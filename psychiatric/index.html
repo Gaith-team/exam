@@ -3,178 +3,96 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GAITH TEAM</title>
+<title>تمريض نفسية</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box;font-family:Cairo,sans-serif}
+:root{
+    --glow:0 10px 28px rgba(0,0,0,.28);
+    --bg-dark:radial-gradient(circle at top,#0b1225,#020617);
+    --bg-light:linear-gradient(180deg,#f8fafc,#eef2f7);
+    --text-dark:#ffffff;
+    --text-light:#0f172a;
+
+    --main-a:#4fa3a5;
+    --main-b:#2f6f73;
+}
+
+*{box-sizing:border-box;font-family:'Cairo',sans-serif}
 
 body{
     margin:0;
-    background:linear-gradient(180deg,#020617,#020617);
-    color:#fff;
+    background:var(--bg-dark);
+    color:var(--text-dark);
+    text-align:center;
+}
+body.light{
+    background:var(--bg-light);
+    color:var(--text-light);
 }
 
-/* ===== Header ===== */
 .header{
-    padding:70px 20px 40px;
+    padding:60px 20px 30px;
 }
-.header h1{
-    font-size:38px;
-    margin:0;
-}
-.header p{
-    opacity:.6;
-    margin-top:10px;
-}
+.header h1{margin:0;font-size:30px}
+.header p{opacity:.75;margin-top:8px}
 
-/* ===== Timeline Container ===== */
-.timeline{
+.container{
     width:92%;
-    max-width:680px;
+    max-width:520px;
     margin:auto;
-    position:relative;
-    padding-left:30px;
 }
 
-/* Vertical Line */
-.timeline::before{
-    content:"";
-    position:absolute;
-    left:8px;
-    top:0;
-    bottom:0;
-    width:2px;
-    background:linear-gradient(180deg,#38bdf8,#a855f7);
-    opacity:.4;
+.exam{
+    margin:18px 0;
 }
-
-/* ===== Card ===== */
-.card{
-    --accent:#38bdf8;
-    position:relative;
-    background:rgba(255,255,255,.08);
-    backdrop-filter:blur(14px);
-    border-radius:28px;
-    padding:30px;
-    margin-bottom:40px;
-    box-shadow:0 25px 55px rgba(0,0,0,.45);
-}
-
-/* Dot */
-.card::before{
-    content:"";
-    position:absolute;
-    left:-30px;
-    top:38px;
-    width:18px;
-    height:18px;
-    border-radius:50%;
-    background:var(--accent);
-    box-shadow:0 0 0 6px rgba(255,255,255,.05);
-}
-
-/* Icon */
-.icon{
-    width:70px;
-    height:70px;
-    border-radius:22px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    background:linear-gradient(135deg,var(--accent),#000);
-    margin-bottom:18px;
-}
-
-/* Text */
-.card h2{
-    margin:0;
-    font-size:24px;
-}
-.card p{
-    opacity:.65;
-    margin:12px 0 22px;
-    line-height:1.6;
-}
-
-/* Button */
-.card a{
-    display:inline-block;
-    padding:14px 34px;
-    border-radius:30px;
-    background:var(--accent);
-    color:#020617;
+.exam a{
+    display:block;
+    padding:22px;
+    border-radius:36px;
+    font-size:18px;
     text-decoration:none;
-    font-weight:800;
+    color:#fff;
+    background:linear-gradient(135deg,var(--main-a),var(--main-b));
+    box-shadow:var(--glow);
     transition:.3s;
 }
-.card a:hover{
-    transform:scale(1.08);
+.exam a:hover{
+    transform:translateY(-2px);
+    filter:brightness(1.06);
 }
 
-/* ===== Telegram ===== */
-.telegram{
-    margin:60px auto 80px;
-    width:92%;
-    max-width:680px;
-}
-.telegram a{
-    display:block;
-    text-align:center;
-    padding:18px;
-    border-radius:40px;
-    background:linear-gradient(135deg,#229ED9,#38bdf8);
-    color:#fff;
-    text-decoration:none;
-    font-weight:800;
-    box-shadow:0 18px 40px rgba(0,0,0,.45);
+.toggle{
+    position:fixed;
+    top:16px;
+    right:16px;
+    width:42px;
+    height:42px;
+    border:none;
+    border-radius:50%;
+    cursor:pointer;
+    background:#fff;
 }
 </style>
 </head>
 
 <body>
 
+<button class="toggle" onclick="document.body.classList.toggle('light')">🌙</button>
+
 <div class="header">
-    <h1>GAITH TEAM</h1>
-    <p>اختر المادة وابدأ رحلتك في الامتحانات</p>
+    <h1>تمريض نفسية</h1>
+    <p>اختر الامتحان الشامل</p>
 </div>
 
-<div class="timeline">
+<div class="container">
+    <div class="exam"><a href="exam1.html">شامل نفسية 1</a></div>
+    <div class="exam"><a href="exam2.html">شامل نفسية 2</a></div>
+    <div class="exam"><a href="exam3.html">شامل نفسية 3</a></div>
+    <div class="exam"><a href="exam4.html">شامل نفسية 4</a></div>
+    <div class="exam"><a href="exam5.html">شامل نفسية 5</a></div>
+</div>
 
-    <!-- ===== Management ===== -->
-    <div class="card" style="--accent:#38bdf8">
-        <div class="icon">
-            <svg width="34" height="34" viewBox="0 0 24 24" fill="none">
-                <rect x="3" y="3" width="18" height="18" rx="4"
-                      stroke="white" stroke-width="1.5"/>
-                <path d="M7 14V10M12 16V8M17 12V14"
-                      stroke="white" stroke-width="1.5"/>
-            </svg>
-        </div>
-        <h2>تمريض إدارة</h2>
-        <p>
-            تنظيم العمل التمريضي، القيادة، التخطيط،  
-            واتخاذ القرار داخل المؤسسات الصحية.
-        </p>
-        <a href="management/index.html">الدخول</a>
-    </div>
-
-    <!-- ===== Psychiatric ===== -->
-    <div class="card" style="--accent:#a855f7">
-        <div class="icon">
-            <svg width="34" height="34" viewBox="0 0 24 24" fill="none">
-                <path d="M12 3C7.6 3 4 6.6 4 11c0 3.2 2 6 4.8 7.2V21l3-2 3 2v-2.8
-                         C18 17 20 14.2 20 11c0-4.4-3.6-8-8-8Z"
-                      stroke="white" stroke-width="1.5"/>
-            </svg>
-        </div>
-        <h2>تمريض نفسية</h2>
-        <p>
-            الصحة النفسية، الاضطرابات العقلية،  
-            وأساليب الرعاية التمريضية المتخصصة.
-        </p>
-        <a href="psychiatric/index.html">الدخول</a>
-    </div>
-
-</di
+</body>
+</html>
