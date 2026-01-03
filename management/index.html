@@ -2,76 +2,96 @@
 <html lang="ar">
 <head>
 <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>تمريض إدارة</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800&display=swap" rel="stylesheet">
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700&display=swap" rel="stylesheet">
 
 <style>
-:root{--accent:#38bdf8}
-*{box-sizing:border-box;font-family:Cairo,sans-serif}
-body{margin:0;background:#020617;color:#fff}
+:root{
+    --glow:0 10px 28px rgba(0,0,0,.28);
+    --bg-dark:radial-gradient(circle at top,#0b1225,#020617);
+    --bg-light:linear-gradient(180deg,#f8fafc,#eef2f7);
+    --text-dark:#ffffff;
+    --text-light:#0f172a;
+
+    --main-a:#5b6cff;
+    --main-b:#3642b5;
+}
+
+*{box-sizing:border-box;font-family:'Cairo',sans-serif}
+
+body{
+    margin:0;
+    background:var(--bg-dark);
+    color:var(--text-dark);
+    text-align:center;
+}
+body.light{
+    background:var(--bg-light);
+    color:var(--text-light);
+}
 
 .header{
-    padding:50px 20px 30px;
-    font-size:28px;
-    font-weight:800;
+    padding:60px 20px 30px;
 }
+.header h1{margin:0;font-size:30px}
+.header p{opacity:.75;margin-top:8px}
 
-.container{padding:20px}
+.container{
+    width:92%;
+    max-width:520px;
+    margin:auto;
+}
 
 .exam{
-    position:relative;
-    background:rgba(255,255,255,.08);
+    margin:18px 0;
+}
+.exam a{
+    display:block;
     padding:22px;
-    border-radius:22px;
-    margin-bottom:16px;
-    text-align:center;
-    font-weight:700;
+    border-radius:36px;
+    font-size:18px;
     text-decoration:none;
     color:#fff;
-}
-
-.exam::after{
-    content:"";
-    position:absolute;
-    right:0;
-    top:15%;
-    width:4px;
-    height:0%;
-    background:var(--accent);
+    background:linear-gradient(135deg,var(--main-a),var(--main-b));
+    box-shadow:var(--glow);
     transition:.3s;
 }
-
-.exam:hover::after{
-    height:70%;
+.exam a:hover{
+    transform:translateY(-2px);
+    filter:brightness(1.06);
 }
 
-.telegram{
-    margin:40px 20px;
-    text-align:center;
-}
-.telegram a{
-    display:block;
-    padding:16px;
-    border-radius:30px;
-    background:linear-gradient(135deg,#229ED9,#38bdf8);
-    color:#fff;
-    text-decoration:none;
-    font-weight:800;
+.toggle{
+    position:fixed;
+    top:16px;
+    right:16px;
+    width:42px;
+    height:42px;
+    border:none;
+    border-radius:50%;
+    cursor:pointer;
+    background:#fff;
 }
 </style>
 </head>
 
 <body>
 
-<div class="header">📊 تمريض إدارة</div>
+<button class="toggle" onclick="document.body.classList.toggle('light')">🌙</button>
 
-<div class="container">
-    <a class="exam" href="exam1.html">شامل إدارة 1</a>
-    <a class="exam" href="exam2.html">شامل إدارة 2</a>
+<div class="header">
+    <h1>تمريض إدارة</h1>
+    <p>اختر الامتحان الشامل</p>
 </div>
 
-<div class="telegram">
-    <a href="https://t.me/nursing2bu" target="_blank">✈️ انضم إلينا على Telegram</a>
+<div class="container">
+    <div class="exam"><a href="exam1.html">شامل إدارة 1</a></div>
+    <div class="exam"><a href="exam2.html">شامل إدارة 2</a></div>
+    <div class="exam"><a href="exam3.html">شامل إدارة 3</a></div>
+    <div class="exam"><a href="exam4.html">شامل إدارة 4</a></div>
+    <div class="exam"><a href="exam5.html">شامل إدارة 5</a></div>
 </div>
 
 </body>
