@@ -1,166 +1,152 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GAITH TEAM</title>
+<title>Years</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
 <style>
+*{
+    box-sizing:border-box;
+    font-family:'Inter',sans-serif;
+}
+
 body{
     margin:0;
-    font-family:'Cairo',sans-serif;
-    background:radial-gradient(circle at top,#1e3a8a,#020617 65%);
-    color:#fff;
+    background:#f5f6f8;
+    color:#0f172a;
+}
+
+h1{
     text-align:center;
+    margin:40px 0 30px;
+    font-size:28px;
 }
 
-/* ===== Header ===== */
-.header{padding:35px 15px}
-.header h1{font-size:34px;font-weight:800}
-.header span{color:#f43f5e}
-
-/* ===== Gamification Panel ===== */
-.gamify{
+/* ===== Grid ===== */
+.years{
     width:92%;
-    max-width:520px;
-    margin:20px auto;
-    background:rgba(255,255,255,.08);
-    border-radius:25px;
-    padding:18px;
-    box-shadow:0 8px 25px rgba(0,0,0,.45);
+    max-width:1200px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+    gap:22px;
 }
 
-/* Progress */
-.progress{
-    height:10px;
-    background:rgba(255,255,255,.15);
-    border-radius:20px;
-    overflow:hidden;
-}
-.progress-bar{
-    height:100%;
-    width:0%;
-    background:linear-gradient(90deg,#22c55e,#4ade80);
-    transition:.5s;
-}
-
-/* Stats */
-.stats{
+/* ===== Card ===== */
+.card{
+    background:#fff;
+    border-radius:14px;
+    padding:22px;
+    box-shadow:0 10px 25px rgba(0,0,0,.06);
     display:flex;
+    flex-direction:column;
     justify-content:space-between;
-    margin-top:12px;
-    font-size:14px;
-    opacity:.85;
+    transition:.35s;
 }
 
-/* Exams */
-.exam{
-    width:92%;
-    max-width:520px;
-    margin:12px auto;
-    padding:16px;
-    border-radius:20px;
-    background:rgba(255,255,255,.08);
-    cursor:pointer;
+.card:hover{
+    transform:translateY(-6px);
+    box-shadow:0 15px 35px rgba(0,0,0,.1);
+}
+
+.card h3{
+    margin:0;
+    font-size:18px;
+    font-weight:700;
+}
+
+.card p{
+    margin:10px 0 18px;
+    color:#64748b;
+    font-size:14px;
+}
+
+/* ===== Link ===== */
+.card a{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    color:#0ea5e9;
+    font-weight:600;
+    text-decoration:none;
+    font-size:14px;
     transition:.3s;
 }
-.exam:hover{transform:scale(1.03);background:#0ea5e9}
 
-/* Toast */
-.toast{
-    position:fixed;
-    bottom:25px;
-    left:50%;
-    transform:translateX(-50%);
-    background:#020617;
-    padding:14px 22px;
-    border-radius:30px;
-    box-shadow:0 10px 30px rgba(0,0,0,.5);
-    opacity:0;
-    pointer-events:none;
-    transition:.4s;
+.card a span{
+    font-size:18px;
+    transition:.3s;
 }
-.toast.show{opacity:1;bottom:40px}
+
+.card a:hover span{
+    transform:translateX(4px);
+}
+
+/* ===== Disabled ===== */
+.card.disabled{
+    background:#e5e7eb;
+    box-shadow:none;
+}
+.card.disabled h3,
+.card.disabled p{
+    color:#9ca3af;
+}
+.card.disabled a{
+    color:#9ca3af;
+    pointer-events:none;
+}
+.card.disabled a span{
+    opacity:.6;
+}
 </style>
 </head>
 
 <body>
 
-<div class="header">
-    <h1>GAITH TEAM <span>🔥</span></h1>
-    <div>ذاكر – اكسب نقاط – وصل لمستوى أعلى</div>
-</div>
+<h1>Years</h1>
 
-<!-- ===== Gamification Panel ===== -->
-<div class="gamify">
-    <div class="progress">
-        <div class="progress-bar" id="progressBar"></div>
+<div class="years">
+
+    <!-- Pediatric -->
+    <div class="card">
+        <h3>Pediatric Nursing</h3>
+        <p>Materials available.</p>
+        <a href="pediatric.html">
+            Go to <span>→</span>
+        </a>
     </div>
 
-    <div class="stats">
-        <div>⭐ النقاط: <span id="points">0</span></div>
-        <div>🏆 المستوى: <span id="level">مبتدئ</span></div>
-        <div>🔥 Streak: <span id="streak">0</span></div>
+    <!-- OB/GYN -->
+    <div class="card">
+        <h3>OB/GYN Nursing</h3>
+        <p>Materials available.</p>
+        <a href="obgyn.html">
+            Go to <span>→</span>
+        </a>
     </div>
+
+    <!-- First Semester -->
+    <div class="card">
+        <h3>First Semester Subjects</h3>
+        <p>Materials available.</p>
+        <a href="semester1.html">
+            Go to <span>→</span>
+        </a>
+    </div>
+
+    <!-- Second Semester (Disabled) -->
+    <div class="card disabled">
+        <h3>Second Semester Subjects</h3>
+        <p>Materials not available.</p>
+        <a href="#">
+            Go to <span>→</span>
+        </a>
+    </div>
+
 </div>
-
-<!-- Exams -->
-<div class="exam" onclick="completeExam()">📘 شامل 1</div>
-<div class="exam" onclick="completeExam()">📗 شامل 2</div>
-<div class="exam" onclick="completeExam()">📙 شامل 3</div>
-<div class="exam" onclick="completeExam()">📕 شامل 4</div>
-
-<div class="toast" id="toast">🎉 أحسنت! +10 نقاط</div>
-
-<script>
-// ===== Data =====
-let points = localStorage.getItem("points") || 0;
-let streak = localStorage.getItem("streak") || 0;
-let lastVisit = localStorage.getItem("lastVisit") || "";
-
-const pointsEl = document.getElementById("points");
-const levelEl = document.getElementById("level");
-const streakEl = document.getElementById("streak");
-const progressBar = document.getElementById("progressBar");
-const toast = document.getElementById("toast");
-
-// ===== Levels =====
-function getLevel(p){
-    if(p < 50) return "مبتدئ";
-    if(p < 150) return "متوسط";
-    return "محترف";
-}
-
-// ===== Streak =====
-const today = new Date().toDateString();
-if(today !== lastVisit){
-    streak++;
-    localStorage.setItem("streak",streak);
-    localStorage.setItem("lastVisit",today);
-}
-
-// ===== Update UI =====
-function updateUI(){
-    pointsEl.textContent = points;
-    streakEl.textContent = streak;
-    levelEl.textContent = getLevel(points);
-    progressBar.style.width = (points % 50) * 2 + "%";
-}
-updateUI();
-
-// ===== Complete Exam =====
-function completeExam(){
-    points = parseInt(points) + 10;
-    localStorage.setItem("points",points);
-
-    toast.classList.add("show");
-    setTimeout(()=>toast.classList.remove("show"),2000);
-
-    updateUI();
-}
-</script>
 
 </body>
 </html>
