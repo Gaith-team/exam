@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GAITH TEAM – Subjects</title>
+<title>GAITH TEAM</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -15,111 +15,148 @@
 
 body{
     margin:0;
-    background:#f4f6f8;
-    color:#0f172a;
+    background:
+        radial-gradient(circle at top,#1e3a8a,#020617 65%);
+    color:#fff;
 }
 
-/* ===== Title ===== */
-h1{
+/* ===== Header ===== */
+.header{
+    padding:50px 20px 30px;
     text-align:center;
-    margin:40px 0 30px;
-    font-size:28px;
-    font-weight:700;
+}
+.header h1{
+    font-size:38px;
+    font-weight:800;
+    margin:0;
+}
+.header span{
+    color:#38bdf8;
+}
+.header p{
+    opacity:.75;
+    margin-top:10px;
 }
 
 /* ===== Grid ===== */
-.years{
+.subjects{
     width:92%;
     max-width:1200px;
-    margin:auto;
+    margin:30px auto 60px;
     display:grid;
     grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
-    gap:22px;
+    gap:26px;
 }
 
 /* ===== Card ===== */
 .card{
     position:relative;
-    background:#fff;
-    border-radius:16px;
-    padding:22px;
-    box-shadow:0 10px 25px rgba(0,0,0,.07);
-    display:flex;
-    flex-direction:column;
-    justify-content:space-between;
-    transition:.35s;
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(14px);
+    border-radius:22px;
+    padding:26px;
+    box-shadow:0 20px 45px rgba(0,0,0,.45);
+    transition:.4s;
+    overflow:hidden;
+}
+
+.card::before{
+    content:"";
+    position:absolute;
+    inset:0;
+    background:linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,.15),
+        transparent
+    );
+    opacity:0;
+    transition:.4s;
+}
+
+.card:hover::before{
+    opacity:1;
 }
 
 .card:hover{
-    transform:translateY(-6px);
-    box-shadow:0 16px 40px rgba(0,0,0,.12);
-}
-
-.card h3{
-    margin:0;
-    font-size:18px;
-    font-weight:700;
-}
-
-.card p{
-    margin:10px 0 20px;
-    color:#64748b;
-    font-size:14px;
-}
-
-/* ===== Go To ===== */
-.card a{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    text-decoration:none;
-    font-size:14px;
-    font-weight:600;
-    color:#0ea5e9;
-}
-
-.card a span{
-    font-size:18px;
-    transition:.3s;
-}
-
-.card a:hover span{
-    transform:translateX(6px);
+    transform:translateY(-10px) scale(1.03);
 }
 
 /* ===== Badge ===== */
 .badge{
     position:absolute;
-    top:14px;
-    right:14px;
-    padding:5px 12px;
+    top:18px;
+    right:18px;
+    padding:6px 14px;
     border-radius:20px;
     font-size:12px;
     font-weight:700;
-    color:#fff;
 }
 
-.badge.new{
-    background:#22c55e;
+.badge.new{background:#22c55e}
+.badge.updated{background:#0ea5e9}
+.badge.locked{background:#6b7280}
+
+/* ===== Icon ===== */
+.icon{
+    width:56px;
+    height:56px;
+    border-radius:16px;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:26px;
+    margin-bottom:18px;
+    background:linear-gradient(135deg,#38bdf8,#2563eb);
+    box-shadow:0 10px 25px rgba(0,0,0,.4);
 }
-.badge.updated{
-    background:#0ea5e9;
+
+/* ===== Text ===== */
+.card h3{
+    margin:0;
+    font-size:20px;
+    font-weight:700;
 }
-.badge.locked{
-    background:#9ca3af;
+.card p{
+    margin:12px 0 26px;
+    font-size:14px;
+    opacity:.75;
+}
+
+/* ===== Button ===== */
+.card a{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    text-decoration:none;
+    color:#38bdf8;
+    font-weight:600;
+    font-size:15px;
+    transition:.3s;
+}
+
+.card a span{
+    font-size:20px;
+    transition:.3s;
+}
+
+.card a:hover span{
+    transform:translateX(8px);
 }
 
 /* ===== Disabled ===== */
 .card.disabled{
-    background:#e5e7eb;
-    box-shadow:none;
+    background:rgba(255,255,255,.04);
+}
+.card.disabled .icon{
+    background:#6b7280;
 }
 .card.disabled h3,
-.card.disabled p{
+.card.disabled p,
+.card.disabled a{
     color:#9ca3af;
 }
 .card.disabled a{
-    color:#9ca3af;
     pointer-events:none;
 }
 </style>
@@ -127,40 +164,60 @@ h1{
 
 <body>
 
-<h1>Years</h1>
+<!-- ===== Header ===== -->
+<div class="header">
+    <h1>GAITH <span>TEAM</span></h1>
+    <p>Choose your subject and start exams 🚀</p>
+</div>
 
-<div class="years">
+<!-- ===== Subjects ===== -->
+<div class="subjects">
 
     <!-- Pediatric -->
     <div class="card">
-        <span class="badge new">NEW</span>
+        <div class="badge new">NEW</div>
+        <div class="icon">👶</div>
         <h3>Pediatric Nursing</h3>
-        <p>Exams & materials available.</p>
+        <p>Exams – revisions – training questions</p>
         <a href="pediatric/exams.html">
-            Go to <span>→</span>
+            Enter <span>→</span>
         </a>
     </div>
 
     <!-- OB/GYN -->
     <div class="card">
-        <span class="badge updated">UPDATED</span>
-        <h3>OB/GYN Nursing</h3>
-        <p>Updated exams & revisions.</p>
+        <div class="badge updated">UPDATED</div>
+        <div class="icon">🤰</div>
+        <h3>OB / GYN Nursing</h3>
+        <p>Updated exams & clinical cases</p>
         <a href="obgyn/exams.html">
-            Go to <span>→</span>
+            Enter <span>→</span>
         </a>
     </div>
 
-    <!-- First Semester -->
+    <!-- Management -->
     <div class="card">
-        <span class="badge new">NEW</span>
-        <h3>First Semester Subjects</h3>
-        <p>All exams available.</p>
-        <a href="semester1/exams.html">
-            Go to <span>→</span>
+        <div class="badge new">NEW</div>
+        <div class="icon">📊</div>
+        <h3>Nursing Management</h3>
+        <p>Leadership – planning – administration</p>
+        <a href="management/exams.html">
+            Enter <span>→</span>
         </a>
     </div>
 
-    <!-- Second Semester -->
+    <!-- Locked -->
     <div class="card disabled">
-        <span class="badge locked">L
+        <div class="badge locked">LOCKED</div>
+        <div class="icon">🔒</div>
+        <h3>Second Semester</h3>
+        <p>Materials will be available soon</p>
+        <a href="#">
+            Locked <span>→</span>
+        </a>
+    </div>
+
+</div>
+
+</body>
+</html>
