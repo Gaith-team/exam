@@ -8,131 +8,152 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700&display=swap" rel="stylesheet">
 
 <style>
-:root{
-    --bg:#f9fafb;
-    --white:#ffffff;
-    --text:#0f172a;
-    --muted:#64748b;
-    --border:#e5e7eb;
-
-    --blue:#2563eb;
-    --green:#16a34a;
-    --purple:#7c3aed;
-}
-
 *{box-sizing:border-box;font-family:Cairo,sans-serif}
 
 body{
     margin:0;
-    background:var(--bg);
-    color:var(--text);
+    background:#f6f7f9;
+    color:#0f172a;
 }
 
-/* Header */
-.header{
-    max-width:760px;
+/* ===== Page Wrapper ===== */
+.wrapper{
+    max-width:920px;
     margin:auto;
-    padding:80px 20px 40px;
+    padding:70px 20px 90px;
+}
+
+/* ===== Header ===== */
+.header{
+    margin-bottom:60px;
 }
 .header h1{
-    font-size:34px;
+    font-size:38px;
     margin:0;
+    font-weight:700;
 }
 .header p{
-    margin-top:12px;
-    color:var(--muted);
+    margin-top:10px;
+    color:#64748b;
     font-size:15px;
 }
 
-/* Container */
-.container{
-    max-width:760px;
-    margin:auto;
-    padding:0 20px 60px;
+/* ===== Module ===== */
+.module{
+    background:#ffffff;
+    border-radius:20px;
+    box-shadow:0 20px 45px rgba(0,0,0,.06);
+    margin-bottom:40px;
+    display:flex;
+    overflow:hidden;
 }
 
-/* Card */
-.card{
-    background:var(--white);
-    border:1px solid var(--border);
-    border-radius:18px;
-    padding:26px;
-    margin-bottom:28px;
-    display:flex;
-    gap:22px;
-    align-items:flex-start;
-}
-
-/* Icon */
-.icon{
-    width:54px;
-    height:54px;
-    border-radius:14px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    flex-shrink:0;
-    background:rgba(0,0,0,.03);
+/* Accent Strip */
+.strip{
+    width:10px;
+    background:linear-gradient(180deg,var(--accent),var(--accent-soft));
 }
 
 /* Content */
-.card h2{
+.content{
+    padding:34px 36px;
+    flex:1;
+}
+
+/* Title */
+.title{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
+.title h2{
     margin:0;
-    font-size:20px;
+    font-size:24px;
 }
-.card p{
-    margin:8px 0 16px;
-    color:var(--muted);
-    font-size:14px;
-}
-
-/* Button */
-.card a{
-    display:inline-block;
-    padding:8px 22px;
+.badge{
+    font-size:12px;
+    padding:4px 10px;
     border-radius:20px;
-    font-size:14px;
-    font-weight:600;
-    text-decoration:none;
-    border:1px solid currentColor;
+    background:rgba(0,0,0,.05);
+    color:var(--accent);
 }
 
-/* Accent Variants */
-.management{color:var(--blue)}
-.psychiatric{color:var(--purple)}
+/* Description */
+.content p{
+    margin:14px 0 26px;
+    color:#475569;
+    max-width:520px;
+    line-height:1.6;
+}
+
+/* Actions */
+.actions{
+    display:flex;
+    gap:16px;
+    align-items:center;
+}
+.actions a{
+    padding:10px 26px;
+    border-radius:22px;
+    text-decoration:none;
+    font-weight:600;
+    font-size:14px;
+}
+.primary{
+    background:var(--accent);
+    color:#fff;
+}
+.secondary{
+    border:1px solid #e5e7eb;
+    color:#475569;
+}
 </style>
 </head>
 
 <body>
 
-<div class="header">
-    <h1>GAITH TEAM</h1>
-    <p>منصة امتحانات تمريض – تصميم أبيض احترافي</p>
-</div>
+<div class="wrapper">
 
-<div class="container">
+    <div class="header">
+        <h1>GAITH TEAM</h1>
+        <p>منصة امتحانات تمريض — تصميم جامعي احترافي</p>
+    </div>
 
-    <!-- Management -->
-    <div class="card management">
-        <div class="icon">
-            📊
-        </div>
-        <div>
-            <h2>تمريض إدارة</h2>
-            <p>التخطيط – التنظيم – القيادة – إدارة فرق التمريض</p>
-            <a href="management/index.html">الدخول إلى المادة</a>
+    <!-- Nursing Management -->
+    <div class="module" style="--accent:#2563eb;--accent-soft:#93c5fd">
+        <div class="strip"></div>
+        <div class="content">
+            <div class="title">
+                <h2>تمريض إدارة</h2>
+                <span class="badge">Management</span>
+            </div>
+            <p>
+                التخطيط والتنظيم والقيادة داخل المؤسسات الصحية،
+                مع التركيز على إدارة فرق التمريض بكفاءة.
+            </p>
+            <div class="actions">
+                <a class="primary" href="management/index.html">الدخول إلى المادة</a>
+                <a class="secondary" href="#">عن المادة</a>
+            </div>
         </div>
     </div>
 
-    <!-- Psychiatric -->
-    <div class="card psychiatric">
-        <div class="icon">
-            🧠
-        </div>
-        <div>
-            <h2>تمريض نفسية</h2>
-            <p>الصحة النفسية – الاضطرابات العقلية – الرعاية التمريضية</p>
-            <a href="psychiatric/index.html">الدخول إلى المادة</a>
+    <!-- Psychiatric Nursing -->
+    <div class="module" style="--accent:#7c3aed;--accent-soft:#d8b4fe">
+        <div class="strip"></div>
+        <div class="content">
+            <div class="title">
+                <h2>تمريض نفسية</h2>
+                <span class="badge">Psychiatric</span>
+            </div>
+            <p>
+                دراسة الاضطرابات النفسية وأساليب الرعاية التمريضية
+                المتخصصة للصحة العقلية.
+            </p>
+            <div class="actions">
+                <a class="primary" href="psychiatric/index.html">الدخول إلى المادة</a>
+                <a class="secondary" href="#">عن المادة</a>
+            </div>
         </div>
     </div>
 
