@@ -5,212 +5,185 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GAITH TEAM</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700&display=swap" rel="stylesheet">
 
 <style>
+/* ================= VARIABLES ================= */
 :root{
-    /* Backgrounds */
-    --bg:#f7f9f8;
-    --surface:#ffffff;
+    --glow:0 10px 28px rgba(0,0,0,.28);
 
-    /* Text */
-    --text:#1f2933;
-    --muted:#6b7280;
+    --bg-dark:radial-gradient(circle at top,#0b1225,#020617);
+    --bg-light:linear-gradient(180deg,#f8fafc,#eef2f7);
 
-    /* Main Colors */
-    --primary:#0f766e;   /* Teal */
-    --secondary:#4d7c0f; /* Green */
-    --accent:#facc15;    /* Warm Sand */
+    --text-dark:#ffffff;
+    --text-light:#0f172a;
+
+    /* Professional Nursing Colors */
+    --man-a:#5b6cff;
+    --man-b:#3642b5;
+
+    --psy-a:#4fa3a5;
+    --psy-b:#2f6f73;
 }
 
-*{
-    box-sizing:border-box;
-    font-family:'Cairo',sans-serif;
-}
+/* ================= BASE ================= */
+*{box-sizing:border-box;font-family:'Cairo',sans-serif}
 
 body{
     margin:0;
-    background:var(--bg);
-    display:flex;
-    justify-content:center;
-    color:var(--text);
-}
-
-/* App shell */
-.app{
-    width:100%;
-    max-width:480px;
-    min-height:100vh;
-    background:var(--bg);
-}
-
-/* AppBar */
-.appbar{
-    padding:42px 24px 58px;
-    background:linear-gradient(135deg,var(--primary),#14b8a6);
-    color:#fff;
+    background:var(--bg-dark);
+    color:var(--text-dark);
     text-align:center;
+    transition:.4s;
 }
-.appbar h1{
+body.light{
+    background:var(--bg-light);
+    color:var(--text-light);
+}
+
+/* ================= HEADER ================= */
+.header{
+    padding:70px 20px 40px;
+}
+.header h1{
     margin:0;
-    font-size:24px;
-    font-weight:700;
+    font-size:34px;
+    letter-spacing:1px;
 }
-.appbar p{
-    margin-top:6px;
-    font-size:13px;
-    opacity:.9;
-}
-
-/* Content */
-.content{
-    padding:24px;
-    margin-top:-38px;
+.header span{color:#ef4444}
+.header p{
+    margin-top:10px;
+    opacity:.75;
 }
 
-/* Subject Card */
+/* ================= CONTAINER ================= */
+.container{
+    width:92%;
+    max-width:520px;
+    margin:auto;
+}
+
+/* ================= SUBJECT BUTTON ================= */
 .subject{
-    background:var(--surface);
-    border-radius:22px;
-    padding:22px;
-    box-shadow:0 8px 20px rgba(15,23,42,.12);
-    margin-bottom:22px;
-    transition:.25s;
+    margin:26px 0;
 }
-.subject:hover{
-    box-shadow:0 12px 28px rgba(15,23,42,.18);
-}
-
-/* Header inside card */
-.subject-header{
+.subject a{
     display:flex;
-    align-items:flex-start;
-    gap:14px;
-    margin-bottom:10px;
+    align-items:center;
+    justify-content:space-between;
+    padding:24px;
+    border-radius:40px;
+    font-size:20px;
+    text-decoration:none;
+    color:#fff;
+    box-shadow:var(--glow);
+    transition:.3s;
+}
+.subject a:hover{
+    transform:translateY(-3px);
+    filter:brightness(1.06);
 }
 
-/* Icon */
+/* ================= LEFT ================= */
+.left{
+    display:flex;
+    align-items:center;
+    gap:14px;
+}
 .icon{
     width:46px;
     height:46px;
-    border-radius:16px;
+    border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
-    color:#fff;
     font-size:20px;
-    flex-shrink:0;
-}
-.icon.management{
-    background:linear-gradient(135deg,var(--primary),#2dd4bf);
-}
-.icon.psy{
-    background:linear-gradient(135deg,var(--secondary),#84cc16);
+    box-shadow:0 6px 16px rgba(0,0,0,.35);
 }
 
-/* Titles */
-.titles{
-    line-height:1.2;
+/* ================= COLORS ================= */
+.management a{
+    background:linear-gradient(135deg,var(--man-a),var(--man-b));
 }
-.titles span{
-    display:block;
-    font-size:12px;
-    color:var(--muted);
-    margin-bottom:4px;
-}
-.titles h2{
-    margin:0;
-    font-size:18px;
-    font-weight:700;
+.management .icon{
+    background:var(--man-b);
 }
 
-/* Description */
-.subject p{
-    margin:12px 0 18px;
-    color:#4b5563;
-    font-size:14px;
-    line-height:1.6;
+.psychiatric a{
+    background:linear-gradient(135deg,var(--psy-a),var(--psy-b));
+}
+.psychiatric .icon{
+    background:var(--psy-b);
 }
 
-/* Button */
-.subject a{
-    display:block;
-    text-align:center;
-    padding:12px;
-    border-radius:16px;
-    background:linear-gradient(135deg,var(--primary),#14b8a6);
-    color:#fff;
-    text-decoration:none;
-    font-weight:600;
-    font-size:14px;
-}
-
-/* Telegram */
+/* ================= TELEGRAM ================= */
 .telegram{
-    padding:24px;
+    margin:60px auto 80px;
 }
 .telegram a{
-    display:block;
-    text-align:center;
-    padding:14px;
-    border-radius:16px;
-    background:var(--surface);
-    color:#0f766e;
+    display:inline-block;
+    width:90%;
+    max-width:360px;
+    padding:16px;
+    border-radius:40px;
+    background:linear-gradient(135deg,#229ED9,#38bdf8);
+    color:#fff;
     text-decoration:none;
     font-weight:700;
-    box-shadow:0 6px 16px rgba(15,23,42,.12);
+    box-shadow:0 10px 24px rgba(0,0,0,.35);
+}
+
+/* ================= TOGGLE ================= */
+.toggle{
+    position:fixed;
+    top:16px;
+    right:16px;
+    background:#ffffff;
+    border:none;
+    border-radius:50%;
+    width:42px;
+    height:42px;
+    cursor:pointer;
+    box-shadow:0 6px 16px rgba(0,0,0,.25);
 }
 </style>
 </head>
 
 <body>
 
-<div class="app">
+<button class="toggle" onclick="document.body.classList.toggle('light')">
+    🌙
+</button>
 
-    <!-- AppBar -->
-    <div class="appbar">
-        <h1>GAITH TEAM</h1>
-        <p>Nursing Education Platform</p>
+<div class="header">
+    <h1>GAITH TEAM <span>❤️</span></h1>
+    <p>الامتحان في جيبك</p>
+</div>
+
+<div class="container">
+
+    <!-- Nursing Management -->
+    <div class="subject management">
+        <a href="management/index.html">
+            <div class="left">
+                <div class="icon">📊</div>
+                تمريض إدارة
+            </div>
+            ▸
+        </a>
     </div>
 
-    <!-- Content -->
-    <div class="content">
-
-        <!-- Management -->
-        <div class="subject">
-            <div class="subject-header">
-                <div class="icon management">📊</div>
-                <div class="titles">
-                    <span>تمريض</span>
-                    <h2>إدارة</h2>
-                </div>
+    <!-- Psychiatric Nursing -->
+    <div class="subject psychiatric">
+        <a href="psychiatric/index.html">
+            <div class="left">
+                <div class="icon">🧠</div>
+                تمريض نفسية
             </div>
-            <p>
-                التخطيط والتنظيم والقيادة داخل المؤسسات الصحية
-                مع تطبيق مبادئ الإدارة الحديثة.
-            </p>
-            <a href="management/index.html">الدخول إلى المادة</a>
-        </div>
-
-        <!-- Psychiatric -->
-        <div class="subject">
-            <div class="subject-header">
-                <div class="icon psy">🧠</div>
-                <div class="titles">
-                    <span>تمريض</span>
-                    <h2>نفسية</h2>
-                </div>
-            </div>
-            <p>
-                الصحة النفسية، الاضطرابات العقلية،
-                وأساليب الرعاية التمريضية المتخصصة.
-            </p>
-            <a href="psychiatric/index.html">الدخول إلى المادة</a>
-        </div>
-
+            ▸
+        </a>
     </div>
 
-    <!-- Telegram -->
     <div class="telegram">
         <a href="https://t.me/nursing2bu" target="_blank">
             ✈️ انضم إلينا على Telegram
