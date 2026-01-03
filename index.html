@@ -5,15 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GAITH TEAM</title>
 
-<!-- Cairo Font -->
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
 
-<!-- Font Awesome -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
 <style>
-*{box-sizing:border-box}
-
 body{
     margin:0;
     font-family:'Cairo',sans-serif;
@@ -23,192 +17,149 @@ body{
 }
 
 /* ===== Header ===== */
-.header{
-    padding:40px 15px 25px;
-}
-.header h1{
-    font-size:36px;
-    font-weight:800;
-}
-.header span{
-    color:#f43f5e;
-}
-.sub{opacity:.75}
+.header{padding:35px 15px}
+.header h1{font-size:34px;font-weight:800}
+.header span{color:#f43f5e}
 
-/* ===== Container ===== */
-.container{
+/* ===== Gamification Panel ===== */
+.gamify{
     width:92%;
     max-width:520px;
-    margin:auto;
-}
-
-/* ===== Search ===== */
-.search-box{
-    margin:25px 0 10px;
-}
-.search-box input{
-    width:100%;
-    padding:16px 20px;
-    border-radius:30px;
-    border:none;
-    outline:none;
-    font-size:16px;
-    background:rgba(255,255,255,.12);
-    color:#fff;
-}
-
-/* ===== Accordion ===== */
-.exam-btn{
-    margin:20px 0;
-    border-radius:26px;
-    overflow:hidden;
+    margin:20px auto;
     background:rgba(255,255,255,.08);
-    backdrop-filter:blur(12px);
-    box-shadow:0 10px 30px rgba(0,0,0,.45);
-    transition:.4s;
+    border-radius:25px;
+    padding:18px;
+    box-shadow:0 8px 25px rgba(0,0,0,.45);
 }
-.exam-btn:hover{transform:translateY(-4px)}
 
-.exam-btn summary{
-    list-style:none;
-    padding:22px;
-    font-size:22px;
-    cursor:pointer;
+/* Progress */
+.progress{
+    height:10px;
+    background:rgba(255,255,255,.15);
+    border-radius:20px;
+    overflow:hidden;
+}
+.progress-bar{
+    height:100%;
+    width:0%;
+    background:linear-gradient(90deg,#22c55e,#4ade80);
+    transition:.5s;
+}
+
+/* Stats */
+.stats{
     display:flex;
     justify-content:space-between;
-    align-items:center;
+    margin-top:12px;
+    font-size:14px;
+    opacity:.85;
 }
 
-/* ===== Icons ===== */
-.icon{
-    width:48px;
-    height:48px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:22px;
-    margin-left:12px;
-    box-shadow:0 6px 18px rgba(0,0,0,.45);
+/* Exams */
+.exam{
+    width:92%;
+    max-width:520px;
+    margin:12px auto;
+    padding:16px;
+    border-radius:20px;
+    background:rgba(255,255,255,.08);
+    cursor:pointer;
     transition:.3s;
 }
-.exam-btn summary:hover .icon{
-    transform:scale(1.15) rotate(5deg);
-}
+.exam:hover{transform:scale(1.03);background:#0ea5e9}
 
-/* Icon Colors */
-.icon.manage{background:linear-gradient(135deg,#6366f1,#0ea5e9)}
-.icon.child{background:linear-gradient(135deg,#38bdf8,#2563eb)}
-.icon.nutrition{background:linear-gradient(135deg,#22c55e,#4ade80)}
-.icon.svg{background:linear-gradient(135deg,#f59e0b,#f97316)}
-
-.arrow{transition:.4s}
-details[open] .arrow{transform:rotate(180deg)}
-
-/* ===== Links ===== */
-.exam-btn a{
-    display:block;
-    margin:12px;
-    padding:15px;
-    border-radius:18px;
-    color:white;
-    text-decoration:none;
-    font-size:17px;
+/* Toast */
+.toast{
+    position:fixed;
+    bottom:25px;
+    left:50%;
+    transform:translateX(-50%);
     background:#020617;
-    border:1px solid rgba(255,255,255,.1);
-    transition:.3s;
+    padding:14px 22px;
+    border-radius:30px;
+    box-shadow:0 10px 30px rgba(0,0,0,.5);
+    opacity:0;
+    pointer-events:none;
+    transition:.4s;
 }
-.exam-btn a:hover{
-    background:#0ea5e9;
-    transform:scale(1.04);
-}
-
-/* ===== Telegram ===== */
-.telegram{
-    margin:50px auto 40px;
-}
-.telegram a{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:12px;
-    width:90%;
-    max-width:380px;
-    margin:auto;
-    padding:18px;
-    border-radius:40px;
-    background:linear-gradient(135deg,#229ED9,#38bdf8);
-    color:#fff;
-    text-decoration:none;
-    font-size:18px;
-    font-weight:700;
-}
+.toast.show{opacity:1;bottom:40px}
 </style>
 </head>
 
 <body>
 
 <div class="header">
-    <h1>GAITH TEAM <span>❤️</span></h1>
-    <div class="sub">الامتحان في جيبك 📚</div>
+    <h1>GAITH TEAM <span>🔥</span></h1>
+    <div>ذاكر – اكسب نقاط – وصل لمستوى أعلى</div>
 </div>
 
-<div class="container">
-
-<div class="search-box">
-    <input type="text" id="searchInput" placeholder="🔍 ابحث عن امتحان...">
-</div>
-
-<!-- ===== إدارة (Font Awesome) ===== -->
-<details class="exam-btn">
-<summary>
-    <div style="display:flex;align-items:center;">
-        <div class="icon manage">
-            <i class="fas fa-chart-line"></i>
-        </div>
-        تمريض إدارة
+<!-- ===== Gamification Panel ===== -->
+<div class="gamify">
+    <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
     </div>
-    <div class="arrow">▾</div>
-</summary>
-<a href="#">شامل 1</a>
-<a href="#">شامل 2</a>
-</details>
 
-<!-- ===== أيقونة SVG احترافية ===== -->
-<details class="exam-btn">
-<summary>
-    <div style="display:flex;align-items:center;">
-        <div class="icon svg">
-            <svg width="24" height="24" fill="none" viewBox="0 0 24 24">
-                <path d="M3 3h18v4H3zM3 10h18v4H3zM3 17h18v4H3z" fill="white"/>
-            </svg>
-        </div>
-        تمريض تغذية
+    <div class="stats">
+        <div>⭐ النقاط: <span id="points">0</span></div>
+        <div>🏆 المستوى: <span id="level">مبتدئ</span></div>
+        <div>🔥 Streak: <span id="streak">0</span></div>
     </div>
-    <div class="arrow">▾</div>
-</summary>
-<a href="#">شامل 1</a>
-<a href="#">شامل 2</a>
-</details>
-
-<div class="telegram">
-<a href="https://t.me/nursing2bu" target="_blank">
-    ✈️ انضم إلينا على Telegram
-</a>
 </div>
 
-</div>
+<!-- Exams -->
+<div class="exam" onclick="completeExam()">📘 شامل 1</div>
+<div class="exam" onclick="completeExam()">📗 شامل 2</div>
+<div class="exam" onclick="completeExam()">📙 شامل 3</div>
+<div class="exam" onclick="completeExam()">📕 شامل 4</div>
+
+<div class="toast" id="toast">🎉 أحسنت! +10 نقاط</div>
 
 <script>
-const searchInput = document.getElementById("searchInput");
-const exams = document.querySelectorAll(".exam-btn a");
+// ===== Data =====
+let points = localStorage.getItem("points") || 0;
+let streak = localStorage.getItem("streak") || 0;
+let lastVisit = localStorage.getItem("lastVisit") || "";
 
-searchInput.addEventListener("input", ()=>{
-    const v = searchInput.value.toLowerCase();
-    exams.forEach(e=>{
-        e.style.display = e.textContent.toLowerCase().includes(v) ? "block" : "none";
-    });
-});
+const pointsEl = document.getElementById("points");
+const levelEl = document.getElementById("level");
+const streakEl = document.getElementById("streak");
+const progressBar = document.getElementById("progressBar");
+const toast = document.getElementById("toast");
+
+// ===== Levels =====
+function getLevel(p){
+    if(p < 50) return "مبتدئ";
+    if(p < 150) return "متوسط";
+    return "محترف";
+}
+
+// ===== Streak =====
+const today = new Date().toDateString();
+if(today !== lastVisit){
+    streak++;
+    localStorage.setItem("streak",streak);
+    localStorage.setItem("lastVisit",today);
+}
+
+// ===== Update UI =====
+function updateUI(){
+    pointsEl.textContent = points;
+    streakEl.textContent = streak;
+    levelEl.textContent = getLevel(points);
+    progressBar.style.width = (points % 50) * 2 + "%";
+}
+updateUI();
+
+// ===== Complete Exam =====
+function completeExam(){
+    points = parseInt(points) + 10;
+    localStorage.setItem("points",points);
+
+    toast.classList.add("show");
+    setTimeout(()=>toast.classList.remove("show"),2000);
+
+    updateUI();
+}
 </script>
 
 </body>
