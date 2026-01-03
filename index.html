@@ -5,43 +5,76 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GAITH TEAM</title>
 
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+
 <style>
+*{
+    box-sizing:border-box;
+}
+
 body{
     margin:0;
-    font-family:Cairo,sans-serif;
-    background:linear-gradient(180deg,#0b132b,#1c2541);
+    font-family:'Cairo',sans-serif;
+    background:
+        radial-gradient(circle at top,#1e3a8a,#020617 60%);
     color:#fff;
     text-align:center;
+    animation:fadeIn 1.2s ease;
+}
+
+@keyframes fadeIn{
+    from{opacity:0;transform:translateY(20px)}
+    to{opacity:1;transform:translateY(0)}
 }
 
 /* ===== Header ===== */
 .header{
-    padding:30px 15px;
+    padding:40px 15px 30px;
 }
 .header h1{
-    font-size:34px;
+    font-size:36px;
     letter-spacing:2px;
+    font-weight:800;
 }
-.header span{color:red}
-.sub{opacity:.7;margin-top:8px}
+.header span{
+    color:#f43f5e;
+    animation:pulse 1.5s infinite;
+}
+@keyframes pulse{
+    0%,100%{transform:scale(1)}
+    50%{transform:scale(1.2)}
+}
+.sub{
+    opacity:.75;
+    margin-top:10px;
+    font-size:15px;
+}
 
 /* ===== Container ===== */
 .container{
     width:92%;
-    max-width:500px;
+    max-width:520px;
     margin:auto;
 }
 
-/* ===== Accordion ===== */
+/* ===== Accordion Card ===== */
 .exam-btn{
-    border-radius:30px;
-    margin:18px 0;
+    margin:20px 0;
+    border-radius:26px;
     overflow:hidden;
+    background:rgba(255,255,255,.08);
+    backdrop-filter:blur(12px);
+    box-shadow:0 10px 30px rgba(0,0,0,.45);
+    transition:.4s;
+}
+.exam-btn:hover{
+    transform:translateY(-4px);
 }
 
+/* ===== Summary ===== */
 .exam-btn summary{
     list-style:none;
-    padding:20px;
+    padding:22px;
     font-size:22px;
     cursor:pointer;
     display:flex;
@@ -49,49 +82,65 @@ body{
     align-items:center;
 }
 
-/* ===== Icon Circle ===== */
+/* ===== Icon ===== */
 .icon{
-    width:44px;
-    height:44px;
+    width:46px;
+    height:46px;
     border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
     font-size:22px;
     margin-left:12px;
-    box-shadow:0 4px 12px rgba(0,0,0,.35);
+    background:linear-gradient(135deg,#38bdf8,#2563eb);
+    box-shadow:0 6px 18px rgba(0,0,0,.45);
 }
 
-/* ===== Colors ===== */
-.ped summary{background:linear-gradient(90deg,#1cb5e0,#3a7bd5)}
-.obs summary{background:linear-gradient(90deg,#d66efd,#ff5db1)}
-.nut summary{background:linear-gradient(90deg,#56ab2f,#a8e063)}
-.man summary{background:linear-gradient(90deg,#6366f1,#0ea5e9)}
-
-.icon.ped{background:#38bdf8}
-.icon.obs{background:#f472b6}
-.icon.nut{background:#4ade80}
-.icon.man{background:#818cf8}
+/* ===== Arrow ===== */
+.arrow{
+    transition:.4s;
+    font-size:20px;
+}
+details[open] .arrow{
+    transform:rotate(180deg);
+}
 
 /* ===== Links ===== */
 .exam-btn a{
     display:block;
-    background:#111827;
-    margin:10px;
-    padding:14px;
-    border-radius:20px;
+    margin:12px;
+    padding:15px;
+    border-radius:18px;
     color:white;
     text-decoration:none;
-    font-size:16px;
-    transition:.3s;
+    font-size:17px;
+    background:linear-gradient(135deg,#020617,#020617);
+    border:1px solid rgba(255,255,255,.1);
+    transition:.35s;
+    position:relative;
+    overflow:hidden;
+}
+.exam-btn a::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:100%;
+    height:100%;
+    background:linear-gradient(120deg,transparent,rgba(255,255,255,.25),transparent);
+    transition:.5s;
+}
+.exam-btn a:hover::before{
+    left:100%;
 }
 .exam-btn a:hover{
     background:#0ea5e9;
+    transform:scale(1.04);
 }
 
 /* ===== Telegram ===== */
 .telegram{
-    margin:45px auto;
+    margin:55px auto 40px;
 }
 .telegram a{
     display:flex;
@@ -99,60 +148,56 @@ body{
     justify-content:center;
     gap:12px;
     width:90%;
-    max-width:360px;
+    max-width:380px;
     margin:auto;
-    padding:16px;
-    border-radius:35px;
-    background:linear-gradient(90deg,#229ED9,#0ea5e9);
+    padding:18px;
+    border-radius:40px;
+    background:linear-gradient(135deg,#229ED9,#38bdf8);
     color:#fff;
     text-decoration:none;
     font-size:18px;
-    font-weight:600;
-    box-shadow:0 6px 18px rgba(0,0,0,.35);
-    transition:.3s;
+    font-weight:700;
+    box-shadow:0 10px 28px rgba(0,0,0,.45);
+    transition:.35s;
 }
 .telegram a:hover{
-    transform:scale(1.05);
+    transform:translateY(-4px) scale(1.05);
 }
 </style>
 </head>
 
 <body>
 
-<!-- ===== HEADER ===== -->
 <div class="header">
     <h1>GAITH TEAM <span>❤️</span></h1>
-    <div class="sub">الامتحان في جيبك</div>
+    <div class="sub">الامتحان في جيبك 📚</div>
 </div>
 
 <div class="container">
 
-<!-- ===== طب أطفال ===== -->
-<details class="exam-btn ped">
+<details class="exam-btn">
 <summary>
     <div style="display:flex;align-items:center;">
-        <div class="icon ped">👶</div>
-        تمريض إدارة 
+        <div class="icon">👶</div>
+        تمريض إدارة
     </div>
-    <span>▾</span>
+    <div class="arrow">▾</div>
 </summary>
-<a href="exam1/index.html">شامل 1</a>
-<a href="exam2/index.html">شامل 2</a>
-<a href="exam3/index.html">شامل 3</a>
-<a href="exam4/index.html">شامل 4</a>
-<a href="exam5/index.html">شامل 5</a>
+
+<a href="exam1/index.html">📘 شامل 1</a>
+<a href="exam2/index.html">📗 شامل 2</a>
+<a href="exam3/index.html">📙 شامل 3</a>
+<a href="exam4/index.html">📕 شامل 4</a>
+<a href="exam5/index.html">📓 شامل 5</a>
 </details>
 
-<!-- ===== Telegram ===== -->
 <div class="telegram">
 <a href="https://t.me/nursing2bu" target="_blank">
-    ✈️ Telegram انضم إلينا على 
+    ✈️ انضم إلينا على Telegram
 </a>
 </div>
 
 </div>
 
 </body>
-    </html>
-
-
+</html>
