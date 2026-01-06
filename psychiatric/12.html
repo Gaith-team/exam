@@ -1,0 +1,953 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaith Team | Exam</title>
+
+<style>
+:root{
+  --primary:#0284c7;
+  --secondary:#0ea5e9;
+  --bg:#f8fbff;
+  --card:#ffffff;
+  --soft:#e6f0ff;
+  --question:#eef7ff;
+  --option:#f9fcff;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --text:#0f172a;
+
+  /* Brand dynamic */
+  --brand1:#ffffff;
+  --brand2:#e0f2fe;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#eef6ff);
+  color:var(--text);
+}
+
+/* ================= HEADER ================= */
+header{
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* ===== Brand ===== */
+.logo{
+  position:relative;
+  font-size:28px;
+  font-weight:900;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.brand-text{
+  background:linear-gradient(90deg,var(--brand1),var(--brand2),var(--brand1));
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 4s linear infinite;
+}
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+.heart{
+  display:inline-block;
+  animation:heartbeat 1.6s infinite ease-in-out;
+}
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  animation:twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle{
+  0%{opacity:0;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.2)}
+  100%{opacity:0;transform:scale(.6)}
+}
+
+/* Reduced motion أثناء الامتحان */
+.exam .sparkle{animation-duration:5s;opacity:.4}
+.exam .heart{animation-duration:2.5s}
+
+/* After exam */
+.after .sparkle{animation-duration:2s}
+.after .heart{animation-duration:1.1s}
+
+/* ================= LAYOUT ================= */
+.container{max-width:520px;margin:auto;padding:16px}
+
+/* ===== Top Bar ===== */
+.top-bar{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+}
+.progress-box{
+  flex:1;
+  background:var(--card);
+  padding:14px;
+  border-radius:18px;
+  box-shadow:0 10px 22px rgba(2,132,199,.12);
+}
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px;
+  font-weight:800;
+  font-size:14px;
+}
+.progress{
+  height:8px;
+  background:var(--soft);
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+}
+
+/* Timer */
+.timer{
+  width:64px;height:64px;border-radius:50%;
+  background:conic-gradient(var(--primary) 0deg,var(--soft) 0deg);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;
+  background-color:var(--card);
+}
+
+/* ================= CARD ================= */
+.card{
+  background:var(--card);
+  padding:22px;
+  border-radius:24px;
+  box-shadow:0 18px 36px rgba(2,132,199,.18);
+}
+.question-title{
+  background:var(--question);
+  padding:16px;
+  border-radius:16px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+.option{
+  background:var(--option);
+  border:2px solid var(--soft);
+  border-radius:18px;
+  padding:15px;
+  margin:12px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.correct{background:#eafaf1;border-color:var(--success)}
+.option.wrong{background:#fff1f1;border-color:var(--danger)}
+.option.disabled{pointer-events:none;opacity:.9}
+
+button{
+  margin-top:18px;
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-weight:900;
+}
+
+/* Feedback */
+.feedback{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:10px;
+  animation:pop .5s;
+}
+@keyframes pop{
+  0%{transform:scale(.6);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* Report */
+.report{
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  border-left:6px solid var(--soft);
+}
+.report.correct{border-color:var(--success)}
+.report.wrong{border-color:var(--danger)}
+</style>
+</head>
+
+<body class="exam">
+
+<header>
+  <div class="logo">
+    <span class="brand-text">Gaith Team</span>
+    <span class="heart">💖</span>
+    <span class="sparkle" style="top:-8px;left:0">✨</span>
+    <span class="sparkle" style="top:6px;right:-8px">✨</span>
+    <span class="sparkle" style="bottom:-8px;left:50%">✨</span>
+  </div>
+  <div style="margin-top:6px;font-weight:800">الإمتحان في جيبك 👏🏻</div>
+</header>
+
+<div class="container">
+
+  <div class="top-bar">
+    <div class="progress-box">
+      <div class="progress-text">
+        <span id="progressText"></span>
+        <span>
+          ✔️ <span id="correctCount">0</span> |
+          ❌ <span id="wrongCount">0</span> |
+          ⏳ <span id="remainPercent">100%</span>
+        </span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="timer" id="timer">250:00</div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<script>
+/* ===== Questions ===== */
+let questions = [
+/* ===============================
+LECTURE 1: Introduction to Communication
+=============================== */
+
+/* MCQ (1–20) */
+
+{t:"Communication is defined as:",o:["Giving instructions only","Exchange of facts, ideas, opinions or emotions","Written reports only","Nonverbal behavior only"],a:1},
+
+{t:"The term communication is derived from the Latin word:",o:["Communicare","Communis","Community","Communion"],a:1},
+
+{t:"Effective communication in nursing mainly improves:",o:["Hospital income","Patient satisfaction and outcomes","Medical diagnosis","Technology usage"],a:1},
+
+{t:"Which of the following best describes communication skills?",o:["Ability to speak loudly","Ability to use language receptively and expressively","Writing reports only","Listening only"],a:1},
+
+{t:"One importance of communication in nursing is:",o:["Reducing nurse workload","Generating trust between nurse and patient","Increasing paperwork","Avoiding interaction"],a:1},
+
+{t:"Poor communication can lead to:",o:["Better teamwork","Misunderstanding","Improved productivity","Job satisfaction"],a:1},
+
+{t:"Which is NOT a goal of communication?",o:["To persuade","To confuse","To ensure understanding","To get action"],a:1},
+
+{t:"Communication helps nurses to:",o:["Ignore patients","Build rapport","Avoid teamwork","Control patients"],a:1},
+
+{t:"Which group spends most time communicating with patients?",o:["Physicians","Nurses","Technicians","Administrators"],a:1},
+
+{t:"Communication in nursing affects:",o:["Only patients","Only nurses","Only doctors","All aspects of nursing care"],a:3},
+
+{t:"Good communication provides a basis for:",o:["Conflict","Leadership action","Misunderstanding","Delay"],a:1},
+
+{t:"Communication is essential for:",o:["Patient safety","Entertainment","Technology","Administration only"],a:0},
+
+{t:"The quality of nursing care depends on:",o:["Hospital size","Nurse experience only","Quality of communication","Equipment"],a:2},
+
+{t:"Communication is required:",o:["Only at work","Only socially","In all aspects of life","In emergencies only"],a:2},
+
+{t:"Which is an advantage of effective communication?",o:["Confusion","Trust","Conflict","Delay"],a:1},
+
+{t:"Communication skills help nurses to:",o:["Avoid patients","Cooperate in treatment","Work independently","Reduce responsibility"],a:1},
+
+{t:"Effective communication supports:",o:["Isolation","Teamwork","Competition","Stress"],a:1},
+
+{t:"Communication in nursing is considered:",o:["Optional","Core skill","Secondary skill","Administrative only"],a:1},
+
+{t:"One purpose of communication is to:",o:["Waste time","Change behavior","Increase workload","Avoid decisions"],a:1},
+
+{t:"Communication allows nurses to:",o:["Hide information","Express feelings","Avoid interaction","Limit care"],a:1},
+
+/* TRUE / FALSE (21–25) */
+
+{t:"Communication is the sharing of information between two or more persons.",o:["True","False"],a:0},
+
+{t:"Effective communication increases misunderstanding.",o:["True","False"],a:1},
+
+{t:"Communication helps in building nurse-patient trust.",o:["True","False"],a:0},
+
+{t:"Communication is not important for patient safety.",o:["True","False"],a:1},
+
+{t:"Communication skills are essential in nursing practice.",o:["True","False"],a:0},
+/* ===============================
+LECTURE 2: Communication Process
+=============================== */
+/* MCQ (26–45) */
+
+{t:"The communication process is defined as:",o:["Sending information only","A series of steps to transmit a message","Listening without feedback","Writing messages"],a:1},
+
+{t:"The first step in the communication process is:",o:["Encoding","Thinking","Decoding","Feedback"],a:1},
+
+{t:"Encoding refers to:",o:["Receiving the message","Translating ideas into symbols","Understanding the message","Sending feedback"],a:1},
+
+{t:"Selecting the appropriate medium is called:",o:["Encoding","Transmitting","Decoding","Understanding"],a:1},
+
+{t:"The receiver decodes the message during:",o:["Thinking","Encoding","Decoding","Transmitting"],a:2},
+
+{t:"Feedback in communication is:",o:["Noise","A return message from receiver","Encoding process","Channel"],a:1},
+
+{t:"Communication is complete when:",o:["Message is sent","Message is written","Receiver understands the message","Feedback is ignored"],a:2},
+
+{t:"Which is NOT a component of communication process?",o:["Sender","Message","Channel","Authority"],a:3},
+
+{t:"The sender is the person who:",o:["Receives the message","Encodes and sends the message","Gives feedback","Decodes information"],a:1},
+
+{t:"The message may be:",o:["Verbal only","Nonverbal only","Verbal or nonverbal","Written only"],a:2},
+
+{t:"Which of the following is a visual channel?",o:["Telephone call","Facial expression","Touch","Smell"],a:1},
+
+{t:"Auditory channel includes:",o:["Gestures","Written words","Spoken words","Touch"],a:2},
+
+{t:"Tactile channel mainly involves:",o:["Hearing","Seeing","Touch","Reading"],a:2},
+
+{t:"Combined channels include:",o:["Written only","Audiovisual media","Gestures only","Smell"],a:1},
+
+{t:"Feedback can be:",o:["Only positive","Only negative","Positive or negative","Always verbal"],a:2},
+
+{t:"The effect of communication may be:",o:["Emotional only","Cognitive only","Physical only","Emotional, cognitive, or physical"],a:3},
+
+{t:"Intrapersonal communication occurs:",o:["Between two people","Within oneself","In groups","Through media"],a:1},
+
+{t:"Interpersonal communication occurs:",o:["In the mind","Between people face to face","Through mass media","Online only"],a:1},
+
+{t:"Mass communication mainly targets:",o:["Individuals","Small groups","Large audiences","Self"],a:2},
+
+{t:"Effective communication is communication that:",o:["Is long","Uses complex words","Produces intended results","Avoids feedback"],a:2},
+
+/* TRUE / FALSE (46–50) */
+
+{t:"Feedback helps ensure that the message is understood correctly.",o:["True","False"],a:0},
+
+{t:"Communication process ends with encoding.",o:["True","False"],a:1},
+
+{t:"Channels of communication affect message accuracy.",o:["True","False"],a:0},
+
+{t:"Intrapersonal communication happens between two people.",o:["True","False"],a:1},
+
+{t:"Effective communication supports decision making.",o:["True","False"],a:0},
+
+/* ===============================
+LECTURE 3: Communication Competence
+=============================== */
+/* MCQ (51–70) */
+
+{t:"Communication competence refers to:",o:["Speaking loudly","Knowledge and ability to communicate effectively","Writing reports only","Using technology"],a:1},
+
+{t:"A competent communicator is able to:",o:["Ignore context","Adapt communication to situations","Use one style only","Avoid feedback"],a:1},
+
+{t:"Unconscious incompetence means:",o:["Knowing you lack skills","Not knowing you lack skills","Being highly skilled","Mastery level"],a:1},
+
+{t:"Conscious incompetence means:",o:["Not aware of poor skills","Aware of lack of skills","Automatic performance","Expert communication"],a:1},
+
+{t:"Conscious competence means:",o:["Skill without thinking","Knowing you are communicating well","Lack of skills","Poor awareness"],a:1},
+
+{t:"Unconscious competence refers to:",o:["Poor communication","Automatic skilled communication","Learning stage","Lack of awareness"],a:1},
+
+{t:"One benefit of communication competence is:",o:["Increasing conflict","Accomplishing communication goals","Avoiding interaction","Creating misunderstanding"],a:1},
+
+{t:"Self-presentation goals focus on:",o:["Managing conflict","How others perceive you","Teaching skills","Avoiding communication"],a:1},
+
+{t:"Relational goals in communication aim to:",o:["End relationships","Develop and maintain relationships","Avoid others","Control people"],a:1},
+
+{t:"Instrumental goals focus on:",o:["Personal image","Relationship ending","Influencing others","Avoiding persuasion"],a:2},
+
+{t:"Grammatical competence involves:",o:["Appropriateness","Vocabulary and grammar rules","Repair strategies","Context awareness"],a:1},
+
+{t:"Sociolinguistic competence relates to:",o:["Grammar only","Appropriate language use","Writing speed","Sentence length"],a:1},
+
+{t:"Discourse competence focuses on:",o:["Single words","Cohesion and coherence","Pronunciation","Gestures"],a:1},
+
+{t:"Strategic competence helps to:",o:["Create noise","Repair communication breakdowns","Ignore errors","Avoid speaking"],a:1},
+
+{t:"Adaptable communicators are able to:",o:["Use one method only","Change behavior based on situation","Avoid challenges","Ignore audience"],a:1},
+
+{t:"Cognitive complexity means:",o:["Simple thinking","Saying same idea in different ways","Poor understanding","Rigid behavior"],a:1},
+
+{t:"Self-monitoring refers to:",o:["Controlling others","Monitoring own behavior","Avoiding feedback","Judging others"],a:1},
+
+{t:"Empathy in communication competence means:",o:["Giving advice","Understanding others’ emotions","Avoiding emotions","Criticizing"],a:1},
+
+{t:"Effectiveness in communication means:",o:["Talking more","Achieving communication goals","Avoiding interaction","Using authority"],a:1},
+
+{t:"Appropriateness in communication refers to:",o:["Length of message","Meeting situational expectations","Speaking loudly","Using humor"],a:1},
+
+/* TRUE / FALSE (71–75) */
+
+{t:"Communication competence can be learned and improved.",o:["True","False"],a:0},
+
+{t:"Strategic competence helps in repairing misunderstandings.",o:["True","False"],a:0},
+
+{t:"Competent communicators are usually inflexible.",o:["True","False"],a:1},
+
+{t:"Empathy is an element of communication competence.",o:["True","False"],a:0},
+
+{t:"Appropriateness is not important in communication competence.",o:["True","False"],a:1},
+
+/* ===============================
+LECTURE 4: Interpersonal Perception & Attribution
+=============================== */
+
+/* MCQ (76–95) */
+
+{t:"Perception is defined as:",o:["Ignoring stimuli","Conscious reception and interpretation of information","Guessing behavior","Emotional reaction only"],a:1},
+
+{t:"Interpersonal perception refers to:",o:["Self-thinking","Forming impressions about others","Medical diagnosis","Written communication"],a:1},
+
+{t:"Accurate perception is important because it:",o:["Creates conflict","Improves communication","Reduces interaction","Delays decisions"],a:1},
+
+{t:"The first stage of perception process is:",o:["Organization","Interpretation","Selection","Attribution"],a:2},
+
+{t:"Organization in perception means:",o:["Assigning meaning","Choosing stimuli","Classifying information","Judging behavior"],a:2},
+
+{t:"Interpretation refers to:",o:["Receiving stimuli","Assigning meaning to information","Selecting stimuli","Ignoring cues"],a:1},
+
+{t:"Which factor influences interpersonal perception?",o:["Perceiver characteristics","Target characteristics","Context","All of the above"],a:3},
+
+{t:"Stereotyping is:",o:["Accurate judgment","Generalization about a group","Individual assessment","Empathy"],a:1},
+
+{t:"Primacy effect means:",o:["Recent information is strongest","First impression dominates","Equal impressions","Ignoring first impression"],a:1},
+
+{t:"Recency effect refers to:",o:["First information strongest","Last information strongest","Middle information strongest","No effect"],a:1},
+
+{t:"Egocentrism means:",o:["Understanding others","Taking others’ perspective","Inability to see others’ views","Positive thinking"],a:2},
+
+{t:"Positivity bias causes a person to view information:",o:["Negatively","Realistically","Overly idealistically","Critically"],a:2},
+
+{t:"Negativity bias leads to:",o:["Optimistic view","Balanced view","Overly pessimistic view","No judgment"],a:2},
+
+{t:"Metaperception refers to:",o:["How we see ourselves","How others see us","How we think others see us","Self-esteem"],a:2},
+
+{t:"Self-perception is mainly about:",o:["Others’ behavior","Our own characteristics","Social roles only","Cultural norms"],a:1},
+
+{t:"Attribution is the process of:",o:["Sending messages","Explaining causes of behavior","Receiving information","Interpreting words"],a:1},
+
+{t:"Internal attribution explains behavior by:",o:["Situational factors","Environmental forces","Personal traits","Luck"],a:2},
+
+{t:"External attribution refers to:",o:["Personality traits","Abilities","Situational causes","Motivation"],a:2},
+
+{t:"Stable attribution means the cause is:",o:["Temporary","Changeable","Permanent","Situational"],a:2},
+
+{t:"Unstable attribution refers to causes that are:",o:["Permanent","Temporary","Internal","Fixed"],a:1},
+
+/* TRUE / FALSE (96–100) */
+
+{t:"Perception is influenced by past experiences and biases.",o:["True","False"],a:0},
+
+{t:"Stereotyping helps in recognizing individual differences.",o:["True","False"],a:1},
+
+{t:"Primacy effect means first impressions are powerful.",o:["True","False"],a:0},
+
+{t:"Internal attribution relates to personal characteristics.",o:["True","False"],a:0},
+
+{t:"Attribution has no role in social perception.",o:["True","False"],a:1},
+
+/* ===============================
+LECTURE 5: Self-Concept
+=============================== */
+
+/* MCQ (101–120) */
+
+{t:"Self-concept is defined as:",o:["Others’ opinions only","Collection of beliefs about oneself","Emotional reactions only","Social behavior only"],a:1},
+
+{t:"Self-concept mainly answers the question:",o:["Where am I?","Who am I?","What should I do?","Why nursing?"],a:1},
+
+{t:"Self-concept includes perceptions of:",o:["Abilities only","Physical self only","Thoughts and feelings about self","Others’ behaviors"],a:2},
+
+{t:"Which is NOT a key component of self-concept?",o:["Personal characteristics","Social roles","Skills and abilities","Medical diagnosis"],a:3},
+
+{t:"Physical appearance is considered part of:",o:["Self-esteem","Self-concept","Ideal self only","Personality only"],a:1},
+
+{t:"Importance of self-concept includes:",o:["No effect on relationships","Affects way of relating with others","Only academic success","Only communication skills"],a:1},
+
+{t:"A strong self-concept helps in:",o:["Insecurity","Healthy interactions","Conflict","Avoidance"],a:1},
+
+{t:"A weak self-concept may lead to:",o:["Confidence","Security","Insecurity","Self-actualization"],a:2},
+
+{t:"Which factor affects self-concept?",o:["Family relationships","Peers","Appearance","All of the above"],a:3},
+
+{t:"Intelligence and abilities influence:",o:["Self-esteem only","Self-concept","Communication only","Behavior only"],a:1},
+
+{t:"Carl Rogers proposed that self-concept includes:",o:["Two components","Three components","Four components","Five components"],a:1},
+
+{t:"Self-image refers to:",o:["Value we place on ourselves","Mental picture of oneself","Desired future self","Others’ expectations"],a:1},
+
+{t:"Self-esteem is defined as:",o:["Self-image","Ideal self","Value we place upon ourselves","Social role"],a:2},
+
+{t:"Ideal self means:",o:["Real self","Observed self","The self we would like to be","Others’ perception"],a:2},
+
+{t:"Congruence occurs when:",o:["Self-image and ideal self overlap","There is conflict between selves","Self-esteem is low","Self is rejected"],a:0},
+
+{t:"Incongruence may lead to:",o:["Self-actualization","Internal confusion","High confidence","Stability"],a:1},
+
+{t:"Development of self-concept begins during:",o:["Adulthood","Childhood","Infancy","Old age"],a:2},
+
+{t:"During childhood, self-concept becomes more:",o:["Abstract","Descriptive","Unstable","Ignored"],a:1},
+
+{t:"Adulthood self-concept is usually:",o:["Unstable","Detailed and organized","Absent","Confused"],a:1},
+
+{t:"One way to develop healthy self-concept is:",o:["Negative thinking","Unrealistic goals","Self-awareness","Isolation"],a:2},
+
+/* TRUE / FALSE (121–125) */
+
+{t:"Self-concept influences behavior and motivation.",o:["True","False"],a:0},
+
+{t:"Family and peers have no effect on self-concept.",o:["True","False"],a:1},
+
+{t:"Self-esteem is the same as self-image.",o:["True","False"],a:1},
+
+{t:"Congruence supports self-actualization.",o:["True","False"],a:0},
+
+{t:"Self-concept cannot be improved.",o:["True","False"],a:1},
+
+/* ===============================
+LECTURE 6: Active Presentation
+=============================== */
+
+/* MCQ (126–145) */
+
+{t:"A presentation is best defined as:",o:["Casual talk","Structured delivery of information to an audience","Written report only","Private discussion"],a:1},
+
+{t:"One main purpose of presentation is to:",o:["Confuse audience","Report findings","Avoid interaction","Reduce responsibility"],a:1},
+
+{t:"Which type of presentation aims to educate?",o:["Persuasive","Motivational","Informative","Debate"],a:2},
+
+{t:"Persuasive presentations are designed to:",o:["Teach skills","Convince the audience","Entertain","Report data"],a:1},
+
+{t:"Motivational presentations mainly focus on:",o:["Facts only","Inspiring the audience","Statistics","Instructions"],a:1},
+
+{t:"Instructional presentations are also called:",o:["Political speeches","How-to presentations","Poster sessions","Debates"],a:1},
+
+{t:"Oral presentation is delivered:",o:["Through posters","Online only","Face-to-face to an audience","By email"],a:2},
+
+{t:"Virtual presentations are commonly delivered via:",o:["Books","Lecture halls","Online platforms","Posters"],a:2},
+
+{t:"The first step in planning a presentation is to:",o:["Prepare slides","Analyze the audience","Practice delivery","Select visuals"],a:1},
+
+{t:"Defining the objective of a presentation helps to:",o:["Confuse audience","Guide content","Increase length","Avoid focus"],a:1},
+
+{t:"Effective slides should be:",o:["Text-heavy","Crowded","Simple and clear","Complex"],a:2},
+
+{t:"High-quality visuals help to:",o:["Distract audience","Illustrate ideas","Replace speaker","Reduce clarity"],a:1},
+
+{t:"Maintaining eye contact during presentation helps to:",o:["Distract audience","Engage listeners","Reduce confidence","End discussion"],a:1},
+
+{t:"Varying pitch and pace helps to:",o:["Bore audience","Maintain interest","Reduce clarity","Shorten presentation"],a:1},
+
+{t:"One technique for effective presentation is to:",o:["Read slides word by word","Use stories and examples","Avoid audience","Stand still"],a:1},
+
+{t:"An effective presentation is audience-centered, meaning:",o:["Focuses on speaker","Tailored to audience needs","Uses jargon","Is very long"],a:1},
+
+{t:"Clarity in presentation means:",o:["Many details","Complex ideas","Clear core message","Fast delivery"],a:2},
+
+{t:"Logical structure of presentation includes:",o:["Random order","Only introduction","Introduction, body, conclusion","Visuals only"],a:2},
+
+{t:"Storytelling in presentation helps to:",o:["Confuse audience","Make content memorable","Increase duration","Reduce focus"],a:1},
+
+{t:"One common cause of ineffective presentation is:",o:["Preparation","Audience engagement","Poor visuals","Clear objectives"],a:2},
+
+/* TRUE / FALSE (146–150) */
+
+{t:"Effective presentations focus on one core message.",o:["True","False"],a:0},
+
+{t:"Reading directly from slides improves presentation quality.",o:["True","False"],a:1},
+
+{t:"Eye contact is important in engaging the audience.",o:["True","False"],a:0},
+
+{t:"Poor preparation can lead to ineffective presentation.",o:["True","False"],a:0},
+
+{t:"Visual aids should replace the speaker’s explanation.",o:["True","False"],a:1}, 
+/* ===============================
+LECTURE 7: Social Intelligence
+=============================== */
+
+/* MCQ (151–170) */
+
+{t:"Social intelligence is defined as the ability to:",o:["Solve academic problems","Understand and manage interpersonal relationships","Memorize information","Use technology effectively"],a:1},
+
+{t:"Social intelligence mainly involves understanding:",o:["Books","Machines","People and social situations","Numbers"],a:2},
+
+{t:"Social intelligence is different from IQ because it focuses on:",o:["Logical reasoning","Academic achievement","Interpersonal skills","Memory"],a:2},
+
+{t:"A socially intelligent nurse is able to:",o:["Ignore emotions","Read social cues accurately","Avoid interaction","Control others"],a:1},
+
+{t:"One important aspect of social intelligence is:",o:["Self-awareness","Physical strength","Technical skills","Speed"],a:0},
+
+{t:"Social intelligence helps nurses to:",o:["Work alone","Build effective relationships","Avoid teamwork","Increase conflict"],a:1},
+
+{t:"Which behavior reflects high social intelligence?",o:["Interrupting others","Showing empathy","Ignoring feedback","Being rigid"],a:1},
+
+{t:"Social intelligence includes the ability to:",o:["Recognize others’ emotions","Ignore feelings","Control conversations only","Avoid eye contact"],a:0},
+
+{t:"Social intelligence supports effective:",o:["Isolation","Communication","Competition","Authority"],a:1},
+
+{t:"A socially intelligent person usually:",o:["Misreads situations","Adapts to social context","Avoids people","Creates conflict"],a:1},
+
+{t:"Social intelligence contributes to:",o:["Poor teamwork","Better collaboration","Misunderstanding","Stress"],a:1},
+
+{t:"Social intelligence develops mainly through:",o:["Practice and experience","Genetics only","Reading books only","Technology"],a:0},
+
+{t:"Which skill is closely related to social intelligence?",o:["Emotional intelligence","Mathematical ability","Writing speed","Memory"],a:0},
+
+{t:"Social intelligence allows a nurse to:",o:["Misjudge patients","Respond appropriately to situations","Ignore cultural differences","Avoid empathy"],a:1},
+
+{t:"High social intelligence improves:",o:["Conflict","Miscommunication","Patient satisfaction","Isolation"],a:2},
+
+{t:"Social intelligence includes managing:",o:["Equipment","Emotions and relationships","Time only","Documents"],a:1},
+
+{t:"A lack of social intelligence may lead to:",o:["Effective teamwork","Misunderstanding","High empathy","Better care"],a:1},
+
+{t:"Social intelligence is important in nursing because nurses:",o:["Work independently","Interact frequently with patients","Use machines only","Avoid emotions"],a:1},
+
+{t:"Which is an example of social intelligence?",o:["Ignoring body language","Understanding patient feelings","Using medical jargon","Avoiding eye contact"],a:1},
+
+{t:"Social intelligence enhances a nurse’s ability to:",o:["Communicate effectively","Avoid interaction","Dominate others","Ignore feedback"],a:0},
+
+/* TRUE / FALSE (171–175) */
+
+{t:"Social intelligence helps in managing interpersonal relationships.",o:["True","False"],a:0},
+
+{t:"Social intelligence is an inborn ability that cannot be developed.",o:["True","False"],a:1},
+
+{t:"Empathy is a component of social intelligence.",o:["True","False"],a:0},
+
+{t:"Social intelligence has no role in nursing practice.",o:["True","False"],a:1},
+
+{t:"Social intelligence improves communication effectiveness.",o:["True","False"],a:0},
+
+/* ===============================
+LECTURE 8: Therapeutic Communication
+=============================== */
+
+/* MCQ (176–195) */
+
+{t:"Therapeutic communication is mainly used to:",o:["Entertain patients","Promote patient well-being","Give orders","Save time"],a:1},
+
+{t:"The primary purpose of therapeutic communication is to:",o:["Establish social relationship","Improve patient functioning","Control patient behavior","Deliver instructions only"],a:1},
+
+{t:"Therapeutic communication helps to:",o:["Increase anxiety","Build trust","Create distance","Limit expression"],a:1},
+
+{t:"Empathy in therapeutic communication means:",o:["Feeling sorry for patient","Understanding patient’s feelings","Judging patient","Giving advice"],a:1},
+
+{t:"Active listening is important because it:",o:["Ends conversation","Encourages expression","Controls patient","Saves time"],a:1},
+
+{t:"Open-ended questions are used to:",o:["Limit patient response","Encourage detailed responses","Confuse patient","End discussion"],a:1},
+
+{t:"Closed-ended questions usually:",o:["Encourage narration","Allow yes/no answers","Increase anxiety","Delay response"],a:1},
+
+{t:"Silence in therapeutic communication can:",o:["Always increase anxiety","Encourage patient to talk","Block communication","Show disinterest"],a:1},
+
+{t:"Which behavior supports therapeutic communication?",o:["Judgment","Respect","Interruptions","Criticism"],a:1},
+
+{t:"Clarification is used to:",o:["Change topic","Ensure understanding","Judge patient","Give advice"],a:1},
+
+{t:"Reflection in communication involves:",o:["Repeating exact words","Restating patient feelings","Changing subject","Ignoring emotions"],a:1},
+
+{t:"Summarizing in therapeutic communication helps to:",o:["Confuse patient","Verify information","Increase anxiety","End relationship"],a:1},
+
+{t:"Nonverbal communication in therapy includes:",o:["Tone of voice","Facial expressions","Posture","All of the above"],a:3},
+
+{t:"Which of the following should be avoided in therapeutic communication?",o:["Empathy","Judgment","Active listening","Clarification"],a:1},
+
+{t:"Respect in therapeutic communication means:",o:["Agreeing always","Valuing patient as a person","Giving orders","Avoiding eye contact"],a:1},
+
+{t:"Trust in nurse-patient relationship is built through:",o:["Authority","Effective communication","Fear","Control"],a:1},
+
+{t:"The nurse should primarily focus on:",o:["Own opinions","Patient needs","Time constraints","Hospital rules"],a:1},
+
+{t:"Therapeutic communication differs from social communication because it is:",o:["Casual","Goal-directed","Unplanned","For entertainment"],a:1},
+
+{t:"Encouraging patient participation means:",o:["Making decisions alone","Involving patient in care","Ignoring patient opinion","Giving instructions only"],a:1},
+
+{t:"Effective therapeutic communication leads to:",o:["Poor compliance","Better patient outcomes","Increased conflict","Reduced safety"],a:1},
+
+/* TRUE / FALSE (196–200) */
+
+{t:"Therapeutic communication aims to improve patient functioning.",o:["True","False"],a:0},
+
+{t:"Judgmental statements support therapeutic communication.",o:["True","False"],a:1},
+
+{t:"Silence can be a useful therapeutic technique.",o:["True","False"],a:0},
+
+{t:"Active listening is not important in therapeutic communication.",o:["True","False"],a:1},
+
+{t:"Respect and empathy strengthen nurse-patient relationship.",o:["True","False"],a:0},
+
+/* ===============================
+LECTURE 9: Electronic & Telehealth Communication
+=============================== */
+
+/* MCQ (201–220) */
+
+{t:"Electronic communication in nursing mainly includes:",o:["Face-to-face talk only","Emails and electronic records","Gestures only","Telephone only"],a:1},
+
+{t:"Telehealth communication refers to:",o:["In-person care only","Providing care remotely using technology","Paper-based documentation","Social interaction"],a:1},
+
+{t:"One advantage of telehealth is:",o:["Reduced access to care","Improved access to healthcare","Elimination of nurses","Increased errors"],a:1},
+
+{t:"Electronic communication should always be:",o:["Informal","Unclear","Secure and confidential","Personal"],a:2},
+
+{t:"Confidentiality in electronic communication means:",o:["Sharing data freely","Protecting patient information","Ignoring privacy rules","Using social media"],a:1},
+
+{t:"Electronic health records are used to:",o:["Entertain patients","Store patient information","Replace nurses","Avoid documentation"],a:1},
+
+{t:"One risk of electronic communication is:",o:["Faster access","Improved accuracy","Breach of confidentiality","Better coordination"],a:2},
+
+{t:"Telehealth is especially useful for:",o:["Emergency surgery","Remote or rural patients","Replacing hospitals","Avoiding assessment"],a:1},
+
+{t:"Professional electronic communication requires:",o:["Slang language","Clear and professional language","Personal opinions","Informal tone"],a:1},
+
+{t:"Emails in healthcare should be:",o:["Unstructured","Clear and concise","Emotional","Lengthy"],a:1},
+
+{t:"Electronic communication can improve:",o:["Isolation","Coordination of care","Errors","Delay"],a:1},
+
+{t:"Using social media with patients is:",o:["Always allowed","Professional and encouraged","Potentially risky","Required"],a:2},
+
+{t:"Telehealth communication should maintain:",o:["Only speed","Ethical standards","Entertainment","Authority"],a:1},
+
+{t:"Patient privacy is protected by:",o:["Sharing passwords","Access control","Public computers","Open networks"],a:1},
+
+{t:"Electronic documentation is important because it:",o:["Wastes time","Provides legal evidence","Reduces care quality","Confuses staff"],a:1},
+
+{t:"One responsibility of nurses in electronic communication is:",o:["Ignoring errors","Ensuring accuracy","Avoiding documentation","Sharing information freely"],a:1},
+
+{t:"Telehealth communication requires nurses to:",o:["Lack communication skills","Adapt communication skills","Avoid empathy","Use authority only"],a:1},
+
+{t:"Which is essential in electronic communication?",o:["Speed only","Confidentiality","Personal opinions","Informality"],a:1},
+
+{t:"Electronic communication supports:",o:["Continuity of care","Isolation","Conflict","Misunderstanding"],a:0},
+
+{t:"Telehealth does NOT aim to:",o:["Improve access","Support patient care","Replace all face-to-face care","Enhance communication"],a:2},
+
+/* TRUE / FALSE (221–225) */
+
+{t:"Electronic communication can improve coordination of care.",o:["True","False"],a:0},
+
+{t:"Confidentiality is optional in electronic communication.",o:["True","False"],a:1},
+
+{t:"Telehealth can be used to support patient education.",o:["True","False"],a:0},
+
+{t:"Professional language is required in electronic communication.",o:["True","False"],a:0},
+
+{t:"Telehealth communication eliminates the need for nursing skills.",o:["True","False"],a:1},
+/* ===============================
+LECTURE 10: Nurse–Patient Relationship & Communication Styles
+=============================== */
+/* MCQ (226–245) */
+
+{t:"The nurse–patient relationship is best described as:",o:["Social relationship","Professional therapeutic relationship","Personal friendship","Temporary contact only"],a:1},
+
+{t:"The orientation phase of nurse–patient relationship focuses on:",o:["Termination","Establishing trust and rapport","Evaluation","Documentation"],a:1},
+
+{t:"During the working phase, the nurse mainly:",o:["Ends the relationship","Works toward achieving goals","Introduces self","Avoids emotions"],a:1},
+
+{t:"The termination phase involves:",o:["Planning care","Evaluation and closure","Assessment","Diagnosis"],a:1},
+
+{t:"Trust in nurse–patient relationship is built through:",o:["Authority","Effective communication","Fear","Control"],a:1},
+
+{t:"Which communication style expresses needs respectfully?",o:["Aggressive","Passive","Assertive","Passive-aggressive"],a:2},
+
+{t:"Aggressive communication is characterized by:",o:["Respect for others","Violating others’ rights","Clear expression","Empathy"],a:1},
+
+{t:"Passive communication often results in:",o:["Confidence","Clear expression","Suppressed feelings","Leadership"],a:2},
+
+{t:"Passive–aggressive communication shows:",o:["Direct expression","Hidden hostility","Empathy","Cooperation"],a:1},
+
+{t:"Assertive nurses usually:",o:["Ignore others","Respect self and others","Create conflict","Remain silent"],a:1},
+
+{t:"Effective nurse–patient communication helps to:",o:["Increase errors","Improve patient compliance","Create conflict","Reduce safety"],a:1},
+
+{t:"Respectful communication leads to:",o:["Distrust","Better relationships","Misunderstanding","Delay"],a:1},
+
+{t:"The nurse’s role in communication includes:",o:["Judging patients","Providing clear information","Avoiding feedback","Controlling decisions"],a:1},
+
+{t:"Effective communication in the health team improves:",o:["Errors","Coordination","Conflict","Delay"],a:1},
+
+{t:"Patient satisfaction is greatly influenced by:",o:["Hospital size","Nurse communication","Cost","Technology"],a:1},
+
+{t:"Clear discharge instructions help to:",o:["Increase readmission","Promote patient safety","Confuse patient","Reduce compliance"],a:1},
+
+{t:"Communication styles mainly affect:",o:["Technology use","Interaction outcomes","Documentation only","Equipment"],a:1},
+
+{t:"Professional boundaries in nurse–patient relationship mean:",o:["Personal involvement","Maintaining therapeutic limits","Avoiding care","Social interaction"],a:1},
+
+{t:"Feedback from patients helps nurses to:",o:["Ignore care","Evaluate effectiveness","Control patients","Avoid change"],a:1},
+
+{t:"Effective communication reduces:",o:["Patient safety","Medical errors","Trust","Compliance"],a:1},
+
+/* TRUE / FALSE (246–250) */
+
+{t:"The nurse–patient relationship is goal-oriented.",o:["True","False"],a:0},
+
+{t:"Assertive communication respects the rights of both nurse and patient.",o:["True","False"],a:0},
+
+{t:"Aggressive communication promotes trust.",o:["True","False"],a:1},
+
+{t:"Professional boundaries are important in nursing communication.",o:["True","False"],a:0},
+
+{t:"Good communication enhances quality of nursing care.",o:["True","False"],a:0}
+
+];
+// ===== تحويل كل أسئلة True / False تلقائياً =====
+questions = questions.map(q=>{
+  if(typeof q.a === "boolean"){
+    return {
+      ...q,
+      o: ["True","False"],
+      a: q.a ? 0 : 1
+    };
+  }
+  return q;
+});
+// تعريف المتغيرات الناقصة
+let i = 0;
+let correct = 0;
+let wrong = 0;
+let answers = [];
+let wrongSet = [];
+
+/* ===== Timer ===== */
+let totalTime=250*60, timeLeft=totalTime;
+const timerInt=setInterval(()=>{
+  timeLeft--;
+  let m=Math.floor(timeLeft/60), s=timeLeft%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  let deg=(timeLeft/totalTime)*360;
+  timer.style.background=`conic-gradient(var(--primary) ${deg}deg,var(--soft) ${deg}deg)`;
+  if(timeLeft<=0){clearInterval(timerInt);finishExam();}
+},1000);
+
+/* ===== UI ===== */
+function updateTop(){
+  let total=questions.length;
+  let answered=correct+wrong;
+  progressText.innerText=`سؤال ${i+1} من ${total}`;
+  progressBar.style.width=((i+1)/total*100)+"%";
+  correctCount.innerText=correct;
+  wrongCount.innerText=wrong;
+  remainPercent.innerText=Math.round(((total-answered)/total)*100)+"%";
+}
+
+/* ===== Render ===== */
+function show(){
+  updateTop();
+  let q = questions[i];
+
+  app.innerHTML = `
+    <div class="card">
+      <div class="question-title">${q.t}</div>
+      ${q.o.map((o,idx)=>`
+        <div class="option" onclick="choose(${idx})">${o}</div>
+      `).join("")}
+    </div>
+  `;
+}
+/* ===== Choose ===== */
+function choose(v){
+  if(answers[i]!=null) return;
+  answers[i]=v;
+  let ok=v===questions[i].a;
+  ok?correct++:wrong++;
+  app.innerHTML=`
+    <div class="feedback">${ok?"🎉 شاطر جدًا كمل":"😅 ركّز يا سُكر"}</div>
+    <div class="card">
+      <div class="question-title">${questions[i].t}</div>
+      ${questions[i].o.map((o,j)=>`
+        <div class="option ${j===questions[i].a?"correct":j===v?"wrong":""} disabled">${o}</div>
+      `).join("")}
+      <button onclick="next()">التالي</button>
+    </div>`;
+}
+
+/* ===== Next ===== */
+function next(){
+  if(i<questions.length-1){i++;show();}
+  else finishExam();
+}
+
+/* ===== Finish ===== */
+function finishExam(){
+  document.body.classList.remove("exam");
+  document.body.classList.add("after");
+
+  let score=Math.round((correct/questions.length)*100);
+
+  if(score>=80){
+    document.documentElement.style.setProperty("--brand1","#22c55e");
+    document.documentElement.style.setProperty("--brand2","#fde047");
+  }else if(score>=50){
+    document.documentElement.style.setProperty("--brand1","#38bdf8");
+    document.documentElement.style.setProperty("--brand2","#e0f2fe");
+  }else{
+    document.documentElement.style.setProperty("--brand1","#fb923c");
+    document.documentElement.style.setProperty("--brand2","#fed7aa");
+  }
+
+  wrongSet=[];
+  let report="";
+  questions.forEach((q,idx)=>{
+    let ok=answers[idx]===q.a;
+    if(!ok) wrongSet.push(q);
+    report+=`
+      <div class="report ${ok?"correct":"wrong"}">
+        <b>${q.t}</b><br>
+إجابتك: ${answers[idx]!=null ? q.o[answers[idx]] : "لم يتم الحل"}<br>
+الصح: ${q.o[q.a]}
+      </div>`;
+  });
+
+  app.innerHTML=`
+    <div class="card">
+      <h3>?? تقريرك</h3>
+      ${report}
+      ${wrongSet.length?`<button onclick="retry()">إعادة حل الغلط فقط</button>`:"<p>أنت ممتاز 👑</p>"}
+    </div>`;
+}
+
+/* ===== Retry Wrong ===== */
+function retry(){
+  // نبدأ امتحان جديد بالأسئلة الغلط فقط
+  questions = [...wrongSet];
+
+  answers = [];
+  wrongSet = [];
+  i = 0;
+  correct = 0;
+  wrong = 0;
+
+  // رجوع لشكل الامتحان
+  document.body.classList.remove("after");
+  document.body.classList.add("exam");
+
+  show();
+}
+
+show();
+</script>
+
+</body>
+</html>
