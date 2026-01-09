@@ -1,444 +1,687 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Gaith Team | Exam</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Postpartum & FP Summary</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<style>
-:root{
-  --primary:#0284c7;
-  --secondary:#0ea5e9;
-  --bg:#f8fbff;
-  --card:#ffffff;
-  --soft:#e6f0ff;
-  --question:#eef7ff;
-  --option:#f9fcff;
-  --success:#16a34a;
-  --danger:#dc2626;
-  --text:#0f172a;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px;
+            line-height: 1.6;
+        }
 
-  /* Brand dynamic */
-  --brand1:#ffffff;
-  --brand2:#e0f2fe;
-}
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
-  background:linear-gradient(180deg,var(--bg),#eef6ff);
-  color:var(--text);
-}
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            animation: slideIn 0.6s ease-out;
+        }
 
-/* ================= HEADER ================= */
-header{
-  background:linear-gradient(90deg,var(--primary),var(--secondary));
-  color:#fff;
-  padding:18px;
-  text-align:center;
-  overflow:hidden;
-}
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
 
-/* ===== Brand ===== */
-.logo{
-  position:relative;
-  font-size:28px;
-  font-weight:900;
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-}
+        .header {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            padding: 25px;
+            text-align: center;
+        }
 
-.brand-text{
-  background:linear-gradient(90deg,var(--brand1),var(--brand2),var(--brand1));
-  background-size:200% auto;
-  -webkit-background-clip:text;
-  -webkit-text-fill-color:transparent;
-  animation:shine 4s linear infinite;
-}
-@keyframes shine{
-  0%{background-position:0%}
-  100%{background-position:200%}
-}
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+        }
 
-.heart{
-  display:inline-block;
-  animation:heartbeat 1.6s infinite ease-in-out;
-}
-@keyframes heartbeat{
-  0%{transform:scale(1)}
-  50%{transform:scale(1.25)}
-  100%{transform:scale(1)}
-}
+        .header p {
+            font-size: 14px;
+            opacity: 0.95;
+        }
 
-/* Sparkles */
-.sparkle{
-  position:absolute;
-  font-size:14px;
-  animation:twinkle 3s infinite ease-in-out;
-}
-@keyframes twinkle{
-  0%{opacity:0;transform:scale(.6)}
-  50%{opacity:1;transform:scale(1.2)}
-  100%{opacity:0;transform:scale(.6)}
-}
+        .content {
+            padding: 20px;
+        }
 
-/* Reduced motion أثناء الامتحان */
-.exam .sparkle{animation-duration:5s;opacity:.4}
-.exam .heart{animation-duration:2.5s}
+        .section {
+            margin-bottom: 25px;
+            animation: fadeIn 0.8s ease-out;
+        }
 
-/* After exam */
-.after .sparkle{animation-duration:2s}
-.after .heart{animation-duration:1.1s}
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
 
-/* ================= LAYOUT ================= */
-.container{max-width:520px;margin:auto;padding:16px}
+        .section-title {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+            color: white;
+            padding: 12px 15px;
+            border-radius: 10px;
+            font-size: 18px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            box-shadow: 0 4px 15px rgba(67, 233, 123, 0.3);
+            transition: transform 0.3s ease;
+        }
 
-/* ===== Top Bar ===== */
-.top-bar{
-  display:flex;
-  gap:12px;
-  margin-bottom:16px;
-}
-.progress-box{
-  flex:1;
-  background:var(--card);
-  padding:14px;
-  border-radius:18px;
-  box-shadow:0 10px 22px rgba(2,132,199,.12);
-}
-.progress-text{
-  display:flex;
-  justify-content:space-between;
-  flex-wrap:wrap;
-  gap:6px;
-  font-weight:800;
-  font-size:14px;
-}
-.progress{
-  height:8px;
-  background:var(--soft);
-  border-radius:10px;
-  overflow:hidden;
-}
-.progress-bar{
-  height:100%;
-  width:0%;
-  background:linear-gradient(90deg,var(--primary),var(--secondary));
-}
+        .section-title:active {
+            transform: scale(0.98);
+        }
 
-/* Timer */
-.timer{
-  width:64px;height:64px;border-radius:50%;
-  background:conic-gradient(var(--primary) 0deg,var(--soft) 0deg);
-  display:flex;align-items:center;justify-content:center;
-  font-weight:900;font-size:14px;
-  background-color:var(--card);
-}
+        .mnemonic-box {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            padding: 15px;
+            border-radius: 12px;
+            margin: 15px 0;
+            border-left: 5px solid #f5576c;
+            box-shadow: 0 4px 15px rgba(245, 87, 108, 0.2);
+        }
 
-/* ================= CARD ================= */
-.card{
-  background:var(--card);
-  padding:22px;
-  border-radius:24px;
-  box-shadow:0 18px 36px rgba(2,132,199,.18);
-}
-.question-title{
-  background:var(--question);
-  padding:16px;
-  border-radius:16px;
-  font-weight:900;
-  margin-bottom:16px;
-}
-.option{
-  background:var(--option);
-  border:2px solid var(--soft);
-  border-radius:18px;
-  padding:15px;
-  margin:12px 0;
-  font-weight:700;
-  cursor:pointer;
-}
-.option.correct{background:#eafaf1;border-color:var(--success)}
-.option.wrong{background:#fff1f1;border-color:var(--danger)}
-.option.disabled{pointer-events:none;opacity:.9}
+        .mnemonic-title {
+            font-weight: bold;
+            color: #5a1a40;
+            font-size: 16px;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+        }
 
-button{
-  margin-top:18px;
-  width:100%;
-  padding:15px;
-  border:none;
-  border-radius:20px;
-  background:linear-gradient(90deg,var(--primary),var(--secondary));
-  color:#fff;
-  font-weight:900;
-}
+        .mnemonic-title::before {
+            content: "🧠";
+            margin-right: 8px;
+            font-size: 20px;
+        }
 
-/* Feedback */
-.feedback{
-  text-align:center;
-  font-size:22px;
-  margin-bottom:10px;
-  animation:pop .5s;
-}
-@keyframes pop{
-  0%{transform:scale(.6);opacity:0}
-  100%{transform:scale(1);opacity:1}
-}
+        .mnemonic-content {
+            color: #2d0a1f;
+            font-size: 15px;
+            line-height: 1.8;
+        }
 
-/* Report */
-.report{
-  background:var(--card);
-  padding:14px;
-  border-radius:14px;
-  margin:10px 0;
-  border-left:6px solid var(--soft);
-}
-.report.correct{border-color:var(--success)}
-.report.wrong{border-color:var(--danger)}
-</style>
+        .highlight-box {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 12px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #ff6b6b;
+        }
+
+        .important {
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);
+            padding: 12px;
+            border-radius: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #d63031;
+            font-weight: 500;
+        }
+
+        .exam-focus {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 15px;
+            border-radius: 12px;
+            margin: 12px 0;
+            border: 2px dashed #00b4db;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .exam-focus::before {
+            content: "⭐ EXAM FOCUS";
+            position: absolute;
+            top: -8px;
+            left: 15px;
+            background: #00b4db;
+            color: white;
+            padding: 4px 12px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: bold;
+        }
+
+        .exam-focus-content {
+            margin-top: 15px;
+        }
+
+        ul {
+            margin-left: 20px;
+            margin-top: 8px;
+        }
+
+        li {
+            margin: 6px 0;
+            color: #2d3436;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 12px;
+            font-weight: bold;
+            margin: 3px;
+            color: white;
+        }
+
+        .badge-primary { background: #6c5ce7; }
+        .badge-danger { background: #d63031; }
+        .badge-success { background: #00b894; }
+        .badge-warning { background: #fdcb6e; color: #2d3436; }
+        .badge-info { background: #0984e3; }
+
+        .grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .card {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            padding: 12px;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .card:active {
+            transform: scale(0.97);
+        }
+
+        .card-title {
+            font-weight: bold;
+            color: #2d3436;
+            margin-bottom: 5px;
+            font-size: 14px;
+        }
+
+        .table-container {
+            overflow-x: auto;
+            margin: 10px 0;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 10px;
+            text-align: left;
+            font-size: 13px;
+        }
+
+        td {
+            padding: 10px;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 13px;
+        }
+
+        tr:nth-child(even) {
+            background: #f8f9fa;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 13px;
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+
+        @media (max-width: 600px) {
+            .grid-2 {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
 </head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>📚 Postpartum & Family Planning</h1>
+            <p>Professional Summary for Nursing Students</p>
+        </div>
 
-<body class="exam">
+        <div class="content">
+            
+            <!-- PUERPERIUM -->
+            <div class="section">
+                <div class="section-title">🤰 Puerperium Basics</div>
+                
+                <div class="mnemonic-box">
+                    <div class="mnemonic-title">Puerperium Duration</div>
+                    <div class="mnemonic-content">
+                        <strong>"6 WEEKS WONDER"</strong><br>
+                        First <strong>6 weeks (40 days)</strong> after birth<br>
+                        • Immediate: <strong>First 24 hrs</strong><br>
+                        • Early: <strong>First week</strong><br>
+                        • Late: <strong>2nd week to 6 weeks</strong>
+                    </div>
+                </div>
+            </div>
 
-<header>
-  <div class="logo">
-    <span class="brand-text">Gaith Team</span>
-    <span class="heart">💖</span>
-    <span class="sparkle" style="top:-8px;left:0">✨</span>
-    <span class="sparkle" style="top:6px;right:-8px">✨</span>
-    <span class="sparkle" style="bottom:-8px;left:50%">✨</span>
-  </div>
-  <div style="margin-top:6px;font-weight:800">الإمتحان في جيبك 👏🏻</div>
-</header>
+            <!-- UTERINE INVOLUTION -->
+            <div class="section">
+                <div class="section-title">🔄 Uterine Involution</div>
+                
+                <div class="exam-focus">
+                    <div class="exam-focus-content">
+                        <strong>2 Main Processes:</strong><br>
+                        <span class="badge badge-primary">1. AUTOLYSIS</span> = Self-digestion by enzymes<br>
+                        <span class="badge badge-danger">2. ISCHEMIA</span> = Decreased blood supply
+                    </div>
+                </div>
 
-<div class="container">
+                <div class="mnemonic-box">
+                    <div class="mnemonic-title">اللويتا Involution Timeline - "1-10-6"</div>
+                    <div class="mnemonic-content">
+                        <strong>1 hour:</strong> Fundus at umbilicus (1000g)<br>
+                        <strong>1cm/day:</strong> Descends daily<br>
+                        <strong>10 days:</strong> In pelvic cavity (500g)<br>
+                        <strong>6 weeks:</strong> Pre-pregnancy size (60g)
+                    </div>
+                </div>
+            </div>
 
-  <div class="top-bar">
-    <div class="progress-box">
-      <div class="progress-text">
-        <span id="progressText"></span>
-        <span>
-          ✔️ <span id="correctCount">0</span> |
-          ❌ <span id="wrongCount">0</span> |
-          ⏳ <span id="remainPercent">100%</span>
-        </span>
-      </div>
-      <div class="progress">
-        <div class="progress-bar" id="progressBar"></div>
-      </div>
+            <!-- LOCHIA -->
+            <div class="section">
+                <div class="section-title">🩸 Lochia Types</div>
+                
+                <div class="mnemonic-box">
+                    <div class="mnemonic-title"> اللويتا "RSA" - Remember Lochia Sequence</div>
+                    <div class="mnemonic-content">
+                        <strong>R</strong>ubra = <span class="badge badge-danger">RED</span> (Days 1-4/7)<br>
+                        <strong>S</strong>erosa = <span class="badge badge-warning">PINK-YELLOW</span> (Days 5-7)<br>
+                        <strong>A</strong>lba = <span class="badge" style="background: #dfe6e9; color: #2d3436;">WHITE</span> (Day 10+)
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Type</th>
+                            <th>Color</th>
+                            <th>Duration</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Rubra</strong></td>
+                            <td>Red</td>
+                            <td>1-4 days (up to 7)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Serosa</strong></td>
+                            <td>Pinkish-yellow</td>
+                            <td>3-4 days more</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Alba</strong></td>
+                            <td>Creamy white</td>
+                            <td>From day 10</td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+
+            <!-- VITAL SIGNS -->
+            <div class="section">
+                <div class="section-title">🌡️ Vital Signs Changes</div>
+                
+                <div class="exam-focus">
+                    <div class="exam-focus-content">
+                        <div class="grid-2">
+                            <div class="card">
+                                <div class="card-title">🌡️ Temperature</div>
+                                ↑ 0.5°C (up to 38°C) first 24h<br>
+                                <span class="badge badge-warning">Normal!</span>
+                            </div>
+                            <div class="card">
+                                <div class="card-title">💓 Pulse</div>
+                                ↓ 60-70 bpm (24-48h)<br>
+                                <span class="badge badge-success">Bradycardia</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mnemonic-box">
+                    <div class="mnemonic-title">Temperature Rise Causes - اللويتا "MCN"</div>
+                    <div class="mnemonic-content">
+                        <strong>M</strong>ilk engorgement (day 3-4)<br>
+                        <strong>C</strong>onstipation<br>
+                        <strong>N</strong>ervous excitation
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARDIOVASCULAR -->
+            <div class="section">
+                <div class="section-title">❤️ Cardiovascular System</div>
+                
+                <div class="mnemonic-box">
+                    <div class="mnemonic-title"> اللويتا Fluid Elimination - "2 Ds"</div>
+                    <div class="mnemonic-content">
+                        <strong>D</strong>iuresis = Increased urine (3000ml/day)<br>
+                        <strong>D</strong>iaphoresis = Profuse sweating (at night)
+                    </div>
+                </div>
+
+                <div class="important">
+                    <strong>⚠️ EXAM IMPORTANT:</strong><br>
+                    Blood loss: NVD = 300-500ml, C/S = 500-1000ml<br>
+                    Risk of thrombosis due to ↑ fibrinogen
+                </div>
+            </div>
+
+            <!-- DANGER SIGNS -->
+            <div class="section">
+                <div class="section-title">⚠️ Danger Signs</div>
+                
+                <div class="exam-focus">
+                    <div class="exam-focus-content">
+                        <div class="mnemonic-box">
+                            <div class="mnemonic-title">Mother - "FEBS-HEAD"</div>
+                            <div class="mnemonic-content">
+                                <strong>F</strong>ever/Foul discharge<br>
+                                <strong>E</strong>xcessive bleeding<br>
+                                <strong>B</strong>reast problems (engorged/cracked)<br>
+                                <strong>S</strong>evere pain (abdominal)<br>
+                                <strong>H</strong>eadache/blurred vision<br>
+                                <strong>E</strong>dema (hands, face, legs)<br>
+                                <strong>A</strong>bnormal tiredness<br>
+                                <strong>D</strong>yspnea
+                            </div>
+                        </div>
+
+                        <div class="mnemonic-box">
+                            <div class="mnemonic-title">Baby - "FIT COLIC"</div>
+                            <div class="mnemonic-content">
+                                <strong>F</strong>ever >38°C / <35.5°C<br>
+                                <strong>I</strong>nfection signs (cord)<br>
+                                <strong>T</strong>achypnea >60/min<br>
+                                <strong>C</strong>olic<br>
+                                <strong>O</strong>dor from cord<br>
+                                <strong>L</strong>ow temp<br>
+                                <strong>I</strong>llness signs<br>
+                                <strong>C</strong>onstipation/Diarrhea
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- POSTPARTUM HEMORRHAGE -->
+            <div class="section">
+                <div class="section-title">🩸 Postpartum Hemorrhage (PPH)</div>
+                
+                <div class="exam-focus">
+                    <div class="exam-focus-content">
+                        <strong>Definition:</strong> Blood loss >500ml in first 24h
+                    </div>
+                </div>
+
+                <div class="mnemonic-box">
+                    <div class="mnemonic-title">PPH Causes -اللويتا  "4 Ts"</div>
+                    <div class="mnemonic-content">
+                        <strong>T</strong>one (Atonic uterus - #1 cause)<br>
+                        <strong>T</strong>rauma (Lacerations)<br>
+                        <strong>T</strong>issue (Retained placenta)<br>
+                        <strong>T</strong>hrombin (Blood disorders)
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <strong>Atonic Uterus Causes - "MULTIPRO"</strong><br>
+                    <strong>M</strong>ultiparity<br>
+                    <strong>U</strong>terine overdistension<br>
+                    <strong>L</strong>ong labor<br>
+                    <strong>T</strong>rauma/fibroids<br>
+                    <strong>I</strong>ncomplete placenta<br>
+                    <strong>P</strong>recipitate labor<br>
+                    <strong>R</strong>apid delivery<br>
+                    <strong>O</strong>verdistension (twins, polyhydramnios)
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Type</th>
+                            <th>Timing</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Primary PPH</strong></td>
+                            <td>First 24 hours</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Secondary PPH</strong></td>
+                            <td>24h to 6 weeks</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="important">
+                    <strong>🔍 Differentiation:</strong><br>
+                    • Atonic uterus: Soft, boggy, gush on squeezing<br>
+                    • Trauma: Firm uterus, bright red blood
+                </div>
+            </div>
+
+            <!-- PUERPERAL SEPSIS -->
+            <div class="section">
+                <div class="section-title">🦠 Puerperal Sepsis</div>
+                
+                <div class="exam-focus">
+                    <div class="exam-focus-content">
+                        <strong>Definition:</strong> Temp ≥38.5°C for 2 consecutive days in first 6 weeks postpartum
+                    </div>
+                </div>
+
+                <div class="mnemonic-box">
+                    <div class="mnemonic-title">Risk Factors - اللويتا  "PROPEL"</div>
+                    <div class="mnemonic-content">
+                        <strong>P</strong>rolonged labor/PROM<br>
+                        <strong>R</strong>etained placenta<br>
+                        <strong>O</strong>perative delivery<br>
+                        <strong>P</strong>oor nutrition/anemia<br>
+                        <strong>E</strong>xaminations (multiple)<br>
+                        <strong>L</strong>acerations
+                    </div>
+                </div>
+
+                <div class="highlight-box">
+                    <strong>Signs:</strong><br>
+                    • Fever, tachycardia, malaise<br>
+                    • Foul-smelling lochia<br>
+                    • Subinvolution<br>
+                    • Abdominal pain
+                </div>
+            </div>
+
+            <!-- NURSING CARE -->
+            <div class="section">
+                <div class="section-title">👩‍⚕️ Nursing Care Essentials</div>
+                
+                <div class="mnemonic-box">
+                    <div class="mnemonic-title">Daily Assessment - اللويتا "BURP IT"</div>
+                    <div class="mnemonic-content">
+                        <strong>B</strong>reast<br>
+                        <strong>U</strong>terus (fundal height)<br>
+                        <strong>R</strong>espiration/BP<br>
+                        <strong>P</strong>erineum<br>
+                        <strong>I</strong>ntake/output<br>
+                        <strong>T</strong>emperature/legs
+                    </div>
+                </div>
+
+                <div class="exam-focus">
+                    <div class="exam-focus-content">
+                        <strong>Key Points:</strong><br>
+                        • Check VS 2x daily<br>
+                        • Palpate uterus for firmness<br>
+                        • Lochia: color, amount, odor<br>
+                        • Perineum: REEDA (redness, edema, ecchymosis, discharge, approximation)<br>
+                        • Encourage voiding q6-8h<br>
+                        • Early ambulation prevents DVT
+                    </div>
+                </div>
+            </div>
+
+            <!-- BREASTFEEDING -->
+            <div class="section">
+                <div class="section-title">🤱 Breastfeeding Benefits</div>
+                
+                <div class="grid-2">
+                    <div class="card">
+                        <div class="card-title">👶 For Baby</div>
+                        • Immunological protection<br>
+                        • Easily digested<br>
+                        • Perfect nutrition<br>
+                        • Less obesity<br>
+                        • Facial muscle development
+                    </div>
+                    <div class="card">
+                        <div class="card-title">👩 For Mother</div>
+                        • Aids involution (oxytocin)<br>
+                        • Bonding<br>
+                        • Convenient<br>
+                        • Cost-effective<br>
+                        • ↓ Breast cancer risk
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAMILY PLANNING -->
+            <div class="section">
+                <div class="section-title">💊 Family Planning Methods</div>
+                
+                <div class="mnemonic-box">
+                    <div class="mnemonic-title">Contraceptive Categories - اللويتا "HIBS"</div>
+                    <div class="mnemonic-content">
+                        <strong>H</strong>ormonal (Pills, Injectable, Implants)<br>
+                        <strong>I</strong>ntrauterine (IUD)<br>
+                        <strong>B</strong>arrier (Condoms, Spermicides)<br>
+                        <strong>S</strong>urgical (Tubal ligation, Vasectomy)
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <tr>
+                            <th>Method</th>
+                            <th>Key Points</th>
+                        </tr>
+                        <tr>
+                            <td><strong>Combined OCs</strong></td>
+                            <td>Estrogen + Progesterone, 21/28 day cycles</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Minipill</strong></td>
+                            <td>Progesterone only, safe for lactating</td>
+                        </tr>
+                        <tr>
+                            <td><strong>DMPA Injectable</strong></td>
+                            <td>Every 3 months, 150mg</td>
+                        </tr>
+                        <tr>
+                            <td><strong>Norplant</strong></td>
+                            <td>6 capsules, 5 years (Implanon: 1 rod, 3 years)</td>
+                        </tr>
+                        <tr>
+                            <td><strong>IUD</strong></td>
+                            <td>Long-term, check strings monthly</td>
+                        </tr>
+                    </table>
+                </div>
+
+                <div class="exam-focus">
+                    <div class="exam-focus-content">
+                        <strong>⚠️ OCs Contraindications - اللويتا "ACHES"</strong><br>
+                        <strong>A</strong>bdominal pain<br>
+                        <strong>C</strong>hest pain<br>
+                        <strong>H</strong>eadache (severe)<br>
+                        <strong>E</strong>ye problems<br>
+                        <strong>S</strong>welling of legs
+                    </div>
+                </div>
+
+                <div class="important">
+                    <strong>Who Should NOT Use OCs:</strong><br>
+                    • Age >35 + Smoker<br>
+                    • History: heart attack, stroke, blood clots<br>
+                    • Liver disease, breast/uterine cancer
+                </div>
+            </div>
+
+            <!-- RESUMPTION OF MENSES -->
+            <div class="section">
+                <div class="section-title">🔄 Menstruation Return</div>
+                
+                <div class="highlight-box">
+                    <strong>Non-nursing mothers:</strong> 7-9 weeks<br>
+                    <strong>Lactating mothers:</strong> 3-4 months (up to 24 months)<br>
+                    <strong>⚠️ Note:</strong> Ovulation can occur before menstruation!
+                </div>
+            </div>
+
+            <!-- QUICK REFERENCE -->
+            <div class="section">
+                <div class="section-title pulse">⭐ High-Yield Exam Points</div>
+                
+                <div class="exam-focus">
+                    <div class="exam-focus-content">
+                        <strong>1.</strong> Involution: 1cm/day descent, 10 days to pelvis<br>
+                        <strong>2.</strong> Lochia sequence: Rubra → Serosa → Alba<br>
+                        <strong>3.</strong> Physiological bradycardia: 60-70 bpm for 24-48h<br>
+                        <strong>4.</strong> Temp elevation: 0.5°C first 24h (normal!)<br>
+                        <strong>5.</strong> PPH definition: >500ml in 24h<br>
+                        <strong>6.</strong> 4 Ts of PPH: Tone, Trauma, Tissue, Thrombin<br>
+                        <strong>7.</strong> Puerperal sepsis: ≥38.5°C for 2 days<br>
+                        <strong>8.</strong> Diuresis: 3000ml/day common<br>
+                        <strong>9.</strong> DMPA: 150mg every 3 months<br>
+                        <strong>10.</strong> Vasectomy: Use backup for 20 ejaculations/3 months
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="footer">
+            <p>✨ مع مس آلاء أنت في آمان  ✨</p>
+            <p> بالتوفيق ليكم يا أبطال 💪</p>
+        </div>
     </div>
-    <div class="timer" id="timer">35:00</div>
-  </div>
-
-  <div id="app"></div>
-</div>
-
-<script>
-/* ===== Questions ===== */
-let questions = [
-
-            {t:"What is the primary purpose of Simulation-Based Learning (SBL) in nursing education?",o:["To replace clinical practice entirely","To replicate real-life clinical situations in a safe environment","To reduce the number of faculty members needed","To focus solely on theoretical knowledge"],a:1},
-            {t:"Which type of simulation involves advanced mannequins with physiological responses?",o:["Low-Fidelity Simulation","Medium-Fidelity Simulation","High-Fidelity Simulation","Virtual Simulation"],a:2},
-            {t:"According to Kolb’s cycle, which stage follows 'Experience' in simulation?",o:["Application","Conceptualization","Reflection","Evaluation"],a:2},
-            {t:"What is the main focus of the 'Pre-briefing' component in a simulation session?",o:["Structured reflection after the scenario","Orientation to objectives, roles, and equipment","Grading the students' performance","Managing technical issues"],a:1},
-            {t:"Which educational foundation emphasizes that knowledge is best acquired in context?",o:["Adult Learning Theory","Experiential Learning","Situated Cognition","Behavioral Theory"],a:2},
-            {t:"In the context of SBL, what does 'High-Fidelity' refer to?",o:["Basic models for hand hygiene","Role-play without technology","Realistic mannequins with integrated software","Computer-based decision-making scenarios"],a:2},
-            {t:"Which of the following is a benefit of 'Error Management' in simulation?",o:["Students are punished for mistakes","Learners can make mistakes safely and learn from them","It eliminates the need for debriefing","It ensures that no mistakes are ever made in real practice"],a:1},
-            {t:"What is the role of 'Standardized Patients' in nursing simulation?",o:["They are high-tech mannequins","They are actors trained to portray patients consistently","They are students who observe the simulation","They are virtual reality avatars"],a:1},
-            {t:"Which component of a simulation session involves emotional processing and professional growth?",o:["Pre-briefing","Scenario Execution","Debriefing","Evaluation"],a:2},
-            {t:"What is a common challenge in implementing SBL?",o:["Low cost of equipment","Excessive faculty training","Student anxiety","Lack of realistic scenarios"],a:2},
-            {t:"Which step comes first in designing effective simulation activities?",o:["Develop the Scenario","Define Learning Objectives","Prepare Equipment","Conduct Debriefing"],a:1},
-            {t:"In the sample scenario for COPD, what is a primary objective?",o:["Performing a surgical procedure","Assessing respiratory status","Managing a pediatric patient","Conducting a mental health assessment"],a:1},
-            {t:"Adult Learning Theory suggests that adults prefer learning that is:",o:["Theoretical and abstract","Practical and problem-solving oriented","Passive and lecture-based","Focused on rote memorization"],a:1},
-            {t:"Which type of simulation is best suited for practicing vital signs or hand hygiene?",o:["High-Fidelity","Virtual Simulation","Low-Fidelity","Standardized Patients"],a:2},
-            {t:"What does 'Experiential Learning' mean in the context of simulation?",o:["Learning through reading textbooks","Learning through doing and reflection","Learning through watching videos","Learning through listening to lectures"],a:1},
-            {t:"Which of the following is NOT a key characteristic of SBL?",o:["Safe and controlled","Reflective","Realistic","Purely theoretical"],a:3},
-            {t:"What is the purpose of 'Evaluation' in a simulation session?",o:["To set expectations for the scenario","To assess clinical performance and decision-making","To provide emotional support to students","To fix technical issues with mannequins"],a:1},
-            {t:"Which simulation type uses computer-based scenarios for interactive decision-making?",o:["Medium-Fidelity","Virtual Simulation","Standardized Patients","Low-Fidelity"],a:1},
-            {t:"How can faculty training challenges be addressed in SBL?",o:["By reducing the number of simulations","Through workshops and peer mentoring","By hiring external actors only","By using only low-fidelity models"],a:1},
-            {t:"What is a key benefit of 'Critical Thinking' in simulation?",o:["It allows for slower decision-making","It promotes rapid decision-making under pressure","It focuses on memorizing facts","It discourages teamwork"],a:1},
-            {t:"Which component sets the 'psychological safety' for students?",o:["Scenario Execution","Debriefing","Pre-briefing","Evaluation"],a:2},
-            {t:"What is the 'Solution' for the challenge of 'High Cost' in simulation?",o:["Stop using high-fidelity mannequins","Use blended models and prioritize high-impact scenarios","Increase student fees significantly","Use only standardized patients"],a:1},
-            {t:"In the COPD scenario, which material is specifically mentioned?",o:["Surgical kit","High-fidelity mannequin","Pediatric crib","Mental health assessment tool"],a:1},
-            {t:"Which of the following is an example of 'Medium-Fidelity Simulation'?",o:["Role-play for communication","Administering injections on basic mannequins","Managing cardiac arrest on advanced mannequins","Virtual reality surgery"],a:1},
-            {t:"What is the final stage of Kolb’s cycle as applied to simulation?",o:["Experience","Reflection","Conceptualization","Application"],a:3},
-            {t:"Why is 'Emotional Preparedness' important in nursing simulation?",o:["To make students less empathetic","To expose students to stress and ethical dilemmas safely","To ensure students never feel stress","To replace real-world emotional experiences"],a:1},
-            {t:"Which step in designing simulation involves including patient data and lab results?",o:["Define Learning Objectives","Develop the Scenario","Prepare Equipment","Evaluate Performance"],a:1},
-            {t:"What does 'Situated Cognition' imply for nursing education?",o:["Learning is independent of the environment","Knowledge is best acquired in the context where it will be used","Theory should always precede practice","Classroom learning is superior to simulation"],a:1},
-            {t:"Which of the following is a characteristic of 'Debriefing'?",o:["It happens before the scenario","It is a structured reflection led by the instructor","It involves setting up the equipment","It is only for grading purposes"],a:1},
-            {t:"What is the 'Example Scenario' for High-Fidelity Simulation?",o:["Practicing hand hygiene","Administering injections","Managing cardiac arrest or labor delivery","Conducting mental health assessments"],a:2},
-            {t:"Which benefit refers to students feeling more prepared for real patient care?",o:["Skill Mastery","Clinical Confidence","Error Management","Critical Thinking"],a:1},
-            {t:"What is a recommended solution for 'Technical Issues' in simulation?",o:["Ignore them during the session","Ensure regular maintenance and backup plans","Use only low-tech equipment","Let the students fix the issues"],a:1},
-            {t:"Ethical considerations in simulation include:",o:["Ignoring cultural beliefs","Addressing dilemmas like informed consent and end-of-life care","Using only one type of patient population","Focusing only on technical skills"],a:1},
-            {t:"What is the 'Activity' mentioned in the COPD sample scenario?",o:["Writing a research paper","Team-based simulation and role-play","Watching a documentary on COPD","Attending a lecture on respiratory drugs"],a:1},
-            {t:"Which of the following is a 'Key Characteristic' of SBL?",o:["Uncontrolled environment","Experiential learning","Theoretical focus","Passive observation"],a:1},
-            {t:"In SBL, 'Reflective' learning primarily occurs during:",o:["Pre-briefing","Scenario Execution","Debriefing","Equipment preparation"],a:2},
-            {t:"Which type of simulation is described as 'Basic models or role-play without technology'?",o:["Low-Fidelity","Medium-Fidelity","High-Fidelity","Virtual Simulation"],a:0},
-            {t:"What is the 'Description' for 'Skill Mastery' as a benefit?",o:["Feeling more prepared","Repeated practice improves psychomotor and cognitive skills","Learning from mistakes safely","Enhancing leadership"],a:1},
-            {t:"Which foundation of simulation emphasizes 'autonomy and immediate feedback'?",o:["Experiential Learning","Adult Learning Theory","Situated Cognition","Behavioral Theory"],a:1},
-            {t:"What is the 'Solution' for 'Assessment Complexity'?",o:["Use simple pass/fail grades","Use structured rubrics and multi-source feedback","Avoid assessing students during simulation","Only use self-assessment"],a:1},
-            {t:"Which component involves students responding to patient cues?",o:["Pre-briefing","Scenario Execution","Debriefing","Evaluation"],a:1},
-            {t:"What is the 'Description' for 'Virtual Simulation'?",o:["Actors portraying patients","Computer-based scenarios with interactive decision-making","Advanced mannequins with software","Basic models for vital signs"],a:1},
-            {t:"Which of the following is a 'Benefit' related to 'Teamwork'?",o:["Skill Mastery","Clinical Confidence","Teamwork and Communication","Critical Thinking"],a:2},
-            {t:"What is the Step after 'Prepare Equipment and Roles' in designing simulation?",o:["Define Learning Objectives","Develop the Scenario","Facilitate the Simulation","Conduct Debriefing"],a:2},
-            {t:"Experiential learning in SBL means:",o:["Learning by listening","Learning by doing","Learning by reading","Learning by watching"],a:1},
-            {t:"Which of the following is an 'Ethical and Cultural Consideration'?",o:["Promoting respectful communication and empathy","Using only English-speaking mannequins","Avoiding difficult topics like end-of-life care","Focusing only on the physical needs of the patient"],a:0},
-            {t:"What is the Description for 'Low-Fidelity Simulation'?",o:["Advanced mannequins","Basic models or role-play without technology","Computer-based scenarios","Actors as patients"],a:1},
-            {t:"Which component of SBL includes 'Orientation to objectives'?",o:["Pre-briefing","Scenario Execution","Debriefing","Evaluation"],a:0},
-            {t:"What is the 'Benefit' of 'Error Management'?",o:["It prevents all errors","It allows learners to make mistakes safely","It focuses on technical skills only","It reduces the need for faculty"],a:1},
-            {t:"Which 'Step' involves using checklists and rubrics?",o:["Define Learning Objectives","Develop the Scenario","Evaluate Performance","Facilitate the Simulation"],a:2},
-            {t:"'Situated Cognition' suggests that learning is:",o:["Abstract","Authentic when replicated in clinical environments","Best done in a library","Independent of context"],a:1},
-            {t:"What is the 'Example Scenario' for Virtual Simulation?",o:["Practicing hand hygiene","Administering injections","Diagnosing and treating a virtual patient","Managing cardiac arrest"],a:2},
-            {t:"Which of the following is a 'Challenge' in SBL?",o:["High Cost","Faculty Training","Student Anxiety","All of the above"],a:3},
-            {t:"The 'Debriefing' phase encourages:",o:["Technical maintenance","Emotional processing and professional growth","Setting learning objectives","Preparing equipment"],a:1},
-            {t:"Simulation-Based Learning (SBL) allows nursing students to practice without risking patient safety.",o:["True","False"],a:0},
-            {t:"Low-fidelity simulation involves the use of advanced mannequins with physiological responses.",o:["True","False"],a:1},
-            {t:"Kolb’s Experiential Learning cycle includes four stages: experience, reflection, conceptualization, and application.",o:["True","False"],a:0},
-            {t:"Pre-briefing is the phase where students reflect on their performance after the simulation is over.",o:["True","False"],a:1},
-            {t:"Situated Cognition theory suggests that knowledge is best acquired in isolation from its context.",o:["True","False"],a:1},
-            {t:"Debriefing is a structured reflection led by the instructor to discuss what happened and how to improve.",o:["True","False"],a:0},
-            {t:"One of the benefits of SBL is that it allows learners to make mistakes safely.",o:["True","False"],a:0},
-            {t:"High-fidelity simulation is typically used for basic skills like hand hygiene.",o:["True","False"],a:1},
-            {t:"Adult Learning Theory posits that adults prefer theoretical learning over practical problem-solving.",o:["True","False"],a:1},
-            {t:"Standardized Patients are actors trained to portray patients consistently for educational purposes.",o:["True","False"],a:0},
-            {t:"The 'Scenario Execution' phase is where students engage in the simulation and make decisions.",o:["True","False"],a:0},
-            {t:"Simulation-Based Learning is only useful for technical skills and does not address emotional or ethical dimensions.",o:["True","False"],a:1},
-            {t:"Faculty training is a common challenge in implementing simulation-based nursing education.",o:["True","False"],a:0},
-            {t:"Virtual simulation involves computer-based scenarios with interactive decision-making.",o:["True","False"],a:0},
-            {t:"Evaluation in SBL only includes instructor grading and excludes self-assessment or peer feedback.",o:["True","False"],a:1}
-
-];
-
-// تعريف المتغيرات الناقصة
-let i = 0;
-let correct = 0;
-let wrong = 0;
-let answers = [];
-let wrongSet = [];
-
-/* ===== Timer ===== */
-let totalTime=35*60, timeLeft=totalTime;
-const timerInt=setInterval(()=>{
-  timeLeft--;
-  let m=Math.floor(timeLeft/60), s=timeLeft%60;
-  timer.innerText=`${m}:${s<10?"0":""}${s}`;
-  let deg=(timeLeft/totalTime)*360;
-  timer.style.background=`conic-gradient(var(--primary) ${deg}deg,var(--soft) ${deg}deg)`;
-  if(timeLeft<=0){clearInterval(timerInt);finishExam();}
-},1000);
-
-/* ===== UI ===== */
-function updateTop(){
-  let total=questions.length;
-  let answered=correct+wrong;
-  progressText.innerText=`سؤال ${i+1} من ${total}`;
-  progressBar.style.width=((i+1)/total*100)+"%";
-  correctCount.innerText=correct;
-  wrongCount.innerText=wrong;
-  remainPercent.innerText=Math.round(((total-answered)/total)*100)+"%";
-}
-
-/* ===== Render ===== */
-function show(){
-  updateTop();
-  let q = questions[i];
-
-  app.innerHTML = `
-    <div class="card">
-      <div class="question-title">${q.t}</div>
-      ${q.o.map((o,idx)=>`
-        <div class="option" onclick="choose(${idx})">${o}</div>
-      `).join("")}
-    </div>
-  `;
-}
-/* ===== Choose ===== */
-function choose(v){
-  if(answers[i]!=null) return;
-  answers[i]=v;
-  let ok=v===questions[i].a;
-  ok?correct++:wrong++;
-  app.innerHTML=`
-    <div class="feedback">${ok?"🎉 شاطر جدًا كمل":"😅 ركّز يا سُكر"}</div>
-    <div class="card">
-      <div class="question-title">${questions[i].t}</div>
-      ${questions[i].o.map((o,j)=>`
-        <div class="option ${j===questions[i].a?"correct":j===v?"wrong":""} disabled">${o}</div>
-      `).join("")}
-      <button onclick="next()">التالي</button>
-    </div>`;
-}
-
-/* ===== Next ===== */
-function next(){
-  if(i<questions.length-1){i++;show();}
-  else finishExam();
-}
-
-/* ===== Finish ===== */
-function finishExam(){
-  document.body.classList.remove("exam");
-  document.body.classList.add("after");
-
-  let score=Math.round((correct/questions.length)*100);
-
-  if(score>=80){
-    document.documentElement.style.setProperty("--brand1","#22c55e");
-    document.documentElement.style.setProperty("--brand2","#fde047");
-  }else if(score>=50){
-    document.documentElement.style.setProperty("--brand1","#38bdf8");
-    document.documentElement.style.setProperty("--brand2","#e0f2fe");
-  }else{
-    document.documentElement.style.setProperty("--brand1","#fb923c");
-    document.documentElement.style.setProperty("--brand2","#fed7aa");
-  }
-
-  wrongSet=[];
-  let report="";
-  questions.forEach((q,idx)=>{
-    let ok=answers[idx]===q.a;
-    if(!ok) wrongSet.push(q);
-    report+=`
-      <div class="report ${ok?"correct":"wrong"}">
-        <b>${q.t}</b><br>
-إجابتك: ${answers[idx]!=null ? q.o[answers[idx]] : "لم يتم الحل"}<br>
-الصح: ${q.o[q.a]}
-      </div>`;
-  });
-
-  app.innerHTML=`
-    <div class="card">
-      <h3>?? تقريرك</h3>
-      ${report}
-      ${wrongSet.length?`<button onclick="retry()">إعادة حل الغلط فقط</button>`:"<p>أنت ممتاز 👑</p>"}
-    </div>`;
-}
-
-/* ===== Retry Wrong ===== */
-function retry(){
-  // نبدأ امتحان جديد بالأسئلة الغلط فقط
-  questions = [...wrongSet];
-
-  answers = [];
-  wrongSet = [];
-  i = 0;
-  correct = 0;
-  wrong = 0;
-
-  // رجوع لشكل الامتحان
-  document.body.classList.remove("after");
-  document.body.classList.add("exam");
-
-  show();
-}
-
-show();
-</script>
-
 </body>
-
 </html>
-
-
-
