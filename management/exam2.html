@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nursing Leadership Summary</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 15px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header {
+            background: linear-gradient(135deg, #2d3561 0%, #c05c7e 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 26px;
+            margin-bottom: 10px;
+            animation: slideDown 0.8s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .content {
+            padding: 20px;
+        }
+
+        .section {
+            margin-bottom: 25px;
+            animation: slideUp 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .section:nth-child(1) { animation-delay: 0.1s; }
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.3s; }
+        .section:nth-child(4) { animation-delay: 0.4s; }
+        .section:nth-child(5) { animation-delay: 0.5s; }
+        .section:nth-child(6) { animation-delay: 0.6s; }
+        .section:nth-child(7) { animation-delay: 0.7s; }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 12px;
+            padding: 12px 15px;
+            border-radius: 10px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .icon {
+            font-size: 24px;
+        }
+
+        .blue-grad { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .purple-grad { background: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%); }
+        .orange-grad { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+        .green-grad { background: linear-gradient(135deg, #30cfd0 0%, #330867 100%); }
+        .red-grad { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .teal-grad { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .pink-grad { background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%); }
+
+        .card {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            border-left: 4px solid;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+
+        .card h3 {
+            font-size: 16px;
+            margin-bottom: 8px;
+            color: #2d3561;
+        }
+
+        .card p, .card ul {
+            font-size: 14px;
+            color: #555;
+        }
+
+        .card ul {
+            padding-left: 20px;
+            margin-top: 8px;
+        }
+
+        .card ul li {
+            margin-bottom: 5px;
+        }
+
+        .mnemonic-box {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 15px;
+            border-radius: 12px;
+            margin: 15px 0;
+            border: 3px dashed #f093fb;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .mnemonic-box h4 {
+            color: #c05c7e;
+            font-size: 16px;
+            margin-bottom: 8px;
+            text-align: center;
+        }
+
+        .mnemonic-box p {
+            color: #2d3561;
+            font-size: 14px;
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 10px;
+            font-size: 13px;
+            overflow: hidden;
+            border-radius: 10px;
+        }
+
+        .comparison-table th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 12px;
+            text-align: left;
+        }
+
+        .comparison-table td {
+            padding: 10px 12px;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background-color: #f8f9fa;
+        }
+
+        .comparison-table tr:hover {
+            background-color: #e3f2fd;
+            transition: background-color 0.3s ease;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #e0c3fc 0%, #8ec5fc 100%);
+            padding: 15px;
+            border-radius: 10px;
+            margin: 10px 0;
+            font-weight: 500;
+            color: #2d3561;
+        }
+
+        .exam-focus {
+            background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);
+            color: white;
+            padding: 12px;
+            border-radius: 10px;
+            margin: 10px 0;
+            font-weight: bold;
+            text-align: center;
+            animation: shake 3s infinite;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-2px); }
+            75% { transform: translateX(2px); }
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin: 3px;
+            color: white;
+        }
+
+        .badge-blue { background: #4facfe; }
+        .badge-purple { background: #a18cd1; }
+        .badge-orange { background: #fa709a; }
+        .badge-green { background: #30cfd0; }
+        .badge-red { background: #f5576c; }
+
+        .footer {
+            background: #2d3561;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>🏥 Nursing Leadership & Management</h1>
+            <p>Professional Summary - 4th Year Nursing 2025/2026</p>
+        </div>
+
+        <div class="content">
+            <!-- Key Definitions -->
+            <div class="section">
+                <div class="section-title blue-grad">
+                    <span class="icon">📚</span>
+                    <span>Key Definitions (مهمه في الإمتحان )</span>
+                </div>
+                <div class="exam-focus">⭐ غيث بيقولك : ركز عالتعريفات دي وإفتكرها ⭐</div>
+                
+                <div class="card" style="border-left-color: #4facfe;">
+                    <h3>Leadership</h3>
+                    <p>The process by which an individual can direct, guide and influence the behavior and work of others towards accomplishment of specific goal in a given situation.</p>
+                </div>
+
+                <div class="card" style="border-left-color: #a18cd1;">
+                    <h3>Management</h3>
+                    <p>The process of planning, organizing, staffing, leading and controlling an organization.</p>
+                </div>
+
+                <div class="card" style="border-left-color: #fa709a;">
+                    <h3>Leader</h3>
+                    <p>Anyone who uses interpersonal skills to influence others to accomplish specific goals. Cares about and focuses on the people who do the job.</p>
+                </div>
+
+                <div class="card" style="border-left-color: #30cfd0;">
+                    <h3>Manager</h3>
+                    <p>An individual employed by an organization that is responsible and accountable for efficiently accomplishing the goal of organization.</p>
+                </div>
+            </div>
+
+            <!-- Leader vs Manager -->
+            <div class="section">
+                <div class="section-title purple-grad">
+                    <span class="icon">⚖️</span>
+                    <span>Leader vs Manager ( ركز عليها )</span>
+                </div>
+                <div class="exam-focus">🎯 عمو غيث بيقولك دائما بتيجي في الإمتجانات!</div>
+                
+                <table class="comparison-table">
+                    <tr>
+                        <th>Leader</th>
+                        <th>Manager</th>
+                    </tr>
+                    <tr>
+                        <td>No specific position</td>
+                        <td>Managerial position</td>
+                    </tr>
+                    <tr>
+                        <td>Authority from ability to influence others</td>
+                        <td>Authority from manager's position</td>
+                    </tr>
+                    <tr>
+                        <td>Inspiring others to do better work</td>
+                        <td>Making sure work is done by others</td>
+                    </tr>
+                    <tr>
+                        <td>Long-term view, taking risks, innovating</td>
+                        <td>Short-term view, avoiding risks, maintaining</td>
+                    </tr>
+                    <tr>
+                        <td>Prefer change</td>
+                        <td>Accept reality</td>
+                    </tr>
+                    <tr>
+                        <td>Focus on effectiveness</td>
+                        <td>Focus on efficiency</td>
+                    </tr>
+                    <tr>
+                        <td>Focus on people</td>
+                        <td>Focus on system</td>
+                    </tr>
+                    <tr>
+                        <td>Motivate</td>
+                        <td>Direct</td>
+                    </tr>
+                    <tr>
+                        <td>Empower people</td>
+                        <td>Solve problems</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Do the right things</strong></td>
+                        <td><strong>Do things right</strong></td>
+                    </tr>
+                </table>
+
+                <div class="mnemonic-box">
+                    <h4>🧠 بصموجة غيث : LEADER vs MANAGER</h4>
+                    <p><strong>LEADER = PEOPLE</strong> (Focus on People, Empower, Effectiveness)</p>
+                    <p><strong>MANAGER = SYSTEM</strong> (Focus on Systems, Solve problems, Efficiency)</p>
+                </div>
+            </div>
+
+            <!-- Leadership Qualities -->
+            <div class="section">
+                <div class="section-title orange-grad">
+                    <span class="icon">⭐</span>
+                    <span>Qualities/Traits of a Leader</span>
+                </div>
+                <div class="exam-focus">📝 سؤال سهل دايما!</div>
+
+                <div class="mnemonic-box">
+                    <h4>🧠 بصموجة غيث Leader Qualities: "PICK MINDS"</h4>
+                    <p><strong>P</strong>ersonality | <strong>I</strong>nitiative | <strong>C</strong>ommunication | <strong>K</strong>nowledge</p>
+                    <p><strong>M</strong>otivation | <strong>I</strong>ntegrity | <strong>N</strong>ervous control (Self-confidence)</p>
+                    <p><strong>D</strong>ecisiveness | <strong>S</strong>ocial skills</p>
+                </div>
+
+                <div class="card" style="border-left-color: #fa709a;">
+                    <h3>🎭 Personality</h3>
+                    <p>Pleasing, friendly yet authoritative, inspires people to work hard</p>
+                </div>
+
+                <div class="card" style="border-left-color: #4facfe;">
+                    <h3>📖 Knowledge</h3>
+                    <p>Adequate knowledge and competence to influence subordinates</p>
+                </div>
+
+                <div class="card" style="border-left-color: #30cfd0;">
+                    <h3>🛡️ Integrity</h3>
+                    <p>High level of honesty, fair outlook, objective judgment</p>
+                </div>
+
+                <div class="card" style="border-left-color: #a18cd1;">
+                    <h3>🚀 Initiative</h3>
+                    <p>Takes initiative to grab opportunities for organization advantage</p>
+                </div>
+
+                <div class="card" style="border-left-color: #f5576c;">
+                    <h3>💬 Communication Skills</h3>
+                    <p>Good speaker, listener, counselor, and persuader</p>
+                </div>
+
+                <div class="card" style="border-left-color: #feca57;">
+                    <h3>💪 Motivation Skills</h3>
+                    <p>Understands and satisfies needs of people effectively</p>
+                </div>
+
+                <div class="card" style="border-left-color: #ff6b6b;">
+                    <h3>✨ Self-confidence & Will Power</h3>
+                    <p>High confidence even in worst situations</p>
+                </div>
+
+                <div class="card" style="border-left-color: #8ec5fc;">
+                    <h3>🧠 Intelligence</h3>
+                    <p>Analyzes pros/cons, has vision and foresightedness</p>
+                </div>
+
+                <div class="card" style="border-left-color: #667eea;">
+                    <h3>⚡ Decisiveness</h3>
+                    <p>Decisive in managing work, firm on decisions</p>
+                </div>
+
+                <div class="card" style="border-left-color: #c05c7e;">
+                    <h3>🤝 Social Skills</h3>
+                    <p>Empathy, humanist, sense of responsibility and accountability</p>
+                </div>
+            </div>
+
+            <!-- Traditional Leadership Styles -->
+            <div class="section">
+                <div class="section-title green-grad">
+                    <span class="icon">🎯</span>
+                    <span>Traditional Leadership Styles (مهمه جدا)</span>
+                </div>
+                <div class="exam-focus">🔥 في الإمتحان : Know Advantages & Disadvantages!</div>
+
+                <div class="mnemonic-box">
+                    <h4>🧠 بصموجة غيث : "All Dogs Lay By" (ADLB)</h4>
+                    <p><strong>A</strong>utocratic | <strong>D</strong>emocratic | <strong>L</strong>aissez-faire | <strong>B</strong>ureaucratic</p>
+                </div>
+
+                <!-- Autocratic Style -->
+                <div class="card" style="border-left-color: #f5576c;">
+                    <h3>1️⃣ Autocratic Style (Directive/Authoritarian)</h3>
+                    <p><strong>Definition:</strong> Maximum control for leader, minimum freedom for group members</p>
+                    <p><strong>Characteristics:</strong></p>
+                    <ul>
+                        <li>Centralized decision making</li>
+                        <li>Minimal group participation</li>
+                        <li>Task-oriented (high concern for task, low for people)</li>
+                        <li>Uses employee efforts without regard to their interests</li>
+                    </ul>
+                    <div class="highlight-box">
+                        <strong>✅ Advantages:</strong> Less time consuming, useful in emergencies, good when members are inexperienced
+                    </div>
+                    <div class="highlight-box">
+                        <strong>❌ Disadvantages:</strong> No individual initiation, negative reinforcement, threat to organization continuity
+                    </div>
+                </div>
+
+                <!-- Democratic Style -->
+                <div class="card" style="border-left-color: #4facfe;">
+                    <h3>2️⃣ Democratic Style (Participative/Consultative)</h3>
+                    <p><strong>Definition:</strong> Leader consults subordinates before making final decision</p>
+                    <p><strong>Characteristics:</strong></p>
+                    <ul>
+                        <li>Values individual characteristics and abilities</li>
+                        <li>Two-way communication (upward & downward)</li>
+                        <li>Works through suggestions not orders</li>
+                        <li>Gives factual and objective feedback</li>
+                    </ul>
+                    <div class="highlight-box">
+                        <strong>✅ Advantages:</strong> Greater commitment, increases job satisfaction & productivity, inspires confidence
+                    </div>
+                    <div class="highlight-box">
+                        <strong>❌ Disadvantages:</strong> Lacks efficiency when members lack maturity, time consuming
+                    </div>
+                </div>
+
+                <!-- Laissez-faire Style -->
+                <div class="card" style="border-left-color: #30cfd0;">
+                    <h3>3️⃣ Laissez-faire Style (Permissive/Let Alone)</h3>
+                    <p><strong>Definition:</strong> Maximum freedom for group, minimum leader control</p>
+                    <p><strong>Characteristics:</strong></p>
+                    <ul>
+                        <li>Members free to set goals and take decisions</li>
+                        <li>Lacks control, direction, supervision</li>
+                        <li>Total responsibility given to group</li>
+                    </ul>
+                    <div class="highlight-box">
+                        <strong>✅ Advantages:</strong> Encourages innovation, job satisfaction, promotes independence
+                    </div>
+                    <div class="highlight-box">
+                        <strong>❌ Disadvantages:</strong> No unity of action, instability, members feel directionless, miscommunication
+                    </div>
+                </div>
+
+                <!-- Bureaucratic Style -->
+                <div class="card" style="border-left-color: #a18cd1;">
+                    <h3>4️⃣ Bureaucratic Style</h3>
+                    <p><strong>Definition:</strong> Leaders ensure employees follow rules and policies</p>
+                    <p><strong>Characteristics:</strong></p>
+                    <ul>
+                        <li>Follows all rules and regulations</li>
+                        <li>More formal approach</li>
+                        <li>Manages by the book</li>
+                        <li>Too many rules can hamper creativity</li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Advanced Leadership Styles -->
+            <div class="section">
+                <div class="section-title red-grad">
+                    <span class="icon">🚀</span>
+                    <span>Advanced Leadership Styles</span>
+                </div>
+                <div class="exam-focus">📌 Know the Differences Between Transactional & Transformational!</div>
+
+                <div class="mnemonic-box">
+                    <h4>🧠 بصموجة غيث : "CTC" (Like CTC salary!)</h4>
+                    <p><strong>C</strong>harismatic | <strong>T</strong>ransactional | <strong>T</strong>ransformational (Change)</p>
+                </div>
+
+                <div class="card" style="border-left-color: #feca57;">
+                    <h3>1️⃣ Charismatic Style</h3>
+                    <p>Leaders with lots of positivity, enthusiasm, and confidence in team members. Play important role in encouraging and motivating members.</p>
+                </div>
+
+                <div class="card" style="border-left-color: #fa709a;">
+                    <h3>2️⃣ Transactional Style</h3>
+                    <p><strong>Focus:</strong> Motivating through reward and punishment system</p>
+                    <ul>
+                        <li>Based on social interaction between leaders & followers</li>
+                        <li>Promise of rewards for achievement of goals</li>
+                        <li>Enhances loyalty & work performance</li>
+                    </ul>
+                    <div class="highlight-box">
+                        <strong>✅ Advantages:</strong> Encourages hard work, improves productivity & morale, achieves business goals, clear expectations
+                    </div>
+                    <div class="highlight-box">
+                        <strong>❌ Disadvantages:</strong> Employees may lose creativity, time-consuming monitoring, demotivation if targets not met, unsuitable for teamwork
+                    </div>
+                </div>
+
+                <div class="card" style="border-left-color: #8ec5fc;">
+                    <h3>3️⃣ Transformational Style</h3>
+                    <p><strong>Focus:</strong> Identifies change needed, creates vision, guides change through inspiration</p>
+                    <ul>
+                        <li>Focused on effecting continuous change</li>
+                        <li>Raises follower needs to higher levels (self-esteem)</li>
+                        <li>Long-term goals oriented</li>
+                    </ul>
+                </div>
+
+                <!-- Comparison Table -->
+                <table class="comparison-table" style="margin-top: 20px;">
+                    <tr>
+                        <th>Aspect</th>
+                        <th>Transactional</th>
+                        <th>Transformational</th>
+                    </tr>
+                    <tr>
+                        <td><strong>Focus</strong></td>
+                        <td>Day-to-day operations</td>
+                        <td>Commits people to action, converts followers to leaders</td>
+                    </tr>
+                    <tr>
+                        <td><strong>View of Future</strong></td>
+                        <td>Short-term goals & results</td>
+                        <td>Long-term strategic, visionary</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Involvement</strong></td>
+                        <td>Little involvement, very directive</td>
+                        <td>Lots of involvement, very participative</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Implementation Time</strong></td>
+                        <td>Fast</td>
+                        <td>Slow</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Motivation</strong></td>
+                        <td>Incentive focused</td>
+                        <td>Inspirational, visionary, engaging</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Factors Influencing Leadership Style -->
+            <div class="section">
+                <div class="section-title teal-grad">
+                    <span class="icon">🔍</span>
+                    <span>Factors Influencing Leadership Style</span>
+                </div>
+
+                <div class="mnemonic-box">
+                    <h4>🧠 بصموجة غيث  "PPNE" (People, People, Nature, Environment)</h4>
+                    <p><strong>P</strong>ersonality of Leader | <strong>P</strong>ersonality of Group Members</p>
+                    <p><strong>N</strong>ature of Task | <strong>E</strong>nvironment</p>
+                </div>
+
+                <div class="card" style="border-left-color: #4facfe;">
+                    <h3>1. Personality of the Leader</h3>
+                    <p>Value system, trust in employees, inclination towards directive vs team-building style, behavior in uncertain situations</p>
+                </div>
+
+                <div class="card" style="border-left-color: #fa709a;">
+                    <h3>2. Personality of Group Members</h3>
+                    <p>If employees prefer independence, show readiness to assume responsibility, and interest in problem-solving → leaders permit greater freedom</p>
+                </div>
+
+                <div class="card" style="border-left-color: #30cfd0;">
+                    <h3>3. Nature of Task</h3>
+                    <p>Critical task + short time → Autocratic style | Simple task + no time pressure → Participative style</p>
+                </div>
+
+                <div class="card" style="border-left-color: #a18cd1;">
+                    <h3>4. Nature of Environment</h3>
+                    <p>Organizational structure, social, economic, political pressures determine leadership style</p>
+                </div>
+
+                <div class="highlight-box">
+                    <strong>🎯 Key Note:</strong> Different styles are effective in different situations. The best style promotes high work performance in wide variety of circumstances.
+                </div>
+            </div>
+
+            <!-- Seven Habits -->
+            <div class="section">
+                <div class="section-title pink-grad">
+                    <span class="icon">🌟</span>
+                    <span>Seven Habits of Highly Effective People</span>
+                </div>
+
+                <div class="mnemonic-box">
+                    <h4>🧠 بصموجة غيث "Be PuFFy WiSe Saw"</h4>
+                    <p><strong>Be</strong> Proactive | <strong>P</strong>ut First things First | <strong>F</strong>irst understand then be understood</p>
+                    <p><strong>F</strong>inal goal (Begin with end in mind) | <strong>W</strong>in/Win | <strong>S</strong>ynergize | <strong>S</strong>aw (Sharpen)</p>
+                </div>
+
+                <div style="display: grid; gap: 10px;">
+                    <span class="badge badge-blue">1. Be Proactive</span>
+                    <span class="badge badge-purple">2. Begin with the End in Mind</span>
+                    <span class="badge badge-orange">3. Put First Things First</span>
+                    <span class="badge badge-green">4. Think Win/Win</span>
+                    <span class="badge badge-red">5. Seek First to Understand, Then to Be Understood</span>
+                    <span class="badge badge-blue">6. Synergize</span>
+                    <span class="badge badge-purple">7. Sharpen the Saw</span>
+                </div>
+            </div>
+
+            <!-- Exam Tips -->
+            <div class="section">
+                <div class="section-title" style="background: linear-gradient(135deg, #ff6b6b 0%, #feca57 100%);">
+                    <span class="icon">📝</span>
+                    <span>Final Exam Tips</span>
+                </div>
+
+                <div class="exam-focus">🎯 النقاط المهمه من عمو غيث:</div>
+                
+                <div class="card" style="border-left-color: #f5576c; background: #fff5f5;">
+                    <h3>🔥 HIGH PRIORITY</h3>
+                    <ul>
+                        <li><strong>Definitions</strong> of Leadership, Management, Leader, Manager</li>
+                        <li><strong>Leader vs Manager</strong> comparison (all 11 points)</li>
+                        <li><strong>Leadership Qualities</strong> (use PICK MINDS mnemonic)</li>
+                        <li><strong>Traditional Styles</strong> with advantages & disadvantages</li>
+                        <li><strong>Transactional vs Transformational</strong> comparison table</li>
+                    </ul>
+                </div>
+
+                <div class="card" style="border-left-color: #feca57; background: #fffbf0;">
+                    <h3>⚠️ MEDIUM PRIORITY</h3>
+                    <ul>
+                        <li>Factors influencing leadership style (use PPNE mnemonic)</li>
+                        <li>Seven Habits of Effective People</li>
+                        <li>Charismatic leadership characteristics</li>
+                    </ul>
+                </div>
+
+                <div class="highlight-box" style="margin-top: 15px;">
+                    <strong>💡 Pro Tip:</strong> Practice writing comparison tables for Leader vs Manager and Transactional vs Transformational. These are favorite exam questions!
+                </div>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p>📚 Study Smart, Not Hard!</p>
+            <p style="margin-top: 10px; font-size: 12px; opacity: 0.8;"> مع غيث أنت في أمان بإذن الله ، بالتوفيق  🍀</p>
+        </div>
+    </div>
+</body>
+</html>
