@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaith Team | Exam</title>
+
+<style>
+:root{
+  --primary:#0284c7;
+  --secondary:#0ea5e9;
+  --bg:#f8fbff;
+  --card:#ffffff;
+  --soft:#e6f0ff;
+  --question:#eef7ff;
+  --option:#f9fcff;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --text:#0f172a;
+
+  /* Brand dynamic */
+  --brand1:#ffffff;
+  --brand2:#e0f2fe;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#eef6ff);
+  color:var(--text);
+}
+
+/* ================= HEADER ================= */
+header{
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* ===== Brand ===== */
+.logo{
+  position:relative;
+  font-size:28px;
+  font-weight:900;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.brand-text{
+  background:linear-gradient(90deg,var(--brand1),var(--brand2),var(--brand1));
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 4s linear infinite;
+}
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+.heart{
+  display:inline-block;
+  animation:heartbeat 1.6s infinite ease-in-out;
+}
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  animation:twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle{
+  0%{opacity:0;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.2)}
+  100%{opacity:0;transform:scale(.6)}
+}
+
+/* Reduced motion أثناء الامتحان */
+.exam .sparkle{animation-duration:5s;opacity:.4}
+.exam .heart{animation-duration:2.5s}
+
+/* After exam */
+.after .sparkle{animation-duration:2s}
+.after .heart{animation-duration:1.1s}
+
+/* ================= LAYOUT ================= */
+.container{max-width:520px;margin:auto;padding:16px}
+
+/* ===== Top Bar ===== */
+.top-bar{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+}
+.progress-box{
+  flex:1;
+  background:var(--card);
+  padding:14px;
+  border-radius:18px;
+  box-shadow:0 10px 22px rgba(2,132,199,.12);
+}
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px;
+  font-weight:800;
+  font-size:14px;
+}
+.progress{
+  height:8px;
+  background:var(--soft);
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+}
+
+/* Timer */
+.timer{
+  width:64px;height:64px;border-radius:50%;
+  background:conic-gradient(var(--primary) 0deg,var(--soft) 0deg);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;
+  background-color:var(--card);
+}
+
+/* ================= CARD ================= */
+.card{
+  background:var(--card);
+  padding:22px;
+  border-radius:24px;
+  box-shadow:0 18px 36px rgba(2,132,199,.18);
+}
+.question-title{
+  background:var(--question);
+  padding:16px;
+  border-radius:16px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+.option{
+  background:var(--option);
+  border:2px solid var(--soft);
+  border-radius:18px;
+  padding:15px;
+  margin:12px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.correct{background:#eafaf1;border-color:var(--success)}
+.option.wrong{background:#fff1f1;border-color:var(--danger)}
+.option.disabled{pointer-events:none;opacity:.9}
+
+button{
+  margin-top:18px;
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-weight:900;
+}
+
+/* Feedback */
+.feedback{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:10px;
+  animation:pop .5s;
+}
+@keyframes pop{
+  0%{transform:scale(.6);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* Report */
+.report{
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  border-left:6px solid var(--soft);
+}
+.report.correct{border-color:var(--success)}
+.report.wrong{border-color:var(--danger)}
+</style>
+</head>
+
+<body class="exam">
+
+<header>
+  <div class="logo">
+    <span class="brand-text">Gaith Team</span>
+    <span class="heart">💖</span>
+    <span class="sparkle" style="top:-8px;left:0">✨</span>
+    <span class="sparkle" style="top:6px;right:-8px">✨</span>
+    <span class="sparkle" style="bottom:-8px;left:50%">✨</span>
+  </div>
+  <div style="margin-top:6px;font-weight:800">الإمتحان في جيبك 👏🏻</div>
+</header>
+
+<div class="container">
+
+  <div class="top-bar">
+    <div class="progress-box">
+      <div class="progress-text">
+        <span id="progressText"></span>
+        <span>
+          ✔️ <span id="correctCount">0</span> |
+          ❌ <span id="wrongCount">0</span> |
+          ⏳ <span id="remainPercent">100%</span>
+        </span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="timer" id="timer">60:00</div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<script>
+/* ===== Questions ===== */
+let questions = [
+            {t:"Which role of the nurse educator involves guiding students through active engagement and inquiry?",o:["Curriculum Developer","Evaluator","Facilitator of Learning","Innovator"],a:2},
+            {t:"A nurse educator who designs and updates educational content is primarily acting as a:",o:["Mentor","Curriculum Developer","Strategist","Role Model"],a:1},
+            {t:"Which responsibility involves aligning teaching strategies with learning objectives?",o:["Execution","Adaptation","Planning","Support"],a:2},
+            {t:"What is the primary focus of the 'Evaluator' role in nursing education?",o:["Demonstrating professional behavior","Assessing student performance and learning outcomes","Adopting new technologies","Designing realistic scenarios"],a:1},
+            {t:"Which skill involves the ability to select and apply diverse teaching strategies?",o:["Clinical Expertise","Communication Skills","Pedagogical Skills","Technological Proficiency"],a:2},
+            {t:"In Simulation-Based Learning, the educator's role includes:",o:["Curating digital content","Mediating group conflicts","Facilitating pre-briefing and debriefing","Organizing group roles"],a:2},
+            {t:"Which challenge is best addressed by using evidence-based rationale and gradual integration?",o:["Resource Limitations","Resistance to Change","Student Diversity","Workload and Burnout"],a:1},
+            {t:"What is the suggested response to 'Resource Limitations' in nursing education?",o:["Use low-cost alternatives and advocate for funding","Apply differentiated instruction","Use time management and delegation","Stop using simulation entirely"],a:0},
+            {t:"Which educator role focuses on demonstrating professional behavior and ethical practice?",o:["Innovator","Facilitator","Mentor and Role Model","Evaluator"],a:2},
+            {t:"'Technological Proficiency' for a nurse educator includes the use of:",o:["Only traditional textbooks","E-learning platforms and simulation tools","Hand-written assessments only","Physical models without digital integration"],a:1},
+            {t:"In Case-Based Learning, the educator's responsibility is to:",o:["Organize group dynamics","Monitor technical support","Guide discussion and critical thinking","Design advanced mannequins"],a:2},
+            {t:"Which responsibility involves modifying strategies based on feedback and classroom dynamics?",o:["Planning","Execution","Adaptation","Evaluation"],a:2},
+            {t:"What is the impact of educator effectiveness on 'Professional Identity Formation'?",o:["It reduces dropout rates","It shapes students' values and attitudes","It improves academic success only","It focuses on technical skills"],a:1},
+            {t:"Which skill is essential for integrating theory with clinical realities?",o:["Pedagogical Skills","Clinical Expertise","Ethical Leadership","Communication Skills"],a:1},
+            {t:"In Collaborative Learning, the educator's role includes:",o:["Curating interactive modules","Mediating conflicts and ensuring equal participation","Designing realistic scenarios","Providing technical support"],a:1},
+            {t:"Which best practice involves staying updated with educational research?",o:["Aligning strategies with objectives","Fostering an inclusive environment","Staying updated with innovations","Using reflective teaching"],a:2},
+            {t:"What does 'Ethical Leadership' in teaching promote?",o:["High-cost technology","Integrity, fairness, and professionalism","Traditional methods only","Rapid curriculum changes"],a:1},
+            {t:"In E-Learning, the educator is responsible for:",o:["Facilitating debriefing","Monitoring student engagement and progress","Organizing physical group roles","Selecting diverse clinical cases"],a:1},
+            {t:"Which challenge involves varied learning styles and backgrounds?",o:["Resistance to Change","Student Diversity","Resource Limitations","Workload and Burnout"],a:1},
+            {t:"The 'Execution' responsibility refers to:",o:["Aligning strategies with objectives","Delivering content using appropriate methods","Modifying strategies based on feedback","Providing emotional support"],a:1},
+            {t:"Which role involves adopting and adapting new teaching strategies?",o:["Evaluator","Innovator","Mentor","Facilitator"],a:1},
+            {t:"What is a key outcome of 'Supportive Educators'?",o:["Increased dropout rates","Reduced motivation","Increased engagement and retention","Focus on traditional methods"],a:2},
+            {t:"'Pedagogical Skills' include an understanding of:",o:["Only clinical standards","Learning theories and instructional design","Budgeting for simulation labs","Technical maintenance of mannequins"],a:1},
+            {t:"In Simulation-Based Learning, ensuring 'psychological safety' is the responsibility of:",o:["The student","The nurse educator","The IT department","The hospital administrator"],a:1},
+            {t:"Which educator role is described as being a 'strategist'?",o:["The student","The nurse educator","The clinical nurse","The patient"],a:1},
+            {t:"What is the suggested response to 'Student Diversity'?",o:["Use traditional methods only","Apply differentiated instruction and inclusive strategies","Ignore individual backgrounds","Use a one-size-fits-all approach"],a:1},
+            {t:"Which responsibility involves using rubrics to measure effectiveness?",o:["Planning","Execution","Evaluation","Support"],a:2},
+            {t:"'Communication Skills' for an educator include:",o:["Passive listening","Constructive feedback and active listening","One-way transmission of knowledge","Avoiding student interaction"],a:1},
+            {t:"In Case-Based Learning, the educator encourages:",o:["Rote memorization","Ethical reflection and interdisciplinary integration","Technical proficiency only","Group conflict"],a:1},
+            {t:"Which challenge is addressed by 'time management and delegation'?",o:["Resistance to Change","Resource Limitations","Workload and Burnout","Student Diversity"],a:2},
+            {t:"The nurse educator is more than a transmitter of knowledge; they are also a:",o:["Passive observer","Mentor and facilitator","Technical assistant only","Curriculum critic"],a:1},
+            {t:"Which educator role involves designing realistic scenarios?",o:["Collaborative Learning facilitator","Simulation-Based Learning designer","E-learning curator","Case-Based Learning guide"],a:1},
+            {t:"'Clinical Readiness' as a student outcome means:",o:["Students are prepared for real-world practice","Students have passed all theoretical exams","Students have memorized all nursing theories","Students have completed their research papers"],a:0},
+            {t:"Which best practice involves collaborating with peers?",o:["Aligning strategies with objectives","Interdisciplinary integration","Reflective teaching","Inclusive environment"],a:1},
+            {t:"In E-Learning, providing 'timely feedback' is a responsibility of:",o:["The student","The nurse educator","The software developer","The peer group"],a:1},
+            {t:"Which role involves demonstrating professional behavior?",o:["Innovator","Role Model","Evaluator","Facilitator"],a:1},
+            {t:"'Adaptation' in strategy implementation means:",o:["Sticking to the original plan regardless of feedback","Modifying strategies based on classroom dynamics","Replacing all strategies with simulation","Ignoring student needs"],a:1},
+            {t:"Which skill involves clear, respectful, and empathetic interaction?",o:["Pedagogical Skills","Communication Skills","Technological Proficiency","Clinical Expertise"],a:1},
+            {t:"In Collaborative Learning, the educator ensures:",o:["Individual work only","Equal participation and teamwork","No interaction between students","Teacher-led discussion only"],a:1},
+            {t:"What is the 'Impact' of effective teaching on 'Academic Success'?",o:["Students perform worse","Students perform better when guided by skilled educators","It has no impact on performance","It only affects clinical skills"],a:1},
+            {t:"Which responsibility involves providing emotional and academic support?",o:["Planning","Execution","Support","Evaluation"],a:2},
+            {t:"'Reflective Teaching' is used to:",o:["Punish students","Improve continuously","Maintain traditional methods","Increase workload"],a:1},
+            {t:"In Simulation-Based Learning, the educator ensures:",o:["Technical issues are ignored","Ethical sensitivity","Students work in isolation","No pre-briefing is conducted"],a:1},
+            {t:"Which educator role is responsible for 'Curriculum Development'?",o:["Registered Nurse","Nurse Educator","Clinical Instructor","Hospital Manager"],a:1},
+            {t:"'Inclusive Strategies' are a response to which challenge?",o:["High Cost","Student Diversity","Faculty Resistance","Technical Issues"],a:1},
+            {t:"Which skill is required to select and apply diverse teaching strategies?",o:["Clinical Expertise","Pedagogical Skills","Technological Proficiency","Ethical Leadership"],a:1},
+            {t:"In Case-Based Learning, the educator selects:",o:["Only easy cases","Relevant and diverse cases","Cases with no ethical dilemmas","Cases unrelated to nursing"],a:1},
+            {t:"'Workload and Burnout' can be managed through:",o:["Increasing teaching hours","Institutional support and delegation","Avoiding research","Reducing student interaction"],a:1},
+            {t:"Which educator role adopts new teaching technologies?",o:["Evaluator","Innovator","Mentor","Facilitator"],a:1},
+            {t:"'Academic Success' is a student outcome of:",o:["Traditional methods only","Educator effectiveness","Student isolation","Lack of feedback"],a:1},
+            {t:"Which responsibility involves delivering content using simulation?",o:["Planning","Execution","Adaptation","Evaluation"],a:1},
+            {t:"'Ethical Leadership' promotes:",o:["Fairness and professionalism","Competition among students","High-cost resources","Resistance to change"],a:0},
+            {t:"In Collaborative Learning, the educator promotes:",o:["Individualism","Peer learning and teamwork","Teacher-only feedback","Competitive grading"],a:1},
+            {t:"Which educator role guides students through inquiry?",o:["Evaluator","Facilitator of Learning","Curriculum Developer","Innovator"],a:1},
+            {t:"'Clinical Readiness' prepares students for:",o:["Theoretical exams","Real-world practice","Research only","Graduation only"],a:1},
+            {t:"The nurse educator's role is limited to transmitting knowledge and does not include mentoring.",o:["True","False"],a:1},
+            {t:"A nurse educator must be a registered nurse with advanced education in teaching.",o:["True","False"],a:0},
+            {t:"Planning involves aligning teaching strategies with learning objectives and student needs.",o:["True","False"],a:0},
+            {t:"Pedagogical skills refer to the educator's up-to-date knowledge of nursing practice standards.",o:["True","False"],a:1},
+            {t:"In Simulation-Based Learning, the educator is responsible for ensuring psychological safety.",o:["True","False"],a:0},
+            {t:"Resistance to change can be addressed by using evidence-based rationale.",o:["True","False"],a:0},
+            {t:"Student diversity is a challenge that can be met with a one-size-fits-all teaching approach.",o:["True","False"],a:1},
+            {t:"Effective educators shape students' values and attitudes through professional identity formation.",o:["True","False"],a:0},
+            {t:"Ethical leadership in teaching promotes integrity and fairness.",o:["True","False"],a:0},
+            {t:"In E-Learning, the educator does not need to monitor student engagement.",o:["True","False"],a:1},
+            {t:"Collaborative learning involves the educator mediating conflicts and ensuring equal participation.",o:["True","False"],a:0},
+            {t:"Resource limitations are a challenge that can be addressed by using low-cost alternatives.",o:["True","False"],a:0},
+            {t:"Reflective teaching is a best practice for continuous improvement in nursing education.",o:["True","False"],a:0},
+            {t:"Clinical expertise is the ability to select and apply diverse teaching strategies.",o:["True","False"],a:1},
+            {t:"Supportive educators can help reduce student dropout rates and increase motivation.",o:["True","False"],a:0}
+
+];
+// ===== تحويل كل أسئلة True / False تلقائياً =====
+questions = questions.map(q=>{
+  if(typeof q.a === "boolean"){
+    return {
+      ...q,
+      o: ["True","False"],
+      a: q.a ? 0 : 1
+    };
+  }
+  return q;
+});
+// تعريف المتغيرات الناقصة
+let i = 0;
+let correct = 0;
+let wrong = 0;
+let answers = [];
+let wrongSet = [];
+
+/* ===== Timer ===== */
+let totalTime=60*60, timeLeft=totalTime;
+const timerInt=setInterval(()=>{
+  timeLeft--;
+  let m=Math.floor(timeLeft/60), s=timeLeft%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  let deg=(timeLeft/totalTime)*360;
+  timer.style.background=`conic-gradient(var(--primary) ${deg}deg,var(--soft) ${deg}deg)`;
+  if(timeLeft<=0){clearInterval(timerInt);finishExam();}
+},1000);
+
+/* ===== UI ===== */
+function updateTop(){
+  let total=questions.length;
+  let answered=correct+wrong;
+  progressText.innerText=`سؤال ${i+1} من ${total}`;
+  progressBar.style.width=((i+1)/total*100)+"%";
+  correctCount.innerText=correct;
+  wrongCount.innerText=wrong;
+  remainPercent.innerText=Math.round(((total-answered)/total)*100)+"%";
+}
+
+/* ===== Render ===== */
+function show(){
+  updateTop();
+  let q = questions[i];
+
+  app.innerHTML = `
+    <div class="card">
+      <div class="question-title">${q.t}</div>
+      ${q.o.map((o,idx)=>`
+        <div class="option" onclick="choose(${idx})">${o}</div>
+      `).join("")}
+    </div>
+  `;
+}
+/* ===== Choose ===== */
+function choose(v){
+  if(answers[i]!=null) return;
+  answers[i]=v;
+  let ok=v===questions[i].a;
+  ok?correct++:wrong++;
+  app.innerHTML=`
+    <div class="feedback">${ok?"🎉 شاطر جدًا كمل":"😅 ركّز يا سُكر"}</div>
+    <div class="card">
+      <div class="question-title">${questions[i].t}</div>
+      ${questions[i].o.map((o,j)=>`
+        <div class="option ${j===questions[i].a?"correct":j===v?"wrong":""} disabled">${o}</div>
+      `).join("")}
+      <button onclick="next()">التالي</button>
+    </div>`;
+}
+
+/* ===== Next ===== */
+function next(){
+  if(i<questions.length-1){i++;show();}
+  else finishExam();
+}
+
+/* ===== Finish ===== */
+function finishExam(){
+  document.body.classList.remove("exam");
+  document.body.classList.add("after");
+
+  let score=Math.round((correct/questions.length)*100);
+
+  if(score>=80){
+    document.documentElement.style.setProperty("--brand1","#22c55e");
+    document.documentElement.style.setProperty("--brand2","#fde047");
+  }else if(score>=50){
+    document.documentElement.style.setProperty("--brand1","#38bdf8");
+    document.documentElement.style.setProperty("--brand2","#e0f2fe");
+  }else{
+    document.documentElement.style.setProperty("--brand1","#fb923c");
+    document.documentElement.style.setProperty("--brand2","#fed7aa");
+  }
+
+  wrongSet=[];
+  let report="";
+  questions.forEach((q,idx)=>{
+    let ok=answers[idx]===q.a;
+    if(!ok) wrongSet.push(q);
+    report+=`
+      <div class="report ${ok?"correct":"wrong"}">
+        <b>${q.t}</b><br>
+إجابتك: ${answers[idx]!=null ? q.o[answers[idx]] : "لم يتم الحل"}<br>
+الصح: ${q.o[q.a]}
+      </div>`;
+  });
+
+  app.innerHTML=`
+    <div class="card">
+      <h3>?? تقريرك</h3>
+      ${report}
+      ${wrongSet.length?`<button onclick="retry()">إعادة حل الغلط فقط</button>`:"<p>أنت ممتاز 👑</p>"}
+    </div>`;
+}
+
+/* ===== Retry Wrong ===== */
+function retry(){
+  // نبدأ امتحان جديد بالأسئلة الغلط فقط
+  questions = [...wrongSet];
+
+  answers = [];
+  wrongSet = [];
+  i = 0;
+  correct = 0;
+  wrong = 0;
+
+  // رجوع لشكل الامتحان
+  document.body.classList.remove("after");
+  document.body.classList.add("exam");
+
+  show();
+}
+
+show();
+</script>
+
+</body>
+</html>
+
