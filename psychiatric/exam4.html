@@ -228,7 +228,7 @@ button{
         <div class="progress-bar" id="progressBar"></div>
       </div>
     </div>
-    <div class="timer" id="timer">60:00</div>
+    <div class="timer" id="timer">35:00</div>
   </div>
 
   <div id="app"></div>
@@ -237,89 +237,79 @@ button{
 <script>
 /* ===== Questions ===== */
 let questions = [
-            {t:"Which role of the nurse educator involves guiding students through active engagement and inquiry?",o:["Curriculum Developer","Evaluator","Facilitator of Learning","Innovator"],a:2},
-            {t:"A nurse educator who designs and updates educational content is primarily acting as a:",o:["Mentor","Curriculum Developer","Strategist","Role Model"],a:1},
-            {t:"Which responsibility involves aligning teaching strategies with learning objectives?",o:["Execution","Adaptation","Planning","Support"],a:2},
-            {t:"What is the primary focus of the 'Evaluator' role in nursing education?",o:["Demonstrating professional behavior","Assessing student performance and learning outcomes","Adopting new technologies","Designing realistic scenarios"],a:1},
-            {t:"Which skill involves the ability to select and apply diverse teaching strategies?",o:["Clinical Expertise","Communication Skills","Pedagogical Skills","Technological Proficiency"],a:2},
-            {t:"In Simulation-Based Learning, the educator's role includes:",o:["Curating digital content","Mediating group conflicts","Facilitating pre-briefing and debriefing","Organizing group roles"],a:2},
-            {t:"Which challenge is best addressed by using evidence-based rationale and gradual integration?",o:["Resource Limitations","Resistance to Change","Student Diversity","Workload and Burnout"],a:1},
-            {t:"What is the suggested response to 'Resource Limitations' in nursing education?",o:["Use low-cost alternatives and advocate for funding","Apply differentiated instruction","Use time management and delegation","Stop using simulation entirely"],a:0},
-            {t:"Which educator role focuses on demonstrating professional behavior and ethical practice?",o:["Innovator","Facilitator","Mentor and Role Model","Evaluator"],a:2},
-            {t:"'Technological Proficiency' for a nurse educator includes the use of:",o:["Only traditional textbooks","E-learning platforms and simulation tools","Hand-written assessments only","Physical models without digital integration"],a:1},
-            {t:"In Case-Based Learning, the educator's responsibility is to:",o:["Organize group dynamics","Monitor technical support","Guide discussion and critical thinking","Design advanced mannequins"],a:2},
-            {t:"Which responsibility involves modifying strategies based on feedback and classroom dynamics?",o:["Planning","Execution","Adaptation","Evaluation"],a:2},
-            {t:"What is the impact of educator effectiveness on 'Professional Identity Formation'?",o:["It reduces dropout rates","It shapes students' values and attitudes","It improves academic success only","It focuses on technical skills"],a:1},
-            {t:"Which skill is essential for integrating theory with clinical realities?",o:["Pedagogical Skills","Clinical Expertise","Ethical Leadership","Communication Skills"],a:1},
-            {t:"In Collaborative Learning, the educator's role includes:",o:["Curating interactive modules","Mediating conflicts and ensuring equal participation","Designing realistic scenarios","Providing technical support"],a:1},
-            {t:"Which best practice involves staying updated with educational research?",o:["Aligning strategies with objectives","Fostering an inclusive environment","Staying updated with innovations","Using reflective teaching"],a:2},
-            {t:"What does 'Ethical Leadership' in teaching promote?",o:["High-cost technology","Integrity, fairness, and professionalism","Traditional methods only","Rapid curriculum changes"],a:1},
-            {t:"In E-Learning, the educator is responsible for:",o:["Facilitating debriefing","Monitoring student engagement and progress","Organizing physical group roles","Selecting diverse clinical cases"],a:1},
-            {t:"Which challenge involves varied learning styles and backgrounds?",o:["Resistance to Change","Student Diversity","Resource Limitations","Workload and Burnout"],a:1},
-            {t:"The 'Execution' responsibility refers to:",o:["Aligning strategies with objectives","Delivering content using appropriate methods","Modifying strategies based on feedback","Providing emotional support"],a:1},
-            {t:"Which role involves adopting and adapting new teaching strategies?",o:["Evaluator","Innovator","Mentor","Facilitator"],a:1},
-            {t:"What is a key outcome of 'Supportive Educators'?",o:["Increased dropout rates","Reduced motivation","Increased engagement and retention","Focus on traditional methods"],a:2},
-            {t:"'Pedagogical Skills' include an understanding of:",o:["Only clinical standards","Learning theories and instructional design","Budgeting for simulation labs","Technical maintenance of mannequins"],a:1},
-            {t:"In Simulation-Based Learning, ensuring 'psychological safety' is the responsibility of:",o:["The student","The nurse educator","The IT department","The hospital administrator"],a:1},
-            {t:"Which educator role is described as being a 'strategist'?",o:["The student","The nurse educator","The clinical nurse","The patient"],a:1},
-            {t:"What is the suggested response to 'Student Diversity'?",o:["Use traditional methods only","Apply differentiated instruction and inclusive strategies","Ignore individual backgrounds","Use a one-size-fits-all approach"],a:1},
-            {t:"Which responsibility involves using rubrics to measure effectiveness?",o:["Planning","Execution","Evaluation","Support"],a:2},
-            {t:"'Communication Skills' for an educator include:",o:["Passive listening","Constructive feedback and active listening","One-way transmission of knowledge","Avoiding student interaction"],a:1},
-            {t:"In Case-Based Learning, the educator encourages:",o:["Rote memorization","Ethical reflection and interdisciplinary integration","Technical proficiency only","Group conflict"],a:1},
-            {t:"Which challenge is addressed by 'time management and delegation'?",o:["Resistance to Change","Resource Limitations","Workload and Burnout","Student Diversity"],a:2},
-            {t:"The nurse educator is more than a transmitter of knowledge; they are also a:",o:["Passive observer","Mentor and facilitator","Technical assistant only","Curriculum critic"],a:1},
-            {t:"Which educator role involves designing realistic scenarios?",o:["Collaborative Learning facilitator","Simulation-Based Learning designer","E-learning curator","Case-Based Learning guide"],a:1},
-            {t:"'Clinical Readiness' as a student outcome means:",o:["Students are prepared for real-world practice","Students have passed all theoretical exams","Students have memorized all nursing theories","Students have completed their research papers"],a:0},
-            {t:"Which best practice involves collaborating with peers?",o:["Aligning strategies with objectives","Interdisciplinary integration","Reflective teaching","Inclusive environment"],a:1},
-            {t:"In E-Learning, providing 'timely feedback' is a responsibility of:",o:["The student","The nurse educator","The software developer","The peer group"],a:1},
-            {t:"Which role involves demonstrating professional behavior?",o:["Innovator","Role Model","Evaluator","Facilitator"],a:1},
-            {t:"'Adaptation' in strategy implementation means:",o:["Sticking to the original plan regardless of feedback","Modifying strategies based on classroom dynamics","Replacing all strategies with simulation","Ignoring student needs"],a:1},
-            {t:"Which skill involves clear, respectful, and empathetic interaction?",o:["Pedagogical Skills","Communication Skills","Technological Proficiency","Clinical Expertise"],a:1},
-            {t:"In Collaborative Learning, the educator ensures:",o:["Individual work only","Equal participation and teamwork","No interaction between students","Teacher-led discussion only"],a:1},
-            {t:"What is the 'Impact' of effective teaching on 'Academic Success'?",o:["Students perform worse","Students perform better when guided by skilled educators","It has no impact on performance","It only affects clinical skills"],a:1},
-            {t:"Which responsibility involves providing emotional and academic support?",o:["Planning","Execution","Support","Evaluation"],a:2},
-            {t:"'Reflective Teaching' is used to:",o:["Punish students","Improve continuously","Maintain traditional methods","Increase workload"],a:1},
-            {t:"In Simulation-Based Learning, the educator ensures:",o:["Technical issues are ignored","Ethical sensitivity","Students work in isolation","No pre-briefing is conducted"],a:1},
-            {t:"Which educator role is responsible for 'Curriculum Development'?",o:["Registered Nurse","Nurse Educator","Clinical Instructor","Hospital Manager"],a:1},
-            {t:"'Inclusive Strategies' are a response to which challenge?",o:["High Cost","Student Diversity","Faculty Resistance","Technical Issues"],a:1},
-            {t:"Which skill is required to select and apply diverse teaching strategies?",o:["Clinical Expertise","Pedagogical Skills","Technological Proficiency","Ethical Leadership"],a:1},
-            {t:"In Case-Based Learning, the educator selects:",o:["Only easy cases","Relevant and diverse cases","Cases with no ethical dilemmas","Cases unrelated to nursing"],a:1},
-            {t:"'Workload and Burnout' can be managed through:",o:["Increasing teaching hours","Institutional support and delegation","Avoiding research","Reducing student interaction"],a:1},
-            {t:"Which educator role adopts new teaching technologies?",o:["Evaluator","Innovator","Mentor","Facilitator"],a:1},
-            {t:"'Academic Success' is a student outcome of:",o:["Traditional methods only","Educator effectiveness","Student isolation","Lack of feedback"],a:1},
-            {t:"Which responsibility involves delivering content using simulation?",o:["Planning","Execution","Adaptation","Evaluation"],a:1},
-            {t:"'Ethical Leadership' promotes:",o:["Fairness and professionalism","Competition among students","High-cost resources","Resistance to change"],a:0},
-            {t:"In Collaborative Learning, the educator promotes:",o:["Individualism","Peer learning and teamwork","Teacher-only feedback","Competitive grading"],a:1},
-            {t:"Which educator role guides students through inquiry?",o:["Evaluator","Facilitator of Learning","Curriculum Developer","Innovator"],a:1},
-            {t:"'Clinical Readiness' prepares students for:",o:["Theoretical exams","Real-world practice","Research only","Graduation only"],a:1},
-            {t:"The nurse educator's role is limited to transmitting knowledge and does not include mentoring.",o:["True","False"],a:1},
-            {t:"A nurse educator must be a registered nurse with advanced education in teaching.",o:["True","False"],a:0},
-            {t:"Planning involves aligning teaching strategies with learning objectives and student needs.",o:["True","False"],a:0},
-            {t:"Pedagogical skills refer to the educator's up-to-date knowledge of nursing practice standards.",o:["True","False"],a:1},
-            {t:"In Simulation-Based Learning, the educator is responsible for ensuring psychological safety.",o:["True","False"],a:0},
-            {t:"Resistance to change can be addressed by using evidence-based rationale.",o:["True","False"],a:0},
-            {t:"Student diversity is a challenge that can be met with a one-size-fits-all teaching approach.",o:["True","False"],a:1},
-            {t:"Effective educators shape students' values and attitudes through professional identity formation.",o:["True","False"],a:0},
-            {t:"Ethical leadership in teaching promotes integrity and fairness.",o:["True","False"],a:0},
-            {t:"In E-Learning, the educator does not need to monitor student engagement.",o:["True","False"],a:1},
-            {t:"Collaborative learning involves the educator mediating conflicts and ensuring equal participation.",o:["True","False"],a:0},
-            {t:"Resource limitations are a challenge that can be addressed by using low-cost alternatives.",o:["True","False"],a:0},
-            {t:"Reflective teaching is a best practice for continuous improvement in nursing education.",o:["True","False"],a:0},
-            {t:"Clinical expertise is the ability to select and apply diverse teaching strategies.",o:["True","False"],a:1},
-            {t:"Supportive educators can help reduce student dropout rates and increase motivation.",o:["True","False"],a:0}
+
+            {t:"What is the primary purpose of Simulation-Based Learning (SBL) in nursing education?",o:["To replace clinical practice entirely","To replicate real-life clinical situations in a safe environment","To reduce the number of faculty members needed","To focus solely on theoretical knowledge"],a:1},
+            {t:"Which type of simulation involves advanced mannequins with physiological responses?",o:["Low-Fidelity Simulation","Medium-Fidelity Simulation","High-Fidelity Simulation","Virtual Simulation"],a:2},
+            {t:"According to Kolb’s cycle, which stage follows 'Experience' in simulation?",o:["Application","Conceptualization","Reflection","Evaluation"],a:2},
+            {t:"What is the main focus of the 'Pre-briefing' component in a simulation session?",o:["Structured reflection after the scenario","Orientation to objectives, roles, and equipment","Grading the students' performance","Managing technical issues"],a:1},
+            {t:"Which educational foundation emphasizes that knowledge is best acquired in context?",o:["Adult Learning Theory","Experiential Learning","Situated Cognition","Behavioral Theory"],a:2},
+            {t:"In the context of SBL, what does 'High-Fidelity' refer to?",o:["Basic models for hand hygiene","Role-play without technology","Realistic mannequins with integrated software","Computer-based decision-making scenarios"],a:2},
+            {t:"Which of the following is a benefit of 'Error Management' in simulation?",o:["Students are punished for mistakes","Learners can make mistakes safely and learn from them","It eliminates the need for debriefing","It ensures that no mistakes are ever made in real practice"],a:1},
+            {t:"What is the role of 'Standardized Patients' in nursing simulation?",o:["They are high-tech mannequins","They are actors trained to portray patients consistently","They are students who observe the simulation","They are virtual reality avatars"],a:1},
+            {t:"Which component of a simulation session involves emotional processing and professional growth?",o:["Pre-briefing","Scenario Execution","Debriefing","Evaluation"],a:2},
+            {t:"What is a common challenge in implementing SBL?",o:["Low cost of equipment","Excessive faculty training","Student anxiety","Lack of realistic scenarios"],a:2},
+            {t:"Which step comes first in designing effective simulation activities?",o:["Develop the Scenario","Define Learning Objectives","Prepare Equipment","Conduct Debriefing"],a:1},
+            {t:"In the sample scenario for COPD, what is a primary objective?",o:["Performing a surgical procedure","Assessing respiratory status","Managing a pediatric patient","Conducting a mental health assessment"],a:1},
+            {t:"Adult Learning Theory suggests that adults prefer learning that is:",o:["Theoretical and abstract","Practical and problem-solving oriented","Passive and lecture-based","Focused on rote memorization"],a:1},
+            {t:"Which type of simulation is best suited for practicing vital signs or hand hygiene?",o:["High-Fidelity","Virtual Simulation","Low-Fidelity","Standardized Patients"],a:2},
+            {t:"What does 'Experiential Learning' mean in the context of simulation?",o:["Learning through reading textbooks","Learning through doing and reflection","Learning through watching videos","Learning through listening to lectures"],a:1},
+            {t:"Which of the following is NOT a key characteristic of SBL?",o:["Safe and controlled","Reflective","Realistic","Purely theoretical"],a:3},
+            {t:"What is the purpose of 'Evaluation' in a simulation session?",o:["To set expectations for the scenario","To assess clinical performance and decision-making","To provide emotional support to students","To fix technical issues with mannequins"],a:1},
+            {t:"Which simulation type uses computer-based scenarios for interactive decision-making?",o:["Medium-Fidelity","Virtual Simulation","Standardized Patients","Low-Fidelity"],a:1},
+            {t:"How can faculty training challenges be addressed in SBL?",o:["By reducing the number of simulations","Through workshops and peer mentoring","By hiring external actors only","By using only low-fidelity models"],a:1},
+            {t:"What is a key benefit of 'Critical Thinking' in simulation?",o:["It allows for slower decision-making","It promotes rapid decision-making under pressure","It focuses on memorizing facts","It discourages teamwork"],a:1},
+            {t:"Which component sets the 'psychological safety' for students?",o:["Scenario Execution","Debriefing","Pre-briefing","Evaluation"],a:2},
+            {t:"What is the 'Solution' for the challenge of 'High Cost' in simulation?",o:["Stop using high-fidelity mannequins","Use blended models and prioritize high-impact scenarios","Increase student fees significantly","Use only standardized patients"],a:1},
+            {t:"In the COPD scenario, which material is specifically mentioned?",o:["Surgical kit","High-fidelity mannequin","Pediatric crib","Mental health assessment tool"],a:1},
+            {t:"Which of the following is an example of 'Medium-Fidelity Simulation'?",o:["Role-play for communication","Administering injections on basic mannequins","Managing cardiac arrest on advanced mannequins","Virtual reality surgery"],a:1},
+            {t:"What is the final stage of Kolb’s cycle as applied to simulation?",o:["Experience","Reflection","Conceptualization","Application"],a:3},
+            {t:"Why is 'Emotional Preparedness' important in nursing simulation?",o:["To make students less empathetic","To expose students to stress and ethical dilemmas safely","To ensure students never feel stress","To replace real-world emotional experiences"],a:1},
+            {t:"Which step in designing simulation involves including patient data and lab results?",o:["Define Learning Objectives","Develop the Scenario","Prepare Equipment","Evaluate Performance"],a:1},
+            {t:"What does 'Situated Cognition' imply for nursing education?",o:["Learning is independent of the environment","Knowledge is best acquired in the context where it will be used","Theory should always precede practice","Classroom learning is superior to simulation"],a:1},
+            {t:"Which of the following is a characteristic of 'Debriefing'?",o:["It happens before the scenario","It is a structured reflection led by the instructor","It involves setting up the equipment","It is only for grading purposes"],a:1},
+            {t:"What is the 'Example Scenario' for High-Fidelity Simulation?",o:["Practicing hand hygiene","Administering injections","Managing cardiac arrest or labor delivery","Conducting mental health assessments"],a:2},
+            {t:"Which benefit refers to students feeling more prepared for real patient care?",o:["Skill Mastery","Clinical Confidence","Error Management","Critical Thinking"],a:1},
+            {t:"What is a recommended solution for 'Technical Issues' in simulation?",o:["Ignore them during the session","Ensure regular maintenance and backup plans","Use only low-tech equipment","Let the students fix the issues"],a:1},
+            {t:"Ethical considerations in simulation include:",o:["Ignoring cultural beliefs","Addressing dilemmas like informed consent and end-of-life care","Using only one type of patient population","Focusing only on technical skills"],a:1},
+            {t:"What is the 'Activity' mentioned in the COPD sample scenario?",o:["Writing a research paper","Team-based simulation and role-play","Watching a documentary on COPD","Attending a lecture on respiratory drugs"],a:1},
+            {t:"Which of the following is a 'Key Characteristic' of SBL?",o:["Uncontrolled environment","Experiential learning","Theoretical focus","Passive observation"],a:1},
+            {t:"In SBL, 'Reflective' learning primarily occurs during:",o:["Pre-briefing","Scenario Execution","Debriefing","Equipment preparation"],a:2},
+            {t:"Which type of simulation is described as 'Basic models or role-play without technology'?",o:["Low-Fidelity","Medium-Fidelity","High-Fidelity","Virtual Simulation"],a:0},
+            {t:"What is the 'Description' for 'Skill Mastery' as a benefit?",o:["Feeling more prepared","Repeated practice improves psychomotor and cognitive skills","Learning from mistakes safely","Enhancing leadership"],a:1},
+            {t:"Which foundation of simulation emphasizes 'autonomy and immediate feedback'?",o:["Experiential Learning","Adult Learning Theory","Situated Cognition","Behavioral Theory"],a:1},
+            {t:"What is the 'Solution' for 'Assessment Complexity'?",o:["Use simple pass/fail grades","Use structured rubrics and multi-source feedback","Avoid assessing students during simulation","Only use self-assessment"],a:1},
+            {t:"Which component involves students responding to patient cues?",o:["Pre-briefing","Scenario Execution","Debriefing","Evaluation"],a:1},
+            {t:"What is the 'Description' for 'Virtual Simulation'?",o:["Actors portraying patients","Computer-based scenarios with interactive decision-making","Advanced mannequins with software","Basic models for vital signs"],a:1},
+            {t:"Which of the following is a 'Benefit' related to 'Teamwork'?",o:["Skill Mastery","Clinical Confidence","Teamwork and Communication","Critical Thinking"],a:2},
+            {t:"What is the Step after 'Prepare Equipment and Roles' in designing simulation?",o:["Define Learning Objectives","Develop the Scenario","Facilitate the Simulation","Conduct Debriefing"],a:2},
+            {t:"Experiential learning in SBL means:",o:["Learning by listening","Learning by doing","Learning by reading","Learning by watching"],a:1},
+            {t:"Which of the following is an 'Ethical and Cultural Consideration'?",o:["Promoting respectful communication and empathy","Using only English-speaking mannequins","Avoiding difficult topics like end-of-life care","Focusing only on the physical needs of the patient"],a:0},
+            {t:"What is the Description for 'Low-Fidelity Simulation'?",o:["Advanced mannequins","Basic models or role-play without technology","Computer-based scenarios","Actors as patients"],a:1},
+            {t:"Which component of SBL includes 'Orientation to objectives'?",o:["Pre-briefing","Scenario Execution","Debriefing","Evaluation"],a:0},
+            {t:"What is the 'Benefit' of 'Error Management'?",o:["It prevents all errors","It allows learners to make mistakes safely","It focuses on technical skills only","It reduces the need for faculty"],a:1},
+            {t:"Which 'Step' involves using checklists and rubrics?",o:["Define Learning Objectives","Develop the Scenario","Evaluate Performance","Facilitate the Simulation"],a:2},
+            {t:"'Situated Cognition' suggests that learning is:",o:["Abstract","Authentic when replicated in clinical environments","Best done in a library","Independent of context"],a:1},
+            {t:"What is the 'Example Scenario' for Virtual Simulation?",o:["Practicing hand hygiene","Administering injections","Diagnosing and treating a virtual patient","Managing cardiac arrest"],a:2},
+            {t:"Which of the following is a 'Challenge' in SBL?",o:["High Cost","Faculty Training","Student Anxiety","All of the above"],a:3},
+            {t:"The 'Debriefing' phase encourages:",o:["Technical maintenance","Emotional processing and professional growth","Setting learning objectives","Preparing equipment"],a:1},
+            {t:"Simulation-Based Learning (SBL) allows nursing students to practice without risking patient safety.",o:["True","False"],a:0},
+            {t:"Low-fidelity simulation involves the use of advanced mannequins with physiological responses.",o:["True","False"],a:1},
+            {t:"Kolb’s Experiential Learning cycle includes four stages: experience, reflection, conceptualization, and application.",o:["True","False"],a:0},
+            {t:"Pre-briefing is the phase where students reflect on their performance after the simulation is over.",o:["True","False"],a:1},
+            {t:"Situated Cognition theory suggests that knowledge is best acquired in isolation from its context.",o:["True","False"],a:1},
+            {t:"Debriefing is a structured reflection led by the instructor to discuss what happened and how to improve.",o:["True","False"],a:0},
+            {t:"One of the benefits of SBL is that it allows learners to make mistakes safely.",o:["True","False"],a:0},
+            {t:"High-fidelity simulation is typically used for basic skills like hand hygiene.",o:["True","False"],a:1},
+            {t:"Adult Learning Theory posits that adults prefer theoretical learning over practical problem-solving.",o:["True","False"],a:1},
+            {t:"Standardized Patients are actors trained to portray patients consistently for educational purposes.",o:["True","False"],a:0},
+            {t:"The 'Scenario Execution' phase is where students engage in the simulation and make decisions.",o:["True","False"],a:0},
+            {t:"Simulation-Based Learning is only useful for technical skills and does not address emotional or ethical dimensions.",o:["True","False"],a:1},
+            {t:"Faculty training is a common challenge in implementing simulation-based nursing education.",o:["True","False"],a:0},
+            {t:"Virtual simulation involves computer-based scenarios with interactive decision-making.",o:["True","False"],a:0},
+            {t:"Evaluation in SBL only includes instructor grading and excludes self-assessment or peer feedback.",o:["True","False"],a:1}
 
 ];
-// ===== تحويل كل أسئلة True / False تلقائياً =====
-questions = questions.map(q=>{
-  if(typeof q.a === "boolean"){
-    return {
-      ...q,
-      o: ["True","False"],
-      a: q.a ? 0 : 1
-    };
-  }
-  return q;
-});
+
 // تعريف المتغيرات الناقصة
 let i = 0;
 let correct = 0;
@@ -328,7 +318,7 @@ let answers = [];
 let wrongSet = [];
 
 /* ===== Timer ===== */
-let totalTime=60*60, timeLeft=totalTime;
+let totalTime=35*60, timeLeft=totalTime;
 const timerInt=setInterval(()=>{
   timeLeft--;
   let m=Math.floor(timeLeft/60), s=timeLeft%60;
@@ -447,5 +437,8 @@ show();
 </script>
 
 </body>
+
 </html>
+
+
 
