@@ -1,0 +1,876 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaith Team | Exam</title>
+
+<style>
+:root{
+  --primary:#0284c7;
+  --secondary:#0ea5e9;
+  --bg:#f8fbff;
+  --card:#ffffff;
+  --soft:#e6f0ff;
+  --question:#eef7ff;
+  --option:#f9fcff;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --text:#0f172a;
+
+  /* Brand dynamic */
+  --brand1:#ffffff;
+  --brand2:#e0f2fe;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#eef6ff);
+  color:var(--text);
+}
+
+/* ================= HEADER ================= */
+header{
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* ===== Brand ===== */
+.logo{
+  position:relative;
+  font-size:28px;
+  font-weight:900;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.brand-text{
+  background:linear-gradient(90deg,var(--brand1),var(--brand2),var(--brand1));
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 4s linear infinite;
+}
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+.heart{
+  display:inline-block;
+  animation:heartbeat 1.6s infinite ease-in-out;
+}
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  animation:twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle{
+  0%{opacity:0;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.2)}
+  100%{opacity:0;transform:scale(.6)}
+}
+
+/* Reduced motion أثناء الامتحان */
+.exam .sparkle{animation-duration:5s;opacity:.4}
+.exam .heart{animation-duration:2.5s}
+
+/* After exam */
+.after .sparkle{animation-duration:2s}
+.after .heart{animation-duration:1.1s}
+
+/* ================= LAYOUT ================= */
+.container{max-width:520px;margin:auto;padding:16px}
+
+/* ===== Top Bar ===== */
+.top-bar{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+}
+.progress-box{
+  flex:1;
+  background:var(--card);
+  padding:14px;
+  border-radius:18px;
+  box-shadow:0 10px 22px rgba(2,132,199,.12);
+}
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px;
+  font-weight:800;
+  font-size:14px;
+}
+.progress{
+  height:8px;
+  background:var(--soft);
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+}
+
+/* Timer */
+.timer{
+  width:64px;height:64px;border-radius:50%;
+  background:conic-gradient(var(--primary) 0deg,var(--soft) 0deg);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;
+  background-color:var(--card);
+}
+
+/* ================= CARD ================= */
+.card{
+  background:var(--card);
+  padding:22px;
+  border-radius:24px;
+  box-shadow:0 18px 36px rgba(2,132,199,.18);
+}
+.question-title{
+  background:var(--question);
+  padding:16px;
+  border-radius:16px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+.option{
+  background:var(--option);
+  border:2px solid var(--soft);
+  border-radius:18px;
+  padding:15px;
+  margin:12px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.correct{background:#eafaf1;border-color:var(--success)}
+.option.wrong{background:#fff1f1;border-color:var(--danger)}
+.option.disabled{pointer-events:none;opacity:.9}
+
+button{
+  margin-top:18px;
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-weight:900;
+}
+
+/* Feedback */
+.feedback{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:10px;
+  animation:pop .5s;
+}
+@keyframes pop{
+  0%{transform:scale(.6);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* Report */
+.report{
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  border-left:6px solid var(--soft);
+}
+.report.correct{border-color:var(--success)}
+.report.wrong{border-color:var(--danger)}
+</style>
+</head>
+
+<body class="exam">
+
+<header>
+  <div class="logo">
+    <span class="brand-text">Gaith Team</span>
+    <span class="heart">💖</span>
+    <span class="sparkle" style="top:-8px;left:0">✨</span>
+    <span class="sparkle" style="top:6px;right:-8px">✨</span>
+    <span class="sparkle" style="bottom:-8px;left:50%">✨</span>
+  </div>
+  <div style="margin-top:6px;font-weight:800">الإمتحان في جيبك 👏🏻</div>
+</header>
+
+<div class="container">
+
+  <div class="top-bar">
+    <div class="progress-box">
+      <div class="progress-text">
+        <span id="progressText"></span>
+        <span>
+          ✔️ <span id="correctCount">0</span> |
+          ❌ <span id="wrongCount">0</span> |
+          ⏳ <span id="remainPercent">100%</span>
+        </span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="timer" id="timer">60:00</div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<script>
+/* ===== Questions ===== */
+let questions = [
+ {
+        "t": "What is the primary difference between a disaster and a crisis according to the lecture?",
+        "o": [
+            "Disaster is sudden, crisis is slow",
+            "Disaster reduces capital value beyond tolerance, crisis destabilizes livelihood",
+            "Crisis is natural, disaster is man-made",
+            "There is no difference"
+        ],
+        "a": 1
+    },
+    {
+        "t": "Which type of crisis is characterized by being slow-moving and not clearly visible, such as rumors?",
+        "o": [
+            "Sudden crisis",
+            "Smoldering crisis",
+            "Natural crisis",
+            "Complex emergency"
+        ],
+        "a": 1
+    },
+    {
+        "t": "The stage of crisis management that involves building codes and public education is:",
+        "o": [
+            "Prevention",
+            "Preparedness",
+            "Relief",
+            "Recovery"
+        ],
+        "a": 0
+    },
+    {
+        "t": "Which tool is used during the risk assessment step to analyze the probability of risks occurring?",
+        "o": [
+            "Crisis Plan",
+            "Risk Register",
+            "Activation Protocol",
+            "Emergency Contact List"
+        ],
+        "a": 1
+    },
+    {
+        "t": "In the 'Impact' phase of the healthcare team's role, what is the first priority?",
+        "o": [
+            "Triaging victims",
+            "Determining the magnitude of the event",
+            "Field care",
+            "Rebuilding infrastructure"
+        ],
+        "a": 1
+    },
+    {
+        "t": "Sudden crises are unplanned events that occur without warning and are within an organization's control.",
+        "o": [
+            "True",
+            "False"
+        ],
+        "a": 1
+    },
+    {
+        "t": "Crisis preparedness activities are designed to provide permanent protection from crises.",
+        "o": [
+            "True",
+            "False"
+        ],
+        "a": 1
+    },
+    {
+        "t": "A crisis management plan should be reviewed and updated at least once a year.",
+        "o": [
+            "True",
+            "False"
+        ],
+        "a": 0
+    },
+    {
+        "t": "Complex emergencies involve a breakdown of authority, looting, and conflict situations.",
+        "o": [
+            "True",
+            "False"
+        ],
+        "a": 0
+    },
+    {
+        "t": "The 'Relief' stage focuses on rebuilding infrastructure and long-term rehabilitation.",
+        "o": [
+            "True",
+            "False"
+        ],
+        "a": 1
+    },
+    {
+        "t": "Case: A hospital is experiencing a slow spread of rumors regarding its financial stability, which is starting to affect staff morale. This is an example of a:",
+        "o": [
+            "Sudden crisis",
+            "Smoldering crisis",
+            "Natural crisis",
+            "Pandemic emergency"
+        ],
+        "a": 1
+    },
+    {
+        "t": "Case: Following an earthquake, a nursing team is focused on providing immediate food, water, and preventing the spread of disease. Which stage of crisis management are they in?",
+        "o": [
+            "Prevention",
+            "Preparedness",
+            "Relief/Response",
+            "Recovery"
+        ],
+        "a": 2
+    },
+    {
+        "t": "Case: A healthcare organization is developing a strategy that includes strategic reserves of medicines and early warning systems. This is part of:",
+        "o": [
+            "Prevention",
+            "Preparedness",
+            "Relief",
+            "Recovery"
+        ],
+        "a": 1
+    },
+    {
+        "t": "Case: After a major flood, the government begins rebuilding the local clinic and developing new policies to avoid future damage. This is the stage of:",
+        "o": [
+            "Prevention",
+            "Preparedness",
+            "Relief",
+            "Recovery"
+        ],
+        "a": 3
+    },
+    {
+        "t": "Case: A nursing manager is using a risk register to visualize which potential setbacks are most likely to occur in the ICU. This is part of which step in creating a crisis plan?",
+        "o": [
+            "Establish team",
+            "Assess risk",
+            "Plan the response",
+            "Solidify the plan"
+        ],
+        "a": 1
+    },
+    {
+        "t": "Case: During a chemical spill, the nursing team is assigned to secure the network and release news to the public. This step in planning is:",
+        "o": [
+            "Assess risk",
+            "Plan the response",
+            "Solidify the plan",
+            "Review and update"
+        ],
+        "a": 1
+    },
+    {
+        "t": "Case: A hospital administrator is putting together a group of leaders who will take action during a potential fire. This is the step of:",
+        "o": [
+            "Establish team",
+            "Assess risk",
+            "Plan the response",
+            "Solidify the plan"
+        ],
+        "a": 0
+    },
+    {
+        "t": "Case: A nurse is triaging victims at the site of a multi-car accident. According to the healthcare team's role, this is part of:",
+        "o": [
+            "Impact",
+            "Response",
+            "Future Directions",
+            "Prevention"
+        ],
+        "a": 1
+    },
+    {
+        "t": "Case: A public health nurse is defining the health needs of a group affected by a recent hurricane. This is part of the healthcare team's role in:",
+        "o": [
+            "Impact",
+            "Response",
+            "Future Directions",
+            "Recovery"
+        ],
+        "a": 0
+    },
+    {
+        "t": "Case: A hospital is implementing building codes and safety regulations to mitigate the risk of fire. This is an example of:",
+        "o": [
+            "Prevention",
+            "Preparedness",
+            "Relief",
+            "Recovery"
+        ],
+        "a": 0
+    },
+    {
+        "t": "Case: A nursing department is maintaining strategic reserves of food and water in case of a power outage. This is:",
+        "o": [
+            "Prevention",
+            "Preparedness",
+            "Relief",
+            "Recovery"
+        ],
+        "a": 1
+    },
+    {
+        "t": "Case: During a pandemic, the nursing team is focused on repairing vital telecommunications to ensure coordination. This is part of:",
+        "o": [
+            "Prevention",
+            "Preparedness",
+            "Relief/Response",
+            "Recovery"
+        ],
+        "a": 2
+    },
+    {
+        "t": "Case: A nursing leader is documenting 'best practices' after a crisis to improve future responses. This is part of:",
+        "o": [
+            "Impact",
+            "Response",
+            "Future Directions",
+            "Relief"
+        ],
+        "a": 2
+    },
+    {
+        "t": "Case: A crisis plan includes an activation protocol and emergency contacts. This means the plan has reached the step of:",
+        "o": [
+            "Assess risk",
+            "Plan the response",
+            "Solidify the plan",
+            "Review and update"
+        ],
+        "a": 2
+    },
+    {
+        "t": "Case: A nurse is providing psychological support and first aid to victims immediately after a disaster. This is part of:",
+        "o": [
+            "Impact",
+            "Response",
+            "Future Directions",
+            "Prevention"
+        ],
+        "a": 1
+    },
+    {
+        "t": "Case: A hospital is collaborating with a private organization to implement a more effective crisis management plan. This is a:",
+        "o": [
+            "Response activity",
+            "Future Direction activity",
+            "Relief activity",
+            "Prevention activity"
+        ],
+        "a": 1
+    },
+    {
+        "t": "Case: A nursing team is determining the resources needed to respond to a sudden onset of a new disease. This is part of:",
+        "o": [
+            "Impact",
+            "Response",
+            "Future Directions",
+            "Recovery"
+        ],
+        "a": 0
+    },
+    {
+        "t": "Case: A community is being involved in disaster preparedness drills. This is a strategy for:",
+        "o": [
+            "Impact",
+            "Response",
+            "Future Directions",
+            "Relief"
+        ],
+        "a": 2
+    },
+    {
+        "t": "Case: A nursing manager is reviewing the crisis plan after one year to ensure there are no gaps. This is:",
+        "o": [
+            "Solidify the plan",
+            "Review and update",
+            "Assess risk",
+            "Plan the response"
+        ],
+        "a": 1
+    },
+    {
+        "t": "Case: A nurse is arranging for physical facilities for victims of a local fire. This is part of the healthcare team's:",
+        "o": [
+            "Impact",
+            "Response",
+            "Future Directions",
+            "Prevention"
+        ],
+        "a": 1
+    },
+
+
+/* ============== 5 MCQ ============== */
+
+{t:"Performance appraisal is best defined as:",o:["Daily supervision","Periodic formal evaluation of employee performance","Informal feedback only","Punishment system"],a:1},
+
+{t:"One main purpose of performance appraisal is to:",o:["Threaten employees","Evaluate performance against standards","Replace training","Reduce staff"],a:1},
+
+{t:"Which purpose of appraisal focuses on salary and promotion?",o:["Developmental","Educational","Judgment","Motivational"],a:2},
+
+{t:"Which step comes first in the appraisal process?",o:["Develop standards","Job analysis","Formal appraisal","Coaching"],a:1},
+
+{t:"Validity of an evaluation tool means:",o:["Ease of use","Measures what it intends to measure","Free from bias","Acceptable to staff"],a:1},
+
+
+/* ============== 20 CASE QUESTIONS ============== */
+
+{t:"A nurse manager evaluates staff performance to decide salary increase. This appraisal serves which purpose?",o:["Developmental","Judgment","Educational","Motivational"],a:1},
+
+{t:"A manager identifies a nurse’s weakness and plans training. This reflects:",o:["Judgment purpose","Developmental purpose","Punitive action","Ranking method"],a:1},
+
+{t:"A supervisor evaluates performance based on job duties only. This relates to:",o:["Objectivity","Validity","Utility","Simplicity"],a:1},
+
+{t:"An appraisal tool that is easy and uncomplicated reflects:",o:["Utility","Reliability","Simplicity","Discrimination"],a:2},
+
+{t:"Using real behaviors rather than traits describes:",o:["Objectivity","Event-oriented evaluation","Validity","Reliability"],a:1},
+
+{t:"A manager ranks employees from best to worst. This is:",o:["Paired comparison","Forced distribution","Ranking method","Checklist"],a:2},
+
+{t:"A method comparing each employee with all others is:",o:["Ranking","Checklist","Paired comparison","Forced choice"],a:2},
+
+{t:"Assigning fixed percentages to performance categories is:",o:["Numerical rating","Forced distribution","Ranking","Checklist"],a:1},
+
+{t:"A manager wants to overcome leniency error. Best method is:",o:["Checklist","Ranking","Forced distribution","Graphic scale"],a:2},
+
+{t:"A scale using numbers to evaluate behaviors is:",o:["Checklist","Numerical rating scale","Forced choice","BARS"],a:1},
+
+{t:"A tool that assesses presence or absence of behaviors is:",o:["Ranking","Checklist","Forced choice","Paired comparison"],a:1},
+
+{t:"Reducing rater bias by hiding scoring values describes:",o:["Checklist","Forced choice","Ranking","Numerical scale"],a:1},
+
+{t:"Electronic monitoring refers to:",o:["Human observation","Computer-based observation","Self-evaluation","Peer review"],a:1},
+
+{t:"Formal performance appraisal is usually conducted:",o:["Daily","Weekly","According to policy","Only once"],a:2},
+
+{t:"Providing frequent feedback during work is:",o:["Formal evaluation","Judgment appraisal","Informal evaluation","Ranking"],a:2},
+
+{t:"Comparing employee performance with standards occurs in:",o:["Job analysis","Measurement stage","Evaluation principles","Feedback stage"],a:1},
+
+{t:"Scheduling evaluation meeting in pleasant surroundings follows:",o:["Appraisal methods","Evaluation principles","Judgment purpose","Technology use"],a:1},
+
+{t:"Identifying job areas needing improvement supports:",o:["Punishment","Threat","Performance improvement","Bias"],a:2},
+
+{t:"Comparing self-evaluation with supervisor evaluation ensures:",o:["Objectivity","Discipline","Control","Ranking accuracy"],a:0},
+
+{t:"An appraisal tool that distinguishes among employees shows:",o:["Reliability","Discrimination","Utility","Simplicity"],a:1},
+
+
+/* ============== 5 TRUE / FALSE ============== */
+
+{t:"Performance appraisal is an ongoing process.",o:["True","False"],a:0},
+
+{t:"Judgment purpose focuses mainly on staff development.",o:["True","False"],a:1},
+
+{t:"Reliability means consistent results by different evaluators.",o:["True","False"],a:0},
+
+{t:"Forced distribution method provides detailed feedback.",o:["True","False"],a:1},
+
+{t:"Informal evaluation helps coaching and development.",o:["True","False"],a:0} , 
+
+/* ============== 5 MCQ ============== */
+
+{t:"Training is best defined as:",o:["Long-term career growth","Learning for specific job skills","Self-directed learning","General education"],a:1},
+
+{t:"Development mainly focuses on:",o:["Immediate job skills","Short-term goals","Long-term growth and advancement","Orientation only"],a:2},
+
+{t:"Staff development primarily aims to:",o:["Reduce staff number","Improve staff effectiveness","Punish poor performance","Replace supervision"],a:1},
+
+{t:"Which is NOT a type of staff development program?",o:["Induction training","Job orientation","In-service education","Performance appraisal"],a:3},
+
+{t:"Continuing education occurs:",o:["Before employment","During induction","After basic education","Only during internship"],a:2},
+
+
+/* ============== 20 CASE QUESTIONS ============== */
+
+{t:"A newly appointed nurse receives information about hospital philosophy and policies. This is:",o:["Job orientation","Induction training","In-service education","Continuing education"],a:1},
+
+{t:"A nurse is introduced to staff, departments, and agency goals during first days. This reflects:",o:["Continuing education","Induction training","Special training","In-service education"],a:1},
+
+{t:"A unit educator explains job duties and procedures to a new nurse. This is:",o:["General orientation","Specific orientation","Induction training","Continuing education"],a:1},
+
+{t:"Orientation conducted by centralized education department is:",o:["Specific orientation","General orientation","Induction","In-service education"],a:1},
+
+{t:"Education provided by hospital to improve performance at work setting is:",o:["Continuing education","In-service education","Job orientation","Special training"],a:1},
+
+{t:"Assessing learning needs is important because it:",o:["Reduces cost","Forms basis of program","Ends evaluation","Replaces planning"],a:1},
+
+{t:"Observation of staff performance helps to:",o:["Evaluate summative results","Identify learning needs","Conduct orientation","Apply punishment"],a:1},
+
+{t:"Selecting teaching strategies is part of:",o:["Implementation","Evaluation","Planning","Assessment"],a:2},
+
+{t:"Actual presentation of content occurs during:",o:["Planning","Implementation","Evaluation","Needs identification"],a:1},
+
+{t:"Climate setting during implementation refers to:",o:["Evaluation tools","Physical environment","Learning objectives","Teaching methods"],a:1},
+
+{t:"Time schedule in staff development should include:",o:["Only duration","Instructor names only","Sessions and methods","Evaluation results"],a:2},
+
+{t:"Measuring achievement of objectives is:",o:["Planning","Implementation","Evaluation","Orientation"],a:2},
+
+{t:"Formative evaluation is conducted:",o:["At the end only","Before or during program","After long period","Only annually"],a:1},
+
+{t:"Summative evaluation focuses on:",o:["Learning needs","Immediate feedback","Achievement of objectives","Teaching climate"],a:2},
+
+{t:"Training that develops expert technical and communication skills is:",o:["Induction","Continuing education","Training for special function","Job orientation"],a:2},
+
+{t:"Lack of time and resources are considered:",o:["Objectives","Steps","Potential difficulties","Evaluation tools"],a:2},
+
+{t:"A gap between current knowledge and required skills is called:",o:["Objective","Learning need","Evaluation","Orientation"],a:1},
+
+{t:"Verbal and written communication can be used to:",o:["Evaluate summative results","Identify learning needs","Plan budget","Teach content"],a:1},
+
+{t:"Encouraging nurses to cope with new practice roles is an objective of:",o:["Staff development","Performance appraisal","Discipline","Orientation only"],a:0},
+
+{t:"Administrator who coaches staff supports:",o:["Punishment","Staff development","Ranking","Control"],a:1},
+
+
+/* ============== 5 TRUE / FALSE ============== */
+
+{t:"Development focuses on long-term professional growth.",o:["True","False"],a:0},
+
+{t:"Induction training is given after several months of employment.",o:["True","False"],a:1},
+
+{t:"In-service education occurs within the job setting.",o:["True","False"],a:0},
+
+{t:"Summative evaluation allows changes during the program.",o:["True","False"],a:1},
+
+{t:"Lack of resources is a potential difficulty in staff development.",o:["True","False"],a:0},
+
+/* ============== 5 MCQ ============== */
+
+{t:"Change is best defined as:",o:["Staying the same","Moving from current state to a new state","Routine work","Random activity"],a:1},
+
+{t:"A change agent in nursing can be:",o:["Only hospital director","Only physician","Nurse leader or staff nurse","Patient only"],a:2},
+
+{t:"Planned change is described as:",o:["Crisis driven","Sudden and short lived","Deliberate and proactive","Unintentional"],a:2},
+
+{t:"Which quality is essential for a change agent?",o:["Poor communication","Flexibility","Resistance","Isolation"],a:1},
+
+{t:"Accidental change is usually:",o:["Long-term","Proactive","Crisis driven","Well planned"],a:2},
+
+
+/* ============== 20 CASE QUESTIONS ============== */
+
+{t:"A hospital changes policy after a sudden crisis. This type of change is:",o:["Planned","Developmental","Accidental","Innovative"],a:2},
+
+{t:"A nurse leader introduces evidence-based practice intentionally. This is:",o:["Reactive change","Planned change","Unplanned change","Random change"],a:1},
+
+{t:"Improving nurse-patient ratio falls under which area of change?",o:["Technology","Patient education","Staffing & human resources","Leadership"],a:2},
+
+{t:"Adopting electronic health records is a change in:",o:["Patient care only","Staffing","Technology & equipment","Communication"],a:2},
+
+{t:"Administration feels pressure due to low productivity. This is phase:",o:["Diagnosis","Intervention","Pressure and arousal","Reinforcement"],a:2},
+
+{t:"Leader is trusted and guides the change process. This occurs in:",o:["Phase 1","Phase 2","Phase 5","Phase 6"],a:1},
+
+{t:"Organization identifies true causes of problems. This is:",o:["Invention","Diagnosis and recognition","Reinforcement","Experimentation"],a:1},
+
+{t:"Staff participate in creating solutions which increases commitment. Phase:",o:["Phase 3","Phase 4","Phase 5","Phase 6"],a:1},
+
+{t:"Testing change in one department before full use is:",o:["Reinforcement","Diagnosis","Experimentation","Acceptance"],a:2},
+
+{t:"Rewarding staff after successful change reflects:",o:["Intervention","Diagnosis","Reinforcement","Invention"],a:2},
+
+{t:"Unfreezing stage in Lewin’s theory focuses on:",o:["Stabilizing change","Recognizing need for change","Rewarding staff","Evaluating outcomes"],a:1},
+
+{t:"Refreezing stage aims to:",o:["Create resistance","Establish new habits","Remove structure","Test ideas"],a:1},
+
+{t:"Lippitt’s theory emphasizes:",o:["Technology","Change agent role","Rewards","Resistance only"],a:1},
+
+{t:"Building relationship is the first step of:",o:["Lewin’s theory","Havelock’s model","Rogers theory","Lippitt’s theory"],a:1},
+
+{t:"People adopt innovation at different times according to:",o:["Lewin","Lippitt","Havelock","Rogers"],a:3},
+
+{t:"Fear and hostility that oppose change are:",o:["Driving forces","Restraining forces","Equilibrium","Motivation"],a:1},
+
+{t:"Using authority and punishment to force change is:",o:["Logical persuasion","Force participation","Power-coercion","Education strategy"],a:2},
+
+{t:"Using facts and data with low resistance expected is:",o:["Power strategy","Logical persuasion","Force participation","Coercion"],a:1},
+
+{t:"Involving staff in decision making reflects:",o:["Power strategy","Logical persuasion","Force participation","Accidental change"],a:2},
+
+{t:"Fear of losing bonuses is a reason for:",o:["Acceptance","Resistance","Motivation","Commitment"],a:1},
+
+
+/* ============== 5 TRUE / FALSE ============== */
+
+{t:"Planned change is deliberate and intentional.",o:["True","False"],a:0},
+
+{t:"Change agent must be flexible and communicate well.",o:["True","False"],a:0},
+
+{t:"Diagnosis phase is often avoided in unsuccessful change.",o:["True","False"],a:0},
+
+{t:"Driving forces work against change.",o:["True","False"],a:1},
+
+{t:"Nurse manager plays no role in change management.",o:["True","False"],a:1}
+];
+
+// ===== shuffle questions only =====
+function shuffleQuestions(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+// خلط الأسئلة فقط
+shuffleQuestions(questions);
+
+
+// تعريف المتغيرات الناقصة
+let i = 0;
+let correct = 0;
+let wrong = 0;
+let answers = [];
+let wrongSet = [];
+
+/* ===== Timer ===== */
+let totalTime=60*60, timeLeft=totalTime;
+const timerInt=setInterval(()=>{
+  timeLeft--;
+  let m=Math.floor(timeLeft/60), s=timeLeft%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  let deg=(timeLeft/totalTime)*360;
+  timer.style.background=`conic-gradient(var(--primary) ${deg}deg,var(--soft) ${deg}deg)`;
+  if(timeLeft<=0){clearInterval(timerInt);finishExam();}
+},1000);
+
+/* ===== UI ===== */
+function updateTop(){
+  let total=questions.length;
+  let answered=correct+wrong;
+  progressText.innerText=`سؤال ${i+1} من ${total}`;
+  progressBar.style.width=((i+1)/total*100)+"%";
+  correctCount.innerText=correct;
+  wrongCount.innerText=wrong;
+  remainPercent.innerText=Math.round(((total-answered)/total)*100)+"%";
+}
+
+/* ===== Render ===== */
+function show(){
+  updateTop();
+  let q = questions[i];
+
+  app.innerHTML = `
+    <div class="card">
+      <div class="question-title">${q.t}</div>
+      ${q.o.map((o,idx)=>`
+        <div class="option" onclick="choose(${idx})">${o}</div>
+      `).join("")}
+    </div>
+  `;
+}
+/* ===== Choose ===== */
+function choose(v){
+  if(answers[i]!=null) return;
+  answers[i]=v;
+  let ok=v===questions[i].a;
+  ok?correct++:wrong++;
+  app.innerHTML=`
+    <div class="feedback">${ok?"🎉 شاطر جدًا كمل":"😅 ركّز يا سُكر"}</div>
+    <div class="card">
+      <div class="question-title">${questions[i].t}</div>
+      ${questions[i].o.map((o,j)=>`
+        <div class="option ${j===questions[i].a?"correct":j===v?"wrong":""} disabled">${o}</div>
+      `).join("")}
+      <button onclick="next()">التالي</button>
+    </div>`;
+}
+
+/* ===== Next ===== */
+function next(){
+  if(i<questions.length-1){i++;show();}
+  else finishExam();
+}
+
+/* ===== Finish ===== */
+function finishExam(){
+  document.body.classList.remove("exam");
+  document.body.classList.add("after");
+
+  let score=Math.round((correct/questions.length)*100);
+
+  if(score>=80){
+    document.documentElement.style.setProperty("--brand1","#22c55e");
+    document.documentElement.style.setProperty("--brand2","#fde047");
+  }else if(score>=50){
+    document.documentElement.style.setProperty("--brand1","#38bdf8");
+    document.documentElement.style.setProperty("--brand2","#e0f2fe");
+  }else{
+    document.documentElement.style.setProperty("--brand1","#fb923c");
+    document.documentElement.style.setProperty("--brand2","#fed7aa");
+  }
+
+  wrongSet=[];
+  let report="";
+  questions.forEach((q,idx)=>{
+    let ok=answers[idx]===q.a;
+    if(!ok) wrongSet.push(q);
+    report+=`
+      <div class="report ${ok?"correct":"wrong"}">
+        <b>${q.t}</b><br>
+إجابتك: ${answers[idx]!=null ? q.o[answers[idx]] : "لم يتم الحل"}<br>
+الصح: ${q.o[q.a]}
+      </div>`;
+  });
+
+  app.innerHTML=`
+    <div class="card">
+      <h3>?? تقريرك</h3>
+      ${report}
+      ${wrongSet.length?`<button onclick="retry()">إعادة حل الغلط فقط</button>`:"<p>أنت ممتاز 👑</p>"}
+    </div>`;
+}
+
+/* ===== Retry Wrong ===== */
+function retry(){
+  // نبدأ امتحان جديد بالأسئلة الغلط فقط
+  questions = [...wrongSet];
+
+  answers = [];
+  wrongSet = [];
+  i = 0;
+  correct = 0;
+  wrong = 0;
+
+  // رجوع لشكل الامتحان
+  document.body.classList.remove("after");
+  document.body.classList.add("exam");
+
+  show();
+}
+
+show();
+</script>
+
+</body>
+</html>
