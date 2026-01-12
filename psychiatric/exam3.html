@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title> nursing our live 2 </title>
+    <title>Simulation-Based Learning by Gaith </title>
     <style>
         * {
             margin: 0;
@@ -16,7 +16,7 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 15px;
             line-height: 1.6;
-            font-size: 13px;
+            font-size: 14px;
         }
 
         .container {
@@ -40,8 +40,8 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
-            font-size: 1.7em;
-            margin-bottom: 15px;
+            font-size: 1.8em;
+            margin-bottom: 20px;
             animation: slideDown 0.6s ease-out;
         }
 
@@ -51,125 +51,255 @@
         }
 
         .section {
-            margin: 15px 0;
-            padding: 12px;
-            border-radius: 10px;
+            margin: 20px 0;
+            padding: 15px;
+            border-radius: 12px;
             transition: all 0.3s ease;
+            animation: slideUp 0.6s ease-out;
+            animation-fill-mode: both;
         }
 
-        .purple-section { background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%); border-left: 4px solid #667eea; }
-        .blue-section { background: linear-gradient(135deg, #4facfe15 0%, #00f2fe15 100%); border-left: 4px solid #4facfe; }
-        .green-section { background: linear-gradient(135deg, #43e97b15 0%, #38f9d715 100%); border-left: 4px solid #43e97b; }
-        .orange-section { background: linear-gradient(135deg, #fa709a15 0%, #fee14015 100%); border-left: 4px solid #fa709a; }
-        .pink-section { background: linear-gradient(135deg, #f093fb15 0%, #f5576c15 100%); border-left: 4px solid #f093fb; }
-        .teal-section { background: linear-gradient(135deg, #4facfe15 0%, #00f2fe15 100%); border-left: 4px solid #00bcd4; }
-        .red-section { background: linear-gradient(135deg, #ff6b6b15 0%, #ee5a6f15 100%); border-left: 4px solid #ff6b6b; }
-        .yellow-section { background: linear-gradient(135deg, #ffeaa715 0%, #fdcb6e15 100%); border-left: 4px solid #fdcb6e; }
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .section:nth-child(1) { animation-delay: 0.1s; }
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.3s; }
+        .section:nth-child(4) { animation-delay: 0.4s; }
+        .section:nth-child(5) { animation-delay: 0.5s; }
+        .section:nth-child(6) { animation-delay: 0.6s; }
+        .section:nth-child(7) { animation-delay: 0.7s; }
+        .section:nth-child(8) { animation-delay: 0.8s; }
+        .section:nth-child(9) { animation-delay: 0.9s; }
+
+        .purple-section {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-left: 4px solid #667eea;
+        }
+
+        .blue-section {
+            background: linear-gradient(135deg, #4facfe15 0%, #00f2fe15 100%);
+            border-left: 4px solid #4facfe;
+        }
+
+        .green-section {
+            background: linear-gradient(135deg, #43e97b15 0%, #38f9d715 100%);
+            border-left: 4px solid #43e97b;
+        }
+
+        .orange-section {
+            background: linear-gradient(135deg, #fa709a15 0%, #fee14015 100%);
+            border-left: 4px solid #fa709a;
+        }
+
+        .pink-section {
+            background: linear-gradient(135deg, #f093fb15 0%, #f5576c15 100%);
+            border-left: 4px solid #f093fb;
+        }
+
+        .teal-section {
+            background: linear-gradient(135deg, #4facfe15 0%, #00f2fe15 100%);
+            border-left: 4px solid #00bcd4;
+        }
+
+        .red-section {
+            background: linear-gradient(135deg, #ff6b6b15 0%, #ee5a6f15 100%);
+            border-left: 4px solid #ff6b6b;
+        }
+
+        .yellow-section {
+            background: linear-gradient(135deg, #ffeaa715 0%, #fdcb6e15 100%);
+            border-left: 4px solid #fdcb6e;
+        }
 
         h2 {
             color: #2d3748;
-            margin-bottom: 10px;
-            font-size: 1.3em;
+            margin-bottom: 12px;
+            font-size: 1.4em;
             display: flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
         }
 
         h3 {
             color: #4a5568;
-            margin: 12px 0 6px 0;
-            font-size: 1.05em;
+            margin: 15px 0 8px 0;
+            font-size: 1.1em;
         }
 
         .mnemonic {
             background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
-            padding: 12px;
-            border-radius: 8px;
-            margin: 10px 0;
+            padding: 15px;
+            border-radius: 10px;
+            margin: 12px 0;
             font-weight: bold;
-            font-size: 0.95em;
+            font-size: 1em;
             text-align: center;
-            box-shadow: 0 4px 12px rgba(253, 203, 110, 0.3);
+            box-shadow: 0 5px 15px rgba(253, 203, 110, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .mnemonic:active {
+            transform: scale(0.98);
         }
 
         .list-item {
             background: white;
-            padding: 8px;
-            margin: 5px 0;
-            border-radius: 6px;
+            padding: 10px;
+            margin: 6px 0;
+            border-radius: 8px;
             border-left: 3px solid #667eea;
-            font-size: 0.9em;
+            transition: all 0.3s ease;
+            font-size: 0.95em;
+        }
+
+        .list-item:active {
+            background: #f7fafc;
+            transform: translateX(5px);
         }
 
         .highlight-box {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 12px;
-            border-radius: 10px;
-            margin: 12px 0;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
-            font-size: 0.9em;
+            padding: 15px;
+            border-radius: 12px;
+            margin: 15px 0;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            animation: pulse 2s infinite;
+            font-size: 0.95em;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
         }
 
         .critical-fact {
             background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-            padding: 10px;
-            margin: 6px 0;
-            border-radius: 8px;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 10px;
             font-weight: 600;
-            box-shadow: 0 4px 12px rgba(250, 112, 154, 0.2);
-            font-size: 0.85em;
+            box-shadow: 0 5px 15px rgba(250, 112, 154, 0.2);
+            transition: all 0.3s ease;
+            font-size: 0.9em;
+        }
+
+        .critical-fact:active {
+            transform: translateX(5px);
         }
 
         .card {
             background: white;
-            border-radius: 10px;
-            padding: 10px;
-            margin: 8px 0;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            border-radius: 12px;
+            padding: 12px;
+            margin: 10px 0;
+            box-shadow: 0 3px 15px rgba(0,0,0,0.1);
             border-top: 3px solid;
+            transition: all 0.3s ease;
+        }
+
+        .card:active {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
         }
 
         .card-purple { border-top-color: #667eea; }
         .card-blue { border-top-color: #4facfe; }
         .card-green { border-top-color: #43e97b; }
         .card-orange { border-top-color: #fa709a; }
-        .card-red { border-top-color: #ff6b6b; }
+
+        .characteristic-box {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+            font-size: 0.9em;
+        }
+
+        .benefit-box {
+            background: linear-gradient(135deg, #43e97b15 0%, #38f9d715 100%);
+            padding: 10px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border-left: 3px solid #43e97b;
+            font-size: 0.9em;
+        }
+
+        .step-box {
+            background: #f7fafc;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+
+        .step {
+            padding: 8px;
+            margin: 5px 0;
+            background: white;
+            border-radius: 6px;
+            border-left: 3px solid #667eea;
+            font-size: 0.9em;
+        }
 
         table {
             width: 100%;
             border-collapse: collapse;
-            margin: 12px 0;
-            font-size: 0.8em;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            border-radius: 6px;
+            margin: 15px 0;
+            font-size: 0.85em;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
             overflow: hidden;
         }
 
         th {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
-            padding: 8px;
+            padding: 10px;
             text-align: left;
             font-weight: 600;
         }
 
         td {
-            padding: 8px;
+            padding: 10px;
             border-bottom: 1px solid #e2e8f0;
         }
 
+        tr:active td {
+            background: #f7fafc;
+        }
+
         .icon {
-            font-size: 1.2em;
+            font-size: 1.3em;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-3px); }
+        }
+
+        .emoji {
+            display: inline-block;
+            animation: rotate 3s infinite;
+        }
+
+        @keyframes rotate {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-10deg); }
+            75% { transform: rotate(10deg); }
         }
 
         .badge {
             display: inline-block;
-            padding: 3px 8px;
-            border-radius: 12px;
-            font-size: 0.75em;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-size: 0.8em;
             font-weight: bold;
-            margin: 2px;
+            margin: 3px;
             color: white;
         }
 
@@ -177,370 +307,268 @@
         .badge-blue { background: #4facfe; }
         .badge-green { background: #43e97b; }
         .badge-orange { background: #fa709a; }
-        .badge-red { background: #ff6b6b; }
+        .badge-pink { background: #f093fb; }
 
         @media (max-width: 768px) {
-            body { padding: 8px; font-size: 12px; }
-            h1 { font-size: 1.4em; }
-            h2 { font-size: 1.15em; }
-            .container { padding: 12px; }
+            body { padding: 10px; font-size: 13px; }
+            h1 { font-size: 1.5em; }
+            h2 { font-size: 1.2em; }
+            .container { padding: 15px; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>🤰 Normal & Abnormal Pregnancy</h1>
+        <h1>🎮 Simulation-Based Learning (SBL)</h1>
         
         <div class="section purple-section">
-            <h2><span class="icon">📚</span> Key Terminology</h2>
-            <div class="mnemonic">  EDD = LMP + 7 days + 9 months (Nagele's Rule)</div>
-            <div class="list-item"><strong>Gravida:</strong> Any pregnancy (includes current)</div>
-            <div class="list-item"><strong>Para:</strong> Births after 20 wks (dead/alive)</div>
-            <div class="list-item"><strong>Primigravida:</strong> First pregnancy</div>
-            <div class="list-item"><strong>Multigravida:</strong> 2nd or subsequent pregnancy</div>
-            <div class="list-item"><strong>Primipara:</strong> Given birth once (≥20 wks)</div>
-            <div class="list-item"><strong>Multipara:</strong> Given birth 2+ times (≥20 wks)</div>
-            <div class="list-item"><strong>Quickening:</strong> First fetal movement (PG 18-20wks, MG 16-18wks)</div>
-            <div class="list-item"><strong>Braxton Hicks:</strong> Irregular, painless contractions</div>
-            <div class="list-item"><strong>Hegar's Sign:</strong> Softening lower uterine segment (6-12wks)</div>
-            <div class="list-item"><strong>Goodell's Sign:</strong> Softening cervix/uterus/vagina</div>
-            <div class="list-item"><strong>Chadwick's Sign:</strong> Bluish discoloration cervix/vagina</div>
+            <h2><span class="icon">📚</span> Definition</h2>
+            <div class="highlight-box">
+                <strong>Simulation:</strong> Use of tools, scenarios, and environments that mimic real clinical situations to enhance learning. Range: simple role-play → high-fidelity mannequins → virtual reality.
+                <br><br>
+                <strong>SBL:</strong> Dynamic educational strategy that replicates real-life clinical situations in a controlled, safe environment. Practice skills, make decisions, experience emotional/ethical dimensions WITHOUT risking patient safety.
+                <br><br>
+                <strong>Purpose:</strong> Bridge the gap between theory and practice
+            </div>
         </div>
 
         <div class="section blue-section">
-            <h2><span class="icon">✅</span> Signs of Pregnancy</h2>
-            <table>
-                <tr>
-                    <th>Presumptive (6)</th>
-                    <th>Positive (4)</th>
-                </tr>
-                <tr>
-                    <td>
-                        1. Amenorrhea<br>
-                        2. Nausea & vomiting<br>
-                        3. Fatigue<br>
-                        4. Urinary frequency<br>
-                        5. Breast & skin changes<br>
-                        6. Quickening
-                    </td>
-                    <td>
-                        1. Ultrasound fetal sac<br>
-                        2. Hear FHS (Doppler/stethoscope)<br>
-                        3. Felt fetal movement<br>
-                        4. Palpate fetal parts
-                    </td>
-                </tr>
-            </table>
+            <h2><span class="icon">🎯</span> Key Characteristics</h2>
+            <div class="mnemonic">
+                <span class="emoji">💡</span> بصموجة غيث "SERR" <span class="emoji">💡</span>
+            </div>
+
+            <div class="characteristic-box">
+                <strong>S</strong>afe & Controlled
+                <p>• No harm to real patients</p>
+            </div>
+
+            <div class="characteristic-box">
+                <strong>E</strong>xperiential
+                <p>• Learning through doing</p>
+            </div>
+
+            <div class="characteristic-box">
+                <strong>R</strong>eflective
+                <p>• Includes debriefing & feedback</p>
+            </div>
+
+            <div class="characteristic-box">
+                <strong>R</strong>ealistic
+                <p>• Replicates clinical complexity & urgency</p>
+            </div>
+
+            <div class="benefit-box">
+                <strong>📝 Example:</strong> Student performs CPR on high-fidelity mannequin while managing team communication & medication administration
+            </div>
         </div>
 
         <div class="section green-section">
-            <h2><span class="icon">🔄</span> Physiological Changes (8 Systems)</h2>
-            
-            <div class="card card-purple">
-                <h3>1. Reproductive System</h3>
-                <p><strong>Uterus:</strong> Size ×20, Weight 60gm→1000gm, Capacity 5000ml</p>
-                <p><strong>Fundal Height:</strong> 12wks (pubis), 24wks (umbilicus), 36wks (xiphoid), 40wks (descends)</p>
-                <p><strong>Cervix:</strong> Softer, swollen, mucus plug forms</p>
-                <p><strong>Vagina:</strong> Violet color, thick white acidic discharge</p>
-                <p><strong>Breasts:</strong> Size increase, nipples larger/pigmented, colostrum in 3rd trimester</p>
+            <h2><span class="icon">📊</span> Types of Simulation</h2>
+            <div class="mnemonic">
+                <span class="emoji">🎨</span> 5 Types: "LMHVS" <span class="emoji">🎨</span>
             </div>
 
-            <div class="card card-blue">
-                <h3>2. Cardiovascular</h3>
-                <p>• Cardiac hypertrophy</p>
-                <p>• Blood volume ↑30-50% (peaks 3rd trimester)</p>
-                <p>• HR & CO increase</p>
-                <p>• Supine hypotension (10% women)</p>
-                <p>• Coagulation factors & WBC ↑</p>
-                <p>• RBC, Hb, Hct, Platelets, BP ↓</p>
-            </div>
-
-            <div class="card card-green">
-                <h3>3. Respiratory</h3>
-                <p>• Vascularization ↑, Diaphragm elevation</p>
-                <p>• Breathlessness, Hyperventilation</p>
-                <p>• Chest circumference ↑6cm</p>
-                <p>• RR ↑2 breaths/min, O2 demand ↑20%</p>
-            </div>
-
-            <div class="card card-orange">
-                <h3>4. Urinary</h3>
-                <p>• Bladder capacity & tone ↓</p>
-                <p>• Frequency (early: uterus pressure, late: presenting part pressure)</p>
-            </div>
-
-            <div class="card card-red">
-                <h3>5. GI System</h3>
-                <p>• Morning sickness (1st trimester - HCG)</p>
-                <p>• Heartburn (reflux + low sphincter tone)</p>
-                <p>• Constipation (↓motility, ↑water absorption)</p>
-            </div>
-
-            <div class="list-item"><strong>6. CNS:</strong> ↓Attention, memory, concentration; sleepiness/irritability</div>
-            <div class="list-item"><strong>7. Endocrine:</strong> Parathyroid ↑, Posterior pituitary (oxytocin), Anterior pituitary (prolactin), Placenta (estrogen/progesterone)</div>
-            <div class="list-item"><strong>8. Skin:</strong> Hair growth, Linea nigra, Striae gravidarum, Chloasma, Hyperpigmentation</div>
+            <table>
+                <tr>
+                    <th>Type</th>
+                    <th>Description</th>
+                    <th>Example Scenario</th>
+                </tr>
+                <tr>
+                    <td><strong>Low-Fidelity</strong></td>
+                    <td>Basic models/role-play without technology</td>
+                    <td>Hand hygiene or vital signs</td>
+                </tr>
+                <tr>
+                    <td><strong>Medium-Fidelity</strong></td>
+                    <td>Mannequins with limited features & basic monitoring</td>
+                    <td>Injections or wound care</td>
+                </tr>
+                <tr>
+                    <td><strong>High-Fidelity</strong></td>
+                    <td>Advanced mannequins with physiological responses & software</td>
+                    <td>Cardiac arrest or labor delivery</td>
+                </tr>
+                <tr>
+                    <td><strong>Virtual Simulation</strong></td>
+                    <td>Computer-based scenarios with interactive decision-making</td>
+                    <td>Diagnosing & treating virtual patient</td>
+                </tr>
+                <tr>
+                    <td><strong>Standardized Patients</strong></td>
+                    <td>Actors trained to portray patients consistently</td>
+                    <td>Mental health assessments</td>
+                </tr>
+            </table>
         </div>
 
         <div class="section orange-section">
-            <h2><span class="icon">🏥</span> Antenatal Care</h2>
-            <div class="highlight-box">
-                <strong>Schedule:</strong><br>
-                Before 28wks: Every 4 weeks<br>
-                28-36wks: Every 2 weeks<br>
-                After 36wks: Every week
+            <h2><span class="icon">🧠</span> Educational Foundations</h2>
+            <div class="mnemonic">
+                <span class="emoji">🔑</span> بصموجة غيث "EAS" <span class="emoji">🔑</span>
             </div>
 
-            <h3>Elements of Care (5)</h3>
-            <div class="mnemonic"> اللوليتا H-P-L-H-G</div>
-            <div class="list-item">1. <strong>H</strong>istory (personal, medical, obstetric, menstrual, family, present)</div>
-            <div class="list-item">2. <strong>P</strong>hysical exam (general & local)</div>
-            <div class="list-item">3. <strong>L</strong>ab investigations</div>
-            <div class="list-item">4. <strong>H</strong>ealth education</div>
-            <div class="list-item">5. <strong>G</strong>eneral examination</div>
+            <div class="card card-purple">
+                <h3>1. <strong>E</strong>xperiential Learning (Kolb)</h3>
+                <p>• Learn through experience, reflection, experimentation</p>
+                <p>• <strong>Kolb's Cycle:</strong> Experience → Reflection → Conceptualization → Application</p>
+            </div>
 
-            <h3>Key Assessments</h3>
-            <div class="list-item"><strong>Weight Gain:</strong> Total ~12kg (2kg first 20wks, 10kg last 20wks)</div>
-            <div class="list-item"><strong>BP:</strong> Baseline, monitor for ↑30 systolic or ↑15 diastolic</div>
-            <div class="list-item"><strong>Height:</strong> >150cm + shoe size >3 = average pelvis</div>
-            <div class="list-item"><strong>FHR:</strong> Normal 120-160 bpm (Doppler 10wks, Stethoscope 20wks)</div>
+            <div class="card card-blue">
+                <h3>2. <strong>A</strong>dult Learning Theory</h3>
+                <p>• Adults prefer practical, problem-solving learning</p>
+                <p>• Simulation offers: relevance, autonomy, immediate feedback</p>
+            </div>
+
+            <div class="card card-green">
+                <h3>3. <strong>S</strong>ituated Cognition</h3>
+                <p>• Knowledge best acquired in context</p>
+                <p>• Simulation replicates clinical environments → authentic learning</p>
+            </div>
         </div>
 
         <div class="section pink-section">
-            <h2><span class="icon">⚠️</span> Danger Signs During Pregnancy</h2>
-            <div class="mnemonic">Report Immediately!</div>
-            <div class="list-item">• Persistent vomiting</div>
-            <div class="list-item">• Severe abdominal pain</div>
-            <div class="list-item">• Vaginal bleeding/discharge with odor</div>
-            <div class="list-item">• Chills or fever</div>
-            <div class="list-item">• Marked changes in fetal movements</div>
-            <div class="list-item">• Dysuria/burning sensation</div>
-            <div class="list-item">• Severe headache</div>
-            <div class="list-item">• Sudden swelling (face, fingers, feet)</div>
-            <div class="list-item">• Blurring of vision</div>
-            <div class="list-item">• Sudden abdominal enlargement</div>
-            <div class="list-item">• Premature contractions</div>
-            <div class="list-item">• Sudden fluid escape from vagina</div>
-        </div>
-
-        <div class="section red-section">
-            <h2><span class="icon">🚨</span> Hypertensive Disorders</h2>
-            
-            <h3>Classification (3 Types)</h3>
-            <table>
-                <tr>
-                    <th>Type</th>
-                    <th>Definition</th>
-                    <th>Key Features</th>
-                </tr>
-                <tr>
-                    <td><strong>Gestational HTN</strong></td>
-                    <td>New HTN ≥20wks</td>
-                    <td>BP ≥140/90, No proteinuria</td>
-                </tr>
-                <tr>
-                    <td><strong>Chronic HTN</strong></td>
-                    <td>Known before pregnancy</td>
-                    <td>>140/90 before 20wks, persists 6wks postpartum</td>
-                </tr>
-                <tr>
-                    <td><strong>PIH (Pre-eclampsia/Eclampsia)</strong></td>
-                    <td>New HTN after 20wks</td>
-                    <td>HTN + Proteinuria (+ seizures in eclampsia)</td>
-                </tr>
-            </table>
-
-            <h3>Pre-eclampsia</h3>
-            <div class="card card-red">
-                <p><strong>Risk Factors:</strong> Chronic HTN, Nulliparity, Obesity, DM, Multiple pregnancy, Family history</p>
-                <p><strong>Triad:</strong> HTN + Proteinuria + Edema</p>
-                
-                <p><strong>Mild:</strong> BP <160/110, Proteinuria 1+ (300mg/24hr)</p>
-                <p><strong>Severe:</strong> BP ≥160/110, Proteinuria ≥2+ (2-5gm/24hr), Headache, Visual disturbance, Epigastric pain, Oliguria</p>
+            <h2><span class="icon">🎬</span> Components of Simulation Session</h2>
+            <div class="mnemonic">
+                <span class="emoji">🎯</span> 4 Components: "PSDE" <span class="emoji">🎯</span>
             </div>
 
-            <h3>HELLP Syndrome (10-20% severe pre-eclampsia)</h3>
-            <div class="mnemonic"> اللويتا H-EL-LP</div>
-            <div class="list-item"><strong>H</strong>emolysis</div>
-            <div class="list-item"><strong>EL</strong>evated Liver enzymes</div>
-            <div class="list-item"><strong>LP</strong>ow Platelets</div>
+            <div class="step-box">
+                <div class="step">
+                    <strong>1. P</strong>re-briefing
+                    <p>• Orientation to objectives, roles, equipment</p>
+                    <p>• Sets expectations & psychological safety</p>
+                </div>
 
-            <h3>Management</h3>
-            <div class="card card-orange">
-                <p><strong>Mild Pre-eclampsia:</strong></p>
-                <p>• Bed rest (left lateral position)</p>
-                <p>• ↓Activity, Monitor daily weight, Kick counts</p>
-                <p>• Check BP frequently, Urine protein</p>
-                <p>• ↑Protein 70-80g/day, ↓Salt, ↑Water</p>
-                <p>• Antihypertensives, Sedatives</p>
-                
-                <p><strong>Severe Pre-eclampsia:</strong></p>
-                <p>• Hospitalization</p>
-                <p>• Magnesium Sulfate (Loading: 4-6gm IV over 15-20min, Maintenance: 2gm/hr)</p>
-                <p>• Monitor reflexes, hourly output, FHR</p>
-                <p>• Emergency supplies ready</p>
-                <p>• Delivery plan</p>
+                <div class="step">
+                    <strong>2. S</strong>cenario Execution
+                    <p>• Students engage, respond to patient cues, make decisions</p>
+                    <p>• Involves teamwork, communication, emergency management</p>
+                </div>
+
+                <div class="step">
+                    <strong>3. D</strong>ebriefing
+                    <p>• Structured reflection led by instructor</p>
+                    <p>• Discusses: what happened, why, how to improve</p>
+                    <p>• Encourages emotional processing & professional growth</p>
+                </div>
+
+                <div class="step">
+                    <strong>4. E</strong>valuation
+                    <p>• Assessment of clinical performance, teamwork, decision-making</p>
+                    <p>• Includes: self-assessment, peer feedback, instructor grading</p>
+                </div>
             </div>
-
-            <h3>Eclampsia (4 Stages)</h3>
-            <div class="mnemonic"> اللوليتا P-T-C-C</div>
-            <div class="list-item">1. <strong>P</strong>remotory (30sec): Eye rolling, twitches</div>
-            <div class="list-item">2. <strong>T</strong>onic (30sec): Generalized spasm, cyanosis</div>
-            <div class="list-item">3. <strong>C</strong>lonic (1-2min): Convulsions, tongue biting, froth</div>
-            <div class="list-item">4. <strong>C</strong>oma: Variable duration</div>
-
-            <h3>Eclampsia Management</h3>
-            <div class="list-item">• Left lateral position, Suction secretions, O2</div>
-            <div class="list-item">• Padding on bed rails, Foley catheter</div>
-            <div class="list-item">• Mag Sulfate, Antihypertensives</div>
-            <div class="list-item">• Monitor VS/FHR continuously</div>
-            <div class="list-item">• Delivery (induce if no labor in 3-4hrs after last seizure)</div>
         </div>
 
         <div class="section teal-section">
-            <h2><span class="icon">🩸</span> Early Bleeding (<20 weeks)</h3>
+            <h2><span class="icon">✨</span> Benefits of SBL</h2>
+            <div class="mnemonic">
+                <span class="emoji">🌟</span> بصموجة غيث "SCETCE" <span class="emoji">🌟</span>
+            </div>
 
-            <h3>1. Abortion Types</h3>
             <table>
                 <tr>
-                    <th>Type</th>
-                    <th>Bleeding</th>
-                    <th>Pain</th>
-                    <th>Cervix</th>
-                    <th>Management</th>
+                    <th>Benefit</th>
+                    <th>Description</th>
                 </tr>
                 <tr>
-                    <td><strong>Threatened</strong></td>
-                    <td>Mild, bright red</td>
-                    <td>May/may not</td>
-                    <td>Closed</td>
-                    <td>Bed rest, No sex</td>
+                    <td><strong>Skill Mastery</strong></td>
+                    <td>Repeated practice improves psychomotor & cognitive skills</td>
                 </tr>
                 <tr>
-                    <td><strong>Inevitable</strong></td>
-                    <td>Excessive, clots</td>
-                    <td>Severe colicky</td>
-                    <td>Dilated, ROM</td>
-                    <td>Anti-shock, D&C</td>
+                    <td><strong>Clinical Confidence</strong></td>
+                    <td>Students feel more prepared for real patient care</td>
                 </tr>
                 <tr>
-                    <td><strong>Missed</strong></td>
-                    <td>Brownish</td>
-                    <td>None</td>
-                    <td>Closed</td>
-                    <td>Wait 2-4wks, Evacuate</td>
+                    <td><strong>Error Management</strong></td>
+                    <td>Learners can make mistakes safely & learn from them</td>
                 </tr>
                 <tr>
-                    <td><strong>Incomplete</strong></td>
-                    <td>Severe</td>
-                    <td>May/may not</td>
-                    <td>Partly closed</td>
-                    <td>D&C</td>
+                    <td><strong>Teamwork & Communication</strong></td>
+                    <td>Enhances collaboration & leadership</td>
                 </tr>
                 <tr>
-                    <td><strong>Complete</strong></td>
-                    <td>Minimal</td>
-                    <td>Stops</td>
-                    <td>Closed</td>
-                    <td>Observe</td>
+                    <td><strong>Critical Thinking</strong></td>
+                    <td>Promotes rapid decision-making under pressure</td>
                 </tr>
                 <tr>
-                    <td><strong>Septic</strong></td>
-                    <td>Offensive</td>
-                    <td>Tender uterus</td>
-                    <td>Variable</td>
-                    <td>Antibiotics, Isolation</td>
+                    <td><strong>Emotional Preparedness</strong></td>
+                    <td>Exposes to stress, empathy, ethical dilemmas</td>
                 </tr>
             </table>
+        </div>
 
-            <h3>2. Hydatidiform Mole</h3>
-            <div class="card card-blue">
-                <p><strong>Definition:</strong> Gross malformation of trophoblast, chorionic villi proliferate & become avascular</p>
-                <p><strong>Risk:</strong> Age >40 or <19, Malnutrition</p>
-                <p><strong>S&S:</strong> Excessive vomiting, Uterus larger than expected, Bleeding + vesicles, No fetal parts/movements, Positive pregnancy test 1:500 dilution</p>
-                <p><strong>Management:</strong> Evacuation, Monitor HCG for 2 years monthly, Contraception for 2 years, Chemotherapy if HCG >5 IU/L at 8wks postpartum</p>
-            </div>
-
-            <h3>3. Ectopic Pregnancy (99% tubal)</h3>
-            <div class="card card-orange">
-                <p><strong>Risk:</strong> PID, Previous pelvic surgery, IUD use</p>
-                <p><strong>S&S:</strong> Short amenorrhea, Sudden severe colicky pain (one iliac fossa), Blood-stained discharge, Shock, Dyspareunia</p>
-                <p><strong>Management:</strong> Surgical (Salpingectomy) or Medical (Methotrexate if B-HCG <10,000)</p>
-            </div>
+        <div class="section red-section">
+            <h2><span class="icon">⚠️</span> Challenges & Solutions</h2>
+            <table>
+                <tr>
+                    <th>Challenge</th>
+                    <th>Solution</th>
+                </tr>
+                <tr>
+                    <td><strong>High Cost</strong></td>
+                    <td>Use blended models & prioritize high-impact scenarios</td>
+                </tr>
+                <tr>
+                    <td><strong>Faculty Training</strong></td>
+                    <td>Provide workshops & peer mentoring for simulation facilitation</td>
+                </tr>
+                <tr>
+                    <td><strong>Student Anxiety</strong></td>
+                    <td>Use pre-briefing & supportive feedback to reduce stress</td>
+                </tr>
+                <tr>
+                    <td><strong>Technical Issues</strong></td>
+                    <td>Ensure regular maintenance & backup plans</td>
+                </tr>
+                <tr>
+                    <td><strong>Assessment Complexity</strong></td>
+                    <td>Use structured rubrics & multi-source feedback</td>
+                </tr>
+            </table>
         </div>
 
         <div class="section yellow-section">
-            <h2><span class="icon">🩸</span> Late Bleeding (≥28 weeks)</h2>
-
-            <h3>1. Placenta Previa</h3>
-            <div class="card card-red">
-                <p><strong>Definition:</strong> Abnormal placenta in lower uterine segment</p>
-                <p><strong>S&S:</strong> Bright red, Painless, Recurrent bleeding; Soft pain-free uterus; Easy feel fetus/hear FHR</p>
-                <p><strong>Degrees:</strong> Complete (covers os) / Incomplete (partial) / Lateralis (on LUS) / Marginalis (reaches os)</p>
-                <p><strong>Management:</strong> Bed rest, NO vaginal/rectal exam, Avoid constipation/enemas, Monitor bleeding/shock, FHR q4h, IV fluids/O2</p>
+            <h2><span class="icon">🛠️</span> Designing Effective Simulation</h2>
+            <div class="mnemonic">
+                <span class="emoji">🔧</span> Steps: "DDPFDE" <span class="emoji">🔧</span>
             </div>
 
-            <h3>2. Abruptio Placenta</h3>
-            <div class="card card-red">
-                <p><strong>Definition:</strong> Premature separation of normally situated placenta</p>
-                <p><strong>S&S:</strong> Abdominal pain, Dark red bleeding, Tender uterus, Hard to feel fetal parts, No FHR</p>
-                <p><strong>Types:</strong> Revealed / Concealed / Combined</p>
-                <p><strong>Management:</strong> Monitor VS/FHR continuously, IV transfusion, Anti-shock, Prepare for delivery/CS</p>
+            <div class="step-box">
+                <div class="step"><strong>D</strong>efine Learning Objectives</div>
+                <div class="step"><strong>D</strong>evelop the Scenario (patient data, vitals, labs, complications)</div>
+                <div class="step"><strong>P</strong>repare Equipment & Roles (mannequins, monitors, meds, team roles)</div>
+                <div class="step"><strong>F</strong>acilitate the Simulation (students lead care, decide, communicate)</div>
+                <div class="step"><strong>D</strong>ebrief (use structured models for reflection)</div>
+                <div class="step"><strong>E</strong>valuate Performance (checklists, rubrics, reflective writing)</div>
             </div>
-
-            <table>
-                <tr>
-                    <th>Feature</th>
-                    <th>Placenta Previa</th>
-                    <th>Abruptio Placenta</th>
-                </tr>
-                <tr>
-                    <td><strong>Bleeding</strong></td>
-                    <td>Bright red, Painless</td>
-                    <td>Dark red, Painful</td>
-                </tr>
-                <tr>
-                    <td><strong>Uterus</strong></td>
-                    <td>Soft, pain-free</td>
-                    <td>Tender, rigid</td>
-                </tr>
-                <tr>
-                    <td><strong>Fetal Parts</strong></td>
-                    <td>Easy to feel</td>
-                    <td>Hard to feel</td>
-                </tr>
-                <tr>
-                    <td><strong>FHR</strong></td>
-                    <td>Usually heard</td>
-                    <td>Usually absent</td>
-                </tr>
-            </table>
         </div>
 
-        <div class="section green-section">
-            <h2><span class="icon">🔑</span> Critical Facts for Exam</h2>
-            <div class="critical-fact">✓ EDD = LMP + 7 days + 9 months (Nagele's Rule)</div>
-            <div class="critical-fact">✓ Quickening: PG 18-20wks, MG 16-18wks</div>
-            <div class="critical-fact">✓ 6 Presumptive Signs vs 4 Positive Signs</div>
-            <div class="critical-fact">✓ Weight Gain: Total 12kg (2kg first 20wks, 10kg last 20wks)</div>
-            <div class="critical-fact">✓ Fundal Height: 12wks pubis, 24wks umbilicus, 36wks xiphoid</div>
-            <div class="critical-fact">✓ FHR Normal: 120-160 bpm (Doppler 10wks, Stethoscope 20wks)</div>
-            <div class="critical-fact">✓ Antenatal Visits: <28wks (q4wks), 28-36wks (q2wks), >36wks (weekly)</div>
-            <div class="critical-fact">✓ 3 HTN Types: Gestational, Chronic, PIH (Pre-eclampsia/Eclampsia)</div>
-            <div class="critical-fact">✓ Pre-eclampsia Triad: HTN + Proteinuria + Edema</div>
-            <div class="critical-fact">✓ HELLP = Hemolysis + Elevated Liver + Low Platelets</div>
-            <div class="critical-fact">✓ Mag Sulfate: Loading 4-6gm IV, Maintenance 2gm/hr</div>
-            <div class="critical-fact">✓ 4 Eclampsia Stages: Premonitory, Tonic, Clonic, Coma</div>
-            <div class="critical-fact">✓ 6 Abortion Types: Threatened, Inevitable, Missed, Incomplete, Complete, Septic</div>
-            <div class="critical-fact">✓ Threatened Abortion: Mild bleeding, Cervix closed, Bed rest</div>
-            <div class="critical-fact">✓ Inevitable Abortion: Excessive bleeding, Cervix dilated, ROM, D&C</div>
-            <div class="critical-fact">✓ Missed Abortion: Fetus dead & retained, Wait 2-4wks then evacuate</div>
-            <div class="critical-fact">✓ Hydatidiform Mole: Monitor HCG for 2 years, Contraception 2 years</div>
-            <div class="critical-fact">✓ Ectopic: 99% tubal, Surgery (Salpingectomy) or Medical (Methotrexate if B-HCG <10,000)</div>
-            <div class="critical-fact">✓ Placenta Previa: Bright red painless bleeding, Soft uterus, NO PV exam</div>
-</div>
-          
+        <div class="section blue-section">
+            <h2><span class="icon">📝</span> Sample Simulation Scenario</h2>
+            <div class="card card-orange">
+                <h3>Title: Managing Patient with Acute Respiratory Distress</h3>
+                
+                <p><strong>Scenario:</strong> 60-year-old male with COPD presents with shortness of breath, low oxygen saturation, confusion</p>
+                
+                <p><strong>Objectives:</strong></p>
+                <div class="list-item">• Assess respiratory status</div>
+                <div class="list-item">• Administer oxygen & medications</div>
+                <div class="list-item">• Communicate with physician & family</div>
+                
+                <p><strong>Materials:</strong> High-fidelity mannequin, oxygen setup, medication tray</p>
+                
+                <p><strong>Activities:</strong></p>
+                <div class="list-item">• Team-based simulation</div>
+                <div class="list-item">• Role-play nurse-family interaction</div>
+                <div class="list-item">• Debriefing & care plan development</div>
+            </div>
+        </div>
+
         <div class="highlight-box" style="text-align: center; font-size: 1.2em;">
-            <span class="emoji">🍀</span> مع مس آلاء أنت في أمان بإذن الله ، بالتوفيق  <span class="emoji">🍀</span>
+            <span class="emoji">🍀</span> مع تيم غيث أنت في أمان بإذن الله ، بالتوفيق <span class="emoji">🍀</span>
         </div>
     </div>
 </body>
