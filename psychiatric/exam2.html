@@ -1,510 +1,467 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> مراجعة الشفوي من غيث </title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning Strategies in Nursing</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<style>
-*{
-  margin:0;
-  padding:0;
-  box-sizing:border-box;
-  font-family: Arial, sans-serif;
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            animation: fadeIn 0.8s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        h1 {
+            text-align: center;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            font-size: 2.5em;
+            margin-bottom: 30px;
+            animation: slideDown 0.6s ease-out;
+        }
+
+        @keyframes slideDown {
+            from { transform: translateY(-20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .section {
+            margin: 30px 0;
+            padding: 25px;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            animation: slideUp 0.6s ease-out;
+            animation-fill-mode: both;
+        }
+
+        @keyframes slideUp {
+            from { transform: translateY(20px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+
+        .section:nth-child(1) { animation-delay: 0.1s; }
+        .section:nth-child(2) { animation-delay: 0.2s; }
+        .section:nth-child(3) { animation-delay: 0.3s; }
+        .section:nth-child(4) { animation-delay: 0.4s; }
+
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+        }
+
+        .purple-section {
+            background: linear-gradient(135deg, #667eea15 0%, #764ba215 100%);
+            border-left: 5px solid #667eea;
+        }
+
+        .blue-section {
+            background: linear-gradient(135deg, #4facfe15 0%, #00f2fe15 100%);
+            border-left: 5px solid #4facfe;
+        }
+
+        .green-section {
+            background: linear-gradient(135deg, #43e97b15 0%, #38f9d715 100%);
+            border-left: 5px solid #43e97b;
+        }
+
+        .orange-section {
+            background: linear-gradient(135deg, #fa709a15 0%, #fee14015 100%);
+            border-left: 5px solid #fa709a;
+        }
+
+        .pink-section {
+            background: linear-gradient(135deg, #f093fb15 0%, #f5576c15 100%);
+            border-left: 5px solid #f093fb;
+        }
+
+        .teal-section {
+            background: linear-gradient(135deg, #4facfe15 0%, #00f2fe15 100%);
+            border-left: 5px solid #00bcd4;
+        }
+
+        h2 {
+            color: #2d3748;
+            margin-bottom: 15px;
+            font-size: 1.8em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        h3 {
+            color: #4a5568;
+            margin: 20px 0 10px 0;
+            font-size: 1.3em;
+        }
+
+        .mnemonic {
+            background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+            padding: 20px;
+            border-radius: 12px;
+            margin: 15px 0;
+            font-weight: bold;
+            font-size: 1.2em;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(253, 203, 110, 0.3);
+            transition: transform 0.3s ease;
+        }
+
+        .mnemonic:hover {
+            transform: scale(1.03);
+        }
+
+        .list-item {
+            background: white;
+            padding: 12px;
+            margin: 8px 0;
+            border-radius: 8px;
+            border-left: 3px solid #667eea;
+            transition: all 0.3s ease;
+        }
+
+        .list-item:hover {
+            background: #f7fafc;
+            transform: translateX(5px);
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .advantage {
+            color: #38a169;
+            padding: 10px;
+            margin: 5px 0;
+            border-left: 3px solid #38a169;
+            background: #f0fff4;
+            border-radius: 5px;
+        }
+
+        .disadvantage {
+            color: #e53e3e;
+            padding: 10px;
+            margin: 5px 0;
+            border-left: 3px solid #e53e3e;
+            background: #fff5f5;
+            border-radius: 5px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        td {
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+            transition: background 0.3s ease;
+        }
+
+        tr:hover td {
+            background: #f7fafc;
+        }
+
+        .highlight-box {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.02); }
+        }
+
+        .critical-fact {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 10px;
+            font-weight: 600;
+            box-shadow: 0 5px 15px rgba(250, 112, 154, 0.2);
+            transition: all 0.3s ease;
+        }
+
+        .critical-fact:hover {
+            transform: translateX(10px);
+        }
+
+        .icon {
+            font-size: 1.5em;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-5px); }
+        }
+
+        .emoji {
+            display: inline-block;
+            animation: rotate 3s infinite;
+        }
+
+        @keyframes rotate {
+            0%, 100% { transform: rotate(0deg); }
+            25% { transform: rotate(-10deg); }
+            75% { transform: rotate(10deg); }
+        }
+
+        @media print {
+            body { background: white; }
+            .container { box-shadow: none; }
+            .section:hover { transform: none; }
+        }
+        @media (max-width: 768px) {
+
+    body {
+        padding: 10px;
+    }
+
+    .container {
+        padding: 20px;
+        border-radius: 15px;
+    }
+
+    h1 {
+        font-size: 1.8em;
+        margin-bottom: 20px;
+    }
+
+    h2 {
+        font-size: 1.4em;
+        flex-wrap: wrap;
+    }
+
+    h3 {
+        font-size: 1.1em;
+    }
+
+    .section {
+        padding: 18px;
+        margin: 20px 0;
+    }
+
+    .mnemonic {
+        font-size: 1em;
+        padding: 15px;
+    }
+
+    .list-item {
+        font-size: 0.95em;
+        padding: 10px;
+    }
+
+    .highlight-box {
+        padding: 18px;
+        font-size: 1em;
+    }
+
+    .critical-fact {
+        font-size: 0.95em;
+    }
+
+    table {
+        font-size: 0.85em;
+        display: block;
+        overflow-x: auto;
+        white-space: nowrap;
+    }
+
+    th, td {
+        padding: 10px;
+    }
 }
 
-body{
-  min-height:100vh;
-  background: linear-gradient(135deg,#0f172a,#4c1d95);
-  display:flex;
-  justify-content:center;
-  align-items:center;
-  padding:15px;
-  color:#fff;
+@media (max-width: 480px) {
+
+    h1 {
+        font-size: 1.5em;
+    }
+
+    h2 {
+        font-size: 1.2em;
+    }
+
+    .icon {
+        font-size: 1.2em;
+    }
+
+    .emoji {
+        font-size: 1.1em;
+    }
 }
 
-.app{
-  width:100%;
-  max-width:420px;
-  text-align:center;
-}
-
-h1{
-  font-size:22px;
-}
-
-.sub{
-  font-size:13px;
-  opacity:.8;
-  margin-bottom:10px;
-}
-
-.progress{
-  height:6px;
-  background:#333;
-  border-radius:5px;
-  overflow:hidden;
-  margin:15px 0;
-}
-
-.progress-bar{
-  height:100%;
-  width:0%;
-  transition:.3s;
-  background:linear-gradient(to right,#a855f7,#ec4899);
-}
-
-/* Card */
-.scene{
-  perspective:1000px;
-}
-
-.card{
-  width:100%;
-  height:340px;
-  position:relative;
-  transform-style:preserve-3d;
-  transition:.6s;
-}
-
-.card.flip{
-  transform:rotateY(180deg);
-}
-
-.face{
-  position:absolute;
-  width:100%;
-  height:100%;
-  border-radius:22px;
-  padding:20px;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  backface-visibility:hidden;
-}
-
-.back{
-  transform:rotateY(180deg);
-}
-
-.label{
-  font-size:12px;
-  padding:5px 14px;
-  border-radius:20px;
-  background:rgba(0,0,0,.35);
-  margin-bottom:10px;
-  display:inline-block;
-}
-
-.text{
-  font-size:17px;
-  line-height:1.6;
-  white-space:pre-line;
-}
-
-/* Controls */
-.controls{
-  display:flex;
-  justify-content:space-between;
-  margin-top:15px;
-}
-
-button{
-  flex:1;
-  margin:0 5px;
-  padding:12px;
-  border:none;
-  border-radius:30px;
-  background:rgba(255,255,255,.2);
-  color:#fff;
-  font-size:16px;
-}
-
-.footer{
-  margin-top:12px;
-  font-size:12px;
-  opacity:.7;
-}
-</style>
+    </style>
 </head>
-
 <body>
+    <div class="container">
+        <h1> مــــــــراجــــــعــــــــة لـــــــيــــلــــــــــة الإمتـــــحـــــــــــــان </h1>
+        
 
-<div class="app">
-  <h1> مــــــــــــراجــــــــعــــــــــة أســـئــــــــــلـــــــــــة الـــشـــــــفــــــــــــــــوي</h1>
-  <div class="sub"> صلي علي النبي وإستعين بالله </div>
 
-  <div class="progress">
-    <div class="progress-bar" id="progress"></div>
-  </div>
 
-  <div class="scene">
-    <div class="card" id="card">
-      <div class="face front" id="front">
-        <div>
-          <div class="label">QUESTION</div>
-          <div class="text" id="question"></div>
+
+
+
+     <div class="section purple-section">
+            <h2><span class="icon">🔑</span> Teaching methods </h2>
+            <div class="critical-fact">✓ Teaching methods = "Bridge" between goals & achievements</div>
+            <div class="critical-fact">✓ Lecture: Keep 30-45 min max | Teacher-centered</div>
+            <div class="critical-fact">✓ Discussion: 5 types (Whole-class, Small group, Panel, Debate, Brainstorming)</div>
+            <div class="critical-fact">✓ Demonstration: "Teacher shows → Students watch → They try"</div>
+            <div class="critical-fact">✓ Demonstration excellent for PSYCHOMOTOR skills</div>
+            <div class="critical-fact">✓ Blended = Face-to-face + Online learning</div>
+            <div class="critical-fact">✓ OSCE = Objective Structured Clinical Examination</div>
+            <div class="critical-fact">✓ OSCE uses: Stations, Checklists, Time limits, Standardized</div>
+            <div class="critical-fact">✓ Factors: LERF (Level, Educational, Resources, Feelings)</div>
+            <div class="critical-fact">✓ Classification: 6 types (Teacher, Learner, Collaborative, Experiential, Tech, Assessment)</div>
         </div>
-      </div>
-      <div class="face back" id="back">
-        <div>
-          <div class="label">ANSWER</div>
-          <div class="text" id="answer"></div>
+
+        <div class="section teal-section">
+            <h2><span class="icon">🔑</span> teaching materials( media ) </h2>
+            <div class="critical-fact">✓ Combination of audio + visual = MOST EFFECTIVE</div>
+            <div class="critical-fact">✓ Flashcards = Cognitive recall development</div>
+            <div class="critical-fact">✓ Display has MANY ideas, Poster has ONE idea</div>
+            <div class="critical-fact">✓ Newspapers = "Living textbooks"</div>
+            <div class="critical-fact">✓ Models used when actual substance too large/unavailable</div>
+            <div class="critical-fact">✓ Charts used in: Medicine, Nursing, Geography, History, Economics, Civics, Math, Science</div>
+            <div class="critical-fact">✓ Flipchart = Series of large papers turned over one at a time</div>
         </div>
-      </div>
+
+           <div class="section teal-section">
+            <h2><span class="icon">🔑</span> Active Learning </h2>
+            <div class="critical-fact">✓ Active Learning = NECESSITY, not luxury in nursing education</div>
+            <div class="critical-fact">✓ 4 Key Characteristics: LIRE (Learner-centered, Interactive, Reflective, Experiential)</div>
+            <div class="critical-fact">✓ Traditional = Teacher-centered, passive, memorization focus</div>
+            <div class="critical-fact">✓ Active = Student-centered, active participant, application focus</div>
+            <div class="critical-fact">✓ 4 Comparison Aspects: Student Role, Educator Role, Environment, Assessment</div>
+            <div class="critical-fact">✓ 4 Theoretical Foundations: CEAB (Constructivism, Experiential/Kolb, Adult/Knowles, Bloom's)</div>
+            <div class="critical-fact">✓ Kolb's Cycle: Experience → Reflection → Conceptualization → Experimentation</div>
+            <div class="critical-fact">✓ Constructivism by: Piaget & Vygotsky (social interaction, peer collaboration)</div>
+            <div class="critical-fact">✓ Experiential Learning by: Kolb (cyclical process, ideal for clinical/simulation)</div>
+            <div class="critical-fact">✓ Adult Learning Theory by: Knowles (self-directed, relevance, autonomy)</div>
+            <div class="critical-fact">✓ Bloom's Taxonomy = Higher-order thinking (analysis, synthesis, evaluation)</div>
+            <div class="critical-fact">✓ 8 Active Learning Strategies: Case, Simulation, PBL, Role-play, Peer Teaching, Think-Pair-Share, Concept Mapping, Debates</div>
+            <div class="critical-fact">✓ Case-Based = Clinical reasoning, ethical judgment, decision-making</div>
+            <div class="critical-fact">✓ Simulation = Psychomotor skills, teamwork, confidence</div>
+            <div class="critical-fact">✓ PBL = Inquiry, research, self-directed learning</div>
+            <div class="critical-fact">✓ Role-Playing = Empathy, communication, conflict resolution</div>
+            <div class="critical-fact">✓ Peer Teaching = Reinforces understanding, builds leadership</div>
+            <div class="critical-fact">✓ Think-Pair-Share = Individual reflection → Peer discussion → Group sharing</div>
+            <div class="critical-fact">✓ Concept Mapping = Visual organization, relationships between concepts</div>
+            <div class="critical-fact">✓ Debates = Articulation, reasoning, respect for diverse views</div>
+            <div class="critical-fact">✓ Traditional methods: Lecture, Textbook, Worksheet, Rote memorization, Recitation, Demonstration</div>
+        </div>
+
+      
+        <div class="section green-section">
+            <h2><span class="icon">🔑</span> Case-Based Learning </h2>
+            <div class="critical-fact">✓ CBL = Realistic clinical scenarios + Critical thinking + Collaboration</div>
+            <div class="critical-fact">✓ 4 Philosophies: CSAB (Constructivist, Situated, Adult, Bloom's)</div>
+            <div class="critical-fact">✓ 6 Structure Components: CLPADR (Case, Learning, Problem, Analysis, Decision, Reflection)</div>
+            <div class="critical-fact">✓ 4 Case Types: Clinical, Ethical, Psychosocial, Interdisciplinary</div>
+            <div class="critical-fact">✓ 3 Implementation Settings: Classroom, Clinical, Online/Hybrid</div>
+            <div class="critical-fact">✓ 6 Benefits: CC CEEC (Critical, Clinical, Communication, Ethical, Engagement, Confidence)</div>
+            <div class="critical-fact">✓ 4 Challenges: Design Quality, Time/Resources, Student Readiness, Assessment Complexity</div>
+            <div class="critical-fact">✓ Design Steps: DDPFAR (Define, Develop, Prepare, Facilitate, Assign, Reflect)</div>
+            <div class="critical-fact">✓ Bloom's Taxonomy in CBL: Application, Analysis, Evaluation, Creation</div>
+            <div class="critical-fact">✓ CBL transforms passive learners → active problem-solvers</div>
+        </div>
+     <div class="section purple-section">
+            <h2><span class="icon">🔑</span> Simulation-Based Learning (SBL) </h2>
+            <div class="critical-fact">✓ SBL = Replicates real-life clinical situations in safe, controlled environment</div>
+            <div class="critical-fact">✓ 4 Key Characteristics: SERR (Safe, Experiential, Reflective, Realistic)</div>
+            <div class="critical-fact">✓ 5 Types of Simulation: LMHVS (Low, Medium, High, Virtual, Standardized patients)</div>
+            <div class="critical-fact">✓ 3 Educational Foundations: EAS (Experiential/Kolb, Adult Learning, Situated Cognition)</div>
+            <div class="critical-fact">✓ Kolb's Cycle: Experience → Reflection → Conceptualization → Application</div>
+            <div class="critical-fact">✓ 4 Session Components: PSDE (Pre-briefing, Scenario, Debriefing, Evaluation)</div>
+            <div class="critical-fact">✓ Debriefing = MOST IMPORTANT component (structured reflection)</div>
+            <div class="critical-fact">✓ 6 Benefits: SCETCE (Skill, Confidence, Error, Teamwork, Critical, Emotional)</div>
+            <div class="critical-fact">✓ 5 Challenges: High Cost, Faculty Training, Student Anxiety, Technical Issues, Assessment</div>
+            <div class="critical-fact">✓ 6 Design Steps: DDPFDE (Define, Develop, Prepare, Facilitate, Debrief, Evaluate)</div>
+            <div class="critical-fact">✓ High-Fidelity = Advanced mannequins with physiological responses & integrated software</div>
+            <div class="critical-fact">✓ Standardized Patients = Actors trained to portray patients consistently</div>
+            <div class="critical-fact">✓ Pre-briefing sets: expectations & psychological safety</div>
+            <div class="critical-fact">✓ Purpose: Bridge gap between theory & practice</div>
+            <div class="critical-fact">✓ Key Advantage: Practice WITHOUT risking patient safety</div>
+        </div>
+
+              <div class="section green-section">
+            <h2><span class="icon">🔑</span> Future Trends </h2>
+            <div class="critical-fact">✓ Traditional methods NO LONGER SUFFICIENT</div>
+            <div class="critical-fact">✓ 4 Drivers of Change: TGEP (Technology, Global, Evolving, Philosophy)</div>
+            <div class="critical-fact">✓ 6 Emerging Strategies: GAVMFC (AI, VR/AR, Gamification, Microlearning, Flipped, CBE)</div>
+            <div class="critical-fact">✓ 4 Future Educator Roles: FDGE (Facilitator, Data-informed, Global, Ethical)</div>
+            <div class="critical-fact">✓ 5 Benefits: Personalized, Engagement, Global, Skill Mastery, Flexibility</div>
+            <div class="critical-fact">✓ 4 Challenges: Digital Divide, AI Bias, Over-reliance, Privacy/Security</div>
+            <div class="critical-fact">✓ 5 Recommendations: SPCEE (Stay, Pilot, Collaborate, Empower, Evaluate)</div>
+            <div class="critical-fact">✓ CBE = Progress by MASTERY, not time spent</div>
+            <div class="critical-fact">✓ AI: Personalized paths, 24/7 support, adaptive quizzes</div>
+            <div class="critical-fact">✓ VR = Immersive environment | AR = Overlays digital on real-world</div>
+            <div class="critical-fact">✓ Green Nursing = Caring for people & planet simultaneously</div>
+            <div class="critical-fact">✓ Green Nursing Role: Reusable, Recycle, Save energy, Eco-products, Teach</div>
+            <div class="critical-fact">✓ Future Vision: Human-centered + Globally connected + Ethically grounded</div>
+            <div class="critical-fact">✓ Core Nursing Values: Compassion, Integrity, Service</div>
+        </div>
+
+        <div class="section green-section">
+            <h2><span class="icon">🔑</span> Role of Nurse Educator </h2>
+            <div class="critical-fact">✓ Nurse Educator = More than knowledge transmitter: Mentor, Facilitator, Role Model, Strategist</div>
+            <div class="critical-fact">✓ 5 Core Roles: FCEMI (Facilitator, Curriculum, Evaluator, Mentor, Innovator)</div>
+            <div class="critical-fact">✓ 5 Responsibilities: PEAES (Planning, Execution, Adaptation, Evaluation, Support)</div>
+            <div class="critical-fact">✓ 5 Required Skills: PCCTE (Pedagogical, Clinical, Communication, Technological, Ethical)</div>
+            <div class="critical-fact">✓ Specific Roles in 4 Strategies: Simulation, Case-Based, Collaborative, E-Learning</div>
+            <div class="critical-fact">✓ 4 Main Challenges: Resistance to Change, Resource Limitations, Student Diversity, Workload/Burnout</div>
+            <div class="critical-fact">✓ 4 Impact Areas: APCR (Academic, Professional, Clinical, Retention)</div>
+            <div class="critical-fact">✓ 5 Best Practices: AFRCS (Align, Foster, Reflective, Collaborate, Stay updated)</div>
+            <div class="critical-fact">✓ Simulation Role: Design scenarios, Pre-brief/Debrief, Psychological safety</div>
+            <div class="critical-fact">✓ Case-Based Role: Select cases, Guide discussion, Ethical reflection</div>
+            <div class="critical-fact">✓ Collaborative Role: Group dynamics, Mediate conflicts, Equal participation</div>
+            <div class="critical-fact">✓ E-Learning Role: Curate content, Monitor engagement, Timely feedback</div>
+            <div class="critical-fact">✓ Educators shape professional identity, values, and attitudes</div>
+            <div class="critical-fact">✓ Works in: Universities, Schools, Hospitals, Community programs</div>
+        </div>
+
+        <div class="highlight-box" style="text-align: center; font-size: 1.2em;">
+            <span class="emoji">🍀</span> مع غيث أنت في أمان بإذن الله ، بالتوفيق  <span class="emoji">🍀</span>
+        </div>
     </div>
-  </div>
-
-  <div class="controls">
-    <button onclick="prev()">◀</button>
-    <button onclick="resetAll()">⟲</button>
-    <button onclick="next()">▶</button>
-  </div>
-
-  <div class="footer">
-    قول إجابة السؤال بصوتك الأول وبعدين 
-   إضغط على الكارت عشان تشوف الإجابة
-  
-  </div>
-</div>
-
-<script>
-const colors=[
-  ["#a855f7","#ec4899"],
-  ["#38bdf8","#6366f1"],
-  ["#34d399","#10b981"],
-  ["#fbbf24","#f97316"],
-  ["#fb7185","#e11d48"],
-  ["#22d3ee","#0ea5e9"]
-];
-
-const cards=[
-{q:"What are instructional media in nursing education?",
- a:"Teaching aids or resources used to demonstrate or clarify course content during instruction."},
-
-{q:"Why is the combination of audio and visual media more effective?",
- a:"Because it increases learner retention over a longer period compared to using one medium alone."},
-
-{q:"What are teaching materials?",
- a:"All materials used as teaching aids to support the teaching and learning process and achieve desired effects."},
-
-{q:"What is educational media?",
- a:"All materials and physical means used by instructors to facilitate students’ achievement of instructional objectives."},
-
-{q:"Why is media important in education?",
- a:"It delivers information to many students in less time and with wide coverage."},
-
-{q:"How does media help students understand concepts?",
- a:"It makes ideas clear and helps students acquire correct knowledge."},
-
-{q:"How does media affect students’ interest in lessons?",
- a:"It makes lessons interesting and learning easier."},
-
-{q:"How does media support long-term learning?",
- a:"It helps learned content remain in learners’ minds for a longer time."},
-
-{q:"How does media help the facilitator?",
- a:"It enables effective delivery of lessons and clear expression of learning concepts."},
-
-{q:"What is a key characteristic of effective media?",
- a:"It should achieve the required instructional objective."},
-
-{q:"Why should teaching media be appropriate to learners?",
- a:"To match the learners’ types and characteristics."},
-
-{q:"Why is cost considered when selecting media?",
- a:"Effective media should be less expensive and affordable."},
-
-{q:"What are the main types of instructional media?",
- a:"Print, audio, visual, audiovisual, and electronic interactive media."},
-
-{q:"What are print materials?",
- a:"Instructional materials that use printed or written words to communicate information."},
-
-{q:"What is the role of textbooks in education?",
- a:"They provide detailed subject information and guidelines for teaching and learning."},
-
-{q:"What is a pamphlet?",
- a:"A thin book with a paper cover that provides brief information and is inexpensive to distribute."},
-
-{q:"What are manuals used for?",
- a:"Providing practical instructions on how to do or use something."},
-
-{q:"What are flashcards?",
- a:"Note cards with a question on one side and an answer on the other used for review and recall."},
-
-{q:"Why are newspapers called living textbooks?",
- a:"Because they provide rich, authentic, and up-to-date information."},
-
-{q:"What are visual materials?",
- a:"Instructional materials that use images and visual elements to convey information."},
-
-{q:"Why are pictures effective teaching tools?",
- a:"They help students remember information for a long time."},
-
-{q:"When are models used in teaching?",
- a:"When real objects are unavailable, too large, or cannot be brought to the classroom."},
-
-{q:"When do teachers use maps?",
- a:"To teach historical events and geographical elements or places."},
-
-{q:"Why are sketches used in teaching?",
- a:"When no real object, model, or map is available."},
-
-{q:"What is the purpose of graphs in teaching?",
- a:"To show increasing or decreasing patterns."},
-
-{q:"What is a chart?",
- a:"A visual tool used across many subjects to present organized information."},
-
-{q:"What is a flip chart?",
- a:"A series of large papers attached at the top and flipped over to present information."},
-
-{q:"What is a display?",
- a:"An arrangement of real objects, models, pictures, and posters used for learning."},
-
-{q:"What is one advantage of visual media?",
- a:"It makes learning easy to follow and remember."},
-
-{q:"What is one disadvantage of visual media?",
- a:"It relies only on the sense of sight."},
-
-{q:"What are audio materials?",
- a:"Teaching materials that involve spoken words, music, or other sounds."},
-
-{q:"Who benefits most from audio media?",
- a:"Visually impaired and low-literate learners."},
-
-{q:"What is one disadvantage of audio media?",
- a:"It lacks visual stimulus and interaction."},
-
-{q:"What are audiovisual materials?",
- a:"Materials that combine both auditory and visual elements."},
-
-{q:"Why are audiovisual materials effective?",
- a:"They attract attention and are useful for introducing and reviewing concepts."},
-
-{q:"What is a disadvantage of audiovisual media?",
- a:"Some forms are expensive and require good design."},
-
-  {q:"What is simulation in nursing education?",
- a:"The use of tools, scenarios, and environments that mimic real clinical situations to enhance learning."},
-
-{q:"What is Simulation-Based Learning (SBL)?",
- a:"A dynamic educational strategy that replicates real-life clinical situations in a safe and controlled environment."},
-
-{q:"Why is simulation important in nursing education?",
- a:"It bridges the gap between theory and practice without risking patient safety."},
-
-{q:"What is one key advantage of simulation for patient safety?",
- a:"Students can practice skills without causing harm to real patients."},
-
-{q:"What does experiential learning mean in simulation?",
- a:"Learning through doing, reflection, and experimentation."},
-
-{q:"Why is debriefing an essential part of simulation?",
- a:"It allows reflection, feedback, and discussion on performance improvement."},
-
-{q:"How does simulation replicate real clinical practice?",
- a:"By creating realistic clinical complexity and urgency."},
-
-{q:"What is an example of simulation use in nursing?",
- a:"Performing CPR on a high-fidelity mannequin while managing team communication."},
-
-{q:"What is low-fidelity simulation?",
- a:"Basic models or role-play without advanced technology."},
-
-{q:"Give an example of low-fidelity simulation.",
- a:"Practicing hand hygiene or measuring vital signs."},
-
-{q:"What is medium-fidelity simulation?",
- a:"Simulation using mannequins with limited features and basic monitoring."},
-
-{q:"What is high-fidelity simulation?",
- a:"Advanced mannequins with physiological responses and integrated software."},
-
-{q:"What is virtual simulation?",
- a:"Computer-based interactive scenarios for clinical decision-making."},
-
-{q:"What are standardized patients?",
- a:"Actors trained to consistently portray patients in clinical scenarios."},
-
-{q:"Which learning theory supports simulation through experience and reflection?",
- a:"Experiential Learning Theory (Kolb)."}, 
-
-{q:"Why is simulation suitable for adult learners?",
- a:"Because it focuses on practical, problem-solving learning with immediate feedback."},
-
-{q:"What is situated cognition in simulation?",
- a:"Learning that occurs best in realistic and authentic clinical contexts."},
-
-{q:"What is the purpose of pre-briefing in simulation?",
- a:"To orient students to objectives, roles, and equipment and ensure psychological safety."},
-
-{q:"What happens during scenario execution?",
- a:"Students respond to patient cues, make decisions, and work as a team."},
-
-{q:"What is discussed during debriefing?",
- a:"What happened, why it happened, and how to improve performance."},
-
-{q:"What is the role of evaluation in simulation?",
- a:"Assessing clinical performance, teamwork, and decision-making."},
-
-{q:"How does simulation improve skill mastery?",
- a:"Through repeated practice of psychomotor and cognitive skills."},
-
-{q:"How does simulation affect clinical confidence?",
- a:"Students feel more prepared to care for real patients."},
-
-{q:"How does simulation help with error management?",
- a:"It allows students to make mistakes safely and learn from them."},
-
-{q:"What teamwork skills are enhanced through simulation?",
- a:"Communication, collaboration, and leadership."},
-
-{q:"How does simulation promote critical thinking?",
- a:"By encouraging rapid decision-making under pressure."},
-
-{q:"What emotional aspects does simulation address?",
- a:"Stress management, empathy, and ethical dilemmas."},
-
-{q:"What is one major challenge of simulation-based learning?",
- a:"High cost of equipment and resources."},
-
-{q:"How can student anxiety during simulation be reduced?",
- a:"Through effective pre-briefing and supportive feedback."},
-
-{q:"Why is faculty training important for simulation?",
- a:"To ensure effective facilitation and learning outcomes."},
-
-{q:"What is the first step in designing a simulation activity?",
- a:"Defining clear learning objectives."},
-
-{q:"Why should simulation scenarios include ethical and cultural considerations?",
- a:"To promote empathy, respect, and culturally competent care."},
-
-  {q:"What is the main focus of future nursing education?",
- a:"Preparing nurses for complex, diverse, and unpredictable clinical environments through innovative learning strategies."},
-
-{q:"Why are traditional teaching methods no longer sufficient in nursing education?",
- a:"Because they do not adequately prepare nurses for modern healthcare complexity and rapid changes."},
-
-{q:"What technological advancements are transforming nursing education?",
- a:"Artificial Intelligence (AI), Virtual Reality (VR), and Augmented Reality (AR)."}, 
-
-{q:"How do simulation labs benefit nursing students?",
- a:"They provide immersive and realistic clinical experiences for safe practice."},
-
-{q:"Why do global health challenges affect nursing education?",
- a:"They require nurses to be culturally competent and able to respond to international health crises."},
-
-{q:"How have patient needs evolved in modern healthcare?",
- a:"There is an increase in chronic diseases, aging populations, and mental health issues."},
-
-{q:"What shift has occurred in educational philosophy?",
- a:"From teacher-centered models to learner-centered models."},
-
-{q:"What is the role of lifelong learning in nursing education?",
- a:"It encourages continuous self-directed learning and professional development."},
-
-{q:"How does Artificial Intelligence personalize learning?",
- a:"By tailoring learning paths, assessing performance, and providing instant feedback."},
-
-{q:"What role do chatbots and virtual tutors play in education?",
- a:"They offer 24/7 support and adaptive quizzes for students."},
-
-{q:"What is Virtual Reality (VR) used for in nursing education?",
- a:"To allow students to practice procedures in a fully immersive environment."},
-
-{q:"How does Augmented Reality (AR) support learning?",
- a:"By overlaying digital information onto real-world clinical settings."},
-
-{q:"What is gamification in nursing education?",
- a:"The use of game elements like points, levels, and challenges to increase engagement."},
-
-{q:"Which subjects commonly use gamification?",
- a:"Pharmacology, anatomy, and clinical reasoning."},
-
-{q:"What is microlearning?",
- a:"Short, focused learning modules designed for quick and efficient learning."},
-
-{q:"Why is mobile learning important for nursing students?",
- a:"It allows flexible, on-the-go access to learning materials."},
-
-{q:"What happens in a flipped classroom model?",
- a:"Students study theory independently and use class time for discussion and application."},
-
-{q:"What is Competency-Based Education (CBE)?",
- a:"An educational approach where students progress after demonstrating mastery of skills."},
-
-{q:"What is the main advantage of CBE?",
- a:"It ensures students are truly ready for real-world clinical practice."},
-
-{q:"What is the future role of the nurse educator?",
- a:"To act as a facilitator of innovation, mentor, global collaborator, and ethical guardian."},
-
-{q:"How does technology enhance personalized learning?",
- a:"By using data analytics to adapt content to individual student needs."},
-
-{q:"What is the digital divide challenge?",
- a:"Unequal access to technology among students."},
-
-{q:"What is a suggested solution for AI bias?",
- a:"Using transparent and inclusive data sets."},
-
-{q:"Why is over-reliance on technology a concern?",
- a:"It may reduce human connection in teaching."},
-
-{q:"What is Green Nursing?",
- a:"An approach that focuses on environmentally friendly healthcare practices while maintaining quality patient care."},
-
-{q:"What is the nurse’s role in Green Nursing?",
- a:"Reducing waste, saving energy, using eco-friendly products, and educating others about sustainability."}
-
-];
-
-function shuffle(array) {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-}
-
-let i=0;
-const card=document.getElementById("card");
-const q=document.getElementById("question");
-const a=document.getElementById("answer");
-const front=document.getElementById("front");
-const back=document.getElementById("back");
-const progress=document.getElementById("progress");
-
-function load(){
-  card.classList.remove("flip");
-  q.textContent=cards[i].q;
-  a.textContent=cards[i].a;
-  let c=colors[i%colors.length];
-  front.style.background=`linear-gradient(135deg,${c[0]},${c[1]})`;
-  back.style.background=`linear-gradient(135deg,${c[0]},${c[1]})`;
-  progress.style.width=((i+1)/cards.length)*100+"%";
-}
-
-card.onclick=()=>card.classList.toggle("flip");
-
-function next(){ i=(i+1)%cards.length; load(); }
-function prev(){ i=(i-1+cards.length)%cards.length; load(); }
-function resetAll(){ i=0; load(); }
-
-/* Swipe */
-let startX=0;
-card.addEventListener("touchstart",e=>startX=e.touches[0].clientX);
-card.addEventListener("touchend",e=>{
-  let endX=e.changedTouches[0].clientX;
-  if(startX-endX>50) next();
-  if(endX-startX>50) prev();
-});
-
-load();
-</script>
-
 </body>
 </html>
