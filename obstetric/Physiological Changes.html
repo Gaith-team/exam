@@ -1,0 +1,634 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaith Team | Exam</title>
+
+<style>
+:root{
+  --primary:#0284c7;
+  --secondary:#0ea5e9;
+  --bg:#f8fbff;
+  --card:#ffffff;
+  --soft:#e6f0ff;
+  --question:#eef7ff;
+  --option:#f9fcff;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --text:#0f172a;
+
+  /* Brand dynamic */
+  --brand1:#ffffff;
+  --brand2:#e0f2fe;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#eef6ff);
+  color:var(--text);
+}
+
+/* ================= HEADER ================= */
+header{
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* ===== Brand ===== */
+.logo{
+  position:relative;
+  font-size:28px;
+  font-weight:900;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.brand-text{
+  background:linear-gradient(90deg,var(--brand1),var(--brand2),var(--brand1));
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 4s linear infinite;
+}
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+.heart{
+  display:inline-block;
+  animation:heartbeat 1.6s infinite ease-in-out;
+}
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  animation:twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle{
+  0%{opacity:0;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.2)}
+  100%{opacity:0;transform:scale(.6)}
+}
+
+/* Reduced motion أثناء الامتحان */
+.exam .sparkle{animation-duration:5s;opacity:.4}
+.exam .heart{animation-duration:2.5s}
+
+/* After exam */
+.after .sparkle{animation-duration:2s}
+.after .heart{animation-duration:1.1s}
+
+/* ================= LAYOUT ================= */
+.container{max-width:520px;margin:auto;padding:16px}
+
+/* ===== Top Bar ===== */
+.top-bar{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+}
+.progress-box{
+  flex:1;
+  background:var(--card);
+  padding:14px;
+  border-radius:18px;
+  box-shadow:0 10px 22px rgba(2,132,199,.12);
+}
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px;
+  font-weight:800;
+  font-size:14px;
+}
+.progress{
+  height:8px;
+  background:var(--soft);
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+}
+
+/* Timer */
+.timer{
+  width:64px;height:64px;border-radius:50%;
+  background:conic-gradient(var(--primary) 0deg,var(--soft) 0deg);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;
+  background-color:var(--card);
+}
+
+/* ================= CARD ================= */
+.card{
+  background:var(--card);
+  padding:22px;
+  border-radius:24px;
+  box-shadow:0 18px 36px rgba(2,132,199,.18);
+}
+.question-title{
+  background:var(--question);
+  padding:16px;
+  border-radius:16px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+.option{
+  background:var(--option);
+  border:2px solid var(--soft);
+  border-radius:18px;
+  padding:15px;
+  margin:12px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.correct{background:#eafaf1;border-color:var(--success)}
+.option.wrong{background:#fff1f1;border-color:var(--danger)}
+.option.disabled{pointer-events:none;opacity:.9}
+
+button{
+  margin-top:18px;
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-weight:900;
+}
+
+/* Feedback */
+.feedback{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:10px;
+  animation:pop .5s;
+}
+@keyframes pop{
+  0%{transform:scale(.6);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* Report */
+.report{
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  border-left:6px solid var(--soft);
+}
+.report.correct{border-color:var(--success)}
+.report.wrong{border-color:var(--danger)}
+</style>
+</head>
+
+<body class="exam">
+
+<header>
+  <div class="logo">
+    <span class="brand-text">Gaith Team</span>
+    <span class="heart">💖</span>
+    <span class="sparkle" style="top:-8px;left:0">✨</span>
+    <span class="sparkle" style="top:6px;right:-8px">✨</span>
+    <span class="sparkle" style="bottom:-8px;left:50%">✨</span>
+  </div>
+  <div style="margin-top:6px;font-weight:800">الإمتحان في جيبك 👏🏻</div>
+</header>
+
+<div class="container">
+
+  <div class="top-bar">
+    <div class="progress-box">
+      <div class="progress-text">
+        <span id="progressText"></span>
+        <span>
+          ✔️ <span id="correctCount">0</span> |
+          ❌ <span id="wrongCount">0</span> |
+          ⏳ <span id="remainPercent">100%</span>
+        </span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="timer" id="timer">30:00</div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<script>
+/* ===== Questions ===== */
+let questions = [
+  {
+    "t": "A 28-year-old pregnant woman in her second trimester reports feeling lightheaded when lying on her back. The nurse explains this is due to 'Supine Hypotension Syndrome' caused by the compression of which structure?",
+    "o": ["Aorta", "Inferior Vena Cava", "Renal Artery", "Portal Vein"],
+    "a": 1
+  },
+  {
+    "t": "During a prenatal checkup, the nurse notes that the patient's heart is displaced upwards and outwards. This change is primarily caused by:",
+    "o": ["Hypertrophy of the heart", "Elevation of the diaphragm by the pregnant uterus", "Increased blood volume", "Decrease in thoracic circumference"],
+    "a": 1
+  },
+  {
+    "t": "A pregnant woman's lab results show a 50% increase in Glomerular Filtration Rate (GFR). The nurse knows that this change typically leads to a decrease in the serum concentration of:",
+    "o": ["Glucose", "Creatinine and Blood Urea", "Calcium", "White Blood Cells"],
+    "a": 1
+  },
+  {
+    "t": "A patient asks about the 'mask of pregnancy' (butterfly pigmentation) on her face. The nurse correctly identifies this as:",
+    "o": ["Linea Nigra", "Striae Gravidarum", "Chloasma Gravidarum", "Palmar Erythema"],
+    "a": 2
+  },
+  {
+    "t": "The nurse explains that blood volume reaches its maximum increase (45-50%) at which week of pregnancy?",
+    "o": ["12 weeks", "20 weeks", "32 weeks", "40 weeks"],
+    "a": 2
+  },
+  {
+    "t": "A woman in her third trimester complains of urinary frequency. The nurse explains that bladder capacity actually increases during pregnancy to about:",
+    "o": ["500 ml", "1000 ml", "1500 ml", "2000 ml"],
+    "a": 2
+  },
+  {
+    "t": "During labor, a patient's white blood cell (WBC) count is 25,000/mL. The nurse interprets this as:",
+    "o": ["A sign of severe infection", "A normal finding during labor", "A sign of leukemia", "A result of dehydration"],
+    "a": 1
+  },
+  {
+    "t": "Which hormone is responsible for the softening and relaxation of pelvic joints during pregnancy?",
+    "o": ["Estrogen", "Progesterone", "Oxytocin", "Prolactin"],
+    "a": 1
+  },
+  {
+    "t": "A pregnant woman reports pink lines on her abdomen and thighs. The nurse documents this as:",
+    "o": ["Striae Albicantes", "Striae Gravidarum", "Linea Nigra", "Vascular Spiders"],
+    "a": 1
+  },
+  {
+    "t": "The nurse explains that the pulse rate typically increases during pregnancy by how many beats per minute?",
+    "o": ["5-10 bpm", "10-15 bpm", "20-25 bpm", "30-40 bpm"],
+    "a": 1
+  },
+  {
+    "t": "True or False: Glycosuria in pregnancy is always a sign of diabetes mellitus.",
+    "o": ["True", "False"],
+    "a": 1
+  },
+  {
+    "t": "A patient in her third trimester experiences shortness of breath. The nurse knows that the resting position of the diaphragm shifts upwards by about:",
+    "o": ["1-2 cm", "4-5 cm", "8-10 cm", "12-15 cm"],
+    "a": 1
+  },
+  {
+    "t": "Which condition is characterized by a separation of the rectus muscles of the abdominal wall?",
+    "o": ["Lordosis", "Diastasis Recti", "Kyphosis", "Scoliosis"],
+    "a": 1
+  },
+  {
+    "t": "The nurse advises a pregnant woman that her daily calcium need is approximately:",
+    "o": ["500 mg", "800 mg", "1-1.5 gm", "3 gm"],
+    "a": 2
+  },
+  {
+    "t": "A woman asks why she has a 'stuffy nose' even though she doesn't have a cold. The nurse explains this is due to increased levels of:",
+    "o": ["Progesterone", "Estrogen", "Relaxin", "HCG"],
+    "a": 1
+  },
+  {
+    "t": "True or False: Proteinuria is considered abnormal if more than 500mg/24h is lost during pregnancy.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "Which system experiences a 20-40% increase in oxygen consumption during pregnancy?",
+    "o": ["Urinary System", "Cardiovascular System", "Respiratory System", "Digestive System"],
+    "a": 2
+  },
+  {
+    "t": "The nurse identifies the dark line of pigmentation between the umbilicus and the symphysis pubis as:",
+    "o": ["Chloasma", "Linea Nigra", "Striae", "Spider Nevi"],
+    "a": 1
+  },
+  {
+    "t": "Cardiac output increases markedly and reaches its maximum at how many weeks of gestation?",
+    "o": ["8-12 weeks", "20-24 weeks", "32-36 weeks", "38-40 weeks"],
+    "a": 1
+  },
+  {
+    "t": "A pregnant woman feels hotter than usual. The nurse explains this is related to an increased Basal Metabolic Rate (BMR) and the influence of:",
+    "o": ["Estrogen", "Progesterone", "Oxytocin", "Prolactin"],
+    "a": 1
+  },
+  {
+    "t": "The nurse explains that the kidneys increase in size by how many centimeters during pregnancy?",
+    "o": ["0.1 to 0.5 cm", "1 to 1.5 cm", "3 to 4 cm", "5 cm"],
+    "a": 1
+  },
+  {
+    "t": "True or False: Blood pressure usually drops in the second trimester of a normal pregnancy.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "Which skin change is described as small, fiery-red branching spots, particularly on the thighs and upper body?",
+    "o": ["Linea Nigra", "Vascular Spiders", "Palmar Erythema", "Striae Albicantes"],
+    "a": 1
+  },
+  {
+    "t": "The nurse explains that the subcostal angle increases from 68 degrees to how many degrees by 37 weeks?",
+    "o": ["80 degrees", "90 degrees", "103 degrees", "120 degrees"],
+    "a": 2
+  },
+  {
+    "t": "A patient's blood pressure is 145/95 mmHg. The nurse identifies this level as:",
+    "o": ["Normal in pregnancy", "Slightly low", "Abnormal", "Optimal"],
+    "a": 2
+  },
+  {
+    "t": "Which hormone production by the anterior pituitary is suppressed during pregnancy?",
+    "o": ["FSH and LH", "ACTH", "TSH", "Growth Hormone"],
+    "a": 0
+  },
+  {
+    "t": "The nurse knows that the 'physiological anemia' of pregnancy occurs because:",
+    "o": ["RBC production stops", "Plasma volume increases more than RBC mass", "The mother loses blood to the fetus", "Iron is not absorbed"],
+    "a": 1
+  },
+  {
+    "t": "What is the term for the progressive increase in the anterior convexity of the lumbar spine during pregnancy?",
+    "o": ["Kyphosis", "Lordosis", "Scoliosis", "Osteoporosis"],
+    "a": 1
+  },
+  {
+    "t": "True or False: The ureters become shorter and straighter during pregnancy.",
+    "o": ["True", "False"],
+    "a": 1
+  },
+  {
+    "t": "The nurse explains that insulin production increases during pregnancy to compensate for the antagonism of which structure?",
+    "o": ["Thyroid gland", "Adrenal gland", "Placenta", "Pituitary gland"],
+    "a": 2
+  },
+  {
+    "t": "Which position results in the highest blood pressure readings during pregnancy?",
+    "o": ["Sitting", "Supine", "Lateral or knee-chest", "Standing"],
+    "a": 2
+  },
+  {
+    "t": "The Basal Metabolic Rate (BMR) increases by what percentage in the last trimester?",
+    "o": ["5%", "10%", "20%", "50%"],
+    "a": 2
+  },
+  {
+    "t": "A woman after labor notes that her red striae have become pale silvery white. These are now known as:",
+    "o": ["Striae Gravidarum", "Striae Albicantes", "Linea Nigra", "Chloasma"],
+    "a": 1
+  },
+  {
+    "t": "True or False: Thoracic (costal) breathing replaces abdominal breathing as pregnancy advances.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "The increase in renal plasma flow during pregnancy is approximately:",
+    "o": ["5-10%", "15-20%", "25-50%", "75-100%"],
+    "a": 2
+  },
+  {
+    "t": "Which clotting factor increases during pregnancy?",
+    "o": ["Fibrinogen", "Platelets", "Vitamin K", "None of the above"],
+    "a": 0
+  },
+  {
+    "t": "The nurse explains that the heart size increases by approximately:",
+    "o": ["5%", "12%", "25%", "50%"],
+    "a": 1
+  },
+  {
+    "t": "Which endocrine gland undergoes hypertrophy due to increased demand for calcium?",
+    "o": ["Thyroid", "Parathyroid", "Adrenal", "Pancreas"],
+    "a": 1
+  },
+  {
+    "t": "The nurse knows that the maternal hyperventilation during pregnancy is a protective measure to prevent the fetus from exposure to:",
+    "o": ["High Oxygen", "High CO2", "High Nitrogen", "Low Glucose"],
+    "a": 1
+  },
+  {
+    "t": "True or False: Total lung capacity is slightly reduced (4-5%) by the elevation of the diaphragm.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "Aldosterone levels increase during pregnancy to overcome the salt-wasting effects of which hormone?",
+    "o": ["Estrogen", "Progesterone", "HCG", "Relaxin"],
+    "a": 1
+  },
+  {
+    "t": "Which skin condition is described as redness and itching on the hands due to increased estrogen?",
+    "o": ["Vascular Spiders", "Palmar Erythema", "Chloasma", "Striae"],
+    "a": 1
+  },
+  {
+    "t": "The nurse explains that 'Postpartum blues' or depression may develop due to changes in which system?",
+    "o": ["Endocrine", "Nervous", "Cardiovascular", "Urinary"],
+    "a": 1
+  },
+  {
+    "t": "True or False: Uterine blood flow increases from 50ml/min to 500ml/min at full term.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "Which hormone acts as a vasodilator and contributes to the drop in peripheral resistance?",
+    "o": ["Estrogen and Progesterone", "Oxytocin", "Prolactin", "FSH"],
+    "a": 0
+  },
+  {
+    "t": "The nurse explains that the 'tidal volume' (air exchanged during normal inspiration) increases by:",
+    "o": ["10%", "20%", "40%", "60%"],
+    "a": 2
+  },
+  {
+    "t": "A pregnant woman's kidney volume increases by up to:",
+    "o": ["10%", "30%", "50%", "70%"],
+    "a": 1
+  },
+  {
+    "t": "Which hormone production gradually increases as the fetus matures in the posterior pituitary?",
+    "o": ["ADH", "Oxytocin", "Prolactin", "Growth Hormone"],
+    "a": 1
+  },
+  {
+    "t": "True or False: Diastasis recti is a separation of the rectus muscles that can be seen in some pregnant women.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "The nurse explains that the immune system is altered during pregnancy so the mother's body doesn't reject the fetus, which is considered:",
+    "o": ["Self-tissue", "Foreign tissue", "Infected tissue", "Dead tissue"],
+    "a": 1
+  }
+
+
+];
+
+
+
+// ===== shuffle questions only =====
+function shuffleQuestions(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+// خلط الأسئلة فقط
+shuffleQuestions(questions);
+
+// تعريف المتغيرات الناقصة
+let i = 0;
+let correct = 0;
+let wrong = 0;
+let answers = [];
+let wrongSet = [];
+
+/* ===== Timer ===== */
+let totalTime=30*60, timeLeft=totalTime;
+const timerInt=setInterval(()=>{
+  timeLeft--;
+  let m=Math.floor(timeLeft/60), s=timeLeft%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  let deg=(timeLeft/totalTime)*360;
+  timer.style.background=`conic-gradient(var(--primary) ${deg}deg,var(--soft) ${deg}deg)`;
+  if(timeLeft<=0){clearInterval(timerInt);finishExam();}
+},1000);
+
+/* ===== UI ===== */
+function updateTop(){
+  let total=questions.length;
+  let answered=correct+wrong;
+  progressText.innerText=`سؤال ${i+1} من ${total}`;
+  progressBar.style.width=((i+1)/total*100)+"%";
+  correctCount.innerText=correct;
+  wrongCount.innerText=wrong;
+  remainPercent.innerText=Math.round(((total-answered)/total)*100)+"%";
+}
+
+/* ===== Render ===== */
+function show(){
+  updateTop();
+  let q = questions[i];
+
+  app.innerHTML = `
+    <div class="card">
+      <div class="question-title">${q.t}</div>
+      ${q.o.map((o,idx)=>`
+        <div class="option" onclick="choose(${idx})">${o}</div>
+      `).join("")}
+    </div>
+  `;
+}
+/* ===== Choose ===== */
+function choose(v){
+  if(answers[i]!=null) return;
+  answers[i]=v;
+  let ok=v===questions[i].a;
+  ok?correct++:wrong++;
+  app.innerHTML=`
+    <div class="feedback">${ok?"🎉 شاطر جدًا كمل":"😅 ركّز يا سُكر"}</div>
+    <div class="card">
+      <div class="question-title">${questions[i].t}</div>
+      ${questions[i].o.map((o,j)=>`
+        <div class="option ${j===questions[i].a?"correct":j===v?"wrong":""} disabled">${o}</div>
+      `).join("")}
+      <button onclick="next()">التالي</button>
+    </div>`;
+}
+
+/* ===== Next ===== */
+function next(){
+  if(i<questions.length-1){i++;show();}
+  else finishExam();
+}
+
+/* ===== Finish ===== */
+function finishExam(){
+  document.body.classList.remove("exam");
+  document.body.classList.add("after");
+
+  let score=Math.round((correct/questions.length)*100);
+
+  if(score>=80){
+    document.documentElement.style.setProperty("--brand1","#22c55e");
+    document.documentElement.style.setProperty("--brand2","#fde047");
+  }else if(score>=50){
+    document.documentElement.style.setProperty("--brand1","#38bdf8");
+    document.documentElement.style.setProperty("--brand2","#e0f2fe");
+  }else{
+    document.documentElement.style.setProperty("--brand1","#fb923c");
+    document.documentElement.style.setProperty("--brand2","#fed7aa");
+  }
+
+  wrongSet=[];
+  let report="";
+  questions.forEach((q,idx)=>{
+    let ok=answers[idx]===q.a;
+    if(!ok) wrongSet.push(q);
+    report+=`
+      <div class="report ${ok?"correct":"wrong"}">
+        <b>${q.t}</b><br>
+إجابتك: ${answers[idx]!=null ? q.o[answers[idx]] : "لم يتم الحل"}<br>
+الصح: ${q.o[q.a]}
+      </div>`;
+  });
+
+  app.innerHTML=`
+    <div class="card">
+      <h3>?? تقريرك</h3>
+      ${report}
+      ${wrongSet.length?`<button onclick="retry()">إعادة حل الغلط فقط</button>`:"<p>أنت ممتاز 👑</p>"}
+    </div>`;
+}
+
+/* ===== Retry Wrong ===== */
+function retry(){
+  // نبدأ امتحان جديد بالأسئلة الغلط فقط
+  questions = [...wrongSet];
+
+  answers = [];
+  wrongSet = [];
+  i = 0;
+  correct = 0;
+  wrong = 0;
+
+  // رجوع لشكل الامتحان
+  document.body.classList.remove("after");
+  document.body.classList.add("exam");
+
+  show();
+}
+
+show();
+</script>
+
+</body>
+</html>
