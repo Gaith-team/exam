@@ -1,0 +1,632 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaith Team | Exam</title>
+
+<style>
+:root{
+  --primary:#0284c7;
+  --secondary:#0ea5e9;
+  --bg:#f8fbff;
+  --card:#ffffff;
+  --soft:#e6f0ff;
+  --question:#eef7ff;
+  --option:#f9fcff;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --text:#0f172a;
+
+  /* Brand dynamic */
+  --brand1:#ffffff;
+  --brand2:#e0f2fe;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#eef6ff);
+  color:var(--text);
+}
+
+/* ================= HEADER ================= */
+header{
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* ===== Brand ===== */
+.logo{
+  position:relative;
+  font-size:28px;
+  font-weight:900;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.brand-text{
+  background:linear-gradient(90deg,var(--brand1),var(--brand2),var(--brand1));
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 4s linear infinite;
+}
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+.heart{
+  display:inline-block;
+  animation:heartbeat 1.6s infinite ease-in-out;
+}
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  animation:twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle{
+  0%{opacity:0;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.2)}
+  100%{opacity:0;transform:scale(.6)}
+}
+
+/* Reduced motion أثناء الامتحان */
+.exam .sparkle{animation-duration:5s;opacity:.4}
+.exam .heart{animation-duration:2.5s}
+
+/* After exam */
+.after .sparkle{animation-duration:2s}
+.after .heart{animation-duration:1.1s}
+
+/* ================= LAYOUT ================= */
+.container{max-width:520px;margin:auto;padding:16px}
+
+/* ===== Top Bar ===== */
+.top-bar{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+}
+.progress-box{
+  flex:1;
+  background:var(--card);
+  padding:14px;
+  border-radius:18px;
+  box-shadow:0 10px 22px rgba(2,132,199,.12);
+}
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px;
+  font-weight:800;
+  font-size:14px;
+}
+.progress{
+  height:8px;
+  background:var(--soft);
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+}
+
+/* Timer */
+.timer{
+  width:64px;height:64px;border-radius:50%;
+  background:conic-gradient(var(--primary) 0deg,var(--soft) 0deg);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;
+  background-color:var(--card);
+}
+
+/* ================= CARD ================= */
+.card{
+  background:var(--card);
+  padding:22px;
+  border-radius:24px;
+  box-shadow:0 18px 36px rgba(2,132,199,.18);
+}
+.question-title{
+  background:var(--question);
+  padding:16px;
+  border-radius:16px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+.option{
+  background:var(--option);
+  border:2px solid var(--soft);
+  border-radius:18px;
+  padding:15px;
+  margin:12px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.correct{background:#eafaf1;border-color:var(--success)}
+.option.wrong{background:#fff1f1;border-color:var(--danger)}
+.option.disabled{pointer-events:none;opacity:.9}
+
+button{
+  margin-top:18px;
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-weight:900;
+}
+
+/* Feedback */
+.feedback{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:10px;
+  animation:pop .5s;
+}
+@keyframes pop{
+  0%{transform:scale(.6);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* Report */
+.report{
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  border-left:6px solid var(--soft);
+}
+.report.correct{border-color:var(--success)}
+.report.wrong{border-color:var(--danger)}
+</style>
+</head>
+
+<body class="exam">
+
+<header>
+  <div class="logo">
+    <span class="brand-text">Gaith Team</span>
+    <span class="heart">💖</span>
+    <span class="sparkle" style="top:-8px;left:0">✨</span>
+    <span class="sparkle" style="top:6px;right:-8px">✨</span>
+    <span class="sparkle" style="bottom:-8px;left:50%">✨</span>
+  </div>
+  <div style="margin-top:6px;font-weight:800">الإمتحان في جيبك 👏🏻</div>
+</header>
+
+<div class="container">
+
+  <div class="top-bar">
+    <div class="progress-box">
+      <div class="progress-text">
+        <span id="progressText"></span>
+        <span>
+          ✔️ <span id="correctCount">0</span> |
+          ❌ <span id="wrongCount">0</span> |
+          ⏳ <span id="remainPercent">100%</span>
+        </span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="timer" id="timer">30:00</div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<script>
+/* ===== Questions ===== */
+let questions = [
+  {
+    "t": "A 25-year-old woman is trying to conceive. She asks the nurse where fertilization typically takes place. The nurse correctly identifies the site as:",
+    "o": ["Uterine cavity", "Cervical canal", "Ampullary portion of the fallopian tube", "Ovarian surface"],
+    "a": 2
+  },
+  {
+    "t": "During a prenatal education class, the nurse describes the sperm cell. Which part of the sperm contains the mitochondria that provide energy for swimming?",
+    "o": ["Head", "Neck", "Middle-piece", "Tail"],
+    "a": 2
+  },
+  {
+    "t": "A student nurse is reviewing the process of fertilization. Which enzyme is secreted by the sperm acrosome to destroy the hyaluronic acid of the egg cell?",
+    "o": ["Amylase", "Hyaluronidase", "Pepsin", "Lipase"],
+    "a": 1
+  },
+  {
+    "t": "The nurse explains that once a sperm and ovum fuse, they form a single cell with 46 chromosomes called a:",
+    "o": ["Morula", "Blastocyst", "Zygote", "Trophoblast"],
+    "a": 2
+  },
+  {
+    "t": "A patient is 4 days post-fertilization. The nurse knows that the developing embryo is now a solid mass of 16 cells called a:",
+    "o": ["Zygote", "Morula", "Blastocyst", "Embryo"],
+    "a": 1
+  },
+  {
+    "t": "At what stage of development does the embryo typically reach the uterine cavity?",
+    "o": ["Zygote stage", "2-cell stage", "Morula stage", "Blastocyst stage"],
+    "a": 2
+  },
+  {
+    "t": "The nurse describes the 'Blastocyst' stage. Which part of the blastocyst will eventually develop into the placenta and chorion?",
+    "o": ["Inner cell mass", "Trophoblast", "Zona pellucida", "Corona radiata"],
+    "a": 1
+  },
+  {
+    "t": "A pregnant woman asks when the baby actually 'attaches' to the uterus. The nurse explains that implantation is usually completed by which day after fertilization?",
+    "o": ["3rd day", "5th day", "7th day", "10th or 11th day"],
+    "a": 3
+  },
+  {
+    "t": "The nurse identifies the 'pregnant endometrium' as the:",
+    "o": ["Myometrium", "Perimetrium", "Decidua", "Endocervix"],
+    "a": 2
+  },
+  {
+    "t": "Which part of the decidua covers the developing ovum?",
+    "o": ["Decidua basalis", "Decidua capsularis", "Decidua parietalis", "Decidua vera"],
+    "a": 1
+  },
+  {
+    "t": "The nurse is examining a placenta at term. She notes it has a discoid shape and weighs approximately:",
+    "o": ["100-200 gm", "300-400 gm", "500-600 gm", "800-1000 gm"],
+    "a": 2
+  },
+  {
+    "t": "On the maternal side of the placenta, the nurse observes 15 to 20 lobes called:",
+    "o": ["Villi", "Chorion", "Cotyledons", "Amnion"],
+    "a": 2
+  },
+  {
+    "t": "The umbilical cord contains three vessels. Which vessel carries oxygenated blood to the fetus?",
+    "o": ["Right Umbilical Artery", "Left Umbilical Artery", "Umbilical Vein", "Ductus Venosus"],
+    "a": 2
+  },
+  {
+    "t": "What is the name of the gelatinous substance that surrounds and protects the vessels within the umbilical cord?",
+    "o": ["Amniotic fluid", "Wharton's jelly", "Vernix caseosa", "Lanugo"],
+    "a": 1
+  },
+  {
+    "t": "A nurse is assessing the amniotic fluid. She knows that the fluid is completely changed and replaced every:",
+    "o": ["1 hour", "3 hours", "12 hours", "24 hours"],
+    "a": 1
+  },
+  {
+    "t": "During an assessment, the nurse notes the amniotic fluid is 'green-tinged'. This most likely indicates:",
+    "o": ["Hemolytic disease", "Fetal distress (meconium staining)", "Infection", "Normal finding"],
+    "a": 1
+  },
+  {
+    "t": "A patient asks about the volume of amniotic fluid. The nurse explains it reaches its peak of about 1 litre at:",
+    "o": ["20 weeks", "28 weeks", "36-38 weeks", "42 weeks"],
+    "a": 2
+  },
+  {
+    "t": "The pH of amniotic fluid is typically:",
+    "o": ["Highly acidic (3.0-4.0)", "Slightly acidic (5.5-6.5)", "Neutral to alkaline (7.0-7.25)", "Highly alkaline (9.0-10.0)"],
+    "a": 2
+  },
+  {
+    "t": "Which hormone is NOT mentioned as being produced by the placenta?",
+    "o": ["Estrogen", "Progesterone", "H.C.G", "Insulin"],
+    "a": 3
+  },
+  {
+    "t": "True or False: The fetal side of the placenta is white and shiny in appearance.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "A nurse is teaching about fetal sex determination. If a mature ovum (23x) is fertilized by a mature sperm (23y), the resulting sex is:",
+    "o": ["Female", "Male", "Twin", "Indeterminate"],
+    "a": 1
+  },
+  {
+    "t": "Which structure provides nutrition to the growing ovum in the form of glycogen and lipids before the placenta is fully functional?",
+    "o": ["Amnion", "Endometrium (Decidua)", "Umbilical cord", "Yolk sac"],
+    "a": 1
+  },
+  {
+    "t": "The nurse explains that the primary membrane of the ovum, secreted by the egg itself, is the:",
+    "o": ["Corona radiata", "Zona pellucida", "Albumen", "Vitelline membrane"],
+    "a": 1
+  },
+  {
+    "t": "How many chromosomes are in a mature spermatozoon?",
+    "o": ["22", "23", "44", "46"],
+    "a": 1
+  },
+  {
+    "t": "The 'Capacitation' of spermatozoa, which allows them to fertilize the egg, occurs in the fallopian tube and takes about:",
+    "o": ["30 minutes", "2-6 hours", "12-24 hours", "2 days"],
+    "a": 1
+  },
+  {
+    "t": "True or False: The amniotic fluid acts as an antiseptic solution after the rupture of membranes.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "Which germ layer develops in the floor of the amniotic cavity?",
+    "o": ["Ectoderm", "Mesoderm", "Endoderm", "Trophoblast"],
+    "a": 0
+  },
+  {
+    "t": "The umbilical cord is developed from the:",
+    "o": ["Yolk sac", "Ventral connected stalk", "Decidua basalis", "Chorion frondosum"],
+    "a": 1
+  },
+  {
+    "t": "Golden-colored amniotic fluid is associated with:",
+    "o": ["Fetal distress", "Hemolytic disease", "Infection", "Post-maturity"],
+    "a": 1
+  },
+  {
+    "t": "What percentage of amniotic fluid is water?",
+    "o": ["50%", "75%", "90%", "99%"],
+    "a": 3
+  },
+  {
+    "t": "True or False: Prostaglandins in the seminal plasma help the ascent of spermatozoa by increasing uterine peristalsis.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "The thickness of the placenta at its center is approximately:",
+    "o": ["0.5-1 cm", "2.5-3 cm", "5-6 cm", "10 cm"],
+    "a": 1
+  },
+  {
+    "t": "Which part of the sperm contains the genetic information?",
+    "o": ["Head", "Neck", "Middle-piece", "Tail"],
+    "a": 0
+  },
+  {
+    "t": "The secondary membrane of the ovum, contributed by the ovary, is the:",
+    "o": ["Zona pellucida", "Corona radiata", "Albumen", "Shell membrane"],
+    "a": 1
+  },
+  {
+    "t": "A nurse is explaining the 'Acrosomal reaction'. This process allows the sperm to:",
+    "o": ["Swim faster", "Enter the uterus", "Penetrate the corona radiata and zona pellucida", "Determine the fetal sex"],
+    "a": 2
+  },
+  {
+    "t": "The solid mass of cells (Morula) is formed after how many days of fertilization?",
+    "o": ["1 day", "2 days", "4 days", "7 days"],
+    "a": 2
+  },
+  {
+    "t": "Which structure in the blastocyst will eventually form the embryo?",
+    "o": ["Trophoblast", "Inner cell mass", "Blastocele", "Zona pellucida"],
+    "a": 1
+  },
+  {
+    "t": "True or False: The placenta starts developing in the 6th week and is completed by the 12th week of fertilization.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "The site of implantation is usually in which segment of the uterus?",
+    "o": ["Lower uterine segment", "Upper uterine segment", "Cervical canal", "Isthmus"],
+    "a": 1
+  },
+  {
+    "t": "Which part of the decidua lines the rest of the endometrium (not covering the ovum or at the base)?",
+    "o": ["Decidua basalis", "Decidua capsularis", "Decidua parietalis", "Decidua vera"],
+    "a": 2
+  },
+  {
+    "t": "The umbilical cord length at term is typically:",
+    "o": ["10 cm", "25 cm", "50 cm", "100 cm"],
+    "a": 2
+  },
+  {
+    "t": "True or False: The two umbilical arteries carry oxygenated blood from the placenta to the fetus.",
+    "o": ["True", "False"],
+    "a": 1
+  },
+  {
+    "t": "Which of the following is a function of amniotic fluid?",
+    "o": ["Protects fetus from trauma", "Maintains constant temperature", "Permits symmetrical growth", "All of the above"],
+    "a": 3
+  },
+  {
+    "t": "Amniotic fluid volume at term (40 weeks) is approximately:",
+    "o": ["200-400 ml", "600-800 ml", "1000-1200 ml", "1500-2000 ml"],
+    "a": 1
+  },
+  {
+    "t": "Which germ layer develops in the roof of the yolk sac?",
+    "o": ["Ectoderm", "Mesoderm", "Endoderm", "Trophoblast"],
+    "a": 2
+  },
+  {
+    "t": "The presence of lanugo and epithelial scales in the amniotic fluid indicates it is being:",
+    "o": ["Secreted by the mother", "Swallowed by the fetus", "Filtered by the placenta", "Excreted by the kidneys"],
+    "a": 1
+  },
+  {
+    "t": "Gray-colored amniotic fluid suggests:",
+    "o": ["Fetal distress", "Hemolytic disease", "Infection", "Normal state"],
+    "a": 2
+  },
+  {
+    "t": "True or False: The placenta at term continues to function until 40-41 weeks and then begins to degenerate.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "Which protein hormone produced by the placenta is responsible for testing pregnancy?",
+    "o": ["H.P.L", "ACTH", "H.C.G", "Relaxin"],
+    "a": 2
+  },
+  {
+    "t": "The maternal side of the placenta is supplied with how many vessels per cotyledon?",
+    "o": ["1 artery and 1 vein", "2 arteries and 1 vein", "1 artery and 2 veins", "2 arteries and 2 veins"],
+    "a": 1
+  }
+];
+
+
+
+// ===== shuffle questions only =====
+function shuffleQuestions(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+// خلط الأسئلة فقط
+shuffleQuestions(questions);
+
+// تعريف المتغيرات الناقصة
+let i = 0;
+let correct = 0;
+let wrong = 0;
+let answers = [];
+let wrongSet = [];
+
+/* ===== Timer ===== */
+let totalTime=30*60, timeLeft=totalTime;
+const timerInt=setInterval(()=>{
+  timeLeft--;
+  let m=Math.floor(timeLeft/60), s=timeLeft%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  let deg=(timeLeft/totalTime)*360;
+  timer.style.background=`conic-gradient(var(--primary) ${deg}deg,var(--soft) ${deg}deg)`;
+  if(timeLeft<=0){clearInterval(timerInt);finishExam();}
+},1000);
+
+/* ===== UI ===== */
+function updateTop(){
+  let total=questions.length;
+  let answered=correct+wrong;
+  progressText.innerText=`سؤال ${i+1} من ${total}`;
+  progressBar.style.width=((i+1)/total*100)+"%";
+  correctCount.innerText=correct;
+  wrongCount.innerText=wrong;
+  remainPercent.innerText=Math.round(((total-answered)/total)*100)+"%";
+}
+
+/* ===== Render ===== */
+function show(){
+  updateTop();
+  let q = questions[i];
+
+  app.innerHTML = `
+    <div class="card">
+      <div class="question-title">${q.t}</div>
+      ${q.o.map((o,idx)=>`
+        <div class="option" onclick="choose(${idx})">${o}</div>
+      `).join("")}
+    </div>
+  `;
+}
+/* ===== Choose ===== */
+function choose(v){
+  if(answers[i]!=null) return;
+  answers[i]=v;
+  let ok=v===questions[i].a;
+  ok?correct++:wrong++;
+  app.innerHTML=`
+    <div class="feedback">${ok?"🎉 شاطر جدًا كمل":"😅 ركّز يا سُكر"}</div>
+    <div class="card">
+      <div class="question-title">${questions[i].t}</div>
+      ${questions[i].o.map((o,j)=>`
+        <div class="option ${j===questions[i].a?"correct":j===v?"wrong":""} disabled">${o}</div>
+      `).join("")}
+      <button onclick="next()">التالي</button>
+    </div>`;
+}
+
+/* ===== Next ===== */
+function next(){
+  if(i<questions.length-1){i++;show();}
+  else finishExam();
+}
+
+/* ===== Finish ===== */
+function finishExam(){
+  document.body.classList.remove("exam");
+  document.body.classList.add("after");
+
+  let score=Math.round((correct/questions.length)*100);
+
+  if(score>=80){
+    document.documentElement.style.setProperty("--brand1","#22c55e");
+    document.documentElement.style.setProperty("--brand2","#fde047");
+  }else if(score>=50){
+    document.documentElement.style.setProperty("--brand1","#38bdf8");
+    document.documentElement.style.setProperty("--brand2","#e0f2fe");
+  }else{
+    document.documentElement.style.setProperty("--brand1","#fb923c");
+    document.documentElement.style.setProperty("--brand2","#fed7aa");
+  }
+
+  wrongSet=[];
+  let report="";
+  questions.forEach((q,idx)=>{
+    let ok=answers[idx]===q.a;
+    if(!ok) wrongSet.push(q);
+    report+=`
+      <div class="report ${ok?"correct":"wrong"}">
+        <b>${q.t}</b><br>
+إجابتك: ${answers[idx]!=null ? q.o[answers[idx]] : "لم يتم الحل"}<br>
+الصح: ${q.o[q.a]}
+      </div>`;
+  });
+
+  app.innerHTML=`
+    <div class="card">
+      <h3>?? تقريرك</h3>
+      ${report}
+      ${wrongSet.length?`<button onclick="retry()">إعادة حل الغلط فقط</button>`:"<p>أنت ممتاز 👑</p>"}
+    </div>`;
+}
+
+/* ===== Retry Wrong ===== */
+function retry(){
+  // نبدأ امتحان جديد بالأسئلة الغلط فقط
+  questions = [...wrongSet];
+
+  answers = [];
+  wrongSet = [];
+  i = 0;
+  correct = 0;
+  wrong = 0;
+
+  // رجوع لشكل الامتحان
+  document.body.classList.remove("after");
+  document.body.classList.add("exam");
+
+  show();
+}
+
+show();
+</script>
+
+</body>
+</html>
