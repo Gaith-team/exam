@@ -18,18 +18,21 @@
     --text-dark:#ffffff;
     --text-light:#0f172a;
 
-    /* Nursing Colors */
-    --man-a:#5b6cff;
-    --man-b:#3642b5;
+    /* 🔥 High Contrast (مواد تقيلة) */
+    --man-a:#ff003c;
+    --man-b:#9f1239;
 
+    /* 🧠 Psychiatric */
     --psy-a:#4fa3a5;
     --psy-b:#2f6f73;
 
-    --obs-a:#ec4899;
-    --obs-b:#be185d;
+    /* 🤰 Obstetric – default (Light will override) */
+    --obs-a:#fbcfe8;
+    --obs-b:#f472b6;
 
-    --ped-a:#14b8a6;
-    --ped-b:#0f766e;
+    /* 🍼 Pediatric – Mint Pastel */
+    --ped-a:#a7f3d0;
+    --ped-b:#34d399;
 }
 
 /* ================= BASE ================= */
@@ -51,15 +54,9 @@ body.light{
 .header{
     padding:70px 20px 40px;
 }
-.header h1{
-    margin:0;
-    font-size:34px;
-}
+.header h1{margin:0;font-size:34px}
 .header span{color:#ef4444}
-.header p{
-    margin-top:10px;
-    opacity:.75;
-}
+.header p{margin-top:10px;opacity:.75}
 
 /* ================= CONTAINER ================= */
 .container{
@@ -80,13 +77,12 @@ body.light{
     border-radius:40px;
     font-size:20px;
     text-decoration:none;
-    color:#fff;
     box-shadow:var(--glow);
     transition:.3s;
 }
 .subject a:hover{
     transform:translateY(-3px);
-    filter:brightness(1.06);
+    filter:brightness(1.05);
 }
 
 /* ================= LEFT ================= */
@@ -102,30 +98,62 @@ body.light{
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:20px;
+    font-size:22px;
     box-shadow:0 6px 16px rgba(0,0,0,.35);
 }
 
-/* ================= COLORS ================= */
-.management a{
-    background:linear-gradient(135deg,var(--man-a),var(--man-b));
-}
-.management .icon{background:var(--man-b)}
-
-.obstetric a{
-    background:linear-gradient(135deg,var(--obs-a),var(--obs-b));
-}
-.obstetric .icon{background:var(--obs-b)}
-
+/* ================= 🍼 Pediatric – Mint Pastel ================= */
 .pediatric a{
     background:linear-gradient(135deg,var(--ped-a),var(--ped-b));
+    color:#064e3b;
 }
-.pediatric .icon{background:var(--ped-b)}
+.pediatric .icon{
+    background:#ecfdf5;
+    color:#065f46;
+}
 
+/* ================= 🤰 Obstetric – Dark / Light Different ================= */
+.obstetric a{
+    background:linear-gradient(135deg,var(--obs-a),var(--obs-b));
+    color:#1f2937;
+}
+.obstetric .icon{
+    background:#fff;
+    color:#be185d;
+}
+
+/* 🌙 Dark mode override */
+body:not(.light){
+    --obs-a:#6d28d9;
+    --obs-b:#4c1d95;
+}
+body:not(.light) .obstetric a{
+    color:#fff;
+}
+body:not(.light) .obstetric .icon{
+    background:#2e1065;
+    color:#ddd6fe;
+}
+
+/* ================= 🔥 High Contrast – Management ================= */
+.management a{
+    background:linear-gradient(135deg,var(--man-a),var(--man-b));
+    color:#fff;
+    font-weight:700;
+    letter-spacing:.5px;
+}
+.management .icon{
+    background:#7f1d1d;
+}
+
+/* ================= 🧠 Psychiatric ================= */
 .psychiatric a{
     background:linear-gradient(135deg,var(--psy-a),var(--psy-b));
+    color:#fff;
 }
-.psychiatric .icon{background:var(--psy-b)}
+.psychiatric .icon{
+    background:var(--psy-b);
+}
 
 /* ================= TELEGRAM ================= */
 .telegram{
@@ -170,19 +198,8 @@ body.light{
 </div>
 
 <div class="container">
-    
-    <!-- Obstetric Nursing -->
-    <div class="subject obstetric">
-        <a href="obstetric/index.html">
-            <div class="left">
-                <div class="icon">🤰</div>
-                تمريض نسا وتوليد
-            </div>
-            ▸
-        </a>
-    </div>
 
-    <!-- Pediatric Nursing -->
+    <!-- 🍼 Pediatric Nursing -->
     <div class="subject pediatric">
         <a href="pediatric/index.html">
             <div class="left">
@@ -193,7 +210,18 @@ body.light{
         </a>
     </div>
 
-    <!-- Nursing Management -->
+    <!-- 🤰 Obstetric Nursing -->
+    <div class="subject obstetric">
+        <a href="obstetric/index.html">
+            <div class="left">
+                <div class="icon">🤰</div>
+                تمريض نسا وتوليد
+            </div>
+            ▸
+        </a>
+    </div>
+
+    <!-- 🔥 Nursing Management -->
     <div class="subject management">
         <a href="management/index.html">
             <div class="left">
@@ -203,7 +231,8 @@ body.light{
             ▸
         </a>
     </div>
-    <!-- Psychiatric Nursing -->
+
+    <!-- 🧠 Psychiatric Nursing -->
     <div class="subject psychiatric">
         <a href="psychiatric/index.html">
             <div class="left">
