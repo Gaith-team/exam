@@ -1,0 +1,928 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaith Team | Exam</title>
+
+<style>
+:root{
+  --primary:#0284c7;
+  --secondary:#0ea5e9;
+  --bg:#f8fbff;
+  --card:#ffffff;
+  --soft:#e6f0ff;
+  --question:#eef7ff;
+  --option:#f9fcff;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --text:#0f172a;
+
+  /* Brand dynamic */
+  --brand1:#ffffff;
+  --brand2:#e0f2fe;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#eef6ff);
+  color:var(--text);
+}
+
+/* ================= HEADER ================= */
+header{
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* ===== Brand ===== */
+.logo{
+  position:relative;
+  font-size:28px;
+  font-weight:900;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.brand-text{
+  background:linear-gradient(90deg,var(--brand1),var(--brand2),var(--brand1));
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 4s linear infinite;
+}
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+.heart{
+  display:inline-block;
+  animation:heartbeat 1.6s infinite ease-in-out;
+}
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  animation:twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle{
+  0%{opacity:0;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.2)}
+  100%{opacity:0;transform:scale(.6)}
+}
+
+/* Reduced motion أثناء الامتحان */
+.exam .sparkle{animation-duration:5s;opacity:.4}
+.exam .heart{animation-duration:2.5s}
+
+/* After exam */
+.after .sparkle{animation-duration:2s}
+.after .heart{animation-duration:1.1s}
+
+/* ================= LAYOUT ================= */
+.container{max-width:520px;margin:auto;padding:16px}
+
+/* ===== Top Bar ===== */
+.top-bar{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+}
+.progress-box{
+  flex:1;
+  background:var(--card);
+  padding:14px;
+  border-radius:18px;
+  box-shadow:0 10px 22px rgba(2,132,199,.12);
+}
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px;
+  font-weight:800;
+  font-size:14px;
+}
+.progress{
+  height:8px;
+  background:var(--soft);
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+}
+
+/* Timer */
+.timer{
+  width:64px;height:64px;border-radius:50%;
+  background:conic-gradient(var(--primary) 0deg,var(--soft) 0deg);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;
+  background-color:var(--card);
+}
+
+/* ================= CARD ================= */
+.card{
+  background:var(--card);
+  padding:22px;
+  border-radius:24px;
+  box-shadow:0 18px 36px rgba(2,132,199,.18);
+}
+.question-title{
+  background:var(--question);
+  padding:16px;
+  border-radius:16px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+.option{
+  background:var(--option);
+  border:2px solid var(--soft);
+  border-radius:18px;
+  padding:15px;
+  margin:12px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.correct{background:#eafaf1;border-color:var(--success)}
+.option.wrong{background:#fff1f1;border-color:var(--danger)}
+.option.disabled{pointer-events:none;opacity:.9}
+
+button{
+  margin-top:18px;
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-weight:900;
+}
+
+/* Feedback */
+.feedback{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:10px;
+  animation:pop .5s;
+}
+@keyframes pop{
+  0%{transform:scale(.6);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* Report */
+.report{
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  border-left:6px solid var(--soft);
+}
+.report.correct{border-color:var(--success)}
+.report.wrong{border-color:var(--danger)}
+</style>
+</head>
+
+<body class="exam">
+
+<header>
+  <div class="logo">
+    <span class="brand-text">Gaith Team</span>
+    <span class="heart">💖</span>
+    <span class="sparkle" style="top:-8px;left:0">✨</span>
+    <span class="sparkle" style="top:6px;right:-8px">✨</span>
+    <span class="sparkle" style="bottom:-8px;left:50%">✨</span>
+  </div>
+  <div style="margin-top:6px;font-weight:800">الإمتحان في جيبك 👏🏻</div>
+</header>
+
+<div class="container">
+
+  <div class="top-bar">
+    <div class="progress-box">
+      <div class="progress-text">
+        <span id="progressText"></span>
+        <span>
+          ✔️ <span id="correctCount">0</span> |
+          ❌ <span id="wrongCount">0</span> |
+          ⏳ <span id="remainPercent">100%</span>
+        </span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="timer" id="timer">240:00</div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<script>
+/* ===== Questions ===== */
+let questions = [
+/* ============== 5 MCQ ============== */
+
+{t:"Continuity of care mainly focuses on:",o:["Single episode of care","Quality of care over time","Emergency management","Hospital policies"],a:1},
+
+{t:"Planning continuity patient care begins:",o:["At discharge only","After admission","At first contact or before admission","During follow-up only"],a:2},
+
+{t:"Which domain of continuity refers to availability of information?",o:["Interpersonal","Longitudinal","Management","Informational"],a:3},
+
+{t:"Care coordination is best described as:",o:["Fragmented care","Reactive care","Proactive integrated care","Doctor-centered care"],a:2},
+
+{t:"Which is NOT a domain of continuity?",o:["Interpersonal","Informational","Financial","Management"],a:2},
+
+
+/* ============== 20 CASE QUESTIONS ============== */
+
+{t:"A nurse ensures discharge information is shared with community services. This reflects:",o:["Interpersonal continuity","Informational continuity","Relationship continuity","Longitudinal continuity"],a:1},
+
+{t:"A patient always meets the same nurse over time. This is:",o:["Management continuity","Relationship continuity","Informational continuity","Care coordination"],a:1},
+
+{t:"A chronic patient requires multiple services and coordination. This emphasizes:",o:["Minimal planning","Management continuity","Accidental care","Routine discharge"],a:1},
+
+{t:"A nurse starts discharge planning on admission day. This supports:",o:["Cost reduction","Continuity of care","Early discharge","Hospital routine"],a:1},
+
+{t:"Reduced readmission rates are a result of:",o:["Poor documentation","Good continuity planning","Extended hospitalization","Limited follow-up"],a:1},
+
+{t:"A patient-centered conference mainly focuses on:",o:["Staff schedules","Patient needs and problems","Hospital policies","Medical orders"],a:1},
+
+{t:"At the beginning of shift, nurses receive assignments. This is:",o:["Reporting conference","Direction-giving conference","Content conference","General problem conference"],a:1},
+
+{t:"Discussing patient problems and planning care occurs in:",o:["Content conference","Patient-centered conference","Reporting conference","General problem conference"],a:1},
+
+{t:"Updating the nursing care plan during off-duty report ensures:",o:["Documentation only","Continuity of care","Staff discipline","Medical authority"],a:1},
+
+{t:"A conference where staff express work-related problems is:",o:["Reporting","Content","General problem","Direction-giving"],a:2},
+
+{t:"The main purpose of nursing conferences is to:",o:["Replace care plans","Plan individualized nursing care","Evaluate doctors","Control staff"],a:1},
+
+{t:"A nursing care plan is best described as:",o:["Doctor’s prescription","Written guide for nursing care","Shift report","Hospital policy"],a:1},
+
+{t:"Identifying patient needs and problems occurs in which step?",o:["Planning","Assessment","Implementation","Evaluation"],a:1},
+
+{t:"Setting goals and deciding nursing actions is part of:",o:["Assessment","Planning","Implementation","Evaluation"],a:1},
+
+{t:"Carrying out nursing instructions is:",o:["Assessment","Planning","Implementation","Evaluation"],a:2},
+
+{t:"Determining whether goals are achieved is:",o:["Assessment","Planning","Implementation","Evaluation"],a:3},
+
+{t:"Maslow’s hierarchy is mainly used during:",o:["Implementation","Evaluation","Planning","Documentation"],a:2},
+
+{t:"Confidential patient information should:",o:["Be included","Be shared","Not be included","Be documented daily"],a:2},
+
+{t:"Keeping the care plan up to date occurs during:",o:["Rounds and conferences","Admission only","Discharge only","Orientation"],a:0},
+
+{t:"Electronic health records mainly enhance:",o:["Relationship continuity","Informational continuity","Staffing","Leadership"],a:1},
+
+
+/* ============== 5 TRUE / FALSE ============== */
+
+{t:"Continuity of care planning is only for complex patients.",o:["True","False"],a:1},
+
+{t:"Interpersonal continuity builds trust between patient and provider.",o:["True","False"],a:0},
+
+{t:"Nursing care plan is a communication tool among caregivers.",o:["True","False"],a:0},
+
+{t:"Evaluation is a continuous process in nursing care planning.",o:["True","False"],a:0},
+
+{t:"Nursing conference helps coordinate available services.",o:["True","False"],a:0},
+
+/* ============== 5 MCQ ============== */
+
+{t:"Motivation is best defined as:",o:["Controlling people","Inspiring people to exert effort toward goals","Supervising staff","Evaluating performance"],a:1},
+
+{t:"Which need influences behavior according to Maslow?",o:["Satisfied needs","Unsatisfied needs","Completed goals","Rewards only"],a:1},
+
+{t:"The lowest level in Maslow’s hierarchy is:",o:["Safety","Social","Physiological","Esteem"],a:2},
+
+{t:"Intrinsic motivation is mainly:",o:["External rewards","Fear-based","Internal and self-driven","Punishment-based"],a:2},
+
+{t:"Salary and benefits are examples of:",o:["Intrinsic motivation","Extrinsic motivation","Self-actualization","Competence motivation"],a:1},
+
+
+/* ============== 20 CASE QUESTIONS ============== */
+
+{t:"A nurse works harder because she enjoys her job responsibilities. This is:",o:["Extrinsic motivation","Intrinsic motivation","Reward motivation","Fear motivation"],a:1},
+
+{t:"A nurse improves performance to receive a bonus. This reflects:",o:["Intrinsic motivation","Extrinsic motivation","Reward motivation","Power motivation"],a:2},
+
+{t:"A manager provides meal breaks and drinking water. Which need is addressed?",o:["Safety","Physiological","Esteem","Social"],a:1},
+
+{t:"Providing a secure work environment meets which need?",o:["Physiological","Safety","Social","Esteem"],a:1},
+
+{t:"Encouraging teamwork and friendships satisfies:",o:["Esteem","Social","Safety","Self-actualization"],a:1},
+
+{t:"Recognizing nurses publicly mainly fulfills:",o:["Safety needs","Esteem needs","Physiological needs","Social needs"],a:1},
+
+{t:"Offering career advancement opportunities meets:",o:["Social needs","Esteem needs","Self-actualization needs","Safety needs"],a:2},
+
+{t:"A nurse lacks motivation due to poor peer relationships. This relates to:",o:["Work factors","Personal health","Financial status","Self-concept"],a:0},
+
+{t:"Using appropriate leadership style to motivate staff is a:",o:["Personal factor","Work factor","Financial factor","Intrinsic factor"],a:1},
+
+{t:"Adequate staffing and supplies mainly influence:",o:["Intrinsic motivation","Personal motivation","Organizational motivation","Work factors"],a:3},
+
+{t:"Motivation helps nurses mainly to:",o:["Increase absenteeism","Improve quality care","Reduce responsibility","Avoid teamwork"],a:1},
+
+{t:"Motivated employees are more likely to show:",o:["Low creativity","Job dissatisfaction","High performance","Resistance"],a:2},
+
+{t:"Annual rewards and praise are examples of:",o:["Punishment","Avoidance learning","Positive reinforcement","Intrinsic motivation"],a:2},
+
+{t:"Improving behavior to avoid criticism is:",o:["Punishment","Reward motivation","Avoidance learning","Intrinsic motivation"],a:2},
+
+{t:"Withholding promotion to correct behavior is:",o:["Positive reinforcement","Punishment","Reward motivation","Avoidance learning"],a:1},
+
+{t:"Allowing staff participation in conferences mainly provides:",o:["Control","Affiliation and recognition","Punishment","Fear"],a:1},
+
+{t:"Matching people to jobs helps to:",o:["Reduce equity","Decrease motivation","Improve motivation","Increase punishment"],a:2},
+
+{t:"Linking rewards to performance ensures:",o:["Inequity","Fairness","Reduced effort","Low morale"],a:1},
+
+{t:"Providing challenging work mainly enhances:",o:["Fear","Boredom","Motivation","Punishment"],a:2},
+
+{t:"Listening to staff needs helps managers to:",o:["Ignore differences","Improve motivation","Increase control","Reduce communication"],a:1},
+
+
+/* ============== 5 TRUE / FALSE ============== */
+
+{t:"Satisfied needs no longer motivate behavior.",o:["True","False"],a:0},
+
+{t:"Self-actualization is the highest level of Maslow’s hierarchy.",o:["True","False"],a:0},
+
+{t:"Extrinsic motivation is controlled by the individual.",o:["True","False"],a:1},
+
+{t:"Motivation reduces absenteeism in nursing.",o:["True","False"],a:0},
+
+{t:"Money should always be ignored as a motivator.",o:["True","False"],a:1},
+
+/* ============== 5 MCQ ============== */
+
+{t:"Conflict is best defined as:",o:["A simple disagreement","An expressed struggle between parties with incompatible goals","Lack of communication only","Personal dislike"],a:1},
+
+{t:"Conflict management mainly aims to:",o:["Eliminate all conflicts","Punish conflicting parties","Manage conflicts to reduce escalation","Ignore conflicts"],a:2},
+
+{t:"Which is a common cause of conflict?",o:["Clear communication","Adequate resources","Role ambiguity","Team cooperation"],a:2},
+
+{t:"Conflict that occurs within an individual is called:",o:["Interpersonal","Intergroup","Intrapersonal","Horizontal"],a:2},
+
+{t:"Vertical conflict occurs between:",o:["Peers","Teams","Management and employees","Departments"],a:2},
+
+
+/* ============== 20 CASE QUESTIONS ============== */
+
+{t:"A nurse feels stress due to unclear job role. This conflict source is:",o:["Competition","Role ambiguity","Fear","Status struggle"],a:1},
+
+{t:"Two nurses disagree due to different beliefs. This is:",o:["Intrapersonal conflict","Interpersonal conflict","Intergroup conflict","Vertical conflict"],a:1},
+
+{t:"Conflict within a nursing team is classified as:",o:["Intergroup","Intragroup","Horizontal","Vertical"],a:1},
+
+{t:"Conflict between nursing and medical departments is:",o:["Intrapersonal","Interpersonal","Intergroup","Horizontal"],a:2},
+
+{t:"Conflict between a nurse manager and staff nurse is:",o:["Horizontal","Intragroup","Vertical","Interpersonal"],a:2},
+
+{t:"Stressful work conditions often lead to:",o:["Cooperation","Conflict","Motivation","Collaboration"],a:1},
+
+{t:"Recognizing conflict logically without emotion is:",o:["Felt conflict","Perceived conflict","Manifest conflict","Aftermath"],a:1},
+
+{t:"Feelings of anger and hostility occur during:",o:["Perceived conflict","Felt conflict","Manifest conflict","Antecedent stage"],a:1},
+
+{t:"Overt actions like arguing or withdrawal appear in:",o:["Perceived conflict","Felt conflict","Manifest conflict","Aftermath"],a:2},
+
+{t:"The final stage where effects of conflict appear is:",o:["Antecedent","Manifest","Aftermath","Felt"],a:2},
+
+{t:"A nurse avoids conflict because the issue is trivial. This strategy is:",o:["Competing","Avoiding","Collaborating","Compromising"],a:1},
+
+{t:"A manager forces a decision during an emergency. This is:",o:["Compromising","Accommodating","Competing","Avoiding"],a:2},
+
+{t:"A nurse gives up her request to maintain harmony. This is:",o:["Collaborating","Accommodating","Competing","Avoiding"],a:1},
+
+{t:"Both parties give up something to reach a solution. This is:",o:["Collaborating","Compromising","Avoiding","Competing"],a:1},
+
+{t:"A win-win solution that satisfies both parties is:",o:["Avoiding","Compromising","Collaborating","Accommodating"],a:2},
+
+{t:"Conflict can be positive because it:",o:["Always causes stress","Reduces productivity","Stimulates creativity","Leads to absenteeism"],a:2},
+
+{t:"Poorly managed conflict may lead to:",o:["Better teamwork","Increased coordination","High absenteeism","Improved morale"],a:2},
+
+{t:"Using authority and power to win conflict is:",o:["Accommodation","Collaboration","Competition","Avoidance"],a:2},
+
+{t:"High concern for self and others describes:",o:["Avoiding","Competing","Collaborating","Accommodating"],a:2},
+
+{t:"Allowing staff to express opinions helps to:",o:["Increase conflict","Prevent conflict","Ignore conflict","Force conflict"],a:1},
+
+
+/* ============== 5 TRUE / FALSE ============== */
+
+{t:"Conflict can lead to positive outcomes if managed properly.",o:["True","False"],a:0},
+
+{t:"Avoiding conflict is always the best strategy.",o:["True","False"],a:1},
+
+{t:"Felt conflict involves emotional reactions.",o:["True","False"],a:0},
+
+{t:"Collaborating strategy aims for win-win solutions.",o:["True","False"],a:0},
+
+{t:"Clear job descriptions help prevent conflict.",o:["True","False"],a:0},
+
+/* ============== 5 MCQ ============== */
+
+{t:"Power is best defined as:",o:["Right to command","Ability to influence others","Formal position only","Legal authority"],a:1},
+
+{t:"Power that comes from formal position is called:",o:["Personal power","Expert power","Positional power","Referent power"],a:2},
+
+{t:"Reward, coercive and legitimate power are types of:",o:["Personal power","Authority","Position power","Expert power"],a:2},
+
+{t:"Expert power is based on:",o:["Punishment","Position","Knowledge and skills","Formal rules"],a:2},
+
+{t:"Authority mainly flows:",o:["Upward","Sideways","In all directions","Downward"],a:3},
+
+
+/* ============== 20 CASE QUESTIONS ============== */
+
+{t:"A nurse manager gives praise and bonuses to motivate staff. This is:",o:["Coercive power","Reward power","Legitimate power","Referent power"],a:1},
+
+{t:"A manager threatens punishment for rule violation. This reflects:",o:["Reward power","Expert power","Coercive power","Referent power"],a:2},
+
+{t:"Staff follow a nurse leader because of trust and admiration. This is:",o:["Expert power","Referent power","Legitimate power","Representative power"],a:1},
+
+{t:"A supervisor convinces staff using facts and logic. This is:",o:["Rational persuasion","Coercive power","Reward power","Legitimate authority"],a:0},
+
+{t:"A nurse is followed because of strong clinical expertise. This is:",o:["Legitimate power","Expert power","Referent power","Operational authority"],a:1},
+
+{t:"A manager speaks officially on behalf of the hospital. This is:",o:["Expert power","Representative power","Reward power","Referent power"],a:1},
+
+{t:"Using formal position to give orders is:",o:["Personal power","Legitimate power","Referent power","Expert power"],a:1},
+
+{t:"A nurse manager warns staff before punishment. This follows guidelines of:",o:["Reward power","Expert power","Coercive power","Referent power"],a:2},
+
+{t:"Sharing knowledge with staff mainly enhances:",o:["Reward power","Expert power","Coercive power","Legitimate power"],a:1},
+
+{t:"Treating subordinates fairly helps build:",o:["Expert power","Referent power","Coercive power","Legal authority"],a:1},
+
+{t:"The right to make final decisions is called:",o:["Power","Authority","Influence","Control"],a:1},
+
+{t:"Authority based on professional expertise is:",o:["Legal authority","Operational authority","Technical authority","Ultimate authority"],a:2},
+
+{t:"Authority delegated to perform specific responsibilities is:",o:["Ultimate","Legal","Technical","Operational"],a:3},
+
+{t:"National health policies are set by:",o:["Technical authority","Operational authority","Legal authority","Ultimate authority"],a:3},
+
+{t:"Hierarchy of authority shows:",o:["Power distribution","Who reports to whom","Motivation level","Span of control"],a:1},
+
+{t:"The principle that one employee reports to one boss is:",o:["Span of control","Delegation","Chain of command","Unity of direction"],a:2},
+
+{t:"Span of control refers to:",o:["Number of managers","Number of subordinates","Levels of authority","Power flow"],a:1},
+
+{t:"A line manager has authority to:",o:["Advise only","Support managers","Direct work of employees","Control policies"],a:2},
+
+{t:"A staff manager mainly:",o:["Commands staff","Gives punishment","Advises line managers","Controls resources"],a:2},
+
+{t:"A manager with authority but little influence is described as:",o:["Powerful","Effective","Powerless","Charismatic"],a:2},
+
+
+/* ============== 5 TRUE / FALSE ============== */
+
+{t:"Power is broader than authority.",o:["True","False"],a:0},
+
+{t:"Authority is always personal.",o:["True","False"],a:1},
+
+{t:"Expert power comes from knowledge and experience.",o:["True","False"],a:0},
+
+{t:"Line authority supports and advises line managers.",o:["True","False"],a:1},
+
+{t:"Power can flow in all directions.",o:["True","False"],a:0},
+
+/* ============== 5 MCQ ============== */
+
+{t:"Time management is best defined as:",o:["Doing many tasks at once","Organizing and planning how to divide time between activities","Working faster only","Avoiding delegation"],a:1},
+
+{t:"Which is considered the most valuable and non-renewable resource?",o:["Money","Staff","Time","Equipment"],a:2},
+
+{t:"Response time is also called:",o:["Specialty time","Discretionary time","Managerial time","Personal time"],a:2},
+
+{t:"Discretionary time mainly involves:",o:["Meetings","Telephone calls","Planning and decision making","Interruptions"],a:2},
+
+{t:"Which is a benefit of good time management?",o:["Increased stress","Missed deadlines","Improved performance","Poor quality work"],a:2},
+
+
+/* ============== 20 CASE QUESTIONS ============== */
+
+{t:"A nurse manager spends most of the day answering calls and attending meetings. This is:",o:["Discretionary time","Response time","Wasted time","Personal time"],a:1},
+
+{t:"A supervisor plans staffing and prepares agendas alone. This is:",o:["Response time","Discretionary time","External time waster","Procrastination"],a:1},
+
+{t:"A nurse feels stressed because she commits to too many tasks. This is due to:",o:["Over-estimation of time","Under-estimation of time","Proper scheduling","Delegation"],a:1},
+
+{t:"Missing deadlines and poor quality output are results of:",o:["Over-estimation","Under-estimation","Good planning","Prioritization"],a:1},
+
+{t:"Spending extra time because others push for completion reflects:",o:["Under-estimation","Over-estimation","Delegation","Time saving"],a:1},
+
+{t:"Delaying tasks until the last minute is called:",o:["Delegation","Scheduling","Procrastination","Prioritizing"],a:2},
+
+{t:"A nurse delays work because she underestimates task duration. This is a form of:",o:["Active procrastination","Passive procrastination","Effective planning","Delegation"],a:1},
+
+{t:"Social media use during work hours is considered:",o:["External time waster","Internal time waster","Productive activity","Delegation"],a:1},
+
+{t:"Frequent interruptions and emails are:",o:["Internal time wasters","External time wasters","Good communication","Discretionary time"],a:1},
+
+{t:"Failure to delegate tasks leads to:",o:["Time saving","Better control","Internal time wasting","Improved efficiency"],a:2},
+
+{t:"Attending too many unnecessary meetings is:",o:["Internal time waster","External time waster","Planning activity","Delegation"],a:1},
+
+{t:"A nurse breaks a big project into small steps to avoid delay. This helps to:",o:["Increase procrastination","Overcome procrastination","Waste time","Increase stress"],a:1},
+
+{t:"Setting priorities helps mainly to:",o:["Increase workload","Focus on important tasks","Delay tasks","Avoid goals"],a:1},
+
+{t:"Handling papers only once is a strategy to:",o:["Increase paperwork","Reduce time wasters","Avoid delegation","Increase interruptions"],a:1},
+
+{t:"A nurse prepares a daily task list with time allocation. This is:",o:["Poor planning","Effective planning","Procrastination","Crisis management"],a:1},
+
+{t:"High priority tasks should be:",o:["Ignored","Done last","Done first","Delegated always"],a:2},
+
+{t:"Saying no to extra work helps in:",o:["Increasing stress","Poor delegation","Better time management","Avoiding responsibility"],a:2},
+
+{t:"Dividing tasks into ‘do now’, ‘do later’, and ‘don’t do’ helps in:",o:["Planning","Prioritizing","Delegation","Scheduling meetings"],a:1},
+
+{t:"Spending the right time on the right activity leads to:",o:["Wasted effort","Low efficiency","Effective results","Missed deadlines"],a:2},
+
+{t:"Arriving late and unprepared to meetings leads to:",o:["Better efficiency","Time wastage","Improved performance","Good planning"],a:1},
+
+
+/* ============== 5 TRUE / FALSE ============== */
+
+{t:"Time can be stored and reused later.",o:["True","False"],a:1},
+
+{t:"Good time management reduces stress.",o:["True","False"],a:0},
+
+{t:"Procrastination is an internal time waster.",o:["True","False"],a:0},
+
+{t:"Delegation helps save managerial time.",o:["True","False"],a:0},
+
+{t:"Important tasks should always be postponed.",o:["True","False"],a:1},
+
+/* ============== 5 MCQ ============== */
+
+{t:"Time scheduling is best defined as:",o:["Planning patient care","Distribution of working hours for staff","Delegation of authority","Motivation of staff"],a:1},
+
+{t:"The main objective of time scheduling is to:",o:["Increase overtime","Ensure patient care without over or under staffing","Reduce staff number","Increase workload"],a:1},
+
+{t:"Time scheduling usually covers:",o:["One day only","One week","3–6 consecutive weeks","One year"],a:2},
+
+{t:"Which principle of scheduling ensures legal compliance?",o:["Flexibility","Labor acts and policies","Continuity","Fairness"],a:1},
+
+{t:"Which factor assesses fair distribution of night shifts?",o:["Optimality","Completeness","Proportionality","Continuity"],a:2},
+
+
+/* ============== 20 CASE QUESTIONS ============== */
+
+{t:"A head nurse plans duty hours to avoid understaffing. This reflects which objective?",o:["Staff satisfaction","Balanced days off","Ensure patient care","Cost reduction"],a:2},
+
+{t:"Staff are informed of their schedule one month in advance. This follows:",o:["Flexibility","Scheduling principles","Scheduling types","Staff preference"],a:1},
+
+{t:"Giving a day off before and after night duty ensures:",o:["Continuity","Healthiness","Completeness","Optimality"],a:1},
+
+{t:"Equal distribution of night shifts reflects:",o:["Completeness factor","Proportionality factor","Healthiness factor","Continuity factor"],a:1},
+
+{t:"Ensuring enough nurses per shift refers to:",o:["Completeness factor","Optimality factor","Proportionality factor","Healthiness factor"],a:0},
+
+{t:"Maintaining same nurses across shifts supports:",o:["Continuity factor","Optimality factor","Completeness factor","Healthiness factor"],a:0},
+
+{t:"Planning schedules in blocks of weeks is:",o:["Cyclic scheduling","Block scheduling","Computerized scheduling","Irregular scheduling"],a:1},
+
+{t:"Scheduling that repeats the same pattern is:",o:["Block scheduling","Cyclic scheduling","Irregular scheduling","Straight shift"],a:1},
+
+{t:"The most effective and unbiased scheduling type is:",o:["Block","Cyclic","Computerized","Straight shift"],a:2},
+
+{t:"Reducing interpersonal conflict is an advantage of:",o:["Block scheduling","Cyclic scheduling","Computerized scheduling","Irregular scheduling"],a:2},
+
+{t:"Traditional 8-hour shifts represent:",o:["10-hour shift","12-hour shift","Straight shift","Irregular shift"],a:2},
+
+{t:"Which shift pattern is most suitable for ICU?",o:["8-hour","10-hour","12-hour","Irregular"],a:2},
+
+{t:"Working 10 hours per day for 4 days a week is:",o:["Straight shift","10-hour shift","12-hour shift","Irregular shift"],a:1},
+
+{t:"Strengthening nurse–patient relationships is an advantage of:",o:["8-hour shift","10-hour shift","12-hour shift","Irregular shift"],a:2},
+
+{t:"Highly trained specialists often use:",o:["Straight shift","10-hour shift","12-hour shift","Irregular scheduling"],a:3},
+
+{t:"Scheduling planned by nursing administration office is:",o:["Decentralized","Cyclic","Centralized","Block"],a:2},
+
+{t:"Fair and impartial scheduling is an advantage of:",o:["Decentralized scheduling","Centralized scheduling","Irregular scheduling","Block scheduling"],a:1},
+
+{t:"Scheduling done by head nurse at unit level is:",o:["Centralized","Computerized","Decentralized","Cyclic"],a:2},
+
+{t:"Staff feeling more personalized attention occurs in:",o:["Centralized scheduling","Computerized scheduling","Decentralized scheduling","Block scheduling"],a:2},
+
+{t:"Dissatisfaction due to comparison of schedules occurs in:",o:["Centralized scheduling","Decentralized scheduling","Computerized scheduling","Cyclic scheduling"],a:1},
+
+
+/* ============== 5 TRUE / FALSE ============== */
+
+{t:"Time scheduling helps maximize use of nursing staff.",o:["True","False"],a:0},
+
+{t:"Block scheduling provides maximum level of care seven days a week.",o:["True","False"],a:1},
+
+{t:"Computerized scheduling reduces clerical workload.",o:["True","False"],a:0},
+
+{t:"Centralized scheduling removes workload from head nurses.",o:["True","False"],a:0},
+
+{t:"Decentralized scheduling is always completely objective.",o:["True","False"],a:1},
+
+/* ============== 5 MCQ ============== */
+
+{t:"Marketing is best defined as:",o:["Selling products only","A social and managerial process to satisfy needs through exchange","Advertising only","Public relations activity"],a:1},
+
+{t:"Marketing mainly aims to:",o:["Increase sales only","Satisfy customer needs and wants","Reduce costs","Control employees"],a:1},
+
+{t:"The core concept underlying marketing is:",o:["Competition","Exchange","Promotion","Profit"],a:1},
+
+{t:"Which is NOT a basic type of marketing?",o:["Internal marketing","External marketing","Personal marketing","Social marketing"],a:2},
+
+{t:"Internal marketing mainly focuses on:",o:["Patients","Employees","Competitors","Community"],a:1},
+
+
+/* ============== 20 CASE QUESTIONS ============== */
+
+{t:"A hospital motivates nurses through training and recognition to improve service quality. This is:",o:["External marketing","Internal marketing","Product marketing","Price strategy"],a:1},
+
+{t:"Advertising hospital services to the community represents:",o:["Internal marketing","External marketing","Employee marketing","Operational control"],a:1},
+
+{t:"A nurse administrator studies patient needs before planning services. This reflects:",o:["Promotion","Marketing concept","Pricing strategy","Distribution"],a:1},
+
+{t:"Patient satisfaction is considered:",o:["Unimportant","A major concept of marketing","Only a nursing issue","Financial issue"],a:1},
+
+{t:"Analyzing strengths, weaknesses, opportunities, and threats is:",o:["Evaluation","SWOT analysis","Promotion","Implementation"],a:1},
+
+{t:"Identifying competitors occurs during:",o:["Planning","Assessment","Implementation","Evaluation"],a:1},
+
+{t:"Developing product, price, place, and promotion is part of:",o:["Assessment","Planning","Implementation","Evaluation"],a:1},
+
+{t:"Brochures and newsletters are examples of:",o:["Personal selling","Promotion tools","Pricing tools","Distribution methods"],a:1},
+
+{t:"Setting cost of healthcare services refers to:",o:["Product","Price","Place","Promotion"],a:1},
+
+{t:"Physical location and accessibility of services represent:",o:["Product","Price","Place","Promotion"],a:2},
+
+{t:"Informing clients about available services mainly reflects:",o:["Product","Price","Place","Promotion"],a:3},
+
+{t:"Marketing process is similar to:",o:["Medical process","Administrative process","Nursing process","Legal process"],a:2},
+
+{t:"Collecting data about target market occurs during:",o:["Assessment","Planning","Implementation","Control"],a:0},
+
+{t:"Establishing promotional activities occurs in:",o:["Assessment","Planning","Implementation","Evaluation"],a:2},
+
+{t:"Measuring gaps between planned and actual goals occurs in:",o:["Assessment","Planning","Implementation","Evaluation"],a:3},
+
+{t:"Failure to collect data before decisions leads to:",o:["Marketing success","Marketing failure","Better planning","Cost reduction"],a:1},
+
+{t:"Leadership and communication are considered:",o:["Marketing barriers","Marketing skills","Marketing failures","Promotion tools"],a:1},
+
+{t:"Maintaining ethical care by nurses supports:",o:["Internal marketing","External marketing","Marketing failure","Cost control"],a:1},
+
+{t:"Health education provided by nurses is part of:",o:["Marketing role of staff nurse","Pricing strategy","Distribution","Control"],a:0},
+
+{t:"Building hospital credibility in the community supports:",o:["Internal marketing","External marketing","Employee motivation","Cost saving"],a:1},
+
+
+/* ============== 5 TRUE / FALSE ============== */
+
+{t:"Marketing begins and ends with customer needs.",o:["True","False"],a:0},
+
+{t:"Exchange requires at least two parties.",o:["True","False"],a:0},
+
+{t:"Promotion is not part of the marketing mix.",o:["True","False"],a:1},
+
+{t:"Evaluation is a continuous step in marketing process.",o:["True","False"],a:0},
+
+{t:"Staff nurses have no role in marketing.",o:["True","False"],a:1},
+
+
+/* ============== 5 MCQ ============== */
+
+{t:"Climate is best defined as:",o:["Daily weather conditions","Short-term temperature changes","Long-term weather patterns of an area","Seasonal rainfall only"],a:2},
+
+{t:"Climate change mainly refers to:",o:["Daily weather changes","Short-term storms","Long-term shifts in temperature and weather patterns","Natural disasters only"],a:2},
+
+{t:"Global warming is primarily caused by:",o:["Ozone depletion","Greenhouse gas emissions","Earth rotation","Solar cycle only"],a:1},
+
+{t:"Which gas is a major contributor to global warming?",o:["Oxygen","Nitrogen","Carbon dioxide","Hydrogen"],a:2},
+
+{t:"Human activities became the main driver of climate change since:",o:["1600s","1700s","1800s","1900s"],a:2},
+
+
+/* ============== 20 CASE QUESTIONS ============== */
+
+{t:"A city experiences more frequent heat waves leading to heat stroke cases. This effect is due to:",o:["Climate stability","Climate change","Natural cooling","Ozone repair"],a:1},
+
+{t:"Burning coal and gas to generate electricity mainly causes:",o:["Oxygen release","Greenhouse gas emissions","Deforestation","Soil erosion"],a:1},
+
+{t:"Cutting down forests for agriculture contributes to climate change by:",o:["Reducing rainfall","Releasing stored carbon","Increasing oxygen","Lowering temperature"],a:1},
+
+{t:"Transportation is a major climate change contributor because it:",o:["Uses renewable energy","Runs on fossil fuels","Reduces emissions","Stops deforestation"],a:1},
+
+{t:"Rising temperatures increase evaporation leading to:",o:["Less rainfall","More severe storms","Lower humidity","Stable climate"],a:1},
+
+{t:"Long periods of water scarcity affecting crops represent:",o:["Flooding","Drought","Storm surge","Heat exhaustion"],a:1},
+
+{t:"Climate change affecting food production mainly results in:",o:["Food surplus","Lower prices","Hunger and malnutrition","Improved nutrition"],a:2},
+
+{t:"Destruction of fisheries and crops leads to:",o:["Economic growth","Food insecurity","Climate recovery","Increased exports"],a:1},
+
+{t:"Extreme weather events causing people to move from homes reflect:",o:["Urbanization","Displacement","Tourism","Population growth"],a:1},
+
+{t:"Heat waves increase risk of:",o:["Skin cancer only","Cardiovascular diseases","Vision problems","Hearing loss"],a:1},
+
+{t:"Air pollution from climate change may lead to:",o:["Asthma and lung cancer","Better immunity","Reduced illness","Faster recovery"],a:0},
+
+{t:"Flooding can cause health problems mainly through:",o:["Improved sanitation","Shortage of safe water","Better nutrition","Reduced infection"],a:1},
+
+{t:"Climate change increases spread of infections due to:",o:["Stable environment","Extreme weather","Improved hygiene","Reduced vectors"],a:1},
+
+{t:"COP27 conference held in Egypt focused on:",o:["Education only","Reducing emissions and adaptation","Tourism development","Economic inflation"],a:1},
+
+{t:"One main goal of climate adaptation is to:",o:["Ignore climate risks","Prepare countries to deal with impacts","Increase emissions","Stop industrial growth"],a:1},
+
+{t:"Climate finance mainly aims to:",o:["Fund luxury projects","Support developing countries","Increase pollution","Reduce healthcare"],a:1},
+
+{t:"A nurse educating patients about heat stroke is practicing:",o:["Medical treatment","Awareness role","Industrial policy","Climate denial"],a:1},
+
+{t:"Using natural light at work helps to:",o:["Increase cost","Save energy","Increase emissions","Waste resources"],a:1},
+
+{t:"Recycling and reducing waste mainly help to:",o:["Increase pollution","Reduce emissions","Destroy environment","Increase climate change"],a:1},
+
+{t:"Planting trees contributes to climate action by:",o:["Producing methane","Purifying air","Increasing heat","Raising pollution"],a:1},
+
+
+/* ============== 5 TRUE / FALSE ============== */
+
+{t:"Climate and development are closely linked.",o:["True","False"],a:0},
+
+{t:"Deforestation reduces greenhouse gas emissions.",o:["True","False"],a:1},
+
+{t:"Climate change increases health risks.",o:["True","False"],a:0},
+
+{t:"Nurses have no role in climate change awareness.",o:["True","False"],a:1},
+
+{t:"Using renewable energy helps limit global warming.",o:["True","False"],a:0}
+
+];
+
+
+
+// ===== shuffle questions only =====
+function shuffleQuestions(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+// خلط الأسئلة فقط
+shuffleQuestions(questions);
+
+// تعريف المتغيرات الناقصة
+let i = 0;
+let correct = 0;
+let wrong = 0;
+let answers = [];
+let wrongSet = [];
+
+/* ===== Timer ===== */
+let totalTime=240*60, timeLeft=totalTime;
+const timerInt=setInterval(()=>{
+  timeLeft--;
+  let m=Math.floor(timeLeft/60), s=timeLeft%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  let deg=(timeLeft/totalTime)*360;
+  timer.style.background=`conic-gradient(var(--primary) ${deg}deg,var(--soft) ${deg}deg)`;
+  if(timeLeft<=0){clearInterval(timerInt);finishExam();}
+},1000);
+
+/* ===== UI ===== */
+function updateTop(){
+  let total=questions.length;
+  let answered=correct+wrong;
+  progressText.innerText=`سؤال ${i+1} من ${total}`;
+  progressBar.style.width=((i+1)/total*100)+"%";
+  correctCount.innerText=correct;
+  wrongCount.innerText=wrong;
+  remainPercent.innerText=Math.round(((total-answered)/total)*100)+"%";
+}
+
+/* ===== Render ===== */
+function show(){
+  updateTop();
+  let q = questions[i];
+
+  app.innerHTML = `
+    <div class="card">
+      <div class="question-title">${q.t}</div>
+      ${q.o.map((o,idx)=>`
+        <div class="option" onclick="choose(${idx})">${o}</div>
+      `).join("")}
+    </div>
+  `;
+}
+/* ===== Choose ===== */
+function choose(v){
+  if(answers[i]!=null) return;
+  answers[i]=v;
+  let ok=v===questions[i].a;
+  ok?correct++:wrong++;
+  app.innerHTML=`
+    <div class="feedback">${ok?"🎉 شاطر جدًا كمل":"😅 ركّز يا سُكر"}</div>
+    <div class="card">
+      <div class="question-title">${questions[i].t}</div>
+      ${questions[i].o.map((o,j)=>`
+        <div class="option ${j===questions[i].a?"correct":j===v?"wrong":""} disabled">${o}</div>
+      `).join("")}
+      <button onclick="next()">التالي</button>
+    </div>`;
+}
+
+/* ===== Next ===== */
+function next(){
+  if(i<questions.length-1){i++;show();}
+  else finishExam();
+}
+
+/* ===== Finish ===== */
+function finishExam(){
+  document.body.classList.remove("exam");
+  document.body.classList.add("after");
+
+  let score=Math.round((correct/questions.length)*100);
+
+  if(score>=80){
+    document.documentElement.style.setProperty("--brand1","#22c55e");
+    document.documentElement.style.setProperty("--brand2","#fde047");
+  }else if(score>=50){
+    document.documentElement.style.setProperty("--brand1","#38bdf8");
+    document.documentElement.style.setProperty("--brand2","#e0f2fe");
+  }else{
+    document.documentElement.style.setProperty("--brand1","#fb923c");
+    document.documentElement.style.setProperty("--brand2","#fed7aa");
+  }
+
+  wrongSet=[];
+  let report="";
+  questions.forEach((q,idx)=>{
+    let ok=answers[idx]===q.a;
+    if(!ok) wrongSet.push(q);
+    report+=`
+      <div class="report ${ok?"correct":"wrong"}">
+        <b>${q.t}</b><br>
+إجابتك: ${answers[idx]!=null ? q.o[answers[idx]] : "لم يتم الحل"}<br>
+الصح: ${q.o[q.a]}
+      </div>`;
+  });
+
+  app.innerHTML=`
+    <div class="card">
+      <h3>?? تقريرك</h3>
+      ${report}
+      ${wrongSet.length?`<button onclick="retry()">إعادة حل الغلط فقط</button>`:"<p>أنت ممتاز 👑</p>"}
+    </div>`;
+}
+
+/* ===== Retry Wrong ===== */
+function retry(){
+  // نبدأ امتحان جديد بالأسئلة الغلط فقط
+  questions = [...wrongSet];
+
+  answers = [];
+  wrongSet = [];
+  i = 0;
+  correct = 0;
+  wrong = 0;
+
+  // رجوع لشكل الامتحان
+  document.body.classList.remove("after");
+  document.body.classList.add("exam");
+
+  show();
+}
+
+show();
+</script>
+
+</body>
+</html>
+
