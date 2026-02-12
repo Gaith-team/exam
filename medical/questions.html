@@ -1,0 +1,454 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaith Team | Exam</title>
+
+<style>
+:root{
+  --primary:#0284c7;
+  --secondary:#0ea5e9;
+  --bg:#f8fbff;
+  --card:#ffffff;
+  --soft:#e6f0ff;
+  --question:#eef7ff;
+  --option:#f9fcff;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --text:#0f172a;
+
+  /* Brand dynamic */
+  --brand1:#ffffff;
+  --brand2:#e0f2fe;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#eef6ff);
+  color:var(--text);
+}
+
+/* ================= HEADER ================= */
+header{
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* ===== Brand ===== */
+.logo{
+  position:relative;
+  font-size:28px;
+  font-weight:900;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.brand-text{
+  background:linear-gradient(90deg,var(--brand1),var(--brand2),var(--brand1));
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 4s linear infinite;
+}
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+.heart{
+  display:inline-block;
+  animation:heartbeat 1.6s infinite ease-in-out;
+}
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  animation:twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle{
+  0%{opacity:0;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.2)}
+  100%{opacity:0;transform:scale(.6)}
+}
+
+/* Reduced motion أثناء الامتحان */
+.exam .sparkle{animation-duration:5s;opacity:.4}
+.exam .heart{animation-duration:2.5s}
+
+/* After exam */
+.after .sparkle{animation-duration:2s}
+.after .heart{animation-duration:1.1s}
+
+/* ================= LAYOUT ================= */
+.container{max-width:520px;margin:auto;padding:16px}
+
+/* ===== Top Bar ===== */
+.top-bar{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+}
+.progress-box{
+  flex:1;
+  background:var(--card);
+  padding:14px;
+  border-radius:18px;
+  box-shadow:0 10px 22px rgba(2,132,199,.12);
+}
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px;
+  font-weight:800;
+  font-size:14px;
+}
+.progress{
+  height:8px;
+  background:var(--soft);
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+}
+
+/* Timer */
+.timer{
+  width:64px;height:64px;border-radius:50%;
+  background:conic-gradient(var(--primary) 0deg,var(--soft) 0deg);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;
+  background-color:var(--card);
+}
+
+/* ================= CARD ================= */
+.card{
+  background:var(--card);
+  padding:22px;
+  border-radius:24px;
+  box-shadow:0 18px 36px rgba(2,132,199,.18);
+}
+.question-title{
+  background:var(--question);
+  padding:16px;
+  border-radius:16px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+.option{
+  background:var(--option);
+  border:2px solid var(--soft);
+  border-radius:18px;
+  padding:15px;
+  margin:12px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.correct{background:#eafaf1;border-color:var(--success)}
+.option.wrong{background:#fff1f1;border-color:var(--danger)}
+.option.disabled{pointer-events:none;opacity:.9}
+
+button{
+  margin-top:18px;
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-weight:900;
+}
+
+/* Feedback */
+.feedback{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:10px;
+  animation:pop .5s;
+}
+@keyframes pop{
+  0%{transform:scale(.6);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* Report */
+.report{
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  border-left:6px solid var(--soft);
+}
+.report.correct{border-color:var(--success)}
+.report.wrong{border-color:var(--danger)}
+</style>
+</head>
+
+<body class="exam">
+
+<header>
+  <div class="logo">
+    <span class="brand-text">Gaith Team</span>
+    <span class="heart">💖</span>
+    <span class="sparkle" style="top:-8px;left:0">✨</span>
+    <span class="sparkle" style="top:6px;right:-8px">✨</span>
+    <span class="sparkle" style="bottom:-8px;left:50%">✨</span>
+  </div>
+  <div style="margin-top:6px;font-weight:800">الإمتحان في جيبك 👏🏻</div>
+</header>
+
+<div class="container">
+
+  <div class="top-bar">
+    <div class="progress-box">
+      <div class="progress-text">
+        <span id="progressText"></span>
+        <span>
+          ✔️ <span id="correctCount">0</span> |
+          ❌ <span id="wrongCount">0</span> |
+          ⏳ <span id="remainPercent">100%</span>
+        </span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="timer" id="timer">30:00</div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<script>
+/* ===== Questions ===== */
+let questions = [
+            // Standard MCQs (30)
+            {t:"What is the definition of blood transfusion?", o:["Infusion of whole blood or components into venous circulation","Infusion of saline into arteries","Drawing blood for testing","Storing blood in a bank"], a:0},
+            {t:"Which blood component is transfused for hemophilia?", o:["Red blood cells","Plasma","Platelets and clotting factors","Whole blood"], a:2},
+            {t:"Plasma is typically transfused in cases of:", o:["Severe anemia","Severe burn or liver failure","Hemophilia","Trauma resuscitation"], a:1},
+            {t:"Which blood type is known as the universal donor?", o:["Type A","Type B","Type AB","Type O"], a:3},
+            {t:"Which blood type is the universal recipient?", o:["Type A","Type B","Type AB","Type O"], a:2},
+            {t:"Rh-positive individuals can receive blood from:", o:["Only Rh-positive","Only Rh-negative","Both Rh-positive and Rh-negative","Only Type O"], a:2},
+            {t:"Rh-negative individuals should only receive blood from:", o:["Rh-positive","Rh-negative","Both Rh-positive and Rh-negative","Type AB"], a:1},
+            {t:"What is the minimum recommended cannula size for blood transfusion?", o:["22G","20G","18G or larger","24G"], a:2},
+            {t:"How long is a blood sample for crossmatch valid?", o:["24 hours","48 hours","72 hours","1 week"], a:2},
+            {t:"A blood transfusion must be started within how many minutes of release from the blood bank?", o:["10-15 minutes","20-30 minutes","60 minutes","2 hours"], a:1},
+            {t:"What is the maximum time allowed to finish a unit of blood transfusion?", o:["2 hours","4 hours","6 hours","8 hours"], a:1},
+            {t:"Which solution is used to prime the blood administration set?", o:["Dextrose 5%","Ringer's Lactate","0.9% Normal Saline","Distilled water"], a:2},
+            {t:"What is the primary purpose of a blood warmer?", o:["To make the blood flow faster","To prevent complications caused by hypothermia","To sterilize the blood","To prevent clotting"], a:1},
+            {t:"During the first 5-15 minutes of transfusion, the nurse should:", o:["Leave the patient to rest","Start the administration slowly and stay with the patient","Increase the rate to maximum","Go to the blood bank"], a:1},
+            {t:"What should the nurse do if the patient's temperature exceeds 100°F before transfusion?", o:["Start the transfusion anyway","Give paracetamol and start","Alert the doctor","Wait for 10 minutes"], a:2},
+            {t:"How many units of packed red blood cells (pRBCs) can be hung at a time?", o:["One","Two","Three","Four"], a:0},
+            {t:"Which of these is an indication for blood transfusion?", o:["Treatment of anemia","Major surgery","Cancer therapy","All of the above"], a:3},
+            {t:"What is the rationale for washing hands before the procedure?", o:["To promote safety","To prevent contamination","To save time","To identify the patient"], a:1},
+            {t:"Which document must be obtained before starting a transfusion?", o:["Birth certificate","Signed consent","Insurance card","Driving license"], a:1},
+            {t:"A febrile reaction is characterized by:", o:["Hives and itching","Fever, chills, headache, and malaise","Facial flushing and low back pain","Dyspnea and rash"], a:1},
+            {t:"What is the first nursing action when a transfusion reaction is suspected?", o:["Slow down the rate","Stop the transfusion immediately","Call the patient's family","Give a glass of water"], a:1},
+            {t:"Which nursing diagnosis is relevant for blood transfusion?", o:["Risk for injury","Excess fluid volume","Ineffective peripheral tissue perfusion","All of the above"], a:3},
+            {t:"What should be checked on the blood pack label before administration?", o:["Blood group and type","Donation number","Expiration date","All of the above"], a:3},
+            {t:"After the first hour, how often should vital signs be reassessed?", o:["Every 15 minutes","Hourly","Once per shift","Every 4 hours"], a:1},
+            {t:"What is the volume of saline used to flush the set after transfusion is complete?", o:["50ml","100ml","200ml","500ml"], a:2},
+            {t:"Where should the used administration set be disposed of?", o:["General waste","Linen bag","Sharps bin","Recycle bin"], a:2},
+            {t:"Type O negative blood is used for:", o:["Routine transfusions","Emergencies with no time for testing","Type AB patients only","Type A patients only"], a:1},
+            {t:"Mismatched blood transfusions can cause:", o:["Improved health","Severe reactions","Faster recovery","No effect"], a:1},
+            {t:"The nurse should reassess vital signs after 15 minutes for the 1st hour and then:", o:["Every 30 minutes","Hourly","Every 2 hours","At the end"], a:1},
+            {t:"What is the nursing activity for an allergic reaction?", o:["Continue transfusion","Stop transfusion and notify provider","Increase the rate","Apply a cold pack"], a:1},
+
+            // Critical Thinking (20)
+            {t:"Why is Dextrose solution avoided when priming blood tubing?", o:["It is too expensive","It can lead to clumping of RBCs and hemolysis","It makes the blood too thin","It causes the patient to be hyperactive"], a:1},
+            {t:"Why must two nurses validate the blood product information?", o:["To finish the work faster","To ensure the right patient receives the correct intervention and prevent errors","To train the junior nurse","Because the law requires it"], a:1},
+            {t:"What is the risk of infusing cold blood faster than 100mL/minute in adults?", o:["It causes headache","It can cause cardiac arrest","It leads to skin rash","It improves circulation"], a:1},
+            {t:"Why should blood components not be warmed using a microwave?", o:["It takes too long","It can damage the blood cells and cause hemolysis","It is not sterile","The microwave might break"], a:1},
+            {t:"Why is it important to obtain baseline vital signs before starting?", o:["To check the equipment","To detect any changes that may indicate a reaction during transfusion","To fill the chart","To see if the patient is sleeping"], a:1},
+            {t:"Why must the nurse stay with the patient for the first 15 minutes?", o:["To talk to the patient","Because most acute transfusion reactions occur during this period","To check the IV site","To adjust the bed"], a:1},
+            {t:"What is the significance of 'low back pain' during transfusion?", o:["The bed is uncomfortable","It is a sign of a hemolytic transfusion reaction","The patient is tired","It is a normal side effect"], a:1},
+            {t:"Why is the blood bag returned to the blood bank after a reaction?", o:["To save money","For further investigations into the cause of the reaction","To be reused","To be thrown away there"], a:1},
+            {t:"Why should medications not be added to the blood component pack?", o:["It changes the color","It is generally advised that the line for blood should not be used for other drugs","It makes the bag too heavy","It is too difficult to mix"], a:1},
+            {t:"Why is patient education provided about signs of delayed reactions?", o:["To make them worry","Delayed reactions can occur one to several days after transfusion","To test their memory","To fill the time"], a:1},
+            {t:"If a patient is unconscious, how is their identity verified?", o:["By asking the roommate","Checking the patient's identification band","By guessing","Waiting for them to wake up"], a:1},
+            {t:"What is the rationale for using a Y-tubing set?", o:["It looks better","It allows for simultaneous or sequential infusion of saline and blood","It is cheaper","It prevents air bubbles"], a:1},
+            {t:"Why is the infusion rate increased gradually after the observation period?", o:["To finish quickly","To ensure the patient tolerates the transfusion well","To save saline","To test the pump"], a:1},
+            {t:"What is the risk of using a cannula smaller than 18G for blood?", o:["The cannula will break","It can cause hemolysis (damage to RBCs) due to pressure","The blood will be too cold","It is too painful"], a:1},
+            {t:"Why is the blood sample for crossmatch valid for only 72 hours?", o:["The tube breaks","To ensure the sample reflects the patient's current immunological status","The label fades","The blood dries up"], a:1},
+            {t:"Why is 0.9% NaCl used instead of other fluids for blood?", o:["It is the only fluid available","It is isotonic and compatible with blood cells","It is the cheapest","It is easy to store"], a:1},
+            {t:"What happens if a patient with Type O blood receives Type A blood?", o:["Nothing","A severe hemolytic reaction occurs","They become Type A","They feel better"], a:1},
+            {t:"Why is the 'donation number' checked on both the pack and the label?", o:["To count the bags","To ensure the compatibility test was done for this specific unit","To see who donated","To check the price"], a:1},
+            {t:"Why are vital signs monitored up to 6 hours post-transfusion?", o:["To keep the nurse busy","Acute reactions can still occur within this timeframe","To check if the patient is hungry","To monitor the IV site"], a:1},
+            {t:"Why is the drip chamber filled to cover the filter?", o:["To save blood","To prevent air from entering and to ensure proper filtration","To see the drops better","To check for clots"], a:1},
+
+            // Scenarios (10)
+            {t:"A patient with severe anemia needs a transfusion. Which component is most likely ordered?", o:["Platelets","Plasma","Red blood cells","Clotting factors"], a:2},
+            {t:"During transfusion, the patient develops hives and itching. What is your first action?", o:["Increase the rate","Stop the transfusion and keep the vein open with saline","Apply a warm cloth","Give an aspirin"], a:1},
+            {t:"A patient is in shock from a car accident and their blood type is unknown. Which blood is used?", o:["AB positive","O negative","A positive","B negative"], a:1},
+            {t:"You are about to hang a unit of blood but notice gas bubbles in the bag. You should:", o:["Shake the bag","Return the blood to the blood bank","Hang it anyway","Filter the bubbles out"], a:1},
+            {t:"The doctor orders a transfusion for a patient with hemophilia. You prepare to administer:", o:["pRBCs","Platelets and clotting factors","Normal Saline","Glucose"], a:1},
+            {t:"10 minutes into the transfusion, the patient complains of chills and a headache. You suspect:", o:["Allergic reaction","Febrile reaction","Normal side effect","Infection"], a:1},
+            {t:"A patient has had multiple previous transfusions. The doctor orders premedication to:", o:["Increase the blood count","Decrease the risk of allergic and febrile reactions","Make the patient sleep","Prevent clotting"], a:1},
+            {t:"The blood bank releases a unit at 10:00 AM. By what time must the transfusion be finished?", o:["11:00 AM","12:00 PM","2:00 PM","4:00 PM"], a:2},
+            {t:"After the transfusion, you notice the patient's urine is dark red. This may indicate:", o:["Dehydration","Hemolytic reaction","Normal finding","High protein diet"], a:1},
+            {t:"You are preparing to start a transfusion but the patient's ID band is missing. You should:", o:["Ask the patient their name and proceed","Get a new ID band and verify before proceeding","Use the bed number to identify","Ask the nurse from the previous shift"], a:1},
+
+            // True/False (5)
+            {t:"Blood should be warmed in a microwave if a blood warmer is unavailable.", o:["True","False"], a:1},
+            {t:"A signed consent must be obtained before a blood transfusion.", o:["True","False"], a:0},
+            {t:"Type AB is the universal donor.", o:["True","False"], a:1},
+            {t:"The transfusion should be started within 30 minutes of receiving it from the bank.", o:["True","False"], a:0},
+            {t:"Normal saline is the only fluid compatible with blood products.", o:["True","False"], a:0}
+];
+
+
+
+// ===== shuffle questions only =====
+function shuffleQuestions(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+// خلط الأسئلة فقط
+shuffleQuestions(questions);
+
+// تعريف المتغيرات الناقصة
+let i = 0;
+let correct = 0;
+let wrong = 0;
+let answers = [];
+let wrongSet = [];
+
+/* ===== Timer ===== */
+let totalTime=30*60, timeLeft=totalTime;
+const timerInt=setInterval(()=>{
+  timeLeft--;
+  let m=Math.floor(timeLeft/60), s=timeLeft%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  let deg=(timeLeft/totalTime)*360;
+  timer.style.background=`conic-gradient(var(--primary) ${deg}deg,var(--soft) ${deg}deg)`;
+  if(timeLeft<=0){clearInterval(timerInt);finishExam();}
+},1000);
+
+/* ===== UI ===== */
+function updateTop(){
+  let total=questions.length;
+  let answered=correct+wrong;
+  progressText.innerText=`سؤال ${i+1} من ${total}`;
+  progressBar.style.width=((i+1)/total*100)+"%";
+  correctCount.innerText=correct;
+  wrongCount.innerText=wrong;
+  remainPercent.innerText=Math.round(((total-answered)/total)*100)+"%";
+}
+
+/* ===== Render ===== */
+function show(){
+  updateTop();
+  let q = questions[i];
+
+  app.innerHTML = `
+    <div class="card">
+      <div class="question-title">${q.t}</div>
+      ${q.o.map((o,idx)=>`
+        <div class="option" onclick="choose(${idx})">${o}</div>
+      `).join("")}
+    </div>
+  `;
+}
+/* ===== Choose ===== */
+function choose(v){
+  if(answers[i]!=null) return;
+  answers[i]=v;
+  let ok=v===questions[i].a;
+  ok?correct++:wrong++;
+  app.innerHTML=`
+    <div class="feedback">${ok?"🎉 شاطر جدًا كمل":"😅 ركّز يا سُكر"}</div>
+    <div class="card">
+      <div class="question-title">${questions[i].t}</div>
+      ${questions[i].o.map((o,j)=>`
+        <div class="option ${j===questions[i].a?"correct":j===v?"wrong":""} disabled">${o}</div>
+      `).join("")}
+      <button onclick="next()">التالي</button>
+    </div>`;
+}
+
+/* ===== Next ===== */
+function next(){
+  if(i<questions.length-1){i++;show();}
+  else finishExam();
+}
+
+/* ===== Finish ===== */
+function finishExam(){
+  document.body.classList.remove("exam");
+  document.body.classList.add("after");
+
+  let score=Math.round((correct/questions.length)*100);
+
+  if(score>=80){
+    document.documentElement.style.setProperty("--brand1","#22c55e");
+    document.documentElement.style.setProperty("--brand2","#fde047");
+  }else if(score>=50){
+    document.documentElement.style.setProperty("--brand1","#38bdf8");
+    document.documentElement.style.setProperty("--brand2","#e0f2fe");
+  }else{
+    document.documentElement.style.setProperty("--brand1","#fb923c");
+    document.documentElement.style.setProperty("--brand2","#fed7aa");
+  }
+
+  wrongSet=[];
+  let report="";
+  questions.forEach((q,idx)=>{
+    let ok=answers[idx]===q.a;
+    if(!ok) wrongSet.push(q);
+    report+=`
+      <div class="report ${ok?"correct":"wrong"}">
+        <b>${q.t}</b><br>
+إجابتك: ${answers[idx]!=null ? q.o[answers[idx]] : "لم يتم الحل"}<br>
+الصح: ${q.o[q.a]}
+      </div>`;
+  });
+
+  app.innerHTML=`
+    <div class="card">
+      <h3>?? تقريرك</h3>
+      ${report}
+      ${wrongSet.length?`<button onclick="retry()">إعادة حل الغلط فقط</button>`:"<p>أنت ممتاز 👑</p>"}
+    </div>`;
+}
+
+/* ===== Retry Wrong ===== */
+function retry(){
+  // نبدأ امتحان جديد بالأسئلة الغلط فقط
+  questions = [...wrongSet];
+
+  answers = [];
+  wrongSet = [];
+  i = 0;
+  correct = 0;
+  wrong = 0;
+
+  // رجوع لشكل الامتحان
+  document.body.classList.remove("after");
+  document.body.classList.add("exam");
+
+  show();
+}
+
+show();
+</script>
+
+</body>
+</html>
