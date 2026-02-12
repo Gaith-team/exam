@@ -1,0 +1,607 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaith Team | Exam</title>
+
+<style>
+:root{
+  --primary:#0284c7;
+  --secondary:#0ea5e9;
+  --bg:#f8fbff;
+  --card:#ffffff;
+  --soft:#e6f0ff;
+  --question:#eef7ff;
+  --option:#f9fcff;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --text:#0f172a;
+
+  /* Brand dynamic */
+  --brand1:#ffffff;
+  --brand2:#e0f2fe;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#eef6ff);
+  color:var(--text);
+}
+
+/* ================= HEADER ================= */
+header{
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* ===== Brand ===== */
+.logo{
+  position:relative;
+  font-size:28px;
+  font-weight:900;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.brand-text{
+  background:linear-gradient(90deg,var(--brand1),var(--brand2),var(--brand1));
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 4s linear infinite;
+}
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+.heart{
+  display:inline-block;
+  animation:heartbeat 1.6s infinite ease-in-out;
+}
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  animation:twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle{
+  0%{opacity:0;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.2)}
+  100%{opacity:0;transform:scale(.6)}
+}
+
+/* Reduced motion أثناء الامتحان */
+.exam .sparkle{animation-duration:5s;opacity:.4}
+.exam .heart{animation-duration:2.5s}
+
+/* After exam */
+.after .sparkle{animation-duration:2s}
+.after .heart{animation-duration:1.1s}
+
+/* ================= LAYOUT ================= */
+.container{max-width:520px;margin:auto;padding:16px}
+
+/* ===== Top Bar ===== */
+.top-bar{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+}
+.progress-box{
+  flex:1;
+  background:var(--card);
+  padding:14px;
+  border-radius:18px;
+  box-shadow:0 10px 22px rgba(2,132,199,.12);
+}
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px;
+  font-weight:800;
+  font-size:14px;
+}
+.progress{
+  height:8px;
+  background:var(--soft);
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+}
+
+/* Timer */
+.timer{
+  width:64px;height:64px;border-radius:50%;
+  background:conic-gradient(var(--primary) 0deg,var(--soft) 0deg);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;
+  background-color:var(--card);
+}
+
+/* ================= CARD ================= */
+.card{
+  background:var(--card);
+  padding:22px;
+  border-radius:24px;
+  box-shadow:0 18px 36px rgba(2,132,199,.18);
+}
+.question-title{
+  background:var(--question);
+  padding:16px;
+  border-radius:16px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+.option{
+  background:var(--option);
+  border:2px solid var(--soft);
+  border-radius:18px;
+  padding:15px;
+  margin:12px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.correct{background:#eafaf1;border-color:var(--success)}
+.option.wrong{background:#fff1f1;border-color:var(--danger)}
+.option.disabled{pointer-events:none;opacity:.9}
+
+button{
+  margin-top:18px;
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-weight:900;
+}
+
+/* Feedback */
+.feedback{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:10px;
+  animation:pop .5s;
+}
+@keyframes pop{
+  0%{transform:scale(.6);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* Report */
+.report{
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  border-left:6px solid var(--soft);
+}
+.report.correct{border-color:var(--success)}
+.report.wrong{border-color:var(--danger)}
+</style>
+</head>
+
+<body class="exam">
+
+<header>
+  <div class="logo">
+    <span class="brand-text">Gaith Team</span>
+    <span class="heart">💖</span>
+    <span class="sparkle" style="top:-8px;left:0">✨</span>
+    <span class="sparkle" style="top:6px;right:-8px">✨</span>
+    <span class="sparkle" style="bottom:-8px;left:50%">✨</span>
+  </div>
+  <div style="margin-top:6px;font-weight:800">الإمتحان في جيبك 👏🏻</div>
+</header>
+
+<div class="container">
+
+  <div class="top-bar">
+    <div class="progress-box">
+      <div class="progress-text">
+        <span id="progressText"></span>
+        <span>
+          ✔️ <span id="correctCount">0</span> |
+          ❌ <span id="wrongCount">0</span> |
+          ⏳ <span id="remainPercent">100%</span>
+        </span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="timer" id="timer">60:00</div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<script>
+/* ===== Questions ===== */
+let questions = [
+
+/* ===== Post One ===== */
+
+{t:"Supervision in the nursing department safeguards patient care and helps personnel improve work quality.",o:["True","False"],a:0},
+
+{t:"Functions of the head nurse include all of the following except:",o:["Patient care management","Supervising all nursing","Unit management","Staff management"],a:1},
+
+{t:"The head nurse refuses to let her standards drop below the minimum for essential patient care.",o:["True","False"],a:0},
+
+{t:"Every hospital, regardless of size or type of control, has an organizational structure.",o:["True","False"],a:0},
+
+{t:"Administrative responsibilities of the head nurse toward staff include all except:",o:["Staff utilization","Staff supervision","Staff development","Staff motivation"],a:3},
+
+{t:"There is one organizational pattern adaptable to every nursing department.",o:["True","False"],a:1},
+
+{t:"Organizational structure is the framework within which hospital purposes and objectives are achieved.",o:["True","False"],a:0},
+
+{t:"Important aspects of good administration include:",o:["Administrative planning","Assignment of activities","Supervision","All of the above"],a:3},
+
+{t:"The head nurse occupies a critical first-line management position in nursing services.",o:["True","False"],a:0},
+
+{t:"A person responsible for routine patient care under supervision of a professional nurse is:",o:["Assistant nurse","Auxiliary worker","Staff nurse","Head nurse"],a:0},
+
+{t:"The head nurse observes patient responses to medical and nursing care.",o:["True","False"],a:0},
+
+{t:"Nursing supervisors are responsible for developing and supervising nursing services of one or part of a unit.",o:["True","False"],a:1},
+
+{t:"Assistant directors and supervisors are directly responsible to the director of nursing.",o:["True","False"],a:0},
+
+{t:"The person responsible for developing and supervising nursing service of two or more units is:",o:["Head nurse","Director","Supervisor","Staff nurse"],a:2},
+
+{t:"The head nurse provides direct and indirect care for patients within an organized unit.",o:["True","False"],a:0},
+
+/* ===== Post Two ===== */
+
+{t:"The purpose of staff development is to promote quality of patient care.",o:["True","False"],a:0},
+
+{t:"__________ is done for six to eight weeks.",o:["Centralized scheduling","Blocking scheduling","Cyclic time scheduling","Flexible scheduling"],a:2},
+
+{t:"__________ is the ability to influence the behavior of others.",o:["Leadership","Autocratic leadership","Leader","Management"],a:0},
+
+{t:"__________ prevent oversupply and serve as a guide to an inexperienced head nurse.",o:["Inventory","Delegation","Standards","Staffing"],a:2},
+
+{t:"__________ facilitate various aspects of the plan of care.",o:["Interaction","Implementation","Assessment","Evaluation"],a:1},
+
+{t:"Cyclic time scheduling provides central control of staff.",o:["True","False"],a:1},
+
+{t:"The most appropriate leadership style depends on the situation and readiness of followers.",o:["True","False"],a:0},
+
+{t:"In awareness, leaders must be aware of themselves and others.",o:["True","False"],a:0},
+
+{t:"Modular nursing is used when staff includes professional, technical, and ancillary workers.",o:["True","False"],a:0},
+
+{t:"Functional nursing is used in intensive care units and teaching nursing students.",o:["True","False"],a:1},
+
+{t:"An advocate does not maintain the cause of someone or something.",o:["True","False"],a:1},
+
+{t:"The staffing plan indicates the number of personnel on duty per unit.",o:["True","False"],a:1},
+
+{t:"__________ is the number of personnel assigned to work on a unit at a given time.",o:["Staffing","Improper staffing","Marked overstaffing","Understaffing"],a:0},
+
+{t:"Staff development is planned educational experience within the agency only.",o:["True","False"],a:1},
+
+{t:"The problem of the borrowing method is that the head nurse never admits she has extra nurses.",o:["True","False"],a:0},
+
+
+/* ===== Post Three ===== */
+,
+{t:"All healthcare professionals should collaborate to improve quality of care.",o:["True","False"],a:0},
+
+{t:"Day, evening, and night shift reports are oral reports.",o:["True","False"],a:1},
+
+{t:"Providing staff with feedback about their work improves job performance.",o:["True","False"],a:0},
+
+{t:"Concurrent audit includes:",o:["Post care conference","Closed chart audit","Post care interview","Patient interview or observation"],a:3},
+
+{t:"Safety is the degree to which care achieves desired outcomes.",o:["True","False"],a:1},
+
+{t:"Advantages of retrospective audit include all except:",o:["Less costly","Less time","Overall organizational picture","Immediate corrective action"],a:3},
+
+{t:"Written requests for supplies or equipment sent to the nursing office are called requisitions.",o:["True","False"],a:0},
+
+{t:"Concurrent audit includes:",o:["Post care conference","Closed chart audit","Post care interview","Patient interview or observation"],a:3},
+
+{t:"Narrative charting was introduced to improve documentation of patient care.",o:["True","False"],a:1},
+
+{t:"A verbal appraisal can substitute a written report if the nurse manager is busy.",o:["True","False"],a:1},
+
+{t:"Responsibility for outcomes of performance appraisal rests mainly with the evaluator.",o:["True","False"],a:1},
+
+{t:"A nurse lacking organizational skills should be continuously observed until improvement occurs.",o:["True","False"],a:1},
+
+{t:"Census records are used by the nursing office.",o:["True","False"],a:1},
+
+{t:"Instruments used to measure quality of care standards include:",o:["Observational instrument","Quality evaluation system","Monitor","All of the above"],a:3},
+
+{t:"Four themes of nursing standards include all except:",o:["Professional standards agreement","Planned and systematic care","Baseline for measurement","Overall organizational picture"],a:3},
+
+/* ===== Final Exam Questions ===== */
+
+{t:"A real learning need is something a person feels that he needs to know it.",o:["True","False"],a:1},
+
+{t:"Informing members of the nursing staff of specific impressions about their work helps improve job performance.",o:["True","False"],a:0},
+
+{t:"It is unnecessary for the head nurse to observe the overall physical and mental condition of each patient.",o:["True","False"],a:1},
+
+{t:"You can evaluate any educational program through judging the worth of the program.",o:["True","False"],a:0},
+
+{t:"The head nurse fills one of the most critical first-line management positions in nursing services administration.",o:["True","False"],a:0},
+
+{t:"There is one organizational pattern adaptable to every department of nursing.",o:["True","False"],a:1},
+
+{t:"In an emergency at the lower level, what is the first action a nurse manager should take?",o:["Isolate the most important message","Send someone for help","Leave for a qualified person","Call a quick conference"],a:0},
+
+{t:"Orientation program makes a new employee feel wanted and needed.",o:["True","False"],a:0},
+
+{t:"Rotation schedules should inform staff of their work schedule for the coming week only.",o:["True","False"],a:1},
+
+{t:"Nursing director is responsible for the organization and administration of nursing service.",o:["True","False"],a:0},
+
+{t:"The nurse manager uses observation, questioning, and listening during formal appraisal.",o:["True","False"],a:0},
+
+{t:"Nursing supervisor is responsible for developing and supervising nursing service of one or part of unit.",o:["True","False"],a:1},
+
+{t:"Evaluation record is used as a base for promotion.",o:["True","False"],a:0},
+
+{t:"A discrepancy is a difference between what is reported and what is found.",o:["True","False"],a:0},
+
+{t:"Leadership and management competency can be spread through induction program.",o:["True","False"],a:1},
+
+{t:"Staff development program should be planned to ensure effectiveness.",o:["True","False"],a:0},
+
+{t:"Team nursing consists of:",o:["Group of workers","Group led by licensed nurse","Group by consensus","Vertical activities"],a:1},
+
+{t:"Primary nursing method is best in agencies with all professional staff.",o:["True","False"],a:0},
+
+{t:"Instructions given to employees regarding specific job tasks is:",o:["Induction","Skill training","Job orientation","Continuing education"],a:2},
+
+{t:"Narcotics record is commonly used by the nursing office.",o:["True","False"],a:1},
+
+{t:"Blocking schedule is planned for 4–8 weeks.",o:["True","False"],a:0},
+
+{t:"Best sequence of communication process is:",o:["Message→Sender→Receiver","Sender→Message→Receiver","Receiver→Sender→Message"],a:1},
+
+{t:"One of the alternative methods of organizing patient care is:",o:["Modular","Primary","Case management","Team"],a:2},
+
+{t:"The following are scheduling types except:",o:["Blocking","Centralized","Decentralized","10-hour shift"],a:3},
+
+{t:"Philosophy describes vision of nursing service.",o:["True","False"],a:0},
+
+{t:"The head nurse observes patient responses to care.",o:["True","False"],a:0},
+
+{t:"Leadership style includes all except:",o:["Behavior","Way of doing","Role or title","Working with followers"],a:2},
+
+{t:"It is unnecessary for nurses’ aides to have professional qualifications.",o:["True","False"],a:0},
+
+{t:"Organizational structure is the framework to achieve hospital objectives.",o:["True","False"],a:0},
+
+{t:"The head nurse provides direct and indirect patient care.",o:["True","False"],a:0},
+
+{t:"Professional nursing personnel must be licensed.",o:["True","False"],a:0},
+
+{t:"Rules and regulations of nursing services are called administrative procedures.",o:["True","False"],a:0},
+
+{t:"Before conducting educational program, climate setting should be prepared.",o:["True","False"],a:0},
+
+{t:"Nursing rounds can be conducted after physician rounds.",o:["True","False"],a:1},
+
+{t:"Scheduling patterns include all except:",o:["Regular shift","12-hour shift","Irregular hours","Cyclic time"],a:3},
+
+{t:"Nursing service organization is a social organization to achieve goals.",o:["True","False"],a:0},
+
+{t:"Assistant directors and supervisors are responsible to the director of nursing.",o:["True","False"],a:0},
+
+{t:"Objectivity is incompatible with halo effect.",o:["True","False"],a:0},
+
+{t:"Centralized scheduling is planned at unit level.",o:["True","False"],a:1},
+
+{t:"Day, evening and night shift reports are oral.",o:["True","False"],a:1},
+
+{t:"Pattern of nursing care is defined as:",o:["Job description","Procedural manual","System used to deliver care","Rules"],a:2},
+
+{t:"A good assignment should be characterized by all except:",o:["Written","Recognize differences","Clearly understood","Ignore geography"],a:3},
+
+{t:"Responsibility for performance appraisal outcomes rests with evaluator.",o:["True","False"],a:1},
+
+{t:"Principles of scheduling include all except:",o:["Meet objectives","Inform 3–6 weeks","Follow labor acts","Overall staffing picture"],a:3},
+
+{t:"All healthcare professionals should collaborate to improve care.",o:["True","False"],a:0},
+
+{t:"Written requests sent to nursing office are called requisitions.",o:["True","False"],a:0},
+
+{t:"Safety is the degree to which care achieves desired outcome.",o:["True","False"],a:1},
+
+{t:"Most appropriate leadership style depends on authoritative style.",o:["True","False"],a:1},
+
+{t:"Four themes of nursing standards include all except:",o:["Professional agreement","Planned care","Baseline measurement","Overall picture"],a:3},
+
+{t:"Purpose of documentation includes all except:",o:["Communication","Legal protection","Teaching","Saving nurse time"],a:3},
+
+{t:"Attendance record is used by nursing unit.",o:["True","False"],a:1},
+
+{t:"Primary nursing provides:",o:["Physician assessment","Continuous coordinated care","Prepared nurse dominance"],a:1},
+
+{t:"Accurate documentation provides legal protection.",o:["True","False"],a:0},
+
+{t:"Employee handbook is part of which program?",o:["Induction","Skill training","Orientation","Continuing education"],a:0},
+
+{t:"Assignment must provide care with maximum efficiency and minimum effort.",o:["True","False"],a:0},
+
+{t:"Supervision in nursing department helps improve work quality.",o:["True","False"],a:0},
+
+{t:"Master record of nursing hours is used by nursing office.",o:["True","False"],a:0},
+
+{t:"Assistant director supervises nursing service of two or more units.",o:["True","False"],a:1},
+
+{t:"Documentation system selection should consider all except:",o:["Staff mix","Cost","Educational time","Length of stay"],a:3},
+
+{t:"Staff development is planned educational experience within agency.",o:["True","False"],a:0},
+
+{t:"Every hospital has an organizational structure.",o:["True","False"],a:0},
+
+{t:"Through nursing rounds, patient environment can be observed.",o:["True","False"],a:0},
+
+
+];
+
+
+
+// ===== shuffle questions only =====
+function shuffleQuestions(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+// خلط الأسئلة فقط
+shuffleQuestions(questions);
+
+// تعريف المتغيرات الناقصة
+let i = 0;
+let correct = 0;
+let wrong = 0;
+let answers = [];
+let wrongSet = [];
+
+/* ===== Timer ===== */
+let totalTime=60*60, timeLeft=totalTime;
+const timerInt=setInterval(()=>{
+  timeLeft--;
+  let m=Math.floor(timeLeft/60), s=timeLeft%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  let deg=(timeLeft/totalTime)*360;
+  timer.style.background=`conic-gradient(var(--primary) ${deg}deg,var(--soft) ${deg}deg)`;
+  if(timeLeft<=0){clearInterval(timerInt);finishExam();}
+},1000);
+
+/* ===== UI ===== */
+function updateTop(){
+  let total=questions.length;
+  let answered=correct+wrong;
+  progressText.innerText=`سؤال ${i+1} من ${total}`;
+  progressBar.style.width=((i+1)/total*100)+"%";
+  correctCount.innerText=correct;
+  wrongCount.innerText=wrong;
+  remainPercent.innerText=Math.round(((total-answered)/total)*100)+"%";
+}
+
+/* ===== Render ===== */
+function show(){
+  updateTop();
+  let q = questions[i];
+
+  app.innerHTML = `
+    <div class="card">
+      <div class="question-title">${q.t}</div>
+      ${q.o.map((o,idx)=>`
+        <div class="option" onclick="choose(${idx})">${o}</div>
+      `).join("")}
+    </div>
+  `;
+}
+/* ===== Choose ===== */
+function choose(v){
+  if(answers[i]!=null) return;
+  answers[i]=v;
+  let ok=v===questions[i].a;
+  ok?correct++:wrong++;
+  app.innerHTML=`
+    <div class="feedback">${ok?"🎉 شاطر جدًا كمل":"😅 ركّز يا سُكر"}</div>
+    <div class="card">
+      <div class="question-title">${questions[i].t}</div>
+      ${questions[i].o.map((o,j)=>`
+        <div class="option ${j===questions[i].a?"correct":j===v?"wrong":""} disabled">${o}</div>
+      `).join("")}
+      <button onclick="next()">التالي</button>
+    </div>`;
+}
+
+/* ===== Next ===== */
+function next(){
+  if(i<questions.length-1){i++;show();}
+  else finishExam();
+}
+
+/* ===== Finish ===== */
+function finishExam(){
+  document.body.classList.remove("exam");
+  document.body.classList.add("after");
+
+  let score=Math.round((correct/questions.length)*100);
+
+  if(score>=80){
+    document.documentElement.style.setProperty("--brand1","#22c55e");
+    document.documentElement.style.setProperty("--brand2","#fde047");
+  }else if(score>=50){
+    document.documentElement.style.setProperty("--brand1","#38bdf8");
+    document.documentElement.style.setProperty("--brand2","#e0f2fe");
+  }else{
+    document.documentElement.style.setProperty("--brand1","#fb923c");
+    document.documentElement.style.setProperty("--brand2","#fed7aa");
+  }
+
+  wrongSet=[];
+  let report="";
+  questions.forEach((q,idx)=>{
+    let ok=answers[idx]===q.a;
+    if(!ok) wrongSet.push(q);
+    report+=`
+      <div class="report ${ok?"correct":"wrong"}">
+        <b>${q.t}</b><br>
+إجابتك: ${answers[idx]!=null ? q.o[answers[idx]] : "لم يتم الحل"}<br>
+الصح: ${q.o[q.a]}
+      </div>`;
+  });
+
+  app.innerHTML=`
+    <div class="card">
+      <h3>?? تقريرك</h3>
+      ${report}
+      ${wrongSet.length?`<button onclick="retry()">إعادة حل الغلط فقط</button>`:"<p>أنت ممتاز 👑</p>"}
+    </div>`;
+}
+
+/* ===== Retry Wrong ===== */
+function retry(){
+  // نبدأ امتحان جديد بالأسئلة الغلط فقط
+  questions = [...wrongSet];
+
+  answers = [];
+  wrongSet = [];
+  i = 0;
+  correct = 0;
+  wrong = 0;
+
+  // رجوع لشكل الامتحان
+  document.body.classList.remove("after");
+  document.body.classList.add("exam");
+
+  show();
+}
+
+show();
+</script>
+
+</body>
+</html>
