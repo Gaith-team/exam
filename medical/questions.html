@@ -1,0 +1,465 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaith Team | Exam</title>
+
+<style>
+:root{
+  --primary:#0284c7;
+  --secondary:#0ea5e9;
+  --bg:#f8fbff;
+  --card:#ffffff;
+  --soft:#e6f0ff;
+  --question:#eef7ff;
+  --option:#f9fcff;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --text:#0f172a;
+
+  /* Brand dynamic */
+  --brand1:#ffffff;
+  --brand2:#e0f2fe;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#eef6ff);
+  color:var(--text);
+}
+
+/* ================= HEADER ================= */
+header{
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* ===== Brand ===== */
+.logo{
+  position:relative;
+  font-size:28px;
+  font-weight:900;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.brand-text{
+  background:linear-gradient(90deg,var(--brand1),var(--brand2),var(--brand1));
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 4s linear infinite;
+}
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+.heart{
+  display:inline-block;
+  animation:heartbeat 1.6s infinite ease-in-out;
+}
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  animation:twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle{
+  0%{opacity:0;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.2)}
+  100%{opacity:0;transform:scale(.6)}
+}
+
+/* Reduced motion أثناء الامتحان */
+.exam .sparkle{animation-duration:5s;opacity:.4}
+.exam .heart{animation-duration:2.5s}
+
+/* After exam */
+.after .sparkle{animation-duration:2s}
+.after .heart{animation-duration:1.1s}
+
+/* ================= LAYOUT ================= */
+.container{max-width:520px;margin:auto;padding:16px}
+
+/* ===== Top Bar ===== */
+.top-bar{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+}
+.progress-box{
+  flex:1;
+  background:var(--card);
+  padding:14px;
+  border-radius:18px;
+  box-shadow:0 10px 22px rgba(2,132,199,.12);
+}
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px;
+  font-weight:800;
+  font-size:14px;
+}
+.progress{
+  height:8px;
+  background:var(--soft);
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+}
+
+/* Timer */
+.timer{
+  width:64px;height:64px;border-radius:50%;
+  background:conic-gradient(var(--primary) 0deg,var(--soft) 0deg);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;
+  background-color:var(--card);
+}
+
+/* ================= CARD ================= */
+.card{
+  background:var(--card);
+  padding:22px;
+  border-radius:24px;
+  box-shadow:0 18px 36px rgba(2,132,199,.18);
+}
+.question-title{
+  background:var(--question);
+  padding:16px;
+  border-radius:16px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+.option{
+  background:var(--option);
+  border:2px solid var(--soft);
+  border-radius:18px;
+  padding:15px;
+  margin:12px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.correct{background:#eafaf1;border-color:var(--success)}
+.option.wrong{background:#fff1f1;border-color:var(--danger)}
+.option.disabled{pointer-events:none;opacity:.9}
+
+button{
+  margin-top:18px;
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-weight:900;
+}
+
+/* Feedback */
+.feedback{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:10px;
+  animation:pop .5s;
+}
+@keyframes pop{
+  0%{transform:scale(.6);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* Report */
+.report{
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  border-left:6px solid var(--soft);
+}
+.report.correct{border-color:var(--success)}
+.report.wrong{border-color:var(--danger)}
+</style>
+</head>
+
+<body class="exam">
+
+<header>
+  <div class="logo">
+    <span class="brand-text">Gaith Team</span>
+    <span class="heart">💖</span>
+    <span class="sparkle" style="top:-8px;left:0">✨</span>
+    <span class="sparkle" style="top:6px;right:-8px">✨</span>
+    <span class="sparkle" style="bottom:-8px;left:50%">✨</span>
+  </div>
+  <div style="margin-top:6px;font-weight:800">الإمتحان في جيبك 👏🏻</div>
+</header>
+
+<div class="container">
+
+  <div class="top-bar">
+    <div class="progress-box">
+      <div class="progress-text">
+        <span id="progressText"></span>
+        <span>
+          ✔️ <span id="correctCount">0</span> |
+          ❌ <span id="wrongCount">0</span> |
+          ⏳ <span id="remainPercent">100%</span>
+        </span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="timer" id="timer">30:00</div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<script>
+/* ===== Questions ===== */
+let questions = [
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Wound Care OSCE Questions</title>
+</head>
+<body>
+    <pre id="questions-output"></pre>
+
+    <script>
+        let questions = [
+            // Standard MCQs (30)
+            {t:"What is the primary goal of wound cleaning?", o:["To make the wound look better","To promote tissue repair and regeneration","To increase pain","To dry the skin"], a:1},
+            {t:"Which solution is most commonly used for sterile wound cleaning?", o:["Alcohol 70%","Hydrogen Peroxide","0.9% Normal Saline","Betadine"], a:2},
+            {t:"What type of gloves should be used when removing an old dressing?", o:["Sterile gloves","Clean, disposable gloves","No gloves","Rubber gloves"], a:1},
+            {t:"When cleaning a wound, you should clean from:", o:["The outside to the center","The least contaminated area to the most contaminated","The bottom to the top","The most contaminated to the least"], a:1},
+            {t:"What is the purpose of using a waterproof pad under the wound site?", o:["To keep the patient warm","To prevent soiling of bed linens","To clean the wound","To reduce pain"], a:1},
+            {t:"Which nursing diagnosis is appropriate for a patient with a surgical wound?", o:["Risk for Infection","Disturbed Body Image","Impaired Skin Integrity","All of the above"], a:3},
+            {t:"At what height should the bed be adjusted for a dressing change?", o:["Lowest position","Elbow height of the caregiver","Knee height","Highest possible position"], a:1},
+            {t:"What should the nurse note about wound drainage?", o:["Color only","Amount only","Type, color, amount, and odor","Only if it smells bad"], a:2},
+            {t:"Which of these is used to help remove tape that is sticking to the skin?", o:["Hot water","Alcohol","Silicone-based adhesive remover","Acetone"], a:2},
+            {t:"What is the purpose of a Hemovac drain?", o:["To give medications","To collect and measure drainage from a surgical site","To pump blood","To provide oxygen"], a:1},
+            {t:"How is suction created in a Hemovac drain?", o:["By a machine","By fully compressing the chamber and applying the cap","By gravity","By the patient squeezing it"], a:1},
+            {t:"How often should a Hemovac drain status be checked?", o:["Once a day","Every 4 hours","Every 12 hours","Once per shift"], a:1},
+            {t:"What is the first step in the implementation of wound care?", o:["Put on sterile gloves","Identify the patient","Review medical orders","Gather supplies"], a:2},
+            {t:"Why is the patient's level of comfort assessed before wound care?", o:["To see if they are sleeping","To determine the need for analgesics","To check their ID","To see if they can talk"], a:1},
+            {t:"What should be used to clean the outlet of a Hemovac drain?", o:["A dry cloth","A gauze pad moistened with alcohol or saline","Soap and water","Nothing"], a:1},
+            {t:"Where should the Hemovac drain be secured?", o:["To the bed rail","To the patient's gown below the wound with a safety pin","To the floor","To the patient's arm"], a:1},
+            {t:"What is 'dehiscence'?", o:["Normal healing","Accidental separation of wound edges","A type of bandage","An infection"], a:1},
+            {t:"Which PPE is typically required for wound care if splashing is expected?", o:["Only gloves","Gloves, mask, and face shield","Only a mask","No PPE"], a:1},
+            {t:"What is the rationale for performing hand hygiene before the procedure?", o:["To save time","To prevent cross-infection","To keep hands warm","To follow the law"], a:1},
+            {t:"When using a swab to clean a wound, how many times should each swab be used?", o:["Once","Twice","Until it's dirty","Three times"], a:0},
+            {t:"In which direction should a circular wound be cleaned?", o:["Inward to outward","Outward to inward","Top to bottom","Left to right"], a:0},
+            {t:"What is the purpose of a 'sterile field'?", o:["To keep the room clean","To provide a germ-free area for sterile supplies","To store waste","To protect the floor"], a:1},
+            {t:"What should be done with soiled dressings?", o:["Put them in a regular trash can","Place them in an appropriate biohazard waste container","Wash and reuse them","Leave them on the bedside table"], a:1},
+            {t:"What is a 'suture set' used for?", o:["To clean the wound","To provide sterile scissors and forceps","To feed the patient","To check blood pressure"], a:1},
+            {t:"Which of these indicates a wound infection?", o:["Pink tissue","Purulent drainage, redness, and heat","No drainage","Itching"], a:1},
+            {t:"What should be documented after a dressing change?", o:["Only the date","Description of wound, drainage, and patient tolerance","Only the nurse's name","Nothing"], a:1},
+            {t:"Why is the old dressing loosened before putting on sterile gloves?", o:["To save sterile gloves for the actual cleaning","To see the wound","To check the tape","To make the patient comfortable"], a:0},
+            {t:"What is the purpose of a 'bath blanket' during the procedure?", o:["To clean the patient","To provide privacy and cover exposed areas","To dry the wound","To use as a bandage"], a:1},
+            {t:"What is the rationale for explaining the procedure to the patient?", o:["To test their knowledge","To decrease anxiety and increase comfort","To pass time","To get their signature"], a:1},
+            {t:"How is the patency of a drain checked?", o:["By looking at the color","By ensuring the tubing is free from twists and kinks","By smelling it","By asking the patient"], a:1},
+
+            // Critical Thinking (20)
+            {t:"Why is it important to wait for an analgesic to take effect before starting wound care?", o:["To save medicine","To ensure the patient is comfortable during the painful parts of the procedure","To let the nurse rest","To check the dosage"], a:1},
+            {t:"Why should you avoid touching the sterile swab to intact skin at the wound edges?", o:["It causes pain","To prevent contamination of the wound from the surrounding skin","It makes the skin wet","It is not necessary"], a:1},
+            {t:"What is the risk of leaving a Hemovac drain chamber expanded (not compressed)?", o:["It will leak","Loss of suction and failure to drain fluid","It will explode","It will become too heavy"], a:1},
+            {t:"Why is the wound cleaned from the least contaminated to the most contaminated area?", o:["To save saline","To prevent spreading microorganisms to cleaner parts of the wound","Because it's easier","To follow the doctor's order"], a:1},
+            {t:"Why must the nurse note the presence of 'odor' in wound drainage?", o:["To check the patient's diet","Foul odor often indicates an infection","To see if the room needs spray","To test their sense of smell"], a:1},
+            {t:"Why is the bed height adjusted to elbow level?", o:["To see the wound better","To prevent back strain for the nurse","To keep the patient safe","To reach the supplies"], a:1},
+            {t:"What should you do if the dressing is stuck to the wound?", o:["Pull it quickly","Use small amounts of sterile saline to help loosen and remove it","Leave it on","Cut the dressing"], a:1},
+            {t:"Why is a silicone-based adhesive remover used instead of just pulling tape?", o:["It smells better","To prevent skin tears and trauma, especially in elderly patients","It is cheaper","It dries faster"], a:1},
+            {t:"Why are sutures or staples counted during the assessment?", o:["To see how expensive they were","To ensure the wound is intact and no closures are missing","To practice counting","To tell the doctor"], a:1},
+            {t:"Why is the Hemovac drain secured to the gown with a safety pin?", o:["For decoration","To prevent tension on the tubing and accidental pull-out","To keep the gown closed","To hide the drain"], a:1},
+            {t:"What is the significance of 'maceration' around a wound site?", o:["It means it's healing","It indicates the skin is too wet, which can lead to further breakdown","It is a type of infection","It is a normal sign"], a:1},
+            {t:"Why is the 'flashback' of a drain chamber important?", o:["It shows it's full","It indicates that air is being drawn in and the device is working","It looks interesting","It is not important"], a:1},
+            {t:"Why do we use 'sterile' technique for surgical wounds?", o:["Because the patient is in a hospital","To prevent the introduction of pathogens into a vulnerable area","To use up the supplies","To look professional"], a:1},
+            {t:"Why is the surrounding skin checked for color and temperature?", o:["To check for a tan","To assess for signs of inflammation or impaired circulation","To see if the patient is cold","To match the bandage color"], a:1},
+            {t:"What is the risk of a drain tubing being kinked?", o:["It will break","Fluid will accumulate in the wound, increasing the risk of infection and pain","The patient will be annoyed","It will change the color of the drainage"], a:1},
+            {t:"Why is the waste receptacle placed at a convenient location?", o:["To keep the room tidy","To prevent the nurse from reaching across the sterile field","To hide the trash","To save steps"], a:1},
+            {t:"Why is a culture specimen sometimes taken from a wound?", o:["To see the cells","To identify the specific bacteria causing an infection","To check the blood type","To test the saline"], a:1},
+            {t:"Why is the skin protectant applied to the skin around the drain?", o:["To make it shiny","To protect the skin from moisture and drainage irritation","To help the tape stick","To clean the skin"], a:1},
+            {t:"What should the nurse do if they accidentally touch a non-sterile object while wearing sterile gloves?", o:["Keep working","Change the gloves and restart the sterile part of the procedure","Wash the gloves with alcohol","Ignore it"], a:1},
+            {t:"Why is the amount of drainage recorded accurately?", o:["To fill the paper","To monitor for excessive blood loss or fluid accumulation","To tell the family","To check the container"], a:1},
+
+            // Scenarios (10)
+            {t:"You are changing a dressing and notice the wound edges have separated. What do you do?", o:["Tape them back together","Cover with a sterile dressing and notify the surgeon immediately","Ignore it as it's normal","Apply alcohol"], a:1},
+            {t:"A patient's Hemovac drain is full of bright red blood shortly after surgery. Your priority is:", o:["Empty it and wait","Notify the surgeon immediately as this may indicate hemorrhage","Check it again in 4 hours","Change the dressing"], a:1},
+            {t:"While cleaning a wound, you notice a foul-smelling yellow discharge. You suspect:", o:["Normal healing","Infection","The saline is bad","The patient needs a bath"], a:1},
+            {t:"A patient is very anxious about their dressing change. You should:", o:["Tell them to be quiet","Explain the procedure and provide privacy","Do it as fast as possible without talking","Ask someone else to do it"], a:1},
+            {t:"You are about to start wound care but realize you forgot the sterile gauze. You should:", o:["Use a clean tissue","Ask someone to bring it or cover the wound and go get it","Use the old gauze","Don't use gauze"], a:1},
+            {t:"A patient with a drain wants to walk around. You should:", o:["Tell them they must stay in bed","Ensure the drain is secured to their gown and below the wound level before they walk","Disconnect the drain","Hold the drain for them"], a:1},
+            {t:"During assessment, you see the skin around the drain is red and wet. You should:", o:["Apply more tape","Clean the area and apply a skin protectant","Leave it open to air","Apply heat"], a:1},
+            {t:"The doctor orders a wound culture. You should take the specimen from:", o:["The old dressing","The cleanest part of the wound bed after cleaning","The surrounding skin","The drainage bag"], a:1},
+            {t:"You find the Hemovac drain chamber is fully expanded and not drawing fluid. You should:", o:["Throw it away","Empty it, clean the outlet, and re-compress it","Wait for the next shift","Call the plumber"], a:1},
+            {t:"A patient complains of severe pain when you touch the area around the wound. You should:", o:["Tell them it's normal","Stop, assess for infection, and check for ordered analgesics","Push harder to finish","Give them water"], a:1},
+
+            // True/False (5)
+            {t:"Sterile gloves are used to remove the old dressing.", o:["True","False"], a:1},
+            {t:"Wounds should be cleaned from the most contaminated to the least contaminated area.", o:["True","False"], a:1},
+            {t:"A Hemovac drain works by using negative pressure (suction).", o:["True","False"], a:0},
+            {t:"Normal saline is a common solution for wound cleaning.", o:["True","False"], a:0},
+            {t:"The nurse should count the number of sutures or staples during a dressing change.", o:["True","False"], a:0}
+];
+
+
+
+// ===== shuffle questions only =====
+function shuffleQuestions(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+// خلط الأسئلة فقط
+shuffleQuestions(questions);
+
+// تعريف المتغيرات الناقصة
+let i = 0;
+let correct = 0;
+let wrong = 0;
+let answers = [];
+let wrongSet = [];
+
+/* ===== Timer ===== */
+let totalTime=30*60, timeLeft=totalTime;
+const timerInt=setInterval(()=>{
+  timeLeft--;
+  let m=Math.floor(timeLeft/60), s=timeLeft%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  let deg=(timeLeft/totalTime)*360;
+  timer.style.background=`conic-gradient(var(--primary) ${deg}deg,var(--soft) ${deg}deg)`;
+  if(timeLeft<=0){clearInterval(timerInt);finishExam();}
+},1000);
+
+/* ===== UI ===== */
+function updateTop(){
+  let total=questions.length;
+  let answered=correct+wrong;
+  progressText.innerText=`سؤال ${i+1} من ${total}`;
+  progressBar.style.width=((i+1)/total*100)+"%";
+  correctCount.innerText=correct;
+  wrongCount.innerText=wrong;
+  remainPercent.innerText=Math.round(((total-answered)/total)*100)+"%";
+}
+
+/* ===== Render ===== */
+function show(){
+  updateTop();
+  let q = questions[i];
+
+  app.innerHTML = `
+    <div class="card">
+      <div class="question-title">${q.t}</div>
+      ${q.o.map((o,idx)=>`
+        <div class="option" onclick="choose(${idx})">${o}</div>
+      `).join("")}
+    </div>
+  `;
+}
+/* ===== Choose ===== */
+function choose(v){
+  if(answers[i]!=null) return;
+  answers[i]=v;
+  let ok=v===questions[i].a;
+  ok?correct++:wrong++;
+  app.innerHTML=`
+    <div class="feedback">${ok?"🎉 شاطر جدًا كمل":"😅 ركّز يا سُكر"}</div>
+    <div class="card">
+      <div class="question-title">${questions[i].t}</div>
+      ${questions[i].o.map((o,j)=>`
+        <div class="option ${j===questions[i].a?"correct":j===v?"wrong":""} disabled">${o}</div>
+      `).join("")}
+      <button onclick="next()">التالي</button>
+    </div>`;
+}
+
+/* ===== Next ===== */
+function next(){
+  if(i<questions.length-1){i++;show();}
+  else finishExam();
+}
+
+/* ===== Finish ===== */
+function finishExam(){
+  document.body.classList.remove("exam");
+  document.body.classList.add("after");
+
+  let score=Math.round((correct/questions.length)*100);
+
+  if(score>=80){
+    document.documentElement.style.setProperty("--brand1","#22c55e");
+    document.documentElement.style.setProperty("--brand2","#fde047");
+  }else if(score>=50){
+    document.documentElement.style.setProperty("--brand1","#38bdf8");
+    document.documentElement.style.setProperty("--brand2","#e0f2fe");
+  }else{
+    document.documentElement.style.setProperty("--brand1","#fb923c");
+    document.documentElement.style.setProperty("--brand2","#fed7aa");
+  }
+
+  wrongSet=[];
+  let report="";
+  questions.forEach((q,idx)=>{
+    let ok=answers[idx]===q.a;
+    if(!ok) wrongSet.push(q);
+    report+=`
+      <div class="report ${ok?"correct":"wrong"}">
+        <b>${q.t}</b><br>
+إجابتك: ${answers[idx]!=null ? q.o[answers[idx]] : "لم يتم الحل"}<br>
+الصح: ${q.o[q.a]}
+      </div>`;
+  });
+
+  app.innerHTML=`
+    <div class="card">
+      <h3>?? تقريرك</h3>
+      ${report}
+      ${wrongSet.length?`<button onclick="retry()">إعادة حل الغلط فقط</button>`:"<p>أنت ممتاز 👑</p>"}
+    </div>`;
+}
+
+/* ===== Retry Wrong ===== */
+function retry(){
+  // نبدأ امتحان جديد بالأسئلة الغلط فقط
+  questions = [...wrongSet];
+
+  answers = [];
+  wrongSet = [];
+  i = 0;
+  correct = 0;
+  wrong = 0;
+
+  // رجوع لشكل الامتحان
+  document.body.classList.remove("after");
+  document.body.classList.add("exam");
+
+  show();
+}
+
+show();
+</script>
+
+</body>
+</html>
