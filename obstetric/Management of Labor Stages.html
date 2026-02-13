@@ -1,0 +1,632 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaith Team | Exam</title>
+
+<style>
+:root{
+  --primary:#0284c7;
+  --secondary:#0ea5e9;
+  --bg:#f8fbff;
+  --card:#ffffff;
+  --soft:#e6f0ff;
+  --question:#eef7ff;
+  --option:#f9fcff;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --text:#0f172a;
+
+  /* Brand dynamic */
+  --brand1:#ffffff;
+  --brand2:#e0f2fe;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#eef6ff);
+  color:var(--text);
+}
+
+/* ================= HEADER ================= */
+header{
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* ===== Brand ===== */
+.logo{
+  position:relative;
+  font-size:28px;
+  font-weight:900;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.brand-text{
+  background:linear-gradient(90deg,var(--brand1),var(--brand2),var(--brand1));
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 4s linear infinite;
+}
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+.heart{
+  display:inline-block;
+  animation:heartbeat 1.6s infinite ease-in-out;
+}
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  animation:twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle{
+  0%{opacity:0;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.2)}
+  100%{opacity:0;transform:scale(.6)}
+}
+
+/* Reduced motion أثناء الامتحان */
+.exam .sparkle{animation-duration:5s;opacity:.4}
+.exam .heart{animation-duration:2.5s}
+
+/* After exam */
+.after .sparkle{animation-duration:2s}
+.after .heart{animation-duration:1.1s}
+
+/* ================= LAYOUT ================= */
+.container{max-width:520px;margin:auto;padding:16px}
+
+/* ===== Top Bar ===== */
+.top-bar{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+}
+.progress-box{
+  flex:1;
+  background:var(--card);
+  padding:14px;
+  border-radius:18px;
+  box-shadow:0 10px 22px rgba(2,132,199,.12);
+}
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px;
+  font-weight:800;
+  font-size:14px;
+}
+.progress{
+  height:8px;
+  background:var(--soft);
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+}
+
+/* Timer */
+.timer{
+  width:64px;height:64px;border-radius:50%;
+  background:conic-gradient(var(--primary) 0deg,var(--soft) 0deg);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;
+  background-color:var(--card);
+}
+
+/* ================= CARD ================= */
+.card{
+  background:var(--card);
+  padding:22px;
+  border-radius:24px;
+  box-shadow:0 18px 36px rgba(2,132,199,.18);
+}
+.question-title{
+  background:var(--question);
+  padding:16px;
+  border-radius:16px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+.option{
+  background:var(--option);
+  border:2px solid var(--soft);
+  border-radius:18px;
+  padding:15px;
+  margin:12px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.correct{background:#eafaf1;border-color:var(--success)}
+.option.wrong{background:#fff1f1;border-color:var(--danger)}
+.option.disabled{pointer-events:none;opacity:.9}
+
+button{
+  margin-top:18px;
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-weight:900;
+}
+
+/* Feedback */
+.feedback{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:10px;
+  animation:pop .5s;
+}
+@keyframes pop{
+  0%{transform:scale(.6);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* Report */
+.report{
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  border-left:6px solid var(--soft);
+}
+.report.correct{border-color:var(--success)}
+.report.wrong{border-color:var(--danger)}
+</style>
+</head>
+
+<body class="exam">
+
+<header>
+  <div class="logo">
+    <span class="brand-text">Gaith Team</span>
+    <span class="heart">💖</span>
+    <span class="sparkle" style="top:-8px;left:0">✨</span>
+    <span class="sparkle" style="top:6px;right:-8px">✨</span>
+    <span class="sparkle" style="bottom:-8px;left:50%">✨</span>
+  </div>
+  <div style="margin-top:6px;font-weight:800">الإمتحان في جيبك 👏🏻</div>
+</header>
+
+<div class="container">
+
+  <div class="top-bar">
+    <div class="progress-box">
+      <div class="progress-text">
+        <span id="progressText"></span>
+        <span>
+          ✔️ <span id="correctCount">0</span> |
+          ❌ <span id="wrongCount">0</span> |
+          ⏳ <span id="remainPercent">100%</span>
+        </span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="timer" id="timer">30:00</div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<script>
+/* ===== Questions ===== */
+let questions = [
+ {
+    "t": "A woman in the active phase of the first stage of labor is being prepared for general anesthesia. To prevent Mendelson's syndrome (pulmonary aspiration), what should the nurse provide for nutrition?",
+    "o": ["Sugary fluids", "Light snacks", "Only Intravenous fluids (glucose/saline)", "Full liquid diet"],
+    "a": 2
+  },
+  {
+    "t": "During the second stage of labor, the nurse observes that the bi-parietal diameter (BPD) has passed the vulval ring and the head no longer recedes between contractions. This is defined as:",
+    "o": ["Engagement", "Crowning", "Restitution", "Internal rotation"],
+    "a": 1
+  },
+  {
+    "t": "A newborn has a heart rate of 110 bpm, a good cry, active movement, grimace during suctioning, and a pink body with blue extremities at 1 minute. What is the Apgar score?",
+    "o": ["7", "8", "9", "10"],
+    "a": 2
+  },
+  {
+    "t": "Which medication is administered to the newborn (1 mg I.M.) to prevent hemorrhagic disease?",
+    "o": ["Vitamin A", "Vitamin D", "Vitamin K1", "Terramycin"],
+    "a": 2
+  },
+  {
+    "t": "The nurse is using the REEDA scale to assess a mother's perineum in the 4th stage of labor. What does the 'E' in REEDA stand for?",
+    "o": ["Edema and Ecchymosis", "Effacement and Engagement", "Erythema and Exudate", "Extension and Expulsion"],
+    "a": 0
+  },
+  {
+    "t": "In the active management of the 3rd stage of labor (Brandt-Andrews method), when is Ergometrine or Syntometrine typically administered?",
+    "o": ["With the onset of labor", "With the delivery of the anterior shoulder", "After the placenta is fully delivered", "During the 4th stage"],
+    "a": 1
+  },
+  {
+    "t": "A woman in labor complains of severe pain. The doctor orders an epidural. In which spinal space is the epidural puncture performed?",
+    "o": ["L1 and L2", "L2 and L3", "L4 and L5", "C7 and T1"],
+    "a": 1
+  },
+  {
+    "t": "True or False: During the first stage of labor, walking is allowed if the membranes are intact and there is no bleeding.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "Which sign indicates the onset of the second stage of labor?",
+    "o": ["Membranes rupture", "Desire to bear down during contractions", "Regular contractions every 10 minutes", "Engagement of the head"],
+    "a": 1
+  },
+  {
+    "t": "The nurse is suctioning a newborn immediately after birth. Which sequence is correct to prevent aspiration?",
+    "o": ["Suction nose then mouth", "Suction mouth then nose", "Suction both simultaneously", "Suctioning is not required"],
+    "a": 1
+  },
+  {
+    "t": "At what interval should vital signs be assessed during the first hour of the 4th stage of labor?",
+    "o": ["Every 5 minutes", "Every 15 minutes", "Every 30 minutes", "Every hour"],
+    "a": 1
+  },
+  {
+    "t": "During a vaginal examination, the nurse finds the cervix is fully dilated. This indicates the beginning of which stage?",
+    "o": ["1st stage", "2nd stage", "3rd stage", "4th stage"],
+    "a": 1
+  },
+  {
+    "t": "Which maneuver is used to assess the abdomen during the first stage of labor?",
+    "o": ["Heimlich maneuver", "Leopold maneuver", "Valsalva maneuver", "Credé maneuver"],
+    "a": 1
+  },
+  {
+    "t": "True or False: The rectum is evacuated by enema during the preparation for labor.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "A mother is encouraged to breastfeed her baby as soon as possible after birth because the suckling reflex is very strong. This helps in:",
+    "o": ["Placental separation", "Uterine atony", "Maternal-infant bonding", "Reducing neonatal jaundice"],
+    "a": 2
+  },
+  {
+    "t": "Which medication is used in the conservative method of the 3rd stage of labor after the delivery of the placenta?",
+    "o": ["Pethidine", "Ergometrine 0.5 mg IM", "Morphine", "Vitamin K1"],
+    "a": 1
+  },
+  {
+    "t": "The nurse notes the presence of 'Caput succedaneum' during a local exam. This is a finding related to:",
+    "o": ["The mother's cervix", "The fetal head", "The placenta", "The umbilical cord"],
+    "a": 1
+  },
+  {
+    "t": "In the 4th stage of labor, if the uterus is found to be lax, what should the nurse do?",
+    "o": ["Administer more analgesia", "Massage the uterus in circular movements", "Encourage the mother to walk", "Perform a vaginal exam"],
+    "a": 1
+  },
+  {
+    "t": "True or False: Crowning occurs when the head recedes between uterine contractions.",
+    "o": ["True", "False"],
+    "a": 1
+  },
+  {
+    "t": "To prevent 'Ophthalmia neonatorum', which eye drops are administered to the newborn?",
+    "o": ["Atropine", "Terramycin", "Saline", "Vitamin K"],
+    "a": 1
+  },
+  {
+    "t": "A woman is in the latent phase of the first stage of labor. Which type of nutrition is appropriate to prevent dehydration?",
+    "o": ["Solid food", "Sugary fluids or soap", "High-protein diet", "NPO (Nothing by mouth)"],
+    "a": 1
+  },
+  {
+    "t": "The nurse is checking for 'Moulding' during a vaginal exam. Moulding refers to:",
+    "o": ["Cervical softening", "Overlapping of fetal skull bones", "Placental shape", "Uterine contractions"],
+    "a": 1
+  },
+  {
+    "t": "True or False: Catheterization is the first choice for evacuating the bladder in labor.",
+    "o": ["True", "False"],
+    "a": 1
+  },
+  {
+    "t": "Which position is the woman typically placed in for delivery in the second stage of labor?",
+    "o": ["Prone", "Lithotomy", "Trendelenburg", "Sims'"],
+    "a": 1
+  },
+  {
+    "t": "The Apgar score is evaluated at which time intervals after birth?",
+    "o": ["1 and 5 minutes", "5 and 10 minutes", "Immediately and at 30 minutes", "Every hour for 4 hours"],
+    "a": 0
+  },
+  {
+    "t": "Which finding during a vaginal exam helps determine the 'Station' of the head?",
+    "o": ["Relation to the iliac crests", "Relation to the ischial spines", "Relation to the symphysis pubis", "Relation to the sacral promontory"],
+    "a": 1
+  },
+  {
+    "t": "True or False: In the active management of the 2nd stage, the mother should bear down between contractions.",
+    "o": ["True", "False"],
+    "a": 1
+  },
+  {
+    "t": "The nurse observes 'Umbilical cord prolapse' during an exam. This requires:",
+    "o": ["Immediate circular massage", "Immediate medical intervention", "Encouraging the mother to walk", "Waiting for crowning"],
+    "a": 1
+  },
+  {
+    "t": "What is the primary goal of supporting the perineum before crowning?",
+    "o": ["To speed up delivery", "To prevent perineal lacerations", "To reduce maternal pain", "To stimulate fetal crying"],
+    "a": 1
+  },
+  {
+    "t": "True or False: Ergometrine 0.5 mg IM helps induce uterine contractions and minimize blood loss.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "A newborn has an Apgar score of 3. This indicates:",
+    "o": ["Normal condition", "Small risk", "Moderate risk", "High risk"],
+    "a": 3
+  },
+  {
+    "t": "The nurse identifies the fetal position as 'LOA'. What does this stand for?",
+    "o": ["Left Occipito-Anterior", "Longitudinal Oblique Axis", "Lateral Occipito-Anterior", "Lower Occipito-Anterior"],
+    "a": 0
+  },
+  {
+    "t": "During the 4th stage, the nurse calculates 'Intake and Output'. This is important to assess:",
+    "o": ["Fetal growth", "Maternal hydration and renal function", "Placental weight", "Breast milk production"],
+    "a": 1
+  },
+  {
+    "t": "True or False: Episiotomy is typically performed at the time of crowning.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "Which investigation is performed to check for 'proteinuria' during labor preparation?",
+    "o": ["Blood group", "Urine analysis", "CBC", "Ultrasound"],
+    "a": 1
+  },
+  {
+    "t": "A newborn's cord stump is cared for using which solution?",
+    "o": ["Hydrogen peroxide", "Alcohol 70%", "Betadine", "Normal saline"],
+    "a": 1
+  },
+  {
+    "t": "True or False: Aseptic technique includes shaving the vulva and cleaning it with antiseptic.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "The nurse is monitoring 'Lochia' in the 4th stage. Lochia refers to:",
+    "o": ["Breast milk", "Vaginal discharge after childbirth", "Amniotic fluid", "Newborn urine"],
+    "a": 1
+  },
+  {
+    "t": "What is the dose of Pethidine used for analgesia in the first stage of labor?",
+    "o": ["10-20 mg I.M.", "50-100 mg I.M.", "200 mg I.M.", "500 mg I.M."],
+    "a": 1
+  },
+  {
+    "t": "True or False: Suctioning of the newborn should be done using a small rubber suction catheter.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "Which sign on the Apgar scale is assigned a '0' if the heart rate is absent?",
+    "o": ["Muscle tone", "Heart rate (Pulse)", "Reflexes", "Color"],
+    "a": 1
+  },
+  {
+    "t": "In the 4th stage of labor, a full bladder should be prevented because it can:",
+    "o": ["Cause ptyalism", "Prevent proper uterine contractions (atony)", "Lead to constipation", "Increase fetal heart rate"],
+    "a": 1
+  },
+  {
+    "t": "True or False: The 1st stage of labor involves full cervical dilatation.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "Which measurement is NOT typically included in the immediate growth measurement of the newborn?",
+    "o": ["Length", "Weight", "Abdominal circumference", "Head circumference"],
+    "a": 2
+  },
+  {
+    "t": "The nurse is checking for 'Effacement'. Effacement refers to:",
+    "o": ["Dilation of the cervix", "Thinning and shortening of the cervix", "Position of the head", "Rupture of membranes"],
+    "a": 1
+  },
+  {
+    "t": "True or False: Morphine 10-20 mg I.M. is an option for analgesia in labor.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "Which instrument is used to auscultate the fetal heart sound (FHS)?",
+    "o": ["Sphygmomanometer", "Pinard's stethoscope or Sonicaid", "Thermometer", "Otoscope"],
+    "a": 1
+  },
+  {
+    "t": "The nurse is providing warmth to the newborn to prevent:",
+    "o": ["Infection", "Hypothermia", "Jaundice", "Hyperglycemia"],
+    "a": 1
+  },
+  {
+    "t": "True or False: The 4th stage of labor is the first 1-2 hours after delivery of the placenta.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "Which scale is used to assess the episiotomy/perineal area?",
+    "o": ["Apgar scale", "REEDA scale", "Glasgow scale", "Norton scale"],
+    "a": 1
+  }
+];
+
+
+
+// ===== shuffle questions only =====
+function shuffleQuestions(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+// خلط الأسئلة فقط
+shuffleQuestions(questions);
+
+// تعريف المتغيرات الناقصة
+let i = 0;
+let correct = 0;
+let wrong = 0;
+let answers = [];
+let wrongSet = [];
+
+/* ===== Timer ===== */
+let totalTime=30*60, timeLeft=totalTime;
+const timerInt=setInterval(()=>{
+  timeLeft--;
+  let m=Math.floor(timeLeft/60), s=timeLeft%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  let deg=(timeLeft/totalTime)*360;
+  timer.style.background=`conic-gradient(var(--primary) ${deg}deg,var(--soft) ${deg}deg)`;
+  if(timeLeft<=0){clearInterval(timerInt);finishExam();}
+},1000);
+
+/* ===== UI ===== */
+function updateTop(){
+  let total=questions.length;
+  let answered=correct+wrong;
+  progressText.innerText=`سؤال ${i+1} من ${total}`;
+  progressBar.style.width=((i+1)/total*100)+"%";
+  correctCount.innerText=correct;
+  wrongCount.innerText=wrong;
+  remainPercent.innerText=Math.round(((total-answered)/total)*100)+"%";
+}
+
+/* ===== Render ===== */
+function show(){
+  updateTop();
+  let q = questions[i];
+
+  app.innerHTML = `
+    <div class="card">
+      <div class="question-title">${q.t}</div>
+      ${q.o.map((o,idx)=>`
+        <div class="option" onclick="choose(${idx})">${o}</div>
+      `).join("")}
+    </div>
+  `;
+}
+/* ===== Choose ===== */
+function choose(v){
+  if(answers[i]!=null) return;
+  answers[i]=v;
+  let ok=v===questions[i].a;
+  ok?correct++:wrong++;
+  app.innerHTML=`
+    <div class="feedback">${ok?"🎉 شاطر جدًا كمل":"😅 ركّز يا سُكر"}</div>
+    <div class="card">
+      <div class="question-title">${questions[i].t}</div>
+      ${questions[i].o.map((o,j)=>`
+        <div class="option ${j===questions[i].a?"correct":j===v?"wrong":""} disabled">${o}</div>
+      `).join("")}
+      <button onclick="next()">التالي</button>
+    </div>`;
+}
+
+/* ===== Next ===== */
+function next(){
+  if(i<questions.length-1){i++;show();}
+  else finishExam();
+}
+
+/* ===== Finish ===== */
+function finishExam(){
+  document.body.classList.remove("exam");
+  document.body.classList.add("after");
+
+  let score=Math.round((correct/questions.length)*100);
+
+  if(score>=80){
+    document.documentElement.style.setProperty("--brand1","#22c55e");
+    document.documentElement.style.setProperty("--brand2","#fde047");
+  }else if(score>=50){
+    document.documentElement.style.setProperty("--brand1","#38bdf8");
+    document.documentElement.style.setProperty("--brand2","#e0f2fe");
+  }else{
+    document.documentElement.style.setProperty("--brand1","#fb923c");
+    document.documentElement.style.setProperty("--brand2","#fed7aa");
+  }
+
+  wrongSet=[];
+  let report="";
+  questions.forEach((q,idx)=>{
+    let ok=answers[idx]===q.a;
+    if(!ok) wrongSet.push(q);
+    report+=`
+      <div class="report ${ok?"correct":"wrong"}">
+        <b>${q.t}</b><br>
+إجابتك: ${answers[idx]!=null ? q.o[answers[idx]] : "لم يتم الحل"}<br>
+الصح: ${q.o[q.a]}
+      </div>`;
+  });
+
+  app.innerHTML=`
+    <div class="card">
+      <h3>?? تقريرك</h3>
+      ${report}
+      ${wrongSet.length?`<button onclick="retry()">إعادة حل الغلط فقط</button>`:"<p>أنت ممتاز 👑</p>"}
+    </div>`;
+}
+
+/* ===== Retry Wrong ===== */
+function retry(){
+  // نبدأ امتحان جديد بالأسئلة الغلط فقط
+  questions = [...wrongSet];
+
+  answers = [];
+  wrongSet = [];
+  i = 0;
+  correct = 0;
+  wrong = 0;
+
+  // رجوع لشكل الامتحان
+  document.body.classList.remove("after");
+  document.body.classList.add("exam");
+
+  show();
+}
+
+show();
+</script>
+
+</body>
+</html>
