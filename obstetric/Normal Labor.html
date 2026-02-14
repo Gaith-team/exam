@@ -1,0 +1,632 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaith Team | Exam</title>
+
+<style>
+:root{
+  --primary:#0284c7;
+  --secondary:#0ea5e9;
+  --bg:#f8fbff;
+  --card:#ffffff;
+  --soft:#e6f0ff;
+  --question:#eef7ff;
+  --option:#f9fcff;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --text:#0f172a;
+
+  /* Brand dynamic */
+  --brand1:#ffffff;
+  --brand2:#e0f2fe;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#eef6ff);
+  color:var(--text);
+}
+
+/* ================= HEADER ================= */
+header{
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* ===== Brand ===== */
+.logo{
+  position:relative;
+  font-size:28px;
+  font-weight:900;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.brand-text{
+  background:linear-gradient(90deg,var(--brand1),var(--brand2),var(--brand1));
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 4s linear infinite;
+}
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+.heart{
+  display:inline-block;
+  animation:heartbeat 1.6s infinite ease-in-out;
+}
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  animation:twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle{
+  0%{opacity:0;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.2)}
+  100%{opacity:0;transform:scale(.6)}
+}
+
+/* Reduced motion أثناء الامتحان */
+.exam .sparkle{animation-duration:5s;opacity:.4}
+.exam .heart{animation-duration:2.5s}
+
+/* After exam */
+.after .sparkle{animation-duration:2s}
+.after .heart{animation-duration:1.1s}
+
+/* ================= LAYOUT ================= */
+.container{max-width:520px;margin:auto;padding:16px}
+
+/* ===== Top Bar ===== */
+.top-bar{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+}
+.progress-box{
+  flex:1;
+  background:var(--card);
+  padding:14px;
+  border-radius:18px;
+  box-shadow:0 10px 22px rgba(2,132,199,.12);
+}
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px;
+  font-weight:800;
+  font-size:14px;
+}
+.progress{
+  height:8px;
+  background:var(--soft);
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+}
+
+/* Timer */
+.timer{
+  width:64px;height:64px;border-radius:50%;
+  background:conic-gradient(var(--primary) 0deg,var(--soft) 0deg);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;
+  background-color:var(--card);
+}
+
+/* ================= CARD ================= */
+.card{
+  background:var(--card);
+  padding:22px;
+  border-radius:24px;
+  box-shadow:0 18px 36px rgba(2,132,199,.18);
+}
+.question-title{
+  background:var(--question);
+  padding:16px;
+  border-radius:16px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+.option{
+  background:var(--option);
+  border:2px solid var(--soft);
+  border-radius:18px;
+  padding:15px;
+  margin:12px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.correct{background:#eafaf1;border-color:var(--success)}
+.option.wrong{background:#fff1f1;border-color:var(--danger)}
+.option.disabled{pointer-events:none;opacity:.9}
+
+button{
+  margin-top:18px;
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-weight:900;
+}
+
+/* Feedback */
+.feedback{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:10px;
+  animation:pop .5s;
+}
+@keyframes pop{
+  0%{transform:scale(.6);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* Report */
+.report{
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  border-left:6px solid var(--soft);
+}
+.report.correct{border-color:var(--success)}
+.report.wrong{border-color:var(--danger)}
+</style>
+</head>
+
+<body class="exam">
+
+<header>
+  <div class="logo">
+    <span class="brand-text">Gaith Team</span>
+    <span class="heart">💖</span>
+    <span class="sparkle" style="top:-8px;left:0">✨</span>
+    <span class="sparkle" style="top:6px;right:-8px">✨</span>
+    <span class="sparkle" style="bottom:-8px;left:50%">✨</span>
+  </div>
+  <div style="margin-top:6px;font-weight:800">الإمتحان في جيبك 👏🏻</div>
+</header>
+
+<div class="container">
+
+  <div class="top-bar">
+    <div class="progress-box">
+      <div class="progress-text">
+        <span id="progressText"></span>
+        <span>
+          ✔️ <span id="correctCount">0</span> |
+          ❌ <span id="wrongCount">0</span> |
+          ⏳ <span id="remainPercent">100%</span>
+        </span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="timer" id="timer">30:00</div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<script>
+/* ===== Questions ===== */
+let questions = [
+ {
+    "t": "A pregnant woman at 39 weeks gestation arrives at the hospital. She reports that she felt the fetus 'drop' into her pelvis a few days ago and is now urinating more frequently. This pre-monitory symptom is known as:",
+    "o": ["Quickening", "Lightening", "Show", "Engagement"],
+    "a": 1
+  },
+  {
+    "t": "A primigravida is in labor. The nurse performs a vaginal exam and finds the fetal head is at the level of the ischial spines. How should the nurse record the fetal station?",
+    "o": ["Station -1", "Station 0", "Station +1", "Station -5"],
+    "a": 1
+  },
+  {
+    "t": "The nurse is assessing a woman who has been in labor for 26 hours. According to the definitions of labor, this would be classified as:",
+    "o": ["Normal labor", "Precipitate labor", "Prolonged labor", "Premature labor"],
+    "a": 2
+  },
+  {
+    "t": "During a vaginal exam, the nurse notes that the cervix is dilated to 5 cm and the woman is experiencing moderate contractions every 4 minutes. Which phase of the first stage of labor is she in?",
+    "o": ["Latent phase", "Active acceleration phase", "Active deceleration phase", "Transition phase"],
+    "a": 1
+  },
+  {
+    "t": "A woman presents with irregular contractions that she describes as 'tightening' in her abdomen. They are not increasing in intensity and are relieved when she rests. The nurse should identify this as:",
+    "o": ["True labor pains", "False labor pains (Braxton Hicks)", "Precipitate labor", "Active labor"],
+    "a": 1
+  },
+  {
+    "t": "The mechanism of labor involves several steps. Which step involves the sub-occipital region hinging under the symphysis pubis to allow the head to be born?",
+    "o": ["Internal rotation", "Extension", "Restitution", "Flexion"],
+    "a": 1
+  },
+  {
+    "t": "A woman's labor started at 8:00 AM and the baby was born at 10:00 AM. This labor, lasting less than 3 hours, is called:",
+    "o": ["Prolonged labor", "Precipitate labor", "Premature labor", "Normal labor"],
+    "a": 1
+  },
+  {
+    "t": "True or False: In a normal fetal attitude, the head and extremities are flexed against the body.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "The 'Show' is a sign of true labor. It is defined as the expulsion of:",
+    "o": ["Amniotic fluid", "The mucus plug stained with blood", "The placenta", "The fetus"],
+    "a": 1
+  },
+  {
+    "t": "Which theory of labor onset suggests that a sudden decrease in progesterone levels leads to the initiation of uterine contractions?",
+    "o": ["Oxytocin stimulation theory", "Prostaglandin production theory", "Progesterone withdrawal theory", "Placental ischemic theory"],
+    "a": 2
+  },
+  {
+    "t": "The nurse is assessing the 3 phases of a uterine contraction. The period where the intra-uterine pressure is at its maximum is called:",
+    "o": ["Increment", "Acme", "Decrement", "Duration"],
+    "a": 1
+  },
+  {
+    "t": "During the second stage of labor, the fetal head rotates 45 degrees anteriorly to the midline under the symphysis. This movement is called:",
+    "o": ["External rotation", "Internal rotation", "Engagement", "Descent"],
+    "a": 1
+  },
+  {
+    "t": "A fetus is positioned such that its long axis is perpendicular to the mother's long axis. This fetal lie is:",
+    "o": ["Longitudinal lie", "Transverse lie", "Oblique lie", "Vertex lie"],
+    "a": 1
+  },
+  {
+    "t": "True or False: The third stage of labor begins with the delivery of the fetus and ends with the expulsion of the placenta.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "Which of the '5Ps' affecting labor refers specifically to the birth canal and the bony pelvis?",
+    "o": ["Passenger", "Passage", "Power", "Position"],
+    "a": 1
+  },
+  {
+    "t": "A woman in the first stage of labor is dilated to 9 cm. She is experiencing severe contractions every 2-3 minutes and feels an involuntary urge to bear down. She is in which phase?",
+    "o": ["Latent phase", "Active acceleration phase", "Active deceleration phase", "Recovery phase"],
+    "a": 2
+  },
+  {
+    "t": "What is the normal duration of the third stage of labor for both primigravida and multigravida women?",
+    "o": ["1-2 hours", "10-20 minutes", "5-10 minutes", "30-60 minutes"],
+    "a": 1
+  },
+  {
+    "t": "True or False: Engagement occurs when the bi-parietal diameter of the presenting part passes through the plane of the pelvic inlet.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "Which fetal position is identified when the occiput is directed to the posterior aspect of the mother's right side?",
+    "o": ["LOA", "ROA", "ROP", "LOP"],
+    "a": 2
+  },
+  {
+    "t": "The nurse notes that the woman's contractions are occurring every 2 minutes and last for 60-90 seconds. This describes which characteristic of contractions?",
+    "o": ["Intensity", "Frequency and Duration", "Phases", "Rhythm"],
+    "a": 1
+  },
+  {
+    "t": "True or False: Normal labor must occur at term and the fetus must be in a vertex presentation.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "Which hormone encourages contractions by promoting adequate levels of intracellular calcium and has a double action in the uterus?",
+    "o": ["Progesterone", "Estrogen", "Oxytocin", "Prostaglandin"],
+    "a": 2
+  },
+  {
+    "t": "A woman is in the latent phase of the first stage of labor. What is the expected range of cervical dilatation?",
+    "o": ["1-3 cm", "4-7 cm", "8-10 cm", "Full dilatation"],
+    "a": 0
+  },
+  {
+    "t": "The descent of the fetal head occurs due to which factors?",
+    "o": ["Uterine contraction and retraction", "Maternal position only", "Progesterone increase", "Sedatives"],
+    "a": 0
+  },
+  {
+    "t": "True or False: In false labor, cervical dilatation is progressive.",
+    "o": ["True", "False"],
+    "a": 1
+  },
+  {
+    "t": "Which sign indicates that the second stage of labor is imminent?",
+    "o": ["Relief of pressure", "Bulging of the perineum and anal orifice", "Decrease in contraction frequency", "Sudden loss of energy"],
+    "a": 1
+  },
+  {
+    "t": "The smallest diameter of the fetal head that enters the pelvis during increased flexion is the sub-occipito-bregmatic, which measures:",
+    "o": ["12.5 cm", "11.5 cm", "9.5 cm", "13.5 cm"],
+    "a": 2
+  },
+  {
+    "t": "True or False: Restitution (External Rotation) is the movement that undoes the twist of the neck caused by internal rotation.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "A woman in labor is described as 'irritable, uncooperative, and fatigued'. These behavioral characteristics are typical of which phase?",
+    "o": ["Latent phase", "Active acceleration phase", "Active deceleration phase", "4th stage"],
+    "a": 1
+  },
+  {
+    "t": "The 'Power' in labor is divided into primary and secondary. Secondary power refers to:",
+    "o": ["Uterine contractions", "Bearing down efforts", "Cervical dilatation", "Placental separation"],
+    "a": 1
+  },
+  {
+    "t": "True or False: Labor is the process by which a viable fetus is expelled from the uterus after 20 weeks of pregnancy.",
+    "o": ["True", "False"],
+    "a": 1
+  },
+  {
+    "t": "Which fetal station indicates that the presenting part is 2 cm below the ischial spines?",
+    "o": ["Station -2", "Station +2", "Station 0", "Station +5"],
+    "a": 1
+  },
+  {
+    "t": "The theory that suggests labor starts because the fetus grows faster than the uterus can expand is the:",
+    "o": ["Mechanical theory (Uterine Distention)", "Ischemic theory", "Withdrawal theory", "Stimulation theory"],
+    "a": 0
+  },
+  {
+    "t": "During the first stage of labor, the 'outcome' is defined as:",
+    "o": ["Expulsion of the fetus", "Cervical dilatation and effacement", "Expulsion of the placenta", "Recovery"],
+    "a": 1
+  },
+  {
+    "t": "True or False: A transverse lie is a longitudinal relationship between the fetus and the mother.",
+    "o": ["True", "False"],
+    "a": 1
+  },
+  {
+    "t": "In the active deceleration phase (8-10 cm), the maternal behavior often includes:",
+    "o": ["Being talkative and excited", "Hyperventilation and intense focus", "Relief and sleepiness", "No change in behavior"],
+    "a": 1
+  },
+  {
+    "t": "The 4th stage of labor is the period of recovery that lasts for how long after delivery?",
+    "o": ["1 hour", "2 hours", "6 hours", "24 hours"],
+    "a": 1
+  },
+  {
+    "t": "True or False: True labor pains are usually felt in the abdomen and lower back.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "Which presenting part corresponds to the initial 'M' in fetal positioning?",
+    "o": ["Occiput", "Mentum (Face)", "Sacrum (Breech)", "Scapula"],
+    "a": 1
+  },
+  {
+    "t": "What is the expected duration of the second stage of labor for a primigravida woman?",
+    "o": ["15-60 minutes", "1-2 hours", "6-8 hours", "10-15 hours"],
+    "a": 1
+  },
+  {
+    "t": "True or False: Prostaglandins stimulate smooth muscles to contract and initiate labor.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "Which movement aligns the long axis of the fetal head with the long axis of the maternal pelvis?",
+    "o": ["Internal rotation", "Extension", "Flexion", "Descent"],
+    "a": 0
+  },
+  {
+    "t": "A woman is dilated to 2 cm with mild contractions every 10 minutes. Her behavior is talkative and excited. She is in the:",
+    "o": ["Latent phase", "Active phase", "Transition phase", "2nd stage"],
+    "a": 0
+  },
+  {
+    "t": "True or False: Precipitate labor is considered a 'normal' labor according to the criteria.",
+    "o": ["True", "False"],
+    "a": 1
+  },
+  {
+    "t": "The 'Decrement' phase of a uterine contraction is when:",
+    "o": ["Pressure starts to increase", "Pressure is at its peak", "Pressure decreases or fades", "Contraction ends"],
+    "a": 2
+  },
+  {
+    "t": "Which of the following is NOT a sign of true labor?",
+    "o": ["Regular rhythm", "Relieved by sedatives", "Progressive cervical dilatation", "Rupture of membranes"],
+    "a": 1
+  },
+  {
+    "t": "True or False: Uterine contractions allow for a period of relaxation to restore utero-placental circulation.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "The term 'Viability' refers to a reasonable chance of the fetus to life outside the uterus, usually at the end of:",
+    "o": ["20 weeks", "24 weeks", "28 weeks", "32 weeks"],
+    "a": 2
+  },
+  {
+    "t": "During the second stage, the grunting voice of the mother and the desire to defecate are signs of:",
+    "o": ["Placental separation", "Impending delivery", "False labor", "1st stage transition"],
+    "a": 1
+  },
+  {
+    "t": "True or False: In the 1st stage, the duration for a multigravida is typically shorter (6-8 hrs) than for a primigravida (10-15 hrs).",
+    "o": ["True", "False"],
+    "a": 0
+ }
+];
+
+
+
+// ===== shuffle questions only =====
+function shuffleQuestions(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+// خلط الأسئلة فقط
+shuffleQuestions(questions);
+
+// تعريف المتغيرات الناقصة
+let i = 0;
+let correct = 0;
+let wrong = 0;
+let answers = [];
+let wrongSet = [];
+
+/* ===== Timer ===== */
+let totalTime=30*60, timeLeft=totalTime;
+const timerInt=setInterval(()=>{
+  timeLeft--;
+  let m=Math.floor(timeLeft/60), s=timeLeft%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  let deg=(timeLeft/totalTime)*360;
+  timer.style.background=`conic-gradient(var(--primary) ${deg}deg,var(--soft) ${deg}deg)`;
+  if(timeLeft<=0){clearInterval(timerInt);finishExam();}
+},1000);
+
+/* ===== UI ===== */
+function updateTop(){
+  let total=questions.length;
+  let answered=correct+wrong;
+  progressText.innerText=`سؤال ${i+1} من ${total}`;
+  progressBar.style.width=((i+1)/total*100)+"%";
+  correctCount.innerText=correct;
+  wrongCount.innerText=wrong;
+  remainPercent.innerText=Math.round(((total-answered)/total)*100)+"%";
+}
+
+/* ===== Render ===== */
+function show(){
+  updateTop();
+  let q = questions[i];
+
+  app.innerHTML = `
+    <div class="card">
+      <div class="question-title">${q.t}</div>
+      ${q.o.map((o,idx)=>`
+        <div class="option" onclick="choose(${idx})">${o}</div>
+      `).join("")}
+    </div>
+  `;
+}
+/* ===== Choose ===== */
+function choose(v){
+  if(answers[i]!=null) return;
+  answers[i]=v;
+  let ok=v===questions[i].a;
+  ok?correct++:wrong++;
+  app.innerHTML=`
+    <div class="feedback">${ok?"🎉 شاطر جدًا كمل":"😅 ركّز يا سُكر"}</div>
+    <div class="card">
+      <div class="question-title">${questions[i].t}</div>
+      ${questions[i].o.map((o,j)=>`
+        <div class="option ${j===questions[i].a?"correct":j===v?"wrong":""} disabled">${o}</div>
+      `).join("")}
+      <button onclick="next()">التالي</button>
+    </div>`;
+}
+
+/* ===== Next ===== */
+function next(){
+  if(i<questions.length-1){i++;show();}
+  else finishExam();
+}
+
+/* ===== Finish ===== */
+function finishExam(){
+  document.body.classList.remove("exam");
+  document.body.classList.add("after");
+
+  let score=Math.round((correct/questions.length)*100);
+
+  if(score>=80){
+    document.documentElement.style.setProperty("--brand1","#22c55e");
+    document.documentElement.style.setProperty("--brand2","#fde047");
+  }else if(score>=50){
+    document.documentElement.style.setProperty("--brand1","#38bdf8");
+    document.documentElement.style.setProperty("--brand2","#e0f2fe");
+  }else{
+    document.documentElement.style.setProperty("--brand1","#fb923c");
+    document.documentElement.style.setProperty("--brand2","#fed7aa");
+  }
+
+  wrongSet=[];
+  let report="";
+  questions.forEach((q,idx)=>{
+    let ok=answers[idx]===q.a;
+    if(!ok) wrongSet.push(q);
+    report+=`
+      <div class="report ${ok?"correct":"wrong"}">
+        <b>${q.t}</b><br>
+إجابتك: ${answers[idx]!=null ? q.o[answers[idx]] : "لم يتم الحل"}<br>
+الصح: ${q.o[q.a]}
+      </div>`;
+  });
+
+  app.innerHTML=`
+    <div class="card">
+      <h3>?? تقريرك</h3>
+      ${report}
+      ${wrongSet.length?`<button onclick="retry()">إعادة حل الغلط فقط</button>`:"<p>أنت ممتاز 👑</p>"}
+    </div>`;
+}
+
+/* ===== Retry Wrong ===== */
+function retry(){
+  // نبدأ امتحان جديد بالأسئلة الغلط فقط
+  questions = [...wrongSet];
+
+  answers = [];
+  wrongSet = [];
+  i = 0;
+  correct = 0;
+  wrong = 0;
+
+  // رجوع لشكل الامتحان
+  document.body.classList.remove("after");
+  document.body.classList.add("exam");
+
+  show();
+}
+
+show();
+</script>
+
+</body>
+</html>
