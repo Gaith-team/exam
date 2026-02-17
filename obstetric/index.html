@@ -12,20 +12,18 @@
 :root{
  --neon1:#a855f7;
  --neon2:#d946ef;
- --darkbg:#0b0615;
+ --dark:#0a0314;
 }
 
 *{box-sizing:border-box;font-family:'Cairo',sans-serif}
 
 body{
  margin:0;
- background:radial-gradient(circle at top,var(--darkbg),#05010a);
+ background:radial-gradient(circle at top,#140622,var(--dark));
  color:#fff;
  overflow-x:hidden;
- transition:.4s;
 }
 
-/* ===== LOGO ===== */
 .logo{
  text-align:center;
  margin-top:60px;
@@ -37,68 +35,51 @@ body{
  0 0 15px var(--neon1),
  0 0 30px var(--neon2),
  0 0 60px var(--neon2);
- animation:pulseLogo 2s infinite alternate;
-}
-@keyframes pulseLogo{
- from{filter:brightness(1);}
- to{filter:brightness(1.5);}
 }
 
-/* ===== GRID ===== */
 .container{
  width:95%;
  max-width:1200px;
  margin:50px auto;
  display:grid;
- grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
- gap:30px;
+ grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+ gap:25px;
 }
 
-/* ===== CARD ===== */
 details{
  background:rgba(255,255,255,0.05);
  border:1px solid rgba(168,85,247,.4);
- border-radius:25px;
+ border-radius:20px;
  backdrop-filter:blur(20px);
- transition:.5s;
- overflow:hidden;
+ transition:.4s;
 }
 
 details[open]{
  box-shadow:
- 0 0 15px var(--neon1),
- 0 0 30px var(--neon2),
- inset 0 0 20px rgba(168,85,247,.3);
+ 0 0 20px var(--neon1),
+ 0 0 40px var(--neon2);
 }
 
 summary{
- padding:20px;
+ padding:18px;
  cursor:pointer;
  display:flex;
- align-items:center;
  justify-content:center;
+ align-items:center;
  gap:10px;
  font-weight:700;
- font-size:18px;
  list-style:none;
 }
 summary::-webkit-details-marker{display:none}
 summary i{color:var(--neon2);}
 
 .content{
- max-height:0;
- overflow:hidden;
- transition:.4s;
  display:flex;
  flex-direction:column;
  align-items:center;
-}
-details[open] .content{
- max-height:200px;
  padding:15px;
 }
 
-/* ===== BUTTONS ===== */
 .content a{
  width:85%;
  text-align:center;
@@ -109,7 +90,6 @@ details[open] .content{
  font-weight:700;
  color:#fff;
  border:1px solid var(--neon2);
- background:transparent;
  transition:.4s;
 }
 
@@ -117,28 +97,8 @@ details[open] .content{
  background:var(--neon1);
  box-shadow:
  0 0 10px var(--neon1),
- 0 0 25px var(--neon2);
- transform:scale(1.07);
-}
-
-/* ===== JOIN BUTTON ===== */
-.join-btn{
- position:fixed;
- bottom:20px;
- left:20px;
- padding:14px 22px;
- border-radius:50px;
- background:var(--neon1);
- color:#fff;
- font-weight:700;
- text-decoration:none;
- box-shadow:
- 0 0 10px var(--neon1),
  0 0 30px var(--neon2);
- transition:.4s;
-}
-.join-btn:hover{
- transform:scale(1.1);
+ transform:scale(1.08);
 }
 </style>
 </head>
@@ -149,14 +109,19 @@ details[open] .content{
 تمريض نسا وتوليد 👶💜
 </div>
 
-<div class="container" id="lecturesContainer"></div>
+<div class="container">
 
-<a href="https://t.me/nursing2bu" target="_blank" class="join-btn">
-<i class="fa-brands fa-telegram"></i> انضم إلينا
-</a>
+<!-- 20 Lectures -->
 
 <script>
 const lectures=[
+"lecture1","lecture2","lecture3","lecture4","lecture5",
+"lecture6","lecture7","lecture8","lecture9","lecture10",
+"lecture11","lecture12","lecture13","lecture14","lecture15",
+"lecture16","lecture17","lecture18","lecture19","lecture20"
+];
+
+const titles=[
 "Anatomy of Female Reproductive System",
 "Menstrual Cycle",
 "Fertilization & Implantation",
@@ -179,71 +144,20 @@ const lectures=[
 "Gynecological Nursing Care"
 ];
 
-const container=document.getElementById("lecturesContainer");
-
-lectures.forEach((lecture,index)=>{
- let lectureNumber=index+1;
- let lectureId="lecture"+lectureNumber;
-
- let card=document.createElement("details");
-
- card.innerHTML=`
-  <summary><i class="fa-solid fa-book-medical"></i> ${lecture}</summary>
-  <div class="content">
-    <a href="${lectureId}-summary.html">📘 ملخص</a>
-    <a href="${lectureId}-questions.html">❓ أسئلة</a>
-  </div>
- `;
-
- container.appendChild(card);
-
- /* Auto create pages dynamically */
- createPage(`${lectureId}-summary.html`,lecture,"ملخص");
- createPage(`${lectureId}-questions.html`,lecture,"أسئلة");
+lectures.forEach((lec,i)=>{
+document.write(`
+<details>
+<summary><i class="fa-solid fa-book-medical"></i> ${titles[i]}</summary>
+<div class="content">
+<a href="summary/${lec}.html">📘 ملخص</a>
+<a href="questions/${lec}.html">❓ أسئلة</a>
+</div>
+</details>
+`);
 });
-
-function createPage(fileName,title,type){
- let pageContent=`
- <!DOCTYPE html>
- <html lang="ar" dir="rtl">
- <head>
- <meta charset="UTF-8">
- <title>${title} - ${type}</title>
- <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700;900&display=swap" rel="stylesheet">
- <style>
- body{
-  background:#0b0615;
-  color:#fff;
-  font-family:'Cairo',sans-serif;
-  text-align:center;
-  padding:50px;
- }
- h1{
-  color:#d946ef;
-  text-shadow:0 0 15px #a855f7;
- }
- a{
-  display:inline-block;
-  margin-top:30px;
-  padding:12px 20px;
-  background:#a855f7;
-  color:#fff;
-  border-radius:30px;
-  text-decoration:none;
- }
- </style>
- </head>
- <body>
- <h1>${title}</h1>
- <h2>${type}</h2>
- <p>اكتب المحتوى هنا ✍️</p>
- <a href="index.html">⬅ رجوع</a>
- </body>
- </html>
- `;
- console.log("Create file manually:",fileName);
-}
 </script>
+
+</div>
 
 </body>
 </html>
