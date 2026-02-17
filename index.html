@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GAITH TEAM</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&display=swap" rel="stylesheet">
 
 <style>
 
@@ -18,28 +18,91 @@ body{
     color:#fff;
     text-align:center;
     overflow-x:hidden;
-    animation:pageEnter .8s ease;
-}
-
-@keyframes pageEnter{
-    from{opacity:0; transform:translateX(40px);}
-    to{opacity:1; transform:translateX(0);}
 }
 
 /* ===== Header ===== */
 .header{
-    padding:80px 20px 40px;
+    padding:90px 20px 60px;
 }
 
-/* 🔥 Logo Style */
+/* 🔥 Ultra Logo App Icon */
+.logo-wrapper{
+    display:flex;
+    justify-content:center;
+}
+
 .logo{
-    font-size:42px;
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:22px;
     font-weight:900;
-    letter-spacing:2px;
-    background:linear-gradient(135deg,#38bdf8,#6366f1);
-    -webkit-background-clip:text;
-    -webkit-text-fill-color:transparent;
-    text-shadow:0 8px 25px rgba(56,189,248,.4);
+    letter-spacing:1px;
+    text-align:center;
+    color:#fff;
+    background:linear-gradient(135deg,#0ea5e9,#6366f1);
+    position:relative;
+    overflow:hidden;
+
+    /* Neon Glow */
+    box-shadow:
+        0 0 15px #38bdf8,
+        0 0 35px #6366f1,
+        0 0 60px rgba(99,102,241,.6);
+
+    animation:logoPulse 2.5s ease-in-out infinite;
+}
+
+/* ✨ Shine Effect */
+.logo::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-75%;
+    width:50%;
+    height:100%;
+    background:linear-gradient(
+        120deg,
+        transparent,
+        rgba(255,255,255,.6),
+        transparent
+    );
+    transform:skewX(-25deg);
+    animation:shineMove 3s infinite;
+}
+
+/* Shine Animation */
+@keyframes shineMove{
+    0%{left:-75%;}
+    100%{left:125%;}
+}
+
+/* 💓 Pulse + Electric Glow */
+@keyframes logoPulse{
+    0%{
+        transform:scale(1);
+        box-shadow:
+            0 0 10px #38bdf8,
+            0 0 25px #6366f1,
+            0 0 45px rgba(99,102,241,.5);
+    }
+    50%{
+        transform:scale(1.08);
+        box-shadow:
+            0 0 25px #38bdf8,
+            0 0 60px #6366f1,
+            0 0 100px rgba(99,102,241,.9);
+    }
+    100%{
+        transform:scale(1);
+        box-shadow:
+            0 0 10px #38bdf8,
+            0 0 25px #6366f1,
+            0 0 45px rgba(99,102,241,.5);
+    }
 }
 
 /* ===== Container ===== */
@@ -58,9 +121,9 @@ body{
     justify-content:center;
     align-items:center;
     gap:14px;
-    padding:26px;
+    padding:24px;
     border-radius:50px;
-    font-size:22px;
+    font-size:20px;
     font-weight:800;
     text-decoration:none;
     transition:.3s;
@@ -82,150 +145,42 @@ body{
 .management a{background:linear-gradient(135deg,#ff003c,#9f1239);color:#fff;}
 .psychiatric a{background:linear-gradient(135deg,#4fa3a5,#2f6f73);color:#fff;}
 
-/* ===== Join Button ===== */
-.join{
-    margin:70px auto 100px;
-}
-
-.join a{
-    display:inline-block;
-    padding:18px 40px;
-    border-radius:60px;
-    font-size:20px;
-    font-weight:900;
-    letter-spacing:1px;
-    text-decoration:none;
-    background:linear-gradient(135deg,#229ED9,#38bdf8);
-    color:#fff;
-    box-shadow:0 12px 30px rgba(34,158,217,.4);
-    transition:.3s;
-    position:relative;
-    overflow:hidden;
-}
-
-/* Glow Animation */
-.join a::before{
-    content:"";
-    position:absolute;
-    width:200%;
-    height:200%;
-    top:-50%;
-    left:-50%;
-    background:radial-gradient(circle,rgba(255,255,255,.4),transparent 60%);
-    animation:shine 3s infinite linear;
-}
-
-@keyframes shine{
-    from{transform:rotate(0deg);}
-    to{transform:rotate(360deg);}
-}
-
-.join a:hover{
-    transform:translateY(-4px) scale(1.05);
-}
-
-.join a:active{
-    transform:scale(.95);
-}
-
-/* ===== Loading Screen ===== */
-#loader{
-    position:fixed;
-    inset:0;
-    background:#0b1225;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    z-index:9999;
-    transition:.5s;
-}
-
-.spinner{
-    width:60px;
-    height:60px;
-    border:6px solid rgba(255,255,255,.2);
-    border-top:6px solid #38bdf8;
-    border-radius:50%;
-    animation:spin 1s linear infinite;
-}
-
-@keyframes spin{
-    to{transform:rotate(360deg);}
-}
-
-.fade-out{
-    opacity:0;
-    transform:translateX(-40px);
-    transition:.5s;
-}
-
 </style>
 </head>
 
 <body>
 
-<!-- Loading -->
-<div id="loader">
-    <div class="spinner"></div>
-</div>
-
 <div class="header">
-    <div class="logo">GAITH TEAM</div>
+    <div class="logo-wrapper">
+        <div class="logo">
+            GAITH<br>TEAM
+        </div>
+    </div>
 </div>
 
 <div class="container">
 
     <div class="subject pediatric">
-        <a href="pediatric/index.html" class="nav-link">🍼 تمريض أطفال</a>
+        <a href="pediatric/index.html">🍼 تمريض أطفال</a>
     </div>
 
     <div class="subject obstetric">
-        <a href="obstetric/index.html" class="nav-link">🤰 تمريض نسا وتوليد</a>
+        <a href="obstetric/index.html">🤰 تمريض نسا وتوليد</a>
     </div>
 
     <div class="subject medical">
-        <a href="medical/index.html" class="nav-link">🩺 تمريض باطني جراحي</a>
+        <a href="medical/index.html">🩺 تمريض باطني جراحي</a>
     </div>
 
     <div class="subject management">
-        <a href="management/index.html" class="nav-link">📊 تمريض إدارة</a>
+        <a href="management/index.html">📊 تمريض إدارة</a>
     </div>
 
     <div class="subject psychiatric">
-        <a href="psychiatric/index.html" class="nav-link">🧠 تمريض نفسية</a>
-    </div>
-
-    <!-- 🔥 Join Button -->
-    <div class="join">
-        <a href="https://t.me/nursing2bu" target="_blank">
-            ✈️ انضم إلينا على Telegram
-        </a>
+        <a href="psychiatric/index.html">🧠 تمريض نفسية</a>
     </div>
 
 </div>
-
-<script>
-
-window.addEventListener("load",()=>{
-    setTimeout(()=>{
-        document.getElementById("loader").style.opacity="0";
-        setTimeout(()=>{
-            document.getElementById("loader").style.display="none";
-        },500);
-    },500);
-});
-
-document.querySelectorAll(".nav-link").forEach(link=>{
-    link.addEventListener("click",function(e){
-        e.preventDefault();
-        document.body.classList.add("fade-out");
-        setTimeout(()=>{
-            window.location=this.href;
-        },500);
-    });
-});
-
-</script>
 
 </body>
 </html>
