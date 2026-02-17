@@ -17,7 +17,7 @@ body{
     background:#000814;
     color:#fff;
     overflow-x:hidden;
-    transition:.4s;
+    transition: background .6s ease, color .6s ease;
 }
 
 body.light{
@@ -25,14 +25,14 @@ body.light{
     color:#111827;
 }
 
-/* ================= GALAXY BACKGROUND ================= */
+/* ================= CANVAS ================= */
 #galaxy{
     position:fixed;
     inset:0;
     z-index:-1;
 }
 
-/* ================= ELECTRIC GLITCH INTRO ================= */
+/* ================= INTRO ================= */
 #intro{
     position:fixed;
     inset:0;
@@ -47,38 +47,21 @@ body.light{
     font-size:55px;
     font-weight:900;
     color:#38bdf8;
-    position:relative;
-    text-shadow:
-        0 0 10px #38bdf8,
-        0 0 30px #0ea5e9,
-        0 0 60px #38bdf8;
+    text-shadow:0 0 10px #38bdf8,0 0 30px #0ea5e9;
     animation:glitch 1s infinite alternate;
 }
 
 @keyframes glitch{
     0%{transform:translate(0);}
-    20%{transform:translate(-2px,2px);}
-    40%{transform:translate(2px,-2px);}
-    60%{transform:translate(-2px,-1px);}
-    80%{transform:translate(1px,2px);}
-    100%{transform:translate(0);}
+    50%{transform:translate(-2px,2px);}
+    100%{transform:translate(2px,-2px);}
 }
 
-/* Fade intro */
-.hide-intro{
-    animation:fadeOut 1.5s forwards;
-}
-
-@keyframes fadeOut{
-    to{opacity:0;visibility:hidden;}
-}
+.hide-intro{animation:fadeOut 1.5s forwards;}
+@keyframes fadeOut{to{opacity:0;visibility:hidden;}}
 
 /* ================= HEADER ================= */
-.header{
-    text-align:center;
-    padding:90px 20px 40px;
-}
-
+.header{text-align:center;padding:90px 20px 40px;}
 .logo{
     font-size:42px;
     font-weight:900;
@@ -87,7 +70,7 @@ body.light{
     -webkit-text-fill-color:transparent;
 }
 
-/* ================= GRID 2x2 ================= */
+/* ================= GRID ================= */
 .container{
     width:95%;
     max-width:520px;
@@ -102,7 +85,6 @@ body.light{
     display:flex;
     justify-content:center;
     align-items:center;
-    text-align:center;
     padding:30px 15px;
     border-radius:20px;
     font-weight:800;
@@ -114,7 +96,6 @@ body.light{
 .subject a:hover{transform:translateY(-6px);}
 .subject a:active{transform:scale(.95);}
 
-/* Colors */
 .pediatric a{background:linear-gradient(135deg,#a7f3d0,#34d399);color:#064e3b;}
 .obstetric a{background:linear-gradient(135deg,#fbcfe8,#f472b6);color:#1f2937;}
 .medical a{background:linear-gradient(135deg,#0ea5e9,#075985);color:#fff;}
@@ -122,11 +103,7 @@ body.light{
 .psychiatric a{background:linear-gradient(135deg,#4fa3a5,#2f6f73);color:#fff;}
 
 /* ================= JOIN ================= */
-.join{
-    text-align:center;
-    margin-bottom:60px;
-}
-
+.join{text-align:center;margin-bottom:60px;}
 .join a{
     padding:18px 40px;
     border-radius:40px;
@@ -134,10 +111,9 @@ body.light{
     color:#fff;
     font-weight:900;
     text-decoration:none;
-    box-shadow:0 0 30px rgba(56,189,248,.6);
+    box-shadow:0 0 25px rgba(56,189,248,.6);
     transition:.3s;
 }
-
 .join a:hover{transform:scale(1.1);}
 
 /* ================= TOGGLE ================= */
@@ -145,24 +121,31 @@ body.light{
     position:fixed;
     top:15px;
     left:15px;
-    width:45px;
-    height:45px;
+    width:50px;
+    height:50px;
     border-radius:50%;
     border:none;
     cursor:pointer;
-    font-size:20px;
-    background:#fff;
+    font-size:22px;
+    background:#0ea5e9;
+    color:#fff;
+    transition:.4s;
+    box-shadow:0 0 20px rgba(14,165,233,.6);
+}
+.toggle:hover{
+    transform:rotate(180deg) scale(1.1);
+    box-shadow:0 0 35px rgba(14,165,233,.9);
+}
+body.light .toggle{
+    background:#111827;
 }
 
 </style>
 </head>
-
 <body>
 
-<!-- Galaxy Background -->
 <canvas id="galaxy"></canvas>
 
-<!-- Intro -->
 <div id="intro">
     <div class="glitch">GAITH TEAM</div>
 </div>
@@ -174,81 +157,119 @@ body.light{
 </div>
 
 <div class="container">
-
-    <div class="subject pediatric">
-        <a href="pediatric/index.html">🍼 أطفال</a>
-    </div>
-
-    <div class="subject obstetric">
-        <a href="obstetric/index.html">🤰 نسا</a>
-    </div>
-
-    <div class="subject medical">
-        <a href="medical/index.html">🩺 باطني</a>
-    </div>
-
-    <div class="subject management">
-        <a href="management/index.html">📊 إدارة</a>
-    </div>
-
-    <div class="subject psychiatric">
-        <a href="psychiatric/index.html">🧠 نفسية</a>
-    </div>
-
+    <div class="subject pediatric"><a href="#">🍼 أطفال</a></div>
+    <div class="subject obstetric"><a href="#">🤰 نسا</a></div>
+    <div class="subject medical"><a href="#">🩺 باطني</a></div>
+    <div class="subject management"><a href="#">📊 إدارة</a></div>
+    <div class="subject psychiatric"><a href="#">🧠 نفسية</a></div>
 </div>
 
 <div class="join">
-    <a href="https://t.me/nursing2bu" target="_blank">
-        ✈️ انضم إلينا
-    </a>
+    <a href="https://t.me/nursing2bu" target="_blank">✈️ انضم إلينا</a>
 </div>
 
 <script>
 
-/* Hide intro after 3s */
-setTimeout(()=>{
-    document.getElementById("intro").classList.add("hide-intro");
-},3000);
+/* INTRO */
+setTimeout(()=>{document.getElementById("intro").classList.add("hide-intro");},3000);
 
-/* Dark Mode */
+/* MODE */
 const toggle=document.getElementById("modeToggle");
-if(localStorage.getItem("mode")==="light"){
-    document.body.classList.add("light");
-    toggle.textContent="☀️";
-}
-toggle.onclick=()=>{
-    document.body.classList.toggle("light");
-    localStorage.setItem("mode",
-        document.body.classList.contains("light")?"light":"dark");
-};
+let currentMode=localStorage.getItem("mode")||"dark";
 
-/* Galaxy Background */
+function applyMode(mode){
+    currentMode=mode;
+    if(mode==="light"){
+        document.body.classList.add("light");
+        toggle.textContent="☀️";
+    }else{
+        document.body.classList.remove("light");
+        toggle.textContent="🌙";
+    }
+    localStorage.setItem("mode",mode);
+}
+applyMode(currentMode);
+
+toggle.onclick=()=>applyMode(currentMode==="light"?"dark":"light");
+
+/* GALAXY */
 const canvas=document.getElementById("galaxy");
 const ctx=canvas.getContext("2d");
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
+
+function resize(){
+    canvas.width=window.innerWidth;
+    canvas.height=window.innerHeight;
+}
+resize();
+window.addEventListener("resize",resize);
 
 let stars=[];
-for(let i=0;i<150;i++){
+for(let i=0;i<180;i++){
     stars.push({
         x:Math.random()*canvas.width,
         y:Math.random()*canvas.height,
-        r:Math.random()*1.5,
-        d:Math.random()*0.5
+        r:Math.random()*1.8+0.5,
+        speed:Math.random()*0.4+0.1,
+        alpha:Math.random(),
+        pulse:Math.random()*0.02+0.005
     });
 }
 
-function animate(){
-    ctx.fillStyle="#000814";
+let nebulaOffset=0;
+
+function drawNebula(){
+    nebulaOffset+=0.001;
+    let g=ctx.createRadialGradient(
+        canvas.width/2+Math.sin(nebulaOffset)*200,
+        canvas.height/2+Math.cos(nebulaOffset)*200,
+        100,
+        canvas.width/2,
+        canvas.height/2,
+        canvas.width
+    );
+
+    if(currentMode==="dark"){
+        g.addColorStop(0,"rgba(56,189,248,0.15)");
+        g.addColorStop(0.5,"rgba(99,102,241,0.1)");
+        g.addColorStop(1,"rgba(0,0,0,0)");
+    }else{
+        g.addColorStop(0,"rgba(14,165,233,0.08)");
+        g.addColorStop(0.5,"rgba(99,102,241,0.05)");
+        g.addColorStop(1,"rgba(255,255,255,0)");
+    }
+
+    ctx.fillStyle=g;
     ctx.fillRect(0,0,canvas.width,canvas.height);
-    ctx.fillStyle="white";
+}
+
+function animate(){
+
+    ctx.fillStyle=currentMode==="dark"?"#000814":"#f1f5f9";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+
+    drawNebula();
+
     stars.forEach(s=>{
+        s.alpha+=s.pulse;
+        if(s.alpha<=0||s.alpha>=1)s.pulse*=-1;
+
         ctx.beginPath();
+        ctx.globalAlpha=s.alpha;
+        ctx.fillStyle=currentMode==="dark"?"white":"#0f172a";
+        ctx.shadowBlur=8;
+        ctx.shadowColor=currentMode==="dark"?"white":"#0f172a";
         ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
         ctx.fill();
-        s.y+=s.d;
-        if(s.y>canvas.height)s.y=0;
+        ctx.globalAlpha=1;
+        ctx.shadowBlur=0;
+
+        s.y+=s.speed;
+        if(s.y>canvas.height){
+            s.y=0;
+            s.x=Math.random()*canvas.width;
+        }
     });
+
     requestAnimationFrame(animate);
 }
 animate();
