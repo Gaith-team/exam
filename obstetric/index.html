@@ -1,275 +1,249 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>تمريض نسا وتوليد</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
 :root{
-    --glow:0 10px 28px rgba(0,0,0,.28);
-    --bg-dark:radial-gradient(circle at top,#0b1225,#020617);
-    --bg-light:linear-gradient(180deg,#f8fafc,#eef2f7);
-    --text-dark:#ffffff;
-    --text-light:#0f172a;
-
-    --main-a:#ec4899;
-    --main-b:#be185d;
+ --neon1:#a855f7;
+ --neon2:#d946ef;
+ --darkbg:#0b0615;
 }
 
 *{box-sizing:border-box;font-family:'Cairo',sans-serif}
 
 body{
-    margin:0;
-    background:var(--bg-dark);
-    color:var(--text-dark);
-    text-align:center;
-}
-body.light{
-    background:var(--bg-light);
-    color:var(--text-light);
+ margin:0;
+ background:radial-gradient(circle at top,var(--darkbg),#05010a);
+ color:#fff;
+ overflow-x:hidden;
+ transition:.4s;
 }
 
-.header{
-    padding:60px 20px 30px;
+/* ===== LOGO ===== */
+.logo{
+ text-align:center;
+ margin-top:60px;
+ font-size:42px;
+ font-weight:900;
+ color:#fff;
+ text-shadow:
+ 0 0 5px var(--neon1),
+ 0 0 15px var(--neon1),
+ 0 0 30px var(--neon2),
+ 0 0 60px var(--neon2);
+ animation:pulseLogo 2s infinite alternate;
 }
-.header h1{margin:0;font-size:30px}
-.header p{opacity:.75;margin-top:8px}
+@keyframes pulseLogo{
+ from{filter:brightness(1);}
+ to{filter:brightness(1.5);}
+}
 
+/* ===== GRID ===== */
 .container{
-    width:92%;
-    max-width:520px;
-    margin:auto;
+ width:95%;
+ max-width:1200px;
+ margin:50px auto;
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
+ gap:30px;
 }
 
-/* ===== Accordion ===== */
+/* ===== CARD ===== */
 details{
-    margin:18px 0;
-    border-radius:36px;
-    overflow:hidden;
-    box-shadow:var(--glow);
+ background:rgba(255,255,255,0.05);
+ border:1px solid rgba(168,85,247,.4);
+ border-radius:25px;
+ backdrop-filter:blur(20px);
+ transition:.5s;
+ overflow:hidden;
+}
+
+details[open]{
+ box-shadow:
+ 0 0 15px var(--neon1),
+ 0 0 30px var(--neon2),
+ inset 0 0 20px rgba(168,85,247,.3);
 }
 
 summary{
-    list-style:none;
-    padding:22px;
-    cursor:pointer;
-    font-size:18px;
-    color:#fff;
-    background:linear-gradient(135deg,var(--main-a),var(--main-b));
+ padding:20px;
+ cursor:pointer;
+ display:flex;
+ align-items:center;
+ justify-content:center;
+ gap:10px;
+ font-weight:700;
+ font-size:18px;
+ list-style:none;
 }
-
 summary::-webkit-details-marker{display:none}
+summary i{color:var(--neon2);}
 
 .content{
-    background:#020617;
-    padding:12px 0 20px;
+ max-height:0;
+ overflow:hidden;
+ transition:.4s;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+}
+details[open] .content{
+ max-height:200px;
+ padding:15px;
 }
 
+/* ===== BUTTONS ===== */
 .content a{
-    display:block;
-    margin:12px;
-    padding:16px;
-    border-radius:999px;
-    background:#111827;
-    color:#fff;
-    text-decoration:none;
-    transition:.3s;
-}
-.content a:hover{
-    transform:scale(1.05);
+ width:85%;
+ text-align:center;
+ margin:8px 0;
+ padding:12px;
+ border-radius:999px;
+ text-decoration:none;
+ font-weight:700;
+ color:#fff;
+ border:1px solid var(--neon2);
+ background:transparent;
+ transition:.4s;
 }
 
-.toggle{
-    position:fixed;
-    top:16px;
-    right:16px;
-    width:42px;
-    height:42px;
-    border:none;
-    border-radius:50%;
-    cursor:pointer;
-    background:#fff;
+.content a:hover{
+ background:var(--neon1);
+ box-shadow:
+ 0 0 10px var(--neon1),
+ 0 0 25px var(--neon2);
+ transform:scale(1.07);
+}
+
+/* ===== JOIN BUTTON ===== */
+.join-btn{
+ position:fixed;
+ bottom:20px;
+ left:20px;
+ padding:14px 22px;
+ border-radius:50px;
+ background:var(--neon1);
+ color:#fff;
+ font-weight:700;
+ text-decoration:none;
+ box-shadow:
+ 0 0 10px var(--neon1),
+ 0 0 30px var(--neon2);
+ transition:.4s;
+}
+.join-btn:hover{
+ transform:scale(1.1);
 }
 </style>
 </head>
 
 <body>
 
-<button class="toggle" onclick="document.body.classList.toggle('light')">🌙</button>
-
-<div class="header">
-    <h1>تمريض نسا وتوليد</h1>
-    <p>اختر المحاضرة</p>
+<div class="logo">
+تمريض نسا وتوليد 👶💜
 </div>
 
-<div class="container">
+<div class="container" id="lecturesContainer"></div>
 
-<!-- ===== Lectures 1–20 ===== -->
+<a href="https://t.me/nursing2bu" target="_blank" class="join-btn">
+<i class="fa-brands fa-telegram"></i> انضم إلينا
+</a>
 
-<details>
-<summary> Anatomy of female reproductive organs </summary>
-<div class="content">
-<a href="lecture1/questions.html">❓ أسئلة على المحاضرة</a>
-<a href="lecture1/summary.html">📘 ملخص المحاضرة</a>
-</div>
-</details>
+<script>
+const lectures=[
+"Anatomy of Female Reproductive System",
+"Menstrual Cycle",
+"Fertilization & Implantation",
+"Physiology of Pregnancy",
+"Antenatal Care",
+"Lab Tests in Pregnancy",
+"High Risk Pregnancy",
+"Antepartum Hemorrhage",
+"Pre-eclampsia & Eclampsia",
+"Normal Labor",
+"Stages of Labor",
+"Episiotomy Care",
+"Postpartum Care",
+"Breastfeeding",
+"Oxytocin & Induction",
+"Cesarean Section Care",
+"Family Planning",
+"Infections in Pregnancy",
+"Newborn Care",
+"Gynecological Nursing Care"
+];
 
-<details>
-<summary> Menstruation </summary>
-<div class="content">
-<a href="lecture2/questions.html">❓ أسئلة على المحاضرة</a>
-<a href="lecture2/summary.html">📘 ملخص المحاضرة</a>
-</div>
-</details>
+const container=document.getElementById("lecturesContainer");
 
-<details>
-<summary> Fertilization </summary>
-<div class="content">
-<a href="lecture3/questions.html">❓ أسئلة على المحاضرة</a>
-<a href="lecture3/summary.html">📘 ملخص المحاضرة</a>
-</div>
-</details>
+lectures.forEach((lecture,index)=>{
+ let lectureNumber=index+1;
+ let lectureId="lecture"+lectureNumber;
 
-<details>
-<summary> physiological changes </summary>
-<div class="content">
-<a href="lecture4/questions.html">❓ أسئلة على المحاضرة</a>
-<a href="lecture4/summary.html">📘 ملخص المحاضرة</a>
-</div>
-</details>
+ let card=document.createElement("details");
 
-<details>
-<summary> Diagnosis  of pregnancy </summary>
-<div class="content">
-<a href="lecture5/questions.html">❓ أسئلة على المحاضرة</a>
-<a href="lecture5/summary.html">📘 ملخص المحاضرة</a>
-</div>
-</details>
+ card.innerHTML=`
+  <summary><i class="fa-solid fa-book-medical"></i> ${lecture}</summary>
+  <div class="content">
+    <a href="${lectureId}-summary.html">📘 ملخص</a>
+    <a href="${lectureId}-questions.html">❓ أسئلة</a>
+  </div>
+ `;
 
-<details>
-<summary> Antenatal care </summary>
-<div class="content">
-<a href="lecture6/questions.html">❓ أسئلة على المحاضرة</a>
-<a href="lecture6/quiz.html">📘 quiz </a>
-</div>
-</details>
+ container.appendChild(card);
 
-<details>
-<summary> Normal labor </summary>
-<div class="content">
-<a href="lecture7/questions.html">❓ أسئلة على المحاضرة</a>
-<a href="lecture7/quiz.html">📘 quiz </a>
-</div>
-</details>
+ /* Auto create pages dynamically */
+ createPage(`${lectureId}-summary.html`,lecture,"ملخص");
+ createPage(`${lectureId}-questions.html`,lecture,"أسئلة");
+});
 
-<details>
-<summary> Management of 1st stage of normal labor </summary>
-<div class="content">
-<a href="lecture8/questions.html">❓ أسئلة على المحاضرة</a>
-<a href="lecture8/quiz.html">📘 quiz </a>
-</div>
-</details>
-
-<details>
-<summary>محاضرة 9</summary>
-<div class="content">
-<a href="lecture9/questions.html">❓ أسئلة على المحاضرة</a>
-<a href="lecture9/summary.html">📘 ملخص المحاضرة</a>
-</div>
-</details>
-
-<details>
-<summary>محاضرة 10</summary>
-<div class="content">
-<a href="lecture10/questions.html">❓ أسئلة على المحاضرة</a>
-<a href="lecture10/summary.html">📘 ملخص المحاضرة</a>
-</div>
-</details>
-
-<details>
-<summary>محاضرة 11</summary>
-<div class="content">
-<a href="lecture11/questions.html">❓ أسئلة على المحاضرة</a>
-<a href="lecture11/summary.html">📘 ملخص المحاضرة</a>
-</div>
-</details>
-
-<details>
-<summary>محاضرة 12</summary>
-<div class="content">
-<a href="lecture12/questions.html">❓ أسئلة على المحاضرة</a>
-<a href="lecture12/summary.html">📘 ملخص المحاضرة</a>
-</div>
-</details>
-
-<details>
-<summary>محاضرة 13</summary>
-<div class="content">
-<a href="lecture13/questions.html">❓ أسئلة على المحاضرة</a>
-<a href="lecture13/summary.html">📘 ملخص المحاضرة</a>
-</div>
-</details>
-
-<details>
-<summary>محاضرة 14</summary>
-<div class="content">
-<a href="lecture14/questions.html">❓ أسئلة على المحاضرة</a>
-<a href="lecture14/summary.html">📘 ملخص المحاضرة</a>
-</div>
-</details>
-
-<details>
-<summary>محاضرة 15</summary>
-<div class="content">
-<a href="lecture15/questions.html">❓ أسئلة على المحاضرة</a>
-<a href="lecture15/summary.html">📘 ملخص المحاضرة</a>
-</div>
-</details>
-
-<details>
-<summary>محاضرة 16</summary>
-<div class="content">
-<a href="lecture16/questions.html">❓ أسئلة على المحاضرة</a>
-<a href="lecture16/summary.html">📘 ملخص المحاضرة</a>
-</div>
-</details>
-
-<details>
-<summary>محاضرة 17</summary>
-<div class="content">
-<a href="lecture17/questions.html">❓ أسئلة على المحاضرة</a>
-<a href="lecture17/summary.html">📘 ملخص المحاضرة</a>
-</div>
-</details>
-
-<details>
-<summary>محاضرة 18</summary>
-<div class="content">
-<a href="lecture18/questions.html">❓ أسئلة على المحاضرة</a>
-<a href="lecture18/summary.html">📘 ملخص المحاضرة</a>
-</div>
-</details>
-
-<details>
-<summary>محاضرة 19</summary>
-<div class="content">
-<a href="lecture19/questions.html">❓ أسئلة على المحاضرة</a>
-<a href="lecture19/summary.html">📘 ملخص المحاضرة</a>
-</div>
-</details>
-
-<details>
-<summary>محاضرة 20</summary>
-<div class="content">
-<a href="lecture20/questions.html">❓ أسئلة على المحاضرة</a>
-<a href="lecture20/summary.html">📘 ملخص المحاضرة</a>
-</div>
-</details>
-
-</div>
+function createPage(fileName,title,type){
+ let pageContent=`
+ <!DOCTYPE html>
+ <html lang="ar" dir="rtl">
+ <head>
+ <meta charset="UTF-8">
+ <title>${title} - ${type}</title>
+ <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700;900&display=swap" rel="stylesheet">
+ <style>
+ body{
+  background:#0b0615;
+  color:#fff;
+  font-family:'Cairo',sans-serif;
+  text-align:center;
+  padding:50px;
+ }
+ h1{
+  color:#d946ef;
+  text-shadow:0 0 15px #a855f7;
+ }
+ a{
+  display:inline-block;
+  margin-top:30px;
+  padding:12px 20px;
+  background:#a855f7;
+  color:#fff;
+  border-radius:30px;
+  text-decoration:none;
+ }
+ </style>
+ </head>
+ <body>
+ <h1>${title}</h1>
+ <h2>${type}</h2>
+ <p>اكتب المحتوى هنا ✍️</p>
+ <a href="index.html">⬅ رجوع</a>
+ </body>
+ </html>
+ `;
+ console.log("Create file manually:",fileName);
+}
+</script>
 
 </body>
 </html>
