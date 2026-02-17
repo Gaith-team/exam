@@ -11,10 +11,10 @@
 
 /* ================= ROOT ================= */
 :root{
-    --bg-dark:#0b1225;
-    --bg-light:#f1f5f9;
-    --text-dark:#ffffff;
-    --text-light:#0f172a;
+    --dark:#0b1225;
+    --light:#f1f5f9;
+    --text-dark:#fff;
+    --text-light:#111827;
 }
 
 /* ================= BASE ================= */
@@ -22,92 +22,84 @@
 
 body{
     margin:0;
-    background:var(--bg-dark);
+    background:var(--dark);
     color:var(--text-dark);
-    text-align:center;
-    transition:.5s;
     overflow-x:hidden;
+    transition:.4s;
 }
 
 /* Light Mode */
 body.light{
-    background:var(--bg-light);
+    background:var(--light);
     color:var(--text-light);
 }
 
-/* ================= Cinematic Entry ================= */
-body{
-    opacity:0;
-    transform:scale(1.05);
-    animation:cinemaIn 1.2s ease forwards;
+/* ================= NETFLIX INTRO ================= */
+#intro{
+    position:fixed;
+    inset:0;
+    background:#000;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
 }
 
-@keyframes cinemaIn{
-    to{
-        opacity:1;
-        transform:scale(1);
-    }
+.intro-text{
+    font-size:42px;
+    font-weight:900;
+    letter-spacing:4px;
+    color:#e50914;
+    animation:introAnim 2.5s ease forwards;
 }
 
-/* ================= Toggle ================= */
+@keyframes introAnim{
+    0%{opacity:0;transform:scale(1.5);}
+    40%{opacity:1;transform:scale(1);}
+    80%{opacity:1;}
+    100%{opacity:0;visibility:hidden;}
+}
+
+/* ================= PARTICLES ================= */
+#particles{
+    position:fixed;
+    inset:0;
+    z-index:-1;
+}
+
+/* ================= TOGGLE ================= */
 .toggle{
     position:fixed;
-    top:20px;
-    left:20px;
+    top:15px;
+    left:15px;
     width:45px;
     height:45px;
     border-radius:50%;
     border:none;
-    cursor:pointer;
     font-size:20px;
+    cursor:pointer;
     background:#fff;
-    box-shadow:0 5px 15px rgba(0,0,0,.3);
 }
 
-/* ================= Header ================= */
+/* ================= HEADER ================= */
 .header{
-    padding:100px 20px 60px;
-}
-
-/* ================= 3D Logo ================= */
-.logo-wrapper{
-    display:flex;
-    justify-content:center;
-    perspective:1000px;
-}
-
-.logo{
-    width:150px;
-    height:150px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:22px;
-    font-weight:900;
-    color:#fff;
     text-align:center;
-    background:linear-gradient(135deg,#0ea5e9,#6366f1);
+    padding:100px 20px 40px;
+}
+
+/* Ultra Logo */
+.logo{
+    font-size:46px;
+    font-weight:900;
+    letter-spacing:3px;
+    background:linear-gradient(135deg,#38bdf8,#6366f1);
+    -webkit-background-clip:text;
+    -webkit-text-fill-color:transparent;
     position:relative;
-    overflow:hidden;
-    transform-style:preserve-3d;
-    transition:transform .2s ease;
-
-    box-shadow:
-        0 0 20px #38bdf8,
-        0 0 40px #6366f1,
-        0 0 80px rgba(99,102,241,.6);
-
-    animation:pulse 2.5s infinite ease-in-out;
+    display:inline-block;
+    animation:pulse 2.5s infinite;
 }
 
-/* Pulse Neon */
-@keyframes pulse{
-    0%,100%{transform:scale(1);}
-    50%{transform:scale(1.07);}
-}
-
-/* Shine */
 .logo::before{
     content:"";
     position:absolute;
@@ -125,39 +117,36 @@ body{
     100%{left:125%;}
 }
 
-/* ================= Container ================= */
-.container{
-    width:92%;
-    max-width:520px;
-    margin:auto;
+@keyframes pulse{
+    50%{transform:scale(1.08);}
 }
 
-/* ================= Buttons ================= */
-.subject{
-    margin:28px 0;
+/* ================= GRID BUTTONS ================= */
+.container{
+    width:95%;
+    max-width:900px;
+    margin:auto;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
+    gap:18px;
+    padding-bottom:80px;
 }
 
 .subject a{
     display:flex;
     justify-content:center;
     align-items:center;
-    gap:12px;
-    padding:24px;
-    border-radius:50px;
-    font-size:20px;
+    text-align:center;
+    padding:25px;
+    border-radius:25px;
     font-weight:800;
     text-decoration:none;
     transition:.3s;
-    box-shadow:0 10px 25px rgba(0,0,0,.3);
+    box-shadow:0 8px 20px rgba(0,0,0,.3);
 }
 
-.subject a:hover{
-    transform:translateY(-4px) scale(1.02);
-}
-
-.subject a:active{
-    transform:scale(.95);
-}
+.subject a:hover{transform:translateY(-5px);}
+.subject a:active{transform:scale(.95);}
 
 /* Colors */
 .pediatric a{background:linear-gradient(135deg,#a7f3d0,#34d399);color:#064e3b;}
@@ -165,20 +154,42 @@ body{
 .medical a{background:linear-gradient(135deg,#0ea5e9,#075985);color:#fff;}
 .management a{background:linear-gradient(135deg,#ff003c,#9f1239);color:#fff;}
 .psychiatric a{background:linear-gradient(135deg,#4fa3a5,#2f6f73);color:#fff;}
+.extra a{background:linear-gradient(135deg,#6366f1,#9333ea);color:#fff;}
+
+/* ================= JOIN BUTTON ================= */
+.join{
+    text-align:center;
+    margin-bottom:60px;
+}
+
+.join a{
+    padding:18px 40px;
+    border-radius:40px;
+    background:linear-gradient(135deg,#229ED9,#38bdf8);
+    color:#fff;
+    font-weight:900;
+    text-decoration:none;
+    box-shadow:0 0 25px rgba(34,158,217,.6);
+    transition:.3s;
+}
+
+.join a:hover{transform:scale(1.08);}
 
 </style>
 </head>
 
 <body>
 
+<div id="intro">
+    <div class="intro-text">GAITH TEAM</div>
+</div>
+
+<canvas id="particles"></canvas>
+
 <button class="toggle" id="modeToggle">🌙</button>
 
 <div class="header">
-    <div class="logo-wrapper">
-        <div class="logo" id="logo">
-            GAITH<br>TEAM
-        </div>
-    </div>
+    <div class="logo">GAITH TEAM</div>
 </div>
 
 <div class="container">
@@ -203,40 +214,69 @@ body{
         <a href="psychiatric/index.html">🧠 تمريض نفسية</a>
     </div>
 
+    <div class="subject extra">
+        <a href="#">⭐ مادة إضافية</a>
+    </div>
+
+</div>
+
+<div class="join">
+    <a href="https://t.me/nursing2bu" target="_blank">
+        ✈️ انضم إلينا على Telegram
+    </a>
 </div>
 
 <script>
 
+/* ===== Hide Intro ===== */
+setTimeout(()=>{
+    document.getElementById("intro").style.display="none";
+},2500);
+
 /* ===== Dark Mode Save ===== */
-const toggle = document.getElementById("modeToggle");
+const toggle=document.getElementById("modeToggle");
 if(localStorage.getItem("mode")==="light"){
     document.body.classList.add("light");
     toggle.textContent="☀️";
 }
-
-toggle.onclick = ()=>{
+toggle.onclick=()=>{
     document.body.classList.toggle("light");
-    if(document.body.classList.contains("light")){
-        localStorage.setItem("mode","light");
-        toggle.textContent="☀️";
-    }else{
-        localStorage.setItem("mode","dark");
-        toggle.textContent="🌙";
-    }
+    localStorage.setItem("mode",
+        document.body.classList.contains("light")?"light":"dark");
 };
 
-/* ===== 3D Mouse Effect ===== */
-const logo = document.getElementById("logo");
+/* ===== Particle Background ===== */
+const canvas=document.getElementById("particles");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
 
-document.addEventListener("mousemove",(e)=>{
-    const x = (window.innerWidth/2 - e.pageX)/25;
-    const y = (window.innerHeight/2 - e.pageY)/25;
-    logo.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
-});
+let particles=[];
+for(let i=0;i<60;i++){
+    particles.push({
+        x:Math.random()*canvas.width,
+        y:Math.random()*canvas.height,
+        r:Math.random()*2,
+        dx:(Math.random()-0.5),
+        dy:(Math.random()-0.5)
+    });
+}
 
-document.addEventListener("mouseleave",()=>{
-    logo.style.transform="rotateY(0deg) rotateX(0deg)";
-});
+function animate(){
+    ctx.clearRect(0,0,canvas.width,canvas.height);
+    particles.forEach(p=>{
+        ctx.beginPath();
+        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle="rgba(255,255,255,.5)";
+        ctx.fill();
+        p.x+=p.dx;
+        p.y+=p.dy;
+        if(p.x<0||p.x>canvas.width)p.dx*=-1;
+        if(p.y<0||p.y>canvas.height)p.dy*=-1;
+    });
+    requestAnimationFrame(animate);
+}
+animate();
 
 </script>
 
