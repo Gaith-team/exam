@@ -4,12 +4,16 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GAITH TEAM</title>
+
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&display=swap" rel="stylesheet">
 
 <style>
-*{box-sizing:border-box;font-family:'Cairo',sans-serif;margin:0;padding:0}
+
+/* ================= BASE ================= */
+*{box-sizing:border-box;font-family:'Cairo',sans-serif}
 
 body{
+    margin:0;
     background:#000814;
     color:#fff;
     overflow-x:hidden;
@@ -21,29 +25,69 @@ body.light{
     color:#111827;
 }
 
-/* ===== Header ===== */
+/* ================= GALAXY BACKGROUND ================= */
+#galaxy{
+    position:fixed;
+    inset:0;
+    z-index:-1;
+}
+
+/* ================= ELECTRIC GLITCH INTRO ================= */
+#intro{
+    position:fixed;
+    inset:0;
+    background:#000;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+}
+
+.glitch{
+    font-size:55px;
+    font-weight:900;
+    color:#38bdf8;
+    position:relative;
+    text-shadow:
+        0 0 10px #38bdf8,
+        0 0 30px #0ea5e9,
+        0 0 60px #38bdf8;
+    animation:glitch 1s infinite alternate;
+}
+
+@keyframes glitch{
+    0%{transform:translate(0);}
+    20%{transform:translate(-2px,2px);}
+    40%{transform:translate(2px,-2px);}
+    60%{transform:translate(-2px,-1px);}
+    80%{transform:translate(1px,2px);}
+    100%{transform:translate(0);}
+}
+
+/* Fade intro */
+.hide-intro{
+    animation:fadeOut 1.5s forwards;
+}
+
+@keyframes fadeOut{
+    to{opacity:0;visibility:hidden;}
+}
+
+/* ================= HEADER ================= */
 .header{
     text-align:center;
     padding:90px 20px 40px;
 }
 
 .logo{
-    font-size:45px;
+    font-size:42px;
     font-weight:900;
-    background:linear-gradient(270deg,#38bdf8,#6366f1,#9333ea,#38bdf8);
-    background-size:600% 600%;
+    background:linear-gradient(135deg,#38bdf8,#6366f1);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
-    animation:gradientMove 6s ease infinite;
 }
 
-@keyframes gradientMove{
-    0%{background-position:0% 50%;}
-    50%{background-position:100% 50%;}
-    100%{background-position:0% 50%;}
-}
-
-/* ===== Grid 2x2 ===== */
+/* ================= GRID 2x2 ================= */
 .container{
     width:95%;
     max-width:520px;
@@ -58,26 +102,31 @@ body.light{
     display:flex;
     justify-content:center;
     align-items:center;
-    padding:30px 10px;
+    text-align:center;
+    padding:30px 15px;
     border-radius:20px;
     font-weight:800;
     text-decoration:none;
     transition:.3s;
     box-shadow:0 8px 20px rgba(0,0,0,.4);
 }
+
 .subject a:hover{transform:translateY(-6px);}
 .subject a:active{transform:scale(.95);}
 
 /* Colors */
 .pediatric a{background:linear-gradient(135deg,#a7f3d0,#34d399);color:#064e3b;}
+.obstetric a{background:linear-gradient(135deg,#fbcfe8,#f472b6);color:#1f2937;}
 .medical a{background:linear-gradient(135deg,#0ea5e9,#075985);color:#fff;}
 .management a{background:linear-gradient(135deg,#ff003c,#9f1239);color:#fff;}
+.psychiatric a{background:linear-gradient(135deg,#4fa3a5,#2f6f73);color:#fff;}
 
-/* ===== Join ===== */
+/* ================= JOIN ================= */
 .join{
     text-align:center;
-    margin:60px 0;
+    margin-bottom:60px;
 }
+
 .join a{
     padding:18px 40px;
     border-radius:40px;
@@ -88,9 +137,10 @@ body.light{
     box-shadow:0 0 30px rgba(56,189,248,.6);
     transition:.3s;
 }
+
 .join a:hover{transform:scale(1.1);}
 
-/* ===== Toggle ===== */
+/* ================= TOGGLE ================= */
 .toggle{
     position:fixed;
     top:15px;
@@ -109,6 +159,14 @@ body.light{
 
 <body>
 
+<!-- Galaxy Background -->
+<canvas id="galaxy"></canvas>
+
+<!-- Intro -->
+<div id="intro">
+    <div class="glitch">GAITH TEAM</div>
+</div>
+
 <button class="toggle" id="modeToggle">🌙</button>
 
 <div class="header">
@@ -118,15 +176,23 @@ body.light{
 <div class="container">
 
     <div class="subject pediatric">
-        <a href="pediatric/index.html">🍼 تمريض أطفال</a>
+        <a href="pediatric/index.html">🍼 أطفال</a>
+    </div>
+
+    <div class="subject obstetric">
+        <a href="obstetric/index.html">🤰 نسا</a>
     </div>
 
     <div class="subject medical">
-        <a href="medical/index.html">🩺 تمريض باطني جراحي</a>
+        <a href="medical/index.html">🩺 باطني</a>
     </div>
 
     <div class="subject management">
-        <a href="management/index.html">📊 تمريض إدارة</a>
+        <a href="management/index.html">📊 إدارة</a>
+    </div>
+
+    <div class="subject psychiatric">
+        <a href="psychiatric/index.html">🧠 نفسية</a>
     </div>
 
 </div>
@@ -139,19 +205,53 @@ body.light{
 
 <script>
 
-/* Dark Mode Save */
-const toggle=document.getElementById("modeToggle");
+/* Hide intro after 3s */
+setTimeout(()=>{
+    document.getElementById("intro").classList.add("hide-intro");
+},3000);
 
+/* Dark Mode */
+const toggle=document.getElementById("modeToggle");
 if(localStorage.getItem("mode")==="light"){
     document.body.classList.add("light");
     toggle.textContent="☀️";
 }
-
 toggle.onclick=()=>{
     document.body.classList.toggle("light");
     localStorage.setItem("mode",
         document.body.classList.contains("light")?"light":"dark");
 };
+
+/* Galaxy Background */
+const canvas=document.getElementById("galaxy");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let stars=[];
+for(let i=0;i<150;i++){
+    stars.push({
+        x:Math.random()*canvas.width,
+        y:Math.random()*canvas.height,
+        r:Math.random()*1.5,
+        d:Math.random()*0.5
+    });
+}
+
+function animate(){
+    ctx.fillStyle="#000814";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle="white";
+    stars.forEach(s=>{
+        ctx.beginPath();
+        ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+        ctx.fill();
+        s.y+=s.d;
+        if(s.y>canvas.height)s.y=0;
+    });
+    requestAnimationFrame(animate);
+}
+animate();
 
 </script>
 
