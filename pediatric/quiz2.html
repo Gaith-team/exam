@@ -1,0 +1,537 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaith Team | Exam</title>
+
+<style>
+:root{
+  --primary:#0284c7;
+  --secondary:#0ea5e9;
+  --bg:#f8fbff;
+  --card:#ffffff;
+  --soft:#e6f0ff;
+  --question:#eef7ff;
+  --option:#f9fcff;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --text:#0f172a;
+
+  /* Brand dynamic */
+  --brand1:#ffffff;
+  --brand2:#e0f2fe;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#eef6ff);
+  color:var(--text);
+}
+
+/* ================= HEADER ================= */
+header{
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* ===== Brand ===== */
+.logo{
+  position:relative;
+  font-size:28px;
+  font-weight:900;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.brand-text{
+  background:linear-gradient(90deg,var(--brand1),var(--brand2),var(--brand1));
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 4s linear infinite;
+}
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+.heart{
+  display:inline-block;
+  animation:heartbeat 1.6s infinite ease-in-out;
+}
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  animation:twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle{
+  0%{opacity:0;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.2)}
+  100%{opacity:0;transform:scale(.6)}
+}
+
+/* Reduced motion أثناء الامتحان */
+.exam .sparkle{animation-duration:5s;opacity:.4}
+.exam .heart{animation-duration:2.5s}
+
+/* After exam */
+.after .sparkle{animation-duration:2s}
+.after .heart{animation-duration:1.1s}
+
+/* ================= LAYOUT ================= */
+.container{max-width:520px;margin:auto;padding:16px}
+
+/* ===== Top Bar ===== */
+.top-bar{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+}
+.progress-box{
+  flex:1;
+  background:var(--card);
+  padding:14px;
+  border-radius:18px;
+  box-shadow:0 10px 22px rgba(2,132,199,.12);
+}
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px;
+  font-weight:800;
+  font-size:14px;
+}
+.progress{
+  height:8px;
+  background:var(--soft);
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+}
+
+/* Timer */
+.timer{
+  width:64px;height:64px;border-radius:50%;
+  background:conic-gradient(var(--primary) 0deg,var(--soft) 0deg);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;
+  background-color:var(--card);
+}
+
+/* ================= CARD ================= */
+.card{
+  background:var(--card);
+  padding:22px;
+  border-radius:24px;
+  box-shadow:0 18px 36px rgba(2,132,199,.18);
+}
+.question-title{
+  background:var(--question);
+  padding:16px;
+  border-radius:16px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+.option{
+  background:var(--option);
+  border:2px solid var(--soft);
+  border-radius:18px;
+  padding:15px;
+  margin:12px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.correct{background:#eafaf1;border-color:var(--success)}
+.option.wrong{background:#fff1f1;border-color:var(--danger)}
+.option.disabled{pointer-events:none;opacity:.9}
+
+button{
+  margin-top:18px;
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-weight:900;
+}
+
+/* Feedback */
+.feedback{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:10px;
+  animation:pop .5s;
+}
+@keyframes pop{
+  0%{transform:scale(.6);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* Report */
+.report{
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  border-left:6px solid var(--soft);
+}
+.report.correct{border-color:var(--success)}
+.report.wrong{border-color:var(--danger)}
+</style>
+</head>
+
+<body class="exam">
+
+<header>
+  <div class="logo">
+    <span class="brand-text">Gaith Team</span>
+    <span class="heart">💖</span>
+    <span class="sparkle" style="top:-8px;left:0">✨</span>
+    <span class="sparkle" style="top:6px;right:-8px">✨</span>
+    <span class="sparkle" style="bottom:-8px;left:50%">✨</span>
+  </div>
+  <div style="margin-top:6px;font-weight:800">الإمتحان في جيبك 👏🏻</div>
+</header>
+
+<div class="container">
+
+  <div class="top-bar">
+    <div class="progress-box">
+      <div class="progress-text">
+        <span id="progressText"></span>
+        <span>
+          ✔️ <span id="correctCount">0</span> |
+          ❌ <span id="wrongCount">0</span> |
+          ⏳ <span id="remainPercent">100%</span>
+        </span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="timer" id="timer">15:00</div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<script>
+/* ===== Questions ===== */
+let questions = [
+  // --- EASY: Knowledge ---
+  {
+    t: "What is the average crown-heel length for a term female neonate?",
+    o: ["47.5 cm", "49 cm", "50 cm", "53.5 cm"],
+    a: 1
+  },
+  {
+    t: "How much birth weight does a neonate typically lose during the first few days of life?",
+    o: ["1-2%", "5-10%", "15-20%", "No weight loss"],
+    a: 1
+  },
+  {
+    t: "The normal respiratory rate for a newborn ranges from:",
+    o: ["12-20 C/M", "20-30 C/M", "35-50 C/M", "60-80 C/M"],
+    a: 2
+  },
+  {
+    t: "What is the average blood pressure of a full-term newborn?",
+    o: ["120/80 mmHg", "100/60 mmHg", "74/47 mmHg", "60/40 mmHg"],
+    a: 2
+  },
+  {
+    t: "Which substance consists of secretions from sebaceous glands and epithelial cells, covering the newborn's skin?",
+    o: ["Lanugo", "Vernix caseosa", "Milia", "Meconium"],
+    a: 1
+  },
+  {
+    t: "The anterior fontanel typically closes by what age?",
+    o: ["2-6 months", "6-12 months", "12-18 months", "24 months"],
+    a: 2
+  },
+  {
+    t: "How many umbilical arteries are normally present in the umbilical cord?",
+    o: ["One", "Two", "Three", "None"],
+    a: 1
+  },
+  {
+    t: "What is the capacity of a newborn's stomach?",
+    o: ["10-20 ml", "30-40 ml", "50-60 ml", "100-120 ml"],
+    a: 2
+  },
+  {
+    t: "The first stool passed by a newborn, which is thick, tarry, and dark green, is called:",
+    o: ["Lochia", "Meconium", "Vernix", "Lanugo"],
+    a: 1
+  },
+
+  // --- MEDIUM: Assessment / Interpretation ---
+  {
+    t: "A nurse notices a soft swelling on a newborn's head that does not cross the suture line. This is likely a:",
+    o: ["Caput-succedaneum", "Cephalo-haematoma", "Plagiocephaly", "Hydrocephalus"],
+    a: 1
+  },
+  {
+    t: "Why do newborns often have a 'false squint' or uncoordinated eye movements?",
+    o: ["They are born blind", "It is a sign of a brain injury", "Eye muscles are not yet coordinated", "They have cataracts"],
+    a: 2
+  },
+  {
+    t: "A female newborn has a small amount of blood on her diaper. The nurse explains to the mother that this is:",
+    o: ["A sign of a urinary tract infection", "Pseudo-menstruation due to withdrawal of maternal hormones", "A result of birth trauma", "A serious emergency"],
+    a: 1
+  },
+  {
+    t: "Which mechanism of heat production is primary in newborns since they cannot shiver effectively?",
+    o: ["Physical exercise", "Brown-fat metabolism (Non-shivering thermogenesis)", "Sweating", "Increased intake of warm milk"],
+    a: 1
+  },
+  {
+    t: "A newborn's hands and feet appear blue (acrocyanosis) and feel cold. The nurse knows this is due to:",
+    o: ["Congenital heart disease", "Poor peripheral circulation and immature heat regulation", "Severe hypothermia", "Respiratory failure"],
+    a: 1
+  },
+  {
+    t: "The 'Witch's milk' or pale milk fluid from a newborn's swollen breasts is caused by:",
+    o: ["Infant infection", "Maternal hormonal activity", "Preterm birth", "High protein diet"],
+    a: 1
+  },
+  {
+    t: "What is the primary reason for physiological weight loss in a newborn?",
+    o: ["Excessive crying", "Withdrawal of maternal hormones and loss of feces/urine", "Inability to swallow", "High metabolic rate"],
+    a: 1
+  },
+  {
+    t: "If a reflex like the Moro (startle) reflex is absent at birth, it may indicate:",
+    o: ["Normal development", "Injury to the Central Nervous System (CNS)", "The baby is sleeping deeply", "The baby is too young"],
+    a: 1
+  },
+  {
+    t: "A nurse observes a 'stork bite' (capillary haemangioma) on the nape of a newborn's neck. What should she tell the parents?",
+    o: ["It requires immediate surgery", "It is a common birthmark that may persist or fade", "It is a sign of a blood disorder", "It is infectious"],
+    a: 1
+  },
+
+  // --- HARD: Problem Solving ---
+  {
+    t: "During the transition to extra-uterine life, which circulatory change occurs to close the foramen ovale?",
+    o: ["Decreased systemic pressure", "Left atrial pressure overcomes right atrial pressure", "Closure of the ductus venosus", "Increased venous pressure"],
+    a: 1
+  },
+  {
+    t: "A newborn has not voided for 24 hours. What is the most common cause the nurse should investigate?",
+    o: ["Immature bladder", "Congenital kidney absence", "Dehydration", "Excessive feeding"],
+    a: 2
+  },
+  {
+    t: "Why is it critical to observe a newborn closely during the first 24 hours of life?",
+    o: ["To check for eye color changes", "Because respiratory distress and circulatory failure can occur rapidly", "To start solid foods", "To begin walking exercises"],
+    a: 1
+  },
+  {
+    t: "Which of the following describes 'Caput-succedaneum' correctly?",
+    o: ["Blood between periosteum and bone", "Edema of the presenting part that crosses suture lines", "A permanent skull deformity", "Brain tissue protrusion"],
+    a: 1
+  },
+  {
+    t: "The hypothalamus acts as what in the newborn's body?",
+    o: ["The primary digestive organ", "The central control system for thermoregulation", "The center for coordinated movement", "The producer of red blood cells"],
+    a: 1
+  },
+  {
+    t: "What should a nurse do if she finds only one umbilical artery in the newborn's cord?",
+    o: ["Nothing, it is normal", "Assess the neonate for other congenital anomalies", "Tell the mother to feed the baby more", "Immediately start a blood transfusion"],
+    a: 1
+  },
+  {
+    t: "The 'fencing' position where a newborn turns their head to one side and extends the arm on that side is the:",
+    o: ["Moro reflex", "Tonic neck reflex", "Startle reflex", "Grasp reflex"],
+    a: 1
+  },
+  {
+    t: "The newborn is a 'nose breather' and unusual nasal discharge should be removed to ensure clear breathing.",
+    o: ["True", "False"],
+    a: 0
+  },
+  {
+    t: "Newborns have a high level of salivation immediately after birth.",
+    o: ["True", "False"],
+    a: 1
+  },
+  {
+    t: "The ductus arteriosus typically closes within the first few minutes of life.",
+    o: ["True", "False"],
+    a: 1
+  },
+  {
+    t: "Mongolian spots are blue-black pigmented areas that usually disappear during pre-school age.",
+    o: ["True", "False"],
+    a: 0
+  },
+  {
+    t: "The shivering mechanism is the primary way a newborn produces heat.",
+    o: ["True", "False"],
+    a: 1
+  }
+];
+
+
+
+// ===== shuffle questions only =====
+function shuffleQuestions(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+// خلط الأسئلة فقط
+shuffleQuestions(questions);
+
+// تعريف المتغيرات الناقصة
+let i = 0;
+let correct = 0;
+let wrong = 0;
+let answers = [];
+let wrongSet = [];
+
+/* ===== Timer ===== */
+let totalTime=15*60, timeLeft=totalTime;
+const timerInt=setInterval(()=>{
+  timeLeft--;
+  let m=Math.floor(timeLeft/60), s=timeLeft%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  let deg=(timeLeft/totalTime)*360;
+  timer.style.background=`conic-gradient(var(--primary) ${deg}deg,var(--soft) ${deg}deg)`;
+  if(timeLeft<=0){clearInterval(timerInt);finishExam();}
+},1000);
+
+/* ===== UI ===== */
+function updateTop(){
+  let total=questions.length;
+  let answered=correct+wrong;
+  progressText.innerText=`سؤال ${i+1} من ${total}`;
+  progressBar.style.width=((i+1)/total*100)+"%";
+  correctCount.innerText=correct;
+  wrongCount.innerText=wrong;
+  remainPercent.innerText=Math.round(((total-answered)/total)*100)+"%";
+}
+
+/* ===== Render ===== */
+function show(){
+  updateTop();
+  let q = questions[i];
+
+  app.innerHTML = `
+    <div class="card">
+      <div class="question-title">${q.t}</div>
+      ${q.o.map((o,idx)=>`
+        <div class="option" onclick="choose(${idx})">${o}</div>
+      `).join("")}
+    </div>
+  `;
+}
+/* ===== Choose ===== */
+function choose(v){
+  if(answers[i]!=null) return;
+  answers[i]=v;
+  let ok=v===questions[i].a;
+  ok?correct++:wrong++;
+  app.innerHTML=`
+    <div class="feedback">${ok?"🎉 شاطر جدًا كمل":"😅 ركّز يا سُكر"}</div>
+    <div class="card">
+      <div class="question-title">${questions[i].t}</div>
+      ${questions[i].o.map((o,j)=>`
+        <div class="option ${j===questions[i].a?"correct":j===v?"wrong":""} disabled">${o}</div>
+      `).join("")}
+      <button onclick="next()">التالي</button>
+    </div>`;
+}
+
+/* ===== Next ===== */
+function next(){
+  if(i<questions.length-1){i++;show();}
+  else finishExam();
+}
+
+/* ===== Finish ===== */
+function finishExam(){
+  document.body.classList.remove("exam");
+  document.body.classList.add("after");
+
+  let score=Math.round((correct/questions.length)*100);
+
+  if(score>=80){
+    document.documentElement.style.setProperty("--brand1","#22c55e");
+    document.documentElement.style.setProperty("--brand2","#fde047");
+  }else if(score>=50){
+    document.documentElement.style.setProperty("--brand1","#38bdf8");
+    document.documentElement.style.setProperty("--brand2","#e0f2fe");
+  }else{
+    document.documentElement.style.setProperty("--brand1","#fb923c");
+    document.documentElement.style.setProperty("--brand2","#fed7aa");
+  }
+
+  wrongSet=[];
+  let report="";
+  questions.forEach((q,idx)=>{
+    let ok=answers[idx]===q.a;
+    if(!ok) wrongSet.push(q);
+    report+=`
+      <div class="report ${ok?"correct":"wrong"}">
+        <b>${q.t}</b><br>
+إجابتك: ${answers[idx]!=null ? q.o[answers[idx]] : "لم يتم الحل"}<br>
+الصح: ${q.o[q.a]}
+      </div>`;
+  });
+
+  app.innerHTML=`
+    <div class="card">
+      <h3>?? تقريرك</h3>
+      ${report}
+      ${wrongSet.length?`<button onclick="retry()">إعادة حل الغلط فقط</button>`:"<p>أنت ممتاز 👑</p>"}
+    </div>`;
+}
+
+/* ===== Retry Wrong ===== */
+function retry(){
+  // نبدأ امتحان جديد بالأسئلة الغلط فقط
+  questions = [...wrongSet];
+
+  answers = [];
+  wrongSet = [];
+  i = 0;
+  correct = 0;
+  wrong = 0;
+
+  // رجوع لشكل الامتحان
+  document.body.classList.remove("after");
+  document.body.classList.add("exam");
+
+  show();
+}
+
+show();
+</script>
+
+</body>
+</html>
