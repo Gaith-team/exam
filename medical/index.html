@@ -31,6 +31,17 @@ body.light{
 #stars{
  position:fixed;
  inset:0;
+ z-index:-2;
+ transition:.6s;
+}
+
+/* Portal Flash */
+.portal-flash{
+ position:fixed;
+ inset:0;
+ background:radial-gradient(circle,rgba(56,189,248,.5) 0%,transparent 60%);
+ opacity:0;
+ pointer-events:none;
  z-index:-1;
 }
 
@@ -69,19 +80,19 @@ body.light{
  display:grid;
  grid-template-columns:repeat(2,1fr);
  gap:30px;
- perspective:1200px;
+ perspective:1400px;
 }
 
-/* FLOATING CARD */
+/* CARD */
 details{
  backdrop-filter:blur(22px);
  background:rgba(255,255,255,0.08);
  border:1px solid rgba(255,255,255,0.18);
  border-radius:30px;
  overflow:hidden;
- transition:.4s;
+ transition:.6s;
  transform-style:preserve-3d;
- will-change:transform;
+ position:relative;
 }
 
 body.light details{
@@ -89,9 +100,20 @@ body.light details{
  border:1px solid rgba(0,0,0,0.08);
 }
 
+/* Portal Animation */
+details.portal-open{
+ animation:portalOut .6s ease forwards;
+}
+
+@keyframes portalOut{
+ 0%{transform:scale(1) rotateX(0);}
+ 50%{transform:scale(1.1) rotateX(15deg);}
+ 100%{transform:scale(1.05) rotateX(0);}
+}
+
 details[open]{
- box-shadow:0 0 25px var(--glow1),
-            0 0 60px var(--glow2);
+ box-shadow:0 0 30px var(--glow1),
+            0 0 80px var(--glow2);
 }
 
 summary{
@@ -105,13 +127,12 @@ summary{
  font-weight:700;
 }
 summary::-webkit-details-marker{display:none}
-summary:active{transform:scale(.95);}
 summary i{color:var(--glow2);}
 
 .content{
  max-height:0;
  overflow:hidden;
- transition:max-height .4s ease;
+ transition:max-height .5s ease;
  padding:0 18px;
  display:flex;
  flex-direction:column;
@@ -155,6 +176,7 @@ details[open] .content{
 <body>
 
 <canvas id="stars"></canvas>
+<div class="portal-flash" id="flash"></div>
 <button class="toggle" id="modeToggle">🌙</button>
 
 <div class="logo">
@@ -198,35 +220,22 @@ toggle.onclick=()=>{
  toggle.textContent=mode==="light"?"☀️":"🌙";
 };
 
-/* Close others */
-document.addEventListener("click",e=>{
- if(e.target.closest("details")){
+/* Portal Effect */
+const flash=document.getElementById("flash");
+document.querySelectorAll("details").forEach(card=>{
+ card.addEventListener("click",()=>{
    document.querySelectorAll("details").forEach(d=>{
-     if(d!==e.target.closest("details")) d.removeAttribute("open");
+     if(d!==card) d.removeAttribute("open");
    });
- }
-});
 
-/* ===== 3D FLOATING CARDS ===== */
-const cards=document.querySelectorAll(".card");
-
-cards.forEach(card=>{
- card.addEventListener("mousemove",e=>{
-   const rect=card.getBoundingClientRect();
-   const x=e.clientX-rect.left;
-   const y=e.clientY-rect.top;
-   const centerX=rect.width/2;
-   const centerY=rect.height/2;
-   const rotateX=((y-centerY)/20);
-   const rotateY=((centerX-x)/20);
-   card.style.transform=`rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.05)`;
- });
- card.addEventListener("mouseleave",()=>{
-   card.style.transform="rotateX(0) rotateY(0) scale(1)";
+   card.classList.add("portal-open");
+   flash.style.opacity="1";
+   setTimeout(()=>{flash.style.opacity="0";},400);
+   setTimeout(()=>{card.classList.remove("portal-open");},600);
  });
 });
 
-/* ===== IMMERSIVE GALAXY ===== */
+/* ===== GALAXY ===== */
 const canvas=document.getElementById("stars");
 const ctx=canvas.getContext("2d");
 
@@ -238,59 +247,31 @@ resize();
 window.addEventListener("resize",resize);
 
 let stars=[];
-let waves=[];
-let mouseX=0,mouseY=0;
-
-document.addEventListener("mousemove",e=>{
- mouseX=(e.clientX-window.innerWidth/2)/100;
- mouseY=(e.clientY-window.innerHeight/2)/100;
-});
-
 for(let i=0;i<600;i++){
- let depth=Math.random();
+ let angle=Math.random()*Math.PI*2;
+ let radius=Math.random()*500;
  stars.push({
-   angle:Math.random()*Math.PI*2,
-   radius:Math.random()*500,
+   angle,
+   radius,
    size:Math.random()*2,
-   speed:0.0002+depth*0.0006,
-   depth:depth,
-   glow:0
+   speed:0.0002+Math.random()*0.0006
  });
 }
-
-setInterval(()=>{waves.push({radius:0,alpha:0.6});},1500);
 
 function animate(){
  ctx.clearRect(0,0,canvas.width,canvas.height);
  let cx=canvas.width/2;
  let cy=canvas.height/2;
 
+ ctx.fillStyle=mode==="dark"?"white":"#94a3b8";
+
  stars.forEach(s=>{
    s.angle+=s.speed;
-   let x=cx+Math.cos(s.angle)*s.radius + mouseX*s.depth*30;
-   let y=cy+Math.sin(s.angle)*s.radius + mouseY*s.depth*30;
-
-   waves.forEach(w=>{
-     let dist=Math.hypot(x-cx,y-cy);
-     if(Math.abs(dist-w.radius)<3) s.glow=1;
-   });
-
-   ctx.fillStyle=s.glow>0?"#38bdf8":(mode==="dark"?"white":"#94a3b8");
+   let x=cx+Math.cos(s.angle)*s.radius;
+   let y=cy+Math.sin(s.angle)*s.radius;
    ctx.beginPath();
-   ctx.arc(x,y,s.size+s.glow*2,0,Math.PI*2);
+   ctx.arc(x,y,s.size,0,Math.PI*2);
    ctx.fill();
-   s.glow*=0.95;
- });
-
- waves.forEach((w,i)=>{
-   ctx.beginPath();
-   ctx.strokeStyle=`rgba(56,189,248,${w.alpha})`;
-   ctx.lineWidth=2;
-   ctx.arc(cx,cy,w.radius,0,Math.PI*2);
-   ctx.stroke();
-   w.radius+=2;
-   w.alpha-=0.004;
-   if(w.alpha<=0) waves.splice(i,1);
  });
 
  requestAnimationFrame(animate);
@@ -300,4 +281,3 @@ animate();
 
 </body>
 </html>
-
