@@ -12,9 +12,9 @@
 
 body{
     margin:0;
+    overflow:hidden;
     background:#000814;
     color:#fff;
-    overflow:hidden;
     transition:.6s;
 }
 
@@ -23,41 +23,10 @@ body.light{
     color:#111827;
 }
 
-/* CANVAS */
 #galaxy{
     position:fixed;
     inset:0;
     z-index:-1;
-}
-
-/* ===== CINEMATIC INTRO ===== */
-#intro{
-    position:fixed;
-    inset:0;
-    background:radial-gradient(circle at center,#0f172a,#000);
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    flex-direction:column;
-    z-index:9999;
-    animation:zoomOut 3s forwards 3s;
-}
-
-.intro-title{
-    font-size:60px;
-    font-weight:900;
-    color:#38bdf8;
-    text-shadow:0 0 20px #38bdf8,0 0 60px #0ea5e9;
-    animation:pulse 2s infinite alternate;
-}
-
-@keyframes pulse{
-    from{transform:scale(1);}
-    to{transform:scale(1.1);}
-}
-
-@keyframes zoomOut{
-    to{opacity:0;visibility:hidden;transform:scale(1.2);}
 }
 
 /* HEADER */
@@ -102,30 +71,23 @@ body.light{
 .fade-out{animation:fadeOut 1s forwards;}
 @keyframes fadeOut{to{opacity:0;transform:scale(1.1);}}
 
-/* Toggle */
+/* TOGGLE */
 .toggle{
     position:fixed;
-    top:15px;
-    left:15px;
+    top:15px;left:15px;
     width:50px;height:50px;
     border-radius:50%;
     border:none;
     cursor:pointer;
     font-size:22px;
     background:#0ea5e9;color:#fff;
-    transition:.4s;
 }
-.toggle:hover{transform:rotate(180deg) scale(1.1);}
 </style>
 </head>
 
 <body>
 
 <canvas id="galaxy"></canvas>
-
-<div id="intro">
-    <div class="intro-title">GAITH TEAM</div>
-</div>
 
 <button class="toggle" id="modeToggle">🌙</button>
 
@@ -141,20 +103,12 @@ body.light{
     <div class="subject psychiatric"><a href="psychiatric/index.html">🧠 نفسية</a></div>
 </div>
 
-<audio id="spaceSound" src="https://assets.mixkit.co/sfx/preview/mixkit-space-ambience-142.mp3"></audio>
-
 <script>
 
-/* SOUND ON LOAD */
-window.addEventListener("load",()=>{
-    const sound=document.getElementById("spaceSound");
-    sound.volume=0.2;
-    sound.play().catch(()=>{});
-});
-
-/* MODE */
+/* ================= MODE ================= */
 const toggle=document.getElementById("modeToggle");
 let currentMode=localStorage.getItem("mode")||"dark";
+
 function applyMode(mode){
     currentMode=mode;
     if(mode==="light"){
@@ -178,102 +132,16 @@ document.querySelectorAll(".subject a").forEach(link=>{
     });
 });
 
-/* GALAXY */
+/* ================= GALAXY SYSTEM ================= */
+
 const canvas=document.getElementById("galaxy");
 const ctx=canvas.getContext("2d");
+
 function resize(){
     canvas.width=window.innerWidth;
     canvas.height=window.innerHeight;
 }
 resize();window.addEventListener("resize",resize);
 
-let stars=[],shootingStars=[],planets=[];
 let mouseX=0,mouseY=0;
-
-document.addEventListener("mousemove",e=>{
-    mouseX=(e.clientX-window.innerWidth/2)/50;
-    mouseY=(e.clientY-window.innerHeight/2)/50;
-});
-
-/* Spiral Stars */
-for(let i=0;i<800;i++){
-    stars.push({
-        angle:Math.random()*Math.PI*2,
-        radius:Math.random()*400,
-        speed:0.0003+Math.random()*0.0005,
-        size:Math.random()*2
-    });
-}
-
-/* Planets */
-for(let i=0;i<3;i++){
-    planets.push({
-        angle:Math.random()*Math.PI*2,
-        distance:200+Math.random()*150,
-        size:10+Math.random()*15,
-        speed:0.001+Math.random()*0.001
-    });
-}
-
-/* Shooting star */
-function createShootingStar(){
-    shootingStars.push({
-        x:Math.random()*canvas.width,
-        y:0,
-        length:200,
-        speed:10
-    });
-}
-setInterval(createShootingStar,4000);
-
-function animate(){
-    ctx.fillStyle=currentMode==="dark"?"#000814":"#f1f5f9";
-    ctx.fillRect(0,0,canvas.width,canvas.height);
-
-    const cx=canvas.width/2+mouseX;
-    const cy=canvas.height/2+mouseY;
-
-    /* Stars */
-    stars.forEach(s=>{
-        s.angle+=s.speed;
-        const x=cx+Math.cos(s.angle)*s.radius;
-        const y=cy+Math.sin(s.angle)*s.radius;
-        ctx.beginPath();
-        ctx.fillStyle=currentMode==="dark"?"white":"#0f172a";
-        ctx.arc(x,y,s.size,0,Math.PI*2);
-        ctx.fill();
-    });
-
-    /* Planets */
-    planets.forEach(p=>{
-        p.angle+=p.speed;
-        const x=cx+Math.cos(p.angle)*p.distance;
-        const y=cy+Math.sin(p.angle)*p.distance;
-        ctx.beginPath();
-        ctx.fillStyle="#38bdf8";
-        ctx.arc(x,y,p.size,0,Math.PI*2);
-        ctx.fill();
-    });
-
-    /* Shooting stars */
-    shootingStars.forEach((s,i)=>{
-        ctx.strokeStyle="white";
-        ctx.beginPath();
-        ctx.moveTo(s.x,s.y);
-        ctx.lineTo(s.x+s.length,s.y+s.length);
-        ctx.stroke();
-        s.x+=s.speed;
-        s.y+=s.speed;
-        if(s.x>canvas.width||s.y>canvas.height){
-            shootingStars.splice(i,1);
-        }
-    });
-
-    requestAnimationFrame(animate);
-}
-animate();
-
-</script>
-
-</body>
-</html>
+document.addEventListene
