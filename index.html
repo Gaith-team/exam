@@ -9,32 +9,24 @@
 
 <style>
 
-/* ================= ROOT ================= */
-:root{
-    --dark:#0b1225;
-    --light:#f1f5f9;
-    --text-dark:#fff;
-    --text-light:#111827;
-}
-
 /* ================= BASE ================= */
 *{box-sizing:border-box;font-family:'Cairo',sans-serif}
 
 body{
     margin:0;
-    background:var(--dark);
-    color:var(--text-dark);
+    background:#0b1225;
+    color:#fff;
     overflow-x:hidden;
-    transition:.4s;
+    transition:.5s;
 }
 
 /* Light Mode */
 body.light{
-    background:var(--light);
-    color:var(--text-light);
+    background:#f1f5f9;
+    color:#111827;
 }
 
-/* ================= NETFLIX INTRO ================= */
+/* ================= CINEMATIC INTRO ================= */
 #intro{
     position:fixed;
     inset:0;
@@ -46,99 +38,70 @@ body.light{
 }
 
 .intro-text{
-    font-size:42px;
+    font-size:50px;
     font-weight:900;
-    letter-spacing:4px;
-    color:#e50914;
-    animation:introAnim 2.5s ease forwards;
+    letter-spacing:5px;
+    color:#38bdf8;
+    text-shadow:
+        0 0 15px #38bdf8,
+        0 0 35px #38bdf8,
+        0 0 70px #0ea5e9;
+    animation:introZoom 2.5s ease forwards;
 }
 
-@keyframes introAnim{
-    0%{opacity:0;transform:scale(1.5);}
-    40%{opacity:1;transform:scale(1);}
+/* Zoom + Fade */
+@keyframes introZoom{
+    0%{opacity:0;transform:scale(2);filter:blur(10px);}
+    40%{opacity:1;transform:scale(1);filter:blur(0);}
     80%{opacity:1;}
-    100%{opacity:0;visibility:hidden;}
-}
-
-/* ================= PARTICLES ================= */
-#particles{
-    position:fixed;
-    inset:0;
-    z-index:-1;
-}
-
-/* ================= TOGGLE ================= */
-.toggle{
-    position:fixed;
-    top:15px;
-    left:15px;
-    width:45px;
-    height:45px;
-    border-radius:50%;
-    border:none;
-    font-size:20px;
-    cursor:pointer;
-    background:#fff;
+    100%{opacity:0;transform:scale(0.8);}
 }
 
 /* ================= HEADER ================= */
 .header{
     text-align:center;
-    padding:100px 20px 40px;
+    padding:90px 20px 40px;
+    animation:fadeIn 1.2s ease forwards;
 }
 
-/* Ultra Logo */
+@keyframes fadeIn{
+    from{opacity:0;transform:translateY(30px);}
+    to{opacity:1;transform:translateY(0);}
+}
+
+/* ================= LOGO ================= */
 .logo{
-    font-size:46px;
+    font-size:44px;
     font-weight:900;
-    letter-spacing:3px;
     background:linear-gradient(135deg,#38bdf8,#6366f1);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
-    position:relative;
-    display:inline-block;
-    animation:pulse 2.5s infinite;
-}
-
-.logo::before{
-    content:"";
-    position:absolute;
-    top:0;
-    left:-75%;
-    width:50%;
-    height:100%;
-    background:linear-gradient(120deg,transparent,rgba(255,255,255,.6),transparent);
-    transform:skewX(-25deg);
-    animation:shine 3s infinite;
-}
-
-@keyframes shine{
-    0%{left:-75%;}
-    100%{left:125%;}
+    animation:pulse 3s infinite;
 }
 
 @keyframes pulse{
     50%{transform:scale(1.08);}
 }
 
-/* ================= GRID BUTTONS ================= */
+/* ================= GRID 2x2 ================= */
 .container{
     width:95%;
-    max-width:900px;
+    max-width:500px;
     margin:auto;
     display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(160px,1fr));
-    gap:18px;
+    grid-template-columns:repeat(2,1fr);
+    gap:20px;
     padding-bottom:80px;
 }
 
+/* Buttons */
 .subject a{
     display:flex;
     justify-content:center;
     align-items:center;
     text-align:center;
-    padding:25px;
-    border-radius:25px;
+    padding:28px 15px;
+    border-radius:20px;
     font-weight:800;
     text-decoration:none;
     transition:.3s;
@@ -154,9 +117,8 @@ body.light{
 .medical a{background:linear-gradient(135deg,#0ea5e9,#075985);color:#fff;}
 .management a{background:linear-gradient(135deg,#ff003c,#9f1239);color:#fff;}
 .psychiatric a{background:linear-gradient(135deg,#4fa3a5,#2f6f73);color:#fff;}
-.extra a{background:linear-gradient(135deg,#6366f1,#9333ea);color:#fff;}
 
-/* ================= JOIN BUTTON ================= */
+/* ================= JOIN ================= */
 .join{
     text-align:center;
     margin-bottom:60px;
@@ -165,15 +127,29 @@ body.light{
 .join a{
     padding:18px 40px;
     border-radius:40px;
-    background:linear-gradient(135deg,#229ED9,#38bdf8);
+    background:linear-gradient(135deg,#38bdf8,#0ea5e9);
     color:#fff;
     font-weight:900;
     text-decoration:none;
-    box-shadow:0 0 25px rgba(34,158,217,.6);
+    box-shadow:0 0 30px rgba(56,189,248,.6);
     transition:.3s;
 }
 
-.join a:hover{transform:scale(1.08);}
+.join a:hover{transform:scale(1.1);}
+
+/* ================= TOGGLE ================= */
+.toggle{
+    position:fixed;
+    top:15px;
+    left:15px;
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    border:none;
+    cursor:pointer;
+    font-size:20px;
+    background:#fff;
+}
 
 </style>
 </head>
@@ -184,8 +160,6 @@ body.light{
     <div class="intro-text">GAITH TEAM</div>
 </div>
 
-<canvas id="particles"></canvas>
-
 <button class="toggle" id="modeToggle">🌙</button>
 
 <div class="header">
@@ -195,45 +169,37 @@ body.light{
 <div class="container">
 
     <div class="subject pediatric">
-        <a href="pediatric/index.html">🍼 تمريض أطفال</a>
+        <a href="pediatric/index.html">🍼 أطفال</a>
     </div>
 
     <div class="subject obstetric">
-        <a href="obstetric/index.html">🤰 تمريض نسا وتوليد</a>
+        <a href="obstetric/index.html">🤰 نسا</a>
     </div>
 
     <div class="subject medical">
-        <a href="medical/index.html">🩺 تمريض باطني جراحي</a>
+        <a href="medical/index.html">🩺 باطني</a>
     </div>
 
     <div class="subject management">
-        <a href="management/index.html">📊 تمريض إدارة</a>
-    </div>
-
-    <div class="subject psychiatric">
-        <a href="psychiatric/index.html">🧠 تمريض نفسية</a>
-    </div>
-
-    <div class="subject extra">
-        <a href="#">⭐ مادة إضافية</a>
+        <a href="management/index.html">📊 إدارة</a>
     </div>
 
 </div>
 
 <div class="join">
     <a href="https://t.me/nursing2bu" target="_blank">
-        ✈️ انضم إلينا على Telegram
+        ✈️ انضم إلينا
     </a>
 </div>
 
 <script>
 
-/* ===== Hide Intro ===== */
+/* Hide Intro */
 setTimeout(()=>{
     document.getElementById("intro").style.display="none";
 },2500);
 
-/* ===== Dark Mode Save ===== */
+/* Dark Mode */
 const toggle=document.getElementById("modeToggle");
 if(localStorage.getItem("mode")==="light"){
     document.body.classList.add("light");
@@ -244,39 +210,6 @@ toggle.onclick=()=>{
     localStorage.setItem("mode",
         document.body.classList.contains("light")?"light":"dark");
 };
-
-/* ===== Particle Background ===== */
-const canvas=document.getElementById("particles");
-const ctx=canvas.getContext("2d");
-canvas.width=window.innerWidth;
-canvas.height=window.innerHeight;
-
-let particles=[];
-for(let i=0;i<60;i++){
-    particles.push({
-        x:Math.random()*canvas.width,
-        y:Math.random()*canvas.height,
-        r:Math.random()*2,
-        dx:(Math.random()-0.5),
-        dy:(Math.random()-0.5)
-    });
-}
-
-function animate(){
-    ctx.clearRect(0,0,canvas.width,canvas.height);
-    particles.forEach(p=>{
-        ctx.beginPath();
-        ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
-        ctx.fillStyle="rgba(255,255,255,.5)";
-        ctx.fill();
-        p.x+=p.dx;
-        p.y+=p.dy;
-        if(p.x<0||p.x>canvas.width)p.dx*=-1;
-        if(p.y<0||p.y>canvas.height)p.dy*=-1;
-    });
-    requestAnimationFrame(animate);
-}
-animate();
 
 </script>
 
