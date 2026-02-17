@@ -8,8 +8,6 @@
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@700;900&display=swap" rel="stylesheet">
 
 <style>
-
-/* ================= BASE ================= */
 *{box-sizing:border-box;font-family:'Cairo',sans-serif}
 
 body{
@@ -17,7 +15,7 @@ body{
     background:#000814;
     color:#fff;
     overflow-x:hidden;
-    transition: background .6s ease, color .6s ease;
+    transition:.6s;
 }
 
 body.light{
@@ -25,42 +23,20 @@ body.light{
     color:#111827;
 }
 
-/* ================= CANVAS ================= */
 #galaxy{
     position:fixed;
     inset:0;
     z-index:-1;
 }
 
-/* ================= INTRO ================= */
-#intro{
-    position:fixed;
-    inset:0;
-    background:#000;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    z-index:9999;
+.fade-out{
+    animation:fadeOut 1s forwards;
+}
+@keyframes fadeOut{
+    to{opacity:0;transform:scale(1.05);}
 }
 
-.glitch{
-    font-size:55px;
-    font-weight:900;
-    color:#38bdf8;
-    text-shadow:0 0 10px #38bdf8,0 0 30px #0ea5e9;
-    animation:glitch 1s infinite alternate;
-}
-
-@keyframes glitch{
-    0%{transform:translate(0);}
-    50%{transform:translate(-2px,2px);}
-    100%{transform:translate(2px,-2px);}
-}
-
-.hide-intro{animation:fadeOut 1.5s forwards;}
-@keyframes fadeOut{to{opacity:0;visibility:hidden;}}
-
-/* ================= HEADER ================= */
+/* Header */
 .header{text-align:center;padding:90px 20px 40px;}
 .logo{
     font-size:42px;
@@ -70,7 +46,7 @@ body.light{
     -webkit-text-fill-color:transparent;
 }
 
-/* ================= GRID ================= */
+/* Grid */
 .container{
     width:95%;
     max-width:520px;
@@ -102,21 +78,7 @@ body.light{
 .management a{background:linear-gradient(135deg,#ff003c,#9f1239);color:#fff;}
 .psychiatric a{background:linear-gradient(135deg,#4fa3a5,#2f6f73);color:#fff;}
 
-/* ================= JOIN ================= */
-.join{text-align:center;margin-bottom:60px;}
-.join a{
-    padding:18px 40px;
-    border-radius:40px;
-    background:linear-gradient(135deg,#38bdf8,#0ea5e9);
-    color:#fff;
-    font-weight:900;
-    text-decoration:none;
-    box-shadow:0 0 25px rgba(56,189,248,.6);
-    transition:.3s;
-}
-.join a:hover{transform:scale(1.1);}
-
-/* ================= TOGGLE ================= */
+/* Toggle */
 .toggle{
     position:fixed;
     top:15px;
@@ -130,25 +92,14 @@ body.light{
     background:#0ea5e9;
     color:#fff;
     transition:.4s;
-    box-shadow:0 0 20px rgba(14,165,233,.6);
 }
-.toggle:hover{
-    transform:rotate(180deg) scale(1.1);
-    box-shadow:0 0 35px rgba(14,165,233,.9);
-}
-body.light .toggle{
-    background:#111827;
-}
-
+.toggle:hover{transform:rotate(180deg) scale(1.1);}
 </style>
 </head>
+
 <body>
 
 <canvas id="galaxy"></canvas>
-
-<div id="intro">
-    <div class="glitch">GAITH TEAM</div>
-</div>
 
 <button class="toggle" id="modeToggle">🌙</button>
 
@@ -157,23 +108,32 @@ body.light .toggle{
 </div>
 
 <div class="container">
-    <div class="subject pediatric"><a href="#">🍼 أطفال</a></div>
-    <div class="subject obstetric"><a href="#">🤰 نسا</a></div>
-    <div class="subject medical"><a href="#">🩺 باطني</a></div>
-    <div class="subject management"><a href="#">📊 إدارة</a></div>
-    <div class="subject psychiatric"><a href="#">🧠 نفسية</a></div>
-</div>
 
-<div class="join">
-    <a href="https://t.me/nursing2bu" target="_blank">✈️ انضم إلينا</a>
+    <div class="subject pediatric">
+        <a href="pediatric/index.html">🍼 أطفال</a>
+    </div>
+
+    <div class="subject obstetric">
+        <a href="obstetric/index.html">🤰 نسا</a>
+    </div>
+
+    <div class="subject medical">
+        <a href="medical/index.html">🩺 باطني</a>
+    </div>
+
+    <div class="subject management">
+        <a href="management/index.html">📊 إدارة</a>
+    </div>
+
+    <div class="subject psychiatric">
+        <a href="psychiatric/index.html">🧠 نفسية</a>
+    </div>
+
 </div>
 
 <script>
 
-/* INTRO */
-setTimeout(()=>{document.getElementById("intro").classList.add("hide-intro");},3000);
-
-/* MODE */
+/* ================= MODE ================= */
 const toggle=document.getElementById("modeToggle");
 let currentMode=localStorage.getItem("mode")||"dark";
 
@@ -189,10 +149,19 @@ function applyMode(mode){
     localStorage.setItem("mode",mode);
 }
 applyMode(currentMode);
-
 toggle.onclick=()=>applyMode(currentMode==="light"?"dark":"light");
 
-/* GALAXY */
+/* ================= PAGE TRANSITION ================= */
+document.querySelectorAll(".subject a").forEach(link=>{
+    link.addEventListener("click",function(e){
+        e.preventDefault();
+        const url=this.href;
+        document.body.classList.add("fade-out");
+        setTimeout(()=>{window.location.href=url;},800);
+    });
+});
+
+/* ================= 3D SPIRAL GALAXY ================= */
 const canvas=document.getElementById("galaxy");
 const ctx=canvas.getContext("2d");
 
@@ -204,42 +173,21 @@ resize();
 window.addEventListener("resize",resize);
 
 let stars=[];
-for(let i=0;i<180;i++){
+const totalStars=900;
+const arms=4;
+
+for(let i=0;i<totalStars;i++){
+    const angle=Math.random()*Math.PI*2;
+    const radius=Math.random()*400;
+    const armOffset=(i%arms)*(Math.PI*2/arms);
+
     stars.push({
-        x:Math.random()*canvas.width,
-        y:Math.random()*canvas.height,
-        r:Math.random()*1.8+0.5,
-        speed:Math.random()*0.4+0.1,
-        alpha:Math.random(),
-        pulse:Math.random()*0.02+0.005
+        angle:angle+armOffset,
+        radius:radius,
+        speed:0.0003+Math.random()*0.0005,
+        size:Math.random()*2,
+        depth:Math.random()*0.5+0.5
     });
-}
-
-let nebulaOffset=0;
-
-function drawNebula(){
-    nebulaOffset+=0.001;
-    let g=ctx.createRadialGradient(
-        canvas.width/2+Math.sin(nebulaOffset)*200,
-        canvas.height/2+Math.cos(nebulaOffset)*200,
-        100,
-        canvas.width/2,
-        canvas.height/2,
-        canvas.width
-    );
-
-    if(currentMode==="dark"){
-        g.addColorStop(0,"rgba(56,189,248,0.15)");
-        g.addColorStop(0.5,"rgba(99,102,241,0.1)");
-        g.addColorStop(1,"rgba(0,0,0,0)");
-    }else{
-        g.addColorStop(0,"rgba(14,165,233,0.08)");
-        g.addColorStop(0.5,"rgba(99,102,241,0.05)");
-        g.addColorStop(1,"rgba(255,255,255,0)");
-    }
-
-    ctx.fillStyle=g;
-    ctx.fillRect(0,0,canvas.width,canvas.height);
 }
 
 function animate(){
@@ -247,27 +195,21 @@ function animate(){
     ctx.fillStyle=currentMode==="dark"?"#000814":"#f1f5f9";
     ctx.fillRect(0,0,canvas.width,canvas.height);
 
-    drawNebula();
+    const cx=canvas.width/2;
+    const cy=canvas.height/2;
 
     stars.forEach(s=>{
-        s.alpha+=s.pulse;
-        if(s.alpha<=0||s.alpha>=1)s.pulse*=-1;
+        s.angle+=s.speed;
+
+        const x=cx+Math.cos(s.angle)*s.radius*s.depth;
+        const y=cy+Math.sin(s.angle)*s.radius*s.depth;
 
         ctx.beginPath();
-        ctx.globalAlpha=s.alpha;
         ctx.fillStyle=currentMode==="dark"?"white":"#0f172a";
-        ctx.shadowBlur=8;
-        ctx.shadowColor=currentMode==="dark"?"white":"#0f172a";
-        ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+        ctx.globalAlpha=s.depth;
+        ctx.arc(x,y,s.size,0,Math.PI*2);
         ctx.fill();
         ctx.globalAlpha=1;
-        ctx.shadowBlur=0;
-
-        s.y+=s.speed;
-        if(s.y>canvas.height){
-            s.y=0;
-            s.x=Math.random()*canvas.width;
-        }
     });
 
     requestAnimationFrame(animate);
