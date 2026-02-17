@@ -10,8 +10,12 @@
 
 <style>
 :root{
-    --main-a:#0ea5e9;
-    --main-b:#075985;
+    --glass-bg-dark:rgba(255,255,255,0.07);
+    --glass-bg-light:rgba(255,255,255,0.55);
+    --border-dark:rgba(255,255,255,0.15);
+    --border-light:rgba(0,0,0,0.08);
+    --text-dark:#ffffff;
+    --text-light:#0f172a;
 }
 
 *{box-sizing:border-box;font-family:'Cairo',sans-serif}
@@ -19,14 +23,28 @@
 body{
     margin:0;
     min-height:100vh;
-    background:radial-gradient(circle at top,#0b1225,#020617);
-    color:#fff;
-    text-align:center;
+    background:#020617;
+    color:var(--text-dark);
+    transition:.4s;
+    overflow-x:hidden;
+}
+
+body.light{
+    background:#f1f5f9;
+    color:var(--text-light);
+}
+
+/* Canvas Background */
+#stars{
+    position:fixed;
+    inset:0;
+    z-index:-1;
 }
 
 /* Header */
 .header{
-    padding:60px 20px 30px;
+    padding:70px 20px 40px;
+    text-align:center;
 }
 .header h1{
     margin:0;
@@ -34,32 +52,48 @@ body{
     font-weight:900;
 }
 
-/* Grid 2x2 */
+/* Toggle */
+.toggle{
+    position:fixed;
+    top:15px;
+    right:15px;
+    width:45px;
+    height:45px;
+    border-radius:50%;
+    border:none;
+    cursor:pointer;
+    font-size:20px;
+    background:#0ea5e9;
+    color:#fff;
+    z-index:999;
+}
+
+/* Grid */
 .container{
-    width:94%;
-    max-width:700px;
+    width:95%;
+    max-width:750px;
     margin:auto;
     display:grid;
     grid-template-columns:repeat(2,1fr);
-    gap:20px;
+    gap:22px;
 }
 
 /* Glass Card */
 details{
-    backdrop-filter:blur(14px);
-    background:rgba(255,255,255,0.07);
-    border:1px solid rgba(255,255,255,0.15);
-    border-radius:24px;
+    backdrop-filter:blur(18px);
+    background:var(--glass-bg-dark);
+    border:1px solid var(--border-dark);
+    border-radius:26px;
     overflow:hidden;
     transition:.3s;
 }
 
-/* Tap animation */
-details summary:active{
-    transform:scale(.96);
+body.light details{
+    background:var(--glass-bg-light);
+    border:1px solid var(--border-light);
 }
 
-/* Title */
+/* Tap Effect */
 summary{
     list-style:none;
     padding:20px;
@@ -72,16 +106,15 @@ summary{
     font-size:15px;
     transition:.3s;
 }
-
-summary:hover{
-    background:rgba(255,255,255,0.1);
+summary:active{
+    transform:scale(.95);
 }
-
+summary:hover{
+    background:rgba(255,255,255,0.08);
+}
 summary i{
-    font-size:18px;
     color:#38bdf8;
 }
-
 summary::-webkit-details-marker{display:none}
 
 /* Content */
@@ -91,17 +124,15 @@ summary::-webkit-details-marker{display:none}
     flex-direction:column;
     gap:10px;
 }
-
 .content a{
     padding:12px;
     border-radius:999px;
-    background:linear-gradient(135deg,var(--main-a),var(--main-b));
+    background:linear-gradient(135deg,#0ea5e9,#075985);
     color:#fff;
     text-decoration:none;
     font-size:14px;
     transition:.3s;
 }
-
 .content a:hover{
     transform:scale(1.05);
 }
@@ -138,6 +169,10 @@ summary::-webkit-details-marker{display:none}
 
 <body>
 
+<canvas id="stars"></canvas>
+
+<button class="toggle" id="modeToggle">🌙</button>
+
 <div class="header">
 <h1>🩺 تمريض باطني جراحي 1 (عملي)</h1>
 </div>
@@ -145,91 +180,130 @@ summary::-webkit-details-marker{display:none}
 <div class="container">
 
 <details>
-<summary><i class="fa-solid fa-syringe"></i> IV Cannulation & Infusion</summary>
+<summary><i class="fa-solid fa-syringe"></i> IV Cannulation</summary>
 <div class="content">
-<a href="lecture1/questions.html">❓ أسئلة</a>
-<a href="lecture1/summary.html">📘 ملخص</a>
+<a href="#">❓ أسئلة</a>
+<a href="#">📘 ملخص</a>
 </div>
 </details>
 
 <details>
 <summary><i class="fa-solid fa-droplet"></i> Blood Transfusion</summary>
 <div class="content">
-<a href="lecture2/questions.html">❓ أسئلة</a>
-<a href="lecture2/summary.html">📘 ملخص</a>
+<a href="#">❓ أسئلة</a>
+<a href="#">📘 ملخص</a>
 </div>
 </details>
 
 <details>
 <summary><i class="fa-solid fa-user-doctor"></i> Perioperative Care</summary>
 <div class="content">
-<a href="lecture3/questions.html">❓ أسئلة</a>
-<a href="lecture3/summary.html">📘 ملخص</a>
+<a href="#">❓ أسئلة</a>
+<a href="#">📘 ملخص</a>
 </div>
 </details>
 
 <details>
 <summary><i class="fa-solid fa-bandage"></i> Wound Care</summary>
 <div class="content">
-<a href="lecture4/questions.html">❓ أسئلة</a>
-<a href="lecture4/summary.html">📘 ملخص</a>
+<a href="#">❓ أسئلة</a>
+<a href="#">📘 ملخص</a>
 </div>
 </details>
 
 <details>
 <summary><i class="fa-solid fa-tube"></i> Nasogastric Tube</summary>
 <div class="content">
-<a href="lecture5/questions.html">❓ أسئلة</a>
-<a href="lecture5/summary.html">📘 ملخص</a>
+<a href="#">❓ أسئلة</a>
+<a href="#">📘 ملخص</a>
 </div>
 </details>
 
 <details>
 <summary><i class="fa-solid fa-lungs"></i> Chest Physiotherapy</summary>
 <div class="content">
-<a href="lecture6/questions.html">❓ أسئلة</a>
-<a href="lecture6/summary.html">📘 ملخص</a>
+<a href="#">❓ أسئلة</a>
+<a href="#">📘 ملخص</a>
 </div>
 </details>
 
 <details>
 <summary><i class="fa-solid fa-wind"></i> Oxygen Therapy</summary>
 <div class="content">
-<a href="lecture7/questions.html">❓ أسئلة</a>
-<a href="lecture7/summary.html">📘 ملخص</a>
+<a href="#">❓ أسئلة</a>
+<a href="#">📘 ملخص</a>
 </div>
 </details>
 
 <details>
 <summary><i class="fa-solid fa-cat"></i> Urinary Catheterization</summary>
 <div class="content">
-<a href="lecture8/questions.html">❓ أسئلة</a>
-<a href="lecture8/summary.html">📘 ملخص</a>
+<a href="#">❓ أسئلة</a>
+<a href="#">📘 ملخص</a>
 </div>
 </details>
 
 </div>
 
-<!-- Floating Telegram -->
 <a href="https://t.me/nursing2bu" target="_blank" class="floating-telegram">
 <i class="fa-brands fa-telegram"></i>
 </a>
 
 <script>
-/* Close other lectures automatically */
-const detailsElements = document.querySelectorAll("details");
+/* Light/Dark Toggle */
+const toggle=document.getElementById("modeToggle");
+let mode="dark";
+toggle.onclick=()=>{
+  document.body.classList.toggle("light");
+  mode=document.body.classList.contains("light")?"light":"dark";
+  toggle.textContent=mode==="light"?"☀️":"🌙";
+};
 
-detailsElements.forEach((target)=>{
-  target.addEventListener("click",()=>{
-    detailsElements.forEach((item)=>{
-      if(item !== target){
-        item.removeAttribute("open");
-      }
+/* Close others */
+const details=document.querySelectorAll("details");
+details.forEach(d=>{
+  d.addEventListener("click",()=>{
+    details.forEach(o=>{
+      if(o!==d) o.removeAttribute("open");
     });
   });
 });
+
+/* Stars Animation */
+const canvas=document.getElementById("stars");
+const ctx=canvas.getContext("2d");
+
+function resize(){
+  canvas.width=window.innerWidth;
+  canvas.height=window.innerHeight;
+}
+resize();
+window.addEventListener("resize",resize);
+
+let stars=[];
+for(let i=0;i<200;i++){
+  stars.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    size:Math.random()*2,
+    speed:Math.random()*0.5
+  });
+}
+
+function animate(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+  ctx.fillStyle=mode==="dark"?"white":"#94a3b8";
+  stars.forEach(s=>{
+    s.y+=s.speed;
+    if(s.y>canvas.height) s.y=0;
+    ctx.beginPath();
+    ctx.arc(s.x,s.y,s.size,0,Math.PI*2);
+    ctx.fill();
+  });
+  requestAnimationFrame(animate);
+}
+animate();
 </script>
 
 </body>
 </html>
-
