@@ -5,38 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GAITH TEAM</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800;900&display=swap" rel="stylesheet">
 
 <style>
-/* ================= VARIABLES ================= */
+
+/* ================= ROOT ================= */
 :root{
-    --glow:0 10px 28px rgba(0,0,0,.28);
-
-    --bg-dark:radial-gradient(circle at top,#0b1225,#020617);
-    --bg-light:linear-gradient(180deg,#f8fafc,#eef2f7);
-
+    --glow:0 10px 30px rgba(0,0,0,.35);
     --text-dark:#ffffff;
     --text-light:#0f172a;
-
-    /* 🔥 High Contrast (إدارة) */
-    --man-a:#ff003c;
-    --man-b:#9f1239;
-
-    /* 🧠 Psychiatric */
-    --psy-a:#4fa3a5;
-    --psy-b:#2f6f73;
-
-    /* 🤰 Obstetric (Light default) */
-    --obs-a:#fbcfe8;
-    --obs-b:#f472b6;
-
-    /* 🍼 Pediatric – Mint Pastel */
-    --ped-a:#a7f3d0;
-    --ped-b:#34d399;
-
-    /* 🩺 Medical Surgical Practical */
-    --med-a:#0ea5e9;
-    --med-b:#075985;
 }
 
 /* ================= BASE ================= */
@@ -44,21 +21,58 @@
 
 body{
     margin:0;
-    background:var(--bg-dark);
     color:var(--text-dark);
     text-align:center;
+    background:linear-gradient(-45deg,#0b1225,#020617,#111827,#0f172a);
+    background-size:400% 400%;
+    animation:gradientMove 18s ease infinite;
+    overflow-x:hidden;
     transition:.4s;
 }
+
 body.light{
-    background:var(--bg-light);
+    background:linear-gradient(-45deg,#f8fafc,#eef2f7,#ffffff,#e2e8f0);
+    background-size:400% 400%;
     color:var(--text-light);
+}
+
+@keyframes gradientMove{
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+/* ================= PARALLAX ================= */
+.parallax-bg{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:
+        radial-gradient(circle at 20% 30%,rgba(255,255,255,.08),transparent 40%),
+        radial-gradient(circle at 80% 70%,rgba(255,255,255,.06),transparent 40%);
+    pointer-events:none;
+    transition:transform .1s ease-out;
+    z-index:0;
+}
+
+.container,.header{
+    position:relative;
+    z-index:1;
 }
 
 /* ================= HEADER ================= */
 .header{
     padding:70px 20px 40px;
 }
-.header h1{margin:0;font-size:34px}
+
+.header h1{
+    margin:0;
+    font-size:34px;
+    font-weight:900;
+}
+
 .header span{color:#ef4444}
 .header p{margin-top:10px;opacity:.75}
 
@@ -69,113 +83,126 @@ body.light{
     margin:auto;
 }
 
-/* ================= SUBJECT BUTTON ================= */
+/* ================= SUBJECT ================= */
 .subject{
-    margin:26px 0;
-}
-.subject a{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    padding:24px;
-    border-radius:40px;
-    font-size:20px;
-    text-decoration:none;
-    box-shadow:var(--glow);
-    transition:.3s;
-}
-.subject a:hover{
-    transform:translateY(-3px);
-    filter:brightness(1.05);
+    margin:30px 0;
+    opacity:0;
+    transform:translateY(40px);
+    animation:fadeUp .8s forwards;
 }
 
-/* ================= LEFT ================= */
-.left{
-    display:flex;
-    align-items:center;
-    gap:14px;
+.subject:nth-child(1){animation-delay:.2s}
+.subject:nth-child(2){animation-delay:.4s}
+.subject:nth-child(3){animation-delay:.6s}
+.subject:nth-child(4){animation-delay:.8s}
+.subject:nth-child(5){animation-delay:1s}
+
+@keyframes fadeUp{
+    to{opacity:1;transform:translateY(0);}
 }
+
+.subject a{
+    position:relative;
+    display:grid;
+    grid-template-columns:60px 1fr 40px;
+    align-items:center;
+    padding:26px;
+    border-radius:50px;
+    font-size:20px;
+    text-decoration:none;
+    backdrop-filter:blur(14px);
+    -webkit-backdrop-filter:blur(14px);
+    background:rgba(255,255,255,0.08);
+    border:1px solid rgba(255,255,255,0.15);
+    box-shadow:var(--glow);
+    transition:all .4s ease;
+    overflow:hidden;
+}
+
+/* Glow Border */
+.subject a::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    border-radius:50px;
+    padding:1px;
+    background:linear-gradient(135deg,rgba(255,255,255,.4),transparent);
+    -webkit-mask:
+        linear-gradient(#000 0 0) content-box,
+        linear-gradient(#000 0 0);
+    -webkit-mask-composite:xor;
+            mask-composite:exclude;
+    opacity:.4;
+}
+
+/* Shine */
+.subject a::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-120%;
+    width:100%;
+    height:100%;
+    background:linear-gradient(120deg,transparent,rgba(255,255,255,.25),transparent);
+    transition:.7s;
+}
+
+.subject a:hover::before{
+    left:120%;
+}
+
+.subject a:hover{
+    transform:translateY(-8px) scale(1.03);
+    box-shadow:0 18px 45px rgba(0,0,0,.55);
+}
+
+/* ICON */
 .icon{
-    width:46px;
-    height:46px;
+    width:54px;
+    height:54px;
     border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
-    font-size:22px;
-    box-shadow:0 6px 16px rgba(0,0,0,.35);
+    font-size:24px;
+    background:rgba(255,255,255,.15);
+    box-shadow:0 8px 25px rgba(0,0,0,.4);
 }
 
-/* ================= 🍼 Pediatric ================= */
-.pediatric a{
-    background:linear-gradient(135deg,var(--ped-a),var(--ped-b));
-    color:#064e3b;
-}
-.pediatric .icon{
-    background:#ecfdf5;
-    color:#065f46;
+/* TEXT */
+.subject a span{
+    text-align:center;
+    font-weight:900;
+    letter-spacing:.6px;
+    font-size:21px;
 }
 
-/* ================= 🤰 Obstetric ================= */
-.obstetric a{
-    background:linear-gradient(135deg,var(--obs-a),var(--obs-b));
-    color:#1f2937;
-}
-.obstetric .icon{
-    background:#fff;
-    color:#be185d;
+/* ARROW */
+.arrow{
+    font-size:24px;
+    transition:transform .3s ease;
 }
 
-/* 🌙 Dark Mode Obstetric */
-body:not(.light){
-    --obs-a:#6d28d9;
-    --obs-b:#4c1d95;
-}
-body:not(.light) .obstetric a{
-    color:#fff;
-}
-body:not(.light) .obstetric .icon{
-    background:#2e1065;
-    color:#ddd6fe;
+.subject a:hover .arrow{
+    transform:translateX(10px);
 }
 
-/* ================= 🩺 Medical Surgical ================= */
-.medical a{
-    background:linear-gradient(135deg,var(--med-a),var(--med-b));
-    color:#fff;
-}
-.medical .icon{
-    background:#082f49;
-    color:#e0f2fe;
-}
-body:not(.light) .medical a{
-    border:1px solid rgba(255,255,255,.15);
+/* LIGHT MODE FIX */
+body.light .subject a{
+    background:rgba(255,255,255,.6);
+    border:1px solid rgba(0,0,0,.08);
+    box-shadow:0 10px 25px rgba(0,0,0,.12);
 }
 
-/* ================= 🔥 Management ================= */
-.management a{
-    background:linear-gradient(135deg,var(--man-a),var(--man-b));
-    color:#fff;
-    font-weight:700;
-    letter-spacing:.5px;
-}
-.management .icon{
-    background:#7f1d1d;
+body.light .icon{
+    background:rgba(0,0,0,.05);
 }
 
-/* ================= 🧠 Psychiatric ================= */
-.psychiatric a{
-    background:linear-gradient(135deg,var(--psy-a),var(--psy-b));
-    color:#fff;
-}
-.psychiatric .icon{
-    background:var(--psy-b);
-}
-
-/* ================= TELEGRAM ================= */
+/* TELEGRAM */
 .telegram{
     margin:60px auto 80px;
 }
+
 .telegram a{
     display:inline-block;
     width:90%;
@@ -185,27 +212,31 @@ body:not(.light) .medical a{
     background:linear-gradient(135deg,#229ED9,#38bdf8);
     color:#fff;
     text-decoration:none;
-    font-weight:700;
+    font-weight:800;
     box-shadow:0 10px 24px rgba(0,0,0,.35);
 }
 
-/* ================= TOGGLE ================= */
+/* TOGGLE */
 .toggle{
     position:fixed;
     top:16px;
     right:16px;
-    background:#ffffff;
+    background:#fff;
     border:none;
     border-radius:50%;
     width:42px;
     height:42px;
     cursor:pointer;
     box-shadow:0 6px 16px rgba(0,0,0,.25);
+    z-index:2;
 }
+
 </style>
 </head>
 
 <body>
+
+<div class="parallax-bg"></div>
 
 <button class="toggle" onclick="document.body.classList.toggle('light')">🌙</button>
 
@@ -216,58 +247,43 @@ body:not(.light) .medical a{
 
 <div class="container">
 
-    <!-- 🍼 Pediatric -->
-    <div class="subject pediatric">
-        <a href="pediatric/index.html">
-            <div class="left">
-                <div class="icon">🍼</div>
-                تمريض أطفال
-            </div>
-            ▸
+    <div class="subject">
+        <a href="#">
+            <div class="icon">🍼</div>
+            <span>تمريض أطفال</span>
+            <div class="arrow">▸</div>
         </a>
     </div>
 
-    <!-- 🤰 Obstetric -->
-    <div class="subject obstetric">
-        <a href="obstetric/index.html">
-            <div class="left">
-                <div class="icon">🤰</div>
-                تمريض نسا وتوليد
-            </div>
-            ▸
+    <div class="subject">
+        <a href="#">
+            <div class="icon">🤰</div>
+            <span>تمريض نسا وتوليد</span>
+            <div class="arrow">▸</div>
         </a>
     </div>
 
-    <!-- 🩺 Medical Surgical -->
-    <div class="subject medical">
-        <a href="medical/index.html">
-            <div class="left">
-                <div class="icon">🩺</div>
-                تمريض باطني جراحي 1 (عملي)
-            </div>
-            ▸
+    <div class="subject">
+        <a href="#">
+            <div class="icon">🩺</div>
+            <span>تمريض باطني جراحي 1 (عملي)</span>
+            <div class="arrow">▸</div>
         </a>
     </div>
 
-    <!-- 🔥 Management -->
-    <div class="subject management">
-        <a href="management/index.html">
-            <div class="left">
-                <div class="icon">📊</div>
-                تمريض إدارة
-            </div>
-            ▸
+    <div class="subject">
+        <a href="#">
+            <div class="icon">📊</div>
+            <span>تمريض إدارة</span>
+            <div class="arrow">▸</div>
         </a>
     </div>
 
-    <!-- 🧠 Psychiatric -->
-    <div class="subject psychiatric">
-        <a href="psychiatric/index.html">
-            <div class="left">
-                <div class="icon">🧠</div>
-                تمريض نفسية ( معهد فني صحي )
-            </div>
-            ▸
+    <div class="subject">
+        <a href="#">
+            <div class="icon">🧠</div>
+            <span>تمريض نفسية ( معهد فني صحي )</span>
+            <div class="arrow">▸</div>
         </a>
     </div>
 
@@ -278,6 +294,15 @@ body:not(.light) .medical a{
     </div>
 
 </div>
+
+<script>
+document.addEventListener("mousemove", function(e){
+    const x = (window.innerWidth / 2 - e.pageX) / 40;
+    const y = (window.innerHeight / 2 - e.pageY) / 40;
+    document.querySelector(".parallax-bg")
+        .style.transform = `translate(${x}px, ${y}px)`;
+});
+</script>
 
 </body>
 </html>
