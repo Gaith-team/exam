@@ -44,12 +44,28 @@ body.light{
  -webkit-background-clip:text;
  -webkit-text-fill-color:transparent;
  animation:floatLogo 4s ease-in-out infinite;
- text-shadow:0 0 20px rgba(56,189,248,.5);
+ position:relative;
 }
 
 .logo span{
  font-size:28px;
  animation:heartbeat 1.5s infinite;
+ position:relative;
+}
+
+/* Sparkle */
+.logo span::after{
+ content:"✨";
+ position:absolute;
+ right:-15px;
+ top:-10px;
+ opacity:0;
+ animation:sparkle 3s infinite;
+}
+
+@keyframes sparkle{
+ 0%,80%,100%{opacity:0;transform:scale(.5);}
+ 90%{opacity:1;transform:scale(1.4);}
 }
 
 @keyframes floatLogo{
@@ -62,15 +78,10 @@ body.light{
  50%{transform:scale(1.2);}
 }
 
-/* HEADER */
+/* Header */
 .header{
  padding:30px 20px 40px;
  text-align:center;
- animation:fadeIn 1.2s ease;
-}
-@keyframes fadeIn{
- from{opacity:0;transform:translateY(30px);}
- to{opacity:1;transform:translateY(0);}
 }
 
 /* Toggle */
@@ -152,14 +163,19 @@ summary::-webkit-details-marker{display:none}
  overflow:hidden;
  transition:max-height .4s ease;
  padding:0 18px;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
 }
+
 details[open] .content{
- max-height:220px;
+ max-height:250px;
  padding:15px 18px;
 }
 
 .content a{
- display:block;
+ width:80%;
+ text-align:center;
  margin:10px 0;
  padding:12px;
  border-radius:999px;
@@ -168,6 +184,7 @@ details[open] .content{
  text-decoration:none;
  transition:.3s;
 }
+
 .content a:hover{
  transform:scale(1.06);
 }
@@ -215,7 +232,7 @@ GAITH TEAM <span>💖</span>
 <div class="container">
 
 <details>
-<summary><i class="fa-solid fa-syringe"></i> IV Cannulation</summary>
+<summary><i class="fa-solid fa-syringe"></i> IV Cannulation & IV Infusion</summary>
 <div class="content">
 <a href="#">❓ أسئلة</a>
 <a href="#">📘 ملخص</a>
@@ -223,7 +240,7 @@ GAITH TEAM <span>💖</span>
 </details>
 
 <details>
-<summary><i class="fa-solid fa-droplet"></i> Blood Transfusion</summary>
+<summary><i class="fa-solid fa-droplet"></i> Administrating Blood Transfusion</summary>
 <div class="content">
 <a href="#">❓ أسئلة</a>
 <a href="#">📘 ملخص</a>
@@ -246,6 +263,38 @@ GAITH TEAM <span>💖</span>
 </div>
 </details>
 
+<details>
+<summary><i class="fa-solid fa-tube"></i> Nasogastric Tube</summary>
+<div class="content">
+<a href="#">❓ أسئلة</a>
+<a href="#">📘 ملخص</a>
+</div>
+</details>
+
+<details>
+<summary><i class="fa-solid fa-lungs"></i> Chest Physiotherapy</summary>
+<div class="content">
+<a href="#">❓ أسئلة</a>
+<a href="#">📘 ملخص</a>
+</div>
+</details>
+
+<details>
+<summary><i class="fa-solid fa-wind"></i> Oxygen Therapy & Nebulizer</summary>
+<div class="content">
+<a href="#">❓ أسئلة</a>
+<a href="#">📘 ملخص</a>
+</div>
+</details>
+
+<details>
+<summary><i class="fa-solid fa-cat"></i> Urinary Catheterization</summary>
+<div class="content">
+<a href="#">❓ أسئلة</a>
+<a href="#">📘 ملخص</a>
+</div>
+</details>
+
 </div>
 
 <a href="https://t.me/nursing2bu" target="_blank" class="floating-telegram">
@@ -253,7 +302,7 @@ GAITH TEAM <span>💖</span>
 </a>
 
 <script>
-/* Toggle Mode */
+/* Toggle */
 const toggle=document.getElementById("modeToggle");
 let mode="dark";
 toggle.onclick=()=>{
@@ -272,7 +321,7 @@ details.forEach(d=>{
  });
 });
 
-/* Galaxy Spiral + Stars */
+/* Spiral Galaxy */
 const canvas=document.getElementById("stars");
 const ctx=canvas.getContext("2d");
 
@@ -284,14 +333,14 @@ resize();
 window.addEventListener("resize",resize);
 
 let stars=[];
-for(let i=0;i<400;i++){
+for(let i=0;i<450;i++){
  let angle=Math.random()*Math.PI*2;
- let radius=Math.random()*300;
+ let radius=Math.random()*350;
  stars.push({
    angle:angle,
    radius:radius,
    size:Math.random()*2,
-   speed:0.0005+Math.random()*0.0005
+   speed:0.0004+Math.random()*0.0004
  });
 }
 
@@ -299,7 +348,6 @@ function animate(){
  ctx.clearRect(0,0,canvas.width,canvas.height);
  let cx=canvas.width/2;
  let cy=canvas.height/2;
-
  ctx.fillStyle=mode==="dark"?"white":"#94a3b8";
 
  stars.forEach(s=>{
