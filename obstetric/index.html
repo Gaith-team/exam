@@ -3,13 +3,13 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>تمريض نسا وتوليد</title>
+<title>Obstetrics & Gynecology</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800;900&display=swap" rel="stylesheet">
 
 <style>
 :root{
- --violet1:#4c1d95;
+ --violet1:#3b0764;
  --violet2:#7c3aed;
  --violet3:#a855f7;
  --glow:rgba(168,85,247,.7);
@@ -19,86 +19,112 @@
 
 body{
  margin:0;
- background:radial-gradient(circle at 30% 20%,#3b0764,#14072e 70%);
+ background:
+ radial-gradient(circle at 20% 30%, rgba(168,85,247,.35), transparent 40%),
+ radial-gradient(circle at 80% 70%, rgba(124,58,237,.35), transparent 40%),
+ linear-gradient(135deg,#240046,#10002b);
  color:#fff;
  overflow-x:hidden;
+ position:relative;
 }
 
-/* ===== LOADING INTRO ===== */
-.loader{
+/* صورة طبية خفيفة */
+body::before{
+ content:"";
  position:fixed;
  inset:0;
- background:#14072e;
- display:flex;
- justify-content:center;
- align-items:center;
- font-size:28px;
- font-weight:800;
- z-index:9999;
- animation:fadeOut 2.5s forwards;
- animation-delay:1.5s;
-}
-@keyframes fadeOut{
- to{opacity:0;visibility:hidden;}
+ background:url("https://images.unsplash.com/photo-1584515933487-779824d29309?q=80&w=2070&auto=format&fit=crop") center/cover no-repeat;
+ opacity:.05;
+ z-index:-2;
 }
 
-/* ===== Background Canvas ===== */
+/* Canvas */
 canvas{
  position:fixed;
  inset:0;
  z-index:-1;
 }
 
-/* ===== Logo ===== */
+/* تأثير نور الماوس */
+.light{
+ position:fixed;
+ width:400px;
+ height:400px;
+ border-radius:50%;
+ background:radial-gradient(circle, rgba(168,85,247,.4) 0%, transparent 70%);
+ pointer-events:none;
+ transform:translate(-50%,-50%);
+ z-index:-1;
+}
+
+/* Logo */
 .logo{
  text-align:center;
- margin-top:100px;
- font-size:52px;
+ margin-top:90px;
+ font-size:48px;
  font-weight:900;
  background:linear-gradient(135deg,var(--violet2),var(--violet3));
  -webkit-background-clip:text;
  -webkit-text-fill-color:transparent;
  text-shadow:0 0 30px var(--glow);
+ position:relative;
 }
 
-/* ===== Grid ===== */
+/* تاج متحرك */
+.crown{
+ position:absolute;
+ top:-40px;
+ left:50%;
+ transform:translateX(-50%);
+ font-size:35px;
+ animation:float 2s ease-in-out infinite;
+}
+@keyframes float{
+ 0%,100%{transform:translateX(-50%) translateY(0);}
+ 50%{transform:translateX(-50%) translateY(-10px);}
+}
+
+/* Grid */
 .container{
  width:92%;
- max-width:1000px;
+ max-width:1100px;
  margin:70px auto;
  display:grid;
  grid-template-columns:repeat(2,1fr);
  gap:35px;
- perspective:1200px;
 }
 
-/* ===== Cards ===== */
+/* Cards */
 details{
  border-radius:30px;
  background:rgba(255,255,255,0.07);
- backdrop-filter:blur(35px);
+ backdrop-filter:blur(30px);
  border:1px solid rgba(255,255,255,0.25);
- transition:.4s;
- transform-style:preserve-3d;
- box-shadow:0 0 25px rgba(0,0,0,.4);
+ transition:.5s;
+ opacity:0;
+ transform:translateY(40px);
+ animation:fadeUp .8s forwards;
+}
+
+details:nth-child(odd){animation-delay:.2s}
+details:nth-child(even){animation-delay:.4s}
+
+@keyframes fadeUp{
+ to{opacity:1;transform:translateY(0);}
 }
 
 details:hover{
  box-shadow:0 0 50px var(--glow);
-}
-
-details[open]{
- box-shadow:0 0 70px var(--glow);
+ transform:translateY(-8px);
 }
 
 summary{
  list-style:none;
- padding:24px;
+ padding:22px;
  text-align:center;
  cursor:pointer;
  font-weight:800;
- font-size:22px;
- letter-spacing:1px;
+ font-size:18px;
 }
 summary::-webkit-details-marker{display:none}
 
@@ -106,25 +132,21 @@ summary::-webkit-details-marker{display:none}
  display:flex;
  flex-direction:column;
  align-items:center;
- gap:15px;
+ gap:12px;
  max-height:0;
  overflow:hidden;
- opacity:0;
- transform:translateY(-15px);
- transition:.6s ease;
+ transition:.6s;
 }
 
 details[open] .content{
- max-height:220px;
- opacity:1;
- transform:translateY(0);
- padding-bottom:25px;
+ max-height:200px;
+ padding-bottom:20px;
 }
 
 .content a{
- width:75%;
- padding:15px;
- border-radius:60px;
+ width:80%;
+ padding:14px;
+ border-radius:50px;
  text-align:center;
  text-decoration:none;
  font-weight:700;
@@ -139,76 +161,73 @@ details[open] .content{
  box-shadow:0 0 40px var(--glow);
 }
 
-/* ===== Join Button ===== */
-.join-btn{
- position:fixed;
- bottom:25px;
- left:25px;
- padding:16px 28px;
- border-radius:60px;
- background:linear-gradient(135deg,var(--violet2),var(--violet3));
- color:#fff;
- font-weight:800;
- text-decoration:none;
- box-shadow:0 0 40px var(--glow);
- transition:.4s;
-}
-.join-btn:hover{transform:scale(1.15);}
-
-/* ===== Mobile ===== */
+/* Responsive */
 @media(max-width:768px){
- .logo{font-size:38px;margin-top:70px}
- .container{grid-template-columns:1fr;gap:25px}
- .content a{width:85%}
+ .logo{font-size:34px}
+ .container{grid-template-columns:1fr}
 }
 </style>
 </head>
 
 <body>
 
-<div class="loader">✨ Gaith team ✨</div>
+<div class="light" id="mouseLight"></div>
 <canvas id="bg"></canvas>
 
-<div class="logo">تمريض نسا وتوليد 💜</div>
+<div class="logo">
+<div class="crown">👑</div>
+Obstetrics & Gynecology
+</div>
 
 <div class="container">
+
 <script>
-for(let i=1;i<=20;i++){
+const lectures=[
+"Anatomy of female genital tract",
+"Menstruation",
+"Fertilization",
+"Physiological changes with pregnancy",
+"Diagnosis of pregnancy",
+"Antenatal care",
+"Mechanism of normal labor",
+"Management of normal labor",
+"Normal puerperium",
+"Bleeding in early pregnancy",
+"Bleeding in late pregnancy",
+"Hypertensive disorders (PIH)",
+"Heart disease with pregnancy",
+"Gestational Diabetes Mellitus",
+"Anemia during pregnancy",
+"Abnormal labor",
+"Abnormal puerperium",
+"Final Chapter"
+];
+
+lectures.forEach((name,i)=>{
  document.write(`
  <details>
-  <summary>المحاضرة ${i}</summary>
+  <summary>${name}</summary>
   <div class="content">
-    <a href="lecture${i}/questions.html">❓ بنك أسئلة</a>
-    <a href="lecture${i}/summary.html">📘 ملخص</a>
+    <a href="lecture${i+1}/questions.html">❓ Questions </a>
+    <a href="lecture${i+1}/quiz.html">📝 Quiz</a>
   </div>
  </details>
  `);
-}
+});
 </script>
+
 </div>
 
-<a href="https://t.me/nursing2bu" target="_blank" class="join-btn">انضم إلينا</a>
-
 <script>
-/* ===== Animated Galaxy Background ===== */
+/* نجوم */
 const canvas=document.getElementById("bg");
 const ctx=canvas.getContext("2d");
-
-function resize(){
- canvas.width=window.innerWidth;
- canvas.height=window.innerHeight;
-}
-resize();
-window.addEventListener("resize",resize);
+function resize(){canvas.width=innerWidth;canvas.height=innerHeight;}
+resize();window.addEventListener("resize",resize);
 
 let stars=[];
-for(let i=0;i<500;i++){
- stars.push({
-  x:Math.random()*canvas.width,
-  y:Math.random()*canvas.height,
-  r:Math.random()*1.5,
-  d:Math.random()*0.5
- });
+for(let i=0;i<400;i++){
+ stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.5,d:Math.random()*0.4});
 }
 
 function draw(){
@@ -225,21 +244,11 @@ function draw(){
 }
 draw();
 
-/* ===== 3D Tilt Effect ===== */
-document.querySelectorAll("details").forEach(card=>{
- card.addEventListener("mousemove",e=>{
-   const rect=card.getBoundingClientRect();
-   const x=e.clientX-rect.left;
-   const y=e.clientY-rect.top;
-   const centerX=rect.width/2;
-   const centerY=rect.height/2;
-   const rotateX=((y-centerY)/20);
-   const rotateY=((centerX-x)/20);
-   card.style.transform=`rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
- });
- card.addEventListener("mouseleave",()=>{
-   card.style.transform="rotateX(0) rotateY(0)";
- });
+/* نور الماوس */
+const light=document.getElementById("mouseLight");
+document.addEventListener("mousemove",e=>{
+ light.style.left=e.clientX+"px";
+ light.style.top=e.clientY+"px";
 });
 </script>
 
