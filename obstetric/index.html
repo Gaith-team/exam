@@ -25,14 +25,32 @@ body{
  overflow-x:hidden;
 }
 
-/* نجوم */
+/* ===== INTRO ===== */
+.loader{
+ position:fixed;
+ inset:0;
+ background:#14072e;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ font-size:30px;
+ font-weight:900;
+ z-index:9999;
+ animation:fadeOut 2.5s forwards;
+ animation-delay:1.8s;
+}
+@keyframes fadeOut{
+ to{opacity:0;visibility:hidden;}
+}
+
+/* ===== Stars ===== */
 canvas{
  position:fixed;
  inset:0;
  z-index:-1;
 }
 
-/* نور الماوس */
+/* ===== Mouse Light ===== */
 .light{
  position:fixed;
  width:400px;
@@ -44,7 +62,7 @@ canvas{
  z-index:-1;
 }
 
-/* Logo */
+/* ===== Logo ===== */
 .logo{
  text-align:center;
  margin-top:80px;
@@ -70,7 +88,7 @@ canvas{
  50%{transform:translateX(-50%) translateY(-8px);}
 }
 
-/* Search */
+/* ===== Search ===== */
 .search-box{
  width:90%;
  max-width:600px;
@@ -97,17 +115,17 @@ canvas{
  color:#c084fc;
 }
 
-/* Grid */
+/* ===== Grid ===== */
 .container{
  width:92%;
  max-width:1100px;
- margin:20px auto 70px;
+ margin:20px auto 90px;
  display:grid;
  grid-template-columns:repeat(2,1fr);
  gap:25px;
 }
 
-/* Cards */
+/* ===== Cards ===== */
 details{
  border-radius:25px;
  backdrop-filter:blur(25px);
@@ -127,7 +145,7 @@ details:hover{
  box-shadow:0 0 40px rgba(255,255,255,.3);
 }
 
-/* ألوان حسب الشابتر */
+/* ===== Colors ===== */
 .basic{background:linear-gradient(135deg,#5b21b6,#7c3aed);}
 .pregnancy{background:linear-gradient(135deg,#9d174d,#c026d3);}
 .labor{background:linear-gradient(135deg,#1e3a8a,#6366f1);}
@@ -135,7 +153,7 @@ details:hover{
 .medical{background:linear-gradient(135deg,#065f46,#10b981);}
 .final{background:linear-gradient(135deg,#92400e,#f59e0b);}
 
-/* Summary */
+/* ===== Summary ===== */
 summary{
  list-style:none;
  padding:18px;
@@ -151,7 +169,7 @@ summary{
 summary::-webkit-details-marker{display:none}
 summary i{font-size:18px}
 
-/* Content */
+/* ===== Content ===== */
 .content{
  display:flex;
  flex-direction:column;
@@ -182,6 +200,24 @@ details[open] .content{
  box-shadow:0 0 30px var(--glow);
 }
 
+/* ===== Join Button ===== */
+.join-btn{
+ position:fixed;
+ bottom:20px;
+ left:20px;
+ padding:14px 25px;
+ border-radius:50px;
+ background:linear-gradient(135deg,#a855f7,#c084fc);
+ color:#fff;
+ font-weight:800;
+ text-decoration:none;
+ box-shadow:0 0 30px var(--glow);
+ transition:.3s;
+}
+.join-btn:hover{
+ transform:scale(1.1);
+}
+
 /* Responsive */
 @media(max-width:768px){
  .container{grid-template-columns:1fr}
@@ -192,6 +228,7 @@ details[open] .content{
 
 <body>
 
+<div class="loader">✨ Gaith Team ✨</div>
 <div class="light" id="mouseLight"></div>
 <canvas id="bg"></canvas>
 
@@ -206,6 +243,10 @@ Obstetrics & Gynecology
 </div>
 
 <div class="container" id="lecturesContainer"></div>
+
+<a href="https://t.me/nursing2bu" target="_blank" class="join-btn">
+<i class="fa-brands fa-telegram"></i> انضم إلينا
+</a>
 
 <script>
 const lectures=[
@@ -233,13 +274,13 @@ const container=document.getElementById("lecturesContainer");
 
 lectures.forEach((lec,i)=>{
  container.innerHTML+=`
- <details class="lecture-card ${lec[2]}">
+ <details class="${lec[2]}">
   <summary>
    <i class="fa-solid ${lec[0]}"></i>
    ${lec[1]}
   </summary>
   <div class="content">
-    <a href="lecture${i+1}/questions.html">❓ Questions </a>
+    <a href="lecture${i+1}/questions.html">❓ Questions Bank</a>
     <a href="lecture${i+1}/quiz.html">📝 Quiz</a>
   </div>
  </details>
@@ -249,7 +290,7 @@ lectures.forEach((lec,i)=>{
 /* Search */
 document.getElementById("searchInput").addEventListener("keyup",function(){
  let value=this.value.toLowerCase();
- document.querySelectorAll(".lecture-card").forEach(card=>{
+ document.querySelectorAll("details").forEach(card=>{
   card.style.display=card.innerText.toLowerCase().includes(value)?"block":"none";
  });
 });
@@ -264,7 +305,6 @@ let stars=[];
 for(let i=0;i<300;i++){
  stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*1.5,d:Math.random()*0.3});
 }
-
 function draw(){
  ctx.clearRect(0,0,canvas.width,canvas.height);
  ctx.fillStyle="#a855f7";
