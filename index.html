@@ -14,19 +14,25 @@
 
 body{
     margin:0;
-    background:#0b1225;
+    background:#000814;
     color:#fff;
     overflow-x:hidden;
-    transition:.5s;
+    transition:.4s;
 }
 
-/* Light Mode */
 body.light{
     background:#f1f5f9;
     color:#111827;
 }
 
-/* ================= CINEMATIC INTRO ================= */
+/* ================= GALAXY BACKGROUND ================= */
+#galaxy{
+    position:fixed;
+    inset:0;
+    z-index:-1;
+}
+
+/* ================= ELECTRIC GLITCH INTRO ================= */
 #intro{
     position:fixed;
     inset:0;
@@ -37,78 +43,75 @@ body.light{
     z-index:9999;
 }
 
-.intro-text{
-    font-size:50px;
+.glitch{
+    font-size:55px;
     font-weight:900;
-    letter-spacing:5px;
     color:#38bdf8;
+    position:relative;
     text-shadow:
-        0 0 15px #38bdf8,
-        0 0 35px #38bdf8,
-        0 0 70px #0ea5e9;
-    animation:introZoom 2.5s ease forwards;
+        0 0 10px #38bdf8,
+        0 0 30px #0ea5e9,
+        0 0 60px #38bdf8;
+    animation:glitch 1s infinite alternate;
 }
 
-/* Zoom + Fade */
-@keyframes introZoom{
-    0%{opacity:0;transform:scale(2);filter:blur(10px);}
-    40%{opacity:1;transform:scale(1);filter:blur(0);}
-    80%{opacity:1;}
-    100%{opacity:0;transform:scale(0.8);}
+@keyframes glitch{
+    0%{transform:translate(0);}
+    20%{transform:translate(-2px,2px);}
+    40%{transform:translate(2px,-2px);}
+    60%{transform:translate(-2px,-1px);}
+    80%{transform:translate(1px,2px);}
+    100%{transform:translate(0);}
+}
+
+/* Fade intro */
+.hide-intro{
+    animation:fadeOut 1.5s forwards;
+}
+
+@keyframes fadeOut{
+    to{opacity:0;visibility:hidden;}
 }
 
 /* ================= HEADER ================= */
 .header{
     text-align:center;
     padding:90px 20px 40px;
-    animation:fadeIn 1.2s ease forwards;
 }
 
-@keyframes fadeIn{
-    from{opacity:0;transform:translateY(30px);}
-    to{opacity:1;transform:translateY(0);}
-}
-
-/* ================= LOGO ================= */
 .logo{
-    font-size:44px;
+    font-size:42px;
     font-weight:900;
     background:linear-gradient(135deg,#38bdf8,#6366f1);
     -webkit-background-clip:text;
     -webkit-text-fill-color:transparent;
-    animation:pulse 3s infinite;
-}
-
-@keyframes pulse{
-    50%{transform:scale(1.08);}
 }
 
 /* ================= GRID 2x2 ================= */
 .container{
     width:95%;
-    max-width:500px;
+    max-width:520px;
     margin:auto;
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:20px;
-    padding-bottom:80px;
+    padding-bottom:60px;
 }
 
-/* Buttons */
 .subject a{
     display:flex;
     justify-content:center;
     align-items:center;
     text-align:center;
-    padding:28px 15px;
+    padding:30px 15px;
     border-radius:20px;
     font-weight:800;
     text-decoration:none;
     transition:.3s;
-    box-shadow:0 8px 20px rgba(0,0,0,.3);
+    box-shadow:0 8px 20px rgba(0,0,0,.4);
 }
 
-.subject a:hover{transform:translateY(-5px);}
+.subject a:hover{transform:translateY(-6px);}
 .subject a:active{transform:scale(.95);}
 
 /* Colors */
@@ -156,8 +159,12 @@ body.light{
 
 <body>
 
+<!-- Galaxy Background -->
+<canvas id="galaxy"></canvas>
+
+<!-- Intro -->
 <div id="intro">
-    <div class="intro-text">GAITH TEAM</div>
+    <div class="glitch">GAITH TEAM</div>
 </div>
 
 <button class="toggle" id="modeToggle">🌙</button>
@@ -184,6 +191,10 @@ body.light{
         <a href="management/index.html">📊 إدارة</a>
     </div>
 
+    <div class="subject psychiatric">
+        <a href="psychiatric/index.html">🧠 نفسية</a>
+    </div>
+
 </div>
 
 <div class="join">
@@ -194,10 +205,10 @@ body.light{
 
 <script>
 
-/* Hide Intro */
+/* Hide intro after 3s */
 setTimeout(()=>{
-    document.getElementById("intro").style.display="none";
-},2500);
+    document.getElementById("intro").classList.add("hide-intro");
+},3000);
 
 /* Dark Mode */
 const toggle=document.getElementById("modeToggle");
@@ -210,6 +221,37 @@ toggle.onclick=()=>{
     localStorage.setItem("mode",
         document.body.classList.contains("light")?"light":"dark");
 };
+
+/* Galaxy Background */
+const canvas=document.getElementById("galaxy");
+const ctx=canvas.getContext("2d");
+canvas.width=window.innerWidth;
+canvas.height=window.innerHeight;
+
+let stars=[];
+for(let i=0;i<150;i++){
+    stars.push({
+        x:Math.random()*canvas.width,
+        y:Math.random()*canvas.height,
+        r:Math.random()*1.5,
+        d:Math.random()*0.5
+    });
+}
+
+function animate(){
+    ctx.fillStyle="#000814";
+    ctx.fillRect(0,0,canvas.width,canvas.height);
+    ctx.fillStyle="white";
+    stars.forEach(s=>{
+        ctx.beginPath();
+        ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+        ctx.fill();
+        s.y+=s.d;
+        if(s.y>canvas.height)s.y=0;
+    });
+    requestAnimationFrame(animate);
+}
+animate();
 
 </script>
 
