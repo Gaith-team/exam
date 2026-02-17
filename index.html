@@ -1,92 +1,73 @@
 <!DOCTYPE html>
-<html lang="ar">
+<html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GAITH TEAM APP</title>
+<title>GAITH TEAM</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;900&display=swap" rel="stylesheet">
 
 <style>
 
+/* ================= VARIABLES ================= */
+:root{
+    --glow:0 12px 35px rgba(0,0,0,.35);
+    --bg-dark:radial-gradient(circle at top,#0b1225,#020617);
+    --bg-light:linear-gradient(180deg,#f8fafc,#eef2f7);
+    --text-dark:#ffffff;
+    --text-light:#0f172a;
+}
+
 /* ================= BASE ================= */
-*{box-sizing:border-box;font-family:'Cairo',sans-serif}
+*{
+    box-sizing:border-box;
+    font-family:'Cairo',sans-serif;
+}
 
 body{
     margin:0;
-    background:#0b1225;
-    color:#fff;
+    background:var(--bg-dark);
+    color:var(--text-dark);
     text-align:center;
-    overflow:hidden;
+    transition:.4s;
+    overflow-x:hidden;
 }
 
-/* ================= SPLASH SCREEN ================= */
-.splash{
-    position:fixed;
-    inset:0;
-    background:linear-gradient(135deg,#0f172a,#020617);
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    z-index:9999;
-    animation:fadeOut 1s ease forwards;
-    animation-delay:3s;
+body.light{
+    background:var(--bg-light);
+    color:var(--text-light);
 }
 
-.splash h1{
-    font-size:38px;
-    font-weight:900;
-    margin:0;
-    animation:zoomIn 1.2s ease;
+/* ================= ENTRY ANIMATION ================= */
+body{
+    animation:fadeIn 1s ease forwards;
 }
 
-.splash span{color:#ff2e63}
-
-.loader{
-    margin-top:30px;
-    width:50px;
-    height:50px;
-    border:5px solid rgba(255,255,255,.2);
-    border-top:5px solid #ff2e63;
-    border-radius:50%;
-    animation:spin 1s linear infinite;
-}
-
-@keyframes spin{
-    to{transform:rotate(360deg);}
-}
-
-@keyframes zoomIn{
-    from{transform:scale(.6);opacity:0}
-    to{transform:scale(1);opacity:1}
-}
-
-@keyframes fadeOut{
-    to{opacity:0;visibility:hidden}
-}
-
-/* ================= APP CONTENT ================= */
-.app{
-    opacity:0;
-    transform:scale(.95);
-    transition:1s ease;
-}
-
-.app.active{
-    opacity:1;
-    transform:scale(1);
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(20px);}
+    to{opacity:1; transform:translateY(0);}
 }
 
 /* ================= HEADER ================= */
 .header{
-    padding:70px 20px 40px;
+    padding:80px 20px 40px;
 }
 
 .header h1{
     margin:0;
-    font-size:32px;
+    font-size:38px;
     font-weight:900;
+    letter-spacing:1px;
+}
+
+.header span{
+    color:#ef4444;
+}
+
+.header p{
+    margin-top:12px;
+    opacity:.8;
+    font-weight:600;
 }
 
 /* ================= CONTAINER ================= */
@@ -96,63 +77,128 @@ body{
     margin:auto;
 }
 
-/* ================= BUTTON ================= */
+/* ================= SUBJECT BUTTON ================= */
 .subject{
-    margin:25px 0;
+    margin:28px 0;
+    animation:slideUp .8s ease forwards;
+}
+
+@keyframes slideUp{
+    from{opacity:0; transform:translateY(30px);}
+    to{opacity:1; transform:translateY(0);}
 }
 
 .subject a{
-    display:grid;
-    grid-template-columns:60px 1fr 40px;
+    display:flex;
     align-items:center;
-    padding:22px;
-    border-radius:40px;
-    font-size:20px;
-    text-decoration:none;
-    backdrop-filter:blur(12px);
-    background:rgba(255,255,255,0.08);
-    border:1px solid rgba(255,255,255,0.15);
-    color:#fff;
-    transition:.4s;
-}
-
-.subject a:hover{
-    transform:scale(1.04);
-    box-shadow:0 10px 35px rgba(0,0,0,.5);
-}
-
-.icon{
-    font-size:24px;
-}
-
-.subject span{
-    text-align:center;
-    font-weight:900;
-}
-
-.arrow{
+    justify-content:center;
+    gap:14px;
+    padding:26px;
+    border-radius:50px;
     font-size:22px;
-    transition:.3s;
+    font-weight:800;
+    text-decoration:none;
+    box-shadow:var(--glow);
+    transition:.25s;
+    backdrop-filter:blur(10px);
+    position:relative;
 }
 
-.subject a:hover .arrow{
-    transform:translateX(8px);
+/* Hover */
+.subject a:hover{
+    transform:translateY(-4px) scale(1.02);
 }
 
-/* TELEGRAM */
+/* Click Effect */
+.subject a:active{
+    transform:scale(.96);
+    box-shadow:0 6px 18px rgba(0,0,0,.25);
+}
+
+/* ================= ICON ================= */
+.icon{
+    width:52px;
+    height:52px;
+    border-radius:50%;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    font-size:24px;
+    background:rgba(255,255,255,.2);
+}
+
+/* ================= COLORS ================= */
+
+/* Pediatric */
+.pediatric a{
+    background:linear-gradient(135deg,#a7f3d0,#34d399);
+    color:#064e3b;
+}
+
+/* Obstetric */
+.obstetric a{
+    background:linear-gradient(135deg,#fbcfe8,#f472b6);
+    color:#1f2937;
+}
+
+/* Medical */
+.medical a{
+    background:linear-gradient(135deg,#0ea5e9,#075985);
+    color:#fff;
+}
+
+/* Management */
+.management a{
+    background:linear-gradient(135deg,#ff003c,#9f1239);
+    color:#fff;
+}
+
+/* Psychiatric */
+.psychiatric a{
+    background:linear-gradient(135deg,#4fa3a5,#2f6f73);
+    color:#fff;
+}
+
+/* ================= TELEGRAM ================= */
 .telegram{
-    margin:50px auto 70px;
+    margin:70px auto 90px;
 }
+
 .telegram a{
     display:inline-block;
     width:90%;
     max-width:360px;
-    padding:14px;
-    border-radius:40px;
+    padding:18px;
+    border-radius:50px;
     background:linear-gradient(135deg,#229ED9,#38bdf8);
     color:#fff;
     text-decoration:none;
     font-weight:800;
+    box-shadow:0 12px 30px rgba(0,0,0,.35);
+    transition:.25s;
+}
+
+.telegram a:hover{
+    transform:translateY(-3px);
+}
+
+.telegram a:active{
+    transform:scale(.96);
+}
+
+/* ================= TOGGLE ================= */
+.toggle{
+    position:fixed;
+    top:18px;
+    left:18px;
+    background:#ffffff;
+    border:none;
+    border-radius:50%;
+    width:44px;
+    height:44px;
+    cursor:pointer;
+    box-shadow:0 6px 16px rgba(0,0,0,.25);
+    font-size:18px;
 }
 
 </style>
@@ -160,71 +206,57 @@ body{
 
 <body>
 
-<!-- 🎬 SPLASH -->
-<div class="splash">
-    <h1>GAITH <span>TEAM</span></h1>
-    <div class="loader"></div>
+<button class="toggle" onclick="document.body.classList.toggle('light')">🌙</button>
+
+<div class="header">
+    <h1>GAITH TEAM <span>❤️</span></h1>
+    <p>الامتحان في جيبك</p>
 </div>
 
-<!-- 📱 APP -->
-<div class="app" id="app">
+<div class="container">
 
-    <div class="header">
-        <h1>GAITH TEAM ❤️</h1>
-        <p>الامتحان في جيبك</p>
+    <div class="subject pediatric">
+        <a href="#">
+            <div class="icon">🍼</div>
+            تمريض أطفال
+        </a>
     </div>
 
-    <div class="container">
-
-        <div class="subject">
-            <a href="#">
-                <div class="icon">🍼</div>
-                <span>تمريض أطفال</span>
-                <div class="arrow">▸</div>
-            </a>
-        </div>
-
-        <div class="subject">
-            <a href="#">
-                <div class="icon">🤰</div>
-                <span>تمريض نسا وتوليد</span>
-                <div class="arrow">▸</div>
-            </a>
-        </div>
-
-        <div class="subject">
-            <a href="#">
-                <div class="icon">🩺</div>
-                <span>تمريض باطني جراحي 1 (عملي)</span>
-                <div class="arrow">▸</div>
-            </a>
-        </div>
-
-        <div class="subject">
-            <a href="#">
-                <div class="icon">📊</div>
-                <span>تمريض إدارة</span>
-                <div class="arrow">▸</div>
-            </a>
-        </div>
-
-        <div class="subject">
-            <a href="#">
-                <div class="icon">🧠</div>
-                <span>تمريض نفسية ( معهد فني صحي )</span>
-                <div class="arrow">▸</div>
-            </a>
-        </div>
-
-        <div class="telegram">
-            <a href="https://t.me/nursing2bu" target="_blank">
-                ✈️ انضم إلينا على Telegram
-            </a>
-        </div>
-
+    <div class="subject obstetric">
+        <a href="#">
+            <div class="icon">🤰</div>
+            تمريض نسا وتوليد
+        </a>
     </div>
+
+    <div class="subject medical">
+        <a href="#">
+            <div class="icon">🩺</div>
+            تمريض باطني جراحي عملي
+        </a>
+    </div>
+
+    <div class="subject management">
+        <a href="#">
+            <div class="icon">📊</div>
+            تمريض إدارة
+        </a>
+    </div>
+
+    <div class="subject psychiatric">
+        <a href="#">
+            <div class="icon">🧠</div>
+            تمريض نفسية (معهد فني صحي)
+        </a>
+    </div>
+
+    <div class="telegram">
+        <a href="https://t.me/nursing2bu" target="_blank">
+            ✈️ انضم إلينا على Telegram
+        </a>
+    </div>
+
 </div>
-
 
 </body>
 </html>
