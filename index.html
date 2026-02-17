@@ -14,7 +14,7 @@ body{
     margin:0;
     background:#000814;
     color:#fff;
-    overflow-x:hidden;
+    overflow:hidden;
     transition:.6s;
 }
 
@@ -23,21 +23,45 @@ body.light{
     color:#111827;
 }
 
+/* CANVAS */
 #galaxy{
     position:fixed;
     inset:0;
     z-index:-1;
 }
 
-.fade-out{
-    animation:fadeOut 1s forwards;
-}
-@keyframes fadeOut{
-    to{opacity:0;transform:scale(1.05);}
+/* ===== CINEMATIC INTRO ===== */
+#intro{
+    position:fixed;
+    inset:0;
+    background:radial-gradient(circle at center,#0f172a,#000);
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    flex-direction:column;
+    z-index:9999;
+    animation:zoomOut 3s forwards 3s;
 }
 
-/* Header */
-.header{text-align:center;padding:90px 20px 40px;}
+.intro-title{
+    font-size:60px;
+    font-weight:900;
+    color:#38bdf8;
+    text-shadow:0 0 20px #38bdf8,0 0 60px #0ea5e9;
+    animation:pulse 2s infinite alternate;
+}
+
+@keyframes pulse{
+    from{transform:scale(1);}
+    to{transform:scale(1.1);}
+}
+
+@keyframes zoomOut{
+    to{opacity:0;visibility:hidden;transform:scale(1.2);}
+}
+
+/* HEADER */
+.header{text-align:center;padding:100px 20px 40px;}
 .logo{
     font-size:42px;
     font-weight:900;
@@ -46,7 +70,7 @@ body.light{
     -webkit-text-fill-color:transparent;
 }
 
-/* Grid */
+/* GRID */
 .container{
     width:95%;
     max-width:520px;
@@ -54,23 +78,20 @@ body.light{
     display:grid;
     grid-template-columns:repeat(2,1fr);
     gap:20px;
-    padding-bottom:60px;
 }
 
 .subject a{
     display:flex;
     justify-content:center;
     align-items:center;
-    padding:30px 15px;
+    padding:30px;
     border-radius:20px;
     font-weight:800;
     text-decoration:none;
     transition:.3s;
     box-shadow:0 8px 20px rgba(0,0,0,.4);
 }
-
 .subject a:hover{transform:translateY(-6px);}
-.subject a:active{transform:scale(.95);}
 
 .pediatric a{background:linear-gradient(135deg,#a7f3d0,#34d399);color:#064e3b;}
 .obstetric a{background:linear-gradient(135deg,#fbcfe8,#f472b6);color:#1f2937;}
@@ -78,19 +99,20 @@ body.light{
 .management a{background:linear-gradient(135deg,#ff003c,#9f1239);color:#fff;}
 .psychiatric a{background:linear-gradient(135deg,#4fa3a5,#2f6f73);color:#fff;}
 
+.fade-out{animation:fadeOut 1s forwards;}
+@keyframes fadeOut{to{opacity:0;transform:scale(1.1);}}
+
 /* Toggle */
 .toggle{
     position:fixed;
     top:15px;
     left:15px;
-    width:50px;
-    height:50px;
+    width:50px;height:50px;
     border-radius:50%;
     border:none;
     cursor:pointer;
     font-size:22px;
-    background:#0ea5e9;
-    color:#fff;
+    background:#0ea5e9;color:#fff;
     transition:.4s;
 }
 .toggle:hover{transform:rotate(180deg) scale(1.1);}
@@ -101,6 +123,10 @@ body.light{
 
 <canvas id="galaxy"></canvas>
 
+<div id="intro">
+    <div class="intro-title">GAITH TEAM</div>
+</div>
+
 <button class="toggle" id="modeToggle">🌙</button>
 
 <div class="header">
@@ -108,35 +134,27 @@ body.light{
 </div>
 
 <div class="container">
-
-    <div class="subject pediatric">
-        <a href="pediatric/index.html">🍼 أطفال</a>
-    </div>
-
-    <div class="subject obstetric">
-        <a href="obstetric/index.html">🤰 نسا</a>
-    </div>
-
-    <div class="subject medical">
-        <a href="medical/index.html">🩺 باطني</a>
-    </div>
-
-    <div class="subject management">
-        <a href="management/index.html">📊 إدارة</a>
-    </div>
-
-    <div class="subject psychiatric">
-        <a href="psychiatric/index.html">🧠 نفسية</a>
-    </div>
-
+    <div class="subject pediatric"><a href="pediatric/index.html">🍼 أطفال</a></div>
+    <div class="subject obstetric"><a href="obstetric/index.html">🤰 نسا</a></div>
+    <div class="subject medical"><a href="medical/index.html">🩺 باطني</a></div>
+    <div class="subject management"><a href="management/index.html">📊 إدارة</a></div>
+    <div class="subject psychiatric"><a href="psychiatric/index.html">🧠 نفسية</a></div>
 </div>
+
+<audio id="spaceSound" src="https://assets.mixkit.co/sfx/preview/mixkit-space-ambience-142.mp3"></audio>
 
 <script>
 
-/* ================= MODE ================= */
+/* SOUND ON LOAD */
+window.addEventListener("load",()=>{
+    const sound=document.getElementById("spaceSound");
+    sound.volume=0.2;
+    sound.play().catch(()=>{});
+});
+
+/* MODE */
 const toggle=document.getElementById("modeToggle");
 let currentMode=localStorage.getItem("mode")||"dark";
-
 function applyMode(mode){
     currentMode=mode;
     if(mode==="light"){
@@ -151,65 +169,104 @@ function applyMode(mode){
 applyMode(currentMode);
 toggle.onclick=()=>applyMode(currentMode==="light"?"dark":"light");
 
-/* ================= PAGE TRANSITION ================= */
+/* PAGE TRANSITION */
 document.querySelectorAll(".subject a").forEach(link=>{
     link.addEventListener("click",function(e){
         e.preventDefault();
-        const url=this.href;
         document.body.classList.add("fade-out");
-        setTimeout(()=>{window.location.href=url;},800);
+        setTimeout(()=>{window.location=this.href;},800);
     });
 });
 
-/* ================= 3D SPIRAL GALAXY ================= */
+/* GALAXY */
 const canvas=document.getElementById("galaxy");
 const ctx=canvas.getContext("2d");
-
 function resize(){
     canvas.width=window.innerWidth;
     canvas.height=window.innerHeight;
 }
-resize();
-window.addEventListener("resize",resize);
+resize();window.addEventListener("resize",resize);
 
-let stars=[];
-const totalStars=900;
-const arms=4;
+let stars=[],shootingStars=[],planets=[];
+let mouseX=0,mouseY=0;
 
-for(let i=0;i<totalStars;i++){
-    const angle=Math.random()*Math.PI*2;
-    const radius=Math.random()*400;
-    const armOffset=(i%arms)*(Math.PI*2/arms);
+document.addEventListener("mousemove",e=>{
+    mouseX=(e.clientX-window.innerWidth/2)/50;
+    mouseY=(e.clientY-window.innerHeight/2)/50;
+});
 
+/* Spiral Stars */
+for(let i=0;i<800;i++){
     stars.push({
-        angle:angle+armOffset,
-        radius:radius,
+        angle:Math.random()*Math.PI*2,
+        radius:Math.random()*400,
         speed:0.0003+Math.random()*0.0005,
-        size:Math.random()*2,
-        depth:Math.random()*0.5+0.5
+        size:Math.random()*2
     });
 }
 
-function animate(){
+/* Planets */
+for(let i=0;i<3;i++){
+    planets.push({
+        angle:Math.random()*Math.PI*2,
+        distance:200+Math.random()*150,
+        size:10+Math.random()*15,
+        speed:0.001+Math.random()*0.001
+    });
+}
 
+/* Shooting star */
+function createShootingStar(){
+    shootingStars.push({
+        x:Math.random()*canvas.width,
+        y:0,
+        length:200,
+        speed:10
+    });
+}
+setInterval(createShootingStar,4000);
+
+function animate(){
     ctx.fillStyle=currentMode==="dark"?"#000814":"#f1f5f9";
     ctx.fillRect(0,0,canvas.width,canvas.height);
 
-    const cx=canvas.width/2;
-    const cy=canvas.height/2;
+    const cx=canvas.width/2+mouseX;
+    const cy=canvas.height/2+mouseY;
 
+    /* Stars */
     stars.forEach(s=>{
         s.angle+=s.speed;
-
-        const x=cx+Math.cos(s.angle)*s.radius*s.depth;
-        const y=cy+Math.sin(s.angle)*s.radius*s.depth;
-
+        const x=cx+Math.cos(s.angle)*s.radius;
+        const y=cy+Math.sin(s.angle)*s.radius;
         ctx.beginPath();
         ctx.fillStyle=currentMode==="dark"?"white":"#0f172a";
-        ctx.globalAlpha=s.depth;
         ctx.arc(x,y,s.size,0,Math.PI*2);
         ctx.fill();
-        ctx.globalAlpha=1;
+    });
+
+    /* Planets */
+    planets.forEach(p=>{
+        p.angle+=p.speed;
+        const x=cx+Math.cos(p.angle)*p.distance;
+        const y=cy+Math.sin(p.angle)*p.distance;
+        ctx.beginPath();
+        ctx.fillStyle="#38bdf8";
+        ctx.arc(x,y,p.size,0,Math.PI*2);
+        ctx.fill();
+    });
+
+    /* Shooting stars */
+    shootingStars.forEach((s,i)=>{
+        ctx.strokeStyle="white";
+        ctx.beginPath();
+        ctx.moveTo(s.x,s.y);
+        ctx.lineTo(s.x+s.length,s.y+s.length);
+        ctx.stroke();
+        s.x+=s.speed;
+        s.y+=s.speed;
+        if(s.x>canvas.width||s.y>canvas.height){
+            shootingStars.splice(i,1);
+        }
     });
 
     requestAnimationFrame(animate);
