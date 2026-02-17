@@ -14,7 +14,7 @@ body{
     margin:0;
     background:#000814;
     color:#fff;
-    overflow:hidden;
+    overflow-x:hidden;
     transition:.6s;
 }
 
@@ -30,7 +30,7 @@ body.light{
     z-index:-1;
 }
 
-/* ===== CINEMATIC INTRO ===== */
+/* INTRO */
 #intro{
     position:fixed;
     inset:0;
@@ -102,6 +102,47 @@ body.light{
 .fade-out{animation:fadeOut 1s forwards;}
 @keyframes fadeOut{to{opacity:0;transform:scale(1.1);}}
 
+/* JOIN SECTION */
+.join-section{
+    text-align:center;
+    margin:60px 0 100px;
+}
+
+.join-btn{
+    display:inline-block;
+    padding:18px 50px;
+    font-size:22px;
+    font-weight:900;
+    text-decoration:none;
+    border-radius:50px;
+    background:linear-gradient(135deg,#229ED9,#0ea5e9);
+    color:#fff;
+    box-shadow:0 10px 30px rgba(0,0,0,.5);
+    transition:.4s;
+    position:relative;
+    overflow:hidden;
+}
+
+.join-btn:hover{
+    transform:translateY(-8px) scale(1.05);
+    box-shadow:0 15px 40px rgba(0,0,0,.7);
+}
+
+.join-btn::before{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:100%;
+    height:100%;
+    background:linear-gradient(120deg,transparent,rgba(255,255,255,.5),transparent);
+    transition:.6s;
+}
+
+.join-btn:hover::before{
+    left:100%;
+}
+
 /* Toggle */
 .toggle{
     position:fixed;
@@ -141,11 +182,16 @@ body.light{
     <div class="subject psychiatric"><a href="psychiatric/index.html">🧠 نفسية</a></div>
 </div>
 
+<!-- زر الانضمام -->
+<div class="join-section">
+    <a href="https://t.me/nursing2bu" target="_blank" class="join-btn">
+        🚀 انضم إلينا على تليجرام
+    </a>
+</div>
+
 <audio id="spaceSound" src="https://assets.mixkit.co/sfx/preview/mixkit-space-ambience-142.mp3"></audio>
 
 <script>
-
-/* SOUND ON LOAD */
 window.addEventListener("load",()=>{
     const sound=document.getElementById("spaceSound");
     sound.volume=0.2;
@@ -169,110 +215,43 @@ function applyMode(mode){
 applyMode(currentMode);
 toggle.onclick=()=>applyMode(currentMode==="light"?"dark":"light");
 
-/* PAGE TRANSITION */
-document.querySelectorAll(".subject a").forEach(link=>{
-    link.addEventListener("click",function(e){
-        e.preventDefault();
-        document.body.classList.add("fade-out");
-        setTimeout(()=>{window.location=this.href;},800);
-    });
-});
-
 /* GALAXY */
 const canvas=document.getElementById("galaxy");
 const ctx=canvas.getContext("2d");
+
 function resize(){
     canvas.width=window.innerWidth;
     canvas.height=window.innerHeight;
 }
-resize();window.addEventListener("resize",resize);
+resize();
+window.addEventListener("resize",resize);
 
-let stars=[],shootingStars=[],planets=[];
-let mouseX=0,mouseY=0;
-
-document.addEventListener("mousemove",e=>{
-    mouseX=(e.clientX-window.innerWidth/2)/50;
-    mouseY=(e.clientY-window.innerHeight/2)/50;
-});
-
-/* Spiral Stars */
+let stars=[];
 for(let i=0;i<800;i++){
     stars.push({
-        angle:Math.random()*Math.PI*2,
-        radius:Math.random()*400,
-        speed:0.0003+Math.random()*0.0005,
-        size:Math.random()*2
-    });
-}
-
-/* Planets */
-for(let i=0;i<3;i++){
-    planets.push({
-        angle:Math.random()*Math.PI*2,
-        distance:200+Math.random()*150,
-        size:10+Math.random()*15,
-        speed:0.001+Math.random()*0.001
-    });
-}
-
-/* Shooting star */
-function createShootingStar(){
-    shootingStars.push({
         x:Math.random()*canvas.width,
-        y:0,
-        length:200,
-        speed:10
+        y:Math.random()*canvas.height,
+        size:Math.random()*2,
+        speed:Math.random()*0.5
     });
 }
-setInterval(createShootingStar,4000);
 
 function animate(){
     ctx.fillStyle=currentMode==="dark"?"#000814":"#f1f5f9";
     ctx.fillRect(0,0,canvas.width,canvas.height);
 
-    const cx=canvas.width/2+mouseX;
-    const cy=canvas.height/2+mouseY;
-
-    /* Stars */
     stars.forEach(s=>{
-        s.angle+=s.speed;
-        const x=cx+Math.cos(s.angle)*s.radius;
-        const y=cy+Math.sin(s.angle)*s.radius;
+        s.y+=s.speed;
+        if(s.y>canvas.height){s.y=0;}
         ctx.beginPath();
         ctx.fillStyle=currentMode==="dark"?"white":"#0f172a";
-        ctx.arc(x,y,s.size,0,Math.PI*2);
+        ctx.arc(s.x,s.y,s.size,0,Math.PI*2);
         ctx.fill();
-    });
-
-    /* Planets */
-    planets.forEach(p=>{
-        p.angle+=p.speed;
-        const x=cx+Math.cos(p.angle)*p.distance;
-        const y=cy+Math.sin(p.angle)*p.distance;
-        ctx.beginPath();
-        ctx.fillStyle="#38bdf8";
-        ctx.arc(x,y,p.size,0,Math.PI*2);
-        ctx.fill();
-    });
-
-    /* Shooting stars */
-    shootingStars.forEach((s,i)=>{
-        ctx.strokeStyle="white";
-        ctx.beginPath();
-        ctx.moveTo(s.x,s.y);
-        ctx.lineTo(s.x+s.length,s.y+s.length);
-        ctx.stroke();
-        s.x+=s.speed;
-        s.y+=s.speed;
-        if(s.x>canvas.width||s.y>canvas.height){
-            shootingStars.splice(i,1);
-        }
     });
 
     requestAnimationFrame(animate);
 }
 animate();
-
 </script>
 
 </body>
