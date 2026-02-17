@@ -28,21 +28,33 @@ body.light{
  color:#0f172a;
 }
 
+/* ===== GALAXY ===== */
 #stars{
  position:fixed;
  inset:0;
- z-index:-2;
- transition:.6s;
+ z-index:-3;
 }
 
-/* Portal Flash */
+/* Zoom Dimension */
+.zoom-dimension{
+ animation:zoomDimension .6s ease;
+}
+
+@keyframes zoomDimension{
+ 0%{transform:scale(1);}
+ 50%{transform:scale(1.08);}
+ 100%{transform:scale(1);}
+}
+
+/* Flash */
 .portal-flash{
  position:fixed;
  inset:0;
- background:radial-gradient(circle,rgba(56,189,248,.5) 0%,transparent 60%);
+ background:radial-gradient(circle,rgba(56,189,248,.6) 0%,transparent 70%);
  opacity:0;
  pointer-events:none;
- z-index:-1;
+ z-index:-2;
+ transition:.4s;
 }
 
 /* LOGO */
@@ -91,24 +103,11 @@ details{
  border-radius:30px;
  overflow:hidden;
  transition:.6s;
- transform-style:preserve-3d;
- position:relative;
 }
 
 body.light details{
  background:rgba(255,255,255,0.6);
  border:1px solid rgba(0,0,0,0.08);
-}
-
-/* Portal Animation */
-details.portal-open{
- animation:portalOut .6s ease forwards;
-}
-
-@keyframes portalOut{
- 0%{transform:scale(1) rotateX(0);}
- 50%{transform:scale(1.1) rotateX(15deg);}
- 100%{transform:scale(1.05) rotateX(0);}
 }
 
 details[open]{
@@ -156,6 +155,37 @@ details[open] .content{
 }
 .content a:hover{transform:scale(1.06);}
 
+/* ===== JOIN BUTTON ===== */
+.join-btn{
+ position:fixed;
+ bottom:20px;
+ left:20px;
+ padding:14px 22px;
+ border-radius:50px;
+ background:linear-gradient(135deg,#229ED9,#0ea5e9);
+ color:#fff;
+ font-weight:700;
+ text-decoration:none;
+ display:flex;
+ align-items:center;
+ gap:8px;
+ box-shadow:0 0 20px #229ED9;
+ transition:.4s;
+ z-index:999;
+ animation:pulseJoin 2s infinite;
+}
+
+.join-btn:hover{
+ transform:scale(1.1);
+}
+
+@keyframes pulseJoin{
+ 0%{box-shadow:0 0 0 0 rgba(34,158,217,.7);}
+ 70%{box-shadow:0 0 0 15px rgba(34,158,217,0);}
+ 100%{box-shadow:0 0 0 0 rgba(34,158,217,0);}
+}
+
+/* Toggle */
 .toggle{
  position:fixed;
  top:15px;
@@ -183,7 +213,7 @@ details[open] .content{
 GAITH TEAM <span>💖</span>
 </div>
 
-<div class="container" id="cards">
+<div class="container">
 
 <script>
 const lectures=[
@@ -198,7 +228,7 @@ const lectures=[
 ];
 
 document.write(lectures.map(l=>`
-<details class="card">
+<details>
 <summary><i class="fa-solid ${l[0]}"></i> ${l[1]}</summary>
 <div class="content">
 <a href="#">❓ أسئلة</a>
@@ -210,6 +240,11 @@ document.write(lectures.map(l=>`
 
 </div>
 
+<!-- Join Us Button -->
+<a href="https://t.me/nursing2bu" target="_blank" class="join-btn">
+<i class="fa-brands fa-telegram"></i> انضم إلينا
+</a>
+
 <script>
 /* Toggle */
 const toggle=document.getElementById("modeToggle");
@@ -220,7 +255,7 @@ toggle.onclick=()=>{
  toggle.textContent=mode==="light"?"☀️":"🌙";
 };
 
-/* Portal Effect */
+/* Zoom + Flash */
 const flash=document.getElementById("flash");
 document.querySelectorAll("details").forEach(card=>{
  card.addEventListener("click",()=>{
@@ -228,10 +263,13 @@ document.querySelectorAll("details").forEach(card=>{
      if(d!==card) d.removeAttribute("open");
    });
 
-   card.classList.add("portal-open");
+   document.body.classList.add("zoom-dimension");
    flash.style.opacity="1";
-   setTimeout(()=>{flash.style.opacity="0";},400);
-   setTimeout(()=>{card.classList.remove("portal-open");},600);
+
+   setTimeout(()=>{
+     flash.style.opacity="0";
+     document.body.classList.remove("zoom-dimension");
+   },500);
  });
 });
 
