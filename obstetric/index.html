@@ -10,9 +10,6 @@
 
 <style>
 :root{
- --violet1:#3b0764;
- --violet2:#7c3aed;
- --violet3:#a855f7;
  --glow:rgba(168,85,247,.7);
 }
 
@@ -28,7 +25,7 @@ body{
  overflow-x:hidden;
 }
 
-/* Canvas */
+/* نجوم */
 canvas{
  position:fixed;
  inset:0;
@@ -53,7 +50,7 @@ canvas{
  margin-top:80px;
  font-size:46px;
  font-weight:900;
- background:linear-gradient(135deg,var(--violet2),var(--violet3));
+ background:linear-gradient(135deg,#a855f7,#c084fc);
  -webkit-background-clip:text;
  -webkit-text-fill-color:transparent;
  text-shadow:0 0 30px var(--glow);
@@ -73,14 +70,13 @@ canvas{
  50%{transform:translateX(-50%) translateY(-8px);}
 }
 
-/* ===== Search Bar ===== */
+/* Search */
 .search-box{
  width:90%;
  max-width:600px;
- margin:40px auto 20px;
+ margin:40px auto;
  position:relative;
 }
-
 .search-box input{
  width:100%;
  padding:15px 50px 15px 20px;
@@ -93,56 +89,67 @@ canvas{
  color:#fff;
  box-shadow:0 0 20px var(--glow);
 }
-
 .search-box i{
  position:absolute;
  right:18px;
  top:50%;
  transform:translateY(-50%);
  color:#c084fc;
- font-size:18px;
 }
 
 /* Grid */
 .container{
  width:92%;
  max-width:1100px;
- margin:30px auto 70px;
+ margin:20px auto 70px;
  display:grid;
  grid-template-columns:repeat(2,1fr);
- gap:30px;
+ gap:25px;
 }
 
 /* Cards */
 details{
  border-radius:25px;
- background:rgba(255,255,255,0.07);
  backdrop-filter:blur(25px);
  border:1px solid rgba(255,255,255,0.2);
  transition:.4s;
+ overflow:hidden;
+ opacity:0;
+ transform:translateY(30px);
+ animation:fadeUp .8s forwards;
+}
+@keyframes fadeUp{
+ to{opacity:1;transform:translateY(0);}
 }
 
 details:hover{
- box-shadow:0 0 40px var(--glow);
  transform:translateY(-6px);
+ box-shadow:0 0 40px rgba(255,255,255,.3);
 }
 
+/* ألوان حسب الشابتر */
+.basic{background:linear-gradient(135deg,#5b21b6,#7c3aed);}
+.pregnancy{background:linear-gradient(135deg,#9d174d,#c026d3);}
+.labor{background:linear-gradient(135deg,#1e3a8a,#6366f1);}
+.complication{background:linear-gradient(135deg,#7f1d1d,#dc2626);}
+.medical{background:linear-gradient(135deg,#065f46,#10b981);}
+.final{background:linear-gradient(135deg,#92400e,#f59e0b);}
+
+/* Summary */
 summary{
  list-style:none;
  padding:18px;
  cursor:pointer;
  font-weight:700;
- font-size:16px;
+ font-size:15px;
  display:flex;
+ justify-content:center;
  align-items:center;
- gap:12px;
+ gap:10px;
+ text-align:center;
 }
 summary::-webkit-details-marker{display:none}
-
-summary i{
- color:#c084fc;
- font-size:18px;
-}
+summary i{font-size:18px}
 
 /* Content */
 .content{
@@ -154,7 +161,6 @@ summary i{
  overflow:hidden;
  transition:.5s;
 }
-
 details[open] .content{
  max-height:200px;
  padding-bottom:15px;
@@ -167,11 +173,10 @@ details[open] .content{
  text-align:center;
  text-decoration:none;
  font-weight:700;
- background:linear-gradient(135deg,var(--violet2),var(--violet3));
+ background:linear-gradient(135deg,#a855f7,#c084fc);
  color:#fff;
  transition:.3s;
 }
-
 .content a:hover{
  transform:scale(1.07);
  box-shadow:0 0 30px var(--glow);
@@ -195,9 +200,8 @@ details[open] .content{
 Obstetrics & Gynecology
 </div>
 
-<!-- Search -->
 <div class="search-box">
-<input type="text" id="searchInput" placeholder="ابحث عن محاضرة...">
+<input type="text" id="searchInput" placeholder="Search lecture...">
 <i class="fa-solid fa-magnifying-glass"></i>
 </div>
 
@@ -205,32 +209,35 @@ Obstetrics & Gynecology
 
 <script>
 const lectures=[
-["fa-venus","Anatomy of female genital tract"],
-["fa-droplet","Menstruation"],
-["fa-dna","Fertilization"],
-["fa-baby","Physiological changes with pregnancy"],
-["fa-stethoscope","Diagnosis of pregnancy"],
-["fa-user-nurse","Antenatal care"],
-["fa-gears","Mechanism of normal labor"],
-["fa-hand-holding-medical","Management of normal labor"],
-["fa-bed","Normal puerperium"],
-["fa-triangle-exclamation","Bleeding in early pregnancy"],
-["fa-triangle-exclamation","Bleeding in late pregnancy"],
-["fa-heart-pulse","Hypertensive disorders (PIH)"],
-["fa-heart","Heart disease with pregnancy"],
-["fa-syringe","Gestational Diabetes Mellitus"],
-["fa-droplet-slash","Anemia during pregnancy"],
-["fa-briefcase-medical","Abnormal labor"],
-["fa-hospital-user","Abnormal puerperium"],
-["fa-book-medical","Final Chapter"]
+["fa-venus","Anatomy of female genital tract","basic"],
+["fa-droplet","Menstruation","basic"],
+["fa-dna","Fertilization","basic"],
+["fa-baby","Physiological changes with pregnancy","pregnancy"],
+["fa-stethoscope","Diagnosis of pregnancy","pregnancy"],
+["fa-user-nurse","Antenatal care","pregnancy"],
+["fa-gears","Mechanism of normal labor","labor"],
+["fa-hand-holding-medical","Management of normal labor","labor"],
+["fa-bed","Normal puerperium","labor"],
+["fa-triangle-exclamation","Bleeding in early pregnancy","complication"],
+["fa-triangle-exclamation","Bleeding in late pregnancy","complication"],
+["fa-heart-pulse","Hypertensive disorders (PIH)","complication"],
+["fa-heart","Heart disease with pregnancy","medical"],
+["fa-syringe","Gestational Diabetes Mellitus","medical"],
+["fa-droplet-slash","Anemia during pregnancy","medical"],
+["fa-briefcase-medical","Abnormal labor","complication"],
+["fa-hospital-user","Abnormal puerperium","complication"],
+["fa-book-medical","Final Chapter","final"]
 ];
 
 const container=document.getElementById("lecturesContainer");
 
 lectures.forEach((lec,i)=>{
  container.innerHTML+=`
- <details class="lecture-card">
-  <summary><i class="fa-solid ${lec[0]}"></i> ${lec[1]}</summary>
+ <details class="lecture-card ${lec[2]}">
+  <summary>
+   <i class="fa-solid ${lec[0]}"></i>
+   ${lec[1]}
+  </summary>
   <div class="content">
     <a href="lecture${i+1}/questions.html">❓ Questions Bank</a>
     <a href="lecture${i+1}/quiz.html">📝 Quiz</a>
@@ -239,16 +246,15 @@ lectures.forEach((lec,i)=>{
  `;
 });
 
-/* ===== Search Function ===== */
+/* Search */
 document.getElementById("searchInput").addEventListener("keyup",function(){
  let value=this.value.toLowerCase();
  document.querySelectorAll(".lecture-card").forEach(card=>{
-  let text=card.innerText.toLowerCase();
-  card.style.display=text.includes(value)?"block":"none";
+  card.style.display=card.innerText.toLowerCase().includes(value)?"block":"none";
  });
 });
 
-/* ===== Stars Background ===== */
+/* Stars */
 const canvas=document.getElementById("bg");
 const ctx=canvas.getContext("2d");
 function resize(){canvas.width=innerWidth;canvas.height=innerHeight;}
@@ -273,7 +279,7 @@ function draw(){
 }
 draw();
 
-/* ===== Mouse Light ===== */
+/* Mouse Light */
 const light=document.getElementById("mouseLight");
 document.addEventListener("mousemove",e=>{
  light.style.left=e.clientX+"px";
