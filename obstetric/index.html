@@ -21,7 +21,6 @@ body{
  margin:0;
  background:radial-gradient(circle at top,#140622,var(--dark));
  color:#fff;
- overflow-x:hidden;
 }
 
 .logo{
@@ -111,16 +110,7 @@ summary i{color:var(--neon2);}
 
 <div class="container">
 
-<!-- 20 Lectures -->
-
 <script>
-const lectures=[
-"lecture1","lecture2","lecture3","lecture4","lecture5",
-"lecture6","lecture7","lecture8","lecture9","lecture10",
-"lecture11","lecture12","lecture13","lecture14","lecture15",
-"lecture16","lecture17","lecture18","lecture19","lecture20"
-];
-
 const titles=[
 "Anatomy of Female Reproductive System",
 "Menstrual Cycle",
@@ -144,13 +134,14 @@ const titles=[
 "Gynecological Nursing Care"
 ];
 
-lectures.forEach((lec,i)=>{
+titles.forEach((title,index)=>{
+let num=index+1;
 document.write(`
 <details>
-<summary><i class="fa-solid fa-book-medical"></i> ${titles[i]}</summary>
+<summary><i class="fa-solid fa-book-medical"></i> ${title}</summary>
 <div class="content">
-<a href="summary/${lec}.html">📘 ملخص</a>
-<a href="questions/${lec}.html">❓ أسئلة</a>
+<a href="lecture${num}/summary.html">📘 ملخص</a>
+<a href="lecture${num}/questions.html">❓ أسئلة</a>
 </div>
 </details>
 `);
