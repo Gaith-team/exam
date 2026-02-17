@@ -10,9 +10,20 @@
 
 <style>
 :root{
- --g1:#6ee7b7;
- --g2:#34d399;
- --g3:#059669;
+ --neonatal1:#6ee7b7;
+ --neonatal2:#34d399;
+
+ --resp1:#93c5fd;
+ --resp2:#3b82f6;
+
+ --cardiac1:#fca5a5;
+ --cardiac2:#ef4444;
+
+ --neuro1:#c4b5fd;
+ --neuro2:#8b5cf6;
+
+ --emergency1:#fde68a;
+ --emergency2:#f59e0b;
 }
 
 *{box-sizing:border-box;font-family:'Cairo',sans-serif}
@@ -22,7 +33,6 @@ body{
  background:#02120d;
  color:#eafff6;
  overflow-x:hidden;
- transition:.4s;
 }
 
 /* ===== INTRO ===== */
@@ -43,42 +53,38 @@ body{
  to{opacity:0;visibility:hidden;}
 }
 
-/* ===== Search Bar ===== */
+/* ===== Search ===== */
 .search-box{
  width:90%;
  max-width:500px;
  margin:25px auto;
  position:relative;
 }
-
 .search-box input{
  width:100%;
  padding:14px 45px 14px 15px;
  border-radius:40px;
  border:none;
  outline:none;
- font-size:15px;
- background:rgba(110,231,183,0.1);
- backdrop-filter:blur(10px);
- color:#eafff6;
- box-shadow:0 0 15px var(--g2);
+ background:rgba(255,255,255,.1);
+ color:#fff;
+ box-shadow:0 0 15px #34d399;
 }
-
 .search-box i{
  position:absolute;
  right:15px;
  top:50%;
  transform:translateY(-50%);
- color:var(--g1);
+ color:#6ee7b7;
 }
 
 /* ===== Logo ===== */
 .logo{
  text-align:center;
  margin-top:60px;
- font-size:38px;
+ font-size:34px;
  font-weight:900;
- background:linear-gradient(135deg,var(--g1),var(--g2));
+ background:linear-gradient(135deg,#6ee7b7,#34d399);
  -webkit-background-clip:text;
  -webkit-text-fill-color:transparent;
 }
@@ -89,23 +95,20 @@ body{
  max-width:1100px;
  margin:30px auto 80px;
  display:grid;
- grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+ grid-template-columns:repeat(auto-fit,minmax(260px,1fr));
  gap:20px;
 }
 
 /* ===== Card ===== */
 details{
- backdrop-filter:blur(15px);
- background:rgba(110,231,183,0.08);
- border:1px solid rgba(110,231,183,0.25);
  border-radius:25px;
  overflow:hidden;
  transition:.4s;
 }
 
 details:hover{
- transform:translateY(-5px);
- box-shadow:0 0 20px var(--g2);
+ transform:translateY(-6px);
+ box-shadow:0 0 20px #34d399;
 }
 
 summary{
@@ -118,8 +121,16 @@ summary{
  gap:10px;
  font-weight:700;
  text-align:center;
+ color:#fff;
 }
 summary::-webkit-details-marker{display:none}
+
+/* ===== Category Colors ===== */
+.neonatal{background:linear-gradient(135deg,var(--neonatal1),var(--neonatal2));}
+.respiratory{background:linear-gradient(135deg,var(--resp1),var(--resp2));}
+.cardiac{background:linear-gradient(135deg,var(--cardiac1),var(--cardiac2));}
+.neuro{background:linear-gradient(135deg,var(--neuro1),var(--neuro2));}
+.emergency{background:linear-gradient(135deg,var(--emergency1),var(--emergency2));}
 
 .content{
  max-height:0;
@@ -127,28 +138,20 @@ summary::-webkit-details-marker{display:none}
  transition:max-height .4s ease;
  padding:0 15px;
  display:flex;
- flex-direction:column;
- align-items:center;
+ justify-content:center;
 }
 details[open] .content{
- max-height:150px;
+ max-height:120px;
  padding:15px;
 }
 
 .content a{
- width:85%;
- text-align:center;
- padding:10px;
+ padding:10px 20px;
  border-radius:30px;
- background:linear-gradient(135deg,var(--g1),var(--g2));
+ background:#fff;
  color:#064e3b;
  font-weight:700;
  text-decoration:none;
- transition:.3s;
-}
-.content a:hover{
- transform:scale(1.05);
- box-shadow:0 0 15px var(--g2);
 }
 
 /* ===== Join Button ===== */
@@ -158,14 +161,12 @@ details[open] .content{
  left:20px;
  padding:12px 20px;
  border-radius:40px;
- background:linear-gradient(135deg,var(--g2),var(--g3));
+ background:linear-gradient(135deg,#34d399,#059669);
  color:#fff;
  font-weight:700;
  text-decoration:none;
- box-shadow:0 0 15px var(--g2);
- transition:.3s;
+ box-shadow:0 0 15px #34d399;
 }
-.join-btn:hover{transform:scale(1.08);}
 
 /* ===== Galaxy ===== */
 #stars{
@@ -174,9 +175,9 @@ details[open] .content{
  z-index:-1;
 }
 
-/* ===== Responsive ===== */
+/* Responsive */
 @media(max-width:600px){
- .logo{font-size:28px}
+ .logo{font-size:26px}
 }
 </style>
 </head>
@@ -186,10 +187,10 @@ details[open] .content{
 <div class="loader">✨ GAITH TEAM ✨</div>
 <canvas id="stars"></canvas>
 
-<div class="logo">🍼  كويزات تمريض أطفال  </div>
+<div class="logo">🍼 تمريض أطفال - الكويزات</div>
 
 <div class="search-box">
-<input type="text" id="searchInput" placeholder="ابحث عن كويز...">
+<input type="text" id="searchInput" placeholder="ابحث عن محاضرة...">
 <i class="fa-solid fa-magnifying-glass"></i>
 </div>
 
@@ -200,21 +201,33 @@ details[open] .content{
 </a>
 
 <script>
-/* ===== Generate Quizzes ===== */
+const lectures=[
+["fa-baby","Neonatal Care","neonatal"],
+["fa-lungs","Respiratory Disorders","respiratory"],
+["fa-heart","Cardiac Disorders","cardiac"],
+["fa-brain","Neurological Disorders","neuro"],
+["fa-triangle-exclamation","Pediatric Emergencies","emergency"],
+["fa-syringe","Immunization","neonatal"],
+["fa-droplet","Fluid & Electrolyte","respiratory"],
+["fa-apple-whole","Malnutrition","neonatal"],
+["fa-virus","Infectious Diseases","emergency"],
+["fa-pills","Pharmacology","cardiac"]
+];
+
 const container=document.getElementById("quizContainer");
 
-for(let i=1;i<=20;i++){
+lectures.forEach((lec,i)=>{
  container.innerHTML+=`
- <details class="quiz-card">
-   <summary><i class="fa-solid fa-baby"></i> كويز ${i}</summary>
+ <details class="quiz-card ${lec[2]}">
+   <summary><i class="fa-solid ${lec[0]}"></i> ${lec[1]}</summary>
    <div class="content">
-     <a href="quiz${i}.html">🚀 ابدأ الكويز</a>
+     <a href="quiz${i+1}.html">🚀 ابدأ الكويز</a>
    </div>
  </details>
  `;
-}
+});
 
-/* ===== Search Function ===== */
+/* Search */
 document.getElementById("searchInput").addEventListener("keyup",function(){
  let value=this.value.toLowerCase();
  document.querySelectorAll(".quiz-card").forEach(card=>{
@@ -222,27 +235,16 @@ document.getElementById("searchInput").addEventListener("keyup",function(){
  });
 });
 
-/* ===== Green Galaxy ===== */
+/* Galaxy */
 const canvas=document.getElementById("stars");
 const ctx=canvas.getContext("2d");
-
-function resize(){
- canvas.width=window.innerWidth;
- canvas.height=window.innerHeight;
-}
-resize();
-window.addEventListener("resize",resize);
+function resize(){canvas.width=innerWidth;canvas.height=innerHeight;}
+resize();window.addEventListener("resize",resize);
 
 let stars=[];
-for(let i=0;i<400;i++){
- stars.push({
-   x:Math.random()*canvas.width,
-   y:Math.random()*canvas.height,
-   r:Math.random()*2,
-   d:Math.random()*0.3
- });
+for(let i=0;i<300;i++){
+ stars.push({x:Math.random()*canvas.width,y:Math.random()*canvas.height,r:Math.random()*2,d:Math.random()*0.3});
 }
-
 function animate(){
  ctx.clearRect(0,0,canvas.width,canvas.height);
  ctx.fillStyle="#34d399";
@@ -251,10 +253,7 @@ function animate(){
    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
    ctx.fill();
    s.y+=s.d;
-   if(s.y>canvas.height){
-     s.y=0;
-     s.x=Math.random()*canvas.width;
-   }
+   if(s.y>canvas.height){s.y=0;s.x=Math.random()*canvas.width;}
  });
  requestAnimationFrame(animate);
 }
