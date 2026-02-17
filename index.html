@@ -5,200 +5,103 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GAITH TEAM</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800;900&display=swap" rel="stylesheet">
 
 <style>
 
-/* ================= VARIABLES ================= */
-:root{
-    --glow:0 12px 35px rgba(0,0,0,.35);
-    --bg-dark:radial-gradient(circle at top,#0b1225,#020617);
-    --bg-light:linear-gradient(180deg,#f8fafc,#eef2f7);
-    --text-dark:#ffffff;
-    --text-light:#0f172a;
-}
-
-/* ================= BASE ================= */
-*{
-    box-sizing:border-box;
-    font-family:'Cairo',sans-serif;
-}
+/* ===== Base ===== */
+*{box-sizing:border-box;font-family:'Cairo',sans-serif}
 
 body{
     margin:0;
-    background:var(--bg-dark);
-    color:var(--text-dark);
+    background:#0b1225;
+    color:#fff;
     text-align:center;
-    transition:.4s;
     overflow-x:hidden;
+    animation:pageEnter .8s ease;
 }
 
-body.light{
-    background:var(--bg-light);
-    color:var(--text-light);
+@keyframes pageEnter{
+    from{opacity:0; transform:translateX(40px);}
+    to{opacity:1; transform:translateX(0);}
 }
 
-/* ================= ENTRY ANIMATION ================= */
-body{
-    animation:fadeIn 1s ease forwards;
-}
-
-@keyframes fadeIn{
-    from{opacity:0; transform:translateY(20px);}
-    to{opacity:1; transform:translateY(0);}
-}
-
-/* ================= HEADER ================= */
+/* ===== Header ===== */
 .header{
     padding:80px 20px 40px;
 }
-
 .header h1{
-    margin:0;
     font-size:38px;
     font-weight:900;
-    letter-spacing:1px;
 }
 
-.header span{
-    color:#ef4444;
-}
-
-.header p{
-    margin-top:12px;
-    opacity:.8;
-    font-weight:600;
-}
-
-/* ================= CONTAINER ================= */
+/* ===== Container ===== */
 .container{
     width:92%;
     max-width:520px;
     margin:auto;
 }
 
-/* ================= SUBJECT BUTTON ================= */
+/* ===== Buttons ===== */
 .subject{
     margin:28px 0;
-    animation:slideUp .8s ease forwards;
 }
-
-@keyframes slideUp{
-    from{opacity:0; transform:translateY(30px);}
-    to{opacity:1; transform:translateY(0);}
-}
-
 .subject a{
     display:flex;
-    align-items:center;
     justify-content:center;
+    align-items:center;
     gap:14px;
     padding:26px;
     border-radius:50px;
     font-size:22px;
     font-weight:800;
     text-decoration:none;
-    box-shadow:var(--glow);
-    transition:.25s;
-    backdrop-filter:blur(10px);
-    position:relative;
-}
-
-/* Hover */
-.subject a:hover{
-    transform:translateY(-4px) scale(1.02);
-}
-
-/* Click Effect */
-.subject a:active{
-    transform:scale(.96);
-    box-shadow:0 6px 18px rgba(0,0,0,.25);
-}
-
-/* ================= ICON ================= */
-.icon{
-    width:52px;
-    height:52px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    font-size:24px;
-    background:rgba(255,255,255,.2);
-}
-
-/* ================= COLORS ================= */
-
-/* Pediatric */
-.pediatric a{
-    background:linear-gradient(135deg,#a7f3d0,#34d399);
-    color:#064e3b;
-}
-
-/* Obstetric */
-.obstetric a{
-    background:linear-gradient(135deg,#fbcfe8,#f472b6);
-    color:#1f2937;
-}
-
-/* Medical */
-.medical a{
-    background:linear-gradient(135deg,#0ea5e9,#075985);
-    color:#fff;
-}
-
-/* Management */
-.management a{
-    background:linear-gradient(135deg,#ff003c,#9f1239);
-    color:#fff;
-}
-
-/* Psychiatric */
-.psychiatric a{
-    background:linear-gradient(135deg,#4fa3a5,#2f6f73);
-    color:#fff;
-}
-
-/* ================= TELEGRAM ================= */
-.telegram{
-    margin:70px auto 90px;
-}
-
-.telegram a{
-    display:inline-block;
-    width:90%;
-    max-width:360px;
-    padding:18px;
-    border-radius:50px;
-    background:linear-gradient(135deg,#229ED9,#38bdf8);
-    color:#fff;
-    text-decoration:none;
-    font-weight:800;
+    transition:.3s;
     box-shadow:0 12px 30px rgba(0,0,0,.35);
-    transition:.25s;
 }
 
-.telegram a:hover{
-    transform:translateY(-3px);
+/* Click */
+.subject a:active{
+    transform:scale(.95);
 }
 
-.telegram a:active{
-    transform:scale(.96);
-}
+/* Colors */
+.pediatric a{background:linear-gradient(135deg,#a7f3d0,#34d399);color:#064e3b;}
+.obstetric a{background:linear-gradient(135deg,#fbcfe8,#f472b6);color:#1f2937;}
+.medical a{background:linear-gradient(135deg,#0ea5e9,#075985);color:#fff;}
+.management a{background:linear-gradient(135deg,#ff003c,#9f1239);color:#fff;}
+.psychiatric a{background:linear-gradient(135deg,#4fa3a5,#2f6f73);color:#fff;}
 
-/* ================= TOGGLE ================= */
-.toggle{
+/* ===== Loading Screen ===== */
+#loader{
     position:fixed;
-    top:18px;
-    left:18px;
-    background:#ffffff;
-    border:none;
+    inset:0;
+    background:#0b1225;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    z-index:9999;
+    transition:.5s;
+}
+
+.spinner{
+    width:60px;
+    height:60px;
+    border:6px solid rgba(255,255,255,.2);
+    border-top:6px solid #38bdf8;
     border-radius:50%;
-    width:44px;
-    height:44px;
-    cursor:pointer;
-    box-shadow:0 6px 16px rgba(0,0,0,.25);
-    font-size:18px;
+    animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+    to{transform:rotate(360deg);}
+}
+
+/* Fade Out */
+.fade-out{
+    opacity:0;
+    transform:translateX(-40px);
+    transition:.5s;
 }
 
 </style>
@@ -206,57 +109,63 @@ body{
 
 <body>
 
-<button class="toggle" onclick="document.body.classList.toggle('light')">🌙</button>
+<!-- Loading -->
+<div id="loader">
+    <div class="spinner"></div>
+</div>
 
 <div class="header">
-    <h1>GAITH TEAM <span>❤️</span></h1>
-    <p>الامتحان في جيبك</p>
+    <h1>GAITH TEAM ❤️</h1>
 </div>
 
 <div class="container">
 
     <div class="subject pediatric">
-        <a href="#">
-            <div class="icon">🍼</div>
-            تمريض أطفال
-        </a>
+        <a href="pediatric/index.html" class="nav-link">🍼 تمريض أطفال</a>
     </div>
 
     <div class="subject obstetric">
-        <a href="#">
-            <div class="icon">🤰</div>
-            تمريض نسا وتوليد
-        </a>
+        <a href="obstetric/index.html" class="nav-link">🤰 تمريض نسا وتوليد</a>
     </div>
 
     <div class="subject medical">
-        <a href="#">
-            <div class="icon">🩺</div>
-            تمريض باطني جراحي عملي
-        </a>
+        <a href="medical/index.html" class="nav-link">🩺 تمريض باطني جراحي</a>
     </div>
 
     <div class="subject management">
-        <a href="#">
-            <div class="icon">📊</div>
-            تمريض إدارة
-        </a>
+        <a href="management/index.html" class="nav-link">📊 تمريض إدارة</a>
     </div>
 
     <div class="subject psychiatric">
-        <a href="#">
-            <div class="icon">🧠</div>
-            تمريض نفسية (معهد فني صحي)
-        </a>
-    </div>
-
-    <div class="telegram">
-        <a href="https://t.me/nursing2bu" target="_blank">
-            ✈️ انضم إلينا على Telegram
-        </a>
+        <a href="psychiatric/index.html" class="nav-link">🧠 تمريض نفسية</a>
     </div>
 
 </div>
+
+<script>
+
+/* Remove loader after load */
+window.addEventListener("load",()=>{
+    setTimeout(()=>{
+        document.getElementById("loader").style.opacity="0";
+        setTimeout(()=>{
+            document.getElementById("loader").style.display="none";
+        },500);
+    },500);
+});
+
+/* Smooth Page Transition */
+document.querySelectorAll(".nav-link").forEach(link=>{
+    link.addEventListener("click",function(e){
+        e.preventDefault();
+        document.body.classList.add("fade-out");
+        setTimeout(()=>{
+            window.location=this.href;
+        },500);
+    });
+});
+
+</script>
 
 </body>
 </html>
