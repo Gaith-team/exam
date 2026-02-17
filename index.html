@@ -3,63 +3,79 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GAITH TEAM</title>
+<title>GAITH TEAM APP</title>
 
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@600;800;900&display=swap" rel="stylesheet">
 
 <style>
-
-/* ================= ROOT ================= */
-:root{
-    --glow:0 10px 30px rgba(0,0,0,.35);
-    --text-dark:#ffffff;
-    --text-light:#0f172a;
-}
 
 /* ================= BASE ================= */
 *{box-sizing:border-box;font-family:'Cairo',sans-serif}
 
 body{
     margin:0;
-    color:var(--text-dark);
+    background:#0b1225;
+    color:#fff;
     text-align:center;
-    background:linear-gradient(-45deg,#0b1225,#020617,#111827,#0f172a);
-    background-size:400% 400%;
-    animation:gradientMove 18s ease infinite;
-    overflow-x:hidden;
-    transition:.4s;
+    overflow:hidden;
 }
 
-body.light{
-    background:linear-gradient(-45deg,#f8fafc,#eef2f7,#ffffff,#e2e8f0);
-    background-size:400% 400%;
-    color:var(--text-light);
-}
-
-@keyframes gradientMove{
-    0%{background-position:0% 50%}
-    50%{background-position:100% 50%}
-    100%{background-position:0% 50%}
-}
-
-/* ================= PARALLAX ================= */
-.parallax-bg{
+/* ================= SPLASH SCREEN ================= */
+.splash{
     position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:
-        radial-gradient(circle at 20% 30%,rgba(255,255,255,.08),transparent 40%),
-        radial-gradient(circle at 80% 70%,rgba(255,255,255,.06),transparent 40%);
-    pointer-events:none;
-    transition:transform .1s ease-out;
-    z-index:0;
+    inset:0;
+    background:linear-gradient(135deg,#0f172a,#020617);
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+    animation:fadeOut 1s ease forwards;
+    animation-delay:3s;
 }
 
-.container,.header{
-    position:relative;
-    z-index:1;
+.splash h1{
+    font-size:38px;
+    font-weight:900;
+    margin:0;
+    animation:zoomIn 1.2s ease;
+}
+
+.splash span{color:#ff2e63}
+
+.loader{
+    margin-top:30px;
+    width:50px;
+    height:50px;
+    border:5px solid rgba(255,255,255,.2);
+    border-top:5px solid #ff2e63;
+    border-radius:50%;
+    animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+    to{transform:rotate(360deg);}
+}
+
+@keyframes zoomIn{
+    from{transform:scale(.6);opacity:0}
+    to{transform:scale(1);opacity:1}
+}
+
+@keyframes fadeOut{
+    to{opacity:0;visibility:hidden}
+}
+
+/* ================= APP CONTENT ================= */
+.app{
+    opacity:0;
+    transform:scale(.95);
+    transition:1s ease;
+}
+
+.app.active{
+    opacity:1;
+    transform:scale(1);
 }
 
 /* ================= HEADER ================= */
@@ -69,12 +85,9 @@ body.light{
 
 .header h1{
     margin:0;
-    font-size:34px;
+    font-size:32px;
     font-weight:900;
 }
-
-.header span{color:#ef4444}
-.header p{margin-top:10px;opacity:.75}
 
 /* ================= CONTAINER ================= */
 .container{
@@ -83,152 +96,63 @@ body.light{
     margin:auto;
 }
 
-/* ================= SUBJECT ================= */
+/* ================= BUTTON ================= */
 .subject{
-    margin:30px 0;
-    opacity:0;
-    transform:translateY(40px);
-    animation:fadeUp .8s forwards;
-}
-
-.subject:nth-child(1){animation-delay:.2s}
-.subject:nth-child(2){animation-delay:.4s}
-.subject:nth-child(3){animation-delay:.6s}
-.subject:nth-child(4){animation-delay:.8s}
-.subject:nth-child(5){animation-delay:1s}
-
-@keyframes fadeUp{
-    to{opacity:1;transform:translateY(0);}
+    margin:25px 0;
 }
 
 .subject a{
-    position:relative;
     display:grid;
     grid-template-columns:60px 1fr 40px;
     align-items:center;
-    padding:26px;
-    border-radius:50px;
+    padding:22px;
+    border-radius:40px;
     font-size:20px;
     text-decoration:none;
-    backdrop-filter:blur(14px);
-    -webkit-backdrop-filter:blur(14px);
+    backdrop-filter:blur(12px);
     background:rgba(255,255,255,0.08);
     border:1px solid rgba(255,255,255,0.15);
-    box-shadow:var(--glow);
-    transition:all .4s ease;
-    overflow:hidden;
-}
-
-/* Glow Border */
-.subject a::after{
-    content:"";
-    position:absolute;
-    inset:0;
-    border-radius:50px;
-    padding:1px;
-    background:linear-gradient(135deg,rgba(255,255,255,.4),transparent);
-    -webkit-mask:
-        linear-gradient(#000 0 0) content-box,
-        linear-gradient(#000 0 0);
-    -webkit-mask-composite:xor;
-            mask-composite:exclude;
-    opacity:.4;
-}
-
-/* Shine */
-.subject a::before{
-    content:"";
-    position:absolute;
-    top:0;
-    left:-120%;
-    width:100%;
-    height:100%;
-    background:linear-gradient(120deg,transparent,rgba(255,255,255,.25),transparent);
-    transition:.7s;
-}
-
-.subject a:hover::before{
-    left:120%;
+    color:#fff;
+    transition:.4s;
 }
 
 .subject a:hover{
-    transform:translateY(-8px) scale(1.03);
-    box-shadow:0 18px 45px rgba(0,0,0,.55);
+    transform:scale(1.04);
+    box-shadow:0 10px 35px rgba(0,0,0,.5);
 }
 
-/* ICON */
 .icon{
-    width:54px;
-    height:54px;
-    border-radius:50%;
-    display:flex;
-    align-items:center;
-    justify-content:center;
     font-size:24px;
-    background:rgba(255,255,255,.15);
-    box-shadow:0 8px 25px rgba(0,0,0,.4);
 }
 
-/* TEXT */
-.subject a span{
+.subject span{
     text-align:center;
     font-weight:900;
-    letter-spacing:.6px;
-    font-size:21px;
 }
 
-/* ARROW */
 .arrow{
-    font-size:24px;
-    transition:transform .3s ease;
+    font-size:22px;
+    transition:.3s;
 }
 
 .subject a:hover .arrow{
-    transform:translateX(10px);
-}
-
-/* LIGHT MODE FIX */
-body.light .subject a{
-    background:rgba(255,255,255,.6);
-    border:1px solid rgba(0,0,0,.08);
-    box-shadow:0 10px 25px rgba(0,0,0,.12);
-}
-
-body.light .icon{
-    background:rgba(0,0,0,.05);
+    transform:translateX(8px);
 }
 
 /* TELEGRAM */
 .telegram{
-    margin:60px auto 80px;
+    margin:50px auto 70px;
 }
-
 .telegram a{
     display:inline-block;
     width:90%;
     max-width:360px;
-    padding:16px;
+    padding:14px;
     border-radius:40px;
     background:linear-gradient(135deg,#229ED9,#38bdf8);
     color:#fff;
     text-decoration:none;
     font-weight:800;
-    box-shadow:0 10px 24px rgba(0,0,0,.35);
-}
-
-/* TOGGLE */
-.toggle{
-    position:fixed;
-    top:16px;
-    right:16px;
-    background:#fff;
-    border:none;
-    border-radius:50%;
-    width:42px;
-    height:42px;
-    cursor:pointer;
-    box-shadow:0 6px 16px rgba(0,0,0,.25);
-    z-index:2;
 }
 
 </style>
@@ -236,73 +160,71 @@ body.light .icon{
 
 <body>
 
-<div class="parallax-bg"></div>
-
-<button class="toggle" onclick="document.body.classList.toggle('light')">🌙</button>
-
-<div class="header">
-    <h1>GAITH TEAM <span>❤️</span></h1>
-    <p>الامتحان في جيبك</p>
+<!-- 🎬 SPLASH -->
+<div class="splash">
+    <h1>GAITH <span>TEAM</span></h1>
+    <div class="loader"></div>
 </div>
 
-<div class="container">
+<!-- 📱 APP -->
+<div class="app" id="app">
 
-    <div class="subject">
-        <a href="#">
-            <div class="icon">🍼</div>
-            <span>تمريض أطفال</span>
-            <div class="arrow">▸</div>
-        </a>
+    <div class="header">
+        <h1>GAITH TEAM ❤️</h1>
+        <p>الامتحان في جيبك</p>
     </div>
 
-    <div class="subject">
-        <a href="#">
-            <div class="icon">🤰</div>
-            <span>تمريض نسا وتوليد</span>
-            <div class="arrow">▸</div>
-        </a>
-    </div>
+    <div class="container">
 
-    <div class="subject">
-        <a href="#">
-            <div class="icon">🩺</div>
-            <span>تمريض باطني جراحي 1 (عملي)</span>
-            <div class="arrow">▸</div>
-        </a>
-    </div>
+        <div class="subject">
+            <a href="#">
+                <div class="icon">🍼</div>
+                <span>تمريض أطفال</span>
+                <div class="arrow">▸</div>
+            </a>
+        </div>
 
-    <div class="subject">
-        <a href="#">
-            <div class="icon">📊</div>
-            <span>تمريض إدارة</span>
-            <div class="arrow">▸</div>
-        </a>
-    </div>
+        <div class="subject">
+            <a href="#">
+                <div class="icon">🤰</div>
+                <span>تمريض نسا وتوليد</span>
+                <div class="arrow">▸</div>
+            </a>
+        </div>
 
-    <div class="subject">
-        <a href="#">
-            <div class="icon">🧠</div>
-            <span>تمريض نفسية ( معهد فني صحي )</span>
-            <div class="arrow">▸</div>
-        </a>
-    </div>
+        <div class="subject">
+            <a href="#">
+                <div class="icon">🩺</div>
+                <span>تمريض باطني جراحي 1 (عملي)</span>
+                <div class="arrow">▸</div>
+            </a>
+        </div>
 
-    <div class="telegram">
-        <a href="https://t.me/nursing2bu" target="_blank">
-            ✈️ انضم إلينا على Telegram
-        </a>
-    </div>
+        <div class="subject">
+            <a href="#">
+                <div class="icon">📊</div>
+                <span>تمريض إدارة</span>
+                <div class="arrow">▸</div>
+            </a>
+        </div>
 
+        <div class="subject">
+            <a href="#">
+                <div class="icon">🧠</div>
+                <span>تمريض نفسية ( معهد فني صحي )</span>
+                <div class="arrow">▸</div>
+            </a>
+        </div>
+
+        <div class="telegram">
+            <a href="https://t.me/nursing2bu" target="_blank">
+                ✈️ انضم إلينا على Telegram
+            </a>
+        </div>
+
+    </div>
 </div>
 
-<script>
-document.addEventListener("mousemove", function(e){
-    const x = (window.innerWidth / 2 - e.pageX) / 40;
-    const y = (window.innerHeight / 2 - e.pageY) / 40;
-    document.querySelector(".parallax-bg")
-        .style.transform = `translate(${x}px, ${y}px)`;
-});
-</script>
 
 </body>
 </html>
