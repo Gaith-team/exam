@@ -12,10 +12,15 @@
     --ped-a:#a7f3d0;
     --ped-b:#34d399;
     --ped-dark:#065f46;
-    --shadow:0 10px 25px rgba(0,0,0,.15);
+    --ped-done-a:#6ee7b7;
+    --ped-done-b:#059669;
+    --shadow:0 12px 28px rgba(0,0,0,.15);
 }
 
-*{box-sizing:border-box;font-family:'Cairo',sans-serif}
+*{
+    box-sizing:border-box;
+    font-family:'Cairo',sans-serif;
+}
 
 body{
     margin:0;
@@ -24,69 +29,93 @@ body{
     color:#064e3b;
 }
 
-/* Header */
+/* ===== Header ===== */
 .header{
-    padding:50px 20px 30px;
+    padding:50px 20px 20px;
 }
 
 .header h1{
     margin:0;
-    font-size:28px;
+    font-size:30px;
 }
 
 .header p{
+    margin-top:10px;
     opacity:.7;
-    margin-top:8px;
 }
 
-/* Container */
+/* ===== Grid ===== */
 .container{
     width:92%;
-    max-width:600px;
-    margin:auto;
+    max-width:700px;
+    margin:30px auto 60px;
+    display:grid;
+    grid-template-columns:repeat(2,1fr);
+    gap:18px;
 }
 
-/* Quiz Card */
-.quiz-card{
-    margin:18px 0;
-    animation:fadeIn .6s ease;
-}
-
+/* ===== Quiz Card ===== */
 .quiz-card a{
-    display:flex;
-    justify-content:space-between;
-    align-items:center;
-    padding:18px 24px;
-    text-decoration:none;
-    border-radius:40px;
-    background:linear-gradient(135deg,var(--ped-a),var(--ped-b));
-    color:var(--ped-dark);
-    font-weight:700;
-    box-shadow:var(--shadow);
-    transition:.3s;
-}
-
-.quiz-card a:hover{
-    transform:translateY(-4px);
-    filter:brightness(1.05);
-}
-
-.icon{
-    background:#ecfdf5;
-    width:38px;
-    height:38px;
-    border-radius:50%;
     display:flex;
     align-items:center;
     justify-content:center;
+    gap:10px;
+    height:90px;
+    text-decoration:none;
+    border-radius:25px;
     font-size:18px;
-    box-shadow:0 5px 12px rgba(0,0,0,.2);
+    font-weight:700;
+    background:linear-gradient(135deg,var(--ped-a),var(--ped-b));
+    color:var(--ped-dark);
+    box-shadow:var(--shadow);
+    transition:.35s ease;
+    position:relative;
+    overflow:hidden;
 }
 
-/* Animation */
-@keyframes fadeIn{
-    from{opacity:0;transform:translateY(15px)}
-    to{opacity:1;transform:translateY(0)}
+/* Hover */
+.quiz-card a:hover{
+    transform:translateY(-6px);
+    box-shadow:0 18px 35px rgba(0,0,0,.2);
+}
+
+/* Shine */
+.quiz-card a::after{
+    content:"";
+    position:absolute;
+    top:0;
+    left:-100%;
+    width:100%;
+    height:100%;
+    background:linear-gradient(120deg,transparent,rgba(255,255,255,.5),transparent);
+    transition:.6s;
+}
+
+.quiz-card a:hover::after{
+    left:100%;
+}
+
+/* ===== DONE STYLE ===== */
+.quiz-card a.done{
+    background:linear-gradient(135deg,var(--ped-done-a),var(--ped-done-b));
+    color:#fff;
+}
+
+.quiz-card a.done:hover{
+    transform:translateY(-4px);
+    box-shadow:0 18px 35px rgba(0,0,0,.25);
+}
+
+.status{
+    font-size:20px;
+    font-weight:900;
+}
+
+/* Responsive */
+@media(max-width:600px){
+    .container{
+        grid-template-columns:1fr;
+    }
 }
 </style>
 </head>
@@ -95,36 +124,45 @@ body{
 
 <div class="header">
     <h1>🍼 تمريض أطفال</h1>
-    <p>اختر الكويز اللي تحلّه</p>
+    <p>اختر الكويز اللي أنت عاوز تحلّه</p>
 </div>
 
 <div class="container">
 
-<!-- 20 Quiz Links -->
+<div class="quiz-card"><a href="quiz1.html" data-quiz="quiz1">🍼  Growth and development <span class="status"></span></a></div>
+<div class="quiz-card"><a href="quiz2.html" data-quiz="quiz2">🍼 newborn <span class="status"></span></a></div>
+<div class="quiz-card"><a href="quiz3.html" data-quiz="quiz3">🍼 infant <span class="status"></span></a></div>
+<div class="quiz-card"><a href="quiz4.html" data-quiz="quiz4">🍼 Toddler <span class="status"></span></a></div>
+<div class="quiz-card"><a href="quiz5.html" data-quiz="quiz5">🍼 preschool <span class="status"></span></a></div>
+<div class="quiz-card"><a href="quiz6.html" data-quiz="quiz6">🍼 school <span class="status"></span></a></div>
+<div class="quiz-card"><a href="quiz7.html" data-quiz="quiz7">🍼 Adolescence <span class="status"></span></a></div>
+<div class="quiz-card"><a href="quiz8.html" data-quiz="quiz8">🍼 مراجعة الفصل الأول <span class="status"></span></a></div>
+<div class="quiz-card"><a href="quiz9.html" data-quiz="quiz9">🍼 كويز 9 <span class="status"></span></a></div>
+<div class="quiz-card"><a href="quiz10.html" data-quiz="quiz10">🍼 كويز 10 <span class="status"></span></a></div>
 
-<div class="quiz-card"><a href="quiz1.html"><span>كويز 1</span><div class="icon">🍼</div></a></div>
-<div class="quiz-card"><a href="quiz2.html"><span>كويز 2</span><div class="icon">🍼</div></a></div>
-<div class="quiz-card"><a href="quiz3.html"><span>كويز 3</span><div class="icon">🍼</div></a></div>
-<div class="quiz-card"><a href="quiz4.html"><span>كويز 4</span><div class="icon">🍼</div></a></div>
-<div class="quiz-card"><a href="quiz5.html"><span>كويز 5</span><div class="icon">🍼</div></a></div>
-<div class="quiz-card"><a href="quiz6.html"><span>كويز 6</span><div class="icon">🍼</div></a></div>
-<div class="quiz-card"><a href="quiz7.html"><span>كويز 7</span><div class="icon">🍼</div></a></div>
-<div class="quiz-card"><a href="quiz8.html"><span>كويز 8</span><div class="icon">🍼</div></a></div>
-<div class="quiz-card"><a href="quiz9.html"><span>كويز 9</span><div class="icon">🍼</div></a></div>
-<div class="quiz-card"><a href="quiz10.html"><span>كويز 10</span><div class="icon">🍼</div></a></div>
-
-<div class="quiz-card"><a href="quiz11.html"><span>كويز 11</span><div class="icon">🍼</div></a></div>
-<div class="quiz-card"><a href="quiz12.html"><span>كويز 12</span><div class="icon">🍼</div></a></div>
-<div class="quiz-card"><a href="quiz13.html"><span>كويز 13</span><div class="icon">🍼</div></a></div>
-<div class="quiz-card"><a href="quiz14.html"><span>كويز 14</span><div class="icon">🍼</div></a></div>
-<div class="quiz-card"><a href="quiz15.html"><span>كويز 15</span><div class="icon">🍼</div></a></div>
-<div class="quiz-card"><a href="quiz16.html"><span>كويز 16</span><div class="icon">🍼</div></a></div>
-<div class="quiz-card"><a href="quiz17.html"><span>كويز 17</span><div class="icon">🍼</div></a></div>
-<div class="quiz-card"><a href="quiz18.html"><span>كويز 18</span><div class="icon">🍼</div></a></div>
-<div class="quiz-card"><a href="quiz19.html"><span>كويز 19</span><div class="icon">🍼</div></a></div>
-<div class="quiz-card"><a href="quiz20.html"><span>كويز 20</span><div class="icon">🍼</div></a></div>
+<div class="quiz-card"><a href="quiz11.html" data-quiz="quiz11">🍼 كويز 11 <span class="status"></span></a></div>
+<div class="quiz-card"><a href="quiz12.html" data-quiz="quiz12">🍼 كويز 12 <span class="status"></span></a></div>
+<div class="quiz-card"><a href="quiz13.html" data-quiz="quiz13">🍼 كويز 13 <span class="status"></span></a></div>
+<div class="quiz-card"><a href="quiz14.html" data-quiz="quiz14">🍼 كويز 14 <span class="status"></span></a></div>
+<div class="quiz-card"><a href="quiz15.html" data-quiz="quiz15">🍼 كويز 15 <span class="status"></span></a></div>
+<div class="quiz-card"><a href="quiz16.html" data-quiz="quiz16">🍼 كويز 16 <span class="status"></span></a></div>
+<div class="quiz-card"><a href="quiz17.html" data-quiz="quiz17">🍼 كويز 17 <span class="status"></span></a></div>
+<div class="quiz-card"><a href="quiz18.html" data-quiz="quiz18">🍼 كويز 18 <span class="status"></span></a></div>
+<div class="quiz-card"><a href="quiz19.html" data-quiz="quiz19">🍼 كويز 19 <span class="status"></span></a></div>
+<div class="quiz-card"><a href="quiz20.html" data-quiz="quiz20">🍼 كويز 20 <span class="status"></span></a></div>
 
 </div>
+
+<script>
+document.querySelectorAll(".quiz-card a").forEach(link=>{
+    let quizName = link.dataset.quiz;
+
+    if(localStorage.getItem(quizName+"_done")){
+        link.classList.add("done");
+        link.querySelector(".status").innerHTML="✔";
+    }
+});
+</script>
 
 </body>
 </html>
