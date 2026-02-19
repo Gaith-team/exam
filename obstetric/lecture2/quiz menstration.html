@@ -1,0 +1,537 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaith Team | Exam</title>
+
+<style>
+:root{
+  --primary:#0284c7;
+  --secondary:#0ea5e9;
+  --bg:#f8fbff;
+  --card:#ffffff;
+  --soft:#e6f0ff;
+  --question:#eef7ff;
+  --option:#f9fcff;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --text:#0f172a;
+
+  /* Brand dynamic */
+  --brand1:#ffffff;
+  --brand2:#e0f2fe;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#eef6ff);
+  color:var(--text);
+}
+
+/* ================= HEADER ================= */
+header{
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* ===== Brand ===== */
+.logo{
+  position:relative;
+  font-size:28px;
+  font-weight:900;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.brand-text{
+  background:linear-gradient(90deg,var(--brand1),var(--brand2),var(--brand1));
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 4s linear infinite;
+}
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+.heart{
+  display:inline-block;
+  animation:heartbeat 1.6s infinite ease-in-out;
+}
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  animation:twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle{
+  0%{opacity:0;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.2)}
+  100%{opacity:0;transform:scale(.6)}
+}
+
+/* Reduced motion أثناء الامتحان */
+.exam .sparkle{animation-duration:5s;opacity:.4}
+.exam .heart{animation-duration:2.5s}
+
+/* After exam */
+.after .sparkle{animation-duration:2s}
+.after .heart{animation-duration:1.1s}
+
+/* ================= LAYOUT ================= */
+.container{max-width:520px;margin:auto;padding:16px}
+
+/* ===== Top Bar ===== */
+.top-bar{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+}
+.progress-box{
+  flex:1;
+  background:var(--card);
+  padding:14px;
+  border-radius:18px;
+  box-shadow:0 10px 22px rgba(2,132,199,.12);
+}
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px;
+  font-weight:800;
+  font-size:14px;
+}
+.progress{
+  height:8px;
+  background:var(--soft);
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+}
+
+/* Timer */
+.timer{
+  width:64px;height:64px;border-radius:50%;
+  background:conic-gradient(var(--primary) 0deg,var(--soft) 0deg);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;
+  background-color:var(--card);
+}
+
+/* ================= CARD ================= */
+.card{
+  background:var(--card);
+  padding:22px;
+  border-radius:24px;
+  box-shadow:0 18px 36px rgba(2,132,199,.18);
+}
+.question-title{
+  background:var(--question);
+  padding:16px;
+  border-radius:16px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+.option{
+  background:var(--option);
+  border:2px solid var(--soft);
+  border-radius:18px;
+  padding:15px;
+  margin:12px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.correct{background:#eafaf1;border-color:var(--success)}
+.option.wrong{background:#fff1f1;border-color:var(--danger)}
+.option.disabled{pointer-events:none;opacity:.9}
+
+button{
+  margin-top:18px;
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-weight:900;
+}
+
+/* Feedback */
+.feedback{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:10px;
+  animation:pop .5s;
+}
+@keyframes pop{
+  0%{transform:scale(.6);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* Report */
+.report{
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  border-left:6px solid var(--soft);
+}
+.report.correct{border-color:var(--success)}
+.report.wrong{border-color:var(--danger)}
+</style>
+</head>
+
+<body class="exam">
+
+<header>
+  <div class="logo">
+    <span class="brand-text">Gaith Team</span>
+    <span class="heart">💖</span>
+    <span class="sparkle" style="top:-8px;left:0">✨</span>
+    <span class="sparkle" style="top:6px;right:-8px">✨</span>
+    <span class="sparkle" style="bottom:-8px;left:50%">✨</span>
+  </div>
+  <div style="margin-top:6px;font-weight:800">الإمتحان في جيبك 👏🏻</div>
+</header>
+
+<div class="container">
+
+  <div class="top-bar">
+    <div class="progress-box">
+      <div class="progress-text">
+        <span id="progressText"></span>
+        <span>
+          ✔️ <span id="correctCount">0</span> |
+          ❌ <span id="wrongCount">0</span> |
+          ⏳ <span id="remainPercent">100%</span>
+        </span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="timer" id="timer">15:00</div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<script>
+/* ===== Questions ===== */
+let questions = [
+// --- EASY: Knowledge ---
+  {
+    t: "What is the definition of menstruation?",
+    o: ["Bleeding due to fertilization", "Cyclic uterine bleeding in response to hormonal changes", "Bleeding caused by infection", "Permanent cessation of the cycle"],
+    a: 1
+  },
+  {
+    t: "What is the average duration of normal menstrual flow?",
+    o: ["1-2 days", "3-5 days", "7-10 days", "14 days"],
+    a: 1
+  },
+  {
+    t: "The 'Key of menstruation' (D/C) normally represents:",
+    o: ["1 day / 1 week", "3-5 days / 3-5 weeks", "7 days / 28 days", "10 days / 1 month"],
+    a: 1
+  },
+  {
+    t: "Which hormone is responsible for building up or thickening the uterine lining during the follicular phase?",
+    o: ["Progesterone", "Estrogen", "LH", "FSH"],
+    a: 1
+  },
+  {
+    t: "At what day of a 28-day cycle does ovulation typically occur?",
+    o: ["Day 1", "Day 7", "Day 14", "Day 28"],
+    a: 2
+  },
+  {
+    t: "The 'Spinnbarkiet test' measures the stretchability of:",
+    o: ["Uterine muscle", "Cervical mucus", "Endometrium", "Vaginal wall"],
+    a: 1
+  },
+  {
+    t: "How often should disposable sanitary pads be changed to maintain hygiene?",
+    o: ["Every 24 hours", "Every 12 hours", "At least every 6 hours", "Only once a day"],
+    a: 2
+  },
+  {
+    t: "Which phase of the endometrial cycle lasts about 2 days and occurs if pregnancy does not happen?",
+    o: ["Menstrual phase", "Proliferative phase", "Secretory phase", "Ischemic phase"],
+    a: 3
+  },
+  {
+    t: "The average daily loss of iron during menstruation is:",
+    o: ["0.1 to 0.2 mg", "0.5 to 1 mg", "5 to 10 mg", "20 mg"],
+    a: 1
+  },
+
+  // --- MEDIUM: Assessment / Interpretation ---
+  {
+    t: "A woman has a menstrual cycle every 18 days. This condition is known as:",
+    o: ["Oligomenorrhea", "Polymenorrhea", "Hypomenorrhea", "Menorrhagia"],
+    a: 1
+  },
+  {
+    t: "Excessive amount or prolonged duration of menstruation with a fixed intermenstrual period is called:",
+    o: ["Metrorrhagia", "Menorrhagia", "Polymenorrhea", "Hypomenorrhea"],
+    a: 1
+  },
+  {
+    t: "What happens to the corpus luteum if the ovum is NOT fertilized?",
+    o: ["It becomes a placenta", "It grows larger", "It degenerates into the corpus albican", "It starts producing more progesterone"],
+    a: 2
+  },
+  {
+    t: "During the secretory phase, the endometrium increases in thickness to:",
+    o: ["1-2 mm", "3-4 mm", "6-8 mm", "10-12 mm"],
+    a: 2
+  },
+  {
+    t: "Which hormone, secreted by the corpus luteum, further prepares the uterus for pregnancy?",
+    o: ["Estrogen", "FSH", "Progesterone", "HCG"],
+    a: 2
+  },
+  {
+    t: "What is the effect of prostaglandins during the menstrual phase?",
+    o: ["They cause vasodilation", "They control bleeding by causing vasoconstriction and myometrium contraction", "They stimulate ovulation", "They prevent the shedding of the lining"],
+    a: 1
+  },
+  {
+    t: "Which type of exercise is specifically mentioned to help relax 'cranky and irritable moods' during periods?",
+    o: ["Violent exercise", "Yoga", "Weightlifting", "Sprinting"],
+    a: 1
+  },
+  {
+    t: "A girl suffers from headache and breast fullness 7 days before her period. These symptoms are called:",
+    o: ["Menarche", "Menopause", "Menstrual molimina (PMS)", "Amenorrhea"],
+    a: 2
+  },
+  {
+    t: "Which of the following is an appropriate pain relief method for menstrual cramps?",
+    o: ["Cold packs to the abdomen", "Applying local heat (hot-water bottle)", "Vigorous running", "Avoiding all fluids"],
+    a: 1
+  },
+
+  // --- HARD: Problem Solving ---
+  {
+    t: "If a patient has irregular or continuous bleeding not related to menstruation, the condition is:",
+    o: ["Menorrhagia", "Metrorrhagia", "Polymenorrhagia", "Hypomenorrhea"],
+    a: 1
+  },
+  {
+    t: "The 'Ischemic phase' results from the loss of support from which two hormones?",
+    o: ["FSH and LH", "Estrogen and Progesterone", "Oxytocin and Prolactin", "Thyroxine and Insulin"],
+    a: 1
+  },
+  {
+    t: "Why is it recommended to lie on the left side during rest periods in pregnancy (related to circulation)?",
+    o: ["It stops menstruation", "It increases blood supply to the fetus", "It prevents PMS", "It reduces sweating"],
+    a: 1
+  },
+  {
+    t: "Which phase of the ovarian cycle is under the primary influence of FSH?",
+    o: ["Luteal phase", "Ovulation phase", "Follicular phase", "Ischemic phase"],
+    a: 2
+  },
+  {
+    t: "The 'Regenerative phase' of the endometrial cycle involves:",
+    o: ["Shedding of the functional layer", "Regeneration of surface epithelium from the bases of uterine glands", "Formation of the corpus luteum", "Necrosis of spiral arterioles"],
+    a: 1
+  },
+  {
+    t: "What is the clinical term for a menstrual cycle that occurs every 40 days?",
+    o: ["Polymenorrhea", "Oligomenorrhea", "Menorrhagia", "Metrorrhagia"],
+    a: 1
+  },
+  {
+    t: "Which specific type of analgesic is mentioned as being 'specific to menstrual pain' because it inhibits prostaglandins?",
+    o: ["Aspirin", "Ibuprofen", "Paracetamol", "Morphine"],
+    a: 1
+  },
+  {
+    t: "Menstruation occurs when the ovum is successfully fertilized.",
+    o: ["True", "False"],
+    a: 1
+  },
+  {
+    t: "The follicular phase of the ovarian cycle typically lasts from day 1 to day 14.",
+    o: ["True", "False"],
+    a: 0
+  },
+  {
+    t: "Hypomenorrhea refers to a menstrual duration of more than 5 days.",
+    o: ["True", "False"],
+    a: 1
+  },
+  {
+    t: "Cervical mucus stretches 5-10 cm during the proliferative phase (positive spinnbarkiet test).",
+    o: ["True", "False"],
+    a: 0
+  },
+  {
+    t: "During menstruation, it is advised to avoid all forms of exercise, including walking.",
+    o: ["True", "False"],
+    a: 1
+  }
+];
+
+
+
+// ===== shuffle questions only =====
+function shuffleQuestions(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+// خلط الأسئلة فقط
+shuffleQuestions(questions);
+
+// تعريف المتغيرات الناقصة
+let i = 0;
+let correct = 0;
+let wrong = 0;
+let answers = [];
+let wrongSet = [];
+
+/* ===== Timer ===== */
+let totalTime=15*60, timeLeft=totalTime;
+const timerInt=setInterval(()=>{
+  timeLeft--;
+  let m=Math.floor(timeLeft/60), s=timeLeft%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  let deg=(timeLeft/totalTime)*360;
+  timer.style.background=`conic-gradient(var(--primary) ${deg}deg,var(--soft) ${deg}deg)`;
+  if(timeLeft<=0){clearInterval(timerInt);finishExam();}
+},1000);
+
+/* ===== UI ===== */
+function updateTop(){
+  let total=questions.length;
+  let answered=correct+wrong;
+  progressText.innerText=`سؤال ${i+1} من ${total}`;
+  progressBar.style.width=((i+1)/total*100)+"%";
+  correctCount.innerText=correct;
+  wrongCount.innerText=wrong;
+  remainPercent.innerText=Math.round(((total-answered)/total)*100)+"%";
+}
+
+/* ===== Render ===== */
+function show(){
+  updateTop();
+  let q = questions[i];
+
+  app.innerHTML = `
+    <div class="card">
+      <div class="question-title">${q.t}</div>
+      ${q.o.map((o,idx)=>`
+        <div class="option" onclick="choose(${idx})">${o}</div>
+      `).join("")}
+    </div>
+  `;
+}
+/* ===== Choose ===== */
+function choose(v){
+  if(answers[i]!=null) return;
+  answers[i]=v;
+  let ok=v===questions[i].a;
+  ok?correct++:wrong++;
+  app.innerHTML=`
+    <div class="feedback">${ok?"🎉 شاطر جدًا كمل":"😅 ركّز يا سُكر"}</div>
+    <div class="card">
+      <div class="question-title">${questions[i].t}</div>
+      ${questions[i].o.map((o,j)=>`
+        <div class="option ${j===questions[i].a?"correct":j===v?"wrong":""} disabled">${o}</div>
+      `).join("")}
+      <button onclick="next()">التالي</button>
+    </div>`;
+}
+
+/* ===== Next ===== */
+function next(){
+  if(i<questions.length-1){i++;show();}
+  else finishExam();
+}
+
+/* ===== Finish ===== */
+function finishExam(){
+  document.body.classList.remove("exam");
+  document.body.classList.add("after");
+
+  let score=Math.round((correct/questions.length)*100);
+
+  if(score>=80){
+    document.documentElement.style.setProperty("--brand1","#22c55e");
+    document.documentElement.style.setProperty("--brand2","#fde047");
+  }else if(score>=50){
+    document.documentElement.style.setProperty("--brand1","#38bdf8");
+    document.documentElement.style.setProperty("--brand2","#e0f2fe");
+  }else{
+    document.documentElement.style.setProperty("--brand1","#fb923c");
+    document.documentElement.style.setProperty("--brand2","#fed7aa");
+  }
+
+  wrongSet=[];
+  let report="";
+  questions.forEach((q,idx)=>{
+    let ok=answers[idx]===q.a;
+    if(!ok) wrongSet.push(q);
+    report+=`
+      <div class="report ${ok?"correct":"wrong"}">
+        <b>${q.t}</b><br>
+إجابتك: ${answers[idx]!=null ? q.o[answers[idx]] : "لم يتم الحل"}<br>
+الصح: ${q.o[q.a]}
+      </div>`;
+  });
+
+  app.innerHTML=`
+    <div class="card">
+      <h3>?? تقريرك</h3>
+      ${report}
+      ${wrongSet.length?`<button onclick="retry()">إعادة حل الغلط فقط</button>`:"<p>أنت ممتاز 👑</p>"}
+    </div>`;
+}
+
+/* ===== Retry Wrong ===== */
+function retry(){
+  // نبدأ امتحان جديد بالأسئلة الغلط فقط
+  questions = [...wrongSet];
+
+  answers = [];
+  wrongSet = [];
+  i = 0;
+  correct = 0;
+  wrong = 0;
+
+  // رجوع لشكل الامتحان
+  document.body.classList.remove("after");
+  document.body.classList.add("exam");
+
+  show();
+}
+
+show();
+</script>
+
+</body>
+</html>
