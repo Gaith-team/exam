@@ -1,0 +1,537 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaith Team | Exam</title>
+
+<style>
+:root{
+  --primary:#0284c7;
+  --secondary:#0ea5e9;
+  --bg:#f8fbff;
+  --card:#ffffff;
+  --soft:#e6f0ff;
+  --question:#eef7ff;
+  --option:#f9fcff;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --text:#0f172a;
+
+  /* Brand dynamic */
+  --brand1:#ffffff;
+  --brand2:#e0f2fe;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#eef6ff);
+  color:var(--text);
+}
+
+/* ================= HEADER ================= */
+header{
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* ===== Brand ===== */
+.logo{
+  position:relative;
+  font-size:28px;
+  font-weight:900;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.brand-text{
+  background:linear-gradient(90deg,var(--brand1),var(--brand2),var(--brand1));
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 4s linear infinite;
+}
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+.heart{
+  display:inline-block;
+  animation:heartbeat 1.6s infinite ease-in-out;
+}
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  animation:twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle{
+  0%{opacity:0;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.2)}
+  100%{opacity:0;transform:scale(.6)}
+}
+
+/* Reduced motion أثناء الامتحان */
+.exam .sparkle{animation-duration:5s;opacity:.4}
+.exam .heart{animation-duration:2.5s}
+
+/* After exam */
+.after .sparkle{animation-duration:2s}
+.after .heart{animation-duration:1.1s}
+
+/* ================= LAYOUT ================= */
+.container{max-width:520px;margin:auto;padding:16px}
+
+/* ===== Top Bar ===== */
+.top-bar{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+}
+.progress-box{
+  flex:1;
+  background:var(--card);
+  padding:14px;
+  border-radius:18px;
+  box-shadow:0 10px 22px rgba(2,132,199,.12);
+}
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px;
+  font-weight:800;
+  font-size:14px;
+}
+.progress{
+  height:8px;
+  background:var(--soft);
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+}
+
+/* Timer */
+.timer{
+  width:64px;height:64px;border-radius:50%;
+  background:conic-gradient(var(--primary) 0deg,var(--soft) 0deg);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;
+  background-color:var(--card);
+}
+
+/* ================= CARD ================= */
+.card{
+  background:var(--card);
+  padding:22px;
+  border-radius:24px;
+  box-shadow:0 18px 36px rgba(2,132,199,.18);
+}
+.question-title{
+  background:var(--question);
+  padding:16px;
+  border-radius:16px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+.option{
+  background:var(--option);
+  border:2px solid var(--soft);
+  border-radius:18px;
+  padding:15px;
+  margin:12px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.correct{background:#eafaf1;border-color:var(--success)}
+.option.wrong{background:#fff1f1;border-color:var(--danger)}
+.option.disabled{pointer-events:none;opacity:.9}
+
+button{
+  margin-top:18px;
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-weight:900;
+}
+
+/* Feedback */
+.feedback{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:10px;
+  animation:pop .5s;
+}
+@keyframes pop{
+  0%{transform:scale(.6);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* Report */
+.report{
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  border-left:6px solid var(--soft);
+}
+.report.correct{border-color:var(--success)}
+.report.wrong{border-color:var(--danger)}
+</style>
+</head>
+
+<body class="exam">
+
+<header>
+  <div class="logo">
+    <span class="brand-text">Gaith Team</span>
+    <span class="heart">💖</span>
+    <span class="sparkle" style="top:-8px;left:0">✨</span>
+    <span class="sparkle" style="top:6px;right:-8px">✨</span>
+    <span class="sparkle" style="bottom:-8px;left:50%">✨</span>
+  </div>
+  <div style="margin-top:6px;font-weight:800">الإمتحان في جيبك 👏🏻</div>
+</header>
+
+<div class="container">
+
+  <div class="top-bar">
+    <div class="progress-box">
+      <div class="progress-text">
+        <span id="progressText"></span>
+        <span>
+          ✔️ <span id="correctCount">0</span> |
+          ❌ <span id="wrongCount">0</span> |
+          ⏳ <span id="remainPercent">100%</span>
+        </span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="timer" id="timer">15:00</div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<script>
+/* ===== Questions ===== */
+let questions = [
+ // --- EASY: Knowledge ---
+  {
+    t: "Which sign is characterized by the bluish-violet discoloration of the vagina and cervix due to increased vascularity?",
+    o: ["Goodell's sign", "Chadwick's sign", "Hegar's sign", "Palmer's sign"],
+    a: 1
+  },
+  {
+    t: "The softening of the cervix that occurs around the sixth week of pregnancy is known as:",
+    o: ["Chadwick's sign", "Goodell's sign", "Braxton Hicks", "Linea nigra"],
+    a: 1
+  },
+  {
+    t: "What is the average total weight gain during a normal pregnancy?",
+    o: ["5-7 kg", "8-10 kg", "12-13 kg", "20-25 kg"],
+    a: 2
+  },
+  {
+    t: "Which hormone is primarily responsible for maintaining the endometrium and inhibiting uterine contractions during pregnancy?",
+    o: ["Estrogen", "Progesterone", "HCG", "Relaxin"],
+    a: 1
+  },
+  {
+    t: "The 'line of pigmentation' that appears between the umbilicus and the symphysis pubis is called:",
+    o: ["Striae gravidarum", "Chloasma", "Linea nigra", "Montgomery's tubercles"],
+    a: 2
+  },
+  {
+    t: "At what week of gestation does the placenta typically take over the production of estrogen and progesterone from the corpus luteum?",
+    o: ["4 weeks", "9-10 weeks", "20 weeks", "36 weeks"],
+    a: 1
+  },
+  {
+    t: "The creamy, white-to-yellowish 'pre-milk' fluid that can be expressed as early as 16 weeks is called:",
+    o: ["Leukorrhea", "Ptyalism", "Colostrum", "Lanolin"],
+    a: 2
+  },
+  {
+    t: "What is the name for the irregular, painless contractions that can be felt through the abdominal wall late in pregnancy?",
+    o: ["Palmer's sign", "Braxton Hicks contractions", "Quickening", "Lightening"],
+    a: 1
+  },
+  {
+    t: "During pregnancy, the heart is typically displaced in which direction?",
+    o: ["Downwards and to the right", "Upwards and outwards to the left", "Downwards and to the left", "It does not move"],
+    a: 1
+  },
+
+  // --- MEDIUM: Assessment / Interpretation ---
+  {
+    t: "A pregnant woman complains of 'stuffiness' in her nose and occasional nosebleeds (epistaxis). This is likely due to:",
+    o: ["A common cold", "Increased estrogen levels causing nasal mucosal engorgement", "Vitamin C deficiency", "High blood pressure"],
+    a: 1
+  },
+  {
+    t: "Why does the glomerular filtration rate (GFR) increase by approximately 50% during pregnancy?",
+    o: ["To compensate for decreased blood volume", "Due to increased renal plasma flow and blood volume", "Because the kidneys shrink", "To prevent protein loss"],
+    a: 1
+  },
+  {
+    t: "The 'supine hypotension syndrome' occurs when a pregnant woman lies on her back because:",
+    o: ["The heart rate drops naturally", "The enlarged uterus compresses the inferior vena cava", "The brain receives too much oxygen", "Progesterone levels spike"],
+    a: 1
+  },
+  {
+    t: "Which musculoskeletal change helps a pregnant woman preserve her center of gravity as the uterus grows?",
+    o: ["Kyphosis", "Lordosis", "Scoliosis", "Diastasis recti"],
+    a: 1
+  },
+  {
+    t: "Morning sickness typically appears at the 6th week and disappears after which week?",
+    o: ["8th week", "12th week", "16th week", "20th week"],
+    a: 1
+  },
+  {
+    t: "A separation of the rectus muscles of the abdominal wall during pregnancy is called:",
+    o: ["Striae gravidarum", "Linea nigra", "Diastasis recti", "Umbilical hernia"],
+    a: 2
+  },
+  {
+    t: "What is the primary reason for the 'physiological anemia' of pregnancy?",
+    o: ["Blood loss during the first trimester", "The plasma volume increases more than the red blood cell mass", "Iron is not absorbed at all", "The fetus consumes all the red blood cells"],
+    a: 1
+  },
+  {
+    t: "Which hormone relaxes the cardiac sphincter, often leading to heartburn?",
+    o: ["Estrogen", "Progesterone", "HCG", "HPL"],
+    a: 1
+  },
+  {
+    t: "The uterus increases in weight from 50g to approximately how much at term?",
+    o: ["200g", "500g", "1000g", "2000g"],
+    a: 2
+  },
+
+  // --- HARD: Problem Solving ---
+  {
+    t: "During the first 20 weeks of pregnancy, the average weight gain is only about:",
+    o: ["1 kg", "2.5 kg", "5 kg", "7.5 kg"],
+    a: 1
+  },
+  {
+    t: "Why is the appendix displaced to the right upper quadrant in late pregnancy?",
+    o: ["Due to hormonal shifts", "The growing uterus pushes the stomach and intestines upward and back", "It is a congenital variation", "To protect it from infection"],
+    a: 1
+  },
+  {
+    t: "Which hormone decreases maternal metabolism of glucose to favor fetal growth?",
+    o: ["HCG", "Human Placental Lactogen (HPL)", "Relaxin", "Estrogen"],
+    a: 1
+  },
+  {
+    t: "The 'dextrorotation' of the uterus (twisting to the right) is primarily caused by:",
+    o: ["The position of the liver", "The presence of the sigmoid colon on the left", "The weight of the fetus", "The shape of the pelvis"],
+    a: 1
+  },
+  {
+    t: "If a pregnant woman loses more than 500mg of protein in her urine over 24 hours, this is considered:",
+    o: ["Normal physiological change", "Abnormal (Proteinuria)", "A sign of good kidney function", "Due to high fat intake"],
+    a: 1
+  },
+  {
+    t: "Which respiratory parameter increases by 40% during pregnancy to meet increased oxygen demands?",
+    o: ["Respiratory rate", "Tidal volume", "Total lung capacity", "Vital capacity"],
+    a: 1
+  },
+  {
+    t: "The 'Palmer's sign' refers to:",
+    o: ["Pigmentation of the palms", "Regular uterine contractions detected early in pregnancy via bimanual exam", "Fetal movements", "Softening of the cervix"],
+    a: 1
+  },
+  {
+    t: "The uterus changes from an inverted pear shape to a globular shape by the 8th week of pregnancy.",
+    o: ["True", "False"],
+    a: 0
+  },
+  {
+    t: "Cardiac output decreases by 40% during pregnancy to protect the mother's heart.",
+    o: ["True", "False"],
+    a: 1
+  },
+  {
+    t: "'Pica' refers to the desire for certain non-food materials or specific food cravings during pregnancy.",
+    o: ["True", "False"],
+    a: 0
+  },
+  {
+    t: "The maternal blood volume reaches its maximum increase at 32 weeks of gestation.",
+    o: ["True", "False"],
+    a: 0
+  },
+  {
+    t: "Striae gravidarum (stretch marks) completely disappear immediately after delivery.",
+    o: ["True", "False"],
+    a: 1
+  }
+];
+
+
+
+// ===== shuffle questions only =====
+function shuffleQuestions(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+// خلط الأسئلة فقط
+shuffleQuestions(questions);
+
+// تعريف المتغيرات الناقصة
+let i = 0;
+let correct = 0;
+let wrong = 0;
+let answers = [];
+let wrongSet = [];
+
+/* ===== Timer ===== */
+let totalTime=15*60, timeLeft=totalTime;
+const timerInt=setInterval(()=>{
+  timeLeft--;
+  let m=Math.floor(timeLeft/60), s=timeLeft%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  let deg=(timeLeft/totalTime)*360;
+  timer.style.background=`conic-gradient(var(--primary) ${deg}deg,var(--soft) ${deg}deg)`;
+  if(timeLeft<=0){clearInterval(timerInt);finishExam();}
+},1000);
+
+/* ===== UI ===== */
+function updateTop(){
+  let total=questions.length;
+  let answered=correct+wrong;
+  progressText.innerText=`سؤال ${i+1} من ${total}`;
+  progressBar.style.width=((i+1)/total*100)+"%";
+  correctCount.innerText=correct;
+  wrongCount.innerText=wrong;
+  remainPercent.innerText=Math.round(((total-answered)/total)*100)+"%";
+}
+
+/* ===== Render ===== */
+function show(){
+  updateTop();
+  let q = questions[i];
+
+  app.innerHTML = `
+    <div class="card">
+      <div class="question-title">${q.t}</div>
+      ${q.o.map((o,idx)=>`
+        <div class="option" onclick="choose(${idx})">${o}</div>
+      `).join("")}
+    </div>
+  `;
+}
+/* ===== Choose ===== */
+function choose(v){
+  if(answers[i]!=null) return;
+  answers[i]=v;
+  let ok=v===questions[i].a;
+  ok?correct++:wrong++;
+  app.innerHTML=`
+    <div class="feedback">${ok?"🎉 شاطر جدًا كمل":"😅 ركّز يا سُكر"}</div>
+    <div class="card">
+      <div class="question-title">${questions[i].t}</div>
+      ${questions[i].o.map((o,j)=>`
+        <div class="option ${j===questions[i].a?"correct":j===v?"wrong":""} disabled">${o}</div>
+      `).join("")}
+      <button onclick="next()">التالي</button>
+    </div>`;
+}
+
+/* ===== Next ===== */
+function next(){
+  if(i<questions.length-1){i++;show();}
+  else finishExam();
+}
+
+/* ===== Finish ===== */
+function finishExam(){
+  document.body.classList.remove("exam");
+  document.body.classList.add("after");
+
+  let score=Math.round((correct/questions.length)*100);
+
+  if(score>=80){
+    document.documentElement.style.setProperty("--brand1","#22c55e");
+    document.documentElement.style.setProperty("--brand2","#fde047");
+  }else if(score>=50){
+    document.documentElement.style.setProperty("--brand1","#38bdf8");
+    document.documentElement.style.setProperty("--brand2","#e0f2fe");
+  }else{
+    document.documentElement.style.setProperty("--brand1","#fb923c");
+    document.documentElement.style.setProperty("--brand2","#fed7aa");
+  }
+
+  wrongSet=[];
+  let report="";
+  questions.forEach((q,idx)=>{
+    let ok=answers[idx]===q.a;
+    if(!ok) wrongSet.push(q);
+    report+=`
+      <div class="report ${ok?"correct":"wrong"}">
+        <b>${q.t}</b><br>
+إجابتك: ${answers[idx]!=null ? q.o[answers[idx]] : "لم يتم الحل"}<br>
+الصح: ${q.o[q.a]}
+      </div>`;
+  });
+
+  app.innerHTML=`
+    <div class="card">
+      <h3>?? تقريرك</h3>
+      ${report}
+      ${wrongSet.length?`<button onclick="retry()">إعادة حل الغلط فقط</button>`:"<p>أنت ممتاز 👑</p>"}
+    </div>`;
+}
+
+/* ===== Retry Wrong ===== */
+function retry(){
+  // نبدأ امتحان جديد بالأسئلة الغلط فقط
+  questions = [...wrongSet];
+
+  answers = [];
+  wrongSet = [];
+  i = 0;
+  correct = 0;
+  wrong = 0;
+
+  // رجوع لشكل الامتحان
+  document.body.classList.remove("after");
+  document.body.classList.add("exam");
+
+  show();
+}
+
+show();
+</script>
+
+</body>
+</html>
