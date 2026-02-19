@@ -1,0 +1,537 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaith Team | Exam</title>
+
+<style>
+:root{
+  --primary:#0284c7;
+  --secondary:#0ea5e9;
+  --bg:#f8fbff;
+  --card:#ffffff;
+  --soft:#e6f0ff;
+  --question:#eef7ff;
+  --option:#f9fcff;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --text:#0f172a;
+
+  /* Brand dynamic */
+  --brand1:#ffffff;
+  --brand2:#e0f2fe;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#eef6ff);
+  color:var(--text);
+}
+
+/* ================= HEADER ================= */
+header{
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* ===== Brand ===== */
+.logo{
+  position:relative;
+  font-size:28px;
+  font-weight:900;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.brand-text{
+  background:linear-gradient(90deg,var(--brand1),var(--brand2),var(--brand1));
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 4s linear infinite;
+}
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+.heart{
+  display:inline-block;
+  animation:heartbeat 1.6s infinite ease-in-out;
+}
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  animation:twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle{
+  0%{opacity:0;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.2)}
+  100%{opacity:0;transform:scale(.6)}
+}
+
+/* Reduced motion أثناء الامتحان */
+.exam .sparkle{animation-duration:5s;opacity:.4}
+.exam .heart{animation-duration:2.5s}
+
+/* After exam */
+.after .sparkle{animation-duration:2s}
+.after .heart{animation-duration:1.1s}
+
+/* ================= LAYOUT ================= */
+.container{max-width:520px;margin:auto;padding:16px}
+
+/* ===== Top Bar ===== */
+.top-bar{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+}
+.progress-box{
+  flex:1;
+  background:var(--card);
+  padding:14px;
+  border-radius:18px;
+  box-shadow:0 10px 22px rgba(2,132,199,.12);
+}
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px;
+  font-weight:800;
+  font-size:14px;
+}
+.progress{
+  height:8px;
+  background:var(--soft);
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+}
+
+/* Timer */
+.timer{
+  width:64px;height:64px;border-radius:50%;
+  background:conic-gradient(var(--primary) 0deg,var(--soft) 0deg);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;
+  background-color:var(--card);
+}
+
+/* ================= CARD ================= */
+.card{
+  background:var(--card);
+  padding:22px;
+  border-radius:24px;
+  box-shadow:0 18px 36px rgba(2,132,199,.18);
+}
+.question-title{
+  background:var(--question);
+  padding:16px;
+  border-radius:16px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+.option{
+  background:var(--option);
+  border:2px solid var(--soft);
+  border-radius:18px;
+  padding:15px;
+  margin:12px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.correct{background:#eafaf1;border-color:var(--success)}
+.option.wrong{background:#fff1f1;border-color:var(--danger)}
+.option.disabled{pointer-events:none;opacity:.9}
+
+button{
+  margin-top:18px;
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-weight:900;
+}
+
+/* Feedback */
+.feedback{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:10px;
+  animation:pop .5s;
+}
+@keyframes pop{
+  0%{transform:scale(.6);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* Report */
+.report{
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  border-left:6px solid var(--soft);
+}
+.report.correct{border-color:var(--success)}
+.report.wrong{border-color:var(--danger)}
+</style>
+</head>
+
+<body class="exam">
+
+<header>
+  <div class="logo">
+    <span class="brand-text">  Nursing our lives🤍🌏 </span>
+    <span class="heart">💖</span>
+    <span class="sparkle" style="top:-8px;left:0">✨</span>
+    <span class="sparkle" style="top:6px;right:-8px">✨</span>
+    <span class="sparkle" style="bottom:-8px;left:50%">✨</span>
+  </div>
+  <div style="margin-top:6px;font-weight:800"> 👏🏻 الإمتحان في جيبك  </div>
+</header>
+
+<div class="container">
+
+  <div class="top-bar">
+    <div class="progress-box">
+      <div class="progress-text">
+        <span id="progressText"></span>
+        <span>
+          ✔️ <span id="correctCount">0</span> |
+          ❌ <span id="wrongCount">0</span> |
+          ⏳ <span id="remainPercent">100%</span>
+        </span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="timer" id="timer">15:00</div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<script>
+/* ===== Questions ===== */
+let questions = [
+ // --- EASY: Knowledge ---
+  {
+    t: "According to the American Psychiatric Association, a mental disorder is associated with:",
+    o: ["Complete independence", "Present distress or disability", "Financial success", "High self-esteem"],
+    a: 1
+  },
+  {
+    t: "Which of the following is an individual factor influencing mental health?",
+    o: ["Effective communication", "Access to adequate resources", "Self-esteem", "Intolerance of violence"],
+    a: 2
+  },
+  {
+    t: "Effective communication and the ability to help others are examples of which factors?",
+    o: ["Individual factors", "Interpersonal factors", "Social factors", "Biological factors"],
+    a: 1
+  },
+  {
+    t: "The ability to distinguish reality from fantasy is an example of:",
+    o: ["Reality orientation", "Social mastery", "Intimacy", "Cultural sanctioning"],
+    a: 0
+  },
+  {
+    t: "Which social/cultural factor contributes to mental illness?",
+    o: ["Excessive dependency", "Biologic makeup", "Homelessness", "Loss of emotional control"],
+    a: 2
+  },
+  {
+    t: "What is defined as the ability to cope with crises without assistance beyond the support of family or friends?",
+    o: ["Mental Illness", "Mental Health", "Disability", "Stigma"],
+    a: 1
+  },
+  {
+    t: "Discrimination such as racism, ageism, and sexism are categorized as:",
+    o: ["Individual factors", "Interpersonal factors", "Social/cultural factors", "Biological factors"],
+    a: 2
+  },
+  {
+    t: "A person's biologic makeup is considered which type of factor?",
+    o: ["Individual", "Interpersonal", "Social", "Environmental"],
+    a: 0
+  },
+  {
+    t: "Which of the following is a general criterion for diagnosing a mental disorder?",
+    o: ["Satisfying relationships", "Personal growth", "Ineffective coping with life events", "Realistic view of the world"],
+    a: 2
+  },
+
+  // --- MEDIUM: Assessment / Interpretation ---
+  {
+    t: "If a person feels dissatisfaction with their characteristics and accomplishments, this is a criterion for:",
+    o: ["Mental health", "Mental illness diagnosis", "Social mastery", "Interdependence"],
+    a: 1
+  },
+  {
+    t: "Emotional resilience or 'hardiness' is a component of:",
+    o: ["Interpersonal factors", "Individual factors of mental health", "Social/cultural factors", "Mental illness"],
+    a: 1
+  },
+  {
+    t: "Which interpersonal factor contributes to mental illness?",
+    o: ["Effective communication", "Withdrawal from relationships", "Sense of belonging", "Intimacy"],
+    a: 1
+  },
+  {
+    t: "A positive, yet realistic, view of one's world is a:",
+    o: ["Social/cultural factor of mental health", "Individual factor of mental illness", "Interpersonal factor of mental health", "Biological factor"],
+    a: 0
+  },
+  {
+    t: "What distinguishes 'deviant behavior' from a mental disorder according to the text?",
+    o: ["Deviant behavior is always a disorder", "Deviant behavior does not necessarily indicate a mental disorder", "Mental disorders are always culturally sanctioned", "There is no difference"],
+    a: 1
+  },
+  {
+    t: "Access to adequate resources is classified as a:",
+    o: ["Personal factor", "Relationship factor", "Social/cultural factor", "Biological factor"],
+    a: 2
+  },
+  {
+    t: "A sense of disharmony in life and loss of meaning are:",
+    o: ["Individual factors contributing to mental illness", "Interpersonal factors of mental health", "Social factors of mental illness", "Biological factors of health"],
+    a: 0
+  },
+  {
+    t: "Intimacy and a balance of separateness and connectedness are:",
+    o: ["Individual factors", "Interpersonal factors of mental health", "Social factors", "Signs of illness"],
+    a: 1
+  },
+  {
+    t: "Unrealistic worries and fears are categorized as:",
+    o: ["Social factors of illness", "Individual factors contributing to mental illness", "Interpersonal factors of health", "Cultural factors"],
+    a: 1
+  },
+
+  // --- HARD: Problem Solving ---
+  {
+    t: "A patient reports feeling 'disconnected' from their community and lacks access to basic resources like housing. These factors are:",
+    o: ["Individual", "Interpersonal", "Social/cultural", "Biological"],
+    a: 2
+  },
+  {
+    t: "A person is able to set realistic limits and maintain independence while also being able to be dependent when the need arises. This describes:",
+    o: ["Mental illness", "Interdependence within mental health", "Disability", "Loss of freedom"],
+    a: 1
+  },
+  {
+    t: "Why is 'reality orientation' critical for mental health?",
+    o: ["It allows one to withdraw from relationships", "It is the ability to distinguish reality from fantasy", "It ensures one has no worries", "It is a social factor"],
+    a: 1
+  },
+  {
+    t: "Which scenario best fits the definition of mental illness?",
+    o: ["Coping with a crisis with family support", "Feeling sad after a loss but continuing to function", "A pattern of behavior associated with disability in important areas of functioning", "Having a unique cultural practice"],
+    a: 2
+  },
+  {
+    t: "Ineffective communication is a factor that can contribute to:",
+    o: ["Both mental health and illness", "Mental illness (Interpersonal category)", "Mental health (Individual category)", "Social mastery"],
+    a: 1
+  },
+  {
+    t: "The 'capacity for growth' is an individual factor. Its lack is a criterion for:",
+    o: ["Mental health", "Mental illness", "Social mastery", "Biological makeup"],
+    a: 1
+  },
+  {
+    t: "Stigma and discrimination are social factors that primarily lead to:",
+    o: ["Improved self-esteem", "Mental health", "Mental illness and social exclusion", "Increased autonomy"],
+    a: 2
+ },
+  {
+    t: "Mental health is influenced solely by a person's biological makeup.",
+    o: ["True", "False"],
+    a: 1
+  },
+  {
+    t: "Deviant behavior always indicates the presence of a mental disorder.",
+    o: ["True", "False"],
+    a: 1
+  },
+  {
+    t: "The ability to find meaning in life is an individual factor of mental health.",
+    o: ["True", "False"],
+    a: 0
+  },
+  {
+    t: "Excessive dependency on others is an interpersonal factor that contributes to mental illness.",
+    o: ["True", "False"],
+    a: 0
+  },
+  {
+    t: "A sense of belonging is an interpersonal factor for mental health, but its absence is an interpersonal factor for mental illness.",
+    o: ["True", "False"],
+    a: 0
+  }
+];
+
+
+
+// ===== shuffle questions only =====
+function shuffleQuestions(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+// خلط الأسئلة فقط
+shuffleQuestions(questions);
+
+// تعريف المتغيرات الناقصة
+let i = 0;
+let correct = 0;
+let wrong = 0;
+let answers = [];
+let wrongSet = [];
+
+/* ===== Timer ===== */
+let totalTime=15*60, timeLeft=totalTime;
+const timerInt=setInterval(()=>{
+  timeLeft--;
+  let m=Math.floor(timeLeft/60), s=timeLeft%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  let deg=(timeLeft/totalTime)*360;
+  timer.style.background=`conic-gradient(var(--primary) ${deg}deg,var(--soft) ${deg}deg)`;
+  if(timeLeft<=0){clearInterval(timerInt);finishExam();}
+},1000);
+
+/* ===== UI ===== */
+function updateTop(){
+  let total=questions.length;
+  let answered=correct+wrong;
+  progressText.innerText=`سؤال ${i+1} من ${total}`;
+  progressBar.style.width=((i+1)/total*100)+"%";
+  correctCount.innerText=correct;
+  wrongCount.innerText=wrong;
+  remainPercent.innerText=Math.round(((total-answered)/total)*100)+"%";
+}
+
+/* ===== Render ===== */
+function show(){
+  updateTop();
+  let q = questions[i];
+
+  app.innerHTML = `
+    <div class="card">
+      <div class="question-title">${q.t}</div>
+      ${q.o.map((o,idx)=>`
+        <div class="option" onclick="choose(${idx})">${o}</div>
+      `).join("")}
+    </div>
+  `;
+}
+/* ===== Choose ===== */
+function choose(v){
+  if(answers[i]!=null) return;
+  answers[i]=v;
+  let ok=v===questions[i].a;
+  ok?correct++:wrong++;
+  app.innerHTML=`
+    <div class="feedback">${ok?"🎉 شاطر جدًا كمل":"😅 ركّز يا سُكر"}</div>
+    <div class="card">
+      <div class="question-title">${questions[i].t}</div>
+      ${questions[i].o.map((o,j)=>`
+        <div class="option ${j===questions[i].a?"correct":j===v?"wrong":""} disabled">${o}</div>
+      `).join("")}
+      <button onclick="next()">التالي</button>
+    </div>`;
+}
+
+/* ===== Next ===== */
+function next(){
+  if(i<questions.length-1){i++;show();}
+  else finishExam();
+}
+
+/* ===== Finish ===== */
+function finishExam(){
+  document.body.classList.remove("exam");
+  document.body.classList.add("after");
+
+  let score=Math.round((correct/questions.length)*100);
+
+  if(score>=80){
+    document.documentElement.style.setProperty("--brand1","#22c55e");
+    document.documentElement.style.setProperty("--brand2","#fde047");
+  }else if(score>=50){
+    document.documentElement.style.setProperty("--brand1","#38bdf8");
+    document.documentElement.style.setProperty("--brand2","#e0f2fe");
+  }else{
+    document.documentElement.style.setProperty("--brand1","#fb923c");
+    document.documentElement.style.setProperty("--brand2","#fed7aa");
+  }
+
+  wrongSet=[];
+  let report="";
+  questions.forEach((q,idx)=>{
+    let ok=answers[idx]===q.a;
+    if(!ok) wrongSet.push(q);
+    report+=`
+      <div class="report ${ok?"correct":"wrong"}">
+        <b>${q.t}</b><br>
+إجابتك: ${answers[idx]!=null ? q.o[answers[idx]] : "لم يتم الحل"}<br>
+الصح: ${q.o[q.a]}
+      </div>`;
+  });
+
+  app.innerHTML=`
+    <div class="card">
+      <h3>?? تقريرك</h3>
+      ${report}
+      ${wrongSet.length?`<button onclick="retry()">إعادة حل الغلط فقط</button>`:"<p>أنت ممتاز 👑</p>"}
+    </div>`;
+}
+
+/* ===== Retry Wrong ===== */
+function retry(){
+  // نبدأ امتحان جديد بالأسئلة الغلط فقط
+  questions = [...wrongSet];
+
+  answers = [];
+  wrongSet = [];
+  i = 0;
+  correct = 0;
+  wrong = 0;
+
+  // رجوع لشكل الامتحان
+  document.body.classList.remove("after");
+  document.body.classList.add("exam");
+
+  show();
+}
+
+show();
+</script>
+
+</body>
+</html>
