@@ -28,6 +28,20 @@ body.light{
  background:#ecfdf5;
  color:#064e3b;
 }
+/* ===== Review Special Style ===== */
+.review-card{
+ border:1px solid #facc15;
+ background:rgba(250,204,21,0.08);
+}
+
+.review-card[open]{
+ box-shadow:0 0 25px #facc15,
+            0 0 60px rgba(250,204,21,.6);
+}
+
+.review-card summary i{
+ color:#facc15;
+}
 
 /* ===== Galaxy ===== */
 #stars{
@@ -214,17 +228,42 @@ GAITH TEAM <span>💖</span>
 <div class="container">
 
 <script>
-for(let i=1;i<=20;i++){
+const lectures = [
+ {name:"introducation growth and development", icon:"fa-seedling"},
+ {name:"newborn", icon:"fa-baby"},
+ {name:"infant", icon:"fa-baby-carriage"},
+ {name:"toddler", icon:"fa-child"},
+ {name:" pre-school", icon:"fa-puzzle-piece"},
+ {name:"school", icon:"fa-school"},
+ {name:"adolescent", icon:"fa-user-graduate"},
+ {name:"مراجعة الشابتر الأول", icon:"fa-book-open", review:true},
+ {name:"High risk neonates", icon:"fa-hospital-user"},
+ {name:"Endocrine and metabolic disorders", icon:"fa-flask"},
+ {name:"Infectious Disorders", icon:"fa-virus"},
+ {name:"E.N.T and Respiratory problems", icon:"fa-lungs"},
+ {name:"Nutritional disorders", icon:"fa-apple-whole"},
+ {name:"Neurologic disorders", icon:"fa-brain"},
+ {name:"Gastrointestinal Disorders", icon:"fa-stomach"},
+ {name:"Malignant neoplasm", icon:"fa-ribbon"},
+ {name:"Congenital anomalies", icon:"fa-dna"},
+ {name:"Urinary System disorders", icon:"fa-droplet"},
+ {name:"Hematological disorders", icon:"fa-heart-pulse"}
+];
+
+lectures.forEach((lecture, index) => {
  document.write(`
- <details>
- <summary><i class="fa-solid fa-baby"></i> كويز ${i}</summary>
+ <details class="${lecture.review ? 'review-card' : ''}">
+ <summary>
+ <i class="fa-solid ${lecture.icon}"></i> ${lecture.name}
+ </summary>
  <div class="content">
- <a href="quiz${i}.html">🚀 ابدأ الكويز</a>
+ <a href="quiz${index+1}.html">🚀 ابدأ الكويز</a>
  </div>
  </details>
  `);
-}
+});
 </script>
+
 
 </div>
 
