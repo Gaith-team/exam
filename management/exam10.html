@@ -1,0 +1,532 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaith Team | Exam</title>
+
+<style>
+:root{
+  --primary:#0284c7;
+  --secondary:#0ea5e9;
+  --bg:#f8fbff;
+  --card:#ffffff;
+  --soft:#e6f0ff;
+  --question:#eef7ff;
+  --option:#f9fcff;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --text:#0f172a;
+
+  /* Brand dynamic */
+  --brand1:#ffffff;
+  --brand2:#e0f2fe;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#eef6ff);
+  color:var(--text);
+}
+
+/* ================= HEADER ================= */
+header{
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* ===== Brand ===== */
+.logo{
+  position:relative;
+  font-size:28px;
+  font-weight:900;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.brand-text{
+  background:linear-gradient(90deg,var(--brand1),var(--brand2),var(--brand1));
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 4s linear infinite;
+}
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+.heart{
+  display:inline-block;
+  animation:heartbeat 1.6s infinite ease-in-out;
+}
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  animation:twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle{
+  0%{opacity:0;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.2)}
+  100%{opacity:0;transform:scale(.6)}
+}
+
+/* Reduced motion أثناء الامتحان */
+.exam .sparkle{animation-duration:5s;opacity:.4}
+.exam .heart{animation-duration:2.5s}
+
+/* After exam */
+.after .sparkle{animation-duration:2s}
+.after .heart{animation-duration:1.1s}
+
+/* ================= LAYOUT ================= */
+.container{max-width:520px;margin:auto;padding:16px}
+
+/* ===== Top Bar ===== */
+.top-bar{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+}
+.progress-box{
+  flex:1;
+  background:var(--card);
+  padding:14px;
+  border-radius:18px;
+  box-shadow:0 10px 22px rgba(2,132,199,.12);
+}
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px;
+  font-weight:800;
+  font-size:14px;
+}
+.progress{
+  height:8px;
+  background:var(--soft);
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+}
+
+/* Timer */
+.timer{
+  width:64px;height:64px;border-radius:50%;
+  background:conic-gradient(var(--primary) 0deg,var(--soft) 0deg);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;
+  background-color:var(--card);
+}
+
+/* ================= CARD ================= */
+.card{
+  background:var(--card);
+  padding:22px;
+  border-radius:24px;
+  box-shadow:0 18px 36px rgba(2,132,199,.18);
+}
+.question-title{
+  background:var(--question);
+  padding:16px;
+  border-radius:16px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+.option{
+  background:var(--option);
+  border:2px solid var(--soft);
+  border-radius:18px;
+  padding:15px;
+  margin:12px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.correct{background:#eafaf1;border-color:var(--success)}
+.option.wrong{background:#fff1f1;border-color:var(--danger)}
+.option.disabled{pointer-events:none;opacity:.9}
+
+button{
+  margin-top:18px;
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-weight:900;
+}
+
+/* Feedback */
+.feedback{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:10px;
+  animation:pop .5s;
+}
+@keyframes pop{
+  0%{transform:scale(.6);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* Report */
+.report{
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  border-left:6px solid var(--soft);
+}
+.report.correct{border-color:var(--success)}
+.report.wrong{border-color:var(--danger)}
+</style>
+</head>
+
+<body class="exam">
+
+<header>
+  <div class="logo">
+    <span class="brand-text">Gaith Team</span>
+    <span class="heart">💖</span>
+    <span class="sparkle" style="top:-8px;left:0">✨</span>
+    <span class="sparkle" style="top:6px;right:-8px">✨</span>
+    <span class="sparkle" style="bottom:-8px;left:50%">✨</span>
+  </div>
+  <div style="margin-top:6px;font-weight:800">الإمتحان في جيبك 👏🏻</div>
+</header>
+
+<div class="container">
+
+  <div class="top-bar">
+    <div class="progress-box">
+      <div class="progress-text">
+        <span id="progressText"></span>
+        <span>
+          ✔️ <span id="correctCount">0</span> |
+          ❌ <span id="wrongCount">0</span> |
+          ⏳ <span id="remainPercent">100%</span>
+        </span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="timer" id="timer">30:00</div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<script>
+/* ===== Questions ===== */
+let questions = [
+{t:"What is the primary goal of first aid?",o:["Definitive medical treatment","Initial care for illness or injury","Surgery","Long-term rehabilitation"],a:1},
+{t:"Which of the following is NOT a content of a first aid bag?",o:["Antibiotic cream","Disposable gloves","Intravenous fluids","Small towel"],a:2},
+{t:"Shock is defined as a decrease of oxygenated blood supply to the:",o:["Lungs","Heart","Brain","Kidneys"],a:2},
+{t:"Which type of shock is caused by severe bleeding?",o:["Septic shock","Anaphylactic shock","Hypovolemic shock","Neurogenic shock"],a:2},
+{t:"Tachycardia is a sign of hypovolemic shock. It means:",o:["Slow heart rate","Fast heart rate","Irregular heart rate","Absent heart rate"],a:1},
+{t:"A patient with hypovolemic shock will likely have:",o:["High blood pressure","Low blood pressure","Normal blood pressure","Bounding pulse"],a:1},
+{t:"Which type of shock is caused by hypersensitivity to drugs or food?",o:["Cardiogenic shock","Anaphylactic shock","Electrical shock","Septic shock"],a:1},
+{t:"What is the recommended position for a casualty in shock (if no injuries prevent it)?",o:["Sitting upright","Prone position","On back with feet elevated","Side-lying"],a:2},
+{t:"In which case should you NOT elevate the legs of a shock patient?",o:["Fever","Dehydration","Unsplinted leg fracture","Vomiting"],a:2},
+{t:"What should you NOT give to a casualty in shock?",o:["A blanket","Reassurance","Food or drink","Oxygen"],a:2},
+{t:"Range of Motion (ROM) exercises are performed to prevent:",o:["Infection","Muscle atrophy","Hypertension","Fever"],a:1},
+{t:"Which type of ROM is performed independently by the client?",o:["Passive ROM","Active ROM","Active-Assistive ROM","Static ROM"],a:1},
+{t:"Passive ROM is performed by:",o:["The patient alone","The nurse or health care provider","The patient with a machine","The patient\'s family"],a:1},
+{t:"Moving a joint or extremity toward the midline of the body is called:",o:["Abduction","Adduction","Flexion","Extension"],a:1},
+{t:"Moving a joint or extremity away from the midline of the body is called:",o:["Adduction","Abduction","Inversion","Eversion"],a:1},
+{t:"Decreasing the angle between two bones is called:",o:["Extension","Flexion","Rotation","Supination"],a:1},
+{t:"Straightening a joint is called:",o:["Flexion","Extension","Hyperextension","Pronation"],a:1},
+{t:"Turning the body or body part to face upward is:",o:["Pronation","Supination","Inversion","Eversion"],a:1},
+{t:"Touching the thumb to each finger is called:",o:["Circumduction","Rotation","Opposition","Abduction"],a:2},
+{t:"Turning the feet inward so toes point toward the midline is:",o:["Eversion","Inversion","Dorsiflexion","Plantar flexion"],a:1},
+{t:"How many times should each ROM movement be repeated?",o:["1-2 times","At least 3 times, not exceeding 5","Exactly 10 times","As many as possible"],a:1},
+{t:"Which joint allows circumduction?",o:["Elbow","Knee","Shoulder","Wrist"],a:2},
+{t:"Movement of the head is contraindicated in which patient?",o:["Patient with a broken arm","Patient with spine trauma","Patient with a leg cast","Patient with fever"],a:1},
+{t:"The normal range for body temperature in adults is:",o:["35.0°C - 36.0°C","36.4°C - 37.2°C","37.5°C - 38.5°C","38.0°C - 39.0°C"],a:1},
+{t:"Which part of the brain controls body temperature?",o:["Cerebellum","Medulla oblongata","Hypothalamus","Thalamus"],a:2},
+{t:"Core temperature is measured at which site?",o:["Axilla","Skin","Rectum","Temporal artery"],a:2},
+{t:"Which temperature site is considered the most accurate for core temperature?",o:["Axillary","Oral","Tympanic","Skin tape"],a:2},
+{t:"How long should a glass thermometer stay in the axilla?",o:["1 minute","3 minutes","5 minutes","10 minutes"],a:2},
+{t:"When measuring rectal temperature, you should:",o:["Add 0.5°C to the reading","Subtract 0.5°C from the reading","Keep it as is","Multiply by 2"],a:1},
+{t:"Which of the following is a contraindication for oral temperature?",o:["Diarrhea","Oral surgery","Rectal surgery","Leg fracture"],a:1},
+{t:"A patient with a persistent cough should NOT have their temperature taken:",o:["Rectally","Orally","Axillary","Tympanically"],a:1},
+{t:"Normal pulse rate for an adult is:",o:["40-60 bpm","60-100 bpm","100-120 bpm","120-140 bpm"],a:1},
+{t:"Tachycardia is defined as a pulse rate more than:",o:["60 bpm","80 bpm","100 bpm","120 bpm"],a:2},
+{t:"Bradycardia is defined as a pulse rate less than:",o:["50 bpm","60 bpm","70 bpm","80 bpm"],a:1},
+{t:"The most common site for pulse measurement in a clinical setting is:",o:["Carotid","Radial","Brachial","Femoral"],a:1},
+{t:"Which pulse site is used during CPR in adults?",o:["Radial","Brachial","Carotid","Popliteal"],a:2},
+{t:"A \'bounding\' pulse is described as:",o:["Difficult to detect","Easy to feel due to large blood volume","Irregular","Absent"],a:1},
+{t:"Normal respiratory rate for an adult is:",o:["8-12 breaths/min","12-20 breaths/min","20-30 breaths/min","30-40 breaths/min"],a:1},
+{t:"One respiration consists of:",o:["One inhalation only","One exhalation only","One inhalation and one exhalation","Two inhalations"],a:2},
+{t:"Costal (thoracic) breathing is most common in:",o:["Infants","Children","Adults","Newborns"],a:2},
+{t:"Diaphragmatic (abdominal) breathing is most common in:",o:["Adults","Elderly","Children","Athletes"],a:2},
+{t:"Which medication class can decrease respiratory rate and depth?",o:["Antibiotics","Narcotics","Vitamins","Antipyretics"],a:1},
+{t:"Blood pressure is measured in:",o:["Degrees Celsius","Beats per minute","Millimeters of mercury (mm Hg)","Breaths per minute"],a:2},
+{t:"The top number in a blood pressure reading is the:",o:["Diastolic pressure","Systolic pressure","Pulse pressure","Mean arterial pressure"],a:1},
+{t:"Systolic blood pressure occurs during:",o:["Contraction of the left ventricle","Resting of the heart","Contraction of the right atrium","Filling of the ventricles"],a:0},
+{t:"Diastolic blood pressure is the pressure when the heart is:",o:["Contracting","At rest between beats","Pumping blood","Beating fast"],a:1},
+{t:"Primary hypertension is also known as:",o:["Secondary hypertension","Essential hypertension","Acute hypertension","Malignant hypertension"],a:1},
+{t:"Which of the following is a risk factor for primary hypertension?",o:["Kidney disease","Sedentary lifestyle","Medication side effects","Pregnancy"],a:1},
+{t:"Secondary hypertension is caused by:",o:["Old age","Identifiable causes like kidney disease","Unknown factors","Stress only"],a:1},
+{t:"The fifth vital sign is often considered to be:",o:["Oxygen saturation","Pain","Weight","Height"],a:1},
+{t:"Which of the following is a sign of hypovolemic shock?",o:["Slow breathing","Thirst and dry mucous membranes","High blood pressure","Warm extremities"],a:1},
+{t:"Septic shock is caused by:",o:["Severe bleeding","Infection","Heart failure","Allergic reaction"],a:1},
+{t:"Cardiogenic shock can be caused by:",o:["Dehydration","Myocardial infarction","Bee sting","Spinal cord injury"],a:1},
+{t:"When a patient is in shock, you should cover them to:",o:["Hide the injury","Avoid loss of body heat","Make them sleep","Prevent infection"],a:1},
+{t:"Which of the following is a contraindication for ROM exercises?",o:["Weakness","Elderly age","Swollen and inflamed joints","Paralysis"],a:2},
+{t:"ROM exercises should be done systematically, starting from:",o:["The feet to the head","The head to the feet","The center to the periphery","The weak side to the strong side"],a:1},
+{t:"Turning the joint inward is called:",o:["External rotation","Internal rotation","Circumduction","Opposition"],a:1},
+{t:"Turning the joint outward is called:",o:["Internal rotation","External rotation","Flexion","Extension"],a:1},
+{t:"Moving a joint past its normal extension is called:",o:["Flexion","Hyperextension","Rotation","Abduction"],a:1},
+{t:"Turning the body or body part to face downward is:",o:["Supination","Pronation","Inversion","Eversion"],a:1},
+{t:"Moving a body part in widening circles is called:",o:["Rotation","Circumduction","Flexion","Extension"],a:1},
+{t:"Turning the feet outward so toes point away from the midline is:",o:["Inversion","Eversion","Dorsiflexion","Plantar flexion"],a:1},
+{t:"Which movement is specific to the thumb?",o:["Flexion","Extension","Opposition","Rotation"],a:2},
+{t:"Movement of the head through flexion and extension is part of:",o:["Shoulder ROM","Neck ROM","Wrist ROM","Ankle ROM"],a:1},
+{t:"Elbow and knee joints primarily perform:",o:["Rotation and circumduction","Flexion and extension","Abduction and adduction","Inversion and eversion"],a:1},
+{t:"Dorsal flexion and plantar flexion are movements of the:",o:["Wrist","Ankle","Neck","Shoulder"],a:1},
+{t:"Which individual can perform spine ROM exercises?",o:["Bedridden patient","Patient who is able to stand","Patient with spine trauma","Unconscious patient"],a:1},
+{t:"If a patient experiences pain during ROM, the nurse should:",o:["Continue to finish the set","Stop the exercise","Increase the speed","Apply more force"],a:1},
+{t:"The nurse should use good body mechanics during ROM to ensure:",o:["Patient\'s comfort only","Nurse\'s stability and safety","Faster completion","More repetitions"],a:1},
+{t:"A patient with aphasia may show pain through:",o:["Verbalizing it clearly","Facial expressions and body language","Writing it down","Asking for help"],a:1},
+{t:"Fever is also known as:",o:["Hypothermia","Pyrexia","Bradycardia","Hypotension"],a:1},
+{t:"Hyperpyrexia is a body temperature above:",o:["38.5°C","39.6°C","41°C","42°C"],a:2},
+{t:"Mild fever is defined as a temperature range of:",o:["36.4°C - 37.2°C","37.8°C - 38.4°C","38.5°C - 39.5°C","39.6°C - 41°C"],a:1},
+{t:"Body loses heat through evaporation during:",o:["Sweating and breathing","Direct contact with cold objects","Sitting in a cold room","Elimination of waste"],a:0},
+{t:"Metabolism and exercise are processes that:",o:["Lose body heat","Produce body heat","Maintain blood pressure","Decrease pulse rate"],a:1},
+{t:"Surface temperature rises and falls in response to:",o:["Internal organs","The environment","Metabolism","Hormones"],a:1},
+{t:"Which site is contraindicated for temperature measurement in a child under 7?",o:["Axillary","Rectal","Oral","Tympanic"],a:2},
+{t:"A patient with nasal obstruction should NOT have their temperature taken:",o:["Rectally","Orally","Axillary","Tympanically"],a:1},
+{t:"Which thermometer is used in the outer ear canal?",o:["Glass mercury","Electronic","Tympanic","Temporal artery"],a:2},
+{t:"To convert Celsius to Fahrenheit, the formula is:",o:["F = 5/9(C - 32)","F = 9/5(C + 32)","F = C + 273","F = C * 1.8"],a:1},
+{t:"Pulse is a wave of blood created by the contraction of the:",o:["Right atrium","Left ventricle","Right ventricle","Left atrium"],a:1},
+{t:"Which factor increases the pulse rate?",o:["Old age","Fever","Narcotics","Sleep"],a:1},
+{t:"Adrenaline and noradrenaline are hormones that:",o:["Decrease heart rate","Increase heart rate","Have no effect on heart rate","Lower blood pressure"],a:1},
+{t:"The apical pulse is located at the:",o:["Neck","Wrist","Heart (central)","Groin"],a:2},
+{t:"A weak or thready pulse indicates:",o:["Large amount of blood flow","Decreased amount of blood flow","Normal blood flow","Blocked artery"],a:1},
+{t:"Dysrhythmia (arrhythmia) refers to:",o:["Fast heart rate","Slow heart rate","Irregular rhythm","Absent pulse"],a:2},
+{t:"Newborns have a respiratory rate of approximately:",o:["12 breaths/min","20 breaths/min","35 breaths/min","60 breaths/min"],a:2},
+{t:"Respiratory depth is described as:",o:["Fast or slow","Regular or irregular","Shallow to deep","Strong or weak"],a:2},
+{t:"As altitude increases, the respiratory rate and depth:",o:["Decrease","Increase","Stay the same","Stop"],a:1},
+{t:"Blood pressure is stated in:",o:["mm Hg","bpm","breaths/min","°C"],a:0},
+{t:"The minimum pressure in the arteries when the heart is at rest is:",o:["Systolic pressure","Diastolic pressure","Pulse pressure","Atmospheric pressure"],a:1},
+{t:"Manual blood pressure measurement requires a cuff and a:",o:["Thermometer","Sphygmomanometer","Pulse oximeter","Glucometer"],a:1},
+{t:"Which of the following is a risk factor for secondary hypertension?",o:["Old age","Kidney disease","Sedentary lifestyle","High salt intake"],a:1},
+{t:"Essential hypertension is another name for:",o:["Primary hypertension","Secondary hypertension","Malignant hypertension","Gestational hypertension"],a:0},
+{t:"When measuring blood pressure manually, the health care provider uses a:",o:["Watch","Stethoscope","Flashlight","Reflex hammer"],a:1},
+{t:"Which of the following is a cause of cardiogenic shock?",o:["Severe diarrhea","Tension pneumothorax","Bee sting","Spinal injury"],a:1},
+{t:"In hypovolemic shock, the skin is usually:",o:["Warm and dry","Cold and sweaty","Hot and flushed","Red and itchy"],a:1},
+{t:"The purpose of ROM exercises includes all EXCEPT:",o:["Promote joint mobility","Prevent muscle atrophy","Increase blood pressure","Restore joint function"],a:2},
+{t:"Which movement involves moving the head toward the shoulder?",o:["Rotation","Lateral flexion","Hyperextension","Flexion"],a:1},
+{t:"A patient with a nasogastric (NG) tube should have their temperature taken:",o:["Orally","Axillary","Rectally","Both B and C"],a:3},
+{t:"A patient is bleeding severely from a leg wound and shows signs of confusion and cold extremities. What is the first action?",o:["Give them water","Elevate their legs","Apply pressure to the wound","Perform ROM exercises"],a:2},
+{t:"You are caring for a patient with a suspected spinal injury. Which ROM movement is strictly contraindicated?",o:["Flexion of the elbow","Rotation of the neck","Abduction of the shoulder","Dorsiflexion of the ankle"],a:1},
+{t:"A patient has just finished drinking a cup of hot coffee. How long should you wait before taking an oral temperature?",o:["No need to wait","5 minutes","15-30 minutes","1 hour"],a:2},
+{t:"An elderly patient is performing spine ROM exercises. What should you advise them to do for balance?",o:["Close their eyes","Hold the back of a chair","Stand on one leg","Lean against the wall"],a:1},
+{t:"A patient in the ICU has a central vein line. Which movement should be avoided?",o:["Flexion of the knee","Movement of the head","Abduction of the hip","Extension of the wrist"],a:1},
+{t:"You find a patient who is unconscious and breathing. Which temperature site is most appropriate?",o:["Oral","Rectal","Axillary","Both B and C"],a:3},
+{t:"A patient has a pulse rate of 110 bpm after a high fever. This condition is called:",o:["Bradycardia","Tachycardia","Dysrhythmia","Normal pulse"],a:1},
+{t:"During ROM, a patient starts to grimace and pull their arm away. What should you do?",o:["Continue the exercise","Stop the exercise immediately","Apply more pressure","Ask them to relax"],a:1},
+{t:"A patient has a blood pressure of 150/95 mm Hg and a history of kidney disease. This is likely:",o:["Primary hypertension","Secondary hypertension","Normal blood pressure","Hypotension"],a:1},
+{t:"You are measuring the pulse of a patient with a very weak heart. Which site is most reliable for an accurate count?",o:["Radial","Brachial","Apical","Dorsalis pedis"],a:2},
+{t:"A child is brought to the clinic with a high fever. Which breathing pattern do you expect to see?",o:["Slow and shallow","Rapid and deep","Normal","Absent"],a:1},
+{t:"A patient has just returned from surgery and is very cold. What is the best way to prevent further heat loss?",o:["Give them hot tea","Cover them with a blanket","Turn on the fan","Perform active ROM"],a:1},
+{t:"You are performing passive ROM on a patient\'s shoulder. Where should you support the limb?",o:["Only at the wrist","Below and above the joint","Only below the joint","At the fingertips"],a:2},
+{t:"A patient has a rectal temperature of 38.5°C. What is their equivalent oral temperature?",o:["38.0°C","39.0°C","38.5°C","37.5°C"],a:0},
+{t:"A patient is experiencing anaphylactic shock after a bee sting. What is the underlying cause of their low blood pressure?",o:["Loss of blood","Peripheral vasodilation","Heart failure","Dehydration"],a:1},
+{t:"You are about to measure the blood pressure of a patient who just finished exercising. What should you do?",o:["Measure it immediately","Wait 5-10 minutes for the patient to rest","Measure it while they are standing","Skip the measurement"],a:1},
+{t:"A patient has a respiratory rate of 8 breaths per minute after receiving a narcotic. This is called:",o:["Tachypnea","Bradypnea","Eupnea","Apnea"],a:1},
+{t:"You are performing ROM on a patient with hemiplegia. What should you encourage the patient to do?",o:["Stay completely still","Use their strong arm to move the weak one","Only watch the nurse","Sleep during the procedure"],a:1},
+{t:"A patient has a very irregular pulse. How long should you count the pulse to be accurate?",o:["15 seconds","30 seconds","60 seconds","2 minutes"],a:2},
+{t:"A patient has a temperature of 40.5°C. This is classified as:",o:["Mild fever","Moderate fever","Pyrexia","Hyperpyrexia"],a:2},
+{t:"You are preparing a first aid bag for a school trip. Which item is essential for cleaning wounds?",o:["Antibiotic cream","Saline or sterile water","Small towel","Scissors"],a:1},
+{t:"A patient is in shock and is very thirsty. What should you do?",o:["Give them a large glass of water","Give them small sips of water","Do not give them anything to drink","Give them juice"],a:2},
+{t:"During ROM of the wrist, you move the hand toward the thumb side. This is:",o:["Flexion","Extension","Lateral flexion/rotation","Abduction"],a:2},
+{t:"A patient has a blood pressure of 90/60 mm Hg and is feeling faint. This is called:",o:["Hypertension","Hypotension","Normal blood pressure","Tachycardia"],a:1},
+{t:"You are measuring the temperature of a patient with a persistent cough. Which site should you avoid?",o:["Axillary","Rectal","Oral","Tympanic"],a:2},
+{t:"A patient has a pulse that is difficult to detect. You should document this as:",o:["Bounding","Normal","Weak or thready","Absent"],a:2},
+{t:"You are performing ROM on a patient\'s hip. Which movement involves turning the foot and leg toward the other leg?",o:["External rotation","Internal rotation","Abduction","Adduction"],a:1},
+{t:"A patient has a respiratory rate of 25 breaths per minute. This is called:",o:["Bradypnea","Tachypnea","Eupnea","Dyspnea"],a:1},
+{t:"You are taking the blood pressure of an obese patient. What is the most important consideration?",o:["Use a standard cuff","Use a larger cuff size","Measure it on the leg","Measure it twice"],a:1},
+{t:"A patient has a temperature of 37.0°C. This is:",o:["Fever","Hypothermia","Within normal range","Hyperpyrexia"],a:2},
+{t:"A patient is in cardiogenic shock due to a myocardial infarction. What is the primary problem?",o:["Low blood volume","Heart cannot pump effectively","Severe infection","Allergic reaction"],a:1},
+{t:"You are performing ROM on a patient\'s fingers. Touching the thumb to the pinky is:",o:["Abduction","Adduction","Opposition","Flexion"],a:2},
+{t:"A patient has a pulse of 55 bpm. This is called:",o:["Tachycardia","Bradycardia","Normal","Dysrhythmia"],a:1},
+{t:"You are measuring the axillary temperature of a patient. The reading is 36.5°C. What is the estimated core temperature?",o:["36.0°C","37.0°C","36.5°C","37.5°C"],a:1},
+{t:"A patient is breathing very shallowly. This affects which characteristic of respiration?",o:["Rate","Rhythm","Depth","Sound"],a:2},
+{t:"You are about to perform ROM on a patient with swollen and inflamed joints. What is the first step?",o:["Start the exercises immediately","Consult with the physician","Apply heat before starting","Skip the exercises"],a:1},
+{t:"A patient has a blood pressure of 120/80 mm Hg. This is:",o:["Hypertension","Hypotension","Normal blood pressure","Pre-hypertension"],a:2},
+{t:"You are measuring the pulse of a 5-year-old child. Where is the most common site?",o:["Radial","Carotid","Brachial","Femoral"],a:0},
+{t:"A patient is in septic shock. What is the most likely cause?",o:["Severe burn","Severe infection","Heart attack","Bee sting"],a:1},
+{t:"You are performing ROM on a patient\'s ankle. Moving the toes toward the shin is:",o:["Plantar flexion","Dorsal flexion","Inversion","Eversion"],a:1},
+{t:"A patient has a temperature of 41.5°C. This is:",o:["Pyrexia","Hyperpyrexia","Moderate fever","Mild fever"],a:1},
+{t:"You are measuring the blood pressure of a patient with a very thin arm. What should you do?",o:["Use a standard cuff","Use a smaller cuff size","Measure it on the forearm","Skip the measurement"],a:1},
+{t:"A patient is in neurogenic shock. This is often caused by:",o:["Severe bleeding","Spinal cord injury","Infection","Heart failure"],a:1},
+{t:"You are performing ROM on a patient\'s elbow. Straightening the arm is:",o:["Flexion","Extension","Hyperextension","Rotation"],a:1},
+{t:"A patient has a pulse of 120 bpm. This is:",o:["Bradycardia","Tachycardia","Normal","Dysrhythmia"],a:1},
+{t:"You are measuring the oral temperature of a patient with a nasal obstruction. Why is this difficult?",o:["The patient cannot close their mouth","The thermometer will break","The reading will be too high","It is not difficult"],a:0},
+{t:"A patient is in shock and has a head wound. Should you elevate their legs?",o:["Yes, to improve blood flow to the brain","No, it is contraindicated","Only if they are conscious","Only if they ask"],a:1},
+{t:"You are performing ROM on a patient\'s shoulder. Moving the arm in a circle is:",o:["Rotation","Circumduction","Abduction","Adduction"],a:1},
+{t:"A patient has a respiratory rate of 16 breaths per minute. This is:",o:["Tachypnea","Bradypnea","Normal","Apnea"],a:2},
+{t:"You are measuring the blood pressure of a patient. The first sound you hear represents the:",o:["Systolic pressure","Diastolic pressure","Pulse pressure","Mean pressure"],a:0},
+];
+
+
+
+// ===== shuffle questions only =====
+function shuffleQuestions(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+// خلط الأسئلة فقط
+shuffleQuestions(questions);
+
+// تعريف المتغيرات الناقصة
+let i = 0;
+let correct = 0;
+let wrong = 0;
+let answers = [];
+let wrongSet = [];
+
+/* ===== Timer ===== */
+let totalTime=30*60, timeLeft=totalTime;
+const timerInt=setInterval(()=>{
+  timeLeft--;
+  let m=Math.floor(timeLeft/60), s=timeLeft%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  let deg=(timeLeft/totalTime)*360;
+  timer.style.background=`conic-gradient(var(--primary) ${deg}deg,var(--soft) ${deg}deg)`;
+  if(timeLeft<=0){clearInterval(timerInt);finishExam();}
+},1000);
+
+/* ===== UI ===== */
+function updateTop(){
+  let total=questions.length;
+  let answered=correct+wrong;
+  progressText.innerText=`سؤال ${i+1} من ${total}`;
+  progressBar.style.width=((i+1)/total*100)+"%";
+  correctCount.innerText=correct;
+  wrongCount.innerText=wrong;
+  remainPercent.innerText=Math.round(((total-answered)/total)*100)+"%";
+}
+
+/* ===== Render ===== */
+function show(){
+  updateTop();
+  let q = questions[i];
+
+  app.innerHTML = `
+    <div class="card">
+      <div class="question-title">${q.t}</div>
+      ${q.o.map((o,idx)=>`
+        <div class="option" onclick="choose(${idx})">${o}</div>
+      `).join("")}
+    </div>
+  `;
+}
+/* ===== Choose ===== */
+function choose(v){
+  if(answers[i]!=null) return;
+  answers[i]=v;
+  let ok=v===questions[i].a;
+  ok?correct++:wrong++;
+  app.innerHTML=`
+    <div class="feedback">${ok?"🎉 شاطر جدًا كمل":"😅 ركّز يا سُكر"}</div>
+    <div class="card">
+      <div class="question-title">${questions[i].t}</div>
+      ${questions[i].o.map((o,j)=>`
+        <div class="option ${j===questions[i].a?"correct":j===v?"wrong":""} disabled">${o}</div>
+      `).join("")}
+      <button onclick="next()">التالي</button>
+    </div>`;
+}
+
+/* ===== Next ===== */
+function next(){
+  if(i<questions.length-1){i++;show();}
+  else finishExam();
+}
+
+/* ===== Finish ===== */
+function finishExam(){
+  document.body.classList.remove("exam");
+  document.body.classList.add("after");
+
+  let score=Math.round((correct/questions.length)*100);
+
+  if(score>=80){
+    document.documentElement.style.setProperty("--brand1","#22c55e");
+    document.documentElement.style.setProperty("--brand2","#fde047");
+  }else if(score>=50){
+    document.documentElement.style.setProperty("--brand1","#38bdf8");
+    document.documentElement.style.setProperty("--brand2","#e0f2fe");
+  }else{
+    document.documentElement.style.setProperty("--brand1","#fb923c");
+    document.documentElement.style.setProperty("--brand2","#fed7aa");
+  }
+
+  wrongSet=[];
+  let report="";
+  questions.forEach((q,idx)=>{
+    let ok=answers[idx]===q.a;
+    if(!ok) wrongSet.push(q);
+    report+=`
+      <div class="report ${ok?"correct":"wrong"}">
+        <b>${q.t}</b><br>
+إجابتك: ${answers[idx]!=null ? q.o[answers[idx]] : "لم يتم الحل"}<br>
+الصح: ${q.o[q.a]}
+      </div>`;
+  });
+
+  app.innerHTML=`
+    <div class="card">
+      <h3>?? تقريرك</h3>
+      ${report}
+      ${wrongSet.length?`<button onclick="retry()">إعادة حل الغلط فقط</button>`:"<p>أنت ممتاز 👑</p>"}
+    </div>`;
+}
+
+/* ===== Retry Wrong ===== */
+function retry(){
+  // نبدأ امتحان جديد بالأسئلة الغلط فقط
+  questions = [...wrongSet];
+
+  answers = [];
+  wrongSet = [];
+  i = 0;
+  correct = 0;
+  wrong = 0;
+
+  // رجوع لشكل الامتحان
+  document.body.classList.remove("after");
+  document.body.classList.add("exam");
+
+  show();
+}
+
+show();
+</script>
+
+</body>
+</html>
