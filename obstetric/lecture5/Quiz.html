@@ -1,0 +1,597 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gaith Team | Exam</title>
+
+<style>
+:root{
+  --primary:#0284c7;
+  --secondary:#0ea5e9;
+  --bg:#f8fbff;
+  --card:#ffffff;
+  --soft:#e6f0ff;
+  --question:#eef7ff;
+  --option:#f9fcff;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --text:#0f172a;
+
+  /* Brand dynamic */
+  --brand1:#ffffff;
+  --brand2:#e0f2fe;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#eef6ff);
+  color:var(--text);
+}
+
+/* ================= HEADER ================= */
+header{
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* ===== Brand ===== */
+.logo{
+  position:relative;
+  font-size:28px;
+  font-weight:900;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.brand-text{
+  background:linear-gradient(90deg,var(--brand1),var(--brand2),var(--brand1));
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 4s linear infinite;
+}
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+.heart{
+  display:inline-block;
+  animation:heartbeat 1.6s infinite ease-in-out;
+}
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  animation:twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle{
+  0%{opacity:0;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.2)}
+  100%{opacity:0;transform:scale(.6)}
+}
+
+/* Reduced motion أثناء الامتحان */
+.exam .sparkle{animation-duration:5s;opacity:.4}
+.exam .heart{animation-duration:2.5s}
+
+/* After exam */
+.after .sparkle{animation-duration:2s}
+.after .heart{animation-duration:1.1s}
+
+/* ================= LAYOUT ================= */
+.container{max-width:520px;margin:auto;padding:16px}
+
+/* ===== Top Bar ===== */
+.top-bar{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+}
+.progress-box{
+  flex:1;
+  background:var(--card);
+  padding:14px;
+  border-radius:18px;
+  box-shadow:0 10px 22px rgba(2,132,199,.12);
+}
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px;
+  font-weight:800;
+  font-size:14px;
+}
+.progress{
+  height:8px;
+  background:var(--soft);
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+}
+
+/* Timer */
+.timer{
+  width:64px;height:64px;border-radius:50%;
+  background:conic-gradient(var(--primary) 0deg,var(--soft) 0deg);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;
+  background-color:var(--card);
+}
+
+/* ================= CARD ================= */
+.card{
+  background:var(--card);
+  padding:22px;
+  border-radius:24px;
+  box-shadow:0 18px 36px rgba(2,132,199,.18);
+}
+.question-title{
+  background:var(--question);
+  padding:16px;
+  border-radius:16px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+.option{
+  background:var(--option);
+  border:2px solid var(--soft);
+  border-radius:18px;
+  padding:15px;
+  margin:12px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.correct{background:#eafaf1;border-color:var(--success)}
+.option.wrong{background:#fff1f1;border-color:var(--danger)}
+.option.disabled{pointer-events:none;opacity:.9}
+
+button{
+  margin-top:18px;
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-weight:900;
+}
+
+/* Feedback */
+.feedback{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:10px;
+  animation:pop .5s;
+}
+@keyframes pop{
+  0%{transform:scale(.6);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* Report */
+.report{
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  border-left:6px solid var(--soft);
+}
+.report.correct{border-color:var(--success)}
+.report.wrong{border-color:var(--danger)}
+</style>
+</head>
+
+<body class="exam">
+
+<header>
+  <div class="logo">
+    <span class="brand-text">Gaith Team</span>
+    <span class="heart">💖</span>
+    <span class="sparkle" style="top:-8px;left:0">✨</span>
+    <span class="sparkle" style="top:6px;right:-8px">✨</span>
+    <span class="sparkle" style="bottom:-8px;left:50%">✨</span>
+  </div>
+  <div style="margin-top:6px;font-weight:800">الإمتحان في جيبك 👏🏻</div>
+</header>
+
+<div class="container">
+
+  <div class="top-bar">
+    <div class="progress-box">
+      <div class="progress-text">
+        <span id="progressText"></span>
+        <span>
+          ✔️ <span id="correctCount">0</span> |
+          ❌ <span id="wrongCount">0</span> |
+          ⏳ <span id="remainPercent">100%</span>
+        </span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="timer" id="timer">15:00</div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<script>/* ===== Questions ===== */
+let questions = [
+ 
+
+/* =========================
+MULTIPLE CHOICE QUESTIONS
+========================= */
+
+{t:"What is the most common symptom indicating early pregnancy?", o:["Amenorrhea","Abdominal pain","Hypertension","Back pain"], a:0},
+
+{t:"Morning sickness in pregnancy usually begins around:", o:["2 weeks after fertilization","6 weeks after the last menstrual period","12 weeks of pregnancy","20 weeks of pregnancy"], a:1},
+
+{t:"Frequency of micturition during early pregnancy is mainly due to:", o:["Increased kidney size","Bladder infection","Pressure and congestion of the bladder","Hormonal deficiency"], a:2},
+
+{t:"Which of the following breast changes occurs during early pregnancy?", o:["Decrease in nipple pigmentation","Increase in vascularity and enlargement","Loss of areola color","Shrinkage of breast tissue"], a:1},
+
+{t:"Montgomery tubercles are:", o:["Dilated sebaceous glands in the areola","Milk ducts","Fat deposits in breast tissue","Inflamed lymph nodes"], a:0},
+
+{t:"Hegar's sign refers to:", o:["Softening of the cervix","Softening of the lower uterine segment","Violet discoloration of vagina","Uterine enlargement"], a:1},
+
+{t:"Goodell’s sign is characterized by:", o:["Softening of the cervix","Softening of the uterus","Violet color of vagina","Enlargement of ovaries"], a:0},
+
+{t:"Chadwick’s sign refers to:", o:["Cervical dilation","Violet discoloration of vagina","Increased uterine contractions","Breast enlargement"], a:1},
+
+{t:"Urine pregnancy tests usually become positive:", o:["3 days after fertilization","7 days after fertilization","14 days after fertilization","30 days after fertilization"], a:2},
+
+{t:"Serum pregnancy tests may become positive as early as:", o:["1–2 days after fertilization","7–10 days after fertilization","20 days after fertilization","4 weeks after fertilization"], a:1},
+
+{t:"Using transabdominal ultrasound, the gestational sac can usually be visualized at:", o:["4 weeks","5 weeks","6 weeks","10 weeks"], a:2},
+
+{t:"Fetal heart sounds can be detected by transabdominal ultrasound at:", o:["6 weeks","8 weeks","12 weeks","16 weeks"], a:1},
+
+{t:"Quickening refers to:", o:["First uterine contraction","First fetal movement felt by the mother","Increase in fetal heart rate","Onset of labor"], a:1},
+
+{t:"Quickening usually occurs at what time in primigravida?", o:["10–12 weeks","14–16 weeks","18–20 weeks","24–26 weeks"], a:2},
+
+{t:"Braxton Hicks contractions are:", o:["Painful regular contractions","Intermittent painless uterine contractions","Cervical dilatation contractions","Postpartum contractions"], a:1},
+
+{t:"Internal ballottement can be elicited approximately at:", o:["10 weeks","12 weeks","16 weeks","24 weeks"], a:2},
+
+{t:"External ballottement can usually be elicited at:", o:["12 weeks","16 weeks","20 weeks","30 weeks"], a:2},
+
+{t:"Fetal heart sounds can be heard by Sonicaid at approximately:", o:["6 weeks","8 weeks","10–12 weeks","20 weeks"], a:2},
+
+{t:"Which investigation replaced X-ray in pregnancy due to safety concerns?", o:["MRI","Ultrasonography","CT scan","Endoscopy"], a:1},
+
+{t:"Which of the following is a sure sign of pregnancy?", o:["Amenorrhea","Breast enlargement","Palpation of fetal parts","Morning sickness"], a:2},
+
+/* =========================
+TRUE / FALSE QUESTIONS
+========================= */
+
+{t:"Amenorrhea in early pregnancy occurs mainly due to increased estrogen and progesterone.", o:["True","False"], a:0},
+
+{t:"Morning sickness usually disappears by the end of the first trimester.", o:["True","False"], a:0},
+
+{t:"Quickening occurs earlier in primigravida than multipara.", o:["True","False"], a:1},
+
+{t:"Braxton Hicks contractions are painful and regular.", o:["True","False"], a:1},
+
+{t:"Ultrasonography can detect fetal movements and heart activity.", o:["True","False"], a:0},
+
+/* =========================
+SCENARIO QUESTIONS
+========================= */
+
+{t:"A pregnant woman at 7 weeks gestation undergoes a blood test that detects HCG. Which investigation was most likely used?", o:["Urine pregnancy test","Serum pregnancy test","X-ray examination","CT scan"], a:1},
+
+{t:"A doctor palpates the uterus and notes softening of the lower uterine segment during a bimanual examination at 8 weeks. What sign is this?", o:["Goodell's sign","Chadwick's sign","Hegar's sign","Palmer's sign"], a:2},
+
+{t:"A primigravida woman reports feeling fetal movement for the first time at 19 weeks. What is this phenomenon called?", o:["Engagement","Ballottement","Quickening","Braxton Hicks"], a:2},
+
+{t:"During abdominal examination at 20 weeks, a doctor pushes the fetus and feels it rebound against the other hand. What is this sign?", o:["Internal ballottement","External ballottement","Palmer's sign","Hegar's sign"], a:1},
+
+{t:"During auscultation, a murmur with the same rate as fetal heart sounds is heard due to blood flow in umbilical arteries. What is this called?", o:["Uterine souffle","Umbilical (funic) souffle","Placental bruit","Cardiac murmur"], a:1}
+
+
+
+];
+
+
+/* ===== Shuffle ===== */
+function shuffleQuestions(array){
+  for (let i = array.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i],array[j]]=[array[j],array[i]];
+  }
+} let savedQuestions = localStorage.getItem("shuffledQuestions");
+
+if(savedQuestions){
+  questions = JSON.parse(savedQuestions);
+}else{
+  shuffleQuestions(questions);
+  localStorage.setItem("shuffledQuestions", JSON.stringify(questions));
+}
+;
+
+/* ===== Variables ===== */
+let i = localStorage.getItem("qIndex") ? parseInt(localStorage.getItem("qIndex")) : 0;
+let answers = localStorage.getItem("answers") ? JSON.parse(localStorage.getItem("answers")) : [];
+let correct = 0;
+let wrong = 0;
+let wrongSet = [];const progressText = document.getElementById("progressText");
+const progressBar = document.getElementById("progressBar");
+const remainPercent = document.getElementById("remainPercent");
+const timer = document.getElementById("timer");
+const app = document.getElementById("app");
+
+
+/* ===== Timer ===== */
+let totalTime=15*60;
+let timeLeft = localStorage.getItem("timeLeft") ? parseInt(localStorage.getItem("timeLeft")) : totalTime;
+
+const timerInt=setInterval(()=>{
+  timeLeft--;
+  localStorage.setItem("timeLeft",timeLeft);
+
+  let m=Math.floor(timeLeft/60);
+  let s=timeLeft%60;
+
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+
+  let deg=(timeLeft/totalTime)*360;
+  timer.style.background=`conic-gradient(var(--primary) ${deg}deg,var(--soft) ${deg}deg)`;
+
+  if(timeLeft<=0){
+    clearInterval(timerInt);
+    finishExam();
+  }
+
+},1000);
+
+
+
+/* ===== Top Bar ===== */function updateTop(){
+
+let total = questions.length;
+
+progressText.innerText = `سؤال ${i+1} من ${total}`;
+
+progressBar.style.width = ((i+1)/total*100) + "%";
+
+/* نسبة الأسئلة المتبقية */
+let remain = Math.round(((total - (i+1)) / total) * 100);
+
+remainPercent.innerText = remain + "%";
+
+}
+
+
+
+/* ===== Render Question ===== */
+function show(){
+
+  updateTop();
+
+  let q = questions[i];
+
+  app.innerHTML = `
+    <div class="card">
+
+      <div class="question-title">${q.t}</div>
+
+      ${q.o.map((o,idx)=>`
+
+        <div class="option ${answers[i]===idx?"correct":""}" onclick="choose(${idx})">
+        ${o}
+        </div>
+
+      `).join("")}
+
+      <div style="display:flex;gap:10px">
+
+        <button onclick="prev()" style="flex:1">السابق</button>
+
+        <button onclick="next()" style="flex:1">التالي</button>
+
+      </div>
+
+    </div>
+  `;
+
+}
+
+
+/* ===== Choose Answer ===== */
+function choose(v){
+
+  answers[i]=v;
+
+  localStorage.setItem("answers",JSON.stringify(answers));
+
+  show();
+
+}
+
+
+/* ===== Next ===== */
+function next(){
+
+  if(answers[i]==null){
+
+    alert("اختر إجابة أولاً");
+
+    return;
+
+  }
+
+  if(i < questions.length-1){
+
+    i++;
+
+    localStorage.setItem("qIndex",i);
+
+    show();
+
+  }else{
+
+    finishExam();
+
+  }
+
+}
+
+/* ===== Previous ===== */
+function prev(){
+
+  if(i>0){
+
+    i--;
+
+    localStorage.setItem("qIndex",i);
+
+    show();
+
+  }
+
+}
+
+/* ===== Finish Exam ===== */
+function finishExam(){
+
+clearInterval(timerInt);
+
+document.body.classList.remove("exam");
+document.body.classList.add("after");
+
+correct = 0;
+wrong = 0;
+wrongSet = [];
+
+questions.forEach((q,idx)=>{
+
+if(answers[idx] === q.a){
+correct++;
+}else{
+wrong++;
+wrongSet.push(q);
+}
+
+});
+
+correctCount.innerText = correct;
+wrongCount.innerText = wrong;
+
+let total = questions.length;
+
+/* ===== Percentage ===== */
+let percent = Math.round((correct / total) * 100);
+
+/* ===== Grade ===== */
+let grade = "";
+
+if(percent >= 90){
+grade = "ممتاز ⭐⭐⭐⭐⭐";
+}else if(percent >= 80){
+grade = "جيد جداً ⭐⭐⭐⭐";
+}else if(percent >= 70){
+grade = "جيد ⭐⭐⭐";
+}else if(percent >= 50){
+grade = "مقبول ⭐⭐";
+}else{
+grade = "ضعيف ⭐";
+}
+
+let report = "";
+
+questions.forEach((q,idx)=>{
+
+let ok = answers[idx] === q.a;
+
+report += `
+
+  <div class="report ${ok ? "correct" : "wrong"}">
+  <b>${q.t}</b><br>
+  إجابتك: ${answers[idx]!=null ? q.o[answers[idx]] : "لم يتم الحل"}<br>
+  الصح: ${q.o[q.a]}
+  </div>
+  `;
+
+});
+
+app.innerHTML = `
+
+<div class="card">
+
+<h2 style="text-align:center;margin-bottom:10px"> 📊 السكر عمل أي 😇</h2>
+
+<div style="
+background:#eef7ff;
+padding:15px;
+border-radius:14px;
+font-weight:800;
+line-height:1.9;
+margin-bottom:18px;
+text-align:center
+">
+
+✔️ عدد الصح: ${correct} <br>
+❌ عدد الغلط: ${wrong} <br>
+📊 النسبة المئوية: ${percent}% <br>
+🏆 التقدير: ${grade}
+
+</div>
+
+${report}
+
+${wrongSet.length
+? `<button onclick="retry()">إعادة حل الغلط فقط</button>`
+: `<p style="text-align:center;font-weight:900">أنت ممتاز 👑</p>`}
+
+</div>
+
+`;
+localStorage.clear();
+
+}
+
+/* ===== Retry Wrong Questions ===== */
+function retry(){
+
+questions = wrongSet;   // تحويل الأسئلة إلى الغلط فقط
+i = 0;
+answers = [];
+correct = 0;
+wrong = 0;
+
+document.body.classList.remove("after");
+document.body.classList.add("exam");
+
+show();
+
+}
+
+show();
+
+</script>
+
+
+</body>
+</html>
