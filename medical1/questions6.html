@@ -1,0 +1,462 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ghaith Team | Exam</title>
+
+<style>
+:root{
+  --primary:#0284c7;
+  --secondary:#0ea5e9;
+  --bg:#f8fbff;
+  --card:#ffffff;
+  --soft:#e6f0ff;
+  --question:#eef7ff;
+  --option:#f9fcff;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --text:#0f172a;
+
+  /* Brand dynamic */
+  --brand1:#ffffff;
+  --brand2:#e0f2fe;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#eef6ff);
+  color:var(--text);
+}
+
+/* ================= HEADER ================= */
+header{
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* ===== Brand ===== */
+.logo{
+  position:relative;
+  font-size:28px;
+  font-weight:900;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.brand-text{
+  background:linear-gradient(90deg,var(--brand1),var(--brand2),var(--brand1));
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 4s linear infinite;
+}
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+.heart{
+  display:inline-block;
+  animation:heartbeat 1.6s infinite ease-in-out;
+}
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  animation:twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle{
+  0%{opacity:0;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.2)}
+  100%{opacity:0;transform:scale(.6)}
+}
+
+/* Reduced motion أثناء الامتحان */
+.exam .sparkle{animation-duration:5s;opacity:.4}
+.exam .heart{animation-duration:2.5s}
+
+/* After exam */
+.after .sparkle{animation-duration:2s}
+.after .heart{animation-duration:1.1s}
+
+/* ================= LAYOUT ================= */
+.container{max-width:520px;margin:auto;padding:16px}
+
+/* ===== Top Bar ===== */
+.top-bar{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+}
+.progress-box{
+  flex:1;
+  background:var(--card);
+  padding:14px;
+  border-radius:18px;
+  box-shadow:0 10px 22px rgba(2,132,199,.12);
+}
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px;
+  font-weight:800;
+  font-size:14px;
+}
+.progress{
+  height:8px;
+  background:var(--soft);
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+}
+
+/* Timer */
+.timer{
+  width:64px;height:64px;border-radius:50%;
+  background:conic-gradient(var(--primary) 0deg,var(--soft) 0deg);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;
+  background-color:var(--card);
+}
+
+/* ================= CARD ================= */
+.card{
+  background:var(--card);
+  padding:22px;
+  border-radius:24px;
+  box-shadow:0 18px 36px rgba(2,132,199,.18);
+}
+.question-title{
+  background:var(--question);
+  padding:16px;
+  border-radius:16px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+.option{
+  background:var(--option);
+  border:2px solid var(--soft);
+  border-radius:18px;
+  padding:15px;
+  margin:12px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.correct{background:#eafaf1;border-color:var(--success)}
+.option.wrong{background:#fff1f1;border-color:var(--danger)}
+.option.disabled{pointer-events:none;opacity:.9}
+
+button{
+  margin-top:18px;
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-weight:900;
+}
+
+/* Feedback */
+.feedback{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:10px;
+  animation:pop .5s;
+}
+@keyframes pop{
+  0%{transform:scale(.6);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* Report */
+.report{
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  border-left:6px solid var(--soft);
+}
+.report.correct{border-color:var(--success)}
+.report.wrong{border-color:var(--danger)}
+</style>
+</head>
+
+<body class="exam">
+
+<header>
+  <div class="logo">
+    <span class="brand-text">Ghaith Team</span>
+    <span class="heart">💖</span>
+    <span class="sparkle" style="top:-8px;left:0">✨</span>
+    <span class="sparkle" style="top:6px;right:-8px">✨</span>
+    <span class="sparkle" style="bottom:-8px;left:50%">✨</span>
+  </div>
+  <div style="margin-top:6px;font-weight:800">  👏🏻 الإمتحان في جيبك </div>
+</header>
+
+<div class="container">
+
+  <div class="top-bar">
+    <div class="progress-box">
+      <div class="progress-text">
+        <span id="progressText"></span>
+        <span>
+          ✔️ <span id="correctCount">0</span> |
+          ❌ <span id="wrongCount">0</span> |
+          ⏳ <span id="remainPercent">100%</span>
+        </span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="timer" id="timer">40:00</div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<script>
+/* ===== Questions ===== */
+let questions = [
+ {t:"What is the definition of pneumonia?", o:["Inflammation of the upper respiratory tract","Inflammation of the lung parenchyma causing impaired gas exchange","A chronic obstruction of the bronchi","A viral infection of the throat only"], a:1},
+            {t:"Pneumonia affecting both lungs is referred to as:", o:["Single pneumonia","Lobar pneumonia","Double pneumonia","Bronchitis"], a:2},
+            {t:"Which of the following is a common causative agent of pneumonia?", o:["Bacteria","Virus","Fungus","All of the above"], a:3},
+            {t:"Anthrax pneumonia is also known as:", o:["Bird-fancier's lung","Wool-sorter's disease","Farmer's lung","Legionnaires' disease"], a:1},
+            {t:"Which type of bacteria is Pneumococcal classified under?", o:["Gram-Negative","Gram-Positive","Acid-fast bacilli","Anaerobic"], a:1},
+            {t:"What is the most common type of pneumonia?", o:["Bacterial","Viral","Protozoal","Fungal"], a:1},
+            {t:"Which protozoa typically causes pneumonia in patients with AIDS?", o:["Plasmodium","Pneumocystis carinii","Entamoeba","Giardia"], a:1},
+            {t:"Which of the following is a risk factor for pneumonia?", o:["Cigarette smoking","Heart failure","Immobility","All of the above"], a:3},
+            {t:"A sudden onset of shaking chills and a fever of 39.5° to 40.5°C is characteristic of:", o:["Viral pneumonia","Bacterial pneumonia","Chronic bronchitis","Asthma"], a:1},
+            {t:"Productive cough with purulent sputum is a sign of:", o:["Normal recovery","Bacterial pneumonia","Dehydration","Pleurisy"], a:1},
+            {t:"Pleuritic chest pain in pneumonia is typically aggravated by:", o:["Walking","Respiration and coughing","Lying flat","Eating"], a:1},
+            {t:"What does 'Tachypnea' mean?", o:["Slow breathing","Abnormally rapid breathing","Difficulty swallowing","Rapid heart rate"], a:1},
+            {t:"Which complication of pneumonia involves fluid in the pleural space?", o:["Atelectasis","Pleural effusion","Pericarditis","Meningitis"], a:1},
+            {t:"Sustained hypotension and shock are most common in which type of pneumonia?", o:["Viral","Gram-negative bacterial","Fungal","Protozoal"], a:1},
+            {t:"Which complication is considered a medical emergency in pneumonia patients?", o:["Fatigue","Delirium","Cough","Fever"], a:1},
+            {t:"Atelectasis in pneumonia is often due to:", o:["Excessive exercise","Mucous plugs","High fever","Antibiotics"], a:1},
+            {t:"Which diagnostic test confirms the presence of elevated White Blood Cells (WBC)?", o:["Chest X-ray","CBC","Sputum culture","ABG"], a:1},
+            {t:"What is the primary medical management for bacterial pneumonia?", o:["Physical therapy","Antimicrobial therapy","Surgery","Aspirin only"], a:1},
+            {t:"In elderly patients, what is a key symptom to assess for pneumonia?", o:["Increased appetite","Altered mental status","Hyperactivity","Improved memory"], a:1},
+            {t:"Which nursing diagnosis is related to thick, tenacious sputum?", o:["Impaired gas exchange","Ineffective airway clearance","Activity intolerance","Risk for fluid volume deficit"], a:1},
+            {t:"Impaired gas exchange in pneumonia is primarily due to:", o:["Chest pain","Exudate in the alveoli","Fatigue","High fever"], a:1},
+            {t:"What is a major goal for a patient with pneumonia?", o:["Increasing smoking","Improving airway patency","Reducing fluid intake","Avoiding rest"], a:1},
+            {t:"How much fluid intake is generally encouraged for pneumonia patients (if not contraindicated)?", o:["500 ml/day","1 Liter/day","2 Liters/day","5 Liters/day"], a:2},
+            {t:"Why is smoking cessation important for lung defense?", o:["It tastes bad","It destroys tracheobronchial ciliary action","It increases appetite","It helps sleep"], a:1},
+            {t:"Which vaccine is encouraged to prevent secondary bacterial pneumonia?", o:["Polio vaccine","Influenza vaccine","Hepatitis B vaccine","Tetanus vaccine"], a:1},
+            {t:"What is 'Lobar pneumonia'?", o:["Pneumonia in both lungs","Pneumonia affecting only certain lobes","Pneumonia caused by chemicals","Pneumonia in the throat"], a:1},
+            {t:"Gram-negative bacteria like Pseudomonas are associated with:", o:["Mild symptoms","Severe pneumonia and shock","Easy treatment","Skin rashes only"], a:1},
+            {t:"Nasal flaring and use of accessory muscles are signs of:", o:["Respiratory distress","Relaxation","Normal breathing","Sleep apnea"], a:0},
+            {t:"What is the purpose of chest physiotherapy (percussion/vibration)?", o:["To strengthen muscles","To reduce accumulation of secretions","To stop coughing","To lower fever"], a:1},
+            {t:"Which of the following is a Gram-Negative bacterium?", o:["Staphylococcal","Streptococcal","Klebsiella","Anthrax"], a:2},
+            {t:"'Rapid, bounding pulse' is a clinical manifestation of:", o:["Hypotension","Tachycardia associated with pneumonia","Dehydration","Bradycardia"], a:1},
+            {t:"Which of these is a superinfection complication of pneumonia?", o:["Diabetes","Meningitis","Obesity","Cataracts"], a:1},
+            {t:"Acid-fast bacilli (AFB) testing in sputum is often associated with:", o:["Heart failure","Tuberculosis/Pneumonia diagnosis","Broken bones","Skin cancer"], a:1},
+            {t:"Nursing intervention for 'Activity intolerance' includes:", o:["Running marathons","Rest to conserve energy","Strict fasting","Avoiding oxygen"], a:1},
+            {t:"'Ineffective breathing pattern' in pneumonia is often related to:", o:["Excessive sleep","Chest pain and airway inflammation","Overhydration","Low altitude"], a:1},
+            {t:"What is the significance of 'Double pneumonia'?", o:["It affects both lungs","It is twice as fast","It requires two doctors","It has two causes"], a:0},
+            {t:"Which organism is a fungus that can cause pneumonia?", o:["Influenza","Candida/Fungi","Staphylococcus","Legionella"], a:1},
+            {t:"Respiratory grunting is also described as:", o:["Singing","Snoring/Grunting sounds","Whistling","Silence"], a:1},
+            {t:"Which of the following can cause pneumonia via aspiration?", o:["Fresh air","Chemicals or toxic substances","Drinking water properly","Sleeping"], a:1},
+            {t:"A patient with AIDS is most susceptible to which pneumonia?", o:["Pneumococcal","Pneumocystis carinii","Anthrax","Viral"], a:1},
+            {t:"What is the role of the nurse in assessing secretions?", o:["Ignoring them","Assessing amount, odor, and color","Changing the patient's diet","Prescribing antibiotics"], a:1},
+            {t:"'Delayed resolution' is considered a:", o:["Treatment goal","Complication","Risk factor","Diagnostic test"], a:1},
+            {t:"Which position change helps improve airway patency?", o:["Staying flat on back","Frequent changes of position/Bed rest","Standing all day","Lying on the stomach only"], a:1},
+            {t:"Insensible fluid loss in pneumonia occurs through:", o:["The skin only","The respiratory tract","The ears","The hair"], a:1},
+            {t:"Evaluation of 'Adequate hydration' includes checking:", o:["Eye color","Urine output and skin turgor","Hair strength","Weight gain"], a:1},
+            {t:"Which bacterium is associated with 'Legionnaires' disease?", o:["Streptococcus","Legionella","Staphylococcus","Anthrax"], a:1},
+            {t:"Fever in pneumonia can reach up to:", o:["37°C","38°C","40.5°C","45°C"], a:2},
+            {t:"The diagnosis of pneumonia is primarily made by:", o:["Blood type","History, Physical Exam, and Chest X-Ray","Eye exam","Hearing test"], a:1},
+            {t:"'Tenacious sputum' means the sputum is:", o:["Watery","Thick and sticky","Bloody","Non-existent"], a:1},
+            {t:"Oxygen therapy is indicated if the patient has:", o:["Too much energy","Inadequate gas exchange","Normal ABGs","High appetite"], a:1},
+            {t:"Which of the following is a Gram-Positive bacterium?", o:["Pseudomonas","Influenza (Haemophilus)","Staphylococcal","Legionella"], a:2},
+            {t:"What is the 'first line of defense' for the lungs destroyed by smoking?", o:["The ribs","Tracheobronchial ciliary action","The skin","The stomach acid"], a:1},
+            {t:"'Activity level increased without frequent rest' is an:", o:["Intervention","Evaluation finding","Nursing diagnosis","Etiology"], a:1},
+            {t:"Pneumonia is an inflammation of the:", o:["Heart","Lung parenchyma","Liver","Kidney"], a:1},
+            {t:"Which factor increases the risk of pneumonia in the elderly?", o:["Heart failure and immobility","High fiber diet","Daily exercise","Vaccination"], a:0},
+            {t:"The 'WBC' count in pneumonia is typically:", o:["Decreased","Elevated","Normal","Absent"], a:1},
+            {t:"'Pleuritic chest pain' is pain in the:", o:["Stomach","Chest lining","Legs","Head"], a:1},
+            {t:"Causative agents can be classified by:", o:["Color","Location or causative agent","Price","Weight"], a:1},
+            {t:"Which of the following is a viral cause of pneumonia?", o:["Influenza virus","Staphylococcus","Fungi","Amoeba"], a:0},
+            {t:"'Fatigue and weakness' after pneumonia may be:", o:["Brief","Prolonged","Non-existent","Instant"], a:1},
+            {t:"Pneumonia is an inflammation of the upper respiratory tract.", o:["True","False"], a:1},
+            {t:"Viral pneumonia is the most common type of pneumonia.", o:["True","False"], a:0},
+            {t:"Anthrax is a bacterial disease that can be transmitted from sheep to humans.", o:["True","False"], a:0},
+            {t:"Pneumonia can be caused by inhaling toxic chemicals.", o:["True","False"], a:0},
+            {t:"A 'shaking chill' is a common sign of the sudden onset of bacterial pneumonia.", o:["True","False"], a:0},
+            {t:"Pleuritic chest pain is relieved by deep coughing.", o:["True","False"], a:1},
+            {t:"Delirium in a pneumonia patient is a medical emergency.", o:["True","False"], a:0},
+            {t:"Atelectasis is a complication caused by mucous plugs.", o:["True","False"], a:0},
+            {t:"Chest X-ray is NOT used to diagnose pneumonia.", o:["True","False"], a:1},
+            {t:"The elderly may show unusual behavior or altered mental status when they have pneumonia.", o:["True","False"], a:0},
+            {t:"'Ineffective airway clearance' is a common nursing diagnosis for pneumonia.", o:["True","False"], a:0},
+            {t:"Fluid intake should be decreased for patients with pneumonia to prevent drowning.", o:["True","False"], a:1},
+            {t:"Smoking inhibits the function of alveolar macrophages.", o:["True","False"], a:0},
+            {t:"Influenza vaccine increases the risk of bacterial pneumonia.", o:["True","False"], a:1},
+            {t:"Improved pulse oximetry readings indicate effective treatment for pneumonia.", o:["True","False"], a:0},
+            {t:" An 80-year-old patient is admitted with a history of heart failure and recent confusion. The nurse suspects pneumonia. Which assessment finding is most critical to report in this elderly patient?", o:["Increased appetite","Altered mental status and dehydration","Improved skin turgor","Normal temperature"], a:1},
+            {t:"Scenario: A patient with pneumonia has thick, green sputum and is having difficulty coughing it up. Which nursing intervention is most appropriate to help clear the airway?", o:["Decrease fluid intake","Encourage bed rest without moving","Perform chest physiotherapy and promote fluid intake","Administer a sedative immediately"], a:2},
+            {t:":A nurse is caring for a patient with Gram-negative bacterial pneumonia. The patient's blood pressure suddenly drops to 80/50 mmHg. What complication is the patient likely experiencing?", o:["Superinfection","Shock/Hypotension","Delirium","Atelectasis"], a:1},
+            {t:"Scenario: A patient who smokes 2 packs a day is diagnosed with pneumonia. The patient asks why they should stop smoking now. What is the best nursing response?", o:["Smoking makes you smell bad","Smoking destroys the cilia in your lungs, which are your first line of defense","Smoking is too expensive","You can continue smoking if you use a filter"], a:1},
+            {t:"A patient with pneumonia is experiencing pleuritic chest pain. What should the nurse instruct the patient to do to minimize pain during coughing?", o:["Cough as hard as possible","Splint the chest wall with a pillow during coughing","Avoid breathing deeply","Only cough while standing up"], a:1}
+];
+
+
+
+// ===== shuffle questions only =====
+function shuffleQuestions(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+// خلط الأسئلة فقط
+shuffleQuestions(questions);
+
+// تعريف المتغيرات الناقصة
+let i = 0;
+let correct = 0;
+let wrong = 0;
+let answers = [];
+let wrongSet = [];
+
+/* ===== Timer ===== */
+let totalTime=40*60, timeLeft=totalTime;
+const timerInt=setInterval(()=>{
+  timeLeft--;
+  let m=Math.floor(timeLeft/60), s=timeLeft%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  let deg=(timeLeft/totalTime)*360;
+  timer.style.background=`conic-gradient(var(--primary) ${deg}deg,var(--soft) ${deg}deg)`;
+  if(timeLeft<=0){clearInterval(timerInt);finishExam();}
+},1000);
+
+/* ===== UI ===== */
+function updateTop(){
+  let total=questions.length;
+  let answered=correct+wrong;
+  progressText.innerText=`سؤال ${i+1} من ${total}`;
+  progressBar.style.width=((i+1)/total*100)+"%";
+  correctCount.innerText=correct;
+  wrongCount.innerText=wrong;
+  remainPercent.innerText=Math.round(((total-answered)/total)*100)+"%";
+}
+
+/* ===== Render ===== */
+function show(){
+  updateTop();
+  let q = questions[i];
+
+  app.innerHTML = `
+    <div class="card">
+      <div class="question-title">${q.t}</div>
+      ${q.o.map((o,idx)=>`
+        <div class="option" onclick="choose(${idx})">${o}</div>
+      `).join("")}
+    </div>
+  `;
+}
+/* ===== Choose ===== */
+function choose(v){
+  if(answers[i]!=null) return;
+  answers[i]=v;
+  let ok=v===questions[i].a;
+  ok?correct++:wrong++;
+  app.innerHTML=`
+    <div class="feedback">${ok?"🎉 شاطر جدًا كمل":"😅 ركّز يا سُكر"}</div>
+    <div class="card">
+      <div class="question-title">${questions[i].t}</div>
+      ${questions[i].o.map((o,j)=>`
+        <div class="option ${j===questions[i].a?"correct":j===v?"wrong":""} disabled">${o}</div>
+      `).join("")}
+      <button onclick="next()">التالي</button>
+    </div>`;
+}
+
+/* ===== Next ===== */
+function next(){
+  if(i<questions.length-1){i++;show();}
+  else finishExam();
+}
+
+/* ===== Finish ===== */
+function finishExam(){
+  document.body.classList.remove("exam");
+  document.body.classList.add("after");
+
+  let score=Math.round((correct/questions.length)*100);
+
+  if(score>=80){
+    document.documentElement.style.setProperty("--brand1","#22c55e");
+    document.documentElement.style.setProperty("--brand2","#fde047");
+  }else if(score>=50){
+    document.documentElement.style.setProperty("--brand1","#38bdf8");
+    document.documentElement.style.setProperty("--brand2","#e0f2fe");
+  }else{
+    document.documentElement.style.setProperty("--brand1","#fb923c");
+    document.documentElement.style.setProperty("--brand2","#fed7aa");
+  }
+
+  wrongSet=[];
+  let report="";
+  questions.forEach((q,idx)=>{
+    let ok=answers[idx]===q.a;
+    if(!ok) wrongSet.push(q);
+    report+=`
+      <div class="report ${ok?"correct":"wrong"}">
+        <b>${q.t}</b><br>
+إجابتك: ${answers[idx]!=null ? q.o[answers[idx]] : "لم يتم الحل"}<br>
+الصح: ${q.o[q.a]}
+      </div>`;
+  });
+
+  app.innerHTML=`
+    <div class="card">
+      <h3>?? تقريرك</h3>
+      ${report}
+      ${wrongSet.length?`<button onclick="retry()">إعادة حل الغلط فقط</button>`:"<p>أنت ممتاز 👑</p>"}
+    </div>`;
+}
+
+/* ===== Retry Wrong ===== */
+function retry(){
+  // نبدأ امتحان جديد بالأسئلة الغلط فقط
+  questions = [...wrongSet];
+
+  answers = [];
+  wrongSet = [];
+  i = 0;
+  correct = 0;
+  wrong = 0;
+
+  // رجوع لشكل الامتحان
+  document.body.classList.remove("after");
+  document.body.classList.add("exam");
+
+  show();
+}
+
+show();
+</script>
+
+</body>
+</html>
