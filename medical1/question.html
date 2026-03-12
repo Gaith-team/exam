@@ -1,0 +1,463 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ghaith Team | Exam</title>
+
+<style>
+:root{
+  --primary:#0284c7;
+  --secondary:#0ea5e9;
+  --bg:#f8fbff;
+  --card:#ffffff;
+  --soft:#e6f0ff;
+  --question:#eef7ff;
+  --option:#f9fcff;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --text:#0f172a;
+
+  /* Brand dynamic */
+  --brand1:#ffffff;
+  --brand2:#e0f2fe;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#eef6ff);
+  color:var(--text);
+}
+
+/* ================= HEADER ================= */
+header{
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* ===== Brand ===== */
+.logo{
+  position:relative;
+  font-size:28px;
+  font-weight:900;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.brand-text{
+  background:linear-gradient(90deg,var(--brand1),var(--brand2),var(--brand1));
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 4s linear infinite;
+}
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+.heart{
+  display:inline-block;
+  animation:heartbeat 1.6s infinite ease-in-out;
+}
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  animation:twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle{
+  0%{opacity:0;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.2)}
+  100%{opacity:0;transform:scale(.6)}
+}
+
+/* Reduced motion أثناء الامتحان */
+.exam .sparkle{animation-duration:5s;opacity:.4}
+.exam .heart{animation-duration:2.5s}
+
+/* After exam */
+.after .sparkle{animation-duration:2s}
+.after .heart{animation-duration:1.1s}
+
+/* ================= LAYOUT ================= */
+.container{max-width:520px;margin:auto;padding:16px}
+
+/* ===== Top Bar ===== */
+.top-bar{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+}
+.progress-box{
+  flex:1;
+  background:var(--card);
+  padding:14px;
+  border-radius:18px;
+  box-shadow:0 10px 22px rgba(2,132,199,.12);
+}
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px;
+  font-weight:800;
+  font-size:14px;
+}
+.progress{
+  height:8px;
+  background:var(--soft);
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+}
+
+/* Timer */
+.timer{
+  width:64px;height:64px;border-radius:50%;
+  background:conic-gradient(var(--primary) 0deg,var(--soft) 0deg);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;
+  background-color:var(--card);
+}
+
+/* ================= CARD ================= */
+.card{
+  background:var(--card);
+  padding:22px;
+  border-radius:24px;
+  box-shadow:0 18px 36px rgba(2,132,199,.18);
+}
+.question-title{
+  background:var(--question);
+  padding:16px;
+  border-radius:16px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+.option{
+  background:var(--option);
+  border:2px solid var(--soft);
+  border-radius:18px;
+  padding:15px;
+  margin:12px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.correct{background:#eafaf1;border-color:var(--success)}
+.option.wrong{background:#fff1f1;border-color:var(--danger)}
+.option.disabled{pointer-events:none;opacity:.9}
+
+button{
+  margin-top:18px;
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-weight:900;
+}
+
+/* Feedback */
+.feedback{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:10px;
+  animation:pop .5s;
+}
+@keyframes pop{
+  0%{transform:scale(.6);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* Report */
+.report{
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  border-left:6px solid var(--soft);
+}
+.report.correct{border-color:var(--success)}
+.report.wrong{border-color:var(--danger)}
+</style>
+</head>
+
+<body class="exam">
+
+<header>
+  <div class="logo">
+    <span class="brand-text">Ghaith Team</span>
+    <span class="heart">💖</span>
+    <span class="sparkle" style="top:-8px;left:0">✨</span>
+    <span class="sparkle" style="top:6px;right:-8px">✨</span>
+    <span class="sparkle" style="bottom:-8px;left:50%">✨</span>
+  </div>
+  <div style="margin-top:6px;font-weight:800">  👏🏻 الإمتحان في جيبك </div>
+</header>
+
+<div class="container">
+
+  <div class="top-bar">
+    <div class="progress-box">
+      <div class="progress-text">
+        <span id="progressText"></span>
+        <span>
+          ✔️ <span id="correctCount">0</span> |
+          ❌ <span id="wrongCount">0</span> |
+          ⏳ <span id="remainPercent">100%</span>
+        </span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="timer" id="timer">30:00</div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<script>
+/* ===== Questions ===== */
+let questions = [
+ {t:"Which zone in the operating room requires scrub attire and surgical masks?", o:["Unrestricted zone","Semi-restricted zone","Restricted zone","Patient reception area"], a:2},
+            {t:"What is the primary purpose of 'Ablative' surgery?", o:["Repairing a malformed organ","Removal of a diseased organ","Relief of pain","Transferring an organ"], a:1},
+            {t:"A patient requiring surgery within 24 to 30 hours is classified as:", o:["Emergent","Urgent / Imperative","Required","Elective"], a:1},
+            {t:"When does the intraoperative phase begin?", o:["When the decision for surgery is made","Upon admission to the hospital","With the transfer of the patient onto the OR bed","When the patient is discharged"], a:2},
+            {t:"Which member of the surgical team is responsible for counting sponges and instruments with the scrub nurse?", o:["Anesthesiologist","Surgeon","Circulating nurse","Radiology technician"], a:2},
+            {t:"What is the recommended timeframe for patients to stop smoking before surgery to reduce complications?", o:["1 to 2 weeks","2 to 4 weeks","4 to 8 weeks","10 to 12 weeks"], a:2},
+            {t:"Which position is typically used for kidney surgery?", o:["Dorsal recumbent","Prone","Lateral","Lithotomy"], a:2},
+            {t:"The primary goal of 'Palliative' surgery is to:", o:["Provide relief of pain","Replace a diseased structure","Confirm a diagnosis","Repair a cleft palate"], a:0},
+            {t:"Which laboratory test is used to evaluate respiratory status before surgery?", o:["Complete blood count","Urine analysis","Chest X-ray","Blood sugar test"], a:2},
+            {t:"Preoperative medications like atropine are primarily given to:", o:["Reduce anxiety","Promote amnesia","Reduce secretions","Enhance hypnotic effects"], a:2},
+            {t:"Which zone interfaces with other departments and allows street clothes?", o:["Restricted zone","Semi-restricted zone","Unrestricted zone","Sterile core"], a:2},
+            {t:"A biopsy is an example of which type of surgery?", o:["Exploratory","Diagnostic","Ablative","Constructive"], a:1},
+            {t:"Surgery for a fractured skull or severe bleeding is classified as:", o:["Urgent","Required","Emergent","Optional"], a:2},
+            {t:"The preoperative phase ends when:", o:["The patient signs the consent form","The patient is transferred to the operating room","The surgery begins","The patient enters the PACU"], a:1},
+            {t:"Which of the following is NOT a goal of the preoperative phase?", o:["Reduce anxiety","Inform the patient what to expect","Perform the surgical incision","Decrease risk of complications"], a:2},
+            {t:"What is the purpose of 'Reconstructive' surgery?", o:["Removal of a diseased organ","Repair or restoration of an organ or structure","Relief of pain","Diagnosis of a condition"], a:1},
+            {t:"Which electrolyte is commonly analyzed in routine preoperative screening?", o:["Potassium (K)","Iron","Vitamin D","Lead"], a:0},
+            {t:"Obesity and malnutrition are factors assessed in which body system status?", o:["Respiratory","Cardiovascular","Nutritional and Fluid","Endocrine"], a:2},
+            {t:"Why is surgery usually postponed if a patient has a respiratory infection?", o:["Risk of skin infection","Ventilation is potentially compromised","To save on hospital costs","The patient might be too tired"], a:1},
+            {t:"Uncontrolled hypertension may lead to:", o:["Immediate surgery","Postponement of surgery","A change in surgical site","Increased appetite"], a:1},
+            {t:"Which organ disorder affects how anesthetic agents are metabolized?", o:["Kidney","Liver","Heart","Lungs"], a:1},
+            {t:"Patients with diabetes are at risk for which perioperative complication?", o:["Hypoglycemia and hyperglycemia","Hypotension","Increased hair growth","Better wound healing"], a:0},
+            {t:"What is the purpose of shaving the operative site immediately before surgery?", o:["For cosmetic reasons","To minimize skin contamination and bacteria reservoir","To make the incision easier to see","It is not recommended anymore"], a:1},
+            {t:"Laxatives and enemas are primarily used before abdominal surgery to:", o:["Hydrate the patient","Empty the bowel and prevent distention","Increase blood pressure","Induce sleep"], a:1},
+            {t:"How many hours before general anesthesia should a patient typically be NPO (nothing by mouth)?", o:["2-4 hours","4-6 hours","8-12 hours","24 hours"], a:2},
+            {t:"Which of the following must be removed from the patient on the day of surgery?", o:["Hospital gown","ID band","Artificial nails and jewelry","Consent form"], a:2},
+            {t:"Lorazepam and midazolam are used in premedication to:", o:["Reduce secretions","Promote amnesia","Prevent infection","Increase gastric pH"], a:1},
+            {t:"What is the role of the 'Reception Nurse' in the intraoperative phase?", o:["Perform the surgery","Identify patient and check lab investigations","Administer anesthesia","Sterilize instruments"], a:1},
+            {t:"Which member of the unsterile team checks the suction apparatus and O2 supply?", o:["Surgeon","Anesthesia Nurse","Scrub Nurse","Radiology technician"], a:1},
+            {t:"The process by which all pathogenic and nonpathogenic organisms, including spores, are killed is:", o:["Disinfection","Sanitization","Sterilization","Cleaning"], a:2},
+            {t:"Which type of anesthesia involves blocking pain at a level below the diaphragm without loss of consciousness?", o:["General anesthesia","Local anesthesia","Spinal or epidural anesthesia","Regional block"], a:2},
+            {t:"Nitrous oxide is an example of a:", o:["Local anesthetic","General anesthetic agent","Sedative","Antiemetic"], a:1},
+            {t:"According to surgical asepsis guidelines, which part of the surgical gown is considered sterile?", o:["The entire gown","The back","The front from chest to level of sterile field","The sleeves only"], a:2},
+            {t:"Which position is used for operations on the thyroid and neck area?", o:["Lithotomy","Semi-fowlers","Jackknife","Trendelenburg"], a:1},
+            {t:"The 'Trendelenburg' position is primarily used for:", o:["Spinal surgery","Pelvic surgery","Brain surgery","Foot surgery"], a:1},
+            {t:"Which position is used for proctologic surgery?", o:["Jackknife","Supine","Prone","Lateral"], a:0},
+            {t:"A 'Cleft palate repair' is classified as which type of surgery?", o:["Ablative","Constructive","Palliative","Diagnostic"], a:1},
+            {t:"Which classification of urgency applies to a cataract surgery?", o:["Emergent","Urgent","Required","Optional"], a:2},
+            {t:"The 'Post-operative phase' continues until:", o:["The patient wakes up","The patient is discharged from medical care and last follow-up","The patient leaves the OR","The patient starts eating"], a:1},
+            {t:"Which of the following is a routine screening test for coagulation studies?", o:["ECG","Prothrombin time (PT)","Chest X-ray","Urine analysis"], a:1},
+            {t:"A 'Skin graft' is an example of:", o:["Ablative surgery","Transplant surgery","Diagnostic surgery","Exploratory surgery"], a:1},
+            {t:"What is the primary role of the 'Scrub Nurse' regarding instruments?", o:["Buying them","Cleaning them after the patient leaves the hospital","Checking for proper function and handling them during procedure","Ordering them from the supplier"], a:2},
+            {t:"Which zone requires scrub clothes and caps but not necessarily a mask (unless in restricted areas)?", o:["Unrestricted zone","Semi-restricted zone","Restricted zone","The cafeteria"], a:1},
+            {t:"The 'Circulating Nurse' is part of which team?", o:["Sterile team","Unsterile team","Management team","Maintenance team"], a:1},
+            {t:"Which position is also known as 'Supine'?", o:["Dorsal recumbent","Prone","Lateral","Lithotomy"], a:0},
+            {t:"What is the purpose of 'Ranitidine' in preoperative medication?", o:["Reduction of anxiety","Reduction of volume and pH of gastric contents","Reduction of secretions","Promotion of amnesia"], a:1},
+            {t:"Who is responsible for gowning and gloving the surgeons?", o:["Circulating nurse","Anesthesiologist","Scrub nurse","The surgeon themselves"], a:2},
+            {t:"Which method of sterilization uses steam as autoclaving?", o:["Chemical","Thermal","Ionizing radiation","Gas"], a:1},
+            {t:"If a sterile barrier is breached, the area must be considered:", o:["Still sterile","Slightly clean","Contaminated","Washable"], a:2},
+            {t:"Which of the following is an example of 'Elective' surgery?", o:["Gunshot wound","Simple hernia repair","Severe bleeding","Cataract"], a:1},
+            {t:"A 'Rhizotomy' for relief of pain is an example of:", o:["Ablative surgery","Palliative surgery","Constructive surgery","Transplant"], a:1},
+            {t:"Which team member stays in the 'unsterile' area but assists in counting sponges?", o:["Scrub nurse","Circulating nurse","Surgeon","Assistant surgeon"], a:1},
+            {t:"The 'Lithotomy' position is used for:", o:["Kidney surgery","Vaginal and rectal surgery","Thyroid surgery","Spinal surgery"], a:1},
+            {t:"Which of the following is a general anesthetic given intravenously (I.V.)?", o:["Halothane","Nitrous oxide","Methohexital sodium","Oxygen"], a:2},
+            {t:"When should the patient void (urinate) in relation to preoperative medications?", o:["After the medication takes effect","Before administering the medications","During the surgery","Only if they feel like it"], a:1},
+            {t:"What should the nurse do after administering preoperative sedatives?", o:["Encourage the patient to walk","Raise the side rails and instruct the patient to stay in bed","Take the patient to the cafeteria","Leave the patient alone"], a:1},
+            {t:"The 'Phase I PACU' is designated for:", o:["Patients waiting for surgery","Patients immediately after surgery requiring close monitoring","Patients ready for discharge","Families of patients"], a:1},
+            {t:"Which surgery is 'patient's decision' and 'personal preference'?", o:["Elective","Required","Optional","Urgent"], a:2},
+            {t:"A 'Cydex' solution is used for which type of sterilization?", o:["Thermal","Chemical","Radiation","Mechanical"], a:1},
+            {t:"What is the 'Scrub Nurse's' action before donning sterile gown and gloves?", o:["Check the patient's ID","Perform surgical hand scrub","Talk to the family","Eat a meal"], a:1},
+            {t:"Minor surgery carries a high risk and results in many complications.", o:["True","False"], a:1},
+            {t:"The intraoperative phase begins when the patient is admitted to the PACU.", o:["True","False"], a:1},
+            {t:"Palliative surgery is performed to cure a disease.", o:["True","False"], a:1},
+            {t:"Patients who smoke should be urged to stop 4 to 8 weeks before surgery.", o:["True","False"], a:0},
+            {t:"The restricted zone includes the patient reception area.", o:["True","False"], a:1},
+            {t:"The circulating nurse is part of the sterile team.", o:["True","False"], a:1},
+            {t:"General anesthesia causes a loss of consciousness.", o:["True","False"], a:0},
+            {t:"The incision area should be shaved several days before the operation to ensure cleanliness.", o:["True","False"], a:1},
+            {t:"Laxatives are used to prevent post-operative distention.", o:["True","False"], a:0},
+            {t:"A patient with a respiratory infection should proceed with surgery as planned.", o:["True","False"], a:1},
+            {t:"The scrub nurse handles the surgical instruments during the procedure.", o:["True","False"], a:0},
+            {t:"Sterilization kills both pathogenic and nonpathogenic organisms, including spores.", o:["True","False"], a:0},
+            {t:"The Jackknife position is used for spinal surgery.", o:["True","False"], a:1},
+            {t:"Items added to a sterile field must be added using methods that preserve sterility.", o:["True","False"], a:0},
+            {t:"The preoperative phase starts when the patient enters the operating room.", o:["True","False"], a:1},
+            {t:"Scenario: A 45-year-old patient is scheduled for an elective cholecystectomy. During the preoperative assessment, the patient mentions they had a cup of coffee 2 hours ago. What is the most appropriate nursing action?", o:["Proceed with surgery as scheduled","Inform the surgeon and anesthesiologist, as surgery may be postponed","Tell the patient it is okay since it was just coffee","Administer an extra dose of sedative"], a:1},
+            {t:"Scenario: During a surgical procedure, the circulating nurse notices the scrub nurse's glove touch an unsterile light fixture. What should the circulating nurse do?", o:["Ignore it if the touch was brief","Tell the scrub nurse to wash the glove with alcohol","Immediately point out the break in technique and ensure the glove is changed","Wait until the end of the surgery to report it"], a:2},
+            {t:"Scenario: A patient is undergoing an emergency laparotomy for a ruptured appendix. Which classification of urgency does this fall under?", o:["Urgent","Elective","Emergent","Required"], a:2},
+            {t:"Scenario: A nurse is preparing a patient for surgery and notices the informed consent form is not signed. The patient says, 'I'm not sure I want this surgery anymore.' What is the nurse's priority?", o:["Ask the patient's spouse to sign instead","Coerce the patient into signing quickly","Notify the surgeon and ensure the patient's concerns are addressed before signing","Sign the form for the patient to save time"], a:2},
+            {t:"Scenario: A patient is being positioned for a thyroidectomy. Which position should the nurse prepare?", o:["Lithotomy","Semi-fowlers","Trendelenburg","Prone"], a:1}
+  
+];
+
+
+
+// ===== shuffle questions only =====
+function shuffleQuestions(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+// خلط الأسئلة فقط
+shuffleQuestions(questions);
+
+// تعريف المتغيرات الناقصة
+let i = 0;
+let correct = 0;
+let wrong = 0;
+let answers = [];
+let wrongSet = [];
+
+/* ===== Timer ===== */
+let totalTime=30*60, timeLeft=totalTime;
+const timerInt=setInterval(()=>{
+  timeLeft--;
+  let m=Math.floor(timeLeft/60), s=timeLeft%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  let deg=(timeLeft/totalTime)*360;
+  timer.style.background=`conic-gradient(var(--primary) ${deg}deg,var(--soft) ${deg}deg)`;
+  if(timeLeft<=0){clearInterval(timerInt);finishExam();}
+},1000);
+
+/* ===== UI ===== */
+function updateTop(){
+  let total=questions.length;
+  let answered=correct+wrong;
+  progressText.innerText=`سؤال ${i+1} من ${total}`;
+  progressBar.style.width=((i+1)/total*100)+"%";
+  correctCount.innerText=correct;
+  wrongCount.innerText=wrong;
+  remainPercent.innerText=Math.round(((total-answered)/total)*100)+"%";
+}
+
+/* ===== Render ===== */
+function show(){
+  updateTop();
+  let q = questions[i];
+
+  app.innerHTML = `
+    <div class="card">
+      <div class="question-title">${q.t}</div>
+      ${q.o.map((o,idx)=>`
+        <div class="option" onclick="choose(${idx})">${o}</div>
+      `).join("")}
+    </div>
+  `;
+}
+/* ===== Choose ===== */
+function choose(v){
+  if(answers[i]!=null) return;
+  answers[i]=v;
+  let ok=v===questions[i].a;
+  ok?correct++:wrong++;
+  app.innerHTML=`
+    <div class="feedback">${ok?"🎉 شاطر جدًا كمل":"😅 ركّز يا سُكر"}</div>
+    <div class="card">
+      <div class="question-title">${questions[i].t}</div>
+      ${questions[i].o.map((o,j)=>`
+        <div class="option ${j===questions[i].a?"correct":j===v?"wrong":""} disabled">${o}</div>
+      `).join("")}
+      <button onclick="next()">التالي</button>
+    </div>`;
+}
+
+/* ===== Next ===== */
+function next(){
+  if(i<questions.length-1){i++;show();}
+  else finishExam();
+}
+
+/* ===== Finish ===== */
+function finishExam(){
+  document.body.classList.remove("exam");
+  document.body.classList.add("after");
+
+  let score=Math.round((correct/questions.length)*100);
+
+  if(score>=80){
+    document.documentElement.style.setProperty("--brand1","#22c55e");
+    document.documentElement.style.setProperty("--brand2","#fde047");
+  }else if(score>=50){
+    document.documentElement.style.setProperty("--brand1","#38bdf8");
+    document.documentElement.style.setProperty("--brand2","#e0f2fe");
+  }else{
+    document.documentElement.style.setProperty("--brand1","#fb923c");
+    document.documentElement.style.setProperty("--brand2","#fed7aa");
+  }
+
+  wrongSet=[];
+  let report="";
+  questions.forEach((q,idx)=>{
+    let ok=answers[idx]===q.a;
+    if(!ok) wrongSet.push(q);
+    report+=`
+      <div class="report ${ok?"correct":"wrong"}">
+        <b>${q.t}</b><br>
+إجابتك: ${answers[idx]!=null ? q.o[answers[idx]] : "لم يتم الحل"}<br>
+الصح: ${q.o[q.a]}
+      </div>`;
+  });
+
+  app.innerHTML=`
+    <div class="card">
+      <h3>?? تقريرك</h3>
+      ${report}
+      ${wrongSet.length?`<button onclick="retry()">إعادة حل الغلط فقط</button>`:"<p>أنت ممتاز 👑</p>"}
+    </div>`;
+}
+
+/* ===== Retry Wrong ===== */
+function retry(){
+  // نبدأ امتحان جديد بالأسئلة الغلط فقط
+  questions = [...wrongSet];
+
+  answers = [];
+  wrongSet = [];
+  i = 0;
+  correct = 0;
+  wrong = 0;
+
+  // رجوع لشكل الامتحان
+  document.body.classList.remove("after");
+  document.body.classList.add("exam");
+
+  show();
+}
+
+show();
+</script>
+
+</body>
+</html>
