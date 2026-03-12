@@ -1,0 +1,618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> gaith-team </title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --blue: #1a3a5c;
+    --blue-light: #d0e8ff;
+    --green: #1a4a2e;
+    --green-light: #c8f0d8;
+    --red: #c0392b;
+    --red-light: #fdecea;
+    --yellow: #d4890a;
+    --yellow-light: #fef9e7;
+    --purple: #6c3483;
+    --purple-light: #f0e6f6;
+    --teal: #0e6655;
+    --teal-light: #d1f2eb;
+    --orange: #a04000;
+    --orange-light: #fdebd0;
+    --bg: #f4f6f9;
+    --card: #ffffff;
+    --text: #1a1a2e;
+    --border: #e0e6ef;
+
+    --fs-base: clamp(13px,2.2vw,15px);
+    --fs-sm:   clamp(11px,1.8vw,13px);
+    --fs-xs:   clamp(10px,1.5vw,12px);
+    --fs-h1:   clamp(18px,4.5vw,30px);
+    --fs-h3:   clamp(11px,2vw,13px);
+    --fs-phase:clamp(14px,3vw,18px);
+    --fs-char: clamp(18px,4vw,26px);
+    --radius:  clamp(8px,2vw,14px);
+    --pad-card:clamp(12px,3vw,20px);
+    --pad-h:   clamp(16px,4vw,40px);
+    --gap:     clamp(10px,2vw,16px);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+  body{
+    font-family:'DM Sans',sans-serif;
+    background:var(--bg);color:var(--text);
+    font-size:var(--fs-base);line-height:1.65;
+    overflow-x:hidden;
+  }
+
+  /* HEADER */
+  header{
+    background:linear-gradient(135deg,#0a1628 0%,#1a3a5c 55%,#0d2b1a 100%);
+    color:white;
+    padding:clamp(18px,4vw,34px) var(--pad-h) clamp(16px,3vw,26px);
+    position:relative;overflow:hidden;
+  }
+  header::before{
+    content:'';position:absolute;top:-40px;right:-40px;
+    width:clamp(100px,25vw,200px);height:clamp(100px,25vw,200px);
+    border-radius:50%;background:rgba(240,165,0,0.15);
+  }
+  header h1{font-family:'Syne',sans-serif;font-size:var(--fs-h1);font-weight:800;letter-spacing:-0.5px;line-height:1.25;}
+  header p{opacity:.75;font-size:var(--fs-sm);margin-top:4px;}
+  .badge-row{display:flex;gap:8px;margin-top:12px;flex-wrap:wrap;}
+  .badge{
+    padding:clamp(3px,.8vw,5px) clamp(10px,2.5vw,16px);
+    border-radius:20px;font-size:var(--fs-xs);font-weight:600;
+    letter-spacing:.4px;text-transform:uppercase;white-space:nowrap;
+  }
+  .b-red   {background:var(--red-light);color:var(--red);}
+  .b-blue  {background:var(--blue-light);color:var(--blue);}
+  .b-green {background:var(--green-light);color:var(--green);}
+  .b-teal  {background:var(--teal-light);color:var(--teal);}
+
+  /* CONTAINER */
+  .container{max-width:1100px;margin:0 auto;padding:clamp(16px,3vw,28px) clamp(12px,3vw,20px) 60px;}
+
+  /* SECTION LABEL */
+  .sec-label{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'Syne',sans-serif;font-size:var(--fs-phase);font-weight:800;
+    padding:clamp(8px,1.5vw,11px) clamp(14px,3vw,24px);border-radius:12px;
+    margin:clamp(20px,4vw,30px) 0 clamp(12px,2vw,16px);max-width:100%;
+  }
+  .sl-blue  {background:var(--blue);color:white;}
+  .sl-red   {background:var(--red);color:white;}
+  .sl-green {background:var(--green);color:white;}
+  .sl-teal  {background:var(--teal);color:white;}
+  .sl-purple{background:var(--purple);color:white;}
+  .sl-orange{background:var(--orange);color:white;}
+  .sl-dark  {background:#2c3e50;color:white;}
+
+  /* GRID */
+  .grid{display:grid;gap:var(--gap);}
+  .g2{grid-template-columns:repeat(2,1fr);}
+  .g3{grid-template-columns:repeat(3,1fr);}
+
+  /* CARD */
+  .card{
+    background:var(--card);border-radius:var(--radius);
+    padding:var(--pad-card);border-left:5px solid #ccc;
+    box-shadow:0 2px 8px rgba(0,0,0,.07);min-width:0;overflow:hidden;
+  }
+  .c-blue  {border-color:var(--blue);}
+  .c-red   {border-color:var(--red);background:var(--red-light);}
+  .c-green {border-color:var(--green);}
+  .c-yellow{border-color:var(--yellow);background:var(--yellow-light);}
+  .c-purple{border-color:var(--purple);background:var(--purple-light);}
+  .c-teal  {border-color:var(--teal);background:var(--teal-light);}
+  .c-orange{border-color:var(--orange);background:var(--orange-light);}
+
+  .card h3{
+    font-family:'Syne',sans-serif;font-size:var(--fs-h3);font-weight:800;
+    text-transform:uppercase;letter-spacing:.5px;
+    margin-bottom:10px;display:flex;align-items:center;gap:6px;
+    flex-wrap:wrap;line-height:1.4;
+  }
+  .c-blue   h3{color:var(--blue);}
+  .c-red    h3{color:var(--red);}
+  .c-green  h3{color:var(--green);}
+  .c-yellow h3{color:var(--orange);}
+  .c-purple h3{color:var(--purple);}
+  .c-teal   h3{color:var(--teal);}
+  .c-orange h3{color:var(--orange);}
+
+  ul{padding-left:18px;}
+  ul li{margin-bottom:5px;font-size:var(--fs-base);}
+
+  /* EXAM STAR */
+  .star{
+    display:inline-flex;align-items:center;gap:4px;
+    background:#fff3cd;border:1.5px solid #f0a500;
+    color:#7d5e00;border-radius:8px;
+    padding:2px clamp(6px,1.5vw,10px);
+    font-size:var(--fs-xs);font-weight:700;
+    margin-left:6px;white-space:nowrap;flex-shrink:0;
+  }
+
+  /* TAGS */
+  .tag{
+    display:inline-block;
+    padding:clamp(2px,.5vw,3px) clamp(6px,1.5vw,9px);
+    border-radius:6px;font-size:var(--fs-xs);font-weight:700;
+    margin:2px 2px;white-space:nowrap;
+  }
+  .t-red   {background:var(--red-light);color:var(--red);border:1px solid #f1948a;}
+  .t-blue  {background:var(--blue-light);color:var(--blue);border:1px solid #85c1e9;}
+  .t-green {background:var(--green-light);color:var(--green);border:1px solid #82e0aa;}
+  .t-purple{background:var(--purple-light);color:var(--purple);border:1px solid #c39bd3;}
+  .t-yellow{background:var(--yellow-light);color:var(--orange);border:1px solid #f9ca24;}
+  .t-teal  {background:var(--teal-light);color:var(--teal);border:1px solid #76d7c4;}
+  .t-orange{background:var(--orange-light);color:var(--orange);border:1px solid #f0a060;}
+
+  /* TABLE */
+  table{width:100%;border-collapse:collapse;font-size:var(--fs-sm);table-layout:fixed;}
+  th{
+    font-family:'Syne',sans-serif;font-size:var(--fs-xs);font-weight:800;
+    text-transform:uppercase;letter-spacing:.4px;
+    padding:clamp(6px,1.5vw,9px) clamp(6px,1.5vw,10px);text-align:left;
+  }
+  td{
+    padding:clamp(5px,1.2vw,8px) clamp(6px,1.5vw,10px);
+    border-bottom:1px solid var(--border);word-break:break-word;vertical-align:top;
+  }
+  tr:last-child td{border-bottom:none;}
+  tr:nth-child(even) td{background:rgba(0,0,0,.025);}
+
+  /* ══ بصموجة عمو غيث ══ */
+  .bsm{
+    border-radius:var(--radius);
+    padding:clamp(12px,3vw,20px) clamp(14px,3vw,22px);
+    margin:8px 0;
+  }
+  .bsm-title{
+    font-family:'Syne',sans-serif;font-size:var(--fs-sm);font-weight:800;
+    letter-spacing:.6px;text-transform:uppercase;margin-bottom:8px;
+    display:flex;align-items:flex-start;gap:6px;flex-wrap:wrap;line-height:1.5;
+  }
+  .phrase{
+    font-family:'Syne',sans-serif;font-size:clamp(12px,2.5vw,15px);
+    font-weight:700;font-style:italic;
+    padding:4px 12px;border-radius:8px;
+    display:inline-block;margin-bottom:10px;
+  }
+  .letter-row{display:flex;flex-wrap:wrap;gap:clamp(6px,1.5vw,10px);margin-top:6px;}
+  .letter-item{
+    display:flex;align-items:flex-start;
+    min-width:clamp(80px,18vw,130px);max-width:clamp(110px,22vw,160px);
+  }
+  .lchar{
+    font-family:'Syne',sans-serif;font-size:var(--fs-char);
+    font-weight:800;line-height:1;
+    min-width:clamp(22px,5vw,30px);flex-shrink:0;
+  }
+  .lmean{font-size:var(--fs-xs);font-weight:500;padding-top:2px;line-height:1.4;}
+
+  /* bsm color themes */
+  .bsm-blue {background:var(--blue-light);}
+  .bsm-blue .lchar,.bsm-blue .bsm-title{color:var(--blue);}
+  .bsm-blue .phrase{background:var(--blue);color:white;}
+
+  .bsm-red {background:var(--red-light);}
+  .bsm-red .lchar,.bsm-red .bsm-title{color:var(--red);}
+  .bsm-red .phrase{background:var(--red);color:white;}
+
+  .bsm-green {background:var(--green-light);}
+  .bsm-green .lchar,.bsm-green .bsm-title{color:var(--green);}
+  .bsm-green .phrase{background:var(--green);color:white;}
+
+  .bsm-teal {background:var(--teal-light);}
+  .bsm-teal .lchar,.bsm-teal .bsm-title{color:var(--teal);}
+  .bsm-teal .phrase{background:var(--teal);color:white;}
+
+  .bsm-purple {background:var(--purple-light);}
+  .bsm-purple .lchar,.bsm-purple .bsm-title{color:var(--purple);}
+  .bsm-purple .phrase{background:var(--purple);color:white;}
+
+  .bsm-orange {background:var(--orange-light);}
+  .bsm-orange .lchar,.bsm-orange .bsm-title{color:var(--orange);}
+  .bsm-orange .phrase{background:var(--orange);color:white;}
+
+  /* MINI GRID */
+  .mg{display:grid;gap:8px;margin-top:8px;}
+  .mg2{grid-template-columns:repeat(2,1fr);}
+  .mg3{grid-template-columns:repeat(3,1fr);}
+  .mi{border-radius:8px;padding:clamp(7px,2vw,10px) clamp(8px,2vw,12px);font-size:var(--fs-sm);}
+
+  /* QUICK NUMS */
+  .qnum{
+    display:flex;align-items:flex-start;gap:10px;
+    background:white;border-radius:8px;padding:8px 12px;
+  }
+  .qnum-n{
+    font-family:'Syne',sans-serif;font-weight:800;font-size:22px;
+    line-height:1;flex-shrink:0;
+  }
+
+  /* RESPONSIVE */
+  @media(max-width:860px){
+    .g3{grid-template-columns:repeat(2,1fr);}
+    .mg3{grid-template-columns:repeat(2,1fr);}
+  }
+  @media(max-width:560px){
+    .g2,.g3{grid-template-columns:1fr;}
+    .mg2,.mg3{grid-template-columns:1fr;}
+    .star{display:none;}
+    table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════ HEADER ══════════════ -->
+<header>
+  <h1>🫁 Pneumonia </h1>
+  <p> ركز معايا وصلي علي النبي والمحاضة في جيبك بإذن الله </p>
+</header>
+
+<div class="container">
+
+<!-- ══════════════ DEFINITION ══════════════ -->
+<div class="sec-label sl-dark">📚 Definition</div>
+<div class="card c-blue">
+  <h3>🫁 What is Pneumonia? <span class="star">⭐ EXAM</span></h3>
+  Inflammation of the <strong>lung parenchyma</strong> — organisms inhaled → transmitted to lower airways & alveoli → <strong>impairs gas exchange</strong>. Air sacs fill with pus and may become solid.
+  <div class="mg mg3" style="margin-top:12px;">
+    <div class="mi" style="background:var(--blue-light);"><strong style="color:var(--blue);">Double Pneumonia</strong><br>Both lungs affected</div>
+    <div class="mi" style="background:var(--blue-light);"><strong style="color:var(--blue);">Single Pneumonia</strong><br>One lung affected</div>
+    <div class="mi" style="background:var(--blue-light);"><strong style="color:var(--blue);">Lobar Pneumonia</strong><br>Only certain lobes</div>
+  </div>
+</div>
+
+<!-- ══════════════ CLASSIFICATION ══════════════ -->
+<div class="sec-label sl-blue">🦠 Classification by Causative Agent <span class="star">⭐ EXAM</span></div>
+<div class="grid g2">
+
+  <div class="card c-blue">
+    <h3>🔵 Bacterial — Gram-Positive <span class="star">⭐ EXAM</span></h3>
+    <ul>
+      <li><span class="tag t-blue">Pneumococcal</span></li>
+      <li><span class="tag t-blue">Staphylococcal</span></li>
+      <li><span class="tag t-blue">Streptococcal</span></li>
+      <li><span class="tag t-red">Anthrax</span> — <em>also called wool-sorter's disease</em><br>
+        <small>• Disease of sheep/cattle → humans via <strong>inhalation</strong><br>
+        • Agricultural/industrial exposure to contaminated animal hides or hair<br>
+        • <strong>Lethal</strong> if not treated before severe symptoms</small>
+      </li>
+    </ul>
+  </div>
+
+  <div class="card c-blue">
+    <h3>🔴 Bacterial — Gram-Negative <span class="star">⭐ EXAM</span></h3>
+    <ul>
+      <li><span class="tag t-red">Influenza (Haemophilus)</span></li>
+      <li><span class="tag t-red">Pseudomonas</span></li>
+      <li><span class="tag t-red">Klebsiella</span></li>
+      <li><span class="tag t-red">Legionnaires</span></li>
+    </ul>
+    <div style="margin-top:10px;">
+      <strong style="color:var(--blue);">Other types:</strong><br>
+      <span class="tag t-teal">Mycoplasma</span>
+      <span class="tag t-green">Viral</span> <small>— most common</small>
+      <span class="tag t-purple">Protozoa</span> <small>Pneumocystis carinii — in AIDS/Chemo patients</small>
+      <span class="tag t-orange">Fungi, Parasites, Rickettsiae, Chlamydiae</span>
+    </div>
+  </div>
+
+</div>
+
+<!-- بصموجة عمو غيث — Classification -->
+<div class="bsm bsm-blue">
+  <div class="bsm-title">🧠 بصموجة عمو غيث — Gram+ Bacteria: <span class="phrase">"Please Stop Sneezing Around"</span></div>
+  <div class="letter-row">
+    <div class="letter-item"><div class="lchar">P</div><div class="lmean">Pneumococcal</div></div>
+    <div class="letter-item"><div class="lchar">S</div><div class="lmean">Staphylococcal</div></div>
+    <div class="letter-item"><div class="lchar">S</div><div class="lmean">Streptococcal</div></div>
+    <div class="letter-item"><div class="lchar">A</div><div class="lmean">Anthrax<br><small>(wool-sorter's)</small></div></div>
+  </div>
+</div>
+
+<div class="bsm bsm-red" style="margin-top:8px;">
+  <div class="bsm-title">🧠 بصموجة عمو غيث — Gram− Bacteria: <span class="phrase">"I Play Kicking Legionnaire"</span></div>
+  <div class="letter-row">
+    <div class="letter-item"><div class="lchar">I</div><div class="lmean">Influenza<br><small>(Haemophilus)</small></div></div>
+    <div class="letter-item"><div class="lchar">P</div><div class="lmean">Pseudomonas</div></div>
+    <div class="letter-item"><div class="lchar">K</div><div class="lmean">Klebsiella</div></div>
+    <div class="letter-item"><div class="lchar">L</div><div class="lmean">Legionnaires</div></div>
+  </div>
+</div>
+
+<!-- ══════════════ RISK FACTORS ══════════════ -->
+<div class="sec-label sl-orange">⚠️ Risk Factors <span class="star">⭐ EXAM</span></div>
+<div class="card c-orange">
+  <h3>🚨 Who is at Risk?</h3>
+  <div class="mg mg2">
+    <div class="mi" style="background:white;"><strong style="color:var(--orange);">Chronic Diseases</strong><br>Heart failure, Diabetes, Alcoholism, COPD, AIDS</div>
+    <div class="mi" style="background:white;"><strong style="color:var(--orange);">Lifestyle</strong><br>Cigarette smoking</div>
+    <div class="mi" style="background:white;"><strong style="color:var(--orange);">Health Status</strong><br>Severe acute illness</div>
+    <div class="mi" style="background:white;"><strong style="color:var(--orange);">Immunity</strong><br>Suppressed immune system & Immobility</div>
+  </div>
+</div>
+
+<div class="bsm bsm-orange">
+  <div class="bsm-title">🧠 بصموجة عمو غيث — Risk Factors: <span class="phrase">"Can Smoking Sick People Survive?"</span></div>
+  <div class="letter-row">
+    <div class="letter-item"><div class="lchar">C</div><div class="lmean">Chronic disease<br><small>HF, DM, COPD, AIDS</small></div></div>
+    <div class="letter-item"><div class="lchar">S</div><div class="lmean">Smoking</div></div>
+    <div class="letter-item"><div class="lchar">S</div><div class="lmean">Severe acute<br><small>illness</small></div></div>
+    <div class="letter-item"><div class="lchar">P</div><div class="lmean">Poor immunity<br><small>suppressed</small></div></div>
+    <div class="letter-item"><div class="lchar">S</div><div class="lmean">Sedentary/<br><small>Immobility</small></div></div>
+  </div>
+</div>
+
+<!-- ══════════════ CLINICAL MANIFESTATIONS ══════════════ -->
+<div class="sec-label sl-red">🌡️ Clinical Manifestations (Bacterial) <span class="star">⭐ EXAM</span></div>
+<div class="grid g2">
+  <div class="card c-red">
+    <h3>🔥 Signs & Symptoms</h3>
+    <ul>
+      <li><strong>Sudden onset</strong> + shaking chill</li>
+      <li><strong>Rapidly rising fever</strong>: 39.5°–40.5°C (101°–105°F)</li>
+      <li>Cough productive of <strong>purulent sputum</strong> (pus)</li>
+      <li><strong>Pleuritic chest pain</strong> — aggravated by breathing/coughing</li>
+      <li><strong>Tachypnea</strong> + respiratory grunting + nasal flaring + accessory muscles</li>
+      <li><strong>Tachycardia</strong></li>
+      <li>Rapid, bounding pulse</li>
+      <li>Fatigue, poor appetite</li>
+    </ul>
+  </div>
+
+  <div class="card c-red">
+    <h3>⚠️ Complications <span class="star">⭐ EXAM</span></h3>
+    <ul>
+      <li><span class="tag t-red">Pleural effusion</span></li>
+      <li><span class="tag t-red">Hypotension & Shock</span> <small>especially gram−, elderly</small></li>
+      <li><span class="tag t-red">Superinfection</span> <small>pericarditis, bacteremia, meningitis</small></li>
+      <li><span class="tag t-red">Delirium</span> <small>⚡ Medical emergency!</small></li>
+      <li><span class="tag t-red">Atelectasis</span> <small>due to mucous plugs</small></li>
+      <li><span class="tag t-red">Delayed resolution</span></li>
+    </ul>
+    <div style="margin-top:10px;padding:8px;background:white;border-radius:8px;border-left:3px solid var(--red);">
+      <strong style="color:var(--red);">📝 Elderly Special Note:</strong><br>
+      <small>Assess for: unusual behavior, altered mental status, dehydration, excessive fatigue, concomitant heart failure</small>
+    </div>
+  </div>
+</div>
+
+<!-- بصموجة عمو غيث — Signs -->
+<div class="bsm bsm-red">
+  <div class="bsm-title">🧠 بصموجة عمو غيث — Clinical Manifestations: <span class="phrase">"Sudden Fever Coughs Painful Tachypnea, Tachycardia, Fatigue"</span></div>
+  <div class="letter-row">
+    <div class="letter-item"><div class="lchar">S</div><div class="lmean">Sudden onset<br><small>+ chills</small></div></div>
+    <div class="letter-item"><div class="lchar">F</div><div class="lmean">Fever<br><small>39.5–40.5°C</small></div></div>
+    <div class="letter-item"><div class="lchar">C</div><div class="lmean">Cough<br><small>purulent sputum</small></div></div>
+    <div class="letter-item"><div class="lchar">P</div><div class="lmean">Pain<br><small>pleuritic chest</small></div></div>
+    <div class="letter-item"><div class="lchar">T</div><div class="lmean">Tachypnea<br><small>+ grunting</small></div></div>
+    <div class="letter-item"><div class="lchar">T</div><div class="lmean">Tachycardia<br><small>bounding pulse</small></div></div>
+    <div class="letter-item"><div class="lchar">F</div><div class="lmean">Fatigue<br><small>poor appetite</small></div></div>
+  </div>
+</div>
+
+<!-- بصموجة عمو غيث — Complications -->
+<div class="bsm bsm-purple" style="margin-top:8px;">
+  <div class="bsm-title">🧠 بصموجة عمو غيث — Complications: <span class="phrase">"Please Have Super Delicious Ato-Delayed"</span></div>
+  <div class="letter-row">
+    <div class="letter-item"><div class="lchar">P</div><div class="lmean">Pleural<br><small>effusion</small></div></div>
+    <div class="letter-item"><div class="lchar">H</div><div class="lmean">Hypotension/<br><small>Shock</small></div></div>
+    <div class="letter-item"><div class="lchar">S</div><div class="lmean">Superinfection<br><small>bacteremia</small></div></div>
+    <div class="letter-item"><div class="lchar">D</div><div class="lmean">Delirium<br><small>⚡ Emergency</small></div></div>
+    <div class="letter-item"><div class="lchar">A</div><div class="lmean">Atelectasis<br><small>mucous plugs</small></div></div>
+    <div class="letter-item"><div class="lchar">D</div><div class="lmean">Delayed<br><small>resolution</small></div></div>
+  </div>
+</div>
+
+<!-- ══════════════ DIAGNOSIS ══════════════ -->
+<div class="sec-label sl-teal">🔬 Diagnosis <span class="star">⭐ EXAM</span></div>
+<div class="card c-teal">
+  <h3>🧪 Diagnostic Studies</h3>
+  <div class="mg mg3">
+    <div class="mi" style="background:white;"><strong style="color:var(--teal);">1. History</strong><br>Recent respiratory tract infection</div>
+    <div class="mi" style="background:white;"><strong style="color:var(--teal);">2. Physical Exam</strong><br>Auscultation, inspection</div>
+    <div class="mi" style="background:white;"><strong style="color:var(--teal);">3. Chest X-Ray</strong><br>Confirms infiltrates</div>
+    <div class="mi" style="background:white;"><strong style="color:var(--teal);">4. Sputum Culture</strong><br>+ Acid-fast bacilli (AFB)</div>
+    <div class="mi" style="background:white;"><strong style="color:var(--teal);">5. CBC</strong><br>WBC elevated ↑</div>
+  </div>
+</div>
+
+<div class="bsm bsm-teal">
+  <div class="bsm-title">🧠 بصموجة عمو غيث — Diagnosis: <span class="phrase">"History, Physical, X-ray, Sputum, CBC"</span></div>
+  <div class="letter-row">
+    <div class="letter-item"><div class="lchar">H</div><div class="lmean">History<br><small>recent URTI</small></div></div>
+    <div class="letter-item"><div class="lchar">P</div><div class="lmean">Physical<br><small>exam</small></div></div>
+    <div class="letter-item"><div class="lchar">X</div><div class="lmean">X-Ray<br><small>chest</small></div></div>
+    <div class="letter-item"><div class="lchar">S</div><div class="lmean">Sputum<br><small>culture + AFB</small></div></div>
+    <div class="letter-item"><div class="lchar">C</div><div class="lmean">CBC<br><small>↑ WBC</small></div></div>
+  </div>
+</div>
+
+<!-- ══════════════ MEDICAL MANAGEMENT ══════════════ -->
+<div class="sec-label sl-green">💊 Medical Management</div>
+<div class="grid g2">
+  <div class="card c-green">
+    <h3>💉 Treatment</h3>
+    <ul>
+      <li><strong>Antimicrobial therapy</strong> — based on lab identification of causative organism & sensitivity</li>
+      <li><strong>Oxygen therapy</strong> — if inadequate gas exchange</li>
+    </ul>
+  </div>
+  <div class="card c-green">
+    <h3>📝 Key Point</h3>
+    Antibiotic choice depends on:<br>
+    <span class="tag t-green">Causative organism identified</span>
+    <span class="tag t-green">Sensitivity testing</span>
+    <span class="tag t-green">Lab results</span>
+  </div>
+</div>
+
+<!-- ══════════════ NURSING PROCESS ══════════════ -->
+<div class="sec-label sl-purple">🩺 Nursing Process (I–V) <span class="star">⭐ EXAM</span></div>
+
+<!-- ASSESSMENT -->
+<div class="card c-purple" style="margin-bottom:var(--gap);">
+  <h3>I. Assessment <span class="star">⭐ EXAM</span></h3>
+  <div class="mg mg2">
+    <div>
+      <ul>
+        <li>Changes in <strong>temperature & pulse</strong></li>
+        <li>Amount, odor, color of <strong>secretions</strong></li>
+        <li>Frequency & severity of <strong>cough</strong></li>
+      </ul>
+    </div>
+    <div>
+      <ul>
+        <li>Degree of <strong>tachypnea</strong> / SOB</li>
+        <li>Physical assessment: <strong>inspect & auscultate</strong> chest</li>
+        <li>Changes in <strong>chest X-ray</strong></li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- NURSING DIAGNOSES -->
+<div class="card c-purple" style="margin-bottom:var(--gap);">
+  <h3>II. Nursing Diagnoses <span class="star">⭐ EXAM</span></h3>
+  <table>
+    <thead><tr style="background:var(--purple);color:white;"><th>Diagnosis</th><th>Related To</th></tr></thead>
+    <tbody>
+      <tr><td>Ineffective airway clearance</td><td>Thick, tenacious sputum</td></tr>
+      <tr><td>Ineffective breathing pattern</td><td>Tachypnea, chest pain, airway inflammation</td></tr>
+      <tr><td>Impaired gas exchange</td><td>Exudate in alveoli</td></tr>
+      <tr><td>Activity intolerance</td><td>Hypoxemia, fatigue</td></tr>
+      <tr><td>Risk for fluid volume deficit</td><td>Fever and dyspnea</td></tr>
+      <tr><td>Imbalanced nutrition</td><td>Less than body requirements</td></tr>
+    </tbody>
+  </table>
+</div>
+
+<!-- بصموجة عمو غيث — Nursing Dx -->
+<div class="bsm bsm-purple">
+  <div class="bsm-title">🧠 بصموجة عمو غيث — Nursing Diagnoses: <span class="phrase">"Ineffective Airways Impair Activity, Risking Imbalance"</span></div>
+  <div class="letter-row">
+    <div class="letter-item"><div class="lchar">I</div><div class="lmean">Ineffective<br><small>airway clearance</small></div></div>
+    <div class="letter-item"><div class="lchar">A</div><div class="lmean">Airway<br><small>breathing pattern</small></div></div>
+    <div class="letter-item"><div class="lchar">I</div><div class="lmean">Impaired gas<br><small>exchange</small></div></div>
+    <div class="letter-item"><div class="lchar">A</div><div class="lmean">Activity<br><small>intolerance</small></div></div>
+    <div class="letter-item"><div class="lchar">R</div><div class="lmean">Risk: fluid<br><small>deficit</small></div></div>
+    <div class="letter-item"><div class="lchar">I</div><div class="lmean">Imbalanced<br><small>nutrition</small></div></div>
+  </div>
+</div>
+
+<!-- PLANNING & INTERVENTIONS -->
+<div class="grid g2" style="margin-top:var(--gap);">
+
+  <div class="card c-green">
+    <h3>III. Goals / Planning <span class="star">⭐ EXAM</span></h3>
+    <ul>
+      <li>Improve <strong>airway patency</strong></li>
+      <li>Rest to <strong>conserve energy</strong></li>
+      <li>Maintain <strong>fluid balance</strong></li>
+      <li>Maintain <strong>adequate nutrition</strong></li>
+      <li>Patient <strong>education</strong> & preventive measures</li>
+      <li>Prevention of <strong>complications</strong></li>
+    </ul>
+  </div>
+
+  <div class="card c-green">
+    <h3>IV. Nursing Interventions <span class="star">⭐ EXAM</span></h3>
+    <ul>
+      <li><strong>Airway:</strong> auscultate lungs, monitor ABGs/pulse oximetry</li>
+      <li><strong>Reduce secretions:</strong> breathing exercises, chest physiotherapy (percussion, vibration, postural drainage), fluid intake</li>
+      <li><strong>Rest:</strong> bed rest + position changes, sedatives if needed</li>
+      <li><strong>Fluids:</strong> ↑ intake to <strong>2 L/day</strong> if not contraindicated; I&O chart</li>
+      <li><strong>Education:</strong> breathing exercises, smoking cessation, influenza vaccine</li>
+    </ul>
+  </div>
+
+</div>
+
+<!-- بصموجة عمو غيث — Interventions -->
+<div class="bsm bsm-green">
+  <div class="bsm-title">🧠 بصموجة عمو غيث — Nursing Interventions: <span class="phrase">"Airways Rest Fluid Education"</span></div>
+  <div class="letter-row">
+    <div class="letter-item"><div class="lchar">A</div><div class="lmean">Airway<br><small>ABGs, O2, auscultate</small></div></div>
+    <div class="letter-item"><div class="lchar">R</div><div class="lmean">Rest<br><small>bed rest + energy</small></div></div>
+    <div class="letter-item"><div class="lchar">F</div><div class="lmean">Fluid<br><small>2L/day + I&O</small></div></div>
+    <div class="letter-item"><div class="lchar">E</div><div class="lmean">Education<br><small>vaccine + smoking</small></div></div>
+  </div>
+</div>
+
+<!-- EVALUATION -->
+<div class="card c-teal" style="margin-top:var(--gap);">
+  <h3>V. Evaluation</h3>
+  <div class="mg mg3">
+    <div class="mi" style="background:white;">
+      <strong style="color:var(--teal);">✅ Airway Improved</strong><br>
+      Normal SpO2/ABGs, normal temp & breath sounds, no chest pain
+    </div>
+    <div class="mi" style="background:white;">
+      <strong style="color:var(--teal);">✅ Activity Increased</strong><br>
+      Without frequent rest periods
+    </div>
+    <div class="mi" style="background:white;">
+      <strong style="color:var(--teal);">✅ Adequate Hydration</strong><br>
+      Adequate fluid intake + urine output + normal skin turgor
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════ QUICK REFERENCE ══════════════ -->
+<div class="sec-label sl-dark" style="margin-top:28px;">⭐ Quick Exam Reference</div>
+<div class="card" style="border-left:5px solid #2c3e50;background:#f8f9fa;">
+  <h3 style="color:#2c3e50;">📌 Must-Know Facts</h3>
+  <div class="mg mg2" style="margin-top:10px;">
+    <div class="qnum" style="background:var(--blue-light);">
+      <div class="qnum-n" style="color:var(--blue);">🌡️</div>
+      <div><strong>Fever range:</strong> 39.5°–40.5°C (101°–105°F)</div>
+    </div>
+    <div class="qnum" style="background:var(--teal-light);">
+      <div class="qnum-n" style="color:var(--teal);">💧</div>
+      <div><strong>Fluid intake goal:</strong> 2 Liters/day</div>
+    </div>
+    <div class="qnum" style="background:var(--red-light);">
+      <div class="qnum-n" style="color:var(--red);">⚡</div>
+      <div><strong>Delirium</strong> = medical emergency</div>
+    </div>
+    <div class="qnum" style="background:var(--green-light);">
+      <div class="qnum-n" style="color:var(--green);">🦠</div>
+      <div><strong>Most common type:</strong> Viral pneumonia</div>
+    </div>
+    <div class="qnum" style="background:var(--orange-light);">
+      <div class="qnum-n" style="color:var(--orange);">🐑</div>
+      <div><strong>Anthrax</strong> = wool-sorter's disease — lethal if untreated</div>
+    </div>
+    <div class="qnum" style="background:var(--purple-light);">
+      <div class="qnum-n" style="color:var(--purple);">🧪</div>
+      <div><strong>Protozoa (Pneumocystis carinii)</strong> → AIDS / Chemo patients</div>
+    </div>
+    <div class="qnum" style="background:var(--blue-light);">
+      <div class="qnum-n" style="color:var(--blue);">🚬</div>
+      <div><strong>Smoking</strong> destroys tracheobronchial ciliary action = 1st line of lung defense</div>
+    </div>
+    <div class="qnum" style="background:var(--teal-light);">
+      <div class="qnum-n" style="color:var(--teal);">💉</div>
+      <div><strong>Influenza vaccine</strong> → prevents secondary bacterial infections (Staph, H. influenza, S. pneumonia)</div>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div style="text-align:center;margin-top:36px;padding:20px;background:#1a1a2e;border-radius:14px;color:white;">
+  <div style="font-family:'Syne',sans-serif;font-size:16px;font-weight:800;"> 😉🙊 مع غيث أنت في أمان</div>
+  <div style="opacity:.6;font-size:12px;margin-top:4px;">🥹❤️ دعواتك بالجنه والخير</div>
+</div>
+
+</div>
+</body>
+</html>
