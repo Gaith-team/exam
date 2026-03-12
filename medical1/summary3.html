@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Perioperative Nursing – Exam Summary</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --pre: #1a3a5c;
+    --pre-light: #d0e8ff;
+    --intra: #1a4a2e;
+    --intra-light: #c8f0d8;
+    --post: #4a1a3a;
+    --post-light: #f5d0ee;
+    --accent: #f0a500;
+    --red: #c0392b;
+    --red-light: #fdecea;
+    --yellow: #f39c12;
+    --yellow-light: #fef9e7;
+    --purple: #6c3483;
+    --purple-light: #f0e6f6;
+    --teal: #0e6655;
+    --teal-light: #d1f2eb;
+    --bg: #f4f6f9;
+    --card: #ffffff;
+    --text: #1a1a2e;
+    --border: #e0e6ef;
+  }
+
+  * { margin:0; padding:0; box-sizing:border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ── HEADER ── */
+  header {
+    background: linear-gradient(135deg, #0d1b2a 0%, #1a3a5c 50%, #0d2b1a 100%);
+    color: white;
+    padding: 32px 40px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content:'';
+    position:absolute; top:-40px; right:-40px;
+    width:200px; height:200px;
+    border-radius:50%;
+    background: rgba(240,165,0,0.15);
+  }
+  header h1 {
+    font-family:'Syne',sans-serif;
+    font-size:28px; font-weight:800;
+    letter-spacing:-0.5px;
+  }
+  header p { opacity:0.75; font-size:13px; margin-top:4px; }
+  .badge-row { display:flex; gap:10px; margin-top:14px; flex-wrap:wrap; }
+  .badge {
+    padding:4px 14px; border-radius:20px; font-size:11px; font-weight:600;
+    letter-spacing:0.5px; text-transform:uppercase;
+  }
+  .badge-pre  { background:var(--pre-light); color:var(--pre); }
+  .badge-intra{ background:var(--intra-light); color:var(--intra); }
+  .badge-post { background:var(--post-light); color:var(--post); }
+
+  /* ── LAYOUT ── */
+  .container { max-width:1100px; margin:0 auto; padding:28px 20px 60px; }
+
+  /* ── PHASE LABEL ── */
+  .phase-label {
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'Syne',sans-serif; font-size:18px; font-weight:800;
+    padding:10px 22px; border-radius:12px;
+    margin: 28px 0 16px;
+  }
+  .ph-pre  { background:var(--pre); color:white; }
+  .ph-intra{ background:var(--intra); color:white; }
+  .ph-post { background:var(--post); color:white; }
+
+  /* ── CARDS ── */
+  .grid { display:grid; gap:16px; }
+  .grid-2 { grid-template-columns: 1fr 1fr; }
+  .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+  .card {
+    background: var(--card);
+    border-radius:14px;
+    padding:18px 20px;
+    border-left:5px solid var(--accent);
+    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  }
+  .card-pre   { border-color: var(--pre); }
+  .card-intra { border-color: var(--intra); }
+  .card-post  { border-color: var(--post); }
+  .card-red   { border-color: var(--red); background: var(--red-light); }
+  .card-yellow{ border-color: var(--yellow); background: var(--yellow-light); }
+  .card-purple{ border-color: var(--purple); background: var(--purple-light); }
+  .card-teal  { border-color: var(--teal); background: var(--teal-light); }
+
+  .card h3 {
+    font-family:'Syne',sans-serif; font-size:13px; font-weight:800;
+    text-transform:uppercase; letter-spacing:0.6px;
+    margin-bottom:10px; display:flex; align-items:center; gap:6px;
+  }
+  .card-pre   h3 { color: var(--pre); }
+  .card-intra h3 { color: var(--intra); }
+  .card-post  h3 { color: var(--post); }
+  .card-red   h3 { color: var(--red); }
+  .card-yellow h3{ color: #7d5e00; }
+  .card-purple h3{ color: var(--purple); }
+  .card-teal  h3 { color: var(--teal); }
+
+  ul { padding-left:18px; }
+  ul li { margin-bottom:4px; }
+
+  /* ── MNEMONIC BOX ── */
+  .mnemonic {
+    border-radius:14px;
+    padding:18px 22px;
+    margin:8px 0;
+  }
+  .mnemonic-title {
+    font-family:'Syne',sans-serif; font-size:12px; font-weight:800;
+    letter-spacing:1px; text-transform:uppercase; margin-bottom:10px;
+    display:flex; align-items:center; gap:6px;
+  }
+  .letter-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
+  .letter-item {
+    display:flex; align-items:flex-start; gap:0; min-width:140px;
+  }
+  .letter-char {
+    font-family:'Syne',sans-serif;
+    font-size:24px; font-weight:800; line-height:1;
+    min-width:28px;
+  }
+  .letter-meaning { font-size:12px; font-weight:500; padding-top:2px; line-height:1.3; }
+
+  /* Colors for mnemonic boxes */
+  .mn-blue  { background:var(--pre-light); }
+  .mn-blue .letter-char { color:var(--pre); }
+  .mn-blue .mnemonic-title { color:var(--pre); }
+
+  .mn-green { background:var(--intra-light); }
+  .mn-green .letter-char { color:var(--intra); }
+  .mn-green .mnemonic-title { color:var(--intra); }
+
+  .mn-pink  { background:var(--post-light); }
+  .mn-pink .letter-char { color:var(--post); }
+  .mn-pink .mnemonic-title { color:var(--post); }
+
+  .mn-red   { background:var(--red-light); }
+  .mn-red .letter-char { color:var(--red); }
+  .mn-red .mnemonic-title { color:var(--red); }
+
+  .mn-yellow{ background:var(--yellow-light); }
+  .mn-yellow .letter-char { color:var(--yellow); }
+  .mn-yellow .mnemonic-title { color:#7d5e00; }
+
+  .mn-teal  { background:var(--teal-light); }
+  .mn-teal .letter-char { color:var(--teal); }
+  .mn-teal .mnemonic-title { color:var(--teal); }
+
+  .mn-purple{ background:var(--purple-light); }
+  .mn-purple .letter-char { color:var(--purple); }
+  .mn-purple .mnemonic-title { color:var(--purple); }
+
+  /* ── HIGHLIGHT TAGS ── */
+  .tag {
+    display:inline-block; padding:2px 8px; border-radius:6px;
+    font-size:11px; font-weight:700; margin:2px 2px;
+  }
+  .tag-red    { background:#fdecea; color:var(--red); border:1px solid #f1948a; }
+  .tag-blue   { background:var(--pre-light); color:var(--pre); border:1px solid #85c1e9; }
+  .tag-green  { background:var(--intra-light); color:var(--intra); border:1px solid #82e0aa; }
+  .tag-purple { background:var(--purple-light); color:var(--purple); border:1px solid #c39bd3; }
+  .tag-yellow { background:var(--yellow-light); color:#7d5e00; border:1px solid #f9ca24; }
+  .tag-teal   { background:var(--teal-light); color:var(--teal); border:1px solid #76d7c4; }
+
+  /* ── TABLE ── */
+  table { width:100%; border-collapse:collapse; font-size:12.5px; }
+  th {
+    font-family:'Syne',sans-serif; font-size:11px; font-weight:800;
+    text-transform:uppercase; letter-spacing:0.5px;
+    padding:8px 10px; text-align:left;
+  }
+  td { padding:7px 10px; border-bottom:1px solid var(--border); }
+  tr:last-child td { border-bottom:none; }
+  tr:nth-child(even) td { background:rgba(0,0,0,0.02); }
+
+  /* ── EXAM STAR ── */
+  .exam-star {
+    display:inline-flex; align-items:center; gap:5px;
+    background:#fff3cd; border:1.5px solid #f0a500;
+    color:#7d5e00; border-radius:8px;
+    padding:3px 10px; font-size:11px; font-weight:700;
+    margin-left:8px;
+  }
+
+  /* ── DIVIDER ── */
+  .divider {
+    height:3px; border-radius:3px; margin:8px 0 14px;
+    background:linear-gradient(90deg, currentColor 0%, transparent 100%);
+    opacity:0.3;
+  }
+
+  /* ── FULL WIDTH CARD ── */
+  .card-full { grid-column: 1 / -1; }
+
+  /* ── COMPLICATIONS TABLE ── */
+  .comp-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
+  .comp-item {
+    display:flex; align-items:center; gap:6px;
+    background:white; border-radius:8px; padding:5px 10px;
+    font-size:12.5px;
+  }
+  .comp-num {
+    font-family:'Syne',sans-serif; font-weight:800;
+    color:var(--post); font-size:14px; min-width:18px;
+  }
+
+  @media(max-width:700px){
+    .grid-2,.grid-3{ grid-template-columns:1fr; }
+    header { padding:20px; }
+    header h1 { font-size:20px; }
+    .letter-item { min-width:120px; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📋  Perioperative Nursing ملخص لمحاضرة الـ </h1>
+  <p>  المحاضرة هتبقي في جيبك بإذن الله </p>
+  <div class="badge-row">
+    <span class="badge badge-pre">🔵 Pre-operative</span>
+    <span class="badge badge-intra">🟢 Intra-operative</span>
+    <span class="badge badge-post">🟣 Post-operative</span>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- ═══════════════ DEFINITIONS ═══════════════ -->
+  <div class="phase-label" style="background:#2c3e50; color:white;">📚 Key Definitions</div>
+  <div class="grid grid-3">
+    <div class="card card-pre">
+      <h3>⏱ Pre-op Phase</h3>
+      From <strong>decision to operate</strong> → transfer to OR
+    </div>
+    <div class="card card-intra">
+      <h3>🔪 Intra-op Phase</h3>
+      From <strong>transfer to OR table</strong> → admission to PACU
+    </div>
+    <div class="card card-post">
+      <h3>🏥 Post-op Phase</h3>
+      From <strong>after surgery</strong> → last follow-up discharge
+    </div>
+  </div>
+
+  <!-- ═══════════════ SURGERY CLASSIFICATIONS ═══════════════ -->
+  <div class="phase-label ph-pre">🔵 Phase I — Pre-operative</div>
+
+  <div class="grid grid-2">
+
+    <!-- URGENCY TABLE -->
+    <div class="card card-pre">
+      <h3>⚡ Surgery by Urgency <span class="exam-star">⭐ EXAM</span></h3>
+      <table>
+        <thead>
+          <tr style="background:var(--pre); color:white;">
+            <th>Type</th><th>Timeframe</th><th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="tag tag-red">Emergent</span></td><td><strong>Immediately</strong></td><td>Severe bleeding, skull fracture</td></tr>
+          <tr><td><span class="tag tag-blue">Urgent</span></td><td>24–30 hrs</td><td>Kidney stones, acute gallbladder</td></tr>
+          <tr><td><span class="tag tag-green">Required</span></td><td>Weeks/months</td><td>Cataract, thyroid</td></tr>
+          <tr><td><span class="tag tag-yellow">Elective</span></td><td>Not catastrophic</td><td>Hernia repair, scar</td></tr>
+          <tr><td><span class="tag tag-purple">Optional</span></td><td>Patient's choice</td><td>Cosmetic surgery</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- PURPOSE TABLE -->
+    <div class="card card-pre">
+      <h3>🎯 Surgery by Purpose <span class="exam-star">⭐ EXAM</span></h3>
+      <table>
+        <thead>
+          <tr style="background:var(--pre); color:white;">
+            <th>Type</th><th>Meaning</th><th>Example</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="tag tag-blue">Diagnostic</span></td><td>Establish disease</td><td>Biopsy</td></tr>
+          <tr><td><span class="tag tag-blue">Exploratory</span></td><td>Extent of disease</td><td>Exploratory laparotomy</td></tr>
+          <tr><td><span class="tag tag-red">Ablative</span></td><td>Remove diseased organ</td><td>Appendectomy</td></tr>
+          <tr><td><span class="tag tag-green">Constructive</span></td><td>Repair congenital defect</td><td>Cleft palate</td></tr>
+          <tr><td><span class="tag tag-green">Reconstructive</span></td><td>Restore organ</td><td>Rhinoplasty</td></tr>
+          <tr><td><span class="tag tag-yellow">Palliative</span></td><td>Relieve pain</td><td>Rhizotomy</td></tr>
+          <tr><td><span class="tag tag-purple">Transplant</span></td><td>Transfer organ</td><td>Kidney/heart</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+  </div>
+
+  <!-- MNEMONIC URGENCY -->
+  <div class="mnemonic mn-red">
+    <div class="mnemonic-title">🧠 Mnemonic — Urgency Levels: <strong>"Every Ugly Runner Eats Oats"</strong></div>
+    <div class="letter-row">
+      <div class="letter-item"><div class="letter-char">E</div><div class="letter-meaning">Emergent<br><small>Immediate</small></div></div>
+      <div class="letter-item"><div class="letter-char">U</div><div class="letter-meaning">Urgent<br><small>24–30 hrs</small></div></div>
+      <div class="letter-item"><div class="letter-char">R</div><div class="letter-meaning">Required<br><small>Weeks/months</small></div></div>
+      <div class="letter-item"><div class="letter-char">E</div><div class="letter-meaning">Elective<br><small>Not catastrophic</small></div></div>
+      <div class="letter-item"><div class="letter-char">O</div><div class="letter-meaning">Optional<br><small>Patient's choice</small></div></div>
+    </div>
+  </div>
+
+  <!-- PRE-OP ASSESSMENT -->
+  <div class="grid grid-2" style="margin-top:16px;">
+    <div class="card card-pre">
+      <h3>📝 Pre-op Assessment <span class="exam-star">⭐ EXAM</span></h3>
+      <strong>A. History</strong>
+      <ul>
+        <li>Personal: age, occupation, diet/habits, <strong>allergies</strong>, cultural/religious background</li>
+        <li>Medical: past surgeries, current illness</li>
+      </ul>
+      <div style="margin-top:8px;"><strong>B. Physical Assessment</strong></div>
+      <ul>
+        <li>Vital signs (baseline)</li>
+        <li>Height & weight (nutrition)</li>
+        <li>General appearance</li>
+      </ul>
+    </div>
+
+    <div class="card card-pre">
+      <h3>🔬 Lab & Diagnostic Tests <span class="exam-star">⭐ EXAM</span></h3>
+      <ul>
+        <li><span class="tag tag-blue">CBC</span> Hb, RBCs, WBCs, Hematocrit</li>
+        <li><span class="tag tag-blue">Electrolytes</span> K, Na, Ca</li>
+        <li><span class="tag tag-blue">Urinalysis</span></li>
+        <li><span class="tag tag-blue">ECG</span></li>
+        <li><span class="tag tag-blue">Coagulation</span> PT, PTT</li>
+        <li><span class="tag tag-blue">Blood sugar</span></li>
+        <li><span class="tag tag-blue">Chest X-ray</span> respiratory status</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- MNEMONIC LAB TESTS -->
+  <div class="mnemonic mn-blue">
+    <div class="mnemonic-title">🧠 Mnemonic — Pre-op Lab Tests: <strong>"Can Every Upset Child Be Checked"</strong></div>
+    <div class="letter-row">
+      <div class="letter-item"><div class="letter-char">C</div><div class="letter-meaning">CBC<br><small>Blood count</small></div></div>
+      <div class="letter-item"><div class="letter-char">E</div><div class="letter-meaning">Electrolytes<br><small>K,Na,Ca</small></div></div>
+      <div class="letter-item"><div class="letter-char">U</div><div class="letter-meaning">Urinalysis</div></div>
+      <div class="letter-item"><div class="letter-char">C</div><div class="letter-meaning">Coagulation<br><small>PT, PTT</small></div></div>
+      <div class="letter-item"><div class="letter-char">B</div><div class="letter-meaning">Blood sugar</div></div>
+      <div class="letter-item"><div class="letter-char">C</div><div class="letter-meaning">Chest X-ray<br><small>+ ECG</small></div></div>
+    </div>
+  </div>
+
+  <!-- BODY SYSTEM ASSESSMENT -->
+  <div class="card card-pre" style="margin-top:14px;">
+    <h3>🫀 Body System Assessment <span class="exam-star">⭐ EXAM</span></h3>
+    <div class="grid grid-3" style="margin-top:8px; gap:8px;">
+      <div style="background:var(--pre-light); border-radius:8px; padding:10px;">
+        <strong style="color:var(--pre);">Respiratory</strong><br>
+        <small>Stop smoking <strong>4–8 weeks</strong> before surgery. Postpone if respiratory infection present.</small>
+      </div>
+      <div style="background:var(--pre-light); border-radius:8px; padding:10px;">
+        <strong style="color:var(--pre);">Cardiovascular</strong><br>
+        <small>Postpone if <strong>uncontrolled hypertension</strong>.</small>
+      </div>
+      <div style="background:var(--pre-light); border-radius:8px; padding:10px;">
+        <strong style="color:var(--pre);">Hepatic/Renal</strong><br>
+        <small>Acute liver disease = high surgical mortality. Affects anesthetic metabolism.</small>
+      </div>
+      <div style="background:var(--pre-light); border-radius:8px; padding:10px;">
+        <strong style="color:var(--pre);">Endocrine (Diabetes)</strong><br>
+        <small>Risk of <strong>hypoglycemia</strong> during anesthesia & <strong>hyperglycemia</strong> → wound infection.</small>
+      </div>
+      <div style="background:var(--pre-light); border-radius:8px; padding:10px;">
+        <strong style="color:var(--pre);">Immune</strong><br>
+        <small>Identify & document all <strong>allergies</strong> and medication sensitivities.</small>
+      </div>
+      <div style="background:var(--pre-light); border-radius:8px; padding:10px;">
+        <strong style="color:var(--pre);">Drug/Alcohol</strong><br>
+        <small>Postpone surgery if acutely intoxicated (susceptible to injury).</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- PRE-OP PREPARATION -->
+  <div class="grid grid-2" style="margin-top:14px;">
+    <div class="card card-pre">
+      <h3>🩹 Pre-op Preparation <span class="exam-star">⭐ EXAM</span></h3>
+      <ul>
+        <li><strong>Informed consent</strong> — must be signed</li>
+        <li><strong>Teaching</strong> — deep breathing, coughing, leg exercises</li>
+        <li><strong>Skin prep</strong> — antibacterial soap, shave immediately before OR</li>
+        <li><strong>Bowel prep</strong> — laxatives/enemas if needed</li>
+        <li><strong>Urinary catheter</strong> if required (especially pyloric surgery)</li>
+        <li><strong>NPO</strong> — nothing by mouth <strong>8–12 hours</strong> before general anesthesia</li>
+        <li>Remove: jewelry, artificial nails, dentures, lenses</li>
+      </ul>
+    </div>
+
+    <div class="card card-yellow">
+      <h3>💊 Pre-medication Purposes <span class="exam-star">⭐ EXAM</span></h3>
+      <ul>
+        <li><span class="tag tag-yellow">Anxiety/Pain</span> Benzodiazepines</li>
+        <li><span class="tag tag-yellow">Amnesia</span> Lorazepam, Midazolam</li>
+        <li><span class="tag tag-yellow">↓ Secretions</span> Atropine / Hyoscine</li>
+        <li><span class="tag tag-yellow">↓ Gastric acid</span> Ranitidine (Zantac)</li>
+        <li><span class="tag tag-yellow">↓ PONV</span> Antihistamines, Butyrophenones</li>
+        <li><span class="tag tag-yellow">↑ Hypnosis</span> Morphine, Pethidine</li>
+        <li>Given <strong>30–60 min</strong> before OR</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- MNEMONIC PRE-MED -->
+  <div class="mnemonic mn-yellow">
+    <div class="mnemonic-title">🧠 Mnemonic — Pre-medication Goals: <strong>"All Anxious Students Need Good Marks"</strong></div>
+    <div class="letter-row">
+      <div class="letter-item"><div class="letter-char">A</div><div class="letter-meaning">Anxiety ↓<br><small>Benzodiazepines</small></div></div>
+      <div class="letter-item"><div class="letter-char">A</div><div class="letter-meaning">Amnesia<br><small>Midazolam</small></div></div>
+      <div class="letter-item"><div class="letter-char">S</div><div class="letter-meaning">Secretions ↓<br><small>Atropine</small></div></div>
+      <div class="letter-item"><div class="letter-char">N</div><div class="letter-meaning">Nausea ↓<br><small>Antihistamines</small></div></div>
+      <div class="letter-item"><div class="letter-char">G</div><div class="letter-meaning">Gastric acid ↓<br><small>Ranitidine</small></div></div>
+      <div class="letter-item"><div class="letter-char">M</div><div class="letter-meaning">Morphine effect ↑<br><small>↑ Hypnosis</small></div></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ INTRA-OP ═══════════════ -->
+  <div class="phase-label ph-intra">🟢 Phase II — Intra-operative</div>
+
+  <div class="grid grid-2">
+
+    <div class="card card-intra">
+      <h3>🏥 OR Zones <span class="exam-star">⭐ EXAM</span></h3>
+      <table>
+        <thead><tr style="background:var(--intra); color:white;"><th>Zone</th><th>Attire</th></tr></thead>
+        <tbody>
+          <tr><td><span class="tag tag-green">Unrestricted</span></td><td>Street clothes allowed</td></tr>
+          <tr><td><span class="tag tag-yellow">Semi-restricted</span></td><td>Scrub clothes + caps</td></tr>
+          <tr><td><span class="tag tag-red">Restricted</span></td><td>Scrubs + shoe covers + caps + masks</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="card card-intra">
+      <h3>👥 OR Team <span class="exam-star">⭐ EXAM</span></h3>
+      <strong style="color:var(--red);">Unsterile Team:</strong>
+      <ul>
+        <li>Anesthesiologist</li>
+        <li><strong>Circulating Nurse</strong> (Reception / Anesthesia / Assist scrub)</li>
+        <li>Radiology Technician</li>
+      </ul>
+      <div style="margin-top:8px;"><strong style="color:var(--intra);">Sterile Team:</strong></div>
+      <ul>
+        <li>Operating Surgeon</li>
+        <li>Surgical Assistants</li>
+        <li><strong>Scrub Nurse</strong></li>
+      </ul>
+    </div>
+
+  </div>
+
+  <!-- MNEMONIC OR TEAM -->
+  <div class="mnemonic mn-green">
+    <div class="mnemonic-title">🧠 Mnemonic — OR Team: <strong>"Sterile Surgeons Scrub; Unstable Anesthesia Circulates Radios"</strong></div>
+    <div class="letter-row" style="flex-direction:column; gap:6px;">
+      <div style="font-size:13px;"><strong style="color:var(--intra);">STERILE:</strong> <span class="tag tag-green">Surgeon</span> <span class="tag tag-green">Surgical Assistants</span> <span class="tag tag-green">Scrub Nurse</span></div>
+      <div style="font-size:13px;"><strong style="color:var(--red);">UNSTERILE:</strong> <span class="tag tag-red">Anesthesiologist</span> <span class="tag tag-red">Circulating Nurse</span> <span class="tag tag-red">Radiology Tech</span></div>
+    </div>
+  </div>
+
+  <!-- SURGICAL POSITIONS -->
+  <div class="card card-intra" style="margin-top:14px;">
+    <h3>🛏 Surgical Positions <span class="exam-star">⭐ EXAM</span></h3>
+    <div class="grid grid-3" style="margin-top:8px; gap:8px;">
+      <div style="background:var(--intra-light); border-radius:8px; padding:8px 12px;">
+        <strong style="color:var(--intra);">Supine (Dorsal)</strong><br><small>Abdominal & thoracic, extremities</small>
+      </div>
+      <div style="background:var(--intra-light); border-radius:8px; padding:8px 12px;">
+        <strong style="color:var(--intra);">Semi-Fowler's</strong><br><small>Thyroid & neck surgery</small>
+      </div>
+      <div style="background:var(--intra-light); border-radius:8px; padding:8px 12px;">
+        <strong style="color:var(--intra);">Trendelenburg</strong><br><small>Pelvic surgery</small>
+      </div>
+      <div style="background:var(--intra-light); border-radius:8px; padding:8px 12px;">
+        <strong style="color:var(--intra);">Prone</strong><br><small>Spinal surgery</small>
+      </div>
+      <div style="background:var(--intra-light); border-radius:8px; padding:8px 12px;">
+        <strong style="color:var(--intra);">Lateral</strong><br><small>Kidney & upper ureters</small>
+      </div>
+      <div style="background:var(--intra-light); border-radius:8px; padding:8px 12px;">
+        <strong style="color:var(--intra);">Lithotomy</strong><br><small>Vaginal, perineal, rectal</small>
+      </div>
+      <div style="background:var(--intra-light); border-radius:8px; padding:8px 12px;">
+        <strong style="color:var(--intra);">Jackknife</strong><br><small>Proctologic surgery</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- MNEMONIC POSITIONS -->
+  <div class="mnemonic mn-green">
+    <div class="mnemonic-title">🧠 Mnemonic — Surgical Positions: <strong>"Super Students Take Practical Life Journey"</strong></div>
+    <div class="letter-row">
+      <div class="letter-item"><div class="letter-char">S</div><div class="letter-meaning">Supine<br><small>Abdomen/Thorax</small></div></div>
+      <div class="letter-item"><div class="letter-char">S</div><div class="letter-meaning">Semi-Fowler's<br><small>Thyroid/Neck</small></div></div>
+      <div class="letter-item"><div class="letter-char">T</div><div class="letter-meaning">Trendelenburg<br><small>Pelvis</small></div></div>
+      <div class="letter-item"><div class="letter-char">P</div><div class="letter-meaning">Prone<br><small>Spine</small></div></div>
+      <div class="letter-item"><div class="letter-char">L</div><div class="letter-meaning">Lateral<br><small>Kidney</small></div></div>
+      <div class="letter-item"><div class="letter-char">J</div><div class="letter-meaning">Jackknife<br><small>Proctologic</small></div></div>
+    </div>
+    <div style="margin-top:8px; font-size:12px; color:var(--intra);"><strong>+Lithotomy</strong> for vaginal/perineal/rectal</div>
+  </div>
+
+  <!-- INTRA-OP COMPLICATIONS -->
+  <div class="card card-red" style="margin-top:14px;">
+    <h3>⚠️ Intraoperative Complications <span class="exam-star">⭐ EXAM</span></h3>
+    <div class="letter-row" style="margin-top:6px;">
+      <span class="tag tag-red">Nausea/Vomiting</span>
+      <span class="tag tag-red">Anaphylaxis</span>
+      <span class="tag tag-red">Hypoxia</span>
+      <span class="tag tag-red">Hypothermia</span>
+      <span class="tag tag-red">Malignant Hyperthermia</span>
+      <span class="tag tag-red">DIC</span>
+    </div>
+  </div>
+
+  <!-- ANESTHESIA -->
+  <div class="card card-teal" style="margin-top:14px;">
+    <h3>💉 Types of Anesthesia <span class="exam-star">⭐ EXAM</span></h3>
+    <div class="grid grid-2" style="gap:8px; margin-top:6px;">
+      <div style="background:white; border-radius:8px; padding:8px 12px;">
+        <strong style="color:var(--teal);">1. General</strong><br><small>Pain controlled by general insensibility<br>Agents: Halothane, Nitrous oxide, Methohexital sodium (IV)</small>
+      </div>
+      <div style="background:white; border-radius:8px; padding:8px 12px;">
+        <strong style="color:var(--teal);">2. Local/Regional Block</strong><br><small>Sensory nerves in one area anesthetized</small>
+      </div>
+      <div style="background:white; border-radius:8px; padding:8px 12px;">
+        <strong style="color:var(--teal);">3. Spinal/Epidural</strong><br><small>Blocked below diaphragm — no loss of consciousness</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══════════════ POST-OP ═══════════════ -->
+  <div class="phase-label ph-post">🟣 Phase III — Post-operative</div>
+
+  <div class="grid grid-2">
+    <div class="card card-post">
+      <h3>📋 PACU Assessment (Immediate) <span class="exam-star">⭐ EXAM</span></h3>
+      <ul>
+        <li><strong>A</strong> — Airway: artificial airway presence</li>
+        <li><strong>B</strong> — Breathing / Vital signs + pulse oximeter</li>
+        <li><strong>C</strong> — Consciousness: follows commands, moves extremities</li>
+        <li><strong>D</strong> — Dressing / suture line</li>
+        <li><strong>E</strong> — oxygenation: skin color, nail beds, capillary refill</li>
+        <li><strong>F</strong> — Fluids: IV rate, amount in bottle</li>
+        <li><strong>P</strong> — Position of patient</li>
+      </ul>
+    </div>
+
+    <div class="card card-post">
+      <h3>⏱ Vital Signs Monitoring Schedule <span class="exam-star">⭐ EXAM</span></h3>
+      <table>
+        <thead><tr style="background:var(--post); color:white;"><th>Frequency</th><th>Duration</th></tr></thead>
+        <tbody>
+          <tr><td>Every <strong>15 minutes</strong></td><td>Until stable</td></tr>
+          <tr><td>Every <strong>30 minutes</strong></td><td>For 2 hours</td></tr>
+          <tr><td>Every <strong>4 hours</strong></td><td>Until ordered otherwise</td></tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- MNEMONIC POST-OP ASSESSMENT -->
+  <div class="mnemonic mn-pink">
+    <div class="mnemonic-title">🧠 Mnemonic — Post-op Assessment: <strong>"ABCDEFP"</strong></div>
+    <div class="letter-row">
+      <div class="letter-item"><div class="letter-char">A</div><div class="letter-meaning">Airway</div></div>
+      <div class="letter-item"><div class="letter-char">B</div><div class="letter-meaning">Breathing<br><small>Vitals</small></div></div>
+      <div class="letter-item"><div class="letter-char">C</div><div class="letter-meaning">Consciousness<br><small>Level</small></div></div>
+      <div class="letter-item"><div class="letter-char">D</div><div class="letter-meaning">Dressing<br><small>Suture</small></div></div>
+      <div class="letter-item"><div class="letter-char">E</div><div class="letter-meaning">oxygenation<br><small>Skin/nails</small></div></div>
+      <div class="letter-item"><div class="letter-char">F</div><div class="letter-meaning">Fluids<br><small>IV lines</small></div></div>
+      <div class="letter-item"><div class="letter-char">P</div><div class="letter-meaning">Position<br><small>Patient</small></div></div>
+    </div>
+  </div>
+
+  <!-- POST-OP COMPLICATIONS -->
+  <div class="card card-red" style="margin-top:14px;">
+    <h3>🚨 Post-operative Complications <span class="exam-star">⭐ EXAM</span></h3>
+    <div class="comp-grid" style="margin-top:8px;">
+      <div class="comp-item"><div class="comp-num">1</div> Shock</div>
+      <div class="comp-item"><div class="comp-num">2</div> Hemorrhage / Bleeding</div>
+      <div class="comp-item"><div class="comp-num">3</div> Deep Vein Thrombosis (DVT)</div>
+      <div class="comp-item"><div class="comp-num">4</div> Pulmonary: Atelectasis & Aspiration</div>
+      <div class="comp-item"><div class="comp-num">5</div> Pneumonia</div>
+      <div class="comp-item"><div class="comp-num">6</div> Pulmonary Embolism</div>
+      <div class="comp-item"><div class="comp-num">7</div> Urinary Retention</div>
+      <div class="comp-item"><div class="comp-num">8</div> Intestinal Obstruction</div>
+      <div class="comp-item"><div class="comp-num">9</div> Wound Infection</div>
+      <div class="comp-item"><div class="comp-num">10</div> Wound Dehiscence / Evisceration</div>
+      <div class="comp-item"><div class="comp-num">11</div> Psychological: Depression</div>
+    </div>
+  </div>
+
+  <!-- MNEMONIC COMPLICATIONS -->
+  <div class="mnemonic mn-red">
+    <div class="mnemonic-title">🧠 Mnemonic — Post-op Complications: <strong>"She Had Deep Purple Pants, Pulling Up Interesting Wounds Daily"</strong></div>
+    <div class="letter-row">
+      <div class="letter-item"><div class="letter-char">S</div><div class="letter-meaning">Shock</div></div>
+      <div class="letter-item"><div class="letter-char">H</div><div class="letter-meaning">Hemorrhage</div></div>
+      <div class="letter-item"><div class="letter-char">D</div><div class="letter-meaning">DVT</div></div>
+      <div class="letter-item"><div class="letter-char">P</div><div class="letter-meaning">Pulmonary<br><small>Atelectasis</small></div></div>
+      <div class="letter-item"><div class="letter-char">P</div><div class="letter-meaning">Pneumonia</div></div>
+      <div class="letter-item"><div class="letter-char">P</div><div class="letter-meaning">Pulmonary<br><small>Embolism</small></div></div>
+      <div class="letter-item"><div class="letter-char">U</div><div class="letter-meaning">Urinary<br><small>Retention</small></div></div>
+      <div class="letter-item"><div class="letter-char">I</div><div class="letter-meaning">Intestinal<br><small>Obstruction</small></div></div>
+      <div class="letter-item"><div class="letter-char">W</div><div class="letter-meaning">Wound<br><small>Infection</small></div></div>
+      <div class="letter-item"><div class="letter-char">D</div><div class="letter-meaning">Dehiscence/<br><small>Evisceration</small></div></div>
+    </div>
+  </div>
+
+  <!-- EARLY AMBULATION BENEFITS -->
+  <div class="card card-teal" style="margin-top:14px;">
+    <h3>🚶 Benefits of Early Post-op Ambulation <span class="exam-star">⭐ EXAM</span></h3>
+    <div class="grid grid-3" style="gap:8px; margin-top:8px;">
+      <div style="background:white; border-radius:8px; padding:8px;">
+        <strong style="color:var(--teal);">Respiratory ↑</strong><br><small>↑ Breathing depth → prevents atelectasis & pneumonia</small>
+      </div>
+      <div style="background:white; border-radius:8px; padding:8px;">
+        <strong style="color:var(--teal);">Circulation ↑</strong><br><small>Prevents DVT, brings nutrients to wound</small>
+      </div>
+      <div style="background:white; border-radius:8px; padding:8px;">
+        <strong style="color:var(--teal);">Kidney ↑</strong><br><small>Prevents urinary retention, ↑ micturition</small>
+      </div>
+      <div style="background:white; border-radius:8px; padding:8px;">
+        <strong style="color:var(--teal);">Metabolism ↑</strong><br><small>Restores nitrogen balance</small>
+      </div>
+      <div style="background:white; border-radius:8px; padding:8px;">
+        <strong style="color:var(--teal);">Muscle Tone</strong><br><small>Prevents loss of muscle tone</small>
+      </div>
+      <div style="background:white; border-radius:8px; padding:8px;">
+        <strong style="color:var(--teal);">GI ↑</strong><br><small>↑ Peristalsis → prevents ileus, distention, constipation</small>
+      </div>
+    </div>
+  </div>
+
+  <!-- MNEMONIC AMBULATION -->
+  <div class="mnemonic mn-teal">
+    <div class="mnemonic-title">🧠 Mnemonic — Ambulation Benefits: <strong>"Rare Candy Kills My Muscles Good"</strong></div>
+    <div class="letter-row">
+      <div class="letter-item"><div class="letter-char">R</div><div class="letter-meaning">Respiratory<br><small>↑ breathing</small></div></div>
+      <div class="letter-item"><div class="letter-char">C</div><div class="letter-meaning">Circulation<br><small>↓ DVT</small></div></div>
+      <div class="letter-item"><div class="letter-char">K</div><div class="letter-meaning">Kidney<br><small>↑ micturition</small></div></div>
+      <div class="letter-item"><div class="letter-char">M</div><div class="letter-meaning">Metabolism<br><small>N2 balance</small></div></div>
+      <div class="letter-item"><div class="letter-char">M</div><div class="letter-meaning">Muscle Tone<br><small>maintained</small></div></div>
+      <div class="letter-item"><div class="letter-char">G</div><div class="letter-meaning">GI/Gut<br><small>↑ peristalsis</small></div></div>
+    </div>
+  </div>
+
+  <!-- POST-OP DISCOMFORTS -->
+  <div class="grid grid-2" style="margin-top:14px;">
+    <div class="card card-purple">
+      <h3>😣 Common Post-op Discomforts <span class="exam-star">⭐ EXAM</span></h3>
+      <div class="letter-row" style="margin-top:6px;">
+        <span class="tag tag-purple">Nausea/Vomiting</span>
+        <span class="tag tag-purple">Restlessness</span>
+        <span class="tag tag-purple">Thirst</span>
+        <span class="tag tag-purple">Constipation</span>
+        <span class="tag tag-purple">Abdominal distention</span>
+        <span class="tag tag-purple">Pain</span>
+        <span class="tag tag-purple">Urinary retention</span>
+        <span class="tag tag-purple">Hiccups</span>
+      </div>
+    </div>
+
+    <div class="card card-post">
+      <h3>🎯 Post-op Goals (Expected Outcomes)</h3>
+      <ul style="font-size:12.5px;">
+        <li>Optimal respiratory function</li>
+        <li>Relief of pain & discomforts</li>
+        <li>Freedom from injury</li>
+        <li>Adequate tissue perfusion & fluid volume</li>
+        <li>Nutritional balance</li>
+        <li>Normal urinary & bowel function</li>
+        <li>Skin integrity & no infection</li>
+        <li>Return of mobility</li>
+        <li>Reduction of anxiety & psychological well-being</li>
+      </ul>
+    </div>
+  </div>
+
+  <!-- MNEMONIC DISCOMFORTS -->
+  <div class="mnemonic mn-purple">
+    <div class="mnemonic-title">🧠 Mnemonic — Post-op Discomforts: <strong>"Never Rest, The Cold Patients Are Hurt"</strong></div>
+    <div class="letter-row">
+      <div class="letter-item"><div class="letter-char">N</div><div class="letter-meaning">Nausea/<br><small>Vomiting</small></div></div>
+      <div class="letter-item"><div class="letter-char">R</div><div class="letter-meaning">Restlessness/<br><small>Sleeplessness</small></div></div>
+      <div class="letter-item"><div class="letter-char">T</div><div class="letter-meaning">Thirst</div></div>
+      <div class="letter-item"><div class="letter-char">C</div><div class="letter-meaning">Constipation/<br><small>Distention</small></div></div>
+      <div class="letter-item"><div class="letter-char">P</div><div class="letter-meaning">Pain</div></div>
+      <div class="letter-item"><div class="letter-char">A</div><div class="letter-meaning">Abdomen<br><small>Gas cramps</small></div></div>
+      <div class="letter-item"><div class="letter-char">H</div><div class="letter-meaning">Hiccups +<br><small>Urinary retention</small></div></div>
+    </div>
+  </div>
+
+  <!-- STERILIZATION -->
+  <div class="card card-teal" style="margin-top:14px;">
+    <h3>🧪 Sterilization Methods <span class="exam-star">⭐ EXAM</span></h3>
+    <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:8px;">
+      <span class="tag tag-teal">1. Thermal (Heat) — Autoclave / Microwave</span>
+      <span class="tag tag-teal">2. Chemical — Cidex</span>
+      <span class="tag tag-teal">3. Ionizing Radiation — Gamma rays</span>
+    </div>
+  </div>
+
+  <!-- ═══════════════ QUICK REFERENCE ═══════════════ -->
+  <div class="phase-label" style="background:#2c3e50; color:white; margin-top:28px;">⭐ Quick Exam Reference</div>
+
+  <div class="card" style="border-left:5px solid #2c3e50; background:#f8f9fa;">
+    <h3 style="color:#2c3e50;">📌 Must-Know Numbers & Facts</h3>
+    <div class="grid grid-2" style="margin-top:10px; gap:8px;">
+      <div style="background:var(--pre-light); border-radius:8px; padding:8px 12px;">
+        <strong style="color:var(--pre);">NPO before general anesthesia:</strong> 8–12 hours
+      </div>
+      <div style="background:var(--pre-light); border-radius:8px; padding:8px 12px;">
+        <strong style="color:var(--pre);">Stop smoking before surgery:</strong> 4–8 weeks
+      </div>
+      <div style="background:var(--yellow-light); border-radius:8px; padding:8px 12px;">
+        <strong style="color:#7d5e00;">Pre-medication given:</strong> 30–60 min before OR
+      </div>
+      <div style="background:var(--yellow-light); border-radius:8px; padding:8px 12px;">
+        <strong style="color:#7d5e00;">Urgent surgery:</strong> Within 24–30 hours
+      </div>
+      <div style="background:var(--post-light); border-radius:8px; padding:8px 12px;">
+        <strong style="color:var(--post);">VS frequency (stable):</strong> q15min → q30min → q4h
+      </div>
+      <div style="background:var(--post-light); border-radius:8px; padding:8px 12px;">
+        <strong style="color:var(--post);">Avoid heavy lifting after major surgery:</strong> ≥6 weeks
+      </div>
+      <div style="background:var(--teal-light); border-radius:8px; padding:8px 12px;">
+        <strong style="color:var(--teal);">Bowel movement check:</strong> If none after 2–3 days post-peristalsis → act
+      </div>
+      <div style="background:var(--teal-light); border-radius:8px; padding:8px 12px;">
+        <strong style="color:var(--teal);">Position changes (bedridden):</strong> Every 2 hours
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <div style="text-align:center; margin-top:36px; padding:20px; background:#1a1a2e; border-radius:14px; color:white;">
+    <div style="font-family:'Syne',sans-serif; font-size:16px; font-weight:800;"> 😉 مع غيث ، أنت في الأمان  </div>
+    <div style="opacity:0.6; font-size:12px; margin-top:4px;"> 🙊❤️ دعواتك بالخير والجنه </div>
+  </div>
+
+</div>
+</body>
+</html>
