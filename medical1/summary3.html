@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Perioperative Nursing – Exam Summary</title>
+<title> ghaith team</title>
 <link href="https://fonts.googleapis.com/css2?family=Syne:wght@700;800&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -26,73 +26,100 @@
     --card: #ffffff;
     --text: #1a1a2e;
     --border: #e0e6ef;
+    --fs-base: clamp(13px, 2.2vw, 15px);
+    --fs-sm: clamp(11px, 1.8vw, 13px);
+    --fs-xs: clamp(10px, 1.5vw, 12px);
+    --fs-h1: clamp(18px, 4.5vw, 30px);
+    --fs-h3: clamp(11px, 2vw, 13px);
+    --fs-phase: clamp(14px, 3vw, 18px);
+    --fs-char: clamp(18px, 4vw, 26px);
+    --radius: clamp(8px, 2vw, 14px);
+    --pad-card: clamp(12px, 3vw, 20px);
+    --pad-h: clamp(16px, 4vw, 40px);
+    --gap: clamp(10px, 2vw, 16px);
   }
 
   * { margin:0; padding:0; box-sizing:border-box; }
+
+  html { -webkit-text-size-adjust:100%; }
 
   body {
     font-family: 'DM Sans', sans-serif;
     background: var(--bg);
     color: var(--text);
-    font-size: 14px;
-    line-height: 1.6;
+    font-size: var(--fs-base);
+    line-height: 1.65;
+    overflow-x: hidden;
   }
 
   /* ── HEADER ── */
   header {
     background: linear-gradient(135deg, #0d1b2a 0%, #1a3a5c 50%, #0d2b1a 100%);
     color: white;
-    padding: 32px 40px 24px;
+    padding: clamp(18px,4vw,34px) var(--pad-h) clamp(16px,3vw,26px);
     position: relative;
     overflow: hidden;
   }
   header::before {
     content:'';
     position:absolute; top:-40px; right:-40px;
-    width:200px; height:200px;
+    width:clamp(100px,25vw,200px); height:clamp(100px,25vw,200px);
     border-radius:50%;
     background: rgba(240,165,0,0.15);
   }
   header h1 {
     font-family:'Syne',sans-serif;
-    font-size:28px; font-weight:800;
+    font-size: var(--fs-h1);
+    font-weight:800;
     letter-spacing:-0.5px;
+    line-height:1.25;
   }
-  header p { opacity:0.75; font-size:13px; margin-top:4px; }
-  .badge-row { display:flex; gap:10px; margin-top:14px; flex-wrap:wrap; }
+  header p { opacity:0.75; font-size:var(--fs-sm); margin-top:4px; }
+  .badge-row { display:flex; gap:8px; margin-top:12px; flex-wrap:wrap; }
   .badge {
-    padding:4px 14px; border-radius:20px; font-size:11px; font-weight:600;
-    letter-spacing:0.5px; text-transform:uppercase;
+    padding: clamp(3px,0.8vw,5px) clamp(10px,2.5vw,16px);
+    border-radius:20px;
+    font-size: var(--fs-xs);
+    font-weight:600;
+    letter-spacing:0.4px; text-transform:uppercase;
+    white-space: nowrap;
   }
   .badge-pre  { background:var(--pre-light); color:var(--pre); }
   .badge-intra{ background:var(--intra-light); color:var(--intra); }
   .badge-post { background:var(--post-light); color:var(--post); }
 
   /* ── LAYOUT ── */
-  .container { max-width:1100px; margin:0 auto; padding:28px 20px 60px; }
+  .container { max-width:1100px; margin:0 auto; padding: clamp(16px,3vw,28px) clamp(12px,3vw,20px) 60px; }
 
   /* ── PHASE LABEL ── */
   .phase-label {
     display:inline-flex; align-items:center; gap:8px;
-    font-family:'Syne',sans-serif; font-size:18px; font-weight:800;
-    padding:10px 22px; border-radius:12px;
-    margin: 28px 0 16px;
+    font-family:'Syne',sans-serif;
+    font-size: var(--fs-phase);
+    font-weight:800;
+    padding: clamp(8px,1.5vw,11px) clamp(14px,3vw,24px);
+    border-radius:12px;
+    margin: clamp(20px,4vw,30px) 0 clamp(12px,2vw,16px);
+    max-width:100%;
   }
   .ph-pre  { background:var(--pre); color:white; }
   .ph-intra{ background:var(--intra); color:white; }
   .ph-post { background:var(--post); color:white; }
 
-  /* ── CARDS ── */
-  .grid { display:grid; gap:16px; }
-  .grid-2 { grid-template-columns: 1fr 1fr; }
-  .grid-3 { grid-template-columns: 1fr 1fr 1fr; }
+  /* ── GRID ── */
+  .grid { display:grid; gap: var(--gap); }
+  .grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .grid-3 { grid-template-columns: repeat(3, 1fr); }
 
+  /* ── CARDS ── */
   .card {
     background: var(--card);
-    border-radius:14px;
-    padding:18px 20px;
-    border-left:5px solid var(--accent);
+    border-radius: var(--radius);
+    padding: var(--pad-card);
+    border-left: 5px solid var(--accent);
     box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+    min-width:0; /* prevent grid blowout */
+    overflow:hidden;
   }
   .card-pre   { border-color: var(--pre); }
   .card-intra { border-color: var(--intra); }
@@ -103,9 +130,14 @@
   .card-teal  { border-color: var(--teal); background: var(--teal-light); }
 
   .card h3 {
-    font-family:'Syne',sans-serif; font-size:13px; font-weight:800;
-    text-transform:uppercase; letter-spacing:0.6px;
-    margin-bottom:10px; display:flex; align-items:center; gap:6px;
+    font-family:'Syne',sans-serif;
+    font-size: var(--fs-h3);
+    font-weight:800;
+    text-transform:uppercase; letter-spacing:0.5px;
+    margin-bottom:10px;
+    display:flex; align-items:center; gap:6px;
+    flex-wrap:wrap;
+    line-height:1.4;
   }
   .card-pre   h3 { color: var(--pre); }
   .card-intra h3 { color: var(--intra); }
@@ -116,29 +148,40 @@
   .card-teal  h3 { color: var(--teal); }
 
   ul { padding-left:18px; }
-  ul li { margin-bottom:4px; }
+  ul li { margin-bottom:5px; font-size: var(--fs-base); }
 
   /* ── MNEMONIC BOX ── */
   .mnemonic {
-    border-radius:14px;
-    padding:18px 22px;
+    border-radius: var(--radius);
+    padding: clamp(12px,3vw,20px) clamp(14px,3vw,22px);
     margin:8px 0;
   }
   .mnemonic-title {
-    font-family:'Syne',sans-serif; font-size:12px; font-weight:800;
-    letter-spacing:1px; text-transform:uppercase; margin-bottom:10px;
-    display:flex; align-items:center; gap:6px;
+    font-family:'Syne',sans-serif;
+    font-size: var(--fs-xs);
+    font-weight:800;
+    letter-spacing:0.8px; text-transform:uppercase; margin-bottom:10px;
+    display:flex; align-items:flex-start; gap:6px;
+    flex-wrap:wrap;
+    line-height:1.5;
   }
-  .letter-row { display:flex; flex-wrap:wrap; gap:8px; margin-top:8px; }
+  .letter-row { display:flex; flex-wrap:wrap; gap: clamp(6px,1.5vw,10px); margin-top:8px; }
   .letter-item {
-    display:flex; align-items:flex-start; gap:0; min-width:140px;
+    display:flex; align-items:flex-start; gap:0;
+    min-width: clamp(80px, 18vw, 140px);
+    max-width: clamp(110px, 22vw, 160px);
   }
   .letter-char {
     font-family:'Syne',sans-serif;
-    font-size:24px; font-weight:800; line-height:1;
-    min-width:28px;
+    font-size: var(--fs-char);
+    font-weight:800; line-height:1;
+    min-width: clamp(22px,5vw,30px);
+    flex-shrink:0;
   }
-  .letter-meaning { font-size:12px; font-weight:500; padding-top:2px; line-height:1.3; }
+  .letter-meaning {
+    font-size: var(--fs-xs);
+    font-weight:500; padding-top:2px; line-height:1.4;
+  }
 
   /* Colors for mnemonic boxes */
   .mn-blue  { background:var(--pre-light); }
@@ -171,8 +214,12 @@
 
   /* ── HIGHLIGHT TAGS ── */
   .tag {
-    display:inline-block; padding:2px 8px; border-radius:6px;
-    font-size:11px; font-weight:700; margin:2px 2px;
+    display:inline-block;
+    padding: clamp(2px,0.5vw,3px) clamp(6px,1.5vw,9px);
+    border-radius:6px;
+    font-size: var(--fs-xs);
+    font-weight:700; margin:2px 2px;
+    white-space:nowrap;
   }
   .tag-red    { background:#fdecea; color:var(--red); border:1px solid #f1948a; }
   .tag-blue   { background:var(--pre-light); color:var(--pre); border:1px solid #85c1e9; }
@@ -182,23 +229,36 @@
   .tag-teal   { background:var(--teal-light); color:var(--teal); border:1px solid #76d7c4; }
 
   /* ── TABLE ── */
-  table { width:100%; border-collapse:collapse; font-size:12.5px; }
+  table { width:100%; border-collapse:collapse; font-size: var(--fs-sm); table-layout:fixed; }
   th {
-    font-family:'Syne',sans-serif; font-size:11px; font-weight:800;
-    text-transform:uppercase; letter-spacing:0.5px;
-    padding:8px 10px; text-align:left;
+    font-family:'Syne',sans-serif;
+    font-size: var(--fs-xs);
+    font-weight:800;
+    text-transform:uppercase; letter-spacing:0.4px;
+    padding: clamp(6px,1.5vw,9px) clamp(6px,1.5vw,10px);
+    text-align:left;
+    word-break:break-word;
   }
-  td { padding:7px 10px; border-bottom:1px solid var(--border); }
+  td {
+    padding: clamp(5px,1.2vw,8px) clamp(6px,1.5vw,10px);
+    border-bottom:1px solid var(--border);
+    word-break:break-word;
+    vertical-align:top;
+  }
   tr:last-child td { border-bottom:none; }
-  tr:nth-child(even) td { background:rgba(0,0,0,0.02); }
+  tr:nth-child(even) td { background:rgba(0,0,0,0.025); }
 
   /* ── EXAM STAR ── */
   .exam-star {
-    display:inline-flex; align-items:center; gap:5px;
+    display:inline-flex; align-items:center; gap:4px;
     background:#fff3cd; border:1.5px solid #f0a500;
     color:#7d5e00; border-radius:8px;
-    padding:3px 10px; font-size:11px; font-weight:700;
-    margin-left:8px;
+    padding: 2px clamp(6px,1.5vw,10px);
+    font-size: var(--fs-xs);
+    font-weight:700;
+    margin-left:6px;
+    white-space:nowrap;
+    flex-shrink:0;
   }
 
   /* ── DIVIDER ── */
@@ -211,31 +271,71 @@
   /* ── FULL WIDTH CARD ── */
   .card-full { grid-column: 1 / -1; }
 
-  /* ── COMPLICATIONS TABLE ── */
+  /* ── COMPLICATIONS GRID ── */
   .comp-grid { display:grid; grid-template-columns:1fr 1fr; gap:6px; }
   .comp-item {
     display:flex; align-items:center; gap:6px;
-    background:white; border-radius:8px; padding:5px 10px;
-    font-size:12.5px;
+    background:white; border-radius:8px;
+    padding: clamp(4px,1vw,6px) clamp(8px,2vw,12px);
+    font-size: var(--fs-sm);
   }
   .comp-num {
     font-family:'Syne',sans-serif; font-weight:800;
-    color:var(--post); font-size:14px; min-width:18px;
+    color:var(--post); font-size: var(--fs-base); min-width:18px;
+    flex-shrink:0;
   }
 
-  @media(max-width:700px){
-    .grid-2,.grid-3{ grid-template-columns:1fr; }
-    header { padding:20px; }
-    header h1 { font-size:20px; }
-    .letter-item { min-width:120px; }
+  /* ── INLINE MINI GRIDS (inside cards) ── */
+  .mini-grid { display:grid; gap:8px; }
+  .mini-grid-2 { grid-template-columns: repeat(2, 1fr); }
+  .mini-grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .mini-item {
+    border-radius:8px; padding: clamp(7px,2vw,10px) clamp(8px,2vw,12px);
+    font-size: var(--fs-sm);
+  }
+
+  /* ══════════════════════════════
+     RESPONSIVE BREAKPOINTS
+  ══════════════════════════════ */
+
+  /* Tablet: 2-col grids become 1-col for grid-3, keep grid-2 */
+  @media (max-width: 860px) {
+    .grid-3 { grid-template-columns: repeat(2, 1fr); }
+    .mini-grid-3 { grid-template-columns: repeat(2, 1fr); }
+  }
+
+  /* Mobile: everything single column */
+  @media (max-width: 560px) {
+    .grid-2,
+    .grid-3 { grid-template-columns: 1fr; }
+    .mini-grid-2,
+    .mini-grid-3 { grid-template-columns: 1fr; }
+    .comp-grid { grid-template-columns: 1fr; }
+
+    header h1 { font-size: clamp(16px,5.5vw,22px); }
+
+    .phase-label { font-size: clamp(13px, 4vw, 16px); width:100%; justify-content:center; }
+
+    .letter-item { min-width: clamp(70px,28vw,100px); max-width:none; }
+    .letter-char { font-size: clamp(18px, 5.5vw, 24px); }
+
+    table { display:block; overflow-x:auto; -webkit-overflow-scrolling:touch; }
+    th, td { white-space: normal; }
+
+    .exam-star { display:none; } /* hide on very small screens to save space */
+    .card h3 { font-size: clamp(11px, 3.2vw, 13px); }
+
+    .mnemonic-title { font-size: clamp(10px, 2.8vw, 12px); }
+
+    .badge { font-size: clamp(9px, 2.5vw, 11px); padding: 3px 10px; }
   }
 </style>
 </head>
 <body>
 
 <header>
-  <h1>📋  Perioperative Nursing ملخص لمحاضرة الـ </h1>
-  <p>  المحاضرة هتبقي في جيبك بإذن الله </p>
+  <h1>📋 Perioperative Nursing </h1>
+  <p>ركز معايا وصلي علي النبي  والمحاضة في جيبك بإذن الله  </p>
   <div class="badge-row">
     <span class="badge badge-pre">🔵 Pre-operative</span>
     <span class="badge badge-intra">🟢 Intra-operative</span>
@@ -311,7 +411,7 @@
 
   <!-- MNEMONIC URGENCY -->
   <div class="mnemonic mn-red">
-    <div class="mnemonic-title">🧠 Mnemonic — Urgency Levels: <strong>"Every Ugly Runner Eats Oats"</strong></div>
+    <div class="mnemonic-title">🧠 بصموجة غيث — Urgency Levels: <strong>"Every Ugly Runner Eats Oats"</strong></div>
     <div class="letter-row">
       <div class="letter-item"><div class="letter-char">E</div><div class="letter-meaning">Emergent<br><small>Immediate</small></div></div>
       <div class="letter-item"><div class="letter-char">U</div><div class="letter-meaning">Urgent<br><small>24–30 hrs</small></div></div>
@@ -354,7 +454,7 @@
 
   <!-- MNEMONIC LAB TESTS -->
   <div class="mnemonic mn-blue">
-    <div class="mnemonic-title">🧠 Mnemonic — Pre-op Lab Tests: <strong>"Can Every Upset Child Be Checked"</strong></div>
+    <div class="mnemonic-title">🧠 بصموجة غيث — Pre-op Lab Tests: <strong>"Can Every Upset Child Be Checked"</strong></div>
     <div class="letter-row">
       <div class="letter-item"><div class="letter-char">C</div><div class="letter-meaning">CBC<br><small>Blood count</small></div></div>
       <div class="letter-item"><div class="letter-char">E</div><div class="letter-meaning">Electrolytes<br><small>K,Na,Ca</small></div></div>
@@ -368,28 +468,28 @@
   <!-- BODY SYSTEM ASSESSMENT -->
   <div class="card card-pre" style="margin-top:14px;">
     <h3>🫀 Body System Assessment <span class="exam-star">⭐ EXAM</span></h3>
-    <div class="grid grid-3" style="margin-top:8px; gap:8px;">
-      <div style="background:var(--pre-light); border-radius:8px; padding:10px;">
+    <div class="mini-grid mini-grid-3" style="margin-top:8px;">
+      <div class="mini-item" style="background:var(--pre-light);">
         <strong style="color:var(--pre);">Respiratory</strong><br>
         <small>Stop smoking <strong>4–8 weeks</strong> before surgery. Postpone if respiratory infection present.</small>
       </div>
-      <div style="background:var(--pre-light); border-radius:8px; padding:10px;">
+      <div class="mini-item" style="background:var(--pre-light);">
         <strong style="color:var(--pre);">Cardiovascular</strong><br>
         <small>Postpone if <strong>uncontrolled hypertension</strong>.</small>
       </div>
-      <div style="background:var(--pre-light); border-radius:8px; padding:10px;">
+      <div class="mini-item" style="background:var(--pre-light);">
         <strong style="color:var(--pre);">Hepatic/Renal</strong><br>
         <small>Acute liver disease = high surgical mortality. Affects anesthetic metabolism.</small>
       </div>
-      <div style="background:var(--pre-light); border-radius:8px; padding:10px;">
+      <div class="mini-item" style="background:var(--pre-light);">
         <strong style="color:var(--pre);">Endocrine (Diabetes)</strong><br>
         <small>Risk of <strong>hypoglycemia</strong> during anesthesia & <strong>hyperglycemia</strong> → wound infection.</small>
       </div>
-      <div style="background:var(--pre-light); border-radius:8px; padding:10px;">
+      <div class="mini-item" style="background:var(--pre-light);">
         <strong style="color:var(--pre);">Immune</strong><br>
         <small>Identify & document all <strong>allergies</strong> and medication sensitivities.</small>
       </div>
-      <div style="background:var(--pre-light); border-radius:8px; padding:10px;">
+      <div class="mini-item" style="background:var(--pre-light);">
         <strong style="color:var(--pre);">Drug/Alcohol</strong><br>
         <small>Postpone surgery if acutely intoxicated (susceptible to injury).</small>
       </div>
@@ -427,7 +527,7 @@
 
   <!-- MNEMONIC PRE-MED -->
   <div class="mnemonic mn-yellow">
-    <div class="mnemonic-title">🧠 Mnemonic — Pre-medication Goals: <strong>"All Anxious Students Need Good Marks"</strong></div>
+    <div class="mnemonic-title">🧠 بصموجة غيث — Pre-medication Goals: <strong>"All Anxious Students Need Good Marks"</strong></div>
     <div class="letter-row">
       <div class="letter-item"><div class="letter-char">A</div><div class="letter-meaning">Anxiety ↓<br><small>Benzodiazepines</small></div></div>
       <div class="letter-item"><div class="letter-char">A</div><div class="letter-meaning">Amnesia<br><small>Midazolam</small></div></div>
@@ -475,7 +575,7 @@
 
   <!-- MNEMONIC OR TEAM -->
   <div class="mnemonic mn-green">
-    <div class="mnemonic-title">🧠 Mnemonic — OR Team: <strong>"Sterile Surgeons Scrub; Unstable Anesthesia Circulates Radios"</strong></div>
+    <div class="mnemonic-title">🧠 بصموجة غيث — OR Team: <strong>"Sterile Surgeons Scrub; Unstable Anesthesia Circulates Radios"</strong></div>
     <div class="letter-row" style="flex-direction:column; gap:6px;">
       <div style="font-size:13px;"><strong style="color:var(--intra);">STERILE:</strong> <span class="tag tag-green">Surgeon</span> <span class="tag tag-green">Surgical Assistants</span> <span class="tag tag-green">Scrub Nurse</span></div>
       <div style="font-size:13px;"><strong style="color:var(--red);">UNSTERILE:</strong> <span class="tag tag-red">Anesthesiologist</span> <span class="tag tag-red">Circulating Nurse</span> <span class="tag tag-red">Radiology Tech</span></div>
@@ -485,26 +585,26 @@
   <!-- SURGICAL POSITIONS -->
   <div class="card card-intra" style="margin-top:14px;">
     <h3>🛏 Surgical Positions <span class="exam-star">⭐ EXAM</span></h3>
-    <div class="grid grid-3" style="margin-top:8px; gap:8px;">
-      <div style="background:var(--intra-light); border-radius:8px; padding:8px 12px;">
+    <div class="mini-grid mini-grid-3" style="margin-top:8px;">
+      <div class="mini-item" style="background:var(--intra-light);">
         <strong style="color:var(--intra);">Supine (Dorsal)</strong><br><small>Abdominal & thoracic, extremities</small>
       </div>
-      <div style="background:var(--intra-light); border-radius:8px; padding:8px 12px;">
+      <div class="mini-item" style="background:var(--intra-light);">
         <strong style="color:var(--intra);">Semi-Fowler's</strong><br><small>Thyroid & neck surgery</small>
       </div>
-      <div style="background:var(--intra-light); border-radius:8px; padding:8px 12px;">
+      <div class="mini-item" style="background:var(--intra-light);">
         <strong style="color:var(--intra);">Trendelenburg</strong><br><small>Pelvic surgery</small>
       </div>
-      <div style="background:var(--intra-light); border-radius:8px; padding:8px 12px;">
+      <div class="mini-item" style="background:var(--intra-light);">
         <strong style="color:var(--intra);">Prone</strong><br><small>Spinal surgery</small>
       </div>
-      <div style="background:var(--intra-light); border-radius:8px; padding:8px 12px;">
+      <div class="mini-item" style="background:var(--intra-light);">
         <strong style="color:var(--intra);">Lateral</strong><br><small>Kidney & upper ureters</small>
       </div>
-      <div style="background:var(--intra-light); border-radius:8px; padding:8px 12px;">
+      <div class="mini-item" style="background:var(--intra-light);">
         <strong style="color:var(--intra);">Lithotomy</strong><br><small>Vaginal, perineal, rectal</small>
       </div>
-      <div style="background:var(--intra-light); border-radius:8px; padding:8px 12px;">
+      <div class="mini-item" style="background:var(--intra-light);">
         <strong style="color:var(--intra);">Jackknife</strong><br><small>Proctologic surgery</small>
       </div>
     </div>
@@ -512,7 +612,7 @@
 
   <!-- MNEMONIC POSITIONS -->
   <div class="mnemonic mn-green">
-    <div class="mnemonic-title">🧠 Mnemonic — Surgical Positions: <strong>"Super Students Take Practical Life Journey"</strong></div>
+    <div class="mnemonic-title">🧠 بصموجة غيث — Surgical Positions: <strong>"Super Students Take Practical Life Journey"</strong></div>
     <div class="letter-row">
       <div class="letter-item"><div class="letter-char">S</div><div class="letter-meaning">Supine<br><small>Abdomen/Thorax</small></div></div>
       <div class="letter-item"><div class="letter-char">S</div><div class="letter-meaning">Semi-Fowler's<br><small>Thyroid/Neck</small></div></div>
@@ -541,13 +641,13 @@
   <div class="card card-teal" style="margin-top:14px;">
     <h3>💉 Types of Anesthesia <span class="exam-star">⭐ EXAM</span></h3>
     <div class="grid grid-2" style="gap:8px; margin-top:6px;">
-      <div style="background:white; border-radius:8px; padding:8px 12px;">
+      <div class="mini-item" style="background:white;">
         <strong style="color:var(--teal);">1. General</strong><br><small>Pain controlled by general insensibility<br>Agents: Halothane, Nitrous oxide, Methohexital sodium (IV)</small>
       </div>
-      <div style="background:white; border-radius:8px; padding:8px 12px;">
+      <div class="mini-item" style="background:white;">
         <strong style="color:var(--teal);">2. Local/Regional Block</strong><br><small>Sensory nerves in one area anesthetized</small>
       </div>
-      <div style="background:white; border-radius:8px; padding:8px 12px;">
+      <div class="mini-item" style="background:white;">
         <strong style="color:var(--teal);">3. Spinal/Epidural</strong><br><small>Blocked below diaphragm — no loss of consciousness</small>
       </div>
     </div>
@@ -558,7 +658,7 @@
 
   <div class="grid grid-2">
     <div class="card card-post">
-      <h3>📋 PACU Assessment (Immediate) <span class="exam-star">⭐ EXAM</span></h3>
+      <h3>📋 بصموجة غيث — PACU Assessment (Immediate) <span class="exam-star">⭐ EXAM</span></h3>
       <ul>
         <li><strong>A</strong> — Airway: artificial airway presence</li>
         <li><strong>B</strong> — Breathing / Vital signs + pulse oximeter</li>
@@ -585,7 +685,7 @@
 
   <!-- MNEMONIC POST-OP ASSESSMENT -->
   <div class="mnemonic mn-pink">
-    <div class="mnemonic-title">🧠 Mnemonic — Post-op Assessment: <strong>"ABCDEFP"</strong></div>
+    <div class="mnemonic-title">🧠 بصموجة غيث — Post-op Assessment: <strong>"ABCDEFP"</strong></div>
     <div class="letter-row">
       <div class="letter-item"><div class="letter-char">A</div><div class="letter-meaning">Airway</div></div>
       <div class="letter-item"><div class="letter-char">B</div><div class="letter-meaning">Breathing<br><small>Vitals</small></div></div>
@@ -617,7 +717,7 @@
 
   <!-- MNEMONIC COMPLICATIONS -->
   <div class="mnemonic mn-red">
-    <div class="mnemonic-title">🧠 Mnemonic — Post-op Complications: <strong>"She Had Deep Purple Pants, Pulling Up Interesting Wounds Daily"</strong></div>
+    <div class="mnemonic-title">🧠 بصموجة غيث — Post-op Complications: <strong>"She Had Deep Purple Pants, Pulling Up Interesting Wounds Daily"</strong></div>
     <div class="letter-row">
       <div class="letter-item"><div class="letter-char">S</div><div class="letter-meaning">Shock</div></div>
       <div class="letter-item"><div class="letter-char">H</div><div class="letter-meaning">Hemorrhage</div></div>
@@ -635,23 +735,23 @@
   <!-- EARLY AMBULATION BENEFITS -->
   <div class="card card-teal" style="margin-top:14px;">
     <h3>🚶 Benefits of Early Post-op Ambulation <span class="exam-star">⭐ EXAM</span></h3>
-    <div class="grid grid-3" style="gap:8px; margin-top:8px;">
-      <div style="background:white; border-radius:8px; padding:8px;">
+    <div class="mini-grid mini-grid-3" style="margin-top:8px;">
+      <div class="mini-item" style="background:white;">
         <strong style="color:var(--teal);">Respiratory ↑</strong><br><small>↑ Breathing depth → prevents atelectasis & pneumonia</small>
       </div>
-      <div style="background:white; border-radius:8px; padding:8px;">
+      <div class="mini-item" style="background:white;">
         <strong style="color:var(--teal);">Circulation ↑</strong><br><small>Prevents DVT, brings nutrients to wound</small>
       </div>
-      <div style="background:white; border-radius:8px; padding:8px;">
+      <div class="mini-item" style="background:white;">
         <strong style="color:var(--teal);">Kidney ↑</strong><br><small>Prevents urinary retention, ↑ micturition</small>
       </div>
-      <div style="background:white; border-radius:8px; padding:8px;">
+      <div class="mini-item" style="background:white;">
         <strong style="color:var(--teal);">Metabolism ↑</strong><br><small>Restores nitrogen balance</small>
       </div>
-      <div style="background:white; border-radius:8px; padding:8px;">
+      <div class="mini-item" style="background:white;">
         <strong style="color:var(--teal);">Muscle Tone</strong><br><small>Prevents loss of muscle tone</small>
       </div>
-      <div style="background:white; border-radius:8px; padding:8px;">
+      <div class="mini-item" style="background:white;">
         <strong style="color:var(--teal);">GI ↑</strong><br><small>↑ Peristalsis → prevents ileus, distention, constipation</small>
       </div>
     </div>
@@ -659,7 +759,7 @@
 
   <!-- MNEMONIC AMBULATION -->
   <div class="mnemonic mn-teal">
-    <div class="mnemonic-title">🧠 Mnemonic — Ambulation Benefits: <strong>"Rare Candy Kills My Muscles Good"</strong></div>
+    <div class="mnemonic-title">🧠 بصموجة غيث — Ambulation Benefits: <strong>"Rare Candy Kills My Muscles Good"</strong></div>
     <div class="letter-row">
       <div class="letter-item"><div class="letter-char">R</div><div class="letter-meaning">Respiratory<br><small>↑ breathing</small></div></div>
       <div class="letter-item"><div class="letter-char">C</div><div class="letter-meaning">Circulation<br><small>↓ DVT</small></div></div>
@@ -704,7 +804,7 @@
 
   <!-- MNEMONIC DISCOMFORTS -->
   <div class="mnemonic mn-purple">
-    <div class="mnemonic-title">🧠 Mnemonic — Post-op Discomforts: <strong>"Never Rest, The Cold Patients Are Hurt"</strong></div>
+    <div class="mnemonic-title">🧠 بصموجة غيث  — Post-op Discomforts: <strong>"Never Rest, The Cold Patients Are Hurt"</strong></div>
     <div class="letter-row">
       <div class="letter-item"><div class="letter-char">N</div><div class="letter-meaning">Nausea/<br><small>Vomiting</small></div></div>
       <div class="letter-item"><div class="letter-char">R</div><div class="letter-meaning">Restlessness/<br><small>Sleeplessness</small></div></div>
@@ -727,33 +827,33 @@
   </div>
 
   <!-- ═══════════════ QUICK REFERENCE ═══════════════ -->
-  <div class="phase-label" style="background:#2c3e50; color:white; margin-top:28px;">⭐ Quick Exam Reference</div>
+  <div class="phase-label" style="background:#2c3e50; color:white; margin-top:28px;">⭐ االلي تركز عليه في الإمتحان</div>
 
   <div class="card" style="border-left:5px solid #2c3e50; background:#f8f9fa;">
-    <h3 style="color:#2c3e50;">📌 Must-Know Numbers & Facts</h3>
-    <div class="grid grid-2" style="margin-top:10px; gap:8px;">
+    <h3 style="color:#2c3e50;">📌 المهم من عمو غيث </h3>
+    <div class="mini-grid mini-grid-2" style="margin-top:10px;">
       <div style="background:var(--pre-light); border-radius:8px; padding:8px 12px;">
         <strong style="color:var(--pre);">NPO before general anesthesia:</strong> 8–12 hours
       </div>
       <div style="background:var(--pre-light); border-radius:8px; padding:8px 12px;">
         <strong style="color:var(--pre);">Stop smoking before surgery:</strong> 4–8 weeks
       </div>
-      <div style="background:var(--yellow-light); border-radius:8px; padding:8px 12px;">
+      <div class="mini-item" style="background:var(--yellow-light);">
         <strong style="color:#7d5e00;">Pre-medication given:</strong> 30–60 min before OR
       </div>
-      <div style="background:var(--yellow-light); border-radius:8px; padding:8px 12px;">
+      <div class="mini-item" style="background:var(--yellow-light);">
         <strong style="color:#7d5e00;">Urgent surgery:</strong> Within 24–30 hours
       </div>
-      <div style="background:var(--post-light); border-radius:8px; padding:8px 12px;">
+      <div class="mini-item" style="background:var(--post-light);">
         <strong style="color:var(--post);">VS frequency (stable):</strong> q15min → q30min → q4h
       </div>
-      <div style="background:var(--post-light); border-radius:8px; padding:8px 12px;">
+      <div class="mini-item" style="background:var(--post-light);">
         <strong style="color:var(--post);">Avoid heavy lifting after major surgery:</strong> ≥6 weeks
       </div>
-      <div style="background:var(--teal-light); border-radius:8px; padding:8px 12px;">
+      <div class="mini-item" style="background:var(--teal-light);">
         <strong style="color:var(--teal);">Bowel movement check:</strong> If none after 2–3 days post-peristalsis → act
       </div>
-      <div style="background:var(--teal-light); border-radius:8px; padding:8px 12px;">
+      <div class="mini-item" style="background:var(--teal-light);">
         <strong style="color:var(--teal);">Position changes (bedridden):</strong> Every 2 hours
       </div>
     </div>
@@ -761,8 +861,8 @@
 
   <!-- FOOTER -->
   <div style="text-align:center; margin-top:36px; padding:20px; background:#1a1a2e; border-radius:14px; color:white;">
-    <div style="font-family:'Syne',sans-serif; font-size:16px; font-weight:800;"> 😉 مع غيث ، أنت في الأمان  </div>
-    <div style="opacity:0.6; font-size:12px; margin-top:4px;"> 🙊❤️ دعواتك بالخير والجنه </div>
+    <div style="font-family:'Syne',sans-serif; font-size:16px; font-weight:800;"> مع غيث أنت في أمان</div>
+    <div style="opacity:0.6; font-size:12px; margin-top:4px;"> 🥹❤️ دعواتك بالجنه والخير </div>
   </div>
 
 </div>
