@@ -227,18 +227,22 @@ const lectures=[
 ["fa-cat","Urinary Catheterization"]
 ];
 
-document.write(lectures.map(l=>`
-<details>
-<summary><i class="fa-solid ${l[0]}"></i> ${l[1]}</summary>
-<div class="content">
-<a href="questions.html">❓ أسئلة</a>
-</div>
-</details>
-`).join(""));
+lectures.forEach((lecture, index) => {
+ document.write(`
+ <details class="${lecture.review ? 'review-card' : ''}">
+ <summary>
+ <i class="fa-solid ${lecture.icon}"></i> ${lecture.name}
+ </summary>
+ <div class="content">
+ <a href="quiz${index+1}.html">🚀 إبدأ الأسئلة </a>
+ </div>
+ </details>
+ `);
+});
 </script>
 
 </div>
-
+ 
 <!-- Join Us Button -->
 <a href="https://t.me/nursing2bu" target="_blank" class="join-btn">
 <i class="fa-brands fa-telegram"></i> انضم إلينا
