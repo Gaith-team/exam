@@ -1,0 +1,462 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ghaith Team | Exam</title>
+
+<style>
+:root{
+  --primary:#0284c7;
+  --secondary:#0ea5e9;
+  --bg:#f8fbff;
+  --card:#ffffff;
+  --soft:#e6f0ff;
+  --question:#eef7ff;
+  --option:#f9fcff;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --text:#0f172a;
+
+  /* Brand dynamic */
+  --brand1:#ffffff;
+  --brand2:#e0f2fe;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#eef6ff);
+  color:var(--text);
+}
+
+/* ================= HEADER ================= */
+header{
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* ===== Brand ===== */
+.logo{
+  position:relative;
+  font-size:28px;
+  font-weight:900;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.brand-text{
+  background:linear-gradient(90deg,var(--brand1),var(--brand2),var(--brand1));
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 4s linear infinite;
+}
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+.heart{
+  display:inline-block;
+  animation:heartbeat 1.6s infinite ease-in-out;
+}
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  animation:twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle{
+  0%{opacity:0;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.2)}
+  100%{opacity:0;transform:scale(.6)}
+}
+
+/* Reduced motion أثناء الامتحان */
+.exam .sparkle{animation-duration:5s;opacity:.4}
+.exam .heart{animation-duration:2.5s}
+
+/* After exam */
+.after .sparkle{animation-duration:2s}
+.after .heart{animation-duration:1.1s}
+
+/* ================= LAYOUT ================= */
+.container{max-width:520px;margin:auto;padding:16px}
+
+/* ===== Top Bar ===== */
+.top-bar{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+}
+.progress-box{
+  flex:1;
+  background:var(--card);
+  padding:14px;
+  border-radius:18px;
+  box-shadow:0 10px 22px rgba(2,132,199,.12);
+}
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px;
+  font-weight:800;
+  font-size:14px;
+}
+.progress{
+  height:8px;
+  background:var(--soft);
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+}
+
+/* Timer */
+.timer{
+  width:64px;height:64px;border-radius:50%;
+  background:conic-gradient(var(--primary) 0deg,var(--soft) 0deg);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;
+  background-color:var(--card);
+}
+
+/* ================= CARD ================= */
+.card{
+  background:var(--card);
+  padding:22px;
+  border-radius:24px;
+  box-shadow:0 18px 36px rgba(2,132,199,.18);
+}
+.question-title{
+  background:var(--question);
+  padding:16px;
+  border-radius:16px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+.option{
+  background:var(--option);
+  border:2px solid var(--soft);
+  border-radius:18px;
+  padding:15px;
+  margin:12px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.correct{background:#eafaf1;border-color:var(--success)}
+.option.wrong{background:#fff1f1;border-color:var(--danger)}
+.option.disabled{pointer-events:none;opacity:.9}
+
+button{
+  margin-top:18px;
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-weight:900;
+}
+
+/* Feedback */
+.feedback{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:10px;
+  animation:pop .5s;
+}
+@keyframes pop{
+  0%{transform:scale(.6);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* Report */
+.report{
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  border-left:6px solid var(--soft);
+}
+.report.correct{border-color:var(--success)}
+.report.wrong{border-color:var(--danger)}
+</style>
+</head>
+
+<body class="exam">
+
+<header>
+  <div class="logo">
+    <span class="brand-text">Ghaith Team</span>
+    <span class="heart">💖</span>
+    <span class="sparkle" style="top:-8px;left:0">✨</span>
+    <span class="sparkle" style="top:6px;right:-8px">✨</span>
+    <span class="sparkle" style="bottom:-8px;left:50%">✨</span>
+  </div>
+  <div style="margin-top:6px;font-weight:800">  👏🏻 الإمتحان في جيبك </div>
+</header>
+
+<div class="container">
+
+  <div class="top-bar">
+    <div class="progress-box">
+      <div class="progress-text">
+        <span id="progressText"></span>
+        <span>
+          ✔️ <span id="correctCount">0</span> |
+          ❌ <span id="wrongCount">0</span> |
+          ⏳ <span id="remainPercent">100%</span>
+        </span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="timer" id="timer">40:00</div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<script>
+/* ===== Questions ===== */
+let questions = [
+    {t:"How is chronic illness defined?", o:["A disease that lasts one month","A disease that lasts one year or more requiring ongoing medical attention","An illness that cures itself within a week","A minor health problem that doesn't limit activity"], a:1},
+            {t:"Which age group is affected by chronic health problems?", o:["Only the elderly","Only the middle-aged","People of all ages","Only infants"], a:2},
+            {t:"What does 'long latency period' mean in chronic illness?", o:["The time it takes to cure the illness","The time between onset of illness and feeling its effects","The duration of a hospital stay","The time between two different illnesses"], a:1},
+            {t:"Which of the following is a characteristic of chronic illness?", o:["Simple causes","Short-term duration","Functional impairment or disability","Immediate cure"], a:2},
+            {t:"Which chronic illness is described as 'wear and tear' on the joints?", o:["Cancer","Arthritis","Stroke","Diabetes"], a:1},
+            {t:"What is the defining blood pressure for hypertension?", o:["120/80 mmHg","≥140/90 mmHg","110/70 mmHg","130/85 mmHg"], a:1},
+            {t:"Which chronic condition is caused by uncontrollable growth of abnormal cells?", o:["Heart attack","Stroke","Cancer","Hypertension"], a:2},
+            {t:"A stroke is caused by a blockage of blood flow to the:", o:["Heart","Lungs","Brain","Kidneys"], a:2},
+            {t:"In which phase of the trajectory is a person at risk due to genetic factors or lifestyle?", o:["Trajectory phase","Pretrajectory phase","Stable phase","Acute phase"], a:1},
+            {t:"The onset of symptoms or disability associated with a chronic condition marks which phase?", o:["Pretrajectory","Trajectory","Unstable","Comeback"], a:1},
+            {t:"Which phase indicates that symptoms and disability are being managed adequately?", o:["Stable phase","Acute phase","Crisis phase","Downward phase"], a:0},
+            {t:"The 'Unstable phase' is characterized by:", o:["Recovery","Exacerbation of symptoms or complications","Sudden cure","No symptoms"], a:1},
+            {t:"Which phase requires hospitalization for management of sudden severe symptoms?", o:["Stable phase","Acute phase","Dying phase","Pretrajectory phase"], a:1},
+            {t:"A 'Crisis phase' is described as:", o:["A slow decline","A life-threatening situation requiring emergency care","A period of recovery","A risk-only stage"], a:1},
+            {t:"The 'Comeback phase' refers to:", o:["Worsening of the condition","Recovery after an acute period","Genetic susceptibility","Death"], a:1},
+            {t:"The 'Downward phase' is marked by:", o:["Improvement in health","Worsening of the condition despite treatment","Stable symptoms","Genetic risk"], a:1},
+            {t:"What characterizes the 'Dying phase'?", o:["Gradual or rapid decline and failure of life-maintaining functions","A return to normal life","A new diagnosis","Successful treatment"], a:0},
+            {t:"What is the first step in the nursing management of chronic illness?", o:["Establishing goals","Implementing interventions","Identifying the trajectory phase","Evaluating effectiveness"], a:2},
+            {t:"Establishing goals for chronic illness care should be a collaborative effort between:", o:["The nurse and doctor only","The nurse, patient, and family","The nurse and the hospital manager","The patient and their friends only"], a:1},
+            {t:"Which factor is a lifestyle risk for chronic illness?", o:["Eating vegetables","Smoking","Regular exercise","Sleeping 8 hours"], a:1},
+            {t:"Excessive exposure to sunlight is a risk factor for which chronic condition?", o:["Arthritis","Cancer (Skin)","Diabetes","Hypertension"], a:1},
+            {t:"Which of the following is a challenge of living with a chronic condition?", o:["Social isolation and loneliness","Always having a cure","Never needing medicine","Increased wealth"], a:0},
+            {t:"What is the primary goal of nursing care in chronic illness?", o:["Curing the patient completely","Maintaining stability while preserving patient control and identity","Keeping the patient in the hospital forever","Ignoring the patient's family"], a:1},
+            {t:"Which step involves identifying environmental or social factors that might interfere with goals?", o:["Step 1: Assessment","Step 4: Identifying factors that facilitate or hinder attainment","Step 5: Implementation","Step 6: Evaluation"], a:1},
+            {t:"Direct care, teaching, and counseling are examples of:", o:["Nursing diagnoses","Nursing interventions","Evaluation criteria","Trajectory phases"], a:1},
+            {t:"Which condition is characterized by elevated blood glucose levels?", o:["Hypertension","Diabetes mellitus","Arthritis","Stroke"], a:1},
+            {t:"A heart attack is caused by blockage of blood flow to the:", o:["Brain","Heart","Lungs","Liver"], a:1},
+            {t:"Chronic illness frequency increases with:", o:["Wealth","Age","Height","Education"], a:1},
+            {t:"'Dying with dignity and comfort' is a challenge associated with:", o:["Pretrajectory phase","Stable phase","Chronic conditions","Acute injuries only"], a:2},
+            {t:"Which phase involves genetic factors increasing susceptibility?", o:["Trajectory","Stable","Pretrajectory","Crisis"], a:2},
+            {t:"During the 'Unstable phase', everyday activities may be:", o:["Improved","Temporarily disrupted","Completely stopped forever","Unchanged"], a:1},
+            {t:"'Reactivation of an illness in remission' occurs in which phase?", o:["Stable","Unstable","Pretrajectory","Comeback"], a:1},
+            {t:"What is the focus of care for patients with chronic conditions determined by?", o:["The patient's age only","The illness phase and nursing process","The hospital's name","The weather"], a:1},
+            {t:"Step 3 in nursing management involves establishing a:", o:["New diagnosis","Realistic and mutually agreed upon plan","Bill for the patient","New hospital"], a:1},
+            {t:"'Validating individual self-worth' is a challenge related to:", o:["Physical health only","Psychological adjustment to chronic conditions","Financial status","Genetic testing"], a:1},
+            {t:"Which of the following is NOT a common chronic disease mentioned?", o:["Arthritis","Common cold","Cancer","Diabetes"], a:1},
+            {t:"'Long-term illness' is a characteristic of:", o:["Acute illness","Chronic illness","Infectious disease only","Broken bones"], a:1},
+            {t:"What does 'Functional impairment' refer to?", o:["High intelligence","Limitations in daily activities","Perfect health","Fast recovery"], a:1},
+            {t:"Excessive alcohol is a factor that affects:", o:["Eye color","Chronic illness development","Height","Hearing"], a:1},
+            {t:"Depression and stress are factors that:", o:["Cure chronic illness","Affect or contribute to chronic illness","Have no impact on health","Only affect children"], a:1},
+            {t:"The 'Trajectory' model has how many phases?", o:["Three","Five","Nine","Twelve"], a:2},
+            {t:"Which phase involves the onset of disability?", o:["Pretrajectory","Trajectory","Stable","Comeback"], a:1},
+            {t:"In the 'Stable phase', disability is:", o:["Worsening","Managed adequately","Non-existent","Increasing"], a:1},
+            {t:"Emergency treatment is required in which phase?", o:["Stable","Crisis","Pretrajectory","Comeback"], a:1},
+            {t:"The 'Downard phase' means the condition is:", o:["Improving","Getting worse despite treatment","Staying the same","Cured"], a:1},
+            {t:"Failure of life-maintaining body functions occurs in:", o:["Acute phase","Dying phase","Trajectory phase","Stable phase"], a:1},
+            {t:"Nursing care for chronic conditions can be provided in:", o:["Only hospitals","Only homes","Assortment of settings including clinics, hospitals, and homes","Only schools"], a:2},
+            {t:"'Serving as an advocate' is a nursing:", o:["Diagnosis","Intervention","Goal","Evaluation"], a:1},
+            {t:"Evaluating effectiveness is which step of the nursing management?", o:["First","Third","Fifth","Final (Sixth)"], a:3},
+            {t:"Chronic illnesses generally:", o:["Cure themselves","Are not cured completely","Last only a week","Are always infectious"], a:1},
+            {t:"Which condition is caused by blood flow blockage to the heart?", o:["Stroke","Heart attack","Cancer","Arthritis"], a:1},
+            {t:"'Wear and tear' on joints like knees and hips is:", o:["Diabetes","Arthritis","Hypertension","Stroke"], a:1},
+            {t:"Hypertension is defined by a systolic BP of:", o:["<120","≥140","<100","80"], a:1},
+            {t:"A diastolic BP of ≥90 mmHg indicates:", o:["Low blood pressure","Hypertension","Normal blood pressure","Dehydration"], a:1},
+            {t:"'Managing threats to identity' is a challenge for:", o:["The nurse only","Patients living with chronic conditions","The government","Healthy people"], a:1},
+            {t:"The 'Comeback phase' follows which phase?", o:["Pretrajectory","Stable","Acute/Crisis","Dying"], a:2},
+            {t:"Lifestyle changes necessitated by illness affect:", o:["Only the patient","The duration and management of chronic illness","Only the doctor","Nothing"], a:1},
+            {t:"'Previous experience with illness' can affect how one deals with:", o:["Food","Chronic illness stress","Weather","Sports"], a:1},
+            {t:"A chronic disease lasts at least:", o:["One week","One month","One year","Five years"], a:2},
+            {t:"Which phase is characterized by 'failure to halt the disorder'?", o:["Stable","Dying","Pretrajectory","Comeback"], a:1},
+            {t:"Chronic health problems only affect elderly people.", o:["True","False"], a:1},
+            {t:"A chronic illness is defined as a disease lasting one year or more.", o:["True","False"], a:0},
+            {t:"Chronic illnesses are generally cured completely with the right medicine.", o:["True","False"], a:1},
+            {t:"The pretrajectory phase involves genetic risk factors.", o:["True","False"], a:0},
+            {t:"The stable phase means the patient is cured.", o:["True","False"], a:1},
+            {t:"The acute phase requires hospitalization.", o:["True","False"], a:0},
+            {t:"A crisis phase is a life-threatening situation.", o:["True","False"], a:0},
+            {t:"The downward phase marks the improvement of a condition.", o:["True","False"], a:1},
+            {t:"Nursing care for chronic illness is only provided in hospitals.", o:["True","False"], a:1},
+            {t:"Establishing goals should be a collaborative effort between the nurse and patient.", o:["True","False"], a:0},
+            {t:"Arthritis is caused by uncontrollable growth of abnormal cells.", o:["True","False"], a:1},
+            {t:"Hypertension is defined as BP ≥140/90 mmHg.", o:["True","False"], a:0},
+            {t:"Stroke is caused by blockage of blood flow to the brain.", o:["True","False"], a:0},
+            {t:"Smoking is a risk factor for chronic illness.", o:["True","False"], a:0},
+            {t:"The dying phase is characterized by failure of life-maintaining functions.", o:["True","False"], a:0},
+            {t:"A 50-year-old patient has a family history of diabetes and eats a high-sugar diet but has no symptoms yet. Which phase of the chronic illness trajectory are they in?", o:["Trajectory phase","Pretrajectory phase","Stable phase","Acute phase"], a:1},
+            {t:" A patient with a chronic heart condition is suddenly admitted to the hospital with severe shortness of breath that isn't relieved by their usual medication. Which phase are they in?", o:["Stable phase","Unstable phase","Acute phase","Comeback phase"], a:2},
+            {t:"A nurse is working with a patient who has arthritis. The patient is frustrated because they can no longer garden. The nurse helps the patient find tools with larger handles to continue their hobby. Which challenge is the nurse helping the patient address?", o:["Managing a crisis","Physically accommodating disabilities and normalizing life","Dying with dignity","Genetic testing"], a:1},
+            {t:" A patient with multiple sclerosis is experiencing a worsening of symptoms despite following their treatment plan strictly. The disability is progressing. Which phase does this represent?", o:["Stable phase","Downward phase","Comeback phase","Pretrajectory phase"], a:1},
+            {t:"A nurse is setting goals for a patient with hypertension. The patient wants to reduce salt, but the nurse wants the patient to exercise 2 hours a day. The patient refuses. What did the nurse fail to do according to Step 2 of nursing management?", o:["Assess the patient's BP","Collaborate with the patient to establish mutually agreed upon goals","Prescribe the right medicine","Identify the trajectory phase"], a:1}
+];
+
+
+
+// ===== shuffle questions only =====
+function shuffleQuestions(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+// خلط الأسئلة فقط
+shuffleQuestions(questions);
+
+// تعريف المتغيرات الناقصة
+let i = 0;
+let correct = 0;
+let wrong = 0;
+let answers = [];
+let wrongSet = [];
+
+/* ===== Timer ===== */
+let totalTime=40*60, timeLeft=totalTime;
+const timerInt=setInterval(()=>{
+  timeLeft--;
+  let m=Math.floor(timeLeft/60), s=timeLeft%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  let deg=(timeLeft/totalTime)*360;
+  timer.style.background=`conic-gradient(var(--primary) ${deg}deg,var(--soft) ${deg}deg)`;
+  if(timeLeft<=0){clearInterval(timerInt);finishExam();}
+},1000);
+
+/* ===== UI ===== */
+function updateTop(){
+  let total=questions.length;
+  let answered=correct+wrong;
+  progressText.innerText=`سؤال ${i+1} من ${total}`;
+  progressBar.style.width=((i+1)/total*100)+"%";
+  correctCount.innerText=correct;
+  wrongCount.innerText=wrong;
+  remainPercent.innerText=Math.round(((total-answered)/total)*100)+"%";
+}
+
+/* ===== Render ===== */
+function show(){
+  updateTop();
+  let q = questions[i];
+
+  app.innerHTML = `
+    <div class="card">
+      <div class="question-title">${q.t}</div>
+      ${q.o.map((o,idx)=>`
+        <div class="option" onclick="choose(${idx})">${o}</div>
+      `).join("")}
+    </div>
+  `;
+}
+/* ===== Choose ===== */
+function choose(v){
+  if(answers[i]!=null) return;
+  answers[i]=v;
+  let ok=v===questions[i].a;
+  ok?correct++:wrong++;
+  app.innerHTML=`
+    <div class="feedback">${ok?"🎉 شاطر جدًا كمل":"😅 ركّز يا سُكر"}</div>
+    <div class="card">
+      <div class="question-title">${questions[i].t}</div>
+      ${questions[i].o.map((o,j)=>`
+        <div class="option ${j===questions[i].a?"correct":j===v?"wrong":""} disabled">${o}</div>
+      `).join("")}
+      <button onclick="next()">التالي</button>
+    </div>`;
+}
+
+/* ===== Next ===== */
+function next(){
+  if(i<questions.length-1){i++;show();}
+  else finishExam();
+}
+
+/* ===== Finish ===== */
+function finishExam(){
+  document.body.classList.remove("exam");
+  document.body.classList.add("after");
+
+  let score=Math.round((correct/questions.length)*100);
+
+  if(score>=80){
+    document.documentElement.style.setProperty("--brand1","#22c55e");
+    document.documentElement.style.setProperty("--brand2","#fde047");
+  }else if(score>=50){
+    document.documentElement.style.setProperty("--brand1","#38bdf8");
+    document.documentElement.style.setProperty("--brand2","#e0f2fe");
+  }else{
+    document.documentElement.style.setProperty("--brand1","#fb923c");
+    document.documentElement.style.setProperty("--brand2","#fed7aa");
+  }
+
+  wrongSet=[];
+  let report="";
+  questions.forEach((q,idx)=>{
+    let ok=answers[idx]===q.a;
+    if(!ok) wrongSet.push(q);
+    report+=`
+      <div class="report ${ok?"correct":"wrong"}">
+        <b>${q.t}</b><br>
+إجابتك: ${answers[idx]!=null ? q.o[answers[idx]] : "لم يتم الحل"}<br>
+الصح: ${q.o[q.a]}
+      </div>`;
+  });
+
+  app.innerHTML=`
+    <div class="card">
+      <h3>?? تقريرك</h3>
+      ${report}
+      ${wrongSet.length?`<button onclick="retry()">إعادة حل الغلط فقط</button>`:"<p>أنت ممتاز 👑</p>"}
+    </div>`;
+}
+
+/* ===== Retry Wrong ===== */
+function retry(){
+  // نبدأ امتحان جديد بالأسئلة الغلط فقط
+  questions = [...wrongSet];
+
+  answers = [];
+  wrongSet = [];
+  i = 0;
+  correct = 0;
+  wrong = 0;
+
+  // رجوع لشكل الامتحان
+  document.body.classList.remove("after");
+  document.body.classList.add("exam");
+
+  show();
+}
+
+show();
+</script>
+
+</body>
+</html>
