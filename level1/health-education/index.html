@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ghaith team</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+:root{
+ --g1:#a7f3c0;
+ --g2:#4ade80;
+ --g3:#16a34a;
+ --g4:#15803d;
+ --glow1:rgba(74,222,128,0.7);
+ --glow2:rgba(22,163,74,0.5);
+}
+
+*{box-sizing:border-box;font-family:'Cairo',sans-serif}
+
+body{
+ margin:0;
+ background:#001a0a;
+ color:#f0fff6;
+ overflow-x:hidden;
+ transition:.5s;
+}
+body.light{
+ background:#f0fff6;
+ color:#14532d;
+}
+
+/* ===== Review Special Style ===== */
+.review-card{
+ border:1px solid #4ade80;
+ background:rgba(74,222,128,0.08);
+}
+.review-card[open]{
+ box-shadow:0 0 25px #4ade80,
+            0 0 60px rgba(74,222,128,.6);
+}
+.review-card summary i{
+ color:#4ade80;
+}
+
+/* ===== Galaxy ===== */
+#stars{
+ position:fixed;
+ inset:0;
+ z-index:-3;
+}
+
+.portal-flash{
+ position:fixed;
+ inset:0;
+ background:radial-gradient(circle,rgba(74,222,128,.5) 0%,transparent 70%);
+ opacity:0;
+ pointer-events:none;
+ z-index:-2;
+ transition:.4s;
+}
+
+.zoom-dimension{animation:zoomDimension .6s ease;}
+@keyframes zoomDimension{
+ 0%{transform:scale(1);}
+ 50%{transform:scale(1.08);}
+ 100%{transform:scale(1);}
+}
+
+/* ===== Logo ===== */
+.logo{
+ text-align:center;
+ margin-top:60px;
+ font-size:40px;
+ font-weight:900;
+ background:linear-gradient(135deg,#a7f3c0,#4ade80,#16a34a);
+ -webkit-background-clip:text;
+ -webkit-text-fill-color:transparent;
+ animation:floatLogo 4s ease-in-out infinite;
+}
+.logo span{
+ display:inline-block;
+ animation:heartbeat 1.5s infinite;
+}
+
+@keyframes floatLogo{
+ 0%,100%{transform:translateY(0);}
+ 50%{transform:translateY(-10px);}
+}
+@keyframes heartbeat{
+ 0%,100%{transform:scale(1);}
+ 50%{transform:scale(1.2);}
+}
+
+/* ===== Grid ===== */
+.container{
+ width:95%;
+ max-width:1100px;
+ margin:40px auto;
+ display:grid;
+ grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+ gap:20px;
+}
+
+/* ===== Card ===== */
+details{
+ backdrop-filter:blur(20px);
+ background:rgba(74,222,128,0.07);
+ border:1px solid rgba(74,222,128,0.28);
+ border-radius:30px;
+ overflow:hidden;
+ transition:.6s;
+}
+
+details[open]{
+ box-shadow:0 0 30px var(--g2),
+            0 0 70px var(--g1);
+}
+
+summary{
+ list-style:none;
+ padding:20px;
+ cursor:pointer;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ gap:10px;
+ font-weight:700;
+}
+summary::-webkit-details-marker{display:none}
+summary i{color:var(--g2);}
+
+.content{
+ max-height:0;
+ overflow:hidden;
+ transition:max-height .5s ease;
+ padding:0 18px;
+ display:flex;
+ flex-direction:column;
+ align-items:center;
+}
+details[open] .content{
+ max-height:200px;
+ padding:15px 18px;
+}
+
+.content a{
+ width:80%;
+ text-align:center;
+ margin:8px 0;
+ padding:12px;
+ border-radius:999px;
+ background:linear-gradient(135deg,#a7f3c0,#4ade80,#16a34a);
+ color:#fff;
+ font-weight:700;
+ text-decoration:none;
+ transition:.3s;
+ box-shadow:0 0 12px rgba(74,222,128,0.4);
+}
+.content a:hover{
+ transform:scale(1.05);
+ box-shadow:0 0 25px var(--g2);
+}
+
+/* ===== Join Button ===== */
+.join-btn{
+ position:fixed;
+ bottom:20px;
+ left:20px;
+ padding:14px 22px;
+ border-radius:50px;
+ background:linear-gradient(135deg,#4ade80,#16a34a);
+ color:#fff;
+ font-weight:700;
+ text-decoration:none;
+ display:flex;
+ align-items:center;
+ gap:8px;
+ box-shadow:0 0 20px var(--g2);
+ transition:.4s;
+ z-index:999;
+ animation:pulseJoin 2s infinite;
+}
+.join-btn:hover{transform:scale(1.1);}
+@keyframes pulseJoin{
+ 0%{box-shadow:0 0 0 0 rgba(74,222,128,.7);}
+ 70%{box-shadow:0 0 0 15px rgba(74,222,128,0);}
+ 100%{box-shadow:0 0 0 0 rgba(74,222,128,0);}
+}
+
+/* Toggle */
+.toggle{
+ position:fixed;
+ top:15px;
+ right:15px;
+ width:45px;
+ height:45px;
+ border-radius:50%;
+ border:none;
+ cursor:pointer;
+ background:linear-gradient(135deg,#4ade80,#16a34a);
+ color:#fff;
+ font-size:18px;
+ z-index:999;
+ box-shadow:0 0 12px rgba(74,222,128,0.5);
+}
+
+@media (max-width:768px){
+ .logo{font-size:28px;margin-top:40px;}
+ summary{font-size:14px;padding:15px;}
+ .content a{width:100%;font-size:14px;}
+ .join-btn{padding:10px 16px;font-size:13px;}
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="stars"></canvas>
+<div class="portal-flash" id="flash"></div>
+<button class="toggle" id="modeToggle">🌙</button>
+
+<div class="logo">
+ تثقيف صحي <span>📢</span>
+</div>
+
+<div class="container">
+
+<script>
+const lectures = [
+{ name:"Introduction of Health Education", icon:"fa-book-medical" },
+{ name:"Basic Principles of Health Education", icon:"fa-lightbulb" },
+{ name:"Barriers of Health Education", icon:"fa-ban" },
+{ name:"Teaching Materials", icon:"fa-chalkboard" },
+{ name:"Ethics of Health Education", icon:"fa-scale-balanced" },
+{ name:"Methods of Health Education", icon:"fa-list-check" },
+{ name:"Communication", icon:"fa-comments" },
+{ name:"Common Characteristics of Good Health Educators", icon:"fa-user-doctor" },
+{ name:"Training", icon:"fa-dumbbell" },
+{ name:"Types of Learner", icon:"fa-users" },
+{ name:"Health Teaching and Role of the Teacher", icon:"fa-person-chalkboard" },
+{ name:"Health Promotion", icon:"fa-heart-pulse" },
+{ name:"Counseling", icon:"fa-hand-holding-heart" },
+{ name:"Planning, Implementation and Evaluation of Health Education", icon:"fa-chart-line" },
+{ name:"Premarital Counseling", icon:"fa-ring" }
+];
+
+lectures.forEach((lecture, index) => {
+ document.write(`
+ <details>
+ <summary>
+ <i class="fa-solid ${lecture.icon}"></i> ${lecture.name}
+ </summary>
+ <div class="content">
+ <a href="questions${index+1}.html">🚀 إبدأ الأسئلة</a>
+ </div>
+ </details>
+ `);
+});
+</script>
+
+</div>
+
+<a href="https://t.me/nursing2bu" target="_blank" class="join-btn">
+<i class="fa-brands fa-telegram"></i> انضم إلينا
+</a>
+
+<script>
+const toggle=document.getElementById("modeToggle");
+let mode="dark";
+toggle.onclick=()=>{
+ document.body.classList.toggle("light");
+ mode=document.body.classList.contains("light")?"light":"dark";
+ toggle.textContent=mode==="light"?"☀️":"🌙";
+};
+
+const flash=document.getElementById("flash");
+document.addEventListener("click",e=>{
+ if(e.target.closest("details")){
+   document.querySelectorAll("details").forEach(d=>{
+     if(d!==e.target.closest("details")) d.removeAttribute("open");
+   });
+   document.body.classList.add("zoom-dimension");
+   flash.style.opacity="1";
+   setTimeout(()=>{
+     flash.style.opacity="0";
+     document.body.classList.remove("zoom-dimension");
+   },500);
+ }
+});
+
+/* ===== Green Galaxy ===== */
+const canvas=document.getElementById("stars");
+const ctx=canvas.getContext("2d");
+
+function resize(){
+ canvas.width=window.innerWidth;
+ canvas.height=window.innerHeight;
+}
+resize();
+window.addEventListener("resize",resize);
+
+let stars=[];
+for(let i=0;i<600;i++){
+ stars.push({
+   angle:Math.random()*Math.PI*2,
+   radius:Math.random()*500,
+   size:Math.random()*2,
+   speed:0.0002+Math.random()*0.0006
+ });
+}
+
+const greenShades=["#a7f3c0","#4ade80","#22c55e","#16a34a","#bbf7d0"];
+
+function animate(){
+ ctx.clearRect(0,0,canvas.width,canvas.height);
+ let cx=canvas.width/2;
+ let cy=canvas.height/2;
+
+ stars.forEach(s=>{
+   s.angle+=s.speed;
+   let x=cx+Math.cos(s.angle)*s.radius;
+   let y=cy+Math.sin(s.angle)*s.radius;
+
+   ctx.shadowBlur=8;
+   ctx.shadowColor="#4ade80";
+   ctx.fillStyle=greenShades[Math.floor(Math.random()*greenShades.length)];
+   ctx.beginPath();
+   ctx.arc(x,y,s.size,0,Math.PI*2);
+   ctx.fill();
+   ctx.shadowBlur=0;
+ });
+
+ requestAnimationFrame(animate);
+}
+animate();
+</script>
+
+</body>
+</html>
