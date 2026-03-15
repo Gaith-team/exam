@@ -1,0 +1,442 @@
+﻿<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ghaith Team | Exam</title>
+
+<style>
+:root{
+  --primary:#0284c7;
+  --secondary:#0ea5e9;
+  --bg:#f8fbff;
+  --card:#ffffff;
+  --soft:#e6f0ff;
+  --question:#eef7ff;
+  --option:#f9fcff;
+  --success:#16a34a;
+  --danger:#dc2626;
+  --text:#0f172a;
+
+  /* Brand dynamic */
+  --brand1:#ffffff;
+  --brand2:#e0f2fe;
+}
+*{box-sizing:border-box}
+body{
+  margin:0;
+  font-family:"Segoe UI",Tahoma,Arial,sans-serif;
+  background:linear-gradient(180deg,var(--bg),#eef6ff);
+  color:var(--text);
+}
+
+/* ================= HEADER ================= */
+header{
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  padding:18px;
+  text-align:center;
+  overflow:hidden;
+}
+
+/* ===== Brand ===== */
+.logo{
+  position:relative;
+  font-size:28px;
+  font-weight:900;
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+}
+
+.brand-text{
+  background:linear-gradient(90deg,var(--brand1),var(--brand2),var(--brand1));
+  background-size:200% auto;
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+  animation:shine 4s linear infinite;
+}
+@keyframes shine{
+  0%{background-position:0%}
+  100%{background-position:200%}
+}
+
+.heart{
+  display:inline-block;
+  animation:heartbeat 1.6s infinite ease-in-out;
+}
+@keyframes heartbeat{
+  0%{transform:scale(1)}
+  50%{transform:scale(1.25)}
+  100%{transform:scale(1)}
+}
+
+/* Sparkles */
+.sparkle{
+  position:absolute;
+  font-size:14px;
+  animation:twinkle 3s infinite ease-in-out;
+}
+@keyframes twinkle{
+  0%{opacity:0;transform:scale(.6)}
+  50%{opacity:1;transform:scale(1.2)}
+  100%{opacity:0;transform:scale(.6)}
+}
+
+/* Reduced motion أثناء الامتحان */
+.exam .sparkle{animation-duration:5s;opacity:.4}
+.exam .heart{animation-duration:2.5s}
+
+/* After exam */
+.after .sparkle{animation-duration:2s}
+.after .heart{animation-duration:1.1s}
+
+/* ================= LAYOUT ================= */
+.container{max-width:520px;margin:auto;padding:16px}
+
+/* ===== Top Bar ===== */
+.top-bar{
+  display:flex;
+  gap:12px;
+  margin-bottom:16px;
+}
+.progress-box{
+  flex:1;
+  background:var(--card);
+  padding:14px;
+  border-radius:18px;
+  box-shadow:0 10px 22px rgba(2,132,199,.12);
+}
+.progress-text{
+  display:flex;
+  justify-content:space-between;
+  flex-wrap:wrap;
+  gap:6px;
+  font-weight:800;
+  font-size:14px;
+}
+.progress{
+  height:8px;
+  background:var(--soft);
+  border-radius:10px;
+  overflow:hidden;
+}
+.progress-bar{
+  height:100%;
+  width:0%;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+}
+
+/* Timer */
+.timer{
+  width:64px;height:64px;border-radius:50%;
+  background:conic-gradient(var(--primary) 0deg,var(--soft) 0deg);
+  display:flex;align-items:center;justify-content:center;
+  font-weight:900;font-size:14px;
+  background-color:var(--card);
+}
+
+/* ================= CARD ================= */
+.card{
+  background:var(--card);
+  padding:22px;
+  border-radius:24px;
+  box-shadow:0 18px 36px rgba(2,132,199,.18);
+}
+.question-title{
+  background:var(--question);
+  padding:16px;
+  border-radius:16px;
+  font-weight:900;
+  margin-bottom:16px;
+}
+.option{
+  background:var(--option);
+  border:2px solid var(--soft);
+  border-radius:18px;
+  padding:15px;
+  margin:12px 0;
+  font-weight:700;
+  cursor:pointer;
+}
+.option.correct{background:#eafaf1;border-color:var(--success)}
+.option.wrong{background:#fff1f1;border-color:var(--danger)}
+.option.disabled{pointer-events:none;opacity:.9}
+
+button{
+  margin-top:18px;
+  width:100%;
+  padding:15px;
+  border:none;
+  border-radius:20px;
+  background:linear-gradient(90deg,var(--primary),var(--secondary));
+  color:#fff;
+  font-weight:900;
+}
+
+/* Feedback */
+.feedback{
+  text-align:center;
+  font-size:22px;
+  margin-bottom:10px;
+  animation:pop .5s;
+}
+@keyframes pop{
+  0%{transform:scale(.6);opacity:0}
+  100%{transform:scale(1);opacity:1}
+}
+
+/* Report */
+.report{
+  background:var(--card);
+  padding:14px;
+  border-radius:14px;
+  margin:10px 0;
+  border-left:6px solid var(--soft);
+}
+.report.correct{border-color:var(--success)}
+.report.wrong{border-color:var(--danger)}
+</style>
+</head>
+
+<body class="exam">
+
+<header>
+  <div class="logo">
+    <span class="brand-text">Ghaith Team</span>
+    <span class="heart">💖</span>
+    <span class="sparkle" style="top:-8px;left:0">✨</span>
+    <span class="sparkle" style="top:6px;right:-8px">✨</span>
+    <span class="sparkle" style="bottom:-8px;left:50%">✨</span>
+  </div>
+  <div style="margin-top:6px;font-weight:800">  👏🏻 الإمتحان في جيبك </div>
+</header>
+
+<div class="container">
+
+  <div class="top-bar">
+    <div class="progress-box">
+      <div class="progress-text">
+        <span id="progressText"></span>
+        <span>
+          ✔️ <span id="correctCount">0</span> |
+          ❌ <span id="wrongCount">0</span> |
+          ⏳ <span id="remainPercent">100%</span>
+        </span>
+      </div>
+      <div class="progress">
+        <div class="progress-bar" id="progressBar"></div>
+      </div>
+    </div>
+    <div class="timer" id="timer">35:00</div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<script>
+/* ===== Questions ===== */
+let questions = [
+    {t: "Which branch of philosophy studies free human acts from the point of view of their moral value?", o: ["Sociology", "Ethics", "Psychology", "Anthropology"], a: 1},
+          {t: "What is defined as a paid occupation that involves prolonged training and a formal qualification?", o: ["Hobby", "Job", "Profession", "Volunteer work"], a: 2},
+          {t: "Modern definitions of nursing describe it as both a science and a(n):", o: ["Art", "Business", "Hobby", "Trade"], a: 0},
+          {t: "A person who has completed a program of basic nursing and is qualified to practice is a:", o: ["Doctor", "Nurse", "Therapist", "Social worker"], a: 1},
+          {t: "Which of the following provides guidance for conduct and relationships in carrying out nursing responsibilities?", o: ["Nursing code of ethics", "Hospital handbook", "Patient bill", "Insurance policy"], a: 0},
+          {t: "A person who is waiting for or undergoing medical treatment and care is called a:", o: ["Consumer", "Client", "Patient", "Customer"], a: 2},
+          {t: "The word 'moral' is derived from the Latin word 'Mores', which means:", o: ["Laws", "Customs or habits", "Religion", "Truth"], a: 1},
+          {t: "Which ethical principle refers to the fairness in distributing care?", o: ["Beneficence", "Nonmaleficence", "Justice", "Veracity"], a: 2},
+          {t: "Doing good and the right thing for the patient is known as:", o: ["Autonomy", "Beneficence", "Fidelity", "Integrity"], a: 1},
+          {t: "The principle of 'Nonmaleficence' means:", o: ["Doing no harm", "Telling the truth", "Keeping promises", "Being fair"], a: 0},
+          {t: "Accepting responsibility for one's own actions is the definition of:", o: ["Accountability", "Fidelity", "Veracity", "Justice"], a: 0},
+          {t: "Keeping one's professional promises is known as:", o: ["Veracity", "Fidelity", "Autonomy", "Beneficence"], a: 1},
+          {t: "The ethical principle of 'Veracity' refers to:", o: ["Privacy", "Truthfulness", "Dignity", "Fairness"], a: 1},
+          {t: "Patient rights are based on which international document?", o: ["Magna Carta", "Universal Declaration of Human Rights", "The Geneva Convention", "The Nursing Act"], a: 1},
+          {t: "Which of the following is NOT listed as a patient right in the text?", o: ["Privacy", "Confidentiality", "Right to free medication", "Respect and dignity"], a: 2},
+          {t: "Which factor is NOT mentioned as influencing nursing practice?", o: ["Religion", "War", "Climate change", "Societal attitude"], a: 2},
+          {t: "Reducing overweight and stopping cigarette smoking are examples of:", o: ["Health promotion", "Preventing illness", "Restoring health", "Caring for the dying"], a: 0},
+          {t: "Immunization and personal hygiene are categorized under:", o: ["Health promotion", "Preventing illness", "Restoring health", "Caring for the dying"], a: 1},
+          {t: "Performing diagnostic measurements like blood pressure and blood glucose is part of:", o: ["Health promotion", "Preventing illness", "Restoring health", "Caring for the dying"], a: 2},
+          {t: "Helping people live as comfortably as possible until death is part of:", o: ["Health promotion", "Preventing illness", "Restoring health", "Caring for the dying"], a: 3},
+          {t: "In the past, what was the only practice setting for nurses?", o: ["Schools", "Acute care hospitals", "Community agencies", "Mental health clinics"], a: 1},
+          {t: "Which role involves the nurse protecting the patient's rights?", o: ["Caregiver", "Communicator", "Client advocate", "Teacher"], a: 2},
+          {t: "Which role involves the nurse assisting the client physically and psychologically?", o: ["Manager", "Leader", "Caregiver", "Teacher"], a: 2},
+          {t: "The International Council of Nurses (ICN) was founded in what year?", o: ["1850", "1899", "1920", "1945"], a: 1},
+          {t: "How many national nurses associations (NNAs) are represented by the ICN?", o: ["50", "100", "More than 130", "500"], a: 2},
+          {t: "Which of the following is a type of nursing educational program?", o: ["Diploma programs", "Baccalaureate Degree", "Graduate Nursing Education", "All of the above"], a: 3},
+          {t: "The ICN represents more than how many million nurses worldwide?", o: ["5", "8", "13", "20"], a: 2},
+          {t: "Which ethical principle involves accepting the client as a unique person with self-determination?", o: ["Justice", "Autonomy", "Fidelity", "Veracity"], a: 1},
+          {t: "What is a 'Consumer' in the context of nursing recipients?", o: ["A person undergoing surgery", "An individual or group that uses a service", "A person waiting for treatment", "A nurse providing care"], a: 1},
+          {t: "Morals are often based on social influence and:", o: ["Legal codes", "Religious beliefs", "Scientific facts", "Financial status"], a: 1},
+          {t: "Which area of nursing practice involves rehabilitation and teaching during recovery?", o: ["Promoting health", "Preventing illness", "Restoring health", "Care of the dying"], a: 2},
+          {t: "The ICN is the world's first international organization for:", o: ["Doctors", "Health professionals", "Teachers", "Engineers"], a: 1},
+          {t: "Which nursing role supports the client through the health team and support people?", o: ["Communicator", "Leader", "Manager", "Advocate"], a: 0},
+          {t: "Patient rights include the freedom to select their:", o: ["Hospital", "Doctors", "Insurance", "Roommate"], a: 1},
+          {t: "Transparency of condition and treatments is a:", o: ["Nurse's right", "Doctor's right", "Patient's right", "Hospital's right"], a: 2},
+          {t: "The Code of Ethics for Nurses was established by the:", o: ["World Health Organization", "Council of Nurses", "United Nations", "Ministry of Justice"], a: 1},
+          {t: "Which factor influenced nursing practice related to population shifts?", o: ["War", "Demographic change", "Women's issues", "Religion"], a: 1},
+          {t: "A 'Client' is a person who engages the advice or services of another who is:", o: ["Famous", "Qualified", "Rich", "A relative"], a: 1},
+          {t: "Which ethical principle is violated if a nurse lies to a patient?", o: ["Justice", "Autonomy", "Veracity", "Fidelity"], a: 2},
+          {t: "Maintaining a safe environment is a way to:", o: ["Promote health", "Prevent illness", "Restore health", "Care for the dying"], a: 1},
+          {t: "Providing direct care and consulting other professionals is part of:", o: ["Health promotion", "Preventing illness", "Restoring health", "Care of the dying"], a: 2},
+          {t: "The ICN works to ensure sound health policies:", o: ["Locally", "Globally", "Only in Europe", "Only in the US"], a: 1},
+          {t: "Which role involves coordinating the activities of others?", o: ["Caregiver", "Manager", "Teacher", "Advocate"], a: 1},
+          {t: "The 'goodness or badness' of human acts is the focus of:", o: ["Biology", "Ethics", "Economics", "History"], a: 1},
+          {t: "A baccalaureate degree is a type of:", o: ["Secondary school", "Nursing educational program", "Medical specialty", "Nursing role"], a: 1},
+          {t: "Ethics is the branch of philosophy that studies free human acts.", o: ["True", "False"], a: 0},
+          {t: "Nursing is only concerned with health and functioning, not with the quality of dying.", o: ["True", "False"], a: 1},
+          {t: "A profession involves prolonged training and a formal qualification.", o: ["True", "False"], a: 0},
+          {t: "A 'Patient' is defined as someone who engages the advice of a qualified professional.", o: ["True", "False"], a: 1},
+          {t: "Morals refer to an individual's personal standards of right and wrong.", o: ["True", "False"], a: 0},
+          {t: "Beneficence means doing no harm to the patient.", o: ["True", "False"], a: 1},
+          {t: "Veracity is the ethical principle of being truthful.", o: ["True", "False"], a: 0},
+          {t: "Patients have the right to reject treatment.", o: ["True", "False"], a: 0},
+          {t: "Religion is a factor that has influenced nursing practice.", o: ["True", "False"], a: 0},
+          {t: "Restoring health focuses only on people who are already healthy.", o: ["True", "False"], a: 1},
+          {t: "Immunization is an example of health promotion.", o: ["True", "False"], a: 1},
+          {t: "The ICN was founded in 1899.", o: ["True", "False"], a: 0},
+          {t: "The role of 'Advocate' involves protecting patient rights.", o: ["True", "False"], a: 0},
+          {t: "Acute care hospitals are the only practice setting for modern nurses.", o: ["True", "False"], a: 1},
+          {t: "Fidelity means keeping one's professional promises.", o: ["True", "False"], a: 0}
+];
+
+
+
+// ===== shuffle questions only =====
+function shuffleQuestions(array) {
+  for (let i = array.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+}
+
+// خلط الأسئلة فقط
+shuffleQuestions(questions);
+
+// تعريف المتغيرات الناقصة
+let i = 0;
+let correct = 0;
+let wrong = 0;
+let answers = [];
+let wrongSet = [];
+
+/* ===== Timer ===== */
+let totalTime=35*60, timeLeft=totalTime;
+const timerInt=setInterval(()=>{
+  timeLeft--;
+  let m=Math.floor(timeLeft/60), s=timeLeft%60;
+  timer.innerText=`${m}:${s<10?"0":""}${s}`;
+  let deg=(timeLeft/totalTime)*360;
+  timer.style.background=`conic-gradient(var(--primary) ${deg}deg,var(--soft) ${deg}deg)`;
+  if(timeLeft<=0){clearInterval(timerInt);finishExam();}
+},1000);
+
+/* ===== UI ===== */
+function updateTop(){
+  let total=questions.length;
+  let answered=correct+wrong;
+  progressText.innerText=`سؤال ${i+1} من ${total}`;
+  progressBar.style.width=((i+1)/total*100)+"%";
+  correctCount.innerText=correct;
+  wrongCount.innerText=wrong;
+  remainPercent.innerText=Math.round(((total-answered)/total)*100)+"%";
+}
+
+/* ===== Render ===== */
+function show(){
+  updateTop();
+  let q = questions[i];
+
+  app.innerHTML = `
+    <div class="card">
+      <div class="question-title">${q.t}</div>
+      ${q.o.map((o,idx)=>`
+        <div class="option" onclick="choose(${idx})">${o}</div>
+      `).join("")}
+    </div>
+  `;
+}
+/* ===== Choose ===== */
+function choose(v){
+  if(answers[i]!=null) return;
+  answers[i]=v;
+  let ok=v===questions[i].a;
+  ok?correct++:wrong++;
+  app.innerHTML=`
+    <div class="feedback">${ok?"🎉 شاطر جدًا كمل":"😅 ركّز يا سُكر"}</div>
+    <div class="card">
+      <div class="question-title">${questions[i].t}</div>
+      ${questions[i].o.map((o,j)=>`
+        <div class="option ${j===questions[i].a?"correct":j===v?"wrong":""} disabled">${o}</div>
+      `).join("")}
+      <button onclick="next()">التالي</button>
+    </div>`;
+}
+
+/* ===== Next ===== */
+function next(){
+  if(i<questions.length-1){i++;show();}
+  else finishExam();
+}
+
+/* ===== Finish ===== */
+function finishExam(){
+  document.body.classList.remove("exam");
+  document.body.classList.add("after");
+
+  let score=Math.round((correct/questions.length)*100);
+
+  if(score>=80){
+    document.documentElement.style.setProperty("--brand1","#22c55e");
+    document.documentElement.style.setProperty("--brand2","#fde047");
+  }else if(score>=50){
+    document.documentElement.style.setProperty("--brand1","#38bdf8");
+    document.documentElement.style.setProperty("--brand2","#e0f2fe");
+  }else{
+    document.documentElement.style.setProperty("--brand1","#fb923c");
+    document.documentElement.style.setProperty("--brand2","#fed7aa");
+  }
+
+  wrongSet=[];
+  let report="";
+  questions.forEach((q,idx)=>{
+    let ok=answers[idx]===q.a;
+    if(!ok) wrongSet.push(q);
+    report+=`
+      <div class="report ${ok?"correct":"wrong"}">
+        <b>${q.t}</b><br>
+إجابتك: ${answers[idx]!=null ? q.o[answers[idx]] : "لم يتم الحل"}<br>
+الصح: ${q.o[q.a]}
+      </div>`;
+  });
+
+  app.innerHTML=`
+    <div class="card">
+      <h3>?? تقريرك</h3>
+      ${report}
+      ${wrongSet.length?`<button onclick="retry()">إعادة حل الغلط فقط</button>`:"<p>أنت ممتاز 👑</p>"}
+    </div>`;
+}
+
+/* ===== Retry Wrong ===== */
+function retry(){
+  // نبدأ امتحان جديد بالأسئلة الغلط فقط
+  questions = [...wrongSet];
+
+  answers = [];
+  wrongSet = [];
+  i = 0;
+  correct = 0;
+  wrong = 0;
+
+  // رجوع لشكل الامتحان
+  document.body.classList.remove("after");
+  document.body.classList.add("exam");
+
+  show();
+}
+
+show();
+</script>
+
+</body>
+</html>
