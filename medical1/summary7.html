@@ -1,0 +1,788 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ghatih team</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;800;900&family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    /* palette */
+    --crimson:   #9b1d20;
+    --crimson-l: #fdecea;
+    --navy:      #1b2f55;
+    --navy-l:    #dce8ff;
+    --teal:      #0d6b5e;
+    --teal-l:    #d0f0eb;
+    --amber:     #b45309;
+    --amber-l:   #fef3c7;
+    --violet:    #5b21b6;
+    --violet-l:  #ede9fe;
+    --rose:      #9d174d;
+    --rose-l:    #fce7f3;
+    --slate:     #1e293b;
+    --bg:        #f0f4f8;
+    --card:      #ffffff;
+    --border:    #e2e8f0;
+
+    /* fluid type */
+    --fs-base:  clamp(13px,2.2vw,15px);
+    --fs-sm:    clamp(11px,1.8vw,13px);
+    --fs-xs:    clamp(10px,1.5vw,12px);
+    --fs-h1:    clamp(20px,5vw,34px);
+    --fs-h3:    clamp(11px,2vw,13px);
+    --fs-sec:   clamp(14px,3vw,19px);
+    --fs-char:  clamp(20px,4.5vw,28px);
+    --radius:   clamp(8px,2vw,14px);
+    --pad-c:    clamp(12px,3vw,20px);
+    --pad-h:    clamp(16px,4vw,44px);
+    --gap:      clamp(10px,2vw,16px);
+  }
+
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{-webkit-text-size-adjust:100%;}
+
+  body{
+    font-family:'Nunito',sans-serif;
+    background:var(--bg);
+    color:var(--slate);
+    font-size:var(--fs-base);
+    line-height:1.7;
+    overflow-x:hidden;
+  }
+
+  /* ─── HEADER ─── */
+  header{
+    background:linear-gradient(135deg,#0a0f1e 0%,#1b2f55 45%,#3b0a0a 100%);
+    color:white;
+    padding:clamp(18px,4vw,38px) var(--pad-h) clamp(16px,3vw,28px);
+    position:relative;overflow:hidden;
+  }
+  header::before{
+    content:'';position:absolute;top:-50px;right:-50px;
+    width:clamp(120px,28vw,240px);height:clamp(120px,28vw,240px);
+    border-radius:50%;background:rgba(155,29,32,.18);
+  }
+  header::after{
+    content:'';position:absolute;bottom:-30px;left:20%;
+    width:clamp(60px,15vw,120px);height:clamp(60px,15vw,120px);
+    border-radius:50%;background:rgba(180,83,9,.13);
+  }
+  header h1{
+    font-family:'Playfair Display',serif;
+    font-size:var(--fs-h1);font-weight:900;
+    letter-spacing:-.5px;line-height:1.2;
+    position:relative;
+  }
+  header p{opacity:.72;font-size:var(--fs-sm);margin-top:5px;}
+  .badge-row{display:flex;gap:8px;margin-top:13px;flex-wrap:wrap;}
+  .badge{
+    padding:clamp(3px,.8vw,5px) clamp(10px,2.5vw,16px);
+    border-radius:20px;font-size:var(--fs-xs);
+    font-weight:700;letter-spacing:.4px;
+    text-transform:uppercase;white-space:nowrap;
+  }
+  .b-cr{background:var(--crimson-l);color:var(--crimson);}
+  .b-nv{background:var(--navy-l);color:var(--navy);}
+  .b-tl{background:var(--teal-l);color:var(--teal);}
+  .b-ro{background:var(--rose-l);color:var(--rose);}
+
+  /* ─── CONTAINER ─── */
+  .container{max-width:1120px;margin:0 auto;padding:clamp(16px,3vw,30px) clamp(12px,3vw,20px) 70px;}
+
+  /* ─── SECTION LABEL ─── */
+  .sec{
+    display:inline-flex;align-items:center;gap:8px;
+    font-family:'Playfair Display',serif;
+    font-size:var(--fs-sec);font-weight:800;
+    padding:clamp(8px,1.5vw,12px) clamp(14px,3vw,26px);
+    border-radius:12px;
+    margin:clamp(22px,4vw,32px) 0 clamp(12px,2vw,16px);
+    max-width:100%;
+  }
+  .sc-cr    {background:var(--crimson);color:white;}
+  .sc-nv    {background:var(--navy);color:white;}
+  .sc-tl    {background:var(--teal);color:white;}
+  .sc-am    {background:var(--amber);color:white;}
+  .sc-vi    {background:var(--violet);color:white;}
+  .sc-ro    {background:var(--rose);color:white;}
+  .sc-dk    {background:var(--slate);color:white;}
+
+  /* ─── GRID ─── */
+  .grid{display:grid;gap:var(--gap);}
+  .g2{grid-template-columns:repeat(2,1fr);}
+  .g3{grid-template-columns:repeat(3,1fr);}
+
+  /* ─── CARD ─── */
+  .card{
+    background:var(--card);border-radius:var(--radius);
+    padding:var(--pad-c);border-left:5px solid #ccc;
+    box-shadow:0 2px 10px rgba(0,0,0,.07);
+    min-width:0;overflow:hidden;
+  }
+  .cc{border-color:var(--crimson);}
+  .cn{border-color:var(--navy);}
+  .ct{border-color:var(--teal);}
+  .ca{border-color:var(--amber);background:var(--amber-l);}
+  .cv{border-color:var(--violet);background:var(--violet-l);}
+  .cr{border-color:var(--rose);background:var(--rose-l);}
+  .cx{border-color:var(--crimson);background:var(--crimson-l);}
+
+  .card h3{
+    font-family:'Playfair Display',serif;
+    font-size:clamp(12px,2.2vw,14px);font-weight:800;
+    text-transform:uppercase;letter-spacing:.5px;
+    margin-bottom:10px;display:flex;align-items:center;
+    gap:6px;flex-wrap:wrap;line-height:1.4;
+  }
+  .cc h3{color:var(--crimson);}
+  .cn h3{color:var(--navy);}
+  .ct h3{color:var(--teal);}
+  .ca h3{color:var(--amber);}
+  .cv h3{color:var(--violet);}
+  .cr h3{color:var(--rose);}
+  .cx h3{color:var(--crimson);}
+
+  ul{padding-left:18px;}
+  ul li{margin-bottom:5px;font-size:var(--fs-base);}
+  strong{font-weight:700;}
+
+  /* ─── STAR ─── */
+  .star{
+    display:inline-flex;align-items:center;gap:4px;
+    background:#fef9c3;border:1.5px solid #ca8a04;
+    color:#78350f;border-radius:8px;
+    padding:2px clamp(6px,1.5vw,10px);
+    font-size:var(--fs-xs);font-weight:700;
+    margin-left:6px;white-space:nowrap;flex-shrink:0;
+  }
+
+  /* ─── TAGS ─── */
+  .tag{
+    display:inline-block;
+    padding:clamp(2px,.5vw,3px) clamp(6px,1.5vw,9px);
+    border-radius:6px;font-size:var(--fs-xs);
+    font-weight:700;margin:2px 2px;white-space:nowrap;
+  }
+  .tcr{background:var(--crimson-l);color:var(--crimson);border:1px solid #f87171;}
+  .tnv{background:var(--navy-l);color:var(--navy);border:1px solid #93c5fd;}
+  .ttl{background:var(--teal-l);color:var(--teal);border:1px solid #6ee7b7;}
+  .tam{background:var(--amber-l);color:var(--amber);border:1px solid #fcd34d;}
+  .tvi{background:var(--violet-l);color:var(--violet);border:1px solid #c4b5fd;}
+  .tro{background:var(--rose-l);color:var(--rose);border:1px solid #f9a8d4;}
+
+  /* ─── TABLE ─── */
+  table{width:100%;border-collapse:collapse;font-size:var(--fs-sm);table-layout:fixed;}
+  th{
+    font-family:'Playfair Display',serif;
+    font-size:var(--fs-xs);font-weight:700;
+    text-transform:uppercase;letter-spacing:.4px;
+    padding:clamp(6px,1.5vw,9px) clamp(6px,1.5vw,10px);text-align:left;
+  }
+  td{
+    padding:clamp(5px,1.2vw,8px) clamp(6px,1.5vw,10px);
+    border-bottom:1px solid var(--border);
+    word-break:break-word;vertical-align:top;
+  }
+  tr:last-child td{border-bottom:none;}
+  tr:nth-child(even) td{background:rgba(0,0,0,.025);}
+
+  /* ─── بصموجة عمو غيث ─── */
+  .bsm{
+    border-radius:var(--radius);
+    padding:clamp(12px,3vw,20px) clamp(14px,3vw,22px);
+    margin:8px 0;
+  }
+  .bsm-title{
+    font-family:'Nunito',sans-serif;
+    font-size:var(--fs-sm);font-weight:800;
+    letter-spacing:.5px;text-transform:uppercase;
+    margin-bottom:8px;
+    display:flex;align-items:flex-start;gap:6px;
+    flex-wrap:wrap;line-height:1.5;
+  }
+  .phrase{
+    font-family:'Playfair Display',serif;
+    font-size:clamp(12px,2.5vw,15px);
+    font-weight:700;font-style:italic;
+    padding:4px 14px;border-radius:8px;
+    display:inline-block;margin-bottom:10px;
+  }
+  .lr{display:flex;flex-wrap:wrap;gap:clamp(6px,1.5vw,10px);margin-top:6px;}
+  .li{
+    display:flex;align-items:flex-start;
+    min-width:clamp(80px,18vw,130px);
+    max-width:clamp(110px,22vw,160px);
+  }
+  .lc{
+    font-family:'Playfair Display',serif;
+    font-size:var(--fs-char);font-weight:900;line-height:1;
+    min-width:clamp(22px,5vw,32px);flex-shrink:0;
+  }
+  .lm{font-size:var(--fs-xs);font-weight:600;padding-top:3px;line-height:1.4;}
+
+  /* bsm themes */
+  .bsm-cr{background:var(--crimson-l);}
+  .bsm-cr .lc,.bsm-cr .bsm-title{color:var(--crimson);}
+  .bsm-cr .phrase{background:var(--crimson);color:white;}
+
+  .bsm-nv{background:var(--navy-l);}
+  .bsm-nv .lc,.bsm-nv .bsm-title{color:var(--navy);}
+  .bsm-nv .phrase{background:var(--navy);color:white;}
+
+  .bsm-tl{background:var(--teal-l);}
+  .bsm-tl .lc,.bsm-tl .bsm-title{color:var(--teal);}
+  .bsm-tl .phrase{background:var(--teal);color:white;}
+
+  .bsm-am{background:var(--amber-l);}
+  .bsm-am .lc,.bsm-am .bsm-title{color:var(--amber);}
+  .bsm-am .phrase{background:var(--amber);color:white;}
+
+  .bsm-vi{background:var(--violet-l);}
+  .bsm-vi .lc,.bsm-vi .bsm-title{color:var(--violet);}
+  .bsm-vi .phrase{background:var(--violet);color:white;}
+
+  .bsm-ro{background:var(--rose-l);}
+  .bsm-ro .lc,.bsm-ro .bsm-title{color:var(--rose);}
+  .bsm-ro .phrase{background:var(--rose);color:white;}
+
+  /* ─── MINI GRID ─── */
+  .mg{display:grid;gap:8px;margin-top:8px;}
+  .mg2{grid-template-columns:repeat(2,1fr);}
+  .mg3{grid-template-columns:repeat(3,1fr);}
+  .mi{border-radius:8px;padding:clamp(7px,2vw,10px) clamp(8px,2vw,12px);font-size:var(--fs-sm);}
+
+  /* ─── QUICK NUM ─── */
+  .qnum{
+    display:flex;align-items:flex-start;gap:10px;
+    background:white;border-radius:8px;padding:8px 12px;
+  }
+  .qn{font-family:'Playfair Display',serif;font-weight:900;font-size:22px;line-height:1;flex-shrink:0;}
+
+  /* ─── ALERT BOX ─── */
+  .alert{
+    border-radius:10px;padding:10px 14px;
+    font-size:var(--fs-sm);font-weight:600;
+    border-left:4px solid;margin-top:8px;
+  }
+  .alert-red{background:var(--crimson-l);border-color:var(--crimson);color:var(--crimson);}
+  .alert-amber{background:var(--amber-l);border-color:var(--amber);color:var(--amber);}
+
+  /* ─── RESPONSIVE ─── */
+  @media(max-width:860px){
+    .g3{grid-template-columns:repeat(2,1fr);}
+    .mg3{grid-template-columns:repeat(2,1fr);}
+  }
+  @media(max-width:560px){
+    .g2,.g3{grid-template-columns:1fr;}
+    .mg2,.mg3{grid-template-columns:1fr;}
+    .star{display:none;}
+    table{display:block;overflow-x:auto;-webkit-overflow-scrolling:touch;}
+    .li{min-width:clamp(70px,28vw,100px);max-width:none;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ════════════ HEADER ════════════ -->
+<header>
+  <h1>❤️ Hypertension &amp; Rheumatic Heart Disease</h1>
+  <p> صلي علي النبي والمحاضرة في جيبك باذن الله </p>
+  <div class="badge-row">
+    <span class="badge b-cr">🩺 Hypertension</span>
+    <span class="badge b-ro">❤️‍🩹 Rheumatic Heart Disease</span>
+  </div>
+</header>
+
+<div class="container">
+
+<!-- ════════════ DEFINITION ════════════ -->
+<div class="sec sc-cr">🩺 Hypertension — Definition &amp; BP Classification</div>
+
+<div class="grid g2">
+  <div class="card cc">
+    <h3>📖 Definition <span class="star">⭐ EXAM</span></h3>
+    Persistent elevation of <strong>systolic or diastolic</strong> pressure above <strong>140/90 mmHg</strong>, based on <strong>two or more measurements</strong>.<br><br>
+    Called the <strong>"Silent Killer"</strong> — often <strong>symptom-free</strong>.<br><br>
+    BP = Cardiac Output × Peripheral Resistance
+  </div>
+
+  <div class="card cn">
+    <h3>📊 BP Classification <span class="star">⭐ EXAM</span></h3>
+    <table>
+      <thead><tr style="background:var(--navy);color:white;"><th>Category</th><th>Systolic</th><th>Diastolic</th></tr></thead>
+      <tbody>
+        <tr><td><span class="tag ttl">Normal</span></td><td>&lt; 120</td><td>&lt; 80</td></tr>
+        <tr><td><span class="tag tam">Prehypertension</span></td><td>120–139</td><td>80–89</td></tr>
+        <tr><td><span class="tag tcr">Stage 1 HTN</span></td><td>140–159</td><td>90–99</td></tr>
+        <tr><td><span class="tag tcr" style="background:#c0392b;color:white;">Stage 2 HTN</span></td><td>≥ 160</td><td>≥ 100</td></tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!-- ════════════ CLASSIFICATION ════════════ -->
+<div class="sec sc-nv">🏷️ Classification of Hypertension <span class="star" style="font-size:12px;margin-left:8px;">⭐ EXAM</span></div>
+
+<div class="grid g2">
+  <div class="card cn">
+    <h3>1️⃣ Primary (Essential) HTN</h3>
+    <span class="tag tnv">&gt; 90% of all cases</span> — <strong>No identifiable cause</strong><br>Multifactorial, polygenic condition.<br><br>
+    <strong>Contributing factors:</strong>
+    <ul>
+      <li>↑ Sodium-retaining hormones + vasoconstriction</li>
+      <li>Increased sodium intake</li>
+      <li>Central abdominal obesity</li>
+      <li>Diabetes mellitus + excessive alcohol</li>
+    </ul>
+  </div>
+
+  <div class="card cn">
+    <h3>2️⃣ Secondary HTN</h3>
+    Due to an <strong>underlying disease</strong>:
+    <ul>
+      <li>Congenital narrowing of the aorta</li>
+      <li><strong>Renal:</strong> artery stenosis, failure, glomerulonephritis</li>
+      <li><strong>Endocrine:</strong> hyperaldosteronism, hypo/hyperthyroidism</li>
+      <li><strong>Neurologic:</strong> brain tumor, head injury</li>
+      <li><strong>Medications:</strong> cocaine, NSAIDs</li>
+      <li>Pregnancy-induced HTN</li>
+    </ul>
+  </div>
+</div>
+
+<div class="grid g2" style="margin-top:var(--gap);">
+  <div class="card ca">
+    <h3>3️⃣ Isolated Systolic HTN (ISH) <span class="star">⭐ EXAM</span></h3>
+    Systolic ≥ <strong>140 mmHg</strong> BUT diastolic <strong>&lt; 90 mmHg</strong><br>
+    Occurs primarily in people <strong>&gt; 50 years</strong><br>
+    Cause: Atherosclerosis → ↓ blood vessel elasticity
+  </div>
+  <div class="card cx">
+    <h3>4️⃣ Malignant HTN <span class="star">⭐ EXAM</span></h3>
+    <strong>Emergency condition</strong> — diastolic <strong>&gt; 120 mmHg</strong><br>
+    Features: retinal hemorrhage, exudates, rapid vascular deterioration<br>
+    Without treatment → <strong>90% mortality</strong> (renal/CHF)<br>
+    Causes: Untreated HTN, Eclampsia, toxic substances
+  </div>
+</div>
+
+<!-- bsm classification -->
+<div class="bsm bsm-nv">
+  <div class="bsm-title">🧠 بصموجة عمو غيث — Types of HTN: <span class="phrase">"Primary Seems Isolated, Malignant"</span></div>
+  <div class="lr">
+    <div class="li"><div class="lc">P</div><div class="lm">Primary<br><small>&gt;90% cases</small></div></div>
+    <div class="li"><div class="lc">S</div><div class="lm">Secondary<br><small>underlying cause</small></div></div>
+    <div class="li"><div class="lc">I</div><div class="lm">Isolated<br><small>Systolic (ISH)</small></div></div>
+    <div class="li"><div class="lc">M</div><div class="lm">Malignant<br><small>DBP &gt;120 ⚡</small></div></div>
+  </div>
+</div>
+
+<!-- ════════════ RISK FACTORS ════════════ -->
+<div class="sec sc-am">⚠️ Risk Factors <span class="star" style="font-size:12px;margin-left:8px;">⭐ EXAM</span></div>
+
+<div class="grid g2">
+  <div class="card ca">
+    <h3>A. Major Risk Factors</h3>
+    <div class="mg mg2">
+      <div class="mi" style="background:white;"><strong style="color:var(--amber);">1. Smoking</strong><br>Nicotine constricts vessels</div>
+      <div class="mi" style="background:white;"><strong style="color:var(--amber);">2. Obesity</strong><br>Intra-abdominal fat → hyperinsulinemia</div>
+      <div class="mi" style="background:white;"><strong style="color:var(--amber);">3. Inactivity</strong><br>↑ cardiovascular risk</div>
+      <div class="mi" style="background:white;"><strong style="color:var(--amber);">4. Dyslipidemia</strong><br>Abnormal blood fats</div>
+      <div class="mi" style="background:white;"><strong style="color:var(--amber);">5. Diabetes</strong><br>Mellitus</div>
+      <div class="mi" style="background:white;"><strong style="color:var(--amber);">6. Renal</strong><br>GFR &lt;60 mL/min</div>
+      <div class="mi" style="background:white;"><strong style="color:var(--amber);">7. Age</strong><br>Men &gt;55 / Women &gt;65</div>
+      <div class="mi" style="background:white;"><strong style="color:var(--amber);">8. Stress</strong><br>↑ PVR + cardiac output</div>
+      <div class="mi" style="background:white;"><strong style="color:var(--amber);">9. Family History</strong><br>BP strongly familial</div>
+      <div class="mi" style="background:white;"><strong style="color:var(--amber);">10. Salt / Sodium</strong><br>High-salt diet ↑ BP</div>
+    </div>
+  </div>
+
+  <div class="card ca">
+    <h3>B. Target Organ Damage <span class="star">⭐ EXAM</span></h3>
+    <ul>
+      <li><span class="tag tam">Heart</span> LV hypertrophy, angina, MI, HF</li>
+      <li><span class="tag tam">Brain</span> Stroke (CVA) or TIA</li>
+      <li><span class="tag tam">Kidney</span> Chronic kidney disease</li>
+      <li><span class="tag tam">Eyes</span> Retinopathy</li>
+      <li><span class="tag tam">Vessels</span> Peripheral arterial disease</li>
+    </ul>
+    <div class="alert alert-amber" style="margin-top:10px;">
+      ⭐ Target organs: <strong>Heart · Kidneys · Brain · Eyes</strong>
+    </div>
+  </div>
+</div>
+
+<!-- bsm risk -->
+<div class="bsm bsm-am">
+  <div class="bsm-title">🧠 بصموجة عمو غيث — Major Risk Factors: <span class="phrase">"Some Old People Do Drink Salty, Fattening, Sugary Alcohol Nervously"</span></div>
+  <div class="lr">
+    <div class="li"><div class="lc">S</div><div class="lm">Smoking</div></div>
+    <div class="li"><div class="lc">O</div><div class="lm">Obesity</div></div>
+    <div class="li"><div class="lc">P</div><div class="lm">Physical<br><small>inactivity</small></div></div>
+    <div class="li"><div class="lc">D</div><div class="lm">Dyslipidemia</div></div>
+    <div class="li"><div class="lc">D</div><div class="lm">Diabetes</div></div>
+    <div class="li"><div class="lc">S</div><div class="lm">Sodium ↑</div></div>
+    <div class="li"><div class="lc">A</div><div class="lm">Age<br><small>&gt;55/65</small></div></div>
+    <div class="li"><div class="lc">S</div><div class="lm">Stress</div></div>
+    <div class="li"><div class="lc">F</div><div class="lm">Family<br><small>history</small></div></div>
+    <div class="li"><div class="lc">G</div><div class="lm">GFR &lt;60<br><small>renal</small></div></div>
+  </div>
+</div>
+
+<!-- ════════════ CLINICAL MANIFESTATIONS ════════════ -->
+<div class="sec sc-cr">🌡️ Clinical Manifestations <span class="star" style="font-size:12px;margin-left:8px;">⭐ EXAM</span></div>
+
+<div class="card cc">
+  <h3>⚠️ Silent Killer — Stages of Symptoms</h3>
+  <div class="mg mg3">
+    <div class="mi" style="background:var(--teal-l);">
+      <strong style="color:var(--teal);">Early Stage</strong><br>
+      <em>No symptoms</em> — only elevated BP
+    </div>
+    <div class="mi" style="background:var(--amber-l);">
+      <strong style="color:var(--amber);">As it Advances</strong><br>
+      Morning occipital <strong>headache</strong>, fatigue, dizziness, flushing, <strong>blurred vision</strong>, epistaxis
+    </div>
+    <div class="mi" style="background:var(--crimson-l);">
+      <strong style="color:var(--crimson);">Advanced (Encephalopathy)</strong><br>
+      Restlessness, ↓ consciousness, blurred vision, nausea/vomiting, renal insufficiency, proteinuria, hematuria, LV failure, pulmonary edema
+    </div>
+  </div>
+  <div class="alert alert-red" style="margin-top:12px;">
+    ⭐ <strong>Prolonged uncontrolled HTN outcomes:</strong> MI · Heart Failure · Renal Failure · Stroke · Impaired Vision · LV Hypertrophy
+  </div>
+</div>
+
+<!-- bsm S&S -->
+<div class="bsm bsm-cr">
+  <div class="bsm-title">🧠 بصموجة عمو غيث — Advanced HTN Symptoms: <span class="phrase">"Head Feels Dizzy, Flushed, Blurry, Nosebleed"</span></div>
+  <div class="lr">
+    <div class="li"><div class="lc">H</div><div class="lm">Headache<br><small>occipital</small></div></div>
+    <div class="li"><div class="lc">F</div><div class="lm">Fatigue</div></div>
+    <div class="li"><div class="lc">D</div><div class="lm">Dizziness</div></div>
+    <div class="li"><div class="lc">F</div><div class="lm">Flushing</div></div>
+    <div class="li"><div class="lc">B</div><div class="lm">Blurred<br><small>vision</small></div></div>
+    <div class="li"><div class="lc">N</div><div class="lm">Nosebleed<br><small>(epistaxis)</small></div></div>
+  </div>
+</div>
+
+<!-- ════════════ DIAGNOSIS ════════════ -->
+<div class="sec sc-tl">🔬 Assessment &amp; Diagnostic Studies <span class="star" style="font-size:12px;margin-left:8px;">⭐ EXAM</span></div>
+
+<div class="card ct">
+  <h3>🧪 Diagnostic Tools</h3>
+  <div class="mg mg3">
+    <div class="mi" style="background:white;"><strong style="color:var(--teal);">BP Measurement</strong><br>≥2 elevated readings on ≥2 separate occasions (supine + sitting)</div>
+    <div class="mi" style="background:white;"><strong style="color:var(--teal);">Retinal Exam</strong><br>Check for retinopathy</div>
+    <div class="mi" style="background:white;"><strong style="color:var(--teal);">Urinalysis</strong><br>Proteinuria, 24-hr urine protein</div>
+    <div class="mi" style="background:white;"><strong style="color:var(--teal);">Blood Chemistry</strong><br>Na, K, creatinine, glucose, lipoproteins</div>
+    <div class="mi" style="background:white;"><strong style="color:var(--teal);">ECG/EKG</strong><br>LV hypertrophy, silent MI</div>
+    <div class="mi" style="background:white;"><strong style="color:var(--teal);">Chest X-ray</strong><br>Cardiac enlargement / HF evidence</div>
+  </div>
+</div>
+
+<!-- ════════════ MANAGEMENT ════════════ -->
+<div class="sec sc-nv">💊 Management <span class="star" style="font-size:12px;margin-left:8px;">⭐ EXAM</span></div>
+
+<div class="grid g2">
+  <div class="card cn">
+    <h3>🌿 Non-Pharmacologic (DASH) <span class="star">⭐ EXAM</span></h3>
+    <div class="alert alert-amber">Goal BP: ≤140/90 (≤130/80 for DM/CKD)</div>
+    <ul style="margin-top:8px;">
+      <li>Weight reduction</li>
+      <li>Restrict <strong>alcohol</strong> and <strong>sodium</strong></li>
+      <li>Regular exercise + relaxation/meditation</li>
+      <li><strong>DASH diet</strong> — ↑ fruits, vegetables, low-fat dairy</li>
+    </ul>
+  </div>
+
+  <div class="card cn">
+    <h3>💊 First-Line Drug Classes <span class="star">⭐ EXAM</span></h3>
+    <span class="tag tnv">1. Diuretics</span> <span class="tag tnv">2. Beta-Blockers</span>
+    <div style="margin-top:10px; font-size:var(--fs-sm);">
+      <strong>Diuretics:</strong><br>
+      • <em>Thiazide</em> (Diuril) — inexpensive, oral, mild SE<br>
+      &nbsp;&nbsp;⚠️ CI: Gout, renal impairment, hyponatremia<br>
+      &nbsp;&nbsp;SE: Dry mouth, weakness, tachycardia, postural hypotension<br>
+      &nbsp;&nbsp;🔑 Monitor: electrolytes, weight, VS; K-rich foods<br><br>
+      • <em>Loop Diuretic</em> (Lasix) — rapid action, used when thiazide fails<br>
+      &nbsp;&nbsp;SE: Volume depletion, electrolyte loss<br><br>
+      <strong>Beta-Blockers (Propranolol):</strong><br>
+      &nbsp;&nbsp;⚠️ CI: Asthma, CHF, diabetes, HR &lt;60 bpm, heart block<br>
+      &nbsp;&nbsp;SE: Depression, insomnia, lightheadedness<br>
+      &nbsp;&nbsp;🔑 Check heart rate before giving!
+    </div>
+  </div>
+</div>
+
+<!-- bsm drugs -->
+<div class="bsm bsm-nv">
+  <div class="bsm-title">🧠 بصموجة عمو غيث — Thiazide Side Effects: <span class="phrase">"Dry Weak Muscles Tachycardia Give Postural"</span></div>
+  <div class="lr">
+    <div class="li"><div class="lc">D</div><div class="lm">Dry mouth<br><small>+ thirst</small></div></div>
+    <div class="li"><div class="lc">W</div><div class="lm">Weakness<br><small>drowsiness</small></div></div>
+    <div class="li"><div class="lc">M</div><div class="lm">Muscle<br><small>aches/fatigue</small></div></div>
+    <div class="li"><div class="lc">T</div><div class="lm">Tachycardia</div></div>
+    <div class="li"><div class="lc">G</div><div class="lm">GIT<br><small>disturbance</small></div></div>
+    <div class="li"><div class="lc">P</div><div class="lm">Postural<br><small>hypotension</small></div></div>
+  </div>
+</div>
+
+<!-- ════════════ NURSING PROCESS ════════════ -->
+<div class="sec sc-tl">🩺 Nursing Process — Hypertension <span class="star" style="font-size:12px;margin-left:8px;">⭐ EXAM</span></div>
+
+<div class="grid g2">
+  <div class="card ct">
+    <h3>I. Assessment</h3>
+    <ul>
+      <li>BP at frequent intervals — know <strong>baseline</strong></li>
+      <li>Signs of target organ damage (angina, SOB, speech/vision changes, headache, nosebleed, nocturia)</li>
+      <li>Apical &amp; peripheral pulse rate, rhythm, character</li>
+      <li>Personal/social/financial impact of HTN</li>
+    </ul>
+  </div>
+  <div class="card ct">
+    <h3>II. Nursing Diagnoses</h3>
+    <ul>
+      <li>Deficient <strong>knowledge</strong> r/t treatment regimen &amp; disease control</li>
+      <li><strong>Noncompliance</strong> with therapeutic regimen r/t side effects</li>
+    </ul>
+    <h3 style="margin-top:12px;">III. Goals</h3>
+    <ul>
+      <li>Understanding disease &amp; treatment</li>
+      <li>Participation in <strong>self-care program</strong></li>
+    </ul>
+  </div>
+</div>
+
+<div class="card ct" style="margin-top:var(--gap);">
+  <h3>IV. Nursing Interventions <span class="star">⭐ EXAM</span></h3>
+  <div class="mg mg3">
+    <div class="mi" style="background:white;">
+      <strong style="color:var(--teal);">1. Education</strong><br>
+      Control (not cure) HTN. Dietitian consult. Restrict sodium &amp; fat, ↑ fruits/veg. Takes <strong>2–3 months</strong> for taste buds to adapt to ↓ salt.
+    </div>
+    <div class="mi" style="background:white;">
+      <strong style="color:var(--teal);">2. Self-Care Teaching</strong><br>
+      Home BP monitoring. Written info on drug side effects. <strong>No sudden stop</strong> of meds (rebound HTN!). Adequate medication supply.
+    </div>
+    <div class="mi" style="background:white;">
+      <strong style="color:var(--teal);">3. Adherence</strong><br>
+      Small changes each visit. Support groups for weight, smoking, stress. Exercise regimen. Family support. Follow-up visits.
+    </div>
+  </div>
+</div>
+
+<!-- bsm nursing interventions -->
+<div class="bsm bsm-tl">
+  <div class="bsm-title">🧠 بصموجة عمو غيث — Nursing Interventions: <span class="phrase">"Every Self-Motivated Adherent Patient Follows"</span></div>
+  <div class="lr">
+    <div class="li"><div class="lc">E</div><div class="lm">Education<br><small>disease + diet</small></div></div>
+    <div class="li"><div class="lc">S</div><div class="lm">Self-care<br><small>BP monitoring</small></div></div>
+    <div class="li"><div class="lc">M</div><div class="lm">Medications<br><small>no sudden stop</small></div></div>
+    <div class="li"><div class="lc">A</div><div class="lm">Adherence<br><small>lifestyle changes</small></div></div>
+    <div class="li"><div class="lc">P</div><div class="lm">Physical activity<br><small>+ support groups</small></div></div>
+    <div class="li"><div class="lc">F</div><div class="lm">Follow-up<br><small>visits</small></div></div>
+  </div>
+</div>
+
+<!-- ════════════ RHD ════════════ -->
+<div class="sec sc-ro">❤️‍🩹 Rheumatic Heart Disease (RHD)</div>
+
+<div class="grid g2">
+  <div class="card cr">
+    <h3>📖 Definitions <span class="star">⭐ EXAM</span></h3>
+    <strong>Rheumatic Fever (RF):</strong> Autoimmune inflammatory reaction to <strong>Streptococcus pyogenes</strong> (Group A beta-hemolytic Strep) throat/skin infection.<br>
+    Affects: <strong>Heart (carditis)</strong>, large joints (arthritis), brain (chorea)<br><br>
+    <strong>Rheumatic Heart Disease (RHD):</strong> Structural/functional changes in heart due to <strong>valve damage + muscle inflammation</strong> from one or more RF episodes. <strong>Life-threatening.</strong>
+  </div>
+
+  <div class="card cr">
+    <h3>⚠️ Risk Factors for RHD</h3>
+    <ul>
+      <li><strong>Environmental:</strong> Overcrowding, poor sanitation, poor access to healthcare/antibiotics</li>
+      <li><strong>Bacteria:</strong> Certain strep strains more likely to cause RF, especially repeated untreated infections</li>
+      <li><strong>Genetics:</strong> Genes that increase susceptibility to RF</li>
+    </ul>
+  </div>
+</div>
+
+<!-- RHD DIAGNOSTIC CRITERIA -->
+<div class="card cr" style="margin-top:var(--gap);">
+  <h3>🏥 Diagnostic Criteria — Modified Jones Criteria <span class="star">⭐ EXAM</span></h3>
+  <div class="alert alert-red" style="margin-bottom:10px;">
+    Diagnosis = <strong>2 Major</strong> OR <strong>1 Major + 2 Minor</strong> OR <strong>3 Minor</strong> criteria
+  </div>
+  <div class="grid g2">
+    <div>
+      <strong style="color:var(--rose);">MAJOR Criteria:</strong>
+      <ul>
+        <li><strong>Carditis</strong> (clinical or subclinical)</li>
+        <li><strong>Polyarthritis</strong></li>
+        <li><strong>Chorea</strong> — jerky uncontrollable movements (hands, feet, face)</li>
+        <li><strong>Subcutaneous nodules</strong> — small, painless bumps</li>
+        <li><strong>Erythema marginatum</strong> — flat/raised painless rash with ragged edge</li>
+      </ul>
+    </div>
+    <div>
+      <strong style="color:var(--amber);">MINOR Criteria:</strong>
+      <ul>
+        <li><strong>Fever</strong> ≥ 38.5°C (≥38°C in high-risk)</li>
+        <li><strong>Polyarthralgia</strong> — painful joints (knees, ankles, elbows, wrists)</li>
+        <li><strong>Prolonged PR interval</strong> on ECG</li>
+        <li><strong>↑ ESR</strong> ≥60 mm/h and/or CRP ≥3.0 mg/dL</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- bsm Major Criteria -->
+<div class="bsm bsm-ro">
+  <div class="bsm-title">🧠 بصموجة عمو غيث — MAJOR Criteria (Jones): <span class="phrase">"Can People Choose Subcutaneous Erythema"</span></div>
+  <div class="lr">
+    <div class="li"><div class="lc">C</div><div class="lm">Carditis</div></div>
+    <div class="li"><div class="lc">P</div><div class="lm">Polyarthritis</div></div>
+    <div class="li"><div class="lc">C</div><div class="lm">Chorea<br><small>jerky movements</small></div></div>
+    <div class="li"><div class="lc">S</div><div class="lm">Subcutaneous<br><small>nodules</small></div></div>
+    <div class="li"><div class="lc">E</div><div class="lm">Erythema<br><small>marginatum</small></div></div>
+  </div>
+</div>
+
+<!-- bsm Minor Criteria -->
+<div class="bsm bsm-am" style="margin-top:8px;">
+  <div class="bsm-title">🧠 بصموجة عمو غيث — MINOR Criteria: <span class="phrase">"Fever Painful Prolonged ESR"</span></div>
+  <div class="lr">
+    <div class="li"><div class="lc">F</div><div class="lm">Fever<br><small>≥38.5°C</small></div></div>
+    <div class="li"><div class="lc">P</div><div class="lm">Polyarthralgia<br><small>painful joints</small></div></div>
+    <div class="li"><div class="lc">P</div><div class="lm">Prolonged<br><small>PR interval</small></div></div>
+    <div class="li"><div class="lc">E</div><div class="lm">ESR ↑ + CRP↑</div></div>
+  </div>
+</div>
+
+<!-- RHD DIAGNOSIS & TREATMENT -->
+<div class="grid g2" style="margin-top:var(--gap);">
+  <div class="card cr">
+    <h3>🔬 Diagnosis Tests <span class="star">⭐ EXAM</span></h3>
+    <ul>
+      <li><strong>Throat culture/blood test</strong> — check for strep</li>
+      <li><span class="tag tro">Echocardiogram</span> — <strong>most useful</strong> — valve damage, regurgitation, fluid, enlargement</li>
+      <li><span class="tag tro">ECG</span> — arrhythmias, heart muscle damage</li>
+      <li><span class="tag tro">Chest X-ray</span> — cardiac enlargement</li>
+      <li><span class="tag tro">Cardiac MRI</span> — detailed valve/muscle images</li>
+      <li><span class="tag tro">Blood tests</span> — infection + inflammation</li>
+    </ul>
+  </div>
+
+  <div class="card cr">
+    <h3>💊 Treatment <span class="star">⭐ EXAM</span></h3>
+    <ul>
+      <li><strong>Antibiotics</strong> (Penicillin) — treat strep &amp; prevent RF</li>
+      <li><strong>Anti-inflammatory</strong> drugs (aspirin, steroids, NSAIDs)</li>
+      <li><strong>Anticoagulants</strong> — reduce stroke/clot risk (mitral stenosis, AFib)</li>
+      <li>Daily/monthly antibiotic prophylaxis</li>
+      <li><strong>Surgery</strong> (severe cases): valvuloplasty or valve replacement</li>
+    </ul>
+    <div class="alert alert-red">
+      Best treatment = <strong>PREVENT</strong> rheumatic fever early!
+    </div>
+  </div>
+</div>
+
+<!-- RHD COMPLICATIONS -->
+<div class="card cx" style="margin-top:var(--gap);">
+  <h3>⚠️ Complications of RHD <span class="star">⭐ EXAM</span></h3>
+  <div class="mg mg3">
+    <div class="mi" style="background:white;"><strong style="color:var(--crimson);">Valve Stenosis</strong><br>Valve flaps thick/stiff → ↓ blood flow</div>
+    <div class="mi" style="background:white;"><strong style="color:var(--crimson);">Regurgitation</strong><br>Valve flaps don't close → backward blood flow</div>
+    <div class="mi" style="background:white;"><strong style="color:var(--crimson);">Muscle Damage</strong><br>Swelling weakens heart muscle → ↓ pumping</div>
+    <div class="mi" style="background:white;"><strong style="color:var(--crimson);">Heart Failure</strong><br>Chronic damage → HF later in life</div>
+    <div class="mi" style="background:white;"><strong style="color:var(--crimson);">Atrial Fibrillation</strong><br>Irregular, fast heartbeat</div>
+    <div class="mi" style="background:white;"><strong style="color:var(--crimson);">Pulmonary HTN</strong><br>↑ stroke/clot risk</div>
+  </div>
+</div>
+
+<!-- RHD PREVENTION -->
+<div class="card cv" style="margin-top:var(--gap);">
+  <h3>🛡️ Prevention Levels <span class="star">⭐ EXAM</span></h3>
+  <div class="mg mg3">
+    <div class="mi" style="background:white;">
+      <strong style="color:var(--violet);">Primordial</strong><br>
+      Address poverty, improve sanitation, reduce crowding, ↑ healthcare access
+    </div>
+    <div class="mi" style="background:white;">
+      <strong style="color:var(--violet);">Primary</strong><br>
+      Diagnose &amp; treat strep pharyngitis/skin infections promptly with antibiotics
+    </div>
+    <div class="mi" style="background:white;">
+      <strong style="color:var(--violet);">Secondary</strong><br>
+      Continuous antibiotic prophylaxis for RF/RHD patients to prevent recurrence
+    </div>
+  </div>
+  <div class="alert" style="border-color:var(--violet);background:var(--violet-l);color:var(--violet);margin-top:10px;">
+    Antibiotic prophylaxis: <strong>Amoxicillin 2g orally 1 hour before</strong> dental/respiratory/urinary procedures. Allergy: use clindamycin or cephalexin.
+  </div>
+</div>
+
+<!-- RHD NURSING -->
+<div class="sec sc-ro">🩺 Nursing Management — RHD</div>
+
+<div class="grid g2">
+  <div class="card cr">
+    <h3>II. Nursing Diagnoses</h3>
+    <ul style="font-size:var(--fs-sm);">
+      <li>Impaired cardiac function r/t valvular damage</li>
+      <li>Risk for infection r/t recurrent strep</li>
+      <li>Noncompliance r/t knowledge deficit</li>
+      <li>Activity intolerance r/t ↓ cardiac output</li>
+      <li>Risk for thromboembolism r/t valvular damage</li>
+      <li>Knowledge deficit r/t RHD self-care</li>
+    </ul>
+  </div>
+  <div class="card cr">
+    <h3>IV. Nursing Interventions <span class="star">⭐ EXAM</span></h3>
+    <ul style="font-size:var(--fs-sm);">
+      <li><strong>Assessment:</strong> heart murmurs, VS, HF signs</li>
+      <li><strong>Medications:</strong> antibiotics, anti-inflammatories, diuretics</li>
+      <li><strong>Pain management</strong></li>
+      <li><strong>Education:</strong> complete antibiotic course, healthy lifestyle</li>
+      <li><strong>Activity/Rest balance</strong></li>
+      <li><strong>Nutrition:</strong> ↓ sodium, heart-healthy diet</li>
+      <li><strong>Fluid management:</strong> diuretics, I&amp;O monitoring</li>
+      <li><strong>Emotional support</strong></li>
+      <li><strong>Infection control:</strong> hand hygiene</li>
+      <li><strong>Surgical consultation</strong> if severe valve damage</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ════════════ QUICK REFERENCE ════════════ -->
+<div class="sec sc-dk" style="margin-top:28px;">⭐  النقاط المهمه من عمو غيث </div>
+
+<div class="card" style="border-left:5px solid var(--slate);background:#f8fafc;">
+  <h3 style="font-family:'Playfair Display',serif;color:var(--slate);">📌 Must-Know Numbers &amp; Facts</h3>
+  <div class="mg mg2" style="margin-top:12px;">
+    <div class="qnum" style="background:var(--crimson-l);"><div class="qn" style="color:var(--crimson);">🩺</div><div>HTN = BP ≥ <strong>140/90 mmHg</strong> (2+ readings, 2+ occasions)</div></div>
+    <div class="qnum" style="background:var(--navy-l);"><div class="qn" style="color:var(--navy);">🎯</div><div>Goal BP ≤ <strong>140/90</strong> (or ≤130/80 for DM/CKD)</div></div>
+    <div class="qnum" style="background:var(--amber-l);"><div class="qn" style="color:var(--amber);">⚡</div><div>Malignant HTN: DBP <strong>&gt;120 mmHg</strong> — 90% mortality untreated</div></div>
+    <div class="qnum" style="background:var(--teal-l);"><div class="qn" style="color:var(--teal);">🔢</div><div>ISH: Systolic ≥ <strong>140</strong>, Diastolic &lt; <strong>90</strong> — age &gt;50</div></div>
+    <div class="qnum" style="background:var(--violet-l);"><div class="qn" style="color:var(--violet);">👴</div><div>Age risk: Men <strong>&gt;55</strong> / Women <strong>&gt;65</strong></div></div>
+    <div class="qnum" style="background:var(--rose-l);"><div class="qn" style="color:var(--rose);">🧂</div><div>Taste buds adapt to ↓ salt: <strong>2–3 months</strong></div></div>
+    <div class="qnum" style="background:var(--crimson-l);"><div class="qn" style="color:var(--crimson);">⭐</div><div>Beta-blocker nursing: <strong>Check heart rate</strong> before giving</div></div>
+    <div class="qnum" style="background:var(--teal-l);"><div class="qn" style="color:var(--teal);">🔬</div><div>Echo = <strong>most useful</strong> test for RHD valve problems</div></div>
+    <div class="qnum" style="background:var(--rose-l);"><div class="qn" style="color:var(--rose);">💊</div><div>Amoxicillin prophylaxis: <strong>2g orally 1 hour before</strong> procedure</div></div>
+    <div class="qnum" style="background:var(--amber-l);"><div class="qn" style="color:var(--amber);">🦠</div><div>RF caused by <strong>Group A beta-hemolytic Streptococcus</strong></div></div>
+    <div class="qnum" style="background:var(--violet-l);"><div class="qn" style="color:var(--violet);">📊</div><div>Primary HTN = <strong>&gt;90%</strong> of all cases — no identifiable cause</div></div>
+    <div class="qnum" style="background:var(--navy-l);"><div class="qn" style="color:var(--navy);">🫀</div><div>Target organs: <strong>Heart · Brain · Kidneys · Eyes</strong></div></div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div style="text-align:center;margin-top:36px;padding:22px;background:linear-gradient(135deg,#0a0f1e,#1b2f55,#3b0a0a);border-radius:14px;color:white;">
+  <div style="font-family:'Playfair Display',serif;font-size:18px;font-weight:900;">❤️ Hypertension &amp; Rheumatic Heart Disease by GHaith</div>
+  <div style="opacity:.6;font-size:12px;margin-top:4px;"> ❤️ مع عمو غيث أنت في أمان بإذن الله ، دعواتك </div>
+</div>
+
+</div>
+</body>
+</html>
