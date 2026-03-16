@@ -1,0 +1,903 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --accent:       #7c3aed;
+  --accent-light: #8b5cf6;
+  --accent-dark:  #6d28d9;
+  --accent-glow:  rgba(124,58,237,0.18);
+  --bg:      #f8fafc;
+  --bg2:     #eef2f7;
+  --card:    #ffffff;
+  --text:    #1a2332;
+  --text2:   #4a5568;
+  --text3:   #718096;
+  --bc:      rgba(0,0,0,0.07);
+  --success: #16a34a;
+  --danger:  #dc2626;
+  --warn:    #d97706;
+  --r:       16px;
+  --tr:      all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="dark"] {
+  --bg:   #0d1117; --bg2: #161b22; --card: #1c2333;
+  --text: #e6edf3; --text2: #b1bac4; --text3: #7d8590;
+  --bc:   rgba(255,255,255,0.08);
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg); color: var(--text);
+  min-height: 100vh; overflow-x: hidden;
+  transition: background .4s, color .4s;
+}
+
+/* PROGRESS TOP */
+#prog-bar {
+  position: fixed; top: 0; left: 0; height: 3px; z-index: 999;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  transition: width .2s;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px; height: 64px;
+  background: rgba(248,250,252,.93); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--bc); transition: var(--tr);
+}
+[data-theme="dark"] nav { background: rgba(13,17,23,.95); }
+
+.nav-back {
+  display: flex; align-items: center; gap: 7px;
+  color: var(--text2); text-decoration: none; font-size: 13px; font-weight: 700;
+  padding: 7px 13px; border-radius: 8px; border: 1px solid var(--bc);
+  background: var(--card); transition: var(--tr);
+}
+.nav-back:hover { color: var(--accent); border-color: var(--accent-glow); transform: translateX(3px); }
+.nav-brand { display: flex; align-items: center; gap: 9px; font-size: 15px; font-weight: 900; color: var(--text); }
+.nav-logo-icon {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 12px; font-weight: 900;
+}
+.nav-right { display: flex; align-items: center; gap: 8px; }
+.theme-btn {
+  width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--bc);
+  background: var(--card); cursor: pointer; font-size: 15px;
+  display: flex; align-items: center; justify-content: center; transition: var(--tr);
+}
+.theme-btn:hover { border-color: var(--accent); transform: rotate(20deg); }
+
+/* HERO BAND */
+.hero-band {
+  margin-top: 64px;
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent), var(--accent-light));
+  padding: 40px 24px 36px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.hero-band::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 600px 200px at 50% 100%, rgba(255,255,255,.12) 0%, transparent 70%);
+}
+.hero-band-icon {
+  width: 68px; height: 68px; border-radius: 20px;
+  background: rgba(255,255,255,.2); backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 30px; margin: 0 auto 14px; border: 1.5px solid rgba(255,255,255,.35);
+}
+.hero-band h1 { font-size: clamp(20px,4vw,30px); font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero-band p { font-size: 13px; color: rgba(255,255,255,.8); }
+.hero-band-meta {
+  display: flex; justify-content: center; gap: 24px; margin-top: 20px;
+  flex-wrap: wrap;
+}
+.meta-pill {
+  background: rgba(255,255,255,.18); backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,.3); border-radius: 50px;
+  padding: 6px 16px; font-size: 12px; font-weight: 700; color: #fff;
+  display: flex; align-items: center; gap: 6px;
+}
+
+/* EXAM SHELL */
+.shell { max-width: 560px; margin: 0 auto; padding: 24px 20px 80px; }
+
+/* STATS ROW */
+.stats-row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 16px;
+}
+.stat-box {
+  background: var(--card); border: 1px solid var(--bc); border-radius: var(--r);
+  padding: 12px 10px; text-align: center;
+}
+.stat-box .val { font-size: 20px; font-weight: 900; }
+.stat-box .lbl { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.stat-correct { color: var(--success); }
+.stat-wrong   { color: var(--danger); }
+.stat-remain  { color: var(--accent); }
+
+/* PROGRESS STRIP */
+.prog-strip {
+  background: var(--card); border: 1px solid var(--bc); border-radius: var(--r);
+  padding: 14px 16px; margin-bottom: 16px;
+  display: flex; align-items: center; gap: 14px;
+}
+.prog-label { font-size: 13px; font-weight: 700; color: var(--text2); white-space: nowrap; }
+.prog-track { flex: 1; height: 8px; background: var(--bg2); border-radius: 8px; overflow: hidden; }
+.prog-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  border-radius: 8px; transition: width .4s;
+}
+.timer-badge {
+  min-width: 64px; height: 36px; border-radius: 18px;
+  background: var(--bg2); border: 1px solid var(--bc);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 900; color: var(--text);
+  gap: 5px; padding: 0 12px; flex-shrink: 0;
+}
+.timer-badge.warn { color: var(--warn); border-color: rgba(217,119,6,.3); background: rgba(217,119,6,.08); }
+.timer-badge.danger { color: var(--danger); border-color: rgba(220,38,38,.3); background: rgba(220,38,38,.08); animation: pulse .8s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.6} }
+
+/* QUESTION CARD */
+.q-card {
+  background: var(--card); border: 1px solid var(--bc);
+  border-radius: 20px; overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+  transition: box-shadow .3s;
+}
+.q-header {
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  padding: 4px 18px 4px;
+  display: flex; align-items: center; gap: 8px;
+}
+.q-num {
+  background: rgba(255,255,255,.2); border-radius: 8px;
+  padding: 3px 10px; font-size: 11px; font-weight: 700; color: #fff;
+}
+.q-text {
+  padding: 22px 18px 14px; font-size: 15px; font-weight: 700; color: var(--text);
+  line-height: 1.65; border-bottom: 1px solid var(--bc);
+  text-align: left; direction: ltr;
+}
+.options { padding: 14px 18px 18px; display: flex; flex-direction: column; gap: 10px; }
+
+/* OPTION */
+.opt {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px; border-radius: 12px;
+  border: 1.5px solid var(--bc); background: var(--bg);
+  cursor: pointer; font-size: 14px; font-weight: 600; color: var(--text);
+  transition: var(--tr); user-select: none;
+  direction: ltr; text-align: left;
+}
+.opt:hover:not(.disabled) {
+  border-color: var(--accent); background: var(--accent-glow);
+  transform: translateX(3px);
+}
+.opt-letter {
+  width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+  background: var(--bg2); border: 1px solid var(--bc);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 900; color: var(--text3);
+  transition: var(--tr);
+}
+.opt.correct {
+  border-color: var(--success); background: rgba(22,163,74,.08);
+}
+.opt.correct .opt-letter {
+  background: var(--success); color: #fff; border-color: var(--success);
+}
+.opt.wrong {
+  border-color: var(--danger); background: rgba(220,38,38,.07);
+}
+.opt.wrong .opt-letter {
+  background: var(--danger); color: #fff; border-color: var(--danger);
+}
+.opt.disabled { pointer-events: none; }
+
+/* FEEDBACK */
+.feedback-bar {
+  margin: 14px 18px; padding: 12px 16px; border-radius: 12px;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px; font-weight: 700;
+  animation: popIn .4s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes popIn { from{transform:scale(.8);opacity:0} to{transform:scale(1);opacity:1} }
+.feedback-bar.ok { background: rgba(22,163,74,.1); color: var(--success); border: 1px solid rgba(22,163,74,.25); }
+.feedback-bar.no { background: rgba(220,38,38,.08); color: var(--danger); border: 1px solid rgba(220,38,38,.2); }
+.feedback-icon { font-size: 20px; }
+
+/* EXPLANATION */
+.explanation {
+  margin: 0 18px 14px; padding: 12px 14px;
+  background: rgba(var(--accent-rgb),.06);
+  border-radius: 10px; border-right: 3px solid var(--accent);
+  font-size: 13px; color: var(--text2); line-height: 1.6;
+  display: none;
+}
+
+/* NAV BTNS */
+.nav-btns { padding: 4px 18px 18px; display: flex; gap: 10px; }
+.btn {
+  flex: 1; padding: 13px; border: none; border-radius: 12px;
+  font-size: 14px; font-weight: 900; cursor: pointer;
+  font-family: 'Outfit', sans-serif; transition: var(--tr);
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+}
+.btn-next {
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  color: #fff; box-shadow: 0 4px 14px var(--accent-glow);
+}
+.btn-next:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
+.btn-skip {
+  background: var(--bg2); color: var(--text2); border: 1px solid var(--bc); flex: 0 0 auto; padding: 13px 18px;
+}
+.btn-skip:hover { border-color: var(--warn); color: var(--warn); }
+
+/* ===== RESULTS ===== */
+.result-hero {
+  text-align: center; padding: 36px 20px 28px;
+  background: var(--card); border-radius: 20px;
+  border: 1px solid var(--bc); margin-bottom: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+}
+.score-ring {
+  width: 110px; height: 110px; border-radius: 50%; margin: 0 auto 18px;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; border: 5px solid var(--bg2);
+  position: relative;
+}
+.score-ring svg { position: absolute; inset: -5px; width: calc(100% + 10px); height: calc(100% + 10px); transform: rotate(-90deg); }
+.score-ring circle { fill: none; stroke-width: 5; stroke-linecap: round; }
+.ring-bg { stroke: var(--bg2); }
+.ring-fill { stroke: var(--accent); transition: stroke-dashoffset 1s ease; }
+.score-num { font-size: 28px; font-weight: 900; color: var(--text); }
+.score-pct { font-size: 12px; color: var(--text3); }
+.result-grade { font-size: 22px; font-weight: 900; margin-bottom: 6px; }
+.result-sub { font-size: 14px; color: var(--text2); }
+.result-stats {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 20px;
+}
+.rs { background: var(--bg2); border-radius: 10px; padding: 12px 8px; text-align: center; }
+.rs .n { font-size: 20px; font-weight: 900; }
+.rs .l { font-size: 11px; color: var(--text3); }
+
+/* REPORT ITEMS */
+.report-item {
+  background: var(--card); border: 1px solid var(--bc); border-radius: 14px;
+  padding: 16px; margin-bottom: 10px; border-right: 4px solid var(--bc);
+}
+.report-item.ok { border-right-color: var(--success); }
+.report-item.no { border-right-color: var(--danger); }
+.report-item .ri-q { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+.report-item .ri-row {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; margin-top: 5px; color: var(--text2);
+}
+.ri-badge {
+  padding: 2px 8px; border-radius: 6px; font-weight: 700; font-size: 11px; flex-shrink: 0;
+}
+.ri-yours { background: rgba(220,38,38,.1); color: var(--danger); }
+.ri-right { background: rgba(22,163,74,.1); color: var(--success); }
+
+.result-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+.btn-retry { background: linear-gradient(135deg, var(--accent-dark), var(--accent)); color: #fff; }
+.btn-retry:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
+.btn-home { background: var(--bg2); color: var(--text); border: 1px solid var(--bc); }
+.btn-home:hover { border-color: var(--accent); color: var(--accent); }
+
+/* FOOTER */
+footer {
+  background: var(--bg2); border-top: 1px solid var(--bc);
+  padding: 22px 24px; display: flex; align-items: center;
+  justify-content: space-between; flex-wrap: wrap; gap: 10px;
+}
+.footer-brand { font-size: 14px; font-weight: 700; }
+.footer-brand span { color: var(--accent); }
+.footer-tg { display: flex; align-items: center; gap: 5px; text-decoration: none; color: #229ED9; font-size: 12px; font-weight: 600; }
+
+@media (max-width: 480px) {
+  nav { padding: 0 14px; }
+  .shell { padding: 16px 14px 60px; }
+  .nav-brand span { display: none; }
+  .hero-band { padding: 30px 16px 28px; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog-bar" style="width:0%"></div>
+
+<nav>
+  <a href="https://gaith-team.github.io/exam/level1/quality-basics/index.html" class="nav-back"><i class="fa-solid fa-arrow-right"></i> Back</a>
+  <div class="nav-brand">
+    <div class="nav-logo-icon">GT</div>
+    <span>GHAITH TEAM</span>
+  </div>
+  <div class="nav-right">
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<div class="hero-band">
+  <div class="hero-band-icon">⭐</div>
+  <h1>أساسيات الجودة والسلامة</h1>
+  <p>Basic tools for quality</p>
+  <div class="hero-band-meta">
+    <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">-- Questions</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-clock"></i> 35 Min</div>
+    <div class="meta-pill"><i class="fa-solid fa-shuffle"></i> Shuffled</div>
+  </div>
+</div>
+
+<div class="shell">
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="val stat-correct" id="sCorrect">0</div>
+      <div class="lbl">✔ Correct</div>
+    </div>
+    <div class="stat-box">
+      <div class="val stat-wrong" id="sWrong">0</div>
+      <div class="lbl">✖ Wrong</div>
+    </div>
+    <div class="stat-box">
+      <div class="val stat-remain" id="sRemain">--%</div>
+      <div class="lbl">⏳ Remaining</div>
+    </div>
+  </div>
+
+  <!-- PROGRESS STRIP -->
+  <div class="prog-strip">
+    <div class="prog-label" id="progLabel">Q 1</div>
+    <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+    <div class="timer-badge" id="timerBadge"><i class="fa-regular fa-clock"></i> <span id="timerTxt">35:00</span></div>
+  </div>
+
+  <!-- APP -->
+  <div id="app"></div>
+</div>
+
+<footer>
+  <div class="footer-brand">GHAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg">
+    <i class="fa-brands fa-telegram"></i> @nursing2bu
+  </a>
+</footer>
+
+<script>
+const QUESTIONS = [
+ {
+    t: "Which of the following is NOT one of the four basic tools for quality ?",
+    o: ["Brainstorming", "Flowchart", "SWOT Analysis", "Pareto Analysis"],
+    a: 2
+  },
+  {
+    t: "The Pareto Principle is commonly known as which rule?",
+    o: ["50-50 Rule", "70-30 Rule", "80-20 Rule", "90-10 Rule"],
+    a: 2
+  },
+  {
+    t: "Who is the Pareto Principle named after?",
+    o: ["An American engineer", "A Greek philosopher", "An Italian economist", "A Japanese quality expert"],
+    a: 2
+  },
+  {
+    t: "According to the Pareto Principle, what percentage of problems are typically caused by 20% of causes?",
+    o: ["20%", "50%", "80%", "100%"],
+    a: 2
+  },
+  {
+    t: "What is the primary purpose of Pareto Analysis?",
+    o: ["To generate new ideas", "To prioritize types or sources of problems", "To map the sequence of a process", "To identify the root cause of a single defect"],
+    a: 1
+  },
+  {
+    t: "Pareto analysis helps to separate the 'vital few' from what?",
+    o: ["The important many", "The trivial many", "The secondary few", "The majority causes"],
+    a: 1
+  },
+  {
+    t: "When constructing a Pareto Diagram, in what order should the identified causes be sorted?",
+    o: ["Alphabetical order", "Ascending order of frequency", "Descending order of frequency", "Random order"],
+    a: 2
+  },
+  {
+    t: "In a Pareto Diagram, what is drawn on the right vertical-axis?",
+    o: ["Frequency", "Names of causes", "Cumulative percentage", "Total cost"],
+    a: 2
+  },
+  {
+    t: "Where is the line dropped in a Pareto Diagram to separate important causes from less important ones?",
+    o: ["At the 50% mark", "At the point where the curve hits 100%", "At the 80% point of intersection with the curve", "At the first column"],
+    a: 2
+  },
+  {
+    t: "Who developed the Cause-and-Effect Diagram in 1943?",
+    o: ["Vilfredo Pareto", "Dr. Ishikawa", "Joseph Juran", "Taiichi Ohno"],
+    a: 1
+  },
+  {
+    t: "What is another common name for the Cause-and-Effect Diagram?",
+    o: ["Spider Diagram", "Fishbone Diagram", "Tree Diagram", "Circle Diagram"],
+    a: 1
+  },
+  {
+    t: "In a Fishbone Diagram, where is the 'effect' or problem located?",
+    o: ["At the top", "At the bottom", "On the left side", "On the right side"],
+    a: 3
+  },
+  {
+    t: "What does the Fishbone Diagram represent visually?",
+    o: ["The timeline of a project", "A process map", "The relationship between an effect and its causes", "The hierarchy of management"],
+    a: 2
+  },
+  {
+    t: "What are the '5 P' categories often used in Fishbone Diagrams for services?",
+    o: ["People, Place, Price, Product, Promotion", "People, Place, Policy, Procedures, Plant", "People, Place, Parts, Power, Performance", "People, Place, Planning, Production, Profit"],
+    a: 1
+  },
+  {
+    t: "A flowchart is also known by what other name?",
+    o: ["Idea map", "Process map", "Cause map", "Priority map"],
+    a: 1
+  },
+  {
+    t: "What does an oval symbol represent in a standard flowchart?",
+    o: ["A step in the process", "A decision point", "Start or End of the process", "Direction of flow"],
+    a: 2
+  },
+  {
+    t: "What does a diamond-shaped symbol represent in a flowchart?",
+    o: ["A document", "A decision", "A delay", "A storage point"],
+    a: 1
+  },
+  {
+    t: "What does a rectangle symbol represent in a flowchart?",
+    o: ["Start/End", "Decision", "A step or activity in the process", "Connector"],
+    a: 2
+  },
+  {
+    t: "Which type of flowchart is described as the 'simplest one'?",
+    o: ["Detailed flowchart", "Deployment flowchart", "High level flowchart", "Matrix flowchart"],
+    a: 2
+  },
+  {
+    t: "What is the primary goal of brainstorming?",
+    o: ["To criticize existing processes", "To generate a wide range of ideas or new ideas", "To find the single best solution immediately", "To assign blame for quality defects"],
+    a: 1
+  },
+  {
+    t: "Which of the following is a primary rule for brainstorming?",
+    o: ["Criticize poor ideas immediately", "Focus on quality over quantity", "No criticism or judgment of ideas", "Only top management should contribute"],
+    a: 2
+  },
+  {
+    t: "During the generation phase of brainstorming, what should be the objective?",
+    o: ["Analyzing the cost of ideas", "Achieving a large volume of ideas", "Selecting the final solution", "Formatting the ideas into a report"],
+    a: 1
+  },
+  {
+    t: "Who is responsible for noting ALL ideas during a brainstorming session without making judgments?",
+    o: ["The leader", "The recorder", "The participant with the most seniority", "External consultants"],
+    a: 1
+  },
+  {
+    t: "In the 'Clarifying Idea' phase of brainstorming, what happens to ideas that say the same thing?",
+    o: ["They are deleted", "They are grouped together", "They are debated", "They are ignored"],
+    a: 1
+  },
+  {
+    t: "What is the final phase of running a brainstorming session?",
+    o: ["Preparatory phase", "Conducting session", "Evaluation phase", "Implementation phase"],
+    a: 2
+  },
+  {
+    t: "Vilfredo Pareto discovered that 80% of the land in Italy was owned by what percentage of the population?",
+    o: ["10%", "20%", "30%", "40%"],
+    a: 1
+  },
+  {
+    t: "Pareto Analysis is a key tool used in what management concept?",
+    o: ["Strategic Planning", "Total Quality Control", "Human Resource Management", "Financial Auditing"],
+    a: 1
+  },
+  {
+    t: "When constructing a Pareto Diagram, how is the cumulative percentage calculated?",
+    o: ["Subtracting every percentage from 100", "Multiplying every percentage by two", "Summing every percentage with the previous percentage", "Averaging all percentages"],
+    a: 2
+  },
+  {
+    t: "In a Fishbone Diagram, the 'backbone' arrow points toward what?",
+    o: ["The causes", "The effect/problem", "The participants", "The solution"],
+    a: 1
+  },
+  {
+    t: "What is the recommended number of participants for a brainstorming session?",
+    o: ["2-3", "Up to 10-12", "Exactly 20", "At least 50"],
+    a: 1
+  },
+  {
+    t: "In the preparatory phase of brainstorming, which of the following must be decided?",
+    o: ["The final solution", "The budget for implementation", "The goal/focus and participants", "The punishment for violations"],
+    a: 2
+  },
+  {
+    t: "What should the recorder do if an idea seems wild or exaggerated during brainstorming?",
+    o: ["Ignore it", "Note it down exactly as given", "Correct it to make it more realistic", "Ask the participant to leave"],
+    a: 1
+  },
+  {
+    t: "The 'Evaluation phase' of brainstorming involves which of the following?",
+    o: ["Encouraging more wild ideas", "Prioritizing and selecting the best suggestions", "Inviting more participants", "Starting the preparatory phase again"],
+    a: 1
+  },
+  {
+    t: "Which flowchart symbol indicates the direction of flow?",
+    o: ["Oval", "Diamond", "Arrow", "Rectangle"],
+    a: 2
+  },
+  {
+    t: "Which tool is best for exploring all suspected possible causes related to a problem?",
+    o: ["Flowchart", "Pareto Analysis", "Cause-and-Effect Diagram", "Brainstorming only"],
+    a: 2
+  },
+  {
+    t: "What does 'vital few' refer to in Pareto Analysis?",
+    o: ["The many small problems that don't matter", "The few major causes that result in most problems", "The employees who work the hardest", "The customers who complain the least"],
+    a: 1
+  },
+  {
+    t: "In the Fishbone Diagram, what angle is typically used for the lines connecting detailed causes to the backbone?",
+    o: ["45 degrees", "70 degrees", "90 degrees", "180 degrees"],
+    a: 1
+  },
+  {
+    t: "Which of the following is NOT a rule for brainstorming?",
+    o: ["Build on each other's ideas", "Quantity counts over quality at the start", "Equal worth for every person and idea", "Immediate evaluation of ideas"],
+    a: 3
+  },
+  {
+    t: "The 'Clarifying Idea' phase of brainstorming helps to structure ideas into what?",
+    o: ["Common themes", "Alphabetical lists", "Financial budgets", "Legal contracts"],
+    a: 0
+  },
+  {
+    t: "Which tool uses standard symbols to understand and document the detailed steps in a process?",
+    o: ["Fishbone Diagram", "Flowchart", "Pareto Diagram", "Brainstorming"],
+    a: 1
+  },
+  {
+    t: "In Pareto Analysis, if 20% of defects cause 80% of problems, where should improvement efforts be focused?",
+    o: ["On the 80% of causes", "On the 20% of causes", "On all causes equally", "On the easiest causes to fix"],
+    a: 1
+  },
+  {
+    t: "What is the first step in constructing a Pareto Diagram?",
+    o: ["Calculate frequencies", "Define the problem", "Draw the axes", "Sort by frequency"],
+    a: 1
+  },
+  {
+    t: "The '5 M' categories (Manpower, Methods, Materials, Machines, Measurements) are associated with which tool?",
+    o: ["Flowchart", "Brainstorming", "Fishbone Diagram", "Pareto Analysis"],
+    a: 2
+  },
+  {
+    t: "Which phase of brainstorming involves deciding on the date, place, and supplies?",
+    o: ["Preparatory phase", "Generation phase", "Clarifying phase", "Evaluation phase"],
+    a: 0
+  },
+  {
+    t: "In a flowchart, what is the 'process map' designed to show?",
+    o: ["The physical layout of a hospital", "The sequence of steps in a process", "The cost of each activity", "The hierarchy of the staff"],
+    a: 1
+  },
+  {
+    t: "The Pareto Principle suggests that 80% of effects come from 20% of causes. (True/False)",
+    o: ["True", "False"],
+    a: 0
+  },
+  {
+    t: "Pareto analysis separates the 'trivial few' from the 'vital many'. (True/False)",
+    o: ["True", "False"],
+    a: 1
+  },
+  {
+    t: "Dr. Ishikawa developed the Fishbone Diagram in 1943. (True/False)",
+    o: ["True", "False"],
+    a: 0
+  },
+  {
+    t: "In a Fishbone Diagram, the problem is written on the left side. (True/False)",
+    o: ["True", "False"],
+    a: 1
+  },
+  {
+    t: "A flowchart uses standard symbols to show the sequence of steps in a process. (True/False)",
+    o: ["True", "False"],
+    a: 0
+  },
+  {
+    t: "A diamond symbol in a flowchart represents the start of a process. (True/False)",
+    o: ["True", "False"],
+    a: 1
+  },
+  {
+    t: "Brainstorming encourages criticism of ideas to ensure only the best are recorded. (True/False)",
+    o: ["True", "False"],
+    a: 1
+  },
+  {
+    t: "In brainstorming, quantity is more important than quality during the initial generation phase. (True/False)",
+    o: ["True", "False"],
+    a: 0
+  },
+  {
+    t: "The recorder in a brainstorming session should judge ideas before writing them down. (True/False)",
+    o: ["True", "False"],
+    a: 1
+  },
+  {
+    t: "The '80-20 Rule' is another name for the Pareto Principle. (True/False)",
+    o: ["True", "False"],
+    a: 0
+  },
+  {
+    t: "A Pareto Diagram is used to prioritize the most significant problems. (True/False)",
+    o: ["True", "False"],
+    a: 0
+  },
+  {
+    t: "The '5 P' categories in a Fishbone Diagram include 'Profit' and 'Promotion'. (True/False)",
+    o: ["True", "False"],
+    a: 1
+  },
+  {
+    t: "High level flowcharts are the most complex type of process maps. (True/False)",
+    o: ["True", "False"],
+    a: 1
+  },
+  {
+    t: "The evaluation phase of brainstorming involves deleting ideas not related to the issue. (True/False)",
+    o: ["True", "False"],
+    a: 0
+  },
+  {
+    t: "In a Pareto Diagram, causes are sorted from lowest to highest frequency. (True/False)",
+    o: ["True", "False"],
+    a: 1
+  }
+];
+
+/* ============ ENGINE ============ */
+let questions, i, correct, wrong, answers, wrongSet, answered;
+let totalTime = 35*60, timeLeft, timerInterval;
+const LETTERS = ['A','B','C','D','E','F'];
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function init(pool) {
+  questions = shuffle([...pool]);
+  i = 0; correct = 0; wrong = 0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = []; answered = 0;
+  timeLeft = totalTime;
+  document.getElementById('totalBadge').textContent = questions.length + ' questions';
+  startTimer();
+  render();
+}
+
+/* TIMER */
+function startTimer() {
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    const m = Math.floor(timeLeft / 60), s = timeLeft % 60;
+    document.getElementById('timerTxt').textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
+    const badge = document.getElementById('timerBadge');
+    if (timeLeft <= 120) { badge.className = 'timer-badge danger'; }
+    else if (timeLeft <= 300) { badge.className = 'timer-badge warn'; }
+    if (timeLeft <= 0) { clearInterval(timerInterval); finish(); }
+  }, 1000);
+}
+
+/* TOP UI */
+function updateTop() {
+  const total = questions.length;
+  document.getElementById('sCorrect').textContent = correct;
+  document.getElementById('sWrong').textContent = wrong;
+  document.getElementById('sRemain').textContent = Math.round(((total - answered) / total) * 100) + '%';
+  document.getElementById('progLabel').textContent = 'Q ' + (i + 1) + ' / ' + total;
+  document.getElementById('progFill').style.width = ((i + 1) / total * 100) + '%';
+  document.getElementById('prog-bar').style.width = ((i + 1) / total * 100) + '%';
+}
+
+/* RENDER QUESTION */
+function render() {
+  updateTop();
+  const q = questions[i];
+  document.getElementById('app').innerHTML = `
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Question ${i + 1} / ${questions.length}</div>
+      </div>
+      <div class="q-text">${q.t}</div>
+      <div class="options">
+        ${q.o.map((o, idx) => `
+          <div class="opt" id="opt${idx}" onclick="choose(${idx})">
+            <div class="opt-letter">${LETTERS[idx] || idx + 1}</div>
+            ${o}
+          </div>
+        `).join('')}
+      </div>
+      <div class="nav-btns">
+        <button class="btn btn-skip" onclick="skip()"><i class="fa-solid fa-forward"></i> Skip</button>
+      </div>
+    </div>`;
+}
+
+/* CHOOSE */
+function choose(v) {
+  if (answers[i] !== null) return;
+  answers[i] = v;
+  answered++;
+  const q = questions[i];
+  const ok = v === q.a;
+  ok ? correct++ : wrong++;
+  updateTop();
+
+  q.o.forEach((_, idx) => {
+    const el = document.getElementById('opt' + idx);
+    el.classList.add('disabled');
+    if (idx === q.a) el.classList.add('correct');
+    else if (idx === v) el.classList.add('wrong');
+  });
+
+  const fb = document.createElement('div');
+  fb.className = 'feedback-bar ' + (ok ? 'ok' : 'no');
+  fb.innerHTML = ok
+    ? `<span class="feedback-icon">🎉</span> <span>  ِشطور جدا ، اللهم بارك </span>`
+    : `<span class="feedback-icon">😔</span> <span>ركز يا سكر </b></span>`;
+
+  const card = document.querySelector('.q-card');
+  card.querySelector('.options').after(fb);
+  if (q.exp) {
+    const exp = document.createElement('div');
+    exp.className = 'explanation';
+    exp.style.display = 'block';
+    exp.innerHTML = '<b>💬 Explanation:</b> ' + q.exp;
+    fb.after(exp);
+  }
+
+  const navBtns = card.querySelector('.nav-btns');
+  navBtns.innerHTML = `<button class="btn btn-next" onclick="next()">
+    ${i < questions.length - 1 ? '<i class="fa-solid fa-arrow-right"></i> Next Question' : '<i class="fa-solid fa-flag-checkered"></i> Finish Exam'}
+  </button>`;
+}
+
+/* SKIP */
+function skip() {
+  if (answers[i] === null) { answers[i] = -1; answered++; wrongSet.push(questions[i]); wrong++; updateTop(); }
+  next();
+}
+
+/* NEXT */
+function next() {
+  if (i < questions.length - 1) { i++; render(); window.scrollTo({top: 0, behavior: 'smooth'}); }
+  else finish();
+}
+
+/* FINISH */
+function finish() {
+  clearInterval(timerInterval);
+  const total = questions.length;
+  const score = Math.round((correct / total) * 100);
+
+  questions.forEach((q, idx) => {
+    if (answers[idx] !== q.a) wrongSet.push({...q, myAns: answers[idx]});
+  });
+  wrongSet = [...new Map(wrongSet.map(q => [q.t, q])).values()];
+
+  let grade, gradeColor;
+  if (score >= 90) { grade = '🥇 Excellent'; gradeColor = 'var(--success)'; }
+  else if (score >= 75) { grade = '🥈 Very Good'; gradeColor = 'var(--accent)'; }
+  else if (score >= 60) { grade = '🥉 Good'; gradeColor = 'var(--warn)'; }
+  else { grade = '📚 Needs Review'; gradeColor = 'var(--danger)'; }
+
+  const circ = 2 * Math.PI * 45;
+  const offset = circ - (score / 100) * circ;
+
+  const reportHTML = questions.map((q, idx) => {
+    const ok = answers[idx] === q.a;
+    return `<div class="report-item ${ok ? 'ok' : 'no'}">
+      <div class="ri-q">${ok ? '✅' : '❌'} ${q.t}</div>
+      ${!ok ? `
+        <div class="ri-row"><span class="ri-badge ri-yours">Your Answer</span> ${answers[idx] >= 0 ? q.o[answers[idx]] : 'Skipped'}</div>
+        <div class="ri-row"><span class="ri-badge ri-right">Correct</span> ${q.o[q.a]}</div>
+      ` : ''}
+    </div>`;
+  }).join('');
+
+  document.getElementById('prog-bar').style.width = '100%';
+  document.getElementById('app').innerHTML = `
+    <div class="result-hero">
+      <div class="score-ring">
+        <svg viewBox="0 0 110 110">
+          <circle class="ring-bg" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="0"/>
+          <circle class="ring-fill" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="${circ}"
+            style="stroke:${gradeColor}" id="ringFill"/>
+        </svg>
+        <div class="score-num">${score}</div>
+        <div class="score-pct">%</div>
+      </div>
+      <div class="result-grade" style="color:${gradeColor}">${grade}</div>
+      <div class="result-sub">Answered ${answered} of ${total} questions</div>
+      <div class="result-stats">
+        <div class="rs"><div class="n" style="color:var(--success)">${correct}</div><div class="l">Correct</div></div>
+        <div class="rs"><div class="n" style="color:var(--danger)">${wrong}</div><div class="l">Wrong</div></div>
+        <div class="rs"><div class="n" style="color:var(--accent)">${total - answered < 0 ? 0 : total - answered}</div><div class="l">Skipped</div></div>
+      </div>
+    </div>
+
+    <div class="result-actions">
+      ${wrongSet.length ? `<button class="btn btn-retry" onclick="retryWrong()"><i class="fa-solid fa-rotate-right"></i> Retry Wrong (${wrongSet.length})</button>` : ''}
+      <button class="btn btn-home" onclick="init(QUESTIONS)"><i class="fa-solid fa-shuffle"></i> New Random Exam</button>
+      <a href="https://gaith-team.github.io/exam/level1/quality-basics/index.html" class="btn btn-home" style="text-decoration:none;"><i class="fa-solid fa-house"></i> Back to Subject</a>
+    </div>
+
+    <div style="margin-top:28px">
+      <div style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text2)">📋 Detailed Report</div>
+      ${reportHTML}
+    </div>`;
+
+  setTimeout(() => { document.getElementById('ringFill').style.strokeDashoffset = offset; }, 100);
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+/* RETRY WRONG */
+function retryWrong() {
+  const pool = [...wrongSet];
+  questions = shuffle(pool); i = 0; correct = 0; wrong = 0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = []; answered = 0; timeLeft = totalTime;
+  startTimer(); render();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+/* THEME */
+const themeBtn = document.getElementById('themeBtn');
+let theme = localStorage.getItem('theme') || 'light';
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', t);
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+
+/* START */
+init(QUESTIONS);
+</script>
+</body>
+</html>
