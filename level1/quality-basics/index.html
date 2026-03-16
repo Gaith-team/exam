@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --accent:             #7c3aed;
+  --accent-light:       #8b5cf6;
+  --accent-dark:        #6d28d9;
+  --accent-glow:        rgba(124,58,237,0.14);
+  --accent-glow-strong: rgba(124,58,237,0.26);
+  --bg:      #f8fafc;
+  --bg2:     #eef2f7;
+  --card:    #ffffff;
+  --text:    #1a2332;
+  --text2:   #4a5568;
+  --text3:   #718096;
+  --border:       rgba(124,58,237,0.18);
+  --border-card:  rgba(0,0,0,0.07);
+  --shadow:       0 4px 20px rgba(0,0,0,0.07);
+  --shadow-hover: 0 8px 32px rgba(124,58,237,0.20);
+  --radius: 16px;
+  --tr: all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="dark"] {
+  --bg:   #0d1117; --bg2: #161b22; --card: #1c2333;
+  --text: #e6edf3; --text2: #b1bac4; --text3: #7d8590;
+  --border:      rgba(139,92,246,0.22);
+  --border-card: rgba(139,92,246,0.10);
+  --shadow:       0 4px 20px rgba(0,0,0,0.4);
+  --shadow-hover: 0 8px 36px rgba(124,58,237,0.26);
+}
+
+body {
+  font-family: 'Cairo', sans-serif;
+  background: var(--bg); color: var(--text);
+  min-height: 100vh; overflow-x: hidden;
+  transition: background .4s, color .4s;
+}
+
+#progress-bar {
+  position: fixed; top: 0; left: 0; height: 3px; z-index: 999;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  width: 0%; transition: width .1s;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 32px; height: 68px;
+  background: rgba(248,250,252,.92); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-card); transition: var(--tr);
+}
+[data-theme="dark"] nav { background: rgba(13,17,23,.94); }
+
+.nav-back {
+  display: flex; align-items: center; gap: 8px;
+  color: var(--text2); text-decoration: none; font-size: 14px; font-weight: 600;
+  padding: 8px 14px; border-radius: 8px;
+  border: 1px solid var(--border-card); background: var(--card);
+  transition: var(--tr);
+}
+.nav-back:hover { color: var(--accent); border-color: var(--border); transform: translateX(3px); }
+
+.nav-brand {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 16px; font-weight: 900; color: var(--text);
+}
+.nav-logo-icon {
+  width: 36px; height: 36px; border-radius: 9px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 13px; font-weight: 900;
+}
+.nav-actions { display: flex; align-items: center; gap: 10px; }
+.theme-toggle {
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 1px solid var(--border-card); background: var(--card);
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  font-size: 16px; transition: var(--tr);
+}
+.theme-toggle:hover { border-color: var(--accent); transform: rotate(20deg); }
+.nav-tg {
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 16px; border-radius: 9px;
+  background: linear-gradient(135deg, #229ED9, #0d7fb5);
+  color: #fff; font-size: 13px; font-weight: 700;
+  text-decoration: none; transition: var(--tr);
+}
+.nav-tg:hover { transform: translateY(-2px); box-shadow: 0 4px 16px rgba(34,158,217,.4); }
+
+/* HERO */
+.hero {
+  padding: 110px 32px 56px;
+  text-align: center; position: relative; overflow: hidden;
+}
+.hero-bg {
+  position: absolute; inset: 0; z-index: 0;
+  background:
+    radial-gradient(ellipse 700px 400px at 50% 0%, rgba(124,58,237,0.08) 0%, transparent 70%),
+    var(--bg);
+}
+[data-theme="dark"] .hero-bg {
+  background:
+    radial-gradient(ellipse 700px 400px at 50% 0%, rgba(124,58,237,0.07) 0%, transparent 70%),
+    var(--bg);
+}
+.hero-inner { position: relative; z-index: 1; max-width: 680px; margin: 0 auto; }
+
+.hero-eyebrow {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 5px 16px; border-radius: 50px;
+  background: rgba(124,58,237,0.10); border: 1px solid var(--border);
+  font-size: 12px; font-weight: 700; color: var(--accent);
+  margin-bottom: 20px; letter-spacing: 1px;
+}
+.hero-icon-wrap {
+  width: 80px; height: 80px; border-radius: 22px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 34px; margin: 0 auto 20px;
+  box-shadow: 0 8px 28px var(--accent-glow-strong);
+}
+.hero-title {
+  font-size: clamp(26px,5vw,42px); font-weight: 900;
+  color: var(--text); line-height: 1.2; margin-bottom: 10px;
+}
+.hero-title em { font-style: normal; color: var(--accent); }
+.hero-desc {
+  font-size: 15px; color: var(--text2); line-height: 1.75; margin-bottom: 28px;
+}
+.hero-stat-row { display: flex; justify-content: center; gap: 32px; flex-wrap: wrap; }
+.hero-stat { text-align: center; }
+.hero-stat-num { font-size: 26px; font-weight: 900; color: var(--accent); }
+.hero-stat-label { font-size: 12px; color: var(--text3); }
+
+/* SEARCH */
+.search-wrap {
+  max-width: 560px; margin: 36px auto 0; position: relative;
+}
+.search-input {
+  width: 100%; padding: 14px 50px 14px 20px;
+  border-radius: 12px; font-size: 15px; font-family: 'Cairo', sans-serif;
+  border: 1.5px solid var(--border-card);
+  background: var(--card); color: var(--text);
+  outline: none; transition: var(--tr);
+}
+.search-input:focus { border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-glow); }
+.search-icon {
+  position: absolute; left: 18px; top: 50%; transform: translateY(-50%);
+  color: var(--text3); font-size: 15px; pointer-events: none;
+}
+
+/* MAIN */
+main { max-width: 1100px; margin: 0 auto; padding: 0 32px 80px; }
+
+.section-label {
+  display: flex; align-items: center; gap: 12px; margin: 44px 0 20px;
+}
+.section-label-line { flex: 1; height: 1px; background: var(--border-card); }
+.section-label-text {
+  font-size: 11px; font-weight: 700; letter-spacing: 2.5px;
+  text-transform: uppercase; color: var(--accent);
+  padding: 4px 14px; border-radius: 50px;
+  background: rgba(124,58,237,0.08); border: 1px solid var(--border);
+  white-space: nowrap;
+}
+
+/* GRID */
+.lectures-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 14px;
+}
+
+/* CARD */
+.lecture-card {
+  background: var(--card); border: 1px solid var(--border-card);
+  border-radius: var(--radius); overflow: hidden; transition: var(--tr); cursor: pointer;
+}
+.lecture-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--border);
+}
+.lecture-card.open {
+  border-color: var(--accent);
+  box-shadow: 0 0 0 2px var(--accent-glow), var(--shadow-hover);
+}
+
+.lecture-header {
+  display: flex; align-items: center; gap: 14px;
+  padding: 18px; user-select: none;
+}
+.lecture-num {
+  width: 32px; height: 32px; border-radius: 8px; flex-shrink: 0;
+  background: rgba(124,58,237,0.10);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 700; color: var(--accent);
+}
+.lecture-icon {
+  width: 42px; height: 42px; border-radius: 11px; flex-shrink: 0;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px; color: #fff;
+  box-shadow: 0 3px 10px var(--accent-glow-strong);
+}
+.lecture-info { flex: 1; min-width: 0; }
+.lecture-title { font-size: 14px; font-weight: 700; color: var(--text); line-height: 1.4; margin-bottom: 3px; }
+.lecture-sub { font-size: 11px; color: var(--text3); }
+
+.lecture-chevron {
+  font-size: 12px; color: var(--text3); transition: transform .3s; flex-shrink: 0;
+}
+.lecture-card.open .lecture-chevron { transform: rotate(180deg); color: var(--accent); }
+
+.lecture-body {
+  max-height: 0; overflow: hidden;
+  transition: max-height .4s cubic-bezier(.4,0,.2,1), padding .3s;
+  padding: 0 18px;
+}
+.lecture-card.open .lecture-body { max-height: 120px; padding: 0 18px 18px; }
+
+.lecture-btn {
+  display: flex; align-items: center; justify-content: center; gap: 8px;
+  width: 100%; padding: 12px; border-radius: 10px;
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  color: #fff; font-size: 14px; font-weight: 700;
+  text-decoration: none; transition: var(--tr);
+  border: none; cursor: pointer; font-family: 'Cairo', sans-serif;
+}
+.lecture-btn:hover { transform: scale(1.02); box-shadow: 0 4px 16px var(--accent-glow-strong); }
+
+/* EMPTY */
+.empty-state { text-align: center; padding: 60px 20px; display: none; }
+.empty-state i { font-size: 40px; color: var(--text3); margin-bottom: 12px; display: block; }
+.empty-state p { color: var(--text3); font-size: 15px; }
+
+/* FOOTER */
+footer {
+  background: var(--bg2); border-top: 1px solid var(--border-card);
+  padding: 28px 32px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 12px;
+}
+.footer-brand { font-size: 14px; font-weight: 700; color: var(--text); }
+.footer-brand span { color: var(--accent); }
+.footer-copy { font-size: 12px; color: var(--text3); }
+.footer-tg {
+  display: flex; align-items: center; gap: 5px;
+  text-decoration: none; color: #229ED9; font-size: 12px; font-weight: 600;
+}
+
+@media (max-width: 640px) {
+  nav { padding: 0 16px; }
+  .hero { padding: 90px 16px 40px; }
+  main { padding: 0 16px 60px; }
+  .hero-stat-row { gap: 20px; }
+  footer { padding: 20px 16px; }
+  .nav-brand span { display: none; }
+  .lectures-grid { grid-template-columns: 1fr; }
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<nav>
+  <a href="https://gaith-team.github.io/exam/" class="nav-back">
+    <i class="fa-solid fa-arrow-right"></i> رجوع
+  </a>
+  <div class="nav-brand">
+    <div class="nav-logo-icon">GT</div>
+    <span>GHAITH TEAM</span>
+  </div>
+  <div class="nav-actions">
+    <button class="theme-toggle" id="themeBtn">🌙</button>
+    <a href="https://t.me/nursing2bu" target="_blank" class="nav-tg">
+      <i class="fa-brands fa-telegram"></i> تليجرام
+    </a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-inner">
+    <div class="hero-eyebrow">⭐ Quality & Safety Basics</div>
+    <div class="hero-icon-wrap">⭐</div>
+    <h1 class="hero-title">أساسيات <em>الجودة</em> والسلامة</h1>
+    <p class="hero-desc">
+      من مفاهيم الجودة وأبعادها إلى الاعتماد والمعايير الدولية والتدقيق التمريضي وسلامة المريض
+    </p>
+    <div class="hero-stat-row">
+      <div class="hero-stat">
+        <div class="hero-stat-num">9</div>
+        <div class="hero-stat-label">محاضرة</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">🆓</div>
+        <div class="hero-stat-label">مجاني</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">📱</div>
+        <div class="hero-stat-label">كل الأجهزة</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<main>
+  <div class="search-wrap">
+    <input type="text" class="search-input" placeholder="🔍  ابحث عن محاضرة..." id="searchInput" />
+    <i class="fa-solid fa-magnifying-glass search-icon"></i>
+  </div>
+
+  <div class="section-label">
+    <div class="section-label-line"></div>
+    <div class="section-label-text">LECTURES — المحاضرات</div>
+    <div class="section-label-line"></div>
+  </div>
+
+  <div class="lectures-grid" id="lecturesGrid"></div>
+  <div class="empty-state" id="emptyState">
+    <i class="fa-solid fa-magnifying-glass"></i>
+    <p>لم يتم العثور على محاضرات مطابقة</p>
+  </div>
+</main>
+
+<footer>
+  <div class="footer-brand">GAITH <span>TEAM</span></div>
+  <div class="footer-copy">© 2025 — أساسيات الجودة والسلامة</div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg">
+    <i class="fa-brands fa-telegram"></i> @nursing2bu
+  </a>
+</footer>
+
+<script>
+const lectures = [
+  {
+    name: "Overview about Quality of Health Care",
+    sub:  "نظرة عامة على جودة الرعاية الصحية",
+    icon: "fa-star"
+  },
+  {
+    name: "Quality Dimensions",
+    sub:  "أبعاد الجودة في الرعاية الصحية",
+    icon: "fa-layer-group"
+  },
+  {
+    name: "Accreditation and Certification",
+    sub:  "الاعتماد والشهادات المؤسسية",
+    icon: "fa-certificate"
+  },
+  {
+    name: "Standards and ISO",
+    sub:  "المعايير والمواصفات الدولية ISO",
+    icon: "fa-globe"
+  },
+  {
+    name: "Nursing Audit",
+    sub:  "التدقيق التمريضي",
+    icon: "fa-magnifying-glass-chart"
+  },
+  {
+    name: "Basic Tools for Quality",
+    sub:  "الأدوات الأساسية لضبط الجودة",
+    icon: "fa-screwdriver-wrench"
+  },
+  {
+    name: "Patient Safety",
+    sub:  "سلامة المرضى والوقاية من الأخطاء",
+    icon: "fa-shield-halved"
+  },
+  {
+    name: "Improving the Safety and Quality of Care Transitions",
+    sub:  "تحسين الجودة والسلامة في انتقالات الرعاية",
+    icon: "fa-arrow-right-arrow-left"
+  },
+  {
+    name: "Assessing and Monitoring the Quality of Care",
+    sub:  "تقييم ومراقبة جودة الرعاية الصحية",
+    icon: "fa-chart-line"
+  }
+];
+
+const grid = document.getElementById('lecturesGrid');
+
+function buildCards(list) {
+  grid.innerHTML = '';
+  list.forEach(lec => {
+    const realIdx = lectures.indexOf(lec);
+    const card = document.createElement('div');
+    card.className = 'lecture-card';
+    card.innerHTML = `
+      <div class="lecture-header" onclick="toggleCard(this.parentElement)">
+        <div class="lecture-num">${String(realIdx + 1).padStart(2,'0')}</div>
+        <div class="lecture-icon"><i class="fa-solid ${lec.icon}"></i></div>
+        <div class="lecture-info">
+          <div class="lecture-title">${lec.name}</div>
+          <div class="lecture-sub">${lec.sub}</div>
+        </div>
+        <i class="fa-solid fa-chevron-down lecture-chevron"></i>
+      </div>
+      <div class="lecture-body">
+        <a href="questions${realIdx + 1}.html" class="lecture-btn">
+          <i class="fa-solid fa-rocket"></i> إبدأ الأسئلة
+        </a>
+      </div>
+    `;
+    grid.appendChild(card);
+  });
+}
+
+buildCards(lectures);
+
+function toggleCard(card) {
+  const isOpen = card.classList.contains('open');
+  document.querySelectorAll('.lecture-card.open').forEach(c => c.classList.remove('open'));
+  if (!isOpen) card.classList.add('open');
+}
+
+// SEARCH
+document.getElementById('searchInput').addEventListener('input', function () {
+  const q = this.value.trim().toLowerCase();
+  const filtered = q
+    ? lectures.filter(l =>
+        l.name.toLowerCase().includes(q) || l.sub.includes(q)
+      )
+    : lectures;
+  buildCards(filtered);
+  const empty = document.getElementById('emptyState');
+  empty.style.display = filtered.length === 0 ? 'block' : 'none';
+  grid.style.display  = filtered.length === 0 ? 'none'  : 'grid';
+});
+
+// THEME
+const btn = document.getElementById('themeBtn');
+let theme = localStorage.getItem('theme') || 'light';
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  btn.textContent = t === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', t);
+}
+applyTheme(theme);
+btn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+
+// PROGRESS BAR
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+  bar.style.width = Math.min(pct, 100) + '%';
+});
+</script>
+</body>
+</html>
