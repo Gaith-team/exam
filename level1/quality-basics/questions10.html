@@ -1,0 +1,722 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --accent:       #7c3aed;
+  --accent-light: #8b5cf6;
+  --accent-dark:  #6d28d9;
+  --accent-glow:  rgba(124,58,237,0.18);
+  --bg:      #f8fafc;
+  --bg2:     #eef2f7;
+  --card:    #ffffff;
+  --text:    #1a2332;
+  --text2:   #4a5568;
+  --text3:   #718096;
+  --bc:      rgba(0,0,0,0.07);
+  --success: #16a34a;
+  --danger:  #dc2626;
+  --warn:    #d97706;
+  --r:       16px;
+  --tr:      all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="dark"] {
+  --bg:   #0d1117; --bg2: #161b22; --card: #1c2333;
+  --text: #e6edf3; --text2: #b1bac4; --text3: #7d8590;
+  --bc:   rgba(255,255,255,0.08);
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg); color: var(--text);
+  min-height: 100vh; overflow-x: hidden;
+  transition: background .4s, color .4s;
+}
+
+/* PROGRESS TOP */
+#prog-bar {
+  position: fixed; top: 0; left: 0; height: 3px; z-index: 999;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  transition: width .2s;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px; height: 64px;
+  background: rgba(248,250,252,.93); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--bc); transition: var(--tr);
+}
+[data-theme="dark"] nav { background: rgba(13,17,23,.95); }
+
+.nav-back {
+  display: flex; align-items: center; gap: 7px;
+  color: var(--text2); text-decoration: none; font-size: 13px; font-weight: 700;
+  padding: 7px 13px; border-radius: 8px; border: 1px solid var(--bc);
+  background: var(--card); transition: var(--tr);
+}
+.nav-back:hover { color: var(--accent); border-color: var(--accent-glow); transform: translateX(3px); }
+.nav-brand { display: flex; align-items: center; gap: 9px; font-size: 15px; font-weight: 900; color: var(--text); }
+.nav-logo-icon {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 12px; font-weight: 900;
+}
+.nav-right { display: flex; align-items: center; gap: 8px; }
+.theme-btn {
+  width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--bc);
+  background: var(--card); cursor: pointer; font-size: 15px;
+  display: flex; align-items: center; justify-content: center; transition: var(--tr);
+}
+.theme-btn:hover { border-color: var(--accent); transform: rotate(20deg); }
+
+/* HERO BAND */
+.hero-band {
+  margin-top: 64px;
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent), var(--accent-light));
+  padding: 40px 24px 36px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.hero-band::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 600px 200px at 50% 100%, rgba(255,255,255,.12) 0%, transparent 70%);
+}
+.hero-band-icon {
+  width: 68px; height: 68px; border-radius: 20px;
+  background: rgba(255,255,255,.2); backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 30px; margin: 0 auto 14px; border: 1.5px solid rgba(255,255,255,.35);
+}
+.hero-band h1 { font-size: clamp(20px,4vw,30px); font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero-band p { font-size: 13px; color: rgba(255,255,255,.8); }
+.hero-band-meta {
+  display: flex; justify-content: center; gap: 24px; margin-top: 20px;
+  flex-wrap: wrap;
+}
+.meta-pill {
+  background: rgba(255,255,255,.18); backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,.3); border-radius: 50px;
+  padding: 6px 16px; font-size: 12px; font-weight: 700; color: #fff;
+  display: flex; align-items: center; gap: 6px;
+}
+
+/* EXAM SHELL */
+.shell { max-width: 560px; margin: 0 auto; padding: 24px 20px 80px; }
+
+/* STATS ROW */
+.stats-row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 16px;
+}
+.stat-box {
+  background: var(--card); border: 1px solid var(--bc); border-radius: var(--r);
+  padding: 12px 10px; text-align: center;
+}
+.stat-box .val { font-size: 20px; font-weight: 900; }
+.stat-box .lbl { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.stat-correct { color: var(--success); }
+.stat-wrong   { color: var(--danger); }
+.stat-remain  { color: var(--accent); }
+
+/* PROGRESS STRIP */
+.prog-strip {
+  background: var(--card); border: 1px solid var(--bc); border-radius: var(--r);
+  padding: 14px 16px; margin-bottom: 16px;
+  display: flex; align-items: center; gap: 14px;
+}
+.prog-label { font-size: 13px; font-weight: 700; color: var(--text2); white-space: nowrap; }
+.prog-track { flex: 1; height: 8px; background: var(--bg2); border-radius: 8px; overflow: hidden; }
+.prog-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  border-radius: 8px; transition: width .4s;
+}
+.timer-badge {
+  min-width: 64px; height: 36px; border-radius: 18px;
+  background: var(--bg2); border: 1px solid var(--bc);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 900; color: var(--text);
+  gap: 5px; padding: 0 12px; flex-shrink: 0;
+}
+.timer-badge.warn { color: var(--warn); border-color: rgba(217,119,6,.3); background: rgba(217,119,6,.08); }
+.timer-badge.danger { color: var(--danger); border-color: rgba(220,38,38,.3); background: rgba(220,38,38,.08); animation: pulse .8s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.6} }
+
+/* QUESTION CARD */
+.q-card {
+  background: var(--card); border: 1px solid var(--bc);
+  border-radius: 20px; overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+  transition: box-shadow .3s;
+}
+.q-header {
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  padding: 4px 18px 4px;
+  display: flex; align-items: center; gap: 8px;
+}
+.q-num {
+  background: rgba(255,255,255,.2); border-radius: 8px;
+  padding: 3px 10px; font-size: 11px; font-weight: 700; color: #fff;
+}
+.q-text {
+  padding: 22px 18px 14px; font-size: 15px; font-weight: 700; color: var(--text);
+  line-height: 1.65; border-bottom: 1px solid var(--bc);
+  text-align: left; direction: ltr;
+}
+.options { padding: 14px 18px 18px; display: flex; flex-direction: column; gap: 10px; }
+
+/* OPTION */
+.opt {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px; border-radius: 12px;
+  border: 1.5px solid var(--bc); background: var(--bg);
+  cursor: pointer; font-size: 14px; font-weight: 600; color: var(--text);
+  transition: var(--tr); user-select: none;
+  direction: ltr; text-align: left;
+}
+.opt:hover:not(.disabled) {
+  border-color: var(--accent); background: var(--accent-glow);
+  transform: translateX(3px);
+}
+.opt-letter {
+  width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+  background: var(--bg2); border: 1px solid var(--bc);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 900; color: var(--text3);
+  transition: var(--tr);
+}
+.opt.correct {
+  border-color: var(--success); background: rgba(22,163,74,.08);
+}
+.opt.correct .opt-letter {
+  background: var(--success); color: #fff; border-color: var(--success);
+}
+.opt.wrong {
+  border-color: var(--danger); background: rgba(220,38,38,.07);
+}
+.opt.wrong .opt-letter {
+  background: var(--danger); color: #fff; border-color: var(--danger);
+}
+.opt.disabled { pointer-events: none; }
+
+/* FEEDBACK */
+.feedback-bar {
+  margin: 14px 18px; padding: 12px 16px; border-radius: 12px;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px; font-weight: 700;
+  animation: popIn .4s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes popIn { from{transform:scale(.8);opacity:0} to{transform:scale(1);opacity:1} }
+.feedback-bar.ok { background: rgba(22,163,74,.1); color: var(--success); border: 1px solid rgba(22,163,74,.25); }
+.feedback-bar.no { background: rgba(220,38,38,.08); color: var(--danger); border: 1px solid rgba(220,38,38,.2); }
+.feedback-icon { font-size: 20px; }
+
+/* EXPLANATION */
+.explanation {
+  margin: 0 18px 14px; padding: 12px 14px;
+  background: rgba(var(--accent-rgb),.06);
+  border-radius: 10px; border-right: 3px solid var(--accent);
+  font-size: 13px; color: var(--text2); line-height: 1.6;
+  display: none;
+}
+
+/* NAV BTNS */
+.nav-btns { padding: 4px 18px 18px; display: flex; gap: 10px; }
+.btn {
+  flex: 1; padding: 13px; border: none; border-radius: 12px;
+  font-size: 14px; font-weight: 900; cursor: pointer;
+  font-family: 'Outfit', sans-serif; transition: var(--tr);
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+}
+.btn-next {
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  color: #fff; box-shadow: 0 4px 14px var(--accent-glow);
+}
+.btn-next:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
+.btn-skip {
+  background: var(--bg2); color: var(--text2); border: 1px solid var(--bc); flex: 0 0 auto; padding: 13px 18px;
+}
+.btn-skip:hover { border-color: var(--warn); color: var(--warn); }
+
+/* ===== RESULTS ===== */
+.result-hero {
+  text-align: center; padding: 36px 20px 28px;
+  background: var(--card); border-radius: 20px;
+  border: 1px solid var(--bc); margin-bottom: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+}
+.score-ring {
+  width: 110px; height: 110px; border-radius: 50%; margin: 0 auto 18px;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; border: 5px solid var(--bg2);
+  position: relative;
+}
+.score-ring svg { position: absolute; inset: -5px; width: calc(100% + 10px); height: calc(100% + 10px); transform: rotate(-90deg); }
+.score-ring circle { fill: none; stroke-width: 5; stroke-linecap: round; }
+.ring-bg { stroke: var(--bg2); }
+.ring-fill { stroke: var(--accent); transition: stroke-dashoffset 1s ease; }
+.score-num { font-size: 28px; font-weight: 900; color: var(--text); }
+.score-pct { font-size: 12px; color: var(--text3); }
+.result-grade { font-size: 22px; font-weight: 900; margin-bottom: 6px; }
+.result-sub { font-size: 14px; color: var(--text2); }
+.result-stats {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 20px;
+}
+.rs { background: var(--bg2); border-radius: 10px; padding: 12px 8px; text-align: center; }
+.rs .n { font-size: 20px; font-weight: 900; }
+.rs .l { font-size: 11px; color: var(--text3); }
+
+/* REPORT ITEMS */
+.report-item {
+  background: var(--card); border: 1px solid var(--bc); border-radius: 14px;
+  padding: 16px; margin-bottom: 10px; border-right: 4px solid var(--bc);
+}
+.report-item.ok { border-right-color: var(--success); }
+.report-item.no { border-right-color: var(--danger); }
+.report-item .ri-q { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+.report-item .ri-row {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; margin-top: 5px; color: var(--text2);
+}
+.ri-badge {
+  padding: 2px 8px; border-radius: 6px; font-weight: 700; font-size: 11px; flex-shrink: 0;
+}
+.ri-yours { background: rgba(220,38,38,.1); color: var(--danger); }
+.ri-right { background: rgba(22,163,74,.1); color: var(--success); }
+
+.result-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+.btn-retry { background: linear-gradient(135deg, var(--accent-dark), var(--accent)); color: #fff; }
+.btn-retry:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
+.btn-home { background: var(--bg2); color: var(--text); border: 1px solid var(--bc); }
+.btn-home:hover { border-color: var(--accent); color: var(--accent); }
+
+/* FOOTER */
+footer {
+  background: var(--bg2); border-top: 1px solid var(--bc);
+  padding: 22px 24px; display: flex; align-items: center;
+  justify-content: space-between; flex-wrap: wrap; gap: 10px;
+}
+.footer-brand { font-size: 14px; font-weight: 700; }
+.footer-brand span { color: var(--accent); }
+.footer-tg { display: flex; align-items: center; gap: 5px; text-decoration: none; color: #229ED9; font-size: 12px; font-weight: 600; }
+
+@media (max-width: 480px) {
+  nav { padding: 0 14px; }
+  .shell { padding: 16px 14px 60px; }
+  .nav-brand span { display: none; }
+  .hero-band { padding: 30px 16px 28px; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog-bar" style="width:0%"></div>
+
+<nav>
+  <a href="https://gaith-team.github.io/exam/level1/quality-basics/index.html" class="nav-back"><i class="fa-solid fa-arrow-right"></i> Back</a>
+  <div class="nav-brand">
+    <div class="nav-logo-icon">GT</div>
+    <span>GHAITH TEAM</span>
+  </div>
+  <div class="nav-right">
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<div class="hero-band">
+  <div class="hero-band-icon">⭐</div>
+  <h1>أساسيات الجودة والسلامة</h1>
+  <p>مراجعة الميدترم من  غيث </p>
+  <div class="hero-band-meta">
+    <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">-- Questions</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-clock"></i> 35 Min</div>
+    <div class="meta-pill"><i class="fa-solid fa-shuffle"></i> Shuffled</div>
+  </div>
+</div>
+
+<div class="shell">
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="val stat-correct" id="sCorrect">0</div>
+      <div class="lbl">✔ Correct</div>
+    </div>
+    <div class="stat-box">
+      <div class="val stat-wrong" id="sWrong">0</div>
+      <div class="lbl">✖ Wrong</div>
+    </div>
+    <div class="stat-box">
+      <div class="val stat-remain" id="sRemain">--%</div>
+      <div class="lbl">⏳ Remaining</div>
+    </div>
+  </div>
+
+  <!-- PROGRESS STRIP -->
+  <div class="prog-strip">
+    <div class="prog-label" id="progLabel">Q 1</div>
+    <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+    <div class="timer-badge" id="timerBadge"><i class="fa-regular fa-clock"></i> <span id="timerTxt">60:00</span></div>
+  </div>
+
+  <!-- APP -->
+  <div id="app"></div>
+</div>
+
+<footer>
+  <div class="footer-brand">GHAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg">
+    <i class="fa-brands fa-telegram"></i> @nursing2bu
+  </a>
+</footer>
+
+<script>
+const QUESTIONS = [
+  {t:"How is quality of health care defined in the lecture?",o:["The number of physicians per 1,000 population","The degree to which health services increase the likelihood of desired health outcomes based on evidence-based professional knowledge","The total budget allocated to health facilities","The ratio of nurses to hospital beds"],a:1,exp:"Quality of health care is defined as the degree to which health services for individuals and populations increase the likelihood of desired health outcomes, based on evidence-based professional knowledge."},
+  {t:"In the 1970s and 1980s, the majority of national health programs in developing countries focused mainly on:",o:["The qualitative aspects of care","The quantitative aspects of care — establishing facilities and increasing trained human resources","Patient satisfaction surveys","Quality accreditation"],a:1,exp:"In the 1970s and 1980s, almost all efforts and resources in developing countries were directed towards establishing health care facilities and increasing the supply of trained human resources."},
+  {t:"Which of the following is a key pillar of health care quality mentioned in the lecture?",o:["Profitability","Equity","Competitiveness","Market share"],a:1,exp:"Key pillars of quality include safety, timeliness, efficiency, equity, and patient-centeredness."},
+  {t:"Quality is generally defined as the degree to which inherent characteristics of a product or service fulfill:",o:["Government regulations only","Customer requirements, needs, or expectations","Internal audit criteria","Employee targets"],a:1,exp:"Quality is defined as the degree to which a set of inherent characteristics of a product, service, or process fulfills requirements, customer needs, or expectations."},
+  {t:"How many principles of quality management are listed in the lecture content?",o:["5","6","7","8"],a:2,exp:"There are 7 principles of quality management according to the lecture."},
+  {t:"What is the FIRST phase in the historical development of the quality concept?",o:["Total Quality Management","Quality Assurance","Quality Control","Quality Inspection"],a:3,exp:"The four phases are: Quality Inspection → Quality Control → Quality Assurance → TQM."},
+  {t:"Quality Inspection detects errors:",o:["Before they occur","After they occur, by examining the final product","During production continuously","Through employee self-assessment"],a:1,exp:"Quality Inspection depends on investigating the final product; defective items are identified and removed — errors are detected after their occurrence."},
+  {t:"Quality Control aims to reduce defects by:",o:["Eliminating all errors permanently","Establishing standards so service features stay within control limits","Training employees only","Conducting patient satisfaction surveys"],a:1,exp:"Quality Control aims at reducing the percent of defects and depends on the establishment of standards so that service and product features are kept within upper and lower control limits."},
+  {t:"Quality Assurance (QA) is best described as:",o:["Inspecting the final product for defects","Any formal and systematic program to identify problems in health care delivery and design activities to overcome them","A financial auditing process","Accreditation by an external body"],a:1,exp:"QA refers to any formal and systematic program to identify problems in health care delivery and design and implement activities to overcome these problems."},
+  {t:"Quality Assurance in nursing specifically ensures:",o:["Higher nurse salaries","Adherence to quality standards as mandated by nursing regulatory bodies","Faster patient discharge","Reduced hospital costs"],a:1,exp:"Quality assurance in nursing is ensuring adherence to quality standards as mandated by nursing regulatory bodies."},
+  {t:"TQM is best described as:",o:["A statistical tool for counting defects","A management philosophy emphasizing commitment to excellence throughout the organization","A government inspection program","A financial management system"],a:1,exp:"TQM is a management philosophy that emphasizes a commitment to excellence throughout the organization."},
+  {t:"Which of the following is NOT a principle of TQM?",o:["Focusing on customer satisfaction","Commitment by top management","Involving every member of the organization","Relying solely on executive-level decisions"],a:3,exp:"TQM requires every member of the organization to be consulted and involved — it is not limited to executive-level decisions."},
+  {t:"Key dimensions of quality health care include all of the following EXCEPT:",o:["Effectiveness","Safety","Profitability","Equity"],a:2,exp:"Key dimensions include effectiveness, safety, patient-centeredness, timeliness, efficiency, and equity — not profitability."},
+  {t:"A stakeholder is defined as:",o:["Only the patient receiving care","A person, group, organization, or system that affects and can be affected by an organizational action","Only the hospital's governing board","Only external suppliers"],a:1,exp:"A stakeholder is a person, group, organization or system who affects and can be affected by an organizational action."},
+  {t:"Internal stakeholders in a hospital typically include:",o:["Government regulators and insurers","Management, professional and non-professional staff","Patients and their families","Suppliers and competitors"],a:1,exp:"Internal stakeholders almost entirely within the organization typically include management, professional and non-professional staff."},
+  {t:"External stakeholders fall into three categories. Which of the following is NOT one of them?",o:["Those that provide inputs to the organization","Those that compete with it","Those with a particular special interest","The hospital's internal clinical leaders"],a:3,exp:"External stakeholders are categorized as those providing inputs, those competing with the organization, and those with special interests. Internal clinical leaders are internal stakeholders."},
+  {t:"Who bears the ultimate legal accountability for ensuring safe, quality care in a hospital?",o:["The nursing staff","The quality management department","The governing board and executive management","The accreditation body"],a:2,exp:"The governing board and executives are held legally accountable for ensuring safe, quality care and adherence to regulatory standards."},
+  {t:"The Quality Management Department is responsible for:",o:["Directly treating patients","Monitoring performance, establishing policies, and enforcing accreditation standards","Managing the hospital's finances","Hiring and firing staff"],a:1,exp:"The Quality Management Department is responsible for monitoring performance, establishing policies, and enforcing accreditation standards."},
+  {t:"Components of high-quality health care include:",o:["High professionalism, efficient resource use, and minimal patient risk","Lowest possible cost and fastest discharge","Maximum number of patients treated","Modern building design"],a:0,exp:"Components of high-quality health care: a high level of professionalism, efficiency in the use of resources, and minimal risk to the patient."},
+  {t:"In Garvin's Eight Dimensions, 'Reliability' refers to:",o:["How long the product lasts","The likelihood that a product will NOT fail within a specified time period","How quickly a product can be repaired","The product's visual appeal"],a:1,exp:"Reliability is the likelihood that a product will not fail within a specified time period."},
+  {t:"'Aesthetics' in Garvin's dimensions refers to:",o:["How long the product lasts","How a product looks, feels, sounds, tastes, or smells","The speed of repair","Conformance to specifications"],a:1,exp:"Aesthetics refers to how a product looks, feels, sounds, tastes, or smells."},
+  {t:"'Perceived Quality' in Garvin's model is best described as:",o:["Objective measurement of defect rates","Subjective reputation or brand image of the product","The product's primary operating characteristics","Conformance to pre-set standards"],a:1,exp:"Perceived Quality is the subjective reputation or image of the product (brand image)."},
+  {t:"Juran's Trilogy consists of:",o:["Inspection, Control, and Improvement","Planning, Control, and Improvement","Planning, Implementation, and Evaluation","Prevention, Detection, and Correction"],a:1,exp:"Juran's Trilogy or Quality Management Trilogy consists of Quality Planning, Quality Control, and Quality Improvement."},
+  {t:"Quality Planning in Juran's Trilogy is the responsibility of:",o:["All frontline employees","Top-level management","The accreditation committee","External stakeholders"],a:1,exp:"Quality Planning is the responsibility of top-level management."},
+  {t:"Quality Control in Juran's Trilogy is the responsibility of:",o:["Top management only","All employees","External auditors","The nursing department only"],a:1,exp:"Quality Control deals with the execution of plans and is the responsibility of all employees."},
+  {t:"Which of the following is a principle for improving quality?",o:["Blame culture","Transparency, ethical practice, and evidence-based practice","Secrecy and information hoarding","Individual decision-making without data"],a:1,exp:"Principles of improving quality include transparency, ethical practice (professionalism), evidence-based practice, from blame to improvement (culture), accountability, information sharing, and sustainability."},
+  {t:"The basic aims of quality improvement include all of the following EXCEPT:",o:["Increased client satisfaction","Improved service quality","Reduced cure rate","Improved health — reduced morbidity and mortality"],a:2,exp:"Basic aims of quality improvement include improved service quality, increased client satisfaction, increased loyalty, increased utilization, increased revenue, increased cure rate, and improved health."},
+  {t:"Most quality improvement models share which common format?",o:["Identify problem → measure performance → cause analysis → develop strategy → measure effect → modify or maintain","Hire staff → purchase equipment → inspect output → celebrate success","Survey patients → fire poor performers → rebuild system","Set budget → allocate resources → report results"],a:0,exp:"Most QI models share: Identify the problem, measure current performance, perform cause analysis, develop and implement an improvement strategy, measure the effect, and modify/maintain/spread the intervention."},
+  {t:"The Donabedian model provides a framework for:",o:["Calculating hospital costs","Examining health services and evaluating quality of health care","Designing hospital buildings","Training medical staff"],a:1,exp:"The Donabedian model is a conceptual model that provides a framework for examining health services and evaluating quality of health care."},
+  {t:"'Structure' in the Donabedian model includes:",o:["Complications and adverse events","Human resources, equipment, facilities, and organizational structures","Patient satisfaction ratings","Clinical procedures and care delivery processes"],a:1,exp:"Structure includes evidence of the organization's ability to provide care: human resources (numbers, qualifications), equipment, facilities, and organizational structures."},
+  {t:"'Process' in the Donabedian model refers to:",o:["The results of care","The procedures, methods, and steps for providing or delivering care","Staff credentials and physical resources","Patient outcomes and satisfaction"],a:1,exp:"Process refers to the procedures, methods, means, or sequence of steps for providing or delivering care and producing outcomes."},
+  {t:"Clinical Outcomes in the Donabedian model include:",o:["Number of staff on duty","Short-term results such as complications, adverse events, mortality, and long-term health status","The physical layout of wards","Hospital accreditation status"],a:1,exp:"Clinical Outcomes include short-term results (complications, adverse events, mortality), long-term health status (e.g., ADL), and perceived outcomes (patient/family satisfaction)."},
+  {t:"What does the acronym PDCA stand for?",o:["Plan, Deploy, Control, Assess","Plan, Do, Check, Act","Prepare, Design, Confirm, Apply","Process, Develop, Check, Analyze"],a:1,exp:"PDCA stands for Plan, Do, Check, Act — a quality improvement cycle."},
+  {t:"In the PDCA cycle, what happens in the 'Act' phase?",o:["Data is collected to evaluate effectiveness","Standards for health care services are developed","Areas for improvement are identified and the improvement is fully implemented or the cycle is reworked","Quality of care results are checked"],a:2,exp:"In the Act phase: identify areas to be improved and either fully implement the improvement or rework the PDCA cycle."},
+  {t:"Six Sigma is described as:",o:["A hospital accreditation program","A statistical measure and systematic philosophy to solve quality problems","A nurse scheduling system","A financial reporting tool"],a:1,exp:"Six Sigma is a statistical measure and a philosophy, a systematic way of thinking to solve quality problems."},
+  {t:"Which company originated Six Sigma?",o:["Toyota","General Electric","Motorola","IBM"],a:2,exp:"Motorola is the originator of Six Sigma."},
+  {t:"The Six Sigma standard is defined as:",o:["Zero defects absolutely","3.4 defects per million","10 defects per thousand","100 defects per million"],a:1,exp:"The Six Sigma standard is 3.4 problems per million."},
+  {t:"What does the 'F' in FOCUS-PDCA stand for?",o:["Fix a problem immediately","Find a process that needs improvement","Form a quality committee","Follow existing protocols"],a:1,exp:"F in FOCUS stands for: Find a process that needs improvements."},
+  {t:"Accreditation in health care is defined as:",o:["A government-issued operating license","Recognition from non-governmental agencies that an organization has achieved pre-determined standards","An internal hospital audit process","A financial rating by insurance companies"],a:1,exp:"Accreditations are recognitions from non-governmental agencies that an organization has achieved pre-determined standards."},
+  {t:"Certification is best described as:",o:["Self-declaration by the organization","Provision by an independent body of written assurance that a product, service, or system meets specific requirements","Approval by the hospital's governing board","Informal peer review"],a:1,exp:"Certification is the provision by an independent body of written assurance (a certificate) that the product, service or system meets specific requirements."},
+  {t:"Accreditation is formally declared by:",o:["The hospital itself","A neutral third party","The national government","The hospital's patients"],a:1,exp:"Accreditation is the formal declaration by a neutral third party that the certification program is administered in a way that meets relevant norms or standards."},
+  {t:"Which of the following is a PURPOSE of accreditation?",o:["To punish underperforming hospitals","To encourage organizational improvement and build positive public relations","To set hospital pricing","To replace government regulation"],a:1,exp:"Purposes of accreditation: encourage and facilitate organization improvement, foster stakeholder involvement, build positive public relations, provide evidence of meeting standards, and prove accountability."},
+  {t:"The word 'ISO' is derived from the Greek word:",o:["isakos","isotope","isos — meaning 'equal'","isogen"],a:2,exp:"ISO is derived from the Greek word 'isos', which means 'equal'."},
+  {t:"ISO is:",o:["A United Nations agency","An independent, non-governmental organization that develops and publishes international standards","A government body that enforces health regulations","A for-profit certification company"],a:1,exp:"ISO is an independent, non-governmental organization that develops and publishes International Standards."},
+  {t:"International Standards from ISO ensure:",o:["Uniformity of government policies","Quality, safety, and efficiency for products, services, and systems","Minimum wage standards","Political alignment between countries"],a:1,exp:"International Standards give world-class specifications for products, services and systems to ensure quality, safety and efficiency."},
+  {t:"A standard in health care is defined as:",o:["A financial target set by hospital administration","A descriptive professional statement of desired or agreed level of performance against which actual quality of care can be judged","A patient's personal treatment preferences","A law enforced by the government"],a:1,exp:"A standard is a descriptive professional statement of desired or agreed level of performance (established as a rule) against which the actual quality of care (structure, process and outcome) can be judged. It must be observable, achievable and measurable."},
+  {t:"In the RUMBA criteria for good standards, what does 'M' stand for?",o:["Mandatory","Motivating","Measurable","Manageable"],a:2,exp:"M in RUMBA stands for Measurable — achieved by designing clear criteria."},
+  {t:"In the RUMBA criteria, 'R' stands for:",o:["Responsible","Reliable","Relevant","Realistic"],a:2,exp:"R stands for Relevant — real and appropriate with regard to universal standards, the unit, and the intervention being standardized."},
+  {t:"In the RUMBA criteria, 'A' stands for:",o:["Accurate","Applicable","Attainable","Accountable"],a:2,exp:"A stands for Attainable — achievable and feasible."},
+  {t:"Types of standards in the Donabedian framework include:",o:["Quantitative, qualitative, and financial","Structure, process, and outcome standards","International, national, and local","Medical, nursing, and administrative"],a:1,exp:"Types of standards: structure standards, process standards, and outcome standards."},
+  {t:"In the RUMBA criteria, 'B' stands for:",o:["Basic","Budget","Broad","Behavioural — objective, designed on objective and scientific bases"],a:3,exp:"B stands for Behavioural — the objective must be designed on objective and scientific bases."},
+  {t:"In the RUMBA criteria, 'U' stands for:",o:["Unique","Universal","Understandable — for nurses who perform and evaluate nursing","Unified"],a:2,exp:"U stands for Understandable for nurses who perform and evaluate nursing."},
+  {t:"Standards in nursing practice are important because they:",o:["Reduce nurse responsibilities","Promote, guide, and direct professional nursing practice and provide a framework for developing competencies","Increase administrative workload","Eliminate the need for supervision"],a:1,exp:"Standards promote, guide, and direct professional nursing practice; they are important for self-assessment and evaluation, and aid in developing competencies."},
+  {t:"Nursing care standards include criteria that can be used to assess:",o:["Hospital revenue","Efficiency and serve as legal guidelines for nursing practice","Physician performance","Facility maintenance"],a:1,exp:"Nursing care standards include criteria to assess efficiency and serve as legal guidelines for nursing practice."},
+  {t:"ISO's motto regarding international standards is:",o:["Each country sets its own version of ISO","Whatever the country, whatever the language, we are always ISO","ISO applies only to manufacturing industries","ISO standards expire every 5 years"],a:1,exp:"ISO says: 'Whatever the country, whatever the language, we are always ISO'."},
+  {t:"Quality assurance is achieved through:",o:["Random inspections only","A proactive, systematic process: setting clear standards, documenting procedures, conducting audits, using continuous improvement techniques, and fostering a quality culture","Hiring more staff","Increasing hospital bed count"],a:1,exp:"Quality is assured through a proactive, systematic process that focuses on preventing defects — setting standards, documenting procedures, conducting audits/inspections, using continuous improvement (PDCA or Root Cause Analysis), and fostering a quality culture."},
+  {t:"Clinical leaders (doctors and nurses) are accountable for:",o:["Setting the hospital's strategic direction","Implementing quality in clinical practice","Managing the hospital's finances","Conducting external audits"],a:1,exp:"Clinical Leaders (Doctors/Nurses) are accountable for implementing quality."},
+  {t:"In Garvin's model, 'Performance' refers to:",o:["Customer satisfaction rating","A product's primary operating characteristics such as speed and acceleration","How long the product lasts","The product's reputation"],a:1,exp:"Performance: a product's primary operating characteristics, e.g., speed, acceleration."},
+  {t:"In Garvin's model, 'Conformance' means:",o:["Visual appeal of the product","Degree to which a product meets established standards or specifications","Speed of repair","Product lifetime"],a:1,exp:"Conformance is the degree to which a product meets established standards or specifications."},
+  {t:"In Garvin's model, 'Serviceability' refers to:",o:["Product durability","Speed, courtesy, and competence of repair","The product's design features","Matching customer expectations"],a:1,exp:"Serviceability is the speed, courtesy, and competence of repair."},
+  {t:"Growing concern about health care quality in developing countries became notable in:",o:["The 1940s and 1950s","The 1990s and 2000s","Recent years, following the quantitative focus of the 1970s–1980s","The 1960s"],a:2,exp:"In recent years there has been a growing concern about the quality of health care in developing countries, following the quantitative focus of the 1970s and 1980s."},
+  {t:"The principle 'From Blame to Improvement' in quality improvement means:",o:["Punishing staff for errors","Shifting organizational culture away from blame toward identifying and implementing improvements","Ignoring errors","Reporting all errors publicly"],a:1,exp:"One of the 7 principles of improving quality is a cultural shift from blame to improvement."},
+  {t:"Which of the following quality improvement models is applied in healthcare?",o:["Six Sigma only","PDSA only","Lean / Toyota Production System only","All of the above, including Human-Centered Design"],a:3,exp:"Approaches applied in healthcare QI include: PDSA cycle, Model for Improvement, Lean/Toyota Production System, Six Sigma, and Human-Centered Design."},
+  {t:"Accreditation reviews are conducted by:",o:["Hospital financial officers","Professional peers","Government inspectors only","Patients and families"],a:1,exp:"Reviews in accreditation are conducted by professional peers."},
+  {t:"In Garvin's model, 'Durability' measures:",o:["Customer satisfaction","Product life — how long it lasts before breaking down","Speed of repair","Conformance to standards"],a:1,exp:"Durability is a measure of product life, or how long it lasts before breaking down."},
+  {t:"Quality improvement (QI) is described as:",o:["A one-time project to fix a specific problem","A systematic, data-driven approach to enhancing processes, systems, and outcomes","An inspection of final outputs","A financial audit process"],a:1,exp:"Quality improvement is a systematic, data-driven approach to enhancing processes, systems, and outcomes within organizations."},
+  {t:"Accreditation is a decision that is:",o:["Advisory and non-binding","Formal — resulting in a yes/no/conditional decision","Temporary and informal","Based solely on financial performance"],a:1,exp:"Accreditation concerns a yes/no/conditional decision and is a formal decision."},
+  {t:"Accreditation evaluates at least:",o:["Maximum performance requirements","Minimum threshold quality requirements","The personal opinions of patients","The hospital's financial statements"],a:1,exp:"Accreditation is based on the assessment of at least minimum requirements (threshold quality)."},
+  {t:"Accreditation standards must be:",o:["Verbal and informal","Written and published","Secret and proprietary","Unique to each hospital"],a:1,exp:"Accreditation is based on written and published standards."},
+  {t:"In Garvin's model, 'Features' refers to:",o:["Primary operating characteristics","Secondary 'bells and whistles' characteristics that enhance appeal","Product durability","Ease of repair"],a:1,exp:"Features are the 'bells and whistles' or secondary characteristics that enhance appeal."},
+  {t:"Reasons for the growing importance of health care quality include:",o:["Adequate supply of physicians everywhere","Frequent medical errors, rising costs, and limited health resources","Disappearance of variation among providers","Declining patient expectations"],a:1,exp:"Importance of quality: concerns with variations among providers and patients, frequent medical errors, and rising costs with limited health resources."},
+  {t:"Lean / Toyota Production System in health care focuses on:",o:["Increasing bed capacity only","Reducing waste and helping organizations produce services better, faster, and cheaper","Increasing the number of physicians","Expanding hospital buildings"],a:1,exp:"Six Sigma and Lean focus on improving quality (reducing waste) by helping organizations produce products and services better, faster, and cheaper."},
+  {t:"Quality improvement contributes to:",o:["Increasing mortality rates","Reducing morbidity and mortality — improving health outcomes","Raising the cost of care","Reducing patient access"],a:1,exp:"One basic aim of quality improvement is improved health — reducing morbidity and mortality."},
+  {t:"Steps of Quality Planning in Juran's Trilogy begin with:",o:["Identifying customer needs directly","Identifying and determining the project or problem","Setting the budget","Hiring new staff"],a:1,exp:"Steps: 1. Identify and determine the project/problem. 2. Identify customers. 3. Determine customer needs. 4. Develop processes. 5. Transfer plans to operating forces."},
+  {t:"Steps of Quality Control include which of the following?",o:["Set the annual budget","Evaluate actual quality performance, compare to goals, and act on differences","Hire qualified nurses","Build new wards"],a:1,exp:"Steps in quality control: Evaluate actual quality performance → Compare actual performance to quality goals → Act on the differences."},
+  {t:"Standards in health care are judged against quality of care in terms of:",o:["Cost, volume, and quantity","Structure, process, and outcome","Location, time, and budget","Human resources only"],a:1,exp:"Actual quality of care (structure, process and outcome) is judged against the standard."},
+  {t:"Sustainability as a principle of quality improvement means:",o:["Achieving immediate results only","Long-term development of clinical practice","Cutting the quality budget","Eliminating improvement programs"],a:1,exp:"Sustainability/Clinical practice development is one of the 7 principles of improving quality."},
+  {t:"Without a standard:",o:["Quality automatically improves","There is no logical basis for making a decision or taking action","Employees perform better","Costs are reduced"],a:1,exp:"'Without a standard there is no logical basis for making a decision or taking action.'"},
+  {t:"Professional standards in nursing represent:",o:["Government-enforced laws","Skills and learning commonly possessed by members of a profession","Daily operational procedures only","Salary and wage structures"],a:1,exp:"Standards are the skills and learning commonly possessed by members of a profession."},
+  {t:"Which of the following is an example of 'Process' in the Donabedian model?",o:["Number of hospital beds","Clinical procedures and care delivery processes","Patient mortality rate","Patient satisfaction score"],a:1,exp:"Process examples include clinical processes, care delivery processes, and administrative and management processes."},
+  {t:"Quality improvement uses collaborative teams and methodologies such as PDSA in order to:",o:["Inspect the final output only","Reduce errors and improve efficiency through ongoing, sustainable changes","Increase hospital revenue directly","Reduce the number of staff"],a:1,exp:"QI focuses on ongoing, small, and sustainable changes, utilizing collaborative teams and methodologies like PDSA to reduce errors and improve efficiency."},
+  {t:"The second phase in the historical development of quality is:",o:["Total Quality Management","Quality Assurance","Quality Control","Quality Inspection"],a:2,exp:"The four phases in order: Quality Inspection → Quality Control → Quality Assurance → TQM."},
+  {t:"Standards in nursing help to:",o:["Reduce nursing responsibilities","Develop a better understanding and respect for the various and complementary roles that nurses have","Increase administrative paperwork","Reduce communication with management"],a:1,exp:"Standards aid in developing a better understanding and respect for the various and complementary roles that nurses have."},
+  {t:"The last step in a quality improvement model cycle is:",o:["Identify the problem","Modify, maintain, or spread the intervention","Measure current performance","Perform a cause analysis"],a:1,exp:"The last step is: Modify, maintain, or spread the intervention."},
+  {t:"The administration of the accreditation process is handled by:",o:["The organization being evaluated","An independent body","The national government","Patient advocacy groups"],a:1,exp:"The accreditation process is administered by an independent body."},
+  {t:"Six Sigma uses characteristics of past data to:",o:["Evaluate historical performance only","Make judgments about how the process will perform in the future","Train employees","Calculate salaries"],a:1,exp:"Six Sigma uses the characteristic of past data to make judgments about how the process will perform in the future."},
+  {t:"Human-Centered Design as a QI approach emphasizes:",o:["Technology and machinery","Designing solutions centered on human needs and experience","Profit maximization","Building design only"],a:1,exp:"Human-Centered Design is one of the QI approaches applied in healthcare, focusing on the human experience."},
+  {t:"The 'O' in FOCUS-PDCA stands for:",o:["Observe the process","Organize a team that knows the process","Optimize the output","Outline improvement steps"],a:1,exp:"O in FOCUS stands for Organize a team that knows the process."},
+  {t:"Accreditation encourages organizational development — this means:",o:["It penalizes organizations for poor performance only","It aims to stimulate and support ongoing improvement in the organization","It replaces internal quality management","It is only for large hospitals"],a:1,exp:"The aim of accreditation is to encourage organizational development."},
+  {t:"In the 1970s and 1980s, developing countries focused primarily on the QUALITATIVE aspects of health care.",a:false,exp:"They focused on the QUANTITATIVE aspects — establishing facilities and increasing trained human resources."},
+  {t:"Quality of health care aims to maximize health benefits while minimizing risks.",a:true,exp:"Quality health care aims for the highest possible clinical outcomes while maximizing benefits and minimizing risks."},
+  {t:"Quality Inspection detects errors BEFORE they occur.",a:false,exp:"Quality Inspection detects errors AFTER their occurrence by examining the final product."},
+  {t:"Quality Assurance is a proactive, systematic process focused on preventing defects rather than just detecting them.",a:true,exp:"QA is a proactive, systematic process that focuses on preventing defects — setting standards, documenting procedures, conducting audits, and fostering a quality culture."},
+  {t:"TQM involves only top-level management and does not require involvement of all staff.",a:false,exp:"TQM requires every member of the organization to be consulted and involved — it is based on teamwork and creative thinking."},
+  {t:"The acronym ISO is derived from the Greek word 'isos' meaning 'equal'.",a:true,exp:"ISO is derived from the Greek word 'isos', which means 'equal'."},
+  {t:"Accreditation is a recognition granted by governmental agencies.",a:false,exp:"Accreditations are recognitions from NON-governmental agencies."},
+  {t:"Certification can be a useful tool to add reliability by demonstrating that a product or service meets customer expectations.",a:true,exp:"Certification can be a useful tool to add reliability, demonstrating that a product or service meets the expectations of customers."},
+  {t:"The Donabedian model categorizes health care quality information into three areas: Structure, Process, and Outcome.",a:true,exp:"According to the Donabedian model, information about quality of care can be drawn from three categories: Structure, Process, and Clinical Outcomes."},
+  {t:"The PDCA cycle begins with the 'Check' phase.",a:false,exp:"The PDCA cycle begins with 'Plan', followed by Do → Check → Act."},
+  {t:"Motorola is the originator of Six Sigma.",a:true,exp:"Motorola is explicitly named as the originator of Six Sigma."},
+  {t:"The RUMBA acronym for good standards stands for Relevant, Understandable, Measurable, Behavioural, and Attainable.",a:true,exp:"RUMBA: Relevant, Understandable, Measurable, Behavioural, Attainable — the features of good standards."},
+  {t:"Quality Control in Juran's Trilogy is the sole responsibility of top-level management.",a:false,exp:"Quality Control is the responsibility of ALL employees, not just top management."},
+  {t:"Quality Planning in Juran's Trilogy is the responsibility of top-level management.",a:true,exp:"Quality Planning deals with setting goals and establishing means to reach them — it is the responsibility of top-level management."},
+  {t:"A good standard in health care does NOT need to be measurable.",a:false,exp:"A standard must be observable, achievable, AND measurable."},
+  {t:"Accreditation standards must be written and published.",a:true,exp:"One of the characteristics of accreditation is that it is based on written and published standards."},
+  {t:"Quality improvement models were originally developed specifically for the health care sector.",a:false,exp:"All of the QI models were initially developed for industries OUTSIDE of healthcare and later adopted and adapted for the healthcare field."},
+  {t:"In Garvin's Eight Dimensions, 'Reliability' refers to how long a product lasts before breaking down.",a:false,exp:"'Durability' measures how long a product lasts. 'Reliability' is the likelihood that a product will NOT fail within a specified time period."},
+  {t:"Quality assurance in nursing ensures adherence to quality standards as mandated by nursing regulatory bodies.",a:true,exp:"Quality assurance in nursing is ensuring adherence to quality standards as mandated by nursing regulatory bodies."},
+  {t:"Stakeholders only include those who affect the organization, not those who are affected by it.",a:false,exp:"A stakeholder is a person, group, organization or system who AFFECTS AND CAN BE AFFECTED by an organizational action."},
+  {t:"Six Sigma focuses on improving quality by helping organizations produce products and services better, faster, and cheaper.",a:true,exp:"Six Sigma focuses on improving quality (reducing waste) by helping organizations produce products and services better, faster, and cheaper."},
+  {t:"Accreditation results in a formal yes/no/conditional decision.",a:true,exp:"Accreditation concerns a yes/no/conditional decision and is a formal decision."},
+  {t:"Principles of improving quality include transparency, ethical practice, evidence-based practice, and accountability.",a:true,exp:"The 7 principles include: Transparency, Ethical practice, Evidence-based practice, From blame to improvement, Accountability, Information sharing and communication, Sustainability."},
+  {t:"'Structure' in the Donabedian model includes clinical outcomes such as mortality and complications.",a:false,exp:"Structure includes resources (human, equipment, facilities, organizational). Outcomes such as mortality and complications fall under 'Clinical Outcomes'."},
+  {t:"The goal of accreditation is to prevent organizations from developing further.",a:false,exp:"The aim of accreditation is to ENCOURAGE organizational development."},
+  {t:"Continuous quality improvement is considered the cornerstone of Total Quality Management.",a:true,exp:"'Improving quality is key to maintaining competitive edge' — and is the cornerstone of TQM."},
+  {t:"Quality Control relies only on inspecting the final output with no reference to pre-set standards.",a:false,exp:"Quality Control depends on the establishment of standards to keep service and product features within upper and lower control limits."},
+  {t:"ISO standards vary from country to country based on local language and culture.",a:false,exp:"ISO says: 'Whatever the country, whatever the language, we are always ISO' — standards are universally uniform."},
+  {t:"All hospital staff members are responsible for participating in quality initiatives and adhering to safe practices in patient care.",a:true,exp:"All Staff Members are responsible for participating in quality initiatives and adhering to safe practices in patient care."},
+  {t:"A standard can be ineffective and difficult to achieve, as long as it sets a high aspirational goal.",a:false,exp:"A standard must be Attainable — achievable and feasible. Unattainable standards are not good standards per the RUMBA criteria."},
+];
+
+/* ============ ENGINE ============ */
+let questions, i, correct, wrong, answers, wrongSet, answered;
+let totalTime = 60*60, timeLeft, timerInterval;
+const LETTERS = ['A','B','C','D','E','F'];
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function init(pool) {
+  questions = shuffle([...pool]);
+  i = 0; correct = 0; wrong = 0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = []; answered = 0;
+  timeLeft = totalTime;
+  document.getElementById('totalBadge').textContent = questions.length + ' questions';
+  startTimer();
+  render();
+}
+
+/* TIMER */
+function startTimer() {
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    const m = Math.floor(timeLeft / 60), s = timeLeft % 60;
+    document.getElementById('timerTxt').textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
+    const badge = document.getElementById('timerBadge');
+    if (timeLeft <= 120) { badge.className = 'timer-badge danger'; }
+    else if (timeLeft <= 300) { badge.className = 'timer-badge warn'; }
+    if (timeLeft <= 0) { clearInterval(timerInterval); finish(); }
+  }, 1000);
+}
+
+/* TOP UI */
+function updateTop() {
+  const total = questions.length;
+  document.getElementById('sCorrect').textContent = correct;
+  document.getElementById('sWrong').textContent = wrong;
+  document.getElementById('sRemain').textContent = Math.round(((total - answered) / total) * 100) + '%';
+  document.getElementById('progLabel').textContent = 'Q ' + (i + 1) + ' / ' + total;
+  document.getElementById('progFill').style.width = ((i + 1) / total * 100) + '%';
+  document.getElementById('prog-bar').style.width = ((i + 1) / total * 100) + '%';
+}
+
+/* RENDER QUESTION */
+function render() {
+  updateTop();
+  const q = questions[i];
+  document.getElementById('app').innerHTML = `
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Question ${i + 1} / ${questions.length}</div>
+      </div>
+      <div class="q-text">${q.t}</div>
+      <div class="options">
+        ${q.o.map((o, idx) => `
+          <div class="opt" id="opt${idx}" onclick="choose(${idx})">
+            <div class="opt-letter">${LETTERS[idx] || idx + 1}</div>
+            ${o}
+          </div>
+        `).join('')}
+      </div>
+      <div class="nav-btns">
+        <button class="btn btn-skip" onclick="skip()"><i class="fa-solid fa-forward"></i> Skip</button>
+      </div>
+    </div>`;
+}
+
+/* CHOOSE */
+function choose(v) {
+  if (answers[i] !== null) return;
+  answers[i] = v;
+  answered++;
+  const q = questions[i];
+  const ok = v === q.a;
+  ok ? correct++ : wrong++;
+  updateTop();
+
+  q.o.forEach((_, idx) => {
+    const el = document.getElementById('opt' + idx);
+    el.classList.add('disabled');
+    if (idx === q.a) el.classList.add('correct');
+    else if (idx === v) el.classList.add('wrong');
+  });
+
+  const fb = document.createElement('div');
+  fb.className = 'feedback-bar ' + (ok ? 'ok' : 'no');
+  fb.innerHTML = ok
+    ? `<span class="feedback-icon">🎉</span> <span>  ِشطور جدا ، اللهم بارك </span>`
+    : `<span class="feedback-icon">😔</span> <span>ركز يا سكر </b></span>`;
+
+  const card = document.querySelector('.q-card');
+  card.querySelector('.options').after(fb);
+  if (q.exp) {
+    const exp = document.createElement('div');
+    exp.className = 'explanation';
+    exp.style.display = 'block';
+    exp.innerHTML = '<b>💬 Explanation:</b> ' + q.exp;
+    fb.after(exp);
+  }
+
+  const navBtns = card.querySelector('.nav-btns');
+  navBtns.innerHTML = `<button class="btn btn-next" onclick="next()">
+    ${i < questions.length - 1 ? '<i class="fa-solid fa-arrow-right"></i> Next Question' : '<i class="fa-solid fa-flag-checkered"></i> Finish Exam'}
+  </button>`;
+}
+
+/* SKIP */
+function skip() {
+  if (answers[i] === null) { answers[i] = -1; answered++; wrongSet.push(questions[i]); wrong++; updateTop(); }
+  next();
+}
+
+/* NEXT */
+function next() {
+  if (i < questions.length - 1) { i++; render(); window.scrollTo({top: 0, behavior: 'smooth'}); }
+  else finish();
+}
+
+/* FINISH */
+function finish() {
+  clearInterval(timerInterval);
+  const total = questions.length;
+  const score = Math.round((correct / total) * 100);
+
+  questions.forEach((q, idx) => {
+    if (answers[idx] !== q.a) wrongSet.push({...q, myAns: answers[idx]});
+  });
+  wrongSet = [...new Map(wrongSet.map(q => [q.t, q])).values()];
+
+  let grade, gradeColor;
+  if (score >= 90) { grade = '🥇 Excellent'; gradeColor = 'var(--success)'; }
+  else if (score >= 75) { grade = '🥈 Very Good'; gradeColor = 'var(--accent)'; }
+  else if (score >= 60) { grade = '🥉 Good'; gradeColor = 'var(--warn)'; }
+  else { grade = '📚 Needs Review'; gradeColor = 'var(--danger)'; }
+
+  const circ = 2 * Math.PI * 45;
+  const offset = circ - (score / 100) * circ;
+
+  const reportHTML = questions.map((q, idx) => {
+    const ok = answers[idx] === q.a;
+    return `<div class="report-item ${ok ? 'ok' : 'no'}">
+      <div class="ri-q">${ok ? '✅' : '❌'} ${q.t}</div>
+      ${!ok ? `
+        <div class="ri-row"><span class="ri-badge ri-yours">Your Answer</span> ${answers[idx] >= 0 ? q.o[answers[idx]] : 'Skipped'}</div>
+        <div class="ri-row"><span class="ri-badge ri-right">Correct</span> ${q.o[q.a]}</div>
+      ` : ''}
+    </div>`;
+  }).join('');
+
+  document.getElementById('prog-bar').style.width = '100%';
+  document.getElementById('app').innerHTML = `
+    <div class="result-hero">
+      <div class="score-ring">
+        <svg viewBox="0 0 110 110">
+          <circle class="ring-bg" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="0"/>
+          <circle class="ring-fill" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="${circ}"
+            style="stroke:${gradeColor}" id="ringFill"/>
+        </svg>
+        <div class="score-num">${score}</div>
+        <div class="score-pct">%</div>
+      </div>
+      <div class="result-grade" style="color:${gradeColor}">${grade}</div>
+      <div class="result-sub">Answered ${answered} of ${total} questions</div>
+      <div class="result-stats">
+        <div class="rs"><div class="n" style="color:var(--success)">${correct}</div><div class="l">Correct</div></div>
+        <div class="rs"><div class="n" style="color:var(--danger)">${wrong}</div><div class="l">Wrong</div></div>
+        <div class="rs"><div class="n" style="color:var(--accent)">${total - answered < 0 ? 0 : total - answered}</div><div class="l">Skipped</div></div>
+      </div>
+    </div>
+
+    <div class="result-actions">
+      ${wrongSet.length ? `<button class="btn btn-retry" onclick="retryWrong()"><i class="fa-solid fa-rotate-right"></i> Retry Wrong (${wrongSet.length})</button>` : ''}
+      <button class="btn btn-home" onclick="init(QUESTIONS)"><i class="fa-solid fa-shuffle"></i> New Random Exam</button>
+      <a href="https://gaith-team.github.io/exam/level1/quality-basics/index.html" class="btn btn-home" style="text-decoration:none;"><i class="fa-solid fa-house"></i> Back to Subject</a>
+    </div>
+
+    <div style="margin-top:28px">
+      <div style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text2)">📋 Detailed Report</div>
+      ${reportHTML}
+    </div>`;
+
+  setTimeout(() => { document.getElementById('ringFill').style.strokeDashoffset = offset; }, 100);
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+/* RETRY WRONG */
+function retryWrong() {
+  const pool = [...wrongSet];
+  questions = shuffle(pool); i = 0; correct = 0; wrong = 0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = []; answered = 0; timeLeft = totalTime;
+  startTimer(); render();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+/* THEME */
+const themeBtn = document.getElementById('themeBtn');
+let theme = localStorage.getItem('theme') || 'light';
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', t);
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+
+/* START */
+init(QUESTIONS);
+</script>
+</body>
+</html>
