@@ -1,0 +1,752 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --accent:       #f59e0b;
+  --accent-light: #fbbf24;
+  --accent-dark:  #d97706;
+  --accent-glow:  rgba(245,158,11,0.2);
+  --bg:      #f8fafc;
+  --bg2:     #eef2f7;
+  --card:    #ffffff;
+  --text:    #1a2332;
+  --text2:   #4a5568;
+  --text3:   #718096;
+  --bc:      rgba(0,0,0,0.07);
+  --success: #16a34a;
+  --danger:  #dc2626;
+  --warn:    #d97706;
+  --r:       16px;
+  --tr:      all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="dark"] {
+  --bg:   #0d1117; --bg2: #161b22; --card: #1c2333;
+  --text: #e6edf3; --text2: #b1bac4; --text3: #7d8590;
+  --bc:   rgba(255,255,255,0.08);
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg); color: var(--text);
+  min-height: 100vh; overflow-x: hidden;
+  transition: background .4s, color .4s;
+}
+
+/* PROGRESS TOP */
+#prog-bar {
+  position: fixed; top: 0; left: 0; height: 3px; z-index: 999;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  transition: width .2s;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px; height: 64px;
+  background: rgba(248,250,252,.93); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--bc); transition: var(--tr);
+}
+[data-theme="dark"] nav { background: rgba(13,17,23,.95); }
+
+.nav-back {
+  display: flex; align-items: center; gap: 7px;
+  color: var(--text2); text-decoration: none; font-size: 13px; font-weight: 700;
+  padding: 7px 13px; border-radius: 8px; border: 1px solid var(--bc);
+  background: var(--card); transition: var(--tr);
+}
+.nav-back:hover { color: var(--accent); border-color: var(--accent-glow); transform: translateX(3px); }
+.nav-brand { display: flex; align-items: center; gap: 9px; font-size: 15px; font-weight: 900; color: var(--text); }
+.nav-logo-icon {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 12px; font-weight: 900;
+}
+.nav-right { display: flex; align-items: center; gap: 8px; }
+.theme-btn {
+  width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--bc);
+  background: var(--card); cursor: pointer; font-size: 15px;
+  display: flex; align-items: center; justify-content: center; transition: var(--tr);
+}
+.theme-btn:hover { border-color: var(--accent); transform: rotate(20deg); }
+
+/* HERO BAND */
+.hero-band {
+  margin-top: 64px;
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent), var(--accent-light));
+  padding: 40px 24px 36px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.hero-band::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 600px 200px at 50% 100%, rgba(255,255,255,.12) 0%, transparent 70%);
+}
+.hero-band-icon {
+  width: 68px; height: 68px; border-radius: 20px;
+  background: rgba(255,255,255,.2); backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 30px; margin: 0 auto 14px; border: 1.5px solid rgba(255,255,255,.35);
+}
+.hero-band h1 { font-size: clamp(20px,4vw,30px); font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero-band p { font-size: 13px; color: rgba(255,255,255,.8); }
+.hero-band-meta {
+  display: flex; justify-content: center; gap: 24px; margin-top: 20px;
+  flex-wrap: wrap;
+}
+.meta-pill {
+  background: rgba(255,255,255,.18); backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,.3); border-radius: 50px;
+  padding: 6px 16px; font-size: 12px; font-weight: 700; color: #fff;
+  display: flex; align-items: center; gap: 6px;
+}
+
+/* EXAM SHELL */
+.shell { max-width: 560px; margin: 0 auto; padding: 24px 20px 80px; }
+
+/* STATS ROW */
+.stats-row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 16px;
+}
+.stat-box {
+  background: var(--card); border: 1px solid var(--bc); border-radius: var(--r);
+  padding: 12px 10px; text-align: center;
+}
+.stat-box .val { font-size: 20px; font-weight: 900; }
+.stat-box .lbl { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.stat-correct { color: var(--success); }
+.stat-wrong   { color: var(--danger); }
+.stat-remain  { color: var(--accent); }
+
+/* PROGRESS STRIP */
+.prog-strip {
+  background: var(--card); border: 1px solid var(--bc); border-radius: var(--r);
+  padding: 14px 16px; margin-bottom: 16px;
+  display: flex; align-items: center; gap: 14px;
+}
+.prog-label { font-size: 13px; font-weight: 700; color: var(--text2); white-space: nowrap; }
+.prog-track { flex: 1; height: 8px; background: var(--bg2); border-radius: 8px; overflow: hidden; }
+.prog-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  border-radius: 8px; transition: width .4s;
+}
+.timer-badge {
+  min-width: 64px; height: 36px; border-radius: 18px;
+  background: var(--bg2); border: 1px solid var(--bc);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 900; color: var(--text);
+  gap: 5px; padding: 0 12px; flex-shrink: 0;
+}
+.timer-badge.warn { color: var(--warn); border-color: rgba(217,119,6,.3); background: rgba(217,119,6,.08); }
+.timer-badge.danger { color: var(--danger); border-color: rgba(220,38,38,.3); background: rgba(220,38,38,.08); animation: pulse .8s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.6} }
+
+/* QUESTION CARD */
+.q-card {
+  background: var(--card); border: 1px solid var(--bc);
+  border-radius: 20px; overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+  transition: box-shadow .3s;
+}
+.q-header {
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  padding: 4px 18px 4px;
+  display: flex; align-items: center; gap: 8px;
+}
+.q-num {
+  background: rgba(255,255,255,.2); border-radius: 8px;
+  padding: 3px 10px; font-size: 11px; font-weight: 700; color: #fff;
+}
+.q-text {
+  padding: 22px 18px 14px; font-size: 15px; font-weight: 700; color: var(--text);
+  line-height: 1.65; border-bottom: 1px solid var(--bc);
+  text-align: left; direction: ltr;
+}
+.options { padding: 14px 18px 18px; display: flex; flex-direction: column; gap: 10px; }
+
+/* OPTION */
+.opt {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px; border-radius: 12px;
+  border: 1.5px solid var(--bc); background: var(--bg);
+  cursor: pointer; font-size: 14px; font-weight: 600; color: var(--text);
+  transition: var(--tr); user-select: none;
+  direction: ltr; text-align: left;
+}
+.opt:hover:not(.disabled) {
+  border-color: var(--accent); background: var(--accent-glow);
+  transform: translateX(3px);
+}
+.opt-letter {
+  width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+  background: var(--bg2); border: 1px solid var(--bc);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 900; color: var(--text3);
+  transition: var(--tr);
+}
+.opt.correct {
+  border-color: var(--success); background: rgba(22,163,74,.08);
+}
+.opt.correct .opt-letter {
+  background: var(--success); color: #fff; border-color: var(--success);
+}
+.opt.wrong {
+  border-color: var(--danger); background: rgba(220,38,38,.07);
+}
+.opt.wrong .opt-letter {
+  background: var(--danger); color: #fff; border-color: var(--danger);
+}
+.opt.disabled { pointer-events: none; }
+
+/* FEEDBACK */
+.feedback-bar {
+  margin: 14px 18px; padding: 12px 16px; border-radius: 12px;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px; font-weight: 700;
+  animation: popIn .4s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes popIn { from{transform:scale(.8);opacity:0} to{transform:scale(1);opacity:1} }
+.feedback-bar.ok { background: rgba(22,163,74,.1); color: var(--success); border: 1px solid rgba(22,163,74,.25); }
+.feedback-bar.no { background: rgba(220,38,38,.08); color: var(--danger); border: 1px solid rgba(220,38,38,.2); }
+.feedback-icon { font-size: 20px; }
+
+/* EXPLANATION */
+.explanation {
+  margin: 0 18px 14px; padding: 12px 14px;
+  background: rgba(var(--accent-rgb),.06);
+  border-radius: 10px; border-right: 3px solid var(--accent);
+  font-size: 13px; color: var(--text2); line-height: 1.6;
+  display: none;
+}
+
+/* NAV BTNS */
+.nav-btns { padding: 4px 18px 18px; display: flex; gap: 10px; }
+.btn {
+  flex: 1; padding: 13px; border: none; border-radius: 12px;
+  font-size: 14px; font-weight: 900; cursor: pointer;
+  font-family: 'Outfit', sans-serif; transition: var(--tr);
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+}
+.btn-next {
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  color: #fff; box-shadow: 0 4px 14px var(--accent-glow);
+}
+.btn-next:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
+.btn-skip {
+  background: var(--bg2); color: var(--text2); border: 1px solid var(--bc); flex: 0 0 auto; padding: 13px 18px;
+}
+.btn-skip:hover { border-color: var(--warn); color: var(--warn); }
+
+/* ===== RESULTS ===== */
+.result-hero {
+  text-align: center; padding: 36px 20px 28px;
+  background: var(--card); border-radius: 20px;
+  border: 1px solid var(--bc); margin-bottom: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+}
+.score-ring {
+  width: 110px; height: 110px; border-radius: 50%; margin: 0 auto 18px;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; border: 5px solid var(--bg2);
+  position: relative;
+}
+.score-ring svg { position: absolute; inset: -5px; width: calc(100% + 10px); height: calc(100% + 10px); transform: rotate(-90deg); }
+.score-ring circle { fill: none; stroke-width: 5; stroke-linecap: round; }
+.ring-bg { stroke: var(--bg2); }
+.ring-fill { stroke: var(--accent); transition: stroke-dashoffset 1s ease; }
+.score-num { font-size: 28px; font-weight: 900; color: var(--text); }
+.score-pct { font-size: 12px; color: var(--text3); }
+.result-grade { font-size: 22px; font-weight: 900; margin-bottom: 6px; }
+.result-sub { font-size: 14px; color: var(--text2); }
+.result-stats {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 20px;
+}
+.rs { background: var(--bg2); border-radius: 10px; padding: 12px 8px; text-align: center; }
+.rs .n { font-size: 20px; font-weight: 900; }
+.rs .l { font-size: 11px; color: var(--text3); }
+
+/* REPORT ITEMS */
+.report-item {
+  background: var(--card); border: 1px solid var(--bc); border-radius: 14px;
+  padding: 16px; margin-bottom: 10px; border-right: 4px solid var(--bc);
+}
+.report-item.ok { border-right-color: var(--success); }
+.report-item.no { border-right-color: var(--danger); }
+.report-item .ri-q { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+.report-item .ri-row {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; margin-top: 5px; color: var(--text2);
+}
+.ri-badge {
+  padding: 2px 8px; border-radius: 6px; font-weight: 700; font-size: 11px; flex-shrink: 0;
+}
+.ri-yours { background: rgba(220,38,38,.1); color: var(--danger); }
+.ri-right { background: rgba(22,163,74,.1); color: var(--success); }
+
+.result-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+.btn-retry { background: linear-gradient(135deg, var(--accent-dark), var(--accent)); color: #fff; }
+.btn-retry:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
+.btn-home { background: var(--bg2); color: var(--text); border: 1px solid var(--bc); }
+.btn-home:hover { border-color: var(--accent); color: var(--accent); }
+
+/* FOOTER */
+footer {
+  background: var(--bg2); border-top: 1px solid var(--bc);
+  padding: 22px 24px; display: flex; align-items: center;
+  justify-content: space-between; flex-wrap: wrap; gap: 10px;
+}
+.footer-brand { font-size: 14px; font-weight: 700; }
+.footer-brand span { color: var(--accent); }
+.footer-tg { display: flex; align-items: center; gap: 5px; text-decoration: none; color: #229ED9; font-size: 12px; font-weight: 600; }
+
+@media (max-width: 480px) {
+  nav { padding: 0 14px; }
+  .shell { padding: 16px 14px 60px; }
+  .nav-brand span { display: none; }
+  .hero-band { padding: 30px 16px 28px; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog-bar" style="width:0%"></div>
+
+<nav>
+  <a href="https://gaith-team.github.io/exam/level1/comprehensive-care/index.html" class="nav-back"><i class="fa-solid fa-arrow-right"></i> Back</a>
+  <div class="nav-brand">
+    <div class="nav-logo-icon">GT</div>
+    <span>GAITH TEAM</span>
+  </div>
+  <div class="nav-right">
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<div class="hero-band">
+  <div class="hero-band-icon">🏥</div>
+  <h1>الرعاية التمريضية الشاملة</h1>
+  <p> مراجعة الميدترم من غيث </p>
+  <div class="hero-band-meta">
+    <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">-- Questions</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-clock"></i> 60 Min</div>
+    <div class="meta-pill"><i class="fa-solid fa-shuffle"></i> Shuffled</div>
+  </div>
+</div>
+
+<div class="shell">
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="val stat-correct" id="sCorrect">0</div>
+      <div class="lbl">✔ Correct</div>
+    </div>
+    <div class="stat-box">
+      <div class="val stat-wrong" id="sWrong">0</div>
+      <div class="lbl">✖ Wrong</div>
+    </div>
+    <div class="stat-box">
+      <div class="val stat-remain" id="sRemain">--%</div>
+      <div class="lbl">⏳ Remaining</div>
+    </div>
+  </div>
+
+  <!-- PROGRESS STRIP -->
+  <div class="prog-strip">
+    <div class="prog-label" id="progLabel">Q 1</div>
+    <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+    <div class="timer-badge" id="timerBadge"><i class="fa-regular fa-clock"></i> <span id="timerTxt">60:00</span></div>
+  </div>
+
+  <!-- APP -->
+  <div id="app"></div>
+</div>
+
+<footer>
+  <div class="footer-brand">GAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg">
+    <i class="fa-brands fa-telegram"></i> @nursing2bu
+  </a>
+</footer>
+
+<script>
+const QUESTIONS = [
+ // ── HOLISTIC CARE BASICS ──────────────────────────────────────────
+  {t:"Who is credited with introducing the holistic aspect to nursing?",o:["Marie Curie","Florence Nightingale","Virginia Henderson","Dorothea Orem"],a:1,exp:"Florence Nightingale is credited with introducing the holistic aspect to nursing; she believed the patient's environment affected their health."},
+  {t:"Holistic healthcare considers which of the following needs of a person?",o:["Physical and emotional only","Physical, emotional, social, economic, and spiritual","Medical and surgical only","Psychological and spiritual only"],a:1,exp:"Holistic healthcare is complete patient care that considers physical, emotional, social, economic, and spiritual needs."},
+  {t:"When the term 'holistic' is used in medicine it refers to:",o:["Treatment of disease symptoms only","Treatment of the whole person taking into account mental and social factors","Surgical and pharmacological management","Preventive vaccination programs"],a:1,exp:"Holistic in medicine refers to treatment of the whole person, taking into account mental and social factors rather than just disease symptoms."},
+  {t:"Which of the following is a common holistic care therapy?",o:["Chemotherapy","Radiation therapy","Acupuncture","Organ transplantation"],a:2,exp:"Common holistic care therapies include acupuncture, aromatherapy, massage, stress management, and others listed in the text."},
+  {t:"A holistic nurse is also known as a:",o:["Surgical nurse","Complementary health nurse","Critical care nurse","Palliative nurse"],a:1,exp:"A holistic nurse is also known as a complementary health nurse and uses alternative medicine to treat patients."},
+  {t:"According to AIHM, which of the following is a core principle of holistic care?",o:["Cure is the primary goal","Prevention is the best intervention","Medication is always required","Diagnosis precedes care"],a:1,exp:"One of the AIHM core principles is 'Prevention is the best intervention.'"},
+  {t:"Holistic nurses differ from traditional RNs mainly in their:",o:["Qualifications","Method of care delivery","Salary","Legal scope"],a:2,exp:"Holistic nurses may administer the same healthcare services as traditional RNs but differ in their method of delivery."},
+  {t:"Which characteristic describes a holistic nurse who asks patients about their overall lifestyle?",o:["Compassionate","Comprehensive","Curious","Cautious"],a:2,exp:"Curious holistic nurses believe many factors affect health and ask patients about their overall lifestyle."},
+  {t:"Holistic nursing that treats the entire person rather than one symptom is described as:",o:["Compassionate","Comprehensive","Curious","Critical"],a:1,exp:"Comprehensive holistic nurses acknowledge the mind, body, and spirit by treating the entire person."},
+  {t:"Which benefit does holistic nursing provide for the care environment?",o:["Higher costs","Reduced nurse staffing","Improved health outcomes and reduced readmission rates","Faster medication dispensing"],a:2,exp:"By addressing multiple dimensions of health, holistic nursing can lead to better patient outcomes and reduced hospital readmission rates."},
+  {t:"Holistic nursing recognizes the importance of self-care for nurses mainly to:",o:["Increase workload","Reduce nurse burnout","Improve patient billing","Standardize protocols"],a:1,exp:"Holistic nursing recognizes the importance of self-care for nurses to reduce burnout and enhance well-being among healthcare providers."},
+  {t:"Which area of well-being includes education on healthy lifestyle choices and nutrition guidance?",o:["Spiritual well-being","Psychological well-being","Physical well-being","Social well-being"],a:2,exp:"Under physical well-being, holistic nursing promotes preventive measures including education on healthy lifestyle choices and nutrition guidance."},
+  {t:"Providing a supportive environment where individuals can explore spiritual beliefs is part of:",o:["Physical well-being","Psychological well-being","Spiritual well-being","Social well-being"],a:2,exp:"Spiritual support and allowing patients to explore and express spiritual beliefs is part of spiritual well-being in holistic nursing."},
+  {t:"Stress reduction techniques such as deep breathing and mindfulness belong to which holistic domain?",o:["Physical well-being","Spiritual well-being","Psychological well-being","Economic well-being"],a:2,exp:"Stress reduction and relaxation techniques are included under psychological well-being in holistic nursing."},
+  {t:"The AIHM principle 'Holistic medicine is relationship-centered care' emphasizes:",o:["Technology-driven treatment","Strong nurse–patient relationships","High medication doses","Rapid diagnosis"],a:1,exp:"Holistic medicine is relationship-centered care is one of the AIHM core principles."},
+ 
+  // ── COMPLEMENTARY THERAPIES ──────────────────────────────────────
+  {t:"Complementary therapy aims to treat patients by:",o:["Replacing conventional medicine","Complementing conventional medicine","Eliminating the need for doctors","Focusing only on surgery"],a:1,exp:"Complementary therapy aims to treat patients by complementing conventional medicine rather than providing an alternative."},
+  {t:"Alternative therapy differs from complementary therapy in that it:",o:["Is used alongside standard treatment","May replace traditional medical interventions","Is the same as holistic care","Is never used by nurses"],a:1,exp:"Alternative therapy may replace traditional medical interventions altogether, unlike complementary therapy which is used alongside conventional care."},
+  {t:"Acupuncture is often used to treat which side effects of cancer treatment?",o:["Hair loss and weight gain","Fatigue and nausea","Insomnia and confusion","Bleeding and infection"],a:1,exp:"Acupuncture is often used to treat side effects of cancer treatment including fatigue and nausea."},
+  {t:"Complementary Health Approaches (CHA) are categorized into how many main areas?",o:["Two","Three","Four","Five"],a:1,exp:"CHA are categorized into three main areas: Natural Products, Body-Mind Interventions, and Other Methods."},
+  {t:"Which of the following belongs to the 'Natural Products' category of CHA?",o:["Massage","Yoga","Probiotics","Acupuncture"],a:2,exp:"Natural Products include plants, vitamins, probiotics, and dietary supplements."},
+  {t:"Yoga is classified under which CHA category?",o:["Natural Products","Body-Mind Interventions","Other Methods","Spiritual Therapies"],a:1,exp:"Yoga is listed under Body-Mind Interventions in the CHA classification."},
+  {t:"Traditional Chinese medicine falls under which CHA category?",o:["Natural Products","Body-Mind Interventions","Other Methods","Energetic-Touch"],a:2,exp:"Traditional Chinese medicine is listed under Other Methods in the CHA classification."},
+  {t:"In allopathic medicine, healing is described as:",o:["Slow and natural","Aggressive, quick, seeking to destroy invading agents","Based on lifestyle choices","Led by the client"],a:1,exp:"In allopathic medicine, healing is aggressive, quick, and seeks to destroy the invading agents."},
+  {t:"In alternative medicine, the body is believed to:",o:["Rely entirely on external agents","Have no healing ability","Have a natural ability to heal itself","Require surgery for every condition"],a:2,exp:"In alternative medicine, the belief is that the body has a natural ability to heal itself."},
+  {t:"Which of the following is a goal of CAM?",o:["Reducing nursing staff","Increasing hospital stays","Health promotion and pain relief","Decreasing patient autonomy"],a:2,exp:"Goals of CAM include health promotion, pain relief, treatment of chronic and terminal illness, and spiritual growth among others."},
+ 
+  // ── MIND-BODY SELF-REGULATORY TECHNIQUES ─────────────────────────
+  {t:"Self-regulatory techniques allow individuals to consciously control which system?",o:["Parasympathetic nervous system","Sympathetic nervous system","Central nervous system","Peripheral nervous system"],a:1,exp:"Self-regulatory techniques allow an individual to consciously control some functions of the sympathetic nervous system."},
+  {t:"The basic elements of the relaxation response include all EXCEPT:",o:["Quiet environment","Focused attention","Vigorous exercise","Passive attitude"],a:2,exp:"The basic elements of the relaxation response are quiet environment, comfortable position, focused attention, passive attitude, and practice. Vigorous exercise is not included."},
+  {t:"Relaxation techniques are an essential aspect of cognitive behavioral therapy when treating:",o:["Fractures","Phobias, fear, and depression","Hypertension","Renal failure"],a:1,exp:"Relaxation techniques are an essential aspect of cognitive behavioral therapy when treating people with phobias, fear, and depression."},
+  {t:"To evoke the relaxation response through meditation, the recommended approach is to:",o:["Breathe rapidly","Repeat a word or short phrase with special meaning","Watch television","Engage in physical exercise"],a:1,exp:"To evoke the relaxation response through meditation, repeat a word or short phrase, preferably one that has special meaning to the individual."},
+  {t:"Florence Nightingale wrote about imagery in nursing in which century?",o:["17th","18th","19th","20th"],a:2,exp:"In the mid-1800s (19th century), Nightingale wrote in Notes on Nursing about nurses helping the ill to alter their thoughts through images of nature."},
+  {t:"Imagery is contraindicated (not recommended) for clients who are:",o:["Elderly","Emotionally unstable","Physically disabled","Postoperative"],a:1,exp:"The nursing alert states that imagery is not recommended for clients who are emotionally unstable."},
+  {t:"Therapeutic hypnosis induces:",o:["Deep sleep","Altered states of consciousness during which the person is more receptive to suggestion","Full anesthesia","Unconsciousness"],a:1,exp:"Therapeutic hypnosis induces altered states of consciousness or awareness (a trance) during which the person is more receptive to suggestion."},
+  {t:"Hypnosis is a potentially effective tool for altering:",o:["Blood type","Pain, anxiety, and some physiological processes","Bone structure","Genetic expression"],a:1,exp:"Hypnosis is a potentially effective and powerful tool for altering pain, anxiety, and some physiological processes."},
+  {t:"The three main elements of yoga are:",o:["Diet, rest, and meditation","Breathing, movement, and posture","Flexibility, strength, and balance","Prayer, massage, and imagery"],a:1,exp:"The three main elements of yoga are breathing, movement, and posture."},
+  {t:"Yoga originated in which country?",o:["China","Egypt","India","Japan"],a:2,exp:"Yoga is a form of meditative exercise that originated in India and is an essential component of Ayurvedic healing."},
+ 
+  // ── ENERGETIC-TOUCH & MASSAGE ─────────────────────────────────────
+  {t:"Energetic-touch therapies work with the body's energy field using:",o:["Needles","Herbs","The hands","Sound waves"],a:2,exp:"Energetic-touch therapies are a group of techniques that work with the body's energy field by the use of the hands."},
+  {t:"Touch is described as the earliest sense to develop in humans, providing:",o:["Taste stimulation","A basic means of interacting with others and the environment","Chemical healing","Heat regulation"],a:1,exp:"Touch is the earliest sense to develop in humans and provides a basic means of interacting with others and the environment."},
+  {t:"Therapeutic massage involves:",o:["Needle insertion","Kneading, rubbing, and using friction","Herbal ingestion","Sound therapy"],a:1,exp:"Therapeutic massage involves kneading, rubbing, and using friction applied by the hands."},
+  {t:"Massage is especially beneficial for:",o:["Patients with acute infections","Immobilized patients","Patients with hemophilia","Pregnant patients"],a:1,exp:"Massage techniques are especially beneficial to those who are immobilized."},
+  {t:"Massage should be used with CAUTION for people with which condition?",o:["Mild anxiety","Heart disease, diabetes, hypertension, or kidney disease","Minor headache","Low back pain"],a:1,exp:"Massage should be used with caution for people with heart disease, diabetes, hypertension, or kidney disease because increased circulation may be harmful."},
+  {t:"Therapeutic Touch (TT) is based on:",o:["Western pharmacology","Ancient healing practices, assessing energy field alterations","Surgical techniques","Nutritional therapy"],a:1,exp:"Therapeutic touch is based on ancient healing practices and consists of assessing alterations in a person's energy field and using the hands to direct energy."},
+  {t:"The relaxation response with TT may be apparent in as few as:",o:["30–60 minutes","15–20 minutes","2–5 minutes","24 hours"],a:2,exp:"The relaxation response may be apparent in the client as quickly as 2 to 5 minutes after a TT treatment has begun."},
+  {t:"Healing Touch (HT) was developed by which nurse in the 1980s?",o:["Florence Nightingale","Janet Mentgen","Virginia Henderson","Betty Neuman"],a:1,exp:"Healing Touch was developed by Janet Mentgen, a nurse, in the 1980s."},
+  {t:"In 1993, HT became a certification program of which association?",o:["ANA","AHNA","ICN","WHO"],a:1,exp:"In 1993, HT was established as a certification program of the American Holistic Nurses Association (AHNA)."},
+  {t:"Shiatsu means:",o:["Energy flow","Needle therapy","Finger pressure","Touch healing"],a:2,exp:"Shiatsu comes from the word meaning 'finger pressure' and is based on East Asian philosophy and Japanese methodology."},
+ 
+  // ── ACUPUNCTURE & REFLEXOLOGY ─────────────────────────────────────
+  {t:"Acupuncture originated in:",o:["Japan","India","China","Egypt"],a:2,exp:"Acupuncture originated in China over 2,000 years ago."},
+  {t:"Acupuncture treatment focuses on correcting the flow of:",o:["Blood","Chi (energy)","Lymph","Hormones"],a:1,exp:"Acupuncture treatment focuses on correcting the flow of chi (energy) when imbalances (blockages) occur."},
+  {t:"Acupuncture is CONTRAINDICATED in which condition?",o:["Arthritis","Low back pain","Acute cardiovascular disorder","Migraine headache"],a:2,exp:"Acupuncture is contraindicated for people with acute cardiovascular disorder, hemophilia, and pregnancy."},
+  {t:"Egyptian wall paintings from approximately 2300 BC show the use of:",o:["Acupuncture","Herbal therapy","Reflexology","Aromatherapy"],a:2,exp:"Reflexology is rooted in ancient healing arts; Egyptian wall paintings from approximately 2300 BC show its use."},
+  {t:"Eunice Ingham discovered in the 1930s that certain points on the feet:",o:["Were identical to hand points","Were more responsive to pressure for better pain relief","Were ineffective","Required needles"],a:1,exp:"Eunice Ingham discovered that certain points on the feet were more responsive to pressure and provided better pain relief than points on the hand."},
+  {t:"Reflexology can be used as a complementary method for managing:",o:["Acute MI","Diabetes mellitus","Chronic conditions such as asthma and migraines","Surgical wounds"],a:2,exp:"Reflexology can be used as a complementary method for managing chronic conditions such as asthma, sinus infections, migraines, irritable bowel syndrome, kidney stones, and constipation."},
+ 
+  // ── SPIRITUAL THERAPIES ───────────────────────────────────────────
+  {t:"Faith healing is based on:",o:["Pharmacological intervention","Religious belief and prayer to achieve unity with God","Herbal medicine","Surgical procedures"],a:1,exp:"Faith healing is the practitioner's belief that one must purify oneself and reach a state of unity with God, usually done through prayer."},
+  {t:"Florence Nightingale recognized in 1860 that prayer helps connect individuals to:",o:["Modern medicine","Nature and the environment","Financial resources","Social networks"],a:1,exp:"Florence Nightingale (1860) recognized that prayer helps connect individuals to nature and the environment."},
+  {t:"A study on coronary artery bypass surgery found that the best single predictor of survival was:",o:["Cholesterol level","Physical fitness","Degree of religious faith and spiritual meaning","Medication adherence"],a:2,exp:"A study examining coronary artery bypass surgery found the best single predictor of survival was the degree of religious faith and spiritual meaning in the client's life."},
+ 
+  // ── NUTRITIONAL THERAPIES ─────────────────────────────────────────
+  {t:"Nutraceuticals refer to:",o:["Synthetic vitamins","Natural substances found in plant or animal foods that act as protective or healing agents","Intravenous nutrition","Dietary supplements only"],a:1,exp:"Nutraceuticals refer to any natural substances found in plant or animal foods that act as protective or healing agents."},
+  {t:"Which vitamins may prevent heart disease and some forms of cancer through antioxidant action?",o:["Vitamins B and K","Vitamins A and D","Vitamins C and E, and beta-carotene","Vitamins B12 and folate"],a:2,exp:"Vitamins C and E, and beta-carotene which converts to vitamin A, may prevent heart disease and some forms of cancer."},
+  {t:"The macrobiotic diet became popular in the 1960s because of heightened interest in:",o:["Fast food","Processed foods","Natural and more spiritual approaches to health","High-protein diets"],a:2,exp:"Macrobiotic diets became popular in the 1960s because of the heightened interest in 'natural' and more spiritual approaches to managing health and illness."},
+  {t:"The nursing alert for the macrobiotic diet warns that it may be deficient in:",o:["Protein and iron","Vitamins D and B12","Calcium and zinc","Vitamins C and E"],a:1,exp:"The nursing alert states children and pregnant women should use the macrobiotic diet with caution as it could be deficient in vitamins D and B12."},
+  {t:"Herbal medicine is also known as:",o:["Allopathic medicine","Botanical medicine or phytotherapy","Homeopathy","Naturopathy"],a:1,exp:"Herbal medicine, also known as botanical medicine or phytotherapy, uses plant extracts for therapeutic outcomes."},
+  {t:"Which herb is described as antiviral and used for colds, flu, and other infections?",o:["Aloe vera","Chamomile","Echinacea","Feverfew"],a:2,exp:"Echinacea is listed as antiviral and used for colds, flu, and other infections."},
+  {t:"Capsaicin is used for:",o:["Anxiety and colic","Skin lesions","Tenderness and pain of osteoarthritis, fibromyalgia, diabetic neuropathy, and shingles","Migraine headaches"],a:2,exp:"Capsaicin is listed for tenderness and pain of osteoarthritis, fibromyalgia, diabetic neuropathy, and shingles."},
+  {t:"To assure client safety with herbal therapy, nurses should suggest clients purchase products labelled:",o:["Organic","Standardized","Natural","Generic"],a:1,exp:"Nurses should suggest that clients purchase and use only herbal products labelled 'standardized' for quality checks."},
+ 
+  // ── AROMATHERAPY ──────────────────────────────────────────────────
+  {t:"Aromatherapy is defined as the therapeutic use of:",o:["Synthetic perfumes","Concentrated essences or essential oils extracted from plants and flowers","Mineral oils","Petroleum-based products"],a:1,exp:"Aromatherapy is defined as the therapeutic use of concentrated essences or essential oils that have been extracted from plants and flowers."},
+  {t:"Essential oils help relax the mind and body by promoting balance between:",o:["Motor and sensory nerves","Sympathetic and parasympathetic nervous systems","Brain and spinal cord","Heart and lungs"],a:1,exp:"Essential oils help relax the mind and body by promoting balance between the sympathetic and parasympathetic nervous systems."},
+  {t:"Which clients should AVOID the use of essential oils according to the nursing alert?",o:["Elderly patients","Clients with diabetes","Clients with asthma, cancer, epilepsy, or hypertension, or those who are pregnant","Post-surgical patients"],a:2,exp:"The nursing alert states that clients with asthma, cancer, epilepsy, or hypertension, or those who are pregnant should avoid the use of essential oils."},
+  {t:"Nursing checklist for aromatherapy states essential oils should be stored in:",o:["Plastic containers","Clear glass bottles","Dark glass bottles, tightly capped and away from heat and sunlight","Metal containers"],a:2,exp:"Essential oils should be stored in dark glass bottles, tightly capped and away from heat and sunlight."},
+  {t:"When applying essential oils to the skin, the first nursing action should be:",o:["Apply directly in large amounts","Do a skin patch test for sensitivity","Mix with water only","Inhale first"],a:1,exp:"The nursing checklist states to do a skin patch test for sensitivity before applying essential oils to the skin."},
+ 
+  // ── HUMOR, MUSIC, HEAT & COLD ─────────────────────────────────────
+  {t:"Humor decreases pain by stimulating the production of:",o:["Cortisol","Adrenaline","Endorphins","Insulin"],a:2,exp:"Humor can decrease pain by stimulating the production of endorphins."},
+  {t:"The nursing checklist for humor states it should be used as:",o:["A substitute for pain medication","An adjunct, not a substitute, for pain medication","The primary treatment for all conditions","A replacement for communication"],a:1,exp:"The checklist states to use humor as an adjunct, not a substitute, for pain medication."},
+  {t:"Therapeutic use of music consists of playing music to elicit:",o:["Negative behavioral changes","Positive changes in behavior, emotions, or physiological response","Sedation only","Confusion"],a:1,exp:"Therapeutic use of music consists of playing music to elicit positive changes in behavior, emotions, or physiological response."},
+  {t:"A warm compress achieves which effect?",o:["Constricts blood vessels","Soothes sore muscles and dilates vessels bringing healing circulation","Reduces inflammation by cooling","Causes vasoconstriction"],a:1,exp:"A warm compress can soothe sore muscles and dilate vessels in a defined area, bringing healing circulation as well as endorphin release."},
+  {t:"Ice or a cold gel pack is most helpful for:",o:["Chronic arthritis only","Acute injury and some types of headaches","Burns and skin wounds","Digestive disorders"],a:1,exp:"Ice can be helpful on an acute injury and for some types of headaches."},
+ 
+  // ── NURSING ETHICS ────────────────────────────────────────────────
+  {t:"Ethics is defined as the branch of philosophy that studies free human acts from the point of view of their:",o:["Economic value","Moral value (goodness or badness)","Legal value","Social value"],a:1,exp:"Ethics is the branch of philosophy that studies free human acts from the point of view of their moral value, their goodness or badness."},
+  {t:"The principle of 'nonmaleficence' in nursing ethics means:",o:["Keeping professional promises","Doing no harm","Fairness in distributing care","Truthfulness"],a:1,exp:"Nonmaleficence means doing no harm."},
+  {t:"The principle of 'beneficence' means:",o:["Fairness in distributing care","Truthfulness","Doing good and the right thing","Accepting responsibility for own actions"],a:2,exp:"Beneficence means doing good and the right thing."},
+  {t:"'Veracity' as an ethical principle refers to:",o:["Fairness","Truthfulness","Keeping promises","Self-determination"],a:1,exp:"Veracity means truthfulness."},
+  {t:"'Fidelity' as an ethical principle refers to:",o:["Doing no harm","Keeping one's professional promises","Accepting responsibility","Fairness"],a:1,exp:"Fidelity means keeping one's professional promises."},
+  {t:"Patient rights are based on:",o:["Hospital policy only","The Universal Declaration of Human Rights","Individual nurse judgment","National law alone"],a:1,exp:"Patient rights are based on the Universal Declaration of Human Rights and need to be advocated for and upheld by nurses."},
+  {t:"Which of the following is a patient right?",o:["Mandatory medication","Confidentiality and privacy","Unlimited hospital stay","Free surgery"],a:1,exp:"Patient rights include privacy, confidentiality, respect and dignity, and many others listed in the text."},
+  {t:"The Code of Ethics for Nurses is established by:",o:["The Ministry of Health","The Council of Nurses","The Medical Association","The ICN only"],a:1,exp:"The Code of Ethics for Nurses, established by the Council of Nurses, serves as a framework for ethical nursing practice."},
+  {t:"Factors that influence nursing practice include all of the following EXCEPT:",o:["Religion","War","Technology preferences","Demographic change"],a:2,exp:"Factors influencing nursing practice listed in the book are religion, war, societal attitude, demographic change, and women's issues. Technology preferences is not listed."},
+  {t:"The ICN was founded in:",o:["1850","1899","1920","1945"],a:1,exp:"The International Council of Nurses (ICN) was founded in 1899 and is the world's first international organization for health professionals."},
+  {t:"The ICN represents more than how many nurses worldwide?",o:["5 million","13 million","20 million","8 million"],a:1,exp:"The ICN represents the more than 13 million nurses worldwide through its more than 130 national nurses associations."},
+ 
+  // ── STROKE ────────────────────────────────────────────────────────
+  {t:"Stroke is defined as sudden death of some brain cells due to:",o:["Excess oxygen","Lack of oxygen when blood flow is impaired by blockage or rupture of an artery","Bacterial infection","Traumatic brain injury only"],a:1,exp:"Stroke is defined as sudden death of some brain cells due to lack of oxygen when the blood flow to the brain is impaired by blockage or rupture of an artery to the brain."},
+  {t:"High blood pressure is defined as a reading of:",o:["120/80 or greater","130/85 or greater","140/90 or greater","160/100 or greater"],a:2,exp:"High blood pressure is defined as a reading of 140/90 or greater and is the leading risk factor for stroke."},
+  {t:"Atrial fibrillation makes a person how many times more likely to have a stroke?",o:["Two times","Three times","Five times","Ten times"],a:2,exp:"According to the National Stroke Association, atrial fibrillation makes a person five times more likely to have a stroke."},
+  {t:"The most common type of stroke accounts for approximately what percentage of all cases?",o:["60%","75%","87%","95%"],a:2,exp:"Ischemic stroke is the most common type, accounting for about 87% of all cases."},
+  {t:"A TIA is sometimes called a:",o:["Major stroke","Mini-stroke","Silent stroke","Hemorrhagic event"],a:1,exp:"TIA is sometimes called a 'mini-stroke' and may be a precursor to an ischemic stroke."},
+  {t:"In the BEFAST acronym, 'F' stands for:",o:["Fatigue","Face drooping","Fever","Fainting"],a:1,exp:"In BEFAST, F stands for Face: one side of the face is drooping or feels numb."},
+  {t:"In the BEFAST acronym, 'T' stands for:",o:["Temperature","Tremor","Time to call emergency services","Tingling"],a:2,exp:"T stands for Time: it is time to call emergency services immediately if any of these symptoms are present."},
+  {t:"Pressure ulcers in stroke patients develop due to:",o:["Poor nutrition only","Continuous pressure on body areas from inability to move freely","Medication side effects","Fluid overload"],a:1,exp:"Pressure ulcers (sores) may form due to continuous pressure on body areas as stroke patients may not move freely or change their body position."},
+  {t:"Deep venous thrombosis (DVT) in stroke patients results from:",o:["High blood pressure","Lack of movement causing blood clots in leg veins","Dehydration alone","Excessive activity"],a:1,exp:"Because of the lack of movement from stroke, people may experience blood clots in the veins of the legs (DVT)."},
+  {t:"The Glasgow Coma Scale (GCS) best score is:",o:["3","7","10","15"],a:3,exp:"The GCS best score is 15; worst score is 3; 7 or less generally indicates coma."},
+  {t:"A GCS score of 7 or less generally indicates:",o:["Mild confusion","Moderate disability","Coma","Normal consciousness"],a:2,exp:"A GCS score of 7 or less generally indicates coma."},
+  {t:"During stroke rehabilitation, speech therapy is used to:",o:["Improve walking","Relearn talking and swallowing","Strengthen the arms","Provide nutritional support"],a:1,exp:"Speech therapy is used during rehabilitation to relearn talking and swallowing."},
+  {t:"Stroke prevention includes taking a healthy diet that is:",o:["High in saturated fats","Low in cholesterol, saturated fats, trans fats, and high in fiber","Rich in red meat","High in sodium"],a:1,exp:"Having foods low in cholesterol, saturated fats, trans fats, and high in fiber can help prevent brain stroke."},
+  {t:"Lowering elevated blood pressure during the first few days after stroke is:",o:["Strongly recommended","No longer recommended as it may worsen stroke","Mandatory","Required every hour"],a:1,exp:"Lowering elevated blood pressure into the normal range is no longer recommended during the first few days following a stroke since this may further reduce blood flow and make the stroke worse."},
+  {t:"Which imaging technique is used in stroke diagnosis?",o:["Echocardiogram alone","Computed Tomography Scan (CT)","Chest X-ray","ECG"],a:1,exp:"Radiology and imaging for stroke diagnosis includes CT scan, MRI, cerebral angiography, and brain scan among others."},
+  {t:"Florence Nightingale believed that a patient's environment had an effect on a patient's health.",o:["True","False"],a:0,exp:"True. Florence Nightingale believed that a patient's environment had an effect on their health."},
+  {t:"Holistic care aims only to treat illness rather than enhance overall well-being.",o:["True","False"],a:1,exp:"False. Holistic care aims to enhance the overall well-being and quality of life rather than just treat illness."},
+  {t:"A holistic nurse may combine holistic healing techniques with traditional medicine.",o:["True","False"],a:0,exp:"True. Sometimes holistic nurses combine their holistic healing techniques with traditional medicine."},
+  {t:"Complementary therapy provides an alternative to conventional medicine by replacing it.",o:["True","False"],a:1,exp:"False. Complementary therapy complements conventional medicine rather than replacing it; that is alternative therapy."},
+  {t:"The body-mind self-regulatory techniques include relaxation, meditation, imagery, biofeedback, and hypnosis.",o:["True","False"],a:0,exp:"True. Self-regulatory techniques include relaxation, meditation, imagery, biofeedback, and hypnosis."},
+  {t:"Imagery is recommended for clients who are emotionally unstable.",o:["True","False"],a:1,exp:"False. The nursing alert states imagery is NOT recommended for clients who are emotionally unstable."},
+  {t:"Therapeutic touch (TT) can make some clients fall asleep or require less pain medication after a treatment.",o:["True","False"],a:0,exp:"True. Some clients may fall asleep or require less pain medication after a TT treatment."},
+  {t:"Massage should never be attempted in areas of open wounds or inflammation.",o:["True","False"],a:0,exp:"True. Massage should never be attempted in areas of soft-tissue injury, open wounds, inflammation, joint or bone injury, or other listed conditions."},
+  {t:"Acupuncture points stimulate the central nervous system to release chemicals into muscles, spinal cord, and brain.",o:["True","False"],a:0,exp:"True. Acupuncture points are believed to stimulate the central nervous system to release chemicals that alter or lessen pain."},
+  {t:"Acupuncture is safe for use during pregnancy.",o:["True","False"],a:1,exp:"False. Acupuncture is contraindicated for people with pregnancy, along with acute cardiovascular disorder and hemophilia."},
+  {t:"Herbal medicine is also known as botanical medicine or phytotherapy.",o:["True","False"],a:0,exp:"True. Herbal medicine is also known as botanical medicine or phytotherapy."},
+  {t:"Just because a herbal substance is 'natural' means it is harmless.",o:["True","False"],a:1,exp:"False. The nursing alert states that just because the substance is 'natural' does not mean it is harmless; many plants can be poisonous."},
+  {t:"Essential oils should be stored in plastic containers to maintain quality.",o:["True","False"],a:1,exp:"False. The nursing checklist states essential oils should be stored only in glass containers, not plastic."},
+  {t:"Humor can improve respiratory function and enhance immunological function.",o:["True","False"],a:0,exp:"True. Humor can relieve anxiety, promote relaxation, improve respiratory function, enhance immunological function, and decrease pain."},
+  {t:"The principle of 'justice' in nursing ethics refers to fairness in distributing care.",o:["True","False"],a:0,exp:"True. Justice means fairness in distributing care."},
+  {t:"'Accountability' in nursing ethics means keeping one's professional promises.",o:["True","False"],a:1,exp:"False. Accountability means accepting responsibility for one's own actions. Fidelity means keeping professional promises."},
+  {t:"Hemorrhagic stroke occurs when a blood clot blocks an artery leading to the brain.",o:["True","False"],a:1,exp:"False. Hemorrhagic stroke occurs when a blood vessel in the brain bursts. Ischemic stroke occurs from a blood clot blocking an artery."},
+  {t:"Ischemic stroke is the most common type, accounting for about 87% of all cases.",o:["True","False"],a:0,exp:"True. Ischemic stroke is the most common type, accounting for about 87% of all cases."},
+  {t:"Strokes are more common in women, and women make up more than half of all stroke deaths.",o:["True","False"],a:0,exp:"True. While strokes are more common in men, women make up more than half of all stroke deaths."},
+  {t:"The best score on the Glasgow Coma Scale is 3.",o:["True","False"],a:1,exp:"False. The best score on the GCS is 15; the worst score is 3."},
+  {t:"Holistic nursing can lead to reduced hospital readmission rates.",o:["True","False"],a:0,exp:"True. Treating the underlying causes of illness and supporting overall well-being can lead to better patient outcomes and reduced hospital readmission rates."},
+  {t:"Reflexology was first documented in Egyptian wall paintings from approximately 2300 BC.",o:["True","False"],a:0,exp:"True. Egyptian wall paintings from approximately 2300 BC show the use of reflexology."},
+  {t:"The ICN was founded in 1899 and is the world's first international organization for health professionals.",o:["True","False"],a:0,exp:"True. Founded in 1899, ICN is the world's first and widest reaching international organization for health professionals."},
+  {t:"Macrobiotic diets should avoid processed foods, red meat, sugar, dairy products, eggs, and caffeine.",o:["True","False"],a:0,exp:"True. Foods to be avoided on the macrobiotic diet include processed and treated foods, red meat, sugar, dairy products, eggs, and caffeine."},
+  {t:"A holistic nurse's role includes being attentive, present, and compassionate toward patients.",o:["True","False"],a:0,exp:"True. Compassionate holistic nurses are attentive, present, and compassionate toward patients."},
+  {t:"Psychoneuroimmunology (PNI) supports the dualistic belief that the mind, body, and spirit are separate entities.",o:["True","False"],a:1,exp:"False. PNI studies the complex relationship between cognitive, affective, and physical aspects of humans, rejecting the strict dualistic separation."},
+  {t:"Nursing code of ethics applies only to nurse clinicians and does not include educators or researchers.",o:["True","False"],a:1,exp:"False. The Code of Ethics applies to all forms of nursing services and roles, including clinicians, educators, students, researchers, managers, and policymakers."},
+  {t:"A GCS score of 7 or less generally indicates coma.",o:["True","False"],a:0,exp:"True. A GCS score of 7 or less generally indicates coma."},
+  {t:"Smoking lowers oxygen levels in the blood and enables blood clots to form more readily, increasing stroke risk.",o:["True","False"],a:0,exp:"True. Smoking lowers oxygen levels in the blood, forces the heart to work harder, and enables blood clots to form more readily."},
+  {t:"Healing in holistic nursing is the same as curing (ridding one of disease).",o:["True","False"],a:1,exp:"False. Healing is NOT the same as curing; it is a process that activates the individual's healing forces from within."},
+];
+
+/* ============ ENGINE ============ */
+let questions, i, correct, wrong, answers, wrongSet, answered;
+let totalTime = 60*60, timeLeft, timerInterval;
+const LETTERS = ['A','B','C','D','E','F'];
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function init(pool) {
+  questions = shuffle([...pool]);
+  i = 0; correct = 0; wrong = 0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = []; answered = 0;
+  timeLeft = totalTime;
+  document.getElementById('totalBadge').textContent = questions.length + ' questions';
+  startTimer();
+  render();
+}
+
+/* TIMER */
+function startTimer() {
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    const m = Math.floor(timeLeft / 60), s = timeLeft % 60;
+    document.getElementById('timerTxt').textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
+    const badge = document.getElementById('timerBadge');
+    if (timeLeft <= 120) { badge.className = 'timer-badge danger'; }
+    else if (timeLeft <= 300) { badge.className = 'timer-badge warn'; }
+    if (timeLeft <= 0) { clearInterval(timerInterval); finish(); }
+  }, 1000);
+}
+
+/* TOP UI */
+function updateTop() {
+  const total = questions.length;
+  document.getElementById('sCorrect').textContent = correct;
+  document.getElementById('sWrong').textContent = wrong;
+  document.getElementById('sRemain').textContent = Math.round(((total - answered) / total) * 100) + '%';
+  document.getElementById('progLabel').textContent = 'Q ' + (i + 1) + ' / ' + total;
+  document.getElementById('progFill').style.width = ((i + 1) / total * 100) + '%';
+  document.getElementById('prog-bar').style.width = ((i + 1) / total * 100) + '%';
+}
+
+/* RENDER QUESTION */
+function render() {
+  updateTop();
+  const q = questions[i];
+  document.getElementById('app').innerHTML = `
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Question ${i + 1} / ${questions.length}</div>
+      </div>
+      <div class="q-text">${q.t}</div>
+      <div class="options">
+        ${q.o.map((o, idx) => `
+          <div class="opt" id="opt${idx}" onclick="choose(${idx})">
+            <div class="opt-letter">${LETTERS[idx] || idx + 1}</div>
+            ${o}
+          </div>
+        `).join('')}
+      </div>
+      <div class="nav-btns">
+        <button class="btn btn-skip" onclick="skip()"><i class="fa-solid fa-forward"></i> Skip</button>
+      </div>
+    </div>`;
+}
+
+/* CHOOSE */
+function choose(v) {
+  if (answers[i] !== null) return;
+  answers[i] = v;
+  answered++;
+  const q = questions[i];
+  const ok = v === q.a;
+  ok ? correct++ : wrong++;
+  updateTop();
+
+  q.o.forEach((_, idx) => {
+    const el = document.getElementById('opt' + idx);
+    el.classList.add('disabled');
+    if (idx === q.a) el.classList.add('correct');
+    else if (idx === v) el.classList.add('wrong');
+  });
+
+  const fb = document.createElement('div');
+  fb.className = 'feedback-bar ' + (ok ? 'ok' : 'no');
+  fb.innerHTML = ok
+    ? `<span class="feedback-icon">🎉</span> <span>  شطور جدا , اللهم بارك </span>`
+    : `<span class="feedback-icon">😔</span> <span>  ركز يا سكر </b></span>`;
+
+  const card = document.querySelector('.q-card');
+  card.querySelector('.options').after(fb);
+  if (q.exp) {
+    const exp = document.createElement('div');
+    exp.className = 'explanation';
+    exp.style.display = 'block';
+    exp.innerHTML = '<b>💬 Explanation:</b> ' + q.exp;
+    fb.after(exp);
+  }
+
+  const navBtns = card.querySelector('.nav-btns');
+  navBtns.innerHTML = `<button class="btn btn-next" onclick="next()">
+    ${i < questions.length - 1 ? '<i class="fa-solid fa-arrow-right"></i> Next Question' : '<i class="fa-solid fa-flag-checkered"></i> Finish Exam'}
+  </button>`;
+}
+
+/* SKIP */
+function skip() {
+  if (answers[i] === null) { answers[i] = -1; answered++; wrongSet.push(questions[i]); wrong++; updateTop(); }
+  next();
+}
+
+/* NEXT */
+function next() {
+  if (i < questions.length - 1) { i++; render(); window.scrollTo({top: 0, behavior: 'smooth'}); }
+  else finish();
+}
+
+/* FINISH */
+function finish() {
+  clearInterval(timerInterval);
+  const total = questions.length;
+  const score = Math.round((correct / total) * 100);
+
+  questions.forEach((q, idx) => {
+    if (answers[idx] !== q.a) wrongSet.push({...q, myAns: answers[idx]});
+  });
+  wrongSet = [...new Map(wrongSet.map(q => [q.t, q])).values()];
+
+  let grade, gradeColor;
+  if (score >= 90) { grade = '🥇 Excellent'; gradeColor = 'var(--success)'; }
+  else if (score >= 75) { grade = '🥈 Very Good'; gradeColor = 'var(--accent)'; }
+  else if (score >= 60) { grade = '🥉 Good'; gradeColor = 'var(--warn)'; }
+  else { grade = '📚 Needs Review'; gradeColor = 'var(--danger)'; }
+
+  const circ = 2 * Math.PI * 45;
+  const offset = circ - (score / 100) * circ;
+
+  const reportHTML = questions.map((q, idx) => {
+    const ok = answers[idx] === q.a;
+    return `<div class="report-item ${ok ? 'ok' : 'no'}">
+      <div class="ri-q">${ok ? '✅' : '❌'} ${q.t}</div>
+      ${!ok ? `
+        <div class="ri-row"><span class="ri-badge ri-yours">Your Answer</span> ${answers[idx] >= 0 ? q.o[answers[idx]] : 'Skipped'}</div>
+        <div class="ri-row"><span class="ri-badge ri-right">Correct</span> ${q.o[q.a]}</div>
+      ` : ''}
+    </div>`;
+  }).join('');
+
+  document.getElementById('prog-bar').style.width = '100%';
+  document.getElementById('app').innerHTML = `
+    <div class="result-hero">
+      <div class="score-ring">
+        <svg viewBox="0 0 110 110">
+          <circle class="ring-bg" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="0"/>
+          <circle class="ring-fill" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="${circ}"
+            style="stroke:${gradeColor}" id="ringFill"/>
+        </svg>
+        <div class="score-num">${score}</div>
+        <div class="score-pct">%</div>
+      </div>
+      <div class="result-grade" style="color:${gradeColor}">${grade}</div>
+      <div class="result-sub">Answered ${answered} of ${total} questions</div>
+      <div class="result-stats">
+        <div class="rs"><div class="n" style="color:var(--success)">${correct}</div><div class="l">Correct</div></div>
+        <div class="rs"><div class="n" style="color:var(--danger)">${wrong}</div><div class="l">Wrong</div></div>
+        <div class="rs"><div class="n" style="color:var(--accent)">${total - answered < 0 ? 0 : total - answered}</div><div class="l">Skipped</div></div>
+      </div>
+    </div>
+
+    <div class="result-actions">
+      ${wrongSet.length ? `<button class="btn btn-retry" onclick="retryWrong()"><i class="fa-solid fa-rotate-right"></i> Retry Wrong (${wrongSet.length})</button>` : ''}
+      <button class="btn btn-home" onclick="init(QUESTIONS)"><i class="fa-solid fa-shuffle"></i> New Random Exam</button>
+      <a href="https://gaith-team.github.io/exam/level1/comprehensive-care/index.html" class="btn btn-home" style="text-decoration:none;"><i class="fa-solid fa-house"></i> Back to Subject</a>
+    </div>
+
+    <div style="margin-top:28px">
+      <div style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text2)">📋 Detailed Report</div>
+      ${reportHTML}
+    </div>`;
+
+  setTimeout(() => { document.getElementById('ringFill').style.strokeDashoffset = offset; }, 100);
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+/* RETRY WRONG */
+function retryWrong() {
+  const pool = [...wrongSet];
+  questions = shuffle(pool); i = 0; correct = 0; wrong = 0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = []; answered = 0; timeLeft = totalTime;
+  startTimer(); render();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+/* THEME */
+const themeBtn = document.getElementById('themeBtn');
+let theme = localStorage.getItem('theme') || 'light';
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', t);
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+
+/* START */
+init(QUESTIONS);
+</script>
+</body>
+</html>
