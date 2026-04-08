@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
@@ -28,7 +28,6 @@
   --warn:    #1d4ed8;
   --r:       16px;
   --tr:      all 0.3s cubic-bezier(0.4,0,0.2,1);
-  --accent-rgb: 37,99,235;
 }
 [data-theme="dark"] {
   --bg:   #0d1117; --bg2: #161b22; --card: #1c2333;
@@ -43,14 +42,12 @@ body {
   transition: background .4s, color .4s;
 }
 
-/* PROGRESS TOP */
 #prog-bar {
   position: fixed; top: 0; left: 0; height: 3px; z-index: 999;
   background: linear-gradient(90deg, var(--accent), var(--accent-light));
   transition: width .2s;
 }
 
-/* NAV */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
   display: flex; align-items: center; justify-content: space-between;
@@ -82,7 +79,6 @@ nav {
 }
 .theme-btn:hover { border-color: var(--accent); transform: rotate(20deg); }
 
-/* HERO BAND */
 .hero-band {
   margin-top: 64px;
   background: linear-gradient(135deg, var(--accent-dark), var(--accent), var(--accent-light));
@@ -112,10 +108,8 @@ nav {
   display: flex; align-items: center; gap: 6px;
 }
 
-/* EXAM SHELL */
 .shell { max-width: 560px; margin: 0 auto; padding: 24px 20px 80px; }
 
-/* STATS ROW */
 .stats-row {
   display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 16px;
 }
@@ -129,7 +123,6 @@ nav {
 .stat-wrong   { color: var(--danger); }
 .stat-remain  { color: var(--accent); }
 
-/* PROGRESS STRIP */
 .prog-strip {
   background: var(--card); border: 1px solid var(--bc); border-radius: var(--r);
   padding: 14px 16px; margin-bottom: 16px;
@@ -153,7 +146,6 @@ nav {
 .timer-badge.danger { color: var(--danger); border-color: rgba(220,38,38,.3); background: rgba(220,38,38,.08); animation: pulse .8s infinite; }
 @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.6} }
 
-/* QUESTION CARD */
 .q-card {
   background: var(--card); border: 1px solid var(--bc);
   border-radius: 20px; overflow: hidden;
@@ -176,7 +168,6 @@ nav {
 }
 .options { padding: 14px 18px 18px; display: flex; flex-direction: column; gap: 10px; }
 
-/* OPTION */
 .opt {
   display: flex; align-items: center; gap: 12px;
   padding: 14px 16px; border-radius: 12px;
@@ -196,21 +187,12 @@ nav {
   font-size: 12px; font-weight: 900; color: var(--text3);
   transition: var(--tr);
 }
-.opt.correct {
-  border-color: var(--success); background: rgba(22,163,74,.08);
-}
-.opt.correct .opt-letter {
-  background: var(--success); color: #fff; border-color: var(--success);
-}
-.opt.wrong {
-  border-color: var(--danger); background: rgba(220,38,38,.07);
-}
-.opt.wrong .opt-letter {
-  background: var(--danger); color: #fff; border-color: var(--danger);
-}
+.opt.correct { border-color: var(--success); background: rgba(22,163,74,.08); }
+.opt.correct .opt-letter { background: var(--success); color: #fff; border-color: var(--success); }
+.opt.wrong { border-color: var(--danger); background: rgba(220,38,38,.07); }
+.opt.wrong .opt-letter { background: var(--danger); color: #fff; border-color: var(--danger); }
 .opt.disabled { pointer-events: none; }
 
-/* FEEDBACK */
 .feedback-bar {
   margin: 14px 18px; padding: 12px 16px; border-radius: 12px;
   display: flex; align-items: center; gap: 10px;
@@ -222,16 +204,14 @@ nav {
 .feedback-bar.no { background: rgba(220,38,38,.08); color: var(--danger); border: 1px solid rgba(220,38,38,.2); }
 .feedback-icon { font-size: 20px; }
 
-/* EXPLANATION */
 .explanation {
   margin: 0 18px 14px; padding: 12px 14px;
-  background: rgba(var(--accent-rgb),.06);
+  background: rgba(37,99,235,.06);
   border-radius: 10px; border-right: 3px solid var(--accent);
   font-size: 13px; color: var(--text2); line-height: 1.6;
   display: none;
 }
 
-/* NAV BTNS */
 .nav-btns { padding: 4px 18px 18px; display: flex; gap: 10px; }
 .btn {
   flex: 1; padding: 13px; border: none; border-radius: 12px;
@@ -249,7 +229,6 @@ nav {
 }
 .btn-skip:hover { border-color: var(--warn); color: var(--warn); }
 
-/* ===== RESULTS ===== */
 .result-hero {
   text-align: center; padding: 36px 20px 28px;
   background: var(--card); border-radius: 20px;
@@ -277,7 +256,6 @@ nav {
 .rs .n { font-size: 20px; font-weight: 900; }
 .rs .l { font-size: 11px; color: var(--text3); }
 
-/* REPORT ITEMS */
 .report-item {
   background: var(--card); border: 1px solid var(--bc); border-radius: 14px;
   padding: 16px; margin-bottom: 10px; border-right: 4px solid var(--bc);
@@ -301,7 +279,6 @@ nav {
 .btn-home { background: var(--bg2); color: var(--text); border: 1px solid var(--bc); }
 .btn-home:hover { border-color: var(--accent); color: var(--accent); }
 
-/* FOOTER */
 footer {
   background: var(--bg2); border-top: 1px solid var(--bc);
   padding: 22px 24px; display: flex; align-items: center;
@@ -336,8 +313,8 @@ footer {
 
 <div class="hero-band">
   <div class="hero-band-icon">📋</div>
-  <h1>Medical-Surgical Nursing 2 </h1>
-  <p>CPR OSCE </p>
+  <h1>Medical-Surgical Nursing 2</h1>
+  <p>CPR OSCE</p>
   <div class="hero-band-meta">
     <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">-- سؤال</span></div>
     <div class="meta-pill"><i class="fa-solid fa-clock"></i>75 Min</div>
@@ -346,7 +323,6 @@ footer {
 </div>
 
 <div class="shell">
-  <!-- STATS -->
   <div class="stats-row">
     <div class="stat-box">
       <div class="val stat-correct" id="sCorrect">0</div>
@@ -362,14 +338,12 @@ footer {
     </div>
   </div>
 
-  <!-- PROGRESS STRIP -->
   <div class="prog-strip">
     <div class="prog-label" id="progLabel">سؤال ١</div>
     <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
     <div class="timer-badge" id="timerBadge"><i class="fa-regular fa-clock"></i> <span id="timerTxt">75:00</span></div>
   </div>
 
-  <!-- APP -->
   <div id="app"></div>
 </div>
 
@@ -382,89 +356,72 @@ footer {
 
 <script>
 const QUESTIONS = [
- {t:"What is the definition of Cardiopulmonary Resuscitation (CPR)?",o:["An emergency lifesaving procedure involving chest compressions and rescue breathing","A surgical procedure to repair the heart","A technique to clean arteries","A method to lower blood pressure"],a:0,exp:"CPR is an emergency lifesaving procedure for victims of cardiac or respiratory arrest involving chest compressions and rescue breathing"},
-            {t:"What is the primary purpose of CPR?",o:["To restore breathing and circulation","To stop bleeding","To reduce pain","To improve vision"],a:0,exp:"The primary purpose is to restore breathing and circulation and provide oxygen to vital organs"},
-            {t:"Which of the following is an indication for CPR?",o:["Myocardial infarction (heart attack)","Allergic reactions","Choking and drowning","All of the above"],a:3,exp:"All these conditions can lead to cardiac or respiratory arrest requiring CPR"},
-            {t:"What is the difference between cardiac arrest and respiratory arrest?",o:["Cardiac arrest = cessation of heartbeat; Respiratory arrest = cessation of breathing","There is no difference","Cardiac arrest is more dangerous than respiratory arrest","Respiratory arrest is more dangerous than cardiac arrest"],a:0,exp:"Cardiac arrest is sudden cessation of heart function while respiratory arrest is sudden cessation of breathing"},
-            {t:"What are the signs of cardiac arrest?",o:["Absence of carotid pulse, immediate loss of consciousness, no breath sounds","Pale face only","High blood pressure","Loud breathing sounds"],a:0,exp:"Key signs include absent pulse, loss of consciousness, and absent breath sounds"},
-            {t:"How many phases of CPR are there?",o:["Three phases","Two phases","Four phases","Five phases"],a:0,exp:"The three phases are: BLS (Basic Life Support), ACLS (Advanced Cardiac Life Support), and Prolonged Life Support"},
-            {t:"What does BLS stand for?",o:["Basic Life Support","Blood Life Support","Breathing Life System","Cardiac Basic Support"],a:0,exp:"BLS = Basic Life Support which includes CAB: Circulation, Airway, Breathing"},
-            {t:"What does ACLS stand for?",o:["Advanced Cardiac Life Support","Airway Cardiac Life System","Advanced Care Life Support","Automated Cardiac Life Support"],a:0,exp:"ACLS = Advanced Cardiac Life Support which includes DEF: Defibrillation, ECG, Fluids/drugs"},
-            {t:"What are the complications of CPR?",o:["Rib fracture, liver laceration, stomach distension, brain damage","High blood pressure only","Fever","Vision loss"],a:0,exp:"Common complications include rib fractures, organ lacerations, and brain damage"},
-            {t:"What is the definition of defibrillation?",o:["Administration of electrical shocks to restore normal heart rhythm","Blood cleaning procedure","Technique to reduce heart rate","Surgical procedure"],a:0,exp:"Defibrillation is the administration of electrical shocks to reset abnormal heart rhythms"},
-            {t:"What is the purpose of defibrillation?",o:["To treat ventricular fibrillation and pulseless ventricular tachycardia","To lower blood pressure","To increase heart rate","To clean arteries"],a:0,exp:"Purpose is to treat VF and pulseless VT to restore cardiac output"},
-            {t:"How many types of defibrillators are there?",o:["Four types","Two types","Three types","Five types"],a:0,exp:"Main types: Monophasic, Biphasic, Internal/Implantable, and AED"},
-            {t:"What is a monophasic defibrillator?",o:["Sends a single electrical pulse from one pad to the other","Sends two electrical currents","Sends three pulses","Sends no pulses"],a:0,exp:"Monophasic sends one pulse, starting at 200 joules and increasing to 360 joules"},
-            {t:"What is a biphasic defibrillator?",o:["Sends electrical current in two opposite directions","Sends one pulse only","Sends three pulses","Does not use electricity"],a:0,exp:"Biphasic sends current in two directions, using less electricity than monophasic"},
-            {t:"What is an internal (implantable) defibrillator?",o:["Surgically placed device in the chest that monitors heartbeat","Portable external device","Home use device","Simple examination device"],a:0,exp:"Internal defibrillator is surgically implanted and runs on battery power"},
-            {t:"What is an AED (Automated External Defibrillator)?",o:["Portable device that can be used by the public in emergencies","Complex medical device","Surgical device","Diagnostic device only"],a:0,exp:"AED is portable and user-friendly, can check heart rate and provide instructions"},
-            {t:"What is the most common complication of defibrillation?",o:["Skin burns from defibrillator pads","Rib fracture","Liver laceration","Vision loss"],a:0,exp:"Skin burns from defibrillator pads are the most common complication"},
-            {t:"How many steps are in the basic CPR procedure?",o:["14 steps","10 steps","20 steps","8 steps"],a:0,exp:"The procedure includes 14 main steps from preparation to post-care"},
-            {t:"What is the first step in performing CPR?",o:["Preparation and checking for hazards","Checking responsiveness","Starting chest compressions","Giving rescue breaths"],a:0,exp:"First step is preparation and checking for environmental hazards"},
-            {t:"How do you check for responsiveness?",o:["Tap shoulder and shout 'Are you okay?'","Only tap shoulder","Only shout","Do not check responsiveness"],a:0,exp:"Tap shoulder and shout to ensure the person is unresponsive before starting CPR"},
-            {t:"What is the correct position for the patient during CPR?",o:["Supine on a firm surface","Prone position","Sitting","Standing"],a:0,exp:"Patient must be supine on a firm surface to maximize chest compression effectiveness"},
-            {t:"What does CAB stand for?",o:["Circulation, Airway, Breathing","Cardiac, Airway, Blood","Chest, Airway, Breathing","Circulation, Assessment, Breathing"],a:0,exp:"CAB is the correct order: Circulation (chest compressions), Airway, Breathing"},
-            {t:"How many chest compressions are required in each CPR cycle?",o:["30 compressions","15 compressions","50 compressions","100 compressions"],a:0,exp:"Each CPR cycle consists of 30 chest compressions followed by 2 rescue breaths"},
-            {t:"How many rescue breaths follow 30 chest compressions?",o:["2 breaths","1 breath","3 breaths","4 breaths"],a:0,exp:"After 30 compressions, give 2 rescue breaths"},
-            {t:"What is the correct compression rate?",o:["100-120 compressions per minute","50-60 compressions per minute","150-200 compressions per minute","30-40 compressions per minute"],a:0,exp:"Recommended rate is 100-120 compressions per minute"},
-            {t:"What is the correct depth of chest compression?",o:["At least 2 inches (5 centimeters)","1 inch only","3 inches","Half inch"],a:0,exp:"Chest compression depth should be at least 2 inches (5 cm)"},
-            {t:"Where should you place your hands during chest compression?",o:["Center of chest between the nipples","Left side only","Right side only","On the neck"],a:0,exp:"Place heel of hand on center of chest between nipples"},
-            {t:"How should you position your hands during chest compression?",o:["Lower hand on chest, upper hand on top, elbows straight","Both hands on side","One hand only","Fingers only"],a:0,exp:"Lower hand on chest, upper hand on top, keeping elbows straight"},
-            {t:"What is the head-tilt-chin-lift technique used for?",o:["Opening airway when no neck injury is suspected","Opening airway with suspected neck injury","Compressing the neck","Not opening airway"],a:0,exp:"Head-tilt-chin-lift is used when no neck injury is suspected"},
-            {t:"What is the jaw-thrust technique used for?",o:["Opening airway with suspected neck injury","Opening airway without neck injury","Compressing the neck","Not opening airway"],a:0,exp:"Jaw-thrust is used with suspected neck injury to avoid movement"},
-            {t:"How long should pulse check take?",o:["No more than 10 seconds","30 seconds","1 minute","2 minutes"],a:0,exp:"Pulse check should not exceed 10 seconds"},
-            {t:"Which artery is checked for pulse?",o:["Carotid artery","Femoral artery","Radial artery","Aorta"],a:0,exp:"Carotid artery is checked because it's close to heart and easily accessible"},
-            {t:"What types of rescue breathing can be used in CPR?",o:["Mouth-to-mouth, mouth-to-nose, or bag-mask with HEPA filter","Mouth-to-mouth only","Tubes only","No rescue breathing"],a:0,exp:"Multiple methods can be used including mouth-to-mouth or bag-mask"},
-            {t:"What are current recommendations for rescue breathing?",o:["Use bag-mask with high-efficiency particulate air (HEPA) filter","Mouth-to-mouth only","No rescue breathing","Tubes only"],a:0,exp:"Current recommendations favor bag-mask with HEPA filter for rescuer protection"},
-            {t:"How often should pulse and breathing be checked during CPR?",o:["After every 5 cycles (about 2 minutes)","Every minute","Every 30 seconds","Every 10 minutes"],a:0,exp:"Check pulse and breathing after every 5 CPR cycles (approximately 2 minutes)"},
-            {t:"When should an AED be used?",o:["After 2 minutes of CPR if device is available","Immediately upon arrival","After 5 minutes","Never"],a:0,exp:"Use AED after 2 minutes of CPR (5 cycles) if available"},
-            {t:"What are shockable rhythms?",o:["Ventricular fibrillation (VF) and pulseless ventricular tachycardia (VT)","Asystole","Pulseless electrical activity (PEA)","All rhythms"],a:0,exp:"Only VF and pulseless VT are shockable rhythms"},
-            {t:"What are non-shockable rhythms?",o:["Asystole and pulseless electrical activity (PEA)","Ventricular fibrillation","Pulseless ventricular tachycardia","All rhythms"],a:0,exp:"Asystole and PEA are non-shockable rhythms"},
-            {t:"What is the default energy for a defibrillator?",o:["250 joules","100 joules","500 joules","1000 joules"],a:0,exp:"Default energy is 250 joules"},
-            {t:"What is the maximum energy for monophasic defibrillation?",o:["360 joules","250 joules","300 joules","200 joules"],a:0,exp:"Maximum energy for monophasic is 360 joules"},
-            {t:"What medications are used in ACLS?",o:["Epinephrine (adrenaline) and amiodarone","Aspirin only","Acetaminophen","Antibiotics"],a:0,exp:"Main medications are Epinephrine and Amiodarone"},
-            {t:"How often is epinephrine given during CPR?",o:["Every 3-5 minutes","Once only","Every minute","Every 10 minutes"],a:0,exp:"Epinephrine is given every 3-5 minutes during CPR"},
-            {t:"What is the role of epinephrine in CPR?",o:["Causes vasoconstriction and increases blood flow to heart and brain","Lowers blood pressure","Reduces heart rate","Dilates blood vessels"],a:0,exp:"Epinephrine causes vasoconstriction increasing blood flow to vital organs"},
-            {t:"What is the role of amiodarone in CPR?",o:["Affects sodium, calcium, and potassium channels","Lowers body temperature","Increases heart rate","Stops bleeding"],a:0,exp:"Amiodarone affects ion channels to stabilize heart rhythm"},
-            {t:"When should CPR be stopped?",o:["When patient starts moving, advanced providers arrive, or rescuer is exhausted","After 5 minutes only","After 1 minute","Never"],a:0,exp:"Stop CPR when patient responds, advanced providers arrive, or rescuer is too exhausted"},
-            {t:"What is the recovery position?",o:["Side-lying position that keeps airway open and prevents choking","Supine position","Sitting position","Standing position"],a:0,exp:"Recovery position maintains open airway and prevents aspiration"},
-            {t:"What are the reversible causes of cardiac arrest?",o:["Hypoxia, hypovolemia, hypothermia, hyperkalemia, tension pneumothorax, tamponade, toxins, thromboembolism","High blood pressure only","Fever only","Obesity"],a:0,exp:"The '4 Hs and 4 Ts' are reversible causes that must be identified and treated"},
-            {t:"What is post-resuscitation care?",o:["Recovery position, 12-lead ECG, oxygen, vital signs every 15 minutes","Stop all treatment","Give more drugs","Move patient"],a:0,exp:"Post-resuscitation care includes monitoring and supportive measures"},
-            {t:"What should be documented during CPR?",o:["Joules used, number of attempts, drugs given, patient response","Time only","Patient name only","No documentation"],a:0,exp:"Must document energy, attempts, medications, and patient response"},
-            {t:"How many people are needed for effective CPR?",o:["At least one, but two is better","3 people","5 people","10 people"],a:0,exp:"One person can perform CPR, but two provides better performance"},
-            {t:"How often should chest compression providers be switched?",o:["Every 2 minutes (5 cycles)","Every 5 minutes","Every 30 seconds","No switching"],a:0,exp:"Switch every 2 minutes to prevent fatigue and maintain compression quality"},
-            {t:"What is the first action when finding an unresponsive person?",o:["Check responsiveness and breathing","Start CPR immediately","Call emergency services","Move the person"],a:0,exp:"First check responsiveness and breathing before any other action"},
-            {t:"Why is carotid pulse check important?",o:["To confirm circulation before starting CPR","To measure blood pressure","To check temperature","To count heart rate"],a:0,exp:"Carotid pulse check confirms circulation and determines need for CPR"},
-            {t:"What is the timeframe for effective CPR?",o:["CPR should start within 4-6 minutes of cardiac arrest","After 30 minutes","After 1 hour","No specific timeframe"],a:0,exp:"CPR should start within 4-6 minutes for best outcomes"},
-            {t:"What is the expected success rate of CPR?",o:["5-30% depending on condition and speed","100%","1%","50%"],a:0,exp:"Success rate depends on speed, initial condition, and underlying causes"},
-            {t:"What signs indicate CPR failure?",o:["No pulse after 30 minutes of continuous CPR","No pulse after 1 minute","No breathing","No response"],a:0,exp:"If no pulse after 30 minutes of continuous CPR, resuscitation efforts may be stopped"},
-            {t:"Why is CPR training important?",o:["Increases confidence, competence, and ability to act quickly","Not important","Reduces confidence","Increases fear"],a:0,exp:"Regular training improves performance and response in emergencies"},
-            {t:"What types of injuries require CPR?",o:["Any condition leading to cardiac or respiratory arrest","Minor injuries only","Burns only","Fractures only"],a:0,exp:"Any condition causing cardiac or respiratory arrest requires CPR"},
-            {t:"What age groups require CPR modifications?",o:["Children and infants require different compression depth and rate","All groups are equal","Elderly only","Teenagers only"],a:0,exp:"Children and infants require adjusted compression depth and rate"},
-            {t:"What are common CPR errors?",o:["Insufficient compression depth, wrong rate, improper airway opening","Compression too strong only","Rate too fast","Not giving drugs"],a:0,exp:"Common errors include inadequate depth, wrong rate, and improper airway management"},
-            {t:"Why is keeping airway open important?",o:["To ensure oxygen reaches lungs and vital organs","To reduce pain","To reduce bleeding","To improve vision"],a:0,exp:"Open airway ensures oxygen delivery to lungs and brain"},
-            {t:"Why is continuous chest compression important?",o:["To ensure continuous blood pumping to vital organs","To reduce pain","To reduce bleeding","To improve vision"],a:0,exp:"Continuous compression ensures blood flow to brain and heart"},
-            {t:"Why is rescue breathing important in CPR?",o:["To provide oxygen to lungs and blood","To reduce pain","To reduce bleeding","To improve vision"],a:0,exp:"Rescue breathing provides oxygen needed by blood and organs"},
-         {t:"Why is defibrillation important in VF cases?",
- o:[
-   "To restore normal heart rhythm through electrical shocks",
-   "To reduce pain",
-   "To reduce bleeding",
-   "To improve vision"
- ],
- a:0,
- exp:"Defibrillation restores normal rhythm in ventricular fibrillation"
-},
-      {t:"Why is emergency service activation important?",
- o:[
-   "To obtain advanced medical help and expert guidance",
-   "Not important",
-   "Delays treatment",
-   "Increases problems"
- ],
- a:0,
- exp:"Emergency services provide advanced care and equipment"
-},
+  {t:"What is the definition of Cardiopulmonary Resuscitation (CPR)?",o:["An emergency lifesaving procedure involving chest compressions and rescue breathing","A surgical procedure to repair the heart","A technique to clean arteries","A method to lower blood pressure"],a:0,exp:"CPR is an emergency lifesaving procedure for victims of cardiac or respiratory arrest involving chest compressions and rescue breathing"},
+  {t:"What is the primary purpose of CPR?",o:["To restore breathing and circulation","To stop bleeding","To reduce pain","To improve vision"],a:0,exp:"The primary purpose is to restore breathing and circulation and provide oxygen to vital organs"},
+  {t:"Which of the following is an indication for CPR?",o:["Myocardial infarction (heart attack)","Allergic reactions","Choking and drowning","All of the above"],a:3,exp:"All these conditions can lead to cardiac or respiratory arrest requiring CPR"},
+  {t:"What is the difference between cardiac arrest and respiratory arrest?",o:["Cardiac arrest = cessation of heartbeat; Respiratory arrest = cessation of breathing","There is no difference","Cardiac arrest is more dangerous than respiratory arrest","Respiratory arrest is more dangerous than cardiac arrest"],a:0,exp:"Cardiac arrest is sudden cessation of heart function while respiratory arrest is sudden cessation of breathing"},
+  {t:"What are the signs of cardiac arrest?",o:["Absence of carotid pulse, immediate loss of consciousness, no breath sounds","Pale face only","High blood pressure","Loud breathing sounds"],a:0,exp:"Key signs include absent pulse, loss of consciousness, and absent breath sounds"},
+  {t:"How many phases of CPR are there?",o:["Three phases","Two phases","Four phases","Five phases"],a:0,exp:"The three phases are: BLS (Basic Life Support), ACLS (Advanced Cardiac Life Support), and Prolonged Life Support"},
+  {t:"What does BLS stand for?",o:["Basic Life Support","Blood Life Support","Breathing Life System","Cardiac Basic Support"],a:0,exp:"BLS = Basic Life Support which includes CAB: Circulation, Airway, Breathing"},
+  {t:"What does ACLS stand for?",o:["Advanced Cardiac Life Support","Airway Cardiac Life System","Advanced Care Life Support","Automated Cardiac Life Support"],a:0,exp:"ACLS = Advanced Cardiac Life Support which includes DEF: Defibrillation, ECG, Fluids/drugs"},
+  {t:"What are the complications of CPR?",o:["Rib fracture, liver laceration, stomach distension, brain damage","High blood pressure only","Fever","Vision loss"],a:0,exp:"Common complications include rib fractures, organ lacerations, and brain damage"},
+  {t:"What is the definition of defibrillation?",o:["Administration of electrical shocks to restore normal heart rhythm","Blood cleaning procedure","Technique to reduce heart rate","Surgical procedure"],a:0,exp:"Defibrillation is the administration of electrical shocks to reset abnormal heart rhythms"},
+  {t:"What is the purpose of defibrillation?",o:["To treat ventricular fibrillation and pulseless ventricular tachycardia","To lower blood pressure","To increase heart rate","To clean arteries"],a:0,exp:"Purpose is to treat VF and pulseless VT to restore cardiac output"},
+  {t:"How many types of defibrillators are there?",o:["Four types","Two types","Three types","Five types"],a:0,exp:"Main types: Monophasic, Biphasic, Internal/Implantable, and AED"},
+  {t:"What is a monophasic defibrillator?",o:["Sends a single electrical pulse from one pad to the other","Sends two electrical currents","Sends three pulses","Sends no pulses"],a:0,exp:"Monophasic sends one pulse, starting at 200 joules and increasing to 360 joules"},
+  {t:"What is a biphasic defibrillator?",o:["Sends electrical current in two opposite directions","Sends one pulse only","Sends three pulses","Does not use electricity"],a:0,exp:"Biphasic sends current in two directions, using less electricity than monophasic"},
+  {t:"What is an internal (implantable) defibrillator?",o:["Surgically placed device in the chest that monitors heartbeat","Portable external device","Home use device","Simple examination device"],a:0,exp:"Internal defibrillator is surgically implanted and runs on battery power"},
+  {t:"What is an AED (Automated External Defibrillator)?",o:["Portable device that can be used by the public in emergencies","Complex medical device","Surgical device","Diagnostic device only"],a:0,exp:"AED is portable and user-friendly, can check heart rate and provide instructions"},
+  {t:"What is the most common complication of defibrillation?",o:["Skin burns from defibrillator pads","Rib fracture","Liver laceration","Vision loss"],a:0,exp:"Skin burns from defibrillator pads are the most common complication"},
+  {t:"How many steps are in the basic CPR procedure?",o:["14 steps","10 steps","20 steps","8 steps"],a:0,exp:"The procedure includes 14 main steps from preparation to post-care"},
+  {t:"What is the first step in performing CPR?",o:["Preparation and checking for hazards","Checking responsiveness","Starting chest compressions","Giving rescue breaths"],a:0,exp:"First step is preparation and checking for environmental hazards"},
+  {t:"How do you check for responsiveness?",o:["Tap shoulder and shout 'Are you okay?'","Only tap shoulder","Only shout","Do not check responsiveness"],a:0,exp:"Tap shoulder and shout to ensure the person is unresponsive before starting CPR"},
+  {t:"What is the correct position for the patient during CPR?",o:["Supine on a firm surface","Prone position","Sitting","Standing"],a:0,exp:"Patient must be supine on a firm surface to maximize chest compression effectiveness"},
+  {t:"What does CAB stand for?",o:["Circulation, Airway, Breathing","Cardiac, Airway, Blood","Chest, Airway, Breathing","Circulation, Assessment, Breathing"],a:0,exp:"CAB is the correct order: Circulation (chest compressions), Airway, Breathing"},
+  {t:"How many chest compressions are required in each CPR cycle?",o:["30 compressions","15 compressions","50 compressions","100 compressions"],a:0,exp:"Each CPR cycle consists of 30 chest compressions followed by 2 rescue breaths"},
+  {t:"How many rescue breaths follow 30 chest compressions?",o:["2 breaths","1 breath","3 breaths","4 breaths"],a:0,exp:"After 30 compressions, give 2 rescue breaths"},
+  {t:"What is the correct compression rate?",o:["100-120 compressions per minute","50-60 compressions per minute","150-200 compressions per minute","30-40 compressions per minute"],a:0,exp:"Recommended rate is 100-120 compressions per minute"},
+  {t:"What is the correct depth of chest compression?",o:["At least 2 inches (5 centimeters)","1 inch only","3 inches","Half inch"],a:0,exp:"Chest compression depth should be at least 2 inches (5 cm)"},
+  {t:"Where should you place your hands during chest compression?",o:["Center of chest between the nipples","Left side only","Right side only","On the neck"],a:0,exp:"Place heel of hand on center of chest between nipples"},
+  {t:"How should you position your hands during chest compression?",o:["Lower hand on chest, upper hand on top, elbows straight","Both hands on side","One hand only","Fingers only"],a:0,exp:"Lower hand on chest, upper hand on top, keeping elbows straight"},
+  {t:"What is the head-tilt-chin-lift technique used for?",o:["Opening airway when no neck injury is suspected","Opening airway with suspected neck injury","Compressing the neck","Not opening airway"],a:0,exp:"Head-tilt-chin-lift is used when no neck injury is suspected"},
+  {t:"What is the jaw-thrust technique used for?",o:["Opening airway with suspected neck injury","Opening airway without neck injury","Compressing the neck","Not opening airway"],a:0,exp:"Jaw-thrust is used with suspected neck injury to avoid movement"},
+  {t:"How long should pulse check take?",o:["No more than 10 seconds","30 seconds","1 minute","2 minutes"],a:0,exp:"Pulse check should not exceed 10 seconds"},
+  {t:"Which artery is checked for pulse?",o:["Carotid artery","Femoral artery","Radial artery","Aorta"],a:0,exp:"Carotid artery is checked because it's close to heart and easily accessible"},
+  {t:"What types of rescue breathing can be used in CPR?",o:["Mouth-to-mouth, mouth-to-nose, or bag-mask with HEPA filter","Mouth-to-mouth only","Tubes only","No rescue breathing"],a:0,exp:"Multiple methods can be used including mouth-to-mouth or bag-mask"},
+  {t:"What are current recommendations for rescue breathing?",o:["Use bag-mask with high-efficiency particulate air (HEPA) filter","Mouth-to-mouth only","No rescue breathing","Tubes only"],a:0,exp:"Current recommendations favor bag-mask with HEPA filter for rescuer protection"},
+  {t:"How often should pulse and breathing be checked during CPR?",o:["After every 5 cycles (about 2 minutes)","Every minute","Every 30 seconds","Every 10 minutes"],a:0,exp:"Check pulse and breathing after every 5 CPR cycles (approximately 2 minutes)"},
+  {t:"When should an AED be used?",o:["After 2 minutes of CPR if device is available","Immediately upon arrival","After 5 minutes","Never"],a:0,exp:"Use AED after 2 minutes of CPR (5 cycles) if available"},
+  {t:"What are shockable rhythms?",o:["Ventricular fibrillation (VF) and pulseless ventricular tachycardia (VT)","Asystole","Pulseless electrical activity (PEA)","All rhythms"],a:0,exp:"Only VF and pulseless VT are shockable rhythms"},
+  {t:"What are non-shockable rhythms?",o:["Asystole and pulseless electrical activity (PEA)","Ventricular fibrillation","Pulseless ventricular tachycardia","All rhythms"],a:0,exp:"Asystole and PEA are non-shockable rhythms"},
+  {t:"What is the default energy for a defibrillator?",o:["250 joules","100 joules","500 joules","1000 joules"],a:0,exp:"Default energy is 250 joules"},
+  {t:"What is the maximum energy for monophasic defibrillation?",o:["360 joules","250 joules","300 joules","200 joules"],a:0,exp:"Maximum energy for monophasic is 360 joules"},
+  {t:"What medications are used in ACLS?",o:["Epinephrine (adrenaline) and amiodarone","Aspirin only","Acetaminophen","Antibiotics"],a:0,exp:"Main medications are Epinephrine and Amiodarone"},
+  {t:"How often is epinephrine given during CPR?",o:["Every 3-5 minutes","Once only","Every minute","Every 10 minutes"],a:0,exp:"Epinephrine is given every 3-5 minutes during CPR"},
+  {t:"What is the role of epinephrine in CPR?",o:["Causes vasoconstriction and increases blood flow to heart and brain","Lowers blood pressure","Reduces heart rate","Dilates blood vessels"],a:0,exp:"Epinephrine causes vasoconstriction increasing blood flow to vital organs"},
+  {t:"What is the role of amiodarone in CPR?",o:["Affects sodium, calcium, and potassium channels","Lowers body temperature","Increases heart rate","Stops bleeding"],a:0,exp:"Amiodarone affects ion channels to stabilize heart rhythm"},
+  {t:"When should CPR be stopped?",o:["When patient starts moving, advanced providers arrive, or rescuer is exhausted","After 5 minutes only","After 1 minute","Never"],a:0,exp:"Stop CPR when patient responds, advanced providers arrive, or rescuer is too exhausted"},
+  {t:"What is the recovery position?",o:["Side-lying position that keeps airway open and prevents choking","Supine position","Sitting position","Standing position"],a:0,exp:"Recovery position maintains open airway and prevents aspiration"},
+  {t:"What are the reversible causes of cardiac arrest?",o:["Hypoxia, hypovolemia, hypothermia, hyperkalemia, tension pneumothorax, tamponade, toxins, thromboembolism","High blood pressure only","Fever only","Obesity"],a:0,exp:"The '4 Hs and 4 Ts' are reversible causes that must be identified and treated"},
+  {t:"What is post-resuscitation care?",o:["Recovery position, 12-lead ECG, oxygen, vital signs every 15 minutes","Stop all treatment","Give more drugs","Move patient"],a:0,exp:"Post-resuscitation care includes monitoring and supportive measures"},
+  {t:"What should be documented during CPR?",o:["Joules used, number of attempts, drugs given, patient response","Time only","Patient name only","No documentation"],a:0,exp:"Must document energy, attempts, medications, and patient response"},
+  {t:"How many people are needed for effective CPR?",o:["At least one, but two is better","3 people","5 people","10 people"],a:0,exp:"One person can perform CPR, but two provides better performance"},
+  {t:"How often should chest compression providers be switched?",o:["Every 2 minutes (5 cycles)","Every 5 minutes","Every 30 seconds","No switching"],a:0,exp:"Switch every 2 minutes to prevent fatigue and maintain compression quality"},
+  {t:"What is the first action when finding an unresponsive person?",o:["Check responsiveness and breathing","Start CPR immediately","Call emergency services","Move the person"],a:0,exp:"First check responsiveness and breathing before any other action"},
+  {t:"Why is carotid pulse check important?",o:["To confirm circulation before starting CPR","To measure blood pressure","To check temperature","To count heart rate"],a:0,exp:"Carotid pulse check confirms circulation and determines need for CPR"},
+  {t:"What is the timeframe for effective CPR?",o:["CPR should start within 4-6 minutes of cardiac arrest","After 30 minutes","After 1 hour","No specific timeframe"],a:0,exp:"CPR should start within 4-6 minutes for best outcomes"},
+  {t:"What is the expected success rate of CPR?",o:["5-30% depending on condition and speed","100%","1%","50%"],a:0,exp:"Success rate depends on speed, initial condition, and underlying causes"},
+  {t:"What signs indicate CPR failure?",o:["No pulse after 30 minutes of continuous CPR","No pulse after 1 minute","No breathing","No response"],a:0,exp:"If no pulse after 30 minutes of continuous CPR, resuscitation efforts may be stopped"},
+  {t:"Why is CPR training important?",o:["Increases confidence, competence, and ability to act quickly","Not important","Reduces confidence","Increases fear"],a:0,exp:"Regular training improves performance and response in emergencies"},
+  {t:"What types of injuries require CPR?",o:["Any condition leading to cardiac or respiratory arrest","Minor injuries only","Burns only","Fractures only"],a:0,exp:"Any condition causing cardiac or respiratory arrest requires CPR"},
+  {t:"What age groups require CPR modifications?",o:["Children and infants require different compression depth and rate","All groups are equal","Elderly only","Teenagers only"],a:0,exp:"Children and infants require adjusted compression depth and rate"},
+  {t:"What are common CPR errors?",o:["Insufficient compression depth, wrong rate, improper airway opening","Compression too strong only","Rate too fast","Not giving drugs"],a:0,exp:"Common errors include inadequate depth, wrong rate, and improper airway management"},
+  {t:"Why is keeping airway open important?",o:["To ensure oxygen reaches lungs and vital organs","To reduce pain","To reduce bleeding","To improve vision"],a:0,exp:"Open airway ensures oxygen delivery to lungs and brain"},
+  {t:"Why is continuous chest compression important?",o:["To ensure continuous blood pumping to vital organs","To reduce pain","To reduce bleeding","To improve vision"],a:0,exp:"Continuous compression ensures blood flow to brain and heart"},
+  {t:"Why is rescue breathing important in CPR?",o:["To provide oxygen to lungs and blood","To reduce pain","To reduce bleeding","To improve vision"],a:0,exp:"Rescue breathing provides oxygen needed by blood and organs"},
+  {t:"Why is defibrillation important in VF cases?",o:["To restore normal heart rhythm through electrical shocks","To reduce pain","To reduce bleeding","To improve vision"],a:0,exp:"Defibrillation restores normal rhythm in ventricular fibrillation"},
+  {t:"Why is emergency service activation important?",o:["To obtain advanced medical help and expert guidance","Not important","Delays treatment","Increases problems"],a:0,exp:"Emergency services provide advanced care and equipment"}
+];
 
 /* ============ ENGINE ============ */
 let questions, i, correct, wrong, answers, wrongSet, answered;
@@ -472,9 +429,9 @@ let totalTime = 75*60, timeLeft, timerInterval;
 const LETTERS = ['A','B','C','D','E','F'];
 
 function shuffle(arr) {
-  for (let i = arr.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [arr[i], arr[j]] = [arr[j], arr[i]];
+  for (let k = arr.length - 1; k > 0; k--) {
+    const j = Math.floor(Math.random() * (k + 1));
+    [arr[k], arr[j]] = [arr[j], arr[k]];
   }
   return arr;
 }
@@ -490,7 +447,6 @@ function init(pool) {
   render();
 }
 
-/* TIMER */
 function startTimer() {
   clearInterval(timerInterval);
   timerInterval = setInterval(() => {
@@ -504,7 +460,6 @@ function startTimer() {
   }, 1000);
 }
 
-/* TOP UI */
 function updateTop() {
   const total = questions.length;
   document.getElementById('sCorrect').textContent = correct;
@@ -515,7 +470,6 @@ function updateTop() {
   document.getElementById('prog-bar').style.width = ((i + 1) / total * 100) + '%';
 }
 
-/* RENDER QUESTION */
 function render() {
   updateTop();
   const q = questions[i];
@@ -539,7 +493,6 @@ function render() {
     </div>`;
 }
 
-/* CHOOSE */
 function choose(v) {
   if (answers[i] !== null) return;
   answers[i] = v;
@@ -559,8 +512,8 @@ function choose(v) {
   const fb = document.createElement('div');
   fb.className = 'feedback-bar ' + (ok ? 'ok' : 'no');
   fb.innerHTML = ok
-    ? `<span class="feedback-icon">🎉</span> <span>ممتاز ، اللهم بارك </span>`
-    : `<span class="feedback-icon">😔</span> <span>ركز يا سكر</b></span>`;
+    ? `<span class="feedback-icon">🎉</span> <span>ممتاز ، اللهم بارك</span>`
+    : `<span class="feedback-icon">😔</span> <span>ركز يا سكر</span>`;
 
   const card = document.querySelector('.q-card');
   card.querySelector('.options').after(fb);
@@ -578,28 +531,28 @@ function choose(v) {
   </button>`;
 }
 
-/* SKIP */
 function skip() {
   if (answers[i] === null) { answers[i] = -1; answered++; wrongSet.push(questions[i]); wrong++; updateTop(); }
   next();
 }
 
-/* NEXT */
 function next() {
   if (i < questions.length - 1) { i++; render(); window.scrollTo({top: 0, behavior: 'smooth'}); }
   else finish();
 }
 
-/* FINISH */
 function finish() {
   clearInterval(timerInterval);
   const total = questions.length;
   const score = Math.round((correct / total) * 100);
 
+  const seenTitles = new Set();
   questions.forEach((q, idx) => {
-    if (answers[idx] !== q.a) wrongSet.push({...q, myAns: answers[idx]});
+    if (answers[idx] !== q.a && !seenTitles.has(q.t)) {
+      seenTitles.add(q.t);
+      wrongSet.push({...q, myAns: answers[idx]});
+    }
   });
-  wrongSet = [...new Map(wrongSet.map(q => [q.t, q])).values()];
 
   let grade, gradeColor;
   if (score >= 90) { grade = '🥇 ممتاز'; gradeColor = 'var(--success)'; }
@@ -638,7 +591,7 @@ function finish() {
       <div class="result-stats">
         <div class="rs"><div class="n" style="color:var(--success)">${correct}</div><div class="l">صحيح</div></div>
         <div class="rs"><div class="n" style="color:var(--danger)">${wrong}</div><div class="l">خطأ</div></div>
-        <div class="rs"><div class="n" style="color:var(--accent)">${total - answered < 0 ? 0 : total - answered}</div><div class="l">تخطي</div></div>
+        <div class="rs"><div class="n" style="color:var(--accent)">${Math.max(0, total - answered)}</div><div class="l">تخطي</div></div>
       </div>
     </div>
 
@@ -657,7 +610,6 @@ function finish() {
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
-/* RETRY WRONG */
 function retryWrong() {
   const pool = [...wrongSet];
   questions = shuffle(pool); i = 0; correct = 0; wrong = 0;
@@ -667,7 +619,6 @@ function retryWrong() {
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
-/* THEME */
 const themeBtn = document.getElementById('themeBtn');
 let theme = localStorage.getItem('theme') || 'light';
 function applyTheme(t) {
@@ -679,7 +630,6 @@ function applyTheme(t) {
 applyTheme(theme);
 themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
 
-/* START */
 init(QUESTIONS);
 </script>
 </body>
