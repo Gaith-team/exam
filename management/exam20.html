@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> GHAITH TEAM</title>
+<title>GHAITH TEAM</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
@@ -12,10 +12,10 @@
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --accent:       #0d9488;
-  --accent-light: #14b8a6;
-  --accent-dark:  #0f766e;
-  --accent-glow:  rgba(13,148,136,0.2);
+  --accent:       #2563eb;
+  --accent-light: #3b82f6;
+  --accent-dark:  #1d4ed8;
+  --accent-glow:  rgba(37,99,235,0.2);
   --bg:      #f8fafc;
   --bg2:     #eef2f7;
   --card:    #ffffff;
@@ -25,7 +25,7 @@
   --bc:      rgba(0,0,0,0.07);
   --success: #16a34a;
   --danger:  #dc2626;
-  --warn:    #0f766e;
+  --warn:    #1d4ed8;
   --r:       16px;
   --tr:      all 0.3s cubic-bezier(0.4,0,0.2,1);
 }
@@ -323,7 +323,7 @@ footer {
 <div id="prog-bar" style="width:0%"></div>
 
 <nav>
-  <a href="https://gaith-team.github.io/exam/pediatric/index.html" class="nav-back"><i class="fa-solid fa-arrow-right"></i> رجوع</a>
+  <a href="https://gaith-team.github.io/exam/medical1/index.html" class="nav-back"><i class="fa-solid fa-arrow-right"></i> رجوع</a>
   <div class="nav-brand">
     <div class="nav-logo-icon">GT</div>
     <span>GHAITH TEAM</span>
@@ -334,12 +334,12 @@ footer {
 </nav>
 
 <div class="hero-band">
-  <div class="hero-band-icon">🍼</div>
+  <div class="hero-band-icon">📋</div>
   <h1>جراحة عامة</h1>
-  <p>أسئلة الدكتور</p>
+  <p>أسئلة الدكتور علي محاضرات الانفكيشن والشوك</p>
   <div class="hero-band-meta">
     <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">-- سؤال</span></div>
-    <div class="meta-pill"><i class="fa-solid fa-clock"></i> 50 Min</div>
+    <div class="meta-pill"><i class="fa-solid fa-clock"></i> 60 Min</div>
     <div class="meta-pill"><i class="fa-solid fa-shuffle"></i> Shuffled</div>
   </div>
 </div>
@@ -365,7 +365,7 @@ footer {
   <div class="prog-strip">
     <div class="prog-label" id="progLabel">سؤال ١</div>
     <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
-    <div class="timer-badge" id="timerBadge"><i class="fa-regular fa-clock"></i> <span id="timerTxt">50:00</span></div>
+    <div class="timer-badge" id="timerBadge"><i class="fa-regular fa-clock"></i> <span id="timerTxt">60:00</span></div>
   </div>
 
   <!-- APP -->
@@ -381,13 +381,7 @@ footer {
 
 <script>
 const QUESTIONS = [
-<script>
-const questions = [
-
-<script>
-const questions = [
-
-{t:"The shock includes:", o:["Hypovolemic shock","Cardiogenic shock","Septic shock","All answers are correct"], a:3,
+/{t:"The shock includes:", o:["Hypovolemic shock","Cardiogenic shock","Septic shock","All answers are correct"], a:3,
 exp:"Shock has multiple types: hypovolemic (loss of blood/fluids), cardiogenic (heart failure), and septic (infection)."},
 
 {t:"Monitoring of shocked patient includes:", o:["Insertion of Foley’s catheter","Doing CVP","CBC & arterial blood gases","All answers are correct"], a:3,
@@ -467,12 +461,11 @@ exp:"All are classic signs of tetanus."},
 
 {t:"Incubation period in tetanus is:", o:["1 week","1 month","3 months","1 day"], a:0,
 exp:"Usually around 1 week (range days to weeks)."}
-
 ];
 
 /* ============ ENGINE ============ */
 let questions, i, correct, wrong, answers, wrongSet, answered;
-let totalTime = 50*60, timeLeft, timerInterval;
+let totalTime = 60*60, timeLeft, timerInterval;
 const LETTERS = ['A','B','C','D','E','F'];
 
 function shuffle(arr) {
@@ -563,8 +556,8 @@ function choose(v) {
   const fb = document.createElement('div');
   fb.className = 'feedback-bar ' + (ok ? 'ok' : 'no');
   fb.innerHTML = ok
-    ? `<span class="feedback-icon">🎉</span> <span>شطور جدا ، اللهم بارك</span>`
-    : `<span class="feedback-icon">😔</span> <span>ركز يا سكر</span>`;
+    ? `<span class="feedback-icon">🎉</span> <span>ممتاز ، اللهم بارك </span>`
+    : `<span class="feedback-icon">😔</span> <span>ركز يا سكر</b></span>`;
 
   const card = document.querySelector('.q-card');
   card.querySelector('.options').after(fb);
@@ -647,9 +640,13 @@ function finish() {
     </div>
 
     <div class="result-actions">
-      ${wrongSet.length ? `<button class="btn btn-retry" onclick="retryWrong()"><i class="fa-solid fa-rotate-right"></i> إعادة الخطأ (${wrongSet.length})</button>` : ''}
+      ${wrongSet.length ? `<button class="btn btn-retry" onclick="retryWrong()"><i class="fa-solid fa-rotate-right"></i> إعادة الخطأ (${wrongSet.length})
+
+</button>` : ''}
       <button class="btn btn-home" onclick="init(QUESTIONS)"><i class="fa-solid fa-shuffle"></i> امتحان جديد عشوائي</button>
-      <a href="https://gaith-team.github.io/exam/pediatric/index.html" class="btn btn-home" style="text-decoration:none;"><i class="fa-solid fa-house"></i> رجوع للمادة</a>
+      <a href="https://gaith-team.github.io/exam/medical1/index.html" class="btn btn-home" style="text-decoration:none;"><i class="fa-solid fa-house"></i> رجوع 
+
+للمادة</a>
     </div>
 
     <div style="margin-top:28px">
