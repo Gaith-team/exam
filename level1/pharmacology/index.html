@@ -297,7 +297,94 @@ nav {
   transform: translateX(-4px);
 }
 
-/* ── COMING SOON tag ── */
+/* ── MIDTERM BANNER ── */
+.midterm-banner {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 0;
+  position: relative; overflow: hidden;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, #7a3800 0%, var(--pharma-deep) 40%, var(--pharma) 80%, var(--pharma-lite) 100%);
+  border: 2px solid rgba(255,255,255,0.15);
+  text-decoration: none; color: inherit;
+  transition: var(--transition);
+  margin-bottom: 32px;
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(230,126,34,0.35);
+}
+.midterm-banner:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 18px 50px rgba(230,126,34,0.45);
+}
+.midterm-glow {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 300px 150px at 20% 50%, rgba(255,230,150,0.18) 0%, transparent 70%),
+    radial-gradient(ellipse 200px 200px at 80% 50%, rgba(0,0,0,0.2) 0%, transparent 70%);
+}
+.midterm-banner::before {
+  content: 'MIDTERM';
+  position: absolute; right: -18px; top: 50%; transform: translateY(-50%);
+  font-size: 80px; font-weight: 900;
+  color: rgba(255,255,255,0.05);
+  letter-spacing: 4px; pointer-events: none;
+  font-family: 'Cairo', sans-serif;
+}
+.midterm-left {
+  display: flex; align-items: center; gap: 20px;
+  padding: 26px 24px; flex: 1; position: relative; z-index: 1;
+}
+.midterm-icon {
+  width: 60px; height: 60px; flex-shrink: 0;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.18);
+  border: 1.5px solid rgba(255,255,255,0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px;
+  transition: var(--transition);
+  backdrop-filter: blur(8px);
+}
+.midterm-banner:hover .midterm-icon { transform: rotate(-6deg) scale(1.1); }
+.midterm-body { display: flex; flex-direction: column; gap: 5px; }
+.midterm-tag {
+  font-size: 10px; font-weight: 800; letter-spacing: 2px;
+  text-transform: uppercase; color: rgba(255,230,150,0.95);
+}
+.midterm-title {
+  font-size: 22px; font-weight: 900; color: #fff; line-height: 1.2;
+}
+.midterm-title-en {
+  font-size: 12px; color: rgba(255,255,255,0.65); font-weight: 600; letter-spacing: 0.5px;
+}
+.midterm-desc {
+  font-size: 13px; color: rgba(255,255,255,0.78); line-height: 1.6; margin-top: 4px;
+  max-width: 460px;
+}
+.midterm-arrow {
+  padding: 0 28px; position: relative; z-index: 1;
+  display: flex; align-items: center;
+}
+.midterm-arrow-btn {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  border: 1.5px solid rgba(255,255,255,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; color: #fff;
+  transition: var(--transition);
+}
+.midterm-banner:hover .midterm-arrow-btn {
+  background: rgba(255,255,255,0.35);
+  transform: translateX(-5px);
+}
+
+@media (max-width: 640px) {
+  .midterm-left { padding: 20px 16px; gap: 14px; }
+  .midterm-icon { width: 48px; height: 48px; font-size: 22px; }
+  .midterm-title { font-size: 18px; }
+  .midterm-arrow { padding: 0 16px; }
+  .midterm-banner::before { display: none; }
+}
+
+
 .lc-soon {
   display: inline-flex; align-items: center; gap: 5px;
   padding: 3px 10px; border-radius: 50px;
@@ -307,7 +394,94 @@ nav {
   margin-top: 6px; width: fit-content;
 }
 
-/* ── EMPTY STATE ── */
+/* ── FINAL BANNER ── */
+.final-banner {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 0;
+  position: relative; overflow: hidden;
+  border-radius: var(--radius);
+  background: linear-gradient(135deg, #0a2a5e 0%, #0f4c81 40%, #1a6bb5 75%, #00b4d8 100%);
+  border: 2px solid rgba(255,255,255,0.15);
+  text-decoration: none; color: inherit;
+  transition: var(--transition);
+  margin-bottom: 32px;
+  cursor: pointer;
+  box-shadow: 0 8px 32px rgba(15,76,129,0.4);
+}
+.final-banner:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: 0 18px 50px rgba(15,76,129,0.5);
+}
+.final-glow {
+  position: absolute; inset: 0; pointer-events: none;
+  background:
+    radial-gradient(ellipse 300px 150px at 20% 50%, rgba(100,200,255,0.15) 0%, transparent 70%),
+    radial-gradient(ellipse 200px 200px at 80% 50%, rgba(0,0,0,0.2) 0%, transparent 70%);
+}
+.final-banner::before {
+  content: 'FINAL';
+  position: absolute; right: -10px; top: 50%; transform: translateY(-50%);
+  font-size: 90px; font-weight: 900;
+  color: rgba(255,255,255,0.05);
+  letter-spacing: 4px; pointer-events: none;
+  font-family: 'Cairo', sans-serif;
+}
+.final-left {
+  display: flex; align-items: center; gap: 20px;
+  padding: 26px 24px; flex: 1; position: relative; z-index: 1;
+}
+.final-icon {
+  width: 60px; height: 60px; flex-shrink: 0;
+  border-radius: 16px;
+  background: rgba(255,255,255,0.18);
+  border: 1.5px solid rgba(255,255,255,0.25);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 28px;
+  transition: var(--transition);
+  backdrop-filter: blur(8px);
+}
+.final-banner:hover .final-icon { transform: rotate(-6deg) scale(1.1); }
+.final-body { display: flex; flex-direction: column; gap: 5px; }
+.final-tag {
+  font-size: 10px; font-weight: 800; letter-spacing: 2px;
+  text-transform: uppercase; color: rgba(150,230,255,0.95);
+}
+.final-title {
+  font-size: 22px; font-weight: 900; color: #fff; line-height: 1.2;
+}
+.final-title-en {
+  font-size: 12px; color: rgba(255,255,255,0.65); font-weight: 600; letter-spacing: 0.5px;
+}
+.final-desc {
+  font-size: 13px; color: rgba(255,255,255,0.78); line-height: 1.6; margin-top: 4px;
+  max-width: 460px;
+}
+.final-arrow {
+  padding: 0 28px; position: relative; z-index: 1;
+  display: flex; align-items: center;
+}
+.final-arrow-btn {
+  width: 42px; height: 42px; border-radius: 50%;
+  background: rgba(255,255,255,0.2);
+  border: 1.5px solid rgba(255,255,255,0.3);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 18px; color: #fff;
+  transition: var(--transition);
+}
+.final-banner:hover .final-arrow-btn {
+  background: rgba(255,255,255,0.35);
+  transform: translateX(-5px);
+}
+
+@media (max-width: 640px) {
+  .final-left { padding: 20px 16px; gap: 14px; }
+  .final-icon { width: 48px; height: 48px; font-size: 22px; }
+  .final-title { font-size: 18px; }
+  .final-arrow { padding: 0 16px; }
+  .final-banner::before { display: none; }
+}
+
+
 .empty-state {
   text-align: center; padding: 60px 20px; display: none;
 }
@@ -406,6 +580,42 @@ nav {
 
 <!-- MAIN -->
 <main class="main">
+
+  <!-- MIDTERM REVIEW BANNER -->
+  <a href="midterm-review/index.html" class="midterm-banner animate-up"
+     data-search="midterm review مراجعة ميدترم مراجعه نصف السنة">
+    <div class="midterm-glow"></div>
+    <div class="midterm-left">
+      <div class="midterm-icon">📝</div>
+      <div class="midterm-body">
+        <div class="midterm-tag">⭐ مراجعة شاملة</div>
+        <div class="midterm-title">مراجعة الميدترم</div>
+        <div class="midterm-title-en">Midterm Review — أسئلة مهمه </div>
+        <div class="midterm-desc">أسئلة هتخش تلاقيها في الامتحان — جاهز للامتحان في أسرع وقت</div>
+      </div>
+    </div>
+    <div class="midterm-arrow">
+      <div class="midterm-arrow-btn">←</div>
+    </div>
+  </a>
+
+  <!-- FINAL REVIEW BANNER -->
+  <a href="final-review/index.html" class="final-banner animate-up"
+     data-search="final review مراجعة فاينل مراجعه نهاية السنة اخر">
+    <div class="final-glow"></div>
+    <div class="final-left">
+      <div class="final-icon">🏆</div>
+      <div class="final-body">
+        <div class="final-tag">🔥 مراجعة نهائية شاملة</div>
+        <div class="final-title">مراجعة الفاينل</div>
+        <div class="final-title-en">Final Review — مراجعة كل المادة</div>
+        <div class="final-desc">مراجعة متكاملة لجميع محاضرات المادة — كل ما تحتاجه قبل الامتحان النهائي في مكان واحد</div>
+      </div>
+    </div>
+    <div class="final-arrow">
+      <div class="final-arrow-btn">←</div>
+    </div>
+  </a>
 
   <div class="section-label animate-up">
     <div class="section-label-text">المحاضرات</div>
@@ -603,7 +813,7 @@ nav {
 
 <!-- FOOTER -->
 <footer class="page-footer">
-  <div class="footer-brand">GHAITH <span>TEAM</span> — الفارماكولوجي</div>
+  <div class="footer-brand">GHAITH <span>TEAM</span> — فارما</div>
   <div class="footer-copy">جميع الحقوق محفوظة © 2026</div>
 </footer>
 
