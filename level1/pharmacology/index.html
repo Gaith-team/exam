@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>الفارماكولوجي — GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --pharma:     #e67e22;
+  --pharma-deep:#b8590a;
+  --pharma-lite:#f39c12;
+  --pharma-glow:rgba(230,126,34,0.18);
+  --pharma-soft:rgba(230,126,34,0.09);
+
+  --bg:    #f9f5f0;
+  --bg2:   #f1e8dc;
+  --card:  #ffffff;
+  --text:  #1a1208;
+  --text2: #5a4a30;
+  --text3: #9a8060;
+  --border:rgba(230,126,34,0.15);
+  --shadow:0 4px 24px rgba(230,126,34,0.10);
+  --shadow-hover:0 14px 44px rgba(230,126,34,0.22);
+  --radius:18px;
+  --radius-sm:10px;
+  --transition:all 0.33s cubic-bezier(0.4,0,0.2,1);
+}
+
+[data-theme="dark"] {
+  --bg:    #12100c;
+  --bg2:   #1c1710;
+  --card:  #231e16;
+  --text:  #f0e6d6;
+  --text2: #c0a880;
+  --text3: #806848;
+  --border:rgba(230,126,34,0.18);
+  --shadow:0 4px 24px rgba(0,0,0,0.4);
+  --shadow-hover:0 14px 44px rgba(230,126,34,0.25);
+}
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Cairo','Tajawal',sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background .4s, color .4s;
+}
+
+/* ── PROGRESS BAR ── */
+#progress-bar {
+  position: fixed; top: 0; left: 0; height: 3px; z-index: 999;
+  background: linear-gradient(90deg, var(--pharma), var(--pharma-lite));
+  width: 0%; transition: width .1s;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 68px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 36px;
+  background: rgba(249,245,240,0.92);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+  transition: var(--transition);
+}
+[data-theme="dark"] nav { background: rgba(18,16,12,0.94); }
+
+.nav-back {
+  display: flex; align-items: center; gap: 9px;
+  text-decoration: none; color: var(--text2);
+  font-size: 14px; font-weight: 700;
+  padding: 8px 14px; border-radius: 9px;
+  border: 1px solid var(--border);
+  background: var(--card);
+  transition: var(--transition);
+}
+.nav-back:hover { color: var(--pharma); border-color: var(--pharma); transform: translateX(3px); }
+
+.nav-center {
+  display: flex; align-items: center; gap: 10px;
+}
+.nav-icon {
+  width: 36px; height: 36px; border-radius: 9px;
+  background: linear-gradient(135deg, var(--pharma), var(--pharma-lite));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 17px;
+}
+.nav-title { font-size: 16px; font-weight: 900; color: var(--text); }
+.nav-title span { color: var(--pharma); }
+
+.nav-actions { display: flex; align-items: center; gap: 10px; }
+.theme-toggle {
+  width: 40px; height: 40px; border-radius: 50%;
+  border: 1.5px solid var(--border); background: var(--card);
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  font-size: 17px; transition: var(--transition);
+}
+.theme-toggle:hover { border-color: var(--pharma); transform: rotate(20deg); }
+
+/* ── HERO ── */
+.hero {
+  padding: 110px 40px 60px;
+  position: relative; overflow: hidden;
+  background: linear-gradient(160deg, var(--pharma) 0%, var(--pharma-deep) 55%, #7a3800 100%);
+}
+.hero::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse 700px 400px at 10% 60%, rgba(255,200,100,0.15) 0%, transparent 65%),
+    radial-gradient(ellipse 500px 600px at 90% 20%, rgba(0,0,0,0.25) 0%, transparent 65%);
+}
+.hero-pattern {
+  position: absolute; inset: 0; z-index: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 50px 50px;
+  mask-image: radial-gradient(ellipse 90% 90% at 50% 50%, black 20%, transparent 80%);
+}
+.hero-inner {
+  position: relative; z-index: 1;
+  max-width: 860px; margin: 0 auto;
+  display: flex; align-items: flex-start; gap: 40px;
+  flex-wrap: wrap;
+}
+.hero-left { flex: 1; min-width: 260px; }
+.hero-badge {
+  display: inline-flex; align-items: center; gap: 7px;
+  padding: 5px 14px; border-radius: 50px;
+  background: rgba(255,255,255,0.15);
+  border: 1px solid rgba(255,255,255,0.25);
+  font-size: 12px; font-weight: 700; color: rgba(255,255,255,0.9);
+  letter-spacing: 1px; margin-bottom: 20px;
+  animation: fadeUp .7s ease .1s both;
+}
+.hero-title {
+  font-size: clamp(32px,5vw,56px); font-weight: 900;
+  color: #fff; line-height: 1.1;
+  animation: fadeUp .7s ease .2s both;
+}
+.hero-title .en { display: block; font-size: .55em; color: rgba(255,255,255,0.65); margin-top: 6px; letter-spacing: 2px; }
+.hero-desc {
+  margin-top: 18px; font-size: 15px; color: rgba(255,255,255,0.78); line-height: 1.8;
+  animation: fadeUp .7s ease .3s both;
+}
+.hero-right {
+  display: flex; flex-direction: column; gap: 12px;
+  animation: fadeUp .7s ease .4s both;
+}
+.hero-stat-pill {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 20px; border-radius: 14px;
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.18);
+  backdrop-filter: blur(8px);
+  min-width: 200px;
+}
+.hero-stat-pill .pill-num { font-size: 26px; font-weight: 900; color: #fff; }
+.hero-stat-pill .pill-label { font-size: 12px; color: rgba(255,255,255,0.75); line-height: 1.4; }
+
+/* ── SEARCH ── */
+.search-wrap {
+  max-width: 860px; margin: -28px auto 0; padding: 0 40px;
+  position: relative; z-index: 10;
+  animation: fadeUp .6s ease .5s both;
+}
+.search-box {
+  width: 100%; padding: 16px 22px 16px 50px;
+  border-radius: 14px;
+  border: 1.5px solid var(--border);
+  background: var(--card);
+  font-family: 'Cairo',sans-serif;
+  font-size: 15px; font-weight: 600;
+  color: var(--text);
+  box-shadow: var(--shadow);
+  transition: var(--transition);
+  outline: none;
+  direction: rtl;
+}
+.search-box::placeholder { color: var(--text3); }
+.search-box:focus { border-color: var(--pharma); box-shadow: 0 0 0 4px var(--pharma-glow); }
+.search-icon {
+  position: absolute; left: 56px; top: 50%;
+  transform: translateY(-50%);
+  font-size: 18px; pointer-events: none;
+}
+
+/* ── MAIN ── */
+.main {
+  max-width: 860px; margin: 0 auto;
+  padding: 44px 40px 80px;
+}
+
+.section-label {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 22px;
+}
+.section-label-line { flex: 1; height: 1px; background: var(--border); }
+.section-label-text {
+  font-size: 11px; font-weight: 800; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--pharma);
+  white-space: nowrap;
+}
+
+/* ── LECTURE CARDS ── */
+.lectures-list {
+  display: flex; flex-direction: column; gap: 14px;
+}
+
+.lecture-card {
+  display: flex; align-items: center; gap: 0;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  text-decoration: none; color: inherit;
+  transition: var(--transition);
+  position: relative;
+  cursor: pointer;
+}
+.lecture-card:hover {
+  transform: translateX(-5px);
+  box-shadow: var(--shadow-hover);
+  border-color: var(--pharma);
+}
+.lecture-card.hidden { display: none; }
+
+/* number strip */
+.lc-num {
+  width: 64px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  align-self: stretch;
+  background: var(--pharma-soft);
+  border-left: 3px solid var(--pharma);
+  font-size: 22px; font-weight: 900;
+  color: var(--pharma);
+  position: relative;
+}
+.lc-num::after {
+  content: '';
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 100%);
+}
+
+/* icon bubble */
+.lc-icon-wrap {
+  width: 64px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  padding: 20px 0;
+}
+.lc-icon {
+  width: 46px; height: 46px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 22px;
+  background: var(--pharma-soft);
+  transition: var(--transition);
+}
+.lecture-card:hover .lc-icon { transform: scale(1.12) rotate(-4deg); }
+
+/* body */
+.lc-body {
+  flex: 1; padding: 18px 16px;
+  display: flex; flex-direction: column; gap: 5px;
+}
+.lc-tag {
+  font-size: 10px; font-weight: 800; letter-spacing: 1.5px;
+  text-transform: uppercase; color: var(--pharma);
+}
+.lc-title { font-size: 17px; font-weight: 900; color: var(--text); line-height: 1.3; }
+.lc-title-en { font-size: 12px; color: var(--text3); font-weight: 600; margin-top: 1px; letter-spacing: 0.5px; }
+.lc-desc { font-size: 12px; color: var(--text2); line-height: 1.6; margin-top: 4px; }
+
+/* arrow */
+.lc-arrow {
+  width: 56px; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+}
+.lc-arrow-btn {
+  width: 36px; height: 36px; border-radius: 50%;
+  background: var(--bg2); border: 1.5px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 15px; color: var(--text3);
+  transition: var(--transition);
+}
+.lecture-card:hover .lc-arrow-btn {
+  background: var(--pharma); color: #fff; border-color: transparent;
+  transform: translateX(-4px);
+}
+
+/* ── COMING SOON tag ── */
+.lc-soon {
+  display: inline-flex; align-items: center; gap: 5px;
+  padding: 3px 10px; border-radius: 50px;
+  font-size: 10px; font-weight: 700; letter-spacing: 1px;
+  background: rgba(230,126,34,0.1); color: var(--pharma);
+  border: 1px solid rgba(230,126,34,0.2);
+  margin-top: 6px; width: fit-content;
+}
+
+/* ── EMPTY STATE ── */
+.empty-state {
+  text-align: center; padding: 60px 20px; display: none;
+}
+.empty-state .es-icon { font-size: 48px; margin-bottom: 14px; }
+.empty-state p { font-size: 15px; color: var(--text3); }
+
+/* ── FOOTER ── */
+.page-footer {
+  background: var(--bg2);
+  border-top: 1px solid var(--border);
+  padding: 26px 36px;
+  display: flex; align-items: center; justify-content: space-between;
+  flex-wrap: wrap; gap: 12px;
+}
+.footer-brand { font-size: 14px; font-weight: 800; color: var(--text); }
+.footer-brand span { color: var(--pharma); }
+.footer-copy { font-size: 12px; color: var(--text3); }
+
+/* ── ANIMATIONS ── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.animate-up {
+  opacity: 0; transform: translateY(28px);
+  transition: opacity .55s ease, transform .55s ease;
+}
+.animate-up.visible { opacity: 1; transform: translateY(0); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 640px) {
+  nav { padding: 0 18px; }
+  .hero { padding: 90px 22px 50px; }
+  .hero-inner { flex-direction: column; gap: 24px; }
+  .search-wrap { padding: 0 22px; }
+  .main { padding: 36px 22px 60px; }
+  .lc-num { width: 48px; font-size: 17px; }
+  .lc-icon-wrap { width: 52px; }
+  .nav-title { display: none; }
+  .page-footer { padding: 20px 22px; }
+}
+</style>
+</head>
+<body>
+
+<div id="progress-bar"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="https://gaith-team.github.io/exam/" class="nav-back">
+    <span>→</span> الرئيسية
+  </a>
+  <div class="nav-center">
+    <div class="nav-icon">💊</div>
+    <div class="nav-title">فارما <span>/ Pharmacology</span></div>
+  </div>
+  <div class="nav-actions">
+    <button class="theme-toggle" id="themeBtn" title="تغيير المظهر">🌙</button>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-pattern"></div>
+  <div class="hero-inner">
+    <div class="hero-left">
+      <div class="hero-badge">💊 المستوى الأول — Level 1</div>
+      <h1 class="hero-title">
+        الفارماكولوجي
+        <span class="en">Pharmacology — علم الأدوية</span>
+      </h1>
+      <p class="hero-desc">
+        أساسيات علم الأدوية من الفارماكوكينيتيكس وحتى التطبيقات السريرية —
+        دراسة منظّمة لكل جهاز في الجسم وعلاقته بالأدوية المستخدمة في التمريض
+      </p>
+    </div>
+    <div class="hero-right">
+      <div class="hero-stat-pill">
+        <div class="pill-num">11</div>
+        <div class="pill-label">محاضرة<br>متكاملة</div>
+      </div>
+      <div class="hero-stat-pill">
+        <div class="pill-num">🆓</div>
+        <div class="pill-label">محتوى مجاني<br>100%</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SEARCH -->
+<div class="search-wrap">
+  <input class="search-box" type="text" id="searchInput"
+         placeholder="ابحث عن محاضرة... مثال: قلب، أعصاب، أدوية">
+  <span class="search-icon">🔍</span>
+</div>
+
+<!-- MAIN -->
+<main class="main">
+
+  <div class="section-label animate-up">
+    <div class="section-label-text">المحاضرات</div>
+    <div class="section-label-line"></div>
+    <div class="section-label-text">Lectures</div>
+  </div>
+
+  <div class="lectures-list animate-up" id="lecturesList">
+
+    <!-- 1. General Pharmacology -->
+    <a href="general/index.html" class="lecture-card"
+       data-search="general pharmacology فارماكولوجي عام مقدمة أساسيات pharmacokinetics pharmacodynamics">
+      <div class="lc-num">01</div>
+      <div class="lc-icon-wrap">
+        <div class="lc-icon">🧪</div>
+      </div>
+      <div class="lc-body">
+        <div class="lc-tag">المحاضرة الأولى</div>
+        <div class="lc-title">الفارماكولوجي العام</div>
+        <div class="lc-title-en">General Pharmacology</div>
+        <div class="lc-desc">مقدمة علم الأدوية — الفارماكوكينيتيكس والفارماكوديناميكس وآليات عمل الدواء</div>
+      </div>
+      <div class="lc-arrow"><div class="lc-arrow-btn">←</div></div>
+    </a>
+
+    <!-- 2. Autonomic NS -->
+    <a href="autonomic/index.html" class="lecture-card"
+       data-search="autonomic nervous system الجهاز العصبي اللاإرادي سيمباثاوي باراسيمباثاوي">
+      <div class="lc-num">02</div>
+      <div class="lc-icon-wrap">
+        <div class="lc-icon">⚡</div>
+      </div>
+      <div class="lc-body">
+        <div class="lc-tag">المحاضرة الثانية</div>
+        <div class="lc-title">الجهاز العصبي اللاإرادي</div>
+        <div class="lc-title-en">Autonomic Nervous System</div>
+        <div class="lc-desc">أدوية السمبثاوي والباراسمبثاوي — الناقلات العصبية ومستقبلاتها والأدوية المؤثرة عليها</div>
+      </div>
+      <div class="lc-arrow"><div class="lc-arrow-btn">←</div></div>
+    </a>
+
+    <!-- 3. Cardiovascular -->
+    <a href="cardiovascular/index.html" class="lecture-card"
+       data-search="cardiovascular system الجهاز القلبي الوعائي قلب ضغط دم">
+      <div class="lc-num">03</div>
+      <div class="lc-icon-wrap">
+        <div class="lc-icon">❤️</div>
+      </div>
+      <div class="lc-body">
+        <div class="lc-tag">المحاضرة الثالثة</div>
+        <div class="lc-title">الجهاز القلبي الوعائي</div>
+        <div class="lc-title-en">Cardiovascular System</div>
+        <div class="lc-desc">أدوية القلب والأوعية الدموية — مضادات ارتفاع الضغط، مدرّات البول، الأدوية المضادة للذبحة</div>
+      </div>
+      <div class="lc-arrow"><div class="lc-arrow-btn">←</div></div>
+    </a>
+
+    <!-- 4. CNS -->
+    <a href="cns/index.html" class="lecture-card"
+       data-search="central nervous system الجهاز العصبي المركزي مخ تخدير مسكن مهدئ">
+      <div class="lc-num">04</div>
+      <div class="lc-icon-wrap">
+        <div class="lc-icon">🧠</div>
+      </div>
+      <div class="lc-body">
+        <div class="lc-tag">المحاضرة الرابعة</div>
+        <div class="lc-title">الجهاز العصبي المركزي</div>
+        <div class="lc-title-en">Central Nervous System</div>
+        <div class="lc-desc">المسكّنات، المخدّرات، مضادات الصرع، مضادات الاكتئاب، ومضادات القلق والذهان</div>
+      </div>
+      <div class="lc-arrow"><div class="lc-arrow-btn">←</div></div>
+    </a>
+
+    <!-- 5. GIT -->
+    <a href="git/index.html" class="lecture-card"
+       data-search="gastrointestinal tract الجهاز الهضمي معدة أمعاء قرحة غثيان">
+      <div class="lc-num">05</div>
+      <div class="lc-icon-wrap">
+        <div class="lc-icon">🫃</div>
+      </div>
+      <div class="lc-body">
+        <div class="lc-tag">المحاضرة الخامسة</div>
+        <div class="lc-title">الجهاز الهضمي</div>
+        <div class="lc-title-en">Gastro-Intestinal Tract</div>
+        <div class="lc-desc">أدوية المعدة والأمعاء — مضادات الحموضة، علاج القرحة، مضادات الغثيان، الملينات والمضادات</div>
+      </div>
+      <div class="lc-arrow"><div class="lc-arrow-btn">←</div></div>
+    </a>
+
+    <!-- 6. Respiratory -->
+    <a href="respiratory/index.html" class="lecture-card"
+       data-search="respiratory system الجهاز التنفسي رئة ربو سعال">
+      <div class="lc-num">06</div>
+      <div class="lc-icon-wrap">
+        <div class="lc-icon">🫁</div>
+      </div>
+      <div class="lc-body">
+        <div class="lc-tag">المحاضرة السادسة</div>
+        <div class="lc-title">الجهاز التنفسي</div>
+        <div class="lc-title-en">Respiratory System</div>
+        <div class="lc-desc">موسّعات القصبات الهوائية، الكورتيكوستيرويدات التنفسية، مضادات السعال والمقشعات</div>
+      </div>
+      <div class="lc-arrow"><div class="lc-arrow-btn">←</div></div>
+    </a>
+
+    <!-- 7. Chemotherapy -->
+    <a href="chemotherapy/index.html" class="lecture-card"
+       data-search="chemotherapy كيماوي مضاد حيوي مضاد بكتيري سرطان">
+      <div class="lc-num">07</div>
+      <div class="lc-icon-wrap">
+        <div class="lc-icon">🔬</div>
+      </div>
+      <div class="lc-body">
+        <div class="lc-tag">المحاضرة السابعة</div>
+        <div class="lc-title">الكيماوي العلاجي</div>
+        <div class="lc-title-en">Chemotherapy</div>
+        <div class="lc-desc">المضادات الحيوية وآليات عملها، مضادات الفطريات، مضادات الفيروسات، والعلاج الكيماوي للأورام</div>
+      </div>
+      <div class="lc-arrow"><div class="lc-arrow-btn">←</div></div>
+    </a>
+
+    <!-- 8. Endocrine -->
+    <a href="endocrine/index.html" class="lecture-card"
+       data-search="endocrine system الغدد الصماء هرمونات أنسولين سكر درقية">
+      <div class="lc-num">08</div>
+      <div class="lc-icon-wrap">
+        <div class="lc-icon">⚗️</div>
+      </div>
+      <div class="lc-body">
+        <div class="lc-tag">المحاضرة الثامنة</div>
+        <div class="lc-title">الجهاز الغدي الصماوي</div>
+        <div class="lc-title-en">Endocrine System</div>
+        <div class="lc-desc">هرمونات الغدة الدرقية، الأنسولين وأدوية السكري، الكورتيكوستيرويدات، هرمونات الغدة النخامية</div>
+      </div>
+      <div class="lc-arrow"><div class="lc-arrow-btn">←</div></div>
+    </a>
+
+    <!-- 9. Blood -->
+    <a href="blood/index.html" class="lecture-card"
+       data-search="blood الدم تخثر أنيميا مضاد تخثر">
+      <div class="lc-num">09</div>
+      <div class="lc-icon-wrap">
+        <div class="lc-icon">🩸</div>
+      </div>
+      <div class="lc-body">
+        <div class="lc-tag">المحاضرة التاسعة</div>
+        <div class="lc-title">الدم وأدوية التخثر</div>
+        <div class="lc-title-en">Blood</div>
+        <div class="lc-desc">مضادات التخثر، مذيبات الجلطة، أدوية الأنيميا، عوامل تحفيز كرات الدم الحمراء والبيضاء</div>
+      </div>
+      <div class="lc-arrow"><div class="lc-arrow-btn">←</div></div>
+    </a>
+
+    <!-- 10. Autacoids -->
+    <a href="autacoids/index.html" class="lecture-card"
+       data-search="autacoids أوتاكويدز هيستامين سيروتونين برادكينين">
+      <div class="lc-num">10</div>
+      <div class="lc-icon-wrap">
+        <div class="lc-icon">🧬</div>
+      </div>
+      <div class="lc-body">
+        <div class="lc-tag">المحاضرة العاشرة</div>
+        <div class="lc-title">الأوتاكويدز</div>
+        <div class="lc-title-en">Autacoids</div>
+        <div class="lc-desc">الهيستامين والسيروتونين والبروستاجلاندين — آليات عملها ومضاداتها وتطبيقاتها الدوائية</div>
+      </div>
+      <div class="lc-arrow"><div class="lc-arrow-btn">←</div></div>
+    </a>
+
+    <!-- 11. Renal -->
+    <a href="renal/index.html" class="lecture-card"
+       data-search="renal system الجهاز الكلوي كلى مدرات بول">
+      <div class="lc-num">11</div>
+      <div class="lc-icon-wrap">
+        <div class="lc-icon">🫘</div>
+      </div>
+      <div class="lc-body">
+        <div class="lc-tag">المحاضرة الحادية عشرة</div>
+        <div class="lc-title">الجهاز الكلوي</div>
+        <div class="lc-title-en">Renal System</div>
+        <div class="lc-desc">مدرّات البول وأنواعها، أدوية الفشل الكلوي، تعديل الجرعة في القصور الكلوي</div>
+      </div>
+      <div class="lc-arrow"><div class="lc-arrow-btn">←</div></div>
+    </a>
+
+  </div><!-- /lectures-list -->
+
+  <!-- Empty state -->
+  <div class="empty-state" id="emptyState">
+    <div class="es-icon">🔍</div>
+    <p>لا توجد نتائج للبحث عن "<span id="searchTerm"></span>"</p>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="page-footer">
+  <div class="footer-brand">GHAITH <span>TEAM</span> — الفارماكولوجي</div>
+  <div class="footer-copy">جميع الحقوق محفوظة © 2026</div>
+</footer>
+
+<script>
+/* ── Theme ── */
+const btn = document.getElementById('themeBtn');
+let theme = localStorage.getItem('theme') || 'light';
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  btn.textContent = t === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', t);
+}
+applyTheme(theme);
+btn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+
+/* ── Scroll progress ── */
+const bar = document.getElementById('progress-bar');
+window.addEventListener('scroll', () => {
+  const pct = window.scrollY / (document.body.scrollHeight - window.innerHeight) * 100;
+  bar.style.width = Math.min(pct, 100) + '%';
+});
+
+/* ── Intersection observer ── */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => {
+    if (e.isIntersecting) setTimeout(() => e.target.classList.add('visible'), i * 70);
+  });
+}, { threshold: 0.08 });
+document.querySelectorAll('.animate-up').forEach(el => obs.observe(el));
+
+/* ── Search ── */
+const searchInput = document.getElementById('searchInput');
+const cards       = document.querySelectorAll('.lecture-card');
+const emptyState  = document.getElementById('emptyState');
+const searchTerm  = document.getElementById('searchTerm');
+
+searchInput.addEventListener('input', () => {
+  const q = searchInput.value.trim().toLowerCase();
+  let found = 0;
+  cards.forEach(card => {
+    const data = card.getAttribute('data-search') + ' ' + card.textContent;
+    const match = !q || data.toLowerCase().includes(q);
+    card.classList.toggle('hidden', !match);
+    if (match) found++;
+  });
+  emptyState.style.display = found === 0 ? 'block' : 'none';
+  searchTerm.textContent = searchInput.value;
+});
+
+/* ── Stagger card entrance ── */
+cards.forEach((card, i) => {
+  card.style.opacity = '0';
+  card.style.transform = 'translateY(20px)';
+  card.style.transition = 'opacity .45s ease, transform .45s ease, box-shadow .33s ease, border-color .33s ease, transform .33s ease';
+  setTimeout(() => {
+    card.style.opacity = '1';
+    card.style.transform = 'translateY(0)';
+  }, 600 + i * 70);
+});
+</script>
+
+</body>
+</html>
