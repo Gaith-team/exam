@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --c:      #e67e22;
+  --c-deep: #b8590a;
+  --c-lite: #f39c12;
+  --c-glow: rgba(230,126,34,0.2);
+  --c-soft: rgba(230,126,34,0.09);
+  --green:  #27ae60;
+  --red:    #e74c3c;
+  --bg:     #f9f5f0;
+  --bg2:    #f1e8dc;
+  --card:   #ffffff;
+  --text:   #1a1208;
+  --text2:  #5a4a30;
+  --text3:  #9a8060;
+  --border: rgba(230,126,34,0.15);
+  --radius: 18px;
+  --tr:     all 0.28s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="dark"] {
+  --bg:    #12100c;
+  --bg2:   #1c1710;
+  --card:  #231e16;
+  --text:  #f0e6d6;
+  --text2: #c0a880;
+  --text3: #806848;
+  --border:rgba(230,126,34,0.18);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Cairo','Tajawal',sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  transition: background .4s, color .4s;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px;
+  background: rgba(249,245,240,0.93);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+  transition: var(--tr);
+}
+[data-theme="dark"] nav { background: rgba(18,16,12,0.95); }
+.nav-back {
+  display: flex; align-items: center; gap: 8px;
+  text-decoration: none; color: var(--text2);
+  font-size: 13px; font-weight: 700;
+  padding: 7px 13px; border-radius: 9px;
+  border: 1px solid var(--border); background: var(--card);
+  transition: var(--tr);
+}
+.nav-back:hover { color: var(--c); border-color: var(--c); }
+.nav-center { display: flex; align-items: center; gap: 9px; }
+.nav-pill {
+  display: flex; align-items: center; gap: 7px;
+  padding: 6px 14px; border-radius: 50px;
+  background: linear-gradient(135deg, var(--c), var(--c-lite));
+  color: #fff; font-size: 13px; font-weight: 800;
+}
+.theme-toggle {
+  width: 38px; height: 38px; border-radius: 50%;
+  border: 1.5px solid var(--border); background: var(--card);
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  font-size: 16px; transition: var(--tr);
+}
+.theme-toggle:hover { border-color: var(--c); transform: rotate(20deg); }
+
+/* ── SCREENS ── */
+.screen { display: none; }
+.screen.active { display: flex; }
+
+/* ══════════════════════════════════
+   START SCREEN
+══════════════════════════════════ */
+#startScreen {
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 80px 24px 40px;
+  text-align: center;
+}
+.start-icon {
+  width: 90px; height: 90px; border-radius: 24px;
+  background: linear-gradient(135deg, var(--c), var(--c-lite));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 40px; margin: 0 auto 28px;
+  box-shadow: 0 12px 40px var(--c-glow);
+  animation: floatIcon 3s ease-in-out infinite;
+}
+@keyframes floatIcon {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+.start-title {
+  font-size: clamp(28px,5vw,44px); font-weight: 900; color: var(--text);
+  line-height: 1.15; margin-bottom: 12px;
+}
+.start-title span { color: var(--c); }
+.start-sub {
+  font-size: 15px; color: var(--text2); line-height: 1.7;
+  max-width: 400px; margin: 0 auto 36px;
+}
+.start-meta {
+  display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 44px;
+}
+.meta-pill {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 20px; border-radius: 12px;
+  background: var(--card); border: 1px solid var(--border);
+  font-size: 14px; font-weight: 700; color: var(--text2);
+}
+.meta-pill strong { color: var(--c); font-size: 18px; }
+.btn-start {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 44px; border-radius: 14px;
+  background: linear-gradient(135deg, var(--c), var(--c-lite));
+  color: #fff; font-size: 17px; font-weight: 900;
+  border: none; cursor: pointer;
+  box-shadow: 0 8px 28px var(--c-glow);
+  transition: var(--tr); font-family: 'Cairo',sans-serif;
+}
+.btn-start:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 14px 40px var(--c-glow); }
+
+/* ══════════════════════════════════
+   QUIZ SCREEN
+══════════════════════════════════ */
+#quizScreen {
+  min-height: 100vh;
+  flex-direction: column;
+  padding: 80px 0 40px;
+}
+.quiz-wrap {
+  flex: 1; max-width: 680px; width: 100%;
+  margin: 0 auto; padding: 32px 24px;
+  display: flex; flex-direction: column; gap: 24px;
+}
+
+/* progress */
+.quiz-progress-row {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 14px;
+}
+.progress-track {
+  flex: 1; height: 6px; border-radius: 6px;
+  background: var(--bg2); overflow: hidden;
+}
+.progress-fill {
+  height: 100%; border-radius: 6px;
+  background: linear-gradient(90deg, var(--c), var(--c-lite));
+  transition: width .5s cubic-bezier(0.4,0,0.2,1);
+}
+.progress-label {
+  font-size: 13px; font-weight: 800; color: var(--c);
+  white-space: nowrap;
+}
+
+/* question card */
+.q-card {
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  padding: 32px 28px;
+  box-shadow: 0 4px 24px rgba(230,126,34,0.08);
+  animation: slideIn .35s ease;
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.q-num {
+  font-size: 11px; font-weight: 800; letter-spacing: 2px;
+  color: var(--c); text-transform: uppercase; margin-bottom: 14px;
+}
+.q-text {
+  font-size: clamp(16px,2.5vw,20px); font-weight: 700;
+  color: var(--text); line-height: 1.6;
+}
+
+/* options */
+.options-list {
+  display: flex; flex-direction: column; gap: 12px;
+  margin-top: 28px;
+}
+.opt-btn {
+  display: flex; align-items: center; gap: 14px;
+  padding: 15px 18px; border-radius: 13px;
+  border: 1.5px solid var(--border);
+  background: var(--bg);
+  cursor: pointer; text-align: left;
+  transition: var(--tr); font-family: 'Cairo',sans-serif;
+  font-size: 15px; font-weight: 600; color: var(--text);
+  width: 100%;
+}
+.opt-btn:hover:not(:disabled) {
+  border-color: var(--c);
+  background: var(--c-soft);
+  transform: translateX(3px);
+}
+.opt-letter {
+  width: 34px; height: 34px; flex-shrink: 0;
+  border-radius: 50%; border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 900; color: var(--text3);
+  transition: var(--tr); background: var(--card);
+}
+.opt-btn:hover:not(:disabled) .opt-letter {
+  border-color: var(--c); color: var(--c); background: rgba(230,126,34,0.1);
+}
+
+/* states */
+.opt-btn.correct {
+  border-color: var(--green) !important;
+  background: rgba(39,174,96,0.08) !important;
+  color: var(--green);
+}
+.opt-btn.correct .opt-letter {
+  background: var(--green); border-color: var(--green);
+  color: #fff;
+}
+.opt-btn.wrong {
+  border-color: var(--red) !important;
+  background: rgba(231,76,60,0.08) !important;
+  color: var(--red);
+}
+.opt-btn.wrong .opt-letter {
+  background: var(--red); border-color: var(--red);
+  color: #fff;
+}
+.opt-btn:disabled { cursor: not-allowed; }
+
+/* feedback */
+.feedback-box {
+  display: none;
+  align-items: center; gap: 12px;
+  padding: 14px 18px; border-radius: 12px;
+  font-size: 14px; font-weight: 700;
+  margin-top: 16px;
+  animation: fadeIn .3s ease;
+}
+@keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+.feedback-box.show { display: flex; }
+.feedback-box.correct-fb {
+  background: rgba(39,174,96,0.1);
+  border: 1px solid rgba(39,174,96,0.25);
+  color: var(--green);
+}
+.feedback-box.wrong-fb {
+  background: rgba(231,76,60,0.1);
+  border: 1px solid rgba(231,76,60,0.25);
+  color: var(--red);
+}
+.feedback-icon { font-size: 20px; }
+
+/* nav buttons */
+.quiz-nav {
+  display: flex; gap: 12px; justify-content: space-between; align-items: center;
+}
+.btn-nav {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 26px; border-radius: 12px;
+  font-size: 14px; font-weight: 800;
+  border: none; cursor: pointer;
+  font-family: 'Cairo',sans-serif;
+  transition: var(--tr);
+}
+.btn-skip {
+  background: var(--bg2); color: var(--text2);
+  border: 1px solid var(--border);
+}
+.btn-skip:hover { background: var(--border); }
+.btn-next {
+  background: linear-gradient(135deg, var(--c), var(--c-lite));
+  color: #fff;
+  box-shadow: 0 4px 16px var(--c-glow);
+}
+.btn-next:hover { transform: translateY(-2px); box-shadow: 0 8px 24px var(--c-glow); }
+.btn-next:disabled { opacity: .45; pointer-events: none; }
+
+/* ══════════════════════════════════
+   RESULT SCREEN
+══════════════════════════════════ */
+#resultScreen {
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 80px 24px 40px;
+  text-align: center;
+}
+.result-circle {
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  margin: 0 auto 28px;
+  position: relative;
+}
+.result-circle svg {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  transform: rotate(-90deg);
+}
+.result-circle svg circle {
+  fill: none; stroke-width: 8;
+  stroke-linecap: round;
+}
+.circle-bg  { stroke: var(--bg2); }
+.circle-fill { stroke: var(--c); transition: stroke-dashoffset 1.2s cubic-bezier(0.4,0,0.2,1); }
+.result-pct {
+  font-size: 36px; font-weight: 900; color: var(--text);
+  position: relative; z-index: 1;
+}
+.result-pct small { font-size: 14px; color: var(--text3); display: block; }
+
+.result-emoji { font-size: 56px; margin-bottom: 16px; animation: bounce .6s ease; }
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
+.result-title { font-size: 26px; font-weight: 900; color: var(--text); margin-bottom: 8px; }
+.result-sub { font-size: 15px; color: var(--text2); margin-bottom: 36px; }
+
+.result-stats {
+  display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+.rstat {
+  padding: 14px 22px; border-radius: 14px;
+  background: var(--card); border: 1px solid var(--border);
+  min-width: 110px;
+}
+.rstat .rv { font-size: 26px; font-weight: 900; }
+.rstat .rl { font-size: 12px; color: var(--text3); margin-top: 2px; }
+.rstat.correct-s .rv { color: var(--green); }
+.rstat.wrong-s   .rv { color: var(--red); }
+.rstat.skip-s    .rv { color: var(--text3); }
+
+.result-actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.btn-retry {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 14px 32px; border-radius: 12px;
+  background: linear-gradient(135deg, var(--c), var(--c-lite));
+  color: #fff; font-size: 15px; font-weight: 900;
+  border: none; cursor: pointer; font-family: 'Cairo',sans-serif;
+  box-shadow: 0 6px 22px var(--c-glow); transition: var(--tr);
+}
+.btn-retry:hover { transform: translateY(-3px); }
+.btn-review {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 14px 28px; border-radius: 12px;
+  background: var(--card); color: var(--text);
+  font-size: 15px; font-weight: 700;
+  border: 1.5px solid var(--border); cursor: pointer;
+  font-family: 'Cairo',sans-serif; transition: var(--tr);
+}
+.btn-review:hover { border-color: var(--c); color: var(--c); }
+
+/* ── REVIEW MODE ── */
+#reviewScreen {
+  min-height: 100vh;
+  flex-direction: column;
+  padding: 80px 0 60px;
+}
+.review-wrap {
+  max-width: 680px; width: 100%;
+  margin: 0 auto; padding: 32px 24px;
+  display: flex; flex-direction: column; gap: 18px;
+}
+.review-header {
+  text-align: center; margin-bottom: 10px;
+}
+.review-header h2 { font-size: 22px; font-weight: 900; color: var(--text); }
+.review-header p  { font-size: 13px; color: var(--text3); margin-top: 4px; }
+
+.review-card {
+  background: var(--card);
+  border-radius: 16px;
+  border: 1.5px solid var(--border);
+  overflow: hidden;
+}
+.review-card-top {
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--border);
+}
+.review-q-label {
+  font-size: 10px; font-weight: 800; letter-spacing: 2px;
+  color: var(--text3); margin-bottom: 8px;
+}
+.review-q-text { font-size: 15px; font-weight: 700; color: var(--text); line-height: 1.55; }
+.review-opts { padding: 14px 22px; display: flex; flex-direction: column; gap: 8px; }
+.review-opt {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px; border-radius: 10px;
+  font-size: 13px; font-weight: 600; color: var(--text2);
+  background: var(--bg);
+}
+.review-opt.is-correct {
+  background: rgba(39,174,96,0.1);
+  color: var(--green); font-weight: 800;
+}
+.review-opt.is-wrong {
+  background: rgba(231,76,60,0.1);
+  color: var(--red);
+}
+.review-dot {
+  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  background: var(--border);
+}
+.review-opt.is-correct .review-dot { background: var(--green); }
+.review-opt.is-wrong   .review-dot { background: var(--red); }
+.review-status {
+  display: flex; align-items: center; gap: 5px;
+  padding: 3px 10px; border-radius: 50px;
+  font-size: 10px; font-weight: 800; margin-top: 10px;
+  width: fit-content;
+}
+.status-correct { background: rgba(39,174,96,0.12); color: var(--green); }
+.status-wrong   { background: rgba(231,76,60,0.12);  color: var(--red); }
+.status-skip    { background: var(--bg2); color: var(--text3); }
+
+.btn-back-result {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 13px 28px; border-radius: 12px;
+  background: var(--card); color: var(--text);
+  font-size: 14px; font-weight: 700;
+  border: 1.5px solid var(--border); cursor: pointer;
+  font-family: 'Cairo',sans-serif; transition: var(--tr);
+  margin-top: 8px; align-self: center;
+}
+.btn-back-result:hover { border-color: var(--c); color: var(--c); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 540px) {
+  nav { padding: 0 16px; }
+  .quiz-wrap, .review-wrap { padding: 24px 16px; }
+  .q-card { padding: 22px 18px; }
+  .opt-btn { padding: 12px 14px; font-size: 14px; }
+  .result-stats { gap: 10px; }
+  .rstat { min-width: 90px; padding: 12px 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://gaith-team.github.io/exam/level1/pharmacology/" class="nav-back">← Back</a>
+  <div class="nav-center">
+    <div class="nav-pill">📝 Question </div>
+  </div>
+  <button class="theme-toggle" id="themeBtn">🌙</button>
+</nav>
+
+<!-- ══ START SCREEN ══ -->
+<div class="screen active" id="startScreen">
+  <div class="start-icon">📝</div>
+  <h1 class="start-title">Quiz — <span id="quizTitleDisplay"></span></h1>
+  <p class="start-sub" id="startDesc">Test your knowledge — read each question and choose the correct answer</p>
+  <div class="start-meta">
+    <div class="meta-pill"><strong id="totalQDisplay">0</strong> Questions</div>
+    <div class="meta-pill">⏱ No time limit</div>
+    <div class="meta-pill">🎯 Multiple choice</div>
+  </div>
+  <button class="btn-start" onclick="startQuiz()">🚀 Start Quiz</button>
+</div>
+
+<!-- ══ QUIZ SCREEN ══ -->
+<div class="screen" id="quizScreen">
+  <div class="quiz-wrap">
+
+    <div class="quiz-progress-row">
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      </div>
+      <div class="progress-label" id="progressLabel">1 / 1</div>
+    </div>
+
+    <div class="q-card" id="qCard">
+      <div class="q-num" id="qNum">QUESTION 1</div>
+      <div class="q-text" id="qText"></div>
+      <div class="options-list" id="optsList"></div>
+      <div class="feedback-box" id="feedbackBox">
+        <span class="feedback-icon" id="feedbackIcon"></span>
+        <span id="feedbackText"></span>
+      </div>
+    </div>
+
+    <div class="quiz-nav">
+      <button class="btn-nav btn-skip" onclick="skipQuestion()">→ Skip</button>
+      <button class="btn-nav btn-next" id="btnNext" onclick="nextQuestion()" disabled>
+        Next →
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ RESULT SCREEN ══ -->
+<div class="screen" id="resultScreen">
+  <div class="result-emoji" id="resultEmoji">🎉</div>
+
+  <div class="result-circle" id="resultCircle">
+    <svg viewBox="0 0 140 140">
+      <circle class="circle-bg"   cx="70" cy="70" r="62"/>
+      <circle class="circle-fill" cx="70" cy="70" r="62" id="circleArc"
+              stroke-dasharray="389.6"
+              stroke-dashoffset="389.6"/>
+    </svg>
+    <div class="result-pct">
+      <span id="pctNum">0</span>%
+      <small>Score</small>
+    </div>
+  </div>
+
+  <h2 class="result-title" id="resultTitle">Well done!</h2>
+  <p class="result-sub" id="resultSub">You have completed the quiz</p>
+
+  <div class="result-stats">
+    <div class="rstat correct-s">
+      <div class="rv" id="rCorrect">0</div>
+      <div class="rl">✅ Correct</div>
+    </div>
+    <div class="rstat wrong-s">
+      <div class="rv" id="rWrong">0</div>
+      <div class="rl">❌ Wrong</div>
+    </div>
+    <div class="rstat skip-s">
+      <div class="rv" id="rSkip">0</div>
+      <div class="rl">⏭ Skipped</div>
+    </div>
+  </div>
+
+  <div class="result-actions">
+    <button class="btn-retry" onclick="retryQuiz()">🔄 Try Again</button>
+    <button class="btn-review" onclick="showReview()">📋 Review Answers</button>
+  </div>
+</div>
+
+<!-- ══ REVIEW SCREEN ══ -->
+<div class="screen" id="reviewScreen">
+  <div class="review-wrap">
+    <div class="review-header">
+      <h2>📋 Answer Review</h2>
+      <p>Correct answers in green — your wrong answers in red</p>
+    </div>
+    <div id="reviewList"></div>
+    <button class="btn-back-result" onclick="showResult()">← Back to Results</button>
+  </div>
+</div>
+
+<script>
+const QUIZ_TITLE = " Autonomic Nervous System (ANS)";
+const QUIZ_DESC  = "أسئله عالمحاضرة شاملة ";
+
+const QUESTIONS = [
+  // Knowledge/History
+            {t:"The Autonomic Nervous System (ANS) is also known as the:", o:["Voluntary nervous system", "Involuntary nervous system", "Somatic nervous system", "Central nervous system"], a:1},
+            {t:"Which system is described as the 'system of fight and fright'?", o:["Parasympathetic", "Sympathetic", "Enteric", "Somatic"], a:1},
+            {t:"Which receptors are associated with the Parasympathetic nervous system?", o:["Alpha and Beta", "Muscarinic and Nicotinic", "Dopaminergic", "Serotonergic"], a:1},
+            {t:"What is the primary agonist for the Parasympathetic nervous system?", o:["Adrenaline", "Noradrenaline", "Acetylcholine", "Dopamine"], a:2},
+            {t:"Which of the following is a selective alpha-1 blocker?", o:["Propranolol", "Prazosin", "Atropine", "Phentolamine"], a:1},
+            {t:"Sympathetic stimulation of the eye causes:", o:["Miosis", "Mydriasis", "Cataract", "Glaucoma"], a:1},
+            {t:"Which drug is a mixed (dual) action sympathomimetic?", o:["Adrenaline", "Amphetamine", "Ephedrine", "Dopamine"], a:2},
+            {t:"Adrenaline is administered via which route for anaphylactic shock?", o:["Oral", "Subcutaneous", "Intravenous", "Intrathecal"], a:1},
+            {t:"Which drug is a selective beta-2 agonist used for bronchial asthma?", o:["Atenolol", "Salbutamol", "Propranolol", "Metoprolol"], a:1},
+            {t:"Which drug inhibits noradrenaline synthesis?", o:["Guanethidine", "Alpha-methyl dopa", "Trimetaphan", "Clonidine"], a:1},
+            {t:"Phentolamine is classified as a:", o:["Selective alpha-1 blocker", "Non-selective alpha blocker", "Selective beta blocker", "Ganglion blocker"], a:1},
+            {t:"Which beta-blocker is non-selective?", o:["Atenolol", "Metoprolol", "Propranolol", "Bisoprolol"], a:2},
+            {t:"Which drug is a reversible indirect-acting parasympathomimetic?", o:["Pilocarpine", "Neostigmine", "Organophosphorus", "Atropine"], a:1},
+            {t:"Atropine is a natural drug that competes with Acetylcholine for:", o:["Nicotinic receptors", "Muscarinic receptors", "Alpha receptors", "Beta receptors"], a:1},
+            {t:"Which drug is a selective M1 receptor antagonist used for peptic ulcers?", o:["Pirenzepine", "Buscopan", "Atropine", "Ipratropium"], a:0},
+
+            // Assessment/Critical Thinking
+            {t:"Why is adrenaline contraindicated in fingers and toes when used with local anesthetics?", o:["It causes excessive bleeding", "It may cause gangrene due to vasoconstriction", "It neutralizes the anesthetic", "It causes rapid absorption"], a:1},
+            {t:"What is the 'first dose phenomenon' associated with selective alpha-1 blockers?", o:["Severe hypertension", "Postural hypotension", "Cardiac arrest", "Anaphylaxis"], a:1},
+            {t:"Suddenly stopping long-term beta-blocker therapy can lead to angina because of:", o:["Downregulation of receptors", "Upregulation of receptors", "Enzyme induction", "Drug dependence"], a:1},
+            {t:"Why are non-selective beta-blockers contraindicated in asthmatic patients?", o:["They cause bronchodilatation", "They cause bronchospasm by blocking B2 receptors", "They increase heart rate", "They cause dry mouth"], a:1},
+            {t:"In diabetic patients, beta-blockers can be dangerous because they:", o:["Increase insulin secretion", "Mask hypoglycemic manifestations", "Cause hyperglycemia", "Increase glucose absorption"], a:1},
+            {t:"Why is Atropine contraindicated in patients with a senile enlarged prostate?", o:["It causes diarrhea", "It produces urine retention", "It causes hypotension", "It increases heart rate too much"], a:1},
+            {t:"Which property makes Ipratropium suitable for inhalation in asthma?", o:["It is highly absorbed from the GIT", "It is not absorbed by the GIT and acts locally", "It has a rapid systemic effect", "It causes severe CNS side effects"], a:1},
+            {t:"How does Physostigmine treat atropine poisoning?", o:["It neutralizes atropine chemically", "It increases Ach levels to compete with atropine", "It blocks muscarinic receptors", "It acts as a sedative"], a:1},
+            {t:"Which drug is preferred for fundus examination due to its shorter duration of action compared to atropine?", o:["Homatropine", "Pilocarpine", "Propranolol", "Adrenaline"], a:0},
+            {t:"What is the effect of Parasympathetic stimulation on the heart?", o:["Stimulation (Tachycardia)", "Depression (Bradycardia)", "No effect", "Arrhythmia"], a:1},
+            {t:"Which of the following is a symptom of acute atropine poisoning?", o:["Excessive sweating", "Miosis", "Dry mouth and tachycardia", "Diarrhea"], a:2},
+            {t:"Selective beta-1 blockers are primarily used for:", o:["Bronchial asthma", "Hypertension and Angina", "Glaucoma", "Motion sickness"], a:1},
+            {t:"Which drug is an irreversible anticholinesterase?", o:["Physostigmine", "Neostigmine", "Organophosphorus compounds", "Edrophonium"], a:2},
+            {t:"What is the mechanism of action of Amphetamine?", o:["Direct receptor stimulation", "Indirect release of noradrenaline", "Dual action", "Enzyme inhibition"], a:1},
+            {t:"Which drug is used specifically for urinary incontinence by reducing bladder motility?", o:["Emepronium", "Buscopan", "Pirenzepine", "Atenolol"], a:0},
+
+            // Problem Solving/Scenarios
+            {t:"A patient presents with hypovolemic shock. Which drug is appropriate to use after correcting blood volume?", o:["Atropine", "Dopamine", "Propranolol", "Pilocarpine"], a:1},
+            {t:"A patient is diagnosed with glaucoma. Which beta-blocker is commonly used as eye drops to decrease IOP?", o:["Propranolol", "Timolol", "Atenolol", "Metoprolol"], a:1},
+            {t:"For a patient with postoperative paralytic ileus, which drug class is indicated?", o:["Sympathomimetics", "Parasympathomimetics", "Sympatholytics", "Parasympatholytics"], a:1},
+            {t:"An elderly man with benign prostatic hyperplasia (BPH) needs treatment for hypertension. Which drug is most suitable?", o:["Propranolol", "Prazosin", "Atropine", "Adrenaline"], a:1},
+            {t:"A patient has ingested organophosphorus insecticides. What is the specific antidote?", o:["Physostigmine", "Atropine", "Adrenaline", "Propranolol"], a:1},
+            {t:"A child presents with a very high fever and dry skin after accidental ingestion of an unknown medication. Which drug poisoning is suspected?", o:["Aspirin", "Atropine", "Insulin", "Morphine"], a:1},
+            {t:"Which drug would be best for a patient needing a mydriatic for fundus examination that lasts only about 6 hours?", o:["Atropine", "Homatropine", "Tropicamide", "Eucatropine"], a:2},
+            {t:"A patient with Parkinsonism needs an anti-cholinergic drug. Which is commonly used?", o:["Benztropine", "Buscopan", "Pirenzepine", "Salbutamol"], a:0},
+            {t:"Which drug is used by inhalation for asthma because it relaxes bronchial muscles without drying secretions?", o:["Atropine", "Ipratropium", "Propranolol", "Pilocarpine"], a:1},
+            {t:"A patient on beta-blockers develops nightmares and depression. This is likely due to:", o:["Peripheral effects", "CNS side effects", "Allergic reaction", "Drug interaction"], a:1},
+            {t:"Which drug acts as a selective M3 blocker for intestinal colic?", o:["Darifenacin", "Pirenzepine", "Atenolol", "Prazosin"], a:0},
+            {t:"In the treatment of hypotension, which alpha-1 stimulant is used?", o:["Phenylephrine", "Salbutamol", "Prazosin", "Timolol"], a:0},
+            {t:"Which drug is used as a preanesthetic medication to reduce secretions?", o:["Acetylcholine", "Atropine", "Neostigmine", "Propranolol"], a:1},
+            {t:"A patient with a peptic ulcer should avoid which drug class?", o:["Parasympatholytics", "Parasympathomimetics", "Beta-blockers", "Alpha-blockers"], a:1},
+            {t:"Which drug is used locally to treat epistaxis (nosebleed)?", o:["Adrenaline", "Atropine", "Pilocarpine", "Timolol"], a:0},
+
+            // Interpretation/Assessment (General)
+            {t:"Which system causes relaxation of the bladder wall and contraction of the sphincter?", o:["Parasympathetic", "Sympathetic", "Somatic", "Enteric"], a:1},
+            {t:"Catecholamines act on adrenergic receptors via which mechanism?", o:["Direct", "Indirect", "Mixed", "Non-specific"], a:0},
+            {t:"Which drug is used to treat primary hypertension by blocking alpha-1 receptors?", o:["Prazosin", "Atropine", "Pilocarpine", "Salbutamol"], a:0},
+            {t:"Beta-blockers reduce O2 requirements of the heart, making them useful in:", o:["Asthma", "Angina", "Hypotension", "Bradycardia"], a:1},
+            {t:"Which drug is a M3 specific blocker used for renal colic?", o:["Oxybutynin", "Pirenzepine", "Atenolol", "Prazosin"], a:0},
+            {t:"Postural hypotension is a side effect of which drug class?", o:["Beta-blockers", "Alpha-blockers", "Parasympathomimetics", "Mydriatics"], a:1},
+            {t:"Which drug is used for nocturnal enuresis?", o:["Atropine", "Pilocarpine", "Neostigmine", "Acetylcholine"], a:0},
+            {t:"What is the effect of Sympathetic stimulation on the GIT?", o:["Contraction of wall", "Relaxation of wall and contraction of sphincters", "Increase secretions", "Relaxation of sphincters"], a:1},
+            {t:"Which drug is a non-selective alpha blocker used for peripheral vascular disease?", o:["Phenoxybenzamine", "Prazosin", "Atenolol", "Timolol"], a:0},
+            {t:"The drug 'Buscopan' is chemically known as:", o:["Hyoscine butyl bromide", "Atropine sulfate", "Ipratropium bromide", "Pirenzepine"], a:0}
+        ];
+
+        const tfs = [
+            {t:"The Sympathetic nervous system is the system of rest.", o:["True","False"], a:1},
+            {t:"Mydriasis means constriction of the pupil.", o:["True","False"], a:1},
+            {t:"Adrenaline can be used to treat hypoglycemia.", o:["True","False"], a:0},
+            {t:"Salbutamol is a selective beta-2 agonist used for hypertension.", o:["True","False"], a:1},
+            {t:"Prazosin is a selective alpha-1 blocker used for benign prostatic hyperplasia.", o:["True","False"], a:0},
+            {t:"Beta-blockers increase the heart rate.", o:["True","False"], a:1},
+            {t:"Timolol is used to treat glaucoma by increasing intraocular pressure.", o:["True","False"], a:1},
+            {t:"Acetylcholine is a direct-acting parasympathomimetic.", o:["True","False"], a:0},
+            {t:"Organophosphorus compounds are reversible anticholinesterases.", o:["True","False"], a:1},
+            {t:"Atropine is used as an antidote for organophosphorus poisoning.", o:["True","False"], a:0},
+            {t:"Atropine causes 'passive' mydriasis.", o:["True","False"], a:0},
+            {t:"Pirenzepine is used to treat peptic ulcers by blocking M1 receptors.", o:["True","False"], a:0},
+            {t:"Ipratropium is typically administered via IV injection for asthma.", o:["True","False"], a:1},
+            {t:"Physostigmine can antagonize both central and peripheral effects of atropine.", o:["True","False"], a:0},
+            {t:"Atropine poisoning can cause hyperthermia, especially in children.", o:["True","False"], a:0}
+
+// ── State ──
+let current = 0;
+let answers = [];
+let answered = false;
+
+// ── Init ──
+document.getElementById('quizTitleDisplay').textContent = QUIZ_TITLE;
+document.getElementById('startDesc').textContent        = QUIZ_DESC;
+document.getElementById('totalQDisplay').textContent    = QUESTIONS.length;
+
+// ── Theme ──
+const themeBtn = document.getElementById('themeBtn');
+let theme = localStorage.getItem('theme') || 'light';
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', t);
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+
+// ── Screen switch ──
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// ── Start ──
+function startQuiz() {
+  current = 0;
+  answers = new Array(QUESTIONS.length).fill(null);
+  answered = false;
+  show('quizScreen');
+  renderQuestion();
+}
+
+// ── Render question ──
+function renderQuestion() {
+  answered = false;
+  const q   = QUESTIONS[current];
+  const tot = QUESTIONS.length;
+
+  document.getElementById('qNum').textContent  = `QUESTION ${current + 1}`;
+  document.getElementById('qText').textContent = q.t;
+  document.getElementById('progressLabel').textContent = `${current+1} / ${tot}`;
+  document.getElementById('progressFill').style.width  = `${((current+1)/tot)*100}%`;
+  document.getElementById('btnNext').disabled = true;
+
+  const fb = document.getElementById('feedbackBox');
+  fb.className = 'feedback-box';
+
+  const letters = ['A','B','C','D','E'];
+  const list = document.getElementById('optsList');
+  list.innerHTML = '';
+  q.o.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.innerHTML = `<span class="opt-letter">${letters[i]}</span>${opt}`;
+    btn.onclick = () => selectAnswer(i, btn);
+    list.appendChild(btn);
+  });
+
+  const card = document.getElementById('qCard');
+  card.style.animation = 'none';
+  card.offsetHeight;
+  card.style.animation = 'slideIn .35s ease';
+}
+
+// ── Select answer ──
+function selectAnswer(chosen, clickedBtn) {
+  if (answered) return;
+  answered = true;
+  answers[current] = chosen;
+
+  const q    = QUESTIONS[current];
+  const opts = document.querySelectorAll('.opt-btn');
+  const correct = q.a;
+
+  opts.forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === correct)        btn.classList.add('correct');
+    if (i === chosen && chosen !== correct) btn.classList.add('wrong');
+  });
+
+  const fb = document.getElementById('feedbackBox');
+  if (chosen === correct) {
+    fb.className = 'feedback-box correct-fb show';
+    document.getElementById('feedbackIcon').textContent = '✅';
+    document.getElementById('feedbackText').textContent = 'Correct answer! 🎉';
+  } else {
+    fb.className = 'feedback-box wrong-fb show';
+    document.getElementById('feedbackIcon').textContent = '❌';
+    document.getElementById('feedbackText').textContent =
+      `Correct answer: ${q.o[correct]}`;
+  }
+
+  document.getElementById('btnNext').disabled = false;
+}
+
+// ── Skip ──
+function skipQuestion() {
+  if (answered) return;
+  answers[current] = null;
+  nextQuestion();
+}
+
+// ── Next ──
+function nextQuestion() {
+  current++;
+  if (current >= QUESTIONS.length) {
+    showResult();
+  } else {
+    answered = false;
+    renderQuestion();
+  }
+}
+
+// ── Result ──
+function showResult() {
+  let correct = 0, wrong = 0, skip = 0;
+  answers.forEach((a, i) => {
+    if (a === null)                skip++;
+    else if (a === QUESTIONS[i].a) correct++;
+    else                           wrong++;
+  });
+  const pct = Math.round((correct / QUESTIONS.length) * 100);
+  document.getElementById('rCorrect').textContent = correct;
+  document.getElementById('rWrong').textContent   = wrong;
+  document.getElementById('rSkip').textContent    = skip;
+  document.getElementById('pctNum').textContent   = pct;
+
+  let emoji, title, sub;
+  if      (pct >= 90) { emoji='🏆'; title='Excellent! Outstanding!';    sub='Amazing result — keep it up!'; }
+  else if (pct >= 75) { emoji='🎉'; title='Very Good!';                 sub='Strong performance, keep reviewing to reach the top!'; }
+  else if (pct >= 60) { emoji='💪'; title='Good, but room to improve!'; sub='Review your wrong answers and try again'; }
+  else if (pct >= 40) { emoji='📚'; title='Needs more revision';        sub='Go back to your notes and retake the quiz'; }
+  else                { emoji='😅'; title="Don't worry, keep studying!";sub='Revision is the key — try again!'; }
+
+  document.getElementById('resultEmoji').textContent = emoji;
+  document.getElementById('resultTitle').textContent = title;
+  document.getElementById('resultSub').textContent   = sub;
+
+  const circ  = 2 * Math.PI * 62;
+  const offset = circ - (pct / 100) * circ;
+  const arc = document.getElementById('circleArc');
+  arc.style.strokeDashoffset = '389.6';
+  arc.style.stroke = pct >= 60 ? 'var(--green)' : pct >= 40 ? 'var(--c)' : 'var(--red)';
+  setTimeout(() => { arc.style.strokeDashoffset = offset; }, 200);
+
+  show('resultScreen');
+}
+
+// ── Review ──
+function showReview() {
+  const list = document.getElementById('reviewList');
+  list.innerHTML = '';
+  const letters = ['A','B','C','D','E'];
+
+  QUESTIONS.forEach((q, qi) => {
+    const userAns = answers[qi];
+    let statusClass, statusText;
+    if      (userAns === null)       { statusClass='status-skip';    statusText='⏭ Skipped'; }
+    else if (userAns === q.a)        { statusClass='status-correct'; statusText='✅ Correct'; }
+    else                             { statusClass='status-wrong';   statusText='❌ Wrong'; }
+
+    const card = document.createElement('div');
+    card.className = 'review-card';
+    card.innerHTML = `
+      <div class="review-card-top">
+        <div class="review-q-label">QUESTION ${qi+1}</div>
+        <div class="review-q-text">${q.t}</div>
+        <div class="review-status ${statusClass}">${statusText}</div>
+      </div>
+      <div class="review-opts">
+        ${q.o.map((opt, oi) => {
+          let cls = 'review-opt';
+          if (oi === q.a)                        cls += ' is-correct';
+          if (oi === userAns && userAns !== q.a) cls += ' is-wrong';
+          return `<div class="${cls}"><div class="review-dot"></div>${letters[oi]}. ${opt}</div>`;
+        }).join('')}
+      </div>`;
+    list.appendChild(card);
+  });
+
+  show('reviewScreen');
+}
+
+function retryQuiz() {
+  current = 0;
+  answers = new Array(QUESTIONS.length).fill(null);
+  answered = false;
+  show('quizScreen');
+  renderQuestion();
+}
+</script>
+</body>
+</html>
