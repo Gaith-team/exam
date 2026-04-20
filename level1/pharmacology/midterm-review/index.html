@@ -1,9 +1,9 @@
-﻿<!DOCTYPE html>
-<html lang="ar" dir="rtl">
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title> GHAITH TEAM</title>
+<title>GHAITH TEAM</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
 <style>
@@ -183,7 +183,7 @@ nav {
   animation: slideIn .35s ease;
 }
 @keyframes slideIn {
-  from { opacity: 0; transform: translateX(20px); }
+  from { opacity: 0; transform: translateX(-20px); }
   to   { opacity: 1; transform: translateX(0); }
 }
 .q-num {
@@ -205,7 +205,7 @@ nav {
   padding: 15px 18px; border-radius: 13px;
   border: 1.5px solid var(--border);
   background: var(--bg);
-  cursor: pointer; text-align: right;
+  cursor: pointer; text-align: left;
   transition: var(--tr); font-family: 'Cairo',sans-serif;
   font-size: 15px; font-weight: 600; color: var(--text);
   width: 100%;
@@ -213,7 +213,7 @@ nav {
 .opt-btn:hover:not(:disabled) {
   border-color: var(--c);
   background: var(--c-soft);
-  transform: translateX(-3px);
+  transform: translateX(3px);
 }
 .opt-letter {
   width: 34px; height: 34px; flex-shrink: 0;
@@ -458,9 +458,9 @@ nav {
 
 <!-- NAV -->
 <nav>
-  <a href="https://gaith-team.github.io/exam/level1/pharmacology/index.html" class="nav-back">→ رجوع</a>
+  <a href="https://gaith-team.github.io/exam/level1/pharmacology/l" class="nav-back">← Back</a>
   <div class="nav-center">
-    <div class="nav-pill">📝 الامتحان</div>
+    <div class="nav-pill">📝 Quiz</div>
   </div>
   <button class="theme-toggle" id="themeBtn">🌙</button>
 </nav>
@@ -468,14 +468,14 @@ nav {
 <!-- ══ START SCREEN ══ -->
 <div class="screen active" id="startScreen">
   <div class="start-icon">📝</div>
-  <h1 class="start-title">امتحان <span id="quizTitleDisplay"></span></h1>
-  <p class="start-sub" id="startDesc">اختبر معلوماتك — اقرأ كل سؤال واختر الإجابة الصحيحة</p>
+  <h1 class="start-title">Quiz — <span id="quizTitleDisplay"></span></h1>
+  <p class="start-sub" id="startDesc">Test your knowledge — read each question and choose the correct answer</p>
   <div class="start-meta">
-    <div class="meta-pill"><strong id="totalQDisplay">0</strong> سؤال</div>
-    <div class="meta-pill">⏱ بدون وقت</div>
-    <div class="meta-pill">🎯 اختيار من متعدد</div>
+    <div class="meta-pill"><strong id="totalQDisplay">0</strong> Questions</div>
+    <div class="meta-pill">⏱ No time limit</div>
+    <div class="meta-pill">🎯 Multiple choice</div>
   </div>
-  <button class="btn-start" onclick="startQuiz()">🚀 ابدأ الامتحان</button>
+  <button class="btn-start" onclick="startQuiz()">🚀 Start Quiz</button>
 </div>
 
 <!-- ══ QUIZ SCREEN ══ -->
@@ -490,7 +490,7 @@ nav {
     </div>
 
     <div class="q-card" id="qCard">
-      <div class="q-num" id="qNum">السؤال 1</div>
+      <div class="q-num" id="qNum">QUESTION 1</div>
       <div class="q-text" id="qText"></div>
       <div class="options-list" id="optsList"></div>
       <div class="feedback-box" id="feedbackBox">
@@ -500,9 +500,9 @@ nav {
     </div>
 
     <div class="quiz-nav">
-      <button class="btn-nav btn-skip" onclick="skipQuestion()">تخطي ←</button>
+      <button class="btn-nav btn-skip" onclick="skipQuestion()">→ Skip</button>
       <button class="btn-nav btn-next" id="btnNext" onclick="nextQuestion()" disabled>
-        التالي ←
+        Next →
       </button>
     </div>
 
@@ -522,31 +522,31 @@ nav {
     </svg>
     <div class="result-pct">
       <span id="pctNum">0</span>%
-      <small>النتيجة</small>
+      <small>Score</small>
     </div>
   </div>
 
-  <h2 class="result-title" id="resultTitle">أحسنت!</h2>
-  <p class="result-sub" id="resultSub">لقد أنهيت الامتحان</p>
+  <h2 class="result-title" id="resultTitle">Well done!</h2>
+  <p class="result-sub" id="resultSub">You have completed the quiz</p>
 
   <div class="result-stats">
     <div class="rstat correct-s">
       <div class="rv" id="rCorrect">0</div>
-      <div class="rl">✅ صح</div>
+      <div class="rl">✅ Correct</div>
     </div>
     <div class="rstat wrong-s">
       <div class="rv" id="rWrong">0</div>
-      <div class="rl">❌ غلط</div>
+      <div class="rl">❌ Wrong</div>
     </div>
     <div class="rstat skip-s">
       <div class="rv" id="rSkip">0</div>
-      <div class="rl">⏭ تخطي</div>
+      <div class="rl">⏭ Skipped</div>
     </div>
   </div>
 
   <div class="result-actions">
-    <button class="btn-retry" onclick="retryQuiz()">🔄 حاول مجدداً</button>
-    <button class="btn-review" onclick="showReview()">📋 مراجعة الإجابات</button>
+    <button class="btn-retry" onclick="retryQuiz()">🔄 Try Again</button>
+    <button class="btn-review" onclick="showReview()">📋 Review Answers</button>
   </div>
 </div>
 
@@ -554,18 +554,17 @@ nav {
 <div class="screen" id="reviewScreen">
   <div class="review-wrap">
     <div class="review-header">
-      <h2>📋 مراجعة الإجابات</h2>
-      <p>الإجابات الصحيحة باللون الأخضر — إجاباتك الخاطئة باللون الأحمر</p>
+      <h2>📋 Answer Review</h2>
+      <p>Correct answers in green — your wrong answers in red</p>
     </div>
     <div id="reviewList"></div>
-    <button class="btn-back-result" onclick="showResult()">← العودة للنتيجة</button>
+    <button class="btn-back-result" onclick="showResult()">← Back to Results</button>
   </div>
 </div>
 
 <script>
-
-const QUIZ_TITLE = "مراجعة الميدترم الشامله";
-const QUIZ_DESC  = "مراجعة غيث الي هتخش تلاقيها"
+const QUIZ_TITLE = "مراجعة الميدترم ";
+const QUIZ_DESC  = "الأسئله علي محاضرات الميدترم بس وهتخش تلاقيها باذن الله ";
 
 const QUESTIONS = [
 {t:"Which dosage form is given through skin and acts systemically?",o:["Capsules","Aerosols","Nitroglycerin patch","Ampoules"],a:2},
@@ -634,11 +633,10 @@ const QUESTIONS = [
   {t:"Main side effect of insulin:",o:["Hyperglycemia","Abdominal pain","Hypotension","Hypoglycemia"],a:3},
   {t:"Local side effects of insulin include:",o:["Hyperglycemia","Insulin resistance","Lipodystrophy","Hypoglycemia"],a:2},
 ];
-/* ═══════════════════════════════════════════════ */
 
 // ── State ──
 let current = 0;
-let answers = [];   // null = skip, number = chosen index
+let answers = [];
 let answered = false;
 
 // ── Init ──
@@ -680,17 +678,15 @@ function renderQuestion() {
   const q   = QUESTIONS[current];
   const tot = QUESTIONS.length;
 
-  document.getElementById('qNum').textContent  = `السؤال ${current + 1}`;
+  document.getElementById('qNum').textContent  = `QUESTION ${current + 1}`;
   document.getElementById('qText').textContent = q.t;
   document.getElementById('progressLabel').textContent = `${current+1} / ${tot}`;
   document.getElementById('progressFill').style.width  = `${((current+1)/tot)*100}%`;
   document.getElementById('btnNext').disabled = true;
 
-  // feedback reset
   const fb = document.getElementById('feedbackBox');
   fb.className = 'feedback-box';
 
-  // options
   const letters = ['A','B','C','D','E'];
   const list = document.getElementById('optsList');
   list.innerHTML = '';
@@ -702,7 +698,6 @@ function renderQuestion() {
     list.appendChild(btn);
   });
 
-  // animate card
   const card = document.getElementById('qCard');
   card.style.animation = 'none';
   card.offsetHeight;
@@ -729,12 +724,12 @@ function selectAnswer(chosen, clickedBtn) {
   if (chosen === correct) {
     fb.className = 'feedback-box correct-fb show';
     document.getElementById('feedbackIcon').textContent = '✅';
-    document.getElementById('feedbackText').textContent = 'إجابة صحيحة! 🎉';
+    document.getElementById('feedbackText').textContent = 'Correct answer! 🎉';
   } else {
     fb.className = 'feedback-box wrong-fb show';
     document.getElementById('feedbackIcon').textContent = '❌';
     document.getElementById('feedbackText').textContent =
-      `الإجابة الصحيحة: ${q.o[correct]}`;
+      `Correct answer: ${q.o[correct]}`;
   }
 
   document.getElementById('btnNext').disabled = false;
@@ -762,39 +757,33 @@ function nextQuestion() {
 function showResult() {
   let correct = 0, wrong = 0, skip = 0;
   answers.forEach((a, i) => {
-    if (a === null)                    skip++;
-    else if (a === QUESTIONS[i].a)     correct++;
-    else                               wrong++;
+    if (a === null)                skip++;
+    else if (a === QUESTIONS[i].a) correct++;
+    else                           wrong++;
   });
-
   const pct = Math.round((correct / QUESTIONS.length) * 100);
-
   document.getElementById('rCorrect').textContent = correct;
   document.getElementById('rWrong').textContent   = wrong;
   document.getElementById('rSkip').textContent    = skip;
   document.getElementById('pctNum').textContent   = pct;
 
   let emoji, title, sub;
-  if      (pct >= 90) { emoji='🏆'; title='ممتاز! أحسنت!';       sub='نتيجة رائعة، استمر على هذا المستوى'; }
-  else if (pct >= 75) { emoji='🎉'; title='جيد جداً!';           sub='أداء قوي، كمّل المراجعة للوصول للقمة'; }
-  else if (pct >= 60) { emoji='💪'; title='جيد، بس في مجال';     sub='راجع الإجابات الخاطئة وعد حاول مجدداً'; }
-  else if (pct >= 40) { emoji='📚'; title='تحتاج مراجعة أكثر';   sub='ارجع للمحاضرات وعد للامتحان'; }
-  else                { emoji='😅'; title='متقلقش، راجع وحاول!'; sub='المراجعة هي المفتاح — عد وحاول مرة أخرى'; }
+  if      (pct >= 90) { emoji='🏆'; title='Excellent! Outstanding!';    sub='Amazing result — keep it up!'; }
+  else if (pct >= 75) { emoji='🎉'; title='Very Good!';                 sub='Strong performance, keep reviewing to reach the top!'; }
+  else if (pct >= 60) { emoji='💪'; title='Good, but room to improve!'; sub='Review your wrong answers and try again'; }
+  else if (pct >= 40) { emoji='📚'; title='Needs more revision';        sub='Go back to your notes and retake the quiz'; }
+  else                { emoji='😅'; title="Don't worry, keep studying!";sub='Revision is the key — try again!'; }
 
   document.getElementById('resultEmoji').textContent = emoji;
   document.getElementById('resultTitle').textContent = title;
   document.getElementById('resultSub').textContent   = sub;
 
-  // circle animation
   const circ  = 2 * Math.PI * 62;
   const offset = circ - (pct / 100) * circ;
-  setTimeout(() => {
-    document.getElementById('circleArc').style.strokeDashoffset = offset;
-  }, 200);
-
-  // color circle by score
   const arc = document.getElementById('circleArc');
+  arc.style.strokeDashoffset = '389.6';
   arc.style.stroke = pct >= 60 ? 'var(--green)' : pct >= 40 ? 'var(--c)' : 'var(--red)';
+  setTimeout(() => { arc.style.strokeDashoffset = offset; }, 200);
 
   show('resultScreen');
 }
@@ -808,15 +797,15 @@ function showReview() {
   QUESTIONS.forEach((q, qi) => {
     const userAns = answers[qi];
     let statusClass, statusText;
-    if      (userAns === null)       { statusClass='status-skip';    statusText='⏭ تم التخطي'; }
-    else if (userAns === q.a)        { statusClass='status-correct'; statusText='✅ صحيح'; }
-    else                             { statusClass='status-wrong';   statusText='❌ خطأ'; }
+    if      (userAns === null)       { statusClass='status-skip';    statusText='⏭ Skipped'; }
+    else if (userAns === q.a)        { statusClass='status-correct'; statusText='✅ Correct'; }
+    else                             { statusClass='status-wrong';   statusText='❌ Wrong'; }
 
     const card = document.createElement('div');
     card.className = 'review-card';
     card.innerHTML = `
       <div class="review-card-top">
-        <div class="review-q-label">السؤال ${qi+1}</div>
+        <div class="review-q-label">QUESTION ${qi+1}</div>
         <div class="review-q-text">${q.t}</div>
         <div class="review-status ${statusClass}">${statusText}</div>
       </div>
@@ -832,41 +821,6 @@ function showReview() {
   });
 
   show('reviewScreen');
-}
-
-function showResult() {
-  // recalculate in case called from review
-  let correct = 0, wrong = 0, skip = 0;
-  answers.forEach((a, i) => {
-    if (a === null)                skip++;
-    else if (a === QUESTIONS[i].a) correct++;
-    else                           wrong++;
-  });
-  const pct = Math.round((correct / QUESTIONS.length) * 100);
-  document.getElementById('rCorrect').textContent = correct;
-  document.getElementById('rWrong').textContent   = wrong;
-  document.getElementById('rSkip').textContent    = skip;
-  document.getElementById('pctNum').textContent   = pct;
-
-  let emoji, title, sub;
-  if      (pct >= 90) { emoji='🏆'; title='ممتاز! أحسنت!';       sub='نتيجة رائعة، استمر على هذا المستوى'; }
-  else if (pct >= 75) { emoji='🎉'; title='جيد جداً!';           sub='أداء قوي، كمّل المراجعة للوصول للقمة'; }
-  else if (pct >= 60) { emoji='💪'; title='جيد، بس في مجال';     sub='راجع الإجابات الخاطئة وعد حاول مجدداً'; }
-  else if (pct >= 40) { emoji='📚'; title='تحتاج مراجعة أكثر';   sub='ارجع للمحاضرات وعد للامتحان'; }
-  else                { emoji='😅'; title='متقلقش، راجع وحاول!'; sub='المراجعة هي المفتاح — عد وحاول مرة أخرى'; }
-
-  document.getElementById('resultEmoji').textContent = emoji;
-  document.getElementById('resultTitle').textContent = title;
-  document.getElementById('resultSub').textContent   = sub;
-
-  const circ  = 2 * Math.PI * 62;
-  const offset = circ - (pct / 100) * circ;
-  const arc = document.getElementById('circleArc');
-  arc.style.strokeDashoffset = '389.6';
-  arc.style.stroke = pct >= 60 ? 'var(--green)' : pct >= 40 ? 'var(--c)' : 'var(--red)';
-  setTimeout(() => { arc.style.strokeDashoffset = offset; }, 200);
-
-  show('resultScreen');
 }
 
 function retryQuiz() {
