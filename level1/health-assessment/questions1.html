@@ -1,0 +1,1658 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --c:      #e67e22;
+  --c-deep: #b8590a;
+  --c-lite: #f39c12;
+  --c-glow: rgba(230,126,34,0.2);
+  --c-soft: rgba(230,126,34,0.09);
+  --green:  #27ae60;
+  --red:    #e74c3c;
+  --bg:     #f9f5f0;
+  --bg2:    #f1e8dc;
+  --card:   #ffffff;
+  --text:   #1a1208;
+  --text2:  #5a4a30;
+  --text3:  #9a8060;
+  --border: rgba(230,126,34,0.15);
+  --radius: 18px;
+  --tr:     all 0.28s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="dark"] {
+  --bg:    #12100c;
+  --bg2:   #1c1710;
+  --card:  #231e16;
+  --text:  #f0e6d6;
+  --text2: #c0a880;
+  --text3: #806848;
+  --border:rgba(230,126,34,0.18);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Cairo','Tajawal',sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  transition: background .4s, color .4s;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px;
+  background: rgba(249,245,240,0.93);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+  transition: var(--tr);
+}
+[data-theme="dark"] nav { background: rgba(18,16,12,0.95); }
+.nav-back {
+  display: flex; align-items: center; gap: 8px;
+  text-decoration: none; color: var(--text2);
+  font-size: 13px; font-weight: 700;
+  padding: 7px 13px; border-radius: 9px;
+  border: 1px solid var(--border); background: var(--card);
+  transition: var(--tr);
+}
+.nav-back:hover { color: var(--c); border-color: var(--c); }
+.nav-center { display: flex; align-items: center; gap: 9px; }
+.nav-pill {
+  display: flex; align-items: center; gap: 7px;
+  padding: 6px 14px; border-radius: 50px;
+  background: linear-gradient(135deg, var(--c), var(--c-lite));
+  color: #fff; font-size: 13px; font-weight: 800;
+}
+.theme-toggle {
+  width: 38px; height: 38px; border-radius: 50%;
+  border: 1.5px solid var(--border); background: var(--card);
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  font-size: 16px; transition: var(--tr);
+}
+.theme-toggle:hover { border-color: var(--c); transform: rotate(20deg); }
+
+/* ── SCREENS ── */
+.screen { display: none; }
+.screen.active { display: flex; }
+
+/* ══════════════════════════════════
+   START SCREEN
+══════════════════════════════════ */
+#startScreen {
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 80px 24px 40px;
+  text-align: center;
+}
+.start-icon {
+  width: 90px; height: 90px; border-radius: 24px;
+  background: linear-gradient(135deg, var(--c), var(--c-lite));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 40px; margin: 0 auto 28px;
+  box-shadow: 0 12px 40px var(--c-glow);
+  animation: floatIcon 3s ease-in-out infinite;
+}
+@keyframes floatIcon {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+.start-title {
+  font-size: clamp(28px,5vw,44px); font-weight: 900; color: var(--text);
+  line-height: 1.15; margin-bottom: 12px;
+}
+.start-title span { color: var(--c); }
+.start-sub {
+  font-size: 15px; color: var(--text2); line-height: 1.7;
+  max-width: 400px; margin: 0 auto 36px;
+}
+.start-meta {
+  display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 44px;
+}
+.meta-pill {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 20px; border-radius: 12px;
+  background: var(--card); border: 1px solid var(--border);
+  font-size: 14px; font-weight: 700; color: var(--text2);
+}
+.meta-pill strong { color: var(--c); font-size: 18px; }
+.btn-start {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 44px; border-radius: 14px;
+  background: linear-gradient(135deg, var(--c), var(--c-lite));
+  color: #fff; font-size: 17px; font-weight: 900;
+  border: none; cursor: pointer;
+  box-shadow: 0 8px 28px var(--c-glow);
+  transition: var(--tr); font-family: 'Cairo',sans-serif;
+}
+.btn-start:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 14px 40px var(--c-glow); }
+
+/* ══════════════════════════════════
+   QUIZ SCREEN
+══════════════════════════════════ */
+#quizScreen {
+  min-height: 100vh;
+  flex-direction: column;
+  padding: 80px 0 40px;
+}
+.quiz-wrap {
+  flex: 1; max-width: 680px; width: 100%;
+  margin: 0 auto; padding: 32px 24px;
+  display: flex; flex-direction: column; gap: 24px;
+}
+
+/* progress */
+.quiz-progress-row {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 14px;
+}
+.progress-track {
+  flex: 1; height: 6px; border-radius: 6px;
+  background: var(--bg2); overflow: hidden;
+}
+.progress-fill {
+  height: 100%; border-radius: 6px;
+  background: linear-gradient(90deg, var(--c), var(--c-lite));
+  transition: width .5s cubic-bezier(0.4,0,0.2,1);
+}
+.progress-label {
+  font-size: 13px; font-weight: 800; color: var(--c);
+  white-space: nowrap;
+}
+
+/* question card */
+.q-card {
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  padding: 32px 28px;
+  box-shadow: 0 4px 24px rgba(230,126,34,0.08);
+  animation: slideIn .35s ease;
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.q-num {
+  font-size: 11px; font-weight: 800; letter-spacing: 2px;
+  color: var(--c); text-transform: uppercase; margin-bottom: 14px;
+}
+.q-text {
+  font-size: clamp(16px,2.5vw,20px); font-weight: 700;
+  color: var(--text); line-height: 1.6;
+}
+
+/* options */
+.options-list {
+  display: flex; flex-direction: column; gap: 12px;
+  margin-top: 28px;
+}
+.opt-btn {
+  display: flex; align-items: center; gap: 14px;
+  padding: 15px 18px; border-radius: 13px;
+  border: 1.5px solid var(--border);
+  background: var(--bg);
+  cursor: pointer; text-align: left;
+  transition: var(--tr); font-family: 'Cairo',sans-serif;
+  font-size: 15px; font-weight: 600; color: var(--text);
+  width: 100%;
+}
+.opt-btn:hover:not(:disabled) {
+  border-color: var(--c);
+  background: var(--c-soft);
+  transform: translateX(3px);
+}
+.opt-letter {
+  width: 34px; height: 34px; flex-shrink: 0;
+  border-radius: 50%; border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 900; color: var(--text3);
+  transition: var(--tr); background: var(--card);
+}
+.opt-btn:hover:not(:disabled) .opt-letter {
+  border-color: var(--c); color: var(--c); background: rgba(230,126,34,0.1);
+}
+
+/* states */
+.opt-btn.correct {
+  border-color: var(--green) !important;
+  background: rgba(39,174,96,0.08) !important;
+  color: var(--green);
+}
+.opt-btn.correct .opt-letter {
+  background: var(--green); border-color: var(--green);
+  color: #fff;
+}
+.opt-btn.wrong {
+  border-color: var(--red) !important;
+  background: rgba(231,76,60,0.08) !important;
+  color: var(--red);
+}
+.opt-btn.wrong .opt-letter {
+  background: var(--red); border-color: var(--red);
+  color: #fff;
+}
+.opt-btn:disabled { cursor: not-allowed; }
+
+/* feedback */
+.feedback-box {
+  display: none;
+  align-items: center; gap: 12px;
+  padding: 14px 18px; border-radius: 12px;
+  font-size: 14px; font-weight: 700;
+  margin-top: 16px;
+  animation: fadeIn .3s ease;
+}
+@keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+.feedback-box.show { display: flex; }
+.feedback-box.correct-fb {
+  background: rgba(39,174,96,0.1);
+  border: 1px solid rgba(39,174,96,0.25);
+  color: var(--green);
+}
+.feedback-box.wrong-fb {
+  background: rgba(231,76,60,0.1);
+  border: 1px solid rgba(231,76,60,0.25);
+  color: var(--red);
+}
+.feedback-icon { font-size: 20px; }
+
+/* nav buttons */
+.quiz-nav {
+  display: flex; gap: 12px; justify-content: space-between; align-items: center;
+}
+.btn-nav {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 26px; border-radius: 12px;
+  font-size: 14px; font-weight: 800;
+  border: none; cursor: pointer;
+  font-family: 'Cairo',sans-serif;
+  transition: var(--tr);
+}
+.btn-skip {
+  background: var(--bg2); color: var(--text2);
+  border: 1px solid var(--border);
+}
+.btn-skip:hover { background: var(--border); }
+.btn-next {
+  background: linear-gradient(135deg, var(--c), var(--c-lite));
+  color: #fff;
+  box-shadow: 0 4px 16px var(--c-glow);
+}
+.btn-next:hover { transform: translateY(-2px); box-shadow: 0 8px 24px var(--c-glow); }
+.btn-next:disabled { opacity: .45; pointer-events: none; }
+
+/* ══════════════════════════════════
+   RESULT SCREEN
+══════════════════════════════════ */
+#resultScreen {
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 80px 24px 40px;
+  text-align: center;
+}
+.result-circle {
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  margin: 0 auto 28px;
+  position: relative;
+}
+.result-circle svg {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  transform: rotate(-90deg);
+}
+.result-circle svg circle {
+  fill: none; stroke-width: 8;
+  stroke-linecap: round;
+}
+.circle-bg  { stroke: var(--bg2); }
+.circle-fill { stroke: var(--c); transition: stroke-dashoffset 1.2s cubic-bezier(0.4,0,0.2,1); }
+.result-pct {
+  font-size: 36px; font-weight: 900; color: var(--text);
+  position: relative; z-index: 1;
+}
+.result-pct small { font-size: 14px; color: var(--text3); display: block; }
+
+.result-emoji { font-size: 56px; margin-bottom: 16px; animation: bounce .6s ease; }
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
+.result-title { font-size: 26px; font-weight: 900; color: var(--text); margin-bottom: 8px; }
+.result-sub { font-size: 15px; color: var(--text2); margin-bottom: 36px; }
+
+.result-stats {
+  display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+.rstat {
+  padding: 14px 22px; border-radius: 14px;
+  background: var(--card); border: 1px solid var(--border);
+  min-width: 110px;
+}
+.rstat .rv { font-size: 26px; font-weight: 900; }
+.rstat .rl { font-size: 12px; color: var(--text3); margin-top: 2px; }
+.rstat.correct-s .rv { color: var(--green); }
+.rstat.wrong-s   .rv { color: var(--red); }
+.rstat.skip-s    .rv { color: var(--text3); }
+
+.result-actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.btn-retry {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 14px 32px; border-radius: 12px;
+  background: linear-gradient(135deg, var(--c), var(--c-lite));
+  color: #fff; font-size: 15px; font-weight: 900;
+  border: none; cursor: pointer; font-family: 'Cairo',sans-serif;
+  box-shadow: 0 6px 22px var(--c-glow); transition: var(--tr);
+}
+.btn-retry:hover { transform: translateY(-3px); }
+.btn-review {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 14px 28px; border-radius: 12px;
+  background: var(--card); color: var(--text);
+  font-size: 15px; font-weight: 700;
+  border: 1.5px solid var(--border); cursor: pointer;
+  font-family: 'Cairo',sans-serif; transition: var(--tr);
+}
+.btn-review:hover { border-color: var(--c); color: var(--c); }
+
+/* ── REVIEW MODE ── */
+#reviewScreen {
+  min-height: 100vh;
+  flex-direction: column;
+  padding: 80px 0 60px;
+}
+.review-wrap {
+  max-width: 680px; width: 100%;
+  margin: 0 auto; padding: 32px 24px;
+  display: flex; flex-direction: column; gap: 18px;
+}
+.review-header {
+  text-align: center; margin-bottom: 10px;
+}
+.review-header h2 { font-size: 22px; font-weight: 900; color: var(--text); }
+.review-header p  { font-size: 13px; color: var(--text3); margin-top: 4px; }
+
+.review-card {
+  background: var(--card);
+  border-radius: 16px;
+  border: 1.5px solid var(--border);
+  overflow: hidden;
+}
+.review-card-top {
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--border);
+}
+.review-q-label {
+  font-size: 10px; font-weight: 800; letter-spacing: 2px;
+  color: var(--text3); margin-bottom: 8px;
+}
+.review-q-text { font-size: 15px; font-weight: 700; color: var(--text); line-height: 1.55; }
+.review-opts { padding: 14px 22px; display: flex; flex-direction: column; gap: 8px; }
+.review-opt {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px; border-radius: 10px;
+  font-size: 13px; font-weight: 600; color: var(--text2);
+  background: var(--bg);
+}
+.review-opt.is-correct {
+  background: rgba(39,174,96,0.1);
+  color: var(--green); font-weight: 800;
+}
+.review-opt.is-wrong {
+  background: rgba(231,76,60,0.1);
+  color: var(--red);
+}
+.review-dot {
+  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  background: var(--border);
+}
+.review-opt.is-correct .review-dot { background: var(--green); }
+.review-opt.is-wrong   .review-dot { background: var(--red); }
+.review-status {
+  display: flex; align-items: center; gap: 5px;
+  padding: 3px 10px; border-radius: 50px;
+  font-size: 10px; font-weight: 800; margin-top: 10px;
+  width: fit-content;
+}
+.status-correct { background: rgba(39,174,96,0.12); color: var(--green); }
+.status-wrong   { background: rgba(231,76,60,0.12);  color: var(--red); }
+.status-skip    { background: var(--bg2); color: var(--text3); }
+
+.btn-back-result {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 13px 28px; border-radius: 12px;
+  background: var(--card); color: var(--text);
+  font-size: 14px; font-weight: 700;
+  border: 1.5px solid var(--border); cursor: pointer;
+  font-family: 'Cairo',sans-serif; transition: var(--tr);
+  margin-top: 8px; align-self: center;
+}
+.btn-back-result:hover { border-color: var(--c); color: var(--c); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 540px) {
+  nav { padding: 0 16px; }
+  .quiz-wrap, .review-wrap { padding: 24px 16px; }
+  .q-card { padding: 22px 18px; }
+  .opt-btn { padding: 12px 14px; font-size: 14px; }
+  .result-stats { gap: 10px; }
+  .rstat { min-width: 90px; padding: 12px 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://gaith-team.github.io/exam/level1/health-assessment/index.html/" class="nav-back">← Back</a>
+  <div class="nav-center">
+    <div class="nav-pill">📝 Question </div>
+  </div>
+  <button class="theme-toggle" id="themeBtn">🌙</button>
+</nav>
+
+<!-- ══ START SCREEN ══ -->
+<div class="screen active" id="startScreen">
+  <div class="start-icon">📝</div>
+  <h1 class="start-title">أسئلة  <span id="quizTitleDisplay"></span></h1>
+  <p class="start-sub" id="startDesc">Test your knowledge — read each question and choose the correct answer</p>
+  <div class="start-meta">
+    <div class="meta-pill"><strong id="totalQDisplay">0</strong> Questions</div>
+    <div class="meta-pill">⏱ No time limit</div>
+    <div class="meta-pill">🎯 Multiple choice</div>
+  </div>
+  <button class="btn-start" onclick="startQuiz()">🚀 Start Quiz</button>
+</div>
+
+<!-- ══ QUIZ SCREEN ══ -->
+<div class="screen" id="quizScreen">
+  <div class="quiz-wrap">
+
+    <div class="quiz-progress-row">
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      </div>
+      <div class="progress-label" id="progressLabel">1 / 1</div>
+    </div>
+
+    <div class="q-card" id="qCard">
+      <div class="q-num" id="qNum">QUESTION 1</div>
+      <div class="q-text" id="qText"></div>
+      <div class="options-list" id="optsList"></div>
+      <div class="feedback-box" id="feedbackBox">
+        <span class="feedback-icon" id="feedbackIcon"></span>
+        <span id="feedbackText"></span>
+      </div>
+    </div>
+
+    <div class="quiz-nav">
+      <button class="btn-nav btn-skip" onclick="skipQuestion()">→ Skip</button>
+      <button class="btn-nav btn-next" id="btnNext" onclick="nextQuestion()" disabled>
+        Next →
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ RESULT SCREEN ══ -->
+<div class="screen" id="resultScreen">
+  <div class="result-emoji" id="resultEmoji">🎉</div>
+
+  <div class="result-circle" id="resultCircle">
+    <svg viewBox="0 0 140 140">
+      <circle class="circle-bg"   cx="70" cy="70" r="62"/>
+      <circle class="circle-fill" cx="70" cy="70" r="62" id="circleArc"
+              stroke-dasharray="389.6"
+              stroke-dashoffset="389.6"/>
+    </svg>
+    <div class="result-pct">
+      <span id="pctNum">0</span>%
+      <small>Score</small>
+    </div>
+  </div>
+
+  <h2 class="result-title" id="resultTitle">Well done!</h2>
+  <p class="result-sub" id="resultSub">You have completed the quiz</p>
+
+  <div class="result-stats">
+    <div class="rstat correct-s">
+      <div class="rv" id="rCorrect">0</div>
+      <div class="rl">✅ Correct</div>
+    </div>
+    <div class="rstat wrong-s">
+      <div class="rv" id="rWrong">0</div>
+      <div class="rl">❌ Wrong</div>
+    </div>
+    <div class="rstat skip-s">
+      <div class="rv" id="rSkip">0</div>
+      <div class="rl">⏭ Skipped</div>
+    </div>
+  </div>
+
+  <div class="result-actions">
+    <button class="btn-retry" onclick="retryQuiz()">🔄 Try Again</button>
+    <button class="btn-review" onclick="showReview()">📋 Review Answers</button>
+  </div>
+</div>
+
+<!-- ══ REVIEW SCREEN ══ -->
+<div class="screen" id="reviewScreen">
+  <div class="review-wrap">
+    <div class="review-header">
+      <h2>📋 Answer Review</h2>
+      <p>Correct answers in green — your wrong answers in red</p>
+    </div>
+    <div id="reviewList"></div>
+    <button class="btn-back-result" onclick="showResult()">← Back to Results</button>
+  </div>
+</div>
+
+<script>
+const QUIZ_TITLE = "مراجعة شامله ";
+const QUIZ_DESC  = "أسئله شامله علي محاضرات الميد نظري ";
+
+const QUESTIONS = [
+            {type:"mcq",d:"easy",
+t:"Health Assessment is defined as the first step in which process?",
+o:["Medical process","Nursing process","Diagnostic process","Therapeutic process"],a:1},
+
+{type:"mcq",d:"easy",
+t:"Health Assessment is best described as:",
+o:["A static, one-time collection of data","A dynamic and continuous process of collecting, verifying and organizing data","A surgical intervention plan","A medication administration guide"],a:1},
+
+{type:"mcq",d:"easy",
+t:"In clinical practice, which type of care pathway is becoming more widespread?",
+o:["Individual care pathways","Integrated care pathways","Surgical care pathways","Emergency care pathways"],a:1},
+
+{type:"mcq",d:"easy",
+t:"Who is in charge of the patient or client nursing assessment?",
+o:["The charge nurse","The physician","The primary nurse","The ward clerk"],a:2},
+
+{type:"mcq",d:"easy",
+t:"The nursing assessment is defined as the systematic collection of all information related to:",
+o:["Medication schedules","The care of patients, their problems, and needs","Billing and insurance","Staff scheduling"],a:1},
+
+{type:"mcq",d:"easy",
+t:"Constituents of the nursing assessment include all of the following EXCEPT:",
+o:["Nursing history","Physical examination","Surgical procedures","Analysis of collected data"],a:2},
+
+{type:"mcq",d:"easy",
+t:"A nursing model-based assessment framework is usually applied in which type of assessment?",
+o:["Emergency assessment","Health Assessment","Diagnostic assessment","Nutritional assessment"],a:1},
+
+// ── Topic 2: Holistic Health Assessment ─────────
+
+{type:"mcq",d:"easy",
+t:"Holistic health assessment addresses which combination of dimensions?",
+o:["Physical and financial health","Physical, mental, and spiritual health","Mental and occupational health","Emotional and financial health"],a:1},
+
+{type:"mcq",d:"easy",
+t:"How many aspects does a holistic assessment include?",
+o:["Three","Four","Five","Six"],a:3},
+
+{type:"mcq",d:"easy",
+t:"Which of the following is NOT one of the six aspects of holistic assessment?",
+o:["Physical","Psychological","Financial","Cultural"],a:2},
+
+{type:"mcq",d:"medium",
+t:"Holistic health assessment permits the nurse to pick up mandatory data for:",
+o:["Surgical planning only","Diagnosis, planning and implementation","Medication administration only","Discharge planning only"],a:1},
+
+{type:"mcq",d:"medium",
+t:"Which aspect of holistic assessment considers the patient's growth and maturation stages?",
+o:["Cultural","Spiritual","Developmental","Sociological"],a:2},
+
+// ── Topic 3: Characteristics of a Healthy Individual ─
+
+{type:"mcq",d:"easy",
+t:"Characteristics of a healthy person are discussed under how many headings?",
+o:["Two","Three","Four","Five"],a:2},
+
+{type:"mcq",d:"easy",
+t:"Physical characteristics of a healthy individual account for:",
+o:["A minor part of individual health","A major part of individual health","Only mental health indicators","Only social health indicators"],a:1},
+
+{type:"mcq",d:"easy",
+t:"Physical characteristics of a healthy person can be measured by:",
+o:["Laboratory tests only","Head-to-toe assessment","Psychological testing","Blood pressure alone"],a:1},
+
+{type:"mcq",d:"easy",
+t:"The normal apical pulse rate for a healthy adult is:",
+o:["50–60 beats/min","60–70 beats/min","72–76 beats/min","80–90 beats/min"],a:2},
+
+{type:"mcq",d:"easy",
+t:"A healthy adult typically has how many teeth?",
+o:["20 to 24","24 to 28","28 to 32","32 to 36"],a:2},
+
+{type:"mcq",d:"easy",
+t:"Normal mental status in a healthy individual includes:",
+o:["Well-oriented to person, place, and time","Disoriented but responsive","Semiconscious and slow to respond","Agitated and restless"],a:0},
+
+{type:"mcq",d:"medium",
+t:"Healthy hair characteristics include all of the following EXCEPT:",
+o:["Clean and shining","Oiled and combed","With dandruff","Without dandruff"],a:2},
+
+{type:"mcq",d:"medium",
+t:"A healthy abdomen is described as:",
+o:["Hard and rigid with no sounds","Flat with absent bowel sounds","Round, soft, with audible and normal bowel sounds","Distended with increased bowel sounds"],a:2},
+
+{type:"mcq",d:"medium",
+t:"Which of the following describes a healthy chest?",
+o:["Asymmetrical and barrel-shaped","Symmetrical","Concave and sunken","Convex and protruding"],a:1},
+
+{type:"mcq",d:"medium",
+t:"Healthy buccal mucosa should be:",
+o:["Pale and dry with discoloration","Pink and moist without discoloration, no ulcer","Yellow and moist","Dry and cracked"],a:1},
+
+{type:"mcq",d:"medium",
+t:"A healthy neck should be:",
+o:["Rigid and immobile","Symmetrical with smooth controlled movement","Asymmetrical with limited movement","Stiff with painful range of motion"],a:1},
+
+{type:"mcq",d:"medium",
+t:"Which of the following describes healthy lips?",
+o:["Cracked and dry","Pale and chapped","Smooth and moist","Inflamed and bleeding"],a:2},
+
+{type:"mcq",d:"medium",
+t:"Healthy eyes are described as:",
+o:["Asymmetrical with unequal lash spacing","Symmetrical, in alignment with top of ears, with evenly spaced lashes","Symmetrical but misaligned with the ears","Asymmetrical with equal lash distribution"],a:1},
+
+{type:"mcq",d:"medium",
+t:"Social characteristics of a healthy individual include all of the following EXCEPT:",
+o:["Having good community relations","Being active socially","Isolated from community activities","Following social change and social control"],a:2},
+
+{type:"mcq",d:"hard",
+t:"Which statement BEST describes spiritual and cultural characteristics of a healthy individual?",
+o:["The individual follows only their own religious beliefs strictly","The individual believes in their religion but respects other religions and beliefs","The individual avoids all religious and cultural practices","The individual only follows cultural norms, ignoring spiritual aspects"],a:1},
+
+{type:"mcq",d:"hard",
+t:"Mental characteristics of a healthy person are described in relation to which types of hygiene?",
+o:["Personal, environmental, social, industrial, and school hygiene","Personal and hospital hygiene only","Environmental and occupational hygiene","Social and financial hygiene"],a:0},
+
+// ── Topic 4: Purposes of Health Assessment ──────
+
+{type:"mcq",d:"easy",
+t:"Which of the following is a purpose of health assessment?",
+o:["To prescribe medications","To gather data","To perform surgical procedures","To replace the physician's role"],a:1},
+
+{type:"mcq",d:"easy",
+t:"Health assessment is used to verify or reject data obtained in the:",
+o:["Physical examination","Lab results","Health history","Discharge summary"],a:2},
+
+{type:"mcq",d:"easy",
+t:"One key purpose of health assessment is to:",
+o:["Identify nursing diagnoses","Prescribe antibiotics","Perform invasive procedures","Replace physician assessment"],a:0},
+
+{type:"mcq",d:"medium",
+t:"Health assessment helps the nurse to estimate which type of results of care?",
+o:["Financial results","Bio-psycho-social and spiritual results","Administrative results","Logistical results"],a:1},
+
+{type:"mcq",d:"medium",
+t:"Making clinical judgments regarding a client's altering health status is BEST achieved through:",
+o:["Health assessment","Medication administration","Dietary planning","Surgical consultation"],a:0},
+
+// ── Topic 5: Importance of Nursing Health Assessment ─
+
+{type:"mcq",d:"easy",
+t:"Health assessment provides a baseline used to:",
+o:["Discharge the patient","Plan the client's care","Write prescriptions","Calculate billing charges"],a:1},
+
+{type:"mcq",d:"easy",
+t:"Health assessment affects the choice of:",
+o:["Hospital location","Therapies and client responses","Dietary preferences","Visiting hours"],a:1},
+
+{type:"mcq",d:"medium",
+t:"Which of the following correctly states an importance of nursing health assessment?",
+o:["It replaces all other aspects of nursing care","It contains a great revision of client's condition","It eliminates the need for physician consultation","It is performed only at admission"],a:1},
+
+{type:"mcq",d:"medium",
+t:"Health Assessment Components include all of the following EXCEPT:",
+o:["Nursing health history","Physical examination","Records and reports","Surgical documentation only"],a:3},
+
+// ── Topic 6: Frequency of Health Evaluation ─────
+
+{type:"mcq",d:"easy",
+t:"Individuals under 35 years of age should have a health evaluation every:",
+o:["1–2 years","2–3 years","4–5 years","6–7 years"],a:2},
+
+{type:"mcq",d:"easy",
+t:"Individuals aged 35–45 years should have a health evaluation every:",
+o:["1 year","2–3 years","4–5 years","6 months"],a:1},
+
+{type:"mcq",d:"easy",
+t:"Individuals aged 45–55 years should:",
+o:["Have evaluation every 4–5 years","Have evaluation every 2–3 years","Undergo a thorough medical checkup each year","Have monthly check-ups"],a:2},
+
+{type:"mcq",d:"easy",
+t:"Individuals over 55 years old may need a health check-up:",
+o:["Annually","Every 6 months","Monthly","Every 2 years"],a:2},
+
+// ── Topic 7: Health Assessment Principles ───────
+
+{type:"mcq",d:"medium",
+t:"Which principle states that documentation must be objective, precise, clear, concise, specific and up-to-date?",
+o:["Accuracy principle","Health Assessment Principle","Legal documentation standard","Confidentiality principle"],a:1},
+
+{type:"mcq",d:"medium",
+t:"According to Health Assessment Principles, the information collected should be:",
+o:["Kept only by the primary nurse","Shared with other healthcare professionals","Kept confidential from all staff","Shared only with the patient's family"],a:1},
+
+{type:"mcq",d:"medium",
+t:"Which of the following is a Health Assessment Principle?",
+o:["Assessment should focus only on physical health","Client confidentiality must be maintained","Only physicians may access assessment data","Assessment is performed only at admission"],a:1},
+
+{type:"mcq",d:"medium",
+t:"A comprehensive assessment in Health Assessment Principles includes:",
+o:["Physiological data only","Physiological, psychosocial, and spiritual health","Physical and financial data","Laboratory data only"],a:1},
+
+// ── Topic 8: Types of Health Assessment ─────────
+
+{type:"mcq",d:"easy",
+t:"How many main types of health assessments can a nurse perform?",
+o:["Two","Three","Four","Five"],a:2},
+
+{type:"mcq",d:"easy",
+t:"An initial assessment is also called:",
+o:["Emergency assessment","Admission assessment","Focused assessment","Time-lapsed assessment"],a:1},
+
+{type:"mcq",d:"easy",
+t:"Which type of assessment is carried out in life-threatening situations?",
+o:["Initial comprehensive assessment","Problem-focused assessment","Emergency assessment","Time-lapsed assessment"],a:2},
+
+{type:"mcq",d:"easy",
+t:"Emergency assessment problems are often related to:",
+o:["Psychological and social issues","Airway, breathing, and circulatory problems","Nutritional and dietary deficiencies","Skin and wound care problems"],a:1},
+
+{type:"mcq",d:"medium",
+t:"A problem-focused assessment incorporates:",
+o:["A larger scope and longer time than the initial assessment","A smaller scope and shorter time than the initial assessment","The same scope as an emergency assessment","Only objective data from laboratory results"],a:1},
+
+{type:"mcq",d:"medium",
+t:"In a focused assessment, the nurse determines all of the following EXCEPT:",
+o:["If the problem still exists","If the status of the problem has changed","New or misdiagnosed problems","The patient's financial situation"],a:3},
+
+{type:"mcq",d:"medium",
+t:"Time-lapsed assessment is conducted after the initial assessment to:",
+o:["Replace the initial assessment","Evaluate any alterations in the health of the client","Plan the initial care","Perform emergency procedures"],a:1},
+
+{type:"mcq",d:"medium",
+t:"An initial comprehensive assessment provides data that are both:",
+o:["Financial and social","Subjective and objective","Physical and financial","Emergency and routine"],a:1},
+
+{type:"mcq",d:"medium",
+t:"Subjective data in a comprehensive assessment are obtained from:",
+o:["Physical examination findings","Laboratory results","Health history and body system","Vital signs measurement"],a:2},
+
+{type:"mcq",d:"medium",
+t:"Objective data in a comprehensive assessment are collected from:",
+o:["Health history","Family interviews","Physical examination","Social assessment"],a:2},
+
+{type:"mcq",d:"hard",
+t:"Which type of assessment would be MOST appropriate for a nurse seeing a patient at a follow-up clinic visit after several weeks?",
+o:["Initial comprehensive assessment","Emergency assessment","Problem-focused assessment","Time-lapsed (ongoing) assessment"],a:3},
+
+{type:"mcq",d:"hard",
+t:"A nurse discovers during a focused assessment that a new problem was missed in the initial evaluation. This is BEST described as:",
+o:["Time-lapsed assessment finding","Misdiagnosed problem identified during focused assessment","Emergency assessment finding","Administrative error in documentation"],a:1},
+
+// ── Topic 9: Sources of Data ──────────────────
+
+{type:"mcq",d:"easy",
+t:"Data can be obtained from which two main types of sources?",
+o:["Electronic and paper sources","Primary and secondary sources","Clinical and administrative sources","Objective and subjective sources"],a:1},
+
+{type:"mcq",d:"easy",
+t:"The primary source of data in nursing assessment is:",
+o:["The family member","The medical record","The patient","The diagnostic result"],a:2},
+
+{type:"mcq",d:"easy",
+t:"Secondary sources of data include all of the following EXCEPT:",
+o:["Family members","The patient directly","Medical records","Diagnostic procedures"],a:1},
+
+{type:"mcq",d:"medium",
+t:"When is it appropriate to use secondary data sources instead of the patient as primary source?",
+o:["When the nurse prefers secondary sources","When the patient is unconscious, mentally ill, or severely ill","When the patient refuses to cooperate","When the physician recommends it"],a:1},
+
+{type:"mcq",d:"medium",
+t:"Family members can provide information on all of the following EXCEPT:",
+o:["Patient's past health","Current illness and allergies","Patient's medications","Patient's laboratory values directly"],a:3},
+
+{type:"mcq",d:"medium",
+t:"Previous knowledge about a patient from multiple sources helps the nurse to do all EXCEPT:",
+o:["Determine what information to look for","Prioritize data","Make surgical decisions independently","Differentiate relevant from irrelevant data"],a:2},
+
+{type:"mcq",d:"medium",
+t:"Other health professionals serve as which type of data source?",
+o:["Primary source","Tertiary source","Secondary source","Administrative source"],a:2},
+
+// ── Topic 10: Types of Data ───────────────────
+
+{type:"mcq",d:"easy",
+t:"Data in nursing assessment is classified into:",
+o:["Primary and secondary data","Subjective and objective data","Clinical and administrative data","Quantitative and qualitative data"],a:1},
+
+{type:"mcq",d:"easy",
+t:"Subjective data is BEST described as:",
+o:["Measurable and verifiable observations","What the person informs the examiner such as description of pain or feelings","Laboratory findings and vital signs","Findings from the physical examination"],a:1},
+
+{type:"mcq",d:"easy",
+t:"Which of the following is an example of subjective data?",
+o:["Blood pressure of 140/90","Pulse of 88 beats/min",'Patient says "I feel dizzy"',"Temperature of 38°C"],a:2},
+
+{type:"mcq",d:"easy",
+t:"Objective data is characterized by being:",
+o:["Reported by the patient","Obvious, measurable, and verifiable","Based on family reports","Obtained only from medical records"],a:1},
+
+{type:"mcq",d:"easy",
+t:"Which of the following is an example of objective data?",
+o:['Patient reports "I am too fat"',"Vital signs, wound redness, laboratory findings",'Patient says "My bladder never seems empty"',"Patient reports pain of 8/10"],a:1},
+
+{type:"mcq",d:"medium",
+t:"Correlation of subjective and objective data means:",
+o:["Only using one type of data","Cross-verifying patient reports with measurable observations","Ignoring subjective data in favor of objective data","Documenting both types in separate records"],a:1},
+
+{type:"mcq",d:"medium",
+t:"Which of the following correctly pairs subjective and objective data?",
+o:['"I feel dizzy" paired with BP 90/60 and Pulse 110',"Temperature 38°C paired with 'I feel hot'",'Wound redness paired with "I have pain"',"All of the above represent correct correlations"],a:3},
+
+{type:"mcq",d:"hard",
+t:"A patient states they experience difficulty breathing. The nurse notes altered breath sounds on auscultation and dullness on percussion. This BEST illustrates:",
+o:["Purely subjective assessment","Purely objective assessment","Correlation of subjective and objective data","Administrative documentation"],a:2},
+
+// ── Topic 11: Health Promotion ────────────────
+
+{type:"mcq",d:"easy",
+t:"Health promotion is a vital component of:",
+o:["Surgical practice","Nursing practice","Pharmaceutical practice","Administrative practice"],a:1},
+
+{type:"mcq",d:"medium",
+t:"Health assessment of a healthy person is conducted to maintain and promote health, representing:",
+o:["Secondary prevention","Tertiary prevention","Primary prevention","Emergency intervention"],a:2},
+
+{type:"mcq",d:"medium",
+t:"Health assessment of a patient with an acute condition is directed to early diagnosis and treatment to reduce illness effects, representing:",
+o:["Primary prevention","Secondary prevention","Tertiary prevention","Quaternary prevention"],a:1},
+
+{type:"mcq",d:"medium",
+t:"Health assessment of a patient with chronic illness aims to prevent complications and restore health to the optimum level, representing:",
+o:["Primary prevention","Secondary prevention","Tertiary prevention","Emergency intervention"],a:2},
+
+{type:"mcq",d:"hard",
+t:"Through health assessment, a nurse uses opportunities to instruct clients about:",
+o:["Surgical techniques","How to reduce risks and prevent illness and disease","Medication prescriptions","Insurance billing procedures"],a:1},
+
+// ── Topic 12: Preparation for Assessment ────────
+
+{type:"mcq",d:"easy",
+t:"How many primary preparations are used in the physical assessment?",
+o:["Three","Four","Five","Six"],a:2},
+
+{type:"mcq",d:"easy",
+t:"Which of the following is NOT one of the five primary preparations for physical assessment?",
+o:["Preparing the patient","Preparing the environment","Positioning","Requesting laboratory tests"],a:3},
+
+{type:"mcq",d:"easy",
+t:"Clients should empty their bladder before a physical exam primarily to:",
+o:["Provide a urine sample","Help them feel more relaxed","Facilitate deep palpation","Reduce examination time"],a:1},
+
+{type:"mcq",d:"medium",
+t:"Which of the following should a nurse be aware of when preparing an elderly patient for assessment?",
+o:["High pain tolerance","Normal physiologic changes that occur with age and stiffness of muscles and joints","Increased flexibility and strength","Enhanced sensory perception"],a:1},
+
+{type:"mcq",d:"medium",
+t:"When a client's language differs from that of the nurse, the nurse should:",
+o:["Postpone the assessment","Ask the family to translate informally","Arrange for an interpreter","Cancel the assessment"],a:2},
+
+{type:"mcq",d:"medium",
+t:"The environment for physical examination should be:",
+o:["Cold and brightly lit","Well lighted, warm, organized, and private","Dark and quiet with minimal equipment","Open and shared with other patients"],a:1},
+
+{type:"mcq",d:"medium",
+t:"The timing of the physical examination should be:",
+o:["Convenient only for the nurse","Convenient only for the patient","Convenient for both the client and the caregiver","Determined by hospital administration only"],a:2},
+
+{type:"mcq",d:"medium",
+t:"Drapes are made of which materials?",
+o:["Only paper","Only cloth","Paper, cloth, or bed linen","Plastic only"],a:2},
+
+{type:"mcq",d:"medium",
+t:"The purpose of draping during physical examination includes all EXCEPT:",
+o:["Providing privacy","Providing warmth","Exposing all body areas simultaneously","Covering body areas not being examined"],a:2},
+
+{type:"mcq",d:"medium",
+t:"Multiple positions are often required during the physical exam. When organizing positioning, the nurse should:",
+o:["Change the patient's position as frequently as possible","Organize assessment so several body areas can be assessed in one position","Always use only the supine position","Ask the patient to choose positions independently"],a:1},
+
+{type:"mcq",d:"hard",
+t:"When adapting assessment techniques for a patient with sensory impairment, the nurse should ensure:",
+o:["The assessment is shortened","Eye glasses or hearing aids are nearby","The patient is not assessed for that area","Another nurse performs the assessment"],a:1},
+
+{type:"mcq",d:"hard",
+t:"All equipment required for health assessment should be:",
+o:["Sterile and autoclaved","Clean, in good working order, and readily accessible","New and unused","Provided by the patient"],a:1},
+
+// ── Topic 13: Physical Exam – Inspection ────────
+
+{type:"mcq",d:"easy",
+t:"Inspection is BEST described as:",
+o:["Examination of the body with sense of touch","The most common evaluation method and visual evaluation","Striking the body surface to produce audible sounds","Listening to body sounds with a stethoscope"],a:1},
+
+{type:"mcq",d:"easy",
+t:"During inspection, the nurse pays attention to:",
+o:["Only skin color","Color, size, location, smells, and sounds","Only visible lesions","Blood pressure and pulse"],a:1},
+
+{type:"mcq",d:"easy",
+t:"The nurse inspects with:",
+o:["Stethoscope only","The naked eye and with a lighted instrument","Percussion hammer only","Palpating fingers"],a:1},
+
+{type:"mcq",d:"medium",
+t:"In addition to visual observations, inspection also uses which senses?",
+o:["Taste and touch","Olfactory (smell) and auditory (hearing) senses","Touch and proprioception","Only the visual sense"],a:1},
+
+{type:"mcq",d:"medium",
+t:"For accurate auditory assessment during inspection, the nurse requires:",
+o:["Bright lighting","A quiet environment","A warm room","The patient to speak loudly"],a:1},
+
+{type:"mcq",d:"medium",
+t:"Lighting during inspection must be:",
+o:["Dim to prevent patient discomfort","Sufficient for the nurse to see clearly","Ultraviolet","Provided only by natural light"],a:1},
+
+// ── Topic 14: Physical Exam – Palpation ─────────
+
+{type:"mcq",d:"easy",
+t:"Palpation is the examination of the body using:",
+o:["Visual observation","The sense of touch","Auditory perception","Percussion sounds"],a:1},
+
+{type:"mcq",d:"easy",
+t:"Which part of the hand is used during palpation due to its high sensitivity?",
+o:["Palm of the hand","Dorsum of the hand","Pads of the fingers","Back of the wrist"],a:2},
+
+{type:"mcq",d:"easy",
+t:"The effectiveness of palpation depends largely on:",
+o:["The nurse's speed","The client's relaxation","Room temperature","Type of equipment used"],a:1},
+
+{type:"mcq",d:"medium",
+t:"How many types of palpation are there?",
+o:["One","Two","Three","Four"],a:1},
+
+{type:"mcq",d:"medium",
+t:"Light palpation (superficial palpation) should always precede deep palpation because:",
+o:["Deep palpation is more accurate","Strong pressure on fingertips can dull the sense of touch","Light palpation covers a wider area","Deep palpation requires a different instrument"],a:1},
+
+{type:"mcq",d:"medium",
+t:"For light palpation, the nurse:",
+o:["Uses the dorsum of both hands","Extends the dominant hand's fingers parallel to skin and presses gently in a circle","Applies strong downward pressure","Uses both hands simultaneously"],a:1},
+
+{type:"mcq",d:"medium",
+t:"With light palpation, the skin is:",
+o:["Deeply depressed to 4–5 cm","Slightly depressed","Not depressed at all","Stretched laterally"],a:1},
+
+{type:"mcq",d:"medium",
+t:"Deep palpation is usually:",
+o:["Performed routinely in all assessments","Not done during routine examination and requires significant practitioner skill","Performed before light palpation","The same technique as light palpation"],a:1},
+
+{type:"mcq",d:"medium",
+t:"Deep palpation is NOT indicated in clients who have:",
+o:["Mild joint pain","Acute abdominal pain or undiagnosed pain","Chronic back pain only","Mild skin tenderness"],a:1},
+
+{type:"mcq",d:"hard",
+t:"During deep palpation using two hands, which hand applies pressure?",
+o:["The lower (supporting) hand","The top hand","Both hands equally","Neither; only one hand is used in deep palpation"],a:1},
+
+{type:"mcq",d:"hard",
+t:"During deep palpation, the lower hand:",
+o:["Applies downward pressure","Remains relaxed to perceive tactile sensations","Uses the dorsum to sense temperature","Taps the body surface rhythmically"],a:1},
+
+{type:"mcq",d:"hard",
+t:"Which of the following BEST describes how a nurse can assist a client to relax during palpation?",
+o:["Perform palpation quickly without warning","Gown/drape the client appropriately, position comfortably, and ensure hands are warm","Dim the lights and have the patient stand","Start with deep palpation to get it done quickly"],a:1},
+
+// ── Topic 15: Physical Exam – Percussion ────────
+
+{type:"mcq",d:"easy",
+t:"Percussion is used to:",
+o:["Listen to heart sounds","Determine size and shape of internal organs and whether tissue is fluid-filled, air-filled, or solid","Feel the texture of skin","Observe the color of mucous membranes"],a:1},
+
+{type:"mcq",d:"easy",
+t:"How many types of percussion are there?",
+o:["One","Two","Three","Four"],a:1},
+
+{type:"mcq",d:"easy",
+t:"Direct percussion involves:",
+o:["Striking a finger held against the body with a finger of the other hand","Striking the area to be assessed with the pads of two, three, or four fingers directly","Using a rubber mallet on bony prominences","Applying sustained pressure with the palm"],a:1},
+
+{type:"mcq",d:"easy",
+t:"Indirect percussion involves:",
+o:["Using fingertips directly on the skin","Striking a finger held against the body with a finger of the other hand","Applying a percussion hammer","Using a stethoscope for sound amplification"],a:1},
+
+{type:"mcq",d:"medium",
+t:"In indirect percussion, the motion comes from the:",
+o:["Elbow","Shoulder","Wrist; the forearm remains stationary","Hip"],a:2},
+
+{type:"mcq",d:"medium",
+t:"To obtain a clear sound during indirect percussion, the blows must be:",
+o:["Slow and sustained","Firm, rapid, and short","Light and continuous","Random and varied"],a:1},
+
+{type:"mcq",d:"medium",
+t:"Flatness as a percussion sound is described as:",
+o:["A musical, drum-like sound","An extremely muffled sound produced by very dense tissue such as muscle or bone","A hollow sound like air-filled lungs","A booming sound over emphysematous tissue"],a:1},
+
+{type:"mcq",d:"medium",
+t:"Tympany as a percussion sound is described as:",
+o:["A muffled sound over dense tissue","A musical or drum-like sound produced by an air-filled stomach","A thud-like sound over the liver","A hollow sound like normal lung tissue"],a:1},
+
+{type:"mcq",d:"medium",
+t:"Dullness as a percussion sound is described as:",
+o:["A musical sound from an air-filled cavity","A hollow sound from air-filled lungs","A thud-like sound produced by dense tissue such as liver, spleen, or heart","An extremely muffled sound from bone"],a:2},
+
+{type:"mcq",d:"medium",
+t:"Resonance as a percussion sound is described as:",
+o:["A thud-like sound from dense tissue","A musical drum-like sound","A hollow sound produced by lungs filled with air","An extremely muffled sound from muscle"],a:2},
+
+{type:"mcq",d:"hard",
+t:"Hyperresonance is described as:",
+o:["Produced in all normal body assessments","A booming sound heard over an emphysematous lung; NOT produced in the normal body","A thud-like sound from a fluid-filled cavity","A musical sound from an air-filled stomach"],a:1},
+
+{type:"mcq",d:"hard",
+t:"Which percussion sound would MOST likely be heard over the liver?",
+o:["Tympany","Resonance","Dullness","Hyperresonance"],a:2},
+
+{type:"mcq",d:"hard",
+t:"Which percussion sound would MOST likely be heard over the stomach when air-filled?",
+o:["Flatness","Dullness","Resonance","Tympany"],a:3},
+
+// ── Topic 16: Physical Exam – Auscultation ──────
+
+{type:"mcq",d:"easy",
+t:"Auscultation is defined as:",
+o:["Striking the body surface to produce sound","The process of listening to the sounds produced in the body","Examining the body with the sense of touch","Visual observation of body structures"],a:1},
+
+{type:"mcq",d:"easy",
+t:"Direct auscultation involves:",
+o:["Using a stethoscope","Listening to body sounds with the unaided ear","Tapping the body surface","Feeling organ borders"],a:1},
+
+{type:"mcq",d:"easy",
+t:"Indirect auscultation involves:",
+o:["Listening with the unaided ear","Using a stethoscope","Visual observation","Using a percussion hammer"],a:1},
+
+{type:"mcq",d:"medium",
+t:"The stethoscope has which two main components?",
+o:["Headset and tubing","A flat disc diaphragm and a bell-shaped amplifier","Eartip and eartube only","Stem and chestpiece only"],a:1},
+
+{type:"mcq",d:"medium",
+t:"The diaphragm of the stethoscope BEST transmits:",
+o:["Low-pitched sounds such as heart sounds","High-pitched sounds such as bronchial sounds","No sounds; it is decorative","Vibrations only"],a:1},
+
+{type:"mcq",d:"medium",
+t:"The bell of the stethoscope BEST transmits:",
+o:["High-pitched sounds such as bronchial breath sounds","Low-pitched sounds such as some heart sounds","Percussion vibrations","Tactile sensations"],a:1},
+
+// ── Topic 17: General Survey ──────────────────
+
+{type:"mcq",d:"easy",
+t:"A general survey assessment observes:",
+o:["Only the patient's vital signs","The entire patient as a whole","Only the patient's skin and wound","Only the cardiovascular system"],a:1},
+
+{type:"mcq",d:"easy",
+t:"General surveys begin with:",
+o:["The physical examination","The initial patient contact and continue throughout care","Laboratory results","The physician's orders"],a:1},
+
+{type:"mcq",d:"medium",
+t:"During a general survey, nurses begin assessing patients from the moment they meet them by noting:",
+o:["Only the patient's age and weight","Appearance, posture, gait, verbal and nonverbal communication, and behaviors","Only the patient's chief complaint","Only vital signs"],a:1},
+
+{type:"mcq",d:"medium",
+t:"Cues obtained during a general survey are used to:",
+o:["Replace focused assessments","Guide additional focused assessments in areas of concern","Determine the patient's financial status","Write the discharge summary"],a:1},
+
+{type:"mcq",d:"medium",
+t:"A general survey is a fundamental research and clinical tool used to gain:",
+o:["A deep analysis of one specific problem","A broad understanding of a population or issue","Only quantitative data","Only financial information"],a:1},
+
+{type:"mcq",d:"medium",
+t:"A general survey in nursing uses how many senses to gather cues?",
+o:["Two senses","Three senses","All five senses","Only visual sense"],a:2},
+
+{type:"mcq",d:"medium",
+t:"Key characteristics of a general survey include all of the following EXCEPT:",
+o:["Broad scope","Descriptive in nature","Standardized data collection","Deep analysis of specific variables"],a:3},
+
+{type:"mcq",d:"hard",
+t:"Methods used in a general survey include all of the following EXCEPT:",
+o:["Questionnaires","Interviews","Observation","Surgical procedures"],a:3},
+
+{type:"mcq",d:"hard",
+t:"Which of the following is NOT a purpose of a general survey?",
+o:["Identify basic characteristics of a population","Understand general trends or patterns","Detect problems requiring deeper study","Provide deep analysis of a specific clinical diagnosis"],a:3},
+
+// ── Topic 18: Nursing Process ─────────────────
+
+{type:"mcq",d:"easy",
+t:"How many components does the nursing process include?",
+o:["Four","Five","Six","Seven"],a:2},
+
+{type:"mcq",d:"easy",
+t:"The six components of the nursing process are:",
+o:["Assessment, Diagnosis, Outcomes ID, Planning, Implementation, Evaluation","Assessment, Diagnosis, Planning, Surgery, Documentation, Evaluation","History, Exam, Diagnosis, Therapy, Monitoring, Discharge","Observation, Data, Diagnosis, Plan, Care, Report"],a:0},
+
+{type:"mcq",d:"medium",
+t:"According to the ANA, nursing assessment includes collecting pertinent data covering demographics, social determinants of health, and:",
+o:["Financial data only","Physical, functional, psychosocial, emotional, cognitive, sexual, cultural, spiritual, and economic assessments","Only physical examination findings","Only laboratory results"],a:1},
+
+{type:"mcq",d:"medium",
+t:"Subjective data in nursing is information obtained from:",
+o:["Laboratory findings","Physical examination findings","The patient and/or family members","Diagnostic imaging results"],a:2},
+
+{type:"mcq",d:"medium",
+t:"When documenting subjective data, it should:",
+o:["Be written as objective measurements","Be in quotation marks and start with 'The patient reports...' or similar verbiage","Be listed separately from objective data in a different record","Be recorded only in the discharge summary"],a:1},
+
+{type:"mcq",d:"medium",
+t:"An inference such as 'The patient appears anxious' is considered:",
+o:["Objective data","Primary data","Subjective data","Secondary objective data"],a:2},
+
+{type:"mcq",d:"hard",
+t:"Which of the following is an example of properly documented objective data?",
+o:["'The patient appears depressed'","'The patient seems to be in pain'","'The patient's radial pulse is 58 and regular, skin feels warm and dry'","'The patient reports pain severity of 2 on a 0–10 scale'"],a:2},
+
+{type:"mcq",d:"hard",
+t:"Assessment data is collected in which three ways?",
+o:["Chart review, lab tests, and imaging","Focused interview, physical examination, and review of laboratory and diagnostic test results","Family interview, medical history, and surgery reports","Observation, questionnaire, and secondary data"],a:1},
+
+// ── Topic 19: Documentation ───────────────────
+
+{type:"mcq",d:"easy",
+t:"Documentation must be:",
+o:["Long, detailed, and narrative","Clear, concise, and accurate","Handwritten only","Completed only at discharge"],a:1},
+
+{type:"mcq",d:"easy",
+t:"Assessment data is documented in the patient's:",
+o:["Personal notebook","Electronic medical record (EMR)","Family correspondence file","Billing department record"],a:1},
+
+{type:"mcq",d:"easy",
+t:"Nursing documentation provides a full account of patient care used for all EXCEPT:",
+o:["Reimbursement by payors","Legal system evidence","Personal nursing journals","Research and quality improvement"],a:2},
+
+{type:"mcq",d:"medium",
+t:"Times of documentation include all of the following EXCEPT:",
+o:["At admission to a unit","After head-to-toe assessment","After each visitor leaves","After medication administration"],a:2},
+
+{type:"mcq",d:"medium",
+t:"Progress notes should be documented according to hospital policy, which may include every:",
+o:["30 minutes","Every 2 hours or after a change in patient status","Every 8 hours only","Once per day"],a:1},
+
+{type:"mcq",d:"medium",
+t:"Guidelines for documentation state that nurses should:",
+o:["Use erasable ink for corrections","Leave blank lines between entries","Document legibly in unerasable ink","Write long, detailed sentences"],a:2},
+
+{type:"mcq",d:"medium",
+t:"Blank lines in patient records should be avoided because:",
+o:["They waste paper","They may allow someone to add incorrect information","They slow documentation speed","They confuse the billing department"],a:1},
+
+{type:"mcq",d:"medium",
+t:"Which type of documentation was designed to decrease the amount of time required to document care?",
+o:["Narrative notes","SOAPIE notes","Charting by Exception (CBE)","Patient Discharge Summary"],a:2},
+
+{type:"mcq",d:"medium",
+t:"In SOAPIE notes, what does the 'A' stand for?",
+o:["Action","Auscultation","Assessment","Administration"],a:2},
+
+{type:"mcq",d:"medium",
+t:"In SOAPIE notes, the 'Plan' section:",
+o:["Contains the patient's self-reported symptoms","Outlines the plan of care based on the Assessment section, including goals and planned interventions","Documents the patient's response to interventions","Records observable and measurable data"],a:1},
+
+{type:"mcq",d:"medium",
+t:"The 'Subjective' section of SOAPIE notes includes:",
+o:["Vital signs and physical examination findings","What the patient said and why they are in need of care","The nursing diagnosis interpretation","The evaluation of care outcomes"],a:1},
+
+{type:"mcq",d:"medium",
+t:"A Patient Discharge Summary includes all of the following EXCEPT:",
+o:["Time of departure and method of transportation","Name and relationship of person accompanying the patient","Condition of the patient at discharge","Nurse's personal opinion about the patient's attitude"],a:3},
+
+{type:"mcq",d:"medium",
+t:"Methods of electronic documentation protection include all EXCEPT:",
+o:["Maintaining confidentiality of passwords","Logging off when leaving the terminal","Sharing passwords with trusted colleagues","Changing passwords per facility policy"],a:2},
+
+{type:"mcq",d:"hard",
+t:"Flow sheets in nursing documentation include:",
+o:["Only the medication administration record","Graphic clinical record, fluid balance record, medication administration record, and daily nursing care records","Only the laboratory result record","Only the vital signs record"],a:1},
+
+{type:"mcq",d:"hard",
+t:"The 'Data' section of a focused DAR note is collected during:",
+o:["The discharge phase","The evaluation phase","The patient assessment phase","The surgical phase"],a:2},
+
+{type:"mcq",d:"hard",
+t:"The 'Action' section in DAR documentation correlates to which phases of the nursing process?",
+o:["Assessment and Diagnosis","Planning and Implementation","Evaluation and Outcomes","Diagnosis and Evaluation"],a:1},
+
+{type:"mcq",d:"hard",
+t:"Narrative notes are described as a type of documentation that:",
+o:["Records only abnormal findings","Chronicles assessment findings and nursing activities for the entire shift or visit","Replaces the initial assessment","Is organized into six structured categories"],a:1},
+
+{type:"mcq",d:"hard",
+t:"Which statement BEST describes quality documentation in relation to the nursing process?",
+o:["Quality documentation means the record is handwritten neatly","Quality documentation means the elements of the nursing process are evident in the documentation","Quality documentation means the record is lengthy and detailed","Quality documentation means recording only positive patient outcomes"],a:1},
+
+{type:"mcq",d:"hard",
+t:"A good test to evaluate whether documentation is satisfactory is to ask:",
+o:["'Is the documentation long enough?'","'Did I spend enough time writing?'","'If another RN had to take over, does the record provide sufficient information for safe, competent, and ethical care?'","'Did I document the patient's family's concerns?'"],a:2},
+
+// ════════════════════════════════════════════════
+//  TRUE / FALSE  (50)
+// ════════════════════════════════════════════════
+
+{type:"tf",d:"easy",
+t:"Health Assessment is the first step in the nursing process.",
+o:["True","False"],a:0},
+
+{type:"tf",d:"easy",
+t:"The primary nurse is in charge of the patient or client nursing assessment.",
+o:["True","False"],a:0},
+
+{type:"tf",d:"easy",
+t:"Health Assessment is a static, one-time process of data collection.",
+o:["True","False"],a:1},
+
+{type:"tf",d:"easy",
+t:"Holistic health assessment focuses only on physical wellbeing.",
+o:["True","False"],a:1},
+
+{type:"tf",d:"easy",
+t:"The six aspects of holistic assessment include physical, psychological, sociological, developmental, spiritual, and cultural assessment.",
+o:["True","False"],a:0},
+
+{type:"tf",d:"easy",
+t:"Physical characteristics of a healthy individual can be measured by head-to-toe assessment.",
+o:["True","False"],a:0},
+
+{type:"tf",d:"easy",
+t:"A healthy adult has a normal apical pulse of 72–76 beats per minute.",
+o:["True","False"],a:0},
+
+{type:"tf",d:"easy",
+t:"Palpation is the process of listening to sounds produced in the body.",
+o:["True","False"],a:1},
+
+{type:"tf",d:"easy",
+t:"Inspection is the most common evaluation method and involves visual evaluation.",
+o:["True","False"],a:0},
+
+{type:"tf",d:"easy",
+t:"The diaphragm of the stethoscope best transmits high-pitched sounds such as bronchial sounds.",
+o:["True","False"],a:0},
+
+{type:"tf",d:"easy",
+t:"Light palpation should always precede deep palpation.",
+o:["True","False"],a:0},
+
+{type:"tf",d:"easy",
+t:"Individuals under 35 years of age should have a health evaluation every 4–5 years.",
+o:["True","False"],a:0},
+
+{type:"tf",d:"easy",
+t:"A healthy adult has 28 to 32 teeth.",
+o:["True","False"],a:0},
+
+{type:"tf",d:"easy",
+t:"The primary source of data is the patient.",
+o:["True","False"],a:0},
+
+{type:"tf",d:"easy",
+t:"Auscultation is the first technique performed before all other physical assessment techniques.",
+o:["True","False"],a:1},
+
+{type:"tf",d:"medium",
+t:"Subjective data are obvious, measurable, and verifiable observations such as vital signs.",
+o:["True","False"],a:1},
+
+{type:"tf",d:"medium",
+t:"The bell of the stethoscope best transmits low-pitched sounds such as some heart sounds.",
+o:["True","False"],a:0},
+
+{type:"tf",d:"medium",
+t:"Deep palpation is routinely performed during every standard physical examination.",
+o:["True","False"],a:1},
+
+{type:"tf",d:"medium",
+t:"Individuals aged 35–45 years should have a health evaluation every 2–3 years.",
+o:["True","False"],a:0},
+
+{type:"tf",d:"medium",
+t:"Tympany is a musical or drum-like sound produced by an air-filled stomach.",
+o:["True","False"],a:0},
+
+{type:"tf",d:"medium",
+t:"The nursing process is a continuous, cyclic process that adapts to the patient's current health status.",
+o:["True","False"],a:0},
+
+{type:"tf",d:"medium",
+t:"A comprehensive individual assessment includes only objective data from the physical examination.",
+o:["True","False"],a:1},
+
+{type:"tf",d:"medium",
+t:"An emergency assessment prioritizes airway, breathing, and circulatory problems.",
+o:["True","False"],a:0},
+
+{type:"tf",d:"medium",
+t:"Charting by Exception (CBE) was designed to increase the amount of time required for documentation.",
+o:["True","False"],a:1},
+
+{type:"tf",d:"medium",
+t:"Indirect auscultation involves using a stethoscope to listen to body sounds.",
+o:["True","False"],a:0},
+
+{type:"tf",d:"medium",
+t:"Resonance is a hollow sound produced by lungs filled with air.",
+o:["True","False"],a:0},
+
+{type:"tf",d:"medium",
+t:"Health assessment of a patient with an acute condition represents tertiary prevention.",
+o:["True","False"],a:1},
+
+{type:"tf",d:"medium",
+t:"A general survey assessment uses all five senses to gather cues about the patient.",
+o:["True","False"],a:0},
+
+{type:"tf",d:"medium",
+t:"Subjective data documented from a family member is considered primary data.",
+o:["True","False"],a:1},
+
+{type:"tf",d:"medium",
+t:"Documentation serves as a permanent legal record of care given or not given to the client.",
+o:["True","False"],a:0},
+
+{type:"tf",d:"medium",
+t:"Dullness on percussion is a thud-like sound produced by dense tissue such as the liver, spleen, or heart.",
+o:["True","False"],a:0},
+
+{type:"tf",d:"medium",
+t:"Clients should empty their bladder before physical examination to provide a urine sample.",
+o:["True","False"],a:1},
+
+{type:"tf",d:"medium",
+t:"The patient care record is used to facilitate effective communication among healthcare professionals.",
+o:["True","False"],a:0},
+
+{type:"tf",d:"hard",
+t:"Hyperresonance is produced in the normal healthy body during routine percussion.",
+o:["True","False"],a:1},
+
+{type:"tf",d:"hard",
+t:"Nursing documentation can be used as evidence by the legal system.",
+o:["True","False"],a:0},
+
+{type:"tf",d:"hard",
+t:"Health assessment of a patient with chronic illness represents secondary prevention.",
+o:["True","False"],a:1},
+
+{type:"tf",d:"hard",
+t:"The Registered Nurse remains responsible for analyzing physical examination findings even when data collection is delegated to LPNs or UAPs.",
+o:["True","False"],a:0},
+
+{type:"tf",d:"hard",
+t:"In DAR documentation, the 'Response' section corresponds to the Evaluation phase of the nursing process.",
+o:["True","False"],a:0},
+
+{type:"tf",d:"hard",
+t:"Security and confidentiality of computerized (electronic) documentation are no longer a concern with modern systems.",
+o:["True","False"],a:1},
+
+{type:"tf",d:"hard",
+t:"During indirect percussion, the motion comes from the wrist while the forearm remains stationary.",
+o:["True","False"],a:0},
+
+{type:"tf",d:"hard",
+t:"Deep palpation is indicated for clients with acute abdominal pain or undiagnosed pain.",
+o:["True","False"],a:1},
+
+{type:"tf",d:"hard",
+t:"Blank lines should be left in patient records to allow for later additions by any team member.",
+o:["True","False"],a:1},
+
+{type:"tf",d:"hard",
+t:"Flatness on percussion is an extremely muffled sound produced by very dense tissue such as muscle or bone.",
+o:["True","False"],a:0},
+
+{type:"tf",d:"hard",
+t:"An inference documented during assessment is considered objective data.",
+o:["True","False"],a:1},
+
+{type:"tf",d:"hard",
+t:"The pads of the fingers are used in palpation because their concentration of nerve endings makes them highly sensitive to tactile discrimination.",
+o:["True","False"],a:0},
+
+{type:"tf",d:"hard",
+t:"A focused assessment has a larger scope and longer time outline than the initial assessment.",
+o:["True","False"],a:1},
+
+{type:"tf",d:"hard",
+t:"According to documentation guidelines, events should be recorded chronologically, sequentially, and logically.",
+o:["True","False"],a:0},
+
+{type:"tf",d:"hard",
+t:"The nursing process includes five components according to the ANA standards.",
+o:["True","False"],a:1},
+
+{type:"tf",d:"hard",
+t:"Health promotion is a vital component of nursing practice and can begin with the health assessment.",
+o:["True","False"],a:0},
+
+{type:"tf",d:"hard",
+t:"The purpose of the patient care record is to reduce healthcare costs, not to improve patient care.",
+o:["True","False"],a:1},
+        ];
+
+
+// ── State ──
+let current = 0;
+let answers = [];
+let answered = false;
+
+// ── Init ──
+document.getElementById('quizTitleDisplay').textContent = QUIZ_TITLE;
+document.getElementById('startDesc').textContent        = QUIZ_DESC;
+document.getElementById('totalQDisplay').textContent    = QUESTIONS.length;
+
+// ── Theme ──
+const themeBtn = document.getElementById('themeBtn');
+let theme = localStorage.getItem('theme') || 'light';
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', t);
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+
+// ── Screen switch ──
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// ── Start ──
+function startQuiz() {
+  current = 0;
+  answers = new Array(QUESTIONS.length).fill(null);
+  answered = false;
+  show('quizScreen');
+  renderQuestion();
+}
+
+// ── Render question ──
+function renderQuestion() {
+  answered = false;
+  const q   = QUESTIONS[current];
+  const tot = QUESTIONS.length;
+
+  document.getElementById('qNum').textContent  = `QUESTION ${current + 1}`;
+  document.getElementById('qText').textContent = q.t;
+  document.getElementById('progressLabel').textContent = `${current+1} / ${tot}`;
+  document.getElementById('progressFill').style.width  = `${((current+1)/tot)*100}%`;
+  document.getElementById('btnNext').disabled = true;
+
+  const fb = document.getElementById('feedbackBox');
+  fb.className = 'feedback-box';
+
+  const letters = ['A','B','C','D','E'];
+  const list = document.getElementById('optsList');
+  list.innerHTML = '';
+  q.o.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.innerHTML = `<span class="opt-letter">${letters[i]}</span>${opt}`;
+    btn.onclick = () => selectAnswer(i, btn);
+    list.appendChild(btn);
+  });
+
+  const card = document.getElementById('qCard');
+  card.style.animation = 'none';
+  card.offsetHeight;
+  card.style.animation = 'slideIn .35s ease';
+}
+
+// ── Select answer ──
+function selectAnswer(chosen, clickedBtn) {
+  if (answered) return;
+  answered = true;
+  answers[current] = chosen;
+
+  const q    = QUESTIONS[current];
+  const opts = document.querySelectorAll('.opt-btn');
+  const correct = q.a;
+
+  opts.forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === correct)        btn.classList.add('correct');
+    if (i === chosen && chosen !== correct) btn.classList.add('wrong');
+  });
+
+  const fb = document.getElementById('feedbackBox');
+  if (chosen === correct) {
+    fb.className = 'feedback-box correct-fb show';
+    document.getElementById('feedbackIcon').textContent = '✅';
+    document.getElementById('feedbackText').textContent = 'Correct answer! 🎉';
+  } else {
+    fb.className = 'feedback-box wrong-fb show';
+    document.getElementById('feedbackIcon').textContent = '❌';
+    document.getElementById('feedbackText').textContent =
+      `Correct answer: ${q.o[correct]}`;
+  }
+
+  document.getElementById('btnNext').disabled = false;
+}
+
+// ── Skip ──
+function skipQuestion() {
+  if (answered) return;
+  answers[current] = null;
+  nextQuestion();
+}
+
+// ── Next ──
+function nextQuestion() {
+  current++;
+  if (current >= QUESTIONS.length) {
+    showResult();
+  } else {
+    answered = false;
+    renderQuestion();
+  }
+}
+
+// ── Result ──
+function showResult() {
+  let correct = 0, wrong = 0, skip = 0;
+  answers.forEach((a, i) => {
+    if (a === null)                skip++;
+    else if (a === QUESTIONS[i].a) correct++;
+    else                           wrong++;
+  });
+  const pct = Math.round((correct / QUESTIONS.length) * 100);
+  document.getElementById('rCorrect').textContent = correct;
+  document.getElementById('rWrong').textContent   = wrong;
+  document.getElementById('rSkip').textContent    = skip;
+  document.getElementById('pctNum').textContent   = pct;
+
+  let emoji, title, sub;
+  if      (pct >= 90) { emoji='🏆'; title='Excellent! Outstanding!';    sub='Amazing result — keep it up!'; }
+  else if (pct >= 75) { emoji='🎉'; title='Very Good!';                 sub='Strong performance, keep reviewing to reach the top!'; }
+  else if (pct >= 60) { emoji='💪'; title='Good, but room to improve!'; sub='Review your wrong answers and try again'; }
+  else if (pct >= 40) { emoji='📚'; title='Needs more revision';        sub='Go back to your notes and retake the quiz'; }
+  else                { emoji='😅'; title="Don't worry, keep studying!";sub='Revision is the key — try again!'; }
+
+  document.getElementById('resultEmoji').textContent = emoji;
+  document.getElementById('resultTitle').textContent = title;
+  document.getElementById('resultSub').textContent   = sub;
+
+  const circ  = 2 * Math.PI * 62;
+  const offset = circ - (pct / 100) * circ;
+  const arc = document.getElementById('circleArc');
+  arc.style.strokeDashoffset = '389.6';
+  arc.style.stroke = pct >= 60 ? 'var(--green)' : pct >= 40 ? 'var(--c)' : 'var(--red)';
+  setTimeout(() => { arc.style.strokeDashoffset = offset; }, 200);
+
+  show('resultScreen');
+}
+
+// ── Review ──
+function showReview() {
+  const list = document.getElementById('reviewList');
+  list.innerHTML = '';
+  const letters = ['A','B','C','D','E'];
+
+  QUESTIONS.forEach((q, qi) => {
+    const userAns = answers[qi];
+    let statusClass, statusText;
+    if      (userAns === null)       { statusClass='status-skip';    statusText='⏭ Skipped'; }
+    else if (userAns === q.a)        { statusClass='status-correct'; statusText='✅ Correct'; }
+    else                             { statusClass='status-wrong';   statusText='❌ Wrong'; }
+
+    const card = document.createElement('div');
+    card.className = 'review-card';
+    card.innerHTML = `
+      <div class="review-card-top">
+        <div class="review-q-label">QUESTION ${qi+1}</div>
+        <div class="review-q-text">${q.t}</div>
+        <div class="review-status ${statusClass}">${statusText}</div>
+      </div>
+      <div class="review-opts">
+        ${q.o.map((opt, oi) => {
+          let cls = 'review-opt';
+          if (oi === q.a)                        cls += ' is-correct';
+          if (oi === userAns && userAns !== q.a) cls += ' is-wrong';
+          return `<div class="${cls}"><div class="review-dot"></div>${letters[oi]}. ${opt}</div>`;
+        }).join('')}
+      </div>`;
+    list.appendChild(card);
+  });
+
+  show('reviewScreen');
+}
+
+function retryQuiz() {
+  current = 0;
+  answers = new Array(QUESTIONS.length).fill(null);
+  answered = false;
+  show('quizScreen');
+  renderQuestion();
+}
+</script>
+</body>
+</html>
