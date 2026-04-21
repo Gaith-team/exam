@@ -1,0 +1,887 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --c:      #e67e22;
+  --c-deep: #b8590a;
+  --c-lite: #f39c12;
+  --c-glow: rgba(230,126,34,0.2);
+  --c-soft: rgba(230,126,34,0.09);
+  --green:  #27ae60;
+  --red:    #e74c3c;
+  --bg:     #f9f5f0;
+  --bg2:    #f1e8dc;
+  --card:   #ffffff;
+  --text:   #1a1208;
+  --text2:  #5a4a30;
+  --text3:  #9a8060;
+  --border: rgba(230,126,34,0.15);
+  --radius: 18px;
+  --tr:     all 0.28s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="dark"] {
+  --bg:    #12100c;
+  --bg2:   #1c1710;
+  --card:  #231e16;
+  --text:  #f0e6d6;
+  --text2: #c0a880;
+  --text3: #806848;
+  --border:rgba(230,126,34,0.18);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Cairo','Tajawal',sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  transition: background .4s, color .4s;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px;
+  background: rgba(249,245,240,0.93);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+  transition: var(--tr);
+}
+[data-theme="dark"] nav { background: rgba(18,16,12,0.95); }
+.nav-back {
+  display: flex; align-items: center; gap: 8px;
+  text-decoration: none; color: var(--text2);
+  font-size: 13px; font-weight: 700;
+  padding: 7px 13px; border-radius: 9px;
+  border: 1px solid var(--border); background: var(--card);
+  transition: var(--tr);
+}
+.nav-back:hover { color: var(--c); border-color: var(--c); }
+.nav-center { display: flex; align-items: center; gap: 9px; }
+.nav-pill {
+  display: flex; align-items: center; gap: 7px;
+  padding: 6px 14px; border-radius: 50px;
+  background: linear-gradient(135deg, var(--c), var(--c-lite));
+  color: #fff; font-size: 13px; font-weight: 800;
+}
+.theme-toggle {
+  width: 38px; height: 38px; border-radius: 50%;
+  border: 1.5px solid var(--border); background: var(--card);
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  font-size: 16px; transition: var(--tr);
+}
+.theme-toggle:hover { border-color: var(--c); transform: rotate(20deg); }
+
+/* ── SCREENS ── */
+.screen { display: none; }
+.screen.active { display: flex; }
+
+/* ══════════════════════════════════
+   START SCREEN
+══════════════════════════════════ */
+#startScreen {
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 80px 24px 40px;
+  text-align: center;
+}
+.start-icon {
+  width: 90px; height: 90px; border-radius: 24px;
+  background: linear-gradient(135deg, var(--c), var(--c-lite));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 40px; margin: 0 auto 28px;
+  box-shadow: 0 12px 40px var(--c-glow);
+  animation: floatIcon 3s ease-in-out infinite;
+}
+@keyframes floatIcon {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+.start-title {
+  font-size: clamp(28px,5vw,44px); font-weight: 900; color: var(--text);
+  line-height: 1.15; margin-bottom: 12px;
+}
+.start-title span { color: var(--c); }
+.start-sub {
+  font-size: 15px; color: var(--text2); line-height: 1.7;
+  max-width: 400px; margin: 0 auto 36px;
+}
+.start-meta {
+  display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 44px;
+}
+.meta-pill {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 20px; border-radius: 12px;
+  background: var(--card); border: 1px solid var(--border);
+  font-size: 14px; font-weight: 700; color: var(--text2);
+}
+.meta-pill strong { color: var(--c); font-size: 18px; }
+.btn-start {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 44px; border-radius: 14px;
+  background: linear-gradient(135deg, var(--c), var(--c-lite));
+  color: #fff; font-size: 17px; font-weight: 900;
+  border: none; cursor: pointer;
+  box-shadow: 0 8px 28px var(--c-glow);
+  transition: var(--tr); font-family: 'Cairo',sans-serif;
+}
+.btn-start:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 14px 40px var(--c-glow); }
+
+/* ══════════════════════════════════
+   QUIZ SCREEN
+══════════════════════════════════ */
+#quizScreen {
+  min-height: 100vh;
+  flex-direction: column;
+  padding: 80px 0 40px;
+}
+.quiz-wrap {
+  flex: 1; max-width: 680px; width: 100%;
+  margin: 0 auto; padding: 32px 24px;
+  display: flex; flex-direction: column; gap: 24px;
+}
+
+/* progress */
+.quiz-progress-row {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 14px;
+}
+.progress-track {
+  flex: 1; height: 6px; border-radius: 6px;
+  background: var(--bg2); overflow: hidden;
+}
+.progress-fill {
+  height: 100%; border-radius: 6px;
+  background: linear-gradient(90deg, var(--c), var(--c-lite));
+  transition: width .5s cubic-bezier(0.4,0,0.2,1);
+}
+.progress-label {
+  font-size: 13px; font-weight: 800; color: var(--c);
+  white-space: nowrap;
+}
+
+/* question card */
+.q-card {
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  padding: 32px 28px;
+  box-shadow: 0 4px 24px rgba(230,126,34,0.08);
+  animation: slideIn .35s ease;
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.q-num {
+  font-size: 11px; font-weight: 800; letter-spacing: 2px;
+  color: var(--c); text-transform: uppercase; margin-bottom: 14px;
+}
+.q-text {
+  font-size: clamp(16px,2.5vw,20px); font-weight: 700;
+  color: var(--text); line-height: 1.6;
+}
+
+/* options */
+.options-list {
+  display: flex; flex-direction: column; gap: 12px;
+  margin-top: 28px;
+}
+.opt-btn {
+  display: flex; align-items: center; gap: 14px;
+  padding: 15px 18px; border-radius: 13px;
+  border: 1.5px solid var(--border);
+  background: var(--bg);
+  cursor: pointer; text-align: left;
+  transition: var(--tr); font-family: 'Cairo',sans-serif;
+  font-size: 15px; font-weight: 600; color: var(--text);
+  width: 100%;
+}
+.opt-btn:hover:not(:disabled) {
+  border-color: var(--c);
+  background: var(--c-soft);
+  transform: translateX(3px);
+}
+.opt-letter {
+  width: 34px; height: 34px; flex-shrink: 0;
+  border-radius: 50%; border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 900; color: var(--text3);
+  transition: var(--tr); background: var(--card);
+}
+.opt-btn:hover:not(:disabled) .opt-letter {
+  border-color: var(--c); color: var(--c); background: rgba(230,126,34,0.1);
+}
+
+/* states */
+.opt-btn.correct {
+  border-color: var(--green) !important;
+  background: rgba(39,174,96,0.08) !important;
+  color: var(--green);
+}
+.opt-btn.correct .opt-letter {
+  background: var(--green); border-color: var(--green);
+  color: #fff;
+}
+.opt-btn.wrong {
+  border-color: var(--red) !important;
+  background: rgba(231,76,60,0.08) !important;
+  color: var(--red);
+}
+.opt-btn.wrong .opt-letter {
+  background: var(--red); border-color: var(--red);
+  color: #fff;
+}
+.opt-btn:disabled { cursor: not-allowed; }
+
+/* feedback */
+.feedback-box {
+  display: none;
+  align-items: center; gap: 12px;
+  padding: 14px 18px; border-radius: 12px;
+  font-size: 14px; font-weight: 700;
+  margin-top: 16px;
+  animation: fadeIn .3s ease;
+}
+@keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+.feedback-box.show { display: flex; }
+.feedback-box.correct-fb {
+  background: rgba(39,174,96,0.1);
+  border: 1px solid rgba(39,174,96,0.25);
+  color: var(--green);
+}
+.feedback-box.wrong-fb {
+  background: rgba(231,76,60,0.1);
+  border: 1px solid rgba(231,76,60,0.25);
+  color: var(--red);
+}
+.feedback-icon { font-size: 20px; }
+
+/* nav buttons */
+.quiz-nav {
+  display: flex; gap: 12px; justify-content: space-between; align-items: center;
+}
+.btn-nav {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 26px; border-radius: 12px;
+  font-size: 14px; font-weight: 800;
+  border: none; cursor: pointer;
+  font-family: 'Cairo',sans-serif;
+  transition: var(--tr);
+}
+.btn-skip {
+  background: var(--bg2); color: var(--text2);
+  border: 1px solid var(--border);
+}
+.btn-skip:hover { background: var(--border); }
+.btn-next {
+  background: linear-gradient(135deg, var(--c), var(--c-lite));
+  color: #fff;
+  box-shadow: 0 4px 16px var(--c-glow);
+}
+.btn-next:hover { transform: translateY(-2px); box-shadow: 0 8px 24px var(--c-glow); }
+.btn-next:disabled { opacity: .45; pointer-events: none; }
+
+/* ══════════════════════════════════
+   RESULT SCREEN
+══════════════════════════════════ */
+#resultScreen {
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 80px 24px 40px;
+  text-align: center;
+}
+.result-circle {
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  margin: 0 auto 28px;
+  position: relative;
+}
+.result-circle svg {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  transform: rotate(-90deg);
+}
+.result-circle svg circle {
+  fill: none; stroke-width: 8;
+  stroke-linecap: round;
+}
+.circle-bg  { stroke: var(--bg2); }
+.circle-fill { stroke: var(--c); transition: stroke-dashoffset 1.2s cubic-bezier(0.4,0,0.2,1); }
+.result-pct {
+  font-size: 36px; font-weight: 900; color: var(--text);
+  position: relative; z-index: 1;
+}
+.result-pct small { font-size: 14px; color: var(--text3); display: block; }
+
+.result-emoji { font-size: 56px; margin-bottom: 16px; animation: bounce .6s ease; }
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
+.result-title { font-size: 26px; font-weight: 900; color: var(--text); margin-bottom: 8px; }
+.result-sub { font-size: 15px; color: var(--text2); margin-bottom: 36px; }
+
+.result-stats {
+  display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+.rstat {
+  padding: 14px 22px; border-radius: 14px;
+  background: var(--card); border: 1px solid var(--border);
+  min-width: 110px;
+}
+.rstat .rv { font-size: 26px; font-weight: 900; }
+.rstat .rl { font-size: 12px; color: var(--text3); margin-top: 2px; }
+.rstat.correct-s .rv { color: var(--green); }
+.rstat.wrong-s   .rv { color: var(--red); }
+.rstat.skip-s    .rv { color: var(--text3); }
+
+.result-actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.btn-retry {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 14px 32px; border-radius: 12px;
+  background: linear-gradient(135deg, var(--c), var(--c-lite));
+  color: #fff; font-size: 15px; font-weight: 900;
+  border: none; cursor: pointer; font-family: 'Cairo',sans-serif;
+  box-shadow: 0 6px 22px var(--c-glow); transition: var(--tr);
+}
+.btn-retry:hover { transform: translateY(-3px); }
+.btn-review {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 14px 28px; border-radius: 12px;
+  background: var(--card); color: var(--text);
+  font-size: 15px; font-weight: 700;
+  border: 1.5px solid var(--border); cursor: pointer;
+  font-family: 'Cairo',sans-serif; transition: var(--tr);
+}
+.btn-review:hover { border-color: var(--c); color: var(--c); }
+
+/* ── REVIEW MODE ── */
+#reviewScreen {
+  min-height: 100vh;
+  flex-direction: column;
+  padding: 80px 0 60px;
+}
+.review-wrap {
+  max-width: 680px; width: 100%;
+  margin: 0 auto; padding: 32px 24px;
+  display: flex; flex-direction: column; gap: 18px;
+}
+.review-header {
+  text-align: center; margin-bottom: 10px;
+}
+.review-header h2 { font-size: 22px; font-weight: 900; color: var(--text); }
+.review-header p  { font-size: 13px; color: var(--text3); margin-top: 4px; }
+
+.review-card {
+  background: var(--card);
+  border-radius: 16px;
+  border: 1.5px solid var(--border);
+  overflow: hidden;
+}
+.review-card-top {
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--border);
+}
+.review-q-label {
+  font-size: 10px; font-weight: 800; letter-spacing: 2px;
+  color: var(--text3); margin-bottom: 8px;
+}
+.review-q-text { font-size: 15px; font-weight: 700; color: var(--text); line-height: 1.55; }
+.review-opts { padding: 14px 22px; display: flex; flex-direction: column; gap: 8px; }
+.review-opt {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px; border-radius: 10px;
+  font-size: 13px; font-weight: 600; color: var(--text2);
+  background: var(--bg);
+}
+.review-opt.is-correct {
+  background: rgba(39,174,96,0.1);
+  color: var(--green); font-weight: 800;
+}
+.review-opt.is-wrong {
+  background: rgba(231,76,60,0.1);
+  color: var(--red);
+}
+.review-dot {
+  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  background: var(--border);
+}
+.review-opt.is-correct .review-dot { background: var(--green); }
+.review-opt.is-wrong   .review-dot { background: var(--red); }
+.review-status {
+  display: flex; align-items: center; gap: 5px;
+  padding: 3px 10px; border-radius: 50px;
+  font-size: 10px; font-weight: 800; margin-top: 10px;
+  width: fit-content;
+}
+.status-correct { background: rgba(39,174,96,0.12); color: var(--green); }
+.status-wrong   { background: rgba(231,76,60,0.12);  color: var(--red); }
+.status-skip    { background: var(--bg2); color: var(--text3); }
+
+.btn-back-result {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 13px 28px; border-radius: 12px;
+  background: var(--card); color: var(--text);
+  font-size: 14px; font-weight: 700;
+  border: 1.5px solid var(--border); cursor: pointer;
+  font-family: 'Cairo',sans-serif; transition: var(--tr);
+  margin-top: 8px; align-self: center;
+}
+.btn-back-result:hover { border-color: var(--c); color: var(--c); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 540px) {
+  nav { padding: 0 16px; }
+  .quiz-wrap, .review-wrap { padding: 24px 16px; }
+  .q-card { padding: 22px 18px; }
+  .opt-btn { padding: 12px 14px; font-size: 14px; }
+  .result-stats { gap: 10px; }
+  .rstat { min-width: 90px; padding: 12px 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://gaith-team.github.io/exam/" class="nav-back">← Back</a>
+  <div class="nav-center">
+    <div class="nav-pill">📝 Ghaith team</div>
+  </div>
+  <button class="theme-toggle" id="themeBtn">🌙</button>
+</nav>
+
+<!-- ══ START SCREEN ══ -->
+<div class="screen active" id="startScreen">
+  <div class="start-icon">📝</div>
+  <h1 class="start-title">Revision<span id="quizTitleDisplay"></span></h1>
+  <p class="start-sub" id="startDesc">Test your knowledge — read each question and choose the correct answer</p>
+  <div class="start-meta">
+    <div class="meta-pill"><strong id="totalQDisplay">0</strong> Questions</div>
+    <div class="meta-pill">⏱ No time limit</div>
+    <div class="meta-pill">🎯 Multiple choice</div>
+  </div>
+  <button class="btn-start" onclick="startQuiz()">🚀 Start Quiz</button>
+</div>
+
+<!-- ══ QUIZ SCREEN ══ -->
+<div class="screen" id="quizScreen">
+  <div class="quiz-wrap">
+
+    <div class="quiz-progress-row">
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      </div>
+      <div class="progress-label" id="progressLabel">1 / 1</div>
+    </div>
+
+    <div class="q-card" id="qCard">
+      <div class="q-num" id="qNum">QUESTION 1</div>
+      <div class="q-text" id="qText"></div>
+      <div class="options-list" id="optsList"></div>
+      <div class="feedback-box" id="feedbackBox">
+        <span class="feedback-icon" id="feedbackIcon"></span>
+        <span id="feedbackText"></span>
+      </div>
+    </div>
+
+    <div class="quiz-nav">
+      <button class="btn-nav btn-skip" onclick="skipQuestion()">→ Skip</button>
+      <button class="btn-nav btn-next" id="btnNext" onclick="nextQuestion()" disabled>
+        Next →
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ RESULT SCREEN ══ -->
+<div class="screen" id="resultScreen">
+  <div class="result-emoji" id="resultEmoji">🎉</div>
+
+  <div class="result-circle" id="resultCircle">
+    <svg viewBox="0 0 140 140">
+      <circle class="circle-bg"   cx="70" cy="70" r="62"/>
+      <circle class="circle-fill" cx="70" cy="70" r="62" id="circleArc"
+              stroke-dasharray="389.6"
+              stroke-dashoffset="389.6"/>
+    </svg>
+    <div class="result-pct">
+      <span id="pctNum">0</span>%
+      <small>Score</small>
+    </div>
+  </div>
+
+  <h2 class="result-title" id="resultTitle">Well done!</h2>
+  <p class="result-sub" id="resultSub">You have completed the quiz</p>
+
+  <div class="result-stats">
+    <div class="rstat correct-s">
+      <div class="rv" id="rCorrect">0</div>
+      <div class="rl">✅ Correct</div>
+    </div>
+    <div class="rstat wrong-s">
+      <div class="rv" id="rWrong">0</div>
+      <div class="rl">❌ Wrong</div>
+    </div>
+    <div class="rstat skip-s">
+      <div class="rv" id="rSkip">0</div>
+      <div class="rl">⏭ Skipped</div>
+    </div>
+  </div>
+
+  <div class="result-actions">
+    <button class="btn-retry" onclick="retryQuiz()">🔄 Try Again</button>
+    <button class="btn-review" onclick="showReview()">📋 Review Answers</button>
+  </div>
+</div>
+
+<!-- ══ REVIEW SCREEN ══ -->
+<div class="screen" id="reviewScreen">
+  <div class="review-wrap">
+    <div class="review-header">
+      <h2>📋 Answer Review</h2>
+      <p>Correct answers in green — your wrong answers in red</p>
+    </div>
+    <div id="reviewList"></div>
+    <button class="btn-back-result" onclick="showResult()">← Back to Results</button>
+  </div>
+</div>
+
+<script>
+const QUIZ_TITLE = " Medical Area";
+const QUIZ_DESC  = "مراجعه بنظام الأوسكي علي الأريا كامله بإذن الله ، صلي علي النبي وإستعن بالله ولا تعجز   ";
+
+const QUESTIONS = [
+  // ── DRUG ADMINISTRATION — EASY ──
+  {t:"What is the primary advantage of intramuscular (IM) injection over subcutaneous injection?",o:["It is painless","Faster drug action due to greater muscle blood supply","It requires smaller volumes","It is safer for neonates"],a:1,d:0,type:"mcq"},
+  {t:"Which IM injection site is preferred for neonates and infants?",o:["Deltoid","Dorsogluteal","Vastus lateralis","Ventrogluteal"],a:2,d:0,type:"mcq"},
+  {t:"When administering an IM injection into the vastus lateralis, which portion of the muscle should be targeted?",o:["Upper third","Middle third","Lower third","Any portion is acceptable"],a:1,d:0,type:"mcq"},
+  {t:"Why is the rectus femoris no longer considered a safe IM injection site?",o:["It is too superficial","Risk of damage to the descending branch of the lateral circumflex femoral artery and femoral nerve","It has poor blood supply","It is difficult to locate in infants"],a:1,d:1,type:"mcq"},
+  {t:"The deltoid muscle is described as which shape when used as an IM injection site?",o:["Oval","Square","Rounded triangle","Elongated rectangle"],a:2,d:0,type:"mcq"},
+  {t:"At what minimum age is the deltoid muscle recommended for IM injection in children?",o:["6 months","12 months","3 years","5 years"],a:1,d:0,type:"mcq"},
+  {t:"The dorsogluteal IM injection site is strongly NOT recommended for children under which age?",o:["1 year","3 years","6 years","12 years"],a:2,d:1,type:"mcq"},
+  {t:"Why is the dorsogluteal site avoided in young children?",o:["The muscle is too small","Proximity to the sciatic nerve and major blood supply","Risk of femoral nerve damage","Poor absorption rate"],a:1,d:1,type:"mcq"},
+  {t:"For the ventrogluteal injection, the nurse places the middle finger toward which landmark to create the injection 'V'?",o:["Greater trochanter","Iliac crest","Anterior superior iliac spine","Gluteal fold"],a:1,d:1,type:"mcq"},
+  {t:"Which of the following is a contraindication to IM injection?",o:["Fever","Hypovolemic shock","Mild dehydration","Age over 6 months"],a:1,d:1,type:"mcq"},
+  {t:"What needle gauge and length is recommended for IM injection in a neonate or infant at the vastus lateralis site?",o:["21g × 38mm","25g × 25mm or 23g × 25mm","18g × 25mm","30g × 16mm"],a:1,d:1,type:"mcq"},
+  {t:"Which needle gauge is color-coded PINK and used for multi-purpose IV access?",o:["18G","20G","22G","24G"],a:1,d:0,type:"mcq"},
+  {t:"A 24G yellow cannula is most appropriate for which patient population?",o:["Adults with large veins","Patients in massive trauma","Elderly or pediatric patients with very fragile veins","Blood transfusion recipients"],a:2,d:0,type:"mcq"},
+  {t:"What is the needle angle for subcutaneous injection in an obese child?",o:["15 degrees","30 degrees","45 degrees","90 degrees"],a:3,d:0,type:"mcq"},
+  {t:"What is the needle angle for SC injection in a thin child with limited subcutaneous tissue?",o:["15 degrees","30 degrees","45 degrees","90 degrees"],a:2,d:0,type:"mcq"},
+  {t:"Subcutaneous injections are administered into which tissue layer?",o:["Epidermis","Dermis","Adipose fatty tissue below the dermis","Muscle layer"],a:2,d:0,type:"mcq"},
+  {t:"Which of the following medications is most commonly administered via subcutaneous injection?",o:["Penicillin","Insulin","Morphine IV","BCG vaccine"],a:1,d:0,type:"mcq"},
+  {t:"Which of the following is NOT  common subcutaneous injection site?",o:["Outer aspect of upper arm","Around the umbilicus","Anterior thigh","Dorsal hand"],a:3,d:1,type:"mcq"},
+  {t:"Intradermal injection is administered into which layer of skin?",o:["Subcutaneous layer","Muscle","Dermal layer just beneath the epidermis","Epidermis only"],a:2,d:0,type:"mcq"},
+  {t:"What is the typical volume used for an intradermal injection?",o:["0.5 mL","1 mL","0.1 mL","2 mL"],a:2,d:0,type:"mcq"},
+  {t:"Which vaccination is administered via the intradermal route?",o:["MMR","DTP","BCG","Hepatitis B"],a:2,d:0,type:"mcq"},
+  {t:"Which site is NOT  common intradermal injection site?",o:["Anterior forearm","Upper chest","Inner subscapular region of upper back","Outer aspect of the thigh"],a:3,d:1,type:"mcq"},
+  {t:"What gauge needle is standard for vaccination and IM medication?",o:["18G","21G","25G","30G"],a:2,d:1,type:"mcq"},
+  {t:"What is the IV flow rate formula?",o:["[Volume (mL) × Drop factor]  ÷ time","[Volume (mL) / Time (min)] × Drop factor (drops/mL)","Drop factor × Time (min)","Volume × Time / Drop factor"],a:0,d:1,type:"mcq"},
+  {t:"Which pediatric IV access site is used exclusively in neonates?",o:["Femoral vein","Median cubital vein","Scalp vein","Ankle vein"],a:2,d:1,type:"mcq"},
+  {t:"Which of the following is an indication for IV fluid therapy in pediatrics?",o:["Mild fever","Prophylactic antibiotic","Dehydration and electrolyte disturbance","Routine health check"],a:2,d:0,type:"mcq"},
+  {t:"What is the main advantage of a burette set over a standard IV set?",o:["It is cheaper","It is a volumetric set allowing accurate volume administration","It has a larger capacity","It is used only for blood products"],a:1,d:1,type:"mcq"},
+  {t:"A syringe pump is preferred over an infusion pump when:",o:["Large volumes need to be delivered","Higher accuracy for small volumes and smaller flow rate pulsation is needed","Blood products are being transfused","Long-term treatment is required"],a:1,d:1,type:"mcq"},
+  {t:"The infusion pump has an advantage over a syringe pump because it offers:",o:["Higher accuracy for small volumes","Smaller flow rate pulsation","Larger capacity and wider flow rate range","Lower risk of infection"],a:2,d:1,type:"mcq"},
+  {t:"An 18G green cannula is best suited for which clinical use?",o:["Very fragile veins in neonates","Routine hydration and medications","Blood transfusion or large volume infusions","Massive trauma"],a:2,d:0,type:"mcq"},
+
+  // ── BLOOD GAS — MEDIUM ──
+  {t:"What does an arterial blood gas (ABG) test primarily evaluate?",o:["Complete blood count","Ventilation, gas exchange and acid-base status","Electrolyte levels","Blood glucose"],a:1,d:1,type:"mcq"},
+  {t:"Which artery is the FIRST choice for arterial blood gas sampling?",o:["Brachial artery","Femoral artery","Radial artery","Temporal artery"],a:2,d:0,type:"mcq"},
+  {t:"Why is the radial artery preferred for ABG sampling over brachial or femoral arteries?",o:["Larger size","It is more superficial and has better collateral circulation","Easier access in neonates","No risk of infection"],a:1,d:1,type:"mcq"},
+  {t:"Which of the following is NOT a measurement obtained from an ABG test?",o:["PaO₂","PaCO₂","Blood glucose","Oxygen saturation"],a:2,d:1,type:"mcq"},
+  {t:"What does PaCO₂ measure in an ABG?",o:["Partial pressure of oxygen dissolved in blood","Amount of carbon dioxide in blood and how well CO₂ moves out of the lungs","Oxygen content in hemoglobin","Blood pH balance"],a:1,d:1,type:"mcq"},
+  {t:"Which assessment test is performed to evaluate collateral circulation before radial artery ABG sampling?",o:["Homan's test","Romberg test","Allen's test","Capillary refill test"],a:2,d:1,type:"mcq"},
+  {t:"How can haematoma formation during ABG sampling be best prevented?",o:["Using the largest possible needle","Inserting without puncturing the far vessel wall and applying immediate pressure","Warming the site before puncture","Using a tourniquet during sampling"],a:1,d:2,type:"mcq"},
+  {t:"Which of the following sampling errors can affect ABG results?",o:["Using too small a syringe","Presence of air in the sample","Drawing sample too slowly","Using a 23G needle"],a:1,d:1,type:"mcq"},
+  {t:"What is the recommended amount of heparin in the syringe used for ABG collection?",o:["0.5 mL","1 mL","2 mL","5 mL"],a:1,d:1,type:"mcq"},
+  {t:"Capillary blood gas sampling is primarily used in which patient population?",o:["Adolescents","Adults in ICU","Neonates","Elderly patients"],a:2,d:0,type:"mcq"},
+  {t:"What is the recommended puncture site for premature neonates during capillary blood sampling?",o:["Finger","Earlobe","Heel","Forearm"],a:2,d:1,type:"mcq"},
+  {t:"What is the recommended incision depth for capillary sampling in infants under 6 months?",o:["0.85 mm","1.5 mm","2.0 mm","2.4 mm"],a:2,d:2,type:"mcq"},
+  {t:"Osteomyelitis of the heel bone is a complication of capillary sampling that involves which bone?",o:["Talus","Cuboid","Calcaneus","Tibia"],a:2,d:2,type:"mcq"},
+  {t:"Nerve damage during capillary blood sampling occurs specifically when:",o:["The heel is lanced too deeply","The fingers of neonates are punctured","The sample is collected too slowly","Air is introduced into the sample"],a:1,d:2,type:"mcq"},
+  {t:"Which of the following is a contraindication for capillary blood sampling?",o:["Jaundice","Inflammation or infection at the localized area","Blood sugar monitoring","Sepsis screening"],a:1,d:1,type:"mcq"},
+
+  // ── OXYGEN THERAPY ──
+  {t:"What percentage of oxygen does normal atmospheric air contain?",o:["16%","18%","21%","25%"],a:2,d:0,type:"mcq"},
+  {t:"Which organ is the FIRST to be affected by hypoxia?",o:["Heart","Lungs","Liver","Brain"],a:3,d:0,type:"mcq"},
+  {t:"How long does it take for the brain to sustain damage from lack of oxygen?",o:["2 minutes","4 minutes","6 minutes","10 minutes"],a:2,d:1,type:"mcq"},
+  {t:"Why is oxygen passed through a humidification system before delivery?",o:["To increase FiO₂","To prevent mucous membranes of the respiratory tract from drying","To filter bacteria","To reduce oxygen toxicity"],a:1,d:1,type:"mcq"},
+  {t:"Which of the following is a low-flow oxygen delivery system?",o:["Venturi mask","Non-rebreathing mask","Nasal cannula","Oxygen tent"],a:2,d:1,type:"mcq"},
+  {t:"Which oxygen delivery device is classified as a HIGH-flow system?",o:["Simple mask","Nasal cannula","Nasal catheter","Venturi mask"],a:3,d:1,type:"mcq"},
+  {t:"What is the flow rate range for a nasal cannula?",o:["1–6 L/min","2–4 L/min","4–8 L/min","6–10 L/min"],a:1,d:0,type:"mcq"},
+  {t:"Which complication can result from prolonged exposure to high oxygen levels?",o:["Metabolic alkalosis","Permanent lung damage from pulmonary oxygen toxicity","Anemia","Bradycardia"],a:1,d:1,type:"mcq"},
+  {t:"Which patient position is recommended when applying a nasal cannula?",o:["Prone position","Supine with head slightly elevated","Trendelenburg","Left lateral"],a:1,d:1,type:"mcq"},
+  {t:"What safety measure MUST be maintained in all areas where oxygen is in use?",o:["Keep lights dimmed","No smoking and remove flammable substances","Use only plastic tubing","Limit air conditioning"],a:1,d:0,type:"mcq"},
+  {t:"Oxygen cylinders should be stored in which position?",o:["Horizontal to conserve space","Tilted at 45 degrees","Secure upright position away from heat","Lying flat on the floor"],a:2,d:1,type:"mcq"},
+
+  // ── SUCTION ──
+  {t:"What device is typically used for oral suctioning?",o:["Suction catheter","Yankauer hard plastic tip","Nasal bulb syringe","Burette set"],a:1,d:0,type:"mcq"},
+  {t:"What is the maximum recommended suction duration to avoid complications?",o:["5–8 seconds","10–15 seconds","20–25 seconds","30 seconds"],a:1,d:1,type:"mcq"},
+  {t:"What is the maximum safe suction pressure for children?",o:["60–80 mm Hg","80–100 mm Hg","100–120 mm Hg","120–150 mm Hg"],a:2,d:1,type:"mcq"},
+  {t:"Suction pressure for neonates should be set at which range?",o:["60–80 mm Hg","80–100 mm Hg","100–120 mm Hg","120–150 mm Hg"],a:0,d:1,type:"mcq"},
+  {t:"Which type of suction is used specifically with a tracheostomy tube for urgent secretion removal?",o:["Oral suction","Nasal suction","Nasopharyngeal suction","Deep suctioning"],a:3,d:1,type:"mcq"},
+  {t:"Which complication of suctioning involves spasm of the vocal cords leading to airway obstruction?",o:["Pneumothorax","Tracheitis","Laryngospasm","Bronchospasm"],a:2,d:2,type:"mcq"},
+  {t:"What formula is used to estimate the suction catheter size for ETT suctioning?",o:["Fr = ETT size × 2","Fr = (ETT size [mm] – 1) × 2","Fr = ETT size + 2","Fr = ETT size / 2"],a:1,d:2,type:"mcq"},
+  {t:"During ETT closed suction, what distinguishes it from open suction?",o:["It uses a wider catheter","Patient is not disconnected from the ventilator","It requires higher suction pressure","It is only used in neonates"],a:1,d:2,type:"mcq"},
+  {t:"To prevent hyperoxia during ETT suctioning, FiO₂ should not be increased more than how much above baseline?",o:["5–10%","10–20%","25–30%","30–40%"],a:1,d:2,type:"mcq"},
+  {t:"Which of the following is NOT a clinical indication for ETT suctioning?",o:["Coarse breath sounds","Oxygen desaturation","Normal capnography reading","Bradycardia"],a:2,d:2,type:"mcq"},
+ {t:"The ventrogluteal site is recommended for use in children under 3 years of age as a first-line choice.",o:["True","False"],a:1,d:1,type:"tf"},
+  {t:"Subcutaneous injections deliver medication into the muscle layer.",o:["True","False"],a:1,d:0,type:"tf"},
+  {t:"The brachial artery is the preferred first choice for arterial blood gas sampling.",o:["True","False"],a:1,d:0,type:"tf"},
+  {t:"In capillary blood sampling, the lateral aspect of the heel is the recommended puncture site.",o:["True","False"],a:0,d:1,type:"tf"},
+  {t:"Oxygen therapy can cause permanent lung damage if high concentrations are administered for a prolonged period.",o:["True","False"],a:0,d:0,type:"tf"},
+  {t:"The Venturi mask is classified as a low-flow oxygen delivery system.",o:["True","False"],a:1,d:1,type:"tf"},
+  {t:"Suction pressure should not exceed 120 mm Hg in pediatric patients to prevent hypoxemia and atelectasis.",o:["True","False"],a:0,d:1,type:"tf"},
+  {t:"Open ETT suction requires disconnecting the patient from the ventilator during the procedure.",o:["True","False"],a:0,d:1,type:"tf"},
+  {t:"The dorsogluteal injection site is the preferred site for infants under 1 year.",o:["True","False"],a:1,d:0,type:"tf"},
+  {t:"Intradermal injections are used for tuberculin testing and allergy skin tests.",o:["True","False"],a:0,d:0,type:"tf"},{t:"<span class='scenario-label'>SCENARIO</span>A nurse is preparing to administer a vaccine to a 9-month-old infant. Which injection site should she choose?",o:["Deltoid (upper arm)","Vastus lateralis (side of thigh)","Dorsogluteal (back of hip)","Ventrogluteal (side of hip)"],a:1,d:0,type:"scen"},
+  {t:"<span class='scenario-label'>SCENARIO</span>A nurse needs to administer insulin to a 7-year-old child who is of average build. She pinches the skin and is about to insert the needle. What angle should she use?",o:["15 degrees","30 degrees","45 degrees","90 degrees"],a:2,d:0,type:"scen"},
+  {t:"<span class='scenario-label'>SCENARIO</span>A 4-year-old child requires IV access. Which cannula size is most appropriate given their likely small veins?",o:["14G (orange)","18G (green)","22G (blue)","16G (gray)"],a:2,d:0,type:"scen"},
+  {t:"<span class='scenario-label'>SCENARIO</span>A toddler presents to the ED and requires a large-volume blood transfusion. Which cannula should the nurse select?",o:["24G yellow","22G blue","20G pink","18G green"],a:3,d:0,type:"scen"},
+  {t:"<span class='scenario-label'>SCENARIO</span>A nurse is setting up oxygen therapy for a 5-year-old with mild respiratory distress. Which delivery device should she select for low-flow supplemental oxygen?",o:["Venturi mask","Non-rebreathing mask","Nasal cannula","Oxygen tent"],a:2,d:0,type:"scen"},
+  {t:"<span class='scenario-label'>SCENARIO</span>During an assessment prior to oxygen therapy, the nurse notices the child has cyanosis and an altered level of consciousness. These findings indicate:",o:["Increased work of breathing","Decreased oxygen saturation levels","Normal oxygen delivery","Hyperoxia"],a:1,d:0,type:"scen"},
+  {t:"<span class='scenario-label'>SCENARIO</span>A 2-year-old needs suctioning and the nurse observes visible secretions in the nose. Which suction method is most appropriate?",o:["Deep suctioning","Oral suctioning with Yankauer","Nasal suctioning","ETT suctioning"],a:2,d:0,type:"scen"},
+  {t:"<span class='scenario-label'>SCENARIO</span>A nurse is suctioning an infant and wants to verify the suction pressure is safe. What is the appropriate range?",o:["40–60 mm Hg","60–80 mm Hg","100–120 mm Hg","120–150 mm Hg"],a:1,d:0,type:"scen"},
+  {t:"<span class='scenario-label'>SCENARIO</span>A physician orders an intradermal BCG vaccine for a newborn. The nurse prepares 0.1 mL for injection. Which site is most appropriate?",o:["Outer thigh","Deltoid for an IM injection","Anterior aspect of the forearm","Umbilical region"],a:2,d:0,type:"scen"},
+  {t:"<span class='scenario-label'>SCENARIO</span>A nurse is about to perform an ABG on a neonate. She knows alternative sites have disadvantages. What is her FIRST choice of artery?",o:["Femoral artery","Brachial artery","Temporal artery","Radial artery"],a:3,d:0,type:"scen"},
+
+  // ── MEDIUM SCENARIOS ──
+  {t:"<span class='scenario-label'>SCENARIO</span>A 5-year-old weighing 22 kg requires an IM injection at the ventrogluteal site. The nurse is calculating the maximum safe volume. According to the table, what is the maximum volume for this site?",o:["1–2 mL","Up to 3 mL","Up to 4 mL","5 mL"],a:1,d:1,type:"scen"},
+  {t:"<span class='scenario-label'>SCENARIO</span>During an IM injection at the dorsogluteal site in an 8-year-old, the nurse accidentally angles too medially. Which structure is most at risk?",o:["Femoral artery","Radial nerve","Sciatic nerve","Brachial plexus"],a:2,d:1,type:"scen"},
+  {t:"<span class='scenario-label'>SCENARIO</span>A nurse is administering a subcutaneous injection to an obese 10-year-old. She selects the abdomen as the site and uses which technique?",o:["No skin pinch, 90-degree angle","Skin pinch, 45-degree angle","Skin pinch, 90-degree angle","No skin pinch, 15-degree angle"],a:2,d:1,type:"scen"},
+  {t:"<span class='scenario-label'>SCENARIO</span>A 500 mL IV bag must infuse over 4 hours using a set with a drop factor of 20 drops/mL. What is the flow rate in drops/min?",o:["25 drops/min","41.7 drops/min","50 drops/min","100 drops/min"],a:1,d:1,type:"scen"},
+  {t:"<span class='scenario-label'>SCENARIO</span>An ABG sample is collected but the results are abnormally normal despite the child appearing in respiratory distress. The nurse suspects a sampling error. Which is the MOST likely cause?",o:["Sample collected too quickly","Air present in the sample","Too much heparin used","Sample transported immediately on ice"],a:1,d:1,type:"scen"},
+  {t:"<span class='scenario-label'>SCENARIO</span>A neonate's heel capillary sample shows an unexpectedly high PaO₂. The nurse reviews the collection. What is the most likely sampling error?",o:["Insufficient lancet depth","Collection of venous rather than arterial blood","Using a 2.0 mm lancet","Choosing the lateral heel site"],a:1,d:1,type:"scen"},
+  {t:"<span class='scenario-label'>SCENARIO</span>A child with COPD receiving supplemental oxygen develops worsening respiratory effort. The nurse suspects oxygen toxicity. What is the likely long-term complication of excessive O₂ in this patient?",o:["Cardiac arrest","Respiratory failure due to chronic lung disease","Metabolic acidosis","Cerebral edema"],a:1,d:1,type:"scen"},
+  {t:"<span class='scenario-label'>SCENARIO</span>A 4-year-old with bronchial asthma is ordered nebulized salbutamol. Before administration, the nurse performs a baseline respiratory assessment. Which parameter is NOT part of this assessment?",o:["Pulse oximetry","Peak flow measurement","Blood glucose","Respiratory rate"],a:2,d:1,type:"scen"},
+  {t:"<span class='scenario-label'>SCENARIO</span>A nurse is suctioning a 6-year-old and notices the suction pressure is set to 130 mm Hg. What should she do?",o:["Continue; this is within safe range for children","Increase pressure to 150 mm Hg","Reduce pressure; maximum for children is 120 mm Hg","Stop suctioning immediately; any suction is too dangerous"],a:2,d:1,type:"scen"},
+  {t:"<span class='scenario-label'>SCENARIO</span>A mechanically ventilated neonate's nurse must suction the ETT. To prevent hyperoxia, by how much should she increase the FiO₂?",o:["No increase needed","2–5% above baseline","10–20% above baseline","30–40% above baseline"],a:1,d:2,type:"scen"},
+
+  // ── HARD SCENARIOS ──
+  {t:"<span class='scenario-label'>SCENARIO</span>A 3-month-old infant requires capillary blood sampling. The nurse selects a lancet. According to age-based guidelines, the incision depth should not exceed:",o:["0.85 mm","1.0 mm","2.0 mm","2.4 mm"],a:2,d:2,type:"scen"},
+  {t:"<span class='scenario-label'>SCENARIO</span>During capillary sampling on a neonate, the nurse accidentally punctures the medial aspect of the heel. Which complication is specifically associated with this error?",o:["Haematoma only","Collapse of veins due to tibial artery laceration","Nerve damage","Scarring only"],a:1,d:2,type:"scen"},
+  {t:"<span class='scenario-label'>SCENARIO</span>A nurse is calculating the suction catheter size for a patient with a size 4.0 mm ETT. Using the formula Fr = (ETT size – 1) × 2, what French size catheter should be used?",o:["6 Fr","8 Fr","10 Fr","12 Fr"],a:0,d:2,type:"scen"},
+  {t:"<span class='scenario-label'>SCENARIO</span>A child on mechanical ventilation requires ETT suctioning. Post-procedure, which finding confirms effective suctioning?",o:["Increased respiratory rate","Coarse breath sounds persist","Improved oxygen saturation and decreased work of breathing","Worsening agitation"],a:2,d:2,type:"scen"},
+  {t:"<span class='scenario-label'>SCENARIO</span>A nurse notes that after ABG sampling from the radial artery, the patient develops localized involuntary contraction of the artery. This is called:",o:["Haematoma","Arteriospasm","Vasovagal response","Laceration"],a:1,d:2,type:"scen"},
+  {t:"<span class='scenario-label'>SCENARIO</span>A 14-year-old with an IV infusion suddenly develops tachycardia, decreased breath sounds, and sudden increased work of breathing post ETT suctioning. The nurse suspects:",o:["Infection","Laryngospasm","Pneumothorax","Haematoma"],a:2,d:2,type:"scen"},
+  {t:"<span class='scenario-label'>SCENARIO</span>A fainting (vasovagal) response during ABG sampling can be prevented by:",o:["Using the brachial artery instead","Ensuring the patient is supine with feet elevated before the draw","Applying a tourniquet","Using a larger needle"],a:1,d:2,type:"scen"},
+  {t:"<span class='scenario-label'>SCENARIO</span>A nurse is assessing a child prior to oxygen therapy and discovers a history of cyanotic heart disease. This information is important because:",o:["These children cannot receive oxygen","It predisposes the child to baseline lower-than-normal oxygen saturation, affecting interpretation","It means oxygen must be given at maximum flow","It eliminates the use of humidification"],a:1,d:2,type:"scen"},
+  {t:"<span class='scenario-label'>SCENARIO</span>A child with thick, excessive mucus secretions and bronchospasm is referred to the respiratory team. The nurse anticipates which treatment?",o:["IV fluid bolus","Intradermal steroid injection","Nebulization therapy","ETT insertion"],a:2,d:2,type:"scen"},
+  {t:"<span class='scenario-label'>SCENARIO</span>A nurse is managing a 7-year-old child post-operatively who requires IM pain medication. The child has a body weight within normal limits. The nurse chooses the ventrogluteal site and selects a 23g × 25mm needle. The maximum volume she can administer at this site is:",o:["1 mL","2 mL","3 mL","4 mL"],a:2,d:2,type:"scen"},
+        ];
+
+
+// ── State ──
+let current = 0;
+let answers = [];
+let answered = false;
+
+// ── Init ──
+document.getElementById('quizTitleDisplay').textContent = QUIZ_TITLE;
+document.getElementById('startDesc').textContent        = QUIZ_DESC;
+document.getElementById('totalQDisplay').textContent    = QUESTIONS.length;
+
+// ── Theme ──
+const themeBtn = document.getElementById('themeBtn');
+let theme = localStorage.getItem('theme') || 'light';
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', t);
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+
+// ── Screen switch ──
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// ── Start ──
+function startQuiz() {
+  current = 0;
+  answers = new Array(QUESTIONS.length).fill(null);
+  answered = false;
+  show('quizScreen');
+  renderQuestion();
+}
+
+// ── Render question ──
+function renderQuestion() {
+  answered = false;
+  const q   = QUESTIONS[current];
+  const tot = QUESTIONS.length;
+
+  document.getElementById('qNum').textContent  = `QUESTION ${current + 1}`;
+  document.getElementById('qText').textContent = q.t;
+  document.getElementById('progressLabel').textContent = `${current+1} / ${tot}`;
+  document.getElementById('progressFill').style.width  = `${((current+1)/tot)*100}%`;
+  document.getElementById('btnNext').disabled = true;
+
+  const fb = document.getElementById('feedbackBox');
+  fb.className = 'feedback-box';
+
+  const letters = ['A','B','C','D','E'];
+  const list = document.getElementById('optsList');
+  list.innerHTML = '';
+  q.o.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.innerHTML = `<span class="opt-letter">${letters[i]}</span>${opt}`;
+    btn.onclick = () => selectAnswer(i, btn);
+    list.appendChild(btn);
+  });
+
+  const card = document.getElementById('qCard');
+  card.style.animation = 'none';
+  card.offsetHeight;
+  card.style.animation = 'slideIn .35s ease';
+}
+
+// ── Select answer ──
+function selectAnswer(chosen, clickedBtn) {
+  if (answered) return;
+  answered = true;
+  answers[current] = chosen;
+
+  const q    = QUESTIONS[current];
+  const opts = document.querySelectorAll('.opt-btn');
+  const correct = q.a;
+
+  opts.forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === correct)        btn.classList.add('correct');
+    if (i === chosen && chosen !== correct) btn.classList.add('wrong');
+  });
+
+  const fb = document.getElementById('feedbackBox');
+  if (chosen === correct) {
+    fb.className = 'feedback-box correct-fb show';
+    document.getElementById('feedbackIcon').textContent = '✅';
+    document.getElementById('feedbackText').textContent = 'Correct answer! 🎉';
+  } else {
+    fb.className = 'feedback-box wrong-fb show';
+    document.getElementById('feedbackIcon').textContent = '❌';
+    document.getElementById('feedbackText').textContent =
+      `Correct answer: ${q.o[correct]}`;
+  }
+
+  document.getElementById('btnNext').disabled = false;
+}
+
+// ── Skip ──
+function skipQuestion() {
+  if (answered) return;
+  answers[current] = null;
+  nextQuestion();
+}
+
+// ── Next ──
+function nextQuestion() {
+  current++;
+  if (current >= QUESTIONS.length) {
+    showResult();
+  } else {
+    answered = false;
+    renderQuestion();
+  }
+}
+
+// ── Result ──
+function showResult() {
+  let correct = 0, wrong = 0, skip = 0;
+  answers.forEach((a, i) => {
+    if (a === null)                skip++;
+    else if (a === QUESTIONS[i].a) correct++;
+    else                           wrong++;
+  });
+  const pct = Math.round((correct / QUESTIONS.length) * 100);
+  document.getElementById('rCorrect').textContent = correct;
+  document.getElementById('rWrong').textContent   = wrong;
+  document.getElementById('rSkip').textContent    = skip;
+  document.getElementById('pctNum').textContent   = pct;
+
+  let emoji, title, sub;
+  if      (pct >= 90) { emoji='🏆'; title='Excellent! Outstanding!';    sub='Amazing result — keep it up!'; }
+  else if (pct >= 75) { emoji='🎉'; title='Very Good!';                 sub='Strong performance, keep reviewing to reach the top!'; }
+  else if (pct >= 60) { emoji='💪'; title='Good, but room to improve!'; sub='Review your wrong answers and try again'; }
+  else if (pct >= 40) { emoji='📚'; title='Needs more revision';        sub='Go back to your notes and retake the quiz'; }
+  else                { emoji='😅'; title="Don't worry, keep studying!";sub='Revision is the key — try again!'; }
+
+  document.getElementById('resultEmoji').textContent = emoji;
+  document.getElementById('resultTitle').textContent = title;
+  document.getElementById('resultSub').textContent   = sub;
+
+  const circ  = 2 * Math.PI * 62;
+  const offset = circ - (pct / 100) * circ;
+  const arc = document.getElementById('circleArc');
+  arc.style.strokeDashoffset = '389.6';
+  arc.style.stroke = pct >= 60 ? 'var(--green)' : pct >= 40 ? 'var(--c)' : 'var(--red)';
+  setTimeout(() => { arc.style.strokeDashoffset = offset; }, 200);
+
+  show('resultScreen');
+}
+
+// ── Review ──
+function showReview() {
+  const list = document.getElementById('reviewList');
+  list.innerHTML = '';
+  const letters = ['A','B','C','D','E'];
+
+  QUESTIONS.forEach((q, qi) => {
+    const userAns = answers[qi];
+    let statusClass, statusText;
+    if      (userAns === null)       { statusClass='status-skip';    statusText='⏭ Skipped'; }
+    else if (userAns === q.a)        { statusClass='status-correct'; statusText='✅ Correct'; }
+    else                             { statusClass='status-wrong';   statusText='❌ Wrong'; }
+
+    const card = document.createElement('div');
+    card.className = 'review-card';
+    card.innerHTML = `
+      <div class="review-card-top">
+        <div class="review-q-label">QUESTION ${qi+1}</div>
+        <div class="review-q-text">${q.t}</div>
+        <div class="review-status ${statusClass}">${statusText}</div>
+      </div>
+      <div class="review-opts">
+        ${q.o.map((opt, oi) => {
+          let cls = 'review-opt';
+          if (oi === q.a)                        cls += ' is-correct';
+          if (oi === userAns && userAns !== q.a) cls += ' is-wrong';
+          return `<div class="${cls}"><div class="review-dot"></div>${letters[oi]}. ${opt}</div>`;
+        }).join('')}
+      </div>`;
+    list.appendChild(card);
+  });
+
+  show('reviewScreen');
+}
+
+function retryQuiz() {
+  current = 0;
+  answers = new Array(QUESTIONS.length).fill(null);
+  answered = false;
+  show('quizScreen');
+  renderQuestion();
+}
+</script>
+</body>
+</html>
