@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --accent:       #0284c7;
+  --accent-light: #0ea5e9;
+  --accent-dark:  #0369a1;
+  --accent-glow:  rgba(2,132,199,0.2);
+  --bg:      #f8fafc;
+  --bg2:     #eef2f7;
+  --card:    #ffffff;
+  --text:    #1a2332;
+  --text2:   #4a5568;
+  --text3:   #718096;
+  --bc:      rgba(0,0,0,0.07);
+  --success: #16a34a;
+  --danger:  #dc2626;
+  --warn:    #0369a1;
+  --r:       16px;
+  --tr:      all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="dark"] {
+  --bg:   #0d1117; --bg2: #161b22; --card: #1c2333;
+  --text: #e6edf3; --text2: #b1bac4; --text3: #7d8590;
+  --bc:   rgba(255,255,255,0.08);
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg); color: var(--text);
+  min-height: 100vh; overflow-x: hidden;
+  transition: background .4s, color .4s;
+}
+
+/* PROGRESS TOP */
+#prog-bar {
+  position: fixed; top: 0; left: 0; height: 3px; z-index: 999;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  transition: width .2s;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px; height: 64px;
+  background: rgba(248,250,252,.93); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--bc); transition: var(--tr);
+}
+[data-theme="dark"] nav { background: rgba(13,17,23,.95); }
+
+.nav-back {
+  display: flex; align-items: center; gap: 7px;
+  color: var(--text2); text-decoration: none; font-size: 13px; font-weight: 700;
+  padding: 7px 13px; border-radius: 8px; border: 1px solid var(--bc);
+  background: var(--card); transition: var(--tr);
+}
+.nav-back:hover { color: var(--accent); border-color: var(--accent-glow); transform: translateX(3px); }
+.nav-brand { display: flex; align-items: center; gap: 9px; font-size: 15px; font-weight: 900; color: var(--text); }
+.nav-logo-icon {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 12px; font-weight: 900;
+}
+.nav-right { display: flex; align-items: center; gap: 8px; }
+.theme-btn {
+  width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--bc);
+  background: var(--card); cursor: pointer; font-size: 15px;
+  display: flex; align-items: center; justify-content: center; transition: var(--tr);
+}
+.theme-btn:hover { border-color: var(--accent); transform: rotate(20deg); }
+
+/* HERO BAND */
+.hero-band {
+  margin-top: 64px;
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent), var(--accent-light));
+  padding: 40px 24px 36px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.hero-band::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 600px 200px at 50% 100%, rgba(255,255,255,.12) 0%, transparent 70%);
+}
+.hero-band-icon {
+  width: 68px; height: 68px; border-radius: 20px;
+  background: rgba(255,255,255,.2); backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 30px; margin: 0 auto 14px; border: 1.5px solid rgba(255,255,255,.35);
+}
+.hero-band h1 { font-size: clamp(20px,4vw,30px); font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero-band p { font-size: 13px; color: rgba(255,255,255,.8); }
+.hero-band-meta {
+  display: flex; justify-content: center; gap: 24px; margin-top: 20px;
+  flex-wrap: wrap;
+}
+.meta-pill {
+  background: rgba(255,255,255,.18); backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,.3); border-radius: 50px;
+  padding: 6px 16px; font-size: 12px; font-weight: 700; color: #fff;
+  display: flex; align-items: center; gap: 6px;
+}
+
+/* EXAM SHELL */
+.shell { max-width: 560px; margin: 0 auto; padding: 24px 20px 80px; }
+
+/* STATS ROW */
+.stats-row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 16px;
+}
+.stat-box {
+  background: var(--card); border: 1px solid var(--bc); border-radius: var(--r);
+  padding: 12px 10px; text-align: center;
+}
+.stat-box .val { font-size: 20px; font-weight: 900; }
+.stat-box .lbl { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.stat-correct { color: var(--success); }
+.stat-wrong   { color: var(--danger); }
+.stat-remain  { color: var(--accent); }
+
+/* PROGRESS STRIP */
+.prog-strip {
+  background: var(--card); border: 1px solid var(--bc); border-radius: var(--r);
+  padding: 14px 16px; margin-bottom: 16px;
+  display: flex; align-items: center; gap: 14px;
+}
+.prog-label { font-size: 13px; font-weight: 700; color: var(--text2); white-space: nowrap; }
+.prog-track { flex: 1; height: 8px; background: var(--bg2); border-radius: 8px; overflow: hidden; }
+.prog-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  border-radius: 8px; transition: width .4s;
+}
+.timer-badge {
+  min-width: 64px; height: 36px; border-radius: 18px;
+  background: var(--bg2); border: 1px solid var(--bc);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 900; color: var(--text);
+  gap: 5px; padding: 0 12px; flex-shrink: 0;
+}
+.timer-badge.warn { color: var(--warn); border-color: rgba(217,119,6,.3); background: rgba(217,119,6,.08); }
+.timer-badge.danger { color: var(--danger); border-color: rgba(220,38,38,.3); background: rgba(220,38,38,.08); animation: pulse .8s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.6} }
+
+/* QUESTION CARD */
+.q-card {
+  background: var(--card); border: 1px solid var(--bc);
+  border-radius: 20px; overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+  transition: box-shadow .3s;
+}
+.q-header {
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  padding: 4px 18px 4px;
+  display: flex; align-items: center; gap: 8px;
+}
+.q-num {
+  background: rgba(255,255,255,.2); border-radius: 8px;
+  padding: 3px 10px; font-size: 11px; font-weight: 700; color: #fff;
+}
+.q-text {
+  padding: 22px 18px 14px; font-size: 15px; font-weight: 700; color: var(--text);
+  line-height: 1.65; border-bottom: 1px solid var(--bc);
+  text-align: left; direction: ltr;
+}
+.options { padding: 14px 18px 18px; display: flex; flex-direction: column; gap: 10px; }
+
+/* OPTION */
+.opt {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px; border-radius: 12px;
+  border: 1.5px solid var(--bc); background: var(--bg);
+  cursor: pointer; font-size: 14px; font-weight: 600; color: var(--text);
+  transition: var(--tr); user-select: none;
+  direction: ltr; text-align: left;
+}
+.opt:hover:not(.disabled) {
+  border-color: var(--accent); background: var(--accent-glow);
+  transform: translateX(3px);
+}
+.opt-letter {
+  width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+  background: var(--bg2); border: 1px solid var(--bc);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 900; color: var(--text3);
+  transition: var(--tr);
+}
+.opt.correct {
+  border-color: var(--success); background: rgba(22,163,74,.08);
+}
+.opt.correct .opt-letter {
+  background: var(--success); color: #fff; border-color: var(--success);
+}
+.opt.wrong {
+  border-color: var(--danger); background: rgba(220,38,38,.07);
+}
+.opt.wrong .opt-letter {
+  background: var(--danger); color: #fff; border-color: var(--danger);
+}
+.opt.disabled { pointer-events: none; }
+
+/* FEEDBACK */
+.feedback-bar {
+  margin: 14px 18px; padding: 12px 16px; border-radius: 12px;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px; font-weight: 700;
+  animation: popIn .4s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes popIn { from{transform:scale(.8);opacity:0} to{transform:scale(1);opacity:1} }
+.feedback-bar.ok { background: rgba(22,163,74,.1); color: var(--success); border: 1px solid rgba(22,163,74,.25); }
+.feedback-bar.no { background: rgba(220,38,38,.08); color: var(--danger); border: 1px solid rgba(220,38,38,.2); }
+.feedback-icon { font-size: 20px; }
+
+/* EXPLANATION */
+.explanation {
+  margin: 0 18px 14px; padding: 12px 14px;
+  background: rgba(var(--accent-rgb),.06);
+  border-radius: 10px; border-right: 3px solid var(--accent);
+  font-size: 13px; color: var(--text2); line-height: 1.6;
+  display: none;
+}
+
+/* NAV BTNS */
+.nav-btns { padding: 4px 18px 18px; display: flex; gap: 10px; }
+.btn {
+  flex: 1; padding: 13px; border: none; border-radius: 12px;
+  font-size: 14px; font-weight: 900; cursor: pointer;
+  font-family: 'Outfit', sans-serif; transition: var(--tr);
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+}
+.btn-next {
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  color: #fff; box-shadow: 0 4px 14px var(--accent-glow);
+}
+.btn-next:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
+.btn-skip {
+  background: var(--bg2); color: var(--text2); border: 1px solid var(--bc); flex: 0 0 auto; padding: 13px 18px;
+}
+.btn-skip:hover { border-color: var(--warn); color: var(--warn); }
+
+/* ===== RESULTS ===== */
+.result-hero {
+  text-align: center; padding: 36px 20px 28px;
+  background: var(--card); border-radius: 20px;
+  border: 1px solid var(--bc); margin-bottom: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+}
+.score-ring {
+  width: 110px; height: 110px; border-radius: 50%; margin: 0 auto 18px;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; border: 5px solid var(--bg2);
+  position: relative;
+}
+.score-ring svg { position: absolute; inset: -5px; width: calc(100% + 10px); height: calc(100% + 10px); transform: rotate(-90deg); }
+.score-ring circle { fill: none; stroke-width: 5; stroke-linecap: round; }
+.ring-bg { stroke: var(--bg2); }
+.ring-fill { stroke: var(--accent); transition: stroke-dashoffset 1s ease; }
+.score-num { font-size: 28px; font-weight: 900; color: var(--text); }
+.score-pct { font-size: 12px; color: var(--text3); }
+.result-grade { font-size: 22px; font-weight: 900; margin-bottom: 6px; }
+.result-sub { font-size: 14px; color: var(--text2); }
+.result-stats {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 20px;
+}
+.rs { background: var(--bg2); border-radius: 10px; padding: 12px 8px; text-align: center; }
+.rs .n { font-size: 20px; font-weight: 900; }
+.rs .l { font-size: 11px; color: var(--text3); }
+
+/* REPORT ITEMS */
+.report-item {
+  background: var(--card); border: 1px solid var(--bc); border-radius: 14px;
+  padding: 16px; margin-bottom: 10px; border-right: 4px solid var(--bc);
+}
+.report-item.ok { border-right-color: var(--success); }
+.report-item.no { border-right-color: var(--danger); }
+.report-item .ri-q { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+.report-item .ri-row {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; margin-top: 5px; color: var(--text2);
+}
+.ri-badge {
+  padding: 2px 8px; border-radius: 6px; font-weight: 700; font-size: 11px; flex-shrink: 0;
+}
+.ri-yours { background: rgba(220,38,38,.1); color: var(--danger); }
+.ri-right { background: rgba(22,163,74,.1); color: var(--success); }
+
+.result-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+.btn-retry { background: linear-gradient(135deg, var(--accent-dark), var(--accent)); color: #fff; }
+.btn-retry:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
+.btn-home { background: var(--bg2); color: var(--text); border: 1px solid var(--bc); }
+.btn-home:hover { border-color: var(--accent); color: var(--accent); }
+
+/* FOOTER */
+footer {
+  background: var(--bg2); border-top: 1px solid var(--bc);
+  padding: 22px 24px; display: flex; align-items: center;
+  justify-content: space-between; flex-wrap: wrap; gap: 10px;
+}
+.footer-brand { font-size: 14px; font-weight: 700; }
+.footer-brand span { color: var(--accent); }
+.footer-tg { display: flex; align-items: center; gap: 5px; text-decoration: none; color: #229ED9; font-size: 12px; font-weight: 600; }
+
+@media (max-width: 480px) {
+  nav { padding: 0 14px; }
+  .shell { padding: 16px 14px 60px; }
+  .nav-brand span { display: none; }
+  .hero-band { padding: 30px 16px 28px; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog-bar" style="width:0%"></div>
+
+<nav>
+  <a href="https://gaith-team.github.io/exam/practicalmedical/index.html" class="nav-back"><i class="fa-solid fa-arrow-right"></i> رجوع</a>
+  <div class="nav-brand">
+    <div class="nav-logo-icon">GT</div>
+    <span>GHAITH TEAM</span>
+  </div>
+  <div class="nav-right">
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<div class="hero-band">
+  <div class="hero-band-icon">🏌🏼</div>
+  <h1>تمريض باطني جراحي 2 </h1>
+  <p>chest tube</p>
+  <div class="hero-band-meta">
+    <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">-- سؤال</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-clock"></i> 100 Min</div>
+    <div class="meta-pill"><i class="fa-solid fa-shuffle"></i> Shuffled</div>
+  </div>
+</div>
+
+<div class="shell">
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="val stat-correct" id="sCorrect">0</div>
+      <div class="lbl">✔ صحيح</div>
+    </div>
+    <div class="stat-box">
+      <div class="val stat-wrong" id="sWrong">0</div>
+      <div class="lbl">✖ خطأ</div>
+    </div>
+    <div class="stat-box">
+      <div class="val stat-remain" id="sRemain">--%</div>
+      <div class="lbl">⏳ متبقي</div>
+    </div>
+  </div>
+
+  <!-- PROGRESS STRIP -->
+  <div class="prog-strip">
+    <div class="prog-label" id="progLabel">سؤال ١</div>
+    <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+    <div class="timer-badge" id="timerBadge"><i class="fa-regular fa-clock"></i> <span id="timerTxt">100</span></div>
+  </div>
+
+  <!-- APP -->
+  <div id="app"></div>
+</div>
+
+<footer>
+  <div class="footer-brand">GHAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg">
+    <i class="fa-brands fa-telegram"></i> @nursing2bu
+  </a>
+</footer>
+
+<script>
+const QUESTIONS = [
+
+ {t:"What is the primary purpose of a chest tube?", o:["To deliver oxygen","To remove air or fluid from the pleural space","To measure blood pressure","To administer intravenous fluids"], a:1},
+            {t:"Which position is optimal for a patient with a pneumothorax to evacuate air?", o:["High-Fowler's","Semi-Fowler's","Supine","Trendelenburg"], a:1},
+            {t:"Which position is best for a patient with a hemothorax to drain fluid?", o:["High-Fowler's","Semi-Fowler's","Prone","Sim's"], a:0},
+            {t:"What is the term for a collection of air or gas under the skin?", o:["Hemothorax","Pneumothorax","Subcutaneous emphysema","Intercostal neuralgia"], a:2},
+            {t:"During chest tube removal, which maneuver should the patient perform to prevent air from entering the chest?", o:["Coughing","Deep breathing","Valsalva maneuver","Rapid shallow breathing"], a:2},
+            {t:"What is the primary goal of applying an occlusive dressing after chest tube removal?", o:["To stop bleeding","To prevent air from entering the pleural space","To reduce pain","To absorb drainage"], a:1},
+            {t:"Which equipment is used to cut the sutures during chest tube removal?", o:["Scalpel","Sterile scissors","Stitch cutter","Hemostat"], a:2},
+            {t:"What does 'tidaling' in the water-seal chamber indicate?", o:["A permanent air leak","Normal communication between the pleural cavity and drainage bottle","The system is blocked","The patient is in respiratory distress"], a:1},
+            {t:"What is the maximum amount of fluid drainage in less than 30 minutes that may lead to re-expansion pulmonary edema?", o:["200-300 mL","500-700 mL","1-1.5 L","2-3 L"], a:2},
+            {t:"Which complication is characterized by a deviated trachea and hypotension?", o:["Local infection","Tension pneumothorax","Intercostal neuralgia","Organ perforation"], a:1},
+            {t:"What is the first step in the procedure for chest tube care?", o:["Apply clean gloves","Explain the procedure to the patient","Prepare necessary equipment","Perform hand hygiene"], a:3},
+            {t:"How long before a chest tube procedure should pain medication typically be administered?", o:["5 minutes","15 minutes","30 minutes","60 minutes"], a:2},
+            {t:"What is the rationale for performing hand hygiene before the procedure?", o:["To relieve patient pain","To reduce transmission of microorganisms","To maintain patient privacy","To ensure proper drainage"], a:1},
+            {t:"Which of the following is NOT a complication of a chest tube?", o:["Bleeding","Organ perforation","Hypertension","Tension pneumothorax"], a:2},
+            {t:"What is the cause of intercostal neuralgia after chest tube insertion?", o:["Laceration of a vessel","Trauma of the intercostal neurovascular bundle","Air leak into tissues","Local infection"], a:1},
+            {t:"In the case of a recurrent pneumothorax, where is air entering from?", o:["The drainage bottle","The IV line","The pleural space through the chest tube tract","The mouth"], a:2},
+            {t:"What should be observed in the water-seal chamber if wet suction is ordered?", o:["Continuous bubbling","Tidaling","No movement","Bright red blood"], a:1},
+            {t:"Which nursing diagnosis is most relevant to a patient with decreased lung expansion due to trauma?", o:["Risk for infection","Ineffective breathing pattern","Impaired skin integrity","Acute confusion"], a:1},
+            {t:"What is the purpose of a purse-string suture during chest tube removal?", o:["To secure the tube","To provide an airtight seal after the tube is pulled","To measure drainage","To prevent infection"], a:1},
+            {t:"When should a chest X-ray be performed in relation to chest tube removal?", o:["Only 24 hours after","Prior to removal to establish lung re-expansion","Never","Every hour during the procedure"], a:1},
+            {t:"A nurse notices continuous bubbling in the water-seal chamber. What does this most likely indicate?", o:["Normal functioning","A system leak","The lung has fully re-expanded","The suction is too high"], a:1},
+            {t:"The nurse assesses 'crackles' on palpation of the skin around the chest tube. This is a sign of:", o:["Infection","Subcutaneous emphysema","Pneumonia","Pleural effusion"], a:1},
+            {t:"Which assessment finding requires immediate notification of the healthcare provider?", o:["Drainage of 50 mL in 4 hours","Tidaling in the water-seal chamber","Drainage of 200 mL of bright red blood in 1 hour","Patient reporting mild discomfort (3/10)"], a:2},
+            {t:"A patient with a chest tube becomes suddenly dyspneic with a deviated trachea. The nurse should suspect:", o:["Pulmonary embolism","Tension pneumothorax","Local infection","Cardiac tamponade"], a:1},
+            {t:"What is the first action if the chest tube becomes disconnected from the drainage system?", o:["Clamp the tube","Submerge the end of the tube in sterile water","Call the doctor","Cover the site with a dry dressing"], a:1},
+            {t:"During assessment, the nurse finds the drainage system is above the level of the patient's chest. What is the risk?", o:["Improved drainage","Backflow of fluid into the pleural space","Tension pneumothorax","System disconnection"], a:1},
+            {t:"The nurse observes that the water-seal fluctuation (tidaling) has stopped. What is the most likely reason if the lung is not yet re-expanded?", o:["The patient is sleeping","The tube is kinked or obstructed","The suction is off","The patient is in Semi-Fowler's position"], a:1},
+            {t:"A patient's respiratory rate is 28 breaths/min and O2 saturation is 89%. Which nursing intervention is a priority?", o:["Administer antibiotics","Assess the chest tube system for patency","Change the dressing","Perform hand hygiene"], a:1},
+            {t:"Which finding indicates that a chest tube is ready to be removed?", o:["Drainage is >200 mL/day","Continuous bubbling in the water-seal chamber","Drainage has decreased to less than 100 mL in 24 hours","The patient has a fever"], a:2},
+            {t:"When assessing for infection at the chest tube site, the nurse looks for:", o:["Tidaling","Redness, warmth, and purulent drainage","Subcutaneous emphysema","Fluctuation of fluid"], a:1},
+            {t:"A patient is complaining of acute chest pain and is tachycardic (HR 142). This is most likely a sign of:", o:["Local infection","Tension pneumothorax","Normal recovery","Sleep apnea"], a:1},
+            {t:"What is the significance of an elevated white blood cell count in a patient with a chest tube?", o:["Normal response to trauma","Indicates a systemic infection","Shows the lung is re-expanding","Means the patient is dehydrated"], a:1},
+            {t:"Which vital sign change is most indicative of a tension pneumothorax?", o:["Hypertension","Bradycardia","Hypotension","Decreased temperature"], a:2},
+            {t:"The nurse palpates the area where the tube was inserted after removal. What is she evaluating for?", o:["Bleeding","Subcutaneous emphysema","Infection","Pain level"], a:1},
+            {t:"If a patient has asymmetrical chest move and sudden sharp pain, the nurse should suspect:", o:["Ineffective breathing pattern","Recurrent pneumothorax","Organ perforation","Intercostal neuralgia"], a:1},
+            {t:"A nurse is monitoring ABGs and O2 saturation for a patient with a chest tube. This is to evaluate:", o:["Risk for infection","Ineffective breathing pattern","Level of pain","Fluid volume deficit"], a:1},
+            {t:"The nurse notices the drainage has changed from serous to bright red. This indicates:", o:["Normal progression","Active bleeding","Infection","Healing"], a:1},
+            {t:"What should the nurse do if the chest tube is accidentally pulled out of the patient?", o:["Reinsert it immediately","Apply an occlusive dressing taped on three sides","Leave it open to air","Clamp the site"], a:1},
+            {t:"Which assessment finding is 'normal' for a patient with a chest tube for a pneumothorax?", o:["Tracheal deviation","Intermittent bubbling in the water-seal chamber during expiration","Hypotension","Absence of breath sounds on the affected side"], a:1},
+            {t:"What is the priority assessment for a patient with a chest tube during the first few hours after removal?", o:["Wound healing","Respiratory distress and vital signs","Nutrition status","Ability to ambulate"], a:1},
+            {t:"Which tool is essential to have at the bedside for a patient with a chest tube in case of emergency disconnection?", o:["Sterile water","Adhesive tape","Stitch cutter","Face shield"], a:0},
+            {t:"What is the purpose of the 'water-seal' in the drainage system?", o:["To provide suction","To prevent air from moving back into the pleural space","To measure the amount of drainage","To humidify the oxygen"], a:1},
+            {t:"In a three-chamber drainage system, what is the purpose of the first chamber?", o:["Water seal","Suction control","Drainage collection","Air leak monitor"], a:2},
+            {t:"If the nurse sees the fluid level in the water-seal chamber rising during inspiration and falling during expiration, this is:", o:["An air leak","Tidaling (normal)","A blockage","Excessive suction"], a:1},
+            {t:"Which type of dressing is typically used for a chest tube insertion site?", o:["Dry gauze only","Transparent film","Petroleum-impregnated gauze (occlusive)","Elastic bandage"], a:2},
+            {t:"What is the significance of 'bubbling' in the suction control chamber?", o:["It indicates an air leak in the patient","It shows that suction is being applied","It means the system is broken","It indicates the lung is re-expanded"], a:1},
+            {t:"When using a stitch cutter, the nurse should cut:", o:["The tube itself","The suture holding the tube in place","The dressing","The patient's skin"], a:1},
+            {t:"Which equipment is used to monitor oxygen saturation in a patient with a chest tube?", o:["Sphygmomanometer","Pulse oximeter","Stethoscope","Thermometer"], a:1},
+            {t:"What is the purpose of the 'bung' in the drainage bottle?", o:["To seal the bottle and prevent air entry","To allow air to escape freely","To measure the fluid","To hold the suction tube"], a:0},
+            {t:"Which item is NOT part of the sterile dressing pack for chest tube removal?", o:["Sterile gloves","Antiseptic solution","Non-sterile tape","Sterile gauze"], a:2},
+            {t:"What is the purpose of using a 'safety pin' or 'system's clamp' on the tubing next to the patient?", o:["To stop drainage","To secure the tubing to the mattress and prevent pulling","To clamp the tube during transport","To measure the length of the tube"], a:1},
+            {t:"Which solution is used to clean the insertion site during a dressing change?", o:["Tap water","Antiseptic solution","Hydrogen peroxide","Soap and water"], a:1},
+            {t:"If a nurse is using 'foam tape' at the connection site, the purpose is:", o:["To make it look better","To prevent air leakage through the connection","To cushion the patient's skin","To identify the tube"], a:1},
+            {t:"What is the function of the 'suction control' chamber?", o:["To seal the system","To regulate the amount of negative pressure applied","To collect drainage","To monitor for air leaks"], a:1},
+            {t:"Which of the following is a sign of 'organ perforation' during insertion?", o:["Acute chest pain and varied signs depending on the organ","Subcutaneous emphysema","Local redness","Fever"], a:0},
+            {t:"What does 'asymmetrical chest move' suggest in a chest tube patient?", o:["Normal breathing","Recurrent pneumothorax or ineffective expansion","The patient is lying on their side","The suction is too high"], a:1},
+            {t:"The '14-gauge angiocath' is mentioned as an intervention for which emergency?", o:["Bleeding","Tension pneumothorax","Local infection","Intercostal neuralgia"], a:1},
+            {t:"What is the 'purse-string' suture?", o:["A decorative stitch","A suture that can be pulled tight to close the wound after tube removal","A way to attach the tube to the bed","A suture used for internal organs only"], a:1},
+            {t:"Which monitoring tool helps in determining the need to continue or alter therapy?", o:["Pulse oximeter","ABGs and O2 saturation","Thermometer","Weight scale"], a:1},
+            {t:"What is the role of 'petrolatum-impregnated gauze' in chest tube removal?", o:["To clean the wound","To form an airtight seal over the wound","To reduce pain","To promote hair growth"], a:1}
+        ];
+
+        const tfQuestions = [
+            {t:"A chest tube should be clamped during transport of the patient.", o:["True","False"], a:1},
+            {t:"Tidaling in the water-seal chamber is a normal finding.", o:["True","False"], a:0},
+            {t:"Continuous bubbling in the water-seal chamber always indicates the lung has re-expanded.", o:["True","False"], a:1},
+            {t:"The drainage system should always be kept below the level of the patient's chest.", o:["True","False"], a:0},
+            {t:"A patient should be in the High-Fowler's position to evacuate air in a pneumothorax.", o:["True","False"], a:1},
+            {t:"Subcutaneous emphysema is characterized by a 'crackling' sensation on palpation.", o:["True","False"], a:0},
+            {t:"Chest tube removal is a sterile procedure.", o:["True","False"], a:0},
+            {t:"Tracheal deviation is a late and life-threatening sign of tension pneumothorax.", o:["True","False"], a:0},
+            {t:"It is normal to see 250 mL of bright red blood drainage per hour.", o:["True","False"], a:1},
+            {t:"The Valsalva maneuver helps prevent air from being sucked into the chest during tube removal.", o:["True","False"], a:0}
+        ];
+
+        const scenarioQuestions = [
+            {t:"Mr. Rifas has 250 mL of bright red blood in his drainage system. What is the priority nursing action?", o:["Document the finding","Notify the healthcare provider immediately","Change the dressing","Increase the suction"], a:1},
+            {t:"Based on Mr. Rifas's vital signs (HR 142, RR 28, BP 102/56), he is showing signs of:", o:["Stable recovery","Hypovolemic shock or tension pneumothorax","Sleep deprivation","Infection"], a:1},
+            {t:"Mr. Rifas's O2 saturation is 89%. What should the nurse do first?", o:["Start a new IV line","Assess respiratory status and check chest tube patency","Give a sedative","Call the family"], a:1},
+            {t:"The nurse notes Mr. Rifas is complaining of dyspnea. Which position would best assist his breathing?", o:["Supine","Semi-Fowler's or High-Fowler's","Trendelenburg","Prone"], a:1},
+            {t:"If Mr. Rifas develops a deviated trachea, what emergency procedure should the nurse prepare for?", o:["Wound debridement","Needle decompression (14-gauge angiocath)","Intubation","Changing the drainage bottle"], a:1},
+            {t:"What does the 'bright red' color of the drainage in Mr. Rifas's system indicate?", o:["Old blood","Active bleeding","Normal serous fluid","Infection"], a:1},
+            {t:"The nurse auscultates Mr. Rifas's lungs and finds absent breath sounds on the affected side. This indicates:", o:["Lung re-expansion","The pneumothorax has not resolved or has worsened","Normal recovery","The tube is working perfectly"], a:1},
+            {t:"Mr. Rifas is tachycardic (HR 142). This is a compensatory mechanism for:", o:["High blood pressure","Decreased oxygenation and potential blood loss","Pain only","The motorcycle accident impact"], a:1},
+            {t:"Which nursing diagnosis is a priority for Mr. Rifas?", o:["Risk for infection","Ineffective breathing pattern related to trauma","Impaired physical mobility","Deficient knowledge"], a:1},
+            {t:"The nurse needs to monitor Mr. Rifas's 'trend in water-seal fluctuation'. If it stops, what is the first check?", o:["Check for kinks in the tubing","Assume the lung is re-expanded","Call the doctor","Empty the bottle"], a:0},
+            {t:"A patient just had their chest tube removed. The nurse palpates the skin and feels 'puffed out' skin that crackles. This is:", o:["Normal healing","Subcutaneous emphysema","Infection","Bleeding"], a:1},
+            {t:"After chest tube removal, the patient develops sudden shortness of breath. The nurse should first:", o:["Check the dressing for an airtight seal","Give water","Help the patient walk","Check the temperature"], a:0},
+            {t:"The nurse is teaching a patient about the Valsalva maneuver for tube removal. She tells the patient to:", o:["Breathe rapidly","Take a deep breath and hold it","Cough as hard as possible","Scream"], a:1},
+            {t:"A patient's dressing after chest tube removal is saturated with serosanguinous drainage. The nurse should:", o:["Remove the dressing","Reinforce the dressing and monitor","Leave it alone","Clamp the wound"], a:1},
+            {t:"Which finding 2 hours after removal is most concerning?", o:["Mild pain at the site","O2 saturation of 95%","Respiratory rate of 32 breaths/min","Serous drainage on the dressing"], a:2},
+            {t:"The nurse is preparing for chest tube removal. Which medication is most appropriate to give 30 minutes prior?", o:["Antibiotic","Analgesic (pain killer)","Diuretic","Antihypertensive"], a:1},
+            {t:"A patient asks why they need a chest X-ray after the tube is removed. The nurse explains it is to:", o:["Check for infection","Confirm the lung remains expanded","Look for broken ribs","Measure heart size"], a:1},
+            {t:"During removal, the doctor asks the nurse to 'tighten the purse-string suture'. The rationale is:", o:["To keep the tube in","To close the opening and prevent air entry","To stop the patient from moving","To prevent bleeding"], a:1},
+            {t:"After removal, the nurse auscultates the lungs. What is the 'expected' finding if the procedure was successful?", o:["Absent breath sounds","Clear, bilateral breath sounds","Crackles in all fields","Wheezing"], a:1},
+            {t:"The nurse observes the patient for 'nonverbal cues of pain' after removal. This is part of which step?", o:["Assessment","Implementation","Planning","Evaluation"], a:3},
+            {t:"A nurse finds the chest tube drainage system has tipped over. What is the first action?", o:["Throw it away","Set it upright and check the water-seal levels","Clamp the tube","Call the doctor"], a:1},
+            {t:"While turning a patient, the chest tube is accidentally pulled out. The nurse should immediately:", o:["Cover the site with a sterile occlusive dressing taped on three sides","Try to push it back in","Call for a code blue","Do nothing"], a:0},
+            {t:"A patient with a chest tube has a sudden drop in BP and increase in HR. The drainage is 150 mL/hr of bright red blood. This suggests:", o:["Tension pneumothorax","Hemorrhage","Infection","Normal recovery"], a:1},
+            {t:"The nurse notes that the bubbling in the water-seal chamber has become continuous. She clamps the tube near the chest site and the bubbling stops. This means the leak is:", o:["In the drainage system","In the patient's chest or at the insertion site","In the suction machine","Normal"], a:1},
+            {t:"A patient is being transported to X-ray. The nurse should:", o:["Clamp the chest tube","Keep the drainage system below the chest level and patent","Disconnect the suction and leave the tube open","Empty the drainage before going"], a:1},
+            {t:"The nurse sees 'dependent loops' in the chest tube tubing. She should:", o:["Leave them as they are","Coil the tubing on the bed to ensure straight drainage","Clamp the tube","Cut the tubing"], a:1},
+            {t:"A patient with a chest tube for hemothorax has no drainage for 4 hours. The nurse should first:", o:["Assume the patient is healed","Check the tubing for kinks or clots","Milk the tubing vigorously","Notify the surgeon for removal"], a:1},
+            {t:"The nurse is assessing a patient for 'intercostal neuralgia'. The patient would complain of:", o:["Shortness of breath","Persistent pain along the nerve path","Fever","Itching"], a:1},
+            {t:"A patient has developed 're-expansion pulmonary edema'. This was likely caused by:", o:["Removing the tube too early","Removing a large amount of fluid (>1.5L) too quickly","Infection","The patient coughing"], a:1},
+            {t:"The nurse is evaluating the 'effectiveness of breathing pattern'. Which finding shows the goal is met?", o:["Patient uses accessory muscles","Patient is free from cyanosis and has O2 sat >95%","Patient has tachypnea","Patient has a deviated trachea"], a:1}
+        ];
+];
+/* ============ ENGINE ============ */
+let questions, i, correct, wrong, answers, wrongSet, answered;
+let totalTime = 100*60, timeLeft, timerInterval;
+const LETTERS = ['A','B','C','D','E','F'];
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function init(pool) {
+  questions = shuffle([...pool]);
+  i = 0; correct = 0; wrong = 0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = []; answered = 0;
+  timeLeft = totalTime;
+  document.getElementById('totalBadge').textContent = questions.length + ' سؤال';
+  startTimer();
+  render();
+}
+
+/* TIMER */
+function startTimer() {
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    const m = Math.floor(timeLeft / 60), s = timeLeft % 60;
+    document.getElementById('timerTxt').textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
+    const badge = document.getElementById('timerBadge');
+    if (timeLeft <= 120) { badge.className = 'timer-badge danger'; }
+    else if (timeLeft <= 300) { badge.className = 'timer-badge warn'; }
+    if (timeLeft <= 0) { clearInterval(timerInterval); finish(); }
+  }, 1000);
+}
+
+/* TOP UI */
+function updateTop() {
+  const total = questions.length;
+  document.getElementById('sCorrect').textContent = correct;
+  document.getElementById('sWrong').textContent = wrong;
+  document.getElementById('sRemain').textContent = Math.round(((total - answered) / total) * 100) + '%';
+  document.getElementById('progLabel').textContent = 'سؤال ' + (i + 1) + ' / ' + total;
+  document.getElementById('progFill').style.width = ((i + 1) / total * 100) + '%';
+  document.getElementById('prog-bar').style.width = ((i + 1) / total * 100) + '%';
+}
+
+/* RENDER QUESTION */
+function render() {
+  updateTop();
+  const q = questions[i];
+  document.getElementById('app').innerHTML = `
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">سؤال ${i + 1} / ${questions.length}</div>
+      </div>
+      <div class="q-text">${q.t}</div>
+      <div class="options">
+        ${q.o.map((o, idx) => `
+          <div class="opt" id="opt${idx}" onclick="choose(${idx})">
+            <div class="opt-letter">${LETTERS[idx] || idx + 1}</div>
+            ${o}
+          </div>
+        `).join('')}
+      </div>
+      <div class="nav-btns">
+        <button class="btn btn-skip" onclick="skip()"><i class="fa-solid fa-forward"></i> تخطي</button>
+      </div>
+    </div>`;
+}
+
+/* CHOOSE */
+function choose(v) {
+  if (answers[i] !== null) return;
+  answers[i] = v;
+  answered++;
+  const q = questions[i];
+  const ok = v === q.a;
+  ok ? correct++ : wrong++;
+  updateTop();
+
+  q.o.forEach((_, idx) => {
+    const el = document.getElementById('opt' + idx);
+    el.classList.add('disabled');
+    if (idx === q.a) el.classList.add('correct');
+    else if (idx === v) el.classList.add('wrong');
+  });
+
+  const fb = document.createElement('div');
+  fb.className = 'feedback-bar ' + (ok ? 'ok' : 'no');
+  fb.innerHTML = ok
+    ? `<span class="feedback-icon">🎉</span> <span>شطور جدا ، اللهم بارك</span>`
+    : `<span class="feedback-icon">😔</span> <span>ركز يا سكر </b></span>`;
+
+  const card = document.querySelector('.q-card');
+  card.querySelector('.options').after(fb);
+  if (q.exp) {
+    const exp = document.createElement('div');
+    exp.className = 'explanation';
+    exp.style.display = 'block';
+    exp.innerHTML = '<b>💬 شرح:</b> ' + q.exp;
+    fb.after(exp);
+  }
+
+  const navBtns = card.querySelector('.nav-btns');
+  navBtns.innerHTML = `<button class="btn btn-next" onclick="next()">
+    ${i < questions.length - 1 ? '<i class="fa-solid fa-arrow-left"></i> السؤال التالي' : '<i class="fa-solid fa-flag-checkered"></i> إنهاء الامتحان'}
+  </button>`;
+}
+
+/* SKIP */
+function skip() {
+  if (answers[i] === null) { answers[i] = -1; answered++; wrongSet.push(questions[i]); wrong++; updateTop(); }
+  next();
+}
+
+/* NEXT */
+function next() {
+  if (i < questions.length - 1) { i++; render(); window.scrollTo({top: 0, behavior: 'smooth'}); }
+  else finish();
+}
+
+/* FINISH */
+function finish() {
+  clearInterval(timerInterval);
+  const total = questions.length;
+  const score = Math.round((correct / total) * 100);
+
+  questions.forEach((q, idx) => {
+    if (answers[idx] !== q.a) wrongSet.push({...q, myAns: answers[idx]});
+  });
+  wrongSet = [...new Map(wrongSet.map(q => [q.t, q])).values()];
+
+  let grade, gradeColor;
+  if (score >= 90) { grade = '🥇 ممتاز'; gradeColor = 'var(--success)'; }
+  else if (score >= 75) { grade = '🥈 جيد جداً'; gradeColor = 'var(--accent)'; }
+  else if (score >= 60) { grade = '🥉 جيد'; gradeColor = 'var(--warn)'; }
+  else { grade = '📚 راجع تاني'; gradeColor = 'var(--danger)'; }
+
+  const circ = 2 * Math.PI * 45;
+  const offset = circ - (score / 100) * circ;
+
+  const reportHTML = questions.map((q, idx) => {
+    const ok = answers[idx] === q.a;
+    return `<div class="report-item ${ok ? 'ok' : 'no'}">
+      <div class="ri-q">${ok ? '✅' : '❌'} ${q.t}</div>
+      ${!ok ? `
+        <div class="ri-row"><span class="ri-badge ri-yours">إجابتك</span> ${answers[idx] >= 0 ? q.o[answers[idx]] : 'تم التخطي'}</div>
+        <div class="ri-row"><span class="ri-badge ri-right">الصحيح</span> ${q.o[q.a]}</div>
+      ` : ''}
+    </div>`;
+  }).join('');
+
+  document.getElementById('prog-bar').style.width = '100%';
+  document.getElementById('app').innerHTML = `
+    <div class="result-hero">
+      <div class="score-ring">
+        <svg viewBox="0 0 110 110">
+          <circle class="ring-bg" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="0"/>
+          <circle class="ring-fill" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="${circ}"
+            style="stroke:${gradeColor}" id="ringFill"/>
+        </svg>
+        <div class="score-num">${score}</div>
+        <div class="score-pct">%</div>
+      </div>
+      <div class="result-grade" style="color:${gradeColor}">${grade}</div>
+      <div class="result-sub">أجبت على ${answered} من ${total} سؤال</div>
+      <div class="result-stats">
+        <div class="rs"><div class="n" style="color:var(--success)">${correct}</div><div class="l">صحيح</div></div>
+        <div class="rs"><div class="n" style="color:var(--danger)">${wrong}</div><div class="l">خطأ</div></div>
+        <div class="rs"><div class="n" style="color:var(--accent)">${total - answered < 0 ? 0 : total - answered}</div><div class="l">تخطي</div></div>
+      </div>
+    </div>
+
+    <div class="result-actions">
+      ${wrongSet.length ? `<button class="btn btn-retry" onclick="retryWrong()"><i class="fa-solid fa-rotate-right"></i> إعادة الخطأ (${wrongSet.length})
+
+</button>` : ''}
+      <button class="btn btn-home" onclick="init(QUESTIONS)"><i class="fa-solid fa-shuffle"></i> امتحان جديد عشوائي</button>
+      <a href="https://gaith-team.github.io/exam/practicalmedical/index.html" class="btn btn-home" style="text-decoration:none;"><i class="fa-solid fa-house"></i> 
+
+رجوع للمادة</a>
+    </div>
+
+    <div style="margin-top:28px">
+      <div style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text2)">📋 تقرير مفصّل</div>
+      ${reportHTML}
+    </div>`;
+
+  setTimeout(() => { document.getElementById('ringFill').style.strokeDashoffset = offset; }, 100);
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+/* RETRY WRONG */
+function retryWrong() {
+  const pool = [...wrongSet];
+  questions = shuffle(pool); i = 0; correct = 0; wrong = 0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = []; answered = 0; timeLeft = totalTime;
+  startTimer(); render();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+/* THEME */
+const themeBtn = document.getElementById('themeBtn');
+let theme = localStorage.getItem('theme') || 'light';
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', t);
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+
+/* START */
+init(QUESTIONS);
+</script>
+</body>
+</html>
