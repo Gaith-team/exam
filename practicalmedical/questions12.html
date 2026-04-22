@@ -1,0 +1,703 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --accent:       #0284c7;
+  --accent-light: #0ea5e9;
+  --accent-dark:  #0369a1;
+  --accent-glow:  rgba(2,132,199,0.2);
+  --bg:      #f8fafc;
+  --bg2:     #eef2f7;
+  --card:    #ffffff;
+  --text:    #1a2332;
+  --text2:   #4a5568;
+  --text3:   #718096;
+  --bc:      rgba(0,0,0,0.07);
+  --success: #16a34a;
+  --danger:  #dc2626;
+  --warn:    #0369a1;
+  --r:       16px;
+  --tr:      all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="dark"] {
+  --bg:   #0d1117; --bg2: #161b22; --card: #1c2333;
+  --text: #e6edf3; --text2: #b1bac4; --text3: #7d8590;
+  --bc:   rgba(255,255,255,0.08);
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg); color: var(--text);
+  min-height: 100vh; overflow-x: hidden;
+  transition: background .4s, color .4s;
+}
+
+/* PROGRESS TOP */
+#prog-bar {
+  position: fixed; top: 0; left: 0; height: 3px; z-index: 999;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  transition: width .2s;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px; height: 64px;
+  background: rgba(248,250,252,.93); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--bc); transition: var(--tr);
+}
+[data-theme="dark"] nav { background: rgba(13,17,23,.95); }
+
+.nav-back {
+  display: flex; align-items: center; gap: 7px;
+  color: var(--text2); text-decoration: none; font-size: 13px; font-weight: 700;
+  padding: 7px 13px; border-radius: 8px; border: 1px solid var(--bc);
+  background: var(--card); transition: var(--tr);
+}
+.nav-back:hover { color: var(--accent); border-color: var(--accent-glow); transform: translateX(3px); }
+.nav-brand { display: flex; align-items: center; gap: 9px; font-size: 15px; font-weight: 900; color: var(--text); }
+.nav-logo-icon {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 12px; font-weight: 900;
+}
+.nav-right { display: flex; align-items: center; gap: 8px; }
+.theme-btn {
+  width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--bc);
+  background: var(--card); cursor: pointer; font-size: 15px;
+  display: flex; align-items: center; justify-content: center; transition: var(--tr);
+}
+.theme-btn:hover { border-color: var(--accent); transform: rotate(20deg); }
+
+/* HERO BAND */
+.hero-band {
+  margin-top: 64px;
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent), var(--accent-light));
+  padding: 40px 24px 36px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.hero-band::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 600px 200px at 50% 100%, rgba(255,255,255,.12) 0%, transparent 70%);
+}
+.hero-band-icon {
+  width: 68px; height: 68px; border-radius: 20px;
+  background: rgba(255,255,255,.2); backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 30px; margin: 0 auto 14px; border: 1.5px solid rgba(255,255,255,.35);
+}
+.hero-band h1 { font-size: clamp(20px,4vw,30px); font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero-band p { font-size: 13px; color: rgba(255,255,255,.8); }
+.hero-band-meta {
+  display: flex; justify-content: center; gap: 24px; margin-top: 20px;
+  flex-wrap: wrap;
+}
+.meta-pill {
+  background: rgba(255,255,255,.18); backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,.3); border-radius: 50px;
+  padding: 6px 16px; font-size: 12px; font-weight: 700; color: #fff;
+  display: flex; align-items: center; gap: 6px;
+}
+
+/* EXAM SHELL */
+.shell { max-width: 560px; margin: 0 auto; padding: 24px 20px 80px; }
+
+/* STATS ROW */
+.stats-row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 16px;
+}
+.stat-box {
+  background: var(--card); border: 1px solid var(--bc); border-radius: var(--r);
+  padding: 12px 10px; text-align: center;
+}
+.stat-box .val { font-size: 20px; font-weight: 900; }
+.stat-box .lbl { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.stat-correct { color: var(--success); }
+.stat-wrong   { color: var(--danger); }
+.stat-remain  { color: var(--accent); }
+
+/* PROGRESS STRIP */
+.prog-strip {
+  background: var(--card); border: 1px solid var(--bc); border-radius: var(--r);
+  padding: 14px 16px; margin-bottom: 16px;
+  display: flex; align-items: center; gap: 14px;
+}
+.prog-label { font-size: 13px; font-weight: 700; color: var(--text2); white-space: nowrap; }
+.prog-track { flex: 1; height: 8px; background: var(--bg2); border-radius: 8px; overflow: hidden; }
+.prog-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  border-radius: 8px; transition: width .4s;
+}
+.timer-badge {
+  min-width: 64px; height: 36px; border-radius: 18px;
+  background: var(--bg2); border: 1px solid var(--bc);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 900; color: var(--text);
+  gap: 5px; padding: 0 12px; flex-shrink: 0;
+}
+.timer-badge.warn { color: var(--warn); border-color: rgba(217,119,6,.3); background: rgba(217,119,6,.08); }
+.timer-badge.danger { color: var(--danger); border-color: rgba(220,38,38,.3); background: rgba(220,38,38,.08); animation: pulse .8s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.6} }
+
+/* QUESTION CARD */
+.q-card {
+  background: var(--card); border: 1px solid var(--bc);
+  border-radius: 20px; overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+  transition: box-shadow .3s;
+}
+.q-header {
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  padding: 4px 18px 4px;
+  display: flex; align-items: center; gap: 8px;
+}
+.q-num {
+  background: rgba(255,255,255,.2); border-radius: 8px;
+  padding: 3px 10px; font-size: 11px; font-weight: 700; color: #fff;
+}
+.q-text {
+  padding: 22px 18px 14px; font-size: 15px; font-weight: 700; color: var(--text);
+  line-height: 1.65; border-bottom: 1px solid var(--bc);
+  text-align: left; direction: ltr;
+}
+.options { padding: 14px 18px 18px; display: flex; flex-direction: column; gap: 10px; }
+
+/* OPTION */
+.opt {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px; border-radius: 12px;
+  border: 1.5px solid var(--bc); background: var(--bg);
+  cursor: pointer; font-size: 14px; font-weight: 600; color: var(--text);
+  transition: var(--tr); user-select: none;
+  direction: ltr; text-align: left;
+}
+.opt:hover:not(.disabled) {
+  border-color: var(--accent); background: var(--accent-glow);
+  transform: translateX(3px);
+}
+.opt-letter {
+  width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+  background: var(--bg2); border: 1px solid var(--bc);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 900; color: var(--text3);
+  transition: var(--tr);
+}
+.opt.correct {
+  border-color: var(--success); background: rgba(22,163,74,.08);
+}
+.opt.correct .opt-letter {
+  background: var(--success); color: #fff; border-color: var(--success);
+}
+.opt.wrong {
+  border-color: var(--danger); background: rgba(220,38,38,.07);
+}
+.opt.wrong .opt-letter {
+  background: var(--danger); color: #fff; border-color: var(--danger);
+}
+.opt.disabled { pointer-events: none; }
+
+/* FEEDBACK */
+.feedback-bar {
+  margin: 14px 18px; padding: 12px 16px; border-radius: 12px;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px; font-weight: 700;
+  animation: popIn .4s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes popIn { from{transform:scale(.8);opacity:0} to{transform:scale(1);opacity:1} }
+.feedback-bar.ok { background: rgba(22,163,74,.1); color: var(--success); border: 1px solid rgba(22,163,74,.25); }
+.feedback-bar.no { background: rgba(220,38,38,.08); color: var(--danger); border: 1px solid rgba(220,38,38,.2); }
+.feedback-icon { font-size: 20px; }
+
+/* EXPLANATION */
+.explanation {
+  margin: 0 18px 14px; padding: 12px 14px;
+  background: rgba(var(--accent-rgb),.06);
+  border-radius: 10px; border-right: 3px solid var(--accent);
+  font-size: 13px; color: var(--text2); line-height: 1.6;
+  display: none;
+}
+
+/* NAV BTNS */
+.nav-btns { padding: 4px 18px 18px; display: flex; gap: 10px; }
+.btn {
+  flex: 1; padding: 13px; border: none; border-radius: 12px;
+  font-size: 14px; font-weight: 900; cursor: pointer;
+  font-family: 'Outfit', sans-serif; transition: var(--tr);
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+}
+.btn-next {
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  color: #fff; box-shadow: 0 4px 14px var(--accent-glow);
+}
+.btn-next:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
+.btn-skip {
+  background: var(--bg2); color: var(--text2); border: 1px solid var(--bc); flex: 0 0 auto; padding: 13px 18px;
+}
+.btn-skip:hover { border-color: var(--warn); color: var(--warn); }
+
+/* ===== RESULTS ===== */
+.result-hero {
+  text-align: center; padding: 36px 20px 28px;
+  background: var(--card); border-radius: 20px;
+  border: 1px solid var(--bc); margin-bottom: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+}
+.score-ring {
+  width: 110px; height: 110px; border-radius: 50%; margin: 0 auto 18px;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; border: 5px solid var(--bg2);
+  position: relative;
+}
+.score-ring svg { position: absolute; inset: -5px; width: calc(100% + 10px); height: calc(100% + 10px); transform: rotate(-90deg); }
+.score-ring circle { fill: none; stroke-width: 5; stroke-linecap: round; }
+.ring-bg { stroke: var(--bg2); }
+.ring-fill { stroke: var(--accent); transition: stroke-dashoffset 1s ease; }
+.score-num { font-size: 28px; font-weight: 900; color: var(--text); }
+.score-pct { font-size: 12px; color: var(--text3); }
+.result-grade { font-size: 22px; font-weight: 900; margin-bottom: 6px; }
+.result-sub { font-size: 14px; color: var(--text2); }
+.result-stats {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 20px;
+}
+.rs { background: var(--bg2); border-radius: 10px; padding: 12px 8px; text-align: center; }
+.rs .n { font-size: 20px; font-weight: 900; }
+.rs .l { font-size: 11px; color: var(--text3); }
+
+/* REPORT ITEMS */
+.report-item {
+  background: var(--card); border: 1px solid var(--bc); border-radius: 14px;
+  padding: 16px; margin-bottom: 10px; border-right: 4px solid var(--bc);
+}
+.report-item.ok { border-right-color: var(--success); }
+.report-item.no { border-right-color: var(--danger); }
+.report-item .ri-q { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+.report-item .ri-row {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; margin-top: 5px; color: var(--text2);
+}
+.ri-badge {
+  padding: 2px 8px; border-radius: 6px; font-weight: 700; font-size: 11px; flex-shrink: 0;
+}
+.ri-yours { background: rgba(220,38,38,.1); color: var(--danger); }
+.ri-right { background: rgba(22,163,74,.1); color: var(--success); }
+
+.result-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+.btn-retry { background: linear-gradient(135deg, var(--accent-dark), var(--accent)); color: #fff; }
+.btn-retry:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
+.btn-home { background: var(--bg2); color: var(--text); border: 1px solid var(--bc); }
+.btn-home:hover { border-color: var(--accent); color: var(--accent); }
+
+/* FOOTER */
+footer {
+  background: var(--bg2); border-top: 1px solid var(--bc);
+  padding: 22px 24px; display: flex; align-items: center;
+  justify-content: space-between; flex-wrap: wrap; gap: 10px;
+}
+.footer-brand { font-size: 14px; font-weight: 700; }
+.footer-brand span { color: var(--accent); }
+.footer-tg { display: flex; align-items: center; gap: 5px; text-decoration: none; color: #229ED9; font-size: 12px; font-weight: 600; }
+
+@media (max-width: 480px) {
+  nav { padding: 0 14px; }
+  .shell { padding: 16px 14px 60px; }
+  .nav-brand span { display: none; }
+  .hero-band { padding: 30px 16px 28px; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog-bar" style="width:0%"></div>
+
+<nav>
+  <a href="https://gaith-team.github.io/exam/practicalmedical/index.html" class="nav-back"><i class="fa-solid fa-arrow-right"></i> رجوع</a>
+  <div class="nav-brand">
+    <div class="nav-logo-icon">GT</div>
+    <span>GHAITH TEAM</span>
+  </div>
+  <div class="nav-right">
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<div class="hero-band">
+  <div class="hero-band-icon">🩺</div>
+  <h1>أساسيات تمريض عملي </h1>
+  <p>vital signs</p>
+  <div class="hero-band-meta">
+    <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">-- سؤال</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-clock"></i> 70 Min</div>
+    <div class="meta-pill"><i class="fa-solid fa-shuffle"></i> Shuffled</div>
+  </div>
+</div>
+
+<div class="shell">
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="val stat-correct" id="sCorrect">0</div>
+      <div class="lbl">✔ صحيح</div>
+    </div>
+    <div class="stat-box">
+      <div class="val stat-wrong" id="sWrong">0</div>
+      <div class="lbl">✖ خطأ</div>
+    </div>
+    <div class="stat-box">
+      <div class="val stat-remain" id="sRemain">--%</div>
+      <div class="lbl">⏳ متبقي</div>
+    </div>
+  </div>
+
+  <!-- PROGRESS STRIP -->
+  <div class="prog-strip">
+    <div class="prog-label" id="progLabel">سؤال ١</div>
+    <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+    <div class="timer-badge" id="timerBadge"><i class="fa-regular fa-clock"></i> <span id="timerTxt">70:00</span></div>
+  </div>
+
+  <!-- APP -->
+  <div id="app"></div>
+</div>
+
+<footer>
+  <div class="footer-brand">GHAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg">
+    <i class="fa-brands fa-telegram"></i> @nursing2bu
+  </a>
+</footer>
+
+<script>
+const QUESTIONS = [
+
+       {t:"What is the normal range for body temperature?", o:["35.0°C - 36.0°C","36.4°C - 37.2°C","37.5°C - 38.5°C","38.0°C - 39.0°C"], a:1},
+          {t:"Which site is considered the most accurate for measuring body temperature?", o:["Oral","Axillary","Rectal","Tympanic"], a:2},
+          {t:"How long should an oral thermometer be left in place?", o:["1 minute","3 minutes","5 minutes","10 minutes"], a:1},
+          {t:"What is the normal respiration rate for a healthy adult?", o:["8-12 breaths/min","12-20 breaths/min","20-30 breaths/min","30-40 breaths/min"], a:1},
+          {t:"Which term describes an abnormally slow heart rate (less than 60 bpm)?", o:["Tachycardia","Bradypnea","Bradycardia","Apnea"], a:2},
+          {t:"When measuring blood pressure, the first sound heard represents which pressure?", o:["Diastolic","Systolic","Mean arterial","Pulse pressure"], a:1},
+          {t:"What is the recommended time to wait before taking oral temperature if the patient just had a cold drink?", o:["5 minutes","10 minutes","20 minutes","60 minutes"], a:2},
+          {t:"Which artery is most commonly used to measure pulse in the wrist?", o:["Brachial","Carotid","Radial","Femoral"], a:2},
+          {t:"What is the correct position for an adult's pinna when taking a tympanic temperature?", o:["Pull down and back","Pull straight back","Pull up and back","Pull down and forward"], a:2},
+          {t:"A blood pressure reading of 180/110 mmHg is classified as:", o:["Normal","Stage 1 Hypertension","Stage 2 Hypertension","Stage 3 Hypertension"], a:3},
+          {t:"Which of the following is a contraindication for oral temperature measurement?", o:["Patient is awake","Patient is mouth breathing","Patient is sitting","Patient is elderly"], a:1},
+          {t:"The axillary temperature is typically how much lower than the oral temperature?", o:["0.1°C","0.5°C","1.0°C","1.5°C"], a:1},
+          {t:"How deep should a rectal thermometer be inserted in an adult?", o:["0.5 inch","1-1.5 inches","3 inches","5 inches"], a:1},
+          {t:"Which pulse site is used during cardiac arrest in adults?", o:["Radial","Brachial","Carotid","Dorsalis pedis"], a:2},
+          {t:"What does 'Apnea' mean?", o:["Difficult breathing","Rapid breathing","Absence of breathing","Slow breathing"], a:2},
+          {t:"The 'lubrication' step in rectal temperature procedure is intended to:", o:["Clean the thermometer","Reduce friction and prevent tissue injury","Increase temperature accuracy","Speed up the process"], a:1},
+          {t:"Which pulse volume is described as 'Full, bounding'?", o:["+1","+2","+3","0"], a:2},
+          {t:"Where is the apical pulse measured?", o:["Wrist","Neck","Fifth intercostal space","Groin"], a:2},
+          {t:"What is the rationale for washing a thermometer with soap and running water after use?", o:["To make it shine","To return mercury to the bulb","To remove microorganisms via friction","To cool it down"], a:2},
+          {t:"Which blood pressure classification is 120/80 mmHg?", o:["Low Normal","Normal","High Normal","Stage 1 Hypertension"], a:1},
+          {t:"How long should you count the pulse if it is irregular?", o:["15 seconds","30 seconds","1 minute","2 minutes"], a:2},
+          {t:"Which instrument is used to measure blood pressure?", o:["Thermometer","Stethoscope","Sphygmomanometer","Otoscope"], a:2},
+          {t:"What is the rationale for not using your thumb to palpate a patient's pulse?", o:["The thumb is too strong","The thumb has its own pulse","The thumb is not sensitive enough","It is unprofessional"], a:1},
+          {t:"Which term describes difficult or labored breathing?", o:["Eupnea","Dyspnea","Tachypnea","Orthopnea"], a:1},
+          {t:"When taking axillary temperature, where should the bulb be placed?", o:["On the shoulder","In the center of the axilla","On the upper arm","Against the ribs"], a:1},
+          {t:"What is the mercury level a thermometer should be below before use?", o:["37°C","36°C","35°C","34°C"], a:2},
+          {t:"Which artery is located at the back of the knee?", o:["Femoral","Popliteal","Posterior tibial","Dorsalis pedis"], a:1},
+          {t:"A patient with a respiratory rate of 28 breaths/min is experiencing:", o:["Bradypnea","Tachypnea","Apnea","Eupnea"], a:1},
+          {t:"What is the first step in all vital signs procedures?", o:["Explain the procedure","Hand washing","Prepare equipment","Record findings"], a:1},
+          {t:"Which temperature site is closest to the hypothalamus?", o:["Oral","Rectal","Ear (Tympanic)","Axillary"], a:2},
+          {t:"In blood pressure measurement, the cuff should cover what fraction of the upper arm length?", o:["1/4","1/2","2/3","Full arm"], a:2},
+          {t:"Which pulse site is used to assess circulation to the foot?", o:["Brachial","Popliteal","Dorsalis pedis","Femoral"], a:2},
+          {t:"What is the normal pulse range for a healthy adult?", o:["40-60 bpm","60-100 bpm","100-120 bpm","120-140 bpm"], a:1},
+          {t:"Which of the following affects body temperature?", o:["Gender","Time of day","Recent activity","All of the above"], a:3},
+          {t:"How long should an axillary thermometer be left in place?", o:["1-2 minutes","2-3 minutes","5-10 minutes","15 minutes"], a:2},
+          {t:"Which position is used for rectal temperature measurement?", o:["Supine","Prone","Side-lying with upper leg flexed","Sitting"], a:2},
+          {t:"What is the rationale for holding the patient's hand as if counting pulse while actually counting respirations?", o:["To save time","Respirations can be consciously controlled if the patient knows","To check for skin temperature","To keep the patient still"], a:1},
+          {t:"Which blood pressure reading indicates 'Dangerously Low Blood Pressure'?", o:["90/60 mmHg","100/65 mmHg","50/33 mmHg","120/80 mmHg"], a:2},
+          {t:"The brachial artery is located in the:", o:["Wrist","Antecubital space","Neck","Groin"], a:1},
+          {t:"Which term describes alternating periods of apnea and hyperventilation?", o:["Dyspnea","Cheyne-Stokes","Tachypnea","Bradypnea"], a:1},
+          {t:"What should you do if a patient's axilla is moist before taking temperature?", o:["Wait 10 minutes","Dry it with a towel","Take oral temperature instead","Ignore it"], a:1},
+          {t:"The systolic pressure occurs when the ventricles:", o:["Fill with blood","Relax","Contract","Dilate"], a:2},
+          {t:"Which thermometer is disposable and non-breakable?", o:["Mercury","Electronic","Heat sensitive strip","Tympanic"], a:2},
+          {t:"Where is the posterior tibial pulse located?", o:["Top of the foot","Behind the knee","Inner aspect of the ankle","Front of the ear"], a:2},
+          {t:"What is the rationale for cleaning a thermometer from bulb to end before use?", o:["To move microorganisms from cleanest to dirtiest area","To warm up the mercury","To make it easier to read","To prevent breakage"], a:0},
+          {t:"Which of the following is NOT a vital sign?", o:["Blood pressure","Pulse","Height","Respiration"], a:2},
+          {t:"A pulse rate of 110 bpm is called:", o:["Bradycardia","Tachycardia","Normal","Arrhythmia"], a:1},
+          {t:"When should vital signs be taken?", o:["On admission","According to physician's order","When physical condition changes","All of the above"], a:3},
+          {t:"The diastolic pressure is the:", o:["First number recorded","Second number recorded","Average of two numbers","Difference between two numbers"], a:1},
+          {t:"Which pulse site is used to assess circulation to the hand?", o:["Radial","Ulnar","Brachial","Carotid"], a:1},
+          {t:"What is the correct way to read a mercury thermometer?", o:["At an angle","Parallel at eye level","Under bright light only","While shaking it"], a:1},
+          {t:"Which factor can increase pulse rate?", o:["Exercise","Illness","Emotions","All of the above"], a:3},
+          {t:"How long should a rectal thermometer be left in place?", o:["1 minute","3 minutes","5 minutes","10 minutes"], a:0},
+          {t:"What is the rationale for drying the thermometer after washing?", o:["To prevent it from slipping","Moist environment helps in growth of microorganisms","To make it look clean","To reset the mercury"], a:1},
+          {t:"Which artery is used to measure blood pressure in the arm?", o:["Radial","Brachial","Ulnar","Axillary"], a:1},
+          {t:"A respiratory rate of 10 breaths/min is:", o:["Tachypnea","Bradypnea","Apnea","Normal"], a:1},
+          {t:"Where is the temporal artery located?", o:["In the neck","In front of the ear","In the groin","Behind the knee"], a:1},
+          {t:"What is the rationale for inflating the cuff 30 mmHg above the point where the radial pulse disappears?", o:["To ensure the artery is fully occluded","To make the reading faster","To prevent the cuff from slipping","To calibrate the machine"], a:0},
+          {t:"Which temperature site is contraindicated for a patient with diarrhea?", o:["Oral","Axillary","Rectal","Tympanic"], a:2},
+          {t:"The 'Volume' of a pulse refers to:", o:["The speed of the heart","The pattern of the beats","The force of blood against the artery wall","The location of the pulse"], a:2},
+          {t:"Which blood pressure classification is 140/90 mmHg?", o:["Normal","High Normal","Stage 1 Hypertension","Stage 2 Hypertension"], a:2},
+          {t:"What is the rationale for shaking down a mercury thermometer?", o:["To clean it","To return mercury to its chamber for reuse","To mix the mercury","To test if it's broken"], a:1},
+          {t:"Which pulse site is used for infants during cardiac arrest?", o:["Radial","Carotid","Brachial or Femoral","Temporal"], a:2},
+          {t:"What is 'Hypothermia'?", o:["High body temperature","Normal body temperature","Low body temperature","Fluctuating body temperature"], a:2},
+          {t:"When measuring respiration, one cycle consists of:", o:["One inspiration","One expiration","One inspiration and one expiration","Two inspirations"], a:2},
+          {t:"Which thermometer is appropriate for children and elderly due to being non-breakable?", o:["Mercury","Glass","Heat sensitive strip","Electronic"], a:2},
+          {t:"The 'Rhythm' of a pulse refers to:", o:["The strength of the beat","The number of beats per minute","The pattern of the beats","The location of the pulse"], a:2},
+          {t:"Which blood pressure reading is 'Borderline Low'?", o:["120/80 mmHg","90/60 mmHg","140/95 mmHg","180/110 mmHg"], a:1},
+          {t:"Where is the femoral artery located?", o:["In the neck","In the groin","Behind the knee","In the wrist"], a:1},
+          {t:"What is the rationale for placing the sphygmomanometer at heart level?", o:["To prevent it from falling","To avoid distorted readings","To make it easier to see","To keep the tubes straight"], a:1},
+          {t:"Which term describes shallow and rapid breathing?", o:["Dyspnea","SOB (Shortness of Breath)","Apnea","Bradypnea"], a:1},
+          {t:"A pulse graded as +1 is:", o:["Absent","Weak","Normal","Strong"], a:1},
+          {t:"Which temperature site is contraindicated for a patient with oral inflammation?", o:["Oral","Axillary","Rectal","Tympanic"], a:0},
+          {t:"What is the rationale for hand washing before a procedure?", o:["To keep hands soft","To reduce the number of microorganisms","To warm up the hands","To follow hospital rules only"], a:1},
+          {t:"Which artery is located on the upper surface of the foot?", o:["Posterior tibial","Dorsalis pedis","Popliteal","Femoral"], a:1},
+          {t:"A blood pressure of 160/100 mmHg is:", o:["Stage 1 Hypertension","Stage 2 Hypertension","Stage 3 Hypertension","Stage 4 Hypertension"], a:1},
+          {t:"How should you clean a thermometer AFTER use?", o:["From bulb to end","From end to bulb","Only the bulb","Only the end"], a:1},
+          {t:"Which pulse site is used when the radial pulse is inaccessible?", o:["Temporal","Carotid","Apical","All of the above"], a:3},
+          {t:"What is the normal range for systolic blood pressure in 'High Normal'?", o:["120 mmHg","140 mmHg","160 mmHg","180 mmHg"], a:1},
+          {t:"Which of the following is a sign of physical stress that vital signs indicate?", o:["Hunger","Pain","Happiness","Sleepiness"], a:1},
+          {t:"Normal body temperature ranges from 36.4°C to 37.2°C.", o:["True","False"], a:0},
+          {t:"Axillary temperature is usually 0.5°C higher than oral temperature.", o:["True","False"], a:1},
+          {t:"Tachycardia is defined as a pulse rate greater than 100 beats per minute.", o:["True","False"], a:0},
+          {t:"A blood pressure reading of 120/80 mmHg is considered Stage 1 Hypertension.", o:["True","False"], a:1},
+          {t:"Rectal temperature is the most accurate site for body temperature.", o:["True","False"], a:0},
+          {t:"Bradypnea is an abnormal increase in respiratory rate.", o:["True","False"], a:1},
+          {t:"The radial artery is located on the little finger side of the wrist.", o:["True","False"], a:1},
+          {t:"Systolic pressure is the pressure when the heart ventricles relax.", o:["True","False"], a:1},
+          {t:"Hand washing is necessary to reduce the number of microorganisms.", o:["True","False"], a:0},
+          {t:"You should use your thumb to palpate a patient's pulse.", o:["True","False"], a:1},
+          {t:"Apnea means the absence of breathing.", o:["True","False"], a:0},
+          {t:"A pulse volume of +3 is considered 'Full, bounding'.", o:["True","False"], a:0},
+          {t:"Oral temperature is appropriate for a patient who is mouth breathing.", o:["True","False"], a:1},
+          {t:"The femoral artery is located in the middle of the groin.", o:["True","False"], a:0},
+          {t:"Blood pressure should be measured after the patient has been inactive for 5 minutes.", o:["True","False"], a:0},
+          {t:"Mercury level in a thermometer should be above 35°C before use.", o:["True","False"], a:1},
+          {t:"Dyspnea refers to difficult or labored breathing.", o:["True","False"], a:0},
+          {t:"The diastolic pressure is typically the first number recorded in a BP reading.", o:["True","False"], a:1},
+          {t:"Tympanic temperature is measured in the ear.", o:["True","False"], a:0},
+          {t:"Hypertension is the term for low blood pressure.", o:["True","False"], a:1}
+        ];
+/* ============ ENGINE ============ */
+let questions, i, correct, wrong, answers, wrongSet, answered;
+let totalTime = 70*60, timeLeft, timerInterval;
+const LETTERS = ['A','B','C','D','E','F'];
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function init(pool) {
+  questions = shuffle([...pool]);
+  i = 0; correct = 0; wrong = 0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = []; answered = 0;
+  timeLeft = totalTime;
+  document.getElementById('totalBadge').textContent = questions.length + ' سؤال';
+  startTimer();
+  render();
+}
+
+/* TIMER */
+function startTimer() {
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    const m = Math.floor(timeLeft / 60), s = timeLeft % 60;
+    document.getElementById('timerTxt').textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
+    const badge = document.getElementById('timerBadge');
+    if (timeLeft <= 120) { badge.className = 'timer-badge danger'; }
+    else if (timeLeft <= 300) { badge.className = 'timer-badge warn'; }
+    if (timeLeft <= 0) { clearInterval(timerInterval); finish(); }
+  }, 1000);
+}
+
+/* TOP UI */
+function updateTop() {
+  const total = questions.length;
+  document.getElementById('sCorrect').textContent = correct;
+  document.getElementById('sWrong').textContent = wrong;
+  document.getElementById('sRemain').textContent = Math.round(((total - answered) / total) * 100) + '%';
+  document.getElementById('progLabel').textContent = 'سؤال ' + (i + 1) + ' / ' + total;
+  document.getElementById('progFill').style.width = ((i + 1) / total * 100) + '%';
+  document.getElementById('prog-bar').style.width = ((i + 1) / total * 100) + '%';
+}
+
+/* RENDER QUESTION */
+function render() {
+  updateTop();
+  const q = questions[i];
+  document.getElementById('app').innerHTML = `
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">سؤال ${i + 1} / ${questions.length}</div>
+      </div>
+      <div class="q-text">${q.t}</div>
+      <div class="options">
+        ${q.o.map((o, idx) => `
+          <div class="opt" id="opt${idx}" onclick="choose(${idx})">
+            <div class="opt-letter">${LETTERS[idx] || idx + 1}</div>
+            ${o}
+          </div>
+        `).join('')}
+      </div>
+      <div class="nav-btns">
+        <button class="btn btn-skip" onclick="skip()"><i class="fa-solid fa-forward"></i> تخطي</button>
+      </div>
+    </div>`;
+}
+
+/* CHOOSE */
+function choose(v) {
+  if (answers[i] !== null) return;
+  answers[i] = v;
+  answered++;
+  const q = questions[i];
+  const ok = v === q.a;
+  ok ? correct++ : wrong++;
+  updateTop();
+
+  q.o.forEach((_, idx) => {
+    const el = document.getElementById('opt' + idx);
+    el.classList.add('disabled');
+    if (idx === q.a) el.classList.add('correct');
+    else if (idx === v) el.classList.add('wrong');
+  });
+
+  const fb = document.createElement('div');
+  fb.className = 'feedback-bar ' + (ok ? 'ok' : 'no');
+  fb.innerHTML = ok
+    ? `<span class="feedback-icon">🎉</span> <span>شطور جدا ، اللهم بارك</span>`
+    : `<span class="feedback-icon">😔</span> <span>ركز يا سكر </b></span>`;
+
+  const card = document.querySelector('.q-card');
+  card.querySelector('.options').after(fb);
+  if (q.exp) {
+    const exp = document.createElement('div');
+    exp.className = 'explanation';
+    exp.style.display = 'block';
+    exp.innerHTML = '<b>💬 شرح:</b> ' + q.exp;
+    fb.after(exp);
+  }
+
+  const navBtns = card.querySelector('.nav-btns');
+  navBtns.innerHTML = `<button class="btn btn-next" onclick="next()">
+    ${i < questions.length - 1 ? '<i class="fa-solid fa-arrow-left"></i> السؤال التالي' : '<i class="fa-solid fa-flag-checkered"></i> إنهاء الامتحان'}
+  </button>`;
+}
+
+/* SKIP */
+function skip() {
+  if (answers[i] === null) { answers[i] = -1; answered++; wrongSet.push(questions[i]); wrong++; updateTop(); }
+  next();
+}
+
+/* NEXT */
+function next() {
+  if (i < questions.length - 1) { i++; render(); window.scrollTo({top: 0, behavior: 'smooth'}); }
+  else finish();
+}
+
+/* FINISH */
+function finish() {
+  clearInterval(timerInterval);
+  const total = questions.length;
+  const score = Math.round((correct / total) * 100);
+
+  questions.forEach((q, idx) => {
+    if (answers[idx] !== q.a) wrongSet.push({...q, myAns: answers[idx]});
+  });
+  wrongSet = [...new Map(wrongSet.map(q => [q.t, q])).values()];
+
+  let grade, gradeColor;
+  if (score >= 90) { grade = '🥇 ممتاز'; gradeColor = 'var(--success)'; }
+  else if (score >= 75) { grade = '🥈 جيد جداً'; gradeColor = 'var(--accent)'; }
+  else if (score >= 60) { grade = '🥉 جيد'; gradeColor = 'var(--warn)'; }
+  else { grade = '📚 راجع تاني'; gradeColor = 'var(--danger)'; }
+
+  const circ = 2 * Math.PI * 45;
+  const offset = circ - (score / 100) * circ;
+
+  const reportHTML = questions.map((q, idx) => {
+    const ok = answers[idx] === q.a;
+    return `<div class="report-item ${ok ? 'ok' : 'no'}">
+      <div class="ri-q">${ok ? '✅' : '❌'} ${q.t}</div>
+      ${!ok ? `
+        <div class="ri-row"><span class="ri-badge ri-yours">إجابتك</span> ${answers[idx] >= 0 ? q.o[answers[idx]] : 'تم التخطي'}</div>
+        <div class="ri-row"><span class="ri-badge ri-right">الصحيح</span> ${q.o[q.a]}</div>
+      ` : ''}
+    </div>`;
+  }).join('');
+
+  document.getElementById('prog-bar').style.width = '100%';
+  document.getElementById('app').innerHTML = `
+    <div class="result-hero">
+      <div class="score-ring">
+        <svg viewBox="0 0 110 110">
+          <circle class="ring-bg" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="0"/>
+          <circle class="ring-fill" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="${circ}"
+            style="stroke:${gradeColor}" id="ringFill"/>
+        </svg>
+        <div class="score-num">${score}</div>
+        <div class="score-pct">%</div>
+      </div>
+      <div class="result-grade" style="color:${gradeColor}">${grade}</div>
+      <div class="result-sub">أجبت على ${answered} من ${total} سؤال</div>
+      <div class="result-stats">
+        <div class="rs"><div class="n" style="color:var(--success)">${correct}</div><div class="l">صحيح</div></div>
+        <div class="rs"><div class="n" style="color:var(--danger)">${wrong}</div><div class="l">خطأ</div></div>
+        <div class="rs"><div class="n" style="color:var(--accent)">${total - answered < 0 ? 0 : total - answered}</div><div class="l">تخطي</div></div>
+      </div>
+    </div>
+
+    <div class="result-actions">
+      ${wrongSet.length ? `<button class="btn btn-retry" onclick="retryWrong()"><i class="fa-solid fa-rotate-right"></i> إعادة الخطأ (${wrongSet.length})</button>` : ''}
+      <button class="btn btn-home" onclick="init(QUESTIONS)"><i class="fa-solid fa-shuffle"></i> امتحان جديد عشوائي</button>
+      <a href="https://gaith-team.github.io/exam/practicalmedical/index.html" class="btn btn-home" style="text-decoration:none;"><i class="fa-solid fa-house"></i> رجوع للمادة</a>
+    </div>
+
+    <div style="margin-top:28px">
+      <div style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text2)">📋 تقرير مفصّل</div>
+      ${reportHTML}
+    </div>`;
+
+  setTimeout(() => { document.getElementById('ringFill').style.strokeDashoffset = offset; }, 100);
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+/* RETRY WRONG */
+function retryWrong() {
+  const pool = [...wrongSet];
+  questions = shuffle(pool); i = 0; correct = 0; wrong = 0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = []; answered = 0; timeLeft = totalTime;
+  startTimer(); render();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+/* THEME */
+const themeBtn = document.getElementById('themeBtn');
+let theme = localStorage.getItem('theme') || 'light';
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', t);
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+
+/* START */
+init(QUESTIONS);
+</script>
+</body>
+</html>
