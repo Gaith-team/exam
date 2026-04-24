@@ -1,0 +1,1104 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --c:      #e67e22;
+  --c-deep: #b8590a;
+  --c-lite: #f39c12;
+  --c-glow: rgba(230,126,34,0.2);
+  --c-soft: rgba(230,126,34,0.09);
+  --green:  #27ae60;
+  --red:    #e74c3c;
+  --bg:     #f9f5f0;
+  --bg2:    #f1e8dc;
+  --card:   #ffffff;
+  --text:   #1a1208;
+  --text2:  #5a4a30;
+  --text3:  #9a8060;
+  --border: rgba(230,126,34,0.15);
+  --radius: 18px;
+  --tr:     all 0.28s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="dark"] {
+  --bg:    #12100c;
+  --bg2:   #1c1710;
+  --card:  #231e16;
+  --text:  #f0e6d6;
+  --text2: #c0a880;
+  --text3: #806848;
+  --border:rgba(230,126,34,0.18);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Cairo','Tajawal',sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  transition: background .4s, color .4s;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px;
+  background: rgba(249,245,240,0.93);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+  transition: var(--tr);
+}
+[data-theme="dark"] nav { background: rgba(18,16,12,0.95); }
+.nav-back {
+  display: flex; align-items: center; gap: 8px;
+  text-decoration: none; color: var(--text2);
+  font-size: 13px; font-weight: 700;
+  padding: 7px 13px; border-radius: 9px;
+  border: 1px solid var(--border); background: var(--card);
+  transition: var(--tr);
+}
+.nav-back:hover { color: var(--c); border-color: var(--c); }
+.nav-center { display: flex; align-items: center; gap: 9px; }
+.nav-pill {
+  display: flex; align-items: center; gap: 7px;
+  padding: 6px 14px; border-radius: 50px;
+  background: linear-gradient(135deg, var(--c), var(--c-lite));
+  color: #fff; font-size: 13px; font-weight: 800;
+}
+.theme-toggle {
+  width: 38px; height: 38px; border-radius: 50%;
+  border: 1.5px solid var(--border); background: var(--card);
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  font-size: 16px; transition: var(--tr);
+}
+.theme-toggle:hover { border-color: var(--c); transform: rotate(20deg); }
+
+/* ── SCREENS ── */
+.screen { display: none; }
+.screen.active { display: flex; }
+
+/* ══════════════════════════════════
+   START SCREEN
+══════════════════════════════════ */
+#startScreen {
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 80px 24px 40px;
+  text-align: center;
+}
+.start-icon {
+  width: 90px; height: 90px; border-radius: 24px;
+  background: linear-gradient(135deg, var(--c), var(--c-lite));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 40px; margin: 0 auto 28px;
+  box-shadow: 0 12px 40px var(--c-glow);
+  animation: floatIcon 3s ease-in-out infinite;
+}
+@keyframes floatIcon {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+.start-title {
+  font-size: clamp(28px,5vw,44px); font-weight: 900; color: var(--text);
+  line-height: 1.15; margin-bottom: 12px;
+}
+.start-title span { color: var(--c); }
+.start-sub {
+  font-size: 15px; color: var(--text2); line-height: 1.7;
+  max-width: 400px; margin: 0 auto 36px;
+}
+.start-meta {
+  display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 44px;
+}
+.meta-pill {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 20px; border-radius: 12px;
+  background: var(--card); border: 1px solid var(--border);
+  font-size: 14px; font-weight: 700; color: var(--text2);
+}
+.meta-pill strong { color: var(--c); font-size: 18px; }
+.btn-start {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 44px; border-radius: 14px;
+  background: linear-gradient(135deg, var(--c), var(--c-lite));
+  color: #fff; font-size: 17px; font-weight: 900;
+  border: none; cursor: pointer;
+  box-shadow: 0 8px 28px var(--c-glow);
+  transition: var(--tr); font-family: 'Cairo',sans-serif;
+}
+.btn-start:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 14px 40px var(--c-glow); }
+
+/* ══════════════════════════════════
+   QUIZ SCREEN
+══════════════════════════════════ */
+#quizScreen {
+  min-height: 100vh;
+  flex-direction: column;
+  padding: 80px 0 40px;
+}
+.quiz-wrap {
+  flex: 1; max-width: 680px; width: 100%;
+  margin: 0 auto; padding: 32px 24px;
+  display: flex; flex-direction: column; gap: 24px;
+}
+
+/* progress */
+.quiz-progress-row {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 14px;
+}
+.progress-track {
+  flex: 1; height: 6px; border-radius: 6px;
+  background: var(--bg2); overflow: hidden;
+}
+.progress-fill {
+  height: 100%; border-radius: 6px;
+  background: linear-gradient(90deg, var(--c), var(--c-lite));
+  transition: width .5s cubic-bezier(0.4,0,0.2,1);
+}
+.progress-label {
+  font-size: 13px; font-weight: 800; color: var(--c);
+  white-space: nowrap;
+}
+
+/* question card */
+.q-card {
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  padding: 32px 28px;
+  box-shadow: 0 4px 24px rgba(230,126,34,0.08);
+  animation: slideIn .35s ease;
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.q-num {
+  font-size: 11px; font-weight: 800; letter-spacing: 2px;
+  color: var(--c); text-transform: uppercase; margin-bottom: 14px;
+}
+.q-text {
+  font-size: clamp(16px,2.5vw,20px); font-weight: 700;
+  color: var(--text); line-height: 1.6;
+}
+
+/* options */
+.options-list {
+  display: flex; flex-direction: column; gap: 12px;
+  margin-top: 28px;
+}
+.opt-btn {
+  display: flex; align-items: center; gap: 14px;
+  padding: 15px 18px; border-radius: 13px;
+  border: 1.5px solid var(--border);
+  background: var(--bg);
+  cursor: pointer; text-align: left;
+  transition: var(--tr); font-family: 'Cairo',sans-serif;
+  font-size: 15px; font-weight: 600; color: var(--text);
+  width: 100%;
+}
+.opt-btn:hover:not(:disabled) {
+  border-color: var(--c);
+  background: var(--c-soft);
+  transform: translateX(3px);
+}
+.opt-letter {
+  width: 34px; height: 34px; flex-shrink: 0;
+  border-radius: 50%; border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 900; color: var(--text3);
+  transition: var(--tr); background: var(--card);
+}
+.opt-btn:hover:not(:disabled) .opt-letter {
+  border-color: var(--c); color: var(--c); background: rgba(230,126,34,0.1);
+}
+
+/* states */
+.opt-btn.correct {
+  border-color: var(--green) !important;
+  background: rgba(39,174,96,0.08) !important;
+  color: var(--green);
+}
+.opt-btn.correct .opt-letter {
+  background: var(--green); border-color: var(--green);
+  color: #fff;
+}
+.opt-btn.wrong {
+  border-color: var(--red) !important;
+  background: rgba(231,76,60,0.08) !important;
+  color: var(--red);
+}
+.opt-btn.wrong .opt-letter {
+  background: var(--red); border-color: var(--red);
+  color: #fff;
+}
+.opt-btn:disabled { cursor: not-allowed; }
+
+/* feedback */
+.feedback-box {
+  display: none;
+  align-items: center; gap: 12px;
+  padding: 14px 18px; border-radius: 12px;
+  font-size: 14px; font-weight: 700;
+  margin-top: 16px;
+  animation: fadeIn .3s ease;
+}
+@keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+.feedback-box.show { display: flex; }
+.feedback-box.correct-fb {
+  background: rgba(39,174,96,0.1);
+  border: 1px solid rgba(39,174,96,0.25);
+  color: var(--green);
+}
+.feedback-box.wrong-fb {
+  background: rgba(231,76,60,0.1);
+  border: 1px solid rgba(231,76,60,0.25);
+  color: var(--red);
+}
+.feedback-icon { font-size: 20px; }
+
+/* nav buttons */
+.quiz-nav {
+  display: flex; gap: 12px; justify-content: space-between; align-items: center;
+}
+.btn-nav {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 26px; border-radius: 12px;
+  font-size: 14px; font-weight: 800;
+  border: none; cursor: pointer;
+  font-family: 'Cairo',sans-serif;
+  transition: var(--tr);
+}
+.btn-skip {
+  background: var(--bg2); color: var(--text2);
+  border: 1px solid var(--border);
+}
+.btn-skip:hover { background: var(--border); }
+.btn-next {
+  background: linear-gradient(135deg, var(--c), var(--c-lite));
+  color: #fff;
+  box-shadow: 0 4px 16px var(--c-glow);
+}
+.btn-next:hover { transform: translateY(-2px); box-shadow: 0 8px 24px var(--c-glow); }
+.btn-next:disabled { opacity: .45; pointer-events: none; }
+
+/* ══════════════════════════════════
+   RESULT SCREEN
+══════════════════════════════════ */
+#resultScreen {
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 80px 24px 40px;
+  text-align: center;
+}
+.result-circle {
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  margin: 0 auto 28px;
+  position: relative;
+}
+.result-circle svg {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  transform: rotate(-90deg);
+}
+.result-circle svg circle {
+  fill: none; stroke-width: 8;
+  stroke-linecap: round;
+}
+.circle-bg  { stroke: var(--bg2); }
+.circle-fill { stroke: var(--c); transition: stroke-dashoffset 1.2s cubic-bezier(0.4,0,0.2,1); }
+.result-pct {
+  font-size: 36px; font-weight: 900; color: var(--text);
+  position: relative; z-index: 1;
+}
+.result-pct small { font-size: 14px; color: var(--text3); display: block; }
+
+.result-emoji { font-size: 56px; margin-bottom: 16px; animation: bounce .6s ease; }
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
+.result-title { font-size: 26px; font-weight: 900; color: var(--text); margin-bottom: 8px; }
+.result-sub { font-size: 15px; color: var(--text2); margin-bottom: 36px; }
+
+.result-stats {
+  display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+.rstat {
+  padding: 14px 22px; border-radius: 14px;
+  background: var(--card); border: 1px solid var(--border);
+  min-width: 110px;
+}
+.rstat .rv { font-size: 26px; font-weight: 900; }
+.rstat .rl { font-size: 12px; color: var(--text3); margin-top: 2px; }
+.rstat.correct-s .rv { color: var(--green); }
+.rstat.wrong-s   .rv { color: var(--red); }
+.rstat.skip-s    .rv { color: var(--text3); }
+
+.result-actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.btn-retry {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 14px 32px; border-radius: 12px;
+  background: linear-gradient(135deg, var(--c), var(--c-lite));
+  color: #fff; font-size: 15px; font-weight: 900;
+  border: none; cursor: pointer; font-family: 'Cairo',sans-serif;
+  box-shadow: 0 6px 22px var(--c-glow); transition: var(--tr);
+}
+.btn-retry:hover { transform: translateY(-3px); }
+.btn-review {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 14px 28px; border-radius: 12px;
+  background: var(--card); color: var(--text);
+  font-size: 15px; font-weight: 700;
+  border: 1.5px solid var(--border); cursor: pointer;
+  font-family: 'Cairo',sans-serif; transition: var(--tr);
+}
+.btn-review:hover { border-color: var(--c); color: var(--c); }
+
+/* ── REVIEW MODE ── */
+#reviewScreen {
+  min-height: 100vh;
+  flex-direction: column;
+  padding: 80px 0 60px;
+}
+.review-wrap {
+  max-width: 680px; width: 100%;
+  margin: 0 auto; padding: 32px 24px;
+  display: flex; flex-direction: column; gap: 18px;
+}
+.review-header {
+  text-align: center; margin-bottom: 10px;
+}
+.review-header h2 { font-size: 22px; font-weight: 900; color: var(--text); }
+.review-header p  { font-size: 13px; color: var(--text3); margin-top: 4px; }
+
+.review-card {
+  background: var(--card);
+  border-radius: 16px;
+  border: 1.5px solid var(--border);
+  overflow: hidden;
+}
+.review-card-top {
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--border);
+}
+.review-q-label {
+  font-size: 10px; font-weight: 800; letter-spacing: 2px;
+  color: var(--text3); margin-bottom: 8px;
+}
+.review-q-text { font-size: 15px; font-weight: 700; color: var(--text); line-height: 1.55; }
+.review-opts { padding: 14px 22px; display: flex; flex-direction: column; gap: 8px; }
+.review-opt {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px; border-radius: 10px;
+  font-size: 13px; font-weight: 600; color: var(--text2);
+  background: var(--bg);
+}
+.review-opt.is-correct {
+  background: rgba(39,174,96,0.1);
+  color: var(--green); font-weight: 800;
+}
+.review-opt.is-wrong {
+  background: rgba(231,76,60,0.1);
+  color: var(--red);
+}
+.review-dot {
+  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  background: var(--border);
+}
+.review-opt.is-correct .review-dot { background: var(--green); }
+.review-opt.is-wrong   .review-dot { background: var(--red); }
+.review-status {
+  display: flex; align-items: center; gap: 5px;
+  padding: 3px 10px; border-radius: 50px;
+  font-size: 10px; font-weight: 800; margin-top: 10px;
+  width: fit-content;
+}
+.status-correct { background: rgba(39,174,96,0.12); color: var(--green); }
+.status-wrong   { background: rgba(231,76,60,0.12);  color: var(--red); }
+.status-skip    { background: var(--bg2); color: var(--text3); }
+
+.btn-back-result {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 13px 28px; border-radius: 12px;
+  background: var(--card); color: var(--text);
+  font-size: 14px; font-weight: 700;
+  border: 1.5px solid var(--border); cursor: pointer;
+  font-family: 'Cairo',sans-serif; transition: var(--tr);
+  margin-top: 8px; align-self: center;
+}
+.btn-back-result:hover { border-color: var(--c); color: var(--c); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 540px) {
+  nav { padding: 0 16px; }
+  .quiz-wrap, .review-wrap { padding: 24px 16px; }
+  .q-card { padding: 22px 18px; }
+  .opt-btn { padding: 12px 14px; font-size: 14px; }
+  .result-stats { gap: 10px; }
+  .rstat { min-width: 90px; padding: 12px 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://gaith-team.github.io/exam/level1/health-assessment/index.html/" class="nav-back">← Back</a>
+  <div class="nav-center">
+    <div class="nav-pill">📝Ghaith team</div>
+  </div>
+  <button class="theme-toggle" id="themeBtn">🌙</button>
+</nav>
+
+<!-- ══ START SCREEN ══ -->
+<div class="screen active" id="startScreen">
+  <div class="start-icon">📝</div>
+  <h1 class="start-title">Revision<span id="quizTitleDisplay"></span></h1>
+  <p class="start-sub" id="startDesc">Test your knowledge — read each question and choose the correct answer</p>
+  <div class="start-meta">
+    <div class="meta-pill"><strong id="totalQDisplay">0</strong> Questions</div>
+    <div class="meta-pill">⏱ No time limit</div>
+    <div class="meta-pill">🎯 Multiple choice</div>
+  </div>
+  <button class="btn-start" onclick="startQuiz()">🚀 Start Quiz</button>
+</div>
+
+<!-- ══ QUIZ SCREEN ══ -->
+<div class="screen" id="quizScreen">
+  <div class="quiz-wrap">
+
+    <div class="quiz-progress-row">
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      </div>
+      <div class="progress-label" id="progressLabel">1 / 1</div>
+    </div>
+
+    <div class="q-card" id="qCard">
+      <div class="q-num" id="qNum">QUESTION 1</div>
+      <div class="q-text" id="qText"></div>
+      <div class="options-list" id="optsList"></div>
+      <div class="feedback-box" id="feedbackBox">
+        <span class="feedback-icon" id="feedbackIcon"></span>
+        <span id="feedbackText"></span>
+      </div>
+    </div>
+
+    <div class="quiz-nav">
+      <button class="btn-nav btn-skip" onclick="skipQuestion()">→ Skip</button>
+      <button class="btn-nav btn-next" id="btnNext" onclick="nextQuestion()" disabled>
+        Next →
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ RESULT SCREEN ══ -->
+<div class="screen" id="resultScreen">
+  <div class="result-emoji" id="resultEmoji">🎉</div>
+
+  <div class="result-circle" id="resultCircle">
+    <svg viewBox="0 0 140 140">
+      <circle class="circle-bg"   cx="70" cy="70" r="62"/>
+      <circle class="circle-fill" cx="70" cy="70" r="62" id="circleArc"
+              stroke-dasharray="389.6"
+              stroke-dashoffset="389.6"/>
+    </svg>
+    <div class="result-pct">
+      <span id="pctNum">0</span>%
+      <small>Score</small>
+    </div>
+  </div>
+
+  <h2 class="result-title" id="resultTitle">Well done!</h2>
+  <p class="result-sub" id="resultSub">You have completed the quiz</p>
+
+  <div class="result-stats">
+    <div class="rstat correct-s">
+      <div class="rv" id="rCorrect">0</div>
+      <div class="rl">✅ Correct</div>
+    </div>
+    <div class="rstat wrong-s">
+      <div class="rv" id="rWrong">0</div>
+      <div class="rl">❌ Wrong</div>
+    </div>
+    <div class="rstat skip-s">
+      <div class="rv" id="rSkip">0</div>
+      <div class="rl">⏭ Skipped</div>
+    </div>
+  </div>
+
+  <div class="result-actions">
+    <button class="btn-retry" onclick="retryQuiz()">🔄 Try Again</button>
+    <button class="btn-review" onclick="showReview()">📋 Review Answers</button>
+  </div>
+</div>
+
+<!-- ══ REVIEW SCREEN ══ -->
+<div class="screen" id="reviewScreen">
+  <div class="review-wrap">
+    <div class="review-header">
+      <h2>📋 Answer Review</h2>
+      <p>Correct answers in green — your wrong answers in red</p>
+    </div>
+    <div id="reviewList"></div>
+    <button class="btn-back-result" onclick="showResult()">← Back to Results</button>
+  </div>
+</div>
+
+<script>
+const QUIZ_TITLE = "OSCE ";
+const QUIZ_DESC  = "أسئله أوسكي شاملة علي علي كل البروسيجرات  ";
+
+const QUESTIONS = [
+  // ── ARTERIAL BLOOD GAS / ARTERIAL PUNCTURE ──────────────── EASY
+  {t:"What is the primary purpose of arterial puncture?",o:["To administer medications directly into arterial circulation","To aspirate arterial blood for ABG analysis","To measure central venous pressure","To obtain venous blood samples"],a:1,diff:"easy",topic:"ABG"},
+  {t:"Which artery is the most commonly used site for ABG sampling?",o:["Femoral artery","Brachial artery","Radial artery","Carotid artery"],a:2,diff:"easy",topic:"ABG"},
+  {t:"What is the normal arterial blood pH range?",o:["7.25 – 7.35","7.35 – 7.45","7.45 – 7.55","7.20 – 7.30"],a:1,diff:"easy",topic:"ABG"},
+  {t:"What is the normal PaCO₂ range?",o:["25 – 35 mmHg","45 – 55 mmHg","35 – 45 mmHg","60 – 80 mmHg"],a:2,diff:"easy",topic:"ABG"},
+  {t:"What is the normal HCO₃ range?",o:["15 – 20 mEq/L","22 – 26 mEq/L","30 – 35 mEq/L","10 – 15 mEq/L"],a:1,diff:"easy",topic:"ABG"},
+  {t:"What is the normal PaO₂ range?",o:["60 – 70 mmHg","70 – 80 mmHg","80 – 100 mmHg","100 – 120 mmHg"],a:2,diff:"easy",topic:"ABG"},
+  {t:"What is the normal SaO₂ (oxygen saturation) range?",o:["85 – 90%","90 – 95%","95 – 99%","99 – 100%"],a:2,diff:"easy",topic:"ABG"},
+  {t:"The Allen test is performed to assess what before radial artery puncture?",o:["Venous patency","Nerve function in the hand","Collateral blood circulation","Arterial blood pressure"],a:2,diff:"easy",topic:"ABG"},
+  {t:"A blood pH value less than 7.35 indicates:",o:["Alkalosis","Acidosis","Normal range","Compensated disorder"],a:1,diff:"easy",topic:"ABG"},
+  {t:"Which of the following is an ABSOLUTE contraindication for ABG sampling?",o:["Patient anxiety","Patient on anticoagulant therapy","Abnormal modified Allen test","Obesity"],a:2,diff:"easy",topic:"ABG"},
+  // MEDIUM
+  {t:"PaCO₂ greater than 45 mmHg indicates:",o:["Metabolic alkalosis","Respiratory alkalosis","Metabolic acidosis","Respiratory acidosis"],a:3,diff:"medium",topic:"ABG"},
+  {t:"HCO₃ less than 22 mEq/L indicates:",o:["Metabolic alkalosis","Respiratory acidosis","Metabolic acidosis","Respiratory alkalosis"],a:2,diff:"medium",topic:"ABG"},
+  {t:"Which of the following is a sampling error that can produce inaccurate ABG results?",o:["Using a 20-gauge needle","Presence of air bubbles in the sample","Using the radial artery site","Performing the Allen test first"],a:1,diff:"medium",topic:"ABG"},
+  {t:"At approximately what angle is the needle inserted for radial artery puncture?",o:["15 degrees","30 degrees","45 degrees","90 degrees"],a:2,diff:"medium",topic:"ABG"},
+  {t:"How long should pressure be applied to the puncture site after ABG collection in a patient without bleeding disorders?",o:["1 – 2 minutes","3 – 4 minutes","5 minutes","10 – 15 minutes"],a:2,diff:"medium",topic:"ABG"},
+  {t:"ABG samples must be analyzed within how many minutes to ensure accuracy?",o:["5 minutes","10 minutes","20 minutes","30 minutes"],a:1,diff:"medium",topic:"ABG"},
+  {t:"A PaO₂ less than 60 mmHg is associated with:",o:["Normal oxygenation","Hypoxemia","Hyperoxemia","Metabolic alkalosis only"],a:1,diff:"medium",topic:"ABG"},
+  {t:"Which gauge needle is typically used for ABG sampling?",o:["14 – 16 gauge","18 – 19 gauge","20 – 25 gauge","26 – 28 gauge"],a:2,diff:"medium",topic:"ABG"},
+  {t:"What is the purpose of heparin in the ABG syringe?",o:["Enhance blood flow","Prevent clotting of the sample","Maintain pH of the sample","Prevent hemolysis"],a:1,diff:"medium",topic:"ABG"},
+  {t:"Which ABG result indicates respiratory alkalosis?",o:["pH 7.29, PaCO₂ 55, HCO₃ 25","pH 7.49, PaCO₂ 28, HCO₃ 26","pH 7.21, HCO₃ 15, PaCO₂ 40","pH 7.50, HCO₃ 34, PaCO₂ 41"],a:1,diff:"medium",topic:"ABG"},
+  {t:"Which ABG result indicates metabolic acidosis?",o:["pH 7.49, PaCO₂ 28, HCO₃ 26","pH 7.29, PaCO₂ 55, HCO₃ 25","pH 7.21, HCO₃ 15, PaCO₂ 40","pH 7.50, HCO₃ 34, PaCO₂ 41"],a:2,diff:"medium",topic:"ABG"},
+  {t:"The femoral artery is considered the least desirable ABG site primarily because:",o:["It is too superficial","It has poor collateral circulation","It is too small to puncture","It is inaccessible in emergencies"],a:1,diff:"medium",topic:"ABG"},
+  {t:"Which of the following is a RELATIVE contraindication for ABG sampling?",o:["Arteriovenous fistula at puncture site","Local infection at puncture site","Severe coagulopathy","Abnormal Allen test"],a:2,diff:"medium",topic:"ABG"},
+  {t:"The brachial artery is chosen for ABG sampling when:",o:["Femoral access is preferred","The radial arteries are not accessible","The patient is in cardiac arrest","The Allen test is positive"],a:1,diff:"medium",topic:"ABG"},
+  {t:"Which of the following causes inaccurate ABG results?",o:["Using the radial artery","Using appropriate gauge needle","Delay in specimen transportation","Performing the Allen test before puncture"],a:2,diff:"medium",topic:"ABG"},
+  {t:"For ABG puncture at the brachial artery, the needle is inserted at approximately what angle?",o:["30 degrees","45 degrees","60 degrees","90 degrees"],a:2,diff:"medium",topic:"ABG"},
+  {t:"For ABG puncture at the femoral artery, the needle is inserted at approximately what angle?",o:["30 degrees","45 degrees","60 degrees","90 degrees"],a:3,diff:"medium",topic:"ABG"},
+  {t:"Which ABG result indicates metabolic alkalosis?",o:["pH 7.29, PaCO₂ 55, HCO₃ 25","pH 7.21, HCO₃ 15, PaCO₂ 40","pH 7.50, HCO₃ 34, PaCO₂ 41","pH 7.49, PaCO₂ 28, HCO₃ 26"],a:2,diff:"medium",topic:"ABG"},
+  {t:"What must the nurse do after collecting the ABG sample to prevent clotting and air exposure?",o:["Refrigerate sample immediately","Seal the syringe and gently roll between hands","Centrifuge the sample","Leave sample at room temperature"],a:1,diff:"medium",topic:"ABG"},
+  {t:"Radial artery is preferred for ABG over brachial artery because:",o:["It has a larger diameter","It is deeper and easier to puncture","It has collateral blood circulation and less hematoma risk","It has no risk of nerve injury"],a:2,diff:"medium",topic:"ABG"},
+  // HARD
+  {t:"In PARTIAL respiratory compensation, what describes the ABG pattern?",o:["pH normal; PaCO₂ and HCO₃ moving in same direction","pH abnormal; PaCO₂ and HCO₃ moving in same direction","pH normal; PaCO₂ and HCO₃ moving in opposite directions","pH abnormal; PaCO₂ normal; HCO₃ elevated"],a:1,diff:"hard",topic:"ABG"},
+  {t:"ABG result: pH 7.31, HCO₃ 14, PaCO₂ 25. What is the acid-base disturbance?",o:["Respiratory acidosis with partial metabolic compensation","Metabolic acidosis with partial respiratory compensation","Respiratory alkalosis","Metabolic alkalosis"],a:1,diff:"hard",topic:"ABG"},
+  {t:"ABG result: pH 7.35, HCO₃ 44, PaCO₂ 57. What is this condition?",o:["Metabolic alkalosis with respiratory compensation","Respiratory acidosis with complete metabolic compensation","Mixed respiratory and metabolic alkalosis","Respiratory alkalosis with metabolic compensation"],a:1,diff:"hard",topic:"ABG"},
+  {t:"Which complication of arterial puncture is most strongly associated with the femoral artery site?",o:["Radial nerve damage","Hematoma formation","Thumb ischemia","Thrombophlebitis"],a:1,diff:"hard",topic:"ABG"},
+  {t:"During the Allen test, when pressure over the ulnar artery is released, what should occur?",o:["The hand remains blanched","The radial pulse disappears","The hand flushes and regains color within 5–10 seconds","The hand turns cyanotic"],a:2,diff:"hard",topic:"ABG"},
+  // ── CVC ──────────────────────────────────────────────── EASY
+  {t:"A Central Venous Catheter (CVC) is inserted into which type of vessel?",o:["A peripheral vein","A large central vein (e.g., internal jugular, subclavian, femoral)","An artery","A lymphatic vessel"],a:1,diff:"easy",topic:"CVC"},
+  {t:"What does PICC stand for?",o:["Peripherally Inserted Cardiac Catheter","Percutaneous Indwelling Central Catheter","Peripherally Inserted Central Catheter","Partially Implanted Central Catheter"],a:2,diff:"easy",topic:"CVC"},
+  {t:"What is the normal CVP range measured at the mid-axillary line?",o:["0 – 5 cm H₂O","5 – 12 cm H₂O","12 – 20 cm H₂O","20 – 25 cm H₂O"],a:1,diff:"easy",topic:"CVC"},
+  {t:"CVP less than 5 cm H₂O indicates:",o:["Hypervolemia","Cardiac tamponade","Hypovolemia","Heart failure"],a:2,diff:"easy",topic:"CVC"},
+  {t:"CVP greater than 12 cm H₂O indicates:",o:["Dehydration","Hypovolemia","Normal cardiac output","Hypervolemia"],a:3,diff:"easy",topic:"CVC"},
+  {t:"Which of the following is an ABSOLUTE contraindication for CVC insertion?",o:["Coagulopathy","Morbid obesity","Active skin infection at the potential insertion site","Thrombocytopenia"],a:2,diff:"easy",topic:"CVC"},
+  {t:"What patient position is used during CVC insertion to prevent air embolism and dilate neck veins?",o:["Semi-Fowler's position","Lateral decubitus position","Trendelenburg position","Prone position"],a:2,diff:"easy",topic:"CVC"},
+  {t:"What is the purpose of flushing a CVC with saline or heparin?",o:["To prevent infection at the insertion site","To confirm correct placement","To prevent catheter blockage","To measure CVP"],a:2,diff:"easy",topic:"CVC"},
+  {t:"After internal jugular or subclavian CVC insertion, what imaging confirms placement?",o:["Ultrasound at the bedside","CT scan of the chest","MRI of the chest","Chest X-ray"],a:3,diff:"easy",topic:"CVC"},
+  {t:"The normal CVP range measured at the sternal angle is:",o:["0 – 5 cm H₂O","5 – 12 cm H₂O","12 – 20 cm H₂O","20 – 30 cm H₂O"],a:0,diff:"easy",topic:"CVC"},
+  // MEDIUM
+  {t:"Which of the following INCREASES CVP?",o:["Hypovolemia","Deep inhalation","Heart failure","Distributive shock"],a:2,diff:"medium",topic:"CVC"},
+  {t:"Which of the following DECREASES CVP?",o:["Cardiac tamponade","Tension pneumothorax","Hypervolemia","Hypovolemia"],a:3,diff:"medium",topic:"CVC"},
+  {t:"The zero reference point for CVP measurement is:",o:["The sternal notch","The mid-axillary line at the 4th intercostal space","The apex of the heart","The clavicle"],a:1,diff:"medium",topic:"CVC"},
+  {t:"During CVC dressing change, the insertion site is cleaned in what manner?",o:["Linear strokes top-down","Random pattern","Circular motion from inside outward","Circular motion from outside inward"],a:2,diff:"medium",topic:"CVC"},
+  {t:"Which CVC complication is caused by air entering during venous puncture or catheter removal?",o:["Thrombosis","Air embolism","Hematoma","Catheter-related bacteremia"],a:1,diff:"medium",topic:"CVC"},
+  {t:"To safely remove a CVC, the patient is asked to perform:",o:["Forced inspiration with mouth open","Deep inhalation and hold","Valsalva maneuver (forced expiration with mouth closed)","Rapid shallow breathing"],a:2,diff:"medium",topic:"CVC"},
+  {t:"After CVC removal, an airtight dressing should be applied for:",o:["6 hours","12 hours","24 hours","48 hours"],a:2,diff:"medium",topic:"CVC"},
+  {t:"The correct tip position for a properly inserted CVC is:",o:["Right atrium","Superior vena cava near junction of right atrium","Left subclavian vein","Internal jugular vein"],a:1,diff:"medium",topic:"CVC"},
+  {t:"Which type of CVC is entirely placed under the skin and is also called Port-a-Cath?",o:["Tunnelled CVC","PICC line","Subcutaneous port","Peripheral IV"],a:2,diff:"medium",topic:"CVC"},
+  {t:"Which pre-procedural CVC complication is caused by guidewire irritation of the atria or ventricles?",o:["Thrombosis","Arrhythmia","Pneumothorax","Infection"],a:1,diff:"medium",topic:"CVC"},
+  // HARD
+  {t:"A patient has CVP 3 cm H₂O, tachycardia, hypotension, and dry mucous membranes. What does this indicate?",o:["Cardiac tamponade","Pulmonary embolism","Hypovolemia","Tension pneumothorax"],a:2,diff:"hard",topic:"CVC"},
+  {t:"Why is the patient positioned in Trendelenburg during CVC removal?",o:["To increase venous pressure and prevent air aspiration","To promote patient comfort","To facilitate drainage of the catheter","To reduce risk of bleeding"],a:0,diff:"hard",topic:"CVC"},
+  {t:"A nurse cannot flush one lumen of a multi-lumen CVC freely. What is the most likely cause?",o:["Infection at the insertion site","Air embolism","Catheter occlusion or thrombosis","Incorrect catheter placement"],a:2,diff:"hard",topic:"CVC"},
+  {t:"During CVC insertion, the clinician's head is turned to the right. The most likely insertion site is:",o:["Right subclavian vein","Right femoral vein","Left internal jugular vein","Left subclavian vein"],a:2,diff:"hard",topic:"CVC"},
+  {t:"Which factor is a RELATIVE contraindication for CVC placement?",o:["Active infection at the proposed site","Vascular injury proximal to insertion site","Coagulopathy","Anatomical distortion at site"],a:2,diff:"hard",topic:"CVC"},
+  // ── ET INTUBATION & SUCTION ─────────────────────────── EASY
+  {t:"Endotracheal intubation involves placement of a tube through:",o:["The nose only","The mouth or nose into the trachea","The throat into the esophagus","A surgical incision in the chest wall"],a:1,diff:"easy",topic:"ETT"},
+  {t:"What material is an endotracheal tube (ETT) typically made of?",o:["Latex rubber","Silicone","Stainless steel","Polyvinyl chloride (PVC)"],a:3,diff:"easy",topic:"ETT"},
+  {t:"The standard ETT internal diameter for adult MALES is:",o:["6 – 6.5 mm ID","7 – 7.5 mm ID","8 – 8.5 mm ID","9 – 9.5 mm ID"],a:2,diff:"easy",topic:"ETT"},
+  {t:"The standard ETT internal diameter for adult FEMALES is:",o:["6 – 6.5 mm ID","7 – 7.5 mm ID","8 – 8.5 mm ID","9 – 9.5 mm ID"],a:1,diff:"easy",topic:"ETT"},
+  {t:"Endotracheal suctioning is defined as:",o:["Insertion of a tube into the trachea","Removal of secretions from the tracheobronchial tree through an ETT","Inflation of the ETT cuff","Checking ETT tube placement"],a:1,diff:"easy",topic:"ETT"},
+  {t:"What suction pressure is appropriate for an adult using a WALL suction unit?",o:["50 – 80 mmHg","100 – 120 mmHg","150 – 200 mmHg","200 – 250 mmHg"],a:1,diff:"easy",topic:"ETT"},
+  {t:"How long should each suction pass last?",o:["5 – 10 seconds","10 – 15 seconds","20 – 25 seconds","30 seconds"],a:1,diff:"easy",topic:"ETT"},
+  {t:"Which of the following is an INDICATION for endotracheal intubation?",o:["Stable spontaneous breathing","Normal SpO₂ on room air","Worsening respiratory failure despite oxygen therapy","Patient cooperation with breathing exercises"],a:2,diff:"easy",topic:"ETT"},
+  // MEDIUM
+  {t:"Before ET intubation, the patient's neck is positioned how?",o:["Flexed forward","Turned to the side","Extended/hyperextended with pillow under shoulders","Flat without any support"],a:2,diff:"medium",topic:"ETT"},
+  {t:"After ETT insertion, what is the FIRST step to confirm placement?",o:["Order a chest X-ray","Attach bag valve mask and observe for bilateral chest rise","Attach the ventilator","Check oxygen saturation alone"],a:1,diff:"medium",topic:"ETT"},
+  {t:"The formula for calculating French suction catheter size for an ETT is:",o:["Fr = (ETT size × 2) – 1","Fr = (ETT size – 1) × 2","Fr = ETT size + 2","Fr = ETT size ÷ 2"],a:1,diff:"medium",topic:"ETT"},
+  {t:"For an ETT size 8, the correct suction catheter size is:",o:["12 Fr","14 Fr","16 Fr","18 Fr"],a:1,diff:"medium",topic:"ETT"},
+  {t:"The Sellick maneuver involves applying pressure to the:",o:["Thyroid cartilage","Tracheal rings","Cricoid cartilage","Hyoid bone"],a:2,diff:"medium",topic:"ETT"},
+  {t:"Hearing air sounds over the stomach during ETT ventilation indicates:",o:["Correct tracheal placement","Esophageal intubation","Right mainstem intubation","Tube positioned at the carina"],a:1,diff:"medium",topic:"ETT"},
+  {t:"The recommended ETT cuff pressure is:",o:["10 – 15 mmHg","20 – 25 mmHg","30 – 35 mmHg","40 – 50 mmHg"],a:1,diff:"medium",topic:"ETT"},
+  {t:"Open suction differs from closed suction in that it:",o:["Keeps patient connected to ventilator","Uses an in-line catheter","Requires disconnecting the patient from ventilation during suctioning","Allows continuous suctioning"],a:2,diff:"medium",topic:"ETT"},
+  {t:"Diminished or absent breath sounds in the LEFT lung after intubation suggests:",o:["Esophageal intubation","Carina stimulation","Right mainstem bronchus intubation","Bilateral lung inflation"],a:2,diff:"medium",topic:"ETT"},
+  {t:"The unconscious patient requiring ET suctioning should be placed in:",o:["Semi-Fowler's position","Lateral position facing the nurse","Prone position","Trendelenburg position"],a:1,diff:"medium",topic:"ETT"},
+  // HARD
+  {t:"A patient suddenly develops continuous coughing after intubation. This most likely indicates:",o:["The tube is in the right mainstem bronchus","The tube is stimulating the carina","The tube is in the esophagus","The cuff is over-inflated"],a:1,diff:"hard",topic:"ETT"},
+  {t:"Before ET suctioning, hyperventilation should be provided for at least:",o:["15 seconds","20 seconds","30 seconds","60 seconds"],a:2,diff:"hard",topic:"ETT"},
+  {t:"Which complication of ET intubation can result in ARDS?",o:["Esophageal intubation","Cuff overinflation","Aspiration of stomach contents","Right mainstem intubation"],a:2,diff:"hard",topic:"ETT"},
+  {t:"What is the maximum number of suction passes per suctioning episode?",o:["1","2","3","5"],a:2,diff:"hard",topic:"ETT"},
+  {t:"After oropharyngeal suctioning, can the nurse reinsert the same catheter into the ET tube?",o:["Yes, if the catheter appears clean","Yes, after flushing with sterile saline","No – catheter must NOT re-enter the ETT after mouth suctioning","Yes, if suction pressure is reduced"],a:2,diff:"hard",topic:"ETT"},
+  {t:"The oral ETT should be repositioned to the opposite side of the mouth:",o:["Every 6 hours","Every 12 hours","Daily","Every 3 days"],a:2,diff:"hard",topic:"ETT"},
+  // ── CPR & DEFIBRILLATION ─────────────────────────────── EASY
+  {t:"The correct CPR sequence according to AHA guidelines is:",o:["A–B–C (Airway, Breathing, Compressions)","B–C–A (Breathing, Compressions, Airway)","C–A–B (Compressions, Airway, Breathing)","C–B–A (Compressions, Breathing, Airway)"],a:2,diff:"easy",topic:"CPR"},
+  {t:"Cardiac arrest is defined as:",o:["Slow, weak heart rate","Sudden cessation of heartbeat and effective circulation","An irregular heartbeat requiring medication","Increased heart rate above 200 bpm"],a:1,diff:"easy",topic:"CPR"},
+  {t:"Chest compressions in adults should depress the sternum at least:",o:["1 inch (2.5 cm)","1.5 inches (3.8 cm)","2 inches (5 cm)","3 inches (7.5 cm)"],a:2,diff:"easy",topic:"CPR"},
+  {t:"The recommended rate of chest compressions during CPR is:",o:["60 – 80 per minute","80 – 100 per minute","100 – 120 per minute","120 – 140 per minute"],a:2,diff:"easy",topic:"CPR"},
+  {t:"The CPR compression-to-ventilation ratio for adults is:",o:["15:2","30:2","30:1","10:2"],a:1,diff:"easy",topic:"CPR"},
+  {t:"Which pulse is checked to assess circulation during CPR?",o:["Radial pulse","Brachial pulse","Carotid pulse","Femoral pulse"],a:2,diff:"easy",topic:"CPR"},
+  {t:"Defibrillation is primarily used to treat:",o:["Asystole","Bradycardia","Ventricular fibrillation","Heart block"],a:2,diff:"easy",topic:"CPR"},
+  {t:"BLS (Basic Life Support) is defined as:",o:["Life support WITH specialized equipment","Life support WITHOUT specialized equipment","Advanced airway management and IV drugs","Using a defibrillator only"],a:1,diff:"easy",topic:"CPR"},
+  // MEDIUM
+  {t:"All of the following are signs of cardiac arrest EXCEPT:",o:["Absence of carotid pulse","Loss of consciousness","Active breathing with normal rhythm and depth","Gray skin color"],a:2,diff:"medium",topic:"CPR"},
+  {t:"Without CPR, brain damage or death can occur within:",o:["1 – 2 minutes","3 – 5 minutes","10 minutes","15 minutes"],a:1,diff:"medium",topic:"CPR"},
+  {t:"After delivering one defibrillation shock, what should immediately follow?",o:["Check for pulse","Resume CPR for 2 minutes","Deliver a second shock","Assess blood pressure"],a:1,diff:"medium",topic:"CPR"},
+  {t:"The starting charge for a MONOPHASIC defibrillator is typically:",o:["100 joules","150 joules","200 joules","360 joules"],a:2,diff:"medium",topic:"CPR"},
+  {t:"Which of the following is a complication of CPR?",o:["Hypertension","Rib fracture","Bradycardia","Hyperglycemia"],a:1,diff:"medium",topic:"CPR"},
+  {t:"Which medication causes vasoconstriction and increases myocardial blood flow during cardiac arrest?",o:["Amiodarone","Lidocaine","Epinephrine","Atropine"],a:2,diff:"medium",topic:"CPR"},
+  {t:"Asystole (flat line on ECG) is classified as a:",o:["Shockable rhythm","Non-shockable rhythm","Normal sinus variant","Bradyarrhythmia"],a:1,diff:"medium",topic:"CPR"},
+  {t:"During mouth-to-mouth rescue breathing, the rescuer should:",o:["Leave nostrils open","Pinch the nostrils shut","Cover the nose and mouth simultaneously","Assess for blockage before breathing"],a:1,diff:"medium",topic:"CPR"},
+  {t:"During head-tilt chin-lift, two fingers are placed:",o:["On the patient's forehead","Under the bony part of the chin","On the throat","On the carotid artery"],a:1,diff:"medium",topic:"CPR"},
+  {t:"The most common complication of defibrillation is:",o:["Heart muscle damage","Blood clots","Abnormal heart rhythms","Skin burns from the paddles"],a:3,diff:"medium",topic:"CPR"},
+  // HARD
+  {t:"A biphasic defibrillator differs from monophasic in that it:",o:["Uses more electricity","Delivers a single electrical pulse only","Sends two currents — first one direction, then reverses","Is only used internally"],a:2,diff:"hard",topic:"CPR"},
+  {t:"The apex paddle is placed during defibrillation:",o:["Right subclavicular area near the clavicle","Left of the nipple in the midaxillary line","Center of the chest over the sternum","Between the shoulder blades"],a:1,diff:"hard",topic:"CPR"},
+  {t:"During defibrillation, oxygen should be:",o:["Increased to 100% FiO₂","Maintained at current levels","Turned off to avoid ignition risk","Switched to humidified oxygen"],a:2,diff:"hard",topic:"CPR"},
+  {t:"Amiodarone is used during cardiac arrest because it affects:",o:["Only the potassium channel","Sodium, calcium, and potassium channels","Adrenergic receptors causing vasoconstriction","The parasympathetic nervous system"],a:3,diff:"hard",topic:"CPR"},
+  {t:"If a patient has tension pneumothorax as the reversible cause of cardiac arrest, the intervention is:",o:["Give IV calcium chloride","Insert a sterile 14-gauge angiocath (needle decompression)","Administer epinephrine","Perform defibrillation immediately"],a:1,diff:"hard",topic:"CPR"},
+  {t:"Pulseless Electrical Activity (PEA) is:",o:["A shockable rhythm","A non-shockable rhythm","Equivalent to ventricular fibrillation","Treated with immediate defibrillation"],a:1,diff:"hard",topic:"CPR"},
+  // ── ECG ─────────────────────────────────────────────── EASY
+  {t:"An ECG (electrocardiography) is defined as:",o:["An invasive procedure measuring arterial pressure","A non-invasive procedure recording electrical activity of the heart","A blood test measuring cardiac enzymes","A procedure measuring oxygen saturation"],a:1,diff:"easy",topic:"ECG"},
+  {t:"A standard resting ECG records how many leads?",o:["6","8","10","12"],a:3,diff:"easy",topic:"ECG"},
+  {t:"Which limb lead wire is placed on the RIGHT ARM?",o:["Yellow","Black","Green","Red"],a:3,diff:"easy",topic:"ECG"},
+  {t:"Which limb lead wire is placed on the LEFT ARM?",o:["Red","Yellow","Black","Green"],a:1,diff:"easy",topic:"ECG"},
+  {t:"V1 electrode is placed at the:",o:["4th intercostal LEFT sternal border","5th intercostal midclavicular line","4th intercostal RIGHT sternal border","3rd intercostal left sternal border"],a:2,diff:"easy",topic:"ECG"},
+  {t:"The P wave on the ECG represents:",o:["Ventricular depolarization","Ventricular repolarization","Atrial depolarization","Atrial repolarization"],a:2,diff:"easy",topic:"ECG"},
+  {t:"A Holter monitor is used to:",o:["Record a 12-lead ECG during exercise","Record heart activity in the hospital for 1 hour","Monitor heart activity at home for 1 or more days","Assess coronary artery blood flow"],a:2,diff:"easy",topic:"ECG"},
+  // MEDIUM
+  {t:"The T wave on the ECG represents:",o:["Atrial depolarization","Ventricular depolarization","Atrial repolarization","Ventricular repolarization"],a:3,diff:"medium",topic:"ECG"},
+  {t:"Which ECG leads examine the INFERIOR surface of the heart?",o:["I, aVL","V1, V2","II, III, aVF","V5, V6"],a:2,diff:"medium",topic:"ECG"},
+  {t:"Which ECG leads examine the LATERAL wall of the heart?",o:["V1, V2","II, III, aVF","I, aVL, V5, V6","V3, V4"],a:2,diff:"medium",topic:"ECG"},
+  {t:"Which leads look at the ANTERIOR surface and right ventricle?",o:["I, II, III","V1 and V2","V5 and V6","aVL and aVF"],a:1,diff:"medium",topic:"ECG"},
+  {t:"The QRS complex on ECG represents:",o:["Atrial depolarization","Ventricular repolarization","Ventricular depolarization","AV nodal conduction delay"],a:2,diff:"medium",topic:"ECG"},
+  {t:"Which limb lead wire goes to the LEFT LEG?",o:["Red","Yellow","Black","Green"],a:3,diff:"medium",topic:"ECG"},
+  {t:"V4 electrode is placed at the:",o:["4th intercostal right sternal border","4th intercostal left sternal border","5th intercostal midclavicular line","Lateral V4 anterior axillary line"],a:2,diff:"medium",topic:"ECG"},
+  // HARD
+  {t:"Lead II is formed using:",o:["Right arm (negative) and left arm (positive)","Right arm (negative) and left leg (positive)","Left arm (negative) and left leg (positive)","Right arm (positive) and left leg (negative)"],a:1,diff:"hard",topic:"ECG"},
+  {t:"Lead I is formed using:",o:["Right arm (negative) and left arm (positive)","Right arm (negative) and left leg (positive)","Left arm (negative) and left leg (positive)","Right arm (positive) and left arm (negative)"],a:0,diff:"hard",topic:"ECG"},
+  {t:"Leads V3 and V4 look at which region of the heart?",o:["Lateral wall","Inferior wall","Anterior and septal regions","Right ventricle"],a:2,diff:"hard",topic:"ECG"},
+  // ── CHEST TUBE ───────────────────────────────────────── EASY
+  {t:"A chest tube is also known as a:",o:["Central venous catheter","Thoracostomy tube","Arterial line","Foley catheter"],a:1,diff:"easy",topic:"CHEST"},
+  {t:"The most commonly used chest tube size range in adults is:",o:["6 – 10 Fr","12 – 18 Fr","24 – 36 Fr","40 – 50 Fr"],a:2,diff:"easy",topic:"CHEST"},
+  {t:"Tiddling (fluctuation) in the water-seal chamber indicates:",o:["An air leak in the system","Tube blockage","The chest tube is patent and system is functional","Lung re-expansion is complete"],a:2,diff:"easy",topic:"CHEST"},
+  {t:"For removal of AIR (pneumothorax), a chest tube is placed:",o:["Low and posterior (5th–6th intercostal)","At the level of the diaphragm","High (2nd–3rd intercostal) and anterior","At the 7th intercostal space"],a:2,diff:"easy",topic:"CHEST"},
+  {t:"For drainage of FLUID (hemothorax), a chest tube is placed:",o:["High and anterior","Low (5th–6th intercostal) and posterior/lateral","At the 2nd–3rd intercostal space","At the suprasternal notch"],a:1,diff:"easy",topic:"CHEST"},
+  // MEDIUM
+  {t:"The water-seal chamber tube must be submerged to a depth of:",o:["1 cm","2 cm","5 cm","10 cm"],a:1,diff:"medium",topic:"CHEST"},
+  {t:"The typical wet suction control chamber level for adults is set at:",o:["10 cm H₂O","20 cm H₂O","30 cm H₂O","5 cm H₂O"],a:1,diff:"medium",topic:"CHEST"},
+  {t:"A sudden increase in chest tube drainage of more than how much in 1 hour should be reported to the physician?",o:["50 mL","100 mL","150 mL","250 mL"],a:3,diff:"medium",topic:"CHEST"},
+  {t:"In the water-seal chamber, the water level should:",o:["Remain absolutely still","Rise with exhalation and fall with inhalation","Rise with inhalation and fall with exhalation","Bubble continuously when suction is off"],a:2,diff:"medium",topic:"CHEST"},
+  {t:"For a patient with PNEUMOTHORAX, the appropriate therapeutic position is:",o:["High Fowler's position","Prone position","Trendelenburg position","Semi-Fowler's position"],a:3,diff:"medium",topic:"CHEST"},
+  {t:"Empyema refers to:",o:["Blood in the pleural space","Air in the pleural space","Pus in the pleural space","Lymphatic fluid in the pleural space"],a:2,diff:"medium",topic:"CHEST"},
+  {t:"Hemothorax refers to:",o:["Air in the pleural space","Lymph in the pleural space","Blood in the pleural space","Pus in the pleural space"],a:2,diff:"medium",topic:"CHEST"},
+  {t:"Pleurodesis refers to:",o:["Surgical removal of the lung","Insertion of chemicals to cause intentional pleural scarring","Drainage of air from the pleural space","Re-inflation of a collapsed lung"],a:1,diff:"medium",topic:"CHEST"},
+  {t:"Chylothorax refers to:",o:["Blood in the pleural space","Air in the pleural space","Pus in the pleural space","Lymphatic fluid in the pleural space"],a:3,diff:"medium",topic:"CHEST"},
+  {t:"Subcutaneous emphysema is detected by:",o:["Auscultating lung sounds","Palpating for crepitus or crackling under the skin","Observing tidal fluctuation in the chamber","Reviewing the chest X-ray only"],a:1,diff:"medium",topic:"CHEST"},
+  // HARD
+  {t:"Constant bubbling in the water-seal chamber with no bubbles in the suction control chamber indicates:",o:["Normal system function","Lung has fully expanded","An air leak in the drainage system","Tube obstruction"],a:2,diff:"hard",topic:"CHEST"},
+  {t:"When fluctuation in a chest tube drainage system STOPS, this could indicate:",o:["Worsening air leak","Infection at the insertion site","Lung has expanded OR tubing is obstructed","Excessive drainage volume"],a:2,diff:"hard",topic:"CHEST"},
+  {t:"Re-expansion pulmonary edema occurs when:",o:["Less than 500 mL drains in 30 minutes","More than 1–1.5 L of fluid drains in less than 30 minutes","Air enters the pleural space through the tube","Suction pressure is set too high"],a:1,diff:"hard",topic:"CHEST"},
+  {t:"In a single-bottle water-seal system, what is a major disadvantage?",o:["It cannot drain air","It cannot provide suction","Drainage raises fluid level, increasing resistance and eventually stopping drainage","It is too complex to set up"],a:2,diff:"hard",topic:"CHEST"},
+  {t:"During chest tube removal, the patient performs the Valsalva maneuver. This involves:",o:["Deep inhalation followed by fast exhalation","Taking a deep breath and holding it (or exhaling completely and holding it)","Normal breathing throughout the procedure","Rapid shallow breathing"],a:1,diff:"hard",topic:"CHEST"},
+  {t:"In a THREE-BOTTLE drainage system, the third bottle provides:",o:["Collection of drainage","Water seal","Suction control","Secondary water seal"],a:2,diff:"hard",topic:"CHEST"},
+  {t:"The radial artery is the most preferred site for arterial blood gas sampling.",o:["True","False"],a:0,diff:"easy",topic:"ABG"},
+  {t:"A blood pH greater than 7.45 indicates acidosis.",o:["True","False"],a:1,diff:"easy",topic:"ABG"},
+  {t:"The Allen test is performed to assess collateral circulation before radial artery puncture.",o:["True","False"],a:0,diff:"easy",topic:"ABG"},
+  {t:"Excessive heparin in the ABG syringe can alter the pH of the arterial sample.",o:["True","False"],a:0,diff:"medium",topic:"ABG"},
+  {t:"PaCO₂ less than 35 mmHg indicates respiratory acidosis.",o:["True","False"],a:1,diff:"medium",topic:"ABG"},
+  {t:"HCO₃ greater than 26 mEq/L indicates metabolic alkalosis.",o:["True","False"],a:0,diff:"easy",topic:"ABG"},
+  {t:"The femoral artery is the most preferred site for arterial puncture due to its large size.",o:["True","False"],a:1,diff:"easy",topic:"ABG"},
+  {t:"ABG samples should be analyzed within 10 minutes of collection to ensure accuracy.",o:["True","False"],a:0,diff:"easy",topic:"ABG"},
+  {t:"An abnormal Allen test is a RELATIVE contraindication for radial artery puncture.",o:["True","False"],a:1,diff:"medium",topic:"ABG"},
+  {t:"CVP greater than 12 cm H₂O indicates hypervolemia.",o:["True","False"],a:0,diff:"easy",topic:"CVC"},
+  {t:"A PICC line is inserted through a large vein in the inner elbow area.",o:["True","False"],a:0,diff:"easy",topic:"CVC"},
+  {t:"Trendelenburg position is used during CVC removal to prevent air embolism.",o:["True","False"],a:0,diff:"medium",topic:"CVC"},
+  {t:"After CVC removal, an airtight dressing should be applied for 12 hours.",o:["True","False"],a:1,diff:"medium",topic:"CVC"},
+  {t:"The normal CVP range at the sternal angle is 0–5 cm H₂O.",o:["True","False"],a:0,diff:"easy",topic:"CVC"},
+  {t:"The standard ETT internal diameter for adult males is 7–7.5 mm ID.",o:["True","False"],a:1,diff:"easy",topic:"ETT"},
+  {t:"The Sellick maneuver is applied to reduce the risk of regurgitation during intubation.",o:["True","False"],a:0,diff:"medium",topic:"ETT"},
+  {t:"Closed suction allows ET suctioning without disconnecting the patient from the ventilator.",o:["True","False"],a:0,diff:"medium",topic:"ETT"},
+  {t:"Endotracheal suctioning should never exceed 15 seconds per pass.",o:["True","False"],a:0,diff:"easy",topic:"ETT"},
+  {t:"CPR chest compressions should be performed at a rate of 60–80 per minute.",o:["True","False"],a:1,diff:"easy",topic:"CPR"},
+  {t:"The correct CPR compression-to-ventilation ratio for adults is 30:2.",o:["True","False"],a:0,diff:"easy",topic:"CPR"},
+  {t:"Ventricular fibrillation is a non-shockable rhythm in cardiac arrest.",o:["True","False"],a:1,diff:"medium",topic:"CPR"},
+  {t:"Monophasic defibrillators require less electricity than biphasic defibrillators.",o:["True","False"],a:1,diff:"medium",topic:"CPR"},
+  {t:"Skin burns from defibrillator paddles are the most common complication of defibrillation.",o:["True","False"],a:0,diff:"medium",topic:"CPR"},
+  {t:"An ECG is a non-invasive procedure.",o:["True","False"],a:0,diff:"easy",topic:"ECG"},
+  {t:"V4 is placed at the 5th intercostal space at the midclavicular line.",o:["True","False"],a:0,diff:"medium",topic:"ECG"},
+  {t:"The P wave on the ECG represents ventricular depolarization.",o:["True","False"],a:1,diff:"easy",topic:"ECG"},
+  {t:"A chest tube placed HIGH (2nd–3rd intercostal space) anteriorly is used to drain fluid.",o:["True","False"],a:1,diff:"medium",topic:"CHEST"},
+  {t:"Tiddling in the water-seal chamber indicates patent chest tube communication with the pleural space.",o:["True","False"],a:0,diff:"easy",topic:"CHEST"},
+  {t:"Empyema refers to accumulation of blood in the pleural space.",o:["True","False"],a:1,diff:"easy",topic:"CHEST"},
+  {t:"The jaw thrust maneuver is preferred over head-tilt chin-lift when a neck injury is suspected.",o:["True","False"],a:0,diff:"medium",topic:"CPR"},
+  // ── SCENARIO 1: ABG / Respiratory Failure ────────────────────────
+  {scenario:"Mr. Ahmed, 65, has COPD and worsening shortness of breath. ABG results: pH 7.29, PaCO₂ 58, HCO₃ 25.",
+   t:"What acid-base disturbance does Mr. Ahmed have?",o:["Metabolic acidosis","Respiratory alkalosis","Respiratory acidosis","Metabolic alkalosis"],a:2,diff:"easy",topic:"ABG"},
+  {scenario:"Mr. Ahmed, 65, has COPD and worsening shortness of breath. ABG results: pH 7.29, PaCO₂ 58, HCO₃ 25.",
+   t:"The nurse prepares to collect an ABG from the radial artery. What test must be performed FIRST?",o:["Coagulation studies","Allen test","Blood pressure measurement","Pulse oximetry reading"],a:1,diff:"easy",topic:"ABG"},
+  {scenario:"Mr. Ahmed, 65, has COPD and worsening shortness of breath. ABG results: pH 7.29, PaCO₂ 58, HCO₃ 25.",
+   t:"After ABG collection from the radial artery, how long should the nurse apply pressure?",o:["2 minutes","3 minutes","5 minutes","10 minutes"],a:2,diff:"easy",topic:"ABG"},
+  {scenario:"Mr. Ahmed, 65, has COPD and worsening shortness of breath. ABG results: pH 7.29, PaCO₂ 58, HCO₃ 25.",
+   t:"The nurse notices air bubbles in the collected ABG syringe. What is the correct action?",o:["Send the sample immediately to the lab","Discard the sample and collect a new one","Refrigerate the sample quickly","Document and ignore the bubbles"],a:1,diff:"medium",topic:"ABG"},
+  {scenario:"Mr. Ahmed, 65, has COPD and worsening shortness of breath. ABG results: pH 7.29, PaCO₂ 58, HCO₃ 25.",
+   t:"Mr. Ahmed is on warfarin. How does this affect post-puncture site care?",o:["No change in care is needed","Apply pressure for 10–15 minutes instead of 5 minutes","Use a smaller gauge needle","Avoid the radial artery altogether"],a:1,diff:"medium",topic:"ABG"},
+ 
+  // ── SCENARIO 2: CVC Insertion ─────────────────────────────────────
+  {scenario:"Mrs. Johnson, 58, requires central venous access for TPN and vasopressor administration. She has not had a central line before and is anxious.",
+   t:"Which position should the nurse place Mrs. Johnson in for subclavian CVC insertion?",o:["Sitting upright","Semi-Fowler's","Trendelenburg (head-down tilt)","Left lateral"],a:2,diff:"easy",topic:"CVC"},
+  {scenario:"Mrs. Johnson, 58, requires central venous access for TPN and vasopressor administration.",
+   t:"What complication should be monitored for IMMEDIATELY after subclavian CVC insertion?",o:["Urinary tract infection","Atrial fibrillation","Pneumothorax","Hypervolemia"],a:2,diff:"medium",topic:"CVC"},
+  {scenario:"Mrs. Johnson's CVC dressing is noted to be wet and soiled during the nurse's assessment.",
+   t:"What should the nurse do?",o:["Change the dressing only when completely saturated","Perform a dressing change using aseptic technique","Apply a second dressing on top","Notify the physician before changing the dressing"],a:1,diff:"easy",topic:"CVC"},
+  {scenario:"Mrs. Johnson's CVP reading is measured at 3 cm H₂O. She also has tachycardia and hypotension.",
+   t:"What does a CVP of 3 cm H₂O indicate in this context?",o:["Hypervolemia","Cardiac tamponade","Hypovolemia","Normal CVP"],a:2,diff:"easy",topic:"CVC"},
+  {scenario:"Mrs. Johnson's CVP is now 18 cm H₂O and she has developed bilateral peripheral edema.",
+   t:"What does this indicate?",o:["Dehydration","Hypovolemia","Normal cardiac output","Hypervolemia or impaired cardiac function"],a:3,diff:"medium",topic:"CVC"},
+ 
+  // ── SCENARIO 3: ET Intubation ─────────────────────────────────────
+  {scenario:"A 45-year-old ICU patient requires emergency intubation. His SpO₂ has dropped to 82% and he is in acute respiratory failure.",
+   t:"What is the FIRST step the nurse should take before intubation?",o:["Administer prophylactic antibiotics","Hyperventilate the patient with 100% oxygen using a bag-valve mask","Place the patient in the prone position","Begin chest compressions"],a:1,diff:"easy",topic:"ETT"},
+  {scenario:"A 45-year-old ICU patient requires emergency intubation. After ETT insertion, the nurse auscultates air sounds over the epigastrium.",
+   t:"This finding indicates:",o:["Correct tracheal placement","Esophageal intubation","Right mainstem intubation","Tube positioned at the carina"],a:1,diff:"easy",topic:"ETT"},
+  {scenario:"An ICU patient has been intubated with an ETT size 7. The nurse needs to perform suctioning.",
+   t:"Using the formula Fr = (ETT size – 1) × 2, what French size suction catheter should be used?",o:["10 Fr","12 Fr","14 Fr","16 Fr"],a:1,diff:"medium",topic:"ETT"},
+  {scenario:"After suctioning an intubated ICU patient, the nurse notes that the patient's SpO₂ drops from 96% to 87%.",
+   t:"What is the appropriate immediate nursing action?",o:["Suction again immediately at higher pressure","Notify the physician and wait for orders","Hyperventilate the patient using the manual resuscitation bag","Increase the ventilator FiO₂ setting"],a:2,diff:"medium",topic:"ETT"},
+  {scenario:"After intubation, the nurse notes the patient is coughing continuously and has persistent cough reflex.",
+   t:"This most likely indicates:",o:["The tube is in the esophagus","The tube is stimulating the carina","Right mainstem bronchus intubation","The cuff is over-inflated"],a:1,diff:"hard",topic:"ETT"},
+ 
+  // ── SCENARIO 4: CPR ───────────────────────────────────────────────
+  {scenario:"A nurse finds a 70-year-old patient unresponsive in the hospital corridor. The patient is not responding to verbal stimuli.",
+   t:"What is the nurse's FIRST action?",o:["Begin chest compressions immediately","Open the airway with head-tilt chin-lift","Assess consciousness by tapping the shoulder and shouting 'Are you ok?'","Call for the defibrillator"],a:2,diff:"easy",topic:"CPR"},
+  {scenario:"The nurse checks the carotid pulse and cannot detect it after 10 seconds.",
+   t:"What should she do next?",o:["Check the radial pulse for additional confirmation","Begin chest compressions immediately","Give 2 rescue breaths first","Wait for help to arrive"],a:1,diff:"easy",topic:"CPR"},
+  {scenario:"The patient is lying supine on a soft mattress in the hospital corridor.",
+   t:"What should the nurse do before beginning chest compressions?",o:["Remove the patient's pillows only","Turn the patient to the lateral position","Place the patient on a firm, flat surface","Elevate the patient's head"],a:2,diff:"easy",topic:"CPR"},
+  {scenario:"The defibrillator arrives and the monitor shows ventricular fibrillation. CPR is ongoing.",
+   t:"What is the appropriate next step after confirming VF?",o:["Continue CPR only for 5 more cycles","Administer IV fluids first","Deliver a defibrillation shock","Perform endotracheal intubation first"],a:2,diff:"medium",topic:"CPR"},
+  {scenario:"After the first defibrillation shock for VF, the monitor shows a rhythm change but is uncertain.",
+   t:"What should the nurse do IMMEDIATELY after the shock?",o:["Check for pulse before doing anything else","Resume CPR for 2 minutes immediately","Deliver a second shock","Administer epinephrine before resuming CPR"],a:1,diff:"medium",topic:"CPR"},
+ 
+  // ── SCENARIO 5: ECG ───────────────────────────────────────────────
+  {scenario:"A 55-year-old male with chest pain is scheduled for a 12-lead resting ECG in the emergency department.",
+   t:"What position should the patient be in for a resting ECG?",o:["Sitting upright in a chair","Standing","Supine (lying down)","Left lateral position"],a:2,diff:"easy",topic:"ECG"},
+  {scenario:"The nurse is preparing to perform a 12-lead ECG on the chest pain patient. He has abundant chest hair.",
+   t:"What should the nurse do before applying chest electrodes?",o:["Proceed without any modification","Apply extra gel to compensate","Clip the excess hair before electrode placement","Use alternative electrode sites"],a:2,diff:"easy",topic:"ECG"},
+  {scenario:"During ECG recording, the patient begins talking and moving.",
+   t:"What should the nurse do?",o:["Stop the recording, ask patient to remain still, and restart","Proceed despite the movement","Ask the physician to interpret results accordingly","Reposition all electrodes"],a:0,diff:"easy",topic:"ECG"},
+  {scenario:"The 12-lead ECG of the chest pain patient shows ST elevation in leads II, III, and aVF.",
+   t:"Which cardiac wall is most likely affected?",o:["Anterior wall","Lateral wall","Right ventricular wall","Inferior wall"],a:3,diff:"hard",topic:"ECG"},
+  {scenario:"The nurse attaches the limb lead wires and is placing the right leg lead.",
+   t:"Which colour limb lead wire goes to the right leg?",o:["Red","Yellow","Black","Green"],a:2,diff:"medium",topic:"ECG"},
+ 
+  // ── SCENARIO 6: Chest Tube ────────────────────────────────────────
+  {scenario:"Mr. Rifas, 39, developed a tension pneumothorax after a motorcycle accident. He has a chest tube in place at 20 cm of suction. During assessment, the nurse notices 250 mL of bright red blood in the drainage system. His BP is 102/56 mmHg, HR 142 bpm, RR 28, SpO₂ 89%.",
+   t:"What should the nurse do FIRST?",o:["Clamp the chest tube","Notify the physician immediately and document findings","Increase suction to 30 cm","Change the drainage bottle"],a:1,diff:"medium",topic:"CHEST"},
+  {scenario:"Mr. Rifas has a chest tube in place. The nurse notes that there is no tiddling (fluctuation) in the water-seal chamber.",
+   t:"What does absence of tiddling suggest?",o:["Normal system function","Lung has fully expanded OR the tube is obstructed","Air leak in the system","Suction is too strong"],a:1,diff:"medium",topic:"CHEST"},
+  {scenario:"Mr. Rifas needs to be transported to radiology for imaging.",
+   t:"Where should the drainage system be positioned during transport?",o:["On the bed level with the patient's chest","Below the patient's chest level, close to the floor","Above the patient's chest to prevent reflux","On the stretcher at waist level"],a:1,diff:"easy",topic:"CHEST"},
+  {scenario:"During assessment, the nurse notices CONSTANT bubbling in the water-seal chamber even when suction is temporarily disconnected.",
+   t:"What does this MOST LIKELY indicate?",o:["Normal tiddling expected during breathing","Lung has re-expanded","An air leak in the drainage system","Tube obstruction from fibrin clot"],a:2,diff:"hard",topic:"CHEST"},
+  {scenario:"Mr. Rifas's chest tube is being removed after the physician confirms lung re-expansion on X-ray.",
+   t:"What should the nurse instruct Mr. Rifas to do just BEFORE the tube is pulled out?",o:["Perform a head-tilt chin-lift","Valsalva maneuver (deep breath and hold OR exhale and hold)","Allen test","Jaw thrust maneuver"],a:1,diff:"medium",topic:"CHEST"},
+ 
+  // ── SCENARIO 7: ABG Interpretation ───────────────────────────────
+  {scenario:"A post-operative patient is hyperventilating due to anxiety. ABG results: pH 7.52, PaCO₂ 28, HCO₃ 24.",
+   t:"What acid-base disturbance is present?",o:["Metabolic alkalosis","Respiratory acidosis","Metabolic acidosis","Respiratory alkalosis"],a:3,diff:"medium",topic:"ABG"},
+  {scenario:"A ventilated patient's ABG shows: pH 7.31, PaCO₂ 52, HCO₃ 23 — consistent with respiratory acidosis.",
+   t:"What ventilator adjustment is most appropriate?",o:["Increase the rate of ventilation","Decrease the oxygen concentration","Discontinue mechanical ventilation","Administer sodium bicarbonate as sole treatment"],a:0,diff:"hard",topic:"ABG"},
+  {scenario:"A patient with DKA presents with: pH 7.22, HCO₃ 10, PaCO₂ 22.",
+   t:"What acid-base disturbance with compensation is demonstrated?",o:["Respiratory acidosis with metabolic compensation","Metabolic alkalosis with respiratory compensation","Metabolic acidosis with partial respiratory compensation","Respiratory alkalosis with metabolic compensation"],a:2,diff:"hard",topic:"ABG"},
+ 
+  // ── SCENARIO 8: CVC Infection ─────────────────────────────────────
+  {scenario:"A patient with a subclavian CVC in place for 10 days develops a fever of 38.9°C, redness, and tenderness at the insertion site.",
+   t:"What does this presentation most likely suggest?",o:["Normal inflammatory response to catheter","Air embolism","Catheter-related bloodstream infection (CLABSI)","Catheter-related thrombosis"],a:2,diff:"medium",topic:"CVC"},
+  {scenario:"A patient with a subclavian CVC in place for 10 days develops signs of catheter-related infection.",
+   t:"What is the MOST appropriate initial nursing action?",o:["Apply a warm compress to the site only","Notify the physician and assess the need for catheter removal","Administer prophylactic antibiotics independently","Continue monitoring without intervention for 24 hours"],a:1,diff:"medium",topic:"CVC"},
+  {scenario:"The nurse is performing a CVC dressing change using aseptic technique.",
+   t:"In what direction should the insertion site be cleaned?",o:["Random pattern with any antiseptic","Downward linear strokes","Circular motion from the insertion site outward","Circular motion from outside inward toward the site"],a:2,diff:"easy",topic:"CVC"},
+ 
+  // ── SCENARIO 9: ET Tube Complications ────────────────────────────
+  {scenario:"An intubated ICU patient on mechanical ventilation is assessed. The nurse notices diminished breath sounds on the left side but clear sounds on the right.",
+   t:"What does this finding most likely indicate?",o:["The tube is in the esophagus","The tube has advanced into the right mainstem bronchus","The ETT cuff has ruptured","The patient has developed left-sided pneumonia"],a:1,diff:"medium",topic:"ETT"},
+  {scenario:"An intubated patient has diminished left breath sounds suggesting right mainstem intubation.",
+   t:"What should the nurse do IMMEDIATELY?",o:["Remove the tube completely and re-intubate","Suction the ETT vigorously","Withdraw the ETT slightly until bilateral breath sounds are equal","Increase ventilator FiO₂ only"],a:2,diff:"hard",topic:"ETT"},
+  {scenario:"During ET suctioning, the nurse notes thick, yellowish secretions.",
+   t:"What does this most likely indicate?",o:["Normal secretions from the airways","A pulmonary infection","Esophageal intubation","ETT cuff overinflation"],a:1,diff:"medium",topic:"ETT"},
+ 
+  // ── SCENARIO 10: Defibrillation ───────────────────────────────────
+  {scenario:"A cardiac monitor alarmed and the nurse confirms ventricular fibrillation. The patient is unresponsive. A defibrillator has arrived.",
+   t:"Before delivering the shock, what MUST all personnel do?",o:["Begin CPR compressions again","Move away from the bed and announce 'All clear'","Apply supplemental oxygen at high flow","Check arterial blood pressure"],a:1,diff:"easy",topic:"CPR"},
+  {scenario:"The nurse applies defibrillator pads to the patient in VF.",
+   t:"Where is the APEX pad correctly placed?",o:["Right subclavicular area below the clavicle","Left of the nipple in the midaxillary line","Center of the sternum","Left subclavicular area"],a:1,diff:"medium",topic:"CPR"},
+  {scenario:"After the first defibrillation shock, the patient continues in VF.",
+   t:"What is the correct next step?",o:["Deliver a second shock immediately","Resume CPR for 2 minutes, then reassess rhythm","Intubate the patient before next shock","Administer amiodarone and wait 5 minutes"],a:1,diff:"medium",topic:"CPR"},
+ 
+  // ── SCENARIO 11: Mixed Critical Thinking ─────────────────────────
+  {scenario:"A nurse removes a patient's CVC. Shortly after, the patient develops sudden respiratory distress, hypotension, and distended neck veins.",
+   t:"What complication has most likely occurred?",o:["Catheter site infection","Pneumothorax","Air embolism","Catheter-related thrombosis"],a:2,diff:"hard",topic:"CVC"},
+  {scenario:"A patient on a chest tube drainage system suddenly develops acute chest pain, tachypnea, hypotension, and tracheal deviation to the contralateral side.",
+   t:"What complication has occurred?",o:["Hemothorax","Re-expansion pulmonary edema","Air embolism","Tension pneumothorax"],a:3,diff:"hard",topic:"CHEST"},
+  {scenario:"A nurse is preparing an ABG syringe. After aspirating heparin into the syringe, what should she do next?",
+   t:"What is the correct heparin preparation step?",o:["Leave all heparin in the syringe","Eject all heparin, leaving only enough to fill the needle hub","Add more heparin for extra anticoagulation","Remove the needle and attach a new sterile needle"],a:1,diff:"medium",topic:"ABG"},
+  {scenario:"A patient in cardiac arrest is found to have hyperkalemia as the reversible cause.",
+   t:"Which medication should be administered?",o:["Epinephrine","Amiodarone","IV calcium chloride","Sodium bicarbonate alone"],a:2,diff:"hard",topic:"CPR"},
+  {scenario:"A nurse has just suctioned the oropharynx (mouth) of an intubated patient using the ET suction catheter.",
+   t:"Can the nurse reinsert this same catheter into the endotracheal tube?",o:["Yes, if the catheter still appears visually clean","Yes, after flushing with sterile saline","No — the catheter must NOT be reinserted into the ETT after oropharyngeal suctioning","Yes, if suction pressure is reduced to the minimum"],a:2,diff:"medium",topic:"ETT"},
+  {scenario:"The nurse is placing ECG chest leads. She mistakenly places V1 at the 4th intercostal space LEFT sternal border instead of the RIGHT.",
+   t:"What error has occurred?",o:["V1 and V2 positions have been transposed","V3 and V4 positions have been transposed","No significant error has occurred","The limb lead wire colors are incorrect"],a:0,diff:"hard",topic:"ECG"},
+  {scenario:"A patient's chest tube is draining actively and the physician orders the chest tube clamped for removal.",
+   t:"What should the nurse do if there is still an active air leak?",o:["Clamp the tube as ordered immediately","Notify the physician — chest tube should NOT be clamped with an ongoing air leak","Remove the tube immediately","Increase suction to compensate"],a:1,diff:"hard",topic:"CHEST"},
+  {scenario:"ABG results: pH 7.50, HCO₃ 34, PaCO₂ 41. The patient has been vomiting for 3 days.",
+   t:"What acid-base disturbance is present?",o:["Respiratory alkalosis","Metabolic acidosis","Metabolic alkalosis","Respiratory acidosis"],a:2,diff:"medium",topic:"ABG"},
+  {scenario:"A patient has CVP 20 cm H₂O, muffled heart sounds, hypotension, and distended neck veins (Beck's triad).",
+   t:"Which condition could explain this HIGH CVP reading?",o:["Hypovolemia","Distributive shock","Cardiac tamponade","Deep inhalation artifact"],a:2,diff:"hard",topic:"CVC"},
+  {scenario:"A 60-year-old male on a ventilator. ABG: pH 7.21, HCO₃ 15, PaCO₂ 40.",
+   t:"What acid-base disturbance is present?",o:["Respiratory acidosis","Metabolic acidosis","Respiratory alkalosis","Metabolic alkalosis"],a:1,diff:"medium",topic:"ABG"},
+  {scenario:"The physician orders chest tube removal. The nurse prepares an occlusive dressing.",
+   t:"What type of dressing should be applied immediately after chest tube removal?",o:["Dry sterile gauze only","Petrolatum-impregnated gauze (occlusive dressing)","Wet-to-dry saline dressing","Transparent semipermeable film dressing"],a:1,diff:"medium",topic:"CHEST"},
+  {scenario:"A patient with a radial artery ABG sample develops blanching, pallor, and coolness of the hand after the procedure.",
+   t:"What complication is occurring?",o:["Hematoma formation","Catheter infection","Limb ischemia","Nerve injury"],a:2,diff:"hard",topic:"ABG"},
+  {scenario:"The nurse measures the CVP and notes the manometer fluid fluctuates slightly with the patient's respirations.",
+   t:"What does this fluctuation indicate?",o:["Abnormal finding requiring immediate report","A sign of catheter occlusion","Normal finding confirming communication between catheter and manometer","An indication of cardiac tamponade"],a:2,diff:"medium",topic:"CVC"},
+  {scenario:"After successful CPR and ROSC (return of spontaneous circulation), the nurse prepares for post-resuscitation care.",
+   t:"Which of the following is an essential post-resuscitation nursing action?",o:["Discontinue all monitoring to allow patient to rest","Obtain a 12-lead ECG","Remove IV access once patient is stable","Administer sedation without a physician order"],a:1,diff:"medium",topic:"CPR"},
+  {scenario:"The nurse is assessing a patient with a chest tube drainage system and notices the drainage system has accidentally been elevated above the chest tube insertion site.",
+   t:"What is the IMMEDIATE risk and what should the nurse do?",o:["Risk of infection — notify infection control","Risk of back-flow of fluid into the pleural space — lower the system below chest level","Risk of air embolism — clamp the tube","No immediate risk — document the observation"],a:1,diff:"hard",topic:"CHEST"},
+  {scenario:"During ECG recording, muscle trembling is observed in the waveforms on the screen.",
+   t:"What is the most likely cause and solution?",o:["Incorrect electrode placement — reposition all electrodes","Electrical interference from muscle activity — ensure limbs are relaxed and minimise trembling","Lead wire disconnection — reconnect all wires","ECG machine malfunction — replace the machine"],a:1,diff:"medium",topic:"ECG"},
+  {scenario:"The nurse is about to perform ET suctioning and calculates the suction catheter size for an ETT size 9.",
+   t:"Using Fr = (ETT size – 1) × 2, what is the correct catheter size?",o:["14 Fr","16 Fr","18 Fr","20 Fr"],a:1,diff:"hard",topic:"ETT"},
+];
+
+
+// ── State ──
+let current = 0;
+let answers = [];
+let answered = false;
+
+// ── Init ──
+document.getElementById('quizTitleDisplay').textContent = QUIZ_TITLE;
+document.getElementById('startDesc').textContent        = QUIZ_DESC;
+document.getElementById('totalQDisplay').textContent    = QUESTIONS.length;
+
+// ── Theme ──
+const themeBtn = document.getElementById('themeBtn');
+let theme = localStorage.getItem('theme') || 'light';
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', t);
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+
+// ── Screen switch ──
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// ── Start ──
+function startQuiz() {
+  current = 0;
+  answers = new Array(QUESTIONS.length).fill(null);
+  answered = false;
+  show('quizScreen');
+  renderQuestion();
+}
+
+// ── Render question ──
+function renderQuestion() {
+  answered = false;
+  const q   = QUESTIONS[current];
+  const tot = QUESTIONS.length;
+
+  document.getElementById('qNum').textContent  = `QUESTION ${current + 1}`;
+  document.getElementById('qText').textContent = q.t;
+  document.getElementById('progressLabel').textContent = `${current+1} / ${tot}`;
+  document.getElementById('progressFill').style.width  = `${((current+1)/tot)*100}%`;
+  document.getElementById('btnNext').disabled = true;
+
+  const fb = document.getElementById('feedbackBox');
+  fb.className = 'feedback-box';
+
+  const letters = ['A','B','C','D','E'];
+  const list = document.getElementById('optsList');
+  list.innerHTML = '';
+  q.o.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.innerHTML = `<span class="opt-letter">${letters[i]}</span>${opt}`;
+    btn.onclick = () => selectAnswer(i, btn);
+    list.appendChild(btn);
+  });
+
+  const card = document.getElementById('qCard');
+  card.style.animation = 'none';
+  card.offsetHeight;
+  card.style.animation = 'slideIn .35s ease';
+}
+
+// ── Select answer ──
+function selectAnswer(chosen, clickedBtn) {
+  if (answered) return;
+  answered = true;
+  answers[current] = chosen;
+
+  const q    = QUESTIONS[current];
+  const opts = document.querySelectorAll('.opt-btn');
+  const correct = q.a;
+
+  opts.forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === correct)        btn.classList.add('correct');
+    if (i === chosen && chosen !== correct) btn.classList.add('wrong');
+  });
+
+  const fb = document.getElementById('feedbackBox');
+  if (chosen === correct) {
+    fb.className = 'feedback-box correct-fb show';
+    document.getElementById('feedbackIcon').textContent = '✅';
+    document.getElementById('feedbackText').textContent = 'Correct answer! 🎉';
+  } else {
+    fb.className = 'feedback-box wrong-fb show';
+    document.getElementById('feedbackIcon').textContent = '❌';
+    document.getElementById('feedbackText').textContent =
+      `Correct answer: ${q.o[correct]}`;
+  }
+
+  document.getElementById('btnNext').disabled = false;
+}
+
+// ── Skip ──
+function skipQuestion() {
+  if (answered) return;
+  answers[current] = null;
+  nextQuestion();
+}
+
+// ── Next ──
+function nextQuestion() {
+  current++;
+  if (current >= QUESTIONS.length) {
+    showResult();
+  } else {
+    answered = false;
+    renderQuestion();
+  }
+}
+
+// ── Result ──
+function showResult() {
+  let correct = 0, wrong = 0, skip = 0;
+  answers.forEach((a, i) => {
+    if (a === null)                skip++;
+    else if (a === QUESTIONS[i].a) correct++;
+    else                           wrong++;
+  });
+  const pct = Math.round((correct / QUESTIONS.length) * 100);
+  document.getElementById('rCorrect').textContent = correct;
+  document.getElementById('rWrong').textContent   = wrong;
+  document.getElementById('rSkip').textContent    = skip;
+  document.getElementById('pctNum').textContent   = pct;
+
+  let emoji, title, sub;
+  if      (pct >= 90) { emoji='🏆'; title='Excellent! Outstanding!';    sub='Amazing result — keep it up!'; }
+  else if (pct >= 75) { emoji='🎉'; title='Very Good!';                 sub='Strong performance, keep reviewing to reach the top!'; }
+  else if (pct >= 60) { emoji='💪'; title='Good, but room to improve!'; sub='Review your wrong answers and try again'; }
+  else if (pct >= 40) { emoji='📚'; title='Needs more revision';        sub='Go back to your notes and retake the quiz'; }
+  else                { emoji='😅'; title="Don't worry, keep studying!";sub='Revision is the key — try again!'; }
+
+  document.getElementById('resultEmoji').textContent = emoji;
+  document.getElementById('resultTitle').textContent = title;
+  document.getElementById('resultSub').textContent   = sub;
+
+  const circ  = 2 * Math.PI * 62;
+  const offset = circ - (pct / 100) * circ;
+  const arc = document.getElementById('circleArc');
+  arc.style.strokeDashoffset = '389.6';
+  arc.style.stroke = pct >= 60 ? 'var(--green)' : pct >= 40 ? 'var(--c)' : 'var(--red)';
+  setTimeout(() => { arc.style.strokeDashoffset = offset; }, 200);
+
+  show('resultScreen');
+}
+
+// ── Review ──
+function showReview() {
+  const list = document.getElementById('reviewList');
+  list.innerHTML = '';
+  const letters = ['A','B','C','D','E'];
+
+  QUESTIONS.forEach((q, qi) => {
+    const userAns = answers[qi];
+    let statusClass, statusText;
+    if      (userAns === null)       { statusClass='status-skip';    statusText='⏭ Skipped'; }
+    else if (userAns === q.a)        { statusClass='status-correct'; statusText='✅ Correct'; }
+    else                             { statusClass='status-wrong';   statusText='❌ Wrong'; }
+
+    const card = document.createElement('div');
+    card.className = 'review-card';
+    card.innerHTML = `
+      <div class="review-card-top">
+        <div class="review-q-label">QUESTION ${qi+1}</div>
+        <div class="review-q-text">${q.t}</div>
+        <div class="review-status ${statusClass}">${statusText}</div>
+      </div>
+      <div class="review-opts">
+        ${q.o.map((opt, oi) => {
+          let cls = 'review-opt';
+          if (oi === q.a)                        cls += ' is-correct';
+          if (oi === userAns && userAns !== q.a) cls += ' is-wrong';
+          return `<div class="${cls}"><div class="review-dot"></div>${letters[oi]}. ${opt}</div>`;
+        }).join('')}
+      </div>`;
+    list.appendChild(card);
+  });
+
+  show('reviewScreen');
+}
+
+function retryQuiz() {
+  current = 0;
+  answers = new Array(QUESTIONS.length).fill(null);
+  answered = false;
+  show('quizScreen');
+  renderQuestion();
+}
+</script>
+</body>
+</html>
