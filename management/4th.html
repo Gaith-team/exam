@@ -1,0 +1,998 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --c:      #e67e22;
+  --c-deep: #b8590a;
+  --c-lite: #f39c12;
+  --c-glow: rgba(230,126,34,0.2);
+  --c-soft: rgba(230,126,34,0.09);
+  --green:  #27ae60;
+  --red:    #e74c3c;
+  --bg:     #f9f5f0;
+  --bg2:    #f1e8dc;
+  --card:   #ffffff;
+  --text:   #1a1208;
+  --text2:  #5a4a30;
+  --text3:  #9a8060;
+  --border: rgba(230,126,34,0.15);
+  --radius: 18px;
+  --tr:     all 0.28s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="dark"] {
+  --bg:    #12100c;
+  --bg2:   #1c1710;
+  --card:  #231e16;
+  --text:  #f0e6d6;
+  --text2: #c0a880;
+  --text3: #806848;
+  --border:rgba(230,126,34,0.18);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Cairo','Tajawal',sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  transition: background .4s, color .4s;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px;
+  background: rgba(249,245,240,0.93);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+  transition: var(--tr);
+}
+[data-theme="dark"] nav { background: rgba(18,16,12,0.95); }
+.nav-back {
+  display: flex; align-items: center; gap: 8px;
+  text-decoration: none; color: var(--text2);
+  font-size: 13px; font-weight: 700;
+  padding: 7px 13px; border-radius: 9px;
+  border: 1px solid var(--border); background: var(--card);
+  transition: var(--tr);
+}
+.nav-back:hover { color: var(--c); border-color: var(--c); }
+.nav-center { display: flex; align-items: center; gap: 9px; }
+.nav-pill {
+  display: flex; align-items: center; gap: 7px;
+  padding: 6px 14px; border-radius: 50px;
+  background: linear-gradient(135deg, var(--c), var(--c-lite));
+  color: #fff; font-size: 13px; font-weight: 800;
+}
+.theme-toggle {
+  width: 38px; height: 38px; border-radius: 50%;
+  border: 1.5px solid var(--border); background: var(--card);
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  font-size: 16px; transition: var(--tr);
+}
+.theme-toggle:hover { border-color: var(--c); transform: rotate(20deg); }
+
+/* ── SCREENS ── */
+.screen { display: none; }
+.screen.active { display: flex; }
+
+/* ══════════════════════════════════
+   START SCREEN
+══════════════════════════════════ */
+#startScreen {
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 80px 24px 40px;
+  text-align: center;
+}
+.start-icon {
+  width: 90px; height: 90px; border-radius: 24px;
+  background: linear-gradient(135deg, var(--c), var(--c-lite));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 40px; margin: 0 auto 28px;
+  box-shadow: 0 12px 40px var(--c-glow);
+  animation: floatIcon 3s ease-in-out infinite;
+}
+@keyframes floatIcon {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+.start-title {
+  font-size: clamp(28px,5vw,44px); font-weight: 900; color: var(--text);
+  line-height: 1.15; margin-bottom: 12px;
+}
+.start-title span { color: var(--c); }
+.start-sub {
+  font-size: 15px; color: var(--text2); line-height: 1.7;
+  max-width: 400px; margin: 0 auto 36px;
+}
+.start-meta {
+  display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 44px;
+}
+.meta-pill {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 20px; border-radius: 12px;
+  background: var(--card); border: 1px solid var(--border);
+  font-size: 14px; font-weight: 700; color: var(--text2);
+}
+.meta-pill strong { color: var(--c); font-size: 18px; }
+.btn-start {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 44px; border-radius: 14px;
+  background: linear-gradient(135deg, var(--c), var(--c-lite));
+  color: #fff; font-size: 17px; font-weight: 900;
+  border: none; cursor: pointer;
+  box-shadow: 0 8px 28px var(--c-glow);
+  transition: var(--tr); font-family: 'Cairo',sans-serif;
+}
+.btn-start:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 14px 40px var(--c-glow); }
+
+/* ══════════════════════════════════
+   QUIZ SCREEN
+══════════════════════════════════ */
+#quizScreen {
+  min-height: 100vh;
+  flex-direction: column;
+  padding: 80px 0 40px;
+}
+.quiz-wrap {
+  flex: 1; max-width: 680px; width: 100%;
+  margin: 0 auto; padding: 32px 24px;
+  display: flex; flex-direction: column; gap: 24px;
+}
+
+/* progress */
+.quiz-progress-row {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 14px;
+}
+.progress-track {
+  flex: 1; height: 6px; border-radius: 6px;
+  background: var(--bg2); overflow: hidden;
+}
+.progress-fill {
+  height: 100%; border-radius: 6px;
+  background: linear-gradient(90deg, var(--c), var(--c-lite));
+  transition: width .5s cubic-bezier(0.4,0,0.2,1);
+}
+.progress-label {
+  font-size: 13px; font-weight: 800; color: var(--c);
+  white-space: nowrap;
+}
+
+/* question card */
+.q-card {
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  padding: 32px 28px;
+  box-shadow: 0 4px 24px rgba(230,126,34,0.08);
+  animation: slideIn .35s ease;
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.q-num {
+  font-size: 11px; font-weight: 800; letter-spacing: 2px;
+  color: var(--c); text-transform: uppercase; margin-bottom: 14px;
+}
+.q-text {
+  font-size: clamp(16px,2.5vw,20px); font-weight: 700;
+  color: var(--text); line-height: 1.6;
+}
+
+/* options */
+.options-list {
+  display: flex; flex-direction: column; gap: 12px;
+  margin-top: 28px;
+}
+.opt-btn {
+  display: flex; align-items: center; gap: 14px;
+  padding: 15px 18px; border-radius: 13px;
+  border: 1.5px solid var(--border);
+  background: var(--bg);
+  cursor: pointer; text-align: left;
+  transition: var(--tr); font-family: 'Cairo',sans-serif;
+  font-size: 15px; font-weight: 600; color: var(--text);
+  width: 100%;
+}
+.opt-btn:hover:not(:disabled) {
+  border-color: var(--c);
+  background: var(--c-soft);
+  transform: translateX(3px);
+}
+.opt-letter {
+  width: 34px; height: 34px; flex-shrink: 0;
+  border-radius: 50%; border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 900; color: var(--text3);
+  transition: var(--tr); background: var(--card);
+}
+.opt-btn:hover:not(:disabled) .opt-letter {
+  border-color: var(--c); color: var(--c); background: rgba(230,126,34,0.1);
+}
+
+/* states */
+.opt-btn.correct {
+  border-color: var(--green) !important;
+  background: rgba(39,174,96,0.08) !important;
+  color: var(--green);
+}
+.opt-btn.correct .opt-letter {
+  background: var(--green); border-color: var(--green);
+  color: #fff;
+}
+.opt-btn.wrong {
+  border-color: var(--red) !important;
+  background: rgba(231,76,60,0.08) !important;
+  color: var(--red);
+}
+.opt-btn.wrong .opt-letter {
+  background: var(--red); border-color: var(--red);
+  color: #fff;
+}
+.opt-btn:disabled { cursor: not-allowed; }
+
+/* feedback */
+.feedback-box {
+  display: none;
+  align-items: center; gap: 12px;
+  padding: 14px 18px; border-radius: 12px;
+  font-size: 14px; font-weight: 700;
+  margin-top: 16px;
+  animation: fadeIn .3s ease;
+}
+@keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+.feedback-box.show { display: flex; }
+.feedback-box.correct-fb {
+  background: rgba(39,174,96,0.1);
+  border: 1px solid rgba(39,174,96,0.25);
+  color: var(--green);
+}
+.feedback-box.wrong-fb {
+  background: rgba(231,76,60,0.1);
+  border: 1px solid rgba(231,76,60,0.25);
+  color: var(--red);
+}
+.feedback-icon { font-size: 20px; }
+
+/* nav buttons */
+.quiz-nav {
+  display: flex; gap: 12px; justify-content: space-between; align-items: center;
+}
+.btn-nav {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 26px; border-radius: 12px;
+  font-size: 14px; font-weight: 800;
+  border: none; cursor: pointer;
+  font-family: 'Cairo',sans-serif;
+  transition: var(--tr);
+}
+.btn-skip {
+  background: var(--bg2); color: var(--text2);
+  border: 1px solid var(--border);
+}
+.btn-skip:hover { background: var(--border); }
+.btn-next {
+  background: linear-gradient(135deg, var(--c), var(--c-lite));
+  color: #fff;
+  box-shadow: 0 4px 16px var(--c-glow);
+}
+.btn-next:hover { transform: translateY(-2px); box-shadow: 0 8px 24px var(--c-glow); }
+.btn-next:disabled { opacity: .45; pointer-events: none; }
+
+/* ══════════════════════════════════
+   RESULT SCREEN
+══════════════════════════════════ */
+#resultScreen {
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 80px 24px 40px;
+  text-align: center;
+}
+.result-circle {
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  margin: 0 auto 28px;
+  position: relative;
+}
+.result-circle svg {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  transform: rotate(-90deg);
+}
+.result-circle svg circle {
+  fill: none; stroke-width: 8;
+  stroke-linecap: round;
+}
+.circle-bg  { stroke: var(--bg2); }
+.circle-fill { stroke: var(--c); transition: stroke-dashoffset 1.2s cubic-bezier(0.4,0,0.2,1); }
+.result-pct {
+  font-size: 36px; font-weight: 900; color: var(--text);
+  position: relative; z-index: 1;
+}
+.result-pct small { font-size: 14px; color: var(--text3); display: block; }
+
+.result-emoji { font-size: 56px; margin-bottom: 16px; animation: bounce .6s ease; }
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
+.result-title { font-size: 26px; font-weight: 900; color: var(--text); margin-bottom: 8px; }
+.result-sub { font-size: 15px; color: var(--text2); margin-bottom: 36px; }
+
+.result-stats {
+  display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+.rstat {
+  padding: 14px 22px; border-radius: 14px;
+  background: var(--card); border: 1px solid var(--border);
+  min-width: 110px;
+}
+.rstat .rv { font-size: 26px; font-weight: 900; }
+.rstat .rl { font-size: 12px; color: var(--text3); margin-top: 2px; }
+.rstat.correct-s .rv { color: var(--green); }
+.rstat.wrong-s   .rv { color: var(--red); }
+.rstat.skip-s    .rv { color: var(--text3); }
+
+.result-actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.btn-retry {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 14px 32px; border-radius: 12px;
+  background: linear-gradient(135deg, var(--c), var(--c-lite));
+  color: #fff; font-size: 15px; font-weight: 900;
+  border: none; cursor: pointer; font-family: 'Cairo',sans-serif;
+  box-shadow: 0 6px 22px var(--c-glow); transition: var(--tr);
+}
+.btn-retry:hover { transform: translateY(-3px); }
+.btn-review {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 14px 28px; border-radius: 12px;
+  background: var(--card); color: var(--text);
+  font-size: 15px; font-weight: 700;
+  border: 1.5px solid var(--border); cursor: pointer;
+  font-family: 'Cairo',sans-serif; transition: var(--tr);
+}
+.btn-review:hover { border-color: var(--c); color: var(--c); }
+
+/* ── REVIEW MODE ── */
+#reviewScreen {
+  min-height: 100vh;
+  flex-direction: column;
+  padding: 80px 0 60px;
+}
+.review-wrap {
+  max-width: 680px; width: 100%;
+  margin: 0 auto; padding: 32px 24px;
+  display: flex; flex-direction: column; gap: 18px;
+}
+.review-header {
+  text-align: center; margin-bottom: 10px;
+}
+.review-header h2 { font-size: 22px; font-weight: 900; color: var(--text); }
+.review-header p  { font-size: 13px; color: var(--text3); margin-top: 4px; }
+
+.review-card {
+  background: var(--card);
+  border-radius: 16px;
+  border: 1.5px solid var(--border);
+  overflow: hidden;
+}
+.review-card-top {
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--border);
+}
+.review-q-label {
+  font-size: 10px; font-weight: 800; letter-spacing: 2px;
+  color: var(--text3); margin-bottom: 8px;
+}
+.review-q-text { font-size: 15px; font-weight: 700; color: var(--text); line-height: 1.55; }
+.review-opts { padding: 14px 22px; display: flex; flex-direction: column; gap: 8px; }
+.review-opt {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px; border-radius: 10px;
+  font-size: 13px; font-weight: 600; color: var(--text2);
+  background: var(--bg);
+}
+.review-opt.is-correct {
+  background: rgba(39,174,96,0.1);
+  color: var(--green); font-weight: 800;
+}
+.review-opt.is-wrong {
+  background: rgba(231,76,60,0.1);
+  color: var(--red);
+}
+.review-dot {
+  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  background: var(--border);
+}
+.review-opt.is-correct .review-dot { background: var(--green); }
+.review-opt.is-wrong   .review-dot { background: var(--red); }
+.review-status {
+  display: flex; align-items: center; gap: 5px;
+  padding: 3px 10px; border-radius: 50px;
+  font-size: 10px; font-weight: 800; margin-top: 10px;
+  width: fit-content;
+}
+.status-correct { background: rgba(39,174,96,0.12); color: var(--green); }
+.status-wrong   { background: rgba(231,76,60,0.12);  color: var(--red); }
+.status-skip    { background: var(--bg2); color: var(--text3); }
+
+.btn-back-result {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 13px 28px; border-radius: 12px;
+  background: var(--card); color: var(--text);
+  font-size: 14px; font-weight: 700;
+  border: 1.5px solid var(--border); cursor: pointer;
+  font-family: 'Cairo',sans-serif; transition: var(--tr);
+  margin-top: 8px; align-self: center;
+}
+.btn-back-result:hover { border-color: var(--c); color: var(--c); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 540px) {
+  nav { padding: 0 16px; }
+  .quiz-wrap, .review-wrap { padding: 24px 16px; }
+  .q-card { padding: 22px 18px; }
+  .opt-btn { padding: 12px 14px; font-size: 14px; }
+  .result-stats { gap: 10px; }
+  .rstat { min-width: 90px; padding: 12px 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://gaith-team.github.io/exam/level1/health-assessment/index.html/" class="nav-back">← Back</a>
+  <div class="nav-center">
+    <div class="nav-pill">📝Ghaith team</div>
+  </div>
+  <button class="theme-toggle" id="themeBtn">🌙</button>
+</nav>
+
+<!-- ══ START SCREEN ══ -->
+<div class="screen active" id="startScreen">
+  <div class="start-icon">📝</div>
+  <h1 class="start-title">Revision<span id="quizTitleDisplay"></span></h1>
+  <p class="start-sub" id="startDesc">Test your knowledge — read each question and choose the correct answer</p>
+  <div class="start-meta">
+    <div class="meta-pill"><strong id="totalQDisplay">0</strong> Questions</div>
+    <div class="meta-pill">⏱ No time limit</div>
+    <div class="meta-pill">🎯 Multiple choice</div>
+  </div>
+  <button class="btn-start" onclick="startQuiz()">🚀 Start Quiz</button>
+</div>
+
+<!-- ══ QUIZ SCREEN ══ -->
+<div class="screen" id="quizScreen">
+  <div class="quiz-wrap">
+
+    <div class="quiz-progress-row">
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      </div>
+      <div class="progress-label" id="progressLabel">1 / 1</div>
+    </div>
+
+    <div class="q-card" id="qCard">
+      <div class="q-num" id="qNum">QUESTION 1</div>
+      <div class="q-text" id="qText"></div>
+      <div class="options-list" id="optsList"></div>
+      <div class="feedback-box" id="feedbackBox">
+        <span class="feedback-icon" id="feedbackIcon"></span>
+        <span id="feedbackText"></span>
+      </div>
+    </div>
+
+    <div class="quiz-nav">
+      <button class="btn-nav btn-skip" onclick="skipQuestion()">→ Skip</button>
+      <button class="btn-nav btn-next" id="btnNext" onclick="nextQuestion()" disabled>
+        Next →
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ RESULT SCREEN ══ -->
+<div class="screen" id="resultScreen">
+  <div class="result-emoji" id="resultEmoji">🎉</div>
+
+  <div class="result-circle" id="resultCircle">
+    <svg viewBox="0 0 140 140">
+      <circle class="circle-bg"   cx="70" cy="70" r="62"/>
+      <circle class="circle-fill" cx="70" cy="70" r="62" id="circleArc"
+              stroke-dasharray="389.6"
+              stroke-dashoffset="389.6"/>
+    </svg>
+    <div class="result-pct">
+      <span id="pctNum">0</span>%
+      <small>Score</small>
+    </div>
+  </div>
+
+  <h2 class="result-title" id="resultTitle">Well done!</h2>
+  <p class="result-sub" id="resultSub">You have completed the quiz</p>
+
+  <div class="result-stats">
+    <div class="rstat correct-s">
+      <div class="rv" id="rCorrect">0</div>
+      <div class="rl">✅ Correct</div>
+    </div>
+    <div class="rstat wrong-s">
+      <div class="rv" id="rWrong">0</div>
+      <div class="rl">❌ Wrong</div>
+    </div>
+    <div class="rstat skip-s">
+      <div class="rv" id="rSkip">0</div>
+      <div class="rl">⏭ Skipped</div>
+    </div>
+  </div>
+
+  <div class="result-actions">
+    <button class="btn-retry" onclick="retryQuiz()">🔄 Try Again</button>
+    <button class="btn-review" onclick="showReview()">📋 Review Answers</button>
+  </div>
+</div>
+
+<!-- ══ REVIEW SCREEN ══ -->
+<div class="screen" id="reviewScreen">
+  <div class="review-wrap">
+    <div class="review-header">
+      <h2>📋 Answer Review</h2>
+      <p>Correct answers in green — your wrong answers in red</p>
+    </div>
+    <div id="reviewList"></div>
+    <button class="btn-back-result" onclick="showResult()">← Back to Results</button>
+  </div>
+</div>
+
+<script>
+const QUIZ_TITLE = "OSCE ";
+const QUIZ_DESC  = "أسئله أوسكي شاملة علي علي كل البروسيجرات  ";
+
+const QUESTIONS = [
+  // ── SECTION 1: FIRST AID – SHOCK ──────────────────────────────
+  {t:"What is the FIRST action when a nurse suspects an elderly client has gone into shock?",o:["Administer oxygen immediately","Reassure the client and place them in a comfortable position","Begin CPR","Give oral fluids"],a:1,d:"easy"},
+  {t:"When positioning a client in shock (fainting), the nurse should:",o:["Sit the client upright","Lay the client on their back, head low, legs raised (unless fracture suspected)","Place the client in the recovery position immediately","Keep the client standing to maintain blood pressure"],a:1,d:"easy"},
+  {t:"A client in shock complains of thirst. The correct nursing action is to:",o:["Give a full glass of water to prevent dehydration","Give only small sips of water every 5 minutes","Moisten the lips with water but give nothing to drink","Administer intravenous fluids"],a:2,d:"medium"},
+  {t:"How often should the nurse check breathing rate, pulse, and level of responsiveness in a client who is in shock?",o:["Every 5 minutes","Every 10 minutes","Every 15 minutes","Every 30 minutes"],a:1,d:"medium"},
+  {t:"Which of the following is the LAST step in first aid for shock before transfer to hospital?",o:["Loosen tight clothing","Check breathing and pulse","Begin resuscitation if breathing and heartbeat stop","Measure blood pressure"],a:2,d:"medium"},
+  {t:"When a client in shock shows likely vomiting or becomes unconscious, the nurse should:",o:["Keep the client supine with legs elevated","Place client in a comfortable side-lying position","Begin CPR immediately","Apply a tourniquet"],a:1,d:"hard"},
+  {t:"Which of the following is NOT a post-procedure activity after first aid for shock?",o:["Measure blood pressure","Provide reassurance","Administer anticoagulants","Document results accurately"],a:2,d:"easy"},
+  {t:"In shock management, the purpose of loosening tight clothing is to:",o:["Prevent pressure sores","Help circulation and assist breathing","Reduce body temperature","Allow IV access"],a:1,d:"easy"},
+ 
+  // ── SECTION 2: FIRST AID – BURN ──────────────────────────────
+  {t:"For a thermal burn, cooling should be performed by:",o:["Applying ice packs directly for 10 minutes","Running cool water over the burn for 20 minutes","Using cold butter or toothpaste","Wrapping tightly with a dry bandage"],a:1,d:"easy"},
+  {t:"For a flame burn on clothing (fire on clothing), the first action is:",o:["Remove clothing immediately","Pour cold water over clothing","Stop, Drop, Cover, and Roll","Apply hydrogel dressing"],a:2,d:"easy"},
+  {t:"Jewellery near a burn site should be removed:",o:["Immediately upon discovering the burn","After cooling has commenced","Only by a physician","Never, as it may damage tissue"],a:1,d:"medium"},
+  {t:"When running water is NOT available for cooling a thermal burn, the nurse should:",o:["Apply ice packs","Apply hydrogel or hydrogel-impregnated towels","Leave the wound open to air","Apply petroleum jelly"],a:1,d:"medium"},
+  {t:"For chemical burns, if the chemical is in dry form, the nurse should FIRST:",o:["Flush with water immediately","Gently brush off the chemical before using water","Apply neutralizing agent","Cover with a wet cloth"],a:1,d:"medium"},
+  {t:"The MINIMUM duration of flushing a chemical burn with cool running water is:",o:["5 minutes","10 minutes","20 minutes","30 minutes"],a:2,d:"easy"},
+  {t:"Which statement about neutralizing agents in chemical burns is CORRECT?",o:["They are recommended for acid burns","They should always be applied before water","They should be avoided","They neutralize the burn instantly"],a:2,d:"medium"},
+  {t:"For an electrical burn, to move the electrical source away from a victim, the nurse should use:",o:["Bare hands","A metal rod","A dry, non-conducting object (wood/plastic/cardboard)","A wet cloth"],a:2,d:"easy"},
+  {t:"In electrical burn first aid, why should the injured person be moved as little as possible?",o:["To prevent spreading infection","Because severe electric shock may cause a spinal fracture","To conserve the victim's energy","To avoid further electrical contact"],a:1,d:"hard"},
+  {t:"Which dressing is CONTRAINDICATED for an electrical burn wound?",o:["Sterile gauze bandage","Clean cloth","Blanket or towel (loose fibers)","Non-adherent sterile dressing"],a:2,d:"hard"},
+  {t:"Which of the following is CORRECT regarding soaking towels for burn cooling?",o:["Refresh the water every 10 minutes","Refresh the water every 2–3 minutes for 20 minutes total","Use the same towel throughout","Apply as hot as tolerated"],a:1,d:"medium"},
+ 
+  // ── SECTION 3: DIABETIC FOOT CARE ──────────────────────────────
+  {t:"The CORRECT technique for cutting toenails in a diabetic patient is:",o:["Round the nail corners with a file","Cut nails shorter than the end of the toes","Cut nails straight across, not shorter than the end of toes","Dig under toenails to remove debris"],a:2,d:"easy"},
+  {t:"A diabetic elderly patient should wash their feet:",o:["Once a week","Every day in warm, soapy water","Twice a week with hot water","Only when visibly dirty"],a:1,d:"easy"},
+  {t:"After washing a diabetic patient's feet, the nurse should:",o:["Leave feet slightly damp","Dry thoroughly, including between the toes","Apply alcohol to prevent infection","Soak feet in cold water"],a:1,d:"easy"},
+  {t:"Which exercise is recommended for diabetic foot care to improve circulation?",o:["Running","Pointing toes up and down and circling each foot 10 times while sitting on bed edge","Deep knee bends","High-impact aerobics"],a:1,d:"medium"},
+  {t:"If a diabetic patient's feet are cold, the CORRECT advice is:",o:["Use a heating pad","Use a hot water bottle","Wear warm socks and use an extra blanket","Soak feet in warm water twice daily"],a:2,d:"medium"},
+  {t:"During diabetic foot care, if the feet perspire heavily, the nurse should apply:",o:["Moisturizing cream","Alcohol solution","Mild foot powder","Talcum powder with fragrance"],a:2,d:"medium"},
+  {t:"A diabetic patient should consult a podiatrist for treatment of:",o:["Fungal nail infection only","Corns and calluses","All skin conditions","Only diabetic ulcers"],a:1,d:"hard"},
+  {t:"Which type of shoes is recommended for diabetic elderly patients?",o:["Tight-fitting shoes for support","Open-toed sandals","Properly fitting leather shoes","Any comfortable shoe"],a:2,d:"medium"},
+ 
+  // ── SECTION 4: BLOOD GLUCOSE TEST ──────────────────────────────
+  {t:"When preparing the blood glucose meter, the strip should be inserted to turn on the meter. How long does the meter stay on before blood must be applied?",o:["1 minute","3 minutes","5 minutes","10 minutes"],a:1,d:"hard"},
+  {t:"When obtaining a blood drop for glucose testing, the nurse should prick which part of the finger?",o:["The tip of the finger","The middle of the finger pad","The side of the finger","Any convenient part"],a:2,d:"easy"},
+  {t:"After reading the blood glucose result, the used test strip and lancet should be discarded in:",o:["Regular trash bin","A sharps container","A biohazard bag","A sealed plastic bag"],a:1,d:"easy"},
+  {t:"If bubbles appear when drawing insulin into a syringe, the nurse should:",o:["Discard the syringe and start over","Tap the syringe to remove bubbles, push plunger slightly to expel air, then pull back to correct dose","Inject the insulin with bubbles present","Shake the syringe vigorously"],a:1,d:"hard"},
+  {t:"The site of the blood glucose strip where blood is applied is called the:",o:["Display window","Absorbent hole (port)","Calibration port","Lancet chamber"],a:1,d:"medium"},
+  {t:"To avoid sore spots when doing blood glucose monitoring, the nurse should:",o:["Always prick the same spot","Use different spots each time","Only prick the dominant hand","Prick the thumb for highest accuracy"],a:1,d:"easy"},
+ 
+  // ── SECTION 5: INSULIN INJECTION ──────────────────────────────
+  {t:"The standard angle for insulin injection in a normal-weight patient is:",o:["15 degrees","30 degrees","45 degrees","90 degrees"],a:3,d:"easy"},
+  {t:"In very thin elderly patients, the insulin needle may need to be inserted at:",o:["90 degrees","60 degrees","45 degrees","15 degrees"],a:2,d:"medium"},
+  {t:"How long should the needle remain in the skin AFTER injecting insulin to ensure complete delivery?",o:["1–2 seconds","5–10 seconds","15–20 seconds","30 seconds"],a:1,d:"medium"},
+  {t:"When priming an insulin pen, the dial is set to how many units before pressing the injection button?",o:["1 unit","2 units","5 units","10 units"],a:1,d:"hard"},
+  {t:"Cloudy insulin should be handled by:",o:["Shaking vigorously before use","Gently rolling between the hands to mix","Adding normal saline to clear it","Discarding it as expired"],a:1,d:"medium"},
+  {t:"Insulin is injected into which tissue layer?",o:["Intradermal (dermis)","Subcutaneous (fatty) tissue","Intramuscular","Intravenous"],a:1,d:"easy"},
+  {t:"To prepare the insulin injection site, the nurse should:",o:["Apply petroleum jelly","Clean with alcohol swab and let area dry before proceeding","Scrub with soap and water","Apply iodine solution"],a:1,d:"easy"},
+  {t:"After withdrawing the insulin needle from the skin, the correct angle is:",o:["90 degrees","The same angle as insertion","Any convenient angle","45 degrees only"],a:1,d:"medium"},
+  {t:"Which item is REQUIRED when gathering supplies for insulin injection?",o:["Oxygen mask","Sharps disposal container","Blood pressure cuff","Wound irrigation kit"],a:1,d:"easy"},
+  {t:"What should be documented after an insulin injection?",o:["Time, dose, type of insulin, site of injection","Only dose and time","Only type and site","Dose, route, and patient weight"],a:0,d:"medium"},
+ 
+  // ── SECTION 6: VITAL SIGNS – TEMPERATURE ──────────────────────────────
+  {t:"The thermometer should be held at which part when inspecting mercury level?",o:["At the bulb end","From the bottom, parallel at eye level","At the tip","At any convenient point"],a:1,d:"easy"},
+  {t:"For oral temperature measurement, the thermometer bulb is placed:",o:["Under the tongue, directed toward either cheek","On the top of the tongue","Between the upper lip and gum","At the back of the throat"],a:0,d:"easy"},
+  {t:"The CORRECT time for oral temperature measurement using a mercury thermometer is:",o:["1 minute","3 minutes","5 minutes","7 minutes"],a:1,d:"easy"},
+  {t:"The thermometer is wiped:",o:["From bulb to top (distal to proximal)","From top to bulb (proximal to distal) — end to bulb","At the middle first","Not wiped before reading"],a:1,d:"medium"},
+  {t:"For axillary temperature, the arm position should be:",o:["Abducted at 45 degrees","Forearm crossing the chest with hand resting on opposite shoulder","Extended straight outward","Raised above the head"],a:1,d:"medium"},
+  {t:"The CORRECT duration for axillary temperature measurement is:",o:["3 minutes","5 minutes","7 minutes","10 minutes"],a:1,d:"easy"},
+  {t:"After use, the glass thermometer should be washed with:",o:["Hot water to sterilize","Soap under running water","Alcohol solution in a basin","Hydrogen peroxide"],a:1,d:"easy"},
+ 
+  // ── SECTION 7: VITAL SIGNS – PULSE & RESPIRATION ──────────────────────────────
+  {t:"When measuring a peripheral (radial) pulse, the nurse should use:",o:["The thumb","One finger","Two or three fingers placed on the wrist at the base of the patient's thumb","Four fingers placed across the wrist"],a:2,d:"easy"},
+  {t:"The radial pulse should be counted for:",o:["15 seconds then multiplied by 4","30 seconds then multiplied by 2","A full minute","2 minutes"],a:2,d:"easy"},
+  {t:"The nurse should NOT use the thumb to palpate the pulse because:",o:["The thumb is too thick","The thumb has its own strong pulse that may be confused with the patient's","The thumb is reserved for BP measurement","The thumb is less sensitive"],a:1,d:"medium"},
+  {t:"When measuring respiratory rate in an elderly patient, the nurse should:",o:["Ask the patient to breathe deeply","Hold patient's hand as if counting the pulse to prevent altered breathing","Tell the patient what is being counted","Ask patient to count breaths silently"],a:1,d:"medium"},
+  {t:"Respiratory rate is counted for:",o:["15 seconds","30 seconds","One full minute","2 minutes"],a:2,d:"easy"},
+  {t:"When recording respiratory characteristics, which of the following is NOT typically documented?",o:["Rate","Rhythm","Depth","Color of lips"],a:3,d:"medium"},
+ 
+  // ── SECTION 8: VITAL SIGNS – BLOOD PRESSURE ──────────────────────────────
+  {t:"Before measuring blood pressure, the patient should be inactive for a minimum of:",o:["1 minute","5 minutes","10 minutes","15 minutes"],a:1,d:"easy"},
+  {t:"The blood pressure cuff should be placed how far above the antecubital fossa (armpit area)?",o:["5 cm","2 cm","4 cm","1 cm"],a:1,d:"medium"},
+  {t:"The width of the BP cuff bladder should cover approximately what portion of the upper arm?",o:["1/3","1/2","2/3","3/4"],a:2,d:"hard"},
+  {t:"The sphygmomanometer should be placed at:",o:["Below the heart level","The patient's heart level","Above the heart level","At the level of the patient's eye"],a:1,d:"medium"},
+  {t:"During blood pressure measurement, the cuff should be inflated to how many mmHg above the palpated systolic pressure?",o:["10 mmHg","20 mmHg","30 mmHg","40 mmHg"],a:2,d:"hard"},
+  {t:"If BP re-measurement is required, the nurse should wait at least:",o:["30 seconds","1 minute","2 minutes","5 minutes"],a:2,d:"medium"},
+  {t:"The stethoscope should be placed on the:",o:["Radial artery","Femoral artery","Brachial artery","Carotid artery"],a:2,d:"easy"},
+  {t:"Which leg position is recommended for accurate blood pressure measurement?",o:["Legs crossed","Legs extended on the bed","Feet flat on the floor, legs uncrossed","Legs dangling off the bed"],a:2,d:"easy"},
+ 
+  // ── SECTION 9: RANGE OF MOTION EXERCISES ──────────────────────────────
+  {t:"ROM exercises should be performed:",o:["Quickly to save time","Slowly and gently","Only when the patient requests them","Only when the patient is fully awake"],a:1,d:"easy"},
+  {t:"Each ROM exercise should be repeated:",o:["Once only","2 times","3–5 times","10 times"],a:2,d:"easy"},
+  {t:"ROM exercise for neck (head movement) is CONTRAINDICATED in:",o:["Elderly patients with mild arthritis","Patients in supine surgery, spine trauma, or with central vein line","Patients with knee pain","Patients with mild dementia"],a:1,d:"medium"},
+  {t:"During ROM exercises, support should be provided by holding the patient:",o:["Only at the joint being exercised","Proximal and distal to the joint being exercised","Only distally to the joint","By the limb extremity only"],a:1,d:"medium"},
+  {t:"The nurse should STOP or DECREASE ROM exercise if the patient:",o:["Asks a question","Complains of discomfort or muscle spasm","Shows normal range of movement","Is breathing normally"],a:1,d:"easy"},
+  {t:"Which of the following movements is performed at the ankle joint?",o:["Flexion and extension only","Dorsal flexion, plantar flexion, eversion, inversion","Circumduction and rotation only","Supination and pronation"],a:1,d:"medium"},
+  {t:"For spinal ROM exercises, the patient must:",o:["Perform exercises in supine position","Be able to stand and hold the back of a chair for balance","Be a young adult","Have no history of any back condition"],a:1,d:"medium"},
+  {t:"If the patient experiences back pain during spinal ROM exercises, the nurse should:",o:["Encourage the patient to push through the pain","Stop the exercise immediately","Reduce intensity and continue","Apply a heating pad and continue"],a:2,d:"medium"},
+  {t:"After completing ROM exercises, the nurse should:",o:["Leave the patient in the exercise position","Reposition patient in a comfortable position, wash hands, and document","Immediately measure vital signs","Apply cold packs to exercised joints"],a:1,d:"easy"},
+  {t:"The forearm ROM movements are:",o:["Flexion and extension","Abduction and adduction","Supination and pronation","Circumduction and rotation"],a:2,d:"hard"},
+  {t:"When performing ROM exercises, the nurse should first:",o:["Uncover the entire body","Uncover only the limb to be exercised","Cover the entire body","Ask family to leave the room"],a:1,d:"easy"},
+  {t:"What should be reported to the physician after ROM exercises?",o:["Complete range achieved","Resistance, patient complaints of pain, and signs of inflammation","Normal muscle tone","Patient preferences for next session"],a:1,d:"medium"},
+ 
+  // ── SECTION 10: ENVIRONMENTAL SAFETY & ASSESSMENT ──────────────────────────────
+  {t:"In the environmental assessment of an elderly client's home, which of the following is a potential fall risk?",o:["Adequate lighting","Side rails present","Slippery floors","Near-side phone available"],a:2,d:"easy"},
+  {t:"An appropriate assistive facility for an elderly person's bedroom includes all of the following EXCEPT:",o:["Side rails","Near-side light","Near-side ring","Loose scatter rugs"],a:3,d:"medium"},
+  {t:"During home assessment for elderly safety, the nurse checks for all of the following EXCEPT:",o:["Furniture arrangement","Slippery floors","Presence of stairs","Number of televisions"],a:3,d:"easy"},
+  {t:"Which component is included in environmental safety assessment for the elderly?",o:["Patient's academic achievements","Presence of elevator for mobility","Patient's favorite hobbies","Number of grandchildren"],a:1,d:"easy"},
+ 
+  // ── SECTION 11: CLIENT ASSESSMENT – SYSTEMS ──────────────────────────────
+  {t:"During eye assessment of an elderly patient, the nurse assesses for all of the following EXCEPT:",o:["Visual impairment","Use of glasses","Glaucoma","Kidney function"],a:3,d:"easy"},
+  {t:"Which urinary symptom is commonly assessed in elderly males related to prostate issues?",o:["Vaginal discharge","Prostatitis","Onset of menopause","Breast self-examination"],a:1,d:"easy"},
+  {t:"Which musculoskeletal finding in an elderly patient may indicate osteoporosis risk?",o:["Muscle hypertrophy","History of fracture and kyphosis","Joint hypermobility","Increased perspiration"],a:1,d:"medium"},
+  {t:"Neurological assessment of the elderly includes evaluation of:",o:["Vision and hearing only","Numbness, diminished senses of smell, touch, and taste","Blood pressure and pulse","Skin color and lesions"],a:1,d:"medium"},
+  {t:"During psychosocial assessment of an elderly client, the nurse assesses for:",o:["Blood glucose levels","Feelings of loneliness, confusion, dementia, and anxiety","Joint range of motion","Wound healing"],a:1,d:"easy"},
+  {t:"Which skin change is a normal aging finding in the elderly?",o:["Increased skin thickness","Increased perspiration","Thinning, dryness, and hair loss","Increased skin elasticity"],a:2,d:"medium"},
+ 
+  // ── SECTION 12: CLINICAL CONDITIONS ──────────────────────────────
+  {t:"Osteoporosis is characterized by:",o:["Increased bone density","Decreased bone density leading to fractures","Inflammation of joint synovium","Overgrowth of bone tissue"],a:1,d:"easy"},
+  {t:"Which of the following is a major risk factor for osteoporosis in elderly women?",o:["High calcium intake","Post-menopausal estrogen deficiency","Regular weight-bearing exercise","High vitamin D levels"],a:1,d:"medium"},
+  {t:"COPD (Chronic Obstructive Pulmonary Disease) in the elderly is primarily characterized by:",o:["Reversible airflow limitation","Progressive, largely irreversible airflow limitation","Recurrent pneumonia only","Purely infectious etiology"],a:1,d:"medium"},
+  {t:"Which lifestyle modification is MOST important in managing hypertension in the elderly?",o:["Increased sodium intake","Smoking cessation and reduced alcohol intake","Bed rest","Increased caffeine consumption"],a:1,d:"easy"},
+  {t:"Diabetic retinopathy is a complication of diabetes affecting the:",o:["Kidneys","Retina of the eye","Peripheral nerves","Coronary arteries"],a:1,d:"easy"},
+  {t:"Trachoma is caused by:",o:["Staphylococcus aureus","Chlamydia trachomatis","Herpes simplex virus","Neisseria gonorrhoeae"],a:1,d:"hard"},
+  {t:"A key difference between cataract and glaucoma in elderly patients is that:",o:["Cataract causes increased intraocular pressure; glaucoma causes lens clouding","Glaucoma causes increased intraocular pressure; cataract causes lens clouding","Both cause the same type of vision loss","Glaucoma is always painless"],a:1,d:"medium"},
+  {t:"Coronary artery disease in the elderly is primarily caused by:",o:["Atherosclerosis of coronary vessels","Bacterial infection of coronary arteries","Autoimmune destruction of heart muscle","Congenital heart defects"],a:0,d:"medium"},
+  {t:"Which dietary recommendation is appropriate for an elderly patient with fatty liver disease?",o:["High-fat diet","Reduced calorie and low-fat diet with avoidance of alcohol","Increased red meat consumption","High carbohydrate diet"],a:1,d:"medium"},
+  {t:"Vitamin D deficiency in the elderly is associated with:",o:["Increased bone density","Muscle weakness, bone pain, and increased fracture risk","Improved immune function","Decreased risk of osteoporosis"],a:1,d:"medium"},
+  {t:"Knee replacement surgery (arthroplasty) is most commonly indicated for:",o:["Mild joint stiffness","Severe osteoarthritis with joint destruction causing significant pain and disability","Minor knee injuries","Muscle weakness only"],a:1,d:"medium"},
+  {t:"Which cancer screening is discussed for elderly women in the geriatric curriculum?",o:["Colorectal cancer screening","Cervical cancer PAP smear","Breast cancer screening","Ovarian cancer","Lung cancer"],a:2,d:"easy"},
+  {t:"The primary goal of care for a hepatic (liver) patient in the outpatient setting includes:",o:["High-protein diet to prevent wasting","Monitoring for signs of hepatic encephalopathy and ascites","Encouraging alcohol consumption","Restricting all fluid intake"],a:1,d:"hard"},
+  {t:"Which of the following climate change effects is discussed in the geriatric context?",o:["Increased bone density","Heat-related illness and exacerbation of chronic diseases in the elderly","Improved respiratory function","Reduced cardiovascular risk"],a:1,d:"medium"},
+  {t:"Quality of life in elderly patients post-retirement is affected by all of the following EXCEPT:",o:["Social engagement","Financial security","Physical health","Increased work hours"],a:3,d:"easy"},
+  {t:"Artificial intelligence (AI) in care of the elderly can be utilized for:",o:["Only administrative purposes","Fall detection, medication reminders, and remote monitoring","Replacing all nursing care","Diagnosing psychiatric illness only"],a:1,d:"medium"},
+ 
+  // ── SECTION 13: PROFESSIONAL PRACTICE & OSCE ──────────────────────────────
+  {t:"OSCE stands for:",o:["Oral and Clinical Simulation Examination","Objective Structured Clinical Examination","Observational Skills and Clinical Evaluation","Open-book Structured Clinical Exercise"],a:1,d:"easy"},
+  {t:"In geriatric nursing practice, ethical decision-making is guided by the principle of:",o:["Paternalism only","Respecting patient autonomy and applying professional ethical standards","Only following institutional rules","Deferring all decisions to the physician"],a:1,d:"medium"},
+  {t:"The THREE levels of prevention in geriatric nursing include:",o:["Primary, secondary, and tertiary prevention","Basic, intermediate, and advanced care","Preventive, curative, and palliative care","Assessment, planning, and evaluation"],a:0,d:"easy"},
+  {t:"Inter-professional collaboration in geriatric care aims to:",o:["Reduce nursing responsibility","Maximize health outcomes for patients, families, and communities","Create competition among health team members","Replace the role of the nurse"],a:1,d:"easy"},
+  {t:"Which communication strategy is MOST effective when working with an elderly patient who has hearing impairment?",o:["Speak rapidly to maintain their attention","Speak loudly into a microphone","Face the patient, speak clearly and at moderate pace, use visual aids","Rely on written instructions only"],a:2,d:"medium"},
+  {t:"The nursing care plan for an elderly patient should include all of the following EXCEPT:",o:["Assessment findings","Nursing diagnoses","Personal financial information","Nursing interventions and evaluation"],a:2,d:"easy"},
+  {t:"Which of the following is the PRIMARY purpose of the geriatric clinical log book?",o:["Administrative record keeping","To equip student nurses with practical skills for elderly care","Research data collection","Staff evaluation"],a:1,d:"easy"},
+  {t:"Hand hygiene in clinical procedures is performed:",o:["Only before invasive procedures","Before and after all patient contact and clinical procedures","Only when hands are visibly dirty","Only after removing gloves"],a:1,d:"easy"},
+  {t:"In the context of this geriatric course, field training is conducted at:",o:["Only the university laboratory","Geriatric home and outpatient clinics","Hospital ICU and surgery department","Primary schools only"],a:1,d:"easy"},
+  {t:"Documentation in nursing practice should be:",o:["Estimated and approximate","Complete, concise, and accurate","Only verbal communication","Done by the physician"],a:1,d:"easy"},
+ 
+  // ── SECTION 14: ADVANCED / HARD QUESTIONS ──────────────────────────────
+  {t:"In ROM exercises for the shoulder, which movements are included?",o:["Flexion, extension, and adduction only","Flexion, extension, hyperextension, abduction, adduction, circumduction, external and internal rotation","Only circumduction","Flexion and extension only"],a:1,d:"hard"},
+  {t:"Which of the following signs would CONTRAINDICATE continuing ROM exercises?",o:["Normal range of movement","Patient is fully alert","Redness, swelling, hotness, and tenderness around a joint","Patient's request for a break"],a:2,d:"medium"},
+  {t:"When checking the blood glucose meter strip vial when opened for the first time, the nurse should:",o:["Write the date of opening and check the printed expiry date","Only check expiry date","Discard after one use","Store in refrigerator"],a:0,d:"hard"},
+  {t:"The correct sequence for chemical burn first aid is:",o:["Flush with water → remove clothing → apply neutralizing agent","Wear PPE → reassure → remove chemical source → brush off if dry OR stop exposure → remove clothing → flush 20 min","Apply ice → remove clothing → flush with hot water","Neutralize → dress → seek help"],a:1,d:"hard"},
+  {t:"For BP measurement, auscultation should be performed through:",o:["A thin layer of clothing for patient comfort","Directly on the skin (not through clothing)","Over the patient's sleeve","Using the patient's clothing as a filter"],a:1,d:"medium"},
+  {t:"Which of the following best defines holistic nursing care?",o:["Treating only the patient's primary medical diagnosis","Providing care that addresses the physical, psychological, social, and spiritual needs of patients, families, and communities","Focusing only on medication administration","Caring for patients in isolation from their families"],a:1,d:"medium"},
+  {t:"Cyber-knife radiosurgery in the elderly is related to:",o:["Hip replacement therapy","Non-invasive stereotactic radiation therapy for tumors","Antibiotic treatment for infections","Dialysis for renal failure"],a:1,d:"hard"},
+  {t:"Which of the following is a NORMAL physiological change of aging that affects vital signs?",o:["Increased heart rate at rest","Decreased systolic blood pressure","Increased resting respiratory rate","Increased tendency for orthostatic hypotension"],a:3,d:"hard"},
+  {t:"The 'Rule of Nines' used in burn assessment refers to:",o:["The nine steps of first aid","Dividing the body into regions each representing approximately 9% of total body surface area","Nine minutes of cooling","Nine hours of hospital observation"],a:1,d:"hard"},
+  {t:"Which of the following is the MOST reliable indicator of circulation status during shock assessment?",o:["Skin color alone","Breathing rate, pulse, and level of responsiveness assessed together","Temperature alone","Blood glucose level"],a:1,d:"hard"},
+  {t:"When drawing insulin from a vial, the nurse should first inject air into the vial equal to:",o:["Half the prescribed dose","Twice the prescribed dose","The prescribed number of units","Zero — no air is needed"],a:2,d:"hard"},
+  {t:"Which of the following is the CORRECT order for blood pressure measurement?",o:["Inflate cuff → palpate radial artery → place stethoscope → release air","Palpate radial artery → inflate cuff 30 mmHg above palpated systolic → place stethoscope on brachial artery → release pressure gradually","Place stethoscope → inflate cuff → palpate radial artery → record","Auscultate first → inflate → deflate → record"],a:1,d:"hard"},
+  {t:"Normal fasting blood glucose level in a healthy adult is:",o:["Below 70 mg/dL","70–99 mg/dL","100–125 mg/dL","Above 126 mg/dL"],a:1,d:"medium"},
+  {t:"Which ROM movement is performed at the forearm (radioulnar joint)?",o:["Flexion and extension","Abduction and adduction","Supination and pronation","Circumduction"],a:2,d:"hard"},
+  {t:"The geriatric nursing course (CLN 412) comprises how many total teaching hours?",o:["28 hours","35 hours","42 hours","56 hours"],a:2,d:"easy"},
+  {t:"In the geriatric course, the practical final examination is weighted at how many marks?",o:["10 marks","30 marks","60 marks","70 marks"],a:3,d:"medium"},
+  {t:"Which of the following assessment domains is addressed by evaluating the patient's furniture arrangement and floor type?",o:["Psychosocial assessment","Environmental assessment","Neurological assessment","Musculoskeletal assessment"],a:1,d:"easy"},
+  {t:"The PRIMARY role of the community health nurse in the geriatric home is to:",o:["Administer intravenous medications only","Assess, educate, and promote health while supporting the elderly person's self-reliance","Replace family caregivers entirely","Only conduct environmental inspections"],a:1,d:"easy"},
+  {t:"In first aid for shock, the nurse should raise the patient's legs unless a leg fracture is suspected.",o:["True","False"],a:0,d:"easy"},
+  {t:"Ice or ice packs should be applied directly to a thermal burn for 10 minutes to cool it.",o:["True","False"],a:1,d:"easy"},
+  {t:"For chemical burns, neutralizing agents are recommended before water flushing.",o:["True","False"],a:1,d:"medium"},
+  {t:"In electrical burn first aid, a wet cloth is safe to use to move the electrical source away from the victim.",o:["True","False"],a:1,d:"medium"},
+  {t:"Diabetic patients should always cut their toenails shorter than the end of the toes to prevent ingrown nails.",o:["True","False"],a:1,d:"easy"},
+  {t:"The thumb should NOT be used to measure a patient's peripheral pulse.",o:["True","False"],a:0,d:"easy"},
+  {t:"For axillary temperature measurement, the thermometer should remain in place for 3 minutes.",o:["True","False"],a:1,d:"medium"},
+  {t:"ROM exercises should be performed slowly and gently, with each exercise repeated 3–5 times.",o:["True","False"],a:0,d:"easy"},
+  {t:"Neck ROM exercises are contraindicated in patients with a central venous line.",o:["True","False"],a:0,d:"medium"},
+  {t:"For BP measurement, the cuff may be applied over thin clothing for patient comfort.",o:["True","False"],a:1,d:"medium"},
+  {t:"Insulin should be injected at a 90-degree angle in very thin elderly patients.",o:["True","False"],a:1,d:"hard"},
+  {t:"A slippery floor in an elderly patient's home is considered an environmental fall risk.",o:["True","False"],a:0,d:"easy"},
+  {t:"The blood glucose lancet should prick the middle of the fingertip for the most blood.",o:["True","False"],a:1,d:"easy"},
+  {t:"Trachoma is a bacterial eye infection caused by Chlamydia trachomatis.",o:["True","False"],a:0,d:"hard"},
+  {t:"Diabetic retinopathy is a complication of diabetes that affects the kidneys.",o:["True","False"],a:1,d:"easy"},
+  {t:"Post-menopausal women have a lower risk of osteoporosis than pre-menopausal women.",o:["True","False"],a:1,d:"medium"},
+  {t:"Blossoming fire on clothing should be managed using Stop, Drop, Cover, and Roll technique.",o:["True","False"],a:0,d:"easy"},
+  {t:"Insulin pen priming requires setting the dial to 5 units before pressing the injection button.",o:["True","False"],a:1,d:"hard"},
+  {t:"Documenting blood pressure results should include at minimum both systolic and diastolic values.",o:["True","False"],a:0,d:"easy"},
+  {t:"The spinal ROM exercises can be performed in a supine position by any elderly patient.",o:["True","False"],a:1,d:"medium"},
+  {t:"SCENARIO: A 72-year-old man suddenly becomes pale, sweaty, and confused in the geriatric home. He has a weak, rapid pulse. The nurse suspects he is in shock. What is the FIRST action the nurse should take?",o:["Start IV fluids immediately","Reassure the client and place him in a comfortable position, then lay him on his back with head low and legs raised","Administer oxygen via face mask","Call the physician before touching the patient"],a:1,d:"easy"},
+  {t:"SCENARIO: An elderly woman is brought to the outpatient clinic with a scald burn on her forearm from hot water. Running tap water is available. What is the correct immediate action?",o:["Apply ice packs for 10 minutes","Apply butter or toothpaste to soothe the burn","Run cool water over the burn for 20 minutes, then remove jewellery after cooling begins","Wrap tightly with a dry bandage and refer immediately"],a:2,d:"easy"},
+  {t:"SCENARIO: During a home visit, an 80-year-old diabetic woman says she always cuts her toenails in a rounded shape at the corners. What correction should the nurse make?",o:["Encourage her to continue as this prevents ingrown nails","Advise cutting nails straight across and not shorter than the end of the toes","Tell her to stop cutting nails herself and see a doctor","Advise using scissors rather than nail clippers"],a:1,d:"easy"},
+  {t:"SCENARIO: You are teaching a nursing student to measure an oral temperature. The student places the thermometer bulb on top of the patient's tongue and reads it after 1 minute. Identify TWO errors made.",o:["Wrong placement; should be under the tongue — AND — insufficient time; should be 3 minutes","Correct placement; only time is wrong","Correct placement and time; only documentation is missing","Only the placement is wrong; time is correct"],a:0,d:"medium"},
+  {t:"SCENARIO: A 68-year-old male diabetic patient is learning to inject insulin. He asks if he should inject at 45 or 90 degrees. How should the nurse respond?",o:["Always 45 degrees for safety","Always 90 degrees, regardless of body type","90 degrees for normal weight; 45 degrees may be needed for very thin patients","The angle does not matter for insulin"],a:2,d:"medium"},
+  {t:"SCENARIO: While performing blood glucose testing, the student nurse pricks the patient's fingertip center, squeezes the finger hard, and applies the blood. What TWO errors are present?",o:["Pricking the center (should be the side) AND squeezing too hard may give inaccurate results","Only the squeezing is incorrect","Only the pricking site is incorrect","No errors are present in this procedure"],a:0,d:"medium"},
+  {t:"SCENARIO: During ROM exercises, an elderly patient suddenly complains of severe knee pain when the nurse attempts knee flexion. What should the nurse do?",o:["Encourage the patient to breathe through the pain and continue","Discontinue or decrease ROM for that joint and report signs of inflammation","Apply ice and continue after 5 minutes","Increase speed of movement to complete the ROM"],a:1,d:"medium"},
+  {t:"SCENARIO: A nurse is preparing to measure blood pressure and notices the patient has been walking briskly. What should the nurse do?",o:["Measure BP immediately as exercise gives a more accurate reading","Ask the patient to sit, feet flat on the floor, and wait 5 minutes before measuring","Measure BP standing up instead","Measure BP on both arms simultaneously"],a:1,d:"easy"},
+  {t:"SCENARIO: While conducting a home visit, the nurse observes that an 82-year-old woman has slippery floors, no side rails on the bed, and poor lighting. How should the nurse prioritize these hazards?",o:["Focus only on medication management","These are all environmental fall risks requiring modification — prioritize slippery floors, then lighting, then side rails","Report only to the physician","Document but take no immediate action"],a:1,d:"medium"},
+  {t:"SCENARIO: A nursing student uses a thumb to feel the radial pulse of an elderly patient and counts it for 30 seconds, then multiplies by 2. Two errors are present. What are they?",o:["Using thumb (thumb has its own pulse) AND counting only 30 seconds (should be a full minute) for irregular pulse detection","Only the thumb use is wrong","Only the counting time is wrong","No errors — this is correct technique"],a:0,d:"hard"},
+  {t:"SCENARIO: A 75-year-old patient with chemical burn from a liquid acid is brought to the clinic. The first aider already applied a neutralizing solution. What should the nurse do next?",o:["Praise the first aider and continue with neutralizing agent","Remove neutralizing agent, avoid further neutralizing agents, and flush with cool running water for 20 minutes","Apply ice packs","Dress the wound immediately without flushing"],a:1,d:"hard"},
+  {t:"SCENARIO: After giving insulin, a nurse notices the patient has a burning sensation and raised skin wheal at the injection site. This suggests the insulin was likely injected into:",o:["Subcutaneous tissue","Intradermal layer (too shallow)","Intravenous","Intramuscular layer"],a:1,d:"hard"},
+  {t:"SCENARIO: An elderly man with diabetes visits the outpatient clinic complaining that his feet feel cold at night. The nurse advises him to use a heating pad. Is this advice correct?",o:["Yes, heating pads improve circulation","No; diabetic patients should use warm socks and extra blankets instead — heating pads can cause burns due to reduced sensation","Yes, but only for 10 minutes","No; cold feet in diabetics are not treated"],a:1,d:"medium"},
+  {t:"SCENARIO: A 78-year-old woman in the geriatric home has been sedentary for 2 months post-hospitalization. The nurse is planning ROM exercises. Which joint movement is CONTRAINDICATED because the patient has a central venous catheter in her neck?",o:["Shoulder circumduction","Knee flexion/extension","Neck ROM (flexion, extension, lateral flexion)","Ankle dorsiflexion"],a:2,d:"hard"},
+  {t:"SCENARIO: The blood glucose meter turns on but shows an error code when blood is applied. The nurse notices the strip was opened 3 weeks ago but the vial was not recapped immediately after removal. What is the MOST likely cause?",o:["Insufficient blood applied","The strip may have degraded due to improper storage (vial not recapped)","Wrong meter calibration","Patient's blood sugar is too high for the meter"],a:1,d:"hard"},
+  {t:"SCENARIO: A nursing student inflates the BP cuff to only 10 mmHg above the systolic palpated level and releases quickly. What effect will this have?",o:["The diastolic reading will be falsely high","The systolic reading may be underestimated and the diastolic overestimated due to rapid deflation","No effect on the reading","The reading will be 30 mmHg too high"],a:1,d:"hard"},
+  {t:"SCENARIO: An elderly woman tells the nurse she has been feeling lonely since her husband died and often lives in the past. Which assessment domain does this fall under?",o:["Environmental assessment","Musculoskeletal assessment","Psychosocial assessment","Neurological assessment"],a:2,d:"easy"},
+  {t:"SCENARIO: During an outpatient visit, an 80-year-old man with chronic osteoarthritis reports pain with weight bearing and significant limitation in daily activities. His X-ray shows severe joint destruction. What intervention is likely to be discussed?",o:["Conservative physiotherapy only","Knee replacement surgery","Long-term bed rest","Oral corticosteroids indefinitely"],a:1,d:"medium"},
+  {t:"SCENARIO: A 66-year-old female patient has glaucoma and cataract in the same eye. The nurse explains the difference to a student. Which explanation is CORRECT?",o:["Cataract raises eye pressure; glaucoma causes lens clouding","Glaucoma raises intraocular pressure causing optic nerve damage; cataract causes clouding of the lens causing blurred vision","Both cause the same pathology","Glaucoma only affects the retina"],a:1,d:"medium"},
+  {t:"SCENARIO: While teaching an elderly group about fall prevention, the nurse should recommend all of the following EXCEPT:",o:["Installing side rails on the bed","Ensuring adequate lighting","Removing scatter rugs","Using slippery tile flooring in the bathroom"],a:3,d:"easy"},
+  {t:"SCENARIO: A 74-year-old diabetic patient is found unconscious with a blood glucose of 38 mg/dL. The nurse should classify this as:",o:["Hyperglycemic emergency","Hypoglycemic emergency","Normal blood glucose level for the elderly","Diabetic ketoacidosis"],a:1,d:"medium"},
+  {t:"SCENARIO: During a class presentation on osteoporosis, a student states that post-menopausal women are at lower risk because estrogen protects bones. The instructor should:",o:["Agree — this is correct","Correct the student — post-menopausal women have LOWER estrogen, which INCREASES risk of osteoporosis","Ask the student to elaborate further without correction","Redirect to a different topic"],a:1,d:"medium"},
+  {t:"SCENARIO: The nurse is documenting after performing insulin injection. Which set of information is ESSENTIAL to record?",o:["Time, dose, type of insulin, site of injection, and monitoring for reactions","Only the dose administered","Time and site only","Patient's weight and diagnosis only"],a:0,d:"easy"},
+  {t:"SCENARIO: A 70-year-old patient with COPD is visited at home. The nurse notices the patient becomes breathless after minimal activity and has persistent cough. Which nursing priority is MOST appropriate?",o:["Advise increased physical activity immediately","Assess respiratory rate, oxygen saturation, and teach pursed-lip breathing and energy conservation","Advise complete bed rest","Focus only on medication compliance"],a:1,d:"hard"},
+  {t:"SCENARIO: During axillary temperature measurement, the student places the thermometer in the axilla without checking if it is dry. What error was made and what is the consequence?",o:["No error — axilla moisture does not affect temperature readings","The axilla should be dry and clean before placement; moisture can give a lower (falsely reduced) temperature reading","The axilla should be wet for conduction","Only the arm position matters, not axilla dryness"],a:1,d:"hard"},
+  {t:"SCENARIO: A student nurse is performing a geriatric home assessment. She finds that the patient's bed has no side rails, the stairs have no handrails, and there is a loose rug at the entrance. How should these be categorized?",o:["Medical hazards requiring prescription","Environmental fall hazards requiring modification and patient/family education","Normal home features","Concerns only if the patient is visually impaired"],a:1,d:"easy"},
+  {t:"SCENARIO: A 77-year-old woman is confused, forgetful, and shows evidence of paranoia during a psychosocial assessment. Which conditions should the nurse assess for?",o:["Osteoporosis and hypertension","Dementia, anxiety, confusion, and adjustment to social life","Urinary incontinence only","Skin integrity issues"],a:1,d:"medium"},
+  {t:"SCENARIO: An elderly male is seen at the outpatient ophthalmology clinic with gradual painless loss of vision. Examination shows clouding of the lens. The nurse recognizes this as:",o:["Glaucoma","Trachoma","Cataract","Diabetic retinopathy"],a:2,d:"easy"},
+  {t:"SCENARIO: An elderly woman comes to the clinic with complaints of eye discharge, redness, and photophobia. The nurse suspects trachoma. What is the causative organism?",o:["Staphylococcus aureus","Herpes simplex virus","Chlamydia trachomatis","Pseudomonas aeruginosa"],a:2,d:"hard"},
+  {t:"SCENARIO: A 65-year-old obese male with fatty liver disease asks the nurse what dietary changes he should make. The BEST advice includes:",o:["High-protein, high-fat diet","Low-calorie, low-fat diet with complete avoidance of alcohol","High-carbohydrate diet to restore liver glycogen","Red meat three times a week for iron"],a:1,d:"medium"},
+  {t:"SCENARIO: An elderly woman says she smokes 10 cigarettes a day and drinks 3 cups of coffee. She asks if these habits affect her health. The nurse should advise:",o:["Coffee is harmless; only smoking needs to stop","Both smoking cessation and reduction of caffeine are important; smoking is a risk factor for COPD, coronary artery disease, and hypertension","These habits have no effect at her age","Only reduce coffee intake"],a:1,d:"medium"},
+  {t:"SCENARIO: You need to measure respiratory rate in a suspicious elderly patient who will consciously alter their breathing if told. What is the BEST technique?",o:["Ask the patient to breathe normally while you count","Hold the patient's wrist as if counting the pulse while observing chest and abdominal movement","Use a pulse oximeter instead","Ask a family member to count breaths"],a:1,d:"medium"},
+  {t:"SCENARIO: A student nurse inflated the BP cuff but placed the stethoscope on the radial artery instead of the brachial artery. What will be the result?",o:["Accurate systolic reading, inaccurate diastolic","Inaccurate BP measurement — sounds may not be heard or may be misleading","Accurate result — radial artery is acceptable","Higher than normal reading"],a:1,d:"hard"},
+  {t:"SCENARIO: An elderly patient with diabetes has a fasting blood glucose of 220 mg/dL. The nurse is going to administer insulin. Before drawing the dose, the nurse notices the insulin is cloudy. What should the nurse do?",o:["Discard the cloudy insulin","Shake the vial vigorously","Gently roll the vial between the palms to mix properly, then inspect and draw dose","Add normal saline to dilute"],a:2,d:"medium"},
+  {t:"SCENARIO: During a diabetic foot care session, the nurse applies moisturizing cream between the toes. Is this correct practice?",o:["Yes, moisturize everywhere including between toes","No; moisturizing cream should be applied to dry feet but thoroughly dry between the toes — do NOT apply cream between them","Yes, but only on the sole","No; no cream should be applied anywhere"],a:1,d:"hard"},
+  {t:"SCENARIO: You are supervising a student doing ROM exercises for the hip. The student performs only flexion and extension. What movements are they MISSING?",o:["No movements are missing","Hyperextension, abduction, adduction, circumduction, external and internal rotation","Only circumduction","Supination and pronation"],a:1,d:"hard"},
+  {t:"SCENARIO: An 80-year-old man in the geriatric home says he cannot exercise because of severe back pain when trying to do spinal exercises. The appropriate nursing response is:",o:["Encourage him to push through the pain — it is normal","Stop spinal exercises immediately; spinal ROM should only be done when standing with support, and if back pain occurs, stop","Administer pain medication and continue","Apply a heating pad and try again after 30 minutes"],a:1,d:"medium"},
+  {t:"SCENARIO: A newly diagnosed 72-year-old hypertensive patient asks what lifestyle changes are needed. The nurse's education should include all of the following EXCEPT:",o:["Reduce sodium intake","Increase physical activity","Stop smoking","Increase daily alcohol consumption"],a:3,d:"easy"},
+  {t:"SCENARIO: A student nurse leaves the blood glucose meter running without applying blood and comes back after 5 minutes. What has likely happened?",o:["The meter has auto-corrected and is still ready","The meter has turned off (it stays on for only 3 minutes before timing out)","The blood sugar has been recorded as zero","The battery has died"],a:1,d:"hard"},
+  {t:"SCENARIO: While inspecting a diabetic patient's feet, the nurse finds a small painless blister on the sole. The patient was unaware. This finding MOST likely indicates:",o:["Normal skin aging","Reduced peripheral sensation (peripheral neuropathy) leading to unnoticed injury — requires immediate referral","Normal callus formation — no action needed","Only footwear issue — change shoes"],a:1,d:"hard"},
+  {t:"SCENARIO: A 69-year-old woman is brought to the ER after severe electrical shock from faulty wiring. She is unresponsive. The first action is:",o:["Touch the patient and begin CPR immediately","Call for emergency, turn off electricity source or move it with a dry non-conducting object, then assess breathing and pulse and begin CPR if needed","Apply sterile dressings to all burn sites first","Administer IV fluids"],a:1,d:"medium"},
+  {t:"SCENARIO: A nursing student assessing an elderly woman notes kyphosis, joint swelling, and history of vertebral fracture. Which condition should the nurse suspect?",o:["Hypertension","Osteoporosis with possible vertebral compression fractures","COPD","Diabetic neuropathy"],a:1,d:"medium"},
+  {t:"SCENARIO: The student nurse is priming the insulin pen and sets the dial to 5 units. The instructor corrects her. What is the correct dose for priming?",o:["5 units","2 units","1 unit","10 units"],a:1,d:"hard"},
+  {t:"SCENARIO: An 85-year-old woman with Vitamin D deficiency presents with bone pain, proximal muscle weakness, and has had two falls in the last month. The nurse should advise:",o:["Bed rest to prevent further falls","Vitamin D supplementation, calcium intake, and supervised safe mobility exercises","High-dose NSAIDs for bone pain","Avoid sunlight completely"],a:1,d:"medium"},
+  {t:"SCENARIO: A patient in the outpatient clinic has Type 2 diabetes and is a long-term smoker with hypertension. His eyes are being screened. The nurse explains that the risk of which eye condition is elevated in long-term, poorly controlled diabetes?",o:["Trachoma","Glaucoma only","Diabetic retinopathy (and possibly cataract and glaucoma)","Only cataract"],a:2,d:"hard"},
+  {t:"SCENARIO: The community nurse finds that an elderly man lives alone, lacks social support, rarely leaves home, and states 'I have no reason to go on.' What is the PRIORITY nursing concern?",o:["Nutritional assessment","Fall prevention","Psychosocial risk — possible depression or suicidal ideation — requires immediate further assessment and referral","Skin integrity"],a:2,d:"hard"},
+  {t:"SCENARIO: A student records the axillary temperature as 37.5°C after leaving the thermometer for 3 minutes. The instructor questions the documentation. Why?",o:["The value is too high","Axillary temperature requires 5 minutes, not 3 — the result may be falsely low","The thermometer should not have been wiped","The value should always be 36°C"],a:1,d:"medium"},
+  {t:"SCENARIO: During a burn first aid lecture, a student states that a blanket should be used to cover electrical burn wounds. The correct response is:",o:["Correct — blankets provide warmth and protection","Incorrect — loose fibers from blankets stick to burns and can cause infection; use sterile gauze or a clean cloth","Correct only for large burns","Correct if the blanket is sterile"],a:1,d:"medium"},
+  {t:"SCENARIO: An elderly man with knee osteoarthritis asks the nurse about ROM exercises. He wants to know which exercises require him to be able to stand. The nurse explains that only ___ exercises require standing.",o:["Hip","Ankle","Spinal","Shoulder"],a:2,d:"hard"},
+  {t:"SCENARIO: After a successful insulin injection, the patient reports dizziness, sweating, and confusion 30 minutes later. Blood glucose testing shows 55 mg/dL. What is the MOST likely cause and nursing response?",o:["Hyperglycemic episode — administer more insulin","Hypoglycemic episode — administer fast-acting carbohydrate and monitor closely","Normal post-injection response — no action needed","Side effect of the injection technique — change the site"],a:1,d:"hard"},
+];
+
+
+// ── State ──
+let current = 0;
+let answers = [];
+let answered = false;
+
+// ── Init ──
+document.getElementById('quizTitleDisplay').textContent = QUIZ_TITLE;
+document.getElementById('startDesc').textContent        = QUIZ_DESC;
+document.getElementById('totalQDisplay').textContent    = QUESTIONS.length;
+
+// ── Theme ──
+const themeBtn = document.getElementById('themeBtn');
+let theme = localStorage.getItem('theme') || 'light';
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', t);
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+
+// ── Screen switch ──
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// ── Start ──
+function startQuiz() {
+  current = 0;
+  answers = new Array(QUESTIONS.length).fill(null);
+  answered = false;
+  show('quizScreen');
+  renderQuestion();
+}
+
+// ── Render question ──
+function renderQuestion() {
+  answered = false;
+  const q   = QUESTIONS[current];
+  const tot = QUESTIONS.length;
+
+  document.getElementById('qNum').textContent  = `QUESTION ${current + 1}`;
+  document.getElementById('qText').textContent = q.t;
+  document.getElementById('progressLabel').textContent = `${current+1} / ${tot}`;
+  document.getElementById('progressFill').style.width  = `${((current+1)/tot)*100}%`;
+  document.getElementById('btnNext').disabled = true;
+
+  const fb = document.getElementById('feedbackBox');
+  fb.className = 'feedback-box';
+
+  const letters = ['A','B','C','D','E'];
+  const list = document.getElementById('optsList');
+  list.innerHTML = '';
+  q.o.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.innerHTML = `<span class="opt-letter">${letters[i]}</span>${opt}`;
+    btn.onclick = () => selectAnswer(i, btn);
+    list.appendChild(btn);
+  });
+
+  const card = document.getElementById('qCard');
+  card.style.animation = 'none';
+  card.offsetHeight;
+  card.style.animation = 'slideIn .35s ease';
+}
+
+// ── Select answer ──
+function selectAnswer(chosen, clickedBtn) {
+  if (answered) return;
+  answered = true;
+  answers[current] = chosen;
+
+  const q    = QUESTIONS[current];
+  const opts = document.querySelectorAll('.opt-btn');
+  const correct = q.a;
+
+  opts.forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === correct)        btn.classList.add('correct');
+    if (i === chosen && chosen !== correct) btn.classList.add('wrong');
+  });
+
+  const fb = document.getElementById('feedbackBox');
+  if (chosen === correct) {
+    fb.className = 'feedback-box correct-fb show';
+    document.getElementById('feedbackIcon').textContent = '✅';
+    document.getElementById('feedbackText').textContent = 'Correct answer! 🎉';
+  } else {
+    fb.className = 'feedback-box wrong-fb show';
+    document.getElementById('feedbackIcon').textContent = '❌';
+    document.getElementById('feedbackText').textContent =
+      `Correct answer: ${q.o[correct]}`;
+  }
+
+  document.getElementById('btnNext').disabled = false;
+}
+
+// ── Skip ──
+function skipQuestion() {
+  if (answered) return;
+  answers[current] = null;
+  nextQuestion();
+}
+
+// ── Next ──
+function nextQuestion() {
+  current++;
+  if (current >= QUESTIONS.length) {
+    showResult();
+  } else {
+    answered = false;
+    renderQuestion();
+  }
+}
+
+// ── Result ──
+function showResult() {
+  let correct = 0, wrong = 0, skip = 0;
+  answers.forEach((a, i) => {
+    if (a === null)                skip++;
+    else if (a === QUESTIONS[i].a) correct++;
+    else                           wrong++;
+  });
+  const pct = Math.round((correct / QUESTIONS.length) * 100);
+  document.getElementById('rCorrect').textContent = correct;
+  document.getElementById('rWrong').textContent   = wrong;
+  document.getElementById('rSkip').textContent    = skip;
+  document.getElementById('pctNum').textContent   = pct;
+
+  let emoji, title, sub;
+  if      (pct >= 90) { emoji='🏆'; title='Excellent! Outstanding!';    sub='Amazing result — keep it up!'; }
+  else if (pct >= 75) { emoji='🎉'; title='Very Good!';                 sub='Strong performance, keep reviewing to reach the top!'; }
+  else if (pct >= 60) { emoji='💪'; title='Good, but room to improve!'; sub='Review your wrong answers and try again'; }
+  else if (pct >= 40) { emoji='📚'; title='Needs more revision';        sub='Go back to your notes and retake the quiz'; }
+  else                { emoji='😅'; title="Don't worry, keep studying!";sub='Revision is the key — try again!'; }
+
+  document.getElementById('resultEmoji').textContent = emoji;
+  document.getElementById('resultTitle').textContent = title;
+  document.getElementById('resultSub').textContent   = sub;
+
+  const circ  = 2 * Math.PI * 62;
+  const offset = circ - (pct / 100) * circ;
+  const arc = document.getElementById('circleArc');
+  arc.style.strokeDashoffset = '389.6';
+  arc.style.stroke = pct >= 60 ? 'var(--green)' : pct >= 40 ? 'var(--c)' : 'var(--red)';
+  setTimeout(() => { arc.style.strokeDashoffset = offset; }, 200);
+
+  show('resultScreen');
+}
+
+// ── Review ──
+function showReview() {
+  const list = document.getElementById('reviewList');
+  list.innerHTML = '';
+  const letters = ['A','B','C','D','E'];
+
+  QUESTIONS.forEach((q, qi) => {
+    const userAns = answers[qi];
+    let statusClass, statusText;
+    if      (userAns === null)       { statusClass='status-skip';    statusText='⏭ Skipped'; }
+    else if (userAns === q.a)        { statusClass='status-correct'; statusText='✅ Correct'; }
+    else                             { statusClass='status-wrong';   statusText='❌ Wrong'; }
+
+    const card = document.createElement('div');
+    card.className = 'review-card';
+    card.innerHTML = `
+      <div class="review-card-top">
+        <div class="review-q-label">QUESTION ${qi+1}</div>
+        <div class="review-q-text">${q.t}</div>
+        <div class="review-status ${statusClass}">${statusText}</div>
+      </div>
+      <div class="review-opts">
+        ${q.o.map((opt, oi) => {
+          let cls = 'review-opt';
+          if (oi === q.a)                        cls += ' is-correct';
+          if (oi === userAns && userAns !== q.a) cls += ' is-wrong';
+          return `<div class="${cls}"><div class="review-dot"></div>${letters[oi]}. ${opt}</div>`;
+        }).join('')}
+      </div>`;
+    list.appendChild(card);
+  });
+
+  show('reviewScreen');
+}
+
+function retryQuiz() {
+  current = 0;
+  answers = new Array(QUESTIONS.length).fill(null);
+  answered = false;
+  show('quizScreen');
+  renderQuestion();
+}
+</script>
+</body>
+</html>
