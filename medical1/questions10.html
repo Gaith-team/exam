@@ -1,0 +1,704 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --accent:       #2563eb;
+  --accent-light: #3b82f6;
+  --accent-dark:  #1d4ed8;
+  --accent-glow:  rgba(37,99,235,0.2);
+  --bg:      #f8fafc;
+  --bg2:     #eef2f7;
+  --card:    #ffffff;
+  --text:    #1a2332;
+  --text2:   #4a5568;
+  --text3:   #718096;
+  --bc:      rgba(0,0,0,0.07);
+  --success: #16a34a;
+  --danger:  #dc2626;
+  --warn:    #1d4ed8;
+  --r:       16px;
+  --tr:      all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="dark"] {
+  --bg:   #0d1117; --bg2: #161b22; --card: #1c2333;
+  --text: #e6edf3; --text2: #b1bac4; --text3: #7d8590;
+  --bc:   rgba(255,255,255,0.08);
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg); color: var(--text);
+  min-height: 100vh; overflow-x: hidden;
+  transition: background .4s, color .4s;
+}
+
+/* PROGRESS TOP */
+#prog-bar {
+  position: fixed; top: 0; left: 0; height: 3px; z-index: 999;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  transition: width .2s;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px; height: 64px;
+  background: rgba(248,250,252,.93); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--bc); transition: var(--tr);
+}
+[data-theme="dark"] nav { background: rgba(13,17,23,.95); }
+
+.nav-back {
+  display: flex; align-items: center; gap: 7px;
+  color: var(--text2); text-decoration: none; font-size: 13px; font-weight: 700;
+  padding: 7px 13px; border-radius: 8px; border: 1px solid var(--bc);
+  background: var(--card); transition: var(--tr);
+}
+.nav-back:hover { color: var(--accent); border-color: var(--accent-glow); transform: translateX(3px); }
+.nav-brand { display: flex; align-items: center; gap: 9px; font-size: 15px; font-weight: 900; color: var(--text); }
+.nav-logo-icon {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 12px; font-weight: 900;
+}
+.nav-right { display: flex; align-items: center; gap: 8px; }
+.theme-btn {
+  width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--bc);
+  background: var(--card); cursor: pointer; font-size: 15px;
+  display: flex; align-items: center; justify-content: center; transition: var(--tr);
+}
+.theme-btn:hover { border-color: var(--accent); transform: rotate(20deg); }
+
+/* HERO BAND */
+.hero-band {
+  margin-top: 64px;
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent), var(--accent-light));
+  padding: 40px 24px 36px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.hero-band::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 600px 200px at 50% 100%, rgba(255,255,255,.12) 0%, transparent 70%);
+}
+.hero-band-icon {
+  width: 68px; height: 68px; border-radius: 20px;
+  background: rgba(255,255,255,.2); backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 30px; margin: 0 auto 14px; border: 1.5px solid rgba(255,255,255,.35);
+}
+.hero-band h1 { font-size: clamp(20px,4vw,30px); font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero-band p { font-size: 13px; color: rgba(255,255,255,.8); }
+.hero-band-meta {
+  display: flex; justify-content: center; gap: 24px; margin-top: 20px;
+  flex-wrap: wrap;
+}
+.meta-pill {
+  background: rgba(255,255,255,.18); backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,.3); border-radius: 50px;
+  padding: 6px 16px; font-size: 12px; font-weight: 700; color: #fff;
+  display: flex; align-items: center; gap: 6px;
+}
+
+/* EXAM SHELL */
+.shell { max-width: 560px; margin: 0 auto; padding: 24px 20px 80px; }
+
+/* STATS ROW */
+.stats-row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 16px;
+}
+.stat-box {
+  background: var(--card); border: 1px solid var(--bc); border-radius: var(--r);
+  padding: 12px 10px; text-align: center;
+}
+.stat-box .val { font-size: 20px; font-weight: 900; }
+.stat-box .lbl { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.stat-correct { color: var(--success); }
+.stat-wrong   { color: var(--danger); }
+.stat-remain  { color: var(--accent); }
+
+/* PROGRESS STRIP */
+.prog-strip {
+  background: var(--card); border: 1px solid var(--bc); border-radius: var(--r);
+  padding: 14px 16px; margin-bottom: 16px;
+  display: flex; align-items: center; gap: 14px;
+}
+.prog-label { font-size: 13px; font-weight: 700; color: var(--text2); white-space: nowrap; }
+.prog-track { flex: 1; height: 8px; background: var(--bg2); border-radius: 8px; overflow: hidden; }
+.prog-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  border-radius: 8px; transition: width .4s;
+}
+.timer-badge {
+  min-width: 64px; height: 36px; border-radius: 18px;
+  background: var(--bg2); border: 1px solid var(--bc);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 900; color: var(--text);
+  gap: 5px; padding: 0 12px; flex-shrink: 0;
+}
+.timer-badge.warn { color: var(--warn); border-color: rgba(217,119,6,.3); background: rgba(217,119,6,.08); }
+.timer-badge.danger { color: var(--danger); border-color: rgba(220,38,38,.3); background: rgba(220,38,38,.08); animation: pulse .8s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.6} }
+
+/* QUESTION CARD */
+.q-card {
+  background: var(--card); border: 1px solid var(--bc);
+  border-radius: 20px; overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+  transition: box-shadow .3s;
+}
+.q-header {
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  padding: 4px 18px 4px;
+  display: flex; align-items: center; gap: 8px;
+}
+.q-num {
+  background: rgba(255,255,255,.2); border-radius: 8px;
+  padding: 3px 10px; font-size: 11px; font-weight: 700; color: #fff;
+}
+.q-text {
+  padding: 22px 18px 14px; font-size: 15px; font-weight: 700; color: var(--text);
+  line-height: 1.65; border-bottom: 1px solid var(--bc);
+  text-align: left; direction: ltr;
+}
+.options { padding: 14px 18px 18px; display: flex; flex-direction: column; gap: 10px; }
+
+/* OPTION */
+.opt {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px; border-radius: 12px;
+  border: 1.5px solid var(--bc); background: var(--bg);
+  cursor: pointer; font-size: 14px; font-weight: 600; color: var(--text);
+  transition: var(--tr); user-select: none;
+  direction: ltr; text-align: left;
+}
+.opt:hover:not(.disabled) {
+  border-color: var(--accent); background: var(--accent-glow);
+  transform: translateX(3px);
+}
+.opt-letter {
+  width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+  background: var(--bg2); border: 1px solid var(--bc);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 900; color: var(--text3);
+  transition: var(--tr);
+}
+.opt.correct {
+  border-color: var(--success); background: rgba(22,163,74,.08);
+}
+.opt.correct .opt-letter {
+  background: var(--success); color: #fff; border-color: var(--success);
+}
+.opt.wrong {
+  border-color: var(--danger); background: rgba(220,38,38,.07);
+}
+.opt.wrong .opt-letter {
+  background: var(--danger); color: #fff; border-color: var(--danger);
+}
+.opt.disabled { pointer-events: none; }
+
+/* FEEDBACK */
+.feedback-bar {
+  margin: 14px 18px; padding: 12px 16px; border-radius: 12px;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px; font-weight: 700;
+  animation: popIn .4s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes popIn { from{transform:scale(.8);opacity:0} to{transform:scale(1);opacity:1} }
+.feedback-bar.ok { background: rgba(22,163,74,.1); color: var(--success); border: 1px solid rgba(22,163,74,.25); }
+.feedback-bar.no { background: rgba(220,38,38,.08); color: var(--danger); border: 1px solid rgba(220,38,38,.2); }
+.feedback-icon { font-size: 20px; }
+
+/* EXPLANATION */
+.explanation {
+  margin: 0 18px 14px; padding: 12px 14px;
+  background: rgba(var(--accent-rgb),.06);
+  border-radius: 10px; border-right: 3px solid var(--accent);
+  font-size: 13px; color: var(--text2); line-height: 1.6;
+  display: none;
+}
+
+/* NAV BTNS */
+.nav-btns { padding: 4px 18px 18px; display: flex; gap: 10px; }
+.btn {
+  flex: 1; padding: 13px; border: none; border-radius: 12px;
+  font-size: 14px; font-weight: 900; cursor: pointer;
+  font-family: 'Outfit', sans-serif; transition: var(--tr);
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+}
+.btn-next {
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  color: #fff; box-shadow: 0 4px 14px var(--accent-glow);
+}
+.btn-next:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
+.btn-skip {
+  background: var(--bg2); color: var(--text2); border: 1px solid var(--bc); flex: 0 0 auto; padding: 13px 18px;
+}
+.btn-skip:hover { border-color: var(--warn); color: var(--warn); }
+
+/* ===== RESULTS ===== */
+.result-hero {
+  text-align: center; padding: 36px 20px 28px;
+  background: var(--card); border-radius: 20px;
+  border: 1px solid var(--bc); margin-bottom: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+}
+.score-ring {
+  width: 110px; height: 110px; border-radius: 50%; margin: 0 auto 18px;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; border: 5px solid var(--bg2);
+  position: relative;
+}
+.score-ring svg { position: absolute; inset: -5px; width: calc(100% + 10px); height: calc(100% + 10px); transform: rotate(-90deg); }
+.score-ring circle { fill: none; stroke-width: 5; stroke-linecap: round; }
+.ring-bg { stroke: var(--bg2); }
+.ring-fill { stroke: var(--accent); transition: stroke-dashoffset 1s ease; }
+.score-num { font-size: 28px; font-weight: 900; color: var(--text); }
+.score-pct { font-size: 12px; color: var(--text3); }
+.result-grade { font-size: 22px; font-weight: 900; margin-bottom: 6px; }
+.result-sub { font-size: 14px; color: var(--text2); }
+.result-stats {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 20px;
+}
+.rs { background: var(--bg2); border-radius: 10px; padding: 12px 8px; text-align: center; }
+.rs .n { font-size: 20px; font-weight: 900; }
+.rs .l { font-size: 11px; color: var(--text3); }
+
+/* REPORT ITEMS */
+.report-item {
+  background: var(--card); border: 1px solid var(--bc); border-radius: 14px;
+  padding: 16px; margin-bottom: 10px; border-right: 4px solid var(--bc);
+}
+.report-item.ok { border-right-color: var(--success); }
+.report-item.no { border-right-color: var(--danger); }
+.report-item .ri-q { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+.report-item .ri-row {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; margin-top: 5px; color: var(--text2);
+}
+.ri-badge {
+  padding: 2px 8px; border-radius: 6px; font-weight: 700; font-size: 11px; flex-shrink: 0;
+}
+.ri-yours { background: rgba(220,38,38,.1); color: var(--danger); }
+.ri-right { background: rgba(22,163,74,.1); color: var(--success); }
+
+.result-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+.btn-retry { background: linear-gradient(135deg, var(--accent-dark), var(--accent)); color: #fff; }
+.btn-retry:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
+.btn-home { background: var(--bg2); color: var(--text); border: 1px solid var(--bc); }
+.btn-home:hover { border-color: var(--accent); color: var(--accent); }
+
+/* FOOTER */
+footer {
+  background: var(--bg2); border-top: 1px solid var(--bc);
+  padding: 22px 24px; display: flex; align-items: center;
+  justify-content: space-between; flex-wrap: wrap; gap: 10px;
+}
+.footer-brand { font-size: 14px; font-weight: 700; }
+.footer-brand span { color: var(--accent); }
+.footer-tg { display: flex; align-items: center; gap: 5px; text-decoration: none; color: #229ED9; font-size: 12px; font-weight: 600; }
+
+@media (max-width: 480px) {
+  nav { padding: 0 14px; }
+  .shell { padding: 16px 14px 60px; }
+  .nav-brand span { display: none; }
+  .hero-band { padding: 30px 16px 28px; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog-bar" style="width:0%"></div>
+
+<nav>
+  <a href="https://gaith-team.github.io/exam/medical1/index.html" class="nav-back"><i class="fa-solid fa-arrow-right"></i> رجوع</a>
+  <div class="nav-brand">
+    <div class="nav-logo-icon">GT</div>
+    <span>GHAITH TEAM</span>
+  </div>
+  <div class="nav-right">
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<div class="hero-band">
+  <div class="hero-band-icon">📋</div>
+  <h1>Medical-Surgical Nursing 1 </h1>
+  <p>Nursing management of patient with digestive disorder</p>
+  <div class="hero-band-meta">
+    <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">-- سؤال</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-clock"></i> 60 Min</div>
+    <div class="meta-pill"><i class="fa-solid fa-shuffle"></i> Shuffled</div>
+  </div>
+</div>
+
+<div class="shell">
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="val stat-correct" id="sCorrect">0</div>
+      <div class="lbl">✔ صحيح</div>
+    </div>
+    <div class="stat-box">
+      <div class="val stat-wrong" id="sWrong">0</div>
+      <div class="lbl">✖ خطأ</div>
+    </div>
+    <div class="stat-box">
+      <div class="val stat-remain" id="sRemain">--%</div>
+      <div class="lbl">⏳ متبقي</div>
+    </div>
+  </div>
+
+  <!-- PROGRESS STRIP -->
+  <div class="prog-strip">
+    <div class="prog-label" id="progLabel">سؤال ١</div>
+    <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+    <div class="timer-badge" id="timerBadge"><i class="fa-regular fa-clock"></i> <span id="timerTxt">60:00</span></div>
+  </div>
+
+  <!-- APP -->
+  <div id="app"></div>
+</div>
+
+<footer>
+  <div class="footer-brand">GHAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg">
+    <i class="fa-brands fa-telegram"></i> @nursing2bu
+  </a>
+</footer>
+
+<script>
+const QUESTIONS = [
+{"t": "What is the term for a surgical operation where one or more branches of the vagus nerve are cut?", "o": ["Pyloroplasty", "Gastrectomy", "Enterostomy", "Vagotomy"], "a": 3},
+{"t": "A peptic ulcer is an excavation that can form in which of the following locations?", "o": ["Duodenum", "Stomach", "All of the above", "Esophagus"], "a": 2},
+{"t": "What is the most common age range for the occurrence of peptic ulcers?", "o": ["25-50 years", "60-80 years", "Over 85 years", "10-20 years"], "a": 0},
+{"t": "Which blood type is associated with a higher incidence of peptic ulcers?", "o": ["Type AB", "Type A", "Type O", "Type B"], "a": 2},
+{"t": "Which bacterium is strongly associated with the development of peptic ulcers?", "o": ["Streptococcus", "H. pylori", "Staphylococcus", "E. coli"], "a": 1},
+{"t": "The chronic use of which class of drugs is a major predisposing factor for peptic ulcers?", "o": ["Antibiotics", "Statins", "NSAIDs", "Antihistamines"], "a": 2},
+{"t": "In duodenal ulcers, gastric acid secretion is typically:", "o": ["Normal", "Absent", "Decreased", "More than normal"], "a": 3},
+{"t": "Which type of ulcer is more likely to cause pain 2-3 hours after a meal and often awakens the patient at night?", "o": ["Stress ulcer", "Gastric ulcer", "Duodenal ulcer", "Esophageal ulcer"], "a": 2},
+{"t": "Vomiting is more common in which type of ulcer?", "o": ["Gastric ulcer", "Marginal ulcer", "Duodenal ulcer", "Esophageal ulcer"], "a": 0},
+{"t": "What is a characteristic symptom of a peptic ulcer?", "o": ["Dull, gnawing pain in the mid-epigastrium", "Sharp chest pain", "Lower abdominal cramping", "Right lower quadrant pain"], "a": 0},
+{"t": "How is the pain of a duodenal ulcer typically relieved?", "o": ["By eating or taking alkali", "By lying flat", "By exercise", "By drinking cold water"], "a": 0},
+{"t": "Which diagnostic method is preferred for visualizing a peptic ulcer?", "o": ["Ultrasound", "X-ray", "MRI", "Endoscopy"], "a": 3},
+{"t": "The goal of pharmacological therapy for PUD includes eradicating H. pylori and:", "o": ["Stimulating pepsin production", "Increasing gastric motility", "Reducing mucus secretion", "Managing gastric acidity"], "a": 3},
+{"t": "Which medication is a Proton Pump Inhibitor (PPI) used in PUD treatment?", "o": ["Omeprazole", "Sucralfate", "Cimetidine", "Ranitidine"], "a": 0},
+{"t": "Which drug is a cytoprotective agent that protects mucosal cells from acid?", "o": ["Amoxicillin", "Famotidine", "Maalox", "Sucralfate"], "a": 3},
+{"t": "Why is smoking cessation strongly encouraged for patients with PUD?", "o": ["It causes constipation", "It causes weight gain", "It raises duodenal acidity and inhibits repair", "It increases appetite"], "a": 2},
+{"t": "What dietary advice is given to patients with peptic ulcers?", "o": ["Avoid extremes of temperature", "Increase caffeine intake", "Drink plenty of milk and cream", "Eat one large meal a day"], "a": 0},
+{"t": "A 'coffee ground' appearance in emesis indicates:", "o": ["Normal gastric contents", "Bile reflux", "Digested blood from the stomach", "Fresh arterial bleeding"], "a": 2},
+{"t": "Which nursing diagnosis is appropriate for a PUD patient with epigastric pain?", "o": ["Fluid Volume Excess", "Disturbed Body Image", "Impaired Gas Exchange", "Acute Pain"], "a": 3},
+{"t": "What is a potential life-threatening complication of a peptic ulcer?", "o": ["Weight gain", "Heartburn", "Constipation", "Perforation"], "a": 3},
+{"t": "Sudden abdominal pain and a rigid, board-like abdomen are signs of:", "o": ["Malignancy", "Perforation", "Obstruction", "Hemorrhage"], "a": 1},
+{"t": "To prevent aspiration in a patient with GI bleeding who is vomiting, the nurse should place them:", "o": ["On their back", "On their right side", "On their left side", "In high Fowler's"], "a": 2},
+{"t": "Which vital sign change is an early indicator of GI hemorrhage?", "o": ["Tachycardia", "Hypertension", "Bradypnea", "Bradycardia"], "a": 0},
+{"t": "The opening between the stomach and the duodenum is called the:", "o": ["Fundus", "Cardia", "Pylorus", "Antrum"], "a": 2},
+{"t": "Which blood test is monitored to evaluate the severity of blood loss in PUD?", "o": ["WBC count", "Hemoglobin and Hematocrit", "Platelet count", "BUN"], "a": 1},
+{"t": "The liver is located in which part of the abdominal cavity?", "o": ["Upper right", "Lower right", "Lower left", "Upper left"], "a": 0},
+{"t": "What is the weight of a normal adult liver?", "o": ["2000-2500 g", "1200-1500 g", "500-800 g", "3000-3500 g"], "a": 1},
+{"t": "Cirrhosis is characterized by the replacement of normal liver tissue with:", "o": ["Cysts", "Diffuse fibrosis", "Muscle fibers", "Adipose tissue"], "a": 1},
+{"t": "Which type of cirrhosis is most frequently caused by chronic alcoholism?", "o": ["Biliary cirrhosis", "Alcoholic cirrhosis", "Postnecrotic cirrhosis", "Cardiac cirrhosis"], "a": 1},
+{"t": "Biliary cirrhosis results from chronic obstruction and infection of the:", "o": ["Hepatic artery", "Portal vein", "Inferior vena cava", "Bile ducts"], "a": 3},
+{"t": "Which age group is most commonly affected by liver cirrhosis?", "o": ["40-60 years", "Infants", "Over 80 years", "10-20 years"], "a": 0},
+{"t": "What is a hallmark sign of decompensated cirrhosis?", "o": ["Ankle edema", "Vascular spiders", "Mild indigestion", "Ascites"], "a": 3},
+{"t": "Palmar erythema refers to:", "o": ["Sweaty palms", "Pale palms", "Reddened palms", "Yellowing of the palms"], "a": 2},
+{"t": "Which symptom is associated with portal hypertension in cirrhosis?", "o": ["Muscle wasting", "Splenomegaly", "White nails", "Clubbing of fingers"], "a": 1},
+{"t": "Jaundice in cirrhosis is caused by the liver's inability to excrete:", "o": ["Glucose", "Urea", "Albumin", "Bilirubin"], "a": 3},
+{"t": "A 'flapping tremor' of the hands in hepatic encephalopathy is called:", "o": ["Apraxia", "Asterixis", "Aphasia", "Ataxia"], "a": 1},
+{"t": "Which vitamin is often injected to improve blood-clotting factors in cirrhosis?", "o": ["Vitamin A", "Vitamin K", "Vitamin D", "Vitamin C"], "a": 1},
+{"t": "The diet for a patient with compensated cirrhosis should be:", "o": ["Low calorie, high fat", "NPO", "Low protein, high sodium", "High calorie, moderate-to-high protein"], "a": 3},
+{"t": "In liver cirrhosis, the serum albumin level typically:", "o": ["Decreases", "Fluctuates wildly", "Increases", "Stays the same"], "a": 0},
+{"t": "Which enzyme test indicates liver cell damage when levels are increased?", "o": ["ALT and AST", "Amylase", "Creatinine", "Lipase"], "a": 0},
+{"t": "What is the definitive diagnostic test for liver cirrhosis?", "o": ["MRI", "Liver biopsy", "Ultrasound", "CT scan"], "a": 1},
+{"t": "Gynecomastia (enlarged breasts) in males with cirrhosis is due to the liver's inability to metabolize:", "o": ["Insulin", "Testosterone", "Thyroxine", "Estrogen"], "a": 3},
+{"t": "To measure the extent of ascites, the nurse should measure the patient's:", "o": ["Limb length", "Abdominal girth", "Chest circumference", "Height"], "a": 1},
+{"t": "Pruritus (itching) in jaundiced patients is caused by the accumulation of:", "o": ["Bile salts", "Uric acid", "Potassium", "Calcium"], "a": 0},
+{"t": "What is a priority nursing intervention for 'Impaired Skin Integrity' related to jaundice?", "o": ["Massage with harsh detergents", "Use alcohol-based lotions", "Keep fingernails short and smooth", "Turn the patient every 8 hours"], "a": 2},
+{"t": "Patients with cirrhosis are at high risk for injury due to:", "o": ["Improved level of consciousness", "Decreased bleeding tendencies", "Increased muscle strength", "Altered clotting mechanisms"], "a": 3},
+{"t": "To prevent falls in a patient with altered consciousness, the nurse should:", "o": ["Turn off all lights", "Keep the bed in high position", "Pad the side rails", "Remove all pillows"], "a": 2},
+{"t": "Which position helps prevent hypotension in a patient with GI hemorrhage?", "o": ["Trendelenburg", "Prone", "Recumbent with legs elevated", "High Fowler's"], "a": 2},
+{"t": "Esophageal varices are a complication of:", "o": ["Peptic ulcer", "Biliary colic", "Gastritis", "Portal hypertension"], "a": 3},
+{"t": "The small functional units of the liver are called:", "o": ["Lobules", "Nephrons", "Alveoli", "Neurons"], "a": 0},
+{"t": "Which of the following is a 'Knowledge' level question about the liver?", "o": ["How much does the liver weigh?", "Predict the effect of a liver transplant", "Why does jaundice occur?", "How would you manage ascites?"], "a": 0},
+{"t": "The term 'pyrosis' refers to:", "o": ["Belching", "Heartburn", "Diarrhea", "Vomiting"], "a": 1},
+{"t": "Which blood type is 'more' in people with peptic ulcers?", "o": ["Type O", "Type A", "Type AB", "Type B"], "a": 0},
+{"t": "What is the 'first part' of the small intestine?", "o": ["Cecum", "Duodenum", "Ileum", "Jejunum"], "a": 1},
+{"t": "Which factor 'inhibits' the secretion of protective mucus in the stomach?", "o": ["Antacids", "NSAIDs", "Vitamins", "Antibiotics"], "a": 1},
+{"t": "A patient with cirrhosis should 'exclude' what from their diet?", "o": ["Alcohol", "Water", "Protein", "Carbohydrates"], "a": 0},
+{"t": "What is the primary cause of 'postnecrotic' cirrhosis?", "o": ["Alcoholism", "Viral hepatitis", "Heart failure", "Bile duct obstruction"], "a": 1},
+{"t": "Vascular spiders are a sign of:", "o": ["Acute gastritis", "PUD", "Compensated cirrhosis", "Decompensated cirrhosis"], "a": 2},
+{"t": "Which nursing intervention is for 'Relieving Pain' in PUD?", "o": ["Administer aspirin", "Administer prescribed medications", "Encourage caffeine", "Skip meals"], "a": 1},
+{"t": "What should be monitored frequently if hemorrhage is a concern?", "o": ["Vital signs", "Vision", "Hair growth", "Hearing"], "a": 0},
+{"t": "The liver is divided into how many lobes?", "o": ["Eight", "Four", "Two", "Six"], "a": 1},
+{"t": "Which test reveals 'hypoxia' in cirrhosis patients?", "o": ["HbA1c", "Arterial blood gas analysis", "Urine analysis", "Blood glucose"], "a": 1},
+{"t": "A 'firm, enlarged liver' is a sign of:", "o": ["Esophageal ulcer", "Normal health", "PUD", "Compensated cirrhosis"], "a": 3},
+{"t": "Which of these is a 'Potential Complication' of PUD?", "o": ["Improved digestion", "Weight gain", "Pyloric obstruction", "Increased energy"], "a": 2},
+{"t": "In cirrhosis, serum globulin levels tend to:", "o": ["Decrease", "Disappear", "Stay the same", "Rise"], "a": 3},
+{"t": "Which of these is a 'Lifestyle Change' for PUD?", "o": ["Stress reduction", "Increasing smoking", "Skipping rest", "Drinking more coffee"], "a": 0},
+{"t": "What is 'epistaxis'?", "o": ["Nosebleed", "Headache", "Toothache", "Earache"], "a": 0},
+{"t": "Which position prevents 'aspiration' from vomiting?", "o": ["Supine", "Left side", "Prone", "Right side"], "a": 1},
+{"t": "What is the 'major goal' for a patient with PUD?", "o": ["Weight loss", "Increased anxiety", "Relief of pain", "Reduced knowledge"], "a": 2},
+{"t": "Which unit is used to measure 'abdominal girth'?", "o": ["Kilograms", "Degrees", "Centimeters/Inches", "Liters"], "a": 2},
+{"t": "A 'rigid abdomen' is an emergency sign of:", "o": ["Perforation", "Heartburn", "Indigestion", "Constipation"], "a": 0},
+{"t": "Which medication is an H2 receptor antagonist?", "o": ["Ranitidine", "Sucralfate", "Amoxicillin", "Omeprazole"], "a": 0},
+{"t": "What is the purpose of an 'ice collar' in nursing care?", "o": ["To treat itching", "To treat fever", "To treat nausea", "To treat pain"], "a": 2},
+{"t": "Which vitamin deficiency is common in cirrhosis?", "o": ["Vitamin E", "Vitamin B complex", "Vitamin B12", "Vitamin D"], "a": 1},
+{"t": "What is 'melena'?", "o": ["Black, tarry stool", "Normal stool", "Bright red blood in stool", "Mucus in stool"], "a": 0},
+{"t": "Which factor is 'most common' in PUD epidemiology?", "o": ["Young children", "High altitude", "Male sex", "Female sex"], "a": 2},
+{"t": "The 'vagus nerve' controls which secretion?", "o": ["Saliva", "Insulin", "Gastric acid", "Bile"], "a": 2},
+{"t": "What is 'splenomegaly'?", "o": ["Enlarged kidney", "Enlarged spleen", "Enlarged liver", "Enlarged heart"], "a": 1},
+{"t": "Which 'type' of diet is for hepatic failure?", "o": ["Low protein", "High sodium", "High protein", "High fat"], "a": 0},
+{"t": "How many 'regular meals' a day are encouraged for PUD?", "o": ["Six", "Three", "Ten", "One"], "a": 1},
+{"t": "The pylorus is the opening between the stomach and the esophagus.", "o": ["True", "False"], "a": 1},
+{"t": "A vagotomy is performed to increase gastric acid secretion.", "o": ["True", "False"], "a": 1},
+{"t": "Duodenal ulcers are more common than gastric ulcers.", "o": ["True", "False"], "a": 0},
+{"t": "Peptic ulcers are more common in women than in men after menopause.", "o": ["True", "False"], "a": 0},
+{"t": "H. pylori infection is a major cause of peptic ulcer disease.", "o": ["True", "False"], "a": 0},
+{"t": "Gastric ulcers are typically associated with hypersecretion of acid.", "o": ["True", "False"], "a": 1},
+{"t": "Pain from a gastric ulcer is often relieved by vomiting.", "o": ["True", "False"], "a": 0},
+{"t": "Endoscopy is the preferred diagnostic method for peptic ulcers.", "o": ["True", "False"], "a": 0},
+{"t": "Proton Pump Inhibitors (PPIs) are used to suppress H. pylori.", "o": ["True", "False"], "a": 0},
+{"t": "Smoking has no effect on the repair of peptic ulcers.", "o": ["True", "False"], "a": 1},
+{"t": "The liver is the largest gland in the body.", "o": ["True", "False"], "a": 0},
+{"t": "Alcoholic cirrhosis is the most common type of cirrhosis.", "o": ["True", "False"], "a": 0},
+{"t": "Ascites is a sign of compensated liver cirrhosis.", "o": ["True", "False"], "a": 1},
+{"t": "Asterixis is also known as a 'flapping tremor'.", "o": ["True", "False"], "a": 0},
+{"t": "Vitamin K is given to patients with cirrhosis to improve clotting.", "o": ["True", "False"], "a": 0},
+{"t": "A high-sodium diet is recommended for patients with ascites.", "o": ["True", "False"], "a": 1},
+{"t": "Liver biopsy is the definitive test to confirm cirrhosis.", "o": ["True", "False"], "a": 0},
+{"t": "Pruritus in cirrhosis is caused by high blood sugar.", "o": ["True", "False"], "a": 1},
+{"t": "Patients with cirrhosis should use electric razors to prevent bleeding.", "o": ["True", "False"], "a": 0},
+{"t": "Hemorrhage is a potential complication of both PUD and cirrhosis.", "o": ["True", "False"], "a": 0}
+
+];
+
+/* ============ ENGINE ============ */
+let questions, i, correct, wrong, answers, wrongSet, answered;
+let totalTime = 60*60, timeLeft, timerInterval;
+const LETTERS = ['A','B','C','D','E','F'];
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function init(pool) {
+  questions = shuffle([...pool]);
+  i = 0; correct = 0; wrong = 0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = []; answered = 0;
+  timeLeft = totalTime;
+  document.getElementById('totalBadge').textContent = questions.length + ' سؤال';
+  startTimer();
+  render();
+}
+
+/* TIMER */
+function startTimer() {
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    const m = Math.floor(timeLeft / 60), s = timeLeft % 60;
+    document.getElementById('timerTxt').textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
+    const badge = document.getElementById('timerBadge');
+    if (timeLeft <= 120) { badge.className = 'timer-badge danger'; }
+    else if (timeLeft <= 300) { badge.className = 'timer-badge warn'; }
+    if (timeLeft <= 0) { clearInterval(timerInterval); finish(); }
+  }, 1000);
+}
+
+/* TOP UI */
+function updateTop() {
+  const total = questions.length;
+  document.getElementById('sCorrect').textContent = correct;
+  document.getElementById('sWrong').textContent = wrong;
+  document.getElementById('sRemain').textContent = Math.round(((total - answered) / total) * 100) + '%';
+  document.getElementById('progLabel').textContent = 'سؤال ' + (i + 1) + ' / ' + total;
+  document.getElementById('progFill').style.width = ((i + 1) / total * 100) + '%';
+  document.getElementById('prog-bar').style.width = ((i + 1) / total * 100) + '%';
+}
+
+/* RENDER QUESTION */
+function render() {
+  updateTop();
+  const q = questions[i];
+  document.getElementById('app').innerHTML = `
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">سؤال ${i + 1} / ${questions.length}</div>
+      </div>
+      <div class="q-text">${q.t}</div>
+      <div class="options">
+        ${q.o.map((o, idx) => `
+          <div class="opt" id="opt${idx}" onclick="choose(${idx})">
+            <div class="opt-letter">${LETTERS[idx] || idx + 1}</div>
+            ${o}
+          </div>
+        `).join('')}
+      </div>
+      <div class="nav-btns">
+        <button class="btn btn-skip" onclick="skip()"><i class="fa-solid fa-forward"></i> تخطي</button>
+      </div>
+    </div>`;
+}
+
+/* CHOOSE */
+function choose(v) {
+  if (answers[i] !== null) return;
+  answers[i] = v;
+  answered++;
+  const q = questions[i];
+  const ok = v === q.a;
+  ok ? correct++ : wrong++;
+  updateTop();
+
+  q.o.forEach((_, idx) => {
+    const el = document.getElementById('opt' + idx);
+    el.classList.add('disabled');
+    if (idx === q.a) el.classList.add('correct');
+    else if (idx === v) el.classList.add('wrong');
+  });
+
+  const fb = document.createElement('div');
+  fb.className = 'feedback-bar ' + (ok ? 'ok' : 'no');
+  fb.innerHTML = ok
+    ? `<span class="feedback-icon">🎉</span> <span>ممتاز ، اللهم بارك </span>`
+    : `<span class="feedback-icon">😔</span> <span>ركز يا سكر</b></span>`;
+
+  const card = document.querySelector('.q-card');
+  card.querySelector('.options').after(fb);
+  if (q.exp) {
+    const exp = document.createElement('div');
+    exp.className = 'explanation';
+    exp.style.display = 'block';
+    exp.innerHTML = '<b>💬 شرح:</b> ' + q.exp;
+    fb.after(exp);
+  }
+
+  const navBtns = card.querySelector('.nav-btns');
+  navBtns.innerHTML = `<button class="btn btn-next" onclick="next()">
+    ${i < questions.length - 1 ? '<i class="fa-solid fa-arrow-left"></i> السؤال التالي' : '<i class="fa-solid fa-flag-checkered"></i> إنهاء الامتحان'}
+  </button>`;
+}
+
+/* SKIP */
+function skip() {
+  if (answers[i] === null) { answers[i] = -1; answered++; wrongSet.push(questions[i]); wrong++; updateTop(); }
+  next();
+}
+
+/* NEXT */
+function next() {
+  if (i < questions.length - 1) { i++; render(); window.scrollTo({top: 0, behavior: 'smooth'}); }
+  else finish();
+}
+
+/* FINISH */
+function finish() {
+  clearInterval(timerInterval);
+  const total = questions.length;
+  const score = Math.round((correct / total) * 100);
+
+  questions.forEach((q, idx) => {
+    if (answers[idx] !== q.a) wrongSet.push({...q, myAns: answers[idx]});
+  });
+  wrongSet = [...new Map(wrongSet.map(q => [q.t, q])).values()];
+
+  let grade, gradeColor;
+  if (score >= 90) { grade = '🥇 ممتاز'; gradeColor = 'var(--success)'; }
+  else if (score >= 75) { grade = '🥈 جيد جداً'; gradeColor = 'var(--accent)'; }
+  else if (score >= 60) { grade = '🥉 جيد'; gradeColor = 'var(--warn)'; }
+  else { grade = '📚 راجع تاني'; gradeColor = 'var(--danger)'; }
+
+  const circ = 2 * Math.PI * 45;
+  const offset = circ - (score / 100) * circ;
+
+  const reportHTML = questions.map((q, idx) => {
+    const ok = answers[idx] === q.a;
+    return `<div class="report-item ${ok ? 'ok' : 'no'}">
+      <div class="ri-q">${ok ? '✅' : '❌'} ${q.t}</div>
+      ${!ok ? `
+        <div class="ri-row"><span class="ri-badge ri-yours">إجابتك</span> ${answers[idx] >= 0 ? q.o[answers[idx]] : 'تم التخطي'}</div>
+        <div class="ri-row"><span class="ri-badge ri-right">الصحيح</span> ${q.o[q.a]}</div>
+      ` : ''}
+    </div>`;
+  }).join('');
+
+  document.getElementById('prog-bar').style.width = '100%';
+  document.getElementById('app').innerHTML = `
+    <div class="result-hero">
+      <div class="score-ring">
+        <svg viewBox="0 0 110 110">
+          <circle class="ring-bg" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="0"/>
+          <circle class="ring-fill" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="${circ}"
+            style="stroke:${gradeColor}" id="ringFill"/>
+        </svg>
+        <div class="score-num">${score}</div>
+        <div class="score-pct">%</div>
+      </div>
+      <div class="result-grade" style="color:${gradeColor}">${grade}</div>
+      <div class="result-sub">أجبت على ${answered} من ${total} سؤال</div>
+      <div class="result-stats">
+        <div class="rs"><div class="n" style="color:var(--success)">${correct}</div><div class="l">صحيح</div></div>
+        <div class="rs"><div class="n" style="color:var(--danger)">${wrong}</div><div class="l">خطأ</div></div>
+        <div class="rs"><div class="n" style="color:var(--accent)">${total - answered < 0 ? 0 : total - answered}</div><div class="l">تخطي</div></div>
+      </div>
+    </div>
+
+    <div class="result-actions">
+      ${wrongSet.length ? `<button class="btn btn-retry" onclick="retryWrong()"><i class="fa-solid fa-rotate-right"></i> إعادة الخطأ (${wrongSet.length})</button>` : ''}
+      <button class="btn btn-home" onclick="init(QUESTIONS)"><i class="fa-solid fa-shuffle"></i> امتحان جديد عشوائي</button>
+      <a href="https://gaith-team.github.io/exam/medical1/index.html" class="btn btn-home" style="text-decoration:none;"><i class="fa-solid fa-house"></i> رجوع للمادة</a>
+    </div>
+
+    <div style="margin-top:28px">
+      <div style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text2)">📋 تقرير مفصّل</div>
+      ${reportHTML}
+    </div>`;
+
+  setTimeout(() => { document.getElementById('ringFill').style.strokeDashoffset = offset; }, 100);
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+/* RETRY WRONG */
+function retryWrong() {
+  const pool = [...wrongSet];
+  questions = shuffle(pool); i = 0; correct = 0; wrong = 0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = []; answered = 0; timeLeft = totalTime;
+  startTimer(); render();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+/* THEME */
+const themeBtn = document.getElementById('themeBtn');
+let theme = localStorage.getItem('theme') || 'light';
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', t);
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+
+/* START */
+init(QUESTIONS);
+</script>
+</body>
+</html>
