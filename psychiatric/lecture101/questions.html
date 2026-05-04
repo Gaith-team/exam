@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --c:#e67e22;--c-deep:#b8590a;--c-lite:#f39c12;--c-glow:rgba(230,126,34,0.2);--c-soft:rgba(230,126,34,0.09);
+  --green:#27ae60;--red:#e74c3c;--bg:#f9f5f0;--bg2:#f1e8dc;--card:#ffffff;--text:#1a1208;--text2:#5a4a30;
+  --text3:#9a8060;--border:rgba(230,126,34,0.15);--radius:18px;--tr:all 0.28s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="dark"]{--bg:#12100c;--bg2:#1c1710;--card:#231e16;--text:#f0e6d6;--text2:#c0a880;--text3:#806848;--border:rgba(230,126,34,0.18);}
+html{scroll-behavior:smooth;}
+body{font-family:'Cairo','Tajawal',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;transition:background .4s,color .4s;overflow-x:hidden;}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 28px;background:rgba(249,245,240,0.93);backdrop-filter:blur(18px);border-bottom:1px solid var(--border);transition:var(--tr);}
+[data-theme="dark"] nav{background:rgba(18,16,12,0.95);}
+.nav-back{display:flex;align-items:center;gap:8px;text-decoration:none;color:var(--text2);font-size:13px;font-weight:700;padding:7px 13px;border-radius:9px;border:1px solid var(--border);background:var(--card);transition:var(--tr);}
+.nav-back:hover{color:var(--c);border-color:var(--c);}
+.nav-center{display:flex;align-items:center;gap:9px;}
+.nav-pill{display:flex;align-items:center;gap:7px;padding:6px 14px;border-radius:50px;background:linear-gradient(135deg,var(--c),var(--c-lite));color:#fff;font-size:13px;font-weight:800;}
+.theme-toggle{width:38px;height:38px;border-radius:50%;border:1.5px solid var(--border);background:var(--card);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:16px;transition:var(--tr);}
+.theme-toggle:hover{border-color:var(--c);transform:rotate(20deg);}
+
+.screen{display:none;}
+.screen.active{display:flex;}
+
+/* START */
+#startScreen{min-height:100vh;flex-direction:column;align-items:center;justify-content:center;padding:80px 24px 40px;text-align:center;}
+.start-icon{width:90px;height:90px;border-radius:24px;background:linear-gradient(135deg,var(--c),var(--c-lite));display:flex;align-items:center;justify-content:center;font-size:40px;margin:0 auto 28px;box-shadow:0 12px 40px var(--c-glow);animation:floatIcon 3s ease-in-out infinite;}
+@keyframes floatIcon{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+.start-title{font-size:clamp(28px,5vw,44px);font-weight:900;color:var(--text);line-height:1.15;margin-bottom:12px;}
+.start-title span{color:var(--c);}
+.start-sub{font-size:15px;color:var(--text2);line-height:1.7;max-width:400px;margin:0 auto 36px;}
+.start-meta{display:flex;gap:16px;justify-content:center;flex-wrap:wrap;margin-bottom:44px;}
+.meta-pill{display:flex;align-items:center;gap:8px;padding:10px 20px;border-radius:12px;background:var(--card);border:1px solid var(--border);font-size:14px;font-weight:700;color:var(--text2);}
+.meta-pill strong{color:var(--c);font-size:18px;}
+.btn-start{display:inline-flex;align-items:center;gap:10px;padding:16px 44px;border-radius:14px;background:linear-gradient(135deg,var(--c),var(--c-lite));color:#fff;font-size:17px;font-weight:900;border:none;cursor:pointer;box-shadow:0 8px 28px var(--c-glow);transition:var(--tr);font-family:'Cairo',sans-serif;}
+.btn-start:hover{transform:translateY(-3px) scale(1.03);box-shadow:0 14px 40px var(--c-glow);}
+
+/* CATEGORY FILTER */
+.category-filter{display:flex;gap:10px;flex-wrap:wrap;justify-content:center;margin-bottom:28px;}
+.cat-btn{padding:8px 18px;border-radius:50px;border:1.5px solid var(--border);background:var(--card);color:var(--text2);font-size:13px;font-weight:700;cursor:pointer;font-family:'Cairo',sans-serif;transition:var(--tr);}
+.cat-btn:hover,.cat-btn.active{border-color:var(--c);color:var(--c);background:rgba(230,126,34,0.08);}
+
+/* QUIZ */
+#quizScreen{min-height:100vh;flex-direction:column;padding:80px 0 40px;}
+.quiz-wrap{flex:1;max-width:680px;width:100%;margin:0 auto;padding:32px 24px;display:flex;flex-direction:column;gap:24px;}
+.quiz-progress-row{display:flex;align-items:center;justify-content:space-between;gap:14px;}
+.progress-track{flex:1;height:6px;border-radius:6px;background:var(--bg2);overflow:hidden;}
+.progress-fill{height:100%;border-radius:6px;background:linear-gradient(90deg,var(--c),var(--c-lite));transition:width .5s cubic-bezier(0.4,0,0.2,1);}
+.progress-label{font-size:13px;font-weight:800;color:var(--c);white-space:nowrap;}
+.q-card{background:var(--card);border:1.5px solid var(--border);border-radius:20px;padding:32px 28px;box-shadow:0 4px 24px rgba(230,126,34,0.08);animation:slideIn .35s ease;}
+@keyframes slideIn{from{opacity:0;transform:translateX(-20px)}to{opacity:1;transform:translateX(0)}}
+.q-num{font-size:11px;font-weight:800;letter-spacing:2px;color:var(--c);text-transform:uppercase;margin-bottom:14px;}
+.q-cat-badge{display:inline-block;padding:3px 10px;border-radius:50px;background:var(--c-soft);color:var(--c);font-size:10px;font-weight:800;margin-bottom:10px;}
+.q-text{font-size:clamp(16px,2.5vw,20px);font-weight:700;color:var(--text);line-height:1.6;}
+.options-list{display:flex;flex-direction:column;gap:12px;margin-top:28px;}
+.opt-btn{display:flex;align-items:center;gap:14px;padding:15px 18px;border-radius:13px;border:1.5px solid var(--border);background:var(--bg);cursor:pointer;text-align:left;transition:var(--tr);font-family:'Cairo',sans-serif;font-size:15px;font-weight:600;color:var(--text);width:100%;}
+.opt-btn:hover:not(:disabled){border-color:var(--c);background:var(--c-soft);transform:translateX(3px);}
+.opt-letter{width:34px;height:34px;flex-shrink:0;border-radius:50%;border:2px solid var(--border);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:900;color:var(--text3);transition:var(--tr);background:var(--card);}
+.opt-btn:hover:not(:disabled) .opt-letter{border-color:var(--c);color:var(--c);background:rgba(230,126,34,0.1);}
+.opt-btn.correct{border-color:var(--green)!important;background:rgba(39,174,96,0.08)!important;color:var(--green);}
+.opt-btn.correct .opt-letter{background:var(--green);border-color:var(--green);color:#fff;}
+.opt-btn.wrong{border-color:var(--red)!important;background:rgba(231,76,60,0.08)!important;color:var(--red);}
+.opt-btn.wrong .opt-letter{background:var(--red);border-color:var(--red);color:#fff;}
+.opt-btn:disabled{cursor:not-allowed;}
+.feedback-box{display:none;align-items:center;gap:12px;padding:14px 18px;border-radius:12px;font-size:14px;font-weight:700;margin-top:16px;animation:fadeIn .3s ease;}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:translateY(0)}}
+.feedback-box.show{display:flex;}
+.feedback-box.correct-fb{background:rgba(39,174,96,0.1);border:1px solid rgba(39,174,96,0.25);color:var(--green);}
+.feedback-box.wrong-fb{background:rgba(231,76,60,0.1);border:1px solid rgba(231,76,60,0.25);color:var(--red);}
+.feedback-icon{font-size:20px;}
+.quiz-nav{display:flex;gap:12px;justify-content:space-between;align-items:center;}
+.btn-nav{display:inline-flex;align-items:center;gap:8px;padding:13px 26px;border-radius:12px;font-size:14px;font-weight:800;border:none;cursor:pointer;font-family:'Cairo',sans-serif;transition:var(--tr);}
+.btn-skip{background:var(--bg2);color:var(--text2);border:1px solid var(--border);}
+.btn-skip:hover{background:var(--border);}
+.btn-next{background:linear-gradient(135deg,var(--c),var(--c-lite));color:#fff;box-shadow:0 4px 16px var(--c-glow);}
+.btn-next:hover{transform:translateY(-2px);box-shadow:0 8px 24px var(--c-glow);}
+.btn-next:disabled{opacity:.45;pointer-events:none;}
+
+/* RESULT */
+#resultScreen{min-height:100vh;flex-direction:column;align-items:center;justify-content:center;padding:80px 24px 40px;text-align:center;}
+.result-circle{width:140px;height:140px;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;margin:0 auto 28px;position:relative;}
+.result-circle svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg);}
+.result-circle svg circle{fill:none;stroke-width:8;stroke-linecap:round;}
+.circle-bg{stroke:var(--bg2);}
+.circle-fill{stroke:var(--c);transition:stroke-dashoffset 1.2s cubic-bezier(0.4,0,0.2,1);}
+.result-pct{font-size:36px;font-weight:900;color:var(--text);position:relative;z-index:1;}
+.result-pct small{font-size:14px;color:var(--text3);display:block;}
+.result-emoji{font-size:56px;margin-bottom:16px;animation:bounce .6s ease;}
+@keyframes bounce{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+.result-title{font-size:26px;font-weight:900;color:var(--text);margin-bottom:8px;}
+.result-sub{font-size:15px;color:var(--text2);margin-bottom:36px;}
+.result-stats{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-bottom:40px;}
+.rstat{padding:14px 22px;border-radius:14px;background:var(--card);border:1px solid var(--border);min-width:110px;}
+.rstat .rv{font-size:26px;font-weight:900;}
+.rstat .rl{font-size:12px;color:var(--text3);margin-top:2px;}
+.rstat.correct-s .rv{color:var(--green);}
+.rstat.wrong-s .rv{color:var(--red);}
+.rstat.skip-s .rv{color:var(--text3);}
+.result-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center;}
+.btn-retry{display:inline-flex;align-items:center;gap:9px;padding:14px 32px;border-radius:12px;background:linear-gradient(135deg,var(--c),var(--c-lite));color:#fff;font-size:15px;font-weight:900;border:none;cursor:pointer;font-family:'Cairo',sans-serif;box-shadow:0 6px 22px var(--c-glow);transition:var(--tr);}
+.btn-retry:hover{transform:translateY(-3px);}
+.btn-review{display:inline-flex;align-items:center;gap:9px;padding:14px 28px;border-radius:12px;background:var(--card);color:var(--text);font-size:15px;font-weight:700;border:1.5px solid var(--border);cursor:pointer;font-family:'Cairo',sans-serif;transition:var(--tr);}
+.btn-review:hover{border-color:var(--c);color:var(--c);}
+
+/* REVIEW */
+#reviewScreen{min-height:100vh;flex-direction:column;padding:80px 0 60px;}
+.review-wrap{max-width:680px;width:100%;margin:0 auto;padding:32px 24px;display:flex;flex-direction:column;gap:18px;}
+.review-header{text-align:center;margin-bottom:10px;}
+.review-header h2{font-size:22px;font-weight:900;color:var(--text);}
+.review-header p{font-size:13px;color:var(--text3);margin-top:4px;}
+.review-card{background:var(--card);border-radius:16px;border:1.5px solid var(--border);overflow:hidden;}
+.review-card-top{padding:20px 22px;border-bottom:1px solid var(--border);}
+.review-q-label{font-size:10px;font-weight:800;letter-spacing:2px;color:var(--text3);margin-bottom:8px;}
+.review-q-text{font-size:15px;font-weight:700;color:var(--text);line-height:1.55;}
+.review-opts{padding:14px 22px;display:flex;flex-direction:column;gap:8px;}
+.review-opt{display:flex;align-items:center;gap:10px;padding:10px 14px;border-radius:10px;font-size:13px;font-weight:600;color:var(--text2);background:var(--bg);}
+.review-opt.is-correct{background:rgba(39,174,96,0.1);color:var(--green);font-weight:800;}
+.review-opt.is-wrong{background:rgba(231,76,60,0.1);color:var(--red);}
+.review-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;background:var(--border);}
+.review-opt.is-correct .review-dot{background:var(--green);}
+.review-opt.is-wrong .review-dot{background:var(--red);}
+.review-status{display:flex;align-items:center;gap:5px;padding:3px 10px;border-radius:50px;font-size:10px;font-weight:800;margin-top:10px;width:fit-content;}
+.status-correct{background:rgba(39,174,96,0.12);color:var(--green);}
+.status-wrong{background:rgba(231,76,60,0.12);color:var(--red);}
+.status-skip{background:var(--bg2);color:var(--text3);}
+.btn-back-result{display:inline-flex;align-items:center;gap:9px;padding:13px 28px;border-radius:12px;background:var(--card);color:var(--text);font-size:14px;font-weight:700;border:1.5px solid var(--border);cursor:pointer;font-family:'Cairo',sans-serif;transition:var(--tr);margin-top:8px;align-self:center;}
+.btn-back-result:hover{border-color:var(--c);color:var(--c);}
+
+@media(max-width:540px){nav{padding:0 16px;}.quiz-wrap,.review-wrap{padding:24px 16px;}.q-card{padding:22px 18px;}.opt-btn{padding:12px 14px;font-size:14px;}.result-stats{gap:10px;}.rstat{min-width:90px;padding:12px 16px;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="#" class="nav-back" onclick="show('startScreen');return false;">← Back</a>
+  <div class="nav-center"><div class="nav-pill">📝 GHAITH TEAM</div></div>
+  <button class="theme-toggle" id="themeBtn">🌙</button>
+</nav>
+
+<!-- START -->
+<div class="screen active" id="startScreen">
+  <div class="start-icon">📝</div>
+  <h1 class="start-title">أسئلة <span>مراجعة شاملة</span></h1>
+  <p class="start-sub">أسئلة شاملة على محاضرات أوسكي</p>
+  <div class="category-filter" id="categoryFilter"></div>
+  <div class="start-meta">
+    <div class="meta-pill"><strong id="totalQDisplay">0</strong> Questions</div>
+    <div class="meta-pill">⏱ No time limit</div>
+    <div class="meta-pill">🎯 Multiple choice</div>
+  </div>
+  <button class="btn-start" onclick="startQuiz()">🚀 Start Quiz</button>
+</div>
+
+<!-- QUIZ -->
+<div class="screen" id="quizScreen">
+  <div class="quiz-wrap">
+    <div class="quiz-progress-row">
+      <div class="progress-track"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+      <div class="progress-label" id="progressLabel">1 / 1</div>
+    </div>
+    <div class="q-card" id="qCard">
+      <div class="q-num" id="qNum">QUESTION 1</div>
+      <div class="q-cat-badge" id="qCatBadge"></div>
+      <div class="q-text" id="qText"></div>
+      <div class="options-list" id="optsList"></div>
+      <div class="feedback-box" id="feedbackBox">
+        <span class="feedback-icon" id="feedbackIcon"></span>
+        <span id="feedbackText"></span>
+      </div>
+    </div>
+    <div class="quiz-nav">
+      <button class="btn-nav btn-skip" onclick="skipQuestion()">→ Skip</button>
+      <button class="btn-nav btn-next" id="btnNext" onclick="nextQuestion()" disabled>Next →</button>
+    </div>
+  </div>
+</div>
+
+<!-- RESULT -->
+<div class="screen" id="resultScreen">
+  <div class="result-emoji" id="resultEmoji">🎉</div>
+  <div class="result-circle" id="resultCircle">
+    <svg viewBox="0 0 140 140"><circle class="circle-bg" cx="70" cy="70" r="62"/><circle class="circle-fill" cx="70" cy="70" r="62" id="circleArc" stroke-dasharray="389.6" stroke-dashoffset="389.6"/></svg>
+    <div class="result-pct"><span id="pctNum">0</span>%<small>Score</small></div>
+  </div>
+  <h2 class="result-title" id="resultTitle">Well done!</h2>
+  <p class="result-sub" id="resultSub">You have completed the quiz</p>
+  <div class="result-stats">
+    <div class="rstat correct-s"><div class="rv" id="rCorrect">0</div><div class="rl">✅ Correct</div></div>
+    <div class="rstat wrong-s"><div class="rv" id="rWrong">0</div><div class="rl">❌ Wrong</div></div>
+    <div class="rstat skip-s"><div class="rv" id="rSkip">0</div><div class="rl">⏭ Skipped</div></div>
+  </div>
+  <div class="result-actions">
+    <button class="btn-retry" onclick="retryQuiz()">🔄 Try Again</button>
+    <button class="btn-review" onclick="showReview()">📋 Review Answers</button>
+  </div>
+</div>
+
+<!-- REVIEW -->
+<div class="screen" id="reviewScreen">
+  <div class="review-wrap">
+    <div class="review-header"><h2>📋 Answer Review</h2><p>Correct answers in green — your wrong answers in red</p></div>
+    <div id="reviewList"></div>
+    <button class="btn-back-result" onclick="showResult()">← Back to Results</button>
+  </div>
+</div>
+
+<script>
+const ALL_SECTIONS = [
+  {
+    name: "CPR & Defibrillation",
+    icon: "❤️",
+    qs: [
+      {t:"What is the primary reason cardiac arrest causes death or permanent brain damage within minutes?",o:["Lack of oxygen-rich blood delivery to vital organs","Excessive blood pressure causing vessel rupture","Respiratory alkalosis altering brain chemistry","Hypovolemia from internal hemorrhage"],a:0},
+      {t:"A nurse finds an unresponsive patient. According to CPR protocol, what is the FIRST action?",o:["Begin chest compressions immediately","Open the airway with head-tilt chin-lift","Tap the shoulder and shout 'Are you ok?'","Call for a defibrillator right away"],a:2},
+      {t:"The C-A-B sequence in CPR stands for:",o:["Chest compressions, Airway, Breathing","Circulation, Assessment, Bagging","Compressions, Auscultation, Breathing","Cardiac check, Airway, Bag-mask"],a:0},
+      {t:"Why is the carotid artery used to check pulse during CPR rather than peripheral arteries?",o:["It is closer to the heart and more easily found","It has the highest blood pressure in the body","It is unaffected by states of cardiac arrest","It reflects brain perfusion more accurately than any other site"],a:0},
+      {t:"During CPR, chest compressions should be performed to a depth of at least:",o:["1 inch (2.5 cm)","2 inches (5 cm)","3 inches (7.5 cm)","1.5 inches (3.8 cm)"],a:1},
+      {t:"The recommended compression rate during adult CPR is:",o:["60–80 compressions per minute","80–100 compressions per minute","100–120 compressions per minute","120–140 compressions per minute"],a:2},
+      {t:"The correct compression-to-ventilation ratio for a non-intubated adult during CPR is:",o:["15:2","30:2","5:1","20:2"],a:1},
+      {t:"The patient is placed supine on a firm surface during CPR primarily to:",o:["Prevent aspiration of stomach contents","Maximize effectiveness of chest compressions","Allow easier airway opening","Reduce risk of rib fracture"],a:1},
+      {t:"Why must the chest be allowed to fully recoil after each chest compression?",o:["To prevent rib fractures","To allow the heart to adequately refill with blood","To reduce risk of skin burns","To maintain the airway in an open position"],a:1},
+      {t:"Which of the following is a contraindication to beginning chest compressions?",o:["Absence of carotid pulse","Strong and easily palpable pulse","Gray skin discoloration","Loss of consciousness without breathing"],a:1},
+      {t:"The head-tilt chin-lift maneuver is contraindicated when:",o:["The patient is obese or morbidly overweight","There is evidence of a neck injury","The patient is unconscious but breathing","The airway appears visually clear"],a:1},
+      {t:"The jaw thrust maneuver achieves airway opening by:",o:["Tilting the head firmly backward","Lifting the mandible upward to relieve upper airway obstruction","Inserting an oral airway adjunct","Compressing the cricoid cartilage against the esophagus"],a:1},
+      {t:"During rescue breathing, the first rescue breath should last:",o:["0.5 seconds","1 second","2 seconds","3 seconds"],a:1},
+      {t:"If the chest does NOT rise during the first rescue breath, the nurse should:",o:["Continue with compressions immediately","Repeat the head-tilt chin-lift and give a second breath","Begin endotracheal suctioning","Increase airway pressure on the next breath"],a:1},
+      {t:"A biphasic defibrillator differs from a monophasic defibrillator in that it:",o:["Uses lower frequency alternating current","Sends current in two directions, requiring less total energy","Requires higher joule settings to function","Cannot be used for ventricular fibrillation"],a:1},
+      {t:"A monophasic defibrillator charge is typically started at:",o:["100 joules","150 joules","200 joules","360 joules"],a:2},
+      {t:"An AED is best described as a device that:",o:["Requires expert medical training to operate safely","Analyzes heart rhythm and determines if a shock is needed, guiding the user","Only works on pulseless ventricular tachycardia","Replaces the need for CPR entirely"],a:1},
+      {t:"Which of the following cardiac rhythms is SHOCKABLE with a defibrillator?",o:["Asystole (flat line)","Pulseless electrical activity (PEA)","Ventricular fibrillation (VF)","Normal sinus rhythm"],a:2},
+      {t:"After delivering one defibrillation shock, what should be done immediately?",o:["Check the pulse right away before proceeding","Resume CPR starting with chest compressions for 2 minutes","Increase the joule setting and deliver a second shock","Administer amiodarone before resuming CPR"],a:1},
+      {t:"Why must the oxygen source be turned OFF during actual defibrillation?",o:["To prevent electrical interference with the ECG tracing","To maintain patient safety and prevent fire hazard","Because oxygen increases transthoracic resistance","To allow more accurate cardiac rhythm interpretation"],a:1},
+      {t:"Defibrillator paddles should be pressed against the chest with approximately:",o:["5 kg of pressure","11 kg of pressure","15 kg of pressure","20 kg of pressure"],a:1},
+      {t:"During paddle placement, one paddle is placed at the heart's apex, which is located:",o:["Just right of the sternum at the second intercostal space","Just left of the nipple in the midaxillary line","Just below the right clavicle","Over the manubrium"],a:1},
+      {t:"The most common complication of defibrillation is:",o:["Liver laceration from pressure","Skin burns from defibrillator paddles","Rib fractures","Permanent brain damage"],a:1},
+      {t:"Epinephrine is given during cardiac arrest resuscitation because it:",o:["Suppresses arrhythmias by blocking sodium channels","Causes vasodilation to improve cardiac chamber filling","Causes vasoconstriction and increases myocardial and cerebral blood flow","Reduces transthoracic resistance for better shock delivery"],a:2},
+      {t:"Amiodarone works during cardiac arrest by:",o:["Causing vasoconstriction like epinephrine","Affecting sodium, calcium, and potassium channels","Increasing heart rate to improve cardiac output","Selectively blocking beta receptors only"],a:1},
+      {t:"Which of the following is NOT a listed complication of CPR?",o:["Rib fracture","Liver laceration","Stomach distension","Pulmonary embolism"],a:3},
+      {t:"An implantable (internal) defibrillator differs from external defibrillators primarily because it:",o:["Requires higher energy levels than external devices","Is battery-powered and delivers current directly through cardiac electrodes","Can only treat asystole, not VF","Must be manually activated externally each time it fires"],a:1},
+      {t:"The post-resuscitation recovery position is used to:",o:["Facilitate defibrillation if a second arrest occurs","Keep the airway clear and prevent choking on vomit or fluid","Allow easier intravenous access","Enable continuous ECG monitoring more accurately"],a:1},
+      {t:"Gel is applied to defibrillator pads before use in order to:",o:["Improve electrical conduction and prevent skin burns","Ensure accurate paddle placement on the chest","Cool the paddles after repeated use","Maintain asepsis during the procedure"],a:0},
+      {t:"A reversible cause of cardiac arrest treated with IV calcium chloride is:",o:["Hypothermia","Hyperkalemia or hypocalcemia","Tension pneumothorax","Pulmonary thromboembolism"],a:1},
+      {t:"The purpose of pressing defibrillator paddles firmly against the chest is to:",o:["Increase the total electrical charge delivered","Decrease transthoracic resistance to improve energy delivery","Prevent the paddles from slipping only","Ensure patient comfort during the shock"],a:1},
+      {t:"Basic Life Support (BLS) differs from Advanced Cardiac Life Support (ACLS) in that BLS:",o:["Includes administration of intravenous drugs","Does not require special equipment","Requires use of a defibrillator","Involves placement of an endotracheal tube"],a:1},
+      {t:"After successful resuscitation, vital signs should be monitored every:",o:["5 minutes","10 minutes","15 minutes","30 minutes"],a:2},
+      {t:"When should an AED be applied during a resuscitation attempt?",o:["After the very first cycle of 30 compressions","If the patient has not begun moving after five cycles (about 2 minutes)","Before starting any compressions whatsoever","Only after medications have been administered"],a:1},
+      {t:"Pulse check and breathing assessment during CPR should together take no more than:",o:["5 seconds","10 seconds","15 seconds","20 seconds"],a:1},
+      {t:"Liquid or semi-liquid material in the airway during CPR is best removed by:",o:["Performing a blind finger sweep into the mouth","Turning the victim's head to the side and sweeping out with gloved fingers","Immediate endotracheal intubation","Applying nasogastric suction immediately"],a:1},
+      {t:"Which phase of the CPR framework is classified as 'Prolonged Life Support'?",o:["Phase 1 — Basic Life Support","Phase 2 — Advanced Cardiac Life Support","Phase 3 — Intensive Care","Phase 4 — Post-resuscitation"],a:2},
+      {t:"Which sign of cardiac arrest is most definitive and distinguishes it from simple respiratory arrest?",o:["Loss of consciousness","Absence of breath sounds","Absence of a palpable carotid or femoral pulse","Gray or ashen skin color"],a:2},
+      {t:"Documentation after defibrillation should include all of the following EXCEPT:",o:["Joules used for each shock","Number of defibrillation attempts made","Patient's next of kin contact information","Patient's response to defibrillation"],a:2},
+      {t:"An AED is described as 'automated' because it:",o:["Automatically begins chest compressions","Analyzes heart rhythm and determines shock necessity without expert interpretation","Is connected to an automated hospital drug delivery system","Delivers continuous shocks without requiring user confirmation"],a:1}
+    ]
+  },
+  {
+    name: "Electrocardiography (ECG)",
+    icon: "📈",
+    qs: [
+      {t:"Electrocardiography (ECG) is classified as which type of procedure?",o:["Invasive","Noninvasive","Minor surgical","Therapeutic only"],a:1},
+      {t:"An ambulatory ECG (Holter monitor) is best suited for:",o:["Monitoring during surgery","Heart monitoring during treadmill exercise testing","Heart monitoring at home for one or more days","Getting a quick baseline tracing in a clinic"],a:2},
+      {t:"The P wave on an ECG tracing represents:",o:["Ventricular depolarization","Atrial depolarization","Ventricular repolarization","Sino-atrial node repolarization"],a:1},
+      {t:"The QRS complex on an ECG tracing represents:",o:["Atrial depolarization","Ventricular repolarization","Ventricular depolarization","SA node spontaneous firing"],a:2},
+      {t:"The T wave on an ECG tracing represents:",o:["Atrial depolarization","Ventricular depolarization","Ventricular repolarization","Atrial repolarization"],a:2},
+      {t:"Which lead wire color is placed on the right arm?",o:["Yellow","Black","Red","Green"],a:2},
+      {t:"Which lead wire color is placed on the left leg?",o:["Red","Black","Yellow","Green"],a:3},
+      {t:"The V1 chest electrode is placed at the:",o:["4th intercostal space, right sternal border","4th intercostal space, left sternal border","5th intercostal space, midclavicular line","Midway between V2 and V4"],a:0},
+      {t:"The V4 chest electrode is placed at the:",o:["4th intercostal space, right sternal border","Midway between V2 and V4","5th intercostal space, midclavicular line","Anterior axillary line, lateral to V4"],a:2},
+      {t:"Which ECG leads look at the inferior aspect of the heart?",o:["I, aVL, V5, V6","II, III, aVF","V1, V2","aVR, I, II"],a:1},
+      {t:"V1 and V2 leads look at which part of the heart?",o:["Lateral wall and left ventricle","Inferior wall","Anterior surface and right ventricle","Septal and anterior wall"],a:2},
+      {t:"Which leads look at the lateral aspect of the heart?",o:["V1 and V2","II, III, aVF","aVL, I, and II together with V5 and V6","aVR alone"],a:2},
+      {t:"The purpose of clipping or shaving hair at electrode sites before ECG is to:",o:["Maintain skin integrity and prevent rashes","Enhance electrode attachment and skin contact","Prevent electrical shock to the patient","Maintain sterility of the electrode pads"],a:1},
+      {t:"During ECG recording, the patient should be instructed to:",o:["Breathe deeply and rapidly to expand the chest","Lie still, relax, breathe normally, and not talk","Perform the Valsalva maneuver","Sit upright in a chair throughout"],a:1},
+      {t:"Why should the patient be kept away from metal objects or equipment during ECG recording?",o:["To prevent skin burns at the electrode sites","To prevent electrical interference with the tracing quality","To maintain sterility of the electrodes","To prevent patient discomfort from static electricity"],a:1},
+      {t:"A stress or exercise ECG is performed:",o:["While the patient lies still in supine position","While the patient uses an exercise bike or treadmill","While the patient wears a portable monitor at home","During induction of general anesthesia"],a:1},
+      {t:"Which of the following is a documented indication for ECG?",o:["Monitoring urine output after abdominal surgery","Determining how an implanted pacemaker is working","Assessing renal function in chronic kidney disease","Evaluating liver enzyme elevation after drug reaction"],a:1},
+      {t:"Exposing only the necessary parts of the patient during ECG is done to:",o:["Improve electrode adhesion to skin","Minimize muscle trembling that can cause electrical interference","Maintain asepsis of the electrode pads","Prevent hypothermia and shivering only"],a:1},
+      {t:"Lead aVR reflects which part of the heart?",o:["Inferior wall","Lateral wall","Right side of the heart","Anterior wall and septum"],a:2},
+      {t:"The V3 chest electrode is placed:",o:["At the 4th intercostal space, right sternal border","Midway between V2 and V4","At the 5th intercostal space, midclavicular line","At the anterior axillary line"],a:1},
+      {t:"Before applying ECG electrodes, cleaning the skin with soap and water is done primarily to:",o:["Sterilize the skin to prevent infection","Remove oils and substances that impair electrical contact","Prevent allergic reactions to electrode gel","Reduce skin impedance from perspiration only"],a:1},
+      {t:"Which type of ECG would best detect intermittent unexplained palpitations occurring throughout the day?",o:["Resting 12-lead ECG","Stress ECG on a treadmill","Ambulatory (Holter) ECG worn at home","Intraoperative ECG monitoring"],a:2},
+      {t:"An ECG can detect coronary artery disease by identifying:",o:["Elevated blood urea nitrogen levels","Blocked or narrowed arteries causing chest pain or evidence of a heart attack","Impaired kidney perfusion patterns","Elevated troponin levels directly on the tracing"],a:1},
+      {t:"The nursing diagnosis 'Activity intolerance related to imbalance between oxygen supply and demand' during ECG workup is evidenced by:",o:["Abnormal ECG waveforms alone on the tracing","Dyspnea, weakness, and fatigue","Elevated blood pressure as an isolated finding","Skin rash from electrode gel allergy"],a:1},
+      {t:"Lead I is formed using which electrodes as negative and positive poles?",o:["Right arm (negative) and left arm (positive)","Left arm (negative) and left leg (positive)","Right arm (negative) and left leg (positive)","Right leg (negative) and left arm (positive)"],a:0},
+      {t:"Lead II is formed using which electrodes as negative and positive poles?",o:["Right arm (negative) and left arm (positive)","Right arm (negative) and left leg (positive)","Left arm (negative) and left leg (positive)","Right leg (negative) and left arm (positive)"],a:1},
+      {t:"After the ECG recording is completed, what is the immediate FIRST clinical step?",o:["Document the procedure in the chart","Disconnect equipment and remove the electrodes","Label the ECG tracing with patient data","Return the patient to a comfortable position"],a:1},
+      {t:"Previewing waveforms on the ECG machine's display screen before printing serves to:",o:["Allow the patient to observe their own cardiac rhythm","Check waveform quality before the machine commits to recording on paper","Calibrate the machine to the patient's baseline","Ensure all 12 leads are recording simultaneously and correctly"],a:1},
+      {t:"The precordial chest leads V1 through V6 examine the heart in which anatomical plane?",o:["Coronal plane","Sagittal plane","Transverse plane","Frontal plane"],a:2},
+      {t:"The limb leads (I, II, III, aVR, aVL, aVF) examine the heart in which plane?",o:["Transverse plane","Coronal (frontal) plane","Sagittal plane","Horizontal oblique plane"],a:1},
+      {t:"The black lead wire (N/RL) is placed on the:",o:["Right arm","Left arm","Right leg","Left leg"],a:2},
+      {t:"A resting 12-lead ECG typically takes approximately how long to perform?",o:["1 minute","5 minutes","15 minutes","30 minutes"],a:1},
+      {t:"The V5 electrode is placed at the:",o:["5th intercostal space, midclavicular line","Midway between V2 and V4","Anterior axillary line, lateral to V4","Mid axillary line, lateral to V4"],a:2},
+      {t:"The V6 electrode is placed at the:",o:["4th intercostal space, left sternal border","Anterior axillary line lateral to V5","Mid axillary line, lateral to V4","5th intercostal space, midclavicular line"],a:2},
+      {t:"aVL, aVF, and aVR are described as 'composite leads' because they are:",o:["Placed directly on the chest wall","Computed using information derived from the other leads","Only used during exercise stress testing","Connected to the right side of the body only"],a:1},
+      {t:"V3 and V4 leads look at which part of the heart?",o:["Inferior wall","Right ventricle and anterior surface only","Anterior wall and septum","Lateral wall and left ventricle"],a:2},
+      {t:"What should the nurse specifically assess on the patient's chest before electrode placement?",o:["Blood pressure, pulse, and temperature","Areas of irritation, skin breakdown, or excessive hair growth","Presence of chest pain and elevated temperature","Lung sounds and respiratory rate only"],a:1},
+      {t:"An ECG is used to assess the effects of which of the following?",o:["Antibiotics used to treat pulmonary infections","Drugs or devices used to regulate the heart, such as a pacemaker","Antihypertensive medications in isolation","Diuretics and their effect on kidney function"],a:1},
+      {t:"The yellow lead wire is placed on which limb?",o:["Right arm","Left arm","Right leg","Left leg"],a:1},
+      {t:"V5 and V6 leads look at which cardiac region?",o:["Right ventricle and anterior wall","Anterior wall and septum","Lateral wall and left ventricle","Inferior wall"],a:2}
+    ]
+  },
+  {
+    name: "Endotracheal Intubation & Suctioning",
+    icon: "🫁",
+    qs: [
+      {t:"Endotracheal intubation is best described as:",o:["A noninvasive procedure for supplemental oxygen delivery","An invasive procedure placing a tube in the trachea to maintain a patent airway and gas exchange","A procedure for measuring lung capacity and compliance","A technique for suctioning the nasopharynx"],a:1},
+      {t:"The recommended endotracheal tube internal diameter for an adult male is:",o:["6–6.5 mm","7–7.5 mm","8–8.5 mm","9–9.5 mm"],a:2},
+      {t:"The Sellick maneuver (cricoid pressure) is applied during intubation to:",o:["Facilitate direct visualization of the vocal cords","Reduce the risk of regurgitation by occluding the esophagus","Open the airway by extending the neck","Prevent laryngospasm during laryngoscopy"],a:1},
+      {t:"Using the formula (ETT size [mm] – 1) × 2, the correct suction catheter size for an ETT size 8 mm is:",o:["12 Fr","14 Fr","16 Fr","18 Fr"],a:1},
+      {t:"If breath sounds are diminished or absent in the LEFT lung after intubation, this suggests:",o:["Esophageal intubation has occurred","The tube is in the left main stem bronchus","The tube has entered the right main stem bronchus","The cuff is under-inflated"],a:2},
+      {t:"The primary purpose of hyperventilating the patient with 100% oxygen BEFORE intubation is to:",o:["Prevent aspiration of gastric contents","Create an oxygen reserve during the apnoeic intubation period","Reduce the required sedation dose","Facilitate passage of the laryngoscope blade"],a:1},
+      {t:"Dentures must be removed before intubation to:",o:["Improve visualization for the laryngoscopist","Prevent aspiration of the denture","Allow proper positioning of the head and neck","Facilitate correct cuff inflation"],a:1},
+      {t:"The endotracheal tube cuff pressure should be maintained at:",o:["5–10 mmHg","10–15 mmHg","20–25 mmHg","30–35 mmHg"],a:2},
+      {t:"Hearing air in the stomach during ventilation after intubation indicates:",o:["Correct tracheal tube placement","Esophageal intubation has occurred","Cuff over-inflation","Right main stem bronchus intubation"],a:1},
+      {t:"A bite block or oral airway is placed after oral ET tube positioning primarily to:",o:["Maintain the head-tilt position","Prevent the patient from biting down and collapsing the tube","Secure the tube and prevent displacement","Facilitate easier suctioning of secretions"],a:1},
+      {t:"Cuff under-inflation of an endotracheal tube increases the risk of:",o:["Ischemia or necrosis of tracheal tissue","Aspiration of gastric contents","Excessive airway resistance to ventilation","Obstruction of the ventilator circuit"],a:1},
+      {t:"Cuff over-inflation of an endotracheal tube may cause:",o:["Aspiration of gastric contents","Esophageal intubation","Ischemia or necrosis of tracheal tissue","Persistent air leakage around the tube"],a:2},
+      {t:"The correct patient position during endotracheal intubation is:",o:["Semi-Fowler's with head of bed at 30°","Lateral decubitus with affected side up","Flat supine with a pillow under the shoulders to hyperextend the neck","Prone position with a cervical roll"],a:2},
+      {t:"A chest X-ray is obtained after endotracheal intubation to:",o:["Assess cardiac size and function","Confirm correct tracheal placement of the tube","Rule out concurrent pneumonia","Measure lung compliance indirectly"],a:1},
+      {t:"Continuous coughing after endotracheal intubation suggests:",o:["Esophageal intubation","The tube is in the right main stem bronchus","The tube tip is at the carina, stimulating the cough reflex","Cuff deflation has occurred"],a:2},
+      {t:"Open suction differs from closed (in-line) suction in that open suction requires:",o:["An in-line catheter without disconnecting from the ventilator","Disconnecting the ETT from the ventilation device during the suctioning procedure","Less personal protective equipment for the nurse","No pre-oxygenation before the procedure"],a:1},
+      {t:"The maximum duration of each individual suction pass during endotracheal suctioning is:",o:["5 seconds","10–15 seconds","20–25 seconds","30 seconds"],a:1},
+      {t:"No more than how many suction passes should be made per one suctioning episode?",o:["2","3","4","5"],a:1},
+      {t:"For a wall suction unit used in an adult patient, the appropriate suction pressure is:",o:["50–80 mmHg","100–120 mmHg","150–180 mmHg","200–250 mmHg"],a:1},
+      {t:"After suctioning the oropharynx/mouth, the nurse should:",o:["Reinsert the same catheter into the ETT for additional tracheal suctioning","NOT reinsert the same catheter into the endotracheal tube","Flush the catheter and reuse it for ETT suctioning if it appears clean","Replace the catheter only if it is visibly heavily soiled"],a:1},
+      {t:"The dominant gloved hand during endotracheal suctioning must remain sterile because it:",o:["Handles the suction connecting tubing","Manipulates the sterile suction catheter","Operates the suction source controls","Positions and stabilizes the patient's head"],a:1},
+      {t:"Suction is applied during endotracheal suctioning by:",o:["Maintaining continuous suction throughout insertion and withdrawal","Intermittently occluding the Y-port with the thumb of the non-dominant hand while withdrawing","Applying continuous suction only during catheter insertion","Applying suction only at the deepest point of insertion"],a:1},
+      {t:"Before each suctioning pass, the patient should be hyperventilated for at least:",o:["15 seconds delivering 1–2 breaths","30 seconds delivering 3–6 breaths","60 seconds delivering 10–12 breaths","10 seconds delivering a single breath"],a:1},
+      {t:"An indication for endotracheal suctioning includes:",o:["Stable SpO2 with clear bilateral breath sounds","Gurgling sounds on lung auscultation with decreased SpO2","Normal respiratory rate and adequate tidal volume","Absence of visible secretions on bronchoscopy"],a:1},
+      {t:"A contraindication to endotracheal intubation includes:",o:["Respiratory failure requiring mechanical ventilation","Inadequate spontaneous ventilation","Severe head and neck injury or surgery affecting the airway","Cardiac arrest requiring resuscitation"],a:2},
+      {t:"Aspiration of stomach contents during or after intubation can result in:",o:["Pneumothorax and bronchospasm","Pneumonia and acute respiratory distress syndrome (ARDS)","Pulmonary edema and simple atelectasis","Hemothorax and pleural effusion"],a:1},
+      {t:"The ETT is marked at the level of the patient's front teeth and secured with tape to:",o:["Prevent infection at the insertion site","Prevent tube displacement","Measure ventilation adequacy","Monitor cuff pressure indirectly"],a:1},
+      {t:"Which of the following should NOT be included in ETT intubation documentation?",o:["Time and duration of intubation procedure","Depth of the endotracheal tube at the teeth or lips","Nursing shift schedule for the day","Patient's vital sign changes and pain response during procedure"],a:2},
+      {t:"The lower respiratory tract includes:",o:["Nose, pharynx, larynx, and trachea","Sinuses, mouth, and nasal cavity","Lungs, bronchi, bronchioles, and alveoli","Trachea, pharynx, and mouth together"],a:2},
+      {t:"The purpose of offering oral hygiene after endotracheal suctioning is to:",o:["Prevent the patient from biting the tube","Maintain oral comfort and reduce infection risk in the intubated patient","Rehydrate the oral mucosa after dehydration","Facilitate cuff re-inflation"],a:1},
+      {t:"The suction catheter diameter must not exceed what fraction of the endotracheal tube size?",o:["One-quarter the internal diameter","One-half the internal diameter","Three-quarters the internal diameter","Equal to the internal diameter"],a:1},
+      {t:"A minimum 30-second to 1-minute interval between suction passes is recommended to:",o:["Allow the suction machine time to reset","Allow the patient to recover oxygenation and prevent hypoxemia","Enable the nurse to change to fresh sterile gloves","Allow secretions to re-accumulate for better removal"],a:1},
+      {t:"Endotracheal suctioning is classified as a 'diagnostic' indication when used to:",o:["Maintain a patent airway by removing retained secretions","Aspirate a sputum specimen for laboratory investigation","Stimulate coughing in a weak patient","Facilitate bronchoscopy visualization"],a:1},
+      {t:"Gently rotating the catheter while withdrawing during suctioning serves to:",o:["Increase the effective suction pressure","Prevent mucosal trauma and remove secretions more effectively","Stabilize the catheter in a fixed position","Prevent catheter kinking during removal"],a:1},
+      {t:"When the patient is unconscious during ETT suctioning, they should be positioned in:",o:["Semi-Fowler's position at 30° elevation","Prone position to facilitate drainage","Lateral position facing the nurse","Supine with legs elevated above the heart"],a:2},
+      {t:"An endotracheal tube is usually made of:",o:["Latex rubber","Medical-grade silicone","Polyvinyl chloride (PVC)","Stainless steel"],a:2},
+      {t:"Repositioning and taping the oral ETT to the opposite side daily is done to:",o:["Prevent tube occlusion from accumulated secretions","Prevent skin irritation and pressure ulcers at the lip corners","Allow better visualization of the vocal cords","Facilitate scheduled cuff deflation checks"],a:1},
+      {t:"Evaluation after endotracheal suctioning involves comparing which parameters before and after the procedure?",o:["Urinary output and fluid balance","Vital signs, cardiopulmonary assessments, and SpO2 values","Blood glucose and serum electrolytes","Skin integrity and pupillary response"],a:1},
+      {t:"The Sellick maneuver occludes the esophagus by applying pressure to the:",o:["Thyroid cartilage","Hyoid bone","Cricoid cartilage","Arytenoid cartilage"],a:2},
+      {t:"Which assessment finding would indicate the need for endotracheal suctioning?",o:["Clear breath sounds bilaterally with SpO2 of 98%","Wheezing, crackles, or gurgling with increased respiratory rate","Patient verbalizes they feel comfortable breathing","Normal capnography waveform on the ventilator"],a:1}
+    ]
+  },
+  {
+    name: "Chest Tube & Drainage",
+    icon: "🫀",
+    qs: [
+      {t:"A chest tube is inserted into which anatomical space?",o:["Mediastinal space","Pleural space","Pericardial space","Peritoneal space"],a:1},
+      {t:"The most commonly used chest tube size in adult patients ranges from:",o:["6–16 Fr","16–24 Fr","24–36 Fr","36–50 Fr"],a:2},
+      {t:"The primary purpose of a chest tube is to:",o:["Deliver medications directly into the lungs","Remove air and/or fluid from the pleural space","Provide continuous monitoring of intrapleural pressure","Serve as an alternative route for ventilatory support"],a:1},
+      {t:"To remove air from the pleural space, a chest tube is placed:",o:["Low and posterior at the 5th–6th intercostal space","High and anterior at the 2nd–3rd intercostal space","At the midaxillary line at the 4th intercostal space","In the mediastinum between the lungs"],a:1},
+      {t:"A chest tube placed low (5th–6th intercostal space) is intended to drain:",o:["Air, because it rises in the intrapleural space","Fluid, because it is affected by gravity and settles in the lower portion","Lymphatic fluid exclusively","Blood clots following cardiac surgery"],a:1},
+      {t:"Which of the following is a valid indication for chest tube insertion?",o:["Pneumonia without associated pleural effusion","Pleural effusion causing lung collapse (hydrothorax)","COPD exacerbation without pleural involvement","Pulmonary contusion without hemothorax or pneumothorax"],a:1},
+      {t:"The water-seal chamber prevents air from re-entering the pleural space because:",o:["It uses continuous mechanical suction to overcome pressure","It acts as a one-way valve; air exits during exhalation but cannot re-enter during inhalation","It contains antimicrobial solution that seals the connection","It creates positive pressure within the pleural space"],a:1},
+      {t:"Fluctuation of water in the water-seal chamber (tidaling) with each breath indicates:",o:["An active air leak within the drainage system","Effective communication between the pleural space and the drainage system","The lung has fully re-expanded","The chest tube is kinked or obstructed"],a:1},
+      {t:"When tidaling (fluctuations) in the water-seal chamber stops, this may indicate:",o:["Increased drainage from the pleural space","The lung has expanded OR the drainage tubing is obstructed","The suction pressure is set too high","The drainage bottle must be replaced immediately"],a:1},
+      {t:"The water-seal chamber must be filled with sterile water to the:",o:["5 cm mark","2 cm mark","10 cm mark","1 cm mark"],a:1},
+      {t:"Wet suction control for adult chest drainage is typically set at:",o:["5 cm H2O","10 cm H2O","20 cm H2O","30 cm H2O"],a:2},
+      {t:"Constant bubbling in the water-seal bottle with absence of bubbles in the suction control chamber indicates:",o:["Normal function of the drainage system","The lung has fully re-expanded","An active air leak within the drainage system","Excessive pleural fluid accumulation"],a:2},
+      {t:"Kinking or looping of the chest drainage tubing can produce:",o:["Increased drainage flow through the system","Back pressure that may force drainage back into the pleural space","Improved water-seal function","Better regulation of suction control"],a:1},
+      {t:"A sudden increase of MORE than 250 mL of drainage over 1 hour indicates:",o:["Normal post-operative drainage volume","Possible fresh bleeding from the thorax requiring immediate reporting","The lung has fully re-expanded","The tube simply needs repositioning"],a:1},
+      {t:"The chest drainage system must remain upright at all times primarily to:",o:["Prevent accidental tube disconnection","Maintain effective water-seal function","Allow continuous suction monitoring","Keep the chest tube positioned correctly in the pleural space"],a:1},
+      {t:"To prevent back-flow of fluid into the pleural space when transporting a patient, the drainage system should be:",o:["Held at chest level at all times","Raised above the chest level","Kept below chest level, as close to the floor as possible","Clamped during any transport regardless of distance"],a:2},
+      {t:"The collection chamber in a chest drainage system is calibrated to:",o:["Measure suction pressure applied to the system","Measure the amount of pleural drainage collected","Monitor the water seal level in the second chamber","Control the rate of suction applied"],a:1},
+      {t:"A patient with pneumothorax should be positioned in which position for optimal chest tube drainage?",o:["High Fowler's position","Semi-Fowler's position to facilitate evacuation of air","Prone position to maximize drainage","Trendelenburg position to prevent aspiration"],a:1},
+      {t:"A patient with hemothorax should be positioned in which position for optimal fluid drainage?",o:["Semi-Fowler's at 30°","High Fowler's position to drain fluid downward","Lateral decubitus with the affected side up","Flat supine with no elevation"],a:1},
+      {t:"Subcutaneous emphysema around the chest tube insertion site is detected by:",o:["Auscultation of crackles over the site","Gently palpating around the site and feeling for a 'crackling' sensation under the skin","Observing for frank bleeding at the site","Measuring the circumference of the chest wall"],a:1},
+      {t:"Which of the following is a relative contraindication to chest tube placement?",o:["Tension pneumothorax","Hemothorax","Coagulopathy (abnormal clotting)","Empyema"],a:2},
+      {t:"During chest tube dressing change, sterile gloves are worn after the initial cleaning to:",o:["Maintain patient privacy throughout the procedure","Maintain asepsis while cleaning and redressing the insertion site","Prevent electrical hazard from monitoring equipment","Ensure accurate tube position assessment"],a:1},
+      {t:"Deep breathing and coughing are encouraged in patients with chest tubes because they:",o:["Prevent tube displacement during activity","Raise intrapleural pressure to empty pleural accumulation and promote lung expansion","Reduce pain at the insertion site through distraction","Prevent development of subcutaneous emphysema"],a:1},
+      {t:"When changing the drainage bottle, clamps are applied to the intrapleural tube to:",o:["Reduce suction pressure during the changeover","Prevent atmospheric air from entering the pleural space during the swap","Allow additional time to prepare the new bottle carefully","Prevent the tube from being accidentally pulled out"],a:1},
+      {t:"After reconnecting a new drainage bottle, the nurse confirms re-established drainage by:",o:["Checking the color of fresh drainage","Observing for resumption of fluid fluctuation (tidaling) in the drainage tube","Measuring the patient's oxygen saturation","Auscultating breath sounds on the affected side"],a:1},
+      {t:"The chest tube should be removed when:",o:["The patient reports pain at the insertion site","Drainage has diminished significantly and water-seal fluctuations have ceased","The water level in the seal chamber drops below 2 cm","The patient's SpO2 consistently stays above 95%"],a:1},
+      {t:"During chest tube removal, the patient performs the Valsalva maneuver to:",o:["Reduce pain during the withdrawal procedure","Prevent air from being sucked into the chest as the tube is removed","Facilitate lung re-expansion after tube removal","Allow the nurse to remove the tube more easily and quickly"],a:1},
+      {t:"An occlusive dressing is applied immediately after chest tube removal to:",o:["Absorb excessive drainage from the wound","Prevent entry of air through the chest wound","Support and promote lung re-expansion","Allow spontaneous secondary intention healing with open air exposure"],a:1},
+      {t:"The Pleur-Evac chest drainage system is best described as:",o:["A reusable glass bottle underwater seal system","A one-piece molded plastic disposable unit providing single or multiple-chamber closed drainage","A dry suction mobile device for ambulatory patients","A passive gravity drainage system with no suction capability"],a:1},
+      {t:"A portable valve chest drainage system benefits the patient primarily by:",o:["Providing stronger suction than wall-mounted systems","Decreasing the risk for deep vein thrombosis and embolism by allowing patient mobility","Eliminating the need for a water seal mechanism entirely","Being reusable and significantly reducing hospital cost"],a:1},
+      {t:"Empyema is defined as:",o:["Accumulation of air in the pleural space","Accumulation of blood in the pleural space","Collection of pus in the pleural space due to infection causing lung collapse","Collection of lymphatic fluid in the pleural space"],a:2},
+      {t:"Chylothorax is defined as:",o:["Accumulation of air in the pleural space","Collection of pus in the pleural space due to infection","Collection of lymphatic fluid in the pleural space","Accumulation of blood due to traumatic injury"],a:2},
+      {t:"Tension pneumothorax as a complication of chest tube management results from:",o:["Excessive fluid drainage through the tube","Re-clamping or removing the chest tube despite an ongoing air leak","Over-inflation of the endotracheal cuff","Excessive suction pressure applied to the drainage system"],a:1},
+      {t:"ROM exercises for the arm and shoulder on the chest tube side are performed to:",o:["Prevent accidental tube dislodgement during movement","Avoid shoulder joint ankylosis and reduce pain and discomfort","Improve gravitational drainage from the pleural space","Stimulate deeper breathing efforts"],a:1},
+      {t:"A single-bottle water-seal system is NOT recommended for evacuating pleural fluid because:",o:["It lacks a dedicated suction control chamber","Accumulated fluid raises the water-seal level, increasing expiratory resistance and eventually stopping drainage","It cannot be connected to wall suction","It does not have an adequate atmospheric air outlet"],a:1},
+      {t:"Pleurodesis involves inserting chemicals into the pleural space to:",o:["Remove air from the pleural cavity","Cause intentional pleural scarring to prevent recurrent fluid accumulation","Drain blood following traumatic hemothorax","Reduce acute pleural inflammation and pain"],a:1},
+      {t:"Re-expansion pulmonary edema as a chest tube complication occurs when:",o:["The tube is inserted in an incorrect anatomical position","More than 1–1.5 L of fluid is drained in less than 30 minutes","The chest tube becomes kinked and drainage suddenly stops","There is a continuous air leak through the drainage system"],a:1},
+      {t:"Which assessment finding during chest tube monitoring requires immediate reporting to the physician?",o:["Gentle tidaling in the water-seal chamber with breathing","Total of 200 mL of serosanguinous drainage at the end of a 12-hour shift","Sudden increase of 250 mL of bright red blood appearing in the system within 1 hour","Mild occasional bubbling in the water-seal chamber"],a:2},
+      {t:"After chest tube removal, evaluation should include all of the following EXCEPT:",o:["Auscultating lung sounds bilaterally","Reviewing the post-removal chest X-ray","Assessing bowel sounds and abdominal distension","Evaluating for signs of respiratory distress"],a:2},
+      {t:"Intercostal neuralgia as a complication of chest tube insertion is caused by:",o:["Local infection at the skin insertion site","Trauma of the intercostal neurovascular bundle, presenting as persistent pain","Escape of air into subcutaneous tissues","Accidental laceration of the liver"],a:1}
+    ]
+  }
+];
+
+// State
+let QUESTIONS = [];
+let current = 0;
+let answers = [];
+let answered = false;
+let selectedCat = 'all';
+
+function buildQuestions() {
+  if (selectedCat === 'all') {
+    QUESTIONS = ALL_SECTIONS.flatMap(s => s.qs.map(q => ({...q, cat: s.name})));
+  } else {
+    const sec = ALL_SECTIONS.find(s => s.name === selectedCat);
+    QUESTIONS = sec ? sec.qs.map(q => ({...q, cat: sec.name})) : [];
+  }
+  document.getElementById('totalQDisplay').textContent = QUESTIONS.length;
+}
+
+// Build category filter
+function buildCategoryFilter() {
+  const cf = document.getElementById('categoryFilter');
+  cf.innerHTML = '';
+
+  const allBtn = document.createElement('button');
+  allBtn.className = 'cat-btn active';
+  allBtn.textContent = '🌐 All Topics (' + ALL_SECTIONS.reduce((n,s)=>n+s.qs.length,0) + ')';
+  allBtn.onclick = () => selectCat('all', allBtn);
+  cf.appendChild(allBtn);
+
+  ALL_SECTIONS.forEach(s => {
+    const btn = document.createElement('button');
+    btn.className = 'cat-btn';
+    btn.textContent = s.icon + ' ' + s.name + ' (' + s.qs.length + ')';
+    btn.onclick = () => selectCat(s.name, btn);
+    cf.appendChild(btn);
+  });
+}
+
+function selectCat(name, btn) {
+  selectedCat = name;
+  document.querySelectorAll('.cat-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  buildQuestions();
+}
+
+// Theme
+const themeBtn = document.getElementById('themeBtn');
+let theme = localStorage.getItem('theme') || 'light';
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', t);
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0, 0);
+}
+
+function startQuiz() {
+  buildQuestions();
+  // Shuffle
+  for (let i = QUESTIONS.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [QUESTIONS[i], QUESTIONS[j]] = [QUESTIONS[j], QUESTIONS[i]];
+  }
+  current = 0;
+  answers = new Array(QUESTIONS.length).fill(null);
+  answered = false;
+  show('quizScreen');
+  renderQuestion();
+}
+
+function renderQuestion() {
+  answered = false;
+  const q = QUESTIONS[current];
+  const tot = QUESTIONS.length;
+  document.getElementById('qNum').textContent = `QUESTION ${current + 1}`;
+  document.getElementById('qCatBadge').textContent = q.cat;
+  document.getElementById('qText').textContent = q.t;
+  document.getElementById('progressLabel').textContent = `${current+1} / ${tot}`;
+  document.getElementById('progressFill').style.width = `${((current+1)/tot)*100}%`;
+  document.getElementById('btnNext').disabled = true;
+  const fb = document.getElementById('feedbackBox');
+  fb.className = 'feedback-box';
+  const letters = ['A','B','C','D'];
+  const list = document.getElementById('optsList');
+  list.innerHTML = '';
+  q.o.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.innerHTML = `<span class="opt-letter">${letters[i]}</span>${opt}`;
+    btn.onclick = () => selectAnswer(i, btn);
+    list.appendChild(btn);
+  });
+  const card = document.getElementById('qCard');
+  card.style.animation = 'none';
+  card.offsetHeight;
+  card.style.animation = 'slideIn .35s ease';
+}
+
+function selectAnswer(chosen, clickedBtn) {
+  if (answered) return;
+  answered = true;
+  answers[current] = chosen;
+  const q = QUESTIONS[current];
+  const opts = document.querySelectorAll('.opt-btn');
+  opts.forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === q.a) btn.classList.add('correct');
+    if (i === chosen && chosen !== q.a) btn.classList.add('wrong');
+  });
+  const fb = document.getElementById('feedbackBox');
+  if (chosen === q.a) {
+    fb.className = 'feedback-box correct-fb show';
+    document.getElementById('feedbackIcon').textContent = '✅';
+    document.getElementById('feedbackText').textContent = 'Correct answer! 🎉';
+  } else {
+    fb.className = 'feedback-box wrong-fb show';
+    document.getElementById('feedbackIcon').textContent = '❌';
+    document.getElementById('feedbackText').textContent = `Correct answer: ${q.o[q.a]}`;
+  }
+  document.getElementById('btnNext').disabled = false;
+}
+
+function skipQuestion() {
+  if (answered) return;
+  answers[current] = null;
+  nextQuestion();
+}
+
+function nextQuestion() {
+  current++;
+  if (current >= QUESTIONS.length) showResult();
+  else { answered = false; renderQuestion(); }
+}
+
+function showResult() {
+  let correct = 0, wrong = 0, skip = 0;
+  answers.forEach((a, i) => {
+    if (a === null) skip++;
+    else if (a === QUESTIONS[i].a) correct++;
+    else wrong++;
+  });
+  const pct = Math.round((correct / QUESTIONS.length) * 100);
+  document.getElementById('rCorrect').textContent = correct;
+  document.getElementById('rWrong').textContent = wrong;
+  document.getElementById('rSkip').textContent = skip;
+  document.getElementById('pctNum').textContent = pct;
+  let emoji, title, sub;
+  if (pct >= 90) { emoji='🏆'; title='Excellent! Outstanding!'; sub='Amazing result — keep it up!'; }
+  else if (pct >= 75) { emoji='🎉'; title='Very Good!'; sub='Strong performance, keep reviewing to reach the top!'; }
+  else if (pct >= 60) { emoji='💪'; title='Good, but room to improve!'; sub='Review your wrong answers and try again'; }
+  else if (pct >= 40) { emoji='📚'; title='Needs more revision'; sub='Go back to your notes and retake the quiz'; }
+  else { emoji='😅'; title="Don't worry, keep studying!"; sub='Revision is the key — try again!'; }
+  document.getElementById('resultEmoji').textContent = emoji;
+  document.getElementById('resultTitle').textContent = title;
+  document.getElementById('resultSub').textContent = sub;
+  const circ = 2 * Math.PI * 62;
+  const offset = circ - (pct / 100) * circ;
+  const arc = document.getElementById('circleArc');
+  arc.style.strokeDashoffset = '389.6';
+  arc.style.stroke = pct >= 60 ? 'var(--green)' : pct >= 40 ? 'var(--c)' : 'var(--red)';
+  setTimeout(() => { arc.style.strokeDashoffset = offset; }, 200);
+  show('resultScreen');
+}
+
+function showReview() {
+  const list = document.getElementById('reviewList');
+  list.innerHTML = '';
+  const letters = ['A','B','C','D'];
+  QUESTIONS.forEach((q, qi) => {
+    const userAns = answers[qi];
+    let statusClass, statusText;
+    if (userAns === null) { statusClass='status-skip'; statusText='⏭ Skipped'; }
+    else if (userAns === q.a) { statusClass='status-correct'; statusText='✅ Correct'; }
+    else { statusClass='status-wrong'; statusText='❌ Wrong'; }
+    const card = document.createElement('div');
+    card.className = 'review-card';
+    card.innerHTML = `
+      <div class="review-card-top">
+        <div class="review-q-label">QUESTION ${qi+1} · ${q.cat}</div>
+        <div class="review-q-text">${q.t}</div>
+        <div class="review-status ${statusClass}">${statusText}</div>
+      </div>
+      <div class="review-opts">
+        ${q.o.map((opt, oi) => {
+          let cls = 'review-opt';
+          if (oi === q.a) cls += ' is-correct';
+          if (oi === userAns && userAns !== q.a) cls += ' is-wrong';
+          return `<div class="${cls}"><div class="review-dot"></div>${letters[oi]}. ${opt}</div>`;
+        }).join('')}
+      </div>`;
+    list.appendChild(card);
+  });
+  show('reviewScreen');
+}
+
+function retryQuiz() {
+  current = 0;
+  answers = new Array(QUESTIONS.length).fill(null);
+  answered = false;
+  // Reshuffle
+  for (let i = QUESTIONS.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [QUESTIONS[i], QUESTIONS[j]] = [QUESTIONS[j], QUESTIONS[i]];
+  }
+  show('quizScreen');
+  renderQuestion();
+}
+
+// Init
+buildCategoryFilter();
+buildQuestions();
+</script>
+</body>
+</html>
