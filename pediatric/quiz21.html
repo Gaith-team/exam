@@ -1,0 +1,1006 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --accent:       #0d9488;
+  --accent-light: #14b8a6;
+  --accent-dark:  #0f766e;
+  --accent-glow:  rgba(13,148,136,0.2);
+  --bg:      #f8fafc;
+  --bg2:     #eef2f7;
+  --card:    #ffffff;
+  --text:    #1a2332;
+  --text2:   #4a5568;
+  --text3:   #718096;
+  --bc:      rgba(0,0,0,0.07);
+  --success: #16a34a;
+  --danger:  #dc2626;
+  --warn:    #0f766e;
+  --r:       16px;
+  --tr:      all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="dark"] {
+  --bg:   #0d1117; --bg2: #161b22; --card: #1c2333;
+  --text: #e6edf3; --text2: #b1bac4; --text3: #7d8590;
+  --bc:   rgba(255,255,255,0.08);
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg); color: var(--text);
+  min-height: 100vh; overflow-x: hidden;
+  transition: background .4s, color .4s;
+}
+
+/* PROGRESS TOP */
+#prog-bar {
+  position: fixed; top: 0; left: 0; height: 3px; z-index: 999;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  transition: width .2s;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px; height: 64px;
+  background: rgba(248,250,252,.93); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--bc); transition: var(--tr);
+}
+[data-theme="dark"] nav { background: rgba(13,17,23,.95); }
+
+.nav-back {
+  display: flex; align-items: center; gap: 7px;
+  color: var(--text2); text-decoration: none; font-size: 13px; font-weight: 700;
+  padding: 7px 13px; border-radius: 8px; border: 1px solid var(--bc);
+  background: var(--card); transition: var(--tr);
+}
+.nav-back:hover { color: var(--accent); border-color: var(--accent-glow); transform: translateX(3px); }
+.nav-brand { display: flex; align-items: center; gap: 9px; font-size: 15px; font-weight: 900; color: var(--text); }
+.nav-logo-icon {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 12px; font-weight: 900;
+}
+.nav-right { display: flex; align-items: center; gap: 8px; }
+.theme-btn {
+  width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--bc);
+  background: var(--card); cursor: pointer; font-size: 15px;
+  display: flex; align-items: center; justify-content: center; transition: var(--tr);
+}
+.theme-btn:hover { border-color: var(--accent); transform: rotate(20deg); }
+
+/* HERO BAND */
+.hero-band {
+  margin-top: 64px;
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent), var(--accent-light));
+  padding: 40px 24px 36px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.hero-band::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 600px 200px at 50% 100%, rgba(255,255,255,.12) 0%, transparent 70%);
+}
+.hero-band-icon {
+  width: 68px; height: 68px; border-radius: 20px;
+  background: rgba(255,255,255,.2); backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 30px; margin: 0 auto 14px; border: 1.5px solid rgba(255,255,255,.35);
+}
+.hero-band h1 { font-size: clamp(20px,4vw,30px); font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero-band p { font-size: 13px; color: rgba(255,255,255,.8); }
+.hero-band-meta {
+  display: flex; justify-content: center; gap: 24px; margin-top: 20px;
+  flex-wrap: wrap;
+}
+.meta-pill {
+  background: rgba(255,255,255,.18); backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,.3); border-radius: 50px;
+  padding: 6px 16px; font-size: 12px; font-weight: 700; color: #fff;
+  display: flex; align-items: center; gap: 6px;
+}
+
+/* EXAM SHELL */
+.shell { max-width: 560px; margin: 0 auto; padding: 24px 20px 80px; }
+
+/* STATS ROW */
+.stats-row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 16px;
+}
+.stat-box {
+  background: var(--card); border: 1px solid var(--bc); border-radius: var(--r);
+  padding: 12px 10px; text-align: center;
+}
+.stat-box .val { font-size: 20px; font-weight: 900; }
+.stat-box .lbl { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.stat-correct { color: var(--success); }
+.stat-wrong   { color: var(--danger); }
+.stat-remain  { color: var(--accent); }
+
+/* PROGRESS STRIP */
+.prog-strip {
+  background: var(--card); border: 1px solid var(--bc); border-radius: var(--r);
+  padding: 14px 16px; margin-bottom: 16px;
+  display: flex; align-items: center; gap: 14px;
+}
+.prog-label { font-size: 13px; font-weight: 700; color: var(--text2); white-space: nowrap; }
+.prog-track { flex: 1; height: 8px; background: var(--bg2); border-radius: 8px; overflow: hidden; }
+.prog-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  border-radius: 8px; transition: width .4s;
+}
+.timer-badge {
+  min-width: 64px; height: 36px; border-radius: 18px;
+  background: var(--bg2); border: 1px solid var(--bc);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 900; color: var(--text);
+  gap: 5px; padding: 0 12px; flex-shrink: 0;
+}
+.timer-badge.warn { color: var(--warn); border-color: rgba(217,119,6,.3); background: rgba(217,119,6,.08); }
+.timer-badge.danger { color: var(--danger); border-color: rgba(220,38,38,.3); background: rgba(220,38,38,.08); animation: pulse .8s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.6} }
+
+/* QUESTION CARD */
+.q-card {
+  background: var(--card); border: 1px solid var(--bc);
+  border-radius: 20px; overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+  transition: box-shadow .3s;
+}
+.q-header {
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  padding: 4px 18px 4px;
+  display: flex; align-items: center; gap: 8px;
+}
+.q-num {
+  background: rgba(255,255,255,.2); border-radius: 8px;
+  padding: 3px 10px; font-size: 11px; font-weight: 700; color: #fff;
+}
+.q-text {
+  padding: 22px 18px 14px; font-size: 15px; font-weight: 700; color: var(--text);
+  line-height: 1.65; border-bottom: 1px solid var(--bc);
+  text-align: left; direction: ltr;
+}
+.options { padding: 14px 18px 18px; display: flex; flex-direction: column; gap: 10px; }
+
+/* OPTION */
+.opt {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px; border-radius: 12px;
+  border: 1.5px solid var(--bc); background: var(--bg);
+  cursor: pointer; font-size: 14px; font-weight: 600; color: var(--text);
+  transition: var(--tr); user-select: none;
+  direction: ltr; text-align: left;
+}
+.opt:hover:not(.disabled) {
+  border-color: var(--accent); background: var(--accent-glow);
+  transform: translateX(3px);
+}
+.opt-letter {
+  width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+  background: var(--bg2); border: 1px solid var(--bc);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 900; color: var(--text3);
+  transition: var(--tr);
+}
+.opt.correct {
+  border-color: var(--success); background: rgba(22,163,74,.08);
+}
+.opt.correct .opt-letter {
+  background: var(--success); color: #fff; border-color: var(--success);
+}
+.opt.wrong {
+  border-color: var(--danger); background: rgba(220,38,38,.07);
+}
+.opt.wrong .opt-letter {
+  background: var(--danger); color: #fff; border-color: var(--danger);
+}
+.opt.disabled { pointer-events: none; }
+
+/* FEEDBACK */
+.feedback-bar {
+  margin: 14px 18px; padding: 12px 16px; border-radius: 12px;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px; font-weight: 700;
+  animation: popIn .4s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes popIn { from{transform:scale(.8);opacity:0} to{transform:scale(1);opacity:1} }
+.feedback-bar.ok { background: rgba(22,163,74,.1); color: var(--success); border: 1px solid rgba(22,163,74,.25); }
+.feedback-bar.no { background: rgba(220,38,38,.08); color: var(--danger); border: 1px solid rgba(220,38,38,.2); }
+.feedback-icon { font-size: 20px; }
+
+/* EXPLANATION */
+.explanation {
+  margin: 0 18px 14px; padding: 12px 14px;
+  background: rgba(var(--accent-rgb),.06);
+  border-radius: 10px; border-right: 3px solid var(--accent);
+  font-size: 13px; color: var(--text2); line-height: 1.6;
+  display: none;
+}
+
+/* NAV BTNS */
+.nav-btns { padding: 4px 18px 18px; display: flex; gap: 10px; }
+.btn {
+  flex: 1; padding: 13px; border: none; border-radius: 12px;
+  font-size: 14px; font-weight: 900; cursor: pointer;
+  font-family: 'Outfit', sans-serif; transition: var(--tr);
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+}
+.btn-next {
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  color: #fff; box-shadow: 0 4px 14px var(--accent-glow);
+}
+.btn-next:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
+.btn-skip {
+  background: var(--bg2); color: var(--text2); border: 1px solid var(--bc); flex: 0 0 auto; padding: 13px 18px;
+}
+.btn-skip:hover { border-color: var(--warn); color: var(--warn); }
+
+/* ===== RESULTS ===== */
+.result-hero {
+  text-align: center; padding: 36px 20px 28px;
+  background: var(--card); border-radius: 20px;
+  border: 1px solid var(--bc); margin-bottom: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+}
+.score-ring {
+  width: 110px; height: 110px; border-radius: 50%; margin: 0 auto 18px;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; border: 5px solid var(--bg2);
+  position: relative;
+}
+.score-ring svg { position: absolute; inset: -5px; width: calc(100% + 10px); height: calc(100% + 10px); transform: rotate(-90deg); }
+.score-ring circle { fill: none; stroke-width: 5; stroke-linecap: round; }
+.ring-bg { stroke: var(--bg2); }
+.ring-fill { stroke: var(--accent); transition: stroke-dashoffset 1s ease; }
+.score-num { font-size: 28px; font-weight: 900; color: var(--text); }
+.score-pct { font-size: 12px; color: var(--text3); }
+.result-grade { font-size: 22px; font-weight: 900; margin-bottom: 6px; }
+.result-sub { font-size: 14px; color: var(--text2); }
+.result-stats {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 20px;
+}
+.rs { background: var(--bg2); border-radius: 10px; padding: 12px 8px; text-align: center; }
+.rs .n { font-size: 20px; font-weight: 900; }
+.rs .l { font-size: 11px; color: var(--text3); }
+
+/* REPORT ITEMS */
+.report-item {
+  background: var(--card); border: 1px solid var(--bc); border-radius: 14px;
+  padding: 16px; margin-bottom: 10px; border-right: 4px solid var(--bc);
+}
+.report-item.ok { border-right-color: var(--success); }
+.report-item.no { border-right-color: var(--danger); }
+.report-item .ri-q { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+.report-item .ri-row {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; margin-top: 5px; color: var(--text2);
+}
+.ri-badge {
+  padding: 2px 8px; border-radius: 6px; font-weight: 700; font-size: 11px; flex-shrink: 0;
+}
+.ri-yours { background: rgba(220,38,38,.1); color: var(--danger); }
+.ri-right { background: rgba(22,163,74,.1); color: var(--success); }
+
+.result-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+.btn-retry { background: linear-gradient(135deg, var(--accent-dark), var(--accent)); color: #fff; }
+.btn-retry:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
+.btn-home { background: var(--bg2); color: var(--text); border: 1px solid var(--bc); }
+.btn-home:hover { border-color: var(--accent); color: var(--accent); }
+
+/* FOOTER */
+footer {
+  background: var(--bg2); border-top: 1px solid var(--bc);
+  padding: 22px 24px; display: flex; align-items: center;
+  justify-content: space-between; flex-wrap: wrap; gap: 10px;
+}
+.footer-brand { font-size: 14px; font-weight: 700; }
+.footer-brand span { color: var(--accent); }
+.footer-tg { display: flex; align-items: center; gap: 5px; text-decoration: none; color: #229ED9; font-size: 12px; font-weight: 600; }
+
+@media (max-width: 480px) {
+  nav { padding: 0 14px; }
+  .shell { padding: 16px 14px 60px; }
+  .nav-brand span { display: none; }
+  .hero-band { padding: 30px 16px 28px; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog-bar" style="width:0%"></div>
+
+<nav>
+  <a href="https://gaith-team.github.io/exam/pediatric/index.html" class="nav-back"><i class="fa-solid fa-arrow-right"></i> رجوع</a>
+  <div class="nav-brand">
+    <div class="nav-logo-icon">GT</div>
+    <span>GHAITH TEAM</span>
+  </div>
+  <div class="nav-right">
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<div class="hero-band">
+  <div class="hero-band-icon">🍼</div>
+  <h1>تمريض الأطفال</h1>
+  <p>High Risk neonates</p>
+  <div class="hero-band-meta">
+    <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">-- سؤال</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-clock"></i> 200 Min</div>
+    <div class="meta-pill"><i class="fa-solid fa-shuffle"></i> Shuffled</div>
+  </div>
+</div>
+
+<div class="shell">
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="val stat-correct" id="sCorrect">0</div>
+      <div class="lbl">✔ صحيح</div>
+    </div>
+    <div class="stat-box">
+      <div class="val stat-wrong" id="sWrong">0</div>
+      <div class="lbl">✖ خطأ</div>
+    </div>
+    <div class="stat-box">
+      <div class="val stat-remain" id="sRemain">--%</div>
+      <div class="lbl">⏳ متبقي</div>
+    </div>
+  </div>
+
+  <!-- PROGRESS STRIP -->
+  <div class="prog-strip">
+    <div class="prog-label" id="progLabel">سؤال ١</div>
+    <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+    <div class="timer-badge" id="timerBadge"><i class="fa-regular fa-clock"></i> <span id="timerTxt">200:00</span></div>
+  </div>
+
+  <!-- APP -->
+  <div id="app"></div>
+</div>
+
+<footer>
+  <div class="footer-brand">GHAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg">
+    <i class="fa-brands fa-telegram"></i> @nursing2bu
+  </a>
+</footer>
+
+<script>
+const QUESTIONS = [
+// ═══════════════════════════════════════════════
+// CEREBRAL PALSY (45 MCQ)
+// ═══════════════════════════════════════════════
+{t:"What is cerebral palsy?",o:["A progressive neurological disease","A group of disorders affecting movement, balance, and posture","An infectious disease of the brain","A degenerative muscle disease"],a:1,topic:"Cerebral Palsy",d:"easy"},
+{t:"Cerebral palsy is the most common ___ disability in childhood.",o:["Cognitive","Sensory","Motor","Speech"],a:2,topic:"Cerebral Palsy",d:"easy"},
+{t:"Which of the following is NOT a known cause of cerebral palsy?",o:["Gene mutations","Fetal stroke","Viral gastroenteritis","Maternal infections"],a:2,topic:"Cerebral Palsy",d:"medium"},
+{t:"When does cerebral palsy most typically appear?",o:["During adolescence","In infancy or early childhood","At school age","During puberty"],a:1,topic:"Cerebral Palsy",d:"easy"},
+{t:"Which maternal infection associated with CP risk can be prevented by vaccination?",o:["Cytomegalovirus","German measles (rubella)","Toxoplasmosis","Herpes"],a:1,topic:"Cerebral Palsy",d:"medium"},
+{t:"Low birth weight associated with increased CP risk is defined as less than:",o:["3.0 kg","2.0 kg","2.5 kg","1.5 kg"],a:2,topic:"Cerebral Palsy",d:"medium"},
+{t:"The most common movement disorder in cerebral palsy is:",o:["Ataxia","Dyskinesia","Rigidity","Spasticity"],a:3,topic:"Cerebral Palsy",d:"easy"},
+{t:"Spastic CP affects approximately what percentage of children with CP?",o:["50%","60%","80%","40%"],a:2,topic:"Cerebral Palsy",d:"medium"},
+{t:"In spastic diplegia, muscle stiffness is mainly in the:",o:["Arms","Face","Legs","Trunk"],a:2,topic:"Cerebral Palsy",d:"medium"},
+{t:"Which type of spastic CP affects only one side of the body?",o:["Diplegia","Quadriplegia","Hemiplegia","Paraplegia"],a:2,topic:"Cerebral Palsy",d:"easy"},
+{t:"Spastic quadriplegia is the most severe form of spastic CP and affects:",o:["Only the legs","One side of the body","All four limbs, the trunk, and the face","Arms only"],a:2,topic:"Cerebral Palsy",d:"medium"},
+{t:"Children with dyskinetic CP primarily have difficulty controlling movement of their:",o:["Eyes and tongue only","Hands, arms, feet, and legs","Speech only","Bladder and bowel"],a:1,topic:"Cerebral Palsy",d:"medium"},
+{t:"Children with ataxic CP primarily have problems with:",o:["Speech production","Vision and hearing","Balance and coordination","Muscle spasm"],a:2,topic:"Cerebral Palsy",d:"easy"},
+{t:"The most common type of mixed CP is:",o:["Spastic-ataxic CP","Ataxic-dyskinetic CP","Spastic-dyskinetic CP","Dyskinetic-ataxic CP"],a:2,topic:"Cerebral Palsy",d:"hard"},
+{t:"Which imaging technique uses radio waves and a magnetic field to produce detailed 3D brain images?",o:["CT scan","Cranial ultrasound","EEG","MRI"],a:3,topic:"Cerebral Palsy",d:"easy"},
+{t:"An EEG is used primarily to evaluate which complication in CP?",o:["Intellectual disability","Seizures","Visual impairment","Hearing loss"],a:1,topic:"Cerebral Palsy",d:"medium"},
+{t:"Contracture in CP refers to:",o:["Bone fractures due to osteoporosis","Muscle tissue shortening due to severe muscle tightening","Brain lesion formation","Spinal cord inflammation"],a:1,topic:"Cerebral Palsy",d:"medium"},
+{t:"Which complication of CP can result in scoliosis and hip dislocation?",o:["Osteoporosis","Malnutrition","Contracture","Aspiration pneumonia"],a:2,topic:"Cerebral Palsy",d:"medium"},
+{t:"Aspiration pneumonia in CP is most likely caused by:",o:["Low immune function","Problems with swallowing","Excessive exercise","Medication side effects"],a:1,topic:"Cerebral Palsy",d:"medium"},
+{t:"The brain disorder causing cerebral palsy:",o:["Worsens significantly with age","Changes with the seasons","Does not change with time","Is reversible with treatment"],a:2,topic:"Cerebral Palsy",d:"easy"},
+{t:"Which medication is used to treat uncontrolled body movements such as tremors in CP?",o:["Baclofen","Gabapentin","Benztropine mesylate","Diazepam"],a:2,topic:"Cerebral Palsy",d:"hard"},
+{t:"Baclofen (Lioresal) is classified as a:",o:["Anticonvulsant","Anticholinergic","Muscle relaxant","Anti-inflammatory"],a:2,topic:"Cerebral Palsy",d:"hard"},
+{t:"Which nursing diagnosis addresses difficulty feeding in a child with CP?",o:["Risk for injury","Impaired physical mobility","Imbalanced nutrition: less than body requirements","Risk for delayed growth"],a:2,topic:"Cerebral Palsy",d:"medium"},
+{t:"For a child with CP who has difficulty swallowing, the nurse should position the child during feedings:",o:["Supine","Upright","Lateral","Prone"],a:1,topic:"Cerebral Palsy",d:"easy"},
+{t:"ROM exercises should be performed every ___ hours for a CP child unable to move body parts.",o:["2","4","6","8"],a:1,topic:"Cerebral Palsy",d:"medium"},
+{t:"Which referral is most appropriate to improve speech in a child with CP?",o:["Occupational therapist","Physical therapist","Speech therapist","Nutritionist"],a:2,topic:"Cerebral Palsy",d:"easy"},
+{t:"The primary nursing goal for a child with CP who has impaired mobility is to:",o:["Achieve cure of the disease","Optimize mobility and prevent deformity","Eliminate seizure activity","Improve intellectual function"],a:1,topic:"Cerebral Palsy",d:"easy"},
+{t:"Which food type is recommended for a CP child with difficulty chewing?",o:["Raw vegetables","Hard crackers","Soft and blended foods","Nuts and seeds"],a:2,topic:"Cerebral Palsy",d:"easy"},
+{t:"Seizure precautions for a child with CP include:",o:["Keeping the child prone","Keeping padded side rails up with bed in lowest position","Restricting all physical activity","Restraining the child to bed"],a:1,topic:"Cerebral Palsy",d:"medium"},
+{t:"Which drug is used as a benzodiazepine for seizure management in CP?",o:["Baclofen","Gabapentin","Diazepam","Benztropine"],a:2,topic:"Cerebral Palsy",d:"medium"},
+{t:"The MOST severe form of spastic CP is:",o:["Spastic diplegia","Spastic hemiplegia","Spastic triplegia","Spastic quadriplegia"],a:3,topic:"Cerebral Palsy",d:"easy"},
+{t:"Which laboratory tests screen for genetic or metabolic problems in CP diagnosis?",o:["ECG and EEG","Blood, urine, or skin tests","Chest X-ray and echocardiogram","Stool culture and serology"],a:1,topic:"Cerebral Palsy",d:"medium"},
+{t:"A child with CP has a 'scissoring gait.' This is associated with:",o:["Ataxic CP","Dyskinetic CP","Spastic diplegia","Spastic hemiplegia"],a:2,topic:"Cerebral Palsy",d:"hard"},
+{t:"Expected outcome for 'impaired physical mobility' in CP is that the child will:",o:["Gain 5 kg in weight","Achieve maximum movement ability and absence of contractures","Be free of all infections","Speak fluently within 2 months"],a:1,topic:"Cerebral Palsy",d:"medium"},
+{t:"Osteoporosis in CP can result from all of the following EXCEPT:",o:["Lack of mobility","Inadequate nutrition","Anti-epileptic drug use","Excessive physical activity"],a:3,topic:"Cerebral Palsy",d:"hard"},
+{t:"Cranial ultrasound is used in infancy for CP diagnosis because it is:",o:["The most accurate test available","Quick and provides a preliminary brain assessment","Painless and takes only 5 minutes","Able to detect all types of brain lesions"],a:1,topic:"Cerebral Palsy",d:"medium"},
+{t:"Which is a risk factor for CP related to multiple pregnancies?",o:["Overweight mothers","Premature birth and low birth weight","Post-term delivery","Excessive maternal exercise"],a:1,topic:"Cerebral Palsy",d:"medium"},
+{t:"A child with CP who drags a leg while crawling is likely exhibiting signs of:",o:["Dyskinesia","Ataxia","Spastic hemiplegia","Rigidity"],a:2,topic:"Cerebral Palsy",d:"hard"},
+{t:"For a CP child with 'risk for injury' due to seizures, the nurse should:",o:["Restrict all physical activity permanently","Explain seizure triggers and provide protective gear (helmet, kneepads)","Administer antibiotics prophylactically","Limit all social interactions"],a:1,topic:"Cerebral Palsy",d:"medium"},
+{t:"Which nursing assessment FIRST step for impaired physical mobility in CP is correct?",o:["Administer muscle relaxants","Assess the type of auditory, visual, motor, or intellectual deficit","Refer immediately to physical therapy","Apply orthotic devices"],a:1,topic:"Cerebral Palsy",d:"medium"},
+{t:"What cytomegalovirus (CMV) risk factor for CP is unique?",o:["Can only be transmitted during delivery","Causes flu-like symptoms and can cause birth defects if first active infection occurs during pregnancy","Is prevented by a routine childhood vaccine","Only affects immunocompromised women"],a:1,topic:"Cerebral Palsy",d:"hard"},
+{t:"Which complication of CP may develop from swallowing problems?",o:["Renal failure","Diabetes mellitus","Heart and lung disease including respiratory problems","Scoliosis alone"],a:2,topic:"Cerebral Palsy",d:"medium"},
+{t:"When nurturing a child with CP at home, the nurse should teach the family to:",o:["Perform all activities for the child","Allow the child to perform activities at their own pace","Restrict all physical movement","Avoid any play activities"],a:1,topic:"Cerebral Palsy",d:"easy"},
+{t:"Which drug class is Gabapentin (Neurontin) used for in CP management?",o:["Muscle relaxant","Anticholinergic","Anticonvulsant","Anti-emetic"],a:2,topic:"Cerebral Palsy",d:"hard"},
+{t:"Maternal infection with Toxoplasmosis in pregnancy is caused by:",o:["A virus transmitted via insect bites","A bacterium spread by respiratory droplets","A parasite found in contaminated food, soil, and cat feces","A fungus found in soil"],a:2,topic:"Cerebral Palsy",d:"hard"},
+{t:"Lack of oxygen to the brain during labor is related to birth-related:",o:["Hypoglycemia","Asphyxia","Hypertension","Hyperthermia"],a:1,topic:"Cerebral Palsy",d:"medium"},
+ 
+// ═══════════════════════════════════════════════
+// DOWN SYNDROME (25 MCQ)
+// ═══════════════════════════════════════════════
+{t:"Down syndrome is caused by the presence of an extra chromosome:",o:["18","21","13","22"],a:1,topic:"Down Syndrome",d:"easy"},
+{t:"Another name for Down syndrome is:",o:["Trisomy 18","Klinefelter syndrome","Trisomy 21","Turner syndrome"],a:2,topic:"Down Syndrome",d:"easy"},
+{t:"Down syndrome is also called:",o:["Fragile X syndrome","Mongolism","Williams syndrome","Patau syndrome"],a:1,topic:"Down Syndrome",d:"easy"},
+{t:"Which physical characteristic is MOST commonly associated with Down syndrome?",o:["Long neck","Eyes that slant upward","Protruding ears","Very tall stature"],a:1,topic:"Down Syndrome",d:"easy"},
+{t:"Children with Down syndrome typically have ___ palm creases instead of the normal three.",o:["Four","Two","One","Five"],a:1,topic:"Down Syndrome",d:"medium"},
+{t:"Which is a major risk factor for Down syndrome?",o:["Paternal smoking","Increased maternal age","Low socioeconomic status","Maternal exercise during pregnancy"],a:1,topic:"Down Syndrome",d:"easy"},
+{t:"The most common chromosomal mechanism causing Down syndrome is:",o:["Deletion of chromosome 21","Abnormal cell division resulting in an extra chromosome 21","Monosomy of chromosome 21","Inversion of chromosome 21"],a:1,topic:"Down Syndrome",d:"medium"},
+{t:"Which laboratory test is performed at birth, then at 6 and 12 months, and annually in Down syndrome to rule out hypothyroidism?",o:["CBC and bone marrow examination","TSH and T4 levels","Cytogenetic studies","Complete urine analysis"],a:1,topic:"Down Syndrome",d:"hard"},
+{t:"A prenatal screening technique used for Down syndrome diagnosis is:",o:["Chest X-ray","Electroencephalogram","Amniocentesis","Renal biopsy"],a:2,topic:"Down Syndrome",d:"medium"},
+{t:"Children with Down syndrome should be counseled to avoid which sports due to spinal injury risk?",o:["Swimming and cycling","Football, soccer, and gymnastics","Running and basketball","Tennis and golf"],a:1,topic:"Down Syndrome",d:"medium"},
+{t:"Which nursing diagnosis is MOST relevant for a Down syndrome child with frequent mucus drainage?",o:["Risk for injury","Risk for infection related to decreased muscle tone and poor drainage of mucus","Impaired verbal communication","Delayed growth and development"],a:1,topic:"Down Syndrome",d:"medium"},
+{t:"Heart defects in Down syndrome typically require:",o:["Radiation therapy","Chemotherapy","Timely surgical treatment detected during newborn period or early infancy","No intervention"],a:2,topic:"Down Syndrome",d:"medium"},
+{t:"What diet is required for a child with Down syndrome?",o:["High-protein diet only","No special diet unless celiac disease is present","Low-fat diet exclusively","High-sugar diet for energy"],a:1,topic:"Down Syndrome",d:"medium"},
+{t:"By the time a child with Down syndrome is ___ year old, developmental lag behind normal children becomes clear.",o:["3","2","1","5"],a:2,topic:"Down Syndrome",d:"medium"},
+{t:"Which vaccines are specifically recommended for Down syndrome children with chronic cardiac and respiratory disease?",o:["Hepatitis B and BCG","Pneumococcal and influenza vaccines","Meningococcal vaccine","Typhoid vaccine"],a:1,topic:"Down Syndrome",d:"hard"},
+{t:"The most important initial nursing intervention after diagnosis of Down syndrome is:",o:["Restricting the child from all activities","Establishing a trusting relationship with parents and encouraging communication","Immediately separating child from family","Starting intensive chemotherapy"],a:1,topic:"Down Syndrome",d:"easy"},
+{t:"Which statement about feeding a child with Down syndrome is CORRECT?",o:["Force-feeding is recommended","Parents should exercise patience as the child may have difficulty sucking","No special feeding consideration is needed","High-sugar foods improve energy in these children"],a:1,topic:"Down Syndrome",d:"easy"},
+{t:"Cytogenetic studies in Down syndrome are performed to:",o:["Detect infections","Confirm the clinical diagnosis of trisomy 21","Assess liver function","Monitor drug levels"],a:1,topic:"Down Syndrome",d:"medium"},
+{t:"Mosaic Down syndrome refers to:",o:["All cells having extra chromosome 21","Some cells having an extra copy of chromosome 21","No cells having extra chromosome 21","Deletion of chromosome 21"],a:1,topic:"Down Syndrome",d:"hard"},
+{t:"Which prenatal ultrasound finding is associated with Down syndrome at 11 weeks?",o:["Decreased bladder size","Enlarged nuchal translucency (NT) and absent nasal bone","Increased amniotic fluid","Small head circumference"],a:1,topic:"Down Syndrome",d:"hard"},
+{t:"Thyroid hormone in Down syndrome management is given to:",o:["Treat cardiac anomalies","Prevent hypothyroidism-related intellectual deterioration and improve function","Reduce seizure frequency","Prevent infections"],a:1,topic:"Down Syndrome",d:"hard"},
+{t:"Anticonvulsants in Down syndrome management are used to treat:",o:["Cardiac arrhythmias","Hypothyroidism","Tonic-clonic seizures or infantile spasms","Upper respiratory infections"],a:2,topic:"Down Syndrome",d:"hard"},
+{t:"Parents of a Down syndrome child should be referred to genetic counseling to:",o:["Learn surgical techniques","Evaluate future risks and develop coping skills","Diagnose the condition again","Obtain medications"],a:1,topic:"Down Syndrome",d:"easy"},
+{t:"Which translocations can also cause Down syndrome?",o:["Between chromosomes 21 and 22","Between chromosomes 21 and 14","Between chromosomes 21 and 13","Between chromosomes 18 and 21"],a:1,topic:"Down Syndrome",d:"hard"},
+{t:"In Down syndrome, 'loose joints' refer to:",o:["Dislocated bones","Hypotonia and ligamentous laxity","Arthritis","Contractures"],a:1,topic:"Down Syndrome",d:"medium"},
+ 
+// ═══════════════════════════════════════════════
+// MENTAL RETARDATION (20 MCQ)
+// ═══════════════════════════════════════════════
+{t:"Mental retardation is currently widely referred to as:",o:["Learning disability","Autism spectrum disorder","Intellectual disability (ID)","Attention deficit disorder"],a:2,topic:"Mental Retardation",d:"easy"},
+{t:"Mental retardation is characterized by an intelligence factor (IQ) below:",o:["85-90","70-75","60-65","50-55"],a:1,topic:"Mental Retardation",d:"easy"},
+{t:"What percentage of mental retardation is attributed to genetic causes?",o:["Over 50%","Over 30%","About 10%","About 20%"],a:1,topic:"Mental Retardation",d:"medium"},
+{t:"Which degree of mental retardation has an IQ range of 55-70?",o:["Moderate","Severe","Mild","Profound"],a:2,topic:"Mental Retardation",d:"easy"},
+{t:"Children with moderate intellectual disability have an IQ range of:",o:["55-70","35-54","20-34","Less than 20"],a:1,topic:"Mental Retardation",d:"medium"},
+{t:"What term is used for the MILD level of mental retardation in the classification table?",o:["Idiot","Imbecile","Moron","Cretin"],a:2,topic:"Mental Retardation",d:"hard"},
+{t:"Approximately what percentage of children with intellectual disability fall in the mild category?",o:["5-10%","3-4%","85%","50%"],a:2,topic:"Mental Retardation",d:"medium"},
+{t:"Which childhood illness can cause encephalitis leading to mental retardation?",o:["Chicken pox","Measles","Mumps","Rubella"],a:1,topic:"Mental Retardation",d:"medium"},
+{t:"Exposure to which toxic elements is linked to reduced intellectual growth in children?",o:["Calcium and magnesium","Mercury and lead","Iron and zinc","Copper and aluminum"],a:1,topic:"Mental Retardation",d:"medium"},
+{t:"In mental retardation, nurses should approach the child according to their:",o:["Chronological age","Mental age rather than chronological age","Physical size","Social class"],a:1,topic:"Mental Retardation",d:"medium"},
+{t:"The three 'Rs' emphasized in caring for mentally retarded children are:",o:["Reading, writing, arithmetic","Routine, repetition, relaxation","Rest, rehabilitation, reintegration","Referral, review, reassessment"],a:1,topic:"Mental Retardation",d:"hard"},
+{t:"Prevention of mental retardation includes immunization against:",o:["Tuberculosis","Typhoid fever","Measles","Malaria"],a:2,topic:"Mental Retardation",d:"easy"},
+{t:"The primary nursing diagnosis for a mentally retarded child who cannot bathe or dress independently is:",o:["Risk for fluid volume deficit","Self-care deficit related to cognitive impairment","Acute pain","Hypertension risk"],a:1,topic:"Mental Retardation",d:"easy"},
+{t:"A key communication technique when caring for mentally retarded children is:",o:["Using complex medical terminology","Speaking quickly to maintain attention","Maintaining a calm, unhurried communication manner","Using only written communication"],a:2,topic:"Mental Retardation",d:"easy"},
+{t:"Profound intellectual disability has an IQ of less than:",o:["35","20","55","10"],a:1,topic:"Mental Retardation",d:"medium"},
+{t:"Which family nursing diagnosis is relevant in mental retardation?",o:["Fluid volume excess","Ineffective family coping related to emotional stress and grief","Risk for infection","Acute confusion"],a:1,topic:"Mental Retardation",d:"medium"},
+{t:"The WHO estimates that approximately ___ of children and adolescents have some form of mental disability.",o:["1-2%","5%","10-20%","30%"],a:2,topic:"Mental Retardation",d:"medium"},
+{t:"Which characteristic describes the 'bad memory' of mentally retarded children?",o:["They have no memory at all","They have short-term memory recall but can improve with repetition of tasks","They have excellent photographic memory","They only remember visual information"],a:1,topic:"Mental Retardation",d:"medium"},
+{t:"Pregnant women should avoid which substances to prevent neural defects in the child?",o:["Vitamins and minerals","Drugs, smoking, and alcohol","Exercise and swimming","Sunlight exposure"],a:1,topic:"Mental Retardation",d:"easy"},
+{t:"Which nursing diagnosis relates to difficulty interacting socially in mental retardation?",o:["Risk for injury","Altered growth and development","Risk for social isolation related to behavior or appearance","Imbalanced nutrition"],a:2,topic:"Mental Retardation",d:"medium"},
+ 
+// ═══════════════════════════════════════════════
+// GASTROENTERITIS (25 MCQ)
+// ═══════════════════════════════════════════════
+{t:"Gastroenteritis is defined as acute inflammation of:",o:["The liver and gallbladder","The stomach and intestines resulting in vomiting and diarrhea","The kidneys and bladder","The lungs and airways"],a:1,topic:"Gastroenteritis",d:"easy"},
+{t:"The most common causative agent of viral gastroenteritis is:",o:["Shigella","Salmonella","Rotavirus","E. coli"],a:2,topic:"Gastroenteritis",d:"easy"},
+{t:"In bacterial gastroenteritis, fever is usually above:",o:["37.5°C","38°C","38.5°C","39°C"],a:2,topic:"Gastroenteritis",d:"medium"},
+{t:"Which stool characteristic suggests Vibrio cholera infection?",o:["Bloody stool with mucus","Bulky frothy pale stool","Rice water stool","Watery colorless stool"],a:2,topic:"Gastroenteritis",d:"medium"},
+{t:"Which stool characteristic suggests Giardia infection?",o:["Bloody stool","Rice water stool","Bulky frothy, pale, and offensive stool","Watery colorless stool"],a:2,topic:"Gastroenteritis",d:"medium"},
+{t:"The main route of transmission of gastroenteritis is:",o:["Airborne","Vector-borne","Fecal-oral route","Sexual contact"],a:2,topic:"Gastroenteritis",d:"easy"},
+{t:"The Rotavirus vaccine is administered orally at which ages?",o:["1, 3, 5 months","2, 4, 6 months","3, 6, 9 months","6, 12, 18 months"],a:1,topic:"Gastroenteritis",d:"medium"},
+{t:"Which is a red flag symptom of acute gastroenteritis requiring urgent attention?",o:["Mild diarrhea","Slight fever below 38°C","Altered sensorium","Normal appetite"],a:2,topic:"Gastroenteritis",d:"medium"},
+{t:"Metabolic acidosis in gastroenteritis is manifested by:",o:["Slow shallow breathing","Rapid deep breathing (Kussmaul's breathing)","Normal breathing pattern","Irregular breathing"],a:1,topic:"Gastroenteritis",d:"hard"},
+{t:"Which neurological complication can occur due to hyponatraemia in gastroenteritis?",o:["Peripheral neuropathy","Convulsions","Encephalopathy only","Meningitis only"],a:1,topic:"Gastroenteritis",d:"hard"},
+{t:"Antibiotic therapy in gastroenteritis is indicated when:",o:["Diarrhea lasts more than 1 day","There is mild fever below 38°C","There is high persistent fever with signs of severe bacterial infection","Patient has mild vomiting"],a:2,topic:"Gastroenteritis",d:"medium"},
+{t:"The most important nursing goal in caring for a child with gastroenteritis is to:",o:["Restrict all fluids","Hydrate the infant, feed the infant, and deal with associated problems","Administer antibiotics immediately","Measure temperature every 30 minutes"],a:1,topic:"Gastroenteritis",d:"easy"},
+{t:"If vomiting occurs during ORS therapy, the nurse should:",o:["Stop ORS completely for 24 hours","Wait 10 minutes then continue ORS more slowly","Continue at the same rate","Increase the amount given"],a:1,topic:"Gastroenteritis",d:"medium"},
+{t:"'Puffy eyes' during ORS therapy is a sign of:",o:["Dehydration","Allergic reaction","Over hydration","Infection"],a:2,topic:"Gastroenteritis",d:"hard"},
+{t:"During diarrhea, food should be offered to the child every:",o:["1-2 hours","3-4 hours","6-8 hours","Once daily"],a:1,topic:"Gastroenteritis",d:"medium"},
+{t:"Which of the following is a digestive complication of severe gastroenteritis?",o:["Acute renal failure","Convulsions","Persistent diarrhea for more than 2 weeks","Arrhythmia"],a:2,topic:"Gastroenteritis",d:"hard"},
+{t:"After diarrhea stops, how many extra meals per day should a normal child receive for 2 weeks?",o:["Three extra meals","Two extra meals","One extra meal","No extra meals"],a:2,topic:"Gastroenteritis",d:"medium"},
+{t:"Which of the following should NOT be given routinely to a child with diarrhea?",o:["ORS solution","Zinc supplements","Anti-diarrheal drugs","Breast milk"],a:2,topic:"Gastroenteritis",d:"easy"},
+{t:"Hand washing is critical in preventing gastroenteritis because:",o:["It kills all intestinal bacteria permanently","Excretion can begin before symptoms and continue after they resolve","It prevents all viral infections","It eliminates the need for vaccines"],a:1,topic:"Gastroenteritis",d:"medium"},
+{t:"Water purification by boiling should last at least:",o:["2 minutes","5 minutes","10 minutes","20 minutes"],a:2,topic:"Gastroenteritis",d:"easy"},
+{t:"Which of the following is NOT a bacterial organism causing gastroenteritis?",o:["Shigella","Salmonella","Rotavirus","Campylobacter"],a:2,topic:"Gastroenteritis",d:"medium"},
+{t:"Hemolytic uremic syndrome (HUS) as a complication of gastroenteritis consists of:",o:["Renal failure, hemolytic anemia, and thrombocytopenia","Liver failure and jaundice","Cardiac arrhythmia only","Pulmonary edema only"],a:0,topic:"Gastroenteritis",d:"hard"},
+{t:"Paralytic ileus as a GIT complication of gastroenteritis can be caused by:",o:["Hyperkalaemia","Toxemia, hypokalemia, and antimotility drugs","Hypernatraemia","Alkalosis only"],a:1,topic:"Gastroenteritis",d:"hard"},
+{t:"Anti-emetics such as chlorpromazine should not be given to children with diarrhea because:",o:["They cause more diarrhea","They cause hypertension","They sedate the child, making it too sleepy to take ORS","They increase vomiting"],a:2,topic:"Gastroenteritis",d:"hard"},
+{t:"The 5 main bacterial organisms causing gastroenteritis are shigella, salmonella, E.coli, campylobacter, and:",o:["Rotavirus","Giardia lamblia","Yersinia enterocolitica","Vibrio cholerae"],a:2,topic:"Gastroenteritis",d:"hard"},
+ 
+// ═══════════════════════════════════════════════
+// TYPHOID FEVER (20 MCQ)
+// ═══════════════════════════════════════════════
+{t:"Typhoid fever is caused by:",o:["Shigella dysenteriae","Salmonella typhi","Vibrio cholerae","Escherichia coli"],a:1,topic:"Typhoid Fever",d:"easy"},
+{t:"The incubation period for typhoid fever is usually:",o:["1-3 days","8-14 days","4-6 weeks","24-48 hours"],a:1,topic:"Typhoid Fever",d:"medium"},
+{t:"Typhoid fever is most commonly spread through contamination of:",o:["Air and droplets","Water, milk, or food with sewage","Direct skin contact","Insect bites"],a:1,topic:"Typhoid Fever",d:"easy"},
+{t:"Payer's patches in typhoid fever refer to:",o:["Skin rashes on the trunk","Enlargement of lymphoid tissue in the intestine","Brain abscesses","Gastric ulcers"],a:1,topic:"Typhoid Fever",d:"hard"},
+{t:"In the FIRST week of typhoid fever, the temperature pattern is:",o:["Constantly normal","Decreases to subnormal levels","Increases 2 grades at night reaching 39-40°C","Remains stable at 38°C"],a:2,topic:"Typhoid Fever",d:"medium"},
+{t:"The THIRD week of typhoid fever is characterized by:",o:["Headache and mild fever","Intestinal complications beginning","Prostration with marked weakness, fatigue, and circulatory failure","Complete recovery"],a:2,topic:"Typhoid Fever",d:"medium"},
+{t:"Intestinal perforation in typhoid fever presents with:",o:["Gradual improvement in abdominal pain","Sudden acute abdominal pain with signs of collapse and shock","Disappearance of fever","Increased appetite"],a:1,topic:"Typhoid Fever",d:"medium"},
+{t:"Which antibiotic is the only effective treatment for typhoid fever?",o:["Ampicillin IV","Penicillin IV","Chloramphenicol IV","Erythromycin IV"],a:2,topic:"Typhoid Fever",d:"medium"},
+{t:"How long should Chloramphenicol be continued in typhoid fever treatment?",o:["1 week","2 weeks","3 weeks","5 days"],a:2,topic:"Typhoid Fever",d:"medium"},
+{t:"How many stool cultures are typically performed in typhoid fever diagnosis?",o:["One (1)","Two (2)","Three (3), one per week","Five (5)"],a:2,topic:"Typhoid Fever",d:"hard"},
+{t:"'Rose spots' in typhoid fever appear on the:",o:["Face","Extremities","Trunk","Back only"],a:2,topic:"Typhoid Fever",d:"medium"},
+{t:"The typhoid organism is found in blood during which week of illness?",o:["Second week","Third week","First week","Fourth week"],a:2,topic:"Typhoid Fever",d:"hard"},
+{t:"Which complication of typhoid fever is caused by erosion of blood vessels due to ulceration?",o:["Metearism","Acute myocarditis","Intestinal hemorrhage","Meningitis"],a:2,topic:"Typhoid Fever",d:"medium"},
+{t:"Which nursing intervention helps manage fever in typhoid fever?",o:["Ice water sponge baths","Tepid sponge baths avoiding ice water and alcohol","Cold alcohol rubs","Restriction of all fluids"],a:1,topic:"Typhoid Fever",d:"medium"},
+{t:"The typhoid vaccine is recommended for people who:",o:["Have already recovered from typhoid fever","Are traveling to endemic areas or live with a known carrier","Are under 5 years of age only","Have had recent diarrhea"],a:1,topic:"Typhoid Fever",d:"easy"},
+{t:"Acute myocarditis in typhoid fever is caused by:",o:["Bacterial spread directly to the heart","Release of powerful endotoxins by Salmonella","Direct viral infection of the heart","Immune complex deposition"],a:1,topic:"Typhoid Fever",d:"hard"},
+{t:"Which nursing diagnosis in typhoid fever relates to temperature elevation?",o:["Risk for fluid volume deficit","Activity intolerance","Hyperthermia related to increase in metabolic rate","Acute pain"],a:2,topic:"Typhoid Fever",d:"easy"},
+{t:"The public health slogan 'boil it, cook it, peel it, or forget it' prevents typhoid by:",o:["Water purification only","Ensuring safe food and water practices","Improving hand hygiene protocol","Directing vaccine administration"],a:1,topic:"Typhoid Fever",d:"easy"},
+{t:"The mortality rate of typhoid fever in children compared to adults is:",o:["Higher in children","Equal in both groups","Lower in children","Variable with no consistent pattern"],a:2,topic:"Typhoid Fever",d:"medium"},
+{t:"Metearism in typhoid fever refers to:",o:["Intestinal hemorrhage","Abdominal distension caused by accumulation of flatus in the bowel","Intestinal perforation","Jaundice"],a:1,topic:"Typhoid Fever",d:"hard"},
+ 
+// ═══════════════════════════════════════════════
+// DIARRHEA (15 MCQ)
+// ═══════════════════════════════════════════════
+{t:"WHO defines diarrhea as passage of ___ or more loose or liquid stools per day.",o:["Two","Three","Four","Five"],a:1,topic:"Diarrhea",d:"easy"},
+{t:"Rotavirus is responsible for approximately what percentage of infantile diarrhea?",o:["10-20%","30-50%","60-70%","5-10%"],a:1,topic:"Diarrhea",d:"medium"},
+{t:"Dysentery is defined as diarrhea with:",o:["Watery stools only","Visible blood in the feces","Mucus but no blood","Yellow-colored stools"],a:1,topic:"Diarrhea",d:"easy"},
+{t:"Persistent diarrhea is defined as lasting at least:",o:["3-5 days","7 days","14 days","30 days"],a:2,topic:"Diarrhea",d:"medium"},
+{t:"Chronic nonspecific diarrhea (CNSD) is most common in children aged:",o:["0-6 months","6 to 54 months","5-10 years","Adolescents"],a:1,topic:"Diarrhea",d:"hard"},
+{t:"Zinc supplements in diarrhea treatment reduce the duration of diarrhea episodes by:",o:["10%","25%","50%","75%"],a:1,topic:"Diarrhea",d:"hard"},
+{t:"ORS enhances reabsorption of sodium and water primarily through the:",o:["Large intestine","Stomach","Small intestine","Colon"],a:2,topic:"Diarrhea",d:"medium"},
+{t:"For ongoing stool losses in older children, ORS should replace losses on a ___ basis.",o:["2:1","1:2","1:1","3:1"],a:2,topic:"Diarrhea",d:"hard"},
+{t:"Which beverage is BEST for a child with diarrhea?",o:["Caffeinated drinks","Carbonated beverages","Diluted fruit juice without added sugar","Full-fat milk"],a:2,topic:"Diarrhea",d:"easy"},
+{t:"Starvation diarrhea in marasmus presents as:",o:["Bloody stools with tenesmus","Small greenish stools with excess mucus","Rice water stools","Bulky frothy stools"],a:1,topic:"Diarrhea",d:"hard"},
+{t:"Two doses of Rotarix rotavirus vaccine can be administered at:",o:["1 and 3 months","2 and 4 months","3 and 6 months","6 and 12 months"],a:1,topic:"Diarrhea",d:"medium"},
+{t:"Which food should be avoided during diarrhea?",o:["Bananas","Broths and soups","Potatoes without skin","Caffeinated drinks"],a:3,topic:"Diarrhea",d:"easy"},
+{t:"What is ORS (oral rehydration solution) primarily composed of?",o:["Glucose and vitamins","Clean water, salt, and sugar","Electrolytes and antibiotics","Fruit juice and salt"],a:1,topic:"Diarrhea",d:"easy"},
+{t:"Intractable diarrhea of infancy persists for longer than 2 weeks with:",o:["Known pathogens identified","No recognized pathogens and is refractory to treatment","High fever always present","Normal stool cultures"],a:1,topic:"Diarrhea",d:"hard"},
+{t:"Breastfeeding during the first 6 months of life has a protective effect against:",o:["All infections equally","Rotavirus infection","Bacterial infections only","Parasitic infections only"],a:1,topic:"Diarrhea",d:"medium"},
+ 
+// ═══════════════════════════════════════════════
+// DEHYDRATION (15 MCQ)
+// ═══════════════════════════════════════════════
+{t:"Dehydration occurs when total output of fluid:",o:["Equals total intake","Exceeds total intake","Is less than total intake","Stays constant regardless of intake"],a:1,topic:"Dehydration",d:"easy"},
+{t:"Mild dehydration is characterized by body weight loss of:",o:["10% or more","5-9%","2-4%","1% or less"],a:2,topic:"Dehydration",d:"easy"},
+{t:"In severe dehydration, body weight loss is:",o:["2-4%","5-9%","10% or more","Less than 2%"],a:2,topic:"Dehydration",d:"easy"},
+{t:"Which type of dehydration has serum sodium below 130 mEq/L?",o:["Isotonic","Hypertonic","Hypotonic","Hypernatremic"],a:2,topic:"Dehydration",d:"medium"},
+{t:"Hypertonic dehydration is frequently observed in:",o:["Breastfed infants","Malnourished children","Formula-fed infants","Older children"],a:2,topic:"Dehydration",d:"hard"},
+{t:"Which is the EARLIEST manifestation of dehydration?",o:["Sunken eyes","Shock","Thirst","Oliguria"],a:2,topic:"Dehydration",d:"easy"},
+{t:"In hypotonic dehydration, the tongue is:",o:["Very dry (woody)","Moist","Dry","Cracked and bleeding"],a:1,topic:"Dehydration",d:"hard"},
+{t:"Plan C treatment for severe dehydration involves:",o:["Giving ORS at home","Giving ORS at outpatient department","Giving IV fluids at hospital","Restricting all fluids"],a:2,topic:"Dehydration",d:"medium"},
+{t:"In moderate dehydration, Plan B ORS should be given as:",o:["100 ml/kg in 3-6 hours","75 ml/kg in 4 hours","50 ml/kg in 2 hours","150 ml/kg in 6 hours"],a:1,topic:"Dehydration",d:"hard"},
+{t:"In severe dehydration, the cardiovascular sign present is:",o:["Normal blood pressure and pulse","Bradycardia only","Rapid weak (thready) pulse and hypotension","Hypertension only"],a:2,topic:"Dehydration",d:"medium"},
+{t:"The anterior fontanel in a dehydrated infant appears:",o:["Bulging","Normal","Depressed (sunken)","Tense"],a:2,topic:"Dehydration",d:"easy"},
+{t:"Isotonic dehydration is the MOST common type occurring in:",o:["5-10% of cases","10-15% of cases","Over 75% of cases","About 50% of cases"],a:2,topic:"Dehydration",d:"medium"},
+{t:"Hypokalemia complication of dehydration can cause:",o:["Hypertension","Tetany","Hypotonia of muscles and cardiac arrhythmia","Hypoglycemia only"],a:2,topic:"Dehydration",d:"hard"},
+{t:"In hypotonic dehydration, what happens to brain cells?",o:["Brain cell dehydration and shrinkage","Brain cell edema due to water moving into cells","No change in brain cells","Immediate brain cell death"],a:1,topic:"Dehydration",d:"hard"},
+{t:"For a child under 2 years with moderate dehydration, ORS amount after each stool is:",o:["200-300 ml","50-100 ml","10-20 ml","500 ml"],a:1,topic:"Dehydration",d:"hard"},
+ 
+// ═══════════════════════════════════════════════
+// NEOPLASTIC DISORDERS (25 MCQ)
+// ═══════════════════════════════════════════════
+{t:"Leukemia accounts for approximately what percentage of childhood cancer cases?",o:["10%","28%","50%","40%"],a:1,topic:"Neoplastic Disorders",d:"medium"},
+{t:"The most frequent type of leukemia in children is:",o:["Acute myeloid leukemia (AML)","Chronic lymphocytic leukemia (CLL)","Acute lymphoblastic leukemia (ALL)","Chronic myeloid leukemia (CML)"],a:2,topic:"Neoplastic Disorders",d:"easy"},
+{t:"The highest incidence of leukemia occurs in children aged:",o:["2-6 years","10-14 years","7-9 years","Newborn period"],a:0,topic:"Neoplastic Disorders",d:"medium"},
+{t:"Normal white blood cell count ranges from:",o:["1,000-3,000/cmm","5,000-10,000/cmm","15,000-20,000/cmm","25,000-30,000/cmm"],a:1,topic:"Neoplastic Disorders",d:"medium"},
+{t:"In leukemia, immature WBCs:",o:["Develop and function normally","Multiply rapidly but do not develop into mature functional cells","Are produced in smaller numbers","Are immediately destroyed"],a:1,topic:"Neoplastic Disorders",d:"medium"},
+{t:"Hemorrhagic manifestations in leukemia are largely caused by:",o:["Low hemoglobin","High WBC count","Low platelet count","Abnormal liver function"],a:2,topic:"Neoplastic Disorders",d:"medium"},
+{t:"Which clinical manifestation of leukemia is caused by destruction of bone by leukemic cells?",o:["Petechiae","Anemia","Leg or joint pain","Hepatomegaly"],a:2,topic:"Neoplastic Disorders",d:"medium"},
+{t:"Diagnosis of leukemia is confirmed by examination of:",o:["Chest X-ray","Urine analysis","Aspirated bone marrow","Cerebrospinal fluid"],a:2,topic:"Neoplastic Disorders",d:"medium"},
+{t:"Which is a specific treatment for leukemia?",o:["Antibiotics and sedatives only","Blood transfusion only","Chemotherapy, IV corticosteroids, and bone marrow transplantation","Radiation therapy alone"],a:2,topic:"Neoplastic Disorders",d:"easy"},
+{t:"Nursing care for a child with leukemia includes:",o:["Isolation to avoid infection from others","Restricting all fluid intake","Measuring rectal temperature routinely","Promoting excessive physical exercise"],a:0,topic:"Neoplastic Disorders",d:"medium"},
+{t:"Brain tumors rank ___ in incidence among all pediatric cancers after leukemia.",o:["Third","Second","Fourth","First"],a:1,topic:"Neoplastic Disorders",d:"medium"},
+{t:"Wilm's tumor is a malignant embryonic tumor of the:",o:["Liver","Brain","Kidney","Spleen"],a:2,topic:"Neoplastic Disorders",d:"easy"},
+{t:"Wilm's tumor is most commonly discovered at age:",o:["At birth","6 months to 5 years","10-15 years","During adolescence"],a:1,topic:"Neoplastic Disorders",d:"medium"},
+{t:"The most important nursing instruction for Wilm's tumor is:",o:["Encourage abdominal exercises","Avoid abdominal palpation to prevent metastasis","Apply heat to the abdomen","Perform daily abdominal massage"],a:1,topic:"Neoplastic Disorders",d:"medium"},
+{t:"Treatment of Wilm's tumor includes:",o:["Chemotherapy alone","Surgery (nephrectomy) with possible X-ray irradiation and chemotherapy for 15 months","Radiation therapy alone","Antibiotics only"],a:1,topic:"Neoplastic Disorders",d:"medium"},
+{t:"Hodgkin's disease is a malignant disease affecting the:",o:["Kidney","Liver","Lymph nodes","Brain"],a:2,topic:"Neoplastic Disorders",d:"easy"},
+{t:"Which is the EARLIEST sign of Hodgkin's disease?",o:["Severe pain in lymph nodes","Painless enlargement of cervical lymph nodes","Hematuria","Jaundice"],a:1,topic:"Neoplastic Disorders",d:"easy"},
+{t:"Hodgkin's disease Stage II means disease affects:",o:["A single lymph node","2 or more lymph node regions on the SAME side of the diaphragm","Lymph nodes on BOTH sides of the diaphragm","Diffuse involvement of extra-lymphatic organs"],a:1,topic:"Neoplastic Disorders",d:"hard"},
+{t:"Children with Hodgkin's Stage I or II receiving radiation therapy have approximately what cure rate?",o:["50%","70%","90%","100%"],a:2,topic:"Neoplastic Disorders",d:"medium"},
+{t:"After total splenectomy for Hodgkin's disease, prophylactic penicillin should be given for:",o:["1-2 weeks","1-2 months","1-2 years","5 years"],a:2,topic:"Neoplastic Disorders",d:"hard"},
+{t:"Which is a late effect of childhood cancer treatment that can occur months or years after treatment ends?",o:["Temporary hair loss","Second cancers and emotional/cognitive problems","Improved immune function","Accelerated growth"],a:1,topic:"Neoplastic Disorders",d:"medium"},
+{t:"IV pyelogram in Wilm's tumor shows the:",o:["Liver structure","Pelvis of the kidney","Bladder only","Spinal cord"],a:1,topic:"Neoplastic Disorders",d:"hard"},
+{t:"AML (Acute Myeloid Leukemia) accounts for approximately what percentage of childhood leukemia?",o:["50%","40%","20%","5%"],a:2,topic:"Neoplastic Disorders",d:"hard"},
+{t:"Which is a COMMON presentation of leukemia involving the oral cavity?",o:["Dental caries","Necrotic ulcerative lesions of the gums","Halitosis","Tooth fractures"],a:1,topic:"Neoplastic Disorders",d:"hard"},
+{t:"Childhood brain tumors are the leading cause of:",o:["All pediatric deaths","Cancer-related death in children","Infectious deaths in children","Metabolic deaths in children"],a:1,topic:"Neoplastic Disorders",d:"medium"},
+ 
+// ═══════════════════════════════════════════════
+// CONGENITAL ANOMALIES (18 MCQ)
+// ═══════════════════════════════════════════════
+{t:"Congenital anomalies are defined as:",o:["Diseases acquired after birth","Abnormalities present at birth in structure, position, or function","Infections occurring in the neonatal period","Nutritional deficiencies"],a:1,topic:"Congenital Anomalies",d:"easy"},
+{t:"Which viral infection during the FIRST trimester of pregnancy is associated with congenital anomalies?",o:["Influenza","Rubella (German measles)","Cytomegalovirus","HIV"],a:1,topic:"Congenital Anomalies",d:"easy"},
+{t:"Approximately what percentage of infants of insulin-dependent diabetic mothers may have congenital anomalies?",o:["5%","10%","20%","25%"],a:1,topic:"Congenital Anomalies",d:"hard"},
+{t:"Spina bifida occulta is present in what percentage of the general population?",o:["1-2%","5-10%","20-30%","50%"],a:1,topic:"Congenital Anomalies",d:"medium"},
+{t:"Which type of spina bifida involves the spinal cord and nerve roots causing sensorimotor deficits?",o:["Spina bifida occulta","Meningocele","Myelomeningocele","Encephalocele"],a:2,topic:"Congenital Anomalies",d:"medium"},
+{t:"In meningocele, what protrudes outside the vertebrae?",o:["Brain tissue","Spinal cord only","Sac containing meninges and CSF","Nerve roots only"],a:2,topic:"Congenital Anomalies",d:"medium"},
+{t:"Encephalocele occurs when:",o:["The spinal cord fails to close","Bones of the skull fail to knit together, with CSF protruding and damaged brain tissue","Only the cerebellum protrudes","The meninges alone protrude"],a:1,topic:"Congenital Anomalies",d:"medium"},
+{t:"Prevention of spina bifida requires women of childbearing age to take at least ___ of folic acid per day from one month before conception.",o:["0.1 mg","0.2 mg","0.4 mg","1.0 mg"],a:2,topic:"Congenital Anomalies",d:"medium"},
+{t:"Women who have already had a baby with spina bifida should take folic acid at:",o:["0.4 mg/day","1 mg/day","2 mg/day","4 mg/day"],a:3,topic:"Congenital Anomalies",d:"hard"},
+{t:"The nurse should position an infant with myelomeningocele in which position to reduce CSF pressure in the sac?",o:["High Trendelenburg's position","Low Trendelenburg's position while prone","Supine with head elevated","Lateral recumbent position"],a:1,topic:"Congenital Anomalies",d:"hard"},
+{t:"Hydrocephalus is caused by:",o:["Increased brain tissue growth","Imbalance between production and absorption of CSF causing accumulation","Decreased blood supply to the brain","Infection of the meninges alone"],a:1,topic:"Congenital Anomalies",d:"medium"},
+{t:"The 'setting sun sign' in hydrocephalus refers to:",o:["Bulging fontanel","Dilated scalp veins","Sluggish and unequal pupils","High-pitched cry"],a:2,topic:"Congenital Anomalies",d:"hard"},
+{t:"Post-operative care for hydrocephalus shunt placement includes positioning the child on:",o:["The side of shunt insertion","The side opposite the shunt to facilitate drainage","The prone position only","Sitting upright immediately"],a:1,topic:"Congenital Anomalies",d:"medium"},
+{t:"Folic acid is found naturally in:",o:["Meat and dairy products","Cereals, dried beans, leaf vegetables, and fruits","Processed foods","Fish and seafood"],a:1,topic:"Congenital Anomalies",d:"easy"},
+{t:"Which preoperative care is essential for a newborn with a congenital anomaly requiring surgery?",o:["Starting chemotherapy","Placing peripheral IV for fluids/glucose and correcting electrolyte imbalances","Performing immediate surgery without preparation","Restricting all fluids"],a:1,topic:"Congenital Anomalies",d:"medium"},
+{t:"MMR vaccine for females is recommended primarily to prevent congenital anomalies due to:",o:["Measles only","Rubella (German measles)","Mumps only","Influenza"],a:1,topic:"Congenital Anomalies",d:"easy"},
+{t:"Anencephaly refers to:",o:["Spinal cord malformation","Failure of the brain to develop properly or at all, resulting in death","Small brain size","Hydrocephalus"],a:1,topic:"Congenital Anomalies",d:"medium"},
+{t:"The nurse monitoring an infant with myelomeningocele should assess head circumference for signs of:",o:["Malnutrition","Infection","Increased intracranial pressure","Dehydration"],a:2,topic:"Congenital Anomalies",d:"medium"},
+ 
+// ═══════════════════════════════════════════════
+// NEPHROTIC SYNDROME (12 MCQ)
+// ═══════════════════════════════════════════════
+{t:"Nephrotic syndrome is characterized by increased glomerular permeability resulting in:",o:["Hematuria and hypertension","Massive urinary protein loss, low blood protein, and massive edema","Urinary tract infection","Kidney stones"],a:1,topic:"Nephrotic Syndrome",d:"easy"},
+{t:"Nephrotic syndrome occurs most commonly between ages:",o:["Newborn to 1 year","2 and 5 years","6 and 10 years","10 and 15 years"],a:1,topic:"Nephrotic Syndrome",d:"medium"},
+{t:"The boy-to-girl ratio in nephrotic syndrome in young children is:",o:["1:2","2:1","1:1","3:1"],a:1,topic:"Nephrotic Syndrome",d:"medium"},
+{t:"The most common type of nephrotic syndrome in children is:",o:["Secondary nephrotic syndrome","Congenital nephrotic syndrome","Primary nephrotic syndrome","Drug-induced nephrotic syndrome"],a:2,topic:"Nephrotic Syndrome",d:"medium"},
+{t:"Which is a clinical manifestation of nephrotic syndrome?",o:["Hypertension and hematuria","Pitting edema, weight gain, and decreased urinary output","High fever and rash","Polyuria and polydipsia"],a:1,topic:"Nephrotic Syndrome",d:"easy"},
+{t:"In nephrotic syndrome, urinary protein excretion exceeds:",o:["0.5 gm/24 hrs","1 gm/24 hrs","2 gm/24 hrs","4 gm/24 hrs"],a:2,topic:"Nephrotic Syndrome",d:"hard"},
+{t:"Diet management in nephrotic syndrome includes:",o:["High sodium diet","Sodium-restricted diet while the child is edematous","Protein-free diet","High fat diet"],a:1,topic:"Nephrotic Syndrome",d:"medium"},
+{t:"Which is a complication of nephrotic syndrome?",o:["Only kidney stones","Hypertension crisis","Pulmonary edema, infection, and growth retardation","Hematuria alone"],a:2,topic:"Nephrotic Syndrome",d:"medium"},
+{t:"Which nursing intervention is the priority for excess fluid volume in nephrotic syndrome?",o:["Restricting all fluid intake","Monitoring and documenting fluid intake and output, weighing daily at same time","Administering diuretics without monitoring","Encouraging high sodium diet"],a:1,topic:"Nephrotic Syndrome",d:"medium"},
+{t:"Skin integrity in nephrotic syndrome should be promoted by:",o:["Keeping the child in one position all day","Turning and positioning the child every 2 hours","Applying ice packs to edematous areas","Restricting bathing completely"],a:1,topic:"Nephrotic Syndrome",d:"easy"},
+{t:"Blood pressure in nephrotic syndrome is typically:",o:["Significantly elevated","Normal or slightly decreased","Very low causing shock","Always markedly elevated"],a:1,topic:"Nephrotic Syndrome",d:"medium"},
+{t:"Which nursing diagnosis is relevant for a child with nephrotic syndrome who has poor appetite due to ascites?",o:["Fluid volume deficit","Risk for imbalanced nutrition: less than body requirements related to anorexia","Risk for infection only","Impaired skin integrity only"],a:1,topic:"Nephrotic Syndrome",d:"medium"},
+ 
+// ═══════════════════════════════════════════════
+// ACUTE GLOMERULONEPHRITIS (10 MCQ)
+// ═══════════════════════════════════════════════
+{t:"Acute glomerulonephritis results from immune injury following infection with:",o:["E. coli","Staphylococcus aureus","Group A beta-hemolytic streptococci","Pneumococcus"],a:2,topic:"Glomerulonephritis",d:"medium"},
+{t:"The peak incidence of acute glomerulonephritis is in children aged:",o:["2-4 years","6-7 years","10-12 years","Adolescence"],a:1,topic:"Glomerulonephritis",d:"medium"},
+{t:"The FIRST presenting symptom of acute glomerulonephritis is usually:",o:["Severe edema","Hypertension only","Grossly bloody urine (hematuria)","Oliguria"],a:2,topic:"Glomerulonephritis",d:"medium"},
+{t:"Hypertension in acute glomerulonephritis typically appears during:",o:["The first 4 days","Second week","Third week","The last day only"],a:0,topic:"Glomerulonephritis",d:"hard"},
+{t:"Treatment of acute glomerulonephritis includes:",o:["High-sodium diet","Restriction of activity for 6 months","Penicillin to eradicate existing streptococcal infection","Immediate dialysis in all cases"],a:2,topic:"Glomerulonephritis",d:"medium"},
+{t:"Activities in acute glomerulonephritis should be limited until clinical manifestations reduce, generally:",o:["1 week","2-4 weeks","3 months","1 year"],a:1,topic:"Glomerulonephritis",d:"medium"},
+{t:"Blood pressure monitoring in acute glomerulonephritis should be done:",o:["Once weekly","Regularly using the same arm","Only when symptoms worsen","Monthly"],a:1,topic:"Glomerulonephritis",d:"easy"},
+{t:"Cerebral symptoms in acute glomerulonephritis (headache, convulsions) occur in connection with:",o:["Anemia","Hypertension","Oliguria","Fever"],a:1,topic:"Glomerulonephritis",d:"hard"},
+{t:"Diagnosis of acute glomerulonephritis is confirmed by:",o:["Renal biopsy","Culture of throat swab for streptococcal infection","CT scan of kidneys","ECG"],a:1,topic:"Glomerulonephritis",d:"medium"},
+{t:"The nurse should weigh a child with acute glomerulonephritis:",o:["Once weekly","Monthly","Daily at the same time on the same scale in the same clothes","Only on admission"],a:2,topic:"Glomerulonephritis",d:"medium"},
+ 
+// ═══════════════════════════════════════════════
+// UTI (8 MCQ)
+// ═══════════════════════════════════════════════
+{t:"UTI is MORE common in girls because:",o:["Girls have lower immunity","Girls have a shorter urinary tract","Girls have larger kidneys","Girls drink less water"],a:1,topic:"UTI",d:"easy"},
+{t:"The most common organism causing UTI is:",o:["Staphylococcus aureus","Pseudomonas aeruginosa","E. coli bacteria","Streptococcus"],a:2,topic:"UTI",d:"easy"},
+{t:"Which is a sign of UTI in neonates?",o:["Urgency to urinate","Painful urination","Poor growth and poor feeding","Discomfort above pubic bone"],a:2,topic:"UTI",d:"medium"},
+{t:"Prevention of UTI includes wiping:",o:["Back to front","Front to back","In circular motion","Either direction"],a:1,topic:"UTI",d:"easy"},
+{t:"Which children are at HIGHER risk for UTI?",o:["Breastfed infants","Circumcised males","Uncircumcised males","Athletic children"],a:2,topic:"UTI",d:"medium"},
+{t:"Treatment of UTI primarily includes:",o:["Surgery","Antibiotics and increased fluid intake (especially water)","Steroids","Diuretics only"],a:1,topic:"UTI",d:"easy"},
+{t:"A renal ultrasound in UTI is indicated for:",o:["All children with UTI","Boys with UTI or girls under age 5-6","Girls over 10 years old","Adolescents only"],a:1,topic:"UTI",d:"hard"},
+{t:"Prophylactic antibiotics may be considered for children with:",o:["First UTI episode only","Recurrent febrile UTIs","Single episode of hematuria","Frequent urination without confirmed infection"],a:1,topic:"UTI",d:"medium"},
+ 
+// ═══════════════════════════════════════════════
+// RENAL FAILURE (10 MCQ)
+// ═══════════════════════════════════════════════
+{t:"Acute renal failure differs from chronic renal failure in that it:",o:["Is permanent","Progresses slowly over 3 months","Has abrupt onset and is potentially reversible","Always requires long-term dialysis"],a:2,topic:"Renal Failure",d:"easy"},
+{t:"Prerenal failure is caused by:",o:["Urinary obstruction","Damage to kidney tissue itself","Decreased renal blood flow","Kidney tumors blocking outflow"],a:2,topic:"Renal Failure",d:"medium"},
+{t:"The oliguric phase of ARF lasts approximately:",o:["1-2 days","3-5 days","8-14 days","4-6 weeks"],a:2,topic:"Renal Failure",d:"hard"},
+{t:"In the oliguric phase of ARF, urine output is less than:",o:["200 cc/day","400 cc/day","600 cc/day","800 cc/day"],a:1,topic:"Renal Failure",d:"medium"},
+{t:"Which electrolyte disturbance is common during the oliguric phase of ARF?",o:["Low potassium (hypokalemia)","Low sodium and HIGH potassium","High sodium and low potassium","Normal electrolytes throughout"],a:1,topic:"Renal Failure",d:"hard"},
+{t:"Dialysis is indicated in renal failure when there is:",o:["Mild electrolyte imbalance","Severe electrolyte disturbances, toxic waste levels, or fluid overload","Minor fluid imbalance","Mild anemia only"],a:1,topic:"Renal Failure",d:"medium"},
+{t:"Which is a cardiovascular manifestation of renal failure?",o:["Bradycardia only","Normal blood pressure always","Congestive heart failure and hypertension","Hypotension only"],a:2,topic:"Renal Failure",d:"medium"},
+{t:"Which nursing diagnosis is a PRIORITY for a child with renal failure?",o:["Risk for infection only","Fluid volume excess related to inability of kidneys to excrete fluid","Impaired verbal communication","Activity intolerance only"],a:1,topic:"Renal Failure",d:"medium"},
+{t:"A renal biopsy is performed to:",o:["Measure kidney size","Assess blood flow in renal vessels","Remove tissue samples for microscopic examination","Drain fluid from the kidney"],a:2,topic:"Renal Failure",d:"medium"},
+{t:"Chronic renal failure progresses slowly over at least:",o:["1 month","3 months","6 months","1 year"],a:1,topic:"Renal Failure",d:"medium"},
+ 
+// ═══════════════════════════════════════════════
+// THALASSEMIA (12 MCQ)
+// ═══════════════════════════════════════════════
+{t:"Beta-thalassemia is caused by mutations in:",o:["Alpha-globin genes","Beta-globin genes","Gamma-globin genes","Delta-globin genes"],a:1,topic:"Thalassemia",d:"medium"},
+{t:"Beta-thalassemia major onset generally occurs at:",o:["Birth","6-24 months of age","5-10 years","Adolescence"],a:1,topic:"Thalassemia",d:"medium"},
+{t:"Which populations are MORE frequently affected by beta-thalassemia?",o:["East Asian and North American","Mediterranean, African, and Southeast Asian","North European exclusively","Australian Aboriginal"],a:1,topic:"Thalassemia",d:"medium"},
+{t:"The goal of long-term hyper transfusion in thalassemia major is to maintain Hb at:",o:["5-6 g/dL","7-8 g/dL","9-10 g/dL","12-13 g/dL"],a:2,topic:"Thalassemia",d:"hard"},
+{t:"Iron chelation therapy in thalassemia uses:",o:["Penicillin","Folic acid","Deferoxamine","Vitamin B12"],a:2,topic:"Thalassemia",d:"hard"},
+{t:"A complication of severe thalassemia related to bone marrow expansion is:",o:["Kidney failure","Bone deformities, especially in face and skull, and cortical bone thinning","Liver cancer","Pulmonary fibrosis"],a:1,topic:"Thalassemia",d:"hard"},
+{t:"Enlarged spleen in thalassemia can worsen anemia by:",o:["Producing abnormal red cells","Reducing the lifespan of transfused red blood cells","Blocking blood flow to kidneys","Producing excess white cells"],a:1,topic:"Thalassemia",d:"hard"},
+{t:"Thalassemia minor (trait) patients typically:",o:["Require regular blood transfusions","Have severe symptoms requiring urgent treatment","Are asymptomatic or have mild anemia and do not require treatment","Need bone marrow transplant urgently"],a:2,topic:"Thalassemia",d:"medium"},
+{t:"During deferoxamine administration, the nurse should monitor all of the following EXCEPT:",o:["Blood pressure (hypotension risk)","Visual acuity (ocular toxicity)","Hearing (ototoxicity)","Blood glucose levels"],a:3,topic:"Thalassemia",d:"hard"},
+{t:"Folic acid is administered in thalassemia as:",o:["Iron replacement","Vitamin supplement to support red blood cell production","Antibiotic prophylaxis","Iron chelation"],a:1,topic:"Thalassemia",d:"medium"},
+{t:"Thalassemia is an inherited disorder meaning:",o:["It is always acquired","At least one parent must be a carrier","Only the mother can transmit it","Only the father can transmit it"],a:1,topic:"Thalassemia",d:"easy"},
+{t:"Iron overload in thalassemia can damage which organs?",o:["Lungs and kidneys only","Heart, liver, and endocrine system","Brain and spinal cord","Skin and joints only"],a:1,topic:"Thalassemia",d:"medium"},
+ 
+// ═══════════════════════════════════════════════
+// SICKLE CELL ANEMIA (12 MCQ)
+// ═══════════════════════════════════════════════
+{t:"Sickle cell anemia is characterized by red blood cells shaped like:",o:["A disc","A sphere","A 'C' or sickle shape","An irregular polygon"],a:2,topic:"Sickle Cell Anemia",d:"easy"},
+{t:"Sickle cell disease is an autosomal ___ disorder.",o:["Dominant","Recessive","X-linked dominant","Codominant"],a:1,topic:"Sickle Cell Anemia",d:"medium"},
+{t:"What is the chance of each child having sickle cell disease when BOTH parents carry the trait?",o:["50%","75%","25%","100%"],a:2,topic:"Sickle Cell Anemia",d:"medium"},
+{t:"Sickle cell disease is MORE common in which race?",o:["White/Caucasian","Asian","Black/African","Hispanic"],a:2,topic:"Sickle Cell Anemia",d:"easy"},
+{t:"Vaso-occlusive crisis (painful crisis) occurs due to:",o:["Decreased red cell production","Obstructed capillaries and restricted blood flow causing ischemia and organ damage","Excess red cell production","Platelet aggregation only"],a:1,topic:"Sickle Cell Anemia",d:"medium"},
+{t:"Hand and foot syndrome in sickle cell disease involves infarction of:",o:["Cerebral vessels","Renal vessels","Metacarpals and metatarsals","Coronary vessels"],a:2,topic:"Sickle Cell Anemia",d:"hard"},
+{t:"Hemolytic crisis in sickle cell disease is characterized by:",o:["Acute drop in hemoglobin level","Acute rise in platelet count","Sudden high fever only","Severe hypertension"],a:0,topic:"Sickle Cell Anemia",d:"hard"},
+{t:"Cerebral vaso-occlusive crisis can result in:",o:["Blindness","Hemiplegia","Cardiac failure","Renal stones"],a:1,topic:"Sickle Cell Anemia",d:"medium"},
+{t:"Patient-controlled analgesia (PCA) may be used in children as young as:",o:["1 year","3 years","5 years","10 years"],a:2,topic:"Sickle Cell Anemia",d:"hard"},
+{t:"Regular blood transfusions in sickle cell disease are given primarily to:",o:["Prevent infections","Prevent strokes","Cure the disease","Increase platelet count"],a:1,topic:"Sickle Cell Anemia",d:"medium"},
+{t:"Folic acid supplements in sickle cell disease are essential because:",o:["They cure sickling episodes","They are essential for producing red blood cells","They prevent infections","They reduce iron overload"],a:1,topic:"Sickle Cell Anemia",d:"medium"},
+{t:"In sickle cell nursing care, oral and IV hydration fluids are given to:",o:["Reduce fever","Increase fluid volume of blood to prevent sickling and thrombosis","Replace iron losses","Improve renal function only"],a:1,topic:"Sickle Cell Anemia",d:"medium"},
+ 
+// ═══════════════════════════════════════════════
+// HEMOPHILIA (10 MCQ)
+// ═══════════════════════════════════════════════
+{t:"Classic hemophilia (Hemophilia A) is caused by deficiency of:",o:["Factor IX","Factor VII","Factor VIII","Factor X"],a:2,topic:"Hemophilia",d:"easy"},
+{t:"Hemophilia B is also called:",o:["Classic hemophilia","Von Willebrand disease","Christmas disease","Thrombocytopenia"],a:2,topic:"Hemophilia",d:"medium"},
+{t:"Hemophilia A is caused by an inherited ___ trait.",o:["Autosomal dominant","X-linked recessive","Autosomal recessive","Y-linked"],a:1,topic:"Hemophilia",d:"medium"},
+{t:"Why are most people with hemophilia A male?",o:["Males have lower immunity","Males have only ONE X chromosome; if the factor VIII gene is broken, they have hemophilia","Males produce less clotting factors naturally","Male hormones suppress clotting"],a:1,topic:"Hemophilia",d:"medium"},
+{t:"Desmopressin in hemophilia works by:",o:["Replacing factor VIII directly from outside","Inhibiting fibrinolysis","Increasing the amount of factor VIII in the blood","Preventing platelet aggregation"],a:2,topic:"Hemophilia",d:"hard"},
+{t:"Which analgesic should be AVOIDED in hemophilia as it promotes bleeding?",o:["Acetaminophen","Codeine","Morphine","Aspirin"],a:3,topic:"Hemophilia",d:"medium"},
+{t:"Immunization with hepatitis B vaccine in hemophilia is important because:",o:["Hemophilia directly causes hepatitis","Frequent blood infusions increase risk of exposure to hepatitis","Hemophilia weakens the immune system","Factor VIII affects liver function directly"],a:1,topic:"Hemophilia",d:"medium"},
+{t:"The RICE method of first aid in hemophilia stands for:",o:["Rest, Ice, Compression, Elevate","Remove, Inject, Compress, Evaluate","Rest, Inject, Compress, Examine","Reduce, Ice, Cast, Elevate"],a:0,topic:"Hemophilia",d:"medium"},
+{t:"Which factor is used in Hemophilia B treatment?",o:["Factor VIII concentrate","Factor IX","Factor VII","Factor X"],a:1,topic:"Hemophilia",d:"medium"},
+{t:"Hemophilia A occurs in about ___ in 10,000 males.",o:["5","1","10","50"],a:1,topic:"Hemophilia",d:"hard"},
+ 
+// ═══════════════════════════════════════════════
+// ITP (8 MCQ)
+// ═══════════════════════════════════════════════
+{t:"Idiopathic thrombocytopenic purpura (ITP) is characterized by:",o:["High platelet count","Low platelet count of unknown cause","Excessive clotting tendency","High WBC count"],a:1,topic:"ITP",d:"easy"},
+{t:"The female-to-male ratio in ITP is:",o:["1:2","1:1","3:2","2:1"],a:2,topic:"ITP",d:"hard"},
+{t:"Which symptom of ITP is the MOST dangerous?",o:["Nosebleeds","Petechiae on legs","Bleeding into the head","Bruising on limbs from movement"],a:2,topic:"ITP",d:"medium"},
+{t:"Petechiae are described as:",o:["Large bruises on joints","Tiny red dots under the skin resulting from very small bleeds","Purple discoloration of skin","Swollen lymph nodes"],a:1,topic:"ITP",d:"easy"},
+{t:"Treatment of ITP may include:",o:["Antibiotics only","Steroids, immunoglobulins, or splenectomy","Chemotherapy always","Blood transfusions only"],a:1,topic:"ITP",d:"easy"},
+{t:"Which infection can trigger antibodies that cross-react with platelets in ITP?",o:["UTI","Chicken pox virus, hepatitis C, and AIDS","Typhoid fever","Malaria"],a:1,topic:"ITP",d:"medium"},
+{t:"A major nursing intervention for ITP to prevent injury includes:",o:["Restraining the child in bed","Administering aspirin for pain","Thoroughly orienting the patient to surroundings and removing hazards from the room","Encouraging vigorous exercise"],a:2,topic:"ITP",d:"medium"},
+{t:"Antifibrinolytic proteins used in hemophilia and bleeding disorders help by:",o:["Replacing clotting factors directly","Protecting clots and holding them in place","Increasing platelet count","Preventing sickling of red cells"],a:1,topic:"ITP",d:"hard"},
+ 
+// ═══════════════════════════════════════════════
+// TRUE / FALSE (40 questions)
+// ═══════════════════════════════════════════════
+{t:"Cerebral palsy is a progressive neurological disease that worsens significantly with age.",o:["True","False"],a:1,topic:"Cerebral Palsy",d:"easy"},
+{t:"Spastic CP is the most common type of cerebral palsy, affecting about 80% of children with CP.",o:["True","False"],a:0,topic:"Cerebral Palsy",d:"easy"},
+{t:"In spastic hemiplegia, the arm is usually MORE affected than the leg.",o:["True","False"],a:0,topic:"Cerebral Palsy",d:"medium"},
+{t:"Down syndrome is caused by an extra chromosome 18 (Trisomy 18).",o:["True","False"],a:1,topic:"Down Syndrome",d:"easy"},
+{t:"The clinical diagnosis of trisomy 21 should always be confirmed with cytogenetic studies.",o:["True","False"],a:0,topic:"Down Syndrome",d:"medium"},
+{t:"Children with mild mental retardation have an IQ range of 35-54.",o:["True","False"],a:1,topic:"Mental Retardation",d:"medium"},
+{t:"Viruses are the most common causes of acute gastroenteritis in both developed and developing countries.",o:["True","False"],a:0,topic:"Gastroenteritis",d:"easy"},
+{t:"In Giardia lamblia parasitic enteritis, diarrhea is usually bloody and associated with high fever.",o:["True","False"],a:1,topic:"Gastroenteritis",d:"medium"},
+{t:"Anti-diarrheal drugs are the first-line treatment of choice for children with acute gastroenteritis.",o:["True","False"],a:1,topic:"Gastroenteritis",d:"easy"},
+{t:"The incubation period for typhoid fever is usually 8-14 days.",o:["True","False"],a:0,topic:"Typhoid Fever",d:"medium"},
+{t:"Chloramphenicol IV is the only effective antibiotic for typhoid fever and should be continued for 3 weeks.",o:["True","False"],a:0,topic:"Typhoid Fever",d:"medium"},
+{t:"Dehydration occurs when total fluid intake exceeds total fluid output.",o:["True","False"],a:1,topic:"Dehydration",d:"easy"},
+{t:"In hypotonic dehydration, brain cells become edematous due to water moving into them from the extracellular space.",o:["True","False"],a:0,topic:"Dehydration",d:"hard"},
+{t:"Severe dehydration is characterized by body weight loss of 10% or more.",o:["True","False"],a:0,topic:"Dehydration",d:"easy"},
+{t:"ALL (Acute Lymphoblastic Leukemia) is the most common type of leukemia in children.",o:["True","False"],a:0,topic:"Neoplastic Disorders",d:"easy"},
+{t:"Wilm's tumor is always bilateral (affecting both kidneys).",o:["True","False"],a:1,topic:"Neoplastic Disorders",d:"medium"},
+{t:"Abdominal palpation should be avoided in Wilm's tumor as it may lead to metastasis.",o:["True","False"],a:0,topic:"Neoplastic Disorders",d:"medium"},
+{t:"Spina bifida occulta usually causes significant neurological deficits in the lower extremities.",o:["True","False"],a:1,topic:"Congenital Anomalies",d:"medium"},
+{t:"Folic acid supplementation before and during early pregnancy can help prevent spina bifida.",o:["True","False"],a:0,topic:"Congenital Anomalies",d:"easy"},
+{t:"Hydrocephalus occurs when CSF absorption exceeds its production.",o:["True","False"],a:1,topic:"Congenital Anomalies",d:"medium"},
+{t:"Nephrotic syndrome occurs more commonly in boys than girls in young children (2:1 ratio).",o:["True","False"],a:0,topic:"Nephrotic Syndrome",d:"medium"},
+{t:"Blood pressure in nephrotic syndrome is typically significantly elevated.",o:["True","False"],a:1,topic:"Nephrotic Syndrome",d:"medium"},
+{t:"Acute glomerulonephritis is caused by Group A beta-hemolytic streptococcal infection.",o:["True","False"],a:0,topic:"Glomerulonephritis",d:"easy"},
+{t:"UTI is more common in boys than in girls due to anatomical differences.",o:["True","False"],a:1,topic:"UTI",d:"easy"},
+{t:"Acute renal failure has an abrupt onset and is potentially reversible.",o:["True","False"],a:0,topic:"Renal Failure",d:"easy"},
+{t:"Beta-thalassemia is a sex-linked (X-linked) genetic trait.",o:["True","False"],a:1,topic:"Thalassemia",d:"medium"},
+{t:"Iron chelation therapy using deferoxamine can turn the patient's urine red.",o:["True","False"],a:0,topic:"Thalassemia",d:"hard"},
+{t:"Sickle cell disease is an autosomal dominant disorder.",o:["True","False"],a:1,topic:"Sickle Cell Anemia",d:"medium"},
+{t:"Hemophilia A is caused by a deficiency of clotting Factor VIII.",o:["True","False"],a:0,topic:"Hemophilia",d:"easy"},
+{t:"Aspirin is the analgesic of choice for pain management in hemophilia.",o:["True","False"],a:1,topic:"Hemophilia",d:"medium"},
+{t:"ITP is more common in women than in men.",o:["True","False"],a:0,topic:"ITP",d:"medium"},
+{t:"Petechiae in ITP are palpable (can be felt when pressing the skin).",o:["True","False"],a:1,topic:"ITP",d:"hard"},
+{t:"Rotavirus is the most common causative agent of viral gastroenteritis.",o:["True","False"],a:0,topic:"Gastroenteritis",d:"easy"},
+{t:"ORS (oral rehydration solution) is more effective, safer, and less costly than IV rehydration for mild-moderate dehydration.",o:["True","False"],a:0,topic:"Diarrhea",d:"easy"},
+{t:"In Hodgkin's disease Stages I and II, the cure rate with radiation therapy is approximately 90%.",o:["True","False"],a:0,topic:"Neoplastic Disorders",d:"medium"},
+{t:"A child with Down syndrome's early normal-appearing development is a reliable indicator of future intellectual progress.",o:["True","False"],a:1,topic:"Down Syndrome",d:"medium"},
+{t:"The 'setting sun sign' in hydrocephalus refers to a bulging anterior fontanel.",o:["True","False"],a:1,topic:"Congenital Anomalies",d:"hard"},
+{t:"Congenital nephrotic syndrome is an autosomal recessive disease.",o:["True","False"],a:0,topic:"Nephrotic Syndrome",d:"hard"},
+{t:"In sickle cell disease, when both parents carry the trait, there is a 25% chance of each child having the disease.",o:["True","False"],a:0,topic:"Sickle Cell Anemia",d:"medium"},
+{t:"Mental retardation is always caused solely by genetic (hereditary) factors.",o:["True","False"],a:1,topic:"Mental Retardation",d:"easy"}
+
+];
+
+/* ============ ENGINE ============ */
+let questions, i, correct, wrong, answers, wrongSet, answered;
+let totalTime =200*60, timeLeft, timerInterval;
+const LETTERS = ['A','B','C','D','E','F'];
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function init(pool) {
+  questions = shuffle([...pool]);
+  i = 0; correct = 0; wrong = 0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = []; answered = 0;
+  timeLeft = totalTime;
+  document.getElementById('totalBadge').textContent = questions.length + ' سؤال';
+  startTimer();
+  render();
+}
+
+/* TIMER */
+function startTimer() {
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    const m = Math.floor(timeLeft / 60), s = timeLeft % 60;
+    document.getElementById('timerTxt').textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
+    const badge = document.getElementById('timerBadge');
+    if (timeLeft <= 120) { badge.className = 'timer-badge danger'; }
+    else if (timeLeft <= 300) { badge.className = 'timer-badge warn'; }
+    if (timeLeft <= 0) { clearInterval(timerInterval); finish(); }
+  }, 1000);
+}
+
+/* TOP UI */
+function updateTop() {
+  const total = questions.length;
+  document.getElementById('sCorrect').textContent = correct;
+  document.getElementById('sWrong').textContent = wrong;
+  document.getElementById('sRemain').textContent = Math.round(((total - answered) / total) * 100) + '%';
+  document.getElementById('progLabel').textContent = 'سؤال ' + (i + 1) + ' / ' + total;
+  document.getElementById('progFill').style.width = ((i + 1) / total * 100) + '%';
+  document.getElementById('prog-bar').style.width = ((i + 1) / total * 100) + '%';
+}
+
+/* RENDER QUESTION */
+function render() {
+  updateTop();
+  const q = questions[i];
+  document.getElementById('app').innerHTML = `
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">سؤال ${i + 1} / ${questions.length}</div>
+      </div>
+      <div class="q-text">${q.t}</div>
+      <div class="options">
+        ${q.o.map((o, idx) => `
+          <div class="opt" id="opt${idx}" onclick="choose(${idx})">
+            <div class="opt-letter">${LETTERS[idx] || idx + 1}</div>
+            ${o}
+          </div>
+        `).join('')}
+      </div>
+      <div class="nav-btns">
+        <button class="btn btn-skip" onclick="skip()"><i class="fa-solid fa-forward"></i> تخطي</button>
+      </div>
+    </div>`;
+}
+
+/* CHOOSE */
+function choose(v) {
+  if (answers[i] !== null) return;
+  answers[i] = v;
+  answered++;
+  const q = questions[i];
+  const ok = v === q.a;
+  ok ? correct++ : wrong++;
+  updateTop();
+
+  q.o.forEach((_, idx) => {
+    const el = document.getElementById('opt' + idx);
+    el.classList.add('disabled');
+    if (idx === q.a) el.classList.add('correct');
+    else if (idx === v) el.classList.add('wrong');
+  });
+
+  const fb = document.createElement('div');
+  fb.className = 'feedback-bar ' + (ok ? 'ok' : 'no');
+  fb.innerHTML = ok
+    ? `<span class="feedback-icon">🎉</span> <span>شطور جدا ، اللهم بارك</span>`
+    : `<span class="feedback-icon">😔</span> <span>ركز يا سكر</span>`;
+
+  const card = document.querySelector('.q-card');
+  card.querySelector('.options').after(fb);
+  if (q.exp) {
+    const exp = document.createElement('div');
+    exp.className = 'explanation';
+    exp.style.display = 'block';
+    exp.innerHTML = '<b>💬 شرح:</b> ' + q.exp;
+    fb.after(exp);
+  }
+
+  const navBtns = card.querySelector('.nav-btns');
+  navBtns.innerHTML = `<button class="btn btn-next" onclick="next()">
+    ${i < questions.length - 1 ? '<i class="fa-solid fa-arrow-left"></i> السؤال التالي' : '<i class="fa-solid fa-flag-checkered"></i> إنهاء الامتحان'}
+  </button>`;
+}
+
+/* SKIP */
+function skip() {
+  if (answers[i] === null) { answers[i] = -1; answered++; wrongSet.push(questions[i]); wrong++; updateTop(); }
+  next();
+}
+
+/* NEXT */
+function next() {
+  if (i < questions.length - 1) { i++; render(); window.scrollTo({top: 0, behavior: 'smooth'}); }
+  else finish();
+}
+
+/* FINISH */
+function finish() {
+  clearInterval(timerInterval);
+  const total = questions.length;
+  const score = Math.round((correct / total) * 100);
+
+  questions.forEach((q, idx) => {
+    if (answers[idx] !== q.a) wrongSet.push({...q, myAns: answers[idx]});
+  });
+  wrongSet = [...new Map(wrongSet.map(q => [q.t, q])).values()];
+
+  let grade, gradeColor;
+  if (score >= 90) { grade = '🥇 ممتاز'; gradeColor = 'var(--success)'; }
+  else if (score >= 75) { grade = '🥈 جيد جداً'; gradeColor = 'var(--accent)'; }
+  else if (score >= 60) { grade = '🥉 جيد'; gradeColor = 'var(--warn)'; }
+  else { grade = '📚 راجع تاني'; gradeColor = 'var(--danger)'; }
+
+  const circ = 2 * Math.PI * 45;
+  const offset = circ - (score / 100) * circ;
+
+  const reportHTML = questions.map((q, idx) => {
+    const ok = answers[idx] === q.a;
+    return `<div class="report-item ${ok ? 'ok' : 'no'}">
+      <div class="ri-q">${ok ? '✅' : '❌'} ${q.t}</div>
+      ${!ok ? `
+        <div class="ri-row"><span class="ri-badge ri-yours">إجابتك</span> ${answers[idx] >= 0 ? q.o[answers[idx]] : 'تم التخطي'}</div>
+        <div class="ri-row"><span class="ri-badge ri-right">الصحيح</span> ${q.o[q.a]}</div>
+      ` : ''}
+    </div>`;
+  }).join('');
+
+  document.getElementById('prog-bar').style.width = '100%';
+  document.getElementById('app').innerHTML = `
+    <div class="result-hero">
+      <div class="score-ring">
+        <svg viewBox="0 0 110 110">
+          <circle class="ring-bg" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="0"/>
+          <circle class="ring-fill" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="${circ}"
+            style="stroke:${gradeColor}" id="ringFill"/>
+        </svg>
+        <div class="score-num">${score}</div>
+        <div class="score-pct">%</div>
+      </div>
+      <div class="result-grade" style="color:${gradeColor}">${grade}</div>
+      <div class="result-sub">أجبت على ${answered} من ${total} سؤال</div>
+      <div class="result-stats">
+        <div class="rs"><div class="n" style="color:var(--success)">${correct}</div><div class="l">صحيح</div></div>
+        <div class="rs"><div class="n" style="color:var(--danger)">${wrong}</div><div class="l">خطأ</div></div>
+        <div class="rs"><div class="n" style="color:var(--accent)">${total - answered < 0 ? 0 : total - answered}</div><div class="l">تخطي</div></div>
+      </div>
+    </div>
+
+    <div class="result-actions">
+      ${wrongSet.length ? `<button class="btn btn-retry" onclick="retryWrong()"><i class="fa-solid fa-rotate-right"></i> إعادة الخطأ (${wrongSet.length})</button>` : ''}
+      <button class="btn btn-home" onclick="init(QUESTIONS)"><i class="fa-solid fa-shuffle"></i> امتحان جديد عشوائي</button>
+      <a href="https://gaith-team.github.io/exam/pediatric/index.html" class="btn btn-home" style="text-decoration:none;"><i class="fa-solid fa-house"></i> رجوع للمادة</a>
+    </div>
+
+    <div style="margin-top:28px">
+      <div style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text2)">📋 تقرير مفصّل</div>
+      ${reportHTML}
+    </div>`;
+
+  setTimeout(() => { document.getElementById('ringFill').style.strokeDashoffset = offset; }, 100);
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+/* RETRY WRONG */
+function retryWrong() {
+  const pool = [...wrongSet];
+  questions = shuffle(pool); i = 0; correct = 0; wrong = 0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = []; answered = 0; timeLeft = totalTime;
+  startTimer(); render();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+/* THEME */
+const themeBtn = document.getElementById('themeBtn');
+let theme = localStorage.getItem('theme') || 'light';
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', t);
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+
+/* START */
+init(QUESTIONS);
+</script>
+</body>
+</html>
