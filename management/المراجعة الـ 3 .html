@@ -1,0 +1,981 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --accent:       #7c3aed;
+  --accent-light: #8b5cf6;
+  --accent-dark:  #6d28d9;
+  --accent-glow:  rgba(124,58,237,0.2);
+  --bg:      #f8fafc;
+  --bg2:     #eef2f7;
+  --card:    #ffffff;
+  --text:    #1a2332;
+  --text2:   #4a5568;
+  --text3:   #718096;
+  --bc:      rgba(0,0,0,0.07);
+  --success: #16a34a;
+  --danger:  #dc2626;
+  --warn:    #6d28d9;
+  --r:       16px;
+  --tr:      all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="dark"] {
+  --bg:   #0d1117; --bg2: #161b22; --card: #1c2333;
+  --text: #e6edf3; --text2: #b1bac4; --text3: #7d8590;
+  --bc:   rgba(255,255,255,0.08);
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg); color: var(--text);
+  min-height: 100vh; overflow-x: hidden;
+  transition: background .4s, color .4s;
+}
+
+/* PROGRESS TOP */
+#prog-bar {
+  position: fixed; top: 0; left: 0; height: 3px; z-index: 999;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  transition: width .2s;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px; height: 64px;
+  background: rgba(248,250,252,.93); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--bc); transition: var(--tr);
+}
+[data-theme="dark"] nav { background: rgba(13,17,23,.95); }
+
+.nav-back {
+  display: flex; align-items: center; gap: 7px;
+  color: var(--text2); text-decoration: none; font-size: 13px; font-weight: 700;
+  padding: 7px 13px; border-radius: 8px; border: 1px solid var(--bc);
+  background: var(--card); transition: var(--tr);
+}
+.nav-back:hover { color: var(--accent); border-color: var(--accent-glow); transform: translateX(3px); }
+.nav-brand { display: flex; align-items: center; gap: 9px; font-size: 15px; font-weight: 900; color: var(--text); }
+.nav-logo-icon {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 12px; font-weight: 900;
+}
+.nav-right { display: flex; align-items: center; gap: 8px; }
+.theme-btn {
+  width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--bc);
+  background: var(--card); cursor: pointer; font-size: 15px;
+  display: flex; align-items: center; justify-content: center; transition: var(--tr);
+}
+.theme-btn:hover { border-color: var(--accent); transform: rotate(20deg); }
+
+/* HERO BAND */
+.hero-band {
+  margin-top: 64px;
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent), var(--accent-light));
+  padding: 40px 24px 36px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.hero-band::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 600px 200px at 50% 100%, rgba(255,255,255,.12) 0%, transparent 70%);
+}
+.hero-band-icon {
+  width: 68px; height: 68px; border-radius: 20px;
+  background: rgba(255,255,255,.2); backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 30px; margin: 0 auto 14px; border: 1.5px solid rgba(255,255,255,.35);
+}
+.hero-band h1 { font-size: clamp(20px,4vw,30px); font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero-band p { font-size: 13px; color: rgba(255,255,255,.8); }
+.hero-band-meta {
+  display: flex; justify-content: center; gap: 24px; margin-top: 20px;
+  flex-wrap: wrap;
+}
+.meta-pill {
+  background: rgba(255,255,255,.18); backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,.3); border-radius: 50px;
+  padding: 6px 16px; font-size: 12px; font-weight: 700; color: #fff;
+  display: flex; align-items: center; gap: 6px;
+}
+
+/* EXAM SHELL */
+.shell { max-width: 560px; margin: 0 auto; padding: 24px 20px 80px; }
+
+/* STATS ROW */
+.stats-row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 16px;
+}
+.stat-box {
+  background: var(--card); border: 1px solid var(--bc); border-radius: var(--r);
+  padding: 12px 10px; text-align: center;
+}
+.stat-box .val { font-size: 20px; font-weight: 900; }
+.stat-box .lbl { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.stat-correct { color: var(--success); }
+.stat-wrong   { color: var(--danger); }
+.stat-remain  { color: var(--accent); }
+
+/* PROGRESS STRIP */
+.prog-strip {
+  background: var(--card); border: 1px solid var(--bc); border-radius: var(--r);
+  padding: 14px 16px; margin-bottom: 16px;
+  display: flex; align-items: center; gap: 14px;
+}
+.prog-label { font-size: 13px; font-weight: 700; color: var(--text2); white-space: nowrap; }
+.prog-track { flex: 1; height: 8px; background: var(--bg2); border-radius: 8px; overflow: hidden; }
+.prog-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  border-radius: 8px; transition: width .4s;
+}
+.timer-badge {
+  min-width: 64px; height: 36px; border-radius: 18px;
+  background: var(--bg2); border: 1px solid var(--bc);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 900; color: var(--text);
+  gap: 5px; padding: 0 12px; flex-shrink: 0;
+}
+.timer-badge.warn { color: var(--warn); border-color: rgba(217,119,6,.3); background: rgba(217,119,6,.08); }
+.timer-badge.danger { color: var(--danger); border-color: rgba(220,38,38,.3); background: rgba(220,38,38,.08); animation: pulse .8s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.6} }
+
+/* QUESTION CARD */
+.q-card {
+  background: var(--card); border: 1px solid var(--bc);
+  border-radius: 20px; overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+  transition: box-shadow .3s;
+}
+.q-header {
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  padding: 4px 18px 4px;
+  display: flex; align-items: center; gap: 8px;
+}
+.q-num {
+  background: rgba(255,255,255,.2); border-radius: 8px;
+  padding: 3px 10px; font-size: 11px; font-weight: 700; color: #fff;
+}
+.q-text {
+  padding: 22px 18px 14px; font-size: 15px; font-weight: 700; color: var(--text);
+  line-height: 1.65; border-bottom: 1px solid var(--bc);
+  text-align: left; direction: ltr;
+}
+.options { padding: 14px 18px 18px; display: flex; flex-direction: column; gap: 10px; }
+
+/* OPTION */
+.opt {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px; border-radius: 12px;
+  border: 1.5px solid var(--bc); background: var(--bg);
+  cursor: pointer; font-size: 14px; font-weight: 600; color: var(--text);
+  transition: var(--tr); user-select: none;
+  direction: ltr; text-align: left;
+}
+.opt:hover:not(.disabled) {
+  border-color: var(--accent); background: var(--accent-glow);
+  transform: translateX(3px);
+}
+.opt-letter {
+  width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+  background: var(--bg2); border: 1px solid var(--bc);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 900; color: var(--text3);
+  transition: var(--tr);
+}
+.opt.correct {
+  border-color: var(--success); background: rgba(22,163,74,.08);
+}
+.opt.correct .opt-letter {
+  background: var(--success); color: #fff; border-color: var(--success);
+}
+.opt.wrong {
+  border-color: var(--danger); background: rgba(220,38,38,.07);
+}
+.opt.wrong .opt-letter {
+  background: var(--danger); color: #fff; border-color: var(--danger);
+}
+.opt.disabled { pointer-events: none; }
+
+/* FEEDBACK */
+.feedback-bar {
+  margin: 14px 18px; padding: 12px 16px; border-radius: 12px;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px; font-weight: 700;
+  animation: popIn .4s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes popIn { from{transform:scale(.8);opacity:0} to{transform:scale(1);opacity:1} }
+.feedback-bar.ok { background: rgba(22,163,74,.1); color: var(--success); border: 1px solid rgba(22,163,74,.25); }
+.feedback-bar.no { background: rgba(220,38,38,.08); color: var(--danger); border: 1px solid rgba(220,38,38,.2); }
+.feedback-icon { font-size: 20px; }
+
+/* EXPLANATION */
+.explanation {
+  margin: 0 18px 14px; padding: 12px 14px;
+  background: rgba(var(--accent-rgb),.06);
+  border-radius: 10px; border-right: 3px solid var(--accent);
+  font-size: 13px; color: var(--text2); line-height: 1.6;
+  display: none;
+}
+
+/* NAV BTNS */
+.nav-btns { padding: 4px 18px 18px; display: flex; gap: 10px; }
+.btn {
+  flex: 1; padding: 13px; border: none; border-radius: 12px;
+  font-size: 14px; font-weight: 900; cursor: pointer;
+  font-family: 'Outfit', sans-serif; transition: var(--tr);
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+}
+.btn-next {
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  color: #fff; box-shadow: 0 4px 14px var(--accent-glow);
+}
+.btn-next:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
+.btn-skip {
+  background: var(--bg2); color: var(--text2); border: 1px solid var(--bc); flex: 0 0 auto; padding: 13px 18px;
+}
+.btn-skip:hover { border-color: var(--warn); color: var(--warn); }
+
+/* ===== RESULTS ===== */
+.result-hero {
+  text-align: center; padding: 36px 20px 28px;
+  background: var(--card); border-radius: 20px;
+  border: 1px solid var(--bc); margin-bottom: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+}
+.score-ring {
+  width: 110px; height: 110px; border-radius: 50%; margin: 0 auto 18px;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; border: 5px solid var(--bg2);
+  position: relative;
+}
+.score-ring svg { position: absolute; inset: -5px; width: calc(100% + 10px); height: calc(100% + 10px); transform: rotate(-90deg); }
+.score-ring circle { fill: none; stroke-width: 5; stroke-linecap: round; }
+.ring-bg { stroke: var(--bg2); }
+.ring-fill { stroke: var(--accent); transition: stroke-dashoffset 1s ease; }
+.score-num { font-size: 28px; font-weight: 900; color: var(--text); }
+.score-pct { font-size: 12px; color: var(--text3); }
+.result-grade { font-size: 22px; font-weight: 900; margin-bottom: 6px; }
+.result-sub { font-size: 14px; color: var(--text2); }
+.result-stats {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 20px;
+}
+.rs { background: var(--bg2); border-radius: 10px; padding: 12px 8px; text-align: center; }
+.rs .n { font-size: 20px; font-weight: 900; }
+.rs .l { font-size: 11px; color: var(--text3); }
+
+/* REPORT ITEMS */
+.report-item {
+  background: var(--card); border: 1px solid var(--bc); border-radius: 14px;
+  padding: 16px; margin-bottom: 10px; border-right: 4px solid var(--bc);
+}
+.report-item.ok { border-right-color: var(--success); }
+.report-item.no { border-right-color: var(--danger); }
+.report-item .ri-q { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+.report-item .ri-row {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; margin-top: 5px; color: var(--text2);
+}
+.ri-badge {
+  padding: 2px 8px; border-radius: 6px; font-weight: 700; font-size: 11px; flex-shrink: 0;
+}
+.ri-yours { background: rgba(220,38,38,.1); color: var(--danger); }
+.ri-right { background: rgba(22,163,74,.1); color: var(--success); }
+
+.result-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+.btn-retry { background: linear-gradient(135deg, var(--accent-dark), var(--accent)); color: #fff; }
+.btn-retry:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
+.btn-home { background: var(--bg2); color: var(--text); border: 1px solid var(--bc); }
+.btn-home:hover { border-color: var(--accent); color: var(--accent); }
+
+/* FOOTER */
+footer {
+  background: var(--bg2); border-top: 1px solid var(--bc);
+  padding: 22px 24px; display: flex; align-items: center;
+  justify-content: space-between; flex-wrap: wrap; gap: 10px;
+}
+.footer-brand { font-size: 14px; font-weight: 700; }
+.footer-brand span { color: var(--accent); }
+.footer-tg { display: flex; align-items: center; gap: 5px; text-decoration: none; color: #229ED9; font-size: 12px; font-weight: 600; }
+
+@media (max-width: 480px) {
+  nav { padding: 0 14px; }
+  .shell { padding: 16px 14px 60px; }
+  .nav-brand span { display: none; }
+  .hero-band { padding: 30px 16px 28px; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog-bar" style="width:0%"></div>
+
+<nav>
+  <a href="https://gaith-team.github.io/exam/" class="nav-back"><i class="fa-solid fa-arrow-right"></i> رجوع</a>
+  <div class="nav-brand">
+    <div class="nav-logo-icon">GT</div>
+    <span>GHAITH TEAM</span>
+  </div>
+  <div class="nav-right">
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<div class="hero-band">
+  <div class="hero-band-icon">👴</div>
+  <h1>تمريض المسنين</h1>
+  <p>المراجعة الثالثه عالمنهج</p>
+  <div class="hero-band-meta">
+    <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">-- سؤال</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-clock"></i> 200 Min</div>
+    <div class="meta-pill"><i class="fa-solid fa-shuffle"></i> Shuffled</div>
+  </div>
+</div>
+
+<div class="shell">
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="val stat-correct" id="sCorrect">0</div>
+      <div class="lbl">✔ صحيح</div>
+    </div>
+    <div class="stat-box">
+      <div class="val stat-wrong" id="sWrong">0</div>
+      <div class="lbl">✖ خطأ</div>
+    </div>
+    <div class="stat-box">
+      <div class="val stat-remain" id="sRemain">--%</div>
+      <div class="lbl">⏳ متبقي</div>
+    </div>
+  </div>
+
+  <!-- PROGRESS STRIP -->
+  <div class="prog-strip">
+    <div class="prog-label" id="progLabel">سؤال ١</div>
+    <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+    <div class="timer-badge" id="timerBadge"><i class="fa-regular fa-clock"></i> <span id="timerTxt">200:00</span></div>
+  </div>
+
+  <!-- APP -->
+  <div id="app"></div>
+</div>
+
+<footer>
+  <div class="footer-brand">GHAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg">
+    <i class="fa-brands fa-telegram"></i> @nursing2bu
+  </a>
+</footer>
+
+<script>
+const QUESTIONS = [
+  // ══════════════════════════════════════════
+// PALLIATIVE CARE — EASY (1-40)
+// ══════════════════════════════════════════
+{t:"Palliative care is defined as specialized medical care for people living with a:", o:["Minor illness","Serious illness","Contagious disease","Mental disorder"], a:1, topic:"pc", diff:"easy"},
+{t:"According to the WHO, palliative care improves the quality of life of patients and their:", o:["Physicians","Colleagues","Families","Neighbors"], a:2, topic:"pc", diff:"easy"},
+{t:"Palliative care is based on the needs of the patient, not on the patient's:", o:["Age","Prognosis","Gender","Religion"], a:1, topic:"pc", diff:"easy"},
+{t:"Palliative care can be provided along with:", o:["Curative treatment","Elective surgery only","Preventive care only","Diagnostic procedures only"], a:0, topic:"pc", diff:"easy"},
+{t:"The goal of palliative care is to:", o:["Cure the underlying disease","Improve quality of life for patient and family","Extend life at all costs","Reduce hospital costs"], a:1, topic:"pc", diff:"easy"},
+{t:"Who is considered the leader of the clinical palliative care team?", o:["Nurse","Social worker","Doctor","Chaplain"], a:2, topic:"pc", diff:"easy"},
+{t:"In a palliative care team, the nurse is usually considered the:", o:["Leader","Chaplain","Cornerstone of any service","Psychologist"], a:2, topic:"pc", diff:"easy"},
+{t:"Which team member helps palliative care patients with eating problems?", o:["Physiotherapist","Dietician","Occupational therapist","Chaplain"], a:1, topic:"pc", diff:"easy"},
+{t:"Palliative care volunteers provide their services:", o:["For a fee","Free of charge","Only in hospitals","Only during weekdays"], a:1, topic:"pc", diff:"easy"},
+{t:"Which is NOT listed as a setting for palliative care?", o:["Outpatient practice","Home care","Intensive care unit","Hospice clinics"], a:2, topic:"pc", diff:"easy"},
+{t:"Hospice care focuses on comfort for those:", o:["Recovering from surgery","Nearing the end of life","With minor illnesses","With acute infections"], a:1, topic:"pc", diff:"easy"},
+{t:"Palliative care eligibility is available at:", o:["Any age and any stage of serious illness","Only terminal stage","Only for adults over 65","Only for cancer patients"], a:0, topic:"pc", diff:"easy"},
+{t:"Hospice care eligibility is for patients with a life expectancy of:", o:["1 year or less","6 months or less","2 years or less","3 months or less"], a:1, topic:"pc", diff:"easy"},
+{t:"Which type of care has NO time limits and can last for years?", o:["Hospice care","Palliative care","Intensive care","Surgical care"], a:1, topic:"pc", diff:"easy"},
+{t:"The three categories of palliative care patient support services are:", o:["Pain, symptoms, and financial support","Pain, symptoms, and emotional/spiritual support","Physical, surgical, and medical support","Assessment, planning, and evaluation"], a:1, topic:"pc", diff:"easy"},
+{t:"Pain management in palliative care is vital for comfort and to reduce:", o:["Hospital stays","Patient's distress","Medical costs","Family burden"], a:1, topic:"pc", diff:"easy"},
+{t:"Symptoms management in palliative care involves treating symptoms OTHER than:", o:["Nausea","Pain","Weakness","Fatigue"], a:1, topic:"pc", diff:"easy"},
+{t:"Which is the most common opioid used for dyspnea management in palliative care?", o:["Codeine","Tramadol","Morphine sulfate","Fentanyl"], a:2, topic:"pc", diff:"easy"},
+{t:"Good communication is considered the key of effective palliative care:", o:["Assessment","Teamwork","Documentation","Research"], a:1, topic:"pc", diff:"easy"},
+{t:"Which factor INHIBITS palliative care team success?", o:["Good communication","Flexibility","Stress and burnout","Continuous education"], a:2, topic:"pc", diff:"easy"},
+{t:"Dyspnea is described as an uncomfortable awareness of:", o:["Pain","Breathing","Swallowing","Movement"], a:1, topic:"pc", diff:"easy"},
+{t:"In palliative care, oxygen therapy for dyspnea is best administered via:", o:["Face mask","Nasal cannula","Endotracheal tube","Tracheostomy"], a:1, topic:"pc", diff:"easy"},
+{t:"Which is a psychological health problem seen in terminally ill patients?", o:["Hypertension","Delirium","Pneumonia","Fractures"], a:1, topic:"pc", diff:"easy"},
+{t:"The most common distress symptom near the end of life is:", o:["Depression","Delirium","Anxiety","Anger"], a:2, topic:"pc", diff:"easy"},
+{t:"Signs of depression in terminally ill patients include:", o:["Weight gain only","Changes in sleep pattern","Increased social activity","Elevated mood"], a:1, topic:"pc", diff:"easy"},
+{t:"Which management is used for depression in palliative care?", o:["Only surgical intervention","Antidepressant drugs and counseling","Only physiotherapy","Only dietary changes"], a:1, topic:"pc", diff:"easy"},
+{t:"Spiritual assessment is a key component of nursing assessment for:", o:["Surgical patients","Terminally ill patients","Outpatient patients","Pediatric patients"], a:1, topic:"pc", diff:"easy"},
+{t:"Nursing interventions for supporting hope include listening:", o:["Selectively","Attentively","Passively","Occasionally"], a:1, topic:"pc", diff:"easy"},
+{t:"Active disease in palliative care can be confirmed and measured by:", o:["Patient report only","Clinical examination and investigations","Family report","MRI only"], a:1, topic:"pc", diff:"easy"},
+{t:"Which condition is an example of far-advanced disease in palliative care?", o:["Common cold","Congestive heart failure","Minor fracture","Skin rash"], a:1, topic:"pc", diff:"easy"},
+{t:"The occupational therapist in palliative care ensures safety and support for patients going:", o:["To the ICU","To surgery","Home","To rehabilitation gym"], a:2, topic:"pc", diff:"easy"},
+{t:"The physiotherapist in palliative care has an important role for gentle:", o:["Surgery","Rehabilitation","Diagnosis","Medication management"], a:1, topic:"pc", diff:"easy"},
+{t:"Which is NOT a goal of palliative care?", o:["Maximize quality of life","Manage physical symptoms","Cure the underlying disease","Provide emotional support"], a:2, topic:"pc", diff:"easy"},
+{t:"In palliative care, COPD is an example of:", o:["Active disease","Progressive pulmonary disorder","Renal failure","Metastatic cancer"], a:1, topic:"pc", diff:"easy"},
+{t:"Which professional provides spiritual and religious care in the palliative care team?", o:["Psychologist","Dietician","Chaplain","Physiotherapist"], a:2, topic:"pc", diff:"easy"},
+{t:"Palliative care for hospice patients at home includes assessment how often?", o:["Daily","Every 8 hours","Weekly","Monthly"], a:2, topic:"pc", diff:"easy"},
+{t:"The palliative care team includes which of the following?", o:["Only doctors and nurses","Only social workers","Doctors, nurses, and various allied health professionals","Only volunteers"], a:2, topic:"pc", diff:"easy"},
+{t:"AIDS is listed under which category of disease in palliative care?", o:["Active disease","Progressive disease","Far-advanced disease","Acute disease"], a:2, topic:"pc", diff:"easy"},
+{t:"In hospice care, family involvement has a heavy focus on:", o:["Medical procedures","Family support and caregiver relief","Financial management","Legal documentation"], a:1, topic:"pc", diff:"easy"},
+{t:"Which is a correct nursing intervention for supporting hope in palliative patients?", o:["Withholding information","Encouraging sharing of feelings","Limiting patient choices","Avoiding spiritual topics"], a:1, topic:"pc", diff:"easy"},
+ 
+// ══════════════════════════════════════════
+// PALLIATIVE CARE — MEDIUM (41-70)
+// ══════════════════════════════════════════
+{t:"Assessment in institutional palliative care settings should be done at least every:", o:["4 hours","8 hours","12 hours","24 hours"], a:1, topic:"pc", diff:"medium"},
+{t:"As death approaches, which assessment becomes especially important?", o:["Nutritional assessment","Neurological assessment","Financial assessment","Social assessment"], a:1, topic:"pc", diff:"medium"},
+{t:"The frequency of palliative care assessment depends primarily on the patient's:", o:["Age","Insurance coverage","Stability","Prognosis"], a:2, topic:"pc", diff:"medium"},
+{t:"Managing dyspnea by placing needed equipment within reach is classified as:", o:["Treating the underlying pathology","Altering perception of breathlessness","Reducing the respiratory demand","Decreasing anxiety"], a:2, topic:"pc", diff:"medium"},
+{t:"Administering prescribed diuretics and monitoring fluid balance addresses dyspnea by:", o:["Reducing respiratory demand","Treating the underlying pathology","Decreasing anxiety","Altering perception"], a:1, topic:"pc", diff:"medium"},
+{t:"Providing a portable fan for air movement in the patient's environment helps manage dyspnea by:", o:["Reducing the respiratory demand","Treating underlying pathology","Altering perception of breathlessness","Decreasing anxiety"], a:2, topic:"pc", diff:"medium"},
+{t:"A specialist psychiatric referral should be considered when:", o:["Patient first shows anxiety","Mood improvement fails and suicidal thoughts are present","Patient requests it","Family demands it"], a:1, topic:"pc", diff:"medium"},
+{t:"Anxiety near end of life is frequently related to fear of:", o:["Recovery","Pain, death, and family worries","Exercise","Dietary changes"], a:1, topic:"pc", diff:"medium"},
+{t:"Which intervention is used for anxiety management in palliative care?", o:["Physical restraints","Both pharmacologic and non-pharmacologic interventions","Surgery","Dietary modification only"], a:1, topic:"pc", diff:"medium"},
+{t:"Skin condition in terminally ill patients must be assessed on an ongoing basis because skin becomes:", o:["Elastic and strong","Fragile and may easily break down","Thick and resistant","Less sensitive"], a:1, topic:"pc", diff:"medium"},
+{t:"Which symptom is assessed when the patient approaches end of life regarding neurological status?", o:["Blood pressure","Level of consciousness, reflexes, and pupil responses","Appetite","Weight"], a:1, topic:"pc", diff:"medium"},
+{t:"Assessing social and financial needs for the family includes asking which family members are:", o:["Available financially","Involved in the care","Living nearby","Working full time"], a:1, topic:"pc", diff:"medium"},
+{t:"Symptoms in terminal illness may be caused by the disease indirectly, such as:", o:["Pain due to tumor","Dyspnea due to COPD","Nausea related to pressure in the gastric area","Fatigue due to anemia"], a:2, topic:"pc", diff:"medium"},
+{t:"Which competence is essential for effective palliative care teamwork?", o:["Rigid role definitions","Isolation from colleagues","Leadership and conflict management ability","Resistance to change"], a:2, topic:"pc", diff:"medium"},
+{t:"Which is NOT listed as a necessary competence for effective palliative care teamwork?", o:["Good communication","Flexibility and collaboration","Financial management","Coping skills"], a:2, topic:"pc", diff:"medium"},
+{t:"Research and audit advance the practice of palliative care, which is part of the role of:", o:["Volunteers","Specialist palliative care nurses","Occupational therapists","Hospital administrators"], a:1, topic:"pc", diff:"medium"},
+{t:"The role of specialist palliative care nurses includes:", o:["Leading the clinical team only","Clinical support, education, leadership, and research","Financial planning","Prescribing chemotherapy"], a:1, topic:"pc", diff:"medium"},
+{t:"Which is a difference between palliative care and hospice care regarding treatment?", o:["Both focus only on comfort","Palliative care can include curative treatments; hospice focuses on comfort only","Hospice can include curative treatments; palliative cannot","Both include curative treatments"], a:1, topic:"pc", diff:"medium"},
+{t:"Palliative care family involvement is described as:", o:["Heavy focus on family support","Family support provided but care is patient-focused","No family involvement","Family leads all decisions"], a:1, topic:"pc", diff:"medium"},
+{t:"Which is a barrier to palliative care team success?", o:["Effective communication","Continuous education","Lack of role definition","Strong leadership"], a:2, topic:"pc", diff:"medium"},
+{t:"Patients with primary lung tumors may experience significant:", o:["Cardiac arrest","Dyspnea","Renal failure","Joint pain"], a:1, topic:"pc", diff:"medium"},
+{t:"Relaxation techniques in palliative care are primarily used to:", o:["Treat infection","Decrease anxiety","Increase appetite","Strengthen muscles"], a:1, topic:"pc", diff:"medium"},
+{t:"Which of the following is an indirect cause of symptoms in terminal illness?", o:["Pain due to tumor invasion","Dyspnea due to lung disease","Anorexia related to gastric pressure from treatment","Fatigue from advanced cancer"], a:2, topic:"pc", diff:"medium"},
+{t:"Team suffering is listed under which category in palliative care?", o:["Competences for effective teamwork","Goals of palliative care","Factors that inhibit team success","Settings for palliative care"], a:2, topic:"pc", diff:"medium"},
+{t:"Which assessment is included in activities of daily living for terminally ill patients?", o:["Blood glucose monitoring","Food and fluid intake, sleep pattern, and stress response","Cardiac monitoring","X-ray results"], a:1, topic:"pc", diff:"medium"},
+{t:"Providing erythropoietin as prescribed addresses dyspnea by:", o:["Reducing respiratory demand","Altering perception of breathlessness","Treating the underlying pathology","Decreasing anxiety"], a:2, topic:"pc", diff:"medium"},
+{t:"Bronchodilators and corticosteroids for dyspnea act by:", o:["Decreasing anxiety","Treating the underlying pathology","Altering breathlessness perception","Reducing respiratory demand"], a:1, topic:"pc", diff:"medium"},
+{t:"Conflict is listed as a factor that:", o:["Enhances palliative care team success","Inhibits palliative care team success","Is irrelevant to palliative care","Improves communication"], a:1, topic:"pc", diff:"medium"},
+{t:"Coping abilities of which individuals should be assessed in palliative care?", o:["Only the patient","Only the family","The patient and family","The medical team only"], a:2, topic:"pc", diff:"medium"},
+{t:"Spiritual assessment in palliative care is conceptually:", o:["Identical to religious assessment","Narrower than religion","Much broader than religion","Irrelevant to non-religious patients"], a:2, topic:"pc", diff:"medium"},
+ 
+// ══════════════════════════════════════════
+// PALLIATIVE CARE — HARD (71-85)
+// ══════════════════════════════════════════
+{t:"Which combination of diseases qualifies as far-advanced disease in palliative care?", o:["Common cold and flu","Congestive heart failure, renal failure, and AIDS","Hypertension and diabetes only","Minor infections and rashes"], a:1, topic:"pc", diff:"hard"},
+{t:"No one profession can provide palliative care on its own because optimal care requires:", o:["Financial resources","Coordinated input from multiple disciplines","A single physician","A large hospital setting"], a:1, topic:"pc", diff:"hard"},
+{t:"In palliative care, the WHO definition emphasizes early identification and impeccable assessment of pain and:", o:["Financial problems only","Physical, psychological, and spiritual problems","Legal issues","Social benefits only"], a:1, topic:"pc", diff:"hard"},
+{t:"A patient with extensive metastatic disease who still wants curative chemotherapy would be BEST served by:", o:["Hospice care only","Palliative care alongside curative treatment","Refusing all treatment","Home care without medical support"], a:1, topic:"pc", diff:"hard"},
+{t:"Which statement CORRECTLY differentiates hospice from palliative care regarding duration?", o:["Both have no time limits","Hospice is limited to final months; palliative care has no time limits","Palliative care is limited to 6 months; hospice is unlimited","Both are limited to 6 months"], a:1, topic:"pc", diff:"hard"},
+{t:"The palliative care nurse's role in 'consultative acting as a resource' primarily means:", o:["Writing prescriptions independently","Providing expert advice and guidance to colleagues and patients","Managing hospital budgets","Performing surgical procedures"], a:1, topic:"pc", diff:"hard"},
+{t:"If a dying patient's mood fails to improve with standard counseling and antidepressants, the NEXT appropriate action is:", o:["Discontinue all medications","Increase opioid doses","Consider specialist psychiatric referral","Discharge the patient"], a:2, topic:"pc", diff:"hard"},
+{t:"Dyspnea management strategy D (decrease anxiety) differs from strategy B (alter perception) in that strategy D specifically:", o:["Uses bronchodilators","Uses oxygen therapy","Uses anxiolytic medications and relaxation techniques","Uses portable fans"], a:2, topic:"pc", diff:"hard"},
+{t:"In assessing a terminally ill patient's social needs, financial concerns are MOST worrying when:", o:["The patient has savings","The sick person normally supported the household","Family members are employed","The patient is elderly"], a:1, topic:"pc", diff:"hard"},
+{t:"Which combination BEST describes the WHO definition of palliative care?", o:["Cure-focused care for patients with any illness","Quality-of-life improvement through prevention, relief, and assessment of suffering in life-threatening illness","Symptom management only for cancer patients","Emergency care for critically ill patients"], a:1, topic:"pc", diff:"hard"},
+{t:"The role of hospital palliative care team includes supporting staff to deliver quality palliative care AND:", o:["Only providing physical care","Reviewing complex physical and emotional situations and advancing practice through research","Managing hospital finances","Performing clinical procedures independently"], a:1, topic:"pc", diff:"hard"},
+{t:"Grief and anxiety are listed in palliative care as factors that:", o:["Enhance team performance","Inhibit team success","Improve communication","Strengthen team bonds"], a:1, topic:"pc", diff:"hard"},
+{t:"An electric bed with an elevating head is recommended for dyspnea management in which setting?", o:["Hospital ICU only","Home or hospice care","Outpatient clinic","Rehabilitation center"], a:1, topic:"pc", diff:"hard"},
+{t:"Progressive disease in palliative care is one that:", o:["Responds fully to treatment","Can be assessed clinically as worsening over time","Is stable for years","Only affects the elderly"], a:1, topic:"pc", diff:"hard"},
+{t:"Which statement about palliative care is MOST accurate?", o:["It replaces curative treatment entirely","It is only for cancer patients","It is appropriate at any age and stage in serious illness","It is only provided in hospitals"], a:2, topic:"pc", diff:"hard"},
+ 
+// ══════════════════════════════════════════
+// COMMON HEALTH PROBLEMS — EASY (86-110)
+// ══════════════════════════════════════════
+{t:"Which is a cardiovascular health problem common in older adults?", o:["Arthritis","Hypertension","Osteoporosis","Emphysema"], a:1, topic:"ch", diff:"easy"},
+{t:"Alzheimer's disease is classified under which body system?", o:["Cardiovascular","Gastrointestinal","Neurological","Musculoskeletal"], a:2, topic:"ch", diff:"easy"},
+{t:"Constipation is a health problem of which body system in older adults?", o:["Neurological","Respiratory","Gastrointestinal","Integumentary"], a:2, topic:"ch", diff:"easy"},
+{t:"Osteoporosis affects which body system?", o:["Respiratory","Musculoskeletal","Urinary","Neurological"], a:1, topic:"ch", diff:"easy"},
+{t:"Which is a primary prevention strategy for older adults?", o:["Managing existing diseases","Preventing health problems before they occur","Rehabilitation after illness","Treatment of chronic conditions"], a:1, topic:"ch", diff:"easy"},
+{t:"Secondary prevention for older adults focuses on:", o:["Preventing health problems from occurring","Early detection of disease and prompt intervention","Rehabilitation after disease","Vaccination programs only"], a:1, topic:"ch", diff:"easy"},
+{t:"Tertiary prevention for older adults focuses on:", o:["Preventing illness occurrence","Vaccination","Preventing complications of existing conditions","Screening programs"], a:2, topic:"ch", diff:"easy"},
+{t:"How many minutes of sustained, rhythmic, vigorous exercise per week is recommended for successful aging?", o:["At least 60 minutes once a week","At least 30 minutes four times a week","At least 20 minutes twice a week","At least 45 minutes three times a week"], a:1, topic:"ch", diff:"easy"},
+{t:"For skin care in older adults, which type of soap is recommended?", o:["Strong antibacterial soap","Mild soap","Medicated soap","No soap"], a:1, topic:"ch", diff:"easy"},
+{t:"For older adults, hair should be shampooed with mild soap:", o:["Daily","Monthly","Weekly","Every 2 weeks"], a:2, topic:"ch", diff:"easy"},
+{t:"Which vitamin is especially important in the nutrition of older adults?", o:["Only vitamin D","Calcium, iron, vitamins A and C, riboflavin, thiamine, and fiber","Only vitamin B12","Only vitamin E"], a:1, topic:"ch", diff:"easy"},
+{t:"Older adults' diet should be:", o:["High fat, low protein","High protein, low fat, moderate carbohydrates","High carbohydrates, low protein","Equal amounts of all macronutrients"], a:1, topic:"ch", diff:"easy"},
+{t:"The flu vaccine for older adults over 65 should be received:", o:["Every 5 years","Yearly","Only once","Every 2 years"], a:1, topic:"ch", diff:"easy"},
+{t:"The pneumonia vaccine is recommended every:", o:["Year","3 years","5 years","10 years"], a:2, topic:"ch", diff:"easy"},
+{t:"Which safety measure helps prevent falls in older adults?", o:["Using throw rugs","Eliminating throw rugs or using nonskid type","Reducing lighting","Using high heels"], a:1, topic:"ch", diff:"easy"},
+{t:"Parkinson's disease is classified under which system in older adults?", o:["Cardiovascular","Gastrointestinal","Neurological","Urinary"], a:2, topic:"ch", diff:"easy"},
+{t:"Decubitus ulcers are classified under which system?", o:["Musculoskeletal","Integumentary","Cardiovascular","Respiratory"], a:1, topic:"ch", diff:"easy"},
+{t:"Urinary tract infection is classified under which system in older adults?", o:["Gastrointestinal","Respiratory","Urinary","Neurological"], a:2, topic:"ch", diff:"easy"},
+{t:"Benign prostatic hypertrophy is a health problem of the:", o:["Female reproductive system","Male reproductive system","Cardiovascular system","Urinary system"], a:1, topic:"ch", diff:"easy"},
+{t:"Which is a goal for chronic care in older adults?", o:["Cure all conditions","Maintain or improve self-care capacity","Avoid all medications","Prevent all hospitalizations"], a:1, topic:"ch", diff:"easy"},
+{t:"A community health nurse caring for elderly patients should be:", o:["Pitying and condescending","Patient with good observation and warmth","Strict and directive only","Uninvolved in emotional support"], a:1, topic:"ch", diff:"easy"},
+{t:"For tertiary prevention of constipation in older adults, which is recommended?", o:["Ignore urge to defecate","Reduce fluid intake","Encourage fluid and fiber intake and regular exercise","Use strong laxatives daily"], a:2, topic:"ch", diff:"easy"},
+{t:"For urinary incontinence, which exercise is recommended?", o:["Swimming","Kegel exercises","Weight lifting","Running"], a:1, topic:"ch", diff:"easy"},
+{t:"For skin breakdown prevention, bony prominences should be relieved by:", o:["Applying strong pressure","Frequent change of position","Tight bandaging","Keeping still"], a:1, topic:"ch", diff:"easy"},
+{t:"For confusion in older adults, which principle should be applied?", o:["Ignore the patient","Reality orientation","Encourage fantasy","Restrict communication"], a:1, topic:"ch", diff:"easy"},
+ 
+// COMMON HEALTH PROBLEMS — MEDIUM (111-130)
+{t:"The community health nurse's role for geriatric patients at the tertiary level includes which for sensory loss?", o:["Avoiding communication","Using only written materials","Using multisensory approaches to communication","Speaking loudly without adjustments"], a:2, topic:"ch", diff:"medium"},
+{t:"Which strategy is included under tertiary prevention for mobility limitation?", o:["Encourage complete bed rest","Refer for financial assistance","Provide assistance with ambulation and obtain equipment like walkers","Eliminate all activities"], a:2, topic:"ch", diff:"medium"},
+{t:"For older adults with pain, which tertiary prevention approach is recommended?", o:["Avoid all activity","Plan activities for times when pain is controlled","Restrict fluid intake","Apply ice packs continuously"], a:1, topic:"ch", diff:"medium"},
+{t:"Which is a strategy for successful aging?", o:["Smoke moderately","Drink alcohol in small amounts","Maintain a sense of humor and deflect anger","Avoid all exercise"], a:2, topic:"ch", diff:"medium"},
+{t:"The community health nurse's role in primary prevention for older adults includes:", o:["Managing complications of existing disease","Early disease detection","Hygiene, nutrition, safety, immunization, and exercise","Rehabilitation after illness"], a:2, topic:"ch", diff:"medium"},
+{t:"For older adults with confusion, reality orientation principles include:", o:["Providing excessive stimulation","Establishing irregular routines","Providing a calm environment and maintaining a regular routine","Using complex instructions"], a:2, topic:"ch", diff:"medium"},
+{t:"Which is appropriate for managing sensory loss in older adults?", o:["Use colors that make discrimination difficult","Eliminate background noise and speak clearly at a lower pitch","Increase background noise","Avoid large-print materials"], a:1, topic:"ch", diff:"medium"},
+{t:"Cerebrovascular accident (CVA) is classified under which body system?", o:["Musculoskeletal","Gastrointestinal","Neurological","Urinary"], a:2, topic:"ch", diff:"medium"},
+{t:"Herpes zoster is classified under which body system?", o:["Neurological","Integumentary","Gastrointestinal","Cardiovascular"], a:1, topic:"ch", diff:"medium"},
+{t:"Hip fractures in older adults are classified under which system?", o:["Cardiovascular","Musculoskeletal","Respiratory","Urinary"], a:1, topic:"ch", diff:"medium"},
+{t:"For managing depression in older adults at the tertiary level, which is appropriate?", o:["Dismiss feelings","Encourage client to ventilate feelings and refer for counseling","Isolate the patient","Increase medications without assessment"], a:1, topic:"ch", diff:"medium"},
+{t:"The strategy 'set goals and accept challenges' for successful aging is aimed at keeping elderly:", o:["Sedentary","As alive and creative as possible","Financially dependent","Isolated from society"], a:1, topic:"ch", diff:"medium"},
+{t:"For abuse or neglect in older adults, tertiary prevention includes:", o:["Ignoring the situation","Supporting victims and assisting families to obtain respite care","Increasing isolation","Punishing caregivers immediately"], a:1, topic:"ch", diff:"medium"},
+{t:"'Never to drink alcohol' is a strategy for:", o:["Managing chronic pain","Successful aging","Treating dementia","Managing hypertension"], a:1, topic:"ch", diff:"medium"},
+{t:"For social isolation in older adults, the community nurse should:", o:["Encourage further isolation","Assist client to build social support network and refer to social groups","Restrict all outside activities","Advise staying home"], a:1, topic:"ch", diff:"medium"},
+{t:"Which condition falls under the respiratory system in older adults?", o:["Arthritis","Gallbladder disease","Emphysema","Hemorrhoids"], a:2, topic:"ch", diff:"medium"},
+{t:"Gallbladder disease in older adults falls under which system?", o:["Cardiovascular","Gastrointestinal","Neurological","Musculoskeletal"], a:1, topic:"ch", diff:"medium"},
+{t:"A nightlight at night is recommended as a safety measure for older adults to prevent:", o:["Social isolation","Falls","Depression","Confusion"], a:1, topic:"ch", diff:"medium"},
+{t:"For elderly clients, primary prevention includes preparing them for:", o:["Surgery","Disability only","Death and end-of-life care","Hospital admission"], a:2, topic:"ch", diff:"medium"},
+{t:"Which is correct about exercise for older adults?", o:["Avoid exercise completely","Moderate exercise on a regular basis improves body tone, circulation, and sleep","Only vigorous exercise is beneficial","Exercise is only for younger adults"], a:1, topic:"ch", diff:"medium"},
+ 
+// COMMON HEALTH PROBLEMS — HARD (131-140)
+{t:"A community health nurse notices an elderly patient who previously managed independently is now unable to climb stairs. This is BEST addressed at which prevention level?", o:["Primary prevention","Secondary prevention","Tertiary prevention","No prevention needed"], a:2, topic:"ch", diff:"hard"},
+{t:"Which combination BEST represents tertiary prevention for skin breakdown in older adults?", o:["Vaccination and hygiene education","Frequent position changes, using lotion, loose-fitting clothing, and inspecting extremities","Annual screening only","Dietary modifications only"], a:1, topic:"ch", diff:"hard"},
+{t:"The goal 'die with comfort, peace and dignity' is listed under goals for:", o:["Palliative care only","Acute care","Chronic care for older adults","Home health care only"], a:2, topic:"ch", diff:"hard"},
+{t:"A community health nurse is considered a resource person because she should have a large body of:", o:["Personal experience only","Scientific knowledge and community available resources for proper referral","Administrative skills","Physical examination skills only"], a:1, topic:"ch", diff:"hard"},
+{t:"Which combination of strategies BEST represents the 'eat like a bushman' recommendation for successful aging?", o:["High-fat diet with supplements","Healthy diet of fruits, whole grains, vegetables, and lean meat","High-carbohydrate diet","Low-protein diet with vitamins"], a:1, topic:"ch", diff:"hard"},
+{t:"For an older adult with inadequate financial resources, the community health nurse's FIRST action should be:", o:["Tell patient to reduce expenses","Refer for financial assistance and assist with budgeting","Discharge from care","Contact family for financial support"], a:1, topic:"ch", diff:"hard"},
+{t:"Which statement BEST describes the community health nurse's approach to elderly clients?", o:["Be directive and do not involve client in care planning","Let the client be an active participant in his own plan of care","Make all decisions for the elderly client","Focus only on physical care"], a:2, topic:"ch", diff:"hard"},
+{t:"Client involvement in planning health care for older adults is important primarily to foster their:", o:["Dependence on healthcare","Sense of independence","Financial management","Medical knowledge"], a:1, topic:"ch", diff:"hard"},
+{t:"Aging in and of itself is described in the notes as:", o:["A disease","A pathological process","A normal, irreversible physiological process","A preventable condition"], a:2, topic:"ch", diff:"hard"},
+{t:"Which practice is RECOMMENDED as a safety measure for older adults with impaired senses?", o:["Drive alone at all times","Ride with others or use a bus rather than drive","Avoid going outside","Ignore sensory impairment"], a:1, topic:"ch", diff:"hard"},
+ 
+// ══════════════════════════════════════════
+// HOME HEALTH CARE — EASY (141-165)
+// ══════════════════════════════════════════
+{t:"Home health care is also known as:", o:["Institutional care","Domiciliary care","Acute care","Surgical care"], a:1, topic:"hh", diff:"easy"},
+{t:"By 2050, the estimated number of people over 60 years is:", o:["One billion","Two billion","Three billion","Half a billion"], a:1, topic:"hh", diff:"easy"},
+{t:"One benefit of home health care is that it helps older adults continue living:", o:["In nursing homes","Independently at home","In hospitals","In rehabilitation centers"], a:1, topic:"hh", diff:"easy"},
+{t:"Research shows elderly adults recover faster with fewer complications:", o:["In hospitals","In nursing homes","At home","In rehabilitation centers"], a:2, topic:"hh", diff:"easy"},
+{t:"An occupational therapist in home health care helps create a safe environment to reduce:", o:["Depression","Medication errors","Risk of falls","Infection"], a:2, topic:"hh", diff:"easy"},
+{t:"Home health care benefits include providing patients with access to a professional:", o:["Only during business hours","24/7 for troublesome symptoms","Only during emergencies","Only during scheduled visits"], a:1, topic:"hh", diff:"easy"},
+{t:"Home health care can benefit which condition?", o:["Only acute conditions","Only cancer","Alzheimer's disease, COPD, diabetes, and heart disease","Only surgical recovery"], a:2, topic:"hh", diff:"easy"},
+{t:"Personalized care in home health care means:", o:["Comprehensive clinical care","One-on-one attention with a care plan tailored to specific needs","More social interaction","Check quality of care only"], a:1, topic:"hh", diff:"easy"},
+{t:"Home health care professionals typically work for:", o:["Pharmaceutical companies","Home health agencies, hospitals, or public health departments","Insurance companies","Legal firms"], a:1, topic:"hh", diff:"easy"},
+{t:"Which is a benefit of home health care for family caregivers?", o:["Increased financial burden","Relief for family caregivers and prevention of caregiver burnout","More hospital visits","Increased responsibility"], a:1, topic:"hh", diff:"easy"},
+{t:"Home health care costs are covered by:", o:["Only private insurance","Only self-pay","Medicare, Medicare Advantage, and private insurance for eligible patients","Only government funding"], a:2, topic:"hh", diff:"easy"},
+{t:"Home health care is described as grounded in:", o:["Traditional practices","Evidence-based practices and standards of care","Experimental treatments","Individual preferences only"], a:1, topic:"hh", diff:"easy"},
+{t:"Companionship in home health care benefits elderly patients by:", o:["Increasing their medical knowledge","Combating loneliness and bringing families together","Reducing their independence","Increasing hospital visits"], a:1, topic:"hh", diff:"easy"},
+{t:"Which service can be offered in home settings?", o:["Major surgical procedures","Health education, personal care, and psychosocial support","Organ transplantation","Complex diagnostic procedures only"], a:1, topic:"hh", diff:"easy"},
+{t:"Home health care professionals keep a log for each visit and provide updates to:", o:["Insurance companies","The patient's family only","The doctor","The hospital administration"], a:2, topic:"hh", diff:"easy"},
+{t:"Care provided in a person's home as opposed to nursing homes or clinics is called:", o:["Institutional care","Home health care","Palliative care","Hospice care"], a:1, topic:"hh", diff:"easy"},
+{t:"When caring for the elderly in home settings, care should be:", o:["Self-centered","Disease-centered","Person-centered","Task-centered"], a:2, topic:"hh", diff:"easy"},
+{t:"Dignity in elderly home care means helping them:", o:["Lose confidence","Retain dignity by giving ultimate respect","Become dependent","Feel isolated"], a:1, topic:"hh", diff:"easy"},
+{t:"Home health care includes which of the following clinical services?", o:["Major surgery","Skilled nursing, therapy, and wound care","Organ transplantation","Emergency surgery only"], a:1, topic:"hh", diff:"easy"},
+{t:"A home caregiver who is reliable and dependable is important because elderly people:", o:["Prefer unreliable caregivers","Have lived independent lives and may attempt self-care if caregiver is late","Do not need regular care","Are always available for self-care"], a:1, topic:"hh", diff:"easy"},
+{t:"Training for home health care providers must cover:", o:["Only technical skills","Communication skills, wound care, nursing services, and emergency management","Only administrative skills","Only medication management"], a:1, topic:"hh", diff:"easy"},
+{t:"Home healthcare geriatric nurses may help patients recover from surgery and care for those with:", o:["Only minor conditions","Chronic conditions such as dementia or paralysis","Only acute infections","Only sports injuries"], a:1, topic:"hh", diff:"easy"},
+{t:"Which is NOT listed as a benefit of home health care?", o:["Greater independence","Safety and comfort","Judgment","Saves money"], a:2, topic:"hh", diff:"easy"},
+{t:"Transitional home health care is provided after:", o:["Routine check-ups","Release from hospitalization","Minor outpatient procedures","Diagnostic tests only"], a:1, topic:"hh", diff:"easy"},
+{t:"Who can provide home health care?", o:["Only licensed physicians","Community health workers, nurses, social workers, and physiotherapists","Only registered nurses","Only family members"], a:1, topic:"hh", diff:"easy"},
+ 
+// HOME HEALTH CARE — MEDIUM (166-180)
+{t:"Patients who received transitional home health care are approximately how likely to return to hospital compared to those who do not?", o:["Twice as likely","Half as likely","Equally likely","Three times as likely"], a:1, topic:"hh", diff:"medium"},
+{t:"The global shift in burden of illness is from acute infectious diseases to:", o:["Surgical conditions","Chronic disabling noncommunicable diseases","Genetic disorders","Mental health conditions"], a:1, topic:"hh", diff:"medium"},
+{t:"Psychosocial support in home health care includes counseling and studies show social support:", o:["Worsens cognitive decline","Slows cognitive decline and onset of dementia","Has no effect on dementia","Increases disability"], a:1, topic:"hh", diff:"medium"},
+{t:"The elderly are described as psychologically fragile and preferring care from:", o:["Different caregivers each visit","The same care workers, not a series of strangers","Only family members","Only professional nurses"], a:1, topic:"hh", diff:"medium"},
+{t:"Which is a basic quality requirement for home health care?", o:["Privacy and dignity only","Medication management, wound care prevention, and continuous staff training","Only physical care","Only financial management"], a:1, topic:"hh", diff:"medium"},
+{t:"Medication management in home health care is important because older patients often:", o:["Take no medications","Take multiple medications for comorbidities prescribed by more than one provider","Self-medicate appropriately","Require only one medication"], a:2, topic:"hh", diff:"medium"},
+{t:"In home health care, an important consideration is that elderly people experiencing communication disabilities:", o:["Should be ignored","Need exploration of different communication methods","Should be hospitalized","Cannot be cared for at home"], a:1, topic:"hh", diff:"medium"},
+{t:"The population aging is resulting from decreasing fertility and:", o:["Increasing birth rates","Increasing life expectancy","Decreasing immigration","Increasing childhood diseases"], a:1, topic:"hh", diff:"medium"},
+{t:"Being a confidant for an elderly person in home care helps:", o:["Violate their privacy","Understand each other better and ensure a good relationship","Create dependency","Reduce their autonomy"], a:1, topic:"hh", diff:"medium"},
+{t:"For elderly home care, early detection and preventive services include:", o:["Major surgery only","Prevention of bed ulcers, measuring blood pressure, and regular laboratory tests","Only vaccination","Only emergency care"], a:1, topic:"hh", diff:"medium"},
+{t:"A home health care plan should be reviewed and updated regularly to:", o:["Reduce costs","Reflect people's current needs and preferences","Satisfy insurance requirements","Train staff only"], a:1, topic:"hh", diff:"medium"},
+{t:"Which is a potential safety issue when an elderly caregiver is unreliable?", o:["Patient may improve","Patient may fall trying to care for herself","Patient will request a new caregiver","Patient will refuse all care"], a:1, topic:"hh", diff:"medium"},
+{t:"Home health care helps by delaying or preventing the need for:", o:["All medical care","Nursing home care or more intensive types of care","Primary care visits","Emergency care"], a:1, topic:"hh", diff:"medium"},
+{t:"The role of home health care professionals includes acting as a liaison between:", o:["Insurance companies and hospitals","Patient, patient's family, and patient's doctor","Government and healthcare providers","Pharmaceutical companies and doctors"], a:1, topic:"hh", diff:"medium"},
+{t:"Which condition is listed as one home health care does NOT benefit?", o:["COPD","Heart disease","Alzheimer's disease","Respiratory failure"], a:2, topic:"hh", diff:"medium"},
+ 
+// HOME HEALTH CARE — HARD (181-185)
+{t:"In home health care, medication management prevents adverse events and is especially important because older people taking multiple medications are vulnerable to:", o:["Allergic reactions only","Medication errors, drug interactions, and adverse events from inappropriate medications","Only overdose","Only under-dosing"], a:1, topic:"hh", diff:"hard"},
+{t:"By 2050, what percentage of those over 60 will live in developing countries?", o:["50%","60%","70%","80%"], a:3, topic:"hh", diff:"hard"},
+{t:"Which quality requirement for home health care addresses staff who provide intimate personal care without understanding safeguarding responsibilities?", o:["Risk assessment","Safeguarding and safety - described as unacceptable","Infection control","Medication management"], a:1, topic:"hh", diff:"hard"},
+{t:"The positive health outcome of transitional home health care continues for more than:", o:["1 month","3 months","6 months","1 year"], a:2, topic:"hh", diff:"hard"},
+{t:"Loneliness in older adults at home can best be prevented by the caregiver by:", o:["Limiting social interactions","Helping them avoid depression and being a primary friend","Increasing hospital visits","Restricting TV watching"], a:1, topic:"hh", diff:"hard"},
+ 
+// ══════════════════════════════════════════
+// ELDERLY ABUSE — EASY (186-210)
+// ══════════════════════════════════════════
+{t:"Abuse is defined as mistreatment of a person that takes advantage of a:", o:["Financial transaction","Relationship","Legal contract","Medical condition"], a:1, topic:"ea", diff:"easy"},
+{t:"Neglect is defined as failure to behave in a reasonable way to avert:", o:["Legal consequences","Injury, pain, or damage to another person","Financial loss","Social isolation"], a:1, topic:"ea", diff:"easy"},
+{t:"What fraction of people 60 years and older experienced some form of abuse in community settings?", o:["1 in 10","1 in 6","1 in 4","1 in 3"], a:1, topic:"ea", diff:"easy"},
+{t:"Rates of abuse of older people have increased during:", o:["The financial crisis","The COVID-19 pandemic","Natural disasters","Political elections"], a:1, topic:"ea", diff:"easy"},
+{t:"Which type of elderly abuse involves non-accidental use of force?", o:["Financial exploitation","Emotional abuse","Physical abuse","Healthcare fraud"], a:2, topic:"ea", diff:"easy"},
+{t:"Which is an example of emotional elder abuse?", o:["Hitting","Stealing money","Intimidation through yelling or threats","Unauthorized use of funds"], a:2, topic:"ea", diff:"easy"},
+{t:"Sexual elder abuse involves contact with an elderly person:", o:["With their consent","Without their consent","Only during medical procedures","With family permission"], a:1, topic:"ea", diff:"easy"},
+{t:"Elder neglect constitutes what fraction of all reported cases of elder abuse?", o:["More than one quarter","More than half","Less than one quarter","Exactly one third"], a:1, topic:"ea", diff:"easy"},
+{t:"Financial exploitation of elderly includes:", o:["Providing extra care","Unauthorized use of funds or property","Giving gifts","Paying medical bills"], a:1, topic:"ea", diff:"easy"},
+{t:"Misusing an elder's personal checks or credit cards is an example of:", o:["Physical abuse","Emotional abuse","Financial exploitation","Healthcare fraud"], a:2, topic:"ea", diff:"easy"},
+{t:"Healthcare fraud by nursing staff includes:", o:["Providing excellent care","Overcharging or double-billing for medical care","Only financial theft","Only physical abuse"], a:1, topic:"ea", diff:"easy"},
+{t:"Which is a physical abuse warning sign?", o:["Sudden weight gain","Unexplained bruises, welts, or scars","Increased social activity","Improved financial situation"], a:1, topic:"ea", diff:"easy"},
+{t:"Unusual weight loss, malnutrition, and dehydration are warning signs of:", o:["Physical abuse","Financial exploitation","Elder neglect","Healthcare fraud"], a:2, topic:"ea", diff:"easy"},
+{t:"Sudden changes in the elder's financial condition may indicate:", o:["Physical abuse","Financial exploitation","Emotional abuse","Sexual abuse"], a:1, topic:"ea", diff:"easy"},
+{t:"Which is an emotional abuse warning sign?", o:["Bruises around genitals","Sudden withdrawal from social activities","Unusual weight loss","Duplicate billings"], a:1, topic:"ea", diff:"easy"},
+{t:"Primary prevention of elderly abuse concerns interventions designed to:", o:["Treat victims after abuse","Detect abuse early","Avoid the occurrence of abuse and eliminate risk factors","Prosecute abusers"], a:2, topic:"ea", diff:"easy"},
+{t:"Secondary prevention of elderly abuse is aimed at:", o:["Preventing the first occurrence","Preventing further abuse or harm by early detection","Managing consequences after abuse","Only financial support"], a:1, topic:"ea", diff:"easy"},
+{t:"Violence is defined as an incident in which at least one person intentionally:", o:["Neglects another","Applies or threatens physical force on others","Commits financial fraud","Provides inadequate care"], a:1, topic:"ea", diff:"easy"},
+{t:"Isolating an elder from friends or activities is a form of:", o:["Physical abuse","Financial exploitation","Nonverbal psychological elder abuse","Healthcare fraud"], a:2, topic:"ea", diff:"easy"},
+{t:"Which is a warning sign of sexual elder abuse?", o:["Unexplained bruises around breasts or genitals","Sudden withdrawal from finances","Duplicate billings","Rope marks on wrists"], a:0, topic:"ea", diff:"easy"},
+{t:"Rope marks on wrists are warning signs of:", o:["Financial exploitation","Emotional abuse","Physical abuse - signs of restraint","Sexual abuse"], a:2, topic:"ea", diff:"easy"},
+{t:"Evidence of over-medication or under-medication is a warning sign of:", o:["Physical abuse","Healthcare fraud or abuse","Financial exploitation","Neglect"], a:1, topic:"ea", diff:"easy"},
+{t:"An unsanitary living condition with dirt, bugs, and soiled bedding is a warning sign of:", o:["Physical abuse","Financial abuse","Elder neglect","Emotional abuse"], a:2, topic:"ea", diff:"easy"},
+{t:"Duplicate billings for the same medical service is a warning sign of:", o:["Physical abuse","Elder neglect","Healthcare fraud or abuse","Emotional abuse"], a:2, topic:"ea", diff:"easy"},
+{t:"Tertiary prevention of elderly abuse includes actions to manage the consequences such as:", o:["Risk assessment tools","Justice system services and medical follow-up","Screening instruments","Caregiver support programs"], a:1, topic:"ea", diff:"easy"},
+ 
+// ELDERLY ABUSE — MEDIUM (211-225)
+{t:"Which individual-level characteristic increases the risk of becoming a VICTIM of elderly abuse?", o:["Mental illness","Substance abuse","Cognitive impairment and functional dependence","Financial wealth"], a:2, topic:"ea", diff:"medium"},
+{t:"Which individual characteristic increases the risk of becoming a PERPETRATOR of elderly abuse?", o:["Good physical health","High education","Mental illness and substance abuse","Financial independence"], a:2, topic:"ea", diff:"medium"},
+{t:"In institutional settings, what fraction of staff reported committing abuse in the past year?", o:["1 in 3","1 in 6","2 in 3","1 in 2"], a:2, topic:"ea", diff:"medium"},
+{t:"Habitual blaming is listed under which type of elder abuse?", o:["Physical abuse","Verbal emotional abuse","Financial exploitation","Healthcare fraud"], a:1, topic:"ea", diff:"medium"},
+{t:"Lack of training and too many responsibilities may make nursing home staff prone to:", o:["Better patient care","Elder abuse","Financial success","Improved relationships"], a:1, topic:"ea", diff:"medium"},
+{t:"Secondary prevention nursing actions for elder abuse include:", o:["Only referring to police","Developing trusting relationships, being direct but supportive, and exploring ways to alter abuse-leading events","Only financial assistance","Only documentation"], a:1, topic:"ea", diff:"medium"},
+{t:"Monitoring for increased depression and suicide potential is part of which prevention level for elder abuse?", o:["Primary prevention","Secondary prevention","Tertiary prevention","No prevention"], a:1, topic:"ea", diff:"medium"},
+{t:"WHO collaborates to prevent elderly abuse through which initiative?", o:["Providing financial aid to victims","Synthesizing evidence and disseminating information to countries","Only legal prosecution","Only medical treatment"], a:1, topic:"ea", diff:"medium"},
+{t:"Depression is listed as a risk factor among:", o:["Elder victims only","Caregivers who commit abuse","Healthcare administrators","Government officials"], a:1, topic:"ea", diff:"medium"},
+{t:"Which risk factor for elder abuse is associated with the caregiver?", o:["Elder's wealth","Caregiver's inability to cope with stress and depression","Elder's physical strength","Elder's education level"], a:1, topic:"ea", diff:"medium"},
+{t:"Forging an elderly person's signature is an example of:", o:["Physical abuse","Healthcare fraud","Financial exploitation","Emotional abuse"], a:2, topic:"ea", diff:"medium"},
+{t:"The caregiver's perception that caring for elderly is burdensome and without psychological reward is a risk factor for:", o:["Better caregiving","Elder abuse","Improved patient outcomes","Social connection"], a:1, topic:"ea", diff:"medium"},
+{t:"Overmedicating or undermedicating elderly patients by healthcare providers is an example of:", o:["Neglect only","Physical abuse","Healthcare fraud and abuse","Financial exploitation"], a:2, topic:"ea", diff:"medium"},
+{t:"Getting kickbacks for referrals to other providers is an example of:", o:["Physical abuse","Financial exploitation","Healthcare fraud and abuse","Emotional abuse"], a:2, topic:"ea", diff:"medium"},
+{t:"Low self-esteem or signs of depression in an elder may indicate:", o:["Physical abuse","Financial exploitation","Emotional abuse","Healthcare fraud"], a:2, topic:"ea", diff:"medium"},
+ 
+// ELDERLY ABUSE — HARD (226-230)
+{t:"An elder's prescription has more medication remaining than it should — this most likely indicates:", o:["Financial exploitation","Drug overdose abuse or failure to administer medication regularly","Emotional abuse","Healthcare fraud"], a:1, topic:"ea", diff:"hard"},
+{t:"Tertiary prevention for elder abuse includes housing, counselling, and legal services, which primarily aim to:", o:["Prevent first occurrence of abuse","Detect abuse early","Prevent further re-victimization","Train caregivers"], a:2, topic:"ea", diff:"hard"},
+{t:"A nurse notices an elderly patient seems fearful whenever a specific caregiver is present. This MOST likely indicates:", o:["Physical abuse","Financial exploitation","Emotional abuse","Healthcare fraud"], a:2, topic:"ea", diff:"hard"},
+{t:"Abuse of older people can lead to serious physical injuries AND:", o:["Improved family relationships","Long-term psychological consequences","Better financial outcomes","Increased social connections"], a:1, topic:"ea", diff:"hard"},
+{t:"An ATM withdrawal when the account holder is bedridden is a warning sign of:", o:["Physical abuse","Neglect","Emotional abuse","Financial exploitation"], a:3, topic:"ea", diff:"hard"},
+ 
+// ══════════════════════════════════════════
+// FAMILY CAREGIVER — EASY (231-255)
+// ══════════════════════════════════════════
+{t:"Caregiving is defined as the provision of care for another person with:", o:["Only physical needs","Physical and emotional needs","Only financial needs","Only medical needs"], a:1, topic:"fc", diff:"easy"},
+{t:"A family caregiver is someone who provides care for a loved one often without formal:", o:["Medical conditions","Housing","Training or compensation","Transportation"], a:2, topic:"fc", diff:"easy"},
+{t:"Formal caregivers are:", o:["Unpaid family members","Paid care providers such as nursing home care staff","Volunteer neighbors","Only friends"], a:1, topic:"fc", diff:"easy"},
+{t:"Informal caregivers include:", o:["Hospital staff","Paid professionals","Family members, close relatives, friends, and neighbors","Government workers"], a:2, topic:"fc", diff:"easy"},
+{t:"By 2050, the global number of elderly persons is projected to reach over:", o:["500 million","1 billion","1.5 billion","2 billion"], a:2, topic:"fc", diff:"easy"},
+{t:"Empathy in a family caregiver is the ability to:", o:["Provide financial support","Understand and share the feelings of another","Give medical advice","Manage medications"], a:1, topic:"fc", diff:"easy"},
+{t:"Which is a key quality of a family caregiver?", o:["Impatience","Patience and remaining calm in stressful situations","Avoidance of communication","Lack of flexibility"], a:1, topic:"fc", diff:"easy"},
+{t:"Which is a positive impact of family caregiving?", o:["Emotional exhaustion only","Strengthening relationship and bonding with the elderly person","Financial burden","Increased isolation"], a:1, topic:"fc", diff:"easy"},
+{t:"Which is a negative emotional impact of caregiving on the caregiver?", o:["Improved mental health","Anxiety, depression, and feeling overwhelmed","Increased energy","Better social life"], a:1, topic:"fc", diff:"easy"},
+{t:"Physical effects of caregiving include:", o:["Improved immune system","Sleep problems, fatigue, and memory problems","Better nutrition","Reduced stress"], a:1, topic:"fc", diff:"easy"},
+{t:"Caregiver burnout refers to:", o:["Physical fitness achieved through caregiving","State of physical, mental, and emotional exhaustion due to caring for someone else","Financial success through caregiving","Improved social connections"], a:1, topic:"fc", diff:"easy"},
+{t:"Caregiver burnout is more common in:", o:["Male caregivers with high education","Female caregivers, low-educated persons, high caregiving hours, and financial stress","Young caregivers with support","Part-time caregivers with assistance"], a:1, topic:"fc", diff:"easy"},
+{t:"Which is a sign of caregiver burnout?", o:["Increased interest in activities","Physical and emotional exhaustion","Improved appetite","Better concentration"], a:1, topic:"fc", diff:"easy"},
+{t:"'Respite Care' in caregiver burnout management refers to:", o:["Permanent caregiver replacement","Temporary break where another family member takes over caregiving role","Financial assistance","Medical treatment for caregiver"], a:1, topic:"fc", diff:"easy"},
+{t:"Family caregiver's responsibilities include medication management, which means:", o:["Prescribing medications","Ensuring correct medications are taken at right times","Dispensing medications without guidance","Stopping medications independently"], a:1, topic:"fc", diff:"easy"},
+{t:"Which is a family caregiver responsibility?", o:["Performing surgery","Scheduling medical appointments and managing transportation","Prescribing treatments","Conducting laboratory tests"], a:1, topic:"fc", diff:"easy"},
+{t:"Observing new health symptoms by family caregivers requires:", o:["Treating the condition independently","Regular communication with care providers","Waiting for the annual check-up","Avoiding medical professionals"], a:1, topic:"fc", diff:"easy"},
+{t:"The financial effects of caregiving include caregivers reducing:", o:["Their social activities only","Their working hours or leaving jobs to care for a loved one","Their medication intake","Their education"], a:1, topic:"fc", diff:"easy"},
+{t:"Depression, anxiety, and feeling overwhelmed are listed as which type of caregiving impact?", o:["Physical effects","Financial effects","Emotional and psychological effects","Relationship effects"], a:2, topic:"fc", diff:"easy"},
+{t:"Caregiver burden is more common in caregivers who are caring:", o:["Part-time with full support","Alone without assistance","With professional help","In institutional settings"], a:1, topic:"fc", diff:"easy"},
+{t:"To manage caregiver burnout, talking to a healthcare provider helps to:", o:["Increase caregiver burden","Reduce tension and treat physical problems","Replace caregiving duties","Avoid all responsibilities"], a:1, topic:"fc", diff:"easy"},
+{t:"Self-care for caregivers includes:", o:["Avoiding all rest","Eating balanced diet, getting enough sleep, and daily exercise","Working longer hours","Increasing medication use"], a:1, topic:"fc", diff:"easy"},
+{t:"'Attention to details' as a key quality of family caregiver includes:", o:["Ignoring health changes","Noticing changes in health or well-being and communicating with providers","Making all medical decisions independently","Avoiding communication with healthcare team"], a:1, topic:"fc", diff:"easy"},
+{t:"Which condition is associated with increased demand for caregiving?", o:["Acute infections only","Chronic conditions like dementia, cancer, diabetes, and heart disease","Only surgical conditions","Only mental health conditions"], a:1, topic:"fc", diff:"easy"},
+{t:"Caregivers who reduce working hours or pick up extra jobs do so because of:", o:["Personal preference","The financial demands of caregiving","Better work opportunities","Reduced workload"], a:1, topic:"fc", diff:"easy"},
+ 
+// FAMILY CAREGIVER — MEDIUM (256-270)
+{t:"Caregiver burden is a multidimensional concept referring to the adverse effect on the caregiver's emotional, social, financial, physical, and:", o:["Educational functioning","Spiritual functioning","Career advancement","Political participation"], a:1, topic:"fc", diff:"medium"},
+{t:"Which is a positive benefit of family caregiving related to knowledge?", o:["No introductory period needed since caregiver knows elderly's needs, preferences, and routines","Must learn everything from scratch","Requires extensive formal training","Needs outside professional guidance always"], a:0, topic:"fc", diff:"medium"},
+{t:"Hypertension as a result of stress is listed as which type of caregiving impact?", o:["Emotional effect","Relationship effect","Physical effect","Financial effect"], a:2, topic:"fc", diff:"medium"},
+{t:"Lack of balance between needs of sick and healthy family members is a:", o:["Positive impact","Financial effect","Relationship effect of caregiving","Physical effect"], a:2, topic:"fc", diff:"medium"},
+{t:"Finding local resources for caregiver support involves:", o:["Only financial assistance","Organizations offering home care, adult care centers, and support groups","Only medical treatment","Only legal services"], a:1, topic:"fc", diff:"medium"},
+{t:"The value of being a family caregiver is measured in:", o:["Hours spent","Financial compensation","Quality of care and support provided","Academic qualifications"], a:2, topic:"fc", diff:"medium"},
+{t:"'Problem-solving skills' as a caregiver quality refers to:", o:["Making all decisions for the elderly without input","Effectively addressing challenges and finding solutions to meet elderly needs","Avoiding difficult situations","Delegating all problems to medical staff"], a:1, topic:"fc", diff:"medium"},
+{t:"Increased use of alcohol, smoking, and medications are listed as which effect of caregiving?", o:["Emotional effects","Relationship effects","Physical effects","Financial effects"], a:2, topic:"fc", diff:"medium"},
+{t:"The role of family caregivers ensures the elderly are comfortable and experience lower:", o:["Physical activity","Financial independence","Stress and anxiety about day-to-day experiences","Social connections"], a:2, topic:"fc", diff:"medium"},
+{t:"Withdrawal from family, friends, and loved ones is a sign of:", o:["Improved caregiving","Caregiver burnout","Better relationships","Increased engagement"], a:1, topic:"fc", diff:"medium"},
+{t:"Ensuring the safety of the home environment by a family caregiver involves:", o:["Only cleaning the house","Watching for safety threats like upturned rug corners and loose handrails","Only cooking meals","Only personal hygiene assistance"], a:1, topic:"fc", diff:"medium"},
+{t:"Caregivers in institutional settings can experience stress that leads to elder abuse when they:", o:["Have strong support systems","Lack training, have too many responsibilities, or work under poor conditions","Are well trained and supported","Work in comfortable conditions"], a:1, topic:"fc", diff:"medium"},
+{t:"Changes in appetite and weight in a caregiver may indicate:", o:["Improved health","Caregiver burnout","Normal caregiving process","Better nutrition"], a:1, topic:"fc", diff:"medium"},
+{t:"The dependency of abuser on victim (often financial) is listed as which type of risk factor for elder abuse?", o:["Individual level characteristic of victim","Individual level characteristic of perpetrator","Relationship level risk factor","Community level risk factor"], a:1, topic:"fc", diff:"medium"},
+{t:"'Effective communication' as a caregiver quality requires:", o:["Speaking only to medical professionals","Listening attentively and communicating well with elderly, family, and healthcare professionals","Avoiding difficult conversations","Speaking only when necessary"], a:1, topic:"fc", diff:"medium"},
+ 
+// FAMILY CAREGIVER — HARD (271-280)
+{t:"Which combination BEST describes the multidimensional nature of caregiver burden?", o:["Only emotional and financial","Emotional, social, financial, physical, and spiritual functioning with lack of social connections","Only physical and emotional","Only financial and relationship effects"], a:1, topic:"fc", diff:"hard"},
+{t:"A family caregiver reports she has less time for her partner and children, increased stress, and conflict. This BEST represents which impact of caregiving?", o:["Physical effects","Financial effects","Emotional effects","Relationship effects of caregiving"], a:3, topic:"fc", diff:"hard"},
+{t:"Which statement CORRECTLY explains why informal caregivers face more challenges than formal caregivers?", o:["Informal caregivers work longer hours","Informal caregivers seldom receive enough training for caregiving tasks","Informal caregivers have more resources","Informal caregivers are less committed"], a:1, topic:"fc", diff:"hard"},
+{t:"A nurse should advise a burned-out caregiver that self-care including exercise primarily helps to:", o:["Eliminate caregiving responsibilities","Improve mood and maintain energy to perform caregiving best","Resolve financial problems","Improve the elderly patient's condition"], a:1, topic:"fc", diff:"hard"},
+{t:"The increasing demand for caregiving as population ages is primarily a concern because it aims to:", o:["Reduce healthcare costs only","Prevent further complications of disease and improve quality of life","Increase hospital admissions","Reduce family involvement"], a:1, topic:"fc", diff:"hard"},
+{t:"Which BEST explains why 'desire to help' is listed as a key quality for family caregivers?", o:["It reduces the need for formal training","Motivation to serve makes a difference in the lives of elderly regardless of challenges","It eliminates caregiver burnout","It replaces empathy and patience"], a:1, topic:"fc", diff:"hard"},
+{t:"A family caregiver who is becoming dependent on alcohol and has sleep problems is MOST likely experiencing:", o:["Normal adjustment","Caregiver burnout","Improved coping","Financial stress only"], a:1, topic:"fc", diff:"hard"},
+{t:"Which intervention should a nurse FIRST recommend to a caregiver showing signs of burnout?", o:["Immediately stop caregiving","Talk to a healthcare provider to reduce tension and treat physical problems","Increase caregiving hours","Avoid all social contact"], a:1, topic:"fc", diff:"hard"},
+{t:"The statement 'no introductory period is needed' as a benefit of family caregiving means:", o:["Family caregivers need no training at all","Family caregivers already know the elderly's care needs, preferences, and personality","Family caregivers are always available","Family caregivers work for free"], a:1, topic:"fc", diff:"hard"},
+{t:"Which combination CORRECTLY represents the three types of family caregiver responsibilities?", o:["Medical, surgical, and pharmaceutical","Daily tasks, medication management, and emotional support","Only physical care","Only financial management"], a:1, topic:"fc", diff:"hard"},
+ 
+// ══════════════════════════════════════════
+// TRUE / FALSE — ALL TOPICS (281-330)
+// ══════════════════════════════════════════
+{t:"Palliative care is only appropriate for patients in the terminal stage of illness.", o:["True","False"], a:1, topic:"tf", diff:"medium"},
+{t:"The WHO definition of palliative care includes prevention and relief of suffering through early identification.", o:["True","False"], a:0, topic:"tf", diff:"easy"},
+{t:"Palliative care can be provided alongside curative treatment.", o:["True","False"], a:0, topic:"tf", diff:"easy"},
+{t:"The doctor is the cornerstone of any palliative care service.", o:["True","False"], a:1, topic:"tf", diff:"easy"},
+{t:"Hospice care has no time limits and can last for years.", o:["True","False"], a:1, topic:"tf", diff:"medium"},
+{t:"Palliative care eligibility requires a life expectancy of 6 months or less.", o:["True","False"], a:1, topic:"tf", diff:"medium"},
+{t:"Good communication is the key to effective palliative care teamwork.", o:["True","False"], a:0, topic:"tf", diff:"easy"},
+{t:"Dyspnea is a highly subjective symptom that is always associated with visible signs of distress.", o:["True","False"], a:1, topic:"tf", diff:"medium"},
+{t:"Morphine sulfate is the most commonly used opioid for dyspnea management in palliative care.", o:["True","False"], a:0, topic:"tf", diff:"easy"},
+{t:"Palliative care neurological assessment near death includes level of consciousness, reflexes, and pupil responses.", o:["True","False"], a:0, topic:"tf", diff:"medium"},
+{t:"Stress and burnout among staff are factors that enhance palliative care team success.", o:["True","False"], a:1, topic:"tf", diff:"easy"},
+{t:"Spiritual assessment in palliative care is conceptually narrower than religion.", o:["True","False"], a:1, topic:"tf", diff:"medium"},
+{t:"In institutional palliative care settings, assessment should be done at least every 8 hours.", o:["True","False"], a:0, topic:"tf", diff:"medium"},
+{t:"Anxiety is the most common distress symptom near the end of life.", o:["True","False"], a:0, topic:"tf", diff:"easy"},
+{t:"AIDS is classified as an example of progressive disease in palliative care.", o:["True","False"], a:1, topic:"tf", diff:"hard"},
+{t:"Aging in and of itself is considered a health problem.", o:["True","False"], a:1, topic:"tf", diff:"easy"},
+{t:"The flu vaccine for adults over 65 is recommended every year.", o:["True","False"], a:0, topic:"tf", diff:"easy"},
+{t:"The pneumonia vaccine is recommended every year for older adults.", o:["True","False"], a:1, topic:"tf", diff:"medium"},
+{t:"Primary prevention for older adults is the most cost-effective means of providing health care.", o:["True","False"], a:0, topic:"tf", diff:"easy"},
+{t:"Tertiary prevention for older adults focuses on preventing complications of existing conditions.", o:["True","False"], a:0, topic:"tf", diff:"easy"},
+{t:"Kegel exercises are recommended for managing constipation in older adults.", o:["True","False"], a:1, topic:"tf", diff:"medium"},
+{t:"For older adults with confusion, reality orientation includes providing excessive stimulation.", o:["True","False"], a:1, topic:"tf", diff:"medium"},
+{t:"Older adults recover faster at home than in hospitals according to research.", o:["True","False"], a:0, topic:"tf", diff:"easy"},
+{t:"Home health care is only beneficial for acute conditions.", o:["True","False"], a:1, topic:"tf", diff:"easy"},
+{t:"Personalized care in home health care means more social interaction for the patient.", o:["True","False"], a:1, topic:"tf", diff:"medium"},
+{t:"Patients who received transitional home health care are approximately half as likely to return to hospital.", o:["True","False"], a:0, topic:"tf", diff:"medium"},
+{t:"Home health care has no time restrictions for family and friends visiting.", o:["True","False"], a:0, topic:"tf", diff:"easy"},
+{t:"By 2050, 80% of those over 60 will live in developed countries.", o:["True","False"], a:1, topic:"tf", diff:"medium"},
+{t:"Care provided in a person's home is also called domiciliary care.", o:["True","False"], a:0, topic:"tf", diff:"easy"},
+{t:"Respiratory failure is listed as a condition that home health care can benefit.", o:["True","False"], a:1, topic:"tf", diff:"medium"},
+{t:"According to the notes, 1 in 6 people aged 60 and older experienced some form of abuse.", o:["True","False"], a:0, topic:"tf", diff:"easy"},
+{t:"Neglect constitutes less than a quarter of all reported cases of elder abuse.", o:["True","False"], a:1, topic:"tf", diff:"medium"},
+{t:"Financial exploitation includes misusing an elder's checks, credit cards, and accounts.", o:["True","False"], a:0, topic:"tf", diff:"easy"},
+{t:"Physical elderly abuse is accidental use of force against an elderly person.", o:["True","False"], a:1, topic:"tf", diff:"easy"},
+{t:"Isolating an elder from friends is a form of nonverbal psychological abuse.", o:["True","False"], a:0, topic:"tf", diff:"easy"},
+{t:"Primary prevention of elderly abuse focuses on managing consequences after abuse occurs.", o:["True","False"], a:1, topic:"tf", diff:"medium"},
+{t:"Depression is a risk factor among caregivers that may lead to elder abuse.", o:["True","False"], a:0, topic:"tf", diff:"easy"},
+{t:"Formal caregivers are unpaid family members or friends.", o:["True","False"], a:1, topic:"tf", diff:"easy"},
+{t:"Informal caregivers seldom receive enough training for caregiving tasks.", o:["True","False"], a:0, topic:"tf", diff:"easy"},
+{t:"Caregiver burnout is more common in male caregivers.", o:["True","False"], a:1, topic:"tf", diff:"medium"},
+{t:"Respite care means permanently replacing the family caregiver.", o:["True","False"], a:1, topic:"tf", diff:"easy"},
+{t:"Hypertension can be a physical result of caregiver stress.", o:["True","False"], a:0, topic:"tf", diff:"easy"},
+{t:"The value of being a family caregiver is measured in hours of care provided.", o:["True","False"], a:1, topic:"tf", diff:"medium"},
+{t:"Family caregiving may allow elderly persons to experience lower stress and anxiety.", o:["True","False"], a:0, topic:"tf", diff:"easy"},
+{t:"Community health nurses must involve clients and families in planning their care.", o:["True","False"], a:0, topic:"tf", diff:"easy"},
+{t:"Caregiver burden is a unidimensional concept affecting only the physical functioning of caregivers.", o:["True","False"], a:1, topic:"tf", diff:"medium"},
+{t:"An effective community health nurse should let the client be a passive participant in care planning.", o:["True","False"], a:1, topic:"tf", diff:"medium"},
+{t:"Spiritually, the nursing assessment should include religious affiliation only.", o:["True","False"], a:1, topic:"tf", diff:"hard"},
+{t:"In home health care, the continuity of care workers is important because elderly patients prefer familiar caregivers.", o:["True","False"], a:0, topic:"tf", diff:"easy"},
+{t:"The increasing use of alcohol and smoking are listed as physical effects of caregiving stress.", o:["True","False"], a:0, topic:"tf", diff:"medium"},
+ 
+];
+
+/* ============ ENGINE ============ */
+let questions, i, correct, wrong, answers, wrongSet, answered;
+let totalTime = 200*60, timeLeft, timerInterval;
+const LETTERS = ['A','B','C','D','E','F'];
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function init(pool) {
+  questions = shuffle([...pool]);
+  i = 0; correct = 0; wrong = 0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = []; answered = 0;
+  timeLeft = totalTime;
+  document.getElementById('totalBadge').textContent = questions.length + ' سؤال';
+  startTimer();
+  render();
+}
+
+/* TIMER */
+function startTimer() {
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    const m = Math.floor(timeLeft / 60), s = timeLeft % 60;
+    document.getElementById('timerTxt').textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
+    const badge = document.getElementById('timerBadge');
+    if (timeLeft <= 120) { badge.className = 'timer-badge danger'; }
+    else if (timeLeft <= 300) { badge.className = 'timer-badge warn'; }
+    if (timeLeft <= 0) { clearInterval(timerInterval); finish(); }
+  }, 1000);
+}
+
+/* TOP UI */
+function updateTop() {
+  const total = questions.length;
+  document.getElementById('sCorrect').textContent = correct;
+  document.getElementById('sWrong').textContent = wrong;
+  document.getElementById('sRemain').textContent = Math.round(((total - answered) / total) * 100) + '%';
+  document.getElementById('progLabel').textContent = 'سؤال ' + (i + 1) + ' / ' + total;
+  document.getElementById('progFill').style.width = ((i + 1) / total * 100) + '%';
+  document.getElementById('prog-bar').style.width = ((i + 1) / total * 100) + '%';
+}
+
+/* RENDER QUESTION */
+function render() {
+  updateTop();
+  const q = questions[i];
+  document.getElementById('app').innerHTML = `
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">سؤال ${i + 1} / ${questions.length}</div>
+      </div>
+      <div class="q-text">${q.t}</div>
+      <div class="options">
+        ${q.o.map((o, idx) => `
+          <div class="opt" id="opt${idx}" onclick="choose(${idx})">
+            <div class="opt-letter">${LETTERS[idx] || idx + 1}</div>
+            ${o}
+          </div>
+        `).join('')}
+      </div>
+      <div class="nav-btns">
+        <button class="btn btn-skip" onclick="skip()"><i class="fa-solid fa-forward"></i> تخطي</button>
+      </div>
+    </div>`;
+}
+
+/* CHOOSE */
+function choose(v) {
+  if (answers[i] !== null) return;
+  answers[i] = v;
+  answered++;
+  const q = questions[i];
+  const ok = v === q.a;
+  ok ? correct++ : wrong++;
+  updateTop();
+
+  q.o.forEach((_, idx) => {
+    const el = document.getElementById('opt' + idx);
+    el.classList.add('disabled');
+    if (idx === q.a) el.classList.add('correct');
+    else if (idx === v) el.classList.add('wrong');
+  });
+
+  const fb = document.createElement('div');
+  fb.className = 'feedback-bar ' + (ok ? 'ok' : 'no');
+  fb.innerHTML = ok
+    ? `<span class="feedback-icon">🎉</span> <span>شطور جدا ، اللهم بارك</span>`
+    : `<span class="feedback-icon">😔</span> <span>ركز يا عسل</span>`;
+
+  const card = document.querySelector('.q-card');
+  card.querySelector('.options').after(fb);
+  if (q.exp) {
+    const exp = document.createElement('div');
+    exp.className = 'explanation';
+    exp.style.display = 'block';
+    exp.innerHTML = '<b>💬 شرح:</b> ' + q.exp;
+    fb.after(exp);
+  }
+
+  const navBtns = card.querySelector('.nav-btns');
+  navBtns.innerHTML = `<button class="btn btn-next" onclick="next()">
+    ${i < questions.length - 1 ? '<i class="fa-solid fa-arrow-left"></i> السؤال التالي' : '<i class="fa-solid fa-flag-checkered"></i> إنهاء الامتحان'}
+  </button>`;
+}
+
+/* SKIP */
+function skip() {
+  if (answers[i] === null) { answers[i] = -1; answered++; wrongSet.push(questions[i]); wrong++; updateTop(); }
+  next();
+}
+
+/* NEXT */
+function next() {
+  if (i < questions.length - 1) { i++; render(); window.scrollTo({top: 0, behavior: 'smooth'}); }
+  else finish();
+}
+
+/* FINISH */
+function finish() {
+  clearInterval(timerInterval);
+  const total = questions.length;
+  const score = Math.round((correct / total) * 100);
+
+  questions.forEach((q, idx) => {
+    if (answers[idx] !== q.a) wrongSet.push({...q, myAns: answers[idx]});
+  });
+  wrongSet = [...new Map(wrongSet.map(q => [q.t, q])).values()];
+
+  let grade, gradeColor;
+  if (score >= 90) { grade = '🥇 ممتاز'; gradeColor = 'var(--success)'; }
+  else if (score >= 75) { grade = '🥈 جيد جداً'; gradeColor = 'var(--accent)'; }
+  else if (score >= 60) { grade = '🥉 جيد'; gradeColor = 'var(--warn)'; }
+  else { grade = '📚 راجع تاني'; gradeColor = 'var(--danger)'; }
+
+  const circ = 2 * Math.PI * 45;
+  const offset = circ - (score / 100) * circ;
+
+  const reportHTML = questions.map((q, idx) => {
+    const ok = answers[idx] === q.a;
+    return `<div class="report-item ${ok ? 'ok' : 'no'}">
+      <div class="ri-q">${ok ? '✅' : '❌'} ${q.t}</div>
+      ${!ok ? `
+        <div class="ri-row"><span class="ri-badge ri-yours">إجابتك</span> ${answers[idx] >= 0 ? q.o[answers[idx]] : 'تم التخطي'}</div>
+        <div class="ri-row"><span class="ri-badge ri-right">الصحيح</span> ${q.o[q.a]}</div>
+      ` : ''}
+    </div>`;
+  }).join('');
+
+  document.getElementById('prog-bar').style.width = '100%';
+  document.getElementById('app').innerHTML = `
+    <div class="result-hero">
+      <div class="score-ring">
+        <svg viewBox="0 0 110 110">
+          <circle class="ring-bg" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="0"/>
+          <circle class="ring-fill" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="${circ}"
+            style="stroke:${gradeColor}" id="ringFill"/>
+        </svg>
+        <div class="score-num">${score}</div>
+        <div class="score-pct">%</div>
+      </div>
+      <div class="result-grade" style="color:${gradeColor}">${grade}</div>
+      <div class="result-sub">أجبت على ${answered} من ${total} سؤال</div>
+      <div class="result-stats">
+        <div class="rs"><div class="n" style="color:var(--success)">${correct}</div><div class="l">صحيح</div></div>
+        <div class="rs"><div class="n" style="color:var(--danger)">${wrong}</div><div class="l">خطأ</div></div>
+        <div class="rs"><div class="n" style="color:var(--accent)">${total - answered < 0 ? 0 : total - answered}</div><div class="l">تخطي</div></div>
+      </div>
+    </div>
+
+    <div class="result-actions">
+      ${wrongSet.length ? `<button class="btn btn-retry" onclick="retryWrong()"><i class="fa-solid fa-rotate-right"></i> إعادة الخطأ (${wrongSet.length})</button>` : ''}
+      <button class="btn btn-home" onclick="init(QUESTIONS)"><i class="fa-solid fa-shuffle"></i> امتحان جديد عشوائي</button>
+      <a href="https://gaith-team.github.io/exam/" class="btn btn-home" style="text-decoration:none;"><i class="fa-solid fa-house"></i> رجوع للمادة</a>
+    </div>
+
+    <div style="margin-top:28px">
+      <div style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text2)">📋 تقرير مفصّل</div>
+      ${reportHTML}
+    </div>`;
+
+  setTimeout(() => { document.getElementById('ringFill').style.strokeDashoffset = offset; }, 100);
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+/* RETRY WRONG */
+function retryWrong() {
+  const pool = [...wrongSet];
+  questions = shuffle(pool); i = 0; correct = 0; wrong = 0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = []; answered = 0; timeLeft = totalTime;
+  startTimer(); render();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+/* THEME */
+const themeBtn = document.getElementById('themeBtn');
+let theme = localStorage.getItem('theme') || 'light';
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', t);
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+
+/* START */
+init(QUESTIONS);
+</script>
+</body>
+</html>
