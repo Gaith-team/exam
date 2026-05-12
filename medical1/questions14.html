@@ -1,0 +1,1114 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --c:      #e67e22;
+  --c-deep: #b8590a;
+  --c-lite: #f39c12;
+  --c-glow: rgba(230,126,34,0.2);
+  --c-soft: rgba(230,126,34,0.09);
+  --green:  #27ae60;
+  --red:    #e74c3c;
+  --bg:     #f9f5f0;
+  --bg2:    #f1e8dc;
+  --card:   #ffffff;
+  --text:   #1a1208;
+  --text2:  #5a4a30;
+  --text3:  #9a8060;
+  --border: rgba(230,126,34,0.15);
+  --radius: 18px;
+  --tr:     all 0.28s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="dark"] {
+  --bg:    #12100c;
+  --bg2:   #1c1710;
+  --card:  #231e16;
+  --text:  #f0e6d6;
+  --text2: #c0a880;
+  --text3: #806848;
+  --border:rgba(230,126,34,0.18);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Cairo','Tajawal',sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  transition: background .4s, color .4s;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px;
+  background: rgba(249,245,240,0.93);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+  transition: var(--tr);
+}
+[data-theme="dark"] nav { background: rgba(18,16,12,0.95); }
+.nav-back {
+  display: flex; align-items: center; gap: 8px;
+  text-decoration: none; color: var(--text2);
+  font-size: 13px; font-weight: 700;
+  padding: 7px 13px; border-radius: 9px;
+  border: 1px solid var(--border); background: var(--card);
+  transition: var(--tr);
+}
+.nav-back:hover { color: var(--c); border-color: var(--c); }
+.nav-center { display: flex; align-items: center; gap: 9px; }
+.nav-pill {
+  display: flex; align-items: center; gap: 7px;
+  padding: 6px 14px; border-radius: 50px;
+  background: linear-gradient(135deg, var(--c), var(--c-lite));
+  color: #fff; font-size: 13px; font-weight: 800;
+}
+.theme-toggle {
+  width: 38px; height: 38px; border-radius: 50%;
+  border: 1.5px solid var(--border); background: var(--card);
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  font-size: 16px; transition: var(--tr);
+}
+.theme-toggle:hover { border-color: var(--c); transform: rotate(20deg); }
+
+/* ── SCREENS ── */
+.screen { display: none; }
+.screen.active { display: flex; }
+
+/* ══════════════════════════════════
+   START SCREEN
+══════════════════════════════════ */
+#startScreen {
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 80px 24px 40px;
+  text-align: center;
+}
+.start-icon {
+  width: 90px; height: 90px; border-radius: 24px;
+  background: linear-gradient(135deg, var(--c), var(--c-lite));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 40px; margin: 0 auto 28px;
+  box-shadow: 0 12px 40px var(--c-glow);
+  animation: floatIcon 3s ease-in-out infinite;
+}
+@keyframes floatIcon {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+.start-title {
+  font-size: clamp(28px,5vw,44px); font-weight: 900; color: var(--text);
+  line-height: 1.15; margin-bottom: 12px;
+}
+.start-title span { color: var(--c); }
+.start-sub {
+  font-size: 15px; color: var(--text2); line-height: 1.7;
+  max-width: 400px; margin: 0 auto 36px;
+}
+.start-meta {
+  display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 44px;
+}
+.meta-pill {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 20px; border-radius: 12px;
+  background: var(--card); border: 1px solid var(--border);
+  font-size: 14px; font-weight: 700; color: var(--text2);
+}
+.meta-pill strong { color: var(--c); font-size: 18px; }
+.btn-start {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 44px; border-radius: 14px;
+  background: linear-gradient(135deg, var(--c), var(--c-lite));
+  color: #fff; font-size: 17px; font-weight: 900;
+  border: none; cursor: pointer;
+  box-shadow: 0 8px 28px var(--c-glow);
+  transition: var(--tr); font-family: 'Cairo',sans-serif;
+}
+.btn-start:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 14px 40px var(--c-glow); }
+
+/* ══════════════════════════════════
+   QUIZ SCREEN
+══════════════════════════════════ */
+#quizScreen {
+  min-height: 100vh;
+  flex-direction: column;
+  padding: 80px 0 40px;
+}
+.quiz-wrap {
+  flex: 1; max-width: 680px; width: 100%;
+  margin: 0 auto; padding: 32px 24px;
+  display: flex; flex-direction: column; gap: 24px;
+}
+
+/* progress */
+.quiz-progress-row {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 14px;
+}
+.progress-track {
+  flex: 1; height: 6px; border-radius: 6px;
+  background: var(--bg2); overflow: hidden;
+}
+.progress-fill {
+  height: 100%; border-radius: 6px;
+  background: linear-gradient(90deg, var(--c), var(--c-lite));
+  transition: width .5s cubic-bezier(0.4,0,0.2,1);
+}
+.progress-label {
+  font-size: 13px; font-weight: 800; color: var(--c);
+  white-space: nowrap;
+}
+
+/* question card */
+.q-card {
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  padding: 32px 28px;
+  box-shadow: 0 4px 24px rgba(230,126,34,0.08);
+  animation: slideIn .35s ease;
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.q-num {
+  font-size: 11px; font-weight: 800; letter-spacing: 2px;
+  color: var(--c); text-transform: uppercase; margin-bottom: 14px;
+}
+.q-text {
+  font-size: clamp(16px,2.5vw,20px); font-weight: 700;
+  color: var(--text); line-height: 1.6;
+}
+
+/* options */
+.options-list {
+  display: flex; flex-direction: column; gap: 12px;
+  margin-top: 28px;
+}
+.opt-btn {
+  display: flex; align-items: center; gap: 14px;
+  padding: 15px 18px; border-radius: 13px;
+  border: 1.5px solid var(--border);
+  background: var(--bg);
+  cursor: pointer; text-align: left;
+  transition: var(--tr); font-family: 'Cairo',sans-serif;
+  font-size: 15px; font-weight: 600; color: var(--text);
+  width: 100%;
+}
+.opt-btn:hover:not(:disabled) {
+  border-color: var(--c);
+  background: var(--c-soft);
+  transform: translateX(3px);
+}
+.opt-letter {
+  width: 34px; height: 34px; flex-shrink: 0;
+  border-radius: 50%; border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 900; color: var(--text3);
+  transition: var(--tr); background: var(--card);
+}
+.opt-btn:hover:not(:disabled) .opt-letter {
+  border-color: var(--c); color: var(--c); background: rgba(230,126,34,0.1);
+}
+
+/* states */
+.opt-btn.correct {
+  border-color: var(--green) !important;
+  background: rgba(39,174,96,0.08) !important;
+  color: var(--green);
+}
+.opt-btn.correct .opt-letter {
+  background: var(--green); border-color: var(--green);
+  color: #fff;
+}
+.opt-btn.wrong {
+  border-color: var(--red) !important;
+  background: rgba(231,76,60,0.08) !important;
+  color: var(--red);
+}
+.opt-btn.wrong .opt-letter {
+  background: var(--red); border-color: var(--red);
+  color: #fff;
+}
+.opt-btn:disabled { cursor: not-allowed; }
+
+/* feedback */
+.feedback-box {
+  display: none;
+  align-items: center; gap: 12px;
+  padding: 14px 18px; border-radius: 12px;
+  font-size: 14px; font-weight: 700;
+  margin-top: 16px;
+  animation: fadeIn .3s ease;
+}
+@keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+.feedback-box.show { display: flex; }
+.feedback-box.correct-fb {
+  background: rgba(39,174,96,0.1);
+  border: 1px solid rgba(39,174,96,0.25);
+  color: var(--green);
+}
+.feedback-box.wrong-fb {
+  background: rgba(231,76,60,0.1);
+  border: 1px solid rgba(231,76,60,0.25);
+  color: var(--red);
+}
+.feedback-icon { font-size: 20px; }
+
+/* nav buttons */
+.quiz-nav {
+  display: flex; gap: 12px; justify-content: space-between; align-items: center;
+}
+.btn-nav {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 26px; border-radius: 12px;
+  font-size: 14px; font-weight: 800;
+  border: none; cursor: pointer;
+  font-family: 'Cairo',sans-serif;
+  transition: var(--tr);
+}
+.btn-skip {
+  background: var(--bg2); color: var(--text2);
+  border: 1px solid var(--border);
+}
+.btn-skip:hover { background: var(--border); }
+.btn-next {
+  background: linear-gradient(135deg, var(--c), var(--c-lite));
+  color: #fff;
+  box-shadow: 0 4px 16px var(--c-glow);
+}
+.btn-next:hover { transform: translateY(-2px); box-shadow: 0 8px 24px var(--c-glow); }
+.btn-next:disabled { opacity: .45; pointer-events: none; }
+
+/* ══════════════════════════════════
+   RESULT SCREEN
+══════════════════════════════════ */
+#resultScreen {
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 80px 24px 40px;
+  text-align: center;
+}
+.result-circle {
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  margin: 0 auto 28px;
+  position: relative;
+}
+.result-circle svg {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  transform: rotate(-90deg);
+}
+.result-circle svg circle {
+  fill: none; stroke-width: 8;
+  stroke-linecap: round;
+}
+.circle-bg  { stroke: var(--bg2); }
+.circle-fill { stroke: var(--c); transition: stroke-dashoffset 1.2s cubic-bezier(0.4,0,0.2,1); }
+.result-pct {
+  font-size: 36px; font-weight: 900; color: var(--text);
+  position: relative; z-index: 1;
+}
+.result-pct small { font-size: 14px; color: var(--text3); display: block; }
+
+.result-emoji { font-size: 56px; margin-bottom: 16px; animation: bounce .6s ease; }
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
+.result-title { font-size: 26px; font-weight: 900; color: var(--text); margin-bottom: 8px; }
+.result-sub { font-size: 15px; color: var(--text2); margin-bottom: 36px; }
+
+.result-stats {
+  display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+.rstat {
+  padding: 14px 22px; border-radius: 14px;
+  background: var(--card); border: 1px solid var(--border);
+  min-width: 110px;
+}
+.rstat .rv { font-size: 26px; font-weight: 900; }
+.rstat .rl { font-size: 12px; color: var(--text3); margin-top: 2px; }
+.rstat.correct-s .rv { color: var(--green); }
+.rstat.wrong-s   .rv { color: var(--red); }
+.rstat.skip-s    .rv { color: var(--text3); }
+
+.result-actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.btn-retry {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 14px 32px; border-radius: 12px;
+  background: linear-gradient(135deg, var(--c), var(--c-lite));
+  color: #fff; font-size: 15px; font-weight: 900;
+  border: none; cursor: pointer; font-family: 'Cairo',sans-serif;
+  box-shadow: 0 6px 22px var(--c-glow); transition: var(--tr);
+}
+.btn-retry:hover { transform: translateY(-3px); }
+.btn-review {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 14px 28px; border-radius: 12px;
+  background: var(--card); color: var(--text);
+  font-size: 15px; font-weight: 700;
+  border: 1.5px solid var(--border); cursor: pointer;
+  font-family: 'Cairo',sans-serif; transition: var(--tr);
+}
+.btn-review:hover { border-color: var(--c); color: var(--c); }
+
+/* ── REVIEW MODE ── */
+#reviewScreen {
+  min-height: 100vh;
+  flex-direction: column;
+  padding: 80px 0 60px;
+}
+.review-wrap {
+  max-width: 680px; width: 100%;
+  margin: 0 auto; padding: 32px 24px;
+  display: flex; flex-direction: column; gap: 18px;
+}
+.review-header {
+  text-align: center; margin-bottom: 10px;
+}
+.review-header h2 { font-size: 22px; font-weight: 900; color: var(--text); }
+.review-header p  { font-size: 13px; color: var(--text3); margin-top: 4px; }
+
+.review-card {
+  background: var(--card);
+  border-radius: 16px;
+  border: 1.5px solid var(--border);
+  overflow: hidden;
+}
+.review-card-top {
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--border);
+}
+.review-q-label {
+  font-size: 10px; font-weight: 800; letter-spacing: 2px;
+  color: var(--text3); margin-bottom: 8px;
+}
+.review-q-text { font-size: 15px; font-weight: 700; color: var(--text); line-height: 1.55; }
+.review-opts { padding: 14px 22px; display: flex; flex-direction: column; gap: 8px; }
+.review-opt {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px; border-radius: 10px;
+  font-size: 13px; font-weight: 600; color: var(--text2);
+  background: var(--bg);
+}
+.review-opt.is-correct {
+  background: rgba(39,174,96,0.1);
+  color: var(--green); font-weight: 800;
+}
+.review-opt.is-wrong {
+  background: rgba(231,76,60,0.1);
+  color: var(--red);
+}
+.review-dot {
+  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  background: var(--border);
+}
+.review-opt.is-correct .review-dot { background: var(--green); }
+.review-opt.is-wrong   .review-dot { background: var(--red); }
+.review-status {
+  display: flex; align-items: center; gap: 5px;
+  padding: 3px 10px; border-radius: 50px;
+  font-size: 10px; font-weight: 800; margin-top: 10px;
+  width: fit-content;
+}
+.status-correct { background: rgba(39,174,96,0.12); color: var(--green); }
+.status-wrong   { background: rgba(231,76,60,0.12);  color: var(--red); }
+.status-skip    { background: var(--bg2); color: var(--text3); }
+
+.btn-back-result {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 13px 28px; border-radius: 12px;
+  background: var(--card); color: var(--text);
+  font-size: 14px; font-weight: 700;
+  border: 1.5px solid var(--border); cursor: pointer;
+  font-family: 'Cairo',sans-serif; transition: var(--tr);
+  margin-top: 8px; align-self: center;
+}
+.btn-back-result:hover { border-color: var(--c); color: var(--c); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 540px) {
+  nav { padding: 0 16px; }
+  .quiz-wrap, .review-wrap { padding: 24px 16px; }
+  .q-card { padding: 22px 18px; }
+  .opt-btn { padding: 12px 14px; font-size: 14px; }
+  .result-stats { gap: 10px; }
+  .rstat { min-width: 90px; padding: 12px 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://gaith-team.github.io/exam/medical1/index.html" class="nav-back">← Back</a>
+  <div class="nav-center">
+    <div class="nav-pill">📝 Question </div>
+  </div>
+  <button class="theme-toggle" id="themeBtn">🌙</button>
+</nav>
+
+<!-- ══ START SCREEN ══ -->
+<div class="screen active" id="startScreen">
+  <div class="start-icon">📝</div>
+  <h1 class="start-title">أسئلة  <span id="quizTitleDisplay"></span></h1>
+  <p class="start-sub" id="startDesc">Test your knowledge — read each question and choose the correct answer</p>
+  <div class="start-meta">
+    <div class="meta-pill"><strong id="totalQDisplay">0</strong> Questions</div>
+    <div class="meta-pill">⏱ No time limit</div>
+    <div class="meta-pill">🎯 Multiple choice</div>
+  </div>
+  <button class="btn-start" onclick="startQuiz()">🚀 Start Quiz</button>
+</div>
+
+<!-- ══ QUIZ SCREEN ══ -->
+<div class="screen" id="quizScreen">
+  <div class="quiz-wrap">
+
+    <div class="quiz-progress-row">
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      </div>
+      <div class="progress-label" id="progressLabel">1 / 1</div>
+    </div>
+
+    <div class="q-card" id="qCard">
+      <div class="q-num" id="qNum">QUESTION 1</div>
+      <div class="q-text" id="qText"></div>
+      <div class="options-list" id="optsList"></div>
+      <div class="feedback-box" id="feedbackBox">
+        <span class="feedback-icon" id="feedbackIcon"></span>
+        <span id="feedbackText"></span>
+      </div>
+    </div>
+
+    <div class="quiz-nav">
+      <button class="btn-nav btn-skip" onclick="skipQuestion()">→ Skip</button>
+      <button class="btn-nav btn-next" id="btnNext" onclick="nextQuestion()" disabled>
+        Next →
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ RESULT SCREEN ══ -->
+<div class="screen" id="resultScreen">
+  <div class="result-emoji" id="resultEmoji">🎉</div>
+
+  <div class="result-circle" id="resultCircle">
+    <svg viewBox="0 0 140 140">
+      <circle class="circle-bg"   cx="70" cy="70" r="62"/>
+      <circle class="circle-fill" cx="70" cy="70" r="62" id="circleArc"
+              stroke-dasharray="389.6"
+              stroke-dashoffset="389.6"/>
+    </svg>
+    <div class="result-pct">
+      <span id="pctNum">0</span>%
+      <small>Score</small>
+    </div>
+  </div>
+
+  <h2 class="result-title" id="resultTitle">Well done!</h2>
+  <p class="result-sub" id="resultSub">You have completed the quiz</p>
+
+  <div class="result-stats">
+    <div class="rstat correct-s">
+      <div class="rv" id="rCorrect">0</div>
+      <div class="rl">✅ Correct</div>
+    </div>
+    <div class="rstat wrong-s">
+      <div class="rv" id="rWrong">0</div>
+      <div class="rl">❌ Wrong</div>
+    </div>
+    <div class="rstat skip-s">
+      <div class="rv" id="rSkip">0</div>
+      <div class="rl">⏭ Skipped</div>
+    </div>
+  </div>
+
+  <div class="result-actions">
+    <button class="btn-retry" onclick="retryQuiz()">🔄 Try Again</button>
+    <button class="btn-review" onclick="showReview()">📋 Review Answers</button>
+  </div>
+</div>
+
+<!-- ══ REVIEW SCREEN ══ -->
+<div class="screen" id="reviewScreen">
+  <div class="review-wrap">
+    <div class="review-header">
+      <h2>📋 Answer Review</h2>
+      <p>Correct answers in green — your wrong answers in red</p>
+    </div>
+    <div id="reviewList"></div>
+    <button class="btn-back-result" onclick="showResult()">← Back to Results</button>
+  </div>
+</div>
+
+<script>
+const QUIZ_TITLE = " 2 مراجعة شامله ";
+const QUIZ_DESC  = "أسئله شامله علي ثاني 6 محاضرات ";
+
+const QUESTIONS = [
+
+// ═══════════════════════════════════════════
+// ONCOLOGY  (Q1–40 MCQ)
+// ═══════════════════════════════════════════
+{t:"The word 'oncology' is derived from a Greek word meaning:",o:["Cell","Mass or bulk","Growth","Tumor type"],a:1,topic:"Oncology",type:"mcq",diff:"easy"},
+{t:"Metastasis is defined as:",o:["Abnormal cell division locally","Spread of cancer cells from the primary tumor to distant sites","Transformation of normal to malignant cells","Removal of a cancerous tumor"],a:1,topic:"Oncology",type:"mcq",diff:"easy"},
+{t:"Carcinogenesis refers to:",o:["Spread of cancer","Surgical removal of cancer","Process of transforming normal cells into malignant cells","A type of benign tumor"],a:2,topic:"Oncology",type:"mcq",diff:"easy"},
+{t:"Which type of tumor can invade nearby tissues and spread to other parts of the body?",o:["Benign","Malignant","Cystic","Fibrous"],a:1,topic:"Oncology",type:"mcq",diff:"easy"},
+{t:"Stage IV cancer indicates:",o:["Cancer localized to a small area","Cancer has grown but not spread","Cancer has possibly spread to lymph nodes","Cancer has spread to other organs or areas of the body"],a:3,topic:"Oncology",type:"mcq",diff:"easy"},
+{t:"In the TNM classification, 'N0' means:",o:["No evidence of primary tumor","No distant metastasis","No regional lymph node involvement","Nodes unable to be assessed"],a:2,topic:"Oncology",type:"mcq",diff:"medium"},
+{t:"Which of the following is NOT a classification of cancer by tissue type?",o:["Carcinoma","Sarcoma","Myeloma","Adenoma"],a:3,topic:"Oncology",type:"mcq",diff:"medium"},
+{t:"Smoking is directly linked to cancer of the lung, mouth, larynx, bladder, kidney, and:",o:["Skin","Prostate only","Cervix, esophagus, and pancreas","Brain"],a:2,topic:"Oncology",type:"mcq",diff:"medium"},
+{t:"Which of the following is a CONTROLLABLE risk factor for cancer?",o:["Age","Family history of cancer","Genetic conditions","Tobacco use"],a:3,topic:"Oncology",type:"mcq",diff:"easy"},
+{t:"UV radiation exposure is primarily linked to which cancer?",o:["Lung cancer","Colon cancer","Skin cancer","Prostate cancer"],a:2,topic:"Oncology",type:"mcq",diff:"easy"},
+{t:"The cancer warning sign 'A sore that does not heal' refers to:",o:["A warning sign of possible cancer","A normal skin change","A benign tumor sign","A radiation therapy side effect"],a:0,topic:"Oncology",type:"mcq",diff:"easy"},
+{t:"The American Cancer Society recommends routine monthly breast self-examination starting at age:",o:["15","20","25","30"],a:1,topic:"Oncology",type:"mcq",diff:"medium"},
+{t:"Incisional biopsy involves:",o:["Removal of entire tumor","Aspiration through a needle","Removal of a small portion of tumor for examination","Endoscopic visual examination only"],a:2,topic:"Oncology",type:"mcq",diff:"medium"},
+{t:"Excisional biopsy means:",o:["Removal of only a small portion of tumor","Removal of the entire tumor","Needle aspiration of tissue","X-ray examination"],a:1,topic:"Oncology",type:"mcq",diff:"medium"},
+{t:"Radiation therapy can be used prophylactically to prevent:",o:["Bone cancer","Leukemic infiltration to the brain or spinal cord","Metastasis to the liver","All types of cancer"],a:1,topic:"Oncology",type:"mcq",diff:"medium"},
+{t:"Which of the following is a SYSTEMIC effect of radiation therapy?",o:["Skin erythema","Bone necrosis","Radiation sickness causing nausea, vomiting, and depression","Testicular atrophy"],a:2,topic:"Oncology",type:"mcq",diff:"medium"},
+{t:"Chemotherapy works primarily by:",o:["Increasing cancer cell growth","Interfering with cancer cells' ability to grow or reproduce","Boosting the immune system only","Surgically removing the tumor"],a:1,topic:"Oncology",type:"mcq",diff:"easy"},
+{t:"Which of the following is a common side effect of chemotherapy?",o:["Increased platelet count","Hair growth","Bone marrow suppression","Weight gain"],a:2,topic:"Oncology",type:"mcq",diff:"easy"},
+{t:"Alopecia caused by chemotherapy:",o:["Is permanent","Regrows approximately 2–6 months after stopping treatment","Only affects body hair, not scalp","Is not a concern for patients"],a:1,topic:"Oncology",type:"mcq",diff:"easy"},
+{t:"Hyperthermia as a cancer treatment exposes body tissue to temperatures up to:",o:["100°F","113°F","120°F","98.6°F"],a:1,topic:"Oncology",type:"mcq",diff:"hard"},
+{t:"Cryosurgery uses which agent to destroy abnormal tissue?",o:["High-frequency sound","Liquid nitrogen or argon gas","Ionizing radiation","Cytotoxic drugs"],a:1,topic:"Oncology",type:"mcq",diff:"medium"},
+{t:"Hormonal therapy is particularly useful in treating:",o:["Skin cancer","Brain cancer","Prostate cancer and breast cancer","Bone cancer"],a:2,topic:"Oncology",type:"mcq",diff:"medium"},
+{t:"Gene therapy involves:",o:["Surgical removal of cancer genes","Chemical destruction of cancer cells","Introducing genetic material (DNA or RNA) into cells to fight disease","Radiation of the genome"],a:2,topic:"Oncology",type:"mcq",diff:"medium"},
+{t:"Stem cell transplants are used to restore blood-forming cells in patients who had theirs destroyed by:",o:["Surgery","Very high doses of chemotherapy or radiation therapy","Infection","Hormonal therapy"],a:1,topic:"Oncology",type:"mcq",diff:"medium"},
+{t:"Which occupational carcinogen is associated with uranium miners and asbestos factory workers?",o:["Salt","Sugar","Asbestos and radioactive materials","Vitamins"],a:2,topic:"Oncology",type:"mcq",diff:"medium"},
+{t:"Oral contraceptives have been linked to an increased risk of:",o:["Lung cancer","Breast cancer","Prostate cancer","Bone cancer"],a:1,topic:"Oncology",type:"mcq",diff:"medium"},
+{t:"Proto-oncogenes, when mutated, become:",o:["Tumor suppressor genes","DNA repair genes","Oncogenes","Carcinogens"],a:2,topic:"Oncology",type:"mcq",diff:"hard"},
+{t:"Stage I cancer is best described as:",o:["Spread to other organs","Grown but has not spread","Localized to a small area and has not spread to lymph nodes or other tissues","Spread to nearby lymph nodes"],a:2,topic:"Oncology",type:"mcq",diff:"easy"},
+{t:"ACS recommends screening mammography every 2 years starting at age:",o:["30","35","40","50"],a:2,topic:"Oncology",type:"mcq",diff:"medium"},
+{t:"Carcinoma in situ is also known as:",o:["Stage I","Stage II","Stage IV","Stage 0"],a:3,topic:"Oncology",type:"mcq",diff:"medium"},
+{t:"Internal radiation therapy may be delivered by:",o:["A large machine pointing energy waves at the tumor","Radioactive seeds or capsules implanted in the body","Laser therapy only","Oral medications only"],a:1,topic:"Oncology",type:"mcq",diff:"medium"},
+{t:"For impaired skin integrity due to radiation therapy, the nurse should:",o:["Apply perfumes to the area","Use deodorants on irradiated skin","Clean skin with lukewarm water","Shave the irradiated area"],a:2,topic:"Oncology",type:"mcq",diff:"easy"},
+{t:"The role of tumor suppressor genes is to:",o:["Stimulate cell growth","Control and inhibit normal cell growth (prevent excessive growth)","Promote metastasis","Code for oncogenes"],a:1,topic:"Oncology",type:"mcq",diff:"hard"},
+{t:"Which cancer screening test is recommended yearly after age 50?",o:["Mammography only","Pap test only","Stool occult blood test","ECG"],a:2,topic:"Oncology",type:"mcq",diff:"medium"},
+{t:"Primary prevention of cancer focuses on:",o:["Surgical removal of tumors","Chemotherapy","Community education about cancer risk and adopting lifestyle changes","Performing biopsies"],a:2,topic:"Oncology",type:"mcq",diff:"easy"},
+{t:"Secondary prevention of cancer involves:",o:["Reducing risks in healthy people","Screening and early detection for cancer","Surgical removal of tumors","Gene therapy"],a:1,topic:"Oncology",type:"mcq",diff:"easy"},
+{t:"Which vitamins act as protective agents against many cancers?",o:["Vitamin D and K","Vitamin B and E","Vitamin A and C","Vitamin K and B12"],a:2,topic:"Oncology",type:"mcq",diff:"medium"},
+{t:"Prostate Specific Antigen (PSA) test is recommended yearly starting at age:",o:["40","45","50","60"],a:2,topic:"Oncology",type:"mcq",diff:"medium"},
+{t:"The TNM classification system uses 'T' to represent:",o:["Type of cancer cells","Primary tumor size and extent","Treatment modality","Tissue involvement"],a:1,topic:"Oncology",type:"mcq",diff:"medium"},
+{t:"A cancer of plasma cells is classified as:",o:["Lymphoma","Leukemia","Myeloma","Sarcoma"],a:2,topic:"Oncology",type:"mcq",diff:"hard"},
+ 
+// ═══════════════════════════════════════════
+// PEPTIC ULCER  (Q41–65 MCQ)
+// ═══════════════════════════════════════════
+{t:"A peptic ulcer is an excavation forming in the mucosal wall of the:",o:["Lung","Stomach, pylorus, duodenum, or esophagus","Skin and subcutaneous tissue","Liver"],a:1,topic:"Peptic Ulcer",type:"mcq",diff:"easy"},
+{t:"The greatest frequency of peptic ulcer disease is in people aged:",o:["15–25 years","25–50 years","50–65 years","Over 65 years"],a:1,topic:"Peptic Ulcer",type:"mcq",diff:"easy"},
+{t:"The bacterium most associated with peptic ulcer disease is:",o:["Staphylococcus aureus","Streptococcus pyogenes","Helicobacter pylori","Escherichia coli"],a:2,topic:"Peptic Ulcer",type:"mcq",diff:"easy"},
+{t:"NSAIDs predispose to peptic ulcer by:",o:["Increasing acid secretion directly","Inhibiting the secretion of protective mucus","Causing H. pylori infection","Increasing gastric motility"],a:1,topic:"Peptic Ulcer",type:"mcq",diff:"medium"},
+{t:"Esophageal ulcers are caused by:",o:["H. pylori infection","Backward flow of hydrochloric acid from the stomach into the esophagus","NSAIDs use","Alcohol abuse alone"],a:1,topic:"Peptic Ulcer",type:"mcq",diff:"medium"},
+{t:"The characteristic pain of peptic ulcer is:",o:["Sharp, radiating to both legs","Dull, gnawing pain and burning sensation in the mid-epigastrium or back","Colicky pain around the navel","Chest pain with radiation to the jaw"],a:1,topic:"Peptic Ulcer",type:"mcq",diff:"easy"},
+{t:"Peptic ulcer pain is typically relieved by:",o:["Vigorous exercise","Eating food or taking alkali","Lying in the prone position","Drinking alcohol"],a:1,topic:"Peptic Ulcer",type:"mcq",diff:"easy"},
+{t:"Pyrosis refers to:",o:["Vomiting blood","Severe diarrhea","Heartburn — a burning sensation in the esophagus and stomach that moves up to the mouth","Constipation"],a:2,topic:"Peptic Ulcer",type:"mcq",diff:"medium"},
+{t:"The preferred diagnostic method for peptic ulcer disease is:",o:["Plain X-ray","CT scan","Endoscopy","MRI"],a:2,topic:"Peptic Ulcer",type:"mcq",diff:"medium"},
+{t:"Proton pump inhibitors used in peptic ulcer treatment include:",o:["Ranitidine","Omeprazole (pantoprazole)","Sucralfate","Antacids"],a:1,topic:"Peptic Ulcer",type:"mcq",diff:"medium"},
+{t:"The primary goal of peptic ulcer treatment is to:",o:["Remove the stomach surgically","Eradicate H. pylori and manage gastric acidity","Stop all food intake for 1 week","Perform immediate surgery in all cases"],a:1,topic:"Peptic Ulcer",type:"mcq",diff:"easy"},
+{t:"Sucralfate is classified as a:",o:["Proton pump inhibitor","Antibiotic","Cytoprotective agent","H2 receptor antagonist"],a:2,topic:"Peptic Ulcer",type:"mcq",diff:"medium"},
+{t:"Patients with duodenal ulcers characteristically secrete:",o:["Less acid than normal","Normal levels of acid","More acid than normal","No acid at all"],a:2,topic:"Peptic Ulcer",type:"mcq",diff:"medium"},
+{t:"Vagotomy is a surgical procedure that involves:",o:["Removal of the stomach","Cutting one or more branches of the vagus nerve to reduce gastric secretion","Removal of the duodenum","Bypassing the esophagus"],a:1,topic:"Peptic Ulcer",type:"mcq",diff:"hard"},
+{t:"Which beverage should peptic ulcer patients avoid due to acid stimulation?",o:["Still water","Green tea (herbal)","Decaffeinated coffee","Orange juice (pure)"],a:2,topic:"Peptic Ulcer",type:"mcq",diff:"medium"},
+{t:"When hemorrhage is a concern in peptic ulcer, the nurse should:",o:["Increase oral fluid intake immediately","Place patient in upright position","Monitor vital signs frequently and insert an IV line","Administer aspirin"],a:2,topic:"Peptic Ulcer",type:"mcq",diff:"medium"},
+{t:"Which is a potential complication of peptic ulcer disease?",o:["Cirrhosis","Perforation","Hypertension","Pneumonia"],a:1,topic:"Peptic Ulcer",type:"mcq",diff:"easy"},
+{t:"The nurse assessing vomited emesis in peptic ulcer determines whether it is bright red or coffee-ground in appearance to:",o:["Assess nutritional status","Identify the source of the blood","Determine the degree of pain","Measure acid level"],a:1,topic:"Peptic Ulcer",type:"mcq",diff:"medium"},
+{t:"Cimetidine (Tagamet) belongs to which drug class?",o:["Proton pump inhibitor","H2 receptor antagonist","Antibiotic","Antacid"],a:1,topic:"Peptic Ulcer",type:"mcq",diff:"medium"},
+{t:"A key lifestyle modification for peptic ulcer includes:",o:["Increasing alcohol intake moderately","Eating large meals twice daily","Smoking cessation","Avoiding all vegetables"],a:2,topic:"Peptic Ulcer",type:"mcq",diff:"easy"},
+{t:"Signs of hemorrhage in peptic ulcer include:",o:["Bradycardia and hypertension","Tachycardia and hypotension","Normal vital signs throughout","Bradypnea only"],a:1,topic:"Peptic Ulcer",type:"mcq",diff:"easy"},
+{t:"Pyloric obstruction is also known as:",o:["Peritonitis","Gastric outlet obstruction","Perforation","Hemorrhage"],a:1,topic:"Peptic Ulcer",type:"mcq",diff:"medium"},
+{t:"Signs of peptic ulcer perforation include:",o:["Gradual, mild abdominal discomfort","Sudden severe abdominal pain with extremely tender and rigid abdomen","Constipation as the only symptom","Jaundice"],a:1,topic:"Peptic Ulcer",type:"mcq",diff:"medium"},
+{t:"Peptic ulcer disease has a higher incidence in people with blood type:",o:["Type A","Type B","Type AB","Type O"],a:3,topic:"Peptic Ulcer",type:"mcq",diff:"hard"},
+{t:"Milk and cream are discouraged in peptic ulcer patients because:",o:["They reduce gastric secretion","They are potent acid stimulators","They cause nausea","They cause constipation"],a:1,topic:"Peptic Ulcer",type:"mcq",diff:"hard"},
+ 
+// ═══════════════════════════════════════════
+// LIVER CIRRHOSIS  (Q66–90 MCQ)
+// ═══════════════════════════════════════════
+{t:"Cirrhosis is characterized by:",o:["Acute liver inflammation only","Replacement of normal liver tissue with diffuse fibrosis","Liver enlargement without structural changes","Bile duct blockage only"],a:1,topic:"Liver Cirrhosis",type:"mcq",diff:"easy"},
+{t:"The most common type of cirrhosis is:",o:["Biliary cirrhosis","Postnecrotic cirrhosis","Alcoholic cirrhosis","Infectious cirrhosis"],a:2,topic:"Liver Cirrhosis",type:"mcq",diff:"easy"},
+{t:"Biliary cirrhosis results from:",o:["Chronic alcohol abuse","Previous acute viral hepatitis","Chronic biliary obstruction and infection (cholangitis)","Genetic factors alone"],a:2,topic:"Liver Cirrhosis",type:"mcq",diff:"medium"},
+{t:"Postnecrotic cirrhosis is a late result of:",o:["Alcoholism","A previous bout of acute viral hepatitis","Biliary obstruction","Drug toxicity"],a:1,topic:"Liver Cirrhosis",type:"mcq",diff:"medium"},
+{t:"Ascites and jaundice are hallmark signs of:",o:["Compensated cirrhosis","Decompensated cirrhosis","Normal liver function","Biliary cirrhosis only"],a:1,topic:"Liver Cirrhosis",type:"mcq",diff:"easy"},
+{t:"Palmar erythema (reddened palms) is a sign of:",o:["Compensated cirrhosis","Decompensated cirrhosis","Peptic ulcer disease","Hypertension"],a:0,topic:"Liver Cirrhosis",type:"mcq",diff:"medium"},
+{t:"In liver cirrhosis, the serum albumin level:",o:["Increases significantly","Remains completely normal","Tends to decrease","Is not affected at all"],a:2,topic:"Liver Cirrhosis",type:"mcq",diff:"medium"},
+{t:"The prothrombin time in liver cirrhosis is:",o:["Shortened","Normal","Prolonged","Highly variable"],a:2,topic:"Liver Cirrhosis",type:"mcq",diff:"medium"},
+{t:"The definitive diagnosis of cirrhosis is confirmed by:",o:["Abdominal ultrasound","Liver biopsy","Blood count","CT scan alone"],a:1,topic:"Liver Cirrhosis",type:"mcq",diff:"medium"},
+{t:"The recommended daily caloric intake for cirrhosis patients is:",o:["1,000–1,500 calories","1,500–2,000 calories","2,500–3,000 calories","3,500–4,000 calories"],a:2,topic:"Liver Cirrhosis",type:"mcq",diff:"medium"},
+{t:"Sodium restriction for cirrhosis patients is:",o:["200–1,000 mg per day","2,000–3,000 mg per day","500–1,500 mg per day","No restriction needed"],a:0,topic:"Liver Cirrhosis",type:"mcq",diff:"hard"},
+{t:"Vitamin K injections are ordered in cirrhosis patients to:",o:["Improve energy levels","Improve blood-clotting factors","Reduce ascites","Lower bilirubin levels"],a:1,topic:"Liver Cirrhosis",type:"mcq",diff:"medium"},
+{t:"Asterixis (liver flap) is tested by asking the patient to:",o:["Auscultate for bowel sounds","Stretch the arm and hyperextend the wrist with fingers separated","Palpate their own liver","Measure abdominal girth"],a:1,topic:"Liver Cirrhosis",type:"mcq",diff:"hard"},
+{t:"The most common age range for cirrhosis patients is:",o:["20–30 years","30–40 years","40–60 years","Over 70 years"],a:2,topic:"Liver Cirrhosis",type:"mcq",diff:"medium"},
+{t:"Gynecomastia (enlarged breasts) in liver cirrhosis occurs in:",o:["Females only","Males","Both sexes equally","Children only"],a:1,topic:"Liver Cirrhosis",type:"mcq",diff:"medium"},
+{t:"Spider angiomas are associated with:",o:["Renal failure","Lung disease","Liver cirrhosis","Cardiac disease"],a:2,topic:"Liver Cirrhosis",type:"mcq",diff:"medium"},
+{t:"A key nursing intervention for cirrhosis patient with impaired skin integrity is:",o:["Using alcohol-based lotions","Keeping fingernails long","Massaging every 2 hours with emollients; turning every 2 hours","Avoiding any position changes"],a:2,topic:"Liver Cirrhosis",type:"mcq",diff:"medium"},
+{t:"Which enzyme is a primary indicator of liver cell damage?",o:["Amylase","Lipase","AST (aspartate aminotransferase)","Creatinine"],a:2,topic:"Liver Cirrhosis",type:"mcq",diff:"medium"},
+{t:"For most cirrhosis patients, daily fluid intake should be limited to:",o:["2,000–2,500 mL","500–1,000 mL","1,500–2,000 mL","No limit"],a:1,topic:"Liver Cirrhosis",type:"mcq",diff:"hard"},
+{t:"Ascites is assessed clinically by:",o:["Measuring blood pressure","Noting shifting dullness in the abdomen","Performing urinalysis","Ordering an ECG"],a:1,topic:"Liver Cirrhosis",type:"mcq",diff:"medium"},
+{t:"The nurse should pad side rails for the cirrhosis patient primarily to prevent:",o:["Pressure sores","Injury due to altered clotting mechanisms and altered consciousness","Infections","Falls during exercise therapy"],a:1,topic:"Liver Cirrhosis",type:"mcq",diff:"medium"},
+{t:"To address constipation in cirrhosis, the nurse should:",o:["Recommend high-fat, low-fiber diet","Encourage increased fluid intake and exercise","Recommend low-protein diet","Restrict carbohydrates"],a:1,topic:"Liver Cirrhosis",type:"mcq",diff:"easy"},
+{t:"Esophageal varices in cirrhosis are related to:",o:["Gastric ulcer alone","Portal hypertension","Cardiac failure","Renal failure"],a:1,topic:"Liver Cirrhosis",type:"mcq",diff:"medium"},
+{t:"Purpura in decompensated cirrhosis is due to:",o:["Increased platelet count","Decreased platelet count","Liver infection","Hypernatremia"],a:1,topic:"Liver Cirrhosis",type:"mcq",diff:"medium"},
+{t:"Serum globulin level in liver cirrhosis:",o:["Decreases","Stays completely normal","Rises","Becomes undetectable"],a:2,topic:"Liver Cirrhosis",type:"mcq",diff:"hard"},
+ 
+// ═══════════════════════════════════════════
+// HYPERTENSION  (Q91–115 MCQ)
+// ═══════════════════════════════════════════
+{t:"Hypertension is defined as a persistent elevation of blood pressure above:",o:["120/80 mmHg","130/85 mmHg","140/90 mmHg","160/100 mmHg"],a:2,topic:"Hypertension",type:"mcq",diff:"easy"},
+{t:"Normal blood pressure according to JNC 7 is:",o:["Systolic <120 AND diastolic <80","Systolic 120–139 OR diastolic 80–89","Systolic 140–159 OR diastolic 90–99","Systolic >160 OR diastolic >100"],a:0,topic:"Hypertension",type:"mcq",diff:"easy"},
+{t:"Prehypertension is classified as systolic:",o:["<120 mmHg","120–139 mmHg","140–159 mmHg",">160 mmHg"],a:1,topic:"Hypertension",type:"mcq",diff:"medium"},
+{t:"Primary (essential) hypertension accounts for:",o:["About 50% of all cases","About 70% of all cases","More than 90% of all cases","Exactly 100% of all cases"],a:2,topic:"Hypertension",type:"mcq",diff:"medium"},
+{t:"Hypertension is called the 'silent killer' because:",o:["It kills very quickly","It usually occurs without symptoms until severe","It is completely untreatable","It always causes sudden cardiac death"],a:1,topic:"Hypertension",type:"mcq",diff:"easy"},
+{t:"Which of the following is NOT a major risk factor for hypertension?",o:["Smoking","Obesity","Blood type","Diabetes mellitus"],a:2,topic:"Hypertension",type:"mcq",diff:"medium"},
+{t:"Isolated Systolic Hypertension (ISH) is defined as:",o:["Only diastolic BP is elevated","Systolic ≥140 mmHg but diastolic remains below 90 mmHg","Both are equally and markedly elevated","Diastolic BP above 120 mmHg"],a:1,topic:"Hypertension",type:"mcq",diff:"medium"},
+{t:"Malignant hypertension is an emergency characterized by diastolic BP above:",o:["100 mmHg","110 mmHg","120 mmHg","130 mmHg"],a:2,topic:"Hypertension",type:"mcq",diff:"hard"},
+{t:"Which of the following is a target organ damaged by uncontrolled hypertension?",o:["Spleen","Thyroid gland","Kidney","Pancreas"],a:2,topic:"Hypertension",type:"mcq",diff:"easy"},
+{t:"The DASH diet recommended for hypertension is high in:",o:["Red meat and full-fat dairy","Saturated fats","Fruits, vegetables, and low-fat dairy products","Salt and refined sugar"],a:2,topic:"Hypertension",type:"mcq",diff:"easy"},
+{t:"First-line pharmacological therapy for hypertension includes:",o:["Opioids and sedatives","Diuretics and beta-blockers","Antibiotics","Anticoagulants"],a:1,topic:"Hypertension",type:"mcq",diff:"medium"},
+{t:"Thiazide diuretics are contraindicated in patients with:",o:["Mild hypertension","Gout","Compensated heart failure","Mild lower extremity edema"],a:1,topic:"Hypertension",type:"mcq",diff:"medium"},
+{t:"Propranolol (Inderal) belongs to which antihypertensive drug class?",o:["Thiazide diuretics","ACE inhibitors","Beta-blockers","Calcium channel blockers"],a:2,topic:"Hypertension",type:"mcq",diff:"easy"},
+{t:"Beta-blockers are contraindicated in patients with:",o:["Stable hypertension","Stable angina pectoris","Bronchial asthma","Tachycardia"],a:2,topic:"Hypertension",type:"mcq",diff:"medium"},
+{t:"When administering thiazide diuretics, the nurse should primarily monitor for:",o:["Hyperkalemia","Electrolyte imbalance (sodium, potassium, magnesium)","Bradycardia","Hyperglycemia only"],a:1,topic:"Hypertension",type:"mcq",diff:"medium"},
+{t:"Loop diuretics (e.g., furosemide/Lasix) are used when:",o:["Thiazides are already successful","Thiazides fail or rapid diuresis is needed","Beta-blockers fail","Surgery is the next planned step"],a:1,topic:"Hypertension",type:"mcq",diff:"medium"},
+{t:"For patients with diabetes mellitus or chronic kidney disease, the BP target is:",o:["<140/90 mmHg","<130/80 mmHg","<120/70 mmHg","<150/90 mmHg"],a:1,topic:"Hypertension",type:"mcq",diff:"hard"},
+{t:"Morning occipital headache is a symptom of:",o:["Mild anemia","Symptomatic hypotension","Advanced hypertension","Peptic ulcer disease"],a:2,topic:"Hypertension",type:"mcq",diff:"medium"},
+{t:"Hypertensive encephalopathy manifests as:",o:["Bradycardia and hypotension","Restlessness, altered consciousness, blurred vision, nausea","Jaundice","Severe constipation"],a:1,topic:"Hypertension",type:"mcq",diff:"hard"},
+{t:"Rebound hypertension can occur if antihypertensive medications are:",o:["Taken with food","Suddenly stopped","Taken twice a day","Changed to a generic brand"],a:1,topic:"Hypertension",type:"mcq",diff:"medium"},
+{t:"Left ventricular hypertrophy due to hypertension is best detected by:",o:["Chest X-ray","Urinalysis","ECG","Routine blood tests"],a:2,topic:"Hypertension",type:"mcq",diff:"medium"},
+{t:"High blood pressure is more likely to develop in women after:",o:["Menstruation","Menopause","Pregnancy","Lactation"],a:1,topic:"Hypertension",type:"mcq",diff:"medium"},
+{t:"Sodium is an important cause of hypertension because a high-salt diet may:",o:["Increase heart rate directly","Increase blood calcium levels","Indirectly increase blood pressure","Decrease peripheral vasodilation"],a:2,topic:"Hypertension",type:"mcq",diff:"medium"},
+{t:"Regular physical activity helps control hypertension primarily by:",o:["Increasing sodium retention","Increasing blood volume","Helping control weight and reducing cardiovascular risk","Increasing peripheral resistance"],a:2,topic:"Hypertension",type:"mcq",diff:"easy"},
+{t:"Before administering a beta-blocker, the nurse should:",o:["Check serum potassium","Check blood glucose","Check the patient's heart rate","Check urine output"],a:2,topic:"Hypertension",type:"mcq",diff:"medium"},
+ 
+// ═══════════════════════════════════════════
+// RHEUMATIC HEART DISEASE  (Q116–140 MCQ)
+// ═══════════════════════════════════════════
+{t:"Rheumatic fever is caused by:",o:["Staphylococcal infection","Group A beta-hemolytic Streptococcus","Viral pneumonia","Fungal infection"],a:1,topic:"Rheumatic Heart Disease",type:"mcq",diff:"easy"},
+{t:"Symptoms of rheumatic fever typically begin after a bout of strep throat within:",o:["24–48 hours","1–6 weeks","2–3 months","1 full year"],a:1,topic:"Rheumatic Heart Disease",type:"mcq",diff:"medium"},
+{t:"Chorea in rheumatic fever involves:",o:["Small painless skin nodules","Joint pain and swelling","Jerky, uncontrollable body movements in hands, feet, and face","A flat, painless skin rash"],a:2,topic:"Rheumatic Heart Disease",type:"mcq",diff:"medium"},
+{t:"Erythema marginatum is described as:",o:["A raised, painful rash with blisters","A flat or slightly raised, painless rash with a ragged edge","Red, warm, swollen joints","Subcutaneous firm nodules"],a:1,topic:"Rheumatic Heart Disease",type:"mcq",diff:"medium"},
+{t:"Which of the following is a MAJOR diagnostic criterion for rheumatic fever?",o:["Prolonged PR interval on ECG","Fever ≥38.5°C","Carditis","Elevated ESR"],a:2,topic:"Rheumatic Heart Disease",type:"mcq",diff:"medium"},
+{t:"The most useful test for diagnosing heart valve problems in RHD is:",o:["ECG","Chest X-ray","Echocardiogram","Blood culture"],a:2,topic:"Rheumatic Heart Disease",type:"mcq",diff:"medium"},
+{t:"The ESR threshold for a minor criterion of rheumatic fever is:",o:["≥20 mm/h","≥40 mm/h","≥60 mm/h","≥80 mm/h"],a:2,topic:"Rheumatic Heart Disease",type:"mcq",diff:"hard"},
+{t:"The standard antibiotic prophylaxis dose before procedures is:",o:["1 g amoxicillin taken 2 hours before","2 g amoxicillin orally 1 hour before the procedure","500 mg penicillin taken daily","250 mg ampicillin twice daily"],a:1,topic:"Rheumatic Heart Disease",type:"mcq",diff:"hard"},
+{t:"For patients allergic to penicillin, the recommended alternative for prophylaxis is:",o:["Erythromycin","Vancomycin","Clindamycin or cephalexin","Tetracycline"],a:2,topic:"Rheumatic Heart Disease",type:"mcq",diff:"hard"},
+{t:"Valve regurgitation in RHD occurs when:",o:["Valve flaps are thickened and stiff","Valve flaps do not close properly allowing backflow of blood","Heart muscle is severely enlarged","Pericardium is inflamed"],a:1,topic:"Rheumatic Heart Disease",type:"mcq",diff:"medium"},
+{t:"Valve stenosis in RHD occurs when:",o:["Valve flaps do not close properly","Valve flaps become thick or stiff decreasing blood flow","Heart muscle weakens","Arteries narrow externally"],a:1,topic:"Rheumatic Heart Disease",type:"mcq",diff:"medium"},
+{t:"Rheumatic heart disease is:",o:["Reversible with appropriate antibiotic treatment","Permanent and requires long-term care","Cured completely by valve surgery","Self-limiting without treatment"],a:1,topic:"Rheumatic Heart Disease",type:"mcq",diff:"medium"},
+{t:"Primary prevention of rheumatic fever involves:",o:["Long-term antibiotic prophylaxis","Effective diagnosis and prompt treatment of strep pharyngitis","Immediate cardiac valve surgery","Immunization against strep bacteria"],a:1,topic:"Rheumatic Heart Disease",type:"mcq",diff:"medium"},
+{t:"Secondary prevention of RHD involves:",o:["Improving sanitation and living conditions","Continuous antibiotic prophylaxis to prevent recurrence of RF","Cardiac surgery as first step","Vitamin supplementation"],a:1,topic:"Rheumatic Heart Disease",type:"mcq",diff:"medium"},
+{t:"Subcutaneous nodules in rheumatic fever are:",o:["Painful and large","Small, painless bumps beneath the skin","Fluid-filled blisters","Red, warm, and tender swellings"],a:1,topic:"Rheumatic Heart Disease",type:"mcq",diff:"medium"},
+{t:"Atrial fibrillation in RHD is mainly related to:",o:["Kidney damage","Damage to heart valves and other cardiac areas","Liver failure","Lung disease"],a:1,topic:"Rheumatic Heart Disease",type:"mcq",diff:"medium"},
+{t:"A heart murmur in RHD is caused by:",o:["Air in the pleural space","Blood leaking around the damaged valve","Pulmonary fluid accumulation","Thickened pericardium"],a:1,topic:"Rheumatic Heart Disease",type:"mcq",diff:"easy"},
+{t:"Pulmonary hypertension in RHD can increase the risk of:",o:["Kidney stones","Bone fractures","Stroke or blood clots","Liver failure"],a:2,topic:"Rheumatic Heart Disease",type:"mcq",diff:"hard"},
+{t:"Which of the following is a MINOR diagnostic criterion for rheumatic fever?",o:["Carditis","Chorea","Prolonged PR interval on ECG","Subcutaneous nodules"],a:2,topic:"Rheumatic Heart Disease",type:"mcq",diff:"hard"},
+{t:"Which drug is given to reduce inflammation in rheumatic fever?",o:["Digoxin","Aspirin","Furosemide","Metformin"],a:1,topic:"Rheumatic Heart Disease",type:"mcq",diff:"medium"},
+{t:"Heart failure is a long-term complication of:",o:["Peptic ulcer disease","Rheumatic heart disease","Iron deficiency anemia only","Type 2 diabetes only"],a:1,topic:"Rheumatic Heart Disease",type:"mcq",diff:"easy"},
+{t:"The modified diagnostic criteria for recurrent RF require:",o:["1 major criterion only","2 major, OR 1 major + 2 minor, OR 3 minor criteria","3 major criteria","2 major + 3 minor criteria"],a:1,topic:"Rheumatic Heart Disease",type:"mcq",diff:"hard"},
+{t:"Nursing management in RHD includes emphasizing:",o:["Complete bed rest only","Completing full antibiotic course and practicing hand hygiene","Low-protein diet","Blood transfusions"],a:1,topic:"Rheumatic Heart Disease",type:"mcq",diff:"easy"},
+{t:"Which nursing diagnosis applies specifically to RHD patients?",o:["Excess fluid volume only","Impaired cardiac function related to valvular damage and decreased cardiac output","Ineffective airway clearance","Disturbed body image"],a:1,topic:"Rheumatic Heart Disease",type:"mcq",diff:"medium"},
+{t:"Cardiac auscultation in RHD may reveal:",o:["Normal heart sounds only","Murmurs and rubs","Hyperactive bowel sounds","Crackles in lung bases"],a:1,topic:"Rheumatic Heart Disease",type:"mcq",diff:"easy"},
+ 
+// ═══════════════════════════════════════════
+// ANEMIA  (Q141–165 MCQ)
+// ═══════════════════════════════════════════
+{t:"Anemia is defined as:",o:["Higher than normal hemoglobin concentration","Lower than normal hemoglobin concentration","Excess red blood cells","Decreased total blood volume"],a:1,topic:"Anemia",type:"mcq",diff:"easy"},
+{t:"Iron deficiency anemia is the most common cause in premenopausal women due to:",o:["Poor dietary intake alone","Excessive menstrual bleeding (menorrhagia) and pregnancy","Alcohol use","Genetic predisposition"],a:1,topic:"Anemia",type:"mcq",diff:"medium"},
+{t:"Mild anemia is defined as hemoglobin in the range of:",o:["6–10 g/dL","9.5–13 g/dL","<6 g/dL",">13 g/dL"],a:1,topic:"Anemia",type:"mcq",diff:"medium"},
+{t:"Moderate anemia (Hb 6–10 g/dL) may present with:",o:["Tachypnea at rest only","Brittle nails, sore tongue, pallor, chronic fatigue, and dizziness","Severe dyspnea at rest","Coma"],a:1,topic:"Anemia",type:"mcq",diff:"medium"},
+{t:"The definitive method for diagnosing iron deficiency anemia is:",o:["Complete blood count","Serum ferritin measurement","Bone marrow aspiration stained for iron","Urine analysis"],a:2,topic:"Anemia",type:"mcq",diff:"hard"},
+{t:"Angular cheilosis refers to:",o:["Nail deformity","Tongue swelling","Scaling and fissures at the corners of the mouth","Reddened palms"],a:2,topic:"Anemia",type:"mcq",diff:"medium"},
+{t:"Oral iron preparations used to treat iron deficiency anemia include:",o:["Ferrous sulfate, ferrous gluconate, ferrous fumarate","Calcium gluconate","Potassium chloride","Magnesium hydroxide"],a:0,topic:"Anemia",type:"mcq",diff:"medium"},
+{t:"Before parenteral iron administration, a test dose is given to avoid:",o:["Hyperkalemia","Anaphylaxis","Bradycardia","Hypertension"],a:1,topic:"Anemia",type:"mcq",diff:"medium"},
+{t:"For bleeding precautions, they should be instituted when platelet count drops to:",o:["100,000/mm³","50,000/mm³","20,000/mm³","200,000/mm³"],a:1,topic:"Anemia",type:"mcq",diff:"hard"},
+{t:"Plasma constitutes approximately what percentage of total blood volume?",o:["35%","45%","55%","65%"],a:2,topic:"Anemia",type:"mcq",diff:"medium"},
+{t:"Which nursing diagnosis is most appropriate for a patient with severe anemia?",o:["Excess fluid volume","Fatigue related to decreased hemoglobin and diminished oxygen-carrying capacity","Impaired skin integrity","Disturbed body image"],a:1,topic:"Anemia",type:"mcq",diff:"easy"},
+{t:"For aplastic anemia in patients under 40 with an HLA-identical related donor, the standard treatment is:",o:["Chemotherapy","Immunosuppressive therapy","Allogeneic hematopoietic stem cell transplantation","Blood transfusion only"],a:2,topic:"Anemia",type:"mcq",diff:"hard"},
+{t:"Normal hemoglobin in adult males is:",o:["8–10 g/dL","13.2–16.6 g/dL","11–13 g/dL","16–20 g/dL"],a:1,topic:"Anemia",type:"mcq",diff:"easy"},
+{t:"Normal platelet count in adult males is:",o:["50,000–100,000/mcL","135,000–317,000/mcL","500,000–700,000/mcL","50,000–200,000/mcL"],a:1,topic:"Anemia",type:"mcq",diff:"medium"},
+{t:"In adults, bone marrow aspiration is usually performed at the:",o:["Femur","Tibia","Iliac crest","Radius"],a:2,topic:"Anemia",type:"mcq",diff:"medium"},
+{t:"Vitamin B12 injections for deficiency should be given:",o:["Daily for one month only","Monthly for the remainder of the patient's life","Weekly for one year","Once as a single dose"],a:1,topic:"Anemia",type:"mcq",diff:"medium"},
+{t:"Intramuscular iron injections are administered using the Z-track method to:",o:["Reduce pain","Prevent leakage of solution into subcutaneous tissue","Ensure faster absorption","Reduce infection risk"],a:1,topic:"Anemia",type:"mcq",diff:"medium"},
+{t:"Thalassemia is:",o:["An acquired platelet disorder","An inherited disorder of hemoglobin synthesis","An autoimmune anemia","A drug-induced anemia"],a:1,topic:"Anemia",type:"mcq",diff:"medium"},
+{t:"Hematocrit refers to:",o:["Hemoglobin concentration","White blood cell count","The ratio of red cell volume to whole blood volume","Platelet count"],a:2,topic:"Anemia",type:"mcq",diff:"easy"},
+{t:"For an anemia patient, oxygen saturation should be maintained at:",o:["80% or greater","85% or greater","90% or greater","95% or greater"],a:2,topic:"Anemia",type:"mcq",diff:"medium"},
+{t:"One unit of transfused packed RBCs raises hemoglobin by approximately:",o:["0.5 g/dL","1 g/dL","2 g/dL","3 g/dL"],a:1,topic:"Anemia",type:"mcq",diff:"medium"},
+{t:"Normal adult white blood cell count is:",o:["1,000–3,000 cells/mcL","3,400–9,600 cells/mcL","10,000–15,000 cells/mcL","500–1,000 cells/mcL"],a:1,topic:"Anemia",type:"mcq",diff:"easy"},
+{t:"Early symptoms of Graft-versus-Host Disease (GVHD) include:",o:["Hypertension and headache","Red maculopapular rash, dry eyes, abdominal pain, and jaundice","Bradycardia","Severe chest pain only"],a:1,topic:"Anemia",type:"mcq",diff:"hard"},
+{t:"Severe anemia can lead to the following general complication:",o:["Urinary retention","Paresthesia and delirium","Hyperglycemia","Constipation"],a:1,topic:"Anemia",type:"mcq",diff:"medium"},
+{t:"Iron supplements should be taken with meals to:",o:["Improve drug absorption","Prevent gastric upset","Increase iron binding capacity","Reduce bleeding risk"],a:1,topic:"Anemia",type:"mcq",diff:"medium"},
+ 
+// ═══════════════════════════════════════════
+// LEUKEMIA  (Q166–190 MCQ)
+// ═══════════════════════════════════════════
+{t:"Leukemia is defined as:",o:["A deficiency of platelets in the blood","Malignant proliferation of white blood cell precursors in bone marrow or lymph tissue","A benign tumor of lymph nodes","Viral infection of the bone marrow"],a:1,topic:"Leukemia",type:"mcq",diff:"easy"},
+{t:"Acute leukemia is characterized by:",o:["Slow, insidious progression","Rapid multiplication of immature WBCs (blasts)","Accumulation of mature blood cells","Completely normal blood cell count initially"],a:1,topic:"Leukemia",type:"mcq",diff:"easy"},
+{t:"Chronic Lymphocytic Leukemia (CLL) is most common in:",o:["Children","Infants","Adults (who may be asymptomatic for years)","Very elderly patients only"],a:2,topic:"Leukemia",type:"mcq",diff:"medium"},
+{t:"Acute Lymphocytic Leukemia (ALL) is most common in:",o:["Adults over 50","Children","Middle-aged adults","Infants only"],a:1,topic:"Leukemia",type:"mcq",diff:"medium"},
+{t:"Acute Myelogenous Leukemia (AML) occurs more commonly in:",o:["Children","Infants","Adolescents","Adults"],a:3,topic:"Leukemia",type:"mcq",diff:"medium"},
+{t:"A known risk factor for leukemia is:",o:["High vitamin C intake","Regular aerobic exercise","Previous chemotherapy or radiotherapy for cancer","A strict vegetarian diet"],a:2,topic:"Leukemia",type:"mcq",diff:"medium"},
+{t:"Down syndrome is associated with an increased risk of:",o:["Peptic ulcer","Hypertension","Leukemia","Liver cirrhosis"],a:2,topic:"Leukemia",type:"mcq",diff:"medium"},
+{t:"Benzene in gasoline is associated with which disease risk?",o:["Liver cirrhosis","Hypertension","Leukemia","Diabetes mellitus"],a:2,topic:"Leukemia",type:"mcq",diff:"medium"},
+{t:"A bone marrow transplant is also known as:",o:["Blood transfusion","Stem cell transplant","Plasmapheresis","Hemodialysis"],a:1,topic:"Leukemia",type:"mcq",diff:"easy"},
+{t:"To reduce infection risk in leukemia patients, the nurse should restrict:",o:["Cooked vegetables","High-protein foods","Raw fruits and vegetables","All oral fluids"],a:2,topic:"Leukemia",type:"mcq",diff:"medium"},
+{t:"Petechiae appear when the platelet count drops to approximately:",o:["50,000/mm³","100,000/mm³","20,000/mm³","500/mm³"],a:2,topic:"Leukemia",type:"mcq",diff:"hard"},
+{t:"To reduce infection risk in a leukemia patient's room, live plants and flowers should be:",o:["Allowed freely","Prohibited from the room","Limited to two arrangements per room","Disinfected daily and kept"],a:1,topic:"Leukemia",type:"mcq",diff:"medium"},
+{t:"Oral hygiene in leukemia patients should use:",o:["Alcohol-based mouthwash","A hard toothbrush","A soft toothbrush, sponge, or swab","Dental floss only"],a:2,topic:"Leukemia",type:"mcq",diff:"medium"},
+{t:"Tumor lysis syndrome occurs when:",o:["Leukocytes multiply rapidly in the blood","Destroyed cancer cells release toxic levels of potassium, phosphorus, and uric acid","Bone marrow completely stops functioning","The liver suddenly fails"],a:1,topic:"Leukemia",type:"mcq",diff:"hard"},
+{t:"Allopurinol (Zyloprim) is given to leukemia patients to:",o:["Increase platelet count","Improve renal excretion of toxic byproducts (uric acid) from cancer cell breakdown","Reduce infection risk","Stimulate RBC production"],a:1,topic:"Leukemia",type:"mcq",diff:"hard"},
+{t:"For bleeding precautions in leukemia, the patient should use:",o:["A safety razor","An electric shaver","No shaving at all in hospital","Sharp scissors"],a:1,topic:"Leukemia",type:"mcq",diff:"easy"},
+{t:"When the platelet count is less than 20,000/mm³, the leukemia patient is at high risk for:",o:["Severe infection","Spontaneous life-threatening bleeding","Organ rejection","Anaphylaxis"],a:1,topic:"Leukemia",type:"mcq",diff:"medium"},
+{t:"Myelogenous leukemia affects:",o:["Lymphocytes only","Myeloid cells — precursors of WBCs, RBCs, and platelets","Plasma cells","Natural killer (NK) cells"],a:1,topic:"Leukemia",type:"mcq",diff:"medium"},
+{t:"Fluid intake for leukemia patients should be encouraged up to:",o:["1–2 L/day","3–4 L/day","500 mL/day","5–6 L/day"],a:1,topic:"Leukemia",type:"mcq",diff:"medium"},
+{t:"Strict perianal hygiene in leukemia patients is important to prevent:",o:["Urinary tract infection","Perianal abscess contributing to septicemia","Pressure sores","Bleeding gums"],a:1,topic:"Leukemia",type:"mcq",diff:"medium"},
+{t:"Aspirin-containing antipyretics are avoided in leukemia because they:",o:["Cause fever","Increase blood pressure","Can cause gastric bleeding and further decrease platelet count","Cause alopecia"],a:2,topic:"Leukemia",type:"mcq",diff:"medium"},
+{t:"The nursing care plan for leukemia emphasizes:",o:["Strict bed rest only","Comfort, minimizing chemotherapy side effects, and managing complications","A high-fat diet","Avoiding all medications"],a:1,topic:"Leukemia",type:"mcq",diff:"easy"},
+{t:"Temperature monitoring in leukemia is critical because:",o:["Septicemia may occur without fever in immunocompromised patients","Fever never occurs in leukemia","Body temperature is always normal","All fever indicates a drug reaction"],a:0,topic:"Leukemia",type:"mcq",diff:"hard"},
+{t:"Lymphocytic leukemia involves:",o:["Myeloid precursor cells","Lymphocytes (immune cells formed in lymphatic tissue)","Thrombocytes (platelets)","Erythrocytes (red blood cells)"],a:1,topic:"Leukemia",type:"mcq",diff:"easy"},
+{t:"Maintaining external central vascular access in leukemia is used to:",o:["Give blood products only","Eliminate peripheral venipuncture as a source of bleeding and infection","Monitor blood pressure continuously","Deliver chemotherapy only"],a:1,topic:"Leukemia",type:"mcq",diff:"medium"},
+ 
+// ═══════════════════════════════════════════
+// THYROID DISORDERS  (Q191–210 MCQ)
+// ═══════════════════════════════════════════
+{t:"The thyroid gland produces which three hormones?",o:["Insulin, glucagon, and somatostatin","T3 (triiodothyronine), T4 (thyroxine), and calcitonin","Estrogen, progesterone, and testosterone","Cortisol, aldosterone, and epinephrine"],a:1,topic:"Thyroid Disorders",type:"mcq",diff:"easy"},
+{t:"Thyroid-stimulating hormone (TSH) is released from the:",o:["Thyroid gland itself","Adrenal gland","Pituitary gland","Hypothalamus"],a:2,topic:"Thyroid Disorders",type:"mcq",diff:"easy"},
+{t:"Exophthalmos refers to:",o:["Enlargement of the thyroid gland (goiter)","Thyroid gland inflammation","Abnormal protrusion of one or both eyeballs","Inflammation of the parathyroid"],a:2,topic:"Thyroid Disorders",type:"mcq",diff:"easy"},
+{t:"Hashimoto's thyroiditis (chronic lymphocytic thyroiditis) is the most common cause of:",o:["Hyperthyroidism","Hypothyroidism","Normal thyroid function","Thyroid cancer"],a:1,topic:"Thyroid Disorders",type:"mcq",diff:"medium"},
+{t:"Clinical manifestations of hypothyroidism include:",o:["Weight loss and fine tremors","Constipation, cold intolerance, fatigue, and weight gain","Excessive sweating and tachycardia","Exophthalmos and diarrhea"],a:1,topic:"Thyroid Disorders",type:"mcq",diff:"medium"},
+{t:"In myxedema coma (severe hypothyroidism), thyroid hormone should be administered:",o:["Orally in high doses","Intravenously until consciousness is restored, then oral therapy continues","Intramuscularly only","Topically"],a:1,topic:"Thyroid Disorders",type:"mcq",diff:"hard"},
+{t:"The primary management goal for hypothyroidism is:",o:["Surgical thyroid removal","Radioactive iodine destruction","Thyroid hormone replacement to restore normal metabolic state","Immunosuppression"],a:2,topic:"Thyroid Disorders",type:"mcq",diff:"easy"},
+{t:"Graves' disease is an autoimmune condition that leads to:",o:["Hypothyroidism","Normal thyroid function","Generalized over-activity of the entire thyroid gland (hyperthyroidism)","Thyroid cancer"],a:2,topic:"Thyroid Disorders",type:"mcq",diff:"easy"},
+{t:"In hyperthyroidism, which blood pressure finding is characteristic?",o:["Both systolic and diastolic are elevated equally","Diastolic elevation only","Systolic elevation (not diastolic)","Both are equally low"],a:2,topic:"Thyroid Disorders",type:"mcq",diff:"hard"},
+{t:"Treatment of hyperthyroidism includes which of the following?",o:["Thyroid hormone replacement","Propranolol for tachycardia, tremors, and sweating","Insulin therapy","Corticosteroids only"],a:1,topic:"Thyroid Disorders",type:"mcq",diff:"medium"},
+{t:"Calcitonin, secreted by the thyroid, functions to:",o:["Increase blood glucose","Reduce plasma calcium level by increasing its deposition in bone","Raise blood pressure","Increase heart rate"],a:1,topic:"Thyroid Disorders",type:"mcq",diff:"medium"},
+{t:"Subclinical hyperthyroidism is characterized by:",o:["High TSH and high T4","Low serum TSH but normal serum T4 and T3","Normal TSH with elevated T4","High TSH with normal T4"],a:1,topic:"Thyroid Disorders",type:"mcq",diff:"hard"},
+{t:"Which medication is known to cause hypothyroidism as a side effect?",o:["Aspirin","Lithium","Metformin","Atorvastatin"],a:1,topic:"Thyroid Disorders",type:"mcq",diff:"hard"},
+{t:"For a hypothyroid patient who feels cold, external heat sources (heating pads) should be:",o:["Encouraged to maintain comfort","Required for all patients","Avoided due to risk of peripheral vasodilatation and vascular collapse","Used continuously at low setting"],a:2,topic:"Thyroid Disorders",type:"mcq",diff:"medium"},
+{t:"In hyperthyroidism, the pulse rate ranges constantly between:",o:["60–80 beats/min","80–90 beats/min","90–160 beats/min",">160 beats/min exclusively"],a:2,topic:"Thyroid Disorders",type:"mcq",diff:"medium"},
+{t:"Foods and stimulants discouraged in hyperthyroidism include:",o:["Plain water and whole grain bread","Coffee, tea, cola, and alcohol","Fresh fruits and vegetables","Low-fat dairy products"],a:1,topic:"Thyroid Disorders",type:"mcq",diff:"easy"},
+{t:"A cool environment for hyperthyroid patients is important because they have:",o:["A tendency to feel too cold","An exaggerated metabolic rate causing excessive heat production","Recurrent infections requiring temperature control","Frequent fever episodes"],a:1,topic:"Thyroid Disorders",type:"mcq",diff:"medium"},
+{t:"A thyroid scan uses:",o:["High-frequency sound waves","Radioactive iodine","X-rays alone","Magnetic resonance imaging"],a:1,topic:"Thyroid Disorders",type:"mcq",diff:"medium"},
+{t:"Iodine deficiency commonly results in:",o:["Hyperthyroidism","Goiter and hypothyroidism","Thyroid cancer","Hyperparathyroidism"],a:1,topic:"Thyroid Disorders",type:"mcq",diff:"easy"},
+{t:"Thyroidectomy means:",o:["Removal of the parathyroid gland","Surgical removal of all or part of the thyroid gland","Removal of the pituitary gland","Biopsy of the neck lymph nodes"],a:1,topic:"Thyroid Disorders",type:"mcq",diff:"easy"},
+ 
+// ═══════════════════════════════════════════
+// DIABETES MELLITUS  (Q211–230 MCQ)
+// ═══════════════════════════════════════════
+{t:"Diabetes mellitus is a condition in which:",o:["The pancreas overproduces insulin","The pancreas no longer produces enough insulin OR cells stop responding to insulin","Blood glucose is chronically too low","Blood pressure is chronically elevated"],a:1,topic:"Diabetes Mellitus",type:"mcq",diff:"easy"},
+{t:"Type 1 DM is characterized by:",o:["Insulin resistance as the primary mechanism","Autoimmune beta cell destruction and insulin deficiency","Slow, insidious onset","Strong family history and obesity"],a:1,topic:"Diabetes Mellitus",type:"mcq",diff:"easy"},
+{t:"A fasting plasma glucose of ≥ __ mg/dL after fasting 10–12 hours confirms diabetes:",o:["100 mg/dL","110 mg/dL","126 mg/dL","150 mg/dL"],a:2,topic:"Diabetes Mellitus",type:"mcq",diff:"medium"},
+{t:"A Random Blood Sugar (RBS) value of ≥ __ mg/dL, along with diabetes symptoms, confirms diabetes:",o:["126 mg/dL","140 mg/dL","180 mg/dL","200 mg/dL"],a:3,topic:"Diabetes Mellitus",type:"mcq",diff:"medium"},
+{t:"Which of the following symptoms is NOT typically associated with Type 1 DM?",o:["Polyuria","Polydipsia","Obesity","Unintentional weight loss"],a:2,topic:"Diabetes Mellitus",type:"mcq",diff:"medium"},
+{t:"Diabetic ketoacidosis (DKA) occurs predominantly in:",o:["Type 2 DM","Gestational diabetes","Type 1 DM","All types equally"],a:2,topic:"Diabetes Mellitus",type:"mcq",diff:"medium"},
+{t:"Glycosuria means:",o:["Glucose spilling into the urine","Ketones in the urine","Protein in the urine","Blood in the urine"],a:0,topic:"Diabetes Mellitus",type:"mcq",diff:"easy"},
+{t:"Insulin should be injected with systematic site rotation to:",o:["Reduce pain at injection sites","Prevent scar tissue and allow for proper absorption","Ensure faster drug action","Avoid bruising"],a:1,topic:"Diabetes Mellitus",type:"mcq",diff:"medium"},
+{t:"Oral hypoglycemic agents work primarily by:",o:["Replacing missing insulin completely","Stimulating pancreatic insulin secretion","Blocking carbohydrate absorption in the gut","Reducing total blood volume"],a:1,topic:"Diabetes Mellitus",type:"mcq",diff:"medium"},
+{t:"The recommended dietary carbohydrate percentage for diabetic patients is:",o:["20%","30%","40%","50%"],a:3,topic:"Diabetes Mellitus",type:"mcq",diff:"medium"},
+{t:"Complex carbohydrates are recommended for diabetics over simple ones because they have:",o:["Better taste","Delayed absorption — preventing rapid glucose spikes","Proven weight-loss effects","Lower caloric content"],a:1,topic:"Diabetes Mellitus",type:"mcq",diff:"easy"},
+{t:"To prevent hypoglycemia during exercise, an insulin-dependent diabetic should:",o:["Skip meals before exercise","Eat 15 g of carbohydrate with a protein snack before exercise","Inject more insulin before exercise","Drink alcohol for quick energy"],a:1,topic:"Diabetes Mellitus",type:"mcq",diff:"medium"},
+{t:"HbA1c (glycosylated hemoglobin) reflects average blood glucose control over:",o:["The past 24 hours","The past 1 week","The past 1 month","The past 2–3 months"],a:3,topic:"Diabetes Mellitus",type:"mcq",diff:"medium"},
+{t:"Which of the following is a MICROVASCULAR complication of diabetes?",o:["Stroke","Coronary heart disease","Retinopathy (and neuropathy, nephropathy)","Peripheral arterial disease"],a:2,topic:"Diabetes Mellitus",type:"mcq",diff:"medium"},
+{t:"Which of the following is a MACROVASCULAR complication of diabetes?",o:["Nephropathy","Retinopathy","Neuropathy","Coronary heart disease and stroke"],a:3,topic:"Diabetes Mellitus",type:"mcq",diff:"medium"},
+{t:"An insulin-requiring patient should reduce the insulin dosage during:",o:["Illness","Exercise","Prolonged rest","Nighttime hours"],a:1,topic:"Diabetes Mellitus",type:"mcq",diff:"hard"},
+{t:"Insulin vials currently in use should be stored at:",o:["Freezer temperatures (<0°C)","Room temperature (to reduce local irritation at injection site)","Refrigerator temperature (2–8°C)","Below 0°C always"],a:1,topic:"Diabetes Mellitus",type:"mcq",diff:"medium"},
+{t:"Rotation of insulin injection sites is important to prevent:",o:["Hypoglycemia","Infection at injection sites","Scar tissue formation and to allow consistent absorption","Bruising and ecchymosis"],a:2,topic:"Diabetes Mellitus",type:"mcq",diff:"medium"},
+{t:"Postprandial blood glucose (PPBG) is measured:",o:["Before all meals","2 hours after a meal","4 hours after a meal","While the patient is fasting"],a:1,topic:"Diabetes Mellitus",type:"mcq",diff:"medium"},
+{t:"The five components of diabetes management are diet, exercise, monitoring, medication, and:",o:["Surgery","Patient education","Hospitalization","Prolonged bed rest"],a:1,topic:"Diabetes Mellitus",type:"mcq",diff:"easy"},
+ 
+// ═══════════════════════════════════════════
+// IMMOBILIZATION  (Q231–260 MCQ)
+// ═══════════════════════════════════════════
+{t:"Immobility is defined as:",o:["Voluntary restriction of movement for comfort","Inability to independently move or change position, or movement restricted for medical reasons","Temporary pain during activity","Limitation of exercise capacity only"],a:1,topic:"Immobilization",type:"mcq",diff:"easy"},
+{t:"Which condition can cause PERMANENT immobility?",o:["A fractured finger","Spinal cord injury resulting in paralysis","Mild arthritis","Temporary postoperative pain"],a:1,topic:"Immobilization",type:"mcq",diff:"easy"},
+{t:"Prolonged immobility causes muscle atrophy, which is:",o:["Increased muscle fiber size","Decreased size of muscle fiber (wasting)","Muscle spasm","Muscle inflammation"],a:1,topic:"Immobilization",type:"mcq",diff:"easy"},
+{t:"Contracture is caused by:",o:["Increased muscle bulk from exercise","Shortening of muscle fiber leading to limitation of joint movement","A joint infection","A bone fracture"],a:1,topic:"Immobilization",type:"mcq",diff:"medium"},
+{t:"Which cardiovascular complication results from prolonged immobility?",o:["Hypertension","Orthostatic hypotension","Increased cardiac output","Tachycardia alone"],a:1,topic:"Immobilization",type:"mcq",diff:"medium"},
+{t:"Orthostatic hypotension in immobilized patients occurs when:",o:["The patient lies flat for too long","Moving from a reclining to a sitting or standing position suddenly causes blood pooling in lower extremities","Exercising too vigorously","Sleeping for extended periods"],a:1,topic:"Immobilization",type:"mcq",diff:"medium"},
+{t:"Thrombus formation in immobilized patients is primarily caused by:",o:["Increased blood flow velocity","Pooling (stasis) of blood in veins causing increased coagulation","Persistent hypertension","Vigorous exercise"],a:1,topic:"Immobilization",type:"mcq",diff:"medium"},
+{t:"Pressure sores (decubitus ulcers) result from:",o:["Infectious organisms on the skin","Prolonged pressure obstructing blood flow to tissue","Nutritional deficiency alone","Drug side effects"],a:1,topic:"Immobilization",type:"mcq",diff:"easy"},
+{t:"Hypostatic pneumonia in immobilized patients is caused by:",o:["Chest trauma","A specific viral infection","Stasis of respiratory secretions in the lungs","Excessive coughing"],a:2,topic:"Immobilization",type:"mcq",diff:"medium"},
+{t:"Atelectasis is best described as:",o:["A lung infection","Collapse of alveoli preventing normal oxygen and carbon dioxide exchange","Accumulation of fluid around the lungs","A primary lung tumor"],a:1,topic:"Immobilization",type:"mcq",diff:"medium"},
+{t:"Constipation in immobilized patients results from:",o:["Increased gastrointestinal activity","A general decrease in gastrointestinal activity","Excessive fluid intake","A high-fiber diet"],a:1,topic:"Immobilization",type:"mcq",diff:"easy"},
+{t:"Urine stasis in immobile patients can lead to:",o:["Hypertension","Urinary tract infection AND renal calculi","Urinary frequency only","Proteinuria"],a:1,topic:"Immobilization",type:"mcq",diff:"medium"},
+{t:"Hypercalciuria in immobility leads to:",o:["Muscle weakness","Formation of urinary calculi (kidney stones)","Joint infection","Skin breakdown"],a:1,topic:"Immobilization",type:"mcq",diff:"hard"},
+{t:"To prevent contractures, the nurse should perform:",o:["Immobilization of all joints","Range of motion (ROM) exercises","Application of tight bandages","Elevation of all extremities at 90°"],a:1,topic:"Immobilization",type:"mcq",diff:"easy"},
+{t:"Elastic stockings in immobilized patients help prevent:",o:["Pressure ulcers","Dependent edema and thrombus formation","Muscle atrophy","Pneumonia"],a:1,topic:"Immobilization",type:"mcq",diff:"medium"},
+{t:"In the functional level classification, a score of '0' indicates:",o:["Completely dependent — does not participate in activity","Requires use of equipment","Requires help from another person","Completely independent"],a:3,topic:"Immobilization",type:"mcq",diff:"medium"},
+{t:"Passive movement benefits immobilized patients by helping to prevent:",o:["Bone fractures from trauma","Systemic infections","Osteoporosis and contractures, while improving joint ROM","Hypertension"],a:2,topic:"Immobilization",type:"mcq",diff:"medium"},
+{t:"To maintain respiratory function in immobilized patients, the nurse should:",o:["Limit fluid intake","Instruct the patient in regular deep breathing and coughing exercises","Avoid all position changes","Restrict any chest physiotherapy"],a:1,topic:"Immobilization",type:"mcq",diff:"easy"},
+{t:"Synovial fluid functions to:",o:["Transport nutrients to muscles","Lubricate joint capsules","Provide calcium to bone surfaces","Anchor tendons to bone"],a:1,topic:"Immobilization",type:"mcq",diff:"medium"},
+{t:"A postural blood pressure drop from supine to sitting suggests a risk for:",o:["Cardiac arrest","Impaired ambulation due to orthostatic hypotension","Urinary retention","Acute respiratory failure"],a:1,topic:"Immobilization",type:"mcq",diff:"medium"},
+{t:"Isometric exercises differ from isotonic exercises in that:",o:["They involve active joint movement","The muscle contracts but there is no change in length and no joint movement","They require equipment always","They are used only after injury"],a:1,topic:"Immobilization",type:"mcq",diff:"hard"},
+{t:"Daily fluid intake of at least 2,000 mL in immobilized patients helps prevent:",o:["Hypertension","Accumulation of calcium deposits in the kidneys (renal calculi)","Muscle atrophy","Pressure sores"],a:1,topic:"Immobilization",type:"mcq",diff:"medium"},
+{t:"The assessment of body alignment in an immobilized patient begins with:",o:["Measuring muscle circumference","Checking whether an imaginary line can be drawn through ear, shoulder, hip, knee, and ankle","Testing deep tendon reflexes","Assessing fine motor skills"],a:1,topic:"Immobilization",type:"mcq",diff:"hard"},
+{t:"Which of the following immobilization complications directly involves the nervous system?",o:["Muscle atrophy","Altered sensation from prolonged pressure on nerves","Thrombus formation","Pressure ulcers"],a:1,topic:"Immobilization",type:"mcq",diff:"medium"},
+{t:"Psychological effects of prolonged immobility include:",o:["Increased self-esteem and confidence","Feelings of loss of body image, dependence, guilt, and fear","Improved concentration","Enhanced social interaction"],a:1,topic:"Immobilization",type:"mcq",diff:"easy"},
+{t:"To prevent pooling of blood in the lower extremities in an immobilized patient, the nurse should:",o:["Bend the patient's knees and support them with a pillow","Elevate the lower extremities and encourage peripheral exercises","Apply heat to the lower limbs","Restrict all leg movements"],a:1,topic:"Immobilization",type:"mcq",diff:"medium"},
+{t:"The spread of cancer cells from one site to form new tumors in other parts of the body through the bloodstream is called:",o:["Benign growth","Metastasis","Carcinogenesis","Local invasion only"],a:1,topic:"Oncology",type:"mcq",diff:"easy"},
+{t:"In liver cirrhosis, the nurse assesses asterixis (liver flap) in stages II and III of hepatic encephalopathy. This is characterized by:",o:["Sudden loss of consciousness","Rapid, irregular flexion and extension of the wrist","Fixed muscle rigidity","Generalized tonic-clonic seizures"],a:1,topic:"Liver Cirrhosis",type:"mcq",diff:"hard"},
+{t:"Loop diuretics (furosemide) have which advantage over thiazide diuretics?",o:["Slower, more predictable action","Milder side effects with no electrolyte loss","Rapid action and effectiveness when thiazides have failed","No contraindications"],a:2,topic:"Hypertension",type:"mcq",diff:"medium"},
+{t:"Before parenteral iron therapy, epinephrine should be available because:",o:["It prevents bruising at injection sites","It is used to treat anaphylaxis (severe allergic reaction) if it occurs","It improves iron absorption","It controls pain at the site"],a:1,topic:"Anemia",type:"mcq",diff:"medium"},
+ 
+// ═══════════════════════════════════════════
+// TRUE / FALSE  (TF1–TF40)
+// ═══════════════════════════════════════════
+{t:"Benign tumors can spread (metastasize) to other parts of the body.",o:["True","False"],a:1,topic:"Oncology",type:"tf",diff:"easy"},
+{t:"Chemotherapy is a systemic therapy that affects the whole body, as opposed to localized therapies like surgery or radiation.",o:["True","False"],a:0,topic:"Oncology",type:"tf",diff:"easy"},
+{t:"Alopecia caused by chemotherapy is a permanent, irreversible side effect.",o:["True","False"],a:1,topic:"Oncology",type:"tf",diff:"easy"},
+{t:"Radiation therapy always causes total body hair loss in every patient.",o:["True","False"],a:1,topic:"Oncology",type:"tf",diff:"easy"},
+{t:"Acupuncture can help control symptoms caused by cancer treatment such as nausea, anxiety, and dry mouth.",o:["True","False"],a:0,topic:"Oncology",type:"tf",diff:"medium"},
+{t:"Stage 0 cancer (carcinoma in situ) means the cancer has already spread to regional lymph nodes.",o:["True","False"],a:1,topic:"Oncology",type:"tf",diff:"medium"},
+{t:"Endoscopy is the preferred diagnostic method for confirming peptic ulcer disease.",o:["True","False"],a:0,topic:"Peptic Ulcer",type:"tf",diff:"easy"},
+{t:"Peptic ulcer disease is more common in females than in males.",o:["True","False"],a:1,topic:"Peptic Ulcer",type:"tf",diff:"easy"},
+{t:"In decompensated liver cirrhosis, ascites and jaundice are characteristic hallmark findings.",o:["True","False"],a:0,topic:"Liver Cirrhosis",type:"tf",diff:"easy"},
+{t:"Vitamin K injections are given to cirrhosis patients primarily to improve bone density.",o:["True","False"],a:1,topic:"Liver Cirrhosis",type:"tf",diff:"medium"},
+{t:"H. pylori infection can be detected via biopsy, histology, and culture of gastric tissue.",o:["True","False"],a:0,topic:"Peptic Ulcer",type:"tf",diff:"medium"},
+{t:"Milk and cream are recommended for peptic ulcer patients because they neutralize stomach acid effectively.",o:["True","False"],a:1,topic:"Peptic Ulcer",type:"tf",diff:"medium"},
+{t:"Hypertension is defined as blood pressure persistently above 120/80 mmHg.",o:["True","False"],a:1,topic:"Hypertension",type:"tf",diff:"easy"},
+{t:"Rheumatic fever is caused by Group A beta-hemolytic Streptococcus bacteria.",o:["True","False"],a:0,topic:"Rheumatic Heart Disease",type:"tf",diff:"easy"},
+{t:"Malignant hypertension is characterized by diastolic blood pressure above 120 mmHg with retinal hemorrhage.",o:["True","False"],a:0,topic:"Hypertension",type:"tf",diff:"medium"},
+{t:"The DASH diet (high in fruits, vegetables, and low-fat dairy) is recommended for hypertension management.",o:["True","False"],a:0,topic:"Hypertension",type:"tf",diff:"easy"},
+{t:"Primary (essential) hypertension has an identifiable single cause in most cases.",o:["True","False"],a:1,topic:"Hypertension",type:"tf",diff:"medium"},
+{t:"Chorea in rheumatic fever involves jerky, uncontrollable body movements most often in the hands, feet, and face.",o:["True","False"],a:0,topic:"Rheumatic Heart Disease",type:"tf",diff:"medium"},
+{t:"Beta-blockers are indicated and safe for patients with bronchial asthma.",o:["True","False"],a:1,topic:"Hypertension",type:"tf",diff:"easy"},
+{t:"Echocardiogram is the most useful diagnostic test for evaluating heart valve problems in rheumatic heart disease.",o:["True","False"],a:0,topic:"Rheumatic Heart Disease",type:"tf",diff:"easy"},
+{t:"Acute leukemia requires aggressive treatment as early as possible due to the rapid multiplication of immature blood cells.",o:["True","False"],a:0,topic:"Leukemia",type:"tf",diff:"easy"},
+{t:"Oral iron supplements should be taken on a completely empty stomach to maximize absorption.",o:["True","False"],a:1,topic:"Anemia",type:"tf",diff:"medium"},
+{t:"Bone marrow aspiration in adults is usually performed at the iliac crest.",o:["True","False"],a:0,topic:"Anemia",type:"tf",diff:"medium"},
+{t:"Leukemia patients should be placed in private rooms to reduce the risk of infection from outside sources.",o:["True","False"],a:0,topic:"Leukemia",type:"tf",diff:"easy"},
+{t:"In chronic leukemia, symptoms may not appear until several years after the onset of disease.",o:["True","False"],a:0,topic:"Leukemia",type:"tf",diff:"medium"},
+{t:"Petechiae are tiny red spots on the skin indicating a tendency to bleed.",o:["True","False"],a:0,topic:"Leukemia",type:"tf",diff:"easy"},
+{t:"Iron deficiency anemia in premenopausal women is most commonly caused by excessive menstrual bleeding.",o:["True","False"],a:0,topic:"Anemia",type:"tf",diff:"medium"},
+{t:"Vitamin B12 deficiency leads to megaloblastic (macrocytic) anemia.",o:["True","False"],a:0,topic:"Anemia",type:"tf",diff:"medium"},
+{t:"Graves' disease is an autoimmune condition that causes hypothyroidism.",o:["True","False"],a:1,topic:"Thyroid Disorders",type:"tf",diff:"easy"},
+{t:"Exophthalmos refers to abnormal protrusion of one or both eyeballs, commonly seen in hyperthyroidism.",o:["True","False"],a:0,topic:"Thyroid Disorders",type:"tf",diff:"easy"},
+{t:"Heating pads and electric blankets are safe and recommended for hypothyroid patients who feel cold.",o:["True","False"],a:1,topic:"Thyroid Disorders",type:"tf",diff:"medium"},
+{t:"Calcitonin secreted by the thyroid reduces plasma calcium levels by increasing its deposition in bone.",o:["True","False"],a:0,topic:"Thyroid Disorders",type:"tf",diff:"medium"},
+{t:"Type 1 DM is primarily caused by insulin resistance rather than beta cell destruction.",o:["True","False"],a:1,topic:"Diabetes Mellitus",type:"tf",diff:"medium"},
+{t:"A patient who is treated with insulin does not necessarily have Type 1 diabetes.",o:["True","False"],a:0,topic:"Diabetes Mellitus",type:"tf",diff:"medium"},
+{t:"Microvascular complications of diabetes include neuropathy, retinopathy, and nephropathy.",o:["True","False"],a:0,topic:"Diabetes Mellitus",type:"tf",diff:"easy"},
+{t:"Diabetic patients taking insulin should exercise immediately after an insulin injection to maximize its effect.",o:["True","False"],a:1,topic:"Diabetes Mellitus",type:"tf",diff:"medium"},
+{t:"Prolonged immobilization leads to osteoporosis and calcium loss from bone, contributing to hypercalciuria.",o:["True","False"],a:0,topic:"Immobilization",type:"tf",diff:"medium"},
+{t:"Passive movement (ROM exercises) can help prevent pressure ulcers, osteoporosis, and contractures.",o:["True","False"],a:0,topic:"Immobilization",type:"tf",diff:"easy"},
+{t:"Orthostatic hypotension in immobilized patients occurs when moving from standing to lying down.",o:["True","False"],a:1,topic:"Immobilization",type:"tf",diff:"medium"},
+{t:"Fecal impaction in comatose immobilized patients results from absence of the desire to defecate.",o:["True","False"],a:0,topic:"Immobilization",type:"tf",diff:"medium"}
+]; // ── End of QUESTIONS ──
+
+// ── State ──
+let current = 0;
+let answers = [];
+let answered = false;
+
+// ── Init ──
+document.getElementById('quizTitleDisplay').textContent = QUIZ_TITLE;
+document.getElementById('startDesc').textContent        = QUIZ_DESC;
+document.getElementById('totalQDisplay').textContent    = QUESTIONS.length;
+
+// ── Theme ──
+const themeBtn = document.getElementById('themeBtn');
+let theme = localStorage.getItem('theme') || 'light';
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', t);
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+
+// ── Screen switch ──
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// ── Start ──
+function startQuiz() {
+  current = 0;
+  answers = new Array(QUESTIONS.length).fill(null);
+  answered = false;
+  show('quizScreen');
+  renderQuestion();
+}
+
+// ── Render question ──
+function renderQuestion() {
+  answered = false;
+  const q   = QUESTIONS[current];
+  const tot = QUESTIONS.length;
+
+  document.getElementById('qNum').textContent  = `QUESTION ${current + 1}`;
+  document.getElementById('qText').textContent = q.t;
+  document.getElementById('progressLabel').textContent = `${current+1} / ${tot}`;
+  document.getElementById('progressFill').style.width  = `${((current+1)/tot)*100}%`;
+  document.getElementById('btnNext').disabled = true;
+
+  const fb = document.getElementById('feedbackBox');
+  fb.className = 'feedback-box';
+
+  const letters = ['A','B','C','D','E'];
+  const list = document.getElementById('optsList');
+  list.innerHTML = '';
+  q.o.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.innerHTML = `<span class="opt-letter">${letters[i]}</span>${opt}`;
+    btn.onclick = () => selectAnswer(i, btn);
+    list.appendChild(btn);
+  });
+
+  const card = document.getElementById('qCard');
+  card.style.animation = 'none';
+  card.offsetHeight;
+  card.style.animation = 'slideIn .35s ease';
+}
+
+// ── Select answer ──
+function selectAnswer(chosen, clickedBtn) {
+  if (answered) return;
+  answered = true;
+  answers[current] = chosen;
+
+  const q    = QUESTIONS[current];
+  const opts = document.querySelectorAll('.opt-btn');
+  const correct = q.a;
+
+  opts.forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === correct)        btn.classList.add('correct');
+    if (i === chosen && chosen !== correct) btn.classList.add('wrong');
+  });
+
+  const fb = document.getElementById('feedbackBox');
+  if (chosen === correct) {
+    fb.className = 'feedback-box correct-fb show';
+    document.getElementById('feedbackIcon').textContent = '✅';
+    document.getElementById('feedbackText').textContent = 'Correct answer! 🎉';
+  } else {
+    fb.className = 'feedback-box wrong-fb show';
+    document.getElementById('feedbackIcon').textContent = '❌';
+    document.getElementById('feedbackText').textContent =
+      `Correct answer: ${q.o[correct]}`;
+  }
+
+  document.getElementById('btnNext').disabled = false;
+}
+
+// ── Skip ──
+function skipQuestion() {
+  if (answered) return;
+  answers[current] = null;
+  nextQuestion();
+}
+
+// ── Next ──
+function nextQuestion() {
+  current++;
+  if (current >= QUESTIONS.length) {
+    showResult();
+  } else {
+    answered = false;
+    renderQuestion();
+  }
+}
+
+// ── Result ──
+function showResult() {
+  let correct = 0, wrong = 0, skip = 0;
+  answers.forEach((a, i) => {
+    if (a === null)                skip++;
+    else if (a === QUESTIONS[i].a) correct++;
+    else                           wrong++;
+  });
+  const pct = Math.round((correct / QUESTIONS.length) * 100);
+  document.getElementById('rCorrect').textContent = correct;
+  document.getElementById('rWrong').textContent   = wrong;
+  document.getElementById('rSkip').textContent    = skip;
+  document.getElementById('pctNum').textContent   = pct;
+
+  let emoji, title, sub;
+  if      (pct >= 90) { emoji='🏆'; title='Excellent! Outstanding!';    sub='Amazing result — keep it up!'; }
+  else if (pct >= 75) { emoji='🎉'; title='Very Good!';                 sub='Strong performance, keep reviewing to reach the top!'; }
+  else if (pct >= 60) { emoji='💪'; title='Good, but room to improve!'; sub='Review your wrong answers and try again'; }
+  else if (pct >= 40) { emoji='📚'; title='Needs more revision';        sub='Go back to your notes and retake the quiz'; }
+  else                { emoji='😅'; title="Don't worry, keep studying!";sub='Revision is the key — try again!'; }
+
+  document.getElementById('resultEmoji').textContent = emoji;
+  document.getElementById('resultTitle').textContent = title;
+  document.getElementById('resultSub').textContent   = sub;
+
+  const circ  = 2 * Math.PI * 62;
+  const offset = circ - (pct / 100) * circ;
+  const arc = document.getElementById('circleArc');
+  arc.style.strokeDashoffset = '389.6';
+  arc.style.stroke = pct >= 60 ? 'var(--green)' : pct >= 40 ? 'var(--c)' : 'var(--red)';
+  setTimeout(() => { arc.style.strokeDashoffset = offset; }, 200);
+
+  show('resultScreen');
+}
+
+// ── Review ──
+function showReview() {
+  const list = document.getElementById('reviewList');
+  list.innerHTML = '';
+  const letters = ['A','B','C','D','E'];
+
+  QUESTIONS.forEach((q, qi) => {
+    const userAns = answers[qi];
+    let statusClass, statusText;
+    if      (userAns === null)       { statusClass='status-skip';    statusText='⏭ Skipped'; }
+    else if (userAns === q.a)        { statusClass='status-correct'; statusText='✅ Correct'; }
+    else                             { statusClass='status-wrong';   statusText='❌ Wrong'; }
+
+    const card = document.createElement('div');
+    card.className = 'review-card';
+    card.innerHTML = `
+      <div class="review-card-top">
+        <div class="review-q-label">QUESTION ${qi+1}</div>
+        <div class="review-q-text">${q.t}</div>
+        <div class="review-status ${statusClass}">${statusText}</div>
+      </div>
+      <div class="review-opts">
+        ${q.o.map((opt, oi) => {
+          let cls = 'review-opt';
+          if (oi === q.a)                        cls += ' is-correct';
+          if (oi === userAns && userAns !== q.a) cls += ' is-wrong';
+          return `<div class="${cls}"><div class="review-dot"></div>${letters[oi]}. ${opt}</div>`;
+        }).join('')}
+      </div>`;
+    list.appendChild(card);
+  });
+
+  show('reviewScreen');
+}
+
+function retryQuiz() {
+  current = 0;
+  answers = new Array(QUESTIONS.length).fill(null);
+  answered = false;
+  show('quizScreen');
+  renderQuestion();
+}
+</script>
+</body>
+</html>
