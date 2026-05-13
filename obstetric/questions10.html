@@ -1,0 +1,853 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --accent:       #db2777;
+  --accent-light: #ec4899;
+  --accent-dark:  #be185d;
+  --accent-glow:  rgba(219,39,119,0.2);
+  --bg:      #f8fafc;
+  --bg2:     #eef2f7;
+  --card:    #ffffff;
+  --text:    #1a2332;
+  --text2:   #4a5568;
+  --text3:   #718096;
+  --bc:      rgba(0,0,0,0.07);
+  --success: #16a34a;
+  --danger:  #dc2626;
+  --warn:    #be185d;
+  --r:       16px;
+  --tr:      all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="dark"] {
+  --bg:   #0d1117; --bg2: #161b22; --card: #1c2333;
+  --text: #e6edf3; --text2: #b1bac4; --text3: #7d8590;
+  --bc:   rgba(255,255,255,0.08);
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg); color: var(--text);
+  min-height: 100vh; overflow-x: hidden;
+  transition: background .4s, color .4s;
+}
+
+/* PROGRESS TOP */
+#prog-bar {
+  position: fixed; top: 0; left: 0; height: 3px; z-index: 999;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  transition: width .2s;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px; height: 64px;
+  background: rgba(248,250,252,.93); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--bc); transition: var(--tr);
+}
+[data-theme="dark"] nav { background: rgba(13,17,23,.95); }
+
+.nav-back {
+  display: flex; align-items: center; gap: 7px;
+  color: var(--text2); text-decoration: none; font-size: 13px; font-weight: 700;
+  padding: 7px 13px; border-radius: 8px; border: 1px solid var(--bc);
+  background: var(--card); transition: var(--tr);
+}
+.nav-back:hover { color: var(--accent); border-color: var(--accent-glow); transform: translateX(3px); }
+.nav-brand { display: flex; align-items: center; gap: 9px; font-size: 15px; font-weight: 900; color: var(--text); }
+.nav-logo-icon {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 12px; font-weight: 900;
+}
+.nav-right { display: flex; align-items: center; gap: 8px; }
+.theme-btn {
+  width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--bc);
+  background: var(--card); cursor: pointer; font-size: 15px;
+  display: flex; align-items: center; justify-content: center; transition: var(--tr);
+}
+.theme-btn:hover { border-color: var(--accent); transform: rotate(20deg); }
+
+/* HERO BAND */
+.hero-band {
+  margin-top: 64px;
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent), var(--accent-light));
+  padding: 40px 24px 36px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.hero-band::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 600px 200px at 50% 100%, rgba(255,255,255,.12) 0%, transparent 70%);
+}
+.hero-band-icon {
+  width: 68px; height: 68px; border-radius: 20px;
+  background: rgba(255,255,255,.2); backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 30px; margin: 0 auto 14px; border: 1.5px solid rgba(255,255,255,.35);
+}
+.hero-band h1 { font-size: clamp(20px,4vw,30px); font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero-band p { font-size: 13px; color: rgba(255,255,255,.8); }
+.hero-band-meta {
+  display: flex; justify-content: center; gap: 24px; margin-top: 20px;
+  flex-wrap: wrap;
+}
+.meta-pill {
+  background: rgba(255,255,255,.18); backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,.3); border-radius: 50px;
+  padding: 6px 16px; font-size: 12px; font-weight: 700; color: #fff;
+  display: flex; align-items: center; gap: 6px;
+}
+
+/* EXAM SHELL */
+.shell { max-width: 560px; margin: 0 auto; padding: 24px 20px 80px; }
+
+/* STATS ROW */
+.stats-row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 16px;
+}
+.stat-box {
+  background: var(--card); border: 1px solid var(--bc); border-radius: var(--r);
+  padding: 12px 10px; text-align: center;
+}
+.stat-box .val { font-size: 20px; font-weight: 900; }
+.stat-box .lbl { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.stat-correct { color: var(--success); }
+.stat-wrong   { color: var(--danger); }
+.stat-remain  { color: var(--accent); }
+
+/* PROGRESS STRIP */
+.prog-strip {
+  background: var(--card); border: 1px solid var(--bc); border-radius: var(--r);
+  padding: 14px 16px; margin-bottom: 16px;
+  display: flex; align-items: center; gap: 14px;
+}
+.prog-label { font-size: 13px; font-weight: 700; color: var(--text2); white-space: nowrap; }
+.prog-track { flex: 1; height: 8px; background: var(--bg2); border-radius: 8px; overflow: hidden; }
+.prog-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  border-radius: 8px; transition: width .4s;
+}
+.timer-badge {
+  min-width: 64px; height: 36px; border-radius: 18px;
+  background: var(--bg2); border: 1px solid var(--bc);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 900; color: var(--text);
+  gap: 5px; padding: 0 12px; flex-shrink: 0;
+}
+.timer-badge.warn { color: var(--warn); border-color: rgba(217,119,6,.3); background: rgba(217,119,6,.08); }
+.timer-badge.danger { color: var(--danger); border-color: rgba(220,38,38,.3); background: rgba(220,38,38,.08); animation: pulse .8s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.6} }
+
+/* QUESTION CARD */
+.q-card {
+  background: var(--card); border: 1px solid var(--bc);
+  border-radius: 20px; overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+  transition: box-shadow .3s;
+}
+.q-header {
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  padding: 4px 18px 4px;
+  display: flex; align-items: center; gap: 8px;
+}
+.q-num {
+  background: rgba(255,255,255,.2); border-radius: 8px;
+  padding: 3px 10px; font-size: 11px; font-weight: 700; color: #fff;
+}
+.q-text {
+  padding: 22px 18px 14px; font-size: 15px; font-weight: 700; color: var(--text);
+  line-height: 1.65; border-bottom: 1px solid var(--bc);
+  text-align: left; direction: ltr;
+}
+.options { padding: 14px 18px 18px; display: flex; flex-direction: column; gap: 10px; }
+
+/* OPTION */
+.opt {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px; border-radius: 12px;
+  border: 1.5px solid var(--bc); background: var(--bg);
+  cursor: pointer; font-size: 14px; font-weight: 600; color: var(--text);
+  transition: var(--tr); user-select: none;
+  direction: ltr; text-align: left;
+}
+.opt:hover:not(.disabled) {
+  border-color: var(--accent); background: var(--accent-glow);
+  transform: translateX(3px);
+}
+.opt-letter {
+  width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+  background: var(--bg2); border: 1px solid var(--bc);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 900; color: var(--text3);
+  transition: var(--tr);
+}
+.opt.correct {
+  border-color: var(--success); background: rgba(22,163,74,.08);
+}
+.opt.correct .opt-letter {
+  background: var(--success); color: #fff; border-color: var(--success);
+}
+.opt.wrong {
+  border-color: var(--danger); background: rgba(220,38,38,.07);
+}
+.opt.wrong .opt-letter {
+  background: var(--danger); color: #fff; border-color: var(--danger);
+}
+.opt.disabled { pointer-events: none; }
+
+/* FEEDBACK */
+.feedback-bar {
+  margin: 14px 18px; padding: 12px 16px; border-radius: 12px;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px; font-weight: 700;
+  animation: popIn .4s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes popIn { from{transform:scale(.8);opacity:0} to{transform:scale(1);opacity:1} }
+.feedback-bar.ok { background: rgba(22,163,74,.1); color: var(--success); border: 1px solid rgba(22,163,74,.25); }
+.feedback-bar.no { background: rgba(220,38,38,.08); color: var(--danger); border: 1px solid rgba(220,38,38,.2); }
+.feedback-icon { font-size: 20px; }
+
+/* EXPLANATION */
+.explanation {
+  margin: 0 18px 14px; padding: 12px 14px;
+  background: rgba(var(--accent-rgb),.06);
+  border-radius: 10px; border-right: 3px solid var(--accent);
+  font-size: 13px; color: var(--text2); line-height: 1.6;
+  display: none;
+}
+
+/* NAV BTNS */
+.nav-btns { padding: 4px 18px 18px; display: flex; gap: 10px; }
+.btn {
+  flex: 1; padding: 13px; border: none; border-radius: 12px;
+  font-size: 14px; font-weight: 900; cursor: pointer;
+  font-family: 'Outfit', sans-serif; transition: var(--tr);
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+}
+.btn-next {
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  color: #fff; box-shadow: 0 4px 14px var(--accent-glow);
+}
+.btn-next:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
+.btn-skip {
+  background: var(--bg2); color: var(--text2); border: 1px solid var(--bc); flex: 0 0 auto; padding: 13px 18px;
+}
+.btn-skip:hover { border-color: var(--warn); color: var(--warn); }
+
+/* ===== RESULTS ===== */
+.result-hero {
+  text-align: center; padding: 36px 20px 28px;
+  background: var(--card); border-radius: 20px;
+  border: 1px solid var(--bc); margin-bottom: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+}
+.score-ring {
+  width: 110px; height: 110px; border-radius: 50%; margin: 0 auto 18px;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; border: 5px solid var(--bg2);
+  position: relative;
+}
+.score-ring svg { position: absolute; inset: -5px; width: calc(100% + 10px); height: calc(100% + 10px); transform: rotate(-90deg); }
+.score-ring circle { fill: none; stroke-width: 5; stroke-linecap: round; }
+.ring-bg { stroke: var(--bg2); }
+.ring-fill { stroke: var(--accent); transition: stroke-dashoffset 1s ease; }
+.score-num { font-size: 28px; font-weight: 900; color: var(--text); }
+.score-pct { font-size: 12px; color: var(--text3); }
+.result-grade { font-size: 22px; font-weight: 900; margin-bottom: 6px; }
+.result-sub { font-size: 14px; color: var(--text2); }
+.result-stats {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 20px;
+}
+.rs { background: var(--bg2); border-radius: 10px; padding: 12px 8px; text-align: center; }
+.rs .n { font-size: 20px; font-weight: 900; }
+.rs .l { font-size: 11px; color: var(--text3); }
+
+/* REPORT ITEMS */
+.report-item {
+  background: var(--card); border: 1px solid var(--bc); border-radius: 14px;
+  padding: 16px; margin-bottom: 10px; border-right: 4px solid var(--bc);
+}
+.report-item.ok { border-right-color: var(--success); }
+.report-item.no { border-right-color: var(--danger); }
+.report-item .ri-q { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+.report-item .ri-row {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; margin-top: 5px; color: var(--text2);
+}
+.ri-badge {
+  padding: 2px 8px; border-radius: 6px; font-weight: 700; font-size: 11px; flex-shrink: 0;
+}
+.ri-yours { background: rgba(220,38,38,.1); color: var(--danger); }
+.ri-right { background: rgba(22,163,74,.1); color: var(--success); }
+
+.result-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+.btn-retry { background: linear-gradient(135deg, var(--accent-dark), var(--accent)); color: #fff; }
+.btn-retry:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
+.btn-home { background: var(--bg2); color: var(--text); border: 1px solid var(--bc); }
+.btn-home:hover { border-color: var(--accent); color: var(--accent); }
+
+/* FOOTER */
+footer {
+  background: var(--bg2); border-top: 1px solid var(--bc);
+  padding: 22px 24px; display: flex; align-items: center;
+  justify-content: space-between; flex-wrap: wrap; gap: 10px;
+}
+.footer-brand { font-size: 14px; font-weight: 700; }
+.footer-brand span { color: var(--accent); }
+.footer-tg { display: flex; align-items: center; gap: 5px; text-decoration: none; color: #229ED9; font-size: 12px; font-weight: 600; }
+
+@media (max-width: 480px) {
+  nav { padding: 0 14px; }
+  .shell { padding: 16px 14px 60px; }
+  .nav-brand span { display: none; }
+  .hero-band { padding: 30px 16px 28px; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog-bar" style="width:0%"></div>
+
+<nav>
+  <a href="https://gaith-team.github.io/exam/obstetric/index.html" class="nav-back"><i class="fa-solid fa-arrow-right"></i> رجوع</a>
+  <div class="nav-brand">
+    <div class="nav-logo-icon">GT</div>
+    <span>GHAITH TEAM</span>
+  </div>
+  <div class="nav-right">
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<div class="hero-band">
+  <div class="hero-band-icon">🤰</div>
+  <h1>تمريض النساء والتوليد</h1>
+  <p>Bleeding in early pregnancy</p>
+  <div class="hero-band-meta">
+    <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">-- سؤال</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-clock"></i> 35 Min</div>
+    <div class="meta-pill"><i class="fa-solid fa-shuffle"></i> Shuffled</div>
+  </div>
+</div>
+
+<div class="shell">
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="val stat-correct" id="sCorrect">0</div>
+      <div class="lbl">✔ صحيح</div>
+    </div>
+    <div class="stat-box">
+      <div class="val stat-wrong" id="sWrong">0</div>
+      <div class="lbl">✖ خطأ</div>
+    </div>
+    <div class="stat-box">
+      <div class="val stat-remain" id="sRemain">--%</div>
+      <div class="lbl">⏳ متبقي</div>
+    </div>
+  </div>
+
+  <!-- PROGRESS STRIP -->
+  <div class="prog-strip">
+    <div class="prog-label" id="progLabel">سؤال ١</div>
+    <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+    <div class="timer-badge" id="timerBadge"><i class="fa-regular fa-clock"></i> <span id="timerTxt">35:00</span></div>
+  </div>
+
+  <!-- APP -->
+  <div id="app"></div>
+</div>
+
+<footer>
+  <div class="footer-brand">GHAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg">
+    <i class="fa-brands fa-telegram"></i> @nursing2bu
+  </a>
+</footer>
+
+<script>
+const QUESTIONS = [
+{
+    "t": "A woman at 10 weeks gestation presents with mild vaginal bleeding and lower abdominal pain. Upon examination, the cervix is found to be closed and the embryo is viable. Which type of abortion is she experiencing?",
+    "o": ["Inevitable abortion", "Threatened abortion", "Missed abortion", "Incomplete abortion"],
+    "a": 1
+  },
+  {
+    "t": "A patient is diagnosed with an ectopic pregnancy. In which part of the reproductive system do more than 95% of ectopic pregnancies occur?",
+    "o": ["Ovary", "Abdominal cavity", "Fallopian tubes", "Cervix"],
+    "a": 2
+  },
+  {
+    "t": "A woman presents with severe vaginal bleeding, strong supra-pubic pain radiating to the back, and an opened cervix. The embryo is dead but still inside the uterus. What is the most likely diagnosis?",
+    "o": ["Threatened abortion", "Inevitable abortion", "Missed abortion", "Complete abortion"],
+    "a": 1
+  },
+  {
+    "t": "Which medication is a folic acid antagonist used in the medical management of ectopic pregnancy to destroy rapidly growing trophoblast cells?",
+    "o": ["Mifepristone", "Oxytocin", "Methotrexate", "Methergine"],
+    "a": 2
+  },
+  {
+    "t": "True or False: Fetal viability is defined as the ability of the fetus to live outside the uterus, typically occurring between 24-28 weeks of gestation.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "A woman at 12 weeks gestation reports that her pregnancy symptoms have subsided and she has a brown vaginal discharge. An ultrasound confirms the embryo is dead but retained. This is a:",
+    "o": ["Septic abortion", "Habitual abortion", "Missed abortion", "Incomplete abortion"],
+    "a": 2
+  },
+  {
+    "t": "What is the most common site for implantation in a tubal ectopic pregnancy?",
+    "o": ["Interstitial", "Isthmic", "Ampullary", "Fimbrial"],
+    "a": 2
+  },
+  {
+    "t": "A patient with a vesicular mole (molar pregnancy) presents with signs of pre-eclampsia. Why is this finding significant in early pregnancy?",
+    "o": ["It is normal for all pregnancies", "Pre-eclampsia before 20 weeks is a classic sign of a molar pregnancy", "It indicates fetal lung maturity", "It means the baby is growing too fast"],
+    "a": 1
+  },
+  {
+    "t": "True or False: A 'Septic abortion' is an incomplete abortion complicated by an infection of the uterine cavity.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "Which type of abortion involves the illegal termination of pregnancy without medical or obstetrical indications?",
+    "o": ["Therapeutic abortion", "Criminal abortion", "Habitual abortion", "Septic abortion"],
+    "a": 1
+  },
+  {
+    "t": "A woman with an ectopic pregnancy experiences dizziness, fainting, and low blood pressure. What is the nurse's primary concern?",
+    "o": ["Morning sickness", "Hypovolemic shock due to internal bleeding", "Gestational diabetes", "Uterine fibroids"],
+    "a": 1
+  },
+  {
+    "t": "In the management of a threatened abortion, which of the following is typically forbidden?",
+    "o": ["Eating a healthy diet", "Bed rest", "Coitus (sexual intercourse)", "Monitoring vital signs"],
+    "a": 2
+  },
+  {
+    "t": "True or False: In a 'Complete abortion', all products of conception are expelled, the cervix is closed, and bleeding is mild.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "Which surgical procedure involves the removal of a completely damaged fallopian tube in an ectopic pregnancy?",
+    "o": ["Laparoscopy", "Salpingectomy", "Suction curettage", "Dilation and evacuation"],
+    "a": 1
+  },
+  {
+    "t": "A woman has had three successive spontaneous abortions. This condition is known as:",
+    "o": ["Missed abortion", "Habitual abortion", "Septic abortion", "Inevitable abortion"],
+    "a": 1
+  },
+  {
+    "t": "What is the preferred method for evacuating a vesicular mole to preserve fertility?",
+    "o": ["Abdominal hysterectomy", "Suction curettage", "Medical induction with oxytocin", "Laparoscopy"],
+    "a": 1
+  },
+  {
+    "t": "True or False: A 'Partial mole' occurs when two sperms fertilize a single ovum, and a baby may start to develop but cannot survive.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "A nurse assesses a patient with a suspected septic abortion. Which laboratory finding would support a diagnosis of sepsis?",
+    "o": ["Hemoglobin of 12 g/dl", "WBC count greater than 12,000/ml", "Negative pregnancy test", "Normal blood pressure"],
+    "a": 1
+  },
+  {
+    "t": "Following a molar pregnancy, how long should a woman be advised to avoid pregnancy?",
+    "o": ["6 months", "1 year", "2 years", "5 years"],
+    "a": 2
+  },
+  {
+    "t": "Which complication of abortion involves disseminated intravascular coagulation (DIC)?",
+    "o": ["Shock", "Infection", "Bleeding disorder where blood fails to clot normally", "Depression"],
+    "a": 2
+  },
+  {
+    "t": "True or False: In an 'Incomplete abortion', the cervical internal os is opened and some products of conception are retained.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "A woman with an ectopic pregnancy complains of sharp, stabbing pain in her pelvis. What is the pathophysiology behind this pain?",
+    "o": ["Uterine stretching", "Rupture of the fallopian tube or internal bleeding", "Normal fetal movement", "Cervical dilation"],
+    "a": 1
+  },
+  {
+    "t": "Which age groups are at higher risk for developing a vesicular mole?",
+    "o": ["20 to 30 years", "Under 17 or older than 35 years", "Only women over 45", "All ages have equal risk"],
+    "a": 1
+  },
+  {
+    "t": "True or False: 'Therapeutic abortion' means the artificial legal termination of pregnancy by a physician due to medical indications.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "What is the priority nursing diagnosis for a patient experiencing severe bleeding in early pregnancy?",
+    "o": ["Deficit fluid volume related to excessive vascular loss", "Disturbed sleep pattern", "Imbalanced nutrition", "Risk for constipation"],
+    "a": 0
+  },
+  {
+    "t": "A patient with a missed abortion is scheduled for evacuation. Why might the doctor administer oxytocin?",
+    "o": ["To prevent infection", "To help make contractions and evacuate uterine contents", "To stop the bleeding", "To lower blood pressure"],
+    "a": 1
+  },
+  {
+    "t": "True or False: Ectopic pregnancy can occur in the ovary, abdomen, or cervix, although these are rare.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "Which diagnostic tool is the most common determinant of an ectopic pregnancy?",
+    "o": ["X-ray", "Pelvic Ultrasound", "Blood glucose test", "Urine analysis"],
+    "a": 1
+  },
+  {
+    "t": "A patient with a vesicular mole has a 'grape-like' vaginal discharge. These vesicles are actually:",
+    "o": ["Small babies", "Fluid-filled trophoblastic villi", "Blood clots", "Infected tissue"],
+    "a": 1
+  },
+  {
+    "t": "True or False: Methotrexate is a folic acid antagonist that destroys rapidly growing cells like the trophoblast.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "What is a potential malignancy that can develop from a vesicular mole?",
+    "o": ["Cervical cancer", "Choriocarcinoma", "Ovarian cyst", "Uterine fibroid"],
+    "a": 1
+  },
+  {
+    "t": "In the nursing assessment of early pregnancy bleeding, a hemoglobin level of less than 10.5 g/dl suggests:",
+    "o": ["Sepsis", "Anemia due to blood loss", "Normal pregnancy changes", "Dehydration"],
+    "a": 1
+  },
+  {
+    "t": "True or False: 'Habitual abortion' is often caused by an incompetent internal cervical os.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "Which position should a woman with a threatened abortion be placed in?",
+    "o": ["Prone position", "Supine position with a pillow under head and shoulder", "Sitting upright", "Trendelenburg position"],
+    "a": 1
+  },
+  {
+    "t": "A woman at 8 weeks gestation has a positive pregnancy test but an empty uterus on ultrasound. What should be suspected?",
+    "o": ["Normal pregnancy", "Ectopic pregnancy", "Multiple pregnancy", "False positive test"],
+    "a": 1
+  },
+  {
+    "t": "True or False: In an 'Inevitable abortion', the cervix is already dilated and vaginal bleeding is present.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "Which factor increases the risk for an ectopic pregnancy?",
+    "o": ["First-time pregnancy", "Previous ectopic pregnancy or tubal surgery", "Young age", "High-fiber diet"],
+    "a": 1
+  },
+  {
+    "t": "A patient with a vesicular mole presents with a rapid and weak pulse. This is a sign of:",
+    "o": ["Anxiety", "Shock", "Infection", "Pre-eclampsia"],
+    "a": 1
+  },
+  {
+    "t": "True or False: A 'Complete mole' is where a baby never develops, and the placenta grows many small cysts.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "What is the primary maternal cause of abortion related to local uterine issues?",
+    "o": ["Anemia", "Cervical incompetence", "Diabetes", "Hypertension"],
+    "a": 1
+  },
+  {
+    "t": "During the follow-up for a molar pregnancy, why is a 'negative pregnancy test' after 4 weeks important?",
+    "o": ["To show she can get pregnant again", "To ensure all molar tissue is gone and no malignancy is developing", "To check for twins", "To monitor iron levels"],
+    "a": 1
+  },
+  {
+    "t": "True or False: Septic shock can occur if a missed abortion is not managed properly.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "Which of the following is a maternal cause of abortion related to environmental factors?",
+    "o": ["Uterine fibroids", "Alcohol and drug abuse", "Fetal anemia", "Cervical incompetence"],
+    "a": 1
+  },
+  {
+    "t": "In an ectopic pregnancy, if the fallopian tube is not yet ruptured, which management might be chosen to save the tube?",
+    "o": ["Salpingectomy", "Medical management with Methotrexate", "Hysterectomy", "Dilation and curettage"],
+    "a": 1
+  },
+  {
+    "t": "True or False: HCG levels are typically very high in a molar pregnancy compared to a normal pregnancy.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "A patient is grieving the loss of her pregnancy. What is the nurse's role in psychological support?",
+    "o": ["Tell her to forget about it", "Provide confidentiality and identify available support systems", "Advise her to get pregnant again immediately", "Avoid talking about the loss"],
+    "a": 1
+  },
+  {
+    "t": "Which type of abortion is characterized by 'offensive vaginal discharge' and 'abdominal distension'?",
+    "o": ["Missed abortion", "Septic abortion", "Complete abortion", "Threatened abortion"],
+    "a": 1
+  },
+  {
+    "t": "True or False: Dilation and curettage (D&C) is considered an obsolete method of surgical abortion in some contexts, with vacuum aspiration being preferred.",
+    "o": ["True", "False"],
+    "a": 0
+  },
+  {
+    "t": "A 'Missed abortion' is confirmed when:",
+    "o": ["The baby is born early", "The embryo is dead but remains inside the uterus for several weeks", "There is heavy bleeding and pain", "The cervix is wide open"],
+    "a": 1
+  },
+  {
+    "t": "What is the goal of administering triple antibiotics in a septic abortion?",
+    "o": ["To stop the bleeding", "To prevent or treat infection", "To induce labor", "To reduce pain"],
+    "a": 1
+  }
+];
+
+/* ============ ENGINE ============ */
+let questions, i, correct, wrong, answers, wrongSet, answered;
+let totalTime = 35*60, timeLeft, timerInterval;
+const LETTERS = ['A','B','C','D','E','F'];
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function init(pool) {
+  questions = shuffle([...pool]);
+  i = 0; correct = 0; wrong = 0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = []; answered = 0;
+  timeLeft = totalTime;
+  document.getElementById('totalBadge').textContent = questions.length + ' سؤال';
+  startTimer();
+  render();
+}
+
+/* TIMER */
+function startTimer() {
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    const m = Math.floor(timeLeft / 60), s = timeLeft % 60;
+    document.getElementById('timerTxt').textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
+    const badge = document.getElementById('timerBadge');
+    if (timeLeft <= 120) { badge.className = 'timer-badge danger'; }
+    else if (timeLeft <= 300) { badge.className = 'timer-badge warn'; }
+    if (timeLeft <= 0) { clearInterval(timerInterval); finish(); }
+  }, 1000);
+}
+
+/* TOP UI */
+function updateTop() {
+  const total = questions.length;
+  document.getElementById('sCorrect').textContent = correct;
+  document.getElementById('sWrong').textContent = wrong;
+  document.getElementById('sRemain').textContent = Math.round(((total - answered) / total) * 100) + '%';
+  document.getElementById('progLabel').textContent = 'سؤال ' + (i + 1) + ' / ' + total;
+  document.getElementById('progFill').style.width = ((i + 1) / total * 100) + '%';
+  document.getElementById('prog-bar').style.width = ((i + 1) / total * 100) + '%';
+}
+
+/* RENDER QUESTION */
+function render() {
+  updateTop();
+  const q = questions[i];
+  document.getElementById('app').innerHTML = `
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">سؤال ${i + 1} / ${questions.length}</div>
+      </div>
+      <div class="q-text">${q.t}</div>
+      <div class="options">
+        ${q.o.map((o, idx) => `
+          <div class="opt" id="opt${idx}" onclick="choose(${idx})">
+            <div class="opt-letter">${LETTERS[idx] || idx + 1}</div>
+            ${o}
+          </div>
+        `).join('')}
+      </div>
+      <div class="nav-btns">
+        <button class="btn btn-skip" onclick="skip()"><i class="fa-solid fa-forward"></i> تخطي</button>
+      </div>
+    </div>`;
+}
+
+/* CHOOSE */
+function choose(v) {
+  if (answers[i] !== null) return;
+  answers[i] = v;
+  answered++;
+  const q = questions[i];
+  const ok = v === q.a;
+  ok ? correct++ : wrong++;
+  updateTop();
+
+  q.o.forEach((_, idx) => {
+    const el = document.getElementById('opt' + idx);
+    el.classList.add('disabled');
+    if (idx === q.a) el.classList.add('correct');
+    else if (idx === v) el.classList.add('wrong');
+  });
+
+  const fb = document.createElement('div');
+  fb.className = 'feedback-bar ' + (ok ? 'ok' : 'no');
+  fb.innerHTML = ok
+    ? `<span class="feedback-icon">🎉</span> <span>شطور جدا ، اللهم بارك</span>`
+    : `<span class="feedback-icon">😔</span> <span>ركز يا سكر</span>`;
+
+  const card = document.querySelector('.q-card');
+  card.querySelector('.options').after(fb);
+  if (q.exp) {
+    const exp = document.createElement('div');
+    exp.className = 'explanation';
+    exp.style.display = 'block';
+    exp.innerHTML = '<b>💬 شرح:</b> ' + q.exp;
+    fb.after(exp);
+  }
+
+  const navBtns = card.querySelector('.nav-btns');
+  navBtns.innerHTML = `<button class="btn btn-next" onclick="next()">
+    ${i < questions.length - 1 ? '<i class="fa-solid fa-arrow-left"></i> السؤال التالي' : '<i class="fa-solid fa-flag-checkered"></i> إنهاء الامتحان'}
+  </button>`;
+}
+
+/* SKIP */
+function skip() {
+  if (answers[i] === null) { answers[i] = -1; answered++; wrongSet.push(questions[i]); wrong++; updateTop(); }
+  next();
+}
+
+/* NEXT */
+function next() {
+  if (i < questions.length - 1) { i++; render(); window.scrollTo({top: 0, behavior: 'smooth'}); }
+  else finish();
+}
+
+/* FINISH */
+function finish() {
+  clearInterval(timerInterval);
+  const total = questions.length;
+  const score = Math.round((correct / total) * 100);
+
+  questions.forEach((q, idx) => {
+    if (answers[idx] !== q.a) wrongSet.push({...q, myAns: answers[idx]});
+  });
+  wrongSet = [...new Map(wrongSet.map(q => [q.t, q])).values()];
+
+  let grade, gradeColor;
+  if (score >= 90) { grade = '🥇 ممتاز'; gradeColor = 'var(--success)'; }
+  else if (score >= 75) { grade = '🥈 جيد جداً'; gradeColor = 'var(--accent)'; }
+  else if (score >= 60) { grade = '🥉 جيد'; gradeColor = 'var(--warn)'; }
+  else { grade = '📚 راجع تاني'; gradeColor = 'var(--danger)'; }
+
+  const circ = 2 * Math.PI * 45;
+  const offset = circ - (score / 100) * circ;
+
+  const reportHTML = questions.map((q, idx) => {
+    const ok = answers[idx] === q.a;
+    return `<div class="report-item ${ok ? 'ok' : 'no'}">
+      <div class="ri-q">${ok ? '✅' : '❌'} ${q.t}</div>
+      ${!ok ? `
+        <div class="ri-row"><span class="ri-badge ri-yours">إجابتك</span> ${answers[idx] >= 0 ? q.o[answers[idx]] : 'تم التخطي'}</div>
+        <div class="ri-row"><span class="ri-badge ri-right">الصحيح</span> ${q.o[q.a]}</div>
+      ` : ''}
+    </div>`;
+  }).join('');
+
+  document.getElementById('prog-bar').style.width = '100%';
+  document.getElementById('app').innerHTML = `
+    <div class="result-hero">
+      <div class="score-ring">
+        <svg viewBox="0 0 110 110">
+          <circle class="ring-bg" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="0"/>
+          <circle class="ring-fill" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="${circ}"
+            style="stroke:${gradeColor}" id="ringFill"/>
+        </svg>
+        <div class="score-num">${score}</div>
+        <div class="score-pct">%</div>
+      </div>
+      <div class="result-grade" style="color:${gradeColor}">${grade}</div>
+      <div class="result-sub">أجبت على ${answered} من ${total} سؤال</div>
+      <div class="result-stats">
+        <div class="rs"><div class="n" style="color:var(--success)">${correct}</div><div class="l">صحيح</div></div>
+        <div class="rs"><div class="n" style="color:var(--danger)">${wrong}</div><div class="l">خطأ</div></div>
+        <div class="rs"><div class="n" style="color:var(--accent)">${total - answered < 0 ? 0 : total - answered}</div><div class="l">تخطي</div></div>
+      </div>
+    </div>
+
+    <div class="result-actions">
+      ${wrongSet.length ? `<button class="btn btn-retry" onclick="retryWrong()"><i class="fa-solid fa-rotate-right"></i> إعادة الخطأ (${wrongSet.length})</button>` : ''}
+      <button class="btn btn-home" onclick="init(QUESTIONS)"><i class="fa-solid fa-shuffle"></i> امتحان جديد عشوائي</button>
+      <a href="https://gaith-team.github.io/exam/obstetric/index.html" class="btn btn-home" style="text-decoration:none;"><i class="fa-solid fa-house"></i> رجوع للمادة</a>
+    </div>
+
+    <div style="margin-top:28px">
+      <div style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text2)">📋 تقرير مفصّل</div>
+      ${reportHTML}
+    </div>`;
+
+  setTimeout(() => { document.getElementById('ringFill').style.strokeDashoffset = offset; }, 100);
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+/* RETRY WRONG */
+function retryWrong() {
+  const pool = [...wrongSet];
+  questions = shuffle(pool); i = 0; correct = 0; wrong = 0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = []; answered = 0; timeLeft = totalTime;
+  startTimer(); render();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+/* THEME */
+const themeBtn = document.getElementById('themeBtn');
+let theme = localStorage.getItem('theme') || 'light';
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', t);
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+
+/* START */
+init(QUESTIONS);
+</script>
+</body>
+</html>
