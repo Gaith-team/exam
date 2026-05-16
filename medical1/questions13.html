@@ -1,923 +1,743 @@
-<!DOCTYPE html>
-<html lang="en" dir="ltr">
+﻿<!DOCTYPE html>
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>GHAITH TEAM</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
-  --c:      #e67e22;
-  --c-deep: #b8590a;
-  --c-lite: #f39c12;
-  --c-glow: rgba(230,126,34,0.2);
-  --c-soft: rgba(230,126,34,0.09);
-  --green:  #27ae60;
-  --red:    #e74c3c;
-  --bg:     #f9f5f0;
-  --bg2:    #f1e8dc;
-  --card:   #ffffff;
-  --text:   #1a1208;
-  --text2:  #5a4a30;
-  --text3:  #9a8060;
-  --border: rgba(230,126,34,0.15);
-  --radius: 18px;
-  --tr:     all 0.28s cubic-bezier(0.4,0,0.2,1);
+  --accent:       #2563eb;
+  --accent-light: #3b82f6;
+  --accent-dark:  #1d4ed8;
+  --accent-glow:  rgba(37,99,235,0.2);
+  --bg:      #f8fafc;
+  --bg2:     #eef2f7;
+  --card:    #ffffff;
+  --text:    #1a2332;
+  --text2:   #4a5568;
+  --text3:   #718096;
+  --bc:      rgba(0,0,0,0.07);
+  --success: #16a34a;
+  --danger:  #dc2626;
+  --warn:    #1d4ed8;
+  --r:       16px;
+  --tr:      all 0.3s cubic-bezier(0.4,0,0.2,1);
 }
 [data-theme="dark"] {
-  --bg:    #12100c;
-  --bg2:   #1c1710;
-  --card:  #231e16;
-  --text:  #f0e6d6;
-  --text2: #c0a880;
-  --text3: #806848;
-  --border:rgba(230,126,34,0.18);
+  --bg:   #0d1117; --bg2: #161b22; --card: #1c2333;
+  --text: #e6edf3; --text2: #b1bac4; --text3: #7d8590;
+  --bc:   rgba(255,255,255,0.08);
 }
 
-html { scroll-behavior: smooth; }
 body {
-  font-family: 'Cairo','Tajawal',sans-serif;
-  background: var(--bg);
-  color: var(--text);
-  min-height: 100vh;
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg); color: var(--text);
+  min-height: 100vh; overflow-x: hidden;
   transition: background .4s, color .4s;
-  overflow-x: hidden;
 }
 
-/* ── NAV ── */
+/* PROGRESS TOP */
+#prog-bar {
+  position: fixed; top: 0; left: 0; height: 3px; z-index: 999;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  transition: width .2s;
+}
+
+/* NAV */
 nav {
   position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-  height: 64px;
   display: flex; align-items: center; justify-content: space-between;
-  padding: 0 28px;
-  background: rgba(249,245,240,0.93);
-  backdrop-filter: blur(18px);
-  border-bottom: 1px solid var(--border);
-  transition: var(--tr);
+  padding: 0 28px; height: 64px;
+  background: rgba(248,250,252,.93); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--bc); transition: var(--tr);
 }
-[data-theme="dark"] nav { background: rgba(18,16,12,0.95); }
+[data-theme="dark"] nav { background: rgba(13,17,23,.95); }
+
 .nav-back {
-  display: flex; align-items: center; gap: 8px;
-  text-decoration: none; color: var(--text2);
-  font-size: 13px; font-weight: 700;
-  padding: 7px 13px; border-radius: 9px;
-  border: 1px solid var(--border); background: var(--card);
-  transition: var(--tr);
-}
-.nav-back:hover { color: var(--c); border-color: var(--c); }
-.nav-center { display: flex; align-items: center; gap: 9px; }
-.nav-pill {
   display: flex; align-items: center; gap: 7px;
-  padding: 6px 14px; border-radius: 50px;
-  background: linear-gradient(135deg, var(--c), var(--c-lite));
-  color: #fff; font-size: 13px; font-weight: 800;
+  color: var(--text2); text-decoration: none; font-size: 13px; font-weight: 700;
+  padding: 7px 13px; border-radius: 8px; border: 1px solid var(--bc);
+  background: var(--card); transition: var(--tr);
 }
-.theme-toggle {
-  width: 38px; height: 38px; border-radius: 50%;
-  border: 1.5px solid var(--border); background: var(--card);
-  cursor: pointer; display: flex; align-items: center; justify-content: center;
-  font-size: 16px; transition: var(--tr);
-}
-.theme-toggle:hover { border-color: var(--c); transform: rotate(20deg); }
-
-/* ── SCREENS ── */
-.screen { display: none; }
-.screen.active { display: flex; }
-
-/* ══════════════════════════════════
-   START SCREEN
-══════════════════════════════════ */
-#startScreen {
-  min-height: 100vh;
-  flex-direction: column;
-  align-items: center; justify-content: center;
-  padding: 80px 24px 40px;
-  text-align: center;
-}
-.start-icon {
-  width: 90px; height: 90px; border-radius: 24px;
-  background: linear-gradient(135deg, var(--c), var(--c-lite));
+.nav-back:hover { color: var(--accent); border-color: var(--accent-glow); transform: translateX(3px); }
+.nav-brand { display: flex; align-items: center; gap: 9px; font-size: 15px; font-weight: 900; color: var(--text); }
+.nav-logo-icon {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
   display: flex; align-items: center; justify-content: center;
-  font-size: 40px; margin: 0 auto 28px;
-  box-shadow: 0 12px 40px var(--c-glow);
-  animation: floatIcon 3s ease-in-out infinite;
+  color: #fff; font-size: 12px; font-weight: 900;
 }
-@keyframes floatIcon {
-  0%,100% { transform: translateY(0); }
-  50%      { transform: translateY(-8px); }
+.nav-right { display: flex; align-items: center; gap: 8px; }
+.theme-btn {
+  width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--bc);
+  background: var(--card); cursor: pointer; font-size: 15px;
+  display: flex; align-items: center; justify-content: center; transition: var(--tr);
 }
-.start-title {
-  font-size: clamp(28px,5vw,44px); font-weight: 900; color: var(--text);
-  line-height: 1.15; margin-bottom: 12px;
+.theme-btn:hover { border-color: var(--accent); transform: rotate(20deg); }
+
+/* HERO BAND */
+.hero-band {
+  margin-top: 64px;
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent), var(--accent-light));
+  padding: 40px 24px 36px; text-align: center;
+  position: relative; overflow: hidden;
 }
-.start-title span { color: var(--c); }
-.start-sub {
-  font-size: 15px; color: var(--text2); line-height: 1.7;
-  max-width: 400px; margin: 0 auto 36px;
+.hero-band::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 600px 200px at 50% 100%, rgba(255,255,255,.12) 0%, transparent 70%);
 }
-.start-meta {
-  display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
-  margin-bottom: 44px;
+.hero-band-icon {
+  width: 68px; height: 68px; border-radius: 20px;
+  background: rgba(255,255,255,.2); backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 30px; margin: 0 auto 14px; border: 1.5px solid rgba(255,255,255,.35);
+}
+.hero-band h1 { font-size: clamp(20px,4vw,30px); font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero-band p { font-size: 13px; color: rgba(255,255,255,.8); }
+.hero-band-meta {
+  display: flex; justify-content: center; gap: 24px; margin-top: 20px;
+  flex-wrap: wrap;
 }
 .meta-pill {
-  display: flex; align-items: center; gap: 8px;
-  padding: 10px 20px; border-radius: 12px;
-  background: var(--card); border: 1px solid var(--border);
-  font-size: 14px; font-weight: 700; color: var(--text2);
-}
-.meta-pill strong { color: var(--c); font-size: 18px; }
-.btn-start {
-  display: inline-flex; align-items: center; gap: 10px;
-  padding: 16px 44px; border-radius: 14px;
-  background: linear-gradient(135deg, var(--c), var(--c-lite));
-  color: #fff; font-size: 17px; font-weight: 900;
-  border: none; cursor: pointer;
-  box-shadow: 0 8px 28px var(--c-glow);
-  transition: var(--tr); font-family: 'Cairo',sans-serif;
-}
-.btn-start:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 14px 40px var(--c-glow); }
-
-/* ══════════════════════════════════
-   QUIZ SCREEN
-══════════════════════════════════ */
-#quizScreen {
-  min-height: 100vh;
-  flex-direction: column;
-  padding: 80px 0 40px;
-}
-.quiz-wrap {
-  flex: 1; max-width: 680px; width: 100%;
-  margin: 0 auto; padding: 32px 24px;
-  display: flex; flex-direction: column; gap: 24px;
+  background: rgba(255,255,255,.18); backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,.3); border-radius: 50px;
+  padding: 6px 16px; font-size: 12px; font-weight: 700; color: #fff;
+  display: flex; align-items: center; gap: 6px;
 }
 
-/* progress */
-.quiz-progress-row {
-  display: flex; align-items: center; justify-content: space-between;
-  gap: 14px;
-}
-.progress-track {
-  flex: 1; height: 6px; border-radius: 6px;
-  background: var(--bg2); overflow: hidden;
-}
-.progress-fill {
-  height: 100%; border-radius: 6px;
-  background: linear-gradient(90deg, var(--c), var(--c-lite));
-  transition: width .5s cubic-bezier(0.4,0,0.2,1);
-}
-.progress-label {
-  font-size: 13px; font-weight: 800; color: var(--c);
-  white-space: nowrap;
-}
+/* EXAM SHELL */
+.shell { max-width: 560px; margin: 0 auto; padding: 24px 20px 80px; }
 
-/* question card */
+/* STATS ROW */
+.stats-row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 16px;
+}
+.stat-box {
+  background: var(--card); border: 1px solid var(--bc); border-radius: var(--r);
+  padding: 12px 10px; text-align: center;
+}
+.stat-box .val { font-size: 20px; font-weight: 900; }
+.stat-box .lbl { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.stat-correct { color: var(--success); }
+.stat-wrong   { color: var(--danger); }
+.stat-remain  { color: var(--accent); }
+
+/* PROGRESS STRIP */
+.prog-strip {
+  background: var(--card); border: 1px solid var(--bc); border-radius: var(--r);
+  padding: 14px 16px; margin-bottom: 16px;
+  display: flex; align-items: center; gap: 14px;
+}
+.prog-label { font-size: 13px; font-weight: 700; color: var(--text2); white-space: nowrap; }
+.prog-track { flex: 1; height: 8px; background: var(--bg2); border-radius: 8px; overflow: hidden; }
+.prog-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  border-radius: 8px; transition: width .4s;
+}
+.timer-badge {
+  min-width: 64px; height: 36px; border-radius: 18px;
+  background: var(--bg2); border: 1px solid var(--bc);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 900; color: var(--text);
+  gap: 5px; padding: 0 12px; flex-shrink: 0;
+}
+.timer-badge.warn { color: var(--warn); border-color: rgba(217,119,6,.3); background: rgba(217,119,6,.08); }
+.timer-badge.danger { color: var(--danger); border-color: rgba(220,38,38,.3); background: rgba(220,38,38,.08); animation: pulse .8s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.6} }
+
+/* QUESTION CARD */
 .q-card {
-  background: var(--card);
-  border: 1.5px solid var(--border);
-  border-radius: 20px;
-  padding: 32px 28px;
-  box-shadow: 0 4px 24px rgba(230,126,34,0.08);
-  animation: slideIn .35s ease;
+  background: var(--card); border: 1px solid var(--bc);
+  border-radius: 20px; overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+  transition: box-shadow .3s;
 }
-@keyframes slideIn {
-  from { opacity: 0; transform: translateX(-20px); }
-  to   { opacity: 1; transform: translateX(0); }
+.q-header {
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  padding: 4px 18px 4px;
+  display: flex; align-items: center; gap: 8px;
 }
 .q-num {
-  font-size: 11px; font-weight: 800; letter-spacing: 2px;
-  color: var(--c); text-transform: uppercase; margin-bottom: 14px;
+  background: rgba(255,255,255,.2); border-radius: 8px;
+  padding: 3px 10px; font-size: 11px; font-weight: 700; color: #fff;
 }
 .q-text {
-  font-size: clamp(16px,2.5vw,20px); font-weight: 700;
-  color: var(--text); line-height: 1.6;
+  padding: 22px 18px 14px; font-size: 15px; font-weight: 700; color: var(--text);
+  line-height: 1.65; border-bottom: 1px solid var(--bc);
+  text-align: left; direction: ltr;
 }
+.options { padding: 14px 18px 18px; display: flex; flex-direction: column; gap: 10px; }
 
-/* options */
-.options-list {
-  display: flex; flex-direction: column; gap: 12px;
-  margin-top: 28px;
+/* OPTION */
+.opt {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px; border-radius: 12px;
+  border: 1.5px solid var(--bc); background: var(--bg);
+  cursor: pointer; font-size: 14px; font-weight: 600; color: var(--text);
+  transition: var(--tr); user-select: none;
+  direction: ltr; text-align: left;
 }
-.opt-btn {
-  display: flex; align-items: center; gap: 14px;
-  padding: 15px 18px; border-radius: 13px;
-  border: 1.5px solid var(--border);
-  background: var(--bg);
-  cursor: pointer; text-align: left;
-  transition: var(--tr); font-family: 'Cairo',sans-serif;
-  font-size: 15px; font-weight: 600; color: var(--text);
-  width: 100%;
-}
-.opt-btn:hover:not(:disabled) {
-  border-color: var(--c);
-  background: var(--c-soft);
+.opt:hover:not(.disabled) {
+  border-color: var(--accent); background: var(--accent-glow);
   transform: translateX(3px);
 }
 .opt-letter {
-  width: 34px; height: 34px; flex-shrink: 0;
-  border-radius: 50%; border: 2px solid var(--border);
+  width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+  background: var(--bg2); border: 1px solid var(--bc);
   display: flex; align-items: center; justify-content: center;
-  font-size: 13px; font-weight: 900; color: var(--text3);
-  transition: var(--tr); background: var(--card);
-}
-.opt-btn:hover:not(:disabled) .opt-letter {
-  border-color: var(--c); color: var(--c); background: rgba(230,126,34,0.1);
-}
-
-/* states */
-.opt-btn.correct {
-  border-color: var(--green) !important;
-  background: rgba(39,174,96,0.08) !important;
-  color: var(--green);
-}
-.opt-btn.correct .opt-letter {
-  background: var(--green); border-color: var(--green);
-  color: #fff;
-}
-.opt-btn.wrong {
-  border-color: var(--red) !important;
-  background: rgba(231,76,60,0.08) !important;
-  color: var(--red);
-}
-.opt-btn.wrong .opt-letter {
-  background: var(--red); border-color: var(--red);
-  color: #fff;
-}
-.opt-btn:disabled { cursor: not-allowed; }
-
-/* feedback */
-.feedback-box {
-  display: none;
-  align-items: center; gap: 12px;
-  padding: 14px 18px; border-radius: 12px;
-  font-size: 14px; font-weight: 700;
-  margin-top: 16px;
-  animation: fadeIn .3s ease;
-}
-@keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
-.feedback-box.show { display: flex; }
-.feedback-box.correct-fb {
-  background: rgba(39,174,96,0.1);
-  border: 1px solid rgba(39,174,96,0.25);
-  color: var(--green);
-}
-.feedback-box.wrong-fb {
-  background: rgba(231,76,60,0.1);
-  border: 1px solid rgba(231,76,60,0.25);
-  color: var(--red);
-}
-.feedback-icon { font-size: 20px; }
-
-/* nav buttons */
-.quiz-nav {
-  display: flex; gap: 12px; justify-content: space-between; align-items: center;
-}
-.btn-nav {
-  display: inline-flex; align-items: center; gap: 8px;
-  padding: 13px 26px; border-radius: 12px;
-  font-size: 14px; font-weight: 800;
-  border: none; cursor: pointer;
-  font-family: 'Cairo',sans-serif;
+  font-size: 12px; font-weight: 900; color: var(--text3);
   transition: var(--tr);
 }
-.btn-skip {
-  background: var(--bg2); color: var(--text2);
-  border: 1px solid var(--border);
+.opt.correct {
+  border-color: var(--success); background: rgba(22,163,74,.08);
 }
-.btn-skip:hover { background: var(--border); }
-.btn-next {
-  background: linear-gradient(135deg, var(--c), var(--c-lite));
-  color: #fff;
-  box-shadow: 0 4px 16px var(--c-glow);
+.opt.correct .opt-letter {
+  background: var(--success); color: #fff; border-color: var(--success);
 }
-.btn-next:hover { transform: translateY(-2px); box-shadow: 0 8px 24px var(--c-glow); }
-.btn-next:disabled { opacity: .45; pointer-events: none; }
+.opt.wrong {
+  border-color: var(--danger); background: rgba(220,38,38,.07);
+}
+.opt.wrong .opt-letter {
+  background: var(--danger); color: #fff; border-color: var(--danger);
+}
+.opt.disabled { pointer-events: none; }
 
-/* ══════════════════════════════════
-   RESULT SCREEN
-══════════════════════════════════ */
-#resultScreen {
-  min-height: 100vh;
-  flex-direction: column;
-  align-items: center; justify-content: center;
-  padding: 80px 24px 40px;
-  text-align: center;
+/* FEEDBACK */
+.feedback-bar {
+  margin: 14px 18px; padding: 12px 16px; border-radius: 12px;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px; font-weight: 700;
+  animation: popIn .4s cubic-bezier(.34,1.56,.64,1);
 }
-.result-circle {
-  width: 140px; height: 140px;
-  border-radius: 50%;
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  margin: 0 auto 28px;
+@keyframes popIn { from{transform:scale(.8);opacity:0} to{transform:scale(1);opacity:1} }
+.feedback-bar.ok { background: rgba(22,163,74,.1); color: var(--success); border: 1px solid rgba(22,163,74,.25); }
+.feedback-bar.no { background: rgba(220,38,38,.08); color: var(--danger); border: 1px solid rgba(220,38,38,.2); }
+.feedback-icon { font-size: 20px; }
+
+/* EXPLANATION */
+.explanation {
+  margin: 0 18px 14px; padding: 12px 14px;
+  background: rgba(var(--accent-rgb),.06);
+  border-radius: 10px; border-right: 3px solid var(--accent);
+  font-size: 13px; color: var(--text2); line-height: 1.6;
+  display: none;
+}
+
+/* NAV BTNS */
+.nav-btns { padding: 4px 18px 18px; display: flex; gap: 10px; }
+.btn {
+  flex: 1; padding: 13px; border: none; border-radius: 12px;
+  font-size: 14px; font-weight: 900; cursor: pointer;
+  font-family: 'Outfit', sans-serif; transition: var(--tr);
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+}
+.btn-next {
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  color: #fff; box-shadow: 0 4px 14px var(--accent-glow);
+}
+.btn-next:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
+.btn-skip {
+  background: var(--bg2); color: var(--text2); border: 1px solid var(--bc); flex: 0 0 auto; padding: 13px 18px;
+}
+.btn-skip:hover { border-color: var(--warn); color: var(--warn); }
+
+/* ===== RESULTS ===== */
+.result-hero {
+  text-align: center; padding: 36px 20px 28px;
+  background: var(--card); border-radius: 20px;
+  border: 1px solid var(--bc); margin-bottom: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+}
+.score-ring {
+  width: 110px; height: 110px; border-radius: 50%; margin: 0 auto 18px;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; border: 5px solid var(--bg2);
   position: relative;
 }
-.result-circle svg {
-  position: absolute; inset: 0; width: 100%; height: 100%;
-  transform: rotate(-90deg);
-}
-.result-circle svg circle {
-  fill: none; stroke-width: 8;
-  stroke-linecap: round;
-}
-.circle-bg  { stroke: var(--bg2); }
-.circle-fill { stroke: var(--c); transition: stroke-dashoffset 1.2s cubic-bezier(0.4,0,0.2,1); }
-.result-pct {
-  font-size: 36px; font-weight: 900; color: var(--text);
-  position: relative; z-index: 1;
-}
-.result-pct small { font-size: 14px; color: var(--text3); display: block; }
-
-.result-emoji { font-size: 56px; margin-bottom: 16px; animation: bounce .6s ease; }
-@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
-.result-title { font-size: 26px; font-weight: 900; color: var(--text); margin-bottom: 8px; }
-.result-sub { font-size: 15px; color: var(--text2); margin-bottom: 36px; }
-
+.score-ring svg { position: absolute; inset: -5px; width: calc(100% + 10px); height: calc(100% + 10px); transform: rotate(-90deg); }
+.score-ring circle { fill: none; stroke-width: 5; stroke-linecap: round; }
+.ring-bg { stroke: var(--bg2); }
+.ring-fill { stroke: var(--accent); transition: stroke-dashoffset 1s ease; }
+.score-num { font-size: 28px; font-weight: 900; color: var(--text); }
+.score-pct { font-size: 12px; color: var(--text3); }
+.result-grade { font-size: 22px; font-weight: 900; margin-bottom: 6px; }
+.result-sub { font-size: 14px; color: var(--text2); }
 .result-stats {
-  display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
-  margin-bottom: 40px;
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 20px;
 }
-.rstat {
-  padding: 14px 22px; border-radius: 14px;
-  background: var(--card); border: 1px solid var(--border);
-  min-width: 110px;
-}
-.rstat .rv { font-size: 26px; font-weight: 900; }
-.rstat .rl { font-size: 12px; color: var(--text3); margin-top: 2px; }
-.rstat.correct-s .rv { color: var(--green); }
-.rstat.wrong-s   .rv { color: var(--red); }
-.rstat.skip-s    .rv { color: var(--text3); }
+.rs { background: var(--bg2); border-radius: 10px; padding: 12px 8px; text-align: center; }
+.rs .n { font-size: 20px; font-weight: 900; }
+.rs .l { font-size: 11px; color: var(--text3); }
 
-.result-actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
-.btn-retry {
-  display: inline-flex; align-items: center; gap: 9px;
-  padding: 14px 32px; border-radius: 12px;
-  background: linear-gradient(135deg, var(--c), var(--c-lite));
-  color: #fff; font-size: 15px; font-weight: 900;
-  border: none; cursor: pointer; font-family: 'Cairo',sans-serif;
-  box-shadow: 0 6px 22px var(--c-glow); transition: var(--tr);
+/* REPORT ITEMS */
+.report-item {
+  background: var(--card); border: 1px solid var(--bc); border-radius: 14px;
+  padding: 16px; margin-bottom: 10px; border-right: 4px solid var(--bc);
 }
-.btn-retry:hover { transform: translateY(-3px); }
-.btn-review {
-  display: inline-flex; align-items: center; gap: 9px;
-  padding: 14px 28px; border-radius: 12px;
-  background: var(--card); color: var(--text);
-  font-size: 15px; font-weight: 700;
-  border: 1.5px solid var(--border); cursor: pointer;
-  font-family: 'Cairo',sans-serif; transition: var(--tr);
+.report-item.ok { border-right-color: var(--success); }
+.report-item.no { border-right-color: var(--danger); }
+.report-item .ri-q { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+.report-item .ri-row {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; margin-top: 5px; color: var(--text2);
 }
-.btn-review:hover { border-color: var(--c); color: var(--c); }
+.ri-badge {
+  padding: 2px 8px; border-radius: 6px; font-weight: 700; font-size: 11px; flex-shrink: 0;
+}
+.ri-yours { background: rgba(220,38,38,.1); color: var(--danger); }
+.ri-right { background: rgba(22,163,74,.1); color: var(--success); }
 
-/* ── REVIEW MODE ── */
-#reviewScreen {
-  min-height: 100vh;
-  flex-direction: column;
-  padding: 80px 0 60px;
-}
-.review-wrap {
-  max-width: 680px; width: 100%;
-  margin: 0 auto; padding: 32px 24px;
-  display: flex; flex-direction: column; gap: 18px;
-}
-.review-header {
-  text-align: center; margin-bottom: 10px;
-}
-.review-header h2 { font-size: 22px; font-weight: 900; color: var(--text); }
-.review-header p  { font-size: 13px; color: var(--text3); margin-top: 4px; }
+.result-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+.btn-retry { background: linear-gradient(135deg, var(--accent-dark), var(--accent)); color: #fff; }
+.btn-retry:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
+.btn-home { background: var(--bg2); color: var(--text); border: 1px solid var(--bc); }
+.btn-home:hover { border-color: var(--accent); color: var(--accent); }
 
-.review-card {
-  background: var(--card);
-  border-radius: 16px;
-  border: 1.5px solid var(--border);
-  overflow: hidden;
+/* FOOTER */
+footer {
+  background: var(--bg2); border-top: 1px solid var(--bc);
+  padding: 22px 24px; display: flex; align-items: center;
+  justify-content: space-between; flex-wrap: wrap; gap: 10px;
 }
-.review-card-top {
-  padding: 20px 22px;
-  border-bottom: 1px solid var(--border);
-}
-.review-q-label {
-  font-size: 10px; font-weight: 800; letter-spacing: 2px;
-  color: var(--text3); margin-bottom: 8px;
-}
-.review-q-text { font-size: 15px; font-weight: 700; color: var(--text); line-height: 1.55; }
-.review-opts { padding: 14px 22px; display: flex; flex-direction: column; gap: 8px; }
-.review-opt {
-  display: flex; align-items: center; gap: 10px;
-  padding: 10px 14px; border-radius: 10px;
-  font-size: 13px; font-weight: 600; color: var(--text2);
-  background: var(--bg);
-}
-.review-opt.is-correct {
-  background: rgba(39,174,96,0.1);
-  color: var(--green); font-weight: 800;
-}
-.review-opt.is-wrong {
-  background: rgba(231,76,60,0.1);
-  color: var(--red);
-}
-.review-dot {
-  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
-  background: var(--border);
-}
-.review-opt.is-correct .review-dot { background: var(--green); }
-.review-opt.is-wrong   .review-dot { background: var(--red); }
-.review-status {
-  display: flex; align-items: center; gap: 5px;
-  padding: 3px 10px; border-radius: 50px;
-  font-size: 10px; font-weight: 800; margin-top: 10px;
-  width: fit-content;
-}
-.status-correct { background: rgba(39,174,96,0.12); color: var(--green); }
-.status-wrong   { background: rgba(231,76,60,0.12);  color: var(--red); }
-.status-skip    { background: var(--bg2); color: var(--text3); }
+.footer-brand { font-size: 14px; font-weight: 700; }
+.footer-brand span { color: var(--accent); }
+.footer-tg { display: flex; align-items: center; gap: 5px; text-decoration: none; color: #229ED9; font-size: 12px; font-weight: 600; }
 
-.btn-back-result {
-  display: inline-flex; align-items: center; gap: 9px;
-  padding: 13px 28px; border-radius: 12px;
-  background: var(--card); color: var(--text);
-  font-size: 14px; font-weight: 700;
-  border: 1.5px solid var(--border); cursor: pointer;
-  font-family: 'Cairo',sans-serif; transition: var(--tr);
-  margin-top: 8px; align-self: center;
-}
-.btn-back-result:hover { border-color: var(--c); color: var(--c); }
-
-/* ── RESPONSIVE ── */
-@media (max-width: 540px) {
-  nav { padding: 0 16px; }
-  .quiz-wrap, .review-wrap { padding: 24px 16px; }
-  .q-card { padding: 22px 18px; }
-  .opt-btn { padding: 12px 14px; font-size: 14px; }
-  .result-stats { gap: 10px; }
-  .rstat { min-width: 90px; padding: 12px 16px; }
+@media (max-width: 480px) {
+  nav { padding: 0 14px; }
+  .shell { padding: 16px 14px 60px; }
+  .nav-brand span { display: none; }
+  .hero-band { padding: 30px 16px 28px; }
 }
 </style>
 </head>
 <body>
 
-<!-- NAV -->
+<div id="prog-bar" style="width:0%"></div>
+
 <nav>
-  <a href="https://gaith-team.github.io/exam/medical1/index.html" class="nav-back">← Back</a>
-  <div class="nav-center">
-    <div class="nav-pill">📝 Question </div>
+  <a href="https://gaith-team.github.io/exam/medical1/index.html" class="nav-back"><i class="fa-solid fa-arrow-right"></i> رجوع</a>
+  <div class="nav-brand">
+    <div class="nav-logo-icon">GT</div>
+    <span>GHAITH TEAM</span>
   </div>
-  <button class="theme-toggle" id="themeBtn">🌙</button>
+  <div class="nav-right">
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
 </nav>
 
-<!-- ══ START SCREEN ══ -->
-<div class="screen active" id="startScreen">
-  <div class="start-icon">📝</div>
-  <h1 class="start-title">أسئلة  <span id="quizTitleDisplay"></span></h1>
-  <p class="start-sub" id="startDesc">Test your knowledge — read each question and choose the correct answer</p>
-  <div class="start-meta">
-    <div class="meta-pill"><strong id="totalQDisplay">0</strong> Questions</div>
-    <div class="meta-pill">⏱ No time limit</div>
-    <div class="meta-pill">🎯 Multiple choice</div>
-  </div>
-  <button class="btn-start" onclick="startQuiz()">🚀 Start Quiz</button>
-</div>
-
-<!-- ══ QUIZ SCREEN ══ -->
-<div class="screen" id="quizScreen">
-  <div class="quiz-wrap">
-
-    <div class="quiz-progress-row">
-      <div class="progress-track">
-        <div class="progress-fill" id="progressFill" style="width:0%"></div>
-      </div>
-      <div class="progress-label" id="progressLabel">1 / 1</div>
-    </div>
-
-    <div class="q-card" id="qCard">
-      <div class="q-num" id="qNum">QUESTION 1</div>
-      <div class="q-text" id="qText"></div>
-      <div class="options-list" id="optsList"></div>
-      <div class="feedback-box" id="feedbackBox">
-        <span class="feedback-icon" id="feedbackIcon"></span>
-        <span id="feedbackText"></span>
-      </div>
-    </div>
-
-    <div class="quiz-nav">
-      <button class="btn-nav btn-skip" onclick="skipQuestion()">→ Skip</button>
-      <button class="btn-nav btn-next" id="btnNext" onclick="nextQuestion()" disabled>
-        Next →
-      </button>
-    </div>
-
+<div class="hero-band">
+  <div class="hero-band-icon">📋</div>
+  <h1>Medical-Surgical Nursing 1 </h1>
+  <p> إسم المحاضرة</p>
+  <div class="hero-band-meta">
+    <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">-- سؤال</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-clock"></i> 35 Min</div>
+    <div class="meta-pill"><i class="fa-solid fa-shuffle"></i> Shuffled</div>
   </div>
 </div>
 
-<!-- ══ RESULT SCREEN ══ -->
-<div class="screen" id="resultScreen">
-  <div class="result-emoji" id="resultEmoji">🎉</div>
-
-  <div class="result-circle" id="resultCircle">
-    <svg viewBox="0 0 140 140">
-      <circle class="circle-bg"   cx="70" cy="70" r="62"/>
-      <circle class="circle-fill" cx="70" cy="70" r="62" id="circleArc"
-              stroke-dasharray="389.6"
-              stroke-dashoffset="389.6"/>
-    </svg>
-    <div class="result-pct">
-      <span id="pctNum">0</span>%
-      <small>Score</small>
+<div class="shell">
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="val stat-correct" id="sCorrect">0</div>
+      <div class="lbl">✔ صحيح</div>
+    </div>
+    <div class="stat-box">
+      <div class="val stat-wrong" id="sWrong">0</div>
+      <div class="lbl">✖ خطأ</div>
+    </div>
+    <div class="stat-box">
+      <div class="val stat-remain" id="sRemain">--%</div>
+      <div class="lbl">⏳ متبقي</div>
     </div>
   </div>
 
-  <h2 class="result-title" id="resultTitle">Well done!</h2>
-  <p class="result-sub" id="resultSub">You have completed the quiz</p>
-
-  <div class="result-stats">
-    <div class="rstat correct-s">
-      <div class="rv" id="rCorrect">0</div>
-      <div class="rl">✅ Correct</div>
-    </div>
-    <div class="rstat wrong-s">
-      <div class="rv" id="rWrong">0</div>
-      <div class="rl">❌ Wrong</div>
-    </div>
-    <div class="rstat skip-s">
-      <div class="rv" id="rSkip">0</div>
-      <div class="rl">⏭ Skipped</div>
-    </div>
+  <!-- PROGRESS STRIP -->
+  <div class="prog-strip">
+    <div class="prog-label" id="progLabel">سؤال ١</div>
+    <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+    <div class="timer-badge" id="timerBadge"><i class="fa-regular fa-clock"></i> <span id="timerTxt">35:00</span></div>
   </div>
 
-  <div class="result-actions">
-    <button class="btn-retry" onclick="retryQuiz()">🔄 Try Again</button>
-    <button class="btn-review" onclick="showReview()">📋 Review Answers</button>
-  </div>
+  <!-- APP -->
+  <div id="app"></div>
 </div>
 
-<!-- ══ REVIEW SCREEN ══ -->
-<div class="screen" id="reviewScreen">
-  <div class="review-wrap">
-    <div class="review-header">
-      <h2>📋 Answer Review</h2>
-      <p>Correct answers in green — your wrong answers in red</p>
-    </div>
-    <div id="reviewList"></div>
-    <button class="btn-back-result" onclick="showResult()">← Back to Results</button>
-  </div>
-</div>
+<footer>
+  <div class="footer-brand">GHAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg">
+    <i class="fa-brands fa-telegram"></i> @nursing2bu
+  </a>
+</footer>
 
 <script>
-const QUIZ_TITLE = "مراجعة شامله ";
-const QUIZ_DESC  = "أسئله شامله علي أول 6 محاضرات ";
-
 const QUESTIONS = [
+   // MCQ Easy
+      {t:"What is the FIRST step in the nursing process?",o:["Assessment","Diagnosis","Planning","Evaluation"],a:0,type:"mcq",difficulty:"easy"},
+      {t:"Which type of data consists of verbal statements from the patient such as complaints and descriptions of pain?",o:["Objective data","Subjective data","Secondary data","Diagnostic data"],a:1,type:"mcq",difficulty:"easy"},
+      {t:"NANDA stands for:",o:["National Association of Nursing Diagnosis Administrators","North American Nursing Diagnosis Association","National Accreditation for Nursing Diagnosis Approaches","Nursing Assessment and Diagnosis Association"],a:1,type:"mcq",difficulty:"easy"},
+      // MCQ Medium
+      {t:"Which component of critical thinking involves translating complex medical information into terms that patients and families can understand?",o:["Inference","Interpretation","Explanation","Self-regulation"],a:2,type:"mcq",difficulty:"medium"},
+      {t:"A nursing diagnosis differs from a medical diagnosis in that it:",o:["Focuses on the illness or disease process","Changes as the client's response and health problem changes","Remains constant until a cure is effected","Is formulated only by physicians"],a:1,type:"mcq",difficulty:"medium"},
+      {t:"In the nursing process, which phase involves determining whether goals have been met, partially met, or not met?",o:["Assessment","Planning","Implementation","Evaluation"],a:3,type:"mcq",difficulty:"medium"},
+      {t:"Which of the following is an example of OBJECTIVE data?",o:["The patient states 'I have a severe headache'","Temperature 38.5°C, pulse 100 bpm, blood pressure 130/76 mmHg","The patient reports burning pain in the stomach","The patient feels very anxious about surgery"],a:1,type:"mcq",difficulty:"medium"},
+      // MCQ Hard
+      {t:"A risk nursing diagnosis is composed of:",o:["Diagnostic label, related factors, and signs and symptoms","Diagnostic label preceded by 'risk for' with specific risk factors listed","Diagnostic label and expected outcomes only","Medical diagnosis with contributing factors"],a:1,type:"mcq",difficulty:"hard"},
+      {t:"According to Maslow's Hierarchy of Needs applied to the nursing process, which needs should the nurse address FIRST?",o:["Self-esteem and self-actualization needs","Safety and security needs","Basic physiological needs (airway, breathing, circulation)","Love and belonging needs"],a:2,type:"mcq",difficulty:"hard"},
+      {t:"Which of the following best describes an appropriate, well-written nursing expected outcome?",o:["Patient will feel better after treatment","Patient will understand pain management","Patient will rate pain ≤3 on a 0-10 scale within 24 hours of analgesic administration","Patient will recover fully from surgery"],a:2,type:"mcq",difficulty:"hard"},
+      // T/F
+      {t:"Critical thinking in nursing means simply criticizing the decisions made by other healthcare professionals.",o:["True","False"],a:1,type:"tf",difficulty:"easy"},
+      {t:"Nursing assessment is a continuous, dynamic process that does not end with the initial patient interview and physical examination.",o:["True","False"],a:0,type:"tf",difficulty:"easy"},
+      {t:"A possible (potential) nursing diagnosis indicates that a problem currently exists in the patient and requires immediate intervention.",o:["True","False"],a:1,type:"tf",difficulty:"medium"},
+      {t:"Pain receptors located throughout the body tissues (except the brain) are called:",o:["Baroreceptors","Chemoreceptors","Nociceptors","Proprioceptors"],a:2,type:"mcq",difficulty:"easy"},
+      {t:"Chronic pain is defined as pain lasting longer than:",o:["1 month","3 months","6 months","12 months"],a:2,type:"mcq",difficulty:"easy"},
+      {t:"Pain that occurs in an area of the body remote from the affected organ — such as cardiac pain radiating to the left arm — is called:",o:["Radiating pain","Deep somatic pain","Cutaneous pain","Referred pain"],a:3,type:"mcq",difficulty:"easy"},
+      // MCQ Medium
+      {t:"The SYMPATHETIC physiological response to moderate, superficial pain includes:",o:["Increased blood pressure, pulse, and respirations","Nausea, vomiting, and fainting","Decreased blood pressure and pulse","Rapid, irregular breathing"],a:0,type:"mcq",difficulty:"medium"},
+      {t:"The PQRST mnemonic for pain assessment stands for:",o:["Pain, Quality, Radiation, Severity, Timing","Position, Quality, Relief, Severity, Type","Provocative/Palliative factors, Quality, Radiation, Severity, Temporal (Time)","Pain, Quantity, Region, Status, Time"],a:2,type:"mcq",difficulty:"medium"},
+      {t:"Non-narcotic analgesics (e.g., aspirin, NSAIDs) produce their analgesic effect primarily at the:",o:["Central nervous system","Peripheral nervous system","Spinal cord only","Thalamus and cerebral cortex"],a:1,type:"mcq",difficulty:"medium"},
+      {t:"Cold therapy provides pain relief primarily by:",o:["Dilating blood vessels and increasing local blood flow","Slowing transmission of first-order neurons, decreasing pain stimuli","Promoting muscle relaxation and reducing tension","Stimulating endorphin release"],a:1,type:"mcq",difficulty:"medium"},
+      // MCQ Hard
+      {t:"A major side effect of narcotic analgesics (e.g., morphine) that requires careful nursing monitoring is:",o:["Hypertension and bradycardia","Respiratory depression, sedation, and risk of addiction","Diarrhea and increased appetite","Skin rash and photosensitivity"],a:1,type:"mcq",difficulty:"hard"},
+      {t:"Progressive relaxation training (PRT) as a non-pharmacological pain relief intervention primarily works by:",o:["Focusing solely on rhythmic breathing patterns","Insertion of needles into specific acupressure points","Successively tensing then relaxing voluntary skeletal muscle groups","Applying moist heat to the painful area"],a:2,type:"mcq",difficulty:"hard"},
+      {t:"A patient with chronic pain is MOST likely to exhibit which behavioral pattern?",o:["Active grimacing, restlessness, and crying","Social withdrawal, depression, immobility, and controlling behaviors","Tachycardia, diaphoresis, and pupil dilation","Moving away from painful stimuli and guarding"],a:1,type:"mcq",difficulty:"hard"},
+      // T/F
+      {t:"Pain is an objective experience that can be accurately measured by laboratory tests or X-rays.",o:["True","False"],a:1,type:"tf",difficulty:"easy"},
+      {t:"The older adult typically has a higher pain threshold and decreased perception of sensory stimuli, increasing their risk of serious injury.",o:["True","False"],a:0,type:"tf",difficulty:"medium"},
+      {t:"Distraction techniques (e.g., music, reading, visiting with family) have been effective in relieving both acute and chronic pain.",o:["True","False"],a:0,type:"tf",difficulty:"easy"},
+      {t:"The PREOPERATIVE phase of perioperative nursing begins when:",o:["The decision is made to perform surgery until the patient is transferred to the OR","The patient is transferred onto the operating room bed","The patient arrives in the post-anesthesia care unit (PACU)","The patient is discharged from the hospital"],a:0,type:"mcq",difficulty:"easy"},
+      {t:"Emergency surgery is classified as surgery requiring intervention:",o:["Within a few weeks or months","Within 24 to 30 hours","Based on personal preference","Without delay — life-threatening condition"],a:3,type:"mcq",difficulty:"easy"},
+      {t:"Which surgical position is most commonly used for PELVIC surgery?",o:["Dorsal recumbent (supine) position","Trendelenburg position","Prone position","Lateral position"],a:1,type:"mcq",difficulty:"easy"},
+      {t:"The primary purpose of preoperative skin preparation is to:",o:["Promote patient comfort and hygiene","Minimize skin contamination and reduce risk of postoperative wound infection","Facilitate skin monitoring of vital signs","Remove hair for cosmetic reasons only"],a:1,type:"mcq",difficulty:"easy"},
+      // MCQ Medium
+      {t:"Which type of anesthesia involves the loss of sensation in one specific region of the body WITHOUT loss of consciousness?",o:["General anesthesia","Local or regional block anesthesia","Spinal anesthesia causing loss below the diaphragm","Intravenous sedation causing unconsciousness"],a:1,type:"mcq",difficulty:"medium"},
+      {t:"Preoperative medication containing atropine or hyoscine is administered primarily to:",o:["Reduce anxiety and pain","Promote amnesia","Reduce secretions in the mouth, nose, throat, and bronchi","Enhance the hypnotic effects of general anesthesia"],a:2,type:"mcq",difficulty:"medium"},
+      {t:"During the intraoperative phase, who is responsible for COUNTING sponges, needles, and instruments?",o:["The scrub nurse only","The circulating nurse only","Both the scrub nurse and circulating nurse together","The surgeon and assistant surgeon"],a:2,type:"mcq",difficulty:"medium"},
+      {t:"In the PACU (Phase I), vital signs should initially be monitored every:",o:["15 minutes until stable","30 minutes for the first 2 hours","60 minutes for the first 4 hours","Every 4 hours until ordered otherwise"],a:0,type:"mcq",difficulty:"medium"},
+      // MCQ Hard
+      {t:"A patient with diabetes mellitus undergoing surgery is at risk for which specific complication related to anesthesia and perioperative fasting?",o:["Respiratory depression from anesthetic agents","Malignant hyperthermia reaction","Both hypoglycemia AND hyperglycemia","Anaphylaxis to anesthetic medications"],a:2,type:"mcq",difficulty:"hard"},
+      {t:"Early postoperative ambulation benefits the patient by preventing all of the following EXCEPT:",o:["Deep vein thrombosis (DVT)","Constipation and paralytic ileus","Urinary retention","Surgical site bleeding"],a:3,type:"mcq",difficulty:"hard"},
+      {t:"To reduce pulmonary and wound-healing complications, patients who smoke are urged to stop smoking for at least how long before surgery?",o:["24–48 hours","1–2 weeks","4–8 weeks","3–6 months"],a:2,type:"mcq",difficulty:"hard"},
+      {t:"A patient returning from the OR has ineffective airway clearance. The MOST appropriate nursing positioning is:",o:["Supine, flat with head extended","Side-lying or semi-prone with head tilted back and jaw supported forward","High-Fowler's position","Prone position with head down"],a:1,type:"mcq",difficulty:"hard"},
+      // T/F
+      {t:"Informed consent can be appropriately obtained AFTER the patient has received preoperative sedation.",o:["True","False"],a:1,type:"tf",difficulty:"easy"},
+      {t:"Kidney surgery typically uses the lateral surgical position.",o:["True","False"],a:0,type:"tf",difficulty:"medium"},
+      {t:"General anesthesia results in complete unconsciousness and loss of pain sensation throughout the entire body.",o:["True","False"],a:0,type:"tf",difficulty:"easy"},
+      {t:"The postoperative phase ends when the patient is discharged from the recovery room.",o:["True","False"],a:1,type:"tf",difficulty:"medium"},
+      {t:"Chronic illness is defined as a disease that:",o:["Resolves within 6 months with treatment","Lasts one year or more and requires ongoing medical attention or limits daily activity","Always requires hospitalization","Is caused exclusively by genetic factors"],a:1,type:"mcq",difficulty:"easy"},
+      {t:"Which level of prevention involves actions to REDUCE THE IMPACT of an already established disease by restoring function?",o:["Primordial prevention","Primary prevention","Secondary prevention","Tertiary prevention"],a:3,type:"mcq",difficulty:"easy"},
+      // MCQ Medium
+      {t:"The 'unstable phase' of the chronic illness trajectory is characterized by:",o:["Being at risk due to genetic or lifestyle factors with no symptoms yet","Exacerbation of symptoms, complications, or reactivation of illness in remission","A gradual decline despite treatment efforts","Complete recovery after an acute episode"],a:1,type:"mcq",difficulty:"medium"},
+      {t:"In the trajectory model, the FIRST step in nursing management of chronic illness is to:",o:["Establish goals of care collaboratively","Assess to identify the specific trajectory phase","Implement nursing interventions immediately","Evaluate the effectiveness of existing interventions"],a:1,type:"mcq",difficulty:"medium"},
+      {t:"'Self-care deficit: bathing/hygiene' due to disability is categorized as which component of the nursing process?",o:["Nursing assessment finding","Nursing diagnosis","Nursing goal/expected outcome","Nursing evaluation"],a:1,type:"mcq",difficulty:"medium"},
+      // MCQ Hard
+      {t:"The 'pretrajectory phase' of chronic illness refers to:",o:["The stage characterized by sudden severe symptoms requiring hospitalization","The period at risk for developing chronic illness due to genetic factors or lifestyle behaviors","The phase marked by recovery after an acute period","The stage of gradual worsening despite treatment"],a:1,type:"mcq",difficulty:"hard"},
+      // T/F
+      {t:"Chronic illness is always curable with appropriate, sustained medical treatment.",o:["True","False"],a:1,type:"tf",difficulty:"easy"},
+      {t:"Disability can result from both sudden acute incidents (e.g., stroke) and the progression of chronic conditions (e.g., multiple sclerosis).",o:["True","False"],a:0,type:"tf",difficulty:"easy"},
+      {t:"Total body water comprises what percentage of an average adult's body weight?",o:["40%","60%","80%","50%"],a:1,type:"mcq",difficulty:"easy"},
+      {t:"Normal serum sodium (Na⁺) level is:",o:["125–130 mEq/L","135–145 mEq/L","145–155 mEq/L","150–160 mEq/L"],a:1,type:"mcq",difficulty:"easy"},
+      {t:"Normal serum potassium (K⁺) level is:",o:["2.0–3.0 mEq/L","3.5–5.0 mEq/L","5.5–7.0 mEq/L","1.5–2.5 mEq/L"],a:1,type:"mcq",difficulty:"easy"},
+      {t:"Signs of HYPERNATREMIA include:",o:["Thirst, dry sticky mucous membranes, restlessness, and disorientation","Muscle spasms, convulsions, and weight gain","Confusion, orthostatic hypotension, and nausea","Edema, weight gain, and distended neck veins"],a:0,type:"mcq",difficulty:"easy"},
+      // MCQ Medium
+      {t:"Which assessment finding is MOST associated with fluid volume EXCESS (FVE)?",o:["Flat neck veins and orthostatic hypotension","Bounding pulse and distended neck veins","Sunken eyes and poor skin turgor","Decreased pulse rate and inelastic skin turgor"],a:1,type:"mcq",difficulty:"medium"},
+      {t:"Positive Chvostek's sign (facial muscle spasm on tapping the cheek) is associated with which electrolyte imbalance?",o:["Hyperkalemia","Hypomagnesemia","Hypocalcemia","Hypernatremia"],a:2,type:"mcq",difficulty:"medium"},
+      {t:"When treating HYPERKALEMIA, insulin combined with IV glucose is administered to:",o:["Stimulate renal excretion of potassium","Move potassium from the extracellular space back into the cells","Bind potassium ions in the gastrointestinal tract","Decrease myocardial irritability directly"],a:1,type:"mcq",difficulty:"medium"},
+      {t:"A patient loses 10–15% of body weight due to fluid deficit. This is classified as:",o:["Mild FVD","Moderate FVD","Severe FVD","Fatal FVD"],a:2,type:"mcq",difficulty:"medium"},
+      {t:"Normal serum magnesium (Mg²⁺) level is:",o:["3.5–5.0 mEq/L","1.5–2.5 mEq/L","4.5–5.5 mEq/L","0.5–1.0 mEq/L"],a:1,type:"mcq",difficulty:"medium"},
+      // MCQ Hard
+      {t:"A patient has been receiving nasogastric suctioning for 3 days. Which electrolyte imbalance pattern is MOST likely?",o:["Hypernatremia and hyperkalemia","Hypermagnesemia and hypercalcemia","Hypokalemia, hypochloremia, and fluid volume deficit","Hyperphosphatemia and hyponatremia"],a:2,type:"mcq",difficulty:"hard"},
+      {t:"In hypocalcemia, the nurse should take which of the following precautions as a priority?",o:["Administer loop diuretics to excrete excess calcium","Restrict calcium and vitamin D in the diet","Implement seizure precautions and monitor cardiovascular status","Encourage ambulation to prevent further bone loss"],a:2,type:"mcq",difficulty:"hard"},
+      {t:"Which IV fluid is MOST appropriate for initial replacement in a patient with moderate, uncomplicated fluid volume deficit (dehydration)?",o:["Colloid solution (albumin) to increase oncotic pressure","Hypertonic saline (3% NaCl)","Isotonic crystalloid solution (normal saline or Lactated Ringer's)","Hypotonic solution (0.45% NaCl) only"],a:2,type:"mcq",difficulty:"hard"},
+      // T/F
+      {t:"The intravascular and interstitial spaces are BOTH components of the extracellular fluid (ECF) compartment.",o:["True","False"],a:0,type:"tf",difficulty:"easy"},
+      {t:"Distended neck veins are a sign of fluid volume DEFICIT (dehydration).",o:["True","False"],a:1,type:"tf",difficulty:"medium"},
+      {t:"Normal arterial blood pH range is 7.36 to 7.44.",o:["True","False"],a:0,type:"tf",difficulty:"easy"},
+      {t:"Hypocalcemia can produce muscle cramps, tetany, and a positive Trousseau's sign.",o:["True","False"],a:0,type:"tf",difficulty:"medium"},
+      {t:"Pneumonia is best defined as:",o:["Chronic inflammation causing excessive mucus secretion and cough","Inflammation of the lung parenchyma impairing gas exchange","Destruction of alveolar walls and enlargement of distal air spaces","Obstruction of airflow in the major bronchi"],a:1,type:"mcq",difficulty:"easy"},
+      {t:"The MOST IMPORTANT risk factor for developing COPD is:",o:["Occupational exposure to dust and chemicals","Air pollution and passive smoking","Cigarette smoking (accounts for 80–90% of cases)","Alpha-1 antitrypsin deficiency"],a:2,type:"mcq",difficulty:"easy"},
+      {t:"Chronic bronchitis is clinically defined as a productive cough lasting:",o:["At least 3 months in each of 2 consecutive years","At least 6 months in 1 year","Any chronic cough lasting more than 1 month","Dry cough for more than 3 months"],a:0,type:"mcq",difficulty:"easy"},
+      // MCQ Medium
+      {t:"The 'barrel chest' thorax configuration in advanced COPD results from:",o:["Excessive mucus accumulation in the bronchi","Hyperinflation fixing the ribs in inspiratory position and loss of lung elasticity","Fibrosis and scarring of lung tissue","Fluid accumulation in the pleural cavity"],a:1,type:"mcq",difficulty:"medium"},
+      {t:"An FEV1/FVC ratio of less than 70% is diagnostic of:",o:["Restrictive lung disease","Normal lung function","Obstructive lung disease (COPD)","Pulmonary fibrosis"],a:2,type:"mcq",difficulty:"medium"},
+      {t:"The term 'blue bloater' used to describe a clinical manifestation of COPD refers to:",o:["Rhonchi and wheezing on auscultation","Cyanosis associated with chronic hypoxia","Clubbing of the fingers","Intercostal muscle use during breathing"],a:1,type:"mcq",difficulty:"medium"},
+      // MCQ Hard
+      {t:"In an ELDERLY patient with pneumonia, which symptom is MOST LIKELY to appear FIRST?",o:["Pleuritic chest pain aggravated by respiration","Altered mental status and dehydration","Sudden fever of 40°C with shaking chills","Hemoptysis and purulent sputum"],a:1,type:"mcq",difficulty:"hard"},
+      {t:"Bronchodilators (e.g., albuterol, theophylline) are used in COPD primarily to:",o:["Suppress the cough reflex","Relieve bronchospasm and reduce airway obstruction","Promote expectoration of sputum","Reduce pulmonary inflammation"],a:1,type:"mcq",difficulty:"hard"},
+      {t:"Cor pulmonale, a serious complication of COPD, is best described as:",o:["Right ventricular failure secondary to pulmonary disease and hypertension","Left ventricular hypertrophy from systemic hypertension","Pulmonary embolism obstructing the main pulmonary artery","Pleural effusion compressing the lung"],a:0,type:"mcq",difficulty:"hard"},
+      // T/F
+      {t:"Emphysema is characterized by destruction of alveolar walls and enlargement of distal airspaces, impairing gas exchange.",o:["True","False"],a:0,type:"tf",difficulty:"easy"},
+      {t:"Pneumococcal vaccine should be administered annually to all patients with COPD.",o:["True","False"],a:1,type:"tf",difficulty:"medium"},
+      {t:"Atelectasis (partial or complete lung collapse) is a potential complication of pneumonia.",o:["True","False"],a:0,type:"tf",difficulty:"easy"},
+      {t:"Asthma is currently classified as a type of COPD due to its similar airflow obstruction mechanism.",o:["True","False"],a:1,type:"tf",difficulty:"hard"},
+      {t:"The spread of cancer cells from the primary tumor to form new tumors in distant sites is called:",o:["Carcinogenesis","Benign transformation","Metastasis","Neoplasia"],a:2,type:"mcq",difficulty:"easy"},
+      {t:"The process of transforming normal cells into malignant cells is called:",o:["Carcinogenesis","Metastasis","Malignant progression","Oncogenesis"],a:0,type:"mcq",difficulty:"easy"},
+      // MCQ Medium
+      {t:"In the TNM staging system, 'M1' indicates:",o:["No evidence of the primary tumor","Regional lymph node involvement present","Presence of distant metastasis","Tumor is unable to be assessed"],a:2,type:"mcq",difficulty:"medium"},
+      {t:"Which of the following is an UNCONTROLLABLE risk factor for cancer?",o:["Tobacco use and smoking","Obesity and sedentary lifestyle","Family history and genetic predisposition","Alcohol and drug abuse"],a:2,type:"mcq",difficulty:"medium"},
+      {t:"Stage I cancer means:",o:["The cancer has spread to other organs","The cancer is localized and has NOT spread to lymph nodes or other tissues","The cancer has grown but not yet spread","The cancer has involved regional lymph nodes"],a:1,type:"mcq",difficulty:"medium"},
+      {t:"The American Cancer Society (ACS) recommends screening mammography every 2 years for women aged:",o:["20–40 years","40–50 years","50–60 years","All women regardless of age"],a:1,type:"mcq",difficulty:"medium"},
+      // MCQ Hard
+      {t:"Radiation therapy can be used for ALL of the following EXCEPT:",o:["Curative treatment of localized thyroid carcinoma","Prophylactic prevention of leukemic CNS infiltration","Palliative relief of pain from bone metastases","Primary diagnostic imaging of suspected cancer"],a:3,type:"mcq",difficulty:"hard"},
+      // T/F
+      {t:"Benign tumors can invade surrounding tissues and spread to distant organs through the bloodstream.",o:["True","False"],a:1,type:"tf",difficulty:"easy"},
+      {t:"Radiation therapy can cause systemic effects including nausea, vomiting, anemia, leucopenia, and thrombocytopenia.",o:["True","False"],a:0,type:"tf",difficulty:"medium"},
+      {t:"Alopecia caused by chemotherapy is usually PERMANENT and does not regrow after treatment ends.",o:["True","False"],a:1,type:"tf",difficulty:"medium"},
+      {t:"Peptic ulcer disease has the greatest frequency in which age group?",o:["10–20 years","25–50 years","55–70 years","Over 75 years"],a:1,type:"mcq",difficulty:"easy"},
+      {t:"The characteristic pain of a DUODENAL ulcer is:",o:["Relieved by eating; returns when stomach is empty or alkali wears off","Worsens after eating and radiates to the right shoulder","Constant, severe, and unrelieved by antacids or food","Occurs mainly in the right lower quadrant"],a:0,type:"mcq",difficulty:"easy"},
+      {t:"The MOST COMMON type of liver cirrhosis is:",o:["Alcoholic cirrhosis","Postnecrotic (viral) cirrhosis","Biliary cirrhosis","Schistosomal cirrhosis"],a:0,type:"mcq",difficulty:"easy"},
+      // MCQ Medium
+      {t:"First-line treatment for H. pylori-associated peptic ulcer disease is:",o:["H2-receptor antagonists alone (ranitidine)","NSAIDs combined with antacids","Antibiotics combined with proton pump inhibitors (e.g., omeprazole)","Sucralfate and dietary modification only"],a:2,type:"mcq",difficulty:"medium"},
+      {t:"Pyrosis, a symptom of peptic ulcer disease, refers to:",o:["Abdominal rigidity and tenderness","Eructation (belching)","Heartburn — a burning sensation in the esophagus and stomach moving up to the mouth","Epigastric tenderness on deep palpation"],a:2,type:"mcq",difficulty:"medium"},
+      {t:"Ascites (fluid accumulation in the peritoneal cavity) in liver cirrhosis is a sign of:",o:["Compensated cirrhosis","Decompensated cirrhosis","Acute alcoholic hepatitis only","Early-stage biliary obstruction"],a:1,type:"mcq",difficulty:"medium"},
+      {t:"In liver cirrhosis, which laboratory finding is characteristic?",o:["Serum albumin increases; globulin decreases","Serum albumin decreases; globulin rises; prothrombin time is prolonged","Serum bilirubin decreases; liver enzymes are normal","All liver enzymes decrease significantly"],a:1,type:"mcq",difficulty:"medium"},
+      // MCQ Hard
+      {t:"Asterixis (liver flap), observed by hyperextending the patient's wrist, indicates which complication of liver cirrhosis?",o:["Mild, compensated cirrhosis with good hepatic reserve","Normal neurological function in cirrhosis","Hepatic encephalopathy (stages II–III impending/stuporous)","Portal hypertension with esophageal varices"],a:2,type:"mcq",difficulty:"hard"},
+      // T/F
+      {t:"NSAIDs protect the gastric mucosa by stimulating increased mucus secretion.",o:["True","False"],a:1,type:"tf",difficulty:"easy"},
+      {t:"The definitive diagnosis of liver cirrhosis is confirmed by liver biopsy.",o:["True","False"],a:0,type:"tf",difficulty:"medium"},
+      {t:"Patients with liver cirrhosis and ascites should consume a HIGH-sodium diet to maintain fluid balance.",o:["True","False"],a:1,type:"tf",difficulty:"easy"},
+      {t:"Hypertension is defined as a persistent elevation of blood pressure above:",o:["140/90 mmHg based on two or more readings","130/80 mmHg on a single reading","120/70 mmHg on multiple readings","150/100 mmHg on one reading"],a:0,type:"mcq",difficulty:"easy"},
+      {t:"Hypertension is called the 'silent killer' because:",o:["It always causes sudden unexpected death","It typically occurs without symptoms until serious target organ damage has occurred","It only affects the cardiovascular system silently","It is caused by silent opportunistic infections"],a:1,type:"mcq",difficulty:"easy"},
+      {t:"Rheumatic fever is caused by an autoimmune inflammatory reaction to infection with:",o:["Staphylococcus aureus","Group A beta-hemolytic Streptococcus (Streptococcus pyogenes)","Pseudomonas aeruginosa","Klebsiella pneumoniae"],a:1,type:"mcq",difficulty:"easy"},
+      // MCQ Medium
+      {t:"According to JNC 7, Stage 1 hypertension is defined as:",o:["Systolic 120–139 mmHg or diastolic 80–89 mmHg (prehypertension)","Systolic 140–159 mmHg or diastolic 90–99 mmHg","Systolic ≥160 mmHg or diastolic ≥100 mmHg","Systolic <120 mmHg and diastolic <80 mmHg (normal)"],a:1,type:"mcq",difficulty:"medium"},
+      {t:"Primary (essential) hypertension accounts for approximately what percentage of all adult hypertension cases?",o:["50% of cases","70% of cases","More than 90% of cases","Less than 30% of cases"],a:2,type:"mcq",difficulty:"medium"},
+      {t:"Which organ is a MAJOR TARGET of hypertension-related damage?",o:["Spleen and thyroid gland","Pancreas and adrenal glands","Kidney (chronic kidney disease and renal failure)","Skeletal muscles and joints"],a:2,type:"mcq",difficulty:"medium"},
+      {t:"MAJOR diagnostic criteria for rheumatic fever include ALL of the following EXCEPT:",o:["Carditis (inflammation of the heart)","Chorea (involuntary jerky movements)","Erythema marginatum (rash with ragged edge)","Prolonged PR interval on ECG"],a:3,type:"mcq",difficulty:"medium"},
+      // MCQ Hard
+      {t:"Malignant hypertension is characterized by a diastolic blood pressure above:",o:["90 mmHg","100 mmHg","120 mmHg","140 mmHg"],a:2,type:"mcq",difficulty:"hard"},
+      {t:"The MOST USEFUL diagnostic test for detecting rheumatic heart disease valve problems is:",o:["Chest X-ray (for cardiac enlargement)","Electrocardiogram (ECG) for rhythm assessment","Throat culture to detect strep infection","Echocardiogram (echo) using sound waves"],a:3,type:"mcq",difficulty:"hard"},
+      {t:"The recommended antibiotic prophylaxis before dental procedures in high-risk patients with rheumatic heart disease is:",o:["Penicillin V 500 mg orally twice daily for 5 days","Amoxicillin 2 g orally 1 hour before the procedure","Erythromycin 1 g IV immediately before the procedure","Tetracycline 500 mg orally twice daily"],a:1,type:"mcq",difficulty:"hard"},
+      // T/F
+      {t:"Isolated systolic hypertension (ISH) occurs when systolic BP is ≥140 mmHg while diastolic BP remains BELOW 90 mmHg.",o:["True","False"],a:0,type:"tf",difficulty:"medium"},
+      {t:"Rheumatic heart disease is a temporary condition that fully resolves with a complete antibiotic course.",o:["True","False"],a:1,type:"tf",difficulty:"medium"},
+      {t:"Smoking is a major risk factor for hypertension because nicotine causes vasoconstriction of blood vessels.",o:["True","False"],a:0,type:"tf",difficulty:"easy"},
+      {t:"Anemia is defined as:",o:["A hemoglobin concentration LOWER than normal limits","A WBC count higher than normal","A decreased platelet count (thrombocytopenia)","An elevated hematocrit level above normal"],a:0,type:"mcq",difficulty:"easy"},
+      {t:"The MOST COMMON cause of iron deficiency anemia in PREMENOPAUSAL women is:",o:["Inadequate dietary iron intake","Menorrhagia (excessive menstrual bleeding) and/or pregnancy","Hemolysis of red blood cells","Chronic renal disease"],a:1,type:"mcq",difficulty:"easy"},
+      // MCQ Medium
+      {t:"Leukemia is best described as:",o:["A deficiency of circulating red blood cells","A decrease in platelet production by the bone marrow","Malignant proliferation of WBC precursors in bone marrow accumulating in peripheral blood and tissues","Inflammation of lymph nodes from infection"],a:2,type:"mcq",difficulty:"medium"},
+      {t:"The hallmark clinical finding indicating SEVERELY impaired oxygen transport in anemia is:",o:["Hypertension and bradycardia","Fever and lymphadenopathy","Tachycardia and tachypnea at rest","Peripheral edema and ascites"],a:2,type:"mcq",difficulty:"medium"},
+      {t:"Bone marrow aspiration in adults is most commonly performed at the:",o:["Iliac crest","Sternum only","Lumbar vertebral body","Proximal femur"],a:0,type:"mcq",difficulty:"medium"},
+      {t:"Acute lymphocytic leukemia (ALL) is MOST common in which patient population?",o:["Elderly adults over 70 years","Middle-aged adults 40–60 years","Children (also found in some adults)","Infants under 1 year of age"],a:2,type:"mcq",difficulty:"hard"},
+      {t:"The definitive method for establishing a diagnosis of iron deficiency anemia is bone marrow aspiration to assess iron stores.",o:["True","False"],a:0,type:"tf",difficulty:"medium"},
+      {t:"All patients with chronic lymphocytic leukemia (CLL) are symptomatic from the time of initial diagnosis.",o:["True","False"],a:1,type:"tf",difficulty:"hard"},
+      {t:"One unit of packed red blood cells (PRBCs) typically raises the hemoglobin level by approximately 1 g/dL.",o:["True","False"],a:0,type:"tf",difficulty:"easy"},
 
-// ── CRITICAL THINKING (30 MCQ) ─────────────────────
-{t:"Critical thinking in nursing is best described as:",o:["Simple criticism of patient care decisions","A multidimensional skill involving purposeful, systematic, reflective thinking based on knowledge","Following physician orders exactly as written","Memorizing medical procedures and protocols"],a:1,topic:"ct",diff:"easy",type:"mcq"},
-{t:"EBP stands for:",o:["Evidence-Based Protocol","Evidence-Based Practice","Evidence-Based Prevention","Evidence-Based Program"],a:1,topic:"ct",diff:"easy",type:"mcq"},
-{t:"Critical thinking skills in nursing are important primarily because they help nurses:",o:["Reduce their workload","Follow routine tasks more efficiently","Prioritize care and make key decisions that can save lives","Document patient information faster"],a:2,topic:"ct",diff:"easy",type:"mcq"},
-{t:"Which of the following is NOT a characteristic of a critical thinker?",o:["Inquisitive","Fair-minded","Closed-minded to alternative solutions","Truth seeker"],a:2,topic:"ct",diff:"easy",type:"mcq"},
-{t:"The component of critical thinking that involves 'making logical deductions about the impact of care decisions' is:",o:["Interpretation","Explanation","Inference","Evaluation"],a:2,topic:"ct",diff:"medium",type:"mcq"},
-{t:"NANDA stands for:",o:["North American Nursing Diagnosis Association","National Association of Nursing Diagnosis Advancement","Nursing Assessment and Diagnosis Alliance","National American Nursing and Diagnosis Agency"],a:0,topic:"ct",diff:"easy",type:"mcq"},
-{t:"Which component of critical thinking is used to 'determine the significance of data gathered'?",o:["Evaluation","Inference","Explanation","Interpretation"],a:3,topic:"ct",diff:"medium",type:"mcq"},
-{t:"A case-based approach in nursing critical thinking requires:",o:["Reviewing textbooks during patient care","Going through a clinical situation from start to finish","Consulting only the attending physician","Relying solely on past experience"],a:1,topic:"ct",diff:"easy",type:"mcq"},
-{t:"In critical thinking, 'self-regulation' refers to:",o:["Regulating medication doses independently","Managing patient schedules","Examining care provided and adjusting interventions as needed","Controlling patient behavior"],a:2,topic:"ct",diff:"medium",type:"mcq"},
-{t:"Which of the following is a recommended way to nurture critical thinking skills?",o:["Always accepting information at face value","Practicing daily reflection on successes and areas for improvement","Following only one established information source","Avoiding consultation with nursing colleagues"],a:1,topic:"ct",diff:"easy",type:"mcq"},
-{t:"A nurse notices a patient's blood pressure of 84/44 mmHg on the chart. Which action BEST demonstrates critical thinking?",o:["Immediately call the physician","Administer a fluid bolus as a precaution","Go to the patient, recheck BP, and assess the patient before calling the medical team","Document the reading and continue with other tasks"],a:2,topic:"ct",diff:"hard",type:"mcq"},
-{t:"When a nurse encounters an unusual patient situation, critical thinking requires:",o:["Reporting immediately without full assessment","Gathering as much relevant information as possible before drawing conclusions","Making decisions based on personal opinions","Delegating to a more experienced nurse"],a:1,topic:"ct",diff:"medium",type:"mcq"},
-{t:"Evidence-based practice (EBP) in nursing BEST means:",o:["Following hospital tradition and protocols","Making decisions based solely on patient preference","Integrating clinical expertise with the best available research evidence","Using only personal clinical experience to guide care"],a:2,topic:"ct",diff:"medium",type:"mcq"},
-{t:"In nursing critical thinking tools, SWOT stands for:",o:["Strengths, Weaknesses, Opportunities, Threats","Symptoms, Wounds, Outcomes, Treatment","Safety, Wellness, Options, Techniques","Strategies, Workload, Observations, Tasks"],a:0,topic:"ct",diff:"medium",type:"mcq"},
-{t:"A patient with SpO₂ 95% on 2L O₂ and no SOB is one patient. Another patient is post-prostatectomy with new-onset hematuria in the Foley catheter. Which patient should the nurse prioritize?",o:["The patient with SpO₂ of 95% on 2L O₂","The patient with new-onset hematuria post-prostatectomy","The confused elderly patient with UTI","The patient with abscess and 3/10 pain"],a:1,topic:"ct",diff:"hard",type:"mcq"},
-{t:"When faced with a patient situation, which critical thinking question is MOST important to ask first?",o:["What medications should I give?","What relevant assessment information do I need and how do I interpret it?","Who should I call for help?","What documentation is required?"],a:1,topic:"ct",diff:"medium",type:"mcq"},
-{t:"'Being a lifelong learner' as a critical thinking strategy means:",o:["Learning from patient mistakes only","Staying current with evidence-based practice through continuous education","Reading only nursing textbooks","Attending one conference per year"],a:1,topic:"ct",diff:"easy",type:"mcq"},
-{t:"'Opening your mind' in critical thinking involves:",o:["Assuming you are always right","Asking for opinions and considering viewpoints of others on the team","Ignoring other team members' perspectives","Maintaining rigid decision-making practices"],a:1,topic:"ct",diff:"easy",type:"mcq"},
-{t:"In critical thinking, validating information means ensuring it is:",o:["Easy to document","Accepted by physicians","Accurate, factual, and evidence-based","Available in the patient's chart"],a:2,topic:"ct",diff:"medium",type:"mcq"},
-{t:"A nurse enters a client's room to obtain a fasting blood glucose reading and notices the breakfast tray in front of the client. Which action BEST demonstrates critical thinking?",o:["Administer the insulin dose as ordered","Do not obtain blood glucose reading without further action","Ask the client if he or she has eaten any food yet","Call the physician immediately"],a:2,topic:"ct",diff:"hard",type:"mcq"},
-{t:"Analyzing information in critical thinking involves:",o:["Accepting all findings as accurate","Looking for clusters or patterns that point to conclusions","Documenting findings without interpretation","Relying on past experience alone"],a:1,topic:"ct",diff:"medium",type:"mcq"},
-{t:"Maintaining a flexible attitude in critical thinking allows the nurse to:",o:["Change assessments based only on family requests","Let the facts guide thinking and take all possibilities into account","Ignore established protocols","Follow only physician orders"],a:1,topic:"ct",diff:"medium",type:"mcq"},
-{t:"The 'Evaluation' component of critical thinking is used to:",o:["Gather data from patients","Make logical deductions","Determine whether expected outcomes have been met","Translate medical information to patients"],a:2,topic:"ct",diff:"medium",type:"mcq"},
-{t:"The 'Explanation' component of critical thinking involves:",o:["Determining the significance of data","Making logical deductions from evidence","Translating complex medical information to patients and families in understandable terms","Reviewing whether care outcomes were met"],a:2,topic:"ct",diff:"medium",type:"mcq"},
-{t:"A nurse who acknowledges personal biases when assessing patients is demonstrating:",o:["Weakness","Unprofessionalism","Critical thinking and self-awareness","Poor clinical judgment"],a:2,topic:"ct",diff:"medium",type:"mcq"},
-{t:"Nurses with strong critical thinking skills are MOST likely to:",o:["Resist changes in patient care protocols","Learn from both their own mistakes and those of other nurses","Make all decisions independently without consultation","Treat each patient the same way"],a:1,topic:"ct",diff:"medium",type:"mcq"},
-{t:"Nurses must critically think to determine which patient to see first primarily because:",o:["All patients need equal attention at the same time","Patient conditions are continually changing and require constant evaluation","Only one patient can be cared for at a time","Nursing schedules are predetermined by administration"],a:1,topic:"ct",diff:"medium",type:"mcq"},
-{t:"'Nurses are often the first to detect issues' in critical thinking refers to which role?",o:["Documentation specialist","Patient advocate detecting early clinical changes at the bedside","Medication administrator only","Surgical assistant"],a:1,topic:"ct",diff:"easy",type:"mcq"},
-{t:"Practicing a 'questioning attitude' in nursing means:",o:["Challenging all physician orders without evidence","Not accepting offered information at face value and thinking beyond what is given","Refusing to follow any protocols","Questioning patients' honesty"],a:1,topic:"ct",diff:"medium",type:"mcq"},
-{t:"Which of the following statements about critical thinking is FALSE?",o:["Critical thinking is a multidimensional skill","Critical thinking involves systematic, reflective thinking","Critical thinking means accepting information at face value without evaluation","Critical thinking enhances clinical decision making"],a:2,topic:"ct",diff:"medium",type:"mcq"},
- 
-// ── NURSING PROCESS (35 MCQ) ───────────────────────
-{t:"How many sequential steps does the nursing process include?",o:["Three","Four","Five","Six"],a:2,topic:"np",diff:"easy",type:"mcq"},
-{t:"The FIRST step of the nursing process is:",o:["Nursing Diagnosis","Planning","Assessment","Implementation"],a:2,topic:"np",diff:"easy",type:"mcq"},
-{t:"Which type of data involves verbal statements from the patient or caregiver?",o:["Objective data","Subjective data","Secondary data","Laboratory data"],a:1,topic:"np",diff:"easy",type:"mcq"},
-{t:"Which of the following is an example of OBJECTIVE data?",o:["Patient reports pain rated 8/10","Patient states 'I feel dizzy'","Blood pressure of 130/76 mmHg","Patient complains of nausea"],a:2,topic:"np",diff:"easy",type:"mcq"},
-{t:"The PRIMARY source of data in nursing assessment is:",o:["Medical records","Family members","The patient/client","Laboratory results"],a:2,topic:"np",diff:"easy",type:"mcq"},
-{t:"According to NANDA, a nursing diagnosis is defined as:",o:["A medical judgment about disease processes","A clinical judgment about responses to actual or potential health problems","A physician's plan for treatment","A laboratory-based clinical conclusion"],a:1,topic:"np",diff:"medium",type:"mcq"},
-{t:"Which of the following is an example of a RISK (potential) nursing diagnosis?",o:["Impaired skin integrity related to prolonged pressure","Acute pain related to tissue trauma","Risk for impaired skin integrity related to inability to turn self in bed","Deficient fluid volume related to vomiting"],a:2,topic:"np",diff:"medium",type:"mcq"},
-{t:"In the SMART goal framework for nursing outcomes, 'M' stands for:",o:["Medical","Manageable","Measurable","Motivational"],a:2,topic:"np",diff:"medium",type:"mcq"},
-{t:"The step of the nursing process that involves the 'actual carrying out of nursing interventions' is:",o:["Planning","Evaluation","Assessment","Implementation"],a:3,topic:"np",diff:"easy",type:"mcq"},
-{t:"When a nursing goal has been partially met during evaluation, the nurse should:",o:["Stop nursing activities","Continue without any changes","Reassess the situation and revise the plan of care accordingly","Discharge the patient"],a:2,topic:"np",diff:"medium",type:"mcq"},
-{t:"Which of the following is a NURSING diagnosis (not a medical diagnosis)?",o:["Lung cancer","Acute pain","Congestive heart failure","Brain tumor"],a:1,topic:"np",diff:"easy",type:"mcq"},
-{t:"Medical diagnoses differ from nursing diagnoses in that medical diagnoses:",o:["Change as the patient's response changes","Focus on patient responses to health problems","Remain constant until a cure is effected or the patient dies","Are within the nurse's scope of practice"],a:2,topic:"np",diff:"medium",type:"mcq"},
-{t:"Assessment in the nursing process is described as 'dynamic' because:",o:["It is completed only during initial contact","It continues with each nurse-client interaction","It changes based on physician orders","It is performed only by senior nurses"],a:1,topic:"np",diff:"medium",type:"mcq"},
-{t:"Expected outcomes in the planning phase must be:",o:["Vague and broad","Physician-driven","Measurable, time-limited, and realistic","Based on family preferences only"],a:2,topic:"np",diff:"medium",type:"mcq"},
-{t:"The nursing diagnosis 'Sleeping disturbance related to pain' follows which format?",o:["Problem – Etiology (related factor)","Problem – Signs and Symptoms","Risk for – Related Factors","Possible – Contributing Factors"],a:0,topic:"np",diff:"medium",type:"mcq"},
-{t:"The PRIMARY purpose of the nursing process is to:",o:["Standardize care for all patients equally","Provide individualized, holistic, and effective client care efficiently","Reduce the nursing workload","Follow physician orders systematically"],a:1,topic:"np",diff:"easy",type:"mcq"},
-{t:"Validating data during nursing assessment is essential to avoid:",o:["Collecting too much information","Omissions, misunderstandings, and incorrect inferences","Involving the patient in care planning","Excessive documentation"],a:1,topic:"np",diff:"medium",type:"mcq"},
-{t:"An 'actual nursing diagnosis' is composed of:",o:["Risk factors only","The diagnostic label, related factors, and signs/symptoms","Medical diagnosis and treatment plan","Expected outcomes and interventions"],a:1,topic:"np",diff:"hard",type:"mcq"},
-{t:"When evaluation shows that a nursing goal HAS been met, the nurse must decide:",o:["Start a new nursing diagnosis immediately","Whether nursing activities should stop or continue to maintain the status","Discharge the patient immediately","Consult the physician for further orders"],a:1,topic:"np",diff:"medium",type:"mcq"},
-{t:"'Impaired Skin Integrity related to prolonged pressure on bony prominence as manifested by stage II pressure ulcer over coccyx' is which type of nursing diagnosis?",o:["Risk (potential) diagnosis","Possible diagnosis","Actual diagnosis","Medical diagnosis"],a:2,topic:"np",diff:"medium",type:"mcq"},
-{t:"The planning phase of the nursing process involves all of the following EXCEPT:",o:["Prioritizing the list of nursing diagnoses","Identifying client-centered goals and outcomes","Implementing specific nursing interventions","Recording the entire plan in the client's record"],a:2,topic:"np",diff:"hard",type:"mcq"},
-{t:"Using Maslow's Hierarchy of Needs in nursing diagnoses helps to:",o:["Replace nursing assessments","Prioritize and plan care based on patient needs","Guide medication prescriptions","Establish medical diagnoses"],a:1,topic:"np",diff:"medium",type:"mcq"},
-{t:"A nursing intervention is best defined as:",o:["A physician's order for treatment","The activity the nurse performs for and with the client to accomplish goals","A method for documenting patient responses","A type of nursing diagnosis"],a:1,topic:"np",diff:"easy",type:"mcq"},
-{t:"Which of the following is a possible reason nursing goals are NOT met?",o:["Patient was cooperative with all care","The initial assessment data were incomplete","Nursing interventions were appropriate for the client","Goals were set realistically"],a:0,topic:"np",diff:"hard",type:"mcq"},
-{t:"Secondary sources of data in nursing assessment include:",o:["The patient's direct verbal statements","Physical examination findings","Family members, other health providers, and medical records","The patient's subjective description of symptoms"],a:2,topic:"np",diff:"medium",type:"mcq"},
-{t:"Which of the following is a nursing IMPLEMENTATION activity?",o:["Identifying nursing diagnoses","Setting goal outcomes","Documenting interventions and client response","Collecting baseline assessment data"],a:2,topic:"np",diff:"medium",type:"mcq"},
-{t:"Which statement about nursing assessment is TRUE?",o:["Assessment ends after the initial interview and physical examination","Assessment is only performed by charge nurses","Assessment is dynamic and continues with each nurse-client interaction","Assessment is identical for all patients"],a:2,topic:"np",diff:"easy",type:"mcq"},
-{t:"Nursing care plans enhance which of the following?",o:["Medical billing only","Communication, documentation, and continuity of care across the healthcare continuum","Physician control of patient management","Administrative decision-making"],a:1,topic:"np",diff:"medium",type:"mcq"},
-{t:"A risk nursing diagnosis is composed of the diagnostic label preceded by:",o:["'Actual'","'Possible'","'Risk for'","'Impaired'"],a:2,topic:"np",diff:"easy",type:"mcq"},
-{t:"The nursing process provides the basis for:",o:["Medical treatment planning","Critical thinking in nursing","Hospital administration","Pharmacy management"],a:1,topic:"np",diff:"easy",type:"mcq"},
-{t:"Nurse-prescribed interventions are those that nurses formulate:",o:["Only after physician approval","For themselves or other nursing staff to implement","Exclusively for pharmacists","Only in emergency situations"],a:1,topic:"np",diff:"medium",type:"mcq"},
-{t:"Goals in the nursing process are described as:",o:["Specific measurable statements of expected outcomes","Broad statements describing the intended change in client behavior","Detailed nursing orders","Physician-approved outcomes"],a:1,topic:"np",diff:"medium",type:"mcq"},
-{t:"Which of the following is NOT a step in the nursing assessment process?",o:["Collecting data from various sources","Validating the data","Prescribing medications","Recording or reporting data"],a:2,topic:"np",diff:"medium",type:"mcq"},
-{t:"'Providing individualized, holistic care' means the nursing process addresses:",o:["Only physical needs","Only psychological needs","All aspects of the patient including physical, emotional, and social needs","Only immediate medical needs"],a:2,topic:"np",diff:"easy",type:"mcq"},
-{t:"Nursing diagnoses focus on the client's RESPONSE to:",o:["Laboratory findings only","Actual or potential health problems or life processes","Physician-diagnosed conditions","Surgical procedures only"],a:1,topic:"np",diff:"medium",type:"mcq"},
- 
-// ── PAIN MANAGEMENT (45 MCQ) ──────────────────────
-{t:"Pain is defined as:",o:["A purely physical sensation caused by tissue damage","An unpleasant sensory and emotional experience associated with actual or potential tissue damage","A sign of psychological weakness","A finding detectable only by laboratory testing"],a:1,topic:"pain",diff:"easy",type:"mcq"},
-{t:"Nerve receptors for pain are called:",o:["Thermoreceptors","Mechanoreceptors","Nociceptors","Proprioceptors"],a:2,topic:"pain",diff:"easy",type:"mcq"},
-{t:"Nociceptors are present throughout all body tissues EXCEPT:",o:["Skin","Muscles","Brain","Internal organs"],a:2,topic:"pain",diff:"medium",type:"mcq"},
-{t:"Nociceptors can be stimulated by:",o:["Mechanical stimuli only","Thermal stimuli only","Chemical stimuli only","Mechanical, thermal, electrical, and chemical stimuli"],a:3,topic:"pain",diff:"medium",type:"mcq"},
-{t:"Pain impulses are perceived, described, localized, and interpreted in the:",o:["Spinal cord","Peripheral nervous system","Thalamus and cerebral cortex","Brainstem"],a:2,topic:"pain",diff:"medium",type:"mcq"},
-{t:"Pain lasting less than how many months with an identified cause is classified as acute pain?",o:["3 months","6 months","12 months","18 months"],a:1,topic:"pain",diff:"easy",type:"mcq"},
-{t:"Chronic pain is characterized by:",o:["Sudden onset with always identified cause","Duration of less than 6 months","Prolonged pain lasting longer than 6 months","Pain that always resolves with treatment"],a:2,topic:"pain",diff:"easy",type:"mcq"},
-{t:"Pain that occurs in an area of the body remote from the affected organ is called:",o:["Radiating pain","Referred pain","Phantom pain","Central pain"],a:1,topic:"pain",diff:"medium",type:"mcq"},
-{t:"In coronary heart disease, referred pain commonly radiates to:",o:["Right arm and shoulder","Epigastric region","Left axilla and left arm","Lower back only"],a:2,topic:"pain",diff:"medium",type:"mcq"},
-{t:"Which type of pain is characterized as 'dull and poorly localized' originating in muscles, nerves, bones, and blood vessels?",o:["Superficial cutaneous pain","Visceral pain","Deep somatic pain","Referred pain"],a:2,topic:"pain",diff:"medium",type:"mcq"},
-{t:"The SYMPATHETIC physiologic response to pain includes:",o:["Nausea and vomiting","Decreased blood pressure","Increased blood pressure, pulse, and respirations","Decreased pulse rate"],a:2,topic:"pain",diff:"medium",type:"mcq"},
-{t:"Parasympathetic physiologic response to pain occurs with:",o:["Mild, superficial pain","Severe and deep pain","Emotional pain only","Psychological pain"],a:1,topic:"pain",diff:"medium",type:"mcq"},
-{t:"In the PQRST pain assessment tool, 'Q' stands for:",o:["Quantity","Quality","Quotient","Questions"],a:1,topic:"pain",diff:"easy",type:"mcq"},
-{t:"A numeric 0-10 pain rating scale is used to assess which component of pain?",o:["Quality of pain","Location of pain","Severity of pain","Duration of pain"],a:2,topic:"pain",diff:"easy",type:"mcq"},
-{t:"Heat therapy relieves pain primarily by:",o:["Slowing transmission of pain neurons","Constricting blood vessels","Dilating blood vessels, increasing local blood flow, and promoting muscle relaxation","Decreasing inflammation only"],a:2,topic:"pain",diff:"medium",type:"mcq"},
-{t:"Cold therapy produces pain relief by:",o:["Increasing local blood flow","Slowing transmission of first-order neurons and constricting blood vessels","Dilating blood vessels","Stimulating nociceptors"],a:1,topic:"pain",diff:"medium",type:"mcq"},
-{t:"Acupuncture produces analgesic effects through:",o:["Vasodilation of blood vessels","Muscle relaxation alone","Stimulation of endorphins in the nervous system","Applying cold stimulation"],a:2,topic:"pain",diff:"hard",type:"mcq"},
-{t:"Non-narcotic analgesics (aspirin, NSAIDs) produce analgesia at the:",o:["Central nervous system","Peripheral nervous system","Spinal cord","Brainstem"],a:1,topic:"pain",diff:"medium",type:"mcq"},
-{t:"Narcotic analgesics such as morphine produce analgesia at the:",o:["Peripheral nervous system","Nerve endings","Central nervous system","Nociceptors"],a:2,topic:"pain",diff:"medium",type:"mcq"},
-{t:"The major side effects of narcotic analgesics include:",o:["Nausea and increased bleeding tendencies","Hypertension and tachycardia","Respiratory depression, sedation, and addiction","Diarrhea and fluid retention"],a:2,topic:"pain",diff:"medium",type:"mcq"},
-{t:"Which of the following is an appropriate nursing diagnosis related to pain?",o:["Impaired gas exchange","Risk for infection","Acute pain related to physical injury","Fluid volume deficit"],a:2,topic:"pain",diff:"easy",type:"mcq"},
-{t:"Progressive Relaxation Training (PRT) involves:",o:["Breathing exercises only","Tensing then relaxing successive muscle groups to promote relaxation","Medication administration","Immobilization of the affected body part"],a:1,topic:"pain",diff:"medium",type:"mcq"},
-{t:"Which factor can DECREASE pain perception?",o:["Anxiety","Distraction","Fatigue","Fear of the unknown"],a:1,topic:"pain",diff:"medium",type:"mcq"},
-{t:"The older adult's risk for injury increases because they may have:",o:["Lower pain threshold","Higher sensitivity to pain","Decreased perception of sensory stimuli and higher pain threshold","Increased perception of pain"],a:2,topic:"pain",diff:"medium",type:"mcq"},
-{t:"'Distraction' as a non-pharmacological pain management technique works by:",o:["Blocking nerve conduction","Focusing the patient's attention on something other than the pain","Stimulating endorphins","Reducing local inflammation"],a:1,topic:"pain",diff:"easy",type:"mcq"},
-{t:"Nociceptors are stimulated by local release of biochemicals secondary to cell injury. These biochemicals include:",o:["Insulin, glucagon, and adrenaline","Prostaglandins, histamine, and hydrogen ions","Serotonin, dopamine, and norepinephrine","Albumin, globulin, and fibrinogen"],a:1,topic:"pain",diff:"hard",type:"mcq"},
-{t:"After nociceptors receive the pain stimulus, nerve impulses travel to:",o:["The heart and lungs","The liver","The spinal cord or directly to the brain","The lymphatic system"],a:2,topic:"pain",diff:"medium",type:"mcq"},
-{t:"Which of the following is an example of superficial or cutaneous pain?",o:["Pain from a kidney stone","A burn or laceration on the skin surface","Cardiac ischemic pain","Appendicitis pain"],a:1,topic:"pain",diff:"medium",type:"mcq"},
-{t:"Central pain is related to:",o:["Peripheral muscle injury","Injury to a limb","A lesion in the brain such as thalamic pain","Skin trauma"],a:2,topic:"pain",diff:"hard",type:"mcq"},
-{t:"Psychological pain is pain for which:",o:["There is clear tissue damage","Medication is the only effective treatment","There is no detectable physiologic or organic origin","There is always a visible injury"],a:2,topic:"pain",diff:"medium",type:"mcq"},
-{t:"In the PQRST pain assessment, 'R' stands for:",o:["Response to treatment","Rate of pain increase","Radiation or location of pain","Reassessment interval"],a:2,topic:"pain",diff:"easy",type:"mcq"},
-{t:"In the PQRST pain assessment, 'T' refers to:",o:["Treatment used","Time — duration and chronology of pain","Type of analgesic taken","Temperature at site"],a:1,topic:"pain",diff:"easy",type:"mcq"},
-{t:"The relaxation response requires all of the following elements EXCEPT:",o:["A quiet environment","Loud background music","A comfortable position","A passive attitude"],a:1,topic:"pain",diff:"medium",type:"mcq"},
-{t:"Non-narcotic analgesics are used for:",o:["Severe pain unresponsive to other drugs","Epidural pain management","Mild to moderate pain","Pain requiring central nervous system action"],a:2,topic:"pain",diff:"easy",type:"mcq"},
-{t:"Anxiety leads to __ which can increase pain intensity:",o:["Reduced blood pressure","Muscle tension and fatigue","Decreased heart rate","Sedation and drowsiness"],a:1,topic:"pain",diff:"medium",type:"mcq"},
-{t:"Massage relieves pain primarily by:",o:["Blocking nerve impulses","Constricting blood vessels","Producing relaxation and relief of muscle tension","Stimulating nociceptors"],a:2,topic:"pain",diff:"easy",type:"mcq"},
-{t:"Radiating pain is most often caused by:",o:["Superficial skin trauma","Pressure and/or irritation of a spinal nerve root","Cardiac ischemia","Psychological factors"],a:1,topic:"pain",diff:"medium",type:"mcq"},
-{t:"Vibration as a pain relief technique is most commonly applied to:",o:["Abdominal areas","Shoulder, neck areas, or any body part for muscle tension relief","Feet only","Chest areas only"],a:1,topic:"pain",diff:"medium",type:"mcq"},
-{t:"Adequate rest and sleep in relation to pain management:",o:["Increases pain perception","Has no effect on pain","Reduces pain perception and enhances coping ability in both acute and chronic pain","Only benefits acute pain"],a:2,topic:"pain",diff:"medium",type:"mcq"},
-{t:"Regarding sex differences in pain response, which statement is accurate?",o:["Men have significantly higher pain tolerance than women","Women have significantly higher pain tolerance than men","Men and women do not differ significantly in pain response, but cultural bias affects expression","Men never express pain regardless of culture"],a:2,topic:"pain",diff:"hard",type:"mcq"},
-{t:"Behavioral responses to pain include all of the following EXCEPT:",o:["Grimacing, moaning, and crying","Restlessness","Protecting the painful area and refusing to move","Increased blood pressure and pupil dilation"],a:3,topic:"pain",diff:"medium",type:"mcq"},
-{t:"When assessing the 'T' (time) component of pain, the nurse should ask:",o:["What type of medication makes the pain better?","How long has the patient experienced the pain and is it intermittent or constant?","What is the patient's overall health history?","Has the patient had surgery before?"],a:1,topic:"pain",diff:"medium",type:"mcq"},
-{t:"A lack of understanding about the source and meaning of pain:",o:["Always reduces anxiety","Contributes negatively to the pain experience","Has no effect on pain perception","Eliminates the need for medication"],a:1,topic:"pain",diff:"medium",type:"mcq"},
-{t:"Which statement about environment and pain is TRUE?",o:["Loud noises and bright lights reduce pain perception","A calm, quiet environment is important in modifying the response to pain","Environmental factors have no effect on pain","Busy, active environments always distract from pain"],a:1,topic:"pain",diff:"medium",type:"mcq"},
-{t:"Morphine (narcotic analgesic) is considered capable of:",o:["Treating only mild pain","Working best on muscle and joint pain","Relieving most pain in sufficient doses by acting on the CNS","Treating pain at the peripheral nervous system level"],a:2,topic:"pain",diff:"medium",type:"mcq"},
- 
-// ── PERIOPERATIVE NURSING (60 MCQ) ─────────────────
-{t:"Perioperative nursing refers to:",o:["Nursing care only in the operating room","All nursing functions in the total surgical experience of the patient","Post-operative care only","Anesthesia management"],a:1,topic:"peri",diff:"easy",type:"mcq"},
-{t:"The preoperative phase BEGINS when:",o:["Patient enters the operating room","The decision is made to perform a surgical procedure","Patient is transferred to the recovery room","Patient is discharged from hospital"],a:1,topic:"peri",diff:"easy",type:"mcq"},
-{t:"Minor surgery is characterized by:",o:["High risk and prolonged duration","Brief duration, low risk, and few complications","Requiring hospitalization","Involving major body organs"],a:1,topic:"peri",diff:"easy",type:"mcq"},
-{t:"Surgery performed to establish the presence of a disease condition is classified as:",o:["Ablative","Reconstructive","Diagnostic","Palliative"],a:2,topic:"peri",diff:"easy",type:"mcq"},
-{t:"An appendectomy is classified as which type of surgery?",o:["Constructive","Diagnostic","Palliative","Ablative"],a:3,topic:"peri",diff:"medium",type:"mcq"},
-{t:"Surgery classified as 'Emergent' requires:",o:["Planning within a few weeks or months","Immediate attention without delay","Attention within 24-30 hours","Patient's personal preference"],a:1,topic:"peri",diff:"easy",type:"mcq"},
-{t:"Surgery for kidney or ureteral stones is classified as:",o:["Elective","Optional","Emergent","Urgent/Imperative"],a:3,topic:"peri",diff:"medium",type:"mcq"},
-{t:"The intraoperative phase BEGINS with:",o:["Surgeon's first incision","Transfer of the patient onto the operating room bed","Administration of anesthesia","Arrival of patient to the hospital"],a:1,topic:"peri",diff:"easy",type:"mcq"},
-{t:"The postoperative phase extends to:",o:["Patient's transfer to recovery room","Patient's discharge from the OR","The last follow-up after discharge from medical care","24 hours after surgery"],a:2,topic:"peri",diff:"medium",type:"mcq"},
-{t:"Which preoperative screening test evaluates respiratory status?",o:["ECG","Blood sugar test","Chest X-ray","Urine analysis"],a:2,topic:"peri",diff:"easy",type:"mcq"},
-{t:"Patients who smoke are urged to stop smoking before surgery for at least:",o:["1-2 weeks","2-4 weeks","4-8 weeks","12 weeks"],a:2,topic:"peri",diff:"medium",type:"mcq"},
-{t:"The purpose of bowel cleansing before surgery does NOT include:",o:["Reducing risk of contamination from fecal matter","Preventing postoperative distention","Reducing preoperative anxiety","Avoiding constipation and straining postoperatively"],a:2,topic:"peri",diff:"medium",type:"mcq"},
-{t:"With general anesthesia, the patient should have nothing by mouth (NPO) for:",o:["2-4 hours","4-6 hours","8-12 hours","24 hours"],a:2,topic:"peri",diff:"medium",type:"mcq"},
-{t:"Benzodiazepines are given as preoperative medication to:",o:["Reduce secretions","Promote amnesia only","Reduce anxiety and pain","Reduce nausea and vomiting"],a:2,topic:"peri",diff:"medium",type:"mcq"},
-{t:"Atropine or hyoscine is given preoperatively to:",o:["Reduce anxiety","Promote amnesia","Reduce secretions","Reduce pain"],a:2,topic:"peri",diff:"medium",type:"mcq"},
-{t:"In the operating room, the RESTRICTED zone requires:",o:["Street clothes only","Scrub attire and caps","Scrub clothes, shoe covers, caps, and masks","No special attire"],a:2,topic:"peri",diff:"medium",type:"mcq"},
-{t:"The circulating nurse in the OR belongs to:",o:["The sterile team","The unsterile team","The anesthesia specialist team","The surgical team only"],a:1,topic:"peri",diff:"medium",type:"mcq"},
-{t:"The scrub nurse's primary responsibility includes:",o:["Administering anesthesia to the patient","Identifying the patient on admission","Performing surgical hand scrub and handling sterile instruments during surgery","Writing the operative notes only"],a:2,topic:"peri",diff:"medium",type:"mcq"},
-{t:"Which surgical position is used for KIDNEY surgery?",o:["Dorsal recumbent (supine)","Prone","Lateral","Lithotomy"],a:2,topic:"peri",diff:"medium",type:"mcq"},
-{t:"Lithotomy position is used for:",o:["Abdominal surgery","Spinal surgery","Vaginal, perineal, and rectal surgery","Thyroid and neck surgery"],a:2,topic:"peri",diff:"medium",type:"mcq"},
-{t:"The Trendelenburg position is used for:",o:["Thoracic surgery","Pelvic surgery","Spinal surgery","Neck and thyroid surgery"],a:1,topic:"peri",diff:"medium",type:"mcq"},
-{t:"General anesthesia is best described as:",o:["Loss of sensation in lower half of body only","General insensibility with full unconsciousness","Local numbness of surgical area","Awake but completely pain-free state"],a:1,topic:"peri",diff:"easy",type:"mcq"},
-{t:"Spinal or epidural anesthesia blocks sensation:",o:["Above the diaphragm","In the head and neck region","At a level below the diaphragm without loss of consciousness","Throughout the whole body"],a:2,topic:"peri",diff:"medium",type:"mcq"},
-{t:"Which of the following is an INTRAOPERATIVE complication?",o:["Deep vein thrombosis","Malignant hyperthermia","Wound infection","Constipation"],a:1,topic:"peri",diff:"hard",type:"mcq"},
-{t:"The immediate postoperative phase occurs in:",o:["ICU","Phase I PACU (recovery room)","General medical ward","Outpatient clinic"],a:1,topic:"peri",diff:"easy",type:"mcq"},
-{t:"In the recovery room, vital signs are monitored every 15 minutes until stable, then every half hour for:",o:["1 hour","2 hours","4 hours","6 hours"],a:1,topic:"peri",diff:"hard",type:"mcq"},
-{t:"Which postoperative complication presents with dyspnea, orthopnea, and crackles?",o:["Wound dehiscence","Deep vein thrombosis","Pulmonary edema","Urinary retention"],a:2,topic:"peri",diff:"hard",type:"mcq"},
-{t:"Early postoperative ambulation helps prevent all of the following EXCEPT:",o:["Atelectasis and hypostatic pneumonia","Deep vein thrombosis","Urinary retention","Wound dehiscence"],a:3,topic:"peri",diff:"hard",type:"mcq"},
-{t:"Which nursing intervention promotes bowel function after surgery?",o:["Restricting fluids","Prolonged bed rest","Progressive ambulation and activity","Increased pain medications"],a:2,topic:"peri",diff:"medium",type:"mcq"},
-{t:"'Informed consent' in surgery refers to:",o:["The surgeon signing the operative paperwork","The patient's autonomous decision about the procedure based on full information","The hospital's legal liability document","The anesthesiologist's approval of the procedure"],a:1,topic:"peri",diff:"medium",type:"mcq"},
-{t:"The postoperative nursing diagnosis 'Ineffective breathing pattern' is related to:",o:["Anesthesia, increased respiratory secretions, and pain","Patient anxiety only","Fluid overload","Wound infection"],a:0,topic:"peri",diff:"medium",type:"mcq"},
-{t:"Deep vein thrombosis (DVT) prevention post-surgery includes:",o:["Bed rest for 48 hours","Vigorous leg massage","Elastic stockings and leg exercises","Restricting oral fluids"],a:2,topic:"peri",diff:"medium",type:"mcq"},
-{t:"Constructive surgery involves:",o:["Removal of diseased organ","Establishing a diagnosis","Repairing a congenitally malformed organ or tissue","Relieving pain"],a:2,topic:"peri",diff:"medium",type:"mcq"},
-{t:"Palliative surgery is performed primarily for:",o:["Diagnosing disease","Transplanting organs","Relief of pain","Cosmetic improvement"],a:2,topic:"peri",diff:"medium",type:"mcq"},
-{t:"Elective surgery is characterized by:",o:["Requiring immediate attention without delay","Requiring attention within 24-30 hours","Failure to have surgery not catastrophic, done at patient's convenience","Life-threatening condition if not done immediately"],a:2,topic:"peri",diff:"medium",type:"mcq"},
-{t:"On the day of surgery, the nurse checks all of the following EXCEPT:",o:["Medical notes and laboratory results","Consent form has been signed","Insurance coverage and billing information","Preoperative assessment of vital signs"],a:2,topic:"peri",diff:"hard",type:"mcq"},
-{t:"Preoperative medications are usually administered approximately how long before the patient goes to the OR?",o:["5-15 minutes","30-60 minutes","2-3 hours","Immediately upon arrival to the OR"],a:1,topic:"peri",diff:"medium",type:"mcq"},
-{t:"A patient with diabetes undergoing surgery is at risk for:",o:["Hypercalcemia","Hypoglycemia and hyperglycemia","Hypothyroidism","Anemia only"],a:1,topic:"peri",diff:"medium",type:"mcq"},
-{t:"Inserting a urinary catheter before surgery primarily serves to:",o:["Measure hemoglobin levels","Ensure continuous bladder drainage during surgery","Provide IV access","Reduce anesthesia complications"],a:1,topic:"peri",diff:"medium",type:"mcq"},
-{t:"'Wound dehiscence' refers to:",o:["Infection of the surgical wound","Separation or opening of the surgical wound edges","Bleeding at the wound site","Normal healing of the wound with scar formation"],a:1,topic:"peri",diff:"medium",type:"mcq"},
-{t:"Nursing assessment in the PACU (recovery room) includes all of the following EXCEPT:",o:["Airway patency","Level of consciousness","Surgical technique used by the surgeon","Vital signs and wound dressing check"],a:2,topic:"peri",diff:"medium",type:"mcq"},
-{t:"Postoperative hiccups result from:",o:["Wound infection","Irritation of the diaphragm","Fluid overload","Excessive pain medication"],a:1,topic:"peri",diff:"medium",type:"mcq"},
-{t:"In the operating room, the SEMI-RESTRICTED zone requires:",o:["Street clothes only","Scrub attire and caps","Scrub clothes, shoe covers, caps, and masks","No special attire"],a:1,topic:"peri",diff:"medium",type:"mcq"},
-{t:"Sterilization is defined as the process by which:",o:["Pathogenic organisms only are killed","All pathogenic and nonpathogenic organisms including spores are killed","The operating room is simply cleaned","Instruments are washed with antiseptic solution"],a:1,topic:"peri",diff:"medium",type:"mcq"},
-{t:"Autoclaving is classified as which type of sterilization?",o:["Chemical sterilization","Ionizing radiation","Thermal (heat) sterilization","Ultraviolet sterilization"],a:2,topic:"peri",diff:"medium",type:"mcq"},
-{t:"Dorsal recumbent (supine) position is used for:",o:["Spinal surgery","Pelvic surgery","Abdominal and thoracic surgery","Vaginal surgery"],a:2,topic:"peri",diff:"medium",type:"mcq"},
-{t:"Prone position is used for:",o:["Thyroid surgery","Abdominal surgery","Spinal surgery","Kidney surgery"],a:2,topic:"peri",diff:"medium",type:"mcq"},
-{t:"An important function of preoperative assessment regarding immune function is to:",o:["Determine blood type","Identify and document any sensitivity to medications or allergies","Check liver function","Assess pain tolerance"],a:1,topic:"peri",diff:"medium",type:"mcq"},
-{t:"Regarding alcohol use and surgery, which statement is TRUE?",o:["Alcohol use has no effect on surgical risk","Surgery is generally postponed if the patient is acutely intoxicated","Alcohol use improves anesthesia response","Alcohol users always have lower surgical risk"],a:1,topic:"peri",diff:"medium",type:"mcq"},
-{t:"During the intraoperative phase, who is responsible for counting sponges, needles, and instruments?",o:["The scrub nurse only","The circulating nurse only","Both the scrub nurse and the circulating nurse","The surgeon and the assistant surgeon"],a:2,topic:"peri",diff:"medium",type:"mcq"},
-{t:"A disorder of the liver has a surgical concern primarily because:",o:["It affects bone healing","Anesthetic agents are metabolized by the liver","It causes electrolyte imbalances only","It affects wound dehiscence"],a:1,topic:"peri",diff:"medium",type:"mcq"},
-{t:"Which of the following is NOT a postoperative complication?",o:["Shock","Deep vein thrombosis","Preoperative anxiety","Wound infection"],a:2,topic:"peri",diff:"medium",type:"mcq"},
-{t:"The Jackknife position is used for:",o:["Abdominal surgery","Kidney surgery","Proctologic surgery","Thyroid surgery"],a:2,topic:"peri",diff:"hard",type:"mcq"},
-{t:"Which of the following is NOT a potential intraoperative complication?",o:["Nausea and vomiting","Anaphylaxis","Malignant hyperthermia","Wound dehiscence"],a:3,topic:"peri",diff:"hard",type:"mcq"},
-{t:"Which nutritional concern must be corrected before surgery to provide adequate tissue repair?",o:["Excess carbohydrate intake","Obesity, malnutrition, and specific nutrient deficiencies","Excessive vitamin C intake","High-protein diet"],a:1,topic:"peri",diff:"medium",type:"mcq"},
-{t:"Preoperative skin preparation aims to:",o:["Increase blood flow to the surgical site","Minimize skin contamination and decrease risk of postoperative wound infection","Improve patient comfort","Reduce postoperative swelling"],a:1,topic:"peri",diff:"medium",type:"mcq"},
-{t:"Surgery is usually POSTPONED if the patient has:",o:["A mild headache","A respiratory infection","A history of controlled hypertension","Minor anemia"],a:1,topic:"peri",diff:"medium",type:"mcq"},
-{t:"If a patient has uncontrolled hypertension preoperatively:",o:["Surgery proceeds as planned","Surgery may be postponed until blood pressure is controlled","The patient is only given antihypertensive during surgery","Surgery is cancelled permanently"],a:1,topic:"peri",diff:"medium",type:"mcq"},
-{t:"Which of the following is a common postoperative DISCOMFORT (not a major complication)?",o:["Hemorrhage","Deep vein thrombosis","Urinary retention","Wound evisceration"],a:2,topic:"peri",diff:"medium",type:"mcq"},
- 
-// ── CHRONIC ILLNESS & DISABILITY (35 MCQ) ──────────
-{t:"Chronic illness is defined as disease that lasts:",o:["Less than 6 months","6-12 months","One year or more requiring ongoing medical attention","Less than 3 months"],a:2,topic:"ci",diff:"easy",type:"mcq"},
-{t:"Which of the following is NOT a characteristic of chronic illness?",o:["Complex causes","Long latency periods","Short-term illness that resolves quickly","Functional impairment or disability"],a:2,topic:"ci",diff:"easy",type:"mcq"},
-{t:"The 'pretrajectory phase' of chronic illness describes:",o:["Sudden onset of severe symptoms","The person being at risk for developing a chronic condition due to genetic or lifestyle factors","Recovery after an acute illness episode","A life-threatening crisis requiring emergency care"],a:1,topic:"ci",diff:"hard",type:"mcq"},
-{t:"The 'crisis phase' of chronic illness trajectory is:",o:["The person being at risk for developing chronic illness","Exacerbation of illness symptoms","A critical or life-threatening situation requiring emergency treatment","Recovery after an acute period"],a:2,topic:"ci",diff:"hard",type:"mcq"},
-{t:"The 'stable phase' of chronic illness trajectory indicates that:",o:["The condition is worsening despite treatment","Symptoms and disability are being managed adequately","Emergency treatment is needed","The person is only at risk, without symptoms"],a:1,topic:"ci",diff:"medium",type:"mcq"},
-{t:"Which of the following does NOT directly affect chronic illness progression?",o:["Duration of lifestyle changes necessitated by the illness","Family and individual coping resources","Previous experience with illness and crises","The patient's hair color"],a:3,topic:"ci",diff:"easy",type:"mcq"},
-{t:"Hypertension is defined as systolic BP ≥ __ mmHg and/or diastolic BP values ≥ __ mmHg:",o:["120/80","130/85","140/90","150/95"],a:2,topic:"ci",diff:"medium",type:"mcq"},
-{t:"Disability is defined as:",o:["A permanent medical condition only","Condition or function significantly impaired relative to the usual standard of an individual or group","A temporary injury only","A psychological problem exclusively"],a:1,topic:"ci",diff:"medium",type:"mcq"},
-{t:"PRIMARY prevention of disability involves:",o:["Early detection of health problems at a treatable stage","Reducing impact of established disease","Actions to avoid or remove the cause before it arises, including health promotion","Rehabilitation and restoration of function"],a:2,topic:"ci",diff:"medium",type:"mcq"},
-{t:"Secondary prevention involves:",o:["Avoiding the cause of disease entirely","Detecting health problems at an early stage to facilitate cure","Reducing impact of established disease","Emergency management of acute episodes"],a:1,topic:"ci",diff:"medium",type:"mcq"},
-{t:"Tertiary prevention involves:",o:["Primary health promotion and education","Early screening programs","Reducing the impact of an established disease and restoring function","Vaccination programs"],a:2,topic:"ci",diff:"medium",type:"mcq"},
-{t:"Emotional reactions to disability typically progress in which order?",o:["Acceptance → Denial → Depression","Depression → Denial → Acceptance","Denial → Depression/Anger → Acceptance","Anger → Acceptance → Denial"],a:2,topic:"ci",diff:"medium",type:"mcq"},
-{t:"The PRIMARY goal of the rehabilitation team is:",o:["Curing the disability completely","Promoting independence, self-respect, and acceptable quality of life","Providing long-term hospitalization","Ensuring physician control of all patient decisions"],a:1,topic:"ci",diff:"easy",type:"mcq"},
-{t:"Activities of Daily Living (ADLs) include:",o:["Job performance and career activities only","Personal hygiene, dressing, toileting, eating, and moving","Social and recreational activities only","Financial management activities"],a:1,topic:"ci",diff:"easy",type:"mcq"},
-{t:"The 'acute phase' of chronic illness trajectory is characterized by:",o:["Being at risk for developing the condition","Stable management of symptoms","Sudden onset of severe symptoms requiring hospitalization","Recovery after an acute episode"],a:2,topic:"ci",diff:"hard",type:"mcq"},
-{t:"The 'comeback phase' of chronic illness is marked by:",o:["Worsening of the condition","Recovery after an acute period","A life-threatening crisis","Gradual decline despite treatment"],a:1,topic:"ci",diff:"hard",type:"mcq"},
-{t:"The 'downward phase' of chronic illness is characterized by:",o:["Recovery and improvement","Stable management","Worsening condition despite treatment and management","Risk factor identification only"],a:2,topic:"ci",diff:"hard",type:"mcq"},
-{t:"Which chronic disease is defined as 'uncontrollable growth of abnormal cells in the body'?",o:["Arthritis","Hypertension","Diabetes mellitus","Cancer"],a:3,topic:"ci",diff:"easy",type:"mcq"},
-{t:"A challenge of living with chronic illness includes:",o:["Gaining independence easily without effort","Living with altered time, social isolation, and loneliness","Regular hospitalization for all chronic conditions","Financial gains from disability compensation"],a:1,topic:"ci",diff:"medium",type:"mcq"},
-{t:"A stroke is caused by:",o:["Blockage of blood flow to the heart","Elevated blood sugar levels","Blockage of blood flow to the brain","Lung inflammation"],a:2,topic:"ci",diff:"easy",type:"mcq"},
-{t:"The FIRST step of the nurse's approach to managing chronic illness is:",o:["Establishing goals","Identifying the trajectory phase through assessment","Planning interventions","Evaluating outcomes"],a:1,topic:"ci",diff:"medium",type:"mcq"},
-{t:"Identifying the trajectory phase of chronic illness helps the nurse:",o:["Prescribe medications","Identify specific medical, social, and psychological problems likely in that phase","Plan surgical intervention","Schedule discharge date"],a:1,topic:"ci",diff:"medium",type:"mcq"},
-{t:"Nursing care for patients with chronic conditions is provided in:",o:["Only hospital settings","Only the patient's home","Clinic, physician's office, hospital, or patient's home depending on illness phase","Only outpatient settings"],a:2,topic:"ci",diff:"medium",type:"mcq"},
-{t:"Chronic conditions tend to:",o:["Decrease in frequency with age","Remain constant throughout life","Increase in frequency with age","Only affect young people"],a:2,topic:"ci",diff:"easy",type:"mcq"},
-{t:"The 'unstable phase' of chronic illness is characterized by:",o:["Stable symptom management","Exacerbation of illness symptoms, complications, or reactivation of a condition in remission","Complete recovery","Being at risk for illness only"],a:1,topic:"ci",diff:"hard",type:"mcq"},
-{t:"The 'dying phase' of chronic illness trajectory is characterized by:",o:["Recovery despite illness","Stable symptom management","Gradual or rapid decline with failure of life-maintaining body functions","Crisis requiring emergency care"],a:2,topic:"ci",diff:"hard",type:"mcq"},
-{t:"Goal-setting in chronic illness management should be:",o:["Primarily the nurse's responsibility","A collaborative effort between patient, family, and nurse","Exclusively physician-driven","Based solely on insurance coverage"],a:1,topic:"ci",diff:"medium",type:"mcq"},
-{t:"Disability can result from:",o:["An acute incident such as stroke or trauma only","Progression of a chronic condition such as arthritis only","Both acute incidents and progression of chronic conditions","Lifestyle choices only"],a:2,topic:"ci",diff:"medium",type:"mcq"},
-{t:"The nurse's role in teaching a patient with disability self-care activities includes:",o:["Doing all activities for the patient","Teaching, guiding, and supporting the patient in learning or relearning self-care","Preventing all physical activity","Relying solely on family caregivers"],a:1,topic:"ci",diff:"medium",type:"mcq"},
-{t:"Nursing assessment for a patient with disability should include:",o:["Financial resources only","Insurance information","Ability to perform ADLs, joint motion, muscle strength, and neurologic status","Social history only"],a:2,topic:"ci",diff:"medium",type:"mcq"},
-{t:"Diabetes mellitus is characterized as a disorder in which:",o:["Blood glucose levels are abnormally low","Blood glucose levels are elevated","Blood flow to the heart is blocked","Abnormal cells grow uncontrollably"],a:1,topic:"ci",diff:"easy",type:"mcq"},
-{t:"Arthritis in the context of chronic illness is described as:",o:["Blockage of blood flow to a joint","Uncontrolled cell growth in joints","'Wear and tear' on joints such as knees, hips, and wrists","Elevated pressure within joint spaces"],a:2,topic:"ci",diff:"easy",type:"mcq"},
-{t:"A positive evaluation outcome for a patient with disability in self-care includes:",o:["Demonstrating full dependence on nursing staff","Demonstrating independent self-care in bathing with adaptive devices as appropriate","Refusing to perform ADLs","Reporting dissatisfaction with level of care"],a:1,topic:"ci",diff:"medium",type:"mcq"},
-{t:"Most chronic illnesses are characterized by the fact that they:",o:["Cure themselves over time","Are always immediately life-threatening","Do not cure themselves and are generally not cured completely","Respond fully to medication alone"],a:2,topic:"ci",diff:"medium",type:"mcq"},
-{t:"Which of the following is a MODIFIABLE risk factor for chronic illness?",o:["Age","Gender","Cigarette smoking and excessive alcohol consumption","Genetic predisposition"],a:2,topic:"ci",diff:"medium",type:"mcq"},
- 
-// ── FLUID & ELECTROLYTES (40 MCQ) ──────────────────
-{t:"Total body water comprises approximately what percentage of body weight in the average adult?",o:["40%","50%","60%","70%"],a:2,topic:"fe",diff:"easy",type:"mcq"},
-{t:"The intracellular fluid (ICF) comprises what percentage of body weight?",o:["20%","30%","40%","60%"],a:2,topic:"fe",diff:"medium",type:"mcq"},
-{t:"The extracellular fluid (ECF) comprises what percentage of body weight?",o:["10%","20%","40%","60%"],a:1,topic:"fe",diff:"medium",type:"mcq"},
-{t:"Which electrolyte is the major INTRAcellular cation?",o:["Sodium","Calcium","Potassium","Chloride"],a:2,topic:"fe",diff:"medium",type:"mcq"},
-{t:"Which electrolyte is the major EXTRAcellular cation?",o:["Potassium","Magnesium","Phosphorus","Sodium"],a:3,topic:"fe",diff:"medium",type:"mcq"},
-{t:"The normal serum sodium level is:",o:["120-130 mEq/L","135-145 mEq/L","145-155 mEq/L","130-140 mEq/L"],a:1,topic:"fe",diff:"easy",type:"mcq"},
-{t:"The normal serum potassium level is:",o:["2.5-3.5 mEq/L","3.5-5.0 mEq/L","5.0-6.5 mEq/L","1.5-2.5 mEq/L"],a:1,topic:"fe",diff:"easy",type:"mcq"},
-{t:"The normal serum calcium level is:",o:["2.5-4.5 mEq/L","4.5-5.5 mEq/L","1.5-2.5 mEq/L","3.5-5.0 mEq/L"],a:1,topic:"fe",diff:"easy",type:"mcq"},
-{t:"The normal serum magnesium level is:",o:["3.5-5.0 mEq/L","4.5-5.5 mEq/L","1.5-2.5 mEq/L","2.5-4.5 mg/dL"],a:2,topic:"fe",diff:"medium",type:"mcq"},
-{t:"The normal serum phosphorus level is:",o:["1.5-2.5 mEq/L","3.5-5.0 mEq/L","2.5-4.5 mg/dL","4.5-5.5 mEq/L"],a:2,topic:"fe",diff:"medium",type:"mcq"},
-{t:"Hypovolemia is defined as:",o:["Abnormal increase in blood plasma volume","Abnormal decrease in the volume of blood plasma","Normal blood volume","Increased cellular fluid"],a:1,topic:"fe",diff:"easy",type:"mcq"},
-{t:"An isotonic solution is one that has:",o:["Higher salt concentration than normal cells","Lower salt concentration than normal cells","The same salt concentration as normal cells and blood","No electrolytes at all"],a:2,topic:"fe",diff:"medium",type:"mcq"},
-{t:"Colloids (blood, albumin, plasma) are used to:",o:["Correct electrolyte deficits only","Increase blood volume following severe hemorrhage or loss of plasma","Provide daily maintenance hydration","Decrease blood pressure"],a:1,topic:"fe",diff:"medium",type:"mcq"},
-{t:"Which of the following is a sign of MILD fluid volume deficit?",o:["Unconsciousness","Orthostatic hypotension and increased heart rate","Absent peripheral pulses","Decreased cardiac output"],a:1,topic:"fe",diff:"medium",type:"mcq"},
-{t:"Signs of fluid volume EXCESS include:",o:["Flat neck veins and decreased pulse","Sunken eyes and dry conjunctiva","Bounding pulse and distended neck veins","Inelastic skin turgor"],a:2,topic:"fe",diff:"medium",type:"mcq"},
-{t:"A 2-5% body weight loss in a short period indicates:",o:["Severe fluid volume deficit","Moderate fluid volume deficit","Mild fluid volume deficit","Fluid volume excess"],a:2,topic:"fe",diff:"medium",type:"mcq"},
-{t:"A 10-15% body weight loss from fluid indicates:",o:["Mild FVD","Moderate FVD","Severe FVD","Fluid volume excess"],a:2,topic:"fe",diff:"hard",type:"mcq"},
-{t:"Hypernatremia is caused by:",o:["Excessive water intake and decreased sodium","Water loss and excessive sodium intake","Heart failure and cirrhosis","Nasogastric suctioning and laxatives"],a:1,topic:"fe",diff:"medium",type:"mcq"},
-{t:"Signs of hypernatremia include:",o:["Confusion, orthostatic hypotension, and edema","Muscle spasms and convulsions","Thirst, dry sticky mucous membranes, and restlessness","Nausea, vomiting, and weight gain"],a:2,topic:"fe",diff:"medium",type:"mcq"},
-{t:"Hyponatremia is caused by:",o:["Water loss and excessive sodium intake","Inadequate sodium intake and excessive water gain","Diabetes insipidus","Corticosteroid use"],a:1,topic:"fe",diff:"medium",type:"mcq"},
-{t:"Hyperkalemia signs include:",o:["Fatigue and muscle weakness only","Arrhythmias, decreased cardiac contraction, and cardiac arrest","Orthostatic hypotension","Muscle cramps and tetany"],a:1,topic:"fe",diff:"medium",type:"mcq"},
-{t:"A nursing intervention for HYPERKALEMIA includes administering:",o:["Potassium supplements and high-potassium foods","Calcium gluconate to decrease myocardial irritability, insulin and IV glucose","Fluid restriction only","Sodium chloride supplements"],a:1,topic:"fe",diff:"hard",type:"mcq"},
-{t:"Signs of hypokalemia include:",o:["Arrhythmias and cardiac arrest","Nausea, vomiting, and intestinal colic","Fatigue, muscle weakness, and orthostatic hypotension","Facial flushing and warmth"],a:2,topic:"fe",diff:"medium",type:"mcq"},
-{t:"Foods rich in potassium recommended for hypokalemia patients include:",o:["White bread and rice","Bananas, dried fruit, and orange juice","Milk and dairy products only","Fried foods and sweets"],a:1,topic:"fe",diff:"easy",type:"mcq"},
-{t:"Signs of hypocalcemia include:",o:["Muscle weakness and constipation","Anorexia and confusion only","Tingling around the mouth and positive Chvostek's sign","Cardiac arrest only"],a:2,topic:"fe",diff:"medium",type:"mcq"},
-{t:"Hypercalcemia causes include:",o:["Acute pancreatitis and thyroid carcinoma","Loop diuretics and malnutrition","Metastatic bone cancer and hyperparathyroidism","Inadequate vitamin D intake"],a:2,topic:"fe",diff:"medium",type:"mcq"},
-{t:"Positive Chvostek's or Trousseau's signs indicate:",o:["Hyperkalemia","Hypocalcemia","Hypernatremia","Hypomagnesemia"],a:1,topic:"fe",diff:"hard",type:"mcq"},
-{t:"Nursing intervention for hypocalcemia includes:",o:["Administering loop diuretics","Encouraging ambulation","Administering IV calcium and encouraging calcium-rich foods and vitamin D","Restricting calcium-rich foods"],a:2,topic:"fe",diff:"medium",type:"mcq"},
-{t:"Hypomagnesemia causes include:",o:["Renal failure and adrenal insufficiency","Excessive magnesium replacement","Malnutrition, malabsorption, diarrhea, and diuretic use","Diuretic abuse alone"],a:2,topic:"fe",diff:"medium",type:"mcq"},
-{t:"Signs of hypermagnesemia include:",o:["Muscle tremors and seizures","Tachyarrhythmias and ventricular fibrillation","Peripheral vasodilation, loss of deep tendon reflexes, and possible cardiac arrest","Nausea, vomiting, and anorexia only"],a:2,topic:"fe",diff:"hard",type:"mcq"},
-{t:"The normal BUN:Creatinine ratio as an indicator of renal function is:",o:["5:1","10:1","20:1","1:10"],a:1,topic:"fe",diff:"hard",type:"mcq"},
-{t:"The body's normal blood pH range is:",o:["7.20-7.30","7.36-7.44","7.44-7.54","7.10-7.20"],a:1,topic:"fe",diff:"medium",type:"mcq"},
-{t:"Treatment for fluid volume deficit involves:",o:["Diuretic therapy","Restricting all oral intake","Sodium and fluid restriction only","Determining the cause and replacing lost fluids orally or IV"],a:3,topic:"fe",diff:"medium",type:"mcq"},
-{t:"Treatment for fluid volume excess typically includes:",o:["Increasing fluid intake","Sodium supplementation","Fluid and sodium restriction with possible diuretic therapy","IV potassium replacement"],a:2,topic:"fe",diff:"medium",type:"mcq"},
-{t:"Body fluids help regulate body temperature, transport nutrients, and:",o:["Produce hormones","Carry cellular waste products to excretion sites","Generate electrical impulses","Produce digestive enzymes"],a:1,topic:"fe",diff:"easy",type:"mcq"},
-{t:"Which electrolyte disturbances are most common in COVID-19 patients?",o:["Hyperkalemia and hyperphosphatemia","Hyponatremia, hypokalemia, and hypocalcemia","Hypernatremia and hypermagnesemia","Hypercalcemia and hyperphosphatemia"],a:1,topic:"fe",diff:"hard",type:"mcq"},
-{t:"Potassium (K+) primarily regulates:",o:["Fluid distribution and blood pressure","Cell excitability, nerve impulse conduction, and muscle contraction","Bone and teeth formation","Protein and fat metabolism only"],a:1,topic:"fe",diff:"medium",type:"mcq"},
-{t:"Calcium (Ca+) functions include all of the following EXCEPT:",o:["Helping cells adhere to each other and maintain shape","Acting as an enzyme activator within cells","Aiding in coagulation","Regulating blood glucose levels"],a:3,topic:"fe",diff:"medium",type:"mcq"},
-{t:"Sodium (Na+) primarily helps to maintain:",o:["Intracellular fluid balance only","Muscle contraction only","Acid-base balance and activates nerve and muscle cells","Bone density"],a:2,topic:"fe",diff:"medium",type:"mcq"},
-{t:"During physical assessment, which finding is associated with fluid volume DEFICIT?",o:["Distended neck veins","Periorbital edema","Sunken eyes and inelastic skin turgor","Bounding pulse"],a:2,topic:"fe",diff:"medium",type:"mcq"},
- 
-// ── PNEUMONIA (15 MCQ) ────────────────────────────
-{t:"Pneumonia is defined as:",o:["Inflammation of the pleural cavity","Inflammation of the lung parenchyma causing impaired gas exchange","Collapse of alveoli (atelectasis)","Obstruction of major bronchi"],a:1,topic:"pneu",diff:"easy",type:"mcq"},
-{t:"The most common causative type of agent for pneumonia is:",o:["Bacteria","Fungi","Protozoa","Virus"],a:3,topic:"pneu",diff:"medium",type:"mcq"},
-{t:"Pneumocystis carinii pneumonia occurs primarily in patients with:",o:["Diabetes mellitus","Hypertension","Immunological deficiencies such as AIDS or chemotherapy patients","Chronic bronchitis"],a:2,topic:"pneu",diff:"medium",type:"mcq"},
-{t:"Which is a risk factor for developing pneumonia?",o:["Regular exercise and healthy diet","Young age without comorbidities","Cigarette smoking and chronic underlying disorders such as COPD, diabetes, heart failure","Adequate immune function"],a:2,topic:"pneu",diff:"medium",type:"mcq"},
-{t:"The clinical presentation of BACTERIAL pneumonia includes:",o:["Gradual onset, dry cough, and low-grade fever","Sudden onset, shaking chills, rapidly rising fever (39.5-40.5°C), and purulent sputum","Slow pulse and weight gain","No respiratory symptoms initially"],a:1,topic:"pneu",diff:"medium",type:"mcq"},
-{t:"Anthrax pneumonia is primarily associated with:",o:["Urban air pollution","Agricultural or industrial exposure to contaminated animal hides or hair","Swimming in contaminated water","Contaminated food ingestion"],a:1,topic:"pneu",diff:"hard",type:"mcq"},
-{t:"Pneumonia diagnosis is confirmed by:",o:["Urine analysis alone","Physical examination, chest X-ray, and sputum culture","Blood glucose test only","ECG findings alone"],a:1,topic:"pneu",diff:"easy",type:"mcq"},
-{t:"Which complication of pneumonia is considered a MEDICAL EMERGENCY?",o:["Pleural effusion","Atelectasis due to mucous plugs","Delirium","Superinfection"],a:2,topic:"pneu",diff:"hard",type:"mcq"},
-{t:"Nursing management of pneumonia to improve airway patency includes:",o:["Restricting fluid intake","Keeping patient in supine position only","Breathing exercises, coughing, and chest physiotherapy","Administering sedatives routinely"],a:2,topic:"pneu",diff:"medium",type:"mcq"},
-{t:"The recommended daily fluid intake for a patient with pneumonia (if not contraindicated) is at least:",o:["1 liter/day","2 liters/day","3 liters/day","4 liters/day"],a:1,topic:"pneu",diff:"medium",type:"mcq"},
-{t:"Lobar pneumonia affects:",o:["Both lungs equally","One entire lung","Only certain lobes of a lung","The pleura only"],a:2,topic:"pneu",diff:"medium",type:"mcq"},
-{t:"In the context of pneumonia diagnosis, AFB stands for:",o:["Antibiotic Frequency Baseline","Acid-Fast Bacilli","Airflow Function Breathing","Alveolar Function Balance"],a:1,topic:"pneu",diff:"medium",type:"mcq"},
-{t:"Which vaccines are recommended as preventive measures for patients at high risk for pneumonia?",o:["Meningococcal and hepatitis B","Influenza and pneumococcal vaccines","MMR and varicella","HPV and Tdap"],a:1,topic:"pneu",diff:"medium",type:"mcq"},
-{t:"Gram-negative bacteria causing pneumonia include:",o:["Staphylococcal and Streptococcal","Pneumococcal and Anthrax","Pseudomonas, Klebsiella, and Legionnaires","Mycoplasma"],a:2,topic:"pneu",diff:"hard",type:"mcq"},
-{t:"In diagnosing pneumonia, the expected CBC finding is:",o:["Decreased WBC (leukopenia)","Elevated WBC (leukocytosis)","Normal WBC only","Decreased RBC only"],a:1,topic:"pneu",diff:"medium",type:"mcq"},
- 
-// ── COPD (20 MCQ) ─────────────────────────────────
-{t:"COPD stands for:",o:["Chronic Obstructive Pulmonary Disease","Chronic Ongoing Pulmonary Dysfunction","Complete Obstruction of Pulmonary Ducts","Chronic Obese Pulmonary Disorder"],a:0,topic:"copd",diff:"easy",type:"mcq"},
-{t:"COPD may include which combination of conditions?",o:["Pneumonia and pleuritis","Emphysema and chronic bronchitis","Pneumothorax and atelectasis","Pulmonary embolism and pleural effusion"],a:1,topic:"copd",diff:"easy",type:"mcq"},
-{t:"The most important risk factor for COPD is:",o:["Age over 65","Genetic factors","Cigarette smoking","Indoor air pollution"],a:2,topic:"copd",diff:"easy",type:"mcq"},
-{t:"Cigarette smoking accounts for an estimated percentage of COPD cases of:",o:["50-60%","60-70%","70-80%","80-90%"],a:3,topic:"copd",diff:"medium",type:"mcq"},
-{t:"Chronic bronchitis is defined as cough and sputum production for at least:",o:["3 months in each of 2 consecutive years","6 months in 1 year","3 months in 1 year only","1 month in each of 2 consecutive years"],a:0,topic:"copd",diff:"medium",type:"mcq"},
-{t:"Emphysema is characterized by:",o:["Excessive mucous secretion and productive cough","Bronchospasm only","Destruction of alveoli, enlargement of distal airspaces, and breakdown of alveolar walls","Narrowing of bronchi without alveolar damage"],a:2,topic:"copd",diff:"medium",type:"mcq"},
-{t:"The 'barrel chest' in COPD results from:",o:["Fluid accumulation in the thorax","Pleural effusion","Fixation of ribs in inspiratory position and loss of lung elasticity in advanced emphysema","Weight gain around the thorax"],a:2,topic:"copd",diff:"medium",type:"mcq"},
-{t:"Obstructive lung disease is defined as a FEV1/FVC ratio of less than:",o:["50%","60%","70%","80%"],a:2,topic:"copd",diff:"medium",type:"mcq"},
-{t:"FEV1 is defined as:",o:["Force Evaluation Volume 1","Volume of air the patient can forcibly exhale in 1 second","Functional exercise ventilation measure","Fixed expiratory value per second"],a:1,topic:"copd",diff:"medium",type:"mcq"},
-{t:"Alpha1-antitrypsin deficiency screening is recommended for patients:",o:["Over 65 years with any lung condition","Under 45 years or those with a strong family history of COPD","With hypertension and COPD combined","With diabetes and COPD combined"],a:1,topic:"copd",diff:"hard",type:"mcq"},
-{t:"Which is a specific complication of COPD?",o:["Liver failure","Cor pulmonale","Acute renal failure","Meningitis"],a:1,topic:"copd",diff:"medium",type:"mcq"},
-{t:"'Blue bloater' in COPD refers to a patient with:",o:["Emphysema and thin physique","Cyanosis often associated with chronic bronchitis","Pulmonary embolism","Heart failure only"],a:1,topic:"copd",diff:"hard",type:"mcq"},
-{t:"Bronchodilators used in COPD management include:",o:["Morphine and codeine","Albuterol and Theophylline","Prednisone and SoluMedrol","Ranitidine"],a:1,topic:"copd",diff:"medium",type:"mcq"},
-{t:"The nursing goal for a COPD patient regarding smoking is:",o:["Gradual reduction of cigarettes smoked","Switching to low-tar cigarettes","Complete smoking cessation","Allowing smoking in designated outdoor areas"],a:2,topic:"copd",diff:"medium",type:"mcq"},
-{t:"Postural drainage in COPD management serves to:",o:["Improve cardiac function","Promote secretion drainage from the airways","Reduce fever","Prevent deep vein thrombosis"],a:1,topic:"copd",diff:"medium",type:"mcq"},
-{t:"Pursed-lip breathing in COPD patients helps by:",o:["Increasing the respiratory rate","Reducing the work of breathing and slowing expiration","Increasing oxygen consumption","Preventing secretion formation"],a:1,topic:"copd",diff:"medium",type:"mcq"},
-{t:"In COPD nutrition management, patients are advised to:",o:["Eat 3 large meals per day","Avoid all high-protein foods","Eat 6 small meals and take fluids between meals to avoid stomach distension","Rest immediately after every meal"],a:2,topic:"copd",diff:"medium",type:"mcq"},
-{t:"Alpha1-antitrypsin is an enzyme inhibitor that normally:",o:["Regulates blood glucose levels","Counteracts the destruction of lung tissue by certain other enzymes","Stimulates mucous production","Prevents bronchospasm directly"],a:1,topic:"copd",diff:"hard",type:"mcq"},
-{t:"Which early morning symptom is most indicative of chronic bronchitis in COPD?",o:["Dry, nonproductive cough only","Cough in the morning with sputum production","Wheezing exclusively at night","Dyspnea at rest from the beginning"],a:1,topic:"copd",diff:"medium",type:"mcq"},
-{t:"Patients with COPD should receive the influenza vaccine:",o:["Every 10 years","Every 5-7 years","Yearly","Only when symptoms worsen significantly"],a:2,topic:"copd",diff:"medium",type:"mcq"},
- 
-// ── TRUE / FALSE (40 Questions) ────────────────────
-{t:"Critical thinking in nursing means simple criticism of patient care — not accepting any information without analyzing it.",o:["True","False"],a:1,topic:"ct",diff:"easy",type:"tf"},
-{t:"Being 'inquisitive' is one of the most important characteristics of a critical thinker.",o:["True","False"],a:0,topic:"ct",diff:"easy",type:"tf"},
-{t:"Pain is an objective finding that can be directly measured by X-ray or blood tests.",o:["True","False"],a:1,topic:"pain",diff:"easy",type:"tf"},
-{t:"Nociceptors are present throughout all body tissues including the brain.",o:["True","False"],a:1,topic:"pain",diff:"medium",type:"tf"},
-{t:"Acute pain typically lasts for less than 6 months and usually has an identified cause.",o:["True","False"],a:0,topic:"pain",diff:"easy",type:"tf"},
-{t:"Chronic pain always has a clearly identifiable cause.",o:["True","False"],a:1,topic:"pain",diff:"medium",type:"tf"},
-{t:"Referred pain from coronary heart disease commonly radiates to the left axilla and left arm.",o:["True","False"],a:0,topic:"pain",diff:"medium",type:"tf"},
-{t:"Heat therapy produces pain relief by causing constriction of blood vessels.",o:["True","False"],a:1,topic:"pain",diff:"medium",type:"tf"},
-{t:"Narcotic analgesics such as morphine act on the peripheral nervous system to relieve pain.",o:["True","False"],a:1,topic:"pain",diff:"medium",type:"tf"},
-{t:"The older adult may have decreased perception of sensory stimuli and a higher pain threshold, increasing their risk of injury or serious illness.",o:["True","False"],a:0,topic:"pain",diff:"medium",type:"tf"},
-{t:"The preoperative phase begins when the patient enters the operating room.",o:["True","False"],a:1,topic:"peri",diff:"easy",type:"tf"},
-{t:"Surgery for kidney or ureteral stones is classified as emergent surgery.",o:["True","False"],a:1,topic:"peri",diff:"medium",type:"tf"},
-{t:"Emergent surgery requires immediate attention and is performed without delay.",o:["True","False"],a:0,topic:"peri",diff:"easy",type:"tf"},
-{t:"With general anesthesia, the patient is completely unconscious and insensible.",o:["True","False"],a:0,topic:"peri",diff:"easy",type:"tf"},
-{t:"Both the scrub nurse and the circulating nurse are responsible for counting sponges, needles, and instruments.",o:["True","False"],a:0,topic:"peri",diff:"medium",type:"tf"},
-{t:"Patients should stop smoking 4-8 weeks before surgery to significantly reduce pulmonary and wound healing complications.",o:["True","False"],a:0,topic:"peri",diff:"medium",type:"tf"},
-{t:"In the operating room, the restricted zone allows street clothes as attire.",o:["True","False"],a:1,topic:"peri",diff:"medium",type:"tf"},
-{t:"Patients undergoing general anesthesia should be NPO (nothing by mouth) for 8-12 hours before surgery.",o:["True","False"],a:0,topic:"peri",diff:"medium",type:"tf"},
-{t:"Chronic illness, by definition, lasts less than one year.",o:["True","False"],a:1,topic:"ci",diff:"easy",type:"tf"},
-{t:"Cigarette smoking is a factor that can affect the development and progression of chronic illness.",o:["True","False"],a:0,topic:"ci",diff:"easy",type:"tf"},
-{t:"Primary prevention involves early detection of disease at a treatable stage.",o:["True","False"],a:1,topic:"ci",diff:"medium",type:"tf"},
-{t:"Disability can result from the progression of a chronic condition such as arthritis or multiple sclerosis.",o:["True","False"],a:0,topic:"ci",diff:"easy",type:"tf"},
-{t:"Self-care deficit due to disability is an example of a nursing diagnosis.",o:["True","False"],a:0,topic:"ci",diff:"easy",type:"tf"},
-{t:"Total body water comprises approximately 60% of body weight in an average adult.",o:["True","False"],a:0,topic:"fe",diff:"easy",type:"tf"},
-{t:"Intracellular fluid (ICF) comprises approximately 20% of body weight.",o:["True","False"],a:1,topic:"fe",diff:"medium",type:"tf"},
-{t:"Potassium is the major extracellular cation in the body.",o:["True","False"],a:1,topic:"fe",diff:"medium",type:"tf"},
-{t:"The normal serum sodium level is 135-145 mEq/L.",o:["True","False"],a:0,topic:"fe",diff:"easy",type:"tf"},
-{t:"A 15-20% body weight loss from acute fluid loss can be fatal.",o:["True","False"],a:0,topic:"fe",diff:"medium",type:"tf"},
-{t:"A positive Chvostek's sign is an indicator of hypocalcemia.",o:["True","False"],a:0,topic:"fe",diff:"medium",type:"tf"},
-{t:"A bounding pulse is a sign of fluid volume deficit.",o:["True","False"],a:1,topic:"fe",diff:"medium",type:"tf"},
-{t:"Pneumonia is an inflammation of the lung parenchyma that impairs gas exchange.",o:["True","False"],a:0,topic:"pneu",diff:"easy",type:"tf"},
-{t:"Anthrax pneumonia is lethal if not treated prior to the onset of severe signs and symptoms.",o:["True","False"],a:0,topic:"pneu",diff:"medium",type:"tf"},
-{t:"Pneumocystis carinii pneumonia occurs mainly in immunocompromised patients such as those with AIDS.",o:["True","False"],a:0,topic:"pneu",diff:"medium",type:"tf"},
-{t:"COPD is classified as an irreversible and completely untreatable disease.",o:["True","False"],a:1,topic:"copd",diff:"medium",type:"tf"},
-{t:"Chronic bronchitis is defined as productive cough for at least 3 months in each of 2 consecutive years.",o:["True","False"],a:0,topic:"copd",diff:"medium",type:"tf"},
-{t:"Emphysema primarily causes hypertrophy of mucus-secreting glands leading to excessive sputum.",o:["True","False"],a:1,topic:"copd",diff:"hard",type:"tf"},
-{t:"A FEV1/FVC ratio of less than 70% indicates obstructive lung disease in COPD.",o:["True","False"],a:0,topic:"copd",diff:"medium",type:"tf"},
-{t:"The most important risk factor for COPD is air pollution.",o:["True","False"],a:1,topic:"copd",diff:"medium",type:"tf"},
-{t:"Alpha1-antitrypsin deficiency is a genetic risk factor for developing COPD.",o:["True","False"],a:0,topic:"copd",diff:"hard",type:"tf"},
-{t:"The nursing process is a systematic, problem-solving approach that guides all nursing actions and care delivery.",o:["True","False"],a:0,topic:"np",diff:"easy",type:"tf"}
 
-]; // ── End of QUESTIONS ──
+];
 
-// ── State ──
-let current = 0;
-let answers = [];
-let answered = false;
+/* ============ ENGINE ============ */
+let questions, i, correct, wrong, answers, wrongSet, answered;
+let totalTime = 35*60, timeLeft, timerInterval;
+const LETTERS = ['A','B','C','D','E','F'];
 
-// ── Init ──
-document.getElementById('quizTitleDisplay').textContent = QUIZ_TITLE;
-document.getElementById('startDesc').textContent        = QUIZ_DESC;
-document.getElementById('totalQDisplay').textContent    = QUESTIONS.length;
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
 
-// ── Theme ──
+function init(pool) {
+  questions = shuffle([...pool]);
+  i = 0; correct = 0; wrong = 0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = []; answered = 0;
+  timeLeft = totalTime;
+  document.getElementById('totalBadge').textContent = questions.length + ' سؤال';
+  startTimer();
+  render();
+}
+
+/* TIMER */
+function startTimer() {
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    const m = Math.floor(timeLeft / 60), s = timeLeft % 60;
+    document.getElementById('timerTxt').textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
+    const badge = document.getElementById('timerBadge');
+    if (timeLeft <= 120) { badge.className = 'timer-badge danger'; }
+    else if (timeLeft <= 300) { badge.className = 'timer-badge warn'; }
+    if (timeLeft <= 0) { clearInterval(timerInterval); finish(); }
+  }, 1000);
+}
+
+/* TOP UI */
+function updateTop() {
+  const total = questions.length;
+  document.getElementById('sCorrect').textContent = correct;
+  document.getElementById('sWrong').textContent = wrong;
+  document.getElementById('sRemain').textContent = Math.round(((total - answered) / total) * 100) + '%';
+  document.getElementById('progLabel').textContent = 'سؤال ' + (i + 1) + ' / ' + total;
+  document.getElementById('progFill').style.width = ((i + 1) / total * 100) + '%';
+  document.getElementById('prog-bar').style.width = ((i + 1) / total * 100) + '%';
+}
+
+/* RENDER QUESTION */
+function render() {
+  updateTop();
+  const q = questions[i];
+  document.getElementById('app').innerHTML = `
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">سؤال ${i + 1} / ${questions.length}</div>
+      </div>
+      <div class="q-text">${q.t}</div>
+      <div class="options">
+        ${q.o.map((o, idx) => `
+          <div class="opt" id="opt${idx}" onclick="choose(${idx})">
+            <div class="opt-letter">${LETTERS[idx] || idx + 1}</div>
+            ${o}
+          </div>
+        `).join('')}
+      </div>
+      <div class="nav-btns">
+        <button class="btn btn-skip" onclick="skip()"><i class="fa-solid fa-forward"></i> تخطي</button>
+      </div>
+    </div>`;
+}
+
+/* CHOOSE */
+function choose(v) {
+  if (answers[i] !== null) return;
+  answers[i] = v;
+  answered++;
+  const q = questions[i];
+  const ok = v === q.a;
+  ok ? correct++ : wrong++;
+  updateTop();
+
+  q.o.forEach((_, idx) => {
+    const el = document.getElementById('opt' + idx);
+    el.classList.add('disabled');
+    if (idx === q.a) el.classList.add('correct');
+    else if (idx === v) el.classList.add('wrong');
+  });
+
+  const fb = document.createElement('div');
+  fb.className = 'feedback-bar ' + (ok ? 'ok' : 'no');
+  fb.innerHTML = ok
+    ? `<span class="feedback-icon">🎉</span> <span>ممتاز ، اللهم بارك </span>`
+    : `<span class="feedback-icon">😔</span> <span>ركز يا سكر</b></span>`;
+
+  const card = document.querySelector('.q-card');
+  card.querySelector('.options').after(fb);
+  if (q.exp) {
+    const exp = document.createElement('div');
+    exp.className = 'explanation';
+    exp.style.display = 'block';
+    exp.innerHTML = '<b>💬 شرح:</b> ' + q.exp;
+    fb.after(exp);
+  }
+
+  const navBtns = card.querySelector('.nav-btns');
+  navBtns.innerHTML = `<button class="btn btn-next" onclick="next()">
+    ${i < questions.length - 1 ? '<i class="fa-solid fa-arrow-left"></i> السؤال التالي' : '<i class="fa-solid fa-flag-checkered"></i> إنهاء الامتحان'}
+  </button>`;
+}
+
+/* SKIP */
+function skip() {
+  if (answers[i] === null) { answers[i] = -1; answered++; wrongSet.push(questions[i]); wrong++; updateTop(); }
+  next();
+}
+
+/* NEXT */
+function next() {
+  if (i < questions.length - 1) { i++; render(); window.scrollTo({top: 0, behavior: 'smooth'}); }
+  else finish();
+}
+
+/* FINISH */
+function finish() {
+  clearInterval(timerInterval);
+  const total = questions.length;
+  const score = Math.round((correct / total) * 100);
+
+  questions.forEach((q, idx) => {
+    if (answers[idx] !== q.a) wrongSet.push({...q, myAns: answers[idx]});
+  });
+  wrongSet = [...new Map(wrongSet.map(q => [q.t, q])).values()];
+
+  let grade, gradeColor;
+  if (score >= 90) { grade = '🥇 ممتاز'; gradeColor = 'var(--success)'; }
+  else if (score >= 75) { grade = '🥈 جيد جداً'; gradeColor = 'var(--accent)'; }
+  else if (score >= 60) { grade = '🥉 جيد'; gradeColor = 'var(--warn)'; }
+  else { grade = '📚 راجع تاني'; gradeColor = 'var(--danger)'; }
+
+  const circ = 2 * Math.PI * 45;
+  const offset = circ - (score / 100) * circ;
+
+  const reportHTML = questions.map((q, idx) => {
+    const ok = answers[idx] === q.a;
+    return `<div class="report-item ${ok ? 'ok' : 'no'}">
+      <div class="ri-q">${ok ? '✅' : '❌'} ${q.t}</div>
+      ${!ok ? `
+        <div class="ri-row"><span class="ri-badge ri-yours">إجابتك</span> ${answers[idx] >= 0 ? q.o[answers[idx]] : 'تم التخطي'}</div>
+        <div class="ri-row"><span class="ri-badge ri-right">الصحيح</span> ${q.o[q.a]}</div>
+      ` : ''}
+    </div>`;
+  }).join('');
+
+  document.getElementById('prog-bar').style.width = '100%';
+  document.getElementById('app').innerHTML = `
+    <div class="result-hero">
+      <div class="score-ring">
+        <svg viewBox="0 0 110 110">
+          <circle class="ring-bg" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="0"/>
+          <circle class="ring-fill" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="${circ}"
+            style="stroke:${gradeColor}" id="ringFill"/>
+        </svg>
+        <div class="score-num">${score}</div>
+        <div class="score-pct">%</div>
+      </div>
+      <div class="result-grade" style="color:${gradeColor}">${grade}</div>
+      <div class="result-sub">أجبت على ${answered} من ${total} سؤال</div>
+      <div class="result-stats">
+        <div class="rs"><div class="n" style="color:var(--success)">${correct}</div><div class="l">صحيح</div></div>
+        <div class="rs"><div class="n" style="color:var(--danger)">${wrong}</div><div class="l">خطأ</div></div>
+        <div class="rs"><div class="n" style="color:var(--accent)">${total - answered < 0 ? 0 : total - answered}</div><div class="l">تخطي</div></div>
+      </div>
+    </div>
+
+    <div class="result-actions">
+      ${wrongSet.length ? `<button class="btn btn-retry" onclick="retryWrong()"><i class="fa-solid fa-rotate-right"></i> إعادة الخطأ (${wrongSet.length})</button>` : ''}
+      <button class="btn btn-home" onclick="init(QUESTIONS)"><i class="fa-solid fa-shuffle"></i> امتحان جديد عشوائي</button>
+      <a href="https://gaith-team.github.io/exam/medical1/index.html" class="btn btn-home" style="text-decoration:none;"><i class="fa-solid fa-house"></i> رجوع للمادة</a>
+    </div>
+
+    <div style="margin-top:28px">
+      <div style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text2)">📋 تقرير مفصّل</div>
+      ${reportHTML}
+    </div>`;
+
+  setTimeout(() => { document.getElementById('ringFill').style.strokeDashoffset = offset; }, 100);
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+/* RETRY WRONG */
+function retryWrong() {
+  const pool = [...wrongSet];
+  questions = shuffle(pool); i = 0; correct = 0; wrong = 0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = []; answered = 0; timeLeft = totalTime;
+  startTimer(); render();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+/* THEME */
 const themeBtn = document.getElementById('themeBtn');
 let theme = localStorage.getItem('theme') || 'light';
 function applyTheme(t) {
@@ -929,180 +749,8 @@ function applyTheme(t) {
 applyTheme(theme);
 themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
 
-// ── Screen switch ──
-function show(id) {
-  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
-  document.getElementById(id).classList.add('active');
-  window.scrollTo(0,0);
-}
-
-// ── Start ──
-function startQuiz() {
-  current = 0;
-  answers = new Array(QUESTIONS.length).fill(null);
-  answered = false;
-  show('quizScreen');
-  renderQuestion();
-}
-
-// ── Render question ──
-function renderQuestion() {
-  answered = false;
-  const q   = QUESTIONS[current];
-  const tot = QUESTIONS.length;
-
-  document.getElementById('qNum').textContent  = `QUESTION ${current + 1}`;
-  document.getElementById('qText').textContent = q.t;
-  document.getElementById('progressLabel').textContent = `${current+1} / ${tot}`;
-  document.getElementById('progressFill').style.width  = `${((current+1)/tot)*100}%`;
-  document.getElementById('btnNext').disabled = true;
-
-  const fb = document.getElementById('feedbackBox');
-  fb.className = 'feedback-box';
-
-  const letters = ['A','B','C','D','E'];
-  const list = document.getElementById('optsList');
-  list.innerHTML = '';
-  q.o.forEach((opt, i) => {
-    const btn = document.createElement('button');
-    btn.className = 'opt-btn';
-    btn.innerHTML = `<span class="opt-letter">${letters[i]}</span>${opt}`;
-    btn.onclick = () => selectAnswer(i, btn);
-    list.appendChild(btn);
-  });
-
-  const card = document.getElementById('qCard');
-  card.style.animation = 'none';
-  card.offsetHeight;
-  card.style.animation = 'slideIn .35s ease';
-}
-
-// ── Select answer ──
-function selectAnswer(chosen, clickedBtn) {
-  if (answered) return;
-  answered = true;
-  answers[current] = chosen;
-
-  const q    = QUESTIONS[current];
-  const opts = document.querySelectorAll('.opt-btn');
-  const correct = q.a;
-
-  opts.forEach((btn, i) => {
-    btn.disabled = true;
-    if (i === correct)        btn.classList.add('correct');
-    if (i === chosen && chosen !== correct) btn.classList.add('wrong');
-  });
-
-  const fb = document.getElementById('feedbackBox');
-  if (chosen === correct) {
-    fb.className = 'feedback-box correct-fb show';
-    document.getElementById('feedbackIcon').textContent = '✅';
-    document.getElementById('feedbackText').textContent = 'Correct answer! 🎉';
-  } else {
-    fb.className = 'feedback-box wrong-fb show';
-    document.getElementById('feedbackIcon').textContent = '❌';
-    document.getElementById('feedbackText').textContent =
-      `Correct answer: ${q.o[correct]}`;
-  }
-
-  document.getElementById('btnNext').disabled = false;
-}
-
-// ── Skip ──
-function skipQuestion() {
-  if (answered) return;
-  answers[current] = null;
-  nextQuestion();
-}
-
-// ── Next ──
-function nextQuestion() {
-  current++;
-  if (current >= QUESTIONS.length) {
-    showResult();
-  } else {
-    answered = false;
-    renderQuestion();
-  }
-}
-
-// ── Result ──
-function showResult() {
-  let correct = 0, wrong = 0, skip = 0;
-  answers.forEach((a, i) => {
-    if (a === null)                skip++;
-    else if (a === QUESTIONS[i].a) correct++;
-    else                           wrong++;
-  });
-  const pct = Math.round((correct / QUESTIONS.length) * 100);
-  document.getElementById('rCorrect').textContent = correct;
-  document.getElementById('rWrong').textContent   = wrong;
-  document.getElementById('rSkip').textContent    = skip;
-  document.getElementById('pctNum').textContent   = pct;
-
-  let emoji, title, sub;
-  if      (pct >= 90) { emoji='🏆'; title='Excellent! Outstanding!';    sub='Amazing result — keep it up!'; }
-  else if (pct >= 75) { emoji='🎉'; title='Very Good!';                 sub='Strong performance, keep reviewing to reach the top!'; }
-  else if (pct >= 60) { emoji='💪'; title='Good, but room to improve!'; sub='Review your wrong answers and try again'; }
-  else if (pct >= 40) { emoji='📚'; title='Needs more revision';        sub='Go back to your notes and retake the quiz'; }
-  else                { emoji='😅'; title="Don't worry, keep studying!";sub='Revision is the key — try again!'; }
-
-  document.getElementById('resultEmoji').textContent = emoji;
-  document.getElementById('resultTitle').textContent = title;
-  document.getElementById('resultSub').textContent   = sub;
-
-  const circ  = 2 * Math.PI * 62;
-  const offset = circ - (pct / 100) * circ;
-  const arc = document.getElementById('circleArc');
-  arc.style.strokeDashoffset = '389.6';
-  arc.style.stroke = pct >= 60 ? 'var(--green)' : pct >= 40 ? 'var(--c)' : 'var(--red)';
-  setTimeout(() => { arc.style.strokeDashoffset = offset; }, 200);
-
-  show('resultScreen');
-}
-
-// ── Review ──
-function showReview() {
-  const list = document.getElementById('reviewList');
-  list.innerHTML = '';
-  const letters = ['A','B','C','D','E'];
-
-  QUESTIONS.forEach((q, qi) => {
-    const userAns = answers[qi];
-    let statusClass, statusText;
-    if      (userAns === null)       { statusClass='status-skip';    statusText='⏭ Skipped'; }
-    else if (userAns === q.a)        { statusClass='status-correct'; statusText='✅ Correct'; }
-    else                             { statusClass='status-wrong';   statusText='❌ Wrong'; }
-
-    const card = document.createElement('div');
-    card.className = 'review-card';
-    card.innerHTML = `
-      <div class="review-card-top">
-        <div class="review-q-label">QUESTION ${qi+1}</div>
-        <div class="review-q-text">${q.t}</div>
-        <div class="review-status ${statusClass}">${statusText}</div>
-      </div>
-      <div class="review-opts">
-        ${q.o.map((opt, oi) => {
-          let cls = 'review-opt';
-          if (oi === q.a)                        cls += ' is-correct';
-          if (oi === userAns && userAns !== q.a) cls += ' is-wrong';
-          return `<div class="${cls}"><div class="review-dot"></div>${letters[oi]}. ${opt}</div>`;
-        }).join('')}
-      </div>`;
-    list.appendChild(card);
-  });
-
-  show('reviewScreen');
-}
-
-function retryQuiz() {
-  current = 0;
-  answers = new Array(QUESTIONS.length).fill(null);
-  answered = false;
-  show('quizScreen');
-  renderQuestion();
-}
+/* START */
+init(QUESTIONS);
 </script>
 </body>
 </html>
