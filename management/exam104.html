@@ -1,0 +1,733 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Disease Comparison – Nursing Study Aid</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #faf8f3;
+    --card: #ffffff;
+    --gold: #c9a84c;
+    --dark: #1e1a14;
+    --mid: #5a5040;
+    --light: #f0ead8;
+    --accent: #8b2e2e;
+    --green: #2e6e4e;
+    --blue: #1d4e7a;
+    --purple: #5a2e7a;
+    --border: #d6cdb8;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: 'Source Sans 3', sans-serif;
+    background: var(--bg);
+    color: var(--dark);
+    padding: 32px 16px 64px;
+  }
+  header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+  header h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: 2.2rem;
+    color: var(--dark);
+    letter-spacing: -0.5px;
+  }
+  header p {
+    color: var(--mid);
+    font-size: 0.95rem;
+    margin-top: 6px;
+  }
+  .gold-line {
+    width: 80px;
+    height: 3px;
+    background: var(--gold);
+    margin: 14px auto 0;
+    border-radius: 2px;
+  }
+
+  /* ---- SECTION TITLES ---- */
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.45rem;
+    color: var(--accent);
+    margin: 48px 0 18px;
+    border-left: 4px solid var(--gold);
+    padding-left: 14px;
+  }
+
+  /* ---- TABLE WRAPPER ---- */
+  .tbl-wrap {
+    overflow-x: auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.08);
+    border: 1px solid var(--border);
+  }
+  table {
+    border-collapse: collapse;
+    width: 100%;
+    min-width: 900px;
+    font-size: 0.875rem;
+    background: var(--card);
+  }
+  thead th {
+    background: var(--dark);
+    color: #fff;
+    font-family: 'Source Sans 3', sans-serif;
+    font-weight: 600;
+    font-size: 0.8rem;
+    letter-spacing: 0.5px;
+    text-transform: uppercase;
+    padding: 12px 14px;
+    border-right: 1px solid #3a352a;
+    text-align: left;
+    white-space: nowrap;
+  }
+  thead th:first-child { border-radius: 0; width: 130px; }
+  
+  /* Category rows */
+  .cat-row td {
+    background: var(--light);
+    font-weight: 600;
+    font-size: 0.78rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    color: var(--mid);
+    padding: 7px 14px;
+    border-bottom: 1px solid var(--border);
+    border-top: 2px solid var(--border);
+  }
+
+  tbody tr { border-bottom: 1px solid #ede7d6; }
+  tbody tr:hover td { background: #fdf7e8; }
+  tbody td {
+    padding: 11px 14px;
+    vertical-align: top;
+    border-right: 1px solid #ede7d6;
+    line-height: 1.55;
+  }
+  tbody td:first-child {
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: var(--dark);
+    white-space: nowrap;
+    background: #faf5ea;
+    border-right: 2px solid var(--gold);
+  }
+
+  /* color badges */
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+    margin: 1px 0;
+  }
+  .b-bac { background: #dbeafe; color: #1d4e7a; }
+  .b-vir { background: #fce7f3; color: #7e1d5a; }
+  .b-bac-spo { background: #d1fae5; color: #1a5c38; }
+  .b-zoo { background: #fef3c7; color: #92400e; }
+
+  ul.compact { padding-left: 16px; margin: 0; }
+  ul.compact li { margin: 2px 0; }
+
+  /* ---- SIMPLIFIED TABLE ---- */
+  .simple-tbl thead th {
+    background: var(--green);
+  }
+  .simple-tbl .cat-row td {
+    background: #e6f4ed;
+    color: var(--green);
+    border-top: 2px solid #aad4bc;
+    border-bottom: 1px solid #aad4bc;
+  }
+  .simple-tbl tbody td:first-child {
+    background: #f0faf5;
+    border-right: 2px solid var(--green);
+  }
+  .simple-tbl tbody tr:hover td { background: #f0faf5; }
+
+  .tag {
+    display: inline-block;
+    background: #fef9ec;
+    border: 1px solid var(--gold);
+    color: var(--mid);
+    border-radius: 4px;
+    padding: 1px 7px;
+    font-size: 0.78rem;
+    margin: 1px 2px;
+  }
+
+  footer {
+    text-align: center;
+    margin-top: 60px;
+    font-size: 0.8rem;
+    color: #aaa;
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>Infectious Disease Comparison</h1>
+  <p>Yellow-highlighted diseases from your Nursing / Epidemiology notes</p>
+  <div class="gold-line"></div>
+</header>
+
+<!-- ===================== TABLE 1: DETAILED ===================== -->
+<h2 class="section-title">Table 1 — Detailed Comparison</h2>
+<div class="tbl-wrap">
+<table>
+  <thead>
+    <tr>
+      <th>Disease</th>
+      <th>Agent Type</th>
+      <th>Reservoir</th>
+      <th>Mode of Transmission</th>
+      <th>Incubation Period</th>
+      <th>Key Complications</th>
+      <th>Specific Prevention</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <!-- FOOD-BORNE -->
+    <tr class="cat-row"><td colspan="7">🍽️ Food-borne Diseases</td></tr>
+
+    <tr>
+      <td>Typhoid Fever</td>
+      <td><span class="badge b-bac">Bacteria</span><br><em>Salmonella typhi</em></td>
+      <td>Man only<br>(cases + carriers: incubatory, contact, convalescent, healthy)</td>
+      <td>
+        <ul class="compact">
+          <li>Auto-infection (hand-to-mouth)</li>
+          <li>Contaminated food/water/milk</li>
+          <li>House flies & cockroaches</li>
+        </ul>
+      </td>
+      <td>14–17 days</td>
+      <td>
+        <ul class="compact">
+          <li>Intestinal hemorrhage/perforation</li>
+          <li>Cholecystitis</li>
+          <li>Pneumonia, myocarditis</li>
+          <li>Osteomyelitis, bone abscess</li>
+        </ul>
+      </td>
+      <td>TAB vaccine (SC, 3 yrs); Vi conjugate; Oral ty21a (live)<br><em>Treatment: Ceftriaxone</em></td>
+    </tr>
+
+    <tr>
+      <td>Poliomyelitis</td>
+      <td><span class="badge b-vir">Virus</span><br><em>Picorna RNA virus (3 serotypes)</em></td>
+      <td>Man only<br>(all carrier types, all temporary)</td>
+      <td>
+        <ul class="compact">
+          <li>Droplet / oral-to-oral (developed countries)</li>
+          <li>Feco-oral: hand-to-mouth, contaminated food/water</li>
+        </ul>
+        <strong>CNS risk ↑ with:</strong> tonsillectomy, IM injections, fatigue, pregnancy
+      </td>
+      <td>7–14 days</td>
+      <td>
+        <ul class="compact">
+          <li>Flaccid paralysis (spinal/bulbar)</li>
+          <li>Respiratory failure (bulbar)</li>
+          <li>Bone/muscle deformity</li>
+          <li>Fatality 2–10% (bulbar form)</li>
+        </ul>
+      </td>
+      <td>OPV Sabin (oral, 95% effective); IPV Salk (SC/IM, 80%)<br>Seroprophylaxis for pregnants/lab workers</td>
+    </tr>
+
+    <tr>
+      <td>Hepatitis A<br><small>("Infective Hepatitis")</small></td>
+      <td><span class="badge b-vir">Virus</span><br><em>HAV – RNA virus</em></td>
+      <td>Man only<br>(incubatory carriers + acute cases; NO chronic infection)</td>
+      <td>
+        <ul class="compact">
+          <li>Oral: hand-to-mouth, contaminated food/water</li>
+          <li>Blood exposure: <em>rare</em> (short viremia, no carrier state)</li>
+        </ul>
+      </td>
+      <td>2–6 weeks</td>
+      <td>
+        <ul class="compact">
+          <li>Very low case-fatality</li>
+          <li>No chronic disease</li>
+          <li>No persistent infection</li>
+        </ul>
+      </td>
+      <td>Active immunization (killed/live-attenuated vaccine)<br>Seroprophylaxis: human Ig (4–6 months protection)</td>
+    </tr>
+
+    <tr>
+      <td>Brucellosis<br><small>("Malta/Undulant Fever")</small></td>
+      <td><span class="badge b-bac">Bacteria</span><br><em>Brucella bacilli</em></td>
+      <td><strong>Animals only</strong><br>(cattle, sheep, goats, pigs)<br><em>No man-to-man spread</em></td>
+      <td>
+        <ul class="compact">
+          <li>Food-borne: raw milk, undercooked meat</li>
+          <li>Contact (occupational): skin/mucous abrasions</li>
+          <li>Air-borne: dust of dried animal tissue</li>
+        </ul>
+      </td>
+      <td>5–21 days</td>
+      <td>
+        <ul class="compact">
+          <li>Undulant fever (3–4 wk bouts)</li>
+          <li>Chronic brucellosis with relapses</li>
+          <li>Lymphadenopathy, body aches</li>
+        </ul>
+      </td>
+      <td>Animal: immunization of calves; eradication<br>Human: pasteurize milk, protective gear (contact/air routes)</td>
+    </tr>
+
+    <!-- BLOOD / BODY FLUID -->
+    <tr class="cat-row"><td colspan="7">🩸 Blood / Body-fluid Borne Diseases</td></tr>
+
+    <tr>
+      <td>Hepatitis B<br><small>("Serum Hepatitis")</small></td>
+      <td><span class="badge b-vir">Virus</span><br><em>HBV – DNA virus</em><br>(more resistant than HAV)</td>
+      <td>Man<br>(cases + chronic carriers: incubatory, convalescent, healthy)</td>
+      <td>
+        <ul class="compact">
+          <li>Infected blood (transfusion, syringes, dialysis, transplant)</li>
+          <li>Sexual contact</li>
+          <li>Congenital (HBsAg+ mother → fetus)</li>
+          <li>Oral route – rare</li>
+        </ul>
+      </td>
+      <td>6 wks – 6 months<br>(usually 3 months)</td>
+      <td>
+        <ul class="compact">
+          <li>Chronic carrier state</li>
+          <li>Fulminant hepatitis</li>
+          <li>Chronic hepatitis → Cirrhosis</li>
+          <li>Hepatoma (liver cancer)</li>
+        </ul>
+      </td>
+      <td>HBV vaccine (plasma-derived or yeast-recombinant), 3 doses; 90% protection for 7 yrs<br>Seroprophylaxis: specific HBIg</td>
+    </tr>
+
+    <tr>
+      <td>AIDS<br><small>(HIV Infection)</small></td>
+      <td><span class="badge b-vir">Virus</span><br><em>HIV I & II – DNA retrovirus</em><br>(attacks T-helper cells)</td>
+      <td>Man<br>(cases + incubatory carriers)</td>
+      <td>
+        <ul class="compact">
+          <li><strong>Sexual contact</strong> (main route)</li>
+          <li>Perinatal / postnatal</li>
+          <li>Infected blood (transfusion, IV drugs)</li>
+          <li>Kissing (saliva)</li>
+        </ul>
+        <strong>NOT transmitted by:</strong> droplet, food-borne, vector, blood-sucking insects
+      </td>
+      <td>6 months – 7 years</td>
+      <td>
+        <ul class="compact">
+          <li>TB (most common opportunistic)</li>
+          <li>Kaposi's sarcoma, Lymphoma</li>
+          <li>Neurological manifestations</li>
+          <li>100% fatal (eventually)</li>
+        </ul>
+      </td>
+      <td>No vaccine yet; Antiretroviral therapy (ART); harm reduction (condoms, disposable syringes)</td>
+    </tr>
+
+    <!-- CONTACT / ZOONOTIC -->
+    <tr class="cat-row"><td colspan="7">🐾 Contact / Zoonotic Diseases</td></tr>
+
+    <tr>
+      <td>Rabies</td>
+      <td><span class="badge b-zoo">Virus</span><br><em>Rabies virus (street / fixed)</em></td>
+      <td><strong>Animals</strong><br>(dogs mainly; cats, wolves, foxes; rarely rodents)<br><em>Possibly man (saliva) – not reported</em></td>
+      <td>
+        <ul class="compact">
+          <li>Bite of rabid animal (main)</li>
+          <li>Lick on skin abrasions</li>
+        </ul>
+        IP depends on: site/severity of bite, number of bites, dose of virus
+      </td>
+      <td>10 days – 6+ months</td>
+      <td>
+        <ul class="compact">
+          <li>Acute encephalomyelitis</li>
+          <li>Hydrophobia</li>
+          <li><strong>100% fatal</strong> once symptomatic</li>
+        </ul>
+      </td>
+      <td>Pre-exposure: 3 doses on Days 0, 7, 21/28<br>Post-exposure: vaccine + RIG Day 0; wound wash 15 min soap & water<br>Vaccinate/destroy stray animals</td>
+    </tr>
+
+    <tr>
+      <td>Tetanus<br><small>("Lock-jaw")</small></td>
+      <td><span class="badge b-bac-spo">Bacteria</span><br><em>Clostridium tetani</em><br>Anaerobic spore-forming, exotoxin</td>
+      <td>Animals (herbivores/horses) & Man<br><em>No man-to-man spread</em></td>
+      <td>
+        <ul class="compact">
+          <li>Wound contamination (polluted place)</li>
+          <li>Tetanus neonatorum (contaminated cord)</li>
+          <li>Surgical tetanus (unsterilized instruments)</li>
+          <li>Puerperal tetanus (septic abortion)</li>
+        </ul>
+      </td>
+      <td>4–21 days</td>
+      <td>
+        <ul class="compact">
+          <li>Tonic muscle spasms (lock-jaw / risus sardonicus)</li>
+          <li>Respiratory failure</li>
+          <li>High case-fatality if untreated</li>
+        </ul>
+      </td>
+      <td>Active: Tetanus toxoid / DPT / DT<br>Passive: ATG (4 wks) or ATS (2 wks)<br>Chemoprophylaxis: Penicillin</td>
+    </tr>
+
+    <tr>
+      <td>Gas Gangrene</td>
+      <td><span class="badge b-bac-spo">Bacteria</span><br><em>Clostridia group</em><br>Anaerobic spore-forming</td>
+      <td>Man & animals (small intestine)</td>
+      <td>
+        <ul class="compact">
+          <li>Deeply lacerated wounds (war, occupational)</li>
+          <li>Surgical infection (non-sterile instruments)</li>
+          <li>Puerperal infection (septic abortion)</li>
+        </ul>
+      </td>
+      <td>Varies (hours–days)</td>
+      <td>
+        <ul class="compact">
+          <li>Myonecrosis + gas production</li>
+          <li>Toxemia</li>
+          <li>Very high case-fatality</li>
+        </ul>
+      </td>
+      <td>Seroprophylaxis: polyvalent antitoxin IM<br>Chemoprophylaxis: Penicillin<br>Drastic: close + sterilize affected ward</td>
+    </tr>
+
+    <!-- DROPLET -->
+    <tr class="cat-row"><td colspan="7">💨 Droplet / Airborne Diseases</td></tr>
+
+    <tr>
+      <td>Streptococcal Sore Throat</td>
+      <td><span class="badge b-bac">Bacteria</span><br><em>Group A β-haemolytic Streptococci</em></td>
+      <td>Man (cases + carriers in throat)</td>
+      <td>
+        <ul class="compact">
+          <li>Direct droplet (most important)</li>
+          <li>Droplet nuclei / dust</li>
+          <li>Contaminated articles/fomites</li>
+          <li>Milk-borne</li>
+        </ul>
+      </td>
+      <td>1–5 days</td>
+      <td>
+        <ul class="compact">
+          <li>Suppurative: quinsy, otitis media, pneumonia</li>
+          <li>Non-suppurative: <strong>Rheumatic fever / RHD</strong></li>
+          <li>Acute glomerulonephritis</li>
+        </ul>
+      </td>
+      <td>Chemoprophylaxis: Penicillin / Erythromycin (to prevent RHD)</td>
+    </tr>
+
+    <tr>
+      <td>Meningococcal Meningitis<br><small>("Cerebrospinal Fever")</small></td>
+      <td><span class="badge b-bac">Bacteria</span><br><em>Meningococcus (delicate diplococcus)</em></td>
+      <td>Man (cases + all carrier types in nasopharynx)</td>
+      <td>
+        <ul class="compact">
+          <li>Direct droplet infection (main)</li>
+          <li>Droplet nuclei/articles – <em>rare</em> (organism dies quickly)</li>
+        </ul>
+        Favoured by: overcrowding, bad ventilation
+      </td>
+      <td>2–7 days</td>
+      <td>
+        <ul class="compact">
+          <li>Hydrocephalus, optic neuritis</li>
+          <li>Nerve deafness, arthritis</li>
+          <li>Fatality: 50% → 5% with treatment</li>
+        </ul>
+      </td>
+      <td>Chemoprophylaxis: Rifampicin 600 mg × 3 days / Ceftriaxone<br>Vaccine: polysaccharide (type A & C) for high-risk groups</td>
+    </tr>
+
+    <tr>
+      <td>Mumps<br><small>("Epidemic Parotitis")</small></td>
+      <td><span class="badge b-vir">Virus</span><br><em>Mumps virus</em></td>
+      <td>Man (cases + incubatory carriers – saliva)</td>
+      <td>
+        <ul class="compact">
+          <li>Direct droplet (cough spray)</li>
+          <li>Contaminated articles/fomites</li>
+          <li>Congenital infection</li>
+        </ul>
+      </td>
+      <td>~18 days (1–2 weeks)</td>
+      <td>
+        <ul class="compact">
+          <li>Orchitis, oophoritis, mastitis</li>
+          <li>Pancreatitis, meningoencephalitis</li>
+          <li>CNS affection (especially adults)</li>
+          <li>Congenital malformations</li>
+        </ul>
+      </td>
+      <td>Active: Mumps vaccine (live-attenuated, 0.5 ml SC) or MMR<br>Passive: Immunoglobulin for susceptible adults</td>
+    </tr>
+
+    <tr>
+      <td>Measles</td>
+      <td><span class="badge b-vir">Virus</span><br><em>Measles virus (perishes within hours)</em></td>
+      <td>Man only – Cases ONLY (no carriers)</td>
+      <td>
+        <ul class="compact">
+          <li>Direct droplet</li>
+          <li>Contaminated articles/fomites</li>
+          <li>Droplet nuclei (air-borne)</li>
+          <li><em>Branny rash scales NOT infective</em></li>
+        </ul>
+      </td>
+      <td>~10 days (14 days until rash)</td>
+      <td>
+        <ul class="compact">
+          <li>Bronchopneumonia</li>
+          <li>Gastroenteritis → malnutrition</li>
+          <li>Otitis media</li>
+          <li>Encephalitis (rare)</li>
+        </ul>
+      </td>
+      <td>Active: live-attenuated vaccine 95%; compulsory Egypt 9–12 months<br>Post-exposure seroprophylaxis within 72 hours</td>
+    </tr>
+
+    <tr>
+      <td>Chickenpox<br><small>("Varicella")</small></td>
+      <td><span class="badge b-vir">Virus</span><br><em>Varicella-Zoster (VZV)</em></td>
+      <td>Cases of varicella OR herpes zoster</td>
+      <td>
+        <ul class="compact">
+          <li>Direct droplet (cough spray)</li>
+          <li>Droplet nuclei (air-borne)</li>
+          <li>Contact (vesicle fluid)</li>
+          <li>Articles/fomites</li>
+          <li>Exposure to herpes zoster</li>
+        </ul>
+        Communicability: 1 day before → 7 days after rash
+      </td>
+      <td>2–3 weeks</td>
+      <td>
+        <ul class="compact">
+          <li>Secondary infection of vesicles</li>
+          <li>Pneumonia</li>
+          <li>Encephalitis (rare)</li>
+          <li>Fatality: rare</li>
+        </ul>
+      </td>
+      <td>Vaccine available; Seroprophylaxis: specific Ig for high-risk (prematures, debilitated)</td>
+    </tr>
+
+    <tr>
+      <td>Pulmonary TB</td>
+      <td><span class="badge b-bac">Bacteria</span><br><em>Mycobacterium tuberculosis</em><br>(human & bovine types)</td>
+      <td>Man (open cases) & Cattle (tuberculous cattle)</td>
+      <td>
+        <ul class="compact">
+          <li>Direct droplet (most common): bad ventilation, overcrowding</li>
+          <li>Airborne: droplet nuclei, dried sputum dust</li>
+          <li>Contaminated articles/fomites</li>
+          <li>Bovine type: inhalation from cattle (occupational)</li>
+        </ul>
+      </td>
+      <td>~4 weeks</td>
+      <td>
+        <ul class="compact">
+          <li>Progressive pulmonary disease</li>
+          <li>Haematogenous dissemination</li>
+          <li>Pleurisy, cavitation</li>
+          <li>High fatality if untreated</li>
+        </ul>
+        Risk ↑ with: malnutrition, diabetes, steroids, silicosis
+      </td>
+      <td>BCG vaccine (live-attenuated, 0.1 ml ID): ~85% protection for 15 yrs<br>Chemoprophylaxis: INH for 1 year (high-risk groups)</td>
+    </tr>
+
+  </tbody>
+</table>
+</div>
+
+
+<!-- ===================== TABLE 2: SIMPLIFIED ===================== -->
+<h2 class="section-title">Table 2 — Quick Reference (Simplified)</h2>
+<div class="tbl-wrap">
+<table class="simple-tbl">
+  <thead>
+    <tr>
+      <th>Disease</th>
+      <th>Agent</th>
+      <th>Source (Reservoir)</th>
+      <th>How it Spreads</th>
+      <th>IP</th>
+      <th>Worst Complication</th>
+      <th>Prevention Key Point</th>
+    </tr>
+  </thead>
+  <tbody>
+
+    <tr class="cat-row"><td colspan="7">🍽️ Food-borne</td></tr>
+
+    <tr>
+      <td>Typhoid</td>
+      <td><span class="tag">Bacteria</span></td>
+      <td>Humans only</td>
+      <td>Contaminated food/water; flies</td>
+      <td>14–17 days</td>
+      <td>Intestinal perforation</td>
+      <td>Sanitation + TAB vaccine</td>
+    </tr>
+    <tr>
+      <td>Polio</td>
+      <td><span class="tag">Virus</span></td>
+      <td>Humans only</td>
+      <td>Feco-oral + droplet</td>
+      <td>7–14 days</td>
+      <td>Permanent paralysis</td>
+      <td>OPV Sabin (oral) / IPV Salk</td>
+    </tr>
+    <tr>
+      <td>Hepatitis A</td>
+      <td><span class="tag">Virus</span></td>
+      <td>Humans only</td>
+      <td>Feco-oral; blood rare</td>
+      <td>2–6 weeks</td>
+      <td>Self-limiting; very low fatality</td>
+      <td>Killed vaccine + Ig</td>
+    </tr>
+    <tr>
+      <td>Brucellosis</td>
+      <td><span class="tag">Bacteria</span></td>
+      <td>Animals only (no human-to-human)</td>
+      <td>Raw milk/meat; direct animal contact; dust</td>
+      <td>5–21 days</td>
+      <td>Chronic relapsing illness</td>
+      <td>Pasteurize milk; animal control</td>
+    </tr>
+
+    <tr class="cat-row"><td colspan="7">🩸 Blood / Body-fluid</td></tr>
+
+    <tr>
+      <td>Hepatitis B</td>
+      <td><span class="tag">Virus</span></td>
+      <td>Humans (chronic carriers)</td>
+      <td>Blood, sex, mother→baby</td>
+      <td>6 wks–6 months</td>
+      <td>Liver cancer (hepatoma)</td>
+      <td>HBV vaccine × 3 doses + HBIg</td>
+    </tr>
+    <tr>
+      <td>AIDS (HIV)</td>
+      <td><span class="tag">Virus</span></td>
+      <td>Humans only</td>
+      <td>Sexual (main), blood, perinatal</td>
+      <td>6 months–7 yrs</td>
+      <td>100% fatal; TB, Kaposi's sarcoma</td>
+      <td>ART; condoms; no vaccine yet</td>
+    </tr>
+
+    <tr class="cat-row"><td colspan="7">🐾 Contact / Zoonotic</td></tr>
+
+    <tr>
+      <td>Rabies</td>
+      <td><span class="tag">Virus</span></td>
+      <td>Animals (dogs mainly)</td>
+      <td>Animal bite/lick</td>
+      <td>10 days–6+ months</td>
+      <td>100% fatal once symptomatic</td>
+      <td>PEP: wound wash + vaccine + RIG</td>
+    </tr>
+    <tr>
+      <td>Tetanus</td>
+      <td><span class="tag">Bacteria (spore)</span></td>
+      <td>Animals + soil; no person-to-person</td>
+      <td>Wound contamination; neonatal; surgical</td>
+      <td>4–21 days</td>
+      <td>Respiratory failure</td>
+      <td>Tetanus toxoid + ATG after injury</td>
+    </tr>
+    <tr>
+      <td>Gas Gangrene</td>
+      <td><span class="tag">Bacteria (spore)</span></td>
+      <td>Man + animals (GIT)</td>
+      <td>Deep lacerated/surgical wounds</td>
+      <td>Hours–days</td>
+      <td>Myonecrosis; very high fatality</td>
+      <td>Polyvalent antitoxin + Penicillin</td>
+    </tr>
+
+    <tr class="cat-row"><td colspan="7">💨 Droplet / Airborne</td></tr>
+
+    <tr>
+      <td>Strep. Sore Throat</td>
+      <td><span class="tag">Bacteria</span></td>
+      <td>Humans</td>
+      <td>Direct droplet; milk</td>
+      <td>1–5 days</td>
+      <td>Rheumatic fever / RHD</td>
+      <td>Penicillin chemoprophylaxis</td>
+    </tr>
+    <tr>
+      <td>Meningococcal Meningitis</td>
+      <td><span class="tag">Bacteria</span></td>
+      <td>Humans (nasopharynx)</td>
+      <td>Direct droplet (dies outside body quickly)</td>
+      <td>2–7 days</td>
+      <td>Hydrocephalus; 50% fatality if untreated</td>
+      <td>Rifampicin chemo + polysaccharide vaccine</td>
+    </tr>
+    <tr>
+      <td>Mumps</td>
+      <td><span class="tag">Virus</span></td>
+      <td>Humans</td>
+      <td>Direct droplet; fomites; congenital</td>
+      <td>~18 days</td>
+      <td>Orchitis → infertility (adults)</td>
+      <td>MMR vaccine</td>
+    </tr>
+    <tr>
+      <td>Measles</td>
+      <td><span class="tag">Virus</span></td>
+      <td>Humans only (no carriers)</td>
+      <td>Droplet; air-borne; fomites (rash scales NOT infective)</td>
+      <td>10–14 days</td>
+      <td>Bronchopneumonia; encephalitis</td>
+      <td>Live-attenuated vaccine; seroprophylaxis &lt;72h</td>
+    </tr>
+    <tr>
+      <td>Chickenpox</td>
+      <td><span class="tag">Virus</span></td>
+      <td>Cases of varicella or herpes zoster</td>
+      <td>Droplet; air-borne; vesicle fluid; fomites</td>
+      <td>2–3 weeks</td>
+      <td>Secondary infection; pneumonia</td>
+      <td>Vaccine; specific Ig for high-risk</td>
+    </tr>
+    <tr>
+      <td>Pulmonary TB</td>
+      <td><span class="tag">Bacteria</span></td>
+      <td>Humans (open cases) + Cattle</td>
+      <td>Droplet (main); airborne dust; fomites; bovine (occupational)</td>
+      <td>~4 weeks</td>
+      <td>Cavitation; haematogenous spread</td>
+      <td>BCG vaccine (85%) + INH chemoprophylaxis</td>
+    </tr>
+
+  </tbody>
+</table>
+</div>
+
+<footer>Generated from yellow-highlighted content · Nursing / Epidemiology Notes</footer>
+</body>
+</html>
