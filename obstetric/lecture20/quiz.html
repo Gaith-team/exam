@@ -674,37 +674,51 @@ function updateTop() {
 /* RENDER QUESTION */
 function render() {
   updateTop();
+
   const q = questions[i];
+
   document.getElementById('app').innerHTML = `
     <div class="q-card">
+
       <div class="q-header">
         <div class="q-num">سؤال ${i + 1} / ${questions.length}</div>
       </div>
-     <div class="q-text">
-  ${q.s ? `<div style="margin-bottom:14px;
-    padding:12px;
-    background:var(--bg2);
-    border-radius:12px;
-    font-size:13px;
-    line-height:1.8;
-    color:var(--text2);">
-    ${q.s}
-  </div>` : ''}
 
-  ${q.t}
-</div>
+      <div class="q-text">
+        ${q.scenario ? `
+          <div style="
+            margin-bottom:14px;
+            padding:12px;
+            background:var(--bg2);
+            border-radius:12px;
+            font-size:13px;
+            line-height:1.8;
+            color:var(--text2);
+          ">
+            ${q.scenario}
+          </div>
+        ` : ''}
+
+        ${q.t}
+      </div>
+
       <div class="options">
-        ${q.o.map((o, idx) => `
+        ${q.o.map((x, idx) => `
           <div class="opt" id="opt${idx}" onclick="choose(${idx})">
-            <div class="opt-letter">${LETTERS[idx] || idx + 1}</div>
-            ${o}
+            <div class="opt-letter">${LETTERS[idx]}</div>
+            <div>${x}</div>
           </div>
         `).join('')}
       </div>
+
       <div class="nav-btns">
-        <button class="btn btn-skip" onclick="skip()"><i class="fa-solid fa-forward"></i> تخطي</button>
+        <button class="btn btn-skip" onclick="next()">
+          <i class="fa-solid fa-forward"></i> تخطي
+        </button>
       </div>
-    </div>`;
+
+    </div>
+  `;
 }
 
 /* CHOOSE */
