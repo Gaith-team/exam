@@ -680,7 +680,19 @@ function render() {
       <div class="q-header">
         <div class="q-num">سؤال ${i + 1} / ${questions.length}</div>
       </div>
-      <div class="q-text">${q.t}</div>
+     <div class="q-text">
+  ${q.s ? `<div style="margin-bottom:14px;
+    padding:12px;
+    background:var(--bg2);
+    border-radius:12px;
+    font-size:13px;
+    line-height:1.8;
+    color:var(--text2);">
+    ${q.s}
+  </div>` : ''}
+
+  ${q.t}
+</div>
       <div class="options">
         ${q.o.map((o, idx) => `
           <div class="opt" id="opt${idx}" onclick="choose(${idx})">
