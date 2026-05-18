@@ -617,13 +617,7 @@ function updateTop() {
 /* RENDER QUESTION */
 function render() {
   updateTop();
-  const q = questions[i];
-  document.getElementById('app').innerHTML = `
-    <div class="q-card">
-      <div class="q-header">
-        <div class="q-num">سؤال ${i + 1} / ${questions.length}</div>
-      </div>
-   <div class="q-text">
+<div class="q-text">
   ${q.scenario ? `
     <div style="
       margin-bottom:14px;
@@ -640,23 +634,6 @@ function render() {
 
   ${q.t}
 </div>
-    <div class="q-text">
-      ${q.scenario ? `
-        <div style="
-          margin-bottom:14px;
-          padding:12px;
-          background:var(--bg2);
-          border-radius:12px;
-          font-size:13px;
-          line-height:1.8;
-          color:var(--text2);
-        ">
-          ${q.scenario}
-        </div>
-      ` : ''}
-
-      ${q.t}
-    </div>
 
     <div class="options">
       ${q.o.map((x, idx) => `
