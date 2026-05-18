@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nursing Flashcards – Epidemiology</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Segoe UI', sans-serif;
+    background: #f0f4ff;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 24px 16px 40px;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+
+  header h1 {
+    font-size: 1.8rem;
+    color: #1e3a8a;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+  }
+
+  header p {
+    color: #64748b;
+    font-size: 0.95rem;
+    margin-top: 6px;
+  }
+
+  /* Progress */
+  .progress-bar-wrap {
+    width: 100%;
+    max-width: 680px;
+    background: #dbeafe;
+    border-radius: 999px;
+    height: 8px;
+    margin-bottom: 10px;
+    overflow: hidden;
+  }
+  .progress-bar-fill {
+    height: 100%;
+    background: linear-gradient(90deg, #3b82f6, #6366f1);
+    border-radius: 999px;
+    transition: width 0.4s ease;
+  }
+  .progress-text {
+    font-size: 0.85rem;
+    color: #475569;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  .progress-text span { font-weight: 700; color: #1e3a8a; }
+
+  /* Card container */
+  .card-area {
+    perspective: 1200px;
+    width: 100%;
+    max-width: 680px;
+    height: 320px;
+    cursor: pointer;
+    margin-bottom: 28px;
+  }
+
+  .card-inner {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 0.55s cubic-bezier(.4,0,.2,1);
+  }
+
+  .card-area.flipped .card-inner { transform: rotateY(180deg); }
+
+  .card-face {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    border-radius: 20px;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 32px 36px;
+    text-align: center;
+    box-shadow: 0 8px 32px rgba(30,58,138,0.12);
+  }
+
+  /* Front – Question */
+  .card-front {
+    background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+    color: white;
+  }
+
+  .card-front .tag {
+    background: rgba(255,255,255,0.18);
+    border-radius: 999px;
+    padding: 4px 14px;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+    font-weight: 600;
+  }
+
+  .card-front .question {
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.5;
+  }
+
+  .card-front .hint {
+    margin-top: 18px;
+    font-size: 0.8rem;
+    opacity: 0.65;
+  }
+
+  /* Back – Answer */
+  .card-back {
+    background: white;
+    border: 3px solid #fbbf24;
+    transform: rotateY(180deg);
+    color: #1e293b;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .card-back .answer-tag {
+    background: #fef9c3;
+    color: #92400e;
+    border-radius: 999px;
+    padding: 4px 14px;
+    font-size: 0.75rem;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 14px;
+    font-weight: 700;
+    border: 1px solid #fde68a;
+  }
+
+  .card-back .answer {
+    font-size: 1.05rem;
+    line-height: 1.7;
+    color: #1e293b;
+  }
+
+  .card-back .answer strong {
+    color: #1e3a8a;
+  }
+
+  /* Buttons */
+  .controls {
+    display: flex;
+    gap: 14px;
+    max-width: 680px;
+    width: 100%;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn {
+    padding: 13px 30px;
+    border-radius: 12px;
+    border: none;
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+    flex: 1;
+    min-width: 120px;
+    max-width: 200px;
+  }
+
+  .btn-prev { background: #e2e8f0; color: #475569; }
+  .btn-prev:hover { background: #cbd5e1; }
+
+  .btn-flip { background: linear-gradient(135deg,#f59e0b,#fbbf24); color: white; }
+  .btn-flip:hover { opacity: 0.9; transform: translateY(-1px); }
+
+  .btn-next { background: linear-gradient(135deg,#1e3a8a,#2563eb); color: white; }
+  .btn-next:hover { opacity: 0.9; transform: translateY(-1px); }
+
+  /* Category filter */
+  .categories {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 22px;
+    max-width: 720px;
+  }
+
+  .cat-btn {
+    padding: 6px 16px;
+    border-radius: 999px;
+    border: 2px solid #cbd5e1;
+    background: white;
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #475569;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .cat-btn.active {
+    border-color: #2563eb;
+    background: #2563eb;
+    color: white;
+  }
+  .cat-btn:hover:not(.active) { border-color: #93c5fd; color: #1e3a8a; }
+
+  /* Shuffle badge */
+  .shuffle-btn {
+    background: #f1f5f9;
+    border: 2px solid #e2e8f0;
+    color: #475569;
+    padding: 8px 18px;
+    border-radius: 999px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    margin-bottom: 16px;
+    transition: all 0.2s;
+  }
+  .shuffle-btn:hover { background: #dbeafe; border-color: #93c5fd; color: #1e3a8a; }
+
+  /* Score area */
+  .score-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .score-badge {
+    padding: 8px 18px;
+    border-radius: 12px;
+    font-size: 0.85rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .score-know { background: #dcfce7; color: #166534; border: 2px solid #86efac; }
+  .score-know:hover { background: #bbf7d0; }
+  .score-dontknow { background: #fee2e2; color: #991b1b; border: 2px solid #fca5a5; }
+  .score-dontknow:hover { background: #fecaca; }
+
+  .score-summary {
+    font-size: 0.82rem;
+    color: #64748b;
+    text-align: center;
+    margin-top: 10px;
+  }
+  .score-summary strong { color: #166534; }
+
+  @media (max-width: 500px) {
+    .card-area { height: 360px; }
+    .card-face { padding: 24px 20px; }
+    .card-front .question { font-size: 1.05rem; }
+    .card-back .answer { font-size: 0.95rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📚 Nursing Flashcards</h1>
+  <p>Epidemiology — Highlighted Topics (Oral Exam)</p>
+</header>
+
+<div class="categories" id="catButtons"></div>
+<button class="shuffle-btn" onclick="shuffle()">🔀 Shuffle Cards</button>
+
+<div class="progress-bar-wrap"><div class="progress-bar-fill" id="pbar"></div></div>
+<p class="progress-text">Card <span id="cnum">1</span> of <span id="ctotal">1</span></p>
+
+<div class="card-area" id="cardArea" onclick="flipCard()">
+  <div class="card-inner" id="cardInner">
+    <div class="card-face card-front">
+      <div class="tag" id="cardCat">Category</div>
+      <div class="question" id="cardQ"></div>
+      <div class="hint">👆 Tap to reveal answer</div>
+    </div>
+    <div class="card-face card-back">
+      <div class="answer-tag">✅ Answer</div>
+      <div class="answer" id="cardA"></div>
+    </div>
+  </div>
+</div>
+
+<div class="controls">
+  <button class="btn btn-prev" onclick="prev()">← Prev</button>
+  <button class="btn btn-flip" onclick="flipCard()">Flip Card</button>
+  <button class="btn btn-next" onclick="next()">Next →</button>
+</div>
+
+<div class="score-row" id="scoreRow">
+  <button class="score-badge score-know" onclick="markKnow()">✅ I Know It</button>
+  <button class="score-badge score-dontknow" onclick="markDontKnow()">❌ Need Review</button>
+</div>
+<p class="score-summary" id="scoreSummary"></p>
+
+<script>
+const ALL_CARDS = [
+  // ── Definitions ──
+  { cat: "Definitions", q: "Define Epidemiology", a: "It is the study of <strong>frequency, distribution and determinants</strong> of diseases or conditions in a defined population." },
+  { cat: "Definitions", q: "What is the Distribution Triad?", a: "Distribution is described in relation to: <strong>Person, Time, and Place</strong> characteristics." },
+  { cat: "Definitions", q: "Define Ecology (in epidemiology)", a: "It is the <strong>interaction between agent, host and environmental factors</strong> that help to maintain the presence of disease in the community." },
+  { cat: "Definitions", q: "Define Herd Immunity", a: "The <strong>resistance of a group of population</strong> to the spread of infection. It depends on the number of people who are immune in that population." },
+  { cat: "Definitions", q: "Define Public Health Surveillance", a: "The <strong>ongoing systematic collection, analysis, interpretation and dissemination</strong> of health data." },
+  { cat: "Definitions", q: "Define Hospital Acquired (Nosocomial) Infection", a: "An infection that may be <strong>acquired by a patient attending any medical center or unit</strong> including hospital for medical care." },
+  { cat: "Definitions", q: "What is an Infectious Disease Hospital cross-infection?", a: "<strong>Hospitalized cases may acquire another form of infection</strong> on top of the present infection." },
+
+  // ── Sequelae of Infection ──
+  { cat: "Infection Sequelae", q: "What are the 3 Sequelae of Infection?", a: "1. <strong>In-apparent</strong><br>2. <strong>Sub-clinical infection</strong><br>3. <strong>Manifest (clinical) disease</strong>" },
+
+  // ── Infectious Cycle ──
+  { cat: "Infectious Cycle", q: "Define the Infectious Cycle (Epidemiological Cycle)", a: "The process through which an <strong>infectious agent is transmitted from source of infection to a new susceptible host</strong>." },
+  { cat: "Infectious Cycle", q: "What are the 3 Links of the Infectious Cycle?", a: "1. <strong>Reservoir (source) of infection</strong><br>2. <strong>Mode of transmission</strong><br>3. <strong>Susceptible host</strong>" },
+  { cat: "Infectious Cycle", q: "Define a Carrier", a: "A person who <strong>carries the organism in their body but shows no signs or symptoms</strong>. Organisms are excreted with discharges and can infect others." },
+
+  // ── Types of Carriers ──
+  { cat: "Carriers", q: "What are the 4 types of carriers according to course of disease?", a: "<strong>Incubatory, Contact, Convalescent, Healthy</strong>" },
+  { cat: "Carriers", q: "What are the types of carriers according to exit of infection?", a: "<strong>Urinary</strong> and <strong>Intestinal</strong> (gall bladder / fecal)" },
+  { cat: "Carriers", q: "Types of carriers according to regularity?", a: "<strong>Intermittent</strong> (organisms do not always pass in discharge)" },
+  { cat: "Carriers", q: "Types of carriers according to duration?", a: "<strong>Chronic</strong> and <strong>Temporary</strong>" },
+  { cat: "Carriers", q: "Who are the reservoir in Typhoid? And what types of carriers exist?", a: "Reservoir: <strong>Man only</strong> — Cases & Carriers. Carrier types: incubatory, contact, convalescent & healthy. <strong>No chronic carriers in Cholera</strong>; in endemic areas, healthy carriers are most common." },
+
+  // ── Pattern of Spread ──
+  { cat: "Disease Patterns", q: "Define Sporadic disease", a: "<strong>Infrequent scattered cases</strong> not related to each other." },
+  { cat: "Disease Patterns", q: "Define Endemic disease", a: "A disease <strong>constantly present in the community</strong> due to the presence of its ecological factors (agent, host, environment)." },
+  { cat: "Disease Patterns", q: "Define Hyperendemic disease", a: "<strong>Endemic disease with high incidence and prevalence rates</strong>." },
+  { cat: "Disease Patterns", q: "Define Epidemic disease", a: "<strong>Sudden increase</strong> in cases of an infectious disease in a certain place and time — more than expected." },
+  { cat: "Disease Patterns", q: "Define Pandemic disease", a: "<strong>Epidemic involving several countries</strong> of the world (e.g. cholera, plague)." },
+  { cat: "Disease Patterns", q: "Define Outbreak", a: "<strong>Epidemic in a confined group</strong> or closed community (e.g. school, camp, hospital)." },
+  { cat: "Disease Patterns", q: "Define Epizootic", a: "<strong>Epidemic spread</strong> of infectious disease <strong>among animals</strong>." },
+  { cat: "Disease Patterns", q: "Define Enzootic", a: "<strong>Endemic spread</strong> of infectious disease <strong>among animals</strong>." },
+
+  // ── Prevention ──
+  { cat: "Prevention", q: "What are the 3 Levels of Prevention?", a: "<strong>Primary</strong>: prevent disease in healthy people<br><strong>Secondary (control)</strong>: prevent spread and complications<br><strong>Tertiary</strong>: rehabilitation of the handicapped" },
+  { cat: "Prevention", q: "What is most important in environment sanitation for prevention?", a: "<strong>Safe water supply</strong>, Food sanitation, Proper waste disposal, Insect control (flies & cockroaches)." },
+  { cat: "Prevention", q: "What is health education about in typhoid/cholera prevention?", a: "i) Mode of transmission<br>ii) Complications" },
+  { cat: "Prevention", q: "How many vaccines are used for specific prevention of cholera?", a: "<strong>3 vaccines</strong> (B-specific prevention by vaccination)" },
+
+  // ── Post-Exposure Immunization ──
+  { cat: "Immunization", q: "Name the 3 viral diseases for post-exposure active immunization", a: "1. <strong>Rabies</strong><br>2. <strong>Small pox</strong><br>3. <strong>Measles</strong>" },
+  { cat: "Immunization", q: "Post-exposure immunization for Rabies — how does it work?", a: "Human diploid cell vaccine — <strong>effective before the incubation period</strong> and appearance of symptoms." },
+  { cat: "Immunization", q: "Post-exposure immunization for Small Pox — key timing?", a: "Primary vaccination is protective <strong>after 8 days</strong> while the incubation period is <strong>12 days</strong>." },
+  { cat: "Immunization", q: "Post-exposure immunization for Measles — key timing?", a: "Vaccine is protective if given <strong>within 72 hours of exposure</strong>." },
+  { cat: "Immunization", q: "Name the 2 toxemic diseases that receive booster dose for post-exposure immunization", a: "<strong>Diphtheria & Tetanus</strong> (booster dose gives rapid protection)." },
+  { cat: "Immunization", q: "What is EPI?", a: "<strong>Expanded Program of Immunization</strong> — compulsory in Egypt." },
+
+  // ── International Immunization ──
+  { cat: "International Measures", q: "Which vaccines are for international travelers going to/from endemic areas?", a: "<strong>Cholera vaccine</strong> & <strong>Yellow Fever vaccine</strong>" },
+  { cat: "International Measures", q: "What vaccine is required for Pilgrims before leaving?", a: "<strong>Meningococcal vaccine</strong>" },
+  { cat: "International Measures", q: "Is the Cholera vaccine still required for Pilgrims?", a: "<strong>No longer required</strong> — replaced by chemoprophylaxis: single dose of <strong>oral tetracycline</strong>." },
+  { cat: "International Measures", q: "What are International Measures?", a: "<strong>Regulations to prevent introduction of disease from one country to another</strong>." },
+  { cat: "International Measures", q: "Name the Quarantinable Diseases", a: "<strong>Cholera, Yellow fever, Plague, Cutaneous anthrax</strong>" },
+  { cat: "International Measures", q: "Is a Cholera vaccination certificate still required for international travel?", a: "<strong>No</strong> — it is no longer required and has been replaced by chemoprophylaxis." },
+  { cat: "International Measures", q: "Yellow Fever certificate — when is it valid and for how long?", a: "Valid <strong>after 10 days</strong> and for <strong>10 years</strong>." },
+  { cat: "International Measures", q: "What are the regulations for Imported Goods?", a: "• <strong>Used clothes</strong> → sterilized<br>• <strong>Raw wool, hides & hair</strong> → certificate of disinfection for anthrax<br>• <strong>Cargo ships</strong> → De-rating certificate valid 6 months (fumigation with HCN or SO₂)" },
+  { cat: "International Measures", q: "What are the quarantine rules for Imported Animals?", a: "• <strong>Monkeys</strong> → quarantine against yellow fever<br>• <strong>Psittacine birds</strong> → for psittacosis<br>• <strong>Dogs & cats</strong> → for rabies" },
+
+  // ── Surveillance ──
+  { cat: "Surveillance", q: "Define the Surveillance System", a: "<strong>Public health surveillance</strong>: ongoing systematic collection, analysis, interpretation, and dissemination of health data." },
+  { cat: "Surveillance", q: "Name the Characteristics of Surveillance (8 of them)", a: "1. Acceptability  2. Accuracy (scientific validity)<br>3. Continuity  4. Consistency<br>5. Confidency  6. Flexibility<br>7. Feasibility  8. Feedback<br>9. Simplicity  10. Representativeness<br>13. Timeliness  14. Usefulness / Sensitivity" },
+
+  // ── Mode of Transmission (Cholera) ──
+  { cat: "Mode of Transmission", q: "What are the 2 main modes of transmission of Cholera/Polio?", a: "1. <strong>Droplet infection</strong> (oral-to-oral) — developed countries with sanitary environment<br>2. <strong>Ingestion (feco-oral)</strong>:<br>  - Direct: autoinfection (hand to mouth)<br>  - Indirect: contaminated food, water or milk — developing countries" },
+
+  // ── Predisposing factors ──
+  { cat: "CNS / Polio Risk", q: "What are the predisposing factors for CNS injury in Polio?", a: "• <strong>Surgery</strong>: tonsillectomy, adenoidectomy, teeth extraction<br>• <strong>IM injections</strong><br>• <strong>Fatigue / excessive muscle activity</strong><br>• <strong>Pregnancy</strong> in non-endemic areas" },
+
+  // ── Typhoid Complications ──
+  { cat: "Complications", q: "Name the complications of Typhoid Fever (4 main ones)", a: "1. <strong>Intestinal</strong>: hemorrhage & perforation<br>2. <strong>Cholecystitis</strong> & thrombophlebitis (femoral vein)<br>3. <strong>Pneumonia & myocarditis</strong><br>4. <strong>Osteomyelitis / bone abscess</strong>" },
+];
+
+let cards = [...ALL_CARDS];
+let current = 0;
+let known = 0;
+let review = 0;
+let markedCards = {};
+let activeCategory = "All";
+
+const categories = ["All", ...new Set(ALL_CARDS.map(c => c.cat))];
+
+function renderCatButtons() {
+  const div = document.getElementById("catButtons");
+  div.innerHTML = "";
+  categories.forEach(cat => {
+    const b = document.createElement("button");
+    b.className = "cat-btn" + (cat === activeCategory ? " active" : "");
+    b.textContent = cat;
+    b.onclick = () => { activeCategory = cat; filterCards(); renderCatButtons(); };
+    div.appendChild(b);
+  });
+}
+
+function filterCards() {
+  cards = activeCategory === "All" ? [...ALL_CARDS] : ALL_CARDS.filter(c => c.cat === activeCategory);
+  current = 0;
+  known = 0; review = 0; markedCards = {};
+  updateCard();
+  updateScore();
+}
+
+function shuffle() {
+  for (let i = cards.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [cards[i], cards[j]] = [cards[j], cards[i]];
+  }
+  current = 0;
+  document.getElementById("cardArea").classList.remove("flipped");
+  updateCard();
+}
+
+function updateCard() {
+  const card = cards[current];
+  document.getElementById("cardQ").textContent = card.q;
+  document.getElementById("cardA").innerHTML = card.a;
+  document.getElementById("cardCat").textContent = card.cat;
+  document.getElementById("cnum").textContent = current + 1;
+  document.getElementById("ctotal").textContent = cards.length;
+  const pct = ((current + 1) / cards.length) * 100;
+  document.getElementById("pbar").style.width = pct + "%";
+  document.getElementById("cardArea").classList.remove("flipped");
+}
+
+function flipCard() {
+  document.getElementById("cardArea").classList.toggle("flipped");
+}
+
+function next() {
+  if (current < cards.length - 1) { current++; updateCard(); }
+}
+
+function prev() {
+  if (current > 0) { current--; updateCard(); }
+}
+
+function markKnow() {
+  if (!markedCards[current]) { known++; }
+  else if (markedCards[current] === "review") { known++; review--; }
+  markedCards[current] = "know";
+  updateScore();
+  if (current < cards.length - 1) setTimeout(next, 300);
+}
+
+function markDontKnow() {
+  if (!markedCards[current]) { review++; }
+  else if (markedCards[current] === "know") { review++; known--; }
+  markedCards[current] = "review";
+  updateScore();
+  if (current < cards.length - 1) setTimeout(next, 300);
+}
+
+function updateScore() {
+  const total = cards.length;
+  const done = known + review;
+  document.getElementById("scoreSummary").innerHTML =
+    `✅ Know: <strong>${known}</strong> &nbsp;|&nbsp; ❌ Need Review: <strong>${review}</strong> &nbsp;|&nbsp; Remaining: <strong>${total - done}</strong>`;
+}
+
+// Init
+renderCatButtons();
+updateCard();
+updateScore();
+
+// Keyboard support
+document.addEventListener("keydown", e => {
+  if (e.key === "ArrowRight") next();
+  else if (e.key === "ArrowLeft") prev();
+  else if (e.key === " ") { e.preventDefault(); flipCard(); }
+  else if (e.key === "k") markKnow();
+  else if (e.key === "r") markDontKnow();
+});
+</script>
+</body>
+</html>
