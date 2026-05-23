@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Tajawal:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --c:      #e67e22;
+  --c-deep: #b8590a;
+  --c-lite: #f39c12;
+  --c-glow: rgba(230,126,34,0.2);
+  --c-soft: rgba(230,126,34,0.09);
+  --green:  #27ae60;
+  --red:    #e74c3c;
+  --bg:     #f9f5f0;
+  --bg2:    #f1e8dc;
+  --card:   #ffffff;
+  --text:   #1a1208;
+  --text2:  #5a4a30;
+  --text3:  #9a8060;
+  --border: rgba(230,126,34,0.15);
+  --radius: 18px;
+  --tr:     all 0.28s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="dark"] {
+  --bg:    #12100c;
+  --bg2:   #1c1710;
+  --card:  #231e16;
+  --text:  #f0e6d6;
+  --text2: #c0a880;
+  --text3: #806848;
+  --border:rgba(230,126,34,0.18);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Cairo','Tajawal',sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  transition: background .4s, color .4s;
+  overflow-x: hidden;
+}
+
+/* ── NAV ── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px;
+  background: rgba(249,245,240,0.93);
+  backdrop-filter: blur(18px);
+  border-bottom: 1px solid var(--border);
+  transition: var(--tr);
+}
+[data-theme="dark"] nav { background: rgba(18,16,12,0.95); }
+.nav-back {
+  display: flex; align-items: center; gap: 8px;
+  text-decoration: none; color: var(--text2);
+  font-size: 13px; font-weight: 700;
+  padding: 7px 13px; border-radius: 9px;
+  border: 1px solid var(--border); background: var(--card);
+  transition: var(--tr);
+}
+.nav-back:hover { color: var(--c); border-color: var(--c); }
+.nav-center { display: flex; align-items: center; gap: 9px; }
+.nav-pill {
+  display: flex; align-items: center; gap: 7px;
+  padding: 6px 14px; border-radius: 50px;
+  background: linear-gradient(135deg, var(--c), var(--c-lite));
+  color: #fff; font-size: 13px; font-weight: 800;
+}
+.theme-toggle {
+  width: 38px; height: 38px; border-radius: 50%;
+  border: 1.5px solid var(--border); background: var(--card);
+  cursor: pointer; display: flex; align-items: center; justify-content: center;
+  font-size: 16px; transition: var(--tr);
+}
+.theme-toggle:hover { border-color: var(--c); transform: rotate(20deg); }
+
+/* ── SCREENS ── */
+.screen { display: none; }
+.screen.active { display: flex; }
+
+/* ══════════════════════════════════
+   START SCREEN
+══════════════════════════════════ */
+#startScreen {
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 80px 24px 40px;
+  text-align: center;
+}
+.start-icon {
+  width: 90px; height: 90px; border-radius: 24px;
+  background: linear-gradient(135deg, var(--c), var(--c-lite));
+  display: flex; align-items: center; justify-content: center;
+  font-size: 40px; margin: 0 auto 28px;
+  box-shadow: 0 12px 40px var(--c-glow);
+  animation: floatIcon 3s ease-in-out infinite;
+}
+@keyframes floatIcon {
+  0%,100% { transform: translateY(0); }
+  50%      { transform: translateY(-8px); }
+}
+.start-title {
+  font-size: clamp(28px,5vw,44px); font-weight: 900; color: var(--text);
+  line-height: 1.15; margin-bottom: 12px;
+}
+.start-title span { color: var(--c); }
+.start-sub {
+  font-size: 15px; color: var(--text2); line-height: 1.7;
+  max-width: 400px; margin: 0 auto 36px;
+}
+.start-meta {
+  display: flex; gap: 16px; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 44px;
+}
+.meta-pill {
+  display: flex; align-items: center; gap: 8px;
+  padding: 10px 20px; border-radius: 12px;
+  background: var(--card); border: 1px solid var(--border);
+  font-size: 14px; font-weight: 700; color: var(--text2);
+}
+.meta-pill strong { color: var(--c); font-size: 18px; }
+.btn-start {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 16px 44px; border-radius: 14px;
+  background: linear-gradient(135deg, var(--c), var(--c-lite));
+  color: #fff; font-size: 17px; font-weight: 900;
+  border: none; cursor: pointer;
+  box-shadow: 0 8px 28px var(--c-glow);
+  transition: var(--tr); font-family: 'Cairo',sans-serif;
+}
+.btn-start:hover { transform: translateY(-3px) scale(1.03); box-shadow: 0 14px 40px var(--c-glow); }
+
+/* ══════════════════════════════════
+   QUIZ SCREEN
+══════════════════════════════════ */
+#quizScreen {
+  min-height: 100vh;
+  flex-direction: column;
+  padding: 80px 0 40px;
+}
+.quiz-wrap {
+  flex: 1; max-width: 680px; width: 100%;
+  margin: 0 auto; padding: 32px 24px;
+  display: flex; flex-direction: column; gap: 24px;
+}
+
+/* progress */
+.quiz-progress-row {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 14px;
+}
+.progress-track {
+  flex: 1; height: 6px; border-radius: 6px;
+  background: var(--bg2); overflow: hidden;
+}
+.progress-fill {
+  height: 100%; border-radius: 6px;
+  background: linear-gradient(90deg, var(--c), var(--c-lite));
+  transition: width .5s cubic-bezier(0.4,0,0.2,1);
+}
+.progress-label {
+  font-size: 13px; font-weight: 800; color: var(--c);
+  white-space: nowrap;
+}
+
+/* question card */
+.q-card {
+  background: var(--card);
+  border: 1.5px solid var(--border);
+  border-radius: 20px;
+  padding: 32px 28px;
+  box-shadow: 0 4px 24px rgba(230,126,34,0.08);
+  animation: slideIn .35s ease;
+}
+@keyframes slideIn {
+  from { opacity: 0; transform: translateX(-20px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+.q-num {
+  font-size: 11px; font-weight: 800; letter-spacing: 2px;
+  color: var(--c); text-transform: uppercase; margin-bottom: 14px;
+}
+.q-text {
+  font-size: clamp(16px,2.5vw,20px); font-weight: 700;
+  color: var(--text); line-height: 1.6;
+}
+
+/* options */
+.options-list {
+  display: flex; flex-direction: column; gap: 12px;
+  margin-top: 28px;
+}
+.opt-btn {
+  display: flex; align-items: center; gap: 14px;
+  padding: 15px 18px; border-radius: 13px;
+  border: 1.5px solid var(--border);
+  background: var(--bg);
+  cursor: pointer; text-align: left;
+  transition: var(--tr); font-family: 'Cairo',sans-serif;
+  font-size: 15px; font-weight: 600; color: var(--text);
+  width: 100%;
+}
+.opt-btn:hover:not(:disabled) {
+  border-color: var(--c);
+  background: var(--c-soft);
+  transform: translateX(3px);
+}
+.opt-letter {
+  width: 34px; height: 34px; flex-shrink: 0;
+  border-radius: 50%; border: 2px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 900; color: var(--text3);
+  transition: var(--tr); background: var(--card);
+}
+.opt-btn:hover:not(:disabled) .opt-letter {
+  border-color: var(--c); color: var(--c); background: rgba(230,126,34,0.1);
+}
+
+/* states */
+.opt-btn.correct {
+  border-color: var(--green) !important;
+  background: rgba(39,174,96,0.08) !important;
+  color: var(--green);
+}
+.opt-btn.correct .opt-letter {
+  background: var(--green); border-color: var(--green);
+  color: #fff;
+}
+.opt-btn.wrong {
+  border-color: var(--red) !important;
+  background: rgba(231,76,60,0.08) !important;
+  color: var(--red);
+}
+.opt-btn.wrong .opt-letter {
+  background: var(--red); border-color: var(--red);
+  color: #fff;
+}
+.opt-btn:disabled { cursor: not-allowed; }
+
+/* feedback */
+.feedback-box {
+  display: none;
+  align-items: center; gap: 12px;
+  padding: 14px 18px; border-radius: 12px;
+  font-size: 14px; font-weight: 700;
+  margin-top: 16px;
+  animation: fadeIn .3s ease;
+}
+@keyframes fadeIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:translateY(0); } }
+.feedback-box.show { display: flex; }
+.feedback-box.correct-fb {
+  background: rgba(39,174,96,0.1);
+  border: 1px solid rgba(39,174,96,0.25);
+  color: var(--green);
+}
+.feedback-box.wrong-fb {
+  background: rgba(231,76,60,0.1);
+  border: 1px solid rgba(231,76,60,0.25);
+  color: var(--red);
+}
+.feedback-icon { font-size: 20px; }
+
+/* nav buttons */
+.quiz-nav {
+  display: flex; gap: 12px; justify-content: space-between; align-items: center;
+}
+.btn-nav {
+  display: inline-flex; align-items: center; gap: 8px;
+  padding: 13px 26px; border-radius: 12px;
+  font-size: 14px; font-weight: 800;
+  border: none; cursor: pointer;
+  font-family: 'Cairo',sans-serif;
+  transition: var(--tr);
+}
+.btn-skip {
+  background: var(--bg2); color: var(--text2);
+  border: 1px solid var(--border);
+}
+.btn-skip:hover { background: var(--border); }
+.btn-next {
+  background: linear-gradient(135deg, var(--c), var(--c-lite));
+  color: #fff;
+  box-shadow: 0 4px 16px var(--c-glow);
+}
+.btn-next:hover { transform: translateY(-2px); box-shadow: 0 8px 24px var(--c-glow); }
+.btn-next:disabled { opacity: .45; pointer-events: none; }
+
+/* ══════════════════════════════════
+   RESULT SCREEN
+══════════════════════════════════ */
+#resultScreen {
+  min-height: 100vh;
+  flex-direction: column;
+  align-items: center; justify-content: center;
+  padding: 80px 24px 40px;
+  text-align: center;
+}
+.result-circle {
+  width: 140px; height: 140px;
+  border-radius: 50%;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  margin: 0 auto 28px;
+  position: relative;
+}
+.result-circle svg {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  transform: rotate(-90deg);
+}
+.result-circle svg circle {
+  fill: none; stroke-width: 8;
+  stroke-linecap: round;
+}
+.circle-bg  { stroke: var(--bg2); }
+.circle-fill { stroke: var(--c); transition: stroke-dashoffset 1.2s cubic-bezier(0.4,0,0.2,1); }
+.result-pct {
+  font-size: 36px; font-weight: 900; color: var(--text);
+  position: relative; z-index: 1;
+}
+.result-pct small { font-size: 14px; color: var(--text3); display: block; }
+
+.result-emoji { font-size: 56px; margin-bottom: 16px; animation: bounce .6s ease; }
+@keyframes bounce { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-14px)} }
+.result-title { font-size: 26px; font-weight: 900; color: var(--text); margin-bottom: 8px; }
+.result-sub { font-size: 15px; color: var(--text2); margin-bottom: 36px; }
+
+.result-stats {
+  display: flex; gap: 14px; justify-content: center; flex-wrap: wrap;
+  margin-bottom: 40px;
+}
+.rstat {
+  padding: 14px 22px; border-radius: 14px;
+  background: var(--card); border: 1px solid var(--border);
+  min-width: 110px;
+}
+.rstat .rv { font-size: 26px; font-weight: 900; }
+.rstat .rl { font-size: 12px; color: var(--text3); margin-top: 2px; }
+.rstat.correct-s .rv { color: var(--green); }
+.rstat.wrong-s   .rv { color: var(--red); }
+.rstat.skip-s    .rv { color: var(--text3); }
+
+.result-actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
+.btn-retry {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 14px 32px; border-radius: 12px;
+  background: linear-gradient(135deg, var(--c), var(--c-lite));
+  color: #fff; font-size: 15px; font-weight: 900;
+  border: none; cursor: pointer; font-family: 'Cairo',sans-serif;
+  box-shadow: 0 6px 22px var(--c-glow); transition: var(--tr);
+}
+.btn-retry:hover { transform: translateY(-3px); }
+.btn-review {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 14px 28px; border-radius: 12px;
+  background: var(--card); color: var(--text);
+  font-size: 15px; font-weight: 700;
+  border: 1.5px solid var(--border); cursor: pointer;
+  font-family: 'Cairo',sans-serif; transition: var(--tr);
+}
+.btn-review:hover { border-color: var(--c); color: var(--c); }
+
+/* ── REVIEW MODE ── */
+#reviewScreen {
+  min-height: 100vh;
+  flex-direction: column;
+  padding: 80px 0 60px;
+}
+.review-wrap {
+  max-width: 680px; width: 100%;
+  margin: 0 auto; padding: 32px 24px;
+  display: flex; flex-direction: column; gap: 18px;
+}
+.review-header {
+  text-align: center; margin-bottom: 10px;
+}
+.review-header h2 { font-size: 22px; font-weight: 900; color: var(--text); }
+.review-header p  { font-size: 13px; color: var(--text3); margin-top: 4px; }
+
+.review-card {
+  background: var(--card);
+  border-radius: 16px;
+  border: 1.5px solid var(--border);
+  overflow: hidden;
+}
+.review-card-top {
+  padding: 20px 22px;
+  border-bottom: 1px solid var(--border);
+}
+.review-q-label {
+  font-size: 10px; font-weight: 800; letter-spacing: 2px;
+  color: var(--text3); margin-bottom: 8px;
+}
+.review-q-text { font-size: 15px; font-weight: 700; color: var(--text); line-height: 1.55; }
+.review-opts { padding: 14px 22px; display: flex; flex-direction: column; gap: 8px; }
+.review-opt {
+  display: flex; align-items: center; gap: 10px;
+  padding: 10px 14px; border-radius: 10px;
+  font-size: 13px; font-weight: 600; color: var(--text2);
+  background: var(--bg);
+}
+.review-opt.is-correct {
+  background: rgba(39,174,96,0.1);
+  color: var(--green); font-weight: 800;
+}
+.review-opt.is-wrong {
+  background: rgba(231,76,60,0.1);
+  color: var(--red);
+}
+.review-dot {
+  width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
+  background: var(--border);
+}
+.review-opt.is-correct .review-dot { background: var(--green); }
+.review-opt.is-wrong   .review-dot { background: var(--red); }
+.review-status {
+  display: flex; align-items: center; gap: 5px;
+  padding: 3px 10px; border-radius: 50px;
+  font-size: 10px; font-weight: 800; margin-top: 10px;
+  width: fit-content;
+}
+.status-correct { background: rgba(39,174,96,0.12); color: var(--green); }
+.status-wrong   { background: rgba(231,76,60,0.12);  color: var(--red); }
+.status-skip    { background: var(--bg2); color: var(--text3); }
+
+.btn-back-result {
+  display: inline-flex; align-items: center; gap: 9px;
+  padding: 13px 28px; border-radius: 12px;
+  background: var(--card); color: var(--text);
+  font-size: 14px; font-weight: 700;
+  border: 1.5px solid var(--border); cursor: pointer;
+  font-family: 'Cairo',sans-serif; transition: var(--tr);
+  margin-top: 8px; align-self: center;
+}
+.btn-back-result:hover { border-color: var(--c); color: var(--c); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 540px) {
+  nav { padding: 0 16px; }
+  .quiz-wrap, .review-wrap { padding: 24px 16px; }
+  .q-card { padding: 22px 18px; }
+  .opt-btn { padding: 12px 14px; font-size: 14px; }
+  .result-stats { gap: 10px; }
+  .rstat { min-width: 90px; padding: 12px 16px; }
+}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="https://gaith-team.github.io/exam/level1/pharmacology/" class="nav-back">← Back</a>
+  <div class="nav-center">
+    <div class="nav-pill">📝 Quiz</div>
+  </div>
+  <button class="theme-toggle" id="themeBtn">🌙</button>
+</nav>
+
+<!-- ══ START SCREEN ══ -->
+<div class="screen active" id="startScreen">
+  <div class="start-icon">📝</div>
+  <h1 class="start-title">Question - <span id="quizTitleDisplay"></span></h1>
+  <p class="start-sub" id="startDesc">Test your knowledge — read each question and choose the correct answer</p>
+  <div class="start-meta">
+    <div class="meta-pill"><strong id="totalQDisplay">0</strong> Questions</div>
+    <div class="meta-pill">⏱ No time limit</div>
+    <div class="meta-pill">🎯 Multiple choice</div>
+  </div>
+  <button class="btn-start" onclick="startQuiz()">🚀 Start Quiz</button>
+</div>
+
+<!-- ══ QUIZ SCREEN ══ -->
+<div class="screen" id="quizScreen">
+  <div class="quiz-wrap">
+
+    <div class="quiz-progress-row">
+      <div class="progress-track">
+        <div class="progress-fill" id="progressFill" style="width:0%"></div>
+      </div>
+      <div class="progress-label" id="progressLabel">1 / 1</div>
+    </div>
+
+    <div class="q-card" id="qCard">
+      <div class="q-num" id="qNum">QUESTION 1</div>
+      <div class="q-text" id="qText"></div>
+      <div class="options-list" id="optsList"></div>
+      <div class="feedback-box" id="feedbackBox">
+        <span class="feedback-icon" id="feedbackIcon"></span>
+        <span id="feedbackText"></span>
+      </div>
+    </div>
+
+    <div class="quiz-nav">
+      <button class="btn-nav btn-skip" onclick="skipQuestion()">→ Skip</button>
+      <button class="btn-nav btn-next" id="btnNext" onclick="nextQuestion()" disabled>
+        Next →
+      </button>
+    </div>
+
+  </div>
+</div>
+
+<!-- ══ RESULT SCREEN ══ -->
+<div class="screen" id="resultScreen">
+  <div class="result-emoji" id="resultEmoji">🎉</div>
+
+  <div class="result-circle" id="resultCircle">
+    <svg viewBox="0 0 140 140">
+      <circle class="circle-bg"   cx="70" cy="70" r="62"/>
+      <circle class="circle-fill" cx="70" cy="70" r="62" id="circleArc"
+              stroke-dasharray="389.6"
+              stroke-dashoffset="389.6"/>
+    </svg>
+    <div class="result-pct">
+      <span id="pctNum">0</span>%
+      <small>Score</small>
+    </div>
+  </div>
+
+  <h2 class="result-title" id="resultTitle">Well done!</h2>
+  <p class="result-sub" id="resultSub">You have completed the quiz</p>
+
+  <div class="result-stats">
+    <div class="rstat correct-s">
+      <div class="rv" id="rCorrect">0</div>
+      <div class="rl">✅ Correct</div>
+    </div>
+    <div class="rstat wrong-s">
+      <div class="rv" id="rWrong">0</div>
+      <div class="rl">❌ Wrong</div>
+    </div>
+    <div class="rstat skip-s">
+      <div class="rv" id="rSkip">0</div>
+      <div class="rl">⏭ Skipped</div>
+    </div>
+  </div>
+
+  <div class="result-actions">
+    <button class="btn-retry" onclick="retryQuiz()">🔄 Try Again</button>
+    <button class="btn-review" onclick="showReview()">📋 Review Answers</button>
+  </div>
+</div>
+
+<!-- ══ REVIEW SCREEN ══ -->
+<div class="screen" id="reviewScreen">
+  <div class="review-wrap">
+    <div class="review-header">
+      <h2>📋 Answer Review</h2>
+      <p>Correct answers in green — your wrong answers in red</p>
+    </div>
+    <div id="reviewList"></div>
+    <button class="btn-back-result" onclick="showResult()">← Back to Results</button>
+  </div>
+</div>
+
+<script>
+const QUIZ_TITLE = Renal System";
+const QUIZ_DESC  = "أسئله شاملة عالمحاضرة ";
+
+const QUESTIONS = [
+{t:"Which of the following is a primary action of diuretics?", o:["Decrease urine volume","Increase urine volume","Decrease blood pressure","Increase blood pressure"], a:1},
+{t:"Natriuretic diuretics primarily increase the excretion of which ion?", o:["Potassium","Sodium","Calcium","Magnesium"], a:1},
+{t:"Which type of diuretic increases water excretion without significantly affecting salt excretion?", o:["Natriuretic","Osmotic","Loop","Thiazide"], a:1},
+{t:"Which of these is classified as an extrarenal diuretic?", o:["Furosemide","Hydrochlorothiazide","Dobutamine","Spironolactone"], a:2},
+{t:"The site of action for Thiazide diuretics is primarily the:", o:["Proximal convoluted tubule","Loop of Henle","Distal convoluted tubule","Collecting duct"], a:2},
+{t:"A common side effect of Thiazide diuretics is:", o:["Hypokalemia","Hyperkalemia","Hypertension","Hypoglycemia"], a:0},
+{t:"Loop diuretics are known for their:", o:["Low efficacy","Moderate efficacy","High efficacy","Delayed onset"], a:2},
+{t:"The mechanism of action for Loop diuretics involves inhibiting the co-transport of Na+/K+/2Cl- in the:", o:["Proximal convoluted tubule","Thick ascending limb of Loop of Henle","Distal convoluted tubule","Collecting duct"], a:1},
+{t:"Which of the following is a therapeutic use for Loop diuretics?", o:["Mild hypertension","Diabetes insipidus","Refractory edema","Gout"], a:2},
+{t:"Potassium-sparing diuretics primarily act on the:", o:["Proximal convoluted tubule","Loop of Henle","Distal convoluted tubule","Collecting duct"], a:2},
+
+// Batch 1: Renal System & Diuretics - True/False Questions (Easy to Medium)
+
+{t:"Diuretics are drugs that decrease the volume of urine.", o:["True","False"], a:1},
+{t:"Aquaretic diuretics increase salt excretion more than water excretion.", o:["True","False"], a:1},
+{t:"Thiazide diuretics have a rapid onset of action.", o:["True","False"], a:1},
+{t:"Loop diuretics can cause hypocalcemia.", o:["True","False"], a:0},
+{t:"Spironolactone is an aldosterone antagonist.", o:["True","False"], a:0},
+
+// Batch 2: Diuretic Details - Multiple Choice Questions (Medium)
+
+{t:"Which of these is a common side effect of Loop diuretics?", o:["Hyperkalemia","Hypocalcemia","Hyperglycemia","Hyponatremia"], a:3},
+{t:"Which diuretic is known to increase calcium reabsorption, potentially leading to hypercalcemia?", o:["Furosemide","Spironolactone","Hydrochlorothiazide","Amiloride"], a:2},
+{t:"A patient with gout should avoid which type of diuretic due to hyperuricemia as a side effect?", o:["Loop diuretics","Thiazide diuretics","Potassium-sparing diuretics","Osmotic diuretics"], a:1},
+{t:"Which of the following is a contraindication for Thiazide diuretics?", o:["Hypertension","Edema","Liver disease","Renal stones"], a:2},
+{t:"Spironolactone\\'s mechanism of action involves competition with which hormone?", o:["ADH","Aldosterone","Renin","Angiotensin"], a:1},
+{t:"Gynecomastia in males is a known side effect of which diuretic?", o:["Furosemide","Hydrochlorothiazide","Spironolactone","Bumetanide"], a:2},
+{t:"Which diuretic is considered safe in renal failure due to its dependence on biliary excretion?", o:["Chlorothiazide","Indapamide","Metholazone","Chlorthalidone"], a:1},
+{t:"Ototoxicity is a significant side effect associated with which class of diuretics?", o:["Thiazide diuretics","Potassium-sparing diuretics","Loop diuretics","Osmotic diuretics"], a:2},
+{t:"Which of the following is an example of a non-aldosterone antagonist potassium-sparing diuretic?", o:["Spironolactone","Eplerenone","Triamterene","Canrenone"], a:2},
+{t:"The primary site of action for potassium-sparing diuretics is the:", o:["Proximal convoluted tubule","Loop of Henle","Late part of DCT","Collecting duct"], a:2},
+
+// Batch 2: Diuretic Details - True/False Questions (Medium)
+
+{t:"Thiazide diuretics are effective in treating severe hypertension.", o:["True","False"], a:1},
+{t:"Loop diuretics increase renal blood flow.", o:["True","False"], a:0},
+{t:"Amiloride is an aldosterone antagonist.", o:["True","False"], a:1},
+{t:"Hypomagnesemia is a common side effect of both Thiazide and Loop diuretics.", o:["True","False"], a:0},
+{t:"Ethacrynic acid is known for being the least allergic among Loop diuretics.", o:["True","False"], a:0},
+
+// Batch 3: Urinary Tract Infections & Nephrotoxic Drugs - Multiple Choice Questions (Medium to Hard)
+
+{t:"Which of the following antibiotic classes is commonly used for urinary tract infections?", o:["Macrolides","Tetracyclines","Quinolones","Glycopeptides"], a:2},
+{t:"Nitrofurantoin is primarily used for the treatment of:", o:["Upper UTI","Systemic infections","Lower UTI","Fungal infections"], a:2},
+{t:"A significant side effect of Nitrofurantoin, especially in patients with G6PD deficiency, is:", o:["Nephrotoxicity","Hepatotoxicity","Hemolytic anemia","Cardiotoxicity"], a:2},
+{t:"Methenamine releases formaldehyde, which acts as a bactericidal agent, under what condition?", o:["Alkaline pH","Acidic pH","Neutral pH","High temperature"], a:1},
+{t:"Which of the following is NOT considered a direct nephrotoxic agent?", o:["Aminoglycosides","NSAIDs","Heavy metals","ACE inhibitors"], a:3},
+{t:"The kidneys are particularly vulnerable to toxic injury due to their:", o:["Low blood flow","Small endothelial surface area","High metabolic activity","All of the above"], a:2},
+{t:"Which of these drugs can cause renal injury through an immune-reaction response?", o:["Phenytoin","Aminoglycosides","NSAIDs","Radiocontrast media"], a:0},
+{t:"Cytotoxic drugs can cause nephrotoxicity indirectly by forming:", o:["Crystals","Antibodies","Enzymes","Proteins"], a:0},
+{t:"Which of the following is an example of an indirect nephrotoxic agent that can cause hypercalcemia?", o:["Diuretics","Calciferol","Laxatives","ACE inhibitors"], a:1},
+{t:"Which class of antibiotics is mentioned as being used for UTIs and can be nephrotoxic in high doses?", o:["Penicillins","Cephalosporins","Aminoglycosides","Sulfonamides"], a:2},
+
+// Batch 3: Urinary Tract Infections & Nephrotoxic Drugs - True/False Questions (Medium to Hard)
+
+{t:"Sulphonamides are a class of antibiotics used for urinary tract infections.", o:["True","False"], a:0},
+{t:"Nitrofurantoin is effective against upper urinary tract infections.", o:["True","False"], a:1},
+{t:"Methenamine requires an alkaline urine pH to be effective.", o:["True","False"], a:1},
+{t:"NSAIDs are considered direct nephrotoxic agents.", o:["True","False"], a:0},
+{t:"ACE inhibitors can cause acute renal failure in patients with compromised renal blood flow.", o:["True","False"], a:0},
+
+// Batch 4: Diuretics and Interactions - Multiple Choice Questions (Medium to Hard)
+
+{t:"Which of the following drug interactions with thiazide and loop diuretics can lead to increased toxicity?", o:["Concomitant administration of non-steroidal anti-inflammatory drugs","Concomitant administration of beta-blockers","Concomitant administration of ACE inhibitors","Concomitant administration of calcium channel blockers"], a:0},
+{t:"Loop diuretics may displace oral anticoagulants from plasma protein binding sites, leading to:", o:["Decreased anticoagulant effect","Increased anticoagulant effect","No change in anticoagulant effect","Increased diuretic effect"], a:1},
+{t:"Which of the following is a side effect of Spironolactone that is related to its anti-androgenic effects?", o:["Hyperkalemia","Metabolic acidosis","Gynecomastia","Hyponatremia"], a:2},
+{t:"The use of potassium-sparing diuretics with ACE inhibitors can significantly increase the risk of:", o:["Hypokalemia","Hyperkalemia","Hyponatremia","Hypocalcemia"], a:1},
+{t:"Which diuretic is often used in combination with thiazide and loop diuretics to prevent potassium loss?", o:["Furosemide","Hydrochlorothiazide","Spironolactone","Mannitol"], a:2},
+{t:"Which of the following is a characteristic of osmotic diuretics like Mannitol?", o:["Increase Na excretion","Increase water excretion without significant Na excretion","Act on the distal convoluted tubule","Cause hypokalemia"], a:1},
+{t:"Which of the following is a therapeutic use of thiazide diuretics beyond hypertension and edema?", o:["Acute renal failure","Hyperkalemia","Renal stones due to idiopathic hypercalcuria","Refractory edema"], a:2},
+{t:"The antihypertensive action of thiazide diuretics is partly due to:", o:["Increased vascular smooth muscle sensitivity to vasopressors","Decreased synthesis of vasodilator prostaglandins","Increased synthesis of vasodilator prostaglandins","Increased sodium reabsorption"], a:2},
+{t:"Which of the following is a contraindication for loop diuretics, especially when given with other ototoxic drugs?", o:["Pregnancy","Gout","Use with aminoglycosides","Diabetes mellitus"], a:2},
+{t:"Which of the following is a common side effect of both thiazide and loop diuretics?", o:["Hyperkalemia","Hypomagnesemia","Hypercalcemia","Metabolic acidosis"], a:1},
+
+// Batch 4: Diuretics and Interactions - True/False Questions (Medium to Hard)
+
+{t:"Non-steroidal anti-inflammatory drugs (NSAIDs) can reduce the diuretic effect of loop diuretics.", o:["True","False"], a:0},
+{t:"Spironolactone can cause hyperkalemia.", o:["True","False"], a:0},
+{t:"Thiazide diuretics are contraindicated in patients with diabetes mellitus due to their hyperglycemic effect.", o:["True","False"], a:0},
+{t:"Loop diuretics are the drug of choice for treating mild hypertension.", o:["True","False"], a:1},
+{t:"Amiloride is a potassium-sparing diuretic that can be used to treat lithium toxicity.", o:["True","False"], a:0},
+
+// Batch 5: Specifics and Exceptions - Multiple Choice Questions (Hard)
+
+{t:"Which of the following diuretics is known to cause hypochloremic alkalosis as a side effect?", o:["Spironolactone","Mannitol","Furosemide","Amiloride"], a:2},
+{t:"The use of which diuretic can lead to an increase in serum uric acid, potentially exacerbating gout?", o:["Hydrochlorothiazide","Bumetanide","Triamterene","All of the above"], a:3},
+{t:"Which of the following is a potential adverse effect of Thiazide diuretics that can worsen diabetes mellitus?", o:["Hypoglycemia","Hyperglycemia","Hypokalemia","Hyponatremia"], a:1},
+{t:"Which of the following is a non-electrolyte osmotic diuretic?", o:["Mannitol","NH4Cl","Furosemide","Spironolactone"], a:0},
+{t:"Which diuretic is specifically mentioned for its use in treating lithium toxicity?", o:["Spironolactone","Amiloride","Hydrochlorothiazide","Ethacrynic acid"], a:1},
+{t:"Which of the following is a direct nephrotoxic agent that is an antimicrobial?", o:["Penicillin","Cephalosporin","Aminoglycoside","Sulfonamide"], a:2},
+{t:"The high blood flow to the kidneys makes them susceptible to toxic injury, accounting for what percentage of cardiac output?", o:["5-10%","10-15%","20-25%","30-35%"], a:2},
+{t:"Which of the following is an indirect nephrotoxic agent that can cause renal injury through immune-reaction?", o:["Phenytoin","NSAIDs","Heavy metals","Radiocontrast media"], a:0},
+{t:"Which diuretic can cause stone formation as a side effect?", o:["Spironolactone","Amiloride","Triamterene","Furosemide"], a:2},
+{t:"Which of the following is a characteristic of Aquaretic diuretics?", o:["Increase Na excretion","Increase water excretion without significant Na excretion","Act on the proximal convoluted tubule","Cause hyperkalemia"], a:1},
+
+// Batch 5: Specifics and Exceptions - True/False Questions (Hard)
+
+{t:"Thiazide diuretics can cause blood dyscrasias.", o:["True","False"], a:0},
+{t:"Loop diuretics are contraindicated in patients with pregnancy.", o:["True","False"], a:0},
+{t:"Nitrofurantoin is effective against both upper and lower urinary tract infections.", o:["True","False"], a:1},
+{t:"Methenamine is effective in alkaline urine.", o:["True","False"], a:1},
+{t:"Heavy metals are considered indirect nephrotoxic agents.", o:["True","False"], a:1},
+
+// Batch 6: Final Questions - Multiple Choice Questions (Medium to Hard)
+
+{t:"Which of the following is a preparation of long-acting thiazide diuretic?", o:["Chlorothiazide","Hydrochlorothiazide","Chlorthalidone","Indapamide"], a:2},
+{t:"Which of the following is a therapeutic use of loop diuretics for emergency situations?", o:["Mild edema","Chronic hypertension","Acute pulmonary edema","Renal stones"], a:2},
+{t:"Which of the following is a side effect of loop diuretics that can lead to deafness?", o:["Hypokalemia","Ototoxicity","Hyperuricemia","Hypomagnesemia"], a:1},
+{t:"Which of the following is a contraindication for potassium-sparing diuretics?", o:["Hypokalemia","Hyperkalemia","Hyponatremia","Hypocalcemia"], a:1},
+{t:"Which of the following is an example of an extrarenal diuretic that works in cases of hypoalbuminemia?", o:["Dobutamine","Methylxanthines","Albumin","Ethyl alcohol"], a:2},
+{t:"Which of the following is a side effect of thiazide diuretics that can lead to gout?", o:["Hypokalemia","Hyperuricemia","Hyperglycemia","Hyponatremia"], a:1},
+{t:"Which of the following is a mechanism of action for thiazide diuretics?", o:["Inhibit Na+/K+/2Cl- co-transport","Inhibit Na+/Cl- co-transport","Block aldosterone receptors","Inhibit carbonic anhydrase"], a:1},
+{t:"Which of the following is a side effect of spironolactone that affects females?", o:["Gynecomastia","Hirsutism","Menstrual irregularities","Both B and C"], a:2},
+{t:"Which of the following urinary antiseptics requires an acidic pH to be effective?", o:["Nitrofurantoin","Sulfonamides","Methenamine","Quinolones"], a:2},
+{t:"Which of the following is an indirect nephrotoxic agent that can cause renal injury in patients with compromised RBF?", o:["Aminoglycosides","NSAIDs","ACE inhibitors","Radiocontrast media"], a:2},
+
+// Batch 6: Final Questions - True/False Questions (Medium to Hard)
+
+{t:"Thiazide diuretics can cause blood dyscrasias.", o:["True","False"], a:0},
+{t:"Loop diuretics are contraindicated in patients with pregnancy.", o:["True","False"], a:0},
+{t:"Nitrofurantoin is effective against both upper and lower urinary tract infections.", o:["True","False"], a:1},
+{t:"Methenamine is effective in alkaline urine.", o:["True","False"], a:1},
+{t:"Heavy metals are considered indirect nephrotoxic agents.", o:["True","False"], a:1},
+
+// Batch 7: Final Questions - Multiple Choice Questions (Medium to Hard)
+
+{t:"Which of the following is a common side effect of Thiazide diuretics that can lead to blood dyscrasias?", o:["Hypokalemia","Hyponatremia","Blood Dyscrasia","Hyperuricemia"], a:2},
+{t:"Which of the following is a therapeutic use of Loop diuretics for acute poisoning?", o:["Mild edema","Chronic hypertension","Acute poisoning","Renal stones"], a:2},
+{t:"Which of the following is a side effect of Loop diuretics that can lead to dehydration?", o:["Hypokalemia","Ototoxicity","Dehydration","Hyperuricemia"], a:2},
+{t:"Which of the following is a contraindication for Thiazide diuretics due to their effect on blood sugar?", o:["Liver disease","Renal disease","Diabetes Mellitus","Gout"], a:2},
+{t:"Which of the following is an extrarenal diuretic that is used in cases of congestive heart failure (CHF)?", o:["H2O","Dobutamine","Digitals","Methylxanthines"], a:2},
+{t:"Which of the following is a side effect of Thiazide diuretics that can lead to hyperlipidemia?", o:["Hypokalemia","Hyperuricemia","Hyperlipidemia","Hyponatremia"], a:2},
+{t:"Which of the following is a mechanism of action for Potassium-sparing diuretics that are aldosterone antagonists?", o:["Inhibit Na+/K+/2Cl- co-transport","Inhibit Na+/Cl- co-transport","Block aldosterone receptors","Inhibit carbonic anhydrase"], a:2},
+{t:"Which of the following is a side effect of Spironolactone that can cause metabolic acidosis?", o:["Hyperkalemia","Metabolic acidosis","Gynecomastia","Hyponatremia"], a:1},
+{t:"Which of the following urinary antiseptics is bacteriostatic and bactericidal?", o:["Sulfonamides","Nitrofurantoin","Methenamine","Quinolones"], a:1},
+{t:"Which of the following is an indirect nephrotoxic agent that can cause renal injury through crystal formation?", o:["Phenytoin","Cytotoxic drugs","Heavy metals","Radiocontrast media"], a:1},
+
+// Batch 7: Final Questions - True/False Questions (Medium to Hard)
+
+{t:"Thiazide diuretics are contraindicated in patients with pregnancy.", o:["True","False"], a:0},
+{t:"Loop diuretics are the drug of choice for treating severe hypertension.", o:["True","False"], a:0},
+{t:"Nitrofurantoin is primarily used for lower urinary tract infections.", o:["True","False"], a:0},
+{t:"Methenamine releases formaldehyde in acidic urine.", o:["True","False"], a:0},
+{t:"ACE inhibitors can cause acute renal failure in patients with compromised renal blood flow.", o:["True","False"], a:0},
+];
+
+// ── State ──
+let current = 0;
+let answers = [];
+let answered = false;
+
+// ── Init ──
+document.getElementById('quizTitleDisplay').textContent = QUIZ_TITLE;
+document.getElementById('startDesc').textContent        = QUIZ_DESC;
+document.getElementById('totalQDisplay').textContent    = QUESTIONS.length;
+
+// ── Theme ──
+const themeBtn = document.getElementById('themeBtn');
+let theme = localStorage.getItem('theme') || 'light';
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', t);
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+
+// ── Screen switch ──
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  window.scrollTo(0,0);
+}
+
+// ── Start ──
+function startQuiz() {
+  current = 0;
+  answers = new Array(QUESTIONS.length).fill(null);
+  answered = false;
+  show('quizScreen');
+  renderQuestion();
+}
+
+// ── Render question ──
+function renderQuestion() {
+  answered = false;
+  const q   = QUESTIONS[current];
+  const tot = QUESTIONS.length;
+
+  document.getElementById('qNum').textContent  = `QUESTION ${current + 1}`;
+  document.getElementById('qText').textContent = q.t;
+  document.getElementById('progressLabel').textContent = `${current+1} / ${tot}`;
+  document.getElementById('progressFill').style.width  = `${((current+1)/tot)*100}%`;
+  document.getElementById('btnNext').disabled = true;
+
+  const fb = document.getElementById('feedbackBox');
+  fb.className = 'feedback-box';
+
+  const letters = ['A','B','C','D','E'];
+  const list = document.getElementById('optsList');
+  list.innerHTML = '';
+  q.o.forEach((opt, i) => {
+    const btn = document.createElement('button');
+    btn.className = 'opt-btn';
+    btn.innerHTML = `<span class="opt-letter">${letters[i]}</span>${opt}`;
+    btn.onclick = () => selectAnswer(i, btn);
+    list.appendChild(btn);
+  });
+
+  const card = document.getElementById('qCard');
+  card.style.animation = 'none';
+  card.offsetHeight;
+  card.style.animation = 'slideIn .35s ease';
+}
+
+// ── Select answer ──
+function selectAnswer(chosen, clickedBtn) {
+  if (answered) return;
+  answered = true;
+  answers[current] = chosen;
+
+  const q    = QUESTIONS[current];
+  const opts = document.querySelectorAll('.opt-btn');
+  const correct = q.a;
+
+  opts.forEach((btn, i) => {
+    btn.disabled = true;
+    if (i === correct)        btn.classList.add('correct');
+    if (i === chosen && chosen !== correct) btn.classList.add('wrong');
+  });
+
+  const fb = document.getElementById('feedbackBox');
+  if (chosen === correct) {
+    fb.className = 'feedback-box correct-fb show';
+    document.getElementById('feedbackIcon').textContent = '✅';
+    document.getElementById('feedbackText').textContent = 'Correct answer! 🎉';
+  } else {
+    fb.className = 'feedback-box wrong-fb show';
+    document.getElementById('feedbackIcon').textContent = '❌';
+    document.getElementById('feedbackText').textContent =
+      `Correct answer: ${q.o[correct]}`;
+  }
+
+  document.getElementById('btnNext').disabled = false;
+}
+
+// ── Skip ──
+function skipQuestion() {
+  if (answered) return;
+  answers[current] = null;
+  nextQuestion();
+}
+
+// ── Next ──
+function nextQuestion() {
+  current++;
+  if (current >= QUESTIONS.length) {
+    showResult();
+  } else {
+    answered = false;
+    renderQuestion();
+  }
+}
+
+// ── Result ──
+function showResult() {
+  let correct = 0, wrong = 0, skip = 0;
+  answers.forEach((a, i) => {
+    if (a === null)                skip++;
+    else if (a === QUESTIONS[i].a) correct++;
+    else                           wrong++;
+  });
+  const pct = Math.round((correct / QUESTIONS.length) * 100);
+  document.getElementById('rCorrect').textContent = correct;
+  document.getElementById('rWrong').textContent   = wrong;
+  document.getElementById('rSkip').textContent    = skip;
+  document.getElementById('pctNum').textContent   = pct;
+
+  let emoji, title, sub;
+  if      (pct >= 90) { emoji='🏆'; title='Excellent! Outstanding!';    sub='Amazing result — keep it up!'; }
+  else if (pct >= 75) { emoji='🎉'; title='Very Good!';                 sub='Strong performance, keep reviewing to reach the top!'; }
+  else if (pct >= 60) { emoji='💪'; title='Good, but room to improve!'; sub='Review your wrong answers and try again'; }
+  else if (pct >= 40) { emoji='📚'; title='Needs more revision';        sub='Go back to your notes and retake the quiz'; }
+  else                { emoji='😅'; title="Don't worry, keep studying!";sub='Revision is the key — try again!'; }
+
+  document.getElementById('resultEmoji').textContent = emoji;
+  document.getElementById('resultTitle').textContent = title;
+  document.getElementById('resultSub').textContent   = sub;
+
+  const circ  = 2 * Math.PI * 62;
+  const offset = circ - (pct / 100) * circ;
+  const arc = document.getElementById('circleArc');
+  arc.style.strokeDashoffset = '389.6';
+  arc.style.stroke = pct >= 60 ? 'var(--green)' : pct >= 40 ? 'var(--c)' : 'var(--red)';
+  setTimeout(() => { arc.style.strokeDashoffset = offset; }, 200);
+
+  show('resultScreen');
+}
+
+// ── Review ──
+function showReview() {
+  const list = document.getElementById('reviewList');
+  list.innerHTML = '';
+  const letters = ['A','B','C','D','E'];
+
+  QUESTIONS.forEach((q, qi) => {
+    const userAns = answers[qi];
+    let statusClass, statusText;
+    if      (userAns === null)       { statusClass='status-skip';    statusText='⏭ Skipped'; }
+    else if (userAns === q.a)        { statusClass='status-correct'; statusText='✅ Correct'; }
+    else                             { statusClass='status-wrong';   statusText='❌ Wrong'; }
+
+    const card = document.createElement('div');
+    card.className = 'review-card';
+    card.innerHTML = `
+      <div class="review-card-top">
+        <div class="review-q-label">QUESTION ${qi+1}</div>
+        <div class="review-q-text">${q.t}</div>
+        <div class="review-status ${statusClass}">${statusText}</div>
+      </div>
+      <div class="review-opts">
+        ${q.o.map((opt, oi) => {
+          let cls = 'review-opt';
+          if (oi === q.a)                        cls += ' is-correct';
+          if (oi === userAns && userAns !== q.a) cls += ' is-wrong';
+          return `<div class="${cls}"><div class="review-dot"></div>${letters[oi]}. ${opt}</div>`;
+        }).join('')}
+      </div>`;
+    list.appendChild(card);
+  });
+
+  show('reviewScreen');
+}
+
+function retryQuiz() {
+  current = 0;
+  answers = new Array(QUESTIONS.length).fill(null);
+  answered = false;
+  show('quizScreen');
+  renderQuestion();
+}
+</script>
+</body>
+</html>
