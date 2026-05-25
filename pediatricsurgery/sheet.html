@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM - Pediatric Surgery</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --accent: #0d9488; --accent-light: #14b8a6; --accent-dark: #0f766e;
+  --accent-glow: rgba(13,148,136,0.2);
+  --bg: #f8fafc; --bg2: #eef2f7; --card: #ffffff;
+  --text: #1a2332; --text2: #4a5568; --text3: #718096;
+  --bc: rgba(0,0,0,0.07);
+  --success: #16a34a; --danger: #dc2626; --warn: #0f766e;
+  --r: 16px; --tr: all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="dark"] {
+  --bg: #0d1117; --bg2: #161b22; --card: #1c2333;
+  --text: #e6edf3; --text2: #b1bac4; --text3: #7d8590;
+  --bc: rgba(255,255,255,0.08);
+}
+body { font-family:'Outfit',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; overflow-x:hidden; transition:background .4s,color .4s; }
+
+/* PROGRESS TOP */
+#prog-bar { position:fixed; top:0; left:0; height:3px; z-index:999; background:linear-gradient(90deg,var(--accent),var(--accent-light)); transition:width .2s; }
+
+/* NAV */
+nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:0 28px; height:64px; background:rgba(248,250,252,.93); backdrop-filter:blur(16px); border-bottom:1px solid var(--bc); transition:var(--tr); }
+[data-theme="dark"] nav { background:rgba(13,17,23,.95); }
+.nav-back { display:flex; align-items:center; gap:7px; color:var(--text2); text-decoration:none; font-size:13px; font-weight:700; padding:7px 13px; border-radius:8px; border:1px solid var(--bc); background:var(--card); transition:var(--tr); cursor:pointer; }
+.nav-back:hover { color:var(--accent); border-color:var(--accent-glow); }
+.nav-brand { display:flex; align-items:center; gap:9px; font-size:15px; font-weight:900; color:var(--text); }
+.nav-logo-icon { width:34px; height:34px; border-radius:8px; background:linear-gradient(135deg,var(--accent),var(--accent-light)); display:flex; align-items:center; justify-content:center; color:#fff; font-size:12px; font-weight:900; }
+.nav-right { display:flex; align-items:center; gap:8px; }
+.theme-btn { width:38px; height:38px; border-radius:50%; border:1px solid var(--bc); background:var(--card); cursor:pointer; font-size:15px; display:flex; align-items:center; justify-content:center; transition:var(--tr); }
+.theme-btn:hover { border-color:var(--accent); transform:rotate(20deg); }
+
+/* HERO */
+.hero-band { margin-top:64px; background:linear-gradient(135deg,var(--accent-dark),var(--accent),var(--accent-light)); padding:36px 24px 32px; text-align:center; position:relative; overflow:hidden; }
+.hero-band::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 600px 200px at 50% 100%,rgba(255,255,255,.12) 0%,transparent 70%); }
+.hero-band-icon { width:64px; height:64px; border-radius:18px; background:rgba(255,255,255,.2); backdrop-filter:blur(8px); display:flex; align-items:center; justify-content:center; font-size:28px; margin:0 auto 12px; border:1.5px solid rgba(255,255,255,.35); }
+.hero-band h1 { font-size:clamp(18px,4vw,28px); font-weight:900; color:#fff; margin-bottom:4px; }
+.hero-band p { font-size:13px; color:rgba(255,255,255,.8); }
+.hero-band-meta { display:flex; justify-content:center; gap:16px; margin-top:16px; flex-wrap:wrap; }
+.meta-pill { background:rgba(255,255,255,.18); backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,.3); border-radius:50px; padding:5px 14px; font-size:12px; font-weight:700; color:#fff; display:flex; align-items:center; gap:5px; }
+
+/* SHELL */
+.shell { max-width:560px; margin:0 auto; padding:24px 20px 80px; }
+
+/* LANDING */
+.sheets-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:10px; margin-bottom:20px; }
+.sheet-card { background:var(--card); border:2px solid var(--bc); border-radius:var(--r); padding:14px 8px; text-align:center; cursor:pointer; transition:var(--tr); }
+.sheet-card:hover { border-color:var(--accent-light); transform:translateY(-2px); }
+.sheet-card.active { border-color:var(--accent); background:var(--accent-glow); box-shadow:0 0 0 3px rgba(13,148,136,.12); }
+.sc-icon { font-size:26px; display:block; margin-bottom:6px; }
+.sc-name { font-size:12px; font-weight:900; color:var(--text); }
+.sc-full { font-size:9px; color:var(--text3); margin-top:2px; line-height:1.3; }
+.sc-count { font-size:11px; color:var(--accent); margin-top:6px; font-weight:700; }
+
+.section-title { font-size:11px; font-weight:700; color:var(--text3); letter-spacing:.08em; text-transform:uppercase; margin-bottom:10px; }
+.topic-pills { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:16px; }
+.topic-pill { padding:7px 14px; border-radius:50px; border:1.5px solid var(--bc); background:var(--card); font-size:12px; font-weight:700; color:var(--text2); cursor:pointer; transition:var(--tr); white-space:nowrap; }
+.topic-pill:hover { border-color:var(--accent); color:var(--accent); }
+.topic-pill.active { background:var(--accent); color:#fff; border-color:var(--accent); box-shadow:0 2px 8px var(--accent-glow); }
+
+.start-bar { background:var(--card); border:1px solid var(--bc); border-radius:var(--r); padding:16px 18px; display:flex; align-items:center; justify-content:space-between; gap:16px; box-shadow:0 2px 12px rgba(0,0,0,.05); }
+.start-info { font-size:13px; color:var(--text2); line-height:1.6; }
+.start-info strong { color:var(--text); font-weight:900; }
+.btn-start { background:linear-gradient(135deg,var(--accent-dark),var(--accent)); color:#fff; border:none; border-radius:12px; flex-shrink:0; padding:13px 20px; font-size:14px; font-weight:900; cursor:pointer; font-family:'Outfit',sans-serif; display:flex; align-items:center; gap:7px; transition:var(--tr); box-shadow:0 4px 14px var(--accent-glow); }
+.btn-start:hover { transform:translateY(-2px); box-shadow:0 6px 20px var(--accent-glow); }
+
+/* STATS */
+.stats-row { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:16px; }
+.stat-box { background:var(--card); border:1px solid var(--bc); border-radius:var(--r); padding:12px 10px; text-align:center; }
+.stat-box .val { font-size:20px; font-weight:900; }
+.stat-box .lbl { font-size:11px; color:var(--text3); margin-top:2px; }
+.stat-correct { color:var(--success); } .stat-wrong { color:var(--danger); } .stat-remain { color:var(--accent); }
+
+/* PROGRESS */
+.prog-strip { background:var(--card); border:1px solid var(--bc); border-radius:var(--r); padding:14px 16px; margin-bottom:16px; display:flex; align-items:center; gap:14px; }
+.prog-label { font-size:13px; font-weight:700; color:var(--text2); white-space:nowrap; }
+.prog-track { flex:1; height:8px; background:var(--bg2); border-radius:8px; overflow:hidden; }
+.prog-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--accent),var(--accent-light)); border-radius:8px; transition:width .4s; }
+.timer-badge { min-width:64px; height:36px; border-radius:18px; background:var(--bg2); border:1px solid var(--bc); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:900; color:var(--text); gap:5px; padding:0 12px; flex-shrink:0; }
+.timer-badge.warn { color:var(--warn); border-color:rgba(217,119,6,.3); background:rgba(217,119,6,.08); }
+.timer-badge.danger { color:var(--danger); border-color:rgba(220,38,38,.3); background:rgba(220,38,38,.08); animation:pulse .8s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.6} }
+
+/* QUESTION CARD */
+.q-card { background:var(--card); border:1px solid var(--bc); border-radius:20px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,.06); }
+.q-header { background:linear-gradient(135deg,var(--accent-dark),var(--accent)); padding:10px 18px; display:flex; align-items:center; gap:8px; }
+.q-num { background:rgba(255,255,255,.2); border-radius:8px; padding:3px 10px; font-size:11px; font-weight:700; color:#fff; }
+.q-text { padding:20px 18px 14px; font-size:15px; font-weight:700; color:var(--text); line-height:1.65; border-bottom:1px solid var(--bc); text-align:left; direction:ltr; }
+.options { padding:14px 18px 18px; display:flex; flex-direction:column; gap:10px; }
+.opt { display:flex; align-items:center; gap:12px; padding:14px 16px; border-radius:12px; border:1.5px solid var(--bc); background:var(--bg); cursor:pointer; font-size:14px; font-weight:600; color:var(--text); transition:var(--tr); user-select:none; direction:ltr; text-align:left; }
+.opt:hover:not(.disabled) { border-color:var(--accent); background:var(--accent-glow); transform:translateX(3px); }
+.opt-letter { width:28px; height:28px; border-radius:8px; flex-shrink:0; background:var(--bg2); border:1px solid var(--bc); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:900; color:var(--text3); transition:var(--tr); }
+.opt.correct { border-color:var(--success); background:rgba(22,163,74,.08); }
+.opt.correct .opt-letter { background:var(--success); color:#fff; border-color:var(--success); }
+.opt.wrong { border-color:var(--danger); background:rgba(220,38,38,.07); }
+.opt.wrong .opt-letter { background:var(--danger); color:#fff; border-color:var(--danger); }
+.opt.disabled { pointer-events:none; }
+
+.feedback-bar { margin:14px 18px; padding:12px 16px; border-radius:12px; display:flex; align-items:center; gap:10px; font-size:14px; font-weight:700; animation:popIn .4s cubic-bezier(.34,1.56,.64,1); }
+@keyframes popIn { from{transform:scale(.8);opacity:0} to{transform:scale(1);opacity:1} }
+.feedback-bar.ok { background:rgba(22,163,74,.1); color:var(--success); border:1px solid rgba(22,163,74,.25); }
+.feedback-bar.no { background:rgba(220,38,38,.08); color:var(--danger); border:1px solid rgba(220,38,38,.2); }
+.feedback-icon { font-size:20px; }
+.explanation { margin:0 18px 14px; padding:12px 14px; background:rgba(13,148,136,.06); border-radius:10px; border-right:3px solid var(--accent); font-size:13px; color:var(--text2); line-height:1.6; display:none; }
+.nav-btns { padding:4px 18px 18px; display:flex; gap:10px; }
+.btn { flex:1; padding:13px; border:none; border-radius:12px; font-size:14px; font-weight:900; cursor:pointer; font-family:'Outfit',sans-serif; transition:var(--tr); display:flex; align-items:center; justify-content:center; gap:7px; }
+.btn-next { background:linear-gradient(135deg,var(--accent-dark),var(--accent)); color:#fff; box-shadow:0 4px 14px var(--accent-glow); }
+.btn-next:hover { transform:translateY(-2px); }
+.btn-skip { background:var(--bg2); color:var(--text2); border:1px solid var(--bc); flex:0 0 auto; padding:13px 18px; }
+.btn-skip:hover { border-color:var(--warn); color:var(--warn); }
+
+/* RESULTS */
+.result-hero { text-align:center; padding:36px 20px 28px; background:var(--card); border-radius:20px; border:1px solid var(--bc); margin-bottom:20px; box-shadow:0 4px 20px rgba(0,0,0,.06); }
+.score-ring { width:110px; height:110px; border-radius:50%; margin:0 auto 18px; display:flex; align-items:center; justify-content:center; flex-direction:column; border:5px solid var(--bg2); position:relative; }
+.score-ring svg { position:absolute; inset:-5px; width:calc(100% + 10px); height:calc(100% + 10px); transform:rotate(-90deg); }
+.score-ring circle { fill:none; stroke-width:5; stroke-linecap:round; }
+.ring-bg { stroke:var(--bg2); } .ring-fill { stroke:var(--accent); transition:stroke-dashoffset 1s ease; }
+.score-num { font-size:28px; font-weight:900; color:var(--text); } .score-pct { font-size:12px; color:var(--text3); }
+.result-grade { font-size:22px; font-weight:900; margin-bottom:6px; } .result-sub { font-size:14px; color:var(--text2); }
+.result-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:20px; }
+.rs { background:var(--bg2); border-radius:10px; padding:12px 8px; text-align:center; }
+.rs .n { font-size:20px; font-weight:900; } .rs .l { font-size:11px; color:var(--text3); }
+.report-item { background:var(--card); border:1px solid var(--bc); border-radius:14px; padding:16px; margin-bottom:10px; border-right:4px solid var(--bc); }
+.report-item.ok { border-right-color:var(--success); } .report-item.no { border-right-color:var(--danger); }
+.report-item .ri-q { font-size:13px; font-weight:700; margin-bottom:8px; }
+.report-item .ri-row { display:flex; align-items:center; gap:8px; font-size:12px; margin-top:5px; color:var(--text2); }
+.ri-badge { padding:2px 8px; border-radius:6px; font-weight:700; font-size:11px; flex-shrink:0; }
+.ri-yours { background:rgba(220,38,38,.1); color:var(--danger); } .ri-right { background:rgba(22,163,74,.1); color:var(--success); }
+.result-actions { display:flex; flex-direction:column; gap:10px; margin-top:20px; }
+.btn-retry { background:linear-gradient(135deg,var(--accent-dark),var(--accent)); color:#fff; }
+.btn-retry:hover { transform:translateY(-2px); box-shadow:0 6px 20px var(--accent-glow); }
+.btn-home { background:var(--bg2); color:var(--text); border:1px solid var(--bc); }
+.btn-home:hover { border-color:var(--accent); color:var(--accent); }
+
+footer { background:var(--bg2); border-top:1px solid var(--bc); padding:22px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+.footer-brand { font-size:14px; font-weight:700; } .footer-brand span { color:var(--accent); }
+.footer-tg { display:flex; align-items:center; gap:5px; text-decoration:none; color:#229ED9; font-size:12px; font-weight:600; }
+
+@media (max-width:480px) {
+  nav { padding:0 14px; }
+  .shell { padding:16px 14px 60px; }
+  .nav-brand span { display:none; }
+  .hero-band { padding:28px 16px 24px; }
+  .sheets-grid { grid-template-columns:repeat(2,1fr); }
+}
+</style>
+</head>
+<body>
+
+<div id="prog-bar" style="width:0%"></div>
+
+<nav>
+  <div style="display:flex;align-items:center;gap:8px">
+    <a href="https://gaith-team.github.io/exam/pediatric/index.html" class="nav-back" id="navHome"><i class="fa-solid fa-arrow-right"></i> رجوع</a>
+    <button class="nav-back" id="navQuizBack" style="display:none" onclick="backToLanding()"><i class="fa-solid fa-list"></i> القائمة</button>
+  </div>
+  <div class="nav-brand">
+    <div class="nav-logo-icon">GT</div>
+    <span>GHAITH TEAM</span>
+  </div>
+  <div class="nav-right">
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<div class="hero-band">
+  <div class="hero-band-icon">🍼</div>
+  <h1>جراحة الأطفال</h1>
+  <p>Pediatric Surgery Quiz Bank</p>
+  <div class="hero-band-meta">
+    <div class="meta-pill"><i class="fa-solid fa-layer-group"></i> 4 Sheets</div>
+    <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> 335 سؤال</div>
+    <div class="meta-pill"><i class="fa-solid fa-shuffle"></i> Shuffled</div>
+  </div>
+</div>
+
+<!-- LANDING SCREEN -->
+<div class="shell" id="landingShell">
+  <div class="sheets-grid" id="sheetsGrid"></div>
+  <div class="section-title">FILTER BY TOPIC</div>
+  <div class="topic-pills" id="topicPills"></div>
+  <div class="start-bar">
+    <div class="start-info" id="startInfo"></div>
+    <button class="btn-start" onclick="startQuiz()">
+      Start Quiz <i class="fa-solid fa-arrow-right"></i>
+    </button>
+  </div>
+</div>
+
+<!-- QUIZ SCREEN -->
+<div id="quizShell" style="display:none">
+  <div class="shell">
+    <div class="stats-row">
+      <div class="stat-box"><div class="val stat-correct" id="sCorrect">0</div><div class="lbl">✔ صحيح</div></div>
+      <div class="stat-box"><div class="val stat-wrong" id="sWrong">0</div><div class="lbl">✖ خطأ</div></div>
+      <div class="stat-box"><div class="val stat-remain" id="sRemain">--%</div><div class="lbl">⏳ متبقي</div></div>
+    </div>
+    <div class="prog-strip">
+      <div class="prog-label" id="progLabel">سؤال ١</div>
+      <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+      <div class="timer-badge" id="timerBadge"><i class="fa-regular fa-clock"></i> <span id="timerTxt">50:00</span></div>
+    </div>
+    <div id="app"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">GHAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg">
+    <i class="fa-brands fa-telegram"></i> @nursing2bu
+  </a>
+</footer>
+
+<script>
+/* ===== ALL DATA ===== */
+const SHEETS = [
+{
+  id:'s1', name:'Sheet 1', fullName:'Acute Abdomen & Intestinal Conditions', icon:'🫁',
+  questions:[
+    {t:"Acute Abdomen is a condition caused by both medical & surgical causes.",o:["True","False"],a:0,topic:"Acute Abdomen & Appendicitis"},
+    {t:"Surgical acute abdomen means the condition requires surgical intervention.",o:["True","False"],a:0,topic:"Acute Abdomen & Appendicitis"},
+    {t:"Children with appendicitis usually present with vague periumbilical pain.",o:["True","False"],a:0,topic:"Acute Abdomen & Appendicitis"},
+    {t:"All cases of appendicitis in children present with Right iliac fossa pain.",o:["True","False"],a:1,topic:"Acute Abdomen & Appendicitis"},
+    {t:"Treatment of acute appendicitis is by appendectomy either open or laparoscopic.",o:["True","False"],a:0,topic:"Acute Abdomen & Appendicitis"},
+    {t:"Pain in acute appendicitis usually starts as suprapubic pain.",o:["True","False"],a:1,topic:"Acute Abdomen & Appendicitis"},
+    {t:"The most common site of appendix is retrocaecal.",o:["True","False"],a:0,topic:"Acute Abdomen & Appendicitis"},
+    {t:"Intestinal obstruction is a medical emergency.",o:["True","False"],a:0,topic:"Intestinal Obstruction"},
+    {t:"Intestinal obstruction (I.O) can occur at any site of the intestine distal to caecum.",o:["True","False"],a:1,topic:"Intestinal Obstruction"},
+    {t:"Reducible inguinal hernia is a cause of I.O.",o:["True","False"],a:1,topic:"Intestinal Obstruction"},
+    {t:"C.H.P.S (Congenital Hypertrophic Pyloric Stenosis) is a cause of GIT obstruction in children.",o:["True","False"],a:0,topic:"Intestinal Obstruction"},
+    {t:"I.O could be mechanical or functional.",o:["True","False"],a:0,topic:"Intestinal Obstruction"},
+    {t:"Outlet obstruction is a subtype of bowel obstruction affecting the duodeno-jejunal flexure.",o:["True","False"],a:1,topic:"Intestinal Obstruction"},
+    {t:"Post-operative adhesions is a common cause of functional I.O.",o:["True","False"],a:1,topic:"Intestinal Obstruction"},
+    {t:"Post-operative adhesions is a common cause of mechanical I.O.",o:["True","False"],a:0,topic:"Intestinal Obstruction"},
+    {t:"Post-operative ileus is a common cause of mechanical I.O.",o:["True","False"],a:1,topic:"Intestinal Obstruction"},
+    {t:"Post-operative ileus is a common cause of functional I.O.",o:["True","False"],a:0,topic:"Intestinal Obstruction"},
+    {t:"Absolute constipation is a sign of intestinal obstruction.",o:["True","False"],a:0,topic:"Intestinal Obstruction"},
+    {t:"Dysentery is a sign of I.O.",o:["True","False"],a:1,topic:"Intestinal Obstruction"},
+    {t:"GIT decompression is important in management of I.O.",o:["True","False"],a:0,topic:"Intestinal Obstruction"},
+    {t:"Urine output monitoring is important in management of a case of I.O.",o:["True","False"],a:0,topic:"Intestinal Obstruction"},
+    {t:"Intussusception is entrance of one intestinal loop into another loop causing I.O.",o:["True","False"],a:0,topic:"Intussusception"},
+    {t:"Most cases of intussusception are idiopathic.",o:["True","False"],a:0,topic:"Intussusception"},
+    {t:"Peak incidence of intussusception is between 6 & 9 months.",o:["True","False"],a:0,topic:"Intussusception"},
+    {t:"Passage of red current jelly stool is a sign of intussusception.",o:["True","False"],a:0,topic:"Intussusception"},
+    {t:"The outer loop in intussusception is called intussusceptum.",o:["True","False"],a:1,topic:"Intussusception"},
+    {t:"Treatment of intussusception is always surgical.",o:["True","False"],a:1,topic:"Intussusception"},
+    {t:"Meconium ileus is usually associated with hepatic disorders.",o:["True","False"],a:1,topic:"NEC & Meconium Ileus"},
+    {t:"Most common site of Necrotizing Enterocolitis (N.E.C) is terminal ileum.",o:["True","False"],a:0,topic:"NEC & Meconium Ileus"},
+    {t:"Rectal prolapse could be partial or complete.",o:["True","False"],a:0,topic:"Rectal Prolapse"},
+    {t:"Decreased tone of anal canal can cause rectal prolapse.",o:["True","False"],a:0,topic:"Rectal Prolapse"},
+    {t:"Complete rectal prolapse is less common than partial prolapse.",o:["True","False"],a:0,topic:"Rectal Prolapse"},
+    {t:"Complete rectal prolapse is more common in males.",o:["True","False"],a:1,topic:"Rectal Prolapse"},
+    {t:"Complete rectal prolapse requires surgical repair.",o:["True","False"],a:0,topic:"Rectal Prolapse"},
+    {t:"The descent of complete rectal prolapse is always more than 4 cm and includes the mucosal layer only.",o:["True","False"],a:1,topic:"Rectal Prolapse"}
+  ]
+},
+{
+  id:'s2', name:'Sheet 2', fullName:'Pediatric Surgery Basics', icon:'👶',
+  questions:[
+    {t:"Pediatric surgery is a subspecialty concerned with surgery of:",o:["Adults only","Elderly patients only","Fetuses, infants, children, and adolescents","Pregnant women only"],a:2,topic:"Overview & Basics"},
+    {t:"Pediatric nursing mainly deals with care of:",o:["Adults only","Neonates and children up to adolescence","Geriatric patients","Pregnant females only"],a:1,topic:"Overview & Basics"},
+    {t:"Which of the following is a subspecialty of pediatric surgery?",o:["Pediatric neurosurgery","Dermatology","Ophthalmology","Psychiatry"],a:0,topic:"Overview & Basics"},
+    {t:"Children are different from adults in:",o:["Anatomical aspects only","Physiological aspects only","Psychological aspects only","Anatomical, physiological, and psychological aspects"],a:3,topic:"Overview & Basics"},
+    {t:"In pediatric surgery, the surgeon deals with:",o:["One patient only","Sick child and anxious parents","Nurses only","Hospital staff only"],a:1,topic:"Overview & Basics"},
+    {t:"History taking in children is usually:",o:["Easy","Impossible","More difficult","Unimportant"],a:2,topic:"Overview & Basics"},
+    {t:"Complete physical examination in children requires:",o:["Consent of parents or guardians","Police approval","Court order","No consent"],a:0,topic:"Overview & Basics"},
+    {t:"The newborn head is:",o:["Smaller than body size","Equal to body size","Greater in size compared to body","Very light"],a:2,topic:"Head & Anatomy"},
+    {t:"Large head size in newborn predisposes to:",o:["Heat and fluid loss","Hypertension","Blindness","Deafness"],a:0,topic:"Head & Anatomy"},
+    {t:"Skull sutures in newborns are:",o:["Completely fused","Not united","Calcified","Absent"],a:1,topic:"Head & Anatomy"},
+    {t:"Fontanels in newborns are:",o:["Closed at birth","Not closed","Calcified","Infected normally"],a:1,topic:"Head & Anatomy"},
+    {t:"Tears are absent in early infancy because of:",o:["Eye infection","Poor lacrimal gland development","Blindness","Trauma"],a:1,topic:"Head & Anatomy"},
+    {t:"Normal respiratory rate in infants is:",o:["5-10/min","10-20/min","30-60/min","70-90/min"],a:2,topic:"Respiratory System"},
+    {t:"Airway passages in infants are:",o:["Wide","Relatively small","Absent","Calcified"],a:1,topic:"Respiratory System"},
+    {t:"Infants are nose breathers until:",o:["1 month","3 months","6 months","2 years"],a:2,topic:"Respiratory System"},
+    {t:"The Eustachian tube in children is:",o:["Long and curved","Short and straight","Blocked normally","Very narrow only"],a:1,topic:"Respiratory System"},
+    {t:"Sore throat in children may extend to:",o:["Otitis media","Appendicitis","Hepatitis","Arthritis"],a:0,topic:"Respiratory System"},
+    {t:"Trachea in children under 5 years is:",o:["Long and wide","Short and narrow","Calcified","Absent"],a:1,topic:"Respiratory System"},
+    {t:"A short narrow trachea predisposes to:",o:["Foreign body aspiration","Diabetes","Hypertension","Renal failure"],a:0,topic:"Respiratory System"},
+    {t:"Children are more prone to airway obstruction because air passages are:",o:["Large","Narrow","Calcified","Dry"],a:1,topic:"Respiratory System"},
+    {t:"The tongue in children is:",o:["Small","Large","Absent","Weak"],a:1,topic:"GI System"},
+    {t:"Teeth in children are:",o:["Permanent","Artificial","Temporary","Metallic"],a:2,topic:"GI System"},
+    {t:"Vomiting is frequent in children because:",o:["Pylorus is tight","Cardiac sphincter is relaxed","Liver is enlarged","Colon is short"],a:1,topic:"GI System"},
+    {t:"Proper positioning during feeding is important to prevent:",o:["Hypertension","Vomiting","Fever","Seizures"],a:1,topic:"GI System"},
+    {t:"Gastric emptying time in children is:",o:["Long","Short","Absent","Delayed only at night"],a:1,topic:"GI System"},
+    {t:"Immature hepatic function may lead to:",o:["Physiological jaundice","Hypertension","Asthma","Blindness"],a:0,topic:"GI System"},
+    {t:"Newborn liver produces less:",o:["Albumin","Insulin","Calcium","Glucose"],a:0,topic:"GI System"},
+    {t:"Stool in children is watery because:",o:["Water absorption is poor","Colon is absent","Excess bile secretion","Increased fat absorption"],a:0,topic:"GI System"},
+    {t:"Heart rate in children is usually:",o:["40-60/min","60-80/min","100-160/min","180-220/min"],a:2,topic:"Cardiovascular"},
+    {t:"Blood volume in term neonates is approximately:",o:["20 ml/kg","40 ml/kg","85 ml/kg","150 ml/kg"],a:2,topic:"Cardiovascular"},
+    {t:"Allowable blood loss in children should not exceed:",o:["5%","10%","15%","50%"],a:2,topic:"Cardiovascular"},
+    {t:"Blood replacement is needed when blood loss exceeds:",o:["2%","5%","10%","25%"],a:2,topic:"Cardiovascular"},
+    {t:"Iron reserve in children is:",o:["High","Normal","Low","Excessive"],a:2,topic:"Cardiovascular"},
+    {t:"Skin in children is:",o:["Thick","Thin","Calcified","Dry only"],a:1,topic:"Skin & Metabolism"},
+    {t:"Thin skin in children increases risk of:",o:["Increased absorption through skin","Bone fracture","Hypertension","Deafness"],a:0,topic:"Skin & Metabolism"},
+    {t:"Basal metabolic rate in newborns is:",o:["Low","High","Absent","Equal to adults"],a:1,topic:"Skin & Metabolism"},
+    {t:"Oxygen consumption in neonates is approximately:",o:["1-2 ml/kg/min","2-4 ml/kg/min","6-8 ml/kg/min","10-12 ml/kg/min"],a:2,topic:"Skin & Metabolism"},
+    {t:"Poor temperature regulation in newborns is due to immaturity of:",o:["Kidney","Liver","Hypothalamus","Pancreas"],a:2,topic:"Skin & Metabolism"},
+    {t:"Shivering mechanism in newborns is:",o:["Excessive","Normal","Absent","Painful"],a:2,topic:"Skin & Metabolism"},
+    {t:"Inadequate treatment of dehydration may lead to circulatory failure within:",o:["1 hour","6 hours","24 hours","7 days"],a:2,topic:"Fluids & Dehydration"},
+    {t:"Children have increased insensible fluid loss because of:",o:["Small surface area","Greater surface area","Low metabolism","Kidney failure"],a:1,topic:"Fluids & Dehydration"},
+    {t:"Fluid requirement for first 10 kg body weight is:",o:["20 ml/kg/day","50 ml/kg/day","100 ml/kg/day","200 ml/kg/day"],a:2,topic:"Fluids & Dehydration"},
+    {t:"The margin between dehydration and fluid overload in children is:",o:["Very wide","Small","Absent","Unimportant"],a:1,topic:"Fluids & Dehydration"},
+    {t:"Hypovolemic infants are best treated initially with:",o:["Oral juice","Bolus therapy","Antibiotics only","Exercise"],a:1,topic:"Fluids & Dehydration"},
+    {t:"Separation anxiety is common during:",o:["Old age","Infancy","Adulthood","Pregnancy"],a:1,topic:"Psychological Development"},
+    {t:"Toddlers commonly show:",o:["Cooperative behavior","Negativistic behavior","Depression only","Paralysis"],a:1,topic:"Psychological Development"},
+    {t:"Preschool children usually have:",o:["Long attention span","Short attention span","No emotions","Memory loss"],a:1,topic:"Psychological Development"},
+    {t:"Which congenital anomaly affects the lip and palate?",o:["Hirschsprung disease","Cleft lip and palate","Hydrocele","Torsion testis"],a:1,topic:"Congenital Anomalies"},
+    {t:"Esophageal atresia affects the:",o:["Colon","Esophagus","Liver","Kidney"],a:1,topic:"Congenital Anomalies"},
+    {t:"Congenital diaphragmatic hernia involves defect in the:",o:["Heart","Diaphragm","Kidney","Bladder"],a:1,topic:"Congenital Anomalies"},
+    {t:"Hypertrophic pyloric stenosis affects the:",o:["Pylorus","Colon","Appendix","Rectum"],a:0,topic:"Congenital Anomalies"},
+    {t:"Hirschsprung disease mainly affects the:",o:["Brain","Intestine","Heart","Lung"],a:1,topic:"Congenital Anomalies"},
+    {t:"Undescended testis is related to:",o:["Female genitalia","Male reproductive system","Respiratory system","CNS"],a:1,topic:"Congenital Anomalies"},
+    {t:"Hypospadias is a congenital anomaly of the:",o:["Ear","Nose","Urethra","Eye"],a:2,topic:"Congenital Anomalies"},
+    {t:"Phimosis affects the:",o:["Tongue","Penis","Eye","Ear"],a:1,topic:"Congenital Anomalies"},
+    {t:"Congenital inguinal hernia occurs in:",o:["Groin region","Skull","Neck","Chest"],a:0,topic:"Congenital Anomalies"},
+    {t:"Hydrocele is a swelling related to:",o:["Brain","Testis","Liver","Thyroid"],a:1,topic:"Congenital Anomalies"},
+    {t:"Torsion testis is associated with:",o:["Scrotal pain","Headache","Jaundice","Hematuria"],a:0,topic:"Congenital Anomalies"},
+    {t:"Acute appendicitis is considered:",o:["Pediatric emergency","Skin disease","Eye disease","Psychiatric disorder"],a:0,topic:"Congenital Anomalies"},
+    {t:"Intussusception causes:",o:["Intestinal obstruction","Renal failure","Asthma","Fracture"],a:0,topic:"Congenital Anomalies"},
+    {t:"Necrotizing enterocolitis affects the:",o:["Bone","Intestine","Brain","Eye"],a:1,topic:"Congenital Anomalies"},
+    {t:"Thyroglossal cyst commonly occurs in the:",o:["Neck","Groin","Leg","Chest"],a:0,topic:"Congenital Anomalies"},
+    {t:"Branchial cyst is a:",o:["Neck swelling","Brain tumor","Lung disease","Kidney stone"],a:0,topic:"Congenital Anomalies"},
+    {t:"Ranula occurs in the:",o:["Mouth floor","Abdomen","Chest","Skull"],a:0,topic:"Congenital Anomalies"},
+    {t:"Infantile hemangioma is a:",o:["Vascular anomaly","Bone disease","Muscle disease","Nerve disorder"],a:0,topic:"Congenital Anomalies"},
+    {t:"Venous malformation belongs to:",o:["Respiratory diseases","Vascular anomalies","Liver diseases","Bone tumors"],a:1,topic:"Congenital Anomalies"},
+    {t:"Arteriovenous fistula involves:",o:["Artery and vein connection","Bone fracture","Kidney infection","Liver enlargement"],a:0,topic:"Congenital Anomalies"},
+    {t:"Preoperative preparation is important before:",o:["Surgery","Sleeping","Feeding","Bathing only"],a:0,topic:"Congenital Anomalies"},
+    {t:"Vascular access is needed for:",o:["Fluid and medication administration","Eye examination","Hearing test","Speech therapy"],a:0,topic:"Congenital Anomalies"},
+    {t:"Circumcision is an operative procedure involving:",o:["Eye","Ear","Penis","Nose"],a:2,topic:"Congenital Anomalies"},
+    {t:"Pediatric surgery includes surgery of infants and children.",o:["True","False"],a:0,topic:"Overview & Basics"},
+    {t:"Pediatric nursing cares for adults only.",o:["True","False"],a:1,topic:"Overview & Basics"},
+    {t:"Children are small adults with no differences.",o:["True","False"],a:1,topic:"Overview & Basics"},
+    {t:"Anatomical differences exist between children and adults.",o:["True","False"],a:0,topic:"Overview & Basics"},
+    {t:"History taking in children is usually easy.",o:["True","False"],a:1,topic:"Overview & Basics"},
+    {t:"Newborn head is relatively large compared to body size.",o:["True","False"],a:0,topic:"Head & Anatomy"},
+    {t:"Fontanels are closed at birth.",o:["True","False"],a:1,topic:"Head & Anatomy"},
+    {t:"Tears are absent in early infancy.",o:["True","False"],a:0,topic:"Head & Anatomy"},
+    {t:"Infants normally breathe 30-60 times per minute.",o:["True","False"],a:0,topic:"Respiratory System"},
+    {t:"Infants are mouth breathers until 6 months.",o:["True","False"],a:1,topic:"Respiratory System"},
+    {t:"Eustachian tube in children is short and straight.",o:["True","False"],a:0,topic:"Respiratory System"},
+    {t:"Trachea in young children is long and wide.",o:["True","False"],a:1,topic:"Respiratory System"},
+    {t:"Tongue of children is relatively large.",o:["True","False"],a:0,topic:"GI System"},
+    {t:"Vomiting is frequent in children due to relaxed cardiac sphincter.",o:["True","False"],a:0,topic:"GI System"},
+    {t:"Gastric emptying time in children is long.",o:["True","False"],a:1,topic:"GI System"},
+    {t:"Physiological jaundice may occur due to immature liver function.",o:["True","False"],a:0,topic:"GI System"},
+    {t:"Heart rate in children is lower than adults.",o:["True","False"],a:1,topic:"Cardiovascular"},
+    {t:"Blood replacement is needed when blood loss exceeds 10%.",o:["True","False"],a:0,topic:"Cardiovascular"},
+    {t:"Children have thicker skin than adults.",o:["True","False"],a:1,topic:"Skin & Metabolism"},
+    {t:"Basal metabolic rate is high in newborns.",o:["True","False"],a:0,topic:"Skin & Metabolism"},
+    {t:"Shivering mechanism is absent in newborns.",o:["True","False"],a:0,topic:"Skin & Metabolism"},
+    {t:"Dehydration in children may rapidly cause circulatory failure.",o:["True","False"],a:0,topic:"Fluids & Dehydration"},
+    {t:"Children have decreased water requirements.",o:["True","False"],a:1,topic:"Fluids & Dehydration"},
+    {t:"Separation anxiety is common in infancy.",o:["True","False"],a:0,topic:"Psychological Development"},
+    {t:"Toddlers usually show negativistic behavior.",o:["True","False"],a:0,topic:"Psychological Development"},
+    {t:"Preschool children have long attention span.",o:["True","False"],a:1,topic:"Psychological Development"},
+    {t:"Hydrocele is a scrotal swelling.",o:["True","False"],a:0,topic:"Congenital Anomalies"},
+    {t:"Intussusception is a cause of intestinal obstruction.",o:["True","False"],a:0,topic:"Congenital Anomalies"},
+    {t:"Thyroglossal cyst is a neck swelling.",o:["True","False"],a:0,topic:"Congenital Anomalies"},
+    {t:"Circumcision is a pediatric operative procedure.",o:["True","False"],a:0,topic:"Congenital Anomalies"}
+  ]
+},
+{
+  id:'s3', name:'Sheet 3', fullName:'Neck Swellings & Vascular Anomalies', icon:'🫀',
+  questions:[
+    {t:"What is the most common swelling in a child's neck?",o:["Lipoma","Lymphadenopathy","Thyroglossal duct cyst","Branchial cleft cyst"],a:1,topic:"Lymphadenopathy"},
+    {t:"Which of these is a common cause of a cystic neck mass?",o:["Lymphoma","Rhabdomyosarcoma","Abscess","Reactive lymph nodes"],a:2,topic:"Lymphadenopathy"},
+    {t:"Generalized lymphadenopathy is defined as the enlargement of how many noncontiguous node regions?",o:["Exactly one","More than two","Only in the neck","Only in the groin"],a:1,topic:"Lymphadenopathy"},
+    {t:"What usually causes regional lymphadenopathy?",o:["Systemic disease","Infection in the drainage area","Genetic mutation","High-output heart failure"],a:1,topic:"Lymphadenopathy"},
+    {t:"Which infection is a cause of generalized lymphadenopathy in infants?",o:["EBV","CMV","Syphilis","Toxoplasmosis"],a:2,topic:"Lymphadenopathy"},
+    {t:"Which autoimmune disease can cause lymphadenopathy in children?",o:["Diabetes","SLE (Lupus)","Asthma","Hypertension"],a:1,topic:"Lymphadenopathy"},
+    {t:"What type of malignancy is characterized by the presence of Reed-Sternberg cells?",o:["Non-Hodgkin's lymphoma","Hodgkin's lymphoma","Rhabdomyosarcoma","Infantile hemangioma"],a:1,topic:"Lymphadenopathy"},
+    {t:"What is the first step in diagnosing lymphadenopathy?",o:["Immediate surgery","CT scan","Examining the head, neck, oral cavity, and pharynx","Chemotherapy"],a:2,topic:"Lymphadenopathy"},
+    {t:"Which diagnostic tool can find the specific extent of lymphadenopathy?",o:["X-ray","CT scanning","Visual inspection only","Blood pressure check"],a:1,topic:"Lymphadenopathy"},
+    {t:"If no specific cause for lymphadenopathy is found, what is the typical initial treatment?",o:["10-day course of antibiotics","Immediate chemotherapy","Surgical removal","HAART therapy"],a:0,topic:"Lymphadenopathy"},
+    {t:"What is the most common congenital neck mass?",o:["Ranula","Thyroglossal duct cyst","Branchial cyst","Hemangioma"],a:1,topic:"Thyroglossal Cyst"},
+    {t:"Where is a thyroglossal cyst most commonly located?",o:["Lateral neck","Midline (75%)","Behind the ear","Shoulder"],a:1,topic:"Thyroglossal Cyst"},
+    {t:"What clinical sign is characteristic of a thyroglossal cyst?",o:["It disappears when lying down","It pulsates with the heart","It elevates on swallowing or tongue protrusion","It turns blue when crying"],a:2,topic:"Thyroglossal Cyst"},
+    {t:"What is the only treatment for a thyroglossal cyst?",o:["Antibiotics","Massage","Surgery","Observation only"],a:2,topic:"Thyroglossal Cyst"},
+    {t:"What is the name of the surgical procedure for a thyroglossal cyst?",o:["HAART","Sistrunk's procedure","Sclerotherapy","Embolization"],a:1,topic:"Thyroglossal Cyst"},
+    {t:"Branchial cysts are remnants of what?",o:["Thyroid gland","Incompletely obliterated branchial clefts","Salivary glands","Lymph nodes"],a:1,topic:"Branchial Cyst"},
+    {t:"Where is a branchial cyst typically located?",o:["Midline of the neck","Anterolateral neck, deep to the sternomastoid muscle","Floor of the mouth","Scalp"],a:1,topic:"Branchial Cyst"},
+    {t:"Which side of the neck are 75% of branchial cysts found on?",o:["Right side","Left side","Both sides equally","The back"],a:1,topic:"Branchial Cyst"},
+    {t:"What does a branchial cyst often contain?",o:["Blood","Cholesterol crystals","Saliva","Air"],a:1,topic:"Branchial Cyst"},
+    {t:"What is a ranula?",o:["A bone tumor","A cystic swelling in the floor of the mouth","A thyroid mass","A skin infection"],a:1,topic:"Ranula"},
+    {t:"A 'plunging ranula' extends through which muscle?",o:["Sternomastoid","Mylohyoid","Trapezius","Deltoid"],a:1,topic:"Ranula"},
+    {t:"What is the surgical treatment for a ranula?",o:["Removal of the sublingual gland","Draining the ear","Removing the tonsils","Heart surgery"],a:0,topic:"Ranula"},
+    {t:"Which condition is the most common cause of a lateral congenital neck mass?",o:["Thyroglossal cyst","Branchial cleft abnormality","Reactive lymphadenopathy","Lymphoma"],a:1,topic:"Branchial Cyst"},
+    {t:"How long is expectant management appropriate for reactive lymphadenopathy?",o:["One week","Up to six weeks","Six months","One year"],a:1,topic:"Lymphadenopathy"},
+    {t:"Lymphoma is rare in children younger than what age?",o:["1 year","5 years","10 years","15 years"],a:1,topic:"Lymphadenopathy"},
+    {t:"What defines a vascular tumor?",o:["Genetic bone growth","Neoplastic growth of vascular endothelial cells","Infection of the blood","Structural anomaly without proliferation"],a:1,topic:"Hemangiomas"},
+    {t:"What is the most common soft tissue tumor of infancy?",o:["Lymphoma","Infantile hemangioma","Dermoid cyst","Branchial cyst"],a:1,topic:"Hemangiomas"},
+    {t:"At what age does an infantile hemangioma typically appear?",o:["At birth","Median age of 2 weeks (up to 1-3 months)","Age 5","Puberty"],a:1,topic:"Hemangiomas"},
+    {t:"Which gender is more likely to have an infantile hemangioma?",o:["Males","Females","Both equally","Only premature infants"],a:1,topic:"Hemangiomas"},
+    {t:"What is a common complication of an infantile hemangioma?",o:["Bone fracture","Ulceration of overlying skin","Hearing loss","Blindness in all cases"],a:1,topic:"Hemangiomas"},
+    {t:"What is the characteristic life cycle of an infantile hemangioma?",o:["Grows forever","Present at birth and never changes","Proliferative phase, then gradual involution","Disappears within 24 hours"],a:2,topic:"Hemangiomas"},
+    {t:"What medical therapy is commonly used for hemangiomas?",o:["Aspirin","Propranolol","Vitamin C","Insulin"],a:1,topic:"Hemangiomas"},
+    {t:"When is surgery indicated for a hemangioma?",o:["Always","Never","When vital structures are compromised","Only for cosmetic reasons in newborns"],a:2,topic:"Hemangiomas"},
+    {t:"What defines a congenital hemangioma (CH)?",o:["Appears at age 2","Forms in utero and is fully grown at birth","Only grows after puberty","Is always malignant"],a:1,topic:"Hemangiomas"},
+    {t:"Which subtype of CH involutes rapidly after birth?",o:["NICH","RICH","PICH","IH"],a:1,topic:"Hemangiomas"},
+    {t:"By what age do 50% of RICH lesions demonstrate complete regression?",o:["1 month","7 months","5 years","10 years"],a:1,topic:"Hemangiomas"},
+    {t:"What does NICH stand for?",o:["Newly Infected Cystic Hemangioma","Non-Involuting Congenital Hemangioma","Normal Infant Cell Growth","Northern Internal Capillary Hub"],a:1,topic:"Hemangiomas"},
+    {t:"What color does a typical infantile hemangioma exhibit?",o:["Purple","Bright red","Blue","Green"],a:1,topic:"Hemangiomas"},
+    {t:"What is the standard treatment for NICH?",o:["Embolization","Surgical resection","Observation only","Antibiotics"],a:1,topic:"Hemangiomas"},
+    {t:"What is the traditional name for a capillary malformation (CM)?",o:["Strawberry mark","Port-wine stain","Stork bite","Mole"],a:1,topic:"Capillary Malformation"},
+    {t:"What percentage of children are born with a capillary malformation?",o:["0.3%","5%","10%","50%"],a:0,topic:"Capillary Malformation"},
+    {t:"What is the standard treatment for capillary malformations?",o:["Surgery","Laser therapy","Steroids","Sclerotherapy"],a:1,topic:"Capillary Malformation"},
+    {t:"Where are capillary malformations usually located?",o:["Feet","Hands","Head and neck region","Back"],a:2,topic:"Capillary Malformation"},
+    {t:"What defines a venous malformation (VM)?",o:["Fast blood flow","Malformed venous channels with sluggish blood flow","A bacterial infection","A missing vein"],a:1,topic:"Venous Malformation"},
+    {t:"Which is a clinical feature of a venous malformation?",o:["Pulsatile mass","Soft, compressible, and nonpulsatile","Always bright red","High-pitched bruit"],a:1,topic:"Venous Malformation"},
+    {t:"What are phleboliths in a venous malformation?",o:["Tiny bones","Calcified thrombi (firm nodules)","Air bubbles","Muscle tissue"],a:1,topic:"Venous Malformation"},
+    {t:"What is a conservative management option for VMs?",o:["Hot packs","Compression garments","Vigorous exercise","Aspirin"],a:1,topic:"Venous Malformation"},
+    {t:"What is the first-choice invasive treatment for VMs?",o:["Amputation","Percutaneous sclerotherapy","Major open surgery","Radiation"],a:1,topic:"Venous Malformation"},
+    {t:"What is a lymphatic malformation (LM)?",o:["Overgrowth of hair","Abnormal development of lymphatic channels","A blocked artery","A skin rash"],a:1,topic:"Lymphatic Malformation"},
+    {t:"How are LMs typically diagnosed?",o:["Genetic testing","History and physical examination","Brain surgery","X-ray of the lungs"],a:1,topic:"Lymphatic Malformation"},
+    {t:"Which type of LM has cysts 5mm or larger?",o:["Microcystic","Macrocystic","Capillary","Arterial"],a:1,topic:"Lymphatic Malformation"},
+    {t:"What is an indication for invasive therapy for LMs?",o:["Small size","Recurrent infection or hemorrhage","Normal appearance","Healthy appetite"],a:1,topic:"Lymphatic Malformation"},
+    {t:"What defines an arteriovenous malformation (AVM)?",o:["Slow venous flow","Shunting of blood directly from artery to vein via a Nidus","A missing artery","A surface bruise"],a:1,topic:"AVM & AVF"},
+    {t:"What is a clinical feature of an AVM?",o:["Cold, blue mass","Red, pulsatile, warm mass with a thrill","Completely invisible","Painless and soft"],a:1,topic:"AVM & AVF"},
+    {t:"When do AVMs usually become evident?",o:["Immediately at birth","Childhood or adulthood","Only in old age","During pregnancy only"],a:1,topic:"AVM & AVF"},
+    {t:"What is 'arterial steal' in AVMs?",o:["Stealing blood from neighboring organs/limbs causing ischemia","Increased hair growth","Better blood flow to the heart","Stronger bones"],a:0,topic:"AVM & AVF"},
+    {t:"What is an arteriovenous fistula (AVF)?",o:["A type of skin cancer","Abnormal communication between adjacent artery and vein","A broken bone","A blocked lymph node"],a:1,topic:"AVM & AVF"},
+    {t:"What is a major cardiac complication of a large AVF?",o:["Low blood pressure","High-output cardiac failure","Heart murmur only","No effect on the heart"],a:1,topic:"AVM & AVF"},
+    {t:"Which diagnostic sign is common in AVF?",o:["Audible bruit and palpable thrill","Absence of pulse","Greenish skin","Numbness only"],a:0,topic:"AVM & AVF"},
+    {t:"What is the 'steal phenomenon' in AVF?",o:["Excess energy","Impaired circulation distal to the fistula causing tissue ischemia","High fever","Rapid weight loss"],a:1,topic:"AVM & AVF"},
+    {t:"Which medication is an mTOR inhibitor used for extensive LMs?",o:["Propranolol","Sirolimus","Penicillin","Ibuprofen"],a:1,topic:"Lymphatic Malformation"},
+    {t:"What causes regional lymphadenopathy?",o:["Systemic lupus","Infection in the involved node or drainage area","Leukemia","Genetic mutation"],a:1,topic:"Lymphadenopathy"},
+    {t:"A thyroglossal cyst is a result of failure of what to involute?",o:["Pharyngeal clefts","Thyroglossal duct","Sublingual gland","Heart valve"],a:1,topic:"Thyroglossal Cyst"},
+    {t:"What is the management for a small, asymptomatic LM?",o:["Emergency surgery","Monitoring (observation)","Strong antibiotics","Radiation"],a:1,topic:"Lymphatic Malformation"},
+    {t:"Which condition presents as a pink to dark red patch without warmth?",o:["AVM","Capillary malformation","Infantile hemangioma","Abscess"],a:1,topic:"Capillary Malformation"},
+    {t:"What is the primary cause of reactive lymphadenopathy?",o:["Cancer","Local infective or inflammatory process","Congenital defect","Trauma"],a:1,topic:"Lymphadenopathy"},
+    {t:"Where are LMs usually localized?",o:["Legs","Abdomen","Head and neck region","Feet"],a:2,topic:"Lymphatic Malformation"},
+    {t:"What color hue do LMs often have?",o:["Bright red","Yellow","Bluish","White"],a:2,topic:"Lymphatic Malformation"},
+    {t:"Which vascular anomaly grows steadily and gets larger with age?",o:["Infantile hemangioma","Vascular malformations","RICH","Abscess"],a:1,topic:"Hemangiomas"},
+    {t:"What is used to find the extent of lymphadenopathy?",o:["CT scanning","Stethoscope","Thermometer","Eye chart"],a:0,topic:"Lymphadenopathy"},
+    {t:"Lymphadenopathy is the most common swelling in the neck.",o:["True","False"],a:0,topic:"Lymphadenopathy"},
+    {t:"Generalized lymphadenopathy is usually caused by a local infection.",o:["True","False"],a:1,topic:"Lymphadenopathy"},
+    {t:"Hodgkin's lymphoma is the most common cause of a malignant pediatric neck mass.",o:["True","False"],a:0,topic:"Lymphadenopathy"},
+    {t:"Fine-needle aspiration cytology cannot be used to diagnose lymphoma.",o:["True","False"],a:1,topic:"Lymphadenopathy"},
+    {t:"A thyroglossal cyst moves when a child sticks out their tongue.",o:["True","False"],a:0,topic:"Thyroglossal Cyst"},
+    {t:"Surgery is not required for a thyroglossal cyst.",o:["True","False"],a:1,topic:"Thyroglossal Cyst"},
+    {t:"Branchial cysts are usually located on the midline of the neck.",o:["True","False"],a:1,topic:"Branchial Cyst"},
+    {t:"A ranula is found in the floor of the mouth.",o:["True","False"],a:0,topic:"Ranula"},
+    {t:"Reactive lymphadenopathy is most commonly seen in elderly patients.",o:["True","False"],a:1,topic:"Lymphadenopathy"},
+    {t:"Hodgkin's lymphoma presents with cervical adenopathy more commonly than non-Hodgkin's.",o:["True","False"],a:0,topic:"Lymphadenopathy"},
+    {t:"Vascular malformations are neoplastic growths of cells.",o:["True","False"],a:1,topic:"Hemangiomas"},
+    {t:"Infantile hemangiomas are typically visible at birth.",o:["True","False"],a:1,topic:"Hemangiomas"},
+    {t:"Infantile hemangiomas grow rapidly in the first few months of life.",o:["True","False"],a:0,topic:"Hemangiomas"},
+    {t:"Propranolol is a medical therapy for hemangiomas.",o:["True","False"],a:0,topic:"Hemangiomas"},
+    {t:"Congenital hemangiomas are fully grown at birth.",o:["True","False"],a:0,topic:"Hemangiomas"},
+    {t:"RICH stands for Rapidly Involuting Congenital Hemangioma.",o:["True","False"],a:0,topic:"Hemangiomas"},
+    {t:"NICH lesions involute completely by age 5.",o:["True","False"],a:1,topic:"Hemangiomas"},
+    {t:"Capillary malformations are often called port-wine stains.",o:["True","False"],a:0,topic:"Capillary Malformation"},
+    {t:"Laser therapy is the standard treatment for capillary malformations.",o:["True","False"],a:0,topic:"Capillary Malformation"},
+    {t:"Venous malformations have very fast blood flow.",o:["True","False"],a:1,topic:"Venous Malformation"},
+    {t:"Compression garments can help reduce pain in venous malformations.",o:["True","False"],a:0,topic:"Venous Malformation"},
+    {t:"Sclerotherapy is an invasive treatment for lymphatic malformations.",o:["True","False"],a:0,topic:"Lymphatic Malformation"},
+    {t:"Microcystic LMs have cysts 5mm or larger.",o:["True","False"],a:1,topic:"Lymphatic Malformation"},
+    {t:"Antibiotics are used to treat infections in LMs.",o:["True","False"],a:0,topic:"Lymphatic Malformation"},
+    {t:"Arteriovenous malformations (AVMs) are errors in vascular development.",o:["True","False"],a:0,topic:"AVM & AVF"},
+    {t:"An AVM is a cold, non-pulsatile mass.",o:["True","False"],a:1,topic:"AVM & AVF"},
+    {t:"AVMs can cause 'arterial steal,' leading to tissue ischemia.",o:["True","False"],a:0,topic:"AVM & AVF"},
+    {t:"Arteriovenous fistulas (AVFs) are only congenital and never acquired.",o:["True","False"],a:1,topic:"AVM & AVF"},
+    {t:"A large AVF can lead to high-output cardiac failure.",o:["True","False"],a:0,topic:"AVM & AVF"},
+    {t:"A thrill is a vibration that can be felt (palpated) over a vascular mass.",o:["True","False"],a:0,topic:"AVM & AVF"}
+  ]
+},
+{
+  id:'s4', name:'Sheet 4', fullName:'Abdominal Hernia & Scrotal Swellings', icon:'🧬',
+  questions:[
+    {t:"What is the primary definition of a hernia?",o:["Protrusion of a viscus through a defect in its containing cavity","Accumulation of fluid in the scrotum","Inflammation of the abdominal wall","Twisting of the spermatic cord"],a:0,topic:"Hernia Basics"},
+    {t:"Which is a congenital cause of inguinal hernia?",o:["Unobliterated processus vaginalis","Obesity","Chronic cough","Surgical incision"],a:0,topic:"Hernia Basics"},
+    {t:"The narrowest part of the hernial sac is the:",o:["Body","Fundus","Neck","Mouth"],a:2,topic:"Hernia Basics"},
+    {t:"Which increases intra-abdominal pressure?",o:["Aging","Chronic constipation","Nerve injury","Muscle atrophy"],a:1,topic:"Hernia Basics"},
+    {t:"In a 'Sliding Hernia', the sac is partially formed by:",o:["Peritoneum and a retroperitoneal organ","Only the peritoneum","Muscle fascia","The skin"],a:0,topic:"Special Hernia Types"},
+    {t:"Which hernia sac is medial to the inferior epigastric artery?",o:["Indirect inguinal hernia","Direct inguinal hernia","Femoral hernia","Umbilical hernia"],a:1,topic:"Inguinal Hernia"},
+    {t:"Most common site for a congenital inguinal hernia:",o:["Left side","Right side","Bilateral","Umbilicus"],a:1,topic:"Inguinal Hernia"},
+    {t:"A 'Richter's Hernia' involves:",o:["Entire circumference of bowel","Only part of the bowel wall circumference","Meckel's diverticulum","The bladder"],a:1,topic:"Special Hernia Types"},
+    {t:"Treatment for congenital inguinal hernia in a 6-month-old:",o:["Observation","Herniotomy","Hernioplasty with mesh","Truss application"],a:1,topic:"Inguinal Hernia"},
+    {t:"Hernia that cannot be reduced but has no ischemia:",o:["Strangulated","Irreducible","Reducible","Obstructed"],a:1,topic:"Hernia Basics"},
+    {t:"Clinical sign positive in hernia but negative in hydrocele:",o:["Transillumination","Cough impulse","Fluctuation","Auscultation"],a:1,topic:"Hernia Basics"},
+    {t:"Umbilical hernia in children usually closes by age:",o:["6 months","1 year","2 years","10 years"],a:2,topic:"Umbilical & Other Hernias"},
+    {t:"Golden period for treating testicular torsion:",o:["2 hours","6 hours","12 hours","24 hours"],a:1,topic:"Testicular Torsion"},
+    {t:"The 'Bell Clapper' deformity is associated with:",o:["Inguinal hernia","Testicular torsion","Hydrocele","Varicocele"],a:1,topic:"Testicular Torsion"},
+    {t:"Which is NOT a complication of hydrocele?",o:["Pyocele","Hematocele","Direct hernia","Atrophy of the testis"],a:2,topic:"Scrotal Swellings & Hydrocele"},
+    {t:"Getting above the swelling is possible in:",o:["Scrotal hernia","Hydrocele","Epididymo-orchitis","Spermatocele"],a:1,topic:"Scrotal Swellings & Hydrocele"},
+    {t:"Nerve injured during gridiron incision leading to direct hernia:",o:["Genitofemoral","Ilioinguinal","Femoral","Obturator"],a:1,topic:"Inguinal Hernia"},
+    {t:"Maydl's hernia is characterized by:",o:["W-shaped bowel loops","One loop of bowel","Bladder in sac","Appendix in sac"],a:0,topic:"Special Hernia Types"},
+    {t:"Neck of indirect inguinal hernia is located at:",o:["Superficial ring","Deep inguinal ring","Femoral canal","Lineae alba"],a:1,topic:"Inguinal Hernia"},
+    {t:"Surgery for persistent infant hydrocele after:",o:["1 year","2 years","3 years","5 years"],a:0,topic:"Scrotal Swellings & Hydrocele"},
+    {t:"Littre's Hernia contains:",o:["Appendix","Ovary","Meckel's diverticulum","Urinary bladder"],a:2,topic:"Special Hernia Types"},
+    {t:"Symptom of strangulated hernia:",o:["Painless","Severe pain and vomiting","Soft and reducible","Negative cough impulse"],a:1,topic:"Hernia Complications"},
+    {t:"Standard adult repair using mesh:",o:["Herniotomy","Lichtenstein Hernioplasty","Bassini","Shouldice"],a:1,topic:"Inguinal Hernia"},
+    {t:"Pyocele is a collection of:",o:["Blood","Pus","Lymph","Serum"],a:1,topic:"Scrotal Swellings & Hydrocele"},
+    {t:"Primary investigation for suspected torsion:",o:["CT Scan","X-ray","Urgent Duplex Ultrasound","MRI"],a:2,topic:"Testicular Torsion"},
+    {t:"Forms the posterior wall of inguinal canal:",o:["External oblique","Fascia transversalis","Internal oblique","Inguinal ligament"],a:1,topic:"Inguinal Hernia"},
+    {t:"Congenital umbilical hernia defect in:",o:["Linea semilunaris","Umbilical ring","Arcuate line","Deep ring"],a:1,topic:"Umbilical & Other Hernias"},
+    {t:"Cough impulse in strangulated hernia:",o:["Stronger","Lost/Negative","Same","Visible"],a:1,topic:"Hernia Complications"},
+    {t:"Hernia containing bladder part is:",o:["Richter's","Sliding","Femoral","Incisional"],a:1,topic:"Special Hernia Types"},
+    {t:"Manual reduction of a hernia is:",o:["Taxis","Hernioplasty","Herniotomy","Trussing"],a:0,topic:"Hernia Basics"},
+    {t:"Which is a symptom of intestinal obstruction in hernia?",o:["Hunger","Absolute constipation","Diarrhea","Weight loss"],a:1,topic:"Hernia Complications"},
+    {t:"Amyand's hernia contains the:",o:["Gallbladder","Appendix","Spleen","Kidney"],a:1,topic:"Special Hernia Types"},
+    {t:"Femoral hernia is more common in:",o:["Infants","Young men","Adult females","Athletes"],a:2,topic:"Umbilical & Other Hernias"},
+    {t:"Eversion of tunica vaginalis is for:",o:["Hernia","Hydrocele","Torsion","Undescended testis"],a:1,topic:"Scrotal Swellings & Hydrocele"},
+    {t:"Most common content of a hernial sac:",o:["Omentum","Small intestine","Large intestine","Bladder"],a:1,topic:"Hernia Basics"},
+    {t:"Incisional hernia risk increases with:",o:["Wound infection","Laparoscopy","Exercise","Normal birth"],a:0,topic:"Umbilical & Other Hernias"},
+    {t:"Deep inguinal ring is an opening in:",o:["External oblique","Fascia transversalis","Internal oblique","Peritoneum"],a:1,topic:"Inguinal Hernia"},
+    {t:"Painless, soft, reducible groin swelling:",o:["Torsion","Reducible Inguinal Hernia","Hydrocele","Lymphadenopathy"],a:1,topic:"Inguinal Hernia"},
+    {t:"Superficial ring is in the:",o:["Fascia transversalis","External oblique aponeurosis","Rectus sheath","Conjoint tendon"],a:1,topic:"Inguinal Hernia"},
+    {t:"Surgical emergency:",o:["Reducible hernia","Primary hydrocele","Testicular torsion","Varicocele"],a:2,topic:"Testicular Torsion"},
+    {t:"Chylocele contains:",o:["Pus","Blood","Lymph","Urine"],a:2,topic:"Scrotal Swellings & Hydrocele"},
+    {t:"The conjoint tendon is formed by:",o:["External oblique & transversus","Internal oblique & transversus","Fascia transversalis","Rectus muscle"],a:1,topic:"Inguinal Hernia"},
+    {t:"Indirect hernia is lateral to:",o:["Inferior epigastric artery","Rectus muscle","Femoral vein","Symphysis pubis"],a:0,topic:"Inguinal Hernia"},
+    {t:"Type of hernia that can move between groin and scrotum:",o:["Bubonocele","Funicular","Complete scrotal","Femoral"],a:1,topic:"Inguinal Hernia"},
+    {t:"Hesselbach's triangle is the site for:",o:["Indirect hernia","Direct hernia","Femoral hernia","Obturator hernia"],a:1,topic:"Inguinal Hernia"},
+    {t:"Boundary of Hesselbach triangle:",o:["Inferior epigastric artery","Inguinal ligament","Lateral border of rectus","All of the above"],a:3,topic:"Inguinal Hernia"},
+    {t:"Standard for recurrent hernia repair:",o:["Bassini","Laparoscopic mesh repair","Truss","Herniotomy"],a:1,topic:"Inguinal Hernia"},
+    {t:"Hydrocele fluid is usually:",o:["Cloudy","Amber/Straw colored","Bloody","Milky"],a:1,topic:"Scrotal Swellings & Hydrocele"},
+    {t:"Investigation for sliding hernia:",o:["Ultrasound","Barium Enema/Cystography","X-ray","Blood test"],a:1,topic:"Special Hernia Types"},
+    {t:"Treatment for strangulated hernia:",o:["Ice packs","Emergency surgery","Antibiotics","Wait and see"],a:1,topic:"Hernia Complications"},
+    {t:"Epigastric hernia is protrusion through:",o:["Umbilicus","Linea alba","Linea semilunaris","Groin"],a:1,topic:"Umbilical & Other Hernias"},
+    {t:"Which hernia is more common in multiparous women?",o:["Femoral","Epigastric","Indirect inguinal","Direct inguinal"],a:0,topic:"Umbilical & Other Hernias"},
+    {t:"Complication of orchidopexy:",o:["Nerve injury","Testicular atrophy","Bleeding","All of the above"],a:3,topic:"Testicular Torsion"},
+    {t:"Sign of viable bowel during surgery:",o:["Black color","Peristalsis and arterial pulsation","Lack of movement","Cold temperature"],a:1,topic:"Hernia Complications"},
+    {t:"Dullness on percussion in a hernia sac suggests:",o:["Bowel","Omentum","Gas","Fluid"],a:1,topic:"Hernia Basics"},
+    {t:"Gargling sound on reduction suggests:",o:["Bowel content","Omentum content","Bladder content","Blood"],a:0,topic:"Hernia Basics"},
+    {t:"Most common cause of incisional hernia:",o:["Wound dehiscence/infection","Walking too soon","Coughing","Diet"],a:0,topic:"Umbilical & Other Hernias"},
+    {t:"Primary hydrocele is most often:",o:["Congenital","Idiopathic","Traumatic","Infectious"],a:1,topic:"Scrotal Swellings & Hydrocele"},
+    {t:"Secondary hydrocele can be caused by:",o:["Testicular tumor","Inflammation","Torsion","All of the above"],a:3,topic:"Scrotal Swellings & Hydrocele"},
+    {t:"Testicular torsion 'Prehn's sign' (elevation of testis) usually:",o:["Relieves pain","Aggravates or doesn't change pain","Is always positive","Is diagnostic for infection"],a:1,topic:"Testicular Torsion"},
+    {t:"Position of the testis in torsion:",o:["Lowered","High-riding/Transverse","Normal","Retracted to abdomen"],a:1,topic:"Testicular Torsion"},
+    {t:"Internal inguinal ring is located at:",o:["Mid-inguinal point","Mid-point of inguinal ligament","Pubic tubercle","Anterior superior iliac spine"],a:1,topic:"Inguinal Hernia"},
+    {t:"Indirect hernia is more common in:",o:["Adult males","Infants and children","Elderly","Females"],a:1,topic:"Inguinal Hernia"},
+    {t:"Hydrocele that communicates with peritoneum is:",o:["Vaginal","Encysted cord","Communicating","Infantile"],a:2,topic:"Scrotal Swellings & Hydrocele"},
+    {t:"Surgical repair of umbilical hernia in adults is:",o:["Herniotomy","Mayo's repair","Lichtenstein","Bassini"],a:1,topic:"Umbilical & Other Hernias"},
+    {t:"Spigelian hernia occurs through:",o:["Linea alba","Linea semilunaris","Obturator foramen","Femoral canal"],a:1,topic:"Umbilical & Other Hernias"},
+    {t:"A Meckel's diverticulum in a hernial sac is called:",o:["Amyand","Littre","Richter","Maydl"],a:1,topic:"Special Hernia Types"},
+    {t:"Sac of a direct hernia is:",o:["Lateral to epigastric vessels","Medial to epigastric vessels","Below inguinal ligament","None"],a:1,topic:"Inguinal Hernia"},
+    {t:"Which is NOT a boundary of the inguinal canal?",o:["External oblique","Fascia transversalis","Rectus muscle","Inguinal ligament"],a:2,topic:"Inguinal Hernia"},
+    {t:"Most specific sign for torsion:",o:["Absent cremasteric reflex","Fever","Pyuria","Positive cough impulse"],a:0,topic:"Testicular Torsion"},
+    {t:"Direct inguinal hernia is usually congenital.",o:["True","False"],a:1,topic:"Inguinal Hernia"},
+    {t:"Hydrocele is never reducible.",o:["True","False"],a:0,topic:"Scrotal Swellings & Hydrocele"},
+    {t:"The cough impulse is negative in a simple hydrocele.",o:["True","False"],a:0,topic:"Scrotal Swellings & Hydrocele"},
+    {t:"Testicular torsion can be safely observed for 24 hours.",o:["True","False"],a:1,topic:"Testicular Torsion"},
+    {t:"Herniotomy is the standard treatment for pediatric hernias.",o:["True","False"],a:0,topic:"Inguinal Hernia"},
+    {t:"Femoral hernia has a high risk of strangulation.",o:["True","False"],a:0,topic:"Hernia Complications"},
+    {t:"An incarcerated hernia has a compromised blood supply.",o:["True","False"],a:1,topic:"Hernia Complications"},
+    {t:"The right side is the most common site for inguinal hernia in children.",o:["True","False"],a:0,topic:"Inguinal Hernia"},
+    {t:"Transillumination test is positive for an omental hernia.",o:["True","False"],a:1,topic:"Hernia Basics"},
+    {t:"Epigastric hernia occurs in the linea alba.",o:["True","False"],a:0,topic:"Umbilical & Other Hernias"},
+    {t:"Small hernias are less likely to strangulate than large ones.",o:["True","False"],a:1,topic:"Hernia Complications"},
+    {t:"The 'Neck' is the most dangerous part for strangulation.",o:["True","False"],a:0,topic:"Hernia Basics"},
+    {t:"A hydrocele usually improves without surgery in the first year of life.",o:["True","False"],a:0,topic:"Scrotal Swellings & Hydrocele"},
+    {t:"Obesity is a predisposing factor for acquired hernias.",o:["True","False"],a:0,topic:"Hernia Basics"},
+    {t:"Indirect inguinal hernia passes through the deep inguinal ring.",o:["True","False"],a:0,topic:"Inguinal Hernia"},
+    {t:"The treatment for strangulated hernia is emergency surgery.",o:["True","False"],a:0,topic:"Hernia Complications"},
+    {t:"In a sliding hernia, the bladder can be part of the sac wall.",o:["True","False"],a:0,topic:"Special Hernia Types"},
+    {t:"Richter's hernia always presents with full intestinal obstruction.",o:["True","False"],a:1,topic:"Special Hernia Types"},
+    {t:"Testicular torsion causes sudden, severe scrotal pain.",o:["True","False"],a:0,topic:"Testicular Torsion"},
+    {t:"A truss is a curative treatment for hernias.",o:["True","False"],a:1,topic:"Hernia Basics"},
+    {t:"The ilioinguinal nerve supplies the conjoint tendon.",o:["True","False"],a:0,topic:"Inguinal Hernia"},
+    {t:"The spermatic cord contains the vas deferens.",o:["True","False"],a:0,topic:"Inguinal Hernia"},
+    {t:"Pyocele is a collection of lymph.",o:["True","False"],a:1,topic:"Scrotal Swellings & Hydrocele"},
+    {t:"Duplex ultrasound is the best test for torsion.",o:["True","False"],a:0,topic:"Testicular Torsion"},
+    {t:"Most umbilical hernias in infants require surgery by age 6 months.",o:["True","False"],a:1,topic:"Umbilical & Other Hernias"},
+    {t:"A 'preformed sac' is the cause of congenital hernias.",o:["True","False"],a:0,topic:"Hernia Basics"},
+    {t:"Incisional hernias are iatrogenic.",o:["True","False"],a:0,topic:"Umbilical & Other Hernias"},
+    {t:"Omentocele contains small bowel.",o:["True","False"],a:1,topic:"Special Hernia Types"},
+    {t:"The deep inguinal ring is lateral to the inferior epigastric artery.",o:["True","False"],a:0,topic:"Inguinal Hernia"},
+    {t:"Sudden increase in intra-abdominal pressure can cause a hernia.",o:["True","False"],a:0,topic:"Hernia Basics"}
+  ]
+}
+];
+
+/* ===== LANDING STATE ===== */
+let selectedSheet = 0;
+let selectedTopic = 'all';
+let topicList = [];
+
+function initLanding() {
+  document.getElementById('landingShell').style.display = '';
+  document.getElementById('quizShell').style.display = 'none';
+  document.getElementById('navHome').style.display = '';
+  document.getElementById('navQuizBack').style.display = 'none';
+  document.getElementById('prog-bar').style.width = '0%';
+  renderSheetCards();
+  renderTopicPills();
+  updateStartInfo();
+}
+
+function renderSheetCards() {
+  document.getElementById('sheetsGrid').innerHTML = SHEETS.map((s, i) => `
+    <div class="sheet-card ${i === selectedSheet ? 'active' : ''}" onclick="selectSheet(${i})">
+      <span class="sc-icon">${s.icon}</span>
+      <div class="sc-name">${s.name}</div>
+      <div class="sc-full">${s.fullName}</div>
+      <div class="sc-count">${s.questions.length} questions</div>
+    </div>
+  `).join('');
+}
+
+function selectSheet(idx) {
+  selectedSheet = idx;
+  selectedTopic = 'all';
+  renderSheetCards();
+  renderTopicPills();
+  updateStartInfo();
+}
+
+function getTopicsForSheet() {
+  const topics = {};
+  SHEETS[selectedSheet].questions.forEach(q => {
+    if (q.topic) topics[q.topic] = (topics[q.topic] || 0) + 1;
+  });
+  return topics;
+}
+
+function renderTopicPills() {
+  topicList = [];
+  const topics = getTopicsForSheet();
+  const total = SHEETS[selectedSheet].questions.length;
+  let html = `<div class="topic-pill ${selectedTopic==='all'?'active':''}" onclick="selectTopicIdx(-1)">All (${total})</div>`;
+  Object.entries(topics).forEach(([topic, count], i) => {
+    topicList.push(topic);
+    html += `<div class="topic-pill ${selectedTopic===topic?'active':''}" onclick="selectTopicIdx(${i})">${topic} (${count})</div>`;
+  });
+  document.getElementById('topicPills').innerHTML = html;
+}
+
+function selectTopicIdx(idx) {
+  selectedTopic = idx === -1 ? 'all' : topicList[idx];
+  renderTopicPills();
+  updateStartInfo();
+}
+
+function getFilteredPool() {
+  const qs = SHEETS[selectedSheet].questions;
+  return selectedTopic === 'all' ? qs : qs.filter(q => q.topic === selectedTopic);
+}
+
+function updateStartInfo() {
+  const pool = getFilteredPool();
+  const s = SHEETS[selectedSheet];
+  document.getElementById('startInfo').innerHTML =
+    `<strong>${pool.length} questions</strong> selected from <strong>${s.fullName}</strong>`;
+}
+
+function startQuiz() {
+  const pool = getFilteredPool();
+  if (!pool.length) return;
+  document.getElementById('landingShell').style.display = 'none';
+  document.getElementById('quizShell').style.display = '';
+  document.getElementById('navHome').style.display = 'none';
+  document.getElementById('navQuizBack').style.display = '';
+  init(pool);
+}
+
+function backToLanding() {
+  clearInterval(timerInterval);
+  initLanding();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ===== QUIZ ENGINE ===== */
+let questions, qi, correct, wrong, answers, wrongSet, answered, currentPool;
+let timeLeft, timerInterval;
+const LETTERS = ['A','B','C','D','E','F'];
+
+function shuffleArr(arr) {
+  for (let k = arr.length - 1; k > 0; k--) {
+    const j = Math.floor(Math.random() * (k + 1));
+    [arr[k], arr[j]] = [arr[j], arr[k]];
+  }
+  return arr;
+}
+
+function shuffleOptions(q) {
+  const indices = q.o.map((_, i) => i);
+  shuffleArr(indices);
+  return { ...q, o: indices.map(i => q.o[i]), a: indices.indexOf(q.a) };
+}
+
+function init(pool) {
+  currentPool = pool;
+  questions = shuffleArr([...pool]).map(shuffleOptions);
+  qi = 0; correct = 0; wrong = 0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = []; answered = 0;
+  startTimer();
+  render();
+}
+
+function startTimer() {
+  clearInterval(timerInterval);
+  timeLeft = Math.min(questions.length * 90, 50 * 60);
+  const badge = document.getElementById('timerBadge');
+  badge.className = 'timer-badge';
+  const tick = () => {
+    const m = Math.floor(timeLeft / 60), s = timeLeft % 60;
+    document.getElementById('timerTxt').textContent = `${m}:${s<10?'0':''}${s}`;
+    if (timeLeft <= 120) badge.className = 'timer-badge danger';
+    else if (timeLeft <= 300) badge.className = 'timer-badge warn';
+    else badge.className = 'timer-badge';
+  };
+  tick();
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    tick();
+    if (timeLeft <= 0) { clearInterval(timerInterval); finish(); }
+  }, 1000);
+}
+
+function updateTop() {
+  const total = questions.length;
+  document.getElementById('sCorrect').textContent = correct;
+  document.getElementById('sWrong').textContent = wrong;
+  document.getElementById('sRemain').textContent = Math.round(((total - answered) / total) * 100) + '%';
+  document.getElementById('progLabel').textContent = 'سؤال ' + (qi+1) + ' / ' + total;
+  document.getElementById('progFill').style.width = ((qi+1) / total * 100) + '%';
+  document.getElementById('prog-bar').style.width = ((qi+1) / total * 100) + '%';
+}
+
+function render() {
+  updateTop();
+  const q = questions[qi];
+  document.getElementById('app').innerHTML = `
+    <div class="q-card">
+      <div class="q-header"><div class="q-num">سؤال ${qi+1} / ${questions.length}</div></div>
+      <div class="q-text">${q.t}</div>
+      <div class="options">
+        ${q.o.map((o,idx) => `
+          <div class="opt" id="opt${idx}" onclick="choose(${idx})">
+            <div class="opt-letter">${LETTERS[idx]||idx+1}</div>${o}
+          </div>`).join('')}
+      </div>
+      <div class="nav-btns">
+        <button class="btn btn-skip" onclick="skip()"><i class="fa-solid fa-forward"></i> تخطي</button>
+      </div>
+    </div>`;
+}
+
+function choose(v) {
+  if (answers[qi] !== null) return;
+  answers[qi] = v; answered++;
+  const q = questions[qi];
+  const ok = v === q.a;
+  ok ? correct++ : wrong++;
+  updateTop();
+  q.o.forEach((_, idx) => {
+    const el = document.getElementById('opt'+idx);
+    el.classList.add('disabled');
+    if (idx === q.a) el.classList.add('correct');
+    else if (idx === v) el.classList.add('wrong');
+  });
+  const fb = document.createElement('div');
+  fb.className = 'feedback-bar ' + (ok ? 'ok' : 'no');
+  fb.innerHTML = ok
+    ? `<span class="feedback-icon">🎉</span><span>شطور جدا ، اللهم بارك</span>`
+    : `<span class="feedback-icon">😔</span><span>ركز يا سكر</span>`;
+  const card = document.querySelector('.q-card');
+  card.querySelector('.options').after(fb);
+  if (q.exp) {
+    const exp = document.createElement('div');
+    exp.className = 'explanation'; exp.style.display = 'block';
+    exp.innerHTML = '<b>💬 شرح:</b> ' + q.exp;
+    fb.after(exp);
+  }
+  card.querySelector('.nav-btns').innerHTML = `<button class="btn btn-next" onclick="next()">
+    ${qi < questions.length-1 ? '<i class="fa-solid fa-arrow-left"></i> السؤال التالي' : '<i class="fa-solid fa-flag-checkered"></i> إنهاء الامتحان'}
+  </button>`;
+}
+
+function skip() {
+  if (answers[qi] === null) { answers[qi] = -1; answered++; wrong++; updateTop(); }
+  next();
+}
+
+function next() {
+  if (qi < questions.length - 1) { qi++; render(); window.scrollTo({top:0,behavior:'smooth'}); }
+  else finish();
+}
+
+function finish() {
+  clearInterval(timerInterval);
+  const total = questions.length;
+  const score = Math.round((correct / total) * 100);
+  const finalWrong = questions.filter((q, idx) => answers[idx] !== q.a);
+  const skipped = answers.filter(a => a === -1).length;
+  let grade, gradeColor;
+  if (score >= 90) { grade = '🥇 ممتاز'; gradeColor = 'var(--success)'; }
+  else if (score >= 75) { grade = '🥈 جيد جداً'; gradeColor = 'var(--accent)'; }
+  else if (score >= 60) { grade = '🥉 جيد'; gradeColor = 'var(--warn)'; }
+  else { grade = '📚 راجع تاني'; gradeColor = 'var(--danger)'; }
+  const circ = 2 * Math.PI * 45;
+  const offset = circ - (score / 100) * circ;
+  const reportHTML = questions.map((q, idx) => {
+    const ok = answers[idx] === q.a;
+    return `<div class="report-item ${ok?'ok':'no'}">
+      <div class="ri-q">${ok?'✅':'❌'} ${q.t}</div>
+      ${!ok ? `
+        <div class="ri-row"><span class="ri-badge ri-yours">إجابتك</span> ${answers[idx]>=0?q.o[answers[idx]]:'تم التخطي'}</div>
+        <div class="ri-row"><span class="ri-badge ri-right">الصحيح</span> ${q.o[q.a]}</div>` : ''}
+    </div>`;
+  }).join('');
+  document.getElementById('prog-bar').style.width = '100%';
+  document.getElementById('app').innerHTML = `
+    <div class="result-hero">
+      <div class="score-ring">
+        <svg viewBox="0 0 110 110">
+          <circle class="ring-bg" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="0"/>
+          <circle class="ring-fill" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="${circ}" style="stroke:${gradeColor}" id="ringFill"/>
+        </svg>
+        <div class="score-num">${score}</div><div class="score-pct">%</div>
+      </div>
+      <div class="result-grade" style="color:${gradeColor}">${grade}</div>
+      <div class="result-sub">أجبت على ${answered} من ${total} سؤال</div>
+      <div class="result-stats">
+        <div class="rs"><div class="n" style="color:var(--success)">${correct}</div><div class="l">صحيح</div></div>
+        <div class="rs"><div class="n" style="color:var(--danger)">${wrong}</div><div class="l">خطأ</div></div>
+        <div class="rs"><div class="n" style="color:var(--accent)">${skipped}</div><div class="l">تخطي</div></div>
+      </div>
+    </div>
+    <div class="result-actions">
+      ${finalWrong.length ? `<button class="btn btn-retry" onclick="retryWrong()"><i class="fa-solid fa-rotate-right"></i> إعادة الخطأ (${finalWrong.length})</button>` : ''}
+      <button class="btn btn-home" onclick="init(currentPool)"><i class="fa-solid fa-shuffle"></i> امتحان جديد عشوائي</button>
+      <button class="btn btn-home" onclick="backToLanding()"><i class="fa-solid fa-house"></i> رجوع للقائمة</button>
+    </div>
+    <div style="margin-top:28px">
+      <div style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text2)">📋 تقرير مفصّل</div>
+      ${reportHTML}
+    </div>`;
+  setTimeout(() => {
+    const rf = document.getElementById('ringFill');
+    if (rf) rf.style.strokeDashoffset = offset;
+  }, 100);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function retryWrong() {
+  const wrongTexts = new Set(
+    questions.filter((q, idx) => answers[idx] !== q.a).map(q => q.t)
+  );
+  const pool = currentPool.filter(q => wrongTexts.has(q.t));
+  init(pool.length ? pool : currentPool);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ===== THEME ===== */
+const themeBtn = document.getElementById('themeBtn');
+let theme = localStorage.getItem('theme') || 'light';
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', t);
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+
+/* ===== START ===== */
+initLanding();
+</script>
+</body>
+</html>
