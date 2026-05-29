@@ -501,12 +501,18 @@ function shuffle(arr) {
 /* ============ SHUFFLE OPTIONS ============ */
 function shuffleOptions(q) {
   const correctText = q.o[q.a];
-  const indexed = q.o.map((text) => text);
+  const indexed = [...q.o];
+
   for (let i = indexed.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
     [indexed[i], indexed[j]] = [indexed[j], indexed[i]];
   }
-  return { t: q.t, o: indexed, a: indexed.indexOf(correctText), exp: q.exp || null };
+
+  return {
+    ...q,
+    o: indexed,
+    a: indexed.indexOf(correctText)
+  };
 }
 /* BUILD TOPIC BUTTONS */
 function buildTopics() {
