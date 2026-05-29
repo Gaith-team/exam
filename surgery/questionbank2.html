@@ -498,6 +498,16 @@ function shuffle(arr) {
   return a;
 }
 
+/* ============ SHUFFLE OPTIONS ============ */
+function shuffleOptions(q) {
+  const correctText = q.o[q.a];
+  const indexed = q.o.map((text) => text);
+  for (let i = indexed.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [indexed[i], indexed[j]] = [indexed[j], indexed[i]];
+  }
+  return { t: q.t, o: indexed, a: indexed.indexOf(correctText), exp: q.exp || null };
+}
 /* BUILD TOPIC BUTTONS */
 function buildTopics() {
   const wrap = document.getElementById('topicsWrap');
