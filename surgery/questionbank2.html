@@ -717,7 +717,7 @@ function finish() {
 
 function retryWrong() {
   const pool = [...wrongSet];
-  questions = shuffle(pool); i = 0; correct = 0; wrong = 0;
+  questions = shuffle(pool).map(shuffleOptions); i = 0; correct = 0; wrong = 0;
   answers = new Array(questions.length).fill(null);
   wrongSet = []; answered = 0; timeLeft = totalTime;
   startTimer(); render();
