@@ -28,12 +28,6 @@
   --warn:    #1d4ed8;
   --r:       16px;
   --tr:      all 0.3s cubic-bezier(0.4,0,0.2,1);
-
-  --t1: #2563eb;
-  --t2: #16a34a;
-  --t3: #dc2626;
-  --t4: #7c3aed;
-  --t5: #d97706;
 }
 [data-theme="dark"] {
   --bg:   #0d1117; --bg2: #161b22; --card: #1c2333;
@@ -114,7 +108,6 @@ nav {
   display: flex; align-items: center; gap: 6px;
 }
 
-/* TOPIC FILTER */
 .topics-section {
   max-width: 600px; margin: 0 auto 16px;
   padding: 0 4px;
@@ -137,12 +130,6 @@ nav {
 }
 .topic-btn:hover { border-color: var(--accent); color: var(--accent); }
 .topic-btn.active { color: #fff; border-color: transparent; }
-.topic-btn[data-topic="All"].active           { background: var(--accent); }
-.topic-btn[data-topic="Wound Healing"].active  { background: #2563eb; }
-.topic-btn[data-topic="Surgical Infections"].active { background: #16a34a; }
-.topic-btn[data-topic="Shock"].active          { background: #dc2626; }
-.topic-btn[data-topic="Abdominal Trauma"].active { background: #7c3aed; }
-.topic-btn[data-topic="Blood Transfusion"].active { background: #d97706; }
 
 .shell { max-width: 600px; margin: 0 auto; padding: 24px 20px 80px; }
 
@@ -357,20 +344,17 @@ footer {
   <p>شيت 2026</p>
   <div class="hero-band-meta">
     <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">-- سؤال</span></div>
-    <div class="meta-pill"><i class="fa-solid fa-clock"></i> 60 Min</div>
+    <div class="meta-pill"><i class="fa-solid fa-clock"></i> 150 Min</div>
     <div class="meta-pill"><i class="fa-solid fa-shuffle"></i> Shuffled</div>
   </div>
 </div>
 
 <div class="shell">
-
-  <!-- TOPIC FILTER -->
   <div class="topics-section">
     <div class="topics-label">عاوز محاضرة أي ؟</div>
     <div class="topics-wrap" id="topicsWrap"></div>
   </div>
 
-  <!-- STATS -->
   <div class="stats-row">
     <div class="stat-box">
       <div class="val stat-correct" id="sCorrect">0</div>
@@ -386,14 +370,12 @@ footer {
     </div>
   </div>
 
-  <!-- PROGRESS STRIP -->
   <div class="prog-strip">
     <div class="prog-label" id="progLabel">سؤال ١</div>
     <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
-    <div class="timer-badge" id="timerBadge"><i class="fa-regular fa-clock"></i> <span id="timerTxt">60:00</span></div>
+    <div class="timer-badge" id="timerBadge"><i class="fa-regular fa-clock"></i> <span id="timerTxt">150:00</span></div>
   </div>
 
-  <!-- APP -->
   <div id="app"></div>
 </div>
 
@@ -406,6 +388,7 @@ footer {
 
 <script>
 const ALL_QUESTIONS = [
+  // ── Wound Healing ──────────────────────────────────────────────────────────
   {t:"Which of the following morphological classifications involves the tearing away of a large flap of skin and subcutaneous tissue?",o:["Abrasion","Incision","Laceration","Degloving/Avulsion"],a:3,topic:"Wound Healing",exp:"Avulsion/Degloving injury involves tearing away of a large skin and subcutaneous tissue flap."},
   {t:"An elective, non-traumatic surgical wound where the respiratory, gastrointestinal, biliary, and genitourinary tracts are NOT entered is classified as:",o:["Clean (Class I)","Clean-Contaminated (Class II)","Contaminated (Class III)","Dirty/Infected (Class IV)"],a:0,topic:"Wound Healing",exp:"Class I (Clean) wounds are elective, non-traumatic, primarily closed, and do not enter these tracts."},
   {t:"What is the primary cellular goal during the primary immediate phase of coagulation and hemostasis?",o:["To synthesize Type I collagen fibers.","To prevent blood oozing and establish a temporary provisional matrix.","To initiate systemic epithelial differentiation.","To perform chemical debridement of devitalized tissue."],a:1,topic:"Wound Healing",exp:"Hemostasis rapidly controls blood loss and sets a provisional fibrin matrix for subsequent cell invasion."},
@@ -418,6 +401,8 @@ const ALL_QUESTIONS = [
   {t:"Meticulous exploration, toilet, and debridement are performed primarily to accomplish which step?",o:["Surveillance for complications","Stratification of associated injuries","Removal of devitalized tissue and clearing contamination","Epithelial cell maturation"],a:2,topic:"Wound Healing",exp:"Debridement and toilet remove non-viable tissue to control contamination."},
   {t:"Which of the following is an advanced modality listed under 'Adjuncts to Wound Healing'?",o:["Systemic anti-inflammatory steroids","Negative pressure therapy and Hyperbaric oxygen","Absolute limb immobilization for 1 year","Topical chemical cauterization"],a:1,topic:"Wound Healing",exp:"Negative pressure therapy and Hyperbaric oxygen are listed under adjuncts."},
   {t:"According to the slides, what represents the absolute future for advanced wound-healing strategies?",o:["Secondary intention grafting","Routine application of silver dressings","Gene therapy delivered via biological, chemical, or physical methods","Extended administrative antibiotic protocols"],a:2,topic:"Wound Healing",exp:"Gene therapy is defined as the future for wound-healing strategies."},
+
+  // ── Surgical Infections ────────────────────────────────────────────────────
   {t:"How is a surgical site infection (SSI) clinically defined based on the surgical infection guidelines?",o:["Widespread septicemia arising within 48 hours of admission.","An infection occurring at the operative site within 30 days (or up to 1 year if an implant is left).","Any local erythema that resolves without antibiotic treatment.","Superficial skin breakdown after suture removal at 2 weeks."],a:1,topic:"Surgical Infections",exp:"SSI is defined by the 30-day window (or 1 year for prosthetic implants)."},
   {t:"What is the critical threshold of bacterial contamination per gram of tissue required for a wound to develop a clinical infection?",o:["10² organisms per gram","10³ organisms per gram","10⁵ or more organisms per gram","10⁴ organisms per gram"],a:2,topic:"Surgical Infections",exp:"Clinical wound infection occurs when the microbial load exceeds 10⁵ organisms/g of tissue."},
   {t:"A surgical site infection that involves only the skin and subcutaneous tissue of the incision is classified as:",o:["Superficial incisional SSI","Deep incisional SSI","Organ/Space SSI","Systemic necrotizing SSI"],a:0,topic:"Surgical Infections",exp:"Superficial incisional SSI is limited to the skin and subcutaneous tissues."},
@@ -433,6 +418,8 @@ const ALL_QUESTIONS = [
   {t:"A patient presents 5 days post-laparotomy with fever, localized incisional pain, erythema, and fluctuance. What is the nurse's first anticipated intervention?",o:["Apply tight compression bandages over the skin.","Assist with opening the wound incision line to allow for purulent drainage.","Administer high doses of subcutaneous heparin.","Encourage immediate vigorous abdominal wall exercises."],a:1,topic:"Surgical Infections",exp:"Fluctuance indicates a localized fluid collection (pus); opening the incision relieves pressure and clears the infection source."},
   {t:"Which micro-organism is an obligate anaerobe normally found in the colon that frequently complicates intra-abdominal surgical site infections?",o:["Streptococcus pneumoniae","Bacteroides fragilis","Staphylococcus aureus","Klebsiella pneumoniae"],a:1,topic:"Surgical Infections",exp:"Bacteroides fragilis is a predominant anaerobic commensal of the GI tract involved in mixed intra-abdominal infections."},
   {t:"What nursing measure is vital in preventing the cross-contamination of surgical infections between different patients on a surgical ward?",o:["Changing the patient's dietary status from NPO to regular diet.","Ensuring the patient's room windows are kept closed at all times.","Strict adherence to hand hygiene protocols before and after every patient contact.","Administering prophylactic antibiotics to the nursing staff."],a:2,topic:"Surgical Infections",exp:"Hand hygiene remains the single most effective measure to break the chain of transmission for nosocomial pathogens."},
+
+  // ── Shock ──────────────────────────────────────────────────────────────────
   {t:"Based on the primary pathophysiological definition of shock, what is the core defect?",o:["A temporary elevation in systemic arterial blood pressure.","An isolated reduction in hemoglobin oxygen-carrying capacity.","Failure of the circulatory system to provide adequate tissue perfusion, leading to cellular hypoxia.","Generalized paralysis of voluntary skeletal muscles."],a:2,topic:"Shock",exp:"Shock is fundamentally a state of systemic circulatory failure where oxygen delivery falls short of cellular metabolic demands."},
   {t:"What mechanism precipitates neurogenic shock after a high cervical spinal cord injury?",o:["Immediate massive internal hemorrhage into the thorax.","Mechanical compression of the superior vena cava.","Sudden loss of sympathetic vasomotor tone, causing widespread vasodilation.","Acute systemic bacterial toxemia."],a:2,topic:"Shock",exp:"Spinal cord injuries disrupt sympathetic pathways, triggering unregulated vasodilation and venous pooling."},
   {t:"Neurogenic shock presents with which unique clinical combination of signs that differs from hypovolemic shock?",o:["Severe tachycardia and profound hypertension","Severe tachycardia and profound hypotension","Bradycardia and hypotension","Hyperthermia and bounding peripheral pulses"],a:2,topic:"Shock",exp:"The loss of sympathetic outflow leaves parasympathetic tone unopposed, causing bradycardia alongside vasodilation."},
@@ -450,6 +437,8 @@ const ALL_QUESTIONS = [
   {t:"What clinical parameter describes the absolute late phase of uncompensated shock?",o:["Transient mild tachycardia","Isolated orthostatic dizziness","Profound hypotension, oliguria, and altered or absent consciousness.","Bounding peripheral pulses and hypertension."],a:2,topic:"Shock",exp:"When compensatory mechanisms fail, blood pressure drops significantly, urine output stops, and neurological function degrades."},
   {t:"In the management of hypovolemic and septic shock, what is the initial primary nursing therapeutic intervention?",o:["Administering heavy doses of intravenous sedatives.","Placing the patient in a high-Fowler's position.","Securing large-bore intravenous lines and initiating rapid volume resuscitation.","Preparing the patient for immediate continuous renal replacement therapy."],a:2,topic:"Shock",exp:"Restoring intravascular volume is the critical first-line step to re-establish tissue perfusion."},
   {t:"Which class of medications is utilized to increase systemic vascular resistance and support blood pressure when fluid resuscitation alone fails in septic shock?",o:["Beta-blockers","Vasopressors (e.g., Norepinephrine)","Calcium channel blockers","Loop diuretics"],a:1,topic:"Shock",exp:"Vasopressors induce smooth muscle contraction in blood vessels, correcting pathological vasodilation."},
+
+  // ── Abdominal Trauma ───────────────────────────────────────────────────────
   {t:"What is the classic clinical sign defined as referred pain to the left shoulder due to diaphragmatic irritation from a ruptured spleen?",o:["Cullen's sign","Grey Turner's sign","Kehr's sign","Battle's sign"],a:2,topic:"Abdominal Trauma",exp:"Kehr's sign occurs when splenic hemorrhage contacts the diaphragm, referring pain along the phrenic nerve to the left shoulder."},
   {t:"During an abdominal trauma assessment, the nurse notes bluish ecchymosis localized around the umbilicus. This finding is documented as:",o:["Grey Turner's sign","Cullen's sign","Kehr's sign","Murphy's sign"],a:1,topic:"Abdominal Trauma",exp:"Cullen's sign represents periumbilical bruising tracking from retroperitoneal or intraperitoneal bleeding."},
   {t:"Bruising or ecchymosis detected along the flanks (sides of the abdominal wall) indicates retroperitoneal hemorrhage and is known as:",o:["Grey Turner's sign","Cullen's sign","McBurney's sign","Rovsing's sign"],a:0,topic:"Abdominal Trauma",exp:"Grey Turner's sign refers to flank discoloration secondary to retroperitoneal hematomas (e.g., kidney or pancreatic injuries)."},
@@ -460,22 +449,121 @@ const ALL_QUESTIONS = [
   {t:"How does excessive administration of un-warmed, clear crystalloid fluids worsen coagulopathy in active hemorrhage?",o:["It increases platelet aggregation.","It causes a dilutional coagulopathy by washing out remaining clotting factors and platelets.","It shifts the blood pH into severe respiratory alkalosis.","It directly destroys the red bone marrow."],a:1,topic:"Abdominal Trauma",exp:"Giving massive volumes of fluid without replacing clotting components dilutes the coagulation factors required for clotting."},
   {t:"What is the rationale behind 'Permissive Hypotension' in damage control resuscitation for trauma?",o:["To maximize blood flow to the skin and skeletal muscle.","To maintain blood pressure at a lower but viable baseline to prevent blowing off early, fragile clots.","To eliminate the need for surgical source control.","To completely stop renal filtration temporarily."],a:1,topic:"Abdominal Trauma",exp:"Aggressive normalization of blood pressure can dislodge newly formed fibrin clots, worsening internal bleeding."},
   {t:"What is the core physiological objective of performing 'Damage Control Surgery' in an unstable abdominal trauma patient?",o:["Completing all complex anatomical re-grafting in the initial setting.","Rapid control of active hemorrhage and containment of contamination, followed by temporary closure.","Performing cosmetic scar revisions immediately in theater.","Delayed exploration after waiting 72 hours in a standard medical ward."],a:1,topic:"Abdominal Trauma",exp:"Damage control surgery prioritizes stabilizing physiology over executing prolonged, complex anatomical reconstructions."},
+  {t:"A patient presenting with flank pain, hematuria, and a history of blunt trauma to the side of the abdomen is highly suspected of having an injury to which organ?",o:["Stomach","Spleen","Kidney","Transverse colon"],a:2,topic:"Abdominal Trauma",exp:"The kidneys are retroperitoneal organs located in the flanks; trauma presents with localized flank pain and blood in the urine."},
+
+  // ── Blood Transfusion ──────────────────────────────────────────────────────
   {t:"What are the three components required for a blood transfusion crossmatch procedure?",o:["Patient's urine, donor's plasma, and synthetic saline.","Patient's serum, donor's red blood cells, and an anti-human globulin reagent.","Patient's platelets, donor's white blood cells, and heparin.","Patient's whole blood, donor's bone marrow, and warm water."],a:1,topic:"Blood Transfusion",exp:"Crossmatching mixes the recipient's serum with donor red cells to ensure no pre-existing antibodies attack the transfused blood."},
   {t:"Which blood product contains high concentrations of Fibrinogen, Von Willebrand Factor, and Factor VIII, and is used to correct severe coagulopathy?",o:["Packed Red Blood Cells (PRBCs)","Liquid Albumin 25%","Cryoprecipitate","Fresh Frozen Plasma (FFP) alone"],a:2,topic:"Blood Transfusion",exp:"Cryoprecipitate is prepared from FFP and specifically concentrates fibrinogen and key clotting factors."},
   {t:"During a Massive Transfusion Protocol (MTP), blood products are ideally delivered in what ratio to mimic whole blood?",o:["5 units PRBCs : 1 unit FFP : 0 units Platelets","10 units PRBCs : 2 units FFP : 1 unit Platelets","A balanced 1:1:1 ratio of PRBCs, FFP, and Platelets.","1 unit PRBCs : 5 units FFP : 5 units Platelets"],a:2,topic:"Blood Transfusion",exp:"Modern damage control resuscitation utilizes a 1:1:1 balanced ratio to prevent dilutional coagulopathy."},
   {t:"What is the first and most critical action a nurse must take if a patient demonstrates signs of an acute hemolytic transfusion reaction?",o:["Slow down the infusion rate and re-check the vitals in 30 minutes.","Immediately stop the blood transfusion and disconnect the tubing at the hub.","Administer intramuscular low-molecular-weight heparin.","Elevate the patient's head and continue the transfusion."],a:1,topic:"Blood Transfusion",exp:"At the first sign of an adverse reaction, the transfusion must be stopped immediately to limit the volume of incompatible blood delivered."},
-  {t:"A patient presenting with flank pain, hematuria, and a history of blunt trauma to the side of the abdomen is highly suspected of having an injury to which organ?",o:["Stomach","Spleen","Kidney","Transverse colon"],a:2,topic:"Abdominal Trauma",exp:"The kidneys are retroperitoneal organs located in the flanks; trauma presents with localized flank pain and blood in the urine."},
   {t:"Why must blood products be transfused through a specialized administration set containing an in-line filter?",o:["To chemically neutralize residual anesthetic gases.","To clear blood clots, aggregated platelets, and cellular debris from entering the patient.","To warm the blood to body temperature automatically.","To increase the velocity of fluid flow through the line."],a:1,topic:"Blood Transfusion",exp:"Standard blood filters (typically 170-200 microns) trap fibrin clots and cellular aggregates formed during storage."},
   {t:"What is the maximum safe time window allowed for a single unit of Packed Red Blood Cells to hang and infuse once removed from the blood bank refrigerator?",o:["1 hour","2 hours","4 hours","12 hours"],a:2,topic:"Blood Transfusion",exp:"To reduce the risk of bacterial proliferation at room temperature, a blood unit must not hang longer than 4 hours."},
   {t:"A trauma patient with severe intra-abdominal hemorrhage becomes hypothermic (<35°C). How does this hypothermia directly exacerbate bleeding?",o:["It accelerates the operational speed of the liver enzymes.","It severely inhibits the enzymatic activity of the clotting cascade and impairs platelet function.","It causes direct systemic arterial hypertension.","It converts fibrinogen into plasma proteins instantly."],a:1,topic:"Blood Transfusion",exp:"Coagulation cascade enzymes are highly temperature-dependent; hypothermia directly impairs clotting efficiency, worsening hemorrhage."},
+
+  // ── Thyroid ────────────────────────────────────────────────────────────────
+  {t:"The most common cause of hyperthyroidism is:",o:["Toxic adenoma","Graves' disease","Thyroiditis","Thyroid carcinoma"],a:1,topic:"Thyroid",exp:"Graves' disease is an autoimmune condition and the most common cause of hyperthyroidism worldwide."},
+  {t:"The functional unit of the thyroid gland is:",o:["Acinus","Follicle","Lobule","Sinusoid"],a:1,topic:"Thyroid",exp:"The thyroid follicle is the basic structural and functional unit, lined by follicular cells and filled with colloid."},
+  {t:"The most common thyroid malignancy is:",o:["Follicular carcinoma","Medullary carcinoma","Papillary carcinoma","Anaplastic carcinoma"],a:2,topic:"Thyroid",exp:"Papillary thyroid carcinoma accounts for approximately 80% of all thyroid cancers."},
+  {t:"Thyroid gland moves during swallowing because it is attached to:",o:["Sternocleidomastoid muscle","Trachea and larynx","Carotid sheath","Platysma"],a:1,topic:"Thyroid",exp:"The thyroid is enclosed by pretracheal fascia and attached to the trachea and larynx, hence it rises with swallowing."},
+  {t:"The main hormone produced by parafollicular cells is:",o:["Thyroxine","T3","Calcitonin","Parathyroid hormone"],a:2,topic:"Thyroid",exp:"Parafollicular (C) cells secrete calcitonin, which lowers serum calcium."},
+  {t:"Hoarseness of voice in thyroid disease suggests involvement of:",o:["Hypoglossal nerve","Recurrent laryngeal nerve","Facial nerve","Glossopharyngeal nerve"],a:1,topic:"Thyroid",exp:"The recurrent laryngeal nerve innervates the vocal cords; compression or injury causes hoarseness."},
+  {t:"The first investigation for thyroid function assessment is:",o:["Serum TSH","CT neck","Serum calcium","PET scan"],a:0,topic:"Thyroid",exp:"TSH is the most sensitive indicator of thyroid function and is the first-line test."},
+  {t:"A solitary thyroid nodule is malignant in approximately:",o:["1%","5–10%","50%","80%"],a:1,topic:"Thyroid",exp:"Approximately 5–10% of solitary thyroid nodules harbor malignancy."},
+  {t:"Fine needle aspiration cytology (FNAC) is mainly used to:",o:["Treat goiter","Assess thyroid function","Diagnose thyroid nodules","Measure iodine uptake"],a:2,topic:"Thyroid",exp:"FNAC is the primary tool for cytological diagnosis of thyroid nodules."},
+  {t:"The most common cause of hypothyroidism worldwide is:",o:["Graves' disease","Iodine deficiency","Thyroid cancer","Hyperparathyroidism"],a:1,topic:"Thyroid",exp:"Iodine deficiency remains the leading global cause of hypothyroidism and goiter."},
+  {t:"Exophthalmos is classically associated with:",o:["Toxic multinodular goiter","Graves' disease","Hashimoto thyroiditis","Follicular adenoma"],a:1,topic:"Thyroid",exp:"Graves' disease causes proptosis/exophthalmos due to retroorbital inflammatory infiltration."},
+  {t:"The blood supply of the thyroid gland mainly arises from:",o:["Facial artery","Superior and inferior thyroid arteries","Lingual artery","Vertebral artery"],a:1,topic:"Thyroid",exp:"The superior thyroid artery (from external carotid) and inferior thyroid artery (from thyrocervical trunk) supply the thyroid."},
+  {t:"Which thyroid carcinoma commonly spreads via lymphatics?",o:["Follicular carcinoma","Papillary carcinoma","Anaplastic carcinoma","Medullary carcinoma"],a:1,topic:"Thyroid",exp:"Papillary carcinoma has a propensity for lymphatic spread to regional cervical lymph nodes."},
+  {t:"Follicular thyroid carcinoma commonly spreads through:",o:["Lymphatics","Direct extension only","Bloodstream","CSF"],a:2,topic:"Thyroid",exp:"Follicular carcinoma characteristically spreads hematogenously to lungs and bone."},
+  {t:"Medullary thyroid carcinoma arises from:",o:["Follicular cells","Parafollicular C cells","Lymphocytes","Fibroblasts"],a:1,topic:"Thyroid",exp:"Medullary carcinoma originates from parafollicular C cells and secretes calcitonin."},
+  {t:"Which investigation is best for vocal cord assessment before thyroid surgery?",o:["Ultrasound","Laryngoscopy","MRI","PET scan"],a:1,topic:"Thyroid",exp:"Direct laryngoscopy visualizes the vocal cords and assesses recurrent laryngeal nerve function pre-operatively."},
+  {t:"Thyroid storm is characterized by:",o:["Severe hypothyroidism","Acute life-threatening thyrotoxicosis","Benign thyroid enlargement","Hypercalcemia only"],a:1,topic:"Thyroid",exp:"Thyroid storm is an extreme, life-threatening exacerbation of hyperthyroidism with high fever, tachycardia, and altered mentation."},
+  {t:"The most common complication after thyroidectomy is:",o:["Tracheal injury","Hemorrhage/hematoma","Esophageal perforation","Pneumothorax"],a:1,topic:"Thyroid",exp:"Post-thyroidectomy hemorrhage/hematoma is the most common early complication and can be life-threatening."},
+  {t:"Trousseau sign after thyroidectomy indicates:",o:["Hyperkalemia","Hypocalcemia","Hyperthyroidism","Recurrent laryngeal nerve injury"],a:1,topic:"Thyroid",exp:"Trousseau sign (carpal spasm with BP cuff inflation) indicates hypocalcemia from accidental parathyroid removal."},
+  {t:"Hashimoto thyroiditis is associated with:",o:["Hyperparathyroidism","Autoimmune hypothyroidism","Medullary carcinoma only","Pituitary adenoma"],a:1,topic:"Thyroid",exp:"Hashimoto's is a chronic autoimmune thyroiditis leading to progressive hypothyroidism."},
+  {t:"Which thyroid carcinoma has the best prognosis?",o:["Anaplastic carcinoma","Medullary carcinoma","Papillary carcinoma","Poorly differentiated carcinoma"],a:2,topic:"Thyroid",exp:"Papillary carcinoma has an excellent prognosis with >95% 10-year survival in most cases."},
+  {t:"Injury to both recurrent laryngeal nerves may result in:",o:["Dysphagia only","Airway obstruction","Hypercalcemia","Tongue deviation"],a:1,topic:"Thyroid",exp:"Bilateral RLN injury causes bilateral vocal cord paralysis leading to severe airway obstruction."},
+  {t:"Which thyroid cancer is associated with amyloid stroma?",o:["Papillary carcinoma","Follicular carcinoma","Medullary carcinoma","Anaplastic carcinoma"],a:2,topic:"Thyroid",exp:"Medullary carcinoma deposits amyloid derived from calcitonin in the stroma."},
+  {t:"Orphan Annie eye nuclei are characteristic of:",o:["Follicular carcinoma","Medullary carcinoma","Papillary carcinoma","Lymphoma"],a:2,topic:"Thyroid",exp:"Papillary carcinoma shows characteristic empty-appearing 'Orphan Annie eye' nuclei on histology."},
+  {t:"A 'cold' thyroid nodule on radionuclide scan is:",o:["Always benign","Hyperfunctioning","More suspicious for malignancy","Diagnostic of Graves' disease"],a:2,topic:"Thyroid",exp:"Cold nodules do not take up radioiodine and carry a higher risk of malignancy compared to hot nodules."},
+  {t:"The external branch of superior laryngeal nerve is closely related to:",o:["Inferior thyroid artery","Superior thyroid artery","Middle thyroid vein","Internal jugular vein"],a:1,topic:"Thyroid",exp:"The external branch of the SLN runs close to the superior thyroid artery and may be injured during ligation."},
+  {t:"Which syndrome is associated with medullary thyroid carcinoma?",o:["MEN syndrome","Marfan syndrome","Turner syndrome","Down syndrome"],a:0,topic:"Thyroid",exp:"Medullary thyroid carcinoma is associated with MEN2A and MEN2B syndromes."},
+  {t:"Post-thyroidectomy stridor occurring immediately after surgery is most concerning for:",o:["Wound infection","Neck hematoma","Hypocalcemia","Pneumonia"],a:1,topic:"Thyroid",exp:"Immediate post-op stridor suggests expanding neck hematoma compressing the trachea — a surgical emergency."},
+
+  // ── Breast ─────────────────────────────────────────────────────────────────
+  {t:"The most common benign breast lesion in young females is:",o:["Fibroadenoma","Duct ectasia","Fat necrosis","Breast abscess"],a:0,topic:"Breast",exp:"Fibroadenoma is the most common benign breast tumor in young women, typically presenting as a mobile, rubbery lump."},
+  {t:"The most common site of breast carcinoma is:",o:["Lower inner quadrant","Upper outer quadrant","Retroareolar region","Lower outer quadrant"],a:1,topic:"Breast",exp:"The upper outer quadrant contains the most glandular tissue and is the most common site for breast carcinoma."},
+  {t:"The lymphatic drainage of the breast mainly goes to:",o:["Cervical nodes","Inguinal nodes","Axillary lymph nodes","Popliteal nodes"],a:2,topic:"Breast",exp:"The axillary lymph nodes receive the majority (~75%) of breast lymphatic drainage."},
+  {t:"Peau d'orange appearance is caused by:",o:["Fat hypertrophy","Lymphatic obstruction","Venous thrombosis","Infection only"],a:1,topic:"Breast",exp:"Lymphatic obstruction causes skin edema; the tethering of sweat gland ducts creates an orange-peel texture."},
+  {t:"Nipple retraction in breast cancer occurs due to:",o:["Skin edema","Lactational changes","Fibrosis and traction on lactiferous ducts","Increased fat deposition"],a:2,topic:"Breast",exp:"Tumor-induced fibrosis shortens and tethers the lactiferous ducts, pulling the nipple inward."},
+  {t:"The most common histological type of breast cancer is:",o:["Lobular carcinoma","Medullary carcinoma","Invasive ductal carcinoma","Mucinous carcinoma"],a:2,topic:"Breast",exp:"Invasive ductal carcinoma (IDC/NST) accounts for approximately 70–80% of all breast cancers."},
+  {t:"Bloody nipple discharge is most commonly caused by:",o:["Fibroadenoma","Intraductal papilloma","Fat necrosis","Mastitis"],a:1,topic:"Breast",exp:"Intraductal papilloma is the most common cause of bloody/serous nipple discharge in women."},
+  {t:"Breast abscess is most commonly associated with:",o:["Postmenopausal women","Lactation","Breast cancer","Trauma"],a:1,topic:"Breast",exp:"Lactational mastitis progressing to abscess formation is the most common scenario."},
+  {t:"The best screening tool for breast cancer is:",o:["CT scan","Mammography","PET scan","MRI in all patients"],a:1,topic:"Breast",exp:"Mammography is the gold-standard screening modality for breast cancer in women over 40."},
+  {t:"Triple assessment of breast lump includes:",o:["Clinical examination, imaging, biopsy","MRI, CT, PET","Blood test, X-ray, biopsy","Observation only"],a:0,topic:"Breast",exp:"Triple assessment combines clinical examination, imaging (mammography/US), and tissue sampling (FNAC/core biopsy)."},
+  {t:"Fibrocystic disease commonly presents with:",o:["Painless fixed lump","Cyclical breast pain","Bloody discharge only","Axillary sinus"],a:1,topic:"Breast",exp:"Fibrocystic change classically presents with cyclical mastalgia that worsens premenstrually."},
+  {t:"Sentinel lymph node biopsy is mainly used to:",o:["Diagnose fibroadenoma","Assess axillary nodal metastasis","Treat mastitis","Prevent recurrence completely"],a:1,topic:"Breast",exp:"SLNB identifies the first-draining lymph node from the tumor to determine nodal status without full axillary dissection."},
+  {t:"Which receptor positivity is associated with hormonal therapy response?",o:["HER2 only","Estrogen receptor","Ki-67 only","BRCA mutation only"],a:1,topic:"Breast",exp:"Estrogen receptor (ER) positive tumors respond to endocrine therapies such as tamoxifen or aromatase inhibitors."},
+  {t:"Paget disease of the nipple is associated with:",o:["Tuberculosis","Underlying breast carcinoma","Trauma","Lipoma"],a:1,topic:"Breast",exp:"Paget disease of the nipple represents an eczematous change of the nipple-areola complex associated with underlying DCIS or invasive carcinoma."},
+  {t:"The most common breast malignancy in males is:",o:["Sarcoma","Lobular carcinoma","Invasive ductal carcinoma","Phyllodes tumor"],a:2,topic:"Breast",exp:"Invasive ductal carcinoma is also the most common breast cancer in males."},
+  {t:"Which breast lesion has a 'breast mouse' feel on palpation?",o:["Carcinoma","Fibroadenoma","Abscess","Fat necrosis"],a:1,topic:"Breast",exp:"Fibroadenoma is well-circumscribed, smooth, and highly mobile — hence termed 'breast mouse'."},
+  {t:"Orange peel appearance in carcinoma breast indicates involvement of:",o:["Skin lymphatics","Cooper ligaments only","Lactiferous ducts","Pectoralis major"],a:0,topic:"Breast",exp:"Blockage of dermal lymphatics causes interstitial edema and the peau d'orange (orange peel) appearance."},
+  {t:"Which of the following is a risk factor for breast cancer?",o:["Early first pregnancy","Multiparity","Late menopause","Breastfeeding"],a:2,topic:"Breast",exp:"Late menopause (>55 years) prolongs estrogen exposure, increasing breast cancer risk."},
+  {t:"The most important prognostic factor in breast cancer is:",o:["Tumor color","Axillary lymph node status","Breast size","Patient occupation"],a:1,topic:"Breast",exp:"Axillary lymph node involvement is the single most important prognostic factor in breast cancer."},
+  {t:"HER2-positive breast cancer is treated with:",o:["Tamoxifen only","Metformin","Trastuzumab","Aspirin"],a:2,topic:"Breast",exp:"Trastuzumab (Herceptin) is a monoclonal antibody targeting HER2-positive breast cancer."},
+  {t:"A hard irregular breast lump fixed to skin is most suggestive of:",o:["Fibroadenoma","Breast cyst","Carcinoma breast","Fat necrosis only"],a:2,topic:"Breast",exp:"Malignant breast tumors are characteristically hard, irregular, and may be fixed to skin or deep structures."},
+  {t:"Which of the following is TRUE regarding inflammatory breast cancer?",o:["It is usually benign","Presents with peau d'orange and erythema","Has excellent prognosis","Rarely involves lymphatics"],a:1,topic:"Breast",exp:"Inflammatory breast cancer causes rapid lymphatic invasion, presenting with erythema, warmth, and peau d'orange."},
+  {t:"BRCA1 mutation significantly increases risk of:",o:["Thyroid cancer only","Breast and ovarian cancers","Colon cancer only","Liver cancer"],a:1,topic:"Breast",exp:"BRCA1 mutations confer a lifetime risk of ~55–72% for breast cancer and ~44% for ovarian cancer."},
+  {t:"The tail of Spence extends into the:",o:["Neck","Axilla","Mediastinum","Abdomen"],a:1,topic:"Breast",exp:"The axillary tail (tail of Spence) is breast tissue extending into the axilla through an opening in the deep fascia."},
+  {t:"Which condition may mimic carcinoma clinically and radiologically?",o:["Fat necrosis","Galactocele","Simple cyst","Duct ectasia only"],a:0,topic:"Breast",exp:"Fat necrosis can present as a hard, irregular, skin-fixed lump with calcifications on mammography, mimicking carcinoma."},
+  {t:"Invasive lobular carcinoma is characteristically:",o:["Always unilateral","Frequently bilateral and multicentric","Associated with abscess formation","Rarely hormone sensitive"],a:1,topic:"Breast",exp:"Invasive lobular carcinoma has a higher tendency for bilaterality and multicentricity compared to ductal carcinoma."},
+  {t:"The preferred investigation for a breast lump in women under 35 years is:",o:["Mammography","Ultrasound breast","PET scan","Bone scan"],a:1,topic:"Breast",exp:"Ultrasound is preferred in women under 35 because dense glandular tissue reduces mammographic sensitivity."},
+  {t:"Which molecular subtype has the worst prognosis?",o:["Luminal A","Luminal B","Triple-negative breast cancer","ER-positive tumors"],a:2,topic:"Breast",exp:"Triple-negative breast cancer (ER-, PR-, HER2-) lacks targeted therapy options and has the worst prognosis."},
+  {t:"Skin dimpling in breast carcinoma is due to involvement of:",o:["Lactiferous sinuses","Cooper's ligaments","Pectoralis fascia only","Axillary vein"],a:1,topic:"Breast",exp:"Tumor infiltration shortens Cooper's ligaments, tethering the overlying skin and causing visible dimpling."},
+  {t:"The standard modified radical mastectomy includes removal of:",o:["Breast only","Breast with pectoralis major","Breast with axillary lymph node dissection preserving pectoralis major","Breast with clavicle"],a:2,topic:"Breast",exp:"Modified radical mastectomy removes the breast and axillary nodes while preserving both pectoral muscles."},
+
+  // ── Intestinal Obstruction ─────────────────────────────────────────────────
+  {t:"The most common cause of small bowel obstruction in adults is:",o:["Hernia","Adhesions","Volvulus","Intussusception"],a:1,topic:"Intestinal Obstruction",exp:"Post-surgical adhesions are the leading cause of small bowel obstruction in adults."},
+  {t:"The cardinal symptoms of intestinal obstruction include all EXCEPT:",o:["Abdominal pain","Vomiting","Constipation","Hematemesis"],a:3,topic:"Intestinal Obstruction",exp:"Hematemesis (vomiting blood) is not a cardinal feature of intestinal obstruction."},
+  {t:"Colicky abdominal pain is most characteristic of:",o:["Paralytic ileus","Mechanical intestinal obstruction","Peritonitis","Appendicitis"],a:1,topic:"Intestinal Obstruction",exp:"Mechanical obstruction causes intermittent peristaltic waves against the obstruction, producing colicky pain."},
+  {t:"Absolute constipation means absence of:",o:["Stool only","Flatus only","Stool and flatus","Urine"],a:2,topic:"Intestinal Obstruction",exp:"Absolute constipation (obstipation) means no passage of stool or flatus, indicating complete obstruction."},
+  {t:"The most common cause of large bowel obstruction is:",o:["Adhesions","Colorectal carcinoma","Hernia","Gallstones"],a:1,topic:"Intestinal Obstruction",exp:"Colorectal carcinoma accounts for approximately 60% of all large bowel obstructions."},
+  {t:"High small bowel obstruction usually presents with:",o:["Marked abdominal distension","Early profuse vomiting","Severe rectal bleeding","Tenesmus"],a:1,topic:"Intestinal Obstruction",exp:"High (proximal) small bowel obstruction presents early with profuse bilious vomiting and minimal distension."},
+  {t:"In intestinal obstruction, abdominal distension is most marked in:",o:["Gastric outlet obstruction","High jejunal obstruction","Large bowel obstruction","Duodenal ulcer"],a:2,topic:"Intestinal Obstruction",exp:"The entire colon distends in large bowel obstruction, producing marked abdominal distension."},
+  {t:"Which imaging finding is typical of intestinal obstruction?",o:["Ground glass appearance","Air-fluid levels","Pneumothorax","Free subdiaphragmatic gas only"],a:1,topic:"Intestinal Obstruction",exp:"Air-fluid levels on upright abdominal X-ray are the classic radiological sign of intestinal obstruction."},
+  {t:"Paralytic ileus is characterized by:",o:["Hyperactive bowel sounds","Mechanical blockage","Absent bowel sounds","Bloody diarrhea"],a:2,topic:"Intestinal Obstruction",exp:"In paralytic ileus, bowel motility is absent, resulting in silent (absent) bowel sounds on auscultation."},
+  {t:"The first step in management of intestinal obstruction is:",o:["Immediate laparotomy in all cases","IV fluids and resuscitation","Colonoscopy","Oral laxatives"],a:1,topic:"Intestinal Obstruction",exp:"Initial management priorities are fluid resuscitation and electrolyte correction before any further intervention."},
+  {t:"The most common cause of intestinal obstruction in children is:",o:["Adhesions","Volvulus","Intussusception","Carcinoma"],a:2,topic:"Intestinal Obstruction",exp:"Intussusception is the most common cause of intestinal obstruction in children aged 3 months to 6 years."},
+  {t:"Strangulation in intestinal obstruction implies:",o:["Partial obstruction only","Vascular compromise of bowel","Simple constipation","Gastric perforation"],a:1,topic:"Intestinal Obstruction",exp:"Strangulation means the blood supply to the obstructed bowel is compromised, leading to ischemia and necrosis."},
+  {t:"Pain out of proportion with tachycardia and fever suggests:",o:["Simple obstruction","Gastroenteritis","Strangulated obstruction","IBS"],a:2,topic:"Intestinal Obstruction",exp:"These signs indicate bowel ischemia/strangulation — a surgical emergency."},
+  {t:"The most common site of volvulus in adults is:",o:["Cecum","Jejunum","Sigmoid colon","Transverse colon"],a:2,topic:"Intestinal Obstruction",exp:"Sigmoid volvulus accounts for the majority of colonic volvulus cases in adults."},
+  {t:"Coffee bean sign on abdominal X-ray is seen in:",o:["Intussusception","Sigmoid volvulus","Paralytic ileus","Duodenal obstruction"],a:1,topic:"Intestinal Obstruction",exp:"The coffee bean sign is a classic X-ray finding of sigmoid volvulus — a large inverted U-shaped loop."},
+  {t:"In intussusception, the classic triad includes:",o:["Pain, vomiting, jaundice","Fever, constipation, distension","Colicky pain, red currant jelly stool, palpable mass","Diarrhea, hematemesis, weight loss"],a:2,topic:"Intestinal Obstruction",exp:"Intussusception classically presents with colicky abdominal pain, passage of red currant jelly stool (blood-mixed mucus), and a palpable sausage-shaped mass."},
+  {t:"The most common electrolyte abnormality in prolonged vomiting due to obstruction is:",o:["Hyperkalemia","Metabolic acidosis","Hypochloremic metabolic alkalosis","Hypernatremia"],a:2,topic:"Intestinal Obstruction",exp:"Loss of HCl-rich gastric contents causes hypochloremic hypokalemic metabolic alkalosis."},
+  {t:"Closed loop obstruction is dangerous because it:",o:["Always resolves spontaneously","Leads rapidly to strangulation","Causes diarrhea only","Never requires surgery"],a:1,topic:"Intestinal Obstruction",exp:"In a closed loop, both ends are obstructed — pressure rises rapidly causing ischemia and strangulation."},
+  {t:"Which of the following is a cause of paralytic ileus?",o:["Adhesions","Hernia","Peritonitis","Volvulus"],a:2,topic:"Intestinal Obstruction",exp:"Peritonitis inhibits bowel motility via inflammatory mediators, producing a functional (paralytic) ileus."},
+  {t:"String of beads sign on imaging suggests:",o:["Gallstones","Small bowel obstruction","Gastric cancer","Colitis"],a:1,topic:"Intestinal Obstruction",exp:"The string of beads sign (small gas pockets in fluid-filled loops) is seen on X-ray in small bowel obstruction."},
+  {t:"The most sensitive imaging modality for intestinal obstruction is:",o:["Plain abdominal X-ray","Ultrasound","CT abdomen with contrast","MRI brain"],a:2,topic:"Intestinal Obstruction",exp:"CT abdomen with contrast has the highest sensitivity and specificity for diagnosing intestinal obstruction and its complications."},
+  {t:"A competent ileocecal valve in large bowel obstruction may lead to:",o:["Decompression into small bowel","Cecal perforation","Early diarrhea","Reduced distension"],a:1,topic:"Intestinal Obstruction",exp:"A competent ileocecal valve prevents retrograde decompression, leading to progressive cecal distension and risk of perforation."},
+  {t:"Which feature most strongly indicates strangulation?",o:["Colicky pain only","Central abdominal distension","Leukocytosis with metabolic acidosis","Constipation"],a:2,topic:"Intestinal Obstruction",exp:"Leukocytosis combined with metabolic acidosis indicates bowel ischemia and strangulation."},
+  {t:"Gallstone ileus commonly causes obstruction at:",o:["Duodenum","Jejunum","Terminal ileum","Rectum"],a:2,topic:"Intestinal Obstruction",exp:"The terminal ileum is the narrowest part of the small bowel where a large gallstone typically lodges."},
+  {t:"Rigler's triad includes:",o:["Pneumobilia, SBO, ectopic gallstone","Air-fluid level, ascites, volvulus","Pneumoperitoneum, fever, vomiting","Cecal dilatation, diarrhea, obstruction"],a:0,topic:"Intestinal Obstruction",exp:"Rigler's triad of gallstone ileus: pneumobilia (air in bile ducts), small bowel obstruction, and ectopic gallstone."},
+  {t:"Which type of hernia is most prone to strangulation?",o:["Direct inguinal hernia","Femoral hernia","Umbilical hernia","Incisional hernia"],a:1,topic:"Intestinal Obstruction",exp:"Femoral hernias have a narrow, rigid neck and the highest rate of strangulation among common hernias."},
+  {t:"In adhesive small bowel obstruction without strangulation, initial treatment is:",o:["Immediate bowel resection","Conservative management with NG decompression","Total colectomy","Oral feeding"],a:1,topic:"Intestinal Obstruction",exp:"Conservative management (IV fluids, NG decompression, nil by mouth) resolves most adhesive SBO without surgery."},
+  {t:"Cecal volvulus is commonly associated with:",o:["Fixed retroperitoneal cecum","Mobile cecum","Rectal carcinoma","Duodenal ulcer"],a:1,topic:"Intestinal Obstruction",exp:"Cecal volvulus requires an abnormally mobile cecum that is not fixed to the retroperitoneum."},
+  {t:"Which bowel diameter is concerning for impending cecal perforation?",o:[">4 cm",">6 cm",">9 cm",">12 cm"],a:3,topic:"Intestinal Obstruction",exp:"A cecal diameter >12 cm carries a high risk of perforation and requires urgent decompression."},
+  {t:"In strangulated intestinal obstruction, the sequence is:",o:["Venous obstruction → arterial obstruction → gangrene","Arterial obstruction → venous obstruction → recovery","Paralysis → diarrhea → recovery","Obstruction → jaundice → perforation"],a:0,topic:"Intestinal Obstruction",exp:"Strangulation begins with venous obstruction causing edema, then progresses to arterial occlusion and gangrenous necrosis."},
 ];
 
 const TOPIC_COLORS = {
-  "Wound Healing":       "#2563eb",
-  "Surgical Infections": "#16a34a",
-  "Shock":               "#dc2626",
-  "Abdominal Trauma":    "#7c3aed",
-  "Blood Transfusion":   "#d97706",
+  "Wound Healing":            "#2563eb",
+  "Surgical Infections":      "#16a34a",
+  "Shock":                    "#dc2626",
+  "Abdominal Trauma":         "#7c3aed",
+  "Blood Transfusion":        "#d97706",
+  "Thyroid":                  "#0891b2",
+  "Breast":                   "#db2777",
+  "Intestinal Obstruction":   "#65a30d",
 };
 
 const TOPICS = ["All", ...Object.keys(TOPIC_COLORS)];
@@ -483,7 +571,7 @@ const LETTERS = ['A','B','C','D','E','F'];
 
 let activeTopic = "All";
 let questions, i, correct, wrong, answers, wrongSet, answered;
-let totalTime = 60*60, timeLeft, timerInterval;
+let totalTime = 150*60, timeLeft, timerInterval;
 
 function getPool() {
   return activeTopic === "All" ? ALL_QUESTIONS : ALL_QUESTIONS.filter(q => q.topic === activeTopic);
@@ -491,30 +579,23 @@ function getPool() {
 
 function shuffle(arr) {
   const a = [...arr];
-  for (let i = a.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [a[i], a[j]] = [a[j], a[i]];
+  for (let j = a.length - 1; j > 0; j--) {
+    const k = Math.floor(Math.random() * (j + 1));
+    [a[j], a[k]] = [a[k], a[j]];
   }
   return a;
 }
 
-/* ============ SHUFFLE OPTIONS ============ */
 function shuffleOptions(q) {
   const correctText = q.o[q.a];
   const indexed = [...q.o];
-
-  for (let i = indexed.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [indexed[i], indexed[j]] = [indexed[j], indexed[i]];
+  for (let j = indexed.length - 1; j > 0; j--) {
+    const k = Math.floor(Math.random() * (j + 1));
+    [indexed[j], indexed[k]] = [indexed[k], indexed[j]];
   }
-
-  return {
-    ...q,
-    o: indexed,
-    a: indexed.indexOf(correctText)
-  };
+  return { ...q, o: indexed, a: indexed.indexOf(correctText) };
 }
-/* BUILD TOPIC BUTTONS */
+
 function buildTopics() {
   const wrap = document.getElementById('topicsWrap');
   wrap.innerHTML = '';
@@ -524,6 +605,10 @@ function buildTopics() {
     btn.className = 'topic-btn' + (t === activeTopic ? ' active' : '');
     btn.dataset.topic = t;
     btn.textContent = (t === "All" ? "✦ الكل" : t) + ` (${count})`;
+    const color = TOPIC_COLORS[t] || '#2563eb';
+    if (t === activeTopic) {
+      btn.style.background = t === "All" ? '#2563eb' : color;
+    }
     btn.onclick = () => {
       activeTopic = t;
       buildTopics();
@@ -533,9 +618,8 @@ function buildTopics() {
   });
 }
 
-/* INIT */
 function init(pool) {
-questions = shuffle(pool).map(shuffleOptions);
+  questions = shuffle(pool).map(shuffleOptions);
   i = 0; correct = 0; wrong = 0;
   answers = new Array(questions.length).fill(null);
   wrongSet = []; answered = 0;
@@ -545,7 +629,6 @@ questions = shuffle(pool).map(shuffleOptions);
   render();
 }
 
-/* TIMER */
 function startTimer() {
   clearInterval(timerInterval);
   timerInterval = setInterval(() => {
@@ -559,7 +642,6 @@ function startTimer() {
   }, 1000);
 }
 
-/* TOP UI */
 function updateTop() {
   const total = questions.length;
   document.getElementById('sCorrect').textContent = correct;
@@ -570,16 +652,15 @@ function updateTop() {
   document.getElementById('prog-bar').style.width = ((i + 1) / total * 100) + '%';
 }
 
-/* RENDER */
 function render() {
   updateTop();
   const q = questions[i];
   const tc = TOPIC_COLORS[q.topic] || '#2563eb';
   document.getElementById('app').innerHTML = `
     <div class="q-card">
-      <div class="q-header">
+      <div class="q-header" style="background:linear-gradient(135deg,${tc}dd,${tc})">
         <div class="q-num">سؤال ${i + 1} / ${questions.length}</div>
-        <div class="q-topic-badge" style="background:rgba(255,255,255,.25)">${q.topic}</div>
+        <div class="q-topic-badge">${q.topic}</div>
       </div>
       <div class="q-text">${q.t}</div>
       <div class="options">
@@ -596,7 +677,6 @@ function render() {
     </div>`;
 }
 
-/* CHOOSE */
 function choose(v) {
   if (answers[i] !== null) return;
   answers[i] = v; answered++;
@@ -646,7 +726,6 @@ function next() {
   else finish();
 }
 
-/* FINISH */
 function finish() {
   clearInterval(timerInterval);
   const total = questions.length;
@@ -658,10 +737,10 @@ function finish() {
   wrongSet = [...new Map(wrongSet.map(q => [q.t, q])).values()];
 
   let grade, gradeColor;
-  if (score >= 90)      { grade = '🥇 ممتاز';       gradeColor = 'var(--success)'; }
-  else if (score >= 75) { grade = '🥈 جيد جداً';    gradeColor = 'var(--accent)';  }
-  else if (score >= 60) { grade = '🥉 جيد';         gradeColor = 'var(--warn)';    }
-  else                  { grade = '📚 راجع تاني';   gradeColor = 'var(--danger)';  }
+  if (score >= 90)      { grade = '🥇 ممتاز';     gradeColor = 'var(--success)'; }
+  else if (score >= 75) { grade = '🥈 جيد جداً';  gradeColor = 'var(--accent)';  }
+  else if (score >= 60) { grade = '🥉 جيد';       gradeColor = 'var(--warn)';    }
+  else                  { grade = '📚 راجع تاني'; gradeColor = 'var(--danger)';  }
 
   const circ = 2 * Math.PI * 45;
   const offset = circ - (score / 100) * circ;
@@ -724,7 +803,6 @@ function retryWrong() {
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
-/* THEME */
 const themeBtn = document.getElementById('themeBtn');
 let theme = localStorage.getItem('theme') || 'light';
 function applyTheme(t) {
@@ -736,7 +814,6 @@ function applyTheme(t) {
 applyTheme(theme);
 themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
 
-/* START */
 buildTopics();
 init(getPool());
 </script>
