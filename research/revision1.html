@@ -1,0 +1,829 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GAITH TEAM – Research Quiz</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  /* Multi-color gradient palette: teal → violet → rose */
+  --c1: #0ea5e9;   /* sky blue */
+  --c2: #6366f1;   /* indigo */
+  --c3: #a855f7;   /* violet */
+  --c4: #ec4899;   /* pink */
+
+  --accent:       #6366f1;
+  --accent-light: #a5b4fc;
+  --accent-dark:  #4338ca;
+  --accent-glow:  rgba(99,102,241,0.18);
+
+  --grad-main: linear-gradient(135deg, #0ea5e9, #6366f1, #a855f7);
+  --grad-btn:  linear-gradient(135deg, #6366f1, #a855f7, #ec4899);
+  --grad-hero: linear-gradient(135deg, #0c4a6e, #312e81, #581c87);
+
+  --bg:   #f5f3ff;
+  --bg2:  #ede9fe;
+  --card: #ffffff;
+  --text: #1e1b4b;
+  --text2:#3730a3;
+  --text3:#6b7280;
+  --bc:   rgba(99,102,241,0.15);
+  --success:#16a34a;
+  --danger: #dc2626;
+  --warn:   #d97706;
+  --r:      16px;
+  --tr:     all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="dark"] {
+  --bg:   #0f0c29; --bg2:#1e1b4b; --card:#252065;
+  --text: #e0e7ff; --text2:#a5b4fc; --text3:#818cf8;
+  --bc:   rgba(165,180,252,0.15);
+  --accent-glow: rgba(165,180,252,0.18);
+}
+
+body {
+  font-family:'Cairo',sans-serif;
+  background:var(--bg); color:var(--text);
+  min-height:100vh; overflow-x:hidden;
+  transition:background .4s,color .4s;
+}
+
+/* Rainbow progress bar */
+#prog-bar {
+  position:fixed; top:0; left:0; height:3px; z-index:999;
+  background: linear-gradient(90deg, var(--c1), var(--c2), var(--c3), var(--c4));
+  transition:width .2s;
+}
+
+/* NAV */
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 28px; height:64px;
+  background:rgba(245,243,255,.95); backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--bc); transition:var(--tr);
+}
+[data-theme="dark"] nav { background:rgba(15,12,41,.97); }
+
+.nav-back {
+  display:flex; align-items:center; gap:7px;
+  color:var(--text2); text-decoration:none; font-size:13px; font-weight:700;
+  padding:7px 13px; border-radius:8px; border:1px solid var(--bc);
+  background:var(--card); transition:var(--tr);
+}
+.nav-back:hover { color:var(--accent); border-color:var(--accent); transform:translateX(-3px); }
+.nav-brand { display:flex; align-items:center; gap:9px; font-size:15px; font-weight:900; color:var(--text); }
+.nav-logo-icon {
+  width:34px; height:34px; border-radius:8px;
+  background:var(--grad-main);
+  display:flex; align-items:center; justify-content:center;
+  color:#fff; font-size:12px; font-weight:900;
+}
+.nav-right { display:flex; align-items:center; gap:8px; }
+.theme-btn {
+  width:38px; height:38px; border-radius:50%; border:1px solid var(--bc);
+  background:var(--card); cursor:pointer; font-size:15px;
+  display:flex; align-items:center; justify-content:center; transition:var(--tr);
+}
+.theme-btn:hover { border-color:var(--accent); transform:rotate(20deg); }
+
+/* HERO */
+.hero-band {
+  margin-top:64px;
+  background:var(--grad-hero);
+  padding:40px 24px 36px; text-align:center;
+  position:relative; overflow:hidden;
+}
+.hero-band::before {
+  content:''; position:absolute; inset:0;
+  background: radial-gradient(ellipse 700px 220px at 50% 100%, rgba(99,102,241,.25) 0%, transparent 70%);
+}
+.hero-band::after {
+  content:''; position:absolute; top:-50px; right:-50px;
+  width:200px; height:200px; border-radius:50%;
+  background:rgba(168,85,247,.12);
+}
+/* Floating color orbs */
+.hero-band .orb1 {
+  position:absolute; width:120px; height:120px; border-radius:50%;
+  background:radial-gradient(circle, rgba(14,165,233,.3), transparent 70%);
+  top:10px; left:10%; pointer-events:none;
+}
+.hero-band .orb2 {
+  position:absolute; width:80px; height:80px; border-radius:50%;
+  background:radial-gradient(circle, rgba(236,72,153,.25), transparent 70%);
+  bottom:10px; right:15%; pointer-events:none;
+}
+.hero-band-icon {
+  width:68px; height:68px; border-radius:20px;
+  background:rgba(255,255,255,.15); backdrop-filter:blur(8px);
+  display:flex; align-items:center; justify-content:center;
+  font-size:30px; margin:0 auto 14px; border:1.5px solid rgba(255,255,255,.3);
+  position:relative; z-index:1;
+}
+.hero-band h1 { font-size:clamp(20px,4vw,30px); font-weight:900; color:#fff; margin-bottom:6px; position:relative; z-index:1; }
+.hero-band p  { font-size:13px; color:rgba(255,255,255,.8); position:relative; z-index:1; }
+.hero-band-meta {
+  display:flex; justify-content:center; gap:14px; margin-top:20px;
+  flex-wrap:wrap; position:relative; z-index:1;
+}
+.meta-pill {
+  background:rgba(255,255,255,.15); backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.3); border-radius:50px;
+  padding:6px 16px; font-size:12px; font-weight:700; color:#fff;
+  display:flex; align-items:center; gap:6px;
+}
+
+/* SHELL */
+.shell { max-width:560px; margin:0 auto; padding:24px 20px 80px; }
+
+/* STATS */
+.stats-row { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:16px; }
+.stat-box {
+  background:var(--card); border:1px solid var(--bc); border-radius:var(--r);
+  padding:12px 10px; text-align:center;
+  box-shadow:0 2px 8px rgba(99,102,241,.08);
+}
+.stat-box .val { font-size:20px; font-weight:900; }
+.stat-box .lbl { font-size:11px; color:var(--text3); margin-top:2px; }
+.stat-correct { color:var(--success); }
+.stat-wrong   { color:var(--danger); }
+.stat-remain  { color:var(--accent); }
+
+/* PROGRESS STRIP */
+.prog-strip {
+  background:var(--card); border:1px solid var(--bc); border-radius:var(--r);
+  padding:14px 16px; margin-bottom:16px;
+  display:flex; align-items:center; gap:14px;
+  box-shadow:0 2px 8px rgba(99,102,241,.08);
+}
+.prog-label { font-size:13px; font-weight:700; color:var(--text2); white-space:nowrap; }
+.prog-track { flex:1; height:8px; background:var(--bg2); border-radius:8px; overflow:hidden; }
+.prog-fill {
+  height:100%; width:0%;
+  background:var(--grad-main);
+  border-radius:8px; transition:width .4s;
+}
+.timer-badge {
+  min-width:64px; height:36px; border-radius:18px;
+  background:var(--bg2); border:1px solid var(--bc);
+  display:flex; align-items:center; justify-content:center;
+  font-size:14px; font-weight:900; color:var(--text);
+  gap:5px; padding:0 12px; flex-shrink:0;
+}
+.timer-badge.warn   { color:var(--warn);   border-color:rgba(217,119,6,.3);   background:rgba(217,119,6,.08); }
+.timer-badge.danger { color:var(--danger); border-color:rgba(220,38,38,.3);   background:rgba(220,38,38,.08); animation:pulse .8s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.6} }
+
+/* QUESTION CARD */
+.q-card {
+  background:var(--card); border:1px solid var(--bc);
+  border-radius:20px; overflow:hidden;
+  box-shadow:0 4px 24px rgba(99,102,241,.12);
+}
+.q-header {
+  background:var(--grad-main);
+  padding:10px 18px;
+  display:flex; align-items:center; gap:8px;
+}
+.q-num {
+  background:rgba(255,255,255,.2); border-radius:8px;
+  padding:3px 10px; font-size:11px; font-weight:700; color:#fff;
+}
+.q-text {
+  padding:22px 18px 14px; font-size:15px; font-weight:700; color:var(--text);
+  line-height:1.65; border-bottom:1px solid var(--bc);
+}
+.options { padding:14px 18px 18px; display:flex; flex-direction:column; gap:10px; }
+
+.opt {
+  display:flex; align-items:center; gap:12px;
+  padding:14px 16px; border-radius:12px;
+  border:1.5px solid var(--bc); background:var(--bg);
+  cursor:pointer; font-size:14px; font-weight:600; color:var(--text);
+  transition:var(--tr); user-select:none;
+}
+.opt:hover:not(.disabled) {
+  border-color:var(--accent); background:var(--accent-glow);
+  transform:translateX(3px);
+}
+.opt-letter {
+  width:28px; height:28px; border-radius:8px; flex-shrink:0;
+  background:var(--bg2); border:1px solid var(--bc);
+  display:flex; align-items:center; justify-content:center;
+  font-size:12px; font-weight:900; color:var(--text3);
+  transition:var(--tr);
+}
+.opt.correct { border-color:var(--success); background:rgba(22,163,74,.08); }
+.opt.correct .opt-letter { background:var(--success); color:#fff; border-color:var(--success); }
+.opt.wrong   { border-color:var(--danger);  background:rgba(220,38,38,.07); }
+.opt.wrong .opt-letter   { background:var(--danger);  color:#fff; border-color:var(--danger); }
+.opt.disabled { pointer-events:none; }
+
+/* FEEDBACK */
+.feedback-bar {
+  margin:14px 18px; padding:12px 16px; border-radius:12px;
+  display:flex; align-items:center; gap:10px;
+  font-size:14px; font-weight:700;
+  animation:popIn .4s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes popIn { from{transform:scale(.8);opacity:0} to{transform:scale(1);opacity:1} }
+.feedback-bar.ok { background:rgba(22,163,74,.1);  color:var(--success); border:1px solid rgba(22,163,74,.25); }
+.feedback-bar.no { background:rgba(220,38,38,.08); color:var(--danger);  border:1px solid rgba(220,38,38,.2); }
+.feedback-icon { font-size:20px; }
+
+.explanation {
+  margin:0 18px 14px; padding:12px 14px;
+  background:rgba(99,102,241,.06);
+  border-radius:10px; border-left:3px solid var(--accent);
+  font-size:13px; color:var(--text2); line-height:1.6; display:none;
+}
+
+/* NAV BTNS */
+.nav-btns { padding:4px 18px 18px; display:flex; gap:10px; }
+.btn {
+  flex:1; padding:13px; border:none; border-radius:12px;
+  font-size:14px; font-weight:900; cursor:pointer;
+  font-family:'Cairo',sans-serif; transition:var(--tr);
+  display:flex; align-items:center; justify-content:center; gap:7px;
+}
+.btn-next {
+  background:var(--grad-btn); color:#fff;
+  box-shadow:0 4px 14px var(--accent-glow);
+}
+.btn-next:hover { transform:translateY(-2px); box-shadow:0 6px 20px var(--accent-glow); }
+.btn-skip {
+  background:var(--bg2); color:var(--text2); border:1px solid var(--bc);
+  flex:0 0 auto; padding:13px 18px;
+}
+.btn-skip:hover { border-color:var(--warn); color:var(--warn); }
+
+/* RESULTS */
+.result-hero {
+  text-align:center; padding:36px 20px 28px;
+  background:var(--card); border-radius:20px;
+  border:1px solid var(--bc); margin-bottom:20px;
+  box-shadow:0 4px 24px rgba(99,102,241,.12);
+}
+.score-ring {
+  width:110px; height:110px; border-radius:50%; margin:0 auto 18px;
+  display:flex; align-items:center; justify-content:center;
+  flex-direction:column; border:5px solid var(--bg2); position:relative;
+}
+.score-ring svg { position:absolute; inset:-5px; width:calc(100% + 10px); height:calc(100% + 10px); transform:rotate(-90deg); }
+.score-ring circle { fill:none; stroke-width:5; stroke-linecap:round; }
+.ring-bg   { stroke:var(--bg2); }
+.ring-fill { stroke:url(#ringGrad); transition:stroke-dashoffset 1s ease; }
+.score-num { font-size:28px; font-weight:900; color:var(--text); }
+.score-pct { font-size:12px; color:var(--text3); }
+.result-grade { font-size:22px; font-weight:900; margin-bottom:6px; }
+.result-sub   { font-size:14px; color:var(--text2); }
+.result-stats {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:20px;
+}
+.rs { background:var(--bg2); border-radius:10px; padding:12px 8px; text-align:center; }
+.rs .n { font-size:20px; font-weight:900; }
+.rs .l { font-size:11px; color:var(--text3); }
+
+.report-item {
+  background:var(--card); border:1px solid var(--bc); border-radius:14px;
+  padding:16px; margin-bottom:10px; border-left:4px solid var(--bc);
+}
+.report-item.ok { border-left-color:var(--success); }
+.report-item.no { border-left-color:var(--danger); }
+.report-item .ri-q { font-size:13px; font-weight:700; margin-bottom:8px; }
+.report-item .ri-row {
+  display:flex; align-items:center; gap:8px;
+  font-size:12px; margin-top:5px; color:var(--text2);
+}
+.ri-badge { padding:2px 8px; border-radius:6px; font-weight:700; font-size:11px; flex-shrink:0; }
+.ri-yours { background:rgba(220,38,38,.1); color:var(--danger); }
+.ri-right { background:rgba(22,163,74,.1);  color:var(--success); }
+
+.result-actions { display:flex; flex-direction:column; gap:10px; margin-top:20px; }
+.btn-retry { background:var(--grad-btn); color:#fff; }
+.btn-retry:hover { transform:translateY(-2px); box-shadow:0 6px 20px var(--accent-glow); }
+.btn-home { background:var(--bg2); color:var(--text); border:1px solid var(--bc); }
+.btn-home:hover { border-color:var(--accent); color:var(--accent); }
+
+footer {
+  background:var(--bg2); border-top:1px solid var(--bc);
+  padding:22px 24px; display:flex; align-items:center;
+  justify-content:space-between; flex-wrap:wrap; gap:10px;
+}
+.footer-brand { font-size:14px; font-weight:700; }
+.footer-brand span {
+  background:var(--grad-main); -webkit-background-clip:text; -webkit-text-fill-color:transparent;
+  background-clip:text;
+}
+.footer-tg {
+  display:flex; align-items:center; gap:5px;
+  text-decoration:none; color:#229ED9; font-size:12px; font-weight:600;
+}
+
+@media(max-width:480px) {
+  nav { padding:0 14px; }
+  .shell { padding:16px 14px 60px; }
+  .nav-brand span { display:none; }
+  .hero-band { padding:30px 16px 28px; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog-bar" style="width:0%"></div>
+
+<nav>
+  <a href="https://gaith-team.github.io/exam/" class="nav-back"><i class="fa-solid fa-arrow-left"></i> Back</a>
+  <div class="nav-brand">
+    <div class="nav-logo-icon">GT</div>
+    <span>GHAITH TEAM</span>
+  </div>
+  <div class="nav-right">
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<div class="hero-band">
+  <div class="orb1"></div>
+  <div class="orb2"></div>
+  <div class="hero-band-icon">🧑‍🔬</div>
+  <h1>Research</h1>
+  <p>Review of 3 lectures: introduction , problem ,aims </p>
+  <div class="hero-band-meta">
+    <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">-- Questions</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-clock"></i> 100 Minutes</div>
+    <div class="meta-pill"><i class="fa-solid fa-shuffle"></i> Randomized</div>
+  </div>
+</div>
+
+<div class="shell">
+  <div class="stats-row">
+    <div class="stat-box"><div class="val stat-correct" id="sCorrect">0</div><div class="lbl">✔ Correct</div></div>
+    <div class="stat-box"><div class="val stat-wrong"   id="sWrong">0</div><div class="lbl">✖ Wrong</div></div>
+    <div class="stat-box"><div class="val stat-remain"  id="sRemain">--%</div><div class="lbl">⏳ Remaining</div></div>
+  </div>
+
+  <div class="prog-strip">
+    <div class="prog-label" id="progLabel">Question 1</div>
+    <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+    <div class="timer-badge" id="timerBadge"><i class="fa-regular fa-clock"></i> <span id="timerTxt">100:00</span></div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<footer>
+  <div class="footer-brand">GAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg">
+    <i class="fa-brands fa-telegram"></i> @nursing2bu
+  </a>
+</footer>
+
+<script>
+const RAW_QUESTIONS = [
+// ─── EASY MCQ (1–40) ───────────────────────────────────────
+{type:"mcq",d:0,t:"What does the prefix 'Re' in the word 'Research' mean?",o:["To repeat an error","New, once again, or fresh","To remove data","To record findings"],a:1},
+{type:"mcq",d:0,t:"What does the word 'Search' in 'Research' mean?",o:["To ignore facts","To look for something or examine it closely and carefully","To publish a study","To analyze statistics"],a:1},
+{type:"mcq",d:0,t:"Nursing research is BEST described as research that provides evidence to:",o:["Support nursing education only","Increase hospital revenue","Support nursing practices","Diagnose patient diseases"],a:2},
+{type:"mcq",d:0,t:"Since which historical figure has nursing as an evidence-based practice been developing?",o:["Marie Curie","Florence Nightingale","Clara Barton","Elizabeth Blackwell"],a:1},
+{type:"mcq",d:0,t:"Variables are best defined as:",o:["Fixed constants in a study","Measurable characteristics that can change in value across a study","Conclusions drawn from research","Research questions"],a:1},
+{type:"mcq",d:0,t:"An independent variable in experimental research is also called:",o:["Outcome variable","Dependent variable","Treatment variable","Confounding variable"],a:2},
+{type:"mcq",d:0,t:"In the example 'Smoking causes lung cancer,' smoking is the:",o:["Dependent variable","Control variable","Independent variable","Extraneous variable"],a:2},
+{type:"mcq",d:0,t:"In the example 'Smoking causes lung cancer,' lung cancer is the:",o:["Independent variable","Dependent variable","Intervening variable","Moderating variable"],a:1},
+{type:"mcq",d:0,t:"Data is BEST described as:",o:["Analyzed results ready for publication","The raw material from which information is derived","A type of hypothesis","A statistical tool"],a:1},
+{type:"mcq",d:0,t:"Which of the following is TRUE about data versus information?",o:["Data is dependent on information","Information refers to raw facts with no specific meaning","Data is the raw material; information is processed data with meaning","Data and information are identical"],a:2},
+{type:"mcq",d:0,t:"A relationship in research refers to:",o:["The researcher's personal opinion","Bonds or connections between phenomena or variables","The title of a study","A type of sampling method"],a:1},
+{type:"mcq",d:0,t:"Bias in research is BEST defined as:",o:["A statistical error in calculations","A feeling or influence that strongly favors selection of subjects or a particular outcome","The process of random sampling","A type of research design"],a:1},
+{type:"mcq",d:0,t:"Which of the following is NOT listed as a purpose of nursing research?",o:["To extend the base of knowledge in nursing","To link nursing care with Evidence-Based Practice","To maximize hospital profits","To study the effectiveness of nursing interventions"],a:2},
+{type:"mcq",d:0,t:"The first and most important step in any research is to:",o:["Collect data","Identify the research problem","Write the conclusion","Choose the sample size"],a:1},
+{type:"mcq",d:0,t:"According to Calmorin (2004), which acronym represents the characteristics of a good researcher?",o:["NURSE","RESEARCH","SMART","ADPIE"],a:1},
+{type:"mcq",d:0,t:"The nursing process parallels the research process because both are:",o:["Only used in clinical settings","Systematic methods of examining a problem","Identical in steps","Exclusively quantitative"],a:1},
+{type:"mcq",d:0,t:"Which step belongs to the NURSING process but NOT the research process?",o:["Data collection","Study design","Diagnosis","Review of literature"],a:2},
+{type:"mcq",d:0,t:"Which step belongs to the RESEARCH process but NOT the nursing process?",o:["Assessment","Planning","Evaluation","Formulation of hypothesis"],a:3},
+{type:"mcq",d:0,t:"Research objectives should be written as SMART. What does 'M' stand for?",o:["Meaningful","Measurable","Manageable","Modifiable"],a:1},
+{type:"mcq",d:0,t:"Research objectives should be SMART. What does 'S' stand for?",o:["Systematic","Sequential","Specific","Structured"],a:2},
+{type:"mcq",d:0,t:"A hypothesis defined by McGuigan is:",o:["A confirmed fact","A testable statement of a potential relationship","A type of data collection tool","A sampling technique"],a:1},
+{type:"mcq",d:0,t:"Which type of hypothesis implies there is NO relation or statistical difference between variables?",o:["Simple hypothesis","Directional hypothesis","Null hypothesis","Complex hypothesis"],a:2},
+{type:"mcq",d:0,t:"The purpose or aim of a study describes:",o:["The sample size","Why the study has been conducted","The data analysis method","The literature review scope"],a:1},
+{type:"mcq",d:0,t:"Which of the following is a source of a research problem?",o:["Researcher's hobbies","Practical experience in nursing practice","Hospital administration orders","Personal beliefs only"],a:1},
+{type:"mcq",d:0,t:"A research problem written as 'What does blood glucose level influence the incidence of pneumonia among diabetic patients?' is in which format?",o:["Declarative form","Descriptive form","Interrogative form","Null form"],a:2},
+{type:"mcq",d:0,t:"The research aim is generally written in which grammatical form?",o:["Passive voice","Past tense","Infinitive form","Present continuous"],a:2},
+{type:"mcq",d:0,t:"A descriptive research question is used to:",o:["Seek cause-effect relationships","Describe a phenomenon, concept, variable, or population","Test an intervention","Compare two groups"],a:1},
+{type:"mcq",d:0,t:"Which of the following is a characteristic of a good research question?",o:["It is vague and broad","It focuses on multiple unrelated issues","It is feasible and likely to be answered","It avoids primary sources"],a:2},
+{type:"mcq",d:0,t:"What does 'T' stand for in SMART research objectives?",o:["Testable","Theoretical","Time-bound","Technical"],a:2},
+{type:"mcq",d:0,t:"Correlation is BEST described as:",o:["A cause-and-effect relationship","A reciprocal, parallel or complementary relationship between two or more comparable objects","A type of experimental design","A measure of central tendency"],a:1},
+{type:"mcq",d:0,t:"The scope of nursing research includes which of the following?",o:["Clinical research only","Clinical research, health systems and outcomes research, and nursing education research","Only nursing education research","Medical research only"],a:1},
+{type:"mcq",d:0,t:"Which scope of nursing research focuses on how students learn the professional practice of nursing?",o:["Clinical research","Health systems research","Nursing education research","Outcomes research"],a:2},
+{type:"mcq",d:0,t:"Which is an example of a nurse's role in research?",o:["Prescribing medications","Attending research conferences or seminars","Operating surgical equipment","Only diagnosing patients"],a:1},
+{type:"mcq",d:0,t:"How many steps are listed for formulating the research problem in the textbook?",o:["3","4","5","6"],a:2},
+{type:"mcq",d:0,t:"Research is divided into 'Re' and 'Search.' The word 'datum' (Latin root of 'data') means:",o:["A conclusion","Something that is given","A variable","A statistical measure"],a:1},
+{type:"mcq",d:0,t:"Which characteristic of good research requires that all conclusions be justified by sufficient evidence?",o:["Empirical","Logical","Unbiased","Rigorous"],a:3},
+{type:"mcq",d:0,t:"The 'R' in Calmorin's RESEARCHER acronym stands for:",o:["Rational and Reliable","Research-oriented and Reliable","Results-driven and Resourceful","Reflective and Responsible"],a:1},
+{type:"mcq",d:0,t:"A pilot study is conducted at which point in the research process?",o:["Before identifying the problem","After drawing conclusions","Before full data collection, after determining the sample","After data analysis"],a:2},
+{type:"mcq",d:0,t:"Which of the following BEST describes a research problem statement?",o:["A broad issue the researcher addresses","A concise and concrete summary of the research problem","A list of research variables","The conclusion of the study"],a:1},
+{type:"mcq",d:0,t:"'Nursing research encompasses clinical research, health systems research, and nursing education research' describes the:",o:["Purpose of nursing research","Scope of nursing research","Criteria of nursing research","Principles of nursing research"],a:1},
+ 
+// ─── MEDIUM MCQ (41–110) ───────────────────────────────────
+{type:"mcq",d:1,t:"Which of the following BEST distinguishes a research problem from a research problem statement?",o:["They are identical concepts","A research problem is broad; a problem statement is a concise summary of that problem","A problem statement is broader than the research problem","A research problem is always in interrogative form"],a:1},
+{type:"mcq",d:1,t:"A researcher studying the effect of repositioning every 2 hours on bedsore prevention would classify 'repositioning frequency' as:",o:["Dependent variable","Confounding variable","Independent variable","Extraneous variable"],a:2},
+{type:"mcq",d:1,t:"In regression analysis, the independent variable is described as:",o:["The outcome variable","The variable used to predict the dependent variable","The variable that stays constant","The variable with no measurable value"],a:1},
+{type:"mcq",d:1,t:"Which component of a research problem statement asks 'What is the cost of not fixing the problem?'",o:["Background","Scope of the problem","Consequences of the problem","Knowledge gaps"],a:2},
+{type:"mcq",d:1,t:"Which component of a research problem statement asks 'What information is lacking?'",o:["Problem identification","Proposed solution","Knowledge gaps","Background"],a:2},
+{type:"mcq",d:1,t:"According to the document, when the chance of bias is not addressed, the reliability of scientific findings is:",o:["Considered excellent","Highly questionable","Unaffected","Automatically improved"],a:1},
+{type:"mcq",d:1,t:"A study examines whether a new teaching strategy improves ICU nurses' performance regarding immobilized patient care. The research aim would BEST begin with:",o:["This study will prove...","This study aims to evaluate...","This study shows...","This study questions..."],a:1},
+{type:"mcq",d:1,t:"Which criterion of a good research problem states it 'should be significant enough to contribute to the existing body of research'?",o:["Criterion 1","Criterion 2","Criterion 3","Criterion 4"],a:1},
+{type:"mcq",d:1,t:"Health systems and outcomes research examines:",o:["How students learn nursing","The availability, quality, and costs of health care services","Biological investigations of disease","Only patient satisfaction scores"],a:1},
+{type:"mcq",d:1,t:"Which of the following is NOT a characteristic of a good research hypothesis?",o:["Conceptually clear","Operationalized","Based only on researcher intuition","Having empirical referents"],a:2},
+{type:"mcq",d:1,t:"A simple hypothesis predicts the relationship between:",o:["Multiple independent and dependent variables","Two or more dependent variables only","One independent variable and one dependent variable","Two independent variables only"],a:2},
+{type:"mcq",d:1,t:"A complex hypothesis differs from a simple hypothesis because it:",o:["Involves only one variable","Predicts a relationship between 2 or more independent and dependent variables","States there is no relationship","Is always directional"],a:1},
+{type:"mcq",d:1,t:"'There will be a negative correlation between the nurse's performance and patients' immobilized complications post-teaching strategy implementation' is an example of which type of hypothesis?",o:["Null hypothesis","Non-directional hypothesis","Simple hypothesis","Directional hypothesis"],a:3},
+{type:"mcq",d:1,t:"'There will be a correlation between the nurse's knowledge, practice, and years of work experience with patients' immobilized complications' is an example of:",o:["Null hypothesis","Directional hypothesis","Non-directional hypothesis","Simple hypothesis"],a:2},
+{type:"mcq",d:1,t:"The steps for formulating a research problem include all of the following EXCEPT:",o:["Selection of a research area","Reviewing the literature and theories","Writing the final discussion of results","Formulating the final statement of the research problem"],a:2},
+{type:"mcq",d:1,t:"A nurse notices that ICU patients who receive two-hourly position changes develop fewer bedsores. This is most likely derived from which source of research problem?",o:["Existing theories","Technological change","Daily problem and practical experience in nursing","Discussion with supervisors only"],a:2},
+{type:"mcq",d:1,t:"The principle of high-quality research that states 'the process should be clearly explained so it can be reproduced and verified by other researchers' reflects which property?",o:["Generalizability","Ethical standards","Duplicability/Replicability","Data analysis"],a:2},
+{type:"mcq",d:1,t:"'Clinical research provides the scientific basis for the care of individuals across the life span.' This research is based on:",o:["Only administrative data","Biological, behavioral, and other types of investigations","Nursing education studies alone","Hospital revenue data"],a:1},
+{type:"mcq",d:1,t:"According to the textbook, which of the following BEST describes the difference between correlation and regression?",o:["Correlation is used for predictions; regression only describes the relationship","Regression studies the impact of the independent variable on the dependent variable and is used for predictions; correlation only indicates the nature and extent of a linear relationship","They are identical statistical tools","Regression is symmetric; correlation is not"],a:1},
+{type:"mcq",d:1,t:"If a researcher states 'This study aims to determine the effect of structured exercise on blood pressure in hypertensive elderly patients,' this statement represents the:",o:["Research problem","Research aim","Research hypothesis","Research design"],a:1},
+{type:"mcq",d:1,t:"Which of the following is NOT listed as a principle of high-quality research?",o:["It is based on the work of others","It is generalizable to other settings","All findings are presented unambiguously","It must be conducted only in laboratory settings"],a:3},
+{type:"mcq",d:1,t:"A researcher wants to study 'the barriers to positive health practices among adolescents.' This relates to which purpose of nursing research?",o:["To prevent harm to patients","To study barriers to positive health practices","To get a Ph.D. degree","To link nursing care with EBP"],a:1},
+{type:"mcq",d:1,t:"The component of a research problem statement that explains 'How does this new study contribute to solving the problem?' is called:",o:["Problem identification","Scope of the problem","Knowledge gaps","Proposed solution"],a:3},
+{type:"mcq",d:1,t:"Which type of research question seeks to investigate the cause-effect relationship between one thing and another?",o:["Descriptive question","Relationship question","Cause-effect question","Exploratory question"],a:2},
+{type:"mcq",d:1,t:"A research question is considered valid when it is:",o:["Based only on the researcher's experience","Derived from the research problem and based on study design and research objectives","Written only in declarative form","Always tested using quantitative methods"],a:1},
+{type:"mcq",d:1,t:"What does 'A' stand for in SMART research objectives?",o:["Accurate","Achievable","Analytical","Applicable"],a:1},
+{type:"mcq",d:1,t:"Research that 'develops knowledge about health and the promotion of health over the full lifespan' is which type of research?",o:["Administrative research","Nursing research","Only medical research","Only educational research"],a:1},
+{type:"mcq",d:1,t:"Which characteristic of good research requires it to be 'marked by patience, courage and unhurried activities'?",o:["Systematic","Evidence-based","Replicable","Patient and careful"],a:3},
+{type:"mcq",d:1,t:"The causal hypothesis predicts:",o:["An associative relationship between variables","The effect relationship between the independent and dependent variables","That there is no difference between groups","The direction only, not the effect"],a:1},
+{type:"mcq",d:1,t:"Which of the following correctly pairs a nursing process step with its research process equivalent?",o:["Assessment → Data analysis","Diagnosis → Study design","Planning → Review of literature","Evaluation → Data collection"],a:1},
+{type:"mcq",d:1,t:"In the Correlation vs. Regression table, which statement is TRUE about correlation?",o:["It is not symmetric in x and y","It is the study of the impact of x on y","It is used for predictions","It is symmetric in x and y, i.e., rxy = ryx"],a:3},
+{type:"mcq",d:1,t:"Which of the following is an example of a declarative-form research problem?",o:["'What factors influence the incidence of pneumonia among diabetic patients?'","'A descriptive study on the prevalence of bed sore among unconscious patients admitted to the ICU'","'Is there a relationship between nursing education and patient outcomes?'","'Why do patients develop pressure ulcers?'"],a:1},
+{type:"mcq",d:1,t:"According to Theodorson & Theodorson, a hypothesis is:",o:["A confirmed finding","A tentative statement asserting a relationship between certain facts","A statistical test","A type of research design"],a:1},
+{type:"mcq",d:1,t:"'Properly formulated, specific objectives will facilitate the development of the research methodology.' This refers to which component of research?",o:["Research aim","Research objectives","Research hypothesis","Research problem"],a:1},
+{type:"mcq",d:1,t:"When a researcher delimits the research topic, this occurs at which step of formulating the research problem?",o:["Step 1","Step 2","Step 3","Step 5"],a:2},
+{type:"mcq",d:1,t:"Which of the following BEST describes the function of a hypothesis in research?",o:["It replaces data collection","It provides the map that guides and explores the phenomenon under consideration","It is the final conclusion of research","It defines the sampling method"],a:1},
+{type:"mcq",d:1,t:"A nurse researcher wants to know whether 'protein diet, position changes, and back care together reduce bedsores and improve blood circulation.' This is an example of:",o:["Simple hypothesis","Null hypothesis","Complex hypothesis","Directional hypothesis"],a:2},
+{type:"mcq",d:1,t:"The associative hypothesis predicts:",o:["A causal relationship","An associative relationship that may be positive or negative between independent and dependent variables","No relationship between variables","A relationship between only one independent and one dependent variable"],a:1},
+{type:"mcq",d:1,t:"Which step in the research process immediately follows 'determining the sample'?",o:["Identifying the problem","Pilot study","Data collection","Drawing conclusions"],a:1},
+{type:"mcq",d:1,t:"A research problem 'should render itself to investigation through a collection of data.' This is which characteristic number?",o:["1","2","4","6"],a:2},
+{type:"mcq",d:1,t:"'Guide patients to participate in research studies' is listed under which role of the nurse?",o:["Scope of nursing research","Nurses' roles in research","Purpose of nursing research","Criteria of good research"],a:1},
+{type:"mcq",d:1,t:"The regression coefficient being positive means:",o:["For every unit increase in x, y decreases","For every unit increase in x, y increases on average","There is no relationship between x and y","The correlation is negative"],a:1},
+{type:"mcq",d:1,t:"Which of the following describes a NON-directional hypothesis?",o:["Predicts the type of relationship (positive or negative)","Predicts that there will be no relationship","Predicts that there will be a relationship among two or more variables without specifying direction","States a cause-and-effect relationship"],a:2},
+{type:"mcq",d:1,t:"'Assist researchers to identify eligible study participants' is an example of:",o:["A research aim","A nurse's role in research","A research problem component","A criterion of good research"],a:1},
+{type:"mcq",d:1,t:"Research objectives must include which five elements represented by the acronym SMART?",o:["Systematic, Measurable, Achievable, Relevant, Time-bound","Specific, Measurable, Achievable, Relevant, Time-bound","Specific, Meaningful, Applicable, Relevant, Testable","Specific, Measurable, Applicable, Reliable, Time-bound"],a:1},
+{type:"mcq",d:1,t:"Which of the following is NOT a source of research problems listed in the textbook?",o:["Unexplored areas","Existing theories","Patient satisfaction surveys","Technological change"],a:2},
+{type:"mcq",d:1,t:"The step 'Apply procedure if needed in intervention study' appears in which process?",o:["Nursing process only","Research process only","Both nursing and research process","Neither process"],a:1},
+{type:"mcq",d:1,t:"'Identify evidence-based practice' is listed as a nurse's role in:",o:["Patient care only","Research","Teaching","Administration"],a:1},
+{type:"mcq",d:1,t:"Which property of high-quality research states 'All limitations are documented'?",o:["Replicability","Ethical standards","Documentation of limitations","Generalizability"],a:2},
+{type:"mcq",d:1,t:"The research aim is the OVERALL purpose of the research, while research objectives are:",o:["Identical to the aim","Broader than the aim","The concrete steps taken to achieve the aim","The statistical analysis plan"],a:2},
+{type:"mcq",d:1,t:"When a regression coefficient is negative, for every unit increase in x:",o:["y also increases","y stays constant","y decreases on average by byx","There is no predictable change in y"],a:2},
+{type:"mcq",d:1,t:"'Review research proposals and give expert advice' is which nursing role in research?",o:["Scope of nursing research","Principles of high-quality research","Nurses' roles in research","Criteria of good research"],a:2},
+{type:"mcq",d:1,t:"Which statement is TRUE regarding the relationship between research aims and research questions?",o:["Aims and objectives have no connection to research questions","The aims and objectives should lead directly to the research questions","Research questions are formulated before aims","Research questions replace the need for aims"],a:1},
+{type:"mcq",d:1,t:"A nurse observes that a new dressing technique reduces wound infection rates. She decides to study this systematically. Her primary source of research problem is:",o:["Existing theories","Technological change","Practical experience in nursing practice","Discussion with supervisors"],a:2},
+{type:"mcq",d:1,t:"Which of the following is a criterion for a good research problem that focuses on ethics?",o:["It should address a knowledge gap","It should be significant enough to contribute to research","The approach towards solving the problem should be ethical","It should lead to further research"],a:2},
+{type:"mcq",d:1,t:"'Statements that focus on the identification and description of variables and sometimes determination of relationships between variables' describe:",o:["Research hypotheses","Research aims","Research objectives in declarative form","Research questions"],a:2},
+{type:"mcq",d:1,t:"'This work will use surveys to collect…' is an example of phrasing for a:",o:["Research aim","Research objective","Research hypothesis","Research problem"],a:1},
+{type:"mcq",d:1,t:"According to the textbook, 'Nursing research is a systematic inquiry designed to develop knowledge about issues of importance to nurses.' This refers to:",o:["Definition of research","Definition of nursing research","Scope of nursing research","Purpose of nursing research"],a:1},
+{type:"mcq",d:1,t:"The FIRST step in formulating a research problem is:",o:["Delimiting the research topic","Formulating the final statement","Evaluating the research problem","Selection of a research area"],a:3},
+{type:"mcq",d:1,t:"Which of the following characteristics of good research ensures its findings can be applied elsewhere?",o:["Significant","Logical","Empirical","Replicable and generalizable"],a:3},
+{type:"mcq",d:1,t:"'Updating nursing procedures and guidelines' is an example of a nurse's role in:",o:["Medical research","Nursing research","Hospital administration","Pharmaceutical research"],a:1},
+{type:"mcq",d:1,t:"Which of the following BEST differentiates data from information?",o:["Data has purpose and meaning; information does not","Data is raw and independent of information; information is processed and dependent on data","They are interchangeable terms","Information is always numerical; data is always descriptive"],a:1},
+{type:"mcq",d:1,t:"The step 'Statement of research questions or hypothesis' appears in which process?",o:["Nursing process","Research process","Both nursing and research processes","Neither process"],a:1},
+ 
+// ─── HARD MCQ (111–150) ────────────────────────────────────
+{type:"mcq",d:2,t:"A researcher studying 'the effect of Virtual Reality distraction on postoperative pain and anxiety in abdominal surgery patients' wants to write a null hypothesis. Which of the following is MOST appropriate?",o:["VR distraction will reduce postoperative pain significantly","There will be no significant difference in postoperative pain and anxiety between VR and non-VR groups","VR will increase anxiety in postoperative patients","Postoperative pain will decrease after abdominal surgery"],a:1},
+{type:"mcq",d:2,t:"For the study 'Effect of Virtual Reality Distraction on Relieving Postoperative Pain and Anxiety for Abdominal Surgery Patients,' the INDEPENDENT variable is:",o:["Postoperative pain","Abdominal surgery","Anxiety levels","Virtual Reality distraction"],a:3},
+{type:"mcq",d:2,t:"For the same VR study, the DEPENDENT variables are:",o:["Virtual Reality and the surgery type","Postoperative pain and anxiety","The patient's age and gender","The nursing interventions applied"],a:1},
+{type:"mcq",d:2,t:"If a linear correlation coefficient (r) between two variables is -0.85, this indicates:",o:["A strong positive relationship","No relationship","A strong negative relationship","A weak negative relationship"],a:2},
+{type:"mcq",d:2,t:"A regression analysis shows a positive regression coefficient for the effect of hours of sleep on pain scores. This means:",o:["More sleep leads to lower pain scores","More sleep leads to higher pain scores on average","Sleep has no effect on pain","The relationship is non-linear"],a:1},
+{type:"mcq",d:2,t:"Which of the following scenarios BEST demonstrates a causal hypothesis?",o:["There will be a relationship between nurses' years of experience and patient outcomes","There will be no difference between pre- and post-test scores","Administering oral care every 4 hours CAUSES a reduction in ventilator-associated pneumonia","Knowledge, practice, and experience will all correlate with patient safety outcomes"],a:2},
+{type:"mcq",d:2,t:"A nurse researcher uses a previously published study to identify a gap in knowledge about pressure ulcer prevention. Which source of research problem is being used?",o:["Daily problem","Technological change","Previous research","Discussion with supervisors"],a:2},
+{type:"mcq",d:2,t:"In correlation, rxy = ryx. What does this mean in practical terms?",o:["Correlation is asymmetric","The direction of the relationship can be assigned arbitrarily","Correlation is symmetric — the relationship between x and y is the same as between y and x","Correlation implies causation"],a:2},
+{type:"mcq",d:2,t:"Which of the following represents the CORRECT sequence of steps in the research process?",o:["Data collection → Identify problem → Pilot study → Hypothesis","Identify problem → Purpose of study → Research question/hypothesis → Review literature → Method → Sample → Pilot study → Data collection → Analysis → Conclusions","Literature review → Data collection → Problem identification → Conclusions → Analysis","Hypothesis → Sample → Data collection → Problem identification → Analysis"],a:1},
+{type:"mcq",d:2,t:"A research problem statement should include all of the following components EXCEPT:",o:["Problem identification","Background","Statistical analysis results","Knowledge gaps"],a:2},
+{type:"mcq",d:2,t:"Which of the following is the MOST critical distinction between a research question and a research hypothesis?",o:["A research question is always testable; a hypothesis is not","A hypothesis is a tentative statement predicting a relationship between variables; a research question is an interrogative statement derived from the research problem","A hypothesis is always in null form","Research questions are only used in qualitative research"],a:1},
+{type:"mcq",d:2,t:"A study that 'examines the availability, quality, and costs of health care services as well as ways to improve the effectiveness and appropriateness of clinical practice' represents which scope of nursing research?",o:["Clinical research","Nursing education research","Health systems and outcomes research","Administrative nursing research"],a:2},
+{type:"mcq",d:2,t:"A researcher finds bias in subject selection. According to the textbook, what is the consequence of unaddressed bias?",o:["The study becomes more reliable","Findings are automatically corrected","The reliability of the scientific findings is considered highly questionable","The study gains more validity"],a:2},
+{type:"mcq",d:2,t:"Which combination of criteria BEST characterizes a good research problem according to the textbook?",o:["It should be easy, short, and cheap to study","It should address a knowledge gap, be significant, lead to further research, be investigable through data, be of interest to the researcher, and approach solving the problem ethically","It must only use quantitative methods","It must be approved by the hospital administration first"],a:1},
+{type:"mcq",d:2,t:"A study compares the effect of protein diet, two-hourly position changes, and back care on bedsore prevention, blood circulation, and body resistance. The hypothesis in this study is BEST categorized as:",o:["Simple hypothesis","Null hypothesis","Directional hypothesis","Complex hypothesis"],a:3},
+{type:"mcq",d:2,t:"In regression, bxy and byx have different meanings. This is because regression is:",o:["Symmetric, like correlation","Asymmetric — the choice of independent and dependent variable matters","Always positive","The same as correlation"],a:1},
+{type:"mcq",d:2,t:"'Using statistical analysis, the research will measure…' is an example of how research objectives are phrased. This phrasing style is most associated with:",o:["Aims written in infinitive form","Objectives written as concrete steps to achieve the aim","Hypotheses in null form","Research questions in descriptive form"],a:1},
+{type:"mcq",d:2,t:"Which of the following statements about high-quality research is FALSE?",o:["It is generalizable to other settings","All limitations are documented","It is based only on the researcher's own previous work, not the work of others","All findings are presented unambiguously with conclusions justified by sufficient evidence"],a:2},
+{type:"mcq",d:2,t:"A nurse researcher writes: 'This study aims to evaluate the effectiveness of a structured teaching program on nurses' knowledge regarding immobilized patient care in ICU settings.' The research objectives should be:",o:["Identical to the aim","Broader and more general than the aim","Concrete steps such as assessing pre-teaching knowledge, implementing the program, and measuring post-teaching outcomes","Only focused on statistical analysis"],a:2},
+{type:"mcq",d:2,t:"Which of the following correctly applies the SMART framework to evaluate a research objective?",o:["'To improve patient care' — this is SMART because it is clearly stated","'To assess nurses' knowledge scores before and after a 4-week teaching program on ICU pressure ulcer prevention' — this is SMART because it is Specific, Measurable, Achievable, Relevant, and Time-bound","'To study something related to nursing' — this is SMART","'To make patients feel better' — this is SMART because it is patient-centered"],a:1},
+{type:"mcq",d:2,t:"According to the textbook, a hypothesis 'about which data can't be collected because no specific tools or techniques are available cannot be a good research hypothesis.' This reflects which characteristic of a hypothesis?",o:["It must be conceptually clear","It must have empirical referents and be operationalized","It must be commonly accepted","It must be derived from theories"],a:1},
+{type:"mcq",d:2,t:"A researcher conducting a study on 'the prevalence of bed sores among unconscious patients in the ICU' is using which format for the research problem?",o:["Interrogative form","Null form","Declarative form","Complex form"],a:2},
+{type:"mcq",d:2,t:"Nurses' participation in nursing research is described in the textbook as:",o:["Optional for professional nurses","The least important role","The most important role that professional nurses and nursing students have to do","Only required for nurse managers"],a:2},
+{type:"mcq",d:2,t:"Which of the following scenarios MOST accurately demonstrates the difference between a research aim and a research objective?",o:["Aim: To improve patient outcomes; Objective: To improve patient outcomes more specifically","Aim: 'This study aims to evaluate the effectiveness of VR distraction on postoperative pain'; Objective: 'Using pain scales, the research will measure pain scores pre- and post-VR intervention at 1, 6, and 24 hours post-surgery'","Aim and objective are the same statement reworded","Aim: A statistical test; Objective: A research question"],a:1},
+{type:"mcq",d:2,t:"A hospital implements a new technology for wound dressing. A nurse researcher decides to investigate its effectiveness. Which source of research problem does this BEST represent?",o:["Daily problem","Previous research","Theory of one's interest","Technological change"],a:3},
+{type:"mcq",d:2,t:"Which of the following BEST explains why both the nursing process and the research process are described as 'very similar'?",o:["They have identical steps","Both are systematic methods of examining a problem, though with different steps and purposes","Both are used only in clinical settings","They are both used exclusively for quantitative data"],a:1},
+{type:"mcq",d:2,t:"In the context of nursing research, 'criteria' are defined as:",o:["The sample size of the study","Statement of rules, needs, or standards used to identify study subjects, evaluate decisions, ideas or programs to form correct judgment","The statistical tests used","The variables in the study"],a:1},
+{type:"mcq",d:2,t:"A research problem may be defined as 'an area of concern, a gap in the existing knowledge, or a deviation in the norm that points to the need for further understanding and investigation.' This definition emphasizes the concept of:",o:["Bias","Knowledge gap","Sampling error","Pilot study"],a:1},
+{type:"mcq",d:2,t:"Which of the following BEST distinguishes clinical research from health systems and outcomes research?",o:["Clinical research examines costs; outcomes research examines biology","Clinical research provides the scientific basis for individual patient care across the lifespan; outcomes research examines availability, quality, and cost of health care services","They are identical in scope","Clinical research only studies nurses; outcomes research studies doctors"],a:1},
+{type:"mcq",d:2,t:"A well-formulated research problem statement begins broadly and then narrows to a specific question. The component that explains 'What is wrong with the current situation?' is:",o:["Background","Scope of the problem","Problem identification","Proposed solution"],a:2},
+{type:"mcq",d:2,t:"In evaluating a research problem, a researcher must assess whether the problem 'renders itself to investigation through a collection of data.' This means the problem must be:",o:["Theoretical only","Empirically testable and researchable","Based on the researcher's opinion","Limited to laboratory settings"],a:1},
+{type:"mcq",d:2,t:"Which of the following represents the most comprehensive and accurate description of the SCOPE of nursing research as described in the textbook?",o:["Nursing research encompasses only clinical bedside studies","Nursing research encompasses clinical research, health systems and outcomes research, and nursing education research, forming a wide scope of scientific inquiry","Nursing research is limited to the hospital setting","Nursing research only applies to graduate-level nurses"],a:1},
+{type:"mcq",d:2,t:"The difference between a 'relationship question' and a 'cause-effect question' as research question types is BEST described as:",o:["They are identical","A relationship question seeks the nature of the association between subjects; a cause-effect question seeks to investigate whether one thing causes another","A cause-effect question is always descriptive","A relationship question always implies causation"],a:1},
+{type:"mcq",d:2,t:"'Evaluate the research problem' is Step 4 in formulating a research problem. Which question does this step BEST address?",o:["What area should I study?","Is this problem feasible, significant, ethical, and within my skills, time, and resources?","What format should the problem statement take?","Which statistical test should I use?"],a:1},
+{type:"mcq",d:2,t:"A study finds that two variables are positively correlated with r = +0.90. A colleague concludes that one variable causes the other. This conclusion is:",o:["Correct, as a strong positive correlation always implies causation","Incorrect, because correlation indicates the nature and extent of a linear relationship but does not establish causation","Correct only if the regression coefficient is also positive","Correct if both variables are independent"],a:1},
+{type:"mcq",d:2,t:"Which of the following describes the role of a hypothesis in terms of guiding the research process?",o:["It replaces the need for a literature review","It provides the map that guides and explores the phenomenon under consideration, helps pinpoint the problem, and provides the framework for concluding","It is only relevant for quantitative studies","It is the same as the research question"],a:1},
+{type:"mcq",d:2,t:"The principle 'All findings are presented unambiguously, and all conclusions be justified by sufficient evidence' reflects which overall principle of high-quality research?",o:["Replicability","Ethical standards","Transparency and rigor of reporting","Generalizability"],a:2},
+{type:"mcq",d:2,t:"A research study on nursing education that focuses on 'how to improve educational strategies to prepare clinicians and scientists' falls under which scope?",o:["Clinical research","Health systems research","Outcomes research","Nursing education research"],a:3},
+{type:"mcq",d:2,t:"If a researcher discovers that their study has a high chance of bias due to convenience sampling, the BEST action according to the textbook principles is to:",o:["Ignore the bias since all research has bias","Document the limitation and acknowledge that reliability of findings may be questioned","Exclude all results and start over","Change all results to eliminate the bias"],a:1},
+{type:"mcq",d:2,t:"A comprehensive exam question asks a student to identify which type of hypothesis is being used: 'There will be no significant difference between pre- and post-teaching in the main effect of nurses' performance towards immobilized patient care.' The correct answer is:",o:["Simple hypothesis","Complex hypothesis","Null hypothesis","Directional hypothesis"],a:2},
+{type:"mcq",d:2,t:"Which of the following is the MOST accurate understanding of why 'data cannot be enough to make a decision' whereas 'information is sufficient to help make a decision'?",o:["Data and information are equally insufficient","Data is raw and unprocessed with no specific meaning; information is processed data with purpose and meaning that can guide decisions","Data is always numerical; information is always qualitative","Information is less reliable than data"],a:1},
+{type:"mcq",d:2,t:"A nurse researcher asks: 'Does the frequency of oral care affect the incidence of ventilator-associated pneumonia in ICU patients?' This is BEST classified as a:",o:["Descriptive research question","Relationship research question","Cause-effect research question","Non-directional hypothesis"],a:2},
+ 
+// ─── EASY T/F (1–15) ──────────────────────────────────────
+{type:"tf",d:0,t:"Nursing research has been developing as an evidence-based practice since the time of Florence Nightingale.",o:["True","False"],a:0},
+{type:"tf",d:0,t:"The word 'Search' in 'Research' means to record and publish findings.",o:["True","False"],a:1},
+{type:"tf",d:0,t:"The independent variable is the outcome variable that depends on the independent variable.",o:["True","False"],a:1},
+{type:"tf",d:0,t:"Data is the raw material from which information is derived.",o:["True","False"],a:0},
+{type:"tf",d:0,t:"The null hypothesis implies there is no relationship or statistical difference between variables or groups.",o:["True","False"],a:0},
+{type:"tf",d:0,t:"Research objectives should be written using the SMART framework.",o:["True","False"],a:0},
+{type:"tf",d:0,t:"The nursing process and research process are completely different with no similarities.",o:["True","False"],a:1},
+{type:"tf",d:0,t:"Bias that is not addressed makes the reliability of scientific findings highly questionable.",o:["True","False"],a:0},
+{type:"tf",d:0,t:"A research problem can be written in declarative form only.",o:["True","False"],a:1},
+{type:"tf",d:0,t:"Nursing research encompasses clinical research, health systems and outcomes research, and nursing education research.",o:["True","False"],a:0},
+{type:"tf",d:0,t:"The first and most important step in any research is to identify the research problem.",o:["True","False"],a:0},
+{type:"tf",d:0,t:"In correlation, rxy always equals ryx, making it symmetric.",o:["True","False"],a:0},
+{type:"tf",d:0,t:"Regression is used for predictions about the impact of the independent variable on the dependent variable.",o:["True","False"],a:0},
+{type:"tf",d:0,t:"A simple hypothesis predicts the relationship between more than two independent variables.",o:["True","False"],a:1},
+{type:"tf",d:0,t:"The purpose or aim of a study describes why the study has been conducted.",o:["True","False"],a:0},
+ 
+// ─── MEDIUM T/F (16–35) ───────────────────────────────────
+{type:"tf",d:1,t:"A research problem statement is broader and less specific than the research problem itself.",o:["True","False"],a:1},
+{type:"tf",d:1,t:"Clinical research provides the scientific basis for the care of individuals across the life span and occurs in any setting where nursing care is provided.",o:["True","False"],a:0},
+{type:"tf",d:1,t:"Health systems and outcomes research focuses only on the biological aspects of disease.",o:["True","False"],a:1},
+{type:"tf",d:1,t:"A directional hypothesis specifies the existence of a relationship but not its direction (positive or negative).",o:["True","False"],a:1},
+{type:"tf",d:1,t:"A complex hypothesis predicts a relationship between two or more independent and dependent variables.",o:["True","False"],a:0},
+{type:"tf",d:1,t:"Participation in nursing research is described as the most important role for professional nurses and nursing students.",o:["True","False"],a:0},
+{type:"tf",d:1,t:"Research objectives are the overall purpose of the study, while the aim is the concrete step taken to achieve them.",o:["True","False"],a:1},
+{type:"tf",d:1,t:"Correlation is symmetric, meaning rxy = ryx, while regression is not symmetric.",o:["True","False"],a:0},
+{type:"tf",d:1,t:"A good research hypothesis must have empirical referents and be operationalized.",o:["True","False"],a:0},
+{type:"tf",d:1,t:"The research aim is generally written using active and assertive language such as 'This study proves...'",o:["True","False"],a:1},
+{type:"tf",d:1,t:"High-quality research requires that all limitations are documented and all findings are presented unambiguously.",o:["True","False"],a:0},
+{type:"tf",d:1,t:"If a regression coefficient is negative, every unit increase in x leads to an average decrease in y.",o:["True","False"],a:0},
+{type:"tf",d:1,t:"The research question is derived from the research aim rather than the research problem.",o:["True","False"],a:1},
+{type:"tf",d:1,t:"A non-directional hypothesis predicts that there will be a relationship among two or more variables without specifying direction.",o:["True","False"],a:0},
+{type:"tf",d:1,t:"Research objectives, when properly formulated, facilitate the development of the research methodology and orient data collection and analysis.",o:["True","False"],a:0},
+{type:"tf",d:1,t:"In the research process, the step 'apply procedure if needed in intervention study' occurs before data collection.",o:["True","False"],a:1},
+{type:"tf",d:1,t:"A good research problem should be of interest to the researcher and suit their skills, time, and resources.",o:["True","False"],a:0},
+{type:"tf",d:1,t:"The criterion 'Bias' in research refers to the statistical error found during data analysis.",o:["True","False"],a:1},
+{type:"tf",d:1,t:"Nursing education research focuses on how students learn the professional practice and discipline of nursing.",o:["True","False"],a:0},
+{type:"tf",d:1,t:"Data is dependent on information, whereas information is independent of data.",o:["True","False"],a:1},
+ 
+// ─── HARD T/F (36–50) ─────────────────────────────────────
+{type:"tf",d:2,t:"In the VR study 'Effect of Virtual Reality Distraction on Relieving Postoperative Pain and Anxiety,' VR is the dependent variable and pain/anxiety are the independent variables.",o:["True","False"],a:1},
+{type:"tf",d:2,t:"A strong correlation coefficient (e.g., r = 0.95) between two variables is sufficient evidence to conclude a causal relationship.",o:["True","False"],a:1},
+{type:"tf",d:2,t:"The statement 'There will be no significant difference between pre- and post-teaching in nurses' performance towards immobilized patient care' is an example of a null hypothesis.",o:["True","False"],a:0},
+{type:"tf",d:2,t:"In regression analysis, the assignment of variables as independent or dependent can be done arbitrarily without affecting interpretation.",o:["True","False"],a:1},
+{type:"tf",d:2,t:"A hypothesis about which data cannot be collected because no specific tools are available cannot be a good research hypothesis.",o:["True","False"],a:0},
+{type:"tf",d:2,t:"High-quality research must be based only on the researcher's own previous work and not on the work of others.",o:["True","False"],a:1},
+{type:"tf",d:2,t:"The component of a research problem statement that asks 'What is the cost of not fixing the problem?' is called 'Consequences of the problem.'",o:["True","False"],a:0},
+{type:"tf",d:2,t:"A research question that 'seeks the nature of the relationship between subjects' is a cause-effect research question.",o:["True","False"],a:1},
+{type:"tf",d:2,t:"Research objectives must lead directly to the research questions, and research questions must be based on the research problem and objectives.",o:["True","False"],a:0},
+{type:"tf",d:2,t:"The statement 'Two hourly position changes of fully bedridden patients will prevent bedsores' is an example of a complex hypothesis because it involves nursing care.",o:["True","False"],a:1},
+{type:"tf",d:2,t:"Clinical research, as defined in the textbook, is restricted to hospital settings and cannot occur in community nursing settings.",o:["True","False"],a:1},
+{type:"tf",d:2,t:"Evaluating the research problem (Step 4 of formulating a research problem) involves assessing whether the problem is feasible, significant, ethical, and within the researcher's skills and resources.",o:["True","False"],a:0},
+{type:"tf",d:2,t:"The associative hypothesis predicts a positive-only relationship between independent and dependent variables.",o:["True","False"],a:1},
+{type:"tf",d:2,t:"A good research problem MUST be significant enough to contribute to the existing body of research, and the approach to solving it must be ethical.",o:["True","False"],a:0},
+{type:"tf",d:2,t:"Research that 'focuses on how to improve educational strategies to prepare clinicians and scientists' falls under the scope of clinical nursing research.",o:["True","False"],a:1},
+];
+
+/* ============ SHUFFLE OPTIONS ============ */
+function shuffleOptions(q) {
+  const correctText = q.o[q.a];
+  const indexed = q.o.map((text) => text);
+  for (let i = indexed.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [indexed[i], indexed[j]] = [indexed[j], indexed[i]];
+  }
+  return { t: q.t, o: indexed, a: indexed.indexOf(correctText), exp: q.exp || null };
+}
+
+/* ============ ENGINE ============ */
+let questions, i, correct, wrong, answers, wrongSet, answered;
+let totalTime =100*60, timeLeft, timerInterval;
+const LETTERS = ['A','B','C','D','E','F'];
+
+function shuffle(arr) {
+  for (let k = arr.length - 1; k > 0; k--) {
+    const j = Math.floor(Math.random() * (k + 1));
+    [arr[k], arr[j]] = [arr[j], arr[k]];
+  }
+  return arr;
+}
+
+function prepareQuestions(pool) {
+  return shuffle([...pool]).map(q => shuffleOptions(q));
+}
+
+function init(pool) {
+  questions = prepareQuestions(pool);
+  i = 0; correct = 0; wrong = 0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = []; answered = 0;
+  timeLeft = totalTime;
+  document.getElementById('totalBadge').textContent = questions.length + ' Questions';
+  startTimer();
+  render();
+}
+
+function startTimer() {
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    const m = Math.floor(timeLeft / 60), s = timeLeft % 60;
+    document.getElementById('timerTxt').textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
+    const badge = document.getElementById('timerBadge');
+    if (timeLeft <= 120)      badge.className = 'timer-badge danger';
+    else if (timeLeft <= 300) badge.className = 'timer-badge warn';
+    if (timeLeft <= 0) { clearInterval(timerInterval); finish(); }
+  }, 1000);
+}
+
+function updateTop() {
+  const total = questions.length;
+  document.getElementById('sCorrect').textContent = correct;
+  document.getElementById('sWrong').textContent   = wrong;
+  document.getElementById('sRemain').textContent  = Math.round(((total - answered) / total) * 100) + '%';
+  document.getElementById('progLabel').textContent = 'Question ' + (i + 1) + ' / ' + total;
+  document.getElementById('progFill').style.width  = ((i + 1) / total * 100) + '%';
+  document.getElementById('prog-bar').style.width  = ((i + 1) / total * 100) + '%';
+}
+
+function render() {
+  updateTop();
+  const q = questions[i];
+  document.getElementById('app').innerHTML = `
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Question ${i + 1} / ${questions.length}</div>
+      </div>
+      <div class="q-text">${q.t}</div>
+      <div class="options">
+        ${q.o.map((o, idx) => `
+          <div class="opt" id="opt${idx}" onclick="choose(${idx})">
+            <div class="opt-letter">${LETTERS[idx] || idx+1}</div>${o}
+          </div>`).join('')}
+      </div>
+      <div class="nav-btns">
+        <button class="btn btn-skip" onclick="skip()"><i class="fa-solid fa-forward"></i> Skip</button>
+      </div>
+    </div>`;
+}
+
+function choose(v) {
+  if (answers[i] !== null) return;
+  answers[i] = v; answered++;
+  const q = questions[i];
+  const ok = v === q.a;
+  ok ? correct++ : wrong++;
+  updateTop();
+
+  q.o.forEach((_, idx) => {
+    const el = document.getElementById('opt' + idx);
+    el.classList.add('disabled');
+    if (idx === q.a) el.classList.add('correct');
+    else if (idx === v) el.classList.add('wrong');
+  });
+
+  const fb = document.createElement('div');
+  fb.className = 'feedback-bar ' + (ok ? 'ok' : 'no');
+  fb.innerHTML = ok
+    ? `<span class="feedback-icon">🎉</span><span>عسل جدا ، اللهم بارك</span>`
+    : `<span class="feedback-icon">😕</span><span>ركز يا سكر</span>`;
+
+  const card = document.querySelector('.q-card');
+  card.querySelector('.options').after(fb);
+
+  if (q.exp) {
+    const exp = document.createElement('div');
+    exp.className = 'explanation'; exp.style.display = 'block';
+    exp.innerHTML = '<b>💬 Explanation:</b> ' + q.exp;
+    fb.after(exp);
+  }
+
+  card.querySelector('.nav-btns').innerHTML = `
+    <button class="btn btn-next" onclick="next()">
+      ${i < questions.length - 1
+        ? '<i class="fa-solid fa-arrow-right"></i> Next Question'
+        : '<i class="fa-solid fa-flag-checkered"></i> Finish Exam'}
+    </button>`;
+}
+
+function skip() {
+  if (answers[i] === null) { answers[i] = -1; answered++; wrong++; updateTop(); }
+  next();
+}
+
+function next() {
+  if (i < questions.length - 1) { i++; render(); window.scrollTo({top:0,behavior:'smooth'}); }
+  else finish();
+}
+
+function finish() {
+  clearInterval(timerInterval);
+  const total = questions.length;
+  const score = Math.round((correct / total) * 100);
+
+  const wrongItems = [];
+  questions.forEach((q, idx) => {
+    if (answers[idx] !== q.a) wrongItems.push({...q, myAns: answers[idx]});
+  });
+  wrongSet = [...new Map(wrongItems.map(q => [q.t, q])).values()];
+
+  let grade, gradeColor;
+  if      (score >= 90) { grade = '🥇 Excellent';     gradeColor = 'var(--success)'; }
+  else if (score >= 75) { grade = '🥈 Very Good';      gradeColor = 'var(--accent)'; }
+  else if (score >= 60) { grade = '🥉 Good';           gradeColor = 'var(--warn)'; }
+  else                  { grade = '📚 Needs Review';   gradeColor = 'var(--danger)'; }
+
+  const circ  = 2 * Math.PI * 45;
+  const offset = circ - (score / 100) * circ;
+
+  const reportHTML = questions.map((q, idx) => {
+    const ok = answers[idx] === q.a;
+    return `<div class="report-item ${ok ? 'ok' : 'no'}">
+      <div class="ri-q">${ok ? '✅' : '❌'} ${q.t}</div>
+      ${!ok ? `
+        <div class="ri-row"><span class="ri-badge ri-yours">Your Answer</span> ${answers[idx] >= 0 ? q.o[answers[idx]] : 'Skipped'}</div>
+        <div class="ri-row"><span class="ri-badge ri-right">Correct</span> ${q.o[q.a]}</div>` : ''}
+    </div>`;
+  }).join('');
+
+  document.getElementById('prog-bar').style.width = '100%';
+  document.getElementById('app').innerHTML = `
+    <div class="result-hero">
+      <div class="score-ring">
+        <svg viewBox="0 0 110 110">
+          <defs>
+            <linearGradient id="ringGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+              <stop offset="0%"   stop-color="#0ea5e9"/>
+              <stop offset="50%"  stop-color="#6366f1"/>
+              <stop offset="100%" stop-color="#ec4899"/>
+            </linearGradient>
+          </defs>
+          <circle class="ring-bg"   cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="0"/>
+          <circle class="ring-fill" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="${circ}" id="ringFill"/>
+        </svg>
+        <div class="score-num">${score}</div>
+        <div class="score-pct">%</div>
+      </div>
+      <div class="result-grade" style="color:${gradeColor}">${grade}</div>
+      <div class="result-sub">You answered ${answered} out of ${total} questions</div>
+      <div class="result-stats">
+        <div class="rs"><div class="n" style="color:var(--success)">${correct}</div><div class="l">Correct</div></div>
+        <div class="rs"><div class="n" style="color:var(--danger)">${wrong}</div><div class="l">Wrong</div></div>
+        <div class="rs"><div class="n" style="color:var(--accent)">${total-answered<0?0:total-answered}</div><div class="l">Unanswered</div></div>
+      </div>
+    </div>
+    <div class="result-actions">
+      ${wrongSet.length ? `<button class="btn btn-retry" onclick="retryWrong()"><i class="fa-solid fa-rotate-right"></i> Retry Wrong (${wrongSet.length})</button>` : ''}
+      <button class="btn btn-home" onclick="init(RAW_QUESTIONS)"><i class="fa-solid fa-shuffle"></i> New Random Exam</button>
+      <a href="https://gaith-team.github.io/exam/" class="btn btn-home" style="text-decoration:none;"><i class="fa-solid fa-house"></i> Back to Subjects</a>
+    </div>
+    <div style="margin-top:28px">
+      <div style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text2)">📋 Detailed Report</div>
+      ${reportHTML}
+    </div>`;
+
+  setTimeout(() => { document.getElementById('ringFill').style.strokeDashoffset = offset; }, 100);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function retryWrong() {
+  const pool = wrongSet.map(q => {
+    const raw = RAW_QUESTIONS.find(r => r.t === q.t);
+    return raw || q;
+  });
+  questions = prepareQuestions(pool);
+  i = 0; correct = 0; wrong = 0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = []; answered = 0; timeLeft = totalTime;
+  startTimer(); render();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* THEME */
+const themeBtn = document.getElementById('themeBtn');
+let theme = localStorage.getItem('theme') || 'light';
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', t);
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+
+init(RAW_QUESTIONS);
+</script>
+</body>
+</html>
