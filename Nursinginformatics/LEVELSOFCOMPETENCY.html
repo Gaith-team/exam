@@ -1,0 +1,209 @@
+
+<style>
+.ni-wrap { padding: 1rem 0; font-size: 13px; }
+.level-row { display: flex; gap: 10px; margin-bottom: 14px; }
+.level-card { flex: 1; border-radius: 10px; border: 0.5px solid var(--color-border-tertiary); overflow: hidden; }
+.level-head { padding: 8px 12px; font-size: 12px; font-weight: 500; }
+.level-body { padding: 8px 12px 10px; font-size: 12px; color: var(--color-text-secondary); line-height: 1.5; }
+.level-body ul { margin: 4px 0 0; padding-left: 14px; }
+.level-body li { margin-bottom: 2px; }
+
+.domain-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 14px; }
+.domain-card { border-radius: 10px; border: 0.5px solid var(--color-border-tertiary); overflow: hidden; cursor: pointer; transition: box-shadow .15s; }
+.domain-card:hover { border-color: var(--color-border-primary); }
+.domain-head { padding: 8px 12px; font-size: 12px; font-weight: 500; display: flex; align-items: center; gap: 6px; }
+.domain-num { width: 20px; height: 20px; border-radius: 50%; font-size: 11px; font-weight: 500; display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+.domain-body { padding: 0 12px; max-height: 0; overflow: hidden; transition: max-height .3s ease, padding .3s; font-size: 12px; color: var(--color-text-secondary); line-height: 1.5; }
+.domain-body.open { max-height: 200px; padding: 0 12px 10px; }
+.domain-body ul { margin: 4px 0 0; padding-left: 14px; }
+.domain-body li { margin-bottom: 2px; }
+.domain-sig { margin-top: 6px; font-style: italic; color: var(--color-text-tertiary); font-size: 11px; }
+
+.barrier-strat { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
+.bs-card { border-radius: 10px; border: 0.5px solid var(--color-border-tertiary); padding: 10px 12px; }
+.bs-head { font-size: 12px; font-weight: 500; margin-bottom: 6px; }
+.bs-card ul { margin: 0; padding-left: 14px; font-size: 12px; color: var(--color-text-secondary); line-height: 1.6; }
+
+.sec-label { font-size: 11px; font-weight: 500; letter-spacing: .04em; color: var(--color-text-tertiary); text-transform: uppercase; margin: 16px 0 8px; }
+.hint { font-size: 11px; color: var(--color-text-tertiary); margin-bottom: 8px; }
+
+/* color schemes per domain */
+.d1 .domain-head { background: #E6F1FB; } .d1 .domain-num { background: #B5D4F4; color: #0C447C; }
+.d2 .domain-head { background: #E1F5EE; } .d2 .domain-num { background: #9FE1CB; color: #085041; }
+.d3 .domain-head { background: #EEEDFE; } .d3 .domain-num { background: #CECBF6; color: #26215C; }
+.d4 .domain-head { background: #FAECE7; } .d4 .domain-num { background: #F5C4B3; color: #4A1B0C; }
+.d5 .domain-head { background: #FAEEDA; } .d5 .domain-num { background: #FAC775; color: #412402; }
+.d6 .domain-head { background: #FBEAF0; } .d6 .domain-num { background: #F4C0D1; color: #4B1528; }
+.d7 .domain-head { background: #EAF3DE; } .d7 .domain-num { background: #C0DD97; color: #173404; }
+
+@media (prefers-color-scheme: dark) {
+.d1 .domain-head { background: #042C53; } .d1 .domain-num { background: #0C447C; color: #B5D4F4; }
+.d2 .domain-head { background: #04342C; } .d2 .domain-num { background: #085041; color: #9FE1CB; }
+.d3 .domain-head { background: #26215C; } .d3 .domain-num { background: #3C3489; color: #CECBF6; }
+.d4 .domain-head { background: #4A1B0C; } .d4 .domain-num { background: #712B13; color: #F5C4B3; }
+.d5 .domain-head { background: #412402; } .d5 .domain-num { background: #633806; color: #FAC775; }
+.d6 .domain-head { background: #4B1528; } .d6 .domain-num { background: #72243E; color: #F4C0D1; }
+.d7 .domain-head { background: #173404; } .d7 .domain-num { background: #27500A; color: #C0DD97; }
+}
+</style>
+
+<div class="ni-wrap">
+<h2 class="sr-only">Nursing Informatics Competencies — full summary</h2>
+
+<div class="sec-label">Levels of competency</div>
+<div class="level-row">
+  <div class="level-card">
+    <div class="level-head" style="background:var(--color-background-secondary)">🟢 Entry-level nurse</div>
+    <div class="level-body"><ul>
+      <li>Basic computer applications</li>
+      <li>Accurate documentation in EHR</li>
+      <li>Confidentiality & data security</li>
+    </ul></div>
+  </div>
+  <div class="level-card">
+    <div class="level-head" style="background:var(--color-background-secondary)">🔵 Experienced nurse</div>
+    <div class="level-body"><ul>
+      <li>Clinical info systems for decisions</li>
+      <li>Analyzes patient data trends</li>
+      <li>System evaluation & improvement</li>
+    </ul></div>
+  </div>
+  <div class="level-card">
+    <div class="level-head" style="background:var(--color-background-secondary)">🟣 Informatics specialist</div>
+    <div class="level-body"><ul>
+      <li>Designs & evaluates info systems</li>
+      <li>Leads training & change management</li>
+      <li>Research, policy & optimization</li>
+    </ul></div>
+  </div>
+</div>
+
+<div class="sec-label">7 Core competency domains <span class="hint" style="font-weight:400;text-transform:none;letter-spacing:0">(اضغط على أي domain لتشوف تفاصيله)</span></div>
+
+<div class="domain-grid">
+
+<div class="domain-card d1" onclick="toggle(this)">
+  <div class="domain-head"><span class="domain-num">1</span> Computer literacy</div>
+  <div class="domain-body">
+    <ul>
+      <li>Basic hardware & software operations</li>
+      <li>Word processing, spreadsheets, presentations</li>
+      <li>Internet & email navigation</li>
+      <li>Cybersecurity basics (passwords, data protection)</li>
+    </ul>
+    <div class="domain-sig">Enables interaction with health info systems & digital documentation.</div>
+  </div>
+</div>
+
+<div class="domain-card d2" onclick="toggle(this)">
+  <div class="domain-head"><span class="domain-num">2</span> Information literacy</div>
+  <div class="domain-body">
+    <ul>
+      <li>Identify information needs</li>
+      <li>Search electronic databases & digital libraries</li>
+      <li>Evaluate credibility & relevance of sources</li>
+      <li>Apply research findings to practice</li>
+    </ul>
+    <div class="domain-sig">Supports evidence-based nursing & lifelong learning.</div>
+  </div>
+</div>
+
+<div class="domain-card d3" onclick="toggle(this)">
+  <div class="domain-head"><span class="domain-num">3</span> Informatics literacy</div>
+  <div class="domain-body">
+    <ul>
+      <li>DIKW framework (Data → Info → Knowledge → Wisdom)</li>
+      <li>Using electronic health records (EHRs)</li>
+      <li>Interpret clinical data & decision support alerts</li>
+      <li>Apply standardized nursing terminologies</li>
+    </ul>
+    <div class="domain-sig">Transforms raw data into meaningful clinical decisions.</div>
+  </div>
+</div>
+
+<div class="domain-card d4" onclick="toggle(this)">
+  <div class="domain-head"><span class="domain-num">4</span> Clinical informatics</div>
+  <div class="domain-body">
+    <ul>
+      <li>Accurate electronic nursing documentation</li>
+      <li>Use of clinical decision support systems</li>
+      <li>Monitor patient outcomes digitally</li>
+      <li>Report & manage data for quality improvement</li>
+    </ul>
+    <div class="domain-sig">Improves patient safety, continuity & care coordination.</div>
+  </div>
+</div>
+
+<div class="domain-card d5" onclick="toggle(this)">
+  <div class="domain-head"><span class="domain-num">5</span> Management & leadership</div>
+  <div class="domain-body">
+    <ul>
+      <li>Staffing, scheduling & budgeting systems</li>
+      <li>Analyze quality indicators & performance metrics</li>
+      <li>Support system implementation & evaluation</li>
+      <li>Lead technological change in organizations</li>
+    </ul>
+    <div class="domain-sig">Enhances organizational efficiency & strategic decision-making.</div>
+  </div>
+</div>
+
+<div class="domain-card d6" onclick="toggle(this)">
+  <div class="domain-head"><span class="domain-num">6</span> Ethical & legal</div>
+  <div class="domain-body">
+    <ul>
+      <li>Maintain patient privacy & confidentiality</li>
+      <li>Understand data protection laws</li>
+      <li>Ethical use of patient data & digital records</li>
+      <li>Accountability in electronic documentation</li>
+    </ul>
+    <div class="domain-sig">Protects patient rights & maintains professional integrity.</div>
+  </div>
+</div>
+
+<div class="domain-card d7" onclick="toggle(this)">
+  <div class="domain-head"><span class="domain-num">7</span> Research & education</div>
+  <div class="domain-body">
+    <ul>
+      <li>Use data for research & quality improvement</li>
+      <li>Support data collection & analysis</li>
+      <li>Integrate technology into nursing education</li>
+      <li>Evaluate educational technologies & learning systems</li>
+    </ul>
+    <div class="domain-sig">Promotes knowledge generation & continuous professional development.</div>
+  </div>
+</div>
+
+</div>
+
+<div class="sec-label">Barriers & strategies</div>
+<div class="barrier-strat">
+  <div class="bs-card">
+    <div class="bs-head" style="color:var(--color-text-danger)">⚠ Barriers</div>
+    <ul>
+      <li>Lack of training & educational resources</li>
+      <li>Resistance to change</li>
+      <li>Limited access to technology</li>
+      <li>Inadequate organizational support</li>
+      <li>High workload & time constraints</li>
+    </ul>
+  </div>
+  <div class="bs-card">
+    <div class="bs-head" style="color:var(--color-text-success)">✓ Strategies</div>
+    <ul>
+      <li>Integrate informatics into curricula</li>
+      <li>Continuous professional training</li>
+      <li>Organizational support & leadership</li>
+      <li>Hands-on practice with health info systems</li>
+      <li>Encourage lifelong learning & adaptability</li>
+    </ul>
+  </div>
+</div>
+
+</div>
+
+<script>
+function toggle(card) {
+  const body = card.querySelector('.domain-body');
+  body.classList.toggle('open');
+}
+</script>
