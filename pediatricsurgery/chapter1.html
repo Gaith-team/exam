@@ -1323,7 +1323,6 @@ const QUESTIONS = [
     }
 
 ];
-
 /* ============ ENGINE ============ */
 let questions, i, correct, wrong, answers, wrongSet, answered;
 let totalTime = 50*60, timeLeft, timerInterval;
@@ -1336,9 +1335,24 @@ function shuffle(arr) {
   }
   return arr;
 }
+function shuffleOptions(question) {
+  const options = question.o.map((text, index) => ({
+    text,
+    correct: index === question.a
+  }));
 
-function init(pool) {
-  questions = shuffle([...pool]);
+  shuffle(options);
+
+  return {
+    ...question,
+    o: options.map(opt => opt.text),
+    a: options.findIndex(opt => opt.correct)
+  };
+}
+  function init(pool) {
+questions = shuffle(
+  pool.map(q => shuffleOptions({...q}))
+);
   i = 0; correct = 0; wrong = 0;
   answers = new Array(questions.length).fill(null);
   wrongSet = []; answered = 0;
@@ -1347,6 +1361,7 @@ function init(pool) {
   startTimer();
   render();
 }
+
 
 /* TIMER */
 function startTimer() {
@@ -1518,10 +1533,21 @@ function finish() {
 /* RETRY WRONG */
 function retryWrong() {
   const pool = [...wrongSet];
-  questions = shuffle(pool); i = 0; correct = 0; wrong = 0;
+
+  questions = shuffle(
+    pool.map(q => shuffleOptions({...q}))
+  );
+
+  i = 0;
+  correct = 0;
+  wrong = 0;
   answers = new Array(questions.length).fill(null);
-  wrongSet = []; answered = 0; timeLeft = totalTime;
-  startTimer(); render();
+  wrongSet = [];
+  answered = 0;
+  timeLeft = totalTime;
+
+  startTimer();
+  render();
   window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
