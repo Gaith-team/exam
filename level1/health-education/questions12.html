@@ -381,66 +381,496 @@ footer {
 
 <script>
 const QUESTIONS = [
-    {t:"Which principle of health promotion involves helping people gain control over their health decisions?", o:["Participation", "Sustainability", "Equity", "Empowerment"], a:3},
-    {t:"A disadvantage of indirect health education is:", o:["It is slow", "Lacks personal interaction", "It is hard to repeat", "It is expensive"], a:1},
-    {t:"Mandatory seatbelt use is an example of which health promotion strategy?", o:["Policy and Legislation", "Social Marketing", "Environmental Change", "Community Intervention"], a:0},
-    {t:"Diet, exercise, and smoking are examples of which determinant of health?", o:["Biological", "Economic", "Environmental", "Behavioral"], a:3},
-    {t:"Which setting focuses on promoting occupational safety?", o:["Home", "Hospital", "Industry/Workplace", "School"], a:2},
-    {t:"Direct health education is based on the interchange of knowledge through:", o:["Drawing only", "Listening and talking", "Writing only", "Reading only"], a:1},
-    {t:"One of the roles of a nurse as a health educator is to assess patients':", o:["Financial status", "Learning needs and readiness", "Hobbies", "Political views"], a:1},
-    {t:"Health promotion is based on the principle that health is influenced by:", o:["Only diet", "Only exercise", "Multiple factors (lifestyle, environment, etc.)", "Only genetics"], a:2},
-    {t:"Which characteristic involves trying to understand how another person feels?", o:["Sympathy", "Empathy", "Antipathy", "Apathy"], a:1},
-    {t:"Which standard involves identifying trusted adults and professionals who can help promote health?", o:["Standard 6", "Standard 3", "Standard 1", "Standard 4"], a:1},
-    {t:"Sustainability in health promotion focuses on:", o:["Financial profit", "Immediate results only", "Short-term fixes", "Long-term behavior change"], a:3},
-    {t:"To overcome challenges, messages should be tailored to:", o:["Only the government", "Cultural and community contexts", "Only the educator", "Random topics"], a:1},
-    {t:"Which theory emphasizes learning by observing others and self-efficacy?", o:["PRECEDE-PROCEED", "Stages of Change", "Health Belief Model", "Social Cognitive Theory"], a:3},
-    {t:"A key advantage of indirect health education is that it can reach:", o:["People in isolation", "Only doctors", "Large groups of people at once", "Only a few people"], a:2},
-    {t:"One-on-one counseling and home visits are examples of:", o:["Mass Education", "Group Methods", "Individual Methods", "Policy Methods"], a:2},
-    {t:"Standard 5 states that a Health Educator will demonstrate the ability to use:", o:["Indecision", "Decision-making skills", "Confusion", "Conflict skills"], a:1},
-    {t:"Standard 2 focuses on analyzing the influence of which factors on health behaviors?", o:["Technological advancements", "Economic growth", "Family, peers, culture, media, and technology", "Political opinions"], a:2},
-    {t:"Organizing community exercise programs is an example of:", o:["Social Marketing", "Individual Counseling", "Community-Based Interventions", "Policy"], a:2},
-    {t:"Health educators are crucial in evaluating the:", o:["Cost of medicine", "Weather patterns", "Effectiveness of health promotion programs", "Political climate"], a:2},
-    {t:"The 'Holistic Approach' in health promotion considers:", o:["Only social health", "Physical, mental, and social health", "Only physical health", "Only mental health"], a:1},
-    {t:"Which model focuses on individuals' beliefs about health risks and benefits?", o:["Transtheoretical Model", "Social Cognitive Theory", "PRECEDE-PROCEED", "Health Belief Model (HBM)"], a:3},
-    {t:"Health promotion combines education with policies, environmental changes, and:", o:["Financial taxes", "Community support", "Strict laws only", "Military force"], a:1},
-    {t:"Preventing disease before it occurs is known as:", o:["Tertiary prevention", "Primary prevention", "Secondary prevention", "Quaternary prevention"], a:1},
-    {t:"Which strategy uses media and marketing to influence healthy behaviors?", o:["Individual Counseling", "Environmental Change", "Policy", "Social Marketing"], a:3},
-    {t:"Standard 1 of National Health Education Standards focuses on comprehending concepts related to:", o:["Power", "Health promotion and disease prevention", "Wealth", "Fame"], a:1},
-    {t:"Blogs are typically updated:", o:["Annually", "Regularly (daily or weekly)", "Never", "Once a decade"], a:1},
-    {t:"Standard 8 focuses on demonstrating the ability to:", o:["Gain wealth", "Advocate for personal, family, and community health", "Seek fame", "Exercise power"], a:1},
-    {t:"Health education at home primarily focuses on teaching:", o:["Stock trading", "Personal hygiene and nutrition", "Advanced science", "Global politics"], a:1},
-    {t:"Which skill is crucial for success as a public health professional, involving both verbal and written aspects?", o:["Driving skills", "Cooking skills", "Communication skills", "Artistic skills"], a:2},
-    {t:"Providing bicycle lanes and safe playgrounds is an example of:", o:["Environmental Changes", "Social Marketing", "Individual Counseling", "Policy"], a:0},
-    {t:"In schools, health education targets children and adolescents, covering topics like:", o:["Mechanical engineering", "Hygiene and nutrition", "Quantum physics", "Ancient history"], a:1},
-    {t:"Ensuring all populations have access to health opportunities is the principle of:", o:["Sustainability", "Holistic", "Empowerment", "Equity and Social Justice"], a:3},
-    {t:"Which determinant of health includes age, genetics, and sex?", o:["Behavioral", "Social", "Biological", "Environmental"], a:2},
-    {t:"The Transtheoretical Model is also known as the:", o:["Social Learning Theory", "Health Belief Model", "Planning Model", "Stages of Change"], a:3},
-    {t:"Which type of mobile app helps users monitor symptoms like asthma?", o:["Mental Health Apps", "Disease Management Apps", "Fitness Apps", "Nutrition Apps"], a:1},
-    {t:"Which of the following is a challenge in health promotion?", o:["Too much awareness", "Unlimited resources", "No behavioral resistance", "Cultural or social barriers"], a:3},
-    {t:"Which model is a comprehensive planning model that assesses community needs?", o:["PRECEDE-PROCEED Model", "HBM", "Social Cognitive Theory", "Stages of Change"], a:0},
-    {t:"The primary goal of health education is to help people make:", o:["Fast decisions", "No decisions", "Informed decisions", "Random choices"], a:2},
-    {t:"Which strategy creates supportive environments through laws and regulations?", o:["Individual Counseling", "Policy and Legislation", "Health Education", "Social Marketing"], a:1},
-    {t:"A health educator assists individuals and communities to adopt:", o:["Political ideologies", "New technologies", "Healthy behaviors", "Expensive treatments"], a:2},
-    {t:"Clean water and sanitation are examples of which determinant?", o:["Environmental", "Social", "Biological", "Behavioral"], a:0},
-    {t:"Workshops, lectures, and focus groups are examples of:", o:["Environmental Methods", "Mass Education", "Group Methods", "Individual Methods"], a:2},
-    {t:"Which of the following is a type of print media?", o:["Newspapers", "Radio", "Mobile apps", "Television"], a:0},
-    {t:"Standard 6 focuses on demonstrating the ability to use:", o:["Goal-setting skills", "Procrastination", "Distraction", "Apathy"], a:0},
-    {t:"Posters, flyers, and radio are examples of:", o:["Policy Methods", "Mass Education Methods", "Individual Methods", "Group Methods"], a:1},
-    {t:"Sustainability focuses on short-term behavior change.", o:["True", "False"], a:1},
-    {t:"Health education in schools primarily targets adults.", o:["True", "False"], a:1},
-    {t:"Cultural barriers can be a challenge in health promotion.", o:["True", "False"], a:0},
-    {t:"Health promotion is exactly the same as health education.", o:["True", "False"], a:1},
-    {t:"Empathy means trying to understand how another person feels.", o:["True", "False"], a:0},
-    {t:"Policy and legislation include creating laws like smoking bans.", o:["True", "False"], a:0},
-    {t:"Assessing individual and community needs is a role of a health educator.", o:["True", "False"], a:0},
-    {t:"Indirect health education is more effective for changing behavior than direct methods.", o:["True", "False"], a:1},
-    {t:"The Transtheoretical Model identifies stages people go through to change behavior.", o:["True", "False"], a:0},
-    {t:"Primary prevention aims to prevent disease before it occurs.", o:["True", "False"], a:0},
-    {t:"Mass education methods include one-on-one counseling.", o:["True", "False"], a:1},
-    {t:"Social Cognitive Theory emphasizes learning by observing others.", o:["True", "False"], a:0},
-    {t:"Health educators do not need to evaluate their programs.", o:["True", "False"], a:1},
-    {t:"Biological determinants of health include diet and exercise.", o:["True", "False"], a:1},
-    {t:"Direct health education allows for immediate assessment of learners' needs.", o:["True", "False"], a:0}
+   // ===================== EASY LEVEL =====================
+      {
+        t: "Health promotion differs from health education because it:",
+        o: [
+          "Focuses only on teaching people about health",
+          "Combines education with policies, environmental changes, and community support",
+          "Deals exclusively with individual behavior change",
+          "Replaces the need for healthcare services"
+        ],
+        a: 1
+      },
+      {
+        t: "Health promotion is based on the principle that health is influenced by:",
+        o: [
+          "Only genetics and biological factors",
+          "Only individual lifestyle choices",
+          "Multiple factors including lifestyle, environment, social support, and access to healthcare",
+          "Only economic factors and income levels"
+        ],
+        a: 2
+      },
+      {
+        t: "Which of the following BEST describes the importance of health promotion?",
+        o: [
+          "It focuses only on treating existing diseases",
+          "It prevents disease before it occurs and encourages healthy behaviors",
+          "It replaces the role of medical professionals",
+          "It is limited to improving physical health only"
+        ],
+        a: 1
+      },
+      {
+        t: "Health promotion promotes equity in health by:",
+        o: [
+          "Focusing only on wealthy populations",
+          "Targeting vulnerable and underserved populations",
+          "Providing identical programs for all communities",
+          "Avoiding culturally sensitive approaches"
+        ],
+        a: 1
+      },
+      {
+        t: "Which of the following is a principle of health promotion?",
+        o: [
+          "Dependency",
+          "Isolation",
+          "Empowerment",
+          "Rigidity"
+        ],
+        a: 2
+      },
+      {
+        t: "The principle of 'participation' in health promotion refers to:",
+        o: [
+          "Healthcare providers making all decisions",
+          "Encouraging active involvement of communities in health programs",
+          "Using only government-driven health initiatives",
+          "Focusing on individual behavior only"
+        ],
+        a: 1
+      },
+      {
+        t: "Which of the following is a biological determinant of health?",
+        o: [
+          "Diet and exercise",
+          "Income and employment",
+          "Clean water and sanitation",
+          "Age, genetics, and sex"
+        ],
+        a: 3
+      },
+      {
+        t: "Which of the following is a behavioral determinant of health?",
+        o: [
+          "Genetics and age",
+          "Education and employment",
+          "Diet, exercise, smoking, and alcohol consumption",
+          "Clean water and safe neighborhoods"
+        ],
+        a: 2
+      },
+      {
+        t: "Which of the following is an environmental determinant of health?",
+        o: [
+          "Income and affordability",
+          "Social support networks",
+          "Clean water, sanitation, and safe neighborhoods",
+          "Age and genetics"
+        ],
+        a: 2
+      },
+      {
+        t: "Which health promotion strategy involves creating supportive environments through laws and regulations?",
+        o: [
+          "Health education",
+          "Social marketing",
+          "Policy and legislation",
+          "Community-based interventions"
+        ],
+        a: 2
+      },
+      {
+        t: "An example of a policy and legislation strategy in health promotion is:",
+        o: [
+          "Organizing community exercise programs",
+          "Mandatory seatbelt use and smoking bans in public areas",
+          "Teaching parents about proper nutrition",
+          "Campaigns promoting vaccination"
+        ],
+        a: 1
+      },
+      {
+        t: "Social marketing in health promotion uses:",
+        o: [
+          "Only community-based interventions",
+          "Only policy changes and legislation",
+          "Media and marketing strategies to influence healthy behaviors",
+          "Individual counseling and home visits"
+        ],
+        a: 2
+      },
+      {
+        t: "An example of an environmental change strategy in health promotion is:",
+        o: [
+          "Anti-smoking campaigns in the media",
+          "Mandatory vaccination laws",
+          "Providing safe playgrounds, bicycle lanes, and access to healthy foods",
+          "One-on-one counseling sessions"
+        ],
+        a: 2
+      },
+      {
+        t: "Which health promotion model focuses on individuals' beliefs about health risks and benefits of actions?",
+        o: [
+          "Transtheoretical Model",
+          "Social Cognitive Theory",
+          "PRECEDE-PROCEED Model",
+          "Health Belief Model"
+        ],
+        a: 3
+      },
+      {
+        t: "The Transtheoretical Model (Stages of Change) is MOST useful in programs such as:",
+        o: [
+          "Environmental modification programs",
+          "Policy development initiatives",
+          "Smoking cessation or weight management",
+          "Community vaccination campaigns"
+        ],
+        a: 2
+      },
+
+      // ===================== MEDIUM LEVEL =====================
+      {
+        t: "Social Cognitive Theory emphasizes learning by:",
+        o: [
+          "Reading health pamphlets only",
+          "Observing others and developing self-efficacy",
+          "Following government legislation",
+          "Attending group therapy sessions only"
+        ],
+        a: 1
+      },
+      {
+        t: "An example of Social Cognitive Theory in health promotion is:",
+        o: [
+          "Creating smoking bans in public places",
+          "Conducting community vaccination campaigns",
+          "Demonstrating handwashing techniques in schools",
+          "Distributing health flyers in communities"
+        ],
+        a: 2
+      },
+      {
+        t: "The PRECEDE-PROCEED Model is BEST described as:",
+        o: [
+          "A model focused only on individual behavior change",
+          "A comprehensive planning model that assesses community needs before implementing interventions",
+          "A model based on social media marketing strategies",
+          "A model for measuring biological determinants only"
+        ],
+        a: 1
+      },
+      {
+        t: "Which of the following is an individual method of health education for health promotion?",
+        o: [
+          "Workshops and lectures",
+          "Radio and TV broadcasts",
+          "Peer education programs",
+          "One-on-one counseling and home visits"
+        ],
+        a: 3
+      },
+      {
+        t: "Which of the following is a group method of health education?",
+        o: [
+          "Home visits",
+          "Posters and pamphlets",
+          "Personalized health advice",
+          "Focus groups and peer education programs"
+        ],
+        a: 3
+      },
+      {
+        t: "Mass education methods in health promotion include:",
+        o: [
+          "One-on-one counseling sessions",
+          "Home visits and personalized advice",
+          "Posters, radio, and television",
+          "Focus groups and workshops"
+        ],
+        a: 2
+      },
+      {
+        t: "Which of the following is an example of a community-based health promotion intervention?",
+        o: [
+          "Mandatory seatbelt laws",
+          "Anti-smoking media campaigns",
+          "Organizing community exercise programs or clean-up campaigns",
+          "Providing personalized dietary advice"
+        ],
+        a: 2
+      },
+      {
+        t: "Which of the following is a role of health educators in health promotion?",
+        o: [
+          "Prescribing medications to community members",
+          "Performing surgical procedures",
+          "Assessing health needs of individuals and communities",
+          "Developing government policy independently"
+        ],
+        a: 2
+      },
+      {
+        t: "A health educator who evaluates the effectiveness of a health promotion program is fulfilling which role?",
+        o: [
+          "Designing educational materials",
+          "Evaluating the effectiveness of health promotion programs",
+          "Assessing individual biological determinants",
+          "Implementing policy changes"
+        ],
+        a: 1
+      },
+      {
+        t: "Which of the following is identified as a challenge in health promotion?",
+        o: [
+          "Excessive health literacy among populations",
+          "Too many available resources",
+          "Cultural or social barriers and lack of health literacy",
+          "Overuse of community-based interventions"
+        ],
+        a: 2
+      },
+      {
+        t: "Which strategy helps overcome cultural barriers in health promotion?",
+        o: [
+          "Using identical messages for all populations",
+          "Avoiding community involvement",
+          "Tailoring messages to cultural and community contexts",
+          "Relying only on mass media campaigns"
+        ],
+        a: 2
+      },
+      {
+        t: "The principle of sustainability in health promotion focuses on:",
+        o: [
+          "Short-term behavioral changes only",
+          "Immediate symptom relief",
+          "Long-term behavior change rather than short-term fixes",
+          "Providing one-time health events"
+        ],
+        a: 2
+      },
+      {
+        t: "The principle of holistic approach in health promotion considers:",
+        o: [
+          "Only physical health",
+          "Only mental health",
+          "Physical, mental, and social health",
+          "Only environmental health factors"
+        ],
+        a: 2
+      },
+      {
+        t: "Health promotion reduces healthcare costs by:",
+        o: [
+          "Increasing hospitalizations",
+          "Focusing only on treating chronic diseases",
+          "Minimizing illness and hospitalizations through preventive measures",
+          "Replacing all forms of medical treatment"
+        ],
+        a: 2
+      },
+      {
+        t: "Which of the following is an example of a health promotion program?",
+        o: [
+          "Emergency surgical procedures",
+          "School-based nutrition programs and community vaccination campaigns",
+          "Hospital-based intensive care units",
+          "Individual prescription drug programs"
+        ],
+        a: 1
+      },
+
+      // ===================== HARD LEVEL =====================
+      {
+        t: "Which of the following BEST distinguishes the Health Belief Model from the Transtheoretical Model?",
+        o: [
+          "The Health Belief Model focuses on stages of behavior change; the Transtheoretical Model focuses on beliefs about health risks",
+          "The Health Belief Model focuses on individuals' beliefs about health risks and benefits; the Transtheoretical Model identifies stages people go through to change behavior",
+          "Both models serve identical purposes in health promotion planning",
+          "The Transtheoretical Model focuses on community needs assessment; the Health Belief Model focuses on self-efficacy"
+        ],
+        a: 1
+      },
+      {
+        t: "A health promotion program that considers physical, mental, and social health while targeting multiple determinants of health is BEST applying which principle?",
+        o: [
+          "Equity and social justice only",
+          "Sustainability only",
+          "Holistic approach combined with addressing multiple determinants",
+          "Participation only"
+        ],
+        a: 2
+      },
+      {
+        t: "Which combination of health promotion strategies would be MOST comprehensive for reducing smoking rates in a community?",
+        o: [
+          "Social marketing alone",
+          "Policy and legislation alone",
+          "Only community-based interventions",
+          "A combination of health education, policy and legislation, social marketing, and community-based interventions"
+        ],
+        a: 3
+      },
+      {
+        t: "A health educator who designs culturally tailored messages and involves community members in program planning to overcome behavioral resistance is addressing which challenge?",
+        o: [
+          "Excessive health literacy",
+          "Overabundance of resources",
+          "Cultural barriers and behavioral resistance to change",
+          "Too many available healthcare providers"
+        ],
+        a: 2
+      },
+      {
+        t: "The statement 'health promotion prevents disease before it occurs' BEST refers to which level of prevention?",
+        o: [
+          "Tertiary prevention",
+          "Secondary prevention",
+          "Primary prevention",
+          "Quaternary prevention"
+        ],
+        a: 2
+      },
+      {
+        t: "Which of the following CORRECTLY matches a health promotion model with its application?",
+        o: [
+          "Social Cognitive Theory – Assessing community needs before intervention",
+          "Health Belief Model – Identifying stages of behavior change",
+          "PRECEDE-PROCEED – Comprehensive community needs assessment before implementing interventions",
+          "Transtheoretical Model – Emphasizing self-efficacy and observational learning"
+        ],
+        a: 2
+      },
+      {
+        t: "An economic determinant of health that directly impacts a person's ability to access health promotion programs is:",
+        o: [
+          "Genetics and biological factors",
+          "Social support networks",
+          "Behavioral factors such as diet",
+          "Income and affordability of healthy food"
+        ],
+        a: 3
+      },
+      {
+        t: "A program that provides bicycle lanes, safe playgrounds, and access to healthy foods is BEST targeting which determinant of health?",
+        o: [
+          "Biological determinants",
+          "Behavioral determinants only",
+          "Environmental determinants",
+          "Economic determinants only"
+        ],
+        a: 2
+      },
+      {
+        t: "Which of the following BEST explains why equity and social justice is a principle of health promotion?",
+        o: [
+          "All communities have equal access to health resources and require no additional support",
+          "Health disparities exist and health promotion must ensure all populations have access to health opportunities",
+          "Social justice focuses only on economic equality and not health outcomes",
+          "Equity means providing identical programs to all communities regardless of their needs"
+        ],
+        a: 1
+      },
+      {
+        t: "A health educator who uses workshops for groups, home visits for individuals, and television campaigns for mass audiences is BEST applying:",
+        o: [
+          "Only group methods of health education",
+          "A combination of individual, group, and mass education methods",
+          "Only mass education methods",
+          "Only community-based interventions"
+        ],
+        a: 1
+      },
+      {
+        t: "The role of health educators in 'designing educational materials and programs' BEST supports which health promotion strategy?",
+        o: [
+          "Policy and legislation",
+          "Environmental changes",
+          "Health education as a strategy for health promotion",
+          "Social marketing only"
+        ],
+        a: 2
+      },
+      {
+        t: "Health promotion focuses only on teaching people about health without considering environmental or policy factors.",
+        o: ["True", "False"],
+        a: 1
+      },
+      {
+        t: "Empowerment in health promotion means helping people gain control over their health decisions.",
+        o: ["True", "False"],
+        a: 0
+      },
+      {
+        t: "Biological determinants of health include diet, exercise, and smoking.",
+        o: ["True", "False"],
+        a: 1
+      },
+      {
+        t: "Social marketing in health promotion uses media and marketing strategies to influence healthy behaviors.",
+        o: ["True", "False"],
+        a: 0
+      },
+      {
+        t: "The Health Belief Model identifies the stages people go through to change their behavior.",
+        o: ["True", "False"],
+        a: 1
+      },
+      {
+        t: "The Transtheoretical Model is useful in programs like smoking cessation and weight management.",
+        o: ["True", "False"],
+        a: 0
+      },
+      {
+        t: "Home visits are classified as a mass education method in health promotion.",
+        o: ["True", "False"],
+        a: 1
+      },
+      {
+        t: "The principle of sustainability in health promotion focuses on long-term behavior change rather than short-term fixes.",
+        o: ["True", "False"],
+        a: 0
+      },
+      {
+        t: "Lack of health literacy and cultural barriers are recognized challenges in health promotion.",
+        o: ["True", "False"],
+        a: 0
+      }
+      {
+        t: "Health promotion reduces healthcare costs by increasing hospitalizations and medical treatments.",
+        o: ["True", "False"],
+        a: 1
+      },
+      {
+        t: "Social Cognitive Theory emphasizes learning by observing others and developing self-efficacy.",
+        o: ["True", "False"],
+        a: 0
+      },
+      {
+        t: "Workplace wellness programs and school-based nutrition programs are examples of health promotion programs.",
+        o: ["True", "False"],
+        a: 0
+      },
+      {
+        t: "The PRECEDE-PROCEED Model focuses only on individual behavior change without community needs assessment.",
+        o: ["True", "False"],
+        a: 1
+      },
+      {
+        t: "Health educators are responsible for assessing health needs, designing programs, and evaluating health promotion effectiveness.",
+        o: ["True", "False"],
+        a: 0
+      },
+      {
+        t: "Environmental determinants of health include income, employment, and social support networks.",
+        o: ["True", "False"],
+        a: 1
+      }
 ];
 
 /* ============ ENGINE ============ */
