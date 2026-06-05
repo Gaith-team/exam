@@ -1,0 +1,595 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Medical MCQ Quiz</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Arial, sans-serif; background: #f0f4f8; padding: 20px; }
+  h1 { text-align: center; color: #1a3a5c; margin-bottom: 10px; font-size: 22px; }
+  .subtitle { text-align: center; color: #555; margin-bottom: 20px; font-size: 14px; }
+
+  .filters { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: 20px; }
+  .filter-btn { padding: 6px 14px; border: 2px solid #1a3a5c; background: white; color: #1a3a5c;
+    border-radius: 20px; cursor: pointer; font-size: 13px; transition: all 0.2s; }
+  .filter-btn.active { background: #1a3a5c; color: white; }
+
+  .stats { display: flex; gap: 12px; justify-content: center; margin-bottom: 20px; flex-wrap: wrap; }
+  .stat { background: white; border-radius: 10px; padding: 10px 20px; text-align: center; border: 1px solid #ddd; }
+  .stat-num { font-size: 22px; font-weight: bold; color: #1a3a5c; }
+  .stat-label { font-size: 12px; color: #777; }
+
+  #quiz-container { max-width: 720px; margin: 0 auto; }
+  .question-card { background: white; border-radius: 12px; padding: 20px; margin-bottom: 16px;
+    border: 1px solid #ddd; box-shadow: 0 2px 6px rgba(0,0,0,0.06); }
+  .q-header { display: flex; align-items: flex-start; gap: 10px; margin-bottom: 14px; }
+  .q-num { background: #1a3a5c; color: white; border-radius: 50%; width: 28px; height: 28px;
+    display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: bold; flex-shrink: 0; }
+  .q-topic { background: #e8f0fe; color: #1a3a5c; font-size: 11px; padding: 2px 8px;
+    border-radius: 10px; font-weight: bold; flex-shrink: 0; }
+  .q-text { font-size: 15px; color: #222; line-height: 1.5; font-weight: 500; flex: 1; }
+
+  .options { display: flex; flex-direction: column; gap: 8px; }
+  .option { display: flex; align-items: center; gap: 10px; padding: 10px 14px;
+    border: 1.5px solid #ddd; border-radius: 8px; cursor: pointer; transition: all 0.2s; }
+  .option:hover { border-color: #1a3a5c; background: #f0f4f8; }
+  .option.correct { border-color: #27ae60; background: #eafaf1; }
+  .option.wrong { border-color: #e74c3c; background: #fdf0ed; }
+  .option.show-correct { border-color: #27ae60; background: #eafaf1; }
+  .opt-letter { width: 26px; height: 26px; border-radius: 50%; border: 1.5px solid #aaa;
+    display: flex; align-items: center; justify-content: center; font-size: 12px;
+    font-weight: bold; color: #555; flex-shrink: 0; }
+  .option.correct .opt-letter { border-color: #27ae60; background: #27ae60; color: white; }
+  .option.wrong .opt-letter { border-color: #e74c3c; background: #e74c3c; color: white; }
+  .option.show-correct .opt-letter { border-color: #27ae60; background: #27ae60; color: white; }
+  .opt-text { font-size: 14px; color: #333; }
+
+  .nav-bar { display: flex; justify-content: center; gap: 12px; margin-top: 20px; flex-wrap: wrap; }
+  .nav-btn { padding: 10px 24px; border-radius: 8px; border: none; cursor: pointer;
+    font-size: 14px; font-weight: bold; transition: all 0.2s; }
+  .btn-primary { background: #1a3a5c; color: white; }
+  .btn-primary:hover { background: #243f60; }
+  .btn-secondary { background: white; color: #1a3a5c; border: 2px solid #1a3a5c; }
+  .btn-secondary:hover { background: #f0f4f8; }
+  .btn-danger { background: #e74c3c; color: white; }
+  .btn-danger:hover { background: #c0392b; }
+
+  #result-panel { display: none; background: white; border-radius: 12px; padding: 30px;
+    text-align: center; max-width: 720px; margin: 20px auto; box-shadow: 0 4px 12px rgba(0,0,0,0.1); }
+  .result-score { font-size: 48px; font-weight: bold; color: #1a3a5c; }
+  .result-text { font-size: 16px; color: #555; margin: 10px 0 20px; }
+
+  .progress-bar-wrap { background: #eee; border-radius: 10px; height: 8px; margin: 10px 0 16px; }
+  .progress-bar { background: #1a3a5c; height: 8px; border-radius: 10px; transition: width 0.3s; }
+
+  #page-info { text-align: center; color: #777; font-size: 13px; margin-bottom: 10px; }
+
+  .mode-toggle { display: flex; justify-content: center; gap: 10px; margin-bottom: 16px; }
+  .mode-btn { padding: 8px 18px; border-radius: 20px; border: 2px solid #1a3a5c;
+    background: white; color: #1a3a5c; cursor: pointer; font-size: 13px; }
+  .mode-btn.active { background: #1a3a5c; color: white; }
+</style>
+</head>
+<body>
+<h1>📚 Medical MCQ Bank</h1>
+<p class="subtitle">Community Medicine & Epidemiology</p>
+
+<div class="mode-toggle">
+  <button class="mode-btn active" onclick="setMode('practice')" id="mode-practice">Practice Mode</button>
+  <button class="mode-btn" onclick="setMode('exam')" id="mode-exam">Exam Mode</button>
+</div>
+
+<div class="filters" id="topic-filters"></div>
+
+<div class="stats">
+  <div class="stat"><div class="stat-num" id="total-stat">0</div><div class="stat-label">Total</div></div>
+  <div class="stat"><div class="stat-num" id="correct-stat" style="color:#27ae60">0</div><div class="stat-label">Correct</div></div>
+  <div class="stat"><div class="stat-num" id="wrong-stat" style="color:#e74c3c">0</div><div class="stat-label">Wrong</div></div>
+  <div class="stat"><div class="stat-num" id="remaining-stat">0</div><div class="stat-label">Remaining</div></div>
+</div>
+
+<div class="progress-bar-wrap" style="max-width:720px;margin:0 auto 16px;">
+  <div class="progress-bar" id="progress-bar" style="width:0%"></div>
+</div>
+
+<div id="page-info"></div>
+<div id="quiz-container"></div>
+<div id="result-panel">
+  <div class="result-score" id="result-score"></div>
+  <div class="result-text" id="result-text"></div>
+  <button class="nav-btn btn-primary" onclick="resetQuiz()">🔄 Try Again</button>
+</div>
+
+<div class="nav-bar">
+  <button class="nav-btn btn-secondary" onclick="prevPage()">◀ Previous</button>
+  <button class="nav-btn btn-danger" onclick="shuffleQuestions()">🔀 Shuffle</button>
+  <button class="nav-btn btn-primary" onclick="nextPage()">Next ▶</button>
+</div>
+
+<script>
+const ALL_QUESTIONS = [
+  // ── TUBERCULOSIS ──
+  {t:"Which bacteria causes tuberculosis?",o:["Mycobacterium leprae","Mycobacterium tuberculosis","Streptococcus pneumoniae","Haemophilus influenzae"],a:1,topic:"TB"},
+  {t:"What is the primary mode of transmission for tuberculosis?",o:["Fecal-oral route","Vector-borne transmission","Airborne droplet nuclei","Direct contact with bodily fluids"],a:2,topic:"TB"},
+  {t:"Which population has the highest risk for progression from latent TB to active TB?",o:["Elderly with no comorbidities","HIV-negative adolescents","HIV-positive individuals","Healthy adults with BCG vaccination"],a:2,topic:"TB"},
+  {t:"What percentage of latent TB individuals develop active TB without treatment?",o:["1–2%","5–10%","20–30%","50–60%"],a:1,topic:"TB"},
+  {t:"Which is NOT a common symptom of pulmonary tuberculosis?",o:["Persistent cough","Night sweats","Seizures","Weight loss"],a:2,topic:"TB"},
+  {t:"Which test detects TB infection by measuring immune response to TB antigens?",o:["AFB smear","Interferon-Gamma Release Assay (IGRA)","Chest X-ray","PCR"],a:1,topic:"TB"},
+  {t:"What is the global TB incidence rate per WHO estimates?",o:["Less than 1/100,000","~10/100,000","~130/100,000","More than 500/100,000"],a:2,topic:"TB"},
+  {t:"Which is the gold standard for TB diagnosis?",o:["Tuberculin skin test","QuantiFERON-TB Gold","Chest radiography","Mycobacterial culture"],a:3,topic:"TB"},
+  {t:"What is the recommended duration for standard first-line TB treatment?",o:["3 months","6 months","9 months","12 months"],a:1,topic:"TB"},
+  {t:"Which is a major risk factor for MDR-TB?",o:["Prior incomplete/inadequate TB treatment","Advanced age","Female gender","Rural residence"],a:0,topic:"TB"},
+  {t:"BCG vaccine is primarily effective at preventing?",o:["Latent TB in adults","Severe forms of TB in children","TB transmission in communities","All forms of TB disease"],a:1,topic:"TB"},
+  {t:"Best screening test for TB in BCG-vaccinated individuals?",o:["Tuberculin skin test (TST)","Chest X-ray","IGRA","Sputum smear microscopy"],a:2,topic:"TB"},
+  {t:"Which comorbidity is NOT associated with increased TB reactivation risk?",o:["Diabetes mellitus","Hypertension","Silicosis","Chronic renal failure"],a:1,topic:"TB"},
+  {t:"Recommended preventive therapy for latent TB in most adults?",o:["Isoniazid for 6–9 months","Rifampin for 1 month","Ethambutol for 3 months","Pyrazinamide for 2 months"],a:0,topic:"TB"},
+  {t:"Which is an extrapulmonary manifestation of tuberculosis?",o:["Bronchiectasis","Pleural effusion","Pneumothorax","Pulmonary fibrosis"],a:1,topic:"TB"},
+  {t:"What is the term for TB infection without active disease?",o:["Primary tuberculosis","Latent tuberculosis infection","Miliary tuberculosis","Subclinical tuberculosis"],a:1,topic:"TB"},
+  {t:"Which group is at highest risk for TB in low-incidence countries?",o:["Healthcare workers","Foreign-born from high-burden countries","Elderly nursing home residents","Children under 5"],a:1,topic:"TB"},
+  {t:"Which is NOT a first-line drug for tuberculosis?",o:["Isoniazid","Rifampin","Ciprofloxacin","Ethambutol"],a:2,topic:"TB"},
+  {t:"What is the primary goal of TB contact investigation?",o:["Identify the index case","Determine drug susceptibility","Identify recently infected contacts for preventive therapy","Evaluate treatment adherence"],a:2,topic:"TB"},
+
+  // ── SURVEILLANCE & EPIDEMIOLOGY ──
+  {t:"What is a nosocomial (hospital-acquired) infection?",o:["Infection before entering hospital","Infection only affecting staff","Infection acquired while receiving care in a medical center","Infection untreatable by antibiotics"],a:2,topic:"Surveillance"},
+  {t:"Definition of a public health surveillance system?",o:["Monitors infectious diseases only","Ongoing systematic collection, analysis, interpretation and dissemination of health data","Operates only during outbreaks","Used exclusively by hospitals"],a:1,topic:"Surveillance"},
+  {t:"Which is NOT a use of surveillance data?",o:["Describing health events","Setting public health priorities","Replacing need for research","Planning and evaluating programs"],a:2,topic:"Surveillance"},
+  {t:"What does 'Timeliness' in a surveillance system refer to?",o:["Ability to adapt to changing needs","How quickly data are collected and analyzed","Willingness of individuals to participate","How well confidentiality is maintained"],a:1,topic:"Surveillance"},
+  {t:"Hospital cross-infection refers to?",o:["Infections spread between hospitals","Infections from doctors to patients","Infections acquired by staff","Hospitalized patients acquiring another infection in addition to their present one"],a:3,topic:"Surveillance"},
+  {t:"Which is NOT a characteristic of an effective surveillance system?",o:["Simplicity","Flexibility","Complexity","Timeliness"],a:2,topic:"Surveillance"},
+  {t:"What does 'Representativeness' in surveillance mean?",o:["Accurately describes occurrence of health events over time","Adapts to changing information needs","Acceptable to participants","Simple to understand"],a:0,topic:"Surveillance"},
+  {t:"Which objective focuses on detecting rapid changes in disease occurrence?",o:["Identify disease patterns","Follow temporal trends","Detect sudden changes in disease occurrence and distribution","Identify changes in healthcare practice"],a:2,topic:"Surveillance"},
+  {t:"What is herd immunity?",o:["Resistance of an individual","Population's resistance to spread of infection","Immunity after contracting disease","Immunity only through vaccination"],a:1,topic:"Surveillance"},
+  {t:"Which factor does NOT affect degree of herd immunity?",o:["Transmissibility","Duration of infectiousness","Age of infected population","Frequency of new introductions"],a:2,topic:"Surveillance"},
+  {t:"For which disease is the vaccine protective if given within 72 hours of exposure?",o:["Rabies","Smallpox","Measles","Tetanus"],a:2,topic:"Surveillance"},
+  {t:"Smallpox incubation is 12 days. How many days after primary vaccination is a person protected?",o:["4 days","8 days","12 days","16 days"],a:1,topic:"Surveillance"},
+  {t:"Which vaccines are required for travelers to/from endemic areas?",o:["Rabies and tetanus","Cholera and yellow fever","Measles and smallpox","Diphtheria and meningococcal"],a:1,topic:"Surveillance"},
+  {t:"What is unique about the rabies vaccine compared to other post-exposure immunizations?",o:["Effective only before symptoms appear","Requires multiple doses over weeks","Administered intravenously","Provides lifetime immunity after one dose"],a:0,topic:"Surveillance"},
+  {t:"Which vaccine is specifically required for pilgrims before leaving?",o:["Yellow fever","Cholera","Meningococcal","Tetanus"],a:2,topic:"Surveillance"},
+  {t:"Sudden abnormal increase in cases in a closed community is defined as?",o:["Endemic","Epidemic","Pandemic","Outbreak"],a:3,topic:"Surveillance"},
+  {t:"International measures are taken to prevent transmission of?",o:["Tuberculosis","Cholera","Plague","Cholera and plague"],a:3,topic:"Surveillance"},
+  {t:"The epidemiologic triad of disease causation refers to?",o:["Agent, host, environment","Time, place, person","Source, mode of transmission, susceptible host","John Snow, Koch, Rothman"],a:0,topic:"Surveillance"},
+  {t:"Diseases always present at low constant frequency are classified as?",o:["Epidemic","Endemic","Outbreak","Pandemic"],a:1,topic:"Surveillance"},
+  {t:"Which disease gives lifelong immunity after an attack?",o:["Mumps","Tetanus","Diphtheria","Influenza"],a:0,topic:"Surveillance"},
+  {t:"Blood transfusion is a potential source of infection in?",o:["Syphilis","HIV/AIDS","Malaria","All of the answers"],a:3,topic:"Surveillance"},
+  {t:"The first newly given vaccine to newborn within hours is?",o:["HBV","Oral Ty21a","MMR","DPT"],a:0,topic:"Surveillance"},
+  {t:"Which vaccine is indicated during pregnancy?",o:["Koll's vaccine","TAB vaccine","Polysaccharide vaccine","Tetanus toxoid"],a:3,topic:"Surveillance"},
+  {t:"Vertical transmission can occur through?",o:["Mosquitoes","Direct contact","Placenta","Arthropod"],a:2,topic:"Surveillance"},
+  {t:"According to WHO, health is defined as?",o:["Absence of disease only","Mental and social well-being only","Physical fitness only","Complete physical, mental, and social well-being"],a:3,topic:"Surveillance"},
+  {t:"The term 'epizootic' refers to?",o:["Disease among humans","Animal disease epidemic","Waterborne disease","Seasonal flu"],a:1,topic:"Surveillance"},
+  {t:"Zoonotic diseases can be transmitted to humans through?",o:["Inhalation","Ingestion","Insect bites","All of the above"],a:3,topic:"Surveillance"},
+  {t:"Which disease is commonly spread by food-borne infection?",o:["Malaria","Typhoid","HIV","Influenza"],a:1,topic:"Surveillance"},
+  {t:"The most dangerous non-living reservoir of infection is?",o:["Soil","Air","Water","Food"],a:2,topic:"Surveillance"},
+  {t:"Immunization applied after exposure to infection is called?",o:["Passive prevention","Primary prevention","Secondary prevention","Post-exposure prophylaxis"],a:3,topic:"Surveillance"},
+  {t:"Which vaccine is given at birth according to NPI in Egypt?",o:["DPT","MMR","BCG","Measles"],a:2,topic:"Surveillance"},
+  {t:"Surveillance of contacts is important to?",o:["Provide medication","Observe during incubation period","Isolate all cases","Replace immunization"],a:1,topic:"Surveillance"},
+  {t:"One goal of tertiary prevention is?",o:["Health education","Chemoprophylaxis","Rehabilitation","Isolation of cases"],a:2,topic:"Surveillance"},
+  {t:"Most appropriate method to interrupt the chain of infection?",o:["Reduce host susceptibility","Eliminate the mode of transmission","Improve nutrition","Use mass media campaigns"],a:1,topic:"Surveillance"},
+  {t:"Main difference between epidemic and pandemic is?",o:["Number of cases","Type of organism","Geographic spread","Mode of transmission"],a:2,topic:"Surveillance"},
+  {t:"Which best explains primary prevention in epidemiology?",o:["Detect disease early and treat","Prevent disability from established disease","Reduce risk factors before disease occurs","Educate the public"],a:2,topic:"Surveillance"},
+  {t:"A child receives measles vaccine within 72 hours of exposure. This is an example of?",o:["Passive immunity","Tertiary prevention","Specific primary prevention","Post-exposure active immunization"],a:3,topic:"Surveillance"},
+  {t:"Distribution of disease in relation to time, person, and place refers to?",o:["Dynamics","Determinants","Frequency","Descriptive epidemiology"],a:3,topic:"Surveillance"},
+  {t:"Terminal disinfection is performed?",o:["During illness","Before symptoms appear","After recovery, death, or transfer","On PPE only"],a:2,topic:"Surveillance"},
+  {t:"The main aim of secondary prevention is?",o:["Prevent occurrence","Delay onset","Limit complications and spread","Rehabilitate affected individuals"],a:2,topic:"Surveillance"},
+  {t:"Endemicity of a disease is maintained mainly by?",o:["Herd immunity","International travel","Presence of all ecological factors","Vaccine failure"],a:2,topic:"Surveillance"},
+  {t:"Chemoprophylaxis to contacts is indicated in which disease?",o:["Brucellosis","Typhoid","Mumps","Meningitis"],a:3,topic:"Surveillance"},
+
+  // ── TYPHOID ──
+  {t:"Which test is done for diagnosis of typhoid fever?",o:["ELISA test","Widal test","Blood culture","Urine test"],a:1,topic:"Typhoid"},
+  {t:"Carriers of typhoid fever are classified into?",o:["Incubatory","Contact","Convalescent","All of the above"],a:3,topic:"Typhoid"},
+  {t:"Clinical picture of typhoid includes all EXCEPT?",o:["Fever","Abdominal pain","Headache","Tachycardia"],a:3,topic:"Typhoid"},
+  {t:"Typhoid fever is caused by?",o:["Salmonella typhi","Salmonella paratyphi","Shigella","E. coli"],a:0,topic:"Typhoid"},
+  {t:"Typhoid fever is commonly acquired by?",o:["Consuming contaminated food or water","Eating salmonella cysts in muscles","Direct sexual contact","Drinking unpasteurized milk"],a:0,topic:"Typhoid"},
+  {t:"A chronic carrier of typhoid most likely harbors the bacteria in?",o:["Liver","Gallbladder","Spleen","Lungs"],a:1,topic:"Typhoid"},
+  {t:"Widal test becomes positive during which week of typhoid?",o:["1st week","2nd week","3rd week","4th week"],a:1,topic:"Typhoid"},
+  {t:"Which is a hallmark clinical feature of typhoid fever?",o:["Bradycardia relative to fever","Tachycardia with high fever","Petechial rash","Jaundice"],a:0,topic:"Typhoid"},
+  {t:"TAB vaccine provides protection against?",o:["Only S. typhi","S. typhi and S. paratyphi A & B","S. typhi and S. paratyphi C","All Salmonella species"],a:1,topic:"Typhoid"},
+  {t:"For a chronic urinary carrier of typhoid, recommended treatment is?",o:["Ampicillin for 1–3 months","Surgical removal of pathological focus","Chloramphenicol for 4 weeks","Cholecystectomy"],a:1,topic:"Typhoid"},
+  {t:"In endemic areas TAB vaccine is recommended for?",o:["Food handlers","Army recruits","Prisoners","All of the answers"],a:3,topic:"Typhoid"},
+  {t:"In typhoid fever, relapse typically occurs?",o:["During 1st week of convalescence","1–2 weeks after convalescence","1 month after recovery","Only in untreated cases"],a:1,topic:"Typhoid"},
+  {t:"Example of a convalescent carrier?",o:["Measles","Influenza","Typhoid fever","Chicken pox"],a:2,topic:"Typhoid"},
+
+  // ── POLIOMYELITIS ──
+  {t:"The causative agent of polio is?",o:["Fungus","Virus","Bacteria","Toxin"],a:1,topic:"Polio"},
+  {t:"Polio virus multiplies in the body in?",o:["Intestinal cells","Nerve cells","Muscle cells","None of the above"],a:0,topic:"Polio"},
+  {t:"How does poliovirus cause paralysis?",o:["Misinterprets CNS signals","Eats away muscles","Destroys blood vessels in spinal cord","Destroys motor neurons in the CNS"],a:3,topic:"Polio"},
+  {t:"Which is NOT a method for diagnosing polio?",o:["Throat secretions","Stool samples","Spinal tap","Echocardiogram of the heart"],a:3,topic:"Polio"},
+  {t:"Route of administration of Salk vaccine?",o:["Oral","Intramuscular","Intranasal","Subcutaneous"],a:1,topic:"Polio"},
+  {t:"All are true about Salk vaccine EXCEPT?",o:["It is a live vaccine","Suitable for immunocompromised","Easily transported","Indicated in pregnant females"],a:0,topic:"Polio"},
+  {t:"Serious complication of poliovirus worldwide?",o:["Mental retardation","Brain hemorrhage","Pneumonia","Paralysis"],a:3,topic:"Polio"},
+  {t:"Polio usually affects?",o:["Children 0–5 years old","Adolescents 10–15 years","Young adults","Elderly"],a:0,topic:"Polio"},
+  {t:"Correct statement regarding polio vaccine?",o:["Sabin is given intramuscularly","Sabin is killed vaccine","Salk is live attenuated","Sabin is given orally"],a:3,topic:"Polio"},
+  {t:"Poliovirus infection is spread through?",o:["Breastfeeding","Fecal-oral route","Placental route","Sexual route"],a:1,topic:"Polio"},
+  {t:"Which disease spreads by both droplet and food?",o:["Corona","Measles","Poliomyelitis","Typhoid"],a:2,topic:"Polio"},
+  {t:"Which form of poliomyelitis destroys anterior horn cells?",o:["Bulbar","Spinal","Bulbospinal","Non-paralytic"],a:1,topic:"Polio"},
+  {t:"Period of infectivity for poliovirus in intestinal foci lasts up to?",o:["1–2 weeks","3–4 weeks","6–8 weeks","12 weeks"],a:2,topic:"Polio"},
+  {t:"Which polio vaccine provides intestinal immunity?",o:["Salk","Sabin","Both","Neither"],a:1,topic:"Polio"},
+
+  // ── HEPATITIS A ──
+  {t:"What is the causative agent of Hepatitis A?",o:["DNA virus","Bacterial agent","RNA virus","Prion protein"],a:2,topic:"Hepatitis A"},
+  {t:"Which can kill the Hepatitis A virus?",o:["Antibiotics","Heat, UV radiation, and chlorination","Antiviral medications only","Freezing temperatures"],a:1,topic:"Hepatitis A"},
+  {t:"Main reservoir for the Hepatitis A virus?",o:["Animals","Soil","Water","Humans"],a:3,topic:"Hepatitis A"},
+  {t:"During which period is HAV present in feces in last weeks of incubation?",o:["Post-icteric stage","Chronic stage","Incubatory carrier stage","Recovery stage"],a:2,topic:"Hepatitis A"},
+  {t:"Primary foci of infection for Hepatitis A?",o:["Lungs and blood","Kidneys and liver","Small intestine and blood","Brain and spinal fluid"],a:2,topic:"Hepatitis A"},
+  {t:"Incubation period for Hepatitis A?",o:["24–48 hours","1–2 weeks","2–6 weeks","6–12 months"],a:2,topic:"Hepatitis A"},
+  {t:"Most common mode of transmission for Hepatitis A?",o:["Sexual contact","Oral infection through contaminated food or water","Insect bites","Airborne droplets"],a:1,topic:"Hepatitis A"},
+  {t:"Why is blood transmission of HAV relatively rare?",o:["Virus cannot survive in blood","Blood testing is mandatory everywhere","Short viremia and no carrier state","All of the above"],a:2,topic:"Hepatitis A"},
+  {t:"Characteristic symptom of pre-icteric stage of HAV?",o:["Severe jaundice","Dark urine","Permanent liver damage","Chronic infection"],a:1,topic:"Hepatitis A"},
+  {t:"Stool color during the pre-icteric stage?",o:["Green","Black","Yellow","Pale (clay-colored)"],a:3,topic:"Hepatitis A"},
+  {t:"Which stage is characterized by jaundice (icterus)?",o:["Incubatory stage","Pre-icteric stage","Icteric stage","Chronic stage"],a:2,topic:"Hepatitis A"},
+  {t:"Case-fatality rate for Hepatitis A?",o:["Very high","Moderate","Very low","Zero"],a:2,topic:"Hepatitis A"},
+  {t:"Laboratory method to diagnose Hepatitis A?",o:["CT scan","Detection of specific HA antibodies","Ultrasound only","WBC count"],a:1,topic:"Hepatitis A"},
+  {t:"Which is NOT a general preventive measure against HAV?",o:["Disposable syringes","Long-term antibiotic therapy","Sterilization of surgical instruments","Precautions handling blood"],a:1,topic:"Hepatitis A"},
+  {t:"What type of vaccine is available for Hepatitis A?",o:["Only killed","Only live-attenuated","Both killed and live-attenuated","No vaccine available"],a:2,topic:"Hepatitis A"},
+  {t:"What happens to the liver during post-icteric stage?",o:["Permanently damaged","Enlargement may persist for some time","Immediately returns to normal","Becomes smaller than normal"],a:1,topic:"Hepatitis A"},
+  {t:"What distinguishes HAV from other viral hepatitis?",o:["Causes no symptoms","No chronic disease and no persistent infection","Only affects children","Not contagious"],a:1,topic:"Hepatitis A"},
+  {t:"In which areas is HAV typically endemic?",o:["Arctic regions","Tropical rainforests only","Developing countries","Mountainous regions only"],a:2,topic:"Hepatitis A"},
+
+  // ── BRUCELLOSIS ──
+  {t:"Causative agent of brucellosis?",o:["Brucella bacilli","Streptococcus","E. coli","Salmonella"],a:0,topic:"Brucellosis"},
+  {t:"Which is NOT a reservoir for brucellosis?",o:["Cattle","Humans","Sheep","Pigs"],a:1,topic:"Brucellosis"},
+  {t:"How is brucellosis transmitted through food?",o:["Eating properly cooked meat","Drinking pasteurized milk","Consuming raw or underheated milk products","Eating fully cooked vegetables"],a:2,topic:"Brucellosis"},
+  {t:"Incubation period for brucellosis?",o:["1–3 days","5–21 days","30–45 days","60–90 days"],a:1,topic:"Brucellosis"},
+  {t:"Another name for brucellosis?",o:["Yellow fever","Rocky Mountain spotted fever","Malta fever","Typhoid fever"],a:2,topic:"Brucellosis"},
+  {t:"Characteristic of undulant fever in brucellosis?",o:["Continuous high fever","Mild fever at night only","Bouts of fever alternating with afebrile periods","Fever only with sunlight exposure"],a:2,topic:"Brucellosis"},
+  {t:"How can contact infection with brucellosis occur?",o:["Person-to-person","Contaminated water","Through abrasions in skin and mucous membranes","Mosquito bites"],a:2,topic:"Brucellosis"},
+  {t:"Definitive diagnostic method for brucellosis?",o:["Urine analysis","X-ray","Blood culture","Stool examination"],a:2,topic:"Brucellosis"},
+  {t:"Airborne transmission of brucellosis occurs through?",o:["Sneezing of infected humans","Inhalation of dust from dried animal tissue and excreta","Air conditioning systems","Coastal fog"],a:1,topic:"Brucellosis"},
+  {t:"Which is NOT a method to prevent brucellosis in humans?",o:["Boiling milk","Wearing protective gloves","Monthly prophylactic antibiotics","Proper cooking of meat"],a:2,topic:"Brucellosis"},
+  {t:"What happens to Brucella bacilli when milk is pasteurized?",o:["Multiply rapidly","Become more virulent","Are killed","Become dormant"],a:2,topic:"Brucellosis"},
+  {t:"What type of disease is brucellosis?",o:["Viral","Fungal","Bacterial zoonotic disease","Parasitic"],a:2,topic:"Brucellosis"},
+  {t:"Preventive measure for brucellosis in animals?",o:["Administering human antibiotics to all farm animals","Active immunization of young calves in endemic areas","Keeping animals indoors always","Feeding animals only processed food"],a:1,topic:"Brucellosis"},
+  {t:"Brucellin skin test is used for?",o:["Treatment","Prevention of transmission","Diagnosis","Determining milk contamination"],a:2,topic:"Brucellosis"},
+  {t:"Potential complication of brucellosis?",o:["Skin rash disappearing within 24h","Immunity to all bacterial infections","Chronic brucellosis following relapse","Complete recovery without treatment"],a:2,topic:"Brucellosis"},
+
+  // ── HEPATITIS B ──
+  {t:"What type of virus is Hepatitis B?",o:["RNA virus","DNA virus","Retrovirus","Prion"],a:1,topic:"Hepatitis B"},
+  {t:"Typical incubation period for Hepatitis B?",o:["2–4 weeks","6 weeks to 6 months","1–2 days","1–2 years"],a:1,topic:"Hepatitis B"},
+  {t:"Which is NOT a mode of transmission for Hepatitis B?",o:["Blood transfusion","Sexual contact","Mosquito bites","Mother to fetus"],a:2,topic:"Hepatitis B"},
+  {t:"Hepatitis B virus compared to Hepatitis A regarding heat resistance?",o:["Less resistant","More resistant","Equally resistant","Not affected by heat"],a:1,topic:"Hepatitis B"},
+  {t:"Potential complication of Hepatitis B infection?",o:["Kidney failure","Heart disease","Liver cirrhosis","Brain damage"],a:2,topic:"Hepatitis B"},
+  {t:"Onset of Hepatitis B is typically?",o:["Sudden and severe","Insidious (gradual)","Accompanied by skin rash","Painless with visible symptoms"],a:1,topic:"Hepatitis B"},
+  {t:"What does HBsAg indicate?",o:["Complete recovery","Immunity to HBV","Active or past HBV infection","Vaccination status"],a:2,topic:"Hepatitis B"},
+  {t:"How many doses are recommended for HBV vaccine?",o:["1 dose","2 doses","3 doses","4 doses"],a:2,topic:"Hepatitis B"},
+  {t:"For how long is the HBV vaccine typically protective?",o:["1 year","3 years","5 years","7 years"],a:3,topic:"Hepatitis B"},
+  {t:"Which group does NOT typically receive mandatory HBV vaccination?",o:["Medical students","Infants","Elderly over 65","Paramedical personnel"],a:2,topic:"Hepatitis B"},
+  {t:"Where should HBV vaccine be administered?",o:["Subcutaneously in thigh","Intramuscularly in upper arm","Intramuscularly in thigh","Intravenously"],a:1,topic:"Hepatitis B"},
+  {t:"What is the Delta Agent in relation to Hepatitis B?",o:["Treatment for HBV","Virus-like particle causing complications in HBV carriers","Protein produced by immune system","Screening test for HBV"],a:1,topic:"Hepatitis B"},
+  {t:"When should immunoglobulin be given to newborns of HBsAg+ mothers?",o:["Within 12 hours of birth","Within 24 hours","Within 3 days","Within 1 week"],a:0,topic:"Hepatitis B"},
+  {t:"During which period is a person with HBV NOT infectious?",o:["First 1–2 weeks of incubation","During the disease","During convalescence","None – infectious during all periods"],a:3,topic:"Hepatitis B"},
+  {t:"Characteristic of HBV vaccine made from yeast-recombinant technology?",o:["Contains live attenuated virus","Contains purified inactivated HBsAg","Requires only one dose","Provides lifetime immunity"],a:1,topic:"Hepatitis B"},
+
+  // ── HIV/AIDS ──
+  {t:"Causative agent of AIDS?",o:["Bacteria","HIV type I & II","Fungus","Parasite"],a:1,topic:"HIV/AIDS"},
+  {t:"AIDS is defined as a person having CD4 count below?",o:["500 cells/mm³","350 cells/mm³","200 cells/mm³","100 cells/mm³"],a:2,topic:"HIV/AIDS"},
+  {t:"Which is NOT a mode of HIV transmission?",o:["Sexual contact","Mosquito bites","Contact with infected blood","Perinatal infection"],a:1,topic:"HIV/AIDS"},
+  {t:"Incubation period for HIV can range from?",o:["1–3 weeks","1–3 months","6 months to 7 years","10–15 years"],a:2,topic:"HIV/AIDS"},
+  {t:"Which is considered a high-risk group for HIV?",o:["Children in daycare","Office workers","IV drug users","Vegetarians"],a:2,topic:"HIV/AIDS"},
+  {t:"HIV primarily affects which cells?",o:["Red blood cells","T-helper cells","Liver cells","Skin cells"],a:1,topic:"HIV/AIDS"},
+  {t:"Symptom of AIDS-related complex (ARC)?",o:["High blood pressure","Increased appetite","Weight gain","Generalized lymphadenopathy"],a:3,topic:"HIV/AIDS"},
+  {t:"Most common secondary pathological condition associated with AIDS?",o:["Tuberculosis","Diabetes","Heart disease","Arthritis"],a:0,topic:"HIV/AIDS"},
+  {t:"Which body fluid is NOT a major exit route for HIV?",o:["Blood","Semen","Saliva","Vaginal secretions"],a:2,topic:"HIV/AIDS"},
+  {t:"A person with HIV is infectious?",o:["Only when showing symptoms","From onset throughout life","Only during the first year","Only during last stages"],a:1,topic:"HIV/AIDS"},
+  {t:"Prevention strategy for HIV?",o:["Annual flu vaccination","Regular exercise","Using disposable syringes","Drinking bottled water"],a:2,topic:"HIV/AIDS"},
+  {t:"Type of cancer commonly associated with AIDS?",o:["Lung cancer","Prostate cancer","Kaposi's sarcoma","Breast cancer"],a:2,topic:"HIV/AIDS"},
+  {t:"Which is a MINOR sign in AIDS case definition?",o:["Chronic diarrhea >1 month","Oropharyngeal candidiasis","Prolonged fever >1 month","Kaposi's sarcoma"],a:1,topic:"HIV/AIDS"},
+  {t:"Which measure is ineffective for HIV prevention?",o:["Pre-marital serological testing","Avoiding breastfeeding","ARV therapy for pregnant women","Chemoprophylaxis with penicillin"],a:3,topic:"HIV/AIDS"},
+  {t:"Prognosis of untreated AIDS?",o:["Reversible with antibiotics","Fatal within years due to opportunistic infections","Spontaneous remission in 50%","Chronic but non-life-threatening"],a:1,topic:"HIV/AIDS"},
+  {t:"The 'honeymoon phase' of HIV refers to?",o:["Asymptomatic chronic infection","Acute seroconversion illness","Terminal immunodeficiency","Latent TB reactivation"],a:0,topic:"HIV/AIDS"},
+
+  // ── RABIES ──
+  {t:"What is rabies?",o:["Bacterial infection affecting respiratory system","Viral zoonotic disease affecting the CNS","Parasitic infection via mosquitoes","Fungal disease affecting skin"],a:1,topic:"Rabies"},
+  {t:"Causative agent of rabies?",o:["Rabies bacterium","Rabies parasite","Rabies virus","Rabies prion"],a:2,topic:"Rabies"},
+  {t:"Main reservoir of rabies?",o:["Rodents","Birds","Dogs","Humans"],a:2,topic:"Rabies"},
+  {t:"How is rabies primarily transmitted to humans?",o:["Contaminated food","Airborne particles","Bite of a rabid animal","Mosquito bites"],a:2,topic:"Rabies"},
+  {t:"Which is NOT a factor affecting the incubation period of rabies?",o:["Site of the bite","Age of the victim","Severity of the bite","Dose of injected virus"],a:1,topic:"Rabies"},
+  {t:"What is hydrophobia?",o:["Fear of dogs","Fear of drinking due to painful spasm of pharyngeal muscles","Fear of going outside","Fear of being bitten"],a:1,topic:"Rabies"},
+  {t:"Mortality rate of clinical rabies?",o:["50%","75%","90%","100%"],a:2,topic:"Rabies"},
+  {t:"What are Negri bodies?",o:["The rabies virus itself","Structures found in brain during post-mortem","Antibodies against rabies","Wounds from animal bites"],a:1,topic:"Rabies"},
+  {t:"Furious rabies in dogs is characterized by?",o:["Dog becomes sleepy","Dog runs aimlessly, attacks without stimulus, excessive salivation","Dog becomes extremely hungry","Dog develops paralysis"],a:1,topic:"Rabies"},
+  {t:"Which is NOT a clinical feature of rabies in humans?",o:["Headache","Mental depression","Hydrophobia","High fever with rash"],a:3,topic:"Rabies"},
+  {t:"How long should wound from suspected rabid animal be washed?",o:["5 minutes","10 minutes","15 minutes","20 minutes"],a:2,topic:"Rabies"},
+  {t:"Management for Category 1 contact (touching/licking on intact skin)?",o:["Immediate vaccination","Vaccination and immunoglobulin","No treatment needed","Antibiotics only"],a:2,topic:"Rabies"},
+  {t:"How long should biting animal be observed for rabies signs?",o:["5 days","7 days","10 days","14 days"],a:2,topic:"Rabies"},
+  {t:"Which group should receive pre-exposure prophylaxis for rabies?",o:["All children","People with frequent contact with animals (e.g., veterinarians)","All healthcare workers","People in urban areas"],a:1,topic:"Rabies"},
+  {t:"Dumb rabies in dogs is characterized by?",o:["Extremely aggressive","Isolates itself and dies in a sleepiness state","Loses ability to bark","Paralysis of limbs only"],a:1,topic:"Rabies"},
+  {t:"Preventive measure for stray animals in rabies control?",o:["Vaccination","Quarantine","Destruction","Antibiotics"],a:2,topic:"Rabies"},
+  {t:"Correct schedule for pre-exposure rabies vaccination?",o:["Days 0, 3, 7","3 doses on days 0, 7, 21 or 28","5 doses on days 0, 3, 7, 14, 28","2 doses on days 0 and 14"],a:1,topic:"Rabies"},
+  {t:"Which is NOT part of wound treatment after suspected rabid animal bite?",o:["Washing with soap and water","Applying antimicrobials if necessary","Immediate suturing of the wound","Applying tetanus toxoid if necessary"],a:2,topic:"Rabies"},
+  {t:"Purpose of Rabies Immunoglobulin (RIG)?",o:["Kill the rabies virus","Delay multiplication of virus and stimulate immune system","Reduce pain at bite site","None of the above"],a:1,topic:"Rabies"},
+
+  // ── TETANUS ──
+  {t:"What bacterium causes tetanus?",o:["Clostridium tetani","Streptococcus pneumoniae","Staphylococcus aureus","Escherichia coli"],a:0,topic:"Tetanus"},
+  {t:"Tetanus bacteria typically enter the body through?",o:["Contaminated food or water","Respiratory droplets","Wounds or breaks in the skin","Insect bites"],a:2,topic:"Tetanus"},
+  {t:"Which environment best supports survival of tetanus spores?",o:["Chlorinated water","Soil and dust","Air-conditioned rooms","Salt water"],a:1,topic:"Tetanus"},
+  {t:"Common name for tetanus referring to a characteristic symptom?",o:["Walking pneumonia","Sleeping sickness","Lockjaw","Yellow fever"],a:2,topic:"Tetanus"},
+  {t:"Which is NOT a common symptom of tetanus?",o:["Painful muscle spasms","Difficulty swallowing","Skin rash with itching","Stiffness in jaw muscles"],a:2,topic:"Tetanus"},
+  {t:"Tetanus toxin primarily affects which body system?",o:["Digestive","Nervous","Respiratory","Circulatory"],a:1,topic:"Tetanus"},
+  {t:"Incubation period for tetanus?",o:["12–24 hours","2–3 days","3–21 days","30–60 days"],a:2,topic:"Tetanus"},
+  {t:"Which wound has the highest risk for tetanus infection?",o:["Clean kitchen knife cut","Deep puncture from rusty nail","Scraped knee from concrete","Paper cut"],a:1,topic:"Tetanus"},
+  {t:"How is tetanus NOT transmitted?",o:["Through contaminated objects puncturing skin","From person to person through coughing","Through contact with animal manure","Via soil-contaminated wounds"],a:1,topic:"Tetanus"},
+  {t:"Primary method of preventing tetanus?",o:["Regular antibiotics","Vaccination","Avoiding outdoor activities","Wearing gloves always"],a:1,topic:"Tetanus"},
+  {t:"Tetanus vaccine is typically part of which combination vaccine?",o:["MMR","Tdap (Tetanus, diphtheria, pertussis)","HPV","Varicella"],a:1,topic:"Tetanus"},
+  {t:"Person with uncertain vaccination history gets deep dirty wound. Recommended action?",o:["Wait for symptoms","Oral antibiotics only","Seek immediate medical attention for tetanus prophylaxis","Clean with soap and water only"],a:2,topic:"Tetanus"},
+  {t:"Which is NOT a typical treatment for established tetanus?",o:["Muscle relaxants","Tetanus immune globulin","Antibiotics","Vaccines"],a:3,topic:"Tetanus"},
+  {t:"Mortality rate for severe tetanus infections?",o:["Less than 1%","5–10%","10–20%","30–40%"],a:2,topic:"Tetanus"},
+  {t:"Which group is most vulnerable to tetanus?",o:["Young children","Older adults without booster shots","Pregnant women","College students"],a:1,topic:"Tetanus"},
+  {t:"Important first aid for potentially tetanus-prone wound?",o:["Cover immediately without cleaning","Apply heat to kill bacteria","Thorough cleaning with soap and running water","Apply antibiotic ointment without cleaning"],a:2,topic:"Tetanus"},
+  {t:"Which scenario would most likely require a tetanus shot?",o:["After a mosquito bite","After a dog lick","After stepping on a nail","After swimming in chlorinated pool"],a:2,topic:"Tetanus"},
+  {t:"Which statement about global tetanus distribution is correct?",o:["Equally common in all countries","More common in developing countries with lower vaccination rates","Only exists in tropical climates","Completely eradicated worldwide"],a:1,topic:"Tetanus"},
+
+  // ── GAS GANGRENE ──
+  {t:"Type of bacteria causing severe wound infections with tissue destruction and toxemia?",o:["Staphylococcus","Clostridium","Streptococcus","Pseudomonas"],a:1,topic:"Gas Gangrene"},
+  {t:"Clostridia group of bacteria is correctly described as?",o:["Aerobic non-spore forming","Anaerobic non-spore forming","Aerobic spore forming","Anaerobic spore forming"],a:3,topic:"Gas Gangrene"},
+  {t:"Most important Clostridium species in primary wound infections?",o:["Cl. tetani","Cl. botulinum","Cl. welchii","Cl. difficile"],a:2,topic:"Gas Gangrene"},
+  {t:"Primary bacteria in clostridial infections are classified as?",o:["Proteolytic","Saccharolytic","Lipolytic","Hemolytic"],a:1,topic:"Gas Gangrene"},
+  {t:"What do secondary bacteria in clostridial infections do?",o:["Produce acid and gas","Facilitate growth and action of primary bacteria","Directly cause necrosis","Inhibit growth of primary bacteria"],a:1,topic:"Gas Gangrene"},
+  {t:"Natural reservoir for Clostridia bacteria?",o:["Soil only","Water sources","Man and animals (small intestine)","Plant material"],a:2,topic:"Gas Gangrene"},
+  {t:"Which factor favors clostridial infection in wounds?",o:["Shallow, clean cuts","Well-oxygenated tissues","Laceration and interrupted blood supply","Regular wound cleaning"],a:2,topic:"Gas Gangrene"},
+  {t:"How might surgical clostridial infections occur?",o:["Airborne transmission","Non-sterilized instruments and dressings","Insect vectors","Person-to-person contact"],a:1,topic:"Gas Gangrene"},
+  {t:"What is myonecrosis?",o:["Death of nerve tissue","Inflammation of muscle","Destruction of muscle tissue","Infection of bone tissue"],a:2,topic:"Gas Gangrene"},
+  {t:"Which is used for seroprophylaxis against clostridial infections?",o:["Attenuated vaccine","Live vaccine","Polyvalent antitoxin","Toxoid vaccine"],a:2,topic:"Gas Gangrene"},
+  {t:"Antibiotic used for chemoprophylaxis of clostridial infections?",o:["Penicillin","Tetracycline","Ciprofloxacin","Erythromycin"],a:0,topic:"Gas Gangrene"},
+  {t:"When clostridial infection is found in a ward, which is NOT required?",o:["Closing the place","Sterilization of contaminated objects","Antibiotics to all hospital staff","Sterilization of air by formaldehyde gas"],a:2,topic:"Gas Gangrene"},
+  {t:"Local symptom characteristic of clostridial wound infections?",o:["Redness only","Cellulitis with production of gas","Painless swelling","Blue discoloration"],a:1,topic:"Gas Gangrene"},
+  {t:"Which condition most likely leads to puerperal clostridial infection?",o:["Normal delivery","Cesarean section","Septic abortion","Prolonged labor"],a:2,topic:"Gas Gangrene"},
+
+  // ── STREP THROAT ──
+  {t:"Strep throat is primarily caused by?",o:["Viral infection","Group A Streptococcus bacteria","Fungal infection","Parasitic infection"],a:1,topic:"Strep Throat"},
+  {t:"Primary mode of transmission for strep throat?",o:["Mosquito bites","Contaminated food only","Respiratory droplets from coughs and sneezes","Contaminated surfaces only"],a:2,topic:"Strep Throat"},
+  {t:"How long after exposure do strep throat symptoms typically appear?",o:["1–5 days","12–24 hours","7–10 days","14–21 days"],a:0,topic:"Strep Throat"},
+  {t:"Which is NOT a common symptom of strep throat?",o:["Fever","Sore throat","Runny nose","Difficulty swallowing"],a:2,topic:"Strep Throat"},
+  {t:"Test commonly used to diagnose strep throat?",o:["Blood culture","Throat culture","Urine analysis","Spinal tap"],a:1,topic:"Strep Throat"},
+  {t:"Age group most commonly affected by strep throat?",o:["Infants under 1 year","Adults over 65","Children and teenagers aged 5–15","Adults aged 30–50"],a:2,topic:"Strep Throat"},
+  {t:"Potential serious complication of untreated strep throat?",o:["Lung cancer","Rheumatic fever","Diabetes","Alzheimer's disease"],a:1,topic:"Strep Throat"},
+  {t:"How long should a person with strep throat stay home?",o:["24 hours after starting antibiotics","3 days after symptoms disappear","1 week after diagnosis","Only while fever is present"],a:0,topic:"Strep Throat"},
+  {t:"Which is NOT an effective prevention method for strep throat?",o:["Regular handwashing","Taking antibiotics preventatively","Avoiding sharing personal items","Covering mouth when coughing"],a:1,topic:"Strep Throat"},
+  {t:"Medication primarily prescribed to treat strep throat?",o:["Antiviral","Steroids","Antibiotics","Antihistamines"],a:2,topic:"Strep Throat"},
+  {t:"Which about strep throat and antibiotics is true?",o:["Cures within 24 hours","Effective only if taken for 2 weeks","Help prevent complications and reduce contagiousness","Unnecessary as it resolves on its own"],a:2,topic:"Strep Throat"},
+  {t:"Recommended duration for antibiotic treatment of strep throat?",o:["3–5 days","7–10 days","14–21 days","30 days"],a:1,topic:"Strep Throat"},
+  {t:"Which is NOT a potential complication of untreated strep throat?",o:["Rheumatic fever","Kidney inflammation","Pneumonia","Liver failure"],a:3,topic:"Strep Throat"},
+  {t:"Which symptom indicates immediate medical attention in strep throat?",o:["Mild fever below 101°F","Difficulty breathing or swallowing","Slight throat redness","Mild discomfort swallowing"],a:1,topic:"Strep Throat"},
+  {t:"Which statement about strep throat is FALSE?",o:["Spreads through direct contact","Diagnosed by clinical investigation","Commonly causes runny nose and cough","Treated with antibiotics"],a:2,topic:"Strep Throat"},
+  {t:"Non-suppurative complication of streptococcal pharyngitis?",o:["Peritonsillar abscess","Otitis media","Acute glomerulonephritis","Sinusitis"],a:2,topic:"Strep Throat"},
+  {t:"Chemoprophylaxis with penicillin in streptococcal infections is primarily to prevent?",o:["Otitis media","Rheumatic heart disease","Scarlet fever","Meningitis"],a:1,topic:"Strep Throat"},
+  {t:"Latent period between streptococcal pharyngitis and onset of rheumatic fever?",o:["1–3 days","2–3 weeks","6 months","None of the answers"],a:1,topic:"Strep Throat"},
+
+  // ── MENINGITIS ──
+  {t:"What is meningitis?",o:["Infection of the liver","Inflammation of protective membranes covering brain and spinal cord","Bacterial infection of the lungs","Viral infection of the heart"],a:1,topic:"Meningitis"},
+  {t:"Most common cause of bacterial meningitis in adolescents?",o:["Streptococcus pneumoniae","Haemophilus influenzae","Neisseria meningitidis","Listeria monocytogenes"],a:2,topic:"Meningitis"},
+  {t:"How is meningitis most commonly transmitted?",o:["Contaminated food","Insect bites","Respiratory droplets and close contact","Contaminated water"],a:2,topic:"Meningitis"},
+  {t:"Which is NOT a typical symptom of meningitis?",o:["Stiff neck","High fever","Rash","Persistent cough"],a:3,topic:"Meningitis"},
+  {t:"Name of test where needle is inserted into spinal canal?",o:["Blood culture","Lumbar puncture","CT scan","MRI"],a:1,topic:"Meningitis"},
+  {t:"Which age group has highest risk of contracting meningitis?",o:["Infants and young children","Middle-aged adults","Elderly","Pregnant women"],a:0,topic:"Meningitis"},
+  {t:"Predisposing factor for meningitis?",o:["Regular exercise","Weakened immune system","Balanced diet","Adequate sleep"],a:1,topic:"Meningitis"},
+  {t:"Which environment increases risk of meningitis transmission?",o:["Open outdoor spaces","Air-conditioned rooms","Crowded living conditions like dormitories","Private homes with few occupants"],a:2,topic:"Meningitis"},
+  {t:"Most effective way to prevent bacterial meningitis?",o:["Daily antibiotics","Vaccination","Avoiding all public places","Wearing a mask always"],a:1,topic:"Meningitis"},
+  {t:"Which is NOT a complication of meningitis?",o:["Hearing loss","Seizures","Improved memory","Brain damage"],a:2,topic:"Meningitis"},
+  {t:"How quickly can meningitis symptoms develop?",o:["Over several weeks","Over several months","Within hours or days","Only during winter"],a:2,topic:"Meningitis"},
+  {t:"Kernig's sign is used to detect?",o:["Ear infection","Meningeal irritation","Heart problems","Lung infection"],a:1,topic:"Meningitis"},
+  {t:"Unique symptom in infants with meningitis?",o:["Bulging fontanelle (soft spot)","Excessive energy","Improved appetite","Clearer vision"],a:0,topic:"Meningitis"},
+  {t:"Which season typically sees higher meningitis cases?",o:["Summer","Fall","Winter","Spring"],a:2,topic:"Meningitis"},
+  {t:"Positive Kernig's sign is characterized by?",o:["Neck stiffness on passive flexion","Pain/resistance on knee extension after hip flexion","Involuntary hip flexion on neck flexion","Photophobia and headache"],a:1,topic:"Meningitis"},
+  {t:"Primary reservoir for meningococcal meningitis?",o:["Case","Contaminated water","Rodents","Asymptomatic carriers (nasopharynx)"],a:3,topic:"Meningitis"},
+  {t:"Chemoprophylaxis for meningococcal contacts includes all EXCEPT?",o:["Rifampin twice daily for 2 days","Single-dose ciprofloxacin","IM ceftriaxone","Oral acyclovir for 7 days"],a:3,topic:"Meningitis"},
+  {t:"Target for tetravalent meningococcal vaccination in endemic areas?",o:["Infants under 6 months","Pilgrims and international travelers","Pregnant women","Adults with hypertension"],a:1,topic:"Meningitis"},
+  {t:"Complication of untreated bacterial meningitis?",o:["Guillain-Barré syndrome","Hydrocephalus","Parkinson's disease","Myasthenia gravis"],a:1,topic:"Meningitis"},
+  {t:"Brudzinski's sign is positive when?",o:["Passive neck flexion causes involuntary hip/knee flexion","Patient cannot extend knee with hip flexed","Patient screams when sternum pressed","Pupils dilate with head movement"],a:0,topic:"Meningitis"},
+  {t:"Which predisposing factor is MOST associated with meningococcal outbreaks?",o:["High humidity","Overcrowding and poor ventilation","Cold climate","Low socioeconomic status"],a:1,topic:"Meningitis"},
+  {t:"Post-exposure prophylaxis for meningococcal meningitis is indicated for?",o:["All household contacts of a case","Only symptomatic individuals","Healthcare workers who wore PPE","Patients with diabetes mellitus"],a:0,topic:"Meningitis"},
+
+  // ── MUMPS ──
+  {t:"Primary cause of mumps?",o:["Bacteria","Paramyxovirus","Fungus","Protozoan parasite"],a:1,topic:"Mumps"},
+  {t:"How is mumps primarily transmitted?",o:["Contaminated food","Mosquito bites","Respiratory droplets","Skin contact"],a:2,topic:"Mumps"},
+  {t:"Which body part is most characteristically affected by mumps?",o:["Lymph nodes in the neck","Salivary glands (parotid glands)","Tonsils","Thyroid gland"],a:1,topic:"Mumps"},
+  {t:"Typical incubation period for mumps?",o:["1–3 days","5–7 days","12–25 days","30–45 days"],a:2,topic:"Mumps"},
+  {t:"Which is NOT a common symptom of mumps?",o:["Fever","Headache","Rash","Muscle aches"],a:2,topic:"Mumps"},
+  {t:"Which vaccine prevents mumps?",o:["Tdap","MMR","HPV","Hepatitis B"],a:1,topic:"Mumps"},
+  {t:"During which stage is a person with mumps most contagious?",o:["Incubation period before symptoms","Only when parotid swelling present","Few days before swelling to 5 days after","Only during fever stage"],a:2,topic:"Mumps"},
+  {t:"Potential serious complication of mumps in post-pubescent males?",o:["Kidney failure","Orchitis (testicular inflammation)","Permanent hearing loss","Liver damage"],a:1,topic:"Mumps"},
+  {t:"What percentage of mumps-infected people show no symptoms?",o:["About 20%","About 40%","About 60%","About 80%"],a:0,topic:"Mumps"},
+  {t:"Which age receives first dose of MMR vaccine?",o:["12–15 months","2–3 years","4–6 years","11–12 years"],a:0,topic:"Mumps"},
+  {t:"Which activity MOST likely spreads mumps in school?",o:["Sharing textbooks","Using same computer keyboard","Sharing drinks or food","Touching contaminated surfaces"],a:2,topic:"Mumps"},
+  {t:"Which is NOT an effective prevention method for mumps?",o:["Vaccination","Avoiding close contact with infected","Antibiotics","Proper hand hygiene"],a:2,topic:"Mumps"},
+  {t:"Effectiveness of complete MMR vaccination series against mumps?",o:["50–60%","70–80%","88–95%","100%"],a:2,topic:"Mumps"},
+  {t:"Sign that someone with mumps should seek immediate attention?",o:["Mild headache","Swollen cheeks","Testicular pain and swelling","Low-grade fever"],a:2,topic:"Mumps"},
+  {t:"Why is mumps still a public health concern despite vaccines?",o:["Virus mutates too quickly","Vaccine hesitancy and incomplete coverage","Vaccine too expensive","Natural immunity more effective"],a:1,topic:"Mumps"},
+  {t:"How can mumps be diagnosed?",o:["Only blood tests","Only physical examination","Combination of symptoms, physical exam, and lab tests","Only brain imaging"],a:2,topic:"Mumps"},
+
+  // ── MEASLES ──
+  {t:"What is measles?",o:["Bacterial lung infection","Viral infection affecting respiratory system and skin","Fungal skin infection only","Parasitic digestive infection"],a:1,topic:"Measles"},
+  {t:"Which virus causes measles?",o:["Influenza virus","Rhinovirus","Rubeola virus","Varicella-zoster virus"],a:2,topic:"Measles"},
+  {t:"Primary mode of transmission for measles?",o:["Contaminated food and water","Airborne respiratory droplets","Direct blood contact","Insect bites"],a:1,topic:"Measles"},
+  {t:"Typical incubation period for measles?",o:["1–3 days","7–14 days","21–28 days","30–45 days"],a:1,topic:"Measles"},
+  {t:"One of the first symptoms of measles?",o:["Skin rash","High fever","Seizures","Joint pain"],a:1,topic:"Measles"},
+  {t:"Measles rash appears how many days after initial symptoms?",o:["1–2 days","3–5 days","7–10 days","14–21 days"],a:1,topic:"Measles"},
+  {t:"Best description of the measles rash?",o:["Small itchy blisters","Flat red spots that may join together","Purple bruise-like spots","Raised white bumps with red base"],a:1,topic:"Measles"},
+  {t:"What are Koplik's spots?",o:["Rash on arms and legs","Small white spots inside the mouth","Dark spots under fingernails","Blisters on palms and soles"],a:1,topic:"Measles"},
+  {t:"Which is NOT a common complication of measles?",o:["Pneumonia","Encephalitis","Diabetes","Ear infections"],a:2,topic:"Measles"},
+  {t:"Most effective way to prevent measles?",o:["Regular handwashing","Vaccination","Avoiding international travel","Preventive antibiotics"],a:1,topic:"Measles"},
+  {t:"MMR vaccine protects against which diseases?",o:["Measles, Mumps, Rubella","Measles, Malaria, Rabies","Mumps, Malaria, Rotavirus","Meningitis, Mumps, Rabies"],a:0,topic:"Measles"},
+  {t:"How long does a person with measles remain contagious?",o:["Only while feverish","From 4 days before to 4 days after rash appears","Only after rash appears","For up to 3 months after recovery"],a:1,topic:"Measles"},
+  {t:"Which group is at highest risk for severe measles complications?",o:["Healthy teenagers","Young children and pregnant women","Middle-aged adults","Only the elderly"],a:1,topic:"Measles"},
+  {t:"Which is NOT one of the '3 Cs' of measles symptoms?",o:["Cough","Coryza (runny nose)","Conjunctivitis","Convulsions"],a:3,topic:"Measles"},
+  {t:"Global impact of measles vaccination programs?",o:["Minimal effect","Reduced measles deaths by ~80%","Completely eradicated measles","Effective only in developed countries"],a:1,topic:"Measles"},
+  {t:"What to do if you suspect exposure to measles?",o:["Wait to see if symptoms develop","Take antibiotics immediately","Contact healthcare provider immediately","Isolate for 6 months"],a:2,topic:"Measles"},
+
+  // ── VARICELLA (CHICKENPOX) ──
+  {t:"What virus causes chickenpox?",o:["Herpes simplex virus","Varicella-zoster virus","Human papillomavirus","Epstein-Barr virus"],a:1,topic:"Varicella"},
+  {t:"Primary mode of transmission for chickenpox?",o:["Contaminated food and water","Mosquito bites","Direct contact with blood","Respiratory droplets and contact with vesicle fluid"],a:3,topic:"Varicella"},
+  {t:"Typical incubation period for chickenpox?",o:["1–3 days","10–21 days","30–45 days","2–3 months"],a:1,topic:"Varicella"},
+  {t:"Which is NOT a common symptom of chickenpox?",o:["Itchy rash with fluid-filled blisters","Fever","Joint pain and swelling","Fatigue and malaise"],a:2,topic:"Varicella"},
+  {t:"Sequence of chickenpox symptoms?",o:["Rash first, then fever","Joint pain first, then rash","Fever and fatigue first, then rash","Cough first, then fever and rash"],a:2,topic:"Varicella"},
+  {t:"How long is a person with chickenpox contagious?",o:["Only when feverish","From 1–2 days before rash until all lesions crusted","Only first 24 hours after rash","Exactly 7 days after exposure"],a:1,topic:"Varicella"},
+  {t:"Which population is at highest risk for severe chickenpox complications?",o:["Healthy teenagers","Immunocompromised, pregnant women, and infants","Middle-aged adults with no conditions","Children 5–10 years"],a:1,topic:"Varicella"},
+  {t:"Most effective method of preventing chickenpox?",o:["Regular handwashing","Avoiding public pools","Vaccination","Antibiotics during outbreaks"],a:2,topic:"Varicella"},
+  {t:"After chickenpox, the varicella-zoster virus?",o:["Is eliminated from the body","Remains dormant in nerve tissues and may reactivate as shingles","Continues circulating at low levels","Is transformed into a different virus"],a:1,topic:"Varicella"},
+  {t:"Potential complication of chickenpox?",o:["Type 1 diabetes","Bacterial skin infections","Permanent hearing loss","Autoimmune disorders"],a:1,topic:"Varicella"},
+  {t:"How does the chickenpox virus enter the body?",o:["Digestive system","Respiratory system and mucous membranes","Only through open wounds","Urinary tract"],a:1,topic:"Varicella"},
+  {t:"Which statement about chickenpox immunity is correct?",o:["Having chickenpox once provides lifetime immunity","Vaccine immunity is stronger than natural","Immunity wanes after 5 years","Multiple infections are common"],a:0,topic:"Varicella"},
+  {t:"Which helps relieve chickenpox symptoms?",o:["Hot baths with scented soaps","Calamine lotion and cool compresses","Exposure to direct sunlight","Vigorous scrubbing of blisters"],a:1,topic:"Varicella"},
+  {t:"Recommended protocol for chickenpox in school settings?",o:["Close entire school for 21 days","Exclude infected student until all lesions crusted","No action if student feels well","Immediate vaccination of all students"],a:1,topic:"Varicella"},
+  {t:"Which group should NOT receive the varicella vaccine?",o:["Children with no chickenpox history","Pregnant women","Healthcare workers","Adolescents with no chickenpox history"],a:1,topic:"Varicella"}
+];
+
+let currentQuestions = [...ALL_QUESTIONS];
+let answers = {};
+let currentPage = 0;
+const PER_PAGE = 5;
+let mode = 'practice';
+let selectedTopic = 'All';
+
+const topics = ['All', ...new Set(ALL_QUESTIONS.map(q => q.topic))];
+
+function init() {
+  const filters = document.getElementById('topic-filters');
+  filters.innerHTML = '';
+  topics.forEach(t => {
+    const btn = document.createElement('button');
+    btn.className = 'filter-btn' + (t === selectedTopic ? ' active' : '');
+    btn.textContent = t === 'All' ? `All (${ALL_QUESTIONS.length})` : `${t} (${ALL_QUESTIONS.filter(q=>q.topic===t).length})`;
+    btn.onclick = () => { selectedTopic = t; filterQuestions(); };
+    filters.appendChild(btn);
+  });
+  filterQuestions();
+}
+
+function filterQuestions() {
+  answers = {};
+  currentPage = 0;
+  if (selectedTopic === 'All') currentQuestions = [...ALL_QUESTIONS];
+  else currentQuestions = ALL_QUESTIONS.filter(q => q.topic === selectedTopic);
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.textContent.startsWith(selectedTopic === 'All' ? 'All' : selectedTopic));
+  });
+
+  updateStats();
+  render();
+}
+
+function setMode(m) {
+  mode = m;
+  answers = {};
+  document.getElementById('mode-practice').classList.toggle('active', m === 'practice');
+  document.getElementById('mode-exam').classList.toggle('active', m === 'exam');
+  document.getElementById('result-panel').style.display = 'none';
+  updateStats();
+  render();
+}
+
+function shuffleQuestions() {
+  answers = {};
+  currentPage = 0;
+  currentQuestions = [...currentQuestions].sort(() => Math.random() - 0.5);
+  render();
+}
+
+function render() {
+  const container = document.getElementById('quiz-container');
+  const start = currentPage * PER_PAGE;
+  const end = Math.min(start + PER_PAGE, currentQuestions.length);
+  const pageQs = currentQuestions.slice(start, end);
+  const totalPages = Math.ceil(currentQuestions.length / PER_PAGE);
+
+  document.getElementById('page-info').textContent = `Page ${currentPage+1} of ${totalPages} — Questions ${start+1}–${end} of ${currentQuestions.length}`;
+
+  container.innerHTML = pageQs.map((q, i) => {
+    const qi = start + i;
+    const answered = answers[qi] !== undefined;
+    return `<div class="question-card">
+      <div class="q-header">
+        <div class="q-num">${qi+1}</div>
+        <span class="q-topic">${q.topic}</span>
+        <div class="q-text">${q.t}</div>
+      </div>
+      <div class="options">
+        ${q.o.map((opt, oi) => {
+          let cls = '';
+          if (mode === 'practice' && answered) {
+            if (oi === q.a) cls = 'show-correct';
+            else if (oi === answers[qi]) cls = 'wrong';
+          } else if (mode === 'exam' && answered) {
+            if (oi === answers[qi]) cls = answered ? (answers[qi] === q.a ? 'correct' : 'wrong') : '';
+          }
+          const disabled = mode === 'practice' && answered;
+          return `<div class="option ${cls}" onclick="${disabled ? '' : `selectAnswer(${qi}, ${oi})`}" style="${disabled?'cursor:default':''}">
+            <div class="opt-letter">${String.fromCharCode(65+oi)}</div>
+            <div class="opt-text">${opt}</div>
+          </div>`;
+        }).join('')}
+      </div>
+    </div>`;
+  }).join('');
+
+  updateStats();
+  updateProgress();
+}
+
+function selectAnswer(qi, oi) {
+  if (mode === 'practice' && answers[qi] !== undefined) return;
+  if (mode === 'exam' && answers[qi] !== undefined) return;
+  answers[qi] = oi;
+
+  if (mode === 'exam' && Object.keys(answers).length === currentQuestions.length) {
+    showResult();
+    return;
+  }
+
+  render();
+  if (mode === 'practice') {
+    const card = document.querySelectorAll('.question-card')[qi - currentPage * PER_PAGE];
+    if (card) card.scrollIntoView({behavior:'smooth', block:'nearest'});
+  }
+}
+
+function showResult() {
+  let correct = 0;
+  currentQuestions.forEach((q, i) => { if (answers[i] === q.a) correct++; });
+  const pct = Math.round(correct / currentQuestions.length * 100);
+  document.getElementById('result-panel').style.display = 'block';
+  document.getElementById('result-score').textContent = `${correct} / ${currentQuestions.length}`;
+  document.getElementById('result-text').textContent = `${pct}% — ${pct>=80?'Excellent! 🎉':pct>=60?'Good effort! 👍':'Keep studying! 📚'}`;
+  document.getElementById('result-panel').scrollIntoView({behavior:'smooth'});
+}
+
+function updateStats() {
+  const total = currentQuestions.length;
+  let correct = 0, wrong = 0;
+  Object.keys(answers).forEach(i => {
+    if (currentQuestions[i] && answers[i] === currentQuestions[i].a) correct++;
+    else wrong++;
+  });
+  const remaining = total - Object.keys(answers).length;
+  document.getElementById('total-stat').textContent = total;
+  document.getElementById('correct-stat').textContent = correct;
+  document.getElementById('wrong-stat').textContent = wrong;
+  document.getElementById('remaining-stat').textContent = remaining;
+}
+
+function updateProgress() {
+  const pct = Object.keys(answers).length / currentQuestions.length * 100;
+  document.getElementById('progress-bar').style.width = pct + '%';
+}
+
+function nextPage() {
+  const total = Math.ceil(currentQuestions.length / PER_PAGE);
+  if (currentPage < total - 1) { currentPage++; render(); window.scrollTo(0,0); }
+}
+
+function prevPage() {
+  if (currentPage > 0) { currentPage--; render(); window.scrollTo(0,0); }
+}
+
+function resetQuiz() {
+  answers = {};
+  currentPage = 0;
+  document.getElementById('result-panel').style.display = 'none';
+  render();
+  window.scrollTo(0,0);
+}
+
+init();
+</script>
+</body>
+</html>
