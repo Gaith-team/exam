@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --accent:#2563eb; --accent-light:#3b82f6; --accent-dark:#1d4ed8; --accent-glow:rgba(37,99,235,0.2);
+  --bg:#f8fafc; --bg2:#eef2f7; --card:#ffffff; --text:#1a2332; --text2:#4a5568; --text3:#718096;
+  --bc:rgba(0,0,0,0.07); --success:#16a34a; --danger:#dc2626; --warn:#1d4ed8; --r:16px;
+  --tr:all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="dark"] {
+  --bg:#0d1117; --bg2:#161b22; --card:#1c2333; --text:#e6edf3; --text2:#b1bac4; --text3:#7d8590; --bc:rgba(255,255,255,0.08);
+}
+body { font-family:'Outfit',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; overflow-x:hidden; transition:background .4s,color .4s; }
+#prog-bar { position:fixed; top:0; left:0; height:3px; z-index:999; background:linear-gradient(90deg,var(--accent),var(--accent-light)); transition:width .2s; }
+nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:0 28px; height:64px; background:rgba(248,250,252,.93); backdrop-filter:blur(16px); border-bottom:1px solid var(--bc); transition:var(--tr); }
+[data-theme="dark"] nav { background:rgba(13,17,23,.95); }
+.nav-brand { display:flex; align-items:center; gap:9px; font-size:15px; font-weight:900; color:var(--text); }
+.nav-logo-icon { width:34px; height:34px; border-radius:8px; background:linear-gradient(135deg,var(--accent),var(--accent-light)); display:flex; align-items:center; justify-content:center; color:#fff; font-size:12px; font-weight:900; }
+.nav-right { display:flex; align-items:center; gap:8px; }
+.theme-btn { width:38px; height:38px; border-radius:50%; border:1px solid var(--bc); background:var(--card); cursor:pointer; font-size:15px; display:flex; align-items:center; justify-content:center; transition:var(--tr); }
+.theme-btn:hover { border-color:var(--accent); transform:rotate(20deg); }
+.hero-band { margin-top:64px; background:linear-gradient(135deg,var(--accent-dark),var(--accent),var(--accent-light)); padding:40px 24px 36px; text-align:center; position:relative; overflow:hidden; }
+.hero-band::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 600px 200px at 50% 100%,rgba(255,255,255,.12) 0%,transparent 70%); }
+.hero-band-icon { width:68px; height:68px; border-radius:20px; background:rgba(255,255,255,.2); backdrop-filter:blur(8px); display:flex; align-items:center; justify-content:center; font-size:30px; margin:0 auto 14px; border:1.5px solid rgba(255,255,255,.35); }
+.hero-band h1 { font-size:clamp(20px,4vw,30px); font-weight:900; color:#fff; margin-bottom:6px; }
+.hero-band p { font-size:13px; color:rgba(255,255,255,.8); }
+.hero-band-meta { display:flex; justify-content:center; gap:24px; margin-top:20px; flex-wrap:wrap; }
+.meta-pill { background:rgba(255,255,255,.18); backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,.3); border-radius:50px; padding:6px 16px; font-size:12px; font-weight:700; color:#fff; display:flex; align-items:center; gap:6px; }
+
+/* TOPIC SELECTOR */
+.topic-section { max-width:680px; margin:0 auto; padding:24px 20px 0; }
+.topic-title { font-size:13px; font-weight:700; color:var(--text3); text-transform:uppercase; letter-spacing:.05em; margin-bottom:14px; }
+.topic-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:20px; }
+.topic-card {
+  background:var(--card); border:2px solid var(--bc); border-radius:14px;
+  padding:14px 16px; cursor:pointer; transition:var(--tr);
+  display:flex; flex-direction:column; gap:4px;
+  position:relative; overflow:hidden;
+}
+.topic-card::before { content:''; position:absolute; left:0; top:0; bottom:0; width:4px; background:var(--tc,var(--accent)); border-radius:4px 0 0 4px; }
+.topic-card:hover { border-color:var(--tc,var(--accent)); transform:translateY(-2px); box-shadow:0 6px 20px rgba(0,0,0,.08); }
+.topic-card.active { border-color:var(--tc,var(--accent)); background:color-mix(in srgb,var(--tc,var(--accent)) 8%,var(--card)); }
+.topic-card-name { font-size:13px; font-weight:700; color:var(--text); line-height:1.4; }
+.topic-card-count { font-size:11px; color:var(--text3); }
+.topic-card-icon { font-size:20px; margin-bottom:4px; }
+.topic-all { grid-column:1/-1; background:linear-gradient(135deg,var(--accent-dark),var(--accent)); border-color:var(--accent); }
+.topic-all .topic-card-name, .topic-all .topic-card-count, .topic-all .topic-card-icon { color:#fff; }
+.topic-all::before { display:none; }
+.topic-all:hover { transform:translateY(-2px); box-shadow:0 8px 24px var(--accent-glow); }
+
+.shell { max-width:560px; margin:0 auto; padding:24px 20px 80px; }
+.stats-row { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:16px; }
+.stat-box { background:var(--card); border:1px solid var(--bc); border-radius:var(--r); padding:12px 10px; text-align:center; }
+.stat-box .val { font-size:20px; font-weight:900; }
+.stat-box .lbl { font-size:11px; color:var(--text3); margin-top:2px; }
+.stat-correct { color:var(--success); } .stat-wrong { color:var(--danger); } .stat-remain { color:var(--accent); }
+.prog-strip { background:var(--card); border:1px solid var(--bc); border-radius:var(--r); padding:14px 16px; margin-bottom:16px; display:flex; align-items:center; gap:14px; }
+.prog-label { font-size:13px; font-weight:700; color:var(--text2); white-space:nowrap; }
+.prog-track { flex:1; height:8px; background:var(--bg2); border-radius:8px; overflow:hidden; }
+.prog-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--accent),var(--accent-light)); border-radius:8px; transition:width .4s; }
+.timer-badge { min-width:64px; height:36px; border-radius:18px; background:var(--bg2); border:1px solid var(--bc); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:900; color:var(--text); gap:5px; padding:0 12px; flex-shrink:0; }
+.timer-badge.warn { color:var(--warn); border-color:rgba(217,119,6,.3); background:rgba(217,119,6,.08); }
+.timer-badge.danger { color:var(--danger); border-color:rgba(220,38,38,.3); background:rgba(220,38,38,.08); animation:pulse .8s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.6} }
+
+/* topic label in quiz */
+.q-topic-tag { display:inline-flex; align-items:center; gap:5px; padding:3px 10px; border-radius:20px; font-size:10px; font-weight:700; margin-left:8px; }
+
+.q-card { background:var(--card); border:1px solid var(--bc); border-radius:20px; overflow:hidden; box-shadow:0 4px 20px rgba(0,0,0,.06); transition:box-shadow .3s; }
+.q-header { background:linear-gradient(135deg,var(--accent-dark),var(--accent)); padding:8px 18px; display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.q-num { background:rgba(255,255,255,.2); border-radius:8px; padding:3px 10px; font-size:11px; font-weight:700; color:#fff; }
+.q-text { padding:22px 18px 14px; font-size:15px; font-weight:700; color:var(--text); line-height:1.65; border-bottom:1px solid var(--bc); text-align:left; direction:ltr; }
+.options { padding:14px 18px 18px; display:flex; flex-direction:column; gap:10px; }
+.opt { display:flex; align-items:center; gap:12px; padding:14px 16px; border-radius:12px; border:1.5px solid var(--bc); background:var(--bg); cursor:pointer; font-size:14px; font-weight:600; color:var(--text); transition:var(--tr); user-select:none; direction:ltr; text-align:left; }
+.opt:hover:not(.disabled) { border-color:var(--accent); background:var(--accent-glow); transform:translateX(3px); }
+.opt-letter { width:28px; height:28px; border-radius:8px; flex-shrink:0; background:var(--bg2); border:1px solid var(--bc); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:900; color:var(--text3); transition:var(--tr); }
+.opt.correct { border-color:var(--success); background:rgba(22,163,74,.08); }
+.opt.correct .opt-letter { background:var(--success); color:#fff; border-color:var(--success); }
+.opt.wrong { border-color:var(--danger); background:rgba(220,38,38,.07); }
+.opt.wrong .opt-letter { background:var(--danger); color:#fff; border-color:var(--danger); }
+.opt.disabled { pointer-events:none; }
+.feedback-bar { margin:14px 18px; padding:12px 16px; border-radius:12px; display:flex; align-items:center; gap:10px; font-size:14px; font-weight:700; animation:popIn .4s cubic-bezier(.34,1.56,.64,1); }
+@keyframes popIn { from{transform:scale(.8);opacity:0} to{transform:scale(1);opacity:1} }
+.feedback-bar.ok { background:rgba(22,163,74,.1); color:var(--success); border:1px solid rgba(22,163,74,.25); }
+.feedback-bar.no { background:rgba(220,38,38,.08); color:var(--danger); border:1px solid rgba(220,38,38,.2); }
+.feedback-icon { font-size:20px; }
+.explanation { margin:0 18px 14px; padding:12px 14px; background:rgba(37,99,235,.06); border-radius:10px; border-right:3px solid var(--accent); font-size:13px; color:var(--text2); line-height:1.6; display:none; }
+.nav-btns { padding:4px 18px 18px; display:flex; gap:10px; }
+.btn { flex:1; padding:13px; border:none; border-radius:12px; font-size:14px; font-weight:900; cursor:pointer; font-family:'Outfit',sans-serif; transition:var(--tr); display:flex; align-items:center; justify-content:center; gap:7px; }
+.btn-next { background:linear-gradient(135deg,var(--accent-dark),var(--accent)); color:#fff; box-shadow:0 4px 14px var(--accent-glow); }
+.btn-next:hover { transform:translateY(-2px); box-shadow:0 6px 20px var(--accent-glow); }
+.btn-skip { background:var(--bg2); color:var(--text2); border:1px solid var(--bc); flex:0 0 auto; padding:13px 18px; }
+.btn-skip:hover { border-color:var(--warn); color:var(--warn); }
+.btn-back { background:var(--bg2); color:var(--text2); border:1px solid var(--bc); }
+.btn-back:hover { border-color:var(--accent); color:var(--accent); }
+
+.result-hero { text-align:center; padding:36px 20px 28px; background:var(--card); border-radius:20px; border:1px solid var(--bc); margin-bottom:20px; box-shadow:0 4px 20px rgba(0,0,0,.06); }
+.score-ring { width:110px; height:110px; border-radius:50%; margin:0 auto 18px; display:flex; align-items:center; justify-content:center; flex-direction:column; border:5px solid var(--bg2); position:relative; }
+.score-ring svg { position:absolute; inset:-5px; width:calc(100% + 10px); height:calc(100% + 10px); transform:rotate(-90deg); }
+.score-ring circle { fill:none; stroke-width:5; stroke-linecap:round; }
+.ring-bg { stroke:var(--bg2); } .ring-fill { stroke:var(--accent); transition:stroke-dashoffset 1s ease; }
+.score-num { font-size:28px; font-weight:900; color:var(--text); }
+.score-pct { font-size:12px; color:var(--text3); }
+.result-grade { font-size:22px; font-weight:900; margin-bottom:6px; }
+.result-sub { font-size:14px; color:var(--text2); }
+.result-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:20px; }
+.rs { background:var(--bg2); border-radius:10px; padding:12px 8px; text-align:center; }
+.rs .n { font-size:20px; font-weight:900; } .rs .l { font-size:11px; color:var(--text3); }
+.report-item { background:var(--card); border:1px solid var(--bc); border-radius:14px; padding:16px; margin-bottom:10px; border-right:4px solid var(--bc); }
+.report-item.ok { border-right-color:var(--success); } .report-item.no { border-right-color:var(--danger); }
+.report-item .ri-q { font-size:13px; font-weight:700; margin-bottom:8px; }
+.report-item .ri-row { display:flex; align-items:center; gap:8px; font-size:12px; margin-top:5px; color:var(--text2); }
+.ri-badge { padding:2px 8px; border-radius:6px; font-weight:700; font-size:11px; flex-shrink:0; }
+.ri-yours { background:rgba(220,38,38,.1); color:var(--danger); } .ri-right { background:rgba(22,163,74,.1); color:var(--success); }
+.result-actions { display:flex; flex-direction:column; gap:10px; margin-top:20px; }
+.btn-retry { background:linear-gradient(135deg,var(--accent-dark),var(--accent)); color:#fff; }
+.btn-retry:hover { transform:translateY(-2px); box-shadow:0 6px 20px var(--accent-glow); }
+.btn-home { background:var(--bg2); color:var(--text); border:1px solid var(--bc); }
+.btn-home:hover { border-color:var(--accent); color:var(--accent); }
+
+footer { background:var(--bg2); border-top:1px solid var(--bc); padding:22px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+.footer-brand { font-size:14px; font-weight:700; }
+.footer-brand span { color:var(--accent); }
+.footer-tg { display:flex; align-items:center; gap:5px; text-decoration:none; color:#229ED9; font-size:12px; font-weight:600; }
+@media (max-width:480px) { nav { padding:0 14px; } .shell { padding:16px 14px 60px; } .hero-band { padding:30px 16px 28px; } .topic-grid { grid-template-columns:1fr; } }
+
+#quiz-view { display:none; }
+#home-view { display:block; }
+</style>
+</head>
+<body>
+<div id="prog-bar" style="width:0%"></div>
+<nav>
+  <div class="nav-brand">
+    <div class="nav-logo-icon">GT</div>
+    <span>GHAITH TEAM</span>
+  </div>
+  <div class="nav-right">
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<div class="hero-band">
+  <div class="hero-band-icon">🏥</div>
+  <h1>الأسئلة الي ورا الكتاب</h1>
+  <p>Emergency & Critical Care Nursing</p>
+  <div class="hero-band-meta">
+    <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadgeHero">-- سؤال</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-layer-group"></i> 11 محاضرة</div>
+    <div class="meta-pill"><i class="fa-solid fa-shuffle"></i> Shuffled</div>
+  </div>
+</div>
+
+<!-- HOME VIEW -->
+<div id="home-view">
+  <div class="topic-section">
+    <div class="topic-title">اختار المحاضرة</div>
+    <div class="topic-grid" id="topicGrid"></div>
+  </div>
+</div>
+
+<!-- QUIZ VIEW -->
+<div id="quiz-view">
+  <div class="shell">
+    <div class="stats-row">
+      <div class="stat-box"><div class="val stat-correct" id="sCorrect">0</div><div class="lbl">✔ صحيح</div></div>
+      <div class="stat-box"><div class="val stat-wrong" id="sWrong">0</div><div class="lbl">✖ خطأ</div></div>
+      <div class="stat-box"><div class="val stat-remain" id="sRemain">--%</div><div class="lbl">⏳ متبقي</div></div>
+    </div>
+    <div class="prog-strip">
+      <div class="prog-label" id="progLabel">سؤال ١</div>
+      <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+      <div class="timer-badge" id="timerBadge"><i class="fa-regular fa-clock"></i> <span id="timerTxt">120:00</span></div>
+    </div>
+    <div id="app"></div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">GHAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg">
+    <i class="fa-brands fa-telegram"></i> @nursing2bu
+  </a>
+</footer>
+
+<script>
+const TOPICS = [
+  { id:'lec01', name:'Lec 01 — ABC of Major Trauma', icon:'🚑', color:'#dc2626' },
+  { id:'lec03', name:'Lec 03 — ICU Admission & Discharge', icon:'🏥', color:'#7c3aed' },
+  { id:'lec04', name:'Lec 04 — Basic Monitoring in ICU', icon:'📊', color:'#0891b2' },
+  { id:'lec05', name:'Lec 05 — Airway Assessment & Management', icon:'💨', color:'#059669' },
+  { id:'lec06', name:'Lec 06 — Basic Cardiac Life Support (BLS/CPR)', icon:'❤️', color:'#e11d48' },
+  { id:'lec07', name:'Lec 07 — Fluid Management in ICU', icon:'💧', color:'#2563eb' },
+  { id:'lec08', name:'Lec 08 — Arterial Blood Gas', icon:'🧪', color:'#d97706' },
+  { id:'lec09', name:'Lec 09 — Water & Electrolytes Imbalance', icon:'⚗️', color:'#16a34a' },
+  { id:'lec10', name:'Lec 10 — Common Emergency Medical Problems', icon:'⚡', color:'#9333ea' },
+  { id:'lec12', name:'Lec 12 — Nutrition in the ICU', icon:'🥗', color:'#ea580c' },
+  { id:'all',   name:'🔀 كل المحاضرات — All Questions', icon:'🎯', color:'#2563eb', isAll:true }
+];
+
+const QUESTIONS = [
+ {t:"The nurse is triaging four clients injured in a train derailment. Which client should receive priority treatment?",o:["A 42-year-old with dyspnea and chest asymmetry","A 17-year-old with a fractured arm","A 4-year-old with facial lacerations","A 30-year-old with blunt abdominal trauma"],a:0,topic:'lec01'},
+ {t:"Direct pressure to a deep laceration on the client's lower leg has failed to stop the bleeding. The nurse's next action should be able to:",o:["Place a tourniquet proximal to the laceration","Elevate the leg above the level of the heart","Cover the laceration and apply an ice compress","Apply pressure to the femoral artery"],a:1,topic:'lec01'},
+ {t:"The emergency room staff is practicing for its annual disaster drill. According to disaster triage, which of the following four clients would be cared for last?",o:["A client with a pneumothorax","A client with 70% full thickness burns","A client with fractures of the tibia and fibula","A client with smoke inhalation injuries"],a:2,topic:'lec01'},
+ {t:"A trauma patient presents with a GCS score of 8, hypotension, and a distended abdomen. What is the most likely cause of their condition?",o:["Traumatic brain injury","Hemorrhagic shock","Spinal cord injury","Tension pneumothorax"],a:1,topic:'lec01'},
+ {t:"On primary assessment, the driver was found to be unresponsive, not breathing well, and bleeding was running. What is the first resuscitation intervention to be performed?",o:["Apply pressure to the bleeding","Carry out artificial respirations","Clear the airway","Place a cervical collar"],a:2,topic:'lec01'},
+ {t:"A motor vehicle accident patient arrives and is in need of airway management. He is wearing a cervical collar (C-collar). What is the appropriate way to establish an airway?",o:["Perform jaw thrust maneuver with a C-collar on to open the airway","Head tilt-chin lift technique","Put oral airway aggressively","Remove the collar until the airway is clear"],a:0,topic:'lec01'},
+ {t:"The best prognostic factor for head injury is:",o:["Glasgow coma scale","Age","Mode of injury","CT"],a:0,topic:'lec01'},
+ {t:"What are the minimum and maximum possible values of GCS?",o:["Minimum = 0, Maximum = 13","Minimum = 0, Maximum = 15","Minimum = 3, Maximum = 15","Minimum = 3, Maximum = 18"],a:2,topic:'lec01'},
+ {t:"Which of the following statements about head injuries is false?",o:["The majority of deaths from auto accidents are due to head injuries","Head injury alone often produces a shock","A rapid and complete neurologic examination is part of the initial evaluation of the trauma patient","Optimizing arterial oxygenation is part of the initial therapy"],a:1,topic:'lec01'},
+ {t:"Which of the following is the most appropriate initial step in managing a trauma patient according to the ABCDE approach?",o:["Administer pain medication","Ensure adequate breathing and ventilation","Perform a detailed neurological examination","Apply a splint to a fractured limb"],a:1,topic:'lec01'},
+ {t:"Which of the following is the most appropriate initial imaging study for a hemodynamically unstable trauma patient with blunt abdominal trauma?",o:["CT scan of the abdomen","Diagnostic peritoneal lavage","Focused Assessment with Sonography for Trauma (FAST)","X-ray of the abdomen"],a:2,topic:'lec01'},
+ {t:"During the primary survey of a trauma patient, you notice paradoxical chest movement. What is the most likely diagnosis?",o:["Flail chest","Tension pneumothorax","Hemothorax","Pulmonary contusion"],a:0,topic:'lec01'},
+ {t:"A patient who has been in a high-speed car accident arrives in the emergency department. He is unconscious and making a snoring sound when he breathes. What is your PRIORITY action?",o:["Insert two large-bore IV cannulas","Apply a hard cervical collar","Perform a jaw thrust maneuver","Administer high-flow oxygen via a non-rebreather mask"],a:2,topic:'lec01'},
+ {t:"The role of the primary nurse in a trauma team includes all of the following EXCEPT:",o:["Administering medications as directed by the team leader","Assuming the role of team leader and making final decisions","Measuring and recording vital signs","Acting as a patient advocate by providing reassurance"],a:1,topic:'lec01'},
+ {t:"A patient arrives with a decreased level of consciousness and a GCS of 7. After completing your primary survey, which team member would be primarily responsible for managing this patient's airway?",o:["The primary nurse","The circulation doctor","The airway doctor/anesthetist","The team leader"],a:2,topic:'lec01'},
+ {t:"A patient requires a temporary cardiac pacemaker for arrhythmia control is classified as:",o:["Basic Cardiovascular Support","Advanced Cardiovascular Support","Basic Respiratory Support","Intermediate Care"],a:1,topic:'lec03'},
+ {t:"Which member of the multidisciplinary ICU team is primarily responsible for managing and weaning a patient from a mechanical ventilator?",o:["Intensivist","ICU Nurse","Respiratory Therapist","Physiotherapist"],a:2,topic:'lec03'},
+ {t:"A patient with advanced COPD is admitted to the ICU with acute respiratory failure. He is initiated on BiPAP via a face mask. Six hours later, he become fatigued and endotracheal intubation and mechanical ventilation were applied. Which of the following best describes the change in the patient's status?",o:["The patient has improved from Level 3 to Level 2 care","The patient has moved from basic to advanced respiratory support","The patient no longer requires single-organ support","The patient is now appropriate for transfer to a high-dependency unit"],a:1,topic:'lec03'},
+ {t:"A patient requires temporary support for both heart and lung function due to acute respiratory failure and cardiogenic shock. Which life support equipment is most specific to this scenario?",o:["Intra-aortic Balloon Pump (IABP)","Extracorporeal Membrane Oxygenation (ECMO)","Continuous Renal Replacement Therapy (CRRT)","Patient-Controlled Analgesia (PCA) Pump"],a:1,topic:'lec03'},
+ {t:"According to the Level of Care model, a patient receiving non-invasive ventilation with a BiPAP mask is an example of:",o:["Advanced Respiratory Support (Level 3)","Basic Respiratory Support (Level 2)","Basic Cardiovascular Support (Level 2)","No specific organ support (Level 1)"],a:1,topic:'lec03'},
+ {t:"The primary role of the Critical Care Pharmacist in the ICU is to:",o:["Perform chest physiotherapy and early mobilization","Ensure medication safety and recommend appropriate drug dosages","Manage the mechanical ventilator settings","Assess nutritional needs and design feeding plans"],a:1,topic:'lec03'},
+ {t:"The ICU is at full capacity. The charge nurse is informed of four new potential admissions. Based on triage priority, which patient should be advocated for as the most critical (Priority 1)?",o:["A patient with metastatic cancer and new-onset pneumonia, with a \"Do Not Intubate\" order","A patient with stable diabetic ketoacidosis on an insulin drip","A patient found unresponsive after arrest, now intubated and on multiple vasopressors drug","A patient with mild heart failure exacerbation requiring IV diuretics"],a:2,topic:'lec03'},
+ {t:"Which of the following is NOT an objective parameter for ICU admission?",o:["PaO2 < 60 mmHg","pH < 7.1","MAP < 80 mmHg","Serum potassium > 7.0 mEq/L"],a:2,topic:'lec03'},
+ {t:"A patient is being prepared for transfer from the ICU to a step-down unit. Which scenario best indicates safe discharge based on clinical stability criteria?",o:["The patient is on a low-dose Noradrenaline drip to maintain MAP > 65, but is otherwise stable","The patient is awake and following commands but remains intubated on the ventilator","The patient is off all vasopressors, breathing spontaneously on 2L O2 via nasal cannula, and is alert and oriented","The patient requires hourly nursing interventions for wound care, but vital signs are stable"],a:2,topic:'lec03'},
+ {t:"What is the main role of the ICU nurse?",o:["Manage ventilators","Provide 24/7 bedside care","Draw blood samples","Perform surgery"],a:1,topic:'lec03'},
+ {t:"The Golden Hour refers to the period from the moment the patient arrives at the Emergency Department until they reach the operating theatre.",o:["True","False"],a:1,topic:'lec01'},
+ {t:"During the primary survey, if a patient has a compromised airway, the nurse should immediately check the patient's breathing (B) before intervening.",o:["True","False"],a:1,topic:'lec01'},
+ {t:"In a trauma team, the \"Airway\" is primarily assessed for patency and cervical spine stabilization.",o:["True","False"],a:0,topic:'lec01'},
+ {t:"A Secondary Survey should be performed immediately upon the patient's arrival, even if the patient's vital signs are unstable.",o:["True","False"],a:1,topic:'lec01'},
+ {t:"External hemorrhage (active bleeding) should be addressed during the Circulation (C) phase of the primary survey.",o:["True","False"],a:0,topic:'lec01'},
+ {t:"A patient's EtCO2 waveform suddenly drops from 38 mmHg to 12 mmHg. The SpO2 remains at 94%. What is your immediate priority action?",o:["Increase oxygen flow rate","Suction the airway","Administer a bronchodilator","Check sedation levels"],a:1,topic:'lec04'},
+ {t:"A patient receiving morphine PCA develops RR 8, GCS 10 (E2V3M5), and pinpoint pupils. Using the \"AEIOU TIPS\" mnemonic, what is the most likely cause?",o:["Infection","Opioids","Seizure","Endocrine disorder"],a:1,topic:'lec04'},
+ {t:"Which parameter is the most sensitive early indicator of patient deterioration?",o:["Blood pressure","Heart rate","Respiratory rate","Temperature"],a:2,topic:'lec04'},
+ {t:"Which monitoring method provides the most accurate core body temperature?",o:["Axillary thermometer","Tympanic thermometer","Pulmonary artery catheter","Temporal artery thermometer"],a:2,topic:'lec04'},
+ {t:"The AVPU scale assesses which vital parameter?",o:["Blood pressure","Heart rate","Level of consciousness","Respiratory effort"],a:2,topic:'lec04'},
+ {t:"A patient's NEWS2 score increased from 3 to 7 over 2 hours. The most significant changes are RR from 18 to 26 and SpO2 from 96% to 89% on room air. What is the most appropriate immediate action?",o:["Document the findings in the chart","Increase monitoring to every 4 hours","Call the Rapid Response Team","Administer supplemental oxygen and reassess in 1 hour"],a:2,topic:'lec04'},
+ {t:"What is considered an abnormal finding in capillary refill time (CRT)?",o:["CRT < 2 seconds","CRT = 2 seconds","CRT > 2 seconds","CRT = 1 second"],a:2,topic:'lec04'},
+ {t:"A patient on mechanical ventilation has gradually rising EtCO2 from 35 to 52 mmHg over an hour. The most appropriate first action is to:",o:["Check ventilator connections","Suction the endotracheal tube","Assess sedation level and respiratory drive","Increase tidal volume settings"],a:2,topic:'lec04'},
+ {t:"What is the critical MAP threshold below which organ perfusion is compromised?",o:["55 mmHg","60 mmHg","65 mmHg","70 mmHg"],a:2,topic:'lec04'},
+ {t:"A patient with bilateral fixed and dilated pupils requires immediate assessment for:",o:["Liver failure","Brainstem herniation","Hypoglycemia","Sepsis"],a:1,topic:'lec04'},
+ {t:"The primary advantage of invasive arterial blood pressure monitoring over NIBP is:",o:["Lower infection risk","Continuous waveform display","Easier patient mobility","Faster measurement"],a:1,topic:'lec04'},
+ {t:"An elderly patient is admitted after a week of severe vomiting and diarrhea. Current signs are BP 88/50 (MAP 63), HR 128, RR 24, pale, cool, and dry skin. According to the \"Pump, Tank, Pipes\" model, what is the most likely problem?",o:["The Tank is Empty (Low blood volume)","The Pump is Failing (The heart is weak)","The Pipes are Leaky (Widespread vasodilation)","The Pipes are Kinked (An obstruction)"],a:0,topic:'lec04'},
+ {t:"Level 3 ICU care requires a nurse-to-patient ratio of 1:2.",o:["True","False"],a:1,topic:'lec03'},
+ {t:"A patient requiring mechanical ventilation via an endotracheal tube is classified as receiving advanced respiratory support.",o:["True","False"],a:0,topic:'lec03'},
+ {t:"In the triage-based prioritization model, a patient with metastatic cancer and a Do Not Intubate order is considered Priority 1.",o:["True","False"],a:1,topic:'lec03'},
+ {t:"A patient receiving BiPAP via face mask is classified as Level 3 (Full Intensive Care Support).",o:["True","False"],a:1,topic:'lec03'},
+ {t:"One of the ICU discharge criteria is that the patient must no longer require continuous invasive monitoring.",o:["True","False"],a:0,topic:'lec03'},
+ {t:"The primary role of the respiratory therapist in the ICU is to administer medications and provide 24/7 bedside care.",o:["True","False"],a:1,topic:'lec03'},
+ {t:"A patient with a MAP of 58 mmHg meets the objective parameter for ICU admission.",o:["True","False"],a:0,topic:'lec03'},
+ {t:"Priority 4 patients are those who are critically ill with a high likelihood of benefit from ICU admission.",o:["True","False"],a:1,topic:'lec03'},
+ {t:"The ICU nurse acts as the central coordinator of the multidisciplinary team at the patient's bedside.",o:["True","False"],a:0,topic:'lec03'},
+ {t:"A patient receiving a single vasoactive drug, such as norepinephrine, for blood pressure support is classified as receiving advanced cardiovascular support.",o:["True","False"],a:1,topic:'lec03'},
+ {t:"The critical MAP threshold below which organ perfusion is compromised is 65 mmHg.",o:["True","False"],a:0,topic:'lec04'},
+ {t:"Capnography (EtCO2) measures oxygen saturation in the blood.",o:["True","False"],a:1,topic:'lec04'},
+ {t:"A gradually rising EtCO2 waveform in a ventilated patient suggests respiratory depression, often due to sedation or worsening COPD.",o:["True","False"],a:0,topic:'lec04'},
+ {t:"A prolonged capillary refill time (CRT > 2 seconds) indicates adequate tissue perfusion.",o:["True","False"],a:1,topic:'lec04'},
+ {t:"A NEWS2 score of 7 or more requires activation of the Rapid Response Team (RRT) and preparation for ICU transfer.",o:["True","False"],a:0,topic:'lec04'},
+ {t:"A patient with GCS <= 8 generally requires intubation for airway protection.",o:["True","False"],a:0,topic:'lec04'},
+ {t:"The AVPU scale assesses blood pressure status in an emergency.",o:["True","False"],a:1,topic:'lec04'},
+ {t:"In a patient with bradycardia, the mnemonic PLEASE helps identify potential causes including Pump problem, Electrolyte imbalance, and Sedatives/drugs.",o:["True","False"],a:0,topic:'lec04'},
+ {t:"In the Pump, Tank, Pipes model, septic shock is classified as a Tank problem.",o:["True","False"],a:1,topic:'lec04'},
+ {t:"A sudden drop in EtCO2 to zero with high-pressure alarm suggests mucus plug or bronchospasm.",o:["True","False"],a:1,topic:'lec04'},
+ {t:"To open airway...",o:["Head tilt-chin lift","Back slaps","Chest thrusts","None of them"],a:0,topic:'lec05'},
+ {t:"What is the first step in airway management?",o:["Insert an oropharyngeal airway (OPA)","Perform a head tilt-chin lift maneuver","Administer oxygen","Assess the airway for patency"],a:3,topic:'lec05'},
+ {t:"Mallampati Score...",o:["Has 4 classes","Rough to do with the patient","Class I most difficult to intubate","Used for scoring ventilation"],a:0,topic:'lec05'},
+ {t:"To apply for proper oral airway in a position you must:",o:["Choose the appropriate size","Open the airway","Insert upside down in the airway and rotate into place","All of the above"],a:3,topic:'lec05'},
+ {t:"Non-Invasive method for airway management is:",o:["ETT","Crico-throdetomy","Face Mask","FOB intubation"],a:2,topic:'lec05'},
+ {t:"What is the first step in confirming proper endotracheal tube placement?",o:["Chest X-ray","Auscultation of breath sounds","Capnography","Pulse oximetry"],a:2,topic:'lec05'},
+ {t:"Which maneuver is used to open the airway in an unresponsive patient without suspected spinal injury?",o:["Jaw thrust","Head tilt-chin lift","Neck extension","Abdominal thrust"],a:1,topic:'lec05'},
+ {t:"When ventilating an apneic adult patient with a bag-valve-mask device, you must make sure that:",o:["An oral airway device has been inserted, and chest elevation occurred","Continuous check pulse","Ventilations occur at a rate of at least 20 breaths/min","O2 source was connected in a good flow"],a:0,topic:'lec05'},
+ {t:"Snoring respirations in an unresponsive patient are most likely the result of:",o:["Foreign body airway obstruction","Upper airway obstruction by the tongue","Collapse of the trachea during breathing","Swelling of the larynx and surrounding structures"],a:1,topic:'lec05'},
+ {t:"A 60-year-old woman presents with acute respiratory distress. She is alert and oriented but restless. RR is 26 breaths/min with adequate chest expansion and clear breath sounds. What is the most appropriate method of airway management?",o:["Supplemental oxygen with a non-rebreathing mask","A nasopharyngeal airway and assisted ventilation","A nasopharyngeal airway and supplemental oxygen","A nasal cannula with the flowmeter set at 4 to 6 L/min"],a:3,topic:'lec05'},
+ {t:"The Mallampati Score is a clinical tool used to estimate the difficulty of endotracheal intubation based on the visualization of oropharyngeal structures.",o:["True","False"],a:0,topic:'lec05'},
+ {t:"The 3-3-2 rule suggests that a patient should be able to open their mouth to a width of at least 2 fingers for a normal airway assessment.",o:["True","False"],a:0,topic:'lec05'},
+ {t:"Snoring respirations in an unresponsive patient are most commonly caused by a foreign body airway obstruction.",o:["True","False"],a:1,topic:'lec05'},
+ {t:"Capnography is considered the first and most reliable step in confirming the proper placement of an endotracheal tube.",o:["True","False"],a:0,topic:'lec05'},
+ {t:"The head tilt-chin lift maneuver is the preferred method for opening the airway in a patient with a suspected cervical spine injury.",o:["True","False"],a:1,topic:'lec05'},
+ {t:"What is the rate of performing chest compression?",o:["30 per minute","50 per minute","80 per minute","100 per minute"],a:3,topic:'lec06'},
+ {t:"How deep should you compress the adult victim's chest?",o:["1/4 inch","1/2 inch","1/3 inch","1.5-2 inches"],a:3,topic:'lec06'},
+ {t:"What is the maneuver called to open the victim's airway?",o:["Head lift","Child rise","Jaw lift","Head-tilt, chin-lift"],a:3,topic:'lec06'},
+ {t:"How do you give mouth to mouth breaths?",o:["Put your lips in the victim's lips","Seal your lips around the outside of the victim's lips through barrier","Place a breathing tube in their airway","Intubate immediately"],a:1,topic:'lec06'},
+ {t:"How can you tell if ventilations are going into a victim?",o:["Watch for chest rise","Watch for abdominal rise","Listen for air going through the airway","Listen for the victim exhaling air"],a:0,topic:'lec06'},
+ {t:"What are the three steps to check for a victim's breathing?",o:["Look, listen and feel","Feel, push, and ventilate","Listen, breathe and exhale","Look, listen and ventilate"],a:0,topic:'lec06'},
+ {t:"You find a victim gasping; what is your next step?",o:["Give two rescue breaths","Do a blind finger sweep","Do abdominal thrusts","Check for a pulse"],a:3,topic:'lec06'},
+ {t:"How do you know when to start compressions?",o:["The victim is breathing but has no pulse","The victim has a pulse but is not breathing","The victim is breathing and has a pulse","The victim is not breathing and has no pulse"],a:3,topic:'lec06'},
+ {t:"What is early defibrillation needed?",o:["To synchronize heart rate","To increase effectiveness of ventilations","To not have to do compressions","To increase the likelihood of it working"],a:0,topic:'lec06'},
+ {t:"Why should you minimize interruptions during CPR?",o:["It will be more effective","To keep your energy up","To keep a good rhythm for compressions"],a:0,topic:'lec06'},
+ {t:"What is the primary purpose of rescue breaths in CPR?",o:["To provide oxygen to the lungs","To restart the heart","To clear the airway","To stop bleeding"],a:0,topic:'lec06'},
+ {t:"How long should you check for breathing in an unresponsive adult?",o:["5 seconds","10 seconds","15 seconds","20 seconds"],a:1,topic:'lec06'},
+ {t:"What might happen if you touch the victim while shocking?",o:["You'll get shocked","AED will analyze your rhythm","You will throw off the machine's synchronization"],a:0,topic:'lec06'},
+ {t:"You are alone and find an unresponsive infant. What should you do next?",o:["Call EMT or Code Red","Begin CPR, then call EMT after 2 minutes","Chest thrusts","Blind finger sweep"],a:1,topic:'lec06'},
+ {t:"The primary goal of Basic Life Support (BLS) is to restore the patient's heart to a normal rhythm using advanced pharmacological agents.",o:["True","False"],a:1,topic:'lec06'},
+ {t:"According to the CAB sequence, checking for a pulse and performing chest compressions should occur before opening the airway and giving rescue breaths.",o:["True","False"],a:0,topic:'lec06'},
+ {t:"To perform effective chest compressions on an adult, the sternum should be depressed to a depth of at least 5 centimeters, approximately 2 inches.",o:["True","False"],a:0,topic:'lec06'},
+ {t:"In an out-of-hospital setting, the first responder should spend at least 20 seconds checking for a pulse before starting chest compressions.",o:["True","False"],a:1,topic:'lec06'},
+ {t:"Early defibrillation is critical because it significantly increases the likelihood of survival if provided within 10 minutes of a collapse.",o:["True","False"],a:0,topic:'lec06'},
+ {t:"Allowing complete chest recoil between compressions is necessary to allow blood to flow back into the heart.",o:["True","False"],a:0,topic:'lec06'},
+ {t:"For an adult victim, the recommended compression rate is between 60 and 80 compressions per minute.",o:["True","False"],a:1,topic:'lec06'},
+ {t:"If a victim is gasping but has no definitive pulse, the healthcare provider should immediately begin chest compressions.",o:["True","False"],a:0,topic:'lec06'},
+ {t:"When an Automated External Defibrillator (AED) arrives, the rescuer should finish the current 2-minute cycle of CPR before turning the device on.",o:["True","False"],a:0,topic:'lec06'},
+ {t:"The Look, Listen, and Feel technique for checking breathing should take no more than 10 seconds.",o:["True","False"],a:0,topic:'lec06'},
+ {t:"During two-rescuer CPR on an adult, the ratio of compressions to breaths changes from 30:2 to 15:2.",o:["True","False"],a:0,topic:'lec06'},
+ {t:"The correct hand placement for chest compressions on an adult is on the upper half of the sternum.",o:["True","False"],a:1,topic:'lec06'},
+ {t:"Hyperventilation, giving too many breaths or breathing too forcefully, can be harmful because it increases pressure inside the chest and reduces blood return to the heart.",o:["True","False"],a:0,topic:'lec06'},
+ {t:"If a pulse is present but the adult victim is not breathing, the rescuer should provide rescue breaths at a rate of 1 breath every 6 seconds.",o:["True","False"],a:0,topic:'lec06'},
+ {t:"Basic Life Support includes the use of advanced airway adjuncts such as endotracheal tubes.",o:["True","False"],a:1,topic:'lec06'},
+ {t:"A 55-year-old patient with sepsis has BP 88/50 mmHg (MAP=63), HR 128, and cold extremities. The physician orders a 500 mL LR bolus. After the bolus, BP is 92/58 and HR is 122. What does this response indicate?",o:["The patient needs immediate blood transfusion","The patient may need another fluid bolus","The patient is now fluid overloaded","The patient should be switched to D5W"],a:1,topic:'lec07'},
+ {t:"Which patient would be the BEST candidate for colloid administration?",o:["A stable NPO patient needing maintenance fluids","A septic patient still hypotensive after 3L crystalloids","A patient with mild dehydration from vomiting","A patient with cerebral edema"],a:1,topic:'lec07'},
+ {t:"What is the normal range of plasma osmolarity?",o:["200-250 mOsmol/L","260-280 mOsmol/L","280-300 mOsmol/L","310-330 mOsmol/L"],a:2,topic:'lec07'},
+ {t:"A patient's fluid balance chart shows: Input 3200 mL, Output 1800 mL over 24 hours. The patient develops dyspnea and crackles. This represents:",o:["Positive fluid balance with overload","Appropriate fluid resuscitation","Negative fluid balance","Maintenance fluid therapy"],a:0,topic:'lec07'},
+ {t:"Which IV fluid would be MOST appropriate for a patient with severe hyponatremia (Na+ 118 mEq/L) and altered mental status?",o:["0.9% Normal Saline","3% Hypertonic Saline","Lactated Ringer's","D5W"],a:1,topic:'lec07'},
+ {t:"A patient with heart failure develops dyspnea, crackles in lung bases, and +2 pedal edema after receiving 2L of 0.9% NS over 6 hours. What is the most appropriate initial nursing action?",o:["Administer another 500 mL bolus","Stop the IV fluids and elevate the head of bed","Switch to Lactated Ringer's solution","Apply oxygen and continue the current rate"],a:1,topic:'lec07'},
+ {t:"Which fluid compartment contains approximately 40% of body weight?",o:["Intravascular","Interstitial","Intracellular","Extracellular"],a:2,topic:'lec07'},
+ {t:"Lactated Ringer's solution is contraindicated in which condition?",o:["Dehydration","Severe liver failure","Hypovolemic shock","Surgical patients"],a:1,topic:'lec07'},
+ {t:"The pressure that PULLS water into blood vessels is called:",o:["Hydrostatic pressure","Systolic pressure","Osmotic pressure","Diffusion pressure"],a:2,topic:'lec07'},
+ {t:"The most critical parameter to monitor during fluid resuscitation is:",o:["Temperature","Urine output","Blood glucose","Respiratory rate"],a:1,topic:'lec07'},
+ {t:"Which type of intravenous fluid contains small molecules that can easily move out of the blood vessels and into the body's tissues?",o:["Colloids","Crystalloids","Blood products","Albumin"],a:1,topic:'lec07'},
+ {t:"A patient who has been vomiting for three days is most likely to be experiencing which fluid imbalance?",o:["Hypervolemia","Hypovolemia","Fluid overload","Third-spacing"],a:1,topic:'lec07'},
+ {t:"Crystalloids contain small molecules that pass easily through capillary membranes into tissues.",o:["True","False"],a:0,topic:'lec07'},
+ {t:"Colloids, such as albumin, stay in the blood vessels longer than crystalloids because they have larger molecules.",o:["True","False"],a:0,topic:'lec07'},
+ {t:"The normal plasma osmolarity range is 200-250 mOsm/L.",o:["True","False"],a:1,topic:'lec07'},
+ {t:"A positive response to a fluid challenge includes increased blood pressure, decreased heart rate, and increased urine output.",o:["True","False"],a:0,topic:'lec07'},
+ {t:"Hypotonic solutions, such as D5W, are preferred for initial resuscitation in hypovolemic shock because they rapidly expand the intravascular volume.",o:["True","False"],a:1,topic:'lec07'},
+ {t:"Hydrostatic pressure is the pulling force that draws water into blood vessels.",o:["True","False"],a:1,topic:'lec07'},
+ {t:"A patient with severe hyponatremia (Na+ 118 mEq/L) and altered mental status should receive 0.9% normal saline as first-line treatment.",o:["True","False"],a:1,topic:'lec07'},
+ {t:"Lactated Ringer's solution contains potassium and is contraindicated in severe hyperkalemia.",o:["True","False"],a:0,topic:'lec07'},
+ {t:"A negative fluid balance (output > input) always indicates appropriate patient management.",o:["True","False"],a:1,topic:'lec07'},
+ {t:"During a fluid challenge, new-onset crackles and decreased SpO2 indicate a positive response.",o:["True","False"],a:1,topic:'lec07'},
+ {t:"What does a PaCO2 level greater than 45 mmHg indicate?",o:["Respiratory acidosis","Respiratory alkalosis","Metabolic acidosis","Metabolic alkalosis"],a:0,topic:'lec08'},
+ {t:"Which component of ABG reflects the metabolic status of acid-base balance?",o:["pH","PaCO2","HCO3","SaO2"],a:2,topic:'lec08'},
+ {t:"A patient with prolonged vomiting is at risk of which acid-base disorder?",o:["Metabolic acidosis","Respiratory acidosis","Metabolic alkalosis","Respiratory alkalosis"],a:2,topic:'lec08'},
+ {t:"Which buffer system is the most important in extracellular fluid?",o:["Phosphate buffer system","Protein buffer system","Hemoglobin buffer system","Bicarbonate buffer system"],a:3,topic:'lec08'},
+ {t:"Which condition is characterized by a low pH and high PaCO2?",o:["Metabolic acidosis","Respiratory acidosis","Metabolic alkalosis","Respiratory alkalosis"],a:1,topic:'lec08'},
+ {t:"What does a lactate level greater than 4 mmol/L suggest?",o:["Metabolic alkalosis","Respiratory alkalosis","Shock, sepsis, or tissue hypoxia","Normal aerobic metabolism"],a:2,topic:'lec08'},
+ {t:"What is the primary compensation mechanism for metabolic acidosis?",o:["Increased renal bicarbonate excretion","Increased respiratory rate to expel CO2","Decreased renal bicarbonate production","Decreased respiratory rate"],a:1,topic:'lec08'},
+ {t:"Which of the following conditions can cause respiratory acidosis?",o:["Hyperventilation","COPD","Diarrhea","Renal failure"],a:1,topic:'lec08'},
+ {t:"A 25-year-old female presents with anxiety and hyperventilation. Her ABG results are: pH 7.50 - PaCO2 30 mmHg - HCO3 24 mEq/L. What is the most likely diagnosis?",o:["Respiratory alkalosis","Metabolic acidosis","Respiratory acidosis","Metabolic alkalosis"],a:0,topic:'lec08'},
+ {t:"A 45-year-old diabetic patient presents with nausea, vomiting, and deep rapid breathing (Kussmaul breathing). ABG: pH 7.20 - PaCO2 30 mmHg - HCO3 14 mEq/L. What is the most likely acid-base disorder?",o:["Respiratory acidosis","Metabolic acidosis with respiratory compensation","Metabolic alkalosis","Respiratory alkalosis"],a:1,topic:'lec08'},
+ {t:"A 50-year-old man with severe pneumonia is admitted to the ICU with respiratory distress. ABG: pH 7.28 - PaCO2 52 mmHg - HCO3 25 mEq/L. What is the most likely acid-base disorder?",o:["Respiratory alkalosis","Metabolic acidosis","Respiratory acidosis (uncompensated)","Metabolic alkalosis"],a:2,topic:'lec08'},
+ {t:"The normal arterial blood pH range is 7.35-7.45.",o:["True","False"],a:0,topic:'lec08'},
+ {t:"PaCO2 measures oxygenation status.",o:["True","False"],a:1,topic:'lec08'},
+ {t:"A patient with pH 7.28 and PaCO2 52 mmHg has respiratory acidosis.",o:["True","False"],a:0,topic:'lec08'},
+ {t:"A lactate level greater than 4 mmol/L suggests adequate tissue perfusion.",o:["True","False"],a:1,topic:'lec08'},
+ {t:"HCO3- normal range is 22-26 mEq/L.",o:["True","False"],a:0,topic:'lec08'},
+ {t:"The primary compensation mechanism for metabolic acidosis is increased respiratory rate to expel CO2.",o:["True","False"],a:0,topic:'lec08'},
+ {t:"A patient with prolonged vomiting is at risk for metabolic acidosis.",o:["True","False"],a:1,topic:'lec08'},
+ {t:"A compensated acid-base disorder has normal pH with both PaCO2 and HCO3- abnormal.",o:["True","False"],a:0,topic:'lec08'},
+ {t:"An abnormal Allen's test is an absolute contraindication for radial artery puncture.",o:["True","False"],a:0,topic:'lec08'},
+ {t:"A primary disorder is pathological; compensation is physiological.",o:["True","False"],a:0,topic:'lec08'},
+ {t:"Which of the following is the first-line treatment for severe hyperkalemia without ECG changes?",o:["Insulin and glucose","Calcium gluconate","Sodium bicarbonate","Furosemide"],a:0,topic:'lec09'},
+ {t:"A patient with heart failure on furosemide (Lasix diuretic) is at risk for which electrolyte imbalance?",o:["Hypernatremia","Hypokalemia","Hypercalcemia","Hypermagnesemia"],a:1,topic:'lec09'},
+ {t:"A client with a recent thyroidectomy complains of numbness and tingling around the mouth. Which finding indicates the serum calcium is low?",o:["Bone pain","Depressed deep tendon reflexes","Positive Chvostek's sign","Nausea"],a:2,topic:'lec09'},
+ {t:"The nurse is admitting a client with a potassium level of 6.0 mEq/L. The nurse reports this finding as a result of:",o:["Acute renal failure","Malabsorption syndrome","Nasogastric drainage","Laxative abuse"],a:0,topic:'lec09'},
+ {t:"Which of the following treatments is appropriate for severe hypocalcemia?",o:["Oral calcium supplements","IV calcium gluconate","Loop diuretics","Sodium bicarbonate"],a:1,topic:'lec09'},
+ {t:"Nursing interventions for a patient with hyponatremia include:",o:["Administering hypotonic IV fluids","Encouraging water intake","Restricting fluid intake","Restricting sodium intake"],a:2,topic:'lec09'},
+ {t:"Which of the following findings would the nurse expect to assess in a patient with hypokalemia?",o:["Hypertension","pH below 7.35","Hypoglycemia","Hyporeflexia"],a:3,topic:'lec09'},
+ {t:"Which of the following is not an appropriate nursing intervention for a patient with hypercalcemia?",o:["Administering calcitonin","Administering calcium gluconate","Administering loop diuretics","Encouraging ambulation"],a:1,topic:'lec09'},
+ {t:"The majority of the body's water is contained in which of the following fluid compartments?",o:["Intracellular","Interstitial","Intravascular","Extracellular"],a:0,topic:'lec09'},
+ {t:"A client with hypoparathyroidism complains of numbness and tingling in his fingers and around the mouth. Would the nurse assess for what electrolyte imbalance?",o:["Hyponatremia","Hypocalcemia","Hypokalemia","Hypermagnesemia"],a:1,topic:'lec09'},
+ {t:"One patient is scheduled to receive an isotonic solution, which one of the following is an example of such a solution?",o:["D10% W","0.45% saline","0.9% saline","3% normal saline W"],a:2,topic:'lec09'},
+ {t:"A patient with severe vomiting and diarrhea is at risk for which electrolyte imbalance?",o:["Hypernatremia","Hypokalemia","Hypercalcemia","Hypermagnesemia"],a:1,topic:'lec09'},
+ {t:"In a healthy 70 kg adult, the majority of total body water is located within the extracellular fluid compartment.",o:["True","False"],a:1,topic:'lec09'},
+ {t:"An example of an isotonic IV solution is 0.9% Normal Saline, which has the same osmotic pressure as body fluids.",o:["True","False"],a:0,topic:'lec09'},
+ {t:"A primary nursing intervention for a patient with hyponatremia is to encourage a high intake of plain water.",o:["True","False"],a:1,topic:'lec09'},
+ {t:"Hyporeflexia and muscle weakness are common clinical findings in a patient with hypokalemia.",o:["True","False"],a:0,topic:'lec09'},
+ {t:"A patient with hypoparathyroidism who experiences numbness and tingling in the fingers is likely suffering from hypercalcemia.",o:["True","False"],a:1,topic:'lec09'},
+ {t:"A patient with hyperkalemia is at high risk for developing dangerous cardiac arrhythmias.",o:["True","False"],a:0,topic:'lec09'},
+ {t:"Hypotonic IV solutions, such as 0.45% Normal Saline, cause water to move from the intracellular space into the intravascular space.",o:["True","False"],a:1,topic:'lec09'},
+ {t:"Chvostek's sign and Trousseau's sign are classic physical assessment findings associated with hypomagnesemia and hypocalcemia.",o:["True","False"],a:0,topic:'lec09'},
+ {t:"The normal range for serum sodium in a healthy adult is typically between 135 and 145 mEq/L.",o:["True","False"],a:0,topic:'lec09'},
+ {t:"Insensible water loss refers to fluid loss that can be accurately measured, such as urine output.",o:["True","False"],a:1,topic:'lec09'},
+ {t:"Hypernatremia is often the result of a significant water deficit in the body, leading to a concentrated level of sodium in the blood.",o:["True","False"],a:0,topic:'lec09'},
+ {t:"The administration of loop diuretics, such as Furosemide, commonly leads to the retention of potassium in the body.",o:["True","False"],a:1,topic:'lec09'},
+ {t:"Active transport is the movement of substances from an area of higher concentration to an area of lower concentration without the use of energy.",o:["True","False"],a:1,topic:'lec09'},
+ {t:"A patient with severe renal failure is at a high risk for developing hypermagnesemia.",o:["True","False"],a:0,topic:'lec09'},
+ {t:"In the case of fluid volume deficit (dehydration), the nurse would expect to see a decrease in the patient's urine specific gravity.",o:["True","False"],a:1,topic:'lec09'},
+ {t:"Acute management of bronchial asthma includes all the following, EXCEPT:",o:["A high concentration of oxygen to achieve oxygen saturation of >90%","Short-acting inhaled beta-2 agonists","A slow infusion of aminophylline with monitoring blood values","A rapid infusion of dopamine"],a:3,topic:'lec10'},
+ {t:"What is a wrong statement by a patient about using an inhaler, who is on treatment for asthma?",o:["\"I should inhale before using the inhaler.\"","\"I should place my lips firmly around the mouthpiece.\"","\"I should hold my breath 8-10 seconds after using the inhaler.\"","\"I should wait 1-2 minutes between puffs.\""],a:0,topic:'lec10'},
+ {t:"The most sensitive test for early diagnosis of MI is:",o:["Cardiac enzyme like CKMB","Changes in ECG","Troponin I","ABG changes"],a:2,topic:'lec10'},
+ {t:"Which of the following can cause seizures?",o:["Idiopathic 75%","Encephalitis","Head injury","All of the above"],a:3,topic:'lec10'},
+ {t:"During a seizure, what should you do first?",o:["Open the jaws to stop the patient from biting his tongue","Put an oxygen mask on the patient","Give sedation","Prevent injury"],a:3,topic:'lec10'},
+ {t:"MONA during IHD (ischemic heart disease) management means:",o:["Morphine IM, Oral paracetamol, N2O, Aspirin","Morphine IV, O2, Nitrate, Acetyl salicylate","Muscle relaxant, Oral salicylate, Nursing care, Analgesia"],a:1,topic:'lec10'},
+ {t:"The BEST daily nursing measurement to objectively monitor fluid status in a patient with AKI is:",o:["Measuring abdominal circumference","Counting the number of wet pads","Daily weights at the same time on the same scale","Assessing for pitting oedema"],a:2,topic:'lec10'},
+ {t:"Which of the following is the most common symptom experienced by patients with ACS (Acute Coronary Syndrome)?",o:["Chest pain","Abdominal pain","Colic pain","Renal colic"],a:0,topic:'lec10'},
+ {t:"A 45-year-old woman presents with ongoing chest pain. Immediate observations reveal BP 140/80 mmHg, heart rate 90 bpm, and saturation 99% on room air. What should you do next?",o:["Administer oxygen","Administer analgesia","Give aspirin 300 mg","Perform a 12-lead ECG"],a:3,topic:'lec10'},
+ {t:"What is an asthma attack?",o:["When the lungs fill with water","When airways tighten, and the lungs don't get enough air","When the heart beats too fast","When the heart and lungs are working too hard"],a:1,topic:'lec10'},
+ {t:"A patient with pre-renal AKI secondary to dehydration is prescribed a fluid bolus. What is the most important nursing assessment AFTER administering the bolus?",o:["Assessing for signs of fluid overload (e.g., shortness of breath)","Checking the patient's deep tendon reflexes","Measuring the patient's abdominal girth","Asking the patient if they are hungry"],a:0,topic:'lec10'},
+ {t:"A patient is started on gentamicin, an aminoglycoside antibiotic. The nurse knows this medication is a potential nephrotoxin and can cause which type of AKI?",o:["Pre-renal","Intra-renal (Intrinsic)","Post-renal","It does not cause AKI"],a:1,topic:'lec10'},
+ {t:"Pre-renal Acute Kidney Injury (AKI) is primarily caused by a direct injury to the kidney tissues, such as inflammation or toxins.",o:["True","False"],a:1,topic:'lec10'},
+ {t:"The most accurate nursing intervention for monitoring fluid status in a patient with AKI is performing daily weights at the same time on the same scale.",o:["True","False"],a:0,topic:'lec10'},
+ {t:"In a patient presenting with Acute Coronary Syndrome (ACS), chest pain is the most commonly reported symptom.",o:["True","False"],a:0,topic:'lec10'},
+ {t:"An asthma attack is characterized by the permanent destruction of the lung's alveoli, leading to trapped air.",o:["True","False"],a:1,topic:'lec10'},
+ {t:"If a patient suspected of having an Acute Myocardial Infarction has a room-air oxygen saturation of 99%, the nurse should immediately apply high-flow oxygen.",o:["True","False"],a:1,topic:'lec10'},
+ {t:"A patient with post-renal Acute Kidney Injury (AKI) typically has an obstruction in the urinary tract, such as a kidney stone or an enlarged prostate.",o:["True","False"],a:0,topic:'lec10'},
+ {t:"In the management of an acute asthma attack, the primary goal of using a reliever inhaler like Salbutamol is to reduce long-term airway inflammation.",o:["True","False"],a:0,topic:'lec10'},
+ {t:"The use of nephrotoxic drugs, such as certain antibiotics or NSAIDs, is a common cause of intra-renal Acute Kidney Injury.",o:["True","False"],a:0,topic:'lec10'},
+ {t:"A key nursing assessment for a patient with suspected Acute Coronary Syndrome is to observe for diaphoresis and nausea.",o:["True","False"],a:0,topic:'lec10'},
+ {t:"In the oliguric phase of AKI, the patient's urine output typically increases significantly as the kidneys begin to heal.",o:["True","False"],a:1,topic:'lec10'},
+ {t:"For a patient with Acute Coronary Syndrome, morphine is primarily administered to lower the patient's blood pressure.",o:["True","False"],a:1,topic:'lec10'},
+ {t:"Wheezing is always present during a severe asthma attack; its absence indicates the patient is breathing normally.",o:["True","False"],a:0,topic:'lec10'},
+ {t:"Monitoring serum creatinine and Blood Urea Nitrogen (BUN) levels is essential for evaluating the severity of Acute Kidney Injury.",o:["True","False"],a:0,topic:'lec10'},
+ {t:"Nitroglycerin helps relieve chest pain in ACS by constricting the coronary arteries to increase blood pressure.",o:["True","False"],a:1,topic:'lec10'},
+ {t:"Elevating the head of the bed is a priority nursing intervention for a patient experiencing an acute asthma exacerbation.",o:["True","False"],a:0,topic:'lec10'},
+ {t:"Which of the following is NOT a cause of malnutrition in ICU patients?",o:["Hypermetabolism","Increased protein synthesis","Gastrointestinal issues","Medication effects"],a:1,topic:'lec12'},
+ {t:"Which scoring system is ICU-specific for assessing malnutrition risk?",o:["NUTRIC Score","MUST","Subjective Global Assessment (SGA)","BMI"],a:0,topic:'lec12'},
+ {t:"Which macronutrient provides the highest caloric value per gram?",o:["Carbohydrates","Proteins","Lipids","Electrolytes"],a:2,topic:'lec12'},
+ {t:"Which of the following is a contraindication to enteral nutrition?",o:["Mechanical ventilation","Paralytic ileus","Mild diarrhea","Nasogastric tube placement"],a:1,topic:'lec12'},
+ {t:"What percentage of total daily energy intake come from carbohydrates in ICU patients?",o:["10-20%","30-40%","50-60%","70-80%"],a:2,topic:'lec12'},
+ {t:"Which type of enteral formula is preferred for patients with severe malabsorption?",o:["Polymeric formula","Elemental formula","Standard formula","Blenderized hospital-prepared feeds"],a:1,topic:'lec12'},
+ {t:"Which electrolyte abnormality is most characteristic of refeeding syndrome?",o:["Hyperkalemia","Hypercalcemia","Hypophosphatemia","Hypernatremia"],a:2,topic:'lec12'},
+ {t:"Which patients are at highest risk for refeeding syndrome?",o:["Obese patients","Well-nourished patients","Severely malnourished patients","Patients with a high protein intake"],a:2,topic:'lec12'},
+ {t:"Which complication is commonly associated with parenteral nutrition?",o:["Gut atrophy","Hyperglycemia","Electrolyte imbalances","All of the answers"],a:3,topic:'lec12'},
+ {t:"Which of the following strategies can help prevent aspiration during enteral nutrition?",o:["Keeping the patient in a supine position","Administering large bolus feeds","Elevating the head of the bed to 30-45°","Increasing the feeding rate rapidly"],a:2,topic:'lec12'},
+ {t:"What is the primary metabolic fuel for intestinal epithelial cells?",o:["Glucose","Glutamate","Fatty acids","Lactate"],a:1,topic:'lec12'},
+ {t:"How often should gastric residual volume (GRV) be monitored in ICU patients receiving enteral nutrition?",o:["Every 30 minutes","Every 2 hours","Every 4 hours","Once daily"],a:2,topic:'lec12'},
+ {t:"Enteral nutrition is preferred over parenteral nutrition because it maintains gut integrity and prevents bacterial translocation.",o:["True","False"],a:0,topic:'lec12'},
+ {t:"Refeeding syndrome is characterized by hyperphosphatemia.",o:["True","False"],a:1,topic:'lec12'},
+ {t:"The daily protein requirement for ICU patients is 1.2-2.0 g/kg/day.",o:["True","False"],a:0,topic:'lec12'},
+ {t:"During enteral feeding, the head of bed should be maintained at 30-45 degrees to prevent aspiration.",o:["True","False"],a:0,topic:'lec12'},
+ {t:"Complete bowel rest for a few days causes no harm to intestinal mucosa.",o:["True","False"],a:1,topic:'lec12'},
+ {t:"Glutamate is the primary metabolic fuel for intestinal epithelial cells.",o:["True","False"],a:0,topic:'lec12'},
+ {t:"A gastric residual volume (GRV) >200 mL indicates normal gastric emptying.",o:["True","False"],a:1,topic:'lec12'},
+ {t:"Parenteral nutrition (PN) has no risk of hyperglycemia.",o:["True","False"],a:1,topic:'lec12'},
+ {t:"The gold standard method to measure energy expenditure in ICU patients is indirect calorimetry.",o:["True","False"],a:0,topic:'lec12'},
+ {t:"A patient with intestinal ischemia is an appropriate candidate for enteral nutrition.",o:["True","False"],a:1,topic:'lec12'}
+];
+
+/* count per topic */
+const topicCount = {};
+QUESTIONS.forEach(q => { topicCount[q.topic] = (topicCount[q.topic]||0)+1; });
+const totalAll = QUESTIONS.length;
+document.getElementById('totalBadgeHero').textContent = totalAll + ' سؤال';
+
+/* build topic grid */
+const grid = document.getElementById('topicGrid');
+TOPICS.forEach(tp => {
+  const count = tp.isAll ? totalAll : (topicCount[tp.id]||0);
+  const card = document.createElement('div');
+  card.className = 'topic-card' + (tp.isAll ? ' topic-all' : '');
+  card.style.setProperty('--tc', tp.color);
+  card.innerHTML = `<div class="topic-card-icon">${tp.icon}</div><div class="topic-card-name">${tp.name}</div><div class="topic-card-count">${count} سؤال</div>`;
+  card.addEventListener('click', () => startQuiz(tp));
+  grid.appendChild(card);
+});
+
+/* ============ ENGINE ============ */
+let questions, idx, correct, wrong, answers, wrongSet, answered;
+let totalTime = 120*60, timeLeft, timerInterval;
+const LETTERS = ['A','B','C','D','E','F'];
+let currentTopic = null;
+
+function shuffle(arr) {
+  for (let i=arr.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[arr[i],arr[j]]=[arr[j],arr[i]];}
+  return arr;
+}
+
+function startQuiz(tp) {
+  currentTopic = tp;
+  const pool = tp.isAll ? QUESTIONS : QUESTIONS.filter(q=>q.topic===tp.id);
+  document.getElementById('home-view').style.display='none';
+  document.getElementById('quiz-view').style.display='block';
+  init(pool);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function goHome() {
+  clearInterval(timerInterval);
+  document.getElementById('quiz-view').style.display='none';
+  document.getElementById('home-view').style.display='block';
+  document.getElementById('prog-bar').style.width='0%';
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function init(pool) {
+  questions = shuffle([...pool]);
+  idx=0; correct=0; wrong=0;
+  answers=new Array(questions.length).fill(null);
+  wrongSet=[]; answered=0;
+  timeLeft=totalTime;
+  startTimer(); render();
+}
+
+function startTimer() {
+  clearInterval(timerInterval);
+  timerInterval = setInterval(()=>{
+    timeLeft--;
+    const m=Math.floor(timeLeft/60), s=timeLeft%60;
+    document.getElementById('timerTxt').textContent=`${m}:${s<10?'0':''}${s}`;
+    const badge=document.getElementById('timerBadge');
+    if(timeLeft<=120) badge.className='timer-badge danger';
+    else if(timeLeft<=300) badge.className='timer-badge warn';
+    if(timeLeft<=0){clearInterval(timerInterval);finish();}
+  },1000);
+}
+
+function updateTop() {
+  const total=questions.length;
+  document.getElementById('sCorrect').textContent=correct;
+  document.getElementById('sWrong').textContent=wrong;
+  document.getElementById('sRemain').textContent=Math.round(((total-answered)/total)*100)+'%';
+  document.getElementById('progLabel').textContent='سؤال '+(idx+1)+' / '+total;
+  document.getElementById('progFill').style.width=((idx+1)/total*100)+'%';
+  document.getElementById('prog-bar').style.width=((idx+1)/total*100)+'%';
+}
+
+function getTopicInfo(topicId) {
+  return TOPICS.find(t=>t.id===topicId)||{color:'#2563eb',icon:'📚'};
+}
+
+function render() {
+  updateTop();
+  const q=questions[idx];
+  const tinfo=getTopicInfo(q.topic);
+  const tp=TOPICS.find(t=>t.id===q.topic);
+  document.getElementById('app').innerHTML=`
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Question ${idx+1} / ${questions.length}</div>
+        ${currentTopic&&currentTopic.isAll?`<span class="q-topic-tag" style="background:${tinfo.color}22;color:${tinfo.color}">${tinfo.icon} ${tp?tp.name.split('—')[0].trim():''}</span>`:''}
+      </div>
+      <div class="q-text">${q.t}</div>
+      <div class="options">
+        ${q.o.map((o,i)=>`<div class="opt" id="opt${i}" onclick="choose(${i})"><div class="opt-letter">${LETTERS[i]||i+1}</div>${o}</div>`).join('')}
+      </div>
+      <div class="nav-btns">
+        <button class="btn btn-back" onclick="goHome()"><i class="fa-solid fa-house"></i></button>
+        <button class="btn btn-skip" onclick="skip()"><i class="fa-solid fa-forward"></i> تخطي</button>
+      </div>
+    </div>`;
+}
+
+function choose(v) {
+  if(answers[idx]!==null) return;
+  answers[idx]=v; answered++;
+  const q=questions[idx];
+  const ok=v===q.a;
+  ok?correct++:wrong++;
+  updateTop();
+  q.o.forEach((_,i)=>{
+    const el
