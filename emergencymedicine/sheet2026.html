@@ -132,8 +132,10 @@ footer { background:var(--bg2); border-top:1px solid var(--bc); padding:22px 24p
 .footer-tg { display:flex; align-items:center; gap:5px; text-decoration:none; color:#229ED9; font-size:12px; font-weight:600; }
 @media (max-width:480px) { nav { padding:0 14px; } .shell { padding:16px 14px 60px; } .hero-band { padding:30px 16px 28px; } .topic-grid { grid-template-columns:1fr; } }
 
-#quiz-view { display:none; }
+#quiz-view { display:none !important; }
 #home-view { display:block; }
+#quiz-view.active { display:block !important; }
+#home-view.hidden { display:none !important; }
 </style>
 </head>
 <body>
@@ -466,16 +468,16 @@ function shuffle(arr) {
 function startQuiz(tp) {
   currentTopic = tp;
   const pool = tp.isAll ? QUESTIONS : QUESTIONS.filter(q=>q.topic===tp.id);
-  document.getElementById('home-view').style.display='none';
-  document.getElementById('quiz-view').style.display='block';
+  document.getElementById('home-view').classList.add('hidden');
+  document.getElementById('quiz-view').classList.add('active');
   init(pool);
   window.scrollTo({top:0,behavior:'smooth'});
 }
 
 function goHome() {
   clearInterval(timerInterval);
-  document.getElementById('quiz-view').style.display='none';
-  document.getElementById('home-view').style.display='block';
+  document.getElementById('quiz-view').classList.remove('active');
+  document.getElementById('home-view').classList.remove('hidden');
   document.getElementById('prog-bar').style.width='0%';
   window.scrollTo({top:0,behavior:'smooth'});
 }
@@ -546,4 +548,95 @@ function choose(v) {
   ok?correct++:wrong++;
   updateTop();
   q.o.forEach((_,i)=>{
-    const el
+    const el=document.getElementById('opt'+i);
+    el.classList.add('disabled');
+    if(i===q.a) el.classList.add('correct');
+    else if(i===v) el.classList.add('wrong');
+  });
+  const fb=document.createElement('div');
+  fb.className='feedback-bar '+(ok?'ok':'no');
+  fb.innerHTML=ok?`<span class="feedback-icon">&#127881;</span><span>&#1605;&#1605;&#1578;&#1575;&#1586;&#1548; &#1575;&#1604;&#1604;&#1607;&#1605; &#1576;&#1575;&#1585;&#1603;</span>`:`<span class="feedback-icon">&#128532;</span><span>&#1585;&#1603;&#1586; &#1610;&#1575; &#1587;&#1603;&#1585;</span>`;
+  const card=document.querySelector('.q-card');
+  card.querySelector('.options').after(fb);
+  const navBtns=card.querySelector('.nav-btns');
+  navBtns.innerHTML=`<button class="btn btn-back" onclick="goHome()"><i class="fa-solid fa-house"></i></button>
+    <button class="btn btn-next" onclick="next()">
+    ${idx<questions.length-1?'<i class="fa-solid fa-arrow-left"></i> \u0627\u0644\u0633\u0624\u0627\u0644 \u0627\u0644\u062a\u0627\u0644\u064a':'<i class="fa-solid fa-flag-checkered"></i> \u0625\u0646\u0647\u0627\u0621 \u0627\u0644\u0627\u0645\u062a\u062d\u0627\u0646'}
+  </button>`;
+}
+
+function skip() {
+  if(answers[idx]===null){answers[idx]=-1;answered++;wrongSet.push(questions[idx]);wrong++;updateTop();}
+  next();
+}
+
+function next() {
+  if(idx<questions.length-1){idx++;render();window.scrollTo({top:0,behavior:'smooth'});}
+  else finish();
+}
+
+function finish() {
+  clearInterval(timerInterval);
+  const total=questions.length;
+  const score=Math.round((correct/total)*100);
+  questions.forEach((q,i)=>{if(answers[i]!==q.a) wrongSet.push({...q,myAns:answers[i]});});
+  wrongSet=[...new Map(wrongSet.map(q=>[q.t,q])).values()];
+  let grade,gradeColor;
+  if(score>=90){grade='\ud83e\udd47 \u0645\u0645\u062a\u0627\u0632';gradeColor='var(--success)';}
+  else if(score>=75){grade='\ud83e\udd48 \u062c\u064a\u062f \u062c\u062f\u0627\u064b';gradeColor='var(--accent)';}
+  else if(score>=60){grade='\ud83e\udd49 \u062c\u064a\u062f';gradeColor='var(--warn)';}
+  else{grade='\ud83d\udcda \u0631\u0627\u062c\u0639 \u062a\u0627\u0646\u064a';gradeColor='var(--danger)';}
+  const circ=2*Math.PI*45;
+  const offset=circ-(score/100)*circ;
+  const reportHTML=questions.map((q,i)=>{
+    const ok=answers[i]===q.a;
+    return `<div class="report-item ${ok?'ok':'no'}">
+      <div class="ri-q">${ok?'&#9989;':'&#10060;'} ${q.t}</div>
+      ${!ok?`<div class="ri-row"><span class="ri-badge ri-yours">\u0625\u062c\u0627\u0628\u062a\u0643</span>${answers[i]>=0?q.o[answers[i]]:'\u062a\u0645 \u0627\u0644\u062a\u062e\u0637\u064a'}</div><div class="ri-row"><span class="ri-badge ri-right">\u0627\u0644\u0635\u062d\u064a\u062d</span>${q.o[q.a]}</div>`:''}
+    </div>`;
+  }).join('');
+  document.getElementById('prog-bar').style.width='100%';
+  document.getElementById('app').innerHTML=`
+    <div class="result-hero">
+      <div class="score-ring">
+        <svg viewBox="0 0 110 110"><circle class="ring-bg" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="0"/><circle class="ring-fill" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="${circ}" style="stroke:${gradeColor}" id="ringFill"/></svg>
+        <div class="score-num">${score}</div><div class="score-pct">%</div>
+      </div>
+      <div class="result-grade" style="color:${gradeColor}">${grade}</div>
+      <div class="result-sub">\u0623\u062c\u0628\u062a \u0639\u0644\u0649 ${answered} \u0645\u0646 ${total} \u0633\u0624\u0627\u0644</div>
+      <div class="result-stats">
+        <div class="rs"><div class="n" style="color:var(--success)">${correct}</div><div class="l">\u0635\u062d\u064a\u062d</div></div>
+        <div class="rs"><div class="n" style="color:var(--danger)">${wrong}</div><div class="l">\u062e\u0637\u0623</div></div>
+        <div class="rs"><div class="n" style="color:var(--accent)">${total-answered<0?0:total-answered}</div><div class="l">\u062a\u062e\u0637\u064a</div></div>
+      </div>
+    </div>
+    <div class="result-actions">
+      ${wrongSet.length?`<button class="btn btn-retry" onclick="retryWrong()"><i class="fa-solid fa-rotate-right"></i> \u0625\u0639\u0627\u062f\u0629 \u0627\u0644\u062e\u0637\u0623 (${wrongSet.length})</button>`:''}
+      <button class="btn btn-next" onclick="init(questions)"><i class="fa-solid fa-shuffle"></i> \u0627\u0645\u062a\u062d\u0627\u0646 \u062c\u062f\u064a\u062f \u0639\u0634\u0648\u0627\u0626\u064a</button>
+      <button class="btn btn-home" onclick="goHome()"><i class="fa-solid fa-house"></i> \u0627\u0644\u0631\u0626\u064a\u0633\u064a\u0629</button>
+    </div>
+    <div style="margin-top:28px">
+      <div style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text2)">\ud83d\udccb \u062a\u0642\u0631\u064a\u0631 \u0645\u0641\u0635\u0651\u0644</div>
+      ${reportHTML}
+    </div>`;
+  setTimeout(()=>{document.getElementById('ringFill').style.strokeDashoffset=offset;},100);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+function retryWrong() {
+  const pool=[...wrongSet];
+  questions=shuffle(pool);idx=0;correct=0;wrong=0;
+  answers=new Array(questions.length).fill(null);
+  wrongSet=[];answered=0;timeLeft=totalTime;
+  startTimer();render();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+const themeBtn=document.getElementById('themeBtn');
+let theme='light';
+function applyTheme(t){theme=t;document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'');themeBtn.textContent=t==='dark'?'\u2600\ufe0f':'\ud83c\udf19';}
+applyTheme(theme);
+themeBtn.addEventListener('click',()=>applyTheme(theme==='dark'?'light':'dark'));
+</script>
+</body>
+</html>
