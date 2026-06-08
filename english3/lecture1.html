@@ -474,6 +474,28 @@ const QUESTIONS = [
 
 ];
 
+  function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function shuffleOptions(question) {
+  const options = question.o.map((text, index) => ({
+    text,
+    originalIndex: index
+  }));
+
+  shuffle(options);
+
+  return {
+    ...question,
+    o: options.map(x => x.text),
+    a: options.findIndex(x => x.originalIndex === question.a)
+  };
+}
 /* ============ ENGINE ============ */
 let questions, i, correct, wrong, answers, wrongSet, answered;
 let totalTime = 45*60, timeLeft, timerInterval;
@@ -488,8 +510,7 @@ function shuffle(arr) {
 }
 
 function init(pool) {
-  questions = shuffle([...pool]);
-  i = 0; correct = 0; wrong = 0;
+questions = shuffle([...pool]).map(q => shuffleOptions(q));  i = 0; correct = 0; wrong = 0;
   answers = new Array(questions.length).fill(null);
   wrongSet = []; answered = 0;
   timeLeft = totalTime;
