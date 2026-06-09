@@ -484,7 +484,29 @@ const QUESTIONS = [
         {t:"Research in community health is defined as systematic investigation to discover facts affecting community health.", o:["True","False"], a:0, d:"easy", exp:"Research involves systematic investigation to discover facts affecting community health and explore improved methods."},
         {t:"The midwifery program in London was established in 1720 before the one in Paris.", o:["True","False"], a:1, d:"hard", exp:"The Paris program was established in 1720 and the London program in 1741—Paris came first."},
 ];
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
 
+function shuffleOptions(question) {
+  const options = question.o.map((text, index) => ({
+    text,
+    correct: index === question.a
+  }));
+
+  shuffle(options);
+
+  question.o = options.map(opt => opt.text);
+  question.a = options.findIndex(opt => opt.correct);
+
+  return question;
+}
+
+QUESTIONS = QUESTIONS.map(shuffleOptions);
 /* ============ CONFIG ============ */
 const TOTAL_MINUTES = 60;   
 
