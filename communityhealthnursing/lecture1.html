@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --a1: #0f766e;
+  --a2: #14b8a6;
+  --a3: #99f6e4;
+  --a2l: #ccfbf1;
+  --ag: rgba(20,184,166,0.13);
+  --ags: rgba(20,184,166,0.26);
+  --bg:    #f0fdfa;
+  --bg2:   #ccfbf1;
+  --card:  #ffffff;
+  --text:  #134e4a;
+  --text2: #0f766e;
+  --text3: #5eead4;
+  --bdc:   rgba(20,184,166,0.20);
+  --bdcard:rgba(15,118,110,0.12);
+  --sh:    0 4px 18px rgba(15,118,110,0.09);
+  --shh:   0 8px 30px rgba(20,184,166,0.22);
+  --ok:    #15803d;
+  --err:   #b91c1c;
+  --warn:  #b45309;
+  --rad:   16px;
+  --tr:    all 0.28s cubic-bezier(.4,0,.2,1);
+}
+[data-theme="dark"] {
+  --bg:    #022c22; --bg2:   #064e3b; --card:  #065f46;
+  --text:  #d1fae5; --text2: #6ee7b7; --text3: #34d399;
+  --bdc:   rgba(52,211,153,0.22);
+  --bdcard:rgba(52,211,153,0.12);
+  --sh:    0 4px 20px rgba(0,0,0,0.45);
+  --shh:   0 8px 36px rgba(20,184,166,0.28);
+  --a1: #10b981; --a2: #34d399; --a2l: #064e3b; --a3: #6ee7b7;
+}
+
+body {
+  font-family:'Outfit',sans-serif;
+  background:var(--bg); color:var(--text);
+  min-height:100vh; overflow-x:hidden;
+  transition:background .4s,color .4s;
+}
+
+#prog-bar {
+  position:fixed;top:0;left:0;height:3px;z-index:999;
+  background:linear-gradient(90deg,var(--a1),var(--a2),var(--a3));
+  width:0%;transition:width .15s;
+}
+
+/* NAV */
+nav {
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 26px;height:62px;
+  background:rgba(240,253,250,.94);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--bdcard);transition:var(--tr);
+}
+[data-theme="dark"] nav { background:rgba(2,44,34,.96); }
+
+.nav-back {
+  display:flex;align-items:center;gap:6px;
+  color:var(--text2);text-decoration:none;font-size:13px;font-weight:700;
+  padding:6px 13px;border-radius:9px;
+  border:1px solid var(--bdcard);background:var(--card);
+  transition:var(--tr);
+}
+.nav-back:hover { color:var(--a2);border-color:var(--bdc); }
+
+.nav-brand { display:flex;align-items:center;gap:8px;font-size:15px;font-weight:900;color:var(--text); }
+.nav-logo {
+  width:34px;height:34px;border-radius:9px;
+  background:linear-gradient(135deg,var(--a1),var(--a2));
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:12px;font-weight:900;
+}
+.theme-btn {
+  width:37px;height:37px;border-radius:50%;
+  border:1px solid var(--bdcard);background:var(--card);
+  cursor:pointer;font-size:15px;
+  display:flex;align-items:center;justify-content:center;transition:var(--tr);
+}
+.theme-btn:hover { border-color:var(--a2);transform:rotate(22deg); }
+
+/* HERO */
+.hero {
+  margin-top:62px;
+  background:linear-gradient(135deg,var(--a1) 0%,var(--a2) 60%,#2dd4bf 100%);
+  padding:34px 22px 30px;text-align:center;position:relative;overflow:hidden;
+}
+.hero::before {
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 500px 180px at 50% 110%,rgba(255,255,255,.13) 0%,transparent 70%);
+}
+.hero-icon {
+  width:62px;height:62px;border-radius:18px;
+  background:rgba(255,255,255,.2);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;margin:0 auto 11px;
+  border:1.5px solid rgba(255,255,255,.35);
+}
+.hero h1 { font-size:clamp(17px,3.5vw,25px);font-weight:900;color:#fff;margin-bottom:4px; }
+.hero p  { font-size:13px;color:rgba(255,255,255,.82); }
+.hero-meta { display:flex;justify-content:center;gap:12px;margin-top:14px;flex-wrap:wrap; }
+.meta-pill {
+  background:rgba(255,255,255,.18);backdrop-filter:blur(5px);
+  border:1px solid rgba(255,255,255,.3);border-radius:50px;
+  padding:5px 13px;font-size:12px;font-weight:700;color:#fff;
+  display:flex;align-items:center;gap:5px;
+}
+
+/* TOPIC FILTER */
+.filter-wrap {
+  padding:14px 16px 2px;
+  display:flex;flex-wrap:wrap;gap:7px;
+  background:var(--card);border-bottom:1px solid var(--bdcard);
+}
+.filter-btn {
+  padding:5px 13px;border-radius:50px;
+  border:1.5px solid var(--bdcard);background:var(--bg);
+  font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;
+  color:var(--text2);cursor:pointer;transition:var(--tr);
+}
+.filter-btn:hover,
+.filter-btn.active {
+  background:var(--a2);color:#fff;border-color:var(--a2);
+  box-shadow:0 2px 10px var(--ag);
+}
+.filter-count {
+  padding:14px 16px 14px;
+  font-size:12px;color:var(--text2);font-weight:600;
+  background:var(--card);border-bottom:1px solid var(--bdcard);
+}
+
+/* SHELL */
+.shell { max-width:560px;margin:0 auto;padding:18px 16px 80px; }
+
+/* STATS */
+.stats-row { display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-bottom:13px; }
+.stat-box {
+  background:var(--card);border:1px solid var(--bdcard);
+  border-radius:var(--rad);padding:11px 7px;text-align:center;
+}
+.stat-box .val { font-size:20px;font-weight:900; }
+.stat-box .lbl { font-size:11px;color:var(--text3);margin-top:2px; }
+.c-ok   { color:var(--ok); }
+.c-err  { color:var(--err); }
+.c-acc  { color:var(--a1); }
+
+/* PROG STRIP */
+.prog-strip {
+  background:var(--card);border:1px solid var(--bdcard);
+  border-radius:var(--rad);padding:12px 15px;margin-bottom:15px;
+  display:flex;align-items:center;gap:11px;
+}
+.prog-label { font-size:13px;font-weight:700;color:var(--text2);white-space:nowrap; }
+.prog-track { flex:1;height:7px;background:var(--bg2);border-radius:7px;overflow:hidden; }
+.prog-fill {
+  height:100%;width:0%;
+  background:linear-gradient(90deg,var(--a1),var(--a2));
+  border-radius:7px;transition:width .4s;
+}
+.timer-badge {
+  min-width:60px;height:33px;border-radius:17px;
+  background:var(--bg2);border:1px solid var(--bdcard);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:900;color:var(--text);
+  gap:4px;padding:0 10px;flex-shrink:0;
+}
+.timer-badge.warn   { color:var(--warn);  border-color:rgba(180,83,9,.3);  background:rgba(180,83,9,.08); }
+.timer-badge.danger { color:var(--err);   border-color:rgba(185,28,28,.3); background:rgba(185,28,28,.08);animation:blink .8s infinite; }
+@keyframes blink { 0%,100%{opacity:1}50%{opacity:.45} }
+
+/* Q CARD */
+.q-card {
+  background:var(--card);border:1px solid var(--bdcard);
+  border-radius:20px;overflow:hidden;box-shadow:var(--sh);
+}
+.q-header {
+  background:linear-gradient(135deg,var(--a1),var(--a2));
+  padding:9px 17px;display:flex;align-items:center;gap:8px;
+}
+.q-num {
+  background:rgba(255,255,255,.22);border-radius:7px;
+  padding:3px 10px;font-size:11px;font-weight:700;color:#fff;
+}
+.q-topic {
+  margin-left:auto;background:rgba(255,255,255,.18);border-radius:50px;
+  padding:2px 10px;font-size:11px;font-weight:700;color:#fff;
+  border:1px solid rgba(255,255,255,.25);
+}
+.q-text {
+  padding:19px 17px 13px;font-size:15px;font-weight:700;color:var(--text);
+  line-height:1.65;border-bottom:1px solid var(--bdcard);
+}
+.options { padding:13px 17px 17px;display:flex;flex-direction:column;gap:9px; }
+
+.opt {
+  display:flex;align-items:center;gap:11px;
+  padding:12px 14px;border-radius:11px;
+  border:1.5px solid var(--bdcard);background:var(--bg);
+  cursor:pointer;font-size:14px;font-weight:600;color:var(--text);
+  transition:var(--tr);user-select:none;
+}
+.opt:hover:not(.disabled) {
+  border-color:var(--a2);background:var(--ag);
+  transform:translateX(3px);
+}
+.opt-letter {
+  width:28px;height:28px;border-radius:8px;flex-shrink:0;
+  background:var(--bg2);border:1px solid var(--bdcard);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:900;color:var(--text2);
+  transition:var(--tr);
+}
+.opt.correct { border-color:var(--ok);background:rgba(21,128,61,.08); }
+.opt.correct .opt-letter { background:var(--ok);color:#fff;border-color:var(--ok); }
+.opt.wrong   { border-color:var(--err);background:rgba(185,28,28,.07); }
+.opt.wrong   .opt-letter { background:var(--err);color:#fff;border-color:var(--err); }
+.opt.disabled { pointer-events:none; }
+
+/* FEEDBACK */
+.feedback-bar {
+  margin:11px 17px;padding:11px 14px;border-radius:11px;
+  display:flex;align-items:center;gap:9px;
+  font-size:14px;font-weight:700;
+  animation:popIn .38s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes popIn { from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1} }
+.feedback-bar.ok { background:rgba(21,128,61,.1);color:var(--ok);border:1px solid rgba(21,128,61,.25); }
+.feedback-bar.no { background:rgba(185,28,28,.08);color:var(--err);border:1px solid rgba(185,28,28,.2); }
+
+.explanation {
+  margin:0 17px 11px;padding:10px 13px;
+  background:rgba(20,184,166,.07);border-radius:9px;
+  border-left:3px solid var(--a2);
+  font-size:13px;color:var(--text2);line-height:1.6;
+}
+
+/* BUTTONS */
+.nav-btns { padding:4px 17px 17px;display:flex;gap:9px; }
+.btn {
+  flex:1;padding:12px;border:none;border-radius:11px;
+  font-size:14px;font-weight:900;cursor:pointer;
+  font-family:'Outfit',sans-serif;transition:var(--tr);
+  display:flex;align-items:center;justify-content:center;gap:7px;
+}
+.btn-next {
+  background:linear-gradient(135deg,var(--a1),var(--a2));
+  color:#fff;box-shadow:0 4px 14px var(--ag);
+}
+.btn-next:hover { transform:translateY(-2px);box-shadow:0 6px 20px var(--ags); }
+.btn-skip {
+  background:var(--bg2);color:var(--text2);
+  border:1px solid var(--bdcard);flex:0 0 auto;padding:12px 15px;
+}
+.btn-skip:hover { border-color:var(--warn);color:var(--warn); }
+
+/* RESULTS */
+.result-hero {
+  text-align:center;padding:30px 18px 22px;
+  background:var(--card);border-radius:20px;
+  border:1px solid var(--bdcard);margin-bottom:17px;
+}
+.score-ring {
+  width:108px;height:108px;border-radius:50%;margin:0 auto 15px;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;position:relative;
+}
+.score-ring svg { position:absolute;inset:-5px;width:calc(100% + 10px);height:calc(100% + 10px);transform:rotate(-90deg); }
+.score-ring circle { fill:none;stroke-width:5;stroke-linecap:round; }
+.ring-bg   { stroke:var(--bg2); }
+.ring-fill { stroke:var(--a2);transition:stroke-dashoffset 1s ease; }
+.score-num { font-size:28px;font-weight:900;color:var(--text); }
+.score-pct { font-size:12px;color:var(--text3); }
+.result-grade { font-size:20px;font-weight:900;margin-bottom:4px; }
+.result-sub   { font-size:13px;color:var(--text2); }
+.result-stats { display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:17px; }
+.rs { background:var(--bg2);border-radius:10px;padding:10px 7px;text-align:center; }
+.rs .n { font-size:20px;font-weight:900; }
+.rs .l { font-size:11px;color:var(--text3); }
+
+/* REPORT */
+.report-item {
+  background:var(--card);border:1px solid var(--bdcard);
+  border-radius:12px;padding:14px;margin-bottom:8px;
+  border-left:4px solid var(--bdcard);
+}
+.report-item.ok { border-left-color:var(--ok); }
+.report-item.no { border-left-color:var(--err); }
+.report-item .ri-q { font-size:13px;font-weight:700;margin-bottom:6px; }
+.report-item .ri-row { display:flex;align-items:center;gap:7px;font-size:12px;margin-top:4px;color:var(--text2); }
+.ri-badge { padding:2px 8px;border-radius:6px;font-weight:700;font-size:11px;flex-shrink:0; }
+.ri-yours { background:rgba(185,28,28,.1);color:var(--err); }
+.ri-right { background:rgba(21,128,61,.1);color:var(--ok); }
+
+.result-actions { display:flex;flex-direction:column;gap:9px;margin-top:17px; }
+.btn-retry { background:linear-gradient(135deg,var(--a1),var(--a2));color:#fff; }
+.btn-retry:hover { transform:translateY(-2px);box-shadow:0 6px 20px var(--ags); }
+.btn-home  { background:var(--bg2);color:var(--text);border:1px solid var(--bdcard); }
+.btn-home:hover { border-color:var(--a2);color:var(--a1); }
+
+/* FOOTER */
+footer {
+  background:var(--bg2);border-top:1px solid var(--bdcard);
+  padding:20px 22px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:9px;
+}
+.footer-brand { font-size:14px;font-weight:700; }
+.footer-brand span { color:var(--a1); }
+.footer-tg {
+  display:flex;align-items:center;gap:5px;
+  text-decoration:none;color:#229ED9;font-size:12px;font-weight:600;
+}
+
+/* EMPTY STATE */
+.empty-state {
+  text-align:center;padding:50px 20px;
+  background:var(--card);border-radius:20px;border:1px solid var(--bdcard);
+}
+.empty-state .ei { font-size:40px;margin-bottom:12px; }
+.empty-state h3 { font-size:17px;font-weight:700;margin-bottom:7px; }
+.empty-state p { font-size:13px;color:var(--text2); }
+
+@media (max-width:480px) {
+  nav { padding:0 13px; }
+  .shell { padding:13px 11px 60px; }
+  .nav-brand span { display:none; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog-bar"></div>
+
+<nav>
+  <a href="https://gaith-team.github.io/exam/" class="nav-back"><i class="fa-solid fa-arrow-left"></i> Back</a>
+  <div class="nav-brand">
+    <div class="nav-logo">GT</div>
+    <span>GHAITH TEAM</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-icon">🌿</div>
+  <h1>Overview of community health nursing</h1>
+  <p>Community Health Nursing</p>
+  <div class="hero-meta">
+    <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">-- Questions</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-clock"></i> <span id="timeBadge">60 Min</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-shuffle"></i> Shuffled</div>
+  </div>
+</div>
+
+<!-- Topic filter bar (shown only if topics exist) -->
+<div id="filterWrap" class="filter-wrap" style="display:none;"></div>
+<div id="filterCount" class="filter-count" style="display:none;"></div>
+
+<div class="shell">
+  <div class="stats-row">
+    <div class="stat-box"><div class="val c-ok"  id="sCorrect">0</div><div class="lbl">✔ Correct</div></div>
+    <div class="stat-box"><div class="val c-err"  id="sWrong">0</div><div class="lbl">✖ Wrong</div></div>
+    <div class="stat-box"><div class="val c-acc"  id="sRemain">100%</div><div class="lbl">⏳ Remaining</div></div>
+  </div>
+
+  <div class="prog-strip">
+    <div class="prog-label" id="progLabel">Q 1</div>
+    <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+    <div class="timer-badge" id="timerBadge"><i class="fa-regular fa-clock"></i><span id="timerTxt">60:00</span></div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<footer>
+  <div class="footer-brand">GAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg">
+    <i class="fa-brands fa-telegram"></i> @nursing2bu
+  </a>
+</footer>
+
+<script>
+const QUESTIONS = [
+      {t:"According to the WHO definition, health is defined as:", o:["Absence of disease only","A state of complete physical, mental and social well-being not merely the absence of disease or infirmity","The ability to perform daily activities","Freedom from any physical disability"], a:1, d:"easy", exp:"WHO defines health as a state of complete physical, mental and social well-being, not merely the absence of disease or infirmity."},
+        {t:"Which of the following best defines a community?", o:["A group of people living in the same country","A collection of people who interact with one another and share common interests forming a sense of unity","Any group of people with similar diseases","People who share the same hospital"], a:1, d:"easy", exp:"A community is a collection of people who interact and share common interests that form a basis for unity or belonging."},
+        {t:"Community health nursing is a synthesis of:", o:["Medicine and surgery","Nursing practice and public health","Pharmacology and nursing","Social work and psychology"], a:1, d:"easy", exp:"Community health nursing combines nursing practice and public health science."},
+        {t:"Florence Nightingale's work demonstrated that nursing intervention could:", o:["Only treat acute illness","Prevent illness and improve the health of a population at risk","Replace physician services","Only be done in hospitals"], a:1, d:"easy", exp:"Florence Nightingale demonstrated that capable nursing intervention could prevent illness and improve health of populations at risk."},
+        {t:"The first stage in the development of community health nursing is:", o:["Public health nursing","District nursing","Community health nursing","Early home care nursing"], a:3, d:"easy", exp:"Early home care nursing (before mid-1800s) was the first stage of community health nursing development."},
+        {t:"Which of the following is an aim of community health nursing?", o:["Performing surgical procedures","Promote health and efficiency","Managing hospital wards","Prescribing medications"], a:1, d:"easy", exp:"Promoting health and efficiency is one of the three stated aims of community health nursing."},
+        {t:"Primary prevention involves:", o:["Treating existing diseases","Rehabilitating patients after surgery","Measures taken to keep illness or injuries from occurring","Detecting diseases through screening"], a:2, d:"easy", exp:"Primary prevention includes measures taken to prevent illness or injuries before they occur."},
+        {t:"An example of primary prevention is:", o:["Cancer screening","Physical rehabilitation","Immunization programs","Treatment of diabetes"], a:2, d:"easy", exp:"Immunization programs are a classic example of primary prevention."},
+        {t:"Secondary prevention involves:", o:["Preventing disease from occurring","Efforts to detect and treat existing health problems early","Reducing disability in chronic illness","Health education for wellness"], a:1, d:"easy", exp:"Secondary prevention focuses on early detection and treatment of existing health problems."},
+        {t:"Tertiary prevention aims to:", o:["Prevent disease occurrence","Screen for early disease","Reduce extent and severity of a health problem and minimize disability","Provide immunizations"], a:2, d:"easy", exp:"Tertiary prevention attempts to reduce severity and minimize disability, restoring or preserving function."},
+        {t:"District nursing was primarily focused on:", o:["Hospital-based care only","Visiting the sick poor in their homes and teaching proper hygiene","Operating surgical clinics","Managing pharmacies"], a:1, d:"easy", exp:"District nurses visited the sick poor at home and taught proper hygiene to prevent illness."},
+        {t:"The public health nursing stage (1900-1970) primarily targeted:", o:["Individual patients in hospitals","The family as a primary unit of care","Only elderly patients","Surgical patients only"], a:1, d:"easy", exp:"Public health nursing (1900-1970) targeted the family as the primary unit of care."},
+        {t:"Which is NOT one of the six settings of community health nursing?", o:["Homes","Schools","Operating rooms","Occupational health settings"], a:2, d:"easy", exp:"Operating rooms are acute care settings, not typical community health nursing settings."},
+        {t:"Community health is defined as:", o:["Health status of hospital patients","The health status of community members, problems affecting their health, and totality of health care provided","Individual health assessment only","Medical treatment provided by physicians"], a:1, d:"easy", exp:"Community health refers to the health status of members, their health problems, and the totality of health care provided to the community."},
+        {t:"Public health is described as:", o:["The practice of treating individual diseases","The science and art of preventing disease, prolonging life and promoting health through organized community efforts","Hospital management","Individual patient care at bedside"], a:1, d:"easy", exp:"Public health is defined as the science and art of preventing disease, prolonging life, and promoting health through organized community efforts."},
+        {t:"The community health nursing stage began in:", o:["1800","1900","1970","1634"], a:2, d:"easy", exp:"The community health nursing stage began in 1970 and continues to the present."},
+        {t:"Which role involves providing direct care in community health nursing?", o:["Administrator role","Clinician role","Researcher role","Policy maker role"], a:1, d:"easy", exp:"The clinician role involves providing direct care to individuals, families, and groups."},
+        {t:"The educator role in community health nursing focuses on:", o:["Performing surgeries","Health teaching for illness prevention and health promotion","Laboratory testing","Dispensing medications"], a:1, d:"easy", exp:"The educator role focuses on health teaching for illness prevention and health promotion."},
+        {t:"Which factor influenced community health nursing development through relating disease to its cause?", o:["Consumer movement","Progress in causal thinking","Economic forces","Changing role of women"], a:1, d:"medium", exp:"Progress in causal thinking, particularly epidemiology, significantly affected CHN practice."},
+        {t:"The germ theory of disease causation was significant because it:", o:["Led to development of nursing schools","Was the first breakthrough in control of communicable disease","Changed hospital architecture","Established midwifery programs"], a:1, d:"medium", exp:"The germ theory was the first real breakthrough in control of communicable disease."},
+        {t:"Which of the following is a characteristic of community health nursing?", o:["It focuses solely on individual patient care","It is population focused","It only works in hospital settings","It deals exclusively with acute illness"], a:1, d:"medium", exp:"An essential feature of CHN is that it is population focused—concerned with health of population groups."},
+        {t:"The three primary functions of public health include all EXCEPT:", o:["Assessment","Policy development","Assurance","Medication administration"], a:3, d:"medium", exp:"The three primary functions are assessment, policy development, and assurance."},
+        {t:"Assessment in community health nursing refers to:", o:["Diagnosing individual patients","Measuring and monitoring the health status and needs of a community or population","Prescribing treatments","Performing laboratory tests"], a:1, d:"medium", exp:"Assessment involves measuring and monitoring health status and needs of designated community or population."},
+        {t:"Policy development in public health:", o:["Involves dispensing medications","Is the formation of a guide for action that determines decisions affecting public health","Focuses on individual patient care plans","Relates only to hospital policies"], a:1, d:"medium", exp:"Policy development forms guides for action that determine present and future decisions affecting the public's health."},
+        {t:"The assurance function of public health:", o:["Ensures population-based services are provided and monitors quality","Only applies to private health facilities","Focuses on individual insurance coverage","Deals exclusively with laboratory assurance"], a:0, d:"medium", exp:"Assurance ensures population-based services are provided and monitors quality of and access to those services."},
+        {t:"Which component of community health practice involves efforts to move people toward optimal well-being?", o:["Treatment of disorders","Rehabilitation","Promotion of health","Research"], a:2, d:"medium", exp:"Health promotion includes all efforts seeking to move people closer to optimal well-being or higher levels of wellness."},
+        {t:"Holistic practice in the clinician role means:", o:["Treating only physical symptoms","Considering the broad range of interacting needs affecting collective health of the client as a larger system","Focusing only on mental health","Providing only spiritual care"], a:1, d:"medium", exp:"A holistic approach considers the broad range of interacting needs affecting collective health of the client as a larger system."},
+        {t:"The advocate role in community health nursing involves:", o:["Performing clinical procedures","Pleading the cause or acting on behalf of client groups","Teaching health education classes","Conducting epidemiological research"], a:1, d:"medium", exp:"The advocate role involves pleading the cause or acting on behalf of client groups to ensure just treatment."},
+        {t:"Which of the following is a principle of community health nursing?", o:["Services should be limited to wealthy families","Community participation is integral to community health services","Health services should exclude rural areas","Only physicians should make health decisions"], a:1, d:"medium", exp:"Community participation is stated as an integral part of community health services."},
+        {t:"Evaluation as a component of community health practice is:", o:["Optional and rarely performed","The process by which practice is analyzed and judged according to established goals and standards","Only done by hospital administrators","Limited to financial auditing"], a:1, d:"medium", exp:"Evaluation analyzes and judges practice according to established goals and standards."},
+        {t:"Research in community health involves:", o:["Only laboratory experiments","Systematic investigation to discover facts affecting community health and explore improved methods","Solely literature reviews","Only clinical drug trials"], a:1, d:"medium", exp:"Research is systematic investigation to discover facts affecting community health and explore improved methods."},
+        {t:"The women's rights movement influenced community health nursing by:", o:["Eliminating nursing as a profession","Contributing to CHN gains in assuming leadership roles","Reducing the workforce","Closing nursing schools"], a:1, d:"medium", exp:"The women's movement contributed to CHN gains in assuming leadership roles."},
+        {t:"Consumer movement affected community health nursing because:", o:["Consumers demanded quality services and participation in decisions affecting them","Consumers wanted less health care","People stopped visiting nurses","Hospitals became more exclusive"], a:0, d:"medium", exp:"Consumers became more aggressive in demanding quality services and participation in decisions."},
+        {t:"Economic forces that affect community health nursing include:", o:["Lower costs of living only","Unemployment, rising costs of living and health care costs","Decreased health insurance premiums","Reduced medication costs"], a:1, d:"medium", exp:"Economic forces include unemployment, rising costs of living, and health care costs."},
+        {t:"Community health nursing promotes client responsibility and self-care by:", o:["Making all decisions for the client","Encouraging individuals' participation rather than permitting dependency","Limiting information shared with clients","Providing permanent full-time care"], a:1, d:"medium", exp:"CHN encourages individuals' participation rather than permitting dependency."},
+        {t:"The district nursing stage occurred during:", o:["Before mid-1800s","Mid-1800s to 1900","1900 to 1970","1970 to present"], a:1, d:"medium", exp:"District nursing was the second stage, occurring from mid-1800s to 1900."},
+        {t:"Which is NOT an objective of community health nursing?", o:["Provide antenatal, intranatal and postnatal care","Immunization","Performing complex surgical operations","Health education"], a:2, d:"medium", exp:"Performing complex surgical operations is not an objective of community health nursing."},
+        {t:"Advanced technology influenced community health nursing through:", o:["Reducing the need for nurses","Improving health care, nutrition, and lifestyle","Eliminating home care programs","Replacing nurses with machines"], a:1, d:"medium", exp:"Advanced technology improved health care, nutrition, and lifestyle."},
+        {t:"The six categories of CHN settings include all EXCEPT:", o:["Homes and schools","Ambulatory service settings","Intensive care units","Occupational health settings"], a:2, d:"medium", exp:"ICUs are acute care hospital settings, not typical CHN practice settings."},
+        {t:"Which principle states that health services should consider available resources?", o:["Health services should be realistic in terms of available resources","Services should ignore budget constraints","All treatments should be offered regardless of cost","Resources are unlimited in community health"], a:0, d:"medium", exp:"Health services should be realistic in terms of available resources."},
+        {t:"In the community health nursing, the statement 'a whole is greater than the sum of its parts' implies:", o:["Individual health is more important than community health","Community health encompasses more than just the aggregate individual health of citizens","Only sick individuals matter in a community","Community health is irrelevant"], a:1, d:"hard", exp:"The health of a community is more than the sum of the health of its individual citizens."},
+        {t:"The midwifery program established in Paris in 1720 was a response to:", o:["Surplus of trained nurses","High maternal mortality rates","Increased hospital admissions","Shortage of physicians in hospitals"], a:1, d:"hard", exp:"Concern over high maternal mortality rates led to midwifery programs in Paris (1720) and London (1741)."},
+        {t:"Which statement best describes the relationship between community health nursing and public health science?", o:["They are completely unrelated fields","CHN is grounded in both public health science and nursing science, making its practice unique","CHN replaced public health entirely","Public health has no role in nursing"], a:1, d:"hard", exp:"Community health nursing is grounded in both public health science and nursing science, which makes its practice unique."},
+        {t:"Using aggregate measurements and analysis in community health nursing means:", o:["Only looking at individual patient data","Examining data for the entire population under study before making intervention decisions","Ignoring statistical information","Focusing solely on case studies"], a:1, d:"hard", exp:"Examining data for the entire population under study before making intervention decisions is fundamental to CHN."},
+        {t:"Organizational theory principles in community health nursing involve:", o:["Randomly providing services without planning","Assessing group and community needs, establishing priorities, planning, implementing, and evaluating services","Only following physician orders","Avoiding community input in planning"], a:1, d:"hard", exp:"Community health nurses assess needs, establish priorities, and plan, implement, and evaluate services using organizational principles."},
+        {t:"Inter-professional collaboration in community health nursing involves working with:", o:["Only nurses","Physicians, social workers, physical therapists, and teachers as a team","Only hospital administrators","Only pharmacists"], a:1, d:"hard", exp:"CHN involves collaboration with physicians, social workers, physical therapists, teachers, and other health professionals."},
+        {t:"The educator role in community health is especially useful because:", o:["It replaces clinical care entirely","It has potential for greater receptivity, higher yield results, and can reach a wider audience","It requires no specialized training","It focuses only on hospitalized patients"], a:1, d:"hard", exp:"The educator role finds greater receptivity, provides higher yield results, and can reach wider audiences."},
+        {t:"A community health nurse discovers a cluster of lead poisoning cases in children in a low-income neighborhood. Which function is the nurse primarily performing?", o:["Assurance","Policy development","Assessment","Rehabilitation"], a:2, d:"hard", exp:"Assessment involves measuring and monitoring health status and collecting data about health problems in the community."},
+        {t:"Which expanded skill differentiates community health nursing from traditional clinical nursing?", o:["Taking blood pressure","Use of epidemiology and biostatistics, community organization, and program evaluation","Administering injections","Wound dressing"], a:1, d:"hard", exp:"CHN uses expanded skills including epidemiology, biostatistics, community organization, research, and program evaluation."},
+        {t:"The concept of 'focus on wellness' in the clinician role means community health nurses:", o:["Only treat sick patients","Identify people interested in achieving higher levels of health and groups vulnerable to health threats","Avoid healthy populations","Focus exclusively on chronic disease management"], a:1, d:"hard", exp:"CHN identifies people interested in higher health levels and vulnerable groups to design preventive and promotive programs."},
+        {t:"Treatment of disorders as a component of community health practice includes all EXCEPT:", o:["Direct service to people with health problems","Indirect service assisting people to obtain treatment and referral","Development of programs to correct unhealthy conditions","Performing major surgical interventions in the community"], a:3, d:"hard", exp:"Treatment includes direct service, indirect service, and program development—not major surgical interventions."},
+        {t:"In community health nursing, rehabilitation applies to:", o:["Only individual patients","Only families","Only groups","Families, groups, individuals, and communities equally"], a:3, d:"hard", exp:"In community health, reducing disability and restoring function applies equally to families, groups, individuals, and communities."},
+        {t:"The fragmented and depersonalized nature of health care services makes which community health nursing role especially important?", o:["Researcher role","Clinician role","Advocate role","Administrator role"], a:2, d:"hard", exp:"Fragmented and depersonalized services make the advocate role crucial for ensuring clients receive proper care."},
+        {t:"Which of the following best describes the integration principle in community health nursing?", o:["Keeping health education separate from nursing services","Integration of health education, guidance and supervision with community health nursing services","Providing only curative care","Separating family members from health decisions"], a:1, d:"hard", exp:"Health education, guidance, and supervision should be integrated with community health nursing services."},
+        {t:"The shift from public health nursing to community health nursing (1970-present) was marked by:", o:["A narrowing of services to only hospitals","Expansion to include hospital-based outreach, private agencies, school nurses, and home visits","Elimination of home care services","Focus exclusively on communicable diseases"], a:1, d:"hard", exp:"The CHN stage includes hospital-based outreach to community, private agencies, school nurses, health educators, and home visits."},
+        {t:"  A community health nurse is assigned to a rural village where childhood diarrheal diseases are prevalent. The nurse plans to implement a hand-washing education campaign for mothers. Which level of prevention is this intervention?", o:["Primary prevention","Secondary prevention","Tertiary prevention","Quaternary prevention"], a:0, d:"medium", exp:"Health education to prevent disease before it occurs is primary prevention."},
+        {t:"  During a home visit, a community health nurse discovers that a diabetic elderly man has not been taking his medications and has developed foot ulcers. The nurse arranges wound care, medication management, and referral to a specialist. Which component of community health practice is primarily being implemented?", o:["Health promotion","Primary prevention","Treatment of disorders","Research"], a:2, d:"medium", exp:"Providing direct services to people with existing health problems constitutes treatment of disorders."},
+        {t:"  A community health nurse is conducting a community assessment and finds that the infant mortality rate in the district has increased by 15% over the past year. The nurse collects data on prenatal care utilization, immunization rates, and environmental factors. Which primary public health function is the nurse performing?", o:["Policy development","Assurance","Assessment","Rehabilitation"], a:2, d:"medium", exp:"Collecting data and monitoring health status is the assessment function."},
+        {t:"  Following the assessment data showing high infant mortality, the nurse collaborates with local health officials to develop guidelines for improving prenatal care access. This activity represents which public health function?", o:["Assessment","Policy development","Assurance","Evaluation"], a:1, d:"medium", exp:"Developing guidelines and health policies based on assessment data is the policy development function."},
+        {t:"  A factory worker suffers a back injury and is left with limited mobility. The community health nurse works with the occupational health team to develop a rehabilitation plan including physical therapy exercises and workplace modifications. Which level of prevention is being practiced?", o:["Primary prevention","Secondary prevention","Tertiary prevention","Primordial prevention"], a:2, d:"medium", exp:"Reducing disability and restoring function after illness or injury is tertiary prevention."},
+        {t:"  A community health nurse notices that several children in a school have untreated dental caries. She organizes a dental screening camp and refers affected children for treatment. This is an example of:", o:["Primary prevention","Secondary prevention","Tertiary prevention","Health promotion only"], a:1, d:"medium", exp:"Screening to detect and treat existing problems early is secondary prevention."},
+        {t:"  In a low-income urban community, a group of mothers express frustration that they cannot access affordable pediatric services. The community health nurse meets with local officials and insurance representatives to advocate for better services. Which role is the nurse performing?", o:["Clinician role","Educator role","Advocate role","Researcher role"], a:2, d:"hard", exp:"Acting on behalf of clients to ensure they receive services they need is the advocate role."},
+        {t:"  A community health nurse working in a school identifies an outbreak of scabies among students. She educates families about hygiene practices, treats affected children, and monitors the situation for two months. Which characteristics of CHN are demonstrated? Choose the BEST answer:", o:["Population focus and emphasis on prevention","Only hospital-based treatment","Individual treatment without follow-up","Research and policy development only"], a:0, d:"hard", exp:"The nurse demonstrates population focus (addressing the school community) and emphasis on prevention (education and monitoring)."},
+        {t:"  A nurse is developing a maternal health program for a community with high rates of eclampsia. She reviews epidemiological data, identifies risk factors, collaborates with obstetricians, and trains local health workers. Which approach best describes her methodology?", o:["Working independently without collaboration","Using aggregate measurements, inter-professional collaboration, and organizational theory principles","Focusing only on individual patient treatment","Ignoring community data and relying on intuition"], a:1, d:"hard", exp:"She uses aggregate data analysis, collaborates with other professionals, and applies organizational principles."},
+        {t:"  A community health nurse visits a family where a stroke patient has been discharged from the hospital. The patient has left-sided weakness and difficulty with daily activities. The nurse teaches the family proper positioning, exercises, and assists in obtaining a wheelchair. This intervention primarily represents:", o:["Primary prevention","Health promotion","Rehabilitation","Policy development"], a:2, d:"medium", exp:"Reducing disability and restoring function after illness is rehabilitation—a component of community health practice."},
+        {t:"  A community health nurse is working in an occupational health setting at a chemical factory. She implements a lung function screening program for all workers exposed to chemical fumes. This is an example of:", o:["Primary prevention","Secondary prevention","Tertiary prevention","Health promotion"], a:1, d:"hard", exp:"Screening workers for early detection of occupational disease is secondary prevention."},
+        {t:"  A community health nurse working with a population of homeless individuals notices high rates of tuberculosis. She develops a proposal for a mobile TB testing and treatment unit and presents it to the health department. She is performing which public health functions?", o:["Assessment only","Assessment and policy development","Assurance only","None of the above"], a:1, d:"hard", exp:"Identifying the problem (assessment) and developing a proposal for service delivery (policy development) are both demonstrated."},
+        {t:"  In a community with increasing rates of adolescent pregnancy, a CHN designs and implements a comprehensive sex education program in local schools, involving parents, teachers, and health professionals. This demonstrates:", o:["Only the educator role","Only the clinician role","The educator role, inter-professional collaboration, and community participation principles","Only the advocate role"], a:2, d:"hard", exp:"The nurse demonstrates education, collaboration with other professionals, and community participation principles."},
+        {t:"  A community health nurse in a district finds that elderly residents have high rates of medication non-compliance. She develops a color-coded pill organization system and conducts weekly follow-up visits to reinforce medication schedules. Which principle of CHN is best exemplified?", o:["Health services must be continuous","Services should only be provided once","Community participation is not necessary","Records and reports are not essential"], a:0, d:"medium", exp:"The weekly follow-ups exemplify the principle that health services must be continuous."},
+        {t:"  During a community assessment, a CHN discovers that water quality in a neighborhood has deteriorated due to industrial runoff. She collects water samples, documents health complaints from residents, and presents findings to local government officials. Her actions demonstrate which CHN characteristics?", o:["Using aggregate measurements and analysis combined with the advocate role","Only performing clinical treatment","Ignoring environmental factors","Working independently without community input"], a:0, d:"hard", exp:"Collecting environmental data (aggregate measurement) and presenting findings to officials (advocacy) are both demonstrated."},
+        {t:"Community health nursing focuses only on individuals, not on populations or communities.", o:["True","False"], a:1, d:"easy", exp:"CHN is population focused and concerned with families, groups, and communities, not just individuals."},
+        {t:"Florence Nightingale demonstrated that nursing intervention could prevent illness and improve the health of populations at risk.", o:["True","False"], a:0, d:"easy", exp:"Florence Nightingale's work showed that capable nursing intervention could prevent illness and improve population health."},
+        {t:"District nursing (mid-1800s to 1900) focused on visiting the sick poor in their homes.", o:["True","False"], a:0, d:"easy", exp:"District nurses visited the sick poor at home and taught proper hygiene."},
+        {t:"The WHO definition of health includes only physical well-being.", o:["True","False"], a:1, d:"easy", exp:"WHO defines health as a state of complete physical, mental, AND social well-being."},
+        {t:"Primary prevention includes screening programs for early disease detection.", o:["True","False"], a:1, d:"medium", exp:"Screening for early detection is secondary prevention. Primary prevention prevents disease before it occurs."},
+        {t:"Community participation is considered an integral part of community health services.", o:["True","False"], a:0, d:"easy", exp:"Community participation is stated as an integral part of community health services in the principles."},
+        {t:"The assurance function of public health translates established policies into services.", o:["True","False"], a:0, d:"medium", exp:"Assurance is the process of translating established policies into services."},
+        {t:"Community health nursing only uses basic clinical skills such as taking blood pressure and dressing wounds.", o:["True","False"], a:1, d:"medium", exp:"CHN also uses expanded skills including epidemiology, biostatistics, community organization, research, and program evaluation."},
+        {t:"The advocate role in community health nursing involves acting on behalf of clients to ensure just and equal treatment.", o:["True","False"], a:0, d:"medium", exp:"Advocacy involves pleading the cause or acting on behalf of client groups for just treatment."},
+        {t:"In community health, rehabilitation applies only to individual patients, not to families or communities.", o:["True","False"], a:1, d:"medium", exp:"Rehabilitation in community health applies equally to families, groups, individuals, and communities."},
+        {t:"The consumer movement had no impact on the development of community health nursing.", o:["True","False"], a:1, d:"medium", exp:"Consumers became more aggressive in demanding quality services and participation in decisions, influencing CHN development."},
+        {t:"Health services in community health nursing should be available to all without any difference.", o:["True","False"], a:0, d:"easy", exp:"One principle states health services must be available to all without any difference."},
+        {t:"The germ theory of disease causation was the first real breakthrough in control of communicable disease.", o:["True","False"], a:0, d:"medium", exp:"The germ theory is described as the first real breakthrough in control of communicable disease."},
+        {t:"Community health nursing uses principles of organizational theory in its practice.", o:["True","False"], a:0, d:"medium", exp:"CHN uses organizational principles to assess needs, establish priorities, plan, implement, and evaluate services."},
+        {t:"Policy development in public health is independent of assessment data.", o:["True","False"], a:1, d:"hard", exp:"Policy development builds on data from the assessment function—it is not independent of assessment."},
+        {t:"The public health nursing stage (1900-1970) placed greater emphasis on disease prevention and health promotion.", o:["True","False"], a:0, d:"medium", exp:"Official health agencies during this period placed greater emphasis on disease prevention and health promotion."},
+        {t:"The six settings of community health nursing include hospitals' intensive care units.", o:["True","False"], a:1, d:"easy", exp:"The six settings are homes, schools, ambulatory settings, occupational health, residential institutions, and the community at large—not ICUs."},
+        {t:"Inter-professional collaboration is not a characteristic of community health nursing.", o:["True","False"], a:1, d:"medium", exp:"Inter-professional collaboration with physicians, social workers, therapists, and teachers is a key characteristic."},
+        {t:"Research in community health is defined as systematic investigation to discover facts affecting community health.", o:["True","False"], a:0, d:"easy", exp:"Research involves systematic investigation to discover facts affecting community health and explore improved methods."},
+        {t:"The midwifery program in London was established in 1720 before the one in Paris.", o:["True","False"], a:1, d:"hard", exp:"The Paris program was established in 1720 and the London program in 1741—Paris came first."},
+];
+
+/* ============ CONFIG ============ */
+const TOTAL_MINUTES = 60;   
+
+/* ============ ENGINE ============ */
+const LETTERS = ['A','B','C','D','E','F'];
+let pool, questions, qi, correct, wrong, answered, answers, wrongSet;
+let totalTime = 60 * 60, timeLeft, timerInterval;
+let activeTopic = 'All';
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+/* ---- TOPIC FILTER ---- */
+function buildFilters() {
+  const wrap = document.getElementById('filterWrap');
+  const countEl = document.getElementById('filterCount');
+  const topics = [...new Set(QUESTIONS.map(q=>q.topic).filter(Boolean))];
+  if (!topics.length) { wrap.style.display='none'; countEl.style.display='none'; return; }
+  wrap.style.display='flex';
+  countEl.style.display='block';
+  const all = ['All', ...topics];
+  wrap.innerHTML = all.map(t=>
+    `<button class="filter-btn${t==='All'?' active':''}" onclick="setTopic('${t}')">${t}</button>`
+  ).join('');
+  updateFilterCount();
+}
+
+function setTopic(t) {
+  activeTopic = t;
+  document.querySelectorAll('.filter-btn').forEach(b=>{
+    b.classList.toggle('active', b.textContent===t);
+  });
+  updateFilterCount();
+  init(getPool());
+}
+
+function getPool() {
+  return activeTopic==='All' ? QUESTIONS : QUESTIONS.filter(q=>q.topic===activeTopic);
+}
+
+function updateFilterCount() {
+  const p = getPool();
+  document.getElementById('filterCount').textContent =
+    `Showing ${p.length} question${p.length!==1?'s':''} · Topic: ${activeTopic}`;
+}
+
+/* ---- INIT ---- */
+function init(p) {
+  pool = p;
+  if (!pool.length) {
+    document.getElementById('app').innerHTML=`
+      <div class="empty-state">
+        <div class="ei">📭</div>
+        <h3>No Questions Yet</h3>
+        <p>Add questions to the QUESTIONS array in the script section.</p>
+      </div>`;
+    document.getElementById('totalBadge').textContent='0 Questions';
+    document.getElementById('sRemain').textContent='—';
+    clearInterval(timerInterval);
+    return;
+  }
+  questions = shuffle(pool);
+  qi=0; correct=0; wrong=0; answered=0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = [];
+  timeLeft = totalTime;
+  document.getElementById('totalBadge').textContent = questions.length+' Questions';
+  document.getElementById('timeBadge').textContent  = TOTAL_MINUTES+' Min';
+  startTimer(); render();
+}
+
+/* ---- TIMER ---- */
+function startTimer() {
+  clearInterval(timerInterval);
+  timerInterval = setInterval(()=>{
+    timeLeft--;
+    const m=Math.floor(timeLeft/60), s=timeLeft%60;
+    document.getElementById('timerTxt').textContent=`${m}:${s<10?'0':''}${s}`;
+    const b=document.getElementById('timerBadge');
+    if (timeLeft<=120)      b.className='timer-badge danger';
+    else if (timeLeft<=300) b.className='timer-badge warn';
+    else                    b.className='timer-badge';
+    if (timeLeft<=0) { clearInterval(timerInterval); finish(); }
+  },1000);
+}
+
+/* ---- TOP BAR ---- */
+function updateTop() {
+  const total=questions.length;
+  document.getElementById('sCorrect').textContent=correct;
+  document.getElementById('sWrong').textContent=wrong;
+  document.getElementById('sRemain').textContent=Math.round(((total-answered)/total)*100)+'%';
+  document.getElementById('progLabel').textContent='Q '+(qi+1)+' / '+total;
+  document.getElementById('progFill').style.width=((qi+1)/total*100)+'%';
+  document.getElementById('prog-bar').style.width=((qi+1)/total*100)+'%';
+}
+
+/* ---- RENDER ---- */
+function render() {
+  updateTop();
+  const q=questions[qi];
+  const opts = q.o.map((o,idx)=>`
+    <div class="opt" id="opt${idx}" onclick="choose(${idx})">
+      <div class="opt-letter">${LETTERS[idx]}</div>${o}
+    </div>`).join('');
+  document.getElementById('app').innerHTML=`
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Question ${qi+1} / ${questions.length}</div>
+        ${q.topic?`<div class="q-topic">${q.topic}</div>`:''}
+      </div>
+      <div class="q-text">${q.t}</div>
+      <div class="options">${opts}</div>
+      <div class="nav-btns">
+        <button class="btn btn-skip" onclick="skip()"><i class="fa-solid fa-forward"></i> Skip</button>
+      </div>
+    </div>`;
+}
+
+/* ---- CHOOSE ---- */
+function choose(v) {
+  if (answers[qi]!==null) return;
+  answers[qi]=v; answered++;
+  const q=questions[qi], ok=v===q.a;
+  ok?correct++:wrong++;
+  updateTop();
+  q.o.forEach((_,idx)=>{
+    const el=document.getElementById('opt'+idx);
+    el.classList.add('disabled');
+    if (idx===q.a) el.classList.add('correct');
+    else if (idx===v) el.classList.add('wrong');
+  });
+  const fb=document.createElement('div');
+  fb.className='feedback-bar '+(ok?'ok':'no');
+  fb.innerHTML=ok
+    ?`<span style="font-size:17px">🎉</span><span>Correct! Well done.</span>`
+    :`<span style="font-size:17px">💡</span><span>Correct answer: <b>${q.o[q.a]}</b></span>`;
+  const card=document.querySelector('.q-card');
+  card.querySelector('.options').after(fb);
+  if (q.exp) {
+    const exp=document.createElement('div');
+    exp.className='explanation';
+    exp.innerHTML='<b>💬 Explanation:</b> '+q.exp;
+    fb.after(exp);
+  }
+  card.querySelector('.nav-btns').innerHTML=`
+    <button class="btn btn-next" onclick="next()">
+      ${qi<questions.length-1
+        ?'<i class="fa-solid fa-arrow-right"></i> Next Question'
+        :'<i class="fa-solid fa-flag-checkered"></i> Finish Exam'}
+    </button>`;
+}
+
+/* ---- SKIP / NEXT ---- */
+function skip() {
+  if (answers[qi]===null) { answers[qi]=-1; answered++; wrong++; wrongSet.push(questions[qi]); updateTop(); }
+  next();
+}
+function next() {
+  if (qi<questions.length-1) { qi++; render(); window.scrollTo({top:0,behavior:'smooth'}); }
+  else finish();
+}
+
+/* ---- FINISH ---- */
+function finish() {
+  clearInterval(timerInterval);
+  const total=questions.length;
+  const score=Math.round((correct/total)*100);
+  questions.forEach((q,idx)=>{ if(answers[idx]!==q.a) wrongSet.push({...q,myAns:answers[idx]}); });
+  wrongSet=[...new Map(wrongSet.map(q=>[q.t,q])).values()];
+  let grade,gc;
+  if(score>=90)      { grade='🥇 Excellent';    gc='var(--ok)'; }
+  else if(score>=75) { grade='🥈 Very Good';     gc='var(--a1)'; }
+  else if(score>=60) { grade='🥉 Good';          gc='var(--warn)'; }
+  else               { grade='📚 Needs Review';  gc='var(--err)'; }
+  const circ=2*Math.PI*45, offset=circ-(score/100)*circ;
+  const report=questions.map((q,idx)=>{
+    const ok=answers[idx]===q.a;
+    return `<div class="report-item ${ok?'ok':'no'}">
+      <div class="ri-q">${ok?'✅':'❌'} ${q.t}</div>
+      ${!ok?`
+        <div class="ri-row"><span class="ri-badge ri-yours">Your Answer</span>${answers[idx]>=0?q.o[answers[idx]]:'Skipped'}</div>
+        <div class="ri-row"><span class="ri-badge ri-right">Correct</span>${q.o[q.a]}</div>
+      `:''}
+    </div>`;
+  }).join('');
+  document.getElementById('prog-bar').style.width='100%';
+  document.getElementById('app').innerHTML=`
+    <div class="result-hero">
+      <div class="score-ring">
+        <svg viewBox="0 0 110 110">
+          <circle class="ring-bg" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="0"/>
+          <circle class="ring-fill" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="${circ}"
+            style="stroke:${gc}" id="ringFill"/>
+        </svg>
+        <div class="score-num">${score}</div>
+        <div class="score-pct">%</div>
+      </div>
+      <div class="result-grade" style="color:${gc}">${grade}</div>
+      <div class="result-sub">Answered ${answered} of ${total} questions</div>
+      <div class="result-stats">
+        <div class="rs"><div class="n" style="color:var(--ok)">${correct}</div><div class="l">Correct</div></div>
+        <div class="rs"><div class="n" style="color:var(--err)">${wrong}</div><div class="l">Wrong</div></div>
+        <div class="rs"><div class="n" style="color:var(--a1)">${total-answered<0?0:total-answered}</div><div class="l">Skipped</div></div>
+      </div>
+    </div>
+    <div class="result-actions">
+      ${wrongSet.length?`<button class="btn btn-retry" onclick="retryWrong()"><i class="fa-solid fa-rotate-right"></i> Retry Wrong (${wrongSet.length})
+
+</button>`:''}
+      <button class="btn btn-home" onclick="init(getPool())"><i class="fa-solid fa-shuffle"></i> New Random Exam</button>
+      <a href="https://gaith-team.github.io/exam/" class="btn btn-home" style="text-decoration:none"><i class="fa-solid fa-house"></i> Back to Subject</a>
+    </div>
+    <div style="margin-top:22px">
+      <div style="font-size:14px;font-weight:700;margin-bottom:9px;color:var(--text2)">📋 Detailed Report</div>
+      ${report}
+    </div>`;
+  setTimeout(()=>{ document.getElementById('ringFill').style.strokeDashoffset=offset; },100);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ---- RETRY WRONG ---- */
+function retryWrong() {
+  const p=[...wrongSet];
+  questions=shuffle(p); qi=0; correct=0; wrong=0;
+  answers=new Array(questions.length).fill(null);
+  wrongSet=[]; answered=0; timeLeft=totalTime;
+  startTimer(); render();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ---- THEME ---- */
+const themeBtn=document.getElementById('themeBtn');
+let theme=localStorage.getItem('gt-theme')||'light';
+function applyTheme(t) {
+  theme=t;
+  document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'');
+  themeBtn.textContent=t==='dark'?'☀️':'🌙';
+  localStorage.setItem('gt-theme',t);
+}
+applyTheme(theme);
+themeBtn.addEventListener('click',()=>applyTheme(theme==='dark'?'light':'dark'));
+
+/* ---- START ---- */
+buildFilters();
+init(getPool());
+</script>
+</body>
+</html>
