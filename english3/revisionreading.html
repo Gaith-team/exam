@@ -1,0 +1,767 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --accent:       #dc2626;
+  --accent-light: #ef4444;
+  --accent-dark:  #b91c1c;
+  --accent-glow:  rgba(220,38,38,0.2);
+  --bg:      #f8fafc;
+  --bg2:     #eef2f7;
+  --card:    #ffffff;
+  --text:    #1a2332;
+  --text2:   #4a5568;
+  --text3:   #718096;
+  --bc:      rgba(0,0,0,0.07);
+  --success: #16a34a;
+  --danger:  #dc2626;
+  --warn:    #b91c1c;
+  --r:       16px;
+  --tr:      all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="dark"] {
+  --bg:   #0d1117; --bg2: #161b22; --card: #1c2333;
+  --text: #e6edf3; --text2: #b1bac4; --text3: #7d8590;
+  --bc:   rgba(255,255,255,0.08);
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg); color: var(--text);
+  min-height: 100vh; overflow-x: hidden;
+  transition: background .4s, color .4s;
+}
+
+/* PROGRESS TOP */
+#prog-bar {
+  position: fixed; top: 0; left: 0; height: 3px; z-index: 999;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  transition: width .2s;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px; height: 64px;
+  background: rgba(248,250,252,.93); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--bc); transition: var(--tr);
+}
+[data-theme="dark"] nav { background: rgba(13,17,23,.95); }
+
+.nav-back {
+  display: flex; align-items: center; gap: 7px;
+  color: var(--text2); text-decoration: none; font-size: 13px; font-weight: 700;
+  padding: 7px 13px; border-radius: 8px; border: 1px solid var(--bc);
+  background: var(--card); transition: var(--tr);
+}
+.nav-back:hover { color: var(--accent); border-color: var(--accent-glow); transform: translateX(3px); }
+.nav-brand { display: flex; align-items: center; gap: 9px; font-size: 15px; font-weight: 900; color: var(--text); }
+.nav-logo-icon {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 12px; font-weight: 900;
+}
+.nav-right { display: flex; align-items: center; gap: 8px; }
+.theme-btn {
+  width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--bc);
+  background: var(--card); cursor: pointer; font-size: 15px;
+  display: flex; align-items: center; justify-content: center; transition: var(--tr);
+}
+.theme-btn:hover { border-color: var(--accent); transform: rotate(20deg); }
+
+/* HERO BAND */
+.hero-band {
+  margin-top: 64px;
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent), var(--accent-light));
+  padding: 40px 24px 36px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.hero-band::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 600px 200px at 50% 100%, rgba(255,255,255,.12) 0%, transparent 70%);
+}
+.hero-band-icon {
+  width: 68px; height: 68px; border-radius: 20px;
+  background: rgba(255,255,255,.2); backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 30px; margin: 0 auto 14px; border: 1.5px solid rgba(255,255,255,.35);
+}
+.hero-band h1 { font-size: clamp(20px,4vw,30px); font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero-band p { font-size: 13px; color: rgba(255,255,255,.8); }
+.hero-band-meta {
+  display: flex; justify-content: center; gap: 24px; margin-top: 20px;
+  flex-wrap: wrap;
+}
+.meta-pill {
+  background: rgba(255,255,255,.18); backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,.3); border-radius: 50px;
+  padding: 6px 16px; font-size: 12px; font-weight: 700; color: #fff;
+  display: flex; align-items: center; gap: 6px;
+}
+
+/* EXAM SHELL */
+.shell { max-width: 560px; margin: 0 auto; padding: 24px 20px 80px; }
+
+/* STATS ROW */
+.stats-row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 16px;
+}
+.stat-box {
+  background: var(--card); border: 1px solid var(--bc); border-radius: var(--r);
+  padding: 12px 10px; text-align: center;
+}
+.stat-box .val { font-size: 20px; font-weight: 900; }
+.stat-box .lbl { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.stat-correct { color: var(--success); }
+.stat-wrong   { color: var(--danger); }
+.stat-remain  { color: var(--accent); }
+
+/* PROGRESS STRIP */
+.prog-strip {
+  background: var(--card); border: 1px solid var(--bc); border-radius: var(--r);
+  padding: 14px 16px; margin-bottom: 16px;
+  display: flex; align-items: center; gap: 14px;
+}
+.prog-label { font-size: 13px; font-weight: 700; color: var(--text2); white-space: nowrap; }
+.prog-track { flex: 1; height: 8px; background: var(--bg2); border-radius: 8px; overflow: hidden; }
+.prog-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  border-radius: 8px; transition: width .4s;
+}
+.timer-badge {
+  min-width: 64px; height: 36px; border-radius: 18px;
+  background: var(--bg2); border: 1px solid var(--bc);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 900; color: var(--text);
+  gap: 5px; padding: 0 12px; flex-shrink: 0;
+}
+.timer-badge.warn { color: var(--warn); border-color: rgba(217,119,6,.3); background: rgba(217,119,6,.08); }
+.timer-badge.danger { color: var(--danger); border-color: rgba(220,38,38,.3); background: rgba(220,38,38,.08); animation: pulse .8s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.6} }
+
+/* QUESTION CARD */
+.q-card {
+  background: var(--card); border: 1px solid var(--bc);
+  border-radius: 20px; overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+  transition: box-shadow .3s;
+}
+.q-header {
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  padding: 4px 18px 4px;
+  display: flex; align-items: center; gap: 8px;
+}
+.q-num {
+  background: rgba(255,255,255,.2); border-radius: 8px;
+  padding: 3px 10px; font-size: 11px; font-weight: 700; color: #fff;
+}
+.q-text {
+  padding: 22px 18px 14px; font-size: 15px; font-weight: 700; color: var(--text);
+  line-height: 1.65; border-bottom: 1px solid var(--bc);
+  text-align: left; direction: ltr;
+}
+.options { padding: 14px 18px 18px; display: flex; flex-direction: column; gap: 10px; }
+
+/* OPTION */
+.opt {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px; border-radius: 12px;
+  border: 1.5px solid var(--bc); background: var(--bg);
+  cursor: pointer; font-size: 14px; font-weight: 600; color: var(--text);
+  transition: var(--tr); user-select: none;
+  direction: ltr; text-align: left;
+}
+.opt:hover:not(.disabled) {
+  border-color: var(--accent); background: var(--accent-glow);
+  transform: translateX(3px);
+}
+.opt-letter {
+  width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+  background: var(--bg2); border: 1px solid var(--bc);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 900; color: var(--text3);
+  transition: var(--tr);
+}
+.opt.correct {
+  border-color: var(--success); background: rgba(22,163,74,.08);
+}
+.opt.correct .opt-letter {
+  background: var(--success); color: #fff; border-color: var(--success);
+}
+.opt.wrong {
+  border-color: var(--danger); background: rgba(220,38,38,.07);
+}
+.opt.wrong .opt-letter {
+  background: var(--danger); color: #fff; border-color: var(--danger);
+}
+.opt.disabled { pointer-events: none; }
+
+/* FEEDBACK */
+.feedback-bar {
+  margin: 14px 18px; padding: 12px 16px; border-radius: 12px;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px; font-weight: 700;
+  animation: popIn .4s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes popIn { from{transform:scale(.8);opacity:0} to{transform:scale(1);opacity:1} }
+.feedback-bar.ok { background: rgba(22,163,74,.1); color: var(--success); border: 1px solid rgba(22,163,74,.25); }
+.feedback-bar.no { background: rgba(220,38,38,.08); color: var(--danger); border: 1px solid rgba(220,38,38,.2); }
+.feedback-icon { font-size: 20px; }
+
+/* EXPLANATION */
+.explanation {
+  margin: 0 18px 14px; padding: 12px 14px;
+  background: rgba(var(--accent-rgb),.06);
+  border-radius: 10px; border-right: 3px solid var(--accent);
+  font-size: 13px; color: var(--text2); line-height: 1.6;
+  display: none;
+}
+
+/* NAV BTNS */
+.nav-btns { padding: 4px 18px 18px; display: flex; gap: 10px; }
+.btn {
+  flex: 1; padding: 13px; border: none; border-radius: 12px;
+  font-size: 14px; font-weight: 900; cursor: pointer;
+  font-family: 'Outfit', sans-serif; transition: var(--tr);
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+}
+.btn-next {
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  color: #fff; box-shadow: 0 4px 14px var(--accent-glow);
+}
+.btn-next:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
+.btn-skip {
+  background: var(--bg2); color: var(--text2); border: 1px solid var(--bc); flex: 0 0 auto; padding: 13px 18px;
+}
+.btn-skip:hover { border-color: var(--warn); color: var(--warn); }
+
+/* ===== RESULTS ===== */
+.result-hero {
+  text-align: center; padding: 36px 20px 28px;
+  background: var(--card); border-radius: 20px;
+  border: 1px solid var(--bc); margin-bottom: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+}
+.score-ring {
+  width: 110px; height: 110px; border-radius: 50%; margin: 0 auto 18px;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; border: 5px solid var(--bg2);
+  position: relative;
+}
+.score-ring svg { position: absolute; inset: -5px; width: calc(100% + 10px); height: calc(100% + 10px); transform: rotate(-90deg); }
+.score-ring circle { fill: none; stroke-width: 5; stroke-linecap: round; }
+.ring-bg { stroke: var(--bg2); }
+.ring-fill { stroke: var(--accent); transition: stroke-dashoffset 1s ease; }
+.score-num { font-size: 28px; font-weight: 900; color: var(--text); }
+.score-pct { font-size: 12px; color: var(--text3); }
+.result-grade { font-size: 22px; font-weight: 900; margin-bottom: 6px; }
+.result-sub { font-size: 14px; color: var(--text2); }
+.result-stats {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 20px;
+}
+.rs { background: var(--bg2); border-radius: 10px; padding: 12px 8px; text-align: center; }
+.rs .n { font-size: 20px; font-weight: 900; }
+.rs .l { font-size: 11px; color: var(--text3); }
+
+/* REPORT ITEMS */
+.report-item {
+  background: var(--card); border: 1px solid var(--bc); border-radius: 14px;
+  padding: 16px; margin-bottom: 10px; border-right: 4px solid var(--bc);
+}
+.report-item.ok { border-right-color: var(--success); }
+.report-item.no { border-right-color: var(--danger); }
+.report-item .ri-q { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+.report-item .ri-row {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; margin-top: 5px; color: var(--text2);
+}
+.ri-badge {
+  padding: 2px 8px; border-radius: 6px; font-weight: 700; font-size: 11px; flex-shrink: 0;
+}
+.ri-yours { background: rgba(220,38,38,.1); color: var(--danger); }
+.ri-right { background: rgba(22,163,74,.1); color: var(--success); }
+
+.result-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+.btn-retry { background: linear-gradient(135deg, var(--accent-dark), var(--accent)); color: #fff; }
+.btn-retry:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
+.btn-home { background: var(--bg2); color: var(--text); border: 1px solid var(--bc); }
+.btn-home:hover { border-color: var(--accent); color: var(--accent); }
+
+/* FOOTER */
+footer {
+  background: var(--bg2); border-top: 1px solid var(--bc);
+  padding: 22px 24px; display: flex; align-items: center;
+  justify-content: space-between; flex-wrap: wrap; gap: 10px;
+}
+.footer-brand { font-size: 14px; font-weight: 700; }
+.footer-brand span { color: var(--accent); }
+.footer-tg { display: flex; align-items: center; gap: 5px; text-decoration: none; color: #229ED9; font-size: 12px; font-weight: 600; }
+
+@media (max-width: 480px) {
+  nav { padding: 0 14px; }
+  .shell { padding: 16px 14px 60px; }
+  .nav-brand span { display: none; }
+  .hero-band { padding: 30px 16px 28px; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog-bar" style="width:0%"></div>
+
+<nav>
+  <a href="https://gaith-team.github.io/exam/" class="nav-back"><i class="fa-solid fa-arrow-right"></i> رجوع</a>
+  <div class="nav-brand">
+    <div class="nav-logo-icon">GT</div>
+    <span>GHAITH TEAM</span>
+  </div>
+  <div class="nav-right">
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<div class="hero-band">
+  <div class="hero-band-icon">😎</div>
+  <h1>مراجعة علي Reading الـ 6 محاضرات </h1>
+  <p>إنجليزي</p>
+  <div class="hero-band-meta">
+    <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">-- سؤال</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-clock"></i> 100 Min</div>
+    <div class="meta-pill"><i class="fa-solid fa-shuffle"></i> Shuffled</div>
+  </div>
+</div>
+
+<div class="shell">
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="val stat-correct" id="sCorrect">0</div>
+      <div class="lbl">✔ صحيح</div>
+    </div>
+    <div class="stat-box">
+      <div class="val stat-wrong" id="sWrong">0</div>
+      <div class="lbl">✖ خطأ</div>
+    </div>
+    <div class="stat-box">
+      <div class="val stat-remain" id="sRemain">--%</div>
+      <div class="lbl">⏳ متبقي</div>
+    </div>
+  </div>
+
+  <!-- PROGRESS STRIP -->
+  <div class="prog-strip">
+    <div class="prog-label" id="progLabel">سؤال ١</div>
+    <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+    <div class="timer-badge" id="timerBadge"><i class="fa-regular fa-clock"></i> <span id="timerTxt">100:00</span></div>
+  </div>
+
+  <!-- APP -->
+  <div id="app"></div>
+</div>
+
+<footer>
+  <div class="footer-brand">GAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg">
+    <i class="fa-brands fa-telegram"></i> @nursing2bu
+  </a>
+</footer>
+
+<script>
+const QUESTIONS = [
+ {t:"Which department provides immediate treatment for emergency cases?", o:["Casualty department","Causality department","Casual department","Causeway department"], a:0},
+            {t:"Where are patients required to provide personal information and sign consent forms?", o:["Admission department","Admissions department","Admittance department","Admitted department"], a:1},
+            {t:"What is ICU an abbreviation for?", o:["Intense Care Unit","Intensive Care Unit","Internal Care Unit","Interim Care Unit"], a:1},
+            {t:"Which department deals with children and their diseases?", o:["Pediatrics","Paediatrics","Pedatrics","Pediatric"], a:0},
+            {t:"Which unit specializes in the treatment of women during pregnancy and childbirth?", o:["Maternal unit","Maternity unit","Maternaty unit","Maturnity unit"], a:1},
+            
+            // Hospital Departments - Medium
+            {t:"Which department investigates and treats digestive and gastrointestinal diseases?", o:["Gastrology","Gastroenterology","Gastrointestology","Gastroentrology"], a:1},
+            {t:"The department that deals with the health and care of elderly people is called:", o:["Geriatric","Geriatrics","Geratrics","Geriatics"], a:1},
+            {t:"Which department provides treatments including radiotherapy and chemotherapy for cancerous tumors?", o:["Oncology","Oncolgy","Oncalogy","Oncolagy"], a:0},
+            {t:"Which department treats musculoskeletal system including joints, bones, and muscles?", o:["Orthopedics","Orthopaedics","Orthopedic","Orthopaedic"], a:0},
+            {t:"The department that deals with diagnosis and treatment of nervous system disorders is:", o:["Neurology","Nuerology","Neurolagy","Nurology"], a:0},
+            
+            // Hospital Departments - Hard
+            {t:"Which department provides facilities for peritoneal dialysis?", o:["Renal department","Rental department","Rennal department","Renel department"], a:0},
+            {t:"Otolaryngology covers medical conditions related to:", o:["Ear, Nose, and Throat","Eye, Nose, and Throat","Ear, Nose, and Tongue","Ear, Neck, and Throat"], a:0},
+            {t:"Which department provides an extensive clinical service including mycology and parasitology?", o:["Microbiology","Microbiollogy","Microbiolgy","Microboilogy"], a:0},
+            {t:"The imaging department is also called:", o:["Radiology","Radiolagy","Radilogy","Radiollogy"], a:0},
+            {t:"Which department deals with diseases and abnormalities of the heart?", o:["Cardilogy","Cardiology","Cardiollogy","Cardeology"], a:1},
+            
+            // Hospital Staff - Easy
+            {t:"Who is the most senior doctor in charge of a patient's care?", o:["Consultant","Consulant","Consultent","Counsultant"], a:0},
+            {t:"A doctor who specializes in treating sick children is called a:", o:["Pediatrician","Paediatrician","Pedeatrician","Pediatricion"], a:0},
+            {t:"What does GP stand for?", o:["General Practitioner","General Practioner","General Practicioner","General Practitoner"], a:0},
+            {t:"Who prepares and dispenses prescription drugs?", o:["Pharmacist","Pharmicist","Pharmecist","Pharmacyst"], a:0},
+            {t:"A trained health professional who helps women during labor and delivery is a:", o:["Midwife","Midwive","Medwife","Midewife"], a:0},
+            
+            // Hospital Staff - Medium
+            {t:"Who is responsible for assessing patients and determining their level of need in emergency rooms?", o:["Triage nurse","Triaje nurse","Traige nurse","Tryage nurse"], a:0},
+            {t:"Who handles sterile equipment while assisting a surgeon during operations?", o:["Scrub nurse","Scrube nurse","Scrabb nurse","Scrubb nurse"], a:0},
+            {t:"Who treats patients who have mobility issues?", o:["Physiotherapist","Physotherapist","Phisiotherapist","Physiotherapyst"], a:0},
+            {t:"Who gives emergency treatment to accident victims and transports them by ambulance?", o:["Paramedic","Paramadic","Paramedick","Peramedic"], a:0},
+            {t:"Who specializes in mental health including substance use disorders?", o:["Psychiatrist","Psyciatrist","Phsychiatrist","Psychiatryst"], a:0},
+            
+            // Hospital Staff - Hard
+            {t:"Who uses activity to help patients function independently?", o:["Occupational therapist","Ocupational therapist","Occupatonal therapist","Occupational theraspist"], a:0},
+            {t:"Who specializes in working with families to identify health needs early?", o:["Health visitor","Health visiter","Helth visitor","Health visitur"], a:0},
+            {t:"A nurse employed by an agency rather than a hospital is called:", o:["Agency nurse","Agancy nurse","Ajency nurse","Agency nerse"], a:0},
+            {t:"Who provides specialist advice in diet for hospital wards?", o:["Dietitian","Dietician","Dietision","Dietetian"], a:0},
+            {t:"The role primarily providing clinical support to doctors by undertaking specific clinical tasks is:", o:["Physician's assistant","Physican's assistant","Physician's assistent","Physicain's assistant"], a:0},
+            
+            // Things on Ward - Easy
+            {t:"What is drawn around a patient's bed to provide privacy?", o:["Curtain","Curtan","Curtein","Courtin"], a:0},
+            {t:"Where are intravenous fluid bags suspended?", o:["Drip stand","Drop stand","Dripp stand","Drep stand"], a:0},
+            {t:"What do patients use when they need to call a nurse?", o:["Call button","Call buton","Cal button","Coll button"], a:0},
+            {t:"What is worn by patients around their wrist for identification?", o:["Name band","Name bend","Nmae band","Name bund"], a:0},
+            {t:"What keeps a patient warm in bed?", o:["Blanket","Blancket","Blankit","Blunket"], a:0},
+            
+            // Things on Ward - Medium
+            {t:"What is used by patients confined to bed to urinate and defecate?", o:["Bedpan","Bedpen","Badpan","Bedpann"], a:0},
+            {t:"What mechanical device is used for lifting and moving patients?", o:["Hoist","Hiosit","Hoyst","Hoiste"], a:0},
+            {t:"What is suspended above the bed that patients can use to pull themselves up?", o:["Monkey pole","Monky pole","Monkey poll","Munkey pole"], a:0},
+            {t:"A thin, cushion-like mass used to protect against pressure injury is a:", o:["Pressure pad","Pressur pad","Pressure padd","Presure pad"], a:0},
+            {t:"What device lowers and raises a person in a bathtub mechanically?", o:["Bath lift","Bath lifte","Bathe lift","Bath lyft"], a:0},
+            
+            // Things on Ward - Hard
+            {t:"A small plastic tube inserted into a vein is called:", o:["Cannula","Canula","Cannulah","Canulla"], a:0},
+            {t:"A tubular device for insertion into body cavities to permit fluid injection is a:", o:["Catheter","Cathater","Cathitar","Cathetar"], a:0},
+            {t:"A multi-layered sheet with high absorbency used for incontinence is:", o:["Incontinence pad","Incontinance pad","Incontinence padd","Incontinense pad"], a:0},
+            {t:"A narrow bed for transporting patients is called:", o:["Trolley","Trolly","Troley","Trollei"], a:0},
+            {t:"A device for transporting the ill consisting of a frame covered by canvas is:", o:["Stretcher","Strecher","Stratcher","Stretchar"], a:0},
+            
+            // Medical Equipment - Easy
+            {t:"Equipment for listening to a person's heart and lungs is a:", o:["Stethoscope","Stethoscop","Stethascope","Stethescope"], a:0},
+            {t:"An instrument used to check body temperature is a:", o:["Thermometer","Thermometre","Thermomater","Thermometur"], a:0},
+            {t:"A tool that measures a person's weight is:", o:["Weighing scales","Weighting scales","Weighin scales","Wieghing scales"], a:0},
+            {t:"A tool used during throat examinations is a:", o:["Tongue depressor","Tounge depressor","Tongue depresser","Tongue depresssor"], a:0},
+            {t:"A long piece of cloth wrapped around an injured body part is a:", o:["Bandage","Bandege","Bandige","Bandaje"], a:0},
+            
+            // Medical Equipment - Medium
+            {t:"A shallow basin with kidney-shaped base used to receive medical waste is:", o:["Kidney dish","Kedney dish","Kidney dishe","Kidny dish"], a:0},
+            {t:"A device wrapped tightly around a limb to prevent blood flow is a:", o:["Tourniquet","Torniquete","Tournaquet","Tourniket"], a:0},
+            {t:"A small instrument for plucking out hairs and picking up small objects is:", o:["Tweezers","Twezers","Tweazers","Tweezars"], a:0},
+            {t:"Instrument used during operations for pulling, holding, and retrieving is:", o:["Forceps","Forseps","Forcips","Forcapes"], a:0},
+            {t:"A device for looking into a patient's ears is an:", o:["Otoscope","Otascope","Otescope","Otiscope"], a:0},
+            
+            // Medical Equipment - Hard
+            {t:"A sharp pointed metal piece attached to a syringe for taking blood is:", o:["Hypodermic needle","Hypodermic neadle","Hypodermik needle","Hypodermic needel"], a:0},
+            {t:"The pouch that contains liquids to be pumped into a patient's body is:", o:["IV bag","IV beg","IV bage","I.V bag"], a:0},
+            {t:"An object used to separate doctor and patient from others in an open room is:", o:["Privacy screen","Privicy screen","Privacy screan","Privacy scren"], a:0},
+            {t:"A small container used for distributing medications to patients is:", o:["Medicine pot","Medicin pot","Medicine pott","Medecine pot"], a:0},
+            {t:"A set of coverings put on a wound to protect it while healing is:", o:["Dressing pack","Drassing pack","Dressing pak","Dressing peck"], a:0},
+            
+            // Medications - Easy
+            {t:"A pill entirely composed of medication is called a:", o:["Tablet","Tablit","Tablat","Tablete"], a:0},
+            {t:"A small container with a drug inside it is called a:", o:["Capsule","Capsul","Capusle","Capsuale"], a:0},
+            {t:"A liquid medicine taken when you have a cough is:", o:["Cough syrup","Cough sirup","Cogh syrup","Cough syrop"], a:0},
+            {t:"A drug for relieving pain is called a:", o:["Painkiller","Painkiler","Painkillar","Painkillur"], a:0},
+            {t:"A medicine that inhibits the growth of microorganisms is an:", o:["Antibiotic","Antibioitic","Antibiatic","Antibotic"], a:0},
+            
+            // Medications - Medium
+            {t:"A drug taken for its calming or sleep-inducing effect is a:", o:["Sedative","Seditive","Sedetive","Sadative"], a:0},
+            {t:"A drug that reduces inflammation in the body is:", o:["Anti-inflammatory","Anti-inflamatory","Anti-inflammetory","Anti-inflamitory"], a:0},
+            {t:"A drug tending to stimulate evacuation of the bowels is a:", o:["Laxative","Laxitive","Laxetive","Laxativee"], a:0},
+            {t:"The introduction of a serum or vaccine into the body is:", o:["Inoculation","Innoculation","Inocullation","Innocluation"], a:0},
+            {t:"A medicine that helps relieve symptoms of depression is an:", o:["Antidepressant","Antidepressent","Antideppressant","Anti-depressant"], a:0},
+            
+            // Medications - Administration
+            {t:"A device that gets medicine directly into a person's lungs is an:", o:["Inhaler","Inhalar","Inhalor","Inheler"], a:0},
+            {t:"Continuous slow introduction of fluid into a vein is:", o:["IV drip","I.V drip","IV driip","IV dripp"], a:0},
+            {t:"A preparation designed to be inserted into the rectum to dissolve is a:", o:["Suppository","Supositary","Suppossitory","Supository"], a:0},
+            {t:"A patch placed on skin to deliver medication through the skin is:", o:["Adhesive patch","Adhesive pach","Adhesiv patch","Adhessive patch"], a:0},
+            {t:"A liquid mixture where the minor component is uniformly distributed is a:", o:["Solution","Solusion","Sollution","Soluton"], a:0},
+            
+            // Kidney Anatomy
+            {t:"The kidneys are located in the back of the:", o:["Abdomen","Abdomin","Abdoman","Abdomun"], a:0},
+            {t:"The outer part of the kidney where filtration starts is the:", o:["Cortex","Cortax","Cortix","Corteks"], a:0},
+            {t:"The basic functional unit of the kidney is the:", o:["Nephron","Nefron","Nephrone","Nephran"], a:0},
+            {t:"The hormone that stimulates bone marrow to make red blood cells is:", o:["Erythropoietin","Erithropoietin","Erythropoeitin","Erythropoetin"], a:0},
+            {t:"Gradual loss of kidney function is called:", o:["Chronic kidney disease","Chronik kidney disease","Chronic kidny disease","Chronic kidney desease"], a:0},
+
+            {t:"The ICU stands for Intensive Care Unit.", o:["True","False"], a:0},
+            {t:"A midwife is a doctor who specializes in surgery.", o:["True","False"], a:1},
+            {t:"The pharmacy is where medicinal drugs are prepared or sold.", o:["True","False"], a:0},
+            {t:"A stethoscope is used to measure blood pressure.", o:["True","False"], a:1},
+            {t:"Pediatrics deals with the health of elderly people.", o:["True","False"], a:1},
+            {t:"A consultant is the most senior doctor in charge of a patient's care.", o:["True","False"], a:0},
+            {t:"Cardiology deals with diseases of the heart.", o:["True","False"], a:0},
+            {t:"A triage nurse works in the operating theatre.", o:["True","False"], a:1},
+            {t:"Kidneys are responsible for filtering blood.", o:["True","False"], a:0},
+            {t:"A thermometer is used to listen to the lungs.", o:["True","False"], a:1},
+            {t:"The maternity unit specializes in treating men's health issues.", o:["True","False"], a:1},
+            {t:"A blanket is used to keep patients warm in bed.", o:["True","False"], a:0},
+            {t:"Oncology provides treatments for cancerous tumors.", o:["True","False"], a:0},
+            {t:"A paramedic works only inside the hospital.", o:["True","False"], a:1},
+            {t:"Erythropoietin is a hormone produced by the kidneys.", o:["True","False"], a:0},
+            {t:"A scrub nurse handles sterile equipment during surgery.", o:["True","False"], a:0},
+            {t:"The renal department deals with lung conditions.", o:["True","False"], a:1},
+            {t:"Gastroenterology treats digestive diseases.", o:["True","False"], a:0},
+            {t:"A catheter is used to take blood samples.", o:["True","False"], a:1},
+            {t:"Neurology deals with disorders of the nervous system.", o:["True","False"], a:0},
+            {t:"Each kidney contains about 1 million nephrons.", o:["True","False"], a:0},
+            {t:"A bedpan is used by patients to eat their meals.", o:["True","False"], a:1},
+            {t:"Orthopedics treats musculoskeletal system conditions.", o:["True","False"], a:0},
+            {t:"A laxative is used to relieve pain.", o:["True","False"], a:1},
+            {t:"The cortex is the inner part of the kidney.", o:["True","False"], a:1},
+            {t:"A pharmacist dispenses prescription drugs.", o:["True","False"], a:0},
+            {t:"Geriatrics deals with the health of children.", o:["True","False"], a:1},
+            {t:"Diabetes is a major cause of kidney disease.", o:["True","False"], a:0},
+            {t:"A physiotherapist treats patients with mobility issues.", o:["True","False"], a:0},
+            {t:"Otolaryngology covers ear, nose, and throat conditions.", o:["True","False"], a:0}
+];
+
+  function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function shuffleOptions(question) {
+  const options = question.o.map((text, index) => ({
+    text,
+    originalIndex: index
+  }));
+
+  shuffle(options);
+
+  return {
+    ...question,
+    o: options.map(x => x.text),
+    a: options.findIndex(x => x.originalIndex === question.a)
+  };
+}
+/* ============ ENGINE ============ */
+let questions, i, correct, wrong, answers, wrongSet, answered;
+let totalTime = 100*60, timeLeft, timerInterval;
+const LETTERS = ['A','B','C','D','E','F'];
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function init(pool) {
+questions = shuffle([...pool]).map(q => shuffleOptions(q));  i = 0; correct = 0; wrong = 0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = []; answered = 0;
+  timeLeft = totalTime;
+  document.getElementById('totalBadge').textContent = questions.length + ' سؤال';
+  startTimer();
+  render();
+}
+
+/* TIMER */
+function startTimer() {
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    const m = Math.floor(timeLeft / 60), s = timeLeft % 60;
+    document.getElementById('timerTxt').textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
+    const badge = document.getElementById('timerBadge');
+    if (timeLeft <= 120) { badge.className = 'timer-badge danger'; }
+    else if (timeLeft <= 300) { badge.className = 'timer-badge warn'; }
+    if (timeLeft <= 0) { clearInterval(timerInterval); finish(); }
+  }, 1000);
+}
+
+/* TOP UI */
+function updateTop() {
+  const total = questions.length;
+  document.getElementById('sCorrect').textContent = correct;
+  document.getElementById('sWrong').textContent = wrong;
+  document.getElementById('sRemain').textContent = Math.round(((total - answered) / total) * 100) + '%';
+  document.getElementById('progLabel').textContent = 'سؤال ' + (i + 1) + ' / ' + total;
+  document.getElementById('progFill').style.width = ((i + 1) / total * 100) + '%';
+  document.getElementById('prog-bar').style.width = ((i + 1) / total * 100) + '%';
+}
+
+/* RENDER QUESTION */
+function render() {
+  updateTop();
+  const q = questions[i];
+  document.getElementById('app').innerHTML = `
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">سؤال ${i + 1} / ${questions.length}</div>
+      </div>
+      <div class="q-text">${q.t}</div>
+      <div class="options">
+        ${q.o.map((o, idx) => `
+          <div class="opt" id="opt${idx}" onclick="choose(${idx})">
+            <div class="opt-letter">${LETTERS[idx] || idx + 1}</div>
+            ${o}
+          </div>
+        `).join('')}
+      </div>
+      <div class="nav-btns">
+        <button class="btn btn-skip" onclick="skip()"><i class="fa-solid fa-forward"></i> تخطي</button>
+      </div>
+    </div>`;
+}
+
+/* CHOOSE */
+function choose(v) {
+  if (answers[i] !== null) return;
+  answers[i] = v;
+  answered++;
+  const q = questions[i];
+  const ok = v === q.a;
+  ok ? correct++ : wrong++;
+  updateTop();
+
+  q.o.forEach((_, idx) => {
+    const el = document.getElementById('opt' + idx);
+    el.classList.add('disabled');
+    if (idx === q.a) el.classList.add('correct');
+    else if (idx === v) el.classList.add('wrong');
+  });
+
+  const fb = document.createElement('div');
+  fb.className = 'feedback-bar ' + (ok ? 'ok' : 'no');
+  fb.innerHTML = ok
+    ? `<span class="feedback-icon">🎉</span> <span>عسل ، اللهم بارك </span>`
+    : `<span class="feedback-icon">😔</span> <span>ركز يا شطور</span>`;
+
+  const card = document.querySelector('.q-card');
+  card.querySelector('.options').after(fb);
+  if (q.exp) {
+    const exp = document.createElement('div');
+    exp.className = 'explanation';
+    exp.style.display = 'block';
+    exp.innerHTML = '<b>💬 شرح:</b> ' + q.exp;
+    fb.after(exp);
+  }
+
+  const navBtns = card.querySelector('.nav-btns');
+  navBtns.innerHTML = `<button class="btn btn-next" onclick="next()">
+    ${i < questions.length - 1 ? '<i class="fa-solid fa-arrow-left"></i> السؤال التالي' : '<i class="fa-solid fa-flag-checkered"></i> إنهاء الامتحان'}
+  </button>`;
+}
+
+/* SKIP */
+function skip() {
+  if (answers[i] === null) { answers[i] = -1; answered++; wrongSet.push(questions[i]); wrong++; updateTop(); }
+  next();
+}
+
+/* NEXT */
+function next() {
+  if (i < questions.length - 1) { i++; render(); window.scrollTo({top: 0, behavior: 'smooth'}); }
+  else finish();
+}
+
+/* FINISH */
+function finish() {
+  clearInterval(timerInterval);
+  const total = questions.length;
+  const score = Math.round((correct / total) * 100);
+
+  questions.forEach((q, idx) => {
+    if (answers[idx] !== q.a) wrongSet.push({...q, myAns: answers[idx]});
+  });
+  wrongSet = [...new Map(wrongSet.map(q => [q.t, q])).values()];
+
+  let grade, gradeColor;
+  if (score >= 90) { grade = '🥇 ممتاز'; gradeColor = 'var(--success)'; }
+  else if (score >= 75) { grade = '🥈 جيد جداً'; gradeColor = 'var(--accent)'; }
+  else if (score >= 60) { grade = '🥉 جيد'; gradeColor = 'var(--warn)'; }
+  else { grade = '📚 راجع تاني'; gradeColor = 'var(--danger)'; }
+
+  const circ = 2 * Math.PI * 45;
+  const offset = circ - (score / 100) * circ;
+
+  const reportHTML = questions.map((q, idx) => {
+    const ok = answers[idx] === q.a;
+    return `<div class="report-item ${ok ? 'ok' : 'no'}">
+      <div class="ri-q">${ok ? '✅' : '❌'} ${q.t}</div>
+      ${!ok ? `
+        <div class="ri-row"><span class="ri-badge ri-yours">إجابتك</span> ${answers[idx] >= 0 ? q.o[answers[idx]] : 'تم التخطي'}</div>
+        <div class="ri-row"><span class="ri-badge ri-right">الصحيح</span> ${q.o[q.a]}</div>
+      ` : ''}
+    </div>`;
+  }).join('');
+
+  document.getElementById('prog-bar').style.width = '100%';
+  document.getElementById('app').innerHTML = `
+    <div class="result-hero">
+      <div class="score-ring">
+        <svg viewBox="0 0 110 110">
+          <circle class="ring-bg" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="0"/>
+          <circle class="ring-fill" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="${circ}"
+            style="stroke:${gradeColor}" id="ringFill"/>
+        </svg>
+        <div class="score-num">${score}</div>
+        <div class="score-pct">%</div>
+      </div>
+      <div class="result-grade" style="color:${gradeColor}">${grade}</div>
+      <div class="result-sub">أجبت على ${answered} من ${total} سؤال</div>
+      <div class="result-stats">
+        <div class="rs"><div class="n" style="color:var(--success)">${correct}</div><div class="l">صحيح</div></div>
+        <div class="rs"><div class="n" style="color:var(--danger)">${wrong}</div><div class="l">خطأ</div></div>
+        <div class="rs"><div class="n" style="color:var(--accent)">${total - answered < 0 ? 0 : total - answered}</div><div class="l">تخطي</div></div>
+      </div>
+    </div>
+
+    <div class="result-actions">
+      ${wrongSet.length ? `<button class="btn btn-retry" onclick="retryWrong()"><i class="fa-solid fa-rotate-right"></i> إعادة الخطأ (${wrongSet.length})
+
+</button>` : ''}
+      <button class="btn btn-home" onclick="init(QUESTIONS)"><i class="fa-solid fa-shuffle"></i> امتحان جديد عشوائي</button>
+      <a href="https://gaith-team.github.io/exam/" class="btn btn-home" style="text-decoration:none;"><i class="fa-solid fa-house"></i> رجوع للمادة</a>
+    </div>
+
+    <div style="margin-top:28px">
+      <div style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text2)">📋 تقرير مفصّل</div>
+      ${reportHTML}
+    </div>`;
+
+  setTimeout(() => { document.getElementById('ringFill').style.strokeDashoffset = offset; }, 100);
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+/* RETRY WRONG */
+function retryWrong() {
+  const pool = [...wrongSet];
+  questions = shuffle(pool); i = 0; correct = 0; wrong = 0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = []; answered = 0; timeLeft = totalTime;
+  startTimer(); render();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+/* THEME */
+const themeBtn = document.getElementById('themeBtn');
+let theme = localStorage.getItem('theme') || 'light';
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', t);
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+
+/* START */
+init(QUESTIONS);
+</script>
+</body>
+</html>
