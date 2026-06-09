@@ -1,0 +1,1290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --a1: #0f766e;
+  --a2: #14b8a6;
+  --a3: #99f6e4;
+  --a2l: #ccfbf1;
+  --ag: rgba(20,184,166,0.13);
+  --ags: rgba(20,184,166,0.26);
+  --bg:    #f0fdfa;
+  --bg2:   #ccfbf1;
+  --card:  #ffffff;
+  --text:  #134e4a;
+  --text2: #0f766e;
+  --text3: #5eead4;
+  --bdc:   rgba(20,184,166,0.20);
+  --bdcard:rgba(15,118,110,0.12);
+  --sh:    0 4px 18px rgba(15,118,110,0.09);
+  --shh:   0 8px 30px rgba(20,184,166,0.22);
+  --ok:    #15803d;
+  --err:   #b91c1c;
+  --warn:  #b45309;
+  --rad:   16px;
+  --tr:    all 0.28s cubic-bezier(.4,0,.2,1);
+}
+[data-theme="dark"] {
+  --bg:    #022c22; --bg2:   #064e3b; --card:  #065f46;
+  --text:  #d1fae5; --text2: #6ee7b7; --text3: #34d399;
+  --bdc:   rgba(52,211,153,0.22);
+  --bdcard:rgba(52,211,153,0.12);
+  --sh:    0 4px 20px rgba(0,0,0,0.45);
+  --shh:   0 8px 36px rgba(20,184,166,0.28);
+  --a1: #10b981; --a2: #34d399; --a2l: #064e3b; --a3: #6ee7b7;
+}
+
+body {
+  font-family:'Outfit',sans-serif;
+  background:var(--bg); color:var(--text);
+  min-height:100vh; overflow-x:hidden;
+  transition:background .4s,color .4s;
+}
+
+#prog-bar {
+  position:fixed;top:0;left:0;height:3px;z-index:999;
+  background:linear-gradient(90deg,var(--a1),var(--a2),var(--a3));
+  width:0%;transition:width .15s;
+}
+
+/* NAV */
+nav {
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 26px;height:62px;
+  background:rgba(240,253,250,.94);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--bdcard);transition:var(--tr);
+}
+[data-theme="dark"] nav { background:rgba(2,44,34,.96); }
+
+.nav-back {
+  display:flex;align-items:center;gap:6px;
+  color:var(--text2);text-decoration:none;font-size:13px;font-weight:700;
+  padding:6px 13px;border-radius:9px;
+  border:1px solid var(--bdcard);background:var(--card);
+  transition:var(--tr);
+}
+.nav-back:hover { color:var(--a2);border-color:var(--bdc); }
+
+.nav-brand { display:flex;align-items:center;gap:8px;font-size:15px;font-weight:900;color:var(--text); }
+.nav-logo {
+  width:34px;height:34px;border-radius:9px;
+  background:linear-gradient(135deg,var(--a1),var(--a2));
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:12px;font-weight:900;
+}
+.theme-btn {
+  width:37px;height:37px;border-radius:50%;
+  border:1px solid var(--bdcard);background:var(--card);
+  cursor:pointer;font-size:15px;
+  display:flex;align-items:center;justify-content:center;transition:var(--tr);
+}
+.theme-btn:hover { border-color:var(--a2);transform:rotate(22deg); }
+
+/* HERO */
+.hero {
+  margin-top:62px;
+  background:linear-gradient(135deg,var(--a1) 0%,var(--a2) 60%,#2dd4bf 100%);
+  padding:34px 22px 30px;text-align:center;position:relative;overflow:hidden;
+}
+.hero::before {
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 500px 180px at 50% 110%,rgba(255,255,255,.13) 0%,transparent 70%);
+}
+.hero-icon {
+  width:62px;height:62px;border-radius:18px;
+  background:rgba(255,255,255,.2);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;margin:0 auto 11px;
+  border:1.5px solid rgba(255,255,255,.35);
+}
+.hero h1 { font-size:clamp(17px,3.5vw,25px);font-weight:900;color:#fff;margin-bottom:4px; }
+.hero p  { font-size:13px;color:rgba(255,255,255,.82); }
+.hero-meta { display:flex;justify-content:center;gap:12px;margin-top:14px;flex-wrap:wrap; }
+.meta-pill {
+  background:rgba(255,255,255,.18);backdrop-filter:blur(5px);
+  border:1px solid rgba(255,255,255,.3);border-radius:50px;
+  padding:5px 13px;font-size:12px;font-weight:700;color:#fff;
+  display:flex;align-items:center;gap:5px;
+}
+
+/* TOPIC FILTER */
+.filter-wrap {
+  padding:14px 16px 2px;
+  display:flex;flex-wrap:wrap;gap:7px;
+  background:var(--card);border-bottom:1px solid var(--bdcard);
+}
+.filter-btn {
+  padding:5px 13px;border-radius:50px;
+  border:1.5px solid var(--bdcard);background:var(--bg);
+  font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;
+  color:var(--text2);cursor:pointer;transition:var(--tr);
+}
+.filter-btn:hover,
+.filter-btn.active {
+  background:var(--a2);color:#fff;border-color:var(--a2);
+  box-shadow:0 2px 10px var(--ag);
+}
+.filter-count {
+  padding:14px 16px 14px;
+  font-size:12px;color:var(--text2);font-weight:600;
+  background:var(--card);border-bottom:1px solid var(--bdcard);
+}
+
+/* SHELL */
+.shell { max-width:560px;margin:0 auto;padding:18px 16px 80px; }
+
+/* STATS */
+.stats-row { display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-bottom:13px; }
+.stat-box {
+  background:var(--card);border:1px solid var(--bdcard);
+  border-radius:var(--rad);padding:11px 7px;text-align:center;
+}
+.stat-box .val { font-size:20px;font-weight:900; }
+.stat-box .lbl { font-size:11px;color:var(--text3);margin-top:2px; }
+.c-ok   { color:var(--ok); }
+.c-err  { color:var(--err); }
+.c-acc  { color:var(--a1); }
+
+/* PROG STRIP */
+.prog-strip {
+  background:var(--card);border:1px solid var(--bdcard);
+  border-radius:var(--rad);padding:12px 15px;margin-bottom:15px;
+  display:flex;align-items:center;gap:11px;
+}
+.prog-label { font-size:13px;font-weight:700;color:var(--text2);white-space:nowrap; }
+.prog-track { flex:1;height:7px;background:var(--bg2);border-radius:7px;overflow:hidden; }
+.prog-fill {
+  height:100%;width:0%;
+  background:linear-gradient(90deg,var(--a1),var(--a2));
+  border-radius:7px;transition:width .4s;
+}
+.timer-badge {
+  min-width:60px;height:33px;border-radius:17px;
+  background:var(--bg2);border:1px solid var(--bdcard);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:900;color:var(--text);
+  gap:4px;padding:0 10px;flex-shrink:0;
+}
+.timer-badge.warn   { color:var(--warn);  border-color:rgba(180,83,9,.3);  background:rgba(180,83,9,.08); }
+.timer-badge.danger { color:var(--err);   border-color:rgba(185,28,28,.3); background:rgba(185,28,28,.08);animation:blink .8s infinite; }
+@keyframes blink { 0%,100%{opacity:1}50%{opacity:.45} }
+
+/* Q CARD */
+.q-card {
+  background:var(--card);border:1px solid var(--bdcard);
+  border-radius:20px;overflow:hidden;box-shadow:var(--sh);
+}
+.q-header {
+  background:linear-gradient(135deg,var(--a1),var(--a2));
+  padding:9px 17px;display:flex;align-items:center;gap:8px;
+}
+.q-num {
+  background:rgba(255,255,255,.22);border-radius:7px;
+  padding:3px 10px;font-size:11px;font-weight:700;color:#fff;
+}
+.q-topic {
+  margin-left:auto;background:rgba(255,255,255,.18);border-radius:50px;
+  padding:2px 10px;font-size:11px;font-weight:700;color:#fff;
+  border:1px solid rgba(255,255,255,.25);
+}
+.q-text {
+  padding:19px 17px 13px;font-size:15px;font-weight:700;color:var(--text);
+  line-height:1.65;border-bottom:1px solid var(--bdcard);
+}
+.options { padding:13px 17px 17px;display:flex;flex-direction:column;gap:9px; }
+
+.opt {
+  display:flex;align-items:center;gap:11px;
+  padding:12px 14px;border-radius:11px;
+  border:1.5px solid var(--bdcard);background:var(--bg);
+  cursor:pointer;font-size:14px;font-weight:600;color:var(--text);
+  transition:var(--tr);user-select:none;
+}
+.opt:hover:not(.disabled) {
+  border-color:var(--a2);background:var(--ag);
+  transform:translateX(3px);
+}
+.opt-letter {
+  width:28px;height:28px;border-radius:8px;flex-shrink:0;
+  background:var(--bg2);border:1px solid var(--bdcard);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:900;color:var(--text2);
+  transition:var(--tr);
+}
+.opt.correct { border-color:var(--ok);background:rgba(21,128,61,.08); }
+.opt.correct .opt-letter { background:var(--ok);color:#fff;border-color:var(--ok); }
+.opt.wrong   { border-color:var(--err);background:rgba(185,28,28,.07); }
+.opt.wrong   .opt-letter { background:var(--err);color:#fff;border-color:var(--err); }
+.opt.disabled { pointer-events:none; }
+
+/* FEEDBACK */
+.feedback-bar {
+  margin:11px 17px;padding:11px 14px;border-radius:11px;
+  display:flex;align-items:center;gap:9px;
+  font-size:14px;font-weight:700;
+  animation:popIn .38s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes popIn { from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1} }
+.feedback-bar.ok { background:rgba(21,128,61,.1);color:var(--ok);border:1px solid rgba(21,128,61,.25); }
+.feedback-bar.no { background:rgba(185,28,28,.08);color:var(--err);border:1px solid rgba(185,28,28,.2); }
+
+.explanation {
+  margin:0 17px 11px;padding:10px 13px;
+  background:rgba(20,184,166,.07);border-radius:9px;
+  border-left:3px solid var(--a2);
+  font-size:13px;color:var(--text2);line-height:1.6;
+}
+
+/* BUTTONS */
+.nav-btns { padding:4px 17px 17px;display:flex;gap:9px; }
+.btn {
+  flex:1;padding:12px;border:none;border-radius:11px;
+  font-size:14px;font-weight:900;cursor:pointer;
+  font-family:'Outfit',sans-serif;transition:var(--tr);
+  display:flex;align-items:center;justify-content:center;gap:7px;
+}
+.btn-next {
+  background:linear-gradient(135deg,var(--a1),var(--a2));
+  color:#fff;box-shadow:0 4px 14px var(--ag);
+}
+.btn-next:hover { transform:translateY(-2px);box-shadow:0 6px 20px var(--ags); }
+.btn-skip {
+  background:var(--bg2);color:var(--text2);
+  border:1px solid var(--bdcard);flex:0 0 auto;padding:12px 15px;
+}
+.btn-skip:hover { border-color:var(--warn);color:var(--warn); }
+
+/* RESULTS */
+.result-hero {
+  text-align:center;padding:30px 18px 22px;
+  background:var(--card);border-radius:20px;
+  border:1px solid var(--bdcard);margin-bottom:17px;
+}
+.score-ring {
+  width:108px;height:108px;border-radius:50%;margin:0 auto 15px;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;position:relative;
+}
+.score-ring svg { position:absolute;inset:-5px;width:calc(100% + 10px);height:calc(100% + 10px);transform:rotate(-90deg); }
+.score-ring circle { fill:none;stroke-width:5;stroke-linecap:round; }
+.ring-bg   { stroke:var(--bg2); }
+.ring-fill { stroke:var(--a2);transition:stroke-dashoffset 1s ease; }
+.score-num { font-size:28px;font-weight:900;color:var(--text); }
+.score-pct { font-size:12px;color:var(--text3); }
+.result-grade { font-size:20px;font-weight:900;margin-bottom:4px; }
+.result-sub   { font-size:13px;color:var(--text2); }
+.result-stats { display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:17px; }
+.rs { background:var(--bg2);border-radius:10px;padding:10px 7px;text-align:center; }
+.rs .n { font-size:20px;font-weight:900; }
+.rs .l { font-size:11px;color:var(--text3); }
+
+/* REPORT */
+.report-item {
+  background:var(--card);border:1px solid var(--bdcard);
+  border-radius:12px;padding:14px;margin-bottom:8px;
+  border-left:4px solid var(--bdcard);
+}
+.report-item.ok { border-left-color:var(--ok); }
+.report-item.no { border-left-color:var(--err); }
+.report-item .ri-q { font-size:13px;font-weight:700;margin-bottom:6px; }
+.report-item .ri-row { display:flex;align-items:center;gap:7px;font-size:12px;margin-top:4px;color:var(--text2); }
+.ri-badge { padding:2px 8px;border-radius:6px;font-weight:700;font-size:11px;flex-shrink:0; }
+.ri-yours { background:rgba(185,28,28,.1);color:var(--err); }
+.ri-right { background:rgba(21,128,61,.1);color:var(--ok); }
+
+.result-actions { display:flex;flex-direction:column;gap:9px;margin-top:17px; }
+.btn-retry { background:linear-gradient(135deg,var(--a1),var(--a2));color:#fff; }
+.btn-retry:hover { transform:translateY(-2px);box-shadow:0 6px 20px var(--ags); }
+.btn-home  { background:var(--bg2);color:var(--text);border:1px solid var(--bdcard); }
+.btn-home:hover { border-color:var(--a2);color:var(--a1); }
+
+/* FOOTER */
+footer {
+  background:var(--bg2);border-top:1px solid var(--bdcard);
+  padding:20px 22px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:9px;
+}
+.footer-brand { font-size:14px;font-weight:700; }
+.footer-brand span { color:var(--a1); }
+.footer-tg {
+  display:flex;align-items:center;gap:5px;
+  text-decoration:none;color:#229ED9;font-size:12px;font-weight:600;
+}
+
+/* EMPTY STATE */
+.empty-state {
+  text-align:center;padding:50px 20px;
+  background:var(--card);border-radius:20px;border:1px solid var(--bdcard);
+}
+.empty-state .ei { font-size:40px;margin-bottom:12px; }
+.empty-state h3 { font-size:17px;font-weight:700;margin-bottom:7px; }
+.empty-state p { font-size:13px;color:var(--text2); }
+
+@media (max-width:480px) {
+  nav { padding:0 13px; }
+  .shell { padding:13px 11px 60px; }
+  .nav-brand span { display:none; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog-bar"></div>
+
+<nav>
+  <a href="https://gaith-team.github.io/exam/" class="nav-back"><i class="fa-solid fa-arrow-left"></i> Back</a>
+  <div class="nav-brand">
+    <div class="nav-logo">GT</div>
+    <span>GHAITH TEAM</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-icon">🌿</div>
+  <h1>Family health </h1>
+  <p>Community Health Nursing</p>
+  <div class="hero-meta">
+    <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">-- Questions</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-clock"></i> <span id="timeBadge">60 Min</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-shuffle"></i> Shuffled</div>
+  </div>
+</div>
+
+<!-- Topic filter bar (shown only if topics exist) -->
+<div id="filterWrap" class="filter-wrap" style="display:none;"></div>
+<div id="filterCount" class="filter-count" style="display:none;"></div>
+
+<div class="shell">
+  <div class="stats-row">
+    <div class="stat-box"><div class="val c-ok"  id="sCorrect">0</div><div class="lbl">✔ Correct</div></div>
+    <div class="stat-box"><div class="val c-err"  id="sWrong">0</div><div class="lbl">✖ Wrong</div></div>
+    <div class="stat-box"><div class="val c-acc"  id="sRemain">100%</div><div class="lbl">⏳ Remaining</div></div>
+  </div>
+
+  <div class="prog-strip">
+    <div class="prog-label" id="progLabel">Q 1</div>
+    <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+    <div class="timer-badge" id="timerBadge"><i class="fa-regular fa-clock"></i><span id="timerTxt">60:00</span></div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<footer>
+  <div class="footer-brand">GAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg">
+    <i class="fa-brands fa-telegram"></i> @nursing2bu
+  </a>
+</footer>
+
+<script>
+let QUESTIONS = [
+{t:"A family is best defined as:",
+ o:["Only individuals related by blood living in the same house",
+    "Two or more individuals who depend on one another for emotional, physical, and financial support",
+    "Only a mother, father, and their biological children",
+    "Any group of people sharing the same workplace"],
+ a:1, d:"easy",
+ exp:"A family is defined as two or more individuals who depend on one another for emotional, physical, and financial support. They may be related by blood, marriage, adoption, or mutual agreement."},
+
+{t:"Which of the following is the CORRECT definition of family health?",
+ o:["Absence of disease in all family members simultaneously",
+    "The continuing ability to meet defined functions in interaction with other social, political, economic and health systems",
+    "The physical fitness level of the family breadwinner",
+    "The family's financial capacity to pay for health care"],
+ a:1, d:"easy",
+ exp:"Family health is the continuing ability to meet defined functions in interaction with other social, political, economic, and health systems."},
+
+{t:"A nuclear family consists of:",
+ o:["Three generations living together with grandparents, aunts, and uncles",
+    "A father and a mother with their child or children",
+    "One adult with children only",
+    "Two adults without any children"],
+ a:1, d:"easy",
+ exp:"A nuclear family consists of a father and a mother with their child(ren)."},
+
+{t:"An extended family is defined as:",
+ o:["A father and mother with children only",
+    "Three generations living together including married brothers and sisters, grandparents, aunts, uncles, and cousins",
+    "One man with several spouses",
+    "A husband and wife alone without children"],
+ a:1, d:"easy",
+ exp:"An extended family consists of three generations living together, including married brothers and sisters, grandparents, aunts, uncles, and cousins."},
+
+{t:"A single-parent family consists of:",
+ o:["A husband and wife alone without children",
+    "Three generations living together",
+    "An adult female or male with children",
+    "Two families combined with children from both"],
+ a:2, d:"easy",
+ exp:"A single-parent family consists of an adult female or male and children."},
+
+{t:"A dyad family refers to:",
+ o:["A father, mother, and children",
+    "Husband and wife alone without children",
+    "Three generations living together",
+    "One man with several spouses"],
+ a:1, d:"easy",
+ exp:"A dyad family consists of a husband and wife alone without children."},
+
+{t:"A blended family is best described as:",
+ o:["A single adult living alone",
+    "Two adults, at least one of whom has remarried following divorce or death",
+    "A combination of two families with children from one or both families and possibly children from the newly married couple",
+    "One man with several spouses"],
+ a:2, d:"easy",
+ exp:"A blended family is a combination of two families with children from one or both families and possibly children from the newly married couple."},
+
+{t:"A compound family is defined as:",
+ o:["Two adults with children from previous marriages",
+    "One man with several spouses",
+    "A single adult living alone",
+    "A husband and wife with adopted children only"],
+ a:1, d:"easy",
+ exp:"A compound family consists of one man with several spouses."},
+
+{t:"The therapeutic role in a family refers to:",
+ o:["Providing financial resources for the family",
+    "Maintaining the cleanliness of the home",
+    "Assisting family members to cope with problems by providing emotional support",
+    "Participating in recreational activities together"],
+ a:2, d:"easy",
+ exp:"The therapeutic role involves assisting family members to cope with problems, such as providing emotional support."},
+
+{t:"Which of the following is a BIOLOGICAL function of the family?",
+ o:["Emotional security of members","Transfer of cultural values",
+    "Reproduction, child-bearing, and nutrition of family members",
+    "Acquisition of economic resources"],
+ a:2, d:"easy",
+ exp:"Biological functions include reproduction, child-bearing, rearing of children, nutrition of family members, production of health at all ages, and recreation."},
+
+{t:"Which of the following is a PSYCHOLOGICAL function of the family?",
+ o:["Reproduction and child-bearing",
+    "Emotional security and sense of identity for family members",
+    "Transfer of cultural values and traditions",
+    "Acquisition and distribution of economic resources"],
+ a:1, d:"easy",
+ exp:"Psychological functions include emotional security, sense of identity, maturation of personality, psychological protection, and ability to make relationships outside the family."},
+
+{t:"Which of the following is a SOCIO-CULTURAL function of the family?",
+ o:["Emotional security of members",
+    "Acquisition of economic resources",
+    "Transfer of values related to behaviors, traditions, language, and morals, and socialization of children",
+    "Physical protection and nutrition"],
+ a:2, d:"easy",
+ exp:"Socio-cultural functions include transfer of values (behaviors, traditions, language, morals), socialization of children, and formulation of behaviors for all stages of development."},
+
+{t:"Which is an ECONOMIC function of the family?",
+ o:["Emotional security and maturation of personality",
+    "Socialization of children and transfer of cultural values",
+    "Acquisition of resources, distribution of expenditures, savings, and economic buffering of members",
+    "Reproduction and child-rearing"],
+ a:2, d:"easy",
+ exp:"Economic functions include acquisition of resources to fulfill other functions, distribution of resources (expenditure, savings), and economic buffering of family members."},
+
+{t:"Which of the following is a characteristic of a healthy family?",
+ o:["Family members never experience any conflicts",
+    "They actively attempt to cope with problems and establish regular links with the broader community",
+    "They avoid all external social interactions",
+    "All decisions are made by a single dominant member"],
+ a:1, d:"easy",
+ exp:"Characteristics of healthy families include: facilitative interactions, enhancement of individual development, effective relationships, active coping with problems, healthy home environment, and regular links with the broader community."},
+
+{t:"A family health assessment includes which of the following components?",
+ o:["Only the physical health status of the family breadwinner",
+    "Family demographics, physical environment, psychological environment, family structure and roles, functions, values, communication patterns, and coping patterns",
+    "Only the medical diagnosis of sick family members",
+    "Only the financial records of the family"],
+ a:1, d:"easy",
+ exp:"Family health assessment includes: demographics, physical environment, psychological/spiritual environment, family structure and roles, functions, values and beliefs, communication patterns, decision-making, problem-solving, coping patterns, health behaviors, and social/cultural patterns."},
+
+{t:"Family dynamics refer to:",
+ o:["The legal structure of the family",
+    "How to keep family relationships peaceful and harmonious, reflecting and influencing the physical, mental, and spiritual health of family members",
+    "The financial management of family resources",
+    "The number of members in a family"],
+ a:1, d:"easy",
+ exp:"Family dynamics reflect and influence the physical, mental, and spiritual health of individuals in a family, and mean how to keep family relationships peaceful and harmonious even through troubled times."},
+
+{t:"The 'provider role' in a family refers to:",
+ o:["Providing emotional support to family members",
+    "Providing financial and material resources for the family",
+    "Caring for sick family members",
+    "Participating in recreational activities"],
+ a:1, d:"easy",
+ exp:"The provider role is one of the family adult roles, referring to providing financial and material resources necessary for the family's functioning."},
+
+{t:"The kinship role in a family involves:",
+ o:["Only child care responsibilities",
+    "Maintaining relationships and obligations with extended family and social networks",
+    "Providing economic resources",
+    "Teaching children academic subjects"],
+ a:1, d:"easy",
+ exp:"The kinship role involves maintaining family relationships and social obligations with extended family, relatives, and social networks."},
+
+/* ── MEDIUM 19-40 ── */
+{t:"Which type of family is composed of two adults, at least one of whom has remarried following divorce or death of a spouse?",
+ o:["Blended family","Extended family","Step-family","Compound family"],
+ a:2, d:"medium",
+ exp:"Step-families are composed of two adults, at least one of whom has remarried following divorce or death of a spouse. Step-families can include children from previous relationships."},
+
+{t:"The first health task of the family is:",
+ o:["Providing nursing care to sick members",
+    "Recognizing interruptions of health development — monitoring illness or failure to thrive to facilitate healthful development",
+    "Making decisions for seeking health care",
+    "Maintaining a healthy home environment"],
+ a:1, d:"medium",
+ exp:"The first health task is recognizing interruptions of health development. The family monitors illness or failure to thrive, and this recognition will facilitate healthful development."},
+
+{t:"The family health task of 'making decisions for seeking health care' means:",
+ o:["The nurse makes all health decisions for the family",
+    "The family is usually the first to recognize deviation from normal health and must decide when to utilize the health care system",
+    "Decisions are made only by the family physician",
+    "Health decisions are made exclusively by government agencies"],
+ a:1, d:"medium",
+ exp:"The family is usually the first to recognize any deviation from normal health. When necessary, family members must make decisions about utilizing the health care system."},
+
+{t:"Which family health task addresses severe illness, death, childbearing, and hospitalization?",
+ o:["Recognizing interruptions of health development",
+    "Making decisions for seeking health care",
+    "Dealing with health crises",
+    "Providing nursing care to sick members"],
+ a:2, d:"medium",
+ exp:"The task of 'dealing with health crises' addresses that crisis is inevitable in any family. Severe illness, death, childbearing, and hospitalization are crisis situations that affect family health."},
+
+{t:"Environmental factors influencing family health include:",
+ o:["Family's emotional security and sense of identity",
+    "Climate, water supply, air, biological environment (animals, living things), and man-made physical environment (buildings, noise, sewage)",
+    "Cultural patterns and religious beliefs",
+    "Economic status and social class"],
+ a:1, d:"medium",
+ exp:"Environmental factors include: climate/water supply/air, biological environment (animals and all living things), and man-made physical environment (buildings, noise, space, sewage disposal)."},
+
+{t:"Which factor influencing family health includes genetic, prenatal, nutritional, physical, and mental characteristics?",
+ o:["Environmental factors","Cultural patterns",
+    "Biological characteristics of each family member",
+    "Economic status factors"],
+ a:2, d:"medium",
+ exp:"Family factors influencing health include biological characteristics of each member: genetic, prenatal, nutritional, physical, and mental health."},
+
+{t:"The 'latch-key' practice in child-rearing refers to:",
+ o:["A method of child discipline",
+    "Children being responsible for their own care and supervision after school because parents need two incomes",
+    "Extended family members caring for children",
+    "Children attending after-school enrichment programs"],
+ a:1, d:"medium",
+ exp:"The need for two incomes has created the 'latch-key' practice, in which children are responsible for their own care and supervision after school."},
+
+{t:"How do previous life experiences affect family functioning?",
+ o:["They have no impact on current family functioning",
+    "Children learn about relationships almost exclusively from parents and early family life, carrying beliefs about relationships, decision-making, roles, child-rearing, and affection into their own future families",
+    "Previous experiences only affect the oldest family member",
+    "Only traumatic experiences affect family functioning"],
+ a:1, d:"medium",
+ exp:"Previous life experience greatly affects family functioning. Children learn about relationships from parents and carry beliefs about relationships, decisions, roles, child-rearing, resource use, and showing affection into their future families."},
+
+{t:"An example of how acute or chronic illness affects family functioning is:",
+ o:["It has no impact on family roles",
+    "In a family with a seriously ill father, the mother may become the primary economic provider and a child may provide care and nurturing for the father at home",
+    "Only the ill member is affected",
+    "Illness always strengthens family relationships without any negative impact"],
+ a:1, d:"medium",
+ exp:"Acute or chronic illness may alter roles and relationships. For example, with a seriously ill father, the mother may become the primary economic provider and a child may provide care and nurturing for the father."},
+
+{t:"The advantage of family-based care that involves 'overlapping of services and deficient services can be avoided' refers to:",
+ o:["Providing the same service multiple times is beneficial",
+    "Coordinated family-based care prevents duplication and gaps in health services",
+    "Overlapping services improve health outcomes",
+    "Multiple providers seeing the same patient is recommended"],
+ a:1, d:"medium",
+ exp:"One advantage of family care is that overlapping of services and deficient services can be avoided through coordinated, family-based care planning."},
+
+{t:"Cultural factors affecting family coping patterns include:",
+ o:["Only the family's income level",
+    "Ethnic patterns, language, food customs, communication patterns, role expectations, health care beliefs, childbearing practices, extended family support, and religious beliefs",
+    "Only the family's geographic location",
+    "Only the parents' educational level"],
+ a:1, d:"medium",
+ exp:"Socio-cultural dimensions include: ethnic patterns, language, food customs, communication patterns, role expectations, health care beliefs, childbearing practices, extended family support, and religious beliefs and practices."},
+
+{t:"The FIRST step in the nurse's role in family care is:",
+ o:["Treatment planning","Implementation of nursing plans",
+    "Collection of a family nursing database focused on both problem areas and strengths",
+    "Evaluation of family responses"],
+ a:2, d:"medium",
+ exp:"The first step in the nurse's role is collection of a family nursing database (general or focused), focusing on both identification of problem areas AND strengths of the family."},
+
+{t:"In step 2 of the family nursing process, the nurse performs diagnostic reasoning which involves:",
+ o:["Only collecting more data",
+    "Making clinical judgments about problems that need nursing intervention, referral to other professionals, or areas where the family is adapting successfully on its own",
+    "Only implementing the treatment plan",
+    "Only evaluating outcomes"],
+ a:1, d:"medium",
+ exp:"Diagnostic reasoning involves: judging which problems need nursing intervention, which need referral to other professionals, and areas where the family is successfully adapting on its own without intervention."},
+
+{t:"The nursing prognosis in family nursing (Step 3) is:",
+ o:["A list of nursing diagnoses only",
+    "A nursing judgment based on holistic view of the family that predicts the probability of the family's ability to respond to the current situation",
+    "A financial assessment of family resources",
+    "A medical diagnosis made by the physician"],
+ a:1, d:"medium",
+ exp:"The nursing prognosis is a nursing judgment, based on the holistic view of the family and its members, that predicts the probability of the family's ability to respond to the current situation."},
+
+{t:"Step 4 of the family nursing process (treatment planning) involves:",
+ o:["Only the nurse designing the plan without family input",
+    "The nurse and family working in partnership to design and contract for a plan of action based on identified family strengths",
+    "Immediate implementation without assessment",
+    "Only referral to hospital services"],
+ a:1, d:"medium",
+ exp:"Treatment planning (Step 4) involves the nurse and family working in PARTNERSHIP to design and contract for a plan of action based on identified family strengths."},
+
+{t:"The evaluation phase in family nursing (Step 6) is based on:",
+ o:["The effectiveness of the nurse's interventions only",
+    "Family outcomes, not on the effectiveness of the interventions; modifications occur as necessary based on ongoing evaluation",
+    "The number of visits made to the family",
+    "The nurse's subjective assessment only"],
+ a:1, d:"medium",
+ exp:"Evaluation is based on FAMILY OUTCOMES, not on the effectiveness of the interventions. Modification of family nursing diagnoses and plans occurs as necessary based on ongoing evaluation."},
+
+{t:"Guidelines for conducting a family health assessment include:",
+ o:["Focus only on individual sick members, collect data in one visit only",
+    "Focus on the family as a total unit, ask goal-directed questions, collect data over time, and combine quantitative and qualitative data",
+    "Rely only on laboratory tests for assessment",
+    "Assess only the financial status of the family"],
+ a:1, d:"medium",
+ exp:"Guidelines include: focus on the family as a total unit, ask goal-directed questions, collect data over time (not just one visit), and combine quantitative and qualitative data."},
+
+{t:"Social class, race, ethnicity, and age have implications for family role performance because:",
+ o:["They have no impact on family roles",
+    "They influence role conception and performance — e.g., among poor populations, married women may have few rights but demanding domestic and economic obligations",
+    "Only age affects role performance",
+    "Social class affects only economic functions, not roles"],
+ a:1, d:"medium",
+ exp:"Social class, race, ethnicity, and age have significant implications for role conception and performance. For example, among poor populations, married women with husbands present often have few rights but demanding domestic and economic obligations."},
+
+{t:"Economic constraints in families can create problems when:",
+ o:["The family has more than sufficient income",
+    "Families have marginal incomes, experience divorce, employment changes, or shift from two to one wage-earner, creating lifestyle maintenance difficulties and potential resentment",
+    "Extended family support is readily available",
+    "All family members are employed full-time"],
+ a:1, d:"medium",
+ exp:"Economic constraints create problems in maintaining a family's lifestyle after divorce, employment changes, or shifting from two to one wage-earner. Resentment toward society or family members may arise."},
+
+{t:"Family mobility can affect family health and relationships by:",
+ o:["Always improving family health through new experiences",
+    "Changing support systems and friendships when parents move from job to job and children move from school to school, increasing parental strain especially without extended family support",
+    "Having no impact on family relationships",
+    "Only affecting the children but not the parents"],
+ a:1, d:"medium",
+ exp:"Family mobility affects relationships as parents change jobs and children change schools. Support systems and friendships change. Lack of extended family support due to geographic distance increases strain on parents."},
+
+{t:"The educational function of the family involves:",
+ o:["Formal schooling of children in academic institutions",
+    "Preparation for adult roles and fulfillment of adult roles",
+    "Acquisition and distribution of economic resources",
+    "Emotional security and sense of identity"],
+ a:1, d:"medium",
+ exp:"The educational function of the family includes preparation for adult roles and fulfillment of adult roles."},
+
+/* ── HARD 41-55 ── */
+{t:"The family nursing diagnosis in Step 2 is specifically important because:",
+ o:["It is the same as a medical diagnosis",
+    "It provides direction for the collaboration of the nurse and the family in designing a plan of action, and specifies problems requiring nursing intervention",
+    "It is used only for documentation purposes without influencing care",
+    "It replaces the need for further data collection"],
+ a:1, d:"hard",
+ exp:"The family nursing diagnosis provides direction for collaboration between nurse and family in designing a plan of action. It specifically states problems that can be solved by nursing intervention."},
+
+{t:"Which statement BEST describes the difference between Step 5 (implementation) and Step 6 (evaluation) in family nursing?",
+ o:["Implementation and evaluation are the same step",
+    "Implementation involves carrying out family-negotiated plans by identified family members or providers; evaluation assesses family responses and outcomes, modifying diagnoses and plans as needed",
+    "Evaluation occurs before implementation",
+    "Implementation is done only by nurses, and evaluation only by physicians"],
+ a:1, d:"hard",
+ exp:"Implementation (Step 5): specific family and nursing interventions carried out to achieve agreed goals. Evaluation (Step 6): assesses family/member responses and outcomes, modifying diagnoses and plans based on ongoing evaluation."},
+
+{t:"The termination of the nurse-family partnership (Step 7) is:",
+ o:["Done abruptly when the nurse decides care is complete",
+    "Included in the plan of action and implemented based on evaluation outcomes",
+    "Decided by the hospital administrator",
+    "Never appropriate as families always need nursing support"],
+ a:1, d:"hard",
+ exp:"Termination of the nurse-family partnership is included in the plan of action and implemented based on the evaluation. It is a planned, collaborative process."},
+
+{t:"The extended family is described as 'essential as a support system' particularly because:",
+ o:["It replaces the need for professional health services",
+    "It provides critical support when stressors such as illness occur, especially in cultures where the extended family is valued and childbearing is a group endeavor",
+    "It is legally required in all cultures",
+    "It reduces the need for community health services"],
+ a:1, d:"hard",
+ exp:"The extended family is valued in many cultures where childbearing is a group endeavor. The extended family is essential as a support system to help families cope when stressors such as illness occur."},
+
+{t:"The concept that the family 'reflects the culture, values, and health status of a community' is significant for community health nursing because:",
+ o:["It means nurses should focus only on individual patients",
+    "It means improving family health directly impacts community health; family-focused nursing addresses broader community health needs",
+    "Cultural values are irrelevant to health care planning",
+    "It means all families in a community have identical health needs"],
+ a:1, d:"hard",
+ exp:"The family reflects the culture, values, and health status of the community. Therefore, family-focused nursing care provides a broader community health impact, justifying a family-focused rather than individual-focused approach."},
+
+{t:"When a community health nurse finds that a single-parent family has limited psychological and economic resources, which factor is MOST likely affecting their coping ability?",
+ o:["Only cultural beliefs","Only lifestyle choices",
+    "Economic constraints limiting support, combined with limited psychological resources, making single-parent family functioning difficult",
+    "Only previous life experiences"],
+ a:2, d:"hard",
+ exp:"Functioning in single-parent families is difficult when they have limited support, without both psychological and economic resources. Economic constraints interact with psychological factors to impact coping."},
+
+{t:"The nurse notices that data collected from a family visit shows poor communication patterns between parents and children, high stress due to father's chronic illness, altered roles, and limited economic resources. Which step of the family nursing process should the nurse perform NEXT?",
+ o:["Immediately implement a treatment plan",
+    "Perform diagnostic reasoning to generate specific family nursing diagnoses identifying problems requiring nursing intervention, referral, or areas of successful adaptation",
+    "Terminate the nurse-family partnership",
+    "Only collect more data without any analysis"],
+ a:1, d:"hard",
+ exp:"After data collection (Step 1), the nurse performs diagnostic reasoning (Step 2) to make clinical judgments about which problems need nursing intervention, referral, or successful self-adaptation by the family."},
+
+{t:"The family's ability to cope with stress is influenced by which combination of factors according to the lecture?",
+ o:["Only the family's income level",
+    "Cultural beliefs, economic status, lifestyle, previous life experience, and external stressors such as illness of a family member",
+    "Only the parents' educational level",
+    "Only the number of family members"],
+ a:1, d:"hard",
+ exp:"Factors affecting family coping include: cultural beliefs, economic status, lifestyle, previous life experience, and external stressors such as illness of a family member."},
+
+{t:"Why is it an ADVANTAGE of family care that 'all family members can assist in preparing a health care plan for a member requiring special services'?",
+ o:["Because family members have professional medical training",
+    "Because family involvement promotes shared responsibility, self-reliance, better understanding of needs, and improves adherence to the health care plan",
+    "Because it reduces the nurse's workload completely",
+    "Because family members can replace professional nurses"],
+ a:1, d:"hard",
+ exp:"Family involvement in care planning promotes shared responsibility and self-reliance, helps the family understand the needs of the sick member, and improves adherence. It also helps the family be self-reliant in meeting its members' needs."},
+
+{t:"The upper-class wife's family role differs from the poor married woman's role in that:",
+ o:["Upper-class wives have more domestic obligations than poor wives",
+    "The upper-class wife usually has great freedom and serves as manager for employed domestic assistants, while poor married women have few rights but demanding domestic and economic obligations",
+    "Social class has no impact on family roles",
+    "Both have equal rights and obligations regardless of social class"],
+ a:1, d:"hard",
+ exp:"Among poor populations, married women with husbands present usually have few rights but demanding domestic and economic obligations. Upper-class wives usually have great freedom and serve as managers for employed domestic assistants."},
+
+{t:"The predictive nursing prognosis statement in family nursing outlines:",
+ o:["A definitive medical diagnosis","The most successful course of action on which to focus the nursing intervention",
+    "A financial plan for family care","Only the family's past health history"],
+ a:1, d:"hard",
+ exp:"The predictive/prognosis statement outlines the most successful course of action on which to focus the nursing intervention, based on a holistic view of the family."},
+
+{t:"A family that has grown positively as the result of a health crisis demonstrates which characteristic?",
+ o:["Complete avoidance of all future stressors",
+    "Active coping ability — some families have the ability to grow as the result of a crisis, developing stronger coping mechanisms",
+    "That they never experienced real stress",
+    "That professional help was not needed"],
+ a:1, d:"hard",
+ exp:"Some families have the ability to grow as the result of a crisis, while others experience dysfunction. This demonstrates the variation in family coping and stress tolerance abilities."},
+
+{t:"In the family health assessment, combining quantitative and qualitative data means:",
+ o:["Using only numerical lab results for assessment",
+    "Integrating measurable data (like vital signs and lab results) with descriptive data (like observations of family interactions and communication patterns) for a comprehensive assessment",
+    "Assessing only what can be measured numerically",
+    "Focusing only on the family's subjective reports"],
+ a:1, d:"hard",
+ exp:"Guidelines for family assessment include combining BOTH quantitative data (measurable, numerical) AND qualitative data (descriptive observations of family interactions, communication, and behaviors) for a comprehensive assessment."},
+
+{t:"Which step of the family nursing process addresses areas where the family is 'successfully adapting on its own without intervention'?",
+ o:["Step 1: Data collection","Step 4: Treatment planning",
+    "Step 2: Diagnostic reasoning — which identifies problems needing intervention, those needing referral, AND areas of successful self-adaptation",
+    "Step 6: Evaluation"],
+ a:2, d:"hard",
+ exp:"In diagnostic reasoning (Step 2), nurses make clinical judgments about which problems need nursing intervention, which need referral to other professionals, AND areas of concern to which the family is successfully adapting on its own without intervention."},
+
+{t:"The nurse-family partnership in treatment planning (Step 4) is based on identified family STRENGTHS rather than only deficits. This approach is significant because:",
+ o:["It means nurses ignore family problems",
+    "Building on family strengths promotes self-reliance, empowers the family, and makes the care plan more realistic and achievable — the goal is for the family to successfully manage its own health care concerns",
+    "It means the nurse does not need to assess family problems",
+    "It is only relevant for wealthy families with many resources"],
+ a:1, d:"hard",
+ exp:"Treatment planning is based on identified family STRENGTHS. The nurse and family work in partnership to design a plan. The goal is for the family to successfully manage its health care concerns — promoting self-reliance and empowerment."},
+
+{t:" A community health nurse is visiting a household consisting of a grandfather, grandmother, their son, his wife, and three children all living together. Which type of family does this represent?",
+ o:["Nuclear family","Single-parent family","Extended family — three generations living together","Blended family"],
+ a:2, d:"easy",
+ exp:"An extended family consists of three generations living together, including grandparents and their children's families with grandchildren."},
+
+{t:" A 35-year-old mother is raising her two children alone following her divorce. She works two jobs and struggles financially to meet the family's needs. Which type of family is this, and which factor is MOST affecting their coping?",
+ o:["Extended family; cultural factors are most affecting coping",
+    "Single-parent family; economic constraints are most affecting their coping ability",
+    "Nuclear family; lifestyle choices are most affecting coping",
+    "Blended family; previous life experience is most affecting coping"],
+ a:1, d:"medium",
+ exp:"This is a single-parent family. Economic constraints are most affecting their coping — functioning in single-parent families is difficult when they have limited support without psychological and economic resources."},
+
+{t:" A community health nurse visits a family where the father has been recently diagnosed with a serious heart condition. The mother has taken on a second job to provide financially, and the teenage son now helps care for his father at home. Which health task is this family performing?",
+ o:["Recognizing interruptions of health development",
+    "Maintaining a healthy home environment",
+    "Dealing with a health crisis and providing nursing care to a sick/dependent family member",
+    "Making decisions for seeking health care"],
+ a:2, d:"medium",
+ exp:"The family is dealing with a health crisis (severe illness) and providing nursing care to a sick member. Role alterations have occurred — mother as economic provider, son as caregiver — demonstrating family crisis response."},
+
+{t:" During a family assessment visit, a nurse observes that a family rarely communicates openly, decisions are made by one dominant parent, and children show signs of low self-esteem. Which components of the family health assessment should the nurse FOCUS on?",
+ o:["Only physical environment and demographics",
+    "Family communication patterns, decision-making patterns, psychological environment, and family structure and roles",
+    "Only the family's economic status",
+    "Only the family's cultural and religious beliefs"],
+ a:1, d:"medium",
+ exp:"The observations indicate issues with communication patterns, decision-making patterns, psychological environment, and family structure and roles — all key components of the family health assessment."},
+
+{t:" A community health nurse collects the following data from a family: 5 members, 3 rooms, no piped water, uses pit latrine, father smokes, mother has hypertension. The nurse then analyzes this data to identify family nursing problems. Which step is the nurse performing?",
+ o:["Step 4: Treatment planning","Step 6: Evaluation",
+    "Step 1 and 2: Data collection followed by diagnostic reasoning to generate family nursing diagnoses",
+    "Step 5: Implementation"],
+ a:2, d:"medium",
+ exp:"The nurse is performing Step 1 (collecting a family nursing database) and then Step 2 (diagnostic reasoning and generating specific family nursing diagnoses based on the collected data)."},
+
+{t:" A nurse working with a family whose mother has chronic diabetes develops a care plan jointly with the family, assigning specific responsibilities to family members based on their identified strengths (e.g., the eldest daughter can monitor blood glucose). This represents:",
+ o:["Step 2: Diagnostic reasoning","Step 3: Nursing prognosis",
+    "Step 4: Treatment planning based on family nursing diagnosis, prognosis, and family strengths, with nurse-family partnership",
+    "Step 6: Evaluation"],
+ a:2, d:"medium",
+ exp:"This is Step 4: treatment planning. The nurse and family work in partnership to design a plan of action based on identified family strengths, with the goal of the family successfully managing its health care concerns."},
+
+{t:" A family recently relocated from a rural village to a large city for employment. Both parents work long hours, the children have no nearby relatives, and the family struggles to adapt. Which factor is MOST affecting this family's coping?",
+ o:["Cultural beliefs and religious practices",
+    "Lifestyle factors — mobility affecting relationships, loss of support systems/friendships, and lack of extended family support due to geographic distance",
+    "Only previous life experiences",
+    "Only economic factors"],
+ a:1, d:"medium",
+ exp:"Family mobility affects relationships as parents move for jobs and children change schools. Lack of extended family support due to geographic distance can increase strain on parents after relocation."},
+
+{t:" A community health nurse evaluates the outcomes of a care plan implemented for a family with a chronically ill child. She finds that family stress has decreased, the mother has learned proper medication administration, and the child's condition is stable. However, the nurse notes that communication between spouses remains poor. She modifies the family nursing diagnosis accordingly. Which step is being performed?",
+ o:["Step 1: Data collection","Step 4: Treatment planning",
+    "Step 5: Implementation",
+    "Step 6: Evaluation with modification of family nursing diagnosis and plans based on ongoing evaluation"],
+ a:3, d:"hard",
+ exp:"This is Step 6: evaluation. The evaluation is based on family outcomes, not intervention effectiveness. Since communication problems remain, modification of the family nursing diagnosis and plan is made based on ongoing evaluation."},
+
+{t:" A nurse completes a successful series of home visits with a family. The family has achieved their health goals — the mother's hypertension is controlled, children are fully vaccinated, and the family demonstrates healthy coping mechanisms. The nurse and family mutually agree to end the professional relationship. This represents:",
+ o:["Step 5: Implementation","Step 4: Treatment planning",
+    "Step 7: Termination of the nurse-family partnership — included in the plan and implemented based on evaluation",
+    "Step 2: Diagnostic reasoning"],
+ a:2, d:"hard",
+ exp:"Step 7 is termination of the nurse-family partnership. It is included in the plan of action and implemented based on evaluation outcomes, indicating a planned and mutual conclusion to the professional relationship."},
+
+{t:" A family from a culture where the extended family is very involved in health decisions and childbearing is considered a community endeavor is experiencing a health crisis with a sick grandmother. Which cultural factor is MOST relevant to consider in planning care?",
+ o:["Only the family's financial status",
+    "Ethnic patterns, extended family support systems, role expectations, health care beliefs, and childbearing practices — all socio-cultural dimensions affecting how the family will cope and accept care",
+    "Only the educational level of the parents",
+    "Only the physical environment of the home"],
+ a:1, d:"hard",
+ exp:"Socio-cultural factors including ethnic patterns, extended family support, role expectations, health care beliefs, and childbearing practices all influence family coping. The extended family is essential as a support system when stressors such as illness occur."},
+
+{t:" A nurse visits a family of five. Data shows: crowded 2-room apartment, polluted neighborhood, mother with poor nutritional intake, father with history of tuberculosis. Which category of factors influencing family health does the crowded apartment and polluted neighborhood represent?",
+ o:["Family biological characteristics",
+    "Cultural and economic factors",
+    "Environmental factors — man-made physical environment (character of buildings, noise, space, sewage) and physical environment (air quality)",
+    "Psychological family factors"],
+ a:2, d:"medium",
+ exp:"Man-made physical environment (character of buildings, noise, space, sewage disposal) and physical environment (climate, air quality) are environmental factors influencing family health."},
+
+{t:" A newly married couple visits a CHN to discuss starting a family. They ask how knowledge of their family background can help in providing health care. The nurse correctly explains that:",
+ o:["Family background is irrelevant to health care planning",
+    "Knowledge of family background helps understand health care needs of each member, assists in planning coordinated care, prevents overlapping or deficient services, and helps the family be self-reliant",
+    "Family background information is only useful for medical records",
+    "Only the couple's individual medical histories matter, not their family background"],
+ a:1, d:"medium",
+ exp:"Advantages of family care include: understanding health needs from family background, family participation in planning care, providing care on predetermined schedules, economic efficiency, preventing service duplication/gaps, and promoting self-reliance."},
+
+{t:" An 8-year-old child in a family begins performing poorly in school, withdraws from peers, and shows signs of anxiety following his parents' recent divorce. The community health nurse recognizes this as:",
+ o:["Only a school-related problem with no family health implications",
+    "A manifestation of family health disruption affecting an individual member — external stressors (divorce) altering family functioning and individual child health",
+    "Normal child development with no intervention needed",
+    "Only a psychological problem requiring only individual therapy"],
+ a:1, d:"hard",
+ exp:"The child's behavioral changes reflect how stressors (divorce) alter family functioning and individual member health. Family dynamics reflect and influence the physical, mental, and spiritual health of individuals in a family."},
+
+{t:" A community health nurse working with a large immigrant family notices that the grandmother makes all health decisions, the family follows traditional remedies before seeking professional care, and language barriers complicate communication. Which factors are MOST influencing this family's health behavior?",
+ o:["Only economic status","Only physical environmental factors",
+    "Socio-cultural factors: ethnic patterns, language, food customs, communication patterns, role expectations, health care beliefs, and extended family support",
+    "Only psychological factors"],
+ a:2, d:"hard",
+ exp:"Socio-cultural dimensions include ethnic patterns, language, food customs, communication patterns, role expectations, health care beliefs, childbearing practices, extended family support, and religious beliefs — all of which are influencing this family's health behavior."},
+
+{t:" A community health nurse is planning the nursing prognosis for a family with a recently discharged stroke patient. She considers the family's strong motivation, adequate economic resources, good communication, and the presence of a supportive extended family. Based on these findings, the prognosis would MOST likely indicate:",
+ o:["A poor prognosis regardless of family strengths",
+    "A favorable probability that the family will successfully respond to the situation, focusing the intervention plan on maximizing identified strengths",
+    "That no nursing intervention is needed",
+    "That the family should be referred to a hospital immediately"],
+ a:1, d:"hard",
+ exp:"The nursing prognosis is based on a holistic view of the family and predicts the probability of the family's ability to respond. Strong motivation, resources, communication, and extended family support indicate a favorable prognosis and guide the intervention focus."},
+],
+
+/* ═══════════════════════════════════════════
+   20 TRUE / FALSE QUESTIONS
+═══════════════════════════════════════════ */
+tf:[
+{t:"A family must be related by blood or marriage — individuals living together by mutual agreement do NOT qualify as a family.",
+ o:["True","False"], a:1, d:"easy",
+ exp:"A family is a social system of two or more people who may be related by blood, marriage, OR adoption, or who stay together by mutual agreement. Mutual agreement alone qualifies."},
+
+{t:"Family health is defined as the continuing ability to meet defined functions in interaction with other social, political, economic, and health systems.",
+ o:["True","False"], a:0, d:"easy",
+ exp:"Family health is exactly defined as the continuing ability to meet defined functions in interaction with other social, political, economic, and health systems."},
+
+{t:"A nuclear family consists of three generations living together including grandparents, aunts, uncles, and cousins.",
+ o:["True","False"], a:1, d:"easy",
+ exp:"A nuclear family consists of a father and mother with their child(ren) only. Three generations with extended relatives describe an EXTENDED family."},
+
+{t:"A dyad family consists of a husband and wife alone without children.",
+ o:["True","False"], a:0, d:"easy",
+ exp:"A dyad family consists of a husband and wife alone without children — correct as stated."},
+
+{t:"The therapeutic role in a family involves assisting family members to cope with problems by providing emotional support.",
+ o:["True","False"], a:0, d:"easy",
+ exp:"The therapeutic role is assisting family members to cope with problems such as providing emotional support — as stated in the lecture."},
+
+{t:"Healthy families avoid all external links with the broader community to maintain family integrity.",
+ o:["True","False"], a:1, d:"easy",
+ exp:"Healthy families ESTABLISH regular links with the broader community — they do not avoid external connections. This is one of the characteristics of healthy families."},
+
+{t:"The evaluation phase of family nursing is based on the effectiveness of nursing interventions rather than family outcomes.",
+ o:["True","False"], a:1, d:"medium",
+ exp:"Evaluation is based on FAMILY OUTCOMES, NOT on the effectiveness of interventions. This distinction is explicitly stated in the lecture."},
+
+{t:"Treatment planning in family nursing (Step 4) involves the nurse working in partnership with the family based on identified family strengths.",
+ o:["True","False"], a:0, d:"medium",
+ exp:"The nurse and family work in PARTNERSHIP to design a plan of action based on identified family STRENGTHS. The goal is for the family to successfully manage its health care concerns."},
+
+{t:"Previous life experiences have minimal impact on how a family functions and raises children.",
+ o:["True","False"], a:1, d:"medium",
+ exp:"Previous life experience GREATLY affects family functioning. Children learn about relationships almost exclusively from parents and carry beliefs about relationships, roles, decision-making, and affection into their future families."},
+
+{t:"The 'latch-key' practice refers to children being responsible for their own care and supervision after school because parents need two incomes.",
+ o:["True","False"], a:0, d:"medium",
+ exp:"The latch-key practice arises from the need for two incomes, resulting in children being responsible for their own care and supervision after school."},
+
+{t:"Family dynamics are only relevant when family members are experiencing conflict — they have no impact during peaceful times.",
+ o:["True","False"], a:1, d:"medium",
+ exp:"Family dynamics reflect and influence the physical, mental, and spiritual health of family members continuously — they are relevant at all times, not only during conflict."},
+
+{t:"The nursing prognosis in family nursing predicts the probability of the family's ability to respond to the current situation based on a holistic view of the family.",
+ o:["True","False"], a:0, d:"medium",
+ exp:"The nursing prognosis is a nursing judgment based on the holistic view of the family and its members that predicts the probability of the family's ability to respond to the current situation."},
+
+{t:"Family health assessment focuses only on individual sick family members rather than the family as a total unit.",
+ o:["True","False"], a:1, d:"medium",
+ exp:"Family health assessment guidelines state: 'Focus on the family as a TOTAL UNIT.' It encompasses demographics, environment, structure, roles, functions, values, communication, coping, and health behaviors."},
+
+{t:"Termination of the nurse-family partnership is included in the plan of action and implemented based on evaluation.",
+ o:["True","False"], a:0, d:"medium",
+ exp:"Termination of the nurse-family partnership is included in the plan of action and implemented based on the evaluation — it is a planned, collaborative conclusion to the professional relationship."},
+
+{t:"Economic constraints can create resentment within families when members experience a below-standard lifestyle due to financial difficulties.",
+ o:["True","False"], a:0, d:"medium",
+ exp:"Resentment toward society or toward other family members for forcing a below-standard lifestyle may arise when economic constraints limit the family's ability to maintain their lifestyle."},
+
+{t:"A step-family is composed of two adults, at least one of whom has remarried following divorce or death of a spouse, and can include children.",
+ o:["True","False"], a:0, d:"easy",
+ exp:"Step-families are composed of two adults, at least one of whom has remarried following divorce or death of a spouse. Step-families can include children from previous relationships."},
+
+{t:"The family is considered the basic unit of the community and reflects the culture, values, and health status of a community.",
+ o:["True","False"], a:0, d:"easy",
+ exp:"The lecture states: 'The family, as the basic unit of the community, represents all age groups and reflects the culture, values, and health status of a community.'"},
+
+{t:"In the diagnostic reasoning step of family nursing, only problems that need nursing intervention are identified — successful family adaptation areas are ignored.",
+ o:["True","False"], a:1, d:"hard",
+ exp:"Diagnostic reasoning identifies: (1) problems needing nursing intervention, (2) problems needing referral to other professionals, AND (3) areas where the family is successfully adapting on its own WITHOUT intervention — all three are identified."},
+
+{t:"Family care is economical because it saves time, money, and resources of health services.",
+ o:["True","False"], a:0, d:"easy",
+ exp:"One of the advantages of family care is that it is economical as it saves time, money, and resources of health services."},
+
+{t:"Acute or chronic illness of a family member only affects that individual and has no impact on the roles and relationships of other family members.",
+ o:["True","False"], a:1, d:"medium",
+ exp:"Acute or chronic illness of a member may ALTER ROLES AND RELATIONSHIPS within the ENTIRE FAMILY. For example, with a seriously ill father, the mother may become the primary economic provider and a child may take on the care-giving role."},
+];
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function shuffleOptions(question) {
+  const correctAnswer = question.o[question.a];
+
+  question.o = shuffle([...question.o]);
+
+  question.a = question.o.indexOf(correctAnswer);
+
+  return question;
+}
+
+QUESTIONS = QUESTIONS.map(q => shuffleOptions({...q}));
+/* ============ CONFIG ============ */
+const TOTAL_MINUTES = 60;   
+
+/* ============ ENGINE ============ */
+const LETTERS = ['A','B','C','D','E','F'];
+let pool, questions, qi, correct, wrong, answered, answers, wrongSet;
+let totalTime = 60 * 60, timeLeft, timerInterval;
+let activeTopic = 'All';
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+/* ---- TOPIC FILTER ---- */
+function buildFilters() {
+  const wrap = document.getElementById('filterWrap');
+  const countEl = document.getElementById('filterCount');
+  const topics = [...new Set(QUESTIONS.map(q=>q.topic).filter(Boolean))];
+  if (!topics.length) { wrap.style.display='none'; countEl.style.display='none'; return; }
+  wrap.style.display='flex';
+  countEl.style.display='block';
+  const all = ['All', ...topics];
+  wrap.innerHTML = all.map(t=>
+    `<button class="filter-btn${t==='All'?' active':''}" onclick="setTopic('${t}')">${t}</button>`
+  ).join('');
+  updateFilterCount();
+}
+
+function setTopic(t) {
+  activeTopic = t;
+  document.querySelectorAll('.filter-btn').forEach(b=>{
+    b.classList.toggle('active', b.textContent===t);
+  });
+  updateFilterCount();
+  init(getPool());
+}
+
+function getPool() {
+  return activeTopic==='All' ? QUESTIONS : QUESTIONS.filter(q=>q.topic===activeTopic);
+}
+
+function updateFilterCount() {
+  const p = getPool();
+  document.getElementById('filterCount').textContent =
+    `Showing ${p.length} question${p.length!==1?'s':''} · Topic: ${activeTopic}`;
+}
+
+/* ---- INIT ---- */
+function init(p) {
+  pool = p;
+  if (!pool.length) {
+    document.getElementById('app').innerHTML=`
+      <div class="empty-state">
+        <div class="ei">📭</div>
+        <h3>No Questions Yet</h3>
+        <p>Add questions to the QUESTIONS array in the script section.</p>
+      </div>`;
+    document.getElementById('totalBadge').textContent='0 Questions';
+    document.getElementById('sRemain').textContent='—';
+    clearInterval(timerInterval);
+    return;
+  }
+  questions = shuffle(pool);
+  qi=0; correct=0; wrong=0; answered=0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = [];
+  timeLeft = totalTime;
+  document.getElementById('totalBadge').textContent = questions.length+' Questions';
+  document.getElementById('timeBadge').textContent  = TOTAL_MINUTES+' Min';
+  startTimer(); render();
+}
+
+/* ---- TIMER ---- */
+function startTimer() {
+  clearInterval(timerInterval);
+  timerInterval = setInterval(()=>{
+    timeLeft--;
+    const m=Math.floor(timeLeft/60), s=timeLeft%60;
+    document.getElementById('timerTxt').textContent=`${m}:${s<10?'0':''}${s}`;
+    const b=document.getElementById('timerBadge');
+    if (timeLeft<=120)      b.className='timer-badge danger';
+    else if (timeLeft<=300) b.className='timer-badge warn';
+    else                    b.className='timer-badge';
+    if (timeLeft<=0) { clearInterval(timerInterval); finish(); }
+  },1000);
+}
+
+/* ---- TOP BAR ---- */
+function updateTop() {
+  const total=questions.length;
+  document.getElementById('sCorrect').textContent=correct;
+  document.getElementById('sWrong').textContent=wrong;
+  document.getElementById('sRemain').textContent=Math.round(((total-answered)/total)*100)+'%';
+  document.getElementById('progLabel').textContent='Q '+(qi+1)+' / '+total;
+  document.getElementById('progFill').style.width=((qi+1)/total*100)+'%';
+  document.getElementById('prog-bar').style.width=((qi+1)/total*100)+'%';
+}
+
+/* ---- RENDER ---- */
+function render() {
+  updateTop();
+  const q=questions[qi];
+  const opts = q.o.map((o,idx)=>`
+    <div class="opt" id="opt${idx}" onclick="choose(${idx})">
+      <div class="opt-letter">${LETTERS[idx]}</div>${o}
+    </div>`).join('');
+  document.getElementById('app').innerHTML=`
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Question ${qi+1} / ${questions.length}</div>
+        ${q.topic?`<div class="q-topic">${q.topic}</div>`:''}
+      </div>
+      <div class="q-text">${q.t}</div>
+      <div class="options">${opts}</div>
+      <div class="nav-btns">
+        <button class="btn btn-skip" onclick="skip()"><i class="fa-solid fa-forward"></i> Skip</button>
+      </div>
+    </div>`;
+}
+
+/* ---- CHOOSE ---- */
+function choose(v) {
+  if (answers[qi]!==null) return;
+  answers[qi]=v; answered++;
+  const q=questions[qi], ok=v===q.a;
+  ok?correct++:wrong++;
+  updateTop();
+  q.o.forEach((_,idx)=>{
+    const el=document.getElementById('opt'+idx);
+    el.classList.add('disabled');
+    if (idx===q.a) el.classList.add('correct');
+    else if (idx===v) el.classList.add('wrong');
+  });
+  const fb=document.createElement('div');
+  fb.className='feedback-bar '+(ok?'ok':'no');
+  fb.innerHTML=ok
+    ?`<span style="font-size:17px">🎉</span><span>ِما شاء الله عليك</span>`
+    :`<span style="font-size:17px">😔</span><span>ركز يا شطور</span>`;
+  const card=document.querySelector('.q-card');
+  card.querySelector('.options').after(fb);
+  if (q.exp) {
+    const exp=document.createElement('div');
+    exp.className='explanation';
+    exp.innerHTML='<b>💬 Explanation:</b> '+q.exp;
+    fb.after(exp);
+  }
+  card.querySelector('.nav-btns').innerHTML=`
+    <button class="btn btn-next" onclick="next()">
+      ${qi<questions.length-1
+        ?'<i class="fa-solid fa-arrow-right"></i> Next Question'
+        :'<i class="fa-solid fa-flag-checkered"></i> Finish Exam'}
+    </button>`;
+}
+
+/* ---- SKIP / NEXT ---- */
+function skip() {
+  if (answers[qi]===null) { answers[qi]=-1; answered++; wrong++; wrongSet.push(questions[qi]); updateTop(); }
+  next();
+}
+function next() {
+  if (qi<questions.length-1) { qi++; render(); window.scrollTo({top:0,behavior:'smooth'}); }
+  else finish();
+}
+
+/* ---- FINISH ---- */
+function finish() {
+  clearInterval(timerInterval);
+  const total=questions.length;
+  const score=Math.round((correct/total)*100);
+  questions.forEach((q,idx)=>{ if(answers[idx]!==q.a) wrongSet.push({...q,myAns:answers[idx]}); });
+  wrongSet=[...new Map(wrongSet.map(q=>[q.t,q])).values()];
+  let grade,gc;
+  if(score>=90)      { grade='🥇 Excellent';    gc='var(--ok)'; }
+  else if(score>=75) { grade='🥈 Very Good';     gc='var(--a1)'; }
+  else if(score>=60) { grade='🥉 Good';          gc='var(--warn)'; }
+  else               { grade='📚 Needs Review';  gc='var(--err)'; }
+  const circ=2*Math.PI*45, offset=circ-(score/100)*circ;
+  const report=questions.map((q,idx)=>{
+    const ok=answers[idx]===q.a;
+    return `<div class="report-item ${ok?'ok':'no'}">
+      <div class="ri-q">${ok?'✅':'❌'} ${q.t}</div>
+      ${!ok?`
+        <div class="ri-row"><span class="ri-badge ri-yours">Your Answer</span>${answers[idx]>=0?q.o[answers[idx]]:'Skipped'}</div>
+        <div class="ri-row"><span class="ri-badge ri-right">Correct</span>${q.o[q.a]}</div>
+      `:''}
+    </div>`;
+  }).join('');
+  document.getElementById('prog-bar').style.width='100%';
+  document.getElementById('app').innerHTML=`
+    <div class="result-hero">
+      <div class="score-ring">
+        <svg viewBox="0 0 110 110">
+          <circle class="ring-bg" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="0"/>
+          <circle class="ring-fill" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="${circ}"
+            style="stroke:${gc}" id="ringFill"/>
+        </svg>
+        <div class="score-num">${score}</div>
+        <div class="score-pct">%</div>
+      </div>
+      <div class="result-grade" style="color:${gc}">${grade}</div>
+      <div class="result-sub">Answered ${answered} of ${total} questions</div>
+      <div class="result-stats">
+        <div class="rs"><div class="n" style="color:var(--ok)">${correct}</div><div class="l">Correct</div></div>
+        <div class="rs"><div class="n" style="color:var(--err)">${wrong}</div><div class="l">Wrong</div></div>
+        <div class="rs"><div class="n" style="color:var(--a1)">${total-answered<0?0:total-answered}</div><div class="l">Skipped</div></div>
+      </div>
+    </div>
+    <div class="result-actions">
+      ${wrongSet.length?`<button class="btn btn-retry" onclick="retryWrong()"><i class="fa-solid fa-rotate-right"></i> Retry Wrong (${wrongSet.length})
+
+</button>`:''}
+      <button class="btn btn-home" onclick="init(getPool())"><i class="fa-solid fa-shuffle"></i> New Random Exam</button>
+      <a href="https://gaith-team.github.io/exam/" class="btn btn-home" style="text-decoration:none"><i class="fa-solid fa-house"></i> Back to Subject</a>
+    </div>
+    <div style="margin-top:22px">
+      <div style="font-size:14px;font-weight:700;margin-bottom:9px;color:var(--text2)">📋 Detailed Report</div>
+      ${report}
+    </div>`;
+  setTimeout(()=>{ document.getElementById('ringFill').style.strokeDashoffset=offset; },100);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ---- RETRY WRONG ---- */
+function retryWrong() {
+  const p=[...wrongSet];
+  questions=shuffle(p); qi=0; correct=0; wrong=0;
+  answers=new Array(questions.length).fill(null);
+  wrongSet=[]; answered=0; timeLeft=totalTime;
+  startTimer(); render();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ---- THEME ---- */
+const themeBtn=document.getElementById('themeBtn');
+let theme=localStorage.getItem('gt-theme')||'light';
+function applyTheme(t) {
+  theme=t;
+  document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'');
+  themeBtn.textContent=t==='dark'?'☀️':'🌙';
+  localStorage.setItem('gt-theme',t);
+}
+applyTheme(theme);
+themeBtn.addEventListener('click',()=>applyTheme(theme==='dark'?'light':'dark'));
+
+/* ---- START ---- */
+buildFilters();
+init(getPool());
+</script>
+</body>
+</html>
