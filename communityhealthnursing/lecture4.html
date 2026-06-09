@@ -1,0 +1,1244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --a1: #0f766e;
+  --a2: #14b8a6;
+  --a3: #99f6e4;
+  --a2l: #ccfbf1;
+  --ag: rgba(20,184,166,0.13);
+  --ags: rgba(20,184,166,0.26);
+  --bg:    #f0fdfa;
+  --bg2:   #ccfbf1;
+  --card:  #ffffff;
+  --text:  #134e4a;
+  --text2: #0f766e;
+  --text3: #5eead4;
+  --bdc:   rgba(20,184,166,0.20);
+  --bdcard:rgba(15,118,110,0.12);
+  --sh:    0 4px 18px rgba(15,118,110,0.09);
+  --shh:   0 8px 30px rgba(20,184,166,0.22);
+  --ok:    #15803d;
+  --err:   #b91c1c;
+  --warn:  #b45309;
+  --rad:   16px;
+  --tr:    all 0.28s cubic-bezier(.4,0,.2,1);
+}
+[data-theme="dark"] {
+  --bg:    #022c22; --bg2:   #064e3b; --card:  #065f46;
+  --text:  #d1fae5; --text2: #6ee7b7; --text3: #34d399;
+  --bdc:   rgba(52,211,153,0.22);
+  --bdcard:rgba(52,211,153,0.12);
+  --sh:    0 4px 20px rgba(0,0,0,0.45);
+  --shh:   0 8px 36px rgba(20,184,166,0.28);
+  --a1: #10b981; --a2: #34d399; --a2l: #064e3b; --a3: #6ee7b7;
+}
+
+body {
+  font-family:'Outfit',sans-serif;
+  background:var(--bg); color:var(--text);
+  min-height:100vh; overflow-x:hidden;
+  transition:background .4s,color .4s;
+}
+
+#prog-bar {
+  position:fixed;top:0;left:0;height:3px;z-index:999;
+  background:linear-gradient(90deg,var(--a1),var(--a2),var(--a3));
+  width:0%;transition:width .15s;
+}
+
+/* NAV */
+nav {
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 26px;height:62px;
+  background:rgba(240,253,250,.94);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--bdcard);transition:var(--tr);
+}
+[data-theme="dark"] nav { background:rgba(2,44,34,.96); }
+
+.nav-back {
+  display:flex;align-items:center;gap:6px;
+  color:var(--text2);text-decoration:none;font-size:13px;font-weight:700;
+  padding:6px 13px;border-radius:9px;
+  border:1px solid var(--bdcard);background:var(--card);
+  transition:var(--tr);
+}
+.nav-back:hover { color:var(--a2);border-color:var(--bdc); }
+
+.nav-brand { display:flex;align-items:center;gap:8px;font-size:15px;font-weight:900;color:var(--text); }
+.nav-logo {
+  width:34px;height:34px;border-radius:9px;
+  background:linear-gradient(135deg,var(--a1),var(--a2));
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:12px;font-weight:900;
+}
+.theme-btn {
+  width:37px;height:37px;border-radius:50%;
+  border:1px solid var(--bdcard);background:var(--card);
+  cursor:pointer;font-size:15px;
+  display:flex;align-items:center;justify-content:center;transition:var(--tr);
+}
+.theme-btn:hover { border-color:var(--a2);transform:rotate(22deg); }
+
+/* HERO */
+.hero {
+  margin-top:62px;
+  background:linear-gradient(135deg,var(--a1) 0%,var(--a2) 60%,#2dd4bf 100%);
+  padding:34px 22px 30px;text-align:center;position:relative;overflow:hidden;
+}
+.hero::before {
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 500px 180px at 50% 110%,rgba(255,255,255,.13) 0%,transparent 70%);
+}
+.hero-icon {
+  width:62px;height:62px;border-radius:18px;
+  background:rgba(255,255,255,.2);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;margin:0 auto 11px;
+  border:1.5px solid rgba(255,255,255,.35);
+}
+.hero h1 { font-size:clamp(17px,3.5vw,25px);font-weight:900;color:#fff;margin-bottom:4px; }
+.hero p  { font-size:13px;color:rgba(255,255,255,.82); }
+.hero-meta { display:flex;justify-content:center;gap:12px;margin-top:14px;flex-wrap:wrap; }
+.meta-pill {
+  background:rgba(255,255,255,.18);backdrop-filter:blur(5px);
+  border:1px solid rgba(255,255,255,.3);border-radius:50px;
+  padding:5px 13px;font-size:12px;font-weight:700;color:#fff;
+  display:flex;align-items:center;gap:5px;
+}
+
+/* TOPIC FILTER */
+.filter-wrap {
+  padding:14px 16px 2px;
+  display:flex;flex-wrap:wrap;gap:7px;
+  background:var(--card);border-bottom:1px solid var(--bdcard);
+}
+.filter-btn {
+  padding:5px 13px;border-radius:50px;
+  border:1.5px solid var(--bdcard);background:var(--bg);
+  font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;
+  color:var(--text2);cursor:pointer;transition:var(--tr);
+}
+.filter-btn:hover,
+.filter-btn.active {
+  background:var(--a2);color:#fff;border-color:var(--a2);
+  box-shadow:0 2px 10px var(--ag);
+}
+.filter-count {
+  padding:14px 16px 14px;
+  font-size:12px;color:var(--text2);font-weight:600;
+  background:var(--card);border-bottom:1px solid var(--bdcard);
+}
+
+/* SHELL */
+.shell { max-width:560px;margin:0 auto;padding:18px 16px 80px; }
+
+/* STATS */
+.stats-row { display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-bottom:13px; }
+.stat-box {
+  background:var(--card);border:1px solid var(--bdcard);
+  border-radius:var(--rad);padding:11px 7px;text-align:center;
+}
+.stat-box .val { font-size:20px;font-weight:900; }
+.stat-box .lbl { font-size:11px;color:var(--text3);margin-top:2px; }
+.c-ok   { color:var(--ok); }
+.c-err  { color:var(--err); }
+.c-acc  { color:var(--a1); }
+
+/* PROG STRIP */
+.prog-strip {
+  background:var(--card);border:1px solid var(--bdcard);
+  border-radius:var(--rad);padding:12px 15px;margin-bottom:15px;
+  display:flex;align-items:center;gap:11px;
+}
+.prog-label { font-size:13px;font-weight:700;color:var(--text2);white-space:nowrap; }
+.prog-track { flex:1;height:7px;background:var(--bg2);border-radius:7px;overflow:hidden; }
+.prog-fill {
+  height:100%;width:0%;
+  background:linear-gradient(90deg,var(--a1),var(--a2));
+  border-radius:7px;transition:width .4s;
+}
+.timer-badge {
+  min-width:60px;height:33px;border-radius:17px;
+  background:var(--bg2);border:1px solid var(--bdcard);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:900;color:var(--text);
+  gap:4px;padding:0 10px;flex-shrink:0;
+}
+.timer-badge.warn   { color:var(--warn);  border-color:rgba(180,83,9,.3);  background:rgba(180,83,9,.08); }
+.timer-badge.danger { color:var(--err);   border-color:rgba(185,28,28,.3); background:rgba(185,28,28,.08);animation:blink .8s infinite; }
+@keyframes blink { 0%,100%{opacity:1}50%{opacity:.45} }
+
+/* Q CARD */
+.q-card {
+  background:var(--card);border:1px solid var(--bdcard);
+  border-radius:20px;overflow:hidden;box-shadow:var(--sh);
+}
+.q-header {
+  background:linear-gradient(135deg,var(--a1),var(--a2));
+  padding:9px 17px;display:flex;align-items:center;gap:8px;
+}
+.q-num {
+  background:rgba(255,255,255,.22);border-radius:7px;
+  padding:3px 10px;font-size:11px;font-weight:700;color:#fff;
+}
+.q-topic {
+  margin-left:auto;background:rgba(255,255,255,.18);border-radius:50px;
+  padding:2px 10px;font-size:11px;font-weight:700;color:#fff;
+  border:1px solid rgba(255,255,255,.25);
+}
+.q-text {
+  padding:19px 17px 13px;font-size:15px;font-weight:700;color:var(--text);
+  line-height:1.65;border-bottom:1px solid var(--bdcard);
+}
+.options { padding:13px 17px 17px;display:flex;flex-direction:column;gap:9px; }
+
+.opt {
+  display:flex;align-items:center;gap:11px;
+  padding:12px 14px;border-radius:11px;
+  border:1.5px solid var(--bdcard);background:var(--bg);
+  cursor:pointer;font-size:14px;font-weight:600;color:var(--text);
+  transition:var(--tr);user-select:none;
+}
+.opt:hover:not(.disabled) {
+  border-color:var(--a2);background:var(--ag);
+  transform:translateX(3px);
+}
+.opt-letter {
+  width:28px;height:28px;border-radius:8px;flex-shrink:0;
+  background:var(--bg2);border:1px solid var(--bdcard);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:900;color:var(--text2);
+  transition:var(--tr);
+}
+.opt.correct { border-color:var(--ok);background:rgba(21,128,61,.08); }
+.opt.correct .opt-letter { background:var(--ok);color:#fff;border-color:var(--ok); }
+.opt.wrong   { border-color:var(--err);background:rgba(185,28,28,.07); }
+.opt.wrong   .opt-letter { background:var(--err);color:#fff;border-color:var(--err); }
+.opt.disabled { pointer-events:none; }
+
+/* FEEDBACK */
+.feedback-bar {
+  margin:11px 17px;padding:11px 14px;border-radius:11px;
+  display:flex;align-items:center;gap:9px;
+  font-size:14px;font-weight:700;
+  animation:popIn .38s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes popIn { from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1} }
+.feedback-bar.ok { background:rgba(21,128,61,.1);color:var(--ok);border:1px solid rgba(21,128,61,.25); }
+.feedback-bar.no { background:rgba(185,28,28,.08);color:var(--err);border:1px solid rgba(185,28,28,.2); }
+
+.explanation {
+  margin:0 17px 11px;padding:10px 13px;
+  background:rgba(20,184,166,.07);border-radius:9px;
+  border-left:3px solid var(--a2);
+  font-size:13px;color:var(--text2);line-height:1.6;
+}
+
+/* BUTTONS */
+.nav-btns { padding:4px 17px 17px;display:flex;gap:9px; }
+.btn {
+  flex:1;padding:12px;border:none;border-radius:11px;
+  font-size:14px;font-weight:900;cursor:pointer;
+  font-family:'Outfit',sans-serif;transition:var(--tr);
+  display:flex;align-items:center;justify-content:center;gap:7px;
+}
+.btn-next {
+  background:linear-gradient(135deg,var(--a1),var(--a2));
+  color:#fff;box-shadow:0 4px 14px var(--ag);
+}
+.btn-next:hover { transform:translateY(-2px);box-shadow:0 6px 20px var(--ags); }
+.btn-skip {
+  background:var(--bg2);color:var(--text2);
+  border:1px solid var(--bdcard);flex:0 0 auto;padding:12px 15px;
+}
+.btn-skip:hover { border-color:var(--warn);color:var(--warn); }
+
+/* RESULTS */
+.result-hero {
+  text-align:center;padding:30px 18px 22px;
+  background:var(--card);border-radius:20px;
+  border:1px solid var(--bdcard);margin-bottom:17px;
+}
+.score-ring {
+  width:108px;height:108px;border-radius:50%;margin:0 auto 15px;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;position:relative;
+}
+.score-ring svg { position:absolute;inset:-5px;width:calc(100% + 10px);height:calc(100% + 10px);transform:rotate(-90deg); }
+.score-ring circle { fill:none;stroke-width:5;stroke-linecap:round; }
+.ring-bg   { stroke:var(--bg2); }
+.ring-fill { stroke:var(--a2);transition:stroke-dashoffset 1s ease; }
+.score-num { font-size:28px;font-weight:900;color:var(--text); }
+.score-pct { font-size:12px;color:var(--text3); }
+.result-grade { font-size:20px;font-weight:900;margin-bottom:4px; }
+.result-sub   { font-size:13px;color:var(--text2); }
+.result-stats { display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:17px; }
+.rs { background:var(--bg2);border-radius:10px;padding:10px 7px;text-align:center; }
+.rs .n { font-size:20px;font-weight:900; }
+.rs .l { font-size:11px;color:var(--text3); }
+
+/* REPORT */
+.report-item {
+  background:var(--card);border:1px solid var(--bdcard);
+  border-radius:12px;padding:14px;margin-bottom:8px;
+  border-left:4px solid var(--bdcard);
+}
+.report-item.ok { border-left-color:var(--ok); }
+.report-item.no { border-left-color:var(--err); }
+.report-item .ri-q { font-size:13px;font-weight:700;margin-bottom:6px; }
+.report-item .ri-row { display:flex;align-items:center;gap:7px;font-size:12px;margin-top:4px;color:var(--text2); }
+.ri-badge { padding:2px 8px;border-radius:6px;font-weight:700;font-size:11px;flex-shrink:0; }
+.ri-yours { background:rgba(185,28,28,.1);color:var(--err); }
+.ri-right { background:rgba(21,128,61,.1);color:var(--ok); }
+
+.result-actions { display:flex;flex-direction:column;gap:9px;margin-top:17px; }
+.btn-retry { background:linear-gradient(135deg,var(--a1),var(--a2));color:#fff; }
+.btn-retry:hover { transform:translateY(-2px);box-shadow:0 6px 20px var(--ags); }
+.btn-home  { background:var(--bg2);color:var(--text);border:1px solid var(--bdcard); }
+.btn-home:hover { border-color:var(--a2);color:var(--a1); }
+
+/* FOOTER */
+footer {
+  background:var(--bg2);border-top:1px solid var(--bdcard);
+  padding:20px 22px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:9px;
+}
+.footer-brand { font-size:14px;font-weight:700; }
+.footer-brand span { color:var(--a1); }
+.footer-tg {
+  display:flex;align-items:center;gap:5px;
+  text-decoration:none;color:#229ED9;font-size:12px;font-weight:600;
+}
+
+/* EMPTY STATE */
+.empty-state {
+  text-align:center;padding:50px 20px;
+  background:var(--card);border-radius:20px;border:1px solid var(--bdcard);
+}
+.empty-state .ei { font-size:40px;margin-bottom:12px; }
+.empty-state h3 { font-size:17px;font-weight:700;margin-bottom:7px; }
+.empty-state p { font-size:13px;color:var(--text2); }
+
+@media (max-width:480px) {
+  nav { padding:0 13px; }
+  .shell { padding:13px 11px 60px; }
+  .nav-brand span { display:none; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog-bar"></div>
+
+<nav>
+  <a href="https://gaith-team.github.io/exam/" class="nav-back"><i class="fa-solid fa-arrow-left"></i> Back</a>
+  <div class="nav-brand">
+    <div class="nav-logo">GT</div>
+    <span>GHAITH TEAM</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-icon">🌿</div>
+  <h1>PHC</h1>
+  <p>Community Health Nursing</p>
+  <div class="hero-meta">
+    <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">-- Questions</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-clock"></i> <span id="timeBadge">60 Min</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-shuffle"></i> Shuffled</div>
+  </div>
+</div>
+
+<!-- Topic filter bar (shown only if topics exist) -->
+<div id="filterWrap" class="filter-wrap" style="display:none;"></div>
+<div id="filterCount" class="filter-count" style="display:none;"></div>
+
+<div class="shell">
+  <div class="stats-row">
+    <div class="stat-box"><div class="val c-ok"  id="sCorrect">0</div><div class="lbl">✔ Correct</div></div>
+    <div class="stat-box"><div class="val c-err"  id="sWrong">0</div><div class="lbl">✖ Wrong</div></div>
+    <div class="stat-box"><div class="val c-acc"  id="sRemain">100%</div><div class="lbl">⏳ Remaining</div></div>
+  </div>
+
+  <div class="prog-strip">
+    <div class="prog-label" id="progLabel">Q 1</div>
+    <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+    <div class="timer-badge" id="timerBadge"><i class="fa-regular fa-clock"></i><span id="timerTxt">60:00</span></div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<footer>
+  <div class="footer-brand">GAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg">
+    <i class="fa-brands fa-telegram"></i> @nursing2bu
+  </a>
+</footer>
+
+<script>
+const QUESTIONS = [
+{t:"Primary Health Care (PHC) is defined as essential health care based on practical, scientifically sound and socially acceptable methods made universally accessible:",
+ o:["Only to urban populations with high income",
+    "To individuals and families in the community through their full participation and at a cost the community can afford",
+    "Exclusively through hospitals and specialist centers",
+    "Only to children and pregnant women"],
+ a:1, d:"easy",
+ exp:"PHC is essential health care based on practical, scientifically sound and socially acceptable methods made universally accessible to individuals and families through full community participation and at affordable cost."},
+
+{t:"How many elements of Primary Health Care are recognized?",
+ o:["4 elements","6 elements","8 elements","10 elements"],
+ a:2, d:"easy",
+ exp:"There are 8 elements of PHC: health education, food supply/nutrition, safe water/sanitation, MCH/family planning, immunization, endemic disease control, treatment of common diseases/injuries, and essential drugs."},
+
+{t:"Which of the following is the FIRST element of Primary Health Care?",
+ o:["Immunization against major infectious diseases",
+    "Adequate safe water supply and basic sanitation",
+    "Education concerning health problems and methods of preventing and controlling them",
+    "Provision of essential basic household drugs"],
+ a:2, d:"easy",
+ exp:"The first element of PHC is education concerning health problems and the methods of preventing and controlling them."},
+
+{t:"The principle of equity in PHC means:",
+ o:["Equal services for all people regardless of need",
+    "Services to all and MORE services to the needy and vulnerable, irrespective of social, economic, and cultural preferences",
+    "Services only to paying clients",
+    "Providing the same technology to all regardless of resources"],
+ a:1, d:"easy",
+ exp:"Equity means services to ALL and more services to the needy and vulnerable, continuing to provide essential health care irrespective of social, economic, and cultural preferences."},
+
+{t:"Which principle of PHC implies that services are geographically, financially, culturally and functionally within easy reach of the whole community?",
+ o:["Equity","Accessibility","Appropriate technology","Community participation"],
+ a:1, d:"easy",
+ exp:"Accessibility implies that continuing and organized supply of care is geographically, financially, culturally and functionally within easy reach of the whole community."},
+
+{t:"Community participation in PHC means that people have:",
+ o:["No role in health planning",
+    "Both the right and duty to participate in the process for improvement and maintenance of health, becoming agents of their own development",
+    "Only the duty to follow health professionals' decisions",
+    "The right to refuse all health services"],
+ a:1, d:"easy",
+ exp:"Community participation means people have both the right and duty to participate in health processes, enabling them to become agents of their own development instead of passive recipients."},
+
+{t:"PHC services should be accessible to citizens within easy reach of:",
+ o:["30 minutes travel","One hour travel","Three hours travel","Half a day's travel"],
+ a:1, d:"easy",
+ exp:"PHC Strategy 1 states that services are to be made accessible to citizens within easy reach of one hour travel."},
+
+{t:"Which of the following is one of the eight elements of PHC?",
+ o:["Provision of specialist surgical services",
+    "Immunization against major infectious diseases",
+    "Advanced diagnostic imaging for all",
+    "Management of intensive care unit patients"],
+ a:1, d:"easy",
+ exp:"Immunization against major infectious diseases is the 5th element of PHC."},
+
+{t:"Preconceptional care is defined as:",
+ o:["Care provided only during pregnancy",
+    "Care of the female before conception, continued from birth through stages of growth until conception",
+    "Care provided only after delivery",
+    "Care exclusively for newborns"],
+ a:1, d:"easy",
+ exp:"Preconceptional care is care of the female BEFORE conception, continued from birth through stages of growth and development until the time of conception and pregnancy."},
+
+{t:"During antenatal care, how frequently should a pregnant woman visit until 6 months?",
+ o:["Every week","Every two weeks","Every four weeks","Every two months"],
+ a:2, d:"easy",
+ exp:"Antenatal visits are scheduled every 4 weeks until 6 months, every 2 weeks through 7-8 months, and every week until birth."},
+
+{t:"The effectiveness rate of permanent sterilization (tubal ligation/vasectomy) is:",
+ o:["85%","90%","95%","99.5%"],
+ a:3, d:"easy",
+ exp:"Permanent sterilization has an effectiveness rate of 99.5%."},
+
+{t:"The effectiveness rate of combined oral contraceptive pills (estrogen-progestin) is:",
+ o:["80%","88%","96.8%","99.5%"],
+ a:2, d:"easy",
+ exp:"Combined oral contraceptives (estrogen-progestin) have an effectiveness of 96.8%. Dosage is one pill per day."},
+
+{t:"Which contraceptive method works by causing a sterile inflammatory response in the uterine cavity to prevent sperm from reaching the egg?",
+ o:["Combined oral contraceptives","Condoms","Intrauterine Device (IUD)","Spermicides"],
+ a:2, d:"easy",
+ exp:"The IUD is inserted into the uterine cavity where it causes a sterile inflammatory response, preventing sperm from reaching the egg."},
+
+{t:"Which of the following is an advantage of barrier methods of contraception?",
+ o:["100% effectiveness",
+    "Decreased cost and protection from sexually transmitted diseases (STDs)",
+    "No need for use at the time of sexual act",
+    "Suitable for all women including those with STD history"],
+ a:1, d:"easy",
+ exp:"Advantages of barrier methods include decreased cost and protection from STDs."},
+
+{t:"The IMCI strategy was developed by:",
+ o:["UNICEF alone","WHO alone","WHO and UNICEF jointly","The World Bank"],
+ a:2, d:"easy",
+ exp:"IMCI (Integrated Management of Childhood Illness) is a broad strategy to improve child health outcomes developed by WHO and UNICEF."},
+
+{t:"Which of the following is one of the three main components of IMCI?",
+ o:["Providing advanced surgical care for children",
+    "Improve family and community practices related to child health and nutrition",
+    "Building specialty hospitals for childhood diseases only",
+    "Eliminating all traditional medicine practices"],
+ a:1, d:"easy",
+ exp:"IMCI's three components: (1) improve family and community practices for child health and nutrition; (2) improve the health system for effective management of childhood illness; (3) improve health workers' skills."},
+
+{t:"Iron deficiency anemia is significant in PHC nutrition because it is:",
+ o:["A rare condition found only in developing countries",
+    "The most common nutritional deficiency worldwide",
+    "Easily eliminated through dietary changes alone without intervention",
+    "Only found in elderly populations"],
+ a:1, d:"easy",
+ exp:"Anemia due to iron deficiency is the most common nutritional deficiency worldwide, making it a priority in PHC nutrition programs."},
+
+{t:"Which sector supports PHC by providing plentiful supplies of clean water to decrease morbidity and mortality?",
+ o:["Educational sector","Mass media sector","Water sector","Housing sector"],
+ a:2, d:"easy",
+ exp:"The water sector supports PHC by providing plentiful supplies of clean water that help decrease morbidity and mortality."},
+
+/* ── MEDIUM 19-40 ── */
+{t:"Inter-sectoral coordination in PHC refers to:",
+ o:["Health achieving all goals alone without other ministries",
+    "The recognition that health cannot be attained by the health sector alone and requires the support and complementary efforts of other sectors",
+    "Competition between different government ministries for health resources",
+    "Coordination only between hospitals and clinics"],
+ a:1, d:"medium",
+ exp:"Inter-sectoral coordination recognizes that health cannot be attained by the health sector alone. PHC requires the support of other sectors, with each sector's development being complementary to others."},
+
+{t:"PHC Strategy 3 (Weaning people towards comprehensive health care) includes which approach that uses legislation such as compulsory immunization as a prerequisite for birth certificates?",
+ o:["Service approach","Educative approach","Legislative approach","Technology approach"],
+ a:2, d:"medium",
+ exp:"The legislative approach under Strategy 3 introduces appropriate legislation, such as compulsory immunization of children as a prerequisite to obtain birth certificates."},
+
+{t:"PHC Strategy 4 focuses on:",
+ o:["Building more hospitals in urban areas",
+    "Integration of preventive and curative services by coordinating existing health offices, MCH centers, and dispensaries to function as one unit",
+    "Reducing the number of health facilities",
+    "Specializing in curative services only"],
+ a:1, d:"medium",
+ exp:"Strategy 4 integrates preventive and curative services by integrating existing health offices, MCH centers, and dispensaries to function as one unit and coordinating national disease control programs through PHC committees."},
+
+{t:"Which PHC strategy involves utilizing government mass media like radio and television for health education?",
+ o:["Strategy 1: Expansion of services","Strategy 3: Weaning toward comprehensive care",
+    "Strategy 5: Promotion of health awareness","Strategy 7: Coordination with academic institutions"],
+ a:2, d:"medium",
+ exp:"Strategy 5 (Promotion of Health Awareness) involves having a well-defined educational program and utilizing existing government mass media like radio and television."},
+
+{t:"The family record in PHC includes which of the following data?",
+ o:["Only the patient's name and diagnosis",
+    "Family composition, social configurations, demographic characteristics, domestic environment, individual health status, provided health care, referral services",
+    "Only financial information about the family",
+    "Only the mother's obstetric history"],
+ a:1, d:"medium",
+ exp:"Family records include: family composition/size, social configurations, demographic characteristics, domestic environment characteristics, individuals' health status, provided health care and timing, and referral services."},
+
+{t:"Appropriate technology in PHC means the technology should be:",
+ o:["The most advanced and expensive available",
+    "Scientifically sound AND acceptable to those who apply it and those for whom it is used, with simplicity being desirable",
+    "Available only in tertiary care hospitals",
+    "Applied only by specialist physicians"],
+ a:1, d:"medium",
+ exp:"Appropriate technology must be scientifically sound, acceptable to those who apply it and to those for whom it is used. Simplicity is always desirable (e.g., breast feeding in spacing, weighing for growth monitoring)."},
+
+{t:"The PHC health team includes all of the following EXCEPT:",
+ o:["Physicians and dentists",
+    "Nurses and nurse midwives",
+    "Social workers and sanitarians",
+    "Specialist surgeons and anesthesiologists only"],
+ a:3, d:"medium",
+ exp:"The PHC team includes physicians, dentists, nurses, nurse midwives, sanitarians, laboratory technicians, food inspectors, social workers, community workers, health records technicians, and pharmacists."},
+
+{t:"Premarital care includes all of the following EXCEPT:",
+ o:["Premarital counseling and immunization",
+    "Genetic counseling and systemic medical examination",
+    "History taking and investigations",
+    "Postnatal care and breastfeeding support"],
+ a:3, d:"medium",
+ exp:"Premarital care includes counseling, immunization, examination (history, genetic counseling, systemic medical examination, investigations). Postnatal care is part of maternal care after delivery, not premarital care."},
+
+{t:"In antenatal subsequent visits, which assessment is performed at EVERY visit?",
+ o:["Genetic testing","Comprehensive ultrasound only",
+    "Vital signs, weight, urine analysis, fundal height, fetal movement, Leopold's maneuvers, and edema assessment",
+    "Full blood transfusion screening"],
+ a:2, d:"medium",
+ exp:"Each subsequent antenatal visit includes: vital signs, weight, urine analysis (glucose, albumin, ketones), fundal height, fetal movement, Leopold's maneuvers, and edema assessment."},
+
+{t:"Health education topics during the FIRST trimester of pregnancy include:",
+ o:["Only childbirth education and newborn care",
+    "Smoking cessation, alcohol avoidance, work/rest patterns, physiologic changes, emotional changes, nutrition, and screening tests",
+    "Only postpartum self-care",
+    "Only exercise and family roles"],
+ a:1, d:"medium",
+ exp:"First trimester education includes: smoking cessation, alcohol avoidance, work/rest patterns, illicit drug avoidance, physiologic and emotional changes of pregnancy, healthy lifestyle, screening tests, nipple assessment, breastfeeding, and nutrition."},
+
+{t:"Postpartum assessment includes all of the following EXCEPT:",
+ o:["Assessing blood pressure and pulse",
+    "Assessing uterine fundus for tone and position",
+    "Assessing lochia on perineal pad",
+    "Assessing fetal heart rate"],
+ a:3, d:"medium",
+ exp:"Postpartum assessment includes: blood pressure and pulse, uterine fundus (tone and position), lochia amount, perineum condition, and episiotomy condition. Fetal heart rate is assessed BEFORE birth, not postpartum."},
+
+{t:"Progestin-only oral contraceptives are preferred over combined pills for which group?",
+ o:["Women with history of ovarian cancer",
+    "Breastfeeding women, as lactation is not impaired by this formulation",
+    "Women with irregular bleeding",
+    "Women with functional ovarian cysts"],
+ a:1, d:"medium",
+ exp:"A key advantage of progestin-only pills is that lactation is NOT impaired by this formulation, making them suitable for breastfeeding women."},
+
+{t:"IUD is contraindicated in women with a history of:",
+ o:["Hypertension","Pelvic inflammatory disease","Anemia","Diabetes mellitus"],
+ a:1, d:"medium",
+ exp:"IUD is contraindicated for women with a history of pelvic inflammatory disease (PID)."},
+
+{t:"UNICEF child health priorities include all of the following EXCEPT:",
+ o:["Reduction of infant and under-5 mortality rate",
+    "Elimination of iodine deficiency",
+    "Development of advanced pediatric surgical centers in all countries",
+    "Eradication of poliomyelitis"],
+ a:2, d:"medium",
+ exp:"UNICEF priorities focus on public health interventions like reducing mortality, malnutrition, immunization coverage, and disease eradication — not building advanced surgical centers."},
+
+{t:"In developing countries, what percentage of women make at least one antenatal visit according to WHO (1997)?",
+ o:["30%","50%","65%","90%"],
+ a:2, d:"medium",
+ exp:"In developing countries, 65% of women make at least one antenatal visit, compared to 97% in developed countries."},
+
+{t:"Pneumonia kills approximately how many young children each year globally?",
+ o:["500,000","1 million","2.2 million","3-5 million"],
+ a:3, d:"medium",
+ exp:"Pneumonia kills 3-5 million young children each year, while diarrheal diseases kill 2.2 million young children each year."},
+
+{t:"The community health nurse's role in primary prevention under PHC includes:",
+ o:["Performing surgical procedures in the community",
+    "Providing health education, increasing health awareness, genetic counseling, immunization programs, and promoting environmental sanitation",
+    "Only treating chronic diseases",
+    "Only diagnosing infectious diseases"],
+ a:1, d:"medium",
+ exp:"Primary prevention roles of the CHN include: health education, increasing health awareness, genetic counseling, immunization participation, promoting environmental sanitation, increasing resistance to health problems."},
+
+{t:"Food sanitation examination of food handlers includes all of the following EXCEPT:",
+ o:["Chest X-ray for TB and Widal test for typhoid carriers",
+    "Stool analysis and skin examination for staph infection",
+    "Throat swab for diphtheria",
+    "Brain CT scan and cardiac stress test"],
+ a:3, d:"medium",
+ exp:"Food handler examination includes: chest X-ray (TB), Widal test (typhoid carriers), stool analysis, skin examination (staph infection), and throat swab (diphtheria). Brain CT and cardiac stress tests are not included."},
+
+{t:"The community health nurse's tertiary prevention role involves:",
+ o:["Only providing immunizations",
+    "Identifying type and severity of disability, making a realistic rehabilitative plan, applying the plan, and assessing ability to carry out activities of daily living",
+    "Only early case finding and referral",
+    "Only health education for the general public"],
+ a:1, d:"medium",
+ exp:"Tertiary prevention: identify disability type/severity, determine goals, make realistic rehabilitative plan, determine team members, investigate social/family circumstances, apply plan, assess daily living ability."},
+
+{t:"In rural areas, PHC is provided through:",
+ o:["Urban health centers and MCH centers only",
+    "Rural health centers (in big villages) and rural health units (in small villages)",
+    "Industrial health centers only",
+    "School health centers only"],
+ a:1, d:"medium",
+ exp:"In rural areas, PHC is provided through rural health centers (in big villages) and rural health units (in small villages)."},
+
+/* ── HARD 41-55 ── */
+{t:"PHC Strategy 7 (Coordination with academic institutions) aims to achieve PHC development through:",
+ o:["Building more hospitals near universities",
+    "Orientation of future national health manpower in PHC concepts and practices by introducing them in educational curricula, with principles encompassing community participation, early needs assessment, and integration of health services",
+    "Providing scholarships for medical students to study abroad only",
+    "Replacing community health with academic research only"],
+ a:1, d:"hard",
+ exp:"Strategy 7 orients future health manpower in PHC concepts by including them in educational curricula. Principles encompass community participation, early assessment of community needs, and integration of health services."},
+
+{t:"The 'out-reach activities' under PHC Strategy 2 are characterized by:",
+ o:["Only conducting activities within health center walls",
+    "Defining priority areas, introducing planned and documented health education programs involving the community, and initiating communicable disease control including immunization",
+    "Waiting for communities to come to health centers",
+    "Conducting research in academic laboratories only"],
+ a:1, d:"hard",
+ exp:"Out-reach activities involve: defining priority areas, introducing planned/documented health education programs involving the community, and initiating communicable disease control activities including immunization."},
+
+{t:"Which statement BEST describes the reason why slow progress in achieving PHC goals occurs?",
+ o:["PHC has too many staff and too many resources",
+    "Multiple barriers including insufficient political commitment, failure to achieve equity, low status of women, slow socioeconomic development, unbalanced resource distribution, and weak health information systems",
+    "PHC strategies are too simple to implement",
+    "Communities are not interested in participating in PHC"],
+ a:1, d:"hard",
+ exp:"Slow PHC progress is caused by: insufficient political commitment, failure to achieve equity, low status of women, slow socioeconomic development, difficulty in inter-sectoral action, unbalanced resource distribution, weak health information systems, and inappropriate use of resources."},
+
+{t:"The agricultural sector's role in supporting PHC is best described as:",
+ o:["Providing healthcare personnel for health centers",
+    "Curing production of food for family consumption which improves the nutritional status of the population",
+    "Building infrastructure for health centers",
+    "Training nurses in community health"],
+ a:1, d:"hard",
+ exp:"The agricultural sector supports PHC by curing production of food for family consumption, which improves the national (nutritional) status."},
+
+{t:"A community health nurse conducting secondary prevention activities would MOST appropriately:",
+ o:["Only provide immunizations and health education",
+    "Participate in assessment, early case finding and diagnosis, provide prompt treatment information, teach adaptation in daily activities, and help limit disability",
+    "Only develop rehabilitation plans for disabled patients",
+    "Only refer all patients to hospitals without providing any care"],
+ a:1, d:"hard",
+ exp:"Secondary prevention activities include: participating in assessment and early case finding, providing information about care centers, health education based on diagnosis, teaching necessary adaptations in daily living, and helping patients limit disability."},
+
+{t:"Leopold's maneuvers during antenatal subsequent visits are performed to:",
+ o:["Assess maternal blood pressure","Evaluate fetal lie and presentation",
+    "Measure uterine blood flow","Assess placental location"],
+ a:1, d:"hard",
+ exp:"Leopold's maneuvers are used to evaluate fetal lie and presentation during subsequent antenatal visits."},
+
+{t:"The combined oral contraceptive pill is CONTRAINDICATED in women with history of:",
+ o:["Iron deficiency anemia",
+    "Thromboembolic disorders, cerebrovascular or coronary artery disease",
+    "Vitamin A deficiency",
+    "Mild hypertension controlled with diet"],
+ a:1, d:"hard",
+ exp:"Combined OCP is contraindicated for women with history of thromboembolic disorders, cerebrovascular disease, or coronary artery disease."},
+
+{t:"Iodine deficiency as a nutritional problem in children is significant because it results in:",
+ o:["Night blindness and xerophthalmia",
+    "Mental retardation, defective speech, and hearing problems",
+    "Iron deficiency anemia",
+    "Increased susceptibility to infectious diseases"],
+ a:1, d:"hard",
+ exp:"Iodine deficiency results in mental retardation, defective speech, and hearing problems. The UNICEF priorities include elimination of iodine deficiency."},
+
+{t:"The management process the CHN applies through ALL levels of prevention includes:",
+ o:["Only providing direct patient care",
+    "Assessment and prioritizing community problems, community diagnosis, planning nursing intervention, evaluation of intervention, and reassessment to improve PHC intervention",
+    "Only writing reports and documenting findings",
+    "Only referring patients to specialist hospitals"],
+ a:1, d:"hard",
+ exp:"The CHN management process through all levels of prevention includes: assessment and prioritizing community problems, community diagnosis, planning nursing intervention, evaluation of intervention, and reassessment to improve PHC."},
+
+{t:"Why was the provision of essential drugs integrated as an element of PHC in 1978?",
+ o:["Because drugs were too expensive for hospitals to purchase",
+    "Because in 1978 lack of drugs in the public sector — especially for PHC — was identified as a significant problem from national to patient level, with many countries lacking sufficient drug quantities",
+    "Because pharmaceutical companies demanded inclusion",
+    "Because drugs replaced the need for health professionals"],
+ a:1, d:"hard",
+ exp:"In 1978, lack of drugs for the public sector especially for PHC was identified as a significant problem, with many countries lacking sufficient drug quantities. This led to integration of essential drugs as a PHC element."},
+
+{t:"The 'instruments of PHC delivery' include all of the following EXCEPT:",
+ o:["Management of common non-complicated health problems and treatment of childhood illness",
+    "Control of infectious disease outbreaks and first aid emergency services",
+    "Management of chronic diseases and referral of needy cases",
+    "Performing complex organ transplant surgery and advanced oncology"],
+ a:3, d:"hard",
+ exp:"PHC instruments include: management of common problems, childhood illness treatment (IMCI), outbreak control, first aid, chronic disease management (DM, HTN), endemic disease control (TB, hepatitis), minor surgery, basic lab/ultrasound, and referral. Complex transplant surgery is NOT a PHC instrument."},
+
+{t:"Preconceptional care components include all of the following EXCEPT:",
+ o:["Health promotion and prevention of health hazards especially those at particular risk to pregnancy",
+    "Regular health appraisal for early case detection and prevention of complications",
+    "Health education of young girls about determinants of health and family planning",
+    "Intensive care management of complications during labor"],
+ a:3, d:"hard",
+ exp:"Preconceptional care components include: health promotion/prevention, regular health appraisal, health education for young girls, and premarital care. Labor complication management is intrapartum/emergency care, not preconceptional."},
+
+{t:"A major reason for high infant morbidity and mortality in developing countries that can be PREVENTED through PHC interventions includes:",
+ o:["Genetic disorders that are unavoidable",
+    "Pneumonia (kills 3-5 million children/year), diarrheal diseases (kills 2.2 million/year), malnutrition (iodine deficiency, iron deficiency), preventable through water supply, sanitation, nutrition, immunization, and breastfeeding",
+    "Only congenital heart diseases",
+    "Primarily road traffic accidents"],
+ a:1, d:"hard",
+ exp:"Most infant morbidity and mortality can be prevented through: safe water/sanitation, good nutrition, immunization, breastfeeding promotion, and preventing pneumonia (3-5M deaths/year), diarrhea (2.2M deaths/year), and malnutrition complications."},
+
+{t:"The community health nurse's role in the non-physical environment of PHC addresses the concept of 'self-reliance and self-determination' by:",
+ o:["Making all health decisions for community members",
+    "Helping people accept primary responsibility for maintaining their own health and making sound decisions about their health",
+    "Restricting community access to health information",
+    "Providing all care without educating individuals about self-care"],
+ a:1, d:"hard",
+ exp:"The CHN helps people accept primary responsibility for maintaining their health and making sound health decisions — embodying PHC's spirit of self-reliance and self-determination."},
+
+{t:"WHO reported that 80% of the world's children had been immunized against six major childhood diseases, with the potential to prevent how many child deaths per year?",
+ o:["500,000 deaths per year","One million deaths per year",
+    "Three million deaths per year","Ten million deaths per year"],
+ a:2, d:"hard",
+ exp:"WHO reported that 80% immunization coverage against six diseases can prevent an estimated THREE MILLION child deaths each year."},
+
+{t:" A community health nurse is assigned to a remote rural village located 3 hours from the nearest hospital. Community members must travel long distances to receive any health care. Residents have limited income and poor health literacy. Which PHC principle is being MOST violated in this scenario?",
+ o:["Appropriate technology","Multi-sectoral approach",
+    "Equity and accessibility — services are not geographically or financially within easy reach of the community",
+    "Community participation"],
+ a:2, d:"medium",
+ exp:"Accessibility implies services are geographically, financially, culturally and functionally within easy reach of the community. PHC Strategy 1 requires services within one hour travel. This scenario violates both equity and accessibility."},
+
+{t:" A PHC nurse is developing an outreach immunization program for a low-income community. She involves local imams, school teachers, and community leaders in the health committee to plan and implement the program. Which PHC strategy is she applying?",
+ o:["Strategy 1: Expansion of services",
+    "Strategy 2: Developing better relations with the community through community rapport and out-reach activities",
+    "Strategy 5: Promotion of health awareness",
+    "Strategy 7: Coordination with academic institutions"],
+ a:1, d:"medium",
+ exp:"Strategy 2 involves developing rapport with the community by involving community leaders (imams, teachers) in health center committees and conducting out-reach activities including immunization programs."},
+
+{t:" A 16-year-old unmarried female visits the PHC center with her mother. The nurse assesses her reproductive health history, provides education about healthy lifestyle, nutrition, menstrual health, and family planning for the future. This represents which type of care?",
+ o:["Antenatal care","Postpartum care",
+    "Preconceptional care — care of the female before conception including health promotion and education for young girls",
+    "Premarital care only"],
+ a:2, d:"medium",
+ exp:"Preconceptional care includes health promotion, prevention of health hazards, health education for young girls about determinants of health, family health, and family planning."},
+
+{t:" A pregnant woman at 28 weeks gestation visits the PHC clinic. The nurse measures her vital signs, weight, checks urine for glucose and albumin, measures fundal height, asks about fetal movement, and performs Leopold's maneuvers. This represents which type of antenatal visit?",
+ o:["Initial prenatal visit (first visit assessment)",
+    "Subsequent antenatal visit assessment",
+    "Postpartum assessment",
+    "Premarital examination"],
+ a:1, d:"medium",
+ exp:"Subsequent antenatal visits include: vital signs, weight, urine analysis (glucose, albumin, ketones), fundal height, fetal movement, Leopold's maneuvers (fetal lie/presentation), and edema assessment."},
+
+{t:" A newly married couple visits the PHC center requesting contraception. The wife is currently breastfeeding her 2-month-old infant. Which contraceptive method is MOST appropriate to recommend?",
+ o:["Combined oral contraceptives (estrogen-progestin)",
+    "Progestin-only oral contraceptives, as lactation is not impaired by this formulation",
+    "IUD — suitable for all postpartum women regardless of breastfeeding",
+    "Permanent sterilization since they already have one child"],
+ a:1, d:"hard",
+ exp:"Progestin-only pills are preferred for breastfeeding women as lactation is NOT impaired. Combined pills contain estrogen which can reduce milk supply."},
+
+{t:" A 32-year-old woman with a history of two previous pelvic inflammatory disease episodes requests an IUD for long-term contraception. The nurse should advise:",
+ o:["IUD is the best choice for women with pelvic infection history",
+    "IUD is contraindicated for women with a history of pelvic inflammatory disease",
+    "IUD is suitable only if PID episodes occurred more than 5 years ago",
+    "IUD can be inserted after antibiotic prophylaxis"],
+ a:1, d:"medium",
+ exp:"IUD is contraindicated for women with a history of pelvic inflammatory disease (PID) due to risk of ascending infection and further reproductive complications."},
+
+{t:" During a home visit, a CHN finds that a family uses water from an unprotected well, has no proper sewage disposal, and several children have repeated episodes of diarrhea. Which PHC element is MOST critically lacking for this family?",
+ o:["Immunization against major infectious diseases",
+    "Adequate safe water supply and basic sanitation",
+    "Provision of essential drugs",
+    "Maternal and child health care"],
+ a:1, d:"easy",
+ exp:"Lack of safe water supply and sanitation contributes to diarrheal diseases and intestinal worm infections, making this the most critically lacking PHC element for this family."},
+
+{t:" A 3-year-old child presents to the PHC center with fever, fast breathing, and diarrhea. The PHC nurse applies the IMCI protocol to assess and manage the child. Which IMCI component is being implemented?",
+ o:["Improving family and community practices",
+    "Improving health workers' skills and health system management of childhood illness",
+    "Building new pediatric hospitals",
+    "Providing specialist surgical care"],
+ a:1, d:"medium",
+ exp:"Using IMCI protocols at the health system level represents the component of improving the health system for effective management of childhood illness and improving health workers' skills."},
+
+{t:" A community health nurse is preparing examination requirements for food handlers at a school canteen. She lists the required tests. Which combination is CORRECT?",
+ o:["Only blood pressure and urine analysis",
+    "Chest X-ray (TB), Widal test (typhoid), stool analysis, skin examination (staph), throat swab (diphtheria)",
+    "Only CBC and liver function tests",
+    "CT scan and endoscopy"],
+ a:1, d:"medium",
+ exp:"Food handler examination includes: chest X-ray (TB), Widal test (typhoid carriers), stool analysis, skin examination (staph infection), and throat swab (diphtheria)."},
+
+{t:" A PHC team meeting discusses coordination with the Ministry of Agriculture regarding control of brucellosis and provision of safe food. This represents which PHC concept?",
+ o:["Appropriate technology","Team approach within the health sector",
+    "Inter-sectoral coordination — health requiring support from other sectors (agriculture for food and brucellosis control)",
+    "Community participation only"],
+ a:2, d:"hard",
+ exp:"Inter-sectoral coordination includes the ministry of agriculture's role in providing potable water, food provision, and controlling brucellosis — complementing health sector efforts."},
+
+{t:" Following delivery, a new mother is worried about caring for her newborn and feels insecure. The PHC nurse addresses her psychological needs. According to postpartum care principles, the nurse should:",
+ o:["Refer the mother to a psychiatrist immediately",
+    "Provide psychological care, help eliminate feelings of insecurity through daily newborn care education, and support the mother's confidence",
+    "Discharge the mother and ask her to return only if problems arise",
+    "Advise the mother to hire a nanny"],
+ a:1, d:"medium",
+ exp:"Postpartum psychological care addresses the mother's feelings of insecurity about newborn care. Prenatal/postnatal care should help eliminate these feelings through daily newborn care education and support."},
+
+{t:" A PHC nurse is educating a group of pregnant women about antenatal visit frequency. One woman at 32 weeks gestation asks how often she should come. The correct advice is:",
+ o:["Every 4 weeks until delivery","Every 2 weeks through 7-8 months (28-36 weeks) of pregnancy",
+    "Only once per month until delivery","Every week from now until birth"],
+ a:1, d:"medium",
+ exp:"Antenatal visit schedule: every 4 weeks until 6 months, every 2 WEEKS through 7-8 months (including 32 weeks), every week until birth."},
+
+{t:" A PHC administrator wants to improve community members' acceptance of health centers as places for comprehensive care (not just dispensaries for medications). Which PHC strategy should be implemented?",
+ o:["Strategy 1: Expansion and efficiency",
+    "Strategy 3: Weaning people toward comprehensive health care through service, educative, and legislative approaches",
+    "Strategy 6: Coordination with secondary care",
+    "Strategy 7: Coordination with academic institutions"],
+ a:1, d:"hard",
+ exp:"Strategy 3 orients people to accept health centers as the place for comprehensive health services through: service approach (providing all services), educative approach (educating about comprehensive care), and legislative approach (legislation like compulsory immunization)."},
+
+{t:" A CHN is visiting a woman with post-stroke left-sided hemiplegia who has been discharged home. The nurse assesses disability severity, sets realistic goals with the patient, coordinates with physiotherapy, investigates family support, and monitors the patient's ability to perform daily activities. This represents which level of prevention?",
+ o:["Primary prevention — immunization and health education",
+    "Secondary prevention — early case finding",
+    "Tertiary prevention — rehabilitation to reduce disability and restore function",
+    "No specific level of prevention"],
+ a:2, d:"medium",
+ exp:"This is tertiary prevention: identifying disability type and severity, making a realistic rehabilitative plan, determining team members, investigating family circumstances, applying the plan, and assessing daily living activity ability."},
+
+{t:" A PHC center serves 15,000 people in a rural area. The doctor is reviewing the family records and notices that 30% of families lack electricity and use unsafe water sources. He uses this data to plan targeted interventions. Which component of PHC data management does this represent?",
+ o:["Premarital examination records",
+    "The family record — which includes domestic environment characteristics (water supply, sanitary disposal, electricity) to guide health planning",
+    "Hospital discharge records",
+    "Laboratory result archiving only"],
+ a:1, d:"hard",
+ exp:"The family record includes domestic environment characteristics such as water supply, sanitary disposal, number of rooms, and electricity — used to assess family health needs and plan interventions."},
+
+{t:"PHC services should be accessible to citizens within easy reach of one hour of travel time.",
+ o:["True","False"], a:0, d:"easy",
+ exp:"Strategy 1 states that PHC services are to be made accessible to citizens within easy reach of one hour travel."},
+
+{t:"Community participation in PHC means that communities only have the duty — but NOT the right — to participate in health planning.",
+ o:["True","False"], a:1, d:"easy",
+ exp:"Communities have BOTH the right AND the duty to participate in the process for improvement and maintenance of health, enabling them to become agents of their own development."},
+
+{t:"There are 8 elements of Primary Health Care according to the Alma-Ata Declaration.",
+ o:["True","False"], a:0, d:"easy",
+ exp:"The 8 PHC elements include: health education, food/nutrition, safe water/sanitation, MCH/family planning, immunization, endemic disease control, treatment of common diseases/injuries, and essential drugs."},
+
+{t:"Iron deficiency anemia is the most common nutritional deficiency worldwide.",
+ o:["True","False"], a:0, d:"easy",
+ exp:"Anemia due to iron deficiency is stated to be the most common nutritional deficiency worldwide."},
+
+{t:"The effectiveness rate of permanent sterilization (tubal ligation/vasectomy) is 96.8%.",
+ o:["True","False"], a:1, d:"medium",
+ exp:"Permanent sterilization has an effectiveness rate of 99.5%. The 96.8% rate belongs to combined oral contraceptive pills."},
+
+{t:"IUD is contraindicated for women with a history of pelvic inflammatory disease.",
+ o:["True","False"], a:0, d:"medium",
+ exp:"IUD is contraindicated for women with a history of pelvic inflammatory disease (PID)."},
+
+{t:"Progestin-only oral contraceptives are safe for breastfeeding women as they do not impair lactation.",
+ o:["True","False"], a:0, d:"medium",
+ exp:"An advantage of progestin-only pills is that lactation is NOT impaired by this formulation, making them suitable for breastfeeding women."},
+
+{t:"During antenatal care, subsequent visits should be scheduled every 4 weeks throughout the entire pregnancy until birth.",
+ o:["True","False"], a:1, d:"medium",
+ exp:"The schedule is: every 4 weeks until 6 months, every 2 WEEKS through 7-8 months, and every WEEK until birth."},
+
+{t:"IMCI (Integrated Management of Childhood Illness) was developed jointly by WHO and UNICEF.",
+ o:["True","False"], a:0, d:"easy",
+ exp:"IMCI is a broad strategy to improve child health outcomes developed by WHO and UNICEF jointly."},
+
+{t:"Preconceptional care begins only when a woman becomes pregnant.",
+ o:["True","False"], a:1, d:"easy",
+ exp:"Preconceptional care is care of the female BEFORE conception, continued from birth through stages of growth and development until the time of conception."},
+
+{t:"The PHC health team includes only physicians and nurses, excluding social workers, pharmacists, and laboratory technicians.",
+ o:["True","False"], a:1, d:"medium",
+ exp:"The PHC team is multi-disciplinary and includes: physicians, dentists, nurses, nurse midwives, sanitarians, laboratory technicians, food inspectors, social workers, community workers, health records technicians, and pharmacists."},
+
+{t:"Lack of safe water supply and basic sanitation contributes to up to 10% of total disease burden in developing countries.",
+ o:["True","False"], a:0, d:"medium",
+ exp:"Lack of safe water supply and sanitation contributes to diarrheal disease and intestinal worm infections, which together make up to 10% of total disease in developing countries."},
+
+{t:"Leopold's maneuvers during antenatal care are performed to evaluate fetal lie and presentation.",
+ o:["True","False"], a:0, d:"medium",
+ exp:"Leopold's maneuvers are performed during subsequent antenatal visits to evaluate fetal lie and presentation."},
+
+{t:"Inter-sectoral coordination in PHC means the health sector can achieve all health goals without support from other ministries.",
+ o:["True","False"], a:1, d:"medium",
+ exp:"Health CANNOT be attained by the health sector alone. PHC requires the support of other sectors, with each sector's efforts being complementary to others."},
+
+{t:"Appropriate technology in PHC should be scientifically sound, acceptable to those who apply it, and ideally simple in nature.",
+ o:["True","False"], a:0, d:"medium",
+ exp:"Appropriate technology must be scientifically sound, acceptable to those who apply it and those for whom it is used, with simplicity being always desirable."},
+
+{t:"Spermicides as barrier contraceptives work by killing sperm and are available without prescription at low cost.",
+ o:["True","False"], a:0, d:"medium",
+ exp:"Spermicides are inserted in the vagina to kill sperm. They are available over the counter at low cost. Formulated as jellies, creams, foams, and suppositories."},
+
+{t:"WHO estimated that 80% immunization coverage against 6 childhood diseases can prevent 3 million child deaths per year.",
+ o:["True","False"], a:0, d:"hard",
+ exp:"WHO reported that 80% of the world's children had been immunized against six diseases and estimated that three million child deaths each year can be prevented as a result."},
+
+{t:"The community health nurse's management process in PHC includes community diagnosis, planning, evaluation, and reassessment.",
+ o:["True","False"], a:0, d:"medium",
+ exp:"The CHN applies the management process through all levels of prevention including: assessment and prioritizing community problems, community diagnosis, planning nursing intervention, evaluation of intervention, and reassessment."},
+
+{t:"Diarrheal diseases kill approximately 3-5 million young children globally each year.",
+ o:["True","False"], a:1, d:"hard",
+ exp:"Diarrheal diseases kill 2.2 MILLION young children per year. It is PNEUMONIA that kills 3-5 million young children each year."},
+
+{t:"Family records in PHC include data about domestic environment characteristics such as water supply, sanitary disposal, number of rooms, and electricity.",
+ o:["True","False"], a:0, d:"medium",
+ exp:"Family records include domestic environment characteristics: water supply, sanitary disposal, number of rooms, and electricity — all used to assess and plan health interventions."},
+];
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function shuffleOptions(question) {
+  const correctAnswer = question.o[question.a];
+
+  question.o = shuffle([...question.o]);
+
+  question.a = question.o.indexOf(correctAnswer);
+
+  return question;
+}
+
+QUESTIONS = QUESTIONS.map(q => shuffleOptions({...q}));
+/* ============ CONFIG ============ */
+const TOTAL_MINUTES = 60;   
+
+/* ============ ENGINE ============ */
+const LETTERS = ['A','B','C','D','E','F'];
+let pool, questions, qi, correct, wrong, answered, answers, wrongSet;
+let totalTime = 60 * 60, timeLeft, timerInterval;
+let activeTopic = 'All';
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+/* ---- TOPIC FILTER ---- */
+function buildFilters() {
+  const wrap = document.getElementById('filterWrap');
+  const countEl = document.getElementById('filterCount');
+  const topics = [...new Set(QUESTIONS.map(q=>q.topic).filter(Boolean))];
+  if (!topics.length) { wrap.style.display='none'; countEl.style.display='none'; return; }
+  wrap.style.display='flex';
+  countEl.style.display='block';
+  const all = ['All', ...topics];
+  wrap.innerHTML = all.map(t=>
+    `<button class="filter-btn${t==='All'?' active':''}" onclick="setTopic('${t}')">${t}</button>`
+  ).join('');
+  updateFilterCount();
+}
+
+function setTopic(t) {
+  activeTopic = t;
+  document.querySelectorAll('.filter-btn').forEach(b=>{
+    b.classList.toggle('active', b.textContent===t);
+  });
+  updateFilterCount();
+  init(getPool());
+}
+
+function getPool() {
+  return activeTopic==='All' ? QUESTIONS : QUESTIONS.filter(q=>q.topic===activeTopic);
+}
+
+function updateFilterCount() {
+  const p = getPool();
+  document.getElementById('filterCount').textContent =
+    `Showing ${p.length} question${p.length!==1?'s':''} · Topic: ${activeTopic}`;
+}
+
+/* ---- INIT ---- */
+function init(p) {
+  pool = p;
+  if (!pool.length) {
+    document.getElementById('app').innerHTML=`
+      <div class="empty-state">
+        <div class="ei">📭</div>
+        <h3>No Questions Yet</h3>
+        <p>Add questions to the QUESTIONS array in the script section.</p>
+      </div>`;
+    document.getElementById('totalBadge').textContent='0 Questions';
+    document.getElementById('sRemain').textContent='—';
+    clearInterval(timerInterval);
+    return;
+  }
+  questions = shuffle(pool);
+  qi=0; correct=0; wrong=0; answered=0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = [];
+  timeLeft = totalTime;
+  document.getElementById('totalBadge').textContent = questions.length+' Questions';
+  document.getElementById('timeBadge').textContent  = TOTAL_MINUTES+' Min';
+  startTimer(); render();
+}
+
+/* ---- TIMER ---- */
+function startTimer() {
+  clearInterval(timerInterval);
+  timerInterval = setInterval(()=>{
+    timeLeft--;
+    const m=Math.floor(timeLeft/60), s=timeLeft%60;
+    document.getElementById('timerTxt').textContent=`${m}:${s<10?'0':''}${s}`;
+    const b=document.getElementById('timerBadge');
+    if (timeLeft<=120)      b.className='timer-badge danger';
+    else if (timeLeft<=300) b.className='timer-badge warn';
+    else                    b.className='timer-badge';
+    if (timeLeft<=0) { clearInterval(timerInterval); finish(); }
+  },1000);
+}
+
+/* ---- TOP BAR ---- */
+function updateTop() {
+  const total=questions.length;
+  document.getElementById('sCorrect').textContent=correct;
+  document.getElementById('sWrong').textContent=wrong;
+  document.getElementById('sRemain').textContent=Math.round(((total-answered)/total)*100)+'%';
+  document.getElementById('progLabel').textContent='Q '+(qi+1)+' / '+total;
+  document.getElementById('progFill').style.width=((qi+1)/total*100)+'%';
+  document.getElementById('prog-bar').style.width=((qi+1)/total*100)+'%';
+}
+
+/* ---- RENDER ---- */
+function render() {
+  updateTop();
+  const q=questions[qi];
+  const opts = q.o.map((o,idx)=>`
+    <div class="opt" id="opt${idx}" onclick="choose(${idx})">
+      <div class="opt-letter">${LETTERS[idx]}</div>${o}
+    </div>`).join('');
+  document.getElementById('app').innerHTML=`
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Question ${qi+1} / ${questions.length}</div>
+        ${q.topic?`<div class="q-topic">${q.topic}</div>`:''}
+      </div>
+      <div class="q-text">${q.t}</div>
+      <div class="options">${opts}</div>
+      <div class="nav-btns">
+        <button class="btn btn-skip" onclick="skip()"><i class="fa-solid fa-forward"></i> Skip</button>
+      </div>
+    </div>`;
+}
+
+/* ---- CHOOSE ---- */
+function choose(v) {
+  if (answers[qi]!==null) return;
+  answers[qi]=v; answered++;
+  const q=questions[qi], ok=v===q.a;
+  ok?correct++:wrong++;
+  updateTop();
+  q.o.forEach((_,idx)=>{
+    const el=document.getElementById('opt'+idx);
+    el.classList.add('disabled');
+    if (idx===q.a) el.classList.add('correct');
+    else if (idx===v) el.classList.add('wrong');
+  });
+  const fb=document.createElement('div');
+  fb.className='feedback-bar '+(ok?'ok':'no');
+  fb.innerHTML=ok
+    ?`<span style="font-size:17px">🎉</span><span>ِما شاء الله عليك</span>`
+    :`<span style="font-size:17px">😔</span><span>ركز يا شطور</span>`;
+  const card=document.querySelector('.q-card');
+  card.querySelector('.options').after(fb);
+  if (q.exp) {
+    const exp=document.createElement('div');
+    exp.className='explanation';
+    exp.innerHTML='<b>💬 Explanation:</b> '+q.exp;
+    fb.after(exp);
+  }
+  card.querySelector('.nav-btns').innerHTML=`
+    <button class="btn btn-next" onclick="next()">
+      ${qi<questions.length-1
+        ?'<i class="fa-solid fa-arrow-right"></i> Next Question'
+        :'<i class="fa-solid fa-flag-checkered"></i> Finish Exam'}
+    </button>`;
+}
+
+/* ---- SKIP / NEXT ---- */
+function skip() {
+  if (answers[qi]===null) { answers[qi]=-1; answered++; wrong++; wrongSet.push(questions[qi]); updateTop(); }
+  next();
+}
+function next() {
+  if (qi<questions.length-1) { qi++; render(); window.scrollTo({top:0,behavior:'smooth'}); }
+  else finish();
+}
+
+/* ---- FINISH ---- */
+function finish() {
+  clearInterval(timerInterval);
+  const total=questions.length;
+  const score=Math.round((correct/total)*100);
+  questions.forEach((q,idx)=>{ if(answers[idx]!==q.a) wrongSet.push({...q,myAns:answers[idx]}); });
+  wrongSet=[...new Map(wrongSet.map(q=>[q.t,q])).values()];
+  let grade,gc;
+  if(score>=90)      { grade='🥇 Excellent';    gc='var(--ok)'; }
+  else if(score>=75) { grade='🥈 Very Good';     gc='var(--a1)'; }
+  else if(score>=60) { grade='🥉 Good';          gc='var(--warn)'; }
+  else               { grade='📚 Needs Review';  gc='var(--err)'; }
+  const circ=2*Math.PI*45, offset=circ-(score/100)*circ;
+  const report=questions.map((q,idx)=>{
+    const ok=answers[idx]===q.a;
+    return `<div class="report-item ${ok?'ok':'no'}">
+      <div class="ri-q">${ok?'✅':'❌'} ${q.t}</div>
+      ${!ok?`
+        <div class="ri-row"><span class="ri-badge ri-yours">Your Answer</span>${answers[idx]>=0?q.o[answers[idx]]:'Skipped'}</div>
+        <div class="ri-row"><span class="ri-badge ri-right">Correct</span>${q.o[q.a]}</div>
+      `:''}
+    </div>`;
+  }).join('');
+  document.getElementById('prog-bar').style.width='100%';
+  document.getElementById('app').innerHTML=`
+    <div class="result-hero">
+      <div class="score-ring">
+        <svg viewBox="0 0 110 110">
+          <circle class="ring-bg" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="0"/>
+          <circle class="ring-fill" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="${circ}"
+            style="stroke:${gc}" id="ringFill"/>
+        </svg>
+        <div class="score-num">${score}</div>
+        <div class="score-pct">%</div>
+      </div>
+      <div class="result-grade" style="color:${gc}">${grade}</div>
+      <div class="result-sub">Answered ${answered} of ${total} questions</div>
+      <div class="result-stats">
+        <div class="rs"><div class="n" style="color:var(--ok)">${correct}</div><div class="l">Correct</div></div>
+        <div class="rs"><div class="n" style="color:var(--err)">${wrong}</div><div class="l">Wrong</div></div>
+        <div class="rs"><div class="n" style="color:var(--a1)">${total-answered<0?0:total-answered}</div><div class="l">Skipped</div></div>
+      </div>
+    </div>
+    <div class="result-actions">
+      ${wrongSet.length?`<button class="btn btn-retry" onclick="retryWrong()"><i class="fa-solid fa-rotate-right"></i> Retry Wrong (${wrongSet.length})
+
+</button>`:''}
+      <button class="btn btn-home" onclick="init(getPool())"><i class="fa-solid fa-shuffle"></i> New Random Exam</button>
+      <a href="https://gaith-team.github.io/exam/" class="btn btn-home" style="text-decoration:none"><i class="fa-solid fa-house"></i> Back to Subject</a>
+    </div>
+    <div style="margin-top:22px">
+      <div style="font-size:14px;font-weight:700;margin-bottom:9px;color:var(--text2)">📋 Detailed Report</div>
+      ${report}
+    </div>`;
+  setTimeout(()=>{ document.getElementById('ringFill').style.strokeDashoffset=offset; },100);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ---- RETRY WRONG ---- */
+function retryWrong() {
+  const p=[...wrongSet];
+  questions=shuffle(p); qi=0; correct=0; wrong=0;
+  answers=new Array(questions.length).fill(null);
+  wrongSet=[]; answered=0; timeLeft=totalTime;
+  startTimer(); render();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ---- THEME ---- */
+const themeBtn=document.getElementById('themeBtn');
+let theme=localStorage.getItem('gt-theme')||'light';
+function applyTheme(t) {
+  theme=t;
+  document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'');
+  themeBtn.textContent=t==='dark'?'☀️':'🌙';
+  localStorage.setItem('gt-theme',t);
+}
+applyTheme(theme);
+themeBtn.addEventListener('click',()=>applyTheme(theme==='dark'?'light':'dark'));
+
+/* ---- START ---- */
+buildFilters();
+init(getPool());
+</script>
+</body>
+</html>
