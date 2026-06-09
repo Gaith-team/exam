@@ -493,19 +493,16 @@ function shuffle(arr) {
 }
 
 function shuffleOptions(question) {
-  const options = question.o.map((text, index) => ({
-    text,
-    correct: index === question.a
-  }));
+  const correctAnswer = question.o[question.a];
 
-  shuffle(options);
+  question.o = shuffle([...question.o]);
 
-  question.o = options.map(opt => opt.text);
-  question.a = options.findIndex(opt => opt.correct);
+  question.a = question.o.indexOf(correctAnswer);
 
   return question;
 }
 
+QUESTIONS = QUESTIONS.map(q => shuffleOptions({...q}));
 /* ============ CONFIG ============ */
 const TOTAL_MINUTES = 60;   
 
