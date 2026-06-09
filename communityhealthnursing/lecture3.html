@@ -1,0 +1,1253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --a1: #0f766e;
+  --a2: #14b8a6;
+  --a3: #99f6e4;
+  --a2l: #ccfbf1;
+  --ag: rgba(20,184,166,0.13);
+  --ags: rgba(20,184,166,0.26);
+  --bg:    #f0fdfa;
+  --bg2:   #ccfbf1;
+  --card:  #ffffff;
+  --text:  #134e4a;
+  --text2: #0f766e;
+  --text3: #5eead4;
+  --bdc:   rgba(20,184,166,0.20);
+  --bdcard:rgba(15,118,110,0.12);
+  --sh:    0 4px 18px rgba(15,118,110,0.09);
+  --shh:   0 8px 30px rgba(20,184,166,0.22);
+  --ok:    #15803d;
+  --err:   #b91c1c;
+  --warn:  #b45309;
+  --rad:   16px;
+  --tr:    all 0.28s cubic-bezier(.4,0,.2,1);
+}
+[data-theme="dark"] {
+  --bg:    #022c22; --bg2:   #064e3b; --card:  #065f46;
+  --text:  #d1fae5; --text2: #6ee7b7; --text3: #34d399;
+  --bdc:   rgba(52,211,153,0.22);
+  --bdcard:rgba(52,211,153,0.12);
+  --sh:    0 4px 20px rgba(0,0,0,0.45);
+  --shh:   0 8px 36px rgba(20,184,166,0.28);
+  --a1: #10b981; --a2: #34d399; --a2l: #064e3b; --a3: #6ee7b7;
+}
+
+body {
+  font-family:'Outfit',sans-serif;
+  background:var(--bg); color:var(--text);
+  min-height:100vh; overflow-x:hidden;
+  transition:background .4s,color .4s;
+}
+
+#prog-bar {
+  position:fixed;top:0;left:0;height:3px;z-index:999;
+  background:linear-gradient(90deg,var(--a1),var(--a2),var(--a3));
+  width:0%;transition:width .15s;
+}
+
+/* NAV */
+nav {
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 26px;height:62px;
+  background:rgba(240,253,250,.94);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--bdcard);transition:var(--tr);
+}
+[data-theme="dark"] nav { background:rgba(2,44,34,.96); }
+
+.nav-back {
+  display:flex;align-items:center;gap:6px;
+  color:var(--text2);text-decoration:none;font-size:13px;font-weight:700;
+  padding:6px 13px;border-radius:9px;
+  border:1px solid var(--bdcard);background:var(--card);
+  transition:var(--tr);
+}
+.nav-back:hover { color:var(--a2);border-color:var(--bdc); }
+
+.nav-brand { display:flex;align-items:center;gap:8px;font-size:15px;font-weight:900;color:var(--text); }
+.nav-logo {
+  width:34px;height:34px;border-radius:9px;
+  background:linear-gradient(135deg,var(--a1),var(--a2));
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:12px;font-weight:900;
+}
+.theme-btn {
+  width:37px;height:37px;border-radius:50%;
+  border:1px solid var(--bdcard);background:var(--card);
+  cursor:pointer;font-size:15px;
+  display:flex;align-items:center;justify-content:center;transition:var(--tr);
+}
+.theme-btn:hover { border-color:var(--a2);transform:rotate(22deg); }
+
+/* HERO */
+.hero {
+  margin-top:62px;
+  background:linear-gradient(135deg,var(--a1) 0%,var(--a2) 60%,#2dd4bf 100%);
+  padding:34px 22px 30px;text-align:center;position:relative;overflow:hidden;
+}
+.hero::before {
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 500px 180px at 50% 110%,rgba(255,255,255,.13) 0%,transparent 70%);
+}
+.hero-icon {
+  width:62px;height:62px;border-radius:18px;
+  background:rgba(255,255,255,.2);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;margin:0 auto 11px;
+  border:1.5px solid rgba(255,255,255,.35);
+}
+.hero h1 { font-size:clamp(17px,3.5vw,25px);font-weight:900;color:#fff;margin-bottom:4px; }
+.hero p  { font-size:13px;color:rgba(255,255,255,.82); }
+.hero-meta { display:flex;justify-content:center;gap:12px;margin-top:14px;flex-wrap:wrap; }
+.meta-pill {
+  background:rgba(255,255,255,.18);backdrop-filter:blur(5px);
+  border:1px solid rgba(255,255,255,.3);border-radius:50px;
+  padding:5px 13px;font-size:12px;font-weight:700;color:#fff;
+  display:flex;align-items:center;gap:5px;
+}
+
+/* TOPIC FILTER */
+.filter-wrap {
+  padding:14px 16px 2px;
+  display:flex;flex-wrap:wrap;gap:7px;
+  background:var(--card);border-bottom:1px solid var(--bdcard);
+}
+.filter-btn {
+  padding:5px 13px;border-radius:50px;
+  border:1.5px solid var(--bdcard);background:var(--bg);
+  font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;
+  color:var(--text2);cursor:pointer;transition:var(--tr);
+}
+.filter-btn:hover,
+.filter-btn.active {
+  background:var(--a2);color:#fff;border-color:var(--a2);
+  box-shadow:0 2px 10px var(--ag);
+}
+.filter-count {
+  padding:14px 16px 14px;
+  font-size:12px;color:var(--text2);font-weight:600;
+  background:var(--card);border-bottom:1px solid var(--bdcard);
+}
+
+/* SHELL */
+.shell { max-width:560px;margin:0 auto;padding:18px 16px 80px; }
+
+/* STATS */
+.stats-row { display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-bottom:13px; }
+.stat-box {
+  background:var(--card);border:1px solid var(--bdcard);
+  border-radius:var(--rad);padding:11px 7px;text-align:center;
+}
+.stat-box .val { font-size:20px;font-weight:900; }
+.stat-box .lbl { font-size:11px;color:var(--text3);margin-top:2px; }
+.c-ok   { color:var(--ok); }
+.c-err  { color:var(--err); }
+.c-acc  { color:var(--a1); }
+
+/* PROG STRIP */
+.prog-strip {
+  background:var(--card);border:1px solid var(--bdcard);
+  border-radius:var(--rad);padding:12px 15px;margin-bottom:15px;
+  display:flex;align-items:center;gap:11px;
+}
+.prog-label { font-size:13px;font-weight:700;color:var(--text2);white-space:nowrap; }
+.prog-track { flex:1;height:7px;background:var(--bg2);border-radius:7px;overflow:hidden; }
+.prog-fill {
+  height:100%;width:0%;
+  background:linear-gradient(90deg,var(--a1),var(--a2));
+  border-radius:7px;transition:width .4s;
+}
+.timer-badge {
+  min-width:60px;height:33px;border-radius:17px;
+  background:var(--bg2);border:1px solid var(--bdcard);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:900;color:var(--text);
+  gap:4px;padding:0 10px;flex-shrink:0;
+}
+.timer-badge.warn   { color:var(--warn);  border-color:rgba(180,83,9,.3);  background:rgba(180,83,9,.08); }
+.timer-badge.danger { color:var(--err);   border-color:rgba(185,28,28,.3); background:rgba(185,28,28,.08);animation:blink .8s infinite; }
+@keyframes blink { 0%,100%{opacity:1}50%{opacity:.45} }
+
+/* Q CARD */
+.q-card {
+  background:var(--card);border:1px solid var(--bdcard);
+  border-radius:20px;overflow:hidden;box-shadow:var(--sh);
+}
+.q-header {
+  background:linear-gradient(135deg,var(--a1),var(--a2));
+  padding:9px 17px;display:flex;align-items:center;gap:8px;
+}
+.q-num {
+  background:rgba(255,255,255,.22);border-radius:7px;
+  padding:3px 10px;font-size:11px;font-weight:700;color:#fff;
+}
+.q-topic {
+  margin-left:auto;background:rgba(255,255,255,.18);border-radius:50px;
+  padding:2px 10px;font-size:11px;font-weight:700;color:#fff;
+  border:1px solid rgba(255,255,255,.25);
+}
+.q-text {
+  padding:19px 17px 13px;font-size:15px;font-weight:700;color:var(--text);
+  line-height:1.65;border-bottom:1px solid var(--bdcard);
+}
+.options { padding:13px 17px 17px;display:flex;flex-direction:column;gap:9px; }
+
+.opt {
+  display:flex;align-items:center;gap:11px;
+  padding:12px 14px;border-radius:11px;
+  border:1.5px solid var(--bdcard);background:var(--bg);
+  cursor:pointer;font-size:14px;font-weight:600;color:var(--text);
+  transition:var(--tr);user-select:none;
+}
+.opt:hover:not(.disabled) {
+  border-color:var(--a2);background:var(--ag);
+  transform:translateX(3px);
+}
+.opt-letter {
+  width:28px;height:28px;border-radius:8px;flex-shrink:0;
+  background:var(--bg2);border:1px solid var(--bdcard);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:900;color:var(--text2);
+  transition:var(--tr);
+}
+.opt.correct { border-color:var(--ok);background:rgba(21,128,61,.08); }
+.opt.correct .opt-letter { background:var(--ok);color:#fff;border-color:var(--ok); }
+.opt.wrong   { border-color:var(--err);background:rgba(185,28,28,.07); }
+.opt.wrong   .opt-letter { background:var(--err);color:#fff;border-color:var(--err); }
+.opt.disabled { pointer-events:none; }
+
+/* FEEDBACK */
+.feedback-bar {
+  margin:11px 17px;padding:11px 14px;border-radius:11px;
+  display:flex;align-items:center;gap:9px;
+  font-size:14px;font-weight:700;
+  animation:popIn .38s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes popIn { from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1} }
+.feedback-bar.ok { background:rgba(21,128,61,.1);color:var(--ok);border:1px solid rgba(21,128,61,.25); }
+.feedback-bar.no { background:rgba(185,28,28,.08);color:var(--err);border:1px solid rgba(185,28,28,.2); }
+
+.explanation {
+  margin:0 17px 11px;padding:10px 13px;
+  background:rgba(20,184,166,.07);border-radius:9px;
+  border-left:3px solid var(--a2);
+  font-size:13px;color:var(--text2);line-height:1.6;
+}
+
+/* BUTTONS */
+.nav-btns { padding:4px 17px 17px;display:flex;gap:9px; }
+.btn {
+  flex:1;padding:12px;border:none;border-radius:11px;
+  font-size:14px;font-weight:900;cursor:pointer;
+  font-family:'Outfit',sans-serif;transition:var(--tr);
+  display:flex;align-items:center;justify-content:center;gap:7px;
+}
+.btn-next {
+  background:linear-gradient(135deg,var(--a1),var(--a2));
+  color:#fff;box-shadow:0 4px 14px var(--ag);
+}
+.btn-next:hover { transform:translateY(-2px);box-shadow:0 6px 20px var(--ags); }
+.btn-skip {
+  background:var(--bg2);color:var(--text2);
+  border:1px solid var(--bdcard);flex:0 0 auto;padding:12px 15px;
+}
+.btn-skip:hover { border-color:var(--warn);color:var(--warn); }
+
+/* RESULTS */
+.result-hero {
+  text-align:center;padding:30px 18px 22px;
+  background:var(--card);border-radius:20px;
+  border:1px solid var(--bdcard);margin-bottom:17px;
+}
+.score-ring {
+  width:108px;height:108px;border-radius:50%;margin:0 auto 15px;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;position:relative;
+}
+.score-ring svg { position:absolute;inset:-5px;width:calc(100% + 10px);height:calc(100% + 10px);transform:rotate(-90deg); }
+.score-ring circle { fill:none;stroke-width:5;stroke-linecap:round; }
+.ring-bg   { stroke:var(--bg2); }
+.ring-fill { stroke:var(--a2);transition:stroke-dashoffset 1s ease; }
+.score-num { font-size:28px;font-weight:900;color:var(--text); }
+.score-pct { font-size:12px;color:var(--text3); }
+.result-grade { font-size:20px;font-weight:900;margin-bottom:4px; }
+.result-sub   { font-size:13px;color:var(--text2); }
+.result-stats { display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:17px; }
+.rs { background:var(--bg2);border-radius:10px;padding:10px 7px;text-align:center; }
+.rs .n { font-size:20px;font-weight:900; }
+.rs .l { font-size:11px;color:var(--text3); }
+
+/* REPORT */
+.report-item {
+  background:var(--card);border:1px solid var(--bdcard);
+  border-radius:12px;padding:14px;margin-bottom:8px;
+  border-left:4px solid var(--bdcard);
+}
+.report-item.ok { border-left-color:var(--ok); }
+.report-item.no { border-left-color:var(--err); }
+.report-item .ri-q { font-size:13px;font-weight:700;margin-bottom:6px; }
+.report-item .ri-row { display:flex;align-items:center;gap:7px;font-size:12px;margin-top:4px;color:var(--text2); }
+.ri-badge { padding:2px 8px;border-radius:6px;font-weight:700;font-size:11px;flex-shrink:0; }
+.ri-yours { background:rgba(185,28,28,.1);color:var(--err); }
+.ri-right { background:rgba(21,128,61,.1);color:var(--ok); }
+
+.result-actions { display:flex;flex-direction:column;gap:9px;margin-top:17px; }
+.btn-retry { background:linear-gradient(135deg,var(--a1),var(--a2));color:#fff; }
+.btn-retry:hover { transform:translateY(-2px);box-shadow:0 6px 20px var(--ags); }
+.btn-home  { background:var(--bg2);color:var(--text);border:1px solid var(--bdcard); }
+.btn-home:hover { border-color:var(--a2);color:var(--a1); }
+
+/* FOOTER */
+footer {
+  background:var(--bg2);border-top:1px solid var(--bdcard);
+  padding:20px 22px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:9px;
+}
+.footer-brand { font-size:14px;font-weight:700; }
+.footer-brand span { color:var(--a1); }
+.footer-tg {
+  display:flex;align-items:center;gap:5px;
+  text-decoration:none;color:#229ED9;font-size:12px;font-weight:600;
+}
+
+/* EMPTY STATE */
+.empty-state {
+  text-align:center;padding:50px 20px;
+  background:var(--card);border-radius:20px;border:1px solid var(--bdcard);
+}
+.empty-state .ei { font-size:40px;margin-bottom:12px; }
+.empty-state h3 { font-size:17px;font-weight:700;margin-bottom:7px; }
+.empty-state p { font-size:13px;color:var(--text2); }
+
+@media (max-width:480px) {
+  nav { padding:0 13px; }
+  .shell { padding:13px 11px 60px; }
+  .nav-brand span { display:none; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog-bar"></div>
+
+<nav>
+  <a href="https://gaith-team.github.io/exam/" class="nav-back"><i class="fa-solid fa-arrow-left"></i> Back</a>
+  <div class="nav-brand">
+    <div class="nav-logo">GT</div>
+    <span>GHAITH TEAM</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-icon">🌿</div>
+  <h1>School health</h1>
+  <p>Community Health Nursing</p>
+  <div class="hero-meta">
+    <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">-- Questions</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-clock"></i> <span id="timeBadge">60 Min</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-shuffle"></i> Shuffled</div>
+  </div>
+</div>
+
+<!-- Topic filter bar (shown only if topics exist) -->
+<div id="filterWrap" class="filter-wrap" style="display:none;"></div>
+<div id="filterCount" class="filter-count" style="display:none;"></div>
+
+<div class="shell">
+  <div class="stats-row">
+    <div class="stat-box"><div class="val c-ok"  id="sCorrect">0</div><div class="lbl">✔ Correct</div></div>
+    <div class="stat-box"><div class="val c-err"  id="sWrong">0</div><div class="lbl">✖ Wrong</div></div>
+    <div class="stat-box"><div class="val c-acc"  id="sRemain">100%</div><div class="lbl">⏳ Remaining</div></div>
+  </div>
+
+  <div class="prog-strip">
+    <div class="prog-label" id="progLabel">Q 1</div>
+    <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+    <div class="timer-badge" id="timerBadge"><i class="fa-regular fa-clock"></i><span id="timerTxt">60:00</span></div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<footer>
+  <div class="footer-brand">GAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg">
+    <i class="fa-brands fa-telegram"></i> @nursing2bu
+  </a>
+</footer>
+
+<script>
+const QUESTIONS = [
+
+{t:"School health nursing focuses on protecting and promoting student health by:",
+ o:["Providing only emergency surgical procedures",
+    "Facilitating optimal development and promoting academic success",
+    "Replacing classroom teachers during illness",
+    "Administering only vaccines to students"],
+ a:1, d:"easy",
+ exp:"School nursing focuses on protecting and promoting student health by facilitating optimal development and promoting academic success."},
+
+{t:"Which of the following is a characteristic of the school-age period?",
+ o:["Period of complete rest and inactivity",
+    "Period of physical, mental, social, and emotional growth and development",
+    "Period with no susceptibility to communicable diseases",
+    "Period exclusively of academic stress only"],
+ a:1, d:"easy",
+ exp:"The school-age period is characterized by physical, mental, social, and emotional growth and development, as well as play, creation, hyperactivity, and stress."},
+
+{t:"The three main components of a school health program are:",
+ o:["Nutrition, exercise, and rest",
+    "School living environment, school health services, and health education",
+    "Curative services, dental services, and vaccination only",
+    "Physical education, mathematics, and science"],
+ a:1, d:"easy",
+ exp:"The school health program includes three phases: school living environment, school health services, and health education."},
+
+{t:"What is the recommended daily caloric intake for school-age children?",
+ o:["1200 calories/day","1800 calories/day","2400 calories/day","3200 calories/day"],
+ a:2, d:"easy",
+ exp:"School students need 2400 calories per day from a well-balanced diet containing all nutrients, vitamins, minerals, and adequate fluid intake."},
+
+{t:"Which of the following is classified as an appraisal service in the school health program?",
+ o:["Providing immunizations","Administering first aid","Conducting comprehensive medical examinations","Providing dental treatments"],
+ a:2, d:"easy",
+ exp:"Appraisal services include history, observation, screening, laboratory tests, comprehensive medical examinations, and special surveys."},
+
+{t:"The school health program's MAIN objective is:",
+ o:["To train students to become healthcare workers",
+    "Prevention of illness and promotion of health and well-being through early detection, healthy behavior development, and healthy environment",
+    "To replace hospital-based care for students",
+    "To provide free medications to all students"],
+ a:1, d:"easy",
+ exp:"The main objective is prevention of illness and promotion of health and well-being through early detection, developing healthy behaviors, ensuring healthy environments, and preventing communicable diseases."},
+
+{t:"What is the maximum recommended number of students per classroom?",
+ o:["20 students","50 students","30 to 40 students","60 students"],
+ a:2, d:"easy",
+ exp:"The number of students in a classroom should not exceed 30 to 40 students."},
+
+{t:"Which of the following diseases requires a 21-day exclusion period from school?",
+ o:["Measles","Mumps","Hepatitis A","Chicken pox"],
+ a:2, d:"easy",
+ exp:"Hepatitis A requires 21 days of school exclusion. Mumps and measles require 14 days each."},
+
+{t:"Which of the following diseases requires a 14-day exclusion period from school?",
+ o:["Hepatitis A","Whooping cough","COVID-19","Measles"],
+ a:3, d:"easy",
+ exp:"Measles, mumps, and chicken pox each require 14 days of school exclusion."},
+
+{t:"Whooping cough (pertussis) requires exclusion from school for:",
+ o:["7 days","14 days","18 days","21 days"],
+ a:2, d:"easy",
+ exp:"Whooping cough requires 18 days of school exclusion from school."},
+
+{t:"What is the recommended classroom size?",
+ o:["3×4 m or 2×3 m","6×8 m or 5×7 m","10×12 m or 9×11 m","2×2 m only"],
+ a:1, d:"easy",
+ exp:"The recommended classroom size is usually 6×8 m or 5×7 m."},
+
+{t:"School phobia is best described as:",
+ o:["A child's refusal to attend school due to fear, with common complaints of abdominal pain, vomiting, headache, and panic attacks after ruling out organic causes",
+    "A learning disability affecting reading and writing",
+    "An aggressive behavior disorder",
+    "An infectious disease causing school absence"],
+ a:0, d:"easy",
+ exp:"School phobia presents with complaints such as abdominal pain, vomiting, headache, regression, nausea, diarrhea, and panic attacks. All organic causes must be ruled out first."},
+
+{t:"Health education in schools is best defined as:",
+ o:["Distributing pamphlets without follow-up",
+    "The process of providing learning experiences to influence knowledge, attitudes, and change behavior into a healthful one",
+    "Teaching only physical education classes",
+    "A once-yearly activity for parents only"],
+ a:1, d:"easy",
+ exp:"Health education is the process of providing learning experiences for the purpose of influencing knowledge, attitudes, and changing behavior into a healthful one."},
+
+{t:"Which of the following is a nutritional problem in school-age children?",
+ o:["Scoliosis","Conjunctivitis","Obesity (overfeeding) or Anemia (underfeeding)","School phobia"],
+ a:2, d:"easy",
+ exp:"Nutritional problems in school-age children include overfeeding (obesity), underfeeding, anemia, and vitamin A deficiency."},
+
+{t:"Which of the following screening tests is done YEARLY in school health programs?",
+ o:["Chest X-ray","Blood culture","Height, weight, and visual acuity","Stool culture for parasites"],
+ a:2, d:"easy",
+ exp:"Yearly screening tests include height, weight, visual acuity, hearing, and speech defects assessment."},
+
+{t:"The social and emotional school environment includes:",
+ o:["Proper sewage disposal and insect control",
+    "Good relationships between students, teachers, and parents, with opportunities for developing talents and skills",
+    "Adequate water supply and ventilation",
+    "Proper desk and seat design only"],
+ a:1, d:"easy",
+ exp:"The social and emotional environment includes good student-teacher-parent relationships, properly arranged school days, social activities, and opportunities for developing talents and skills."},
+
+{t:"Which of the following represents an emergency that school health services must address?",
+ o:["Routine dental check-ups","Screening for scoliosis","Appendicitis, epileptic fits, and fainting","Annual comprehensive medical examination"],
+ a:2, d:"easy",
+ exp:"The most common medical emergencies in schools include appendicitis, gastroenteritis, renal colic, epileptic fits, fainting, and accidents."},
+
+{t:"COVID-19 requires school exclusion for:",
+ o:["7 days","14 days","18 days","21 days"],
+ a:1, d:"easy",
+ exp:"COVID-19 requires 14 days of school exclusion."},
+
+/* ── MEDIUM 19-40 ── */
+{t:"Why are school-age children considered a vulnerable group deserving special health consideration?",
+ o:["Because they are immune to most infectious diseases",
+    "Because they are growing and exposed to physiological, mental, and emotional stress at home and school, and are easily reached through schools",
+    "Because they only need dental care",
+    "Because they have fully developed immune systems"],
+ a:1, d:"medium",
+ exp:"School students are a vulnerable group because they are growing and exposed to physiological, mental, and emotional stress. Schools are convenient settings since children are compelled by law to attend."},
+
+{t:"The school site must be:",
+ o:["Adjacent to heavy traffic roads for accessibility",
+    "Sufficiently away from sources of noise, heavy traffic, and pollution, in a proper location to provide safety",
+    "Located in commercial zones",
+    "As close as possible to industrial areas"],
+ a:1, d:"medium",
+ exp:"The school site must be sufficiently away from noise, heavy traffic, and pollution, in a proper location to provide safety."},
+
+{t:"Classroom ventilation should be arranged so that:",
+ o:["Windows are only on one side for uniform airflow",
+    "Windows are arranged on both side walls to allow cross ventilation",
+    "Ventilation is achieved through the roof only",
+    "Air conditioning replaces all natural ventilation"],
+ a:1, d:"medium",
+ exp:"Classroom windows should be arranged on both side walls to allow cross ventilation."},
+
+{t:"Laboratory tests in school health appraisal services include all of the following EXCEPT:",
+ o:["Urine analysis for albumin, sugar, and Schistosoma",
+    "Stool analysis for parasites such as Ascaris",
+    "Blood analysis (hemoglobin) for anemia",
+    "CT scan of the brain for all students"],
+ a:3, d:"medium",
+ exp:"School laboratory tests include urine analysis, stool analysis, blood analysis (Hb), and chest X-ray. CT scan of the brain for all students is not included."},
+
+{t:"In Egypt, comprehensive medical examination for school children is conducted:",
+ o:["Only once during the entire school career",
+    "Every month by school nurses",
+    "On entry to each new grade of each education level",
+    "Only when students complain of symptoms"],
+ a:2, d:"medium",
+ exp:"In Egypt, the comprehensive medical examination is done on entry to each new grade of each education level, conducted by physicians and dentists."},
+
+{t:"Booster doses of DT vaccine in Egyptian schools are given in which school years?",
+ o:["1st and 2nd year of primary school",
+    "1st and 4th year of primary school",
+    "Only in the 1st year of preparatory school",
+    "3rd and 5th year of primary school"],
+ a:1, d:"medium",
+ exp:"Booster doses of DT are given in the 1st and 4th year of primary school as part of school preventive services."},
+
+{t:"Meningitis booster vaccination in Egyptian schools is given in:",
+ o:["Only the 1st year of primary school",
+    "1st year of primary school, 1st year of preparatory school, and 1st year of secondary school",
+    "1st year of secondary school only",
+    "Every year throughout primary education"],
+ a:1, d:"medium",
+ exp:"Meningitis booster doses are given in the 1st year of primary school, 1st year of preparatory school, and 1st year of secondary school."},
+
+{t:"After recovery from a communicable disease, before readmission to school the child should be:",
+ o:["Readmitted immediately after the exclusion period ends without any check",
+    "Examined by the nurse before readmission to confirm recovery",
+    "Readmitted only if parents sign a consent form",
+    "Kept home for an additional two weeks regardless of condition"],
+ a:1, d:"medium",
+ exp:"After illness, the child should be examined by the nurse before readmission to school to confirm recovery."},
+
+{t:"German measles (rubella) requires school exclusion for:",
+ o:["14 days","18 days","21 days","7 days"],
+ a:3, d:"medium",
+ exp:"German measles (rubella) requires 7 days of school exclusion."},
+
+{t:"In Egypt, the school health service structure provides a health unit for every:",
+ o:["500 students","1000 students","3000 students","5000 students"],
+ a:2, d:"medium",
+ exp:"In Egypt, health services are provided through health insurance, with one health unit for every 3000 students, staffed by a doctor and nurse."},
+
+{t:"Dental health services in schools should include which three components?",
+ o:["Examination, surgery, and hospitalization",
+    "Dental health education, prevention measures, and referral with follow-through for discovered dental problems",
+    "Extraction, filling, and whitening",
+    "Annual dental X-rays, medication, and hospitalization"],
+ a:1, d:"medium",
+ exp:"Three basic components of a school dental health program are dental health education, prevention measures, and referral with follow-through for discovered dental problems."},
+
+{t:"The school nurse's role in the physical school environment includes:",
+ o:["Prescribing medications for environmental illnesses",
+    "Daily rounds in classrooms to ensure good ventilation and lighting, and in bathrooms for water supply and sewage disposal",
+    "Replacing the school maintenance department",
+    "Teaching only environmental science classes"],
+ a:1, d:"medium",
+ exp:"The nurse conducts daily rounds in classrooms (ventilation, lighting) and bathrooms (water supply, sewage disposal), writes reports, and alerts the administration to deficiencies."},
+
+{t:"Which health education topic is specifically included in school health education programs?",
+ o:["Advanced medical procedures",
+    "Anti-drugs and anti-tobacco education, accident prevention, and disaster preparedness",
+    "Political science and economics",
+    "Hospital management"],
+ a:1, d:"medium",
+ exp:"School health education includes personal hygiene, nutrition, pollution, accident prevention, infection prevention, disaster preparedness, first aid, anti-drugs, anti-tobacco, sports, environment education, and common health problems."},
+
+{t:"Care of school absence during epidemics is important because:",
+ o:["Absent students miss academic lessons only",
+    "It is important to know the cause of absence, especially during epidemics, to identify and control disease spread",
+    "Absent students do not need any health attention",
+    "Absence is a behavioral problem not related to health"],
+ a:1, d:"medium",
+ exp:"Care of absence involves knowing the cause, especially during epidemics, to identify potential cases and prevent further disease spread."},
+
+{t:"Children with special disabilities (exceptional children) are BEST educated in:",
+ o:["Completely isolated special schools with no contact with other children",
+    "Ordinary schools with other children according to most specialists' preference",
+    "At home with no formal schooling",
+    "Only in hospital settings"],
+ a:1, d:"medium",
+ exp:"Most specialists prefer the education of handicapped children in ordinary schools with other children, while providing medical, social, and educational care."},
+
+{t:"The role of the school nurse in the non-physical environment includes:",
+ o:["Only ensuring proper sewage disposal",
+    "Involving teachers and parents in children's problems, listening to students, giving support and advice, and promoting good relationships",
+    "Conducting only physical examinations",
+    "Managing the school cafeteria"],
+ a:1, d:"medium",
+ exp:"In the non-physical environment, the nurse involves teachers and parents in children's problems, listens to students, gives support and advice, and promotes good student-teacher-parent relationships."},
+
+{t:"Health observation by teachers in the school setting can detect which of the following?",
+ o:["Only physical injuries",
+    "Loss of interest, fatigability, eye problems, behavioral problems such as aggression, and manifestations of diseases like pallor or bronchial asthma episodes",
+    "Genetic diseases only",
+    "Chronic diseases requiring surgery"],
+ a:1, d:"medium",
+ exp:"Teachers can observe changes in appearance and behavior, identifying: loss of interest, fatigue, eye problems, behavioral issues, and disease manifestations like pallor or asthma."},
+
+{t:"The school nurse's responsibilities regarding food handlers in school include:",
+ o:["Only teaching food handlers about cooking techniques",
+    "Ensuring food handlers undergo physical examinations, have health certificates, and are examined yearly",
+    "Replacing food handlers during illness",
+    "Supervising food preparation daily without any examination requirement"],
+ a:1, d:"medium",
+ exp:"The school nurse ensures food handlers in school pass through physical examination, have a health certificate, and are examined yearly and treated as needed."},
+
+{t:"Which of the following correctly describes the aims of school health services?",
+ o:["To enhance overall health, provide early detection of disorders, appropriate treatment, prevention of communicable disease, and healthy environment",
+    "To replace all primary care physicians in the community",
+    "To focus only on emergency treatment of injuries",
+    "To provide free medications for all students regardless of need"],
+ a:0, d:"medium",
+ exp:"Aims of school health services include enhancing overall health, early detection of disorders, appropriate treatment, prevention and control of communicable disease, and maintaining a healthy environment."},
+
+{t:"The school nurse assists in curative services by:",
+ o:["Performing surgical operations in the school clinic",
+    "Identifying students needing medical treatment, referring for care, providing medication for chronically ill, keeping health records, and interpreting findings",
+    "Only distributing over-the-counter medicines",
+    "Replacing the school physician in all activities"],
+ a:1, d:"medium",
+ exp:"Curative nursing roles include identifying students needing treatment, referral, providing medication for chronically ill children, maintaining complete health records, and interpreting findings."},
+
+{t:"Which of the following is a psycho-social need of school-age children?",
+ o:["Only nutritional supplements","Security, safety, and peer group interaction","Surgical procedures","Advanced academic tutoring"],
+ a:1, d:"medium",
+ exp:"Psycho-social needs of school-age children include security, safety, and peer group interaction."},
+
+/* ── HARD 41-55 ── */
+{t:"How can schools serve as a means to reach parents regarding health promotion?",
+ o:["Schools cannot reach parents at all",
+    "Parents can be reached through their children who carry health messages and through parent-teacher health conferences",
+    "Only through social media campaigns",
+    "Only through government health departments"],
+ a:1, d:"hard",
+ exp:"The lecture states 'We can reach parents through their children.' The nurse also participates in parent counsels and stimulates parental interest and cooperation in the school health program."},
+
+{t:"A student returns to school after having hepatitis A. As a school nurse, which action is MOST appropriate?",
+ o:["Allow immediate return after parent's verbal confirmation",
+    "Ensure 21 days have passed AND examine the child before readmission",
+    "Allow return after 14 days without examination",
+    "Only require a written note from parents"],
+ a:1, d:"hard",
+ exp:"Hepatitis A requires 21 days exclusion. The child must also be examined by the nurse before readmission to school to confirm recovery."},
+
+{t:"The school nurse writes a report on environmental deficiencies in a special book and presents it to the administrator and physician. This activity falls under which role?",
+ o:["Health education role","Curative services role","Healthful school physical environment role","Screening and appraisal role"],
+ a:2, d:"hard",
+ exp:"Writing reports on building conditions and presenting them to administrators is part of the school nurse's role in maintaining the healthful physical school environment."},
+
+{t:"A student with epilepsy has a seizure during class. The school nurse's PRIORITY action is:",
+ o:["Immediately call parents and wait for them to arrive before doing anything",
+    "Carry out first aid measures and if necessary transfer to hospital or clinic",
+    "Administer medication without physician order",
+    "Send the student home with another student"],
+ a:1, d:"hard",
+ exp:"Emergency care responsibilities include carrying out first aid measures for injured or ill students and, if necessary, transferring them to hospital or clinics."},
+
+{t:"Which statement BEST explains why suitable desks and seats are important in a school physical environment?",
+ o:["They make the classroom look more organized",
+    "Unsuitable desks and seats may cause discomfort, deformities, and optical errors in growing students",
+    "They are only important for student comfort during exams",
+    "They have no impact on student health"],
+ a:1, d:"hard",
+ exp:"Desks and seats must be properly designed for the body of students. Unsuitable furniture may cause discomfort, deformities, and optical errors."},
+
+{t:"The school nurse participates in health education by conducting health conferences with teachers. The PRIMARY purpose of these conferences is:",
+ o:["To replace teachers in the classroom",
+    "To discuss students' health problems and stimulate teacher involvement in the school health program",
+    "To train teachers to perform medical procedures",
+    "To assess teachers' academic performance"],
+ a:1, d:"hard",
+ exp:"The nurse conducts health conferences with teachers about students' health problems and assists in in-service education training for teachers."},
+
+{t:"Why are school years described as the BEST opportunity for health education?",
+ o:["Because students have nothing else to study",
+    "Because children are in a formative period where health knowledge, attitudes, and behaviors can be effectively shaped, and parents can be reached through children",
+    "Because health education is compulsory by law in all schools",
+    "Because children in this age group are already fully independent in health decisions"],
+ a:1, d:"hard",
+ exp:"School years are the best opportunity for health education because children are in a formative developmental period where lasting health knowledge, attitudes, and behaviors can be shaped."},
+
+{t:"A comprehensive school health program that considers all components is said to enable each child to achieve:",
+ o:["Only academic excellence regardless of health",
+    "Optimal health condition for maximal physical, emotional, and intellectual growth",
+    "Physical fitness only without emotional considerations",
+    "Vaccination completion only"],
+ a:1, d:"hard",
+ exp:"A comprehensive, coordinated school health program helps each child achieve and maintain optimal health so that maximal physical, emotional, and intellectual growth can occur."},
+
+{t:"Special surveys in school health appraisal are conducted:",
+ o:["Only once at school entry",
+    "Periodically to detect any health problems in the school population",
+    "Only when an epidemic is declared",
+    "Only for students with known disabilities"],
+ a:1, d:"hard",
+ exp:"Special surveys should be done periodically to detect any health problems in the student population."},
+
+{t:"The school nurse's role in health education for sick children specifically includes:",
+ o:["Providing sick children with homework assignments",
+    "Giving health education to sick children about how to prevent reinfection",
+    "Replacing the physician in treating sick children",
+    "Administering all medications without physician orders"],
+ a:1, d:"hard",
+ exp:"The nurse gives health education to sick children about how to prevent reinfection — a specific health education responsibility."},
+
+{t:"Which combination of measures represents a COMPLETE response when a communicable disease outbreak occurs in a school?",
+ o:["Notification only",
+    "Isolating the case, notifying authorities, caring for contacts, monitoring absence, providing health teaching, ensuring a healthy environment, and readmitting children after examination",
+    "Closing the entire school immediately without any other action",
+    "Vaccination of all students and no other measures"],
+ a:1, d:"hard",
+ exp:"A complete outbreak response includes: isolation, notification, care of contacts, care of absence, health teaching about isolation, environmental measures, and nurse examination before readmission."},
+
+{t:"The school nurse's responsibilities in BOTH the physical AND non-physical environment demonstrate which principle of school health nursing?",
+ o:["School nurses only perform clinical tasks",
+    "School nurses take a holistic approach addressing both the physical and psychosocial dimensions of the school environment",
+    "School nurses focus only on individual student care",
+    "School nurses replace environmental health officers"],
+ a:1, d:"hard",
+ exp:"By addressing physical environment standards AND non-physical factors (relationships, student support, teacher-parent involvement), the school nurse demonstrates a holistic approach to school health."},
+
+{t:"Regarding early identification of children with special disabilities, the school nurse's role includes:",
+ o:["Diagnosing disabilities without physician involvement",
+    "Identifying exceptional children, arranging referral and follow-up, and helping them accommodate with their defects",
+    "Excluding children with disabilities from the school permanently",
+    "Only providing physical therapy directly"],
+ a:1, d:"hard",
+ exp:"The school nurse identifies exceptional children (with mental, physical, visual, speech, or learning disabilities), arranges referral and follow-up, and helps them accommodate with their defects."},
+
+{t:"The first aid training program in schools is the responsibility of the school health center and specifically targets:",
+ o:["Only school nurses",
+    "Students and teachers — providing training programs in first aid procedures and emergency handling",
+    "Only school administrators",
+    "External emergency teams only"],
+ a:1, d:"hard",
+ exp:"The school health center is responsible for performing training programs for both students and teachers in first aid procedures and how to handle emergency situations."},
+
+{t:"In the school health program, 'in-service education training for teachers' that the nurse assists with primarily aims to:",
+ o:["Replace formal teacher training programs",
+    "Enhance teachers' ability to observe, recognize, and respond to student health problems and participate effectively in the school health program",
+    "Train teachers to prescribe medications",
+    "Educate teachers about hospital management"],
+ a:1, d:"hard",
+ exp:"The nurse assists in in-service education training for teachers to enhance their ability to observe and participate in the school health program, including health observation, emergency response, and health education."},
+
+{t:" A school nurse notices that a 10-year-old student has been complaining of abdominal pain and vomiting every Monday morning for the past month, but the school physician finds no organic cause. The student appears healthy on weekends. What is the MOST likely school health problem?",
+ o:["Typhoid fever","Learning disability","School phobia","Nutritional anemia"],
+ a:2, d:"medium",
+ exp:"School phobia presents with somatic complaints (abdominal pain, vomiting, nausea, headache) especially on school days. All organic causes must be ruled out first."},
+
+{t:" A school nurse is conducting the annual health appraisal and finds that a 9-year-old student has difficulty reading the vision chart and squints while reading on the board. What is the nurse's NEXT appropriate action?",
+ o:["Advise the student to sit closer to the board and take no further action",
+    "Report the observation as a suspected visual problem, arrange for comprehensive medical examination, and refer to an ophthalmologist",
+    "Provide the student with glasses from the school's supply",
+    "Inform the student's teacher to move the student to the front row only"],
+ a:1, d:"medium",
+ exp:"The nurse screens vision annually. A suspected error of refraction should be documented, referred for comprehensive medical examination, and the findings interpreted to teachers and parents."},
+
+{t:" Three students in one class are diagnosed with chicken pox on the same day. As the school nurse, what is the COMPLETE management plan?",
+ o:["Only send the three students home",
+    "Exclude the three cases for 14 days, care for contacts (classmates placed under supervision), notify authorities, provide health education, monitor absentees, ensure a healthy environment, and examine children before readmission",
+    "Vaccinate all students immediately and allow cases to remain in school",
+    "Close the entire school for one week without any further action"],
+ a:1, d:"hard",
+ exp:"Management includes: excluding cases for 14 days, supervising contacts, notifying authorities, providing health education about isolation period, monitoring absence, ensuring a healthy environment, and examining children before readmission."},
+
+{t:" During a school inspection, the nurse notes that the classroom has windows only on one wall, the room is dark, and there is no cross ventilation. Which environmental standards are being violated?",
+ o:["Social and emotional environment standards only",
+    "Physical environment standards: cross ventilation (windows on both side walls) and adequate natural lighting requirements",
+    "Food sanitation standards",
+    "Water supply standards"],
+ a:1, d:"medium",
+ exp:"Physical environment standards require windows on BOTH side walls for cross ventilation and adequate natural AND artificial lighting in classrooms."},
+
+{t:" A 12-year-old student collapses in the schoolyard and is unresponsive with jerking movements. The school nurse arrives at the scene. What should the nurse do FIRST?",
+ o:["Call parents and wait for them to arrive before doing anything",
+    "Carry out first aid measures immediately and arrange transfer to hospital if necessary",
+    "Send other students to get a physician from another school",
+    "Wait for the episode to end and then send the student home"],
+ a:1, d:"hard",
+ exp:"Emergency care requires: carrying out first aid measures for the injured or ill student and, if necessary, transferring to hospital or clinic. Parents and authorities should also be notified."},
+
+{t:" A school nurse discovers that a student confirmed to have mumps recovered 10 days ago and the parents want him to return to school. The nurse should:",
+ o:["Allow immediate return since the child is now well",
+    "Refuse return as the required 14-day exclusion period has not been completed, and the child must be examined by the nurse before readmission",
+    "Allow return with a face mask only",
+    "Allow return only if the physician writes a prescription"],
+ a:1, d:"medium",
+ exp:"Mumps requires 14 days of school exclusion. After the exclusion period, the child must be examined by the nurse before readmission to confirm recovery."},
+
+{t:" The school canteen's food handler is found to have diarrhea and abdominal cramps. As a school nurse, your PRIORITY action is:",
+ o:["Allow the food handler to continue work with gloves",
+    "Immediately exclude the food handler from food handling duties, report to the physician, and arrange for examination and treatment",
+    "Advise the food handler to take over-the-counter medication and continue working",
+    "Only inform the school principal without any health intervention"],
+ a:1, d:"hard",
+ exp:"Food handlers in school must be examined yearly and treated. A sick food handler must be excluded from duties immediately, examined, and treated to prevent foodborne disease outbreaks."},
+
+{t:" A school nurse is developing the annual immunization plan for primary school students. Which booster vaccines should be planned for first-year primary students?",
+ o:["Only influenza vaccine",
+    "DT booster and meningitis booster for 1st year primary students",
+    "Only hepatitis B vaccine",
+    "MMR vaccine only"],
+ a:1, d:"medium",
+ exp:"First-year primary students should receive: DT booster (1st and 4th year primary) and meningitis booster (1st year primary, 1st year preparatory, 1st year secondary)."},
+
+{t:" A teacher reports to the school nurse that a student has been increasingly aggressive, lying, and stealing from classmates. The nurse classifies this as which category of school health problem?",
+ o:["Communicable disease","Nutritional problem","Behavioral problem","Dental problem"],
+ a:2, d:"easy",
+ exp:"Behavioral problems include aggression, lying, stealing, and cheating — behaviors children use in an attempt to feel important and control others."},
+
+{t:" A school nurse is conducting a health education session for 5th-grade students. Which topics should be INCLUDED in the session according to the school health education curriculum?",
+ o:["Advanced clinical pharmacology and surgical techniques",
+    "Personal and dental hygiene, nutrition, accident prevention, infection prevention, anti-drugs education, and first aid",
+    "Hospital management and nursing administration",
+    "Only physical education exercises"],
+ a:1, d:"easy",
+ exp:"School health education includes personal hygiene, dental hygiene, nutrition, pollution, accident prevention, infection prevention, disaster preparedness, first aid, anti-drugs, anti-tobacco, sports, environment education, and common health problems."},
+
+{t:" A new school building is being planned. As a school health consultant, which of the following recommendations about the school site is MOST important?",
+ o:["The school should be located near a busy commercial market for accessibility",
+    "The school site must be sufficiently away from noise, heavy traffic, and pollution, in a proper location to provide safety, and with sufficient playground area",
+    "The school should be located near a highway for easy transportation",
+    "The school building can be a converted residential building"],
+ a:1, d:"medium",
+ exp:"The school site must be sufficiently away from noise, heavy traffic, and pollution. The building requires special design — residential buildings are not satisfactory. It should have a sufficiently wide area with a suitable playground."},
+
+{t:" A school nurse finds during a classroom observation that two students appear pale, one is visibly fatigued, and one has enlarged tonsils. What is the nurse's MOST appropriate next step?",
+ o:["Send all students home immediately",
+    "Document findings, notify parents and teachers, arrange comprehensive medical examinations for the affected students, and refer as needed",
+    "Prescribe iron supplements for the pale students",
+    "Only reassure the teacher and take no further action"],
+ a:1, d:"medium",
+ exp:"The nurse observes signs of illness (pallor = possible anemia, fatigue, enlarged tonsils), documents findings, interprets them to teachers and parents, and arranges for comprehensive medical examination and referral."},
+
+{t:" A student with cerebral palsy is enrolled in the local primary school. The parents are concerned about his integration with other children. The school nurse should advise:",
+ o:["The student should attend only a specialized school for disabled children",
+    "Most specialists prefer education of handicapped children in ordinary schools with other children; the nurse will identify the child's needs, arrange referral and follow-up, and help him accommodate with his condition",
+    "The student cannot benefit from any education program",
+    "The student should be home-schooled permanently"],
+ a:1, d:"hard",
+ exp:"Most specialists prefer education of handicapped children in ordinary schools with other children. The nurse identifies exceptional children, arranges referral and follow-up, and helps them accommodate with their defects."},
+
+{t:" A parent contacts the school nurse asking when she can reach her about her child's health findings from the recent school medical examination. The nurse should:",
+ o:["Tell the parent the information is confidential and cannot be shared",
+    "Interpret and explain the findings to the parent, guide them in selecting suitable community resources, and recommend appropriate follow-up",
+    "Only send a written report without explanation",
+    "Refer the parent directly to the hospital without explanation"],
+ a:1, d:"medium",
+ exp:"The nurse interprets findings for teachers, physicians, and parents, emphasizes utilization of community resources, and guides parents in selecting suitable agencies for assistance of their children."},
+
+{t:" Following a typhoid fever outbreak in a neighborhood, several school children are absent. As the school nurse, which action regarding absent students is MOST appropriate?",
+ o:["Ignore the absences as they are expected during an epidemic",
+    "Identify the cause of each absence, contact families of absent students, monitor for additional cases, and apply communicable disease control measures",
+    "Only report the number of absences to the school principal",
+    "Allow all absent students to return without any examination"],
+ a:1, d:"hard",
+ exp:"Care of absence requires knowing the cause of absence especially during epidemics, contacting families to identify potential cases and prevent spread. Children must be examined by the nurse before readmission."},
+
+{t:"Schools are described as a critical setting for health promotion and disease prevention because the vast majority of children attend school.",
+ o:["True","False"], a:0, d:"easy",
+ exp:"Schools are a critical setting for health promotion and disease prevention efforts because the vast majority of children attend school.'"},
+
+{t:"The three components of the school health program are completely separate and do not affect each other.",
+ o:["True","False"], a:1, d:"easy",
+ exp:"The three phases (school living environment, school health services, health education) are NOT separate — each affects the others."},
+
+{t:"School-age children are considered a vulnerable group partly because they are compelled by law to attend school, making them easily accessible for health interventions.",
+ o:["True","False"], a:0, d:"easy",
+ exp:"By law, children must attend school and spend about half their day there for a period of 9 years, making them easily reachable for health services."},
+
+{t:"Hepatitis A requires a school exclusion period of 14 days.",
+ o:["True","False"], a:1, d:"easy",
+ exp:"Hepatitis A requires 21 days of school exclusion — NOT 14 days. Measles, mumps, and chicken pox require 14 days each."},
+
+{t:"Whooping cough (pertussis) requires 18 days of school exclusion.",
+ o:["True","False"], a:0, d:"easy",
+ exp:"Whooping cough requires 18 days of school exclusion according to the school health program guidelines."},
+
+{t:"The recommended number of students per classroom should not exceed 30 to 40 students.",
+ o:["True","False"], a:0, d:"easy",
+ exp:"The number of students in a classroom should not exceed 30 to 40 students."},
+
+{t:"Stool and urine cultures are the PRIMARY diagnostic tools used in the comprehensive medical examination for all school children.",
+ o:["True","False"], a:1, d:"medium",
+ exp:"The comprehensive medical examination uses all previous screening and laboratory tests. Stool and urine cultures are specific diagnostic tests for specific conditions, not the primary tools for all children."},
+
+{t:"The school nurse must examine children before readmission to school after recovery from a communicable disease.",
+ o:["True","False"], a:0, d:"medium",
+ exp:"After sickness, the child should be examined by the nurse before readmission to school."},
+
+{t:"Residential buildings can be used as satisfactory school buildings without any special design modifications.",
+ o:["True","False"], a:1, d:"medium",
+ exp:"School buildings require special design — residential buildings are stated to be 'not satisfactory' as school buildings."},
+
+{t:"Daily observation of students for early case finding of communicable diseases is a responsibility of the school nurse.",
+ o:["True","False"], a:0, d:"medium",
+ exp:"The school nurse's preventive responsibilities include daily observation of students for early case finding, referral, and isolation."},
+
+{t:"Most specialists prefer education of children with special disabilities in completely separate specialized schools, isolated from other children.",
+ o:["True","False"], a:1, d:"medium",
+ exp:"Most specialists prefer education of handicapped children in ORDINARY schools with other children, providing medical, social, and educational care."},
+
+{t:"The DT vaccine booster in Egyptian primary schools is given in the 1st and 4th year of primary school.",
+ o:["True","False"], a:0, d:"medium",
+ exp:"Booster doses of DT are given in the 1st AND 4th year of primary school."},
+
+{t:"School health education can be provided through parent-teacher health conferences, class discussions, and health education during immunization visits.",
+ o:["True","False"], a:0, d:"medium",
+ exp:"Health education can be done through conducting health conferences with teachers, class discussions at occasions such as immunization, comprehensive medical examination, and injuries."},
+
+{t:"The school nurse's role is limited strictly to providing curative (treatment) services and does not include health promotion or education.",
+ o:["True","False"], a:1, d:"hard",
+ exp:"The school nurse's role is broad, encompassing healthful environment maintenance, appraisal services, preventive services, curative services, and health education — not limited to curative services."},
+
+{t:"Classroom windows arranged on only one side wall are sufficient for adequate cross ventilation.",
+ o:["True","False"], a:1, d:"medium",
+ exp:"Windows must be arranged on BOTH side walls to allow cross ventilation."},
+
+{t:"The school nurse is responsible for arranging in-service education training programs for teachers regarding student health.",
+ o:["True","False"], a:0, d:"medium",
+ exp:"The nurse assists in in-service education training for teachers and conducts health conferences with teachers about students' health."},
+
+{t:"Food handlers in school canteens should be examined yearly as part of the school health program.",
+ o:["True","False"], a:0, d:"easy",
+ exp:"Food handlers in school should be examined yearly and treated as a preventive measure."},
+
+{t:"The school health program can reach parents only through direct parent-nurse meetings at the school clinic.",
+ o:["True","False"], a:1, d:"hard",
+ exp:"Parents can be reached through their children (who carry health messages home), through parent counsels, home visits, and health conferences — not only through direct clinic meetings."},
+
+{t:"German measles (rubella) requires a 7-day school exclusion period.",
+ o:["True","False"], a:0, d:"medium",
+ exp:"German measles (rubella) requires 7 days of school exclusion."},
+
+{t:"The school health program is defined as procedures to protect and promote the health of pupils and school personnel from all aspects: physical, mental, social, and emotional health.",
+ o:["True","False"], a:0, d:"easy",
+ exp:"The school health program is defined exactly as: procedures to protect and promote the health of pupils and school personnel from all aspects — physical, mental, social, and emotional health."},
+];
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function shuffleOptions(question) {
+  const correctAnswer = question.o[question.a];
+
+  question.o = shuffle([...question.o]);
+
+  question.a = question.o.indexOf(correctAnswer);
+
+  return question;
+}
+
+QUESTIONS = QUESTIONS.map(q => shuffleOptions({...q}));
+/* ============ CONFIG ============ */
+const TOTAL_MINUTES = 60;   
+
+/* ============ ENGINE ============ */
+const LETTERS = ['A','B','C','D','E','F'];
+let pool, questions, qi, correct, wrong, answered, answers, wrongSet;
+let totalTime = 60 * 60, timeLeft, timerInterval;
+let activeTopic = 'All';
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+/* ---- TOPIC FILTER ---- */
+function buildFilters() {
+  const wrap = document.getElementById('filterWrap');
+  const countEl = document.getElementById('filterCount');
+  const topics = [...new Set(QUESTIONS.map(q=>q.topic).filter(Boolean))];
+  if (!topics.length) { wrap.style.display='none'; countEl.style.display='none'; return; }
+  wrap.style.display='flex';
+  countEl.style.display='block';
+  const all = ['All', ...topics];
+  wrap.innerHTML = all.map(t=>
+    `<button class="filter-btn${t==='All'?' active':''}" onclick="setTopic('${t}')">${t}</button>`
+  ).join('');
+  updateFilterCount();
+}
+
+function setTopic(t) {
+  activeTopic = t;
+  document.querySelectorAll('.filter-btn').forEach(b=>{
+    b.classList.toggle('active', b.textContent===t);
+  });
+  updateFilterCount();
+  init(getPool());
+}
+
+function getPool() {
+  return activeTopic==='All' ? QUESTIONS : QUESTIONS.filter(q=>q.topic===activeTopic);
+}
+
+function updateFilterCount() {
+  const p = getPool();
+  document.getElementById('filterCount').textContent =
+    `Showing ${p.length} question${p.length!==1?'s':''} · Topic: ${activeTopic}`;
+}
+
+/* ---- INIT ---- */
+function init(p) {
+  pool = p;
+  if (!pool.length) {
+    document.getElementById('app').innerHTML=`
+      <div class="empty-state">
+        <div class="ei">📭</div>
+        <h3>No Questions Yet</h3>
+        <p>Add questions to the QUESTIONS array in the script section.</p>
+      </div>`;
+    document.getElementById('totalBadge').textContent='0 Questions';
+    document.getElementById('sRemain').textContent='—';
+    clearInterval(timerInterval);
+    return;
+  }
+  questions = shuffle(pool);
+  qi=0; correct=0; wrong=0; answered=0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = [];
+  timeLeft = totalTime;
+  document.getElementById('totalBadge').textContent = questions.length+' Questions';
+  document.getElementById('timeBadge').textContent  = TOTAL_MINUTES+' Min';
+  startTimer(); render();
+}
+
+/* ---- TIMER ---- */
+function startTimer() {
+  clearInterval(timerInterval);
+  timerInterval = setInterval(()=>{
+    timeLeft--;
+    const m=Math.floor(timeLeft/60), s=timeLeft%60;
+    document.getElementById('timerTxt').textContent=`${m}:${s<10?'0':''}${s}`;
+    const b=document.getElementById('timerBadge');
+    if (timeLeft<=120)      b.className='timer-badge danger';
+    else if (timeLeft<=300) b.className='timer-badge warn';
+    else                    b.className='timer-badge';
+    if (timeLeft<=0) { clearInterval(timerInterval); finish(); }
+  },1000);
+}
+
+/* ---- TOP BAR ---- */
+function updateTop() {
+  const total=questions.length;
+  document.getElementById('sCorrect').textContent=correct;
+  document.getElementById('sWrong').textContent=wrong;
+  document.getElementById('sRemain').textContent=Math.round(((total-answered)/total)*100)+'%';
+  document.getElementById('progLabel').textContent='Q '+(qi+1)+' / '+total;
+  document.getElementById('progFill').style.width=((qi+1)/total*100)+'%';
+  document.getElementById('prog-bar').style.width=((qi+1)/total*100)+'%';
+}
+
+/* ---- RENDER ---- */
+function render() {
+  updateTop();
+  const q=questions[qi];
+  const opts = q.o.map((o,idx)=>`
+    <div class="opt" id="opt${idx}" onclick="choose(${idx})">
+      <div class="opt-letter">${LETTERS[idx]}</div>${o}
+    </div>`).join('');
+  document.getElementById('app').innerHTML=`
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Question ${qi+1} / ${questions.length}</div>
+        ${q.topic?`<div class="q-topic">${q.topic}</div>`:''}
+      </div>
+      <div class="q-text">${q.t}</div>
+      <div class="options">${opts}</div>
+      <div class="nav-btns">
+        <button class="btn btn-skip" onclick="skip()"><i class="fa-solid fa-forward"></i> Skip</button>
+      </div>
+    </div>`;
+}
+
+/* ---- CHOOSE ---- */
+function choose(v) {
+  if (answers[qi]!==null) return;
+  answers[qi]=v; answered++;
+  const q=questions[qi], ok=v===q.a;
+  ok?correct++:wrong++;
+  updateTop();
+  q.o.forEach((_,idx)=>{
+    const el=document.getElementById('opt'+idx);
+    el.classList.add('disabled');
+    if (idx===q.a) el.classList.add('correct');
+    else if (idx===v) el.classList.add('wrong');
+  });
+  const fb=document.createElement('div');
+  fb.className='feedback-bar '+(ok?'ok':'no');
+  fb.innerHTML=ok
+    ?`<span style="font-size:17px">🎉</span><span>ِما شاء الله عليك</span>`
+    :`<span style="font-size:17px">😔</span><span>ركز يا شطور</span>`;
+  const card=document.querySelector('.q-card');
+  card.querySelector('.options').after(fb);
+  if (q.exp) {
+    const exp=document.createElement('div');
+    exp.className='explanation';
+    exp.innerHTML='<b>💬 Explanation:</b> '+q.exp;
+    fb.after(exp);
+  }
+  card.querySelector('.nav-btns').innerHTML=`
+    <button class="btn btn-next" onclick="next()">
+      ${qi<questions.length-1
+        ?'<i class="fa-solid fa-arrow-right"></i> Next Question'
+        :'<i class="fa-solid fa-flag-checkered"></i> Finish Exam'}
+    </button>`;
+}
+
+/* ---- SKIP / NEXT ---- */
+function skip() {
+  if (answers[qi]===null) { answers[qi]=-1; answered++; wrong++; wrongSet.push(questions[qi]); updateTop(); }
+  next();
+}
+function next() {
+  if (qi<questions.length-1) { qi++; render(); window.scrollTo({top:0,behavior:'smooth'}); }
+  else finish();
+}
+
+/* ---- FINISH ---- */
+function finish() {
+  clearInterval(timerInterval);
+  const total=questions.length;
+  const score=Math.round((correct/total)*100);
+  questions.forEach((q,idx)=>{ if(answers[idx]!==q.a) wrongSet.push({...q,myAns:answers[idx]}); });
+  wrongSet=[...new Map(wrongSet.map(q=>[q.t,q])).values()];
+  let grade,gc;
+  if(score>=90)      { grade='🥇 Excellent';    gc='var(--ok)'; }
+  else if(score>=75) { grade='🥈 Very Good';     gc='var(--a1)'; }
+  else if(score>=60) { grade='🥉 Good';          gc='var(--warn)'; }
+  else               { grade='📚 Needs Review';  gc='var(--err)'; }
+  const circ=2*Math.PI*45, offset=circ-(score/100)*circ;
+  const report=questions.map((q,idx)=>{
+    const ok=answers[idx]===q.a;
+    return `<div class="report-item ${ok?'ok':'no'}">
+      <div class="ri-q">${ok?'✅':'❌'} ${q.t}</div>
+      ${!ok?`
+        <div class="ri-row"><span class="ri-badge ri-yours">Your Answer</span>${answers[idx]>=0?q.o[answers[idx]]:'Skipped'}</div>
+        <div class="ri-row"><span class="ri-badge ri-right">Correct</span>${q.o[q.a]}</div>
+      `:''}
+    </div>`;
+  }).join('');
+  document.getElementById('prog-bar').style.width='100%';
+  document.getElementById('app').innerHTML=`
+    <div class="result-hero">
+      <div class="score-ring">
+        <svg viewBox="0 0 110 110">
+          <circle class="ring-bg" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="0"/>
+          <circle class="ring-fill" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="${circ}"
+            style="stroke:${gc}" id="ringFill"/>
+        </svg>
+        <div class="score-num">${score}</div>
+        <div class="score-pct">%</div>
+      </div>
+      <div class="result-grade" style="color:${gc}">${grade}</div>
+      <div class="result-sub">Answered ${answered} of ${total} questions</div>
+      <div class="result-stats">
+        <div class="rs"><div class="n" style="color:var(--ok)">${correct}</div><div class="l">Correct</div></div>
+        <div class="rs"><div class="n" style="color:var(--err)">${wrong}</div><div class="l">Wrong</div></div>
+        <div class="rs"><div class="n" style="color:var(--a1)">${total-answered<0?0:total-answered}</div><div class="l">Skipped</div></div>
+      </div>
+    </div>
+    <div class="result-actions">
+      ${wrongSet.length?`<button class="btn btn-retry" onclick="retryWrong()"><i class="fa-solid fa-rotate-right"></i> Retry Wrong (${wrongSet.length})
+
+</button>`:''}
+      <button class="btn btn-home" onclick="init(getPool())"><i class="fa-solid fa-shuffle"></i> New Random Exam</button>
+      <a href="https://gaith-team.github.io/exam/" class="btn btn-home" style="text-decoration:none"><i class="fa-solid fa-house"></i> Back to Subject</a>
+    </div>
+    <div style="margin-top:22px">
+      <div style="font-size:14px;font-weight:700;margin-bottom:9px;color:var(--text2)">📋 Detailed Report</div>
+      ${report}
+    </div>`;
+  setTimeout(()=>{ document.getElementById('ringFill').style.strokeDashoffset=offset; },100);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ---- RETRY WRONG ---- */
+function retryWrong() {
+  const p=[...wrongSet];
+  questions=shuffle(p); qi=0; correct=0; wrong=0;
+  answers=new Array(questions.length).fill(null);
+  wrongSet=[]; answered=0; timeLeft=totalTime;
+  startTimer(); render();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ---- THEME ---- */
+const themeBtn=document.getElementById('themeBtn');
+let theme=localStorage.getItem('gt-theme')||'light';
+function applyTheme(t) {
+  theme=t;
+  document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'');
+  themeBtn.textContent=t==='dark'?'☀️':'🌙';
+  localStorage.setItem('gt-theme',t);
+}
+applyTheme(theme);
+themeBtn.addEventListener('click',()=>applyTheme(theme==='dark'?'light':'dark'));
+
+/* ---- START ---- */
+buildFilters();
+init(getPool());
+</script>
+</body>
+</html>
