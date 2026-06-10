@@ -446,7 +446,9 @@ function shuffle(arr) {
 }
 
 function init(pool) {
-  questions = shuffle([...pool]);
+questions = shuffle(
+  [...pool].map(q => shuffleOptions({...q}))
+);
   i = 0; correct = 0; wrong = 0;
   answers = new Array(questions.length).fill(null);
   wrongSet = []; answered = 0;
@@ -639,6 +641,19 @@ function applyTheme(t) {
 applyTheme(theme);
 themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
 
+  function shuffleOptions(question) {
+  const options = question.o.map((text, index) => ({
+    text,
+    originalIndex: index
+  }));
+
+  shuffle(options);
+
+  question.a = options.findIndex(opt => opt.originalIndex === question.a);
+  question.o = options.map(opt => opt.text);
+
+  return question;
+}
 init(QUESTIONS);
 </script>
 </body>
