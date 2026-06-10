@@ -1,0 +1,1272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --a1: #0f766e;
+  --a2: #14b8a6;
+  --a3: #99f6e4;
+  --a2l: #ccfbf1;
+  --ag: rgba(20,184,166,0.13);
+  --ags: rgba(20,184,166,0.26);
+  --bg:    #f0fdfa;
+  --bg2:   #ccfbf1;
+  --card:  #ffffff;
+  --text:  #134e4a;
+  --text2: #0f766e;
+  --text3: #5eead4;
+  --bdc:   rgba(20,184,166,0.20);
+  --bdcard:rgba(15,118,110,0.12);
+  --sh:    0 4px 18px rgba(15,118,110,0.09);
+  --shh:   0 8px 30px rgba(20,184,166,0.22);
+  --ok:    #15803d;
+  --err:   #b91c1c;
+  --warn:  #b45309;
+  --rad:   16px;
+  --tr:    all 0.28s cubic-bezier(.4,0,.2,1);
+}
+[data-theme="dark"] {
+  --bg:    #022c22; --bg2:   #064e3b; --card:  #065f46;
+  --text:  #d1fae5; --text2: #6ee7b7; --text3: #34d399;
+  --bdc:   rgba(52,211,153,0.22);
+  --bdcard:rgba(52,211,153,0.12);
+  --sh:    0 4px 20px rgba(0,0,0,0.45);
+  --shh:   0 8px 36px rgba(20,184,166,0.28);
+  --a1: #10b981; --a2: #34d399; --a2l: #064e3b; --a3: #6ee7b7;
+}
+
+body {
+  font-family:'Outfit',sans-serif;
+  background:var(--bg); color:var(--text);
+  min-height:100vh; overflow-x:hidden;
+  transition:background .4s,color .4s;
+}
+
+#prog-bar {
+  position:fixed;top:0;left:0;height:3px;z-index:999;
+  background:linear-gradient(90deg,var(--a1),var(--a2),var(--a3));
+  width:0%;transition:width .15s;
+}
+
+/* NAV */
+nav {
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 26px;height:62px;
+  background:rgba(240,253,250,.94);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--bdcard);transition:var(--tr);
+}
+[data-theme="dark"] nav { background:rgba(2,44,34,.96); }
+
+.nav-back {
+  display:flex;align-items:center;gap:6px;
+  color:var(--text2);text-decoration:none;font-size:13px;font-weight:700;
+  padding:6px 13px;border-radius:9px;
+  border:1px solid var(--bdcard);background:var(--card);
+  transition:var(--tr);
+}
+.nav-back:hover { color:var(--a2);border-color:var(--bdc); }
+
+.nav-brand { display:flex;align-items:center;gap:8px;font-size:15px;font-weight:900;color:var(--text); }
+.nav-logo {
+  width:34px;height:34px;border-radius:9px;
+  background:linear-gradient(135deg,var(--a1),var(--a2));
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:12px;font-weight:900;
+}
+.theme-btn {
+  width:37px;height:37px;border-radius:50%;
+  border:1px solid var(--bdcard);background:var(--card);
+  cursor:pointer;font-size:15px;
+  display:flex;align-items:center;justify-content:center;transition:var(--tr);
+}
+.theme-btn:hover { border-color:var(--a2);transform:rotate(22deg); }
+
+/* HERO */
+.hero {
+  margin-top:62px;
+  background:linear-gradient(135deg,var(--a1) 0%,var(--a2) 60%,#2dd4bf 100%);
+  padding:34px 22px 30px;text-align:center;position:relative;overflow:hidden;
+}
+.hero::before {
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 500px 180px at 50% 110%,rgba(255,255,255,.13) 0%,transparent 70%);
+}
+.hero-icon {
+  width:62px;height:62px;border-radius:18px;
+  background:rgba(255,255,255,.2);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;margin:0 auto 11px;
+  border:1.5px solid rgba(255,255,255,.35);
+}
+.hero h1 { font-size:clamp(17px,3.5vw,25px);font-weight:900;color:#fff;margin-bottom:4px; }
+.hero p  { font-size:13px;color:rgba(255,255,255,.82); }
+.hero-meta { display:flex;justify-content:center;gap:12px;margin-top:14px;flex-wrap:wrap; }
+.meta-pill {
+  background:rgba(255,255,255,.18);backdrop-filter:blur(5px);
+  border:1px solid rgba(255,255,255,.3);border-radius:50px;
+  padding:5px 13px;font-size:12px;font-weight:700;color:#fff;
+  display:flex;align-items:center;gap:5px;
+}
+
+/* TOPIC FILTER */
+.filter-wrap {
+  padding:14px 16px 2px;
+  display:flex;flex-wrap:wrap;gap:7px;
+  background:var(--card);border-bottom:1px solid var(--bdcard);
+}
+.filter-btn {
+  padding:5px 13px;border-radius:50px;
+  border:1.5px solid var(--bdcard);background:var(--bg);
+  font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;
+  color:var(--text2);cursor:pointer;transition:var(--tr);
+}
+.filter-btn:hover,
+.filter-btn.active {
+  background:var(--a2);color:#fff;border-color:var(--a2);
+  box-shadow:0 2px 10px var(--ag);
+}
+.filter-count {
+  padding:14px 16px 14px;
+  font-size:12px;color:var(--text2);font-weight:600;
+  background:var(--card);border-bottom:1px solid var(--bdcard);
+}
+
+/* SHELL */
+.shell { max-width:560px;margin:0 auto;padding:18px 16px 80px; }
+
+/* STATS */
+.stats-row { display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-bottom:13px; }
+.stat-box {
+  background:var(--card);border:1px solid var(--bdcard);
+  border-radius:var(--rad);padding:11px 7px;text-align:center;
+}
+.stat-box .val { font-size:20px;font-weight:900; }
+.stat-box .lbl { font-size:11px;color:var(--text3);margin-top:2px; }
+.c-ok   { color:var(--ok); }
+.c-err  { color:var(--err); }
+.c-acc  { color:var(--a1); }
+
+/* PROG STRIP */
+.prog-strip {
+  background:var(--card);border:1px solid var(--bdcard);
+  border-radius:var(--rad);padding:12px 15px;margin-bottom:15px;
+  display:flex;align-items:center;gap:11px;
+}
+.prog-label { font-size:13px;font-weight:700;color:var(--text2);white-space:nowrap; }
+.prog-track { flex:1;height:7px;background:var(--bg2);border-radius:7px;overflow:hidden; }
+.prog-fill {
+  height:100%;width:0%;
+  background:linear-gradient(90deg,var(--a1),var(--a2));
+  border-radius:7px;transition:width .4s;
+}
+.timer-badge {
+  min-width:60px;height:33px;border-radius:17px;
+  background:var(--bg2);border:1px solid var(--bdcard);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:900;color:var(--text);
+  gap:4px;padding:0 10px;flex-shrink:0;
+}
+.timer-badge.warn   { color:var(--warn);  border-color:rgba(180,83,9,.3);  background:rgba(180,83,9,.08); }
+.timer-badge.danger { color:var(--err);   border-color:rgba(185,28,28,.3); background:rgba(185,28,28,.08);animation:blink .8s infinite; }
+@keyframes blink { 0%,100%{opacity:1}50%{opacity:.45} }
+
+/* Q CARD */
+.q-card {
+  background:var(--card);border:1px solid var(--bdcard);
+  border-radius:20px;overflow:hidden;box-shadow:var(--sh);
+}
+.q-header {
+  background:linear-gradient(135deg,var(--a1),var(--a2));
+  padding:9px 17px;display:flex;align-items:center;gap:8px;
+}
+.q-num {
+  background:rgba(255,255,255,.22);border-radius:7px;
+  padding:3px 10px;font-size:11px;font-weight:700;color:#fff;
+}
+.q-topic {
+  margin-left:auto;background:rgba(255,255,255,.18);border-radius:50px;
+  padding:2px 10px;font-size:11px;font-weight:700;color:#fff;
+  border:1px solid rgba(255,255,255,.25);
+}
+.q-text {
+  padding:19px 17px 13px;font-size:15px;font-weight:700;color:var(--text);
+  line-height:1.65;border-bottom:1px solid var(--bdcard);
+}
+.options { padding:13px 17px 17px;display:flex;flex-direction:column;gap:9px; }
+
+.opt {
+  display:flex;align-items:center;gap:11px;
+  padding:12px 14px;border-radius:11px;
+  border:1.5px solid var(--bdcard);background:var(--bg);
+  cursor:pointer;font-size:14px;font-weight:600;color:var(--text);
+  transition:var(--tr);user-select:none;
+}
+.opt:hover:not(.disabled) {
+  border-color:var(--a2);background:var(--ag);
+  transform:translateX(3px);
+}
+.opt-letter {
+  width:28px;height:28px;border-radius:8px;flex-shrink:0;
+  background:var(--bg2);border:1px solid var(--bdcard);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:900;color:var(--text2);
+  transition:var(--tr);
+}
+.opt.correct { border-color:var(--ok);background:rgba(21,128,61,.08); }
+.opt.correct .opt-letter { background:var(--ok);color:#fff;border-color:var(--ok); }
+.opt.wrong   { border-color:var(--err);background:rgba(185,28,28,.07); }
+.opt.wrong   .opt-letter { background:var(--err);color:#fff;border-color:var(--err); }
+.opt.disabled { pointer-events:none; }
+
+/* FEEDBACK */
+.feedback-bar {
+  margin:11px 17px;padding:11px 14px;border-radius:11px;
+  display:flex;align-items:center;gap:9px;
+  font-size:14px;font-weight:700;
+  animation:popIn .38s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes popIn { from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1} }
+.feedback-bar.ok { background:rgba(21,128,61,.1);color:var(--ok);border:1px solid rgba(21,128,61,.25); }
+.feedback-bar.no { background:rgba(185,28,28,.08);color:var(--err);border:1px solid rgba(185,28,28,.2); }
+
+.explanation {
+  margin:0 17px 11px;padding:10px 13px;
+  background:rgba(20,184,166,.07);border-radius:9px;
+  border-left:3px solid var(--a2);
+  font-size:13px;color:var(--text2);line-height:1.6;
+}
+
+/* BUTTONS */
+.nav-btns { padding:4px 17px 17px;display:flex;gap:9px; }
+.btn {
+  flex:1;padding:12px;border:none;border-radius:11px;
+  font-size:14px;font-weight:900;cursor:pointer;
+  font-family:'Outfit',sans-serif;transition:var(--tr);
+  display:flex;align-items:center;justify-content:center;gap:7px;
+}
+.btn-next {
+  background:linear-gradient(135deg,var(--a1),var(--a2));
+  color:#fff;box-shadow:0 4px 14px var(--ag);
+}
+.btn-next:hover { transform:translateY(-2px);box-shadow:0 6px 20px var(--ags); }
+.btn-skip {
+  background:var(--bg2);color:var(--text2);
+  border:1px solid var(--bdcard);flex:0 0 auto;padding:12px 15px;
+}
+.btn-skip:hover { border-color:var(--warn);color:var(--warn); }
+
+/* RESULTS */
+.result-hero {
+  text-align:center;padding:30px 18px 22px;
+  background:var(--card);border-radius:20px;
+  border:1px solid var(--bdcard);margin-bottom:17px;
+}
+.score-ring {
+  width:108px;height:108px;border-radius:50%;margin:0 auto 15px;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;position:relative;
+}
+.score-ring svg { position:absolute;inset:-5px;width:calc(100% + 10px);height:calc(100% + 10px);transform:rotate(-90deg); }
+.score-ring circle { fill:none;stroke-width:5;stroke-linecap:round; }
+.ring-bg   { stroke:var(--bg2); }
+.ring-fill { stroke:var(--a2);transition:stroke-dashoffset 1s ease; }
+.score-num { font-size:28px;font-weight:900;color:var(--text); }
+.score-pct { font-size:12px;color:var(--text3); }
+.result-grade { font-size:20px;font-weight:900;margin-bottom:4px; }
+.result-sub   { font-size:13px;color:var(--text2); }
+.result-stats { display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:17px; }
+.rs { background:var(--bg2);border-radius:10px;padding:10px 7px;text-align:center; }
+.rs .n { font-size:20px;font-weight:900; }
+.rs .l { font-size:11px;color:var(--text3); }
+
+/* REPORT */
+.report-item {
+  background:var(--card);border:1px solid var(--bdcard);
+  border-radius:12px;padding:14px;margin-bottom:8px;
+  border-left:4px solid var(--bdcard);
+}
+.report-item.ok { border-left-color:var(--ok); }
+.report-item.no { border-left-color:var(--err); }
+.report-item .ri-q { font-size:13px;font-weight:700;margin-bottom:6px; }
+.report-item .ri-row { display:flex;align-items:center;gap:7px;font-size:12px;margin-top:4px;color:var(--text2); }
+.ri-badge { padding:2px 8px;border-radius:6px;font-weight:700;font-size:11px;flex-shrink:0; }
+.ri-yours { background:rgba(185,28,28,.1);color:var(--err); }
+.ri-right { background:rgba(21,128,61,.1);color:var(--ok); }
+
+.result-actions { display:flex;flex-direction:column;gap:9px;margin-top:17px; }
+.btn-retry { background:linear-gradient(135deg,var(--a1),var(--a2));color:#fff; }
+.btn-retry:hover { transform:translateY(-2px);box-shadow:0 6px 20px var(--ags); }
+.btn-home  { background:var(--bg2);color:var(--text);border:1px solid var(--bdcard); }
+.btn-home:hover { border-color:var(--a2);color:var(--a1); }
+
+/* FOOTER */
+footer {
+  background:var(--bg2);border-top:1px solid var(--bdcard);
+  padding:20px 22px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:9px;
+}
+.footer-brand { font-size:14px;font-weight:700; }
+.footer-brand span { color:var(--a1); }
+.footer-tg {
+  display:flex;align-items:center;gap:5px;
+  text-decoration:none;color:#229ED9;font-size:12px;font-weight:600;
+}
+
+/* EMPTY STATE */
+.empty-state {
+  text-align:center;padding:50px 20px;
+  background:var(--card);border-radius:20px;border:1px solid var(--bdcard);
+}
+.empty-state .ei { font-size:40px;margin-bottom:12px; }
+.empty-state h3 { font-size:17px;font-weight:700;margin-bottom:7px; }
+.empty-state p { font-size:13px;color:var(--text2); }
+
+@media (max-width:480px) {
+  nav { padding:0 13px; }
+  .shell { padding:13px 11px 60px; }
+  .nav-brand span { display:none; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog-bar"></div>
+
+<nav>
+  <a href="https://gaith-team.github.io/exam/" class="nav-back"><i class="fa-solid fa-arrow-left"></i> Back</a>
+  <div class="nav-brand">
+    <div class="nav-logo">GT</div>
+    <span>GHAITH TEAM</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-icon">🌿</div>
+  <h1>communication and education</h1>
+  <p>Community Health Nursing</p>
+  <div class="hero-meta">
+    <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">-- Questions</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-clock"></i> <span id="timeBadge">60 Min</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-shuffle"></i> Shuffled</div>
+  </div>
+</div>
+
+<!-- Topic filter bar (shown only if topics exist) -->
+<div id="filterWrap" class="filter-wrap" style="display:none;"></div>
+<div id="filterCount" class="filter-count" style="display:none;"></div>
+
+<div class="shell">
+  <div class="stats-row">
+    <div class="stat-box"><div class="val c-ok"  id="sCorrect">0</div><div class="lbl">✔ Correct</div></div>
+    <div class="stat-box"><div class="val c-err"  id="sWrong">0</div><div class="lbl">✖ Wrong</div></div>
+    <div class="stat-box"><div class="val c-acc"  id="sRemain">100%</div><div class="lbl">⏳ Remaining</div></div>
+  </div>
+
+  <div class="prog-strip">
+    <div class="prog-label" id="progLabel">Q 1</div>
+    <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+    <div class="timer-badge" id="timerBadge"><i class="fa-regular fa-clock"></i><span id="timerTxt">60:00</span></div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<footer>
+  <div class="footer-brand">GAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg">
+    <i class="fa-brands fa-telegram"></i> @nursing2bu
+  </a>
+</footer>
+
+<script>
+let QUESTIONS = [
+
+{t:"Health education is best defined as:",
+ o:["A process of prescribing medications for patients",
+    "The science of teaching people the essentials of healthy living so that attitudes and practices become part of their personality and habits, leading to protection and promotion of health",
+    "A method of surgical training for nurses",
+    "The process of diagnosing community diseases"],
+ a:1, d:"easy",
+ exp:"Health education is the science of teaching people the essentials of healthy living and impressing knowledge so that attitudes and practice become part of their personality and habits, leading to protection and promotion of health."},
+
+{t:"Which of the following is an objective of health education?",
+ o:["To perform surgical procedures in the community",
+    "To inform people about promotion of health and prevention of disease",
+    "To replace physicians in primary care settings",
+    "To limit access to health services"],
+ a:1, d:"easy",
+ exp:"Objectives of health education include: informing people about health promotion and disease prevention, motivating sound health behavior, changing faulty traditional beliefs, promoting proper use of health services, and reducing disease risks."},
+
+{t:"The three domains of learning examined in 'the nature of learning' are:",
+ o:["Reading, writing, and arithmetic",
+    "Cognitive (thinking), affective (feeling), and psychomotor (acting)",
+    "Social, economic, and cultural",
+    "Primary, secondary, and tertiary"],
+ a:1, d:"easy",
+ exp:"The nature of learning examines three domains: cognitive (thinking), affective (feeling), and psychomotor (acting) domains of learning."},
+
+{t:"The FIRST step in the events of instruction is:",
+ o:["Present the material","Provide feedback",
+    "Gain the learner's attention","Assess performance"],
+ a:2, d:"easy",
+ exp:"The first step in the events of instruction is to GAIN ATTENTION — before learning can take place, the educator must gain the learner's attention."},
+
+{t:"Which of the following is one of the six basic principles that guide the effective educator?",
+ o:["Prescribing medication to learners",
+    "Creating the best possible learning environment",
+    "Replacing other health professionals",
+    "Avoiding feedback to the learner"],
+ a:1, d:"easy",
+ exp:"The six basic principles for the effective educator include: Message, Format, Environment, Experience, Participation, and Evaluation. Creating the best possible learning environment is the 'Environment' principle."},
+
+{t:"Direct health education is characterized by:",
+ o:["Using only television and radio to reach the audience",
+    "Face-to-face interaction where sender and receiver are in the same place",
+    "Using only written materials sent by mail",
+    "Having no feedback from receiver to sender"],
+ a:1, d:"easy",
+ exp:"Direct health education is face-to-face, with sender and receiver in the same place, allowing exchange of ideas, active participation, and feedback."},
+
+{t:"Indirect health education uses:",
+ o:["Face-to-face individual teaching only",
+    "Group demonstrations only",
+    "A channel or media between sender and receiver (mass media)",
+    "Return demonstrations only"],
+ a:2, d:"easy",
+ exp:"Indirect health education uses a channel or media between the sender and receiver (mass media), unlike direct health education which is face-to-face."},
+
+{t:"Which educational method involves a teacher performing a skill or process to be learned, usually followed by a return demonstration?",
+ o:["Lecture","Role playing","Demonstration","Case study"],
+ a:2, d:"easy",
+ exp:"Demonstration is teacher performance of a skill or process to be learned, usually followed by a return demonstration (learner performance of the skill)."},
+
+{t:"A 'return demonstration' in health education refers to:",
+ o:["The teacher repeating a demonstration",
+    "Learner performance of a previously learned skill or process",
+    "Using computers to present content",
+    "Verbal exploration of an idea with learners"],
+ a:1, d:"easy",
+ exp:"Return demonstration is when the LEARNER performs the previously learned skill or process — demonstrating understanding and competence."},
+
+{t:"Role playing as an educational method involves:",
+ o:["Watching a film about health topics",
+    "Using computers to present content",
+    "Acting out the role of another person to get a different perspective, usually followed by discussion",
+    "Reading a detailed case account"],
+ a:2, d:"easy",
+ exp:"Role playing involves acting out the role of another to get a different perspective, usually followed by discussion."},
+
+{t:"Which of the following is an ADVANTAGE of the direct method of health education?",
+ o:["It is inexpensive and saves time",
+    "Exchange of ideas between sender and receiver, active participation, and feedback",
+    "Reaching large populations simultaneously without interaction",
+    "No need for a qualified educator"],
+ a:1, d:"easy",
+ exp:"Advantages of direct health education include: exchange of ideas, flexibility of teaching methods, active learner participation, feedback from receiver to sender, and availability of repetition for better understanding."},
+
+{t:"The three sets of communication skills community health nurses need are:",
+ o:["Reading, writing, and speaking",
+    "Sending skills, receiving skills, and interpersonal skills",
+    "Clinical, administrative, and research skills",
+    "Verbal, numerical, and physical skills"],
+ a:1, d:"easy",
+ exp:"Community health nurses need three communication skills: (1) sending skills, (2) receiving skills, and (3) interpersonal skills."},
+
+{t:"Non-verbal messages constitute approximately what proportion of messages in normal communication?",
+ o:["One quarter (25%)","One third (33%)",
+    "Nearly two thirds (approximately 66%)","All messages (100%)"],
+ a:2, d:"easy",
+ exp:"Non-verbal messages constitute nearly two thirds of the messages transmitted in normal communication."},
+
+{t:"Which is an example of non-verbal communication?",
+ o:["Speaking a message to a patient",
+    "Writing a letter to a family member",
+    "Personal appearance, dress, posture, and facial expression",
+    "Using a telephone to convey information"],
+ a:2, d:"easy",
+ exp:"People send non-verbal messages through personal appearance, dress, posture, and facial expression — without using words."},
+
+{t:"The three types of interpersonal skills important for community health nursing communication are:",
+ o:["Sending, receiving, and encoding",
+    "Showing respect, empathizing, and developing trust",
+    "Writing, speaking, and listening",
+    "Assessing, planning, and evaluating"],
+ a:1, d:"easy",
+ exp:"Three types of interpersonal skills include: (1) showing respect, (2) empathizing, and (3) developing trust."},
+
+{t:"A case study as an educational method uses:",
+ o:["Computer programs to test knowledge",
+    "A detailed account of an actual or hypothetical situation to help learners apply principles, become aware of attitudes and values, and enhance potential for change",
+    "Physical demonstrations of clinical skills",
+    "Only visual aids such as pictures and posters"],
+ a:1, d:"easy",
+ exp:"A case study uses a detailed account of an actual or hypothetical situation to help learners apply principles, become aware of attitudes and values, and enhance potential for change."},
+
+{t:"Which barrier to health education falls under 'human factors'?",
+ o:["Inadequate health services","Insanitary environment",
+    "Illiteracy, faulty beliefs, and influential practices of older family members","Lack of facilities for applying knowledge"],
+ a:2, d:"easy",
+ exp:"Human factors as barriers to health education include illiteracy, faulty reactions and beliefs, and influential practices of older members of the family."},
+
+{t:"The learning process is defined as:",
+ o:["The process of testing people's existing knowledge",
+    "The process by which people acquire knowledge, change their feelings, and modify their health behavior",
+    "The process of prescribing health interventions",
+    "The process of documenting health records"],
+ a:1, d:"easy",
+ exp:"The learning process is the process by which people acquire knowledge, change their feelings, and modify their health behavior."},
+
+/* ── MEDIUM 19-40 ── */
+{t:"The 'value component' of motivation in learning refers to:",
+ o:["The learner's emotional reaction to the topic",
+    "The learner's belief about whether they can accomplish the task",
+    "The learner's perception of WHY they are learning ('Why am I learning this?')",
+    "The learner's previous academic grades"],
+ a:2, d:"medium",
+ exp:"Motivation has three components: value ('Why am I learning this?'), expectancy ('Can I do this?'), and affective ('How do I feel about this?'). The value component asks WHY."},
+
+{t:"The 'expectancy component' of motivation is best described as:",
+ o:["The learner's question: 'Why am I learning this?'",
+    "The learner's question: 'Can I do this?' — confidence in ability to succeed",
+    "The learner's emotional feelings about the topic",
+    "The teacher's expectation of the learner's performance"],
+ a:1, d:"medium",
+ exp:"The expectancy component reflects the learner's belief in their ability to succeed: 'Can I do this?' It relates to self-efficacy and confidence."},
+
+{t:"To 'enhance relevance' as a strategy to increase learner motivation, the educator should:",
+ o:["Provide only negative feedback to motivate the learner",
+    "Explain how instruction relates to learners' goals and build on learners' previous experiences",
+    "Use only complicated terminology to challenge the learner",
+    "Present only new material without reference to prior knowledge"],
+ a:1, d:"medium",
+ exp:"Enhancing relevance involves explaining how instruction relates to learners' goals and building on their previous experiences to increase motivation."},
+
+{t:"To 'build confidence' as a motivational strategy, the educator should:",
+ o:["Focus only on learner weaknesses and failures",
+    "Create positive expectations for success, provide opportunities to attain goals successfully, and offer learners control over their learning",
+    "Assign difficult tasks beyond the learner's ability",
+    "Limit the learner's input in the learning process"],
+ a:1, d:"medium",
+ exp:"Building confidence involves: creating positive expectations for success, providing opportunities for learners to successfully attain goals, and offering learners control over their learning."},
+
+{t:"The general principle that 'content presented FIRST is learned best' relates to which aspect of the learning process?",
+ o:["Reinforcement and retention","Learner characteristics",
+    "Presentation of content — content presented first has primacy and is more likely to be retained",
+    "The learning situation context"],
+ a:2, d:"medium",
+ exp:"'Content presented first is learned best' is a principle about the PRESENTATION of content, relating to the concept of primacy — what is learned first tends to be retained most effectively."},
+
+{t:"The principle 'positive reinforcement is more effective than negative reinforcement' falls under which category of learning principles?",
+ o:["Learner characteristics","Learning situation","Presentation of content","Reinforcement and retention"],
+ a:3, d:"medium",
+ exp:"Principles about positive reinforcement, repetition, feedback, and retention fall under the 'Reinforcement and Retention' category of learning principles."},
+
+{t:"Which step of the health education program process involves identifying the target group to receive health education?",
+ o:["Step 1: Identify goals clearly","Step 2: Analyze the environment",
+    "Step 3: Identify the target group to receive the health education",
+    "Step 5: Choose the program topic"],
+ a:2, d:"medium",
+ exp:"Step 3 of the health education program process is to identify the target group to receive health education. Steps follow logically: goals → environment analysis → target group → roles → topic → presentation."},
+
+{t:"When implementing a health education program (Step 8), the educator should remember to:",
+ o:["Use highly technical language to demonstrate expertise",
+    "Be simple, direct, and concise in the information presented",
+    "Avoid any learner input or questions",
+    "Present as much information as possible at once"],
+ a:1, d:"medium",
+ exp:"During implementation, the educator should be simple, direct, and concise in the information presented. The learner's voice (input from participants) should also be continuously sought."},
+
+{t:"The scope of health education in HOMES includes which activities?",
+ o:["Only formal academic health education sessions",
+    "Hygiene habits, family attitudes toward health, prevention and management of illness, and environmental/home sanitation",
+    "Group teaching sessions for patients with similar problems",
+    "Regular examination and attendance records for workers"],
+ a:1, d:"medium",
+ exp:"In homes, the CHN addresses: hygiene habits, family attitudes toward health, prevention and management of illness, and environmental/home sanitation."},
+
+{t:"In INDUSTRY, health education activities include:",
+ o:["Only prenatal education for workers",
+    "Health records requiring regular examination, illness/injury reports, attendance records to assess learning needs, and group discussion classes for people with similar problems",
+    "Only individual counseling without any group activities",
+    "Formal academic lectures only"],
+ a:1, d:"medium",
+ exp:"In industry, health records (examinations, illness/injury reports, attendance) help assess health problems and learning needs of workers. Health education classes and group discussions for people with similar problems are also conducted."},
+
+{t:"The principle 'association of new material with previous learning enhances learning' means:",
+ o:["Previous learning is irrelevant to new learning",
+    "New health education content should be completely separate from what learners already know",
+    "Linking new health information to what learners already know makes the new content more meaningful and easier to retain",
+    "Only completely new information should be presented"],
+ a:2, d:"medium",
+ exp:"Associating new material with previous learning enhances learning by building cognitive connections, making new content more meaningful, relevant, and easier to retain."},
+
+{t:"The principle 'active participation by the learner facilitates learning' means the educator should:",
+ o:["Only lecture without any interaction",
+    "Engage learners in participatory activities rather than passive reception of information",
+    "Avoid asking questions to the learners during sessions",
+    "Provide only written materials without discussion"],
+ a:1, d:"medium",
+ exp:"Active participation is both a learning principle (under presentation of content) and one of the six basic principles for the effective educator (Participation). Engaging learners actively facilitates learning."},
+
+{t:"The 'recency of learning influences retention' principle means:",
+ o:["Only the first lesson is well retained","Information learned long ago is always best remembered",
+    "Information that was learned most recently tends to be better retained than information learned earlier",
+    "Recency has no impact on retention"],
+ a:2, d:"medium",
+ exp:"Recency of learning influences retention — information learned most recently tends to be better retained (recency effect), complementing the primacy effect (content presented first is learned best)."},
+
+{t:"Community under-development as a barrier to health education is characterized by:",
+ o:["High literacy rates and well-equipped health centers",
+    "Insanitary environment, inadequate health services, and lack of opportunities for applying health knowledge and practices",
+    "Strong community motivation for health education",
+    "Advanced technology and rich resources"],
+ a:1, d:"medium",
+ exp:"Community under-development as a barrier is characterized by: insanitary environment, inadequate health services, and lack of opportunities for application of knowledge and health practices."},
+
+{t:"Effective SENDING skills in communication require:",
+ o:["Only written communication without verbal interaction",
+    "Keeping the message honest and uncomplicated, using as few words as possible, and asking for feedback to confirm understanding",
+    "Using as many technical terms as possible to appear professional",
+    "Avoiding any feedback request from the receiver"],
+ a:1, d:"medium",
+ exp:"Basic rules for effective sending: (1) Keep the message honest and uncomplicated, (2) Use as few words as possible, (3) Ask for reactions/feedback to ensure the message is understood."},
+
+{t:"RECEIVING skills in communication are important because they involve:",
+ o:["Only transmitting information to clients",
+    "Not only listening to what people say but also observing their behavior, paying attention to both verbal and non-verbal messages, and seeking feedback through active listening and paraphrasing",
+    "Only reading written materials from clients",
+    "Only documenting what clients say without analyzing non-verbal cues"],
+ a:1, d:"medium",
+ exp:"Receiving skills involve: listening to what people say AND observing their behavior, attending to both verbal and non-verbal messages, seeking feedback, active listening, and paraphrasing."},
+
+{t:"The nurse's role as a health educator includes all of the following EXCEPT:",
+ o:["Advocate and caregiver","Case manager and consultant",
+    "Educator and information broker","Performing specialized surgical operations"],
+ a:3, d:"medium",
+ exp:"The nurse's roles as health educator include: advocate, caregiver, case manager, consultant, educator, information broker, innovator, mediator, role model, sensitizer, policy analyst, and social activist. Performing specialized surgery is not a health education role."},
+
+{t:"Leadership ability is important for the community health nurse as educator because:",
+ o:["Nurses need authority to force patients to learn",
+    "Psychologists have shown that we learn best from people whom we respect and regard — effective educators need leadership qualities to inspire learners",
+    "Leadership is only important for hospital administrators",
+    "Leadership replaces the need for health knowledge"],
+ a:1, d:"medium",
+ exp:"Leadership ability is a quality of a successful health educator. Psychologists have shown that we learn best from people whom we respect and regard — making leadership and respect-earning essential educator qualities."},
+
+{t:"'Motivation' as a quality of the health educator is described as:",
+ o:["Forcing learners to attend health education sessions",
+    "Awakening the fundamental desire to learn that exists in every person",
+    "Providing financial incentives for learning",
+    "Testing learners frequently to force learning"],
+ a:1, d:"medium",
+ exp:"Motivation is an important factor in health education. In every person there is a fundamental desire to learn — awakening this desire is called motivation."},
+
+{t:"'Reinforcement' as a quality of the health educator is described as:",
+ o:["Providing negative feedback to discourage wrong behaviors",
+    "Repetition at intervals which is extremely useful — compared to a 'booster dose'",
+    "Using punishment for non-compliant learners",
+    "Repeating exactly the same content in exactly the same way"],
+ a:1, d:"medium",
+ exp:"Reinforcement in health education refers to repetition at intervals, which is extremely useful. The lecture compares it to a 'booster dose' of a vaccine."},
+
+{t:"The scope of health education in SCHOOLS includes which activities by the nurse?",
+ o:["Only administering vaccinations",
+    "Using health records to assess learning needs, participating in curriculum development, and helping in in-service training programs for teachers",
+    "Only providing emergency first aid",
+    "Only screening for visual and hearing problems"],
+ a:1, d:"medium",
+ exp:"In schools, the nurse uses health records to assess problems and learning needs, may participate in developing health teaching curriculum, and can help in in-service training programs for teachers."},
+
+/* ── HARD 41-55 ── */
+{t:"The statement 'nurses are information brokers and educators who can make a significant difference' implies that nurses:",
+ o:["Replace physicians in all health education activities",
+    "Play a central role in how patients and families cope with illness, how the public benefits from disease prevention education, and how staff nurses gain competency through continuing education",
+    "Are only responsible for clinical care without any educational role",
+    "Only teach other nurses, not patients or families"],
+ a:1, d:"hard",
+ exp:"Nurses as information brokers and educators make a difference in: how patients/families cope with illness, how the public benefits from disease prevention education, and how staff nurses gain competency and confidence through continuing education."},
+
+{t:"The principle 'application of information in several contexts promotes generalization of learning' means:",
+ o:["Learning only one context is sufficient for full understanding",
+    "Applying newly learned health information in multiple different real-life situations helps learners transfer knowledge broadly beyond the original learning context",
+    "Only theoretical knowledge without practical application is sufficient",
+    "Generalization means all learners learn the same content in the same way"],
+ a:1, d:"hard",
+ exp:"Applying information in several contexts promotes GENERALIZATION — the ability to transfer learning beyond the original context. This is a key reinforcement and retention principle."},
+
+{t:"If steps of the instruction process (events of instruction) are omitted, what happens?",
+ o:["Learning improves because fewer steps are distracting",
+    "Superficial and fragmented learning may occur",
+    "Learning becomes more efficient",
+    "The learner becomes more self-directed"],
+ a:1, d:"hard",
+ exp:"The lecture explicitly states: 'If steps of this process are omitted, superficial and fragmented learning may occur.' All nine steps of the instructional sequence are important."},
+
+{t:"The statement 'the nurse's first consideration in sending messages is the extent of their own self-awareness' means:",
+ o:["Nurses should think only about themselves during communication",
+    "The nurse's understanding of their own biases, emotions, and communication style affects the clarity and effectiveness of messages sent to clients",
+    "Self-awareness is unrelated to communication effectiveness",
+    "Only technical knowledge, not self-awareness, affects communication"],
+ a:1, d:"hard",
+ exp:"Two important considerations in sending messages: (1) the extent of the nurse's self-awareness affects communication, and (2) awareness of the receiver influences message sending. Self-awareness is a key determinant of communication quality."},
+
+{t:"The 'generate satisfaction' strategy for increasing motivation involves:",
+ o:["Testing learners repeatedly without feedback",
+    "Providing learners opportunities to use newly acquired skills AND providing positive feedback",
+    "Only praising learners without providing any skill practice opportunities",
+    "Creating difficult goals that challenge learners beyond their current ability"],
+ a:1, d:"hard",
+ exp:"Generating satisfaction involves: providing learners with opportunities to use newly acquired skills AND providing positive feedback. Both elements are needed to generate satisfaction."},
+
+{t:"The core of health education in nursing is described as:",
+ o:["The technical skills of the nurse only",
+    "A therapeutic relationship that develops between the nurse and individuals, families, and the community, where nurses serve as catalysts for change by delivering humanistic care",
+    "The number of health education sessions delivered",
+    "The quantity of pamphlets and materials distributed"],
+ a:1, d:"hard",
+ exp:"The core of health education is a therapeutic relationship that develops between the nurse and individuals, families, and the community. Nurses serve as catalysts for change by delivering humanistic care, moving ideas into action."},
+
+{t:"The principle 'individualization of presentation to the learner promotes learning' means the educator should:",
+ o:["Provide identical instruction to all learners regardless of their background",
+    "Tailor health education content, pace, and approach to match the individual learner's needs, experiences, culture, and learning style",
+    "Use only group teaching without any individual adaptations",
+    "Focus only on the most common learning style"],
+ a:1, d:"hard",
+ exp:"Individualization of presentation is a key learning principle under 'Presentation of Content.' Tailoring instruction to the individual learner's needs, experiences, and background promotes more effective learning."},
+
+{t:"When the nurse in a clinic uses demonstration and group teaching with patients who have similar problems, which scope of health education is being utilized?",
+ o:["Health education in homes","Health education in the community",
+    "Health education in clinics","Health education in industry"],
+ a:2, d:"hard",
+ exp:"In CLINICS, the nurse can use demonstration and group teaching with patients who have similar problems — as stated in the scope of health education section."},
+
+{t:"The principle 'presentation of positive rather than negative behaviors facilitates behavior change' has which practical implication for health education?",
+ o:["Nurses should focus on what patients are doing wrong",
+    "Nurses should emphasize desirable health behaviors (what TO do) rather than focusing on undesirable behaviors (what NOT to do) to facilitate positive behavior change",
+    "Negative examples are always more effective for learning",
+    "Behavior change is not related to how information is presented"],
+ a:1, d:"hard",
+ exp:"This principle means health educators should present POSITIVE behaviors (what to do) rather than negative behaviors (what not to do), as positive framing is more effective in facilitating behavior change."},
+
+{t:"Why is 'repetition' described as a 'booster dose' in health education?",
+ o:["Because it is given only once like a single vaccine",
+    "Because just as booster vaccine doses reinforce immune protection over time, repetition of health education content at intervals reinforces learning and knowledge retention",
+    "Because repetition is only useful for clinical skills, not knowledge",
+    "Because repetition is harmful to the learning process"],
+ a:1, d:"hard",
+ exp:"The lecture draws an analogy: 'Repetition at intervals is extremely useful — we may call it a booster dose.' Just as vaccine boosters reinforce immune protection, periodic repetition reinforces health education learning."},
+
+{t:"The affective component of motivation ('How do I feel about this?') is important in health education because:",
+ o:["Emotions have no impact on learning outcomes",
+    "A learner's emotional state and feelings about the subject matter significantly influence their engagement, openness to change, and ultimate behavioral modification",
+    "Only cognitive understanding, not feelings, affects health behavior change",
+    "The affective component is relevant only for children, not adults"],
+ a:1, d:"hard",
+ exp:"The affective component (feelings) is one of three motivational factors. The nature of learning explicitly includes the affective domain. Emotional engagement influences a learner's openness to health behavior change."},
+
+{t:"The educational principle that 'multiple modes of presenting content enhance learning' means the health educator should:",
+ o:["Use only one teaching method for consistency",
+    "Vary presentation methods (e.g., combining lecture, demonstration, visual aids, discussion) to accommodate different learning styles and reinforce understanding",
+    "Avoid using visual aids as they distract from the verbal message",
+    "Present content only in written form"],
+ a:1, d:"hard",
+ exp:"Multiple modes of presenting content enhance learning by accommodating different learning styles and reinforcing understanding through redundancy across different sensory channels."},
+
+{t:"Which combination BEST represents the complete sequence for gaining and maintaining learner attention in the events of instruction?",
+ o:["Assessment → Implementation → Evaluation",
+    "Gain attention → Inform learner of objectives → Stimulate recall → Present material → Guide learning → Elicit performance → Provide feedback → Assess performance → Enhance retention",
+    "Present material → Assess → Gain attention",
+    "Feedback → Attention → Presentation only"],
+ a:1, d:"hard",
+ exp:"The 9 events of instruction in sequence: (1) Gain attention, (2) Inform of objectives, (3) Stimulate recall, (4) Present material, (5) Provide guidance, (6) Elicit performance, (7) Provide feedback, (8) Assess performance, (9) Enhance retention and transfer."},
+
+{t:"The 'Format' principle for the effective educator (selecting the most appropriate learning format) means the educator should:",
+ o:["Always use lectures as the standard format for all topics",
+    "Choose the teaching method (lecture, demonstration, discussion, role play, etc.) that BEST matches the content, learner characteristics, and desired learning outcomes",
+    "Use the cheapest format regardless of its effectiveness",
+    "Use only computer-assisted instruction for all health education"],
+ a:1, d:"hard",
+ exp:"The Format principle involves selecting the MOST APPROPRIATE learning format for the specific content, learner, and objectives. Not all topics are best taught by lecture — the format must match the learning goal."},
+
+{t:"  A community health nurse is planning to teach a group of diabetic patients about blood glucose monitoring. Before beginning the session, she introduces herself, shows a video clip about diabetes complications, and asks a thought-provoking question. Which event of instruction is she initiating?",
+ o:["Providing feedback","Assessing performance",
+    "Gaining the learner's attention — the first event of instruction required before learning can take place",
+    "Eliciting performance"],
+ a:2, d:"easy",
+ exp:"The nurse is performing Event 1: GAINING ATTENTION. Before learning can take place, the educator must gain the learner's attention through strategies like video clips, thought-provoking questions, or demonstrations."},
+
+{t:"  A nurse educator is teaching a hypertension group. After explaining dietary salt restriction, she asks each patient to demonstrate how they would read food labels for sodium content. Which educational method is being used?",
+ o:["Lecture","Role playing",
+    "Return demonstration — learner performance of a learned skill",
+    "Case study"],
+ a:2, d:"medium",
+ exp:"Return demonstration is when the LEARNER performs the learned skill or process. Asking patients to demonstrate reading food labels is a return demonstration of the taught skill."},
+
+{t:"  A health educator notices that despite understanding information, a 45-year-old patient says 'I don't think I can do this' when asked to practice insulin injection. Which component of motivation is MOST lacking?",
+ o:["Value component ('Why am I learning this?')",
+    "Expectancy component ('Can I do this?') — the patient lacks confidence in ability to succeed",
+    "Affective component ('How do I feel about this?')",
+    "Knowledge component"],
+ a:1, d:"medium",
+ exp:"The EXPECTANCY component of motivation reflects the learner's belief: 'Can I do this?' The patient's statement 'I don't think I can do this' directly indicates low expectancy/self-efficacy."},
+
+{t:"  A nurse conducting a home visit notices that a mother consistently uses a contaminated water source for drinking and cooking, despite having received health education about safe water before. The nurse repeats the health education in a different way, using practical demonstration with the available resources. This application of repetition is described as:",
+ o:["Punishment for non-compliance",
+    "A 'booster dose' of health education — repetition at intervals to reinforce learning",
+    "An indication that the initial education failed completely",
+    "An expensive waste of health education resources"],
+ a:1, d:"medium",
+ exp:"Repetition at intervals is extremely useful and is compared to a 'booster dose.' The nurse is reinforcing the learning — repeating content in a different mode to enhance understanding and behavior change."},
+
+{t:"  During a group health education session, a nurse notices that two participants are disengaged, looking away, and not responding. She changes her approach by asking them direct questions and showing a short video. Which principle of the effective educator is she applying?",
+ o:["Only the Message principle",
+    "Participation and Environment principles — re-engaging learners through active participation and improving the learning environment",
+    "Only the Format principle",
+    "Only the Evaluation principle"],
+ a:1, d:"medium",
+ exp:"By re-engaging learners through questions (Participation principle) and changing the environment/format (Environment and Format principles), the nurse applies multiple principles of the effective educator."},
+
+{t:"  A community health nurse is visiting a factory to conduct health education for workers exposed to occupational hazards. She reviews injury and illness reports, identifies the most common health problems, and plans group discussion sessions. Which scope of health education does this represent?",
+ o:["Health education in homes","Health education in schools",
+    "Health education in industry — using health records to assess needs and conducting group discussions",
+    "Health education in clinics"],
+ a:2, d:"easy",
+ exp:"In INDUSTRY, health records including illness/injury reports and attendance records help assess health problems and learning needs of workers. Health education classes and group discussion for people with similar problems are conducted."},
+
+{t:"  A nurse is teaching a young woman about breast self-examination. After demonstrating on a model, she asks the woman to practice the technique herself while the nurse observes and provides feedback. Which COMBINATION of educational methods is being used?",
+ o:["Lecture and role playing",
+    "Demonstration followed by return demonstration",
+    "Case study and computer-assisted instruction",
+    "Discussion and role playing"],
+ a:1, d:"medium",
+ exp:"The nurse performs a DEMONSTRATION (teacher performs the skill), followed by a RETURN DEMONSTRATION (learner performs the skill). This combination is commonly used for clinical skill teaching."},
+
+{t:"  A nurse observes that when speaking to a patient, the patient's arms are crossed, she avoids eye contact, and looks tense, even though she says 'I'm fine.' The nurse recognizes this inconsistency. Which communication skill is the nurse effectively applying?",
+ o:["Only verbal message sending skills",
+    "Receiving skills — observing behavior and non-verbal messages alongside verbal messages to understand their true meaning",
+    "Only interpersonal skills",
+    "Only feedback skills"],
+ a:1, d:"medium",
+ exp:"Receiving skills involve not only LISTENING to what people say but also OBSERVING their behavior. Effective receiving requires attention to BOTH non-verbal and verbal messages. The nurse recognizes the mismatch between verbal and non-verbal signals."},
+
+{t:"  A health educator is planning a community session on childhood immunization. She first identifies the target group (mothers with children under 2 years), then defines team member roles, chooses the topic, selects appropriate visual aids, and plans evaluation. Which step did she SKIP?",
+ o:["Step 8: Implement the program","Step 9: Evaluate the program",
+    "Step 2: Analyze the environment including client needs and available services",
+    "Step 5: Choose the program topic"],
+ a:2, d:"hard",
+ exp:"The health education program steps are: (1) Identify goals, (2) Analyze environment including client needs and other services, (3) Identify target group... The nurse skipped Step 2 (analyzing the environment/client needs), jumping from goals directly to target group."},
+
+{t:"  A new community health nurse asks her supervisor why it is important to use multiple teaching methods (lecture, visual aids, demonstration) rather than only lecturing. The supervisor correctly explains:",
+ o:["Multiple methods are more expensive and less effective than a single method",
+    "Multiple modes of presenting content enhance learning by accommodating different learning styles and reinforcing understanding through different sensory channels",
+    "Multiple methods create confusion for learners",
+    "Only lecture is effective for adult health education"],
+ a:1, d:"medium",
+ exp:"The principle 'multiple modes of presenting content enhance learning' supports using varied methods to accommodate different learning styles and reinforce content through multiple sensory channels."},
+
+{t:"  A community health nurse needs to reach thousands of people about dengue fever prevention. She decides to use radio broadcasts and newspaper articles. Which method of health education is she using and what is a limitation of this approach?",
+ o:["Direct health education; limitation is that it is face-to-face only",
+    "Indirect health education (mass media); limitation is that there is no direct exchange of ideas or immediate feedback between sender and receiver",
+    "Direct health education; limitation is that it is too expensive",
+    "Indirect health education; limitation is that it cannot reach large populations"],
+ a:1, d:"hard",
+ exp:"Radio and newspaper are INDIRECT health education (mass media) — a channel between sender and receiver. Unlike direct methods, indirect methods do NOT allow exchange of ideas, active participation, or immediate feedback."},
+
+{t:"  A school nurse is developing a health curriculum module on nutrition for primary school children. She consults with teachers, reviews student health records, and identifies common nutritional deficiencies. Which scope of health education is she operating in and which role is she performing?",
+ o:["Community health education scope only; only a screening role",
+    "School health education scope; participating in curriculum development, using health records to assess learning needs, and potentially assisting in teacher training",
+    "Industrial health education; conducting worker health assessments",
+    "Clinical health education; providing individual patient counseling"],
+ a:1, d:"medium",
+ exp:"In SCHOOLS, the nurse uses health records to assess problems and learning needs, may participate in developing health teaching curriculum, and can help in in-service training programs for teachers."},
+
+{t:"  A patient with newly diagnosed hypertension seems uninterested and says 'Why should I bother learning all this?' The nurse explains how controlling blood pressure prevents strokes and heart attacks, connecting the education to the patient's personal health goals. Which motivational strategy is the nurse applying?",
+ o:["Building confidence","Generating satisfaction",
+    "Enhancing relevance — explaining how instruction relates to learner's goals and building on previous experiences",
+    "Providing negative reinforcement"],
+ a:2, d:"medium",
+ exp:"'Enhancing relevance' involves explaining how instruction relates to learners' GOALS. The nurse connects hypertension education to the patient's concern about preventing serious complications, making the learning personally relevant."},
+
+{t:"  A community health nurse is communicating with a family from a different cultural background. She speaks respectfully, acknowledges their values, shows genuine understanding of their concerns, and has consistently kept her promises to them during previous visits. Which interpersonal communication skills is she demonstrating?",
+ o:["Only sending skills","Only receiving skills",
+    "All three interpersonal skills: showing respect, empathizing, and developing trust",
+    "Only empathy without respect or trust"],
+ a:2, d:"hard",
+ exp:"The nurse demonstrates all three interpersonal skills: (1) SHOWING RESPECT (respectful communication acknowledging values), (2) EMPATHIZING (genuine understanding of concerns), and (3) DEVELOPING TRUST (consistently keeping promises)."},
+
+{t:"  A health educator conducts a session on diabetes management. At the end, she asks participants to demonstrate blood glucose monitoring, asks them questions about dietary guidelines, and observes behavioral changes. She then plans a follow-up session based on identified gaps. Which sequence of instructional events is she completing?",
+ o:["Gaining attention and presenting material only",
+    "Eliciting performance (Step 6), providing feedback (Step 7), assessing performance (Step 8), and enhancing retention (Step 9) — the final events of instruction",
+    "Only the first three events of instruction",
+    "Steps 1 through 5 of the events of instruction"],
+ a:1, d:"hard",
+ exp:"The nurse is performing the FINAL events of instruction: eliciting performance (Step 6 — asking demonstrations/questions), providing feedback (Step 7), assessing performance (Step 8), and enhancing retention and transfer (Step 9 — planning follow-up)."},
+
+{t:"Health education results only from formal classroom instruction and does not occur in homes, clinics, or community settings.",
+ o:["True","False"], a:1, d:"easy",
+ exp:"Health education is NOT limited to situations of actual formal instruction. It results from a wide variety of experiences in homes, clinics, educational institutions and schools, community, and industry."},
+
+{t:"The first event of instruction is to gain the learner's attention before any learning can take place.",
+ o:["True","False"], a:0, d:"easy",
+ exp:"'Gain attention' is explicitly stated as the FIRST event of instruction: 'Before learning can take place, the educator must gain the learner's attention.'"},
+
+{t:"Non-verbal messages constitute nearly two thirds of messages transmitted in normal communication.",
+ o:["True","False"], a:0, d:"easy",
+ exp:"Non-verbal messages constitute nearly two thirds (approximately 66%) of the messages transmitted in normal communication."},
+
+{t:"Direct health education is more cost-effective and less time-consuming than indirect health education.",
+ o:["True","False"], a:1, d:"easy",
+ exp:"Direct health education has disadvantages of being EXPENSIVE and TIME-CONSUMING. These are listed as disadvantages compared to mass media/indirect methods."},
+
+{t:"The affective domain of learning relates to 'acting' or psychomotor skills.",
+ o:["True","False"], a:1, d:"medium",
+ exp:"The AFFECTIVE domain relates to FEELING. The PSYCHOMOTOR domain relates to ACTING. The cognitive domain relates to thinking. The three domains are cognitive (thinking), affective (feeling), and psychomotor (acting)."},
+
+{t:"The expectancy component of motivation reflects the learner's question: 'Can I do this?' and relates to confidence and self-efficacy.",
+ o:["True","False"], a:0, d:"medium",
+ exp:"The expectancy component asks 'Can I do this?' and reflects the learner's confidence and belief in their ability to succeed — directly related to self-efficacy."},
+
+{t:"Repetition at intervals in health education is compared to a 'booster dose' because it reinforces learning over time.",
+ o:["True","False"], a:0, d:"medium",
+ exp:"The lecture states: 'Repetition at intervals is extremely useful — we may call it a booster dose.' This reinforces health education learning over time."},
+
+{t:"If steps of the instructional event process are omitted, learning becomes more focused and efficient.",
+ o:["True","False"], a:1, d:"medium",
+ exp:"If steps of the instruction process are omitted, 'superficial and fragmented learning may occur.' Omitting steps worsens, not improves, learning quality."},
+
+{t:"Positive reinforcement is more effective than negative reinforcement for promoting learning and behavior change.",
+ o:["True","False"], a:0, d:"medium",
+ exp:"'Positive reinforcement is more effective than negative reinforcement' is an explicit principle under the 'Reinforcement and Retention' category of learning principles."},
+
+{t:"The 'return demonstration' is when the TEACHER demonstrates a skill for the learner to observe.",
+ o:["True","False"], a:1, d:"easy",
+ exp:"Return demonstration is when the LEARNER performs the learned skill or process. When the TEACHER performs the skill, it is called simply 'demonstration.'"},
+
+{t:"Illiteracy is classified as a human factor barrier to health education.",
+ o:["True","False"], a:0, d:"easy",
+ exp:"Human factors as barriers to health education include illiteracy, faulty reactions and beliefs, and influential practices of older family members."},
+
+{t:"The 'generate satisfaction' motivational strategy involves providing learners with opportunities to use newly acquired skills and giving positive feedback.",
+ o:["True","False"], a:0, d:"medium",
+ exp:"Generating satisfaction involves: providing learners opportunities to use newly acquired skills AND providing positive feedback — both elements are required."},
+
+{t:"Showing respect, empathizing, and developing trust are the three types of SENDING skills in community health communication.",
+ o:["True","False"], a:1, d:"hard",
+ exp:"Showing respect, empathizing, and developing trust are the three types of INTERPERSONAL skills — not sending skills. Sending skills relate to transmitting messages effectively."},
+
+{t:"Content presented FIRST in a health education session is learned best (primacy effect).",
+ o:["True","False"], a:0, d:"medium",
+ exp:"'Content presented first is learned best' is a principle under Presentation of Content — reflecting the primacy effect in learning."},
+
+{t:"The six basic principles for the effective educator are: Message, Format, Environment, Experience, Participation, and Evaluation.",
+ o:["True","False"], a:0, d:"medium",
+ exp:"The six basic principles guiding the effective educator are exactly: (1) Message, (2) Format, (3) Environment, (4) Experience, (5) Participation, and (6) Evaluation."},
+
+{t:"The core of health education is a therapeutic relationship between the nurse and individuals, families, and the community, with nurses serving as catalysts for change.",
+ o:["True","False"], a:0, d:"medium",
+ exp:"The lecture states: 'The core of health education is a therapeutic relationship that develops between the nurse and individuals, families, and the community. Nurses serve as catalysts for change by delivering humanistic care.'"},
+
+{t:"Motivation to learn enhances learning according to the general principles of the learner.",
+ o:["True","False"], a:0, d:"easy",
+ exp:"Under 'General Principles of Learning — Learner,' motivation to learn enhances learning is explicitly stated as a principle."},
+
+{t:"Community under-development as a barrier to health education includes adequate health services and rich environmental resources.",
+ o:["True","False"], a:1, d:"medium",
+ exp:"Community under-development is characterized by INSANITARY environment, INADEQUATE health services, and LACK of opportunities for applying health knowledge — the opposite of adequate services and rich resources."},
+
+{t:"In the events of instruction, 'stimulating recall of prior learning' occurs BEFORE 'presenting the new material.'",
+ o:["True","False"], a:0, d:"hard",
+ exp:"The sequence of events of instruction is: (1) Gain attention, (2) Inform of objectives, (3) STIMULATE RECALL of prior learning, (4) PRESENT the material. Stimulating recall (Step 3) correctly precedes presenting new material (Step 4)."},
+
+{t:"The nurse's awareness of the receiver is one of the two important considerations that influence clarity and effectiveness of message sending.",
+ o:["True","False"], a:0, d:"hard",
+ exp:"Two important considerations influence message sending clarity: (1) the nurse's SELF-AWARENESS and (2) the nurse's AWARENESS OF THE RECEIVER. Both are explicitly stated as factors influencing message clarity and effectiveness."},
+
+];
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function shuffleOptions(question) {
+  const correctAnswer = question.o[question.a];
+
+  question.o = shuffle([...question.o]);
+
+  question.a = question.o.indexOf(correctAnswer);
+
+  return question;
+}
+
+QUESTIONS = QUESTIONS.map(q => shuffleOptions({...q}));
+/* ============ CONFIG ============ */
+const TOTAL_MINUTES = 60;   
+
+/* ============ ENGINE ============ */
+const LETTERS = ['A','B','C','D','E','F'];
+let pool, questions, qi, correct, wrong, answered, answers, wrongSet;
+let totalTime = 60 * 60, timeLeft, timerInterval;
+let activeTopic = 'All';
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+/* ---- TOPIC FILTER ---- */
+function buildFilters() {
+  const wrap = document.getElementById('filterWrap');
+  const countEl = document.getElementById('filterCount');
+  const topics = [...new Set(QUESTIONS.map(q=>q.topic).filter(Boolean))];
+  if (!topics.length) { wrap.style.display='none'; countEl.style.display='none'; return; }
+  wrap.style.display='flex';
+  countEl.style.display='block';
+  const all = ['All', ...topics];
+  wrap.innerHTML = all.map(t=>
+    `<button class="filter-btn${t==='All'?' active':''}" onclick="setTopic('${t}')">${t}</button>`
+  ).join('');
+  updateFilterCount();
+}
+
+function setTopic(t) {
+  activeTopic = t;
+  document.querySelectorAll('.filter-btn').forEach(b=>{
+    b.classList.toggle('active', b.textContent===t);
+  });
+  updateFilterCount();
+  init(getPool());
+}
+
+function getPool() {
+  return activeTopic==='All' ? QUESTIONS : QUESTIONS.filter(q=>q.topic===activeTopic);
+}
+
+function updateFilterCount() {
+  const p = getPool();
+  document.getElementById('filterCount').textContent =
+    `Showing ${p.length} question${p.length!==1?'s':''} · Topic: ${activeTopic}`;
+}
+
+/* ---- INIT ---- */
+function init(p) {
+  pool = p;
+  if (!pool.length) {
+    document.getElementById('app').innerHTML=`
+      <div class="empty-state">
+        <div class="ei">📭</div>
+        <h3>No Questions Yet</h3>
+        <p>Add questions to the QUESTIONS array in the script section.</p>
+      </div>`;
+    document.getElementById('totalBadge').textContent='0 Questions';
+    document.getElementById('sRemain').textContent='—';
+    clearInterval(timerInterval);
+    return;
+  }
+  questions = shuffle(pool);
+  qi=0; correct=0; wrong=0; answered=0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = [];
+  timeLeft = totalTime;
+  document.getElementById('totalBadge').textContent = questions.length+' Questions';
+  document.getElementById('timeBadge').textContent  = TOTAL_MINUTES+' Min';
+  startTimer(); render();
+}
+
+/* ---- TIMER ---- */
+function startTimer() {
+  clearInterval(timerInterval);
+  timerInterval = setInterval(()=>{
+    timeLeft--;
+    const m=Math.floor(timeLeft/60), s=timeLeft%60;
+    document.getElementById('timerTxt').textContent=`${m}:${s<10?'0':''}${s}`;
+    const b=document.getElementById('timerBadge');
+    if (timeLeft<=120)      b.className='timer-badge danger';
+    else if (timeLeft<=300) b.className='timer-badge warn';
+    else                    b.className='timer-badge';
+    if (timeLeft<=0) { clearInterval(timerInterval); finish(); }
+  },1000);
+}
+
+/* ---- TOP BAR ---- */
+function updateTop() {
+  const total=questions.length;
+  document.getElementById('sCorrect').textContent=correct;
+  document.getElementById('sWrong').textContent=wrong;
+  document.getElementById('sRemain').textContent=Math.round(((total-answered)/total)*100)+'%';
+  document.getElementById('progLabel').textContent='Q '+(qi+1)+' / '+total;
+  document.getElementById('progFill').style.width=((qi+1)/total*100)+'%';
+  document.getElementById('prog-bar').style.width=((qi+1)/total*100)+'%';
+}
+
+/* ---- RENDER ---- */
+function render() {
+  updateTop();
+  const q=questions[qi];
+  const opts = q.o.map((o,idx)=>`
+    <div class="opt" id="opt${idx}" onclick="choose(${idx})">
+      <div class="opt-letter">${LETTERS[idx]}</div>${o}
+    </div>`).join('');
+  document.getElementById('app').innerHTML=`
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Question ${qi+1} / ${questions.length}</div>
+        ${q.topic?`<div class="q-topic">${q.topic}</div>`:''}
+      </div>
+      <div class="q-text">${q.t}</div>
+      <div class="options">${opts}</div>
+      <div class="nav-btns">
+        <button class="btn btn-skip" onclick="skip()"><i class="fa-solid fa-forward"></i> Skip</button>
+      </div>
+    </div>`;
+}
+
+/* ---- CHOOSE ---- */
+function choose(v) {
+  if (answers[qi]!==null) return;
+  answers[qi]=v; answered++;
+  const q=questions[qi], ok=v===q.a;
+  ok?correct++:wrong++;
+  updateTop();
+  q.o.forEach((_,idx)=>{
+    const el=document.getElementById('opt'+idx);
+    el.classList.add('disabled');
+    if (idx===q.a) el.classList.add('correct');
+    else if (idx===v) el.classList.add('wrong');
+  });
+  const fb=document.createElement('div');
+  fb.className='feedback-bar '+(ok?'ok':'no');
+  fb.innerHTML=ok
+    ?`<span style="font-size:17px">🎉</span><span>ِما شاء الله عليك</span>`
+    :`<span style="font-size:17px">😔</span><span>ركز يا شطور</span>`;
+  const card=document.querySelector('.q-card');
+  card.querySelector('.options').after(fb);
+  if (q.exp) {
+    const exp=document.createElement('div');
+    exp.className='explanation';
+    exp.innerHTML='<b>💬 Explanation:</b> '+q.exp;
+    fb.after(exp);
+  }
+  card.querySelector('.nav-btns').innerHTML=`
+    <button class="btn btn-next" onclick="next()">
+      ${qi<questions.length-1
+        ?'<i class="fa-solid fa-arrow-right"></i> Next Question'
+        :'<i class="fa-solid fa-flag-checkered"></i> Finish Exam'}
+    </button>`;
+}
+
+/* ---- SKIP / NEXT ---- */
+function skip() {
+  if (answers[qi]===null) { answers[qi]=-1; answered++; wrong++; wrongSet.push(questions[qi]); updateTop(); }
+  next();
+}
+function next() {
+  if (qi<questions.length-1) { qi++; render(); window.scrollTo({top:0,behavior:'smooth'}); }
+  else finish();
+}
+
+/* ---- FINISH ---- */
+function finish() {
+  clearInterval(timerInterval);
+  const total=questions.length;
+  const score=Math.round((correct/total)*100);
+  questions.forEach((q,idx)=>{ if(answers[idx]!==q.a) wrongSet.push({...q,myAns:answers[idx]}); });
+  wrongSet=[...new Map(wrongSet.map(q=>[q.t,q])).values()];
+  let grade,gc;
+  if(score>=90)      { grade='🥇 Excellent';    gc='var(--ok)'; }
+  else if(score>=75) { grade='🥈 Very Good';     gc='var(--a1)'; }
+  else if(score>=60) { grade='🥉 Good';          gc='var(--warn)'; }
+  else               { grade='📚 Needs Review';  gc='var(--err)'; }
+  const circ=2*Math.PI*45, offset=circ-(score/100)*circ;
+  const report=questions.map((q,idx)=>{
+    const ok=answers[idx]===q.a;
+    return `<div class="report-item ${ok?'ok':'no'}">
+      <div class="ri-q">${ok?'✅':'❌'} ${q.t}</div>
+      ${!ok?`
+        <div class="ri-row"><span class="ri-badge ri-yours">Your Answer</span>${answers[idx]>=0?q.o[answers[idx]]:'Skipped'}</div>
+        <div class="ri-row"><span class="ri-badge ri-right">Correct</span>${q.o[q.a]}</div>
+      `:''}
+    </div>`;
+  }).join('');
+  document.getElementById('prog-bar').style.width='100%';
+  document.getElementById('app').innerHTML=`
+    <div class="result-hero">
+      <div class="score-ring">
+        <svg viewBox="0 0 110 110">
+          <circle class="ring-bg" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="0"/>
+          <circle class="ring-fill" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="${circ}"
+            style="stroke:${gc}" id="ringFill"/>
+        </svg>
+        <div class="score-num">${score}</div>
+        <div class="score-pct">%</div>
+      </div>
+      <div class="result-grade" style="color:${gc}">${grade}</div>
+      <div class="result-sub">Answered ${answered} of ${total} questions</div>
+      <div class="result-stats">
+        <div class="rs"><div class="n" style="color:var(--ok)">${correct}</div><div class="l">Correct</div></div>
+        <div class="rs"><div class="n" style="color:var(--err)">${wrong}</div><div class="l">Wrong</div></div>
+        <div class="rs"><div class="n" style="color:var(--a1)">${total-answered<0?0:total-answered}</div><div class="l">Skipped</div></div>
+      </div>
+    </div>
+    <div class="result-actions">
+      ${wrongSet.length?`<button class="btn btn-retry" onclick="retryWrong()"><i class="fa-solid fa-rotate-right"></i> Retry Wrong (${wrongSet.length})
+
+</button>`:''}
+      <button class="btn btn-home" onclick="init(getPool())"><i class="fa-solid fa-shuffle"></i> New Random Exam</button>
+      <a href="https://gaith-team.github.io/exam/" class="btn btn-home" style="text-decoration:none"><i class="fa-solid fa-house"></i> Back to Subject</a>
+    </div>
+    <div style="margin-top:22px">
+      <div style="font-size:14px;font-weight:700;margin-bottom:9px;color:var(--text2)">📋 Detailed Report</div>
+      ${report}
+    </div>`;
+  setTimeout(()=>{ document.getElementById('ringFill').style.strokeDashoffset=offset; },100);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ---- RETRY WRONG ---- */
+function retryWrong() {
+  const p=[...wrongSet];
+  questions=shuffle(p); qi=0; correct=0; wrong=0;
+  answers=new Array(questions.length).fill(null);
+  wrongSet=[]; answered=0; timeLeft=totalTime;
+  startTimer(); render();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ---- THEME ---- */
+const themeBtn=document.getElementById('themeBtn');
+let theme=localStorage.getItem('gt-theme')||'light';
+function applyTheme(t) {
+  theme=t;
+  document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'');
+  themeBtn.textContent=t==='dark'?'☀️':'🌙';
+  localStorage.setItem('gt-theme',t);
+}
+applyTheme(theme);
+themeBtn.addEventListener('click',()=>applyTheme(theme==='dark'?'light':'dark'));
+
+/* ---- START ---- */
+buildFilters();
+init(getPool());
+</script>
+</body>
+</html>
