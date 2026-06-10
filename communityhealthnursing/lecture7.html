@@ -1,0 +1,1257 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --a1: #0f766e;
+  --a2: #14b8a6;
+  --a3: #99f6e4;
+  --a2l: #ccfbf1;
+  --ag: rgba(20,184,166,0.13);
+  --ags: rgba(20,184,166,0.26);
+  --bg:    #f0fdfa;
+  --bg2:   #ccfbf1;
+  --card:  #ffffff;
+  --text:  #134e4a;
+  --text2: #0f766e;
+  --text3: #5eead4;
+  --bdc:   rgba(20,184,166,0.20);
+  --bdcard:rgba(15,118,110,0.12);
+  --sh:    0 4px 18px rgba(15,118,110,0.09);
+  --shh:   0 8px 30px rgba(20,184,166,0.22);
+  --ok:    #15803d;
+  --err:   #b91c1c;
+  --warn:  #b45309;
+  --rad:   16px;
+  --tr:    all 0.28s cubic-bezier(.4,0,.2,1);
+}
+[data-theme="dark"] {
+  --bg:    #022c22; --bg2:   #064e3b; --card:  #065f46;
+  --text:  #d1fae5; --text2: #6ee7b7; --text3: #34d399;
+  --bdc:   rgba(52,211,153,0.22);
+  --bdcard:rgba(52,211,153,0.12);
+  --sh:    0 4px 20px rgba(0,0,0,0.45);
+  --shh:   0 8px 36px rgba(20,184,166,0.28);
+  --a1: #10b981; --a2: #34d399; --a2l: #064e3b; --a3: #6ee7b7;
+}
+
+body {
+  font-family:'Outfit',sans-serif;
+  background:var(--bg); color:var(--text);
+  min-height:100vh; overflow-x:hidden;
+  transition:background .4s,color .4s;
+}
+
+#prog-bar {
+  position:fixed;top:0;left:0;height:3px;z-index:999;
+  background:linear-gradient(90deg,var(--a1),var(--a2),var(--a3));
+  width:0%;transition:width .15s;
+}
+
+/* NAV */
+nav {
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 26px;height:62px;
+  background:rgba(240,253,250,.94);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--bdcard);transition:var(--tr);
+}
+[data-theme="dark"] nav { background:rgba(2,44,34,.96); }
+
+.nav-back {
+  display:flex;align-items:center;gap:6px;
+  color:var(--text2);text-decoration:none;font-size:13px;font-weight:700;
+  padding:6px 13px;border-radius:9px;
+  border:1px solid var(--bdcard);background:var(--card);
+  transition:var(--tr);
+}
+.nav-back:hover { color:var(--a2);border-color:var(--bdc); }
+
+.nav-brand { display:flex;align-items:center;gap:8px;font-size:15px;font-weight:900;color:var(--text); }
+.nav-logo {
+  width:34px;height:34px;border-radius:9px;
+  background:linear-gradient(135deg,var(--a1),var(--a2));
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:12px;font-weight:900;
+}
+.theme-btn {
+  width:37px;height:37px;border-radius:50%;
+  border:1px solid var(--bdcard);background:var(--card);
+  cursor:pointer;font-size:15px;
+  display:flex;align-items:center;justify-content:center;transition:var(--tr);
+}
+.theme-btn:hover { border-color:var(--a2);transform:rotate(22deg); }
+
+/* HERO */
+.hero {
+  margin-top:62px;
+  background:linear-gradient(135deg,var(--a1) 0%,var(--a2) 60%,#2dd4bf 100%);
+  padding:34px 22px 30px;text-align:center;position:relative;overflow:hidden;
+}
+.hero::before {
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 500px 180px at 50% 110%,rgba(255,255,255,.13) 0%,transparent 70%);
+}
+.hero-icon {
+  width:62px;height:62px;border-radius:18px;
+  background:rgba(255,255,255,.2);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;margin:0 auto 11px;
+  border:1.5px solid rgba(255,255,255,.35);
+}
+.hero h1 { font-size:clamp(17px,3.5vw,25px);font-weight:900;color:#fff;margin-bottom:4px; }
+.hero p  { font-size:13px;color:rgba(255,255,255,.82); }
+.hero-meta { display:flex;justify-content:center;gap:12px;margin-top:14px;flex-wrap:wrap; }
+.meta-pill {
+  background:rgba(255,255,255,.18);backdrop-filter:blur(5px);
+  border:1px solid rgba(255,255,255,.3);border-radius:50px;
+  padding:5px 13px;font-size:12px;font-weight:700;color:#fff;
+  display:flex;align-items:center;gap:5px;
+}
+
+/* TOPIC FILTER */
+.filter-wrap {
+  padding:14px 16px 2px;
+  display:flex;flex-wrap:wrap;gap:7px;
+  background:var(--card);border-bottom:1px solid var(--bdcard);
+}
+.filter-btn {
+  padding:5px 13px;border-radius:50px;
+  border:1.5px solid var(--bdcard);background:var(--bg);
+  font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;
+  color:var(--text2);cursor:pointer;transition:var(--tr);
+}
+.filter-btn:hover,
+.filter-btn.active {
+  background:var(--a2);color:#fff;border-color:var(--a2);
+  box-shadow:0 2px 10px var(--ag);
+}
+.filter-count {
+  padding:14px 16px 14px;
+  font-size:12px;color:var(--text2);font-weight:600;
+  background:var(--card);border-bottom:1px solid var(--bdcard);
+}
+
+/* SHELL */
+.shell { max-width:560px;margin:0 auto;padding:18px 16px 80px; }
+
+/* STATS */
+.stats-row { display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-bottom:13px; }
+.stat-box {
+  background:var(--card);border:1px solid var(--bdcard);
+  border-radius:var(--rad);padding:11px 7px;text-align:center;
+}
+.stat-box .val { font-size:20px;font-weight:900; }
+.stat-box .lbl { font-size:11px;color:var(--text3);margin-top:2px; }
+.c-ok   { color:var(--ok); }
+.c-err  { color:var(--err); }
+.c-acc  { color:var(--a1); }
+
+/* PROG STRIP */
+.prog-strip {
+  background:var(--card);border:1px solid var(--bdcard);
+  border-radius:var(--rad);padding:12px 15px;margin-bottom:15px;
+  display:flex;align-items:center;gap:11px;
+}
+.prog-label { font-size:13px;font-weight:700;color:var(--text2);white-space:nowrap; }
+.prog-track { flex:1;height:7px;background:var(--bg2);border-radius:7px;overflow:hidden; }
+.prog-fill {
+  height:100%;width:0%;
+  background:linear-gradient(90deg,var(--a1),var(--a2));
+  border-radius:7px;transition:width .4s;
+}
+.timer-badge {
+  min-width:60px;height:33px;border-radius:17px;
+  background:var(--bg2);border:1px solid var(--bdcard);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:900;color:var(--text);
+  gap:4px;padding:0 10px;flex-shrink:0;
+}
+.timer-badge.warn   { color:var(--warn);  border-color:rgba(180,83,9,.3);  background:rgba(180,83,9,.08); }
+.timer-badge.danger { color:var(--err);   border-color:rgba(185,28,28,.3); background:rgba(185,28,28,.08);animation:blink .8s infinite; }
+@keyframes blink { 0%,100%{opacity:1}50%{opacity:.45} }
+
+/* Q CARD */
+.q-card {
+  background:var(--card);border:1px solid var(--bdcard);
+  border-radius:20px;overflow:hidden;box-shadow:var(--sh);
+}
+.q-header {
+  background:linear-gradient(135deg,var(--a1),var(--a2));
+  padding:9px 17px;display:flex;align-items:center;gap:8px;
+}
+.q-num {
+  background:rgba(255,255,255,.22);border-radius:7px;
+  padding:3px 10px;font-size:11px;font-weight:700;color:#fff;
+}
+.q-topic {
+  margin-left:auto;background:rgba(255,255,255,.18);border-radius:50px;
+  padding:2px 10px;font-size:11px;font-weight:700;color:#fff;
+  border:1px solid rgba(255,255,255,.25);
+}
+.q-text {
+  padding:19px 17px 13px;font-size:15px;font-weight:700;color:var(--text);
+  line-height:1.65;border-bottom:1px solid var(--bdcard);
+}
+.options { padding:13px 17px 17px;display:flex;flex-direction:column;gap:9px; }
+
+.opt {
+  display:flex;align-items:center;gap:11px;
+  padding:12px 14px;border-radius:11px;
+  border:1.5px solid var(--bdcard);background:var(--bg);
+  cursor:pointer;font-size:14px;font-weight:600;color:var(--text);
+  transition:var(--tr);user-select:none;
+}
+.opt:hover:not(.disabled) {
+  border-color:var(--a2);background:var(--ag);
+  transform:translateX(3px);
+}
+.opt-letter {
+  width:28px;height:28px;border-radius:8px;flex-shrink:0;
+  background:var(--bg2);border:1px solid var(--bdcard);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:900;color:var(--text2);
+  transition:var(--tr);
+}
+.opt.correct { border-color:var(--ok);background:rgba(21,128,61,.08); }
+.opt.correct .opt-letter { background:var(--ok);color:#fff;border-color:var(--ok); }
+.opt.wrong   { border-color:var(--err);background:rgba(185,28,28,.07); }
+.opt.wrong   .opt-letter { background:var(--err);color:#fff;border-color:var(--err); }
+.opt.disabled { pointer-events:none; }
+
+/* FEEDBACK */
+.feedback-bar {
+  margin:11px 17px;padding:11px 14px;border-radius:11px;
+  display:flex;align-items:center;gap:9px;
+  font-size:14px;font-weight:700;
+  animation:popIn .38s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes popIn { from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1} }
+.feedback-bar.ok { background:rgba(21,128,61,.1);color:var(--ok);border:1px solid rgba(21,128,61,.25); }
+.feedback-bar.no { background:rgba(185,28,28,.08);color:var(--err);border:1px solid rgba(185,28,28,.2); }
+
+.explanation {
+  margin:0 17px 11px;padding:10px 13px;
+  background:rgba(20,184,166,.07);border-radius:9px;
+  border-left:3px solid var(--a2);
+  font-size:13px;color:var(--text2);line-height:1.6;
+}
+
+/* BUTTONS */
+.nav-btns { padding:4px 17px 17px;display:flex;gap:9px; }
+.btn {
+  flex:1;padding:12px;border:none;border-radius:11px;
+  font-size:14px;font-weight:900;cursor:pointer;
+  font-family:'Outfit',sans-serif;transition:var(--tr);
+  display:flex;align-items:center;justify-content:center;gap:7px;
+}
+.btn-next {
+  background:linear-gradient(135deg,var(--a1),var(--a2));
+  color:#fff;box-shadow:0 4px 14px var(--ag);
+}
+.btn-next:hover { transform:translateY(-2px);box-shadow:0 6px 20px var(--ags); }
+.btn-skip {
+  background:var(--bg2);color:var(--text2);
+  border:1px solid var(--bdcard);flex:0 0 auto;padding:12px 15px;
+}
+.btn-skip:hover { border-color:var(--warn);color:var(--warn); }
+
+/* RESULTS */
+.result-hero {
+  text-align:center;padding:30px 18px 22px;
+  background:var(--card);border-radius:20px;
+  border:1px solid var(--bdcard);margin-bottom:17px;
+}
+.score-ring {
+  width:108px;height:108px;border-radius:50%;margin:0 auto 15px;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;position:relative;
+}
+.score-ring svg { position:absolute;inset:-5px;width:calc(100% + 10px);height:calc(100% + 10px);transform:rotate(-90deg); }
+.score-ring circle { fill:none;stroke-width:5;stroke-linecap:round; }
+.ring-bg   { stroke:var(--bg2); }
+.ring-fill { stroke:var(--a2);transition:stroke-dashoffset 1s ease; }
+.score-num { font-size:28px;font-weight:900;color:var(--text); }
+.score-pct { font-size:12px;color:var(--text3); }
+.result-grade { font-size:20px;font-weight:900;margin-bottom:4px; }
+.result-sub   { font-size:13px;color:var(--text2); }
+.result-stats { display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:17px; }
+.rs { background:var(--bg2);border-radius:10px;padding:10px 7px;text-align:center; }
+.rs .n { font-size:20px;font-weight:900; }
+.rs .l { font-size:11px;color:var(--text3); }
+
+/* REPORT */
+.report-item {
+  background:var(--card);border:1px solid var(--bdcard);
+  border-radius:12px;padding:14px;margin-bottom:8px;
+  border-left:4px solid var(--bdcard);
+}
+.report-item.ok { border-left-color:var(--ok); }
+.report-item.no { border-left-color:var(--err); }
+.report-item .ri-q { font-size:13px;font-weight:700;margin-bottom:6px; }
+.report-item .ri-row { display:flex;align-items:center;gap:7px;font-size:12px;margin-top:4px;color:var(--text2); }
+.ri-badge { padding:2px 8px;border-radius:6px;font-weight:700;font-size:11px;flex-shrink:0; }
+.ri-yours { background:rgba(185,28,28,.1);color:var(--err); }
+.ri-right { background:rgba(21,128,61,.1);color:var(--ok); }
+
+.result-actions { display:flex;flex-direction:column;gap:9px;margin-top:17px; }
+.btn-retry { background:linear-gradient(135deg,var(--a1),var(--a2));color:#fff; }
+.btn-retry:hover { transform:translateY(-2px);box-shadow:0 6px 20px var(--ags); }
+.btn-home  { background:var(--bg2);color:var(--text);border:1px solid var(--bdcard); }
+.btn-home:hover { border-color:var(--a2);color:var(--a1); }
+
+/* FOOTER */
+footer {
+  background:var(--bg2);border-top:1px solid var(--bdcard);
+  padding:20px 22px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:9px;
+}
+.footer-brand { font-size:14px;font-weight:700; }
+.footer-brand span { color:var(--a1); }
+.footer-tg {
+  display:flex;align-items:center;gap:5px;
+  text-decoration:none;color:#229ED9;font-size:12px;font-weight:600;
+}
+
+/* EMPTY STATE */
+.empty-state {
+  text-align:center;padding:50px 20px;
+  background:var(--card);border-radius:20px;border:1px solid var(--bdcard);
+}
+.empty-state .ei { font-size:40px;margin-bottom:12px; }
+.empty-state h3 { font-size:17px;font-weight:700;margin-bottom:7px; }
+.empty-state p { font-size:13px;color:var(--text2); }
+
+@media (max-width:480px) {
+  nav { padding:0 13px; }
+  .shell { padding:13px 11px 60px; }
+  .nav-brand span { display:none; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog-bar"></div>
+
+<nav>
+  <a href="https://gaith-team.github.io/exam/" class="nav-back"><i class="fa-solid fa-arrow-left"></i> Back</a>
+  <div class="nav-brand">
+    <div class="nav-logo">GT</div>
+    <span>GHAITH TEAM</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-icon">🌿</div>
+  <h1>Community assessment and diagnosies</h1>
+  <p>Community Health Nursing</p>
+  <div class="hero-meta">
+    <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">-- Questions</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-clock"></i> <span id="timeBadge">60 Min</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-shuffle"></i> Shuffled</div>
+  </div>
+</div>
+
+<!-- Topic filter bar (shown only if topics exist) -->
+<div id="filterWrap" class="filter-wrap" style="display:none;"></div>
+<div id="filterCount" class="filter-count" style="display:none;"></div>
+
+<div class="shell">
+  <div class="stats-row">
+    <div class="stat-box"><div class="val c-ok"  id="sCorrect">0</div><div class="lbl">✔ Correct</div></div>
+    <div class="stat-box"><div class="val c-err"  id="sWrong">0</div><div class="lbl">✖ Wrong</div></div>
+    <div class="stat-box"><div class="val c-acc"  id="sRemain">100%</div><div class="lbl">⏳ Remaining</div></div>
+  </div>
+
+  <div class="prog-strip">
+    <div class="prog-label" id="progLabel">Q 1</div>
+    <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+    <div class="timer-badge" id="timerBadge"><i class="fa-regular fa-clock"></i><span id="timerTxt">60:00</span></div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<footer>
+  <div class="footer-brand">GAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg">
+    <i class="fa-brands fa-telegram"></i> @nursing2bu
+  </a>
+</footer>
+
+<script>
+let QUESTIONS = [
+{t:"Community assessment is best defined as:",
+ o:["A process of diagnosing individual patient diseases",
+    "A process of gathering, analyzing, and reporting information about the needs of the community AND the capacities or strengths currently available to meet those needs",
+    "A method of treating community health problems",
+    "A financial audit of health services in a community"],
+ a:1, d:"easy",
+ exp:"Community assessment is defined as a process of gathering, analyzing, and reporting information about the needs of the community and the capacities or strengths currently available to meet those needs."},
+
+{t:"Community nurses begin an assessment by defining the client in terms of which THREE dimensions?",
+ o:["Age, gender, and income","Health, disease, and disability",
+    "Place, people, and function",
+    "Assessment, planning, and evaluation"],
+ a:2, d:"easy",
+ exp:"Community nurses start an assessment by clearly defining their client in terms of three dimensions: PLACE, PEOPLE, and FUNCTION."},
+
+{t:"The 'Windshield Survey' is associated with which type of community assessment?",
+ o:["Comprehensive assessment","Community assets assessment",
+    "Problem-oriented assessment",
+    "Familiarization assessment"],
+ a:3, d:"easy",
+ exp:"The Windshield Survey is associated with FAMILIARIZATION assessment — where nurses drive or walk around the community to gain a working knowledge of the community and its resources."},
+
+{t:"Which type of community assessment focuses on a SINGLE problem and assesses the community in terms of that specific problem?",
+ o:["Comprehensive assessment","Community assets assessment",
+    "Problem-oriented assessment",
+    "Community subsystem assessment"],
+ a:2, d:"easy",
+ exp:"Problem-oriented assessment begins with a single problem and assesses the community in terms of that problem. It is used when familiarization is insufficient and comprehensive assessment is too expensive."},
+
+{t:"Which type of community assessment seeks to discover ALL relevant community health information and is described as expensive and time-consuming?",
+ o:["Familiarization assessment","Problem-oriented assessment",
+    "Community subsystem assessment",
+    "Comprehensive assessment"],
+ a:3, d:"easy",
+ exp:"Comprehensive assessment seeks to discover ALL relevant community health information. It reviews all existing data, surveys demographics, interviews key informants in every major system, and describes how power is distributed. It is expensive and time-consuming."},
+
+{t:"Community assets assessment differs from other assessment types because it:",
+ o:["Focuses only on community problems and weaknesses",
+    "Focuses on the strengths and capacities of the community rather than problems alone, and looks for the positive",
+    "Focuses only on individual patient health needs",
+    "Focuses exclusively on financial resources"],
+ a:1, d:"easy",
+ exp:"Assets assessment focuses on the STRENGTHS and CAPACITIES of the community rather than problems alone. It requires the assessor to look for the positive — seeing the glass as 'half full' rather than focusing on deficits."},
+
+{t:"Which community assessment method involves driving or walking around the community to gain working knowledge?",
+ o:["Focus groups","Community forums","Surveys","Windshield Survey (Familiarization)"],
+ a:3, d:"easy",
+ exp:"The Windshield Survey is part of familiarization assessment. Nurses drive or walk around the community, find health/social/governmental services, obtain literature, and generally become familiar with the community."},
+
+{t:"A survey as a community assessment method involves:",
+ o:["Small group discussions of 5-15 homogenous members",
+    "A series of questions used to collect data for analysis of a specific group or area",
+    "Walking around the community to observe its characteristics",
+    "Studying only existing (secondary) data about the community"],
+ a:1, d:"easy",
+ exp:"A survey is an assessment method in which a series of questions is used to collect data for analysis of a specific group or area."},
+
+{t:"Descriptive epidemiologic studies examine the amount and distribution of a disease in a population by which three dimensions?",
+ o:["Agent, host, and environment",
+    "Primary, secondary, and tertiary prevention",
+    "Person (who?), place (where?), and time (when?)",
+    "Social, economic, and cultural factors"],
+ a:2, d:"easy",
+ exp:"Descriptive epidemiologic studies examine disease/health conditions by: PERSON (who is affected?), PLACE (where does it occur?), and TIME (when do cases occur?)."},
+
+{t:"Community forums/town meetings are designed primarily to:",
+ o:["Conduct laboratory testing of community members",
+    "Obtain community opinions from participants representing all segments of the community",
+    "Provide medical treatment to community members",
+    "Train health workers in clinical skills"],
+ a:1, d:"easy",
+ exp:"Community forums/town meetings are a qualitative assessment method designed to obtain community opinions from participants representing all segments of the community involved with the issue."},
+
+{t:"A focus group differs from a community forum primarily in that a focus group:",
+ o:["Involves thousands of community members","Is conducted online only",
+    "Is a small group process usually of 5-15 people who are homogenous in demographic variables",
+    "Focuses only on financial data collection"],
+ a:2, d:"easy",
+ exp:"A focus group is a SMALL GROUP process (usually 5-15 people) whose members are homogenous in demographic variables (e.g., all female community health nurses, or all young women in first pregnancy). Community forums are larger and more diverse."},
+
+{t:"Primary data in community assessment is obtained:",
+ o:["From existing health records and statistical reports",
+    "Directly from the community — by talking with community members including formal leaders, informal leaders, and inhabitants",
+    "From international organizations like WHO",
+    "From research reports published in journals"],
+ a:1, d:"easy",
+ exp:"Primary data is obtained DIRECTLY from the community — by talking with community members including formal leaders, informal leaders, and community inhabitants, who can offer the most accurate insights."},
+
+{t:"Secondary data in community assessment refers to:",
+ o:["Data collected by nurses through direct community interviews",
+    "Newly observed community data",
+    "People who know the community well and the records they create — including health team members, client records, community health statistics, and research reports",
+    "Data collected only from focus groups"],
+ a:2, d:"easy",
+ exp:"Secondary data comes from people who know the community well and the records they create, including health team members, client records, community health statistics, research reports, and community health nurses."},
+
+{t:"Which international organizations collect global community health data that community health nurses can use?",
+ o:["Local hospitals and health centers only",
+    "WHO, Pan-American Health Organization, United Nations, and UNICEF",
+    "Only national health ministries",
+    "Only state-level health departments"],
+ a:1, d:"easy",
+ exp:"International data sources include: WHO and its six regional offices, Pan-American Health Organization, the United Nations, and global specialty organizations like UNICEF."},
+
+{t:"The FIRST step in conducting a community assessment is:",
+ o:["Develop an action plan","Share what you have learned",
+    "Establish the what, where, and who",
+    "Analyze and learn from collected data"],
+ a:2, d:"easy",
+ exp:"Step 1 of community assessment is: Establish the WHAT, WHERE, and WHO. The six steps proceed: (1) Establish what/where/who, (2) Learn more, (3) Identify resources, (4) Analyze data, (5) Develop action plan, (6) Share findings."},
+
+{t:"Which step of community assessment involves developing an action plan?",
+ o:["Step 2","Step 3","Step 4","Step 5"],
+ a:3, d:"easy",
+ exp:"Step 5 of community assessment is: Develop an action plan, based on the data analysis performed in Step 4."},
+
+{t:"The most significant state-level source of community assessment data comes from:",
+ o:["Local libraries and universities",
+    "Community leaders only",
+    "The state health department, which collects vital statistics and morbidity data",
+    "International health organizations"],
+ a:2, d:"easy",
+ exp:"The most significant state source of assessment data is the STATE HEALTH DEPARTMENT, the official agency responsible for collecting state vital statistics and morbidity data."},
+
+{t:"Why should a community assessment be conducted? One reason is 'to satisfy a mandate,' which means:",
+ o:["To impress community members with comprehensive data",
+    "Foundations and funding institutions providing resources for action plans often require a formal assessment of needs and resources",
+    "To mandate that all community members participate in health programs",
+    "To fulfill the nurse's personal professional curiosity"],
+ a:1, d:"easy",
+ exp:"Satisfying a mandate means: foundations and other funding institutions that provide resources for implementing action plans often REQUIRE a formal assessment of needs and resources before funding is granted."},
+
+/* ── MEDIUM 19-40 ── */
+{t:"The community assessment is described as 'a logical, systematic approach' that involves:",
+ o:["Only collecting existing statistics about the community",
+    "Identifying community needs, clarifying problems, and identifying community strengths and resources — the process of critically thinking about the community",
+    "Only interviewing community leaders",
+    "Only treating community health problems after identification"],
+ a:1, d:"medium",
+ exp:"Community assessment is a logical, systematic approach to: identifying community NEEDS, clarifying PROBLEMS, and identifying community STRENGTHS and RESOURCES. It involves critically thinking about the community."},
+
+{t:"The characteristic of successful community assessment 'allow questions to drive the assessment process' means:",
+ o:["Nurses should ask any questions without a specific framework",
+    "Identifying specific questions to be answered makes group members more selective in data collection and acts as a framework for surveys, focus groups, or public meetings",
+    "Questions should only come from government officials",
+    "The assessment should proceed without a predetermined structure"],
+ a:1, d:"medium",
+ exp:"'Allow questions to drive the process' means identifying specific questions to be answered makes the assessment more focused, helps group members be selective in data collection, and acts as a framework for new information gathering."},
+
+{t:"'Stakeholders' in community assessment are defined as:",
+ o:["Only government health officials","Only community health nurses",
+    "People with an interest in the issue — such as parents, students, agency personnel, and government officials — who perceive certain issues as important",
+    "Only people who fund the assessment"],
+ a:2, d:"medium",
+ exp:"Stakeholders are people with an interest in the issue, such as parents, students, agency personnel, and government officials. Successful assessments address issues that stakeholders perceive as important and communicate findings back to them."},
+
+{t:"The characteristic of 'communicate information back to stakeholders' in successful community assessment is important because:",
+ o:["It is only required for legal compliance",
+    "A community assessment that leads to desired change must communicate gathered information back to stakeholders and involve them in the planning process",
+    "Communication is only relevant after all changes have been implemented",
+    "Stakeholders do not need to be informed about assessment findings"],
+ a:1, d:"medium",
+ exp:"'Communicate information back to stakeholders' is important because a community assessment that leads to desired change must communicate gathered information back to stakeholders AND involve them in the planning process."},
+
+{t:"The community subsystem assessment is useful because:",
+ o:["It can be used only by individual nurses working alone",
+    "It allows a team to divide assessment responsibilities — with each member assessing different community systems — to create a more comprehensive picture through shared findings",
+    "It only examines one community system without integration",
+    "It is the least expensive type of assessment"],
+ a:1, d:"medium",
+ exp:"Community subsystem assessment is useful because a team can divide up the community's systems, with each person assessing different subsystems and sharing findings to create a more comprehensive community picture."},
+
+{t:"Primary data may be preferable to secondary data in community assessment because:",
+ o:["Primary data is always available without any data collection effort",
+    "Secondary data may not totally describe the community or reflect community self-perceptions and may need augmentation or further validation — primary data offers the most accurate insights",
+    "Secondary data is always more accurate than primary data",
+    "Primary data is cheaper and easier to collect"],
+ a:1, d:"medium",
+ exp:"Secondary data may not totally describe the community or reflect community self-perceptions, thus needing augmentation or validation. Primary data — directly from community members — can offer the most accurate insights and comprehensive information."},
+
+{t:"The assets assessment approach sees the community's glass as 'half full' rather than 'half empty.' This means:",
+ o:["The assessment ignores all community problems",
+    "Rather than focusing only on deficits, barriers, and weaknesses, assets assessment identifies and builds on community STRENGTHS, CAPACITIES, and POSSIBILITIES",
+    "The community always has sufficient resources for all needs",
+    "The nurse only provides services without community partnership"],
+ a:1, d:"medium",
+ exp:"The 'half full' metaphor means: instead of a deficit/pathology model focusing only on problems, assets assessment identifies community STRENGTHS and CAPACITIES, enabling the nurse to be a PARTNER in community intervention rather than merely providing services."},
+
+{t:"Asset assessment has three levels of inventory. Which of the following CORRECTLY lists all three?",
+ o:["Income, education, and housing",
+    "Specific skills/interests/experiences of individual community members; local citizen associations and organizations; local institutions",
+    "Primary data, secondary data, and international data",
+    "Health, social services, and government"],
+ a:1, d:"medium",
+ exp:"Asset assessment has three levels: (1) inventory of specific skills, interests, and experiences of INDIVIDUAL community members; (2) inventory of LOCAL CITIZEN ASSOCIATIONS and organizations; (3) inventory of LOCAL INSTITUTIONS."},
+
+{t:"The problem-oriented assessment is 'commonly used when familiarization is not sufficient and a comprehensive assessment is too expensive.' This means it occupies which position among assessment types?",
+ o:["It is identical to the familiarization assessment",
+    "It serves as a MIDDLE-GROUND assessment — more focused than familiarization but more targeted and cost-effective than comprehensive assessment",
+    "It replaces both familiarization and comprehensive assessments",
+    "It is more comprehensive and expensive than all other types"],
+ a:1, d:"medium",
+ exp:"Problem-oriented assessment is used when: familiarization alone is NOT sufficient but comprehensive assessment is TOO EXPENSIVE. It occupies a middle ground — responding to a particular need without the cost of a full comprehensive assessment."},
+
+{t:"Descriptive epidemiologic studies in community assessment are useful for which of the following purposes?",
+ o:["Only for treating identified diseases",
+    "Assessing health status, suggesting who may be at greatest risk, health planning purposes, and suggesting hypotheses of disease etiology",
+    "Only for collecting demographic census data",
+    "Only for evaluating the cost of health services"],
+ a:1, d:"medium",
+ exp:"Descriptive epidemiologic studies are useful for: assessing population health status, suggesting who is at greatest risk, indicating where and when conditions might occur, health planning, and suggesting hypotheses of disease etiology."},
+
+{t:"Community forums differ from focus groups in that community forums:",
+ o:["Are smaller (5-15 people) and more homogenous",
+    "Are designed to obtain grassroots opinion from community members representing ALL segments of the community involved with the issue, with participation by invitation",
+    "Are always conducted online",
+    "Focus exclusively on quantitative data collection"],
+ a:1, d:"medium",
+ exp:"Community forums/town meetings obtain community opinions from participants representing ALL segments of the community, invited to participate. Focus groups are SMALLER (5-15 people) and HOMOGENOUS in demographic variables."},
+
+{t:"The characteristic of 'understanding the current situation first' in successful community assessment involves:",
+ o:["Only looking at future goals without assessing current status",
+    "Assessing current capacities (services and resources), collecting information on needs (secondary and primary data), and identifying the GAP between current capacities and needs",
+    "Only interviewing community leaders about past problems",
+    "Ignoring existing data and collecting only new data"],
+ a:1, d:"medium",
+ exp:"'Understand the current situation first' involves: assessing current CAPACITIES (services, resources), collecting NEEDS information (secondary and primary data), and identifying the GAP between capacities and needs — then generating ideas to eliminate the gap."},
+
+{t:"Why is a well-designed community assessment important for 'providing data for decision-making'?",
+ o:["Because it replaces the need for professional judgment",
+    "Because it allows community planners to feel confidence when using assessment information as the basis for decision-making",
+    "Because it eliminates all uncertainty in health planning",
+    "Because it is required only for government reporting purposes"],
+ a:1, d:"medium",
+ exp:"A well-designed community assessment allows community planners to feel CONFIDENCE when using the information as the basis for decision-making — one of the key reasons to conduct a community assessment."},
+
+{t:"The nurse's role in assets assessment changes from service provider to:",
+ o:["Administrator and policy maker only",
+    "A PARTNER in community intervention efforts rather than merely providing services",
+    "A researcher without community interaction",
+    "A supervisor of other health workers"],
+ a:1, d:"medium",
+ exp:"In assets assessment, the nurse becomes a PARTNER in community intervention efforts rather than merely providing services. This is a fundamental shift in the nurse-community relationship."},
+
+{t:"Local sources of community assessment data include which of the following?",
+ o:["Only international organizations like WHO","Only national census data",
+    "Health department, hospitals, social services agencies, school districts, universities or colleges, libraries, and community leaders",
+    "Only state health department vital statistics"],
+ a:2, d:"medium",
+ exp:"Local sources include: health departments, hospitals, social services agencies, school districts, universities or colleges, libraries, and community leaders. These sources have views particular to their discipline, interest, or knowledge base."},
+
+{t:"Before data are collected in the community assessment phase, the nurse must be able to answer questions including:",
+ o:["What is the national disease incidence rate?",
+    "What are the geographic boundaries of this community? Which people are members? What characteristics do they have in common?",
+    "What medications are most prescribed nationally?",
+    "What is the national hospital admission rate?"],
+ a:1, d:"medium",
+ exp:"Before data collection, the nurse must answer: What are the geographic BOUNDARIES of this community? Which PEOPLE are members of this community? What CHARACTERISTICS do they have in common? — defining the three dimensions of place, people, and function."},
+
+{t:"Community assessment promotes awareness and action by:",
+ o:["Only distributing pamphlets to community members",
+    "Assessing and generating awareness of the issues being studied and promoting citizen interest in creating change",
+    "Only informing government officials of community problems",
+    "Conducting awareness campaigns independent of assessment findings"],
+ a:1, d:"medium",
+ exp:"Community assessments can be used to assess and generate AWARENESS of the issues being studied and to promote CITIZEN INTEREST in creating change — making awareness and action promotion a key purpose of assessment."},
+
+{t:"The key to the assets assessment approach is:",
+ o:["Identifying all community deficits and weaknesses first",
+    "Linking assets together — skills of individuals, citizen associations, and local institutions — to enhance the community from WITHIN",
+    "Relying exclusively on external funding and expert consultants",
+    "Creating new community organizations to replace existing ones"],
+ a:1, d:"medium",
+ exp:"The KEY to assets assessment is linking assets together — inventories of individual skills, citizen associations, and local institutions — to enhance the community FROM WITHIN through relationships and multiplied power."},
+
+{t:"Electronic town meetings such as online chat rooms and email response systems are described as:",
+ o:["Replacing all traditional forms of community assessment",
+    "Methods designed to elicit grassroots opinions from local community members — an evolving form of community forum",
+    "Methods that are less effective than traditional paper surveys",
+    "Only suitable for urban communities with internet access"],
+ a:1, d:"medium",
+ exp:"Electronic town meetings (email responses, online chat rooms, toll-free vote lines) are described as designed to elicit GRASSROOTS OPINIONS from local community members — an evolving form of community forum/data gathering."},
+
+{t:"Step 6 of the community assessment process is:",
+ o:["Analyze and learn from collected data","Develop an action plan",
+    "Share what you have learned",
+    "Identify resources in the community"],
+ a:2, d:"medium",
+ exp:"The six steps of community assessment are: (1) Establish what/where/who, (2) Learn more, (3) Identify resources, (4) Analyze data, (5) Develop action plan, (6) SHARE what you have learned."},
+
+/* ── HARD 41-55 ── */
+{t:"The community assets assessment is described as differing from 'pathology models.' This means that traditional needs-oriented assessments:",
+ o:["Are always superior to assets assessments",
+    "May result in a fragmented approach to solutions because they focus on needs, barriers, weaknesses, problems, or scarcity rather than on the community's possibilities, strengths, and assets",
+    "Focus primarily on community strengths",
+    "Are less expensive than assets assessments"],
+ a:1, d:"hard",
+ exp:"Traditional 'pathology models' focus on needs, barriers, weaknesses, problems, or scarcity. This may result in a FRAGMENTED approach to solutions rather than a focused approach to the community's POSSIBILITIES, STRENGTHS, and ASSETS."},
+
+{t:"When a community health nurse uses a descriptive epidemiologic study to assess disease distribution, she examines 'person.' This specifically means:",
+ o:["The geographic location where the disease occurs",
+    "The time period during which cases occur",
+    "WHO is affected by the disease — demographic and personal characteristics of those who develop the condition",
+    "The environmental factors causing the disease"],
+ a:2, d:"hard",
+ exp:"In descriptive epidemiology, PERSON asks 'WHO is affected?' — examining demographic and personal characteristics of those who develop the health condition. PLACE asks 'where?' and TIME asks 'when?'"},
+
+{t:"The statement 'community assessment gathers information from many different individuals and groups in the community' reflects which important principle?",
+ o:["Only one type of stakeholder is needed for accurate assessment",
+    "Comprehensiveness and diversity of data sources — a broad look across agencies, systems, and community members to learn about circumstances crucial to the planning vision",
+    "Assessment should focus only on health professionals' views",
+    "Data from different sources often conflicts and should be avoided"],
+ a:1, d:"hard",
+ exp:"Community assessment takes 'a broad look across agencies, systems, and community members' — gathering from MANY different individuals and groups. This comprehensiveness and diversity of sources ensures a more complete and valid community picture."},
+
+{t:"Which statement BEST explains why 'defining a vision of the future' is a characteristic of successful community assessment?",
+ o:["The future vision replaces the need for current situation assessment",
+    "With increased information availability due to technology, planning groups may find large amounts of data; a future vision helps focus the assessment on applicable information and prevents data overload",
+    "A future vision is only relevant for government planning, not community health nursing",
+    "The vision is established after all data has been collected"],
+ a:1, d:"hard",
+ exp:"'Define a vision of the future' helps manage the challenge that with increased technology, planning groups find LARGE amounts of information, little of which may be applicable. A clear vision focuses the assessment and prevents data overload."},
+
+{t:"The comprehensive community assessment 'describes how power was distributed throughout the system, how decisions were made, and how change occurred.' Why is this information important for community health nurses?",
+ o:["Understanding power distribution is irrelevant to community health",
+    "Understanding power structures, decision-making processes, and change mechanisms helps nurses identify key stakeholders, navigate community dynamics, and design more effective health interventions",
+    "Power distribution only affects political, not health, outcomes",
+    "This information is useful only for government officials"],
+ a:1, d:"hard",
+ exp:"Understanding power distribution, decision-making, and change processes helps nurses identify KEY STAKEHOLDERS, navigate community dynamics, and design interventions that work WITH existing community structures rather than against them."},
+
+{t:"A community health nurse finds secondary data showing high rates of childhood obesity in a community. However, when she talks directly to parents and community members (primary data), they report different perceptions and barriers than what the statistics show. What does this illustrate?",
+ o:["Secondary data is always more accurate than primary data",
+    "Secondary data may not totally describe the community or reflect community self-perceptions and may need augmentation or further validation through primary data collection",
+    "Primary data should be discarded when it conflicts with statistics",
+    "The two types of data should never be used together"],
+ a:1, d:"hard",
+ exp:"This illustrates that secondary data 'may not totally describe the community or reflect community self-perceptions' and 'may need augmentation or further validation.' Both primary AND secondary data are needed for a complete assessment."},
+
+{t:"How does the community subsystem assessment contribute to creating a MORE COMPREHENSIVE community picture when conducted by a team?",
+ o:["Each team member independently assesses all systems without coordination",
+    "Team members divide community systems among themselves (e.g., 5 members assess 2 systems each), then SHARE findings to create a comprehensive integrated community picture",
+    "Only one team member conducts the subsystem assessment",
+    "Subsystem assessment automatically produces a comprehensive assessment without team input"],
+ a:1, d:"hard",
+ exp:"If 5 team members divide up 10 community systems (each assessing 2 systems) and then SHARE their findings, they can create a more comprehensive and integrated picture of the community and its needs than any individual could alone."},
+
+{t:"The community assessment 'builds and strengthens relationships among community leaders, service providers, and community residents.' Why is this a PURPOSE of community assessment beyond just data collection?",
+ o:["Relationships are only a byproduct, not a purpose of assessment",
+    "Building and strengthening relationships creates the social capital and trust necessary for implementing interventions, ensuring community ownership, and sustaining health improvements long-term",
+    "Relationship building is only relevant for rural communities",
+    "Relationships become important only AFTER the assessment is complete"],
+ a:1, d:"hard",
+ exp:"Building and strengthening relationships is explicitly listed as a purpose of community assessment. Strong relationships between leaders, providers, and residents create social capital, trust, and community ownership essential for sustainable health improvements."},
+
+{t:"In the focus group method, 'leadership skills are used along with the small group process.' What specific purposes do leadership skills serve in focus groups?",
+ o:["To dominate the discussion and control participants' answers",
+    "To promote a supportive atmosphere and accomplish set goals while guiding discussion according to a predetermined set of questions or topics",
+    "To replace the need for a predetermined question guide",
+    "To ensure only the loudest participants contribute"],
+ a:1, d:"hard",
+ exp:"In focus groups, leadership skills are used to: (1) promote a SUPPORTIVE ATMOSPHERE and (2) accomplish SET GOALS, while interviewers guide discussion according to a predetermined set of questions or topics."},
+
+{t:"The community assessment step 'Identify resources in the community' (Step 3) is critical because it:",
+ o:["Replaces the need for data analysis in Step 4",
+    "Reveals what capacities, services, and strengths are already available in the community — forming the basis for the assets approach and gap analysis between current capacities and identified needs",
+    "Is only relevant for comprehensive assessments",
+    "Only identifies gaps without considering available strengths"],
+ a:1, d:"hard",
+ exp:"Identifying community resources (Step 3) reveals CURRENT CAPACITIES and STRENGTHS available. This information is essential for assets assessment, gap analysis (gap between capacities and needs), and developing realistic action plans."},
+
+{t:"Why is the familiarization (Windshield Survey) type of assessment said to be 'needed whenever the community health nurse works with families, groups, organizations, or populations'?",
+ o:["Because it replaces all other types of assessment",
+    "Because it provides knowledge of the CONTEXT in which families, groups, and populations exist and may enable the nurse to connect clients with the community and its resources",
+    "Because it is the most comprehensive and detailed assessment type",
+    "Because it is only required for new nurses and not experienced ones"],
+ a:1, d:"hard",
+ exp:"Familiarization assessment provides knowledge of the CONTEXT in which families, groups, and populations exist. It may enable the nurse to CONNECT clients with the community and its resources — making it foundational for all types of community health nursing work."},
+
+{t:"The statement 'community assessment involves getting to know and understand the community as CLIENT' has which important implication for community health nursing practice?",
+ o:["Individual patients remain the primary focus of community health nursing",
+    "The COMMUNITY itself — not just individual members — is the unit of assessment and care; this requires population-focused thinking and assessment of collective needs, strengths, and resources",
+    "Community assessment is only relevant for policy makers, not nurses",
+    "Only sick community members are assessed, not healthy ones"],
+ a:1, d:"hard",
+ exp:"Viewing the COMMUNITY as CLIENT is fundamental to community health nursing. It means the COMMUNITY — not just individual members — is the unit of assessment and care, requiring population-focused assessment of collective needs, strengths, and resources."},
+
+{t:"How do descriptive epidemiologic studies COMPLEMENT surveys in community health assessment?",
+ o:["They replace surveys entirely when available",
+    "While surveys collect broad data on health beliefs, behaviors, and demographics, descriptive epidemiologic studies specifically quantify DISEASE DISTRIBUTION by person, place, and time — together providing both behavioral and epidemiological dimensions of community health",
+    "Descriptive studies are only useful for communicable disease assessment",
+    "They conflict with survey findings and should not be used together"],
+ a:1, d:"hard",
+ exp:"Surveys provide broad data (health use patterns, immunization levels, demographics, health beliefs). Descriptive epidemiologic studies provide disease distribution by person/place/time. TOGETHER they provide complementary behavioral and epidemiological dimensions of community health status."},
+
+{t:"The assets assessment approach requires identifying and 'creating or rebuilding relationships among local residents, associations, and institutions to multiply power and effectiveness.' What does 'multiply power and effectiveness' mean in this context?",
+ o:["It means giving more financial resources to community leaders",
+    "It means that linking community assets together creates synergistic effects — where the combined capacity of connected residents, associations, and institutions is greater than the sum of individual assets",
+    "It means increasing government control over community resources",
+    "It means reducing the number of community organizations to focus resources"],
+ a:1, d:"hard",
+ exp:"'Multiply power and effectiveness' means linking assets creates SYNERGISTIC effects. Connected community residents, associations, and institutions working together produce combined capacity GREATER than the sum of individual assets — creating multiplicative rather than additive effects."},
+
+{t:" A new community health nurse has just been assigned to a rural district. She drives through the community, introduces herself to local service providers, finds the health and social service locations, obtains community literature, and maps key resources. Which type of community assessment is she conducting?",
+ o:["Comprehensive assessment","Problem-oriented assessment",
+    "Community assets assessment",
+    "Familiarization assessment (Windshield Survey)"],
+ a:3, d:"easy",
+ exp:"Familiarization/Windshield Survey involves driving or walking around the community, finding health/social/governmental services, obtaining literature, introducing oneself, and generally becoming familiar with the community — exactly what this nurse is doing."},
+
+{t:" A community health nurse receives reports of increasing childhood obesity in her district. She decides to focus specifically on this problem, collecting data about dietary patterns, physical activity, school food environments, and available recreational facilities in the community. This represents which type of assessment?",
+ o:["Familiarization assessment","Comprehensive assessment",
+    "Problem-oriented assessment — beginning with a single problem and assessing the community in terms of that specific problem",
+    "Community subsystem assessment"],
+ a:2, d:"medium",
+ exp:"Problem-oriented assessment begins with a SINGLE PROBLEM (childhood obesity) and assesses the community specifically in terms of that problem. It is used when familiarization is not sufficient and comprehensive assessment is too expensive."},
+
+{t:" A public health team of 6 nurses is conducting a community assessment. Each nurse is assigned to assess 2 specific community systems: education, health, transportation, economic, social, and religious systems. They then meet to share findings and compile a complete community picture. This represents:",
+ o:["Familiarization assessment","Comprehensive assessment",
+    "Community subsystem assessment — dividing systems among team members and sharing findings for a comprehensive picture",
+    "Problem-oriented assessment"],
+ a:2, d:"medium",
+ exp:"Community subsystem assessment focuses on single dimensions of community life. A team divides up community systems, each member assesses different subsystems, and they share findings to create a more comprehensive community picture."},
+
+{t:" A community health agency wants to conduct the most thorough possible assessment of a large urban community. They plan to review all existing studies, survey the full demographics, interview key informants in every major community system, and analyze power distribution and decision-making. They have a large budget and one year to complete the work. This is:",
+ o:["Familiarization assessment","Problem-oriented assessment",
+    "Community subsystem assessment",
+    "Comprehensive assessment — seeking to discover ALL relevant community health information, though expensive and time-consuming"],
+ a:3, d:"medium",
+ exp:"Comprehensive assessment seeks to discover ALL relevant community health information through review of existing studies, demographic surveys, key informant interviews in every major system, and analysis of power/decision-making. It is expensive and time-consuming."},
+
+{t:" A community nurse notices that despite documented high poverty and disease rates in a neighborhood, the residents have a strong network of mutual aid associations, skilled individuals running informal community programs, and active local organizations. She decides to build the assessment around these existing strengths. This approach represents:",
+ o:["Problem-oriented assessment","Comprehensive assessment",
+    "Community assets assessment — focusing on strengths and capacities rather than problems and deficits",
+    "Familiarization assessment"],
+ a:2, d:"medium",
+ exp:"Assets assessment FOCUSES ON STRENGTHS and CAPACITIES rather than problems alone. It identifies skills of individuals, citizen associations, and local institutions to build on community possibilities rather than only addressing deficits."},
+
+{t:" A community health nurse wants to determine the immunization levels, health care use patterns, and health beliefs of a specific population in her district. She designs a series of structured questions and administers them to a representative sample of the population. She is using which assessment method?",
+ o:["Focus group","Community forum","Survey","Descriptive epidemiologic study"],
+ a:2, d:"easy",
+ exp:"A SURVEY uses a series of questions to collect data for analysis of a specific group or area. It is commonly used and can assess health care use patterns, immunization levels, demographic characteristics, and health beliefs and practices."},
+
+{t:" A public health team is investigating a spike in tuberculosis cases in a specific district. They analyze data by examining who is getting sick (age, gender, occupation), which neighborhoods have the highest rates, and during which season cases are peaking. They are using which community assessment method?",
+ o:["Community forum","Focus group","Survey",
+    "Descriptive epidemiologic study — examining disease distribution by person, place, and time"],
+ a:3, d:"medium",
+ exp:"Descriptive epidemiologic studies examine disease distribution by PERSON (who is affected?), PLACE (where does it occur?), and TIME (when do cases occur?) — exactly what this team is doing for tuberculosis."},
+
+{t:" A health authority wants to gather public opinion on a proposed new community health center. They organize a neighborhood meeting, invite representatives from all segments of the community, and allow participants to express their views on health care concerns in their area. This is an example of:",
+ o:["Focus group","Survey",
+    "Community forum/town meeting — obtaining community opinions from participants representing all community segments",
+    "Comprehensive assessment interview"],
+ a:2, d:"medium",
+ exp:"Community forums/town meetings are qualitative methods designed to obtain community opinions. Participants are invited from all segments of the community involved with the issue — matching this scenario exactly."},
+
+{t:" A community health nurse is studying maternal health barriers for young women in their first pregnancy. She assembles a group of 10 first-time pregnant women aged 18-25, all from the same socioeconomic background, for an in-depth discussion guided by predetermined questions. This is an example of:",
+ o:["Community forum","Survey","Comprehensive assessment",
+    "Focus group — a small, homogenous group (5-15 people) guided by predetermined questions"],
+ a:3, d:"medium",
+ exp:"Focus groups are small (5-15 people), HOMOGENOUS in demographic variables (young first-pregnancy women), and use predetermined questions to guide discussion. This matches the focus group method exactly."},
+
+{t:" A community health nurse is assessing a neighborhood and wants to understand the health needs from the perspective of the people who live there. She goes door-to-door to talk with residents, speaks with local leaders, and holds informal conversations with community members. She is collecting which type of data?",
+ o:["Secondary data — from existing records","International data — from WHO reports",
+    "Primary data — obtained directly from community members who can offer the most accurate insights",
+    "State data — from the state health department"],
+ a:2, d:"easy",
+ exp:"PRIMARY data is obtained DIRECTLY from the community — by talking with community members including formal leaders, informal leaders, and inhabitants. This direct source can frequently offer the most accurate insights and comprehensive information."},
+
+{t:" A community health team is preparing an assessment report and needs to compare local disease rates with national trends. They access published government documents and non-governmental research reports about the populations and diseases they serve. They are using which category of data source?",
+ o:["Primary data collected directly from community members",
+    "International data from WHO and UNICEF",
+    "National sources : both official (government documents) and non-official (research-based) national data",
+    "Local hospital data only"],
+ a:2, d:"medium",
+ exp:"NATIONAL sources include official sources (government-compiled documents) and non-official sources (research data from organizations serving specific populations). These allow comparison of local data with national statistics and trends."},
+
+{t:" A community health nurse is beginning a formal community assessment for a grant application. The funding foundation has specified they will only fund programs with documented evidence of community need. Which reason for conducting a community assessment does this represent?",
+ o:["To promote awareness and action","To provide data for decision-making",
+    "To satisfy a mandate — foundations often require a formal assessment before providing funding",
+    "To build relationships among community leaders"],
+ a:2, d:"medium",
+ exp:"'Satisfying a mandate' means foundations and funding institutions that provide resources for implementing action plans OFTEN REQUIRE a formal assessment of needs and resources. This grant requirement is a classic example."},
+
+{t:" After completing a community assessment, a nurse prepares a comprehensive report and presents the findings at a community meeting, inviting leaders, residents, service providers, and government officials to discuss the results and participate in planning the response. Which characteristic of successful community assessment is being fulfilled?",
+ o:["Understanding the current situation first",
+    "Defining a vision of the future",
+    "Allowing questions to drive the process",
+    "Communicating information back to stakeholders and involving them in the planning process"],
+ a:3, d:"medium",
+ exp:"'Communicate information back to stakeholders' means a successful assessment communicates gathered information back to stakeholders (leaders, residents, providers, officials) AND involves them in the PLANNING PROCESS to lead to desired change."},
+
+{t:" A community health nurse analyzing assessment data finds that while the community has high rates of diabetes, it also has an active senior citizens' association, a network of community gardens, and several community members with nutrition training. She plans to link these resources to create a diabetes management program. This demonstrates which assessment approach?",
+ o:["Problem-oriented assessment focusing on diabetes only",
+    "Community assets assessment — linking individual skills, citizen associations, and institutions to build a community-driven program from within",
+    "Comprehensive assessment covering all community systems",
+    "Familiarization assessment of community geography"],
+ a:1, d:"hard",
+ exp:"Assets assessment identifies and LINKS community assets — individual skills (nutrition-trained members), citizen associations (senior citizens' association), and institutions (community gardens) — to build a community-driven program that multiplies power and effectiveness from within."},
+
+{t:"A student nurse is confused about whether to use a survey or a focus group for assessing community members' views on a proposed vaccination program. Her supervisor explains the key difference. Which explanation is CORRECT?",
+ o:["Surveys and focus groups are identical methods with no differences",
+    "A survey uses structured questions for a broad sample to collect quantifiable data; a focus group is a small (5-15), homogenous group discussion guided by predetermined questions to elicit in-depth qualitative opinions",
+    "Focus groups provide only numerical data while surveys provide qualitative data",
+    "Both methods should never be used for the same community assessment"],
+ a:1, d:"hard",
+ exp:"Surveys: structured questions for broad sample → quantifiable data. Focus groups: small (5-15), homogenous group, predetermined questions → in-depth qualitative opinions. They serve complementary purposes and can be used together in community assessment."},
+
+{t:"Community nurses begin an assessment by defining the client in terms of three dimensions: place, people, and function.",
+ o:["True","False"], a:0, d:"easy",
+ exp:"Community nurses start an assessment by clearly defining their client in terms of three dimensions: PLACE, PEOPLE, and FUNCTION."},
+
+{t:"The Windshield Survey is associated with the comprehensive type of community assessment.",
+ o:["True","False"], a:1, d:"easy",
+ exp:"The Windshield Survey is associated with FAMILIARIZATION assessment — nurses drive or walk around the community to gain working knowledge. It is NOT associated with comprehensive assessment."},
+
+{t:"The comprehensive community assessment is described as expensive and time-consuming.",
+ o:["True","False"], a:0, d:"easy",
+ exp:"Comprehensive assessment seeks to discover all relevant community health information, reviews all existing data, interviews key informants in every major system, and analyzes power structures. It is explicitly described as 'expensive and time-consuming.'"},
+
+{t:"A focus group typically involves 5-15 people who are homogenous in demographic variables.",
+ o:["True","False"], a:0, d:"easy",
+ exp:"A focus group is a small group process — usually 5-15 people — whose members are homogenous in regards to demographic variables (e.g., female community health nurses, or young women in their first pregnancy)."},
+
+{t:"Primary data in community assessment is obtained from existing health records, statistics, and research reports.",
+ o:["True","False"], a:1, d:"easy",
+ exp:"Existing records and statistics are SECONDARY data. PRIMARY data is obtained DIRECTLY from the community — by talking with community members including formal and informal leaders and inhabitants."},
+
+{t:"Community assets assessment focuses on community strengths and capacities rather than only on problems and deficits.",
+ o:["True","False"], a:0, d:"easy",
+ exp:"Assets assessment 'focuses on the strength and capacities of the community rather than the problems alone' — requiring the assessor to look for the positive and see the glass as 'half full.'"},
+
+{t:"Descriptive epidemiologic studies examine disease distribution by agent, host, and environment.",
+ o:["True","False"], a:1, d:"medium",
+ exp:"Descriptive epidemiologic studies examine disease by PERSON (who?), PLACE (where?), and TIME (when?). Agent, host, and environment describe the epidemiologic triad for disease causation, not descriptive epidemiology's three dimensions."},
+
+{t:"Step 5 of the community assessment process is to develop an action plan.",
+ o:["True","False"], a:0, d:"easy",
+ exp:"The six steps are: (1) Establish what/where/who, (2) Learn more, (3) Identify resources, (4) Analyze data, (5) DEVELOP AN ACTION PLAN, (6) Share findings. Step 5 is correct."},
+
+{t:"Community forums and focus groups are identical methods with no significant differences.",
+ o:["True","False"], a:1, d:"medium",
+ exp:"Community forums are LARGER, involve ALL community segments, and aim for broad community opinion. Focus groups are SMALLER (5-15 people), HOMOGENOUS in demographics, and use guided questions for in-depth discussion. They have important differences."},
+
+{t:"Secondary data may not totally describe the community or reflect community self-perceptions and may need augmentation through primary data.",
+ o:["True","False"], a:0, d:"medium",
+ exp:"Secondary data 'may not totally describe the community or reflect community self-perceptions; thus, they may need augmentation or further validation' through primary data collection."},
+
+{t:"The problem-oriented assessment is used when familiarization is not sufficient and a comprehensive assessment is too expensive.",
+ o:["True","False"], a:0, d:"medium",
+ exp:"Problem-oriented assessment is 'commonly used when familiarization is not sufficient and a comprehensive assessment is too expensive.' It responds to a particular need in a targeted, cost-effective manner."},
+
+{t:"Building and strengthening relationships among community leaders, service providers, and residents is a recognized PURPOSE of community assessment.",
+ o:["True","False"], a:0, d:"medium",
+ exp:"'Building and strengthening relationships among community leaders, service providers and most importantly, community residents' is explicitly listed as a purpose for conducting community assessment."},
+
+{t:"Asset assessment has two levels: individual skills and local institutions (without considering citizen associations).",
+ o:["True","False"], a:1, d:"hard",
+ exp:"Asset assessment has THREE levels: (1) individual skills, interests, and experiences; (2) LOCAL CITIZEN ASSOCIATIONS and organizations; and (3) local institutions. Citizen associations are an essential middle level."},
+
+{t:"The most significant state-level source of community assessment data is the state health department.",
+ o:["True","False"], a:0, d:"medium",
+ exp:"The most significant state source of assessment data comes from the STATE HEALTH DEPARTMENT, the official agency responsible for collecting state vital statistics and morbidity data."},
+
+{t:"In community assessment, 'stakeholders' refers only to government officials and health professionals.",
+ o:["True","False"], a:1, d:"medium",
+ exp:"Stakeholders are people with an interest in the issue — including PARENTS, STUDENTS, agency personnel, AND government officials. The term is broader than just officials and professionals."},
+
+{t:"Surveys provide a broad range of data and are helpful when used in conjunction with other data sources.",
+ o:["True","False"], a:0, d:"easy",
+ exp:"Surveys 'provide a broad range of data that are helpful when used in conjunction with other sources or when other sources are not available.'"},
+
+{t:"The community assets assessment approach enables nurses to be partners in community intervention rather than merely providing services.",
+ o:["True","False"], a:0, d:"medium",
+ exp:"Assets assessment enables the nurse to 'become a partner in community intervention efforts, rather than merely provide services' — a fundamental shift in the nurse-community relationship."},
+
+{t:"Understanding current community capacities and identifying the gap between capacities and needs is only relevant for comprehensive assessments.",
+ o:["True","False"], a:1, d:"hard",
+ exp:"Understanding current capacities and the gap between capacities and needs is a characteristic of ALL SUCCESSFUL community assessments — not limited to comprehensive assessments. It is part of 'Understanding the current situation first.'"},
+
+{t:"Electronic town meetings (online chat rooms, email programs) are considered evolving forms of community forum designed to elicit grassroots opinions.",
+ o:["True","False"], a:0, d:"medium",
+ exp:"Electronic town meetings are described as 'designed to elicit grassroots opinions from local community members' — an evolving form of community forum. we will 'continue to see more in the future.'"},
+
+{t:"The community assessment process begins with community assessment as one of the CORE functions of promoting community health through the nursing process.",
+ o:["True","False"], a:0, d:"easy",
+ exp:"The lecture states: 'The nursing process from assessment through evaluation is used to promote community health. This process begins with community assessment, ONE OF THE CORE FUNCTIONS, which involves getting to know the community.'"},
+];
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function shuffleOptions(question) {
+  const correctAnswer = question.o[question.a];
+
+  question.o = shuffle([...question.o]);
+
+  question.a = question.o.indexOf(correctAnswer);
+
+  return question;
+}
+
+QUESTIONS = QUESTIONS.map(q => shuffleOptions({...q}));
+/* ============ CONFIG ============ */
+const TOTAL_MINUTES = 60;   
+
+/* ============ ENGINE ============ */
+const LETTERS = ['A','B','C','D','E','F'];
+let pool, questions, qi, correct, wrong, answered, answers, wrongSet;
+let totalTime = 60 * 60, timeLeft, timerInterval;
+let activeTopic = 'All';
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+/* ---- TOPIC FILTER ---- */
+function buildFilters() {
+  const wrap = document.getElementById('filterWrap');
+  const countEl = document.getElementById('filterCount');
+  const topics = [...new Set(QUESTIONS.map(q=>q.topic).filter(Boolean))];
+  if (!topics.length) { wrap.style.display='none'; countEl.style.display='none'; return; }
+  wrap.style.display='flex';
+  countEl.style.display='block';
+  const all = ['All', ...topics];
+  wrap.innerHTML = all.map(t=>
+    `<button class="filter-btn${t==='All'?' active':''}" onclick="setTopic('${t}')">${t}</button>`
+  ).join('');
+  updateFilterCount();
+}
+
+function setTopic(t) {
+  activeTopic = t;
+  document.querySelectorAll('.filter-btn').forEach(b=>{
+    b.classList.toggle('active', b.textContent===t);
+  });
+  updateFilterCount();
+  init(getPool());
+}
+
+function getPool() {
+  return activeTopic==='All' ? QUESTIONS : QUESTIONS.filter(q=>q.topic===activeTopic);
+}
+
+function updateFilterCount() {
+  const p = getPool();
+  document.getElementById('filterCount').textContent =
+    `Showing ${p.length} question${p.length!==1?'s':''} · Topic: ${activeTopic}`;
+}
+
+/* ---- INIT ---- */
+function init(p) {
+  pool = p;
+  if (!pool.length) {
+    document.getElementById('app').innerHTML=`
+      <div class="empty-state">
+        <div class="ei">📭</div>
+        <h3>No Questions Yet</h3>
+        <p>Add questions to the QUESTIONS array in the script section.</p>
+      </div>`;
+    document.getElementById('totalBadge').textContent='0 Questions';
+    document.getElementById('sRemain').textContent='—';
+    clearInterval(timerInterval);
+    return;
+  }
+  questions = shuffle(pool);
+  qi=0; correct=0; wrong=0; answered=0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = [];
+  timeLeft = totalTime;
+  document.getElementById('totalBadge').textContent = questions.length+' Questions';
+  document.getElementById('timeBadge').textContent  = TOTAL_MINUTES+' Min';
+  startTimer(); render();
+}
+
+/* ---- TIMER ---- */
+function startTimer() {
+  clearInterval(timerInterval);
+  timerInterval = setInterval(()=>{
+    timeLeft--;
+    const m=Math.floor(timeLeft/60), s=timeLeft%60;
+    document.getElementById('timerTxt').textContent=`${m}:${s<10?'0':''}${s}`;
+    const b=document.getElementById('timerBadge');
+    if (timeLeft<=120)      b.className='timer-badge danger';
+    else if (timeLeft<=300) b.className='timer-badge warn';
+    else                    b.className='timer-badge';
+    if (timeLeft<=0) { clearInterval(timerInterval); finish(); }
+  },1000);
+}
+
+/* ---- TOP BAR ---- */
+function updateTop() {
+  const total=questions.length;
+  document.getElementById('sCorrect').textContent=correct;
+  document.getElementById('sWrong').textContent=wrong;
+  document.getElementById('sRemain').textContent=Math.round(((total-answered)/total)*100)+'%';
+  document.getElementById('progLabel').textContent='Q '+(qi+1)+' / '+total;
+  document.getElementById('progFill').style.width=((qi+1)/total*100)+'%';
+  document.getElementById('prog-bar').style.width=((qi+1)/total*100)+'%';
+}
+
+/* ---- RENDER ---- */
+function render() {
+  updateTop();
+  const q=questions[qi];
+  const opts = q.o.map((o,idx)=>`
+    <div class="opt" id="opt${idx}" onclick="choose(${idx})">
+      <div class="opt-letter">${LETTERS[idx]}</div>${o}
+    </div>`).join('');
+  document.getElementById('app').innerHTML=`
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Question ${qi+1} / ${questions.length}</div>
+        ${q.topic?`<div class="q-topic">${q.topic}</div>`:''}
+      </div>
+      <div class="q-text">${q.t}</div>
+      <div class="options">${opts}</div>
+      <div class="nav-btns">
+        <button class="btn btn-skip" onclick="skip()"><i class="fa-solid fa-forward"></i> Skip</button>
+      </div>
+    </div>`;
+}
+
+/* ---- CHOOSE ---- */
+function choose(v) {
+  if (answers[qi]!==null) return;
+  answers[qi]=v; answered++;
+  const q=questions[qi], ok=v===q.a;
+  ok?correct++:wrong++;
+  updateTop();
+  q.o.forEach((_,idx)=>{
+    const el=document.getElementById('opt'+idx);
+    el.classList.add('disabled');
+    if (idx===q.a) el.classList.add('correct');
+    else if (idx===v) el.classList.add('wrong');
+  });
+  const fb=document.createElement('div');
+  fb.className='feedback-bar '+(ok?'ok':'no');
+  fb.innerHTML=ok
+    ?`<span style="font-size:17px">🎉</span><span>ِما شاء الله عليك</span>`
+    :`<span style="font-size:17px">😔</span><span>ركز يا شطور</span>`;
+  const card=document.querySelector('.q-card');
+  card.querySelector('.options').after(fb);
+  if (q.exp) {
+    const exp=document.createElement('div');
+    exp.className='explanation';
+    exp.innerHTML='<b>💬 Explanation:</b> '+q.exp;
+    fb.after(exp);
+  }
+  card.querySelector('.nav-btns').innerHTML=`
+    <button class="btn btn-next" onclick="next()">
+      ${qi<questions.length-1
+        ?'<i class="fa-solid fa-arrow-right"></i> Next Question'
+        :'<i class="fa-solid fa-flag-checkered"></i> Finish Exam'}
+    </button>`;
+}
+
+/* ---- SKIP / NEXT ---- */
+function skip() {
+  if (answers[qi]===null) { answers[qi]=-1; answered++; wrong++; wrongSet.push(questions[qi]); updateTop(); }
+  next();
+}
+function next() {
+  if (qi<questions.length-1) { qi++; render(); window.scrollTo({top:0,behavior:'smooth'}); }
+  else finish();
+}
+
+/* ---- FINISH ---- */
+function finish() {
+  clearInterval(timerInterval);
+  const total=questions.length;
+  const score=Math.round((correct/total)*100);
+  questions.forEach((q,idx)=>{ if(answers[idx]!==q.a) wrongSet.push({...q,myAns:answers[idx]}); });
+  wrongSet=[...new Map(wrongSet.map(q=>[q.t,q])).values()];
+  let grade,gc;
+  if(score>=90)      { grade='🥇 Excellent';    gc='var(--ok)'; }
+  else if(score>=75) { grade='🥈 Very Good';     gc='var(--a1)'; }
+  else if(score>=60) { grade='🥉 Good';          gc='var(--warn)'; }
+  else               { grade='📚 Needs Review';  gc='var(--err)'; }
+  const circ=2*Math.PI*45, offset=circ-(score/100)*circ;
+  const report=questions.map((q,idx)=>{
+    const ok=answers[idx]===q.a;
+    return `<div class="report-item ${ok?'ok':'no'}">
+      <div class="ri-q">${ok?'✅':'❌'} ${q.t}</div>
+      ${!ok?`
+        <div class="ri-row"><span class="ri-badge ri-yours">Your Answer</span>${answers[idx]>=0?q.o[answers[idx]]:'Skipped'}</div>
+        <div class="ri-row"><span class="ri-badge ri-right">Correct</span>${q.o[q.a]}</div>
+      `:''}
+    </div>`;
+  }).join('');
+  document.getElementById('prog-bar').style.width='100%';
+  document.getElementById('app').innerHTML=`
+    <div class="result-hero">
+      <div class="score-ring">
+        <svg viewBox="0 0 110 110">
+          <circle class="ring-bg" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="0"/>
+          <circle class="ring-fill" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="${circ}"
+            style="stroke:${gc}" id="ringFill"/>
+        </svg>
+        <div class="score-num">${score}</div>
+        <div class="score-pct">%</div>
+      </div>
+      <div class="result-grade" style="color:${gc}">${grade}</div>
+      <div class="result-sub">Answered ${answered} of ${total} questions</div>
+      <div class="result-stats">
+        <div class="rs"><div class="n" style="color:var(--ok)">${correct}</div><div class="l">Correct</div></div>
+        <div class="rs"><div class="n" style="color:var(--err)">${wrong}</div><div class="l">Wrong</div></div>
+        <div class="rs"><div class="n" style="color:var(--a1)">${total-answered<0?0:total-answered}</div><div class="l">Skipped</div></div>
+      </div>
+    </div>
+    <div class="result-actions">
+      ${wrongSet.length?`<button class="btn btn-retry" onclick="retryWrong()"><i class="fa-solid fa-rotate-right"></i> Retry Wrong (${wrongSet.length})
+
+</button>`:''}
+      <button class="btn btn-home" onclick="init(getPool())"><i class="fa-solid fa-shuffle"></i> New Random Exam</button>
+      <a href="https://gaith-team.github.io/exam/" class="btn btn-home" style="text-decoration:none"><i class="fa-solid fa-house"></i> Back to Subject</a>
+    </div>
+    <div style="margin-top:22px">
+      <div style="font-size:14px;font-weight:700;margin-bottom:9px;color:var(--text2)">📋 Detailed Report</div>
+      ${report}
+    </div>`;
+  setTimeout(()=>{ document.getElementById('ringFill').style.strokeDashoffset=offset; },100);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ---- RETRY WRONG ---- */
+function retryWrong() {
+  const p=[...wrongSet];
+  questions=shuffle(p); qi=0; correct=0; wrong=0;
+  answers=new Array(questions.length).fill(null);
+  wrongSet=[]; answered=0; timeLeft=totalTime;
+  startTimer(); render();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ---- THEME ---- */
+const themeBtn=document.getElementById('themeBtn');
+let theme=localStorage.getItem('gt-theme')||'light';
+function applyTheme(t) {
+  theme=t;
+  document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'');
+  themeBtn.textContent=t==='dark'?'☀️':'🌙';
+  localStorage.setItem('gt-theme',t);
+}
+applyTheme(theme);
+themeBtn.addEventListener('click',()=>applyTheme(theme==='dark'?'light':'dark'));
+
+/* ---- START ---- */
+buildFilters();
+init(getPool());
+</script>
+</body>
+</html>
