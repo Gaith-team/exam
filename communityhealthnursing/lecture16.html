@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --a1: #0f766e;
+  --a2: #14b8a6;
+  --a3: #99f6e4;
+  --a2l: #ccfbf1;
+  --ag: rgba(20,184,166,0.13);
+  --ags: rgba(20,184,166,0.26);
+  --bg:    #f0fdfa;
+  --bg2:   #ccfbf1;
+  --card:  #ffffff;
+  --text:  #134e4a;
+  --text2: #0f766e;
+  --text3: #5eead4;
+  --bdc:   rgba(20,184,166,0.20);
+  --bdcard:rgba(15,118,110,0.12);
+  --sh:    0 4px 18px rgba(15,118,110,0.09);
+  --shh:   0 8px 30px rgba(20,184,166,0.22);
+  --ok:    #15803d;
+  --err:   #b91c1c;
+  --warn:  #b45309;
+  --rad:   16px;
+  --tr:    all 0.28s cubic-bezier(.4,0,.2,1);
+}
+[data-theme="dark"] {
+  --bg:    #022c22; --bg2:   #064e3b; --card:  #065f46;
+  --text:  #d1fae5; --text2: #6ee7b7; --text3: #34d399;
+  --bdc:   rgba(52,211,153,0.22);
+  --bdcard:rgba(52,211,153,0.12);
+  --sh:    0 4px 20px rgba(0,0,0,0.45);
+  --shh:   0 8px 36px rgba(20,184,166,0.28);
+  --a1: #10b981; --a2: #34d399; --a2l: #064e3b; --a3: #6ee7b7;
+}
+
+body {
+  font-family:'Outfit',sans-serif;
+  background:var(--bg); color:var(--text);
+  min-height:100vh; overflow-x:hidden;
+  transition:background .4s,color .4s;
+}
+
+#prog-bar {
+  position:fixed;top:0;left:0;height:3px;z-index:999;
+  background:linear-gradient(90deg,var(--a1),var(--a2),var(--a3));
+  width:0%;transition:width .15s;
+}
+
+/* NAV */
+nav {
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 26px;height:62px;
+  background:rgba(240,253,250,.94);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--bdcard);transition:var(--tr);
+}
+[data-theme="dark"] nav { background:rgba(2,44,34,.96); }
+
+.nav-back {
+  display:flex;align-items:center;gap:6px;
+  color:var(--text2);text-decoration:none;font-size:13px;font-weight:700;
+  padding:6px 13px;border-radius:9px;
+  border:1px solid var(--bdcard);background:var(--card);
+  transition:var(--tr);
+}
+.nav-back:hover { color:var(--a2);border-color:var(--bdc); }
+
+.nav-brand { display:flex;align-items:center;gap:8px;font-size:15px;font-weight:900;color:var(--text); }
+.nav-logo {
+  width:34px;height:34px;border-radius:9px;
+  background:linear-gradient(135deg,var(--a1),var(--a2));
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:12px;font-weight:900;
+}
+.theme-btn {
+  width:37px;height:37px;border-radius:50%;
+  border:1px solid var(--bdcard);background:var(--card);
+  cursor:pointer;font-size:15px;
+  display:flex;align-items:center;justify-content:center;transition:var(--tr);
+}
+.theme-btn:hover { border-color:var(--a2);transform:rotate(22deg); }
+
+/* HERO */
+.hero {
+  margin-top:62px;
+  background:linear-gradient(135deg,var(--a1) 0%,var(--a2) 60%,#2dd4bf 100%);
+  padding:34px 22px 30px;text-align:center;position:relative;overflow:hidden;
+}
+.hero::before {
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 500px 180px at 50% 110%,rgba(255,255,255,.13) 0%,transparent 70%);
+}
+.hero-icon {
+  width:62px;height:62px;border-radius:18px;
+  background:rgba(255,255,255,.2);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;margin:0 auto 11px;
+  border:1.5px solid rgba(255,255,255,.35);
+}
+.hero h1 { font-size:clamp(17px,3.5vw,25px);font-weight:900;color:#fff;margin-bottom:4px; }
+.hero p  { font-size:13px;color:rgba(255,255,255,.82); }
+.hero-meta { display:flex;justify-content:center;gap:12px;margin-top:14px;flex-wrap:wrap; }
+.meta-pill {
+  background:rgba(255,255,255,.18);backdrop-filter:blur(5px);
+  border:1px solid rgba(255,255,255,.3);border-radius:50px;
+  padding:5px 13px;font-size:12px;font-weight:700;color:#fff;
+  display:flex;align-items:center;gap:5px;
+}
+
+/* TOPIC FILTER */
+.filter-wrap {
+  padding:14px 16px 2px;
+  display:flex;flex-wrap:wrap;gap:7px;
+  background:var(--card);border-bottom:1px solid var(--bdcard);
+}
+.filter-btn {
+  padding:5px 13px;border-radius:50px;
+  border:1.5px solid var(--bdcard);background:var(--bg);
+  font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;
+  color:var(--text2);cursor:pointer;transition:var(--tr);
+}
+.filter-btn:hover,
+.filter-btn.active {
+  background:var(--a2);color:#fff;border-color:var(--a2);
+  box-shadow:0 2px 10px var(--ag);
+}
+.filter-count {
+  padding:14px 16px 14px;
+  font-size:12px;color:var(--text2);font-weight:600;
+  background:var(--card);border-bottom:1px solid var(--bdcard);
+}
+
+/* SHELL */
+.shell { max-width:560px;margin:0 auto;padding:18px 16px 80px; }
+
+/* STATS */
+.stats-row { display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-bottom:13px; }
+.stat-box {
+  background:var(--card);border:1px solid var(--bdcard);
+  border-radius:var(--rad);padding:11px 7px;text-align:center;
+}
+.stat-box .val { font-size:20px;font-weight:900; }
+.stat-box .lbl { font-size:11px;color:var(--text3);margin-top:2px; }
+.c-ok   { color:var(--ok); }
+.c-err  { color:var(--err); }
+.c-acc  { color:var(--a1); }
+
+/* PROG STRIP */
+.prog-strip {
+  background:var(--card);border:1px solid var(--bdcard);
+  border-radius:var(--rad);padding:12px 15px;margin-bottom:15px;
+  display:flex;align-items:center;gap:11px;
+}
+.prog-label { font-size:13px;font-weight:700;color:var(--text2);white-space:nowrap; }
+.prog-track { flex:1;height:7px;background:var(--bg2);border-radius:7px;overflow:hidden; }
+.prog-fill {
+  height:100%;width:0%;
+  background:linear-gradient(90deg,var(--a1),var(--a2));
+  border-radius:7px;transition:width .4s;
+}
+.timer-badge {
+  min-width:60px;height:33px;border-radius:17px;
+  background:var(--bg2);border:1px solid var(--bdcard);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:900;color:var(--text);
+  gap:4px;padding:0 10px;flex-shrink:0;
+}
+.timer-badge.warn   { color:var(--warn);  border-color:rgba(180,83,9,.3);  background:rgba(180,83,9,.08); }
+.timer-badge.danger { color:var(--err);   border-color:rgba(185,28,28,.3); background:rgba(185,28,28,.08);animation:blink .8s infinite; }
+@keyframes blink { 0%,100%{opacity:1}50%{opacity:.45} }
+
+/* Q CARD */
+.q-card {
+  background:var(--card);border:1px solid var(--bdcard);
+  border-radius:20px;overflow:hidden;box-shadow:var(--sh);
+}
+.q-header {
+  background:linear-gradient(135deg,var(--a1),var(--a2));
+  padding:9px 17px;display:flex;align-items:center;gap:8px;
+}
+.q-num {
+  background:rgba(255,255,255,.22);border-radius:7px;
+  padding:3px 10px;font-size:11px;font-weight:700;color:#fff;
+}
+.q-topic {
+  margin-left:auto;background:rgba(255,255,255,.18);border-radius:50px;
+  padding:2px 10px;font-size:11px;font-weight:700;color:#fff;
+  border:1px solid rgba(255,255,255,.25);
+}
+.q-text {
+  padding:19px 17px 13px;font-size:15px;font-weight:700;color:var(--text);
+  line-height:1.65;border-bottom:1px solid var(--bdcard);
+}
+.options { padding:13px 17px 17px;display:flex;flex-direction:column;gap:9px; }
+
+.opt {
+  display:flex;align-items:center;gap:11px;
+  padding:12px 14px;border-radius:11px;
+  border:1.5px solid var(--bdcard);background:var(--bg);
+  cursor:pointer;font-size:14px;font-weight:600;color:var(--text);
+  transition:var(--tr);user-select:none;
+}
+.opt:hover:not(.disabled) {
+  border-color:var(--a2);background:var(--ag);
+  transform:translateX(3px);
+}
+.opt-letter {
+  width:28px;height:28px;border-radius:8px;flex-shrink:0;
+  background:var(--bg2);border:1px solid var(--bdcard);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:900;color:var(--text2);
+  transition:var(--tr);
+}
+.opt.correct { border-color:var(--ok);background:rgba(21,128,61,.08); }
+.opt.correct .opt-letter { background:var(--ok);color:#fff;border-color:var(--ok); }
+.opt.wrong   { border-color:var(--err);background:rgba(185,28,28,.07); }
+.opt.wrong   .opt-letter { background:var(--err);color:#fff;border-color:var(--err); }
+.opt.disabled { pointer-events:none; }
+
+/* FEEDBACK */
+.feedback-bar {
+  margin:11px 17px;padding:11px 14px;border-radius:11px;
+  display:flex;align-items:center;gap:9px;
+  font-size:14px;font-weight:700;
+  animation:popIn .38s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes popIn { from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1} }
+.feedback-bar.ok { background:rgba(21,128,61,.1);color:var(--ok);border:1px solid rgba(21,128,61,.25); }
+.feedback-bar.no { background:rgba(185,28,28,.08);color:var(--err);border:1px solid rgba(185,28,28,.2); }
+
+.explanation {
+  margin:0 17px 11px;padding:10px 13px;
+  background:rgba(20,184,166,.07);border-radius:9px;
+  border-left:3px solid var(--a2);
+  font-size:13px;color:var(--text2);line-height:1.6;
+}
+
+/* BUTTONS */
+.nav-btns { padding:4px 17px 17px;display:flex;gap:9px; }
+.btn {
+  flex:1;padding:12px;border:none;border-radius:11px;
+  font-size:14px;font-weight:900;cursor:pointer;
+  font-family:'Outfit',sans-serif;transition:var(--tr);
+  display:flex;align-items:center;justify-content:center;gap:7px;
+}
+.btn-next {
+  background:linear-gradient(135deg,var(--a1),var(--a2));
+  color:#fff;box-shadow:0 4px 14px var(--ag);
+}
+.btn-next:hover { transform:translateY(-2px);box-shadow:0 6px 20px var(--ags); }
+.btn-skip {
+  background:var(--bg2);color:var(--text2);
+  border:1px solid var(--bdcard);flex:0 0 auto;padding:12px 15px;
+}
+.btn-skip:hover { border-color:var(--warn);color:var(--warn); }
+
+/* RESULTS */
+.result-hero {
+  text-align:center;padding:30px 18px 22px;
+  background:var(--card);border-radius:20px;
+  border:1px solid var(--bdcard);margin-bottom:17px;
+}
+.score-ring {
+  width:108px;height:108px;border-radius:50%;margin:0 auto 15px;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;position:relative;
+}
+.score-ring svg { position:absolute;inset:-5px;width:calc(100% + 10px);height:calc(100% + 10px);transform:rotate(-90deg); }
+.score-ring circle { fill:none;stroke-width:5;stroke-linecap:round; }
+.ring-bg   { stroke:var(--bg2); }
+.ring-fill { stroke:var(--a2);transition:stroke-dashoffset 1s ease; }
+.score-num { font-size:28px;font-weight:900;color:var(--text); }
+.score-pct { font-size:12px;color:var(--text3); }
+.result-grade { font-size:20px;font-weight:900;margin-bottom:4px; }
+.result-sub   { font-size:13px;color:var(--text2); }
+.result-stats { display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:17px; }
+.rs { background:var(--bg2);border-radius:10px;padding:10px 7px;text-align:center; }
+.rs .n { font-size:20px;font-weight:900; }
+.rs .l { font-size:11px;color:var(--text3); }
+
+/* REPORT */
+.report-item {
+  background:var(--card);border:1px solid var(--bdcard);
+  border-radius:12px;padding:14px;margin-bottom:8px;
+  border-left:4px solid var(--bdcard);
+}
+.report-item.ok { border-left-color:var(--ok); }
+.report-item.no { border-left-color:var(--err); }
+.report-item .ri-q { font-size:13px;font-weight:700;margin-bottom:6px; }
+.report-item .ri-row { display:flex;align-items:center;gap:7px;font-size:12px;margin-top:4px;color:var(--text2); }
+.ri-badge { padding:2px 8px;border-radius:6px;font-weight:700;font-size:11px;flex-shrink:0; }
+.ri-yours { background:rgba(185,28,28,.1);color:var(--err); }
+.ri-right { background:rgba(21,128,61,.1);color:var(--ok); }
+
+.result-actions { display:flex;flex-direction:column;gap:9px;margin-top:17px; }
+.btn-retry { background:linear-gradient(135deg,var(--a1),var(--a2));color:#fff; }
+.btn-retry:hover { transform:translateY(-2px);box-shadow:0 6px 20px var(--ags); }
+.btn-home  { background:var(--bg2);color:var(--text);border:1px solid var(--bdcard); }
+.btn-home:hover { border-color:var(--a2);color:var(--a1); }
+
+/* FOOTER */
+footer {
+  background:var(--bg2);border-top:1px solid var(--bdcard);
+  padding:20px 22px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:9px;
+}
+.footer-brand { font-size:14px;font-weight:700; }
+.footer-brand span { color:var(--a1); }
+.footer-tg {
+  display:flex;align-items:center;gap:5px;
+  text-decoration:none;color:#229ED9;font-size:12px;font-weight:600;
+}
+
+/* EMPTY STATE */
+.empty-state {
+  text-align:center;padding:50px 20px;
+  background:var(--card);border-radius:20px;border:1px solid var(--bdcard);
+}
+.empty-state .ei { font-size:40px;margin-bottom:12px; }
+.empty-state h3 { font-size:17px;font-weight:700;margin-bottom:7px; }
+.empty-state p { font-size:13px;color:var(--text2); }
+
+@media (max-width:480px) {
+  nav { padding:0 13px; }
+  .shell { padding:13px 11px 60px; }
+  .nav-brand span { display:none; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog-bar"></div>
+
+<nav>
+  <a href="https://gaith-team.github.io/exam/" class="nav-back"><i class="fa-solid fa-arrow-left"></i> Back</a>
+  <div class="nav-brand">
+    <div class="nav-logo">GT</div>
+    <span>GHAITH TEAM</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-icon">🌿</div>
+  <h1>Disaster</h1>
+  <p>Community Health Nursing</p>
+  <div class="hero-meta">
+    <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">-- Questions</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-clock"></i> <span id="timeBadge">60 Min</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-shuffle"></i> Shuffled</div>
+  </div>
+</div>
+
+<!-- Topic filter bar (shown only if topics exist) -->
+<div id="filterWrap" class="filter-wrap" style="display:none;"></div>
+<div id="filterCount" class="filter-count" style="display:none;"></div>
+
+<div class="shell">
+  <div class="stats-row">
+    <div class="stat-box"><div class="val c-ok"  id="sCorrect">0</div><div class="lbl">✔ Correct</div></div>
+    <div class="stat-box"><div class="val c-err"  id="sWrong">0</div><div class="lbl">✖ Wrong</div></div>
+    <div class="stat-box"><div class="val c-acc"  id="sRemain">100%</div><div class="lbl">⏳ Remaining</div></div>
+  </div>
+
+  <div class="prog-strip">
+    <div class="prog-label" id="progLabel">Q 1</div>
+    <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+    <div class="timer-badge" id="timerBadge"><i class="fa-regular fa-clock"></i><span id="timerTxt">60:00</span></div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<footer>
+  <div class="footer-brand">GAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg">
+    <i class="fa-brands fa-telegram"></i> @nursing2bu
+  </a>
+</footer>
+
+<script>
+let QUESTIONS = [
+/* ── EASY (1-16) ── */
+{t:"A disaster is best defined as a serious disruption of community functioning that exceeds the community's ability to cope using:",
+ o:["External international aid","Its own resources","Government funding","Military support"],
+ a:1, diff:"easy",
+ exp:"A disaster exceeds the ability of the affected community or society to cope using its OWN resources."},
+
+{t:"Which of the following is classified as a NATURAL disaster?",
+ o:["Building collapse","Serial bomb blast","Tsunami","Chemical spill"],
+ a:2, diff:"easy",
+ exp:"Tsunamis are natural disasters caused by geological events. The others are man-made disasters."},
+
+{t:"Which of the following is classified as a MAN-MADE disaster?",
+ o:["Earthquake","Wildfire (natural cause)","Flood","Transportation accident"],
+ a:3, diff:"easy",
+ exp:"Transportation accidents are man-made disasters. Earthquakes, wildfires (natural), and floods are natural disasters."},
+
+{t:"A hazard is defined as a potentially damaging physical event that may cause all of the following EXCEPT:",
+ o:["Loss of life or injury","Property damage","Social and economic disruption","Guaranteed community recovery"],
+ a:3, diff:"easy",
+ exp:"A hazard may cause loss of life, property damage, and disruption—it does not guarantee recovery."},
+
+{t:"Which of the following is a physical effect of disaster on an individual?",
+ o:["Depression","Irritability","Bone and muscle injuries, burns, lacerations","Social isolation only"],
+ a:2, diff:"easy",
+ exp:"Physical effects include bone, muscle, and joint injuries; lacerations; burns; puncture wounds; and possibly death."},
+
+{t:"Which of the following is a stress-related symptom of disaster on an individual?",
+ o:["Fractures","Burns","Puncture wounds","Headache and gastrointestinal upset"],
+ a:3, diff:"easy",
+ exp:"Stress-related symptoms include fluctuation in vital signs, irritability, asthma, cardiac problems, headache, and gastrointestinal upset."},
+
+{t:"Which disaster preparedness stage involves mobilizing emergency equipment and providing food, water, shelter, and medical services?",
+ o:["Preparedness stage","Response stage","Recovery stage","Mitigation stage"],
+ a:1, diff:"easy",
+ exp:"The Response stage involves mobilizing equipment, getting people out of danger, and providing food, water, shelter, and medical services."},
+
+{t:"Rebuilding a community after a disaster and reestablishing services describes which stage?",
+ o:["Preparedness","Response","Recovery","Mitigation"],
+ a:2, diff:"easy",
+ exp:"The Recovery stage involves rebuilding the community, reestablishing services, and supporting victims."},
+
+{t:"Installing fire detectors in homes is an example of which disaster preparedness stage?",
+ o:["Recovery","Mitigation","Response","Prevention"],
+ a:3, diff:"easy",
+ exp:"Prevention involves efforts such as installing fire detectors to avoid emergencies before they occur."},
+
+{t:"Disaster nursing is defined as:",
+ o:["Clinical nursing in a hospital setting only","The adaptation of professional nursing skills to meet nursing, physical, and emotional needs resulting from a disaster","Emergency surgery during disasters","Administrative coordination of hospital resources"],
+ a:1, diff:"easy",
+ exp:"Disaster nursing is the adaptation of professional nursing skills in recognizing and meeting nursing, physical, and emotional needs from a disaster."},
+
+{t:"Public health nurses play a vital role in disaster preparedness by doing all of the following EXCEPT:",
+ o:["Developing disaster plans","Performing cardiac surgery","Participating in disease surveillance","Supporting mass immunization initiatives"],
+ a:1, diff:"easy",
+ exp:"Cardiac surgery is not a public health nursing role in disaster preparedness."},
+
+{t:"Which of the following is an effect of disaster on the COMMUNITY?",
+ o:["Individual depression","Bone and joint injuries","Lifelines interrupted including telephone, water, and transportation services","Personal lacerations"],
+ a:2, diff:"easy",
+ exp:"Community effects include overworked public service personnel, interrupted lifelines, depleted resources, and building damage."},
+
+{t:"The principles of disaster management include providing first aid to the injured and:",
+ o:["Ignoring minor injuries to focus on critical cases only","Evacuating the injured to medical facilities","Preventing all future disasters with certainty","Closing all medical facilities"],
+ a:1, diff:"easy",
+ exp:"Evacuating the injured to medical facilities is one of the key principles of disaster management."},
+
+{t:"Which type of disaster involves food or water contamination?",
+ o:["Natural disaster","Man-made disaster","Geological disaster","Meteorological disaster"],
+ a:1, diff:"easy",
+ exp:"Food or water contamination is listed as a man-made disaster."},
+
+{t:"Resources such as food and medical supplies being depleted after a disaster is an effect on:",
+ o:["Individuals only","The community","Only healthcare workers","Only government agencies"],
+ a:1, diff:"easy",
+ exp:"Depletion of resources including food and medical supplies is listed as a community-level effect of disasters."},
+
+{t:"Which of the following is a man-made disaster?",
+ o:["Pandemic influenza","Landslide","Wars and terrorism","Tsunami"],
+ a:2, diff:"easy",
+ exp:"Wars and terrorism are man-made disasters. Pandemic influenza, landslides, and tsunamis are natural disasters."},
+
+/* ── MEDIUM (17-38) ── */
+{t:"The mitigation stage of disaster preparedness aims to:",
+ o:["Mobilize emergency equipment immediately after disaster","Make communities safer and reduce loss of property and life","Rebuild communities after destruction","Educate individuals about fire detectors"],
+ a:1, diff:"medium",
+ exp:"Mitigation makes communities safer and reduces loss of property and life by lessening disaster effects."},
+
+{t:"Risk reduction as a result of mitigation means:",
+ o:["Eliminating all disasters","Reducing the risk of damage and injury through guidelines and mitigation activities","Replacing the response stage","Mandatory evacuation only"],
+ a:1, diff:"medium",
+ exp:"Risk reduction, achieved through mitigation, reduces the risk of damage and injury by guiding individuals appropriately."},
+
+{t:"The preparedness stage ensures that the emergency management system is prepared through all of the following EXCEPT:",
+ o:["Interagency planning","Ongoing training and exercises","Public education","Ignoring community feedback"],
+ a:3, diff:"medium",
+ exp:"Preparedness involves interagency planning, training, exercises, and public education—it does not ignore community feedback."},
+
+{t:"Disaster management is defined as the organization and management of resources and responsibilities for:",
+ o:["Only military operations during war","Dealing with humanitarian aspects of emergencies including preparedness, response, and recovery","Managing hospital budgets only","Enforcing criminal law during disasters"],
+ a:1, diff:"medium",
+ exp:"Disaster management deals with all humanitarian aspects of emergencies, particularly preparedness, response, and recovery."},
+
+{t:"Which principle of disaster management involves minimizing the number of casualties when a disaster cannot be prevented?",
+ o:["Principle 1: Prevent occurrence","Principle 2: Minimize casualties if disaster can't be prevented","Principle 5: Provide first aid","Principle 8: Promote reconstruction"],
+ a:1, diff:"medium",
+ exp:"Principle 2 states: Minimize the number of casualties if the disaster can't be prevented."},
+
+{t:"A nurse's role in 'community assessment' during a disaster involves assessing for:",
+ o:["Political stability only","Presence or absence of clean water, safe food, sanitation, and shelter","Hospital budget sufficiency","Number of available physicians"],
+ a:1, diff:"medium",
+ exp:"Community assessment involves assessing for clean water, safe food, sanitation, and shelter availability."},
+
+{t:"Which nursing role involves educating people on how to prevent the spread of disease during a disaster?",
+ o:["Community assessment","Diagnosing and reporting","Preventing spread of disease","Assisting with outbreak investigation"],
+ a:2, diff:"medium",
+ exp:"Preventing spread of disease involves educating people on preventing disease spread and information on endemic diseases."},
+
+{t:"Providing appropriate vaccines, prophylactic antimicrobials, and antitoxins during disasters is part of which nursing role?",
+ o:["Community assessment","Providing preventive measures","Discouraging inappropriate response","Assisting with outbreak investigation"],
+ a:1, diff:"medium",
+ exp:"Providing preventive measures includes providing appropriate vaccines, prophylactic antimicrobials, and antitoxins."},
+
+{t:"A nurse discourages people from hoarding antibiotics after a disaster. This reflects which nursing role?",
+ o:["Community assessment","Diagnosing and reporting","Preventing spread of disease","Discouraging inappropriate response"],
+ a:3, diff:"medium",
+ exp:"Discouraging inappropriate response means discouraging unsafe actions such as hoarding antibiotics."},
+
+{t:"Assisting epidemiologists in investigating an outbreak during a disaster is which nursing role?",
+ o:["Providing preventive measures","Assisting with outbreak investigation","Community assessment","Discouraging inappropriate response"],
+ a:1, diff:"medium",
+ exp:"Assisting with outbreak investigation means helping epidemiologists and others investigate disease outbreaks."},
+
+{t:"Emotional effects of disaster on individuals include:",
+ o:["Building damage","Resource depletion","Depression","Interrupted lifelines"],
+ a:2, diff:"medium",
+ exp:"Depression is listed as an emotional effect of disasters on individuals."},
+
+{t:"Recovery from a disaster can take:",
+ o:["Only hours","Only days","Months to years depending on scope","Exactly one week"],
+ a:2, diff:"medium",
+ exp:"Rebuilding a community can take months to years depending on the scope of the disaster."},
+
+{t:"All of the following are listed as man-made disasters EXCEPT:",
+ o:["Building collapse","Serial bomb blasts","Earthquakes","Chemical spills"],
+ a:2, diff:"medium",
+ exp:"Earthquakes are natural disasters; building collapse, serial bomb blasts, and chemical spills are man-made."},
+
+{t:"All of the following are listed as natural disasters EXCEPT:",
+ o:["Landslides","Tsunamis","Floods","Wars and terrorism"],
+ a:3, diff:"medium",
+ exp:"Wars and terrorism are man-made disasters; landslides, tsunamis, and floods are natural disasters."},
+
+{t:"Which principle of disaster management involves promoting reconstruction to lives?",
+ o:["Principle 2","Principle 4","Principle 6","Principle 8"],
+ a:3, diff:"medium",
+ exp:"Principle 8 states: Promote reconstruction to lives."},
+
+{t:"The principle 'Prevent casualties from occurring AFTER the initial impact of the disaster' refers to:",
+ o:["Principle 1","Principle 2","Principle 3","Principle 5"],
+ a:2, diff:"medium",
+ exp:"Principle 3 specifically addresses preventing casualties after the initial disaster impact."},
+
+{t:"Pandemic influenza is classified under which type of disaster?",
+ o:["Man-made","Technological","Natural","Industrial"],
+ a:2, diff:"medium",
+ exp:"Pandemic influenza is listed as a natural disaster in the classification provided."},
+
+{t:"Which of the following best describes a 'hazard' versus a 'disaster'?",
+ o:["Hazard and disaster are identical terms","A hazard is a potentially damaging event, while a disaster is the actual serious disruption that exceeds coping ability","A disaster is a potential threat; a hazard is the realized event","Hazards only affect individuals; disasters only affect communities"],
+ a:1, diff:"medium",
+ exp:"A hazard is a potentially damaging phenomenon, while a disaster is the actual serious disruption exceeding coping capacity."},
+
+{t:"Public and private building damage after a disaster is an effect experienced at which level?",
+ o:["Individual level only","Community level","Only public sector","Only residential areas"],
+ a:1, diff:"medium",
+ exp:"Public and private building damage is listed as a community-level effect of disasters."},
+
+{t:"The response stage differs from the preparedness stage because the response stage:",
+ o:["Occurs before any disaster threat","Takes effect as soon as a disaster is identified","Focuses only on long-term rebuilding","Only involves government officials"],
+ a:1, diff:"medium",
+ exp:"The response stage takes effect as soon as a disaster is identified, whereas preparedness occurs beforehand."},
+
+{t:"Which of the following actions best exemplifies the mitigation stage?",
+ o:["Distributing food after a flood","Conducting disaster drills","Strengthening building codes to withstand earthquakes","Treating injuries in an emergency shelter"],
+ a:2, diff:"medium",
+ exp:"Strengthening building codes reduces damage from future disasters—this is a mitigation action reducing long-term risk."},
+
+{t:"Stress-related symptoms in disaster-affected individuals can include fluctuations in which vital parameter?",
+ o:["Only temperature","Only blood pressure","Normal vital signs fluctuations including cardiac and respiratory changes","Only oxygen saturation"],
+ a:2, diff:"medium",
+ exp:"Stress-related symptoms include fluctuation in normal vital signs, irritability, asthma, cardiac problems, headache, and GI upset."},
+
+/* ── HARD (39-55) ── */
+{t:"A community health nurse is coordinating a disease surveillance program after a flood. She is also reporting new illnesses among survivors. Which combination of nursing roles is she fulfilling?",
+ o:["Community assessment and providing preventive measures","Diagnosing/reporting and assisting with outbreak investigation","Discouraging inappropriate response and community assessment","Providing preventive measures and discouraging inappropriate response"],
+ a:1, diff:"hard",
+ exp:"Reporting new illnesses is 'diagnosing and reporting'; working with surveillance is 'assisting with outbreak investigation.'"},
+
+{t:"A public health nurse notes that disaster survivors are purchasing and stockpiling unnecessary antibiotics from pharmacies, fearing an epidemic. The nurse's MOST appropriate action is to:",
+ o:["Encourage the practice to ensure supply","Provide the antibiotics from the clinic","Discourage this inappropriate response and educate the community on safe practices","Report the survivors to health authorities"],
+ a:2, diff:"hard",
+ exp:"Discouraging inappropriate response means discouraging unsafe actions such as hoarding antibiotics."},
+
+{t:"In disaster management, the principle of 'providing definitive medical care' (Principle 7) differs from 'providing first aid' (Principle 5) because:",
+ o:["They are identical","First aid is provided at the scene, while definitive care is comprehensive medical treatment at a medical facility","First aid requires a physician; definitive care requires a nurse","Definitive care is provided only after full recovery"],
+ a:1, diff:"hard",
+ exp:"First aid is immediate on-site care; definitive medical care refers to comprehensive treatment at medical facilities."},
+
+{t:"Which disaster stage sequence is CORRECT according to disaster management theory?",
+ o:["Response → Preparedness → Recovery → Mitigation","Preparedness → Response → Recovery → Mitigation → Risk Reduction → Prevention","Mitigation → Prevention → Preparedness → Response","Recovery → Preparedness → Response → Prevention"],
+ a:1, diff:"hard",
+ exp:"The correct sequence is: Preparedness → Response → Recovery → Mitigation → Risk Reduction → Prevention."},
+
+{t:"A nurse working in a post-earthquake shelter assesses water safety, food availability, and sanitation conditions for 500 displaced individuals. This nursing activity PRIMARILY represents:",
+ o:["Providing preventive measures","Assisting with outbreak investigation","Community assessment","Discouraging inappropriate response"],
+ a:2, diff:"hard",
+ exp:"Community assessment involves assessing for clean water, safe food, sanitation, and shelter—precisely what this nurse is doing."},
+
+{t:"Which distinguishes 'risk reduction' from 'mitigation' in the disaster preparedness framework?",
+ o:["They are entirely separate, unrelated stages","Risk reduction is the OUTCOME achieved AS A RESULT of successful mitigation activities","Mitigation comes AFTER risk reduction is achieved","Risk reduction refers only to financial risk"],
+ a:1, diff:"hard",
+ exp:"Risk reduction is the result/outcome achieved through mitigation—communities that mitigate effectively reduce their risk."},
+
+{t:"A disaster causes mass casualties and overwhelms the local hospital. According to disaster management principles, after rescuing victims and providing first aid, the NEXT priority should be:",
+ o:["Promote reconstruction to lives","Prevent further casualties after the initial impact","Evacuate the injured to medical facilities","Minimize number of casualties"],
+ a:2, diff:"hard",
+ exp:"Following rescue (P4) and first aid (P5), the next step is evacuating the injured to medical facilities (P6)."},
+
+{t:"The definition of disaster management emphasizes 'humanitarian aspects' of emergencies. This phrase MOST accurately means:",
+ o:["Only distributing financial aid","Focusing on the welfare, dignity, and needs of affected human populations","Military coordination only","Reconstruction of physical infrastructure only"],
+ a:1, diff:"hard",
+ exp:"Humanitarian aspects focus on the welfare and needs of affected people—food, shelter, medical care, and dignity."},
+
+{t:"A nurse correctly identifies that not all emergencies can be prevented, but some can be avoided. This statement best reflects the concept of:",
+ o:["Recovery","Mitigation","Prevention in disaster preparedness","Risk characterization"],
+ a:2, diff:"hard",
+ exp:"Prevention acknowledges that not all disasters can be prevented, but every effort should be made to avoid them (e.g., fire detectors)."},
+
+{t:"Public health nurses are described as an 'integral part' of communities in disaster preparedness because they:",
+ o:["Only provide clinical nursing care","Are involved in disaster planning, outbreak investigation, disease surveillance, shelters, and mass immunization","Replace emergency medical technicians entirely","Work exclusively in hospitals during disasters"],
+ a:1, diff:"hard",
+ exp:"PHNs are integral because they participate in disaster plans, outbreak investigation, surveillance, shelters, and mass immunization."},
+
+{t:"An emotional effect unique to individuals (not listed as a community effect) after a disaster is:",
+ o:["Depleted medical supplies","Interrupted telephone systems","Overworked public service personnel","Depression"],
+ a:3, diff:"hard",
+ exp:"Depression is listed as an emotional effect on INDIVIDUALS, while the other options are community-level effects."},
+
+{t:"The statement 'adaptation of professional nursing skills in recognizing and meeting nursing, physical, and emotional needs' specifically defines:",
+ o:["Emergency medicine","Disaster nursing","Public health nursing in general","Community health assessment"],
+ a:1, diff:"hard",
+ exp:"This is the precise definition of disaster nursing as provided in the text."},
+
+{t:"When a disaster exceeds a community's OWN coping ability, which element of the disaster definition is being referenced?",
+ o:["The sudden nature of the event","The calamitous character","The threshold that classifies an event as a disaster requiring external support","The physical losses only"],
+ a:2, diff:"hard",
+ exp:"The key threshold in disaster definition is exceeding the community's own coping resources, requiring external assistance."},
+
+{t:"Which principle of disaster management addresses preventing casualties AFTER the initial disaster impact, distinguishing it from prevention of the disaster itself?",
+ o:["Principle 1","Principle 2","Principle 3","Principle 4"],
+ a:2, diff:"hard",
+ exp:"Principle 3: Prevent casualties from occurring after the initial impact—this is secondary prevention, not preventing the disaster."},
+
+{t:"A nurse recognizes that educating people on endemic diseases and disease spread prevention serves a dual function. These dual functions are:",
+ o:["Treatment and rehabilitation","Primary and tertiary prevention only","Preventing spread of disease AND contributing to outbreak investigation","Community assessment AND discouraging inappropriate behavior"],
+ a:2, diff:"hard",
+ exp:"Educating on disease prevention directly prevents spread and contributes essential information to ongoing outbreak investigation."},
+
+{t:"In disaster nursing, diagnosing and reporting ANY illness or injury is critical because:",
+ o:["It allows nurses to prescribe controlled substances","Early identification helps prevent outbreaks, ensures proper treatment, and supports epidemiological surveillance","It satisfies legal liability requirements only","It ensures hospital billing accuracy"],
+ a:1, diff:"hard",
+ exp:"Diagnosing and reporting enables early disease detection, proper treatment, and supports the broader public health surveillance system."},
+
+{t:"A comprehensive disaster management plan must address all of the following EXCEPT:",
+ o:["Preparedness before the event","Response during the event","Recovery after the event","Guaranteeing zero casualties in all future disasters"],
+ a:3, diff:"hard",
+ exp:"No plan can guarantee zero casualties. The plan addresses preparedness, response, and recovery to minimize—not eliminate—harm."},
+
+{t:"A massive earthquake strikes a densely populated city. Buildings collapse, roads are impassable, water mains are broken, and thousands are injured. The city's hospitals are overwhelmed and unable to manage all casualties.<br><br>This event MOST clearly meets the definition of a disaster because:",
+ o:["It was unexpected","It caused physical injuries","It exceeds the community's ability to cope using its own resources","It affected multiple buildings"],
+ a:2, diff:"medium",
+ exp:"The defining characteristic of a disaster is that it exceeds the community's own coping ability—the key threshold in the definition."},
+
+{t:"(continued): The first priority of disaster management teams arriving at the scene is to:",
+ o:["Promote reconstruction of damaged buildings","Rescue the victims and provide first aid","Set up long-term mental health clinics","Restore telephone communications first"],
+ a:1, diff:"medium",
+ exp:"Principles 4 and 5: Rescue the victims, then provide first aid to the injured—these are immediate priorities."},
+
+{t:" (continued): A public health nurse at a makeshift shelter assesses water supplies, food safety, and sanitation conditions for displaced families. Which nursing role does this BEST represent?",
+ o:["Discouraging inappropriate response","Providing preventive measures","Community assessment","Assisting with outbreak investigation"],
+ a:2, diff:"easy",
+ exp:"Community assessment involves assessing for clean water, safe food, sanitation, and shelter availability."},
+
+{t:"Following a catastrophic flood, a community reports multiple cases of diarrheal illness. The public health nurse collaborates with epidemiologists to trace the source of the outbreak, collect data, and identify affected populations.<br><br>Which nursing role does this activity represent?",
+ o:["Community assessment","Providing preventive measures","Discouraging inappropriate response","Assisting with outbreak investigation"],
+ a:3, diff:"medium",
+ exp:"Assisting with outbreak investigation means helping epidemiologists investigate the source and spread of disease outbreaks."},
+
+{t:"CASE 2 (continued): The nurse begins administering vaccines and prophylactic antimicrobials to prevent further disease spread among flood survivors. This represents which nursing role?",
+ o:["Community assessment","Providing preventive measures","Diagnosing and reporting","Discouraging inappropriate response"],
+ a:1, diff:"easy",
+ exp:"Providing preventive measures includes providing appropriate vaccines, prophylactic antimicrobials, and antitoxins."},
+
+{t:" A chemical plant explosion releases toxic gases into a residential area. Hundreds are evacuated. Local emergency services, hospitals, and government agencies coordinate to provide shelter and medical care while managing ongoing chemical exposure risks.<br><br>This event is classified as which type of disaster?",
+ o:["Natural disaster","Man-made disaster","Geological disaster","Meteorological disaster"],
+ a:1, diff:"easy",
+ exp:"Explosions and chemical spills are explicitly listed as man-made disasters."},
+
+{t:" (continued): Government engineers strengthen building codes and install early-warning chemical detection systems near industrial areas to prevent future events. This action represents which disaster management stage?",
+ o:["Response","Recovery","Prevention and Mitigation","Preparedness only"],
+ a:2, diff:"hard",
+ exp:"Strengthening codes and early-warning systems represent both prevention (avoiding hazards) and mitigation (reducing impact if they occur)."},
+
+{t:"After a devastating tsunami, a community struggles to rebuild for the next three years. Government agencies reestablish water, electricity, and transportation services, while mental health professionals support survivors with depression and PTSD.<br><br>This phase of disaster management is the:",
+ o:["Preparedness stage","Response stage","Recovery stage","Mitigation stage"],
+ a:2, diff:"easy",
+ exp:"The Recovery stage involves rebuilding, reestablishing services, and supporting victims—it can take months to years."},
+
+{t:" (continued): A survivor experiences severe depression, persistent headaches, and gastrointestinal problems three months after the tsunami. These symptoms are classified as which type of disaster effect?",
+ o:["Physical effects only","Community-level effects","Stress-related and emotional effects on the individual","Resource depletion effects"],
+ a:2, diff:"medium",
+ exp:"Depression is an emotional effect; headaches and GI upset are stress-related symptoms—both are individual-level effects."},
+
+{t:"Following a terrorist attack, rumors spread that a biological agent was released. Citizens begin buying and stockpiling antibiotics from pharmacies, despite no confirmed biological threat. A public health nurse addresses the crowd.<br><br>The nurse's MOST appropriate action is to:",
+ o:["Encourage antibiotic stockpiling as a safety measure","Ignore the situation as it is not a nursing role","Discourage this inappropriate response and provide accurate information about the actual threat","Distribute antibiotics from the health center immediately"],
+ a:2, diff:"medium",
+ exp:"Discouraging inappropriate response includes discouraging unsafe actions like hoarding antibiotics and providing accurate information."},
+
+{t:" (continued): The nurse also begins educating community members about the specific infectious agent reported, transmission routes, and prevention measures. This reflects which nursing role?",
+ o:["Community assessment","Preventing spread of disease through education","Assisting with outbreak investigation","Discouraging inappropriate response"],
+ a:1, diff:"medium",
+ exp:"Preventing spread of disease involves educating people on how to prevent spread and information on endemic diseases."},
+
+{t:" A city experienced a major hurricane five years ago and lost 500 lives. City planners are now constructing reinforced storm shelters, installing flood barriers, and running community awareness campaigns about hurricane safety.<br><br>These activities PRIMARILY represent which disaster management stage(s)?",
+ o:["Response and recovery","Mitigation and prevention","Response and preparedness only","Recovery and risk reduction only"],
+ a:1, diff:"hard",
+ exp:"Building barriers (mitigation), running awareness campaigns (prevention), and shelters (preparedness/mitigation) all reduce future risk."},
+
+{t:"During a mass casualty incident, an emergency team must prioritize actions. Arrange the following in correct order of disaster management principles: (1) Provide definitive medical care (2) Rescue victims (3) Provide first aid (4) Evacuate injured to medical facilities<br><br>The correct order is:",
+ o:["1→2→3→4","2→3→4→1","3→2→4→1","4→3→2→1"],
+ a:1, diff:"hard",
+ exp:"Correct principle order: Rescue victims (P4) → Provide first aid (P5) → Evacuate to medical facilities (P6) → Provide definitive care (P7)."},
+
+{t:"A public health nurse is called to assist in a disaster shelter after a wildfire. She notices that several families are sharing limited food supplies, some children show signs of dehydration, and there are no functioning sanitation facilities.<br><br>Which community-level disaster effects are MOST evident in this scenario?",
+ o:["Building damage and overworked personnel only","Depleted resources (food), interrupted sanitation services, and inadequate shelter","Individual depression and stress-related symptoms only","Bone injuries and lacerations"],
+ a:1, diff:"medium",
+ exp:"Depleted resources and interrupted services (sanitation) are community-level effects of disasters visible in this scenario."},
+
+{t:" A hospital preparedness committee is reviewing their disaster plan. They ask the public health nurses to contribute. The nurses suggest including disease surveillance protocols, mass immunization procedures, and outbreak investigation guidelines.<br><br>This involvement of nurses reflects their role as:",
+ o:["Administrative hospital staff with no clinical duties","An integral part of developing disaster plans with specialized public health expertise","Temporary volunteers with no formal responsibilities","Only clinical bedside nurses"],
+ a:1, diff:"hard",
+ exp:"PHNs are integral to disaster planning, including disease surveillance, mass immunization, and outbreak investigation planning."},
+
+{t:"A disaster is defined as an event that always exceeds INTERNATIONAL coping resources, not just community resources.",
+ o:["True","False"], a:1, diff:"easy",
+ exp:"False—a disaster exceeds the ability of the AFFECTED COMMUNITY OR SOCIETY to cope using its OWN resources, not necessarily international resources."},
+
+{t:"Tsunamis are classified as natural disasters.",
+ o:["True","False"], a:0, diff:"easy",
+ exp:"True—tsunamis are explicitly listed as natural disasters."},
+
+{t:"Wars and terrorism are classified as natural disasters.",
+ o:["True","False"], a:1, diff:"easy",
+ exp:"False—wars and terrorism are man-made disasters."},
+
+{t:"Depression is listed as an emotional effect of disasters on individuals.",
+ o:["True","False"], a:0, diff:"easy",
+ exp:"True—depression is explicitly listed as an emotional effect on individuals."},
+
+{t:"The response stage begins before a disaster is officially identified.",
+ o:["True","False"], a:1, diff:"medium",
+ exp:"False—the response stage takes effect AS SOON AS a disaster is identified, not before."},
+
+{t:"Recovery after a major disaster can take months to years.",
+ o:["True","False"], a:0, diff:"easy",
+ exp:"True—rebuilding a community can take months to years depending on the scope of the disaster."},
+
+{t:"The mitigation stage makes communities safer and reduces loss of property and life.",
+ o:["True","False"], a:0, diff:"easy",
+ exp:"True—mitigation aims to make communities safer and reduce the loss of property and life."},
+
+{t:"All emergencies and disasters can be prevented with sufficient effort.",
+ o:["True","False"], a:1, diff:"medium",
+ exp:"False—NOT all emergencies and disasters can be prevented, but they can sometimes be avoided."},
+
+{t:"Disaster nursing is limited to physical care and does not address emotional needs.",
+ o:["True","False"], a:1, diff:"medium",
+ exp:"False—disaster nursing addresses nursing, PHYSICAL, AND EMOTIONAL needs resulting from a disaster."},
+
+{t:"Public health nurses can play an integral role in developing disaster plans.",
+ o:["True","False"], a:0, diff:"easy",
+ exp:"True—PHNs are an integral part of developing disaster plans in most communities."},
+
+{t:"Providing vaccines and prophylactic antimicrobials is part of the nurse's role in discouraging inappropriate response.",
+ o:["True","False"], a:1, diff:"medium",
+ exp:"False—providing vaccines and antimicrobials is part of 'providing PREVENTIVE MEASURES,' not discouraging inappropriate response."},
+
+{t:"Assisting epidemiologists during an outbreak investigation is a recognized nursing role in disaster management.",
+ o:["True","False"], a:0, diff:"easy",
+ exp:"True—assisting with outbreak investigation is explicitly listed as a nursing role in disaster management."},
+
+{t:"Building collapse is an example of a man-made disaster.",
+ o:["True","False"], a:0, diff:"easy",
+ exp:"True—building collapse is explicitly listed as a man-made disaster."},
+
+{t:"Pandemic influenza is classified as a man-made disaster.",
+ o:["True","False"], a:1, diff:"medium",
+ exp:"False—pandemic influenza is listed as a NATURAL disaster."},
+
+{t:"The principle 'Minimize the number of casualties' only applies when a disaster has already been prevented.",
+ o:["True","False"], a:1, diff:"hard",
+ exp:"False—this principle applies specifically when a disaster CANNOT be prevented, aiming to reduce casualties."},
+
+{t:"Risk reduction is described as an outcome achieved as a result of mitigation activities.",
+ o:["True","False"], a:0, diff:"hard",
+ exp:"True—risk reduction is achieved as a result of mitigation; the risk of damage and injury is reduced through mitigation."},
+
+{t:"Public service personnel being overworked is an individual-level effect of disasters.",
+ o:["True","False"], a:1, diff:"medium",
+ exp:"False—overworked public service personnel is a COMMUNITY-LEVEL effect of disasters."},
+
+{t:"Hoarding antibiotics during a disaster is considered an appropriate public response that nurses should support.",
+ o:["True","False"], a:1, diff:"medium",
+ exp:"False—hoarding antibiotics is an INAPPROPRIATE response that nurses should actively discourage."},
+
+{t:"Stress-related symptoms after a disaster include cardiac problems and gastrointestinal upset.",
+ o:["True","False"], a:0, diff:"easy",
+ exp:"True—stress-related symptoms include fluctuation in vital signs, irritability, asthma, cardiac problems, headache, and GI upset."},
+
+{t:"The definition of disaster management includes preparedness, response, AND recovery in order to lessen the impact of disasters.",
+ o:["True","False"], a:0, diff:"medium",
+ exp:"True—disaster management covers preparedness, response, and recovery to lessen the impact of disasters."},
+];
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function shuffleOptions(question) {
+  const correctAnswer = question.o[question.a];
+
+  question.o = shuffle([...question.o]);
+
+  question.a = question.o.indexOf(correctAnswer);
+
+  return question;
+}
+
+QUESTIONS = QUESTIONS.map(q => shuffleOptions({...q}));
+/* ============ CONFIG ============ */
+const TOTAL_MINUTES = 60;   
+
+/* ============ ENGINE ============ */
+const LETTERS = ['A','B','C','D','E','F'];
+let pool, questions, qi, correct, wrong, answered, answers, wrongSet;
+let totalTime = 60 * 60, timeLeft, timerInterval;
+let activeTopic = 'All';
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+/* ---- TOPIC FILTER ---- */
+function buildFilters() {
+  const wrap = document.getElementById('filterWrap');
+  const countEl = document.getElementById('filterCount');
+  const topics = [...new Set(QUESTIONS.map(q=>q.topic).filter(Boolean))];
+  if (!topics.length) { wrap.style.display='none'; countEl.style.display='none'; return; }
+  wrap.style.display='flex';
+  countEl.style.display='block';
+  const all = ['All', ...topics];
+  wrap.innerHTML = all.map(t=>
+    `<button class="filter-btn${t==='All'?' active':''}" onclick="setTopic('${t}')">${t}</button>`
+  ).join('');
+  updateFilterCount();
+}
+
+function setTopic(t) {
+  activeTopic = t;
+  document.querySelectorAll('.filter-btn').forEach(b=>{
+    b.classList.toggle('active', b.textContent===t);
+  });
+  updateFilterCount();
+  init(getPool());
+}
+
+function getPool() {
+  return activeTopic==='All' ? QUESTIONS : QUESTIONS.filter(q=>q.topic===activeTopic);
+}
+
+function updateFilterCount() {
+  const p = getPool();
+  document.getElementById('filterCount').textContent =
+    `Showing ${p.length} question${p.length!==1?'s':''} · Topic: ${activeTopic}`;
+}
+
+/* ---- INIT ---- */
+function init(p) {
+  pool = p;
+  if (!pool.length) {
+    document.getElementById('app').innerHTML=`
+      <div class="empty-state">
+        <div class="ei">📭</div>
+        <h3>No Questions Yet</h3>
+        <p>Add questions to the QUESTIONS array in the script section.</p>
+      </div>`;
+    document.getElementById('totalBadge').textContent='0 Questions';
+    document.getElementById('sRemain').textContent='—';
+    clearInterval(timerInterval);
+    return;
+  }
+  questions = shuffle(pool);
+  qi=0; correct=0; wrong=0; answered=0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = [];
+  timeLeft = totalTime;
+  document.getElementById('totalBadge').textContent = questions.length+' Questions';
+  document.getElementById('timeBadge').textContent  = TOTAL_MINUTES+' Min';
+  startTimer(); render();
+}
+
+/* ---- TIMER ---- */
+function startTimer() {
+  clearInterval(timerInterval);
+  timerInterval = setInterval(()=>{
+    timeLeft--;
+    const m=Math.floor(timeLeft/60), s=timeLeft%60;
+    document.getElementById('timerTxt').textContent=`${m}:${s<10?'0':''}${s}`;
+    const b=document.getElementById('timerBadge');
+    if (timeLeft<=120)      b.className='timer-badge danger';
+    else if (timeLeft<=300) b.className='timer-badge warn';
+    else                    b.className='timer-badge';
+    if (timeLeft<=0) { clearInterval(timerInterval); finish(); }
+  },1000);
+}
+
+/* ---- TOP BAR ---- */
+function updateTop() {
+  const total=questions.length;
+  document.getElementById('sCorrect').textContent=correct;
+  document.getElementById('sWrong').textContent=wrong;
+  document.getElementById('sRemain').textContent=Math.round(((total-answered)/total)*100)+'%';
+  document.getElementById('progLabel').textContent='Q '+(qi+1)+' / '+total;
+  document.getElementById('progFill').style.width=((qi+1)/total*100)+'%';
+  document.getElementById('prog-bar').style.width=((qi+1)/total*100)+'%';
+}
+
+/* ---- RENDER ---- */
+function render() {
+  updateTop();
+  const q=questions[qi];
+  const opts = q.o.map((o,idx)=>`
+    <div class="opt" id="opt${idx}" onclick="choose(${idx})">
+      <div class="opt-letter">${LETTERS[idx]}</div>${o}
+    </div>`).join('');
+  document.getElementById('app').innerHTML=`
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Question ${qi+1} / ${questions.length}</div>
+        ${q.topic?`<div class="q-topic">${q.topic}</div>`:''}
+      </div>
+      <div class="q-text">${q.t}</div>
+      <div class="options">${opts}</div>
+      <div class="nav-btns">
+        <button class="btn btn-skip" onclick="skip()"><i class="fa-solid fa-forward"></i> Skip</button>
+      </div>
+    </div>`;
+}
+
+/* ---- CHOOSE ---- */
+function choose(v) {
+  if (answers[qi]!==null) return;
+  answers[qi]=v; answered++;
+  const q=questions[qi], ok=v===q.a;
+  ok?correct++:wrong++;
+  updateTop();
+  q.o.forEach((_,idx)=>{
+    const el=document.getElementById('opt'+idx);
+    el.classList.add('disabled');
+    if (idx===q.a) el.classList.add('correct');
+    else if (idx===v) el.classList.add('wrong');
+  });
+  const fb=document.createElement('div');
+  fb.className='feedback-bar '+(ok?'ok':'no');
+  fb.innerHTML=ok
+    ?`<span style="font-size:17px">🎉</span><span>ِما شاء الله عليك</span>`
+    :`<span style="font-size:17px">😔</span><span>ركز يا شطور</span>`;
+  const card=document.querySelector('.q-card');
+  card.querySelector('.options').after(fb);
+  if (q.exp) {
+    const exp=document.createElement('div');
+    exp.className='explanation';
+    exp.innerHTML='<b>💬 Explanation:</b> '+q.exp;
+    fb.after(exp);
+  }
+  card.querySelector('.nav-btns').innerHTML=`
+    <button class="btn btn-next" onclick="next()">
+      ${qi<questions.length-1
+        ?'<i class="fa-solid fa-arrow-right"></i> Next Question'
+        :'<i class="fa-solid fa-flag-checkered"></i> Finish Exam'}
+    </button>`;
+}
+
+/* ---- SKIP / NEXT ---- */
+function skip() {
+  if (answers[qi]===null) { answers[qi]=-1; answered++; wrong++; wrongSet.push(questions[qi]); updateTop(); }
+  next();
+}
+function next() {
+  if (qi<questions.length-1) { qi++; render(); window.scrollTo({top:0,behavior:'smooth'}); }
+  else finish();
+}
+
+/* ---- FINISH ---- */
+function finish() {
+  clearInterval(timerInterval);
+  const total=questions.length;
+  const score=Math.round((correct/total)*100);
+  questions.forEach((q,idx)=>{ if(answers[idx]!==q.a) wrongSet.push({...q,myAns:answers[idx]}); });
+  wrongSet=[...new Map(wrongSet.map(q=>[q.t,q])).values()];
+  let grade,gc;
+  if(score>=90)      { grade='🥇 Excellent';    gc='var(--ok)'; }
+  else if(score>=75) { grade='🥈 Very Good';     gc='var(--a1)'; }
+  else if(score>=60) { grade='🥉 Good';          gc='var(--warn)'; }
+  else               { grade='📚 Needs Review';  gc='var(--err)'; }
+  const circ=2*Math.PI*45, offset=circ-(score/100)*circ;
+  const report=questions.map((q,idx)=>{
+    const ok=answers[idx]===q.a;
+    return `<div class="report-item ${ok?'ok':'no'}">
+      <div class="ri-q">${ok?'✅':'❌'} ${q.t}</div>
+      ${!ok?`
+        <div class="ri-row"><span class="ri-badge ri-yours">Your Answer</span>${answers[idx]>=0?q.o[answers[idx]]:'Skipped'}</div>
+        <div class="ri-row"><span class="ri-badge ri-right">Correct</span>${q.o[q.a]}</div>
+      `:''}
+    </div>`;
+  }).join('');
+  document.getElementById('prog-bar').style.width='100%';
+  document.getElementById('app').innerHTML=`
+    <div class="result-hero">
+      <div class="score-ring">
+        <svg viewBox="0 0 110 110">
+          <circle class="ring-bg" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="0"/>
+          <circle class="ring-fill" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="${circ}"
+            style="stroke:${gc}" id="ringFill"/>
+        </svg>
+        <div class="score-num">${score}</div>
+        <div class="score-pct">%</div>
+      </div>
+      <div class="result-grade" style="color:${gc}">${grade}</div>
+      <div class="result-sub">Answered ${answered} of ${total} questions</div>
+      <div class="result-stats">
+        <div class="rs"><div class="n" style="color:var(--ok)">${correct}</div><div class="l">Correct</div></div>
+        <div class="rs"><div class="n" style="color:var(--err)">${wrong}</div><div class="l">Wrong</div></div>
+        <div class="rs"><div class="n" style="color:var(--a1)">${total-answered<0?0:total-answered}</div><div class="l">Skipped</div></div>
+      </div>
+    </div>
+    <div class="result-actions">
+      ${wrongSet.length?`<button class="btn btn-retry" onclick="retryWrong()"><i class="fa-solid fa-rotate-right"></i> Retry Wrong (${wrongSet.length})
+
+</button>`:''}
+      <button class="btn btn-home" onclick="init(getPool())"><i class="fa-solid fa-shuffle"></i> New Random Exam</button>
+      <a href="https://gaith-team.github.io/exam/" class="btn btn-home" style="text-decoration:none"><i class="fa-solid fa-house"></i> Back to Subject</a>
+    </div>
+    <div style="margin-top:22px">
+      <div style="font-size:14px;font-weight:700;margin-bottom:9px;color:var(--text2)">📋 Detailed Report</div>
+      ${report}
+    </div>`;
+  setTimeout(()=>{ document.getElementById('ringFill').style.strokeDashoffset=offset; },100);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ---- RETRY WRONG ---- */
+function retryWrong() {
+  const p=[...wrongSet];
+  questions=shuffle(p); qi=0; correct=0; wrong=0;
+  answers=new Array(questions.length).fill(null);
+  wrongSet=[]; answered=0; timeLeft=totalTime;
+  startTimer(); render();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ---- THEME ---- */
+const themeBtn=document.getElementById('themeBtn');
+let theme=localStorage.getItem('gt-theme')||'light';
+function applyTheme(t) {
+  theme=t;
+  document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'');
+  themeBtn.textContent=t==='dark'?'☀️':'🌙';
+  localStorage.setItem('gt-theme',t);
+}
+applyTheme(theme);
+themeBtn.addEventListener('click',()=>applyTheme(theme==='dark'?'light':'dark'));
+
+/* ---- START ---- */
+buildFilters();
+init(getPool());
+</script>
+</body>
+</html>
