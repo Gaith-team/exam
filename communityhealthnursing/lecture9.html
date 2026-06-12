@@ -1,0 +1,1102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --a1: #0f766e;
+  --a2: #14b8a6;
+  --a3: #99f6e4;
+  --a2l: #ccfbf1;
+  --ag: rgba(20,184,166,0.13);
+  --ags: rgba(20,184,166,0.26);
+  --bg:    #f0fdfa;
+  --bg2:   #ccfbf1;
+  --card:  #ffffff;
+  --text:  #134e4a;
+  --text2: #0f766e;
+  --text3: #5eead4;
+  --bdc:   rgba(20,184,166,0.20);
+  --bdcard:rgba(15,118,110,0.12);
+  --sh:    0 4px 18px rgba(15,118,110,0.09);
+  --shh:   0 8px 30px rgba(20,184,166,0.22);
+  --ok:    #15803d;
+  --err:   #b91c1c;
+  --warn:  #b45309;
+  --rad:   16px;
+  --tr:    all 0.28s cubic-bezier(.4,0,.2,1);
+}
+[data-theme="dark"] {
+  --bg:    #022c22; --bg2:   #064e3b; --card:  #065f46;
+  --text:  #d1fae5; --text2: #6ee7b7; --text3: #34d399;
+  --bdc:   rgba(52,211,153,0.22);
+  --bdcard:rgba(52,211,153,0.12);
+  --sh:    0 4px 20px rgba(0,0,0,0.45);
+  --shh:   0 8px 36px rgba(20,184,166,0.28);
+  --a1: #10b981; --a2: #34d399; --a2l: #064e3b; --a3: #6ee7b7;
+}
+
+body {
+  font-family:'Outfit',sans-serif;
+  background:var(--bg); color:var(--text);
+  min-height:100vh; overflow-x:hidden;
+  transition:background .4s,color .4s;
+}
+
+#prog-bar {
+  position:fixed;top:0;left:0;height:3px;z-index:999;
+  background:linear-gradient(90deg,var(--a1),var(--a2),var(--a3));
+  width:0%;transition:width .15s;
+}
+
+/* NAV */
+nav {
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:0 26px;height:62px;
+  background:rgba(240,253,250,.94);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--bdcard);transition:var(--tr);
+}
+[data-theme="dark"] nav { background:rgba(2,44,34,.96); }
+
+.nav-back {
+  display:flex;align-items:center;gap:6px;
+  color:var(--text2);text-decoration:none;font-size:13px;font-weight:700;
+  padding:6px 13px;border-radius:9px;
+  border:1px solid var(--bdcard);background:var(--card);
+  transition:var(--tr);
+}
+.nav-back:hover { color:var(--a2);border-color:var(--bdc); }
+
+.nav-brand { display:flex;align-items:center;gap:8px;font-size:15px;font-weight:900;color:var(--text); }
+.nav-logo {
+  width:34px;height:34px;border-radius:9px;
+  background:linear-gradient(135deg,var(--a1),var(--a2));
+  display:flex;align-items:center;justify-content:center;
+  color:#fff;font-size:12px;font-weight:900;
+}
+.theme-btn {
+  width:37px;height:37px;border-radius:50%;
+  border:1px solid var(--bdcard);background:var(--card);
+  cursor:pointer;font-size:15px;
+  display:flex;align-items:center;justify-content:center;transition:var(--tr);
+}
+.theme-btn:hover { border-color:var(--a2);transform:rotate(22deg); }
+
+/* HERO */
+.hero {
+  margin-top:62px;
+  background:linear-gradient(135deg,var(--a1) 0%,var(--a2) 60%,#2dd4bf 100%);
+  padding:34px 22px 30px;text-align:center;position:relative;overflow:hidden;
+}
+.hero::before {
+  content:'';position:absolute;inset:0;
+  background:radial-gradient(ellipse 500px 180px at 50% 110%,rgba(255,255,255,.13) 0%,transparent 70%);
+}
+.hero-icon {
+  width:62px;height:62px;border-radius:18px;
+  background:rgba(255,255,255,.2);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;
+  font-size:26px;margin:0 auto 11px;
+  border:1.5px solid rgba(255,255,255,.35);
+}
+.hero h1 { font-size:clamp(17px,3.5vw,25px);font-weight:900;color:#fff;margin-bottom:4px; }
+.hero p  { font-size:13px;color:rgba(255,255,255,.82); }
+.hero-meta { display:flex;justify-content:center;gap:12px;margin-top:14px;flex-wrap:wrap; }
+.meta-pill {
+  background:rgba(255,255,255,.18);backdrop-filter:blur(5px);
+  border:1px solid rgba(255,255,255,.3);border-radius:50px;
+  padding:5px 13px;font-size:12px;font-weight:700;color:#fff;
+  display:flex;align-items:center;gap:5px;
+}
+
+/* TOPIC FILTER */
+.filter-wrap {
+  padding:14px 16px 2px;
+  display:flex;flex-wrap:wrap;gap:7px;
+  background:var(--card);border-bottom:1px solid var(--bdcard);
+}
+.filter-btn {
+  padding:5px 13px;border-radius:50px;
+  border:1.5px solid var(--bdcard);background:var(--bg);
+  font-family:'Outfit',sans-serif;font-size:12px;font-weight:700;
+  color:var(--text2);cursor:pointer;transition:var(--tr);
+}
+.filter-btn:hover,
+.filter-btn.active {
+  background:var(--a2);color:#fff;border-color:var(--a2);
+  box-shadow:0 2px 10px var(--ag);
+}
+.filter-count {
+  padding:14px 16px 14px;
+  font-size:12px;color:var(--text2);font-weight:600;
+  background:var(--card);border-bottom:1px solid var(--bdcard);
+}
+
+/* SHELL */
+.shell { max-width:560px;margin:0 auto;padding:18px 16px 80px; }
+
+/* STATS */
+.stats-row { display:grid;grid-template-columns:1fr 1fr 1fr;gap:9px;margin-bottom:13px; }
+.stat-box {
+  background:var(--card);border:1px solid var(--bdcard);
+  border-radius:var(--rad);padding:11px 7px;text-align:center;
+}
+.stat-box .val { font-size:20px;font-weight:900; }
+.stat-box .lbl { font-size:11px;color:var(--text3);margin-top:2px; }
+.c-ok   { color:var(--ok); }
+.c-err  { color:var(--err); }
+.c-acc  { color:var(--a1); }
+
+/* PROG STRIP */
+.prog-strip {
+  background:var(--card);border:1px solid var(--bdcard);
+  border-radius:var(--rad);padding:12px 15px;margin-bottom:15px;
+  display:flex;align-items:center;gap:11px;
+}
+.prog-label { font-size:13px;font-weight:700;color:var(--text2);white-space:nowrap; }
+.prog-track { flex:1;height:7px;background:var(--bg2);border-radius:7px;overflow:hidden; }
+.prog-fill {
+  height:100%;width:0%;
+  background:linear-gradient(90deg,var(--a1),var(--a2));
+  border-radius:7px;transition:width .4s;
+}
+.timer-badge {
+  min-width:60px;height:33px;border-radius:17px;
+  background:var(--bg2);border:1px solid var(--bdcard);
+  display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:900;color:var(--text);
+  gap:4px;padding:0 10px;flex-shrink:0;
+}
+.timer-badge.warn   { color:var(--warn);  border-color:rgba(180,83,9,.3);  background:rgba(180,83,9,.08); }
+.timer-badge.danger { color:var(--err);   border-color:rgba(185,28,28,.3); background:rgba(185,28,28,.08);animation:blink .8s infinite; }
+@keyframes blink { 0%,100%{opacity:1}50%{opacity:.45} }
+
+/* Q CARD */
+.q-card {
+  background:var(--card);border:1px solid var(--bdcard);
+  border-radius:20px;overflow:hidden;box-shadow:var(--sh);
+}
+.q-header {
+  background:linear-gradient(135deg,var(--a1),var(--a2));
+  padding:9px 17px;display:flex;align-items:center;gap:8px;
+}
+.q-num {
+  background:rgba(255,255,255,.22);border-radius:7px;
+  padding:3px 10px;font-size:11px;font-weight:700;color:#fff;
+}
+.q-topic {
+  margin-left:auto;background:rgba(255,255,255,.18);border-radius:50px;
+  padding:2px 10px;font-size:11px;font-weight:700;color:#fff;
+  border:1px solid rgba(255,255,255,.25);
+}
+.q-text {
+  padding:19px 17px 13px;font-size:15px;font-weight:700;color:var(--text);
+  line-height:1.65;border-bottom:1px solid var(--bdcard);
+}
+.options { padding:13px 17px 17px;display:flex;flex-direction:column;gap:9px; }
+
+.opt {
+  display:flex;align-items:center;gap:11px;
+  padding:12px 14px;border-radius:11px;
+  border:1.5px solid var(--bdcard);background:var(--bg);
+  cursor:pointer;font-size:14px;font-weight:600;color:var(--text);
+  transition:var(--tr);user-select:none;
+}
+.opt:hover:not(.disabled) {
+  border-color:var(--a2);background:var(--ag);
+  transform:translateX(3px);
+}
+.opt-letter {
+  width:28px;height:28px;border-radius:8px;flex-shrink:0;
+  background:var(--bg2);border:1px solid var(--bdcard);
+  display:flex;align-items:center;justify-content:center;
+  font-size:12px;font-weight:900;color:var(--text2);
+  transition:var(--tr);
+}
+.opt.correct { border-color:var(--ok);background:rgba(21,128,61,.08); }
+.opt.correct .opt-letter { background:var(--ok);color:#fff;border-color:var(--ok); }
+.opt.wrong   { border-color:var(--err);background:rgba(185,28,28,.07); }
+.opt.wrong   .opt-letter { background:var(--err);color:#fff;border-color:var(--err); }
+.opt.disabled { pointer-events:none; }
+
+/* FEEDBACK */
+.feedback-bar {
+  margin:11px 17px;padding:11px 14px;border-radius:11px;
+  display:flex;align-items:center;gap:9px;
+  font-size:14px;font-weight:700;
+  animation:popIn .38s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes popIn { from{transform:scale(.8);opacity:0}to{transform:scale(1);opacity:1} }
+.feedback-bar.ok { background:rgba(21,128,61,.1);color:var(--ok);border:1px solid rgba(21,128,61,.25); }
+.feedback-bar.no { background:rgba(185,28,28,.08);color:var(--err);border:1px solid rgba(185,28,28,.2); }
+
+.explanation {
+  margin:0 17px 11px;padding:10px 13px;
+  background:rgba(20,184,166,.07);border-radius:9px;
+  border-left:3px solid var(--a2);
+  font-size:13px;color:var(--text2);line-height:1.6;
+}
+
+/* BUTTONS */
+.nav-btns { padding:4px 17px 17px;display:flex;gap:9px; }
+.btn {
+  flex:1;padding:12px;border:none;border-radius:11px;
+  font-size:14px;font-weight:900;cursor:pointer;
+  font-family:'Outfit',sans-serif;transition:var(--tr);
+  display:flex;align-items:center;justify-content:center;gap:7px;
+}
+.btn-next {
+  background:linear-gradient(135deg,var(--a1),var(--a2));
+  color:#fff;box-shadow:0 4px 14px var(--ag);
+}
+.btn-next:hover { transform:translateY(-2px);box-shadow:0 6px 20px var(--ags); }
+.btn-skip {
+  background:var(--bg2);color:var(--text2);
+  border:1px solid var(--bdcard);flex:0 0 auto;padding:12px 15px;
+}
+.btn-skip:hover { border-color:var(--warn);color:var(--warn); }
+
+/* RESULTS */
+.result-hero {
+  text-align:center;padding:30px 18px 22px;
+  background:var(--card);border-radius:20px;
+  border:1px solid var(--bdcard);margin-bottom:17px;
+}
+.score-ring {
+  width:108px;height:108px;border-radius:50%;margin:0 auto 15px;
+  display:flex;align-items:center;justify-content:center;
+  flex-direction:column;position:relative;
+}
+.score-ring svg { position:absolute;inset:-5px;width:calc(100% + 10px);height:calc(100% + 10px);transform:rotate(-90deg); }
+.score-ring circle { fill:none;stroke-width:5;stroke-linecap:round; }
+.ring-bg   { stroke:var(--bg2); }
+.ring-fill { stroke:var(--a2);transition:stroke-dashoffset 1s ease; }
+.score-num { font-size:28px;font-weight:900;color:var(--text); }
+.score-pct { font-size:12px;color:var(--text3); }
+.result-grade { font-size:20px;font-weight:900;margin-bottom:4px; }
+.result-sub   { font-size:13px;color:var(--text2); }
+.result-stats { display:grid;grid-template-columns:repeat(3,1fr);gap:9px;margin-top:17px; }
+.rs { background:var(--bg2);border-radius:10px;padding:10px 7px;text-align:center; }
+.rs .n { font-size:20px;font-weight:900; }
+.rs .l { font-size:11px;color:var(--text3); }
+
+/* REPORT */
+.report-item {
+  background:var(--card);border:1px solid var(--bdcard);
+  border-radius:12px;padding:14px;margin-bottom:8px;
+  border-left:4px solid var(--bdcard);
+}
+.report-item.ok { border-left-color:var(--ok); }
+.report-item.no { border-left-color:var(--err); }
+.report-item .ri-q { font-size:13px;font-weight:700;margin-bottom:6px; }
+.report-item .ri-row { display:flex;align-items:center;gap:7px;font-size:12px;margin-top:4px;color:var(--text2); }
+.ri-badge { padding:2px 8px;border-radius:6px;font-weight:700;font-size:11px;flex-shrink:0; }
+.ri-yours { background:rgba(185,28,28,.1);color:var(--err); }
+.ri-right { background:rgba(21,128,61,.1);color:var(--ok); }
+
+.result-actions { display:flex;flex-direction:column;gap:9px;margin-top:17px; }
+.btn-retry { background:linear-gradient(135deg,var(--a1),var(--a2));color:#fff; }
+.btn-retry:hover { transform:translateY(-2px);box-shadow:0 6px 20px var(--ags); }
+.btn-home  { background:var(--bg2);color:var(--text);border:1px solid var(--bdcard); }
+.btn-home:hover { border-color:var(--a2);color:var(--a1); }
+
+/* FOOTER */
+footer {
+  background:var(--bg2);border-top:1px solid var(--bdcard);
+  padding:20px 22px;
+  display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:9px;
+}
+.footer-brand { font-size:14px;font-weight:700; }
+.footer-brand span { color:var(--a1); }
+.footer-tg {
+  display:flex;align-items:center;gap:5px;
+  text-decoration:none;color:#229ED9;font-size:12px;font-weight:600;
+}
+
+/* EMPTY STATE */
+.empty-state {
+  text-align:center;padding:50px 20px;
+  background:var(--card);border-radius:20px;border:1px solid var(--bdcard);
+}
+.empty-state .ei { font-size:40px;margin-bottom:12px; }
+.empty-state h3 { font-size:17px;font-weight:700;margin-bottom:7px; }
+.empty-state p { font-size:13px;color:var(--text2); }
+
+@media (max-width:480px) {
+  nav { padding:0 13px; }
+  .shell { padding:13px 11px 60px; }
+  .nav-brand span { display:none; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog-bar"></div>
+
+<nav>
+  <a href="https://gaith-team.github.io/exam/" class="nav-back"><i class="fa-solid fa-arrow-left"></i> Back</a>
+  <div class="nav-brand">
+    <div class="nav-logo">GT</div>
+    <span>GHAITH TEAM</span>
+  </div>
+  <div style="display:flex;align-items:center;gap:8px;">
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<div class="hero">
+  <div class="hero-icon">🌿</div>
+  <h1>Occupational health</h1>
+  <p>Community Health Nursing</p>
+  <div class="hero-meta">
+    <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">-- Questions</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-clock"></i> <span id="timeBadge">60 Min</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-shuffle"></i> Shuffled</div>
+  </div>
+</div>
+
+<!-- Topic filter bar (shown only if topics exist) -->
+<div id="filterWrap" class="filter-wrap" style="display:none;"></div>
+<div id="filterCount" class="filter-count" style="display:none;"></div>
+
+<div class="shell">
+  <div class="stats-row">
+    <div class="stat-box"><div class="val c-ok"  id="sCorrect">0</div><div class="lbl">✔ Correct</div></div>
+    <div class="stat-box"><div class="val c-err"  id="sWrong">0</div><div class="lbl">✖ Wrong</div></div>
+    <div class="stat-box"><div class="val c-acc"  id="sRemain">100%</div><div class="lbl">⏳ Remaining</div></div>
+  </div>
+
+  <div class="prog-strip">
+    <div class="prog-label" id="progLabel">Q 1</div>
+    <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+    <div class="timer-badge" id="timerBadge"><i class="fa-regular fa-clock"></i><span id="timerTxt">60:00</span></div>
+  </div>
+
+  <div id="app"></div>
+</div>
+
+<footer>
+  <div class="footer-brand">GAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg">
+    <i class="fa-brands fa-telegram"></i> @nursing2bu
+  </a>
+</footer>
+
+<script>
+let QUESTIONS = [
+/* ── EASY (1-16) ── */
+{t:"Occupational health nursing is defined as a specialty practice that focuses on:",
+ o:["Only treating workplace injuries","Promotion, prevention, and restoration of health within a safe and healthy work environment","Hospital-based surgical nursing","Pharmaceutical research in industries"],
+ a:1,diff:"easy",
+ exp:"Occupational health nursing focuses on promotion, prevention, and restoration of health within the context of a safe and healthy environment."},
+
+{t:"Which of the following is a category of work-related biological hazard?",
+ o:["Radiation","Slippery floors","Bacteria, viruses, fungi, and parasites","Extreme temperatures"],
+ a:2,diff:"easy",
+ exp:"Biological hazards include bacteria, viruses, fungi, or parasites transmitted via contact with infected clients or contaminated body fluids."},
+
+{t:"Chemical hazards in the workplace include all of the following EXCEPT:",
+ o:["Medications and solutions","Gases, vapors, and aerosols","Bacteria and fungi","Particulate matter"],
+ a:2,diff:"easy",
+ exp:"Bacteria and fungi are biological hazards, not chemical hazards. Chemical hazards include medications, solutions, gases, vapors, aerosols, and particulate matter."},
+
+{t:"Environmental/mechanical hazards include:",
+ o:["Noise and radiation","Viruses and bacteria","Unsafe equipment, slippery floors, and workstation deficiencies","Stress and interpersonal problems"],
+ a:2,diff:"easy",
+ exp:"Environmental/mechanical hazards include unsafe/inadequate equipment, slippery floors, lifting devices, and workstation deficiencies."},
+
+{t:"Physical hazards in the work environment include:",
+ o:["Bacteria and parasites","Radiation, electricity, extreme temperatures, and noise","Chemical vapors and gases","Stress and emotional strain"],
+ a:1,diff:"easy",
+ exp:"Physical hazards include agents such as radiation, electricity, extreme temperatures, and noise that can cause tissue trauma."},
+
+{t:"Psychosocial hazards are factors that create or potentiate:",
+ o:["Physical injuries","Radiation exposure","Stress, emotional strain, and/or interpersonal problems","Chemical burns"],
+ a:2,diff:"easy",
+ exp:"Psychosocial hazards are factors and situations associated with one's job or work environment that create or potentiate stress, emotional strain, and/or interpersonal problems."},
+
+{t:"Which of the following is listed as a type of industry?",
+ o:["Agriculture","Space exploration","Deep sea fishing","Archaeology"],
+ a:0,diff:"easy",
+ exp:"Agriculture is listed as one of the eight types of industries. Space exploration, deep sea fishing, and archaeology are not listed."},
+
+{t:"The most common occupational skin disease is:",
+ o:["Allergic contact dermatitis","Irritant contact dermatitis","Psoriasis","Eczema"],
+ a:1,diff:"easy",
+ exp:"Irritant contact dermatitis is the most common occupational skin disease, usually resulting from toxic reactions to chemical irritants such as solvents and cutting fluids."},
+
+{t:"Occupational hearing loss is described as:",
+ o:["Reversible with treatment","The most common occupational disease and the second most commonly self-reported occupational illness","Easily detectable through pain","A rare occupational illness"],
+ a:1,diff:"easy",
+ exp:"Noise-induced occupational hearing loss is the most common occupational disease and the second most commonly self-reported occupational illness. Once acquired, it is irreversible."},
+
+{t:"Occupational transmission of blood-borne pathogens (including HIV and hepatitis B and C) occurs primarily by:",
+ o:["Airborne droplets","Needle-stick injuries","Skin contact only","Ingestion of contaminated food"],
+ a:1,diff:"easy",
+ exp:"Occupational transmission of blood-borne pathogens occurs primarily by means of needle-stick injuries."},
+
+{t:"Low back pain is associated with occupational factors including all of the following EXCEPT:",
+ o:["Heavy physical work","Frequent bending and twisting","Repetitive work and vibration","Working in a climate-controlled office with ergonomic chair"],
+ a:3,diff:"easy",
+ exp:"Low back pain factors include heavy work, static postures, bending, twisting, lifting, pushing, pulling, repetitive work, and vibration—not ergonomic office settings."},
+
+{t:"Which four industries have occupational injury fatality rates notably higher than all other industries?",
+ o:["Finance, retail, manufacturing, and construction","Mining, construction, transportation, and agriculture","Healthcare, education, public administration, and mining","Agriculture, finance, healthcare, and transportation"],
+ a:1,diff:"easy",
+ exp:"The four industries with notably higher fatality rates are mining, construction, transportation, and agriculture."},
+
+{t:"Personal protective equipment (PPE) is described as:",
+ o:["The first line of defense against workplace hazards","A method of providing employee safety used as a last line of defense when engineering or administrative controls are not yet effective","Optional and rarely necessary","Only for healthcare workers"],
+ a:1,diff:"easy",
+ exp:"PPE must be issued as a LAST LINE OF DEFENSE to prevent injury when engineering or administrative controls are not yet effective."},
+
+{t:"Which AAOHN standard addresses the analysis of assessment data to formulate diagnoses?",
+ o:["Standard I – Assessment","Standard II – Diagnosis","Standard III – Outcome Identification","Standard IV – Planning"],
+ a:1,diff:"easy",
+ exp:"Standard II – Diagnosis: The occupational and environmental health nurse analyzes assessment data to formulate diagnoses."},
+
+{t:"Rotating shift work, particularly involving night work, leads to which type of disruption?",
+ o:["Only financial disruption","Only physical disruption","Biological, psychosocial, and individual disruptions","Only family relationship disruption"],
+ a:2,diff:"easy",
+ exp:"Rotating shift work leads to biological (circadian dysrhythmia, cardiovascular, GI disorders), psychosocial (fatigue, sleep loss), and individual disruptions."},
+
+{t:"Fertility and pregnancy abnormalities caused by occupational exposure include all of the following EXCEPT:",
+ o:["Birth defects","Spontaneous abortion","Improved reproductive outcomes","Menstrual disorders"],
+ a:2,diff:"easy",
+ exp:"Occupational exposures cause birth defects, developmental disorders, spontaneous abortion, low birth weight, preterm birth, reduced fertility, and menstrual disorders—NOT improved outcomes."},
+
+/* ── MEDIUM (17-38) ── */
+{t:"Primary prevention in the occupational health setting includes which of the following nursing actions?",
+ o:["Pre-employment screening","Treatment of existing conditions","Emergency response","Health education, good nutrition, immunization, and safety education"],
+ a:3,diff:"medium",
+ exp:"Primary prevention includes health promotion (education, nutrition, exercise, prenatal care), illness prevention (immunization, risk factor modification), and injury prevention (safety education, safety devices)."},
+
+{t:"Secondary prevention in the occupational health setting includes:",
+ o:["Health education and stress management","Pre-employment screening, periodic screening, environmental screening, and emergency response","Teaching safe body mechanics","Immunization campaigns"],
+ a:1,diff:"medium",
+ exp:"Secondary prevention includes pre-employment screening, periodic screening of at-risk employees, environmental screening, treatment of existing conditions, and emergency response."},
+
+{t:"Tertiary prevention in the occupational health setting includes:",
+ o:["Immunization of workers before exposure","Pre-employment physical examinations","Preventing spread of communicable disease and preventing recurrence/complications of acute and chronic conditions","Safety education programs"],
+ a:2,diff:"medium",
+ exp:"Tertiary prevention includes preventing spread of communicable disease (immunization, sick leave), preventing recurrence of acute conditions, and preventing complications of chronic conditions."},
+
+{t:"Musculoskeletal disorders of the upper extremities most commonly affect workers in:",
+ o:["Only mining and construction","Industries with substantial repetitive, forceful work (food processors, assemblers, office data entry workers)","Only agriculture","Only transportation"],
+ a:1,diff:"medium",
+ exp:"Highest rates occur in industries with substantial repetitive, forceful work, including food processors, automobile/electronic assemblers, carpenters, and office data entry workers."},
+
+{t:"The occupational health nurse acting as a Clinician/Practitioner performs all of the following EXCEPT:",
+ o:["Assessing the work environment for hazards","Performing physical examinations","Setting national health policy","Providing direct nursing care for occupational and non-occupational injuries"],
+ a:2,diff:"medium",
+ exp:"Setting national health policy is not a clinician/practitioner role. The clinician assesses, examines, treats, and maintains health records."},
+
+{t:"The Administrator role in occupational health nursing includes which four functions?",
+ o:["Assessment, diagnosis, planning, evaluation","Planning, organizing, coordinating, and controlling","Research, publication, consultation, and collaboration","Screening, treatment, referral, and documentation"],
+ a:1,diff:"medium",
+ exp:"The Administrator role includes planning, organizing, coordinating, and controlling—the four management functions."},
+
+{t:"In the AAOHN standards, Standard VII – Resource Management refers to:",
+ o:["Analyzing assessment data","Systematic evaluation of interventions","Securing and managing resources that support an occupational health and safety program","Collaborating with community representatives"],
+ a:2,diff:"medium",
+ exp:"Standard VII – Resource Management: The nurse secures and manages resources that support an occupational health and safety program."},
+
+{t:"Standard IX – Collaboration in the AAOHN standards involves:",
+ o:["Using research findings in practice","Assuming responsibility for professional development","Collaborating with employees, other health care providers, professionals, and community representatives","Setting outcomes specific to the client"],
+ a:2,diff:"medium",
+ exp:"Standard IX – Collaboration: The nurse collaborates with employees, other healthcare providers, professionals, and community representatives."},
+
+{t:"Standard X – Research in the AAOHN standards requires the nurse to:",
+ o:["Only read research without applying it","Use research findings in practice and contribute to the scientific base of occupational health nursing","Only conduct laboratory tests","Set administrative policies"],
+ a:1,diff:"medium",
+ exp:"Standard X: The nurse uses research findings in practice AND contributes to the scientific base to improve practice and advance the profession."},
+
+{t:"The occupational health nurse's role as a Researcher includes all of the following EXCEPT:",
+ o:["Participating in development and implementation of research","Disseminating research findings through presentations and publications","Incorporating research results into practice","Prescribing medications to workers"],
+ a:3,diff:"medium",
+ exp:"Prescribing medications is a clinical/medical role. The Researcher role involves participating in research, disseminating findings, incorporating results, and collaborating on research."},
+
+{t:"The Consultant role of the occupational health nurse includes:",
+ o:["Performing surgery on injured workers","Offering advice to patients regarding future treatment and preventive measures, and advising management about worker health","Setting company financial policies","Operating industrial machinery"],
+ a:1,diff:"medium",
+ exp:"The Consultant offers advice to patients about future treatment/prevention and to management about how work processes/substances may affect worker health."},
+
+{t:"Asthma and COPD in workers are diseases caused by exposures to:",
+ o:["Only tobacco smoke","Coal dust, grain dust, cotton dust, and other occupational agents","Radiation only","Mercury and lead only"],
+ a:1,diff:"medium",
+ exp:"Asthma and COPD result from exposures to coal dust, grain dust, cotton dust, and several other occupational agents. Cigarettes are a primary cause in combination with occupational exposures."},
+
+{t:"Occupational hearing loss is described as insidious because:",
+ o:["It causes severe pain","It is easily detected early","It occurs without pain or obvious physical abnormalities, making prevention difficult","It only affects older workers"],
+ a:2,diff:"medium",
+ exp:"Hearing loss is insidious—it occurs without pain or obvious physical abnormalities, which has hindered prevention efforts."},
+
+{t:"The leading causes of FATAL occupational injuries include:",
+ o:["Overexertion and falls to the same level","Motor vehicles, machines, homicides, falls, electrocution, and falling objects","Chemical burns and radiation","Musculoskeletal injuries"],
+ a:1,diff:"medium",
+ exp:"Leading causes of fatal occupational injuries are motor vehicles, machines, homicides, falls, electrocution, and falling objects."},
+
+{t:"The leading causes of NON-FATAL occupational injuries include:",
+ o:["Falls from heights and electrocution","Overexertion, contact with objects or equipment, and falls to the same level","Homicides and drowning","Motor vehicle accidents and explosions"],
+ a:1,diff:"medium",
+ exp:"Leading causes of nonfatal occupational injuries are overexertion, contact with objects or equipment, and falls to the same level."},
+
+{t:"Safety management key function 'Hazard Management' involves:",
+ o:["Setting company financial goals","Identifying hazards, assessing risks, determining and implementing control measures","Only communicating responsibilities","Monitoring financial performance"],
+ a:1,diff:"medium",
+ exp:"Hazard management: hazards must be identified, risks assessed, and appropriate control measures determined, implemented, and reviewed."},
+
+{t:"The key predictive indicator RANKED FIRST for safety performance according to researchers is:",
+ o:["External factors and financial health","Good organizational learning","Organizational focus on workplace health and safety","Effective communication leading to commonly understood goals at all levels"],
+ a:3,diff:"medium",
+ exp:"Effective communication, leading to commonly understood goals and means to achieve them at all levels, is ranked FIRST."},
+
+{t:"Which step in the PPE program involves informing employees of hazards and training them to wear and maintain protective equipment?",
+ o:["First step: evaluate hazards","Second step: check equipment meets government standards","Third step: inform and train employees","Fourth step: train supervisors"],
+ a:2,diff:"medium",
+ exp:"The third step is informing employees of hazards and training them in how to wear and maintain protective equipment properly."},
+
+{t:"Biological disruptions from rotating shift work include:",
+ o:["Increased salary","Circadian dysrhythmia, cardiovascular disorders, and gastrointestinal disorders","Improved family relationships","Better work performance"],
+ a:1,diff:"medium",
+ exp:"Biological disruptions from rotating shift work include circadian dysrhythmia, cardiovascular disorders, and gastrointestinal disorders."},
+
+{t:"Pre-employment screening in occupational health nursing is an example of which level of prevention?",
+ o:["Primary prevention","Secondary prevention","Tertiary prevention","No prevention level"],
+ a:1,diff:"medium",
+ exp:"Pre-employment screening is secondary prevention—it identifies existing health problems before they worsen in the occupational environment."},
+
+{t:"The basic problems with personal protective devices include all of the following EXCEPT:",
+ o:["Individuals must understand the need to wear protection","Must wear it properly","Must maintain the device in good working condition","PPE automatically adjusts to every hazard type"],
+ a:3,diff:"medium",
+ exp:"PPE does NOT automatically adjust—the three basic problems are: understanding the need, wearing it properly, and maintaining it in good condition."},
+
+{t:"Measures to prevent work-related low back pain include all of the following EXCEPT:",
+ o:["Ergonomically sound work processes","Training and educational programs for workers and managers","Good work organization to reduce repetitive loading","Encouraging workers to lift heavy loads alone without assistance"],
+ a:3,diff:"medium",
+ exp:"Encouraging solo heavy lifting increases back injury risk. Prevention includes ergonomic processes, training, good organization, and optimal work levels."},
+
+/* ── HARD (39-55) ── */
+{t:"A worker develops irritant contact dermatitis after daily exposure to industrial solvents. The MOST likely mechanism is:",
+ o:["Immune-mediated allergic reaction","Toxic reaction to chemical irritants in the workplace","Radiation-induced skin damage","Biological contamination"],
+ a:1,diff:"hard",
+ exp:"Irritant contact dermatitis results from TOXIC reactions to chemical irritants such as solvents and cutting fluids—NOT immune-mediated (which would be allergic contact dermatitis)."},
+
+{t:"An occupational health nurse assessing a worker's complete health status, including occupational history, lifestyle, and health risk appraisal, is functioning primarily in which role?",
+ o:["Administrator","Researcher","Clinician/Practitioner","Consultant"],
+ a:2,diff:"hard",
+ exp:"Assessing health status including occupational history and health risk appraisal is specifically listed under the Clinician/Practitioner role."},
+
+{t:"When engineering and administrative controls are not yet effective in eliminating a hazard, the occupational health nurse should:",
+ o:["Wait for controls to become effective","Issue PPE as a last line of defense and consult with the occupational health physician","Relocate all workers immediately","Report to media"],
+ a:1,diff:"hard",
+ exp:"Protective devices must be issued as a last line of defense when engineering or administrative controls are not yet effective in eliminating the hazard."},
+
+{t:"A nurse correctly identifies that an employee works night shifts on a rotating schedule and reports fatigue, sleep problems, and recent motor vehicle accident. This BEST represents which type of disruption?",
+ o:["Biological disruption only","Psychosocial and individual disruptions from rotating shift work","Chemical hazard effects","Ergonomic hazard effects"],
+ a:1,diff:"hard",
+ exp:"Fatigue/sleep loss (psychosocial disruption) and increased accidents (psychosocial disruption) are specifically listed effects of rotating shift work."},
+
+{t:"Which AAOHN standard describes the nurse who 'systematically and continuously evaluates responses to interventions and progress toward desired outcomes'?",
+ o:["Standard IV – Planning","Standard V – Implementation","Standard VI – Evaluation","Standard VII – Resource Management"],
+ a:2,diff:"hard",
+ exp:"Standard VI – Evaluation: The nurse systematically and continuously evaluates responses to interventions and progress toward desired outcomes."},
+
+{t:"A pregnant worker is exposed to lead at her manufacturing job and subsequently has a spontaneous abortion. This falls under which category of occupational illness?",
+ o:["Musculoskeletal disorders","Infectious diseases","Fertility and pregnancy abnormalities","Traumatic injuries"],
+ a:2,diff:"hard",
+ exp:"Fertility and pregnancy abnormalities include spontaneous abortion; lead is specifically listed as an occupational exposure that can impair fertility and cause pregnancy disorders."},
+
+{t:"Transmission of multi-drug resistant tuberculosis (MDR-TB) in healthcare settings is described as:",
+ o:["A minor occupational concern","A reemerged major public health problem","Easily controlled without any special precautions","Unrelated to occupational health"],
+ a:1,diff:"hard",
+ exp:"Transmission of TB, especially MDR-TB, within healthcare settings has reemerged as a major public health problem."},
+
+{t:"The nurse's role in the fourth step of the PPE program involves:",
+ o:["Evaluating the hazard","Checking equipment against government standards","Training employees to wear and maintain PPE","Training supervisors to ensure protection is worn at all times when needed"],
+ a:3,diff:"hard",
+ exp:"The fourth step is training supervisors to ensure that protection is worn at all times when it is needed."},
+
+{t:"Industries facing higher risks of serious nonfatal injuries are concentrated in the manufacturing sector and include:",
+ o:["Healthcare and education workers","Ship building, foundries, sawmills, and meat packing plants","Banking and finance workers","Agricultural seasonal workers"],
+ a:1,diff:"hard",
+ exp:"Higher-risk nonfatal injury industries include ship building, wooden building, foundries, special products sawmills, and meat packing plants."},
+
+{t:"In safety management, 'Organization and Communication' as a key function refers to:",
+ o:["Setting financial goals","Identifying and assessing hazards","Clearly defined responsibility and lines of two-way communication","Monitoring whether safety steps are working"],
+ a:2,diff:"hard",
+ exp:"Organization and Communication: clearly defined responsibility and lines of two-way communication must be determined."},
+
+{t:"The occupational health nurse acting as Administrator sets goals, quantifiable objectives, priorities, and measures success. This function is called:",
+ o:["Coordinating","Controlling","Planning","Organizing"],
+ a:2,diff:"hard",
+ exp:"Planning: assessing the future and making provision for it, considering problems and figuring out solutions. It includes setting goals and measuring success."},
+
+{t:"An occupational health nurse identifies that workers in a noisy factory lack hearing protection. The nurse evaluates the hazard, checks PPE against government standards, trains employees, trains supervisors, and posts warnings. Failure to complete which step FIRST would make the entire PPE program invalid?",
+ o:["Training employees (Step 3)","Posting warnings (Step 5)","Evaluating the hazard to ensure equipment appropriateness (Step 1)","Training supervisors (Step 4)"],
+ a:2,diff:"hard",
+ exp:"The hazard must be evaluated FIRST (Step 1) to ensure the equipment will be appropriate. Without hazard evaluation, the PPE chosen may not address the actual risk."},
+
+{t:"The occupational health nurse who 'incorporates research results into own practice' and 'collaborates with other members of the OH team in developing and conducting research' is performing which role?",
+ o:["Clinician/Practitioner","Administrator","Researcher","Consultant"],
+ a:2,diff:"hard",
+ exp:"Incorporating research results and collaborating in research development are specifically listed under the Researcher role."},
+
+{t:"A worker's health history reveals that they have existing lung disease and they are being placed in a work environment with coal and grain dust. From an occupational health perspective, the MOST critical concern is:",
+ o:["Risk of skin irritation","Risk of hearing loss","Increased vulnerability to occupational respiratory hazards due to existing lung disease","Risk of musculoskeletal injury"],
+ a:2,diff:"hard",
+ exp:"Those with existing lung disease are especially vulnerable to occupational respiratory hazards such as coal and grain dust."},
+
+{t:"Which occupational health nursing role specifically involves 'verifying whether everything occurred in conformity with the plan adopted, instructions, and principles established'?",
+ o:["Planning","Organizing","Coordinating","Controlling"],
+ a:3,diff:"hard",
+ exp:"Controlling is defined as verifying whether everything occurred in conformity with the plan, instructions, and principles established."},
+
+{t:"A nurse develops and implements a health promotion program for workers including exercise classes, nutrition counseling, stress management, and immunizations. This nurse is functioning primarily in the:",
+ o:["Researcher role","Consultant role","Clinician/Practitioner role implementing primary prevention","Administrator role only"],
+ a:2,diff:"hard",
+ exp:"The Clinician/Practitioner role includes developing and implementing health promotion and disease prevention programs (primary prevention activities)."},
+
+{t:"Musculoskeletal disorders of the upper extremities affect which soft tissues?",
+ o:["Only bones and ligaments of the leg","Neck, shoulder, elbow, hand, wrist, and fingers","Only the lower back","Ankle and foot only"],
+ a:1,diff:"hard",
+ exp:"Musculoskeletal disorders affect the soft tissues of the neck, shoulder, elbow, hand, wrist, and fingers."},
+
+{t:"CASE 1: A factory worker in a textile plant reports skin redness, itching, and blistering on her hands after daily exposure to chemical solvents used in fabric dyeing. The nurse assesses her condition.<br><br>This skin condition is MOST likely classified as which occupational illness?",
+ o:["Allergic contact dermatitis","Irritant contact dermatitis","Psoriasis","Atopic eczema"],
+ a:1,diff:"medium",
+ exp:"Irritant contact dermatitis is the most common occupational skin disease, resulting from toxic reactions to chemical irritants such as solvents."},
+
+{t:"CASE 1 (continued): The nurse recommends the worker wear chemical-resistant gloves. The worker refuses, stating she didn't know it was required. Which step in the PPE program was MISSED?",
+ o:["Step 1: Hazard evaluation","Step 2: Checking government standards","Step 3: Informing employees of hazards and training them","Step 5: Posting warnings"],
+ a:2,diff:"medium",
+ exp:"Step 3 requires informing employees of hazards involved and training them in how to wear and maintain protective equipment properly."},
+
+{t:"CASE 2: A coal miner with 20 years of experience presents with chronic cough, shortness of breath, and progressive breathing difficulty. He has never smoked. His occupational health nurse correlates his symptoms with coal dust exposure.<br><br>His condition is BEST classified under which category of occupational illness?",
+ o:["Fertility and pregnancy abnormalities","Traumatic injuries","Asthma and COPD from occupational exposures","Musculoskeletal disorders"],
+ a:2,diff:"medium",
+ exp:"Asthma and COPD are caused by exposures to occupational agents including coal dust. This miner's progressive lung disease matches this category."},
+
+{t:"CASE 2 (continued): The nurse assesses his work environment for dust levels and collaborates with industrial hygienists to recommend dust control measures. This activity corresponds to which AAOHN standard?",
+ o:["Standard II – Diagnosis","Standard VI – Evaluation","Standard I – Assessment of the environment and worker health","Standard VIII – Professional Development"],
+ a:2,diff:"medium",
+ exp:"Standard I – Assessment: the nurse systematically assesses both the health status of the client and the environment."},
+
+{t:"CASE 3: A healthcare nurse is stuck by a needle while disposing of a used syringe from an HIV-positive patient's blood draw.<br><br>This type of occupational hazard is classified as:",
+ o:["Physical hazard","Chemical hazard","Biological hazard—blood-borne pathogen transmission via needle-stick","Psychosocial hazard"],
+ a:2,diff:"medium",
+ exp:"Needle-stick injuries transmitting blood-borne pathogens (HIV, Hepatitis B and C) are biological hazards in the workplace."},
+
+{t:"CASE 3 (continued): The occupational health nurse provides immediate first aid, counseling, and prophylactic medications. This response falls under which level of prevention?",
+ o:["Primary prevention","Secondary prevention—emergency response and treatment of existing exposure","Tertiary prevention only","No prevention level"],
+ a:1,diff:"hard",
+ exp:"Emergency response to needle-stick injuries and immediate treatment fall under SECONDARY prevention—treating an exposure before it causes full disease."},
+
+{t:"CASE 4: A data entry worker develops pain and numbness in both wrists and hands. She works 8 hours daily typing without ergonomic adjustments. She is diagnosed with carpal tunnel syndrome.<br><br>This is an example of which occupational illness category?",
+ o:["Low back disorders","Traumatic injuries","Musculoskeletal disorders of the upper extremities","Infectious diseases"],
+ a:2,diff:"medium",
+ exp:"Carpal tunnel syndrome in a data entry worker results from repetitive, forceful work—classified as musculoskeletal disorder of the upper extremities."},
+
+{t:"CASE 4 (continued): The occupational health nurse develops a plan to reduce workstation strain. According to the AAOHN standards, developing a goal-directed, comprehensive plan with interventions to attain expected outcomes corresponds to which standard?",
+ o:["Standard II – Diagnosis","Standard III – Outcome Identification","Standard IV – Planning","Standard VI – Evaluation"],
+ a:2,diff:"hard",
+ exp:"Standard IV – Planning: the nurse develops a goal-directed, comprehensive plan and formulates interventions to attain expected outcomes."},
+
+{t:"CASE 5: A construction worker is exposed to extreme noise levels daily. After 10 years, he reports muffled hearing and difficulty understanding speech. An audiogram confirms significant hearing loss.<br><br>The nurse counsels the worker that occupational hearing loss is:",
+ o:["Temporary and will resolve with rest","The second most commonly self-reported occupational illness; irreversible once acquired","A minor inconvenience only","A reversible condition with medication"],
+ a:1,diff:"medium",
+ exp:"Occupational hearing loss is the most common occupational disease and second most self-reported. Once acquired, it is IRREVERSIBLE."},
+
+{t:"CASE 5 (continued): To prevent further hearing loss in other workers, the nurse implements a hearing protection program. Which aspect of primary prevention does this BEST represent?",
+ o:["Pre-employment screening","Emergency response","Injury prevention through use of safety devices and elimination of safety hazards","Treatment of existing hearing loss"],
+ a:2,diff:"hard",
+ exp:"Using hearing protection devices and eliminating noise hazards are primary prevention strategies under injury prevention."},
+
+{t:"CASE 6: A night-shift worker on a rotating schedule reports severe insomnia, weight gain, frequent stomach upset, and two recent minor accidents at work.<br><br>The nurse correctly identifies these symptoms as related to which specific shift work disruptions?",
+ o:["Chemical hazard exposure","Biological (circadian dysrhythmia, GI disorders) and psychosocial (fatigue, sleep loss, increased accidents) disruptions","Physical hazard exposure","Ergonomic hazard effects only"],
+ a:1,diff:"hard",
+ exp:"GI disorders and circadian dysrhythmia are biological disruptions; insomnia/fatigue and increased accidents are psychosocial disruptions from rotating shift work."},
+
+{t:"CASE 7: An occupational health nurse collects and analyzes data from a series of musculoskeletal injury cases in a meat packing plant. She prepares a research publication and presents findings at a national conference.<br><br>She is functioning in which role?",
+ o:["Clinician/Practitioner","Administrator","Researcher","Consultant"],
+ a:2,diff:"medium",
+ exp:"Disseminating research findings through presentations and publications, and collaborating in research are Researcher role activities."},
+
+{t:"CASE 8: A manufacturing plant manager asks the occupational health nurse for advice about whether a new chemical solvent is safe for workers to use without special ventilation. The nurse reviews safety data and provides evidence-based recommendations.<br><br>The nurse is performing which role?",
+ o:["Clinician only","Administrator","Researcher","Consultant—offering advice to management about worker health as affected by substances"],
+ a:3,diff:"hard",
+ exp:"The Consultant offers advice to management regarding worker health as it may be affected by processes or substances used."},
+
+{t:"CASE 9: An occupational health nurse in an agricultural setting plans a comprehensive prevention program for farm workers exposed to pesticides. She includes immunizations (primary prevention), regular blood tests for pesticide exposure levels (secondary), and manages symptoms of existing pesticide toxicity (tertiary).<br><br>This comprehensive program covering all three prevention levels is described as:",
+ o:["Only relevant to healthcare workers","A comprehensive occupational health nursing approach addressing primary, secondary, and tertiary prevention","Only secondary prevention","Only for hospital-based nurses"],
+ a:1,diff:"hard",
+ exp:"The roles of occupational health nurses include all three levels: promoting health (primary), screening and treating (secondary), and preventing complications (tertiary)."},
+
+{t:"CASE 10: During a safety inspection, an occupational health nurse finds exposed electrical wiring on the factory floor, slippery surfaces near machinery, and workers using outdated lifting equipment with no safety guards.<br><br>These hazards are BEST classified as which TWO categories?",
+ o:["Biological and chemical hazards","Environmental/mechanical hazards AND physical hazards (electricity)","Psychosocial and chemical hazards","Biological and physical hazards only"],
+ a:1,diff:"hard",
+ exp:"Slippery floors and deficient equipment are environmental/mechanical hazards; exposed electrical wiring causing potential tissue trauma is a physical hazard. Both categories are present."},
+
+{t:"Occupational health nursing focuses on promotion, prevention, and restoration of health within a safe and healthy work environment.",
+ o:["True","False"], a:0,diff:"easy",
+ exp:"True—this is the exact definition of occupational health nursing as a specialty practice."},
+
+{t:"Biological hazards in the workplace include only bacteria and viruses.",
+ o:["True","False"], a:1,diff:"easy",
+ exp:"False—biological hazards include bacteria, viruses, FUNGI, and PARASITES that may be transmitted via infected clients or contaminated body fluids."},
+
+{t:"Psychosocial hazards create or potentiate stress, emotional strain, and interpersonal problems.",
+ o:["True","False"], a:0,diff:"easy",
+ exp:"True—psychosocial hazards are factors associated with one's job or work environment that create or potentiate stress, emotional strain, and/or interpersonal problems."},
+
+{t:"Occupational hearing loss is reversible with prompt medical treatment.",
+ o:["True","False"], a:1,diff:"easy",
+ exp:"False—once occupational hearing loss is acquired, it is IRREVERSIBLE."},
+
+{t:"The four industries with the highest occupational injury fatality rates are mining, construction, transportation, and agriculture.",
+ o:["True","False"], a:0,diff:"easy",
+ exp:"True—these four industries have occupational injury fatality rates notably and consistently higher than all others."},
+
+{t:"Personal protective equipment (PPE) should be used as the FIRST line of defense against workplace hazards.",
+ o:["True","False"], a:1,diff:"medium",
+ exp:"False—PPE is the LAST line of defense, used when engineering or administrative controls are not yet effective."},
+
+{t:"Standard VI of the AAOHN standards addresses systematic and continuous evaluation of responses to interventions.",
+ o:["True","False"], a:0,diff:"medium",
+ exp:"True—Standard VI – Evaluation: the nurse systematically and continuously evaluates responses to interventions and progress toward desired outcomes."},
+
+{t:"Pre-employment screening is an example of PRIMARY prevention in occupational health nursing.",
+ o:["True","False"], a:1,diff:"medium",
+ exp:"False—pre-employment screening is SECONDARY prevention, identifying existing conditions before work exposure worsens them."},
+
+{t:"Rotating shift work involving night work can cause circadian dysrhythmia and gastrointestinal disorders.",
+ o:["True","False"], a:0,diff:"medium",
+ exp:"True—rotating shift work causes biological disruptions including circadian dysrhythmia, cardiovascular disorders, and gastrointestinal disorders."},
+
+{t:"Irritant contact dermatitis is the MOST common occupational skin disease.",
+ o:["True","False"], a:0,diff:"easy",
+ exp:"True—irritant contact dermatitis is the most common occupational skin disease, resulting from toxic reactions to chemical irritants."},
+
+{t:"Blood-borne pathogen transmission in healthcare settings occurs primarily through airborne droplets.",
+ o:["True","False"], a:1,diff:"medium",
+ exp:"False—occupational transmission of blood-borne pathogens occurs primarily by means of NEEDLE-STICK INJURIES, not airborne droplets."},
+
+{t:"Musculoskeletal disorders of the upper extremities affect the soft tissues of the neck, shoulder, elbow, hand, wrist, and fingers.",
+ o:["True","False"], a:0,diff:"easy",
+ exp:"True—musculoskeletal disorders affect the soft tissues of the neck, shoulder, elbow, hand, wrist, and fingers."},
+
+{t:"The Consultant role of the occupational health nurse includes offering advice to management about how work processes may affect worker health.",
+ o:["True","False"], a:0,diff:"medium",
+ exp:"True—the Consultant offers advice to management regarding worker health as it may be affected by the processes or substances used."},
+
+{t:"Standard VIII – Professional Development means the nurse secures and manages resources that support an occupational health and safety program.",
+ o:["True","False"], a:1,diff:"hard",
+ exp:"False—Standard VIII is Professional Development (assuming responsibility for professional growth). Standard VII is Resource Management."},
+
+{t:"Good organizational learning means organizations are tuned to identify and respond to incremental change.",
+ o:["True","False"], a:0,diff:"medium",
+ exp:"True—good organizational learning is ranked second in safety culture: organizations tuned to identify and respond to incremental change."},
+
+{t:"Effective communication leading to commonly understood goals at all levels is ranked FIRST among key predictive indicators of safety performance.",
+ o:["True","False"], a:0,diff:"medium",
+ exp:"True—effective communication is ranked first among key predictive indicators of safety performance."},
+
+{t:"Low back disorders in workers are only caused by lifting heavy objects and have no relationship to repetitive work or vibration.",
+ o:["True","False"], a:1,diff:"medium",
+ exp:"False—low back disorders are associated with heavy work, static postures, bending, twisting, repetitive work, vibration, and frequent pushing and pulling."},
+
+{t:"The fifth step in a PPE program requires supervisors to be trained to ensure protection is worn when needed.",
+ o:["True","False"], a:1,diff:"hard",
+ exp:"False—the FOURTH step trains supervisors. The FIFTH step is posting warnings to inform everyone of the need for protection."},
+
+{t:"Tertiary prevention in the occupational setting includes preventing spread of communicable disease through immunization and sick leave for ill employees.",
+ o:["True","False"], a:0,diff:"medium",
+ exp:"True—tertiary prevention includes preventing spread of communicable disease through immunization and sick leave for ill employees."},
+
+{t:"The Researcher role of the occupational health nurse involves only reading published research without contributing to new studies.",
+ o:["True","False"], a:1,diff:"medium",
+ exp:"False—the Researcher role actively involves participating in research development and implementation, disseminating findings, and collaborating with others in research."},
+];
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function shuffleOptions(question) {
+  const correctAnswer = question.o[question.a];
+
+  question.o = shuffle([...question.o]);
+
+  question.a = question.o.indexOf(correctAnswer);
+
+  return question;
+}
+
+QUESTIONS = QUESTIONS.map(q => shuffleOptions({...q}));
+/* ============ CONFIG ============ */
+const TOTAL_MINUTES = 60;   
+
+/* ============ ENGINE ============ */
+const LETTERS = ['A','B','C','D','E','F'];
+let pool, questions, qi, correct, wrong, answered, answers, wrongSet;
+let totalTime = 60 * 60, timeLeft, timerInterval;
+let activeTopic = 'All';
+
+function shuffle(arr) {
+  const a = [...arr];
+  for (let i = a.length-1; i > 0; i--) {
+    const j = Math.floor(Math.random()*(i+1));
+    [a[i],a[j]] = [a[j],a[i]];
+  }
+  return a;
+}
+
+/* ---- TOPIC FILTER ---- */
+function buildFilters() {
+  const wrap = document.getElementById('filterWrap');
+  const countEl = document.getElementById('filterCount');
+  const topics = [...new Set(QUESTIONS.map(q=>q.topic).filter(Boolean))];
+  if (!topics.length) { wrap.style.display='none'; countEl.style.display='none'; return; }
+  wrap.style.display='flex';
+  countEl.style.display='block';
+  const all = ['All', ...topics];
+  wrap.innerHTML = all.map(t=>
+    `<button class="filter-btn${t==='All'?' active':''}" onclick="setTopic('${t}')">${t}</button>`
+  ).join('');
+  updateFilterCount();
+}
+
+function setTopic(t) {
+  activeTopic = t;
+  document.querySelectorAll('.filter-btn').forEach(b=>{
+    b.classList.toggle('active', b.textContent===t);
+  });
+  updateFilterCount();
+  init(getPool());
+}
+
+function getPool() {
+  return activeTopic==='All' ? QUESTIONS : QUESTIONS.filter(q=>q.topic===activeTopic);
+}
+
+function updateFilterCount() {
+  const p = getPool();
+  document.getElementById('filterCount').textContent =
+    `Showing ${p.length} question${p.length!==1?'s':''} · Topic: ${activeTopic}`;
+}
+
+/* ---- INIT ---- */
+function init(p) {
+  pool = p;
+  if (!pool.length) {
+    document.getElementById('app').innerHTML=`
+      <div class="empty-state">
+        <div class="ei">📭</div>
+        <h3>No Questions Yet</h3>
+        <p>Add questions to the QUESTIONS array in the script section.</p>
+      </div>`;
+    document.getElementById('totalBadge').textContent='0 Questions';
+    document.getElementById('sRemain').textContent='—';
+    clearInterval(timerInterval);
+    return;
+  }
+  questions = shuffle(pool);
+  qi=0; correct=0; wrong=0; answered=0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = [];
+  timeLeft = totalTime;
+  document.getElementById('totalBadge').textContent = questions.length+' Questions';
+  document.getElementById('timeBadge').textContent  = TOTAL_MINUTES+' Min';
+  startTimer(); render();
+}
+
+/* ---- TIMER ---- */
+function startTimer() {
+  clearInterval(timerInterval);
+  timerInterval = setInterval(()=>{
+    timeLeft--;
+    const m=Math.floor(timeLeft/60), s=timeLeft%60;
+    document.getElementById('timerTxt').textContent=`${m}:${s<10?'0':''}${s}`;
+    const b=document.getElementById('timerBadge');
+    if (timeLeft<=120)      b.className='timer-badge danger';
+    else if (timeLeft<=300) b.className='timer-badge warn';
+    else                    b.className='timer-badge';
+    if (timeLeft<=0) { clearInterval(timerInterval); finish(); }
+  },1000);
+}
+
+/* ---- TOP BAR ---- */
+function updateTop() {
+  const total=questions.length;
+  document.getElementById('sCorrect').textContent=correct;
+  document.getElementById('sWrong').textContent=wrong;
+  document.getElementById('sRemain').textContent=Math.round(((total-answered)/total)*100)+'%';
+  document.getElementById('progLabel').textContent='Q '+(qi+1)+' / '+total;
+  document.getElementById('progFill').style.width=((qi+1)/total*100)+'%';
+  document.getElementById('prog-bar').style.width=((qi+1)/total*100)+'%';
+}
+
+/* ---- RENDER ---- */
+function render() {
+  updateTop();
+  const q=questions[qi];
+  const opts = q.o.map((o,idx)=>`
+    <div class="opt" id="opt${idx}" onclick="choose(${idx})">
+      <div class="opt-letter">${LETTERS[idx]}</div>${o}
+    </div>`).join('');
+  document.getElementById('app').innerHTML=`
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">Question ${qi+1} / ${questions.length}</div>
+        ${q.topic?`<div class="q-topic">${q.topic}</div>`:''}
+      </div>
+      <div class="q-text">${q.t}</div>
+      <div class="options">${opts}</div>
+      <div class="nav-btns">
+        <button class="btn btn-skip" onclick="skip()"><i class="fa-solid fa-forward"></i> Skip</button>
+      </div>
+    </div>`;
+}
+
+/* ---- CHOOSE ---- */
+function choose(v) {
+  if (answers[qi]!==null) return;
+  answers[qi]=v; answered++;
+  const q=questions[qi], ok=v===q.a;
+  ok?correct++:wrong++;
+  updateTop();
+  q.o.forEach((_,idx)=>{
+    const el=document.getElementById('opt'+idx);
+    el.classList.add('disabled');
+    if (idx===q.a) el.classList.add('correct');
+    else if (idx===v) el.classList.add('wrong');
+  });
+  const fb=document.createElement('div');
+  fb.className='feedback-bar '+(ok?'ok':'no');
+  fb.innerHTML=ok
+    ?`<span style="font-size:17px">🎉</span><span>ِما شاء الله عليك</span>`
+    :`<span style="font-size:17px">😔</span><span>ركز يا شطور</span>`;
+  const card=document.querySelector('.q-card');
+  card.querySelector('.options').after(fb);
+  if (q.exp) {
+    const exp=document.createElement('div');
+    exp.className='explanation';
+    exp.innerHTML='<b>💬 Explanation:</b> '+q.exp;
+    fb.after(exp);
+  }
+  card.querySelector('.nav-btns').innerHTML=`
+    <button class="btn btn-next" onclick="next()">
+      ${qi<questions.length-1
+        ?'<i class="fa-solid fa-arrow-right"></i> Next Question'
+        :'<i class="fa-solid fa-flag-checkered"></i> Finish Exam'}
+    </button>`;
+}
+
+/* ---- SKIP / NEXT ---- */
+function skip() {
+  if (answers[qi]===null) { answers[qi]=-1; answered++; wrong++; wrongSet.push(questions[qi]); updateTop(); }
+  next();
+}
+function next() {
+  if (qi<questions.length-1) { qi++; render(); window.scrollTo({top:0,behavior:'smooth'}); }
+  else finish();
+}
+
+/* ---- FINISH ---- */
+function finish() {
+  clearInterval(timerInterval);
+  const total=questions.length;
+  const score=Math.round((correct/total)*100);
+  questions.forEach((q,idx)=>{ if(answers[idx]!==q.a) wrongSet.push({...q,myAns:answers[idx]}); });
+  wrongSet=[...new Map(wrongSet.map(q=>[q.t,q])).values()];
+  let grade,gc;
+  if(score>=90)      { grade='🥇 Excellent';    gc='var(--ok)'; }
+  else if(score>=75) { grade='🥈 Very Good';     gc='var(--a1)'; }
+  else if(score>=60) { grade='🥉 Good';          gc='var(--warn)'; }
+  else               { grade='📚 Needs Review';  gc='var(--err)'; }
+  const circ=2*Math.PI*45, offset=circ-(score/100)*circ;
+  const report=questions.map((q,idx)=>{
+    const ok=answers[idx]===q.a;
+    return `<div class="report-item ${ok?'ok':'no'}">
+      <div class="ri-q">${ok?'✅':'❌'} ${q.t}</div>
+      ${!ok?`
+        <div class="ri-row"><span class="ri-badge ri-yours">Your Answer</span>${answers[idx]>=0?q.o[answers[idx]]:'Skipped'}</div>
+        <div class="ri-row"><span class="ri-badge ri-right">Correct</span>${q.o[q.a]}</div>
+      `:''}
+    </div>`;
+  }).join('');
+  document.getElementById('prog-bar').style.width='100%';
+  document.getElementById('app').innerHTML=`
+    <div class="result-hero">
+      <div class="score-ring">
+        <svg viewBox="0 0 110 110">
+          <circle class="ring-bg" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="0"/>
+          <circle class="ring-fill" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="${circ}"
+            style="stroke:${gc}" id="ringFill"/>
+        </svg>
+        <div class="score-num">${score}</div>
+        <div class="score-pct">%</div>
+      </div>
+      <div class="result-grade" style="color:${gc}">${grade}</div>
+      <div class="result-sub">Answered ${answered} of ${total} questions</div>
+      <div class="result-stats">
+        <div class="rs"><div class="n" style="color:var(--ok)">${correct}</div><div class="l">Correct</div></div>
+        <div class="rs"><div class="n" style="color:var(--err)">${wrong}</div><div class="l">Wrong</div></div>
+        <div class="rs"><div class="n" style="color:var(--a1)">${total-answered<0?0:total-answered}</div><div class="l">Skipped</div></div>
+      </div>
+    </div>
+    <div class="result-actions">
+      ${wrongSet.length?`<button class="btn btn-retry" onclick="retryWrong()"><i class="fa-solid fa-rotate-right"></i> Retry Wrong (${wrongSet.length})
+
+</button>`:''}
+      <button class="btn btn-home" onclick="init(getPool())"><i class="fa-solid fa-shuffle"></i> New Random Exam</button>
+      <a href="https://gaith-team.github.io/exam/" class="btn btn-home" style="text-decoration:none"><i class="fa-solid fa-house"></i> Back to Subject</a>
+    </div>
+    <div style="margin-top:22px">
+      <div style="font-size:14px;font-weight:700;margin-bottom:9px;color:var(--text2)">📋 Detailed Report</div>
+      ${report}
+    </div>`;
+  setTimeout(()=>{ document.getElementById('ringFill').style.strokeDashoffset=offset; },100);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ---- RETRY WRONG ---- */
+function retryWrong() {
+  const p=[...wrongSet];
+  questions=shuffle(p); qi=0; correct=0; wrong=0;
+  answers=new Array(questions.length).fill(null);
+  wrongSet=[]; answered=0; timeLeft=totalTime;
+  startTimer(); render();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+
+/* ---- THEME ---- */
+const themeBtn=document.getElementById('themeBtn');
+let theme=localStorage.getItem('gt-theme')||'light';
+function applyTheme(t) {
+  theme=t;
+  document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'');
+  themeBtn.textContent=t==='dark'?'☀️':'🌙';
+  localStorage.setItem('gt-theme',t);
+}
+applyTheme(theme);
+themeBtn.addEventListener('click',()=>applyTheme(theme==='dark'?'light':'dark'));
+
+/* ---- START ---- */
+buildFilters();
+init(getPool());
+</script>
+</body>
+</html>
