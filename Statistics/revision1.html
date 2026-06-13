@@ -37,7 +37,7 @@
 }
 
 body {
-  font-family:  Cairo , sans-serif;
+  font-family: 'Cairo', sans-serif;
   background: var(--bg); color: var(--text);
   min-height: 100vh; overflow-x: hidden;
   transition: background .4s, color .4s;
@@ -90,11 +90,11 @@ nav {
   position: relative; overflow: hidden;
 }
 .hero-band::before {
-  content:   ; position: absolute; inset: 0;
+  content: ''; position: absolute; inset: 0;
   background: radial-gradient(ellipse 600px 200px at 50% 100%, rgba(255,255,255,.12) 0%, transparent 70%);
 }
 .hero-band::after {
-  content:   ; position: absolute; top: -40px; right: -40px;
+  content: ''; position: absolute; top: -40px; right: -40px;
   width: 180px; height: 180px; border-radius: 50%;
   background: rgba(255,255,255,.07);
 }
@@ -234,7 +234,7 @@ nav {
 .btn {
   flex: 1; padding: 13px; border: none; border-radius: 12px;
   font-size: 14px; font-weight: 900; cursor: pointer;
-  font-family:  Cairo , sans-serif; transition: var(--tr);
+  font-family: 'Cairo', sans-serif; transition: var(--tr);
   display: flex; align-items: center; justify-content: center; gap: 7px;
 }
 .btn-next {
@@ -334,7 +334,7 @@ footer {
 
 <div class="hero-band">
   <div class="hero-band-icon">🤸🏼‍♂️</div>
-  <h1>مراجعة شاملة علي أول 4 محاضرات</h1>
+  <h1>مراجعة أول 4 محاضرات </h1>
   <p>Statistics</p>
   <div class="hero-band-meta">
     <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">-- Questions</span></div>
@@ -481,7 +481,6 @@ const RAW_QUESTIONS = [
   {t:"The independent variable is the one that is measured as a result of manipulation.", o:["True","False"], a:1, type:"tf"},
   {t:"Qualitative (categorical) variables represent measurable quantities with units.", o:["True","False"], a:1, type:"tf"},
   {t:"The population standard deviation formula uses  N  in the denominator, while the sample standard deviation uses  n−1 .", o:["True","False"], a:0, type:"tf"},
-
 ];
 
 /* ============ SHUFFLE OPTIONS ============ */
@@ -503,7 +502,7 @@ function shuffleOptions(q) {
 /* ============ ENGINE ============ */
 let questions, i, correct, wrong, answers, wrongSet, answered;
 let totalTime = 100*60, timeLeft, timerInterval;
-const LETTERS = [ A , B , C , D , E , F ];
+const LETTERS = ['A','B','C','D','E','F'];
 
 function shuffle(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
@@ -514,7 +513,7 @@ function shuffle(arr) {
 }
 
 function prepareQuestions(pool) {
-  // Shuffle questions order AND shuffle each question s options
+  // Shuffle questions order AND shuffle each question's options
   return shuffle([...pool]).map(q => shuffleOptions(q));
 }
 
@@ -524,7 +523,7 @@ function init(pool) {
   answers = new Array(questions.length).fill(null);
   wrongSet = []; answered = 0;
   timeLeft = totalTime;
-  document.getElementById( totalBadge ).textContent = questions.length +   Questions ;
+  document.getElementById('totalBadge').textContent = questions.length + ' Questions';
   startTimer();
   render();
 }
@@ -535,10 +534,10 @@ function startTimer() {
   timerInterval = setInterval(() => {
     timeLeft--;
     const m = Math.floor(timeLeft / 60), s = timeLeft % 60;
-    document.getElementById( timerTxt ).textContent = `${m}:${s < 10 ?  0  :   }${s}`;
-    const badge = document.getElementById( timerBadge );
-    if (timeLeft <= 120) { badge.className =  timer-badge danger ; }
-    else if (timeLeft <= 300) { badge.className =  timer-badge warn ; }
+    document.getElementById('timerTxt').textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
+    const badge = document.getElementById('timerBadge');
+    if (timeLeft <= 120) { badge.className = 'timer-badge danger'; }
+    else if (timeLeft <= 300) { badge.className = 'timer-badge warn'; }
     if (timeLeft <= 0) { clearInterval(timerInterval); finish(); }
   }, 1000);
 }
@@ -546,19 +545,19 @@ function startTimer() {
 /* TOP UI */
 function updateTop() {
   const total = questions.length;
-  document.getElementById( sCorrect ).textContent = correct;
-  document.getElementById( sWrong ).textContent = wrong;
-  document.getElementById( sRemain ).textContent = Math.round(((total - answered) / total) * 100) +  % ;
-  document.getElementById( progLabel ).textContent =  Question   + (i + 1) +   /   + total;
-  document.getElementById( progFill ).style.width = ((i + 1) / total * 100) +  % ;
-  document.getElementById( prog-bar ).style.width = ((i + 1) / total * 100) +  % ;
+  document.getElementById('sCorrect').textContent = correct;
+  document.getElementById('sWrong').textContent = wrong;
+  document.getElementById('sRemain').textContent = Math.round(((total - answered) / total) * 100) + '%';
+  document.getElementById('progLabel').textContent = 'Question ' + (i + 1) + ' / ' + total;
+  document.getElementById('progFill').style.width = ((i + 1) / total * 100) + '%';
+  document.getElementById('prog-bar').style.width = ((i + 1) / total * 100) + '%';
 }
 
 /* RENDER QUESTION */
 function render() {
   updateTop();
   const q = questions[i];
-  document.getElementById( app ).innerHTML = `
+  document.getElementById('app').innerHTML = `
     <div class="q-card">
       <div class="q-header">
         <div class="q-num">Question ${i + 1} / ${questions.length}</div>
@@ -570,7 +569,7 @@ function render() {
             <div class="opt-letter">${LETTERS[idx] || idx + 1}</div>
             ${o}
           </div>
-        `).join(  )}
+        `).join('')}
       </div>
       <div class="nav-btns">
         <button class="btn btn-skip" onclick="skip()"><i class="fa-solid fa-forward"></i> Skip</button>
@@ -589,31 +588,31 @@ function choose(v) {
   updateTop();
 
   q.o.forEach((_, idx) => {
-    const el = document.getElementById( opt  + idx);
-    el.classList.add( disabled );
-    if (idx === q.a) el.classList.add( correct );
-    else if (idx === v) el.classList.add( wrong );
+    const el = document.getElementById('opt' + idx);
+    el.classList.add('disabled');
+    if (idx === q.a) el.classList.add('correct');
+    else if (idx === v) el.classList.add('wrong');
   });
 
-  const fb = document.createElement( div );
-  fb.className =  feedback-bar   + (ok ?  ok  :  no );
+  const fb = document.createElement('div');
+  fb.className = 'feedback-bar ' + (ok ? 'ok' : 'no');
   fb.innerHTML = ok
-    ? `<span class="feedback-icon">🎉</span> <span>شطور جدا ، اللهم بارك</span>`
-    : `<span class="feedback-icon">💡</span> <span> الصح ، لا غلط : <b>${q.o[q.a]}</b></span>`;
+    ? `<span class="feedback-icon">🎉</span> <span>Correct answer! Well done</span>`
+    : `<span class="feedback-icon">💡</span> <span>Correct answer: <b>${q.o[q.a]}</b></span>`;
 
-  const card = document.querySelector( .q-card );
-  card.querySelector( .options ).after(fb);
+  const card = document.querySelector('.q-card');
+  card.querySelector('.options').after(fb);
   if (q.exp) {
-    const exp = document.createElement( div );
-    exp.className =  explanation ;
-    exp.style.display =  block ;
-    exp.innerHTML =  <b>💬 Explanation:</b>   + q.exp;
+    const exp = document.createElement('div');
+    exp.className = 'explanation';
+    exp.style.display = 'block';
+    exp.innerHTML = '<b>💬 Explanation:</b> ' + q.exp;
     fb.after(exp);
   }
 
-  const navBtns = card.querySelector( .nav-btns );
+  const navBtns = card.querySelector('.nav-btns');
   navBtns.innerHTML = `<button class="btn btn-next" onclick="next()">
-    ${i < questions.length - 1 ?  <i class="fa-solid fa-arrow-right"></i> Next Question  :  <i class="fa-solid fa-flag-checkered"></i> Finish Exam }
+    ${i < questions.length - 1 ? '<i class="fa-solid fa-arrow-right"></i> Next Question' : '<i class="fa-solid fa-flag-checkered"></i> Finish Exam'}
   </button>`;
 }
 
@@ -625,7 +624,7 @@ function skip() {
 
 /* NEXT */
 function next() {
-  if (i < questions.length - 1) { i++; render(); window.scrollTo({top: 0, behavior:  smooth }); }
+  if (i < questions.length - 1) { i++; render(); window.scrollTo({top: 0, behavior: 'smooth'}); }
   else finish();
 }
 
@@ -646,27 +645,27 @@ function finish() {
   wrongSet = [...new Map(wrongItems.map(q => [q.t, q])).values()];
 
   let grade, gradeColor;
-  if (score >= 90) { grade =  🥇 Excellent ; gradeColor =  var(--success) ; }
-  else if (score >= 75) { grade =  🥈 Very Good ; gradeColor =  var(--accent) ; }
-  else if (score >= 60) { grade =  🥉 Good ; gradeColor =  var(--warn) ; }
-  else { grade =  📚 Needs Review ; gradeColor =  var(--danger) ; }
+  if (score >= 90) { grade = '🥇 Excellent'; gradeColor = 'var(--success)'; }
+  else if (score >= 75) { grade = '🥈 Very Good'; gradeColor = 'var(--accent)'; }
+  else if (score >= 60) { grade = '🥉 Good'; gradeColor = 'var(--warn)'; }
+  else { grade = '📚 Needs Review'; gradeColor = 'var(--danger)'; }
 
   const circ = 2 * Math.PI * 45;
   const offset = circ - (score / 100) * circ;
 
   const reportHTML = questions.map((q, idx) => {
     const ok = answers[idx] === q.a;
-    return `<div class="report-item ${ok ?  ok  :  no }">
-      <div class="ri-q">${ok ?  ✅  :  ❌ } ${q.t}</div>
+    return `<div class="report-item ${ok ? 'ok' : 'no'}">
+      <div class="ri-q">${ok ? '✅' : '❌'} ${q.t}</div>
       ${!ok ? `
-        <div class="ri-row"><span class="ri-badge ri-yours">Your Answer</span> ${answers[idx] >= 0 ? q.o[answers[idx]] :  Skipped }</div>
+        <div class="ri-row"><span class="ri-badge ri-yours">Your Answer</span> ${answers[idx] >= 0 ? q.o[answers[idx]] : 'Skipped'}</div>
         <div class="ri-row"><span class="ri-badge ri-right">Correct</span> ${q.o[q.a]}</div>
-      ` :   }
+      ` : ''}
     </div>`;
-  }).join(  );
+  }).join('');
 
-  document.getElementById( prog-bar ).style.width =  100% ;
-  document.getElementById( app ).innerHTML = `
+  document.getElementById('prog-bar').style.width = '100%';
+  document.getElementById('app').innerHTML = `
     <div class="result-hero">
       <div class="score-ring">
         <svg viewBox="0 0 110 110">
@@ -687,7 +686,7 @@ function finish() {
     </div>
 
     <div class="result-actions">
-      ${wrongSet.length ? `<button class="btn btn-retry" onclick="retryWrong()"><i class="fa-solid fa-rotate-right"></i> Retry Wrong Questions (${wrongSet.length})</button>` :   }
+      ${wrongSet.length ? `<button class="btn btn-retry" onclick="retryWrong()"><i class="fa-solid fa-rotate-right"></i> Retry Wrong Questions (${wrongSet.length})</button>` : ''}
       <button class="btn btn-home" onclick="init(RAW_QUESTIONS)"><i class="fa-solid fa-shuffle"></i> New Random Exam</button>
       <a href="https://gaith-team.github.io/exam/" class="btn btn-home" style="text-decoration:none;"><i class="fa-solid fa-house"></i> Back to Subject</a>
     </div>
@@ -697,8 +696,8 @@ function finish() {
       ${reportHTML}
     </div>`;
 
-  setTimeout(() => { document.getElementById( ringFill ).style.strokeDashoffset = offset; }, 100);
-  window.scrollTo({top: 0, behavior:  smooth });
+  setTimeout(() => { document.getElementById('ringFill').style.strokeDashoffset = offset; }, 100);
+  window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
 /* RETRY WRONG — re-shuffle options again */
@@ -714,20 +713,20 @@ function retryWrong() {
   answers = new Array(questions.length).fill(null);
   wrongSet = []; answered = 0; timeLeft = totalTime;
   startTimer(); render();
-  window.scrollTo({top: 0, behavior:  smooth });
+  window.scrollTo({top: 0, behavior: 'smooth'});
 }
 
 /* THEME */
-const themeBtn = document.getElementById( themeBtn );
-let theme = localStorage.getItem( theme ) ||  light ;
+const themeBtn = document.getElementById('themeBtn');
+let theme = localStorage.getItem('theme') || 'light';
 function applyTheme(t) {
   theme = t;
-  document.documentElement.setAttribute( data-theme , t ===  dark  ?  dark  :   );
-  themeBtn.textContent = t ===  dark  ?  ☀️  :  🌙 ;
-  localStorage.setItem( theme , t);
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', t);
 }
 applyTheme(theme);
-themeBtn.addEventListener( click , () => applyTheme(theme ===  dark  ?  light  :  dark ));
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
 
 /* START */
 init(RAW_QUESTIONS);
