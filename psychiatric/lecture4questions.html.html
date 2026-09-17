@@ -1,0 +1,914 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --accent:       #7c3aed;
+  --accent-light: #8b5cf6;
+  --accent-dark:  #6d28d9;
+  --accent-glow:  rgba(124,58,237,0.2);
+  --bg:      #f8fafc;
+  --bg2:     #eef2f7;
+  --card:    #ffffff;
+  --text:    #1a2332;
+  --text2:   #4a5568;
+  --text3:   #718096;
+  --bc:      rgba(0,0,0,0.07);
+  --success: #16a34a;
+  --danger:  #dc2626;
+  --warn:    #6d28d9;
+  --r:       16px;
+  --tr:      all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="dark"] {
+  --bg:   #0d1117; --bg2: #161b22; --card: #1c2333;
+  --text: #e6edf3; --text2: #b1bac4; --text3: #7d8590;
+  --bc:   rgba(255,255,255,0.08);
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg); color: var(--text);
+  min-height: 100vh; overflow-x: hidden;
+  transition: background .4s, color .4s;
+}
+
+/* PROGRESS TOP */
+#prog-bar {
+  position: fixed; top: 0; left: 0; height: 3px; z-index: 999;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  transition: width .2s;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px; height: 64px;
+  background: rgba(248,250,252,.93); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--bc); transition: var(--tr);
+}
+[data-theme="dark"] nav { background: rgba(13,17,23,.95); }
+
+.nav-back {
+  display: flex; align-items: center; gap: 7px;
+  color: var(--text2); text-decoration: none; font-size: 13px; font-weight: 700;
+  padding: 7px 13px; border-radius: 8px; border: 1px solid var(--bc);
+  background: var(--card); transition: var(--tr);
+}
+.nav-back:hover { color: var(--accent); border-color: var(--accent-glow); transform: translateX(3px); }
+.nav-brand { display: flex; align-items: center; gap: 9px; font-size: 15px; font-weight: 900; color: var(--text); }
+.nav-logo-icon {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 12px; font-weight: 900;
+}
+.nav-right { display: flex; align-items: center; gap: 8px; }
+.shuffle-btn {
+  border: 1px solid var(--bc);
+  background: var(--bg2);
+  color: var(--text);
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: .2s ease;
+  font-family: inherit;
+}
+.shuffle-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.theme-btn {
+  width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--bc);
+  background: var(--card); cursor: pointer; font-size: 15px;
+  display: flex; align-items: center; justify-content: center; transition: var(--tr);
+}
+.theme-btn:hover { border-color: var(--accent); transform: rotate(20deg); }
+
+/* HERO BAND */
+.hero-band {
+  margin-top: 64px;
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent), var(--accent-light));
+  padding: 40px 24px 36px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.hero-band::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 600px 200px at 50% 100%, rgba(255,255,255,.12) 0%, transparent 70%);
+}
+.hero-band-icon {
+  width: 68px; height: 68px; border-radius: 20px;
+  background: rgba(255,255,255,.2); backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 30px; margin: 0 auto 14px; border: 1.5px solid rgba(255,255,255,.35);
+}
+.hero-band h1 { font-size: clamp(20px,4vw,30px); font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero-band p { font-size: 13px; color: rgba(255,255,255,.8); }
+.hero-band-meta {
+  display: flex; justify-content: center; gap: 24px; margin-top: 20px;
+  flex-wrap: wrap;
+}
+.meta-pill {
+  background: rgba(255,255,255,.18); backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,.3); border-radius: 50px;
+  padding: 6px 16px; font-size: 12px; font-weight: 700; color: #fff;
+  display: flex; align-items: center; gap: 6px;
+}
+
+/* EXAM SHELL */
+.shell { max-width: 560px; margin: 0 auto; padding: 24px 20px 80px; }
+
+/* STATS ROW */
+.stats-row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 16px;
+}
+.stat-box {
+  background: var(--card); border: 1px solid var(--bc); border-radius: var(--r);
+  padding: 12px 10px; text-align: center;
+}
+.stat-box .val { font-size: 20px; font-weight: 900; }
+.stat-box .lbl { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.stat-correct { color: var(--success); }
+.stat-wrong   { color: var(--danger); }
+.stat-remain  { color: var(--accent); }
+
+/* PROGRESS STRIP */
+.prog-strip {
+  background: var(--card); border: 1px solid var(--bc); border-radius: var(--r);
+  padding: 14px 16px; margin-bottom: 16px;
+  display: flex; align-items: center; gap: 14px;
+}
+.prog-label { font-size: 13px; font-weight: 700; color: var(--text2); white-space: nowrap; }
+.prog-track { flex: 1; height: 8px; background: var(--bg2); border-radius: 8px; overflow: hidden; }
+.prog-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  border-radius: 8px; transition: width .4s;
+}
+.timer-badge {
+  min-width: 64px; height: 36px; border-radius: 18px;
+  background: var(--bg2); border: 1px solid var(--bc);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 900; color: var(--text);
+  gap: 5px; padding: 0 12px; flex-shrink: 0;
+}
+.timer-badge.warn { color: var(--warn); border-color: rgba(217,119,6,.3); background: rgba(217,119,6,.08); }
+.timer-badge.danger { color: var(--danger); border-color: rgba(220,38,38,.3); background: rgba(220,38,38,.08); animation: pulse .8s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.6} }
+
+/* QUESTION CARD */
+.q-card {
+  background: var(--card); border: 1px solid var(--bc);
+  border-radius: 20px; overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+  transition: box-shadow .3s;
+}
+.q-header {
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  padding: 4px 18px 4px;
+  display: flex; align-items: center; gap: 8px;
+}
+.q-num {
+  background: rgba(255,255,255,.2); border-radius: 8px;
+  padding: 3px 10px; font-size: 11px; font-weight: 700; color: #fff;
+}
+.q-text {
+  padding: 22px 18px 14px; font-size: 15px; font-weight: 700; color: var(--text);
+  line-height: 1.65; border-bottom: 1px solid var(--bc);
+  text-align: left; direction: ltr;
+}
+.options { padding: 14px 18px 18px; display: flex; flex-direction: column; gap: 10px; }
+
+/* OPTION */
+.opt {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px; border-radius: 12px;
+  border: 1.5px solid var(--bc); background: var(--bg);
+  cursor: pointer; font-size: 14px; font-weight: 600; color: var(--text);
+  transition: var(--tr); user-select: none;
+  direction: ltr; text-align: left;
+}
+.opt:hover:not(.disabled) {
+  border-color: var(--accent); background: var(--accent-glow);
+  transform: translateX(3px);
+}
+.opt-letter {
+  width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+  background: var(--bg2); border: 1px solid var(--bc);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 900; color: var(--text3);
+  transition: var(--tr);
+}
+.opt.correct {
+  border-color: var(--success); background: rgba(22,163,74,.08);
+}
+.opt.correct .opt-letter {
+  background: var(--success); color: #fff; border-color: var(--success);
+}
+.opt.wrong {
+  border-color: var(--danger); background: rgba(220,38,38,.07);
+}
+.opt.wrong .opt-letter {
+  background: var(--danger); color: #fff; border-color: var(--danger);
+}
+.opt.disabled { pointer-events: none; }
+
+/* FEEDBACK */
+.feedback-bar {
+  margin: 14px 18px; padding: 12px 16px; border-radius: 12px;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px; font-weight: 700;
+  animation: popIn .4s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes popIn { from{transform:scale(.8);opacity:0} to{transform:scale(1);opacity:1} }
+.feedback-bar.ok { background: rgba(22,163,74,.1); color: var(--success); border: 1px solid rgba(22,163,74,.25); }
+.feedback-bar.no { background: rgba(220,38,38,.08); color: var(--danger); border: 1px solid rgba(220,38,38,.2); }
+.feedback-icon { font-size: 20px; }
+
+/* EXPLANATION */
+.explanation {
+  margin: 0 18px 14px; padding: 12px 14px;
+  background: rgba(var(--accent-rgb),.06);
+  border-radius: 10px; border-right: 3px solid var(--accent);
+  font-size: 13px; color: var(--text2); line-height: 1.6;
+  display: none;
+}
+
+/* NAV BTNS */
+.nav-btns { padding: 4px 18px 18px; display: flex; gap: 10px; }
+.btn {
+  flex: 1; padding: 13px; border: none; border-radius: 12px;
+  font-size: 14px; font-weight: 900; cursor: pointer;
+  font-family: 'Outfit', sans-serif; transition: var(--tr);
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+}
+.btn-next {
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  color: #fff; box-shadow: 0 4px 14px var(--accent-glow);
+}
+.btn-next:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
+.btn-skip {
+  background: var(--bg2); color: var(--text2); border: 1px solid var(--bc); flex: 0 0 auto; padding: 13px 18px;
+}
+.btn-skip:hover { border-color: var(--warn); color: var(--warn); }
+
+/* ===== RESULTS ===== */
+.result-hero {
+  text-align: center; padding: 36px 20px 28px;
+  background: var(--card); border-radius: 20px;
+  border: 1px solid var(--bc); margin-bottom: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+}
+.score-ring {
+  width: 110px; height: 110px; border-radius: 50%; margin: 0 auto 18px;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; border: 5px solid var(--bg2);
+  position: relative;
+}
+.score-ring svg { position: absolute; inset: -5px; width: calc(100% + 10px); height: calc(100% + 10px); transform: rotate(-90deg); }
+.score-ring circle { fill: none; stroke-width: 5; stroke-linecap: round; }
+.ring-bg { stroke: var(--bg2); }
+.ring-fill { stroke: var(--accent); transition: stroke-dashoffset 1s ease; }
+.score-num { font-size: 28px; font-weight: 900; color: var(--text); }
+.score-pct { font-size: 12px; color: var(--text3); }
+.result-grade { font-size: 22px; font-weight: 900; margin-bottom: 6px; }
+.result-sub { font-size: 14px; color: var(--text2); }
+.result-stats {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 20px;
+}
+.rs { background: var(--bg2); border-radius: 10px; padding: 12px 8px; text-align: center; }
+.rs .n { font-size: 20px; font-weight: 900; }
+.rs .l { font-size: 11px; color: var(--text3); }
+
+/* REPORT ITEMS */
+.report-item {
+  background: var(--card); border: 1px solid var(--bc); border-radius: 14px;
+  padding: 16px; margin-bottom: 10px; border-right: 4px solid var(--bc);
+}
+.report-item.ok { border-right-color: var(--success); }
+.report-item.no { border-right-color: var(--danger); }
+.report-item .ri-q { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+.report-item .ri-row {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; margin-top: 5px; color: var(--text2);
+}
+.ri-badge {
+  padding: 2px 8px; border-radius: 6px; font-weight: 700; font-size: 11px; flex-shrink: 0;
+}
+.ri-yours { background: rgba(220,38,38,.1); color: var(--danger); }
+.ri-right { background: rgba(22,163,74,.1); color: var(--success); }
+
+.result-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+.btn-retry { background: linear-gradient(135deg, var(--accent-dark), var(--accent)); color: #fff; }
+.btn-retry:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
+.btn-home { background: var(--bg2); color: var(--text); border: 1px solid var(--bc); }
+.btn-home:hover { border-color: var(--accent); color: var(--accent); }
+
+/* FOOTER */
+footer {
+  background: var(--bg2); border-top: 1px solid var(--bc);
+  padding: 22px 24px; display: flex; align-items: center;
+  justify-content: space-between; flex-wrap: wrap; gap: 10px;
+}
+.footer-brand { font-size: 14px; font-weight: 700; }
+.footer-brand span { color: var(--accent); }
+.footer-tg { display: flex; align-items: center; gap: 5px; text-decoration: none; color: #229ED9; font-size: 12px; font-weight: 600; }
+
+@media (max-width: 480px) {
+  nav { padding: 0 14px; }
+  .shell { padding: 16px 14px 60px; }
+  .nav-brand span { display: none; }
+  .hero-band { padding: 30px 16px 28px; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog-bar" style="width:0%"></div>
+
+<nav>
+  <a href="https://gaith-team.github.io/exam/psychiatric/index.html" class="nav-back"><i class="fa-solid fa-arrow-right"></i> رجوع</a>
+  <div class="nav-brand">
+    <div class="nav-logo-icon">GT</div>
+    <span>GHAITH TEAM</span>
+  </div>
+  <div class="nav-right">
+    <button class="shuffle-btn" onclick="randomizeQuestions()" title="ترتيب الأسئلة عشوائياً">🔀 عشوائي</button>
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<div class="hero-band">
+  <div class="hero-band-icon">🧠</div>
+  <h1> therapeutic nurse-patient relationship  </h1>
+  <p>Psychiatric Nursing </p>
+  <div class="hero-band-meta">
+    <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">-- سؤال</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-clock"></i> 80 Min</div>
+    <div class="meta-pill"><i class="fa-solid fa-shuffle"></i> Shuffled</div>
+  </div>
+</div>
+
+<div class="shell">
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="val stat-correct" id="sCorrect">0</div>
+      <div class="lbl">✔ صحيح</div>
+    </div>
+    <div class="stat-box">
+      <div class="val stat-wrong" id="sWrong">0</div>
+      <div class="lbl">✖ خطأ</div>
+    </div>
+    <div class="stat-box">
+      <div class="val stat-remain" id="sRemain">--%</div>
+      <div class="lbl">⏳ متبقي</div>
+    </div>
+  </div>
+
+  <!-- PROGRESS STRIP -->
+  <div class="prog-strip">
+    <div class="prog-label" id="progLabel">سؤال ١</div>
+    <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+    <div class="timer-badge" id="timerBadge"><i class="fa-regular fa-clock"></i> <span id="timerTxt">80:00</span></div>
+  </div>
+
+  <!-- APP -->
+  <div id="app"></div>
+</div>
+
+<footer>
+  <div class="footer-brand">GHAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg">
+    <i class="fa-brands fa-telegram"></i> @nursing2bu
+  </a>
+</footer>
+
+<script>
+const QUESTIONS = [
+{t:"The therapeutic nurse-patient relationship is primarily based on all of the following EXCEPT:",
+ o:["Trust and respect","Empathy and compassion","Personal friendship and social bonding","Professional care and confidentiality"],a:2},
+
+{t:"In which nursing specialty is the therapeutic relationship considered especially crucial?",
+ o:["Orthopedic nursing","Psychiatric nursing","Perioperative nursing","Neonatal nursing"],a:1},
+
+{t:"What is the primary goal of the therapeutic nurse-patient relationship?",
+ o:["To develop a long-term friendship with the patient","To improve the patient's health and well-being","To satisfy the nurse's emotional needs","To complete documentation efficiently"],a:1},
+
+{t:"Which component is described as the 'cornerstone' of a successful therapeutic relationship?",
+ o:["Empathy","Effective communication","Trust","Professional boundaries"],a:2},
+
+{t:"Empathy in the therapeutic relationship is best defined as:",
+ o:["Feeling sorry for the patient's situation","The ability to understand and share the patient's feelings","Maintaining strict professional distance at all times","Providing financial assistance to the patient"],a:1},
+
+{t:"Professional boundaries in the therapeutic relationship primarily serve to:",
+ o:["Allow the nurse to share personal problems with the patient","Keep the relationship focused on the patient's care","Encourage social outings between nurse and patient","Eliminate all emotional connection"],a:1},
+
+{t:"Which ethical principle refers to the nurse's duty to 'do no harm'?",
+ o:["Autonomy","Beneficence","Non-maleficence","Justice"],a:2},
+
+{t:"Active listening in the therapeutic relationship involves:",
+ o:["Interrupting the patient to offer quick solutions","Focusing fully on the patient's words and emotions without judgment","Planning the next question while the patient is speaking","Taking detailed notes without making eye contact"],a:1},
+
+{t:"Which of the following best differentiates a therapeutic relationship from a social relationship?",
+ o:["A therapeutic relationship is unlimited in time","A therapeutic relationship is always goal-directed and purposeful","A therapeutic relationship exists for mutual pleasure","A therapeutic relationship develops spontaneously"],a:1},
+
+{t:"In a social relationship, goals typically:",
+ o:["Are established through a formal contract","Are clearly stated at the beginning","Develop spontaneously","Are set by a healthcare professional"],a:2},
+
+{t:"The purpose of the therapeutic relationship is to meet the needs of:",
+ o:["Both the nurse and the patient equally","The patient, rather than the nurse","The healthcare institution primarily","The patient's family members only"],a:1},
+
+{t:"Which characteristic is typical of the orientation (initiating) phase?",
+ o:["Decreased anxiety and high trust","High level of anxiety and lack of trust","Complete independence of the patient","Problem resolution and termination planning"],a:1},
+
+{t:"During the orientation phase, 'testing behavior' by the patient is best understood as:",
+ o:["An attempt to sabotage treatment permanently","A way the patient seeks to establish trust in the relationship","A sign that the patient should be discharged","An indication that the nurse has failed"],a:1},
+
+{t:"A therapeutic contract should include all of the following EXCEPT:",
+ o:["Time, place, and length of sessions","The nurse's personal home address","Client and nurse responsibilities","When the session will terminate"],a:1},
+
+{t:"The working phase of the therapeutic relationship is characterized by:",
+ o:["High anxiety and lack of knowledge","Decreased anxiety and increased trust between nurse and patient","Complete detachment and termination of contact","Initial stranger interactions"],a:1},
+
+{t:"During the working phase, the exploration sub-phase focuses on:",
+ o:["Introducing hospital facilities","Guiding the client to examine feelings and develop better coping skills","Preparing the client for discharge only","Signing the initial contract"],a:1},
+
+{t:"The termination phase begins when:",
+ o:["The nurse and client first meet","The client is admitted to the hospital","The problems are resolved","The nurse feels emotionally exhausted"],a:2},
+
+{t:"During the termination phase, the client may experience the ending of the relationship as:",
+ o:["A joyful celebration","An impending loss","A completely neutral event","An opportunity to start a social friendship"],a:1},
+
+{t:"Self-disclosure by the nurse is acceptable when:",
+ o:["The nurse needs emotional support from the patient","It has been determined that the information will assist in meeting the therapeutic needs of the client","The nurse wants to share personal problems","It helps the nurse feel more comfortable"],a:1},
+
+{t:"The use of restraints by a nurse is acceptable only when:",
+ o:["The nurse feels personally threatened by the patient's attitude","It is in accordance with quality care standards, agency policies, and legal provisions","The patient requests to be restrained for comfort","The family insists on restraint use"],a:1},
+
+{t:"Which of the following is an example of emotional/verbal abuse in the nurse-patient relationship?",
+ o:["Active listening","Sarcasm and intimidation","Providing clear health education","Maintaining confidentiality"],a:1},
+
+{t:"Physical abuse in the nurse-patient relationship includes all of the following EXCEPT:",
+ o:["Hitting and slapping","Gentle repositioning of a bedridden patient","Pushing and shaking","Using force and rough handling"],a:1},
+
+{t:"Neglect in the nurse-patient relationship occurs when the nurse:",
+ o:["Provides too much emotional support","Fails to meet the basic needs of clients who are unable to meet them themselves","Spends excessive time with the patient","Encourages family involvement"],a:1},
+
+{t:"Financial abuse by a nurse includes:",
+ o:["Explaining hospital billing procedures","Borrowing money or property from a client","Helping the patient access insurance benefits","Documenting medication administration"],a:1},
+
+{t:"In the teacher role, the psychiatric nurse primarily:",
+ o:["Makes all decisions for the patient","Teaches the client new methods of coping and problem-solving","Provides only physical care","Avoids discussing medications"],a:1},
+
+{t:"The primary caregiving role in a mental health setting involves:",
+ o:["Performing surgical procedures","Implementing the therapeutic relationship to build trust","Managing the hospital budget","Supervising other nurses only"],a:1},
+
+{t:"The advocate role of the nurse includes all of the following EXCEPT:",
+ o:["Ensuring privacy and dignity","Promoting informed consent","Making treatment decisions on behalf of the patient without consultation","Ensuring safety from abuse"],a:2},
+
+{t:"When a nurse assumes the parent surrogate role, the nurse must:",
+ o:["Encourage the patient's dependency indefinitely","Be clear and firm and set limits","Take over all aspects of the patient's life","Ignore the patient's attempts at independence"],a:1},
+
+{t:"High levels of dependency and anxiety are most characteristic of which phase?",
+ o:["Working phase","Termination phase","Orientation (initiating) phase","Pre-interaction phase"],a:2},
+
+{t:"Promoting independence is a specific task of which phase?",
+ o:["Orientation phase","Working phase","Pre-orientation phase","Social phase"],a:1},
+
+{t:"Mutual expectation between nurse and patient occurs during which phase?",
+ o:["Termination phase","Working phase – exploration","Orientation phase","Post-discharge phase"],a:2},
+
+{t:"The problem identification sub-phase occurs during the:",
+ o:["Orientation phase","Working phase","Termination phase","Pre-interaction phase"],a:1},
+
+{t:"During the termination phase, the nurse should:",
+ o:["Increase the frequency of visits","Gradually reduce visits and encourage the patient to socialize with others","Avoid discussing feelings about the ending","Extend the contract indefinitely"],a:1},
+
+{t:"Which of the following is a task of the termination phase?",
+ o:["Establishing the initial contract","Gathering baseline data","Expressing feelings about the loss of the relationship","Introducing hospital personnel"],a:2},
+
+{t:"Insensitivity to religious and cultural beliefs is classified as:",
+ o:["Acceptable behavior in the therapeutic relationship","An unavoidable aspect of care","Unacceptable behavior in the nurse-patient relationship","A form of active listening"],a:2},
+
+{t:"The therapeutic relationship enables the nurse to understand the patient's holistic needs, which include:",
+ o:["Physical needs only","Emotional needs only","Physical, emotional, and social needs","Financial needs only"],a:2},
+
+{t:"Empowering the patient in the therapeutic relationship means:",
+ o:["Making all decisions for the patient","Helping the patient make informed decisions about their care","Limiting the patient's access to information","Restricting the patient's participation in treatment"],a:1},
+
+{t:"The principle of flexibility in the therapeutic relationship requires the nurse to:",
+ o:["Maintain a rigid care plan regardless of changes","Adjust care plans and interventions as the patient's condition evolves","Ignore the patient's changing needs","Follow only the physician's orders without assessment"],a:1},
+
+{t:"Non-verbal communication that helps build rapport includes:",
+ o:["Sarcasm and swearing","Body language and eye contact","Ignoring the patient","Cultural slurs"],a:1},
+
+{t:"A social relationship is primarily established for the purpose of:",
+ o:["Professional healthcare delivery","Pleasure, companionship, or friendship","Meeting the patient's clinical needs","Achieving therapeutic goals"],a:1},
+
+{t:"In a social relationship, the duration of the relationship is typically:",
+ o:["Time-limited and contract-based","Unlimited","Determined by the healthcare team","Six weeks maximum"],a:1},
+
+{t:"The orientation phase ends when:",
+ o:["The patient is discharged","The client begins to identify problems to examine","The nurse completes the initial assessment","The contract is signed"],a:1},
+
+{t:"Which of the following is NOT a task of the working phase?",
+ o:["Maintaining the relationship","Exploring perceptions of reality","Establishing the initial contract","Facilitating behavior change"],a:2},
+
+{t:"Providing necessary referrals and links with community resources is a task of the:",
+ o:["Orientation phase","Working phase","Termination phase","Pre-interaction phase"],a:2},
+
+{t:"Self-disclosure for the purpose of meeting the nurse's personal needs is:",
+ o:["Encouraged in psychiatric nursing","Acceptable if the patient agrees","Not acceptable","A key component of the working phase"],a:2},
+
+{t:"Which of the following behaviors is considered acceptable in the nurse-patient relationship?",
+ o:["Borrowing money from a client","Using restraints in accordance with legal provisions and agency policies","Using sarcasm during interactions","Isolating the client as punishment"],a:1},
+
+{t:"Withholding medication, food, and fluids from a client is an example of:",
+ o:["Therapeutic intervention","Neglect","Active listening","Professional boundary setting"],a:1},
+
+{t:"The nurse's role as advocate requires the nurse to be observant of:",
+ o:["Only the patient's family members","Other healthcare professionals' actions regarding the patient","Only the hospital administration","The nurse's own personal needs"],a:1},
+
+{t:"The working phase is usually divided into how many sub-phases?",
+ o:["One","Two","Three","Four"],a:1},
+
+{t:"The principle of 'beneficence' in the therapeutic relationship means the nurse must:",
+ o:["Respect the patient's right to refuse treatment","Act in the patient's best interest","Ensure fairness in treatment allocation","Do no harm to the patient"],a:1},
+
+{t:"The therapeutic nurse-patient relationship is time-limited.",o:["True","False"],a:0},
+{t:"In a social relationship, definite goals are usually established at the beginning.",o:["True","False"],a:1},
+{t:"Trust is considered the cornerstone of a successful therapeutic relationship.",o:["True","False"],a:0},
+{t:"Self-disclosure by the nurse to meet her own personal needs is acceptable in the therapeutic relationship.",o:["True","False"],a:1},
+{t:"The termination phase begins when the patient's problems are resolved.",o:["True","False"],a:0},
+{t:"The working phase is characterized by a high level of anxiety and lack of trust.",o:["True","False"],a:1},
+{t:"Confidentiality may be breached when required by law.",o:["True","False"],a:0},
+{t:"A social relationship is set up for mutual need satisfaction of both participants.",o:["True","False"],a:0},
+{t:"When assuming the parent surrogate role, the nurse must be clear, firm, and set limits.",o:["True","False"],a:0},
+{t:"The orientation phase is centered upon mutual attempts for the nurse and patient to know each other.",o:["True","False"],a:0},
+
+{t:"A newly admitted psychiatric patient refuses to speak to the nurse and turns away when approached. The nurse recognizes this behavior as most likely occurring in which phase of the therapeutic relationship?",
+ o:["Working phase","Termination phase","Orientation phase","Post-discharge phase"],a:2},
+
+{t:"During the first meeting, a patient asks the nurse, 'Are you really going to be here every day, or will you leave like everyone else?' This behavior is best identified as:",
+ o:["Exploration behavior","Testing behavior","Termination behavior","Advocacy behavior"],a:1},
+
+{t:"A nurse shares with a patient that she also lost a parent recently and begins crying during the session. This is an example of:",
+ o:["Appropriate therapeutic empathy","Acceptable self-disclosure","Inappropriate self-disclosure to meet the nurse's personal needs","Effective active listening"],a:2},
+
+{t:"A patient in the working phase says, 'I think my anger problems started when my father left.' The nurse responds by exploring the patient's feelings about this event. This is an example of which working phase task?",
+ o:["Gathering baseline data","Exploring perceptions of reality and feelings","Establishing the contract","Preparing for termination"],a:1},
+
+{t:"A nurse is caring for a patient from a different cultural background. The patient requests specific dietary accommodations based on religious beliefs. The nurse dismisses the request as 'unnecessary.' This behavior is classified as:",
+ o:["Professional boundary setting","Insensitivity to religious and cultural beliefs","Appropriate use of resources","Effective communication"],a:1},
+
+{t:"A psychiatric nurse notices a colleague borrowing money from a long-term patient. This behavior is best classified as:",
+ o:["Acceptable social interaction","Financial abuse","Therapeutic self-disclosure","Appropriate advocacy"],a:1},
+
+{t:"During the termination phase, a patient becomes tearful and says, 'I don't want you to stop coming.' The most appropriate nursing response is to:",
+ o:["Extend the therapeutic relationship indefinitely","Acknowledge the patient's feelings and discuss the impending loss","Ignore the tears and focus on discharge paperwork","Tell the patient that crying is inappropriate"],a:1},
+
+{t:"A nurse consistently fails to provide a bedridden patient with meals and fluids during a busy shift. This behavior constitutes:",
+ o:["Acceptable prioritization of care","Neglect","Professional boundary maintenance","Therapeutic limit-setting"],a:1},
+
+{t:"A patient in the orientation phase exhibits aggressive behavior toward the nurse. The nurse understands this as:",
+ o:["A permanent barrier to treatment","A testing behavior as the patient seeks trust","A reason to terminate the relationship immediately","A sign of the working phase"],a:1},
+
+{t:"A nurse is assigned to care for her neighbor who has been admitted to the psychiatric unit. According to therapeutic relationship guidelines, this situation is:",
+ o:["Always prohibited and the nurse must refuse","Acceptable in small communities as part of professional employment","A violation of confidentiality","A form of financial abuse"],a:1},
+
+{t:"A patient tells the nurse a secret about self-harm and asks the nurse not to tell anyone. The nurse explains that confidentiality must be breached in this situation. This action is:",
+ o:["A violation of the therapeutic contract","Ethically and legally appropriate when safety is at risk","A sign of poor communication skills","An example of neglect"],a:1},
+
+{t:"During a session, the nurse maintains eye contact, nods, and paraphrases the patient's statements. The nurse is demonstrating:",
+ o:["Testing behavior","Active listening","Self-disclosure","Parent surrogate role"],a:1},
+
+{t:"A patient in the working phase has developed positive coping mechanisms and a more positive self-image. The nurse begins to discuss future goals and reduce the frequency of sessions. The relationship is transitioning to the:",
+ o:["Orientation phase","Working phase – problem identification","Termination phase","Pre-interaction phase"],a:2},
+
+{t:"A nurse uses sarcasm and an intimidating tone when a patient repeatedly asks the same question. This behavior is an example of:",
+ o:["Effective limit-setting","Emotional/verbal abuse","Appropriate teaching","Therapeutic confrontation"],a:1},
+
+{t:"A psychiatric nurse teaches a patient about a new medication regimen and available community support groups. The nurse is functioning in which role?",
+ o:["Advocate","Parent surrogate","Teacher","Caregiver only"],a:2},
+
+{t:"A patient with childlike behavior requires assistance with bathing. The nurse provides personal care while maintaining clear limits and encouraging the patient's independence. The nurse is managing which role appropriately?",
+ o:["Teacher","Advocate","Parent surrogate","Social companion"],a:2},
+
+{t:"A nurse ensures that a patient's informed consent is obtained before a procedure and protects the patient's privacy during examinations. The nurse is acting in the role of:",
+ o:["Teacher","Parent surrogate","Advocate","Social friend"],a:2},
+
+{t:"During the orientation phase, the nurse introduces herself, explains hospital routines, and discusses the treatment contract with the patient. These actions are aimed at:",
+ o:["Terminating the relationship","Establishing rapport and gaining patient acceptance","Promoting independence","Exploring deep psychological issues"],a:1},
+
+{t:"A nurse physically shakes a confused patient who is not responding to verbal commands. This action is classified as:",
+ o:["Appropriate use of restraints","Physical abuse","Therapeutic touch","Active intervention"],a:1},
+
+{t:"A patient in the termination phase is encouraged by the nurse to join a community support group and interact with other individuals. This intervention aims to:",
+ o:["Prolong the therapeutic relationship","Promote independence and social integration","Replace the nurse with another healthcare provider","Avoid dealing with the patient's feelings"],a:1},
+
+{t:"A nurse pressures a vulnerable elderly patient to change his will in the nurse's favor. This is an example of:",
+ o:["Advocacy","Financial abuse through coercion","Appropriate caregiving","Therapeutic empowerment"],a:1},
+
+{t:"During the working phase, a patient says, 'I feel like nobody understands me.' The nurse responds, 'It sounds like you're feeling very alone right now.' This response demonstrates:",
+ o:["Sarcasm","Empathy","Neglect","Testing behavior"],a:1},
+
+{t:"A nurse and patient have been working together for several weeks. The patient now actively participates in care planning and openly discusses feelings. This indicates the relationship is in the:",
+ o:["Orientation phase","Working phase","Termination phase","Social phase"],a:1},
+
+{t:"A nurse uses chemical restraints on a patient without a physician's order or legal justification, simply because the patient is 'annoying.' This action is:",
+ o:["Acceptable under agency policy","An appropriate use of professional judgment","Unacceptable and a violation of quality care standards","A form of therapeutic intervention"],a:2},
+
+{t:"A patient asks the nurse about her marital status and personal life. The nurse briefly acknowledges the question but redirects the conversation to the patient's treatment goals. This demonstrates:",
+ o:["Inappropriate self-disclosure","Maintenance of professional boundaries","Neglect of the patient's needs","Emotional abuse"],a:1},
+
+{t:"During the orientation phase, the nurse and patient agree on meeting every Tuesday and Thursday at 10 AM for 45 minutes. This agreement represents:",
+ o:["A social arrangement","A therapeutic contract","A termination plan","A working phase task"],a:1},
+
+{t:"A nurse isolates a patient in a room without clinical justification and ignores the patient's call bell for hours. This behavior is best classified as:",
+ o:["Therapeutic limit-setting","Neglect and emotional abuse","Appropriate use of professional boundaries","Active listening"],a:1},
+
+{t:"A patient in the working phase has identified that his anxiety stems from workplace stress. The nurse helps him develop relaxation techniques and problem-solving strategies. This is an example of:",
+ o:["Orientation phase tasks","Developing positive coping mechanisms during the working phase","Termination phase tasks","Parent surrogate role"],a:1},
+
+{t:"A nurse consistently uses an inappropriate tone of voice and cultural slurs when speaking to a patient of a different ethnicity. This behavior violates which principle of the therapeutic relationship?",
+ o:["Flexibility","Mutual respect and ethical behavior","Active listening","Patient autonomy"],a:1},
+
+{t:"At the beginning of the relationship, both the nurse and the patient feel anxious and uncertain. The nurse recognizes this as a normal characteristic of the:",
+ o:["Working phase","Termination phase","Orientation phase","Post-termination phase"],a:2},
+
+{t:"The therapeutic nurse-patient relationship is based on trust, respect, empathy, and ________.",
+ o:["competition","compassion","isolation","indifference"],a:1},
+
+{t:"________ is the cornerstone of a successful therapeutic relationship.",
+ o:["Empathy","Confidentiality","Trust","Flexibility"],a:2},
+
+{t:"The orientation phase is characterized by a high level of anxiety and lack of ________.",
+ o:["empathy","trust","flexibility","independence"],a:1},
+
+{t:"The working phase is divided into problem identification and ________.",
+ o:["termination","orientation","exploration","contracting"],a:2},
+
+{t:"The principle of ________ requires the nurse to act in the patient's best interest.",
+ o:["non-maleficence","justice","autonomy","beneficence"],a:3},
+
+{t:"In the termination phase, the nurse gradually reduces visits to allow for the patient's ________.",
+ o:["dependency","isolation","independence","anxiety"],a:2},
+
+{t:"Self-disclosure by the nurse is acceptable only when it assists in meeting the ________ needs of the client.",
+ o:["social","financial","therapeutic","personal"],a:2},
+
+{t:"The nurse's role as ________ includes ensuring privacy, dignity, and informed consent.",
+ o:["teacher","caregiver","advocate","parent surrogate"],a:2},
+
+{t:"A therapeutic relationship is ________ in time, whereas a social relationship is unlimited.",
+ o:["unlimited","flexible","limited","open-ended"],a:2},
+
+{t:"Withholding food, fluids, and medication from a client who cannot meet their own needs is an example of ________.",
+ o:["abuse","neglect","advocacy","restraint"],a:1}
+];
+
+/* ============ ENGINE ============ */
+let questions, i, correct, wrong, answers, wrongSet, answered;
+let totalTime = 80*60, timeLeft, timerInterval;
+const LETTERS = ['A','B','C','D','E','F'];
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function randomizeQuestions() {
+  if (!confirm('🔀 هل تريد بدء الامتحان من جديد بترتيب أسئلة عشوائي؟')) return;
+  init(QUESTIONS);
+}
+
+function init(pool) {
+  questions = shuffle([...pool]);
+  i = 0; correct = 0; wrong = 0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = []; answered = 0;
+  timeLeft = totalTime;
+  document.getElementById('totalBadge').textContent = questions.length + ' سؤال';
+  startTimer();
+  render();
+}
+
+/* TIMER */
+function startTimer() {
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    const m = Math.floor(timeLeft / 60), s = timeLeft % 60;
+    document.getElementById('timerTxt').textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
+    const badge = document.getElementById('timerBadge');
+    if (timeLeft <= 120) { badge.className = 'timer-badge danger'; }
+    else if (timeLeft <= 300) { badge.className = 'timer-badge warn'; }
+    if (timeLeft <= 0) { clearInterval(timerInterval); finish(); }
+  }, 1000);
+}
+
+/* TOP UI */
+function updateTop() {
+  const total = questions.length;
+  document.getElementById('sCorrect').textContent = correct;
+  document.getElementById('sWrong').textContent = wrong;
+  document.getElementById('sRemain').textContent = Math.round(((total - answered) / total) * 100) + '%';
+  document.getElementById('progLabel').textContent = 'سؤال ' + (i + 1) + ' / ' + total;
+  document.getElementById('progFill').style.width = ((i + 1) / total * 100) + '%';
+  document.getElementById('prog-bar').style.width = ((i + 1) / total * 100) + '%';
+}
+
+/* RENDER QUESTION */
+function render() {
+  updateTop();
+  const q = questions[i];
+  // Randomize answer choices while keeping the original correct-answer index
+  const order = shuffle(q.o.map((_, idx) => idx));
+  q._displayOrder = order;
+  document.getElementById('app').innerHTML = `
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">سؤال ${i + 1} / ${questions.length}</div>
+      </div>
+      <div class="q-text">${q.t}</div>
+      <div class="options">
+        ${order.map((originalIdx, displayIdx) => `
+          <div class="opt" id="opt${originalIdx}" onclick="choose(${originalIdx})">
+            <div class="opt-letter">${LETTERS[displayIdx] || displayIdx + 1}</div>
+            <div class="opt-text">${q.o[originalIdx]}</div>
+          </div>
+        `).join('')}
+      </div>
+      <div class="nav-btns">
+        <button class="btn btn-skip" onclick="skip()"><i class="fa-solid fa-forward"></i> تخطي</button>
+      </div>
+    </div>`;
+}
+
+/* CHOOSE */
+function choose(v) {
+  if (answers[i] !== null) return;
+  answers[i] = v;
+  answered++;
+  const q = questions[i];
+  const ok = v === q.a;
+  ok ? correct++ : wrong++;
+  updateTop();
+
+  q.o.forEach((_, idx) => {
+    const el = document.getElementById('opt' + idx);
+    el.classList.add('disabled');
+    if (idx === q.a) el.classList.add('correct');
+    else if (idx === v) el.classList.add('wrong');
+  });
+
+  const fb = document.createElement('div');
+  fb.className = 'feedback-bar ' + (ok ? 'ok' : 'no');
+  fb.innerHTML = ok
+    ? `<span class="feedback-icon">🥳</span> <span>ما شاء الله عليك 🎉</span>`
+    : `<span class="feedback-icon">😢</span> <span>ركز ونحاول فيها تاني</span>`;
+
+  const card = document.querySelector('.q-card');
+  card.querySelector('.options').after(fb);
+  if (q.exp) {
+    const exp = document.createElement('div');
+    exp.className = 'explanation';
+    exp.style.display = 'block';
+    exp.innerHTML = '<b>💬 شرح:</b> ' + q.exp;
+    fb.after(exp);
+  }
+
+  const navBtns = card.querySelector('.nav-btns');
+  navBtns.innerHTML = `<button class="btn btn-next" onclick="next()">
+    ${i < questions.length - 1 ? '<i class="fa-solid fa-arrow-left"></i> السؤال التالي' : '<i class="fa-solid fa-flag-checkered"></i> إنهاء الامتحان'}
+  </button>`;
+}
+
+/* SKIP */
+function skip() {
+  if (answers[i] === null) { answers[i] = -1; answered++; wrongSet.push(questions[i]); wrong++; updateTop(); }
+  next();
+}
+
+/* NEXT */
+function next() {
+  if (i < questions.length - 1) { i++; render(); window.scrollTo({top: 0, behavior: 'smooth'}); }
+  else finish();
+}
+
+/* FINISH */
+function finish() {
+  clearInterval(timerInterval);
+  const total = questions.length;
+  const score = Math.round((correct / total) * 100);
+
+  questions.forEach((q, idx) => {
+    if (answers[idx] !== q.a) wrongSet.push({...q, myAns: answers[idx]});
+  });
+  wrongSet = [...new Map(wrongSet.map(q => [q.t, q])).values()];
+
+  let grade, gradeColor;
+  if (score >= 90) { grade = '🥇 ممتاز'; gradeColor = 'var(--success)'; }
+  else if (score >= 75) { grade = '🥈 جيد جداً'; gradeColor = 'var(--accent)'; }
+  else if (score >= 60) { grade = '🥉 جيد'; gradeColor = 'var(--warn)'; }
+  else { grade = '📚 راجع تاني'; gradeColor = 'var(--danger)'; }
+
+  const circ = 2 * Math.PI * 45;
+  const offset = circ - (score / 100) * circ;
+
+  const reportHTML = questions.map((q, idx) => {
+    const ok = answers[idx] === q.a;
+    return `<div class="report-item ${ok ? 'ok' : 'no'}">
+      <div class="ri-q">${ok ? '✅' : '❌'} ${q.t}</div>
+      ${!ok ? `
+        <div class="ri-row"><span class="ri-badge ri-yours">إجابتك</span> ${answers[idx] >= 0 ? q.o[answers[idx]] : 'تم التخطي'}</div>
+        <div class="ri-row"><span class="ri-badge ri-right">الصحيح</span> ${q.o[q.a]}</div>
+      ` : ''}
+    </div>`;
+  }).join('');
+
+  document.getElementById('prog-bar').style.width = '100%';
+  document.getElementById('app').innerHTML = `
+    <div class="result-hero">
+      <div class="score-ring">
+        <svg viewBox="0 0 110 110">
+          <circle class="ring-bg" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="0"/>
+          <circle class="ring-fill" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="${circ}"
+            style="stroke:${gradeColor}" id="ringFill"/>
+        </svg>
+        <div class="score-num">${score}</div>
+        <div class="score-pct">%</div>
+      </div>
+      <div class="result-grade" style="color:${gradeColor}">${grade}</div>
+      <div class="result-sub">أجبت على ${answered} من ${total} سؤال</div>
+      <div class="result-stats">
+        <div class="rs"><div class="n" style="color:var(--success)">${correct}</div><div class="l">صحيح</div></div>
+        <div class="rs"><div class="n" style="color:var(--danger)">${wrong}</div><div class="l">خطأ</div></div>
+        <div class="rs"><div class="n" style="color:var(--accent)">${total - answered < 0 ? 0 : total - answered}</div><div class="l">تخطي</div></div>
+      </div>
+    </div>
+
+    <div class="result-actions">
+      ${wrongSet.length ? `<button class="btn btn-retry" onclick="retryWrong()"><i class="fa-solid fa-rotate-right"></i> إعادة الخطأ (${wrongSet.length})
+
+</button>` : ''}
+      <button class="btn btn-home" onclick="init(QUESTIONS)"><i class="fa-solid fa-shuffle"></i> امتحان جديد عشوائي 🔀</button>
+      <a href="https://gaith-team.github.io/exam/psychiatric/index.html" class="btn btn-home" style="text-decoration:none;"><i class="fa-solid fa-house"></i> 
+
+رجوع للمادة</a>
+    </div>
+
+    <div style="margin-top:28px">
+      <div style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text2)">📋 تقرير مفصّل</div>
+      ${reportHTML}
+    </div>`;
+
+  setTimeout(() => { document.getElementById('ringFill').style.strokeDashoffset = offset; }, 100);
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+/* RETRY WRONG */
+function retryWrong() {
+  const pool = [...wrongSet];
+  questions = shuffle(pool); i = 0; correct = 0; wrong = 0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = []; answered = 0; timeLeft = totalTime;
+  startTimer(); render();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+/* THEME */
+const themeBtn = document.getElementById('themeBtn');
+let theme = localStorage.getItem('theme') || 'light';
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', t);
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+
+/* START */
+init(QUESTIONS);
+</script>
+</body>
+</html>
