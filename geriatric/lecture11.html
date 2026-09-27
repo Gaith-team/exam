@@ -478,8 +478,6 @@ const QUESTIONS = [
 
 {t:"Which of the following correctly identifies a direct cause of symptoms in terminal illness?",o:["Nausea from gastric pressure","Dyspnea due to chronic obstructive lung disease","Anorexia from abdominal distension","Fatigue from medication side effects"],a:1},
 
-{t:"In the context of palliative care, 'impeccable assessment' as defined by WHO refers to:",o:["Assessment done only once","Flawless and thorough assessment of pain and other problems","Assessment limited to physical symptoms","Assessment performed only by doctors"],a:1},
-
 {t:"A palliative care team is experiencing conflict between professions. The necessary competence to address this is:",o:["Isolation of team members","Leadership and conflict management ability","Reducing team size","Eliminating the nursing role"],a:1},
 
 {t:"Palliative care is only appropriate for elderly patients.",o:["True","False"],a:1},
@@ -502,7 +500,6 @@ const QUESTIONS = [
 
 {t:"The nurse is usually the cornerstone of any palliative care service.",o:["True","False"],a:0},
 
-{t:"Hospice care focuses on curing the illness in the final months of life.",o:["True","False"],a:1},
 
 {t:"Palliative care volunteers are paid professionals from the hospital staff.",o:["True","False"],a:1},
 
@@ -527,8 +524,6 @@ const QUESTIONS = [
 
 {t:"A 55-year-old man with AIDS is experiencing severe pain and spiritual distress. He has no religious affiliation. The palliative care team should:",o:["Skip spiritual assessment since he has no religion","Conduct a spiritual assessment broader than religion alone","Only address physical pain","Refer him to a surgeon"],a:1},
 
-{t:"A terminally ill patient's skin is becoming fragile and breaking down easily. The nurse should:",o:["Ignore skin changes as they are normal","Assess skin condition on an ongoing basis","Apply tight bandages","Stop all skin care"],a:1},
-
 {t:"A 68-year-old woman with metastatic breast cancer is receiving palliative care at home. The hospice nurse should assess the patient:",o:["Every 4 hours","Weekly, as changes occur","Only once a month","Only when the family calls"],a:1},
 
 {t:"A patient nearing end of life shows decreased level of consciousness and absent reflexes. The nurse recognizes these as important findings in which assessment?",o:["Nutritional assessment","Neurological assessment","Skin assessment","Financial assessment"],a:1},
@@ -551,8 +546,6 @@ const QUESTIONS = [
 
 {t:"A patient receiving palliative care at home needs help with washing, dressing, and eating. This type of support falls under which goal of palliative care?",o:["Pain management","Social care","Spiritual support","Research and audit"],a:1},
 
-{t:"A 67-year-old man with terminal cancer is receiving low-dose oral morphine sulfate for dyspnea. The family is concerned about addiction. The nurse should explain that:",o:["Morphine is not used in palliative care","Low-dose opioids are used to alter the perception of breathlessness","Morphine will cure the dyspnea","Opioids should be avoided at end of life"],a:1},
-
 {t:"A palliative care nurse is educating a family about energy conservation for their dyspneic relative. Which recommendation is most appropriate?",o:["Encourage the patient to walk long distances","Place needed equipment, supplies, and nourishment within reach","Remove all furniture from the room","Restrict all physical activity completely"],a:1},
 
 {t:"A 73-year-old woman in hospice care has a life expectancy of 3 months. Her family wants to continue aggressive chemotherapy. The hospice team should explain that:",o:["Hospice care includes all curative treatments","Hospice care focuses on comfort and quality of life in the final months","The patient must leave hospice to receive any medication","Chemotherapy is mandatory in hospice"],a:1},
@@ -568,8 +561,6 @@ const QUESTIONS = [
 {t:"A 74-year-old man with end-stage COPD is being assessed by the palliative care team. His vital signs show changes in circulation, his respiratory pattern is irregular, and his skin is cool and mottled. The nurse recognizes these findings indicate:",o:["Improvement in condition","Changes in circulation and approaching end of life","Normal aging changes","Side effects of antibiotics"],a:1},
 
 {t:"A terminally ill patient's family reports that the primary breadwinner has stopped working to provide care. They are not receiving benefit entitlements and face severe financial hardship. The palliative care team's social assessment should include:",o:["Only medical history","Input from social services, benefit entitlement review, and volunteer/respite care options","Only the patient's medication list","Discharge planning only"],a:1},
-
-{t:"A 63-year-old woman with progressive neurological disease is receiving palliative care. She exhibits depression with suicidal thoughts that have not improved with initial counseling. The most appropriate next step is:",o:["Discontinue all support","Increase opioid dosage","Specialist psychiatric referral","Transfer to a surgical unit"],a:2},
 
 {t:"A palliative care team is conducting a comprehensive assessment of a terminally ill patient. The assessment includes medical diagnosis, vital signs, respiratory status, nutritional intake, skin condition, ADLs, neurological status, and coping abilities. This reflects the principle that:",o:["Assessment should be limited to one system","Assessment should be comprehensive and multidimensional","Only pain assessment is necessary","Assessment is only done at admission"],a:1},
 
@@ -603,8 +594,15 @@ function shuffle(arr) {
   return arr;
 }
 
+function shuffleOptions(q) {
+  const idxs = shuffle(q.o.map((_, idx) => idx));
+  const newO = idxs.map(idx => q.o[idx]);
+  const newA = idxs.indexOf(q.a);
+  return {...q, o: newO, a: newA};
+}
+
 function init(pool) {
-  questions = shuffle([...pool]);
+  questions = shuffle([...pool]).map(shuffleOptions);
   i = 0; correct = 0; wrong = 0;
   answers = new Array(questions.length).fill(null);
   wrongSet = []; answered = 0;
@@ -786,7 +784,7 @@ function finish() {
 /* RETRY WRONG */
 function retryWrong() {
   const pool = [...wrongSet];
-  questions = shuffle(pool); i = 0; correct = 0; wrong = 0;
+  questions = shuffle(pool).map(shuffleOptions); i = 0; correct = 0; wrong = 0;
   answers = new Array(questions.length).fill(null);
   wrongSet = []; answered = 0; timeLeft = totalTime;
   startTimer(); render();
