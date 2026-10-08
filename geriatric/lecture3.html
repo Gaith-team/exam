@@ -380,411 +380,321 @@ footer {
 </footer>
 
 <script>
-const QUESTIONS = [
+const QUESTIONS = [  {t:"Which nutrients are especially important for elderly patients to prevent osteoporosis?",
+   o:["Iron and vitamin C","Folate and vitamin B12","Calcium and vitamin D","Zinc and vitamin A"], a:2},
 
-{t:"Which nutrients are especially important for elderly patients to prevent osteoporosis?",
- o:["Iron and vitamin C","Folate and vitamin B12","Calcium and vitamin D","Zinc and vitamin A"], a:2}
+  {t:"What is a key reason for ensuring adequate hydration in the elderly?",
+   o:["To increase blood pressure","To reduce the risk of dehydration","To promote weight gain","To decrease calcium absorption"], a:1},
 
-// 2
-{t:"What is a key reason for ensuring adequate hydration in the elderly?",
- o:["To increase blood pressure","To reduce the risk of dehydration","To promote weight gain","To decrease calcium absorption"], a:1}
+  {t:"Which type of diet is recommended to prevent constipation in elderly patients?",
+   o:["High-fiber diet","High-sodium diet","Low-protein diet","High-sugar diet"], a:0},
 
-// 3
-{t:"Which type of diet is recommended to prevent constipation in elderly patients?",
- o:["High-fiber diet","High-sodium diet","Low-protein diet","High-sugar diet"], a:0}
+  {t:"To prevent chronic diseases, caregivers should limit which dietary components in elderly meals?",
+   o:["Fiber and water","Protein and calcium","Vitamins and minerals","Salt, sugar, and saturated fats"], a:3},
 
-// 4
-{t:"To prevent chronic diseases, caregivers should limit which dietary components in elderly meals?",
- o:["Fiber and water","Protein and calcium","Vitamins and minerals","Salt, sugar, and saturated fats"], a:3}
+  {t:"What is the primary role of caregivers in medication management for the elderly?",
+   o:["Prescribing new medications","Organizing medications and providing reminders","Performing surgical procedures","Diagnosing illnesses"], a:1},
 
-// 5
-{t:"What is the primary role of caregivers in medication management for the elderly?",
- o:["Prescribing new medications","Organizing medications and providing reminders","Performing surgical procedures","Diagnosing illnesses"], a:1}
+  {t:"Which type of physical activity is most appropriate for elderly patients?",
+   o:["High-intensity weightlifting","Competitive sprinting","Walking, stretching, and low-impact activities","Marathon running"], a:2},
 
-// 6
-{t:"Which type of physical activity is most appropriate for elderly patients?",
- o:["High-intensity weightlifting","Competitive sprinting","Walking, stretching, and low-impact activities","Marathon running"], a:2}
+  {t:"Adequate sleep and rest in elderly patients primarily enhances which bodily function?",
+   o:["Immune function","Bone fracture risk","Appetite suppression","Dehydration"], a:0},
 
-// 7
-{t:"Adequate sleep and rest in elderly patients primarily enhances which bodily function?",
- o:["Immune function","Bone fracture risk","Appetite suppression","Dehydration"], a:0}
+  {t:"Which physical need is closely linked to maintaining the dignity of elderly patients?",
+   o:["Transportation","Medication storage","Financial planning","Personal hygiene"], a:3},
 
-// 8
-{t:"Which physical need is closely linked to maintaining the dignity of elderly patients?",
- o:["Transportation","Medication storage","Financial planning","Personal hygiene"], a:3}
+  {t:"Why are regular health check-ups crucial for elderly patients?",
+   o:["To increase hospital revenue","For early detection and management of health conditions","To replace all medications","To eliminate the need for caregivers"], a:1},
 
-// 9
-{t:"Why are regular health check-ups crucial for elderly patients?",
- o:["To increase hospital revenue","For early detection and management of health conditions","To replace all medications","To eliminate the need for caregivers"], a:1}
+  {t:"Which service helps seniors attend medical appointments without the stress of driving?",
+   o:["Home renovation","Meal delivery","Transportation to appointments","Financial auditing"], a:2},
 
-// 10
-{t:"Which service helps seniors attend medical appointments without the stress of driving?",
- o:["Home renovation","Meal delivery","Transportation to appointments","Financial auditing"], a:2}
+  {t:"Social isolation in elderly patients can lead to which of the following?",
+   o:["Depression and cognitive decline","Improved immune function","Increased bone density","Enhanced metabolism"], a:0},
 
-// 11
-{t:"Social isolation in elderly patients can lead to which of the following?",
- o:["Depression and cognitive decline","Improved immune function","Increased bone density","Enhanced metabolism"], a:0}
+  {t:"Which of the following is an example of meeting the social interaction needs of the elderly?",
+   o:["Prescribing antibiotics","Installing handrails","Scheduling blood tests","Family gatherings and community center activities"], a:3},
 
-// 12
-{t:"Which of the following is an example of meeting the social interaction needs of the elderly?",
- o:["Prescribing antibiotics","Installing handrails","Scheduling blood tests","Family gatherings and community center activities"], a:3}
+  {t:"Which type of relationships provide elderly individuals with comfort through shared life experiences?",
+   o:["Professional-client relationships","Peer relationships","Doctor-patient relationships","Government-official relationships"], a:1},
 
-// 13
-{t:"Which type of relationships provide elderly individuals with comfort through shared life experiences?",
- o:["Professional-client relationships","Peer relationships","Doctor-patient relationships","Government-official relationships"], a:1}
+  {t:"What helps reduce stigma and promote social inclusion for elderly individuals?",
+   o:["Isolation at home","Reducing community programs","Community engagement","Limiting family visits"], a:2},
 
-// 14
-{t:"What helps reduce stigma and promote social inclusion for elderly individuals?",
- o:["Isolation at home","Reducing community programs","Community engagement","Limiting family visits"], a:2}
+  {t:"Which of the following provides elderly individuals with financial security?",
+   o:["Pensions and social insurance","Increased medication doses","Daily exercise routines","Vitamin supplements"], a:0},
 
-// 15
-{t:"Which of the following provides elderly individuals with financial security?",
- o:["Pensions and social insurance","Increased medication doses","Daily exercise routines","Vitamin supplements"], a:0}
+  {t:"Which psychological need involves feeling loved, valued, and connected to others?",
+   o:["Cognitive stimulation","Spiritual fulfillment","Recreation and joy","Love and belonging"], a:3},
 
-// 16
-{t:"Which psychological need involves feeling loved, valued, and connected to others?",
- o:["Cognitive stimulation","Spiritual fulfillment","Recreation and joy","Love and belonging"], a:3}
+  {t:"What type of activities help maintain memory and cognitive function in the elderly?",
+   o:["Prolonged bed rest","Cognitive stimulation such as reading and puzzles","Social isolation","Reduced physical activity"], a:1},
 
-// 17
-{t:"What type of activities help maintain memory and cognitive function in the elderly?",
- o:["Prolonged bed rest","Cognitive stimulation such as reading and puzzles","Social isolation","Reduced physical activity"], a:1},
+  // ---------- Medium (18–35) ----------
+  {t:"What is a key component of effective pain management in elderly patients?",
+   o:["Using a single medication for all patients","Ignoring the patient's pain report","Developing personalized pain management plans","Eliminating all physical activity"], a:2},
 
-// 18
-{t:"What is a key component of effective pain management in elderly patients?",
- o:["Using a single medication for all patients","Ignoring the patient's pain report","Developing personalized pain management plans","Eliminating all physical activity"], a:2}
+  {t:"Which environmental features are vital to prevent falls in elderly living spaces?",
+   o:["Adequate lighting, handrails, and well-maintained flooring","Dim lighting and decorative rugs","Steep staircases without rails","Cluttered walkways"], a:0},
 
-// 19
-{t:"Which environmental features are vital to prevent falls in elderly living spaces?",
- o:["Adequate lighting, handrails, and well-maintained flooring","Dim lighting and decorative rugs","Steep staircases without rails","Cluttered walkways"], a:0}
+  {t:"Why is temperature regulation particularly important in environments for the elderly?",
+   o:["Elderly prefer very cold temperatures","They have an increased metabolic rate","They generate excessive body heat","They have a decreased ability to regulate body temperature"], a:3},
 
-// 20
-{t:"Why is temperature regulation particularly important in environments for the elderly?",
- o:["Elderly prefer very cold temperatures","They have an increased metabolic rate","They generate excessive body heat","They have a decreased ability to regulate body temperature"], a:3}
+  {t:"According to UN principles, older persons should be able to reside at home for how long?",
+   o:["Until age 75 only","As long as possible","Until they require medication","For a maximum of five years after retirement"], a:1},
 
-// 21
-{t:"According to UN principles, older persons should be able to reside at home for how long?",
- o:["Until age 75 only","As long as possible","Until they require medication","For a maximum of five years after retirement"], a:1}
+  {t:"Under which UN principle category does access to health care for maintaining optimum well-being fall?",
+   o:["Independence","Participation","Care","Self-fulfillment"], a:2},
 
-// 22
-{t:"Under which UN principle category does access to health care for maintaining optimum well-being fall?",
- o:["Independence","Participation","Care","Self-fulfillment"], a:2}
+  {t:"Which right ensures that elderly individuals are free from discrimination based on their age?",
+   o:["Freedom from ageism","Right to recreation","Right to housing","Right to transportation"], a:0},
 
-// 23
-{t:"Which right ensures that elderly individuals are free from discrimination based on their age?",
- o:["Freedom from ageism","Right to recreation","Right to housing","Right to transportation"], a:0}
+  {t:"Which statement correctly addresses the misconception that elderly people cannot learn new things?",
+   o:["They can only learn physical skills","Learning is impossible after age 70","They should not be exposed to technology","They can learn new skills including technology, though it may take more time"], a:3},
 
-// 24
-{t:"Which statement correctly addresses the misconception that elderly people cannot learn new things?",
- o:["They can only learn physical skills","Learning is impossible after age 70","They should not be exposed to technology","They can learn new skills including technology, though it may take more time"], a:3}
+  {t:"What type of environment is designed to help elderly individuals adjust to age-related functional losses?",
+   o:["Restrictive environment","Adaptive environment","Clinical-only environment","Isolated environment"], a:1},
 
-// 25
-{t:"What type of environment is designed to help elderly individuals adjust to age-related functional losses?",
- o:["Restrictive environment","Adaptive environment","Clinical-only environment","Isolated environment"], a:1}
+  {t:"Which social need involves interaction between elderly individuals and younger generations?",
+   o:["Peer relationships","Financial security","Intergenerational relationships","Medication management"], a:2},
 
-// 26
-{t:"Which social need involves interaction between elderly individuals and younger generations?",
- o:["Peer relationships","Financial security","Intergenerational relationships","Medication management"], a:2}
+  {t:"Which psychological need is fulfilled through activities such as volunteering, hobbies, and spiritual practices?",
+   o:["Purpose and meaning","Physical mobility","Nutritional adequacy","Temperature regulation"], a:0},
 
-// 27
-{t:"Which psychological need is fulfilled through activities such as volunteering, hobbies, and spiritual practices?",
- o:["Purpose and meaning","Physical mobility","Nutritional adequacy","Temperature regulation"], a:0}
+  {t:"Beyond medical appointments, which service helps elderly people attend social events and visit friends?",
+   o:["Medication delivery","Home cleaning","Meal preparation","Activity transportation"], a:3},
 
-// 28
-{t:"Beyond medical appointments, which service helps elderly people attend social events and visit friends?",
- o:["Medication delivery","Home cleaning","Meal preparation","Activity transportation"], a:3}
+  {t:"What role do green spaces such as parks and gardens play in elderly care environments?",
+   o:["They increase fall risk","Improved mental health and overall well-being","They have no significant impact","They reduce the need for medication"], a:1},
 
-// 29
-{t:"What role do green spaces such as parks and gardens play in elderly care environments?",
- o:["They increase fall risk","Improved mental health and overall well-being","They have no significant impact","They reduce the need for medication"], a:1}
+  {t:"According to UN principles, older persons should be able to participate in determining which of the following?",
+   o:["The national budget","Hospital staffing levels","When and at what pace withdrawal from the labor force takes place","The pricing of medications"], a:2},
 
-// 30
-{t:"According to UN principles, older persons should be able to participate in determining which of the following?",
- o:["The national budget","Hospital staffing levels","When and at what pace withdrawal from the labor force takes place","The pricing of medications"], a:2}
+  {t:"Which right ensures that elderly individuals can form their own associations and movements?",
+   o:["Right to community and support","Right to housing","Right to nutrition","Right to transportation"], a:0},
 
-// 31
-{t:"Which right ensures that elderly individuals can form their own associations and movements?",
- o:["Right to community and support","Right to housing","Right to nutrition","Right to transportation"], a:0}
+  {t:"Which strategy is most effective in combating ageism in society?",
+   o:["Segregating elderly from younger populations","Reducing funding for senior programs","Limiting elderly participation in community events","Implementing policies and education that challenge ageism"], a:3},
 
-// 32
-{t:"Which strategy is most effective in combating ageism in society?",
- o:["Segregating elderly from younger populations","Reducing funding for senior programs","Limiting elderly participation in community events","Implementing policies and education that challenge ageism"], a:3}
+  {t:"Which psychological need addresses the elderly person's fear of illness, abandonment, and financial insecurity?",
+   o:["Recreation and joy","Security and safety","Cognitive stimulation","Self-fulfillment"], a:1},
 
-// 33
-{t:"Which psychological need addresses the elderly person's fear of illness, abandonment, and financial insecurity?",
- o:["Recreation and joy","Security and safety","Cognitive stimulation","Self-fulfillment"], a:1}
+  {t:"What should be minimized in elderly living environments to lower the risk of respiratory and allergic issues?",
+   o:["Natural light","Social interaction","Exposure to harmful chemicals and pollutants","Physical activity"], a:2},
 
-// 34
-{t:"What should be minimized in elderly living environments to lower the risk of respiratory and allergic issues?",
- o:["Natural light","Social interaction","Exposure to harmful chemicals and pollutants","Physical activity"], a:2}
+  {t:"Which UN principle states that older persons should be treated fairly regardless of age, gender, racial or ethnic background?",
+   o:["Dignity","Independence","Participation","Self-fulfillment"], a:0},
 
-// 35
-{t:"Which UN principle states that older persons should be treated fairly regardless of age, gender, racial or ethnic background?",
- o:["Dignity","Independence","Participation","Self-fulfillment"], a:0},
+  // ---------- Hard (36–50) ----------
+  {t:"In comprehensive elderly care, which approach best integrates physical, mental, social, and safety needs?",
+   o:["Disease-centered care","Task-oriented care","Institutional-only care","Person-centered care"], a:3},
 
-// 36
-{t:"In comprehensive elderly care, which approach best integrates physical, mental, social, and safety needs?",
- o:["Disease-centered care","Task-oriented care","Institutional-only care","Person-centered care"], a:3}
+  {t:"Which combination best addresses the full spectrum of nutritional needs in elderly patients?",
+   o:["High sodium, low fiber, limited fluids","Calcium, vitamin D, high fiber, adequate hydration, and limited salt and sugar","High sugar, low protein, minimal vitamins","Low calorie, no supplements, restricted fluids"], a:1},
 
-// 37
-{t:"Which combination best addresses the full spectrum of nutritional needs in elderly patients?",
- o:["High sodium, low fiber, limited fluids","Calcium, vitamin D, high fiber, adequate hydration, and limited salt and sugar","High sugar, low protein, minimal vitamins","Low calorie, no supplements, restricted fluids"], a:1}
+  {t:"What is the documented relationship between sleep and cognitive abilities in elderly patients?",
+   o:["Sleep has no effect on cognition","Excessive sleep causes dementia","Sufficient rest improves cognitive abilities and immune function","Reduced sleep enhances memory retention"], a:2},
 
-// 38
-{t:"What is the documented relationship between sleep and cognitive abilities in elderly patients?",
- o:["Sleep has no effect on cognition","Excessive sleep causes dementia","Sufficient rest improves cognitive abilities and immune function","Reduced sleep enhances memory retention"], a:2}
+  {t:"Which scenario best demonstrates meeting an elderly patient's need for social recognition?",
+   o:["Acknowledging their wisdom, experience, and past contributions","Assigning them only passive roles","Make all decisions on their behalf","Limiting their participation in family events"], a:0},
 
-// 39
-{t:"Which scenario best demonstrates meeting an elderly patient's need for social recognition?",
- o:["Acknowledging their wisdom, experience, and past contributions","Assigning them only passive roles","Making all decisions on their behalf","Limiting their participation in family events"], a:0}
+  {t:"How does participation in decision-making affect the psychological health of elderly individuals?",
+   o:["It increases dependency","It causes confusion and stress","It has no measurable effect","It maintains dignity, social identity, and reduces feelings of uselessness"], a:3},
 
-// 40
-{t:"How does participation in decision-making affect the psychological health of elderly individuals?",
- o:["It increases dependency","It causes confusion and stress","It has no measurable effect","It maintains dignity, social identity, and reduces feelings of uselessness"], a:3}
-
-// 41
-{t:"Which environmental need category encompasses both clean air quality and personal emergency preparedness?",
- o:["Social and community needs","Environmental quality and health","Physical and structural needs","Enabling independence"], a:1}
-
-// 42
-{t:"Under UN Care principles, what should appropriate levels of institutional care provide for elderly residents?",
- o:["Only medical treatment","Isolation for safety","Protection, rehabilitation, and social and mental stimulation in a humane and secure environment","Minimal interaction to reduce costs"], a:2}
-
-// 43
-{t:"Which misconception-reality pair is correctly matched according to geriatric nursing principles?",
- o:["Occasional forgetfulness is normal with age, but dementia is not a natural part of aging","All elderly people suffer from dementia","Memory loss is always irreversible in the elderly","Dementia affects every person over 70"], a:0}
-
-// 44
-{t:"What distinguishes the right to self-fulfillment from the right to participation for elderly individuals?",
- o:["Self-fulfillment is only about physical health","There is no distinction between the two rights","Participation focuses solely on financial contributions","Self-fulfillment focuses on full personal development through educational, cultural, spiritual, and recreational resources"], a:3}
-
-// 45
-{t:"Which factor most comprehensively addresses the safety and security needs of elderly patients?",
- o:["Providing only medication reminders","Ensuring home safety only","Offering only financial advice","Home safety, financial security, and access to necessary resources"], a:1}
-
-// 46
-{t:"In the context of environmental needs, what does 'enabling independence' primarily involve?",
- o:["Removing all caregivers from the home","Restricting the elderly to one room","Supporting the elderly person's ability to manage daily routines and maintain self-management","Requiring full assistance for all activities"], a:2}
-
-// 47
-{t:"Which statement best reflects the UN principle of self-fulfillment for elderly persons?",
- o:["They should have access to educational, cultural, spiritual, and recreational resources of society","They should retire from all activities","They should depend entirely on family","They should only focus on medical care"], a:0}
-
-// 48
-{t:"What is the most effective approach to simultaneously meeting both physical and psychological needs of elderly patients?",
- o:["Focusing exclusively on medication","Providing only bed rest","Limiting social contact to reduce infection risk","Integrating regular exercise, social activities, and cognitive stimulation into daily routines"], a:3}
-
-// 49
-{t:"Which combination of community services best supports elderly independence and social participation?",
- o:["Only emergency medical services","Transportation, shopping assistance, and activity transportation","Only institutional care","Only financial auditing services"], a:1}
-
-// 50
-{t:"According to the comprehensive framework of elderly care, what is the overarching goal of meeting all elderly needs?",
- o:["Reducing healthcare costs","Maximizing hospital admissions","Maintaining the patient's independence, dignity, and quality of life","Eliminating all chronic conditions"], a:2},
-
-// 1
-{t:"Proper nutrition is crucial for maintaining good health in the elderly.",
- o:["True","False"], a:0}
-
-// 2
-{t:"Dementia is a natural and inevitable part of the aging process.",
- o:["True","False"], a:1}
-
-// 3
-{t:"Regular exercise helps improve cardiovascular health, muscle tone, and joint flexibility in elderly patients.",
- o:["True","False"], a:0}
-
-// 4
-{t:"Elderly people are unable to learn new skills, including technology.",
- o:["True","False"], a:1}
-
-// 5
-{t:"Social isolation in elderly individuals can lead to loneliness, depression, and cognitive decline.",
- o:["True","False"], a:0}
-
-// 6
-{t:"All elderly people are physically weak and always sick.",
- o:["True","False"], a:1}
-
-// 7
-{t:"Adequate hydration in the elderly helps reduce the risk of dehydration.",
- o:["True","False"], a:0}
-</pre>
-
-<h3><span class="tag medium">Medium</span> Questions 8–14</h3>
-<pre>
-// 8
-{t:"Older adults have an increased ability to regulate their body temperature compared to younger adults.",
- o:["True","False"], a:1}
-
-// 9
-{t:"Peer relationships help elderly individuals cope with aging-related challenges by providing shared understanding.",
- o:["True","False"], a:0}
-
-// 10
-{t:"According to UN principles, older persons should be required to withdraw from the labor force at a fixed mandatory age.",
- o:["True","False"], a:1}
-
-// 11
-{t:"Spiritual fulfillment helps many elderly individuals cope with illness, loss, and the idea of death.",
- o:["True","False"], a:0}
-
-// 12
-{t:"Elderly individuals universally lose interest in social life as they age.",
- o:["True","False"], a:1}
-
-// 13
-{t:"Access to clean air and a stable climate is fundamental for the health of older adults.",
- o:["True","False"], a:0}
-
-// 14
-{t:"Complete dependence on others always improves the mental health of elderly individuals.",
- o:["True","False"], a:1}
-</pre>
-
-<h3><span class="tag hard">Hard</span> Questions 15–20</h3>
-<pre>
-// 15
-{t:"The UN principle of dignity states that older persons should be valued independently of their economic contribution.",
- o:["True","False"], a:0}
-
-// 16
-{t:"Institutional care for elderly residents should prioritize operational efficiency over humane treatment and respect for dignity.",
- o:["True","False"], a:1}
-
-// 17
-{t:"Intergenerational relationships, such as grandparent-grandchild bonds, provide elderly individuals with a sense of legacy and life satisfaction.",
- o:["True","False"], a:0}
-
-// 18
-{t:"Exposure to environmental pollutants has no significant effect on the health of elderly individuals.",
- o:["True","False"], a:1}
-
-// 19
-{t:"Adaptive environments are designed to help elderly individuals adjust to age-related functional losses and live meaningful, active lives.",
- o:["True","False"], a:0}
-
-// 20
-{t:"The right to independence for elderly persons means they should never receive any form of assistance or support.",
- o:["True","False"], a:1},
-
-{t:"Mrs. Smith, 78, lives alone and rarely leaves her home. She reports persistent feelings of sadness and loneliness. Which need is primarily unmet?",
- o:["Nutritional needs","Medication management","Social interaction and companionship","Environmental lighting"], a:2}
-
-// 2
-{t:"Mr. Johnson, 82, has been diagnosed with osteoporosis. Which nutritional intervention is most appropriate for his condition?",
- o:["Increase calcium and vitamin D intake","Reduce all dairy products","Increase sodium intake","Eliminate protein from his diet"], a:0}
-
-// 3
-{t:"Mrs. Lee, 75, takes eight different medications daily and frequently misses doses or takes them at the wrong time. What should the caregiver prioritize?",
- o:["Reducing the number of medications without consulting a doctor","Encouraging her to self-manage without support","Ignoring the issue as it is common in the elderly","Organizing medications and providing structured reminders"], a:3}
-
-// 4
-{t:"Mr. Davis, 80, complains of chronic knee pain that significantly limits his daily mobility and activities. What is the best initial approach?",
- o:["Tell him to ignore the pain as it is normal for his age","Develop a personalized pain management plan with healthcare professionals","Restrict all physical movement permanently","Increase his medication dosage without medical consultation"], a:1}
-
-// 5
-{t:"Mrs. Garcia, 77, has increasing difficulty bathing and grooming herself independently. Which physical need requires immediate caregiver attention?",
- o:["Sleep and rest","Nutrition","Personal hygiene","Transportation"], a:2}
-
-// 6
-{t:"Mr. Wilson, 85, has not seen his family members in several months and reports feeling abandoned and unloved. Which social need is most clearly unmet?",
- o:["Family support and emotional connection","Community involvement","Intergenerational relationships","Financial security"], a:0}
-
-// 7
-{t:"Mrs. Brown, 73, wants to attend her weekly church group and visit friends but has no reliable means of transportation. Which service would best address her need?",
- o:["Medication delivery service","Home renovation service","Financial counseling","Activity transportation service"], a:3}
-
-// 8
-{t:"Mr. Taylor, 79, struggles with insomnia and reports feeling constantly fatigued during the day. What should the caregiver address first?",
- o:["Sleep environment and establishing regular sleep patterns","Increasing his exercise to high-intensity workouts","Reducing his fluid intake to zero","Eliminating all daytime rest periods"], a:1}
-
-// 9
-{t:"Mrs. Anderson, 76, lives in a home with dim lighting, loose throw rugs, and no handrails in the bathroom. What is the primary environmental concern?",
- o:["Poor ventilation","Inadequate heating","High risk of falls due to poor lighting and obstacles","Lack of green spaces"], a:2}
-
-// 10
-{t:"Mr. Martinez, 81, tells his caregiver he is 'too old' to learn how to use a tablet computer for video calls with his grandchildren. What misconception does this reflect?",
- o:["Elderly cannot learn new things","Elderly are always physically weak","Elderly lose interest in social life","Elderly are a burden on society"], a:0},
-// 11
-{t:"Mrs. Thompson, 74, recently retired from a 40-year teaching career. She now reports feeling useless and without direction. Which psychological need is most affected?",
- o:["Security and safety","Cognitive stimulation","Love and belonging","Purpose and meaning"], a:3}
-
-// 12
-{t:"Mr. Clark, 83, lives in a nursing home where staff make all decisions about his daily schedule, meals, and activities without consulting him. Which right is being violated?",
- o:["Right to housing","Participation in decision-making and autonomy","Right to transportation","Right to nutrition"], a:1}
-
-// 13
-{t:"Mrs. White, 78, has strong family ties and regular family visits, but she has no friends her own age and feels she has no one who truly understands her experiences. Which social need requires attention?",
- o:["Financial security","Community involvement","Friendship and peer relationships","Intergenerational relationships"], a:2}
-
-// 14
-{t:"Mr. Harris, 80, lives in an industrial area with high air pollution. His chronic obstructive pulmonary disease (COPD) has been worsening. Which environmental need is most critically unmet?",
- o:["Clean air and reduced exposure to pollutants","Ergonomic furniture design","Access to green spaces","Temperature regulation"], a:0}
-
-// 15
-{t:"Mrs. Robinson, 76, is mentally sharp and capable, but her adult children make all financial and medical decisions for her without her input. What psychological need is unmet?",
- o:["Recreation and joy","Spiritual fulfillment","Cognitive stimulation","Autonomy and independence"], a:3}
-
-// 16
-{t:"Mr. Lewis, 84, has no pension or savings and constantly worries about affording his medications and housing. Which social need is most clearly unmet?",
- o:["Social security and financial stability","Peer relationships","Community involvement","Intergenerational relationships"], a:1}
-
-// 17
-{t:"Mrs. Walker, 72, lives in a two-story home with no handrails, steep stairs, and poor lighting on the staircase. What environmental modification is most urgent?",
- o:["Adding decorative plants","Installing a new kitchen","Installing handrails and improving accessibility and lighting","Painting the walls a brighter color"], a:2}
-
-// 18
-{t:"Mr. Hall, 79, was an avid woodworker but since moving to an assisted living facility, he has no space or tools to pursue his hobby. He reports feeling bored and unhappy. Which psychological need is unmet?",
- o:["Recreation and joy","Security and safety","Nutritional adequacy","Physical mobility"], a:0}
-
-// 19
-{t:"Mrs. Allen, 77, is consistently treated dismissively by younger healthcare staff who ignore her opinions, speak over her, and refer to her as 'cute.' Which right is being violated?",
- o:["Right to transportation","Right to housing","Right to nutrition","Right to dignity and respect"], a:3}
-
-// 20
-{t:"Mr. Young, 82, has a grandchild who visits every weekend. They share family stories, traditions, and the grandfather teaches the child how to garden. Which social need is being effectively met?",
- o:["Financial security","Intergenerational relationships","Peer relationships","Community involvement"], a:1},
-
-// 21
-{t:"Mrs. King, 75, has type 2 diabetes, limited mobility due to arthritis, lives alone in a rural area, and reports significant loneliness. What is the most comprehensive care approach?",
- o:["Focus exclusively on diabetes medication management","Refer her to a nursing home immediately","Implement person-centered care addressing physical, social, psychological, and environmental needs simultaneously","Provide only transportation to medical appointments"], a:2}
-
-// 22
-{t:"Mr. Scott, 86, resides in a long-term care facility where staff routinely enter his room without knocking, disregard his religious dietary preferences, and make care decisions without his consent. Which UN principle is most clearly violated?",
- o:["Care principle #14: human rights and fundamental freedoms in care facilities, including dignity, beliefs, needs, and privacy","Independence principle #3: withdrawal from labor force","Participation principle #9: forming associations","Self-fulfillment principle #15: developing potential"], a:0}
-
-// 23
-{t:"Mrs. Green, 73, is an active community volunteer and youth mentor. Her local government plans to cut all funding for senior community programs, claiming they are 'non-essential.' Which advocacy approach is most appropriate?",
- o:["Accept the cuts as inevitable","Advocate for Mrs. Green to move to a nursing home","Encourage Mrs. Green to stop volunteering","Combat ageism through policy advocacy and education about the value of elderly contributions"], a:3}
-
-// 24
-{t:"Mr. Adams, 81, presents with early-stage cognitive decline, chronic lower back pain, and significant weight loss due to poor nutrition. Which combination of interventions is most appropriate?",
- o:["Cognitive stimulation, personalized pain management, and comprehensive dietary planning","Only prescribing pain medication","Only increasing caloric intake","Only providing memory games"], a:1}
-
-// 25
-{t:"Mrs. Baker, 78, lives in a remote rural area 50 miles from the nearest hospital and 30 miles from the nearest grocery store. She has no car and limited public transit. Which environmental need is most critical to address?",
- o:["Ergonomic furniture","Green spaces","Access to services and facilities including medical care and groceries","Temperature regulation"], a:2}
-
-// 26
-{t:"Mr. Nelson, 83, was a highly respected university professor for 40 years. Since retirement, he feels invisible in his community and reports that no one values his knowledge anymore. Which psychological and social needs overlap in this case?",
- o:["Self-esteem, respect, and social recognition","Nutrition and hydration","Sleep and rest","Physical mobility and exercise"], a:0}
-
-// 27
-{t:"Mrs. Carter, 76, lives alone in a home with known safety hazards. She is mentally competent but firmly refuses to move to assisted living. Her family is concerned about her safety. How should caregivers best balance her rights?",
- o:["Force her to relocate immediately for her own safety","Ignore the safety hazards since she is an adult","Remove all her furniture to make the home safer","Respect her autonomy while working collaboratively to implement adaptive safety modifications in her home"], a:3}
-
-// 28
-{t:"Mr. Mitchell, 80, is physically healthy and independent but reports deep feelings of emptiness and meaninglessness since his wife passed away six months ago. He has stopped all hobbies and social activities. Which psychological intervention is most appropriate?",
- o:["Prescribing high-dose sedatives","Addressing his need for purpose, meaning, and emotional support through counseling and gradual re-engagement in activities","Telling him to 'get over it' as grief is temporary","Restricting his social contacts to prevent further loss"], a:1}
-
-// 29
-{t:"Mrs. Perez, 74, lives in a region with extreme summer heat. Her home lacks air conditioning, and she was recently hospitalized for heat exhaustion. Which environmental principle is most relevant to her situation?",
- o:["Access to green spaces","Ergonomic design","Comfort and temperature regulation","Social environment"], a:2}
-
-// 30
-{t:"Mr. Turner, 85, visits his primary care physician reporting increasing difficulty remembering recent conversations and appointments. The doctor dismisses his concerns by saying, 'That's just normal old age,' and orders no further testing. What misconception is the doctor displaying?",
- o:["Forgetfulness and cognitive decline are inevitable and untreatable aspects of aging","Elderly patients exaggerate their symptoms","Memory problems only affect patients over 90","Cognitive testing is unnecessary for all elderly patients"], a:0}
+  {t:"Which environmental need category encompasses both clean air quality and personal emergency preparedness?",
+   o:["Social and community needs","Environmental quality and health","Physical and structural needs","Enabling independence"], a:1},
 
+  {t:"Under UN Care principles, what should appropriate levels of institutional care provide for elderly residents?",
+   o:["Only medical treatment","Isolation for safety","Protection, rehabilitation, and social and mental stimulation in a humane and secure environment","Minimal interaction to reduce costs"], a:2},
+
+  {t:"Which misconception-reality pair is correctly matched according to geriatric nursing principles?",
+   o:["Occasional forgetfulness is normal with age, but dementia is not a natural part of aging","All elderly people suffer from dementia","Memory loss is always irreversible in the elderly","Dementia affects every person over 70"], a:0},
+
+  {t:"What distinguishes the right to self-fulfillment from the right to participation for elderly individuals?",
+   o:["Self-fulfillment is only about physical health","There is no distinction between the two rights","Participation focuses solely on financial contributions","Self-fulfillment focuses on full personal development through educational, cultural, spiritual, and recreational resources"], a:3},
+
+  {t:"Which factor most comprehensively addresses the safety and security needs of elderly patients?",
+   o:["Providing only medication reminders","Ensuring home safety only","Offering only financial advice","Home safety, financial security, and access to necessary resources"], a:1},
+
+  {t:"In the context of environmental needs, what does 'enabling independence' primarily involve?",
+   o:["Removing all caregivers from the home","Restricting the elderly to one room","Supporting the elderly person's ability to manage daily routines and maintain self-management","Requiring full assistance for all activities"], a:2},
+
+  {t:"Which statement best reflects the UN principle of self-fulfillment for elderly persons?",
+   o:["They should have access to educational, cultural, spiritual, and recreational resources of society","They should retire from all activities","They should depend entirely on family","They should only focus on medical care"], a:0},
+
+  {t:"What is the most effective approach to simultaneously meeting both physical and psychological needs of elderly patients?",
+   o:["Focusing exclusively on medication","Providing only bed rest","Limiting social contact to reduce infection risk","Integrating regular exercise, social activities, and cognitive stimulation into daily routines"], a:3},
+
+  {t:"Which combination of community services best supports elderly independence and social participation?",
+   o:["Only emergency medical services","Transportation, shopping assistance, and activity transportation","Only institutional care","Only financial auditing services"], a:1},
+
+  {t:"According to the comprehensive framework of elderly care, what is the overarching goal of meeting all elderly needs?",
+   o:["Reducing healthcare costs","Maximizing hospital admissions","Maintaining the patient's independence, dignity, and quality of life","Eliminating all chronic conditions"], a:2}
+];
+
+
+// ==================== TRUE / FALSE QUESTIONS (20) ====================
+const tf = [
+  // ---------- Easy (1–7) ----------
+  {t:"Proper nutrition is crucial for maintaining good health in the elderly.",
+   o:["True","False"], a:0},
+
+  {t:"Dementia is a natural and inevitable part of the aging process.",
+   o:["True","False"], a:1},
+
+  {t:"Regular exercise helps improve cardiovascular health, muscle tone, and joint flexibility in elderly patients.",
+   o:["True","False"], a:0},
+
+  {t:"Elderly people are unable to learn new skills, including technology.",
+   o:["True","False"], a:1},
+
+  {t:"Social isolation in elderly individuals can lead to loneliness, depression, and cognitive decline.",
+   o:["True","False"], a:0},
+
+  {t:"All elderly people are physically weak and always sick.",
+   o:["True","False"], a:1},
+
+  {t:"Adequate hydration in the elderly helps reduce the risk of dehydration.",
+   o:["True","False"], a:0},
+
+  // ---------- Medium (8–14) ----------
+  {t:"Older adults have an increased ability to regulate their body temperature compared to younger adults.",
+   o:["True","False"], a:1},
+
+  {t:"Peer relationships help elderly individuals cope with aging-related challenges by providing shared understanding.",
+   o:["True","False"], a:0},
+
+  {t:"According to UN principles, older persons should be required to withdraw from the labor force at a fixed mandatory age.",
+   o:["True","False"], a:1},
+
+  {t:"Spiritual fulfillment helps many elderly individuals cope with illness, loss, and the idea of death.",
+   o:["True","False"], a:0},
+
+  {t:"Elderly individuals universally lose interest in social life as they age.",
+   o:["True","False"], a:1},
+
+  {t:"Access to clean air and a stable climate is fundamental for the health of older adults.",
+   o:["True","False"], a:0},
+
+  {t:"Complete dependence on others always improves the mental health of elderly individuals.",
+   o:["True","False"], a:1},
+
+  // ---------- Hard (15–20) ----------
+  {t:"The UN principle of dignity states that older persons should be valued independently of their economic contribution.",
+   o:["True","False"], a:0},
+
+  {t:"Institutional care for elderly residents should prioritize operational efficiency over humane treatment and respect for dignity.",
+   o:["True","False"], a:1},
+
+  {t:"Intergenerational relationships, such as grandparent-grandchild bonds, provide elderly individuals with a sense of legacy and life satisfaction.",
+   o:["True","False"], a:0},
+
+  {t:"Exposure to environmental pollutants has no significant effect on the health of elderly individuals.",
+   o:["True","False"], a:1},
+
+  {t:"Adaptive environments are designed to help elderly individuals adjust to age-related functional losses and live meaningful, active lives.",
+   o:["True","False"], a:0},
+
+  {t:"The right to independence for elderly persons means they should never receive any form of assistance or support.",
+   o:["True","False"], a:1}
+];
+
+
+// ==================== CASE-BASED QUESTIONS (30) ====================
+const cases = [
+  // ---------- Easy (1–10) ----------
+  {t:"A 78-year-old female patient lives alone and rarely leaves her home. She reports persistent feelings of sadness and loneliness. Which need is primarily unmet?",
+   o:["Nutritional needs","Medication management","Social interaction and companionship","Environmental lighting"], a:2},
+
+  {t:"An 82-year-old male patient has been diagnosed with osteoporosis. Which nutritional intervention is most appropriate for this condition?",
+   o:["Increase calcium and vitamin D intake","Reduce all dairy products","Increase sodium intake","Eliminate protein from his diet"], a:0},
+
+  {t:"A 75-year-old female patient takes eight different medications daily and frequently misses doses or takes them at the wrong time. What should the caregiver prioritize?",
+   o:["Reducing the number of medications without consulting a doctor","Encouraging her to self-manage without support","Ignoring the issue as it is common in the elderly","Organizing medications and providing structured reminders"], a:3},
+
+  {t:"An 80-year-old male patient complains of chronic knee pain that significantly limits his daily mobility and activities. What is the best initial approach?",
+   o:["Tell him to ignore the pain as it is normal for his age","Develop a personalized pain management plan with healthcare professionals","Restrict all physical movement permanently","Increase his medication dosage without medical consultation"], a:1},
+
+  {t:"A 77-year-old female patient has increasing difficulty bathing and grooming herself independently. Which physical need requires immediate caregiver attention?",
+   o:["Sleep and rest","Nutrition","Personal hygiene","Transportation"], a:2},
+
+  {t:"An 85-year-old male patient has not seen his family members in several months and reports feeling abandoned and unloved. Which social need is most clearly unmet?",
+   o:["Family support and emotional connection","Community involvement","Intergenerational relationships","Financial security"], a:0},
+
+  {t:"A 73-year-old female patient wants to attend her weekly social group and visit friends but has no reliable means of transportation. Which service would best address her need?",
+   o:["Medication delivery service","Home renovation service","Financial counseling","Activity transportation service"], a:3},
+
+  {t:"A 79-year-old male patient struggles with insomnia and reports feeling constantly fatigued during the day. What should the caregiver address first?",
+   o:["Sleep environment and establishing regular sleep patterns","Increasing his exercise to high-intensity workouts","Reducing his fluid intake to zero","Eliminating all daytime rest periods"], a:1},
+
+  {t:"A 76-year-old female patient lives in a home with dim lighting, loose throw rugs, and no handrails in the bathroom. What is the primary environmental concern?",
+   o:["Poor ventilation","Inadequate heating","High risk of falls due to poor lighting and obstacles","Lack of green spaces"], a:2},
+
+  {t:"An 81-year-old male patient tells his caregiver he is 'too old' to learn how to use a tablet computer for video calls with grandchildren. What misconception does this reflect?",
+   o:["Elderly cannot learn new things","Elderly are always physically weak","Elderly lose interest in social life","Elderly are a burden on society"], a:0},
+
+  // ---------- Medium (11–20) ----------
+  {t:"A 74-year-old female patient recently retired from a 40-year teaching career. She now reports feeling useless and without direction. Which psychological need is most affected?",
+   o:["Security and safety","Cognitive stimulation","Love and belonging","Purpose and meaning"], a:3},
+
+  {t:"An 83-year-old male patient lives in a nursing home where staff make all decisions about his daily schedule, meals, and activities without consulting him. Which right is being violated?",
+   o:["Right to housing","Participation in decision-making and autonomy","Right to transportation","Right to nutrition"], a:1},
+
+  {t:"A 78-year-old female patient has strong family ties and regular family visits, but she has no friends her own age and feels she has no one who truly understands her experiences. Which social need requires attention?",
+   o:["Financial security","Community involvement","Friendship and peer relationships","Intergenerational relationships"], a:2},
+
+  {t:"An 80-year-old male patient lives in an industrial area with high air pollution. His chronic obstructive pulmonary disease (COPD) has been worsening. Which environmental need is most critically unmet?",
+   o:["Clean air and reduced exposure to pollutants","Ergonomic furniture design","Access to green spaces","Temperature regulation"], a:0},
+
+  {t:"A 76-year-old female patient is mentally sharp and capable, but her adult children make all financial and medical decisions for her without her input. What psychological need is unmet?",
+   o:["Recreation and joy","Spiritual fulfillment","Cognitive stimulation","Autonomy and independence"], a:3},
+
+  {t:"An 84-year-old male patient has no pension or savings and constantly worries about affording medications and housing. Which social need is most clearly unmet?",
+   o:["Social security and financial stability","Peer relationships","Community involvement","Intergenerational relationships"], a:1},
+
+  {t:"A 72-year-old female patient lives in a two-story home with no handrails, steep stairs, and poor lighting on the staircase. What environmental modification is most urgent?",
+   o:["Adding decorative plants","Installing a new kitchen","Installing handrails and improving accessibility and lighting","Painting the walls a brighter color"], a:2},
+
+  {t:"A 79-year-old male patient was an avid woodworker but since moving to an assisted living facility, he has no space or tools to pursue his hobby. He reports feeling bored and unhappy. Which psychological need is unmet?",
+   o:["Recreation and joy","Security and safety","Nutritional adequacy","Physical mobility"], a:0},
+
+  {t:"A 77-year-old female patient is consistently treated dismissively by younger healthcare staff who ignore her opinions, speak over her, and refer to her as 'cute.' Which right is being violated?",
+   o:["Right to transportation","Right to housing","Right to nutrition","Right to dignity and respect"], a:3},
+
+  {t:"An 82-year-old male patient has a grandchild who visits every weekend. They share family stories, traditions, and the patient teaches the child how to garden. Which social need is being effectively met?",
+   o:["Financial security","Intergenerational relationships","Peer relationships","Community involvement"], a:1},
+
+  // ---------- Hard (21–30) ----------
+  {t:"A 75-year-old female patient has type 2 diabetes, limited mobility due to arthritis, lives alone in a rural area, and reports significant loneliness. What is the most comprehensive care approach?",
+   o:["Focus exclusively on diabetes medication management","Refer her to a nursing home immediately","Implement person-centered care addressing physical, social, psychological, and environmental needs simultaneously","Provide only transportation to medical appointments"], a:2},
+
+  {t:"An 86-year-old male patient resides in a long-term care facility where staff routinely enter his room without knocking, disregard his religious dietary preferences, and make care decisions without his consent. Which UN principle is most clearly violated?",
+   o:["Care principle #14: human rights and fundamental freedoms in care facilities, including dignity, beliefs, needs, and privacy","Independence principle #3: withdrawal from labor force","Participation principle #9: forming associations","Self-fulfillment principle #15: developing potential"], a:0},
+
+  {t:"A 73-year-old female patient is an active community volunteer and youth mentor. Her local government plans to cut all funding for senior community programs, claiming they are 'non-essential.' Which advocacy approach is most appropriate?",
+   o:["Accept the cuts as inevitable","Advocate for her to move to a nursing home","Encourage her to stop volunteering","Combat ageism through policy advocacy and education about the value of elderly contributions"], a:3},
+
+  {t:"An 81-year-old male patient presents with early-stage cognitive decline, chronic lower back pain, and significant weight loss due to poor nutrition. Which combination of interventions is most appropriate?",
+   o:["Cognitive stimulation, personalized pain management, and comprehensive dietary planning","Only prescribing pain medication","Only increasing caloric intake","Only providing memory games"], a:0},
+
+  {t:"A 78-year-old female patient lives in a remote rural area 50 miles from the nearest hospital and 30 miles from the nearest grocery store. She has no car and limited public transit. Which environmental need is most critical to address?",
+   o:["Ergonomic furniture","Green spaces","Access to services and facilities including medical care and groceries","Temperature regulation"], a:2},
+
+  {t:"An 83-year-old retired university professor feels invisible in the community and reports that no one values his knowledge anymore. Which psychological and social needs overlap in this case?",
+   o:["Self-esteem, respect, and social recognition","Nutrition and hydration","Sleep and rest","Physical mobility and exercise"], a:0},
+
+  {t:"A 76-year-old female patient lives alone in a home with known safety hazards. She is mentally competent but firmly refuses to move to assisted living. Her family is concerned about her safety. How should caregivers best balance her rights?",
+   o:["Force her to relocate immediately for her own safety","Ignore the safety hazards since she is an adult","Remove all her furniture to make the home safer","Respect her autonomy while working collaboratively to implement adaptive safety modifications in her home"], a:3},
+
+  {t:"An 80-year-old male patient is physically healthy and independent but reports deep feelings of emptiness and meaninglessness since his spouse passed away six months ago. He has stopped all hobbies and social activities. Which psychological intervention is most appropriate?",
+   o:["Prescribing high-dose sedatives","Addressing his need for purpose, meaning, and emotional support through counseling and gradual re-engagement in activities","Telling him to 'get over it' as grief is temporary","Restricting his social contacts to prevent further loss"], a:1},
+
+  {t:"A 74-year-old female patient lives in a region with extreme summer heat. Her home lacks air conditioning, and she was recently hospitalized for heat exhaustion. Which environmental principle is most relevant to her situation?",
+   o:["Access to green spaces","Ergonomic design","Comfort and temperature regulation","Social environment"], a:2},
+
+  {t:"An 85-year-old patient visits a primary care physician reporting increasing difficulty remembering recent conversations and appointments. The doctor dismisses these concerns by saying, 'That's just normal old age,' and orders no further testing. What misconception is the doctor displaying?",
+   o:["Forgetfulness and cognitive decline are inevitable and untreatable aspects of aging","Elderly patients exaggerate their symptoms","Memory problems only affect patients over 90","Cognitive testing is unnecessary for all elderly patients"], a:0}
 ];
 
 /* ============ ENGINE ============ */
