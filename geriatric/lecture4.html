@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --accent:       #dc2626;
+  --accent-light: #ef4444;
+  --accent-dark:  #b91c1c;
+  --accent-glow:  rgba(220,38,38,0.2);
+  --bg:      #f8fafc;
+  --bg2:     #eef2f7;
+  --card:    #ffffff;
+  --text:    #1a2332;
+  --text2:   #4a5568;
+  --text3:   #718096;
+  --bc:      rgba(0,0,0,0.07);
+  --success: #16a34a;
+  --danger:  #dc2626;
+  --warn:    #b91c1c;
+  --r:       16px;
+  --tr:      all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="dark"] {
+  --bg:   #0d1117; --bg2: #161b22; --card: #1c2333;
+  --text: #e6edf3; --text2: #b1bac4; --text3: #7d8590;
+  --bc:   rgba(255,255,255,0.08);
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg); color: var(--text);
+  min-height: 100vh; overflow-x: hidden;
+  transition: background .4s, color .4s;
+}
+
+/* PROGRESS TOP */
+#prog-bar {
+  position: fixed; top: 0; left: 0; height: 3px; z-index: 999;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  transition: width .2s;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px; height: 64px;
+  background: rgba(248,250,252,.93); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--bc); transition: var(--tr);
+}
+[data-theme="dark"] nav { background: rgba(13,17,23,.95); }
+
+.nav-back {
+  display: flex; align-items: center; gap: 7px;
+  color: var(--text2); text-decoration: none; font-size: 13px; font-weight: 700;
+  padding: 7px 13px; border-radius: 8px; border: 1px solid var(--bc);
+  background: var(--card); transition: var(--tr);
+}
+.nav-back:hover { color: var(--accent); border-color: var(--accent-glow); transform: translateX(3px); }
+.nav-brand { display: flex; align-items: center; gap: 9px; font-size: 15px; font-weight: 900; color: var(--text); }
+.nav-logo-icon {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 12px; font-weight: 900;
+}
+.nav-right { display: flex; align-items: center; gap: 8px; }
+.theme-btn {
+  width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--bc);
+  background: var(--card); cursor: pointer; font-size: 15px;
+  display: flex; align-items: center; justify-content: center; transition: var(--tr);
+}
+.theme-btn:hover { border-color: var(--accent); transform: rotate(20deg); }
+
+/* HERO BAND */
+.hero-band {
+  margin-top: 64px;
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent), var(--accent-light));
+  padding: 40px 24px 36px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.hero-band::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 600px 200px at 50% 100%, rgba(255,255,255,.12) 0%, transparent 70%);
+}
+.hero-band-icon {
+  width: 68px; height: 68px; border-radius: 20px;
+  background: rgba(255,255,255,.2); backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 30px; margin: 0 auto 14px; border: 1.5px solid rgba(255,255,255,.35);
+}
+.hero-band h1 { font-size: clamp(20px,4vw,30px); font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero-band p { font-size: 13px; color: rgba(255,255,255,.8); }
+.hero-band-meta {
+  display: flex; justify-content: center; gap: 24px; margin-top: 20px;
+  flex-wrap: wrap;
+}
+.meta-pill {
+  background: rgba(255,255,255,.18); backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,.3); border-radius: 50px;
+  padding: 6px 16px; font-size: 12px; font-weight: 700; color: #fff;
+  display: flex; align-items: center; gap: 6px;
+}
+
+/* EXAM SHELL */
+.shell { max-width: 560px; margin: 0 auto; padding: 24px 20px 80px; }
+
+/* STATS ROW */
+.stats-row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 16px;
+}
+.stat-box {
+  background: var(--card); border: 1px solid var(--bc); border-radius: var(--r);
+  padding: 12px 10px; text-align: center;
+}
+.stat-box .val { font-size: 20px; font-weight: 900; }
+.stat-box .lbl { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.stat-correct { color: var(--success); }
+.stat-wrong   { color: var(--danger); }
+.stat-remain  { color: var(--accent); }
+
+/* PROGRESS STRIP */
+.prog-strip {
+  background: var(--card); border: 1px solid var(--bc); border-radius: var(--r);
+  padding: 14px 16px; margin-bottom: 16px;
+  display: flex; align-items: center; gap: 14px;
+}
+.prog-label { font-size: 13px; font-weight: 700; color: var(--text2); white-space: nowrap; }
+.prog-track { flex: 1; height: 8px; background: var(--bg2); border-radius: 8px; overflow: hidden; }
+.prog-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  border-radius: 8px; transition: width .4s;
+}
+.timer-badge {
+  min-width: 64px; height: 36px; border-radius: 18px;
+  background: var(--bg2); border: 1px solid var(--bc);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 900; color: var(--text);
+  gap: 5px; padding: 0 12px; flex-shrink: 0;
+}
+.timer-badge.warn { color: var(--warn); border-color: rgba(217,119,6,.3); background: rgba(217,119,6,.08); }
+.timer-badge.danger { color: var(--danger); border-color: rgba(220,38,38,.3); background: rgba(220,38,38,.08); animation: pulse .8s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.6} }
+
+/* QUESTION CARD */
+.q-card {
+  background: var(--card); border: 1px solid var(--bc);
+  border-radius: 20px; overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+  transition: box-shadow .3s;
+}
+.q-header {
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  padding: 4px 18px 4px;
+  display: flex; align-items: center; gap: 8px;
+}
+.q-num {
+  background: rgba(255,255,255,.2); border-radius: 8px;
+  padding: 3px 10px; font-size: 11px; font-weight: 700; color: #fff;
+}
+.q-text {
+  padding: 22px 18px 14px; font-size: 15px; font-weight: 700; color: var(--text);
+  line-height: 1.65; border-bottom: 1px solid var(--bc);
+  text-align: left; direction: ltr;
+}
+.options { padding: 14px 18px 18px; display: flex; flex-direction: column; gap: 10px; }
+
+/* OPTION */
+.opt {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px; border-radius: 12px;
+  border: 1.5px solid var(--bc); background: var(--bg);
+  cursor: pointer; font-size: 14px; font-weight: 600; color: var(--text);
+  transition: var(--tr); user-select: none;
+  direction: ltr; text-align: left;
+}
+.opt:hover:not(.disabled) {
+  border-color: var(--accent); background: var(--accent-glow);
+  transform: translateX(3px);
+}
+.opt-letter {
+  width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+  background: var(--bg2); border: 1px solid var(--bc);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 900; color: var(--text3);
+  transition: var(--tr);
+}
+.opt.correct {
+  border-color: var(--success); background: rgba(22,163,74,.08);
+}
+.opt.correct .opt-letter {
+  background: var(--success); color: #fff; border-color: var(--success);
+}
+.opt.wrong {
+  border-color: var(--danger); background: rgba(220,38,38,.07);
+}
+.opt.wrong .opt-letter {
+  background: var(--danger); color: #fff; border-color: var(--danger);
+}
+.opt.disabled { pointer-events: none; }
+
+/* FEEDBACK */
+.feedback-bar {
+  margin: 14px 18px; padding: 12px 16px; border-radius: 12px;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px; font-weight: 700;
+  animation: popIn .4s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes popIn { from{transform:scale(.8);opacity:0} to{transform:scale(1);opacity:1} }
+.feedback-bar.ok { background: rgba(22,163,74,.1); color: var(--success); border: 1px solid rgba(22,163,74,.25); }
+.feedback-bar.no { background: rgba(220,38,38,.08); color: var(--danger); border: 1px solid rgba(220,38,38,.2); }
+.feedback-icon { font-size: 20px; }
+
+/* EXPLANATION */
+.explanation {
+  margin: 0 18px 14px; padding: 12px 14px;
+  background: rgba(var(--accent-rgb),.06);
+  border-radius: 10px; border-right: 3px solid var(--accent);
+  font-size: 13px; color: var(--text2); line-height: 1.6;
+  display: none;
+}
+
+/* NAV BTNS */
+.nav-btns { padding: 4px 18px 18px; display: flex; gap: 10px; }
+.btn {
+  flex: 1; padding: 13px; border: none; border-radius: 12px;
+  font-size: 14px; font-weight: 900; cursor: pointer;
+  font-family: 'Outfit', sans-serif; transition: var(--tr);
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+}
+.btn-next {
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  color: #fff; box-shadow: 0 4px 14px var(--accent-glow);
+}
+.btn-next:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
+.btn-skip {
+  background: var(--bg2); color: var(--text2); border: 1px solid var(--bc); flex: 0 0 auto; padding: 13px 18px;
+}
+.btn-skip:hover { border-color: var(--warn); color: var(--warn); }
+
+/* ===== RESULTS ===== */
+.result-hero {
+  text-align: center; padding: 36px 20px 28px;
+  background: var(--card); border-radius: 20px;
+  border: 1px solid var(--bc); margin-bottom: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+}
+.score-ring {
+  width: 110px; height: 110px; border-radius: 50%; margin: 0 auto 18px;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; border: 5px solid var(--bg2);
+  position: relative;
+}
+.score-ring svg { position: absolute; inset: -5px; width: calc(100% + 10px); height: calc(100% + 10px); transform: rotate(-90deg); }
+.score-ring circle { fill: none; stroke-width: 5; stroke-linecap: round; }
+.ring-bg { stroke: var(--bg2); }
+.ring-fill { stroke: var(--accent); transition: stroke-dashoffset 1s ease; }
+.score-num { font-size: 28px; font-weight: 900; color: var(--text); }
+.score-pct { font-size: 12px; color: var(--text3); }
+.result-grade { font-size: 22px; font-weight: 900; margin-bottom: 6px; }
+.result-sub { font-size: 14px; color: var(--text2); }
+.result-stats {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 20px;
+}
+.rs { background: var(--bg2); border-radius: 10px; padding: 12px 8px; text-align: center; }
+.rs .n { font-size: 20px; font-weight: 900; }
+.rs .l { font-size: 11px; color: var(--text3); }
+
+/* REPORT ITEMS */
+.report-item {
+  background: var(--card); border: 1px solid var(--bc); border-radius: 14px;
+  padding: 16px; margin-bottom: 10px; border-right: 4px solid var(--bc);
+}
+.report-item.ok { border-right-color: var(--success); }
+.report-item.no { border-right-color: var(--danger); }
+.report-item .ri-q { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+.report-item .ri-row {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; margin-top: 5px; color: var(--text2);
+}
+.ri-badge {
+  padding: 2px 8px; border-radius: 6px; font-weight: 700; font-size: 11px; flex-shrink: 0;
+}
+.ri-yours { background: rgba(220,38,38,.1); color: var(--danger); }
+.ri-right { background: rgba(22,163,74,.1); color: var(--success); }
+
+.result-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+.btn-retry { background: linear-gradient(135deg, var(--accent-dark), var(--accent)); color: #fff; }
+.btn-retry:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
+.btn-home { background: var(--bg2); color: var(--text); border: 1px solid var(--bc); }
+.btn-home:hover { border-color: var(--accent); color: var(--accent); }
+
+/* FOOTER */
+footer {
+  background: var(--bg2); border-top: 1px solid var(--bc);
+  padding: 22px 24px; display: flex; align-items: center;
+  justify-content: space-between; flex-wrap: wrap; gap: 10px;
+}
+.footer-brand { font-size: 14px; font-weight: 700; }
+.footer-brand span { color: var(--accent); }
+.footer-tg { display: flex; align-items: center; gap: 5px; text-decoration: none; color: #229ED9; font-size: 12px; font-weight: 600; }
+
+@media (max-width: 480px) {
+  nav { padding: 0 14px; }
+  .shell { padding: 16px 14px 60px; }
+  .nav-brand span { display: none; }
+  .hero-band { padding: 30px 16px 28px; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog-bar" style="width:0%"></div>
+
+<nav>
+  <a href="https://gaith-team.github.io/exam/" class="nav-back"><i class="fa-solid fa-arrow-right"></i> رجوع</a>
+  <div class="nav-brand">
+    <div class="nav-logo-icon">GT</div>
+    <span>GHAITH TEAM</span>
+  </div>
+  <div class="nav-right">
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<div class="hero-band">
+  <div class="hero-band-icon">📊</div>
+  <h1> Level of prevention </h1>
+  <p> Geriatric </p>
+  <div class="hero-band-meta">
+    <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">-- سؤال</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-clock"></i> 70 Min</div>
+    <div class="meta-pill"><i class="fa-solid fa-shuffle"></i> Shuffled</div>
+  </div>
+</div>
+
+<div class="shell">
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="val stat-correct" id="sCorrect">0</div>
+      <div class="lbl">✔ صحيح</div>
+    </div>
+    <div class="stat-box">
+      <div class="val stat-wrong" id="sWrong">0</div>
+      <div class="lbl">✖ خطأ</div>
+    </div>
+    <div class="stat-box">
+      <div class="val stat-remain" id="sRemain">--%</div>
+      <div class="lbl">⏳ متبقي</div>
+    </div>
+  </div>
+
+  <!-- PROGRESS STRIP -->
+  <div class="prog-strip">
+    <div class="prog-label" id="progLabel">سؤال ١</div>
+    <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+    <div class="timer-badge" id="timerBadge"><i class="fa-regular fa-clock"></i> <span id="timerTxt">70:00</span></div>
+  </div>
+
+  <!-- APP -->
+  <div id="app"></div>
+</div>
+
+<footer>
+  <div class="footer-brand">GHAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg">
+    <i class="fa-brands fa-telegram"></i> @nursing2bu
+  </a>
+</footer>
+
+<script>
+const QUESTIONS = [
+
+    {type:"mcq", diff:"easy", t:"According to the WHO, health is defined as:", o:["The absence of disease or infirmity","A state of complete physical, mental and social well-being and not merely the absence of disease","The ability to work without fatigue","A condition of physical strength only"], a:1},
+    {type:"mcq", diff:"easy", t:"Which level of prevention focuses on preventing a problem before it occurs?", o:["Tertiary prevention","Secondary prevention","Primordial prevention","Primary prevention"], a:3},
+    {type:"mcq", diff:"easy", t:"Health promotion activities are primarily aimed at:", o:["Treating existing chronic diseases","Enhancing resources aimed at improving well-being","Early detection of preclinical signs","Limiting permanent disability"], a:1},
+    {type:"mcq", diff:"easy", t:"How many total levels of prevention are traditionally and modernly recognized?", o:["Two","Three","Four","Five"], a:2},
+    {type:"mcq", diff:"easy", t:"Which level of prevention was added later to the traditional three levels?", o:["Primary prevention","Secondary prevention","Tertiary prevention","Primordial prevention"], a:3},
+    {type:"mcq", diff:"easy", t:"Immunization programs are an example of which level of prevention?", o:["Primordial prevention","Primary prevention (Specific protection)","Secondary prevention","Tertiary prevention"], a:1},
+    {type:"mcq", diff:"easy", t:"Mammography to detect early-stage breast cancer is categorized under:", o:["Primordial prevention","Primary prevention","Secondary prevention","Tertiary prevention"], a:2},
+    {type:"mcq", diff:"easy", t:"Rehabilitation is a core component of which level of prevention?", o:["Primordial prevention","Primary prevention","Secondary prevention","Tertiary prevention"], a:3},
+    {type:"mcq", diff:"easy", t:"Disease prevention activities primarily aim to:", o:["Enhance social well-being exclusively","Protect persons from disease and its consequences","Generate economic revenue","Increase hospital beds"], a:1},
+    {type:"mcq", diff:"easy", t:"Which of the following is an economic benefit of prevention?", o:["Increasing hospital admission rates","Reducing long-term healthcare costs","Eliminating the need for nurses","Increasing surgical procedures"], a:1},
+    {type:"mcq", diff:"easy", t:"Screening procedures belong to which level of prevention?", o:["Primary","Secondary","Tertiary","Primordial"], a:1},
+    {type:"mcq", diff:"easy", t:"Genetic counseling is classified under:", o:["Primordial prevention","Primary prevention – health promotion","Specific protection","Disability limitation"], a:1},
+    {type:"mcq", diff:"easy", t:"Disability limitation belongs to:", o:["Primary prevention","Secondary prevention","Tertiary prevention","Primordial prevention"], a:2},
+    {type:"mcq", diff:"easy", t:"Chemoprophylaxis is an example of:", o:["Health promotion","Specific protection under primary prevention","Secondary screening","Tertiary rehabilitation"], a:1},
+    {type:"mcq", diff:"easy", t:"Environmental sanitation, such as disinfection of water, is part of:", o:["Primordial prevention","Primary prevention – specific protection","Secondary prevention","Disability limitation"], a:1},
+    {type:"mcq", diff:"easy", t:"The main intervention approach in primordial prevention is:", o:["Surgical intervention","Individual and mass education","Pharmacological therapy","Vocational training"], a:1},
+    {type:"mcq", diff:"easy", t:"Routine blood sugar testing for people over 40 to detect diabetes early is:", o:["Primordial prevention","Primary prevention","Secondary prevention","Tertiary prevention"], a:2},
+
+    {type:"mcq", diff:"medium", t:"Primordial prevention focuses on risk factor reduction for:", o:["Individual clinical cases only","An entire population","Hospitalized patients only","Only geriatric patients"], a:1},
+    {type:"mcq", diff:"medium", t:"Which best describes primordial prevention?", o:["Treating disease immediately after diagnosis","Inhibiting the emergence of risk factors in populations where they have not appeared","Early detection through diagnostic screening","Helping patients adjust to irremediable conditions"], a:1},
+    {type:"mcq", diff:"medium", t:"Primary prevention consists of which two major categories?", o:["Screening and early treatment","Health promotion and specific protection","Disability limitation and rehabilitation","Environmental control and chemotherapy"], a:1},
+    {type:"mcq", diff:"medium", t:"Implementing nationwide policies to ban smoking in public places represents:",o:["Primary prevention","Secondary prevention","Tertiary prevention","Primordial prevention"], a:3},
+    {type:"mcq", diff:"medium", t:"Which of the following is NOT part of Health Promotion under primary prevention?", o:["Socio-economic development","Health education on nutrition","Mammography screening","Personal hygiene and exercise"], a:2},
+    {type:"mcq", diff:"medium", t:"Secondary prevention aims to reduce the impact of disease by:", o:["Preventing all initial exposures to hazards","Detecting and treating disease as soon as possible","Banning harmful consumer goods","Providing permanent palliative care"], a:1},
+    {type:"mcq", diff:"medium", t:"Tertiary prevention is applied when:", o:["Risk factors have not yet emerged","The patient is asymptomatic and healthy","The disease process has advanced beyond its early stages","Initial exposure is suspected"], a:2},
+    {type:"mcq", diff:"medium", t:"Disability is defined as:", o:["Any anatomical loss of tissue","Any restriction or lack of ability to perform an activity within the normal range","A temporary feeling of illness","A chronic condition needing surgery"], a:1},
+    {type:"mcq", diff:"medium", t:"Reducing air pollution through environmental policy to prevent respiratory disease is:", o:["Primary prevention","Secondary prevention","Tertiary prevention","Primordial prevention"], a:3},
+    {type:"mcq", diff:"medium", t:"Which of the following is a recognized importance of levels of prevention?", o:["Increased reliance on medication","Higher mortality rate","Improved quality of life","Lengthened hospital stays"], a:2},
+    {type:"mcq", diff:"medium", t:"Which of the following is NOT a required determination before initiating rehabilitation?", o:["Type and severity of disability","Patient's health attitudes","Patient's religious affiliation","Social and family circumstances"], a:2},
+    {type:"mcq", diff:"medium", t:"Encouraging personal strategies to prevent reinjury or recurrence belongs to:", o:["Primordial prevention","Primary prevention","Secondary prevention","Tertiary prevention"], a:2},
+    {type:"mcq", diff:"medium", t:"Which level of prevention is primarily executed via large social changes and national policy?", o:["Primary prevention","Secondary prevention","Tertiary prevention","Primordial prevention"], a:3},
+    {type:"mcq", diff:"medium", t:"Helping people manage long-term, complex health problems to maximize function is:", o:["Primordial prevention","Primary prevention","Secondary prevention","Tertiary prevention"], a:3},
+    {type:"mcq", diff:"medium", t:"Control of insects, rodents, and food sanitation are measures of:", o:["Health promotion","Specific protection","Secondary prevention","Tertiary prevention"], a:1},
+    {type:"mcq", diff:"medium", t:"Adult health problems like obesity and hypertension have early origins in childhood because:", o:["Childhood is when lifestyles and habits are formed","Children lack immune defenses","Adult diseases are entirely genetic","Secondary screening fails in children"], a:0},
+    {type:"mcq", diff:"medium", t:"Prevention is defined as actions aimed at eradicating, eliminating, or:", o:["Increasing the symptoms","Minimizing the impact of disease and disability","Diagnosing terminal illness","Shortening lifespan"], a:1},
+
+    {type:"mcq", diff:"hard", t:"If eradication or elimination of a disease is not feasible, prevention aims to:", o:["Discontinue intervention","Retard the progress of the disease and disability","Rely solely on primordial policies","Isolate the patient"], a:1},
+    {type:"mcq", diff:"hard", t:"In primordial prevention, efforts are directed toward discouraging children from harmful habits because:", o:["Children are easiest to medicate","Childhood is when foundational lifestyles are formed","Children have higher medical costs","Adults cannot change habits"], a:1},
+    {type:"mcq", diff:"hard", t:"Which pair correctly matches the level of prevention with its fundamental objective?", o:["Primordial – Chemoprophylaxis","Primary – Early detection","Secondary – Early detection and prompt treatment","Tertiary – Inhibiting risk factors"], a:2},
+    {type:"mcq", diff:"hard", t:"A multidisciplinary team is necessary in rehabilitation primarily because:", o:["Single nurses are not legally allowed to assist","Rehabilitation often implies complex, long-term management","Rehabilitation is strictly surgical","It replaces primary care doctors"], a:1},
+    {type:"mcq", diff:"hard", t:"How does health promotion differ fundamentally from disease prevention?", o:["Health promotion improves general well-being; prevention protects against specific disease","Health promotion is only for clinics; prevention is for governments","Health promotion is secondary; prevention is primary","There is no theoretical difference"], a:0},
+    {type:"mcq", diff:"hard", t:"Screening preclinical pathological changes is clinically valuable because:", o:["It eliminates the need for hospitals","Early interventions are more cost-effective than intervening once symptoms appear","It provides lifetime immunity","It replaces diagnostic tests"], a:1},
+    {type:"mcq", diff:"hard", t:"The specific process of identifying and preventing or minimizing disablement is called:", o:["Rehabilitation","Health promotion","Disability limitation","Chemoprophylaxis"], a:2},
+    {type:"mcq", diff:"hard", t:"Assessing a patient's ability to carry out everyday activities of living and working is part of:", o:["Primary prevention planning","Rehabilitation assessment in tertiary prevention","Specific protection protocol","Primordial education"], a:1},
+    {type:"mcq", diff:"hard", t:"Promoting the client's optimal level of function despite a chronic health problem defines:", o:["Disability limitation","Rehabilitation","Early treatment","Specific protection"], a:1},
+    {type:"mcq", diff:"hard", t:"Which sequence reflects the chronological application of prevention levels across disease progression?", o:["Primary -> Secondary -> Primordial -> Tertiary","Primordial -> Primary -> Secondary -> Tertiary","Secondary -> Primary -> Primordial -> Tertiary","Tertiary -> Secondary -> Primary -> Primordial"], a:1},
+    {type:"mcq", diff:"hard", t:"Socio-economic development as a health strategy falls under:", o:["Specific protection","Health promotion (Primary prevention)","Secondary screening","Tertiary adjustment"], a:1},
+    {type:"mcq", diff:"hard", t:"Equipping individuals with skills and resources to translate health decisions into action is a goal of:", o:["Primordial screening","Health promotion under primary prevention","Disability limitation","Tertiary rehabilitation"], a:1},
+    {type:"mcq", diff:"hard", t:"For many patients, rehabilitation implies:", o:["A short-term, one-day intervention","Long-term management requiring a professional team","Solely home remedies","Complete reversal of pathology to original state"], a:1},
+    {type:"mcq", diff:"hard", t:"Primary prevention achieves its goals through which mechanism?", o:["Halting disease after symptoms appear","Altering unsafe behaviors and increasing resistance to disease","Limiting permanent disability in hospitals","Vocational training"], a:1},
+    {type:"mcq", diff:"hard", t:"Programs designed to return people to their original health to prevent long-term problems are part of:", o:["Primordial prevention","Primary prevention","Secondary prevention","Tertiary prevention"], a:2},
+    {type:"mcq", diff:"hard", t:"The definition 'measures to promote the patient's adjustment to irremediable conditions' applies to:", o:["Primordial prevention","Primary prevention","Secondary prevention","Tertiary prevention"], a:3},
+
+    // --- 20 TRUE / FALSE QUESTIONS ---
+    {type:"tf", diff:"easy", t:"WHO defines health merely as the absence of disease or infirmity.", o:["True","False"], a:1},
+    {type:"tf", diff:"easy", t:"Health promotion activities enhance resources aimed at improving well-being.", o:["True","False"], a:0},
+    {type:"tf", diff:"easy", t:"Primordial prevention was one of the three original traditional levels of prevention.", o:["True","False"], a:1},
+    {type:"tf", diff:"easy", t:"Primary prevention aims to prevent disease or injury before it ever occurs.", o:["True","False"], a:0},
+    {type:"tf", diff:"medium", t:"Secondary prevention aims to prevent exposures to hazards that cause disease.", o:["True","False"], a:1},
+    {type:"tf", diff:"easy", t:"Tertiary prevention aims to soften the impact of an ongoing illness that has lasting effects.", o:["True","False"], a:0},
+    {type:"tf", diff:"easy", t:"Immunization programs are classified under secondary prevention.", o:["True","False"], a:1},
+    {type:"tf", diff:"easy", t:"Mammography screening is an example of secondary prevention.", o:["True","False"], a:0},
+    {type:"tf", diff:"medium", t:"Primordial prevention focuses on risk factor reduction for an entire population.", o:["True","False"], a:0},
+    {type:"tf", diff:"easy", t:"Rehabilitation is a core component of primary prevention.", o:["True","False"], a:1},
+    {type:"tf", diff:"medium", t:"Disability limitation is the process of identifying and preventing or minimizing disablement.", o:["True","False"], a:0},
+    {type:"tf", diff:"easy", t:"The main intervention in primordial prevention is through surgery and medication.", o:["True","False"], a:1},
+    {type:"tf", diff:"medium", t:"Many adult health problems (e.g. obesity, hypertension) have their early origins in childhood.", o:["True","False"], a:0},
+    {type:"tf", diff:"medium", t:"Chemoprophylaxis is an example of specific protection under primary prevention.", o:["True","False"], a:0},
+    {type:"tf", diff:"easy", t:"Rehabilitation is always a short-term management process.", o:["True","False"], a:1},
+    {type:"tf", diff:"medium", t:"Screening procedures leading to early intervention are generally more cost-effective than intervening once symptoms appear.", o:["True","False"], a:0},
+    {type:"tf", diff:"easy", t:"Environmental sanitation includes sewage disposal and control of insects and rodents.", o:["True","False"], a:0},
+    {type:"tf", diff:"medium", t:"Tertiary prevention is applied when the disease process is in its earliest preclinical stage.", o:["True","False"], a:1},
+    {type:"tf", diff:"medium", t:"Genetic counseling is considered a health promotion measure under primary prevention.", o:["True","False"], a:0},
+    {type:"tf", diff:"hard", t:"Before rehabilitation can be attempted, a thorough assessment of eight key factors must be made.", o:["True","False"], a:0},
+
+    {type:"case", diff:"easy", t:"A 65-year-old retired teacher receives an annual influenza vaccination at her local health clinic. What level of prevention is this?", o:["Primordial prevention","Primary prevention (Specific protection)","Secondary prevention","Tertiary prevention"], a:1},
+    {type:"case", diff:"easy", t:"A community nurse conducts a routine blood pressure screening for elderly citizens at a community center. This intervention represents:", o:["Primordial prevention","Primary prevention","Secondary prevention","Tertiary prevention"], a:2},
+    {type:"case", diff:"easy", t:"A 72-year-old man who had a stroke 6 months ago attends physical therapy to regain his walking ability. This falls under:", o:["Primordial prevention","Primary prevention","Secondary prevention","Tertiary prevention (Rehabilitation)"], a:3},
+    {type:"case", diff:"easy", t:"A national government passes a strict law banning all tobacco sales to minors to prevent future smoking habit formation. This is:", o:["Primordial prevention","Primary prevention","Secondary prevention","Tertiary prevention"], a:0},
+    {type:"case", diff:"easy", t:"A 52-year-old asymptomatic woman undergoes a mammogram which detects early-stage localized breast cancer. The mammogram is:", o:["Primordial prevention","Primary prevention","Secondary prevention","Tertiary prevention"], a:2},
+    {type:"case", diff:"easy", t:"A public health campaign educates senior citizens on proper nutrition, hydration, and sleep hygiene. This activity represents:", o:["Primordial prevention","Primary prevention (Health promotion)","Secondary prevention","Tertiary prevention"], a:1},
+    {type:"case", diff:"easy", t:"A 68-year-old diabetic patient attends a specialized clinic for chronic diabetic foot care to prevent ulceration and amputation. This is:", o:["Primordial prevention","Primary prevention","Secondary prevention","Tertiary prevention (Disability limitation)"], a:3},
+    {type:"case", diff:"easy", t:"A city builds extensive bicycle lanes and introduces zero-emission public transport to reduce air pollution and future lung disease. This is:", o:["Primordial prevention","Primary prevention","Secondary prevention","Tertiary prevention"], a:0},
+    {type:"case", diff:"easy", t:"A 45-year-old man takes a routine fasting blood sugar test during a wellness exam, revealing pre-diabetes. This testing is:", o:["Primordial prevention","Primary prevention","Secondary prevention (Screening)","Tertiary prevention"], a:2},
+    {type:"case", diff:"easy", t:"Municipal authorities disinfect the city water reservoir with chlorine to prevent waterborne infectious outbreaks. This represents:", o:["Primordial prevention","Primary prevention (Specific protection)","Secondary prevention","Tertiary prevention"], a:1},
+
+
+    {type:"case", diff:"medium", t:"A primary school introduces mandatory physical exercise and bans junk food from cafeterias to prevent the emergence of childhood obesity. This is:", o:["Primary prevention – specific protection","Secondary prevention","Tertiary prevention","Primordial prevention"], a:3},
+    {type:"case", diff:"medium", t:"A 70-year-old patient who survived a heart attack is enrolled in a supervised exercise and lifestyle rehabilitation program. This is:", o:["Primordial prevention","Primary prevention","Secondary prevention","Tertiary prevention (Rehabilitation)"], a:3},
+    {type:"case", diff:"medium", t:"A nurse provides genetic counseling to a newly married couple with a family history of hereditary illness before pregnancy occurs. This is:", o:["Primordial prevention","Primary prevention (Health promotion)","Secondary prevention","Tertiary prevention"], a:1},
+    {type:"case", diff:"medium", t:"An 80-year-old woman with severe osteoarthritis is fitted with adaptive equipment in her home by an occupational therapist. This is:", o:["Primordial prevention","Primary prevention","Secondary prevention","Tertiary prevention"], a:3},
+    {type:"case", diff:"medium", t:"A public health authority launches a nationwide campaign against vaping targeted at middle-school teenagers. This intervention is:", o:["Primordial prevention","Primary prevention","Secondary prevention","Tertiary prevention"], a:0},
+    {type:"case", diff:"medium", t:"An asymptomatic 55-year-old man is found to have mild hypertension during an employer health fair and is prescribed early therapy. The health fair check is:", o:["Primordial prevention","Primary prevention","Secondary prevention","Tertiary prevention"], a:2},
+    {type:"case", diff:"medium", t:"A rehabilitation center establishes a re-injury prevention program for patients recovering from acute occupational spinal injuries. This falls under:", o:["Primordial prevention","Primary prevention","Secondary prevention","Tertiary prevention"], a:2},
+    {type:"case", diff:"medium", t:"Travelers to an endemic malaria area are prescribed chloroquine tablets before traveling. This preventive measure is:", o:["Primordial prevention","Primary prevention (Chemoprophylaxis / Specific protection)","Secondary prevention","Tertiary prevention"], a:1},
+    {type:"case", diff:"medium", t:"A multidisciplinary geriatric team manages an elderly client with advanced Parkinson's disease to optimize daily functional independence. This is:", o:["Primordial prevention","Primary prevention","Secondary prevention","Tertiary prevention"], a:3},
+    {type:"case", diff:"medium", t:"A community nurse conducts an educational seminar for parents on discouraging sedentary screen time among toddlers. This is:", o:["Primordial prevention","Primary prevention","Secondary prevention","Tertiary prevention"], a:0},
+
+    {type:"case", diff:"hard", t:"Before formulating a care plan for a post-stroke senior, the multidisciplinary team assesses his residual abilities, attitudes toward health, family support, and daily living skills. This systematic evaluation is the assessment phase for:", o:["Primordial prevention","Primary prevention","Secondary screening","Tertiary rehabilitation"], a:3},
+    {type:"case", diff:"hard", t:"A developing country with historically low rates of coronary heart disease enacts broad agricultural and trade policies to prevent the infiltration of trans-fat food products. This is best described as:", o:["Primary prevention – health promotion","Primary prevention – specific protection","Secondary prevention","Primordial prevention"], a:3},
+    {type:"case", diff:"hard", t:"A 76-year-old woman with irremediable chronic rheumatoid arthritis receives physiotherapy and psychological counseling to adapt to her joint deformities. The primary objective is to:", o:["Eradicate the rheumatoid disease","Detect new joint damage early","Promote adjustment to irremediable conditions and improve functional quality of life","Immunize against joint inflammation"], a:2},
+    {type:"case", diff:"hard", t:"A regional hospital calculates that routine colonoscopy screenings saved $2 million compared to treating advanced-stage colon cancers. This demonstrates the principle that:", o:["Primordial prevention is unnecessary","Secondary screening is more cost-effective than intervening after symptoms appear","Tertiary prevention replaces screening","Primary prevention cannot reduce costs"], a:1},
+    {type:"case", diff:"hard", t:"A 62-year-old asymptomatic male undergoes a routine cholesterol screening test. Elevated lipids are detected, and early diet/statin therapy begins before vascular occlusion occurs. This demonstrates:", o:["Primordial prevention","Primary prevention","Secondary prevention (Early detection & treatment)","Tertiary prevention"], a:2},
+    {type:"case", diff:"hard", t:"A nursing home develops an infection control protocol featuring staff influenza vaccination, hand hygiene education, and water disinfection. These combined measures belong to:", o:["Primordial prevention only","Primary prevention (both Health promotion and Specific protection)","Secondary prevention only","Tertiary prevention only"], a:1},
+    {type:"case", diff:"hard", t:"An elderly patient with permanent visual impairment due to end-stage glaucoma receives orientation and mobility training along with home modifications. This exemplifies:", o:["Primordial prevention","Primary prevention","Secondary prevention","Tertiary prevention (Rehabilitation)"], a:3},
+    {type:"case", diff:"hard", t:"A national health authority implements a tax on sugary drinks in a region where obesity is currently rare, to discourage early risk factor emergence. This is an example of:", o:["Primordial prevention","Primary prevention","Secondary prevention","Tertiary prevention"], a:0},
+    {type:"case", diff:"hard", t:"During a rehabilitation assessment, the nurse determines: (1) disability severity, (2) patient attitudes, (3) goals, (4) realistic plan, (5) appropriate team staff, (6) progress monitoring, (7) social support, and (8) daily living activities. These 8 steps represent the standard assessment for:", o:["Primordial lifestyle assessment","Primary prevention screening","Secondary early treatment","Tertiary rehabilitation planning"], a:3},
+    {type:"case", diff:"hard", t:"A geriatric program implements: 1) Anti-smoking social policy, 2) Pneumococcal vaccination, 3) Annual mammography screening, 4) Post-stroke physiotherapy. What is the correct sequence of prevention levels represented?", o:["Primary, Secondary, Tertiary, Primordial","Primordial, Primary, Secondary, Tertiary","Secondary, Tertiary, Primordial, Primary","Tertiary, Primordial, Primary, Secondary"], a:1}
+];
+];
+
+/* ============ ENGINE ============ */
+let questions, i, correct, wrong, answers, wrongSet, answered;
+let totalTime = 70*60, timeLeft, timerInterval;
+const LETTERS = ['A','B','C','D','E','F'];
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function shuffleOptions(q) {
+  const idxs = shuffle(q.o.map((_, idx) => idx));
+  const newO = idxs.map(idx => q.o[idx]);
+  const newA = idxs.indexOf(q.a);
+  return {...q, o: newO, a: newA};
+}
+
+function init(pool) {
+  questions = shuffle([...pool]).map(shuffleOptions);
+  i = 0; correct = 0; wrong = 0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = []; answered = 0;
+  timeLeft = totalTime;
+  document.getElementById('totalBadge').textContent = questions.length + ' سؤال';
+  startTimer();
+  render();
+}
+
+/* TIMER */
+function startTimer() {
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    const m = Math.floor(timeLeft / 60), s = timeLeft % 60;
+    document.getElementById('timerTxt').textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
+    const badge = document.getElementById('timerBadge');
+    if (timeLeft <= 120) { badge.className = 'timer-badge danger'; }
+    else if (timeLeft <= 300) { badge.className = 'timer-badge warn'; }
+    if (timeLeft <= 0) { clearInterval(timerInterval); finish(); }
+  }, 1000);
+}
+
+/* TOP UI */
+function updateTop() {
+  const total = questions.length;
+  document.getElementById('sCorrect').textContent = correct;
+  document.getElementById('sWrong').textContent = wrong;
+  document.getElementById('sRemain').textContent = Math.round(((total - answered) / total) * 100) + '%';
+  document.getElementById('progLabel').textContent = 'سؤال ' + (i + 1) + ' / ' + total;
+  document.getElementById('progFill').style.width = ((i + 1) / total * 100) + '%';
+  document.getElementById('prog-bar').style.width = ((i + 1) / total * 100) + '%';
+}
+
+/* RENDER QUESTION */
+function render() {
+  updateTop();
+  const q = questions[i];
+  document.getElementById('app').innerHTML = `
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">سؤال ${i + 1} / ${questions.length}</div>
+      </div>
+      <div class="q-text">${q.t}</div>
+      <div class="options">
+        ${q.o.map((o, idx) => `
+          <div class="opt" id="opt${idx}" onclick="choose(${idx})">
+            <div class="opt-letter">${LETTERS[idx] || idx + 1}</div>
+            ${o}
+          </div>
+        `).join('')}
+      </div>
+      <div class="nav-btns">
+        <button class="btn btn-skip" onclick="skip()"><i class="fa-solid fa-forward"></i> تخطي</button>
+      </div>
+    </div>`;
+}
+
+/* CHOOSE */
+function choose(v) {
+  if (answers[i] !== null) return;
+  answers[i] = v;
+  answered++;
+  const q = questions[i];
+  const ok = v === q.a;
+  ok ? correct++ : wrong++;
+  updateTop();
+
+  q.o.forEach((_, idx) => {
+    const el = document.getElementById('opt' + idx);
+    el.classList.add('disabled');
+    if (idx === q.a) el.classList.add('correct');
+    else if (idx === v) el.classList.add('wrong');
+  });
+
+  const fb = document.createElement('div');
+  fb.className = 'feedback-bar ' + (ok ? 'ok' : 'no');
+  fb.innerHTML = ok
+    ? `<span class="feedback-icon">🎉</span> <span>شطور ، اللهم بارك </span>`
+    : `<span class="feedback-icon">😔</span> <span>ركز يا سكر </b></span>`;
+
+  const card = document.querySelector('.q-card');
+  card.querySelector('.options').after(fb);
+  if (q.exp) {
+    const exp = document.createElement('div');
+    exp.className = 'explanation';
+    exp.style.display = 'block';
+    exp.innerHTML = '<b>💬 شرح:</b> ' + q.exp;
+    fb.after(exp);
+  }
+
+  const navBtns = card.querySelector('.nav-btns');
+  navBtns.innerHTML = `<button class="btn btn-next" onclick="next()">
+    ${i < questions.length - 1 ? '<i class="fa-solid fa-arrow-left"></i> السؤال التالي' : '<i class="fa-solid fa-flag-checkered"></i> إنهاء الامتحان'}
+  </button>`;
+}
+
+/* SKIP */
+function skip() {
+  if (answers[i] === null) { answers[i] = -1; answered++; wrongSet.push(questions[i]); wrong++; updateTop(); }
+  next();
+}
+
+/* NEXT */
+function next() {
+  if (i < questions.length - 1) { i++; render(); window.scrollTo({top: 0, behavior: 'smooth'}); }
+  else finish();
+}
+
+/* FINISH */
+function finish() {
+  clearInterval(timerInterval);
+  const total = questions.length;
+  const score = Math.round((correct / total) * 100);
+
+  questions.forEach((q, idx) => {
+    if (answers[idx] !== q.a) wrongSet.push({...q, myAns: answers[idx]});
+  });
+  wrongSet = [...new Map(wrongSet.map(q => [q.t, q])).values()];
+
+  let grade, gradeColor;
+  if (score >= 90) { grade = '🥇 ممتاز'; gradeColor = 'var(--success)'; }
+  else if (score >= 75) { grade = '🥈 جيد جداً'; gradeColor = 'var(--accent)'; }
+  else if (score >= 60) { grade = '🥉 جيد'; gradeColor = 'var(--warn)'; }
+  else { grade = '📚 راجع تاني'; gradeColor = 'var(--danger)'; }
+
+  const circ = 2 * Math.PI * 45;
+  const offset = circ - (score / 100) * circ;
+
+  const reportHTML = questions.map((q, idx) => {
+    const ok = answers[idx] === q.a;
+    return `<div class="report-item ${ok ? 'ok' : 'no'}">
+      <div class="ri-q">${ok ? '✅' : '❌'} ${q.t}</div>
+      ${!ok ? `
+        <div class="ri-row"><span class="ri-badge ri-yours">إجابتك</span> ${answers[idx] >= 0 ? q.o[answers[idx]] : 'تم التخطي'}</div>
+        <div class="ri-row"><span class="ri-badge ri-right">الصحيح</span> ${q.o[q.a]}</div>
+      ` : ''}
+    </div>`;
+  }).join('');
+
+  document.getElementById('prog-bar').style.width = '100%';
+  document.getElementById('app').innerHTML = `
+    <div class="result-hero">
+      <div class="score-ring">
+        <svg viewBox="0 0 110 110">
+          <circle class="ring-bg" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="0"/>
+          <circle class="ring-fill" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="${circ}"
+            style="stroke:${gradeColor}" id="ringFill"/>
+        </svg>
+        <div class="score-num">${score}</div>
+        <div class="score-pct">%</div>
+      </div>
+      <div class="result-grade" style="color:${gradeColor}">${grade}</div>
+      <div class="result-sub">أجبت على ${answered} من ${total} سؤال</div>
+      <div class="result-stats">
+        <div class="rs"><div class="n" style="color:var(--success)">${correct}</div><div class="l">صحيح</div></div>
+        <div class="rs"><div class="n" style="color:var(--danger)">${wrong}</div><div class="l">خطأ</div></div>
+        <div class="rs"><div class="n" style="color:var(--accent)">${total - answered < 0 ? 0 : total - answered}</div><div class="l">تخطي</div></div>
+      </div>
+    </div>
+
+    <div class="result-actions">
+      ${wrongSet.length ? `<button class="btn btn-retry" onclick="retryWrong()"><i class="fa-solid fa-rotate-right"></i> إعادة الخطأ (${wrongSet.length})
+
+</button>` : ''}
+      <button class="btn btn-home" onclick="init(QUESTIONS)"><i class="fa-solid fa-shuffle"></i> امتحان عشوائي</button>
+      <a href="https://gaith-team.github.io/exam/" class="btn btn-home" style="text-decoration:none;"><i class="fa-solid fa-house"></i> رجوع للمادة</a>
+    </div>
+
+    <div style="margin-top:28px">
+      <div style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text2)">📋 تقرير مفصّل</div>
+      ${reportHTML}
+    </div>`;
+
+  setTimeout(() => { document.getElementById('ringFill').style.strokeDashoffset = offset; }, 100);
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+/* RETRY WRONG */
+function retryWrong() {
+  const pool = [...wrongSet];
+  questions = shuffle(pool).map(shuffleOptions); i = 0; correct = 0; wrong = 0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = []; answered = 0; timeLeft = totalTime;
+  startTimer(); render();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+/* THEME */
+const themeBtn = document.getElementById('themeBtn');
+let theme = localStorage.getItem('theme') || 'light';
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', t);
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+
+/* START */
+init(QUESTIONS);
+</script>
+</body>
+</html>
