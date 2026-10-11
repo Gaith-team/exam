@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM | Nursing Documentation</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:#1e3a8a; --teal:#0e7490; --emerald:#10b981; --gold:#f59e0b;
+  --accent:#0e7490; --accent-glow:rgba(14,116,144,0.18); --accent-rgb:14,116,144;
+  --grad:linear-gradient(135deg,#1e3a8a 0%,#0e7490 50%,#10b981 100%);
+  --grad-bar:linear-gradient(90deg,#1e3a8a,#0e7490,#10b981,#f59e0b);
+  --bg:#f8fafc; --bg2:#eef2f7; --card:#ffffff;
+  --text:#1a2332; --text2:#4a5568; --text3:#718096;
+  --bc:rgba(0,0,0,0.07);
+  --r:16px; --tr:all .3s cubic-bezier(.4,0,.2,1);
+}
+[data-theme="dark"] {
+  --bg:#0d1117; --bg2:#161b22; --card:#1c2333;
+  --text:#e6edf3; --text2:#b1bac4; --text3:#7d8590;
+  --bc:rgba(255,255,255,0.08);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family:'Outfit',sans-serif; background:var(--bg); color:var(--text);
+  min-height:100vh; overflow-x:hidden; transition:background .4s,color .4s;
+}
+
+#prog-bar { position:fixed; top:0; left:0; height:3px; z-index:999; background:var(--grad-bar); width:0%; transition:width .15s; }
+
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 28px; height:64px;
+  background:rgba(248,250,252,.93); backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--bc);
+}
+[data-theme="dark"] nav { background:rgba(13,17,23,.95); }
+.nav-brand { display:flex; align-items:center; gap:9px; font-size:15px; font-weight:900; color:var(--text); }
+.nav-logo-icon {
+  width:34px; height:34px; border-radius:8px; background:var(--grad);
+  display:flex; align-items:center; justify-content:center;
+  color:#fff; font-size:12px; font-weight:900; box-shadow:0 0 0 2px rgba(245,158,11,.5);
+}
+.nav-right { display:flex; align-items:center; gap:8px; }
+.theme-btn, .tool-btn {
+  height:38px; min-width:38px; border-radius:50px; border:1px solid var(--bc);
+  background:var(--card); cursor:pointer; font-size:14px; color:var(--text);
+  display:flex; align-items:center; justify-content:center; gap:6px; padding:0 12px;
+  font-family:'Outfit',sans-serif; font-weight:700; transition:var(--tr);
+}
+.theme-btn { width:38px; padding:0; border-radius:50%; font-size:15px; }
+.theme-btn:hover { border-color:var(--accent); transform:rotate(20deg); }
+.tool-btn:hover { border-color:var(--accent); color:var(--accent); }
+.tool-btn.off { opacity:.55; }
+
+.hero-band {
+  margin-top:64px; background:var(--grad); padding:40px 24px 36px; text-align:center;
+  position:relative; overflow:hidden; border-bottom:4px solid var(--gold);
+}
+.hero-band::before {
+  content:''; position:absolute; inset:0;
+  background:
+    radial-gradient(circle 220px at 12% 20%, rgba(245,158,11,.22) 0%, transparent 70%),
+    radial-gradient(circle 260px at 90% 85%, rgba(16,185,129,.28) 0%, transparent 70%),
+    radial-gradient(ellipse 600px 200px at 50% 100%, rgba(255,255,255,.12) 0%, transparent 70%);
+}
+.hero-band > * { position:relative; }
+.hero-band-icon {
+  width:68px; height:68px; border-radius:20px; background:rgba(255,255,255,.2);
+  backdrop-filter:blur(8px); display:flex; align-items:center; justify-content:center;
+  font-size:30px; margin:0 auto 14px; border:1.5px solid rgba(255,255,255,.35);
+}
+.hero-band h1 { font-size:clamp(20px,4vw,30px); font-weight:900; color:#fff; margin-bottom:6px; }
+.hero-band p { font-size:13px; color:rgba(255,255,255,.85); }
+.hero-band-meta { display:flex; justify-content:center; gap:14px; margin-top:20px; flex-wrap:wrap; }
+.meta-pill {
+  background:rgba(255,255,255,.18); backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.3); border-radius:50px; padding:6px 16px;
+  font-size:12px; font-weight:700; color:#fff; display:flex; align-items:center; gap:6px;
+}
+.meta-pill i { color:var(--gold); }
+
+/* CHIPS */
+.chips-wrap {
+  position:sticky; top:64px; z-index:90; background:var(--bg);
+  border-bottom:1px solid var(--bc); padding:10px 0;
+}
+.chips { display:flex; gap:8px; overflow-x:auto; padding:0 20px; max-width:860px; margin:0 auto; scrollbar-width:none; }
+.chips::-webkit-scrollbar { display:none; }
+.chip {
+  flex-shrink:0; padding:7px 14px; border-radius:50px; font-size:12px; font-weight:700;
+  background:var(--card); border:1px solid var(--bc); color:var(--text2);
+  text-decoration:none; transition:var(--tr); white-space:nowrap;
+}
+.chip:hover, .chip.active { background:var(--grad); color:#fff; border-color:transparent; }
+
+.shell { max-width:860px; margin:0 auto; padding:24px 20px 80px; }
+
+/* SECTION */
+.sec { margin-bottom:34px; scroll-margin-top:130px; }
+.sec-head {
+  display:flex; align-items:center; gap:12px; background:var(--grad); color:#fff;
+  padding:14px 18px; border-radius:16px 16px 0 0; border-bottom:3px solid var(--gold);
+}
+.sec-icon {
+  width:38px; height:38px; border-radius:10px; background:rgba(255,255,255,.2);
+  display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0;
+}
+.sec-title { font-size:17px; font-weight:900; line-height:1.3; }
+.sec-count { margin-left:auto; font-size:11px; font-weight:700; background:rgba(255,255,255,.2); padding:3px 10px; border-radius:50px; white-space:nowrap; }
+.sec-body {
+  background:var(--card); border:1px solid var(--bc); border-top:none;
+  border-radius:0 0 16px 16px; padding:14px; display:flex; flex-direction:column; gap:12px;
+  box-shadow:0 4px 20px rgba(0,0,0,.05);
+}
+
+.subhead {
+  font-size:13px; font-weight:900; color:var(--navy); padding:8px 12px;
+  background:rgba(var(--accent-rgb),.08); border-left:4px solid var(--gold);
+  border-radius:8px; direction:ltr; text-align:left; margin-top:6px;
+}
+[data-theme="dark"] .subhead { color:#7dd3fc; }
+
+/* POINT */
+.pt {
+  border:1px solid var(--bc); border-radius:14px; overflow:hidden; background:var(--bg);
+  transition:var(--tr);
+}
+.pt:hover { border-color:rgba(var(--accent-rgb),.4); box-shadow:0 4px 14px var(--accent-glow); }
+.pt.sub { margin-left:22px; border-left:3px solid var(--teal); }
+.pt.done { opacity:.55; }
+
+.pt-en {
+  display:flex; gap:10px; align-items:flex-start; padding:13px 14px;
+  font-size:15px; font-weight:700; line-height:1.6; direction:ltr; text-align:left;
+  background:var(--card); cursor:pointer;
+}
+.pt-n {
+  min-width:26px; height:26px; border-radius:8px; background:var(--grad); color:#fff;
+  font-size:11px; font-weight:900; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px;
+}
+.pt-ar {
+  padding:12px 16px; font-size:14.5px; line-height:1.9; color:var(--text);
+  direction:rtl; text-align:right; border-top:1px dashed var(--bc);
+  font-family:'Segoe UI',Tahoma,'Outfit',sans-serif;
+}
+.pt-ar .tag, .pt-ex .tag {
+  display:inline-block; font-size:11px; font-weight:900; padding:2px 9px; border-radius:6px; margin-left:8px; vertical-align:middle;
+}
+.pt-ar .tag { background:rgba(14,116,144,.12); color:var(--teal); }
+[data-theme="dark"] .pt-ar .tag { color:#5eead4; }
+.pt-ex {
+  padding:12px 16px; font-size:14px; line-height:1.9; color:var(--text2);
+  direction:rtl; text-align:right; border-top:1px dashed var(--bc);
+  background:rgba(245,158,11,.07); border-right:4px solid var(--gold);
+  font-family:'Segoe UI',Tahoma,'Outfit',sans-serif;
+}
+.pt-ex .tag { background:rgba(245,158,11,.2); color:#b45309; }
+[data-theme="dark"] .pt-ex .tag { color:#fbbf24; }
+body.hide-ex .pt-ex { display:none; }
+body.hide-ar .pt-ar { display:none; }
+
+footer {
+  background:var(--bg2); border-top:3px solid; border-image:var(--grad-bar) 1;
+  padding:22px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;
+}
+.footer-brand { font-size:14px; font-weight:700; }
+.footer-brand span { color:var(--accent); }
+.footer-tg { display:flex; align-items:center; gap:5px; text-decoration:none; color:#229ED9; font-size:12px; font-weight:600; }
+
+@media (max-width:560px) {
+  nav { padding:0 12px; }
+  .nav-brand span { display:none; }
+  .shell { padding:16px 12px 60px; }
+  .pt.sub { margin-left:12px; }
+  .tool-btn span { display:none; }
+  .sec-count { display:none; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog-bar"></div>
+
+<nav>
+  <div class="nav-brand">
+    <div class="nav-logo-icon">GT</div>
+    <span>GHAITH TEAM</span>
+  </div>
+  <div class="nav-right">
+    <button class="tool-btn" id="btnAr" title="Arabic"><i class="fa-solid fa-language"></i><span>الشرح</span></button>
+    <button class="tool-btn" id="btnEx" title="Examples"><i class="fa-solid fa-lightbulb"></i><span>عشان تفهمها</span></button>
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<div class="hero-band">
+  <div class="hero-band-icon">📝</div>
+  <h1>Nursing Documentation</h1>
+  <p>Nursing Management </p>
+  <div class="hero-band-meta">
+    <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">--</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-layer-group"></i> <span id="secBadge">--</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-language"></i> ببساطة مع غيث</div>
+  </div>
+</div>
+
+<div class="chips-wrap"><div class="chips" id="chips"></div></div>
+
+<div class="shell" id="app"></div>
+
+<footer>
+  <div class="footer-brand">GHAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg"><i class="fa-brands fa-telegram"></i> @nursing2bu</a>
+</footer>
+
+<script>
+/* Item format: [English, Arabic explanation, Example, level]  |  {h:"sub heading"}  (level 1 = indented sub-point) */
+const SECTIONS = [
+
+{ id:"intro", icon:"📖", title:"Introduction — Documentation", items:[
+ [`Documentation is considered a vital communication tool among healthcare professionals.`,
+  `التوثيق (الكتابة في ملف المريض) هو أهم وسيلة تواصل بين الفريق الطبي كله: دكتور وممرض وصيدلي وغيرهم.`,
+  `ممرض شيفت الصبح كتب إن المريض خد المضاد الحيوي الساعة 8، فممرض شيفت المساء يقرا الملف ويعرف من غير ما يسأل حد.`],
+ [`Nursing documentation is an integral part of nursing practice and professional patient care.`,
+  `كتابة التمريض جزء أساسي من شغل التمريض نفسه، مش حاجة زيادة بعد الشغل.`,
+  `قست ضغط المريض وعالجته، لكن لو مكتبتش القراءة في الملف يبقى الشغل كأنه ناقص.`],
+ [`Good documentation ensures continuity of care and supports the evaluation of patient care.`,
+  `التوثيق الكويس بيضمن إن الرعاية تكمل من غير انقطاع، وبيساعد نقيّم الرعاية اللي اتقدمت للمريض.`,
+  `من الملف نعرف إن الألم كان 8/10 الصبح وبقى 3/10 بعد المسكن، يبقى الرعاية نفعت.`],
+ [`Nurses must balance clinical documentation with respect to legal imperatives.`,
+  `الممرض لازم يوازن بين كتابة المعلومات الإكلينيكية وبين الالتزام بالمتطلبات القانونية.`,
+  `يكتب حالة المريض بالظبط بشكل موضوعي، من غير رأي شخصي أو كلام ممكن يتحاسب عليه قانونيًا.`],
+ [`Accurate and complete documentation of the client's symptoms and observations is critical to proper treatment and management.`,
+  `كتابة أعراض المريض وملاحظاتك بدقة وبشكل كامل ضرورية عشان العلاج والمتابعة يبقوا صح.`,
+  `مريض بيشتكي من صداع: لو كتبت "صداع" بس الدكتور مش هيعرف شدته. لو كتبت مكانه وشدته ومدته هيقرر علاج أدق.`],
+ [`Entries documented on a client's clinical record are legal and permanent documents.`,
+  `أي حاجة بتتكتب في ملف المريض بتبقى مستند قانوني ودايم، مينفعش تتمسح ولا تتنكر.`,
+  `لو حصلت مشكلة ورحنا المحكمة، الملف هو الدليل على اللي اتعمل بالظبط.`],
+ [`Documentation encourages nurses to assess clients' progress and determine which interventions are effective and which are ineffective and identify changes to the plan of care as needed.`,
+  `التوثيق بيشجع الممرض يقيّم تقدم المريض، ويعرف التدخلات اللي نفعت واللي ماينفعتش، ويغيّر خطة الرعاية لو لزم.`,
+  `المريض بيتقلّب كل ساعتين ولسه فيه احمرار في الضهر، يبقى التدخل مش كفاية فنعدّل الخطة.`],
+ [`It can be a valuable source of data for making decisions about patient conditions.`,
+  `ممكن يكون مصدر بيانات قيّم نتخد منه قرارات عن حالة المريض.`,
+  `متابعة السكر المكتوبة لـ 3 أيام بتساعد الدكتور يحدد جرعة الأنسولين.`],
+ [`All of which have the potential to improve the quality of nursing practice and client care.`,
+  `كل اللي فات ممكن يحسّن جودة شغل التمريض ورعاية المريض.`,
+  `لما الوحدة تراجع الملفات وتلاقي تأخير في إعطاء الدوا، بتعالج السبب والجودة تتحسن.`]
+]},
+
+{ id:"def", icon:"📚", title:"Definition", items:[
+ [`Nursing documentation is defined as any written or electronic evidence of the interaction between and among health professionals, clients, their families, and healthcare organization.`,
+  `توثيق التمريض هو أي دليل مكتوب أو إلكتروني على التعامل بين الفريق الصحي والمرضى وأسرهم والمؤسسة الصحية.`,
+  `ورقة ملاحظات التمريض أو سجل على السيستم بيوضح إن الممرضة كلمت أهل المريض وشرحتلهم الخطة.`],
+ [`Through documentation, nurses communicate to other healthcare professionals their observations, decisions, actions, and outcomes of care.`,
+  `من خلال التوثيق الممرض بيوصّل للفريق الطبي: اللي لاحظه، والقرارات، والإجراءات اللي عملها، ونتيجة الرعاية.`,
+  `ملاحظة: جرح العملية متورم. قرار: بلّغت الدكتور. إجراء: عملت غيار. نتيجة: التورم قل بعد ساعتين.`],
+ [`Documentation is an accurate account of what occurred and when it occurred.`,
+  `التوثيق هو سرد دقيق لـ إيه اللي حصل وإمتى حصل.`,
+  `"الساعة 10:30 ص: اديت المريض حقنة مسكن" — الحدث + الوقت.`],
+ [`The process of obtaining, organizing, and conveying information to others in a written format or computer-based.`,
+  `هو عملية جمع المعلومات وتنظيمها وإيصالها للآخرين بشكل مكتوب أو على الكمبيوتر.`,
+  `تاخد بيانات المريض، ترتبها في الملف، وتسلّمها للشيفت اللي بعدك مكتوبة.`],
+ [`Documentation serves as a permanent record of client information.`,
+  `التوثيق بيشتغل كسجل دايم لمعلومات المريض.`,
+  `بعد سنين لو المريض رجع المستشفى، الملف القديم بيفضل موجود.`],
+ [`Documentation is the process of preparing the client's medical record.`,
+  `التوثيق هو عملية تجهيز السجل الطبي للمريض.`,
+  `كل ورقة بتتكتب (تاريخ مرضي، أوامر، ملاحظات) بتتجمع وتكوّن الملف الطبي.`],
+ [`Documentation is not optional but is mandatory and it is an integral part of nurse practice "What is not documented is not done!"`,
+  `التوثيق مش اختياري، ده إجباري وجزء أساسي من شغل الممرض. والقاعدة المشهورة: "اللي مش متكتب يعتبر ما اتعملش!"`,
+  `اديت دوا بس نسيت تكتبه؛ ممكن ممرض تاني يديه تاني لأن الملف مفيهوش حاجة.`]
+]},
+
+{ id:"purposes", icon:"🎯", title:"Purposes of Documentation", items:[
+ [`Mean of communication among the health care providers and provide continuity of patient care.`,
+  `وسيلة تواصل بين مقدمي الرعاية الصحية وبتضمن استمرارية رعاية المريض.`,
+  `الدكتور بيقرا ملاحظات التمريض عشان يعرف إيه اللي حصل بالليل.`],
+ [`Provide clinical data for research and education.`,
+  `بتوفر بيانات إكلينيكية للبحث العلمي والتعليم.`,
+  `باحث بيدرس نسبة قرح الفراش بيرجع لملفات المرضى، وطلبة التمريض بيتعلموا من حالات مكتوبة.`],
+ [`Quality assurance monitoring`,
+  `مراقبة وضمان الجودة.`,
+  `إدارة الجودة بتراجع الملفات تشوف الرعاية بتتقدم صح ولا لأ.`],
+ [`When the care described in the clinical record doesn't meet an established indicator of care, the quality committee decides what action to take to correct the problems.`,
+  `لما الرعاية المكتوبة في الملف متطابقش مع مؤشر الرعاية المعتمد، لجنة الجودة بتقرر هتعمل إيه لتصحيح المشكلة.`,
+  `المؤشر بيقول إن تغيير الوضعية كل ساعتين، والملف بيوضح إنها بتتغير كل 6 ساعات؛ اللجنة تعمل تدريب أو تعدّل النظام.`, 1],
+ [`Reimbursement "to obtain client's payment".`,
+  `الاسترداد المالي: يعني تحصيل تكلفة العلاج للمستشفى.`,
+  `شركة التأمين مش بتدفع غير لو الملف موضّح الخدمات اللي اتقدمت فعلًا.`],
+ [`Legal evidence`,
+  `دليل قانوني.`,
+  `الملف بيتقدم للمحكمة كإثبات لما حصل مع المريض.`],
+ [`"Document" is usually admissible in a court as documentary evidence of the course of the patient's illness and treatment during hospitalization.`,
+  `الملف عادةً بيتقبل في المحكمة كدليل مستندي على مسار مرض المريض وعلاجه طول فترة وجوده في المستشفى.`,
+  `لو أهل مريض اشتكوا من إهمال، الملف بيثبت مواعيد الأدوية والمتابعة.`, 1]
+]},
+
+{ id:"principles", icon:"✅", title:"Principles of Documentation", items:[
+ [`In the process of documentation, the nurse needs to consider the following:`,
+  `أثناء التوثيق لازم الممرض ياخد باله من المبادئ الجاية.`,
+  `زي ما السواق بيراعي قواعد المرور قبل ما يمشي، الممرض بيراعي المبادئ دي قبل ما يكتب.`],
+
+ {h:"1. Accuracy"},
+ [`Proper grammar and correct spelling`,
+  `قواعد لغة سليمة وإملاء صحيح.`,
+  `تكتب "hypertension" صح مش "hypertention" عشان متتفهمش غلط.`, 1],
+ [`Correct information`,
+  `معلومات صحيحة.`,
+  `تكتب قراءة الضغط الحقيقية 140/90 مش تقريبية.`, 1],
+ [`Proper standard abbreviations`,
+  `اختصارات معتمدة ومعروفة.`,
+  `تكتب BP و HR (المعتمدة) ومتخترعش اختصار من عندك.`, 1],
+ [`Errors corrected properly; any mistakes that occur while recording draw a line through it and write above or next to the original entry with your initial or name.`,
+  `تصحيح الأخطاء بالطريقة الصح: لو غلطت وانت بتكتب، اعمل خط على الغلط واكتب التصحيح فوقه أو جنبه وامضي باسمك أو الحروف الأولى.`,
+  `كتبت 120/80 غلط؟ خط واحد عليها، اكتب 110/70 جنبها وامضي. من غير بياض ولا شطب.`, 1],
+
+ {h:"2. Timely (Date and time)"},
+ [`Document the date and time of each recording (e.g., am 9:00).`,
+  `اكتب التاريخ والوقت مع كل تسجيل.`,
+  `"15/3 — 9:00 ص: المريض نايم، التنفس منتظم".`, 1],
+ [`Avoid recording in advance (this practice is illegal falsification of the records contributes to errors and confusion and threatens patient safety.`,
+  `متكتبش حاجة قبل ما تحصل. ده تزوير غير قانوني للسجلات وبيسبب أخطاء وارتباك وبيهدد سلامة المريض.`,
+  `متكتبش إنك اديت دوا الساعة 12 وانت لسه الساعة 11، ممكن حد يصدق ويدّيه تاني.`, 1],
+
+ {h:"3. Legibility"},
+ [`All entries must be legible, written neatly, and easy to read to prevent interpretation errors.`,
+  `كل اللي بتكتبه لازم يكون مقروء ومرتب وسهل القراءة عشان محدش يفهمه غلط.`,
+  `الجرعة 0.5 لو اتكتبت بخط وحش ممكن تتقري 5 وتبقى كارثة.`],
+
+ {h:"4. Permanence"},
+ [`All entries must be written in ink so that the record is permanent, and any changes can be identified.`,
+  `كل التسجيلات لازم تتكتب بالحبر عشان السجل يبقى دايم وأي تعديل يبان.`,
+  `تكتب بقلم حبر مش رصاص لأن الرصاص ينمسح ومحدش يعرف إتغيّر إيه.`],
+
+ {h:"5. Completeness"},
+ [`Fully describing what is done, observed, or heard and what is important to know.`,
+  `وصف كامل لـ اللي اتعمل أو اتلاحظ أو اتسمع، وأي حاجة مهمة تتعرف.`,
+  `مش تكتب "الجرح كويس"، اكتب لونه وحجمه وفيه إفرازات ولا لأ.`],
+ [`Write clear, concise, and complete data.`,
+  `اكتب بيانات واضحة ومختصرة وكاملة.`,
+  `"الألم 7/10 في البطن اليمين من ساعتين" بدل جمل طويلة مش مفهومة.`],
+
+ {h:"6. Appropriateness \"Factual\""},
+ [`Descriptive objective information about what one sees, hears, feels, smells, and thinks, avoid vague terms like seems …….`,
+  `معلومات وصفية موضوعية عن اللي بتشوفه وتسمعه وتحسه وتشمه، وتجنب الكلمات الغامضة زي "يبدو".`,
+  `بدل "المريض شكله تعبان" اكتب "المريض شاحب، عرقان، نبضه 110/دقيقة".`, 1],
+ [`Subjective data is documented in the client's exact words within quotation marks.`,
+  `البيانات الذاتية (اللي المريض بيقولها) بتتكتب بكلامه بالظبط بين علامات تنصيص.`,
+  `المريض قال: "حاسس إن في سكينة في صدري" — بتكتبها بنفس اللفظ.`, 1],
+
+ {h:"7. Sequence"},
+ [`Document events in the order in which they occur "chart in chronological order".`,
+  `سجّل الأحداث بنفس ترتيب حصولها (ترتيب زمني).`,
+  `الأول التقييم، بعدين الدوا، بعدين رد فعل المريض.`],
+
+ {h:"8. Signature"},
+ [`The name of the person should be clearly written below.`,
+  `اسم الشخص اللي كتب لازم يتكتب بوضوح تحت التسجيل.`,
+  `تختم بـ: "ن. محمد أحمد — ممرض".`]
+]},
+
+{ id:"resp", icon:"👩‍⚕️", title:"Responsibilities of the Nurse in Documentation", items:[
+ [`The nurse understands his/her accountability for documenting on the clinical record the care he/she personally provides to the clients.`,
+  `الممرض فاهم إنه مسؤول عن توثيق الرعاية اللي هو بنفسه قدمها للمريض في الملف.`,
+  `انت اللي اديت الدوا؟ انت اللي تكتب. متكتبش حاجة عملها غيرك.`],
+ [`The nurse documents the care process including information or concerns communicated to another health care provider.`,
+  `الممرض يوثق عملية الرعاية، وكمان أي معلومة أو قلق بلّغه لمقدم رعاية تاني.`,
+  `بلّغت الدكتور إن الضغط واطي، تكتب إنك بلغته الساعة كام وإيه اللي قاله.`],
+ [`The nurse documents all relevant information about clients in chronological order with date and time.`,
+  `يوثق كل المعلومات المهمة عن المريض بترتيب زمني مع التاريخ والوقت.`,
+  `كل ملاحظة ليها تاريخ وساعة وبتتكتب ورا بعض بترتيبها.`],
+ [`The nurse carries out comprehensive, in-depth, and frequent documentation when clients are acutely ill, high risk, or have complex health problems.`,
+  `يعمل توثيق شامل ومعمّق ومتكرر لما يكون المريض حالته حادة أو عالي الخطورة أو عنده مشاكل صحية معقدة.`,
+  `مريض في الـ ICU بيتسجل له كل ساعة، مش زي مريض مستقر بيتسجل له كل شيفت.`],
+ [`The nurse documents timely the care he/she provides.`,
+  `يوثق الرعاية اللي بيقدمها في وقتها.`,
+  `تكتب بعد ما تدّي الدوا على طول، مش آخر الشيفت.`],
+ [`The nurse corrects any documentation error in a timely and forthright manner.`,
+  `يصحح أي غلط في التوثيق بسرعة وبصراحة.`,
+  `لقيت غلط؟ صححه على طول بالطريقة الصح ومتخبيهوش.`],
+ [`The nurse remarks on any late entry if indicated, with both the date and time of the late entry and of the actual event.`,
+  `يوضح لو في تسجيل متأخر، ويكتب تاريخ ووقت التسجيل المتأخر ومعاه تاريخ ووقت الحدث الفعلي.`,
+  `"تسجيل متأخر 3:00 م لحدث الساعة 1:00 م: المريض وقع".`],
+ [`The nurse indicates his/her accountability by adding his/her signature and title as approved by his/her organization to each entry and correction he/she makes on the clinical record.`,
+  `يثبت مسؤوليته بإضافة توقيعه ومسماه الوظيفي المعتمد من المؤسسة على كل تسجيل وكل تصحيح بيعمله في الملف.`,
+  `تمضي: "ن. سارة علي — ممرضة" بعد كل تسجيل وكل تصحيح.`],
+ [`The nurse safeguards the privacy, security, and confidentiality of clinical records by appropriate storage and custody.`,
+  `يحافظ على خصوصية وأمان وسرية السجلات بتخزينها وحراستها صح.`,
+  `متسيبش الملف على الترابيزة، ارجعه مكانه المقفول.`],
+ [`The nurse updates himself/herself with contemporary documentation knowledge.`,
+  `يحدّث معلوماته باستمرار بأحدث معارف التوثيق.`,
+  `تحضر كورس عن السجل الإلكتروني الجديد بتاع المستشفى.`]
+]},
+
+{ id:"methods", icon:"🗂️", title:"Methods of Documentation", items:[
+
+ {h:"1- Source oriented records (charting)"},
+ [`It is a traditional client record organized according to source of information.`,
+  `سجل تقليدي للمريض متنظم حسب مصدر المعلومة.`,
+  `كل قسم أو شخص بيكتب في قسم مخصوص له.`],
+ [`Separate forms for nurses, physician; Each person or department makes notations in a separate section, for example: the admissions department has an admission sheet, the physicians has order sheet, and progress notes, nurse's notes, and so on. So, decrease communication among health care team.`,
+  `في نماذج منفصلة للتمريض والدكتور؛ كل شخص أو قسم بيكتب في جزء لوحده. مثلًا قسم الاستقبال ليه ورقة قبول، والدكتور ليه ورقة أوامر وملاحظات تقدم، والتمريض ليه ملاحظات التمريض. عشان كده التواصل بين الفريق بيقل.`,
+  `الدكتور كتب أمر في ورقته، والممرضة مبصّتش عليها لأنها بتقرا ورقتها هي بس.`],
+ [`Uses narrative charting.`,
+  `بيستخدم التسجيل السردي (حكي بالكلام).`,
+  `"المريض صحي الساعة 7 وشكى من ألم في الصدر، تم إبلاغ الدكتور...".`],
+
+ {h:"2- Problems oriented records (charting)"},
+ [`Recording data focuses on the client's health problems to emphasize goal directed care, so facilitate communication among health care team.`,
+  `تسجيل البيانات بيركز على مشاكل المريض الصحية عشان الرعاية تبقى موجهة لهدف، فبيسهل التواصل بين الفريق.`,
+  `مشكلة "ألم" ← هدف "يقل الألم" ← كل الفريق شغال على نفس الهدف.`],
+ [`Has five basic components/parts:`,
+  `ليه خمس مكونات أساسية:`,
+  `زي ملف مرتب من 5 أجزاء ورا بعض.`],
+ [`Database`, `قاعدة البيانات (المعلومات الأساسية عن المريض).`, `الاسم والسن والتاريخ المرضي والفحص.`, 1],
+ [`Problem list`, `قائمة المشاكل.`, `ألم، حرارة، قلق.`, 1],
+ [`Plan of care`, `خطة الرعاية.`, `إدّي مسكن، قيس الحرارة كل 4 ساعات.`, 1],
+ [`Progress notes`, `ملاحظات التقدم.`, `الحرارة نزلت من 39 لـ 37.5.`, 1],
+ [`Discharge summary`, `ملخص الخروج.`, `ورقة بتلخّص الحالة والعلاج وقت خروج المريض.`, 1],
+ [`The SOAP format is frequently used:`,
+  `صيغة SOAP هي الأكتر استخدامًا:`,
+  `أربع حروف بتترتب بيهم الملاحظة.`],
+ [`S – Subjective data "what the client says"`,
+  `S = البيانات الذاتية: اللي المريض بيقوله.`,
+  `"مش قادر أتنفس كويس".`, 1],
+ [`O – Objective data "what is measured or observed (e.g., V/S, Lab test, X-ray results, and so on……………)."`,
+  `O = البيانات الموضوعية: اللي بيتقاس أو بيتلاحظ (علامات حيوية، تحاليل، أشعة وهكذا).`,
+  `SpO2 = 88%، RR = 28.`, 1],
+ [`A – Assessment "conclusions drawn about the subjective and objective data.`,
+  `A = التقييم: الاستنتاجات اللي طلعت من البيانات الذاتية والموضوعية.`,
+  `"نقص أكسجة".`, 1],
+ [`P – Plan of care "designed to resolve the problem".`,
+  `P = خطة الرعاية: متصممة لحل المشكلة.`,
+  `"أديه أكسجين وأبلغ الدكتور".`, 1],
+
+ {h:"3- PIE (charting)"},
+ [`P – Problem.`, `P = المشكلة.`, `ألم في الجرح.`, 1],
+ [`I – Intervention.`, `I = التدخل.`, `إدّي مسكن وغيّر الوضعية.`, 1],
+ [`E – Evaluation.`, `E = التقييم (النتيجة).`, `الألم قل من 8 لـ 3.`, 1],
+ [`Each client problem is labeled and numbered for easy reference. When interventions are implemented, the evaluation done.`,
+  `كل مشكلة للمريض بتتسمّى وتترقّم عشان يسهل الرجوع لها. ولما التدخلات تتنفذ بيتعمل التقييم.`,
+  `Problem #1: ألم، Problem #2: حرارة؛ وكل واحدة ليها تدخل وتقييم.`],
+
+ {h:"4- Focus (charting)"},
+ [`A documentation method consists of notes that include data both subjective and objective, action or nursing intervention and responses of the clients in column format (DAR).`,
+  `طريقة توثيق ملاحظاتها بتشمل بيانات ذاتية وموضوعية، والإجراء أو التدخل التمريضي، ورد فعل المريض، في شكل أعمدة (DAR).`,
+  `ثلاث أعمدة جنب بعض: Data - Action - Response.`],
+ [`(D) – data, which reflects the assessment phase of the nursing process.`,
+  `D = البيانات، وبتمثل مرحلة التقييم (Assessment) في عملية التمريض.`,
+  `"ضغط 90/60 والمريض دايخ".`, 1],
+ [`(A) – action, which reflects planning and implementation and action.`,
+  `A = الإجراء، وبيمثل التخطيط والتنفيذ.`,
+  `"نيّمته على ضهره ورفعت رجليه".`, 1],
+ [`(R) – response, which reflects the evaluation phase of the nursing process`,
+  `R = الاستجابة، وبتمثل مرحلة التقييم (Evaluation).`,
+  `"الضغط رجع 110/70 والدوخة راحت".`, 1],
+
+ {h:"5- Charting by exception"},
+ [`Is a documentation system "method" that requires to document or written only abnormal or significant findings or exceptions to norms/ or when standard statement in the form isn't met.`,
+  `نظام توثيق بيتطلب إنك تكتب بس النتايج غير الطبيعية أو المهمة، أو الاستثناءات من الطبيعي، أو لما العبارة القياسية اللي في النموذج متتحققش.`,
+  `النموذج مكتوب فيه "الجلد سليم"؛ لو سليم متكتبش حاجة، ولو في جرح اكتب بس الاستثناء.`],
+
+ {h:"6- Computerized documentation"},
+ [`Computerized records of the client's database`,
+  `سجلات محوسبة (على الكمبيوتر) لقاعدة بيانات المريض.`,
+  `ملف المريض بيتفتح على شاشة بدل الورق.`],
+ [`Electronic medical record EMR, which is the electronic version of the client data found in the traditional paper record.`,
+  `السجل الطبي الإلكتروني EMR: النسخة الإلكترونية من بيانات المريض الموجودة في السجل الورقي التقليدي.`,
+  `نفس بيانات الملف الورقي بس متخزنة على السيستم.`],
+ [`Each person would have his or her own computer ID number.`,
+  `كل شخص ليه رقم تعريف خاص بيه على الكمبيوتر.`,
+  `الممرضة بتدخل برقمها السري وكل تسجيل بيتسجل باسمها.`],
+ [`These codes help maintain patient's privacy.`,
+  `الأكواد دي بتساعد في الحفاظ على خصوصية المريض.`,
+  `اللي معهوش كود مقدرش يفتح الملف.`],
+ [`EMR benefits include:`,
+  `فوائد السجل الإلكتروني تشمل:`,
+  `ثمانية فوائد جاية.`],
+ [`Improved access to the medical record.`, `تحسين الوصول للسجل الطبي.`, `الدكتور يفتح الملف من أي كمبيوتر في المستشفى.`, 1],
+ [`Decreased redundancy of data entry.`, `تقليل تكرار إدخال البيانات.`, `تكتب اسم المريض مرة واحدة وتظهر في كل النماذج.`, 1],
+ [`Decreased time spent in documentation.`, `تقليل الوقت المستغرق في التوثيق.`, `اختيار من قايمة جاهزة أسرع من كتابة جملة كاملة.`, 1],
+ [`Increased time for client care.`, `زيادة الوقت المخصص لرعاية المريض.`, `الوقت اللي وفرته في الكتابة تقضيه جنب المريض.`, 1],
+ [`Facilitation of data collection for research.`, `تسهيل جمع البيانات للأبحاث.`, `الباحث يطلع بيانات 500 مريض بضغطة زرار.`, 1],
+ [`Decreased potential for error.`, `تقليل احتمالية الخطأ.`, `مفيش خط وحش يتقري غلط.`, 1],
+ [`Enhance and facilitate the collaboration among all health care team involved in the client care including medical and para-medical professions.`,
+  `تعزيز وتسهيل التعاون بين كل أعضاء الفريق الصحي المشاركين في رعاية المريض، من الأطباء والمهن الطبية المساعدة.`,
+  `الدكتور والصيدلي والممرض والمعمل كلهم شايفين نفس الملف في نفس اللحظة.`, 1],
+ [`Model professionalism.`, `بيمثل الاحترافية.`, `شغل منظم ومرتب بيدي صورة محترمة للمستشفى.`, 1]
+]},
+
+{ id:"components", icon:"🧩", title:"Components of Documentation & Types of Records", items:[
+ [`Recording and reporting are key components of documentation.`,
+  `التسجيل (Recording) والتبليغ (Reporting) هما المكونات الأساسية للتوثيق.`,
+  `تكتب الملاحظة في الملف (تسجيل) وتبلّغ الشيفت اللي بعدك شفهيًا (تبليغ).`],
+
+ {h:"Definition of records"},
+ [`Records are hospital administrative tools used to classify information and prevent duplication of information.`,
+  `السجلات هي أدوات إدارية في المستشفى بتُستخدم لتصنيف المعلومات ومنع تكرارها.`,
+  `سجل الحضور بيصنّف مواعيد الموظفين ومفيش حد بيكتبها مرتين.`],
+
+ {h:"Types of records"},
+ [`There are two types of records used in hospital`,
+  `في نوعين من السجلات بيستخدموا في المستشفى.`,
+  `نوع في وحدة التمريض، ونوع في مكتب التمريض.`],
+
+ {h:"I. Records in common use by nursing unit"},
+ [`Patient's record`, `سجل المريض.`, `ملف فيه كل بيانات وعلاج مريض معين.`, 1],
+ [`Assignment record`, `سجل التكليفات.`, `مين هيمسك أنهي مرضى النهاردة.`, 1],
+ [`Time planning record`, `سجل تخطيط الوقت.`, `جدول الشيفتات الأسبوعي.`, 1],
+ [`Census record`, `سجل الإحصاء (تعداد المرضى).`, `عدد المرضى النهاردة في الوحدة.`, 1],
+ [`Inventory record`, `سجل الجرد.`, `قايمة بالأجهزة والأثاث الموجودين في الوحدة.`, 1],
+ [`Narcotic record`, `سجل المخدرات الطبية.`, `تسجيل كل أمبولة مورفين اتصرفت.`, 1],
+
+ {h:"II. Records in common use by nursing office"},
+ [`Master record of nursing hours`, `السجل الرئيسي لساعات التمريض.`, `كل ساعات شغل التمريض في المستشفى مجمعة.`, 1],
+ [`Attendance record`, `سجل الحضور.`, `توقيع الحضور وقت الدخول.`, 1],
+ [`Personnel record`, `سجل شؤون العاملين.`, `ملف الموظف الشخصي.`, 1],
+ [`Employment record`, `سجل التوظيف.`, `بيانات تعيين الممرض.`, 1],
+ [`Evaluation record`, `سجل التقييم.`, `تقييم الأداء السنوي للممرض.`, 1]
+]},
+
+{ id:"unit", icon:"🏥", title:"I. Nursing Unit Records", items:[
+
+ {h:"1. Patient record"},
+ [`A patient's clinical record is the comprehensive collection of data and an orderly written record; that describes`,
+  `السجل الإكلينيكي للمريض هو مجموعة شاملة من البيانات وسجل مكتوب منظم بيوصف:`,
+  `ملف واحد فيه كل حاجة عن المريض بترتيب.`],
+ [`Patient condition`, `حالة المريض.`, `تشخيصه وعلاماته الحيوية.`, 1],
+ [`Health care needs`, `احتياجاته الصحية.`, `محتاج أكسجين وتغيير وضعية.`, 1],
+ [`Health care services and`, `الخدمات الصحية المقدمة.`, `غيار جرح، حقن، أشعة.`, 1],
+ [`Response to care`, `استجابته للرعاية.`, `الحرارة نزلت بعد الخافض.`, 1],
+ [`This record should be arranged in chronological order from the current data back to the data of admission.`,
+  `السجل ده لازم يترتب زمنيًا من أحدث بيانات رجوعًا لبيانات يوم الدخول.`,
+  `أول ورقة تقابلك أحدث ورقة، وآخر ورقة هي ورقة القبول.`],
+ [`It includes`, `وبيشمل:`, `الأجزاء الجاية.`],
+ [`a. Admission and discharge records,`, `أ. سجلات الدخول والخروج.`, `ورقة قبول المريض وورقة خروجه.`, 1],
+ [`b. History of physical examination`, `ب. التاريخ المرضي والفحص الطبي.`, `شكاوى المريض وفحص الدكتور.`, 1],
+ [`c. Progress notes.`, `ج. ملاحظات التقدم.`, `ملاحظة يومية عن تحسن الحالة.`, 1],
+ [`d. Physician's orders`, `د. أوامر الدكتور.`, `"ميترونيدازول 500 مجم كل 8 ساعات".`, 1],
+ [`e. Graphic records`, `هـ. السجلات البيانية.`, `منحنى الحرارة والنبض والضغط.`, 1],
+ [`f. Other records`, `و. سجلات أخرى:`, `التالي.`, 1],
+ [`Consultation report`, `تقرير الاستشارة.`, `رأي دكتور تخصص تاني في الحالة.`, 1],
+ [`Test result report`, `تقرير نتائج التحاليل.`, `نتيجة CBC.`, 1],
+ [`Transfusion record`, `سجل نقل الدم.`, `إنهي كيس اتنقل وإمتى وعلامات المريض أثناءه.`, 1],
+
+ {h:"2. Assignment records"},
+ [`Is the second record in the nursing unit, is used for delegation of the responsibilities to the health personnel in the unit`,
+  `ثاني سجل في وحدة التمريض، وبيتستخدم لتفويض المسؤوليات لأفراد الفريق الصحي في الوحدة.`,
+  `رئيسة التمريض بتوزع: سارة على الأوض 1-5 ومحمد على 6-10.`],
+ [`There is a special form to be filled daily by the head nurse for each shift and should be located in a place accessible to all nursing personnel`,
+  `في نموذج مخصوص بتملاه رئيسة التمريض يوميًا لكل شيفت، ولازم يكون في مكان يقدر يوصله كل التمريض.`,
+  `يتعلق على لوحة الإعلانات في الوحدة.`],
+ [`The record includes:`, `السجل بيشمل:`, `العناصر الجاية.`],
+ [`Name of the head nurse, charge nurse.`, `اسم رئيسة التمريض (Head nurse) والـ Charge nurse.`, `رئيسة الوحدة: أ. منى.`, 1],
+ [`Name and position of nursing personnel assigned duties during the shift.`, `اسم ووظيفة أفراد التمريض المكلفين بمهام خلال الشيفت.`, `سارة (ممرضة) - محمد (مساعد ممرض).`, 1],
+ [`Name of the patient, diagnosis, nursing care needed or special treatment, investigation to be done.`, `اسم المريض، التشخيص، الرعاية التمريضية المطلوبة أو العلاج الخاص، والفحوصات اللي لازم تتعمل.`, `أحمد - التهاب رئوي - رعاية: شفط إفرازات - مطلوب أشعة صدر.`, 1],
+ [`List of special assignments.`, `قايمة المهام الخاصة.`, `مرافقة مريض للأشعة.`, 1],
+ [`Time and place of conference or meeting.`, `موعد ومكان المؤتمر أو الاجتماع.`, `اجتماع الساعة 12 في غرفة الاجتماعات.`, 1],
+
+ {h:"3. Time planning record"},
+ [`It is weekly or monthly record, which indicates the planned coverage of the nursing personal for each nursing unit.`,
+  `سجل أسبوعي أو شهري بيوضح التغطية المخططة لأفراد التمريض لكل وحدة.`,
+  `جدول الشهر بيبيّن مين شغال أنهي يوم.`],
+ [`It should be made in duplication one copy is retained on the unit and the other is sent to the nursing office.`,
+  `لازم يتعمل منه نسختين: نسخة تفضل في الوحدة والتانية تتبعت لمكتب التمريض.`,
+  `نسخة على الحيطة في الوحدة ونسخة لمديرة التمريض.`],
+ [`The form should include`, `النموذج لازم يشمل:`, `الجاي.`],
+ [`Name of all personnel on the unit`, `أسماء كل العاملين في الوحدة.`, `قايمة بكل الممرضين.`, 1],
+ [`The working hours of different shifts assigned to each nurse including days off.`, `ساعات العمل لكل شيفت متحدد لكل ممرض، بما فيها أيام الإجازة.`, `سارة: صباحي السبت والأحد، إجازة الاتنين.`, 1],
+ [`The floating charge nurse to substitute any non-attended nurse at any shift`, `الـ Floating charge nurse اللي بتحل محل أي ممرضة غايبة في أي شيفت.`, `ممرضة غابت فجأة؛ الـ floating nurse بتاخد مكانها.`, 1],
+ [`Hours of conference or meeting`, `ساعات المؤتمرات أو الاجتماعات.`, `اجتماع شهري الخميس 10 ص.`, 1],
+
+ {h:"4. Patient census record"},
+ [`It is a daily record for each unit to calculate the total number of patients in different in the hospital.`,
+  `سجل يومي لكل وحدة لحساب إجمالي عدد المرضى في الأقسام المختلفة في المستشفى.`,
+  `إجمالي المرضى النهاردة في المستشفى 150.`],
+ [`The census can be taken at any time of the day or the night as hospital policy indicated`,
+  `ممكن يتاخد التعداد في أي وقت في النهار أو الليل حسب سياسة المستشفى.`,
+  `مستشفى بتعمله الساعة 12 بالليل وتانية الساعة 8 الصبح.`],
+ [`The form includes the following`, `النموذج بيشمل:`, `الجاي.`],
+ [`Number of beds on each unit.`, `عدد الأسرّة في كل وحدة.`, `وحدة فيها 20 سرير.`, 1],
+ [`Number of patients.`, `عدد المرضى.`, `18 مريض من 20 سرير.`, 1],
+
+ {h:"5. Inventory records"},
+ [`It is an itemized record for all fixed furniture, equipment, and instruments in the unit with identifying date and quantity of all equipment.`,
+  `سجل مفصّل بكل الأثاث الثابت والأجهزة والأدوات في الوحدة، مع تاريخ التعريف وكمية كل جهاز.`,
+  `3 جهاز ضغط، 2 جهاز نبض، 10 سرير.`],
+ [`Inventory count should be made at periodic time as hospital policies`,
+  `الجرد لازم يتعمل في أوقات دورية حسب سياسة المستشفى.`,
+  `جرد شهري في أول كل شهر.`],
+
+ {h:"6. Narcotic drug record"},
+ [`Document administration of narcotic drugs`,
+  `بيوثق إعطاء الأدوية المخدرة.`,
+  `تسجّل إنك أديت مورفين لمريض الساعة كام.`],
+ [`"Narcotic drugs are substances listed in the schedule used only for medical purpose not given without prescription signature from the physician with 2 copy with two witness e.g. morphine, pethidine……………"`,
+  `المخدرات الطبية مواد مدرجة في جدول خاص وبتُستخدم للأغراض الطبية بس، ومبتتعطيش من غير توقيع الدكتور على الروشتة في نسختين وبشاهدين، زي المورفين والبيثيدين.`,
+  `مريض بعد عملية محتاج مورفين: الدكتور يمضي روشتة بنسختين وشاهدين يمضوا معاك.`],
+ [`Under control from the main pharmacy and Ministry of Health (MOH).`,
+  `تحت رقابة الصيدلية الرئيسية ووزارة الصحة.`,
+  `الصيدلية بتراجع عدد الأمبولات المصروفة مع الرصيد.`]
+]},
+
+{ id:"office", icon:"🏢", title:"III. Records Used in Nursing Office", items:[
+ [`It includes three types of records namely`,
+  `بتشمل ثلاثة أنواع من السجلات:`,
+  `سجل ساعات، وسجل حضور، وسجل شؤون عاملين.`],
+
+ {h:"1. Master record of nursing hours"},
+ [`This record derived from the time record of the nursing units; should show the distribution of the hours assigned to be worked by each category of nursing personnel in the hospital.`,
+  `السجل ده بيتاخد من سجلات الوقت في وحدات التمريض، ولازم يبيّن توزيع ساعات العمل المحددة لكل فئة من أفراد التمريض في المستشفى.`,
+  `إجمالي ساعات الممرضات 1200 ساعة، والمساعدين 600 ساعة في الشهر.`],
+
+ {h:"2. Attendance record"},
+ [`It is used to determine the attendance and absence of nursing personnel. Every nurse should sign and write the exact time of her attendance.`,
+  `بيتستخدم لتحديد حضور وغياب أفراد التمريض. كل ممرضة لازم تمضي وتكتب الوقت بالظبط وقت حضورها.`,
+  `تدخل الساعة 7:55 وتكتب "7:55" وتمضي.`],
+
+ {h:"3. Personnel record"},
+ [`It is concerned with information about each individual nurse. It consists of employment and evaluation record.`,
+  `بيهتم بمعلومات كل ممرض على حدة، وبيتكوّن من سجل التوظيف وسجل التقييم.`,
+  `ملف كل ممرض له بيانات تعيينه وتقييمات أدائه.`],
+ [`The file should include the following`, `الملف لازم يشمل:`, `العناصر الجاية.`],
+ [`Application blank`, `استمارة التقديم.`, `الورقة اللي الممرض ملاها لما قدم على الوظيفة.`, 1],
+ [`Interview form`, `نموذج المقابلة.`, `تقييم المقابلة الشخصية.`, 1],
+ [`Reference findings`, `نتائج المراجع (التزكيات).`, `رأي جهة عمل سابقة فيه.`, 1],
+ [`Health status – physical examination`, `الحالة الصحية - الكشف الطبي.`, `شهادة اللياقة الطبية قبل التعيين.`, 1],
+ [`Employee performance appraisal`, `تقييم أداء الموظف.`, `تقييم سنوي من رئيسة الوحدة.`, 1],
+ [`Salary status`, `وضع الراتب.`, `الراتب والعلاوات.`, 1],
+ [`Employment change`, `تغيّرات الوظيفة.`, `ترقية أو نقل لوحدة تانية.`, 1],
+ [`Disciplinary action`, `الإجراءات التأديبية.`, `إنذار بسبب تأخير متكرر.`, 1],
+ [`Accident and incident reports`, `تقارير الحوادث والوقائع.`, `ممرض اتعور بإبرة في الشغل.`, 1],
+ [`Educational achievement`, `التحصيل العلمي.`, `شهادة دبلومة أو ماجستير.`, 1],
+ [`Staff activity`, `أنشطة الموظف.`, `شارك في ورشة عمل أو لجنة.`, 1]
+]}
+
+];
+
+/* ===== RENDER ===== */
+const app = document.getElementById('app');
+const chips = document.getElementById('chips');
+let totalPts = 0;
+
+SECTIONS.forEach((s, si) => {
+  let n = 0;
+  let body = '';
+  s.items.forEach(it => {
+    if (it.h) { body += `<div class="subhead">${it.h}</div>`; return; }
+    n++; totalPts++;
+    const sub = it[3] ? ' sub' : '';
+    body += `<div class="pt${sub}">
+      <div class="pt-en" onclick="this.parentElement.classList.toggle('done')"><div class="pt-n">${n}</div><div>${it[0]}</div></div>
+      <div class="pt-ar"><span class="tag">شرح</span>${it[1]}</div>
+      <div class="pt-ex"><span class="tag">مثال</span>${it[2]}</div>
+    </div>`;
+  });
+  app.insertAdjacentHTML('beforeend', `
+    <section class="sec" id="${s.id}">
+      <div class="sec-head">
+        <div class="sec-icon">${s.icon}</div>
+        <div class="sec-title">${s.title}</div>
+        <div class="sec-count">${n} points</div>
+      </div>
+      <div class="sec-body">${body}</div>
+    </section>`);
+  chips.insertAdjacentHTML('beforeend', `<a class="chip" href="#${s.id}" data-id="${s.id}">${s.icon} ${s.title.split('—')[0].split('&')[0].trim()}</a>`);
+});
+document.getElementById('totalBadge').textContent = totalPts + ' points';
+document.getElementById('secBadge').textContent = SECTIONS.length + ' sections';
+
+/* progress bar + active chip */
+const secEls = [...document.querySelectorAll('.sec')];
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  document.getElementById('prog-bar').style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+  let cur = secEls[0].id;
+  secEls.forEach(el => { if (el.getBoundingClientRect().top < 160) cur = el.id; });
+  document.querySelectorAll('.chip').forEach(c => {
+    const on = c.dataset.id === cur;
+    c.classList.toggle('active', on);
+    if (on) { const p = c.parentElement; p.scrollTo({ left: c.offsetLeft - 40, behavior: 'smooth' }); }
+  });
+}, { passive: true });
+
+/* toggles */
+function toggler(btnId, cls) {
+  const b = document.getElementById(btnId);
+  b.addEventListener('click', () => { document.body.classList.toggle(cls); b.classList.toggle('off'); });
+}
+toggler('btnAr', 'hide-ar');
+toggler('btnEx', 'hide-ex');
+
+/* theme */
+const themeBtn = document.getElementById('themeBtn');
+let theme = 'light';
+try { theme = localStorage.getItem('theme') || 'light'; } catch (e) {}
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  try { localStorage.setItem('theme', t); } catch (e) {}
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+</script>
+</body>
+</html>
