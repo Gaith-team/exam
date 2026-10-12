@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM </title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:#1e3a8a; --teal:#0e7490; --emerald:#10b981; --gold:#f59e0b;
+  --accent:#0e7490; --accent-glow:rgba(14,116,144,0.18); --accent-rgb:14,116,144;
+  --grad:linear-gradient(135deg,#1e3a8a 0%,#0e7490 50%,#10b981 100%);
+  --grad-bar:linear-gradient(90deg,#1e3a8a,#0e7490,#10b981,#f59e0b);
+  --bg:#f8fafc; --bg2:#eef2f7; --card:#ffffff;
+  --text:#1a2332; --text2:#4a5568; --text3:#718096;
+  --bc:rgba(0,0,0,0.07);
+  --r:16px; --tr:all .3s cubic-bezier(.4,0,.2,1);
+}
+[data-theme="dark"] {
+  --bg:#0d1117; --bg2:#161b22; --card:#1c2333;
+  --text:#e6edf3; --text2:#b1bac4; --text3:#7d8590;
+  --bc:rgba(255,255,255,0.08);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family:'Outfit',sans-serif; background:var(--bg); color:var(--text);
+  min-height:100vh; overflow-x:hidden; transition:background .4s,color .4s;
+}
+
+#prog-bar { position:fixed; top:0; left:0; height:3px; z-index:999; background:var(--grad-bar); width:0%; transition:width .15s; }
+
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 28px; height:64px;
+  background:rgba(248,250,252,.93); backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--bc);
+}
+[data-theme="dark"] nav { background:rgba(13,17,23,.95); }
+.nav-brand { display:flex; align-items:center; gap:9px; font-size:15px; font-weight:900; color:var(--text); }
+.nav-logo-icon {
+  width:34px; height:34px; border-radius:8px; background:var(--grad);
+  display:flex; align-items:center; justify-content:center;
+  color:#fff; font-size:12px; font-weight:900; box-shadow:0 0 0 2px rgba(245,158,11,.5);
+}
+.nav-right { display:flex; align-items:center; gap:8px; }
+.theme-btn, .tool-btn {
+  height:38px; min-width:38px; border-radius:50px; border:1px solid var(--bc);
+  background:var(--card); cursor:pointer; font-size:14px; color:var(--text);
+  display:flex; align-items:center; justify-content:center; gap:6px; padding:0 12px;
+  font-family:'Outfit',sans-serif; font-weight:700; transition:var(--tr);
+}
+.theme-btn { width:38px; padding:0; border-radius:50%; font-size:15px; }
+.theme-btn:hover { border-color:var(--accent); transform:rotate(20deg); }
+.tool-btn:hover { border-color:var(--accent); color:var(--accent); }
+.tool-btn.off { opacity:.55; }
+
+.hero-band {
+  margin-top:64px; background:var(--grad); padding:40px 24px 36px; text-align:center;
+  position:relative; overflow:hidden; border-bottom:4px solid var(--gold);
+}
+.hero-band::before {
+  content:''; position:absolute; inset:0;
+  background:
+    radial-gradient(circle 220px at 12% 20%, rgba(245,158,11,.22) 0%, transparent 70%),
+    radial-gradient(circle 260px at 90% 85%, rgba(16,185,129,.28) 0%, transparent 70%),
+    radial-gradient(ellipse 600px 200px at 50% 100%, rgba(255,255,255,.12) 0%, transparent 70%);
+}
+.hero-band > * { position:relative; }
+.hero-band-icon {
+  width:68px; height:68px; border-radius:20px; background:rgba(255,255,255,.2);
+  backdrop-filter:blur(8px); display:flex; align-items:center; justify-content:center;
+  font-size:30px; margin:0 auto 14px; border:1.5px solid rgba(255,255,255,.35);
+}
+.hero-band h1 { font-size:clamp(20px,4vw,30px); font-weight:900; color:#fff; margin-bottom:6px; }
+.hero-band p { font-size:13px; color:rgba(255,255,255,.85); }
+.hero-band-meta { display:flex; justify-content:center; gap:14px; margin-top:20px; flex-wrap:wrap; }
+.meta-pill {
+  background:rgba(255,255,255,.18); backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.3); border-radius:50px; padding:6px 16px;
+  font-size:12px; font-weight:700; color:#fff; display:flex; align-items:center; gap:6px;
+}
+.meta-pill i { color:var(--gold); }
+
+/* CHIPS */
+.chips-wrap {
+  position:sticky; top:64px; z-index:90; background:var(--bg);
+  border-bottom:1px solid var(--bc); padding:10px 0;
+}
+.chips { display:flex; gap:8px; overflow-x:auto; padding:0 20px; max-width:860px; margin:0 auto; scrollbar-width:none; }
+.chips::-webkit-scrollbar { display:none; }
+.chip {
+  flex-shrink:0; padding:7px 14px; border-radius:50px; font-size:12px; font-weight:700;
+  background:var(--card); border:1px solid var(--bc); color:var(--text2);
+  text-decoration:none; transition:var(--tr); white-space:nowrap;
+}
+.chip:hover, .chip.active { background:var(--grad); color:#fff; border-color:transparent; }
+
+.shell { max-width:860px; margin:0 auto; padding:24px 20px 80px; }
+
+/* SECTION */
+.sec { margin-bottom:34px; scroll-margin-top:130px; }
+.sec-head {
+  display:flex; align-items:center; gap:12px; background:var(--grad); color:#fff;
+  padding:14px 18px; border-radius:16px 16px 0 0; border-bottom:3px solid var(--gold);
+}
+.sec-icon {
+  width:38px; height:38px; border-radius:10px; background:rgba(255,255,255,.2);
+  display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0;
+}
+.sec-title { font-size:17px; font-weight:900; line-height:1.3; }
+.sec-count { margin-left:auto; font-size:11px; font-weight:700; background:rgba(255,255,255,.2); padding:3px 10px; border-radius:50px; white-space:nowrap; }
+.sec-body {
+  background:var(--card); border:1px solid var(--bc); border-top:none;
+  border-radius:0 0 16px 16px; padding:14px; display:flex; flex-direction:column; gap:12px;
+  box-shadow:0 4px 20px rgba(0,0,0,.05);
+}
+
+.subhead {
+  font-size:13px; font-weight:900; color:var(--navy); padding:8px 12px;
+  background:rgba(var(--accent-rgb),.08); border-left:4px solid var(--gold);
+  border-radius:8px; direction:ltr; text-align:left; margin-top:6px;
+}
+[data-theme="dark"] .subhead { color:#7dd3fc; }
+
+/* POINT */
+.pt {
+  border:1px solid var(--bc); border-radius:14px; overflow:hidden; background:var(--bg);
+  transition:var(--tr);
+}
+.pt:hover { border-color:rgba(var(--accent-rgb),.4); box-shadow:0 4px 14px var(--accent-glow); }
+.pt.sub { margin-left:22px; border-left:3px solid var(--teal); }
+.pt.done { opacity:.55; }
+
+.pt-en {
+  display:flex; gap:10px; align-items:flex-start; padding:13px 14px;
+  font-size:15px; font-weight:700; line-height:1.6; direction:ltr; text-align:left;
+  background:var(--card); cursor:pointer;
+}
+.pt-n {
+  min-width:26px; height:26px; border-radius:8px; background:var(--grad); color:#fff;
+  font-size:11px; font-weight:900; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px;
+}
+.pt-ar {
+  padding:12px 16px; font-size:14.5px; line-height:1.9; color:var(--text);
+  direction:rtl; text-align:right; border-top:1px dashed var(--bc);
+  font-family:'Segoe UI',Tahoma,'Outfit',sans-serif;
+}
+.pt-ar .tag, .pt-ex .tag {
+  display:inline-block; font-size:11px; font-weight:900; padding:2px 9px; border-radius:6px; margin-left:8px; vertical-align:middle;
+}
+.pt-ar .tag { background:rgba(14,116,144,.12); color:var(--teal); }
+[data-theme="dark"] .pt-ar .tag { color:#5eead4; }
+.pt-ex {
+  padding:12px 16px; font-size:14px; line-height:1.9; color:var(--text2);
+  direction:rtl; text-align:right; border-top:1px dashed var(--bc);
+  background:rgba(245,158,11,.07); border-right:4px solid var(--gold);
+  font-family:'Segoe UI',Tahoma,'Outfit',sans-serif;
+}
+.pt-ex .tag { background:rgba(245,158,11,.2); color:#b45309; }
+[data-theme="dark"] .pt-ex .tag { color:#fbbf24; }
+body.hide-ex .pt-ex { display:none; }
+body.hide-ar .pt-ar { display:none; }
+
+footer {
+  background:var(--bg2); border-top:3px solid; border-image:var(--grad-bar) 1;
+  padding:22px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;
+}
+.footer-brand { font-size:14px; font-weight:700; }
+.footer-brand span { color:var(--accent); }
+.footer-tg { display:flex; align-items:center; gap:5px; text-decoration:none; color:#229ED9; font-size:12px; font-weight:600; }
+
+@media (max-width:560px) {
+  nav { padding:0 12px; }
+  .nav-brand span { display:none; }
+  .shell { padding:16px 12px 60px; }
+  .pt.sub { margin-left:12px; }
+  .tool-btn span { display:none; }
+  .sec-count { display:none; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog-bar"></div>
+
+<nav>
+  <div class="nav-brand">
+    <div class="nav-logo-icon">GT</div>
+    <span>GHAITH TEAM</span>
+  </div>
+  <div class="nav-right">
+    <button class="tool-btn" id="btnAr" title="Arabic"><i class="fa-solid fa-language"></i><span>الشرح</span></button>
+    <button class="tool-btn" id="btnEx" title="Examples"><i class="fa-solid fa-lightbulb"></i><span>عشان تفهمها</span></button>
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<div class="hero-band">
+  <div class="hero-band-icon">📝</div>
+  <h1>Nursing care delivery system</h1>
+  <p>Nursing Management </p>
+  <div class="hero-band-meta">
+    <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">--</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-layer-group"></i> <span id="secBadge">--</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-language"></i> ببساطة مع غيث</div>
+  </div>
+</div>
+
+<div class="chips-wrap"><div class="chips" id="chips"></div></div>
+
+<div class="shell" id="app"></div>
+
+<footer>
+  <div class="footer-brand">GHAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg"><i class="fa-brands fa-telegram"></i> @nursing2bu</a>
+</footer>
+
+<script>
+/* Item format: [English, Arabic explanation, Example, level]  |  {h:"sub heading"}  (level 1 = indented sub-point) */
+const SECTIONS = [
+
+{ id:"assign", icon:"📖", title:"Assignment — Definition & Principles", items:[
+
+{h:"Definition"},
+["Assignment refers to “a written delegation of duties to care for a group of patients by trained personnel assigned to the unit.”",
+ "الـ Assignment يعني توزيع الشغل مكتوب على الممرضين: مين هيهتم بأنهي مجموعة مرضى في القسم، والتوزيع ده بيتعمل لتمريض متدرب ومتعيّن في القسم.",
+ "مثال: ورقة معلّقة في القسم مكتوب فيها «أحمد: سرير 1 لـ 4 – سارة: سرير 5 لـ 8». كده كل واحد عارف هو مسؤول عن مين."],
+
+{h:"Principles of personnel assignment"},
+["1- Made by the head nurse or nurse in charge for each individual nurse.",
+ "اللي بيعمل التوزيع هي رئيسة التمريض (Head Nurse) أو الممرضة المسؤولة (Nurse in charge)، وبتوزع لكل ممرض لوحده.",
+ "مثال: الصبح الـ Head Nurse هي اللي بتقعد وتقول لكل ممرض هيمسك أنهي مرضى، مش الممرضين يختاروا لنفسهم."],
+["2- Based on:",
+ "التوزيع لازم يبقى مبني على مجموعة حاجات (هنشوفها تحت).",
+ "مثال: الـ Head Nurse مش بتوزع بالعشوائي، بتبص على كذا عامل قبل ما تقرر."],
+["The skills of staff members.",
+ "مهارات الممرضين اللي في الفريق.",
+ "مثال: الممرض اللي شاطر في التعامل مع الأجهزة بياخد المريض اللي عليه جهاز تنفس."],
+["Nursing care needs for each patient.",
+ "احتياجات الرعاية التمريضية لكل مريض.",
+ "مثال: مريض حالته حرجة محتاج رعاية أكتر من مريض مستقر، فالتوزيع بيراعي كده."],
+["Nursing procedures time required.",
+ "الوقت اللي الإجراءات التمريضية بتاخده.",
+ "مثال: مريض محتاج تغيير جروح وتغذية وحقن ياخد وقت طويل، فمينفعش نديله لممرض معاه مرضى كتير تانيين."],
+["Experience and interest of the staff members.",
+ "خبرة واهتمام الممرضين.",
+ "مثال: ممرض خبرته كبيرة وبيحب الأطفال يتحط في قسم الأطفال."],
+["Job description.",
+ "الوصف الوظيفي (كل واحد مكتوب له يعمل إيه).",
+ "مثال: الممرض المساعد مكتوب في وصفه الوظيفي إنه يساعد في النظافة، فمش بنكلفه بإعطاء أدوية الوريد."],
+["Hospital policy.",
+ "سياسة المستشفى.",
+ "مثال: لو سياسة المستشفى إن كل ممرض مسؤول عن عدد معين من المرضى، التوزيع بيمشي عليها."],
+["Nursing Care Standards.",
+ "معايير الرعاية التمريضية.",
+ "مثال: لو المعيار إن الـ ICU ممرض لكل مريض أو اتنين، بنوزع على الأساس ده."],
+["3- Planned weekly, and revised daily if necessary to assure continuity of care.",
+ "التوزيع بيتخطط أسبوعيًا، ولو احتجنا بنراجعه يوميًا عشان نضمن إن الرعاية مستمرة من غير انقطاع.",
+ "مثال: الجدول بيتعمل من أول الأسبوع، ولو ممرض اتغيب النهارده بنعدّل التوزيع في نفس اليوم."],
+["4- Take into account all the direct and indirect unit activities.",
+ "نحط في الحسبان كل أنشطة القسم المباشرة وغير المباشرة.",
+ "مثال: الشغل المباشر زي إعطاء الدواء للمريض، وغير المباشر زي كتابة التقارير وتجهيز الأدوات."],
+["5- Consider the geographical location of the unit and the assigned duties to save nurse’s time and effort.",
+ "نراعي مكان القسم الجغرافي ومكان الشغل المكلّف به الممرض عشان نوفر وقته ومجهوده.",
+ "مثال: نديله مرضى في أوض جنب بعض بدل ما يجري من أول الطرقة لآخرها."],
+["6- Must be balanced among nursing staff.",
+ "لازم التوزيع يبقى متوازن ومتعادل بين الممرضين.",
+ "مثال: مينفعش ممرض ياخد 10 مرضى وزميله ياخد 2."],
+["7- Never to assign the same task to more than one nurse.",
+ "ممنوع نكلّف أكتر من ممرض بنفس المهمة.",
+ "مثال: لو اتنين ممرضين الاتنين مكلفين يدّوا نفس الدواء لنفس المريض ممكن يتدّي مرتين بالغلط."],
+
+]},
+
+{ id:"charact", icon:"✅", title:"Characteristics of Effective Assignment", items:[
+
+["1. Definite and easily understood.",
+ "محدد وسهل يتفهم.",
+ "مثال: «سارة مسؤولة عن أوض 1 و2» جملة واضحة محدش هيتلخبط فيها."],
+["2. Simple.",
+ "بسيط.",
+ "مثال: جدول من غير تعقيدات وتفاصيل كتير."],
+["3. Clear.",
+ "واضح.",
+ "مثال: أسماء الممرضين ومرضاهم مكتوبة بخط مقروء."],
+["4. Written.",
+ "مكتوب (مش كلام شفوي).",
+ "مثال: يتكتب في ورقة أو جدول مش يتقال بس بالصوت."],
+["5. Nursing staff should be informed if any change occurs.",
+ "لو حصل أي تغيير لازم الممرضين يتبلغوا بيه.",
+ "مثال: لو اتنقلت مريض من ممرضة لتانية لازم الاتنين يعرفوا."],
+["6. It should be signed by head nurse and the team leader.",
+ "لازم يتوقّع عليه من الـ Head Nurse وقائد الفريق (Team leader).",
+ "مثال: الجدول عليه إمضاء الاتنين عشان يبقى رسمي."],
+["7. It should be posted in well known permanent place.",
+ "لازم يتعلّق في مكان معروف وثابت.",
+ "مثال: متعلّق دايمًا على الحيطة جنب محطة التمريض (Nurses’ station)، الكل عارف يلاقيه فين."],
+
+]},
+
+{ id:"modes", icon:"🗂️", title:"Modes or Methods of Organizing Patient Care", items:[
+
+["1- Total Patient Care or Case Method.",
+ "الطريقة الأولى: الرعاية الكاملة للمريض أو Case Method.",
+ "مثال: ممرض واحد مسؤول عن مريضه من أول لآخر الشيفت."],
+["2- Functional Method.",
+ "الطريقة التانية: الطريقة الوظيفية.",
+ "مثال: ممرض ياخد الضغط للكل، وممرض يدّي الأدوية للكل."],
+["3- Team Method",
+ "الطريقة التالتة: طريقة الفريق.",
+ "مثال: فريق فيه ممرض وممرض مساعد بيمسكوا مجموعة مرضى مع بعض."],
+["4- Modular Nursing Method.",
+ "الطريقة الرابعة: التمريض المودولار (فريق صغير).",
+ "مثال: فريق من اتنين أو تلاتة بس بيمسكوا مرضى معينين."],
+["5- Primary Nursing Method.",
+ "الطريقة الخامسة: التمريض الأساسي.",
+ "مثال: ممرضة واحدة مسؤولة عن مريضها من دخوله لحد خروجه."],
+["6-Case Management Method",
+ "الطريقة السادسة: إدارة الحالة.",
+ "مثال: منسق بيتابع مريض مزمن من التشخيص لحد ما يرجع بيته."],
+
+]},
+
+{ id:"total", icon:"1️⃣", title:"1- Total Patient Care or Case Method", items:[
+
+["It is the oldest mode of organizing patient care.",
+ "دي أقدم طريقة لتنظيم رعاية المرضى.",
+ "مثال: الطريقة اللي كانت مستخدمة زمان من أيام أول التمريض."],
+["In this method, nurses assume total responsibility for meeting all needs of assigned patients during their time of duty.",
+ "في الطريقة دي الممرض بيبقى مسؤول مسؤولية كاملة عن كل احتياجات المرضى المتكلف بيهم طول مدة شيفته.",
+ "مثال: ممرض ICU ماسك مريضين، هو اللي يدّي الأدوية ويغيّر ويراقب ويتابع كل حاجة بنفسه."],
+["Common use areas—intensive care unit (ICU) and post-anesthetic care unit (PACU)",
+ "الأماكن اللي بتتستخدم فيها كتير: العناية المركزة (ICU) ووحدة الإفاقة بعد التخدير (PACU).",
+ "مثال: ممرض الـ ICU ماسك مريض واحد أو اتنين بس عشان حالتهم حرجة."],
+
+{h:"Advantages"},
+["Nurses are highly autonomous.",
+ "الممرضين عندهم استقلالية كبيرة (بياخدوا قرارات بنفسهم).",
+ "مثال: الممرض يقرر ترتيب شغله مع مريضه من غير ما يستنى حد."],
+["Assigning patients is simple and direct.",
+ "توزيع المرضى سهل ومباشر.",
+ "مثال: «ده مريضك» وخلاص من غير جداول معقدة."],
+["The lines of responsibility and accountability are clear.",
+ "خطوط المسؤولية والمحاسبة واضحة.",
+ "مثال: لو حصلت مشكلة مع المريض عارفين مين المسؤول بالظبط."],
+["Patients do receive non fragmented care.",
+ "المرضى بياخدوا رعاية متكاملة مش مقسّمة.",
+ "مثال: نفس الممرض بيعمل كل حاجة للمريض مش كل شوية حد جديد."],
+["Patients feel more secure.",
+ "المرضى بيحسّوا بأمان أكتر.",
+ "مثال: المريض عارف إن ممرضه هو اللي معاه طول اليوم فبيطمّن."],
+["Better relationship between the patient and the nurse.",
+ "علاقة أحسن بين المريض والممرض.",
+ "مثال: المريض بيتعوّد على ممرضه ويحكي له عن اللي حاسس بيه."],
+["The nurse feels more satisfaction.",
+ "الممرض بيحسّ برضا أكتر.",
+ "مثال: الممرض بيشوف نتيجة تعبه مع مريضه وهو بيتحسّن."],
+
+{h:"Disadvantages"},
+["This method requires highly skilled personnel.",
+ "الطريقة دي محتاجة تمريض عالي المهارة.",
+ "مثال: مينفعش نسيب مريض حرج مع ممرض لسه جديد."],
+["It is more costly than other method.",
+ "أغلى من باقي الطرق.",
+ "مثال: محتاجين ممرضين أكتر وبمهارات عالية فالمرتبات بتزيد."],
+["Some nurses may be disqualified which hinders patient safety.",
+ "ممكن بعض الممرضين ميبقوش مؤهلين، وده بيهدد سلامة المريض.",
+ "مثال: ممرض مش متمكن ماسك مريض لوحده ممكن يغلط في الدواء."],
+
+]},
+
+{ id:"functional", icon:"2️⃣", title:"2- Functional Method", items:[
+
+["In this method nurses are assigned to complete certain tasks rather than to take care of specific patients.",
+ "في الطريقة دي الممرضين بيتكلفوا بمهام معينة بدل ما يتكلفوا بمرضى معينين.",
+ "مثال: ممرض مهمته بس يقيس العلامات الحيوية للقسم كله."],
+["Unskilled workers trained to perform routine, simple tasks.",
+ "العمال غير المهرة بيتدرّبوا على مهام روتينية وبسيطة.",
+ "مثال: عامل متدرّب على نقل المرضى أو تجهيز السرير."],
+["Common use area—operating room",
+ "المكان اللي بتتستخدم فيه كتير: غرفة العمليات.",
+ "مثال: واحد بيجهّز الأدوات، وواحد بيناول الجرّاح، وواحد بيلف على المريض."],
+
+{h:"Advantages"},
+["It is an economic means of providing care.",
+ "وسيلة اقتصادية لتقديم الرعاية.",
+ "مثال: بتوفر فلوس لأن مش كل الشغل محتاج ممرض خبير."],
+["It increases efficiency because tasks are completed quickly.",
+ "بتزوّد الكفاءة لأن المهام بتخلص بسرعة.",
+ "مثال: ممرض بيدّي الأدوية للقسم كله بسرعة لأنه متعوّد على المهمة."],
+["It requires minimal number of professional nurses.",
+ "محتاجة أقل عدد من الممرضين المحترفين.",
+ "مثال: كام ممرض بس بيشرفوا والباقي مساعدين."],
+["Nurses become highly skillful and more self confident.",
+ "الممرضين بيبقوا ماهرين أكتر وثقتهم بنفسهم بتزيد.",
+ "مثال: اللي بيعمل نفس المهمة كل يوم بيتقنها جدًا."],
+["It is useful during emergencies.",
+ "مفيدة وقت الطوارئ.",
+ "مثال: وقت كارثة كل واحد بياخد مهمة ويخلصها بسرعة."],
+
+{h:"Disadvantages"},
+["Fragmented patient care.",
+ "رعاية المريض بتبقى مقسّمة ومش متكاملة.",
+ "مثال: المريض واحد بياخد الدواء وواحد تاني بيقيس الضغط وواحد تالت بيغيّر الجرح."],
+["Too many nurses participate in proving care for one patient.",
+ "ممرضين كتير أوي بيشاركوا في رعاية مريض واحد.",
+ "مثال: في ساعة واحدة المريض شاف 5 ممرضين مختلفين."],
+["It decreases patient satisfaction.",
+ "بتقلّل رضا المريض.",
+ "مثال: المريض مش عارف يكلم مين ويحسّ إن محدش مهتم بيه هو بالذات."],
+["Accountability for patient care is not specified.",
+ "المسؤولية عن رعاية المريض مش محددة.",
+ "مثال: لو حصل غلط محدش عارف مين المسؤول لأن كلهم اشتركوا."],
+["Accordingly quality of care provided to patients may be negatively affected.",
+ "وبالتالي جودة الرعاية المقدمة للمرضى ممكن تتأثر سلبًا.",
+ "مثال: حاجة تتنسى لأن كل واحد افتكر إن التاني عملها."],
+["Nurse's abilities are not fully utilized",
+ "قدرات الممرض مش بتتستغل بالكامل.",
+ "مثال: ممرض ممتاز بس كل شغله إنه يقيس ضغط."],
+
+]},
+
+{ id:"team", icon:"3️⃣", title:"3- Team Method", items:[
+
+["In team nursing, ancillary personnel collaborate in providing care to a group of patients under the direction of a professional nurse. As the team leader, the nurse is responsible for knowing the condition and the needs of all patients assigned to the team for planning individual care.",
+ "في طريقة الفريق، التمريض المساعد بيتعاون في تقديم الرعاية لمجموعة مرضى تحت إشراف ممرض محترف. والممرض ده بصفته قائد الفريق (Team leader) مسؤول إنه يعرف حالة واحتياجات كل المرضى اللي مع الفريق عشان يخطط لرعاية كل مريض لوحده.",
+ "مثال: قائدة الفريق معاها ممرض مساعد وعاملة تمريض، وهي عارفة كل مريض عنده إيه وبتحط خطة لكل واحد."],
+["Team leader duties vary depending on the patient's needs and the work load.",
+ "مهام قائد الفريق بتختلف حسب احتياجات المرضى وحجم الشغل.",
+ "مثال: يوم الزحمة القائد بيشتغل مع الفريق أكتر، ويوم الهدوء بيركز على التخطيط."],
+["These duties may include assisting team members, giving direct personal care to patients, teaching and coordinating patient activities.",
+ "المهام دي ممكن تشمل: مساعدة أعضاء الفريق، وتقديم رعاية مباشرة للمرضى، والتعليم، وتنسيق أنشطة المرضى.",
+ "مثال: القائد بيساعد زميله في تحريك مريض، وبيدّي دواء بنفسه، وبيعلّم ممرض جديد، وينسّق مواعيد الأشعة."],
+["Goal was to reduce fragmented care",
+ "الهدف كان تقليل الرعاية المقسّمة.",
+ "مثال: بدل ما كل واحد يعمل مهمة لكل المرضى، الفريق كله مسؤول عن نفس المجموعة."],
+["Common use areas—most inpatient and outpatient areas",
+ "الأماكن اللي بتتستخدم فيها كتير: أغلب أقسام المرضى الداخليين والعيادات الخارجية.",
+ "مثال: قسم الباطنة وعيادات المستشفى."],
+
+{h:"Advantages"},
+["It enhances team building, team members’ support for each other.",
+ "بتقوّي بناء الفريق ودعم أعضائه لبعض.",
+ "مثال: لو ممرض زحمة زميله يساعده."],
+["More efficient patient care.",
+ "رعاية أكفأ للمريض.",
+ "مثال: الشغل بيتوزع صح فالمريض مبيستناش."],
+["It allows members to contribute their own special expertise or skills.",
+ "بتسمح لكل عضو يساهم بخبرته أو مهارته الخاصة.",
+ "مثال: واحد شاطر في الجروح يعمل التغيير، وواحد شاطر في الكانيولا يركّبها."],
+["All nurses have contact of patient.",
+ "كل الممرضين بيحتكّوا بالمريض.",
+ "مثال: كل أعضاء الفريق بيتعاملوا مع المريض مش القائد بس."],
+["They share in the planning and provision of his care",
+ "بيشاركوا في التخطيط وفي تقديم الرعاية للمريض.",
+ "مثال: الفريق كله يقعد ويقرر خطة المريض مع بعض."],
+["It provides high job satisfaction.",
+ "بتدّي رضا وظيفي عالي.",
+ "مثال: الممرض حاسس إن له دور ومشارك مش مجرد منفّذ."],
+["It enhances good communication.",
+ "بتحسّن التواصل.",
+ "مثال: الفريق بيتكلم مع بعض طول الوقت عن حالة المرضى."],
+
+{h:"Disadvantages"},
+["It depends basically on good communication among members, so if for any reason communication is disturbed patient care, will be severally affected.",
+ "الطريقة دي معتمدة أساسًا على التواصل الكويس بين الأعضاء، فلو التواصل اتعطّل لأي سبب رعاية المريض هتتأثر بشدة.",
+ "مثال: لو ممرض ماقالش لزميله إن المريض أخد الدواء، ممكن المريض ياخده مرتين."],
+["This can lead to blurred lines of responsibility, errors, and fragmented patient care.",
+ "وده ممكن يخلي خطوط المسؤولية مش واضحة ويحصل أخطاء ورعاية مقسّمة.",
+ "مثال: غلط يحصل ومحدش عارف مين المسؤول بالظبط."],
+["Effective team leader must have good communication, organizational management, and leadership skills and must be an excellent practitioner.",
+ "قائد الفريق الفعّال لازم يبقى عنده تواصل كويس ومهارات إدارة وتنظيم وقيادة، ولازم يكون ممارس ممتاز.",
+ "مثال: قائد بيعرف يتكلم مع الفريق وينظّم الشغل وكمان شاطر في شغله الإكلينيكي."],
+["Most nursing programs do not prepare nurses for leadership roles.",
+ "أغلب برامج التمريض مش بتجهّز الممرضين لأدوار القيادة.",
+ "مثال: خريج جديد مادرسش إزاي يقود فريق فبيتلخبط."],
+
+{h:"Factors to be considered in Team method"},
+["Number and skill mix of nursing staff on the unit.",
+ "عدد الممرضين ومزيج مهاراتهم في القسم.",
+ "مثال: القسم فيه ممرضين خبرة وممرضين مساعدين، لازم نوزّعهم في الفرق صح."],
+["Number of patients on the unit and degree of dependency.",
+ "عدد المرضى في القسم ودرجة اعتمادهم على التمريض.",
+ "مثال: مرضى كتير محتاجين مساعدة في كل حاجة يعني فرق أكتر."],
+["Previous experience of nursing staff on the unit.",
+ "الخبرة السابقة للممرضين في القسم.",
+ "مثال: ممرض اشتغل في القسم سنين يبقى أنسب يقود الفريق."],
+
+{h:"Steps to be followed in developing Team method"},
+["Assign a team leader (she/ he is the most experienced, the most qualified one among all team members).",
+ "نعيّن قائد للفريق (يبقى أكتر واحد خبرة وأكتر واحد مؤهل وسط الأعضاء).",
+ "مثال: نختار الممرضة الأقدم والأعلى مؤهلات تبقى القائدة."],
+["Inform all team members of the delegated authority the team leader have, including informing them, that the team leader role is to continuously supervise team members work.",
+ "نعرّف كل أعضاء الفريق بالصلاحيات اللي اتفوّضت لقائد الفريق، ونقولهم كمان إن دور القائد إنه يشرف باستمرار على شغلهم.",
+ "مثال: الـ Head Nurse تقول للفريق: «القائدة هي اللي هتتابع شغلكم وتوجّهكم»."],
+["Team leader assign professional nurses to care for critically ill patients.",
+ "قائد الفريق يكلّف الممرضين المحترفين برعاية المرضى الحرجين.",
+ "مثال: مريض في حالة خطيرة يروح لممرض حاصل على بكالوريوس."],
+["Team leader assign practical nurses to non complicated nursing activities, e.g. vital signs, recording intake and output.",
+ "قائد الفريق يكلّف الممرضين العمليين (Practical nurses) بالأنشطة التمريضية البسيطة غير المعقّدة، زي قياس العلامات الحيوية وتسجيل المأخوذ والخارج (Intake & Output).",
+ "مثال: الممرض العملي يقيس الحرارة والضغط ويسجّل كمية المياه اللي شربها المريض واللي خرجت منه."],
+["Team leader assign nurses aides to do activities of bed making and in helping moving critically ill patients under the direction of professional nurses.",
+ "قائد الفريق يكلّف مساعدي التمريض (Nurses aides) بتجهيز الأسرّة ومساعدة تحريك المرضى الحرجين تحت توجيه الممرضين المحترفين.",
+ "مثال: عاملة التمريض تظبط السرير وتساعد في قلب مريض حرج بس والممرض المحترف واقف يوجّهها."],
+
+]},
+
+{ id:"modular", icon:"4️⃣", title:"4- Modular Nursing Method", items:[
+
+["Recent attempts to refine and improve team nursing have resulted in the concept of “modular nursing,” which is a mini –team (two or three members) approach.",
+ "المحاولات الحديثة لتحسين طريقة الفريق طلّعت فكرة «التمريض المودولار»، وهي أسلوب الفريق المصغّر (اتنين أو تلاتة أعضاء).",
+ "مثال: بدل فريق من 8 أفراد، نعمل فريق صغير من 3 بس."],
+["Keeping the team small and attempting to assign personnel to the same team as often as possible should allow the professional nurse more time for planning and coordinating team members. Additionally, a small team requires less communication, allowing members better use of their time for direct patient care activities.",
+ "لو خلّينا الفريق صغير وحاولنا نحط نفس الأفراد في نفس الفريق أغلب الوقت، الممرض المحترف هيلاقي وقت أكتر للتخطيط وتنسيق شغل الأعضاء. وكمان الفريق الصغير محتاج تواصل أقل، فالأعضاء بيستفيدوا من وقتهم أكتر في الرعاية المباشرة للمرضى.",
+ "مثال: تلاتة بيشتغلوا مع بعض كل يوم فبيفهموا بعض من غير كلام كتير ويركّزوا على المرضى."],
+["Each small team is responsible for giving the whole nursing care to a group of patients. Those patients receive their care from the same mini-team (module) from their admission till discharge and must arrange for the care of their patients during different shifts and off-duty.",
+ "كل فريق صغير مسؤول عن تقديم الرعاية التمريضية كلها لمجموعة مرضى. والمرضى دول بياخدوا رعايتهم من نفس الفريق المصغّر (المودول) من أول دخولهم لحد خروجهم، ولازم الفريق يرتّب رعاية مرضاه في الشيفتات المختلفة وأوقات غيابه.",
+ "مثال: الفريق ده ماسك المرضى من يوم دخولهم لحد خروجهم، ولو هيمشي بيسلّمهم لحد يرعاهم بدله."],
+
+{h:"Advantages"},
+["Continuity of care is improved",
+ "استمرارية الرعاية بتتحسّن.",
+ "مثال: نفس الفريق بيتابع المريض كل يوم فمفيش حاجة بتضيع."],
+["Team members share in the planning and provision of his care",
+ "أعضاء الفريق بيشاركوا في التخطيط وتقديم الرعاية.",
+ "مثال: التلاتة بيقرروا مع بعض خطة المريض وينفّذوها."],
+["It provides high job satisfaction.",
+ "بتدّي رضا وظيفي عالي.",
+ "مثال: الأعضاء حاسين إن ليهم دور حقيقي."],
+["It enhances good communication.",
+ "بتحسّن التواصل.",
+ "مثال: فريق صغير يعني الكلام بينهم أسهل وأسرع."],
+
+{h:"Disadvantages"},
+["Increased costs to stock each module",
+ "تكلفة أعلى لتجهيز كل مودول بالمستلزمات.",
+ "مثال: كل فريق صغير محتاج أدواته الخاصة فالمصاريف بتزيد."],
+["Most nursing programs do not prepare nurses for leadership roles.",
+ "أغلب برامج التمريض مش بتجهّز الممرضين لأدوار القيادة.",
+ "مثال: الممرض مادرسش القيادة فصعب يقود فريق صغير."],
+
+]},
+
+{ id:"primary", icon:"5️⃣", title:"5- The Primary Nursing Method", items:[
+
+["The primary nurse is responsible to plan, implement and evaluate the whole nursing care for a small number of patients (four to six patients).",
+ "الممرض الأساسي (Primary nurse) مسؤول إنه يخطط وينفّذ ويقيّم الرعاية التمريضية كلها لعدد صغير من المرضى (من 4 لـ 6 مرضى).",
+ "مثال: ممرضة ماسكة 5 مرضى، هي اللي بتحط الخطة وتنفّذها وتقيّم النتيجة."],
+["She/ He is responsible for those patients from the moment of admission until discharge and even throughout next admissions. Primary nurse should arrange for someone to care for his/ her patients during off duties.",
+ "هو مسؤول عن المرضى دول من لحظة دخولهم لحد خروجهم، وحتى في دخولهم اللي بعد كده. وعلى الممرض الأساسي إنه يرتّب حد يرعى مرضاه وقت ما يكون في إجازة أو خارج الشغل.",
+ "مثال: لو المريض رجع المستشفى بعد 3 شهور يرجع لنفس الممرضة، ولو هي في إجازة تسيب حد مكانها."],
+["Common use areas—hospice, home health, and long-term care settings",
+ "الأماكن اللي بتتستخدم فيها كتير: رعاية المرضى الميؤوس من شفائهم (Hospice)، والرعاية المنزلية، ومراكز الرعاية طويلة المدى.",
+ "مثال: ممرضة بتتابع مريض كبير في السن في بيته لشهور."],
+
+{h:"Advantages"},
+["High-quality, holistic patient care",
+ "رعاية عالية الجودة وشاملة للمريض (جسديًا ونفسيًا واجتماعيًا).",
+ "مثال: الممرضة تعرف حالة المريض الجسدية والنفسية وظروف أسرته."],
+["Establish rapport with patient",
+ "بتبني علاقة ثقة مع المريض.",
+ "مثال: المريض بيحكي لها كل حاجة لأنه متعوّد عليها."],
+["nurses feels challenged and rewarded",
+ "الممرض بيحسّ بالتحدي وبيتكافأ على مجهوده.",
+ "مثال: الممرضة فرحانة لما تشوف مريضها اتحسّن بسبب خطتها."],
+
+{h:"Disadvantages"},
+["Primary nurse must be able to practice with a high degree of responsibility and autonomy .",
+ "لازم الممرض الأساسي يقدر يشتغل بدرجة عالية من المسؤولية والاستقلالية.",
+ "مثال: لازم تقدر تاخد قرارات لوحدها من غير ما حد يوجّهها في كل خطوة."],
+["Nurses must accept 24-hour responsibility.",
+ "لازم الممرضين يقبلوا مسؤولية على مدار 24 ساعة.",
+ "مثال: هي مسؤولة عن مرضاها حتى لما تمشي من الشيفت، فلازم ترتّب مين يمسكهم."],
+["Not cost-effective .",
+ "مش اقتصادية (مكلّفة).",
+ "مثال: محتاجة ممرضين مؤهلين جدًا وعدد أكبر فالتكلفة عالية."],
+
+]},
+
+{ id:"casemgmt", icon:"6️⃣", title:"6- Case Management Method", items:[
+
+["It usually involves one on one nurse patient assignments. Supplemental form of care delivery; doesn't replace direct care model.",
+ "غالبًا بتبقى ممرض لمريض واحد (one on one). وهي شكل تكميلي لتقديم الرعاية، مش بتحلّ محل نموذج الرعاية المباشرة.",
+ "مثال: منسقة الحالة بتشتغل جنب الممرضين اللي بيقدموا الرعاية المباشرة مش بدالهم."],
+["Case management is a process of monitoring an individual patient's health care for the purpose of maximizing positive outcome, and containing costs.",
+ "إدارة الحالة هي عملية متابعة الرعاية الصحية لمريض معيّن بهدف تحقيق أحسن نتيجة إيجابية والسيطرة على التكاليف.",
+ "مثال: متابعة مريض سكر عشان يتحسّن وفي نفس الوقت منصرفش على فحوصات مالهاش لازمة."],
+["A key to case management is the identification of a critical pathway for care and treatment that includes specific time lines and standard protocols.",
+ "المفتاح في إدارة الحالة إنك تحدد مسار حرج (Critical pathway) للرعاية والعلاج فيه مواعيد زمنية محددة وبروتوكولات قياسية.",
+ "مثال: مريض عملية قلب: يوم 1 كذا، يوم 2 كذا، يوم 3 يتحرك، يوم 5 يخرج، كله مكتوب في مسار."],
+["Reserved for chronically ill patients, seriously ill patients.",
+ "بتتخصص للمرضى المزمنين والمرضى اللي حالتهم خطيرة.",
+ "مثال: مريض فشل كلوي مزمن أو مريض سرطان."],
+["Components include: assessment, planning, implementation, evaluation, and interaction.",
+ "مكوّناتها: التقييم (Assessment)، التخطيط (Planning)، التنفيذ (Implementation)، التقييم النهائي (Evaluation)، والتفاعل (Interaction).",
+ "مثال: تقيّم حالة المريض، تخطّط، تنفّذ، تقيّم النتيجة، وتتفاعل مع الدكتور والأسرة."],
+["Case management method differs from primary nursing in two ways:",
+ "طريقة إدارة الحالة بتختلف عن التمريض الأساسي في حاجتين:",
+ "مثال: الاتنين شبه بعض بس فيه فرقين مهمين (تحت)."],
+["a) First although the case manager use the nursing process the primary focus on planning coordinating and evaluating care there is less control of the patient care and more collaboration.",
+ "أولًا: رغم إن منسق الحالة بيستخدم عملية التمريض، تركيزه الأساسي على التخطيط والتنسيق وتقييم الرعاية، فبيبقى عنده تحكّم أقل في رعاية المريض وتعاون أكتر.",
+ "مثال: المنسّق بينسّق بين الدكتور والعلاج الطبيعي والتمريض، مش هو اللي بيقدم كل الرعاية بنفسه.",1],
+["b) Second Unlike primary nursing in case management is recognized that not every patient. need a case manager.",
+ "ثانيًا: بعكس التمريض الأساسي، في إدارة الحالة معترف إن مش كل مريض محتاج منسق حالة.",
+ "مثال: مريض عنده نزلة برد عادية مش محتاج منسق، لكن مريض مزمن حالته خطيرة محتاج.",1],
+["The case management may follow the patient from the diagnostic phase through hospitalization, rehabilitation and back to home care .",
+ "إدارة الحالة ممكن تمشي مع المريض من مرحلة التشخيص، لحد دخول المستشفى، وإعادة التأهيل، ولحد الرعاية في البيت.",
+ "مثال: نفس المنسّق يتابع المريض من أول ما اتشخّص لحد ما يرجع بيته ويكمل رعايته."],
+["The case manager assists with decision making and helps to assure that the patient receives care that will achieve the most positive outcomes in the most efficient manner.",
+ "منسق الحالة بيساعد في اتخاذ القرارات وبيتأكد إن المريض بياخد رعاية تحقق أحسن نتايج بأكفأ طريقة.",
+ "مثال: يساعد المريض يختار بين العلاج الطبيعي في المستشفى أو في البيت، ويتأكد إن الخطة أنسب وأوفر."],
+
+]}
+
+];
+
+/* ===== RENDER ===== */
+const app = document.getElementById('app');
+const chips = document.getElementById('chips');
+let totalPts = 0;
+
+SECTIONS.forEach((s, si) => {
+  let n = 0;
+  let body = '';
+  s.items.forEach(it => {
+    if (it.h) { body += `<div class="subhead">${it.h}</div>`; return; }
+    n++; totalPts++;
+    const sub = it[3] ? ' sub' : '';
+    body += `<div class="pt${sub}">
+      <div class="pt-en" onclick="this.parentElement.classList.toggle('done')"><div class="pt-n">${n}</div><div>${it[0]}</div></div>
+      <div class="pt-ar"><span class="tag">شرح</span>${it[1]}</div>
+      <div class="pt-ex"><span class="tag">عشان تفهمها</span>${it[2]}</div>
+    </div>`;
+  });
+  app.insertAdjacentHTML('beforeend', `
+    <section class="sec" id="${s.id}">
+      <div class="sec-head">
+        <div class="sec-icon">${s.icon}</div>
+        <div class="sec-title">${s.title}</div>
+        <div class="sec-count">${n} points</div>
+      </div>
+      <div class="sec-body">${body}</div>
+    </section>`);
+  chips.insertAdjacentHTML('beforeend', `<a class="chip" href="#${s.id}" data-id="${s.id}">${s.icon} ${s.title.split('—')[0].split('&')[0].trim()}</a>`);
+});
+document.getElementById('totalBadge').textContent = totalPts + ' points';
+document.getElementById('secBadge').textContent = SECTIONS.length + ' sections';
+
+/* progress bar + active chip */
+const secEls = [...document.querySelectorAll('.sec')];
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  document.getElementById('prog-bar').style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+  let cur = secEls[0].id;
+  secEls.forEach(el => { if (el.getBoundingClientRect().top < 160) cur = el.id; });
+  document.querySelectorAll('.chip').forEach(c => {
+    const on = c.dataset.id === cur;
+    c.classList.toggle('active', on);
+    if (on) { const p = c.parentElement; p.scrollTo({ left: c.offsetLeft - 40, behavior: 'smooth' }); }
+  });
+}, { passive: true });
+
+/* toggles */
+function toggler(btnId, cls) {
+  const b = document.getElementById(btnId);
+  b.addEventListener('click', () => { document.body.classList.toggle(cls); b.classList.toggle('off'); });
+}
+toggler('btnAr', 'hide-ar');
+toggler('btnEx', 'hide-ex');
+
+/* theme */
+const themeBtn = document.getElementById('themeBtn');
+let theme = 'light';
+try { theme = localStorage.getItem('theme') || 'light'; } catch (e) {}
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  try { localStorage.setItem('theme', t); } catch (e) {}
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+</script>
+</body>
+</html>
