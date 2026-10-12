@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:#1e3a8a; --teal:#0e7490; --emerald:#10b981; --gold:#f59e0b;
+  --accent:#0e7490; --accent-glow:rgba(14,116,144,0.18); --accent-rgb:14,116,144;
+  --grad:linear-gradient(135deg,#1e3a8a 0%,#0e7490 50%,#10b981 100%);
+  --grad-bar:linear-gradient(90deg,#1e3a8a,#0e7490,#10b981,#f59e0b);
+  --bg:#f8fafc; --bg2:#eef2f7; --card:#ffffff;
+  --text:#1a2332; --text2:#4a5568; --text3:#718096;
+  --bc:rgba(0,0,0,0.07);
+  --r:16px; --tr:all .3s cubic-bezier(.4,0,.2,1);
+}
+[data-theme="dark"] {
+  --bg:#0d1117; --bg2:#161b22; --card:#1c2333;
+  --text:#e6edf3; --text2:#b1bac4; --text3:#7d8590;
+  --bc:rgba(255,255,255,0.08);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family:'Outfit',sans-serif; background:var(--bg); color:var(--text);
+  min-height:100vh; overflow-x:hidden; transition:background .4s,color .4s;
+}
+
+#prog-bar { position:fixed; top:0; left:0; height:3px; z-index:999; background:var(--grad-bar); width:0%; transition:width .15s; }
+
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 28px; height:64px;
+  background:rgba(248,250,252,.93); backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--bc);
+}
+[data-theme="dark"] nav { background:rgba(13,17,23,.95); }
+.nav-brand { display:flex; align-items:center; gap:9px; font-size:15px; font-weight:900; color:var(--text); }
+.nav-logo-icon {
+  width:34px; height:34px; border-radius:8px; background:var(--grad);
+  display:flex; align-items:center; justify-content:center;
+  color:#fff; font-size:12px; font-weight:900; box-shadow:0 0 0 2px rgba(245,158,11,.5);
+}
+.nav-right { display:flex; align-items:center; gap:8px; }
+.theme-btn, .tool-btn {
+  height:38px; min-width:38px; border-radius:50px; border:1px solid var(--bc);
+  background:var(--card); cursor:pointer; font-size:14px; color:var(--text);
+  display:flex; align-items:center; justify-content:center; gap:6px; padding:0 12px;
+  font-family:'Outfit',sans-serif; font-weight:700; transition:var(--tr);
+}
+.theme-btn { width:38px; padding:0; border-radius:50%; font-size:15px; }
+.theme-btn:hover { border-color:var(--accent); transform:rotate(20deg); }
+.tool-btn:hover { border-color:var(--accent); color:var(--accent); }
+.tool-btn.off { opacity:.55; }
+
+.hero-band {
+  margin-top:64px; background:var(--grad); padding:40px 24px 36px; text-align:center;
+  position:relative; overflow:hidden; border-bottom:4px solid var(--gold);
+}
+.hero-band::before {
+  content:''; position:absolute; inset:0;
+  background:
+    radial-gradient(circle 220px at 12% 20%, rgba(245,158,11,.22) 0%, transparent 70%),
+    radial-gradient(circle 260px at 90% 85%, rgba(16,185,129,.28) 0%, transparent 70%),
+    radial-gradient(ellipse 600px 200px at 50% 100%, rgba(255,255,255,.12) 0%, transparent 70%);
+}
+.hero-band > * { position:relative; }
+.hero-band-icon {
+  width:68px; height:68px; border-radius:20px; background:rgba(255,255,255,.2);
+  backdrop-filter:blur(8px); display:flex; align-items:center; justify-content:center;
+  font-size:30px; margin:0 auto 14px; border:1.5px solid rgba(255,255,255,.35);
+}
+.hero-band h1 { font-size:clamp(20px,4vw,30px); font-weight:900; color:#fff; margin-bottom:6px; }
+.hero-band p { font-size:13px; color:rgba(255,255,255,.85); }
+.hero-band-meta { display:flex; justify-content:center; gap:14px; margin-top:20px; flex-wrap:wrap; }
+.meta-pill {
+  background:rgba(255,255,255,.18); backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.3); border-radius:50px; padding:6px 16px;
+  font-size:12px; font-weight:700; color:#fff; display:flex; align-items:center; gap:6px;
+}
+.meta-pill i { color:var(--gold); }
+
+/* CHIPS */
+.chips-wrap {
+  position:sticky; top:64px; z-index:90; background:var(--bg);
+  border-bottom:1px solid var(--bc); padding:10px 0;
+}
+.chips { display:flex; gap:8px; overflow-x:auto; padding:0 20px; max-width:860px; margin:0 auto; scrollbar-width:none; }
+.chips::-webkit-scrollbar { display:none; }
+.chip {
+  flex-shrink:0; padding:7px 14px; border-radius:50px; font-size:12px; font-weight:700;
+  background:var(--card); border:1px solid var(--bc); color:var(--text2);
+  text-decoration:none; transition:var(--tr); white-space:nowrap;
+}
+.chip:hover, .chip.active { background:var(--grad); color:#fff; border-color:transparent; }
+
+.shell { max-width:860px; margin:0 auto; padding:24px 20px 80px; }
+
+/* SECTION */
+.sec { margin-bottom:34px; scroll-margin-top:130px; }
+.sec-head {
+  display:flex; align-items:center; gap:12px; background:var(--grad); color:#fff;
+  padding:14px 18px; border-radius:16px 16px 0 0; border-bottom:3px solid var(--gold);
+}
+.sec-icon {
+  width:38px; height:38px; border-radius:10px; background:rgba(255,255,255,.2);
+  display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0;
+}
+.sec-title { font-size:17px; font-weight:900; line-height:1.3; }
+.sec-count { margin-left:auto; font-size:11px; font-weight:700; background:rgba(255,255,255,.2); padding:3px 10px; border-radius:50px; white-space:nowrap; }
+.sec-body {
+  background:var(--card); border:1px solid var(--bc); border-top:none;
+  border-radius:0 0 16px 16px; padding:14px; display:flex; flex-direction:column; gap:12px;
+  box-shadow:0 4px 20px rgba(0,0,0,.05);
+}
+
+.subhead {
+  font-size:13px; font-weight:900; color:var(--navy); padding:8px 12px;
+  background:rgba(var(--accent-rgb),.08); border-left:4px solid var(--gold);
+  border-radius:8px; direction:ltr; text-align:left; margin-top:6px;
+}
+[data-theme="dark"] .subhead { color:#7dd3fc; }
+
+/* POINT */
+.pt {
+  border:1px solid var(--bc); border-radius:14px; overflow:hidden; background:var(--bg);
+  transition:var(--tr);
+}
+.pt:hover { border-color:rgba(var(--accent-rgb),.4); box-shadow:0 4px 14px var(--accent-glow); }
+.pt.sub { margin-left:22px; border-left:3px solid var(--teal); }
+.pt.done { opacity:.55; }
+
+.pt-en {
+  display:flex; gap:10px; align-items:flex-start; padding:13px 14px;
+  font-size:15px; font-weight:700; line-height:1.6; direction:ltr; text-align:left;
+  background:var(--card); cursor:pointer;
+}
+.pt-n {
+  min-width:26px; height:26px; border-radius:8px; background:var(--grad); color:#fff;
+  font-size:11px; font-weight:900; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px;
+}
+.pt.sub .pt-n { background:var(--teal); min-width:22px; height:22px; font-size:13px; border-radius:50%; }
+.pt-ar {
+  padding:12px 16px; font-size:14.5px; line-height:1.9; color:var(--text);
+  direction:rtl; text-align:right; border-top:1px dashed var(--bc);
+  font-family:'Segoe UI',Tahoma,'Outfit',sans-serif;
+}
+.pt-ar .tag, .pt-ex .tag {
+  display:inline-block; font-size:11px; font-weight:900; padding:2px 9px; border-radius:6px; margin-left:8px; vertical-align:middle;
+}
+.pt-ar .tag { background:rgba(14,116,144,.12); color:var(--teal); }
+[data-theme="dark"] .pt-ar .tag { color:#5eead4; }
+.pt-ex {
+  padding:12px 16px; font-size:14px; line-height:1.9; color:var(--text2);
+  direction:rtl; text-align:right; border-top:1px dashed var(--bc);
+  background:rgba(245,158,11,.07); border-right:4px solid var(--gold);
+  font-family:'Segoe UI',Tahoma,'Outfit',sans-serif;
+}
+.pt-ex .tag { background:rgba(245,158,11,.2); color:#b45309; }
+[data-theme="dark"] .pt-ex .tag { color:#fbbf24; }
+body.hide-ex .pt-ex { display:none; }
+body.hide-ar .pt-ar { display:none; }
+
+footer {
+  background:var(--bg2); border-top:3px solid; border-image:var(--grad-bar) 1;
+  padding:22px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;
+}
+.footer-brand { font-size:14px; font-weight:700; }
+.footer-brand span { color:var(--accent); }
+.footer-tg { display:flex; align-items:center; gap:5px; text-decoration:none; color:#229ED9; font-size:12px; font-weight:600; }
+
+@media (max-width:560px) {
+  nav { padding:0 12px; }
+  .nav-brand span { display:none; }
+  .shell { padding:16px 12px 60px; }
+  .pt.sub { margin-left:12px; }
+  .tool-btn span { display:none; }
+  .sec-count { display:none; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog-bar"></div>
+
+<nav>
+  <div class="nav-brand">
+    <div class="nav-logo-icon">GT</div>
+    <span>GHAITH TEAM</span>
+  </div>
+  <div class="nav-right">
+    <button class="tool-btn" id="btnAr" title="Arabic"><i class="fa-solid fa-language"></i><span>الشرح</span></button>
+    <button class="tool-btn" id="btnEx" title="Examples"><i class="fa-solid fa-lightbulb"></i><span>عشان تفهمها</span></button>
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<div class="hero-band">
+  <div class="hero-band-icon">📋</div>
+  <h1>Kardex</h1>
+  <p>Nursing Documentation</p>
+  <div class="hero-band-meta">
+    <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">--</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-layer-group"></i> <span id="secBadge">--</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-language"></i> ببساطة مع غيث</div>
+  </div>
+</div>
+
+<div class="chips-wrap"><div class="chips" id="chips"></div></div>
+
+<div class="shell" id="app"></div>
+
+<footer>
+  <div class="footer-brand">GHAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg"><i class="fa-brands fa-telegram"></i> @nursing2bu</a>
+</footer>
+
+<script>
+/* Item format: [English, Arabic explanation, Example, level]  |  {h:"sub heading"}  (level 1 = indented sub-point) */
+const SECTIONS = [
+
+{ id:"definition", icon:"📖", title:"Definition", items:[
+  ["The kardex is a type of card file used in some health facilities.",
+   "الكاردكس ده نوع من ملفات الكروت (card file) بتستخدمه بعض المنشآت الصحية.",
+   "زي دفتر كروت صغير في القسم، بدل ما تفتح ملف المريض الكبير كله."],
+  ["There is a card for each patient.",
+   "كل مريض ليه كارت لوحده.",
+   "عندك 20 مريض في القسم يبقى عندك 20 كارت، كل كارت باسم مريض."],
+  ["It contains some of information found in the patient's record.",
+   "الكارت فيه <b>شوية</b> من المعلومات الموجودة في ملف المريض (patient's record)، مش كلها.",
+   "الملف الكبير فيه كل التحاليل والتاريخ المرضي، لكن الكارت فيه الأساسيات بس زي الاسم والتشخيص والأدوية."],
+  ["The kardex is a flip over card usually kept in a portable index file or notebook at the nurse's station.",
+   "الكاردكس كارت بيتقلب (flip over)، وغالبًا بيتحفظ في فايل متنقل أو نوتة عند محطة التمريض (nurse's station).",
+   "تلاقيه على ترابيزة الممرضات، تقلب بين الكروت بسرعة وانتي واقفة من غير ما تدوري على الملفات."],
+  ["A kardex typically contains boxes for you to check off what applies to each patient",
+   "الكاردكس عادةً فيه خانات (boxes) تعلّم عليها اللي ينطبق على كل مريض.",
+   "خانة الدايت (Diet) تعلّم عليها NPO أو Soft diet حسب حالة المريض."],
+  ["as well as current orders for medications, patient care activities, treatment and tests.",
+   "وكمان فيه الأوامر الحالية (current orders) للأدوية وأنشطة رعاية المريض والعلاج والفحوصات.",
+   "مكتوب فيه مثلًا: مضاد حيوي كل 12 ساعة، وتحليل CBC بكره الصبح."]
+]},
+
+{ id:"purposes", icon:"🎯", title:"Purposes of the Kardex", items:[
+  {h:"The kardex may be used to:"},
+  ["Locate patients by name and room number.",
+   "تعرف مكان المريض من اسمه ورقم أوضدته.",
+   "حد سأل عن «أحمد محمود»، تبص في الكارت تلاقيه في أوضة 5."],
+  ["Identify of patient physician and medical diagnosis.",
+   "تعرف الدكتور بتاع المريض والتشخيص الطبي (medical diagnosis) بتاعه.",
+   "الكارت مكتوب فيه إن الدكتور فلان هو المتابع وإن التشخيص Pneumonia، فلو احتجتيه تعرفي تكلمي مين."],
+  ["Know any medical orders for patient.",
+   "تعرف أي أوامر طبية (medical orders) للمريض.",
+   "الدكتور كتب أمر بمحلول وريدي جديد، تلاقيه مكتوب في الكارت."],
+  ["Aid nurses in making round.",
+   "يساعد الممرضات وهما بيلفوا على المرضى (round).",
+   "وانتي ماشية في اللفة بتفتحي الكارت وتفتكري مين محتاج إيه من غير ما ترجعي للملف."],
+  ["Serve as a reference for change of shift report.",
+   "يبقى مرجع في تقرير تسليم الشيفت (change of shift report).",
+   "وانتي بتسلمي الشيفت للممرضة اللي بعدك، بتبصوا على الكروت وتسلّمي كل مريض."],
+  ["Serve as a guide for making nursing assignment.",
+   "يبقى دليل لتوزيع المرضى على الممرضات (nursing assignment).",
+   "رئيسة القسم تبص على الكروت وتشوف المريض ده حالته تقيلة فتديه لممرضة أكتر خبرة."],
+  ["Check quickly on a patient's type of diet.",
+   "تتأكد بسرعة من نوع الدايت (diet) بتاع المريض.",
+   "قبل ما توزعي الأكل تبصي في الكارت تلاقي المريض ده NPO فمتدّيهوش أكل."],
+  ["Communicate information about specific methods to perform at treatment.",
+   "توصّل معلومات عن طرق معينة لازم تتعمل في العلاج.",
+   "مكتوب في الكارت إن الجرح ده يتغير عليه بطريقة معقمة (sterile) بطريقة معينة، فكل ممرضة تعمل نفس الطريقة."],
+  ["Know the preferred timed to perform a nursing order.",
+   "تعرف الوقت المفضل لتنفيذ أمر تمريضي (nursing order).",
+   "الكارت مكتوب فيه إن تغيير وضعية المريض كل ساعتين الساعة 8 و10 و12."],
+  ["Serve as a guide to know patient's level of activity.",
+   "يبقى دليل تعرفي بيه مستوى نشاط المريض (level of activity).",
+   "مكتوب إن المريض ده Bed rest، يعني ميقومش من السرير، وده مريض تاني Ambulate with assistance."],
+  ["Alert nursing personnel to patient's scheduled test or preparation.",
+   "ينبّه طاقم التمريض لأي فحص أو تحضير مجدول (scheduled) للمريض.",
+   "مكتوب إن المريض عنده أشعة بكره، فتفتكري تقفلي عليه الأكل من بالليل."]
+]},
+
+{ id:"contents", icon:"🗂️", title:"Contents of Kardex", items:[
+  {h:"Kardex include the following information:"},
+  ["Patient data:",
+   "بيانات المريض (patient data).",
+   "زي الأساسيات اللي بتعرفي بيها المريض هو مين."],
+  ["Name, age, marital status.",
+   "الاسم والسن والحالة الاجتماعية.",
+   "أحمد محمود، 45 سنة، متزوج.", 1],
+  ["Religion, occupation.",
+   "الديانة والوظيفة.",
+   "مدرّس مثلًا، والديانة مهمة عشان تراعي احتياجاته الدينية.", 1],
+  ["Medical diagnosis:",
+   "التشخيص الطبي (medical diagnosis).",
+   "المرض اللي الدكتور شخّصه للمريض."],
+  ["Listed by priority.",
+   "بيتكتب بالترتيب حسب الأولوية، الأهم الأول.",
+   "لو المريض عنده سكر وكسر، التشخيص الأخطر أو الأهم يتكتب الأول.", 1],
+  ["Nursing diagnosis:",
+   "التشخيص التمريضي (nursing diagnosis).",
+   "المشكلة اللي الممرضة بتتعامل معاها، زي خطر الوقوع أو ألم."],
+  ["Listed by priority.",
+   "برضه بيتكتب بالترتيب حسب الأولوية.",
+   "المشكلة اللي تهدد حياة المريض أكتر تتكتب قبل الباقي.", 1],
+  ["Current doctor's order for:",
+   "أوامر الدكتور الحالية (current doctor's order) لـ:",
+   "كل اللي الدكتور طلبه حاليًا للمريض."],
+  ["Medication, treatment, diet, I.V therapy.",
+   "الأدوية والعلاج والدايت والمحاليل الوريدية (I.V therapy).",
+   "حقنة مضاد حيوي، وريدي ملح، ودايت خفيف.", 1],
+  ["Diagnostic procedures.",
+   "الإجراءات التشخيصية (diagnostic procedures).",
+   "أشعة، سونار، تحاليل دم.", 1],
+  ["Consultations.",
+   "الاستشارات (consultations) من أطباء تانيين.",
+   "الدكتور طلب استشارة قلب للمريض.", 1],
+  ["Results of diagnostic test and procedures.",
+   "نتايج الفحوصات والإجراءات التشخيصية.",
+   "نتيجة تحليل السكر أو نتيجة الأشعة مكتوبة في الكارت."],
+  ["Permitted activities, functional limitation, assistance needed, & safety precautions.",
+   "الأنشطة المسموحة، والقيود الوظيفية (functional limitation)، والمساعدة المطلوبة، واحتياطات السلامة (safety precautions).",
+   "المريض مسموح له يمشي لكن بمساعدة، وعنده سلاسل سرير مرفوعة (side rails) عشان ميقعش."]
+]},
+
+{ id:"principles", icon:"✍️", title:"Principles of Documentation of Kardex", items:[
+  ["The kardex is not permanent so the entire entries should be written by pencil.",
+   "الكاردكس مش دايم، فكل اللي بيتكتب فيه لازم يتكتب بقلم رصاص (pencil).",
+   "لو الدكتور غيّر جرعة الدوا، تمسحي القديم وتكتبي الجديد بسهولة."],
+  ["All entries are dated.",
+   "كل إدخال (entry) لازم يتحط له تاريخ.",
+   "تكتبي «12/10» جنب أي أمر جديد أو تعديل."],
+  ["Written information should be clear, concise and legible.",
+   "المعلومات المكتوبة لازم تكون واضحة (clear) ومختصرة (concise) ومقروءة (legible).",
+   "تكتبي «Insulin 10 units SC» بخط واضح، مش جملة طويلة وخطها مش مفهوم."],
+  ["Uses of only acceptable abbreviations.",
+   "تستخدمي بس الاختصارات المقبولة (acceptable abbreviations).",
+   "تكتبي NPO و I.V المعروفين، وتتجنبي اختصارات من عندك محدش هيفهمها."],
+  ["Each addition to the plan is signed.",
+   "كل إضافة على الخطة (plan) لازم تتوقّع.",
+   "لما تضيفي أمر جديد، تحطي إمضتك جنبه."],
+  ["If you are documenting on a medication kardex, there are tips:",
+   "لو بتسجلي على كاردكس الأدوية (medication kardex) فيه نصايح:",
+   "ده كارت مخصص للأدوية بس، ودقته مهمة جدًا."],
+  ["Be sure to include the date, the administration time, the medication dose, route, frequency, and your initials.",
+   "اتأكدي إنك كتبتي التاريخ، ووقت إعطاء الدوا، والجرعة (dose)، والطريق (route)، والتكرار (frequency)، وأول حروف اسمك (initials).",
+   "«12/10 - 8 AM - Paracetamol 500 mg - Oral - كل 8 ساعات - م.أ».", 1],
+  ["Indicate whenever you administer a stat dose, if appropriate, the specific number of doses, as ordered, or the stop date.",
+   "وضّحي لما تدّي جرعة فورية (stat dose)، ولو مناسب اكتبي عدد الجرعات المحدد زي ما اتطلب، أو تاريخ الإيقاف (stop date).",
+   "الدكتور طلب جرعة مسكن فورًا، تكتبي إنها stat، ولو المضاد 5 أيام تكتبي تاريخ آخر يوم.", 1],
+  ["After giving the first dose of a medication, sign your full name and your initials in appropriate space.",
+   "بعد ما تدّي أول جرعة من الدوا، وقّعي باسمك كامل وأول حروف اسمك في المكان المخصص.",
+   "أول جرعة مضاد حيوي اتدّت، تكتبي اسمك بالكامل وتحطي initials جنبه.", 1],
+  ["After withholding a medication dose, document which dose wasn't given (usually by circling the time it was scheduled) and the reason it was omitted.",
+   "بعد ما تمنعي جرعة دوا (withholding)، سجّلي أنهي جرعة متدّتش (غالبًا بتعملي دايرة حوالين الوقت المجدول) وسبب إنها اتساب.",
+   "المريض ضغطه واطي فمدّيتيش دوا الضغط الساعة 8، تعملي دايرة على 8 وتكتبي «ضغط واطي».", 1]
+]},
+
+{ id:"advantages", icon:"✅", title:"Advantages of Kardex", items:[
+  ["Patient care kardex provides quick access to data about task oriented interventions, such as medication administration and I.V. therapy.",
+   "كاردكس رعاية المريض بيدّيكي وصول سريع للبيانات عن التدخلات المرتبطة بالمهام (task oriented interventions)، زي إعطاء الأدوية والمحاليل الوريدية.",
+   "عايزة تعرفي الدوا الجاي والمحلول الجاي؟ تبصي في الكارت من غير ما تفتحي الملف كله."],
+  ["Although it duplicates information, the plan of care may be added to the kardex to provide all the necessary data for patient care.",
+   "رغم إنه بيكرر معلومات موجودة في الملف، ممكن تتضاف خطة الرعاية (plan of care) على الكاردكس عشان يبقى فيه كل البيانات الضرورية لرعاية المريض.",
+   "الكارت فيه بيانات المريض والأدوية وكمان خطة الرعاية، يعني كل اللي محتاجاه قدامك في مكان واحد."]
+]},
+
+{ id:"disadvantages", icon:"⚠️", title:"Disadvantages of Kardex", items:[
+  ["Kardex are only as useful as nurses make them.",
+   "الكاردكس مفيد بقدر ما الممرضات بيخلوه مفيد.",
+   "لو الممرضات بيهتموا بيه وبيحدثوه يفيد، ولو سابوه يبوظ هيبقى بلا فايدة."],
+  ["A kardex won't be effective if:",
+   "الكاردكس مش هيبقى فعّال لو:",
+   "فيه كذا حاجة بتبوّظه، وهي اللي تحت."],
+  ["it doesn't have enough space for appropriate data,",
+   "مفيش فيه مساحة كفاية للبيانات المناسبة.",
+   "الكارت صغير ومش لاقيه مكان تكتبي فيه الأوامر كلها.", 1],
+  ["it's not updated frequently,",
+   "مش بيتحدّث باستمرار.",
+   "الدكتور غيّر الدوا من يومين والكارت لسه مكتوب فيه القديم.", 1],
+  ["it's not completed,",
+   "مش مكتمل.",
+   "الكارت ناقص فيه الدايت أو نوع الحساسية.", 1],
+  ["or the nurse doesn't read it before giving patient care.",
+   "أو الممرضة مش بتقراه قبل ما تدّي الرعاية للمريض.",
+   "الكارت متحدّث وكامل، بس الممرضة اداتله الدوا من غير ما تبص فيه، فبتغلط.", 1]
+]}
+
+];
+
+/* ===== RENDER ===== */
+const app = document.getElementById('app');
+const chips = document.getElementById('chips');
+let totalPts = 0;
+
+SECTIONS.forEach((s, si) => {
+  let n = 0;
+  let body = '';
+  s.items.forEach(it => {
+    if (it.h) { body += `<div class="subhead">${it.h}</div>`; return; }
+    const isSub = !!it[3];
+    if (!isSub) n++;
+    totalPts++;
+    const sub = isSub ? ' sub' : '';
+    const badge = isSub ? '•' : n;
+    body += `<div class="pt${sub}">
+      <div class="pt-en" onclick="this.parentElement.classList.toggle('done')"><div class="pt-n">${badge}</div><div>${it[0]}</div></div>
+      <div class="pt-ar"><span class="tag">شرح</span>${it[1]}</div>
+      <div class="pt-ex"><span class="tag">عشان تفهمها</span>${it[2]}</div>
+    </div>`;
+  });
+  app.insertAdjacentHTML('beforeend', `
+    <section class="sec" id="${s.id}">
+      <div class="sec-head">
+        <div class="sec-icon">${s.icon}</div>
+        <div class="sec-title">${s.title}</div>
+        <div class="sec-count">${n} points</div>
+      </div>
+      <div class="sec-body">${body}</div>
+    </section>`);
+  chips.insertAdjacentHTML('beforeend', `<a class="chip" href="#${s.id}" data-id="${s.id}">${s.icon} ${s.title.split('—')[0].split(' of ')[0].trim()}</a>`);
+});
+document.getElementById('totalBadge').textContent = totalPts + ' points';
+document.getElementById('secBadge').textContent = SECTIONS.length + ' sections';
+
+/* progress bar + active chip */
+const secEls = [...document.querySelectorAll('.sec')];
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  document.getElementById('prog-bar').style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+  let cur = secEls[0].id;
+  secEls.forEach(el => { if (el.getBoundingClientRect().top < 160) cur = el.id; });
+  document.querySelectorAll('.chip').forEach(c => {
+    const on = c.dataset.id === cur;
+    c.classList.toggle('active', on);
+    if (on) { const p = c.parentElement; p.scrollTo({ left: c.offsetLeft - 40, behavior: 'smooth' }); }
+  });
+}, { passive: true });
+
+/* toggles */
+function toggler(btnId, cls) {
+  const b = document.getElementById(btnId);
+  b.addEventListener('click', () => { document.body.classList.toggle(cls); b.classList.toggle('off'); });
+}
+toggler('btnAr', 'hide-ar');
+toggler('btnEx', 'hide-ex');
+
+/* theme */
+const themeBtn = document.getElementById('themeBtn');
+let theme = 'light';
+try { theme = localStorage.getItem('theme') || 'light'; } catch (e) {}
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  try { localStorage.setItem('theme', t); } catch (e) {}
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+</script>
+</body>
+</html>
