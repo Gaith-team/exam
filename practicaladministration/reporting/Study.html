@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM - Reporting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:#1e3a8a; --teal:#0e7490; --emerald:#10b981; --gold:#f59e0b;
+  --accent:#0e7490; --accent-glow:rgba(14,116,144,0.18); --accent-rgb:14,116,144;
+  --grad:linear-gradient(135deg,#1e3a8a 0%,#0e7490 50%,#10b981 100%);
+  --grad-bar:linear-gradient(90deg,#1e3a8a,#0e7490,#10b981,#f59e0b);
+  --bg:#f8fafc; --bg2:#eef2f7; --card:#ffffff;
+  --text:#1a2332; --text2:#4a5568; --text3:#718096;
+  --bc:rgba(0,0,0,0.07);
+  --r:16px; --tr:all .3s cubic-bezier(.4,0,.2,1);
+}
+[data-theme="dark"] {
+  --bg:#0d1117; --bg2:#161b22; --card:#1c2333;
+  --text:#e6edf3; --text2:#b1bac4; --text3:#7d8590;
+  --bc:rgba(255,255,255,0.08);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family:'Outfit',sans-serif; background:var(--bg); color:var(--text);
+  min-height:100vh; overflow-x:hidden; transition:background .4s,color .4s;
+}
+
+#prog-bar { position:fixed; top:0; left:0; height:3px; z-index:999; background:var(--grad-bar); width:0%; transition:width .15s; }
+
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 28px; height:64px;
+  background:rgba(248,250,252,.93); backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--bc);
+}
+[data-theme="dark"] nav { background:rgba(13,17,23,.95); }
+.nav-brand { display:flex; align-items:center; gap:9px; font-size:15px; font-weight:900; color:var(--text); }
+.nav-logo-icon {
+  width:34px; height:34px; border-radius:8px; background:var(--grad);
+  display:flex; align-items:center; justify-content:center;
+  color:#fff; font-size:12px; font-weight:900; box-shadow:0 0 0 2px rgba(245,158,11,.5);
+}
+.nav-right { display:flex; align-items:center; gap:8px; }
+.theme-btn, .tool-btn {
+  height:38px; min-width:38px; border-radius:50px; border:1px solid var(--bc);
+  background:var(--card); cursor:pointer; font-size:14px; color:var(--text);
+  display:flex; align-items:center; justify-content:center; gap:6px; padding:0 12px;
+  font-family:'Outfit',sans-serif; font-weight:700; transition:var(--tr);
+}
+.theme-btn { width:38px; padding:0; border-radius:50%; font-size:15px; }
+.theme-btn:hover { border-color:var(--accent); transform:rotate(20deg); }
+.tool-btn:hover { border-color:var(--accent); color:var(--accent); }
+.tool-btn.off { opacity:.55; }
+
+.hero-band {
+  margin-top:64px; background:var(--grad); padding:40px 24px 36px; text-align:center;
+  position:relative; overflow:hidden; border-bottom:4px solid var(--gold);
+}
+.hero-band::before {
+  content:''; position:absolute; inset:0;
+  background:
+    radial-gradient(circle 220px at 12% 20%, rgba(245,158,11,.22) 0%, transparent 70%),
+    radial-gradient(circle 260px at 90% 85%, rgba(16,185,129,.28) 0%, transparent 70%),
+    radial-gradient(ellipse 600px 200px at 50% 100%, rgba(255,255,255,.12) 0%, transparent 70%);
+}
+.hero-band > * { position:relative; }
+.hero-band-icon {
+  width:68px; height:68px; border-radius:20px; background:rgba(255,255,255,.2);
+  backdrop-filter:blur(8px); display:flex; align-items:center; justify-content:center;
+  font-size:30px; margin:0 auto 14px; border:1.5px solid rgba(255,255,255,.35);
+}
+.hero-band h1 { font-size:clamp(20px,4vw,30px); font-weight:900; color:#fff; margin-bottom:6px; }
+.hero-band p { font-size:13px; color:rgba(255,255,255,.85); }
+.hero-band-meta { display:flex; justify-content:center; gap:14px; margin-top:20px; flex-wrap:wrap; }
+.meta-pill {
+  background:rgba(255,255,255,.18); backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.3); border-radius:50px; padding:6px 16px;
+  font-size:12px; font-weight:700; color:#fff; display:flex; align-items:center; gap:6px;
+}
+.meta-pill i { color:var(--gold); }
+
+/* CHIPS */
+.chips-wrap {
+  position:sticky; top:64px; z-index:90; background:var(--bg);
+  border-bottom:1px solid var(--bc); padding:10px 0;
+}
+.chips { display:flex; gap:8px; overflow-x:auto; padding:0 20px; max-width:860px; margin:0 auto; scrollbar-width:none; }
+.chips::-webkit-scrollbar { display:none; }
+.chip {
+  flex-shrink:0; padding:7px 14px; border-radius:50px; font-size:12px; font-weight:700;
+  background:var(--card); border:1px solid var(--bc); color:var(--text2);
+  text-decoration:none; transition:var(--tr); white-space:nowrap;
+}
+.chip:hover, .chip.active { background:var(--grad); color:#fff; border-color:transparent; }
+
+.shell { max-width:860px; margin:0 auto; padding:24px 20px 80px; }
+
+/* SECTION */
+.sec { margin-bottom:34px; scroll-margin-top:130px; }
+.sec-head {
+  display:flex; align-items:center; gap:12px; background:var(--grad); color:#fff;
+  padding:14px 18px; border-radius:16px 16px 0 0; border-bottom:3px solid var(--gold);
+}
+.sec-icon {
+  width:38px; height:38px; border-radius:10px; background:rgba(255,255,255,.2);
+  display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0;
+}
+.sec-title { font-size:17px; font-weight:900; line-height:1.3; }
+.sec-count { margin-left:auto; font-size:11px; font-weight:700; background:rgba(255,255,255,.2); padding:3px 10px; border-radius:50px; white-space:nowrap; }
+.sec-body {
+  background:var(--card); border:1px solid var(--bc); border-top:none;
+  border-radius:0 0 16px 16px; padding:14px; display:flex; flex-direction:column; gap:12px;
+  box-shadow:0 4px 20px rgba(0,0,0,.05);
+}
+
+.subhead {
+  font-size:13px; font-weight:900; color:var(--navy); padding:8px 12px;
+  background:rgba(var(--accent-rgb),.08); border-left:4px solid var(--gold);
+  border-radius:8px; direction:ltr; text-align:left; margin-top:6px;
+}
+[data-theme="dark"] .subhead { color:#7dd3fc; }
+
+/* POINT */
+.pt {
+  border:1px solid var(--bc); border-radius:14px; overflow:hidden; background:var(--bg);
+  transition:var(--tr);
+}
+.pt:hover { border-color:rgba(var(--accent-rgb),.4); box-shadow:0 4px 14px var(--accent-glow); }
+.pt.sub { margin-left:22px; border-left:3px solid var(--teal); }
+.pt.done { opacity:.55; }
+
+.pt-en {
+  display:flex; gap:10px; align-items:flex-start; padding:13px 14px;
+  font-size:15px; font-weight:700; line-height:1.6; direction:ltr; text-align:left;
+  background:var(--card); cursor:pointer;
+}
+.pt-n {
+  min-width:26px; height:26px; border-radius:8px; background:var(--grad); color:#fff;
+  font-size:11px; font-weight:900; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px;
+}
+.pt-ar {
+  padding:12px 16px; font-size:14.5px; line-height:1.9; color:var(--text);
+  direction:rtl; text-align:right; border-top:1px dashed var(--bc);
+  font-family:'Segoe UI',Tahoma,'Outfit',sans-serif;
+}
+.pt-ar .tag, .pt-ex .tag {
+  display:inline-block; font-size:11px; font-weight:900; padding:2px 9px; border-radius:6px; margin-left:8px; vertical-align:middle;
+}
+.pt-ar .tag { background:rgba(14,116,144,.12); color:var(--teal); }
+[data-theme="dark"] .pt-ar .tag { color:#5eead4; }
+.pt-ex {
+  padding:12px 16px; font-size:14px; line-height:1.9; color:var(--text2);
+  direction:rtl; text-align:right; border-top:1px dashed var(--bc);
+  background:rgba(245,158,11,.07); border-right:4px solid var(--gold);
+  font-family:'Segoe UI',Tahoma,'Outfit',sans-serif;
+}
+.pt-ex .tag { background:rgba(245,158,11,.2); color:#b45309; }
+[data-theme="dark"] .pt-ex .tag { color:#fbbf24; }
+body.hide-ex .pt-ex { display:none; }
+body.hide-ar .pt-ar { display:none; }
+
+footer {
+  background:var(--bg2); border-top:3px solid; border-image:var(--grad-bar) 1;
+  padding:22px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;
+}
+.footer-brand { font-size:14px; font-weight:700; }
+.footer-brand span { color:var(--accent); }
+.footer-tg { display:flex; align-items:center; gap:5px; text-decoration:none; color:#229ED9; font-size:12px; font-weight:600; }
+
+@media (max-width:560px) {
+  nav { padding:0 12px; }
+  .nav-brand span { display:none; }
+  .shell { padding:16px 12px 60px; }
+  .pt.sub { margin-left:12px; }
+  .tool-btn span { display:none; }
+  .sec-count { display:none; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog-bar"></div>
+
+<nav>
+  <div class="nav-brand">
+    <div class="nav-logo-icon">GT</div>
+    <span>GHAITH TEAM</span>
+  </div>
+  <div class="nav-right">
+    <button class="tool-btn" id="btnAr" title="Arabic"><i class="fa-solid fa-language"></i><span>الشرح</span></button>
+    <button class="tool-btn" id="btnEx" title="Examples"><i class="fa-solid fa-lightbulb"></i><span>عشان تفهمها</span></button>
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<div class="hero-band">
+  <div class="hero-band-icon">📝</div>
+  <h1>Reporting</h1>
+  <p>Nursing Management</p>
+  <div class="hero-band-meta">
+    <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">--</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-layer-group"></i> <span id="secBadge">--</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-language"></i> ببساطة مع غيث</div>
+  </div>
+</div>
+
+<div class="chips-wrap"><div class="chips" id="chips"></div></div>
+
+<div class="shell" id="app"></div>
+
+<footer>
+  <div class="footer-brand">GHAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg"><i class="fa-brands fa-telegram"></i> @nursing2bu</a>
+</footer>
+
+<script>
+/* Item format: [English, Arabic explanation, Example, level]  |  {h:"sub heading"}  (level 1 = indented sub-point) */
+const SECTIONS = [
+
+{ id:"definition", icon:"📖", title:"Definition", items:[
+
+["Reporting is the verbal, written, or computer-based communication intended to convey information to others.",
+ "الـ Reporting يعني توصيل معلومة لحد تاني، سواء بالكلام، أو بالكتابة، أو على الكمبيوتر. الهدف إن المعلومة توصل للي محتاجها.",
+ "الممرضة بتقول للدكتور في التليفون إن ضغط المريض نزل، أو بتكتبها في الملف، أو بتسجلها على سيستم المستشفى. كل ده Reporting."],
+
+["It is the exchange of information between health care providers regarding a patient's health status, needs, treatments, outcomes, and responses.",
+ "يعني تبادل معلومات بين أعضاء الفريق الصحي عن المريض: حالته الصحية، احتياجاته، العلاجات اللي بياخدها، النتايج، وإزاي جسمه بيستجيب.",
+ "ممرضة الشيفت الصبح تقول للي جاية بعدها: المريض ده حالته مستقرة، محتاج مسكن كل 6 ساعات، والعلاج الجديد جاب نتيجة كويسة."],
+
+["Reports may be oral or written",
+ "التقرير ممكن يكون شفوي (بالكلام) أو مكتوب.",
+ "تقرير شفوي: تقولي لزميلتك بالكلام. تقرير مكتوب: تكتبه في الـ chart أو الورقة."]
+
+]},
+
+{ id:"oral", icon:"🗣️", title:"Oral Report", items:[
+
+["Oral report: Are given when information is needed to be reported immediately not for permanency, e.g., oral reports given by head nurse to all personnel, reports about patient condition and needs.",
+ "الـ Oral report بنستخدمه لما المعلومة لازم تتقال فوراً، ومش محتاجة تتحفظ للأبد. زي لما الـ head nurse تبلغ كل الموظفين بحاجة، أو تتكلم عن حالة المريض واحتياجاته.",
+ "الـ head nurse بتجمع التمريض الصبح وتقول: في مريض جديد دخل سرير 5 وعايز متابعة كل ساعة. كلام مؤقت ومش محتاج أرشفة."],
+
+["Oral reports should be on an unhurried, clear and audible voice.",
+ "لازم الكلام يبقى على مهل، واضح، وصوتك مسموع. من غير استعجال عشان محدش يفوته حاجة.",
+ "وانتي بتسلمي الشيفت ماتجريش في الكلام وماتهمسيش. اتكلمي بهدوء ووضوح عشان الممرضة اللي جاية تسمع كل حاجة صح."]
+
+]},
+
+{ id:"types", icon:"🗂️", title:"Types of Reports", items:[
+
+["There are two types: intradepartmental and interdepartmental.",
+ "التقارير نوعين: Intradepartmental (جوا نفس القسم) و Interdepartmental (بين الأقسام المختلفة).",
+ "Intra يعني جوا. Inter يعني بين. تقرير جوا قسم التمريض نفسه، وتقرير بين التمريض وقسم تاني."],
+
+{h:"The Intradepartmental Reports"},
+
+["Intradepartmental reports are those exchanged between members of different categories within the nursing service department, as the head nurse and the nursing service director.",
+ "دي التقارير اللي بتتبادل بين أفراد من مستويات مختلفة جوا قسم التمريض نفسه، زي الـ head nurse ومدير التمريض.",
+ "الـ head nurse تبعت تقرير لمدير التمريض. الاتنين في نفس قسم التمريض بس مستوياتهم مختلفة."],
+
+["Intradepartmental reports include:",
+ "التقارير اللي جوا القسم بتشمل 4 أنواع.",
+ "الأنواع: Daily shift report، Incident report، Negligence report، Requisition report."],
+
+{h:"1. Daily Shift Report"},
+
+["It is an oral and written report given by the head nurse on one shift to the head nurse and all members of the coming shift.",
+ "ده تقرير شفوي ومكتوب، الـ head nurse بتاعة الشيفت الحالي بتقوله للـ head nurse وكل أعضاء الشيفت اللي جاي.",
+ "الـ head nurse بتاعة الصبح بتقف قدام فريق الشيفت المسائي وتقول لهم كل حاجة عن المرضى، وتسلمهم ورقة مكتوبة."],
+
+["It is exchanged at the beginning of the oncoming shift.",
+ "بيتبادل في بداية الشيفت الجاي، يعني أول ما الشيفت الجديد يبدأ.",
+ "الساعة 2 الضهر الشيفت المسائي بيبدأ، وفي أول الشيفت يتعمل التسليم."],
+
+["It is written summaries of pertinent information about patient's condition and activities related to their care.",
+ "عبارة عن ملخصات مكتوبة للمعلومات المهمة عن حالة المريض والأنشطة اللي اتعملت في رعايته.",
+ "تكتبي: المريض مستقر، اتاخد له مضاد حيوي الساعة 10، ومحتاج قياس السكر بعد الضهر. ملخص مفيد مش رواية طويلة."],
+
+["The shift report occurs at the end of each shift. Nurses report information about their assigned patients to nurses working on the next shift. It should be given efficiently.",
+ "الـ shift report بيحصل في آخر كل شيفت. الممرضات بيبلغوا عن المرضى المسؤولين عنهم للممرضات اللي شغالين في الشيفت اللي بعده. ولازم يتقال بكفاءة.",
+ "الممرضة اللي خلصت شيفتها تعدي على كل مريض كانت مسؤولة عنه وتقول للي جاية حالته. وتختصر وتقول المهم بس عشان الوقت."],
+
+{h:"2- Incident Report"},
+
+["Incident report is report on unplanned or unexpected occurrence which is not consistent with the routine care of the patient that could potentially affect a patient, family member, or staff. e.g error in medication and omission of treatment",
+ "الـ Incident report تقرير عن حاجة حصلت من غير تخطيط أو مكنتش متوقعة، ومش من الرعاية الروتينية العادية للمريض، وممكن تأثر على المريض أو أهله أو الموظفين. زي غلطة في الدوا أو نسيان علاج.",
+ "ممرضة اديت المريض دوا غلط، أو نسيت تدي علاج في ميعاده. لازم تكتب Incident report بالحصل."],
+
+{h:"3- Negligence Report"},
+
+["It is a report which includes:",
+ "ده تقرير بيشمل حاجتين، هنشوفهم في النقطتين اللي تحت.",
+ "بيتكتب لما حد من التمريض يقصّر في شغله."],
+
+["Carelessness or",
+ "الإهمال، أو",
+ "ممرضة سابت المريض من غير متابعة ومخدتش بالها منه."],
+
+["Disregarding of regulations on the part of a member of the nursing personnel to the nursing office",
+ "تجاهل القوانين واللوائح من طرف واحد من التمريض، وبيتبعت لمكتب التمريض.",
+ "ممرضة ماغسلتش إيديها قبل الإجراء رغم إن قانون المستشفى بيلزم بكده، يتعمل عنها تقرير لمكتب التمريض."],
+
+{h:"4- Requisition Report"},
+
+["Written request for",
+ "طلب مكتوب لحاجات معينة، هنشوفها تحت.",
+ "زي ورقة رسمية بتطلب بيها حاجة للوحدة."],
+
+["Supplies, equipment or service to be sent from the unit to the director of nursing office.",
+ "طلب مستلزمات أو أجهزة أو خدمة، بيتبعت من الوحدة لمدير مكتب التمريض.",
+ "الوحدة خلص منها الشاش والسرنجات، فبتكتب طلب وتبعته لمدير التمريض عشان يبعتوا لها."],
+
+["It should be signed by the head nurse or staff nurse.",
+ "لازم الطلب يتمضي من الـ head nurse أو الـ staff nurse.",
+ "من غير إمضاء، الطلب مش بيتقبل."],
+
+{h:"Inter-departmental Reports"},
+
+["Inter-departmental reports are those exchanged between nursing department and other hospital departments, e.g. admission office.",
+ "دي التقارير اللي بتتبادل بين قسم التمريض وأقسام المستشفى التانية، زي مكتب الاستقبال والدخول (Admission office).",
+ "التمريض يبعت تقرير لمكتب الـ Admission عن مريض هيتحول لقسم تاني. ده بين قسمين مختلفين."]
+
+]}
+
+];
+
+/* ===== RENDER ===== */
+const app = document.getElementById('app');
+const chips = document.getElementById('chips');
+let totalPts = 0;
+
+SECTIONS.forEach((s, si) => {
+  let n = 0;
+  let body = '';
+  s.items.forEach(it => {
+    if (it.h) { body += `<div class="subhead">${it.h}</div>`; return; }
+    n++; totalPts++;
+    const sub = it[3] ? ' sub' : '';
+    body += `<div class="pt${sub}">
+      <div class="pt-en" onclick="this.parentElement.classList.toggle('done')"><div class="pt-n">${n}</div><div>${it[0]}</div></div>
+      <div class="pt-ar"><span class="tag">شرح</span>${it[1]}</div>
+      <div class="pt-ex"><span class="tag">عشان تفهمها</span>${it[2]}</div>
+    </div>`;
+  });
+  app.insertAdjacentHTML('beforeend', `
+    <section class="sec" id="${s.id}">
+      <div class="sec-head">
+        <div class="sec-icon">${s.icon}</div>
+        <div class="sec-title">${s.title}</div>
+        <div class="sec-count">${n} points</div>
+      </div>
+      <div class="sec-body">${body}</div>
+    </section>`);
+  chips.insertAdjacentHTML('beforeend', `<a class="chip" href="#${s.id}" data-id="${s.id}">${s.icon} ${s.title.split('—')[0].split('&')[0].trim()}</a>`);
+});
+document.getElementById('totalBadge').textContent = totalPts + ' points';
+document.getElementById('secBadge').textContent = SECTIONS.length + ' sections';
+
+/* progress bar + active chip */
+const secEls = [...document.querySelectorAll('.sec')];
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  document.getElementById('prog-bar').style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+  let cur = secEls[0].id;
+  secEls.forEach(el => { if (el.getBoundingClientRect().top < 160) cur = el.id; });
+  document.querySelectorAll('.chip').forEach(c => {
+    const on = c.dataset.id === cur;
+    c.classList.toggle('active', on);
+    if (on) { const p = c.parentElement; p.scrollTo({ left: c.offsetLeft - 40, behavior: 'smooth' }); }
+  });
+}, { passive: true });
+
+/* toggles */
+function toggler(btnId, cls) {
+  const b = document.getElementById(btnId);
+  b.addEventListener('click', () => { document.body.classList.toggle(cls); b.classList.toggle('off'); });
+}
+toggler('btnAr', 'hide-ar');
+toggler('btnEx', 'hide-ex');
+
+/* theme */
+const themeBtn = document.getElementById('themeBtn');
+let theme = 'light';
+try { theme = localStorage.getItem('theme') || 'light'; } catch (e) {}
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  try { localStorage.setItem('theme', t); } catch (e) {}
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+</script>
+</body>
+</html>
