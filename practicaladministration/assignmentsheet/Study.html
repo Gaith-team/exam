@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM - Assignment</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:#1e3a8a; --teal:#0e7490; --emerald:#10b981; --gold:#f59e0b;
+  --accent:#0e7490; --accent-glow:rgba(14,116,144,0.18); --accent-rgb:14,116,144;
+  --grad:linear-gradient(135deg,#1e3a8a 0%,#0e7490 50%,#10b981 100%);
+  --grad-bar:linear-gradient(90deg,#1e3a8a,#0e7490,#10b981,#f59e0b);
+  --bg:#f8fafc; --bg2:#eef2f7; --card:#ffffff;
+  --text:#1a2332; --text2:#4a5568; --text3:#718096;
+  --bc:rgba(0,0,0,0.07);
+  --r:16px; --tr:all .3s cubic-bezier(.4,0,.2,1);
+}
+[data-theme="dark"] {
+  --bg:#0d1117; --bg2:#161b22; --card:#1c2333;
+  --text:#e6edf3; --text2:#b1bac4; --text3:#7d8590;
+  --bc:rgba(255,255,255,0.08);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family:'Outfit',sans-serif; background:var(--bg); color:var(--text);
+  min-height:100vh; overflow-x:hidden; transition:background .4s,color .4s;
+}
+
+#prog-bar { position:fixed; top:0; left:0; height:3px; z-index:999; background:var(--grad-bar); width:0%; transition:width .15s; }
+
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 28px; height:64px;
+  background:rgba(248,250,252,.93); backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--bc);
+}
+[data-theme="dark"] nav { background:rgba(13,17,23,.95); }
+.nav-brand { display:flex; align-items:center; gap:9px; font-size:15px; font-weight:900; color:var(--text); }
+.nav-logo-icon {
+  width:34px; height:34px; border-radius:8px; background:var(--grad);
+  display:flex; align-items:center; justify-content:center;
+  color:#fff; font-size:12px; font-weight:900; box-shadow:0 0 0 2px rgba(245,158,11,.5);
+}
+.nav-right { display:flex; align-items:center; gap:8px; }
+.theme-btn, .tool-btn {
+  height:38px; min-width:38px; border-radius:50px; border:1px solid var(--bc);
+  background:var(--card); cursor:pointer; font-size:14px; color:var(--text);
+  display:flex; align-items:center; justify-content:center; gap:6px; padding:0 12px;
+  font-family:'Outfit',sans-serif; font-weight:700; transition:var(--tr);
+}
+.theme-btn { width:38px; padding:0; border-radius:50%; font-size:15px; }
+.theme-btn:hover { border-color:var(--accent); transform:rotate(20deg); }
+.tool-btn:hover { border-color:var(--accent); color:var(--accent); }
+.tool-btn.off { opacity:.55; }
+
+.hero-band {
+  margin-top:64px; background:var(--grad); padding:40px 24px 36px; text-align:center;
+  position:relative; overflow:hidden; border-bottom:4px solid var(--gold);
+}
+.hero-band::before {
+  content:''; position:absolute; inset:0;
+  background:
+    radial-gradient(circle 220px at 12% 20%, rgba(245,158,11,.22) 0%, transparent 70%),
+    radial-gradient(circle 260px at 90% 85%, rgba(16,185,129,.28) 0%, transparent 70%),
+    radial-gradient(ellipse 600px 200px at 50% 100%, rgba(255,255,255,.12) 0%, transparent 70%);
+}
+.hero-band > * { position:relative; }
+.hero-band-icon {
+  width:68px; height:68px; border-radius:20px; background:rgba(255,255,255,.2);
+  backdrop-filter:blur(8px); display:flex; align-items:center; justify-content:center;
+  font-size:30px; margin:0 auto 14px; border:1.5px solid rgba(255,255,255,.35);
+}
+.hero-band h1 { font-size:clamp(20px,4vw,30px); font-weight:900; color:#fff; margin-bottom:6px; }
+.hero-band p { font-size:13px; color:rgba(255,255,255,.85); }
+.hero-band-meta { display:flex; justify-content:center; gap:14px; margin-top:20px; flex-wrap:wrap; }
+.meta-pill {
+  background:rgba(255,255,255,.18); backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.3); border-radius:50px; padding:6px 16px;
+  font-size:12px; font-weight:700; color:#fff; display:flex; align-items:center; gap:6px;
+}
+.meta-pill i { color:var(--gold); }
+
+/* CHIPS */
+.chips-wrap {
+  position:sticky; top:64px; z-index:90; background:var(--bg);
+  border-bottom:1px solid var(--bc); padding:10px 0;
+}
+.chips { display:flex; gap:8px; overflow-x:auto; padding:0 20px; max-width:860px; margin:0 auto; scrollbar-width:none; }
+.chips::-webkit-scrollbar { display:none; }
+.chip {
+  flex-shrink:0; padding:7px 14px; border-radius:50px; font-size:12px; font-weight:700;
+  background:var(--card); border:1px solid var(--bc); color:var(--text2);
+  text-decoration:none; transition:var(--tr); white-space:nowrap;
+}
+.chip:hover, .chip.active { background:var(--grad); color:#fff; border-color:transparent; }
+
+.shell { max-width:860px; margin:0 auto; padding:24px 20px 80px; }
+
+/* SECTION */
+.sec { margin-bottom:34px; scroll-margin-top:130px; }
+.sec-head {
+  display:flex; align-items:center; gap:12px; background:var(--grad); color:#fff;
+  padding:14px 18px; border-radius:16px 16px 0 0; border-bottom:3px solid var(--gold);
+}
+.sec-icon {
+  width:38px; height:38px; border-radius:10px; background:rgba(255,255,255,.2);
+  display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0;
+}
+.sec-title { font-size:17px; font-weight:900; line-height:1.3; }
+.sec-count { margin-left:auto; font-size:11px; font-weight:700; background:rgba(255,255,255,.2); padding:3px 10px; border-radius:50px; white-space:nowrap; }
+.sec-body {
+  background:var(--card); border:1px solid var(--bc); border-top:none;
+  border-radius:0 0 16px 16px; padding:14px; display:flex; flex-direction:column; gap:12px;
+  box-shadow:0 4px 20px rgba(0,0,0,.05);
+}
+
+.subhead {
+  font-size:13px; font-weight:900; color:var(--navy); padding:8px 12px;
+  background:rgba(var(--accent-rgb),.08); border-left:4px solid var(--gold);
+  border-radius:8px; direction:ltr; text-align:left; margin-top:6px;
+}
+[data-theme="dark"] .subhead { color:#7dd3fc; }
+
+/* POINT */
+.pt {
+  border:1px solid var(--bc); border-radius:14px; overflow:hidden; background:var(--bg);
+  transition:var(--tr);
+}
+.pt:hover { border-color:rgba(var(--accent-rgb),.4); box-shadow:0 4px 14px var(--accent-glow); }
+.pt.sub { margin-left:22px; border-left:3px solid var(--teal); }
+.pt.done { opacity:.55; }
+
+.pt-en {
+  display:flex; gap:10px; align-items:flex-start; padding:13px 14px;
+  font-size:15px; font-weight:700; line-height:1.6; direction:ltr; text-align:left;
+  background:var(--card); cursor:pointer;
+}
+.pt-n {
+  min-width:26px; height:26px; border-radius:8px; background:var(--grad); color:#fff;
+  font-size:11px; font-weight:900; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px;
+}
+.pt-ar {
+  padding:12px 16px; font-size:14.5px; line-height:1.9; color:var(--text);
+  direction:rtl; text-align:right; border-top:1px dashed var(--bc);
+  font-family:'Segoe UI',Tahoma,'Outfit',sans-serif;
+}
+.pt-ar .tag, .pt-ex .tag {
+  display:inline-block; font-size:11px; font-weight:900; padding:2px 9px; border-radius:6px; margin-left:8px; vertical-align:middle;
+}
+.pt-ar .tag { background:rgba(14,116,144,.12); color:var(--teal); }
+[data-theme="dark"] .pt-ar .tag { color:#5eead4; }
+.pt-ex {
+  padding:12px 16px; font-size:14px; line-height:1.9; color:var(--text2);
+  direction:rtl; text-align:right; border-top:1px dashed var(--bc);
+  background:rgba(245,158,11,.07); border-right:4px solid var(--gold);
+  font-family:'Segoe UI',Tahoma,'Outfit',sans-serif;
+}
+.pt-ex .tag { background:rgba(245,158,11,.2); color:#b45309; }
+[data-theme="dark"] .pt-ex .tag { color:#fbbf24; }
+body.hide-ex .pt-ex { display:none; }
+body.hide-ar .pt-ar { display:none; }
+
+footer {
+  background:var(--bg2); border-top:3px solid; border-image:var(--grad-bar) 1;
+  padding:22px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;
+}
+.footer-brand { font-size:14px; font-weight:700; }
+.footer-brand span { color:var(--accent); }
+.footer-tg { display:flex; align-items:center; gap:5px; text-decoration:none; color:#229ED9; font-size:12px; font-weight:600; }
+
+@media (max-width:560px) {
+  nav { padding:0 12px; }
+  .nav-brand span { display:none; }
+  .shell { padding:16px 12px 60px; }
+  .pt.sub { margin-left:12px; }
+  .tool-btn span { display:none; }
+  .sec-count { display:none; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog-bar"></div>
+
+<nav>
+  <div class="nav-brand">
+    <div class="nav-logo-icon">GT</div>
+    <span>GHAITH TEAM</span>
+  </div>
+  <div class="nav-right">
+    <button class="tool-btn" id="btnAr" title="Arabic"><i class="fa-solid fa-language"></i><span>الشرح</span></button>
+    <button class="tool-btn" id="btnEx" title="Examples"><i class="fa-solid fa-lightbulb"></i><span>عشان تفهمها</span></button>
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<div class="hero-band">
+  <div class="hero-band-icon">📋</div>
+  <h1>Assignment</h1>
+  <p>Nursing Management</p>
+  <div class="hero-band-meta">
+    <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">--</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-layer-group"></i> <span id="secBadge">--</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-language"></i> ببساطة مع غيث</div>
+  </div>
+</div>
+
+<div class="chips-wrap"><div class="chips" id="chips"></div></div>
+
+<div class="shell" id="app"></div>
+
+<footer>
+  <div class="footer-brand">GHAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg"><i class="fa-brands fa-telegram"></i> @nursing2bu</a>
+</footer>
+
+<script>
+/* Item format: [English, Arabic explanation, Example, level]  |  {h:"sub heading"}  (level 1 = indented sub-point) */
+const SECTIONS = [
+
+{ id:"def", icon:"📖", title:"Definition", items:[
+
+["Assignment refers to a written delegation of duties in the care of a group of patients by trained nursing personnel assigned to the unit based on their job description, knowledge, skills and patient nursing needs.",
+ "الـ Assignment يعني تفويض مكتوب بالمهام الخاصة برعاية مجموعة مرضى، بيتسلّم لتمريض متدرب متعيّن في الوحدة، وبيتوزع على حسب الوصف الوظيفي بتاعهم، ومعرفتهم، ومهاراتهم، واحتياجات المرضى التمريضية.",
+ "رئيسة القسم بتكتب ورقة فيها إن الممرضة أ مسؤولة عن سراير 1 لـ 5، والممرضة ب عن سراير 6 لـ 10، على حسب خبرة كل واحدة وحالة المرضى."]
+
+]},
+
+{ id:"deleg", icon:"🧭", title:"Delegation of Assignment", items:[
+
+{h:"1- Decide before the delegation of assignment:"},
+
+["What is to be delegated?",
+ "الأول لازم تحدد إيه الشغل اللي هيتفوّض بالظبط.",
+ "قبل ما توزع، تحدد إن المطلوب هو إدّي الأدوية وقياس العلامات الحيوية لسراير معينة."],
+
+["To whom the work is delegated considering ability, experience and number of available nurses",
+ "تحدد مين هيتفوّض له الشغل، وتاخد في اعتبارك قدرته وخبرته وعدد الممرضات المتاحين.",
+ "حالة حرجة تتدّي لممرضة خبرتها كبيرة، والحالة البسيطة ممكن تتدّي لممرضة أحدث، وكل ده على حسب العدد الموجود في الشيفت."],
+
+["What performance standards of personnel?",
+ "إيه معايير الأداء المطلوبة من الفريق.",
+ "تحدد إن كل ممرضة لازم تسجل العلامات الحيوية في ميعادها وتلتزم بخطوات مكافحة العدوى."],
+
+["Time required to achieve delegated work.",
+ "الوقت اللازم لإنجاز الشغل المتفوّض.",
+ "يعني تحسب إن تغيير الجروح لـ 5 مرضى هياخد قد إيه، وتتأكد إنه يخلص قبل نهاية الشيفت."],
+
+["Type of services and routines.",
+ "نوع الخدمات والروتين اليومي في القسم.",
+ "زي مواعيد الأدوية، والـ rounds، وتغيير الوضعيات، وكل شغل ثابت بيتكرر كل يوم."],
+
+["Availability of equipment and supplies.",
+ "مدى توفر الأجهزة والمستلزمات.",
+ "متوزعش مهمة تحتاج جهاز شفط لو الجهاز مش متاح، أو مهمة تغيير جروح من غير شاش ومطهرات."],
+
+{h:"2- Be specific in the delegation assignment:"},
+
+["Delegated assignment must be in written form, concise, clear and legible.",
+ "التكليف لازم يكون مكتوب، ومختصر، وواضح، وبخط مقروء.",
+ "ورقة التوزيع مكتوبة بوضوح من غير كلام كتير، وأي ممرضة تقراها وتفهم مطلوب منها إيه على طول."],
+
+["Delegated assignment must be posted in an observed area for all delegated personnel.",
+ "التكليف لازم يتعلّق في مكان ظاهر يشوفه كل الفريق اللي اتكلّف.",
+ "تتعلق الورقة على لوحة الإعلانات في محطة التمريض عشان كل ممرضة تشوف مهامها."],
+
+["Two workers should never be assigned to do the same task.",
+ "ممنوع تكلّف اتنين يعملوا نفس المهمة.",
+ "لو ممرضتين اتكلفوا يدّوا نفس الدوا لنفس المريض، ممكن الدوا يتدّي مرتين، وكمان وقت المجهود بيضيع."],
+
+{h:"Considerations in developing assignment:"},
+
+["Geographic locations of patient's rooms must be taken into consideration when distributing patients on assigned personnel to prevent waste of time.",
+ "لازم تراعي مكان أوض المرضى الجغرافي وانت بتوزع المرضى على الفريق، عشان متضيعش وقت.",
+ "تدّي الممرضة سراير 1 لـ 5 اللي جنب بعض، بدل ما تدّيها سرير 1 وسرير 20 وتفضل رايحة جاية في الطرقة."],
+
+{h:"3- Keep informed after the delegation of assignment:"},
+
+["Get periodic reports about delegated tasks or duties.",
+ "خد تقارير دورية عن المهام اللي اتفوّضت.",
+ "رئيسة القسم تسأل كل كام ساعة: خلصتوا إيه من المهام؟"],
+
+["Conduct round when something is wrong, discuss it with the person to whom the task was delegated, give the person permission to exercise a certain amount of adjustment in making decision to achieve expected performance standards.",
+ "لو حصلت مشكلة اعمل round، وناقش الموضوع مع الشخص اللي اتفوّضت له المهمة، وإدّيله صلاحية يعدّل ويتصرف في حدود معينة ياخد فيها قرار عشان يحقق معايير الأداء المطلوبة.",
+ "لو لقيت ممرضة متأخرة في مهمة، تروح لها تعرف السبب، وتسيبها تغيّر ترتيب شغلها بنفسها عشان تلحق."],
+
+["Also when the delegated assignment is done well, the one who did it must be commended.",
+ "وكمان لما المهمة تتنفذ كويس، لازم اللي نفّذها يتشكر ويتقدّر.",
+ "الممرضة خلّصت كل مهامها بدقة، فرئيسة القسم تشكرها قدام الفريق."]
+
+]},
+
+{ id:"methods", icon:"🗂️", title:"Methods of Assignment", items:[
+
+["Several methods of assignment are used to plan for patient care in a hospital.",
+ "فيه كذا طريقة للـ assignment بتتستخدم في تخطيط رعاية المرضى في المستشفى.",
+ "كل مستشفى أو قسم بيختار الطريقة اللي تناسب ظروفه."],
+
+["In planning, the head nurse must know the total nursing needs of each 24 hours and balance this with the number and type of available personnel.",
+ "وهي بتخطط، رئيسة التمريض لازم تعرف إجمالي احتياجات التمريض في الـ 24 ساعة، وتوازنها مع عدد ونوع الفريق المتاح.",
+ "لو القسم محتاج 10 ممرضات على مدار اليوم والمتاح 8 بس، لازم تظبط التوزيع بما يناسب الموجود."],
+
+["Four major methods of assignment are presently employed for organizing patient care:",
+ "فيه 4 طرق أساسية بتتستخدم حاليا لتنظيم رعاية المرضى:",
+ "دول الأربع طرق اللي هتتشرح بعد كده، وأهم حاجة تحفظ أسماءهم بالترتيب."],
+
+["Case assignment",
+ "طريقة الحالة: الممرضة بتتسلّم مريض معين أو حالة معينة.",
+ "ممرضة واحدة مسؤولة عن مريض واحد بس طول الشيفت."],
+
+["Function assignment.",
+ "طريقة المهام: كل ممرضة بتتكلف بوظيفة أو مهمة معينة لكل المرضى.",
+ "ممرضة مسؤولة عن إدّي الأدوية لكل المرضى، وواحدة تانية مسؤولة عن قياس العلامات الحيوية لكل المرضى."],
+
+["Team assignment.",
+ "طريقة الفريق: مجموعة ممرضين شغالين مع بعض بيرعوا مجموعة مرضى.",
+ "فريق من 3 ممرضات بيرعوا 15 مريض، وفي الفريق قائد بينسق بينهم."],
+
+["Primary nursing assignment.",
+ "طريقة التمريض الأساسي: ممرضة واحدة بتبقى مسؤولة عن رعاية المريض من أول دخوله لحد خروجه.",
+ "نفس الممرضة هي اللي بتتابع المريض طول فترة إقامته في المستشفى."]
+
+]}
+
+];
+
+/* ===== RENDER ===== */
+const app = document.getElementById('app');
+const chips = document.getElementById('chips');
+let totalPts = 0;
+
+SECTIONS.forEach((s, si) => {
+  let n = 0;
+  let body = '';
+  s.items.forEach(it => {
+    if (it.h) { body += `<div class="subhead">${it.h}</div>`; return; }
+    n++; totalPts++;
+    const sub = it[3] ? ' sub' : '';
+    body += `<div class="pt${sub}">
+      <div class="pt-en" onclick="this.parentElement.classList.toggle('done')"><div class="pt-n">${n}</div><div>${it[0]}</div></div>
+      <div class="pt-ar"><span class="tag">شرح</span>${it[1]}</div>
+      <div class="pt-ex"><span class="tag">عشان تفهمها</span>${it[2]}</div>
+    </div>`;
+  });
+  app.insertAdjacentHTML('beforeend', `
+    <section class="sec" id="${s.id}">
+      <div class="sec-head">
+        <div class="sec-icon">${s.icon}</div>
+        <div class="sec-title">${s.title}</div>
+        <div class="sec-count">${n} points</div>
+      </div>
+      <div class="sec-body">${body}</div>
+    </section>`);
+  chips.insertAdjacentHTML('beforeend', `<a class="chip" href="#${s.id}" data-id="${s.id}">${s.icon} ${s.title.split('—')[0].split('&')[0].trim()}</a>`);
+});
+document.getElementById('totalBadge').textContent = totalPts + ' points';
+document.getElementById('secBadge').textContent = SECTIONS.length + ' sections';
+
+/* progress bar + active chip */
+const secEls = [...document.querySelectorAll('.sec')];
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  document.getElementById('prog-bar').style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+  let cur = secEls[0].id;
+  secEls.forEach(el => { if (el.getBoundingClientRect().top < 160) cur = el.id; });
+  document.querySelectorAll('.chip').forEach(c => {
+    const on = c.dataset.id === cur;
+    c.classList.toggle('active', on);
+    if (on) { const p = c.parentElement; p.scrollTo({ left: c.offsetLeft - 40, behavior: 'smooth' }); }
+  });
+}, { passive: true });
+
+/* toggles */
+function toggler(btnId, cls) {
+  const b = document.getElementById(btnId);
+  b.addEventListener('click', () => { document.body.classList.toggle(cls); b.classList.toggle('off'); });
+}
+toggler('btnAr', 'hide-ar');
+toggler('btnEx', 'hide-ex');
+
+/* theme */
+const themeBtn = document.getElementById('themeBtn');
+let theme = 'light';
+try { theme = localStorage.getItem('theme') || 'light'; } catch (e) {}
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  try { localStorage.setItem('theme', t); } catch (e) {}
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+</script>
+</body>
+</html>
