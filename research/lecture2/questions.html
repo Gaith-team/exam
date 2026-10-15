@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM | Nursing Research</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* Palette: scholarly indigo (theory) · emerald (data) · gold (hypothesis) · sky (literature) */
+:root {
+  --accent:#4338ca; --accent-light:#818cf8; --accent-dark:#312e81; --accent-glow:rgba(67,56,202,0.2); --accent-rgb:67,56,202;
+  --c2:#059669; --c3:#ca8a04; --c4:#0284c7;
+  --grad:linear-gradient(135deg,#312e81 0%,#4338ca 45%,#0f766e 100%);
+  --grad-soft:linear-gradient(135deg,#4338ca,#0f766e);
+  --bg:#f5f6fb; --bg2:#e9ecf6; --card:#ffffff; --text:#14172e; --text2:#454a6b; --text3:#7a7f9e;
+  --bc:rgba(30,35,90,0.10); --success:#059669; --danger:#e11d48; --warn:#ca8a04; --r:12px;
+  --tr:all 0.25s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="dark"] {
+  --bg:#0b0e1c; --bg2:#131732; --card:#171c3a; --text:#eceefb; --text2:#b9bddc; --text3:#868bb0;
+  --bc:rgba(255,255,255,0.09); --accent:#818cf8; --accent-light:#a5b4fc; --accent-dark:#6366f1;
+  --accent-glow:rgba(129,140,248,0.2); --accent-rgb:129,140,248; --c2:#34d399; --c3:#facc15; --c4:#38bdf8;
+  --success:#34d399; --danger:#fb7185;
+}
+body { font-family:'Plus Jakarta Sans',sans-serif; background:var(--bg); background-image:linear-gradient(var(--bc) 1px,transparent 1px),linear-gradient(90deg,var(--bc) 1px,transparent 1px); background-size:32px 32px; background-attachment:fixed; color:var(--text); min-height:100vh; overflow-x:hidden; transition:background-color .4s,color .4s; }
+#prog-bar { position:fixed; top:0; left:0; height:3px; z-index:999; background:linear-gradient(90deg,var(--accent),var(--c4),var(--c2),var(--c3)); transition:width .2s; }
+nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:0 28px; height:64px; background:rgba(245,246,251,.93); backdrop-filter:blur(16px); border-bottom:1px solid var(--bc); transition:var(--tr); }
+[data-theme="dark"] nav { background:rgba(11,14,28,.95); }
+.nav-back { display:flex; align-items:center; gap:7px; color:var(--text2); text-decoration:none; font-size:13px; font-weight:700; padding:7px 13px; border-radius:8px; border:1px solid var(--bc); background:var(--card); transition:var(--tr); }
+.nav-back:hover { color:var(--c2); border-color:var(--c2); transform:translateX(3px); }
+.nav-brand { display:flex; align-items:center; gap:9px; font-size:15px; font-weight:800; color:var(--text); letter-spacing:.3px; }
+.nav-logo-icon { width:34px; height:34px; border-radius:8px; background:var(--grad-soft); display:flex; align-items:center; justify-content:center; color:#fff; font-size:12px; font-weight:800; }
+.nav-right { display:flex; align-items:center; gap:8px; }
+.theme-btn { width:38px; height:38px; border-radius:50%; border:1px solid var(--bc); background:var(--card); cursor:pointer; font-size:15px; display:flex; align-items:center; justify-content:center; transition:var(--tr); }
+.theme-btn:hover { border-color:var(--c3); transform:rotate(20deg); }
+.hero-band { margin-top:64px; background:var(--grad); padding:40px 24px 52px; text-align:center; position:relative; overflow:hidden; }
+.hero-band::before { content:''; position:absolute; inset:0; background:linear-gradient(rgba(255,255,255,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.07) 1px,transparent 1px),radial-gradient(ellipse 380px 180px at 12% 0%,rgba(250,204,21,.22) 0%,transparent 70%),radial-gradient(ellipse 600px 200px at 50% 100%,rgba(2,132,199,.28) 0%,transparent 70%); background-size:28px 28px,28px 28px,auto,auto; }
+.hero-band > * { position:relative; }
+.curve { position:absolute !important; left:0; right:0; bottom:8px; width:100%; height:46px; opacity:.45; pointer-events:none; }
+.curve path { fill:none; stroke:#fff; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:1200; stroke-dashoffset:1200; animation:draw 2.6s ease-out forwards; }
+.curve .dots circle { fill:#fff; opacity:.8; }
+@keyframes draw { to { stroke-dashoffset:0; } }
+@media (prefers-reduced-motion: reduce) { .curve path { animation:none; stroke-dashoffset:0; } }
+.hero-band-icon { width:68px; height:68px; border-radius:16px; background:rgba(255,255,255,.16); backdrop-filter:blur(8px); display:flex; align-items:center; justify-content:center; font-size:32px; margin:0 auto 14px; border:1.5px solid rgba(255,255,255,.35); transform:rotate(-4deg); }
+.hero-band h1 { font-size:clamp(20px,4vw,30px); font-weight:800; color:#fff; margin-bottom:6px; letter-spacing:.2px; }
+.hero-band p { font-size:13px; color:rgba(255,255,255,.88); }
+.hero-band-meta { display:flex; justify-content:center; gap:24px; margin-top:20px; flex-wrap:wrap; }
+.meta-pill { background:rgba(255,255,255,.14); backdrop-filter:blur(6px); border:1px solid rgba(255,255,255,.3); border-radius:8px; padding:6px 14px; font-size:12px; font-weight:700; color:#fff; display:flex; align-items:center; gap:6px; }
+.shell { max-width:560px; margin:0 auto; padding:24px 20px 80px; }
+.stats-row { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:16px; }
+.stat-box { background:var(--card); border:1px solid var(--bc); border-radius:var(--r); padding:12px 10px; text-align:center; }
+.stat-box:nth-child(1) { border-bottom:3px solid var(--success); }
+.stat-box:nth-child(2) { border-bottom:3px solid var(--danger); }
+.stat-box:nth-child(3) { border-bottom:3px solid var(--c4); }
+.stat-box .val { font-size:20px; font-weight:800; }
+.stat-box .lbl { font-size:11px; color:var(--text3); margin-top:2px; }
+.stat-correct { color:var(--success); } .stat-wrong { color:var(--danger); } .stat-remain { color:var(--c4); }
+.prog-strip { background:var(--card); border:1px solid var(--bc); border-radius:var(--r); padding:14px 16px; margin-bottom:16px; display:flex; align-items:center; gap:14px; }
+.prog-label { font-size:13px; font-weight:700; color:var(--text2); white-space:nowrap; }
+.prog-track { flex:1; height:8px; background:var(--bg2); border-radius:8px; overflow:hidden; }
+.prog-fill { height:100%; width:0%; background:linear-gradient(90deg,var(--accent),var(--c4),var(--c2)); border-radius:8px; transition:width .4s; }
+.timer-badge { min-width:64px; height:36px; border-radius:10px; background:var(--bg2); border:1px solid var(--bc); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:800; color:var(--text); gap:5px; padding:0 12px; flex-shrink:0; font-variant-numeric:tabular-nums; }
+.timer-badge.warn { color:var(--warn); border-color:rgba(202,138,4,.35); background:rgba(202,138,4,.08); }
+.timer-badge.danger { color:var(--danger); border-color:rgba(225,29,72,.3); background:rgba(225,29,72,.08); animation:pulse .8s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.6} }
+.q-card { background:var(--card); border:1px solid var(--bc); border-radius:14px; overflow:hidden; box-shadow:0 6px 24px rgba(40,40,120,.08); transition:box-shadow .3s; }
+.q-header { background:var(--grad); padding:6px 18px; display:flex; align-items:center; gap:8px; }
+.q-num { background:rgba(255,255,255,.2); border-radius:6px; padding:3px 10px; font-size:11px; font-weight:700; color:#fff; letter-spacing:.4px; }
+.q-text { padding:22px 18px 14px; font-size:15px; font-weight:700; color:var(--text); line-height:1.65; border-bottom:1px solid var(--bc); text-align:left; direction:ltr; }
+.q-text img { display:block; max-width:100%; max-height:260px; margin:0 auto 12px; border-radius:10px; background:#fff; }
+.options { padding:14px 18px 18px; display:flex; flex-direction:column; gap:10px; }
+.opt { display:flex; align-items:center; gap:12px; padding:13px 16px; border-radius:10px; border:1.5px solid var(--bc); background:var(--bg); cursor:pointer; font-size:14px; font-weight:600; color:var(--text); transition:var(--tr); user-select:none; direction:ltr; text-align:left; }
+.opt:hover:not(.disabled) { border-color:var(--accent); background:rgba(var(--accent-rgb),.07); transform:translateX(3px); }
+.opt-letter { width:28px; height:28px; border-radius:50%; flex-shrink:0; background:var(--bg2); border:1px solid var(--bc); display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:800; color:var(--text3); transition:var(--tr); }
+.opt:nth-child(1) .opt-letter { background:rgba(67,56,202,.12); color:#4338ca; border-color:rgba(67,56,202,.35); }
+.opt:nth-child(2) .opt-letter { background:rgba(5,150,105,.12); color:#059669; border-color:rgba(5,150,105,.35); }
+.opt:nth-child(3) .opt-letter { background:rgba(202,138,4,.15); color:#ca8a04; border-color:rgba(202,138,4,.4); }
+.opt:nth-child(4) .opt-letter { background:rgba(2,132,199,.13); color:#0284c7; border-color:rgba(2,132,199,.35); }
+[data-theme="dark"] .opt:nth-child(1) .opt-letter { color:#a5b4fc; } [data-theme="dark"] .opt:nth-child(2) .opt-letter { color:#34d399; }
+[data-theme="dark"] .opt:nth-child(3) .opt-letter { color:#facc15; } [data-theme="dark"] .opt:nth-child(4) .opt-letter { color:#38bdf8; }
+.opt.correct { border-color:var(--success); background:rgba(5,150,105,.10); }
+.opt.correct .opt-letter { background:var(--success); color:#fff; border-color:var(--success); }
+.opt.wrong { border-color:var(--danger); background:rgba(225,29,72,.07); }
+.opt.wrong .opt-letter { background:var(--danger); color:#fff; border-color:var(--danger); }
+.opt.disabled { pointer-events:none; }
+.feedback-bar { margin:14px 18px; padding:12px 16px; border-radius:10px; display:flex; align-items:center; gap:10px; font-size:14px; font-weight:700; animation:popIn .4s cubic-bezier(.34,1.56,.64,1); }
+@keyframes popIn { from{transform:scale(.8);opacity:0} to{transform:scale(1);opacity:1} }
+.feedback-bar.ok { background:rgba(5,150,105,.1); color:var(--success); border:1px solid rgba(5,150,105,.25); }
+.feedback-bar.no { background:rgba(225,29,72,.08); color:var(--danger); border:1px solid rgba(225,29,72,.2); }
+.feedback-icon { font-size:20px; }
+.explanation { margin:0 18px 14px; padding:12px 14px; background:rgba(var(--accent-rgb),.06); border-radius:10px; border-right:3px solid var(--c3); font-size:13px; color:var(--text2); line-height:1.6; display:none; }
+.nav-btns { padding:4px 18px 18px; display:flex; gap:10px; }
+.btn { flex:1; padding:13px; border:none; border-radius:10px; font-size:14px; font-weight:800; cursor:pointer; font-family:'Plus Jakarta Sans',sans-serif; transition:var(--tr); display:flex; align-items:center; justify-content:center; gap:7px; }
+.btn:focus-visible, .opt:focus-visible, .theme-btn:focus-visible { outline:3px solid var(--c4); outline-offset:2px; }
+.btn-next { background:var(--grad-soft); color:#fff; box-shadow:0 4px 14px rgba(67,56,202,.28); }
+.btn-next:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(67,56,202,.38); }
+.btn-skip { background:var(--bg2); color:var(--text2); border:1px solid var(--bc); flex:0 0 auto; padding:13px 18px; }
+.btn-skip:hover { border-color:var(--c3); color:var(--warn); }
+.result-hero { text-align:center; padding:36px 20px 28px; background:var(--card); border-radius:14px; border:1px solid var(--bc); margin-bottom:20px; box-shadow:0 6px 24px rgba(40,40,120,.08); border-top:5px solid transparent; background-image:linear-gradient(var(--card),var(--card)),var(--grad); background-origin:border-box; background-clip:padding-box,border-box; }
+.score-ring { width:110px; height:110px; border-radius:50%; margin:0 auto 18px; display:flex; align-items:center; justify-content:center; flex-direction:column; border:5px solid var(--bg2); position:relative; }
+.score-ring svg { position:absolute; inset:-5px; width:calc(100% + 10px); height:calc(100% + 10px); transform:rotate(-90deg); }
+.score-ring circle { fill:none; stroke-width:5; stroke-linecap:round; }
+.ring-bg { stroke:var(--bg2); }
+.ring-fill { stroke:var(--accent); transition:stroke-dashoffset 1s ease; }
+.score-num { font-size:28px; font-weight:800; color:var(--text); }
+.score-pct { font-size:12px; color:var(--text3); }
+.result-grade { font-size:22px; font-weight:800; margin-bottom:6px; }
+.result-sub { font-size:14px; color:var(--text2); }
+.result-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:20px; }
+.rs { background:var(--bg2); border-radius:10px; padding:12px 8px; text-align:center; }
+.rs .n { font-size:20px; font-weight:800; } .rs .l { font-size:11px; color:var(--text3); }
+.report-item { background:var(--card); border:1px solid var(--bc); border-radius:12px; padding:16px; margin-bottom:10px; border-right:4px solid var(--bc); }
+.report-item.ok { border-right-color:var(--success); } .report-item.no { border-right-color:var(--danger); }
+.report-item .ri-q { font-size:13px; font-weight:700; margin-bottom:8px; direction:ltr; text-align:left; }
+.report-item .ri-q img { max-height:90px; display:block; margin:6px 0; border-radius:8px; }
+.report-item .ri-row { display:flex; align-items:center; gap:8px; font-size:12px; margin-top:5px; color:var(--text2); direction:ltr; text-align:left; }
+.ri-badge { padding:2px 8px; border-radius:6px; font-weight:700; font-size:11px; flex-shrink:0; }
+.ri-yours { background:rgba(225,29,72,.1); color:var(--danger); } .ri-right { background:rgba(5,150,105,.1); color:var(--success); }
+.result-actions { display:flex; flex-direction:column; gap:10px; margin-top:20px; }
+.btn-retry { background:linear-gradient(135deg,#ca8a04,#4338ca); color:#fff; }
+.btn-retry:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(67,56,202,.3); }
+.btn-home { background:var(--bg2); color:var(--text); border:1px solid var(--bc); }
+.btn-home:hover { border-color:var(--accent); color:var(--accent); }
+footer { background:var(--bg2); border-top:1px solid var(--bc); padding:22px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+.footer-brand { font-size:14px; font-weight:700; } .footer-brand span { color:var(--accent); }
+.footer-tg { display:flex; align-items:center; gap:5px; text-decoration:none; color:#229ED9; font-size:12px; font-weight:600; }
+@media (max-width:480px) { nav{padding:0 14px;} .shell{padding:16px 14px 60px;} .nav-brand span{display:none;} .hero-band{padding:30px 16px 44px;} }
+</style>
+</head>
+<body>
+<div id="prog-bar" style="width:0%"></div>
+<nav>
+  <a href="https://gaith-team.github.io/exam/" class="nav-back"><i class="fa-solid fa-arrow-right"></i> رجوع</a>
+  <div class="nav-brand"><div class="nav-logo-icon">GT</div><span>GHAITH TEAM</span></div>
+  <div class="nav-right"><button class="theme-btn" id="themeBtn">🌙</button></div>
+</nav>
+<div class="hero-band">
+  <svg class="curve" viewBox="0 0 600 46" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 42 C90 42 140 40 190 30 C235 21 262 4 300 4 C338 4 365 21 410 30 C460 40 510 42 600 42"/>
+    <g class="dots"><circle cx="120" cy="38" r="2"/><circle cx="210" cy="24" r="2"/><circle cx="262" cy="12" r="2"/><circle cx="338" cy="12" r="2"/><circle cx="390" cy="24" r="2"/><circle cx="480" cy="38" r="2"/></g>
+  </svg>
+  <div class="hero-band-icon">🔬</div>
+  <h1>Introduction to nursing research</h1>
+  <p>Nursing Research</p>
+  <div class="hero-band-meta">
+    <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">-- سؤال</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-clock"></i> 40 Min</div>
+    <div class="meta-pill"><i class="fa-solid fa-shuffle"></i> Shuffled</div>
+  </div>
+</div>
+<div class="shell">
+  <div class="stats-row">
+    <div class="stat-box"><div class="val stat-correct" id="sCorrect">0</div><div class="lbl">✔ صحيح</div></div>
+    <div class="stat-box"><div class="val stat-wrong" id="sWrong">0</div><div class="lbl">✖ خطأ</div></div>
+    <div class="stat-box"><div class="val stat-remain" id="sRemain">--%</div><div class="lbl">⏳ متبقي</div></div>
+  </div>
+  <div class="prog-strip">
+    <div class="prog-label" id="progLabel">سؤال ١</div>
+    <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+    <div class="timer-badge" id="timerBadge"><i class="fa-regular fa-clock"></i> <span id="timerTxt">40:00</span></div>
+  </div>
+  <div id="app"></div>
+</div>
+<footer>
+  <div class="footer-brand">GHAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg"><i class="fa-brands fa-telegram"></i> @nursing2bu</a>
+</footer>
+<script>
+const QUESTIONS = [
+{t:"Research is best defined as:",o:["A random collection of opinions","A systematic process of answering questions by generating new knowledge","Using current knowledge to solve a problem","Repeating previous findings exactly"],a:1},
+{t:"Research deals with:",o:["Beliefs and opinions only","Imagination and assumptions","Facts, i.e. phenomena that can be observed in the real world","Personal feelings of the researcher"],a:2},
+{t:"Which is the initial and one of the most significant steps in research?",o:["Identifying the problem","Analyzing the data","Writing the conclusion","Selecting the sample"],a:0},
+{t:"Research is NOT problem solving because research:",o:["Uses only current knowledge","Does not need a purpose","Deals only with daily problems","Discovers or generates new knowledge"],a:3},
+{t:"The most important criterion in selecting a research problem is:",o:["Funding","Possibility of publication","Interest","Popularity of the topic"],a:2},
+{t:"Which of the following is a type of qualitative research question?",o:["Exploratory","Descriptive","Comparative","Relationship-related"],a:0},
+{t:"PICO stands for:",o:["Problem, Intervention, Control, Output","Population, Intervention, Comparison, Outcome","Participant, Idea, Comparison, Objective","Population, Investigation, Control, Outcome"],a:1},
+{t:"A variable is:",o:["A fixed value that never changes","A research tool for collecting data","The final conclusion of a study","A characteristic of a person, object or phenomenon that can take on different values"],a:3},
+{t:"The null hypothesis predicts that:",o:["There is no relationship between the independent and dependent variables","There is a positive relationship between the variables","There is a negative relationship between the variables","The relationship is cause and effect"],a:0},
+{t:"Sex (male / female) is an example of a:",o:["Continuous variable","Discrete variable","Categorical variable","Dependent variable only"],a:2},
+{t:"Height measured in centimeters is an example of a:",o:["Categorical variable","Discrete variable","Null variable","Continuous variable"],a:3},
+{t:"The number of children a person has (0, 1, 2, 3 or more) is a:",o:["Continuous variable","Discrete variable","Categorical variable","Independent variable"],a:1},
+{t:"Which of the following is a source of research problems?",o:["Literature review and past researches","Random guessing","Avoiding daily problems","Ignoring theory"],a:0},
+{t:"A hypothesis is best described as:",o:["A proven fact","A final conclusion","An intelligent guess or prediction that gives direction to the researcher","A list of research questions"],a:2},
+{t:"Which of the following is NOT a step in developing a research question?",o:["Carry out preliminary reading","Collect and analyze the final data","Consider your audience","Evaluate your question"],a:1},
+{t:"A simple hypothesis reflects a relationship between:",o:["Two or more independent variables","Only dependent variables","Three variables","One independent and one dependent variable"],a:3},
+{t:"A complex hypothesis predicts a relationship between:",o:["Two or more independent and dependent variables","Two variables only","No variables","Only one dependent variable"],a:0},
+{t:"Which of the following is an example of a directional hypothesis?",o:["Teacher-student relationship influences student's learning","High quality of nursing education will lead to high quality of nursing practice skills","There is no relationship between education and practice","Education may or may not affect practice"],a:1},
+{t:"'Teacher-student relationship influences student's learning' is an example of a:",o:["Null hypothesis","Directional hypothesis","Non-directional hypothesis","Complex hypothesis"],a:2},
+{t:"Independent variables are used to describe or measure:",o:["The outcome of the study","The sample size","The data collection tool","Factors assumed to cause or influence the problem"],a:3},
+{t:"The dependent variable is sometimes called the:",o:["Predictor variable","Outcome variable","Categorical variable","Control variable"],a:1},
+{t:"In a study of the relation between smoking and lung cancer, the independent variable is:",o:["Smoking","Lung cancer","Age","Hospital"],a:0},
+{t:"Which of the following is a categorical variable?",o:["Temperature","Height","Marital status","Number of children"],a:2},
+{t:"'What is the level of burden in caregivers of stroke survivors?' is what type of research question?",o:["Cause-effect question","Relationship question","Predictive question","Descriptive question"],a:3},
+{t:"'What is the relationship between caregiver burden and quality of life in caregivers of stroke survivors?' is a:",o:["Relationship question","Descriptive question","Cause-effect question","Exploratory question"],a:0},
+{t:"A cause-effect research question seeks to:",o:["Describe a phenomenon or population","Investigate the cause-effect relationship of one thing on another","Only count frequencies","Explore feelings in depth"],a:1},
+{t:"In quantitative research, variables are:",o:["Abstract and broad","Defined in general terms only","Never measurable","Narrow, specific in focus and could be converted to numbers"],a:3},
+{t:"In qualitative research, variables are:",o:["Always converted to numbers","Narrow and statistically tested","More abstract and defined in broader, more general terms","Identical to quantitative variables"],a:2},
+{t:"Feasibility of a research problem includes evaluating:",o:["Only the popularity of the topic","Availability of time, funding, and access to data or participants","The age of the researcher","Only the number of previous studies"],a:1},
+{t:"Which factor is concerned with the possibility that the study population might be adversely affected by some questions?",o:["Ethics","Interest","Data availability","Clarity"],a:0},
+{t:"Which of the following is a characteristic of a good hypothesis?",o:["It is long and complex","It involves only one variable","It is testable","It cannot be justified"],a:2},
+{t:"Which of the following is a source of hypothesis?",o:["Avoiding observation","Ignoring previous research","Random selection","Nursing diagnosis and clinical setting"],a:3},
+{t:"Which of the following is NOT a characteristic of a good hypothesis?",o:["Brief and clearly stated","Ambiguous and untestable","Based on a rationale or theory","Identifies at least two variables"],a:1},
+{t:"Research question: 'Does a hand-hygiene training program reduce infection rates compared with no training in ICU patients?' Which PICO element is 'hand-hygiene training program'?",o:["Intervention","Population","Comparison","Outcome"],a:0},
+{t:"In the same question, 'infection rates' represent the:",o:["Population","Intervention","Outcome","Comparison"],a:2},
+{t:"'Higher caregiver burden leads to lower quality of life' is best classified as a:",o:["Null hypothesis","Directional hypothesis","Non-directional hypothesis","Descriptive question"],a:1},
+{t:"Which hypothesis states a relationship between variables but does not specify its direction?",o:["Directional hypothesis","Null hypothesis","Causal hypothesis","Non-directional hypothesis"],a:3},
+{t:"Which of the following is a criterion of a good research problem?",o:["It should not be over researched","It should be beyond the researcher's experience","It should carry legal impediments","It needs unlimited time to finish"],a:0},
+{t:"A good research question is meaningful:",o:["Only if the answer is 'Yes'","Only if the answer is 'No'","Whether the answer is 'Yes' or 'No'","Only if it confirms the hypothesis"],a:2},
+{t:"Which of the following is an importance of the research hypothesis?",o:["It replaces the research problem","It provides direction for design, sampling and data collection","It eliminates the need for data","It avoids discussion of findings"],a:1},
+{t:"Why is temperature (37.2 C or 37.19999 C) considered a continuous variable?",o:["It has only two categories","It can only take full values","It cannot be measured","Measurements can become more accurate depending on the instrument used"],a:3},
+{t:"A discrete variable is one in which:",o:["Numbers can only have full values","Values can be infinitely subdivided","Values are expressed in names only","Values never change"],a:0},
+{t:"'Is abuse during childhood related to women's victimization through adulthood?' In this question, the dependent variable is:",o:["Abuse during childhood","Women's age","Women's victimization through adulthood","Childhood"],a:2},
+{t:"Regarding data availability, if your research title needs collection of information (journals, reports, proceedings), you must:",o:["Collect them after finalizing the study","Avoid using any published materials","Ask participants to provide them","Make sure these materials are available in the relevant format before finalizing the title"],a:3},
+{t:"A research problem in nursing is best described as:",o:["A solved issue with no gap","An area of concern where there is a gap in the knowledge base needed for nursing practice","Any problem encountered in daily life","A mathematical equation"],a:1},
+{t:"Not all problems are researchable.",o:["True","False"],a:0},
+{t:"Research and problem solving are exactly the same process.",o:["True","False"],a:1},
+{t:"Identifying the problem is the initial and one of the most significant steps in research.",o:["True","False"],a:0},
+{t:"Interest is the least important criterion in selecting a research problem.",o:["True","False"],a:1},
+{t:"A good research problem should be over researched so that a lot of literature is available.",o:["True","False"],a:1},
+{t:"A good hypothesis should be testable.",o:["True","False"],a:0},
+{t:"The PICO approach is used for formulating research questions in quantitative studies.",o:["True","False"],a:0},
+{t:"A null hypothesis predicts a positive relationship between the variables.",o:["True","False"],a:1},
+{t:"The independent variable is assumed to cause or influence the problem.",o:["True","False"],a:0},
+{t:"Marital status is a continuous variable.",o:["True","False"],a:1},
+{t:"Temperature in degrees is an example of a continuous variable.",o:["True","False"],a:0},
+{t:"In qualitative research, variables are narrow and always converted to numbers.",o:["True","False"],a:1},
+{t:"A simple hypothesis reflects a relationship between two variables (independent and dependent).",o:["True","False"],a:0},
+{t:"A non-directional hypothesis specifies the direction of the relationship between the variables.",o:["True","False"],a:1},
+{t:"A discrete variable can take any fractional value between two points.",o:["True","False"],a:1}
+];
+
+
+/* ============ ENGINE ============ */
+let questions, i, correct, wrong, answers, wrongSet, answered;
+let totalTime = 40*60, timeLeft, timerInterval;
+const LETTERS = ['A','B','C','D','E','F'];
+function shuffle(arr) { for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+function shuffleOptions(q) {
+  const idx = shuffle(q.o.map((_, k) => k));
+  return {...q, o: idx.map(k => q.o[k]), a: idx.indexOf(q.a)};
+}
+function init(pool) {
+  questions = shuffle([...pool]).map(shuffleOptions);
+  i = 0; correct = 0; wrong = 0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = []; answered = 0; timeLeft = totalTime;
+  document.getElementById('totalBadge').textContent = questions.length + ' سؤال';
+  startTimer(); render();
+}
+function startTimer() {
+  clearInterval(timerInterval);
+  document.getElementById('timerBadge').className = 'timer-badge';
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    const m = Math.floor(timeLeft / 60), s = timeLeft % 60;
+    document.getElementById('timerTxt').textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
+    const badge = document.getElementById('timerBadge');
+    if (timeLeft <= 120) { badge.className = 'timer-badge danger'; }
+    else if (timeLeft <= 300) { badge.className = 'timer-badge warn'; }
+    if (timeLeft <= 0) { clearInterval(timerInterval); finish(); }
+  }, 1000);
+}
+function updateTop() {
+  const total = questions.length;
+  document.getElementById('sCorrect').textContent = correct;
+  document.getElementById('sWrong').textContent = wrong;
+  document.getElementById('sRemain').textContent = Math.round(((total - answered) / total) * 100) + '%';
+  document.getElementById('progLabel').textContent = 'سؤال ' + (i + 1) + ' / ' + total;
+  document.getElementById('progFill').style.width = ((i + 1) / total * 100) + '%';
+  document.getElementById('prog-bar').style.width = ((i + 1) / total * 100) + '%';
+}
+const SYSTEMS = [
+  { icon:'🔬', l:['#4338ca','67,56,202','#312e81','#4338ca','#0f766e'], d:['#818cf8','129,140,248'] }, /* theory / design */
+  { icon:'📊', l:['#059669','5,150,105','#064e3b','#059669','#1d4ed8'], d:['#34d399','52,211,153'] }, /* data / statistics */
+  { icon:'📝', l:['#b45309','180,83,9','#78350f','#b45309','#4338ca'], d:['#fbbf24','251,191,36'] }, /* hypothesis / ethics */
+  { icon:'📚', l:['#0369a1','3,105,161','#0c4a6e','#0369a1','#7c3aed'], d:['#38bdf8','56,189,248'] }  /* literature / evidence */
+];
+function applyPalette() {
+  const s = SYSTEMS[(i || 0) % SYSTEMS.length];
+  const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const r = document.documentElement.style;
+  const main = dark ? s.d[0] : s.l[0], rgb = dark ? s.d[1] : s.l[1];
+  r.setProperty('--accent', main);
+  r.setProperty('--accent-rgb', rgb);
+  r.setProperty('--accent-glow', `rgba(${rgb},0.2)`);
+  r.setProperty('--grad', `linear-gradient(135deg,${s.l[2]} 0%,${s.l[3]} 45%,${s.l[4]} 100%)`);
+  r.setProperty('--grad-soft', `linear-gradient(135deg,${s.l[3]},${s.l[4]})`);
+  const ic = document.querySelector('.hero-band-icon'); if (ic) ic.textContent = s.icon;
+}
+function render() {
+  applyPalette();
+  updateTop();
+  const q = questions[i];
+  document.getElementById('app').innerHTML = `
+    <div class="q-card">
+      <div class="q-header"><div class="q-num">سؤال ${i + 1} / ${questions.length}</div></div>
+      <div class="q-text">${q.t}</div>
+      <div class="options">
+        ${q.o.map((o, idx) => `
+          <div class="opt" id="opt${idx}" onclick="choose(${idx})">
+            <div class="opt-letter">${LETTERS[idx] || idx + 1}</div>
+            ${o}
+          </div>`).join('')}
+      </div>
+      <div class="nav-btns"><button class="btn btn-skip" onclick="skip()"><i class="fa-solid fa-forward"></i> تخطي</button></div>
+    </div>`;
+}
+function choose(v) {
+  if (answers[i] !== null) return;
+  answers[i] = v; answered++;
+  const q = questions[i];
+  const ok = v === q.a;
+  ok ? correct++ : wrong++;
+  updateTop();
+  q.o.forEach((_, idx) => {
+    const el = document.getElementById('opt' + idx);
+    el.classList.add('disabled');
+    if (idx === q.a) el.classList.add('correct');
+    else if (idx === v) el.classList.add('wrong');
+  });
+  const fb = document.createElement('div');
+  fb.className = 'feedback-bar ' + (ok ? 'ok' : 'no');
+  fb.innerHTML = ok
+    ? `<span class="feedback-icon">🎉</span> <span>ممتاز ، اللهم بارك </span>`
+    : `<span class="feedback-icon">😔</span> <span>ركز يا سكر</span>`;
+  const card = document.querySelector('.q-card');
+  card.querySelector('.options').after(fb);
+  if (q.exp) {
+    const exp = document.createElement('div');
+    exp.className = 'explanation'; exp.style.display = 'block';
+    exp.innerHTML = '<b>💬 شرح:</b> ' + q.exp;
+    fb.after(exp);
+  }
+  const navBtns = card.querySelector('.nav-btns');
+  navBtns.innerHTML = `<button class="btn btn-next" onclick="next()">
+    ${i < questions.length - 1 ? '<i class="fa-solid fa-arrow-left"></i> السؤال التالي' : '<i class="fa-solid fa-flag-checkered"></i> إنهاء الامتحان'}
+  </button>`;
+}
+function skip() {
+  if (answers[i] === null) { answers[i] = -1; answered++; wrongSet.push(questions[i]); wrong++; updateTop(); }
+  next();
+}
+function next() {
+  if (i < questions.length - 1) { i++; render(); window.scrollTo({top: 0, behavior: 'smooth'}); }
+  else finish();
+}
+function finish() {
+  clearInterval(timerInterval);
+  const total = questions.length;
+  const score = Math.round((correct / total) * 100);
+  questions.forEach((q, idx) => { if (answers[idx] !== q.a) wrongSet.push({...q, myAns: answers[idx]}); });
+  wrongSet = [...new Map(wrongSet.map(q => [q.t, q])).values()];
+  let grade, gradeColor;
+  if (score >= 90) { grade = '🥇 ممتاز'; gradeColor = 'var(--success)'; }
+  else if (score >= 75) { grade = '🥈 جيد جداً'; gradeColor = 'var(--c4)'; }
+  else if (score >= 60) { grade = '🥉 جيد'; gradeColor = 'var(--warn)'; }
+  else { grade = '📚 راجع تاني'; gradeColor = 'var(--danger)'; }
+  const circ = 2 * Math.PI * 45;
+  const offset = circ - (score / 100) * circ;
+  const reportHTML = questions.map((q, idx) => {
+    const ok = answers[idx] === q.a;
+    return `<div class="report-item ${ok ? 'ok' : 'no'}">
+      <div class="ri-q">${ok ? '✅' : '❌'} ${q.t}</div>
+      ${!ok ? `
+        <div class="ri-row"><span class="ri-badge ri-yours">إجابتك</span> ${answers[idx] >= 0 ? q.o[answers[idx]] : 'تم التخطي'}</div>
+        <div class="ri-row"><span class="ri-badge ri-right">الصحيح</span> ${q.o[q.a]}</div>` : ''}
+    </div>`;
+  }).join('');
+  document.getElementById('prog-bar').style.width = '100%';
+  document.getElementById('app').innerHTML = `
+    <div class="result-hero">
+      <div class="score-ring">
+        <svg viewBox="0 0 110 110">
+          <circle class="ring-bg" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="0"/>
+          <circle class="ring-fill" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="${circ}" style="stroke:${gradeColor}" id="ringFill"/>
+        </svg>
+        <div class="score-num">${score}</div><div class="score-pct">%</div>
+      </div>
+      <div class="result-grade" style="color:${gradeColor}">${grade}</div>
+      <div class="result-sub">أجبت على ${answered} من ${total} سؤال</div>
+      <div class="result-stats">
+        <div class="rs"><div class="n" style="color:var(--success)">${correct}</div><div class="l">صحيح</div></div>
+        <div class="rs"><div class="n" style="color:var(--danger)">${wrong}</div><div class="l">خطأ</div></div>
+        <div class="rs"><div class="n" style="color:var(--c4)">${total - answered < 0 ? 0 : total - answered}</div><div class="l">تخطي</div></div>
+      </div>
+    </div>
+    <div class="result-actions">
+      ${wrongSet.length ? `<button class="btn btn-retry" onclick="retryWrong()"><i class="fa-solid fa-rotate-right"></i> إعادة الخطأ (${wrongSet.length})</button>` : ''}
+      <button class="btn btn-home" onclick="init(QUESTIONS)"><i class="fa-solid fa-shuffle"></i> امتحان جديد عشوائي</button>
+      <a href="https://gaith-team.github.io/exam/" class="btn btn-home" style="text-decoration:none;"><i class="fa-solid fa-house"></i> رجوع للمادة</a>
+    </div>
+    <div style="margin-top:28px">
+      <div style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text2)">📋 تقرير مفصّل</div>
+      ${reportHTML}
+    </div>`;
+  setTimeout(() => { document.getElementById('ringFill').style.strokeDashoffset = offset; }, 100);
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+function retryWrong() {
+  const pool = [...wrongSet];
+  questions = shuffle(pool).map(shuffleOptions); i = 0; correct = 0; wrong = 0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = []; answered = 0; timeLeft = totalTime;
+  startTimer(); render();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+const themeBtn = document.getElementById('themeBtn');
+let theme = localStorage.getItem('theme') || 'light';
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', t);
+  applyPalette();
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+init(QUESTIONS);
+</script>
+</body>
+</html>
