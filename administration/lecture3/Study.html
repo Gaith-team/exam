@@ -1,0 +1,867 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM — Staff Nurse</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:#1e3a8a; --teal:#0e7490; --emerald:#10b981; --gold:#f59e0b;
+  --accent:#0e7490; --accent-glow:rgba(14,116,144,0.18); --accent-rgb:14,116,144;
+  --grad:linear-gradient(135deg,#1e3a8a 0%,#0e7490 50%,#10b981 100%);
+  --grad-bar:linear-gradient(90deg,#1e3a8a,#0e7490,#10b981,#f59e0b);
+  --bg:#f8fafc; --bg2:#eef2f7; --card:#ffffff;
+  --text:#1a2332; --text2:#4a5568; --text3:#718096;
+  --bc:rgba(0,0,0,0.07);
+  --r:16px; --tr:all .3s cubic-bezier(.4,0,.2,1);
+}
+[data-theme="dark"] {
+  --bg:#0d1117; --bg2:#161b22; --card:#1c2333;
+  --text:#e6edf3; --text2:#b1bac4; --text3:#7d8590;
+  --bc:rgba(255,255,255,0.08);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family:'Outfit',sans-serif; background:var(--bg); color:var(--text);
+  min-height:100vh; overflow-x:hidden; transition:background .4s,color .4s;
+}
+
+#prog-bar { position:fixed; top:0; left:0; height:3px; z-index:999; background:var(--grad-bar); width:0%; transition:width .15s; }
+
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 28px; height:64px;
+  background:rgba(248,250,252,.93); backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--bc);
+}
+[data-theme="dark"] nav { background:rgba(13,17,23,.95); }
+.nav-brand { display:flex; align-items:center; gap:9px; font-size:15px; font-weight:900; color:var(--text); }
+.nav-logo-icon {
+  width:34px; height:34px; border-radius:8px; background:var(--grad);
+  display:flex; align-items:center; justify-content:center;
+  color:#fff; font-size:12px; font-weight:900; box-shadow:0 0 0 2px rgba(245,158,11,.5);
+}
+.nav-right { display:flex; align-items:center; gap:8px; }
+.theme-btn, .tool-btn {
+  height:38px; min-width:38px; border-radius:50px; border:1px solid var(--bc);
+  background:var(--card); cursor:pointer; font-size:14px; color:var(--text);
+  display:flex; align-items:center; justify-content:center; gap:6px; padding:0 12px;
+  font-family:'Outfit',sans-serif; font-weight:700; transition:var(--tr);
+}
+.theme-btn { width:38px; padding:0; border-radius:50%; font-size:15px; }
+.theme-btn:hover { border-color:var(--accent); transform:rotate(20deg); }
+.tool-btn:hover { border-color:var(--accent); color:var(--accent); }
+.tool-btn.off { opacity:.55; }
+
+.hero-band {
+  margin-top:64px; background:var(--grad); padding:40px 24px 36px; text-align:center;
+  position:relative; overflow:hidden; border-bottom:4px solid var(--gold);
+}
+.hero-band::before {
+  content:''; position:absolute; inset:0;
+  background:
+    radial-gradient(circle 220px at 12% 20%, rgba(245,158,11,.22) 0%, transparent 70%),
+    radial-gradient(circle 260px at 90% 85%, rgba(16,185,129,.28) 0%, transparent 70%),
+    radial-gradient(ellipse 600px 200px at 50% 100%, rgba(255,255,255,.12) 0%, transparent 70%);
+}
+.hero-band > * { position:relative; }
+.hero-band-icon {
+  width:68px; height:68px; border-radius:20px; background:rgba(255,255,255,.2);
+  backdrop-filter:blur(8px); display:flex; align-items:center; justify-content:center;
+  font-size:30px; margin:0 auto 14px; border:1.5px solid rgba(255,255,255,.35);
+}
+.hero-band h1 { font-size:clamp(20px,4vw,30px); font-weight:900; color:#fff; margin-bottom:6px; }
+.hero-band p { font-size:13px; color:rgba(255,255,255,.85); }
+.hero-band-meta { display:flex; justify-content:center; gap:14px; margin-top:20px; flex-wrap:wrap; }
+.meta-pill {
+  background:rgba(255,255,255,.18); backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.3); border-radius:50px; padding:6px 16px;
+  font-size:12px; font-weight:700; color:#fff; display:flex; align-items:center; gap:6px;
+}
+.meta-pill i { color:var(--gold); }
+
+/* CHIPS */
+.chips-wrap {
+  position:sticky; top:64px; z-index:90; background:var(--bg);
+  border-bottom:1px solid var(--bc); padding:10px 0;
+}
+.chips { display:flex; gap:8px; overflow-x:auto; padding:0 20px; max-width:860px; margin:0 auto; scrollbar-width:none; }
+.chips::-webkit-scrollbar { display:none; }
+.chip {
+  flex-shrink:0; padding:7px 14px; border-radius:50px; font-size:12px; font-weight:700;
+  background:var(--card); border:1px solid var(--bc); color:var(--text2);
+  text-decoration:none; transition:var(--tr); white-space:nowrap;
+}
+.chip:hover, .chip.active { background:var(--grad); color:#fff; border-color:transparent; }
+
+.shell { max-width:860px; margin:0 auto; padding:24px 20px 80px; }
+
+/* SECTION */
+.sec { margin-bottom:34px; scroll-margin-top:130px; }
+.sec-head {
+  display:flex; align-items:center; gap:12px; background:var(--grad); color:#fff;
+  padding:14px 18px; border-radius:16px 16px 0 0; border-bottom:3px solid var(--gold);
+}
+.sec-icon {
+  width:38px; height:38px; border-radius:10px; background:rgba(255,255,255,.2);
+  display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0;
+}
+.sec-title { font-size:17px; font-weight:900; line-height:1.3; }
+.sec-count { margin-left:auto; font-size:11px; font-weight:700; background:rgba(255,255,255,.2); padding:3px 10px; border-radius:50px; white-space:nowrap; }
+.sec-body {
+  background:var(--card); border:1px solid var(--bc); border-top:none;
+  border-radius:0 0 16px 16px; padding:14px; display:flex; flex-direction:column; gap:12px;
+  box-shadow:0 4px 20px rgba(0,0,0,.05);
+}
+
+.subhead {
+  font-size:13px; font-weight:900; color:var(--navy); padding:8px 12px;
+  background:rgba(var(--accent-rgb),.08); border-left:4px solid var(--gold);
+  border-radius:8px; direction:ltr; text-align:left; margin-top:6px;
+}
+[data-theme="dark"] .subhead { color:#7dd3fc; }
+
+/* POINT */
+.pt {
+  border:1px solid var(--bc); border-radius:14px; overflow:hidden; background:var(--bg);
+  transition:var(--tr);
+}
+.pt:hover { border-color:rgba(var(--accent-rgb),.4); box-shadow:0 4px 14px var(--accent-glow); }
+.pt.sub { margin-left:22px; border-left:3px solid var(--teal); }
+.pt.done { opacity:.55; }
+
+.pt-en {
+  display:flex; gap:10px; align-items:flex-start; padding:13px 14px;
+  font-size:15px; font-weight:700; line-height:1.6; direction:ltr; text-align:left;
+  background:var(--card); cursor:pointer;
+}
+.pt-n {
+  min-width:26px; height:26px; border-radius:8px; background:var(--grad); color:#fff;
+  font-size:11px; font-weight:900; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px;
+}
+.pt-ar {
+  padding:12px 16px; font-size:14.5px; line-height:1.9; color:var(--text);
+  direction:rtl; text-align:right; border-top:1px dashed var(--bc);
+  font-family:'Segoe UI',Tahoma,'Outfit',sans-serif;
+}
+.pt-ar .tag, .pt-ex .tag {
+  display:inline-block; font-size:11px; font-weight:900; padding:2px 9px; border-radius:6px; margin-left:8px; vertical-align:middle;
+}
+.pt-ar .tag { background:rgba(14,116,144,.12); color:var(--teal); }
+[data-theme="dark"] .pt-ar .tag { color:#5eead4; }
+.pt-ex {
+  padding:12px 16px; font-size:14px; line-height:1.9; color:var(--text2);
+  direction:rtl; text-align:right; border-top:1px dashed var(--bc);
+  background:rgba(245,158,11,.07); border-right:4px solid var(--gold);
+  font-family:'Segoe UI',Tahoma,'Outfit',sans-serif;
+}
+.pt-ex .tag { background:rgba(245,158,11,.2); color:#b45309; }
+[data-theme="dark"] .pt-ex .tag { color:#fbbf24; }
+body.hide-ex .pt-ex { display:none; }
+body.hide-ar .pt-ar { display:none; }
+
+/* FIGURES */
+.fig { margin:4px 0; display:flex; justify-content:center; }
+.photo { width:100%; max-width:560px; border-radius:14px; border:1px solid var(--bc); box-shadow:0 4px 16px rgba(0,0,0,.08); }
+.org { display:flex; flex-direction:column; align-items:center; gap:2px; padding:14px; width:100%; max-width:360px; }
+.org-box {
+  width:100%; text-align:center; padding:10px 14px; border-radius:12px; font-size:14px; font-weight:700;
+  background:var(--card); border:1.5px solid var(--bc); color:var(--text);
+}
+.org-box.me { background:var(--grad); color:#fff; border-color:var(--gold); box-shadow:0 4px 14px var(--accent-glow); }
+.org-arrow { color:var(--teal); font-weight:900; font-size:16px; line-height:1; }
+
+footer {
+  background:var(--bg2); border-top:3px solid; border-image:var(--grad-bar) 1;
+  padding:22px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;
+}
+.footer-brand { font-size:14px; font-weight:700; }
+.footer-brand span { color:var(--accent); }
+.footer-tg { display:flex; align-items:center; gap:5px; text-decoration:none; color:#229ED9; font-size:12px; font-weight:600; }
+
+@media (max-width:560px) {
+  nav { padding:0 12px; }
+  .nav-brand span { display:none; }
+  .shell { padding:16px 12px 60px; }
+  .pt.sub { margin-left:12px; }
+  .tool-btn span { display:none; }
+  .sec-count { display:none; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog-bar"></div>
+
+<nav>
+  <div class="nav-brand">
+    <div class="nav-logo-icon">GT</div>
+    <span>GHAITH TEAM</span>
+  </div>
+  <div class="nav-right">
+    <button class="tool-btn" id="btnAr" title="Arabic"><i class="fa-solid fa-language"></i><span>الشرح</span></button>
+    <button class="tool-btn" id="btnEx" title="Examples"><i class="fa-solid fa-lightbulb"></i><span>عشان تفهمها</span></button>
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<div class="hero-band">
+  <div class="hero-band-icon">👩‍⚕️</div>
+  <h1>Staff Nurse</h1>
+  <p>Nursing Management</p>
+  <div class="hero-band-meta">
+    <div class="meta-pill"><i class="fa-solid fa-language"></i> ببساطة مع غيث</div>
+  </div>
+</div>
+
+<div class="chips-wrap"><div class="chips" id="chips"></div></div>
+
+<div class="shell" id="app"></div>
+
+<footer>
+  <div class="footer-brand">GHAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg"><i class="fa-brands fa-telegram"></i> @nursing2bu</a>
+</footer>
+
+<script>
+/* Item format: [English, Arabic explanation, Example, level]  |  {h:"sub heading"}  |  {fig:"html"} */
+const SECTIONS = [
+ {
+  "id": "intro",
+  "icon": "📖",
+  "title": "Introduction",
+  "items": [
+   [
+    "The staff nurse is an active member of the multidisciplinary team and collaborates in the development, execution and evaluation of the multidisciplinary plan of care.",
+    "الـ staff nurse عضو فعّال في الفريق الطبي المتعدد التخصصات، يعني بتشارك الدكتور والصيدلي وباقي التخصصات في وضع خطة رعاية المريض وتنفيذها وتقييمها، مش شغالة لوحدها.",
+    "مريض عنده سكر وجرح عملية: الممرضة بتبلّغ الدكتور بحالة الجرح، وأخصائي التغذية يظبط الأكل، وكلهم ماشيين على خطة واحدة، وهي بتتابع التنفيذ وتقيّم النتيجة.",
+    0
+   ],
+   [
+    "The staff nurse considers factors related to safety, effectiveness and cost in planning and delivering care.",
+    "وهي بتخطط وبتقدم الرعاية بتحط في حسابها 3 حاجات: الأمان، والفاعلية (إن الرعاية تجيب نتيجة)، والتكلفة.",
+    "تحط حواجز أمان على سرير مريض ممكن يقع (أمان)، وتقلّبه بانتظام عشان قرح الفراش ما تحصلش (فاعلية)، وتستخدم المستلزمات من غير إسراف (تكلفة).",
+    0
+   ],
+   [
+    "The staff nurse’s decisions and actions with patients and families are determined in an ethical manner.",
+    "قراراتها وتصرفاتها مع المرضى وأهاليهم لازم تتحكم فيها الأخلاقيات: احترام وسرية وعدل.",
+    "أهل مريض سألوها عن حالة مريض تاني في الأوضة، ترفض تقولهم لأن ده سر المريض.",
+    0
+   ],
+   [
+    "Staff nurse utilizes research findings in his/her practice.",
+    "الـ staff nurse بتستخدم نتايج الأبحاث في شغلها، يعني بتشتغل بالدليل العلمي مش بالعادة.",
+    "أبحاث أثبتت إن غسل الإيدين بيقلل العدوى، فهي بتلتزم بيه في كل مرة مش بس لما حد يبصلها.",
+    0
+   ],
+   [
+    "He/she demonstrates knowledge of and participates in Improving Organizational Performance activities.",
+    "بتبقى عارفة ومشاركة في أنشطة تحسين أداء المنظمة (المستشفى).",
+    "تشارك في لجنة مكافحة العدوى بالمستشفى أو في مشروع لتقليل وقت انتظار المرضى.",
+    0
+   ],
+   [
+    "The staff nurse acquires and maintains knowledge in nursing practice and assumes responsibility for the professional development of self, other nursing staff and students.",
+    "بتكتسب معلومات في الممارسة التمريضية وتحافظ عليها، ومسؤولة عن تطوير نفسها وتطوير زمايلها في التمريض والطلبة.",
+    "تحضر ورشة عن جهاز جديد في القسم، وبعدين تعلّم زميلتها وطالب التمريض إزاي يستخدموه.",
+    0
+   ]
+  ]
+ },
+ {
+  "id": "def",
+  "icon": "📌",
+  "title": "Definition of staff nurse",
+  "items": [
+   [
+    "Staff nurse is a qualified, registered nurse who provides direct patient care in hospitals, clinics, or other healthcare settings under the supervision of senior nurses or physicians.",
+    "الـ staff nurse ممرضة مؤهلة ومسجلة (عندها ترخيص) بتقدم رعاية مباشرة للمريض في المستشفيات أو العيادات أو أي مكان رعاية صحية، وبتشتغل تحت إشراف الممرضين الأكبر منها أو الأطباء.",
+    "ممرضة في قسم الباطنة بتقيس الضغط وتدي الأدوية، ولو حصلت حاجة مش متأكدة منها بترجع للـ head nurse أو الدكتور.",
+    0
+   ],
+   [
+    "Staff nurse is a professionally qualified and registered nurse who provides comprehensive nursing care to patients within a healthcare facility.",
+    "هي ممرضة مؤهلة مهنياً ومسجلة، بتقدم رعاية تمريضية شاملة للمرضى جوه المنشأة الصحية.",
+    "بتتعامل مع المريض كله: جسمه ونفسيته واحتياجاته، مش بس بتديله الدوا وتمشي.",
+    0
+   ],
+   [
+    "They are responsible for delivering direct bedside care, administering treatments and medications as prescribed, observing and assessing patients’ conditions, maintaining accurate clinical records, and ensuring that the physical, emotional, and psychological needs of patients are met.",
+    "مسؤوليتها: تقدم الرعاية المباشرة جنب سرير المريض، وتدي العلاجات والأدوية زي ما اتكتبت، وتلاحظ وتقيّم حالة المرضى، وتسجل في الملفات بدقة، وتتأكد إن احتياجات المريض الجسدية والعاطفية والنفسية متلباة.",
+    "الصبح تقيس العلامات الحيوية، وتدي الدوا في ميعاده، وتلاحظ إن مريض قلقان قبل العملية فتطمنه، وتكتب كل ده في ملف المريض.",
+    0
+   ],
+   [
+    "Staff nurses act as a vital link between patients, their families, and the multidisciplinary healthcare team by promoting effective communication, health education.",
+    "الـ staff nurse حلقة وصل مهمة بين المريض وأهله وفريق الرعاية الصحية، عن طريق التواصل الفعّال والتثقيف الصحي.",
+    "الدكتور شرح للأهل وهما مش فاهمين، فالممرضة بتبسطلهم الكلام وتعلمهم إزاي يعتنوا بالمريض في البيت.",
+    0
+   ]
+  ]
+ },
+ {
+  "id": "qual",
+  "icon": "🎓",
+  "title": "Qualification of the staff nurse",
+  "items": [
+   {
+    "h": "1. The professional qualifications:"
+   },
+   [
+    "Graduate of an accredited school of nursing.",
+    "تكون خريجة مدرسة أو كلية تمريض معتمدة.",
+    "خريجة كلية تمريض في جامعة معترف بيها، مش مكان مش معتمد.",
+    0
+   ],
+   [
+    "Membership in nursing syndicate,",
+    "تكون عضوة في نقابة التمريض.",
+    "قبل ما تبدأ شغل بتطلع كارنيه النقابة.",
+    0
+   ],
+   [
+    "Licensure is must.",
+    "الترخيص إجباري ومن غيره ما ينفعش تشتغل.",
+    "زي رخصة السواقة بالظبط: من غيرها ما تسوقش العربية.",
+    0
+   ],
+   [
+    "Past experience is generally not required, but it is preferred when working in special a care units",
+    "الخبرة السابقة في العموم مش شرط، لكن بتتفضّل لو هتشتغل في وحدات الرعاية الخاصة.",
+    "خريجة جديدة تقدر تشتغل في قسم الباطنة، لكن العناية المركزة غالباً بيفضّلوا اللي عندها خبرة قبل كده.",
+    0
+   ],
+   [
+    "(Advanced knowledge required based on area of specialization (intensive care or dialysis)",
+    "لازم معرفة متقدمة حسب مجال التخصص (زي العناية المركزة أو الغسيل الكلوي).",
+    "ممرضة الغسيل الكلوي لازم تعرف تتعامل مع ماكينة الغسيل ومتابعة المريض أثناء الجلسة.",
+    0
+   ],
+   [
+    "Continue professional development activities.",
+    "تكمّل أنشطة التطوير المهني.",
+    "تحضر كورسات وورش ومؤتمرات تمريض بشكل مستمر.",
+    0
+   ],
+   {
+    "h": "2. The personal qualifications:"
+   },
+   [
+    "Good physical and mental health",
+    "صحة جسدية ونفسية كويسة، لأن الشغل فيه مجهود وضغط.",
+    "تقدر تقف ساعات طويلة وتحرك مريض وفي نفس الوقت تفضل هادية الأعصاب.",
+    0
+   ],
+   [
+    "Excellent communication and interpersonal skills",
+    "مهارات تواصل وعلاقات إنسانية ممتازة.",
+    "مريض خايف من العملية، فتكلمه بهدوء وتسمع كلامه وتطمنه.",
+    0
+   ],
+   [
+    "Cheerful and accept criticism",
+    "بشوشة وتتقبل النقد.",
+    "الـ head nurse نبّهتها إنها نسيت تسجل حاجة، فتقول «حاضر هظبطها» من غير ما تتضايق.",
+    0
+   ],
+   [
+    "Loyalty and sense of belonging",
+    "ولاء وإحساس بالانتماء للمهنة والمكان اللي بتشتغل فيه.",
+    "تحافظ على سمعة القسم وتفضل ملتزمة بشغلها حتى وقت الضغط.",
+    0
+   ],
+   [
+    "Able to work in a multicultural team.",
+    "تقدر تشتغل مع فريق من ثقافات مختلفة.",
+    "تشتغل مع زملاء من بلاد أو ديانات مختلفة وتحترم عاداتهم.",
+    0
+   ],
+   [
+    "Maintain a positive attitude in a fast-paced environment.",
+    "تحافظ على نظرة إيجابية في بيئة شغل سريعة.",
+    "الاستقبال زحمة والحالات داخلة ورا بعض، وهي لسه ماسكة أعصابها ومتفائلة.",
+    0
+   ]
+  ]
+ },
+ {
+  "id": "place",
+  "icon": "🧭",
+  "title": "Place of the staff nurse",
+  "items": [
+   [
+    "The staff nurse is almost on the bottom of the nursing service organization chart.",
+    "الـ staff nurse تقريباً في آخر الهرم التنظيمي لخدمات التمريض.",
+    "الهرم من فوق لتحت: مدير التمريض، المشرفة، الـ head nurse، الـ staff nurse، وتحتها مساعدين التمريض (الشكل تحت).",
+    0
+   ],
+   {
+    "fig": "<div class=\"org\">\n<div class=\"org-box\">Nursing director</div><div class=\"org-arrow\">↓</div>\n<div class=\"org-box\">Nursing supervisor</div><div class=\"org-arrow\">↓</div>\n<div class=\"org-box\">Head nurse</div><div class=\"org-arrow\">↓</div>\n<div class=\"org-box me\">staff nurse</div><div class=\"org-arrow\">↓</div>\n<div class=\"org-box\">Nursing aids or assistant</div></div>"
+   },
+   [
+    "She reports to either the team leader or head nurse.",
+    "هي بتقدّم تقاريرها وبتتبع إما للـ team leader أو للـ head nurse.",
+    "في نص الشيفت لقت مشكلة في الوحدة، فتروح تبلّغ الـ head nurse.",
+    0
+   ],
+   [
+    "She also responsible to supervise assistant nurses, nurses aids or student nurse ; if there are any of them in the unit.",
+    "ومسؤولة كمان إنها تشرف على مساعدين التمريض (assistant nurses) أو nurses aids أو طالب التمريض لو في حد منهم موجود في الوحدة.",
+    "لو في طالب تمريض في الوحدة بيقيس الحرارة، تتابعه وتصحّحله لو غلط.",
+    0
+   ]
+  ]
+ },
+ {
+  "id": "types",
+  "icon": "🗂️",
+  "title": "Types of staff nurse",
+  "items": [
+   {
+    "h": "1. Based on Workplace"
+   },
+   [
+    "Hospital Staff Nurse – works in general or specialized hospitals.",
+    "ممرضة المستشفى: بتشتغل في المستشفيات العامة أو المتخصصة.",
+    "ممرضة في مستشفى عام، أو في مستشفى متخصصة زي مستشفى القلب.",
+    0
+   ],
+   [
+    "Clinic Staff Nurse – works in outpatient clinics .",
+    "ممرضة العيادة: بتشتغل في العيادات الخارجية (المريض بييجي ويمشي من غير ما يبات).",
+    "ممرضة في عيادة سكر بتقيس السكر والوزن للمريض قبل ما يدخل للدكتور.",
+    0
+   ],
+   [
+    "Community Health Nurse – provides nursing care in the community, e.g., vaccinations, health education.",
+    "ممرضة صحة المجتمع: بتقدم الرعاية التمريضية في المجتمع، زي التطعيمات والتثقيف الصحي.",
+    "ممرضة في وحدة صحية بتدي تطعيمات للأطفال وتعمل ندوة توعية للأمهات.",
+    0
+   ],
+   {
+    "h": "2. Based on Specialty"
+   },
+   [
+    "Medical Nurse – cares for patients with internal medicine conditions (e.g., diabetes, hypertension.)",
+    "ممرضة باطنة: بتهتم بمرضى الأمراض الباطنية (زي السكر وضغط الدم).",
+    "تتابع مريض سكر وضغط وتدي الأنسولين وتقيس العلامات الحيوية.",
+    0
+   ],
+   [
+    "Surgical Nurse – provides care before and after surgical operations.",
+    "ممرضة جراحة: بتقدم الرعاية قبل وبعد العمليات الجراحية.",
+    "تجهّز المريض قبل العملية، وبعدها تتابع الجرح والعلامات الحيوية.",
+    0
+   ],
+   [
+    "Pediatric Nurse – specializes in children’s health .",
+    "ممرضة أطفال: متخصصة في صحة الأطفال.",
+    "تحسب جرعة الدوا لطفل حسب وزنه وتتعامل معاه ومع أمه بأسلوب يناسب سنه.",
+    0
+   ],
+   [
+    "Maternity/Obstetric Nurse – cares for pregnant women, delivery, and postpartum care .",
+    "ممرضة نساء وتوليد: بتهتم بالست الحامل وبالولادة وبالرعاية بعد الولادة.",
+    "تتابع سيدة حامل في العيادة، وتساعد في الولادة، وبعدها تعتني بالأم والمولود.",
+    0
+   ],
+   [
+    "ICU / Critical Care Nurse – works in intensive care units with critically ill patients.",
+    "ممرضة عناية مركزة: بتشتغل في وحدات العناية المركزة مع المرضى الحالتهم حرجة.",
+    "تراقب مريض على جهاز تنفس صناعي بشكل مستمر.",
+    0
+   ],
+   [
+    "Emergency Nurse – works in emergency departments",
+    "ممرضة طوارئ: بتشتغل في أقسام الطوارئ.",
+    "حادثة عربية والإصابات داخلة، وهي بتستقبلهم وتتصرف بسرعة.",
+    0
+   ],
+   {
+    "h": "3. Based on Educational Level"
+   },
+   [
+    "Practical Nurse (Diploma Nurse) – holds a diploma in nursing.",
+    "ممرضة عملية (دبلوم): معاها دبلوم تمريض.",
+    "خريجة مدرسة أو معهد تمريض دبلوم.",
+    0
+   ],
+   [
+    "Registered Nurse (Bachelor’s degree) – holds a bachelor’s degree in nursing .",
+    "ممرضة مسجلة (بكالوريوس): معاها بكالوريوس تمريض.",
+    "خريجة كلية التمريض.",
+    0
+   ],
+   [
+    "Specialized Nurse (Master’s/Doctorate) – has postgraduate studies in a specific field (e.g., critical care nursing)",
+    "ممرضة متخصصة (ماجستير/دكتوراه): عملت دراسات عليا في مجال معين (زي تمريض الرعاية الحرجة).",
+    "ممرضة عملت ماجستير في تمريض الرعاية الحرجة فبقت متخصصة فيه.",
+    0
+   ],
+   {
+    "h": "4. Based on Role / Seniority"
+   },
+   [
+    "Junior Staff Nurse – beginner, works under direct supervision .",
+    "ممرضة جونيور: مبتدئة وبتشتغل تحت إشراف مباشر.",
+    "في أول شهور شغل، وفي ممرضة أقدم واقفة جنبها وهي بتعمل أي إجراء.",
+    0
+   ],
+   [
+    "Senior Staff Nurse – more experienced, may guide junior nurses .",
+    "ممرضة سينيور: خبرتها أكتر وممكن توجّه الممرضات الجونيور.",
+    "ممرضة بقالها سنين في القسم بتعلّم الجديدات الشغل.",
+    0
+   ],
+   [
+    "Charge Nurse / Head Nurse – responsible for managing a ward or a shift .",
+    "ممرضة مسؤولة (charge) / رئيسة تمريض (head nurse): مسؤولة عن إدارة قسم أو شيفت.",
+    "هي اللي بتوزع المرضى على الممرضات وبتتابع سير الشيفت كله.",
+    0
+   ]
+  ]
+ },
+ {
+  "id": "skills",
+  "icon": "🛠️",
+  "title": "Skills Needed for staff nurse",
+  "items": [
+   [
+    "Active Listening: Giving full attention to what other people are saying, taking time to understand the points being made, asking questions as appropriate, and not interrupting at inappropriate times.",
+    "الإنصات الفعّال: إنك تدي اهتمامك الكامل للي بيتكلم، وتاخد وقت تفهم كلامه، وتسأل لما يلزم، ومتقاطعوش في وقت مش مناسب.",
+    "مريض بيشرح وجعه، فتسمعه للآخر وبعدين تسأله «الوجع بيزيد لما تتحرك؟».",
+    0
+   ],
+   [
+    "Reading Comprehension: Understanding written sentences and paragraphs in work related documents.",
+    "فهم المقروء: إنك تفهم الجمل والفقرات المكتوبة في مستندات الشغل.",
+    "تقرأ أوامر الدكتور في الملف وتفهم الجرعة والميعاد صح.",
+    0
+   ],
+   [
+    "Critical Thinking: Using logic and reasoning to identify the strengths and weaknesses of alternative solutions, conclusions or approaches to problems.",
+    "التفكير الناقد: إنك تستخدم المنطق والتفكير عشان تعرف نقط القوة والضعف في الحلول أو الاستنتاجات أو الطرق البديلة للمشاكل.",
+    "ضغط المريض نازل: تفكر هل السبب الدوا ولا نزيف ولا جفاف، وتوازن بين الاحتمالات قبل ما تتصرف.",
+    0
+   ],
+   [
+    "Instructing: Teaching others how to do something.",
+    "التوجيه: إنك تعلّم غيرك إزاي يعمل حاجة.",
+    "تعلّم مريض إزاي ياخد حقنة الأنسولين بنفسه.",
+    0
+   ],
+   [
+    "Speaking: Talking to others to convey information effectively.",
+    "التحدث: إنك تتكلم مع الناس وتوصّل المعلومة بشكل فعّال.",
+    "تبلّغ الدكتور بحالة المريض بكلام واضح ومختصر.",
+    0
+   ],
+   [
+    "Time Management -- Managing one's own time and the time of others.",
+    "إدارة الوقت: إنك تنظم وقتك ووقت غيرك.",
+    "ترتب شغل الشيفت: مواعيد الأدوية الأول، وبعدها التمريض الروتيني.",
+    0
+   ],
+   [
+    "Service Orientation: Actively looking for ways to help people.",
+    "التوجه نحو الخدمة: إنك تدور بنشاط على طرق تساعد بيها الناس.",
+    "تلاحظ إن المريض عايز مية وهو مش قادر يطلب، فتجيبله من غير ما يسأل.",
+    0
+   ],
+   [
+    "Monitoring : Monitoring/Assessing performance of yourself, other individuals, or organizations to make improvements or take corrective action.",
+    "المراقبة: إنك تراقب وتقيّم أداء نفسك أو أداء غيرك أو أداء المنظمات عشان تحسّن أو تاخد إجراء تصحيحي.",
+    "تراجع نفسها آخر الشيفت: «هل سجلت كل الأدوية؟» ولو لقت نقص تصلحه.",
+    0
+   ],
+   [
+    "Writing : Communicating effectively in writing as appropriate for the needs of the audience.",
+    "الكتابة: إنك تتواصل بالكتابة بشكل فعّال يناسب احتياج اللي هيقرا.",
+    "تكتب تقرير تسليم الشيفت بشكل واضح عشان الممرضة اللي بعدها تفهمه.",
+    0
+   ],
+   [
+    "Active Learning -- Understanding the implications of new information for both current and future problem-solving and decision-making.",
+    "التعلّم النشط: إنك تفهم أثر المعلومة الجديدة على حل المشاكل واتخاذ القرارات حالياً ومستقبلاً.",
+    "اتعلمت بروتوكول جديد لمنع العدوى، فبتطبقه من النهارده وتبني عليه قراراتها الجاية.",
+    0
+   ],
+   [
+    "Coordination: Adjusting actions in relation to others' actions.",
+    "التنسيق: إنك تظبط تصرفاتك بالنسبة لتصرفات الناس التانية.",
+    "الدكتور داخل يعمل إجراء للمريض، فتأجل إدّاء الدوا لحد ما يخلص.",
+    0
+   ],
+   [
+    "Judgment and Decision Making: Considering the relative costs and benefits of potential actions to choose the most appropriate one.",
+    "الحكم واتخاذ القرار: إنك تفكر في تكلفة وفايدة كل تصرف ممكن وتختار الأنسب.",
+    "عندها مريضين محتاجين مساعدة في نفس الوقت: تقرر مين حالته أخطر وتبدأ بيه.",
+    0
+   ],
+   [
+    "Equipment Selection: Determining the kind of tools and equipment needed to do a job.",
+    "اختيار المعدات: إنك تحدد نوع الأدوات والمعدات اللازمة للشغل.",
+    "هتغيّر على جرح: تجهز المقص والشاش والمطهر المناسبين قبل ما تبدأ.",
+    0
+   ]
+  ]
+ },
+ {
+  "id": "resp",
+  "icon": "📋",
+  "title": "Responsibilities of staff nurses",
+  "items": [
+   {
+    "h": "1. Direct Patient Care"
+   },
+   [
+    "Provide holistic care to patients including personal hygiene, feeding, mobility, and comfort measures.",
+    "تقدم رعاية شاملة للمرضى تشمل النظافة الشخصية، والتغذية، والحركة، وإجراءات الراحة.",
+    "تساعد مريض مش قادر يتحرك في الاستحمام، وتأكله، وتقلّبه، وتظبطله المخدة.",
+    0
+   ],
+   [
+    "Prepare and administer oral, intravenous, and intramuscular medications as prescribed.",
+    "تحضّر وتدي الأدوية اللي بالفم، والوريد، والعضل زي ما اتكتبت.",
+    "الدكتور كتب مضاد حيوي وريدي كل 8 ساعات، فتجهزه وتديه في ميعاده.",
+    0
+   ],
+   {
+    "fig": "<img class=\"photo\" alt=\"Staff nurse giving medication to a patient\" src=\"data:image/jpeg;base64,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\">"
+   },
+   [
+    "Ensure accurate documentation of all medications and treatments given.",
+    "تتأكد إن كل الأدوية والعلاجات اللي اتدّت متسجلة بدقة.",
+    "بعد ما تدي الدوا تكتب اسمه وجرعته ووقته وتمضي.",
+    0
+   ],
+   [
+    "Support patients with daily living activities and ensure dignity and respect are maintained.",
+    "تساعد المرضى في أنشطة حياتهم اليومية وتحافظ على كرامتهم واحترامهم.",
+    "وهي بتساعد مريض في الاستحمام تقفل الستارة وتغطيه عشان خصوصيته.",
+    0
+   ],
+   [
+    "Observe physical and psychological changes in patients.",
+    "تلاحظ التغيرات الجسدية والنفسية اللي بتحصل للمرضى.",
+    "تلاحظ إن مريض كان بيتكلم وبقى ساكت ومش بيأكل، وحرارته ارتفعت.",
+    0
+   ],
+   [
+    "Identify early signs of deterioration and report immediately to physicians or senior nurses.",
+    "تلاحظ العلامات المبكرة لتدهور الحالة وتبلّغ فورا الأطباء أو الممرضين الأكبر.",
+    "نبض المريض زاد ونفسه بقى سريع، فتبلغ الدكتور على طول ومتستناش.",
+    0
+   ],
+   {
+    "h": "2. Patient and Family Education"
+   },
+   [
+    "Educate patients and their families about diagnosis, treatment, and recovery process.",
+    "تثقّف المرضى وأهاليهم عن التشخيص والعلاج ومرحلة التعافي.",
+    "تشرح لأهل مريض عنده التهاب رئوي إيه المرض ده، وهياخد علاج إيه، وإمتى هيتحسن.",
+    0
+   ],
+   [
+    "Teach patients how to manage chronic illnesses (e.g., diabetes, hypertension).",
+    "تعلّم المرضى إزاي يتعاملوا مع الأمراض المزمنة (زي السكر وضغط الدم).",
+    "تعلّم مريض السكر يقيس السكر بنفسه وينظم أكله.",
+    0
+   ],
+   [
+    "Promote healthy lifestyle practices and disease prevention strategies.",
+    "تشجع على ممارسات نمط الحياة الصحي واستراتيجيات الوقاية من الأمراض.",
+    "تنصح المرضى وأهاليهم بالمشي والأكل الصحي وتقليل الملح عشان يمنعوا المرض.",
+    0
+   ],
+   {
+    "h": "3. Infection Control and Safety"
+   },
+   [
+    "Adhere to infection prevention protocols such as hand hygiene and use of PPE.",
+    "تلتزم ببروتوكولات منع العدوى زي نظافة الإيدين واستخدام معدات الوقاية الشخصية (PPE).",
+    "تغسل إيديها قبل وبعد كل مريض وتلبس الجوانتي والماسك لما يلزم.",
+    0
+   ],
+   [
+    "Maintain a clean, safe, and therapeutic environment for patients.",
+    "تحافظ على بيئة نضيفة وآمنة وعلاجية للمرضى.",
+    "تتأكد إن الأرض جافة عشان محدش يتزحلق، وإن الأوضة نضيفة ومرتبة.",
+    0
+   ],
+   [
+    "Properly handle and dispose of medical waste and sharps.",
+    "تتعامل مع المخلفات الطبية والأدوات الحادة وتتخلص منها بشكل صحيح.",
+    "بعد الحقنة ترمي السرنجة في صندوق الأدوات الحادة مش في الزبالة العادية.",
+    0
+   ],
+   {
+    "h": "4. Communication and Collaboration"
+   },
+   [
+    "Communicate effectively with patients, families, doctors, and colleagues.",
+    "تتواصل بشكل فعّال مع المرضى والأهالي والأطباء والزملاء.",
+    "تشرح للمريض الإجراء بكلام بسيط، وتبلّغ الدكتور بتفاصيل واضحة.",
+    0
+   ],
+   [
+    "Give accurate handover during shift changes.",
+    "تسلّم الشيفت بدقة وقت تغيير الشيفتات.",
+    "آخر الشيفت تقول للممرضة الجاية: مين المرضى، حالتهم إيه، وإيه اللي لسه مستني يتعمل.",
+    0
+   ],
+   [
+    "Work collaboratively in multidisciplinary healthcare teams.",
+    "تشتغل بتعاون جوه فرق الرعاية الصحية المتعددة التخصصات.",
+    "تشارك في اجتماع الفريق مع الدكتور وأخصائي العلاج الطبيعي لوضع خطة المريض.",
+    0
+   ],
+   {
+    "h": "5. Discharge Planning"
+   },
+   [
+    "Prepare patients and families for safe discharge.",
+    "تجهّز المرضى وأهاليهم لخروج آمن من المستشفى.",
+    "قبل خروج مريض بعد عملية، تتأكد إن أهله فاهمين هيتعاملوا معاه إزاي في البيت.",
+    0
+   ],
+   [
+    "Provide instructions for home care, medication, and follow-up visits.",
+    "تدي تعليمات للرعاية المنزلية، والأدوية، وزيارات المتابعة.",
+    "تديهم ورقة فيها مواعيد الدوا، وإزاي يغيّروا على الجرح، وميعاد المتابعة.",
+    0
+   ],
+   {
+    "h": "6. Advocacy for Patients"
+   },
+   [
+    "Act as a patient advocate by ensuring their rights and needs are respected.",
+    "تتصرف كمدافعة عن المريض وتتأكد إن حقوقه واحتياجاته محترمة.",
+    "مريض رافض إجراء، فتتأكد إن رفضه اتسمع وإن اتشرحله كل حاجة قبل أي قرار.",
+    0
+   ],
+   [
+    "Speak up on behalf of patients when they cannot express themselves.",
+    "تتكلم نيابة عن المرضى لما ميقدروش يعبّروا عن نفسهم.",
+    "مريض فاقد الوعي أو طفل صغير، فتوصّل احتياجاته وألمه للدكتور.",
+    0
+   ],
+   {
+    "h": "7. Resource and Equipment Management"
+   },
+   [
+    "Ensure availability and proper use of medical equipment.",
+    "تتأكد إن المعدات الطبية متوفرة ومستخدمة صح.",
+    "تتأكد إن جهاز قياس الضغط وجهاز الأكسجين شغالين وجاهزين، وإن الكل بيستخدمهم صح.",
+    0
+   ],
+   [
+    "Report malfunctioning or missing equipment.",
+    "تبلّغ عن المعدات العاطلة أو الناقصة.",
+    "لقت جهاز الشفط عطلان، فتبلغ المسؤولة فوراً عشان يتصلح أو يتبدل.",
+    0
+   ],
+   {
+    "h": "8. Professional Development"
+   },
+   [
+    "Stay updated with the latest nursing practices and healthcare technologies.",
+    "تفضل مواكبة لأحدث ممارسات التمريض وتكنولوجيا الرعاية الصحية.",
+    "تتابع الأدلة الإرشادية الجديدة وتتعلم الأجهزة الحديثة اللي دخلت القسم.",
+    0
+   ],
+   [
+    "Participate in workshops, seminars, and continuous nursing education.",
+    "تشارك في الورش والندوات والتعليم التمريضي المستمر.",
+    "تحضر ورشة عن الإنعاش القلبي الرئوي وتاخد شهادة حضور.",
+    0
+   ],
+   [
+    "Adhere to nursing ethics, legal responsibilities, and professional standards.",
+    "تلتزم بأخلاقيات التمريض والمسؤوليات القانونية والمعايير المهنية.",
+    "متدّيش دوا من غير أمر طبي، ومتفشيش أسرار المريض.",
+    0
+   ]
+  ]
+ }
+];
+
+/* ===== RENDER ===== */
+const app = document.getElementById('app');
+const chips = document.getElementById('chips');
+let totalPts = 0;
+
+SECTIONS.forEach((s, si) => {
+  let n = 0;
+  let body = '';
+  s.items.forEach(it => {
+    if (it.h) { body += `<div class="subhead">${it.h}</div>`; return; }
+    if (it.fig) { body += `<div class="fig">${it.fig}</div>`; return; }
+    n++; totalPts++;
+    const sub = it[3] ? ' sub' : '';
+    body += `<div class="pt${sub}">
+      <div class="pt-en" onclick="this.parentElement.classList.toggle('done')"><div class="pt-n">${n}</div><div>${it[0]}</div></div>
+      <div class="pt-ar"><span class="tag">شرح</span>${it[1]}</div>
+      <div class="pt-ex"><span class="tag">عشان تفهمها</span>${it[2]}</div>
+    </div>`;
+  });
+  app.insertAdjacentHTML('beforeend', `
+    <section class="sec" id="${s.id}">
+      <div class="sec-head">
+        <div class="sec-icon">${s.icon}</div>
+        <div class="sec-title">${s.title}</div>
+        <div class="sec-count">${n} points</div>
+      </div>
+      <div class="sec-body">${body}</div>
+    </section>`);
+  chips.insertAdjacentHTML('beforeend', `<a class="chip" href="#${s.id}" data-id="${s.id}">${s.icon} ${s.title.split('—')[0].split('&')[0].trim()}</a>`);
+});
+document.getElementById('totalBadge').textContent = totalPts + ' points';
+document.getElementById('secBadge').textContent = SECTIONS.length + ' sections';
+
+/* progress bar + active chip */
+const secEls = [...document.querySelectorAll('.sec')];
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  document.getElementById('prog-bar').style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+  let cur = secEls[0].id;
+  secEls.forEach(el => { if (el.getBoundingClientRect().top < 160) cur = el.id; });
+  document.querySelectorAll('.chip').forEach(c => {
+    const on = c.dataset.id === cur;
+    c.classList.toggle('active', on);
+    if (on) { const p = c.parentElement; p.scrollTo({ left: c.offsetLeft - 40, behavior: 'smooth' }); }
+  });
+}, { passive: true });
+
+/* toggles */
+function toggler(btnId, cls) {
+  const b = document.getElementById(btnId);
+  b.addEventListener('click', () => { document.body.classList.toggle(cls); b.classList.toggle('off'); });
+}
+toggler('btnAr', 'hide-ar');
+toggler('btnEx', 'hide-ex');
+
+/* theme */
+const themeBtn = document.getElementById('themeBtn');
+let theme = 'light';
+try { theme = localStorage.getItem('theme') || 'light'; } catch (e) {}
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  try { localStorage.setItem('theme', t); } catch (e) {}
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+</script>
+</body>
+</html>
