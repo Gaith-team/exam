@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Healthy Eating & Meal Planning | GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--accent:#15803d;--c2:#ea580c;--c3:#ca8a04;--c4:#be185d;
+--grad:linear-gradient(135deg,#14532d 0%,#15803d 40%,#65a30d 75%,#ea580c 100%);
+--bg:#f6faf5;--bg2:#eaf3e7;--card:#fff;--text:#14231a;--text2:#3f5546;--text3:#738a7a;--bc:rgba(20,60,30,.10);--r:16px}
+:root[data-theme="dark"]{--bg:#0b140e;--bg2:#111e15;--card:#16261b;--text:#e8f5ec;--text2:#b8d2c0;--text3:#7f9a88;--bc:rgba(255,255,255,.09);--accent:#4ade80;--c2:#fb923c;--c3:#facc15}
+html{scroll-behavior:smooth;scroll-padding-top:150px}
+body{font-family:'Outfit','Cairo',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;line-height:1.6}
+#prog{position:fixed;top:0;left:0;height:3px;width:0;z-index:999;background:linear-gradient(90deg,var(--accent),var(--c3),var(--c2),var(--c4))}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:60px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;background:rgba(246,250,245,.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--bc)}
+:root[data-theme="dark"] nav{background:rgba(11,20,14,.95)}
+.brand{display:flex;align-items:center;gap:9px;font-weight:900;font-size:15px}
+.logo{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,#15803d,#65a30d);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900}
+.theme-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--bc);background:var(--card);cursor:pointer;font-size:15px}
+.hero{margin-top:60px;background:var(--grad);padding:40px 20px 44px;text-align:center;color:#fff}
+.hero .ic{width:66px;height:66px;margin:0 auto 12px;border-radius:20px;background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center;font-size:32px}
+.hero h1{font-size:clamp(20px,4vw,30px);font-weight:900}
+.hero p{font-size:13px;opacity:.9;margin-top:4px}
+.pills{display:flex;justify-content:center;gap:10px;margin-top:18px;flex-wrap:wrap}
+.pill{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);border-radius:50px;padding:6px 16px;font-size:12px;font-weight:700}
+.chips{position:sticky;top:60px;z-index:50;display:flex;gap:8px;overflow-x:auto;padding:10px 20px;background:var(--bg);border-bottom:1px solid var(--bc);scrollbar-width:thin}
+.chip{flex:0 0 auto;text-decoration:none;color:var(--text2);font-size:12px;font-weight:600;padding:6px 12px;border-radius:50px;border:1px solid var(--bc);background:var(--card);white-space:nowrap}
+.chip b{color:var(--c2)}
+.chip:hover{border-color:var(--accent);color:var(--accent)}
+.shell{max-width:780px;margin:0 auto;padding:22px 16px 80px}
+.sec{margin-bottom:34px}
+.sec h2{display:flex;align-items:center;gap:12px;font-size:20px;font-weight:900;margin:8px 0 16px;color:var(--text)}
+.sec-num{width:34px;height:34px;border-radius:10px;background:var(--grad);color:#fff;display:flex;align-items:center;justify-content:center;font-size:15px;flex-shrink:0}
+.item{background:var(--card);border:1px solid var(--bc);border-radius:var(--r);padding:16px 18px;margin-bottom:12px;box-shadow:0 2px 12px rgba(20,90,40,.06)}
+.en{font-size:16px;font-weight:700;color:var(--text);line-height:1.6;padding-bottom:10px;border-bottom:1px dashed var(--bc);text-align:left}
+.ar{font-family:'Cairo',sans-serif;font-size:15.5px;line-height:1.9;color:var(--text2);padding:10px 12px 10px 0;margin-top:10px;border-right:4px solid var(--accent);padding-right:12px;text-align:right}
+.ex{font-family:'Cairo',sans-serif;font-size:14.5px;line-height:1.9;margin-top:10px;padding:10px 14px;border-radius:12px;background:rgba(234,88,12,.07);border:1px solid rgba(234,88,12,.2);color:var(--text2);text-align:right}
+:root[data-theme="dark"] .ex{background:rgba(251,146,60,.09)}
+.ex-label{font-weight:700;color:var(--c2);margin-left:6px}
+.tbl-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:14px;font-weight:600;border-radius:10px;overflow:hidden}
+th{background:var(--grad);color:#fff;padding:10px 12px;text-align:left}
+td{padding:10px 12px;border-bottom:1px solid var(--bc);text-align:left}
+tr.total td{font-weight:900;background:var(--bg2)}
+footer{background:var(--bg2);border-top:1px solid var(--bc);padding:20px 24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:14px;font-weight:700}
+footer span{color:var(--accent)}
+footer a{color:#229ED9;text-decoration:none;font-size:12px;font-weight:600}
+@media(max-width:480px){nav{padding:0 14px}.item{padding:14px}.en{font-size:15px}}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<nav>
+  <div class="brand"><div class="logo">GT</div>GHAITH TEAM</div>
+  <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">🌙</button>
+</nav>
+<div class="hero">
+  <div class="ic">🥗</div>
+  <h1>Healthy Eating and Meal Planning</h1>
+  <p>Applied Nutrition</p>
+<div class="pill">شرح ببساطة مع غيث</div></div>
+</div>
+<div class="chips"><a href="#s1" class="chip" dir="ltr"><b>1</b> Introduction</a><a href="#s2" class="chip" dir="ltr"><b>2</b> Principles of Healthy Eating</a><a href="#s3" class="chip" dir="ltr"><b>3</b> Energy Requirements</a><a href="#s4" class="chip" dir="ltr"><b>4</b> Distribution of Energy Among Meals</a><a href="#s5" class="chip" dir="ltr"><b>5</b> Portion Control</a><a href="#s6" class="chip" dir="ltr"><b>6</b> Building a Balanced Meal</a><a href="#s7" class="chip" dir="ltr"><b>7</b> Meal Planning</a><a href="#s8" class="chip" dir="ltr"><b>8</b> Characteristics of a Good Meal Plan</a><a href="#s9" class="chip" dir="ltr"><b>9</b> Healthy Food Substitution</a></div>
+<div class="shell">
+<section class="sec" id="s1"><h2 dir="ltr"><span class="sec-num">1</span>Introduction</h2><article class="item">
+  <div class="en" lang="en" dir="ltr">Healthy eating is a dietary pattern that provides adequate nutrients and energy while supporting health and reducing disease risk.</div>
+  <div class="ar" lang="ar" dir="rtl">الأكل الصحي معناه نظام أكل بيدّي جسمك الكفاية من العناصر الغذائية والطاقة، وفي نفس الوقت بيحافظ على صحتك وبيقلل احتمال إنك تتعب بأمراض.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> واحد بياكل أكل متوازن كل يوم فجسمه شبعان من كل حاجة ومناعته كويسة وفرصة إصابته بالسكر أو الضغط أقل.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Meal planning is the process of selecting and organizing foods and meals according to individual nutritional needs, lifestyle, food preferences, and available foods.</div>
+  <div class="ar" lang="ar" dir="rtl">تخطيط الوجبات هو إنك تختار الأكل وترتب الوجبات بحيث تناسب احتياج الشخص الغذائي، وأسلوب حياته، وإيه اللي بيحبه، وإيه الأكل المتاح عنده.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> ممرضة بتشتغل نوبتجيات وبتحب الأكل الشعبي: الخطة بتبقى وجبات سهلة بتتحضر بسرعة ومن أكل متوفر في البيت، مش خطة مستوردة ومكلفة.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">The aim of meal planning is not to create a perfect diet, but to develop a balanced, practical, and achievable eating pattern.</div>
+  <div class="ar" lang="ar" dir="rtl">الهدف من التخطيط مش إنك تعمل نظام أكل مثالي 100%، الهدف إنك توصل لنظام متوازن وعملي وتقدر فعلاً تمشي عليه.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> خطة بسيطة تقدر تلتزم بيها 6 شهور أحسن بكتير من خطة مثالية تسيبها بعد أسبوع.</div>
+</article></section>
+<section class="sec" id="s2"><h2 dir="ltr"><span class="sec-num">2</span>Principles of Healthy Eating</h2><article class="item">
+  <div class="en" lang="en" dir="ltr">Adequacy: enough energy and essential nutrients.</div>
+  <div class="ar" lang="ar" dir="rtl">الكفاية: يعني الأكل يغطي احتياجك من الطاقة (السعرات) ومن العناصر الأساسية اللي الجسم لازم ياخدها.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> لو بتاكل أقل من احتياجك هتحس بإرهاق وضعف، لأن جسمك مش واخد كفايته.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Balance: appropriate proportions among foods, nutrients, and energy.</div>
+  <div class="ar" lang="ar" dir="rtl">التوازن: يعني نسب مناسبة بين الأطعمة والعناصر الغذائية والطاقة، مش حاجة واحدة تزيد وحاجة تقل.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> طبق فيه كمية كويسة بروتين وكمية نشويات وخضار، مش طبق رز بس.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Variety/Diversity: include different foods and food groups.</div>
+  <div class="ar" lang="ar" dir="rtl">التنوع: يعني تاكل أنواع مختلفة من الأكل ومن كل المجموعات الغذائية.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> النهاردة فراخ ومعاها خضار، وبكرة سمك، وبعده عدس؛ كل نوع بيدّي عناصر مختلفة.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Moderation: limit excessive calories, added sugars, sodium, saturated fat, and highly processed foods.</div>
+  <div class="ar" lang="ar" dir="rtl">الاعتدال: يعني تقلل الزيادة في السعرات، والسكر المضاف، والصوديوم (الملح)، والدهون المشبعة، والأكل المصنّع جداً.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> مش لازم تبطل حلويات خالص، بس بدل ما تاكل كل يوم، خليها مرة في الأسبوع.</div>
+</article></section>
+<section class="sec" id="s3"><h2 dir="ltr"><span class="sec-num">3</span>Energy Requirements</h2><article class="item">
+  <div class="en" lang="en" dir="ltr">People do not all require the same amount of energy.</div>
+  <div class="ar" lang="ar" dir="rtl">الناس مش كلها محتاجة نفس كمية الطاقة (السعرات)، كل شخص ليه احتياجه.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> عامل بناء بيشيل طوب كل يوم محتاج سعرات أكتر بكتير من موظف قاعد على مكتب.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Energy requirements are affected by:</div>
+  <div class="ar" lang="ar" dir="rtl">احتياج الطاقة بيتأثر بعوامل، وهي العوامل اللي جاية تحت:</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> يعني مفيش رقم واحد يتقال لكل الناس، لازم نبص على العوامل دي الأول.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Age</div>
+  <div class="ar" lang="ar" dir="rtl">السن: احتياج الطاقة بيختلف حسب العمر.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> الطفل في مرحلة النمو محتاج طاقة بالنسبة لوزنه أكتر من راجل كبير في السن.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Sex</div>
+  <div class="ar" lang="ar" dir="rtl">النوع (ذكر أو أنثى): الجنس بيأثر على احتياج الطاقة.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> غالباً الراجل بيحتاج سعرات أكتر من الست في نفس السن لأن عنده كتلة عضلية أكبر.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Body size/composition</div>
+  <div class="ar" lang="ar" dir="rtl">حجم الجسم وتركيبته (عضل ولا دهون).</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> شخص وزنه 90 كجم محتاج طاقة أكتر من شخص وزنه 55 كجم.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Physical activity</div>
+  <div class="ar" lang="ar" dir="rtl">النشاط البدني: كل ما تتحرك أكتر بتحرق أكتر وتحتاج طاقة أكتر.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> واحد بيجري كل يوم محتاج سعرات أكتر من واحد قاعد طول اليوم.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Growth and physiological condition</div>
+  <div class="ar" lang="ar" dir="rtl">النمو والحالة الفسيولوجية: زي مرحلة النمو، أو الحمل، أو الرضاعة.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> الست الحامل أو المرضعة جسمها بيشتغل لحسابين فمحتاجة طاقة زيادة.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Health status</div>
+  <div class="ar" lang="ar" dir="rtl">الحالة الصحية: المرض أو حالة الجسم بتغير احتياج الطاقة.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> مريض عنده حروق أو عدوى جسمه بيحرق أكتر فبيحتاج طاقة أعلى من الطبيعي.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Therefore, a meal plan should be individualized.</div>
+  <div class="ar" lang="ar" dir="rtl">عشان كده خطة الأكل لازم تتعمل على مقاس كل شخص لوحده.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> ما ينفعش أديلك نفس خطة زميلك لمجرد إنكم في نفس السن، لأن نشاطكم ووزنكم مختلف.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Simple estimation: For basic educational purposes:</div>
+  <div class="ar" lang="ar" dir="rtl">تقدير بسيط: ده للأغراض التعليمية الأساسية، يعني طريقة سهلة نحسب بيها تقريباً.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> زي ما بتقدّر الوقت اللي هتوصل فيه، رقم تقريبي يفيدك مش دقيق للمللي.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Estimated energy requirement = Body weight (kg) × level of activity</div>
+  <div class="ar" lang="ar" dir="rtl">احتياج الطاقة المقدّر = وزنك بالكيلو × رقم مستوى النشاط (الأرقام تحت).</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> هتضرب وزنك في رقم يحدده نشاطك: 25 أو 30 أو 35.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">A simple guide:</div>
+  <div class="ar" lang="ar" dir="rtl">دليل بسيط للأرقام اللي هنضرب فيها:</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> تحت هتلاقي كل مستوى نشاط وقيمته.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Low activity → 25 kcal/kg/day</div>
+  <div class="ar" lang="ar" dir="rtl">نشاط قليل يعني 25 سعر حراري لكل كيلو من وزنك في اليوم.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> موظف مكتب وقاعد أغلب اليوم: يستخدم رقم 25.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Moderate activity → 30 kcal/kg/day</div>
+  <div class="ar" lang="ar" dir="rtl">نشاط متوسط يعني 30 سعر حراري لكل كيلو في اليوم.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> حد بيمشي ويتحرك شوية في شغله ويتمرن بشكل خفيف: يستخدم رقم 30.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">High activity → 35 kcal/kg/day</div>
+  <div class="ar" lang="ar" dir="rtl">نشاط عالي يعني 35 سعر حراري لكل كيلو في اليوم.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> رياضي أو عامل شغله مجهود بدني كبير: يستخدم رقم 35.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">These values are approximate estimates for learning purposes, not a substitute for detailed clinical assessment.</div>
+  <div class="ar" lang="ar" dir="rtl">الأرقام دي تقريبية للتعلم بس، ومش بديل عن التقييم الإكلينيكي المفصّل اللي بيعمله الفريق الطبي.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> في المذاكرة ممكن نحسب بيها، لكن في المستشفى مريض حالته خاصة يتقيّم بشكل أدق.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Example</div>
+  <div class="ar" lang="ar" dir="rtl">الكلمة دي معناها إن اللي جاي مسألة محلولة على القاعدة اللي فاتت.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> هنطبق القاعدة على شخص بوزن معين في السطور اللي بعد كده.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">A 60-kg adult with moderate activity:</div>
+  <div class="ar" lang="ar" dir="rtl">شخص بالغ وزنه 60 كجم ونشاطه متوسط.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> نختار رقم النشاط المتوسط وهو 30 لأن نشاطه متوسط.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">60 × 30 = 1800 kcal/day</div>
+  <div class="ar" lang="ar" dir="rtl">بنضرب الوزن (60) في رقم النشاط (30) والناتج 1800 سعر حراري في اليوم.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> 60 كيلو × 30 = 1800، يعني الشخص ده محتاج حوالي 1800 سعر يومياً.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Therefore, the estimated energy requirement is approximately 1800 kcal/day.</div>
+  <div class="ar" lang="ar" dir="rtl">يعني احتياجه من الطاقة تقريباً 1800 سعر حراري في اليوم.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> كلمة &quot;تقريباً&quot; لأن الرقم ده تقدير بسيط مش قياس دقيق.</div>
+</article></section>
+<section class="sec" id="s4"><h2 dir="ltr"><span class="sec-num">4</span>Distribution of Energy Among Meals</h2><article class="item">
+  <div class="en" lang="en" dir="ltr">Daily energy can be distributed among the main meals according to the individual&#x27;s lifestyle and preferences.</div>
+  <div class="ar" lang="ar" dir="rtl">السعرات اللي محتاجها في اليوم ممكن توزعها على الوجبات الأساسية حسب أسلوب حياة الشخص وإيه اللي يناسبه.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> واحد بيصحى بدري وجعان هياخد فطار أكبر، وواحد مبيفطرش كويس ممكن يكبّر الغدا.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">One possible distribution is:</div>
+  <div class="ar" lang="ar" dir="rtl">ده توزيع واحد من توزيعات ممكنة، مش القاعدة الوحيدة.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> التوزيع اللي تحت مجرد نموذج ممكن تمشي عليه.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Breakfast: 20–25%</div>
+  <div class="ar" lang="ar" dir="rtl">الفطار: من 20% لـ 25% من سعرات اليوم.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> لو احتياجك 1800، فطارك يبقى حوالي 360 لـ 450 سعر.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Lunch: 35–40%</div>
+  <div class="ar" lang="ar" dir="rtl">الغدا: من 35% لـ 40% من سعرات اليوم (أكبر وجبة).</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> الغدا هو الوجبة التقيلة في اليوم، فياخد النسبة الأكبر.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Dinner: 30–35%</div>
+  <div class="ar" lang="ar" dir="rtl">العشا: من 30% لـ 35% من سعرات اليوم.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> العشا أقل شوية من الغدا في الكمية.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Snack: according to individual needs</div>
+  <div class="ar" lang="ar" dir="rtl">السناك (الوجبة الخفيفة): حسب احتياج كل شخص، يعني ممكن تحتاجها وممكن لأ.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> واحد بيتدرب أو بين الوجبات فترة طويلة ممكن يحتاج سناك؛ غيره ممكن مايحتاجش.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Example: For 1800 kcal/day:</div>
+  <div class="ar" lang="ar" dir="rtl">مثال من المحاضرة: لو الاحتياج 1800 سعر في اليوم، هنوزعه على الوجبات في الجدول التحت.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> بنحوّل النسب لأرقام فعلية عشان نشوف كل وجبة كام سعر.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">
+    <div class="tbl-wrap"><table dir="ltr"><thead><tr><th>Meal</th><th>Percentage</th><th>Calories</th></tr></thead><tbody><tr class=""><td>Breakfast</td><td>25%</td><td>450</td></tr><tr class=""><td>Lunch</td><td>40%</td><td>720</td></tr><tr class=""><td>Dinner</td><td>35%</td><td>630</td></tr><tr class="total"><td>Total</td><td>100%</td><td>1800</td></tr></tbody></table></div>
+  </div>
+  <div class="ar" lang="ar" dir="rtl">الجدول بيوزع الـ 1800 سعر على الوجبات: الفطار 25% يعني 450، الغدا 40% يعني 720، العشا 35% يعني 630، والمجموع 100% يعني 1800.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> الغدا 40% من 1800 = 1800 × 0.40 = 720. وبنفس الطريقة بتحسب أي وجبة: النسبة × إجمالي السعرات.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">There is no single distribution that is suitable for everyone.</div>
+  <div class="ar" lang="ar" dir="rtl">مفيش توزيع واحد يناسب كل الناس، كل واحد حسب ظروفه.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> اللي بيصوم أو بيشتغل نوبتجية ليل مش هيمشي بنفس توزيع واحد بيشتغل صباحي.</div>
+</article></section>
+<section class="sec" id="s5"><h2 dir="ltr"><span class="sec-num">5</span>Portion Control</h2><article class="item">
+  <div class="en" lang="en" dir="ltr">Portion control means choosing an appropriate amount of food according to individual needs.</div>
+  <div class="ar" lang="ar" dir="rtl">التحكم في الحصة معناه إنك تختار كمية الأكل المناسبة لاحتياجك أنت.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> بدل ما تملّي الطبق لآخره، تاخد كمية تكفيك بس.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Healthy food can still provide excessive energy when consumed in very large portions.</div>
+  <div class="ar" lang="ar" dir="rtl">حتى الأكل الصحي ممكن يدّيك سعرات زيادة لو أكلت منه كميات كبيرة جداً.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> المكسرات صحية، بس لو أكلت كيس كامل هتاخد سعرات كتير جداً.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Therefore, meal planning considers both:</div>
+  <div class="ar" lang="ar" dir="rtl">عشان كده تخطيط الوجبات بيهتم بحاجتين مع بعض:</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> مش كفاية تختار أكل صحي بس، لازم تحدد كميته كمان.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">What to eat and how much to eat.</div>
+  <div class="ar" lang="ar" dir="rtl">تاكل إيه، وتاكل كام (النوع والكمية).</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> سلطة وفراخ مشوية (إيه)، بس بنص صدر مش صدرين (كام).</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Portion vs. Serving</div>
+  <div class="ar" lang="ar" dir="rtl">الفرق بين الحصة (Portion) والوجبة المرجعية (Serving)، والتعريفين تحت.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> الاتنين بيتلخبطوا، بس هما حاجتين مختلفتين.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Portion: The amount of food actually eaten.</div>
+  <div class="ar" lang="ar" dir="rtl">الحصة (Portion): الكمية اللي أنت فعلاً أكلتها.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> أنت حطيت في طبقك 3 معالق رز وأكلتهم، يبقى دي حصتك.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Serving: A standard amount used for dietary guidance or food labeling.</div>
+  <div class="ar" lang="ar" dir="rtl">الوجبة المرجعية (Serving): كمية قياسية بتتستخدم في الإرشادات الغذائية أو على لاصق المنتج.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> على علبة البسكويت مكتوب إن الـ serving = 3 بسكويتات؛ ده الرقم القياسي، لكن أنت ممكن تاكل 6، وده الـ portion بتاعك.</div>
+</article></section>
+<section class="sec" id="s6"><h2 dir="ltr"><span class="sec-num">6</span>Building a Balanced Meal</h2><article class="item">
+  <div class="en" lang="en" dir="ltr">A simple way to construct a main meal is to include:</div>
+  <div class="ar" lang="ar" dir="rtl">طريقة بسيطة تبني بيها وجبة رئيسية إنك تحط فيها العناصر اللي جاية.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> زي ما بتركّب أجزاء الطبق واحدة واحدة.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Protein food</div>
+  <div class="ar" lang="ar" dir="rtl">أكل بروتيني.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> طبق من غير بروتين مش هيبقى متوازن.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Examples: eggs, chicken, fish, meat, legumes, dairy products.</div>
+  <div class="ar" lang="ar" dir="rtl">أمثلة: البيض، الفراخ، السمك، اللحمة، البقوليات (فول وعدس ولوبيا)، ومنتجات الألبان.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> اختار واحد منهم في وجبتك؛ مثلاً بيضتين أو حتة فراخ.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Starchy food</div>
+  <div class="ar" lang="ar" dir="rtl">أكل نشوي.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> ده اللي بيدّيك طاقة أساسية.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Examples: rice, bread, pasta, potatoes, whole grains.</div>
+  <div class="ar" lang="ar" dir="rtl">أمثلة: الرز، العيش، المكرونة، البطاطس، والحبوب الكاملة.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> كوباية رز أو رغيف عيش يغطوا الجزء النشوي في وجبتك.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Vegetables and/or fruit</div>
+  <div class="ar" lang="ar" dir="rtl">خضار و/أو فاكهة.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> طبق سلطة أو خضار مطبوخ بيكمّل الوجبة.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Small amount of healthy fat</div>
+  <div class="ar" lang="ar" dir="rtl">كمية صغيرة من الدهون الصحية.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> معلقة صغيرة زيت زيتون على السلطة كفاية.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">The amounts should be adjusted according to the individual&#x27;s energy needs.</div>
+  <div class="ar" lang="ar" dir="rtl">الكميات بتتظبط حسب احتياج الشخص من الطاقة.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> اللي محتاج 2200 سعر هياخد كميات أكبر من اللي محتاج 1500.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Example</div>
+  <div class="ar" lang="ar" dir="rtl">ده مثال لوجبة متوازنة جاهز في السطر اللي بعده.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> هتشوف إزاي العناصر الأربعة اتجمعت في وجبة واحدة.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Grilled chicken + rice + mixed salad + cooked vegetables + small amount of olive oil</div>
+  <div class="ar" lang="ar" dir="rtl">فراخ مشوية + رز + سلطة مشكّلة + خضار مطبوخ + كمية صغيرة من زيت الزيتون.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> فراخ = بروتين، رز = نشويات، سلطة وخضار = خضار، زيت زيتون = دهون صحية. اتجمعوا كلهم في وجبة واحدة.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">This provides a simple example of a balanced meal without needing to repeat the detailed functions and sources of nutrients already covered in previous lectures.</div>
+  <div class="ar" lang="ar" dir="rtl">ده مثال بسيط لوجبة متوازنة، من غير ما نعيد تفاصيل وظايف ومصادر العناصر الغذائية اللي خدناها في المحاضرات اللي فاتت.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> مش هنرجع نشرح كل عنصر هنا، لأنك ذاكرته قبل كده؛ هنا بنركز على تركيب الوجبة بس.</div>
+</article></section>
+<section class="sec" id="s7"><h2 dir="ltr"><span class="sec-num">7</span>Meal Planning</h2><article class="item">
+  <div class="en" lang="en" dir="ltr">Definition</div>
+  <div class="ar" lang="ar" dir="rtl">التعريف: الجملة اللي بعدها هي تعريف تخطيط الوجبات.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> هنعرف المصطلح الأول وبعدين نشوف خطواته.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Meal planning is the process of selecting and organizing meals in advance to meet an individual&#x27;s nutritional and energy needs while considering lifestyle, preferences, culture, and food availability.</div>
+  <div class="ar" lang="ar" dir="rtl">تخطيط الوجبات هو إنك تختار وترتب الوجبات من بدري عشان تغطي احتياج الشخص من العناصر والطاقة، مع مراعاة أسلوب حياته وتفضيلاته وثقافته وإيه المتاح من الأكل.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> تقعد يوم الجمعة وتكتب أكل الأسبوع وتجيب اللي ناقص من السوق، بدل ما تقرر كل يوم في آخر لحظة.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Steps of Meal Planning</div>
+  <div class="ar" lang="ar" dir="rtl">خطوات تخطيط الوجبات، وهي 6 خطوات بالترتيب.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> خليك ماشي ورا الترتيب ده عشان الخطة تطلع صح.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">1. Assess the individual</div>
+  <div class="ar" lang="ar" dir="rtl">الخطوة 1: قيّم الشخص.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> زي ما بتقيّم المريض قبل أي تدخل تمريضي.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Consider age, sex, weight, activity, health status, lifestyle, and preferences.</div>
+  <div class="ar" lang="ar" dir="rtl">خد في اعتبارك السن، والنوع، والوزن، والنشاط، والحالة الصحية، وأسلوب الحياة، وإيه اللي بيحبه.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> تسأله: عمرك كام؟ بتشتغل إيه؟ بتتحرك قد إيه؟ عندك مرض؟ بتحب إيه؟</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">2. Estimate energy needs</div>
+  <div class="ar" lang="ar" dir="rtl">الخطوة 2: قدّر احتياجه من الطاقة.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> بتحسب احتياجه اليومي بالسعرات.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Determine the approximate daily energy requirement.</div>
+  <div class="ar" lang="ar" dir="rtl">حدد احتياج الطاقة اليومي التقريبي.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> وزن 60 كجم × 30 = 1800 سعر في اليوم.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">3. Distribute energy</div>
+  <div class="ar" lang="ar" dir="rtl">الخطوة 3: وزّع الطاقة.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> بتقسم السعرات على اليوم.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Divide energy among meals and snacks when appropriate.</div>
+  <div class="ar" lang="ar" dir="rtl">قسّم السعرات على الوجبات والسناكس لو ده مناسب.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> 1800 سعر: فطار 450، غدا 720، عشا 630.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">4. Select foods</div>
+  <div class="ar" lang="ar" dir="rtl">الخطوة 4: اختار الأكل.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> هنا بتحدد الأصناف نفسها.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Choose a variety of foods from different food groups.</div>
+  <div class="ar" lang="ar" dir="rtl">اختار تشكيلة متنوعة من الأكل من مجموعات غذائية مختلفة.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> بروتين + نشويات + خضار وفاكهة + دهون صحية، ومتكررش نفس الصنف كل يوم.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">5. Determine portions</div>
+  <div class="ar" lang="ar" dir="rtl">الخطوة 5: حدد الحصص.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> هنا بتحدد كمية كل صنف.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Adjust food quantities according to energy requirements.</div>
+  <div class="ar" lang="ar" dir="rtl">اظبط كميات الأكل حسب احتياج الطاقة.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> لو الغدا 720 سعر، تظبط كمية الرز والفراخ بحيث يطلعوا حوالي الرقم ده.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">6. Evaluate the plan</div>
+  <div class="ar" lang="ar" dir="rtl">الخطوة 6: قيّم الخطة.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> آخر خطوة إنك تراجع اللي عملته.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Check whether the plan is adequate, balanced, varied, moderate, and practical.</div>
+  <div class="ar" lang="ar" dir="rtl">اتأكد إن الخطة كافية، ومتوازنة، ومتنوعة، ومعتدلة، وعملية.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> راجع: السعرات كفاية؟ فيه تنوع؟ مفيهاش سكر وملح زيادة؟ أقدر أنفذها فعلاً؟</div>
+</article></section>
+<section class="sec" id="s8"><h2 dir="ltr"><span class="sec-num">8</span>Characteristics of a Good Meal Plan</h2><article class="item">
+  <div class="en" lang="en" dir="ltr">A good meal plan should be:</div>
+  <div class="ar" lang="ar" dir="rtl">الخطة الكويسة لازم تبقى بالصفات اللي جاية.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> دي زي قايمة تراجع بيها أي خطة أكل.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Adequate – provides sufficient energy and nutrients.</div>
+  <div class="ar" lang="ar" dir="rtl">كافية: بتدّي طاقة وعناصر غذائية كفاية.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> لو اللي بيمشي عليها بيحس بضعف، يبقى الخطة مش كافية.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Balanced – contains appropriate combinations of foods.</div>
+  <div class="ar" lang="ar" dir="rtl">متوازنة: فيها تركيبات مناسبة من الأطعمة.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> بروتين ونشويات وخضار مع بعض، مش صنف واحد.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Varied – includes different foods.</div>
+  <div class="ar" lang="ar" dir="rtl">متنوعة: فيها أطعمة مختلفة.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> مش فراخ مشوية بنفس الطريقة كل يوم.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Moderate – avoids excessive amounts.</div>
+  <div class="ar" lang="ar" dir="rtl">معتدلة: بتتجنب الكميات الزايدة.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> مفيهاش كميات كبيرة من السكر أو الدهون أو الأكل المصنّع.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Practical – can be followed in daily life.</div>
+  <div class="ar" lang="ar" dir="rtl">عملية: ينفع تتنفذ في الحياة اليومية.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> لو الخطة محتاجة تقف ساعتين في المطبخ كل يوم وإنت شغال كتير، مش هتنفع.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Affordable – considers the individual&#x27;s budget.</div>
+  <div class="ar" lang="ar" dir="rtl">في حدود الميزانية: بتراعي قدرة الشخص المادية.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> بدل سلمون غالي، ممكن تختار سمك أرخص بنفس القيمة الغذائية تقريباً.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Culturally appropriate – fits usual eating habits.</div>
+  <div class="ar" lang="ar" dir="rtl">مناسبة ثقافياً: بتتماشى مع عادات الأكل المعتادة.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> تحط فول وطعمية وعيش بلدي لو ده أكل الشخص المعتاد، بدل أكل غريب عليه.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Flexible – can be modified when necessary.</div>
+  <div class="ar" lang="ar" dir="rtl">مرنة: ممكن تتعدل لو احتاج الموضوع.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> لو جالك مناسبة أو سفر، تقدر تبدّل وجبة بوجبة مقاربة من غير ما الخطة تبوظ.</div>
+</article></section>
+<section class="sec" id="s9"><h2 dir="ltr"><span class="sec-num">9</span>Healthy Food Substitution</h2><article class="item">
+  <div class="en" lang="en" dir="ltr">Healthy eating does not always require eliminating familiar foods. Simple substitutions can improve the overall eating pattern.</div>
+  <div class="ar" lang="ar" dir="rtl">الأكل الصحي مش دايماً معناه إنك تشيل الأكل اللي متعود عليه. تبديلات بسيطة ممكن تحسّن نظام أكلك كله.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> مش لازم تبطل فراخ مقلية خالص، ممكن تغير طريقة الطبخ بس.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Examples:</div>
+  <div class="ar" lang="ar" dir="rtl">أمثلة على التبديلات الصحية، وهي اللي تحت.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> كل مثال بيوريك بدّل إيه بإيه.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Fried chicken → grilled or baked chicken</div>
+  <div class="ar" lang="ar" dir="rtl">فراخ مقلية ← فراخ مشوية أو في الفرن.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> نفس الفراخ لكن من غير زيت كتير، فسعراتها ودهونها أقل.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Sugary drinks → water</div>
+  <div class="ar" lang="ar" dir="rtl">المشروبات السكرية ← مية.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> بدل كانز العصير أو المشروب الغازي كل يوم، اشرب مية.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Large portion of rice → moderate portion with more vegetables</div>
+  <div class="ar" lang="ar" dir="rtl">كمية رز كبيرة ← كمية متوسطة مع خضار أكتر.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> بدل طبق رز كامل، خد نص الكمية وزوّد طبق الخضار جنبه.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">Biscuits as a regular breakfast → egg + bread + vegetables</div>
+  <div class="ar" lang="ar" dir="rtl">بسكويت كفطار عادي ← بيض + عيش + خضار.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> بيضة مسلوقة مع رغيف وخيارة وطماطم تشبعك أكتر من بسكويت.</div>
+</article><article class="item">
+  <div class="en" lang="en" dir="ltr">The goal is to make realistic changes that can be maintained over time.</div>
+  <div class="ar" lang="ar" dir="rtl">الهدف إنك تعمل تغييرات واقعية تقدر تكمل عليها مع الوقت.</div>
+  <div class="ex" lang="ar" dir="rtl"><span class="ex-label">عشان تفهمها:</span> تغيّر حاجة أو اتنين تقدر تلتزم بيهم، أحسن ما تغيّر كل حاجة مرة واحدة وتسيبهم.</div>
+</article></section>
+
+</div>
+<footer><div>GHAITH <span>TEAM</span></div><a href="https://t.me/nursing2bu" target="_blank" rel="noopener">@nursing2bu</a></footer>
+<script>
+var btn=document.getElementById('themeBtn'),root=document.documentElement,t='light';
+try{t=localStorage.getItem('theme')||'light'}catch(e){}
+function setT(v){t=v;root.setAttribute('data-theme',v);btn.textContent=v==='dark'?'☀️':'🌙';try{localStorage.setItem('theme',v)}catch(e){}}
+setT(t);btn.onclick=function(){setT(t==='dark'?'light':'dark')};
+window.addEventListener('scroll',function(){var h=document.documentElement;document.getElementById('prog').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'});
+</script>
+</body>
+</html>
