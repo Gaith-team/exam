@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM - Change Management</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:#1e3a8a; --teal:#0e7490; --emerald:#10b981; --gold:#f59e0b;
+  --accent:#0e7490; --accent-glow:rgba(14,116,144,0.18); --accent-rgb:14,116,144;
+  --grad:linear-gradient(135deg,#1e3a8a 0%,#0e7490 50%,#10b981 100%);
+  --grad-bar:linear-gradient(90deg,#1e3a8a,#0e7490,#10b981,#f59e0b);
+  --bg:#f8fafc; --bg2:#eef2f7; --card:#ffffff;
+  --text:#1a2332; --text2:#4a5568; --text3:#718096;
+  --bc:rgba(0,0,0,0.07);
+  --r:16px; --tr:all .3s cubic-bezier(.4,0,.2,1);
+}
+[data-theme="dark"] {
+  --bg:#0d1117; --bg2:#161b22; --card:#1c2333;
+  --text:#e6edf3; --text2:#b1bac4; --text3:#7d8590;
+  --bc:rgba(255,255,255,0.08);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family:'Outfit',sans-serif; background:var(--bg); color:var(--text);
+  min-height:100vh; overflow-x:hidden; transition:background .4s,color .4s;
+}
+
+#prog-bar { position:fixed; top:0; left:0; height:3px; z-index:999; background:var(--grad-bar); width:0%; transition:width .15s; }
+
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 28px; height:64px;
+  background:rgba(248,250,252,.93); backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--bc);
+}
+[data-theme="dark"] nav { background:rgba(13,17,23,.95); }
+.nav-brand { display:flex; align-items:center; gap:9px; font-size:15px; font-weight:900; color:var(--text); }
+.nav-logo-icon {
+  width:34px; height:34px; border-radius:8px; background:var(--grad);
+  display:flex; align-items:center; justify-content:center;
+  color:#fff; font-size:12px; font-weight:900; box-shadow:0 0 0 2px rgba(245,158,11,.5);
+}
+.nav-right { display:flex; align-items:center; gap:8px; }
+.theme-btn, .tool-btn {
+  height:38px; min-width:38px; border-radius:50px; border:1px solid var(--bc);
+  background:var(--card); cursor:pointer; font-size:14px; color:var(--text);
+  display:flex; align-items:center; justify-content:center; gap:6px; padding:0 12px;
+  font-family:'Outfit',sans-serif; font-weight:700; transition:var(--tr);
+}
+.theme-btn { width:38px; padding:0; border-radius:50%; font-size:15px; }
+.theme-btn:hover { border-color:var(--accent); transform:rotate(20deg); }
+.tool-btn:hover { border-color:var(--accent); color:var(--accent); }
+.tool-btn.off { opacity:.55; }
+
+.hero-band {
+  margin-top:64px; background:var(--grad); padding:40px 24px 36px; text-align:center;
+  position:relative; overflow:hidden; border-bottom:4px solid var(--gold);
+}
+.hero-band::before {
+  content:''; position:absolute; inset:0;
+  background:
+    radial-gradient(circle 220px at 12% 20%, rgba(245,158,11,.22) 0%, transparent 70%),
+    radial-gradient(circle 260px at 90% 85%, rgba(16,185,129,.28) 0%, transparent 70%),
+    radial-gradient(ellipse 600px 200px at 50% 100%, rgba(255,255,255,.12) 0%, transparent 70%);
+}
+.hero-band > * { position:relative; }
+.hero-band-icon {
+  width:68px; height:68px; border-radius:20px; background:rgba(255,255,255,.2);
+  backdrop-filter:blur(8px); display:flex; align-items:center; justify-content:center;
+  font-size:30px; margin:0 auto 14px; border:1.5px solid rgba(255,255,255,.35);
+}
+.hero-band h1 { font-size:clamp(20px,4vw,30px); font-weight:900; color:#fff; margin-bottom:6px; }
+.hero-band p { font-size:13px; color:rgba(255,255,255,.85); }
+.hero-band-meta { display:flex; justify-content:center; gap:14px; margin-top:20px; flex-wrap:wrap; }
+.meta-pill {
+  background:rgba(255,255,255,.18); backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.3); border-radius:50px; padding:6px 16px;
+  font-size:12px; font-weight:700; color:#fff; display:flex; align-items:center; gap:6px;
+}
+.meta-pill i { color:var(--gold); }
+
+/* CHIPS */
+.chips-wrap {
+  position:sticky; top:64px; z-index:90; background:var(--bg);
+  border-bottom:1px solid var(--bc); padding:10px 0;
+}
+.chips { display:flex; gap:8px; overflow-x:auto; padding:0 20px; max-width:860px; margin:0 auto; scrollbar-width:none; }
+.chips::-webkit-scrollbar { display:none; }
+.chip {
+  flex-shrink:0; padding:7px 14px; border-radius:50px; font-size:12px; font-weight:700;
+  background:var(--card); border:1px solid var(--bc); color:var(--text2);
+  text-decoration:none; transition:var(--tr); white-space:nowrap;
+}
+.chip:hover, .chip.active { background:var(--grad); color:#fff; border-color:transparent; }
+
+.shell { max-width:860px; margin:0 auto; padding:24px 20px 80px; }
+
+/* SECTION */
+.sec { margin-bottom:34px; scroll-margin-top:130px; }
+.sec-head {
+  display:flex; align-items:center; gap:12px; background:var(--grad); color:#fff;
+  padding:14px 18px; border-radius:16px 16px 0 0; border-bottom:3px solid var(--gold);
+}
+.sec-icon {
+  width:38px; height:38px; border-radius:10px; background:rgba(255,255,255,.2);
+  display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0;
+}
+.sec-title { font-size:17px; font-weight:900; line-height:1.3; }
+.sec-count { margin-left:auto; font-size:11px; font-weight:700; background:rgba(255,255,255,.2); padding:3px 10px; border-radius:50px; white-space:nowrap; }
+.sec-body {
+  background:var(--card); border:1px solid var(--bc); border-top:none;
+  border-radius:0 0 16px 16px; padding:14px; display:flex; flex-direction:column; gap:12px;
+  box-shadow:0 4px 20px rgba(0,0,0,.05);
+}
+
+.subhead {
+  font-size:13px; font-weight:900; color:var(--navy); padding:8px 12px;
+  background:rgba(var(--accent-rgb),.08); border-left:4px solid var(--gold);
+  border-radius:8px; direction:ltr; text-align:left; margin-top:6px;
+}
+[data-theme="dark"] .subhead { color:#7dd3fc; }
+
+/* FIGURE */
+.fig {
+  background:#fff; border:1px solid var(--bc); border-radius:14px; padding:14px;
+  display:flex; justify-content:center;
+}
+.fig img { max-width:100%; height:auto; display:block; }
+
+/* POINT */
+.pt {
+  border:1px solid var(--bc); border-radius:14px; overflow:hidden; background:var(--bg);
+  transition:var(--tr);
+}
+.pt:hover { border-color:rgba(var(--accent-rgb),.4); box-shadow:0 4px 14px var(--accent-glow); }
+.pt.sub { margin-left:22px; border-left:3px solid var(--teal); }
+.pt.done { opacity:.55; }
+
+.pt-en {
+  display:flex; gap:10px; align-items:flex-start; padding:13px 14px;
+  font-size:15px; font-weight:700; line-height:1.6; direction:ltr; text-align:left;
+  background:var(--card); cursor:pointer;
+}
+.pt-n {
+  min-width:26px; height:26px; border-radius:8px; background:var(--grad); color:#fff;
+  font-size:11px; font-weight:900; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px;
+}
+.pt-ar {
+  padding:12px 16px; font-size:14.5px; line-height:1.9; color:var(--text);
+  direction:rtl; text-align:right; border-top:1px dashed var(--bc);
+  font-family:'Segoe UI',Tahoma,'Outfit',sans-serif;
+}
+.pt-ar .tag, .pt-ex .tag {
+  display:inline-block; font-size:11px; font-weight:900; padding:2px 9px; border-radius:6px; margin-left:8px; vertical-align:middle;
+}
+.pt-ar .tag { background:rgba(14,116,144,.12); color:var(--teal); }
+[data-theme="dark"] .pt-ar .tag { color:#5eead4; }
+.pt-ex {
+  padding:12px 16px; font-size:14px; line-height:1.9; color:var(--text2);
+  direction:rtl; text-align:right; border-top:1px dashed var(--bc);
+  background:rgba(245,158,11,.07); border-right:4px solid var(--gold);
+  font-family:'Segoe UI',Tahoma,'Outfit',sans-serif;
+}
+.pt-ex .tag { background:rgba(245,158,11,.2); color:#b45309; }
+[data-theme="dark"] .pt-ex .tag { color:#fbbf24; }
+body.hide-ex .pt-ex { display:none; }
+body.hide-ar .pt-ar { display:none; }
+
+footer {
+  background:var(--bg2); border-top:3px solid; border-image:var(--grad-bar) 1;
+  padding:22px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;
+}
+.footer-brand { font-size:14px; font-weight:700; }
+.footer-brand span { color:var(--accent); }
+.footer-tg { display:flex; align-items:center; gap:5px; text-decoration:none; color:#229ED9; font-size:12px; font-weight:600; }
+
+@media (max-width:560px) {
+  nav { padding:0 12px; }
+  .nav-brand span { display:none; }
+  .shell { padding:16px 12px 60px; }
+  .pt.sub { margin-left:12px; }
+  .tool-btn span { display:none; }
+  .sec-count { display:none; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog-bar"></div>
+
+<nav>
+  <div class="nav-brand">
+    <div class="nav-logo-icon">GT</div>
+    <span>GHAITH TEAM</span>
+  </div>
+  <div class="nav-right">
+    <button class="tool-btn" id="btnAr" title="Arabic"><i class="fa-solid fa-language"></i><span>الشرح</span></button>
+    <button class="tool-btn" id="btnEx" title="Examples"><i class="fa-solid fa-lightbulb"></i><span>عشان تفهمها</span></button>
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<div class="hero-band">
+  <div class="hero-band-icon">🔄</div>
+  <h1>Change Management</h1>
+  <p>Nursing Management</p>
+  <div class="hero-band-meta">
+    <div class="meta-pill"><i class="fa-solid fa-language"></i> ببساطة مع غيث</div>
+  </div>
+</div>
+
+<div class="chips-wrap"><div class="chips" id="chips"></div></div>
+
+<div class="shell" id="app"></div>
+
+<footer>
+  <div class="footer-brand">GHAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg"><i class="fa-brands fa-telegram"></i> @nursing2bu</a>
+</footer>
+
+<script>
+/* Item format: [English, Arabic explanation, Example, level]  |  {h:"sub heading"}  |  {img:true}  (level 1 = indented sub-point) */
+const LEWIN_IMG = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAiwAAADlCAIAAAD/bTvrAACFoklEQVR42u39a7Qt2VUeCM65Vuy9z+O+3/dm3nzqlQ+l0AOEnKSLAQPjLGNgdAHdyFZbw+7RhasMuHo0Ft20sWwXZWRRxlB0Q40qMWQLcA+wqxshKW2q5NYYKYERkpCElFJK3FRm3nzc1znnnufeOyLW/PrHioi9ImLFY5+zz+tmTJ2h3HfviNixI1asueY3v/lNBkCdddZZZ50dYAMRExHRtS3zjdtxDH7sVHB6XlH6/uE11d3dzjrrrLND4IWIiGg9wpXV+Ftr0WYMdt7vnFBnnXXWWWe7awJ6eVO+tBQ9uxJdHxpzR8BYnRPqrLPOOjvoURAzEdHSWF7djCMhAb+8aZZGYt8/1M6oc0KdddZZZwc9ACIiIbqyGr+6afqamelbq/HV9TjxUofZC3VOqLPOOuvsQJulHoxjXFmNb45kQVNP0bUteXHDjM1kg84JddZZZ511tgtOiAmgV7fMtS0ZxgiYNFFo8OqWeWXLWLDu8MZCnRPqrLPOOju4BhATrUXy7O1oPZRAMTETc0/x0kieXYlHMSiF7Don1FlnnXXW2WzjICKi5ZF887YJhfqaBQSiQcAbEa6sRquh0GFG5Don1FlnnXV2oC0SvLplbg0FRD2VOKZAkYCWR/LKpomkc0KdddZZZ53N1CznjYmubckL6yYSMEERKSbFxEQ9pkjwzdvm5vAQc7U7J9RZZ511diCdUPrihXXzwoZRzNphIACkFRvwt9bia1vGvnkY46HOCXXWWWedHUSzHmczwiub5vYIWpFiEiKkf1oREd0O5dVNsxHJIf2ZnRPqrLPOOjtwJkRMJKAX1s2toQFBEykiJlLOC62ImV7ZMlc3TBYhdU6os84666yzHZn1JeMY37wd3R6jr1kzKSbt/CmigGmg+PqWfGsttlpyhy4t1DmhzjrrrLODNzVbZvZYXtwwW0bmKqZqJuop2ojk6rrcGgkdwsLVzgl11llnnR04Y6JRjBfXzWoktl617FqQbkmg2yGeWzdjA6bOCXXWWWeddbZdy1zI9S35i7XICAXMNX5FiAYBjwVXVuPbIXKHOAwW7P31nW3ejKf9GLv6fbu1Juqss85eOzFQ4oSG5uUNQ6CeJk4BumwKZZ5sOdAUGlzbNDe35Py84kM1ZeypEwKs6NHBuMOdddZZZwctDEKS1FkZyStbMoypp1irREEOAOdnMmYmsrWrGBpc3YjvWlQn5lR2qM4J5ed/pkhoNZSxybo0kUpjk8L1Yq/74GI0473KXPpe9zXn9+Ga3ZlrNkD5i5z/sIvY1nhArj2B/A/wbpmVT3fWWWeH3gmlj/m31s21TaOZlCKqntAyU4oY9MJ6dNcRfXLuMOVZ9hqOe37NfPFWuBULMWsmdiZWO+Fz4tWTC80Th+95k9IQ1a4IChtX7cWOF5psWdprckx39+I5V3/pxMcw58+E8udfPivXqWRek0vvp2/yQsAD3T2/nXV2h1ho6OqGWRoZqxSXpTC4IrQBEDAJ0Y2hvLJpHjnV03xoUJ+9cEKCZAr+1lr85VvR1fVYKbYB0GS+Tl6w6zmY8i6EbeQ0ma/zPgaOV4ATpTrzdXInoShJ9Dk+wB558ppKnkMTgSfHYSJW5HFCKuGrKCJWzED2pvtbmIhh37e/GpmrK7hG4qQ2bYICM2sQEUKhkZHTAzXQyhucddZZZ4cpDGIyoOtb5vqmGRkc6bG0y6LbReowputb8sqmuWtRKz4ciFywF5eViIlujeTLS9HVjVgpChQpIoCU8kQYyWxr52sQq+SFUs6nSKf7bIPJnE6U38vdeOIPym86uyub28NkgyTgzaIQEJcjLTdmUqnnUP5Iq+jDnIuQgYDKdb0TGJBtccAwpuWRMaDj/Y7l2Flnh98JgRTTyOC5tXgjEj29A+lrWhmbK6vR+QXd58OxKt11J2Tn09uhfPFW9MK6MUQLAUMm4JIbBhUChQLGpfIbkC9oSA+YC5UcyC79Iq/n4FwgAh8wyOyPizn/Z90GSpeCPa+5agMqvOYJWKcVxaDVEMtjHO1x0IU/nXV2p9jqWL61FoeggWa72G0/2c5p2oxwdUPWQ5yeOxzzwi46ocwJb8by9ZX468tRLDSnWWTieIgIXJyI/al8zuf5/bM1ZyGt++lkR9d1cM0LrjuTgr/0bZXlt1wnWvgupuK3VKSXuOifGEy0MpZbIxF0+Ftnnd0RQByRYjLA9aHcGokIBpqnfcC1UiODpZG8shkf7Qd9dQimB7V719RO/THoayvmy0tRKNRTuVwLyMnbu4GIg8g5L5griGTp9uzbq/gaBUCs+ILLbo7Yk6Zi8h9h8qN8Z0I5VC3zRjlkLxfbZUFb4k1ZK1bEq2OsjDE2sK4Z3UPcWWeH3QsREdGtoby4HkcC5mQOSScF528C7OT+EuieMY7xrXWzFiJ/7NeeE1JEAvqL1firS9HK2Aw0aU6kYT2Q3Z1i3O6i8/THBJFVMBzGuDmUYQzdBUGddXZn2cub8vKG0WmbhuknXvQUgfDSRnxzeDiaO6jdOy6IXtk0n7seLo3MgmZg4pALKFYGl3ELWmGZODftiXHt0SdcA/agbZ43qPXHeSxO5euNPLVNXDysTjyQGcYCgJlB3IVBnXV26BevTEQ0iunVLbMSQjHrSWdVFP+Saar0PhGBAsXMvDaWVzfNME5mj4M8S+yKExIQEV3blD+9Ed4aGiLSzEXPwfkamjIWN3nBGRbHpek+AeKyZA9q4LIisdsD3PkGhxcu87+ZDAQu7KVKWJxzBUiV4D77sXIJFEyB4rFgeSRrIcCsmEUI6HxQZ50dbrMTphG6uhHf2DKxQKmETsXT/JED0Qn41S3z0maczIsHeJ5Qu3E1FdPSUP58KXp+3YCorzhrlu754xwpmYrhERc29k3nxVCj5CTYrSqtCl8mnqxSgIC9MRNTpQ8r7soOZ8F/3PwPSc6EFbMBLY1kZSyC5LahSwZ11tmdYhHw3Fq8OpY5XSJLtfE/2fYgTdTTdHMoVzeMHPhJYsZOyF6NkcGfL4XfuB0RQSt2g0FumNpbfQXXHIdncEW4De5WfQ7cdObc9MMLB9GKYqHbY7k9RiwUMAFkS9gSNcPOGXXW2WE2pF26h0IDzROMrowSVS3l85SFQNFmhBtbsjIW0IEuWZ0lRdtW544M/nwpenY1HhosBAwUCWAFd1GObQo6Bbn5GCX+WAFkq5jauaq6iPP1OgW9nJqaJIeDDgc5pFqFIZeWDW8FKzvxUvbtwEaMm0NjPZCksTWcv8466+yQmmUbvbRuVkPAKSRhd25tWJt79CaZsTIyL6zHi73enOYDq54wm0gI6UQcCZ5bjb90K1oP0dcMd45OX1MBXqsMCriMxTVfwzItm7kxoFFU4nBXRD6VDO/6U2KP1GlDvOWUpm5EWBqaUJCLfAoXtLPOOjuEAZC11RDPr5sY6DERwAWvU2Zpe0nb2UodYKCvaRjj+bV4K859153phOw0CKYX1s0Xb4UrYxMo6nHG7jiA59vqF81wS55+eGrFinkrxvJItmJYnFC6B7ezzu4wVwS6OZTrW8JMmQLXZHXbwnt4M0R9RYbo+lCWR3KQM0MzgOMyVOralvnSrejqhsxp1pzU+uYhuOwF565yNfBVnrxzhZ/M/r28N6lCWtvKyJW6dNRqY/vDL/YCd/mIyP0O76/mLDhTTGNDt0bYiEU5EWc2cC3rvYPjOuvskIZBdiZYi3Btywxj0Yq1IgOL1qMcMcGVfHGiJS7RnNi2KWAMDb20EZ+bV8f6TAdS43gWTgjETKtj+ez18MX1uKcoa+znVQpwpduyubjkY9jbyoHKTLbScoDKvRicLVT5aBUpn7LCT5VWqXsmqpAKSgWwXafElS5t4p+1otDI8ojWIxFJ6nyTgYn8yOy8UGedHc4AyE4jL22aa1uG0/JKLkhTThqqgnO91LI5p6q/A2lmIry4bi4tmmP9gA6kF9opvCUgxbQa4gs3w2+txZFgoD1TK6crfJfW7E7Kk/8gUYn26/dU4FyTT9lDy65iZ7PjpfIBVnILcwGLz4U44QsXG+7lva6b3yp4KfeF3TtgikG3x1geGyPgjICQ+ptCTqhLCXXW2aEz+9hGBi9vmuWx9PQE2eGqyaog08P+lHcmtx8wa6blsbk+NJHgYM4V23dCWT+ekcHXV6KvLMex0ED7C/hr2MxM/pCCmo5T5Dg07cjtKoe5YsdZHd/7de51UIoAWh1jeSyxJPquUn0Xuiios84OpRNiAujWUJaGJjQIVAN7LSNsc560VTmxJD2XORb7LWI/OGgzxvbhuCyW/Npy9OVb4cjA7YVewLjgJDw883sJ46qhWVNFU7uyC+HqrhBcVZDaRMtmz/bs7yeUOvkJmbvYUWJyEtn52KYM6xGWR2Zskm6JIDcym6Bwgs4PddbZIcbihgbPb5i1UJTTmZOSZnQ82bS9W0smCKQdBYiZNPPSSJ5fj8/Mq0AdOK72Np2QbZYqoCur0Z8vRbfGmNesOHe52BfreD1H4SpyRVOD5kDE1yq7cvum7I7r1LiqU3j1F3CJa1BU0S79NLvdVoybQxnFUFXux/dOZ511dpicEBETbUZ4ccOMDQ2sb8hNPKjDkWrwKc7txER9TZuRvLwpD8V0vH/gqoXUNq4dpa1FX900n78RXR+anuJATQFGNYjWNG1/UKLpbSmCVzkwJgoUDWMsjWQrToqcUbr4KL3oYqHOOjuMFgtuDc3KSIQoUNxGw7lar8c7ESVbacUGtDqW61tJZuhA2TYjISa6PjRfXIqubhoimlNkCdkF7ll+uuWq8IWaaNlOOMJUtVdFuOOH+6qKY30vaotJudXG2bcWReGSf2kixRQKrYxkdSzs9OLLBT1woh9OeAqdhGlnnR26GEgxLY/w0qaJBIrc9ABTnn7dOBVXfJALeDTzWPDienxmXp0aHKwlfTDt5bO2EeLLS9EzyyETB0pJ6ZL4mNmVKR+Qh5Zd8BxVF72I8hFTrTNQVf6mRMsukMjL+aFqx5RIMFBJgMer0k1JR0W6NTSrkdir0QzBpe4HxF171c46O3R2Y8u8smmYSRMxkFHaSh7EmSpLzqkm88BOMUdPswG9smXuH8mpgTpQPO0pnRBIMY1j/Nmt8OsrUSy0EDCXIEg35V6QiSuTEwpvetkEcCdsZ3tvrVB2BBT8IleUuBY6gjtfUNYbdbtug0rIWu67/N27kZ1kkkLjniIjtDKW1bHEIDe11uWEOuvsDjM7CYwMboxkNZS+UrnZzBMD8eRhryRkoyYWYqKAKRJaC3FjKJcWMRccoGXrFDkhJJARvn47+vOlaCPEYo/ZF5Q0fl+Zs9B426bavrBXYydTVRFdtT8rnvKsKPV8mgmg9UiWUw/UWWed3akmkzBIlsZil/VuIkh55quJLooq/XnXouxDjBQRQNe3zM2hcP5kDk0kZB34c2vmszfCzSgtSs1LDxTCl6xIcxKIwJOnccWn3QvPVKfQQx7gjsmLtk1qS6dIBZV/FKWUthqFnuLtr9QKIoBsn4u1CMtjjA3cItmaoKcLgzrr7LAaiJhiwdX1+PZYerqsy1Ipoe2t8CnsVXw/D2IFim6N5NVNc89RPZlkD4UTStsx4LlV82c3w+URNFNQoQ3uKUF1UkHwuGiehsPtRcYcL1V53yurf/L3It/4lBs53J7bnnO9VaEVU0DMRFafdDMSSziEz9/4/5kQEzIBuc466+ygm4U61kJc25JhhEHA9qlnyq0subBMnt7Yh/coxVsxbgzN7ZGcGCjFB8INNcNxksYuN7bky0vRi+smYAqmoXZjuxzrcp8HYDtXn5vOaoe3oQ3dvJw8UopCg6WR2YyEUBT9qQnnUY7SO+uss8MQBRFRaPDqllmLBESaK+eHnc9I5fnNInhrIV7eNDHazqj774TsD1gN5XM3o+fXYiIKskiOy420Cxegkpbdop9QFo7kBJLYrQuuCJHKinNtqkqzuKyyOR4TUtiPG7E4ntCy2eFn2w0089jQSijrIQRJZsgdqYAnDMq5H0zY2Z0f6qyzw2KrIa5umFjQ0x4PVFYyq8o9t2j27XFvfc1DQy9umq34oEwbQXMEw7Qeyp8vxc/ejkYG84Gt7K0VsSZPToX8jd24oZVD/kzIp6cwKR6qb5hd7sFajIq40FaVGmV77O486YxHRPlEY24vS+5gZgGtjmV5KPYdaUeEc97s3E9nuRWJTTF2V+Mgm709y2O5PjRE3FcMInbkNoHZNyfLk8e4p2hscGsky2M51td8kHNCbrPUZ2/HX7oZjg16ymYuuL4VwrTdu4sUO66UiasLmKq7d7t1YKoiBqpNFE0IFO7GKImWlmnZlJeJg9VdBy2P5PZYYiTx+HY8EKcthTpI7rVtscAI2XKTzg7sQsFOCeuh3Nwyo4iUSmaEfKFP3ZPshc64KU3t3WAc4dVNc2rAR/uK9pugoGqumiIS0Ddux19aCm+HMtDcU2199a4uJQ6IKeeFF1bk0vXVTCBaD7EylrGB5lbRDGoHaeeAXuMWCW3FFHY9dw+DXd+SmyPRPGk8touzJfsr/QMmJrq2ZZZHchBm1KBmhgXRS5vmT2+E17ZkvscEAju5lhJalf3HpWUXrjT7aNmFQ1Feoacp6GFfT7wKDrfLlEPhJhW1SqkE3Pnfz7PGUeKFu0dnps0It0YSCgqZrRpmthsDOaH7LnRP7+ywmRCFgpEQiCJNvQ6RO8ChUAy6NsTKGIHiFBqxalyOCJg/BkJ90MMtYDUmWFgoUAzg9hjLY9x7AJQ5/U7Itqp7dcv80avjG5sSMCtMALqpgpSybE/9dfIk1qaSias9s7I7IapUfuPiWbW5zeT9LkrVorZiLI9lGCdDqgaFA5XfRL2L6uw154FAocEwQmhAmoaxUgFr1V2Yg+eAmABaHsnSSMYGC71EHM5dQ9vnG+RpycbTp26sy8nvPlk2g3kc4+ZQbg7l7LxipzXP/jshWxKkmG4O5c9uRi+sGxDN6cT/TPqQlsKL9DWjOAeXIsRsXvdN3o3du1Ge4PM3PIvVas6kpns3qn2qp2NQLr81EftxvSlAShGDxoZuj7AeIqcShPzFT3+j63uYKoOkzg+9ls2A1kIZGQhoZAiEvqLOCR04JwRipkjo5Q2zEYliYpDP03imzDz20bz4Z+amuCD5KFB0O5RXN82ZOcX7WjAUlEJGIqKtGF9air6+HLNLyG5SBc15kdqr4G2oOq1YDrVhxPlOhmd0/PJvqbr9imy7blkLYYQCVejF4H9RP/g669bXoxhrIQyIFYlQLJjX0teqw+QOoG3G8sqWGRv0NZO/CzNTc3eG9mAM13zKRH2dFK4Oo2Cxv58jJih77NDgizfDry+HlpCdRWpc2YjOkx0pY1yZbA+YFVWK/ZRXB8U6HirRsivwOvZplVKxE6tPgLUo2+Mjmfi0Sr1Sp1Yhez2S26HESDyQnUXQjgjnj4E4SQuhy0i/Jm0YY3UsQwPLfxEhEK2OpafoIFCeOpusQZkEtDySlbEIYU6xbXxT9kIzAeJqXBfTBHRTTCOD5TFujORyoIP9C6AD98dbD/SN2/GXbkW3Q8xpT86fWsjEUUUHh0nQ52/lUCcTR75WeH6HV9u9u66VA0/XvbtKrSl3cCYm2gixNJI4HQD1ItnIh+HeRBGl1aydaMJr1tZCLI8lJigiMsmQuB0iUDwfIOiioYMRrSbF/mN5dVNiIeXmmrkt6IHWboaqUb7CtgBp5tDg5U1zZk4d7fN+rVpU4exeWDefuxmujKWnuKeaf3xVVWbV9srHCm+jok3bUqqmabbfxl71qwfNpIg2QqyMZWSS7aUU7nhHWw1el3zaaca9hm0jwspYNmMxgij9i4GRwcpYbo9BXRh0kGxpLNeHopi0Sj0TGiaiqabWxiN4p8eeJiG6MTSr+0rwD1x3/fKm+eKt6KUN09fc46RZKnuIBNWTvhOO+PxqhVZp0xNTgvsqY1Rw8UwKkgderVLX0XG5JZLvTJxt/FqldiU6NLQ0xmZWElQOwBsFEeBr8t21sXsNr6xDQ69uxqtjmBIYC9BaKIrpSJ/nKiSGO9szs9c+EloeYyMSpdJlK6fKw/UtOwtvoE2s03RKzrSmmSLQRoRbIzm3oPv7hMgF2e9aHuFPr4fPrUZ9xYpzYq6uRhz5JA+y/yCt3KxshdDQiY4r4T6v2+OqnBB74L6Krgo1iS5u2b07D8QxEZiUonGMm1uyFU0EDnJjqQSmeSE4T3hUhu+6gOg1Ywa0PJYbQxnFFGgyUpxiQoPlsbmxpS4sKLdTQGd7vWJAwsy+MTTLQ2OAgBQTie0MpHLIWJsneCfrCW+LagZrophwY2jODtVdi5r2g6sd2LPZiPD5m+Hza0ZA80FyimkvdH9VaVNrH8cxpKqfjHR35DfgpF5L+fC3Kpk4qsgSUYUP89Kyc1Ee161AyZHzURPfxuVliu1jGBq7/IFVh8sCGnbimLYchNKb2R3qNHteUzEQE21G8sqm2bArG+FCbM0MAQ1jenkznu8FZ3Un5bPPt8yArm3KaoSectEWdy3qB122rW9dBSxxKWhAOlktj3BzSy4t6kZQanciIdB6hC/eCr9wMxwZDBSPDDIJTsdVwE3RK28jOCbluBlyJAkUEUtyWJKJv8nEC2jS7jrnhFT+dXb7xNfjBxVBbT2HW1Wo27nuVtFEI1zltEpzvk2lDEAjdHssq2HqgUqpnW34DjTH5Z3d+WHQraHcGBoRYqbI+HtBC9HSSI4P5Xhf9TuGwr7aZgxboNpXLJhMGm4Eq3wP9U6e8ZoJkB0PlE1ZNpW4EeFIbx9GSzA29M3V+Mu3IiMYKA4UAazcgKbcr6G6GykXcirsm6N9lDZmR6u0RZPTwpvOp8y1MCiRh/DmAwm5LLqD1F+CiZHAj5zSN1T6G2PQ7VBWQ8QCxXn5g3aS2B4NBSodBweiF0hne7amJqLVUK4PZSNCT5FCZfWiEMVC17fkaE8uH9kfjKUzxRQJ3Ria9ci28c6VqDLK+AsKu8/OCZVzTXBW3syE9QjXtuT+ozpQez1agrXQMOHy0SBQea5XuqjPR3EZ60Ylr1ONAXZPHf4jKOdQqRQ0k53ZOR8optN96fqlJTv5oMkidYnCklPWkwBfnAdV00SL0KR0WeVnf6aJWNOEV+2mhbItlfPwg+Y0MdF6KGNDtlhjOg9U4ryB6iqKqHNGrwUnlGYXbg1leSSRYPIEVsVMQssjc7On7l5UFgjvfNDerxs2Y7yyIaEgmdknkwfyHRw8RCgH4Gn7fFfRx5hRszGIeoqHMa5tmksLKlB7PVqC+YAvLupjfWUvk+sDkcclc68n02PGYUAhi571GnCcALLjpJMvV2FTkEn1khMKpGWa4OLigQnCBSgVPigs8yjifLfF92QyvwNUxG5tAJSePlwPaw8TCx3t87zmSBI0UqYfu+WzlarVDjpc7s6cv6x4I5feXx3LRiQAbDv4ehvHtB5JKDTQnQvan/t4eyxLIwGR238A/m2LAYwrh9ZIhi3IjbWiOTive8rmsGUtSgQK9hSOO9ZXfY2ABb7yXdevuBtIRnafzNoMH5srFwok2zjuB1R2QsmbqlQZUytyAzdMyuuwsXMyk2/Id7dNXWM+Z1NWtk52xaT/aXZNQAZkhKE9QyF3JatRuCoiXBVM5/jKzu4QM6DQYKBZl2q6Q6Fx3E5MV1EoFApFoEE3RPY8BmKirRhLIxMKFLEqrEdRwHdQ4TuYpmlzh/RQ3CJOygnHMDHT2ODGljne54VgT8dLACAyiCWnZZSfDVGYDavq/HPv5OZcFA7bJBft+WdyJvB4oNYq1DlPVLMX8iuRIjRWuJGYgI0CKjeoKjvaRiIcmhrcOcFYB8bdaVNYZDCKoYl0UF4aIwZESDHqJ0EIRUIAVLlFY2d74IWIbg3N0kiYiyXtZbY0wD7FSGQuiNtBHk485JFzqQ9wrGzP9S1zdl4tBHovh0xg0R7jQsxwnTbEK3DkW7PnWt0UfJjjluBm+Kvn2QL6BwJVe6x6DwTkti3ChhV5F67wYTXRboJn+j1xZfTT6IFK/+x6e9+xFgltxQgNtKJAch27rfIxMY0NaYby4djuoBWQYrbsuM4H7ZlxCuzfHOH2WDLts0JCuioocT0TT/mYV5XYe2Ojwpfa2tDVUFbGcn5ea+Uv0NydSChfdlPAJgsnUQ4R4AMxq0JFVF+R+oXFDDeu0qhuqV0N8uBjbvJGdvYTtn3+nd0ZNoplGAOgUYw+83x+Fb0YKK1oFEtfs5WA8op6CJEI9QMaBNSVq+5LLLQayupYQqEFncwJec6WZ1ItmNrWbMmtPy0r/ZtE7B+roZya2zsN3ECSAn8PCkceMsJks3KiyJNEyR+kIlSqC4PcQKoNcFePwk0D3PkDqaqvpiryWzURriYGKp9J+ik8u3R+6E6xULAVw/Z93zIcKAyCpFrcThun5tSiVi8ZAyLLJPKuxGOh0NDxeX16rqsS2lv3A3v98eqm2YwRcLFrQ6FpkFeXqyY82lGIVn1MpxaTb49xYygn5/Yugg40gchWUeU7R9fmJFBKRZQwOpQ9VsXEWvVFQAWoRY0ZqRIE55n04WE6VJwM0LDBJGpMRKFSdl1NHqgsSNoA0xU80IR82CEth37hzInsGzYixALDZAAm7ml1NOBMfv78vD47r755myJJhpf4JprIIBQ6P6fuORLs0ozWWc2tHBm6PpJRjJ7yhx3IuyWuWMvuhr+piYoUESvajGVpTCOj5zXvzbAJQCVmtttGujrmKEZIIE/U5E70eV/CDYdFJT/NLR3Nf3X+sHUcBK8HcpV1nM3Q5KLqcHnPryrjmWhysY778YzXXQ6F0v723TS2uzY2WB3LMCalSIQEtBlBsSxoFXCCvAWKXnc8uDE0f74UrxpZ6LE7UdiBsBkJET14TL/+RGAL4O+8hBCAgzkgrU7Paoj1EALqqYQSzIWFZH4XeAMgbPcMqsWz4XVCWdYKpBiR0HqI5REuLPDexNGBEIPE9RTbSEtUbYBqsRk0HaGBjU2e8Kj9jdv28etNanM2Vb1Tt5H0KsiY7ioc17mfPZi5YqGVsWxGMKAgJd5HMQE40pOTA5Upu1xa1O8419+M6IX1eGwAhzrERFqR1nxxXn37+f7lI/pO5SMc2DHJTFshrm+ZSKCUraCvFuNvOtRujLTGAEorjAxd2zInB7wQ7EXhapCeGVCdASpMdrV5IKBMSm7Nq56Agb69pqJiT0Wfo7IoTpZGaooFc0eAZVuyE8ZhJ0S4MgpXdZs6O9S2HpobQxkbMJOYifblVkzXt6SvOBP1YqZ7jwZ/9V7+8i39jdvRSiijmIRIEfUUHevzAyd6j53u3bOosx6+3SJiz4A4IloN5eaWYWLP9XcdSwW8scNHuy0xgT2izfa9nmIjdGsoG4vYm4KhoFTIWQe75dUIyoHOhEUt+c0aHFsOvatLFHn/6U0mlV0L+Ut2vD4AaPI3Xs+RJIUyV8x1TRkaUbiCByruwpPmqruHeABYW1vTWi8uLCQaS11gNOtpazOSmyNZi0Rb7cE8trM8ksWABzppwGwlcS8s6MUL6k0ng9VINiPEQlrRvKbjfXVioI6nkdMdeatG43E4Hh85ekwxAcKsDs6tDA2thNiMSSuPNn8uKmIugf8oH3A2QY+/fYDHM1pxakO0FWN5LMcH3Ne7jugGGYjEvmtKtQxmlLZviV/BJy+BJhSr/Uqh5vhoffzCjgXxBa64UO1NSqzN+uPTTHV229twa7i1tXHs+PEzZ87SAYbjD6kJ6MZQbg4lFmCixZgMCQEZyPUhzQV8bl5lzx0THe3z0b4m0iASIaWK+cI79S6NR+HNG9dH4/GpU6cCrQ/CT82e09uhrI6FnCd6hy5ktvFQS2DQEuOWxnIqVOfmd/3aBmW3U1WLSlS1QWX40syrribClefaKQQRCvFBBQ2htPavROG8l4XyoUleAKhVOaqXspGLgKrpf9lX7kFOaHl5ZW19fX5+fnFxsfNAM7uwRES0FuHGCOsh+poiL10XtDySvjInBsr2vnQLKiwF2AY+2XORtVC502JHuwCCrK2tra2vATh75oxS6gCcWaJFeXNk1kMJlIMYuPAR164imb1r31k6IW7Y0p61Yiii1bGsjHF2nnY7FAqIvNIAtRmICiq2F4KjyrL/ybaNlUDuXh4ygk8FZ6pKIGpNxW6UxEaq3+T1qZiGCEdV7sd5R/ZqslxZXvnmN7/54IMPHj16DIkgcOeNdjKfEjONDF7aiFdGJgaxqaz1Hgstjcyrm3xpUfdSkWP2abO8Fm6J0gzCxtr6S1dfBOT8+QtMJCL76I0si2wzwspIxgY9nSn6W+fEZcCt3sMAO4bjuHUwNOkUmsxbtrfdyGB1bDYjdaQ3KRLYLSeETCG6WiCOfBwEDzRXynxw7RxKPg5C1T3wzuBcm/n3OjZC/oIiF89RK7KADzYEyhmamiRQTQaoFJ/lXvNe8xHAShkxt1duX33x6sVLF0+ePEnEXYuandt6KK9umGGMQHEo1bMGaD3CSxvm5ED3+nVw0GsliFQMovW1tZdfeimOzYULFwKt98sP2YsfCS0NZTPy6Jyx4xiQipUSxOssUOtCdhgPTSZati1Cwb6N025wvB5haSwLgVK8i897wA7KTNMAkVU1N1Qbcbb5tJy8QfXMO6vj07ZmduzOxt58VfFN3ivpUhARtNas+Pr1a6NwJCInTp7UqmsdvaOFaiS0PJK1EDHAThsR70I7NFgayVooR3uauHm6ubODSAJprcXI2urqaDhk5vNnzwW9gPYvZzk0uDkyMRCo8t2B92Zte9rZfsTmb7rqP4VA8dDg5pacn1dzu/msB0xgApwwCO1QOLcJQtrkpz3w5UQeFfknv0pQ8bCoZ6zViXbvjAiHygiGARLAtoSp+VFVYVCVIIUvt4Q9ammXoX8iN2/cjMLo/gfuP3P6jOr80HYXzkS0GcnKWMbG9oBHoxMS0Hoo0bzqt9OD255U42ExEWHFBN7c3PzWlSswctflu/fxl25EsjKGIGFmcyUChxwKRg5YZz3orJ9blz2o/JwtP4gXMMYGt8eyEWJufhc9ewBigAEBc3m+IyIfxIRcToIrga+6pgwNG/jcRgnCa9mUoSoDRLV0bWqRByqmo3yjoMVhKyuBalTmCERgzGKYFqYpt+tgASHs9XoiWL19+/lvPa9YnTlzttNT2LZFglGMSGDnrHonFAkJYWQQg/rtIDgBjBAxBcyHR0KuircM35iEbRq7sb5+9cUXhHD57svMvGe4XHYLtiLcHmFswGlLFy+w5l0vun3TvC6ofXqIfeItjW0gmCvAQyJFHApujWSxx3O7VjMU1JCYyxMfbwtfcodVG52CnQzbvTz+tN9YL0nOmVNveZFnEwBx1aC0CyhbKiRIWaese73eaDS8efMmAAjOnjtHHW97B0MrSpnZDU7ITE2DjMU2fSAdHCacsmKKnNSoaa3sCzunK2ZRfHv1dnglItDFixd7vWCPBiQSMshahOWRZIptvN0HlGf+MO/sIJqZGLdG5vScmt89J+Rds5Ofxwx/l7ZGgdF8J6FK2dgpBEZRpb2NFpP11IIIxfP3YHDZFsVgJf/P/KfFKApUwfrwhkEuOb7lI5O2wRMBHFFuMTFgnKa09uxE6yCO463hlhFjl5aAAFBKxXF87dVrJjZKq1OnTh2EgsFDZz3NWnMkJAAzN8BxAmLqKQ5U2xknEhrG6Cnql5q0HhwfnA7ETPbXLtXExFH+ObMboNfrDYfDbHlkP1BKicjKynL8zZiI7rrrktZ6L3/FaijrETQTbAnq5P/yK86mqKhdfLMzH8NN3mtSq8NKEYjXI6xHcmZO7RYxgaorgajUlIEKMnPkl4Kuh+AIzRI+4pOSzSmrTtOUoZwHkorjNGqH+wE0B5y0vL4WZzIdFduTWOLkuZXWj4oxcRzHIkJEIhKOw9gYIoqjKI5jZmbmKIpiExNRHMfGGAKFUWjzwMaY7Mz7/X4URdevXxuPR488+ui5c+dFoLq+AdOsNOc0L2gVgyIDzWRQN3FEgr7m+UD1VSs5r9BgZDA2MEJ9Jbp34G6OgERETGxMZMd5HMfjcWg9UhSGAEQkjEIiMsZEUWSHqBgxxgRBYIyJ49gNxNfX1v7iL74hYu677z7aZd42ErYbrYVYHYsR9HRam5HEbRUTZXpP/Uvx2XmcZn9T3IxLUCEBZEC3x7I2J8f7u9JkKMh+OVcWq/olsdtzEAq1qN7pm6pV0abiIFDFpJ96KY+2dcucUOEsapq0epXCqam9d4M38t2UhLGNKcgJIpI5IUmf4TiOrROK49h6IABRGIVRaB/vMrLBzNYt3bx585lnnhGRCxcudrjcFFMYqK/4+ICJKQJFoLgiFGIiEMdCA81H+0y1aggZj3QzxjBCLBCmTUNa0/zBJJFARMSOXzskRQAgjmMAxkgURXaIRmFETGKEiLw5LhsPLS8tRVEUxdH99z0QBLvI27Z3AaBbI9mIwIrLAtglh5SbSHj3MLWmI9Xq+KTthThr8cBrIZZHON4yG7ltOK55/tpuGmJaleudLAWwmwef9re0/7H1iStU3Y/tLI4Sj8LWjVh3KMmx4jhmxVppm+8RTDxWUYMCsNhIFMfXr11XSmmtz549Z0GSzg+1ue+K6fScOj+vvzGOb4cyr7mw1EjKNUAbkSz2+PKRwDqhRgsNbYQyNKSYjFAcIlCY0wez+cFkiWOHJDMAiNZIUMrAfQwMG4F4sHCAiLTWIrKysvLNZ58Ngt5dly71+33aHREje7yxkeWRCQWBYmoSP9uXgHva7bnkijTT0OD2WCLRvV1w6EF15JFiaNsQ46lG4XaPCEd1ZOgZEOGa8UDna8rBSVkQoT4WRC006m627cVBJvAAALkblrOavZmoFwTM/Oqrr5o4fvNjj50+fabzQO2f+WM9fuRkcGPLvLwlikhKc6W9/AY4v6AfOhnMa6baSkbbFWJtLJsxYiTdV2NDQSgLgZo/8L2+4TN3iDaOyV6vx8wbm5vPfPUrcRQ+8MADeneIGfYurIXYiESAgSIBJTfQx0xAfpIvx0Y0C6GEJlCuMvriChCPCRYN3ojl9nhXMkMB+V0LClNzSw5CaeYF2gBfrTkIZcythWuZgoNQofOGZuCOJprWUlVkmleEa4UHlu7LxCEzAXtVr9oU6kVh+NJLL43H48fe8m2XLl16bfK2p70VBqQVv/5EsB4huh6+tGGIqK8pg80MUWjQU/yGE73vON87t6C5xaJ+K8atsYxjWMadlTddG0vAdGlRK6Y7XurChuNLt249E0VxFL/hDW/QQbAbuNxWjKWRRMKKUxmrnFIc5zHV3BARn2Pw3ZdphxW32aLgmPJyCShGqkSB4tDQzaEc7fOcnnGToQkxoUy/5lIoQFPSsqmphsYTbUwJhW3j+G0aeBT40+2PTxVEdm66jC0lJ7x88W08pc0L0trDw6nxBdDr98fj8csvv6yUIsKlS3fRHZQf8ivqllpY8pRzhXU2fc1vOdM70uOv3Y5f3TSbkURCBqSZ+pqP9dXdi/qR0717jijNTrTNVegQlsdmPRIm0kQWZ2WiUGR5hCM9PtY/0OwRC86hdm1lNcZqRyYppYJeb3ll5ZlnntFK3f/AA71+f+YDcj2U5VEmtjbxIqm8FtKRwpnU7OSXouV429EJV8lml8Md1IZQAZMBrYxlGKu5WcfTPjguz6Nug8IVploQUD2zthYYRSVIWEvFru8M1EglLwUiPpZ6BY/AP5IAj4eroGLXSH0XoVFU8W6aTaQhoaS1NrGp3yA7CACl9dzcnBh58cUXTWwAuXTp7jsmEuJ2a83i6EJRWL1qr77mR04FlxbV8+tyY2iGMQyox3x0wJcW9X1HgrnAWcPWql4uDeXWyERCitmIg9ERbcS4tmV6ihd7B/e+iElZCtVeSpFq8FIAgMFgYPNDX/nqV0F0//339weDGZ6qAa1H2IqhOC1uSAdH5ke5uKRv9i3eNeu2Ryw3oHOV58M+FG9ksBbiWJ9m64YCRcgEUl0Urlh9UtHFoJ4I16JpW1WTU0wP3DWjcC3leeppbFTNZEMpSVNWQ6A2OhGFC4jm9hDtR6clyLFX7p+T8KXf65vIVDzqYOZer2+MJNw5y1wAdKBE1MuvvDIcj/7S48GF8xcPYzDUUkJfiERICAYEwAjFSOAvA7JTqSQgLbwpwOzCKCLNpJkvLeqLi5YsQgFTL6A+sxC2Yit8QIpZV0QBAG1Ecn1k1sboKY8ktxG6YWSxJ/OBPmjRUIYQRlFkA2vPyCQwsVKKwZbD6XU/SiU0NWNMEGit1crKyhe/+Gfj8ejNjz3GrHY4Jt3WQWshiIlVItNc1UcOAHs52hVfwElosv2TZGqAXMuYW41PslOFEgLR8liO9fjk3Cy52oH9yblqk4pEC7VoykBVfXeqedVVTRlaEabLh83HL5iSg0A1LRVaNGnNVK4LR+CmkyFf1orzzWqLu3CmrzOdNCozq6z/TPkBYAYQxZF1VD4/xADidIMCtqy1BuKV5ZU/+ZM/efihRx544H598Or1C5EKcyWqFgvFQCwUgyJBbCgGGYEBDEhAAphUSsYU6qYTaIYybcXiJedc60LNrBVrQva+ZQAbJHO0YtKKrccKFAeKNVOgSDPPBxQJXt40t8cSi+fW2iatodC1LTMf8Bk7iRyY5FB2GkEQiJd6kF4VEakJg+yIdTZgpZQx8draxrPPPhtF0Rvf9PCRI4s7XxsBWBnJRiSawS4ZIfOptf7G75bIFZ3b4Z3hCg2gto7HPQMboNiFy9pY1gbq5NxMIyFJU2SYgGnbJ1JLO99YIx+LpuXnDo9fv8tOjw/fkmm7XX+k5a/AtA+8fTLr0LY4jg0aNkBpAwi01kqp0Wh87dVrFy9cZH7gYDkeNyvLHn9jBDEoFoqEIkEkFAvi5M3EG0FInNUOHMJTmWWUebialLMtEBKCQMqdolQ+4WgROcWslY2frBPiUHBzaEaxlVfwzUlERHRrZOY0nxiogA+iwqkONAtq4GIABqZl4yQRWMc2Go2Xl5ePHj364Otj2rH7BdHY0EYkoUGPkzs1kwYrvB9k7pamiJgpNLQeIRT0ZhdNO+sO5D2QL0XRLIiA7UBwjeWotDNN0jbM7EJL0/YQHBXaIwHImtq5IU47CM5LhGuDIk67jmt0VPXPeX6+nTxDIhLHcRAEd91118WLlw5E10vfPGuVJizwOzYYGRrFGMYyMhgbGhuKDMThRrJ13ikZQTMpTuXMVJZkzl01r6urAqOyxauH7ZJGUpCJMmYsiIRAZL2WCIVCxmowV3+fYhrGuDWU5bGcnTuIAhf1DOzWVzS3DojjmJnOnD173/33z8/P7yTMQBpTroQYmuxJaRxt1AqLwzYYYC3GPLctiq1RMk1Xb6wZW5EsjdT5eVYz6nQXuPGjtzVqE6/aFbmdxFJVPqAlB2GqvqjbaMrQRoyHWmoZuCU7POFqZ506mvFAzzVHs/NOGeHggzLLK6VGoxGzunTXpbe89W1nTp/cr5wQnFFd+H4D2oqwGctmjK0II4ORgTFkQGLvW8q+sjCLTqcZ63UVT1BySrfhPDmKS5B6m7kSJYHb5GmaFHPCfruAdDq0bNXGCIgEpimNwEwGvBrJyxvmWC/XJMal/tOd0v1Baw0giqK77777zY+9+a677g6CGWibhoLlkYliaMXsyCZm/rPAqmVuh14wYxeufPtW31RRsupeLlu4ujySM3NqVnT/wHNNfNo5hDLiWeQgsK8G00uuq3D+HmWg9hwE73eVE4bYLgeBqpuc1nBRGrXpSkEnXH/jnr+XtnAQgncQKa3EyHgcslL33nPvI29+8/lzZ9uEXDN2PMgtldOkDA1jDGNsxRgm4Q6NDcI0xyMA26SLYsWkmBQl2RcbPVjuk41yJjLJk6bIOe1kKiSZMA3kxU3LZ9iJALYJWJJfhlXjriRqFq7SyOClDUPA8YEaaF4IeCHgQZ7wgKz78KFtGQ5gPBwaY+6++65H3/zo5cv3WFXTnY/JrYhWQxgizYwiPFBc0rJXOoEr5wqe7RNR4W/gAwC9joeLwTRHgo1Itowcm1EsHXjHfFUVS1VlTM2b9cdvc9hpr/g+Hr9xrdNms8bmGtv8pt2LgZiNMeE4VErdffnuRx599ML581Zwey/hOBeJEiQZnVEsGzHWQ2xEshHRMJbY9u8htgkVpbinWCWJloQLwEwq79u89RZcKDXPzziFgowaSi5Sb+dyWNiJpKXp/kdImtmgxVUC0aoxoZE5reYCPtLjo30+2uNFzYNA9TX1VBGNPVztw5VSTLw13DJRdO7C+Tc/9pbLly9bMSqvEOJUYywUWg0lEtv/utyzzvNa2kcnexIDVZ2narMvExNFBisjzGvqz+L5zher+hlr00liUwte9bRiPLUIGxrbp04liU2VfLkaPDD5t2XuJPOIFHvn1l8WSvH9tsAdUyqAj/3VTVBKDYdDJtxzz+VHH3vLubNn7eyr9gOIM6CRwdpYlkeyMpa1EGMDYwsYmZkpUKxStM16Hc5TKzlbp7Lt6+WAbGldPKcfuUvaJFSarCWpetVb9ArliNjdSWUjkFOgDla5NimDFFBo0P56W/WfWHB7jOUREVGgaEHz8QGfmtMnB+pIn12tucMVDCWliiLnL1x482OPXb58j1IzY2avhbIaSrL+QE3UOvkut6yJq9eau/24cNPrmusz2QakFQvRyggn+ugPZnDSQd6lNAJfzubTMBdQ4Tm254GQLwRtIo5P44E8jqHxsCU5OF/I5cno5LHDqYqH9sbpND60dl0ZhmG/37906dIjjzx68uTJFLHl3Z1lkoZmkzdXx1gaycrYrIXYihEaxAQR5sxncPLH1iG5YBpnr9lF2FSa/nE/RR6Cc2Md5klKJWvuzk1Tw6SodLI1CpNfAeuWjILLUPYgCVm84euSk1esmZQiFmJYH0aRkY2Irm9JX/FCn0/01amBOj2nFpziVvs48KwxuvbugbmhvQ6IRqNRbOJ7773vDW94w4WLF60HmskMDsJ6JBuhcNo1m32Cbyg/JiWocB8Qi0Ic3/h055Fgd0kkoI1INmJ1bDCDTmJBe2ioPbhUyGHINEdrxPR22DsV1YflpuO3vNUoiQOhVi0bU15eqtJcaImUw9PPwvlwIvtWz5RlZgGiMGTmey5ffv3r33jq1CnazSYumWJNNvUb0Hoo6yFWQ1kZYy2UzUhGhoiQFtOQ5mQWUKm/KV8yVYGt5SZczm+cuIB89OPB0CdLyKoflW1TXiflqia4mGGyCKRisoo+kWleUAugmAaKFZNWBBDpBPEzoMjQ0IiAeMw3tBzp8YmBOjWnjvb5aE8d6U1aKCRRI89mZswKBqoi+7Tkl4wxoMqYxi6JmPnihYsPPfTQxYuXKBMvmMWqaBjRZkQGFKiqKbsKvvVguV6K/M47QRNVVwVME9Sm3r44chUR2ApGyDDmxYB3CNgGft/j70Y6RTlqrbIOpqfPFWIgoII0QU1RUWUEA0J1n1OqDYNQ9xN9lyIvxkNNSqZl5JOcMtWpBqtSKjbGGKOUImbrLIzzaSaibf9ZVU6ktYaI7UJ08eLF17/hDWdOn8722sWlXEoPiwXDGDfHcm3T3BrKeiSRcMAUMM0FpJP+z7nu6ZNsjRPuJD7G+rZ0opoAazmEbRJUFVzUhClXygBViRM3LT7ZWdCVBlD6Y5CeVV+zZh4bYWZdHSowUSTU1xToLKRA5uQUcU+jR4ykNTg2Yry6JQNNx/t8bkFfWNCnBmqgKVDMswHp0mnOGXLe1Y/VSrADz9vKgVJnxkTnz51705seOnf+PAiQGSQmk26voOURhjE0syWGeWA0VDqVgrckP48JM2/RPZX39dLNy0Wtdh22GWJ1LAvBTkV8Aqmo7Cn9E42JlsnCrXVTBlRM05iyEqjq/OGTrZ1WjMfrSwrLtSSBnLtMvugnT4RDtQZ5uWDLq5iAaRQTWAU64AAwxjBzv5+122SOY2bu9fsmjsfjcRSHg7nBHM2NxiMTG0guIcbMg8FcFMeB1hcvXnrTQw8dO3aMdk022w2AiMgYXBvKyxvm+tCshTAAiJm5r0hZiCmhOyeuRk3AtOQMOQ+yqQSOy/kYxTnX4jotN+ixWSIvNFd2K5WPfcYvZW/ozCnsA3AO783KhuYDdaSHWyMBAEVVEaxiioXmNM9rFTAJTUTPsv8inQq1IgUSkBEsDXFrKM+txif66sKCvuuIOjunM27e9hh0yjbDZg6CwDZUZOa5OWU72tnHNNNH6AW9bEodj8frG+vIQ77W08RxfOrUqfsfeOD8hQtWPWGGS6LQ0FokkYFWRd7g5BksexdMgS0xN46XXcTokrUPF0OpMgfOggpjI2sRnTJqh62qgiQxixyMxtsV42Hv2hwoTNZcG/1waw/kI46Xz98Dxbb0QFRiSGeli1UJHqpWnUApAEKpAWuxzqCuRHc6+VKbCCEdMLPWgVKcdAh31OSYOWm4LEYppZWK4vj2ysrNmzfFiD1RpVRs4vX1NQHuuvvuN7zhjcePH6fd0cy2Y0OlccfqWK4PzY2hLI9kLcTIQIBeirmp0tNSILAVopykKMPyDFDI/Uw4COR6Hc4V7k12KZcHld5pQMnKbompkBaajIsUO7bAiIDmAjo14BtDXhoJMQ2UZxIzQJS2Z50PrOQfihW1WXtqJgViZZ0Qx0AMrIfYjLE0lpc2+Oy8Pr+gzi3ohYCzdNG0uSLFzDpgpiAIer1eNgmLyMLCoh1UtpUqpfwRpdTG+vrm1qaN0e0OWuvhaBjH8fnz5+9/4MFz587NfCgKaNPIVgxD1FcFKCav2UPFj8o+6SBUVpTltN0orqpwlZyHSEDDmLYi9NWOCleTESQW6atw1+0vmfh2RHVqpH3apmbLxixOe7Y01x6ftnt87/ZS3ZFh29e/YdhxgqTZgom2C8Dx2DonpRUzI9HswYULF+5/4MHjx49bLGW2KBycSd+ANiJZHslLG+bVTbMSwgA9xX1FASfaDoy6Jh1lz1ROBVXtqPIeiJ2VILFnX29iiZpUk8tPH+dzQuTI4xLl0lQ23XWkz3cf0RFwe4QtV/8nDXeYqKfV6Tk+OVC6ndiMpLJ1PU09YgOKhdZDrI7k2hCvbPJdR+TSoj4x4CM9pWoko6sX/mmfX1JKO2Av9XqVe9k4HqlWIzPbFuCnTp9+3etff+HCxay976xcERONBatjiQWqKQ2D/DSovNy53XnAp4baysmeaeIwzRwZWh3LkR73d4DJBS7cMRUVu1FZh3ZGhKvU554REa71+deSuYvfxeWKQVQQ4erOpAaFc9ZS2E2mnH2MgVTIiydTQL/fv3Dhwn33P3DkyBF3Kpn5AwOi0NArm+bKWvTyhtmMoYj7igaJUDIZ5J2ES2PLk9YmqaAs6GHvjjmojdw32c0SceFTysdDZX52PU2bnfhYyBsGpZBqJqiR7mN7eAeKLy1qpfiqipdGEjoYqo0RFwI+v6DOzatBwEasd+HkuYdzlkwE5gJkTWwpA0w0p4k0R8C1LXl1y5wYqHuP6geO987OqUDtLo6U0GEytDGt0xGR06fO3Hf//efPn9+lBvNbMVbHaesg5GKFAjuOSxF5RaO7vfZC9ZeEa5V8vUfQTAZYjeiswU6dUIUPAE3flMHrOajac7Rr0gq08zdUceQyB4FKbIIWKnOgRkU4d9HKZecNTMNBqF8TZLI9exa9M/NoNGTmCxcv3nf/A0cWF3cj/SNIupUY4OqGubIav7Ipm5FIlqopPDaci2Zcopqi3Eztzg5OjMKUeqZC9sh1UcoB/FXe8WSeyX6dcrI4HjSmen0KIk67tU3QWk6QwwwFtj7CKmVzCsfZvTTT+Xl1tBesjrAeyVZMMYGI+4oWAl4MeCHgQCUheIaoOFdhMp+6OQ8gLZ/iZLFsN1PEMWFlLJsxrm6Yu47o1x8PLixomkgK7e6QVErFURRF0flz5++9/4GTp07uvB7IH3sJbcUIJdEPLLYZ46K/KRATij6pxPzaFy1zxQ3REnP9p8xMIggNNmIMgu1LmgY7h4DacwpRUatVvzJAa1VstCiSqDl++1/a5hu3wXf34oozp29uaw3FRGRio3Vw9uzZe+6513qg2T7wggnb+NVN8+KGeWk9vjmUkUFP8UBzkhAuASBcC7i5noCJQJVle+zL/ZQ3SHwPcsC6nXrZgb8ov2XNQMm3diGVS3QXZbTKXzFBgUAB0/G+WgxoZFQoEIEQB0w9xVqRERhJDqJSQNhL3axh90o6saqAAnAMGsbYCGV1jJWx3HMkuHxEn55TmSDeLs2wSqkoigh07ty5e++//8yZ0zTr+pvsam/G2AjhUsPZp3zDztKT8in2lkjZjMuHuI4iUd8A2gUS4HvEnG/AaojFXuKEtpEZCnKXG6XnYltU7CpBhJp3yNPktJKGUAWXuWl8P4bmqT9ojq7KI7tyr+rynzIVu4WOnKemtThesBe1qzY/3At6Z86eveuuu48dOzbD2ots+NmF1FaElzbjr63EL66bSGigaLGXMGIFk0iIK8MMZi4JGTAXnFYBdmMqoGZMZYp2yqAjLqJwylGTo9Iz7Davc39vMgz8yBsn3oggztTG2QtK9C4J4CyCYYqR+JY5zfOaQCwgETJEsUm4+MlcWU6eu4whZkrpwkmQlJxrIvSdJagU0bwmUTw2+Obt+JUNuXVMv/FUcG5eD/QuqtcaY4hw4uSp++6//+SJE7MdkIXBuWY7qJbXZVTooOrBXsv1YTXs9ln7IOLWSaGawL2S8J0K6W5E2IzpSG+7xATyTPFokZOoFxhFDdxUJCLvTlOGaYlwbQQRqKlB+OTPyZK3bcqQv6TeDJAX/cMueyGLwmulT50+dc+9SQw026c9Wy/fHMpXlqJvrkabMRTznE5EOwVVijiTJyfnS8jB0Mo5noI4Qp4RV/BMDnmB/dmjvJZPhnWwzyF5nmoqPSDu+2DmiZyti8uRWwbLk0lBOG3xkA4nQwkbW4EnPiSdH10FtKyYF8iDciUEO8ebAIEo0KSFx0a+siwvb8nDJ4OHTgVHeiotQpp1XG7MqVOn7r33vpMnTuxSHsgebhxjK5JIKGD2kF+KHVRLsYUvP1Qlq615lq6oVWUaN+9VRRznRFOXI6GtCGGfBno7fijIJmNwLrtTH3NUZ3RAtSU7bWqSCnJwVZU0NUdu5iCQv/VRSWsHjbvkD4v06c5mDtSfvzfrVvBAXm4Io0KYfNZBkDFGK3X6zOn77rt/5ihcljyIQd9Yib62Er+yacZGNLNWuWRMUdEg32HB9StU7iznaGAXKNrFlJIvQkrcVZqeKbkiP0mhbnWc9IvIDSZmj0oCp4kiTqMiq9EgbszieCnngAzLIKNc4S2hKOTMyJ0WlY/kLqvziaLUURITaZAo0sKh4ObIfO6G3BzKw6d69x3TTGQkKeHaucVxbIw5ffrM5ct3nzx5cveq05jIAOsRRgbsK0ptmNF9CEpNI6HdVupjbuWrGlp9l7A++1AMY2xE6KukBpqndkJ5fKAtgj/9xTogx8euHR/bSlBt7/rsmYJcr9c7c/bs0WPHLBduVh4IzmJqNcRfrMZfuRVe2xKlaD5QetIke6eSw421/dwGysgHYUy1bIh8rOB9kqvqCrhE8y1ytR3lZvbFUiptbeW+q7ztfXlbo5A92YUsKFdE8wGHwGooX12ONiKMpHffUT2ndyrukpkO9MmTJ0+ePHXq1KmZs7ELFgmthRIL6TymKjP9Ft7lnqq7cWlcPnfANDa0Hsrxvg6m/7KAK7qpTt/kFJUI25SdgVAbdrQIyOoEEbYDwbXEA4vBDup3aVGO6l6V0m1iTwJstiic/c/ikcXjJ070er2ZP+127K2F8vmb0ZdvRWODfsA9TgQ6HShsIlCTIyOUyNZlaK5A155ERU7M5ARJJTkf8pC5c3ulGB2VyXtO17vyUrRUHpq//ZxEPDkfDFacAr05OC4JYWxElAV/k/SNI3OXUvyQk6HL0ku5BbuVPkLGR0iYeVkmy/kN7lMgIEW82KcwpufW4pVQNs/1Hj7Znw92Ohvam7awsHDXXXfPzQ3SGqNd5JaNDW3FsIxNVJUeo3XoUUU82EP9bKpF24hqc0JcJb9NMbBlaCQ4Mr14fpCbQFugcPUQ3C5JYtP0TRmqutLVO7bGSiD/j0IuJzRRXytxN1tXAlWUZzm7KCIiCGhXIyJmnpub372n/eaW+ePr4ZVVEwl0So0jD37lSZx64WzOt0AtBDEFd6Wq2wJx3otMoLbUHaosD8QlTh1PfE+jiICrCi0ZHgYw55YmcH0AQyjfwS9xCsgzFzw6CAnmVuhZ58qClCRUsmslpV4T6RI255mSFaSwViTA6lj+6Fq4PsY7zvWP9Buogq3mLB0E88FuAwBMFAo2I4lksvjwJ3V8Dskf81U8QQV2w+49y1MhAfWOhwrsG6LIYC2UvlL9KbnawWSezUshsc+FewMg1Lj5ChnTvFYNpo45/L1fPS9rMjo1ARD5/FZNk1P4gLKCHo8X9IDj5BxRyoryrCLzIv3b5cVgogU6cxSO6JVN+ez18BurcWSwELDb+4CpssiTnfiikBDyPP1ugWq+Nojywc3E55BDQitEWuwwEbjwDmWOmvMc7oxIVZFISM8HaffuJM2C7BwoL6CnwHD8BjvOI+d+8kJWxC51eHJ8153kfJjTBtQd9Fm85bRfcojvzmOliHqKYtDqWL68FBnQO873jveVHJIGRSODjRiU75yLQvtzVM/ovmnKT0mYlR5sE/LP1c9jYYtGx1N4zqwGx0aI4wH6/emdkPe0dtLRoL5hQUstnGmTNI3nOZPz33a3CO8VmPb48Lcb34snerYoHBFd2zJ/eiP66nKsmRYDhpPS4HZHaLwLqraFZXkxy22+mouLxEIUpfIidcg7vQKMUyXVw5zPCXGR6VtYDCn2qxZxwZE4Tku1TmxwUxaEq3qRp9J/iwGvh/jCrTBQ9G1n+8f7h8AHgWgY01YMxdtBzrzXRFH1OmSf4DhVqYHXsC+XjiNEoxgjQwtTFod5+gm1bq8Aalc8VKu1A7QLegoHkVIwW9ONtJ3OQi4ga8YDPfNIgsJxRcTWRoynEYWbhKq7nc3cnQfbXpzbofyna+Ezy3HApFReD80Hr5VobFzpIdhTc1qDy5W7AeVob/l3FBHDSQJhIratSg3xSjAdl/GYDL9NgSwGSBFg6dQ0kQTOtEqRihcUWwmAmFgRCqJwzOmbyPcOR76A19Ls8kIAjGK3cuIkSPMWBhQKG91GYj1NkeCz10Nmeue5/iCYGU9ht8KgmDYjGElbB6G4/K/q40AVeHJVeMRTPkE7dF1cs6iqegzrpROy1RjIEG3EmDdYmIafEFAJ8GnpgaqKTLfDQfC5MaK6k6lxP0RTN2WgaYuHqLopA5OkWFkO1qfpOAheD1SVCdvn/t6tzSZ41yP542vhN27HMdDPV1mzF37jivQP13WTy+YMDzm7/JQ5yFvh+MXQBx6/SE6HCJVladLgUXFF8fykZWpaigNQpqaToj8gZBI77JAROM3BTCoDMl/nMBRQcCTsw5Bd+C47VEJNTIjenAOZE8+lUgEF1wPBdXXps6CYFPEwxpduhX1F335+oHm3G/Buf50E0EYko1iU633zFf0eUCufA/ZiX1wtlgNs3/E05h1rfB5X71LpuvID2N1lK8ZWnDihlosMtT1kiUrivtnaZ4cK0OXDolZlZ7bHx3YHbnsMbRsHRBOeeVjCIc00jPHsSvzVpXhosBAQ5ZMQM5lF2Oeu2qwQG/WwmYjUZEJXpU9V6rJUisupfF/kQryVNWlVjnIdOVrdylcemH27qkUamWtnmVkDO43jWRMNNN8aypduxc+vmVhIHdSBGoM2I4l9HVTbXJOWV0lV30TvyKz5a/912wyY2ohwM2mmUGgYk5lmSvIqJnjcsoeMUI16UbPWTnU5ajliLXDPnPAlHxV55ugaaJF8TVGnEhh1ULjcEfz6eGiWxCZUXxOq0Bw6JB4oWxNdXTdfvBWNYukrYmKhEshW6PdT82CjmGXxi7/lToDLgQ75uxCx9003BiKncFXlJn24tbT1c1MuCpz8GPCE/JZ0qE6ik+L62VnqOvQAt/S1ajXtqWCtTW+4J+DythNgGJXosHuEQPHSSD53IzzSG5xfUActGLKnuhVjLARizRONV5fXMRmbaAVhAW3jlT34gS2/1+9c/fIfnD0jQjQ22IpxpNf2BwVZvFzgE/vkotES46okUqcHkKpEyw6aMiAP+zThgX4qdjG8qEuP+cV4MsZasRV3pZ+Gp5oKTd1jnckFh8cDrY7xjdX4pY24x6yZxfEiuaea863kHHWD5pVmBpvkqRTKx9v2rvJylLlyjiejqDnNGlzpFpVWJlVI+HABB7bKp+LILYNI7IQPYoJiAiWy2cgruTGRzfc418zR9UHKPmCHQj3BhD0MOHZ0u10H5ji55gmOM3Kfz7cNNG/F8s3b0T1H9IlBr68PXHIoMtiIJJJJnDrBYsuLay46JO/P4Wo9HmDvfnt7f0PNlDl/+ztFiAw2IlrQWqtWd7YyJ1RqcopKzjE8rK1Ck1OU9msmC/h7XYPy7Gf2kQXqHVvhIGUPVDz/BIVv1ZTB1VxRyIN+uTGKwmE5HwXW8NG54PBABzwlZFe7AvrG7ehba7GAWCeLJpV/Qhr1FvNNfYqyOlSKn6qO4CkPYvcE8jFZFhtx7jzZ8TdOaMWF+gmekMerZgFWViU297uRhUHFRx+llWkpJ+SltDHly4M8vsg6PzSuJ3zL4QlR2/owYXKTSUk3WCbNNDT0tdvR2Xn1uhMB0cFKDoVCWzGylr6MionZqerzlxO04yCA98gJoSkWr3I5KDkeYo8UiF2saGYDbMYIBfPtCoZUfUIC1ekN5P/aZFymWrm3P/5UCRjvT6i5CNtLFzV+Rf3x0eKYbVamB8o2QvnG7Xh5ZLwKLjN8DrnFfZkW2S+UbWZvqrJ4HefgfuUIobp/7KZ8eNLNqCpboKqTAbytq8e7eqGrzQgpxQNNL22Y59ai+ICNYQENDYUmh6/W/3S1D1dxll/UpuNqYTTWRE4WsA4NDWNIuyAvyNovUgsqdpnA1i6nUkeEo3ZNTqkgJ9qaCFdA4epPeDoiXF3+BlZ7puJMmolwtWgkwSLw3Apr3ncsTjEZ0Mtb5tZIQqGBTtbKqpaWzXmUaSq0oaB6UA8KcJ5bXMAAK/sJeb4Y+SApOwFk+R4urBvd4WC51CmxTTkQ3KSdazqCJxjmJPtTajDEKXstVw09RcVbIYRyoZFcCW3d+nrC7sswFTu/b0R4dUtuDM3FBa34oCByI4NhLNngRHUH1aqoiEp11pgdRXv2rqg67VoFuFF97zuk9MIYc0ErrnaATGVmUtidy1Q0VgI1ZXTqmjLUtHWoy99UcxCoOlFUkMRuVTxEpY4+FTRrqg53qjgIVSVHqGJDOMBm8lrS7Q+4F2LaiPD8WrwRi2K3dcBkvm58cjIa3bSzlUvOVpTjbSOFW5RXoKHEPqAqFeHUzUwcJ+dBQsdvIe/GkP6oLOXDTsI/E3CTor/zzQpunz0HjmtTUZaVxLoeK4Po4LQAB1dAHFT8GibPFzvCtbw0lufX4jNzqq94fxG5bFBtxRjFUOyLb2oY2Fz60WWwrsYztQNbtlnoym33yhUjNJXoMldiBnZJMYwxbFcwpKiJVI12nGC0u3Y1eNq2j0+zOH5LhE1qjz8Vfdy7sdTijYcKfsvZeiSvbJpYqD8NeMHV3mgfpyuPeB38Z5ip2LkKpwGTdmTrWv663ZL33y/UiyhQtBnRyxsmMgdlbMegUUyx1DUm5yYBAjWjEbttlJW3tQtPOTDqLgIn4EdoKGohyxE4/VbcJTm8YFTd8r+6M5AfZCsfxC85muc5N6FwnkI8wONlpxREQP4wNXqvmKxtwcVwxyeI4FPI9s9+Lr8wVUw4LGmhzQi3RwAoUDs6Z96RHyoGPVXdFnIgHpdaJjgc7gIAmJ8FiiWMiq1+gW00lzCaJ8wU5hIR1fPDpRj5eMOhelCtbuOMh8351kGzUufIjqqZxjFWxhgaWuzt8/jMmNmhoAA/enGzxrrUYh84tAhsePvzPlWM5Ka74Efb2kQ/VOu3LOowjrEV4figgQAZ5MZmY1/Upl4P5Yka04jxNKJwnigNbcV4yNdEjioqctoQ4cgnMFo91gBMkQEq+0Lkb09ByfTgGtsGybIZQ7aHuXBDYKR2MPUw+wtU3Z7cKg+O+wi4XOr+wAW8QjFZkfu0hyYXEFpXKlc5LYVswkGcyaPQT0gxmUaPlFfRLo60JvflDQiR+tFy7ztUgF3u8xIwjYDNSNYjc2YuUPuNxRmxBarQKusZ6vEXnkQOt8BtuNINVAslJJoUbe5MUUyoWteqvXtrbLrqpaG7K7lQMDQ4Slz/hOZaOXAFB4FLPqBq3uRC6DOLpgzk/famGbymKUMVU9xHFsBUzAWnvfeklUOWx2lz/vUiScXzd1kQB8+yQGIsGEYQmkRvPI2T2MfVcXnSyTktZA2FPJ53UnvLibIcOSlszlJBpUwKs4ck7eZs6nM8k0xMdfjCOZo3dunq1VNV7Sw/FtqKRAC1f3fafnEkGBlYhaHiQ8jF6aJUBF0R/FaHSlUbl+/kNmBV3lY4xTzFkVERGLnYQCw0NggNDVTdg6yohZiu7EAdp/32B+r4dDCOnyWKvHsJUSwUy0HPFUWGQpma6nZwXOm2L2+WIXAbSSiqSznMVsrm4F9tAYVmOpWX3TAD2jJixB9YT+7jlOI3zWusdp+2l+3h7XqgbYzt8vUpf52xi4zmSCghx7WSxKbpqdhtWqOiOgCqCmioVhBhql525CPCtQTuCshYCpwxklo9f2egRh42uYko+EgWIANipqN9tdDjAz/XwIA088xSC9zgyGfi8GZ1WUGssjCIS3rVbhBErk5MfXg2RURywN38vtvIYCuehCze4lM/LxM7HkZ7+Pt5W33uvUfwSvEW3ldMAmzFtNCD1lznhNxUJJWyLFUQXCMHoewzvF6kXoyHppTEptZU7KamDLVHqMDTvAyIKmdTmQFKK4Hq/aUV5z8xx4+d7l9c0Ac5zlCUUMJmOCFmHQ3qIxje8fzIO55eC/cFqJQksJ1AuI5vgm2cwAE3PdOe8duz0FAYk0pDVAZQKoXydm3IpY7IL/DI9cNjb3/6tHFSJRW7MmOUtSVhxSSgUGhsMFCVNzkoX5WqOhuqDYCo1CSUinz5nOpPnm6H4gKvtjk3k6eawXMQ57sam5y6ntDbF7W+ySnnQqjkTF1VIW7pgYr5o9IJpldgM6ZTA377uf4Dx3RP8QGcbrLb0dc80KyIBNMxE5JU5T5NUCiVzXpPqaLnLFOuuQmESHGusNQ/PbXImKFR3h4NW+Jg+ClmChQNNOt99UF2lhSCzhq4M4MSqTg4E6tHwYcbaAhV5eSonfq9n6KF89jGYXPvl45VdDz+JlKuomES7bsoyNhQFFBVL0PlnhR20Ja0TZPT9sfHjo+PJv0h74uaI9RPBJWVqtXHb3Ul4ZkWBTQ2tBjwQ6d6j53qzQV8wBe8gaL5gANVV2B/YK2uopDr1r8FRV0Uc3tMVdJT2KVTP1hmNV3mNC/2FLdu87obMOAwptBA5S+bnzPpTsf+zlSedH3b9r6lj7ZdJzRttRlXELK5rtGkXziKvVxtQ6PqvF/gnRnbEOG8KBy3zgm1p2KDPCBh/iO0BO5y395EhPMDd+2UddgVJp+GCFePwtljGhAxPXo6eNuZ3lzAB33CARHT0b5a7HEsSV+7WYFjSKnMatvTEHIKknBUd+3qzqpSqASk8WOAmZiOQ6FO5VtS4mqS4XO7NRAM/CiukP/ulx8NNOSQck9m+Qi83XDIJY5z9SKsJs0QgzTz0R4v9pioKOS/d76QaBSLAbn0PFT1wc1F+OmWtYkib/KyPUF02laq29C4otYU7fyWzi/z6fu4UnKR0NjABP6Q12nl4M0J+ebNgqJPbffuVh6oftJHw2FbNGUoQ2rTcBC8HsjflAFwqRbc5vwrPJD3ItimcMz8xpP6sdPByTl1GJa8RERHenx6Tq2HxmyjXhWeYH2GP9nTIANOn6FC39BiKwZ2OxJlizDtQLDuj5W86k1S3ZxUMkPgUbKH000b7YkGTdWRjdK6zrMxRVk0KtApRwokOZKA5gI+Pafm9L7FuACNBZGAUrGZOifBXNDvL/NE2lK0vTv7pqxtj/MqF1KD101F0a5xPGXfDFAsFArN+bjayr14NQhyVRPSqRSyUd0ztM3xt/EA1Et6b2O2qu95WoXLYcoZA6XFmp3oQiEhumtRv+Ns//yCxuEBt4711OUjOlAU7oyNu82fjKlvwZTzPNcsba2bEcr9GZDIZDktSKIKmV4Yft8AuR0cXRHFgqM9uueotkpO+7KQMkTDOAEG2T8tYts/vQYWa+R5847/qPard62nLfIXcPKNsdAwlko4zgtG12rt+Ilw1ADc+fV4ylEItRcY9QVShZWJJ4G0XUGEih4/Hk1S75WpliVFVWsGt1WrEIVClxb02871Lh8JbIcedfCDICYiWgj4vqPBV5bi9dB4mvbCX5iHat2UKR6L7LIzct1hHHGaYl+yvGxPBoRynp3vnjM8XbjgRWR8sXWOZ5Pj8aePH+dxaZCHu4KmBigN3r0UtZfh7qmyevANaU7xRoBOz6t7jgZWLGFf6CcxMJa0a607OHxBSg4v5EmhsXNnmX1LGq6lx/EeLx+maPqeK692f0lVExbOB3nZu4rIAGNDMVGvhKsHVLGW372mDI2eo2VThmKUNuumDN7zL21QhPIs/0lQ9BBAWzGe8gOvmGJQLHRywG853XvTiZ79FnUYKj+ZyIA008UjwaUj+vYYBhUqxSUPrUoPP2fsmwp/4z43EyYb+5qEJueQ7KTKJ1Dqkpdbjbk+KW1tLal+gqTBkZO8BTN7WZ0JSQEwKLq0hF+ZtF5FoYcvpbw7eK8iJn0caGfF17mh66SXir4FZQgOhcHPzCKIQccG6u4jwcmBstDc3g9mAYUGkcFkIVLo2uDPCbWAseBdpZRc2n6rgZTf4KIKut+H5h0PHOfkl6RjJgbFoLFBoItk0gAVxIQqD0QlmnK5ySmX2ox6op/8QQrfXsJes3RxUV6wPmbyjiFMlHSqzz8FWao9rje+ywWJkzW+X3APtZFi7ukODeYD9dYzvTed7CU0s8Nj9goMFD18qrc0lBfW48UelzUis2ijYvFZfB/5TIx9Fup8VG2MhZzqFpKMDlz9STA4m4g566gx2YcTb8Q5OeBJPoVzCrTE+cim6IGytlFJSqacnoFz2s5uDRxUl+NQfPyzQod2iKgn8GripComQ4iE3nSy9/rjwT6uoyJJwOECC58K3U6ruAH1kkTehyCnrZnx9fesnpidAQ/v2bKPDdrQx8F3JJSUjewjMYoxYOrl+QnTYYMtm5y270aKPTm+ewSp/aKdHx9NbN02Y7jw0VYsc5ofPhW8+XT/SJ9FDpn+jUrn8fuP6gePB4OAjbToujjTB7NGjLLy21DE2coAL9IcD5z1teRXFdmQs0mg7E8kfQeQUoU1kuMA+eNjWyUQ1D4ewlQr6ClnQSYDEtCJvnroRHB+XruUqD220GBs/MrT7dli9ddqbxR0ZnhW2zlP33Xx0OSSa07jksxYXsCUvcBX8l+pRMYqA5FGQYRCLUUTMjYFFXuGRDjfrwZqu9J547zpqNgpoGFAmviBY8E7z/WP9ZmIlKJDZ3Y1NND8+hPBzaH55u04EswHLGXtA5fXzrmV6eQWcBqqJOAnFE1SL2kjBov1cwHedFFTrwwlfMhemSgnIJVsYLt25B4hSb9Z0miYSyCC/9ankgpOSiaXNXQjGC7lcnJIL0/Yd5NtmAie5TfylwgVdeJtFqnZKTF7GOFjg3mtHjnVu+eoVvvXGhhAaBAL65RTwsjd4ubop6ki1Xcozo83roqTSheWa/0EpvcTPFUtUU0Th5rudi5SYf9pLEcOCJzdAsrXRvh8AFr6mzbux9vWejschIqmDO3FePznX3InBQ6CvxV6aclcyaNzBRFAVYrjlHbFhlAoeOOJ3nec75+aUzQLKZp9ROQAurio33q2tzSUpZEIYCtrwJnT4WwCLUADqOhMjEI6mH05mwINNE30uAXxyEv3gx1HlVLXmKEcv4Syv0zQOSsNl7YvcnJU3rpiFLQV3FYLICFYQkXCoMtSMm6LB+QznVRA25Dt5QRw8NYeeZ0KVchIVsaYpYhNJXq7AHDXEf22c/3jfbVf3VQBGhmKhRRBMQkmggjMxeVje4eUT/XVKme3DinaUXJ4GwEWt3NbBaBy2v4O2WPJTEwwsCgoBYELx7Fn3MykCSm1wLt2ePw2TVS38UUzOT6aZBrqNRc008ggErp7Ub/1bO/uI5oOn9qA5xIFTPceDd5+vn98wJsxXH7a7JG3HQ9azw2qEBUsSyQklOtUCEryCB7yjG3LLxBftgaFMeN8qdRj5l66Avb0drszVwwaxrh8RL/jbP/8vGLeh/GcXcaxISHSKu3dznXQVWPjUdtLtLwrTz82Z4W076SdK/vg9HrHU1Mzn3a7J2ZSioxQZHIL7iAbtmDPaK0r+WwRvpCPil31VLQhwnkjBi+7oUyEo3b0OVTmDzxfU8Uv9/seN7qsUI3LXhqhWOj0nPqOc/37jh5ofdKpUgIgGmh+y5neVoQ/uxWOYmjiXr4ugz1Inn9GQZ7/zPWzD3LwWga4WToB04S6lrLVUn7BpAFZMTmUkuggIEVsQ7kC4URyh630YVZQIeXZTVxRDh9zSHGpQGEaOHpjGvgWgmU4zv0K9odHnFs8ASXwrbBQY8pxz8dChuj8gn772cGbTvSwr82iDFGENAxPJlkbF7KjF0cNrDCePiTBHvmS9vvWN0ul1gEQVTDumOD4eCtpighkQBkiF0CKT36OuDVlHqh9Uwa0PSwKcHkzcFeLwjV25vYdFr7D+t0JSlMeHPdVz0d3DzsydGqg3nY2eN2JoKdYQHzYXZAzkc1p/vbzfa3os9fHoaFA+Rm6cGHQFP5CLmVTclPZpJzvr5HpGkzSSy5KVhqZnGcR2V2EKZGKBVsmnhCp9NZYedasgVDqI5NpzS0oKbRygKVzA26XVUlXTpk2TzKQOEePzueEIGWvA4hPxl7K5UR5xDsrVMrSS43TKPJxYXa7BWQEJwfquy4N3nSyV26svpcj0IDGMYwkIC2yrrNM2slRCSaCnHDuad3KqNHx5ESb/EAhpull1/RjK1kf7Z0N1VQU5X9MKhBj/TrKNUWZkI8Bjc0kfAyQz0m6sHKbPFCh7sHrgbbRlKFwBN7lpgxcV/zUnAeanL/7Xelkh1KsV5cHIjKCCDQf8COnem8+3Rtobq80dViSQ0R0pMffdqaviD53M1qPZDFgt9cD6h/qLO+d8/oJ75ldh5fEM3l5w1T3Or+wyL/JRAwuOKIJJRqUxknIlyZI0hs1a8XtZ7C6zO1cvXPivRz9J6fcJx0JKGZ9kHuCCpieu8ZK2QooDLxyJWxuYHPOuxSHug+AtqeqiCLQMMaFRf0d5/pvPBH01T7nNQ0QCpI2tZ6sD6eJikyXKSHK54Ik9iAufmKCd3WFKftvez1a87PG7WOgZpdTeAU3pLZVVcioOTXNOazjGQsGaTYomAnyLtPEmtsAgmVnp7cbx9/GD0GL3UEUCgWKHjnVe/R070hP7UvTkb1A50HH+vy2c30QPbMS3x6bmHigSSuafbNyzt9snrzUtZhfJo0qDhyak1dIHaEqhVMFjWH3G8RXGwJfB3qUGAFSLfs2m4Fd0boN0zwIbCushcaGNNM9R/Vbz/YfOdVLQo19Hcy2GTE3leconlw9l60wk/wlt+vL4J35vVtiBw/Ezp+qSYN7ntRj1O9i0w1aExMFtpY14bNOA3xtWxK7JQTXSIQrL8S2TYSrPhnAFwBRjVJDhruJJVyh/jpQ/qvHoEDz/Uf128/2z84rqzVAd5wHojSOWQj4XRcGR/r8hZtYHiISW77OhfQCvHmgCogSeQp1OXjN/ZMdrjPla/kyDmOad4IbDzGkECyVop9c9S1THoIr3npQLgDKQW0OI04cpMKht6HwcBXCI2SZHpQIb/CEPt6HCxVakZyqNrgnIIQI1FN08Yj6zvODB44F7db6u2sCssrlmY5G4VezDzwr6mbb7BFVBkaNK9H2FwH5IItrj9v+sFMUMOUVjBiUFUdMGHRcGS8VbrrrYiKhniLNFLAD4EqLlA/VeqAZivF492ohxuPxQM2S2OQjMrSD4Apfnd4pFhKFFMEn//mUzh8ifNcx/fjFwdkFRYdEmGeHKykb9p3o6y/eGl9ZNcOYFnpJxXoaiIBzaZp0xHJ+TZPP3xTFe2iSE5rMODxphcA1/oaKnkk4VeVhqAyXS7unwMkfWNhuIrTgmz/EBwgjrTFyfiNMupGUXJcPeXOSRQ5dm8sqc27mtcRxyJdwACUJcMnfU2aKgGGMhUA9dDJ47Ez/zNxBKW0LBbFAqZzCvbsqqnJIk6mUHXJ/Js+DdJlRnnnhn9JbPtmNbexdjGsGwVDpnBmTnnVZmRMzcxMJw9sInJ0SvSgNhgKACutOtMaRUBFmzoSK7RHYb3ECmB4VbPOizfHbaONXQXDK5ksFdy/qb08J2bKLYrcHBpQjAqiv+P5jeqAHJwbxc2vxytgQaE5zoD23nusvb4ZKuwuXaowDdRBUQ2NmcoqNXC0f9j4R5bitvAziyTlLJurDWWxRwXbzxtaoPGOgDl5Du6emfKWYSRGFglFMWtHdR4LXHw9edzw4Pbdv6nDlMCg0MJLeCM7Jj+buOE+Kury9D5hIeJKb95AnKddF1zNBo+0EtRs4G6pOAFx45WiSTiq/awpdkSe1w0cpTApX06g0oEIPFWoWFPD2fQDqWga3YkhXEOGouu7Bg8K1OH9U87C98ibtgLtkTeSqonqYeL7DWvQ8Fjo5UN92pvfQid7MW+Yc5GDIyoEz06VFfXKgTg7U11eipZFEhkCkmbSzbuV8O58CdMdpiSi7AnCMXBSVysAlzxfynYrKcBxPXpVVTQGCrWB120dl1DgH/i+SFHwzTo5imo/BizBAEY4rju1Svaof3y6sBvJINeDLTnmW4UQGFINESIiO9vnign7kdO+BY4FmEkxSBftrsZ31StNiuXkPV4QFxemeiwkbhv9hn1X2ZbcP6JJssmdNcevTKfEe60jtgAHFwgGnYDHzFHkgqQDQpkLhqIpNN1MiHFXzyGknRLgCyJvfGiguwGvKmxRRJFgI1Lef673pZE8peq1ZNsrnA37sdO+uRf21lfibq9H6GKxIO36CC5Q2nigaKMq5E8Ek9qfSXkWMbuI/kvsprmxP6uIEzBnbG86KkqEo5VDlezpwi3kEtchzVu5KKOJgie5cIRVUKOXJ5YSAai6ct/y2kEbitFW5KwtkD2VJz2fm9UMnem84GRwJkoXzAYGUBRQLQGSxuLywtzMFwxO1eJWR2ZPpYS5p+birkwknzjlQVUyynZbJaO17MDkZX3aH2qswVMFurk/yLz3ZMhXz7b25egYvS701VgJRayo2ar+rMQ+EUglOoxgPtWjKQKXWrpV9UeHqFzMK+twVeSDrfhTTZox5zY+cDh4+1V/s8eHoErQ70JxlVZ2dV3NB7+KCen49fnHdrIWiFc1py6IpanwVmj6QUwbk5I4Tsm2ulUPmNUrRD/mSQ/beZjWt2RfZczBEKs0OuGwFhcI85ZmkCqEGk9PjA7kG3sj5IRS4c86nyDEOkA+MUPJMKIVEeXflth3JaoYYloGNkQERnx6o+4/re47os/N6PuBGSHPvnVAkRMQqTdR5sQ9mD17qnY+rHFL1yp+4kGrxeD6PxkIbZQk0L3Iol8YpdFpoavVd/Zv84WN9P1ZOnlkGKEILijZavLMTTBPb2mvbi4Md8qobVrKtFYOQwlCxgSJ+3YngbWf6x/ssh12ZZ2cQAdLkwdEeHz0RnJpTZ+bNS+vx0hibsUQxtKK+Ys1ONWi7u4gsYVOnwFBEV8gngEYOb9u7r6t9ItV9+doqtpXe94JsVMHnrormvV/aJidkHbcRCg1ss/Yz8/rsvLq8qO85qo/0VOYOFR8gSNny4nKL8fxNZB8BuqBsq/LbTzGllBpouStaxXWH4opVS5VXqHESID/ChtZPqIvBetcZ3GIv91mQYmdVb9DTmopN1bgzqiE4mga4K7dLKbBavUEbNaFwnge1JR6YrkmzvJrL6faEXPlVfGhgiF5/PPi2s/1zC8mi+bUZBmXjVTuQ2uk5dXpO3XtEP7dmXtyIb49MBDJC4IS5rtJ2PshlT5JH021QhBIil4Y+mCwRHU4dociOS4BrBqcxVCHrY0OErLWQJ33LvnkEZXalQznz0t6QY8TlkTq4damUC3pQnzEqqHHn4qf0UAYT5p5WNK/47Ly+/1hw3zG9GHDmdJkPVkbTzhE9TcYQir3X4L0XHjQJzShVc3hU8h6NLSTq/R1zo8JCM7DG7UKfGmytzvmVJGA5/7wH2YpJVc+8VCvvgcbSmW01ZWjA8WbYlKFM0W7iIJSbMqDUx8/LSnBXIpGBEF1cCN5xvn/PEU37qqZ1AL1RdiVOzqnHevzgMf3Klnlh3dzYMiMDw9xXpJTDYUWeBe02L8jKd5jhOCXhpOejwqSmFBO8hClHF6KszF4ITKw4x2oroDeZynYe+fFMKOVUawEERmGwwZ+zcUE2yR0BZW0FSZ9E39FQjJnSdn4pqIUjPb602LvnqD4/r+YDFajiAvlgDSfmniYNihiRochhELCbFWRP2FFIHXF1UELk6e8NTD3v1/yKXb5Kzf6mPvzybsDVTWT7mvrsREJFJQl/WmXy0BUEe7hlKEOF9oI0VZPTkhervtm+hhHuerd8WG8AVOazsXMKeRA/3czhepCPQ0FEBjQyOLug33mhf99Rrfk1QcjeBpQKkGLqa+5rXuzzmXm1PNI3tuTmUDYiGcbEjJ7inp6I9aZ3hQtacK47QY5DmpAQJtVFmIRSmc4lkFfsz7r8OgWxLi134tfYN8J8y1xPBWuuFirfZIhz9ATkkbWS4OnEXXFWG8SeoMfNjiQdrQSRoUhA4LmAz8yps/Pq7II6NVAnBko7tPKDFgCVg2zWrIgYJAJTnPQKS/bijMXk4TJUoVreLSv1DvYEhG88E67go9eXynJ+wHhjSPcE7FDR9qFWTiTkzXCUT3eqkprGDMq2j49dOH4VQlq1y7bLoZjIEI1inBiot5zpPXQy6Cl6zZIRmuMhZxbuKz4/r8/P60sLuLZlbgzN7RCbkYSGIiEGFLNWZDXoCiuqzMc39h+bNLVzlshJKijfjMykBDxOj6nyKDmqewhVQkClkKgqc1PWeavqD1T5T1ROKqmyQNLcKGBaGKijPXVqoM7P6wuLylIPMtKE4sMRxCsiGxLFTFbLWaQhMGkh0ea5nGr6iXGPn6yanM32rgC3u4JMpBX1FQ3SKsAgzWQ4ZFb4pvJqCK4KTyOfIMIOiXCegolaCZ9piXDURMV2aUJUTRwv/3PCcCUyoIHmx87033G2b7sYdChcoyty7fiAjw+CB48Hq6G8smlubMntUEaGBCRCrCzpw9FZyGR+CMLExAqOvhtsoRImLW5s6VLCxk4ap2Y1DLk2BLnHgl0awrRSLlQBBefETJ1h6XLhKK+0ndfvSVS0S+97xHjgxPcCABQwL/T51Jy6sKDPL+ijPVbcnA844MNJM2nNPVAoFFkdilJEwgUuWyFW8JUJ8nbbNzDvosfiaTbgadrnlShwXBN7ZftqpoGmnsp3ViX20LJ3g4MwXfFQaZ2I5H+tioe20ZRBKkDFqdpyu6AfIRfhCihQNI5FM3/buf63nellTNbOB7UPo7NrFSg6PaeO9Pieo9iMaWkoSyNzeyxbMSIDZtLMvbRJhOs2YKW/XP4TpwOV2f0aJAJ0CTQmadCj8nhxCkdAIc17c0XJdtMK2hnSk/SPFIZcLovj+Ji82A+lTVoL0trkSCKyQ3m3+Z4YAKiv1ck+n+ir03P69LyaD3igqa/YD00fTlNMA0WB4kgQG4rz82ilQyryE3Ica9SCYHsPwVG7dt3NUQ4Xnz6qVekuA7N2357inqIgH3AF3scbO5gjsGM8zTvKkYcptn38QqeTxuO3X9PU81/tJLgVQxE9eDx465ne6TnVoXDbe6KyhYJiGmgeaD7ep9MDtRqq9VDWQ1mLsBVhaBAZGsUgJsUcMFmwzmJHnK/dK7QXUu78wvmq+Ly2gjuKMhk6t8IxK5kpPPmSH4LFtZcDoE9kv305IfJWYTtdXAsXMONtCygWC0mBmALmIz0eBHoh4GN9dbxPR3vqWF+5U4ZMOgHeEcOJKSBSijSRtqIPeTJk48zOFfkVTD+qiWbZYpi3E5I1uC7VdDT2ILupp2HqKer5OocFqK2kmVYQwcdA9TV7nLJJK8qU7movUbGuJJcIV6mhUL16RaHhUgVsSBXpIgEJwQjuPR58x/nB2Xl9J3UJ2keALuOGDDSdm1fn5hURrYe4PZblsayFshUhBBkgYxjbblrW07Ca1JNSRr5mRnlRlrRLYU99dVHfBc7N5QYUzqvZ4ZPwKaV/Sjoj7l55NeFMRUJShYUsl6MV6UANNB0J+MRAnRjo4wO1GPgdzx25ZlLMfU09otAgkomn9+kbeP0vuHbKxzSxCO/mU9P+I+ZGNM6zsbdIiImUor6mXsVBk/beuZxQLQpHeWCaZtqUgfJHppk1ZYAHA2woHir6SI8uQ2lHzuNyiifVlwYUCd19NHjbuf59R7Xijowwe4eU2dE+L/b0xUUdA1sR1iNZDWU9xKaRcWQXvFBEwqSFs0JCdrEYZqRqdYlgtlNclIk5Zh+5Z4Ic6xJcv8qtxn4Lazu3WWquaQJKj+SkG9vk0TAgA4iFnUE9TXMBHwn4WF8d66ujfTUXkCZWJZ2318goZaK+Zs1WYg6251BhkkUzWJe9i/YoHPbqB7ZH5LhtmVOdOAKINFFfc6DqqL+B/0Kgjp5Y44EaK4GKUDJyVCKehoPgupMCDcFB21BWw633QD6PCPdsvedDKfRRAGGQeqAYOD5Qbzvbe/3xQPGhx9MPprkX306mAfGc5uMDPmvU2FBoZBjTVkxDI6OYRgahoThN5bGQYrZ4nSIwJc1ei1Iu7MbE3IChsGeoU5UcOHwrNnYhuAZhTCBhHtuYT2D7RDAzaUULSs0FPKd5PuCFgOY09zVbPLOqhP41NUqZKFCkQCCOiGJLDmwMBLyKc/W1rC0u6/aSRtya5sfTtDaqUevxXBYk2F2gEgy8/jsC7yPRmHGZVVPRGjo17eArqo6/7fNseXp+nwQaGznaU28923vTyWBOJ+pwHSNu99Z67oRuGQoLAS8ECawdCQ0NtmIMI4wMxgaRIDIUC0zaOC4GEchktUeUtCrglI6s2k3QTFM0TShndCi/xrJ8YnEE5SzClmi5pVsqRT0mRRwo1sw9zQNNA01zWs0HvBDwXMBBaRp1J6XX8thM1og6yRIZSbo3uZNktq6XbQ3Rwq1XtcMD0xycW09uM8f0XI+lmHpMgW5V+xi4I56dYL8G+GrZGrU9cLe91qiUp5nSNEQ4NKlCUL5A3RvVlRfHGR0YBCEoEBGHgjnNbzwZvONcbzHoyAh75Y2qAYWeop7iYz2meSKiGAgNxjENDYYGY4PQYGwQC8XWIxV8Aya0BUeQYdIkxiuezU2Oh5p6RWaJHBeCy/I09skPmANFNr6ZC3he87zmQcA9zbpp4uhGZcEVKeaAKGaKAeuKyreQK/A6fyjDLdiwQH3UVXcTUVdP27Ihg5dX7d/Vt15RZOk/HKi2J+4qJmyTg1DA8TBt8RD5W6NuT4yHWjdlaCPG09IDUUHcHpOmvHYGecPJ3rsuDBYDRV1J0MGzgDkIeF7TMUrwKwEZQQyKhEKDUMgIRUBsYOejDKgBpWU4xQmdi4tTbg6gke/lUxyYzAmfImH6WbYrB8w9TX3NPUW9hAGYpHbsi852sprpKQqIbd+ByEZFZdZ1rbQopgLcuH33nu3EKVPgddWflbE4yfA3lcg/tj/toMBTbRnBefE6LlG0y20rq76CmwA6VP8T1XxEnvL4ZX5d+bBljK6Kzmjbsr3uePD2s33bXxJdKuhgGPKjxCZ+NJHmYgxj+z8aIQMYgf2nIHuRZPstVmYLPIlJiAGQt9654lFPkk9sC2TBCYWPlUpafihmxdBEWinFSbs/zRwwa0X1C0/kkzzdIJzWFWlFKs3vCsikwWgxEmonYFqVjsEOcTSewjFViSa0yW+yg0batHdPkbYZtenHVpA2FEFNpxOqoJZRdQxE26Nie7W1K+6Kqz6Sdy3wCpJSLRXbe2ygLhZ0ty7HpJbreWFRvfP84N6jOskDdQ/0wcHrqNh10Lss0laxW1EV5G75ZpYIYCRxSCYFlO2nZTVbziM/mRNiZpWmnXTieGxM0zx4imObPXhRZ9sfM8wBU0DI1iVCRZEk9k3nXF2nPKv4ZoZ7c1PQU5joWJFm6mnS2z3RIEmtOb2TC5dVWojx1AN3fsxhu0Q4amzKgKlUtJtRuKqudIWDWBgHnHRQHBtcWNDvupAqZHezwKFwS9M/tYpJEQWZJslkUPGeTRxVnrWz3Rgpdl0CRZIwFyaIrFcw3YN/VBC1ebfHdu27PM0ItElEraineIfKy0F2RJVXQM1mXuV2Vk6lPlwWA+c3QF5ZeKJpUWgrOBEkniiIwNmlIBSBkhByduZwDktEUtDe4GKVO9gPxIHTujznIHD0jCl/2MKvTjjBTEQ0jHFqoN56tvfGE72e7kqC7iwQr8WDyntyDt2Y2meMjkkxGeaJ3qsk7RNrtAPKd66ZEI/tr1nas+25zW9Gkmu0xOuZoDsBERlQKBM5LDhyWMi39nIan6ACTyuzot2mc0yuDH5F2OTLyeY697jwGqcngwkzbaJNkolo+WlyhaMBwMR5TqQhHSc6qf5zUODshIcGmzGOGJrT/IaTwSOnegPN6J7XOy9a2tZcMZNv7BzPQRsSAROYtM0VOc2ckJeX5uoR4lWhxoyGDc8k5rZtt1KUWPMsV9VJ6URSDMElp50vi81iCJ31JnH6slTJ1XjqjQseyAlNUF3xU8UmYLd6sEJIBbUchyysQj5JIKUbhUJnMrtNGjsGIAENFD18qvfw6d6JgULXqq7zUp29NqIizdwjAii2OrDpBDiDEcJ7Nw69dakW5lFpADTjqzcycmPLvLolXnG6GsG2SXxjXYiUt7TBSxUcivId8ouQovKjXOSUd2a584dkoRgqtCG8Za1+gkZ5g/QnhjGO99V9x4O7FvVir3M9nXX2WjS3bMPyKgu1mLSHKtptPI2/vVYiHcKKoJh41xq7shGMDcaCXKt1buhi2xaIQMX7FZRtbO+7fAfhksOj1AkV/Axz5VcD3Hgm7hYCBIqO9tWcZuoI2Z119po3SZs/SU7ewpFD2wXSbGPykn2TWKIfb4sECJzWpe02lsNAl7PYlZHXlaB31lln7lzvqphn8ZDUpotmM8u3+TSrlsucEPHegDmdE+qss84622uHZJeqtvCZqvrg7KapSSVcIjql92ndvFMn1HmwadcdnXXWWWfZ/OlQjgkCOCkDUOKikomlugURqr/A0Ric7K8IKv03N3a+6iKhzjrrrLPXhE9CrtVlsTlhxV62urG+S17BCdmUzwH51UF34zvrrLPODoJ5GGjMGX9XAKfTHilLME4DIS+WZkE2X6BzgPCaLhLqrLPOOuts30x1l6CzzjrrrLPOCXXWWWedddY5oc4666yzzjrrnFBnnXXWWWedE+qss84666yzzgl11llnnXXWOaHOOuuss84665xQZ5111llnnRPqrLPOOuuss84JddZZZ5111jmhzjrrrLPOOuucUGedddZZZ50T6qyzzjrrrLPOCXXWWWedddY5oc4666yzzjrrnFBnnXXWWWf7bs2dVR+89z4ies973/v+f/z+7M33/6P3f+TDHyaiKy883/Kbrl69+u/+7b/93J9+7o8/85n2e3XW2Qzt6aef/vznPmcH4Xve+95HHnn4e773e0+fPm0/feqpp/7eT/zdqUZ1Z53N1ux8W7D3vPe999xz+Yd++IezsXonTbZ71977lz74wY/9/ke7QfaatbX19Zs3bj744AP78u3D4fADv/gBu3KyZl8/8OCDv/br/683vvGN3Q3qLLOvPvPMIw8/fHDOx47Vf/Pbv/PRj39sfn7+Dpts9w6OsxflFz/4z7tl5mvTjh09+v/96B/897/8K5//wp+Nx+M9/vZ/8zu/Y5/kH/ihH/zwb33kE3/4H37xg//8gQcffO7Klb/3d/+rpaWl7gZ1ltkzz3z9n/y3/+yT//H/t7a+vi8n8Gu/8etXXnje/n3l61/7uZ//h0T03JUrH/uDP7jzJtvZOKGnnnrqwXvve/De+5aWln7zQx/6m+/+G9/3Pd/7L3/5l69evUpEzz77bBZj/uzP/IPstd3lqaeeevrpp7/ve773qaeesivWp5566qd/6qcevPe+n/6pn3rqqaeGw6G7nq361B6t8Pf+f/T+xh072zP73//oj9y4cfN3f+/f/fz7/+nHPv6Jl156eW++d2lp6Rf+yT+1HuhXfvVXn3jiiTe+8Y0/+mM/9vP/+P322f6Pn/xkYfvf/NCHfvqnfsodxhnQ8S9/+Ze/73u+98F777OfPvvss22eAvdhsePQfpQ9Bd1APTj2/d//fZubm3/4v37yF/67D/zrj/z2lSvP7ePJzM/P//i7352EaF99pn6ceCfbbGQOh8P3/6P3ZxsckMl2xnDc/+FHf+y5K1fs6//hX/7Kx//gYx/9+McWFhbe89732nXoux5//HWvf727y5/8pz9xQZKffd/7skDyY7//0Y/9/kd/4Id+8Bc/8AEbhNZ/WmPb3rGzGdrdd9/1yMMPffWZrxHR05/+o6c//Ufnzp39q9//fa978MHBYLB73/vZz37Wvvhb732v+/4TTzzxa7/x60R05MiRxmE8Pz+/tLT0t//We7OPnrtyxX76//6933XB+qrdyUk7ZR91A/VgRu0/+Nf/2kf/4ONE9NVnvvbVZ7527tzZ73znd7z5zY8eO3p0X/yQfXHPPZfrx0n9ZFtApA/IZDtjOO7xJ5741Kef/srXv2af7eeuXPnUpz51+fLljNTwN97zN12CA6VwZ7ZItGf/4d/6yJUXnrcH+djvf/RTn/pU46dZ9Hrlheffk8417/zOdzbu2Nle2g//8A+6/7xx4+a//sjvfOCD/+JjH//EzVu3dulL/+Q//Yl98dBDDxU+evLJJ5988sknnniicRhbZ/bclSsPPPjgpz799JUXnv/EH/4H+2nm5Op3Hw6H1gP9wA/94Ge/8PnPfuHzDz/6SCFI6gbqAbF3vP1t586ddQfqR//g47/w333g9/7t/7JnEbwblydD67u+q36cHMbJdsZO6H0/+77Lly/Pz88/+eSTLXd54MEHP/GH/+HKC88/+eST//6pp4joJ//+T9tJ4cknn7RgqJ1E6j/N7Pd+93fttf65n/+H9jRa7tjZ3qwx/8r3fW/hzc3Nzac//Ue/9N//y9/4H/+nrz7zzB6sKOvtJ3/qJ73D+NFHH/3EH/6H3/xXH758+fI2noKvfe1r9sX/9Wd+5vTp06dPn/6v/uv/2t2gG6gHxwaDwV/9/u8rv/+5z3/hf/h//vpupzb/3k/83Qzm+o63vf0X/sk/fdfjj//e/+d/sQyabY+Tn/v5f/iVr3/NJooOzmQb7MtD7tr/+Sf+y4ybZF3o5/70cxm8+Bff/KZ14O//x++v/9S+8/TTT//sz/wDu9j823/n77Q57Gy87//t/9E9tzu3bz3/wreef2FxcfHxv/Sd3/7t79gX6IOIqoiwly9f/sIXvvDUJz7xrW99q4Z9VPUUXL9+PTuOfVFg5XUD9bCYTW3+7u/9uye+6y9921vecvfdd+32N16/dm3n4+TH3/3ubHAenMk22PfbeaQ00fzxZz7zx5/5TNX2NZ9evXr1vX/zPTa6+sUPfGCqw3Z2cMzmhP/wf/3kIw8/9PhfetfOWd3v/M532vXaF77whbe97W3Z+8Ph0KIE58+fd9+vsqefftoOsHc9/vjP/fw/fP0b3mD/OVvrBuohMje1OUNW96/9xq9nYfTVq1dtJvJfffjD7ijdxjgpL48OwmTb7IQsjdV6s8zsP9/1+OOzvaPvevzxP/7MZ9wb0P7T4XD4t//We+3r3/xXH3Yvd/2OnR1MW1xcPHXq5LHjx3Z+qEcffdS++Ojvf9R9jD/1qU/ZJM2Hf+sjbY7zP/76b1io4e//N//NNk7j/Pnz2QNsg6ECca4bqIfU7rl8+fix47t08MuXLz/+xBPPXbnysd//6K/86q/OapwcnMm2OSf043/j3daz/eaHPjQcDpeWln7vd3/Xernv+d7vme3ltgf8Fx/8JUt7XVpasjw/G9nVf/qz73ufpSR9+Lc+UoDs63fs7KDZuXNn/4/veff7fub/8gN/7T8/e+bMTB7jn/z7P51gAv/o/V/4wheeffbZ3/zQh6wHetfjj7/jHe9oGaMQ0V13JdhLxqtuaRkt4pc++MGlpaWlpaVf+uAHu4F6qAfqD/71v/Zz//f3/eiP/O/2AJGb7Tg5OJNtcyT0Qz/8w//mt3/nuStXfuGf/FNbbGHtB37oBzP2+qzsx9/9bvtd//lf+X43FPs7/6e/U//ps88+m2H0BYTkygvP1x92JvaBf/bfds9kS/vYxz/x9Kf/yPvR7iHs/+VP/IRN5Hzkwx92OUIPPPjgP/vAL7bMZVry68/+zD/49Kc/vXRryYXpW4Ihv/Ybv/73fuLvWt6q/fb2478bqHtsn//Cn/3u7/0770ezAop3Y548dJNtsxM6ffr0Rz/+sU996lO2oOeBBx98/Ikn3vmd7/zu7/7umdcuzM/Pf/TjH/s3v/M7//GT//GPP/OZBx588K/99R/4L37kR6yzrfk0KxjcxmE720t76aWXyx7o3Lmz3/2f/eVHH3l496qF5ufnf+VXf/VHfvRHP/m/ffIzTz/93JUr73nve6cdxu/72fedOHH843/wsWe+8tUf/xvv/r6/8lc+9D9/6CMf/vC/f+qpluDDk08++eHf+sgn/7dPfuTDH/7Jv//T/8WP/Mh3f9cT3UA9gDYejz/+iX9feHO/KDOPPJJkm2xScybj5OBMtgygG3Cd7Zn964/8ti1WtfaOt7/tXd/5zr2EMg6UDYfDR9/0EOUT0Z0dwHj9kYcfevvb33qgBOXuGAu6S9DZntlXn3nGeqD9rT/fL7t69aqNe37xg//8R3/sx4gokwLLqBOdHQS7eeuW9UCLi4tve+tb/vJffuI1NVD32LpIqLO9wzc+8MF/cd+99+wjmL7v9tM/9VPlAqNt0+062714fWtr64knHt9tQanOOifU2Z46oXEYvsZXlLYy6bc/8luWaPcDP/SDf/XJJzsg7gBGQjOhZXbWOaHOOuuss84OtHXtvTvrrLPOOuucUGedddZZZ50T6qyzzjrrrLPOCXXWWWedddY5oc4666yzzjrrnFBnnXXWWWedE+qss84666yzzgl11llnnXXWOaHOOuuss84665xQZ5111llnnRPqrLPOOuuss9b2/weiV5BzfyDk3AAAAABJRU5ErkJggg==";
+const SECTIONS = [
+
+{ id:"intro", icon:"📖", title:"Introduction ", items:[
+[`Life is full of constant movement and transformation.`,
+ `الحياة عمرها ما بتقف، كل يوم فيها حركة وتحول.`,
+ `زي ما انت من سنة أولى لحد دلوقتي في رابعة تمريض اتغيرت في معلوماتك وشغلك، الحياة كلها كده.`],
+[`Nothing around us remains the same for long.`,
+ `مفيش حاجة حوالينا بتفضل زي ما هي لفترة طويلة، لازم تتغير.`,
+ `المستشفى اللي كانت بتكتب الملفات بالورق بقت دلوقتي بتستخدم الكمبيوتر، يعني الحاجة ماثبتتش على حالها.`],
+[`Whether it is technology, organizations, or even our personal lives.`,
+ `التغيير ده بيحصل في كل حاجة: التكنولوجيا، والمؤسسات، وحتى حياتنا الشخصية.`,
+ `جهاز جديد بيدخل القسم (تكنولوجيا)، المستشفى بتغير نظام الشغل (مؤسسة)، وانت بتغير مواعيد مذاكرتك (حياتك الشخصية).`],
+[`Change is the driving force that shapes progress and pushes us to grow, adapt, and discover new possibilities.`,
+ `التغيير هو المحرك اللي بيبني التقدم، وبيخلينا نكبر ونتأقلم ونكتشف فرص جديدة.`,
+ `لو الممرضة فضلت تشتغل بنفس طريقة 20 سنة فاتت من غير ما تتعلم حاجة جديدة، عمرها ما هتتقدم.`],
+[`Throughout history, those who embraced change were able to innovate, succeed, and leave a lasting impact.`,
+ `على مر التاريخ، الناس اللي قبلت التغيير هي اللي ابتكرت ونجحت وسابت أثر باقي.`,
+ `فلورانس نايتنجيل غيّرت شكل التمريض كله لما قبلت تغير طريقة الرعاية، واسمها لسه موجود لحد النهارده.`],
+[`Yet, change is not always easy; it often brings uncertainty and challenges that test our flexibility and resilience.`,
+ `بس التغيير مش دايماً سهل، غالباً بيجيب معاه عدم يقين وتحديات بتختبر مرونتنا وقدرتنا على التحمل.`,
+ `لما المستشفى تقولك من بكرة هنشتغل بنظام جديد، هتحس بقلق: هعرف أشتغل عليه؟ ولا هغلط؟ ده هو عدم اليقين.`],
+{h:"Definition of change"},
+[`Change is the process of making something different from its previous state.`,
+ `التغيير هو عملية بنخلي فيها حاجة تبقى مختلفة عن حالتها اللي كانت عليها قبل كده.`,
+ `قسم كان بيشتغل بنظام شيفتات معين، وبعدين اتعدل النظام. القسم بقى مختلف عن اللي كان عليه، ده تغيير.`],
+[`It involves moving from the current situation to a new one, which may affect individuals, groups, or organizations.`,
+ `يعني بننتقل من الوضع الحالي لوضع جديد، والانتقال ده ممكن يأثر على أفراد أو مجموعات أو مؤسسات.`,
+ `تغيير نظام التسليم بين الشيفتات هيأثر على كل ممرضة لوحدها (فرد)، وعلى فريق القسم (مجموعة)، وعلى المستشفى كلها (مؤسسة).`],
+[`Change can be intentional and planned, such as organizational improvements, or unplanned and sudden, such as unexpected events in life or work.`,
+ `التغيير ممكن يبقى مقصود ومخطط له زي تحسينات المؤسسة، وممكن يبقى مش مخطط وفجأة زي الأحداث اللي ما كناش متوقعينها في الحياة أو الشغل.`,
+ `المستشفى قررت تدرب كل الممرضات على برنامج جديد (مخطط)، لكن فجأة حصلت أزمة ونقص ممرضات في القسم واتغير الجدول (مش مخطط).`],
+]},
+
+{ id:"agent", icon:"🧭", title:"Change Agent", items:[
+[`Change agent is a person or group who helps an organization, team, or individual move from the current state to a desired future state.`,
+ `الـ Change agent هو شخص أو مجموعة بتساعد مؤسسة أو فريق أو فرد إنهم ينتقلوا من وضعهم الحالي للوضع المستقبلي اللي عاوزينه.`,
+ `رئيسة التمريض اللي بتقود القسم من نظام الورق لنظام الملفات الإلكترونية هي اللي بتوصّلهم من النقطة (أ) للنقطة (ب).`],
+[`They guide, support, and facilitate the change process by encouraging new ideas, overcoming resistance, and ensuring smooth implementation of change initiatives`,
+ `هما بيوجهوا وبيدعموا وبيسهلوا عملية التغيير، عن طريق إنهم يشجعوا الأفكار الجديدة، ويتغلبوا على المقاومة، ويتأكدوا إن تنفيذ مبادرات التغيير ماشي بسلاسة.`,
+ `الـ change agent بتقعد مع الممرضات وتسمع أفكارهم، وتقنع المترددة، وتتابع إن التطبيق ماشي من غير مشاكل.`],
+[`In nursing a change agent is a person who brings about changes that impact nursing services.`,
+ `في التمريض، الـ change agent هو الشخص اللي بيعمل تغييرات بتأثر على الخدمات التمريضية.`,
+ `ممرضة اقترحت وطبقت نظام جديد لمتابعة الجروح، ومستوى الخدمة التمريضية في القسم اتحسن بسببه.`],
+[`The change agent may be a nurse leader, staff nurse or someone who works with nurses.`,
+ `الـ change agent ممكن يبقى قائد تمريضي، أو ممرضة staff، أو أي حد بيشتغل مع الممرضات.`,
+ `مش لازم تكون المديرة، ممكن ممرضة عادية في القسم تقترح تغيير وتقود تطبيقه.`],
+{h:"Qualities of change agents:"},
+[`Ability to elicit trust and respect from executors and recipients of change`,
+ `قدرته إنه يكسب ثقة واحترام اللي بينفذوا التغيير واللي بيستقبلوه.`,
+ `الممرضات بيسمعوا كلام رئيستهم اللي عمرها ما كدبت عليهم وبتحترمهم، فبيقبلوا التغيير منها بسهولة.`],
+[`Good collaborator`,
+ `يبقى متعاون كويس، بيشتغل مع غيره.`,
+ `بيشتغل مع الدكاترة والممرضات والإدارة كلهم كفريق واحد، مش لوحده.`],
+[`Flexibility`,
+ `المرونة، يعني ميبقاش متصلب في رأيه.`,
+ `لو الخطة مش ماشية، بيعدل فيها بدل ما يصر عليها.`],
+[`Ability to maintain change vision`,
+ `قدرته إنه يحافظ على رؤية التغيير ويفضل شايف الهدف.`,
+ `حتى لو حصلت مشاكل في أول أسبوع، بيفضل فاكر ليه بدأنا التغيير ويكمل.`],
+[`Ability to communicate well`,
+ `يعرف يتواصل كويس مع الناس.`,
+ `بيشرح للممرضات إيه اللي هيتغير وليه بكلام واضح ومفهوم.`],
+[`Good manager of interpersonal relationships`,
+ `يبقى مدير كويس للعلاقات بين الناس.`,
+ `لما اتنين ممرضات يتخانقوا بسبب التغيير، بيعرف يصلح بينهم ويحافظ على جو الشغل.`],
+[`Ability to involve and empower people in change process`,
+ `قدرته إنه يشرك الناس في عملية التغيير ويديهم القوة والصلاحية.`,
+ `بيخلي الممرضات نفسهم يشاركوا في القرار ويديلهم مسؤولية في التنفيذ، مش مجرد بينفذوا أوامر.`],
+]},
+
+{ id:"types", icon:"🔀", title:"Types of Change", items:[
+[`Accidental (reactive, unplanned change): It occurs as a reaction to some problems, or events as when it arises.`,
+ `التغيير العرضي (رد فعلي، غير مخطط): بيحصل كرد فعل على مشاكل أو أحداث وقت ما بتظهر.`,
+ `حصل انتشار عدوى فجأة في القسم، فاضطرينا نغير بروتوكول التعقيم في نفس اليوم.`],
+[`So it is crisis driven, isolated and short lived.`,
+ `يعني التغيير ده سببه أزمة، ومنعزل، وعمره قصير.`,
+ `بعد ما الأزمة خلصت، رجعنا للنظام القديم ومفيش حاجة كملت.`,1],
+[`It occurs when an organization is forced to change in response to an event in the external or organizational environment.`,
+ `بيحصل لما المؤسسة تضطر تتغير استجابةً لحدث في البيئة الخارجية أو بيئة المؤسسة نفسها.`,
+ `قانون جديد نزل من وزارة الصحة والمستشفى اضطرت تغير نظام الشغل بسرعة.`,1],
+[`Planned change (proactive):`,
+ `التغيير المخطط (استباقي): تغيير بنعمله بإرادتنا ومن غير ما نستنى مشكلة.`,
+ `المستشفى قررت من الأول تدخل نظام الملف الإلكتروني وجهزت له خطة ووقت.`],
+[`It results from deliberated effort to make something happen.`,
+ `بينتج من مجهود مقصود عشان نخلي حاجة معينة تحصل.`,
+ `قعدنا وخططنا وحددنا مين هيعمل إيه عشان نوصل للتحسين اللي عاوزينه.`,1],
+[`It is the deliberate application of knowledge and skills by a leader to bring about a change.`,
+ `هو إن القائد يستخدم علمه ومهاراته بشكل مقصود عشان يعمل التغيير.`,
+ `مديرة التمريض استخدمت خبرتها ودراستها في إدارة التغيير عشان تقود تطبيق نظام جديد.`,1],
+]},
+
+{ id:"need", icon:"🎯", title:"Need / Reason of Change", items:[
+[`To improve efficiency`,
+ `عشان نزود الكفاءة.`,
+ `نظام جديد بيخلي الممرضة تخلص شغلها في وقت أقل وبجودة أعلى.`],
+[`To reduce unnecessary workload for some group.`,
+ `عشان نقلل الحمل الزايد اللي مالوش لازمة على مجموعة معينة.`,
+ `ممرضات بيكتبوا نفس البيانات في 3 ورقات، فنعمل ورقة واحدة وبكده نخفف عنهم.`],
+[`To improve the means of satisfying economic wants.`,
+ `عشان نحسن وسائل تلبية الاحتياجات الاقتصادية.`,
+ `نظام حوافز جديد بيحسن دخل العاملين ويلبي احتياجاتهم المادية.`],
+[`To contribute to individual satisfaction and social well-being.`,
+ `عشان نساهم في رضا الأفراد ورفاهية المجتمع.`,
+ `بيئة شغل أحسن بتخلي الممرضة راضية عن شغلها، وده بينعكس على المجتمع.`],
+[`To solve problems.`,
+ `عشان نحل المشاكل.`,
+ `لو في أخطاء كتير في إعطاء الأدوية، بنغير نظام التحقق عشان نحل المشكلة.`],
+[`To make work procedure more efficient.`,
+ `عشان نخلي إجراءات الشغل أكفأ.`,
+ `نعيد ترتيب خطوات التسليم بين الشيفتات عشان تبقى أسرع وأوضح.`],
+]},
+
+{ id:"areas", icon:"🏥", title:"Areas Need Change in Nursing Field", items:[
+[`1. Patient Care Practices`,
+ `المجال الأول: ممارسات رعاية المريض.`,
+ `ده الأساس اللي بيمس المريض مباشرةً.`],
+[`Updating care protocols, implementing evidence-based practices, and improving patient safety.`,
+ `يعني نحدّث بروتوكولات الرعاية، ونطبق الممارسات المبنية على الدليل العلمي، ونحسن سلامة المريض.`,
+ `بدل ما نقلب المريض بالطريقة القديمة، نستخدم أحدث إرشادات لمنع قرح الفراش.`,1],
+[`2. Technology & Equipment`,
+ `المجال التاني: التكنولوجيا والمعدات.`,
+ `كل ما هو أجهزة وأنظمة بتتطور.`],
+[`Adopting electronic health records (EHR), modern medical devices.`,
+ `يعني نستخدم السجلات الصحية الإلكترونية (EHR) والأجهزة الطبية الحديثة.`,
+ `بدل الورق، الممرضة بتسجل العلامات الحيوية على الكمبيوتر، وبتستخدم مضخات حقن حديثة.`,1],
+[`3. Staffing & Human Resources`,
+ `المجال التالت: التوظيف والموارد البشرية.`,
+ `كل ما يخص عدد الممرضات وتطويرهم.`],
+[`Adequate nurse-to-patient ratios, training programs, skill development, and career progression.`,
+ `يعني نسبة مناسبة بين الممرضات والمرضى، وبرامج تدريب، وتنمية مهارات، وتقدم وظيفي.`,
+ `ممرضة واحدة لكل 5 مرضى بدل 15، وكورسات تدريب بتساعدها تترقى.`,1],
+[`4. Communication & Teamwork`,
+ `المجال الرابع: التواصل والعمل الجماعي.`,
+ `الفريق الصحي لازم يشتغل كوحدة واحدة.`],
+[`Improving collaboration between nurses, doctors, and other healthcare staff.`,
+ `يعني نحسن التعاون بين الممرضات والدكاترة وباقي الفريق الصحي.`,
+ `عمل اجتماع صباحي قصير بين الدكتور والممرضة عشان يتفقوا على خطة اليوم لكل مريض.`,1],
+[`5. Leadership & Management`,
+ `المجال الخامس: القيادة والإدارة.`,
+ `الجانب الإداري من التمريض.`],
+[`Strengthening nurse leadership, supervision, and decision-making.`,
+ `يعني نقوي القيادة التمريضية والإشراف واتخاذ القرار.`,
+ `تدريب رئيسات الأقسام على إزاي يشرفوا وياخدوا قرارات سريعة وصح.`,1],
+[`6. Patient Education & Engagement`,
+ `المجال السادس: تثقيف المريض ومشاركته.`,
+ `المريض شريك في الرعاية مش مجرد متلقي.`],
+[`Enhancing communication with patients, health education, and patient-centered care.`,
+ `يعني نحسن التواصل مع المرضى، والتثقيف الصحي، والرعاية اللي بتتمحور حوالين المريض.`,
+ `الممرضة بتشرح لمريض السكر إزاي يعمل الحقنة لنفسه وبتسمع مخاوفه وبتراعي ظروفه.`,1],
+]},
+
+{ id:"phases", icon:"📶", title:"Phases of Successful Change", items:[
+[`Phase 1: Pressure and Arousal:`,
+ `المرحلة الأولى: الضغط والاستثارة (الإحساس بالحاجة للتغيير).`,
+ `زي لما الإدارة تحس إن في مشكلة كبيرة لازم تتحل ومينفعش نسكت عليها.`],
+[`The process begins when the administration feels a need or pressure for change,`,
+ `العملية بتبدأ لما الإدارة تحس إن في حاجة أو ضغط عشان نغير.`,
+ `مدير المستشفى لاحظ إن في مشكلة بتتكرر ومحتاجة حل.`,1],
+[`this pressure can be exerted by external factors such as increased competition, economic changes, or it may be felt because of internal factors such as a sharp decline in productivity, high absenteeism and turnover.`,
+ `الضغط ده ممكن يجي من عوامل خارجية زي زيادة المنافسة والتغيرات الاقتصادية، أو يتحس بسبب عوامل داخلية زي هبوط حاد في الإنتاجية وغياب كتير وكثرة ترك الشغل.`,
+ `مستشفى تانية جنبنا بقت أحسن وبتسحب مرضانا (خارجي)، أو الممرضات بيغيبوا كتير وبيسيبوا الشغل (داخلي).`,1],
+[`Phase 2: Intervention and Reorientation`,
+ `المرحلة التانية: التدخل وإعادة التوجيه.`,
+ `القائد بيتدخل ويوجه الانتباه للمشاكل الداخلية.`],
+[`Although leaders may sense the need for change, they may not be able to analyze its problems accurately and make the correct changes.`,
+ `رغم إن القادة ممكن يحسوا بالحاجة للتغيير، ممكن ميقدروش يحللوا مشاكله بدقة ويعملوا التغييرات الصح.`,
+ `المدير حاسس إن في مشكلة، بس مش عارف سببها بالظبط فممكن يغير حاجة غلط.`,1],
+[`Leaders may be capable of managing the change process if they are perceived as expert and are trusted.`,
+ `القادة ممكن يقدروا يديروا عملية التغيير لو الناس شايفاهم خبراء وواثقين فيهم.`,
+ `الممرضات بيسمعوا كلام رئيسة القسم لأنهم عارفين إنها خبيرة وبيثقوا فيها.`,1],
+[`Phase 3: Diagnosis and Recognition`,
+ `المرحلة التالتة: التشخيص والتعرف.`,
+ `زي ما الدكتور بيشخّص المرض قبل ما يكتب العلاج، لازم نشخّص المشكلة الأول.`],
+[`In the third phase of successful change, the entire organization becomes involved in determining the true causes of problems requiring change by gathering relevant information,`,
+ `في المرحلة التالتة من التغيير الناجح، المؤسسة كلها بتشارك في تحديد الأسباب الحقيقية للمشاكل اللي محتاجة تغيير، عن طريق جمع المعلومات المناسبة.`,
+ `بنعمل استبيان لكل الممرضات ونراجع سجلات الأخطاء عشان نعرف المشكلة جاية منين بالظبط.`,1],
+[`a shared approach between the leader and staff is common in this stage,`,
+ `في المرحلة دي بيبقى في أسلوب مشترك بين القائد والموظفين.`,
+ `القائدة والممرضات بيقعدوا مع بعض ويفكروا في المشكلة سوا.`,1],
+[`the decision-making process has been broadened as the leader shows her willingness to recognize tough problems and to change,`,
+ `عملية اتخاذ القرار بتتوسع لأن القائد بيبين استعداده إنه يعترف بالمشاكل الصعبة وإنه يتغير.`,
+ `المديرة بتقول قدام الكل: أيوه في مشكلة صعبة وأنا مستعدة نغير حتى لو الحل هيكلفنا مجهود.`,1],
+[`diagnosis of the problem areas leads to recognition of specific problems.`,
+ `تشخيص مناطق المشكلة بيوصلنا لإننا نتعرف على مشاكل محددة.`,
+ `بدل ما نقول القسم فيه مشاكل، نكتشف إن المشكلة بالتحديد في التسليم بين الشيفتات.`,1],
+[`This step tends to be avoided in efforts involving unsuccessful change .`,
+ `الخطوة دي بيتم تجنبها غالباً في محاولات التغيير الفاشلة.`,
+ `إدارات كتير بتقفز على الحل علطول من غير ما تشخّص المشكلة، فالتغيير بيفشل.`,1],
+[`Phase 4: Invention and Commitment`,
+ `المرحلة الرابعة: الابتكار والالتزام.`,
+ `بنفكر في حلول جديدة ونلتزم بيها.`],
+[`After the problem is recognized, the organization moves toward creative solutions to the problems that have been identified.`,
+ `بعد ما المشكلة تتعرف، المؤسسة بتتجه ناحية حلول مبتكرة للمشاكل اللي اتحددت.`,
+ `بعد ما عرفنا إن المشكلة في التسليم، بنفكر في نموذج تسليم جديد مبتكر.`,1],
+[`If organization members are encouraged to participate in this process, they will probably be more committed to the solutions .`,
+ `لو أعضاء المؤسسة اتشجعوا إنهم يشاركوا في العملية دي، غالباً هيبقوا أكتر التزاماً بالحلول.`,
+ `الممرضة اللي شاركت في تصميم النموذج الجديد هتحرص تطبقه أكتر من اللي اتفرض عليها.`,1],
+[`Phase 5: Experimentation and Search`,
+ `المرحلة الخامسة: التجريب والبحث.`,
+ `بنجرب الحل الأول وبنتابع نتيجته.`],
+[`In a large organization, one department may try out an idea before it is attempted in the organization as a whole.`,
+ `في المؤسسة الكبيرة، ممكن قسم واحد يجرب الفكرة قبل ما تتطبق في المؤسسة كلها.`,
+ `نجرب النموذج الجديد في قسم الباطنة الأول قبل ما نعممه على المستشفى كلها.`,1],
+[`In this way, the leader can work out before introducing the change on a large scale.`,
+ `بالطريقة دي، القائد يقدر يظبط الأمور قبل ما يدخل التغيير على نطاق واسع.`,
+ `لو طلعت مشاكل في قسم الباطنة نصلحها قبل التعميم.`,1],
+[`Through control mechanisms, the leader determines to what degree the planned change is succeeding in remedying the problem, how well it is being received, and how implementation can be improved .`,
+ `من خلال آليات الرقابة، القائد بيحدد لأي درجة التغيير المخطط ناجح في علاج المشكلة، ومدى تقبل الناس له، وإزاي نحسن التنفيذ.`,
+ `بنقيس: هل الأخطاء قلت؟ الممرضات راضيين عن النموذج؟ وإيه اللي ممكن نطوره؟`,1],
+[`Phase 6: Reinforcement and Acceptance`,
+ `المرحلة السادسة: التعزيز والقبول.`,
+ `آخر مرحلة: نثبّت التغيير ونكافئ اللي ساهم فيه.`],
+[`Finally, if the course of action has been tested and found desirable, it should be accepted more willingly.`,
+ `في الآخر، لو الحل اتجرب واتأكدنا إنه كويس، المفروض يتقبله الناس بحماس أكتر.`,
+ `لما الناس تشوف إن الأخطاء قلت فعلاً، هتتقبل النموذج الجديد وهي مرتاحة.`,1],
+[`Furthermore, individuals need to be reinforced for making the change successful.`,
+ `وكمان الأفراد محتاجين تعزيز وتشجيع على إنهم نجحوا التغيير.`,
+ `الممرضة اللي التزمت بالنظام الجديد تتشكر وتتقدر.`,1],
+[`The positive feedback add reinforcement to the change process.`,
+ `التغذية الراجعة الإيجابية بتضيف تعزيز لعملية التغيير.`,
+ `كلمة شكر من المديرة قدام الفريق بتخلي الممرضات يكملوا.`,1],
+[`Other techniques for reinforcing acceptance include praise, recognition, promotion, salary increases, and continued participation in the change process.`,
+ `وفي تقنيات تانية لتعزيز القبول زي المدح والتقدير والترقية وزيادة المرتب واستمرار المشاركة في عملية التغيير.`,
+ `شهادة تقدير، وترقية لأفضل ممرضة التزمت، وإنها تفضل عضو في لجنة التطوير.`,1],
+]},
+
+{ id:"theories", icon:"📚", title:"Theories of Change — Traditional", items:[
+[`The classical change theories consist of; firstly, Lewin's force –field model (1951), secondly, Lippit's phases of change (1958), thirdly, Havelock's six step change model (1973), and finally, Roger's diffusion of innovation theory (1983).`,
+ `النظريات الكلاسيكية للتغيير هي أربع نظريات بالترتيب: أولاً نموذج المجال القوي لـ Lewin (1951)، تانياً مراحل التغيير لـ Lippit (1958)، تالتاً نموذج Havelock ذو الست خطوات (1973)، وأخيراً نظرية انتشار الابتكار لـ Roger (1983).`,
+ `خليها في بالك بالتواريخ: لوين 1951، ليبيت 1958، هافلوك 1973، روجر 1983. الترتيب بالسنين، من الأقدم للأحدث.`],
+]},
+
+{ id:"lewin", icon:"🧊", title:"1- Lewin's Change Theory", items:[
+[`Kurt Lewin's change theory is widely used in nursing and involves three stages: the unfreezing, moving, and refreezing stage that recognized the role of habit in people's thoughts and actions.`,
+ `نظرية كيرت لوين في التغيير بتتستخدم بشكل واسع في التمريض، وفيها ثلاث مراحل: الإذابة (unfreezing)، والتحرك (moving)، وإعادة التجميد (refreezing)، وهي اعترفت بدور العادة في أفكار الناس وتصرفاتهم.`,
+ `تخيل مكعب تلج: بتدوّبه، وبتشكل الميه في شكل جديد، وبعدين بتجمدها تاني في الشكل الجديد.`],
+{img:true},
+[`1-First stage "Unfreezing" This stage involves the recognition of the need to change.`,
+ `المرحلة الأولى "الإذابة": المرحلة دي فيها الاعتراف بالحاجة إلى التغيير.`,
+ `الممرضات يدركوا إن نظام التسليم القديم فيه مشاكل وإن لازم يتغير.`],
+[`Action is taken to unfreeze the existing attitudes and behavior, which is essential for supporting employees and minimizing change resistance.`,
+ `بيتم اتخاذ إجراء لإذابة الاتجاهات والسلوكيات الحالية، وده ضروري لدعم الموظفين وتقليل مقاومة التغيير.`,
+ `نعمل ورشة توعية توضح مشاكل النظام القديم، فالممرضات تبقى جاهزة تسيب عادتها القديمة.`],
+[`2-Second stage "Moving to a new level" involves a process of change in thoughts, feelings, behavior, or all three, that is in some way more liberating or more productive.`,
+ `المرحلة التانية "الانتقال لمستوى جديد": فيها عملية تغيير في الأفكار أو المشاعر أو السلوك أو الثلاثة مع بعض، بحيث تبقى بطريقة ما أكثر تحرراً أو إنتاجية.`,
+ `الممرضات بدأوا يطبقوا نموذج التسليم الجديد وبقوا يفكروا ويتصرفوا بطريقة أحسن وأسرع.`],
+[`3- Stage three "Refreezing" is establishing the change as a new habit." Without some process of refreezing, it is easy to backslide into the old ways.`,
+ `المرحلة التالتة "إعادة التجميد": هي تثبيت التغيير كعادة جديدة. ومن غير عملية إعادة تجميد، سهل جداً الناس ترجع للطرق القديمة.`,
+ `لو ما تابعناش وكافأنا التزام الممرضات بالنظام الجديد، بعد شهرين هيرجعوا للطريقة القديمة.`],
+]},
+
+{ id:"lippit", icon:"🧩", title:"2- Lippit's Theory of Change", items:[
+[`Lippit's Theory of Change is an extension of Lewin's Change Theory.`,
+ `نظرية Lippit في التغيير هي امتداد لنظرية Lewin.`,
+ `Lippit خد فكرة لوين الأساسية وكبّرها وفصّلها أكتر.`],
+[`While Lewin focused mainly on three stages (unfreezing, moving, refreezing), Lippitt expanded the model into seven phases, placing greater emphasis on the role of the change agent (the person guiding the change).`,
+ `في الوقت اللي لوين ركز على ثلاث مراحل (إذابة، تحرك، إعادة تجميد)، ليبيت وسّع النموذج لسبع مراحل، وركز أكتر على دور الـ change agent (الشخص اللي بيقود التغيير).`,
+ `لوين: 3 مراحل عامة. ليبيت: 7 مراحل وفيها دور واضح للشخص اللي بيقود التغيير.`],
+[`There are 7 phases of Lippitt's Theory of Change:`,
+ `في 7 مراحل لنظرية ليبيت في التغيير:`,
+ `هنمشي معاهم واحدة واحدة بالترتيب.`],
+[`1- Diagnose the problem`,
+ `1- شخّص المشكلة.`,
+ `نعرف المشكلة بالظبط: إيه سبب كثرة الأخطاء الدوائية؟`,1],
+[`2. Assess the motivation and capacity for change`,
+ `2. قيّم الدافع والقدرة على التغيير.`,
+ `هل الممرضات عندهم رغبة يتغيروا؟ وهل عندهم الإمكانيات والوقت؟`,1],
+[`3. Assess the change agent's motivation and resources`,
+ `3. قيّم دافع الـ change agent ومواردها.`,
+ `هل مديرة القسم متحمسة تقود التغيير؟ وهل معاها وقت وميزانية وناس؟`,1],
+[`4. Select progressive change objectives`,
+ `4. اختار أهداف تغيير تدريجية.`,
+ `بدل ما نغير كل حاجة مرة واحدة، نبدأ بهدف صغير زي تحسين التسليم، وبعدين نكمل.`,1],
+[`5. Choose an appropriate role for the change agent`,
+ `5. اختار دور مناسب للـ change agent.`,
+ `هل هتبقى قائدة بتوجه، ولا مستشارة بتدعم، ولا مدربة؟`,1],
+[`6. Maintain the change`,
+ `6. حافظ على التغيير.`,
+ `نتابع ونتأكد إن الناس مكملة على الأسلوب الجديد.`,1],
+[`7. Terminate the helping relationship`,
+ `7. أنهي علاقة المساعدة.`,
+ `لما التغيير يثبت، الـ change agent تنسحب والفريق يكمل بنفسه.`,1],
+]},
+
+{ id:"havelock", icon:"🪜", title:"3- Havelock's Six Step Change Model", items:[
+[`Six-Step Change Model is another well-known theory of planned change, especially in education, healthcare, and nursing practice.`,
+ `نموذج التغيير ذو الست خطوات هو نظرية تانية مشهورة للتغيير المخطط، خصوصاً في التعليم والرعاية الصحية وممارسة التمريض.`,
+ `ده نموذج بتلاقيه كتير في المستشفيات والكليات.`],
+[`It views change like a problem-solving process, with strong emphasis on the role of the change agent and systematic planning.`,
+ `النموذج بيشوف التغيير كأنه عملية حل مشكلة، مع تركيز قوي على دور الـ change agent والتخطيط المنظم.`,
+ `زي ما بتحل مسألة خطوة بخطوة، بتحل مشكلة العمل بخطوات منظمة.`],
+[`there are 6 steps of Havelock's Model:`,
+ `في 6 خطوات في نموذج Havelock:`,
+ `هنمشي عليهم بالترتيب.`],
+[`1. Building a Relationship`,
+ `1. بناء علاقة.`,
+ `الـ change agent تتعرف على الفريق وتكسب ثقتهم الأول.`,1],
+[`2. Diagnosing the Problem`,
+ `2. تشخيص المشكلة.`,
+ `نحدد إيه المشكلة بالظبط.`,1],
+[`3. Acquiring Resources (and Information)`,
+ `3. الحصول على الموارد (والمعلومات).`,
+ `نجمع المعلومات والأدوات والناس اللي هنحتاجهم.`,1],
+[`4. Choosing the Solution`,
+ `4. اختيار الحل.`,
+ `من بين الحلول، نختار الأنسب.`,1],
+[`5. Gaining Acceptance (and Implementing the Change)`,
+ `5. كسب القبول (وتنفيذ التغيير).`,
+ `نقنع الفريق بالحل ونبدأ نطبقه.`,1],
+[`6. Stabilization and Self-Renewal`,
+ `6. الاستقرار والتجديد الذاتي.`,
+ `التغيير يثبت، والفريق يبقى قادر يجدد ويطور نفسه من غير مساعدة.`,1],
+]},
+
+{ id:"rogers", icon:"📡", title:"4- Roger's Diffusion of Innovation Theory", items:[
+[`Roggers theory explains that when a new idea, practice, or technology is introduced, not everyone adopts it at the same time.`,
+ `نظرية روجرز بتشرح إنه لما بتتقدم فكرة أو ممارسة أو تكنولوجيا جديدة، مش كل الناس بتتبناها في نفس الوقت.`,
+ `لما المستشفى جابت جهاز جديد، في ممرضات اشتغلوا عليه من أول يوم وفي ممرضات استنوا شهور.`],
+[`Some people accept it quickly, while others resist and adopt very late.`,
+ `بعض الناس بتقبله بسرعة، وناس تانية بتقاوم وبتتبناه متأخر جداً.`,
+ `ممرضة متحمسة بتجرب أول ما يتعرض، وممرضة تانية بتقاوم وفي الآخر بتستخدمه بعد سنة.`],
+[`Stages of Roger's diffusion of innovation theory:`,
+ `مراحل نظرية روجر لانتشار الابتكار:`,
+ `خمس مراحل بالترتيب.`],
+[`1. Knowledge:`,
+ `1. المعرفة:`,
+ `أول خطوة إنك تعرف إن الحاجة الجديدة موجودة.`,1],
+[`People first become aware of the innovation (e.g., a new electronic health record system in a hospital).`,
+ `الناس بتبقى واعية بالابتكار لأول مرة (مثلاً نظام سجلات صحية إلكترونية جديد في المستشفى).`,
+ `سمعت إن المستشفى هتدخل نظام ملفات إلكتروني.`,1],
+[`2. Persuasion:`,
+ `2. الإقناع:`,
+ `بتبدأ تكوّن رأي عنه.`,1],
+[`They form an opinion about it – is it useful? worth adopting?`,
+ `بيكونوا رأي عنه: هل مفيد؟ هل يستاهل نتبناه؟`,
+ `بتسأل نفسك: هل النظام ده هيسهل شغلي ولا هيتعبني؟`,1],
+[`3. Decision:`,
+ `3. القرار:`,
+ `بتاخد قرار.`,1],
+[`They decide to adopt or reject the innovation.`,
+ `بيقرروا يتبنوا الابتكار أو يرفضوه.`,
+ `بتقرر إنك هتستخدم النظام الجديد، أو ترفضه وتفضل على القديم.`,1],
+[`4. Implementation:`,
+ `4. التنفيذ:`,
+ `مرحلة التطبيق الفعلي.`,1],
+[`Those who accepted begin to use it in practice.`,
+ `اللي قبلوه بيبدأوا يستخدموه في الواقع.`,
+ `الممرضات اللي وافقوا بدأوا يسجلوا فعلاً على النظام الإلكتروني.`,1],
+[`5. Confirmation:`,
+ `5. التأكيد:`,
+ `المرحلة الأخيرة، بتتأكد من قرارك.`,1],
+[`After using it, they look for feedback or evidence to confirm they made the right decision (sometimes they may even reject it later)`,
+ `بعد ما يستخدموه، بيدوروا على تغذية راجعة أو دليل يأكد إنهم أخدوا القرار الصح (ساعات ممكن يرفضوه بعدين).`,
+ `بعد شهر من الاستخدام، تشوف إن النظام وفر وقت فعلاً فتكمل عليه، أو تلاقيه صعب فترجع للقديم.`,1],
+]},
+
+{ id:"forces", icon:"⚖️", title:"Forces of Change", items:[
+[`These forces can be positive, urging us toward a behavior, or negative, propelling us away from a behavior.`,
+ `القوى دي ممكن تبقى إيجابية بتدفعنا ناحية سلوك معين، أو سلبية بتبعدنا عن سلوك معين.`,
+ `قوة إيجابية: حافز مادي بيشجعك تلتزم. قوة سلبية: خوف من العقاب بيبعدك عن إهمال الشغل.`],
+[`•Driving Forces: Driving forces are those forces which tend to initiate a change and keeps it going as; working through the group, pressure from a supervisor, incentive earnings, and competition`,
+ `القوى الدافعة: هي القوى اللي بتبدأ التغيير وبتخليه مستمر، زي: العمل من خلال الجماعة، وضغط المشرف، والحوافز المادية، والمنافسة.`,
+ `المديرة بتضغط على الفريق، والمكافآت بتشجعهم، والتنافس بين الأقسام بيخليهم يجتهدوا. دي كلها قوى بتدفع التغيير.`],
+[`• Restraining Forces: Restraining forces are forces acting to restrain or decrease the driving forces as; apathy, hostility, and poor performance.`,
+ `القوى المقيدة: هي القوى اللي بتقيد أو بتقلل القوى الدافعة، زي: اللامبالاة، والعداء، وضعف الأداء.`,
+ `ممرضة مش مهتمة، وواحدة معادية للتغيير، وأداء ضعيف في القسم. دي بتكبح التغيير.`],
+[`• Equilibrium: Is a wanted level of productivity, can be raised or lowered by changes in the relationship between the driving and the restraining forces.`,
+ `الاتزان: هو مستوى مطلوب من الإنتاجية، ممكن يرتفع أو ينخفض بتغيير العلاقة بين القوى الدافعة والقوى المقيدة.`,
+ `زي ميزان: لو القوى الدافعة زادت، الإنتاجية ترتفع. ولو القوى المقيدة زادت، الإنتاجية تنزل.`],
+]},
+
+{ id:"strategies", icon:"🛠️", title:"Change Strategies", items:[
+[`Three commonly strategies are used for implementing change.`,
+ `في ثلاث استراتيجيات شائعة بتتستخدم لتنفيذ التغيير.`,
+ `زي ما في أكتر من طريق توصل بيه لنفس المكان، في أكتر من استراتيجية للتغيير.`],
+[`The appropriate strategy for any situation depends on the power of change agent and the amount of resistance expected from subordinates.`,
+ `الاستراتيجية المناسبة لأي موقف بتعتمد على قوة الـ change agent وحجم المقاومة المتوقعة من المرؤوسين.`,
+ `لو المديرة معاها سلطة كبيرة والمقاومة متوقعة قوية، هتختار استراتيجية غير اللي تختارها لو المقاومة قليلة.`],
+[`1- Power - coercion strategy:`,
+ `1- استراتيجية القوة والإكراه:`,
+ `أسلوب السلطة والأمر.`],
+[`Use official authority and the rewards and punishments as incentives to create change.`,
+ `بتستخدم السلطة الرسمية والمكافآت والعقوبات كحوافز لإحداث التغيير.`,
+ `المديرة تقول: اللي هيطبق النظام الجديد هياخد مكافأة، واللي مش هيطبقه هيتحاسب.`,1],
+[`Individuals respond for fear of sanctions or a desire to get the rewards`,
+ `الأفراد بيستجيبوا خوفاً من العقوبات أو رغبةً في الحصول على المكافآت.`,
+ `الممرضة بتطبق النظام لأنها خايفة من الخصم أو عاوزة المكافأة، مش لأنها مقتنعة.`,1],
+[`2- Logical persuasion strategy :`,
+ `2- استراتيجية الإقناع المنطقي:`,
+ `أسلوب الحقائق والعلم.`],
+[`Facts and knowledge is used for bringing about change to persuade others that the change will make them better than the previous.`,
+ `بتستخدم الحقائق والمعرفة لإحداث التغيير، عشان نقنع الآخرين إن التغيير هيخليهم أحسن من الأول.`,
+ `نعرض إحصائيات إن النظام الجديد قلل الأخطاء 40% في مستشفيات تانية.`,1],
+[`This type of strategy used when there is little resistance anticipated`,
+ `النوع ده من الاستراتيجيات بيتستخدم لما تكون المقاومة المتوقعة قليلة.`,
+ `لو الفريق متقبل وبيحب التطوير، الإقناع بالأرقام كفاية.`,1],
+[`3- Force participation strategy:`,
+ `3- استراتيجية المشاركة:`,
+ `أسلوب إشراك الناس.`],
+[`Using the methods of participation in decision-making and the emphasis on shared values to create change.`,
+ `بتستخدم طرق المشاركة في اتخاذ القرار والتركيز على القيم المشتركة لإحداث التغيير.`,
+ `نعمل اجتماع مع كل الممرضات ونقرر سوا إزاي هنطبق النظام الجديد، ونفكرهم بقيمنا المشتركة: سلامة المريض.`,1],
+[`It requires the involvement and empowerment of individuals who are affected by the change honestly and effectively in the planning and decision-making on the president to change.`,
+ `بتتطلب إشراك وتمكين الأفراد اللي هيتأثروا بالتغيير بصدق وفعالية في التخطيط واتخاذ القرار الخاص بالتغيير.`,
+ `الممرضات اللي هيتأثروا بالنظام الجديد بيشاركوا فعلاً في التخطيط، مش مجرد استشارة شكلية.`,1],
+]},
+
+{ id:"emotions", icon:"🎭", title:"Emotional Responses to Change", items:[
+[`1. Equilibrium: There is a sense of balance and inner peace before change occurs.`,
+ `1. الاتزان: في إحساس بالتوازن والسلام الداخلي قبل ما التغيير يحصل.`,
+ `الممرضة مرتاحة في شغلها ومتعودة على نظامها قبل ما حد يقولها هيتغير.`],
+[`2. Denial: Energy is drained by denial of the reality.`,
+ `2. الإنكار: الطاقة بتتستنزف بسبب إنكار الواقع.`,
+ `بتقول: مش معقول هيغيروا النظام، أكيد كلام وهيعدي.`],
+[`3. Anger: Energy is used toward off the change.`,
+ `3. الغضب: الطاقة بتتستخدم لدفع التغيير بعيد.`,
+ `بتتعصب وتقول: ليه بيغيروا حاجة شغالة كويس؟!`],
+[`4. Bargaining: Energy is used in an attempt to eliminate the change.`,
+ `4. المساومة: الطاقة بتتستخدم في محاولة لإلغاء التغيير.`,
+ `بتقول للمديرة: طيب نأجله شوية أو نطبقه على قسم تاني بس.`],
+[`5. Depression: No energy is left to produce results.`,
+ `5. الاكتئاب: مفيش طاقة باقية لإنتاج نتايج.`,
+ `بتحس بإحباط وتفقد الحماس ومبتشتغلش كويس.`],
+[`6. Openness: Renewed energy is available.`,
+ `6. الانفتاح: بتتوفر طاقة متجددة.`,
+ `بتبدأ تفتح عقلها وتقول: طب خليني أشوف النظام الجديد ده.`],
+[`7. Readiness: There is willingness to use energy to explore new events.`,
+ `7. الاستعداد: في رغبة إنها تستخدم الطاقة لاستكشاف الأحداث الجديدة.`,
+ `بتتدرب على النظام الجديد وعاوزة تتعلمه.`],
+[`8. Resistance: Resistance to change also is to be expected as integrate to the whole process of change. Resistance occurs because people are afraid of being disorganized or having their routines interrupted`,
+ `8. المقاومة: المقاومة للتغيير متوقعة كجزء من عملية التغيير كلها. المقاومة بتحصل لأن الناس بتخاف إنها تتلخبط أو إن روتينها يتقطع.`,
+ `الممرضة خايفة تلخبط الشغل أو تتعب عشان روتينها اتغير، فبتقاوم.`],
+]},
+
+{ id:"resisting", icon:"🛑", title:"Reasons for Resisting Change", items:[
+[`There are several reasons for resistance to change among them, for example :`,
+ `في أسباب كتير لمقاومة التغيير، منها على سبيل المثال:`,
+ `هنشوف التسع أسباب واحد واحد.`],
+[`Insecurity and a sense of danger and fear of change with the change of routine-based .`,
+ `عدم الأمان والإحساس بالخطر والخوف من التغيير بسبب تغيير الروتين المعتاد.`,
+ `الممرضة متعودة على روتينها، فأي تغيير بيحسسها بالخطر.`,1],
+[`Fear of not being able to implement the change .`,
+ `الخوف من إنهم مش هيقدروا ينفذوا التغيير.`,
+ `خايفة النظام الجديد يبقى صعب عليها وماتعرفش تشتغل بيه.`,1],
+[`Not feeling the benefits of the change and the increased workload as a result of the change .`,
+ `عدم الإحساس بفوايد التغيير، وزيادة عبء العمل نتيجة التغيير.`,
+ `بتقول: أنا مش شايفة فايدة، وبس شغلي زاد.`,1],
+[`Fear of loss social relations .`,
+ `الخوف من فقدان العلاقات الاجتماعية.`,
+ `ممكن التغيير ينقلها لقسم تاني وتبعد عن زمايلها.`,1],
+[`Fear of losing power .`,
+ `الخوف من فقدان السلطة.`,
+ `رئيسة قسم خايفة إن التغيير يقلل صلاحياتها.`,1],
+[`Lack of understanding the change and the inability to implement it .`,
+ `عدم فهم التغيير وعدم القدرة على تنفيذه.`,
+ `الممرضات مش فاهمين النظام الجديد أصلاً فمش قادرين يطبقوه.`,1],
+[`Not realistic change programs .`,
+ `برامج تغيير غير واقعية.`,
+ `نطلب من الممرضات يطبقوا 10 تغييرات في أسبوع، وده مش واقعي.`,1],
+[`Fear of losing bonuses.`,
+ `الخوف من فقدان المكافآت.`,
+ `خايفين النظام الجديد يلغي الحوافز اللي كانوا بياخدوها.`,1],
+[`Inability to choose the right time to make a change`,
+ `عدم القدرة على اختيار الوقت المناسب لعمل التغيير.`,
+ `نعمل تغيير كبير في وقت الذروة أو ضغط الشغل، فالناس تقاوم.`,1],
+]},
+
+{ id:"overcome", icon:"✅", title:"Strategies to Overcome Resistance to Change", items:[
+[`Make contact with employees to explain the process of change to prepare them well to change .`,
+ `اتصل بالموظفين واشرح لهم عملية التغيير عشان تجهزهم كويس للتغيير.`,
+ `نعمل اجتماع نشرح فيه إيه اللي هيتغير وليه قبل ما نبدأ.`],
+[`Senior management support for the programs of change .`,
+ `دعم الإدارة العليا لبرامج التغيير.`,
+ `مدير المستشفى بنفسه يحضر ويدعم البرنامج الجديد.`],
+[`Staff participation in the process of change.`,
+ `مشاركة الموظفين في عملية التغيير.`,
+ `نخلي الممرضات يقترحوا ويشاركوا في التخطيط.`],
+[`Rewards and bonuses were distributed to each of the applied change plans .`,
+ `توزيع مكافآت وحوافز على كل خطة تغيير اتطبقت.`,
+ `القسم اللي طبق التغيير بنجاح ياخد مكافأة.`],
+[`Providing material and human resources to the change process.`,
+ `توفير موارد مادية وبشرية لعملية التغيير.`,
+ `نوفر أجهزة وممرضات إضافيين وقت التطبيق.`],
+[`Motivate and encourage change agents .`,
+ `تحفيز وتشجيع الـ change agents.`,
+ `نشكر الممرضة اللي بتقود التغيير وندعمها.`],
+[`Prepare for resistance to conflict in a positive way.`,
+ `الاستعداد لمقاومة الصراع بطريقة إيجابية.`,
+ `نتوقع الخلافات من الأول ونجهز طريقة هادية لحلها.`],
+[`Build skills and strengthen the ability to learn .`,
+ `بناء المهارات وتقوية القدرة على التعلم.`,
+ `كورسات تدريب بتخلي الممرضات واثقين في قدرتهم يتعلموا الجديد.`],
+]},
+
+{ id:"manager", icon:"👩‍⚕️", title:"The Role of the Nurse Manager in Change Management", items:[
+[`Nurse manager plays a central role in change management, because they are the link between hospital leadership and the nursing staff.`,
+ `مدير التمريض بيلعب دور محوري في إدارة التغيير، لأنه حلقة الوصل بين قيادة المستشفى وطاقم التمريض.`,
+ `الإدارة العليا بتاخد القرار والممرضات بينفذوا، ومدير التمريض هو اللي بيوصل بينهم.`],
+[`the key roles of the nurse manager in change management:`,
+ `الأدوار الرئيسية لمدير التمريض في إدارة التغيير:`,
+ `ستة أدوار هنشوفهم واحد واحد.`],
+[`1. Planner`,
+ `1. المخطِّط.`,
+ `بيرسم الطريق قبل ما نبدأ.`],
+[`Identify the need for change (e.g., improving patient safety, reducing errors).`,
+ `يحدد الحاجة للتغيير (مثلاً تحسين سلامة المريض وتقليل الأخطاء).`,
+ `يلاحظ إن الأخطاء الدوائية كترت فيقرر لازم نتحرك.`,1],
+[`Set clear goals and create an action plan.`,
+ `يحط أهداف واضحة ويعمل خطة عمل.`,
+ `الهدف: نقلل الأخطاء الدوائية 50% في 3 شهور، وهنا الخطوات.`,1],
+[`Choose the right change model to guide the process (Lewin, Lippitt, etc.).`,
+ `يختار نموذج التغيير الصح اللي يوجه العملية (Lewin أو Lippitt وغيرهم).`,
+ `يقرر يمشي بنموذج لوين: إذابة وتحرك وإعادة تجميد.`,1],
+[`2. Communicator`,
+ `2. المتواصل.`,
+ `بيتكلم ويشرح للفريق.`],
+[`Explain the purpose and benefits of the change to staff.`,
+ `يشرح للموظفين هدف التغيير وفوايده.`,
+ `يقول للممرضات: النظام ده هيقلل الأخطاء ويريحكم.`,1],
+[`Encourage open discussion and answer questions.`,
+ `يشجع النقاش المفتوح ويجاوب على الأسئلة.`,
+ `يفتح باب الأسئلة في الاجتماع ويرد على كل استفسار.`,1],
+[`Reduce rumors and misunderstandings through honest communication.`,
+ `يقلل الشائعات وسوء الفهم بالتواصل الصادق.`,
+ `بدل ما الناس تتكلم إن التغيير ده معناه فصل ناس، يوضح الحقيقة بصراحة.`,1],
+[`3. Motivator`,
+ `3. المحفّز.`,
+ `بيشجع الناس تتقبل التغيير.`],
+[`Inspire staff to accept and support change.`,
+ `يلهم الموظفين إنهم يقبلوا التغيير ويدعموه.`,
+ `يتكلم عن إن التغيير ده خطوة مهمة لمهنتنا.`,1],
+[`Highlight benefits (for patients, staff, and the organization).`,
+ `يبرز الفوايد (للمرضى والموظفين والمؤسسة).`,
+ `المريض هيبقى أأمن، الممرضة هتتعب أقل، والمستشفى سمعتها هتتحسن.`,1],
+[`Recognize and reward staff who contribute positively.`,
+ `يقدّر ويكافئ الموظفين اللي بيساهموا بشكل إيجابي.`,
+ `شهادة تقدير لأكتر ممرضة التزمت بالتغيير.`,1],
+[`4. Educator_Trainer`,
+ `4. المعلّم والمدرّب.`,
+ `بيعلّم ويدرّب الفريق.`],
+[`Provide training and resources so staff can adapt (e.g., new technology, new protocols).`,
+ `يوفر التدريب والموارد عشان الموظفين يقدروا يتأقلموا (مثلاً تكنولوجيا جديدة وبروتوكولات جديدة).`,
+ `ورشة عملية على الجهاز الجديد قبل ما يتشغل.`,1],
+[`Support professional development to increase confidence and skills.`,
+ `يدعم التطوير المهني لزيادة الثقة والمهارات.`,
+ `يرشح الممرضات لكورسات وبرامج تعلم عشان يبقوا واثقين في نفسهم.`,1],
+[`5. Supporter`,
+ `5. الداعم.`,
+ `بيسند الناس وقت التغيير.`],
+[`Listen to staff concerns and fears about change.`,
+ `يسمع مخاوف الموظفين وقلقهم من التغيير.`,
+ `يقعد مع ممرضة قلقانة من النظام الجديد ويسمعها من غير ما يقاطعها.`,1],
+[`Offer emotional support and reduce resistance.`,
+ `يقدم دعم عاطفي ويقلل المقاومة.`,
+ `يطمنها: هتتدربي وأنا معاكي لحد ما تتعودي.`,1],
+[`Promote teamwork and collaboration`,
+ `يشجع العمل الجماعي والتعاون.`,
+ `يخلي الممرضات القدام يساعدوا الجدد في تعلم النظام.`,1],
+[`6. Problem-solver`,
+ `6. حلّال المشاكل.`,
+ `بيواجه العقبات ويلاقي لها حل.`],
+[`Identify barriers (e.g., lack of resources, resistance).`,
+ `يحدد العقبات (مثلاً نقص الموارد والمقاومة).`,
+ `يلاحظ إن الأجهزة الجديدة مش كفاية والقسم محتاج غيرها.`,1],
+[`Find practical solutions to reduce restraining forces.`,
+ `يلاقي حلول عملية لتقليل القوى المقيدة.`,
+ `يوفر أجهزة إضافية ويعمل جلسات توعية لتقليل اللامبالاة والمقاومة.`,1],
+[`Adjust the plan when challenges arise.`,
+ `يعدل الخطة لما تظهر تحديات.`,
+ `لو التطبيق في قسم الطوارئ مش ماشي، يغير الخطة ويدي القسم وقت أكتر.`,1],
+]},
+
+{ id:"resources", icon:"🔗", title:"Other Resources", items:[
+[`Other resources`,
+ `مصادر تانية: في آخر المحاضرة رابط لتسجيل اجتماع (فيديو) بتاع الفرقة الرابعة على موقع الكلية.`,
+ `الرابط ده فيه تسجيل بتاريخ 2023-04-06 تقدر تفتحه وتتفرج عليه كمصدر إضافي: <a href="https://fnurbuedu.sharepoint.com/sites/staff/Shared%20Documents/%D8%A7%D9%84%D9%81%D8%B1%D9%82%D8%A9%20%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9%D8%A9/Recordings/%D8%A7%D9%84%D9%81%D8%B1%D9%82%D8%A9%20%D8%A7%D9%84%D8%B1%D8%A7%D8%A8%D8%B9%D8%A9-20230406_083846-Meeting%20Recording.mp4?web=1" target="_blank" style="color:var(--accent);font-weight:700;">فتح التسجيل</a>`],
+]}
+
+];
+
+/* ===== RENDER ===== */
+const app = document.getElementById('app');
+const chips = document.getElementById('chips');
+let totalPts = 0;
+
+SECTIONS.forEach((s, si) => {
+  let n = 0;
+  let body = '';
+  s.items.forEach(it => {
+    if (it.h) { body += `<div class="subhead">${it.h}</div>`; return; }
+    if (it.img) { body += `<div class="fig"><img src="${LEWIN_IMG}" alt="Unfreeze - Change - Refreeze"></div>`; return; }
+    n++; totalPts++;
+    const sub = it[3] ? ' sub' : '';
+    body += `<div class="pt${sub}">
+      <div class="pt-en" onclick="this.parentElement.classList.toggle('done')"><div class="pt-n">${n}</div><div>${it[0]}</div></div>
+      <div class="pt-ar"><span class="tag">شرح</span>${it[1]}</div>
+      <div class="pt-ex"><span class="tag">عشان تفهمها</span>${it[2]}</div>
+    </div>`;
+  });
+  app.insertAdjacentHTML('beforeend', `
+    <section class="sec" id="${s.id}">
+      <div class="sec-head">
+        <div class="sec-icon">${s.icon}</div>
+        <div class="sec-title">${s.title}</div>
+        <div class="sec-count">${n} points</div>
+      </div>
+      <div class="sec-body">${body}</div>
+    </section>`);
+  chips.insertAdjacentHTML('beforeend', `<a class="chip" href="#${s.id}" data-id="${s.id}">${s.icon} ${s.title.split('—')[0].split('&')[0].trim()}</a>`);
+});
+document.getElementById('totalBadge').textContent = totalPts + ' points';
+document.getElementById('secBadge').textContent = SECTIONS.length + ' sections';
+
+/* progress bar + active chip */
+const secEls = [...document.querySelectorAll('.sec')];
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  document.getElementById('prog-bar').style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+  let cur = secEls[0].id;
+  secEls.forEach(el => { if (el.getBoundingClientRect().top < 160) cur = el.id; });
+  document.querySelectorAll('.chip').forEach(c => {
+    const on = c.dataset.id === cur;
+    c.classList.toggle('active', on);
+    if (on) { const p = c.parentElement; p.scrollTo({ left: c.offsetLeft - 40, behavior: 'smooth' }); }
+  });
+}, { passive: true });
+
+/* toggles */
+function toggler(btnId, cls) {
+  const b = document.getElementById(btnId);
+  b.addEventListener('click', () => { document.body.classList.toggle(cls); b.classList.toggle('off'); });
+}
+toggler('btnAr', 'hide-ar');
+toggler('btnEx', 'hide-ex');
+
+/* theme */
+const themeBtn = document.getElementById('themeBtn');
+let theme = 'light';
+try { theme = localStorage.getItem('theme') || 'light'; } catch (e) {}
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  try { localStorage.setItem('theme', t); } catch (e) {}
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+</script>
+</body>
+</html>
