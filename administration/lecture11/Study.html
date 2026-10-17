@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM </title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:#1e3a8a; --teal:#0e7490; --emerald:#10b981; --gold:#f59e0b;
+  --accent:#0e7490; --accent-glow:rgba(14,116,144,0.18); --accent-rgb:14,116,144;
+  --grad:linear-gradient(135deg,#1e3a8a 0%,#0e7490 50%,#10b981 100%);
+  --grad-bar:linear-gradient(90deg,#1e3a8a,#0e7490,#10b981,#f59e0b);
+  --bg:#f8fafc; --bg2:#eef2f7; --card:#ffffff;
+  --text:#1a2332; --text2:#4a5568; --text3:#718096;
+  --bc:rgba(0,0,0,0.07);
+  --r:16px; --tr:all .3s cubic-bezier(.4,0,.2,1);
+}
+[data-theme="dark"] {
+  --bg:#0d1117; --bg2:#161b22; --card:#1c2333;
+  --text:#e6edf3; --text2:#b1bac4; --text3:#7d8590;
+  --bc:rgba(255,255,255,0.08);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family:'Outfit',sans-serif; background:var(--bg); color:var(--text);
+  min-height:100vh; overflow-x:hidden; transition:background .4s,color .4s;
+}
+
+#prog-bar { position:fixed; top:0; left:0; height:3px; z-index:999; background:var(--grad-bar); width:0%; transition:width .15s; }
+
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 28px; height:64px;
+  background:rgba(248,250,252,.93); backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--bc);
+}
+[data-theme="dark"] nav { background:rgba(13,17,23,.95); }
+.nav-brand { display:flex; align-items:center; gap:9px; font-size:15px; font-weight:900; color:var(--text); }
+.nav-logo-icon {
+  width:34px; height:34px; border-radius:8px; background:var(--grad);
+  display:flex; align-items:center; justify-content:center;
+  color:#fff; font-size:12px; font-weight:900; box-shadow:0 0 0 2px rgba(245,158,11,.5);
+}
+.nav-right { display:flex; align-items:center; gap:8px; }
+.theme-btn, .tool-btn {
+  height:38px; min-width:38px; border-radius:50px; border:1px solid var(--bc);
+  background:var(--card); cursor:pointer; font-size:14px; color:var(--text);
+  display:flex; align-items:center; justify-content:center; gap:6px; padding:0 12px;
+  font-family:'Outfit',sans-serif; font-weight:700; transition:var(--tr);
+}
+.theme-btn { width:38px; padding:0; border-radius:50%; font-size:15px; }
+.theme-btn:hover { border-color:var(--accent); transform:rotate(20deg); }
+.tool-btn:hover { border-color:var(--accent); color:var(--accent); }
+.tool-btn.off { opacity:.55; }
+
+.hero-band {
+  margin-top:64px; background:var(--grad); padding:40px 24px 36px; text-align:center;
+  position:relative; overflow:hidden; border-bottom:4px solid var(--gold);
+}
+.hero-band::before {
+  content:''; position:absolute; inset:0;
+  background:
+    radial-gradient(circle 220px at 12% 20%, rgba(245,158,11,.22) 0%, transparent 70%),
+    radial-gradient(circle 260px at 90% 85%, rgba(16,185,129,.28) 0%, transparent 70%),
+    radial-gradient(ellipse 600px 200px at 50% 100%, rgba(255,255,255,.12) 0%, transparent 70%);
+}
+.hero-band > * { position:relative; }
+.hero-band-icon {
+  width:68px; height:68px; border-radius:20px; background:rgba(255,255,255,.2);
+  backdrop-filter:blur(8px); display:flex; align-items:center; justify-content:center;
+  font-size:30px; margin:0 auto 14px; border:1.5px solid rgba(255,255,255,.35);
+}
+.hero-band h1 { font-size:clamp(20px,4vw,30px); font-weight:900; color:#fff; margin-bottom:6px; }
+.hero-band p { font-size:13px; color:rgba(255,255,255,.85); }
+.hero-band-meta { display:flex; justify-content:center; gap:14px; margin-top:20px; flex-wrap:wrap; }
+.meta-pill {
+  background:rgba(255,255,255,.18); backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.3); border-radius:50px; padding:6px 16px;
+  font-size:12px; font-weight:700; color:#fff; display:flex; align-items:center; gap:6px;
+}
+.meta-pill i { color:var(--gold); }
+
+/* CHIPS */
+.chips-wrap {
+  position:sticky; top:64px; z-index:90; background:var(--bg);
+  border-bottom:1px solid var(--bc); padding:10px 0;
+}
+.chips { display:flex; gap:8px; overflow-x:auto; padding:0 20px; max-width:860px; margin:0 auto; scrollbar-width:none; }
+.chips::-webkit-scrollbar { display:none; }
+.chip {
+  flex-shrink:0; padding:7px 14px; border-radius:50px; font-size:12px; font-weight:700;
+  background:var(--card); border:1px solid var(--bc); color:var(--text2);
+  text-decoration:none; transition:var(--tr); white-space:nowrap;
+}
+.chip:hover, .chip.active { background:var(--grad); color:#fff; border-color:transparent; }
+
+.shell { max-width:860px; margin:0 auto; padding:24px 20px 80px; }
+
+/* SECTION */
+.sec { margin-bottom:34px; scroll-margin-top:130px; }
+.sec-head {
+  display:flex; align-items:center; gap:12px; background:var(--grad); color:#fff;
+  padding:14px 18px; border-radius:16px 16px 0 0; border-bottom:3px solid var(--gold);
+}
+.sec-icon {
+  width:38px; height:38px; border-radius:10px; background:rgba(255,255,255,.2);
+  display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0;
+}
+.sec-title { font-size:17px; font-weight:900; line-height:1.3; }
+.sec-count { margin-left:auto; font-size:11px; font-weight:700; background:rgba(255,255,255,.2); padding:3px 10px; border-radius:50px; white-space:nowrap; }
+.sec-body {
+  background:var(--card); border:1px solid var(--bc); border-top:none;
+  border-radius:0 0 16px 16px; padding:14px; display:flex; flex-direction:column; gap:12px;
+  box-shadow:0 4px 20px rgba(0,0,0,.05);
+}
+
+.subhead {
+  font-size:13px; font-weight:900; color:var(--navy); padding:8px 12px;
+  background:rgba(var(--accent-rgb),.08); border-left:4px solid var(--gold);
+  border-radius:8px; direction:ltr; text-align:left; margin-top:6px;
+}
+[data-theme="dark"] .subhead { color:#7dd3fc; }
+
+/* POINT */
+.pt {
+  border:1px solid var(--bc); border-radius:14px; overflow:hidden; background:var(--bg);
+  transition:var(--tr);
+}
+.pt:hover { border-color:rgba(var(--accent-rgb),.4); box-shadow:0 4px 14px var(--accent-glow); }
+.pt.sub { margin-left:22px; border-left:3px solid var(--teal); }
+.pt.done { opacity:.55; }
+
+.pt-en {
+  display:flex; gap:10px; align-items:flex-start; padding:13px 14px;
+  font-size:15px; font-weight:700; line-height:1.6; direction:ltr; text-align:left;
+  background:var(--card); cursor:pointer;
+}
+.pt-en a { color:var(--teal); word-break:break-all; }
+.pt-n {
+  min-width:26px; height:26px; border-radius:8px; background:var(--grad); color:#fff;
+  font-size:11px; font-weight:900; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px;
+}
+.pt-ar {
+  padding:12px 16px; font-size:14.5px; line-height:1.9; color:var(--text);
+  direction:rtl; text-align:right; border-top:1px dashed var(--bc);
+  font-family:'Segoe UI',Tahoma,'Outfit',sans-serif;
+}
+.pt-ar .tag, .pt-ex .tag {
+  display:inline-block; font-size:11px; font-weight:900; padding:2px 9px; border-radius:6px; margin-left:8px; vertical-align:middle;
+}
+.pt-ar .tag { background:rgba(14,116,144,.12); color:var(--teal); }
+[data-theme="dark"] .pt-ar .tag { color:#5eead4; }
+.pt-ex {
+  padding:12px 16px; font-size:14px; line-height:1.9; color:var(--text2);
+  direction:rtl; text-align:right; border-top:1px dashed var(--bc);
+  background:rgba(245,158,11,.07); border-right:4px solid var(--gold);
+  font-family:'Segoe UI',Tahoma,'Outfit',sans-serif;
+}
+.pt-ex .tag { background:rgba(245,158,11,.2); color:#b45309; }
+[data-theme="dark"] .pt-ex .tag { color:#fbbf24; }
+body.hide-ex .pt-ex { display:none; }
+body.hide-ar .pt-ar { display:none; }
+
+footer {
+  background:var(--bg2); border-top:3px solid; border-image:var(--grad-bar) 1;
+  padding:22px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;
+}
+.footer-brand { font-size:14px; font-weight:700; }
+.footer-brand span { color:var(--accent); }
+.footer-tg { display:flex; align-items:center; gap:5px; text-decoration:none; color:#229ED9; font-size:12px; font-weight:600; }
+
+@media (max-width:560px) {
+  nav { padding:0 12px; }
+  .nav-brand span { display:none; }
+  .shell { padding:16px 12px 60px; }
+  .pt.sub { margin-left:12px; }
+  .tool-btn span { display:none; }
+  .sec-count { display:none; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog-bar"></div>
+
+<nav>
+  <div class="nav-brand">
+    <div class="nav-logo-icon">GT</div>
+    <span>GHAITH TEAM</span>
+  </div>
+  <div class="nav-right">
+    <button class="tool-btn" id="btnAr" title="Arabic"><i class="fa-solid fa-language"></i><span>الشرح</span></button>
+    <button class="tool-btn" id="btnEx" title="Examples"><i class="fa-solid fa-lightbulb"></i><span>عشان تفهمها</span></button>
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<div class="hero-band">
+  <div class="hero-band-icon">⚖️</div>
+  <h1>Power &amp; Authority</h1>
+  <p>Nursing Management </p>
+  <div class="hero-band-meta">
+    <div class="meta-pill"><i class="fa-solid fa-language"></i> ببساطة مع غيث</div>
+  </div>
+</div>
+
+<div class="chips-wrap"><div class="chips" id="chips"></div></div>
+
+<div class="shell" id="app"></div>
+
+<footer>
+  <div class="footer-brand">GHAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg"><i class="fa-brands fa-telegram"></i> @nursing2bu</a>
+</footer>
+
+<script>
+/* Item format: [English, Arabic explanation, Example, level]  |  {h:"sub heading"}  (level 1 = indented sub-point) */
+const SECTIONS = [
+
+{ id:"intro", icon:"📖", title:"Introduction", items:[
+ ["Effective nursing management relies on the ability to influence others and make decisions.",
+  "يعني إدارة التمريض الناجحة بتعتمد إن المدير يعرف يأثر في اللي حواليه ويعرف ياخد قرارات.",
+  "رئيسة التمريض لو مبتعرفش تقنع فريقها ولا تاخد قرار في الوقت المناسب، الشغل في القسم هيبوظ."],
+ ["This is where power and authority play crucial roles.",
+  "هنا بقى بييجي دور القوة (Power) والسلطة (Authority)، وهما أساسيين جدًا في الموضوع ده.",
+  "القوة هي إنك تعرف تأثر في الناس، والسلطة هي الحق الرسمي اللي المنصب بيديهولك. الاتنين بيكملوا بعض."],
+ ["Nurse managers must understand both to lead teams, allocate resources, and ensure high-quality patient care.",
+  "مدير التمريض لازم يفهم الاتنين عشان يقود الفريق، ويوزع الموارد، ويضمن إن المريض ياخد رعاية بجودة عالية.",
+  "مشرفة العناية لو فاهمة القوة والسلطة، هتوزع الممرضات والأجهزة صح وتضمن إن كل مريض ياخد رعايته كاملة."]
+]},
+
+{ id:"defpower", icon:"💪", title:"Definition of Power", items:[
+ ["Power is the capacity of a person, team, or organization to influence others.",
+  "القوة هي قدرة شخص أو فريق أو مؤسسة إنهم يأثروا في غيرهم.",
+  "ممرضة خبرتها كبيرة زمايلها بيسمعوا كلامها، يعني عندها قوة حتى لو مش مديرة."],
+ ["Power is having personal or positional resources to change situations or people’s attitudes & behaviors.",
+  "القوة إنك تملك مصادر شخصية (زي الخبرة والكاريزما) أو مصادر من المنصب، تقدر بيها تغير المواقف أو اتجاهات الناس وسلوكهم.",
+  "مديرة بتقدر تغير سلوك الممرضات المتساهلات في غسيل الإيدين، سواء عن طريق منصبها أو عن طريق احترامهم ليها."],
+ ["Power is the ability to …",
+  "القوة هي القدرة على حاجتين، هنشوفهم تحت.",
+  "الجملة دي مقدمة، والتفصيل في النقطتين اللي بعدها."],
+ ["Get someone to do something you want done.",
+  "تخلي حد يعمل الحاجة اللي إنت عاوزها تتعمل.",
+  "إنك تطلبي من ممرضة تسجل العلامات الحيوية في الميعاد وهي تعملها فعلًا.", 1],
+ ["Make things happen in the way you want.",
+  "تخلي الأمور تمشي بالطريقة اللي إنت عاوزها.",
+  "مديرة القسم تنظم جدول المناوبات بالشكل اللي هي شايفاه مناسب والجدول ينفذ زي ما هو.", 1]
+]},
+
+{ id:"typespower", icon:"🧩", title:"Types of Power or / Source of Power", items:[
+ ["1- Positional Power; Power based on formal status, authority, formal control of resources, punishments, or rewards, so derives from a person’s position in the organizational hierarchy.",
+  "القوة الوظيفية: قوة جاية من المنصب الرسمي والسلطة والتحكم الرسمي في الموارد والعقاب والمكافآت، يعني مصدرها مكانك في الهيكل التنظيمي للمستشفى.",
+  "رئيسة التمريض تقدر توافق على إجازة أو تدي جزاء بسبب منصبها، وأول ما تسيب المنصب القوة دي بتروح."],
+ ["2- Personal Power; Power based on expertise, special skills, personality traits, charisma, personal status, or credibility, so derives from individual sources.",
+  "القوة الشخصية: قوة جاية من الخبرة والمهارات الخاصة وصفات الشخصية والكاريزما والمكانة الشخصية والمصداقية، يعني مصدرها الشخص نفسه.",
+  "ممرضة متميزة في الطوارئ الكل بيسمع كلامها وبيحترمها، مع إنها مش مديرة."]
+]},
+
+{ id:"posjpower", icon:"🏛️", title:"Types of position power", items:[
+ ["Position power:",
+  "قوة المنصب، وده العنوان اللي تحته الأنواع.",
+  "زي ما تقول: كل القوى اللي بتيجي من الكرسي اللي قاعد عليه."],
+ ["Derives from organizational sources.",
+  "مصدرها المؤسسة نفسها.",
+  "المستشفى هي اللي بتديك الصلاحية بالمنصب."],
+ ["Types of position power.",
+  "أنواع قوة المنصب، وهي 4 أنواع.",
+  "اتنين بيتعلقوا بالمكافأة والعقاب، واتنين بالسلطة والتمثيل."],
+ ["1. Reward power.",
+  "النوع الأول: قوة المكافأة.",
+  "المدير اللي بيدي حوافز بيعرف يحرك الفريق.", 1],
+ ["2. Coercive power.",
+  "النوع التاني: قوة الإكراه (العقاب).",
+  "المدير اللي بيدي جزاءات.", 1],
+ ["3. Legitimate power.",
+  "النوع التالت: القوة الشرعية.",
+  "الحق الرسمي في إصدار الأوامر بسبب المنصب.", 1],
+ ["4. Representative power.",
+  "النوع الرابع: القوة التمثيلية.",
+  "إنك تتكلم باسم مجموعة، زي نقيب التمريض في اجتماع.", 1]
+]},
+
+{ id:"reward", icon:"🎁", title:"Reward power", items:[
+ ["Reward power:",
+  "قوة المكافأة.",
+  "تخيل مدير بيعرف يحمس فريقه بالمكافآت."],
+ ["The extent to which a manager can use extrinsic and intrinsic rewards (e.g., bonuses, praise) to influence other people.",
+  "مدى قدرة المدير إنه يستخدم مكافآت مادية (خارجية) ومعنوية (داخلية) زي الحوافز والمدح عشان يأثر في الناس.",
+  "مديرة بتدي ممرضة حافز مالي (خارجي) وبتشكرها قدام الفريق (داخلي) على شغلها الكويس."],
+ ["Success in accessing and utilizing rewards depends on manager’s skills.",
+  "نجاحك في إنك توصل للمكافآت وتستخدمها صح بيعتمد على مهارات المدير.",
+  "مديرين كتير معاهم ميزانية حوافز، بس اللي بيعرف يوزعها بعدل هو اللي بيكسب فريقه."]
+]},
+
+{ id:"coercive", icon:"⚠️", title:"Coercive power", items:[
+ ["Coercive power.",
+  "قوة الإكراه أو العقاب.",
+  "المدير اللي بيخوف بالجزاء عشان الناس تلتزم."],
+ ["The extent to which a manager can deny desired rewards or administer punishments to influence other people.",
+  "مدى قدرة المدير إنه يمنع مكافآت الناس عاوزاها أو يدي عقوبات عشان يأثر فيهم.",
+  "مديرة بتحرم ممرضة متأخرة على طول من الحافز، أو بتديها إنذار."],
+ ["Availability varies from one organization and manager to another.",
+  "وجود القوة دي بيختلف من مؤسسة لمؤسسة ومن مدير لمدير.",
+  "مستشفى حكومي ممكن لوائحه تحدد جزاءات، ومستشفى خاص ممكن تبقى ليه جزاءات تانية خالص."]
+]},
+
+{ id:"legit", icon:"📜", title:"Legitimate power", items:[
+ ["Legitimate power.",
+  "القوة الشرعية.",
+  "قوة الكرسي الرسمي."],
+ ["Also known as formal hierarchical authority.",
+  "وكمان بتتسمى السلطة الرسمية الهرمية.",
+  "يعني اللي فوق في الهرم ليه حق يأمر اللي تحته."],
+ ["The extent to which a manager can use authority to command, based on the position.",
+  "مدى قدرة المدير إنه يستخدم السلطة في إصدار الأوامر بناءً على منصبه.",
+  "رئيسة القسم تقول لممرضة: ابدئي توزيع الأدوية دلوقتي، والممرضة تنفذ لأن دي أوامر من منصب رسمي."]
+]},
+
+{ id:"rep", icon:"📢", title:"Representative power", items:[
+ ["Representative power.",
+  "القوة التمثيلية.",
+  "إنك تبقى صوت مجموعة."],
+ ["The formal right conferred by the firm to speak as a representative for a potentially important group composed of individuals across departments or outside the firm.",
+  "هو الحق الرسمي اللي المؤسسة بتديهولك عشان تتكلم كممثل عن مجموعة ممكن تكون مهمة، وأفرادها من أقسام مختلفة أو حتى من برة المؤسسة.",
+  "ممرضة تتختار ممثلة لكل ممرضات المستشفى في اجتماع مع الإدارة، وتتكلم باسمهم كلهم."]
+]},
+
+{ id:"typespersonal", icon:"🌟", title:"Types of personal power", items:[
+ ["1. Expert power.",
+  "النوع الأول: قوة الخبرة.",
+  "الممرضة اللي بتفهم في العناية المركزة وكل زمايلها بيسألوها.", 1],
+ ["2. Rational persuasion.",
+  "النوع التاني: الإقناع العقلاني.",
+  "إنك تقنع زميلك بالمنطق.", 1],
+ ["3. Referent power.",
+  "النوع التالت: قوة الجاذبية والاقتداء.",
+  "قائد بيحبه الناس فبيمشوا وراه.", 1]
+]},
+
+{ id:"expert", icon:"🎓", title:"Expert power", items:[
+ ["Expert power.",
+  "قوة الخبرة.",
+  "اللي عنده معلومة الناس محتاجاها بيبقى ليه كلمة."],
+ ["The ability to control another person’s behavior through the possession of knowledge, experience, or judgment that the other person needs but does not have.",
+  "القدرة على التحكم في سلوك شخص تاني عن طريق إنك تملك معرفة أو خبرة أو حُسن تقدير، والشخص التاني محتاجها ومعندوش.",
+  "ممرضة جديدة محتاجة تعرف تظبط جهاز التنفس الصناعي، فبتسمع كلام الممرضة الخبيرة وتنفذه بالحرف."]
+]},
+
+{ id:"rational", icon:"🗣️", title:"Rational persuasion", items:[
+ ["Rational persuasion.",
+  "الإقناع العقلاني.",
+  "تغير سلوك الناس بالمنطق مش بالأوامر."],
+ ["The ability to control another person’s behavior by convincing the other person of the desirability of a goal and a reasonable way of achieving it.",
+  "القدرة على التحكم في سلوك الشخص التاني بإنك تقنعه إن الهدف ده مرغوب، وإن فيه طريقة معقولة توصل بيها له.",
+  "المشرفة تقنع الممرضات إن تقليل الوقت في تسليم الوردية هيقلل الأخطاء، وتوريهم الطريقة، فيقتنعوا ويطبقوها."],
+ ["Much of a supervisor’s daily activity involves rational persuasion.",
+  "جزء كبير من شغل المشرف اليومي بيبقى فيه إقناع عقلاني.",
+  "المشرفة طول اليوم بتشرح وتقنع الفريق بالتغييرات، مش بتصدر أوامر بس."]
+]},
+
+{ id:"referent", icon:"✨", title:"Referent power", items:[
+ ["Referent power.",
+  "قوة الجاذبية والاقتداء.",
+  "الناس بتتبع القائد لأنها بتحبه."],
+ ["The ability to control another’s behavior influence based on charisma, identification and trust. People follow because they are influenced or attracted by the magnetic personality of the leader.",
+  "القدرة على التأثير في سلوك الغير بناءً على الكاريزما والتماهي مع القائد والثقة فيه. الناس بتتبعه لأنها متأثرة بيه أو منجذبة لشخصيته الجذابة.",
+  "رئيسة تمريض الكل بيحبها وبيثق فيها، فلما بتطلب حاجة الفريق بيعملها بحب وبدون ضغط."]
+]},
+
+{ id:"guidelines", icon:"🧭", title:"Guidelines for using different types of power", items:[
+ {h:"Legitimate power"},
+ ["Be polite and confident",
+  "كون مؤدب وواثق.",
+  "قولي لممرضة: لو سمحتي سلمي التقرير بثقة وهدوء."],
+ ["Make appropriate requests",
+  "اطلب طلبات مناسبة.",
+  "متطلبش من ممرضة حاجة خارج شغلها."],
+ {h:"Reward power"},
+ ["Offer rewards for desired actions and behaviors",
+  "اعرض مكافآت على الأفعال والسلوكيات اللي إنت عاوزها.",
+  "مكافأة للممرضة اللي بتلتزم بنظافة الإيدين."],
+ ["Offer credible rewards that are desired by subordinates",
+  "اعرض مكافآت حقيقية ومصدقة، ومرغوبة عند المرؤوسين.",
+  "لو وعدت بحافز، لازم فعلًا تديه، وتديه حاجة الفريق عاوزها فعلًا."],
+ {h:"Coercive power"},
+ ["Inform subordinates of rules and penalties",
+  "عرّف المرؤوسين بالقواعد والعقوبات.",
+  "اتأكد إن كل ممرضة عارفة جزاء التأخير قبل ما يحصل."],
+ ["Understand the situation before acting & warn before punishing",
+  "افهم الموقف قبل ما تتصرف، وحذّر قبل ما تعاقب.",
+  "اسأل ليه الممرضة اتأخرت، وإدّيها إنذار الأول."],
+ ["Administer punishment consistently & punish in private",
+  "طبق العقاب بشكل ثابت على الكل، وعاقب في السر.",
+  "نفس الجزاء لأي ممرضة بتغلط نفس الغلطة، وبعيد عن زمايلها."],
+ {h:"Expert power"},
+ ["Act confident and decisive",
+  "اتصرف بثقة وحسم.",
+  "في أزمة بتاخد القرار بسرعة ومن غير تردد."],
+ ["Increase your professional knowledge and skills to enhance your power",
+  "زوّد معرفتك ومهاراتك المهنية عشان تقوّي قوتك.",
+  "خد كورسات وحضر مؤتمرات."],
+ ["Willing to share your knowledge with others",
+  "كن مستعد تشارك معرفتك مع غيرك.",
+  "علّم الممرضات الجداد إزاي يعملوا إجراء جديد."],
+ {h:"Referent power"},
+ ["Treat subordinates fairly",
+  "عامل المرؤوسين بعدل.",
+  "متفرقش في المعاملة بين ممرضة وممرضة."],
+ ["Defend subordinates’ interests",
+  "دافع عن مصالح المرؤوسين.",
+  "تقف مع فريقك قدام الإدارة لو طلبوا حقوقهم."],
+ ["Be sensitive to subordinates’ needs & feelings",
+  "كن حساس لاحتياجات المرؤوسين ومشاعرهم.",
+  "لو ممرضة عندها ظرف خاص، افهم وراعيها."]
+]},
+
+{ id:"defauth", icon:"👑", title:"Definition of Authority", items:[
+ ["It is the right to take final decisions, to act or to command action of others. It moves in a downward direction.",
+  "السلطة هي الحق إنك تاخد القرارات النهائية، وتتصرف، أو تأمر غيرك يتصرف. وبتمشي من فوق لتحت.",
+  "مدير المستشفى بيصدر قرار، والقرار بينزل لرئيسة التمريض وبعدين للممرضات."],
+ ["Often used for command and control.",
+  "وبتستخدم كتير في الأمر والسيطرة.",
+  "زي مدير بيراقب تنفيذ التعليمات في الأقسام."]
+]},
+
+{ id:"typesauth", icon:"🏷️", title:"Types of authority", items:[
+ ["a. Ultimate authority",
+  "أ. السلطة العليا.",
+  "السلطة اللي فوق كل السلطات.", 1],
+ ["b. Legal authority",
+  "ب. السلطة القانونية.",
+  "السلطة اللي بتبقى بحكم القانون والمنصب.", 1],
+ ["c. Technical authority",
+  "ج. السلطة الفنية.",
+  "سلطة الخبير في مجاله.", 1],
+ ["d. Operational authority",
+  "د. السلطة التنفيذية (التشغيلية).",
+  "سلطة بتتاخد بالتفويض عشان تنفذ شغل.", 1],
+ ["a. Ultimate authority:",
+  "السلطة العليا.",
+  "تخيل الهرم، دي في القمة."],
+ ["It deals with the original and final source of decision-making in a system.",
+  "دي المصدر الأصلي والنهائي لاتخاذ القرار في أي نظام.",
+  "زي كلمة الفصل في النظام كله."],
+ ["Example, in the healthcare system, the ministry of health has ultimate authority because it sets national health policies, laws, and standards that all hospitals and healthcare workers must follow.",
+  "مثال: في النظام الصحي، وزارة الصحة هي صاحبة السلطة العليا لأنها بتحط السياسات والقوانين والمعايير الصحية القومية، وكل المستشفيات والعاملين في الصحة لازم يلتزموا بيها.",
+  "وزارة الصحة تصدر بروتوكول لمكافحة العدوى، وكل مستشفى في مصر لازم تطبقه."],
+ ["b. Legal authority:",
+  "السلطة القانونية.",
+  "سلطة مأخوذة بحكم المنصب."],
+ ["Means that an individual is legally permitted by the virtue of the position to take an action; a hospital director delegates to director of nursing service to act on behalf of the department.",
+  "معناها إن الشخص مسموح له قانونًا بحكم منصبه إنه ياخد إجراء؛ زي مدير المستشفى بيفوض مدير خدمات التمريض يتصرف نيابة عن القسم.",
+  "مدير المستشفى يفوّض رئيسة التمريض تعتمد جداول الممرضات من غير ما ترجع له في كل مرة."],
+ ["c. Technical authority:",
+  "السلطة الفنية.",
+  "سلطة الخبرة."],
+ ["It refers to a person who is a recognized expert in some particular field. This does not necessarily mean that it is derived from position.",
+  "دي معناها شخص خبير ومعترف بيه في مجال معين. ومش لازم تكون جاية من المنصب.",
+  "ممرضة متخصصة في العناية بالجروح الكل بيرجعلها، حتى لو مش مديرة."],
+ ["d. Operational authority:",
+  "السلطة التنفيذية.",
+  "سلطة الشغل اليومي."],
+ ["Is giving someone permission to assure certain responsibilities through delegation of authority.",
+  "هي إنك تدي حد الإذن عشان يتأكد إن مسؤوليات معينة اتنفذت، عن طريق تفويض السلطة.",
+  "رئيسة القسم تفوض ممرضة تتابع نظافة الغرف في المناوبة."]
+]},
+
+{ id:"hierarchy", icon:"🔺", title:"Hierarchy of Authority", items:[
+ ["Hierarchy of authority refers to the structured levels of authority or command within an organization, showing who reports to whom and who has the right to make decisions at each level.",
+  "التسلسل الهرمي للسلطة هو المستويات المنظمة للسلطة أو الأمر جوه المؤسسة، وبيوضح مين بيتبع مين ومين له حق اتخاذ القرار في كل مستوى.",
+  "مدير المستشفى، بعده مدير التمريض، بعده المشرفة، بعده الممرضة، وكل واحد عارف هو بيرد على مين."],
+ ["It's starting from the highest level of authority down to the lowest.",
+  "بيبدأ من أعلى مستوى للسلطة لحد أقل مستوى.",
+  "من القمة في المستشفى لحد الممرضة الجديدة."],
+ ["Chain of command is the management principle that no person should report to more than one boss",
+  "سلسلة الأوامر هي مبدأ إداري بيقول إن مفيش حد يرد على أكتر من رئيس واحد.",
+  "الممرضة ترد على المشرفة بس، مش على اتنين في نفس الوقت، عشان متتلخبطش بين أوامر مختلفة."],
+ ["Span of Control: The number of subordinates who report directly to a manager",
+  "نطاق الإشراف: عدد المرؤوسين اللي بيردوا على المدير مباشرة.",
+  "لو مشرفة معاها 8 ممرضات بيردوا عليها، يبقى نطاق إشرافها 8."],
+ ["Line authority or / Line Manager",
+  "السلطة التنفيذية المباشرة أو المدير التنفيذي.",
+  "رئيسة القسم اللي بتدير الممرضات مباشرة."],
+ ["The position authority (given and defined by the organization) that entitles a manager to direct the work of operative employees",
+  "سلطة المنصب (المؤسسة هي اللي بتدّيها وبتحددها) اللي بتديك الحق توجه شغل الموظفين اللي بينفذوا.",
+  "المشرفة بتوزع المهام على الممرضات، لأن المؤسسة إدتها الحق ده.", 1],
+ ["or / Someone in the direct line or chain of command who has formal authority over people and resources",
+  "أو شخص في الخط المباشر أو سلسلة الأوامر ومعاه سلطة رسمية على الناس والموارد.",
+  "مدير القسم عنده سلطة على الممرضات والمعدات.", 1],
+ ["Staff authority or / Staff Manager",
+  "السلطة الاستشارية أو المدير الاستشاري.",
+  "مدير الموارد البشرية بيدي نصيحة لمديرة التمريض."],
+ ["Positions that have some authority but that are created to support, assist, and advise the holders of line authority.",
+  "مناصب ليها بعض السلطة، بس اتعملت عشان تدعم وتساعد وتنصح أصحاب السلطة التنفيذية.",
+  "مستشار الجودة بيساعد مديرة القسم ويديها نصايح، بس مبيأمرش الممرضات مباشرة.", 1],
+ ["Or/ Managers who are functional-area specialists that give advice to line managers.",
+  "أو مديرين متخصصين في مجال وظيفي معين بيدّوا نصيحة للمديرين التنفيذيين.",
+  "مدير التدريب بينصح مديرة الأقسام بالدورات اللازمة للفريق.", 1]
+]},
+
+{ id:"linestaff", icon:"🧱", title:"Line versus Staff Authority", items:[
+ ["Line versus Staff Authority",
+  "الفرق بين السلطة التنفيذية (الخط المتصل) والسلطة الاستشارية (الخط المتقطع) في الرسم.",
+  "الخط المتصل بيمثل أمر مباشر، والمتقطع بيمثل مشورة بس."]
+]},
+
+{ id:"diff", icon:"⚔️", title:"Difference between Power and Authority", items:[
+ {h:"Power"},
+ ["1- Ability: it is the ability of an individual to effect and influence.",
+  "القوة هي قدرة الفرد إنه يأثر ويفرض نفوذه.",
+  "ممرضة قدرتها إنها تأثر في زمايلها."],
+ ["2- Leadership: it is generally associated with leadership.",
+  "القوة غالبًا مرتبطة بالقيادة.",
+  "القائد الملهم عنده قوة حتى من غير منصب."],
+ ["3- Broad: it is a broader concept and includes authority also in some sense.",
+  "القوة مفهوم أوسع، وبتشمل السلطة كمان بمعنى من المعاني.",
+  "القوة كبيرة والسلطة جزء صغير منها."],
+ ["4- Personal: power is a personal quality.",
+  "القوة صفة شخصية.",
+  "كاريزما الشخص مش بتتاخد من حد."],
+ ["5- Both formal and informal",
+  "القوة ممكن تبقى رسمية وغير رسمية.",
+  "ممرضة ليها كلمة بين الزمايل من غير ما حد يكون كلفها."],
+ ["6- Power flows in all directions",
+  "القوة بتمشي في كل الاتجاهات.",
+  "ممكن تأثر في رئيسك أو زميلك أو اللي تحتك."],
+ {h:"Authority"},
+ ["1- Right: it is the right to command and extract work from employees.",
+  "السلطة هي حق الأمر والحصول على الشغل من الموظفين.",
+  "المدير من حقه يطلب من الموظف ينفذ مهمة."],
+ ["2- Managership: it is vested with manager.",
+  "السلطة مرتبطة بالإدارة، والمدير هو اللي بيمتلكها.",
+  "المدير بس هو اللي يقدر يصدر أوامر رسمية."],
+ ["3- Narrow: it is narrow concept. A manager may have considerable authority but still may be powerless.",
+  "السلطة مفهوم أضيق. ممكن المدير يبقى عنده سلطة كبيرة بس مع كده يبقى مالوش قوة.",
+  "مدير رسمي عنده منصب كبير، بس فريقه مش بيحترمه ومش بيسمع كلامه."],
+ ["4- Positional: it is mostly vested in the position.",
+  "السلطة غالبًا بتبقى مرتبطة بالمنصب.",
+  "لو سبت المنصب السلطة بتروح."],
+ ["5- formal",
+  "السلطة رسمية.",
+  "مكتوبة في اللوائح والهيكل التنظيمي."],
+ ["6- Down flowing concept",
+  "السلطة مفهوم بينزل من فوق لتحت.",
+  "القرار بينزل من المدير للمشرفة للممرضة."]
+]},
+
+{ id:"resources", icon:"🔗", title:"Other resources", items:[
+ ["<a href=\"https://fnurbuedu-my.sharepoint.com/:v:/g/personal/aya_ghnemi_fnur_bu_edu_eg/IQDd0cycN6uVS7zCEBEm3rTjAdFsvXvvoBjKvejQ84ak3bU?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=aBVbzv\" target=\"_blank\" rel=\"noopener\">https://fnurbuedu-my.sharepoint.com/:v:/g/personal/aya_ghnemi_fnur_bu_edu_eg/IQDd0cycN6uVS7zCEBEm3rTjAdFsvXvvoBjKvejQ84ak3bU?nav=eyJyZWZlcnJhbEluZm8iOnsicmVmZXJyYWxBcHAiOiJPbmVEcml2ZUZvckJ1c2luZXNzIiwicmVmZXJyYWxBcHBQbGF0Zm9ybSI6IldlYiIsInJlZmVycmFsTW9kZSI6InZpZXciLCJyZWZlcnJhbFZpZXciOiJNeUZpbGVzTGlua0NvcHkifX0&e=aBVbzv</a>",
+  "ده لينك مصدر إضافي للمحاضرة.",
+  "افتحه لو عاوز تراجع الموضوع من مصدر تاني."]
+]}
+
+];
+
+/* ===== RENDER ===== */
+const app = document.getElementById('app');
+const chips = document.getElementById('chips');
+let totalPts = 0;
+
+SECTIONS.forEach((s, si) => {
+  let n = 0;
+  let body = '';
+  s.items.forEach(it => {
+    if (it.h) { body += `<div class="subhead">${it.h}</div>`; return; }
+    n++; totalPts++;
+    const sub = it[3] ? ' sub' : '';
+    body += `<div class="pt${sub}">
+      <div class="pt-en" onclick="this.parentElement.classList.toggle('done')"><div class="pt-n">${n}</div><div>${it[0]}</div></div>
+      <div class="pt-ar"><span class="tag">شرح</span>${it[1]}</div>
+      <div class="pt-ex"><span class="tag">عشان تفهمها</span>${it[2]}</div>
+    </div>`;
+  });
+  app.insertAdjacentHTML('beforeend', `
+    <section class="sec" id="${s.id}">
+      <div class="sec-head">
+        <div class="sec-icon">${s.icon}</div>
+        <div class="sec-title">${s.title}</div>
+        <div class="sec-count">${n} points</div>
+      </div>
+      <div class="sec-body">${body}</div>
+    </section>`);
+  chips.insertAdjacentHTML('beforeend', `<a class="chip" href="#${s.id}" data-id="${s.id}">${s.icon} ${s.title.split('—')[0].split('&')[0].trim()}</a>`);
+});
+document.getElementById('totalBadge').textContent = totalPts + ' points';
+document.getElementById('secBadge').textContent = SECTIONS.length + ' sections';
+
+/* progress bar + active chip */
+const secEls = [...document.querySelectorAll('.sec')];
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  document.getElementById('prog-bar').style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+  let cur = secEls[0].id;
+  secEls.forEach(el => { if (el.getBoundingClientRect().top < 160) cur = el.id; });
+  document.querySelectorAll('.chip').forEach(c => {
+    const on = c.dataset.id === cur;
+    c.classList.toggle('active', on);
+    if (on) { const p = c.parentElement; p.scrollTo({ left: c.offsetLeft - 40, behavior: 'smooth' }); }
+  });
+}, { passive: true });
+
+/* toggles */
+function toggler(btnId, cls) {
+  const b = document.getElementById(btnId);
+  b.addEventListener('click', () => { document.body.classList.toggle(cls); b.classList.toggle('off'); });
+}
+toggler('btnAr', 'hide-ar');
+toggler('btnEx', 'hide-ex');
+
+/* theme */
+const themeBtn = document.getElementById('themeBtn');
+let theme = 'light';
+try { theme = localStorage.getItem('theme') || 'light'; } catch (e) {}
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  try { localStorage.setItem('theme', t); } catch (e) {}
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+</script>
+</body>
+</html>
