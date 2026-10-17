@@ -1,0 +1,523 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM </title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:#1e3a8a; --teal:#0e7490; --emerald:#10b981; --gold:#f59e0b;
+  --accent:#0e7490; --accent-glow:rgba(14,116,144,0.18); --accent-rgb:14,116,144;
+  --grad:linear-gradient(135deg,#1e3a8a 0%,#0e7490 50%,#10b981 100%);
+  --grad-bar:linear-gradient(90deg,#1e3a8a,#0e7490,#10b981,#f59e0b);
+  --bg:#f8fafc; --bg2:#eef2f7; --card:#ffffff;
+  --text:#1a2332; --text2:#4a5568; --text3:#718096;
+  --bc:rgba(0,0,0,0.07);
+  --r:16px; --tr:all .3s cubic-bezier(.4,0,.2,1);
+}
+[data-theme="dark"] {
+  --bg:#0d1117; --bg2:#161b22; --card:#1c2333;
+  --text:#e6edf3; --text2:#b1bac4; --text3:#7d8590;
+  --bc:rgba(255,255,255,0.08);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family:'Outfit',sans-serif; background:var(--bg); color:var(--text);
+  min-height:100vh; overflow-x:hidden; transition:background .4s,color .4s;
+}
+
+#prog-bar { position:fixed; top:0; left:0; height:3px; z-index:999; background:var(--grad-bar); width:0%; transition:width .15s; }
+
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 28px; height:64px;
+  background:rgba(248,250,252,.93); backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--bc);
+}
+[data-theme="dark"] nav { background:rgba(13,17,23,.95); }
+.nav-brand { display:flex; align-items:center; gap:9px; font-size:15px; font-weight:900; color:var(--text); }
+.nav-logo-icon {
+  width:34px; height:34px; border-radius:8px; background:var(--grad);
+  display:flex; align-items:center; justify-content:center;
+  color:#fff; font-size:12px; font-weight:900; box-shadow:0 0 0 2px rgba(245,158,11,.5);
+}
+.nav-right { display:flex; align-items:center; gap:8px; }
+.theme-btn, .tool-btn {
+  height:38px; min-width:38px; border-radius:50px; border:1px solid var(--bc);
+  background:var(--card); cursor:pointer; font-size:14px; color:var(--text);
+  display:flex; align-items:center; justify-content:center; gap:6px; padding:0 12px;
+  font-family:'Outfit',sans-serif; font-weight:700; transition:var(--tr);
+}
+.theme-btn { width:38px; padding:0; border-radius:50%; font-size:15px; }
+.theme-btn:hover { border-color:var(--accent); transform:rotate(20deg); }
+.tool-btn:hover { border-color:var(--accent); color:var(--accent); }
+.tool-btn.off { opacity:.55; }
+
+.hero-band {
+  margin-top:64px; background:var(--grad); padding:40px 24px 36px; text-align:center;
+  position:relative; overflow:hidden; border-bottom:4px solid var(--gold);
+}
+.hero-band::before {
+  content:''; position:absolute; inset:0;
+  background:
+    radial-gradient(circle 220px at 12% 20%, rgba(245,158,11,.22) 0%, transparent 70%),
+    radial-gradient(circle 260px at 90% 85%, rgba(16,185,129,.28) 0%, transparent 70%),
+    radial-gradient(ellipse 600px 200px at 50% 100%, rgba(255,255,255,.12) 0%, transparent 70%);
+}
+.hero-band > * { position:relative; }
+.hero-band-icon {
+  width:68px; height:68px; border-radius:20px; background:rgba(255,255,255,.2);
+  backdrop-filter:blur(8px); display:flex; align-items:center; justify-content:center;
+  font-size:30px; margin:0 auto 14px; border:1.5px solid rgba(255,255,255,.35);
+}
+.hero-band h1 { font-size:clamp(20px,4vw,30px); font-weight:900; color:#fff; margin-bottom:6px; }
+.hero-band p { font-size:13px; color:rgba(255,255,255,.85); }
+.hero-band-meta { display:flex; justify-content:center; gap:14px; margin-top:20px; flex-wrap:wrap; }
+.meta-pill {
+  background:rgba(255,255,255,.18); backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.3); border-radius:50px; padding:6px 16px;
+  font-size:12px; font-weight:700; color:#fff; display:flex; align-items:center; gap:6px;
+}
+.meta-pill i { color:var(--gold); }
+
+/* CHIPS */
+.chips-wrap {
+  position:sticky; top:64px; z-index:90; background:var(--bg);
+  border-bottom:1px solid var(--bc); padding:10px 0;
+}
+.chips { display:flex; gap:8px; overflow-x:auto; padding:0 20px; max-width:860px; margin:0 auto; scrollbar-width:none; }
+.chips::-webkit-scrollbar { display:none; }
+.chip {
+  flex-shrink:0; padding:7px 14px; border-radius:50px; font-size:12px; font-weight:700;
+  background:var(--card); border:1px solid var(--bc); color:var(--text2);
+  text-decoration:none; transition:var(--tr); white-space:nowrap;
+}
+.chip:hover, .chip.active { background:var(--grad); color:#fff; border-color:transparent; }
+
+.shell { max-width:860px; margin:0 auto; padding:24px 20px 80px; }
+
+/* SECTION */
+.sec { margin-bottom:34px; scroll-margin-top:130px; }
+.sec-head {
+  display:flex; align-items:center; gap:12px; background:var(--grad); color:#fff;
+  padding:14px 18px; border-radius:16px 16px 0 0; border-bottom:3px solid var(--gold);
+}
+.sec-icon {
+  width:38px; height:38px; border-radius:10px; background:rgba(255,255,255,.2);
+  display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0;
+}
+.sec-title { font-size:17px; font-weight:900; line-height:1.3; }
+.sec-count { margin-left:auto; font-size:11px; font-weight:700; background:rgba(255,255,255,.2); padding:3px 10px; border-radius:50px; white-space:nowrap; }
+.sec-body {
+  background:var(--card); border:1px solid var(--bc); border-top:none;
+  border-radius:0 0 16px 16px; padding:14px; display:flex; flex-direction:column; gap:12px;
+  box-shadow:0 4px 20px rgba(0,0,0,.05);
+}
+
+.subhead {
+  font-size:13px; font-weight:900; color:var(--navy); padding:8px 12px;
+  background:rgba(var(--accent-rgb),.08); border-left:4px solid var(--gold);
+  border-radius:8px; direction:ltr; text-align:left; margin-top:6px;
+}
+[data-theme="dark"] .subhead { color:#7dd3fc; }
+
+/* POINT */
+.pt {
+  border:1px solid var(--bc); border-radius:14px; overflow:hidden; background:var(--bg);
+  transition:var(--tr);
+}
+.pt:hover { border-color:rgba(var(--accent-rgb),.4); box-shadow:0 4px 14px var(--accent-glow); }
+.pt.sub { margin-left:22px; border-left:3px solid var(--teal); }
+.pt.done { opacity:.55; }
+
+.pt-en {
+  display:flex; gap:10px; align-items:flex-start; padding:13px 14px;
+  font-size:15px; font-weight:700; line-height:1.6; direction:ltr; text-align:left;
+  background:var(--card); cursor:pointer;
+}
+.pt-n {
+  min-width:26px; height:26px; border-radius:8px; background:var(--grad); color:#fff;
+  font-size:11px; font-weight:900; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px;
+}
+.pt-ar {
+  padding:12px 16px; font-size:14.5px; line-height:1.9; color:var(--text);
+  direction:rtl; text-align:right; border-top:1px dashed var(--bc);
+  font-family:'Segoe UI',Tahoma,'Outfit',sans-serif;
+}
+.pt-ar .tag, .pt-ex .tag {
+  display:inline-block; font-size:11px; font-weight:900; padding:2px 9px; border-radius:6px; margin-left:8px; vertical-align:middle;
+}
+.pt-ar .tag { background:rgba(14,116,144,.12); color:var(--teal); }
+[data-theme="dark"] .pt-ar .tag { color:#5eead4; }
+.pt-ex {
+  padding:12px 16px; font-size:14px; line-height:1.9; color:var(--text2);
+  direction:rtl; text-align:right; border-top:1px dashed var(--bc);
+  background:rgba(245,158,11,.07); border-right:4px solid var(--gold);
+  font-family:'Segoe UI',Tahoma,'Outfit',sans-serif;
+}
+.pt-ex .tag { background:rgba(245,158,11,.2); color:#b45309; }
+[data-theme="dark"] .pt-ex .tag { color:#fbbf24; }
+body.hide-ex .pt-ex { display:none; }
+body.hide-ar .pt-ar { display:none; }
+
+footer {
+  background:var(--bg2); border-top:3px solid; border-image:var(--grad-bar) 1;
+  padding:22px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;
+}
+.footer-brand { font-size:14px; font-weight:700; }
+.footer-brand span { color:var(--accent); }
+.footer-tg { display:flex; align-items:center; gap:5px; text-decoration:none; color:#229ED9; font-size:12px; font-weight:600; }
+
+@media (max-width:560px) {
+  nav { padding:0 12px; }
+  .nav-brand span { display:none; }
+  .shell { padding:16px 12px 60px; }
+  .pt.sub { margin-left:12px; }
+  .tool-btn span { display:none; }
+  .sec-count { display:none; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog-bar"></div>
+
+<nav>
+  <div class="nav-brand">
+    <div class="nav-logo-icon">GT</div>
+    <span>GHAITH TEAM</span>
+  </div>
+  <div class="nav-right">
+    <button class="tool-btn" id="btnAr" title="Arabic"><i class="fa-solid fa-language"></i><span>الشرح</span></button>
+    <button class="tool-btn" id="btnEx" title="Examples"><i class="fa-solid fa-lightbulb"></i><span>عشان تفهمها</span></button>
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<div class="hero-band">
+  <div class="hero-band-icon">🌍</div>
+  <h1>Climate Change</h1>
+  <p>Nursing Management </p>
+  <div class="hero-band-meta">
+    <div class="meta-pill"><i class="fa-solid fa-language"></i> ببساطة مع غيث</div>
+  </div>
+</div>
+
+<div class="chips-wrap"><div class="chips" id="chips"></div></div>
+
+<div class="shell" id="app"></div>
+
+<footer>
+  <div class="footer-brand">GHAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg"><i class="fa-brands fa-telegram"></i> @nursing2bu</a>
+</footer>
+
+<script>
+/* Item format: [English, Arabic explanation, Example, level]  |  {h:"sub heading"}  (level 1 = indented sub-point) */
+const SECTIONS = [
+
+{ id:"intro", icon:"📖", title:"Introduction", items:[
+ {h:"Introduction"},
+ ["The Earth is getting hotter and the climate is changing primarily due to human activities such as burning of fossil fuels, deforestation and industrial processes that emit planet-warming gasses, referred to as greenhouse gases.",
+  "الأرض بتسخن والمناخ بيتغير، والسبب الأساسي هو أنشطة الإنسان زي حرق الوقود الأحفوري (فحم وبترول وغاز)، وقطع الغابات، والعمليات الصناعية اللي بتطلع غازات بتسخّن الكوكب واسمها غازات الدفيئة.",
+  "زي أوضة مقفولة فيها ناس كتير وبيولعوا نار جواها: الحرارة والدخان هيزيدوا وماحدش هيعرف يستحمل."],
+ ["The heating effect of the planet is referred to as global warming, which in turn causes climate change.",
+  "سخونة الكوكب دي اسمها الاحتباس الحراري (Global warming)، وهو اللي بيسبب تغير المناخ.",
+  "زي ما السخونة العالية بتسبب سخونة في جسم المريض وبعدها تظهر أعراض تانية؛ سخونة الأرض هي السبب وتغير المناخ هو النتيجة."],
+ ["So climate and development are inextricably linked.",
+  "يعني المناخ والتنمية مرتبطين ببعض ارتباط مايتفكش.",
+  "لو الجو بوظ المحاصيل والمستشفيات اتأثرت، البلد كلها مش هتعرف تتطور."],
+ ["Climate change is having severe consequences for people and the environment, especially in developing countries.",
+  "تغير المناخ ليه نتايج صعبة على الناس والبيئة، وخصوصًا في الدول النامية.",
+  "الدول النامية إمكانياتها أقل، فلما تيجي موجة حر أو فيضان بتتأثر أكتر من الدول الغنية."],
+ ["If we manage to limit global warming and adapt to climate change worldwide as quickly as possible, then we will be able to prevent uncontrollable consequences for our planet and at the same time create new development opportunities.",
+  "لو قدرنا نقلل الاحتباس الحراري ونتأقلم مع تغير المناخ في العالم كله بأسرع وقت، هنمنع نتايج مش هنقدر نسيطر عليها وفي نفس الوقت هنفتح فرص تنمية جديدة.",
+  "زي ما بتعالج المرض بدري فتمنع المضاعفات، وكمان ترجع تشتغل وتنتج تاني."],
+ ["If businesses and society continue to operate as they currently do, climate change will be devastating to economic and social progress, threatening health, safety and livelihoods.",
+  "ولو الشركات والمجتمع فضلوا يشتغلوا بنفس الطريقة الحالية، تغير المناخ هيدمّر التقدم الاقتصادي والاجتماعي ويهدد الصحة والأمان ولقمة العيش.",
+  "زي واحد عارف إن عنده ضغط عالي ومكمّل أكل مالح وسجاير؛ طبيعي المضاعفات هتيجي."]
+]},
+
+{ id:"concepts", icon:"💡", title:"Concepts", items:[
+ {h:"Concepts"},
+ {h:"Climate:"},
+ ["Climate is defined as an area's long-term weather patterns.",
+  "المناخ هو أنماط الطقس في منطقة معينة على مدى فترة طويلة.",
+  "لما نقول مناخ مصر حار وجاف في الصيف، ده كلام عن سنين مش عن يوم واحد."],
+ ["The simplest way to describe climate is to look at average temperature and precipitation over time.",
+  "أسهل طريقة نوصف بيها المناخ إننا نبص على متوسط درجة الحرارة والأمطار (Precipitation) على مدار الوقت.",
+  "متوسط الحرارة والمطر في إسكندرية على مدار سنين يوصفلك مناخها."],
+ {h:"Climate Change:"},
+ ["Climate change refers to long-term shifts in temperatures and weather patterns.",
+  "تغير المناخ معناه تحولات طويلة المدى في درجات الحرارة وأنماط الطقس.",
+  "لو بقى الصيف بيطول سنة ورا سنة والشتا بيقصر، ده تغير مناخ مش مجرد يوم حر."],
+ ["These shifts may be natural, such as through variations in the solar cycle.",
+  "التحولات دي ممكن تحصل بشكل طبيعي، زي التغيرات في دورة الشمس (Solar cycle).",
+  "الشمس نفسها نشاطها بيزيد ويقل في دورات، فده بيأثر على حرارة الأرض من غير تدخل الإنسان."],
+ ["But since the 1800s, human activities have been the main driver of climate change, primarily due to burning fossil fuels like coal and gas.",
+  "لكن من القرن التاسع عشر (1800s) لحد دلوقتي، أنشطة الإنسان هي السبب الرئيسي لتغير المناخ، وأهمها حرق الوقود الأحفوري زي الفحم والغاز.",
+  "الطبيعة كانت بتغير المناخ ببطء، ولما الإنسان بدأ يحرق فحم وغاز بكميات ضخمة الموضوع اتسرّع جدًا."],
+ {h:"Global warming:"},
+ ["Global warming is a gradual increase in the earth's temperature generally due to the greenhouse effect caused by increased levels of carbon dioxide, and other pollutants.",
+  "الاحتباس الحراري هو ارتفاع تدريجي في درجة حرارة الأرض، غالبًا بسبب تأثير الدفيئة الناتج عن زيادة ثاني أكسيد الكربون وملوثات تانية.",
+  "زي الصوبة الزراعية: الزجاج بيدخّل الشمس وبيمنع الحرارة تخرج. غازات الدفيئة شغالة كده حوالين الأرض."],
+ ["This phenomenon has been observed over the past one or two centuries.",
+  "الظاهرة دي اتلاحظت على مدار القرن أو القرنين اللي فاتوا.",
+  "يعني مش حاجة جديدة النهارده، العلماء بيرصدوها بقالهم 100 أو 200 سنة."]
+]},
+
+{ id:"causes", icon:"🏭", title:"Causes of Climate Change", items:[
+ {h:"Causes of climate change"},
+ {h:"Generating power"},
+ ["Most electricity is still generated by burning coal, oil, or gas, which produces carbon dioxide and nitrous oxide powerful greenhouse gases that blanket the earth and trap the sun's heat.",
+  "أغلب الكهرباء لسه بتتولد من حرق الفحم أو البترول أو الغاز، وده بيطلع ثاني أكسيد الكربون وأكسيد النيتروز، وهما غازات دفيئة قوية بتغطي الأرض زي البطانية وتحبس حرارة الشمس.",
+  "كل ما تولّع النور وتشغل التكييف، محطة الكهرباء بتحرق وقود أكتر وبتطلع غازات أكتر."],
+ {h:"Manufacturing goods"},
+ ["Manufacturing and industry produce emissions, mostly from burning fossil fuels to produce energy for making things like cement, iron, steel, electronics, plastics, clothes, and other goods.",
+  "التصنيع والصناعة بيطلعوا انبعاثات، غالبًا من حرق الوقود الأحفوري لتوليد الطاقة اللازمة لصناعة حاجات زي الأسمنت والحديد والصلب والإلكترونيات والبلاستيك والهدوم وسلع تانية.",
+  "مصانع الأسمنت والحديد بتشتغل بطاقة كبيرة جدًا، فكل طوبة وكل كيس بلاستيك وراه انبعاثات."],
+ {h:"Deforestation:"},
+ ["Cutting down forests to create farms or pastures, or for other reasons, causes emissions, since trees, when they are cut, release the carbon they have been storing.",
+  "قطع الغابات عشان نعمل مزارع أو مراعي أو لأي سبب تاني بيسبب انبعاثات، لأن الشجر لما بيتقطع بيطلّع الكربون اللي كان مخزنه.",
+  "الشجرة زي شنطة بتشيل كربون؛ لما نقطعها الشنطة بتتفتح والكربون يطلع في الهوا."],
+ {h:"Using transportation"},
+ ["Most cars, trucks, ships, and planes run on fossil fuels.",
+  "أغلب العربيات والشاحنات والسفن والطيارات بتشتغل على الوقود الأحفوري.",
+  "عربيتك وتوك توك الشارع والميكروباص كلهم بيحرقوا بنزين أو سولار."],
+ ["That makes transportation a major contributor of greenhouse gases, especially carbon-dioxide emissions.",
+  "وده بيخلي المواصلات من أكبر المساهمين في غازات الدفيئة، خصوصًا انبعاثات ثاني أكسيد الكربون.",
+  "ملايين العربيات كل يوم يعني ملايين العوادم بتطلع CO2."],
+ {h:"Producing food"},
+ ["Producing food causes emissions of greenhouse gases in various ways, through deforestation and clearing of land for agriculture and the use of energy to run farm equipment or fishing boats, usually with fossil fuels.",
+  "إنتاج الأكل بيسبب انبعاثات غازات دفيئة بطرق مختلفة: قطع الغابات وتجريف الأرض للزراعة، واستخدام الطاقة لتشغيل معدات المزارع أو مراكب الصيد، وغالبًا بتشتغل بالوقود الأحفوري.",
+  "الأكل اللي على سفرتك وراه جرار بيشتغل بسولار، ومركب صيد بتحرق وقود، وأرض اتشالت منها أشجار."],
+ {h:"Powering buildings"},
+ ["Globally, residential and commercial buildings emit significant quantities of greenhouse gas emissions through growing energy demand for heating and cooling, with rising air-conditioner ownership, as well as increased electricity consumption for lighting.",
+  "على مستوى العالم، المباني السكنية والتجارية بتطلع كميات كبيرة من غازات الدفيئة بسبب زيادة الطلب على الطاقة للتدفئة والتبريد، مع زيادة عدد الناس اللي بتشتري تكييفات، وزيادة استهلاك الكهرباء في الإضاءة.",
+  "كل بيت ومول ومستشفى فيه تكييف ونور شغالين بالساعات، وده كله كهرباء متولدة من وقود."],
+ {h:"Coal mining"},
+ ["Coal mining releases methane, a potent greenhouse gas.",
+  "تعدين الفحم بيطلّع غاز الميثان، وهو غاز دفيئة قوي.",
+  "لما بيحفروا مناجم الفحم، الميثان المحبوس تحت الأرض بيطلع في الجو."],
+ ["Methane emissions from coal mining have a global warming effect.",
+  "انبعاثات الميثان من تعدين الفحم ليها تأثير على الاحتباس الحراري.",
+  "يعني المنجم نفسه، من غير ما نحرق الفحم، بيساهم في سخونة الأرض."]
+]},
+
+{ id:"effects", icon:"🌪️", title:"Effects of Climate Change", items:[
+ {h:"Effects of climate change"},
+ ["Some Effects of Climate Change: Rising sea levels, Economic losses, Rising temperatures, More & worse droughts, More heat-related illnesses (Heat cramps, Heat exhaustion, Heat stroke), More & worse storms, More animal extinctions, More & worse forest fires.",
+  "دي صورة الملخص: من آثار تغير المناخ ارتفاع مستوى البحر، خسائر اقتصادية، ارتفاع الحرارة، جفاف أكتر وأسوأ، أمراض حرارية أكتر (تقلصات حرارية، إجهاد حراري، ضربة شمس)، عواصف أكتر وأسوأ، انقراض حيوانات أكتر، وحرائق غابات أكتر وأسوأ.",
+  "تخيل الأرض في النص وفي كل ناحية سهم بيرمي مشكلة: بحر بيعلى، جفاف، عواصف، حرائق، وناس بتتعب من الحر."],
+ {h:"Hotter temperatures"},
+ ["Higher temperatures increase heat-related illnesses, it can occur when a person is exposed to high temperatures, symptoms range from mild swelling, rashes, or cramps to potentially deadly heat exhaustion and heat stroke.",
+  "الحرارة العالية بتزود الأمراض المرتبطة بالحر، وبتحصل لما الشخص يتعرض لدرجات حرارة عالية، وأعراضها من تورم بسيط وطفح جلدي وتقلصات لحد إجهاد حراري وضربة شمس ممكن تموّت.",
+  "واحد شغال في الشمس ساعات طويلة: في الأول رجله تورم أو جلده يطلع عليه حبوب أو تشنج، ولو كمل ممكن يوصل لضربة شمس خطيرة."],
+ {h:"More severe storms"},
+ ["As temperatures rise, more moisture evaporates, which exacerbates extreme rainfall and flooding, causing more destructive storms, that destroy homes and communities, causing deaths and huge economic losses.",
+  "كل ما الحرارة بتعلى، رطوبة أكتر بتتبخر، وده بيزوّد الأمطار الشديدة والفيضانات، وبيعمل عواصف أكتر تدميرًا بتهد البيوت والمجتمعات وبتسبب وفيات وخسائر اقتصادية ضخمة.",
+  "زي حلة على النار: كل ما تسخن أكتر البخار يطلع أكتر، وبعدين ده كله بينزل مطر غزير مرة واحدة."],
+ {h:"Increased drought"},
+ ["Climate change is changing water availability, making it scarcer in more regions leading to an increased risk of agricultural droughts affecting crops.",
+  "تغير المناخ بيغير توفر المياه وبيخليها أقل في مناطق أكتر، وده بيزوّد خطر الجفاف الزراعي اللي بيأثر على المحاصيل.",
+  "فلاح كان بيعتمد على مطر أو ميه كفاية، وفجأة الميه قلت والزرع جف."],
+ ["Deserts also are expanding, reducing land for growing food.",
+  "كمان الصحاري بتتوسع، وده بيقلل الأرض الصالحة لزراعة الأكل.",
+  "الرمل بياكل من الأرض الخضراء، فمساحة الزراعة بتصغر."],
+ {h:"Not enough food"},
+ ["Changes in the climate and increases in extreme weather events are among the reasons behind a global rise in hunger and poor nutrition.",
+  "التغيرات في المناخ وزيادة الأحداث الجوية المتطرفة من أسباب زيادة الجوع وسوء التغذية في العالم.",
+  "لو المحصول باظ بسبب موجة حر أو فيضان، الأكل يقل ويغلى والناس تجوع."],
+ ["Fisheries, crops, livestock and marine resources may be destroyed or become less productive.",
+  "مصايد الأسماك والمحاصيل والماشية والموارد البحرية ممكن تتدمر أو تبقى إنتاجيتها أقل.",
+  "السمك يقل في البحر، والمحصول يقل في الأرض، والمواشي تتأثر من الحر والعطش."],
+ {h:"Poverty and displacement"},
+ ["Climate change increases the factors that put and keep people in poverty.",
+  "تغير المناخ بيزوّد العوامل اللي بتدخّل الناس في الفقر وبتخليهم فيه.",
+  "اللي بيخسر أرضه أو بيته بسبب كارثة، بيبقى صعب جدًا يقف على رجليه تاني."],
+ ["Also weather-related events displaced an estimated 23.1 million people on average each year, leaving many more vulnerable to poverty.",
+  "كمان الأحداث المرتبطة بالطقس شرّدت تقريبًا 23.1 مليون شخص في المتوسط كل سنة، وده بيخلي ناس أكتر معرضين للفقر.",
+  "23.1 مليون في السنة يعني ناس بتسيب بيوتها كل سنة بسبب فيضان أو عاصفة."]
+]},
+
+{ id:"health", icon:"🩺", title:"Impact on Human Health", items:[
+ {h:"Climate change impact on human health"},
+ ["Heat waves: cardiovascular diseases, such as stroke.",
+  "موجات الحر: بتسبب أمراض القلب والأوعية الدموية، زي السكتة الدماغية (Stroke).",
+  "الحر الشديد بيجهد القلب والأوعية، فكبير السن ممكن يتعرض لجلطة أو سكتة."],
+ ["Air pollution: stroke, heart disease, asthma, chronic obstructive pulmonary disease and lung cancer.",
+  "تلوث الهواء: بيسبب سكتة دماغية، أمراض القلب، الربو، مرض الانسداد الرئوي المزمن (COPD)، وسرطان الرئة.",
+  "ناس بتتنفس عادم وغبار كل يوم، فالرئة والقلب بيتأثروا على المدى الطويل."],
+ ["Wildfires: suffocation, burns, cardiovascular and respiratory problems, mental health.",
+  "حرائق الغابات: اختناق، حروق، مشاكل في القلب والجهاز التنفسي، وتأثير على الصحة النفسية.",
+  "الدخان بيخنق، والنار بتحرق، ومن عاش الحريقة ممكن يتأثر نفسيًا."],
+ ["Drought: food insecurity, malnutrition, and psychosocial stress",
+  "الجفاف: عدم الأمان الغذائي، سوء التغذية، والضغط النفسي والاجتماعي.",
+  "لما الأكل يقل، الناس تقلق وتتغذى وحش وتتضغط نفسيًا."],
+ ["Floods:, displacement and shortages of safe water, mental and physiological health, food insecurity and malnutrition",
+  "الفيضانات: تشريد ونقص المياه الآمنة، وتأثير على الصحة النفسية والجسدية، وعدم أمان غذائي وسوء تغذية.",
+  "الميه تغرق البيوت، والناس تنزح، وميه الشرب تتلوث، فالمرض ينتشر والأكل يقل."],
+ ["Injuries and mortality from extreme weather events",
+  "إصابات ووفيات من الأحداث الجوية المتطرفة.",
+  "عاصفة قوية أو سيول ممكن تسبب كسور وجروح وتموّت ناس."],
+ ["Infections spread.",
+  "انتشار العدوى.",
+  "تغير الجو بيخلي الميكروبات والناقلات (زي الناموس) تنتشر في مناطق أكتر."],
+ ["Increasing occurrence of medical errors.",
+  "زيادة حدوث الأخطاء الطبية.",
+  "فريق طبي شغال في حر شديد أو أزمة طوارئ تركيزه بيقل، فاحتمال الغلط يزيد."],
+ ["The emergence of new diseases.",
+  "ظهور أمراض جديدة.",
+  "مع تغير البيئة ممكن تظهر أمراض مكانتش موجودة في المنطقة قبل كده."],
+ ["Increasing patients vulnerability, delay in cancer detection and management, and worsening prognosis of cancer.",
+  "زيادة هشاشة المرضى، وتأخر اكتشاف السرطان وعلاجه، وسوء التوقعات المستقبلية لمرضى السرطان (Prognosis).",
+  "لو كارثة أو فيضان منعت المريض يروح الفحص أو العلاج في ميعاده، المرض يتأخر اكتشافه وحالته تسوء."]
+]},
+
+{ id:"cop", icon:"🌐", title:"Climate Change Conference", items:[
+ {h:"Climate change conference"},
+ ["In November 2022, Egypt host the 27th annual session of Conference of parties COP in Sharm el-Sheikh.",
+  "في نوفمبر 2022 مصر استضافت الدورة السنوية رقم 27 لمؤتمر الأطراف (COP) في شرم الشيخ.",
+  "COP27 يعني الدورة 27 للمؤتمر، واتعمل في شرم الشيخ سنة 2022."],
+ ["More than 200 governments have been invited, environmental charities, community groups, think tanks, businesses and faith groups also take part.",
+  "اتدعى أكتر من 200 حكومة، وكمان بتشارك جمعيات بيئية خيرية ومجموعات مجتمعية ومراكز أبحاث وشركات ومجموعات دينية.",
+  "مش الحكومات بس اللي بتحضر، كمان الجمعيات والشركات وراجال الدين."],
+ {h:"COP27 focuses on three main areas:"},
+ ["Reducing emissions",
+  "تقليل الانبعاثات.",
+  "يعني نقلل الدخان والغازات اللي بتطلع من المصانع والعربيات."],
+ ["Climate adaptation: Helping countries to prepare for and deal with climate change",
+  "التأقلم مع المناخ: مساعدة الدول إنها تستعد وتتعامل مع تغير المناخ.",
+  "زي دولة بتبني سدود وحواجز ضد الفيضان وتغير طريقة زراعتها عشان تستحمل الحر."],
+ ["Climate finance: Securing technical support and funding for developing countries for the above.",
+  "تمويل المناخ: توفير دعم فني وتمويل للدول النامية عشان تنفذ النقطتين اللي فاتوا.",
+  "الدول الغنية تساعد الدول النامية بفلوس وخبرة عشان تقلل انبعاثاتها وتتأقلم."]
+]},
+
+{ id:"role", icon:"👩‍⚕️", title:"Role of Everyone", items:[
+ {h:"Role of every one in climate change"},
+ ["As a nurse increase Awareness: Educate patients and communities about the health impacts of climate change, such as heat stroke, and air pollution, and provide guidance on staying safe and healthy.",
+  "كممرض/ة: زوّد الوعي، يعني علّم المرضى والمجتمع عن التأثيرات الصحية لتغير المناخ، زي ضربة الشمس وتلوث الهواء، وقدّم إرشادات عشان يفضلوا آمنين وبصحة كويسة.",
+  "تنصح مريض القلب إنه ماينزلش في الشمس وقت الذروة، وتقول لمريض الربو يقعد في مكان نضيف وقت الغبار."],
+ {h:"✓ At work"},
+ ["Use natural light during the day.",
+  "استخدم الإضاءة الطبيعية بالنهار.",
+  "افتح الستاير بدل ما تولّع النور طول اليوم."],
+ ["Keep the thermostat at energy-saving settings.",
+  "خلّي منظم الحرارة (الترموستات) على إعدادات توفير الطاقة.",
+  "ماتخليش التكييف على أقل درجة؛ ظبطه على درجة موفرة."],
+ ["If you work in an office, start a recycling program. Print and photocopy on both sides of paper, and only print when necessary.",
+  "لو بتشتغل في مكتب، ابدأ برنامج لإعادة التدوير. اطبع وصوّر على وش الورقة وضهرها، وماتطبعش إلا لما تحتاج.",
+  "بدل ما تطبع 10 ورقات على وش واحد، اطبعهم على 5 ورقات من الوشين."],
+ ["Turn off office equipment (e.g., computers, printers) after hours.",
+  "اقفل أجهزة المكتب (زي الكمبيوتر والطابعة) بعد انتهاء ساعات العمل.",
+  "قبل ما تمشي، اقفل الجهاز والطابعة بدل ما يفضلوا شغالين طول الليل."],
+ {h:"✓ At home"},
+ ["Support Sustainable Policies and Promote Green Initiatives: Support the use of green cleaning products, support sustainable procurement in hospitals (e.g., healthy and sustainable foods),",
+  "ادعم السياسات المستدامة وشجّع المبادرات الخضراء: ادعم استخدام منتجات التنظيف الصديقة للبيئة، وادعم الشراء المستدام في المستشفيات (زي الأكل الصحي والمستدام).",
+  "المستشفى تشتري مطهرات وأكل من مصادر أقل ضرر على البيئة."],
+ ["Turn the lights off when you leave a room.",
+  "اطفي النور لما تخرج من الأوضة.",
+  "خارج من الأوضة؟ اطفي النور على طول."],
+ ["If alternative energy sources such as solar or wind are available, use them.",
+  "لو متاح مصادر طاقة بديلة زي الشمس أو الرياح، استخدمها.",
+  "سخان شمسي أو ألواح شمسية بدل الكهرباء العادية."],
+ ["Limit use of heaters and airs conditioners.",
+  "قلل استخدام الدفايات والتكييفات.",
+  "افتح الشباك لو الجو يسمح بدل ما تشغل التكييف."],
+ ["Recycle paper, plastic and organic materials.",
+  "أعد تدوير الورق والبلاستيك والمواد العضوية.",
+  "افصل الورق عن البلاستيك عن بقايا الأكل بدل ما كله يترمي مع بعض."],
+ ["Use washable dishes rather than disposable plastic dinnerware.",
+  "استخدم أطباق قابلة للغسيل بدل أطباق البلاستيك اللي بتترمي بعد الاستخدام.",
+  "طبق وكوباية عادية تغسلهم أحسن من طبق بلاستيك تستخدمه مرة وترميه."],
+ ["Eliminate use of toxic chemicals at home; opt for natural substitutes.",
+  "اتخلص من استخدام المواد الكيميائية السامة في البيت، واختار بدايل طبيعية.",
+  "خل وليمون بدل منظفات كيماوية قوية."],
+ ["Plant a tree to help purify the air.",
+  "ازرع شجرة تساعد في تنقية الهوا.",
+  "شجرة قدام البيت أو في البلكونة بتمتص جزء من الكربون."],
+ ["Reduce Waste and Emissions: Lead and participate in efforts to reduce waste, minimize the use of toxic chemicals, and implement",
+  "قلل النفايات والانبعاثات: قُد وشارك في الجهود اللي بتقلل النفايات وبتقلل استخدام المواد الكيميائية السامة، وطبّق (الجملة بتقف هنا في ملف المحاضرة).",
+  "ابدأ بنفسك في المستشفى: قلل رمي المستلزمات الزيادة وقلل استخدام المواد السامة."]
+]}
+
+];
+
+/* ===== RENDER ===== */
+const app = document.getElementById('app');
+const chips = document.getElementById('chips');
+let totalPts = 0;
+
+SECTIONS.forEach((s, si) => {
+  let n = 0;
+  let body = '';
+  s.items.forEach(it => {
+    if (it.h) { body += `<div class="subhead">${it.h}</div>`; return; }
+    n++; totalPts++;
+    const sub = it[3] ? ' sub' : '';
+    body += `<div class="pt${sub}">
+      <div class="pt-en" onclick="this.parentElement.classList.toggle('done')"><div class="pt-n">${n}</div><div>${it[0]}</div></div>
+      <div class="pt-ar"><span class="tag">شرح</span>${it[1]}</div>
+      <div class="pt-ex"><span class="tag">عشان تفهمها</span>${it[2]}</div>
+    </div>`;
+  });
+  app.insertAdjacentHTML('beforeend', `
+    <section class="sec" id="${s.id}">
+      <div class="sec-head">
+        <div class="sec-icon">${s.icon}</div>
+        <div class="sec-title">${s.title}</div>
+        <div class="sec-count">${n} points</div>
+      </div>
+      <div class="sec-body">${body}</div>
+    </section>`);
+  chips.insertAdjacentHTML('beforeend', `<a class="chip" href="#${s.id}" data-id="${s.id}">${s.icon} ${s.title.split('—')[0].split('&')[0].trim()}</a>`);
+});
+document.getElementById('totalBadge').textContent = totalPts + ' points';
+document.getElementById('secBadge').textContent = SECTIONS.length + ' sections';
+
+/* progress bar + active chip */
+const secEls = [...document.querySelectorAll('.sec')];
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  document.getElementById('prog-bar').style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+  let cur = secEls[0].id;
+  secEls.forEach(el => { if (el.getBoundingClientRect().top < 160) cur = el.id; });
+  document.querySelectorAll('.chip').forEach(c => {
+    const on = c.dataset.id === cur;
+    c.classList.toggle('active', on);
+    if (on) { const p = c.parentElement; p.scrollTo({ left: c.offsetLeft - 40, behavior: 'smooth' }); }
+  });
+}, { passive: true });
+
+/* toggles */
+function toggler(btnId, cls) {
+  const b = document.getElementById(btnId);
+  b.addEventListener('click', () => { document.body.classList.toggle(cls); b.classList.toggle('off'); });
+}
+toggler('btnAr', 'hide-ar');
+toggler('btnEx', 'hide-ex');
+
+/* theme */
+const themeBtn = document.getElementById('themeBtn');
+let theme = 'light';
+try { theme = localStorage.getItem('theme') || 'light'; } catch (e) {}
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  try { localStorage.setItem('theme', t); } catch (e) {}
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+</script>
+</body>
+</html>
