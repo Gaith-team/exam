@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:#1e3a8a; --teal:#0e7490; --emerald:#10b981; --gold:#f59e0b;
+  --accent:#0e7490; --accent-glow:rgba(14,116,144,0.18); --accent-rgb:14,116,144;
+  --grad:linear-gradient(135deg,#1e3a8a 0%,#0e7490 50%,#10b981 100%);
+  --grad-bar:linear-gradient(90deg,#1e3a8a,#0e7490,#10b981,#f59e0b);
+  --bg:#f8fafc; --bg2:#eef2f7; --card:#ffffff;
+  --text:#1a2332; --text2:#4a5568; --text3:#718096;
+  --bc:rgba(0,0,0,0.07);
+  --r:16px; --tr:all .3s cubic-bezier(.4,0,.2,1);
+}
+[data-theme="dark"] {
+  --bg:#0d1117; --bg2:#161b22; --card:#1c2333;
+  --text:#e6edf3; --text2:#b1bac4; --text3:#7d8590;
+  --bc:rgba(255,255,255,0.08);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family:'Outfit',sans-serif; background:var(--bg); color:var(--text);
+  min-height:100vh; overflow-x:hidden; transition:background .4s,color .4s;
+}
+
+#prog-bar { position:fixed; top:0; left:0; height:3px; z-index:999; background:var(--grad-bar); width:0%; transition:width .15s; }
+
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 28px; height:64px;
+  background:rgba(248,250,252,.93); backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--bc);
+}
+[data-theme="dark"] nav { background:rgba(13,17,23,.95); }
+.nav-brand { display:flex; align-items:center; gap:9px; font-size:15px; font-weight:900; color:var(--text); }
+.nav-logo-icon {
+  width:34px; height:34px; border-radius:8px; background:var(--grad);
+  display:flex; align-items:center; justify-content:center;
+  color:#fff; font-size:12px; font-weight:900; box-shadow:0 0 0 2px rgba(245,158,11,.5);
+}
+.nav-right { display:flex; align-items:center; gap:8px; }
+.theme-btn, .tool-btn {
+  height:38px; min-width:38px; border-radius:50px; border:1px solid var(--bc);
+  background:var(--card); cursor:pointer; font-size:14px; color:var(--text);
+  display:flex; align-items:center; justify-content:center; gap:6px; padding:0 12px;
+  font-family:'Outfit',sans-serif; font-weight:700; transition:var(--tr);
+}
+.theme-btn { width:38px; padding:0; border-radius:50%; font-size:15px; }
+.theme-btn:hover { border-color:var(--accent); transform:rotate(20deg); }
+.tool-btn:hover { border-color:var(--accent); color:var(--accent); }
+.tool-btn.off { opacity:.55; }
+
+.hero-band {
+  margin-top:64px; background:var(--grad); padding:40px 24px 36px; text-align:center;
+  position:relative; overflow:hidden; border-bottom:4px solid var(--gold);
+}
+.hero-band::before {
+  content:''; position:absolute; inset:0;
+  background:
+    radial-gradient(circle 220px at 12% 20%, rgba(245,158,11,.22) 0%, transparent 70%),
+    radial-gradient(circle 260px at 90% 85%, rgba(16,185,129,.28) 0%, transparent 70%),
+    radial-gradient(ellipse 600px 200px at 50% 100%, rgba(255,255,255,.12) 0%, transparent 70%);
+}
+.hero-band > * { position:relative; }
+.hero-band-icon {
+  width:68px; height:68px; border-radius:20px; background:rgba(255,255,255,.2);
+  backdrop-filter:blur(8px); display:flex; align-items:center; justify-content:center;
+  font-size:30px; margin:0 auto 14px; border:1.5px solid rgba(255,255,255,.35);
+}
+.hero-band h1 { font-size:clamp(20px,4vw,30px); font-weight:900; color:#fff; margin-bottom:6px; }
+.hero-band p { font-size:13px; color:rgba(255,255,255,.85); }
+.hero-band-meta { display:flex; justify-content:center; gap:14px; margin-top:20px; flex-wrap:wrap; }
+.meta-pill {
+  background:rgba(255,255,255,.18); backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.3); border-radius:50px; padding:6px 16px;
+  font-size:12px; font-weight:700; color:#fff; display:flex; align-items:center; gap:6px;
+}
+.meta-pill i { color:var(--gold); }
+
+/* CHIPS */
+.chips-wrap {
+  position:sticky; top:64px; z-index:90; background:var(--bg);
+  border-bottom:1px solid var(--bc); padding:10px 0;
+}
+.chips { display:flex; gap:8px; overflow-x:auto; padding:0 20px; max-width:860px; margin:0 auto; scrollbar-width:none; }
+.chips::-webkit-scrollbar { display:none; }
+.chip {
+  flex-shrink:0; padding:7px 14px; border-radius:50px; font-size:12px; font-weight:700;
+  background:var(--card); border:1px solid var(--bc); color:var(--text2);
+  text-decoration:none; transition:var(--tr); white-space:nowrap;
+}
+.chip:hover, .chip.active { background:var(--grad); color:#fff; border-color:transparent; }
+
+.shell { max-width:860px; margin:0 auto; padding:24px 20px 80px; }
+
+/* SECTION */
+.sec { margin-bottom:34px; scroll-margin-top:130px; }
+.sec-head {
+  display:flex; align-items:center; gap:12px; background:var(--grad); color:#fff;
+  padding:14px 18px; border-radius:16px 16px 0 0; border-bottom:3px solid var(--gold);
+}
+.sec-icon {
+  width:38px; height:38px; border-radius:10px; background:rgba(255,255,255,.2);
+  display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0;
+}
+.sec-title { font-size:17px; font-weight:900; line-height:1.3; }
+.sec-count { margin-left:auto; font-size:11px; font-weight:700; background:rgba(255,255,255,.2); padding:3px 10px; border-radius:50px; white-space:nowrap; }
+.sec-body {
+  background:var(--card); border:1px solid var(--bc); border-top:none;
+  border-radius:0 0 16px 16px; padding:14px; display:flex; flex-direction:column; gap:12px;
+  box-shadow:0 4px 20px rgba(0,0,0,.05);
+}
+
+.subhead {
+  font-size:13px; font-weight:900; color:var(--navy); padding:8px 12px;
+  background:rgba(var(--accent-rgb),.08); border-left:4px solid var(--gold);
+  border-radius:8px; direction:ltr; text-align:left; margin-top:6px;
+}
+[data-theme="dark"] .subhead { color:#7dd3fc; }
+
+/* FIGURE */
+.fig {
+  margin:6px auto 2px; text-align:center; max-width:420px; width:100%;
+  border:1px solid var(--bc); border-radius:14px; overflow:hidden; background:var(--card);
+  box-shadow:0 4px 14px var(--accent-glow);
+}
+.fig img { display:block; width:100%; height:auto; }
+.fig figcaption { font-size:12px; font-weight:700; color:var(--text3); padding:8px 12px; border-top:1px dashed var(--bc); direction:ltr; }
+
+/* POINT */
+.pt {
+  border:1px solid var(--bc); border-radius:14px; overflow:hidden; background:var(--bg);
+  transition:var(--tr);
+}
+.pt:hover { border-color:rgba(var(--accent-rgb),.4); box-shadow:0 4px 14px var(--accent-glow); }
+.pt.sub { margin-left:22px; border-left:3px solid var(--teal); }
+.pt.done { opacity:.55; }
+
+.pt-en {
+  display:flex; gap:10px; align-items:flex-start; padding:13px 14px;
+  font-size:15px; font-weight:700; line-height:1.6; direction:ltr; text-align:left;
+  background:var(--card); cursor:pointer;
+}
+.pt-n {
+  min-width:26px; height:26px; border-radius:8px; background:var(--grad); color:#fff;
+  font-size:11px; font-weight:900; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px;
+}
+.pt-ar {
+  padding:12px 16px; font-size:14.5px; line-height:1.9; color:var(--text);
+  direction:rtl; text-align:right; border-top:1px dashed var(--bc);
+  font-family:'Segoe UI',Tahoma,'Outfit',sans-serif;
+}
+.pt-ar .tag, .pt-ex .tag {
+  display:inline-block; font-size:11px; font-weight:900; padding:2px 9px; border-radius:6px; margin-left:8px; vertical-align:middle;
+}
+.pt-ar .tag { background:rgba(14,116,144,.12); color:var(--teal); }
+[data-theme="dark"] .pt-ar .tag { color:#5eead4; }
+.pt-ex {
+  padding:12px 16px; font-size:14px; line-height:1.9; color:var(--text2);
+  direction:rtl; text-align:right; border-top:1px dashed var(--bc);
+  background:rgba(245,158,11,.07); border-right:4px solid var(--gold);
+  font-family:'Segoe UI',Tahoma,'Outfit',sans-serif;
+}
+.pt-ex .tag { background:rgba(245,158,11,.2); color:#b45309; }
+[data-theme="dark"] .pt-ex .tag { color:#fbbf24; }
+body.hide-ex .pt-ex { display:none; }
+body.hide-ar .pt-ar { display:none; }
+
+footer {
+  background:var(--bg2); border-top:3px solid; border-image:var(--grad-bar) 1;
+  padding:22px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;
+}
+.footer-brand { font-size:14px; font-weight:700; }
+.footer-brand span { color:var(--accent); }
+.footer-tg { display:flex; align-items:center; gap:5px; text-decoration:none; color:#229ED9; font-size:12px; font-weight:600; }
+
+@media (max-width:560px) {
+  nav { padding:0 12px; }
+  .nav-brand span { display:none; }
+  .shell { padding:16px 12px 60px; }
+  .pt.sub { margin-left:12px; }
+  .tool-btn span { display:none; }
+  .sec-count { display:none; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog-bar"></div>
+
+<nav>
+  <div class="nav-brand">
+    <div class="nav-logo-icon">GT</div>
+    <span>GHAITH TEAM</span>
+  </div>
+  <div class="nav-right">
+    <button class="tool-btn" id="btnAr" title="Arabic"><i class="fa-solid fa-language"></i><span>الشرح</span></button>
+    <button class="tool-btn" id="btnEx" title="Examples"><i class="fa-solid fa-lightbulb"></i><span>عشان تفهمها</span></button>
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<div class="hero-band">
+  <div class="hero-band-icon">👩‍⚕️</div>
+  <h1>Role of The Director</h1>
+  <p>Nursing Management</p>
+  <div class="hero-band-meta">
+    <div class="meta-pill"><i class="fa-solid fa-language"></i> ببساطة مع غيث</div>
+  </div>
+</div>
+
+<div class="chips-wrap"><div class="chips" id="chips"></div></div>
+
+<div class="shell" id="app"></div>
+
+<footer>
+  <div class="footer-brand">GHAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg"><i class="fa-brands fa-telegram"></i> @nursing2bu</a>
+</footer>
+
+<script>
+/* Item format: [English, Arabic explanation, Example, level]  |  {h:"sub heading"}  |  {img, cap} */
+const SECTIONS = [
+{ id:"definition", icon:"📖", title:"Definition", items:[
+["Nursing director (Matron) is who assume responsibility in an administrative capacity combing years of clinical nursing experience, education, and managerial skills to develop organizational structure and standards of care.", "مديرة التمريض (واللي بتتسمى كمان Matron) هي اللي بتتحمل المسئولية من الناحية الإدارية. وبتجمع بين سنين خبرتها في التمريض الإكلينيكي (الشغل جنب المريض) وتعليمها ومهاراتها الإدارية، عشان تبني هيكل تنظيمي للتمريض وتحط معايير للرعاية.", "زي كابتن فريق كان لاعب شاطر سنين وفاهم اللعبة، ودلوقتي بينظم الفريق ويحط خطة اللعب. مديرة التمريض كانت ممرضة شاطرة سنين، ودلوقتي بتنظم شغل التمريض في المستشفى كلها."],
+["A Director of Nursing, is an advanced nursing role where have be responsible for leading a nursing department or an entire healthcare system.", "مديرة التمريض دي وظيفة تمريض متقدمة، مسئولة عن قيادة قسم التمريض كله أو حتى نظام الرعاية الصحية كله.", "زي ما رئيسة الوردية مسئولة عن وردية واحدة، مديرة التمريض مسئولة عن كل التمريض في المستشفى، يعني مستوى أعلى بكتير."]
+]},
+
+{ id:"criteria", icon:"🎓", title:"Criteria for the selection of the nursing director", items:[
+["Based on the following: Educational, Professional and Personal qualifications.", "الاختيار بيتم على 3 حاجات: مؤهلات دراسية، ومؤهلات مهنية، ومؤهلات شخصية.", "زي اختيار أي قائد: بتبص على شهادته، وعلى خبرته، وعلى شخصيته."],
+["Educational qualifications: Hold a Bachelor of Science Degree required; Master's Degree preferred; with demonstrated ability in nursing practice and administration", "لازم تكون حاصلة على بكالوريوس علوم تمريض (ده شرط أساسي). والماجستير أفضل (مش شرط). ولازم تكون قدرتها واضحة ومثبتة في الممارسة التمريضية وفي الإدارة.", "واحدة معاها بكالوريوس وشغّالة كويس مع المرضى وبتدير فريق، تتقبل. ولو معاها ماجستير كمان تبقى أفضل."],
+["Professional qualifications: Four years recent clinical experience required, including 1 year supervisory experience, member in a professional nursing organization ( nursing syndicate , nursing association , ….. ) .", "لازم 4 سنين خبرة إكلينيكية حديثة (يعني قريبة مش قديمة)، منهم سنة على الأقل في الإشراف. ولازم تكون عضوة في منظمة تمريض مهنية (زي نقابة التمريض أو جمعية التمريض).", "ممرضة اشتغلت 4 سنين في المستشفى آخرهم، ومنهم سنة كانت مشرفة على وردية، ومعاها كارنيه النقابة. دي تنفع."],
+{"h": "Personal qualifications :"},
+["Accepts responsibility for continuous self – improvement and professional progress through maintaining up – to – date nursing knowledge and skill development .", "بتتحمل مسئولية إنها تطور نفسها وتتقدم مهنيًا باستمرار، عن طريق إنها تفضل مواكبة لأحدث معلومات التمريض وتنمّي مهاراتها.", "زي ممرضة بتحضر كورسات وتقرا أحدث الأبحاث من نفسها من غير ما حد يجبرها."],
+["Is knowledgeable of social , economic , and legal issues affecting the health care practices.", "عندها معرفة بالقضايا الاجتماعية والاقتصادية والقانونية اللي بتأثر على الممارسة الصحية.", "تعرف مثلاً قانون بيأثر على شغل التمريض، وتعرف إن غلاء الأسعار ممكن يأثر على ميزانية المستلزمات."]
+]},
+
+{ id:"assessment", icon:"🔍", title:"I. Assessment — Principle Responsibilities and Duties", items:[
+["Collects and analyzes data to determine staffing pattern and overall nursing service staffing plans.", "بتجمع بيانات وتحللها عشان تحدد نمط توزيع التمريض والخطة العامة لعدد وتوزيع الممرضين في خدمة التمريض.", "لو قسم فيه 30 مريض حالتهم صعبة والممرضين 3 بس، تحلل الأرقام وتقرر تزود العدد."],
+["Reviews work schedules, assignments, patient classification and supervisor's reports.", "بتراجع جداول الشغل، وتوزيع المهام، وتصنيف المرضى، وتقارير المشرفات.", "زي ما تمسك جدول الشهر وتشوف مين شغال امتى، وتقرا تقرير كل مشرفة."],
+["Makes nursing rounds to assess the quality of patient care and to identify problems and needs.", "بتلف على الأقسام (جولات تمريضية) عشان تقيّم جودة رعاية المرضى وتكتشف المشاكل والاحتياجات.", "تنزل القسم بنفسها وتشوف ملاءة المريض نضيفة ولا لأ، والمحاليل في معادها ولا لأ."],
+["Investigates complaints concerning nursing service and takes appropriate action.", "بتحقق في الشكاوى اللي بتخص خدمة التمريض وتاخد الإجراء المناسب.", "مريض اشتكى إن الممرضة اتأخرت عليه، فتسأل وتعرف السبب وتتصرف."],
+["With the infection control nurse, assesses nursing care, the environment and equipment regularly.", "بتشتغل مع ممرضة مكافحة العدوى، وبيقيّموا الرعاية التمريضية والبيئة والأجهزة بشكل منتظم.", "هي وممرضة العدوى يعدوا على الأقسام يتأكدوا من النظافة وتعقيم الأجهزة."]
+]},
+
+{ id:"planning", icon:"🗂️", title:"II. Planning — Principle Responsibilities and Duties", items:[
+["Plans and develops self – objectives, identifies areas of delegation, sets priorities and target dates for completion and identifies resources needed.", "بتخطط وتحط أهداف لنفسها، وتحدد الحاجات اللي ممكن تفوّضها لغيرها، وتحط الأولويات ومواعيد الانتهاء، وتحدد الموارد المحتاجاها.", "زي واحد بيعمل جدول: إيه الأهم، آخر ميعاد لكل حاجة، إيه اللي هيسيبه لزميله، ومحتاج إيه."],
+["Serves as manager, communicator, participator in institutional policy development and planning and as evaluator of nursing care .", "بتشتغل كمديرة، وكحلقة اتصال، وبتشارك في وضع سياسات المؤسسة وتخطيطها، وكمقيّمة للرعاية التمريضية.", "تحضر اجتماع إدارة المستشفى وتقول رأي التمريض في قرار جديد، وبعدين تقيّم أثره على الرعاية."],
+["Organizes and directs department functions and activities to meet with long – and short – term objectives and with hospital philosophy and policies.", "بتنظم وتوجّه وظائف وأنشطة القسم عشان تحقق الأهداف طويلة وقصيرة المدى، وتمشي مع فلسفة المستشفى وسياساتها.", "هدف قصير: تقليل التأخير الشهر ده. هدف طويل: رفع جودة الرعاية السنة الجاية. والاتنين لازم يمشوا مع سياسة المستشفى."],
+["Establish (with assistance of management personnel) the department philosophy, goals and objectives standards and policies and procedures to achieve high quality nursing care.", "بتحط (بمساعدة الإدارة) فلسفة القسم وأهدافه ومعاييره وسياساته وإجراءاته عشان توصل لرعاية تمريضية عالية الجودة.", "زي ما تكتب دليل للقسم فيه خطوات غسل الإيدين وإعطاء الدوا، وإيه المستوى المطلوب."],
+["Coordinates nursing roles and its relationship to other department in the hospital , as well as medical staff.", "بتنسق أدوار التمريض وعلاقته بباقي الأقسام في المستشفى وبالطاقم الطبي.", "مريض عايز يخرج: التمريض لازم يتفق مع المعمل والصيدلية والدكتور عشان كله يخلص في وقته."],
+["Organizes department structure, interprets this relationship to nursing personnel; plans , directs and supervises the nursing service.", "بتنظم هيكل القسم، وتشرح للتمريض العلاقات دي (مين بيرد على مين)، وتخطط وتوجّه وتشرف على خدمة التمريض.", "تفهّم الممرضة الجديدة إنها بتتبع رئيسة التمريض، ورئيسة التمريض تتبع المشرفة، والمشرفة تتبع مديرة التمريض."],
+["Develops (with assistance of management personnel) job/position description .", "بتعمل (بمساعدة الإدارة) الوصف الوظيفي لكل وظيفة.", "ورقة مكتوب فيها مهام ممرضة العناية المركزة بالظبط ومسئولياتها."],
+["Develops policies and procedures regarding qualifications and employment of nursing staff members.", "بتعمل سياسات وإجراءات بخصوص مؤهلات وتعيين أعضاء هيئة التمريض.", "تحدد إن أي ممرضة تتعين لازم يكون معاها بكالوريوس، وتحدد خطوات التعيين."],
+["Develops a system of evaluation of work performance.", "بتعمل نظام لتقييم الأداء في الشغل.", "استمارة تقييم سنوية بنقيّم بيها كل ممرضة بنفس المعايير."],
+["Establishes and maintains an effective patient classification system .", "بتعمل وتحافظ على نظام فعّال لتصنيف المرضى.", "نقسم المرضى حسب شدة حالتهم: مريض محتاج رعاية مكثفة غير مريض حالته مستقرة، ونوزع الممرضين على الأساس ده."],
+["Plans ways to promote the growth and development of personnel through in – service programs, workshops, seminars, and other continuing education opportunities.", "بتخطط لطرق تنمّي بيها الموظفين وتطورهم، عن طريق برامج تدريب أثناء الخدمة وورش عمل وندوات وفرص التعليم المستمر.", "ورشة عن الإنعاش القلبي الرئوي لكل الممرضين، أو ندوة عن مكافحة العدوى."],
+["Assists in establishing and maintaining a safety and disaster program in cooperation with administration and safety committee.", "بتساعد في عمل برنامج للسلامة والكوارث والحفاظ عليه، بالتعاون مع الإدارة ولجنة السلامة.", "تمرين إخلاء حريق بيتعمل كل فترة بالتعاون مع لجنة السلامة."],
+["Outlines and interprets to personnel nursing service's role in disaster planning.", "بتوضح وتشرح للموظفين دور خدمة التمريض في التخطيط للكوارث.", "لو حصل حادثة وجه مصابين كتير مرة واحدة، كل ممرضة تبقى عارفة مكانها وشغلها."]
+]},
+
+{ id:"implementation", icon:"⚙️", title:"III. Implementation — Principle Responsibilities and Duties", items:[
+["Directs the formulation and implementation of policies, procedures and standards of practice .", "بتوجّه صياغة وتنفيذ السياسات والإجراءات ومعايير الممارسة.", "سياسة جديدة لمكافحة العدوى: هي اللي تشرف إنها تتكتب وتتطبق في الأقسام."],
+["Conducts monthly management meetings .", "بتعمل اجتماعات إدارية كل شهر.", "في أول كل شهر تجمع المشرفات ورئيسات التمريض وتراجع معاهم الشغل."],
+["Meets regularly with the administrator about objectives, staffing needs, budget, hospital policies and management problems .", "بتقابل مدير المستشفى بانتظام عشان تتكلم في الأهداف واحتياجات التوظيف والميزانية وسياسات المستشفى والمشاكل الإدارية.", "تروح لمدير المستشفى تقوله القسم محتاج 5 ممرضين زيادة وتناقش معاه التكلفة."],
+["Maintains compliance with nursing care standards, hospital policies and procedures.", "بتحافظ على الالتزام بمعايير الرعاية التمريضية وسياسات المستشفى وإجراءاتها.", "تتأكد إن كل الممرضين بيلبسوا القفازات ويتبعوا خطوات إعطاء الدوا."],
+["Interprets policies, procedures, objectives, standards, philosophy and other matters to personnel .", "بتشرح السياسات والإجراءات والأهداف والمعايير والفلسفة وباقي الأمور للموظفين.", "سياسة جديدة نزلت، فتشرح للممرضين معناها وليه اتعملت."],
+["Interviews applicants for nursing positions , approves applicants for hiring and terminate personnel when necessary .", "بتقابل المتقدمين لوظائف التمريض، وتوافق على تعيينهم، وتنهي خدمة الموظفين لو لزم الأمر.", "تعمل مقابلة لممرضة جديدة وتوافق على تعيينها، ولو حد غلط غلطة كبيرة ومتكررة تنهي خدمته."],
+["Promotes harmonious relationship and favorable attitudes among the health care team.", "بتشجع العلاقات المتناغمة والاتجاهات الإيجابية بين أعضاء الفريق الصحي.", "لو في خلاف بين الممرضين والأطباء، تقعد معاهم وتصلّح الجو."],
+["Serves as consultant and role model for nursing personnel .", "بتبقى مستشارة وقدوة لأفراد التمريض.", "ممرضة جديدة تسألها في حاجة وتتعلم منها طريقة تعاملها مع المريض."],
+["Ensures that regular staff meetings are held for all levels of personnel.", "بتتأكد إن اجتماعات الموظفين بتتعمل بانتظام لكل المستويات.", "اجتماع للممرضين، واجتماع للمشرفات، واجتماع لرئيسات التمريض، كل واحد في معاده."],
+["Establishes a system of record keeping.", "بتعمل نظام لحفظ السجلات.", "كل ملفات المرضى والتقارير تتحفظ في مكان معروف وبترتيب واضح."],
+["Maintains direct patient contact and involvement in patient care.", "بتفضل على اتصال مباشر بالمرضى ومشاركة في رعايتهم.", "تلف على الأوض وتتكلم مع المرضى، ولو في حالة محتاجة مساعدة تشارك بنفسها."],
+["Investigates problems and takes corrective action and follow – up when necessary.", "بتحقق في المشاكل وتاخد إجراء تصحيحي وتتابع لو لزم.", "حصلت غلطة في جرعة دوا: تعرف السبب، تصلّح الوضع، وتتابع إنها متتكررش."],
+["Serves as consultant on hospital admitting and discharge procedures that affect patient care .", "بتبقى مستشارة في إجراءات دخول وخروج المرضى من المستشفى اللي بتأثر على رعايتهم.", "لو المريض بيستنى ساعات في الاستقبال، ترشح طريقة تسرّع الإجراءات."],
+["Prepares and submits budget information to administration.", "بتجهز معلومات الميزانية وتقدمها للإدارة.", "تحسب تكلفة مرتبات التمريض والمستلزمات للسنة وتقدمها لإدارة المستشفى."]
+]},
+
+{ id:"evaluation", icon:"📊", title:"IV. Evaluation — Principle Responsibilities and Duties", items:[
+["Evaluates and submits a report monthly concerning the functions and progress of nursing services, achievement of goals to the administrator", "بتقيّم وتقدم تقرير شهري لمدير المستشفى عن وظائف وتقدم خدمات التمريض وتحقيق الأهداف.", "آخر كل شهر تكتب تقرير: إيه اللي اتعمل وإيه الأهداف اللي اتحققت، وتسلمه للمدير."],
+["Evaluates and analyzes incident reports and takes the appropriate follow – up action.", "بتقيّم وتحلل تقارير الحوادث وتاخد إجراء المتابعة المناسب.", "تقرير عن وقوع مريض من السرير: تحلل ليه حصل وتتخذ إجراء عشان ميتكررش."],
+["Continually evaluates the care delivered by regular review of management reports, direct observation and patient rounds.", "بتقيّم الرعاية المقدمة بشكل مستمر عن طريق مراجعة التقارير الإدارية بانتظام، والملاحظة المباشرة، وجولات المرضى.", "تقرا التقارير، وتراقب الشغل بنفسها، وتلف على المرضى، وكل ده عشان تعرف مستوى الرعاية."],
+["Evaluates and revises goals and objectives , as well as self – objectives .", "بتقيّم وتراجع الأهداف والغايات، وكمان أهدافها هي شخصيًا.", "هدف كان تقليل الأخطاء الدوائية ومتحققش؟ تعدّله، وكمان تراجع أهدافها الشخصية."],
+["Evaluates the performance of supervisors and head nurses according to their job description.", "بتقيّم أداء المشرفات ورئيسات التمريض حسب الوصف الوظيفي بتاعهم.", "تقيّم رئيسة تمريض بالنظر لمهامها المكتوبة في وصفها الوظيفي: عملتها ولا لأ؟"],
+["Evaluates forms to be used in nursing department or that affect nursing service.", "بتقيّم النماذج (الاستمارات) اللي بتستخدم في قسم التمريض أو اللي بتأثر على خدمة التمريض.", "تشوف استمارة تسليم الوردية: واضحة وسهلة ولا محتاجة تتعدل؟"],
+["Evaluates facilities and equipment used in the department.", "بتقيّم المرافق والأجهزة المستخدمة في القسم.", "تتأكد إن أجهزة الضغط وأجهزة الشفط شغالة وكفاية."],
+["Evaluates and revises policies and procedures.", "بتقيّم وتراجع السياسات والإجراءات.", "إجراء قديم بقى بيعطّل الشغل، فتعدله."],
+["Evaluates the effectiveness of problem – solving techniques.", "بتقيّم مدى فعالية أساليب حل المشاكل.", "تشوف الطريقة اللي اتحلت بيها مشكلة نقص الممرضين: نفعت ولا المشكلة رجعت؟"],
+["Evaluates personnel's performance during emergencies and hospital disasters.", "بتقيّم أداء الموظفين وقت الطوارئ وكوارث المستشفى.", "بعد تمرين الحريق أو حادثة حقيقية، تشوف كل واحد عمل إيه وإزاي اتصرف."],
+["Constantly evaluates attitudes, morale and interpersonal relationships and promotes ways to improve in these areas .", "بتقيّم باستمرار الاتجاهات والروح المعنوية والعلاقات بين الأفراد، وتشجع طرق التحسين في المجالات دي.", "تلاحظ إن الممرضين مضايقين من ضغط الشغل، فتعمل حاجة تحسّن الجو والعلاقات."]
+]}
+];
+
+/* ===== RENDER ===== */
+const app = document.getElementById('app');
+const chips = document.getElementById('chips');
+let totalPts = 0;
+
+SECTIONS.forEach((s, si) => {
+  let n = 0;
+  let body = '';
+  s.items.forEach(it => {
+    if (it.h) { body += `<div class="subhead">${it.h}</div>`; return; }
+    if (it.img) { body += `<figure class="fig"><img src="${it.img}" alt="${it.cap || ''}"><figcaption>${it.cap || ''}</figcaption></figure>`; return; }
+    n++; totalPts++;
+    const sub = it[3] ? ' sub' : '';
+    body += `<div class="pt${sub}">
+      <div class="pt-en" onclick="this.parentElement.classList.toggle('done')"><div class="pt-n">${n}</div><div>${it[0]}</div></div>
+      <div class="pt-ar"><span class="tag">شرح</span>${it[1]}</div>
+      <div class="pt-ex"><span class="tag">عشان تفهمها</span>${it[2]}</div>
+    </div>`;
+  });
+  app.insertAdjacentHTML('beforeend', `
+    <section class="sec" id="${s.id}">
+      <div class="sec-head">
+        <div class="sec-icon">${s.icon}</div>
+        <div class="sec-title">${s.title}</div>
+        <div class="sec-count">${n} points</div>
+      </div>
+      <div class="sec-body">${body}</div>
+    </section>`);
+  chips.insertAdjacentHTML('beforeend', `<a class="chip" href="#${s.id}" data-id="${s.id}">${s.icon} ${s.title.split('—')[0].split('&')[0].trim()}</a>`);
+});
+document.getElementById('totalBadge').textContent = totalPts + ' points';
+document.getElementById('secBadge').textContent = SECTIONS.length + ' sections';
+
+/* progress bar + active chip */
+const secEls = [...document.querySelectorAll('.sec')];
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  document.getElementById('prog-bar').style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+  let cur = secEls[0].id;
+  secEls.forEach(el => { if (el.getBoundingClientRect().top < 160) cur = el.id; });
+  document.querySelectorAll('.chip').forEach(c => {
+    const on = c.dataset.id === cur;
+    c.classList.toggle('active', on);
+    if (on) { const p = c.parentElement; p.scrollTo({ left: c.offsetLeft - 40, behavior: 'smooth' }); }
+  });
+}, { passive: true });
+
+/* toggles */
+function toggler(btnId, cls) {
+  const b = document.getElementById(btnId);
+  b.addEventListener('click', () => { document.body.classList.toggle(cls); b.classList.toggle('off'); });
+}
+toggler('btnAr', 'hide-ar');
+toggler('btnEx', 'hide-ex');
+
+/* theme */
+const themeBtn = document.getElementById('themeBtn');
+let theme = 'light';
+try { theme = localStorage.getItem('theme') || 'light'; } catch (e) {}
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  try { localStorage.setItem('theme', t); } catch (e) {}
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+</script>
+</body>
+</html>
