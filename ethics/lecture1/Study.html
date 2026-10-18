@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM | Nursing Ethics</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:wght@400;600;700;900&family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --wine:#5b1a35; --plum:#3d2557; --slate:#2f4858; --brass:#b8893b; --brass-lt:#e3c58b;
+  --accent:#7a2547; --accent-glow:rgba(122,37,71,0.16); --accent-rgb:122,37,71;
+  --grad:linear-gradient(135deg,#5b1a35 0%,#4a2048 55%,#3d2557 100%);
+  --grad-bar:linear-gradient(90deg,#5b1a35,#3d2557,#2f4858,#b8893b);
+  --bg:#faf7f8; --bg2:#f1eaee; --card:#ffffff;
+  --text:#241a20; --text2:#54464e; --text3:#84747c;
+  --bc:rgba(60,20,40,0.12);
+  --r:8px; --tr:all .25s ease;
+}
+[data-theme="dark"] {
+  --accent:#d98aae; --accent-glow:rgba(217,138,174,0.16); --accent-rgb:217,138,174;
+  --bg:#150e14; --bg2:#1e141c; --card:#261a24;
+  --text:#f0e6ec; --text2:#c9b8c2; --text3:#8f7b87;
+  --bc:rgba(255,235,245,0.11);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family:'Source Serif 4','Tajawal',Georgia,serif; background:var(--bg); color:var(--text);
+  min-height:100vh; overflow-x:hidden; transition:background .4s,color .4s;
+}
+:focus-visible { outline:2px solid var(--brass); outline-offset:2px; }
+
+#prog-bar { position:fixed; top:0; left:0; height:3px; z-index:999; background:var(--grad-bar); width:0%; transition:width .15s; }
+
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 28px; height:64px;
+  background:rgba(250,247,248,.95); backdrop-filter:blur(14px);
+  border-bottom:1px solid var(--bc);
+}
+[data-theme="dark"] nav { background:rgba(21,14,20,.96); }
+.nav-brand { display:flex; align-items:center; gap:10px; font-size:15px; font-weight:900; color:var(--text); letter-spacing:.3px; }
+.nav-logo-icon {
+  width:34px; height:34px; border-radius:6px; background:var(--grad);
+  display:flex; align-items:center; justify-content:center;
+  color:var(--brass-lt); font-size:12px; font-weight:900; box-shadow:0 0 0 2px var(--brass);
+}
+.nav-right { display:flex; align-items:center; gap:8px; }
+.theme-btn, .tool-btn {
+  height:38px; min-width:38px; border-radius:8px; border:1px solid var(--bc);
+  background:var(--card); cursor:pointer; font-size:14px; color:var(--text);
+  display:flex; align-items:center; justify-content:center; gap:6px; padding:0 12px;
+  font-family:'Tajawal','Source Serif 4',sans-serif; font-weight:700; transition:var(--tr);
+}
+.theme-btn { width:38px; padding:0; font-size:15px; }
+.theme-btn:hover { border-color:var(--brass); }
+.tool-btn:hover { border-color:var(--brass); color:var(--accent); }
+.tool-btn.off { opacity:.5; }
+
+/* HERO */
+.hero-band {
+  margin-top:64px; background:var(--grad); padding:44px 24px 40px; text-align:center;
+  position:relative; overflow:hidden; border-bottom:4px solid var(--brass);
+}
+.hero-band::before {
+  content:''; position:absolute; inset:10px; pointer-events:none;
+  border:1px solid rgba(227,197,139,.4); border-radius:4px;
+}
+.hero-band > * { position:relative; }
+.hero-band-icon {
+  width:70px; height:70px; border-radius:8px; background:rgba(255,255,255,.07);
+  display:flex; align-items:center; justify-content:center;
+  font-size:30px; color:var(--brass-lt); margin:0 auto 16px; border:1.5px solid var(--brass);
+}
+.hero-band h1 { font-size:clamp(24px,4.6vw,36px); font-weight:900; color:#fff; margin-bottom:8px; letter-spacing:.2px; }
+.hero-band p { font-size:14px; color:rgba(255,255,255,.82); font-style:italic; }
+.hero-band-meta { display:flex; justify-content:center; gap:12px; margin-top:22px; flex-wrap:wrap; }
+.meta-pill {
+  background:rgba(255,255,255,.08);
+  border:1px solid rgba(227,197,139,.45); border-radius:6px; padding:6px 16px;
+  font-size:13px; font-weight:700; color:#fff; display:flex; align-items:center; gap:8px;
+  font-family:'Tajawal','Source Serif 4',sans-serif;
+}
+.meta-pill i { color:var(--brass-lt); }
+
+/* CHIPS */
+.chips-wrap {
+  position:sticky; top:64px; z-index:90; background:var(--bg);
+  border-bottom:1px solid var(--bc); padding:10px 0;
+}
+.chips { display:flex; gap:8px; overflow-x:auto; padding:0 20px; max-width:860px; margin:0 auto; scrollbar-width:none; }
+.chips::-webkit-scrollbar { display:none; }
+.chip {
+  flex-shrink:0; padding:7px 14px; border-radius:6px; font-size:13px; font-weight:600;
+  background:var(--card); border:1px solid var(--bc); color:var(--text2);
+  text-decoration:none; transition:var(--tr); white-space:nowrap;
+}
+.chip:hover, .chip.active { background:var(--wine); color:#fff; border-color:var(--brass); }
+
+.shell { max-width:860px; margin:0 auto; padding:26px 20px 80px; }
+
+/* SECTION */
+.sec { margin-bottom:36px; scroll-margin-top:130px; }
+.sec-head {
+  display:flex; align-items:center; gap:12px; background:var(--grad); color:#fff;
+  padding:14px 18px; border-radius:8px 8px 0 0; border-bottom:3px solid var(--brass);
+}
+.sec-icon {
+  width:38px; height:38px; border-radius:6px; background:rgba(255,255,255,.1); border:1px solid rgba(227,197,139,.45);
+  display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0;
+}
+.sec-title { font-size:18px; font-weight:700; line-height:1.3; }
+.sec-count { margin-left:auto; font-size:12px; font-weight:600; background:rgba(255,255,255,.12); padding:3px 10px; border-radius:6px; white-space:nowrap; }
+.sec-body {
+  background:var(--card); border:1px solid var(--bc); border-top:none;
+  border-radius:0 0 8px 8px; padding:14px; display:flex; flex-direction:column; gap:12px;
+}
+
+.subhead {
+  font-size:14px; font-weight:700; color:var(--wine); padding:8px 12px;
+  background:rgba(var(--accent-rgb),.08); border-left:4px solid var(--brass);
+  border-radius:4px; direction:ltr; text-align:left; margin-top:6px;
+}
+[data-theme="dark"] .subhead { color:#f0b9d0; }
+
+/* POINT */
+.pt {
+  border:1px solid var(--bc); border-left:4px solid var(--brass); border-radius:8px; overflow:hidden; background:var(--bg);
+  transition:var(--tr);
+}
+.pt:hover { border-color:rgba(var(--accent-rgb),.45); border-left-color:var(--brass); box-shadow:0 3px 12px var(--accent-glow); }
+.pt.sub { margin-left:22px; border-left-color:var(--slate); }
+.pt.done { opacity:.5; }
+
+.pt-en {
+  display:flex; gap:12px; align-items:flex-start; padding:14px 14px;
+  font-size:16px; font-weight:600; line-height:1.6; direction:ltr; text-align:left;
+  background:var(--card); cursor:pointer;
+}
+.pt-n {
+  min-width:28px; height:28px; border-radius:6px; background:transparent; color:var(--accent);
+  border:1.5px solid var(--brass);
+  font-size:12px; font-weight:900; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:1px;
+}
+.pt-ar {
+  padding:12px 16px; font-size:15px; line-height:1.95; color:var(--text);
+  direction:rtl; text-align:right; border-top:1px dashed var(--bc);
+  font-family:'Tajawal','Segoe UI',Tahoma,sans-serif;
+}
+.pt-ar .tag, .pt-ex .tag {
+  display:inline-block; font-size:12px; font-weight:800; padding:2px 9px; border-radius:4px; margin-left:8px; vertical-align:middle;
+}
+.pt-ar .tag { background:rgba(var(--accent-rgb),.12); color:var(--accent); }
+.pt-ex {
+  padding:12px 16px; font-size:14.5px; line-height:1.95; color:var(--text2);
+  direction:rtl; text-align:right; border-top:1px dashed var(--bc);
+  background:rgba(47,72,88,.07); border-right:4px solid var(--slate);
+  font-family:'Tajawal','Segoe UI',Tahoma,sans-serif;
+}
+.pt-ex .tag { background:rgba(47,72,88,.16); color:var(--slate); }
+[data-theme="dark"] .pt-ex { background:rgba(120,170,200,.08); border-right-color:#7aa6c0; }
+[data-theme="dark"] .pt-ex .tag { background:rgba(120,170,200,.2); color:#9cc3da; }
+body.hide-ex .pt-ex { display:none; }
+body.hide-ar .pt-ar { display:none; }
+
+footer {
+  background:var(--bg2); border-top:3px solid; border-image:var(--grad-bar) 1;
+  padding:22px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;
+}
+.footer-brand { font-size:14px; font-weight:700; }
+.footer-brand span { color:var(--accent); }
+.footer-tg { display:flex; align-items:center; gap:5px; text-decoration:none; color:#229ED9; font-size:12px; font-weight:600; }
+
+@media (max-width:560px) {
+  nav { padding:0 12px; }
+  .nav-brand span { display:none; }
+  .shell { padding:16px 12px 60px; }
+  .pt.sub { margin-left:12px; }
+  .tool-btn span { display:none; }
+  .sec-count { display:none; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior:auto; }
+  * { transition:none !important; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog-bar"></div>
+
+<nav>
+  <div class="nav-brand">
+    <div class="nav-logo-icon">GT</div>
+    <span>GHAITH TEAM</span>
+  </div>
+  <div class="nav-right">
+    <button class="tool-btn" id="btnAr" title="Arabic"><i class="fa-solid fa-language"></i><span>الشرح</span></button>
+    <button class="tool-btn" id="btnEx" title="Examples"><i class="fa-solid fa-lightbulb"></i><span>عشان تفهمها</span></button>
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<div class="hero-band">
+  <div class="hero-band-icon"><i class="fa-solid fa-scale-balanced"></i></div>
+  <h1>introduction of nursing</h1>
+  <p>Nursing Ethics</p>
+  <div class="hero-band-meta">
+    <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">--</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-layer-group"></i> <span id="secBadge">--</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-language"></i> ببساطة مع غيث</div>
+  </div>
+</div>
+
+<div class="chips-wrap"><div class="chips" id="chips"></div></div>
+
+<div class="shell" id="app"></div>
+
+<footer>
+  <div class="footer-brand">GHAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg"><i class="fa-brands fa-telegram"></i> @nursing2bu</a>
+</footer>
+
+<script>
+/* Item format: [English, Arabic explanation, Example, level]  |  {h:"sub heading"}  (level 1 = indented sub-point) */
+const SECTIONS = [
+
+{ id:"intro", icon:"📖", title:"Introduction", items:[
+["Nursing began as a desire to keep people healthy and to provide comfort and assurance to the sick.",
+ "التمريض بدأ من رغبة الناس إنهم يحافظوا على صحة غيرهم، ويريّحوا المريض ويطمّنوه.",
+ "زي أم قاعدة جنب ابنها التعبان بتطمنه وبتهتم بيه، من غير ما تكون دارسة حاجة."],
+["Although the general goals of nursing have remained relatively the same over the centuries, ever-advancing science and the changing of society’s needs have deeply influenced the practice of nursing.",
+ "أهداف التمريض الأساسية فضلت تقريباً زي ما هي على مر القرون، بس تطور العلم واحتياجات المجتمع اللي بتتغير أثّروا جداً على طريقة ممارسة المهنة.",
+ "زي الموبايل: وظيفته لسه إنك تتصل بحد، بس شكله وإمكانياته اتغيروا مع الزمن. كمان التمريض هدفه ثابت وطريقة الشغل هي اللي اتطورت."]
+]},
+
+{ id:"stages", icon:"🏛️", title:"Stages of Nursing", items:[
+["Nursing from Ancient times to the nineteenth century",
+ "تطور التمريض من العصور القديمة لحد القرن الـ19 عدّى بـ 4 مراحل، وهنمشي عليهم واحدة واحدة.",
+ "زي مراحل عمر الإنسان: طفولة وشباب وكبر، كل مرحلة ليها شكل مختلف، والتمريض كمان عدى بمراحل."],
+["Early Civilization",
+ "المرحلة الأولى: الحضارات القديمة.",
+ "دي نقطة البداية، وفيها مصر واليونان وروما والهند.", 1],
+["Christianity",
+ "المرحلة التانية: ظهور المسيحية.",
+ "هنا التمريض بقى ليه دور رسمي وواضح أكتر.", 1],
+["Middle Ages",
+ "المرحلة التالتة: العصور الوسطى.",
+ "فترة اتبنت فيها مستشفيات أكتر وكان الرهبان والراهبات هم اللي بيرعوا المرضى.", 1],
+["Fifteenth to Nineteenth Century",
+ "المرحلة الرابعة: من القرن الـ15 للقرن الـ19.",
+ "فترة المجتمع اتغير فيها وحصل نقص كبير في الناس اللي بترعى المرضى.", 1],
+
+{h:"Early Civilization — Egyptian"},
+["Egyptian physicians are believed to have specialized in certain diseases (such as systemic diseases, fractured bones, and wounds).",
+ "الأطباء المصريين القدماء يُعتقد إن كل واحد فيهم كان متخصص في أمراض معينة، زي الأمراض الباطنية (systemic) والكسور والجروح.",
+ "زي دلوقتي: دكتور عظام ودكتور جراحة ودكتور باطنة. التخصص ده كان موجود عند القدماء المصريين."],
+["Also women, later known as midwives, to assist with childbirth.",
+ "وكمان كان فيه ستات (اتسموا بعد كده القابلات midwives) بيساعدوا في الولادة.",
+ "زي الداية اللي كانت بتيجي البيت وقت الولادة وتساعد الست."],
+["These women were the first records nurses.",
+ "الستات دول هم أول ممرضات اتسجلوا في التاريخ.",
+ "لو اتسألت مين أول ممرضات مسجلين؟ الإجابة: الستات اللي كانوا بيساعدوا في الولادة في مصر القديمة."],
+
+{h:"Early Civilization — Greece"},
+["The Greeks believed in Apollo, the Greek god of healing and prayed to him for magic cures for their illness.",
+ "اليونانيين كانوا بيؤمنوا بأبولو، إله الشفاء عندهم، وكانوا بيدعوله عشان يشفيهم من أمراضهم بالسحر.",
+ "زي واحد تعبان، وبدل ما يروح للدكتور يروح المعبد يدعي الإله إنه يشفيه."],
+["Many centuries ago, the famous Greek physician Hippocrates believed that disease had natural, not magical, causes.",
+ "من قرون كتير الطبيب اليوناني المشهور أبقراط (Hippocrates) كان شايف إن المرض ليه أسباب طبيعية مش أسباب سحرية.",
+ "يعني لما حد يتعب، السبب عدوى أو برد أو حاجة طبيعية، مش لعنة ولا سحر."],
+
+{h:"Early Civilization — Roman"},
+["300 B.C., early physicians built on the groundwork of their Egyptian and Greek.",
+ "سنة 300 قبل الميلاد، أول أطباء الرومان بنوا على الأساس اللي سابه المصريين واليونانيين.",
+ "زي طالب بيذاكر من ملخص اللي قبله ويزود عليه من عنده."],
+["The Romans are best known for advances in the health of the public.",
+ "الرومان اشتهروا بالتقدم في الصحة العامة (public health).",
+ "يعني اهتمامهم كان بصحة الناس كلها مش بمريض واحد بس."],
+
+{h:"Early Civilization — India"},
+["In ancient India, early hospitals were staffed by male nurses who were required to meet three qualifications:",
+ "في الهند القديمة، المستشفيات الأولى كان بيشتغل فيها ممرضين رجالة، وكان لازم يستوفوا 3 شروط.",
+ "زي شروط التقديم على وظيفة: لازم تعدي التلات شروط عشان تتقبل."],
+["Knowledge of the manner in which drugs should be prepared for administration.",
+ "الشرط الأول: يعرف إزاي الأدوية بتتحضر عشان تتدي للمريض.",
+ "زي الممرض اللي لازم يعرف يحضّر الدوا صح قبل ما يديه للمريض.", 1],
+["Cleverness.",
+ "الشرط التاني: الذكاء.",
+ "ممرض بيعرف يتصرف بسرعة وبعقل في المواقف.", 1],
+["Purity of mind and body.",
+ "الشرط التالت: نقاء العقل والجسم.",
+ "يعني نضافة الجسم وسلامة التفكير والأخلاق.", 1],
+
+{h:"Christianity"},
+["With the beginning of Christianity, nursing began to have a formal and more clearly defined role.",
+ "مع بداية المسيحية، التمريض بدأ يبقى ليه دور رسمي ومحدد أكتر.",
+ "زي وظيفة كانت شغل عشوائي وبعدين بقى ليها مسمى ومهام واضحة."],
+["Belief that love and caring for others were important, women made the first visits to sick people, male gave nursing care and buried the dead.",
+ "كان فيه إيمان إن الحب والاهتمام بالناس مهمين، فالستات كانوا بيزوروا المرضى أول زيارات، والرجالة كانوا بيقدموا الرعاية التمريضية ويدفنوا الموتى.",
+ "تقسيم الأدوار: الست تزور المريض وتطمن عليه، والراجل يقدم الرعاية ويدفن الميت."],
+["Nursing became a respected profession.",
+ "التمريض بقى مهنة محترمة.",
+ "الناس بدأت تقدّر اللي بيشتغل فيها."],
+
+{h:"Middle Ages"},
+["More hospitals were built.",
+ "اتبنت مستشفيات أكتر.",
+ "زي لما الدولة تبني مستشفيات جديدة كتير، الناس بتلاقي مكان تتعالج فيه."],
+["Nurses delivered care and depended on physicians for direction.",
+ "الممرضين كانوا بيقدموا الرعاية، بس بيعتمدوا على الأطباء في التوجيه.",
+ "ممرض بينفذ اللي الدكتور قاله من غير ما يقرر لوحده."],
+["Nurse midwifery, known as one of the oldest nursing roles.",
+ "التوليد التمريضي (nurse midwifery) من أقدم أدوار التمريض.",
+ "الممرضة اللي بتساعد الأم وقت الولادة، ودور قديم جداً في المهنة."],
+["Nursing care was provided by monks and nuns, which was isolated by sex.",
+ "الرعاية التمريضية كان بيقدمها الرهبان والراهبات، وكان فيه فصل بينهم حسب النوع (رجال وستات).",
+ "زي عنابر مفصولة: راهب بيخدم الرجالة وراهبة بتخدم الستات."],
+
+{h:"Fifteenth to Nineteenth Century"},
+["The extensive population growth in cities, the lack of hygiene and sanitation and the increasing poverty in urban centers resulted in serious health problems.",
+ "زيادة السكان الكبيرة في المدن، مع قلة النضافة والصرف الصحي وزيادة الفقر، عملوا مشاكل صحية خطيرة.",
+ "زي منطقة زحمة جداً ومفيهاش صرف ولا نضافة، الأمراض بتنتشر فيها بسرعة."],
+["Society changed from one with a religious orientation to one that emphasized warfare, exploration, and expansion of knowledge.",
+ "المجتمع اتغير من مجتمع متدين لمجتمع بيركز على الحروب والاستكشاف وتوسيع المعرفة.",
+ "اهتمام الناس راح من الدين للحروب والاكتشافات والعلم."],
+["Many monasteries and convents closed, leading to a great shortage of people to care for the sick.",
+ "أديرة كتير اتقفلت، فحصل نقص كبير في الناس اللي بترعى المرضى.",
+ "زي لما المكان اللي بيطلّع الممرضين يقفل، فبيحصل عجز كبير في العدد."],
+["Women who had committed crimes were recruited into nursing in lieu of serving sentences.",
+ "ستات كانوا عاملين جرايم اتشغلوا في التمريض بدل ما يقضوا العقوبة.",
+ "كأن القاضي بيقولها: بدل السجن روحي اشتغلي في رعاية المرضى."]
+]},
+
+{ id:"dark-age", icon:"🌑", title:"Prior to Florence Nightingale", items:[
+["Is the dark age for nursing because nursing is considered as:",
+ "الفترة دي كانت العصر المظلم للتمريض، لأن المهنة كانت بتتشاف على إنها:",
+ "العصر المظلم يعني أسوأ فترة في صورة المهنة عند الناس."],
+["A very low job in terms of social hierarchy.",
+ "شغلانة في أدنى درجات السلم الاجتماعي.",
+ "شغلانة الناس بتتكسف تقول إنها بتشتغلها.", 1],
+["A job for the uneducated and poor.",
+ "شغلانة للناس الغير متعلمة والفقيرة.",
+ "اللي معندوش فلوس ولا تعليم كان بيشتغل فيها.", 1],
+["A desperate occupation.",
+ "شغلانة اللي مفيش قدامه حل تاني بيروحلها.",
+ "زي واحد بيشتغل أي حاجة عشان ياكل بس.", 1],
+["Who are the nurses?",
+ "طيب مين كان بيشتغل ممرض/ممرضة في الوقت ده؟",
+ "هنشوف مين كانوا الناس دول."],
+["Women of lowest social class",
+ "ستات من أقل طبقة اجتماعية.",
+ "ستات من أفقر الطبقات ومعندهمش خيارات تانية.", 1],
+["Naughty women of low status, instead of going to prison, they were asked to serve as nurses.",
+ "ستات سمعتهم وحشة ومكانتهم واطية، وبدل ما يتسجنوا اتطلب منهم يشتغلوا ممرضات.",
+ "بدل السجن: اشتغلي في رعاية المرضى.", 1],
+["Untrained helpers of low repute.",
+ "مساعدين غير متدربين وسمعتهم وحشة.",
+ "ناس بتساعد من غير أي تدريب ولا دراسة.", 1],
+["Poor unmarried woman with no family or no chance of getting married.",
+ "ستات فقيرة مش متجوزة، ملهاش عيلة أو مفيش فرصة إنها تتجوز.",
+ "ست مالهاش حد يصرف عليها فبتشتغل في أي شغلانة.", 1]
+]},
+
+{ id:"nightingale", icon:"🕯️", title:"Florence Nightingale — The Lady with the Lamp", items:[
+{h:"Fifteenth to Nineteenth Century (period of Florence Nightingale)"},
+["Florence Nightingale was born in 1820 in a wealthy family.",
+ "فلورانس نايتنجيل اتولدت سنة 1820 في عيلة غنية.",
+ "يعني كانت عايشة مرتاحة ومكنتش محتاجة تشتغل، بس اختارت التمريض."],
+["Changed the image of nursing",
+ "غيّرت صورة التمريض عند الناس.",
+ "التمريض كان شغلانة محتقرة، وبسببها بقى مهنة محترمة."],
+["Known as the “Lady with the Lamp”",
+ "اتعرفت بلقب «سيدة المصباح» (Lady with the Lamp).",
+ "لو الامتحان سأل مين Lady with the Lamp؟ الإجابة: فلورانس نايتنجيل."],
+["Her education included the mastery of several ancient and modern language, literature, philosophy, history, science, mathematics, religion, art and music.",
+ "تعليمها كان عالي جداً، اتقنت لغات قديمة وحديثة، وأدب وفلسفة وتاريخ وعلوم ورياضيات ودين وفن وموسيقى.",
+ "يعني كانت إنسانة مثقفة جداً، ولما واحدة زيها اشتغلت تمريض، الناس بدأت تحترم المهنة."],
+["She was determined to become a nurse since she believed she was “called by God to help others and to improve the well-being of people”.",
+ "كانت مصممة تبقى ممرضة لأنها كانت مؤمنة إن ربنا بيدعوها تساعد الناس وتحسّن صحتهم ورفاهيتهم.",
+ "زي حد حاسس إن ده رسالته في الدنيا، فبيكمل فيها حتى لو الناس رافضة."],
+["She visited Kaisers Werth and received nurse’s training at 1850 for three months.",
+ "زارت كايزرسفيرث (Kaisers Werth) واتدربت تمريض سنة 1850 لمدة 3 شهور.",
+ "يعني أخدت كورس تدريبي قصير 3 شهور، ومن هنا بدأت."],
+["The occurrence of the Crimean War gave Nightingale an opportunity for achievement.",
+ "حرب القرم (Crimean War) إدّت نايتنجيل فرصة تحقق فيها إنجاز.",
+ "زي واحد معاه مهارة ولقى أزمة كبيرة يطبقها فيها."],
+["Nightingale and her nurses transformed the military hospitals by setting up diet kitchens, a laundry, recreation centers, and reading rooms",
+ "هي وممرضاتها غيّروا المستشفيات العسكرية، وعملوا مطابخ للأكل الصحي، ومغسلة، ومراكز ترفيه، وأوض قراءة.",
+ "زي مكان مهمل بقى نضيف: فيه أكل مناسب وغسيل وحاجة تسلّي المريض."],
+
+{h:"School of Nursing"},
+["In 1860, Nightingale laid the foundation of professional nursing when the first school of nursing was established.",
+ "سنة 1860 نايتنجيل حطت أساس التمريض كمهنة لما أول مدرسة تمريض اتأسست.",
+ "السنة دي زي «شهادة ميلاد» التمريض المهني."],
+
+{h:"Nightingale Training School at St. Thomas’ Hospital"},
+["After the war, Nightingale established the Nightingale Training School for Nurses at St. Thomas’ hospital in London; the school served as a model for other training school.",
+ "بعد الحرب، نايتنجيل أسست مدرسة نايتنجيل لتدريب الممرضات في مستشفى سانت توماس في لندن، والمدرسة دي بقت نموذج للمدارس التانية.",
+ "زي أول كلية ناجحة والكليات التانية بتقلدها."],
+["As the founder of modern nursing, Florence Nightingale established the first nursing philosophy based on health maintenance and restoration.",
+ "بصفتها مؤسسة التمريض الحديث، فلورانس نايتنجيل حطت أول فلسفة للتمريض، وكانت قايمة على الحفاظ على الصحة واستعادتها.",
+ "يعني الفلسفة: حافظ على صحة الناس، ولو تعبوا ساعدهم يرجعوا لصحتهم."]
+]},
+
+{ id:"eminent", icon:"👩‍⚕️", title:"Eminent Personalities in the History of Nursing", items:[
+{h:"Florence Nightingale (1820 – 1910)"},
+["Born on May 12 – called to fulfill the “mission of mercy”",
+ "اتولدت يوم 12 مايو، وكانت شايفة إنها مدعوة تحقق «رسالة الرحمة».",
+ "زي حد بيعتبر شغله رسالة مش مجرد وظيفة."],
+["“Lady with the lamp”",
+ "لقبها «سيدة المصباح».",
+ "اللقب المشهور اللي بيتقال عليها."],
+["Established hospitals",
+ "أسست مستشفيات.",
+ "من إنجازاتها إنها ساهمت في إنشاء مستشفيات."],
+["Produced and implemented public health policies",
+ "عملت ونفذت سياسات للصحة العامة.",
+ "زي القرارات اللي بتحمي صحة الناس كلها مش مريض واحد."],
+["Established training school for nurses in 1860",
+ "أسست مدرسة لتدريب الممرضات سنة 1860.",
+ "من هنا بدأت الدراسة المنظمة للتمريض."],
+
+{h:"Clara Barton (1812 – 1912)"},
+["School teacher, volunteered as a nurse during the American civil war",
+ "كانت مدرّسة، وتطوعت كممرضة في الحرب الأهلية الأمريكية.",
+ "مدرّسة سابت الفصل وراحت تساعد الجرحى بدافع إنساني."],
+["Organized the nursing services",
+ "نظّمت خدمات التمريض.",
+ "زي مدير بينظم الشغل والورديات عشان كله يمشي صح."],
+["Established the American Red cross",
+ "أسست الصليب الأحمر الأمريكي.",
+ "لو اتسألت مين أسست الصليب الأحمر الأمريكي؟ الإجابة: كلارا بارتون."],
+
+{h:"Linda Richards (1841 – 1930)"},
+["First American trained nurse",
+ "أول ممرضة أمريكية متدربة.",
+ "لو اتسألت مين أول ممرضة أمريكية متدربة؟ الإجابة: ليندا ريتشاردز."],
+["Introduced nurses notes and doctors’ orders",
+ "دخلت ملاحظات التمريض وأوامر الأطباء.",
+ "زي ملف المريض: الممرضة بتكتب ملاحظاتها، والدكتور بيكتب أوامره."],
+["Initiated for wearing uniforms for nurses",
+ "بدأت فكرة إن الممرضات يلبسوا يونيفورم.",
+ "الزي الموحد اللي بتلبسه الممرضة دلوقتي."],
+["Pioneer in psychiatric and industrial nursing",
+ "رائدة في التمريض النفسي والتمريض الصناعي.",
+ "زي ممرضة بتشتغل في مستشفى نفسي، وممرضة بتشتغل في مصنع."],
+
+{h:"Mary Mahoney (1845 – 1926)"},
+["First African-American professional nurse",
+ "أول ممرضة محترفة أمريكية من أصل أفريقي.",
+ "لو اتسألت مين أول ممرضة محترفة أفريقية أمريكية؟ الإجابة: ماري ماهوني."],
+["Worked for the acceptance of African-Americans in nursing and for the equal opportunities",
+ "اشتغلت عشان الأمريكان الأفارقة يتقبلوا في التمريض وعشان تبقى الفرص متساوية.",
+ "يعني مفيش حد يتحرم من المهنة بسبب لونه."],
+
+{h:"Lillian Wald (1867 – 1940)"},
+["Founder of public health nursing",
+ "مؤسسة تمريض الصحة العامة.",
+ "ممرضة بتشتغل مع الناس في الحي، مش جوه المستشفى بس."],
+["Services to poor in slums",
+ "قدمت خدمات للفقراء في العشوائيات.",
+ "زي ممرضة بتنزل المناطق الفقيرة وتكشف على الناس."],
+["Visiting nursing services",
+ "خدمات التمريض بالزيارات.",
+ "الممرضة بتروح تزور المريض في بيته."],
+
+{h:"Margaret H Sanger (1879 – 1966)"},
+["Founder of planned parenthood",
+ "مؤسسة جمعية تنظيم الأسرة (Planned Parenthood).",
+ "زي عيادات تنظيم الأسرة اللي بتوعّي الناس."],
+["Opening the first birth control information clinic",
+ "فتحت أول عيادة بتدي معلومات عن تنظيم الحمل (birth control).",
+ "مكان الناس تروحه تسأل عن وسائل تنظيم الأسرة."],
+
+{h:"Mary Breckinridge (1881 – 1965)"},
+["Established the Frontier nursing services",
+ "أسست خدمات التمريض الحدودية (Frontier Nursing Service).",
+ "زي ممرضات بيوصلوا للأماكن البعيدة والنائية."]
+]},
+
+{ id:"definitions", icon:"📚", title:"Contemporary Nursing — Definitions", items:[
+["There are many definitions of nursing.",
+ "فيه تعريفات كتيرة للتمريض.",
+ "زي أي مهنة، كل واحد بيعرفها من زاوية مختلفة."],
+["Florence Nightingale defined nursing as: the act of utilizing the environment of the patient to assist him in his recovery.",
+ "فلورانس نايتنجيل عرّفت التمريض إنه استخدام بيئة المريض عشان نساعده يتعافى.",
+ "زي تهوية الأوضة ونضافتها وهدوئها، كل ده بيساعد المريض يتحسن."],
+["ANA definition: nursing is the diagnosis and treatment of human response to actual and potential health problems.",
+ "تعريف ANA (الجمعية الأمريكية للتمريض): التمريض هو تشخيص وعلاج استجابة الإنسان للمشاكل الصحية الحالية والمحتملة.",
+ "مريض جاي وعنده ألم بعد عملية: الألم ده استجابة، والممرضة تشخّصها وتتصرف. وكمان بتتوقع مشكلة ممكن تحصل لو سيبنا الحالة."],
+
+{h:"Other definitions of Nursing"},
+["Nursing is caring.",
+ "التمريض هو رعاية واهتمام.",
+ "الممرضة اللي بتسأل المريض عن حاله وبتهتم بيه بجد."],
+["Nursing is science and art.",
+ "التمريض علم وفن. علم لأنه مبني على معلومات، وفن لأنه تعامل ومهارة مع الناس.",
+ "الممرضة بتعرف تدي الحقنة صح (علم) وبتطمّن المريض بكلمتين حلوين (فن)."],
+["Nursing is holistic.",
+ "التمريض شامل (holistic): بيشوف المريض كله، جسم ونفسية وظروفه، مش المرض بس.",
+ "مريض عنده ألم وخايف على شغله، الممرضة بتراعي الاتنين."],
+["Nursing is adaptive.",
+ "التمريض بيتكيف (adaptive) مع حالة كل مريض وظروفه.",
+ "بتتعامل مع طفل بشكل غير اللي بتتعامل بيه مع كبير سن."],
+["Nursing is client centered",
+ "التمريض محوره المريض (client centered).",
+ "خطة الرعاية بتتعمل على حسب حالة المريض واحتياجاته هو."]
+]},
+
+{ id:"profession", icon:"🎓", title:"Professionalization", items:[
+["Profession: Profession is a specialized occupation or career that requires advanced knowledge, formal academic training, and specific technical skills to provide structured services to others.",
+ "المهنة (Profession) هي شغلانة متخصصة محتاجة معرفة متقدمة وتعليم أكاديمي رسمي ومهارات فنية معينة عشان تقدم خدمات منظمة للناس.",
+ "زي الدكتور والمهندس: مينفعش يشتغلوا من غير دراسة وشهادة."],
+["Professionalization: is the social process by which an trade, occupation, or vocation transforms itself into a true profession with high status, specialized standards, and formal recognition.",
+ "الـ Professionalization هي العملية الاجتماعية اللي بيها حرفة أو وظيفة بتتحول لمهنة حقيقية ليها مكانة عالية ومعايير متخصصة واعتراف رسمي.",
+ "التمريض كان شغلانة، وبعدين بقى مهنة ليها كليات وترخيص ونقابة."],
+
+{h:"Criteria of a profession"},
+["A profession must meet several key criteria to be recognized as a formal profession:",
+ "عشان المهنة تتعتبر مهنة رسمية، لازم تحقق شروط أساسية، وهنمشي عليهم.",
+ "زي شروط القبول في الكلية: لازم تستوفيها كلها."],
+["Specialized Body of Knowledge: Grounded in well-developed theoretical frameworks, scientific research, and advanced intellectual training rather than simple manual skill.",
+ "مجموعة معرفة متخصصة: المهنة قايمة على نظريات متطورة وأبحاث علمية وتدريب فكري متقدم، مش مجرد مهارة يدوية بسيطة.",
+ "التمريض ليه نظريات وأبحاث، مش بس إنك تعرف تدي حقنة.", 1],
+["Prolonged Higher Education: Requires formal academic degrees from accredited universities or specialized institutions prior to practice.",
+ "تعليم عالي طويل: لازم تاخد درجة أكاديمية رسمية من جامعة معتمدة أو معهد متخصص قبل ما تشتغل.",
+ "مينفعش تشتغل ممرض من غير ما تتخرج الأول.", 1],
+["Autonomy and Self-Regulation: Practitioners exercise independent judgment in their daily work and the professional group sets its own standards of practice.",
+ "الاستقلالية والتنظيم الذاتي: الممارسين بيستخدموا حكمهم المستقل في شغلهم اليومي، والمهنيين نفسهم هم اللي بيحطوا معايير الممارسة.",
+ "التمريض هو اللي بيحدد معايير شغله بنفسه، مش حد من برا المهنة.", 1],
+["Code of Ethics: Governed by an explicit, enforced code of moral and professional conduct to protect the public and ensure accountability.",
+ "ميثاق أخلاقيات المهنة (Code of Ethics): المهنة محكومة بقواعد أخلاقية ومهنية صريحة ومتطبقة فعلاً، عشان تحمي الناس وتضمن المساءلة.",
+ "زي ما الممرضة ملتزمة بسرية بيانات المريض وبتتحاسب لو خالفت.", 1],
+["Service Orientation (Altruism): Primary motivation centers on providing an essential social service and advancing public welfare over pure financial gain.",
+ "التوجه للخدمة (الإيثار Altruism): الدافع الأساسي هو تقديم خدمة اجتماعية مهمة وخدمة رفاهية الناس قبل الربح المادي.",
+ "الممرضة اللي بتفضل جنب المريض لأنها عايزة تساعده، مش بس عشان المرتب.", 1],
+["Licensure and Credentialing: Requires official state board certification, passing national examinations, or holding a legal license to practice.",
+ "الترخيص والاعتماد: لازم شهادة رسمية من مجلس الدولة، أو اجتياز امتحانات قومية، أو الحصول على ترخيص قانوني لمزاولة المهنة.",
+ "زي ترخيص مزاولة المهنة اللي من غيره مينفعش تشتغل.", 1],
+["Professional Associations: Supported by active national or international organizations that represent members, guide policy, and drive continuing research",
+ "الجمعيات المهنية: المهنة ليها منظمات وطنية أو دولية نشطة بتمثل الأعضاء وبتوجّه السياسات وبتدفع الأبحاث المستمرة.",
+ "زي النقابة اللي بتدافع عن حقوق الممرضين وبتطوّر المهنة.", 1],
+
+{h:"Nursing Organizations"},
+["American Nurses Association (ANA)",
+ "الجمعية الأمريكية للتمريض.",
+ "ANA هي النقابة المهنية للتمريض في أمريكا.", 1],
+["Canadian Nurses Association (CAN)",
+ "الجمعية الكندية للتمريض.",
+ "نفس الفكرة، بس في كندا.", 1],
+["National league for Nursing (NLN)",
+ "الرابطة الوطنية للتمريض.",
+ "منظمة وطنية مهتمة بالتمريض.", 1],
+["International Council of Nursing (ICN)",
+ "المجلس الدولي للتمريض.",
+ "ده على مستوى العالم كله مش دولة واحدة.", 1]
+]},
+
+{ id:"hospitals", icon:"🏥", title:"Factors Affecting the Development of Hospitals", items:[
+["Advancements in Medical Science & Technology: The discovery of germ theory, introduction of antiseptics and anesthesia, and breakthroughs in diagnostic technology (such as X-rays and MRI scans) shifted hospitals from basic care facilities to specialized centers for complex medical treatments.",
+ "التقدم في العلوم الطبية والتكنولوجيا: اكتشاف نظرية الجراثيم والمطهرات والتخدير، وتطور التشخيص (زي الأشعة السينية والرنين المغناطيسي) حوّل المستشفيات من أماكن رعاية بسيطة لمراكز متخصصة للعلاج المعقد.",
+ "زي ما المستشفى اتحولت من مكان بيرتاح فيه المريض بس لمكان فيه أشعة وعمليات وتخدير.", 0],
+["Nursing & Health Professions Education: The rise of formal, university-level professional training—pioneered by figures like Florence Nightingale—transformed clinical environments, establishing strict hygiene standards, organized care delivery, and professional hospital management.",
+ "تعليم التمريض والمهن الصحية: ظهور التدريب الجامعي الرسمي (اللي بدأته شخصيات زي فلورانس نايتنجيل) غيّر بيئة المستشفيات، وعمل معايير نضافة صارمة ورعاية منظمة وإدارة مهنية للمستشفى.",
+ "لما الممرضين بقوا متعلمين ومتدربين، المستشفى بقت أنضف وأنظم.", 0],
+["Socioeconomic & Public Health Policies: Shifts in government health legislation, public health mandates, social insurance, and national healthcare systems expanded healthcare access, driving the growth and modernization of hospital infrastructures.",
+ "السياسات الاجتماعية والاقتصادية وسياسات الصحة العامة: تغيّر قوانين الصحة الحكومية وقرارات الصحة العامة والتأمين الاجتماعي ونظم الرعاية الصحية القومية وسّع الوصول للرعاية، وده زاد نمو وتحديث المستشفيات.",
+ "لما الدولة تعمل تأمين صحي للناس، عدد اللي بيروحوا المستشفيات بيزيد فالمستشفيات بتكبر وتتطور.", 0],
+["Economic Models & Health Insurance: The expansion of public and private health insurance programs, combined with evolving hospital funding mechanisms, directly impacts hospital expansion, resource allocation, and bed capacity.",
+ "النماذج الاقتصادية والتأمين الصحي: التوسع في برامج التأمين الصحي الحكومي والخاص، مع تطور طرق تمويل المستشفيات، بيأثر مباشرة على توسع المستشفى وتوزيع الموارد وعدد الأسرّة.",
+ "كل ما التمويل والتأمين يزيدوا، المستشفى بتقدر تزود الأسرّة والإمكانيات.", 0],
+["Demographic & Epidemiological Shifts: Population growth, urbanization, aging demographics, and changes in disease patterns (such as shifting focus toward chronic diseases and global pandemic response) continually drive structural and operational updates in modern hospitals.",
+ "التغيرات السكانية والوبائية: زيادة السكان والتحضر وكبر سن السكان وتغير أنماط الأمراض (زي التركيز على الأمراض المزمنة والتعامل مع الأوبئة العالمية) بيدفعوا باستمرار لتحديث المستشفيات في الشكل والتشغيل.",
+ "لما كبار السن يزيدوا والأمراض المزمنة تكتر، المستشفيات بتجهز نفسها بأقسام ورعاية أنسب لده.", 0],
+["Quality Assurance & Accreditation Standards: Rigorous international and national healthcare quality guidelines, institutional accreditation frameworks, and patient safety protocols mandate continuous facility upgrades, technological adoption, and standardized clinical practices.",
+ "ضمان الجودة ومعايير الاعتماد: إرشادات جودة الرعاية الصحية الدولية والوطنية الصارمة وأطر اعتماد المؤسسات وبروتوكولات سلامة المريض بتفرض تحديث المنشأة باستمرار واستخدام التكنولوجيا وتوحيد الممارسات الإكلينيكية.",
+ "زي اعتماد الجودة اللي المستشفى لازم تحققه عشان تفضل شغالة وتحافظ على سلامة المرضى.", 0]
+]},
+
+{ id:"factors-practice", icon:"🧭", title:"Factors Influenced Nursing Practice", items:[
+["Religion",
+ "الدين.",
+ "زي لما الرهبان والراهبات كانوا هم اللي بيرعوا المرضى."],
+["War",
+ "الحرب.",
+ "زي حرب القرم اللي إدّت نايتنجيل فرصة تغيّر المستشفيات."],
+["Societal attitude",
+ "نظرة المجتمع.",
+ "لما المجتمع كان شايف التمريض شغلانة واطية، المهنة اتأثرت."],
+["Demographic change",
+ "التغير السكاني (الديموغرافي).",
+ "زيادة السكان في المدن عملت مشاكل صحية وطلب أكتر على الرعاية."],
+["Women’s issues",
+ "قضايا المرأة.",
+ "لأن التمريض كان مهنة أغلبها ستات، فوضع المرأة في المجتمع أثّر عليها."]
+]},
+
+{ id:"practice", icon:"💙", title:"Nursing Practice", items:[
+["Nursing Practice involves four areas:",
+ "ممارسة التمريض فيها 4 مجالات.",
+ "تخيل مريض من قبل ما يتعب لحد آخر عمره، التمريض موجود في كل مرحلة."],
+["Promoting health and wellness.",
+ "تعزيز الصحة والعافية.",
+ "توعية الناس يحافظوا على صحتهم وهما لسه كويسين.", 1],
+["Preventing illness.",
+ "الوقاية من المرض.",
+ "التطعيمات وحاجات تمنع المرض قبل ما يحصل.", 1],
+["Restoring health.",
+ "استعادة الصحة.",
+ "رعاية المريض عشان يخف ويرجع لحالته.", 1],
+["Care of the dying.",
+ "رعاية المحتضرين.",
+ "الاهتمام بالمريض في آخر أيامه عشان يكون مرتاح.", 1],
+
+{h:"Health promotion"},
+["Is increase people’s wellbeing and health potential, including:",
+ "تعزيز الصحة معناه إنك تزود رفاهية الناس وإمكانياتهم الصحية، وده بيشمل:",
+ "الهدف إن الناس تبقى أحسن، مش بس إنها متمرضش."],
+["Reduce over weight.",
+ "تقليل الوزن الزايد.",
+ "نصح الناس بنظام أكل ورياضة.", 1],
+["Stop cigarette smoking.",
+ "الإقلاع عن التدخين.",
+ "توعية المدخن بضرر السجاير ومساعدته يبطل.", 1],
+["Improving nutrition and physical fitness.",
+ "تحسين التغذية واللياقة البدنية.",
+ "أكل صحي وحركة ورياضة.", 1],
+["Preventing drug misuse.",
+ "منع إساءة استخدام المخدرات والأدوية.",
+ "توعية الناس بخطر تعاطي المخدرات.", 1],
+["Avoid alcohol intake",
+ "تجنب شرب الكحول.",
+ "توعية الناس بضرر الكحول على الصحة.", 1],
+
+{h:"Prevent illness"},
+["Maintain optimum health by preventing disease, Including:",
+ "الحفاظ على أفضل صحة ممكنة عن طريق منع المرض، وده بيشمل:",
+ "الوقاية خير من العلاج."],
+["Educational program (smoking, prenatal care).",
+ "برامج تثقيفية (زي التدخين ورعاية الحامل قبل الولادة).",
+ "حصة توعية للحوامل عن المتابعة.", 1],
+["Immunization.",
+ "التطعيمات.",
+ "زي تطعيمات الأطفال اللي بتحميهم من أمراض.", 1],
+["Personal hygiene",
+ "النظافة الشخصية.",
+ "غسل الإيدين والاستحمام.", 1],
+["Sanitation",
+ "الصرف الصحي والنظافة العامة.",
+ "نضافة الشوارع والمياه.", 1],
+["Eating healthy foods",
+ "أكل أكل صحي.",
+ "خضار وفاكهة بدل الأكل الغير صحي.", 1],
+["Safety environment",
+ "بيئة آمنة.",
+ "منع الحوادث، زي تأمين الأرضية عشان محدش يتزحلق.", 1],
+
+{h:"Restoring health"},
+["Focus of individual with illnesses and range from early detection to rehabilitation and teaching during recovery including the following:",
+ "التركيز هنا على الأفراد المرضى، وبيمتد من الاكتشاف المبكر لحد التأهيل والتعليم أثناء فترة التعافي، وده بيشمل:",
+ "رحلة المريض كلها من أول ما يبان عليه المرض لحد ما يخف."],
+["Early Detection & Assessment: Identifying health changes, performing clinical assessments, and conducting screening procedures to diagnose illnesses at their earliest, most treatable stages.",
+ "الاكتشاف المبكر والتقييم: ملاحظة التغيرات الصحية وعمل تقييم إكلينيكي وإجراءات فحص عشان يتشخص المرض في أول مراحله لما يكون علاجه أسهل.",
+ "ممرضة لاحظت ارتفاع في درجة حرارة المريض فبلّغت بدري.", 1],
+["Direct Clinical Care & Treatment: Administering prescribed medical treatments, medications, and clinical therapies to stabilize conditions, relieve acute symptoms, and manage disease progression.",
+ "الرعاية والعلاج الإكلينيكي المباشر: إعطاء العلاجات والأدوية والعلاجات الإكلينيكية اللي اتكتبت عشان تثبّت الحالة وتخفف الأعراض الحادة وتتحكم في تطور المرض.",
+ "إنك تدي المريض الدوا والمحلول في ميعاده.", 1],
+["Rehabilitation & Physical Recovery: Implementing targeted therapy regimens (e.g., physical, occupational, or speech therapy) to restore lost function, rebuild independence, and enhance mobility.",
+ "التأهيل والتعافي الجسدي: تطبيق برامج علاج موجهة (زي العلاج الطبيعي أو الوظيفي أو علاج النطق) عشان ترجّع الوظيفة المفقودة وتبني الاستقلالية وتحسّن الحركة.",
+ "مريض بعد جلطة بيتدرب عشان يرجع يمشي ويتكلم.", 1],
+["Patient & Family Education: Teaching individuals and their caregivers about disease management, medication adherence, post-discharge self-care routines, and early signs of complications.",
+ "تعليم المريض والأسرة: إنك تعلّم المرضى ومقدمي الرعاية إزاي يتعاملوا مع المرض، ويلتزموا بالأدوية، ويراعوا نفسهم بعد الخروج من المستشفى، ويعرفوا العلامات المبكرة للمضاعفات.",
+ "الممرضة بتشرح لمريض السكر ولأهله إزاي ياخد الأنسولين وإمتى يرجع للدكتور.", 1],
+["Psychosocial Support & Counseling: Assisting patients in adapting to lifestyle changes, managing chronic illness stress, and coping with the emotional impact of recovery.",
+ "الدعم النفسي والاجتماعي والإرشاد: مساعدة المرضى يتأقلموا مع تغيرات نمط حياتهم ويتحكموا في ضغط المرض المزمن ويتعاملوا مع الأثر النفسي للتعافي.",
+ "الممرضة بتسمع للمريض وتطمنه لما يكون خايف أو زعلان من مرضه.", 1],
+["Continuity of Care & Referral: Coordinating care across healthcare disciplines and connecting patients to community resources, home care services, and follow-up clinics for ongoing recovery support.",
+ "استمرارية الرعاية والتحويل: تنسيق الرعاية بين التخصصات الصحية المختلفة وربط المريض بمصادر المجتمع وخدمات الرعاية المنزلية وعيادات المتابعة عشان التعافي يكمل.",
+ "الممرضة بتحول المريض لعيادة متابعة أو ممرضة منزلية بعد خروجه.", 1],
+
+{h:"Caring for the dying"},
+["This involves comforting and caring for people of all ages who are dying.",
+ "ده معناه إنك تطمّن وترعى الناس بكل أعمارهم اللي بيحتضروا.",
+ "ممرضة جنب مريض كبير أو طفل في آخر أيامه، بتهتم بيه وتريّحه."],
+["It includes helping people to live comfortable as possible until death and help support persons to cope with death.",
+ "وبيشمل مساعدة الناس يعيشوا أريح ما يمكن لحد الوفاة، ودعم الأشخاص عشان يتعاملوا مع الموت.",
+ "إنك تخفف ألم المريض وتقعد جنبه وتدعم أهله نفسياً."]
+]},
+
+{ id:"setting", icon:"🏨", title:"Setting for Nursing", items:[
+["In the past, the acute care hospital was the only practice setting.",
+ "زمان، مستشفى الرعاية الحادة كان المكان الوحيد اللي بتشتغل فيه الممرضة.",
+ "كأن الممرضة مفيش قدامها غير المستشفى."],
+["Today nurses works in hospitals, client’s home, community agencies, education settings, schools, mental health…..etc.",
+ "النهارده الممرضين بيشتغلوا في المستشفيات، وبيت المريض، وهيئات المجتمع، وأماكن التعليم، والمدارس، والصحة النفسية… وغيرها.",
+ "ممكن تلاقي ممرضة في مدرسة أو في بيت مريض أو في مستشفى نفسي."]
+]},
+
+{ id:"education", icon:"🎓", title:"Types of Nursing Educational Programs", items:[
+["Diploma programs.",
+ "برامج الدبلوم.",
+ "دراسة تمريض بنظام دبلوم.", 0],
+["Community College/associate Degree.",
+ "كلية المجتمع / درجة الزمالة (associate).",
+ "نظام دراسة أقصر من الجامعة العادية.", 0],
+["Baccalaureate Degree Program.",
+ "برنامج البكالوريوس.",
+ "زي كلية التمريض اللي بتتخرج منها ببكالوريوس.", 0],
+["Graduated Nursing Education (Master’s & Doctoral Programs)",
+ "الدراسات العليا في التمريض (ماجستير ودكتوراه).",
+ "بعد البكالوريوس تكمّل ماجستير أو دكتوراه.", 0]
+]},
+
+{ id:"roles", icon:"🧑‍⚕️", title:"Roles and Functions of the Nurses", items:[
+["Caregiver: Provides direct holistic care—encompassing physical, emotional, developmental, and spiritual needs—while maintaining patient safety, comfort, and dignity throughout the health-illness continuum.",
+ "مقدم الرعاية (Caregiver): بيقدم رعاية مباشرة شاملة بتغطي الاحتياجات الجسدية والعاطفية والتطورية والروحية، مع الحفاظ على أمان المريض وراحته وكرامته طول رحلة الصحة والمرض.",
+ "الممرضة بتغيّر على الجرح وبتسأل المريض لو محتاج حاجة نفسية، وبتحافظ على خصوصيته."],
+["Communicator: Facilitates effective therapeutic communication with patients, families, and interdisciplinary healthcare teams to coordinate care plans, document clinical findings, and address patient concerns.",
+ "المتواصل (Communicator): بيسهّل التواصل العلاجي الفعال مع المرضى والأسر وفريق الرعاية الصحية عشان ينسقوا خطط الرعاية ويسجلوا النتائج الإكلينيكية ويتعاملوا مع مخاوف المريض.",
+ "الممرضة بتسلّم المناوبة للي بعدها وبتكتب في الملف وبتطمن أهل المريض."],
+["Teacher / Educator: Assesses learning needs, educates patients and families regarding health maintenance, disease processes, medication administration, and self-care skills, and promotes health literacy.",
+ "المعلم / المثقف (Teacher / Educator): بيقيّم احتياجات التعلم، ويعلّم المرضى وأسرهم عن الحفاظ على الصحة وعمليات المرض وإعطاء الأدوية ومهارات الرعاية الذاتية، ويرفع الوعي الصحي.",
+ "الممرضة بتعلّم المريض إزاي ياخد الدوا وإزاي يراعي نفسه في البيت."],
+["Client / Patient Advocate: Protects the patient’s human and legal rights, ensures informed consent, speaks on behalf of patient preferences, and assists patients in navigating complex healthcare systems.",
+ "المدافع عن المريض (Advocate): بيحمي حقوق المريض الإنسانية والقانونية، ويتأكد من الموافقة المستنيرة، ويتكلم نيابة عن رغبات المريض، ويساعده يتعامل مع نظام رعاية صحية معقد.",
+ "الممرضة بتتأكد إن المريض فاهم العملية ووافق عليها قبل ما تتعمل."],
+["Counselor: Helps individuals and families cope with stress, emotional distress, psychological challenges, and lifestyle adjustments related to acute or chronic illness.",
+ "المستشار (Counselor): بيساعد الأفراد والأسر يتعاملوا مع الضغط والضيق النفسي والتحديات النفسية وتعديلات نمط الحياة المرتبطة بالمرض الحاد أو المزمن.",
+ "الممرضة بتسمع لمريض زعلان من مرضه وتساعده يتقبله."],
+["Change Agent: Initiates and leads improvements in clinical practice, safety protocols, healthcare technology integration, and organizational policies to elevate quality of care.",
+ "وكيل التغيير (Change Agent): بيبدأ ويقود التحسينات في الممارسة الإكلينيكية وبروتوكولات السلامة ودمج التكنولوجيا الصحية وسياسات المؤسسة عشان يرفع جودة الرعاية.",
+ "ممرضة اقترحت طريقة أحسن لتعليم المرضى أو نظام أمان جديد في القسم."],
+["Leader / Manager: Coordinates unit operations, delegates tasks, manages resources, supervises healthcare personnel, and oversees patient care delivery to ensure clinical standards are met.",
+ "القائد / المدير (Leader / Manager): بينسق تشغيل القسم، ويوزع المهام، ويدير الموارد، ويشرف على العاملين الصحيين، ويراقب تقديم الرعاية عشان المعايير الإكلينيكية تتحقق.",
+ "رئيسة التمريض (head nurse) اللي بتوزع الشغل على الفريق وبتتابع الأداء."],
+["Researcher / Evidence-Based Practitioner: Utilizes current scientific evidence and research findings to guide clinical practice, participates in data collection, and contributes to quality improvement projects.",
+ "الباحث / الممارس المبني على الدليل (Researcher): بيستخدم الأدلة العلمية الحالية ونتائج الأبحاث عشان يوجّه الممارسة الإكلينيكية، وبيشارك في جمع البيانات، وبيساهم في مشاريع تحسين الجودة.",
+ "الممرضة بتطبق إجراء بناءً على آخر دراسة علمية مش بس على العادة."],
+["Decision Maker / Clinical Judgment Expert: Employs critical thinking and the nursing process (assessment, diagnosis, planning, implementation, evaluation) to make clinical decisions and prioritize interventions.",
+ "متخذ القرار / خبير الحكم الإكلينيكي: بيستخدم التفكير النقدي والعملية التمريضية (تقييم، تشخيص، تخطيط، تنفيذ، تقويم) عشان ياخد قرارات إكلينيكية ويرتب أولويات التدخلات.",
+ "لما يجي مريضين في نفس الوقت، الممرضة بتقرر مين الأول حسب خطورة الحالة."]
+]},
+
+{ id:"icn", icon:"🌍", title:"International Council of Nursing (ICN)", items:[
+["The International Council of Nurses (ICN) is a federation of more than 130 national nurses associations (NNAs), representing the more than 13 million nurses worldwide.",
+ "المجلس الدولي للتمريض (ICN) اتحاد من أكتر من 130 جمعية تمريض وطنية (NNAs)، وبيمثل أكتر من 13 مليون ممرض وممرضة في العالم.",
+ "زي نقابة عالمية بتجمع نقابات التمريض بتاعة الدول."],
+["Founded in 1899, ICN is the world’s first and widest reaching international organization for health professionals.",
+ "اتأسس سنة 1899، وهو أول وأوسع منظمة دولية للمهنيين الصحيين في العالم.",
+ "يعني أقدم وأكبر تجمع دولي للعاملين في الصحة."],
+["Operated by nurses and leading nurses internationally, ICN works to ensure quality nursing care for all, sound health policies globally, the advancement of nursing knowledge, and the presence worldwide of a respected nursing profession and a competent and satisfied nursing workforce",
+ "بيديره ممرضين وبيقوده ممرضين على مستوى العالم، وشغله إنه يضمن رعاية تمريضية بجودة للكل، وسياسات صحية سليمة عالمياً، وتطوير معرفة التمريض، ووجود مهنة تمريض محترمة في كل العالم، وقوة عاملة كفؤة وراضية.",
+ "الهدف إن الممرض في أي بلد يكون ليه مكانة، وشغله يبقى كويس ومرتاح فيه."]
+]}
+
+];
+
+/* ===== RENDER ===== */
+const app = document.getElementById('app');
+const chips = document.getElementById('chips');
+let totalPts = 0;
+
+SECTIONS.forEach((s, si) => {
+  let n = 0;
+  let body = '';
+  s.items.forEach(it => {
+    if (it.h) { body += `<div class="subhead">${it.h}</div>`; return; }
+    n++; totalPts++;
+    const sub = it[3] ? ' sub' : '';
+    body += `<div class="pt${sub}">
+      <div class="pt-en" onclick="this.parentElement.classList.toggle('done')"><div class="pt-n">${n}</div><div>${it[0]}</div></div>
+      <div class="pt-ar"><span class="tag">شرح</span>${it[1]}</div>
+      <div class="pt-ex"><span class="tag">عشان تفهمها</span>${it[2]}</div>
+    </div>`;
+  });
+  app.insertAdjacentHTML('beforeend', `
+    <section class="sec" id="${s.id}">
+      <div class="sec-head">
+        <div class="sec-icon">${s.icon}</div>
+        <div class="sec-title">${s.title}</div>
+        <div class="sec-count">${n} points</div>
+      </div>
+      <div class="sec-body">${body}</div>
+    </section>`);
+  chips.insertAdjacentHTML('beforeend', `<a class="chip" href="#${s.id}" data-id="${s.id}">${s.icon} ${s.title.split('—')[0].split('&')[0].trim()}</a>`);
+});
+document.getElementById('totalBadge').textContent = totalPts + ' points';
+document.getElementById('secBadge').textContent = SECTIONS.length + ' sections';
+
+/* progress bar + active chip */
+const secEls = [...document.querySelectorAll('.sec')];
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  document.getElementById('prog-bar').style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+  let cur = secEls[0].id;
+  secEls.forEach(el => { if (el.getBoundingClientRect().top < 160) cur = el.id; });
+  document.querySelectorAll('.chip').forEach(c => {
+    const on = c.dataset.id === cur;
+    c.classList.toggle('active', on);
+    if (on) { const p = c.parentElement; p.scrollTo({ left: c.offsetLeft - 40, behavior: 'smooth' }); }
+  });
+}, { passive: true });
+
+/* toggles */
+function toggler(btnId, cls) {
+  const b = document.getElementById(btnId);
+  b.addEventListener('click', () => { document.body.classList.toggle(cls); b.classList.toggle('off'); });
+}
+toggler('btnAr', 'hide-ar');
+toggler('btnEx', 'hide-ex');
+
+/* theme */
+const themeBtn = document.getElementById('themeBtn');
+let theme = 'light';
+try { theme = localStorage.getItem('theme') || 'light'; } catch (e) {}
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  try { localStorage.setItem('theme', t); } catch (e) {}
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+</script>
+</body>
+</html>
