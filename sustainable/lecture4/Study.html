@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM | Sustainable Development</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --forest:#0f3d2e; --leaf:#2f9e5b; --ocean:#0b7a9e; --sun:#f2b134; --soil:#8a5a2b;
+  --accent:#2f9e5b; --accent-glow:rgba(47,158,91,.18);
+  --grad:linear-gradient(135deg,#0f3d2e 0%,#1f7a4d 55%,#2f9e5b 100%);
+  --grad-bar:linear-gradient(90deg,#e5243b 0 5.88%,#dda63a 5.88% 11.76%,#4c9f38 11.76% 17.64%,#c5192d 17.64% 23.52%,#ff3a21 23.52% 29.4%,#26bde2 29.4% 35.28%,#fcc30b 35.28% 41.16%,#a21942 41.16% 47.04%,#fd6925 47.04% 52.92%,#dd1367 52.92% 58.8%,#fd9d24 58.8% 64.68%,#bf8b2e 64.68% 70.56%,#3f7e44 70.56% 76.44%,#0a97d9 76.44% 82.32%,#56c02b 82.32% 88.2%,#00689d 88.2% 94.08%,#19486a 94.08% 100%);
+  --bg:#f5f8f1; --bg2:#e8efe3; --card:#fff; --text:#14231b; --text2:#3d4f45; --text3:#74857a;
+  --bc:rgba(15,61,46,.10); --exbg:#fff8e6; --exbd:#f2b134; --extx:#5a4310;
+  --r:16px; --tr:all .3s cubic-bezier(.4,0,.2,1);
+}
+[data-theme="dark"] {
+  --bg:#0b1510; --bg2:#121f18; --card:#17271f; --text:#e4efe8; --text2:#b9cbc0; --text3:#7f9387;
+  --bc:rgba(255,255,255,.09); --accent:#4cc27f; --exbg:#2a2310; --exbd:#c9962a; --extx:#f1dca6;
+}
+html { scroll-behavior: smooth; scroll-padding-top: 130px; }
+body { font-family:'Cairo',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; overflow-x:hidden; transition:background .4s,color .4s; line-height:1.8; }
+
+#prog-bar { position:fixed; top:0; right:0; height:4px; width:0; z-index:999; background:var(--grad-bar); background-size:100vw 100%; background-repeat:no-repeat; }
+
+nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:0 28px; height:64px; background:rgba(245,248,241,.93); backdrop-filter:blur(16px); border-bottom:1px solid var(--bc); }
+[data-theme="dark"] nav { background:rgba(11,21,16,.95); }
+.nav-back { display:flex; align-items:center; gap:7px; color:var(--text2); text-decoration:none; font-size:13px; font-weight:700; padding:7px 13px; border-radius:8px; border:1px solid var(--bc); background:var(--card); transition:var(--tr); }
+.nav-back:hover { color:var(--accent); border-color:var(--accent); }
+.nav-back:focus-visible, .theme-btn:focus-visible, .toc-chip:focus-visible { outline:3px solid var(--sun); outline-offset:2px; }
+.nav-brand { display:flex; align-items:center; gap:9px; font-size:15px; font-weight:900; }
+.nav-logo-icon { width:34px; height:34px; border-radius:8px; background:var(--grad); display:flex; align-items:center; justify-content:center; color:#fff; font-size:12px; font-weight:900; box-shadow:0 0 0 2px rgba(242,177,52,.6); }
+.theme-btn { width:38px; height:38px; border-radius:50%; border:1px solid var(--bc); background:var(--card); cursor:pointer; font-size:15px; display:flex; align-items:center; justify-content:center; transition:var(--tr); }
+.theme-btn:hover { border-color:var(--accent); }
+
+.hero-band { margin-top:64px; background:var(--grad); padding:40px 24px 34px; text-align:center; position:relative; overflow:hidden; border-bottom:4px solid var(--sun); }
+.hero-band::before { content:''; position:absolute; inset:0; background:radial-gradient(circle 200px at 10% 15%,rgba(242,177,52,.30),transparent 70%),radial-gradient(circle 260px at 92% 90%,rgba(11,122,158,.40),transparent 70%); }
+.hero-band > * { position:relative; }
+.hero-icon { width:68px; height:68px; border-radius:50%; background:rgba(255,255,255,.18); display:flex; align-items:center; justify-content:center; font-size:32px; margin:0 auto 14px; border:1.5px solid rgba(255,255,255,.4); }
+.hero-band h1 { font-size:clamp(22px,4.5vw,32px); font-weight:900; color:#fff; margin-bottom:4px; }
+.hero-band p { font-size:14px; color:rgba(255,255,255,.9); }
+.hero-meta { display:flex; justify-content:center; gap:12px; margin-top:18px; flex-wrap:wrap; }
+.meta-pill { background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.3); border-radius:50px; padding:5px 16px; font-size:12px; font-weight:700; color:#fff; display:flex; align-items:center; gap:6px; }
+.meta-pill i { color:var(--sun); }
+
+.toc { position:sticky; top:64px; z-index:50; display:flex; gap:8px; justify-content:center; flex-wrap:wrap; padding:10px 16px; background:var(--bg); border-bottom:1px solid var(--bc); }
+.toc-chip { text-decoration:none; font-size:12.5px; font-weight:700; color:var(--text2); background:var(--card); border:1px solid var(--bc); padding:5px 14px; border-radius:50px; transition:var(--tr); }
+.toc-chip:hover { color:#fff; background:var(--leaf); border-color:var(--leaf); }
+
+.shell { max-width:780px; margin:0 auto; padding:26px 18px 80px; }
+
+.sec { margin-bottom:38px; }
+.sec-head { display:flex; align-items:center; gap:12px; margin:8px 0 16px; }
+.sec-num { width:42px; height:42px; border-radius:12px; background:var(--grad); color:#fff; font-weight:900; font-size:18px; display:flex; align-items:center; justify-content:center; border-bottom:3px solid var(--sun); flex-shrink:0; }
+.sec-head h2 { font-size:20px; font-weight:900; text-align:left; }
+
+.card { position:relative; background:var(--card); border:1px solid var(--bc); border-radius:18px; padding:8px 18px 6px; margin-bottom:16px; box-shadow:0 3px 16px rgba(15,61,46,.06); }
+.head-card { border-top:4px solid var(--sun); }
+.letter { position:absolute; top:-14px; right:18px; background:var(--leaf); color:#fff; font-weight:900; font-size:14px; min-width:34px; height:28px; padding:0 10px; border-radius:50px; display:flex; align-items:center; justify-content:center; border:2px solid var(--bg); }
+
+.blk { padding:16px 0; border-bottom:1px dashed var(--bc); }
+.blk:last-child { border-bottom:none; }
+.blk.sub { margin-right:18px; padding-right:14px; border-right:3px solid var(--ocean); border-bottom:none; background:linear-gradient(270deg,rgba(11,122,158,.05),transparent); }
+.en { direction:ltr; text-align:left; font-size:15.5px; font-weight:700; line-height:1.7; color:var(--text); border-left:4px solid var(--leaf); padding-left:12px; margin-bottom:8px; }
+.blk.key .en { font-size:17px; font-weight:900; color:var(--forest); border-left-color:var(--sun); }
+[data-theme="dark"] .blk.key .en { color:var(--accent); }
+.ar { font-size:15px; font-weight:600; color:var(--text2); margin-bottom:8px; padding-right:2px; }
+.ex { background:var(--exbg); border-right:4px solid var(--exbd); border-radius:10px; padding:10px 14px; font-size:14px; font-weight:600; color:var(--extx); }
+.ex-l { font-weight:900; margin-left:4px; }
+
+footer { background:var(--bg2); border-top:4px solid; border-image:var(--grad-bar) 1; padding:22px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+.footer-brand { font-size:14px; font-weight:700; } .footer-brand span { color:var(--accent); }
+.footer-tg { display:flex; align-items:center; gap:5px; text-decoration:none; color:#229ED9; font-size:12px; font-weight:600; }
+
+@media (max-width:520px) {
+  nav { padding:0 14px; } .nav-brand span { display:none; }
+  .shell { padding:20px 12px 60px; } .card { padding:8px 14px 4px; }
+  .en { font-size:14.5px; } .blk.key .en { font-size:16px; } .ar { font-size:14.5px; }
+  .blk.sub { margin-right:8px; }
+}
+@media (prefers-reduced-motion: reduce) { * { transition:none !important; scroll-behavior:auto !important; } }
+@media print { nav,.toc,#prog-bar { display:none; } .hero-band { margin-top:0; } }
+</style>
+</head>
+<body>
+<div id="prog-bar"></div>
+<nav>
+  <a href="https://gaith-team.github.io/exam/" class="nav-back"><i class="fa-solid fa-arrow-right"></i> رجوع</a>
+  <div class="nav-brand"><div class="nav-logo-icon">GT</div><span>GHAITH TEAM</span></div>
+  <button class="theme-btn" id="themeBtn" aria-label="تغيير الثيم">🌙</button>
+</nav>
+
+<div class="hero-band">
+  <div class="hero-icon">🌍</div>
+  <h1>Nursing role</h1>
+  <p>Sustainable Development</p>
+  <div class="hero-meta">
+    <div class="meta-pill"><i class="fa-solid fa-language"></i>ببساطة مع غيث </div>
+  </div>
+</div>
+
+<div class="toc"><a href="#intro" class="toc-chip" dir="ltr">Introduction</a><a href="#s1" class="toc-chip" dir="ltr">Curricular strategies</a><a href="#s2" class="toc-chip" dir="ltr">Strategies in nursing workforce</a><a href="#s3" class="toc-chip" dir="ltr">Strategies in nursing research</a></div>
+
+<main class="shell">
+<section class="sec" id="intro">
+<div class="sec-head"><div class="sec-num">★</div><h2 dir="ltr">Introduction</h2></div>
+<div class="card">
+<div class="blk">
+  <p class="en" dir="ltr">Nurses, the largest global health care workforce, contribute to achievement of 17 United Nations Sustainable Development Goals through strategic and disruptive research, education, practice, and policy.</p>
+  <p class="ar">الممرضين هم أكبر قوة عاملة في الرعاية الصحية في العالم كله، وبيساهموا في تحقيق الـ 17 هدف من أهداف التنمية المستدامة بتاعة الأمم المتحدة، عن طريق بحث وتعليم وممارسة وسياسات استراتيجية ومبتكرة (disruptive يعني بتغيّر الطريقة التقليدية).</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> تخيل إن الممرضين في العالم زي أكبر فريق في الدنيا. لما الفريق ده كله يشتغل صح في البحث والتعليم والشغل نفسه والقوانين، طبيعي يكون له تأثير كبير في تحقيق أهداف الأمم المتحدة.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">Responsible for advancing the well-being of individuals, families, communities, and society, nurses are positioned to influence and impact health across the life span.</p>
+  <p class="ar">الممرض مسؤول عن تحسين صحة وراحة الفرد والأسرة والمجتمع، ومكانه ده بيخليه يأثر في صحة الناس في كل مراحل العمر من الولادة لحد الكبر.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> ممرضة بتتابع تطعيمات طفل، وبعدين بتنصح أمه، وبعدين بتشارك في حملة توعية في الحي. يعني نفس الممرضة أثّرت في صحة الطفل والأسرة والمجتمع.</div>
+</div><div class="blk key">
+  <p class="en" dir="ltr">Strategies In Nursing Education To Achieve The 2030 vision :</p>
+  <p class="ar">دي الاستراتيجيات اللي بتتعمل في تعليم التمريض عشان نوصل لرؤية 2030 (أهداف التنمية المستدامة).</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> زي خطة المذاكرة للامتحان: الرؤية هي الدرجة النهائية، والاستراتيجيات هي الخطوات اللي بتوصلك ليها.</div>
+</div>
+</div>
+</section>
+<section class="sec" id="s1">
+<div class="sec-head"><div class="sec-num">1</div><h2 dir="ltr">Curricular strategies</h2></div>
+<div class="card head-card"><div class="blk key">
+  <p class="en" dir="ltr">1: Curricular strategies: -</p>
+  <p class="ar">Curricular يعني متعلق بالمنهج. أول مجموعة استراتيجيات بتخص المنهج الدراسي اللي الطالب بيدرسه.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> زي ما تظبط جدول المواد والمذاكرة نفسه الأول قبل ما تبدأ تذاكر.</div>
+</div></div>
+<div class="card">
+<div class="letter" dir="ltr">a)</div>
+<div class="blk key">
+  <p class="en" dir="ltr">a) Promote interprofessional didactic and clinical experiences:</p>
+  <p class="ar">شجّع تجارب تعليم (نظري didactic وعملي clinical) بيشترك فيها طلبة من تخصصات مختلفة مع بعض، مش تمريض لوحده.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> طلبة تمريض وصيدلة وعلاج طبيعي بيحضروا حالة واحدة ويتدربوا عليها سوا.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">Students in Hard and soft skills are gained in these interprofessional experiential learning activities.</p>
+  <p class="ar">الطلبة بيكتسبوا مهارات صلبة (hard skills) زي المهارات الفنية والإكلينيكية، ومهارات ناعمة (soft skills) زي التواصل والشغل الجماعي، من خلال أنشطة التعلم بالتجربة دي مع التخصصات التانية.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> وانت بتدّي دواء مع طالب صيدلة، اتعلمت الجرعة الصح (hard)، واتعلمت إزاي تتناقش معاه وتتفقوا (soft).</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">All of these skills are translatable to varied work settings and position graduates to readily lead and participate in interprofessional teams with confidence.</p>
+  <p class="ar">كل المهارات دي تنفع في أي مكان شغل، وبتخلي الخريج يقدر يقود فريق متعدد التخصصات أو يشارك فيه بثقة.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> أول يوم شغل في الـ ICU مش هتتلخبط وسط الدكاترة والصيادلة والأخصائيين، لأنك متعود من أيام الكلية تشتغل معاهم.</div>
+</div>
+</div>
+<div class="card">
+<div class="letter" dir="ltr">b)</div>
+<div class="blk key">
+  <p class="en" dir="ltr">b) Expand clinical preparation through simulation:</p>
+  <p class="ar">وسّع التدريب العملي عن طريق المحاكاة (simulation)، يعني التدريب على سيناريو أو مريض صناعي بيحاكي الواقع.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> التدريب على دمية (مانيكان) بتحاكي مريض جاله هبوط في القلب، قبل ما تتعامل مع مريض حقيقي.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">While entry-level nursing students must have real-world experience before entering independent nursing practice, there might be a need for discourse around how much clinical hands-on experience needs to be embedded within a nursing curriculum.</p>
+  <p class="ar">طالب التمريض المبتدئ لازم ياخد خبرة حقيقية في الواقع قبل ما يشتغل لوحده، بس ممكن نحتاج نناقش قد إيه من ساعات التدريب العملي المباشر لازم يتحط جوه المنهج.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> زي واحد بيتعلم سواقة، لازم ينزل الشارع قبل الرخصة، بس ممكن نسأل: كام ساعة في الشارع وكام ساعة على جهاز المحاكاة؟</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">Students taking 50% of their clinical hours in simulation educational experiences actually scored higher on knowledge assessment examinations than those who had more hours in traditional non simulation clinical experiences</p>
+  <p class="ar">الطلبة اللي خدوا 50% من ساعات تدريبهم الإكلينيكي في المحاكاة جابوا درجات أعلى في امتحانات تقييم المعرفة من اللي خدوا ساعات أكتر في التدريب التقليدي من غير محاكاة.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> لو جربت إعطاء الحقنة 10 مرات على دمية وكل مرة بيتصحح لك غلطك، غالبًا هتحفظ الخطوات أحسن من واحد شاف الحقنة مرة واحدة بس في القسم.</div>
+</div>
+</div>
+<div class="card">
+<div class="letter" dir="ltr">c)</div>
+<div class="blk key">
+  <p class="en" dir="ltr">c) Enrich nursing curricula:</p>
+  <p class="ar">أثري منهج التمريض، يعني زوّد عليه محتوى مهم.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> زي ما تضيف مصادر مذاكرة زيادة لمنهجك عشان تفهم الصورة الكبيرة.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">Nursing graduates are able to find employment opportunities within or beyond their country borders, and they will benefit from educational experiences that help them identify as global citizens who appreciate the culture of others.</p>
+  <p class="ar">خريجين التمريض ممكن يلاقوا شغل جوه بلدهم أو بره حدودها، فمحتاجين تجارب تعليمية تخليهم يحسوا إنهم مواطنين عالميين (global citizens) بيحترموا ثقافة الناس التانية.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> ممرضة مصرية سافرت تشتغل في دولة تانية وبتتعامل مع مرضى من جنسيات مختلفة. لازم تفهم عاداتهم في الأكل ومعتقداتهم عشان تقدم رعاية تناسبهم.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">Adequate coverage of SDGs should form a foundation of every nursing curricula.</p>
+  <p class="ar">لازم الـ SDGs (أهداف التنمية المستدامة) تتغطى بشكل كافي وتبقى أساس في أي منهج تمريض.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> زي ما التشريح أساس في أي مادة تمريض، أهداف التنمية المستدامة لازم تبقى أساس برضه.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">Students should be encouraged (and given the academic space) to pursue courses and opportunities that help them bridge their professional aspirations with the goals of helping achieve all 17 SDGs.</p>
+  <p class="ar">الطلبة لازم يتشجعوا (ويتدّيلهم مساحة أكاديمية) إنهم يدرسوا كورسات ويدوّروا على فرص تربط بين طموحهم المهني وبين مساعدة العالم يحقق الـ 17 هدف.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> طالب نفسه يشتغل في صحة الأم والطفل، فياخد كورس عن التغذية ومحاربة الفقر، عشان يربط شغله بهدف أكبر.</div>
+</div>
+</div>
+<div class="card">
+<div class="letter" dir="ltr">d)</div>
+<div class="blk key">
+  <p class="en" dir="ltr">d) Expand local and study abroad experiences:</p>
+  <p class="ar">زوّد فرص التجارب المحلية والدراسة بره البلد.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> طالب تمريض يقضي فصل دراسي في جامعة بره، أو في محافظة تانية.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">To be able to live in, and learn from, another culture or country presents unparalleled opportunity for rich experiences, reflections, and personal growth.</p>
+  <p class="ar">إنك تعيش وتتعلم من ثقافة أو بلد تانية دي فرصة مالهاش مثيل لتجارب غنية وتأمل في نفسك وتطور شخصي.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> بعد ما تعيش شهر في بلد تانية وتشوف إزاي بيتعاملوا مع المريض، هتبص لطريقة شغلك بشكل مختلف.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">There are few semester abroad experiences available for undergraduate nursing students, primarily because of curricular requirements and constraints.</p>
+  <p class="ar">فرص الفصل الدراسي بره البلد قليلة لطلبة التمريض في البكالوريوس، وده أساسًا بسبب متطلبات المنهج وقيوده.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> جدول الكلية مليان مواد وتدريب، فمفيش وقت فاضي يسمح للطالب يسافر فصل كامل.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">Partnering with other universities provide experiences for the students</p>
+  <p class="ar">التعاون مع جامعات تانية بيوفر الخبرات دي للطلبة.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> جامعتك تعمل اتفاق مع جامعة بره، وانت تروح تتدرب هناك فترة بدل ما تدوّر لوحدك.</div>
+</div>
+</div>
+<div class="card">
+<div class="letter" dir="ltr">e)</div>
+<div class="blk key">
+  <p class="en" dir="ltr">e) Create clinical immersion experiences:</p>
+  <p class="ar">اعمل تجارب انغماس إكلينيكي (clinical immersion)، يعني الطالب يعيش جوه بيئة مختلفة ويشتغل فيها فعلًا.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> طالب من مدينة كبيرة يقضي أسبوع يشتغل في قرية بعيدة.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">Students could be exposed to different cultures, health beliefs, and practices. Within their own country’s neighborhoods.</p>
+  <p class="ar">الطلبة ممكن يتعرضوا لثقافات ومعتقدات صحية وممارسات مختلفة، وده جوه أحياء بلدهم نفسها.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> يشوف إن في مجتمع معين الناس بتبدأ بالأعشاب الأول قبل ما تروح المستشفى.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">create 1-week intensives, whereby students can be paired with nurse leaders in another part of the country.</p>
+  <p class="ar">اعمل برامج مكثفة مدتها أسبوع، الطالب فيها يتجمع مع قادة تمريض في منطقة تانية في نفس البلد.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> طالبة من القاهرة تقضي أسبوع مع رئيسة تمريض في أسوان.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">They can working with them and be exposed to some of the issues that other cultures and communities are addressing.</p>
+  <p class="ar">الطلبة يشتغلوا مع القادة دول ويشوفوا المشاكل اللي الثقافات والمجتمعات التانية بتحاول تحلها.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> تشوف في أسوان مشاكل مختلفة عن القاهرة، زي بُعد الوحدات الصحية عن القرى.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">All of these options require creativity, strategic partnerships, careful planning, opportunities for exchange.</p>
+  <p class="ar">كل الاختيارات دي محتاجة إبداع وشراكات استراتيجية وتخطيط دقيق وفرص للتبادل.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> تنظيم رحلة جماعية مش بيحصل لوحده، لازم تتفق مع الناس وتخطط وتتبادلوا الأماكن.</div>
+</div>
+</div>
+<div class="card">
+<div class="letter" dir="ltr">f)</div>
+<div class="blk key">
+  <p class="en" dir="ltr">f) Expand RN completion programs:</p>
+  <p class="ar">وسّع برامج إكمال الـ RN (Registered Nurse – الممرض المسجل)، وهي برامج لناس معاهم شهادات في تخصصات تانية وعايزين يبقوا ممرضين.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> واحد خلّص كلية حقوق وعايز يبقى ممرض، فبيدخل برنامج مختصر بدل ما يبدأ من الأول.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">Students with degrees in other disciplines bring unique richness and experience to nursing.</p>
+  <p class="ar">الطلبة اللي معاهم شهادات في تخصصات تانية بيدخلوا التمريض بغنى وخبرة مميزة.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> خريج علم نفس هيفهم نفسية المريض بشكل أعمق وهو بيمارس التمريض.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">These students often come to nursing with interest in pursuing graduate studies and positioning themselves to be leaders in practice, research, education, and policy.</p>
+  <p class="ar">الطلبة دول غالبًا بييجوا للتمريض ومعاهم اهتمام يكملوا دراسات عليا ويبقوا قادة في الممارسة والبحث والتعليم والسياسات.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> خريج اقتصاد يدخل التمريض وطموحه يبقى مدير تمريض أو يشتغل في سياسات الصحة.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">These programs are typically intense and shorter than traditional entry-level nursing preparation, making them attractive to those making a career switch.</p>
+  <p class="ar">البرامج دي عادةً مكثفة وأقصر من برنامج التمريض العادي للمبتدئين، فبتجذب اللي بيغيروا مسار شغلهم.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> واحد عنده 30 سنة ومش عايز يقعد 4 سنين من الأول، فالبرنامج المختصر مناسب له.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">With diverse backgrounds ranging from anthropology and political science to law and religion, these students are poised to make significant contributions to nursing’s role in addressing the 2030 SDGs.</p>
+  <p class="ar">خلفياتهم متنوعة من الأنثروبولوجيا (علم الإنسان) والعلوم السياسية لحد القانون والدين، وكلهم جاهزين يساهموا مساهمات كبيرة في دور التمريض لتحقيق أهداف 2030.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> خريج علوم سياسية ممكن يساعد في كتابة سياسات صحية، وخريج قانون يساعد في حماية حقوق المرضى.</div>
+</div>
+</div>
+<div class="card">
+<div class="letter" dir="ltr">g)</div>
+<div class="blk key">
+  <p class="en" dir="ltr">g) Promote a broad concept of interprofessional education:</p>
+  <p class="ar">شجّع مفهوم أوسع للتعليم المشترك بين التخصصات، مش بس الطب والتمريض.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> التمريض يتعاون مع المهندسين، مش بس مع الدكاترة.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">Nursing faculty could work with faculty from any one of a number of fields or disciplines to create innovative programs of learning that yield new ways of thinking about health care and conceptualizing new solutions.</p>
+  <p class="ar">أعضاء هيئة تدريس التمريض ممكن يشتغلوا مع أعضاء هيئة تدريس من أي مجال، عشان يعملوا برامج تعليمية مبتكرة تطلّع طرق تفكير جديدة في الرعاية الصحية وحلول جديدة.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> دكتور تمريض مع دكتور هندسة يعملوا مادة مشتركة عن تصميم أسرّة ذكية للمرضى.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">Examples include engineering, architecture, design, agriculture, urban planning, social work, linguistics, and veterinary medicine.</p>
+  <p class="ar">من الأمثلة: الهندسة، العمارة، التصميم، الزراعة، تخطيط المدن، الخدمة الاجتماعية، اللغويات، والطب البيطري.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> مهندس معماري يساعد في تصميم قسم عناية بيقلل العدوى، وأخصائي لغويات يساعد في التواصل مع مرضى بلغات مختلفة.</div>
+</div>
+</div>
+<div class="card">
+<div class="letter" dir="ltr">h)</div>
+<div class="blk key">
+  <p class="en" dir="ltr">h) Look to new pathways for education and progression:</p>
+  <p class="ar">دوّر على طرق جديدة للتعليم والترقي.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> بدل ما الكل يمشي في طريق واحد، نفتح طرق جانبية توصل لنفس الهدف.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">Could a track be developed to encourage nursing assistants or community health workers to become registered nurses?</p>
+  <p class="ar">ممكن نعمل مسار يشجع مساعدي التمريض أو العاملين في صحة المجتمع إنهم يبقوا ممرضين مسجلين؟</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> مساعد تمريض بيشتغل من 10 سنين ياخد مسار يوصله لدرجة ممرض مسجل.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">Could license practical nurses be on a track for master’s degree preparation?</p>
+  <p class="ar">وممكن الممرض العملي المرخّص (licensed practical nurse) يبقى له مسار يجهزه للماجستير؟</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> ممرض بدبلوم يكمل لحد الماجستير من غير ما يبدأ من الصفر.</div>
+</div>
+</div>
+<div class="card">
+<div class="letter" dir="ltr">i)</div>
+<div class="blk key">
+  <p class="en" dir="ltr">i) Encourage doctoral nursing student research into, and engagement with, the 2030 SDGs:</p>
+  <p class="ar">شجّع طلبة دكتوراه التمريض إنهم يعملوا أبحاث ويشاركوا في أهداف 2030.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> طالب دكتوراه يعمل بحثه عن تأثير الفقر على صحة الأم.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">Encourage doctoral nursing student research into, and engagement with, the 2030 SDGs.</p>
+  <p class="ar">الجملة بتأكد نفس الفكرة: طلبة الدكتوراه لازم يتشجعوا يبحثوا في الـ SDGs ويشاركوا فيها.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> المشرف يقول لطالب الدكتوراه: اختار موضوع بحثك من حاجة تخدم أهداف 2030، فالطالب يختار موضوع عن المياه النظيفة والصحة.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">Technological advances and the offering of in-person, online, and hybrid models of doctoral nursing education support unprecedented opportunities for exposing students to global and interprofessional research.</p>
+  <p class="ar">التقدم التكنولوجي ووجود دكتوراه التمريض بشكل حضوري وأونلاين وهجين (hybrid – خليط الاتنين) بيدّي فرص غير مسبوقة إن الطلبة يتعرضوا لبحث عالمي ومشترك بين التخصصات.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> طالب دكتوراه في مصر بيحضر محاضرات أونلاين مع باحثين من أوروبا وأمريكا في نفس الوقت.</div>
+</div>
+</div>
+</section>
+<section class="sec" id="s2">
+<div class="sec-head"><div class="sec-num">2</div><h2 dir="ltr">Strategies in nursing workforce</h2></div>
+<div class="card head-card"><div class="blk key">
+  <p class="en" dir="ltr">2: Strategies in nursing workforce to achieve the 2030 SDGs: -</p>
+  <p class="ar">المجموعة التانية استراتيجيات خاصة بالممرضين اللي شغالين فعلًا (القوى العاملة).</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> بعد ما الطالب يتخرج ويشتغل، لازم نطوره وهو في الشغل، مش بس وهو في الكلية.</div>
+</div></div>
+<div class="card">
+<div class="letter" dir="ltr">a)</div>
+<div class="blk key">
+  <p class="en" dir="ltr">a) Increase interprofessional continuing development opportunities:</p>
+  <p class="ar">زوّد فرص التطوير المستمر المشتركة بين التخصصات (continuing development يعني تعليم مستمر بعد التخرج).</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> ورشة تدريب للممرضين والدكاترة والصيادلة مع بعض على بروتوكول جديد.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">Nurses work with other professions to promote health and deliver care to individuals and communities.</p>
+  <p class="ar">الممرضين بيشتغلوا مع مهن تانية عشان يعززوا الصحة ويقدموا الرعاية للأفراد والمجتمعات.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> ممرض بيشتغل مع أخصائي تغذية ودكتور في حالة سكر عشان يظبطوا خطة علاج المريض.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">Sexual assault nurse examiners join colleagues in medicine, advocacy, research, case management, law enforcement, and legal prosecution.</p>
+  <p class="ar">ممرضين فحص ضحايا الاعتداء الجنسي (Sexual assault nurse examiners) بيشتغلوا مع زمايل في الطب والدعم والبحث وإدارة الحالات وإنفاذ القانون والادعاء القانوني.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> ممرضة بتفحص ضحية وتوثق الأدلة، وبعدها تقريرها يروح للدكتور والشرطة والنيابة، فلازم كلهم يفهموا بعض.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">Benefits to collaborative educational opportunities include increasing respect for, and understanding of, each other in the context of the care being provided.</p>
+  <p class="ar">فايدة التعليم التعاوني إنه يزود الاحترام والفهم المتبادل بين التخصصات في سياق الرعاية اللي بتتقدم.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> لما الدكتور يحضر ورشة مع الممرضين، هيفهم صعوبة شغلهم ويحترمه أكتر.</div>
+</div>
+</div>
+<div class="card">
+<div class="letter" dir="ltr">b)</div>
+<div class="blk key">
+  <p class="en" dir="ltr">b) Expand e-Learning models using massive open online courses (MOOCs):</p>
+  <p class="ar">وسّع نماذج التعلم الإلكتروني باستخدام الكورسات المفتوحة الضخمة على الإنترنت (MOOCs)، يعني كورسات أونلاين بيحضرها ناس كتير.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> كورس أونلاين على الإنترنت عن العناية المركزة بتحضره من بيتك.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">MOOCs are of great value to nurses in practice for advancing practical knowledge.</p>
+  <p class="ar">الـ MOOCs ليها قيمة كبيرة للممرضين اللي شغالين في تطوير المعرفة العملية.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> ممرض في ICU ياخد كورس قصير عن قراءة تخطيط القلب يفيده في شغله.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">They elicit interest in working toward an advanced degree.</p>
+  <p class="ar">بتثير اهتمامهم إنهم يكملوا لدرجة علمية أعلى.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> بعد ما يخلص كورس أونلاين ويحبه، يقول: طب أعمل ماجستير في المجال ده.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">MOOCs offer opportunities for mutual learning across countries and continents.</p>
+  <p class="ar">الـ MOOCs بتدّي فرص تعلم متبادل بين الدول والقارات.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> ممرض مصري وممرضة من كندا في نفس الكورس بيتبادلوا خبراتهم.</div>
+</div>
+</div>
+<div class="card">
+<div class="letter" dir="ltr">c)</div>
+<div class="blk key">
+  <p class="en" dir="ltr">c) Promote the ability of nurses to practice at the top of their scopes of practice:</p>
+  <p class="ar">شجّع الممرضين إنهم يشتغلوا بأقصى حدود صلاحياتهم المهنية (scope of practice هو الأعمال المسموح قانونًا للممرض يعملها).</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> ممرض مؤهل مسموح له يعمل حاجات كتير بنفسه، بدل ما كل خطوة تستنى الدكتور.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">Coordinated efforts have been underway for several years in the U.S. to make sure advance practice nurses are able to practice with full practice authority, as Canadian Nurses Association, the Canada Association of Advanced Practice Nurses</p>
+  <p class="ar">في أمريكا في مجهودات منسقة بقالها سنين عشان الممرضين الممارسين المتقدمين (advanced practice nurses) يشتغلوا بسلطة ممارسة كاملة (full practice authority). وزي كده الجمعية الكندية للتمريض والجمعية الكندية للممرضين الممارسين المتقدمين.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> ممرضة متخصصة في القلب تقدر تفحص المريض وتبدأ له العلاج المناسب من غير ما تستنى توقيع على كل خطوة.</div>
+</div>
+</div>
+<div class="card">
+<div class="letter" dir="ltr">d)</div>
+<div class="blk key">
+  <p class="en" dir="ltr">d) Partner with persons receiving care and their families to ensure that care is personalized and fits the individual’s particular circumstances:</p>
+  <p class="ar">اشرك الشخص اللي بياخد الرعاية وأسرته عشان الرعاية تبقى مخصصة وتناسب ظروفه هو بالذات.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> مريض كبير عايش لوحده، تعمل له خطة رعاية في البيت تناسب ظروفه بدل خطة المستشفى العادية.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">In the Netherlands, an exquisite model of this is the Buurtzorg model of care (Dutch for “neighborhood care”).</p>
+  <p class="ar">في هولندا في نموذج ممتاز لده اسمه Buurtzorg (معناها بالهولندي: رعاية الحي).</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> بدل ما المريض يروح المستشفى، ممرضة من نفس الحي تيجي له البيت.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">Key components of this model include (1) using teams of highly skilled teams of professional nurses; (2) training patients and families in self-care; and (3) creating networks of neighborhood resources.</p>
+  <p class="ar">المكونات الأساسية للنموذج: (1) فرق من ممرضين محترفين مهرة جدًا، (2) تدريب المرضى وأسرهم على الرعاية الذاتية، (3) عمل شبكات من موارد الحي.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> ممرضة بتعلّم أسرة مريض السكر يقيسوا السكر ويدّوا الأنسولين، وفي نفس الوقت بتربطهم بالصيدلية القريبة والجيران اللي ممكن يساعدوهم.</div>
+</div>
+</div>
+<div class="card">
+<div class="letter" dir="ltr">e)</div>
+<div class="blk key">
+  <p class="en" dir="ltr">e) Promote healthy work environments:</p>
+  <p class="ar">شجّع بيئات عمل صحية.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> قسم فيه عدد ممرضين كفاية وإدارة بتسمع للممرضين، الشغل فيه بيبقى أحسن.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">The Magnet Recognition Program is one of the most extensive and well-known programs in the world.</p>
+  <p class="ar">برنامج Magnet Recognition واحد من أوسع البرامج وأشهرها في العالم.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> زي شهادة جودة معروفة عالميًا بتتاخد بعد ما المكان يحقق معايير معينة.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">It promotes environments that yield exquisite nursing care and optimal patient outcomes.</p>
+  <p class="ar">البرنامج بيشجع بيئات بتطلّع رعاية تمريضية ممتازة ونتايج مثالية للمرضى.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> مستشفى بيئتها محترمة للممرضين بيبقى فيها أخطاء أقل ومرضى مبسوطين أكتر.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">Cuba has been very supportive of the role of nurses in decision making.</p>
+  <p class="ar">كوبا كانت داعمة جدًا لدور الممرضين في اتخاذ القرار.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> الممرضة هناك لما تقول المريض ده محتاج ينتقل، رأيها بيتحسب في القرار.</div>
+</div>
+</div>
+<div class="card">
+<div class="letter" dir="ltr">f)</div>
+<div class="blk key">
+  <p class="en" dir="ltr">f) Increase the use of and collaboration with volunteers:</p>
+  <p class="ar">زوّد استخدام المتطوعين والتعاون معاهم.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> متطوعين بيساعدوا في قسم الأطفال بالألعاب والرعاية البسيطة.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">In many countries, volunteers expand the capacity of nurses to provide nursing care and help personalize that care.</p>
+  <p class="ar">في دول كتير المتطوعين بيوسّعوا قدرة الممرضين على تقديم الرعاية وبيساعدوا إن الرعاية تبقى شخصية أكتر.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> متطوع يقعد مع مريض كبير يتونس معاه، والممرض في الوقت ده يعمل مهامه الطبية.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">In addition to family members who provide care for their hospitalized relatives in many countries, volunteers are increasingly being sought to augment the nursing staff’s capabilities.</p>
+  <p class="ar">غير أفراد الأسرة اللي في دول كتير بيرعوا قرايبهم اللي في المستشفى، المتطوعين بيتطلبوا أكتر وأكتر عشان يزودوا قدرات طاقم التمريض.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> بنت قاعدة جنب أبوها المريض تساعده في الأكل، ومتطوعين تانيين بيساعدوا باقي المرضى.</div>
+</div>
+</div>
+</section>
+<section class="sec" id="s3">
+<div class="sec-head"><div class="sec-num">3</div><h2 dir="ltr">Strategies in nursing research</h2></div>
+<div class="card head-card"><div class="blk key">
+  <p class="en" dir="ltr">3: Strategies in nursing research to achieve the 2030 SDGs:-</p>
+  <p class="ar">المجموعة التالتة استراتيجيات في مجال البحث التمريضي.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> البحث بيجمع أدلة تثبت إن الحلول فعلًا شغالة، زي ما بتجمع معلومات قبل ما تاخد قرار مهم.</div>
+</div></div>
+<div class="card">
+<div class="letter" dir="ltr">a)</div>
+<div class="blk key">
+  <p class="en" dir="ltr">a) Increase interprofessional research:</p>
+  <p class="ar">زوّد الأبحاث المشتركة بين التخصصات.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> بحث بيشارك فيه ممرض ودكتور وأخصائي اجتماعي عن التدخين.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">Nurses are positioned to contribute to diverse research agendas and projects that target the 2030 SDGs.</p>
+  <p class="ar">الممرضين في موضع يسمح لهم يساهموا في أجندات ومشاريع بحثية متنوعة بتستهدف أهداف 2030.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> ممرض يشارك في مشروع بحثي عن المياه النظيفة والأمراض مع مهندس بيئة.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">Research addressing the health of individuals and communities.</p>
+  <p class="ar">أبحاث بتتناول صحة الأفراد والمجتمعات.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> دراسة عن السمنة في طلبة الجامعة، ودراسة عن انتشار الأنيميا في حي معين.</div>
+</div>
+</div>
+<div class="card">
+<div class="letter" dir="ltr">b)</div>
+<div class="blk key">
+  <p class="en" dir="ltr">b) Establish international research partnerships:</p>
+  <p class="ar">أسس شراكات بحثية دولية.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> جامعة مصرية وجامعة أجنبية يعملوا بحث مشترك.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">Partnerships across boundaries provide fruitful opportunities for innovation and action, whether the boundaries are interprofessional, international, crosssector (eg, governmental or nongovernmental, private, or public), or ideological.</p>
+  <p class="ar">الشراكات عبر الحدود بتدّي فرص مثمرة للابتكار والعمل، سواء الحدود دي بين التخصصات أو الدول أو القطاعات (حكومي أو غير حكومي، خاص أو عام) أو حتى بين الأفكار والمعتقدات.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> مستشفى حكومي مع شركة خاصة مع جامعة بره يعملوا مشروع مشترك.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">Obviously, when there are shared perspectives, collaborative partnerships can yield significant results.</p>
+  <p class="ar">طبيعي إنه لما يبقى في وجهات نظر مشتركة، الشراكات التعاونية ممكن تطلّع نتايج كبيرة.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> فريقين متفقين على نفس الهدف بيخلصوا شغلهم أحسن وأسرع من فريقين مختلفين على كل حاجة.</div>
+</div>
+</div>
+<div class="card">
+<div class="letter" dir="ltr">c)</div>
+<div class="blk key">
+  <p class="en" dir="ltr">c) Develop lines of nursing research explicitly addressing the 2030 SDGs:</p>
+  <p class="ar">طوّر خطوط بحثية في التمريض بتتناول أهداف 2030 بشكل صريح وواضح.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> الجامعة تحدد محور بحثي اسمه التمريض والتنمية المستدامة بدل ما كل باحث يختار موضوع عشوائي.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">In the United States (and likely other countries), there is a need for the nursing research agenda to expand to explicitly include the 2030 SDGs.</p>
+  <p class="ar">في أمريكا (وغالبًا في دول تانية) في احتياج إن أجندة البحث التمريضي تتوسع وتشمل أهداف 2030 بشكل صريح.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> قايمة أولويات البحث في الجامعة فيها بشكل واضح موضوع الجوع وسوء التغذية.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">Funding agencies are encouraged to consider the ways in which their agendas might reward nurse researchers who are leading interprofessional inquiries and addressing the 2030 SDGs.</p>
+  <p class="ar">جهات التمويل متشجعة تفكر إزاي أجنداتها ممكن تكافئ الباحثين الممرضين اللي بيقودوا أبحاث مشتركة بين التخصصات وبيتناولوا أهداف 2030.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> منحة بحثية بتدّي أولوية للمشروع اللي بيخدم هدف صحة الأم والطفل.</div>
+</div>
+</div>
+<div class="card">
+<div class="letter" dir="ltr">d)</div>
+<div class="blk key">
+  <p class="en" dir="ltr">d) Advance use of technological innovations, including wearables, spatial tools:</p>
+  <p class="ar">طوّر استخدام الابتكارات التكنولوجية، منها الأجهزة القابلة للارتداء (wearables) والأدوات المكانية (spatial tools).</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> ساعة ذكية بتقيس نبضك وخطواتك.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">Smartphones offer unprecedented potential for personal and professional use of devices.</p>
+  <p class="ar">الموبايلات الذكية بتدّي إمكانيات غير مسبوقة للاستخدام الشخصي والمهني للأجهزة.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> تطبيق على الموبايل بتسجل فيه ضغط المريض بدل الورقة.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">Wearable devices are becoming increasingly common.</p>
+  <p class="ar">الأجهزة القابلة للارتداء بقت منتشرة أكتر وأكتر.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> ناس كتير بقت تلبس سمارت ووتش كل يوم.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">They are designed to promote self-monitoring of behaviors such as sleep, physical activity, and nutritional consumption.</p>
+  <p class="ar">الأجهزة دي مصممة تشجع المراقبة الذاتية لسلوكيات زي النوم والنشاط البدني والاستهلاك الغذائي.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> الساعة تبعتلك إشعار إنك نمت 4 ساعات بس، فتفكر تنام بدري.</div>
+</div>
+</div>
+<div class="card">
+<div class="letter" dir="ltr">e)</div>
+<div class="blk key">
+  <p class="en" dir="ltr">e) Incorporate research design and methodological innovations, including ecological momentary assessment (EMA) and sequential multiple assignment randomized trial (SMART) trials:</p>
+  <p class="ar">ادمج ابتكارات في تصميم البحث ومنهجيته، منها التقييم اللحظي في البيئة الطبيعية (EMA) وتجارب SMART (التجارب العشوائية متعددة التخصيص المتسلسل).</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> بدل ما تسأل المريض آخر الأسبوع: كنت عامل إيه؟ تسأله كذا مرة في اليوم على موبايله.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">Advances in the ways we are able to conduct research and gain insights must be incorporated in nursing research.</p>
+  <p class="ar">التطورات في طرق إجراء البحث واكتساب الرؤى لازم تدخل في البحث التمريضي.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> زي ما المستشفيات بقت تستخدم السجلات الإلكترونية بدل الورق.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">These include EMA and real-time data collection of mood, behaviors, risk factors, and more.</p>
+  <p class="ar">ومنها EMA وجمع بيانات في نفس اللحظة (real-time) عن المزاج والسلوكيات وعوامل الخطر وغيرها.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> تطبيق يسألك كل كام ساعة: مزاجك إيه دلوقتي؟ ويسجل إجابتك فورًا.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">Large amounts of longitudinal data can be gathered with minimal participant burden and high return on investment.</p>
+  <p class="ar">ممكن نجمع كميات كبيرة من بيانات طولية (longitudinal، يعني على فترة طويلة) بأقل عبء على المشاركين وعائد كبير على الاستثمار.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> المشارك بيجاوب في 10 ثواني كل مرة، والباحث في الآخر بيطلع بآلاف الإجابات.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">Smartphone applications exist to facilitate secure EMA data collection that is in accordance with institutional review board protections, as well as user-friendly.</p>
+  <p class="ar">في تطبيقات موبايل بتسهّل جمع بيانات EMA بشكل آمن وبما يتوافق مع حماية لجنة مراجعة أخلاقيات البحث (institutional review board)، وكمان سهلة الاستخدام.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> بيانات المريض بتتحفظ بكلمة سر وبتتشاف للباحث بس، والمريض بيستخدم التطبيق بسهولة.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">Nursing intervention research will mature toward adaptive intervention research, in prevention and treatment areas of interest, with greater potential for optimizing outcomes, efficiency, and impact.</p>
+  <p class="ar">بحوث التدخلات التمريضية هتنضج ناحية بحوث التدخل التكيفي (adaptive)، في مجالات الوقاية والعلاج، وده بيدّي فرصة أكبر لتحسين النتايج والكفاءة والتأثير.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> لو مريض مش بيستجيب لخطة معينة بعد أسبوعين، التدخل يتعدل بدل ما يكمل على نفس الخطة الفاشلة.</div>
+</div>
+</div>
+<div class="card">
+<div class="letter" dir="ltr">f)</div>
+<div class="blk key">
+  <p class="en" dir="ltr">f) Promote diverse research teams that include a blend of students:</p>
+  <p class="ar">شجّع فرق بحثية متنوعة فيها خليط من الطلبة.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> فريق بحث فيه طلبة من مستويات دراسية مختلفة.</div>
+</div><div class="blk">
+  <p class="en" dir="ltr">Some examples of this include the following:</p>
+  <p class="ar">دي أمثلة على الكلام ده.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> زي ما المدرس يقول: هديكم أمثلة، والنقط الجاية هي الأمثلة نفسها.</div>
+</div><div class="blk sub">
+  <p class="en" dir="ltr">❖ Nursing students pursuing the DNP (doctor of nursing practice) with those pursuing the PhD.</p>
+  <p class="ar">طلبة التمريض اللي بيدرسوا DNP (دكتوراه الممارسة التمريضية) مع اللي بيدرسوا PhD (دكتوراه البحث العلمي).</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> طالب DNP شغال في الممارسة الفعلية، وطالب PhD مهتم بالنظريات، بيشتغلوا مع بعض.</div>
+</div><div class="blk sub">
+  <p class="en" dir="ltr">Together, they can examine the science underpinning a particular phenomenon while they create innovative solutions for real-world problems.</p>
+  <p class="ar">مع بعض يقدروا يفحصوا العلم اللي ورا ظاهرة معينة، وفي نفس الوقت يطلعوا حلول مبتكرة لمشاكل حقيقية.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> الـ PhD يفسر ليه المرضى بينسوا ياخدوا الدوا، والـ DNP يصمم تطبيق تذكير بالدوا.</div>
+</div><div class="blk sub">
+  <p class="en" dir="ltr">❖ Undergraduate students working with doctoral and postdoctoral students to offer insights from different levels into the problem being examined, while exposing more junior students to the research process.</p>
+  <p class="ar">طلبة البكالوريوس يشتغلوا مع طلبة الدكتوراه وما بعد الدكتوراه عشان يقدموا رؤى من مستويات مختلفة للمشكلة المدروسة، وفي نفس الوقت الطلبة الأصغر يتعرفوا على عملية البحث.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> طالب سنة تالتة يساعد في جمع البيانات ويتعلم يعمل استبيان من الباحث الأكبر.</div>
+</div><div class="blk sub">
+  <p class="en" dir="ltr">❖ Community members engaging in academic research projects to bring the subject’s voice into the project, while ensuring a meaningful informed consent process and actionable research outcomes.</p>
+  <p class="ar">أفراد من المجتمع يشاركوا في المشاريع البحثية الأكاديمية عشان صوت صاحب الموضوع يدخل في المشروع، مع ضمان موافقة مستنيرة (informed consent) ذات معنى ونتائج بحث تتحول لخطوات عملية.</p>
+  <div class="ex"><span class="ex-l">عشان تفهمها:</span> في بحث عن مرضى السكر، مريض سكر يقعد في الفريق يقول احتياجات المرضى الحقيقية، ويوافق على المشاركة بعد ما يفهم كل حاجة.</div>
+</div>
+</div>
+</section>
+</main>
+
+<footer>
+  <div class="footer-brand">GHAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" rel="noopener" class="footer-tg"><i class="fa-brands fa-telegram"></i> @nursing2bu</a>
+</footer>
+
+<script>
+const themeBtn = document.getElementById('themeBtn');
+let theme = 'light';
+try { theme = localStorage.getItem('theme') || 'light'; } catch(e) {}
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  try { localStorage.setItem('theme', t); } catch(e) {}
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+const bar = document.getElementById('prog-bar');
+function onScroll() {
+  const h = document.documentElement.scrollHeight - innerHeight;
+  bar.style.width = (h > 0 ? scrollY / h * 100 : 0) + '%';
+}
+addEventListener('scroll', onScroll, {passive:true}); onScroll();
+</script>
+</body>
+</html>
