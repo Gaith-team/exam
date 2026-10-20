@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Food Safety and Sanitation | GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --accent:#15803d; --accent-light:#4ade80; --accent-dark:#14532d; --accent-rgb:21,128,61;
+  --c2:#ea580c; --c3:#ca8a04; --c4:#be185d;
+  --grad:linear-gradient(135deg,#14532d 0%,#15803d 40%,#65a30d 75%,#ea580c 100%);
+  --grad-soft:linear-gradient(135deg,#15803d,#65a30d);
+  --bg:#f6faf5; --bg2:#eaf3e7; --card:#ffffff; --text:#14231a; --text2:#3f5546; --text3:#738a7a;
+  --bc:rgba(20,60,30,0.10); --r:16px; --tr:all .3s cubic-bezier(.4,0,.2,1);
+}
+[data-theme="dark"] {
+  --bg:#0b140e; --bg2:#111e15; --card:#16261b; --text:#e8f5ec; --text2:#b8d2c0; --text3:#7f9a88;
+  --bc:rgba(255,255,255,0.09); --accent:#4ade80; --accent-rgb:74,222,128; --c2:#fb923c; --c3:#facc15; --c4:#f472b6;
+}
+html { scroll-behavior:smooth; }
+body { font-family:'Outfit','Cairo',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; overflow-x:hidden; transition:background .4s,color .4s; }
+#prog-bar { position:fixed; top:0; left:0; height:3px; width:0; z-index:999; background:linear-gradient(90deg,var(--accent),var(--c3),var(--c2),var(--c4)); }
+nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:0 28px; height:64px; background:rgba(246,250,245,.93); backdrop-filter:blur(16px); border-bottom:1px solid var(--bc); }
+[data-theme="dark"] nav { background:rgba(11,20,14,.95); }
+.nav-back { display:flex; align-items:center; gap:7px; color:var(--text2); text-decoration:none; font-size:13px; font-weight:700; padding:7px 13px; border-radius:8px; border:1px solid var(--bc); background:var(--card); transition:var(--tr); font-family:'Cairo',sans-serif; }
+.nav-back:hover { color:var(--c2); border-color:var(--c2); }
+.nav-brand { display:flex; align-items:center; gap:9px; font-size:15px; font-weight:900; }
+.nav-logo-icon { width:34px; height:34px; border-radius:8px; background:var(--grad-soft); display:flex; align-items:center; justify-content:center; color:#fff; font-size:12px; font-weight:900; }
+.theme-btn { width:38px; height:38px; border-radius:50%; border:1px solid var(--bc); background:var(--card); cursor:pointer; font-size:15px; transition:var(--tr); }
+.theme-btn:hover { border-color:var(--c3); transform:rotate(20deg); }
+.hero-band { margin-top:64px; background:var(--grad); padding:40px 24px 44px; text-align:center; position:relative; overflow:hidden; }
+.hero-band::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 380px 180px at 12% 0%,rgba(250,204,21,.28),transparent 70%),radial-gradient(ellipse 600px 200px at 50% 100%,rgba(234,88,12,.25),transparent 70%); }
+.hero-band > * { position:relative; }
+.hero-icon { width:68px; height:68px; border-radius:20px; background:rgba(255,255,255,.18); display:flex; align-items:center; justify-content:center; font-size:32px; margin:0 auto 14px; border:1.5px solid rgba(255,255,255,.35); }
+.hero-band h1 { font-size:clamp(20px,4vw,30px); font-weight:900; color:#fff; margin-bottom:6px; }
+.hero-band p { font-size:13px; color:rgba(255,255,255,.88); }
+.shell { max-width:760px; margin:0 auto; padding:24px 18px 80px; }
+.toc { background:var(--card); border:1px solid var(--bc); border-radius:var(--r); padding:14px; margin-bottom:22px; display:flex; flex-wrap:wrap; gap:8px; justify-content:center; }
+.toc a { text-decoration:none; font-size:12px; font-weight:700; color:var(--text2); padding:7px 12px; border-radius:50px; border:1px solid var(--bc); background:var(--bg); transition:var(--tr); }
+.toc a:hover { color:#fff; background:var(--accent); border-color:var(--accent); }
+.sec { margin-bottom:26px; scroll-margin-top:80px; }
+.sec-head { background:var(--grad); color:#fff; border-radius:18px 18px 0 0; padding:16px 20px; font-size:17px; font-weight:900; text-align:left; direction:ltr; }
+.sec-body { background:var(--card); border:1px solid var(--bc); border-top:none; border-radius:0 0 18px 18px; padding:8px 18px 18px; box-shadow:0 4px 20px rgba(20,90,40,.07); }
+.sub { margin:22px 0 4px; font-size:14px; font-weight:900; color:var(--accent); direction:ltr; text-align:left; display:flex; align-items:center; gap:8px; }
+.sub::before { content:''; width:6px; height:20px; border-radius:4px; background:var(--c2); }
+.item { margin-top:14px; border:1px solid var(--bc); border-radius:14px; overflow:hidden; background:var(--bg); }
+.en { padding:13px 16px; font-size:15px; font-weight:700; line-height:1.65; direction:ltr; text-align:left; border-left:4px solid var(--accent); }
+.ar { padding:12px 16px; font-family:'Cairo',sans-serif; font-size:14.5px; line-height:1.9; direction:rtl; text-align:right; color:var(--text2); background:rgba(var(--accent-rgb),.06); border-top:1px dashed var(--bc); }
+.ex { padding:12px 16px; font-family:'Cairo',sans-serif; font-size:14px; line-height:1.9; direction:rtl; text-align:right; color:var(--text2); background:rgba(234,88,12,.07); border-top:1px dashed var(--bc); }
+.ex b { color:var(--c2); font-weight:900; }
+.lead { margin-top:14px; padding:2px 4px; direction:ltr; text-align:left; }
+.lead .en { border:none; padding:6px 0 0; font-size:14.5px; color:var(--text); }
+.lead .ar { background:none; border:none; padding:0 0 4px; font-size:13.5px; }
+footer { background:var(--bg2); border-top:1px solid var(--bc); padding:22px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+.footer-brand { font-size:14px; font-weight:700; } .footer-brand span { color:var(--accent); }
+.footer-tg { display:flex; align-items:center; gap:5px; text-decoration:none; color:#229ED9; font-size:12px; font-weight:600; }
+@media (max-width:480px) { nav{padding:0 14px;} .nav-brand span{display:none;} .shell{padding:16px 12px 60px;} .en{font-size:14px;} }
+</style>
+</head>
+<body>
+<div id="prog-bar"></div>
+<nav>
+  <a href="https://gaith-team.github.io/exam/" class="nav-back"><i class="fa-solid fa-arrow-right"></i> رجوع</a>
+  <div class="nav-brand"><div class="nav-logo-icon">GT</div><span>GHAITH TEAM</span></div>
+  <button class="theme-btn" id="themeBtn">🌙</button>
+</nav>
+<div class="hero-band">
+  <div class="hero-icon">🥗</div>
+  <h1>Food Safety and Sanitation</h1>
+  <p>Applied Nutrition</p>
+</div>
+<div class="shell">
+  <div class="toc" id="toc"></div>
+  <div id="content"></div>
+</div>
+<footer>
+  <div class="footer-brand">GHAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg"><i class="fa-brands fa-telegram"></i> @nursing2bu</a>
+</footer>
+<script>
+/* s = subheading | l = lead-in line (no example) | [en, ar, ex] = point */
+const DATA = [
+{ h:"1. Introduction to Food Safety", items:[
+ {s:"Food Safety"},
+ ["Food safety refers to the practices and conditions needed to prevent food from becoming contaminated and causing illness when it is prepared, stored, handled, or consumed.",
+  "سلامة الغذاء معناها الإجراءات والظروف اللي لازم تتعمل عشان الأكل ميتلوثش وميعملش مرض وقت ما بيتحضّر أو بيتخزّن أو بيتم التعامل معاه أو بيتاكل.",
+  "لو خزّنت الفراخ في التلاجة وطبختها كويس وغسلت إيدك قبل وبعد، تبقى حميت الأكل من التلوث، وده معنى سلامة الغذاء."],
+ ["Food safety is important because contaminated food may contain bacteria, viruses, parasites, chemicals, or toxins that can cause foodborne diseases.",
+  "سلامة الغذاء مهمة لأن الأكل الملوث ممكن يكون فيه بكتيريا أو فيروسات أو طفيليات أو مواد كيميائية أو سموم، وكلها بتسبب أمراض بتنتقل عن طريق الأكل.",
+  "واحد أكل سندوتش من عربية واقفة في الشمس وبعدها جاله إسهال وترجيع، السبب إن الأكل كان فيه بكتيريا."],
+ {s:"Food Hygiene"},
+ ["Food hygiene refers to the practices used to maintain cleanliness and prevent contamination of food throughout preparation, handling, storage, and serving.",
+  "نظافة الغذاء معناها الممارسات اللي بتحافظ على النضافة وبتمنع تلوث الأكل في كل مراحل التحضير والتعامل والتخزين والتقديم.",
+  "الطباخ اللي بيغسل الأدوات ولابس غطا شعر ونضيف في كل خطوة، بيطبّق نظافة الغذاء."],
+ {s:"Importance of Food Safety"},
+ ["Prevent foodborne diseases.","بتمنع الأمراض اللي بتنتقل عن طريق الأكل.","لما المطبخ نضيف والأكل متخزن صح، محدش في البيت بيتسمم."],
+ ["Protect vulnerable individuals from food-related illness.","بتحمي الناس الأضعف مناعة من المرض اللي بيجي من الأكل.","طفل صغير أو جدّة كبيرة في السن لو أكلوا أكل ملوث، تعبهم بيبقى أخطر من الشخص السليم."],
+ ["Maintain the quality and safety of food.","بتحافظ على جودة الأكل وأمانه.","اللبن اللي اتحط في التلاجة فورًا بيفضل طعمه كويس وآمن، واللي اتساب برا بيبوظ."],
+ ["Reduce contamination during food preparation and storage.","بتقلل التلوث وقت تحضير الأكل وتخزينه.","لما تغطي الأكل المتبقي وتحطه في التلاجة، التلوث بيقل."],
+ ["Protect consumers in homes, restaurants, hospitals, and other foodservice settings.","بتحمي المستهلكين في البيوت والمطاعم والمستشفيات وأي مكان بيقدم أكل.","وجبة المريض في المستشفى لازم تتحضّر بنفس الحرص زي وجبة المطعم والبيت."],
+ ["Food safety is a shared responsibility among food producers, food handlers, food-service establishments, and consumers.",
+  "سلامة الغذاء مسؤولية مشتركة بين اللي بينتجوا الأكل واللي بيتعاملوا معاه والمنشآت اللي بتقدمه والمستهلكين.",
+  "المزارع يزرع في مياه نضيفة، والبياع يخزن صح، والطباخ يطبخ كويس، وانت في البيت تحفظه صح، لو واحد قصّر السلسلة كلها بتتأثر."]
+]},
+{ h:"2. Food Hazards and Contamination", items:[
+ ["A food hazard is a biological, chemical, or physical agent in food that has the potential to cause an adverse health effect.",
+  "الخطر الغذائي هو أي عامل بيولوجي أو كيميائي أو فيزيائي موجود في الأكل ممكن يسبب ضرر للصحة.",
+  "ميكروب في الفراخ أو مبيد في الخضار أو حتة إزاز في الأكل، كلهم أخطار غذائية."],
+ {s:"Main Types of Food Hazards"},
+ ["Biological hazards: Bacteria, viruses, parasites, and some fungi",
+  "الأخطار البيولوجية: بكتيريا وفيروسات وطفيليات وبعض الفطريات.",
+  "بكتيريا السالمونيلا في البيض النيء خطر بيولوجي."],
+ ["Chemical hazards: Pesticide residues, cleaning chemicals, toxins, and excessive levels of some contaminants",
+  "الأخطار الكيميائية: بقايا المبيدات ومواد التنظيف والسموم والمستويات الزايدة من بعض الملوثات.",
+  "لو الخضار اتأكل من غير غسيل وفيه بقايا مبيد، ده خطر كيميائي."],
+ ["Physical hazards: Glass, metal pieces, stones, or other foreign objects",
+  "الأخطار الفيزيائية: إزاز أو حتت معدن أو زلط أو أي أجسام غريبة.",
+  "لقيت حتة حجر صغيرة في الأرز وانت بتاكل، ده خطر فيزيائي."],
+ {s:"Food Contamination"},
+ ["Food contamination occurs when harmful microorganisms, chemicals, toxins, or foreign materials enter food and make it unsafe.",
+  "تلوث الأكل بيحصل لما ميكروبات ضارة أو مواد كيميائية أو سموم أو أجسام غريبة تدخل الأكل وتخليه مش آمن.",
+  "قطرة من مادة تنظيف وقعت في الأكل وهو بيتحضّر، يبقى الأكل اتلوث."],
+ ["Contamination can occur at different stages, including production, transportation, storage, preparation, and serving.",
+  "التلوث ممكن يحصل في مراحل مختلفة: الإنتاج والنقل والتخزين والتحضير والتقديم.",
+  "الأكل ممكن يتلوث في المزرعة، أو في العربية اللي بتنقله، أو في التلاجة، أو في المطبخ، أو حتى على السفرة."],
+ {s:"Sources of Contamination"},
+ ["Contaminated raw foods.","الأكل النيء الملوث.","فراخ نيّة جاية من السوق وفيها ميكروبات."],
+ ["Unsafe water.","المياه الغير آمنة.","غسلت الخضار بمية مش نضيفة، فنقلت لها الميكروبات."],
+ ["Unclean hands.","الأيدي الغير نضيفة.","واحد شاف الأكل بإيد مغسلتهاش بعد الحمام."],
+ ["Contaminated utensils and food-contact surfaces.","الأدوات والأسطح اللي بتلمس الأكل لو كانت ملوثة.","سكينة اتقطع بيها لحمة نيّة واتقطع بيها عيش من غير غسيل."],
+ ["Improper food storage.","التخزين الغلط للأكل.","سيبت الأرز المطبوخ برا التلاجة طول الليل."],
+ ["Inadequate cooking.","الطبخ الغير كافي.","فراخ طلعت من الفرن وهي لسه نيّة من جوه."],
+ ["Insects, pests, and animals.","الحشرات والآفات والحيوانات.","دبانة وقفت على الأكل المكشوف ونقلت له ميكروبات."],
+ ["Contact between raw and ready-to-eat foods.","الاحتكاك بين الأكل النيء والأكل الجاهز للأكل.","لحمة نيّة اتحطت في نفس الطبق اللي هيتحط فيه السلطة."],
+ {s:"Cross-Contamination"},
+ ["Cross-contamination occurs when microorganisms or other contaminants are transferred from one food, surface, utensil, or person's hands to another food.",
+  "التلوث المتقاطع بيحصل لما الميكروبات أو الملوثات تنتقل من أكل أو سطح أو أداة أو إيد شخص لأكل تاني.",
+  "إيدك لمست فراخ نيّة وبعدها مسكت الخيار من غير ما تغسلها، كده نقلت الميكروب للخيار."],
+ ["For example, using the same cutting board for raw chicken and salad without proper cleaning can transfer microorganisms to the salad.",
+  "مثلًا استخدام نفس لوح التقطيع للفراخ النيّة والسلطة من غير تنضيف كويس ممكن ينقل الميكروبات للسلطة.",
+  "قطعت الفراخ على الخشبة وبعدها قطعت الطماطم عليها من غير ما تغسلها، السلطة بقت ملوثة."],
+ {l:["Cross-contamination can be prevented by:","التلوث المتقاطع ممكن نمنعه عن طريق:"]},
+ ["Keeping raw foods separate from ready-to-eat foods.","نفصل الأكل النيء عن الأكل الجاهز للأكل.","نحط الفراخ النيّة في كيس لوحدها بعيد عن الفاكهة."],
+ ["Using clean utensils and surfaces.","نستخدم أدوات وأسطح نضيفة.","نغسل السكينة والخشبة بالمية والصابون قبل ما نستخدمهم تاني."],
+ ["Washing hands after handling raw meat, poultry, seafood, eggs, or other potentially contaminated foods.","نغسل إيدينا بعد ما نمسك اللحمة النيّة أو الفراخ أو السمك أو البيض أو أي أكل ممكن يكون ملوث.","بعد ما تكسر البيض اغسل إيدك قبل ما تمسك أي حاجة تانية."],
+ ["Storing raw foods appropriately so that their juices cannot contaminate other foods.","نخزّن الأكل النيء صح عشان عصارته متنقّطش على أكل تاني.","نحط اللحمة النيّة في تحت التلاجة في طبق مغطى، عشان لو نزل منها سايل ميوقعش على الخضار."]
+]},
+{ h:"3. Foodborne Illness", items:[
+ {s:"Definition"},
+ ["A foodborne illness is an illness caused by consuming food or beverages contaminated with harmful microorganisms, chemicals, or toxins.",
+  "المرض المنقول بالغذاء هو مرض بيحصل من أكل أو شرب حاجة ملوثة بميكروبات ضارة أو مواد كيميائية أو سموم.",
+  "واحد شرب عصير مكشوف ملوث وبعدها تعب وجاله مغص، ده مرض منقول بالغذاء."],
+ ["Foodborne diseases may result from bacteria, viruses, parasites, chemicals, or toxins.",
+  "الأمراض المنقولة بالغذاء ممكن تيجي من بكتيريا أو فيروسات أو طفيليات أو مواد كيميائية أو سموم.",
+  "التسمم من بكتيريا في اللحمة حاجة، والتسمم من مبيد في الخضار حاجة تانية، بس الاتنين مرض منقول بالغذاء."],
+ {s:"Common Symptoms"},
+ ["Symptoms vary according to the causative agent but may include:",
+  "الأعراض بتختلف حسب المسبب، بس ممكن تشمل:",
+  "التسمم من نوع بكتيريا ممكن يبدأ بترجيع، ومن نوع تاني بإسهال، حسب الميكروب."],
+ ["Nausea.","الغثيان.","تحس إن معدتك مقلوبة وعايز تترجّع."],
+ ["Vomiting.","القيء.","ترجّع الأكل اللي أكلته."],
+ ["Abdominal pain or cramps.","ألم أو مغص في البطن.","تحس بلف ومغص جامد في بطنك."],
+ ["Diarrhea.","الإسهال.","تدخل الحمام كذا مرة ورا بعض."],
+ ["Fever.","الحمّى.","حرارتك تعلى بعد الأكل بساعات."],
+ ["Weakness or dehydration.","الضعف أو الجفاف.","بعد إسهال وترجيع كتير، جسمك يفقد مية وتحس بوهن وفمّك ينشف."],
+ {s:"People at Greater Risk"},
+ ["Some individuals are more vulnerable to serious complications from foodborne illness, including:",
+  "فيه ناس أكتر عرضة لمضاعفات خطيرة من المرض المنقول بالغذاء، منهم:",
+  "نفس الأكل الملوث ممكن يخلي شخص سليم يتعب يوم، ويخلي شخص ضعيف المناعة يتعب أسبوع."],
+ ["Infants and young children.","الرضع والأطفال الصغار.","طفل عنده سنة لو جاله إسهال بيجف بسرعة."],
+ ["Older adults.","كبار السن.","جدّتك مناعتها أضعف، فالتسمم عندها أخطر."],
+ ["Pregnant women.","الحوامل.","الست الحامل لازم تاخد بالها أكتر من الأكل النيء."],
+ ["People with weakened immune systems.","الناس اللي مناعتها ضعيفة.","مريض بياخد علاج بيضعف المناعة، جسمه مش قادر يقاوم الميكروب بسهولة."],
+ ["Individuals with certain chronic diseases.","الأشخاص اللي عندهم أمراض مزمنة معينة.","مريض مزمن جسمه أصلًا متعب، فأي تسمم بيضغط عليه أكتر."],
+ ["Therefore, greater care is required when preparing and serving food for these groups.",
+  "عشان كده لازم نكون أحرص أكتر وإحنا بنحضّر ونقدم الأكل للفئات دي.",
+  "لما تعمل أكل لطفل أو مريض، اطبخه كويس جدًا وقدّمه طازة."]
+]},
+{ h:"4. Personal Hygiene and Safe Food Handling", items:[
+ ["Personal hygiene is an important part of food safety because food handlers can transfer microorganisms to food through their hands, clothing, or other forms of contact.",
+  "النظافة الشخصية جزء مهم من سلامة الغذاء لأن اللي بيتعامل مع الأكل ممكن ينقل الميكروبات للأكل من إيديه أو هدومه أو أي تلامس تاني.",
+  "طباخ هدومه مش نضيفة ومسك بيها الأكل، ممكن ينقل الميكروبات من غير ما يحس."],
+ {s:"Important Personal Hygiene Practices"},
+ {l:["Food handlers should:","اللي بيتعامل مع الأكل لازم:"]},
+ ["Wash hands thoroughly with soap and water before preparing or serving food.","يغسل إيديه كويس بالمية والصابون قبل ما يحضّر أو يقدّم الأكل.","قبل ما تبدأ تعمل الغدا، افتح الحنفية واغسل إيدك بالصابون كويس."],
+ ["Wash hands after using the toilet and after handling raw foods.","يغسل إيديه بعد استخدام الحمام وبعد التعامل مع الأكل النيء.","خرجت من الحمام أو مسكت لحمة نيّة، اغسل إيدك قبل ما تمسك أي حاجة."],
+ ["Keep fingernails clean.","يحافظ على نضافة الضوافر.","الضوافر الطويلة المتسخة بتخبّي ميكروبات تحتها."],
+ ["Cover cuts or wounds appropriately.","يغطي الجروح بشكل مناسب.","لو في جرح في صباعك، حط عليه بلاستر وجوانتي قبل ما تمسك الأكل."],
+ ["Avoid handling food when experiencing symptoms such as vomiting or diarrhea.","يتجنب التعامل مع الأكل لما يكون عنده أعراض زي الترجيع أو الإسهال.","لو عندك إسهال النهارده، متطبخش للناس لحد ما تخف."],
+ ["Keep hair and clothing clean and appropriately controlled during food preparation.","يحافظ على نضافة الشعر والهدوم ويتحكم فيهم وقت تحضير الأكل.","اربط شعرك أو البس غطا ولبس نضيف وانت بتطبخ."],
+ ["Avoid unnecessary touching of ready-to-eat foods with bare hands.","يتجنب لمس الأكل الجاهز للأكل بإيد عريانة من غير داعي.","بدل ما تمسك السلطة بإيدك، استخدم ملقاط أو معلقة."],
+ ["Hand hygiene is particularly important because microorganisms can easily be transferred from hands to food, utensils, and surfaces.",
+  "نظافة الإيدين مهمة جدًا لأن الميكروبات بتنتقل بسهولة من الإيد للأكل والأدوات والأسطح.",
+  "إيد واحدة مغسلتهاش ممكن تلوث الأكل والسكينة وسطح الرخامة في نفس الوقت."],
+ {s:"Cleaning Food-Contact Surfaces"},
+ ["Cutting boards, knives, utensils, countertops, and other food-contact surfaces should be properly cleaned to reduce the risk of transferring microorganisms between foods.",
+  "ألواح التقطيع والسكاكين والأدوات وأسطح المطبخ وأي سطح بيلمس الأكل لازم تتنضّف كويس عشان نقلل خطر نقل الميكروبات من أكل لأكل.",
+  "بعد ما تقطع لحمة نيّة، اغسل الخشبة والسكينة والرخامة قبل ما تقطع عليهم أي حاجة تانية."]
+]},
+{ h:"5. WHO Five Keys to Safer Food", items:[
+ ["The WHO Five Keys to Safer food provide a simple framework for preventing foodborne disease.",
+  "المفاتيح الخمسة لمنظمة الصحة العالمية للأكل الآمن بتدّي إطار بسيط لمنع الأمراض المنقولة بالغذاء.",
+  "هي زي خمس قواعد سهلة تفتكرها في المطبخ وتحمي بيها نفسك وأهلك."],
+ {l:["The five keys are:","المفاتيح الخمسة هي:"]},
+ ["1. Keep clean.","١. حافظ على النضافة.","اغسل إيدك ونضّف مطبخك."],
+ ["2. Separate raw and cooked.","٢. افصل النيء عن المطبوخ.","الفراخ النيّة في ناحية والمطبوخ في ناحية."],
+ ["3. Cook thoroughly.","٣. اطبخ كويس.","الأكل لازم يستوي من جوه مش بس من برا."],
+ ["4. Keep food at safe temperatures.","٤. حافظ على الأكل في درجات حرارة آمنة.","الأكل السخن يفضل سخن والبارد يفضل بارد."],
+ ["5. Use safe water and raw materials.","٥. استخدم مياه ومواد خام آمنة.","استخدم مية شرب نضيفة وخضار وفراخ طازة."],
+ {s:"Key 1: Keep Clean"},
+ ["Good cleanliness reduces the transfer of microorganisms to food.","النضافة الكويسة بتقلل انتقال الميكروبات للأكل.","مطبخ نضيف وإيد نضيفة معناهم ميكروبات أقل في أكلك."],
+ {l:["Important practices include:","من الممارسات المهمة:"]},
+ ["Wash hands before and during food preparation and before eating.","نغسل إيدينا قبل وأثناء تحضير الأكل وقبل ما ناكل.","اغسل إيدك قبل ما تبدأ، وبين الخطوات، وقبل ما تقعد تاكل."],
+ ["Clean food-preparation surfaces and utensils.","ننضّف أسطح التحضير والأدوات.","امسح الرخامة وغسّل المعالق والسكاكين بعد كل استخدام."],
+ ["Keep the kitchen and food-preparation area clean.","نخلي المطبخ ومكان تحضير الأكل نضيف.","وقّع الزبالة وامسح الأرض والرخامة بشكل مستمر."],
+ ["Protect food from insects and pests.","نحمي الأكل من الحشرات والآفات.","غطي الأكل بغطا عشان الدبان والصراصير ميقربوش منه."],
+ {s:"Key 2: Separate Raw and Cooked"},
+ ["Raw foods, particularly raw meat, poultry, seafood, and eggs, may contain microorganisms that can contaminate ready-to-eat foods.",
+  "الأكل النيء، خصوصًا اللحمة والفراخ والمأكولات البحرية والبيض، ممكن يكون فيه ميكروبات تلوّث الأكل الجاهز للأكل.",
+  "الفراخ النيّة لو لمست الفاكهة اللي هتتاكل زي ما هي، ممكن تنقل لها الميكروب."],
+ {l:["Therefore:","عشان كده:"]},
+ ["Keep raw and cooked foods separate.","نخلي الأكل النيء والمطبوخ منفصلين.","طبق للنيء وطبق للمطبوخ، ومحدش يتخلط."],
+ ["Use separate utensils or clean them properly between uses.","نستخدم أدوات منفصلة أو ننضّفها كويس بين كل استخدام.","سكينة للنيء وسكينة للمطبوخ، أو اغسل نفس السكينة قبل ما تستخدمها تاني."],
+ ["Store raw foods separately from ready-to-eat foods.","نخزّن الأكل النيء بعيد عن الأكل الجاهز للأكل.","في التلاجة، حط النيء في رف تحت والجاهز في رف فوق."],
+ ["Prevent raw-food juices from contacting other foods.","نمنع عصارة الأكل النيء إنها تلمس أي أكل تاني.","غطي طبق اللحمة النيّة عشان السايل ميوقعش على الخضار."],
+ {s:"Key 3: Cook Thoroughly"},
+ ["Adequate cooking helps destroy many harmful microorganisms that may be present in food.","الطبخ الكافي بيساعد في القضاء على ميكروبات كتير ضارة ممكن تكون في الأكل.","لما الفراخ تتطبخ كويس، الميكروبات اللي كانت فيها بتموت."],
+ {l:["Special attention should be given to foods such as:","لازم نركز بشكل خاص على أكل زي:"]},
+ ["Meat and poultry.","اللحمة والفراخ.","اتأكد إن لون الفراخ من جوه مش وردي."],
+ ["Fish and seafood.","السمك والمأكولات البحرية.","السمك لازم يستوي كويس مش يتاكل نص استواء."],
+ ["Eggs.","البيض.","البيض المسلوق أو المقلي كويس أحسن من النيء."],
+ ["Other foods that may contain harmful microorganisms when raw or undercooked.","أي أكل تاني ممكن يكون فيه ميكروبات ضارة وهو نيء أو مش مستوي كفاية.","أي أكل نيّ أو نص استواء ممكن يكون خطر، فاستوّيه كويس."],
+ ["Cooking should be sufficient to ensure that the food is safe for consumption.","الطبخ لازم يكون كفاية عشان نضمن إن الأكل آمن للأكل.","متشيلش الأكل من على النار بدري، سيبه لحد ما يستوي صح."],
+ ["WHO emphasizes thorough cooking as an important measure for preventing foodborne disease.","منظمة الصحة العالمية بتأكد إن الطبخ الكويس إجراء مهم لمنع الأمراض المنقولة بالغذاء.","الطبخ الكويس هو من أهم الحاجات اللي بتحمينا من التسمم."],
+ {s:"Key 4: Keep Food at Safe Temperatures"},
+ ["Improper temperature control can allow microorganisms to multiply in food.","التحكم الغلط في درجة الحرارة ممكن يخلي الميكروبات تتكاثر في الأكل.","الأكل لو اتساب في الجو الدافي، الميكروبات فيه بتزيد بسرعة."],
+ {l:["Therefore:","عشان كده:"]},
+ ["Refrigerate perishable foods promptly.","نحط الأكل اللي بيبوظ بسرعة في التلاجة فورًا.","اللبن واللحمة المطبوخة حطهم في التلاجة بعد ما تخلص."],
+ ["Avoid leaving perishable foods at room temperature for prolonged periods.","نتجنب ترك الأكل اللي بيبوظ بسرعة في حرارة الغرفة لفترات طويلة.","متسيبش الفراخ المطبوخة على الترابيزة ساعات."],
+ ["Keep hot foods appropriately hot and cold foods appropriately cold.","نخلي الأكل السخن سخن بما يناسب والبارد بارد بما يناسب.","الشوربة تفضل سخنة والعصير يفضل في التلاجة."],
+ ["Follow safe storage instructions for perishable foods.","نتّبع تعليمات التخزين الآمن للأكل اللي بيبوظ بسرعة.","اقرأ على علبة اللبن مكتوب تتخزن إزاي واعمل بيه."],
+ ["Temperature control is an important component of food-safety systems and is also addressed in food-service standards such as the FDA Food Code.",
+  "التحكم في درجة الحرارة جزء مهم من أنظمة سلامة الغذاء، وكمان بتتناوله معايير خدمات الطعام زي FDA Food Code.",
+  "المطاعم والمستشفيات عندها قواعد رسمية لدرجات حرارة تخزين الأكل، والـ FDA Food Code من المراجع اللي بتتكلم عن ده."],
+ {s:"Key 5: Use Safe Water and Raw Materials"},
+ ["Food should be prepared using water and raw materials that are safe and suitable for consumption.","الأكل لازم يتحضّر بمية ومواد خام آمنة ومناسبة للاستهلاك.","متعملش شوربة بمية مش نضيفة ولا تستخدم خضار باظت."],
+ {l:["Important practices include:","من الممارسات المهمة:"]},
+ ["Use safe drinking water.","نستخدم مية شرب آمنة.","استخدم مية الشرب النضيفة في الطبخ وغسيل الأكل."],
+ ["Choose fresh and wholesome raw materials.","نختار مواد خام طازة وسليمة.","اشتري خضار طازة مش دابلة أو عفنة."],
+ ["Wash fruits and vegetables appropriately before consumption.","نغسل الفاكهة والخضار كويس قبل أكلها.","اغسل الخيار والفراولة بمية جارية قبل ما تاكلهم."],
+ ["Use pasteurized milk and dairy products when appropriate.","نستخدم اللبن ومنتجات الألبان المبسترة لما يكون مناسب.","اختار لبن مكتوب عليه مبستر مش لبن سايب."],
+ ["Check food packaging and storage conditions before purchase and use.","نفحص تغليف الأكل وظروف تخزينه قبل الشراء والاستخدام.","علبة منفوخة أو متبعجة أو متخزنة في الشمس، متشتريهاش."]
+]},
+{ h:"6. Safe Handling of High-Risk Foods", items:[
+ ["Some foods require particular attention because they can support the growth or transmission of harmful microorganisms.",
+  "فيه أكل محتاج انتباه خاص لأنه ممكن يساعد على نمو الميكروبات الضارة أو انتقالها.",
+  "اللبن والفراخ والسمك والبيض أكتر حاجات بتحتاج حرص."],
+ {s:"A. Milk and Dairy Products"},
+ ["Milk and dairy products can become contaminated if they are not produced, processed, stored, or handled safely.","اللبن ومنتجات الألبان ممكن تتلوث لو متتنتجش أو متتصنعش أو متتخزنش أو متتعاملش معاها بشكل آمن.","جبنة اتخزنت في مكان دافي ممكن تتلوث."],
+ {l:["Important practices include:","من الممارسات المهمة:"]},
+ ["Prefer pasteurized milk and dairy products.","نفضّل اللبن ومنتجات الألبان المبسترة.","اشتري اللبن المبستر في علبة مقفولة."],
+ ["Maintain appropriate refrigeration.","نحافظ على التبريد المناسب.","خلّي اللبن في التلاجة طول الوقت."],
+ ["Avoid consuming products that have been improperly stored.","نتجنب أكل المنتجات اللي اتخزنت غلط.","علبة زبادي اتساب برا من يوم، ارميها."],
+ ["Follow the storage instructions on packaged products.","نتّبع تعليمات التخزين المكتوبة على المنتجات المغلفة.","لو مكتوب على العلبة احفظ في الثلاجة، سمعها."],
+ ["Pasteurization reduces harmful microorganisms that may be present in milk.","البسترة بتقلل الميكروبات الضارة اللي ممكن تكون في اللبن.","اللبن المبستر اتسخّن بدرجة معينة فالميكروبات اللي فيه قلّت."],
+ {s:"B. Meat and Poultry"},
+ ["Raw meat and poultry may contain harmful microorganisms.","اللحمة والفراخ النيّة ممكن يكون فيهم ميكروبات ضارة.","فراخ طازة من الجزار ممكن برضو يكون فيها ميكروب."],
+ {l:["Safe practices include:","الممارسات الآمنة تشمل:"]},
+ ["Keep raw meat and poultry separate from ready-to-eat foods.","نبعد اللحمة والفراخ النيّة عن الأكل الجاهز للأكل.","متحطش الفراخ النيّة جنب الخيار والخس."],
+ ["Use clean utensils and surfaces.","نستخدم أدوات وأسطح نضيفة.","اغسل الخشبة والسكينة قبل وبعد التقطيع."],
+ ["Store raw products appropriately.","نخزّن المنتجات النيّة بشكل مناسب.","حط اللحمة في كيس مقفول في التلاجة."],
+ ["Cook meat and poultry thoroughly.","نطبخ اللحمة والفراخ كويس.","سيب الفراخ في الفرن لحد ما تستوي لآخرها."],
+ ["Wash hands after handling raw meat or poultry.","نغسل إيدينا بعد ما نتعامل مع اللحمة أو الفراخ النيّة.","بعد ما تنضّف الفراخ، اغسل إيدك بالصابون على طول."],
+ ["Raw meat juices should not be allowed to contact foods that will be eaten without further cooking.","عصارة اللحمة النيّة ميصحش تلمس أكل هيتاكل من غير طبخ تاني.","سايل اللحمة النيّة لو نزل على الفاكهة أو السلطة، الأكل ده يتخلص منه."],
+ {s:"C. Fish and Seafood"},
+ ["Fish and seafood may carry microorganisms or parasites, particularly when eaten raw or undercooked.","السمك والمأكولات البحرية ممكن تحمل ميكروبات أو طفيليات، خصوصًا لو اتاكلت نيّة أو مش مستوية.","السوشي أو الجمبري النيّ فيه خطر أكبر من المطبوخ."],
+ {l:["Safe practices include:","الممارسات الآمنة تشمل:"]},
+ ["Purchase seafood from reliable sources.","نشتري المأكولات البحرية من مصادر موثوقة.","اشتري من محل معروف بنضافته."],
+ ["Keep seafood appropriately refrigerated.","نحافظ على تبريد المأكولات البحرية بشكل مناسب.","حط السمك في التلاجة أو الفريزر على طول بعد الشراء."],
+ ["Prevent contact between raw seafood and ready-to-eat foods.","نمنع الاحتكاك بين المأكولات البحرية النيّة والأكل الجاهز للأكل.","متحطش السمك النيّ جنب السلطة."],
+ ["Cook seafood adequately.","نطبخ المأكولات البحرية كفاية.","الجمبري يستوي كويس قبل ما تاكله."],
+ ["Take extra care when serving seafood to vulnerable individuals.","ناخد حرص زيادة لما نقدّم المأكولات البحرية للفئات الأضعف.","لو بتقدّم سمك لطفل أو حامل، اتأكد إنه مستوي تمامًا."],
+ {s:"D. Eggs"},
+ ["Raw or undercooked eggs may carry harmful microorganisms.","البيض النيّ أو الغير مستوي كفاية ممكن يحمل ميكروبات ضارة.","بيضة نص سوا أو نيّة ممكن تسبب تسمم."],
+ {l:["Safe practices include:","الممارسات الآمنة تشمل:"]},
+ ["Keep eggs appropriately refrigerated.","نحافظ على تبريد البيض بشكل مناسب.","حط البيض في التلاجة مش على الرخامة."],
+ ["Avoid contamination of ready-to-eat foods with raw eggs.","نتجنب تلويث الأكل الجاهز للأكل بالبيض النيّ.","بعد ما تكسر البيض، متمسحش إيدك في أكل جاهز قبل ما تغسلها."],
+ ["Cook eggs and egg-containing dishes adequately.","نطبخ البيض والأطباق اللي فيها بيض كفاية.","الأومليت والكيك اللي فيهم بيض لازم يستووا كويس."],
+ ["Raw or undercooked eggs are recognized as higher-risk food choices for foodborne illness.","البيض النيّ أو الغير مستوي كفاية معروف إنه من الاختيارات الأعلى خطورة للمرض المنقول بالغذاء.","بيضة نيّة في مايونيز متعمل في البيت أخطر من بيضة مسلوقة كويس."]
+]}
+];
+
+const box = document.getElementById('content'), toc = document.getElementById('toc');
+DATA.forEach((sec, si) => {
+  const id = 'sec' + (si + 1);
+  toc.insertAdjacentHTML('beforeend', `<a href="#${id}">${sec.h.split('.')[0]}. ${sec.h.replace(/^\d+\.\s*/, '').split(' ').slice(0,3).join(' ')}</a>`);
+  let body = '';
+  sec.items.forEach(it => {
+    if (it.s) body += `<div class="sub">${it.s}</div>`;
+    else if (it.l) body += `<div class="lead"><div class="en">${it.l[0]}</div><div class="ar">${it.l[1]}</div></div>`;
+    else body += `<div class="item"><div class="en">${it[0]}</div><div class="ar">${it[1]}</div><div class="ex"><b>عشان تفهمها:</b> ${it[2]}</div></div>`;
+  });
+  box.insertAdjacentHTML('beforeend', `<section class="sec" id="${id}"><div class="sec-head">${sec.h}</div><div class="sec-body">${body}</div></section>`);
+});
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  document.getElementById('prog-bar').style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+});
+const themeBtn = document.getElementById('themeBtn');
+let theme = 'light';
+try { theme = localStorage.getItem('theme') || 'light'; } catch(e) {}
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  try { localStorage.setItem('theme', t); } catch(e) {}
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+</script>
+</body>
+</html>
