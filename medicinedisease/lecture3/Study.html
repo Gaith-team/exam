@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--accent:#be123c;--c2:#1d4ed8;--c3:#d97706;--grad:linear-gradient(135deg,#9f1239,#be123c 40%,#1e3a8a);--bg:#faf6f6;--bg2:#f3eaec;--card:#fff;--text:#2a1519;--text2:#5b4348;--bc:rgba(80,20,35,.1)}
+:root[data-theme=dark]{--accent:#fb7185;--bg:#130a0d;--bg2:#1c1015;--card:#25161c;--text:#f5e9ec;--text2:#d4bcc2;--bc:rgba(255,255,255,.1)}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);line-height:1.7}
+nav{position:sticky;top:0;z-index:9;display:flex;justify-content:space-between;align-items:center;padding:0 20px;height:60px;background:var(--card);border-bottom:1px solid var(--bc);font-weight:900}
+.logo{display:flex;align-items:center;gap:8px}.logo b{width:32px;height:32px;border-radius:8px;background:var(--grad);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px}
+.theme{width:38px;height:38px;border-radius:50%;border:1px solid var(--bc);background:var(--bg2);cursor:pointer;font-size:15px}
+.hero{background:var(--grad);color:#fff;text-align:center;padding:34px 16px}
+.hero h1{font-size:clamp(22px,4vw,30px);font-weight:900}.hero p{opacity:.9;font-size:13px;margin-top:4px}
+.tabs{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;padding:16px;position:sticky;top:60px;z-index:8;background:var(--bg)}
+.tab{padding:9px 18px;border-radius:50px;border:1.5px solid var(--bc);background:var(--card);color:var(--text2);font:700 13px 'Outfit',sans-serif;cursor:pointer}
+.tab.on{background:var(--grad);color:#fff;border-color:transparent}
+.shell{max-width:760px;margin:0 auto;padding:8px 16px 70px}
+h2.sec{margin:26px 0 12px;font-size:17px;font-weight:900;color:var(--accent);padding-bottom:6px;border-bottom:2px solid var(--bc)}
+.it{background:var(--card);border:1px solid var(--bc);border-left:4px solid var(--accent);border-radius:14px;padding:14px 16px;margin-bottom:12px}
+.it:nth-of-type(3n+2){border-left-color:var(--c2)}.it:nth-of-type(3n){border-left-color:var(--c3)}
+.en{direction:ltr;text-align:left;font-weight:700;font-size:15px}
+.ar{direction:rtl;text-align:right;margin-top:8px;padding-top:8px;border-top:1px dashed var(--bc);color:var(--text2);font-size:14px}
+.ex{direction:rtl;text-align:right;margin-top:8px;padding:9px 12px;background:var(--bg2);border-radius:10px;font-size:13px;color:var(--text2)}
+.ex b{color:var(--c3)}
+.soon{text-align:center;padding:50px 10px;color:var(--text2)}
+footer{text-align:center;padding:20px;background:var(--bg2);font-size:13px;font-weight:700}
+footer a{color:#229ED9;text-decoration:none}
+</style>
+</head>
+<body>
+<nav><div class="logo"><b>GT</b>GHAITH TEAM</div><button class="theme" id="tb">🌙</button></nav>
+<div class="hero"><h1>cardiac disease</h1><p>· Hypertension · Coronary Artery Disease · Heart Failure</p></div>
+<div class="tabs" id="tabs"></div>
+<div class="shell" id="app"></div>
+<footer>GHAITH TEAM · <a href="https://t.me/nursing2bu" target="_blank">@nursing2bu</a></footer>
+<script>
+const W='عشان تفهمها :';
+const D=[
+{t:'🫀 Hypertension',s:[
+{h:'Introduction',i:[
+['Blood pressure is the product of cardiac output multiplied by peripheral resistance.','ضغط الدم بيطلع من ضرب كمية الدم اللي القلب بيطلعها (Cardiac output) في مقاومة الأوعية الطرفية.','تخيل خرطوم مية: كل ما المضخة تدفع مية أكتر أو الخرطوم يضيق، الضغط جواه بيعلى.'],
+['Cardiac output is the product of the heart rate multiplied by the stroke volume.','كمية الدم اللي القلب بيطلعها = عدد الضربات × كمية الدم في الضربة الواحدة.','لو القلب بيضرب 70 مرة في الدقيقة وكل ضربة بتطلع 70 مل، يبقى بيطلع حوالي 4900 مل في الدقيقة.'],
+['In normal circulation, pressure is exerted by the flow of blood through the heart and blood vessels.','في الدورة الدموية الطبيعية، الضغط بيتكوّن من جريان الدم جوه القلب والأوعية الدموية.','زي الميّه وهي معدّية في الماسورة، بتضغط على جدرانها وهي ماشية.'],
+['High blood pressure, known as hypertension, can result from a change in cardiac output, a change in peripheral resistance, or both.','ارتفاع ضغط الدم (Hypertension) ممكن يحصل بسبب تغيّر في كمية الدم اللي القلب بيطلعها، أو تغيّر في المقاومة الطرفية، أو الاتنين مع بعض.','يعني الضغط يعلى لو القلب بقى يضخ أكتر، أو لو الأوعية ضاقت، أو الحاجتين حصلوا سوا.'],
+['The medications used for treating hypertension decrease peripheral resistance, blood volume, or the strength and rate of myocardial contraction.','أدوية علاج الضغط بتقلل المقاومة الطرفية، أو حجم الدم، أو قوة وسرعة انقباض عضلة القلب.','كل دوا بيشتغل على واحدة من المعادلة: يوسّع الأوعية، أو يطلّع مية زيادة من الجسم، أو يهدّي القلب.'],
+['Hypertension is a major cause of: heart failure, stroke, and kidney failure.','الضغط العالي من الأسباب الرئيسية لـ: فشل القلب، والسكتة الدماغية، والفشل الكلوي.','الضغط العالي سنين طويلة بيرهق القلب والمخ والكلى زي ماسورة بتتعرض لضغط زيادة كل يوم.'],
+['It is called the "silent killer" because the person, who has it, is often symptom-free.','بيتسمى "القاتل الصامت" لأن الشخص اللي عنده الضغط غالبًا مش بيحس بأي أعراض.','واحد ضغطه عالي ومعدّي يومه عادي ومفيش ولا شكوى، ولما يقيس صدفة يلاقيه عالي.']]},
+{h:'Definition of hypertension',i:[
+['Hypertension is defined as a persistent elevation of systolic or diastolic pressure above 140/90 mm Hg, based on two or more measurements.','الضغط العالي هو ارتفاع مستمر في الضغط الانقباضي أو الانبساطي فوق 140/90 ملم زئبق، بناءً على قياسين أو أكتر.','لو قست مرة واحدة طلع 150/95 مش كفاية؛ لازم قياسات متكررة تأكد إن الارتفاع مستمر.']]},
+{h:'Classification of Blood Pressure for Adults Age 18 and Older Established by JNC 7',i:[
+['Normal: Systolic &lt; 120 and Diastolic &lt; 80 mm Hg<br>Prehypertension: 120–139 or 80–89<br>Hypertension Stage 1: 140–159 or 90–99<br>Stage 2: ≥160 or ≥100','الجدول بيقسّم الضغط للبالغين من سن 18 وأكتر: طبيعي، ما قبل الضغط، مرحلة 1، مرحلة 2.','واحد ضغطه 125/85 يبقى Prehypertension، وواحد ضغطه 165/105 يبقى Stage 2.'],
+['(JNC 7) The Seventh Report of the Joint National Committee on Prevention, Detection, Evaluation, and Treatment of High Blood Pressure','JNC 7 هو التقرير السابع للجنة الوطنية المشتركة للوقاية من ارتفاع ضغط الدم واكتشافه وتقييمه وعلاجه.','هو المرجع اللي التصنيف اللي فوق مأخود منه.']]},
+{h:'Classification of hypertension',i:[
+['A-Hypertension can be classified according to degree as follows: Stage 1: Systolic 140 to 159 mm Hg; diastolic 90 to 99 mm Hg. Stage 2: Systolic ≥160 mm Hg; diastolic ≥100 mm Hg','أ- الضغط بيتصنف حسب الدرجة: Stage 1 الانقباضي من 140 لـ 159 والانبساطي من 90 لـ 99، و Stage 2 الانقباضي 160 فأكتر والانبساطي 100 فأكتر.','150/95 يبقى Stage 1، و170/110 يبقى Stage 2.'],
+['B-Hypertension can be classified according to cause as follows: 1- Primary (essential) hypertension','ب- بيتصنف كمان حسب السبب، وأول نوع هو الضغط الأساسي (Primary / Essential).','ده الضغط اللي مفيش مرض واضح وراه.'],
+['It is accounts in the adult individual more than 90 % of all cases and has no identifiable cause; it appears to be a multifactorial, polygenic condition.','بيمثّل أكتر من 90% من الحالات عند البالغين ومالوش سبب محدد، ويبدو إنه حالة متعددة العوامل ومتعددة الجينات.','يعني من كل 10 مرضى ضغط، 9 تقريبًا مفيش سبب واحد نشاور عليه؛ عوامل كتير مع بعض.']]},
+{h:'Contributing factors',i:[
+['Overproduction of sodium retaining hormones and vasoconstriction.','زيادة إفراز الهرمونات اللي بتحتفظ بالصوديوم مع انقباض الأوعية.','الجسم يمسك ملح ومية زيادة والأوعية تضيق، فالضغط يعلى.'],
+['Increased sodium intake.','زيادة تناول الصوديوم.','أكل مخللات وجبنة مالحة كتير كل يوم.'],
+['More than ideal body weight (central abdominal obesity)','وزن أكتر من الوزن المثالي (سمنة البطن المركزية).','واحد كرشه كبير وراكب على القلب مجهود زيادة.'],
+['Diabetes mellitus and excessive alcohol intake.','السكر والإفراط في شرب الكحول.','الاتنين بيضرّوا الأوعية ويرفعوا الضغط مع الوقت.']]},
+{h:'2- Secondary Hypertension',i:[
+['Secondary hypertension is characterized by elevations in blood pressure as a consequence of a particular underlying disease or condition, such as:','الضغط الثانوي هو ارتفاع في الضغط بسبب مرض أو حالة معينة تحته، زي اللي جاي.','هنا الضغط أصلًا عَرَض لمرض تاني؛ لو اتعالج المرض ممكن الضغط يتظبط.'],
+['Congenital narrowing of the aorta.','ضيق خلقي في الشريان الأورطي.','الأورطي ضيق من الولادة فالدم بيتزاحم ويرفع الضغط.'],
+['Renal disease such as renal artery stenosis, renal failure and glomerulonephritis','أمراض الكلى زي ضيق الشريان الكلوي، والفشل الكلوي، والتهاب كُبيبات الكلى.','الكلى بتتحكم في الملح والمية، فلما تتعب الضغط بيعلى.'],
+['Endocrine disorders such as hyperaldosteronism (mineralocorticoid hypertension), Hypo & hyper thyroidism.','اضطرابات الغدد الصماء زي زيادة الألدوستيرون، ونقص وزيادة نشاط الغدة الدرقية.','الهرمونات دي بتأثر على الملح وسرعة القلب فبتغير الضغط.'],
+['Neurologic disorders such as brain tumour , head injury','اضطرابات عصبية زي ورم المخ وإصابة الرأس.','المخ هو اللي بينظم الضغط، فأي مشكلة فيه ممكن تلخبط التنظيم.'],
+['Medication such as sympathetic stimulation (cocaine), nonsteroidal anti-inflammatory','أدوية زي المنبهات السمبثاوية (الكوكايين)، ومضادات الالتهاب غير الستيرويدية.','واحد بياخد مسكن زي الإيبوبروفين بشكل مستمر فيلاقي ضغطه طلع.'],
+['Pregnancy induced hypertension, generalized vasospasm may be a contributing factor','ضغط الحمل، وتقلص الأوعية الدموية في الجسم كله ممكن يكون عامل مساهم.','أوعية الحامل بتتقلص فالدم مش لاقي مجرى واسع، فالضغط يعلى.']]},
+{h:'3- Isolated systolic hypertension (ISH)',i:[
+['Occurs when the systolic blood pressure is 140 mmHg or higher, but diastolic blood pressure remains below 90 mmHg. It occurs primarily in people older than 50 years because of atherosclerosis, induced changes in blood vessel elasticity.','بيحصل لما الضغط الانقباضي 140 أو أكتر والانبساطي لسه أقل من 90. وبيظهر أساسًا عند اللي فوق 50 سنة بسبب تصلب الشرايين وتغيّر مرونة الأوعية.','واحد عنده 60 سنة ضغطه 160/80؛ الأوعية عنده بقت متيبسة زي خرطوم قديم فالانقباضي بس هو اللي عِلي.']]},
+{h:'4- Malignant hypertension',i:[
+['Is an emergency condition characterized by diastolic blood pressure above 120 mmHg, retinal hemorrhage and exudates and rapid vascular deterioration.','حالة طوارئ مميزة بضغط انبساطي فوق 120، ونزيف وإفرازات في الشبكية، وتدهور سريع في الأوعية.','مريض ضغطه 220/130 وشايف الدنيا ضبابية، ده مش ينفع يستنى.'],
+['Without treatment, malignant hypertension leading to 90% mortality rate due to renal or congestive heart failure…etc.','من غير علاج، نسبة الوفاة بتوصل 90% بسبب فشل الكلى أو فشل القلب الاحتقاني وغيره.','لو اتساب من غير علاج، تقريبًا مفيش فرصة كبيرة للنجاة.'],
+['Malignant hypertension can result from: Untreated hypertension. Eclampsia, drug or toxic substance ingestion or exposure.','ممكن يحصل من: ضغط مش متعالج، أو تسمم الحمل (Eclampsia)، أو تناول أو التعرض لدواء أو مادة سامة.','مريض ضغط سايب علاجه شهور، ممكن ضغطه يتحول لحالة خطيرة فجأة.']]},
+{h:'Risk factors and cardiovascular problems in patients with hypertension. A-Major risk factors (in addition to hypertension):',i:[
+['1- Smoking: Nicotine constricts blood vessels.','1- التدخين: النيكوتين بيضيّق الأوعية الدموية.','كل سيجارة بتضيّق الأوعية شوية فالضغط بيعلى.'],
+['2- Obesity: Obesity that associated with increased amount of intra-abdominal fat is associated with hypertension due to hyperinsulinemia secondary to insulin resistance.','2- السمنة: السمنة المرتبطة بدهون البطن الزيادة بترتبط بالضغط العالي بسبب زيادة الأنسولين الناتجة عن مقاومة الجسم للأنسولين.','الجسم يفرز أنسولين كتير عشان الخلايا مش بتستجيب، والزيادة دي بترفع الضغط.'],
+['3- Physical inactivity: Regular physical activity can help control weight and reduce cardiovascular risk.','3- قلة الحركة: النشاط البدني المنتظم بيساعد على التحكم في الوزن وبيقلل خطر أمراض القلب والأوعية.','مشي نص ساعة كل يوم بيفرق مع الوقت.'],
+['4- Dyslipidemia (abnormal blood fat levels).','4- اضطراب الدهون (مستويات غير طبيعية لدهون الدم).','كوليسترول عالي بيرسب على جدران الشرايين.'],
+['5- Diabetes mellitus','5- السكر.','السكر العالي مع الوقت بيأذي الأوعية.'],
+['6- Microalbuminuria or estimated GFR &lt;60 mL/min (normal 90-120 ml/min)','6- ظهور ألبومين بسيط في البول، أو معدل ترشيح الكلى المقدّر أقل من 60 مل/دقيقة (الطبيعي 90-120).','الكلى لو بتسرّب بروتين أو بتصفي أقل من الطبيعي، ده علامة خطر.'],
+['7- Age: The incidence of hypertension ↑ with age, (older than 55 for men, 65 for women).','7- السن: نسبة الضغط بتزيد مع العمر (أكبر من 55 للرجال، و65 للستات).','كل ما العمر يكبر الأوعية بتفقد مرونتها.'],
+['8- Sex: High blood pressure is more common in men. Women are more likely to develop high blood pressure after menopause.','8- النوع: الضغط العالي أكتر شيوعًا عند الرجال، والستات أكتر عرضة له بعد سن اليأس.','سيدة ضغطها طبيعي طول عمرها وبعد انقطاع الطمث بدأ يعلى.'],
+['9- Family history: Level of BP is strongly familial.','9- التاريخ العائلي: مستوى الضغط بيتوارث بقوة في العيلة.','لو أبوك وأمك عندهم ضغط، احتمالك أعلى.'],
+['10- Stress: Stress ↑peripheral vascular resistance, cardiac output and stimulates sympathetic nervous systems.','10- التوتر: بيزوّد المقاومة الطرفية وكمية الدم اللي القلب بيطلعها وبينشّط الجهاز العصبي السمبثاوي.','وقت الخناقة أو الامتحان قلبك بيدق أسرع وضغطك بيعلى.'],
+['11- Nutrients: Sodium is an important cause of hypertension. * A high -salt diet may in directly ↑ B.P.','11- التغذية: الصوديوم سبب مهم للضغط العالي، والأكل العالي في الملح ممكن يرفع الضغط بشكل غير مباشر.','الملح بيسحب مية في الدم فحجم الدم يزيد والضغط يعلى.']]},
+{h:'B-Target organ damage or clinical cardiovascular diseases:',i:[
+['1-Heart disease (left ventricular hypertrophy, angina or previous myocardial infarction, previous coronary revascularization, heart failure).','1- أمراض القلب (تضخم البطين الأيسر، الذبحة الصدرية أو جلطة قلب سابقة، عملية سابقة لإعادة توصيل الدم للشرايين التاجية، فشل القلب).','القلب لما يشتغل ضد ضغط عالي سنين بيتعب ويتضخم.'],
+['2-Stroke (cerebrovascular accident, brain attack) or TIA (transient ischemic attack).','2- السكتة الدماغية أو النوبة الإقفارية العابرة (TIA).','شريان في المخ ينسد أو ينفجر بسبب الضغط، والـ TIA نوبة مؤقتة بتعدي.'],
+['3-Chronic kidney disease.','3- مرض الكلى المزمن.','الضغط العالي بيتلف شعيرات الكلى الصغيرة.'],
+['4-Peripheral arterial disease.','4- أمراض الشرايين الطرفية.','الدم مش بيوصل كويس للرجلين فالواحد يحس بألم وهو ماشي.'],
+['5-Retinopathy.','5- اعتلال الشبكية.','أوعية العين الدقيقة بتتأثر وممكن النظر يضعف.']]},
+{h:'Note: High blood pressure can be viewed as a sign, as a risk factor for atherosclerotic cardiovascular disease, or as a disease.',i:[
+['A-As a sign - Nurses and other health care professionals use blood pressure to monitor a patient’s clinical status. - Elevated pressure may indicate an excessive dose of vasoconstrictive medication, stress, or other problems.','أ- كعلامة: الممرضين والفريق الطبي بيستخدموا الضغط لمتابعة حالة المريض الإكلينيكية، وارتفاعه ممكن يدل على جرعة زيادة من دوا بيضيّق الأوعية، أو توتر، أو مشاكل تانية.','مريض واخد دوا بيضيّق الأوعية وضغطه طلع فجأة، الممرضة تبلّغ.'],
+['B-As a risk factor: Hypertension contributes to the rate at which atherosclerotic plaque accumulates within arterial walls.','ب- كعامل خطورة: الضغط العالي بيسرّع معدل تراكم اللويحات التصلبية جوه جدران الشرايين.','زي ما الميّه المندفعة بتتلف الماسورة أسرع.'],
+['C- As a disease: Hypertension is a major contributor to death related to cardiac, cerebrovascular, renal, and peripheral vascular disease.','ج- كمرض: الضغط العالي سبب رئيسي للوفاة المرتبطة بأمراض القلب والمخ والكلى والأوعية الطرفية.','هنا هو نفسه مرض مش بس عرَض.']]},
+{h:'Clinical manifestations:',i:[
+['Hypertension is called the (SILENT KILLER) because it is a disease that usually occurs without any symptoms until it become more severe and target organ disease has occurred.','الضغط بيتسمى (القاتل الصامت) لأنه غالبًا بيحصل من غير أعراض لحد ما يبقى أشد ويحصل تلف في الأعضاء المستهدفة.','المريض مش حاسس بحاجة لحد ما يجيله مضاعفات.'],
+['In the early stages of hypertension: there is no clinical manifestation, other than elevations in blood pressure.','في المراحل المبكرة: مفيش أي أعراض إكلينيكية غير ارتفاع الضغط نفسه.','الوسيلة الوحيدة للاكتشاف هي قياس الضغط.'],
+['As hypertension advances, without treatment, client may report: morning occipital headache, fatigue, dizziness, flushing, blurred vision, and epistaxis.','مع تقدم الضغط من غير علاج، المريض ممكن يشتكي من: صداع صباحي في مؤخرة الرأس، وإرهاق، ودوخة، واحمرار الوجه، وزغللة، ونزيف أنف.','صاحي من النوم برأسه بتوجعه من ورا ومعاه نزيف أنف.'],
+['Additional clinical manifestations include: hypertensive encephalopathy manifested by restlessness, changes in level of consciousness, blurred vision, nausea and vomiting.','من الأعراض الإضافية: اعتلال المخ الناتج عن الضغط (Hypertensive encephalopathy) ويظهر في صورة قلق وعدم استقرار، وتغيّر في مستوى الوعي، وزغللة، وغثيان وقيء.','مريض ضغطه عالي جدًا بدأ يتلخبط وعيه ويرجّع، المخ بيتأثر.'],
+['Assessment may also reveal renal insufficiency, proteinuria, Hematuria, hemolytic anemia, left ventricular failure and pulmonary edema.','والتقييم ممكن كمان يكشف قصور كلوي، وبروتين في البول، ودم في البول، وأنيميا انحلالية، وفشل البطين الأيسر، وأَدِيما (مية) في الرئة.','الفحص والتحاليل ممكن تظهر إن الكلى والقلب والرئة اتأثروا.'],
+['**Note: Prolonged blood pressure elevation gradually damages blood vessels throughout the body, particularly in target organs such as the heart, kidneys, brain, and eyes .','ملحوظة: ارتفاع الضغط لفترة طويلة بيتلف الأوعية الدموية في الجسم تدريجيًا، وخصوصًا في الأعضاء المستهدفة: القلب والكلى والمخ والعيون.','زي ماسورة المية اللي كل يوم عليها ضغط زيادة، بتبوّظ ببطء.']]},
+{h:'*The patient outcomes of prolonged, uncontrolled hypertension are:',i:[
+['1-Myocardial infarction','1- جلطة في عضلة القلب.','الشريان التاجي بيتسد فجزء من القلب يموت.'],
+['2-Heart failure','2- فشل القلب.','القلب يتعب ومبقاش يضخ كفاية.'],
+['3-Renal failure','3- الفشل الكلوي.','الكلى متقدرش تصفي الدم.'],
+['4-Strokes','4- السكتات الدماغية.','وعاء في المخ ينسد أو ينفجر.'],
+['5-Impaired vision.','5- ضعف النظر.','أوعية الشبكية بتتضرر.'],
+['6-Hypertrophy (enlargement) of the left ventricle of the heart may occur as it works to pump blood against the elevated pressure','6- تضخم البطين الأيسر ممكن يحصل لأنه بيشتغل عشان يضخ الدم ضد الضغط العالي.','زي عضلة الدراع لما تشيل حاجة تقيلة كل يوم بتكبر، بس هنا التضخم ده بيضر القلب.']]},
+{h:'*Assessment and diagnostic studies: History and physical examination, including:',i:[
+['a- Blood pressure measurement: The initial diagnosis of hypertension is made on the basis of two or more elevated blood pressure reading, supine and sitting obtained on at least two separate occasions.','أ- قياس الضغط: التشخيص المبدئي بيتم بناءً على قراءتين أو أكتر مرتفعة، والمريض نايم وقاعد، في مناسبتين مختلفتين على الأقل.','تقيس الضغط النهارده والمريض نايم وقاعد، وتعيد بعد كام يوم، ولو الاتنين عاليين يبقى التشخيص.'],
+['b- Retinal examination.','ب- فحص الشبكية.','الدكتور يبص على قاع العين يشوف الأوعية.'],
+['c- Laboratory studies for organ damage, including:','ج- تحاليل معملية للكشف عن تلف الأعضاء، منها:','عشان نعرف الضغط أثّر على الأعضاء ولا لأ.'],
+['Urinalysis for proteinuria.','تحليل بول للبحث عن بروتين.','وجود بروتين في البول علامة إن الكلى متأثرة.'],
+['urine tests, and 24-hour urine protein, may be performed','ممكن يتعمل اختبارات بول، وبروتين البول على 24 ساعة.','تجمّع البول طول اليوم وتحلله.'],
+['Blood chemistry (sodium, potassium, creatinine, fasting glucose, total and high-density lipoprotein).','كيمياء الدم (الصوديوم، والبوتاسيوم، والكرياتينين، والسكر الصائم، والكوليسترول الكلي والـ HDL).','الكرياتينين بيقيس شغل الكلى، والسكر والدهون بيكشفوا عوامل الخطورة.'],
+['d- Electrocardiogram (EKG/ECG) to assess (left ventricular hypertrophy) or the previous silent cardiac diseases even a myocardial infarction).','د- رسم القلب (ECG) لتقييم تضخم البطين الأيسر أو أمراض قلب صامتة سابقة حتى لو جلطة قلب.','ممكن المريض يكون عدّى بجلطة صامتة وميعرفش، والرسم يكشفها.'],
+['e- Chest X-ray - again for signs of cardiac enlargement or evidence of cardiac failure.','هـ- أشعة على الصدر، برضه للبحث عن علامات تضخم القلب أو دليل على فشل القلب.','الأشعة بتوضح لو حجم القلب كبر.']]},
+{h:'Management: *Medical Management',i:[
+['The goal of any treatment program is to prevent death and complications by achieving and maintaining an arterial blood pressure at or below 140/90 mm Hg (130/80 mm Hg for people with diabetes mellitus or chronic kidney disease), whenever possible.','هدف أي برنامج علاج هو منع الوفاة والمضاعفات عن طريق الوصول للضغط الشرياني عند 140/90 أو أقل والحفاظ عليه (130/80 لمرضى السكر أو الفشل الكلوي المزمن) كل ما أمكن.','مريض السكر هدفه أقل (130/80) لأنه معرّض لمضاعفات أكتر.']]},
+{h:'Nonpharmacologic approaches include:',i:[
+['1- Weight reduction','1- إنقاص الوزن.','كل كيلو بينزل بيساعد الضغط ينزل.'],
+['2- Restriction of alcohol and sodium','2- تقليل الكحول والصوديوم.','قلل الملح والمخللات.'],
+['3- Regular exercise and relaxation therapy, such as meditation, that reduces environmental stress.','3- تمارين منتظمة وعلاج بالاسترخاء زي التأمل بيقلل ضغط البيئة المحيطة.','مشي كل يوم وتنفس عميق يهدّيك.'],
+['4- A DASH (Dietary Approaches to Stop Hypertension) diet high in fruits, vegetables, and low-fat dairy products has been shown to lower elevated blood pressures.','4- حمية DASH (الطرق الغذائية لإيقاف الضغط العالي) الغنية بالفاكهة والخضار ومنتجات الألبان قليلة الدسم ثبت إنها بتخفض الضغط المرتفع.','طبق خضار وفاكهة ولبن خالي الدسم بدل الأكل المالح والدسم.']]},
+{h:'* Pharmacologic Therapy for Hypertension',i:[
+['*Purpose: To maintain blood pressure within normal ranges by the simplest and safest means possible with the fewest side effects for each individual patient','الغرض: الحفاظ على الضغط في المعدل الطبيعي بأبسط وأأمن وسيلة وبأقل أعراض جانبية لكل مريض.','نختار أبسط دوا مناسب لكل مريض.'],
+['Select a drug class that has the greatest effectiveness, fewest side effects, and best chance of acceptance by patient.','اختيار فئة دوائية تكون أكفأ وأقل أعراض جانبية وأكتر احتمال إن المريض يقبلها.','لو المريض بيكره الدوا هيرميه، فنختار اللي يقبله.'],
+['Two classes of drugs are available as first-line therapy: Diuretics and beta-blockers.','فيه فئتين متاحتين كعلاج خط أول: مدرّات البول وحاصرات بيتا.','دول أول اختيارين في المحاضرة.'],
+['Promote compliance by avoiding complicated drug schedules.','تشجيع الالتزام بتجنب جداول الأدوية المعقدة.','دوا مرة واحدة في اليوم أسهل في الالتزام من خمس مرات.']]},
+{h:'A-Diuretics Drugs: 1-Thiazide Diuretic e.g. Diuril',i:[
+['*Advantages: A-Relatively inexpensive b- Effective orally c- Effective during long-term administration d-Mild side effects','المميزات: أ- رخيص نسبيًا ب- فعّال بالفم ج- فعّال مع الاستخدام طويل المدى د- أعراضه الجانبية بسيطة.','مريض هياخده سنين، فرخصه وسهولته مهمين.'],
+['*Contraindications: a- Gout b- Severely impaired kidney function c- History of hyponatremia','موانع الاستعمال: أ- النقرس ب- ضعف شديد في وظائف الكلى ج- تاريخ نقص الصوديوم في الدم.','مريض نقرس مينفعش ياخده.'],
+['*Side Effects: a-Dry mouth & thirst b-Weakness, drowsiness, & lethargy','الأعراض الجانبية: أ- جفاف الفم والعطش ب- ضعف ونعاس وخمول.','المريض يحس إنه ناشف وعطشان وتعبان.'],
+['c-Muscle aches & muscular fatigue d-Tachycardia e- GI disturbance.','ج- آلام وإرهاق في العضلات د- سرعة ضربات القلب هـ- اضطراب في الجهاز الهضمي.','وجع في الرجلين وقلبه بيدق أسرع.'],
+['f-Postural hypotension may be potentiated by alcohol, opioids, or hot weather.','و- هبوط الضغط الوضعي ممكن يزيد مع الكحول أو الأفيونات أو الجو الحار.','يقوم من السرير فجأة في الصيف ويشوف نجوم.'],
+['*Nursing Care: a-Because thiazides cause loss of sodium, potassium, and magnesium, the nurse must monitor (for signs of electrolyte imbalance, monitor patient weight, check vital signs before administering drug','رعاية التمريض: أ- لأن الثيازيد بيسبب فقد صوديوم وبوتاسيوم ومغنيسيوم، الممرضة لازم تراقب علامات اختلال الأملاح، وتتابع وزن المريض، وتقيس العلامات الحيوية قبل إعطاء الدوا.','تزن المريض كل يوم وتقيس ضغطه قبل الجرعة.'],
+['b-Teach client to: Take drug early, take drug with food if GIT upset occur, encourage intake of potassium rich foods (eg, fruits, cereal and potato).','ب- علّم المريض: ياخد الدوا بدري، ومع الأكل لو حصل اضطراب في المعدة، ويكتر من الأكل الغني بالبوتاسيوم (فاكهة، حبوب، بطاطس).','الموز والبطاطس بيعوّضوا البوتاسيوم.'],
+['c-Report muscle weakness, cramping and fatigue.','ج- يبلّغ عن ضعف العضلات والتشنج والإرهاق.','تشنج في الرجل ممكن يكون علامة نقص بوتاسيوم.']]},
+{h:'2-Loop Diuretics e.g. Lasix',i:[
+['*Advantages: a. Rapid action b. Used when thiazides fail c. When patient needs rapid diuresis','المميزات: أ- مفعوله سريع ب- بيُستخدم لما الثيازيد متنفعش ج- لما المريض يحتاج إدرار سريع.','مريض مية متجمعة في رئته وعايز يطلّعها بسرعة.'],
+['*Contraindications: Same as for Thiazides','موانع الاستعمال: نفس موانع الثيازيد.','يعني النقرس وضعف الكلى الشديد ونقص الصوديوم.'],
+['*Side Effects: a-Volume depletion is rapid - profound diuresis can occur b-Electrolyte depletion— replacement is required.','الأعراض الجانبية: أ- فقد حجم السوائل سريع وممكن يحصل إدرار شديد ب- فقد الأملاح ولازم تعويضها.','المريض ممكن يبقى جاف في ساعات.'],
+['c-Thirst, nausea, vomiting, skin rash, postural hypotension. d-Sweet taste noted; oral and gastric burning.','ج- عطش وغثيان وقيء وطفح جلدي وهبوط ضغط وضعي د- طعم حلو في الفم وحرقان في الفم والمعدة.','المريض يقول إن بقه طعمه حلو وحارق.']]},
+{h:'B-Beta-Blockers e.g.Propranolol (Inderal)',i:[
+['*Advantages: 1-Reduces pulse rate in patients with tachycardia and blood pressure elevation','المميزات: 1- بيقلل النبض عند مرضى سرعة القلب مع ارتفاع الضغط.','مريض قلبه سريع وضغطه عالي ياخده فيتظبط.'],
+['2-Indicated for patients who also have stable angina pectoris or have had a myocardial infarction.','2- مُستطب لمرضى الذبحة المستقرة أو اللي عدّوا بجلطة قلب.','بيريّح القلب فبيفيد الحالتين.'],
+['*Contraindications: 1- Bronchial asthma 2- Allergic rhinitis 3-Right ventricular failure from pulmonary hypertension 4-Congestive heart failure','موانع الاستعمال: 1- الربو الشعبي 2- حساسية الأنف 3- فشل البطين الأيمن الناتج عن ضغط الرئة 4- فشل القلب الاحتقاني.','مريض الربو ممكن يضيق صدره بيه.'],
+['5-Depression 6-Diabetes mellitus 7-Dyslipidemia 8-Heart block, peripheral vascular disease, and heart rate under 60 bpm','5- الاكتئاب 6- السكر 7- اضطراب الدهون 8- الإحصار القلبي وأمراض الأوعية الطرفية ونبض أقل من 60.','نبضه 55؟ متديهوش.'],
+['*Side effects: 1-Mental depression manifested by insomnia, lassitude, weakness, and fatigue.','الأعراض الجانبية: 1- اكتئاب يظهر في أرق وفتور وضعف وإرهاق.','المريض يبقى حزين ومش بينام.'],
+['2-Lightheadedness and occasional nausea, vomiting, and epigastric distress','2- دوخة وأحيانًا غثيان وقيء وضيق في أعلى البطن.','يحس إنه دايخ ومعدته مش مظبوطة.'],
+['*Nursing Care: Check heart rate before giving','رعاية التمريض: افحص معدل القلب قبل ما تديه.','تعد النبض دقيقة كاملة قبل الجرعة.']]},
+{h:'Nursing process for patient with hypertension: I-Assessment',i:[
+['1- Assess blood pressure at frequent intervals; know baseline level. Note changes in pressure that would require a change in medication.','1- قيّم الضغط على فترات متكررة واعرف المستوى الأساسي، ولاحظ التغيرات اللي تستدعي تغيير الدوا.','لو ضغطه الأساسي 130/80 وفجأة 170/100 لازم تبلّغ.'],
+['2- Assess for signs and symptoms that indicate target organ damage (eg, anginal pain; shortness of breath; alterations in speech, vision, or balance; nosebleeds; headaches; dizziness; or nocturia).','2- قيّم علامات وأعراض تلف الأعضاء المستهدفة (ألم الذبحة، ضيق النفس، تغيّر الكلام أو النظر أو التوازن، نزيف أنف، صداع، دوخة، أو كثرة التبول بالليل).','يشتكي من ألم في صدره وصداع، يبقى فيه تلف محتمل.'],
+['3- Note the apical and peripheral pulse rate, rhythm, and character.','3- لاحظ معدل وانتظام وطبيعة النبض القمي والطرفي.','تعد نبض القلب بالسماعة ونبض الإيد.'],
+['4- Assess extent to which hypertension has affected patient personally, socially, or financially.','4- قيّم مدى تأثير الضغط على المريض شخصيًا واجتماعيًا وماليًا.','ممكن الدوا يرهق ميزانيته أو يغيّر نمط حياته.']]},
+{h:'II- Nursing diagnoses',i:[
+['1- Deficient knowledge related to the relationship between the treatment regimen and control of the disease process','1- نقص المعرفة المرتبط بالعلاقة بين خطة العلاج والتحكم في المرض.','المريض مش فاهم إن الدوا لازم ينتظم عليه عشان الضغط يفضل متظبط.'],
+['2- Noncompliance with therapeutic regimen related to side effects of prescribed therapy','2- عدم الالتزام بالخطة العلاجية بسبب الأعراض الجانبية للعلاج الموصوف.','يبطّل الدوا لأنه بيتعبه.']]},
+{h:'III- Planning and goals',i:[
+['The major goals for the patient include:','الأهداف الرئيسية للمريض بتشمل:','دي النقطتين اللي المريض لازم يوصلهم.'],
+['1- Understanding of the disease process and its treatment','1- فهم المرض وعلاجه.','يعرف ليه ضغطه عالي وليه بياخد الدوا.'],
+['2- Participation in a self-care program.','2- المشاركة في برنامج للرعاية الذاتية.','يقيس ضغطه بنفسه وينظم أكله.']]},
+{h:'IV- Nursing interventions: 1-Increasing knowledge',i:[
+['a- Emphasize the concept of controlling hypertension (with lifestyle changes and medications) rather than curing it.','أ- أكّد على فكرة إن الضغط بيتم التحكم فيه (بتغيير نمط الحياة والأدوية) مش بيتشفى منه نهائيًا.','زي السكر: بتتحكم فيه، مش بتخلّص منه.'],
+['b- Arrange a consultation with a dietitian to help develop a plan for improving nutrient intake or for weight loss.','ب- رتّب استشارة مع أخصائي تغذية عشان يساعد في وضع خطة لتحسين التغذية أو إنقاص الوزن.','المريض يقعد مع أخصائي التغذية ويعمل خطة أكل.'],
+['*The program usually consists of restricting sodium and fat intake, increasing intake of fruits and vegetables, and implementing regular physical activity.','البرنامج عادةً بيتكوّن من تقليل الصوديوم والدهون، وزيادة الفاكهة والخضار، وممارسة نشاط بدني منتظم.','أكل أقل ملح ودهون، وخضار أكتر، ومشي.'],
+['*Explaining that it takes 2 to 3 months for the taste buds to adapt to changes in salt intake may help the patient adjust to reduced salt intake.','توضيح إن حلمات التذوق بتاخد من شهرين لتلاتة عشان تتعود على التغيير في الملح ممكن يساعد المريض يتأقلم مع تقليله.','أول الأكل هيحس إنه من غير طعم، بس بعد شهرين تلاتة هيتعود.'],
+['c- Advise patient to limit alcohol intake and avoid use of tobacco.','ج- انصح المريض يقلل الكحول ويتجنب التدخين.','يبطّل سجاير ويقلل المشروبات الكحولية.'],
+['d- Recommend support groups for weight control, smoking cessation, and stress reduction, if necessary.','د- أوصي بمجموعات الدعم للتحكم في الوزن والإقلاع عن التدخين وتقليل التوتر لو لزم الأمر.','مجموعة دعم بتساعد اللي عايز يبطّل تدخين.']]},
+{h:'2-Teaching patients about self-care',i:[
+['a- Help the patient achieve blood pressure control through education about managing blood pressure, setting goal blood pressures, and providing assistance with social support; encourage family members to support the patient’s efforts to control hypertension.','أ- ساعد المريض يوصل للتحكم في الضغط عن طريق تثقيفه بإدارة الضغط، وتحديد أهداف للضغط، وتوفير دعم اجتماعي، وشجّع أفراد الأسرة على دعم مجهوده.','الأسرة تعمل أكل قليل الملح علشان يلتزم.'],
+['b- Provide written information about the expected effects and side effects of medications; ensure patient understands importance of reporting side effects (and to whom) when they occur.','ب- وفّر معلومات مكتوبة عن التأثيرات المتوقعة والأعراض الجانبية للأدوية، وتأكد إن المريض فاهم أهمية التبليغ عن الأعراض الجانبية ولمين يبلّغ.','ورقة مكتوبة فيها تأثير كل دوا وإزاي يتصرف لو حصل عرض جانبي.'],
+['c- Inform patient that rebound hypertension can occur if antihypertensive medications are suddenly stopped; advise patient to have an adequate supply of medication.','ج- اعلم المريض إن الضغط ممكن يرتد ويعلى جامد لو وقف أدوية الضغط فجأة، وانصحه يكون عنده مخزون كافي من الدوا.','يسافر ويسيب الدوا في البيت؟ ده خطر.'],
+['d- Encourage and teach patient to measure their blood pressure at home; inform patient that blood pressure varies continuously and that the range within which their pressure varies should be monitored.','د- شجّع المريض وعلّمه يقيس ضغطه في البيت، واعلمه إن الضغط بيتغير باستمرار ولازم يتابع المدى اللي بيتغير فيه.','يسجل الصبح والمغرب ويورّي الدكتور.']]},
+{h:'3-Promoting adherence to the therapeutic regimen',i:[
+['a- When patients actively participate in self-care, including self-monitoring of blood pressure and diet, possibly because patients receive immediate feedback and have a greater sense of control.','أ- لما المرضى بيشاركوا بنشاط في الرعاية الذاتية، بما فيها متابعة ضغطهم وأكلهم بنفسهم، غالبًا لأنهم بياخدوا تغذية راجعة فورية وبيحسوا بسيطرة أكبر.','يقيس ضغطه ويشوف النتيجة قدامه فيتحمس.'],
+['b- Patients with hypertension must make considerable effort to adhere to recommended lifestyle modifications and to take regularly prescribed medications.','ب- مرضى الضغط لازم يبذلوا مجهود كبير للالتزام بتغيير نمط الحياة المقترح وأخد الأدوية بانتظام.','الالتزام مش سهل.'],
+['c- Continued education and encouragement are usually needed to enable patients to formulate an acceptable plan that helps them live with their hypertension and adhere to the treatment plan.','ج- غالبًا بيتحتاج تثقيف وتشجيع مستمر عشان المريض يقدر يعمل خطة مقبولة تساعده يعيش مع ضغطه ويلتزم بالعلاج.','تكرر النصيحة في كل زيارة.'],
+['d-The nurse can assist with behavior change by supporting patients in making small changes with each visit that move them toward their goals.','د- الممرضة تقدر تساعد في تغيير السلوك بدعم المرضى في عمل تغييرات صغيرة مع كل زيارة تقربهم من أهدافهم.','الزيارة دي يقلل الملح، والجاية يبدأ مشي.'],
+['e-Another important factor is following up at each visit to see how the patient has progressed with the plans made at the prior visit.','هـ- عامل مهم كمان هو المتابعة في كل زيارة لمعرفة تقدم المريض في الخطط اللي اتعملت في الزيارة اللي فاتت.','تسأله: عملت إيه في اللي اتفقنا عليه المرة اللي فاتت؟'],
+['f- Support groups for weight control, smoking cessation, and stress reduction may be beneficial for some patients; others can benefit from the support of family and friends.','و- مجموعات الدعم للتحكم في الوزن والإقلاع عن التدخين وتقليل التوتر ممكن تفيد بعض المرضى، وغيرهم بيستفيد من دعم الأسرة والأصدقاء.','واحد يرتاح في مجموعة دعم، وواحد تكفيه أسرته.'],
+['g-The nurse assists the patient to develop and adhere to an appropriate exercise regimen.','ز- الممرضة تساعد المريض يكوّن نظام تمارين مناسب ويلتزم بيه.','تساعده يختار مشي مناسب لسنه وحالته.']]},
+{h:'V- Evaluation: Expected patient outcomes may include: 1. Reports knowledge of disease management sufficient to maintain adequate tissue perfusion',i:[
+['a. Maintains blood pressure at less than 140/90 mm Hg (or less than 130/80 mm Hg for people with diabetes or chronic kidney disease) with lifestyle modifications, medications, or both','أ- يحافظ على ضغط أقل من 140/90 (أو أقل من 130/80 لمرضى السكر أو الفشل الكلوي المزمن) بتغيير نمط الحياة أو الأدوية أو الاتنين.','ضغطه 125/78 وهو مريض سكر، يبقى وصل الهدف.'],
+['b. Demonstrates no symptoms of angina, palpitations, or vision changes','ب- مفيش عنده أعراض ذبحة أو خفقان أو تغيّر في النظر.','مفيش وجع صدر ولا زغللة.'],
+['c. Has stable BUN and serum creatinine levels','ج- مستوى اليوريا والكرياتينين في الدم ثابت.','يعني الكلى شغالة زي ما هي.'],
+['d. Has palpable peripheral pulses.','د- النبض الطرفي محسوس.','تلمس نبض الرسغ والقدم لقيته.']]},
+{h:'2. Adheres to the self-care program',i:[
+['a. Adheres to the dietary regimen as prescribed: reduces calorie, sodium, and fat intake; increases fruit and vegetable intake','أ- يلتزم بالنظام الغذائي الموصوف: يقلل السعرات والصوديوم والدهون، ويزيد الفاكهة والخضار.','أكله بقى أخف ملح ودهون.'],
+['b. Exercises regularly','ب- بيمارس الرياضة بانتظام.','بيمشي كل يوم.'],
+['c. Takes medications as prescribed and reports any side effects','ج- بياخد الأدوية زي ما اتوصفت ويبلّغ عن أي أعراض جانبية.','مفيش جرعة بتفوته وبيقول لو حس بحاجة.'],
+['d. Measures blood pressure routinely','د- بيقيس ضغطه بشكل روتيني.','عنده جهاز في البيت.'],
+['e. Abstains from tobacco and excessive alcohol intake','هـ- بيمتنع عن التدخين والإفراط في الكحول.','بطّل سجاير.'],
+['f. Keeps follow-up appointments','و- بيلتزم بمواعيد المتابعة.','بيروح العيادة في ميعادها.']]},
+{h:'3. Has no complications',i:[
+['a. Reports no changes in vision','أ- مفيش تغيّر في النظر.','نظره زي ما هو.'],
+['b. Exhibits no retinal damage on vision testing','ب- مفيش تلف في الشبكية في اختبار النظر.','فحص العين سليم.'],
+['c. Maintains pulse rate and rhythm and respiratory rate within normal ranges','ج- معدل وانتظام النبض ومعدل التنفس في الحدود الطبيعية.','نبضه منتظم وتنفسه عادي.'],
+['d. Reports no dyspnea or edema','د- مفيش ضيق نفس ولا ورم (أديما).','مفيش تورم في رجليه.'],
+['e. Maintains urine output consistent with intake','هـ- كمية البول متوازنة مع اللي بيشربه.','اللي بيدخل زي اللي بيطلع.'],
+['f. Has renal function test results within normal range','و- نتايج وظائف الكلى في المعدل الطبيعي.','تحاليل الكلى سليمة.'],
+['g. Demonstrates no motor, speech, or sensory deficits','ز- مفيش ضعف في الحركة أو الكلام أو الإحساس.','بيتكلم ويتحرك عادي.'],
+['h. Reports no headaches, dizziness, weakness, changes in gait, or fall','ح- مفيش صداع ولا دوخة ولا ضعف ولا تغيّر في المشية ولا وقوع.','مشيته ثابتة ومفيش دوخة.']]}
+]},
+{t:'🩺 Coronary Artery Disease',s:[
+{h:'Coronary heart disease: Anatomy of the heart',i:[
+['The human heart is a four-chambered muscular organ located in the chest’s mediastinum, responsible for pumping blood throughout the body via two circulation circuits.','القلب عضو عضلي له أربع حجرات، موجود في منتصف الصدر (المنصف)، ومسؤول عن ضخ الدم في الجسم عن طريق دورتين دمويتين.','القلب زي مضخة بتشغّل شبكتين مواسير: واحدة للرئة وواحدة للجسم.'],
+['It consists of upper receiving chambers (right/left atria) and lower pumping chambers (right/left ventricles), separated by a septum.','بيتكوّن من حجرات علوية مستقبلة (الأذينين الأيمن والأيسر) وحجرات سفلية ضاخّة (البطينين الأيمن والأيسر)، وبينهم حاجز.','الأذين زي الاستقبال بيستقبل الدم، والبطين زي المضخة بيدفعه.'],
+['Valves ensure one-way blood flow, while the heart is protected by the pericardium and layers of muscle (myocardium).','الصمامات بتضمن إن الدم يمشي في اتجاه واحد، والقلب محمي بالغشاء المحيط به (Pericardium) وطبقات العضلة (Myocardium).','الصمام زي باب بيفتح لجهة واحدة بس.']]},
+{h:'Medical terminology of the lecture',i:[
+['Acute coronary syndrome (ACS): signs and symptoms that indicate unstable angina or acute myocardial infarction','المتلازمة التاجية الحادة: علامات وأعراض بتدل على ذبحة صدرية غير مستقرة أو جلطة حادة في عضلة القلب.','لو مريض جاي بوجع صدر شديد، ده ممكن ACS.'],
+['Angina pectoris: chest pain brought about by myocardial ischemia','الذبحة الصدرية: ألم في الصدر سببه نقص تروية عضلة القلب.','القلب مش واخد دم كفاية فبيوجّع.'],
+['Atheroma: fibrous cap composed of smooth muscle cells that forms over lipid deposits within arterial vessels and protrudes into the lumen of the vessel, narrowing the lumen and obstructing blood flow; also called plaque','Atheroma: غطاء ليفي من خلايا عضلية ملساء بيتكوّن فوق ترسبات الدهون جوه الشرايين وبيبرز جوه تجويف الشريان فيضيّقه ويعطّل تدفق الدم، وبيتسمى كمان لويحة (Plaque).','زي الجير جوه ماسورة المية بيضيّقها.'],
+['Atherosclerosis: abnormal accumulation of lipid deposits and fibrous tissue within arterial walls and the lumen','تصلب الشرايين: تراكم غير طبيعي لترسبات الدهون والنسيج الليفي جوه جدران الشرايين وتجويفها.','الدهون بتتراكم ويتصلّب الشريان.'],
+['Contractility: ability of the cardiac muscle to shorten in response to an electrical impulse','الانقباضية: قدرة عضلة القلب إنها تتقلص استجابةً للنبضة الكهربائية.','الكهربا توصل فالعضلة تتقلص وتضخ.'],
+['Coronary artery bypass graft (CABG): a surgical procedure in which a blood vessel from another part of the body is grafted onto the occluded coronary artery below the occlusion in such a way that blood flow bypasses the blockage','عملية تحويل مسار الشريان التاجي (CABG): عملية جراحية بيتم فيها زرع وعاء دموي من جزء تاني في الجسم على الشريان التاجي المسدود، تحت مكان الانسداد، بحيث الدم يعدّي حوالين الانسداد.','زي ما تعمل طريق جانبي لما الطريق الرئيسي يتقفل.'],
+['Ischemia: insufficient tissue oxygenation','نقص التروية (Ischemia): عدم كفاية الأكسجين للنسيج.','العضلة جعانة أكسجين.'],
+['Myocardial infarction (MI): death of heart tissue caused by lack of oxygenated blood flow','جلطة عضلة القلب (MI): موت نسيج القلب بسبب نقص الدم المحمّل بالأكسجين.','لو الدم انقطع عن جزء مدة طويلة بيموت.'],
+['Percutaneous coronary intervention (PCI): a procedure in which a catheter is placed in a coronary artery and one of several methods is employed to reduce blockage within the artery','التدخل التاجي عن طريق الجلد (PCI): إجراء بيتم فيه وضع قسطرة في الشريان التاجي واستخدام طريقة من عدة طرق لتقليل الانسداد جوه الشريان.','قسطرة تدخل من الشريان وتفتح السد من غير جراحة كبيرة.'],
+['Percutaneous transluminal coronary angioplasty (PTCA): a type of percutaneous coronary intervention in which a balloon is inflated within a coronary artery to break an atheroma and open the vessel lumen, improving coronary artery blood flow','رأب الشريان التاجي بالبالون (PTCA): نوع من PCI بيتم فيه نفخ بالون جوه الشريان التاجي لتكسير الـ Atheroma وفتح تجويف الوعاء، فيتحسن تدفق الدم.','بالون صغير بيتنفخ جوه الشريان ويوسّعه.'],
+['Stent: a metal mesh that provides structural support to a coronary vessel, preventing its closure.','الدعامة (Stent): شبكة معدنية بتدعم الوعاء التاجي وبتمنع إنه يتقفل.','زي سلك زنبرك بيفضل الأنبوبة مفتوحة.'],
+['Sudden cardiac death: abrupt cessation of effective heart activity','الموت القلبي المفاجئ: توقف مفاجئ لنشاط القلب الفعّال.','القلب يقف فجأة من غير إنذار.'],
+['Thrombolytic: a pharmacologic agent that breaks down blood clots.','مُذيب الجلطات: دوا بيحلل الجلطات الدموية.','بيدوّب الجلطة اللي سادة الشريان.'],
+['Troponin: a cardiac muscle biomarker; measurement is used as an indicator of heart muscle injury','التروبونين: مؤشر حيوي لعضلة القلب، وقياسه بيُستخدم كدليل على إصابة عضلة القلب.','لو التروبونين عالي، فيه ضرر في القلب.']]},
+{h:'Definition of Coronary Heart Disease',i:[
+['Coronary heart disease (CHD) is the most common type of heart disease. It is also called coronary artery disease (CAD).','مرض القلب التاجي (CHD) هو أكتر أنواع أمراض القلب شيوعًا، وبيتسمى كمان مرض الشرايين التاجية (CAD).','اسمين لنفس المرض.'],
+['Coronary artery disease (CAD) causes impaired blood flow in the arteries that supply blood to the heart.','مرض الشرايين التاجية بيسبب ضعف تدفق الدم في الشرايين اللي بتغذي القلب.','الشرايين اللي بتغذي القلب نفسه بتضيق.']]},
+{h:'Causes of coronary heart disease',i:[
+['The most common cause of cardiovascular disease is atherosclerosis','أشهر سبب لأمراض القلب والأوعية هو تصلب الشرايين.','دي الأساس.'],
+['Atherosclerosis: is an abnormal accumulation of lipid, or fatty substances, and fibrous tissue in the lining of arterial blood vessel walls.','تصلب الشرايين: تراكم غير طبيعي للدهون والنسيج الليفي في بطانة جدران الشرايين.','دهون بتلزق في بطانة الشريان.'],
+['These substances block and narrow the coronary vessels in a way that reduces blood flow to the myocardium.','المواد دي بتسد وتضيّق الأوعية التاجية بشكل بيقلل تدفق الدم لعضلة القلب.','الشريان يضيق والقلب ياخد دم أقل.'],
+['The coronary arteries supply blood, oxygen and nutrients to the heart. A buildup of plaque can narrow these arteries, decreasing blood flow to the heart. Eventually, the reduced blood flow may cause chest pain (angina), shortness of breath, or other coronary artery disease signs and symptoms.','الشرايين التاجية بتوصّل الدم والأكسجين والمغذيات للقلب. تراكم اللويحات ممكن يضيّقها فيقل الدم للقلب، ومع الوقت ممكن يسبب ألم صدر (ذبحة) وضيق نفس أو علامات تانية لمرض الشرايين التاجية.','واحد يتعب وهو طالع السلم ويحس بضغط في صدره.']]},
+{h:'Risk Factors',i:[
+['Non modifiable Risk Factors: • Family history of CAD (first-degree relative with cardiovascular disease','عوامل خطورة غير قابلة للتعديل: التاريخ العائلي لـ CAD (قريب من الدرجة الأولى عنده مرض قلب).','لو أبوك عنده القلب، خطرك أعلى.'],
+['• Increasing age (more than 45 years for men; more than 55 years for women)','• التقدم في السن (أكتر من 45 للرجال وأكتر من 55 للستات).','كل ما العمر يزيد الخطر يزيد.'],
+['• Gender (men develop CAD at an earlier age than women)','• النوع (الرجال بيصابوا بـ CAD في سن أبكر من الستات).','الراجل بيتعرض أبكر.'],
+['• Race (higher incidence of heart disease in African Americans than in Caucasians)','• العِرق (نسبة مرض القلب أعلى عند الأمريكان من أصل أفريقي مقارنةً بالقوقازيين).','دي نقطة وراثية مش بإيدك.'],
+['Modifiable Risk Factors: • Hyperlipidemia','عوامل خطورة قابلة للتعديل: • ارتفاع دهون الدم.','ممكن تتحكم فيها بالأكل والدوا.'],
+['• Cigarette smoking, tobacco use','• تدخين السجاير واستخدام التبغ.','التدخين بيضر الشرايين.'],
+['• Hypertension','• ارتفاع ضغط الدم.','الضغط العالي بيضر جدران الشرايين.'],
+['• Diabetes','• السكر.','السكر العالي بيأذي الأوعية.'],
+['• Metabolic syndrome','• المتلازمة الأيضية.','مجموعة اضطرابات مع بعض: سمنة وسكر وضغط ودهون.'],
+['• Obesity','• السمنة.','زيادة الوزن بتتعب القلب.'],
+['• Physical inactivity','• قلة النشاط البدني.','قلة الحركة بتزود الخطر.']]},
+{h:'Angina pectoris',i:[
+['Angina pectoris is a clinical syndrome usually characterized by episodes or paroxysms of pain or pressure in the anterior chest.','الذبحة الصدرية متلازمة إكلينيكية بتتميز عادةً بنوبات من ألم أو ضغط في مقدمة الصدر.','نوبة ضغط على صدره بتيجي وتروح.'],
+['The cause is insufficient coronary blood flow, resulting in a decreased oxygen supply when there is increased myocardial demand for oxygen in response to physical exertion or emotional stress.','السبب هو عدم كفاية تدفق الدم التاجي، فيقل الأكسجين لما احتياج عضلة القلب للأكسجين يزيد بسبب المجهود أو التوتر.','وهو بيجري، القلب عايز أكسجين أكتر من اللي واصله.'],
+['In other words, the need for oxygen exceeds the supply.','بمعنى تاني: احتياج الأكسجين بيزيد عن المعروض.','الطلب أكبر من المتاح.']]},
+{h:'Pathophysiology',i:[
+['Angina is usually caused by atherosclerotic disease. Almost invariably, angina is associated with a significant obstruction of at least one major coronary artery.','الذبحة غالبًا بيسببها تصلب الشرايين، وتقريبًا دايمًا بتكون مرتبطة بانسداد كبير في شريان تاجي رئيسي واحد على الأقل.','شريان رئيسي ضيق جدًا.'],
+['Normally, the myocardium extracts a large amount of oxygen from the coronary circulation to meet its continuous demands.','في الوضع الطبيعي، عضلة القلب بتسحب كمية كبيرة من الأكسجين من الدورة التاجية عشان تلبي احتياجها المستمر.','القلب شغال طول الوقت فبيستهلك أكسجين كتير.'],
+['When demand increases, flow through the coronary arteries needs to be increased. When there is blockage in a coronary artery, flow cannot be increased and ischemia results.','لما الاحتياج يزيد لازم التدفق في الشرايين التاجية يزيد. ولو فيه انسداد في شريان تاجي، التدفق مش بيقدر يزيد وبيحصل نقص تروية.','الشريان الضيق زي ماسورة مش هتقدر تعدّي مية أكتر.'],
+['Several factors are associated with typical angina pain:','فيه عوامل كتير مرتبطة بألم الذبحة المعتاد:','دي المحفزات اللي بتجيب النوبة.'],
+['• Physical exertion, which precipitates an attack by increasing myocardial oxygen demand','• المجهود البدني، بيستثير النوبة لأنه بيزود احتياج عضلة القلب للأكسجين.','طلوع السلم بسرعة.'],
+['• Exposure to cold, which causes vasoconstriction and elevated blood pressure, with increased oxygen demand','• التعرض للبرد، بيسبب انقباض الأوعية وارتفاع الضغط مع زيادة احتياج الأكسجين.','الخروج في جو بارد.'],
+['• Eating a heavy meal, which increases the blood flow to the mesenteric area for digestion, thereby reducing the blood supply available to the heart muscle; in a severely compromised heart, shunting of blood for digestion can be sufficient to induce angina pain','• أكل وجبة تقيلة، بتزود تدفق الدم لمنطقة الأمعاء للهضم، فبيقل الدم المتاح لعضلة القلب؛ وفي القلب المتضرر بشدة، تحويل الدم للهضم ممكن يكفي لإحداث ألم الذبحة.','غدا كبير ثم وجع صدر.'],
+['• Stress or any emotion-provoking situation, causing the release of catecholamine’s, which increases blood pressure, heart rate, and myocardial workload.','• التوتر أو أي موقف انفعالي، بيسبب إفراز الكاتيكولامينات اللي بتزود الضغط ومعدل القلب وشغل عضلة القلب.','خناقة أو خوف.']]},
+{h:'Types of Angina',i:[
+['• Stable angina: predictable and consistent pain that occurs on exertion and is relieved by rest and/or nitroglycerin','• الذبحة المستقرة: ألم متوقع وثابت بيحصل مع المجهود وبيزول بالراحة أو النيتروجليسرين.','دايمًا يوجعه بعد نفس المجهود ويروح بالراحة.'],
+['• Unstable angina: symptoms increase in frequency and severity, and less predictable than the pattern of stable angina. May not be relieved with rest or nitroglycerin,','• الذبحة غير المستقرة: الأعراض بتزيد في التكرار والشدة وأقل قابلية للتوقع من المستقرة، وممكن متزولش بالراحة أو النيتروجليسرين.','بقى بيجيله وهو قاعد وبيشتد.'],
+['• Intractable or refractory angina: severe incapacitating chest pain','• الذبحة العصية: ألم صدر شديد معطّل عن الحركة.','ألم بيمنعه من أي نشاط.'],
+['• Variant angina: pain at rest with reversible ST-segment elevation; thought to be caused by coronary artery vasospasm','• الذبحة المتغيرة: ألم وقت الراحة مع ارتفاع قابل للزوال في قطعة ST، ويُعتقد إنها بسبب تشنج الشريان التاجي.','بتيجي وهو نايم والسبب تشنج.'],
+['• Silent ischemia: objective evidence of ischemia (such as electrocardiographic changes with a stress test), but patient reports no pain','• نقص التروية الصامت: دليل موضوعي على نقص التروية (زي تغيرات رسم القلب مع اختبار المجهود) لكن المريض مش بيشتكي من ألم.','الرسم بيوضح نقص تروية والمريض مش حاسس.'],
+['Angina is relieved by rest or by placing a nitroglycerin tablet under the tongue. Nitroglycerin relaxes the blood vessels and lowers blood pressure. Both rest and nitroglycerin decrease the heart muscles demand for oxygen, thus relieving angina.','الذبحة بتزول بالراحة أو بوضع قرص نيتروجليسرين تحت اللسان. النيتروجليسرين بيرخّي الأوعية ويخفض الضغط. والاتنين بيقللوا احتياج عضلة القلب للأكسجين فتزول الذبحة.','بتحط القرص تحت لسانك وتقعد.'],
+['Unstable angina is characterized by attacks that increase in frequency and severity and are not relieved by rest and administering nitroglycerin.','الذبحة غير المستقرة بتتميز بنوبات بتزيد في التكرار والشدة ومبتزولش بالراحة وإعطاء النيتروجليسرين.','لو الدوا والراحة مفيش فايدة فده خطر.'],
+['Patients with unstable angina require medical intervention.','مرضى الذبحة غير المستقرة بيحتاجوا تدخل طبي.','لازم يتنقل الطوارئ.']]},
+{h:'Clinical Manifestations',i:[
+['• Vary from mild indigestion to a choking.','• بتتراوح من عسر هضم بسيط لإحساس بالاختناق.','ممكن يفتكرها حموضة.'],
+['• The severity ranges from discomfort to agonizing pain.','• الشدة من انزعاج لألم مبرّح.','من ضيق بسيط لوجع جامد.'],
+['• It is often felt deep in the chest behind the sternum (retrosternal area).','• غالبًا بيحس بيه عميق في الصدر ورا عظمة القص.','وجع ورا العضمة اللي في نص الصدر.'],
+['• The pain or discomfort is poorly localized and may radiate to the neck, jaw, shoulders, and inner aspects of the upper arms, usually the left arm.','• الألم أو الانزعاج مش محدد المكان وممكن يمتد للرقبة والفك والأكتاف والجزء الداخلي من الدراع، غالبًا الشمال.','يحس الوجع في الفك والدراع الشمال.'],
+['• The patient often feels tightness or a heavy choking or strangling sensation.','• المريض غالبًا بيحس بضيق أو إحساس تقيل بالاختناق أو الخنق.','كأن حد حاطط حاجة تقيلة على صدره.'],
+['• A feeling of weakness or numbness in the arms, wrists, and hands','• إحساس بضعف أو تنميل في الدراعين والرسغين واليدين.','إيده تتنمل.'],
+['• As well as shortness of breath, pallor, diaphoresis and dizziness','• وكمان ضيق نفس وشحوب وعرق غزير ودوخة.','وشه أصفر ومبلول عرق.'],
+['• Nausea and vomiting, may accompany the pain.','• ممكن غثيان وقيء يصاحبوا الألم.','يحس إنه هيرجّع مع الوجع.']]},
+{h:'Assessment and Diagnostic evaluation:',i:[
+['• The patient’s history related to the clinical manifestations of ischemia.','• تاريخ المريض المرتبط بالأعراض الإكلينيكية لنقص التروية.','تسأله الوجع بيجي إمتى وإزاي.'],
+['• Electrocardiogram (ECG)','• رسم القلب (ECG).','يسجل النشاط الكهربائي للقلب.'],
+['• Exercise stress test','• اختبار المجهود.','يمشي على سير وهو متوصل بجهاز.'],
+['• Stress echocardiography','• إيكو القلب تحت المجهود.','موجات صوتية للقلب أثناء المجهود.'],
+['• Cardiac catheterization','• قسطرة القلب.','أنبوبة دقيقة بتدخل لشرايين القلب.'],
+['• CT coronary angiogram','• أشعة مقطعية على الشرايين التاجية.','صورة بالأشعة لشرايين القلب.']]},
+{h:'Medical Management',i:[
+['The objectives of the medical management of angina are to decrease the oxygen demand of the myocardium and to increase the oxygen supply.','أهداف العلاج الطبي للذبحة هي تقليل احتياج عضلة القلب للأكسجين وزيادة المعروض منه.','نخفف الطلب ونزوّد الإمداد.'],
+['These objectives are met through pharmacologic therapy and control of risk factors','الأهداف دي بتتحقق عن طريق العلاج الدوائي والتحكم في عوامل الخطورة.','دوا ويتحكم في الأسباب.'],
+['1. Nitrates, (Nitroglycerin tablets) placed under the tongue, relieve angina by reducing the heart muscle’s demand for oxygen.','1. النيتريتات (أقراص النيتروجليسرين) تحت اللسان بتخفف الذبحة بتقليل احتياج عضلة القلب للأكسجين.','قرص تحت اللسان وقت النوبة.'],
+['2. Beta-adrenergic blockers (metoprolol and atenolol) relieves angina by inhibiting the effect of adrenaline on the heart.','2. حاصرات بيتا (ميتوبرولول وأتينولول) بتخفف الذبحة بتثبيط تأثير الأدرينالين على القلب.','بتهدّي القلب.'],
+['3. Calcium Channel Blockers: Calcium Channel Blockers relieves angina by lowering blood pressure, and reducing the pumping force of the heart muscle, thereby reducing muscle oxygen demand.','3. حاصرات قنوات الكالسيوم بتخفف الذبحة بخفض الضغط وتقليل قوة ضخ عضلة القلب، فبيقل احتياج العضلة للأكسجين.','بتقلل مجهود القلب.'],
+['4. Antiplatelet and anticoagulant medications (aspirin, heparin, glycoprotein) are administered to prevent platelet aggregation and subsequent thrombosis.','4. مضادات الصفائح ومضادات التجلط (الأسبرين، الهيبارين، الجلايكوبروتين) بتتدّى لمنع تجمع الصفائح وبالتالي حدوث الجلطات.','الأسبرين بيمنع تكوّن جلطة.'],
+['5. Oxygen therapy','5. العلاج بالأكسجين.','يعوّض نقص الأكسجين.']]},
+{h:'Nursing Interventions: Treating angina',i:[
+['• Take immediate action if patient reports pain or if the person’s prodromal symptoms suggest anginal ischemia','• اتصرف فورًا لو المريض اشتكى من ألم أو لو الأعراض التحذيرية بتدل على نقص تروية ذبحي.','أول ما يقول وجع صدر متستناش.'],
+['• Direct the patient to stop all activities and sit or rest in bed in a semi Fowler’s position to reduce the oxygen requirements of the ischemic myocardium.','• وجّه المريض يوقف أي نشاط ويقعد أو يرتاح في السرير بوضع نصف جالس (Semi Fowler) لتقليل احتياج عضلة القلب المحرومة للأكسجين.','يقعد ورأسه مرفوعة شوية.'],
+['• Measure vital signs and observe for signs of respiratory distress.','• قِس العلامات الحيوية وراقب علامات الضيق التنفسي.','ضغط ونبض وتنفس وتشبع الأكسجين.'],
+['• Administer nitroglycerin sublingually and asses the patient’s response (repeat up to three doses).','• أعطِ النيتروجليسرين تحت اللسان وقيّم استجابة المريض (كرّر حتى ثلاث جرعات).','قرص، تستنى، لو لسه يوجعه قرص تاني، لحد تلاتة.'],
+['• Administer oxygen therapy if the patient’s respiratory rate is increased or if the oxygen saturation level is decreased.','• أعطِ أكسجين لو معدل التنفس زاد أو لو نسبة تشبع الأكسجين قلّت.','لو التشبع نزل أو بيتنفس أسرع.'],
+['• If the pain is significant and continues after these interventions, the patient is further evaluated for acute MI and may be transferred to a higher-acuity nursing unit','• لو الألم كبير واستمر بعد التدخلات دي، المريض بيتقيّم أكتر لجلطة قلب حادة وممكن يتنقل لوحدة تمريض أعلى رعاية.','لو الوجع لسه مكمل ينتقل للعناية.']]},
+{h:'Reducing anxiety',i:[
+['• Explore implications that the diagnosis has for patient.','• استكشف تأثير التشخيص على المريض.','تسأله إيه اللي قلقه من مرضه.'],
+['• Provide essential information about the illness and methods of preventing progression.','• قدّم المعلومات الأساسية عن المرض وطرق منع تطوره.','تشرحله إزاي يمنع المرض يزيد.'],
+['• Explain importance of following prescribed directives for the ambulatory patient at home.','• اشرح أهمية اتباع التعليمات الموصوفة للمريض اللي بيتحرك في البيت.','يلتزم بالدوا وهو في بيته.'],
+['• Explore various stress reduction methods with patient (eg, music therapy).','• استكشف مع المريض طرق متنوعة لتقليل التوتر (زي العلاج بالموسيقى).','يسمع حاجة تهديه.']]},
+{h:'Preventing Pain',i:[
+['• Review the assessment findings, identify the level of activity that causes the patient’s pain or prodromal symptoms, and plan the patient’s activities accordingly','• راجع نتايج التقييم وحدد مستوى النشاط اللي بيسبب الألم أو الأعراض التحذيرية، وخطط أنشطته على أساسه.','لو بيتوجع بعد طلوع دور، تقلل المجهود.'],
+['• If the patient has pain frequently or with minimal activity, alternate the patient’s activities with rest periods.','• لو المريض بيتوجع كتير أو مع مجهود بسيط، بدّل أنشطته بفترات راحة.','نشاط شوية وراحة شوية.'],
+['• Balancing activity and rest is an important aspect of the educational plan for the patient and family.','• الموازنة بين النشاط والراحة جانب مهم في خطة التثقيف للمريض وأسرته.','الأسرة لازم تفهم ده.']]},
+{h:'Teaching Patients Self-Care',i:[
+['• The goals of education are to reduce the frequency and severity of anginal attacks, to delay the progress of the underlying disease if possible, and to prevent complications.','• أهداف التثقيف: تقليل تكرار وشدة نوبات الذبحة، وتأخير تقدم المرض الأساسي لو أمكن، ومنع المضاعفات.','نوبات أقل وأخف ومضاعفات أقل.'],
+['• Collaborate on a self-care program with patient, family, or friends.','• اتعاون مع المريض أو أسرته أو أصدقائه على برنامج رعاية ذاتية.','تعمل البرنامج معاهم.'],
+['• Plan activities to minimize angina episodes.','• خطط الأنشطة لتقليل نوبات الذبحة.','يوزّع مجهوده على اليوم.'],
+['• Teach patient that any pain unrelieved within 15 minutes by the usual methods, including nitroglycerin, should be treated at the closest emergency center. Patient should call 911 for assistance','• علّم المريض إن أي ألم مبيزولش خلال 15 دقيقة بالطرق المعتادة بما فيها النيتروجليسرين لازم يتعالج في أقرب مركز طوارئ، وعليه يتصل بالإسعاف (911).','15 دقيقة وماراحش؟ الطوارئ فورًا.']]}
+]},
+{t:'💔 Heart Failure',s:[
+{h:'Medical Terminology',i:[
+['Heart failure: Heart failure means that the heart is unable to pump blood around the body properly.','فشل القلب: معناه إن القلب مش قادر يضخ الدم في الجسم بشكل سليم.','المضخة ضعفت.'],
+['Cardiomyopathy: Cardiomyopathy is a general term for diseases of the heart muscle, where the walls of the heart chambers have become stretched, thickened or stiff. This affects the heart’s ability to pump blood around the body','اعتلال عضلة القلب: مصطلح عام لأمراض عضلة القلب، حيث جدران حجرات القلب بتبقى مشدودة أو سميكة أو متيبسة، وده بيأثر على قدرة القلب على ضخ الدم.','عضلة القلب بتبقى زي المطاط المشدود أو الخشب.'],
+['-Myocarditis: is inflammation of the heart muscle.','التهاب عضلة القلب: التهاب في عضلة القلب.','العضلة نفسها بتلتهب.'],
+['-Pericarditis is inflammation of the outer lining of the heart. In both cases, the body’s immune system','التهاب التامور: التهاب في الغشاء الخارجي للقلب. وفي الحالتين، الجهاز المناعي للجسم (الجملة كده في الأصل).','الغشاء اللي حوالين القلب هو اللي بيلتهب.'],
+['-Echocardiogram (ECHO): high-frequency sound waves are used to examine the shape and function of the heart','الإيكو: بيتم استخدام موجات صوتية عالية التردد لفحص شكل القلب ووظيفته.','زي سونار القلب.'],
+['-Angiogram (or coronary catheterisation): fluid is inserted through a small tube (catheter) to show whether your coronary arteries are narrowed or blocked','تصوير الأوعية (أو القسطرة التاجية): سائل بيتحقن عن طريق أنبوب صغير (قسطرة) لإظهار هل الشرايين التاجية ضيقة أو مسدودة.','صبغة تبان في الأشعة وتوضح مكان الضيق.']]},
+{h:'Definition of heart failure:',i:[
+['Heart failure is a chronic, progressive condition in which the heart muscle is unable to pump enough blood through blood vessels to meet the body’s needs for blood and oxygen. Basically, the heart can’t keep up with its workload.','فشل القلب حالة مزمنة متقدمة، فيها عضلة القلب مش قادرة تضخ دم كفاية في الأوعية لتلبية احتياجات الجسم من الدم والأكسجين. ببساطة القلب مش قادر يجاري شغله.','زي موتور عايز يرفع مية لعمارة 10 أدوار بس قوته بتكفي دورين.']]},
+{h:'Causes and risk factors for heart failure',i:[
+['1-Past heart attack (myocardial infarction)','1- جلطة قلب سابقة.','جزء من العضلة ضعف.'],
+['2-High blood pressure (hypertension)','2- ارتفاع ضغط الدم.','القلب بيضخ ضد ضغط عالي سنين.'],
+['3-Abnormal heart valves','3- عيوب في صمامات القلب.','الصمام المعيوب بيخلي القلب يشتغل أكتر.'],
+['4-Heart defects present at birth (congenital heart disease)','4- عيوب في القلب موجودة من الولادة.','مشكلة خلقية.'],
+['5-Severe lung disease','5- مرض رئوي شديد.','الرئة مريضة فالقلب بيتعب.'],
+['6-Diabetes','6- السكر.','بيضر الأوعية.'],
+['7-Sleep Apnea','7- انقطاع النفس أثناء النوم.','النفس بيقف أثناء النوم.']]},
+{h:'Types of Heart Failure: 1- Left-sided heart failure',i:[
+['Left heart failure occurs when there is dysfunction of the left ventricle, resulting insufficient delivery of blood to vital organs.','فشل القلب الأيسر بيحصل لما يبقى فيه خلل في البطين الأيسر، فيقل توصيل الدم للأعضاء الحيوية.','البطين الأيسر هو اللي بيضخ للجسم كله.'],
+['There are two types of left-sided heart failure. Drug treatments are different for the two types.','فيه نوعين لفشل القلب الأيسر، وعلاج الأدوية مختلف للنوعين.','النوعين محتاجين أدوية مختلفة.'],
+['Systolic failure: The left ventricle loses its ability to contract normally. The heart can’t pump with enough force to push enough blood into circulation.','الفشل الانقباضي: البطين الأيسر بيفقد قدرته على الانقباض الطبيعي، فالقلب مبيقدرش يضخ بقوة كافية لدفع دم كفاية للدورة.','العضلة ضعيفة فمبتعصرش كويس.'],
+['Diastolic failure (also called diastolic dysfunction): The left ventricle loses its ability to relax normally (because the muscle has become stiff). The heart can’t properly fill with blood during the resting period between each beat.','الفشل الانبساطي (أو خلل الانبساط): البطين الأيسر بيفقد قدرته على الارتخاء الطبيعي (لأن العضلة بقت متيبسة)، فالقلب مبيتملّاش بالدم كويس في فترة الراحة بين كل ضربة.','العضلة قوية بس صلبة فمبتتملاش.']]},
+{h:'2-Right-sided heart failure',i:[
+['Right heart failure is a condition that arises when the right ventricle cannot efficiently pump deoxygenated blood to the lungs for oxygenation before it returns to the left side of the heart to supply the rest of the body.','فشل القلب الأيمن حالة بتحصل لما البطين الأيمن مبيقدرش يضخ الدم غير المؤكسج للرئة بكفاءة عشان يتأكسج قبل ما يرجع للجانب الأيسر ويغذي باقي الجسم.','البطين الأيمن شغله يبعت الدم للرئة، ولو ضعف الدم بيتكدس.'],
+['Right-sided or right ventricular (RV) heart failure usually occurs as a result of left sided failure.','فشل القلب الأيمن بيحصل غالبًا نتيجة لفشل الجانب الأيسر.','لما الأيسر يتعب الأيمن بيتعب وراه.']]},
+{h:'3-Congestive heart failure',i:[
+['• Congestive heart failure (CHF) is a complex clinical syndrome that can result from functional or structural cardiac disorder that impairs the ventricle’s ability to fill with or eject blood.','• فشل القلب الاحتقاني (CHF) متلازمة إكلينيكية معقدة ممكن تنتج عن خلل وظيفي أو هيكلي في القلب بيضعف قدرة البطين على التملّي بالدم أو طرده.','البطين مبيتملّاش أو مبيطلّعش الدم كويس.'],
+['• As blood flow out of the heart slows, blood returning to the heart through the veins backs up, causing congestion in the body’s tissues. Often swelling (edema) results.','• لما تدفق الدم الخارج من القلب يبطّأ، الدم الراجع للقلب عن طريق الأوردة بيتكدس، فيسبب احتقان في أنسجة الجسم، وغالبًا ينتج تورم (أديما).','طابور عربيات واقف فالمية بتتجمع في الرجلين.'],
+['Most often there’s swelling in the legs and ankles, but it can happen in other parts of the body, too.','غالبًا التورم بيكون في الرجلين والكاحلين، لكن ممكن يحصل في أجزاء تانية.','الجزمة الضيقة آخر اليوم.']]},
+{h:'Heart failure symptoms include:',i:[
+['• Shortness of breath, which may wake you at night','• ضيق نفس ممكن يصحّيك بالليل.','يقوم نص الليل ملهوف على نفسه.'],
+['• Chest pain','• ألم في الصدر.','وجع في الصدر.'],
+['• Heart palpitations','• خفقان في القلب.','يحس قلبه بيدق جامد.'],
+['• Fatigue when active','• إرهاق مع النشاط.','يتعب من أقل مجهود.'],
+['• Swelling in ankles, legs and belly','• تورم في الكاحلين والرجلين والبطن.','رجليه ورمانة وبطنه منفوخة.'],
+['• Weight gain','• زيادة في الوزن.','الوزن بيزيد من احتباس المية.'],
+['• Needing to pee more often at night','• كثرة التبول بالليل.','يقوم كذا مرة يدخل الحمام.'],
+['• A dry, hacking cough','• كحة جافة متقطعة.','كحة ناشفة من غير بلغم.'],
+['• A full (bloated) or hard stomach','• بطن ممتلئة (منتفخة) أو صلبة.','بطنه تقيلة ومنفوخة.'],
+['• Loss of appetite or upset stomach (nausea)','• فقدان الشهية أو اضطراب المعدة (غثيان).','مش بيشتهي أكل.']]},
+{h:'Causes of Heart failure',i:[
+['Heart failure can develop when heart becomes damaged, weak or stiff. Common causes include:','فشل القلب ممكن يحصل لما القلب يتضرر أو يضعف أو يتيبس، ومن الأسباب الشائعة:','القلب متضرر أو ضعيف أو متيبس.'],
+['• Coronary artery disease: Reduced blood flow can damage or weaken heart.','• مرض الشرايين التاجية: نقص تدفق الدم ممكن يضر القلب أو يضعفه.','القلب محروم من الدم.'],
+['• High blood pressure: Pushing harder against high blood pressure can make heart stiff and weak.','• ارتفاع الضغط: الضخ بقوة أكبر ضد الضغط العالي ممكن يخلي القلب متيبس وضعيف.','زي واحد بيدفع عربية تقيلة كل يوم.'],
+['• Heart valve disease: A damaged valve can make heart work harder to pump blood.','• أمراض الصمامات: الصمام التالف بيخلي القلب يشتغل أكتر عشان يضخ الدم.','باب بيفتح بصعوبة.'],
+['• Cardiomyopathy: Diseases of the heart muscle can make it harder for heart to pump blood.','• اعتلال عضلة القلب: أمراض العضلة بتصعّب على القلب ضخ الدم.','العضلة نفسها مريضة.'],
+['• Congenital heart disease: Heart issues present at birth can affect how well heart pumps blood.','• أمراض القلب الخلقية: مشاكل موجودة من الولادة بتأثر على كفاءة الضخ.','مشكلة من الولادة.'],
+['• Arrhythmias: Abnormal heart rhythms can sometimes weaken heart.','• اضطرابات النظم: النبض غير المنتظم ممكن أحيانًا يضعف القلب.','نبض عشوائي بيرهق العضلة.'],
+['• Myocarditis: Inflammation of the heart muscle can damage heart and lead to heart failure.','• التهاب عضلة القلب: التهاب العضلة ممكن يضر القلب ويؤدي لفشله.','العضلة الملتهبة بتضعف.'],
+['*Other conditions and factors can also cause heart failure, including certain infections, medications and long-term health conditions.','* ظروف وعوامل تانية ممكن تسبب فشل القلب، منها بعض العدوى والأدوية والأمراض المزمنة.','أسباب تانية غير اللي فوق.']]},
+{h:'Heart failure risk factors',i:[
+['Some factors can increase risk of developing heart failure, including:','فيه عوامل بتزود خطر الإصابة بفشل القلب، منها:','عوامل الخطورة.'],
+['• Diabetes','• السكر.','بيضر الأوعية.'],
+['• COPD','• مرض الانسداد الرئوي المزمن.','الرئة بتتعب.'],
+['• High cholesterol','• ارتفاع الكوليسترول.','دهون على الشرايين.'],
+['• High blood pressure','• ارتفاع الضغط.','يرهق القلب.'],
+['• Kidney disease','• مرض الكلى.','احتباس سوائل.'],
+['• A BMI higher than 30','• مؤشر كتلة جسم أعلى من 30.','سمنة.'],
+['• Age over 65','• السن فوق 65.','العمر بيضعف القلب.'],
+['• Tobacco or other substance use','• التبغ أو تعاطي مواد تانية.','يضر القلب.'],
+['• Lack of physical activity','• قلة النشاط البدني.','قلة الحركة.'],
+['• Eating foods high in salt and fat','• أكل أكل عالي في الملح والدهون.','مخللات وأكل دسم.'],
+['• A biological family history of heart failure','• تاريخ عائلي بيولوجي لفشل القلب.','أهلك عندهم فشل قلب.']]},
+{h:'Complications',i:[
+['• Heart and blood vessels: Heart failure can lead to abnormal heart rhythms, heart valve problems, pulmonary hypertension, blood clots or cardiac arrest.','• القلب والأوعية: فشل القلب ممكن يؤدي لاضطراب النبض ومشاكل الصمامات وارتفاع ضغط الرئة وجلطات أو توقف القلب.','مضاعفات في القلب نفسه.'],
+['• Lungs: Fluid can build up in lungs and make it harder to breathe.','• الرئتين: السوائل ممكن تتجمع في الرئتين وتصعّب التنفس.','مية في الرئة.'],
+['• Kidneys and liver: Reduced blood flow can damage these organs over time.','• الكلى والكبد: نقص تدفق الدم ممكن يضر الأعضاء دي مع الوقت.','الدم مش بيوصلهم كفاية.'],
+['• Nutrition: Heart failure can affect appetite and digestion, which may lead to malnutrition','• التغذية: فشل القلب ممكن يأثر على الشهية والهضم، وده ممكن يؤدي لسوء التغذية.','مبياكلش فيضعف.']]},
+{h:'Diagnostic tests',i:[
+['• Blood tests','• تحاليل الدم.','تحليل دم.'],
+['• Cardiac catheterization','• قسطرة القلب.','أنبوبة لشرايين القلب.'],
+['• Chest X-ray','• أشعة على الصدر.','تبين حجم القلب.'],
+['• Echocardiogram','• إيكو القلب.','سونار القلب.'],
+['• Heart MRI','• رنين مغناطيسي على القلب.','صورة تفصيلية.'],
+['• Cardiac CT','• أشعة مقطعية على القلب.','صورة مقطعية.'],
+['• Electrocardiogram (EKG/ECG)','• رسم القلب.','نشاط القلب الكهربائي.'],
+['• Stress test','• اختبار المجهود.','القلب تحت المجهود.'],
+['• Genetic testing','• الفحص الجيني.','لو في سبب وراثي.']]},
+{h:'The four stages of congestive heart failure',i:[
+['There are four congestive heart failure stages (A, B, C and D). They range from being at risk for heart failure to having an advanced case.','فيه أربع مراحل لفشل القلب الاحتقاني (A وB وC وD)، من مجرد التعرض لخطر الإصابة لحد الحالة المتقدمة.','أربع درجات من الخطر للمتقدم.'],
+['• Stage A: when patient at high risk of developing heart failure because having certain risk factors, but don’t have symptoms or structural heart disease.','• المرحلة A: المريض معرّض بشدة لفشل القلب بسبب عوامل خطورة، لكن مفيش أعراض ولا مرض هيكلي في القلب.','سكر وضغط من غير أعراض.'],
+['• Stage B (pre-heart failure): heart has structural changes or doesn’t work as well as it should, but patient have never had symptoms of heart failure.','• المرحلة B (ما قبل فشل القلب): القلب فيه تغيرات هيكلية أو مبيشتغلش بكفاءته، لكن المريض عمره ما ظهرت عنده أعراض.','القلب اتغيّر وكلامه لسه مفيش أعراض.'],
+['• Stage C: There is structural heart disease, and patient currently have or previously had symptoms of heart failure.','• المرحلة C: فيه مرض هيكلي في القلب والمريض عنده أو كان عنده أعراض فشل القلب.','تعب وضيق نفس.'],
+['• Stage D (advanced): Tere is advanced heart failure symptoms that interfere with daily life and may be difficult to manage with treatment.','• المرحلة D (متقدمة): فيه أعراض فشل قلب متقدمة بتتعارض مع الحياة اليومية وممكن يصعب السيطرة عليها بالعلاج.','حتى لبس هدومه بيتعبه.']]},
+{h:'Management and Treatment: Changes to daily habits, which include:',i:[
+['• Regular physical activity','• نشاط بدني منتظم.','مشي خفيف.'],
+['• Avoidance of tobacco and other addictive substances','• تجنب التبغ والمواد المسببة للإدمان.','يبطّل تدخين.'],
+['• Limits on sodium (salt) in the foods you eat','• تقليل الصوديوم (الملح) في الأكل.','أقل ملح.'],
+['• Limits on fluid intake','• تقليل كمية السوائل.','يحدد كمية المية اللي يشربها.']]},
+{h:'Medications',i:[
+['Heart failure medicines may include:','أدوية فشل القلب ممكن تشمل:','دي الفئات.'],
+['• ACE inhibitors','• مثبطات الإنزيم المحول للأنجيوتنسين (ACE).','بتوسّع الأوعية.'],
+['• ARBs','• حاصرات مستقبلات الأنجيوتنسين (ARBs).','شبه اللي قبلها.'],
+['• Beta-blockers','• حاصرات بيتا.','بتهدّي القلب.'],
+['• Diuretics','• مدرّات البول.','بتطلّع المية الزيادة.'],
+['• Aldosterone antagonists','• مضادات الألدوستيرون.','بتقلل احتباس الملح والمية.'],
+['• Inotropic drugs','• أدوية مقوّية لانقباض القلب (Inotropic).','بتقوّي ضربة القلب.']]},
+{h:'Surgical intervention',i:[
+['Procedures may include:','الإجراءات ممكن تشمل:','دي العمليات والأجهزة.'],
+['• Biventricular pacemaker: This device helps the lower chambers of heart pump together more effectively.','• جهاز تنظيم ضربات القلب ثنائي البطين: بيساعد الحجرتين السفليتين على الضخ مع بعض بكفاءة أكبر.','البطينين يضربوا مع بعض.'],
+['• Implantable cardiac defibrillator (ICD): An ICD detects and treats dangerous abnormal heart rhythms.','• جهاز مزيل الرجفان القابل للزرع (ICD): بيكتشف ويعالج اضطرابات النبض الخطيرة.','بيدّي صدمة لو النبض خطر.'],
+['• Heart transplant: This surgery replaces a severely damaged heart with a healthy donor heart.','• زراعة قلب: عملية بتستبدل القلب التالف بشدة بقلب متبرع سليم.','قلب جديد بدل التالف.'],
+['• Intra-aortic balloon pump (IABP): This device helps heart pump more blood when it needs temporary support in the ICU.','• مضخة البالون داخل الأورطي (IABP): بتساعد القلب يضخ دم أكتر لما يحتاج دعم مؤقت في العناية.','بالون بيساعد القلب في العناية.'],
+['• Ventricular assist devices (VADs): A VAD helps a weakened heart pump blood to the rest of body while patient is in the ICU.','• أجهزة مساعدة البطين (VADs): بتساعد القلب الضعيف يضخ الدم لباقي الجسم والمريض في العناية.','مضخة صغيرة تساعد القلب.'],
+['• Heart surgery to treat blocked arteries, valve disease or congenital problems: Surgery can correct heart problems that may cause or worsen heart failure.','• جراحة قلب لعلاج الشرايين المسدودة أو أمراض الصمامات أو المشاكل الخلقية: الجراحة بتصلّح مشاكل القلب اللي ممكن تسبب فشل القلب أو تزوّده.','تصلّح السبب.']]},
+{h:'Nursing Intervention: 1-Initiating Interventions for Decreased Cardiac Output',i:[
+['1-Obtain a comprehensive health history focusing on HF symptoms.','1- خد تاريخ صحي شامل مع التركيز على أعراض فشل القلب.','اسأله عن ضيق النفس والتورم.'],
+['2- Auscultate apical pulse, assess heart rate.','2- اسمع النبض القمي وقيّم معدل القلب.','بالسماعة على القلب.'],
+['3. Note heart sounds.','3- لاحظ أصوات القلب.','اسمع أي أصوات غير عادية.'],
+['4- Palpate peripheral pulses.','4- المس النبض الطرفي.','نبض الرسغ والقدم.'],
+['5- Monitor blood pressure (BP).','5- راقب ضغط الدم.','قياس الضغط.'],
+['6. Inspects the skin for pallor or cyanosis.','6- افحص الجلد للشحوب أو الزرقان.','لون الجلد والشفايف.'],
+['7. Monitor urine output, noting decreasing output and concentrated urine.','7- راقب كمية البول ولاحظ قلتها وتركيزه.','بول قليل غامق علامة سيئة.'],
+['8. Note changes in sensorium: lethargy, confusion, disorientation, anxiety, and depression.','8- لاحظ تغيّر الوعي: خمول وتشوش وتوهان وقلق واكتئاب.','يبقى مش مركز.'],
+['9. Examine lower extremities for edema and rate its severity.','9- افحص الأطراف السفلية للأديما وقيّم شدتها.','اضغط على رجله وشوف الأثر.'],
+['10. Assess the abdomen for tenderness, hepatomegaly, and signs of ascites.','10- قيّم البطن للألم وتضخم الكبد وعلامات الاستسقاء.','بطن منتفخة وكبد كبير.'],
+['11. Assess jugular vein distention (JVD).','11- قيّم انتفاخ الوريد الوداجي.','وريد الرقبة بارز.'],
+['12. Monitor results of laboratory and diagnostic tests.','12- راقب نتايج التحاليل والفحوصات.','تابع النتايج.'],
+['13. Monitor oxygen saturation and ABGs.','13- راقب تشبع الأكسجين وغازات الدم الشرياني.','قياس الأكسجين.'],
+['14. Give oxygen as indicated by the patient’s symptoms, oxygen saturation, and ABGs.','14- أعطِ أكسجين حسب الأعراض والتشبع وغازات الدم.','لو التشبع قل.'],
+['15. Provide a restful environment and encourage periods of rest and sleep; assist with activities.','15- وفّر بيئة هادية وشجّع الراحة والنوم وساعده في الأنشطة.','قلل الإزعاج.'],
+['16. Encourage rest, semi-recumbent in bed or chair.','16- شجّع الراحة بوضع نصف مستلقي في السرير أو الكرسي.','راسه مرفوعة.'],
+['17. Assist the patient in assuming a high Fowler’s position.','17- ساعده يتخذ وضع Fowler العالي.','قاعد تقريبًا بالكامل.'],
+['18. Check for calf tenderness, diminished pedal pulses, swelling, local redness, or pallor of extremity.','18- افحص ألم السمانة وضعف نبض القدم والتورم والاحمرار الموضعي أو شحوب الطرف.','ممكن علامة جلطة.'],
+['19. Elevate legs, avoiding pressure under the knee or in a position comfortable to the patient.','19- ارفع الرجلين مع تجنب الضغط تحت الركبة أو بوضع مريح للمريض.','مخدة تحت الرجل مش تحت الركبة.'],
+['20. Reposition patient every two (2) hours.','20- غيّر وضع المريض كل ساعتين.','عشان القرح.'],
+['21. Encourage active and passive exercises. Increase activity as tolerated.','21- شجّع التمارين النشطة والسلبية وزوّد النشاط حسب التحمل.','زوّد بالتدريج.'],
+['22. Administer medications as indicated.','22- أعطِ الأدوية حسب الإشارة.','حسب أمر الدكتور.'],
+['23. Administer IV solutions, restricting total amount as indicated. Avoid saline solutions.','23- أعطِ المحاليل الوريدية مع تحديد الكمية الكلية حسب الإشارة، وتجنب المحاليل الملحية.','الملح بيحتبس مية.'],
+['24. Monitor for signs and symptoms of fluid and electrolyte imbalances.','24- راقب علامات وأعراض اختلال السوائل والأملاح.','تابع الأملاح.'],
+['25. Monitor serial electrocardiogram (ECG) and chest x-ray changes.','25- راقب التغيرات المتتالية في رسم القلب وأشعة الصدر.','قارن النتايج مع بعض.']]},
+{h:'2. Maintaining or Improving Respiratory Function',i:[
+['1. Assess respiratory rate, use of accessory muscles, & cyanosis.','1- قيّم معدل التنفس واستخدام عضلات التنفس المساعدة والزرقان.','يتنفس بعضلات رقبته وكتافه؟'],
+['2. Auscultate breath sounds, noting crackles and wheezes.','2- اسمع أصوات التنفس ولاحظ الخراخر والصفير.','الخراخر معناها مية في الرئة.'],
+['3. Monitor oxygen saturation and ABG findings.','3- راقب تشبع الأكسجين ونتايج غازات الدم الشرياني.','قياس الأكسجين.'],
+['4. Monitor potassium levels.','4- راقب مستويات البوتاسيوم.','المدرّات بتنزّله.'],
+['5. Instruct patient in effective coughing and deep breathing.','5- علّم المريض الكحة الفعّالة والتنفس العميق.','نفس عميق وكحة قوية.'],
+['6. Encourage frequent position changes.','6- شجّع تغيير الوضعية بشكل متكرر.','متفضلش على جنب واحد.'],
+['7. Position the patient in a High Fowler’s position with the head of the bed elevated up to 90°.','7- ضع المريض بوضع Fowler العالي ورأس السرير مرفوعة لحد 90 درجة.','قاعد مستقيم.'],
+['8. Suction secretions PRN','8- اسحب الإفرازات عند الحاجة.','لو تراكمت.'],
+['9. Administer supplemental oxygen as indicated.','9- أعطِ أكسجين إضافي حسب الإشارة.','لو محتاج.'],
+['10. Administer medications as indicated.','10- أعطِ الأدوية حسب الإشارة.','حسب أمر الدكتور.']]},
+{h:'3. Managing Fluid Volume and Electrolyte Imbalance',i:[
+['1. Monitor urine output, noting amount and color, as well as the time of day when diuresis occurs.','1- راقب كمية ولون البول ووقت اليوم اللي بيحصل فيه الإدرار.','سجّل الكمية واللون.'],
+['2. Monitor and calculate 24-hour intake and output (I&O) balance.','2- راقب واحسب ميزان الداخل والخارج على 24 ساعة.','اللي شربه واللي طلع.'],
+['3. Weigh daily.','3- زن المريض يوميًا.','زيادة الوزن معناها احتباس مية.'],
+['4. Assess for distended neck and peripheral vessels. Inspect dependent body areas for edema (check for pitting); note the presence of generalized body edema (anasarca)..','4- قيّم انتفاخ أوعية الرقبة والأوعية الطرفية، وافحص المناطق المنخفضة في الجسم للأديما (اختبر الانطباع)، ولاحظ وجود أديما معممة (Anasarca).','تضغط بصباعك على الرجل ويفضل أثر.'],
+['5. Auscultate breath sounds, noting decreased and/or adventitious sounds (crackles, wheezes). Note presence of increased dyspnea, tachypnea, orthopnea, paroxysmal nocturnal dyspnea, persistent cough.','5- اسمع أصوات التنفس ولاحظ الأصوات الضعيفة أو الإضافية (خراخر وصفير)، ولاحظ زيادة ضيق النفس وسرعة التنفس وضيق النفس عند الاستلقاء وضيق النفس الليلي المفاجئ والكحة المستمرة.','لو مش قادر ينام مستلقي.'],
+['6. Administer oral diuretics in the morning.','6- أعطِ المدرّات بالفم الصبح.','عشان ميقومش بالليل.'],
+['7. Promote adherence to a low-sodium diet.','7- شجّع الالتزام بنظام غذائي قليل الصوديوم.','أقل ملح.'],
+['8. Plan fluid intake throughout the day.','8- خطط شرب السوائل على مدار اليوم.','يوزّع المية على اليوم.'],
+['9. Monitor IV fluids','9- راقب المحاليل الوريدية.','متتعبش القلب بسوائل زيادة.'],
+['10. Assess for and prevent pressure ulcers.','10- قيّم وامنع قرح الضغط.','غيّر وضعه واهتم بالجلد.'],
+['11. Monitor BP and central venous pressure (CVP)','11- راقب الضغط والضغط الوريدي المركزي (CVP).','CVP بيقيس الضغط في الوريد الكبير.'],
+['12. Assess bowel sounds. Note complaints of anorexia, nausea, abdominal distension, constipation..','12- قيّم أصوات الأمعاء ولاحظ الشكاوى من فقدان الشهية والغثيان وانتفاخ البطن والإمساك.','الأمعاء بتتأثر باحتقان الدم.'],
+['13. Monitor for distended neck veins and ascites','13- راقب انتفاخ أوردة الرقبة والاستسقاء.','وريد الرقبة بارز وبطن منتفخة.'],
+['14. Evaluate urine output in response to diuretic therapy.','14- قيّم كمية البول استجابةً للعلاج بالمدرّات.','لو الدوا شغّال هيزيد البول.'],
+['15. Assess the need for an indwelling urinary catheter.','15- قيّم الحاجة لقسطرة بولية.','لو مش قادر يتبول أو محتاج قياس دقيق.'],
+['16. Assess for the presence of peripheral edema. Do not elevate legs if the client is dyspneic.','16- قيّم وجود أديما طرفية. لا ترفع الرجلين لو المريض عنده ضيق نفس.','رفع الرجلين بيرجّع دم للقلب فيزوّد ضيق النفس.'],
+['17. Administer medications as indicated.','17- أعطِ الأدوية حسب الإشارة.','حسب أمر الدكتور.']]}
+]}
+];
+const tabs=document.getElementById('tabs'),app=document.getElementById('app');
+function show(n){
+ [...tabs.children].forEach((b,k)=>b.classList.toggle('on',k===n));
+ const d=D[n];
+ app.innerHTML=d.s?d.s.map(x=>`<h2 class="sec">${x.h}</h2>`+x.i.map(r=>`<div class="it"><div class="en">${r[0]}</div><div class="ar">${r[1]}</div><div class="ex"><b>${W}</b> ${r[2]}</div></div>`).join('')).join(''):'<div class="soon">الجزء ده لسه هيتضاف في الدفعة الجاية.</div>';
+ window.scrollTo({top:0,behavior:'smooth'});
+}
+D.forEach((d,k)=>{const b=document.createElement('button');b.className='tab';b.textContent=d.t;b.onclick=()=>show(k);tabs.appendChild(b)});
+const tb=document.getElementById('tb');
+tb.onclick=()=>{const dk=document.documentElement.dataset.theme==='dark';document.documentElement.dataset.theme=dk?'':'dark';tb.textContent=dk?'🌙':'☀️'};
+show(0);
+</script>
+</body>
+</html>
