@@ -1,0 +1,680 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --accent:#be123c; --c2:#1d4ed8; --c3:#d97706; --c4:#0d9488;
+  --grad:linear-gradient(135deg,#9f1239 0%,#be123c 30%,#5b21b6 70%,#1e3a8a 100%);
+  --grad-soft:linear-gradient(135deg,#be123c,#1d4ed8);
+  --bg:#faf6f6; --bg2:#f3eaec; --card:#ffffff; --text:#2a1519; --text2:#5b4348; --text3:#8a7479;
+  --bc:rgba(80,20,35,0.09); --r:16px; --tr:all .3s cubic-bezier(.4,0,.2,1);
+}
+[data-theme="dark"] {
+  --bg:#130a0d; --bg2:#1c1015; --card:#25161c; --text:#f5e9ec; --text2:#d4bcc2; --text3:#9c8289;
+  --bc:rgba(255,255,255,0.09); --accent:#fb7185; --c2:#60a5fa; --c3:#fbbf24; --c4:#2dd4bf;
+}
+html { scroll-behavior:smooth; scroll-padding-top:80px; }
+body { font-family:'Outfit','Cairo',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; overflow-x:hidden; transition:background .4s,color .4s; }
+#prog-bar { position:fixed; top:0; left:0; height:3px; z-index:999; background:linear-gradient(90deg,var(--accent),var(--c3),var(--c4),var(--c2)); width:0; }
+nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:0 24px; height:64px; background:rgba(250,246,246,.93); backdrop-filter:blur(16px); border-bottom:1px solid var(--bc); }
+[data-theme="dark"] nav { background:rgba(19,10,13,.95); }
+.nav-brand { display:flex; align-items:center; gap:9px; font-size:15px; font-weight:900; }
+.nav-logo-icon { width:34px; height:34px; border-radius:8px; background:var(--grad-soft); display:flex; align-items:center; justify-content:center; color:#fff; font-size:12px; font-weight:900; }
+.theme-btn { width:38px; height:38px; border-radius:50%; border:1px solid var(--bc); background:var(--card); cursor:pointer; font-size:15px; transition:var(--tr); }
+.theme-btn:hover { border-color:var(--c3); transform:rotate(20deg); }
+.toc-btn { display:flex; align-items:center; gap:7px; font-family:inherit; font-size:13px; font-weight:700; padding:8px 14px; border-radius:8px; border:1px solid var(--bc); background:var(--card); color:var(--text2); cursor:pointer; transition:var(--tr); }
+.toc-btn:hover { color:var(--c2); border-color:var(--c2); }
+.hero-band { margin-top:64px; background:var(--grad); padding:40px 24px 46px; text-align:center; position:relative; overflow:hidden; }
+.hero-band::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 380px 180px at 12% 0%,rgba(245,158,11,.28),transparent 70%),radial-gradient(ellipse 600px 200px at 50% 100%,rgba(13,148,136,.25),transparent 70%); }
+.hero-band > * { position:relative; }
+.ecg { position:absolute !important; left:0; right:0; bottom:8px; width:100%; height:42px; opacity:.35; pointer-events:none; }
+.ecg path { fill:none; stroke:#fff; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; }
+.hero-icon { width:68px; height:68px; border-radius:20px; background:rgba(255,255,255,.18); display:flex; align-items:center; justify-content:center; font-size:32px; margin:0 auto 14px; border:1.5px solid rgba(255,255,255,.35); }
+.hero-band h1 { font-size:clamp(22px,4vw,32px); font-weight:900; color:#fff; margin-bottom:6px; }
+.hero-band p { font-size:13px; color:rgba(255,255,255,.9); }
+.shell { max-width:820px; margin:0 auto; padding:26px 18px 80px; }
+.toc { display:none; background:var(--card); border:1px solid var(--bc); border-radius:var(--r); padding:14px; margin-bottom:22px; }
+.toc.open { display:flex; flex-wrap:wrap; gap:8px; }
+.toc a { font-size:12px; font-weight:700; text-decoration:none; color:var(--text2); padding:6px 12px; border-radius:20px; background:var(--bg2); border:1px solid var(--bc); transition:var(--tr); }
+.toc a:hover { color:#fff; background:var(--accent); border-color:var(--accent); }
+.sec-title { margin:34px 0 14px; padding:14px 18px; border-radius:14px; background:var(--grad); color:#fff; }
+.sec-title .en { font-size:18px; font-weight:900; }
+.sec-title .ar { font-family:'Cairo',sans-serif; font-size:14px; opacity:.92; margin-top:3px; direction:rtl; text-align:right; }
+.sub-title { margin:24px 0 10px; padding:6px 14px; border-left:4px solid var(--c3); border-right:0; }
+.sub-title .en { font-size:16px; font-weight:900; color:var(--text); }
+.sub-title .ar { font-family:'Cairo',sans-serif; font-size:13px; color:var(--text3); direction:rtl; text-align:right; margin-top:2px; }
+.fig { background:var(--card); border:1px solid var(--bc); border-radius:var(--r); padding:14px; margin:0 0 16px; text-align:center; }
+.fig img { max-width:100%; border-radius:10px; background:#fff; }
+.item { background:var(--card); border:1px solid var(--bc); border-radius:var(--r); margin-bottom:14px; overflow:hidden; box-shadow:0 2px 12px rgba(120,20,45,.06); }
+.item .en { padding:15px 18px; font-size:15px; font-weight:700; line-height:1.7; direction:ltr; text-align:left; border-left:4px solid var(--accent); }
+.item .ar { padding:13px 18px; font-family:'Cairo',sans-serif; font-size:15px; line-height:1.9; direction:rtl; text-align:right; background:var(--bg2); color:var(--text); border-top:1px solid var(--bc); border-right:4px solid var(--c2); }
+.item .ex { padding:13px 18px; font-family:'Cairo',sans-serif; font-size:14px; line-height:1.9; direction:rtl; text-align:right; color:var(--text2); background:rgba(217,119,6,.08); border-top:1px dashed rgba(217,119,6,.4); border-right:4px solid var(--c3); }
+.item .ex b { color:var(--c3); }
+.lbl { display:inline-block; font-family:'Outfit',sans-serif; font-size:10px; font-weight:900; letter-spacing:.5px; padding:1px 8px; border-radius:6px; margin-left:8px; vertical-align:middle; }
+.item .en .lbl { background:rgba(190,18,60,.12); color:var(--accent); margin:0 8px 0 0; }
+footer { background:var(--bg2); border-top:1px solid var(--bc); padding:22px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+.footer-brand { font-size:14px; font-weight:700; } .footer-brand span { color:var(--accent); }
+.footer-tg { display:flex; align-items:center; gap:5px; text-decoration:none; color:#229ED9; font-size:12px; font-weight:600; }
+@media (max-width:480px) { nav{padding:0 12px;} .shell{padding:18px 12px 60px;} .nav-brand span{display:none;} .item .en,.item .ar,.item .ex{padding-left:13px;padding-right:13px;} }
+@media print { nav,#prog-bar,.toc,.toc-btn{display:none!important;} .hero-band{margin-top:0;} .item{break-inside:avoid;} }
+</style>
+</head>
+<body>
+<div id="prog-bar"></div>
+<nav>
+  <button class="toc-btn" id="tocBtn"><i class="fa-solid fa-list"></i> الفهرس</button>
+  <div class="nav-brand"><div class="nav-logo-icon">GT</div><span>GHAITH TEAM</span></div>
+  <button class="theme-btn" id="themeBtn" aria-label="theme">🌙</button>
+</nav>
+<div class="hero-band">
+  <svg class="ecg" viewBox="0 0 600 46" preserveAspectRatio="none" aria-hidden="true"><path d="M0 26 H90 L104 26 L112 8 L124 40 L134 14 L142 26 H250 L264 26 L272 6 L284 42 L294 14 L302 26 H410 L424 26 L432 8 L444 40 L454 14 L462 26 H600"/></svg>
+  <div class="hero-icon">🧪</div>
+  <h1>Liver &amp; Viral Hepatitis</h1>
+  <p>Medicine disease</p>
+</div>
+<div class="shell">
+  <div class="toc" id="toc"></div>
+  <div id="doc"></div>
+</div>
+<footer>
+  <div class="footer-brand">GHAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg"><i class="fa-brands fa-telegram"></i> @nursing2bu</a>
+</footer>
+<script>
+const IMG = "data:image/jpeg;base64,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";
+/* '#' = main title | '##' = sub title | 'img' = figure | else [English, Arabic, Example] */
+const D = [
+['#','Anatomic and Physiologic Overview of the Liver','نظرة عامة على تشريح ووظائف الكبد'],
+['The liver is a large, highly vascular organ located behind the ribs in the upper right portion of the abdominal cavity.',
+ 'الكبد عضو كبير وفيه أوعية دموية كتير جدًا، وموجود ورا الضلوع في الجزء الفوقاني اليمين من تجويف البطن.',
+ 'حط إيدك على آخر ضلوع جنبك اليمين من فوق، اللي تحتها ده الكبد. ولأن فيه دم كتير، لو اتجرح بينزف بسرعة.'],
+['It weighs between 1,200 and 1,500 g in the average adult and is divided into four lobes.',
+ 'وزنه عند الشخص البالغ العادي بين 1200 و1500 جرام، ومتقسم لأربع فصوص.',
+ 'زي كيس سكر كيلو ونص تقريبًا في الوزن، ومتقسم لأربع حتت زي البرتقالة لما بتتقسم فصوص.'],
+['The liver is the largest gland of the body—can be considered a chemical factory that manufactures, stores, alters, and excretes a large number of substances involved in metabolism.',
+ 'الكبد أكبر غدة في الجسم، وممكن نشبّهه بمصنع كيميائي بيصنّع ويخزّن ويغيّر ويطرد مواد كتير ليها علاقة بالتمثيل الغذائي (الميتابوليزم).',
+ 'زي مصنع كبير: بتدخله خامات يعمل منها منتجات، ويخزن اللي زيادة في مخزن، ويرمي الفضلات بره.'],
+['img'],
+['#','Functions of the Liver','وظائف الكبد'],
+['Glucose Metabolism','تمثيل الجلوكوز (السكر).','الكبد هو اللي بيظبط مستوى السكر في الدم.'],
+['Ammonia Conversion','تحويل الأمونيا.','الأمونيا سمّ، والكبد بيحوّلها لحاجة أمان.'],
+['Protein Metabolism','تمثيل البروتين.','الكبد بيصنّع معظم بروتينات الدم زي الألبيومين.'],
+['Fat Metabolism','تمثيل الدهون.','الكبد بيكسر الدهون عشان يطلّع منها طاقة.'],
+['Vitamin and Iron Storage','تخزين الفيتامينات والحديد.','الكبد زي المخزن اللي بتحط فيه الفيتامينات والحديد لوقت الحاجة.'],
+['Bile Formation','تكوين الصفراء.','الكبد بيعمل العصارة الصفراء اللي بتساعد في هضم الدهون.'],
+['Bilirubin Excretion','إخراج البيليروبين.','البيليروبين صبغة صفرا، والكبد بيطلّعها من الدم.'],
+['Drug Metabolism','تمثيل الأدوية.','الكبد بيكسر الأدوية اللي بتاخدها وبيجهّزها للخروج من الجسم.'],
+['##','Glucose Metabolism','تمثيل الجلوكوز'],
+['The liver plays a major role in the metabolism of glucose and the regulation of blood glucose concentration.',
+ 'الكبد له دور كبير في تمثيل الجلوكوز وفي ضبط تركيز السكر في الدم.',
+ 'لو السكر عِلي في الدم الكبد يخزّن منه، ولو وِطي الكبد يطلّع من المخزون. زي ترمومتر بيظبط الحرارة.'],
+['Additional glucose can be synthesized by the liver through a process called gluconeogenesis.',
+ 'الكبد يقدر يصنّع جلوكوز زيادة من مواد تانية، والعملية دي اسمها gluconeogenesis (تكوين الجلوكوز الجديد).',
+ 'لو الواحد صايم ومفيش أكل، الكبد يعمل سكر جديد من مواد تانية عشان المخ والجسم ميقفوش.'],
+['##','Ammonia Conversion','تحويل الأمونيا'],
+['The use of amino acids from protein for gluconeogenesis results in the formation of ammonia as a by-product.',
+ 'لما الجسم يستخدم الأحماض الأمينية اللي من البروتين عشان يعمل جلوكوز جديد، بيطلع الأمونيا كناتج جانبي.',
+ 'زي ما الخشب لما يتحرق يطلع دخان؛ الأحماض الأمينية لما تتحرق عشان السكر بتطلع أمونيا.'],
+['The liver converts this metabolically generated ammonia into urea.',
+ 'الكبد بيحوّل الأمونيا اللي اتكوّنت من التمثيل الغذائي دي إلى يوريا.',
+ 'الأمونيا زي مادة سامة، والكبد بيغيّرها لمادة أهدى اسمها يوريا.'],
+['The liver converts ammonia, a potential toxin, into urea, a compound that is excreted in the urine.',
+ 'الكبد بيحوّل الأمونيا (اللي ممكن تسمّم الجسم) إلى يوريا، وهي مادة بتخرج مع البول.',
+ 'زي واحد بياخد قنبلة ويفكّها ويرميها في الزبالة؛ الأمونيا قنبلة، واليوريا بتتطرد مع البول.'],
+['##','Protein Metabolism','تمثيل البروتين'],
+['The liver also plays an important role in protein metabolism.',
+ 'الكبد كمان له دور مهم في تمثيل البروتين.',
+ 'الكبد زي مصنع البروتينات بتاع الجسم.'],
+['It synthesizes almost all of the plasma proteins (except gamma-globulin), including albumin, alpha-globulins and beta-globulins, blood clotting factors, and most of the plasma lipoproteins.',
+ 'الكبد بيصنّع تقريبًا كل بروتينات البلازما (ما عدا الجاما جلوبيولين)، ومنها الألبيومين والألفا والبيتا جلوبيولين وعوامل التجلط ومعظم البروتينات الدهنية.',
+ 'لو الكبد تعب، نسبة الألبيومين تقل وتلاقي رجليه ورمت، ويبقى الدم بطيء في التجلط لأن عوامل التجلط قلّت.'],
+['Vitamin K is required by the liver for synthesis of prothrombin and some of the other clotting factors.',
+ 'الكبد محتاج فيتامين K عشان يصنّع البروثرومبين وبعض عوامل التجلط التانية.',
+ 'فيتامين K زي مفتاح التشغيل؛ من غيره الكبد مش هيعرف يصنّع عوامل التجلط والنزيف هيطول.'],
+['Amino acids are used by the liver for protein synthesis.',
+ 'الكبد بيستخدم الأحماض الأمينية في تصنيع البروتينات.',
+ 'الأحماض الأمينية زي الطوب، والكبد بيبني بيها البروتينات اللي الجسم محتاجها.'],
+['##','Fat Metabolism','تمثيل الدهون'],
+['The liver is also active in fat metabolism. Fatty acids can be broken down for the production of energy and ketone bodies.',
+ 'الكبد كمان نشيط في تمثيل الدهون. الأحماض الدهنية ممكن تتكسّر عشان تطلّع طاقة وأجسام كيتونية.',
+ 'الدهون زي حطب مخزّن، الكبد بيحرقه عشان يطلع طاقة وكيتونات.'],
+['Ketone bodies are small compounds that can enter the bloodstream and provide a source of energy for muscles and other tissues.',
+ 'الأجسام الكيتونية مركبات صغيرة تقدر تدخل مجرى الدم وتدّي طاقة للعضلات وباقي الأنسجة.',
+ 'الكيتونات زي بنزين احتياطي بيطلّعه الكبد، يوديه الدم للعضلات تشتغل بيه.'],
+['Breakdown of fatty acids into ketone bodies occurs primarily when the availability of glucose for metabolism is limited, as in starvation or in uncontrolled diabetes.',
+ 'تكسير الأحماض الدهنية لأجسام كيتونية بيحصل أساسًا لما الجلوكوز مش متاح بكفاية، زي في الجوع الشديد أو السكر اللي مش متظبط.',
+ 'لو واحد معدّى يومين من غير أكل، أو مريض سكر مش ماسك علاجه، الجسم مش لاقي سكر يحرقه فيروح للدهون ويطلّع كيتونات.'],
+['##','Vitamin and Iron Storage','تخزين الفيتامينات والحديد'],
+['Vitamins A, B, and D and several of the B-complex vitamins are stored in large amounts in the liver.',
+ 'فيتامينات A وB وD وكذا فيتامين من مجموعة B المركّبة بتتخزن بكميات كبيرة في الكبد.',
+ 'الكبد زي دولاب كبير فيه مخزون فيتامينات، لو الأكل قلّ يسحب منه.'],
+['Iron and copper are also stored in the liver.',
+ 'الحديد والنحاس كمان بيتخزنوا في الكبد.',
+ 'زي ما بتحط فلوس احتياطي في حتة أمان، الكبد بيحوّش الحديد والنحاس.'],
+['##','Bile Formation','تكوين الصفراء'],
+['Bile is collected and stored in the gallbladder and is emptied into the intestine when needed for digestion.',
+ 'الصفراء بتتجمّع وتتخزن في المرارة، وبتتفرّغ في الأمعاء لما نحتاجها في الهضم.',
+ 'المرارة زي خزان مياه صغير؛ لما تاكل وجبة دسمة بتفتح وتنزل الصفراء في الأمعاء.'],
+['Bile salts are synthesized by the hepatocytes from cholesterol. After conjugation or binding with amino acids, bile salts are excreted into the bile.',
+ 'أملاح الصفراء بتتصنّع من الكوليسترول جوه خلايا الكبد (الهيباتوسايت)، وبعد ما بتتقترن أو بتترتبط بالأحماض الأمينية بتتفرز في الصفراء.',
+ 'الخلية بتاخد الكوليسترول وتحوّله لأملاح، وتربطها بحمض أميني زي ما تلزق ملصق عليها، وبعدين تبعتها مع الصفراء.'],
+['##','Bilirubin Excretion','إخراج البيليروبين'],
+['Bilirubin is a pigment derived from the breakdown of hemoglobin.',
+ 'البيليروبين صبغة بتتكوّن من تكسير الهيموجلوبين.',
+ 'كرات الدم الحمرا لما بتخلص عمرها وتتكسر، الهيموجلوبين اللي جواها بيتحوّل لصبغة صفراء هي البيليروبين.'],
+['Hepatocytes remove bilirubin from the blood and chemically modify it through conjugation to glucuronic acid, which makes the bilirubin more soluble in aqueous solutions.',
+ 'خلايا الكبد بتشيل البيليروبين من الدم وبتعدّله كيميائيًا بالاقتران مع حمض الجلوكورونيك، وده بيخلّي البيليروبين يدوب في المياه أكتر.',
+ 'زي ما السكر بيدوب في الشاي أسهل من الزيت؛ الاقتران بيخلي البيليروبين يدوب في السوائل فيتخلّص منه الجسم بسهولة.'],
+['##','Drug Metabolism','تمثيل الأدوية'],
+['The liver metabolizes many medications, such as barbiturates, opioids, sedatives, anesthetics, and amphetamines.',
+ 'الكبد بيمثّل أدوية كتير زي الباربيتيورات والأفيونات والمهدئات والمخدرات والأمفيتامينات.',
+ 'لو واحد خد مسكّن قوي أو مهدّئ، الكبد هو اللي بيكسره ويخلّصه من الجسم.'],
+['The bioavailability of an oral medication (absorbed from the GI tract) can be decreased if the medication is metabolized to a great extent by the liver before it reaches the systemic circulation.',
+ 'الإتاحة الحيوية للدواء اللي بتاخده بالبق (بيتمتص من الجهاز الهضمي) ممكن تقل لو الكبد كسّر جزء كبير منه قبل ما يوصل للدورة الدموية العامة.',
+ 'خدت قرص 100 مجم، والكبد كسّر نص الكمية قبل ما توصل الدم؛ يبقى اللي وصل فعليًا حوالي 50 بس.'],
+
+['#','Assessment of Hepatic Dysfunction','تقييم خلل وظائف الكبد'],
+['##','Health History','التاريخ الصحي'],
+['If liver function test results are abnormal, the patient is evaluated for liver disease. In such cases, the health history focuses on:',
+ 'لو نتايج وظائف الكبد مش طبيعية، المريض بيتقيّم لمرض الكبد، والتاريخ الصحي بيركّز على النقط الجاية.',
+ 'زي المحقق: التحاليل قالت فيه حاجة غلط، فيسأل المريض أسئلة يوصل بيها للسبب.'],
+['Previous exposure of the patient to hepatotoxic substances or infectious agents.',
+ 'تعرّض المريض قبل كده لمواد سامة للكبد أو لعوامل معدية.',
+ 'واحد اشتغل بالمبيدات أو اتعامل مع واحد عنده فيروس كبد.'],
+['The patient’s occupational, recreational, and travel history may assist in identifying exposure to hepatotoxins (e.g., industrial chemicals, other toxins).',
+ 'تاريخ شغل المريض وهواياته وسفره ممكن يساعد في معرفة هل اتعرّض لسموم الكبد (زي الكيماويات الصناعية وسموم تانية).',
+ 'عامل في مصنع كيماويات، أو راجع من سفر لبلد مياهها مش نضيفة؛ ده يفتح للممرض خيط.'],
+['The patient’s history of alcohol and drug use, including but not limited to the use of intravenous (IV) or injection drugs, provides additional information about exposure to toxins and infectious agents.',
+ 'تاريخ تعاطي المريض للكحول والمخدرات، ومنها التعاطي بالحقن في الوريد، بيدّي معلومات زيادة عن التعرّض للسموم والعوامل المعدية.',
+ 'واحد بيتعاطى بالحقن وبيشارك الإبرة مع صحابه، فرصة إنه ياخد فيروس كبد بتزيد.'],
+['Many medications (including acetaminophen [Tylenol], ketoconazole [Nizoral], and valproic acid [Depakene]) are responsible for hepatic dysfunction and disease.',
+ 'أدوية كتير (منها الأسيتامينوفين [تايلينول] والكيتوكونازول [نيزورال] وحمض الفالبرويك [ديباكين]) بتسبب خلل ومرض في الكبد.',
+ 'واحد بياخد مسكّن بجرعات كبيرة ومتكررة من غير ما يحسب؛ ده ممكن يتعب كبده.'],
+['Medication history should address all current and past prescription medications, over-the-counter medications, herbal remedies, and dietary supplements.',
+ 'تاريخ الأدوية لازم يشمل كل الأدوية الحالية والسابقة اللي بروشتة، واللي من غير روشتة، والأعشاب، والمكملات الغذائية.',
+ 'اسأل: بتاخد إيه من الصيدلية؟ ولا حاجة من العطار؟ ولا فيتامينات من الجيم؟ كل ده يتحسب.'],
+['Lifestyle behaviors that increase the risk of exposure to infectious agents are identified.',
+ 'بيتم تحديد السلوكيات في نمط الحياة اللي بتزوّد خطر التعرض للعوامل المعدية.',
+ 'زي المشاركة في أدوات حادة أو علاقات غير آمنة.'],
+['IV or injection drug use, sexual practices, and foreign travel are all potential risk factors for liver disease.',
+ 'التعاطي بالحقن، والممارسات الجنسية، والسفر للخارج، كلها عوامل ممكن تزوّد خطر أمراض الكبد.',
+ 'ثلاث أبواب ممكن الفيروس يدخل منها: إبرة مشتركة، علاقة غير آمنة، أو سفر لمكان نظافته ضعيفة.'],
+['The amount and type of alcohol consumption are identified.',
+ 'بيتحدد كمية ونوع الكحول اللي بيشربها المريض.',
+ 'مش كفاية تسأل بيشرب ولا لأ؛ لازم تعرف بيشرب كام ونوعه إيه.'],
+
+['#','Manifestations of Hepatic Dysfunction','مظاهر خلل وظائف الكبد'],
+['Hepatic dysfunction results from damage to the liver’s parenchymal cells, directly from primary liver diseases, or indirectly from either obstruction of bile flow or derangements of hepatic circulation.',
+ 'خلل الكبد بيحصل نتيجة تلف في الخلايا الأساسية بتاعت الكبد (الباراكيما)، إما مباشرة من أمراض الكبد الأولية، أو بشكل غير مباشر من انسداد في سريان الصفراء أو اضطراب في دورة الدم في الكبد.',
+ 'زي مصنع يقف: يا إما الماكينات نفسها اتلفت، يا إما المواسير اللي بتودّي الخامات اتسدّت أو اتلخبطت.'],
+['Liver dysfunction may be acute or chronic.',
+ 'خلل الكبد ممكن يبقى حاد أو مزمن.',
+ 'الحاد زي ضربة مفاجئة، والمزمن زي تعب بيمشي ببطء على شهور وسنين.'],
+['Chronic liver disease, including cirrhosis.',
+ 'مرض الكبد المزمن، ومنه التليّف الكبدي (السيروزيس).',
+ 'السيروزيس زي كبد بيتحوّل من نسيج طري لنسيج متليّف ومتشقّق.'],
+['At least 40% of those deaths are associated with alcohol use.',
+ 'على الأقل 40% من الوفيات دي مرتبطة بشرب الكحول.',
+ 'من كل 10 وفيات من مرض الكبد المزمن، 4 على الأقل سببها الكحول.'],
+['The rate of chronic liver disease for men is twice that for women.',
+ 'معدل مرض الكبد المزمن عند الرجالة ضعف معدله عند الستات.',
+ 'لو عندك 100 راجل مصاب، يقابلهم تقريبًا 50 ست بس.'],
+['##','Causes of hepatocellular dysfunction','أسباب خلل خلايا الكبد'],
+['Infectious agents such as bacteria and viruses.','عوامل معدية زي البكتيريا والفيروسات.','فيروسات الكبد (A, B, C) من أشهر الأمثلة.'],
+['Anoxia.','نقص الأكسجين (Anoxia).','لو الدم الواصل للكبد قلّ فمفيش أكسجين، الخلايا تتأذى.'],
+['Metabolic disorders.','اضطرابات التمثيل الغذائي.','لما الكبد مش عارف يتعامل مع السكر أو الدهون بشكل سليم فيتعب.'],
+['Toxins and medications.','السموم والأدوية.','الكحول أو جرعة زيادة من دواء ممكن تضر خلايا الكبد.'],
+['Nutritional deficiencies.','نقص التغذية.','الجسم اللي مش واخد أكل كفاية الكبد بتاعه بيبقى ضعيف.'],
+['Hypersensitivity states.','حالات الحساسية المفرطة.','واحد عنده حساسية من دواء، فجسمه يهاجم الكبد وكأنه عدو.'],
+
+['#','Viral Hepatitis','التهاب الكبد الفيروسي'],
+['Viral hepatitis is a systemic, viral infection in which necrosis and inflammation of liver cells produce a characteristic cluster of clinical, biochemical, and cellular changes.',
+ 'التهاب الكبد الفيروسي عدوى فيروسية بتصيب الجسم كله، وفيها موت والتهاب في خلايا الكبد، وده بيعمل مجموعة مميزة من التغيرات الإكلينيكية والكيميائية والخلوية.',
+ 'زي حريقة صغيرة بتولّع في الكبد، وبتسيب علامات: أعراض عند المريض، وتحاليل متغيّرة، وتلف في الخلايا.'],
+['To date, five definitive types of viral hepatitis have been identified: hepatitis A, B, C, D, and E.',
+ 'لحد دلوقتي اتحدد خمس أنواع مؤكدة من التهاب الكبد الفيروسي: A وB وC وD وE.',
+ 'احفظهم زي حروف الأبجدية الخمسة الأولانيين: A, B, C, D, E.'],
+['Hepatitis A and E are similar in mode of transmission (fecal–oral route), whereas hepatitis B, C, and D share many other characteristics.',
+ 'التهاب الكبد A وE شبه بعض في طريقة العدوى (البراز–الفم)، أما B وC وD فبيشتركوا في خصائص تانية كتير.',
+ 'A وE بيجوا من الأكل والمياه الملوثة. B وC وD بيجوا من الدم وسوائل الجسم.'],
+['Hepatitis is easily transmitted and causes high morbidity and prolonged loss of time from school or employment.',
+ 'التهاب الكبد بينتقل بسهولة وبيسبب نسبة مرض عالية وغياب طويل عن المدرسة أو الشغل.',
+ 'طالب أو موظف لو اتصاب ممكن يقعد في البيت أسابيع ومش قادر يروح.'],
+
+['##','Hepatitis A Virus','فيروس التهاب الكبد A'],
+['Hepatitis A, formerly called infectious hepatitis, is caused by an RNA virus of the Enterovirus family.',
+ 'التهاب الكبد A كان اسمه زمان infectious hepatitis، وبيتسبب عن فيروس RNA من عيلة الإنتروفيروس.',
+ 'الفيروس ده من نوع الفيروسات المعوية، يعني بيعيش في الأمعاء وبيطلع مع البراز.'],
+['This form of hepatitis is transmitted primarily through the fecal–oral route, by the ingestion of food or liquids infected by the virus.',
+ 'النوع ده بينتقل أساسًا بالطريق البراز–الفم، عن طريق أكل أو شرب سوائل ملوثة بالفيروس.',
+ 'واحد مغسلش إيده بعد الحمام وجهّز أكل، والأكل ده وصل لحد تاني؛ كده الفيروس انتقل.'],
+['It is more prevalent in countries with overcrowding and poor sanitation.',
+ 'بينتشر أكتر في البلاد اللي فيها زحمة شديدة وصرف صحي وصحة عامة ضعيفة.',
+ 'في منطقة زحمة ومياهها مش نضيفة، العدوى بتتنقل أسرع بكتير.'],
+['The virus has been found in the stool of infected patients before the onset of symptoms and during the first few days of illness.',
+ 'الفيروس بيتلاقي في براز المصابين قبل ما الأعراض تبدأ وفي أول كام يوم من المرض.',
+ 'المريض ممكن يعدّي غيره وهو لسه حاسس إنه كويس، لأن الفيروس بيطلع في البراز قبل الأعراض.'],
+['Adult acquires the infection through:',
+ 'البالغ بيلتقط العدوى عن طريق:',
+ 'الحاجات الجاية هي أبواب دخول الفيروس.'],
+['Poor hygiene','النظافة الشخصية الضعيفة','مغسلش الإيد بعد الحمام.'],
+['Hand-to-mouth contact','ملامسة اليد للفم','واحد حط إيده في بقه وهي ملوثة.'],
+['Close contact with infected person','الاختلاط القريب مع شخص مصاب','العيشة في نفس البيت مع واحد مصاب.'],
+['An infected food handler can spread the disease','اللي بيجهّز الأكل ولو مصاب ممكن ينقل المرض','طباخ في مطعم مصاب ومغسلش إيده، وكل زباينه معرّضين.'],
+['Consuming water or shellfish from sewage-contaminated waters','شرب مياه أو أكل محار من مياه ملوثة بالصرف','محار اتصاد من مكان فيه مجاري؛ اللي ياكله ممكن ياخد العدوى.'],
+['The incubation period is estimated to be between 2 to 6 weeks, with a mean of approximately 4 weeks. The illness may be prolonged, lasting 4 to 8 weeks.',
+ 'فترة الحضانة بتتقدّر بين 2 و6 أسابيع، ومتوسطها حوالي 4 أسابيع. والمرض ممكن يطوّل ويستمر من 4 لـ 8 أسابيع.',
+ 'واحد اتعدّى النهاردة، الأعراض ممكن تبدأ بعد شهر تقريبًا، وبعد كده يمرض حوالي شهر لشهرين.'],
+['It usually lasts longer and is more severe in those older than 40 years of age.',
+ 'غالبًا بيطوّل أكتر وبيكون أشد عند اللي فوق 40 سنة.',
+ 'واحد عنده 50 سنة هيتعب أكتر وأطول من واحد عنده 20.'],
+['Most patients recover from hepatitis A; it rarely progresses to acute liver necrosis or fulminant hepatitis resulting in cirrhosis of the liver or death.',
+ 'معظم المرضى بيشفوا من التهاب الكبد A، ونادرًا ما بيتطور لموت حاد في الكبد أو التهاب كبد خاطف بيودي للتليّف أو الوفاة.',
+ 'لو شفت 100 مصاب، تقريبًا كلهم بيخفّوا، والحالات الصعبة قليلة جدًا.'],
+['No carrier state exists, and no chronic hepatitis is associated with hepatitis A.',
+ 'مفيش حالة حامل للفيروس (carrier)، ومفيش التهاب كبد مزمن مرتبط بالنوع A.',
+ 'لما المريض يخف يبقى خلاص خف، مش هيفضل شايل الفيروس ولا هيتحوّل لمزمن.'],
+['##','Clinical Manifestations','الأعراض الإكلينيكية'],
+['Many patients are anicteric (without jaundice) and symptomless.',
+ 'مرضى كتير مبيبقاش عندهم يرقان (anicteric) ومبتظهرش عليهم أعراض.',
+ 'واحد مصاب وهو ماشي عادي ومعندوش أي أعراض، ولا حتى لونه اصفر.'],
+['A mild, flulike upper respiratory tract infection, with low grade fever.',
+ 'عدوى خفيفة شبه الإنفلونزا في الجهاز التنفسي العلوي، مع حرارة خفيفة.',
+ 'تحس إنك بردان شوية وحرارتك زايدة سخنة بسيطة، وتفتكرها برد عادي.'],
+['Anorexia, an early symptom, is often severe.',
+ 'فقدان الشهية عرض مبكر، وغالبًا بيكون شديد.',
+ 'المريض نفسه تتسد من الأكل، حتى أحلى أكلة ميقدرش يبصلها.'],
+['Later, jaundice and dark urine may become apparent.',
+ 'بعد كده ممكن يظهر اليرقان والبول الغامق.',
+ 'لون العين والجلد يبقى اصفر، والبول يبقى لونه زي الشاي الغامق.'],
+['Indigestion is present in varying degrees, marked by vague epigastric distress, nausea, heartburn, and flatulence.',
+ 'عسر الهضم بيبقى موجود بدرجات مختلفة، ويتميز بضيق مش واضح في أعلى البطن (الإبيجاستريوم) وغثيان وحموضة وغازات.',
+ 'تحس بتقل في بُوز المعدة، وقرف، وحرقان، وبطنك مليانة غاز.'],
+['##','Assessment and Diagnostic Findings','نتائج التقييم والتشخيص'],
+['The liver and spleen are often moderately enlarged for a few days after onset; other than jaundice, there are few other physical signs.',
+ 'الكبد والطحال غالبًا بيكبروا بدرجة متوسطة لكام يوم بعد بداية المرض، وغير اليرقان العلامات الجسدية الأخرى قليلة.',
+ 'لو الطبيب جس بطنك ممكن يحس الكبد والطحال أكبر من الطبيعي، لكن غير كده مفيش حاجة كتير تتشاف.'],
+['Hepatitis A antigen may be found in the stool 7 to 10 days before illness and for 2 to 3 weeks after symptoms appear.',
+ 'مولّد ضد التهاب الكبد A ممكن يتلاقي في البراز قبل المرض بـ 7 لـ 10 أيام، وبعد ظهور الأعراض لمدة 2 لـ 3 أسابيع.',
+ 'يعني الفيروس بيبان في تحليل البراز من أسبوع قبل الأعراض لحد أسبوعين تلاتة بعد ما تبدأ.'],
+['HAV antibodies are detectable in the serum, but usually not until symptoms appear.',
+ 'أجسام HAV المضادة بتتكشف في السيرم (مصل الدم)، لكن غالبًا مش قبل ما الأعراض تظهر.',
+ 'جسمك محتاج وقت يعمل الأجسام المضادة؛ فمتلاقيهاش في التحليل قبل ما تتعب.'],
+['Analysis of subclasses of immunoglobulins can help determine whether the antibody represents acute or past infection.',
+ 'تحليل الأنواع الفرعية من الجلوبيولين المناعي بيساعد يحدد هل الجسم المضاد ده بيمثل عدوى حالية (حادة) ولا عدوى قديمة.',
+ 'زي ما تبص على تاريخ الصلاحية: التحليل بيقولك الأجسام دي جديدة (المرض لسه) ولا قديمة (المريض اتعافى من زمان).'],
+['##','Prevention','الوقاية'],
+['A number of strategies exist to prevent transmission of HAV.',
+ 'فيه استراتيجيات كتير تمنع انتقال فيروس HAV.',
+ 'زي ما فيه أكتر من حارس على باب المبنى، فيه أكتر من طريقة تحمي بيها نفسك.'],
+['Patients and their families are encouraged to follow general precautions that can prevent transmission of the virus.',
+ 'بنشجّع المرضى وأسرهم على اتباع احتياطات عامة تمنع انتقال الفيروس.',
+ 'أسرة المريض تغسل إيديها كويس وتفصل أدواته لحد ما يخف.'],
+['Scrupulous handwashing','غسل اليدين بدقة شديدة','بصابون وميّه لمدة كويسة، خصوصًا بعد الحمام وقبل الأكل.'],
+['Safe water supplies','إمدادات مياه آمنة','تشرب من مياه نضيفة ومعالجة.'],
+['Proper control of sewage disposal','التحكم السليم في التخلص من الصرف','المجاري متختلطش بمياه الشرب.'],
+['Effective and safe HAV vaccines','لقاحات HAV الفعالة والآمنة','حقنة بتحميك من الفيروس.'],
+['It is recommended that the two-dose vaccine be given to adults 18 years of age or older, with the second dose given 6 to 12 months after the first.',
+ 'بيوصوا إن اللقاح يتاخد على جرعتين للبالغين 18 سنة أو أكتر، والجرعة التانية بتتاخد بعد الأولى بـ 6 لـ 12 شهر.',
+ 'واحد خد الجرعة الأولى النهاردة، ياخد التانية بعد ما يعدّي نص سنة لحد سنة.'],
+['Protection against hepatitis A develops within several weeks after the first dose of the vaccine.',
+ 'الحماية من التهاب الكبد A بتتكوّن بعد كام أسبوع من أول جرعة.',
+ 'متستناش الجرعة التانية عشان تتحمي؛ المناعة بتبدأ بعد أول جرعة بشوية.'],
+['##','Medical Management','العلاج الطبي'],
+['Bed rest during the acute stage and a diet that is both acceptable to the patient.',
+ 'راحة تامة في السرير في المرحلة الحادة، ونظام غذائي يكون مقبول للمريض.',
+ 'المريض ينام ويرتاح، ويتقدّم له أكل هو بيحبه عشان ياكل.'],
+['During the period of anorexia, the patient should receive frequent small feedings, supplemented if necessary by IV fluids with glucose.',
+ 'أثناء فترة فقدان الشهية، المريض لازم ياخد وجبات صغيرة متكررة، ولو لزم تتدعّم بمحاليل وريدية فيها جلوكوز.',
+ 'بدل 3 وجبات كبيرة، ياكل 6 وجبات صغيرة، ولو مقدرش ياكل خالص يتركّب له محلول وريد فيه جلوكوز.'],
+['Because the patient often has an aversion to food, gentle persistence and creativity may be required to stimulate appetite.',
+ 'عشان المريض غالبًا بيكره الأكل، ممكن نحتاج إصرار لطيف وإبداع عشان نفتح شهيته.',
+ 'الممرض يكلمه بلطف ويقدّم له الأكل بشكل مختلف، من غير ما يضغط عليه.'],
+['Optimal food and fluid levels are necessary to counteract weight loss and to speed recovery.',
+ 'لازم نوصّل الأكل والسوائل لأحسن مستوى عشان نقاوم نقص الوزن ونسرّع الشفا.',
+ 'لو المريض وزنه نزل من قلة الأكل، الشفا هيتأخر.'],
+['Restriction of physical activity, gradual ambulation and provided the patient rests after activity.',
+ 'تقييد النشاط البدني، والمشي بالتدريج، بشرط إن المريض يرتاح بعد أي نشاط.',
+ 'يتمشى 5 دقايق وبعدين يرتاح، ويزوّد المدة بالتدريج.'],
+['##','Nursing Management','دور التمريض'],
+['The nurse assists the patient and family in coping with the temporary disability and fatigue that are common in hepatitis.',
+ 'الممرض بيساعد المريض وأسرته إنهم يتأقلموا مع العجز المؤقت والإرهاق اللي شائعين في التهاب الكبد.',
+ 'الممرض يطمّن الأسرة إن التعب ده مؤقت ومش دايم.'],
+['The nurse instructs them to seek additional health care if the symptoms persist or worsen.',
+ 'الممرض بيوجّههم إنهم يطلبوا رعاية صحية زيادة لو الأعراض استمرت أو زادت.',
+ 'لو الأعراض فضلت أسبوع بعد أسبوع أو زادت، يرجعوا للدكتور على طول.'],
+['Specific guidelines for the patient and family about:',
+ 'إرشادات محددة للمريض والأسرة عن:',
+ 'الممرض بيدي قايمة نقط يلتزموا بيها.'],
+['Diet','النظام الغذائي','ياكل أكل صحي ويقسّمه على وجبات صغيرة.'],
+['Rest','الراحة','ينام كويس ويقلل المجهود.'],
+['Follow-up','المتابعة','يرجع للعيادة في المواعيد.'],
+['The importance of avoiding alcohol','أهمية تجنب الكحول','الكحول يتعب كبد معيّن بالفعل، فلازم يبعد عنه.'],
+['Sanitation and hygiene measures (particularly handwashing) to prevent spread of the disease to other family members.',
+ 'إجراءات النظافة والصرف (خصوصًا غسل الإيدين) عشان نمنع انتشار المرض لباقي أفراد الأسرة.',
+ 'كل واحد في البيت يغسل إيده بصابون، ومنفصل أدوات المريض لو أمكن.'],
+['Specific teaching to patients and families about reducing the risk of contracting hepatitis A includes:',
+ 'التعليم المحدد للمرضى والأسر عن تقليل خطر الإصابة بالتهاب الكبد A بيشمل:',
+ 'دي نقط الممرض بيشرحها للناس عشان محدش يتعدّى.'],
+['Good personal hygiene','نظافة شخصية كويسة','استحمام ونضافة ملابس وأظافر.'],
+['Stressing careful handwashing (after bowel movements and before eating)','التشديد على غسل الإيدين بحرص (بعد الحمام وقبل الأكل)','قاعدة ثابتة: حمام ← غسل إيد، أكل ← غسل إيد.'],
+['Environmental sanitation (safe food and water supply, effective sewage disposal)','نظافة البيئة (أكل ومياه آمنة، وصرف فعّال)','مياه نضيفة، أكل متغطي، ومجاري سليمة.'],
+
+['##','Hepatitis B Virus','فيروس التهاب الكبد B'],
+['Unlike HAV, the hepatitis B virus (HBV) is transmitted primarily through blood.',
+ 'عكس HAV، فيروس التهاب الكبد B (HBV) بينتقل أساسًا عن طريق الدم.',
+ 'A من الأكل والمياه، لكن B من الدم: إبرة ملوثة أو نقل دم.'],
+['HBV can be found in blood, saliva, semen, and vaginal secretions and can be transmitted through mucous membranes and breaks in the skin.',
+ 'فيروس HBV بيتلاقي في الدم واللعاب والسائل المنوي والإفرازات المهبلية، وممكن ينتقل عن طريق الأغشية المخاطية والجروح في الجلد.',
+ 'جرح صغير في الإيد لمس دم مصاب؛ كده الفيروس عدّى.'],
+['HBV is also transferred from carrier mothers to their infants at the time of birth and during close contact afterward.',
+ 'HBV كمان بينتقل من الأمهات الحاملات للفيروس لأطفالهم وقت الولادة وأثناء الاحتكاك القريب بعدها.',
+ 'أم عندها الفيروس بتولد، والطفل ممكن ياخده منها وقت الولادة.'],
+['HBV has a long incubation period. It replicates in the liver and remains in the serum for relatively long periods, allowing transmission of the virus.',
+ 'HBV له فترة حضانة طويلة. بيتكاثر في الكبد وبيفضل في السيرم لفترات طويلة نسبيًا، وده بيسمح بانتقال الفيروس.',
+ 'المريض بيفضل ينقل العدوى لفترة طويلة، لأن الفيروس قاعد في دمه شهور.'],
+['Screening of blood donors has greatly reduced the occurrence of hepatitis B after blood transfusion.',
+ 'فحص المتبرعين بالدم قلّل بشكل كبير حالات التهاب الكبد B بعد نقل الدم.',
+ 'بنحلل الدم قبل ما ينقل لحد، فلو فيه فيروس بيترفض.'],
+['Most people (more than 90%) who contract HBV infection develop antibodies and recover spontaneously in 6 months.',
+ 'معظم الناس (أكتر من 90%) اللي بيتعدوا بـ HBV بيكوّنوا أجسام مضادة وبيشفوا من نفسهم في 6 شهور.',
+ 'من كل 100 مصاب، أكتر من 90 بيخفّوا لوحدهم خلال نص سنة.'],
+['10% of patients who have hepatitis B progress to a carrier state or develop chronic hepatitis with persistent HBV infection and hepatocellular cause of cirrhosis and hepatocellular carcinoma.',
+ '10% من مرضى التهاب الكبد B بيتحوّلوا لحالة حامل للفيروس، أو بيطوّروا التهاب كبد مزمن مع عدوى HBV مستمرة، وده سبب للتليّف وسرطان خلايا الكبد.',
+ 'من كل 100 مصاب، حوالي 10 بيفضل الفيروس جواهم وممكن يوصلوا لتليّف أو سرطان كبد بعد سنين.'],
+['##','Risk Factors for Hepatitis B','عوامل الخطورة لالتهاب الكبد B'],
+['Frequent exposure to blood, blood products, or other body fluids','التعرّض المتكرر للدم أو مشتقاته أو سوائل الجسم التانية','ممرض بيتعامل كل يوم مع عينات دم.'],
+['Health care workers: (hemodialysis staff, oncology and chemotherapy nurses, personnel at risk for needlesticks, operating room staff, respiratory therapists, surgeons, dentists)',
+ 'العاملين في الرعاية الصحية: (طاقم الغسيل الكلوي، ممرضين الأورام والعلاج الكيماوي، اللي معرّضين لوخز الإبر، طاقم العمليات، أخصائيين العلاج التنفسي، الجراحين، أطباء الأسنان)',
+ 'ممرضة غسيل كلى وخزت نفسها بإبرة مستخدمة؛ ده أكبر خطر.'],
+['Hemodialysis','الغسيل الكلوي','المريض بيتصل بالجهاز ودمه بيتعامل مع أدوات مشتركة.'],
+['Male homosexual and bisexual activity','النشاط الجنسي المثلي وثنائي الميول عند الرجال','سلوك جنسي بيزوّد احتمال التعرّض للفيروس.'],
+['IV/injection drug use','تعاطي المخدرات بالوريد أو بالحقن','تبادل الإبر مع الصحاب.'],
+['Close contact with carrier of HBV','الاختلاط القريب مع حامل لفيروس HBV','العيشة مع حد حامل الفيروس بدون احتياط.'],
+['Travel to or residence in area with uncertain sanitary conditions','السفر أو الإقامة في منطقة ظروفها الصحية مش مضمونة','واحد سافر لبلد مفيهاش نظام تعقيم كويس للأدوات الطبية.'],
+['Multiple sexual partners','تعدد الشركاء الجنسيين','كل شريك جديد بيزوّد احتمال الإصابة.'],
+['Recent history of sexually transmitted disease','تاريخ حديث للإصابة بمرض بينتقل جنسيًا','واحد اتعالج من مرض جنسي من فترة قريبة، فاحتمال يكون اتعرّض.'],
+['Receipt of blood or blood products (eg, clotting factor concentrate)','تلقي دم أو مشتقات دم (زي مركّزات عوامل التجلط)','مريض هيموفيليا بياخد عوامل تجلط من متبرعين كتير.'],
+['##','Clinical Manifestations','الأعراض الإكلينيكية'],
+['Clinically, the disease closely resembles hepatitis A, but the incubation period is much longer (1 to 6 months).',
+ 'إكلينيكيًا المرض شبه التهاب الكبد A جدًا، لكن فترة الحضانة أطول بكتير (من شهر لـ 6 شهور).',
+ 'الأعراض متشابهة، لكن المريض ممكن يفضل لحد 6 شهور بعد العدوى قبل ما تظهر الأعراض.'],
+['Signs and symptoms of hepatitis B may be insidious and variable.',
+ 'علامات وأعراض التهاب الكبد B ممكن تكون خفية وبتتغير من مريض للتاني.',
+ 'ممكن تبدأ بشويش من غير ما حد ياخد باله، وكل مريض ليه صورة مختلفة.'],
+['Fever and respiratory symptoms are rare.',
+ 'الحرارة وأعراض الجهاز التنفسي نادرة.',
+ 'عكس A اللي بيشبه الإنفلونزا، هنا غالبًا مفيش كحة ولا حرارة.'],
+['Some patients have arthralgias and rashes.',
+ 'بعض المرضى بيبقى عندهم ألم في المفاصل وطفح جلدي.',
+ 'تحس بوجع في ركبك وإيدك، وتظهر على الجلد حبوب حمرا.'],
+['The patient may have loss of appetite, dyspepsia, abdominal pain, generalized aching, malaise, and weakness.',
+ 'المريض ممكن يفقد شهيته ويبقى عنده عسر هضم، ألم في البطن، وجع عام في الجسم، تعب، وضعف.',
+ 'مفيش نفس للأكل، البطن بتوجع، والجسم كله مكسّر.'],
+['Jaundice may or may not be evident.',
+ 'اليرقان ممكن يظهر وممكن لأ.',
+ 'مش شرط لونه يبقى اصفر؛ ممكن يكون مصاب وشكله عادي.'],
+['If jaundice occurs, light-colored stools and dark urine accompany it.',
+ 'لو اليرقان ظهر، بيصاحبه براز فاتح اللون وبول غامق.',
+ 'تلاقي البراز لونه أبيض شوية والبول لونه غامق جدًا.'],
+['The liver may be tender and enlarged to 12 to 14 cm vertically.',
+ 'الكبد ممكن يكون مؤلم عند اللمس ويكبر لحد 12 لـ 14 سم بشكل رأسي.',
+ 'لما الدكتور يضغط على الجنب الأيمن، المريض يتألم والكبد أكبر من الطبيعي.'],
+['The spleen is enlarged and palpable in a few patients.',
+ 'الطحال بيتضخم ويبقى ممكن تحسّه باللمس عند عدد قليل من المرضى.',
+ 'مش كل المرضى؛ بس القلة ممكن الدكتور يحس الطحال تحت ضلوع الشمال.'],
+['##','Assessment and Diagnostic Findings','نتائج التقييم والتشخيص'],
+['HBV is a DNA virus composed of the following antigenic particles:',
+ 'فيروس HBV هو فيروس DNA متكوّن من الجسيمات المستضدية دي:',
+ 'كل جسيم زي علامة مميزة ليه؛ بنستخدمها عشان نعرف المرض في أنهي مرحلة.'],
+['HBcAg—hepatitis B core antigen','HBcAg: مولّد الضد اللبّي (core) لفيروس B','Core = اللب، يعني الجزء الداخلي من الفيروس.'],
+['HBsAg—hepatitis B surface antigen','HBsAg: مولّد الضد السطحي (surface) لفيروس B','Surface = السطح، يعني الجزء اللي من برّه.'],
+['HBeAg—an independent protein circulating in the blood','HBeAg: بروتين مستقل بيدور في الدم','زي بروتين سايب لوحده في الدم، مش مرتبط بالفيروس نفسه.'],
+['HBxAg—gene product of X gene of HBV DNA','HBxAg: ناتج الجين X في DNA بتاع HBV','ده المنتج اللي بيطلع من الجين X.'],
+['Each antigen elicits its specific antibody and is a marker for different stages of the disease process:',
+ 'كل مولّد ضد بيحفّز جسم مضاد خاص بيه، وهو علامة (marker) لمراحل مختلفة من المرض:',
+ 'زي كل قفل ليه مفتاح خاص بيه، كل antigen ليه antibody، وبنتابعهم عشان نعرف المريض في أنهي مرحلة.'],
+['anti-HBc—antibody to core antigen of HBV; persists during the acute phase of illness; may indicate continuing HBV in the liver',
+ 'anti-HBc: جسم مضاد لمولّد الضد اللبّي لـ HBV؛ بيفضل موجود في المرحلة الحادة، وممكن يدل إن الفيروس لسه موجود في الكبد.',
+ 'لو ظهر في التحليل يبقى المرض في مرحلته الحادة.'],
+['anti-HBs—antibody to surface determinants on HBV; detected during late convalescence; usually indicates recovery and development of immunity',
+ 'anti-HBs: جسم مضاد لمحددات السطح في HBV؛ بيظهر في آخر فترة النقاهة، وغالبًا بيدل على الشفاء وتكوّن المناعة.',
+ 'لو ظهر ده يبقى المريض خف وبقى عنده مناعة، زي بعد التطعيم.'],
+['anti-HBe—antibody to hepatitis B e-antigen; usually signifies reduced infectivity',
+ 'anti-HBe: جسم مضاد لمولّد الضد e؛ غالبًا بيدل على إن قدرة العدوى قلّت.',
+ 'يعني المريض بقى أقل خطورة على اللي حواليه.'],
+['anti-HBxAg—antibody to the hepatitis B x-antigen; may indicate ongoing replication of HBV',
+ 'anti-HBxAg: جسم مضاد لمولّد الضد x؛ ممكن يدل إن الفيروس لسه بيتكاثر.',
+ 'لو لقيناه، الفيروس لسه شغّال وبيعمل نسخ جديدة من نفسه.'],
+['##','Prevention','الوقاية'],
+['##','Preventing Transmission','منع انتقال العدوى'],
+['Continued screening of blood donors for the presence of hepatitis B antigens further decreases the risk of transmission by blood transfusion.',
+ 'استمرار فحص المتبرعين بالدم للبحث عن مولّدات ضد التهاب الكبد B بيقلّل أكتر خطر انتقال العدوى عن طريق نقل الدم.',
+ 'كل كيس دم لازم يتحلل قبل ما يتنقل لمريض.'],
+['The use of disposable syringes, needles, and lancets have reduced the risk of spreading this infection from one patient to another or to health care personnel during the collection of blood samples or the administration of parenteral therapy.',
+ 'استخدام السرنجات والإبر والمشارط اللي بتتستعمل مرة واحدة قلّل خطر انتشار العدوى من مريض لمريض أو للعاملين في الرعاية الصحية أثناء سحب عينات الدم أو إعطاء العلاج بالحقن.',
+ 'إبرة واحدة لكل مريض ومرة واحدة بس، وبعدها تترمي في صندوق الأدوات الحادة.'],
+['Good personal hygiene is fundamental to infection control.',
+ 'النظافة الشخصية الكويسة أساسية في مكافحة العدوى.',
+ 'غسل الإيدين قبل وبعد التعامل مع كل مريض.'],
+['In the clinical laboratory, work areas should be disinfected daily. Gloves are worn when handling all blood and body fluids, as well as HBAg positive specimens, or when there is potential exposure to blood (eg, blood drawing) or to patients’ secretions.',
+ 'في المعمل الإكلينيكي، لازم أماكن الشغل تتعقّم كل يوم. والجوانتي بيتلبس عند التعامل مع كل الدم وسوائل الجسم، وعينات HBAg الإيجابية، أو لما يكون فيه احتمال تعرّض للدم (زي سحب الدم) أو لإفرازات المرضى.',
+ 'قبل ما تسحب دم من مريض، البس الجوانتي، وبعد الشغل نضّف الطاولة بمطهّر.'],
+['Eating and smoking are prohibited in the laboratory and in other areas exposed to secretions, blood, or blood products.',
+ 'الأكل والتدخين ممنوعين في المعمل وفي أي أماكن تانية فيها تعرّض لإفرازات أو دم أو مشتقات دم.',
+ 'متاكلش ساندويتش وانت جنب عينات الدم.'],
+['Patient education regarding the nature of the disease, its infectiousness, and prognosis is a critical factor in preventing transmission and protecting contacts.',
+ 'توعية المريض بطبيعة المرض وقدرته على نقل العدوى ومآله عامل حاسم في منع الانتقال وحماية المخالطين.',
+ 'المريض اللي فاهم إنه معدي هيحافظ على أدواته وحدّه عن أهله.'],
+['##','Active Immunization: Hepatitis B Vaccine','التطعيم النشط: لقاح التهاب الكبد B'],
+['Active immunization is recommended for people who are at high risk for hepatitis B (eg, health care personnel, hemodialysis patients).',
+ 'التطعيم النشط بيتوصى بيه للناس المعرضين لخطر عالي من التهاب الكبد B (زي العاملين في الرعاية الصحية ومرضى الغسيل الكلوي).',
+ 'ممرضة جديدة في القسم؛ أول حاجة تاخد اللقاح.'],
+['In addition, people with hepatitis C and other chronic liver diseases should receive the vaccine.',
+ 'وبالإضافة لكده، الناس اللي عندهم التهاب الكبد C وأمراض الكبد المزمنة التانية لازم ياخدوا اللقاح.',
+ 'واحد عنده C ولسه مصاب بالتهاب مزمن في الكبد، لازم يتحصّن من B عشان ميتعبش كبده أكتر.'],
+['People who are at high risk, including nurses and other health care personnel exposed to blood or blood products, should receive active immunization.',
+ 'الناس المعرضين لخطر عالي، بما فيهم الممرضين وباقي العاملين في الرعاية الصحية المعرضين للدم أو مشتقاته، لازم ياخدوا التطعيم النشط.',
+ 'أي ممرض بيتعامل مع دم أو عينات لازم يتطعّم.'],
+['Health care workers who have had frequent contact with blood are screened for anti-HBs to determine whether immunity is already present from previous exposure.',
+ 'العاملين في الرعاية الصحية اللي كان عندهم احتكاك متكرر بالدم بيتم فحصهم لـ anti-HBs عشان يتأكدوا هل عندهم مناعة بالفعل من تعرّض سابق.',
+ 'ممرض له سنين شغال؛ يعمل تحليل anti-HBs، لو طلع موجود يبقى مناعته جاهزة.'],
+['##','Passive Immunity: Hepatitis B Immune Globulin','المناعة السلبية: الجلوبيولين المناعي لالتهاب الكبد B'],
+['Hepatitis B immune globulin (HBIG) provides passive immunity to hepatitis B and is indicated for people exposed to HBV who have never had hepatitis B and have never received hepatitis B vaccine.',
+ 'الجلوبيولين المناعي لالتهاب الكبد B (HBIG) بيدّي مناعة سلبية ضد التهاب الكبد B، وبيتدّى للناس اللي اتعرّضوا لـ HBV ومعندهمش مرض سابق ومخدوش اللقاح قبل كده.',
+ 'ده زي إنك تستلف أجسام مضادة جاهزة بدل ما جسمك يعملها، وبتدّي حماية سريعة بس مؤقتة.'],
+['Specific indications for postexposure vaccine with HBIG include:',
+ 'الدواعي المحددة لإعطاء اللقاح بعد التعرّض مع HBIG بتشمل:',
+ 'دي المواقف اللي بتتدّي فيها الاتنين مع بعض.'],
+['(1) inadvertent exposure to HBAg-positive blood through percutaneous (needlestick) or transmucosal (splashes in contact with mucous membrane) routes',
+ '(1) تعرّض غير مقصود لدم HBAg إيجابي عن طريق الجلد (وخزة إبرة) أو عن طريق الأغشية المخاطية (رشّات بتلامس الأغشية المخاطية).',
+ 'ممرضة اتوخزت بإبرة مريض مصاب، أو دم مصاب رشّ على عينيها.'],
+['(2) sexual contact with people positive for HBAg',
+ '(2) علاقة جنسية مع أشخاص HBAg إيجابي.',
+ 'واحد اكتشف إن شريكه عنده HBV؛ يتدّى HBIG واللقاح.'],
+['(3) perinatal exposure (infants born to HBV-infected mothers should receive HBIG within 12 hours after delivery).',
+ '(3) التعرّض وقت الولادة (الأطفال اللي بتتولد لأمهات مصابات بـ HBV لازم ياخدوا HBIG خلال 12 ساعة بعد الولادة).',
+ 'أم مصابة وولدت طفل؛ الطفل ياخد HBIG قبل ما تعدي 12 ساعة.'],
+['##','Medical Management','العلاج الطبي'],
+['The goals of treatment are to minimize infectivity and liver inflammation and decrease symptoms.',
+ 'أهداف العلاج هي تقليل العدوى والتهاب الكبد وتخفيف الأعراض.',
+ 'الهدف إن المريض ميعدّيش حد، وكبده يهدى، وأعراضه تخف.'],
+['alpha-interferon: A regimen of 5 million units daily or 10 million units three times weekly for 16 to 24 weeks results in remission of disease in approximately one third of patients.',
+ 'ألفا إنترفيرون: نظام 5 مليون وحدة يوميًا أو 10 مليون وحدة 3 مرات في الأسبوع لمدة 16 لـ 24 أسبوع بيؤدي لتراجع المرض عند حوالي ثلث المرضى.',
+ 'من كل 3 مرضى، واحد بس تقريبًا بيستجيب للعلاج ده ويهدى مرضه.'],
+['Interferon must be administered by injection and has significant side effects, including fever, chills, anorexia, nausea, myalgias, and fatigue.',
+ 'الإنترفيرون لازم يتدّى بالحقن وله آثار جانبية مهمة منها الحرارة والرعشة وفقدان الشهية والغثيان وآلام العضلات والإرهاق.',
+ 'بعد الحقنة المريض ممكن يحس إنه عيّان برد وجسمه مكسر.'],
+['Two antiviral agents, lamivudine (Epivir) and adefovir (Hepsera), oral nucleoside analogs, have been approved for use in chronic hepatitis B in the United States.',
+ 'اتنين مضادات فيروسات، لاميفودين (إيبيفير) وأديفوفير (هيبسيرا)، وهما نظائر نيوكليوسيدية بتتاخد بالبق، اتوافق عليهم للاستخدام في التهاب الكبد B المزمن في الولايات المتحدة.',
+ 'دول أقراص بتتبلع مش حقن، وبيتدّوا لمريض B المزمن.'],
+['Bed rest may be recommended, regardless of other treatment, until the symptoms of hepatitis have subsided.',
+ 'ممكن يتوصى بالراحة في السرير، بغض النظر عن العلاجات التانية، لحد ما أعراض التهاب الكبد تهدى.',
+ 'حتى لو المريض بياخد علاج، يفضل مرتاح لحد ما يحس بتحسن.'],
+['Activities are restricted until the hepatic enlargement and levels of serum bilirubin and liver enzymes have decreased.',
+ 'النشاط بيتقيّد لحد ما تضخم الكبد ومستويات البيليروبين في السيرم وإنزيمات الكبد تقل.',
+ 'مينفعش يرجع للشغل الشاق قبل ما التحاليل تتحسن والكبد يرجع لحجمه.'],
+['Gradually increased activity is then allowed.',
+ 'بعد كده بيتسمح بزيادة النشاط بالتدريج.',
+ 'يبدأ بمشي بسيط وبعدين يزوّد.'],
+['Adequate nutrition should be maintained. Proteins are restricted if symptoms indicate that the liver’s ability to metabolize protein byproducts is impaired.',
+ 'لازم نحافظ على تغذية كافية. والبروتينات بتتقلل لو الأعراض بتدل إن قدرة الكبد على تمثيل نواتج البروتين ضعفت.',
+ 'لو الكبد مش قادر يتعامل مع ناتج البروتين (زي الأمونيا)، بنقلل البروتين في الأكل.'],
+['Measures to control the dyspeptic symptoms and general malaise include the use of antacids and antiemetics, but all medications should be avoided if vomiting occurs.',
+ 'إجراءات السيطرة على أعراض عسر الهضم والتعب العام بتشمل استخدام مضادات الحموضة ومضادات القيء، لكن كل الأدوية لازم تتجنب لو حصل قيء.',
+ 'ممكن ياخد مضاد حموضة لو عنده حرقان، لكن لو بيرجّع يبطل أي دوا بالفم.'],
+['If vomiting persists, the patient may require hospitalization and fluid therapy.',
+ 'لو القيء استمر، ممكن المريض يحتاج دخول مستشفى وعلاج بالسوائل.',
+ 'مريض بيرجّع كل شوية ومش بيقدر يشرب؛ هيتحجز ويتركّب له محلول وريد.'],
+['##','Nursing Management','دور التمريض'],
+['Convalescence may be prolonged, with complete symptomatic recovery sometimes requiring 3 to 4 months or longer.',
+ 'فترة النقاهة ممكن تطوّل، والتعافي الكامل من الأعراض ممكن يحتاج أحيانًا 3 لـ 4 شهور أو أكتر.',
+ 'مريض مفروض يتوقع إنه يفضل شوية تعبان حتى بعد ما يخرج من المستشفى، لحد 4 شهور.'],
+['During this stage, gradual resumption of physical activity is encouraged after the jaundice has resolved.',
+ 'في المرحلة دي بنشجّع على استئناف النشاط البدني بالتدريج بعد ما اليرقان يختفي.',
+ 'لما لون العين يرجع طبيعي، يبدأ يتحرك أكتر بالراحة.'],
+['The nurse identifies psychosocial issues and concerns, particularly the effects of separation from family and friends if the patient is hospitalized during the acute and infective stages.',
+ 'الممرض بيحدد المشاكل والمخاوف النفسية والاجتماعية، خصوصًا تأثير الانفصال عن الأسرة والأصحاب لو المريض اتحجز في المرحلة الحادة والمعدية.',
+ 'مريض معزول في أوضة لوحده ومحدش بيزوره؛ ممكن يحس بالوحدة والقلق.'],
+['Planning is required to minimize social isolation. Planning that includes the family helps to reduce their fears and anxieties about the spread of the disease.',
+ 'لازم تخطيط لتقليل العزلة الاجتماعية. والتخطيط اللي بيشمل الأسرة بيقلّل مخاوفهم وقلقهم من انتشار المرض.',
+ 'الممرض يشرح للأسرة إزاي يزوروه بأمان، فتطمن وتقل عزلته.'],
+['##','Teaching Patients Self-Care','تعليم المرضى الرعاية الذاتية'],
+['Because of the prolonged period of convalescence, the patient and family must be prepared for home care.',
+ 'بسبب طول فترة النقاهة، لازم المريض والأسرة يتجهّزوا للرعاية في البيت.',
+ 'يعني الأسرة تتعلم إزاي تهتم بالمريض بعد ما يطلع من المستشفى.'],
+['Provision for adequate rest and nutrition must be ensured.',
+ 'لازم نضمن توفير راحة وتغذية كافية.',
+ 'مكان هادي للراحة وأكل صحي في ميعاده.'],
+['The nurse informs family members and friends who have had intimate contact with the patient about the risks of contracting hepatitis B and makes arrangements for them to receive hepatitis B vaccine or hepatitis B immune globulin as prescribed.',
+ 'الممرض بيعرّف أفراد الأسرة والأصحاب اللي كان عندهم احتكاك قريب مع المريض بمخاطر الإصابة بالتهاب الكبد B، وبيرتّب لهم ياخدوا لقاح التهاب الكبد B أو الجلوبيولين المناعي حسب ما يتوصف.',
+ 'زوجة المريض وعيالُه يروحوا ياخدوا اللقاح أو HBIG بتاع الدكتور.'],
+['Those at risk must be made aware of the early signs of hepatitis B and of ways to reduce risk by avoiding all modes of transmission.',
+ 'لازم نوعّي الناس المعرضين للخطر بالعلامات المبكرة لالتهاب الكبد B وبطرق تقليل الخطر عن طريق تجنب كل طرق انتقال الفيروس.',
+ 'يعرفوا إن التعب والمغص وفقدان الشهية لو ظهر، يروحوا يتحللوا فورًا.'],
+['Patients with all forms of hepatitis should avoid drinking alcohol and eating raw shellfish.',
+ 'المرضى بكل أنواع التهاب الكبد لازم يتجنبوا شرب الكحول وأكل المحار النيء.',
+ 'مفيش بيرة ولا محار نيء، حتى بعد ما يحس إنه تحسّن.'],
+
+['##','Hepatitis C Virus','فيروس التهاب الكبد C'],
+['A significant proportion of cases of viral hepatitis are neither hepatitis A, hepatitis B, nor hepatitis D, and are classified as hepatitis C.',
+ 'نسبة كبيرة من حالات التهاب الكبد الفيروسي مش A ولا B ولا D، وبتتصنّف على إنها التهاب كبد C.',
+ 'لو الدكتور استبعد A وB وD ولسه عنده التهاب فيروسي، يبقى غالبًا C.'],
+['##','Mode of Transmission','طرق الانتقال'],
+['Blood transfusions','نقل الدم','دم ملوث اتنقل لمريض.'],
+['Sexual contact','الاتصال الجنسي','علاقة جنسية مع شخص مصاب.'],
+['Parenteral injection, and sharing of contaminated needles by drug users','الحقن الوريدي أو العضلي، ومشاركة الإبر الملوثة بين المتعاطين','مجموعة أصحاب بيتشاركوا نفس الإبرة.'],
+['Unintentional needlesticks','وخزات الإبر غير المقصودة','ممرضة وخزت نفسها بإبرة من غير قصد وهي بتغيّر على مريض.'],
+['The incubation period is variable and may range from 15 to 160 days. The clinical course of acute hepatitis C is similar to that of hepatitis B; symptoms are usually mild.',
+ 'فترة الحضانة بتتغير وممكن تتراوح من 15 لـ 160 يوم. والمسار الإكلينيكي لالتهاب الكبد C الحاد شبه التهاب الكبد B، والأعراض غالبًا بتبقى خفيفة.',
+ 'المريض ممكن يتعب بعد أسبوعين أو بعد 5 شهور، والتعب غالبًا مش شديد.'],
+['However, a chronic carrier state occurs frequently, and there is an increased risk of chronic liver disease, including cirrhosis or liver cancer, after hepatitis C.',
+ 'لكن حالة الحامل المزمن بتحصل كتير، وفيه خطر زايد لمرض الكبد المزمن، بما فيه التليّف أو سرطان الكبد، بعد التهاب الكبد C.',
+ 'كتير من المصابين بيفضل الفيروس جواهم لسنين ويتعبوا الكبد في الآخر.'],
+['Small amounts of alcohol taken regularly appear to cause progression of the disease. Therefore, alcohol and medications that may affect the liver should be avoided.',
+ 'كميات صغيرة من الكحول لو اتاخدت بانتظام بيبان إنها بتسبب تقدم المرض. عشان كده لازم نتجنب الكحول والأدوية اللي ممكن تأثر على الكبد.',
+ 'حتى لو كوباية صغيرة كل يوم، بتزوّد الضرر. فالكحول مرفوض تمامًا.'],
+['There is no benefit from rest, diet, or vitamin supplements.',
+ 'مفيش فايدة من الراحة أو الحمية أو المكملات الفيتامينية.',
+ 'مش هيفرق لو المريض نام كتير أو أخد فيتامينات؛ ده مش علاج للـ C.'],
+['Studies have demonstrated that a combination of two antiviral agents, interferon (Intron-A) and ribavirin (Rebetol), is effective in producing improvement in patients with hepatitis C and in treating relapses.',
+ 'الدراسات أثبتت إن تركيبة من اتنين مضادات فيروسات، إنترفيرون (إنترون-A) وريبافيرين (ريبيتول)، فعّالة في تحسين حالة مرضى التهاب الكبد C وفي علاج الانتكاسات.',
+ 'بيدّوا دوائين مع بعض بدل دواء واحد، فالمفعول بيبقى أقوى، حتى لو المرض رجع تاني.'],
+['Hemolytic anemia, the most frequent side effect, may be severe enough to require discontinuation of treatment.',
+ 'أنيميا انحلال الدم (Hemolytic anemia) هي أكتر أثر جانبي، وممكن تكون شديدة لدرجة إن العلاج يتوقف.',
+ 'لو كرات الدم الحمرا بدأت تتكسر بسرعة والمريض بقى شاحب ومرهق، الدكتور ممكن يوقف العلاج.'],
+['Screening of blood has reduced the incidence of hepatitis C associated with blood transfusion, and public health programs are helping to reduce the number of cases associated with shared needles in IV or injection drug use.',
+ 'فحص الدم قلّل حالات التهاب الكبد C المرتبطة بنقل الدم، وبرامج الصحة العامة بتساعد في تقليل عدد الحالات المرتبطة بمشاركة الإبر في التعاطي بالوريد أو بالحقن.',
+ 'بنحلل الدم قبل نقله، وبنوعّي المتعاطين مايشاركوش الإبر.'],
+
+['##','Hepatitis D Virus','فيروس التهاب الكبد D'],
+['Hepatitis D virus (delta agent) infection occurs in some cases of hepatitis B.',
+ 'عدوى فيروس التهاب الكبد D (العامل دلتا) بتحصل في بعض حالات التهاب الكبد B.',
+ 'D مبيجيش لوحده؛ لازم يكون فيه B في الجسم.'],
+['Because the virus requires hepatitis B surface antigen for its replication, only people with hepatitis B are at risk for hepatitis D.',
+ 'لأن الفيروس بيحتاج مولّد الضد السطحي لالتهاب الكبد B عشان يتكاثر، فاللي عندهم التهاب كبد B بس هما اللي معرضين لالتهاب الكبد D.',
+ 'D زي واحد ماسك سلاح بس محتاج حد من B يديله الرصاص؛ من غير B مش هيشتغل.'],
+['Anti-delta antibodies in the presence of HBAg on testing confirm the diagnosis.',
+ 'وجود أجسام مضادة للدلتا مع وجود HBAg في الفحص بيأكد التشخيص.',
+ 'لو التحليل طلع فيه الاتنين مع بعض، يبقى المريض عنده D.'],
+['The incubation period varies between 30 and 150 days.',
+ 'فترة الحضانة بتتراوح بين 30 و150 يوم.',
+ 'من حوالي شهر لحد 5 شهور بعد العدوى.'],
+['Hepatitis D is common among:',
+ 'التهاب الكبد D شائع بين:',
+ 'دول الفئات الأكتر عرضة له.'],
+['IV or injection drug users','متعاطي المخدرات بالوريد أو بالحقن','بيشتركوا في الإبر.'],
+['Hemodialysis patients','مرضى الغسيل الكلوي','بيتصلوا بجهاز بيتعامل مع الدم.'],
+['Recipients of multiple blood transfusions','اللي بياخدوا نقل دم متعدد','مريض أنيميا مزمنة بياخد دم كل شهر.'],
+['Sexual contact with those with hepatitis B is considered to be an important mode of transmission of hepatitis B and D.',
+ 'الاتصال الجنسي بمرضى التهاب الكبد B بيعتبر طريقة مهمة لانتقال التهاب الكبد B وD.',
+ 'واحد عنده B وانتقل لشريكه، ممكن ينقله معاه D لو كان عنده.'],
+['The symptoms of hepatitis D are similar to those of hepatitis B, except that patients are more likely to develop fulminant hepatitis and to progress to chronic active hepatitis and cirrhosis.',
+ 'أعراض التهاب الكبد D شبه أعراض B، إلا إن المرضى فرصتهم أكبر إنهم يتطوّر عندهم التهاب كبد خاطف ويتقدموا لالتهاب كبد مزمن نشط وتليّف.',
+ 'D بيخلي حالة B تبقى أسوأ وأسرع في التدهور.'],
+['Treatment is similar to that of other forms of hepatitis; interferon as a specific treatment for hepatitis D is under investigation.',
+ 'العلاج شبه علاج باقي أنواع التهاب الكبد، والإنترفيرون كعلاج خاص بالتهاب الكبد D لسه تحت البحث.',
+ 'مفيش علاج مخصوص ومؤكد لـ D لحد دلوقتي؛ الإنترفيرون لسه بيتجرّب.'],
+
+['##','Hepatitis E Virus','فيروس التهاب الكبد E'],
+['It is believed that hepatitis E virus (HEV) is transmitted by the fecal–oral route, principally through contaminated water in areas with poor sanitation.',
+ 'بيُعتقد إن فيروس التهاب الكبد E (HEV) بينتقل بالطريق البراز–الفم، أساسًا عن طريق مياه ملوثة في المناطق اللي صرفها الصحي ضعيف.',
+ 'قرية بتشرب من ترعة مجاريها واصلة لها؛ العدوى بتنتشر.'],
+['The incubation period is variable, estimated to range between 15 and 65 days.',
+ 'فترة الحضانة بتتغير، وبتتقدّر بين 15 و65 يوم.',
+ 'من أسبوعين لحد شهرين تقريبًا.'],
+['In general, hepatitis E resembles hepatitis A. It has a self-limited course with an abrupt onset. Jaundice is almost always present. Chronic forms do not develop.',
+ 'بشكل عام التهاب الكبد E شبه A. له مسار بيخلص من نفسه وبداية مفاجئة. اليرقان بيبقى موجود تقريبًا دايمًا. ومبيتحوّلش لأشكال مزمنة.',
+ 'بيبدأ فجأة، اللون يصفرّ، وبعد كام أسبوع يخف من نفسه ومبيفضلش في الجسم.'],
+['Avoiding contact with the virus through good hygiene, including handwashing, is the major method of prevention of hepatitis E.',
+ 'تجنب الاحتكاك بالفيروس عن طريق النظافة الكويسة، ومنها غسل الإيدين، هو الطريقة الرئيسية لمنع التهاب الكبد E.',
+ 'اغسل إيدك وخلي مياهك نضيفة.'],
+['The effectiveness of immune globulin in protecting against hepatitis E virus is uncertain.',
+ 'فعالية الجلوبيولين المناعي في الحماية من فيروس التهاب الكبد E مش مؤكدة.',
+ 'مفيش ضمان إن الحقنة دي هتحميك من E.']
+];
+
+const doc = document.getElementById('doc'), toc = document.getElementById('toc');
+const esc = s => s;
+let secN = 0, html = '', tocHtml = '';
+D.forEach(r => {
+  if (r[0] === '#') {
+    secN++;
+    html += `<div class="sec-title" id="s${secN}"><div class="en">${r[1]}</div><div class="ar">${r[2]}</div></div>`;
+    tocHtml += `<a href="#s${secN}">${r[1]}</a>`;
+  } else if (r[0] === '##') {
+    html += `<div class="sub-title"><div class="en">${r[1]}</div><div class="ar">${r[2]}</div></div>`;
+  } else if (r[0] === 'img') {
+    html += `<div class="fig"><img src="${IMG}" alt="Liver anatomy"></div>`;
+  } else {
+    html += `<div class="item"><div class="en">${r[0]}</div><div class="ar">${r[1]}</div><div class="ex"><b>💡 عشان تفهمها:</b> ${r[2]}</div></div>`;
+  }
+});
+doc.innerHTML = html; toc.innerHTML = tocHtml;
+document.getElementById('tocBtn').onclick = () => toc.classList.toggle('open');
+toc.addEventListener('click', e => { if (e.target.tagName === 'A') toc.classList.remove('open'); });
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  document.getElementById('prog-bar').style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+});
+const themeBtn = document.getElementById('themeBtn');
+let theme = 'light';
+try { theme = localStorage.getItem('theme') || 'light'; } catch (e) {}
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  try { localStorage.setItem('theme', t); } catch (e) {}
+}
+applyTheme(theme);
+themeBtn.onclick = () => applyTheme(theme === 'dark' ? 'light' : 'dark');
+</script>
+</body>
+</html>
