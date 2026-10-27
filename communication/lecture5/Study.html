@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GHAITH TEAM</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--a:#0891b2;--v:#6d28d9;--o:#ea580c;--g:#059669;--bg:#f4fafb;--bg2:#e6f2f5;--card:#fff;--t:#0f2a30;--t2:#3f5d65;--bc:rgba(15,60,75,.12);--grad:linear-gradient(135deg,#155e75,#0891b2 40%,#6d28d9)}
+[data-theme=dark]{--bg:#071418;--bg2:#0d1f25;--card:#112a31;--t:#e6f6f9;--t2:#b5d3da;--bc:rgba(255,255,255,.1);--a:#22d3ee}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--t);line-height:1.7}
+.hero{background:var(--grad);color:#fff;text-align:center;padding:36px 20px 48px;border-radius:0 0 50% 50%/0 0 28px 28px}
+.hero h1{font-size:clamp(22px,4vw,30px);font-weight:900}.hero p{font-size:13px;opacity:.9}
+.tb{position:fixed;top:12px;right:12px;width:38px;height:38px;border-radius:50%;border:1px solid var(--bc);background:var(--card);cursor:pointer;font-size:16px;z-index:9}
+.wrap{max-width:640px;margin:0 auto;padding:22px 16px 60px}
+h2{font-size:17px;font-weight:900;margin:26px 0 12px;padding:8px 16px;border-radius:50px;background:var(--card);border:1px solid var(--bc);border-right:5px solid var(--v)}
+.item{background:var(--card);border:1px solid var(--bc);border-radius:22px;margin-bottom:12px;overflow:hidden}
+.en{padding:14px 16px;font-weight:700;font-size:15px;direction:ltr;text-align:left;background:rgba(8,145,178,.08)}
+.ar{padding:12px 16px;direction:rtl;text-align:right;font-size:14px;color:var(--t2);border-top:1px solid var(--bc)}
+.ex{padding:12px 16px;direction:rtl;text-align:right;font-size:14px;background:rgba(234,88,12,.07);border-top:1px solid var(--bc)}
+.ex b{color:var(--o)}
+.ar b{color:var(--v)}
+.sub{font-size:14px;font-weight:900;color:var(--g);margin:16px 4px 8px;direction:ltr}
+</style></head><body>
+<button class="tb" id="tb">🌙</button>
+<div class="hero"><div style="font-size:34px">👂</div><h1>Active Listening</h1><p>Communication Skills</p></div>
+<div class="wrap" id="app"></div>
+<script>
+const D=[
+["❖ Introduction",[
+["Communication is the cornerstone of human interaction, serving as the foundation upon which relationships are built and understanding is fostered.","التواصل هو أساس أي تعامل بين الناس، وعليه بتتبني العلاقات والفهم المتبادل.","لو الممرضة بتتكلم كويس مع المريض وأهله، الثقة بتتبني بينهم والكل بيفهم بعض."],
+["Within this intricate web of exchange, active listening emerges as a fundamental skill, elevating dialogue beyond mere exchange of words to a profound engagement with the thoughts, emotions, and perspectives of others.","وسط التواصل المعقد ده، الاستماع الفعّال بيبقى مهارة أساسية، لأنه بيحوّل الكلام من مجرد تبادل كلمات لتفاعل حقيقي مع أفكار الناس ومشاعرهم ووجهات نظرهم.","المريض بيقول «أنا خايف من العملية». الاستماع الفعّال إنك تفهم خوفه وليه خايف، مش بس تسمع الجملة وتقول «متقلقش»."],
+["In a world often characterized by noise and distraction, the art of active listening offers a pathway to deeper connection, mutual respect, and enhanced communication effectiveness.","في عالم مليان دوشة وتشتيت، فن الاستماع الفعّال بيوصّلك لعلاقة أعمق واحترام متبادل وتواصل أنجح.","وأنت واقف في الـ ICU والأجهزة بتزن والموبايل بيرن، لو ركزت مع زميلك وهو بيسلّمك الحالة هتتجنب أخطاء كتير."]]],
+["❖ Definition",[
+["Active listening is more than just hearing words; it is a dynamic process of fully engaging with the speaker's message on multiple levels.","الاستماع الفعّال مش بس إنك تسمع الكلام، ده عملية نشيطة بتتفاعل فيها مع رسالة المتكلم بكل مستوياتها.","زميلك بيقولك «تعبان». أنت مش بس سمعت الكلمة، فهمت نبرته وتعابير وشه ومعنى الكلام كله."],
+["At its core, active listening involves giving undivided attention to the speaker, empathizing with their perspective, and providing meaningful feedback to demonstrate comprehension and support.","جوهره إنك تدّي المتكلم انتباهك كله، وتحس بوجهة نظره، وترد عليه بردّ مفيد يبيّن إنك فاهمه وبتسانده.","مريض بيحكي عن وجعه، تقفل الموبايل وتبص له وتقوله «يعني الوجع بيزيد بالليل؟» عشان يعرف إنك معاه."],
+["It encompasses a range of verbal and nonverbal behaviors, including maintaining eye contact, nodding, paraphrasing, and asking clarifying questions..","وبيشمل سلوكيات بالكلام وبغير الكلام، زي إنك تبص في عينه، وتهز راسك، وتعيد كلامه بأسلوبك، وتسأل أسئلة توضيحية.","تبص للمريض وتهز راسك وتقول «يعني حضرتك بتحس بدوخة لما بتقوم؟»، كده استخدمت الأربعة مع بعض."]]],
+["7 KEY ACTIVE LISTENING SKILLS",[
+["1. Be attentive.","كن منتبه.","أثناء التسليم، سيب اللي في إيدك وركز مع زميلك."],
+["2. Ask open-ended questions.","اسأل أسئلة مفتوحة.","بدل «بتوجعك؟» اسأل «احكيلي إيه اللي بتحس بيه؟» عشان يشرح بالتفصيل."],
+["3. Ask probing questions.","اسأل أسئلة استكشافية تدخّل في العمق.","المريض قال «تعبان»، فتسأله «من إمتى؟ وإيه اللي بيزوّده؟»."],
+["4. Request clarification.","اطلب توضيح.","«ممكن توضحلي قصدك بـ ‹مش مرتاح›؟»."],
+["5. Paraphrase.","أعد صياغة كلامه بأسلوبك.","«يعني حضرتك مش نايم من يومين بسبب القلق؟»"],
+["6. Be attuned to and reflect feelings.","انتبه لمشاعره واعكسها له.","«واضح إنك زعلان ومضايق من اللي حصل»."],
+["7. Summarize.","لخّص الكلام في الآخر.","«يعني المشكلة الأساسية الوجع بالليل، وهنبلغ الدكتور عشان العلاج»."]]],
+["❖ Types of listening",[
+["Listening is a complex process that can be categorized into various types based on the purpose, context, and level of engagement. Here are some common types of listening:","الاستماع عملية معقدة وبتتقسم لأنواع كتير حسب الغرض والموقف ومدى التفاعل. دي أشهر الأنواع:","زي ما بتسمع محاضرة بتركيز للمذاكرة، وبتسمع مريض متضايق بتعاطف، وبتسمع أغنية للمتعة. كل موقف ليه نوع."]]],
+["1. Active Listening",[
+["Active listening involves fully concentrating on, understanding, responding to, and remembering what is being said by the speaker.","الاستماع الفعّال إنك تركز تمامًا في كلام المتكلم وتفهمه وترد عليه وتفتكره.","المريض قال إنه عنده حساسية من دوا معين، تركز وتفهم وترد وتسجله وتفتكره وقت إعطاء العلاج."],
+["It requires attentiveness, empathy, and engagement to establish relation and foster mutual understanding.","محتاج انتباه وتعاطف وتفاعل عشان تبني علاقة وتحقق فهم متبادل.","لما تهتم بالمريض وتتفاعل معاه، يحس بالأمان ويتعاون معاك في الخطة العلاجية."]]],
+["2. Passive Listening",[
+["Passive listening occurs when individuals receive information without actively engaging or participating in the conversation.","الاستماع السلبي هو إنك تستقبل المعلومة من غير ما تتفاعل أو تشارك في الحوار.","قاعد في المحاضرة بتسمع الدكتور وأنت ساكت ومش بتسأل ولا بتدوّن."],
+["While they may hear the speaker's words, they may not fully comprehend or internalize the message.","ممكن تسمع الكلمات لكن مش بتفهم الرسالة كويس ولا بتستوعبها.","بعد المحاضرة تلاقي نفسك سمعت الكلام كله ومش فاكر منه حاجة."]]],
+["3. Informational Listening",[
+["Informational listening focuses on understanding and retaining factual information, such as instructions, directions, or details conveyed in lectures or presentations.","الاستماع للمعلومات بيركّز على فهم الحقائق وحفظها، زي التعليمات والتوجيهات والتفاصيل في المحاضرات والعروض.","الدكتور بيشرح خطوات تركيب كانيولا، فتركز وتحفظ الخطوات بالترتيب."],
+["The primary goal is to gather and process information for learning or practical purposes.","هدفه الأساسي إنك تجمع المعلومات وتستوعبها عشان تتعلم أو تطبّقها عمليًا.","بتسمع شرح جهاز جديد في الـ CCU عشان تعرف تشغله صح بعدين."]]],
+["4. Critical Listening",[
+["Critical listening involves evaluating and analyzing the speaker's message, ideas, or arguments to assess their validity, credibility, and logical coherence.","الاستماع الناقد هو إنك تقيّم وتحلل رسالة المتكلم وأفكاره وحججه عشان تحكم هي صح ومصداقة ومنطقية ولا لأ.","واحد قالك «الدوا الفلاني بيعالج كل حاجة». تسأل نفسك: ده بدليل علمي ولا كلام وخلاص؟"],
+["It requires critical thinking skills and the ability to discern facts from opinions or biases.","محتاج تفكير نقدي وقدرة تفرّق بين الحقيقة والرأي الشخصي والتحيز.","«الدراسة بتقول كذا» حقيقة، لكن «أنا شايف إنه أحسن» رأي شخصي."]]],
+
+["5. Empathetic Listening",[
+["Empathetic listening centers on understanding and validating the speaker's emotions, feelings, and experiences.","الاستماع التعاطفي بيركّز على إنك تفهم مشاعر المتكلم وتحسّسه إن إحساسه مقدّر ومفهوم.","مريضة بتعيّط بعد ما عرفت تشخيصها، فتقولها «أنا حاسس قد إيه الموضوع صعب عليكي»."],
+["It involves showing empathy, compassion, and support to the speaker, without judgment or criticism.","بيشمل إنك تظهر تعاطف ورحمة ودعم للمتكلم من غير ما تحكم عليه أو تنتقده.","من غير ما تقولها «كان لازم تبقي أهدى»، تسمعها وتسندها بس."]]],
+["6. Appreciative Listening",[
+["Appreciative listening entails enjoying and appreciating the aesthetic or entertainment value of spoken words, such as in music, poetry, storytelling, or inspirational speeches.","الاستماع التقديري إنك تستمتع بجمال الكلام المسموع أو قيمته الترفيهية، زي الموسيقى والشعر والحكايات والخطب الملهمة.","بتسمع تلاوة قرآن أو أغنية بتحبها بس عشان تستمتع بيها."],
+["The focus is on the emotional or aesthetic experience rather than understanding the content.","التركيز بيبقى على الإحساس والجمال مش على فهم المحتوى.","مش مهم تحلل كلمات الأغنية، المهم إحساسك وأنت بتسمعها."]]],
+["7. Discriminative Listening",[
+["Discriminative listening involves distinguishing and interpreting different sounds, tones, accents, and vocal cues to understand the nuances of verbal communication.","الاستماع التمييزي إنك تفرّق بين الأصوات والنبرات واللهجات والإشارات الصوتية المختلفة وتفسّرها عشان تفهم دقائق الكلام.","تعرف من نبرة صوت المريض إنه تعبان أو خايف حتى لو قال «أنا كويس»."],
+["It is essential for language comprehension and effective communication in diverse linguistic contexts.","ده أساسي لفهم اللغة والتواصل الناجح في سياقات لغوية مختلفة.","مريض أجنبي بلهجة مختلفة، لو ميزت نطقه هتفهمه وتتواصل معاه صح."]]],
+["8. Relational Listening",[
+["Relational listening emphasizes building and maintaining interpersonal relationships through effective communication and empathetic understanding.","الاستماع العلائقي بيركّز على بناء العلاقات بين الناس والحفاظ عليها عن طريق تواصل فعّال وفهم متعاطف.","بتسمع زميلك في الشغل باهتمام كل يوم، فبتتكوّن بينكم ثقة وصداقة."],
+["It involves active engagement, respect, and responsiveness to the speaker's needs and concerns.","بيشمل تفاعل نشيط واحترام واستجابة لاحتياجات المتكلم وهمومه.","زميلك قالك إنه مضغوط، فتساعده وتسأل عليه بعدين."]]],
+["9. Selective Listening",[
+["Selective listening involves focusing on specific aspects of the speaker's message while filtering out or ignoring other information.","الاستماع الانتقائي إنك تركز على جزء معين من كلام المتكلم وتتجاهل الباقي.","المريض بيحكي عن أعراضه وأنت سامع بس جملة «بيوجعني»، وفوّت باقي التفاصيل."],
+["It may result from personal biases, distractions, or lack of interest in certain topics.","ممكن يحصل بسبب تحيزات شخصية أو تشتت أو قلة اهتمام بمواضيع معينة.","بتسمع بس الحاجات اللي تعجبك أو اللي بتتفق معاك وتسيب الباقي."],
+["By recognizing the different types of listening and their unique characteristics, individuals can develop and apply appropriate listening strategies to effectively engage in diverse communication contexts and achieve desired outcomes.","لما تعرف أنواع الاستماع وخصائص كل نوع، تقدر تطوّر وتستخدم الأسلوب المناسب وتتفاعل صح في المواقف المختلفة وتوصل للنتيجة اللي عايزها.","مع المريض الخايف تستخدم التعاطفي، ومع شرح الدكتور تستخدم الاستماع للمعلومات."]]],
+["❖ Principals of active listening",[
+["1. Face the speaker and have eye contact. Eye contact is an important part of face-to-face conversation. Too much eye contact can be intimidating, though, so adapt this to the situation you’re in.","واجه المتكلم وبصّ في عينه. التواصل بالعين جزء مهم في الكلام وش لوش، بس لو زاد عن الحد ممكن يخوّف، فظبطه حسب الموقف.","بتبص للمريض وهو بيحكي، لكن من غير ما تحدّق فيه طول الوقت عشان ميتضايقش."],
+["2. Listen to non-verbal cues too. Pay attention to what the other person is saying with their body language, facial expressions, tone of voice and gestures can tell you just as much as what is being said in words.","اسمع الإشارات غير الكلامية كمان. خد بالك من لغة الجسد وتعبيرات الوش ونبرة الصوت والإشارات، لأنها بتقولك زي الكلام بالظبط.","المريض بيقول «مفيش حاجة» ووشه متقلص، يبقى فيه وجع."],
+["3. Do not interrupt. Being interrupted is frustrating for the other person – it gives the impression that you think you’re more important, or that you do not have time for what they have to say.","متقاطعش. المقاطعة بتضايق الطرف التاني وبتدّي انطباع إنك شايف نفسك أهم أو معندكش وقت تسمعه.","سيب المريض يخلّص جملته وبعدين ردّ."],
+["4. Listen without judging, or jumping to conclusions. If you start reacting emotionally to what’s being said, then it can get in the way of listening to what is said next. Try to focus on listening. Equally, do not assume that you know what’s going to be said next.","اسمع من غير ما تحكم أو تستنتج بسرعة. لو بدأت تتأثر وتنفعل بالكلام هتفوّت اللي بعده، فركّز في السمع، وماتفترضش إنك عارف هيقول إيه.","المريض بيحكي، فمتقولش في دماغك «أنا عارف هو هيقول إيه»، استنى وسمع للآخر."],
+["5. Show that you’re listening. Nod your head, smile and make small noises like “yes” and “uh huh”, to show that you’re listening and encourage the speaker to continue.","وضّح إنك بتسمع. هز راسك وابتسم وقول كلمات صغيرة زي «أيوه» و«ماشي» عشان المتكلم يحس إنك معاه ويكمل.","وأنت بتسمع المريض، تقول «أيوه» «فاهمك» وتهز راسك."],
+["6. Do not impose your opinions or solutions. It’s not always easy, but lending a listening, supportive ear can be much more rewarding than telling someone what they should do.","متفرضش رأيك أو حلولك. مش سهل، بس إنك تسمع وتسند أحسن بكتير من إنك تقوله يعمل إيه.","زميلك بيشتكي، فبدل «اعمل كذا»، اسمعه وخلّيه يوصل للحل بنفسه."],
+["7. Stay focused. If you're finding it difficult to focus on what someone is saying, try repeating their words in your head as they say them – this will reinforce what they’re saying and help you to concentrate.","خلّيك مركز. لو صعب عليك تركز، كرر كلامه في دماغك وهو بيقوله، ده بيثبّت الكلام ويساعدك تركز.","المتكلم بيقول «الجرعة ٥٠٠ مجم»، تكررها في دماغك «٥٠٠ مجم»."],
+["8. Ask questions. Asking relevant questions can show that you’ve been listening and help clarify what has been said.","اسأل أسئلة. الأسئلة المناسبة بتبيّن إنك كنت بتسمع وبتوضّح اللي اتقال.","«لما قلت إن الوجع بيزيد، ده بعد الأكل ولا قبله؟»"],
+["9. Paraphrase and summarize. Repeating what has been said really shows you’ve been paying attention, and allows the speaker to correct you if you haven’t understood.","أعد الصياغة ولخّص. إنك تعيد اللي اتقال بأسلوبك بيثبت إنك مركز، وبيدّي المتكلم فرصة يصحّحلك لو فهمت غلط.","«يعني حضرتك بتحس بالتعب بعد المشي؟» لو قال لأ، يصححلك."]]],
+
+["❖ Differences between active listening and hearing.",[
+["Understanding the differences between listening and hearing","فهم الفرق بين الاستماع (Listening) والسمع (Hearing).","السمع إنك تسمع صوت الدكتور، والاستماع إنك تفهم كلامه."],
+["Listening is an active process, whereas hearing is a passive process","الاستماع عملية نشيطة بتبذل فيها مجهود، أما السمع عملية سلبية بتحصل لوحدها.","تسمع صوت التكييف من غير ما تحاول، لكن تسمع مريض بتحاول تفهمه."],
+["Listening requires paying attention, whereas hearing requires no concentration or attention skills","الاستماع محتاج انتباه، أما السمع مش محتاج تركيز ولا مهارة.","بتسمع دوشة الشارع من غير تركيز، لكن شرح المحاضرة محتاج تركيز."],
+["Listening requires empathy, curiosity, and motivation, whereas hearing is associated with being disconnected","الاستماع محتاج تعاطف وفضول ودافع، أما السمع بيرتبط بإنك منفصل عن الكلام.","المريض بيحكي وأنت مهتم وعايز تفهم = استماع، وأنت سرحان = سمع."],
+["Listening is a skill that is necessary to have effective communication, whereas hearing is not a great communication skill.","الاستماع مهارة لازمة للتواصل الفعّال، أما السمع مش مهارة تواصل كبيرة.","التواصل الناجح مع المريض بيحتاج استماع مش مجرد سمع."],
+["Listening is an internal behavior that involves both the mind and body, whereas hearing is a physical act that only involves the ears","الاستماع سلوك داخلي بيشغّل العقل والجسم مع بعض، أما السمع فعل جسدي بتشارك فيه الودان بس.","في الاستماع بتفكر وتتفاعل بجسمك، لكن في السمع ودنك بس اللي شغالة."]]],
+["Importance and benefits of active listening in communication",[
+["Active listening plays a pivotal role in communication, serving as a cornerstone for meaningful interactions and fostering deeper understanding between individuals. Its significance transcends various domains of life, from personal relationships to professional environments, imparting numerous benefits that contribute to overall well-being and success. Below are some key reasons highlighting the importance of active listening in communication:","الاستماع الفعّال له دور محوري في التواصل، وهو أساس لتفاعل له معنى وفهم أعمق بين الناس. أهميته بتمتد لمجالات كتير من العلاقات الشخصية للشغل، وبيدّي فوايد كتير لراحتك ونجاحك. دي أهم الأسباب:","بتستفيد منه مع أهلك وأصحابك وفي شغلك مع المرضى وزمايلك."]]],
+["1. Enhanced Understanding:",[
+["By attentively processing verbal and nonverbal cues, active listeners gain a comprehensive understanding of the speaker's perspective, facilitating empathy and mutual comprehension.","بتركيزك على الكلام وغير الكلام بتفهم وجهة نظر المتكلم كاملة، وده بيسهّل التعاطف والفهم المتبادل.","تفهم إن المريض خايف من نبرة صوته وتعابير وشه، مش من كلامه بس."]]],
+["2. Strengthened Relationships:",[
+["Active listening fosters trust, respect, and relation between individuals by demonstrating genuine interest in their thoughts and feelings. By validating others' experiences and perspectives, active listeners cultivate deeper bonds and foster a sense of belonging within relationships.","الاستماع الفعّال بيبني الثقة والاحترام والعلاقة لأنه بيوري اهتمام حقيقي بأفكار الناس ومشاعرهم. وبتقدير تجاربهم ووجهات نظرهم بتبني روابط أعمق وإحساس بالانتماء.","المريض اللي بتسمعه بجد بيثق فيك وبيحس إنه مش لوحده."]]],
+["3. Conflict Resolution:",[
+["Miscommunication and misunderstandings often arise from a lack of attentive listening.","سوء التواصل وسوء الفهم غالبًا بيحصلوا من قلة الاستماع بانتباه.","زميلك فهم تعليماتك غلط لأنكم ماسمعتوش بعض كويس."],
+["Active listening minimizes the likelihood of conflicts by promoting clarity, validation, and open dialogue.","الاستماع الفعّال بيقلل احتمال المشاكل لأنه بيوضّح الأمور ويقدّر الطرف التاني ويفتح حوار صريح.","بدل ما تتخانقوا، تسمعه وتوضّحوا سوا فتتحل المشكلة."]]],
+["4. Improved Problem-Solving:",[
+["In collaborative settings, active listening is crucial for effective problem-solving and decision-making.","في الشغل الجماعي، الاستماع الفعّال ضروري لحل المشاكل واتخاذ القرارات صح.","في اجتماع الفريق، لو كل واحد سمع التاني هتوصلوا لقرار أحسن."],
+["By encouraging diverse perspectives and encouraging participation, active listening facilitates innovation, creativity, and consensus-building.","بتشجيعه لوجهات النظر المختلفة والمشاركة، بيسهّل الابتكار والإبداع والوصول لاتفاق.","كل ممرضة تقول رأيها في تحسين الشغل، فتطلع أفكار جديدة والكل يتفق."]]],
+["5. Enhanced Leadership Skills:",[
+["Effective leaders prioritize active listening as a cornerstone of their communication repertoire.","القادة الناجحين بيعتبروا الاستماع الفعّال أساس أدواتهم في التواصل.","رئيسة التمريض اللي بتسمع فريقها بتبقى قائدة محبوبة وناجحة."]]],
+["6. Increased Productivity:",[
+["In professional settings, active listening enhances teamwork, collaboration, and productivity. By encouraging active participation and valuing diverse perspectives, active listeners harness the collective wisdom and insights of team members, leading to more innovative solutions and efficient decision-making.","في الشغل، الاستماع الفعّال بيحسّن الشغل الجماعي والتعاون والإنتاجية. وبتشجيعه للمشاركة وتقدير وجهات النظر، بتستفيد من خبرات الفريق كله فتطلع حلول مبتكرة وقرارات أسرع.","الفريق اللي بيسمع بعضه في الـ ICU بيخلّص شغله بسرعة وبدقة."]]],
+["7. Personal Growth and Development:",[
+["Active listening promotes self-awareness, emotional intelligence, and personal growth.","الاستماع الفعّال بينمّي وعيك بنفسك وذكاءك العاطفي ونموك الشخصي.","لما بتسمع غيرك بتفهم نفسك أكتر وتتحكم في ردود أفعالك."]]],
+["8. Improved Customer Satisfaction:",[
+["Active listening is essential in customer service and client relationships.","الاستماع الفعّال ضروري في خدمة العملاء والعلاقة معاهم.","العميل اللي حد سمع شكواه بيبقى راضي حتى قبل ما تتحل."],
+["By attentively listening to customer needs, concerns, and feedback, businesses can deliver tailored solutions, enhance satisfaction, and build long-lasting customer loyalty","لما الشركات تسمع احتياجات العملاء وانشغالاتهم وآرائهم بانتباه، بتقدّم حلول مناسبة وتزوّد الرضا وتبني ولاء طويل.","مستشفى بتسمع شكاوى المرضى بتحسّن خدمتها وبيرجعولها تاني."]]],
+
+["❖ What are the distractions of effective listening?:",[
+["Distractions can significantly impede effective listening by diverting attention away from the speaker and the message being conveyed. Here are some common distractions that may hinder active listening:","المشتتات ممكن تعطّل الاستماع الفعّال جدًا لأنها بتشد انتباهك بعيد عن المتكلم ورسالته. دي أشهر المشتتات اللي بتمنع الاستماع الفعّال:","بتسمع مريض وفجأة جرس جهاز بيزن ومشغول بالموبايل، فتفوتك نص الكلام."]]],
+["1. External Noise:",[
+["Environmental factors such as loud noises, background chatter, or other auditory disturbances can make it difficult to focus on the speaker's voice and follow the conversation.","عوامل البيئة زي الأصوات العالية والكلام في الخلفية وأي دوشة بتصعّب عليك تركز في صوت المتكلم وتتابع الحوار.","زحمة الزيارة في الوردية بتخليك مش سامع المريض كويس."]]],
+["2. Visual Distractions:",[
+["Visual stimuli such as movement in the surrounding environment, screens, or other people's actions can draw attention away from the speaker and disrupt concentration.","المؤثرات البصرية زي الحركة حواليك والشاشات وتصرفات الناس بتشد انتباهك بعيد عن المتكلم وبتبوّظ تركيزك.","شاشة المونيتور بتتغير وأنت بتسمع زميلك، فعينك تروح لها."]]],
+["3. Digital Devices:",[
+["Smartphones, tablets, laptops, and other digital devices are common sources of distraction in today's interconnected world.","الموبايلات والتابلت واللاب توب وغيرها من أكتر مصادر التشتيت في عالمنا المتصل ده.","الموبايل في إيدك وأنت بتتكلم مع مريض."],
+["Notifications, emails, text messages, and social media alerts can interrupt listening and divert attention away from the conversation.","الإشعارات والإيميلات والرسايل وتنبيهات السوشيال ميديا بتقطع الاستماع وبتشد انتباهك بعيد عن الحوار.","وأنت بتسمع حد جالك واتساب، فبصيت عليه ونسيت تكمل."]]],
+["4. Internal Thoughts:",[
+["Internal distractions, such as daydreaming, planning, worrying, or mentally rehearsing responses, can detract from active listening by occupying the mind and reducing cognitive bandwidth available for processing the speaker's message.","المشتتات الداخلية زي أحلام اليقظة والتخطيط والقلق وتحضير الرد في دماغك بتقلل من استماعك لأنها بتشغل عقلك وبتقلل قدرته على استيعاب كلام المتكلم.","وأنت بتسمع المريض بتفكر هترد عليه بإيه، فمسمعتش آخر كلامه."]]],
+["5. Physical Discomfort:",[
+["Physical discomfort, such as fatigue, hunger, discomfort, or pain, can hinder concentration and make it challenging to engage fully in the listening process.","الانزعاج الجسدي زي التعب والجوع والألم بيعطّل التركيز وبيصعّب عليك إنك تشارك كويس في الاستماع.","بعد وردية طويلة وأنت جعان وتعبان، صعب تركز مع حد."]]],
+["6. Personal Bias or Prejudice:",[
+["Personal biases may distort perception and influence interpretation of the speaker's message.","التحيزات الشخصية ممكن تشوّه إدراكك وتأثر على تفسيرك لرسالة المتكلم.","عندك فكرة مسبقة عن مريض، فتفسّر كلامه على حسب فكرتك."],
+["These biases can lead to selective attention, filtering out information that contradicts existing beliefs or preferences.","التحيزات دي ممكن تخليك تنتقي اللي تسمعه وتتجاهل أي معلومة بتخالف معتقداتك أو تفضيلاتك.","تسمع بس اللي يأكد رأيك وتسيب اللي بيخالفه."]]],
+["7. Emotional Distress:",[
+["Emotional factors such as stress, anxiety, anger, or sadness can affect listening comprehension and interpersonal interactions.","العوامل العاطفية زي التوتر والقلق والغضب والحزن بتأثر على فهمك للكلام وعلى تعاملك مع الناس.","لو أنت متعصب من حاجة حصلت في الشغل، مش هتفهم زميلك كويس."],
+["Strong emotions may interfere with the ability to empathize with the speaker and inhibit effective communication.","المشاعر القوية ممكن تمنعك من إنك تتعاطف مع المتكلم وتعطّل التواصل الفعّال.","وأنت زعلان جدًا، مش هتقدر تحس بمشاعر المريض."]]],
+["8. Cultural Differences:",[
+["Cultural differences in communication styles, language proficiency, and nonverbal cues may pose challenges to effective listening, particularly in multicultural or diverse settings where individuals may interpret messages differently.","الاختلافات الثقافية في أساليب التواصل ومستوى اللغة والإشارات غير الكلامية ممكن تعمل صعوبات في الاستماع، خصوصًا في الأماكن متعددة الثقافات اللي الناس فيها بتفسّر الرسايل بشكل مختلف.","مريض من ثقافة تانية بيتجنب النظر في العين احترامًا، وأنت تفهمها إنه مش مهتم."]]],
+["9. Lack of Interest or Motivation:",[
+["A lack of interest, motivation, or relevance to the topic being discussed can diminish engagement and attention, making it difficult to maintain focus and actively listen to the speaker.","قلة الاهتمام أو الدافع أو إحساسك إن الموضوع مالوش علاقة بيك بتقلل تفاعلك وانتباهك، فيصعب تفضل مركز وتسمع بفعالية.","محاضرة موضوعها ممل بالنسبة لك، فبتسرح بعد دقايق."]]],
+["10. Overload of Information:",[
+["Information overload, such as complex or dense content, rapid speech, or excessive detail, can overwhelm cognitive processing capacity and hinder comprehension and retention of the speaker's message.","زيادة المعلومات زي المحتوى المعقد أو الكلام السريع أو التفاصيل الكتير بتزوّد الحمل على عقلك وبتصعّب الفهم والحفظ.","دكتور بيشرح بسرعة ومعلومات كتير ورا بعض، فتتلخبط."]]],
+["Conclusion",[
+["By identifying and addressing these distractions, individuals can improve their ability to engage in active listening, enhance communication effectiveness, and foster deeper understanding and connection with others.","لما تعرف المشتتات دي وتتعامل معاها، هتحسّن قدرتك على الاستماع الفعّال وتزوّد فعالية تواصلك وتبني فهم وصلة أعمق مع الناس.","تقفل الموبايل وتبعد عن الدوشة قبل ما تسمع المريض."]]],
+["❖ advices to improve active listening skills:",[
+["Improving active listening skills is an ongoing process that requires mindfulness, practice, and dedication. Here are some practical tips and advice to enhance your active listening skills:","تحسين مهارات الاستماع الفعّال عملية مستمرة محتاجة وعي وتدريب وإصرار. دي نصايح عملية تحسّن مهارتك:","زي أي مهارة في التمريض، بتتحسن بالتدريب كل يوم."]]],
+["1. Be Present:",[
+["Practice mindfulness by fully focusing on the speaker and the conversation at hand.","تمرّن على الانتباه الكامل بإنك تركز تمامًا في المتكلم والحوار اللي قدامك.","وأنت مع المريض، فكّر فيه هو بس دلوقتي."],
+["Avoid distractions and mental preoccupations, and devote your full attention to listening.","ابعد عن المشتتات وعن الانشغال الذهني، وادّي الاستماع كل انتباهك.","اقفل الموبايل وسيب أي تفكير في حاجة تانية."]]],
+["2. Maintain Eye Contact:",[
+["Establish and maintain eye contact with the speaker to demonstrate attentiveness and engagement.","ابدأ واستمر في التواصل بالعين مع المتكلم عشان تبيّن إنك منتبه ومتفاعل.","بص في عين المريض وهو بيحكي."],
+["Eye contact signals interest and encourages the speaker to continue expressing themselves.","التواصل بالعين بيوصّل اهتمامك وبيشجّع المتكلم يكمل كلامه.","لما بتبصله، بيحس إنك مهتم فيكمل يحكي."]]],
+["3. Use Nonverbal Cues:",[
+["Employ positive body language, such as nodding, leaning forward, and using facial expressions, to convey your interest and understanding.","استخدم لغة جسد إيجابية زي هز الراس والميل لقدام وتعابير الوش عشان توصّل اهتمامك وفهمك.","هز راسك وميّل ناحيته بشوية وابتسم."],
+["Nonverbal cues can enhance communication and build rapport with the speaker.","الإشارات غير الكلامية بتحسّن التواصل وبتبني ألفة مع المتكلم.","لغة جسدك بتخلي المريض يرتاحلك."]]],
+["4. Listen Without Judgment:",[
+["Adopt a nonjudgmental attitude and strive to understand the speaker's perspective without imposing your own biases.","خدّ موقف من غير أحكام، وحاول تفهم وجهة نظر المتكلم من غير ما تفرض تحيزاتك.","مريض عمل حاجة غلط، فتسمعه الأول من غير لوم."]]],
+["5. Paraphrase and Summarize:",[
+["Practice active listening by paraphrasing the speaker's message in your own words to confirm understanding and demonstrate empathy.","مارس الاستماع الفعّال بإنك تعيد رسالة المتكلم بكلامك عشان تتأكد إنك فهمت وتبيّن تعاطفك.","«يعني حضرتك قلقان من نتيجة التحاليل؟»"],
+["Summarize key points to ensure clarity and comprehension.","لخّص النقط الأساسية عشان تضمن الوضوح والفهم.","في آخر الكلام قوله «يعني اتفقنا على كذا وكذا»."]]],
+["6. Ask Clarifying Questions:",[
+["Clarify any points of confusion or ambiguity by asking open-ended questions that encourage the speaker to elaborate further.","وضّح أي نقطة مش واضحة أو غامضة بأسئلة مفتوحة بتشجّع المتكلم يشرح أكتر.","«ممكن تحكيلي أكتر عن الوجع ده؟»"]]],
+["7. Practice Empathetic Listening:",[
+["Empathetic listening involves understanding the speaker's emotions, needs, and concerns without judgment or criticism.","الاستماع التعاطفي إنك تفهم مشاعر المتكلم واحتياجاته وهمومه من غير حكم أو انتقاد.","«أنا فاهم إنك قلقان، وده طبيعي»."]]],
+["8. Avoid Interrupting:",[
+["Resist the urge to interrupt or interject while the speaker is talking.","قاوم رغبتك إنك تقاطع أو تدخل في كلام المتكلم وهو بيتكلم.","لو عندك رد، استنى لحد ما يخلّص."],
+["Allow the speaker to express themselves fully before responding and avoid monopolizing the conversation.","سيب المتكلم يعبّر عن نفسه كامل قبل ما تردّ، وماتسيطرش على الحوار.","خلّي المريض يحكي كله وبعدين اتكلم أنت."]]],
+["9. Seek Feedback:",[
+["Reflect on your listening habits and actively work on addressing any challenges or weaknesses.","راجع عاداتك في الاستماع واشتغل بجد على أي صعوبات أو نقط ضعف.","اسأل زميلك «أنا بسمعك كويس؟» وصلّح اللي ناقص."]]],
+["10. Be Patient:",[
+["Practice patience and tolerance, especially in challenging or emotionally charged conversations.","اتعوّد على الصبر والتحمل، خصوصًا في المواقف الصعبة أو المشحونة بالمشاعر.","مريض متعصب بيزعق، فتصبر وتسمعه لحد ما يهدى."]]],
+["11. Continuous Improvement:",[
+["Set goals for yourself and practice active listening in various situations to build confidence and proficiency over time.","حط لنفسك أهداف ومارس الاستماع الفعّال في مواقف مختلفة عشان تبني ثقتك ومهارتك مع الوقت.","قرر إنك تطبّق مهارة واحدة كل يوم، زي «أسأل سؤال توضيحي»."]]],
+["Conclusion",[
+["By incorporating these strategies into your daily interactions, you can cultivate stronger active listening skills and enhance your ability to connect with others, foster understanding, and build meaningful relationship","لما تطبّق الاستراتيجيات دي في تعاملك كل يوم، هتنمّي مهارات الاستماع الفعّال وتزوّد قدرتك على التواصل مع الناس وبناء فهم وعلاقات ذات معنى.","كل مرة تسمع بتركيز، علاقتك بالمريض والفريق بتتحسن."]]]
+];
+let h='';D.forEach(([t,its])=>{h+=(!/^\d+\./.test(t)?'<h2>'+t+'</h2>':'<div class="sub">'+t+'</div>');its.forEach(([e,a,x])=>{h+='<div class="item"><div class="en">'+e+'</div><div class="ar">'+a+'</div><div class="ex"><b>عشان تفهمها:</b> '+x+'</div></div>'});});
+document.getElementById('app').innerHTML=h;
+const b=document.getElementById('tb');b.onclick=()=>{const d=document.documentElement.dataset.theme==='dark';document.documentElement.dataset.theme=d?'':'dark';b.textContent=d?'🌙':'☀️'};
+</script></body></html>
