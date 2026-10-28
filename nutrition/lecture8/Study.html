@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Obesity and Weight Management | GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --accent:#15803d;--c2:#ea580c;--c3:#ca8a04;--c4:#be185d;
+  --grad:linear-gradient(135deg,#14532d 0%,#15803d 40%,#65a30d 75%,#ea580c 100%);
+  --bg:#f6faf5;--bg2:#eaf3e7;--card:#fff;--text:#14231a;--text2:#3f5546;--text3:#738a7a;
+  --bc:rgba(20,60,30,.12);--exbg:rgba(202,138,4,.10);--exbd:#ca8a04;--r:16px;
+}
+[data-theme="dark"]{
+  --bg:#0b140e;--bg2:#111e15;--card:#16261b;--text:#e8f5ec;--text2:#b8d2c0;--text3:#7f9a88;
+  --bc:rgba(255,255,255,.10);--accent:#4ade80;--c2:#fb923c;--c3:#facc15;--exbg:rgba(250,204,21,.08);--exbd:#facc15;
+}
+html{scroll-behavior:smooth;scroll-padding-top:130px}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;transition:background .3s,color .3s}
+#prog{position:fixed;top:0;left:0;height:3px;width:0;z-index:999;background:linear-gradient(90deg,var(--accent),var(--c3),var(--c2),var(--c4))}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:60px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;background:rgba(246,250,245,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--bc)}
+[data-theme="dark"] nav{background:rgba(11,20,14,.95)}
+.brand{display:flex;align-items:center;gap:9px;font-weight:900;font-size:15px}
+.logo{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,#15803d,#65a30d);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900}
+.theme-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--bc);background:var(--card);cursor:pointer;font-size:15px}
+.theme-btn:focus-visible,.chip:focus-visible{outline:3px solid var(--c2);outline-offset:2px}
+.hero{margin-top:60px;background:var(--grad);padding:42px 22px 46px;text-align:center;color:#fff}
+.hero .ico{width:66px;height:66px;border-radius:20px;background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 14px}
+.hero h1{font-size:clamp(22px,4.4vw,32px);font-weight:900;margin-bottom:6px}
+.hero p{font-size:13px;opacity:.9}
+.toc{position:sticky;top:60px;z-index:50;background:var(--bg);border-bottom:1px solid var(--bc);padding:10px 16px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin}
+.chip{flex:0 0 auto;text-decoration:none;font-size:12px;font-weight:700;color:var(--text2);background:var(--card);border:1px solid var(--bc);padding:6px 13px;border-radius:50px;white-space:nowrap}
+.chip:hover{color:var(--c2);border-color:var(--c2)}
+main{max-width:760px;margin:0 auto;padding:26px 18px 70px}
+section{margin-bottom:34px}
+h2{font-size:20px;font-weight:900;padding:12px 16px;border-radius:12px;background:var(--grad);color:#fff;margin-bottom:14px}
+h3{font-size:15px;font-weight:700;color:var(--accent);margin:20px 4px 10px;padding-left:10px;border-left:4px solid var(--c2)}
+.item{background:var(--card);border:1px solid var(--bc);border-radius:var(--r);padding:16px 18px;margin-bottom:12px}
+.en{direction:ltr;text-align:left;font-size:15.5px;font-weight:700;line-height:1.6;color:var(--text)}
+.ar{direction:rtl;text-align:right;font-family:'Cairo',sans-serif;font-size:15px;line-height:1.9;color:var(--text2);margin-top:9px;padding-top:9px;border-top:1px dashed var(--bc)}
+.ex{direction:rtl;text-align:right;font-family:'Cairo',sans-serif;font-size:14px;line-height:1.85;color:var(--text);margin-top:10px;padding:10px 14px;border-radius:10px;background:var(--exbg);border-right:4px solid var(--exbd)}
+.ex b{color:var(--c2)}
+footer{background:var(--bg2);border-top:1px solid var(--bc);padding:20px 24px;text-align:center;font-size:13px;font-weight:700}
+footer span{color:var(--accent)}
+@media(max-width:480px){nav{padding:0 14px}main{padding:18px 12px 60px}.item{padding:14px}}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<nav>
+  <div class="brand"><div class="logo">GT</div><span>GHAITH TEAM</span></div>
+  <button class="theme-btn" id="themeBtn" aria-label="Toggle theme">🌙</button>
+</nav>
+<div class="hero">
+  <div class="ico">⚖️</div>
+  <h1>Obesity and Weight Management</h1>
+  <p>Applied Nutrition</p>
+</div>
+<div class="toc" id="toc"></div>
+<main id="content"></main>
+<footer>GHAITH <span>TEAM</span></footer>
+
+<script>
+const DATA = [
+{id:"def",t:"Definition of Obesity",items:[
+["Obesity is a chronic disease characterized by excessive accumulation of body fat that can negatively affect health.",
+ "السمنة مرض مزمن، يعني بيفضل مع الشخص فترة طويلة، وسببه إن دهون الجسم بتتراكم أكتر من اللازم، والموضوع ده بيأثر على صحته بشكل سلبي.",
+ "واحد دهونه بتزيد سنة ورا سنة، وبعد فترة بيبدأ يتعب في ضغطه ومفاصله."],
+["Overweight refers to body weight above the healthy range and may result from excess body fat, increased muscle mass, or other factors.",
+ "Overweight معناها إن وزنك فوق المعدل الصحي، بس مش لازم يكون بسبب دهون، ممكن يكون بسبب عضلات زيادة أو عوامل تانية.",
+ "لاعب كمال أجسام وزنه عالي، بس السبب عضلاته مش دهونه."]
+]},
+{id:"class",t:"Classification of Obesity",items:[
+"Body Mass Index (BMI)",
+["BMI is a commonly used screening measure in adults.",
+ "الـ BMI مقياس مشهور بنستخدمه كفحص مبدئي سريع للبالغين.",
+ "زي ما بنقيس الضغط كفحص سريع، الـ BMI فحص سريع للوزن."],
+["BMI = Weight (kg) / Height² (m)",
+ "المعادلة: وزنك بالكيلو مقسوم على مربع طولك بالمتر.",
+ "واحد وزنه 80 كيلو وطوله 2 متر، يبقى الطول تربيع = 4، والناتج 80 ÷ 4 = 20."],
+["BMI < 18.5 : Underweight",
+ "لو الـ BMI أقل من 18.5 يبقى الشخص نحيف (وزنه ناقص).",
+ "واحد الـ BMI بتاعه 17 يعني وزنه أقل من الطبيعي."],
+["BMI 18.5 – 24.9 : Healthy weight",
+ "لو من 18.5 لـ 24.9 يبقى وزنه صحي وطبيعي.",
+ "واحد الـ BMI بتاعه 22 يبقى في المنطقة الآمنة."],
+["BMI 25.0 – 29.9 : Overweight",
+ "لو من 25 لـ 29.9 يبقى وزنه زايد.",
+ "واحد الـ BMI بتاعه 27 يبقى وزنه زايد بس لسه مش سمنة."],
+["BMI 30.0 – 34.9 : Obesity class I",
+ "لو من 30 لـ 34.9 يبقى سمنة من الدرجة الأولى.",
+ "الـ BMI بتاعه 32 يبقى سمنة درجة أولى."],
+["BMI 35.0 – 39.9 : Obesity class II",
+ "لو من 35 لـ 39.9 يبقى سمنة من الدرجة التانية.",
+ "الـ BMI بتاعه 37 يبقى سمنة درجة تانية."],
+["BMI ≥ 40 : Obesity class III",
+ "لو 40 أو أكتر يبقى سمنة من الدرجة التالتة (الأشد).",
+ "الـ BMI بتاعه 42 يبقى سمنة درجة تالتة."],
+"Example of BMI Calculation",
+["A person weighs 90 kg and is 1.70 m tall.",
+ "عندنا شخص وزنه 90 كيلو وطوله 1.70 متر.",
+ "دي المعطيات اللي هنحسب بيها الـ BMI."],
+["BMI = 90 / (1.70)² = 31.1 kg/m²",
+ "بنعوض في المعادلة: 1.70 × 1.70 = 2.89، وبعدين 90 ÷ 2.89 = 31.1 تقريباً.",
+ "زي ما بتحسب في الآلة الحاسبة: اضرب الطول في نفسه الأول، وبعدين اقسم الوزن على الناتج."],
+["Therefore, the person falls within obesity class I according to adult BMI categories.",
+ "يعني الشخص ده بيقع في سمنة الدرجة الأولى حسب تصنيف البالغين.",
+ "لأن 31.1 واقعة بين 30 و 34.9."]
+]},
+{id:"causes",t:"Causes of Obesity",items:[
+"A. Dietary factors",
+["Excessive calorie intake.","أكل سعرات حرارية أكتر من اللي جسمك محتاجه.","واحد بياكل 3000 سعر وجسمه محتاج 2000، الزيادة بتتخزن دهون."],
+["Large portion sizes.","الأطباق بتكون كبيرة، فبتاكل كمية أكتر من غير ما تحس.","طبق رز كبير بدل طبق صغير."],
+["Frequent consumption of energy-dense foods.","الإكثار من الأكل اللي فيه سعرات كتير في حجم صغير.","الشيبسي والحلويات والمقليات."],
+["Excessive sugary drinks.","شرب مشروبات سكرية كتير.","كام علبة مشروب غازي في اليوم."],
+["Frequent fast-food consumption.","أكل الوجبات السريعة بشكل متكرر.","وجبة برجر وبطاطس كل يوم تقريباً."],
+["Low intake of fruits and vegetables.","قلة أكل الفاكهة والخضار.","الشخص مبياكلش سلطة ولا فاكهة، فبيشبع من أكل تقيل في السعرات."],
+"B. Physical inactivity",
+["Sedentary lifestyle.","نمط حياة قليل الحركة، قاعد أغلب اليوم.","موظف قاعد على المكتب ٨ ساعات وبعدها قاعد في البيت."],
+["Prolonged screen time.","قعاد طويل قدام الشاشات (موبايل، تلفزيون، كمبيوتر).","ساعات سوشيال ميديا وألعاب من غير حركة."],
+["Limited opportunities for physical activity.","فرص الحركة والرياضة قليلة.","مفيش جيم ولا حديقة قريبة تمشي فيها."],
+"C. Genetic factors",
+["Genetic factors can influence:","الجينات (الوراثة) ممكن تأثر في حاجات كتير، وهي اللي بعد كده.","زي ما الوراثة بتأثر في الطول، بتأثر في الوزن كمان."],
+["Appetite.","الشهية.","واحد جينات شهيته مفتوحة طول الوقت."],
+["Energy expenditure.","الطاقة اللي الجسم بيحرقها.","اتنين بياكلوا نفس الأكل، واحد بيحرق أسرع من التاني."],
+["Fat storage.","طريقة تخزين الدهون في الجسم.","جسم بيخزن الزيادة بسهولة أكتر من جسم تاني."],
+["Body-weight regulation.","تنظيم وزن الجسم.","الجسم عنده 'ترموستات' للوزن، وبعض الناس الترموستات بتاعهم مظبوط على وزن أعلى."],
+"D. Environmental and social factors",
+["Easy availability of high-calorie foods.","الأكل العالي في السعرات متاح وسهل الوصول له.","محل حلويات ومطعم وجبات سريعة تحت البيت."],
+["Limited access to healthy foods.","صعوبة الوصول للأكل الصحي.","المنطقة مفيهاش سوق خضار، والأكل الصحي غالي."],
+["Work or living environments that encourage sedentary behavior.","بيئة الشغل أو السكن بتشجع على القعاد وقلة الحركة.","شغل مكتبي، ومفيش سلالم لأن الأسانسير موجود."],
+["Socioeconomic factors.","العوامل الاقتصادية والاجتماعية (الدخل والتعليم والمستوى المعيشي).","ناس بتختار الأكل الأرخص، وغالباً بيكون عالي السعرات."],
+"E. Psychological factors",
+["Emotional eating.","الأكل بسبب المشاعر، مش عشان جعان.","واحد زعلان فبيفتح التلاجة ياكل حلويات."],
+["Chronic stress.","التوتر المزمن المستمر.","ضغط شغل ودراسة طول الوقت فبيتعوض بالأكل."],
+["Depression or other psychological factors may contribute to unhealthy eating behaviors.","الاكتئاب أو عوامل نفسية تانية ممكن تخلي الشخص ياكل بطريقة مش صحية.","واحد مكتئب بياكل كتير أو أكل غلط من غير ما يحس."],
+"F. Medical factors",
+["Some medical conditions and medications can contribute to weight gain.","بعض الأمراض وبعض الأدوية ممكن تسبب زيادة في الوزن.","في أدوية معينة وزن المريض بيزيد بعد ما يبدأ ياخدها."]
+]},
+{id:"risk",t:"Risk Factors",items:[
+["Important risk factors include:","أهم عوامل الخطورة اللي بتزود احتمال السمنة هي دي.","عامل الخطورة زي مطب في الطريق، مش لازم تقع، بس احتمال الوقوع بيزيد."],
+["Family history of obesity.","تاريخ عائلي للسمنة.","الأب والأم الاتنين وزنهم زايد."],
+["Physical inactivity.","قلة النشاط البدني.","من غير مشي ولا رياضة خالص."],
+["High-calorie diet.","نظام غذائي عالي السعرات.","أكل دسم وحلويات بشكل دائم."],
+["Poor sleep.","النوم السيء أو القليل.","واحد بينام 4 ساعات كل يوم."],
+["Chronic stress.","التوتر المزمن.","ضغط مستمر بيزود الأكل العاطفي."],
+["Sedentary occupation.","وظيفة بتتطلب القعاد.","سواق أو موظف مكتب."],
+["Excessive screen time.","وقت شاشات زايد.","ساعات طويلة على الموبايل كل يوم."],
+["Certain medications.","أدوية معينة.","أدوية بتزود الشهية أو بتخزن السوائل والدهون."],
+["Some endocrine or metabolic disorders.","بعض اضطرابات الغدد الصماء أو الأيض.","مشاكل في الغدة الدرقية بتبطّأ حرق الجسم للطاقة."]
+]},
+{id:"comp",t:"Complications of Obesity",items:[
+["Obesity can affect almost every body system and increases the risk of:","السمنة بتأثر على تقريباً كل أجهزة الجسم وبتزود خطر مضاعفات كتير، وهي اللي جاية.","زي ما وزن تقيل على عربية بيضغط على الفرامل والموتور والعجل كلهم."],
+["Cardiovascular: Hypertension, coronary heart disease, heart failure, and stroke.","القلب والأوعية: ضغط الدم العالي، أمراض الشريان التاجي، فشل القلب، والسكتة الدماغية.","القلب بيشتغل أكتر عشان يوزع الدم على جسم أكبر، فبيتعب مع الوقت."],
+["Metabolic: Type 2 diabetes mellitus, insulin resistance, and dyslipidemia.","الأيض: السكر من النوع التاني، مقاومة الإنسولين، واضطراب دهون الدم.","الدهون الزيادة بتخلي الجسم مبيستجيبش للإنسولين كويس، فالسكر يعلى."],
+["Respiratory: Obstructive sleep apnea and breathing difficulties.","الجهاز التنفسي: انقطاع النفس أثناء النوم الانسدادي وصعوبة التنفس.","واحد بيشخر جامد وبيصحى تعبان لأن نفسه بيقف لحظات وهو نايم."],
+["Musculoskeletal: Osteoarthritis, joint pain, and reduced mobility.","العضلات والعظام: خشونة المفاصل، آلام المفاصل، وقلة الحركة.","الركبة شايلة وزن زيادة، فبتتآكل وبتوجع."],
+["Gastrointestinal: Gallstones and gastroesophageal reflux disease.","الجهاز الهضمي: حصوات المرارة والارتجاع المريئي.","واحد بيحس بحرقان في المعدة بعد الأكل لأن الحمض بيرجع للمريء."],
+["Reproductive: Menstrual irregularities, infertility, and pregnancy complications.","الجهاز التناسلي: اضطراب الدورة الشهرية، العقم، ومضاعفات الحمل.","سيدة دورتها مش منتظمة وبتتأخر في الحمل بسبب السمنة."],
+["Psychological: Depression, anxiety, low self-esteem, and social stigma.","النفسية: اكتئاب، قلق، ثقة قليلة في النفس، ونظرة المجتمع السلبية.","شخص بيتحرج يخرج لأن الناس بتعلق على وزنه."],
+["Cancer: Increased risk of several types of cancer.","السرطان: زيادة خطر الإصابة بأنواع كتير منه.","السمنة عامل خطورة، يعني احتمال المرض بيزيد."],
+["Skin: Intertrigo, skin infections, and other skin problems.","الجلد: التهاب ثنايا الجلد (Intertrigo)، عدوى جلدية، ومشاكل جلدية تانية.","احتكاك وعرق في ثنايا الجلد بيسبب احمرار وتسلخات."],
+["Quality of life: Reduced physical functioning and difficulty performing daily activities.","جودة الحياة: قدرة الجسم على الحركة بتقل، وبيصعب أداء الأنشطة اليومية.","طلوع سلمتين بيبقى مجهود، وربط الجزمة يبقى صعب."]
+]},
+{id:"prev",t:"Prevention of Obesity",items:[
+["Eat a balanced, varied diet with appropriate portions.","كل أكل متوازن ومتنوع، وبكميات مناسبة.","طبقك فيه بروتين وخضار ونشويات، بدل ما يكون كله نوع واحد."],
+["Increase intake of fruits, vegetables, whole grains, and lean proteins.","زوّد الفاكهة والخضار والحبوب الكاملة والبروتين قليل الدهن.","سلطة مع فرخة مشوية وخبز أسمر."],
+["Limit sugary drinks, added sugars, and highly processed foods.","قلل المشروبات السكرية والسكر المضاف والأكل المصنع جداً.","اشرب مية بدل المشروب الغازي."],
+["Engage in regular physical activity.","اعمل نشاط بدني بانتظام.","مشي نص ساعة كل يوم."],
+["Reduce prolonged sitting and sedentary screen time.","قلل القعاد الطويل ووقت الشاشات من غير حركة.","قوم تتحرك كل ساعة وإنت قاعد على الموبايل أو اللاب."],
+["Maintain adequate, regular sleep.","حافظ على نوم كافي ومنتظم.","نام ٧ إلى ٨ ساعات في معاد ثابت."],
+["Practice healthy eating behaviors and avoid frequent emotional eating.","اتبع عادات أكل صحية وتجنب الأكل العاطفي المتكرر.","لو زعلان، امشي أو كلم حد بدل ما تفتح التلاجة."],
+["Monitor weight regularly and identify excessive weight gain early.","تابع وزنك بانتظام واكتشف الزيادة الكبيرة بدري.","اتوزن كل فترة، فلو زاد كام كيلو تتصرف بدري."],
+["Promote healthy eating and physical activity habits from childhood.","شجّع عادات الأكل الصحي والحركة من الطفولة.","الطفل اللي بيتعود على الفاكهة واللعب بره بيكمل عليهم كبير."],
+["Provide nutrition and lifestyle education to individuals and families.","قدّم توعية عن التغذية ونمط الحياة للأفراد والأسر.","الممرضة تشرح للأم إزاي تظبط أكل أولادها."]
+]},
+{id:"wm",t:"Weight Management",items:[
+["Weight management is the process of achieving and maintaining a healthy body weight through balanced nutrition, regular physical activity, healthy behaviors, and appropriate medical support when needed.",
+ "إدارة الوزن هي إنك توصل لوزن صحي وتحافظ عليه، عن طريق أكل متوازن ونشاط بدني منتظم وسلوكيات صحية، ودعم طبي مناسب لو احتاج الموضوع.",
+ "مش حمية لمدة أسبوعين وخلاص، دي طريقة حياة مستمرة."]
+]},
+{id:"strat",t:"Main Strategies",items:[
+"1. Healthy diet",
+["Eat balanced meals with appropriate portions.","كل وجبات متوازنة وبكميات مناسبة.","اتحكم في حجم الطبق."],
+["Increase vegetables, fruits, whole grains, and lean protein.","زوّد الخضار والفاكهة والحبوب الكاملة والبروتين قليل الدهن.","نص الطبق خضار."],
+["Limit sugary drinks, sweets, fried foods, and highly processed foods.","قلل المشروبات السكرية والحلويات والمقليات والأكل المصنع.","استبدل البطاطس المحمرة بالمشوية."],
+["Reduce excessive salt and saturated fat.","قلل الملح الزايد والدهون المشبعة.","قلل الملح على الأكل، وابعد عن السمنة والدهون الحيوانية."],
+"2. Regular physical activity",
+["Encourage regular moderate-intensity activity such as walking.","شجّع على نشاط معتدل منتظم زي المشي.","مشي سريع نص ساعة معظم أيام الأسبوع."],
+["Reduce prolonged sitting and sedentary activities.","قلل القعاد الطويل والأنشطة قليلة الحركة.","قوم من الكرسي كل شوية."],
+["Gradually increase activity according to the person's ability.","زوّد النشاط تدريجياً حسب قدرة الشخص.","اللي مش متعود يبدأ بـ ١٠ دقايق، وبعدها يزود."],
+"3. Behavior modification",
+["Set realistic and achievable weight goals.","حدد أهداف وزن واقعية وممكن تتحقق.","هدف: أنزل نص كيلو في الأسبوع، مش ١٠ كيلو في أسبوع."],
+["Keep a food and activity record.","اكتب سجل بالأكل والنشاط.","دفتر أو تطبيق تسجل فيه كل اللي أكلته وحركتك."],
+["Practice portion control.","اتحكم في حجم الحصة.","حط الأكل في طبق صغير بدل ما تاكل من العلبة."],
+["Eat regularly and avoid frequent emotional eating.","كل بانتظام وتجنب الأكل العاطفي المتكرر.","وجبات في مواعيدها بدل الأكل العشوائي."],
+["Identify and manage situations that trigger overeating.","اعرف المواقف اللي بتخليك تاكل أكتر من اللازم وتعامل معاها.","لو التلفزيون بيخليك تاكل كتير، كل على السفرة بس."],
+"4. Monitoring",
+["Monitor body weight and BMI regularly.","تابع وزنك والـ BMI بانتظام.","وزن ومقاس مرة كل فترة ثابتة."],
+["Assess dietary intake and physical activity.","قيّم اللي بتاكله ومستوى نشاطك.","راجع السجل وشوف بتاكل وبتتحرك قد إيه."],
+["Monitor progress and adjust the plan when necessary.","تابع التقدم وعدّل الخطة لو احتاج الأمر.","لو الوزن مش بينزل، غيّر في الخطة."],
+"5. Adequate sleep and stress management",
+["Maintain regular adequate sleep.","حافظ على نوم كافي ومنتظم.","نوم بمواعيد ثابتة."],
+["Use healthy methods to manage stress, such as relaxation and physical activity.","استخدم طرق صحية للتعامل مع التوتر، زي الاسترخاء والنشاط البدني.","تمارين تنفس أو مشي بدل الأكل وقت التوتر."],
+"6. Medical management",
+["Some patients may require medications or other medical interventions under healthcare-professional supervision.","بعض المرضى ممكن يحتاجوا أدوية أو تدخلات طبية، بس بإشراف مختص صحي.","ماينفعش حد ياخد دوا تخسيس من نفسه، لازم الدكتور."],
+["Severe obesity may require evaluation for specialized treatment.","السمنة الشديدة ممكن تحتاج تقييم لعلاج متخصص.","حالة BMI فيها عالي جداً بتتحول لمركز متخصص."]
+]},
+{id:"nurse",t:"Nursing Role in Weight Management",items:[
+["Assess weight, BMI, dietary habits, and activity level.","قيّم الوزن والـ BMI وعادات الأكل ومستوى النشاط.","أول ما المريض يدخل، الممرضة بتاخد وزنه وطوله وتسأله عن أكله."],
+["Identify factors contributing to excessive weight.","حدد العوامل اللي بتساهم في زيادة الوزن.","تكتشف إنه بيشرب مشروبات سكرية كتير."],
+["Provide nutrition and lifestyle education.","قدّم تثقيف عن التغذية ونمط الحياة.","تشرح له بدائل صحية."],
+["Encourage gradual, realistic weight-loss goals.","شجّع على أهداف خسارة وزن تدريجية وواقعية.","تقوله نبدأ بنص كيلو في الأسبوع."],
+["Promote physical activity.","شجّع على النشاط البدني.","تقترح عليه مشي يومي."],
+["Support behavioral changes and self-monitoring.","ادعم تغيير السلوك والمتابعة الذاتية.","تساعده يكتب سجل أكله."],
+["Monitor progress and adherence.","تابع التقدم والالتزام بالخطة.","تسأله في كل زيارة: التزمت ولا لأ؟"],
+["Refer patients to a dietitian or physician when appropriate.","حوّل المريض لأخصائي تغذية أو دكتور لما يلزم.","لو الحالة محتاجة نظام غذائي مخصوص، تحوله لأخصائي."],
+["Provide continuous motivation and follow-up.","قدّم تحفيز ومتابعة مستمرة.","كلمة تشجيع ومتابعة بعد كل أسبوع."]
+]},
+{id:"diets",t:"Examples of Recent Popular Diets",items:[
+["1. Mediterranean Diet – Emphasizes vegetables, fruits, whole grains, legumes, fish, and healthy fats.","حمية البحر المتوسط: بتركز على الخضار والفاكهة والحبوب الكاملة والبقوليات والسمك والدهون الصحية.","أكلة فيها سمك مشوي وسلطة وزيت زيتون وعدس."],
+["2. Ketogenic (Keto) Diet – Very low in carbohydrates and high in fat, with moderate protein.","حمية الكيتو: كربوهيدرات قليلة جداً، دهون عالية، وبروتين متوسط.","بيض وجبنة وأفوكادو بدل العيش والرز."],
+["3. Intermittent Fasting – Alternates periods of eating with periods of fasting.","الصيام المتقطع: بيبدل بين فترات أكل وفترات صيام.","تصوم ١٦ ساعة وتاكل في ٨ ساعات."],
+["4. Low-Carbohydrate Diet – Restricts foods high in carbohydrates and emphasizes protein, vegetables, and healthy fats.","حمية قليلة الكربوهيدرات: بتقلل الأكل العالي في الكربوهيدرات، وبتركز على البروتين والخضار والدهون الصحية.","فرخة مشوية وخضار بدل المكرونة."],
+["5. Paleo Diet – Focuses on minimally processed foods such as meat, fish, vegetables, fruits, nuts, and seeds.","حمية الباليو: بتركز على الأكل اللي مفيهوش تصنيع كتير، زي اللحمة والسمك والخضار والفاكهة والمكسرات والبذور.","أكل زي الإنسان القديم: لحمة وخضار وفاكهة ومكسرات."],
+["6. DASH Diet – Emphasizes fruits, vegetables, whole grains, and low-fat dairy; particularly designed to support healthy blood pressure.","حمية DASH: بتركز على الفاكهة والخضار والحبوب الكاملة والألبان قليلة الدسم، ومتصممة خصوصاً لدعم ضغط دم صحي.","مناسبة لمريض الضغط: خضار وفاكهة وألبان لايت."],
+["7. Plant-Based Diet – Mainly consists of plant foods such as vegetables, fruits, legumes, whole grains, nuts, and seeds.","حمية نباتية: أغلب الأكل فيها من مصادر نباتية زي الخضار والفاكهة والبقوليات والحبوب الكاملة والمكسرات والبذور.","فول وعدس وسلطة وفاكهة ومكسرات."],
+["8. Time-Restricted Eating – Limits daily food intake to a specific time window.","الأكل المحدد بوقت: بتحدد نافذة زمنية معينة في اليوم تاكل فيها بس.","تاكل من ١٢ الضهر لحد ٨ بالليل بس."],
+["9. Low-Fat Diet – Limits dietary fat, particularly saturated and trans fats.","حمية قليلة الدهون: بتقلل الدهون في الأكل، خصوصاً المشبعة والمتحولة.","تشوي بدل ما تقلي، وتبعد عن الدهون الحيوانية."],
+["10. High-Protein Diet – Emphasizes protein-rich foods to increase satiety and support muscle maintenance.","حمية عالية البروتين: بتركز على الأكل الغني بالبروتين عشان تزود الشبع وتحافظ على العضلات.","بيض وفراخ وسمك وزبادي يونانى."],
+["**Important point: No single diet is appropriate for everyone. Weight-management plans should consider nutritional adequacy, health status, preferences, sustainability, and individual needs.","نقطة مهمة: مفيش نظام غذائي واحد مناسب للكل. خطط إدارة الوزن لازم تراعي كفاية العناصر الغذائية، والحالة الصحية، والتفضيلات، وإمكانية الاستمرار، واحتياجات كل شخص.","الكيتو ممكن يناسب واحد، ويضر مريض تاني. لازم الخطة تتفصل على حسب الشخص."]
+]},
+{id:"bar",t:"Bariatric Surgery",items:[
+["Bariatric surgery is a group of surgical procedures used to treat severe obesity by reducing stomach capacity, altering digestion, or both.","جراحات السمنة (Bariatric) مجموعة عمليات بتعالج السمنة الشديدة عن طريق تصغير سعة المعدة، أو تغيير الهضم، أو الاتنين.","المعدة بتبقى زي كوباية صغيرة بدل كيس كبير، فبتشبع بسرعة."],
+["It is considered when lifestyle modification and other nonsurgical approaches are insufficient and the patient meets appropriate clinical criteria such as sleeve gastrectomy and gastric bypass surgery.","بنفكر فيها لما تغيير نمط الحياة والطرق غير الجراحية مبتكفيش، والمريض يستوفي المعايير الإكلينيكية المناسبة، زي عملية تكميم المعدة (Sleeve gastrectomy) وعملية تحويل المسار (Gastric bypass).","مريض جرب دايت ورياضة ومنفعش، وحالته تنطبق عليها الشروط، يبقى ممكن يتحول للجراحة."],
+"Benefits",
+["Significant weight loss.","نزول وزن كبير.","ممكن المريض ينزل كتير في فترة معقولة."],
+["Improved blood glucose control.","تحسن في التحكم في سكر الدم.","مريض السكر بيحتاج دوا أقل."],
+["Improvement in hypertension.","تحسن في ضغط الدم العالي.","الضغط بيتظبط أسهل بعد نزول الوزن."],
+["Improvement in obstructive sleep apnea.","تحسن في انقطاع النفس أثناء النوم.","الشخير وتعب الصبح بيقلوا."],
+["Reduced obesity-related health complications.","تقليل المضاعفات الصحية المرتبطة بالسمنة.","احتمال القلب والسكر والمفاصل يقل."],
+["Improved physical functioning and quality of life.","تحسن في القدرة على الحركة وجودة الحياة.","يقدر يمشي ويطلع سلم من غير ما يتعب."],
+"Possible Complications",
+["Bleeding and infection.","نزيف وعدوى.","ممكن مكان العملية ينزف أو يلتهب."],
+["Blood clots.","جلطات دموية.","ممكن جلطة تتكون في الرجل بعد العملية لو المريض مش بيتحرك."],
+["Gastrointestinal leakage or obstruction.","تسريب أو انسداد في الجهاز الهضمي.","وصلة الجراحة تسرب، أو يحصل انسداد في مسار الأكل."],
+["Nutritional deficiencies.","نقص في العناصر الغذائية.","المعدة الصغيرة بتمتص وتاخد أقل، فيقل الحديد والفيتامينات."],
+["Dumping syndrome.","متلازمة الإغراق (Dumping): الأكل بينزل بسرعة من المعدة للأمعاء.","المريض ياكل حلويات فيحس بدوخة وتعرق وإسهال بعدها."],
+["Gallstones.","حصوات المرارة.","نزول الوزن السريع بيزود احتمال تكوين الحصوات."],
+["Dehydration.","جفاف.","المريض ميقدرش يشرب كمية كبيرة مرة واحدة، فبيحصله نقص سوائل."],
+["Weight regain.","رجوع الوزن تاني.","لو رجع لعادات الأكل القديمة، الوزن بيرجع."]
+]},
+{id:"care",t:"Nursing Care",items:[
+"Before surgery:",
+["Assess nutritional and psychological status.","قيّم الحالة الغذائية والنفسية.","تسأل المريض عن أكله ومزاجه وحالته النفسية."],
+["Explain the procedure and expected lifestyle changes.","اشرح العملية والتغييرات المتوقعة في نمط الحياة.","تقوله إن بعد العملية هتاكل كميات صغيرة."],
+["Provide preoperative dietary education.","قدّم تثقيف غذائي قبل العملية.","تعلمه النظام الغذائي اللي يلتزم بيه قبل العملية."],
+["Assess the patient's understanding and readiness.","قيّم فهم المريض واستعداده.","تسأله: فهمت العملية؟ وإنت مستعد؟"],
+"After surgery:",
+["Monitor vital signs and surgical site.","راقب العلامات الحيوية ومكان الجراحة.","اقيس الضغط والنبض والحرارة، وشوف الجرح."],
+["Assess pain, hydration, and intake/output.","قيّم الألم والسوائل والمدخول والمخرج.","سجل الشرب والبول وكمية الألم."],
+["Observe for bleeding, infection, leakage, and thromboembolism.","لاحظ أي نزيف أو عدوى أو تسريب أو جلطات.","ارتفاع حرارة أو ألم جامد في البطن أو تورم في الرجل علامات خطر."],
+["Encourage early mobilization as prescribed.","شجّع على الحركة المبكرة حسب الأمر الطبي.","نقوم المريض يمشي شوية، وده بيقلل الجلطات."],
+["Gradually introduce fluids and foods according to the surgical protocol.","ادخل السوائل والأكل بالتدريج حسب بروتوكول الجراحة.","سوائل الأول، وبعدها أكل مهروس، وبعدها صلب."],
+["Teach appropriate portion sizes and eating behaviors.","علّم المريض الأحجام المناسبة وسلوكيات الأكل.","أكل ببطء وبكميات صغيرة."],
+["Monitor for nutritional deficiencies.","راقب نقص العناصر الغذائية.","تحاليل دورية لمتابعة الفيتامينات والحديد."],
+["Reinforce prescribed vitamin and mineral supplementation.","أكد على الفيتامينات والمعادن المكملة اللي اتكتبت للمريض.","فكّره ياخد الفيتامينات في مواعيدها."],
+["Provide long-term follow-up and health education.","قدّم متابعة طويلة المدى وتثقيف صحي.","متابعة دورية لفترة طويلة بعد العملية."]
+]}
+];
+
+const toc=document.getElementById('toc'), content=document.getElementById('content');
+const esc=s=>s.replace(/&/g,'&amp;').replace(/</g,'&lt;');
+DATA.forEach(sec=>{
+  toc.insertAdjacentHTML('beforeend',`<a class="chip" href="#${sec.id}">${sec.t}</a>`);
+  let h=`<section id="${sec.id}"><h2>${sec.t}</h2>`;
+  sec.items.forEach(it=>{
+    if(typeof it==='string'){h+=`<h3>${esc(it)}</h3>`;return;}
+    h+=`<div class="item"><div class="en">${esc(it[0])}</div><div class="ar">${esc(it[1])}</div><div class="ex"><b>عشان تفهمها :</b> ${esc(it[2])}</div></div>`;
+  });
+  content.insertAdjacentHTML('beforeend',h+'</section>');
+});
+addEventListener('scroll',()=>{
+  const d=document.documentElement;
+  document.getElementById('prog').style.width=(d.scrollTop/(d.scrollHeight-d.clientHeight)*100)+'%';
+},{passive:true});
+const btn=document.getElementById('themeBtn');
+let theme='light';
+try{theme=localStorage.getItem('theme')||'light'}catch(e){}
+function apply(t){theme=t;document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'');btn.textContent=t==='dark'?'☀️':'🌙';try{localStorage.setItem('theme',t)}catch(e){}}
+apply(theme);
+btn.addEventListener('click',()=>apply(theme==='dark'?'light':'dark'));
+</script>
+</body>
+</html>
