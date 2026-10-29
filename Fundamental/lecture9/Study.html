@@ -1,0 +1,528 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM — Drug Administration</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--accent:#be123c;--c2:#1d4ed8;--c3:#d97706;--c4:#0d9488;--grad:linear-gradient(135deg,#9f1239 0%,#be123c 30%,#5b21b6 70%,#1e3a8a 100%);--grad-soft:linear-gradient(135deg,#be123c,#1d4ed8);--bg:#faf6f6;--bg2:#f3eaec;--card:#fff;--text:#2a1519;--text2:#5b4348;--text3:#8a7479;--bc:rgba(80,20,35,.09);--success:#15803d;--r:16px;--tr:all .3s cubic-bezier(.4,.0,.2,1)}
+[data-theme="dark"]{--bg:#130a0d;--bg2:#1c1015;--card:#25161c;--text:#f5e9ec;--text2:#d4bcc2;--text3:#9c8289;--bc:rgba(255,255,255,.09);--accent:#fb7185;--c2:#60a5fa;--c3:#fbbf24;--c4:#2dd4bf;--success:#4ade80}
+html{scroll-behavior:smooth;scroll-padding-top:130px}
+body{font-family:'Outfit','Segoe UI',Tahoma,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;transition:background .4s,color .4s}
+#prog-bar{position:fixed;top:0;left:0;height:3px;z-index:999;width:0;background:linear-gradient(90deg,var(--accent),var(--c3),var(--c4),var(--c2))}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:64px;background:rgba(250,246,246,.93);backdrop-filter:blur(16px);border-bottom:1px solid var(--bc)}
+[data-theme="dark"] nav{background:rgba(19,10,13,.95)}
+.nav-back{display:flex;align-items:center;gap:7px;color:var(--text2);text-decoration:none;font-size:13px;font-weight:700;padding:7px 13px;border-radius:8px;border:1px solid var(--bc);background:var(--card);transition:var(--tr)}
+.nav-back:hover{color:var(--c2);border-color:var(--c2)}
+.nav-brand{display:flex;align-items:center;gap:9px;font-size:15px;font-weight:900}
+.nav-logo-icon{width:34px;height:34px;border-radius:8px;background:var(--grad-soft);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:900}
+.theme-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--bc);background:var(--card);cursor:pointer;font-size:15px;display:flex;align-items:center;justify-content:center;transition:var(--tr)}
+.theme-btn:hover{border-color:var(--c3)}
+.hero-band{margin-top:64px;background:var(--grad);padding:40px 24px 50px;text-align:center;position:relative;overflow:hidden}
+.hero-band::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 380px 180px at 12% 0%,rgba(245,158,11,.28),transparent 70%),radial-gradient(ellipse 600px 200px at 50% 100%,rgba(13,148,136,.25),transparent 70%)}
+.hero-band>*{position:relative}
+.ecg{position:absolute!important;left:0;right:0;bottom:8px;width:100%;height:42px;opacity:.4;pointer-events:none}
+.ecg path{fill:none;stroke:#fff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:1200;stroke-dashoffset:1200;animation:ecg 2.6s ease-out forwards}
+@keyframes ecg{to{stroke-dashoffset:0}}
+@media(prefers-reduced-motion:reduce){.ecg path{animation:none;stroke-dashoffset:0}}
+.hero-band-icon{width:68px;height:68px;border-radius:20px;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:32px;margin:0 auto 14px;border:1.5px solid rgba(255,255,255,.35)}
+.hero-band h1{font-size:clamp(20px,4vw,30px);font-weight:900;color:#fff;margin-bottom:6px}
+.hero-band p{font-size:13px;color:rgba(255,255,255,.9)}
+.hero-band-meta{display:flex;justify-content:center;gap:12px;margin-top:18px;flex-wrap:wrap}
+.meta-pill{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);border-radius:50px;padding:6px 16px;font-size:12px;font-weight:700;color:#fff;display:flex;align-items:center;gap:6px}
+.toc{position:sticky;top:64px;z-index:90;background:var(--bg);border-bottom:1px solid var(--bc);padding:10px 14px;display:flex;gap:8px;overflow-x:auto;white-space:nowrap;scrollbar-width:thin}
+.toc a{flex-shrink:0;text-decoration:none;font-size:12px;font-weight:700;color:var(--text2);background:var(--card);border:1px solid var(--bc);border-radius:50px;padding:6px 13px;transition:var(--tr)}
+.toc a:hover,.toc a.on{color:#fff;background:var(--grad-soft);border-color:transparent}
+.shell{max-width:760px;margin:0 auto;padding:24px 18px 80px}
+.sec{margin-bottom:34px}
+.sec-h{display:flex;align-items:center;gap:10px;background:var(--grad);color:#fff;border-radius:14px;padding:12px 16px;margin-bottom:14px;font-weight:900;font-size:16px;direction:ltr}
+.sec-h .n{background:rgba(255,255,255,.22);border-radius:8px;padding:2px 10px;font-size:12px}
+.sub{margin:18px 4px 10px;font-size:14px;font-weight:900;color:var(--accent);direction:ltr;text-align:left;display:flex;align-items:center;gap:8px}
+.sub::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--c3)}
+.card{background:var(--card);border:1px solid var(--bc);border-radius:var(--r);margin-bottom:12px;overflow:hidden;box-shadow:0 3px 14px rgba(120,20,45,.06)}
+.en{padding:14px 16px;font-size:15px;font-weight:700;line-height:1.7;direction:ltr;text-align:left;border-left:4px solid var(--c2);background:rgba(29,78,216,.05)}
+.ar{padding:12px 16px;font-size:15px;line-height:1.9;direction:rtl;text-align:right;border-top:1px solid var(--bc);border-right:4px solid var(--accent);color:var(--text)}
+.why{padding:11px 16px;font-size:14px;line-height:1.85;direction:rtl;text-align:right;border-top:1px dashed var(--bc);border-right:4px solid var(--c3);background:rgba(217,119,6,.07);color:var(--text2)}
+.why b{color:var(--c3);font-weight:900}
+.en b{color:var(--accent)}
+.en .l{display:block;margin-top:6px;font-weight:600;font-size:14px}
+.pg{font-size:11px;color:var(--text3);font-weight:700;direction:ltr;text-align:left;margin:0 4px 8px}
+footer{background:var(--bg2);border-top:1px solid var(--bc);padding:22px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.footer-brand{font-size:14px;font-weight:700}.footer-brand span{color:var(--accent)}
+.footer-tg{display:flex;align-items:center;gap:5px;text-decoration:none;color:#229ED9;font-size:12px;font-weight:600}
+#top{position:fixed;bottom:18px;left:18px;width:42px;height:42px;border-radius:50%;border:none;background:var(--grad-soft);color:#fff;cursor:pointer;display:none;box-shadow:0 4px 14px rgba(190,18,60,.3)}
+@media(max-width:480px){nav{padding:0 14px}.nav-brand span{display:none}.hero-band{padding:30px 16px 44px}.shell{padding:16px 12px 60px}}
+</style>
+</head>
+<body>
+<div id="prog-bar"></div>
+<nav>
+  <a href="https://gaith-team.github.io/exam/" class="nav-back"><i class="fa-solid fa-arrow-right"></i> رجوع</a>
+  <div class="nav-brand"><div class="nav-logo-icon">GT</div><span>GHAITH TEAM</span></div>
+  <div><button class="theme-btn" id="themeBtn">🌙</button></div>
+</nav>
+<div class="hero-band">
+  <svg class="ecg" viewBox="0 0 600 46" preserveAspectRatio="none" aria-hidden="true"><path d="M0 26 H90 L104 26 L112 8 L124 40 L134 14 L142 26 H250 L264 26 L272 6 L284 42 L294 14 L302 26 H410 L424 26 L432 8 L444 40 L454 14 L462 26 H600"/></svg>
+  <div class="hero-band-icon">💊</div>
+  <h1>Drug Administration</h1>
+  <p>Fundamental of Nursing</p>
+  <div class="hero-band-meta">
+    <div class="meta-pill"><i class="fa-solid fa-file-lines"></i>ببساطة مع غيث</div>
+  </div>
+</div>
+<div class="toc" id="toc"></div>
+<div class="shell" id="app"></div>
+<footer>
+  <div class="footer-brand">GHAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg"><i class="fa-brands fa-telegram"></i> @nursing2bu</a>
+</footer>
+<button id="top" aria-label="top"><i class="fa-solid fa-arrow-up"></i></button>
+<script>
+const S=[];
+S.push({h:"Introduction",i:[
+["The goal of nurses is to alleviate suffering, restore and promote health, and prevent illness.","هدف الممرض إنه يخفف الألم، ويرجّع الصحة ويحافظ عليها، ويمنع المرض.","يعني شغلك مش علاج بس، ده كمان وقاية وتحسين للصحة."],
+["The nurses are advocated for their patients.","الممرض بيدافع عن مريضه ويقف في صفه.","زي ما المحامي بيدافع عن موكّله، الممرض بيدافع عن حقوق المريض."],
+["One of the most fundamental responsibilities is that of medication administration to the patients.","من أهم مسؤولياتك الأساسية إنك تدّي الأدوية للمرضى.","إدّي الدوا هو أكتر حاجة بتتكرر في شغلك، فلازم تبقى فاهمها صح."],
+["This gives medication error a special significance for nurses.","عشان كده غلط الدوا ليه أهمية خاصة عند الممرضين.","أي غلطة في الدوا ممكن تضر المريض مباشرة، فبتتحسب بجدية."],
+["Nurses are at the greatest risk for directly injuring the same patients they aim to heal, and because they are frequently the last involved in the medication administration process, nurses are obvious targets of blame and crimination.","الممرض أكتر واحد معرّض إنه يأذي نفس المريض اللي بيعالجه، ولأنه غالبًا آخر واحد في السلسلة قبل ما الدوا يدخل جسم المريض، بيبقى هو أول واحد اللوم يتوجهله لو حصلت غلطة.","الدوا بيعدّي على الدكتور والصيدلي وبعدين انت. فلو في غلطة، انت آخر حاجة، فالناس بتشوفك انت السبب. عشان كده لازم تتأكد بنفسك."],
+["Medication plays a major part in the treatment of patients and, although prescribed by doctors, it is the responsibility of nurses in hospitals to ensure safe and reliable administration for effective medication therapy for the patients.","الدوا جزء كبير من علاج المرضى، ومع إن الدكتور هو اللي بيكتبه، إلا إن الممرض في المستشفى هو المسؤول إن الدوا يتدّي بطريقة آمنة ومضمونة عشان العلاج ينفع.","الدكتور بيكتب والممرض بينفّذ. وتنفيذك الصح هو اللي بيخلي العلاج يشتغل."],
+["Safety is the main concern underlying medication administration.","السلامة هي الهم الأساسي في إدّي الأدوية.","أول سؤال تسأله لنفسك: هل اللي هعمله ده آمن للمريض؟"],
+["By taking precautions before, during, and after the administration of medications, the potential for making medication errors is reduced.","لما تاخد احتياطاتك قبل وأثناء وبعد إدّي الدوا، احتمال الغلط بيقل.","الأمان مش لحظة واحدة، ده مع الدوا من أول ما تجهّزه لحد ما تتابع المريض بعده."],
+["Administration of medications to patients requires knowledge and a set of skills that is unique to the nurse.","إدّي الأدوية للمرضى محتاج معرفة ومجموعة مهارات مخصوصة للممرض.","مش كفاية تعرف النظري، لازم كمان تبقى شاطر في التنفيذ."]
+]});
+S.push({h:"Fundamentals of Drug Administration",i:[
+"Definition of drug",
+["A drug is any substance that alters physiologic function, with the potential for affecting health.","الـ drug هو أي مادة بتغيّر وظيفة من وظائف الجسم وممكن تأثر على الصحة.","أي حاجة بتغيّر شغل الجسم وتأثر على صحته تتسمى drug."],
+["A medication is a drug administered for its therapeutic effects.","الـ medication هو drug بتديه عشان تأثيره العلاجي.","لما الـ drug يتدّي بغرض العلاج بيبقى medication."],
+["Thus, all medications are drugs, but not all drugs are medications.","يعني كل medication هو drug، لكن مش كل drug هو medication.","زي ما تقول: كل مدرّس إنسان، لكن مش كل إنسان مدرّس. الدوا اللي بتديه للعلاج دخل في الاتنين، لكن مادة بتغيّر وظيفة الجسم من غير علاج تبقى drug بس."],
+"Purposes of drugs administration",
+["1- To diagnose a disease: e.g. barium which is to render a part opaque to X-ray.","1- للتشخيص: زي الباريوم، بيخلي جزء من الجسم معتم في الأشعة.","الباريوم مش بيعالج حاجة، هو بس بيخلي العضو يبان في صورة الأشعة عشان الدكتور يشخّص."],
+["2- To prevent disease: as vaccine, serum are used in preventing the developments of certain diseases. E.g. small pox vaccine.","2- للوقاية من المرض: زي اللقاحات والأمصال بتمنع ظهور أمراض معينة. مثلًا لقاح الجدري.","بتديه وانت سليم عشان المرض ما يحصلش أصلًا."],
+["3- To treat a disease: The physician may elect acute, empiric, supportive, palliative, maintenance, supplemental or replacement therapy depending on the severity, urgency, and prognosis of the patient's condition.","3- لعلاج المرض: الدكتور ممكن يختار نوع علاج من (حاد، تجريبي، داعم، تلطيفي، صيانة، تكميلي أو تعويضي) حسب شدة الحالة ومدى استعجالها وتوقّع مسارها.","النوع اللي الدكتور يختاره بيتوقف على حالة المريض ومدى خطورتها. وهنشرح كل نوع تحت."],
+["Acute therapy is used for critically ill patients such as a trauma patient.","العلاج الحاد (Acute) بيتدّي للمرضى اللي حالتهم حرجة جدًا زي مريض الإصابات الخطيرة.","حالة خطر ومحتاجة تدخل سريع."],
+["Empiric therapy is based on practical experience rather than pure scientific data.","العلاج التجريبي (Empiric) مبني على الخبرة العملية أكتر من البيانات العلمية المؤكدة.","الدكتور بيدّي علاج بناءً على اللي جرّبه واتعلمه من الواقع، مش على دراسة مؤكدة 100%."],
+["Supportive therapy does not treat the cause of the disease but maintains other threatened body systems until the patient's condition resolves.","العلاج الداعم (Supportive) مش بيعالج سبب المرض، لكنه بيحافظ على أجهزة الجسم التانية المهددة لحد ما الحالة تتحسن.","بيشيل الحِمل عن باقي الجسم لحد ما المرض يعدّي، من غير ما يعالج السبب نفسه."],
+["Palliative therapy is used for patients with end- stage or terminal diseases to make them as comfortable as possible.","العلاج التلطيفي (Palliative) بيتدّي لمرضى المراحل الأخيرة أو الأمراض المميتة عشان يبقوا مرتاحين قد الإمكان.","الهدف هنا الراحة مش الشفاء."],
+["Maintenance therapy is used for patients with chronic conditions that do not resolve. It seeks to maintain the patient's level of well- being while preventing further disease progression if possible.","علاج الصيانة (Maintenance) للمرضى اللي عندهم أمراض مزمنة ما بتخلصش. هدفه يحافظ على مستوى راحة المريض ويمنع تطور المرض لو أمكن.","زي صيانة العربية: بتحافظ على المستوى وما بتخليهوش يسوء."],
+["Supplemental or replacement therapy may be short – or long –term. Short as iron- deficiency cases or long- term as insulin injections that substitute for the missing hormone.","العلاج التكميلي أو التعويضي ممكن يبقى قصير أو طويل المدى. القصير زي حالات نقص الحديد، والطويل زي حقن الأنسولين اللي بتعوّض الهرمون الناقص.","الجسم ناقصه حاجة فانت بتعوّضها. لو النقص مؤقت العلاج بيبقى قصير، ولو دايم زي الأنسولين بيبقى طويل."]
+]});
+S.push({h:"Overview of Pharmacology Concepts",i:[
+["Pharmacology is the scientific study of origin, chemistry, effects and use of drugs. The science is made up of five branches:","علم الأدوية (Pharmacology) هو الدراسة العلمية لأصل الأدوية وكيمياءها وتأثيرها واستخدامها. وبيتكوّن من خمسة فروع:","يعني بيجاوب: الدوا جه منين، تركيبه إيه، بيعمل إيه، وبيتستخدم إزاي."],
+["1- Pharmacognosy: refers to the study of natural drug sources, such as plants, animals, and their products.","1- Pharmacognosy: دراسة المصادر الطبيعية للدوا زي النباتات والحيوانات ومنتجاتهم.","اسمها بيدل عليها: دراسة الدوا من مصدره الطبيعي."],
+["Pharmacotherapeutics (clinical pharmacology): are the uses of drugs (clinical indications) in the prevention or treatment of disease.","Pharmacotherapeutics (الدوائيات الإكلينيكية): استخدامات الأدوية (دواعي الاستعمال) في الوقاية من المرض أو علاجه.","يعني الدوا ده بيتدّي في أي حالات."],
+["2- Vegetable or Plant sources: are obtained by drying the roots, bark, and sap. Leaves, flowers and seeds of medical plants e.g., digitalis and morphine.","2- المصادر النباتية: بتتاخد بتجفيف الجذور واللحاء والعُصارة، وأوراق وأزهار وبذور نباتات طبية. زي الديجيتالس والمورفين.","الدوا بيتاخد من أجزاء النبات بعد ما تتجفف."],
+["3- Animals: traditionally, drugs from animal sources include agents such as insulin, pituitary hormones, some vitamins, antibiotics, and biologic agents (e.g., vaccines, immune serums).","3- الحيوانات: الأدوية من مصادر حيوانية زي الأنسولين وهرمونات الغدة النخامية وبعض الفيتامينات والمضادات الحيوية والمواد البيولوجية (زي اللقاحات والأمصال المناعية).","نفس الفكرة بس المصدر هنا حيوان."],
+["4- Pharmacodynamics: Are the study of the biochemical and physical effects of drugs and the mechanisms of drug actions in living organisms.","4- Pharmacodynamics: دراسة التأثيرات الكيميائية والفيزيائية للأدوية وآلية عملها في الكائنات الحية.","ببساطة: الدوا بيعمل إيه في الجسم."],
+["5- Pharmacokinetics: Are referring to the absorption, distribution, metabolism, and excretion of a drug in living organisms.","5- Pharmacokinetics: امتصاص الدوا وتوزيعه وأيضه (تكسيره) وإخراجه في الكائنات الحية.","ببساطة: الجسم بيعمل إيه في الدوا. الاتنين اللي قبل كده عكس بعض: dynamics = الدوا على الجسم، kinetics = الجسم على الدوا."],
+["6- Toxicology: is represents the study of poisons, including the adverse effects of drugs on living organisms.","6- Toxicology: دراسة السموم، وتشمل الآثار الضارة للأدوية على الكائنات الحية.","علم السموم، والأدوية لو ضرّت بتدخل فيه."]
+]});
+S.push({h:"Adverse Drug Reactions (ADRs)",i:[
+["Adverse drug reactions include the following:","التفاعلات الدوائية الضارة بتشمل الأنواع دي:","الحروف A-E كل حرف بيمثل نوع من الأضرار، وهنشرحهم واحد واحد."],
+["Type A: Augmented (side effects and over dosage toxicity).","النوع A: Augmented (آثار جانبية وسُمّية الجرعة الزائدة).","كلمة Augmented يعني مضخّم. يعني تأثير الدوا الطبيعي زاد."],
+["Type B: Bizarre (hypersensitivity, idiosyncrasy, pharmacogenetic disorders).","النوع B: Bizarre (حساسية مفرطة، idiosyncrasy، اضطرابات وراثية دوائية).","Bizarre يعني غريب. رد فعل مش متوقع من الدوا."],
+["Type C: Continuous (reactions due to long-term use).","النوع C: Continuous (تفاعلات بسبب الاستخدام الطويل).","Continuous يعني مستمر. بتحصل لما تفضل تاخد الدوا مدة طويلة."],
+["Type D: Delayed (teratogenesis and carcinogens).","النوع D: Delayed (تشوهات الأجنة والمسرطنات).","Delayed يعني متأخر. الضرر بيظهر بعد وقت."],
+["Type E: Ending of use (adverse effects following drug withdrawal).","النوع E: Ending of use (آثار ضارة بعد إيقاف الدوا).","Ending يعني نهاية. الضرر بيحصل لما توقف الدوا."],
+"Type A \"Augmented\"",
+["1- Side effects: These are the undesirables, but unavoidable part of the pharmacologic actions of drugs when used in therapeutic doses for a specific indication e.g. vomiting with digoxin.","1- الآثار الجانبية: هي الجزء غير المرغوب فيه لكن مش ممكن تتجنبه من تأثير الدوا لما يتدّي بجرعة علاجية لسبب معين. مثلًا القيء مع الديجوكسين.","الجرعة صح والدوا شغال صح، ومع كده بيحصل أثر جانبي مش مطلوب. ده طبيعي في بعض الأدوية."],
+["2- Over dosage toxicity: It occurs at high doses and their incidence increases, as the dose is increased, e.g. liver damage from paracetamol overdose.","2- سُمّية الجرعة الزائدة: بتحصل مع الجرعات العالية، وكل ما الجرعة تزيد بتزيد نسبة حدوثها. زي تلف الكبد من جرعة زائدة من الباراسيتامول.","هنا السبب إنك زوّدت الجرعة. كل ما زوّدت أكتر، الخطر بيزيد."],
+"Type B \"Bizarre\"",
+["1- Allergic reactions: These are adverse reactions that are not dose-related, usually induced by prior contact with the drugs that act as antigens.","1- التفاعلات التحسسية: تفاعلات ضارة مش مرتبطة بحجم الجرعة، وغالبًا بتحصل بسبب تعرّض سابق للدوا اللي بيتصرف كأنه antigen.","الفرق عن النوع A: هنا قليل أو كتير مش مهم، المهم إن جسمه اتعرّف على الدوا قبل كده وبقى بيعتبره عدو."],
+["Mild allergic reaction: Commonly manifested by rash (urticaria), pruritus, or rhinitis can occur within minutes to 2 weeks after drug administration.","تحسس خفيف: بيظهر عادةً كطفح جلدي (urticaria) أو هرش أو التهاب أنف، ممكن يحصل من دقايق لحد أسبوعين بعد إدّي الدوا.","أعراض بسيطة زي حكة وطفح وزكام، وممكن تتأخر لحد أسبوعين."],
+["Skin reaction: Including hives, rashes, and lesions. Usually improve soon after discontinuing the medication, especially with concomitant use of antihistamines.","تفاعل جلدي: زي الشرى والطفح والتقرحات. غالبًا بتتحسن بسرعة بعد وقف الدوا، خصوصًا مع استخدام مضادات الهيستامين.","وقف الدوا بيخلي الجلد يتحسن، ومضاد الهيستامين بيساعد."],
+["Severe allergic reactions: Producing symptoms such as wheezing, dyspnea, angioedema of tongue, oropharynx, or hypotension, and tachycardia occur immediately after the medication is given.","تحسس شديد: أعراضه صفير في الصدر، صعوبة تنفس، تورم اللسان والبلعوم، هبوط ضغط وسرعة نبض. وبتحصل فورًا بعد إدّي الدوا.","الفرق بين الخفيف والشديد: الشديد بيحصل فورًا وبيأثر على التنفس والضغط."],
+["A severe allergic reaction: Is called an anaphylactic reaction and requires immediate medical intervention, because it can be fatal. Treatment includes discontinuing the medication and administering epinephrine, IV fluids, steroids, and antihistamines.","التحسس الشديد اسمه anaphylactic reaction، ومحتاج تدخل طبي فوري لأنه ممكن يموّت. العلاج: وقف الدوا وإدّي إبينفرين وسوائل وريدية وستيرويدات ومضادات هيستامين.","أول خطوة: وقف الدوا. وبعدها العلاج اللي اتذكر. ما تستناش لأن الموضوع خطر."],
+["2- Idiosyncrasy: Abnormal reaction to a drug, which may be due to genetic abnormality, e.g. analgesic- induced asthma syndrome.","2- Idiosyncrasy: رد فعل غير طبيعي للدوا، ممكن يكون بسبب خلل وراثي. زي متلازمة الربو المتسبب عن المسكنات.","رد فعل غريب بسبب تركيب وراثي معين عند الشخص ده."],
+"Type C \"Continuous\"",
+["Occurring on chronic use of drugs, e.g. osteoporosis, diabetes and hypertension with corticosteroids.","بتحصل مع الاستخدام المزمن للأدوية، زي هشاشة العظام والسكر وارتفاع الضغط مع الكورتيكوستيرويد.","الاستعمال الطويل للكورتيزون ممكن يعمل الأمراض دي."],
+"Type D \"Delayed\"",
+["Teratogenicity means induction of fetal abnormalities. It can be caused by some drugs when given early in pregnancy.","Teratogenicity يعني إحداث تشوهات للجنين. ممكن تحصل من بعض الأدوية لو اتاخدت في أول الحمل.","الخطر الأكبر بيبقى في بداية الحمل."],
+"Type E \"Ending of use\"",
+["Adverse effects following withdrawal of some drugs such as: 1- chronic corticosteroid therapy.","آثار ضارة بعد وقف بعض الأدوية، زي: 1- العلاج المزمن بالكورتيكوستيرويد.","لو واحد واخد كورتيزون مدة طويلة ووقفه فجأة، بيحصل له مشاكل. فالوقف كمان له أضرار."],
+"Other adverse effects",
+["1- Drug abuse: It is the use of a drug for non-therapeutic purpose.","1- إساءة استخدام الدوا (Drug abuse): استخدام الدوا لغرض غير علاجي.","استخدامه من غير حاجة طبية."],
+["It is more common with drugs acting on CNS causing drug dependence.","وهي أكتر شيوعًا مع الأدوية اللي بتأثر على الجهاز العصبي المركزي وبتسبب إدمان.","أدوية المخ والأعصاب هي الأكتر اللي الناس بتدمنها."],
+["2- Iatrogenic disease drug- induced disease: A drug prescribed for disease, causes another disease, e.g. drug induced asthma. Peptic ulcers or Parkinsonism.","2- مرض بسبب العلاج (Iatrogenic): دوا اتكتب لمرض فسبّب مرض تاني. زي الربو المتسبب عن دوا، أو قرحة المعدة، أو الباركنسونية.","الدوا اللي كان علاج بقى سبب."],
+["It is essential for the nurse to understand all effects of drugs, so the same drug dose may cause different reactions in different patients.","لازم الممرض يفهم كل تأثيرات الأدوية، لأن نفس الجرعة ممكن تسبب ردود فعل مختلفة من مريض لمريض.","ما تفترضش إن اللي حصل مع مريض هيحصل مع التاني."]
+]});
+S.push({h:"Drug Interaction",i:[
+["Medication interaction occurs when a medication's effects are altered by the concurrent presence of other medications or food.","تفاعل الأدوية بيحصل لما تأثير دوا يتغير بسبب وجود أدوية تانية أو أكل في نفس الوقت.","يعني الدوا ما بيشتغلش لوحده، ممكن أدوية أو أكل تغيّر شغله."],
+["Interaction also can result in antagonism by which drug effects decrease.","التفاعل ممكن كمان يعمل antagonism (تضاد) فيقل تأثير الدوا.","الدوا التاني بيقلل شغل الأول."],
+["Sometimes, foods influence a drug. An example of a food-drug interaction is the deactivation of the antibiotic tetracycline by dairy products.","أحيانًا الأكل بيأثر على الدوا. مثال على تفاعل الأكل مع الدوا: تعطيل المضاد الحيوي تتراسيكلين بالألبان.","التتراسيكلين مع اللبن ومنتجاته ما بيشتغلش."],
+["In some case, a drug will precipitate from solutions if mixed with other medications. This is known as a drug incompatibility.","في بعض الحالات الدوا بيترسّب من المحلول لو اتخلط بأدوية تانية. ودي اسمها drug incompatibility (عدم توافق دوائي).","لو خلطت دوايين في نفس المحلول وبقى فيه رواسب، يبقى مش متوافقين."]
+]});
+S.push({h:"Factors Affecting Drug Action",i:[
+["1- Body weight: Fat individual may require a larger dose than a thin person.","1- وزن الجسم: الشخص البدين ممكن يحتاج جرعة أكبر من النحيف.","الجسم الأكبر محتاج جرعة أكبر عشان الدوا يوصل للتركيز المطلوب."],
+["2- Nutritional factors: The presence of food in the stomach delays the absorption of orally administered drugs.","2- العوامل الغذائية: وجود أكل في المعدة بيأخّر امتصاص الأدوية اللي بتتاخد بالفم.","الأكل بيبطّأ وصول الدوا للدم."],
+["3- Disease: Most drugs are either broken down by the liver or excreted by the kidneys, so disease of these organs with diminished function can lead to accumulation of the drug with a more intense and prolonged action, which can reach dangerous proportions.","3- المرض: أغلب الأدوية بيكسّرها الكبد أو بتخرج عن طريق الكلى، فلو العضوين دول عيانين وشغلهم ضعيف، الدوا بيتراكم وتأثيره بيبقى أقوى وأطول وممكن يوصل لدرجة خطيرة.","الكبد والكلى هما اللي بيشيلوا الدوا من الجسم. لو بيشتغلوا وحش، الدوا بيفضل جوه ويتراكم."],
+["4- Timing of Administration: Some drugs should be given with food to prevent gastric irritation.","4- توقيت الإعطاء: بعض الأدوية لازم تتاخد مع الأكل عشان تمنع تهيج المعدة.","الأكل بيحمي المعدة من الدوا."],
+["5- Environment: the patient who receives pain drug or a sedative in an active, noisy environment may not be able to benefit fully from the drug's effects.","5- البيئة: المريض اللي بياخد مسكن أو مهدئ في مكان نشيط وفيه دوشة ممكن ما يستفيدش بالكامل من تأثير الدوا.","المسكن والمهدئ محتاجين هدوء عشان ينفعوا."],
+["6- Development considerations: older people are more responsive to drugs because their bodies have experienced physiologic changes associated with the aging process, which affect drug pharmacokinetics.","6- اعتبارات العمر: كبار السن أكتر استجابة للأدوية لأن أجسامهم عدّت بتغيّرات فسيولوجية مرتبطة بالشيخوخة بتأثر على حركة الدوا في الجسم.","التقدم في السن بيغيّر طريقة تعامل الجسم مع الدوا."],
+["7- Genetic factors: Enzyme deficiencies or metabolic disturbances can alter the way the body handles a drug or metabolizes a drug.","7- العوامل الوراثية: نقص الإنزيمات أو اضطرابات الأيض ممكن تغيّر طريقة تعامل الجسم مع الدوا أو تكسيره له.","لو إنزيم ناقص، الجسم هيتعامل مع الدوا بشكل مختلف."],
+["8- Culturally: Related health beliefs can also affect compliance and response to a drug regimen. Herbal treatment that are popular in some cultures may interfere with or counteract the action of prescribed drug.","8- العوامل الثقافية: المعتقدات الصحية ممكن تأثر على الالتزام بالعلاج والاستجابة له. والعلاجات العشبية المنتشرة في بعض الثقافات ممكن تتداخل مع الدوا الموصوف أو تضاده.","اللي المريض مؤمن بيه ممكن يخليه ما يلتزمش، والأعشاب ممكن تبوّظ شغل الدوا."],
+["9- Sex: The difference in the distribution of body fat and fluids in men and women is a minor factor affecting the action of some drugs. To date, most on drugs and their actions and effects have been conducted on men. Future clinical drug trials are expected to include more women in order to document the effects of hormonal fluctuations.","9- الجنس: اختلاف توزيع الدهون والسوائل في الرجال والستات عامل بسيط بيأثر على شغل بعض الأدوية. لحد دلوقتي أغلب الدراسات على الأدوية اتعملت على رجال. ومتوقع إن التجارب المستقبلية تضم ستات أكتر عشان توثّق تأثير تقلبات الهرمونات.","الفرق بسيط، لكن الأبحاث القديمة كانت على الرجال بس، وده بيتغير."]
+]});
+S.push({h:"Drug Order",i:[
+["No drug is given to a patient without a prescription of drug order from physician or in some states a nurse practitioner.","مفيش دوا بيتدّي للمريض من غير أمر دوا (prescription) من الدكتور، أو من ممرض ممارس في بعض الولايات.","القاعدة: لا دوا من غير أمر مكتوب."],
+["A prescription is a legal order for preparation and administration of a drug.","الـ prescription هو أمر قانوني بتحضير الدوا وإعطائه.","يعني ورقة لها قيمة قانونية مش مجرد كلام."],
+"Components of drug order",
+["A drug order is incomplete unless it has the following parts:","أمر الدوا ناقص إلا لو فيه الأجزاء دي:","لو أي جزء منها ناقص ما تنفذش الأمر."],
+["Patient's full name: The patient's full name distinguishes the patient from other persons with the same last name.","اسم المريض بالكامل: الاسم الكامل بيفرّق المريض عن غيره ممن لهم نفس اسم العيلة.","عشان ما تدّيش دوا واحد لشخص غلط."],
+["Date: The day, month, year, and time must be included. Designating the time that an order is written helps clarify when certain orders are to stop automatically. If an incident occurs involving a drug error, it is easier to document what happened when this information is available.","التاريخ: لازم يتكتب اليوم والشهر والسنة والوقت. تحديد وقت كتابة الأمر بيوضح إمتى أوامر معينة بتتوقف تلقائيًا. ولو حصلت غلطة دوا، بيسهّل توثيق اللي حصل.","التاريخ والوقت بيحددوا مدة الأمر، وبيفيدوا لو حصل خطأ."],
+["Drug name: The prescriber will order a generic or trade name drug. Correct spelling is essential in preventing confusion with drug with similar spelling.","اسم الدوا: الدكتور بيكتب الاسم العلمي (generic) أو التجاري (trade). والإملاء الصح مهم عشان ما يحصلش لخبطة مع دوا اسمه شبهه.","فيه أدوية أسماؤها قريبة من بعض، والحرف الغلط ممكن يغيّر الدوا."],
+["Dose: The amount or strength of the drug is included.","الجرعة: بتتحدد كمية الدوا أو تركيزه.","كام بالظبط."],
+["Route of administration: The prescriber uses common abbreviations for drug routes. Accuracy is important because some drugs are administered by more than one route.","طريق الإعطاء: الدكتور بيستخدم اختصارات شائعة لطرق الإعطاء. والدقة مهمة لأن بعض الأدوية بتتدّي بأكتر من طريق.","نفس الدوا ممكن يتدّي بالفم أو بالحقن، فلازم تعرف أنهي طريق."],
+["Time and frequency of administration: The nurse needs to know when to initiate drug therapy. Orders for multiple doses establish a routine schedule for drug administration.","وقت وعدد مرات الإعطاء: الممرض محتاج يعرف يبدأ العلاج إمتى. وأوامر الجرعات المتعددة بتحدد جدول ثابت للإعطاء.","يعني تبدأ إمتى وتكرر كل قد إيه."],
+["Signature: Signature of physician, nurse practitioner or physician assistant. Signature makes the order a legal request.","التوقيع: توقيع الدكتور أو الممرض الممارس أو مساعد الطبيب. التوقيع بيخلي الأمر طلب قانوني.","من غير توقيع الأمر ملوش قيمة قانونية."]
+]});
+S.push({h:"General Guidelines for Preparing the Medication",i:[
+"1- There are twelve rights for giving medication that are:",
+["1. Right drug.","1. الدوا الصح.","تتأكد إن ده الدوا المكتوب."],
+["2. Right dose.","2. الجرعة الصح.","الكمية المطلوبة بالظبط."],
+["3. Right patient.","3. المريض الصح.","تتأكد إنه هو المقصود بالدوا."],
+["4. Right preparation.","4. التحضير الصح.","الدوا يتجهّز بالشكل الصحيح."],
+["5. Right route.","5. الطريق الصح.","بالفم ولا حقن ولا غيره، زي ما هو مكتوب."],
+["6. Right time.","6. الوقت الصح.","في ميعاده المحدد."],
+["7. Right education, motivation / approach.","7. التثقيف والتحفيز والأسلوب الصح.","تشرح للمريض وتتعامل معاه بطريقة تخليه يتقبل الدوا."],
+["8. Right of the patient to refuse.","8. حق المريض في الرفض.","المريض له الحق يقول لأ."],
+["9. Right assessment.","9. التقييم الصح.","تقيّم حالته قبل الدوا."],
+["10. Right evaluation.","10. التقييم بعد الدوا (المتابعة) الصح.","تشوف الدوا اشتغل ولا لأ."],
+["11. Right documentation.","11. التوثيق الصح.","تسجّل اللي عملته."],
+["12. Right of the patient to know the reason for the drug.","12. حق المريض إنه يعرف سبب الدوا.","من حقه يعرف الدوا ده ليه."],
+["2- Practice Asepsis: Wash hand before and after preparing the medication to reduce transfer of microorganisms.","2- طبّق التعقيم (Asepsis): اغسل إيديك قبل وبعد تحضير الدوا عشان تقلل نقل الميكروبات.","إيديك ممكن تنقل ميكروبات للدوا أو للمريض."],
+["3. Be knowledgeable about the medication that you administer. A fundamental rule of safe drug administration is: “Never administer an unfamiliar medication”.","3. لازم تكون عارف الدوا اللي بتديه. قاعدة أساسية: \u00abما تديش دوا مش عارفه\u00bb.","لو مش عارف الدوا ده بيعمل إيه، اسأل أو راجع الأول."],
+["4. Keep the Narcotics in locked place.","4. احتفظ بالمخدرات (Narcotics) في مكان مقفول.","عشان ما حدّش ياخدها."],
+["5. Use only medications that are in clearly labeled containers.","5. استخدم بس الأدوية اللي في عبوات مكتوب عليها بوضوح.","من غير لاصق واضح ما تعرفش إيه اللي جوه."],
+["6. Return liquid that is cloudy in color to the pharmacy.","6. رجّع السائل اللي لونه عكر للصيدلية.","العكورة علامة إن فيه حاجة غلط."],
+["7. Before administering medication, identify the client correctly.","7. قبل إدّي الدوا، اتأكد من هوية المريض صح.","نفس فكرة Right patient."],
+["8. Do not leave the medication at the bedside. Stay with the client until he actually takes the medications.","8. ما تسيبش الدوا جنب سرير المريض. افضل معاه لحد ما ياخده فعلًا.","لازم تشوفه بيبلعه بنفسك."],
+["9. \"Don't give medication prepared by someone else\". The nurse who prepares the drug administers it.","9. \u00abما تديش دوا حضّره حد تاني\u00bb. الممرض اللي حضّر الدوا هو اللي بيديه.","مش هتضمن اللي اتحضّر، ولو حصلت غلطة تبقى مسؤوليتك."],
+["10. If the client vomits after taking the medication, report this to the nurse in charge or physician.","10. لو المريض رجّع بعد ما أخد الدوا، بلّغ الممرض المسؤول أو الدكتور.","ما تعيدش الدوا من عندك."],
+["11. Preoperative medications are usually discontinued during the postoperative period unless ordered to be continued.","11. الأدوية اللي قبل العملية بتتوقف عادةً بعد العملية إلا لو اتطلب استمرارها.","الأصل إنها تقف إلا لو الدكتور قال كمّل."],
+["12. When a medication is omitted for any reason, record the fact together with the reason.","12. لو دوا اتسقط لأي سبب، سجّل ده مع السبب.","لازم تكتب إنه ما اتداش وليه."],
+["13. When the medication error is made, report it immediately to the nurse in charge or physician.","13. لما تحصل غلطة دوا، بلّغ فورًا الممرض المسؤول أو الدكتور.","ما تخبّيش الغلطة، التبليغ السريع بيحمي المريض."],
+["14. Check for allergies. The patient's allergies should be written in a large visible letters in the medication record or in the patient's wear arm band indicating their allergies.","14. اتأكد من الحساسية. حساسية المريض لازم تتكتب بحروف كبيرة وواضحة في سجل الأدوية أو في سوار بيتلبس في إيده يوضح حساسيته.","عشان أي حد يشوفها ويتجنب الدوا ده."],
+["15. Don't mix medications with nasogastric tube feeding, as medications may become inactivated by feeding.","15. ما تخلطش الأدوية مع تغذية الأنبوب الأنفي المعدي، لأن الدوا ممكن يتعطل بسبب التغذية.","التغذية ممكن تبوّظ شغل الدوا."],
+["16. Evaluate the effectiveness of the medication, the response of I.V medication is observed within minutes. I.M medication is observed within 15-20 minutes. Oral medication is observed within one hour.","16. قيّم فاعلية الدوا. استجابة الدوا الوريدي بتتلاحظ خلال دقايق، والعضلي خلال 15-20 دقيقة، والفموي خلال ساعة.","الوريد أسرع، وبعده العضل، وبعده الفم."],
+["17. \"Never crush Enteric-Coated or Sustained Release Tablet\" why?","17. \u00abما تفرمش أبدًا الأقراص المغلفة معويًا أو ممتدة المفعول\u00bb ليه؟","الفرم بيبوّظ التصميم بتاعها، والسبب في اللي جاي."],
+["Crushing enteric-coated tablets allows the irritating medication to come in contact with the oral or gastric mucosa, resulting in mucositis or gastric irritation.","فرم الأقراص المغلفة معويًا بيخلي الدوا المهيّج يلمس غشاء الفم أو المعدة، فيحصل التهاب في الغشاء المخاطي أو تهيج للمعدة.","الغلاف كان بيحمي المعدة، ولما تفرمه الحماية تروح."],
+["Crushing sustained-released medication allows all the medication to be absorbed at the same time, resulting in a higher than expected initial level of medication and a shorter than expected duration of action.","فرم الأقراص ممتدة المفعول بيخلي الدوا كله يتمتص مرة واحدة، فتركيز الدوا في الأول يبقى أعلى من المتوقع ومدة تأثيره أقصر من المتوقع.","القرص ده مصمم يطلّع الدوا شوية شوية. لو فرمته هيطلع كله مرة واحدة ويخلص بسرعة."]
+]});
+S.push({h:"Routes for Administrating Drugs",i:[
+"Oral route",
+["Terms used: Oral route — How drug is administered: Having patients swallow drug.","المصطلح: Oral route (الطريق الفموي) — الطريقة: المريض يبلع الدوا.","ببساطة بالبلع."],
+"Enteral route",
+["Enteral route — Administrating drug through an enteral tube.","Enteral route — إعطاء الدوا عن طريق أنبوب معوي.","الدوا بيدخل الجهاز الهضمي من خلال أنبوب."],
+"Sublingual administration",
+["Sublingual administration — Placing drug under tongue.","Sublingual — وضع الدوا تحت اللسان.","تحت = Sub، لسان = lingual."],
+"Buccal administration",
+["Buccal administration — Placing drug between cheek and gum.","Buccal — وضع الدوا بين الخد واللثة.","Buccal من كلمة الخد."],
+"Parenteral route",
+["Parenteral route — Injecting drug into:","الطريق الحقن (Parenteral) — حقن الدوا في:","بيتحدد حسب مكان الحقن، والأنواع اللي جاية."],
+["Subcutaneous injection — Injecting drug into subcutaneous tissue.","حقن تحت الجلد (Subcutaneous) — حقن الدوا في النسيج تحت الجلد.","Sub = تحت، cutaneous = جلد."],
+["Intramuscular injection — Injecting drug into muscle tissue.","حقن عضلي (Intramuscular) — حقن الدوا في نسيج العضلة.","Intra = جوه، muscular = عضلة."],
+["Intradermal injection — Injecting drug into corium (under epidermis).","حقن داخل الجلد (Intradermal) — حقن الدوا في الأدمة (تحت الطبقة السطحية للجلد).","Dermal = الأدمة."],
+["Intravenous injection — Injecting drug into vein.","حقن وريدي (Intravenous) — حقن الدوا في الوريد.","Venous = وريد."],
+["Intraarterial injection — Injecting drug into artery.","حقن شرياني (Intraarterial) — حقن الدوا في الشريان.","Arterial = شريان."],
+["Intracardiac injection — Injecting drug into heart tissue.","حقن داخل القلب (Intracardiac) — حقن الدوا في نسيج القلب.","Cardiac = قلب."],
+["Intraperitoneal injection — Injecting drug into peritoneal cavity.","حقن داخل الصفاق (Intraperitoneal) — حقن الدوا في التجويف البريتوني.","التجويف اللي حوالين أعضاء البطن."],
+["Intraspinal injection — Injecting drug into spinal canal.","حقن داخل العمود الفقري (Intraspinal) — حقن الدوا في القناة الشوكية.","Spinal = العمود الفقري."],
+["Intraosseous injection — Injecting drug into bone.","حقن داخل العظم (Intraosseous) — حقن الدوا في العظم.","Osseous = عظم."],
+"Topical route",
+["Topical route — Inserting drug into:","الطريق الموضعي (Topical) — الدوا بيتحط في:","بيتحط على الجلد أو الأغشية بدل ما يتبلع أو يتحقن، والأنواع اللي جاية."],
+["Vaginal administration — Inserting drug into vagina.","الإعطاء المهبلي (Vaginal) — إدخال الدوا في المهبل.","من اسمه."],
+["Rectal administration — Inserting drug into rectum.","الإعطاء الشرجي (Rectal) — إدخال الدوا في المستقيم.","من اسمه."],
+["Inunction — Rubbing drug into skin.","الدهن (Inunction) — فرك الدوا في الجلد.","تفرك الدوا على الجلد لحد ما يتشرب."],
+["Instillation — Placing drug into direct contact with mucous membrane.","التنقيط (Instillation) — وضع الدوا في تماس مباشر مع الغشاء المخاطي.","زي نقط العين."],
+["Irrigation — Flushing mucous membrane with drug in solution.","الغسيل (Irrigation) — شطف الغشاء المخاطي بدوا مذاب في محلول.","بتغسل بيه مش بتنقّط."],
+["Skin application — Applying transdermal patch.","وضع على الجلد (Skin application) — لصق لزقة عبر الجلد (transdermal patch).","الدوا بيتمتص من الجلد."],
+"Pulmonary route",
+["Pulmonary route — Having patient inhale drug.","الطريق الرئوي (Pulmonary) — المريض يستنشق الدوا.","الدوا بيدخل مع النفس."]
+]});
+S.push({h:"Administering Oral Drug",i:[
+"Advantage of oral route",
+["The oral route is the easiest and the most commonly used.","الطريق الفموي هو الأسهل والأكتر استخدامًا.","الأسهل في التنفيذ والأشهر."],
+["Drugs are given by mouth and swallowed with fluid.","الأدوية بتتاخد بالفم وبتتبلع مع سائل.","يعني بتبلعها بمية أو عصير مثلًا."],
+["Oral drugs have a slower onset of action and more prolonged effect than parenteral drugs.","الأدوية الفموية بتبدأ مفعولها أبطأ وتأثيرها بيستمر أطول من الأدوية الحقن (parenteral).","الحقن أسرع والفم أبطأ، لكن تأثير الفم بيدوم أكتر."],
+["Patients generally prefer oral route.","المرضى بشكل عام بيفضّلوا الطريق الفموي.","مفيش وجع ولا حقن."],
+"Disadvantage of oral route",
+["Oral routes are avoided when patient has alteration in gastrointestinal function (e.g. nausea, or vomiting), reduced motility (after general anesthesia or bowel inflammation, and surgical resection of portion of gastrointestinal tract.","بنتجنب الطريق الفموي لما يكون عند المريض تغيّر في وظيفة الجهاز الهضمي (زي الغثيان أو القيء)، أو حركة الأمعاء قليلة (بعد التخدير العام أو التهاب الأمعاء)، وبعد استئصال جزء من الجهاز الهضمي بالجراحة.","لو الجهاز الهضمي مش شغال كويس، الدوا مش هيتمتص."],
+["Oral administration is contraindicated in patients unable to swallow, e.g., patient with neuromuscular disorders, esophageal strictures, and mouth lesions.","الإعطاء الفموي ممنوع (contraindicated) للمرضى اللي مش قادرين يبلعوا، زي مرضى اضطرابات الأعصاب والعضلات، وتضيق المريء، وتقرحات الفم.","لو مش قادر يبلع، ما ينفعش دوا بالفم."],
+["Oral drug cannot be given when patient has gastric suction and in patient before some tests or surgery.","الدوا الفموي ما ينفعش يتدّي لما يكون المريض موصّل بشفط المعدة، ولا للمريض قبل بعض الفحوصات أو الجراحة.","الشفط هيسحب الدوا، وقبل العمليات عادةً بيبقى صايم."],
+["Oral drug may irritate lining of gastrointestinal tract and discolor teeth or have unpleasant taste.","الدوا الفموي ممكن يهيّج بطانة الجهاز الهضمي، ويغيّر لون الأسنان أو يكون طعمه وحش.","عيوب الفم: تهيج، وتلوين أسنان، وطعم."],
+"Guidelines for administer oral route",
+["The administration of oral drug may be carried by one or two registered nurses.","إعطاء الدوا الفموي ممكن يتم بواسطة ممرض أو ممرضين مسجّلين.","مش لازم اتنين، ممكن واحد."],
+["The nurse should prepare the dose as prescribed.","الممرض لازم يجهّز الجرعة زي ما هي موصوفة.","من غير ما يغيّر حاجة."],
+["Don't crush sustained or release, enteric coated drugs.","ما تفرمش الأدوية ممتدة المفعول أو المغلفة معويًا.","اتشرحت فوق."],
+["On dispensing liquid drugs, the bottle should be held with the label toward the palm of the hand to prevent spillage, which obscures the name of the drug.","وانت بتصب الأدوية السائلة، امسك الزجاجة واللاصق ناحية كف إيدك عشان لو سال حاجة ما يغطيش على اسم الدوا.","اللاصق ناحية الكف عشان يتحمي من السايل."],
+["Hold drug cup at eye level and fill to desired level scale. Scale should be with fluid level at surface not edge.","امسك كوب الدوا على مستوى عينك واملاه للتدريج المطلوب. التدريج يكون عند سطح السائل مش عند الحافة.","عشان تقيس الكمية بدقة."],
+["Patients who find difficulty to take liquids from a cup; the drug can be placed in the mouth directly using a plastic syringe without a needle. The syringe should be placed between the gum and cheek and the liquid given to the patient slowly, in order to prevent patient aspiration of the drug.","المرضى اللي بيلاقوا صعوبة في شرب السوائل من الكوب، الدوا ممكن يتحط في الفم مباشرة بسرنجة بلاستيك من غير إبرة. تتحط السرنجة بين اللثة والخد ويتدّي السائل للمريض ببطء، عشان المريض ما يستنشقش الدوا (aspiration).","البطء مهم عشان الدوا ما ينزلش في القصبة الهوائية."],
+["Sublingual drug placed under patient tongue, so should not be swallowed, or the desired effect will not be achieved. Also the patient should not drink until the drug is completely dissolved.","الدوا تحت اللسان بيتحط تحت لسان المريض، فلازم ما يتبلعش وإلا التأثير المطلوب مش هيتحقق. وكمان المريض ما يشربش لحد ما الدوا يدوب بالكامل.","لو بلعته أو شربت، مفعوله هيضيع."],
+"Some patients object oral drug due to the taste of certain drugs. The following techniques help disguise or mask the objectionable taste:",
+["Crush a drug or add it to food.","افرم الدوا أو ضيفه للأكل.","لكن بشرط إنه مش من الأنواع الممنوع فرمها."],
+["Allow patient to suck on a small piece of ice for a few minutes before taking the drug. The ice numbs the taste buds, and the objectionable taste is less discernible.","خلّي المريض يمص حتة تلج صغيرة كام دقيقة قبل الدوا. التلج بيخدّر حليمات التذوق، فالطعم الوحش بيبان أقل.","التلج بيبلّد اللسان."],
+["Store oily drugs in the refrigerator. Cold oil is less aromatic than oil at room temperature.","احفظ الأدوية الزيتية في التلاجة. الزيت البارد ريحته أقل من الزيت في درجة حرارة الغرفة.","البرد بيقلل الرائحة."],
+["Place a drug in a syringe, and place the syringe well back on the tongue, being careful not to trigger the patient gag reflex. This place contains few taste buds.","حط الدوا في سرنجة وحط السرنجة في آخر اللسان، مع الحذر ما تفعّلش منعكس التقيؤ (gag reflex). المكان ده فيه حليمات تذوق قليلة.","آخر اللسان حساسيته للطعم قليلة."],
+["Offer oral hygiene immediately after giving a drug.","قدّم العناية بالفم فور إعطاء الدوا.","تنضيف الفم بيشيل الطعم."],
+["Drug with generous amount of water or other liquid, permitted to dilute the taste.","اديه الدوا مع كمية كبيرة من الماء أو سائل تاني (لو مسموح) عشان يخفف الطعم.","السائل بيخفف الطعم."],
+["Oral drugs can be instilled by enteral tube when they cannot be swallowed orally.","الأدوية الفموية ممكن تتنقّط (تتدّي) من خلال أنبوب معوي لما ما تتبلعش بالفم.","لو المريض ما يقدرش يبلع، الأنبوب بديل."],
+["Drug given while a patient receiving tube feeding should be instilled separately for two reasons: First, some drugs physically interact with component in the formula, causes it to curdle. Also; a slow infusion may alter drug dose and rate of absorption.","الدوا اللي بيتدّي والمريض ماخد تغذية بالأنبوب لازم يتدّي منفصل لسببين: الأول إن بعض الأدوية بتتفاعل فيزيائيًا مع مكونات الغذاء وبتخليه يتجبّن. وكمان التسريب البطيء ممكن يغيّر جرعة الدوا ومعدل امتصاصه.","اديه لوحده وماتخلطوش بالتغذية."],
+["While drug given with gastric tube used for decompression, the tube should be clamped for at least half hour.","لما الدوا يتدّي بأنبوب معدة مستخدم للتفريغ (decompression)، لازم الأنبوب يتقفل (clamp) نص ساعة على الأقل.","عشان الدوا ياخد وقت يتمتص قبل ما يتسحب."]
+]});
+S.push({h:"Sublingual and Buccal Routes",i:[
+["These are indicated for medications with high first-pass metabolism that need to avoid clearance by the liver.","دول مناسبين للأدوية اللي عندها first-pass metabolism عالي وعاوزة تتجنب إن الكبد يكسّرها.","الدوا اللي بيتبلع بيعدّي على الكبد الأول فيتكسر. تحت اللسان بيعدّي الكبد."],
+"Advantages",
+["Rapid absorption is due to the abundant mucosal network of systemic veins and lymphatics, thereby leading to a rapid onset of action.","الامتصاص سريع بسبب كتر شبكة الأوردة والأوعية الليمفاوية في الغشاء المخاطي، فبيبدأ المفعول بسرعة.","الغشاء فيه أوعية كتير فالدوا بيدخل الدم بسرعة."],
+["If there is any untoward event, the tablet can be removed.","لو حصل أي حدث غير مرغوب، القرص ممكن يتشال.","لو حصل مشكلة تشيله."],
+["A tablet can be kept for a long time in the buccal cavity, which helps develop formulations with a sustained-release effect.","القرص ممكن يفضل مدة طويلة في تجويف الخد، وده بيساعد في تطوير تركيبات ممتدة المفعول.","بيقعد كتير فيطلّع الدوا ببطء."],
+["This route is useful in patients having swallowing difficulties.","الطريق ده مفيد للمرضى اللي عندهم صعوبة في البلع.","مش محتاج بلع."],
+["Low risk of infection.","خطر العدوى قليل.","مفيش جلد بيتخرم."],
+["Convenience.","سهل ومريح.","بسيط في الاستخدام."],
+"Disadvantages",
+["The tablet must be kept in the buccal cavity and neither chewed nor swallowed.","القرص لازم يفضل في تجويف الفم وما يتمضغش ولا يتبلع.","لو مضغته أو بلعته، يبوظ الغرض."],
+["Excessive salivation may cause quick dissolution and absorption of the tablet.","زيادة اللعاب ممكن تخلي القرص يدوب ويتمتص بسرعة.","اللعاب الكتير بيذوّبه أسرع من المطلوب."],
+["Patients may find it difficult to accept an unpalatable tablet. Hence some drugs are applied as a patch or a spray.","المرضى ممكن يلاقوا صعوبة في تقبّل قرص طعمه مش مستساغ. عشان كده بعض الأدوية بتتحط كلزقة أو بخاخ.","اللزقة والبخاخ حل لمشكلة الطعم."]
+]});
+S.push({h:"Rectal Route",i:[
+["This route is useful for patients with gastrointestinal motility problems such as dysphagia or ileus that can interfere with delivering the drug to the intestinal tract. The rectal route is also often utilized in patients near the end of life undergoing hospice care.","الطريق ده مفيد للمرضى اللي عندهم مشاكل في حركة الجهاز الهضمي زي صعوبة البلع (dysphagia) أو شلل الأمعاء (ileus) اللي بتعطل وصول الدوا للأمعاء. وكمان بيستخدم كتير مع المرضى في نهاية الحياة في رعاية التلطيف (hospice).","لو الأمعاء مش بتتحرك أو المريض مش بيبلع، الشرج بيبقى بديل."],
+"Advantages",
+["A relatively large amount of the drug can be administered.","ممكن يتدّي كمية كبيرة نسبيًا من الدوا.","المساحة بتسمح بكمية أكبر."],
+["Those drugs destroyed by the acidic medium in the stomach and those metabolized by pancreatic enzymes can be administered effectively.","الأدوية اللي بتتدمّر بحموضة المعدة واللي بيكسّرها إنزيمات البنكرياس ممكن تتدّي بفاعلية.","الشرج بيتجاوز المعدة والبنكرياس."],
+["Safe and convenient for infants and the elderly.","آمن ومريح للرضّع وكبار السن.","من غير بلع ولا حقن."],
+["It can be used in emergency situations, such as in infants having seizures when the intravenous route is unavailable.","ممكن يتستخدم في الطوارئ، زي الرضّع اللي عندهم تشنجات لما الطريق الوريدي مش متاح.","لو مفيش وريد، الشرج حل سريع."],
+["The rate of absorption is uninfluenced by the ingestion of food or the rate of gastric emptying.","معدل الامتصاص ما بيتأثرش بتناول الأكل ولا بسرعة تفريغ المعدة.","الأكل ما يهمش هنا."],
+["Bypasses hepatic metabolism.","بيتجاوز أيض الكبد.","ما بيعدّيش على الكبد الأول."],
+["Less degradation of drugs compared to that in the upper gastrointestinal tract.","تحلل الدوا أقل مقارنة بالجهاز الهضمي العلوي.","الدوا بيفضل سليم أكتر."],
+"Disadvantages",
+["Some drugs can cause rectal irritation and proctitis, leading to ulceration and bleeding.","بعض الأدوية ممكن تسبب تهيج في المستقيم والتهاب فيه (proctitis)، وده بيؤدي لتقرحات ونزيف.","العيب الأساسي هو تهيج الشرج."]
+]});
+S.push({h:"Administering Parenteral Drug",i:[
+["The term parenteral refers to any route other than gastrointestinal (enteral), but is commonly used to indicate subcutaneous (SC), intramuscular and intravenous (IV) injections.","مصطلح parenteral بيعني أي طريق غير الجهاز الهضمي (enteral)، لكن بيتستخدم غالبًا للدلالة على الحقن تحت الجلد (SC) والعضلي والوريدي (IV).","يعني parenteral = مش من خلال الجهاز الهضمي."],
+["Injections require special drug preparations, equipment, and techniques.","الحقن محتاج تحضيرات وأدوات وتقنيات خاصة.","مش زي الحبوب، لازم تتدرّب."],
+["The effects of parenterally administered drug can develop rapidly depending on the rate of absorption.","تأثير الأدوية اللي بتتدّي بالحقن ممكن يظهر بسرعة حسب معدل الامتصاص.","كل ما الامتصاص أسرع، التأثير أسرع."],
+["Parenteral drugs must be prepared, packaged, and administered in ways to maintain sterility.","الأدوية الحقن لازم تتحضّر وتتعبّأ وتتدّي بطرق بتحافظ على التعقيم.","الحقن بيكسر حاجز الجلد فلازم يكون معقم."],
+"Injection Equipment",
+["Syringes: Syringes are made of plastic or glass, the plastic are disposable, whereas glass can be re-sterilized and reused.","السرنجات (Syringes): بتتعمل من البلاستيك أو الزجاج، البلاستيك بيترمي بعد الاستعمال، والزجاج ممكن يتعقم تاني ويتستخدم.","بلاستيك = مرة واحدة، زجاج = يتعقم ويتعاد."],
+["Needles are available in standard size measured in gauges from 14 to 26. The larger the number of the gauge the smaller the needle.","الإبر موجودة بمقاسات قياسية بتتقاس بالـ gauge من 14 لـ 26. كل ما رقم الـ gauge أكبر، الإبرة أصغر.","عكس المنطق: gauge 26 أرفع من gauge 14."],
+["The selection of gauges depends on medication viscosity.","اختيار الـ gauge بيعتمد على لزوجة الدوا.","الدوا التقيل محتاج إبرة أوسع."],
+["The length of the needle is measured from its beveled tip to the junction of the shaft and the hub: needles vary in length from 1/4 to 3 inches.","طول الإبرة بيتقاس من طرفها المائل (beveled tip) لحد مكان التقاء الساق (shaft) بالقاعدة (hub): والإبر بتتفاوت في الطول من 1/4 لـ 3 بوصة.","بتقيس من الطرف للمكان اللي الإبرة بتبدأ منه."],
+["The nurses choose the needle length according to the patient size and weight and tissue into which medication can use.","الممرضين بيختاروا طول الإبرة حسب حجم ووزن المريض والنسيج اللي هيتحقن فيه الدوا.","المريض الكبير والعضل محتاجين إبرة أطول."],
+["Vials are closed glass or plastic containers with rubber stoppers through which a sterile needle can be inserted for withdrawing drug.","الـ Vials عبوات زجاج أو بلاستيك مقفولة بسدادات مطاط، بتدخل منها إبرة معقمة لسحب الدوا.","السدادة المطاط بتتخرم بالإبرة."],
+["Ampoules are sealed glass containers, the tops of which must be broken off to allow insertion of a needle and withdrawal of the drug.","الـ Ampoules عبوات زجاج مقفولة، لازم يتكسر رأسها عشان تدخل الإبرة وتسحب الدوا.","الأمبولة لازم تتكسر."],
+["When vials or ampoules contain a powder form of the drug, a sterile solution of water or 0.9% sodium chloride must be added and the drug dissolved before withdrawal.","لما الـ vials أو الأمبولات تحتوي دوا على شكل بودرة، لازم يتضاف ماء معقم أو محلول كلوريد صوديوم 0.9% ويدوب الدوا قبل السحب.","البودرة لازم تدوّبها الأول."],
+["Use a filter needle to withdraw the drug from an ampoule because broken glass may need to be removed from the drug solution.","استخدم إبرة فلتر (filter needle) لسحب الدوا من الأمبولة لأن ممكن يكون في زجاج مكسور محتاج يتشال من محلول الدوا.","الفلتر بيمسك الزجاج المكسور."]
+]});
+S.push({h:"Intradermal Injection",i:[
+["Injections are given into the dermis.","الحقن بيتدّي داخل الأدمة (dermis).","طبقة الجلد تحت السطحية."],
+["The two common reasons for giving intradermal injections are testing for sensitivity to allergens and immunization. In the former situation there is a risk of a reaction, so adrenaline should be readily available.","السببين الشائعين للحقن داخل الجلد هما اختبار الحساسية للمسببات التحسسية، والتطعيم. في الحالة الأولى فيه خطر حصول رد فعل، عشان كده الأدرينالين لازم يكون جاهز.","اختبار الحساسية ممكن يعمل تحسس، فجهّز الأدرينالين."],
+["The usual site of injection is lightly pigmented area of the forearm where the reaction can be easily observed, also can inject into upper arm, or across the scapula.","مكان الحقن المعتاد هو منطقة فاتحة اللون من الساعد عشان الرد يتلاحظ بسهولة، وممكن كمان في أعلى الذراع أو على عظمة اللوح (scapula).","الجلد الفاتح بيوضّح التفاعل."],
+["A very small amount of fluid (0.1 ml or less) is given using a 1 ml syringe; this is introduced just between the dermis and epidermis of the skin at an angle of 10-15°, which will raise a small weal (bleb).","كمية صغيرة جدًا من السائل (0.1 مل أو أقل) بتتدّي بسرنجة 1 مل؛ بتتدخل بين الأدمة والبشرة بزاوية 10-15 درجة، وده بيعمل انتفاخ صغير (weal / bleb).","الزاوية قليلة جدًا والكمية صغيرة، والانتفاخ علامة إنك عملتها صح."],
+["The area should not be massaged after removing the needle.","المنطقة ما تتدلكش بعد سحب الإبرة.","التدليك هيبوّظ النتيجة."]
+]});
+S.push({h:"The Subcutaneous Injection (SC)",i:[
+["The SC route involves the injection of drugs under the skin (below dermis) at an angle 45° or 90° depending on needle length and size of patient. Obese person will require a longer needle than thin.","الطريق تحت الجلد (SC) بيحقن الدوا تحت الجلد (تحت الأدمة) بزاوية 45 أو 90 درجة حسب طول الإبرة وحجم المريض. الشخص البدين محتاج إبرة أطول من النحيف.","كل ما كان فيه دهون أكتر، محتاج إبرة أطول."],
+["This route is used for a small volume (approximately 1 ml or less, 0.5 ml) of drug. Absorption is slower and drug action is usually longer with SC injections than with IV or IM injections.","الطريق ده بيستخدم لحجم صغير من الدوا (حوالي 1 مل أو أقل، 0.5 مل). الامتصاص أبطأ ومفعول الدوا غالبًا أطول مع SC مقارنة بالوريدي أو العضلي.","SC بطيء لكن طويل المفعول."],
+["The SC route is commonly used for only a few drugs (e.g. insulin, heparin).","طريق SC بيتستخدم عادةً لعدد قليل من الأدوية (زي الأنسولين والهيبارين).","احفظ المثالين دول."],
+["Many drugs cannot be given SC because they are irritating to tissues and may cause tissue necrosis and abscess formation.","كتير من الأدوية ما ينفعش تتدّي SC لأنها بتهيّج الأنسجة وممكن تسبب موت نسيجي (necrosis) وتكوّن خراج.","الأدوية المهيجة بتضر النسيج تحت الجلد."],
+["Common sites for SC injections are the outer posterior aspect of upper arms, abdomen from below the costal margin to the iliac crests, and the upper ventral or dorsal gluteus areas, and anterior aspect of the thighs. The injection site chosen should be free of skin lesion, bony prominence, and large underlying nerve or muscle.","أماكن حقن SC الشائعة: الجزء الخارجي الخلفي من أعلى الذراع، والبطن من تحت الحافة الضلعية لحد عظمتي الحوض (iliac crests)، ومنطقتي الألوية العليا (الأمامية أو الخلفية)، والجزء الأمامي من الفخذ. ومكان الحقن لازم يكون خالي من آفات الجلد وبروزات العظم وأعصاب أو عضلات كبيرة تحته.","اختار مكان فيه نسيج دهني تحت الجلد وسليم."],
+["SC injections may also be contraindicated in patients with impaired normal SC tissue, such as areas lying underneath burns, birthmarks, inflamed tissue, or scars, because of unpredictable medication absorption. Also absorption may be slow or incomplete if SC medication is administered to a client with generalized edema or severe peripheral vascular disease and cardiogenic shock.","حقن SC ممكن كمان يكون ممنوع لمرضى النسيج تحت الجلد عندهم تالف، زي المناطق تحت الحروق والوحمات والنسيج الملتهب أو الندبات، لأن امتصاص الدوا بيبقى غير متوقع. كمان الامتصاص ممكن يبقى بطيء أو ناقص لو الدوا SC اتدّى لمريض عنده وذمة معممة أو مرض أوعية طرفية شديد وصدمة قلبية.","النسيج لو مش سليم، الامتصاص مش مضمون."]
+]});
+S.push({h:"The Subcutaneous Tissue — Special Consideration SC",i:[
+["Systematically rotate injection sites to prevent lipodystrophy and variable insulin absorption.","بدّل أماكن الحقن بشكل منظّم عشان تمنع اضطراب الدهون تحت الجلد (lipodystrophy) واختلاف امتصاص الأنسولين.","لو حقنت في نفس المكان كل مرة، النسيج بيتغيّر والامتصاص يتلخبط."],
+"For heparin injection",
+["Abdomen the most common site to reduce hematoma but avoid area 1 to 2 in on either side of umbilical.","البطن هي أكتر مكان بيستخدم لتقليل الورم الدموي (hematoma)، لكن تتجنب منطقة 1 لـ 2 بوصة على جانبي السرة.","ما تحقنش قريب من السرة."],
+["Roll or gently bunch the tissue between thumb and forefinger to ensure heparin is administered SC.","لف أو اجمع النسيج برفق بين الإبهام والسبابة للتأكد إن الهيبارين بيتدّي تحت الجلد.","تمسك طيّة من الجلد عشان تضمن إنك في الدهن."],
+["Because heparin is an anticoagulant, don't aspirate for blood return or massage site.","لأن الهيبارين مضاد تجلط، ما تسحبش للتأكد من رجوع دم وما تدلكش المكان.","السحب والتدليك ممكن يعملوا نزيف أو ورم دموي."],
+["After injection slowly and gently withdraw needle to prevent leakage into SC.","بعد الحقن اسحب الإبرة ببطء وبرفق عشان تمنع تسرّب الدوا في النسيج تحت الجلد.","السحب السريع بيخلي الدوا يتسرب."]
+]});
+S.push({h:"Intramuscular Injection (IM)",i:[
+["The IM route involves the injection because muscle tissue has a greater blood supply.","الطريق العضلي (IM) بيعتمد على الحقن في العضل لأن النسيج العضلي عنده إمداد دموي أكبر.","الدم الكتير بيخلي الامتصاص أسرع."],
+["I.M. injections are recommended for patients who are uncooperative or can't take medication orally and for drugs that are altered by digestive juices. Because muscle tissue has few sensory nerves, I.M. injections allow less painful administration of irritating drugs.","حقن IM مناسب للمرضى غير المتعاونين أو اللي ما يقدروش ياخدوا الدوا بالفم، وللأدوية اللي بتتغيّر بعصارات الهضم. ولأن العضل فيه أعصاب حسية قليلة، فالـ IM بيسمح بإعطاء الأدوية المهيجة بألم أقل.","العضل أقل حساسية فالدوا المهيّج مش بيوجع كتير."],
+["Oral or I.V. routes are preferred for administration of drugs that are poorly absorbed by muscle tissue, such as phenytoin, digoxin, chlordiazepoxide, and diazepam.","الطرق الفموية أو الوريدية بتفضّل لإعطاء الأدوية اللي العضل بيمتصها ضعيف، زي الفينيتوين والديجوكسين والكلورديازيبوكسيد والديازيبام.","دي أدوية ما بتتمتصش كويس في العضل."],
+"Sites of IM injection",
+["Commonly used sites are the deltoid, dorsogluteal, ventrogluteal, and vastus lateralis.","الأماكن الشائعة هي: الدالية (deltoid)، والألوية الخلفية (dorsogluteal)، والألوية البطنية (ventrogluteal)، والفخذية الوحشية (vastus lateralis).","أربع أماكن."],
+["The site for an I.M. injection must be chosen carefully, taking into account the patient's general physical status and the purpose of the injection.","مكان حقن IM لازم يتختار بعناية، مع مراعاة الحالة الجسدية العامة للمريض والغرض من الحقن.","مفيش مكان واحد مناسب للكل."],
+["The site must also be inspected for its suitability: shouldn't be administered at inflamed, edematous, or irritated sites or at sites that contain moles, birthmarks, scar tissue, or other lesions.","المكان لازم يتفحص كمان عشان تتأكد إنه مناسب: ما يتحقنش في أماكن ملتهبة أو متورمة أو مهيجة أو فيها شامات أو وحمات أو نسيج ندبي أو آفات تانية.","اختار جلد سليم."],
+["I.M. injection may also be contraindicated in patients with impaired coagulation mechanisms, occlusive peripheral vascular disease, edema, and shock, after thrombolytic therapy, and during an acute myocardial infarction because these conditions impair peripheral absorption.","حقن IM ممكن كمان يكون ممنوع للمرضى اللي عندهم خلل في آليات التجلط، أو انسداد في الأوعية الطرفية، أو وذمة أو صدمة، وبعد العلاج المذيب للجلطات، وأثناء احتشاء عضلة القلب الحاد، لأن الحالات دي بتضعف الامتصاص الطرفي.","في الحالات دي الدم مش بيوصل كويس للعضل أو فيه خطر نزيف."]
+]});
+S.push({h:"Z-Track Injection",i:[
+["The z-track method of I.M. injection prevents leakage, or tracking, into the subcutaneous tissue.","طريقة Z-track لحقن IM بتمنع التسرب أو الرجوع (tracking) للنسيج تحت الجلد.","الاسم من مسار الدوا اللي بيشبه حرف Z."],
+["It's typically used to administer drugs that irritate and discolor subcutaneous tissue, primarily iron preparation such as iron dextran.","بتستخدم عادةً لإعطاء الأدوية اللي بتهيّج وتلوّن النسيج تحت الجلد، وأهمها مستحضرات الحديد زي iron dextran.","الحديد بيلوّن الجلد ويهيّجه."],
+["It may also be used in elderly patients who have decreased muscle mass; lateral displacement of the skin during the injection helps to seal the drug in the muscle.","وممكن تستخدم كمان مع المرضى كبار السن اللي كتلتهم العضلية قليلة؛ إزاحة الجلد جانبيًا أثناء الحقن بتساعد على حبس الدوا جوه العضل.","شد الجلد على جنب بيقفل الطريق بعد الحقن."],
+["This procedure requires careful attention to technique because leakage into subcutaneous tissue can cause patient discomfort and may permanently stain some tissues.","الإجراء ده محتاج انتباه شديد للتقنية لأن التسرب للنسيج تحت الجلد ممكن يسبب إزعاج للمريض وممكن يلوّن بعض الأنسجة بشكل دائم.","الغلط هنا ممكن يسيب تلوين مش بيروح."]
+]});
+S.push({h:"IM Injection Medication Record Sheet",i:[
+["Patient's Name: ……  Phone Number: ……  Doctor: ……  Name of Medicine: ……","اسم المريض، رقم التليفون، الدكتور، اسم الدوا.","دي بيانات ورقة تسجيل حقن IM."],
+["Sites: H = Hip, B = Buttocks, T = Thigh, A = Arm.","الأماكن: H = الورك، B = الأرداف، T = الفخذ، A = الذراع.","رموز تكتب بيها مكان الحقن."],
+["Date — Dose — Site — Comments","التاريخ — الجرعة — المكان — ملاحظات.","أعمدة الجدول اللي بتسجّل فيها كل مرة."]
+]});
+S.push({h:"Complications Associated with IM Medication Administration",i:[
+["<b>Complication:</b> Pain with injection (client reports discomfort).<span class='l'><b>Causes:</b> Muscle tensing during injection; medication irritating to IM; inadvertent tracking of medication or alcohol through SC tissue.</span><span class='l'><b>Nursing management:</b> Encourage client to relax muscles during injection and point toes inward. Use z-track technique when administering medications that are irritating to SC tissues. Change needle after drawing up medication.</span>","<b>المضاعفة:</b> ألم مع الحقن (المريض بيشتكي من الوجع).<br><b>الأسباب:</b> شد العضل أثناء الحقن، الدوا مهيّج للعضل، أو تسرّب الدوا أو الكحول في النسيج تحت الجلد.<br><b>التعامل التمريضي:</b> شجّع المريض يرخّي عضلاته أثناء الحقن ويوجّه صوابعه لجوه. استخدم تقنية z-track مع الأدوية المهيجة للنسيج تحت الجلد. غيّر الإبرة بعد سحب الدوا.","العضل المشدود يوجع أكتر، والدوا المهيج لو وصل لتحت الجلد بيوجع. والحلول بتعالج كل سبب."],
+["<b>Complication:</b> Damage to SC or IM tissue including sterile abscesses (collection of undissolved medication), SC tissue discoloration, hematomas, and muscle contractions (tissue nodules or induration), bruising, brown discoloration, or pain in IM injection site; muscle contracture in infants characterized by difficulty crawling (4 weeks to 1 year) after receiving IM injection.<span class='l'><b>Causes:</b> Multiple injections given into same area; injection given into abnormal tissue; injection of drug that is not water soluble; IM administration of heparin; IM route used for client with a low platelet count; SC deposition of iron supplements (e.g., interferon).</span><span class='l'><b>Nursing management:</b> Use an air lock when giving irritating medications. Let alcohol skin dry before giving injection. Give an injection at least 1 inch away from recently administered injections or from scars. Rotate injection sites (give injections at least 1 inch away from recent injection). Record sites used for all injections. Decrease risk of knee contractures for infants with passive range-of-motion exercises, warm soaks and massage to the thighs. Give iron supplements (e.g., interferon) using the Z-track technique.</span>","<b>المضاعفة:</b> تلف في النسيج تحت الجلد أو العضلي، يشمل خراجات معقمة (تجمّع دوا ما دابش)، تغيّر لون النسيج تحت الجلد، أورام دموية، وتقلصات عضلية (عُقد أو تصلّب)، كدمات، لون بني، أو ألم في مكان الحقن العضلي؛ وتقلص عضلي عند الرضّع بيظهر في صعوبة الزحف (من 4 أسابيع لسنة) بعد حقن IM.<br><b>الأسباب:</b> حقن كتير في نفس المنطقة، حقن في نسيج غير طبيعي، حقن دوا مش بيدوب في الماء، إعطاء الهيبارين عضلي، استخدام IM لمريض صفائحه الدموية قليلة، ترسّب مكملات الحديد (زي interferon) تحت الجلد.<br><b>التعامل التمريضي:</b> استخدم air lock مع الأدوية المهيجة. سيب الكحول على الجلد يجف قبل الحقن. احقن على بعد بوصة على الأقل من حقن قريب أو ندبات. بدّل أماكن الحقن (بوصة على الأقل عن الحقنة الأخيرة). سجّل الأماكن المستخدمة في كل الحقن. قلّل خطر تقلص الركبة عند الرضّع بتمارين حركة سلبية وكمادات دافية ومساج للفخذين. اديه مكملات الحديد (زي interferon) بتقنية Z-track.","كل سبب له علاج: لو كتّرت في نفس المكان بدّل المكان، ولو الدوا مهيج استخدم air lock وZ-track، ولو الكحول ما نشفش سيبه يجف."],
+["<b>Complication:</b> Nerve injury (shooting pain down limb, temporary or permanent paralysis).<span class='l'><b>Causes:</b> Nerve struck during injection; medication injected close nerve.</span><span class='l'><b>Nursing management:</b> As soon as possible, change from IM route to another route. Be sure that medication is recommended for IM administration. Avoid use of deltoid site and dorsogluteal muscle whenever possible. Use visual inspection and palpation to locate injection sites.</span>","<b>المضاعفة:</b> إصابة عصب (ألم حاد بينزل في الطرف، شلل مؤقت أو دائم).<br><b>الأسباب:</b> إصابة العصب أثناء الحقن، أو الدوا اتحقن قريب من عصب.<br><b>التعامل التمريضي:</b> غيّر من طريق IM لطريق تاني في أسرع وقت. اتأكد إن الدوا موصى بيه للإعطاء العضلي. تجنّب الدالية والألوية الخلفية قدر الإمكان. استخدم الفحص بالنظر والجس لتحديد أماكن الحقن.","العصب لو اتصاب بيوجع زي الكهربا في الطرف. والحل إنك تحدد المكان صح وتبعد عن الأماكن الخطرة."],
+["<b>Complication:</b> Bone injury (pain or bone damage).<span class='l'><b>Causes:</b> Bone struck during IM injection.</span><span class='l'><b>Nursing management:</b> Check with physician before administering IM injection to a client whose platelet count is under 30,000/ml. Do not administer IM injections into atrophied muscle. Use a short needle (1.25 in) when giving into the deltoid or ventrogluteal sites. Use visual inspection and palpation to locate injection sites.</span>","<b>المضاعفة:</b> إصابة عظم (ألم أو تلف في العظم).<br><b>الأسباب:</b> الإبرة خبطت في العظم أثناء حقن IM.<br><b>التعامل التمريضي:</b> استشر الدكتور قبل حقن IM لمريض صفائحه أقل من 30,000/مل. ما تحقنش في عضل ضامر (atrophied). استخدم إبرة قصيرة (1.25 بوصة) في الدالية أو الألوية البطنية. استخدم النظر والجس لتحديد أماكن الحقن.","الإبرة الطويلة في عضل رفيع ممكن توصل للعظم، فاختار الإبرة والمكان صح."],
+["<b>Complication:</b> Speed shock or rapid absorption of medication (unexpectedly rapid onset of medication action, may lead to increased HR, decreased respiratory rate, decreased level of consciousness and cardiovascular collapse).<span class='l'><b>Causes:</b> Medication administered directly into a vein or artery.</span><span class='l'><b>Nursing management:</b> After inserting needle into muscle aspirate (pull back on plunger of syringe) to check for blood. If blood appears in syringe barrel remove needle and discard. Draw up another dose of medication and administer in a new site.</span>","<b>المضاعفة:</b> صدمة السرعة (Speed shock) أو امتصاص سريع للدوا (بداية مفعول سريعة بشكل غير متوقع، ممكن تؤدي لزيادة النبض، وانخفاض معدل التنفس، وانخفاض مستوى الوعي، وانهيار القلب والأوعية).<br><b>الأسباب:</b> الدوا اتحقن مباشرة في وريد أو شريان.<br><b>التعامل التمريضي:</b> بعد إدخال الإبرة في العضل اسحب (ارجع المكبس) للتأكد من وجود دم. لو ظهر دم في السرنجة اشيل الإبرة وارميها. حضّر جرعة تانية وادّيها في مكان جديد.","لو الإبرة دخلت وعاء دموي الدوا هيدخل الدم مرة واحدة. السحب بيكشف ده قبل ما تحقن."],
+["<b>Complication:</b> Infection of muscle or bone (muscle or bone pain in injection site, skin redness or warm localized swelling).<span class='l'><b>Causes:</b> Organism introduced into tissue or bone during injection.</span><span class='l'><b>Nursing management:</b> Follow strict aseptic technique when administering IM injections.</span>","<b>المضاعفة:</b> عدوى في العضل أو العظم (ألم في العضل أو العظم في مكان الحقن، احمرار الجلد أو تورم موضعي دافي).<br><b>الأسباب:</b> دخول كائنات دقيقة في النسيج أو العظم أثناء الحقن.<br><b>التعامل التمريضي:</b> اتبع تقنية التعقيم بصرامة عند حقن IM.","العدوى سببها ميكروب دخل، والحل تعقيم صارم."]
+]});
+S.push({h:"Intravenous Route",i:[
+["IV injection is the most common parenteral route of medication administration. This directly administers the medications to the systemic circulation.","الحقن الوريدي هو أشهر طريق parenteral لإعطاء الأدوية. وبيدّي الدوا مباشرة للدورة الدموية العامة.","الدوا بيدخل الدم على طول."],
+"Indications",
+["It is indicated when a rapid drug effect is desired, a precise serum drug level is needed, or when drugs are unstable or poorly absorbed in the gastrointestinal tract.","بيتستخدم لما نحتاج مفعول سريع للدوا، أو نحتاج مستوى دقيق للدوا في الدم، أو لما الأدوية تكون غير ثابتة أو بتتمتص ضعيف في الجهاز الهضمي.","سرعة + دقة + دوا مش بينفع بالفم."],
+["It is also the route utilized in patients with altered mental status or severe nausea or vomiting, unable to tolerate oral medications.","وبيستخدم كمان مع المرضى اللي عندهم تغيّر في الحالة العقلية أو غثيان أو قيء شديد وما يقدروش يتحملوا الأدوية الفموية.","لو المريض مش واعي أو بيرجّع، الوريد هو الحل."],
+"Advantages",
+["Rapid onset of action.","بداية مفعول سريعة.","الدوا في الدم على طول."],
+["Predictable way of action and almost complete bioavailability.","طريقة تأثير متوقعة، وتوافر حيوي شبه كامل.","الدوا كله بيوصل للدم."],
+["The problems of oral drug administration can be eliminated by avoiding the gastrointestinal tract.","مشاكل الإعطاء الفموي ممكن تتلغي بتجنب الجهاز الهضمي.","مفيش هضم ولا امتصاص معوي."],
+["The best way of administration in very ill and comatose patients who cannot ingest anything orally.","أفضل طريقة للمرضى شديدي المرض وفاقدي الوعي (comatose) اللي ما يقدروش يبلعوا أي حاجة بالفم.","اللي مش قادر ياكل بالفم، الوريد بديله."],
+"Disadvantages",
+["Causes pain.","بيسبب ألم.","الوخز بالإبرة."],
+["Chance of infection.","فيه فرصة لعدوى.","الجلد بيتخرم."],
+"Complication of venous route",
+["Bleeding, bruising, infection, or inflammation. Infiltration is a common complication of the intravenous route whereby the intravenous fluid or medication enters the surrounding tissue and not the vein.","نزيف، كدمات، عدوى، أو التهاب. والتسرّب (Infiltration) مضاعفة شائعة للطريق الوريدي، فيها السائل أو الدوا الوريدي بيدخل النسيج اللي حوالين الوريد مش الوريد نفسه.","Infiltration يعني الدوا خرج من الوريد ودخل النسيج."]
+]});
+S.push({h:"Nursing Roles in Drug Administration",i:[
+["The nurse's role is much more than mechanical achievement of objectives. It is a professional role requiring knowledge, skills, judgment and commitment.","دور الممرض أكبر بكتير من مجرد تنفيذ آلي للأهداف. هو دور مهني محتاج معرفة ومهارات وحكم سليم والتزام.","مش بس تدّي الدوا، لازم تفهم وتقرر وتلتزم."],
+"Knowledge: Nurses' knowledge during Drug Administration",
+["Knowledgeable about indications for use of medication as well as precautions and contraindication.","عارف دواعي استعمال الدوا وكمان الاحتياطات وموانع الاستعمال.","تعرف الدوا بيتدّي ليه ومتى ما يتدّيش."],
+["Knowledgeable of the expected outcome from its use.","عارف النتيجة المتوقعة من استخدامه.","تعرف الدوا المفروض يعمل إيه."],
+["Knowledgeable about potential adverse reactions and interactions with food or other medication.","عارف التفاعلات الضارة المحتملة وتفاعلاته مع الأكل أو الأدوية التانية.","تعرف مضاره وتفاعلاته."],
+["Knowledgeable of actions to be taken when adverse reactions or interactions occur.","عارف الإجراءات اللي لازم تتاخد لما تحصل تفاعلات ضارة أو تداخلات.","تعرف تتصرف لو حصلت مشكلة."],
+["Knowledgeable about storage requirements.","عارف متطلبات التخزين.","كل دوا له طريقة حفظ."],
+["Consistently upgrade knowledge of medications.","طوّر معرفتك بالأدوية باستمرار.","الأدوية الجديدة بتنزل دايمًا."],
+["Be aware of the importance of scheduling medications in relation to pharmacology, indication, side effects, monitoring issues, drug-drug interactions, food-drug interactions, etc.","اعرف أهمية جدولة الأدوية بالنسبة لعلم الأدوية ودواعي الاستعمال والآثار الجانبية ومسائل المتابعة وتداخل الدوا مع الدوا والأكل مع الدوا وغيره.","توقيت الدوا مش عشوائي."],
+["Know the intended indication for medication use; record on medication profile.","اعرف دواعي الاستعمال المقصودة للدوا؛ وسجّلها في ملف الأدوية (medication profile).","اكتب سبب الدوا في الملف."],
+["Nurses must protect the individual's health by making judgment about the validity of drug orders, to prevent errors.","الممرضين لازم يحموا صحة الفرد بإنهم يحكموا على صلاحية أوامر الدوا عشان يمنعوا الأخطاء.","لو الأمر مش منطقي، اسأل قبل ما تنفذ."],
+["A nurse must familiarize themselves with the policies for drug administration at individual health care facilities, e.g., leaving drugs at a person's bedside is strictly prohibited in some institutions. In others, certain drugs may be left at bedside with written permission of the physician.","الممرض لازم يتعرف على سياسات إعطاء الأدوية في كل منشأة صحية، مثلًا ترك الأدوية جنب سرير المريض ممنوع تمامًا في بعض المؤسسات. وفي مؤسسات تانية بعض الأدوية ممكن تتساب بإذن مكتوب من الدكتور.","القواعد بتختلف من مستشفى لمستشفى."],
+"Practice",
+["As well as knowledge, a number of skills have to be mastered for successful management of drug as observed changes in patient receiving therapy, communication, teaching, and motor and numeric skills. Nurses are responsible for developing skills that enable them to administer all types of drugs correctly.","غير المعرفة، فيه عدد من المهارات لازم تتقنها عشان تدير الدوا بنجاح، زي ملاحظة التغيرات في المريض اللي بياخد العلاج، والتواصل، والتعليم، والمهارات الحركية والرقمية. والممرضين مسؤولين عن تطوير المهارات اللي بتخليهم يدّوا كل أنواع الأدوية صح.","مهارات: ملاحظة، تواصل، تعليم، حركة، وحسابات."],
+["Safeguarding, storing and caring for drugs.","حماية الأدوية وتخزينها والعناية بيها.","المحافظة على الأدوية."],
+["Acting as a role model for educating others on safe uses of drugs and demonstrating these actions to public.","إنك تكون قدوة في تثقيف الآخرين عن الاستخدام الآمن للأدوية وتوضّح الأفعال دي للناس.","تعلّم بالفعل مش بالكلام بس."],
+["Questioning an incorrect or incomplete drug order and refusing to administer one that you think is unsafe.","التساؤل عن أمر دوا غلط أو ناقص ورفض إعطاء أي أمر تشوفه مش آمن.","من حقك بل من واجبك ترفض الأمر الغير آمن."],
+["Utilizing all steps of the nursing process in the administration of drugs.","استخدام كل خطوات عملية التمريض في إعطاء الأدوية.","تقييم، تشخيص، تخطيط، تنفيذ، تقييم نهائي."],
+["Assessment of the patient and clear understanding of why the patient is receiving a particular medication.","تقييم المريض وفهم واضح لسبب إعطاء المريض دوا معين.","اعرف ليه المريض بياخد الدوا ده."],
+["Preparing the medication to be administered.","تحضير الدوا اللي هيتدّي.","تجهيز الدوا."],
+["Accurate dosage calculations.","حسابات الجرعات الدقيقة.","غلطة حسابية صغيرة ممكن تكون كبيرة."],
+["Administration of the drug.","إعطاء الدوا.","التنفيذ."],
+["Recording the drugs administered (or not administered, with rationale for the omission) and documenting patient responses.","تسجيل الأدوية اللي اتدّت (أو اللي ما اتدّتش مع سبب التفويت) وتوثيق استجابات المريض.","اكتب اللي اتعمل واللي ما اتعملش وليه."],
+["Observing the adverse reactions related to drugs.","ملاحظة التفاعلات الضارة المرتبطة بالأدوية.","راقب المريض بعد الدوا."],
+["Educating the patient regarding his or her drugs and medication regimen.","تثقيف المريض بخصوص أدويته ونظام علاجه.","المريض لازم يفهم دواه."],
+"Attitudes",
+["The nurse accepts the full responsibility that the drug or the nursing actions in administering it will not harm the patient in any way.","الممرض بيقبل المسؤولية الكاملة إن الدوا أو الإجراءات التمريضية في إعطائه ما تضر المريض بأي شكل.","مسؤوليتك إن المريض ما يتأذاش."],
+["The nurse does not assume that the drug ordered for the patient is the correct drug or the correct dose.","الممرض ما بيفترضش إن الدوا الموصوف للمريض هو الدوا الصح أو الجرعة الصح.","اتأكد بنفسك، ما تفترضش."],
+["The nurse could be held accountable for administering an ordered drug.","الممرض ممكن يتحاسب على إعطاء دوا مطلوب.","حتى لو الدكتور كتبه، انت ممكن تتحاسب."],
+["The nurse is responsible for ensuring that patients who will self-administer drugs have been properly informed about all aspects of self-administration.","الممرض مسؤول عن التأكد إن المرضى اللي هياخدوا الدوا بنفسهم اتعلموا كويس كل جوانب الإعطاء الذاتي.","لو المريض هياخد دواه بنفسه، لازم تعلّمه صح."],
+["Demonstrating accountability and acting responsibly in professional practice means that the nurse acknowledges when errors in professional practice occur.","إظهار المساءلة والتصرف بمسؤولية في الممارسة المهنية معناه إن الممرض بيعترف لما تحصل أخطاء في الممارسة المهنية.","اعترف بالغلط ما تخبّيهوش."],
+["The nurse should respond to patient questions about his/her drug or dosage and also reassure the patient by explaining any changes in his/her drug or dosage.","الممرض لازم يرد على أسئلة المريض عن دواه أو جرعته، وكمان يطمّنه بشرح أي تغييرات في دواه أو جرعته.","المريض من حقه يفهم وانت تطمّنه."],
+["However, without an informed respect for drug therapy will not be achieved and drug therapy may fail.","لكن من غير احترام واعي للأدوية، العلاج الدوائي مش هيتحقق وممكن يفشل.","لو ما فهمتش الدوا وما احترمتهوش، العلاج ممكن ما ينجحش."]
+]});
+S.push({h:"Safe Drugs Administration",i:[
+["Safety is of utmost importance in preparing and implementing drug administration.","السلامة لها أهمية قصوى في تحضير وتنفيذ إعطاء الأدوية.","أهم حاجة في الموضوع كله."],
+["A- Safe Environment: An environment that promotes safety and good working habits contributes to accuracy in the preparation of drugs for administration, with good lighting when preparing drugs. Also the nurse who is preparing drugs should work alone; this practice helps to avoid distractions and interruptions, which may lead to errors.","A- بيئة آمنة: البيئة اللي بتشجع على السلامة وعادات الشغل الكويسة بتساهم في دقة تحضير الأدوية للإعطاء، مع إضاءة كويسة وقت التحضير. وكمان الممرض اللي بيحضّر الأدوية يشتغل لوحده، لأن ده بيساعد على تجنب التشتيت والمقاطعات اللي ممكن تسبب أخطاء.","إضاءة كويسة + تركيز من غير مقاطعة."],
+["B- Safe drug order: The nurse ensures that the drug order contains all of the elements; if the drug order is incomplete, the nurse should inform the prescriber and ensure competence before carrying out any drug order.","B- أمر دوا آمن: الممرض بيتأكد إن أمر الدوا فيه كل العناصر؛ ولو الأمر ناقص، لازم يبلّغ الدكتور ويتأكد من الكفاءة قبل تنفيذ أي أمر.","الأمر الناقص ما يتنفّذش."],
+["Each time drug dose is prepared the nurse refers to appropriate drug form, called a drug Administration Record (MAR), Kardex, or computer charting.","كل مرة بتتجهّز فيها جرعة دوا، الممرض بيرجع للنموذج المناسب اللي اسمه سجل إعطاء الدوا (MAR) أو Kardex أو التسجيل بالكمبيوتر.","ارجع للسجل في كل مرة."],
+["The transcribed order includes: the patient's name, room and bed number, drug name, dose, frequency, and route of administration.","الأمر المنسوخ بيشمل: اسم المريض، رقم الأوضة والسرير، اسم الدوا، الجرعة، عدد المرات، وطريق الإعطاء.","دي البيانات اللي لازم تتنسخ."],
+["When transcribing orders, the nurse should be sure that names, dosages, and symbols are legible to correct charting, and if an order seems incorrect or inappropriate, the nurse consults the prescriber and rewrites any smudged or illegible transcriptions by mark errors through one line, then make the correction above the errors and sign it.","وانت بتنسخ الأوامر، الممرض لازم يتأكد إن الأسماء والجرعات والرموز مقروءة عشان التسجيل صح، ولو الأمر شكله غلط أو مش مناسب، بيستشير الدكتور ويعيد كتابة أي نسخ ممسوح أو مش مقروء بإنه يشطب الغلط بخط واحد ويكتب التصحيح فوقه ويوقّع.","الشطب بخط واحد بس، مش تمسح ولا تبوّظ الكتابة."],
+["C- Assessment: Information must be collected before giving a patient any drug. Laboratory tests may be used to monitor serum drug levels, drug effects and drug side effects.","C- التقييم: لازم تتجمع معلومات قبل إعطاء المريض أي دوا. والفحوصات المعملية ممكن تستخدم لمتابعة مستوى الدوا في الدم وتأثيراته وآثاره الجانبية.","التحاليل بتقولك الدوا في الدم قد إيه."],
+["Drug dosages, such as digoxin, gentamycin, phenytoin, and theophylline should be strictly monitored.","جرعات أدوية زي الديجوكسين والجنتاميسين والفينيتوين والثيوفيللين لازم تتراقب بصرامة.","دي أدوية مستواها حساس."],
+["Common or serious side effects of drugs may be monitored using laboratory tests. Many diuretics are potassium wasting. Hence, serum potassium levels are measured to detect hypokalemia.","الآثار الجانبية الشائعة أو الخطيرة للأدوية ممكن تتتابع بالفحوصات المعملية. كتير من مدرات البول بتفقّد البوتاسيوم. عشان كده بيتقاس مستوى البوتاسيوم في الدم لاكتشاف نقص البوتاسيوم (hypokalemia).","المدر بيخرج البوتاسيوم مع البول، فبتقيسه."],
+["Before giving a drug, quickly assess the patient's physical ability to take the drug. The ability to swallow and normal gastrointestinal motility are important considerations for oral drugs. Adequate muscle mass and venous access are important for parenteral drugs.","قبل ما تدّي دوا، قيّم بسرعة قدرة المريض الجسدية على أخد الدوا. القدرة على البلع وحركة الجهاز الهضمي الطبيعية اعتبارات مهمة للأدوية الفموية. وكتلة العضل الكافية وتوفر وصول وريدي مهمين للأدوية الحقن.","فموي: يبلع ومعدته شغالة. حقن: عضل كفاية ووريد متاح."],
+["Never document before medication is administered.","ما تسجّلش أبدًا قبل ما الدوا يتدّي.","سجّل بعد ما تدّي مش قبل."]
+]});
+S.push({h:"Management When a Drug Error Occurs",i:[
+["The following steps are recommended when a drug error occurs:","الخطوات دي موصى بيها لما تحصل غلطة دوا:","أربع خطوات بالترتيب."],
+["1- Check the patient's condition immediately when the error is noted; observe for the development of adverse effects related to the error.","1- اتشيك على حالة المريض فورًا لما الغلطة تتلاحظ؛ وراقب ظهور آثار ضارة مرتبطة بالغلطة.","أول حاجة المريض."],
+["2- Notify the nurse manager and the physician to discuss possible courses of action depending on the patient's condition.","2- بلّغ مدير التمريض والدكتور لمناقشة الإجراءات الممكنة حسب حالة المريض.","اعمل مع الدكتور خطة."],
+["3- Write a description of the error on the patient's medical record, including remedial steps that are taken.","3- اكتب وصف للغلطة في السجل الطبي للمريض، يشمل الخطوات العلاجية اللي اتاخدت.","وثّق الغلطة وإيه اللي اتعمل."],
+["4- Complete a special form for reporting errors, as dictated by agency policy. These forms, called accident, incident, or unusual occurrence reports, require an objective, complete account of the drug errors. Include the steps taken after the error was recognized.","4- اكمل نموذج خاص لتبليغ الأخطاء حسب سياسة المؤسسة. النماذج دي بتتسمى accident أو incident أو تقارير حدث غير عادي، وبتتطلب وصف موضوعي كامل لأخطاء الدوا. وضمّن فيها الخطوات اللي اتاخدت بعد اكتشاف الغلطة.","اكتب اللي حصل بموضوعية من غير رأي."],
+["For legal reasons, it is essential that an error be described fully and accurately. Drug errors are common allegation in nursing liability cases.","لأسباب قانونية، ضروري إن الغلطة تتوصف بالكامل وبدقة. أخطاء الدوا اتهام شائع في قضايا مسؤولية التمريض.","الوصف الدقيق بيحميك قانونيًا."]
+]});
+S.push({h:"Nursing Process and Drug Administration",i:[
+["The nursing process guides nursing decisions about drug administration to ensure the patient's safety and meet medical and legal standard.","عملية التمريض بتوجّه قرارات التمريض بخصوص إعطاء الدوا عشان تضمن سلامة المريض وتحقق المعايير الطبية والقانونية.","هي الإطار اللي بتمشي عليه."],
+["This process provides thorough assessment, appropriate nursing diagnoses, effective planning and implementation, and constant evaluation.","العملية دي بتوفر تقييم شامل، وتشخيصات تمريضية مناسبة، وتخطيط وتنفيذ فعّال، وتقييم مستمر.","تقييم → تشخيص → تخطيط → تنفيذ → تقييم."],
+"Nursing Assessment — Components of a Drug History",
+["When obtaining a drug history, the nurse can use the following list as a guide.","لما تاخد التاريخ الدوائي، الممرض ممكن يستخدم القائمة دي كدليل.","قائمة تمشي عليها وانت بتسأل."],
+["General information: Allergies (Drug, Food). Medical history (Associated acute or chronic illnesses and diseases).","معلومات عامة: الحساسية (للدوا، للأكل). التاريخ الطبي (الأمراض الحادة أو المزمنة المرتبطة).","اسأل عن الحساسية والأمراض."],
+["Habits: Dietary. Use of recreational drugs such as alcohol, tobacco, and stimulants (including caffeine).","العادات: الغذائية. استخدام مواد ترفيهية زي الكحول والتبغ والمنشطات (منها الكافيين).","القهوة والسجاير ممكن تأثر على الدوا."],
+["Socioeconomic status: Age, Education, Occupation, Income level, Health insurance coverage.","الحالة الاجتماعية الاقتصادية: السن، التعليم، الوظيفة، مستوى الدخل، التأمين الصحي.","دي بتأثر على قدرته يلتزم بالعلاج."],
+["Life-style and beliefs: Support systems, Marital status, Child-bearing status, Attitudes toward health and health care, Use of the health care system, Daily activities pattern, Sensory deficits.","نمط الحياة والمعتقدات: أنظمة الدعم، الحالة الزوجية، حالة الإنجاب، الاتجاهات نحو الصحة والرعاية الصحية، استخدام النظام الصحي، نمط الأنشطة اليومية، القصور الحسي.","كل ده بيأثر على طريقة أخد الدوا."],
+["Description of prescription and over-the-counter drugs: Reason for use, Frequency of drug, Adverse reactions, Knowledge of drug, Effectiveness, Pattern or routine.","وصف الأدوية الموصوفة والأدوية بدون وصفة: سبب الاستخدام، عدد مرات الدوا، التفاعلات الضارة، معرفة المريض بالدوا، الفاعلية، النمط أو الروتين.","اسأل عن كل دوا بياخده، حتى اللي من غير روشتة."],
+"Nursing Diagnosis",
+["Possible nursing diagnosis for patient receiving drug includes:","التشخيصات التمريضية الممكنة للمريض اللي بياخد دوا تشمل:","ست تشخيصات."],
+["1- Knowledge deficit related to use and adverse effects of prescribed drugs.","1- نقص معرفة متعلق باستخدام الأدوية الموصوفة وآثارها الضارة.","المريض مش فاهم دواه."],
+["2- Non-compliance is defined as a deliberate misuse of drug regimen.","2- عدم الالتزام (Non-compliance) معرّف بإنه إساءة استخدام متعمدة لنظام الدوا.","يتعمد ما ياخدش الدوا صح."],
+["3- Anxiety.","3- القلق.","خوف من الدوا أو العلاج."],
+["4- Impaired physical mobility.","4- ضعف الحركة الجسدية.","مش قادر يتحرك فيصعب عليه."],
+["5- Alteration in sensory and/or visual perception.","5- تغيّر في الإدراك الحسي و/أو البصري.","ممكن ما يشوفش أو يحس بالدوا صح."],
+["6- Swallowing impaired.","6- ضعف البلع.","مش قادر يبلع."],
+"Planning",
+["Safely and accurately administering drug requires preplanning. A drug administration schedule should be incorporated into the daily work organization plan.","إعطاء الدوا بأمان ودقة محتاج تخطيط مسبق. وجدول إعطاء الأدوية لازم يتدمج في خطة تنظيم الشغل اليومي.","حط مواعيد الدوا في خطة يومك."],
+["Hurrying to give patients drugs can lead to errors.","الاستعجال في إعطاء الأدوية للمرضى ممكن يؤدي لأخطاء.","الاستعجال عدو الدقة."],
+["Unfamiliar drugs should be verified in reference handbooks before the scheduled time to give them.","الأدوية غير المألوفة لازم تتأكد منها في المراجع قبل وقت إعطائها.","راجع قبل الميعاد مش وقت الإعطاء."],
+["Specific planning is required to properly evaluate whether signs and symptoms of adverse effects are present in the patient.","محتاج تخطيط محدد لتقييم هل علامات وأعراض الآثار الضارة موجودة في المريض.","خطط إزاي هتراقب."],
+["Time is planned for teaching the patient the information needed to safely take each drug prescribed.","بيتخطط وقت لتعليم المريض المعلومات اللازمة لأخد كل دوا موصوف بأمان.","خصص وقت للشرح."],
+["Before administering a drug, check the five rights of drug administration.","قبل إعطاء الدوا، تحقق من الحقوق الخمسة لإعطاء الدوا.","مراجعة أخيرة."],
+["Plan ahead whether you will need to take juice or milk and crackers to the patient for particular drugs.","خطط مقدمًا لو هتحتاج تاخد عصير أو لبن وبسكوت للمريض لأدوية معينة.","بعض الأدوية لازم تتاخد مع أكل."],
+["If a patient needs a drug crushed and mixed, take the supplies to the bedside with you.","لو المريض محتاج دوا يتفرم ويتخلط، خد المستلزمات معاك جنب السرير.","جهّز الأدوات قبل ما تروح."],
+["Plan to give routinely scheduled drugs to those needing extra help last.","خطط تدّي الأدوية الروتينية المجدولة للمرضى اللي محتاجين مساعدة زيادة في الآخر.","اللي محتاج وقت أكتر خليه آخر واحد عشان ما يعطّلش الباقي."],
+"Goals and Expected Outcomes",
+["1. The patient and family understand drug therapy.","1. المريض وأهله يفهموا العلاج الدوائي.","فهم."],
+["2. The patient gains therapeutic effect of the prescribed drugs without discomfort or complications.","2. المريض يحصل على التأثير العلاجي للأدوية الموصوفة من غير إزعاج أو مضاعفات.","نتيجة علاجية آمنة."],
+["3. The patient has no complications related to the route of administration.","3. المريض ما يحصلش له مضاعفات مرتبطة بطريق الإعطاء.","زي infiltration أو التهاب."],
+["4. The patient safely self-administers drugs.","4. المريض يديّ الأدوية لنفسه بأمان.","هدف الاستقلالية."],
+"Implementation",
+["Check pertinent laboratory values and assess for side effects of the drug before giving the next dose of a drug.","اتشيك على قيم التحاليل المهمة وقيّم الآثار الجانبية للدوا قبل إعطاء الجرعة التالية.","قبل الجرعة الجاية، شوف التحاليل والأعراض."],
+["Obtain a complete drug history from the patient.","خد تاريخ دوائي كامل من المريض.","اللي اتشرح فوق."],
+["Check drug orders before giving drugs.","اتشيك على أوامر الدوا قبل إعطاء الأدوية.","راجع الأمر."],
+["Check the chart for listed patient allergies and ask the patient about allergies whenever you are administering drug; look for an allergy identification band.","اتشيك في السجل على الحساسية المسجلة واسأل المريض عن الحساسية كل ما تدّي دوا؛ وابحث عن سوار تحديد الحساسية.","السجل + سؤال المريض + السوار."],
+["Know about the drugs being given.","اعرف الأدوية اللي بتتدّي.","ما تديش دوا مش عارفه."],
+["Ask yourself if the drug order is consistent with the patient's diagnosis and plan of treatment. If the answer is no, or if there is doubt, check it out with the charge nurse or physician.","اسأل نفسك لو أمر الدوا متوافق مع تشخيص المريض وخطة علاجه. لو الإجابة لأ أو فيه شك، اسأل الممرض المسؤول أو الدكتور.","لو الأمر مش منطقي مع الحالة، اسأل."],
+["Ask yourself if the drug is similar in action to another drug the patient has been receiving.","اسأل نفسك لو الدوا مشابه في التأثير لدوا تاني المريض بياخده.","تجنب تكرار التأثير."],
+["Avoid distraction or interruptions when preparing or administering drugs.","تجنب التشتيت أو المقاطعات وقت تحضير أو إعطاء الأدوية.","ركّز."],
+["Calculating the drug dosage to be given.","احسب جرعة الدوا اللي هتتدّي.","احسبها بدقة."],
+["Observe the five rights and five rules when administering drugs.","التزم بالحقوق الخمسة والقواعد الخمسة وانت بتدّي الأدوية.","قواعد الإعطاء."],
+["Observe the principles of aseptic technique.","التزم بمبادئ تقنية التعقيم.","اغسل إيديك وعقّم."],
+["Drugs are given by the person who prepared them.","الأدوية بيديها الشخص اللي حضّرها.","نفس القاعدة اللي فاتت."],
+["If the patient questions the dose you are about to give, stop and verify the order.","لو المريض سأل عن الجرعة اللي هتديها، وقّف وتأكد من الأمر.","استفسار المريض ممكن يكشف غلطة."],
+["Drugs are not to be left at the bedside. Exceptions may be made for drugs such as antacids, nitroglycerin, or birth control pills, when ordered in writing by the physician.","الأدوية ما بتتساب جنب السرير. ممكن تتعمل استثناءات لأدوية زي مضادات الحموضة والنيتروجلسرين وحبوب منع الحمل لما الدكتور يطلب كتابةً.","استثناءات بأمر مكتوب."],
+["Teach the patient about the drug.","علّم المريض عن الدوا.","اشرح له."],
+"Evaluation",
+["Monitors a patient response to drug.","تتابع استجابة المريض للدوا.","شوف الدوا عمل إيه."],
+["Evaluation of drug therapy is related to whether the desired therapeutic effect is occurring.","تقييم العلاج الدوائي مرتبط بحصول التأثير العلاجي المطلوب أو لأ.","هل الدوا حقق هدفه؟"]
+]});
+
+let total=0;
+const app=document.getElementById('app'),toc=document.getElementById('toc');
+S.forEach((s,k)=>{
+  const id='s'+k;
+  toc.insertAdjacentHTML('beforeend',`<a href="#${id}">${s.h}</a>`);
+  let h=`<section class="sec" id="${id}"><div class="sec-h"><span class="n">${k+1}</span>${s.h}</div>`;
+  s.i.forEach(x=>{
+    if(typeof x==='string'){h+=`<div class="sub">${x}</div>`;return;}
+    total++;
+    h+=`<div class="card"><div class="en">${x[0]}</div><div class="ar">${x[1]}</div><div class="why"><b>عشان تفهمها :</b> ${x[2]}</div></div>`;
+  });
+  app.insertAdjacentHTML('beforeend',h+'</section>');
+});
+document.getElementById('cnt').textContent=total+' نقطة';
+const links=[...toc.querySelectorAll('a')],secs=[...document.querySelectorAll('.sec')];
+const pb=document.getElementById('prog-bar'),tb=document.getElementById('top');
+addEventListener('scroll',()=>{
+  const m=document.documentElement.scrollHeight-innerHeight;
+  pb.style.width=(m>0?scrollY/m*100:0)+'%';
+  tb.style.display=scrollY>600?'block':'none';
+  let cur=0;secs.forEach((e,k)=>{if(e.getBoundingClientRect().top<160)cur=k});
+  links.forEach((a,k)=>a.classList.toggle('on',k===cur));
+  if(links[cur]){const a=links[cur];toc.scrollLeft=a.offsetLeft-toc.clientWidth/2+a.clientWidth/2;}
+},{passive:true});
+tb.onclick=()=>scrollTo({top:0,behavior:'smooth'});
+const tbtn=document.getElementById('themeBtn');
+let theme='light';
+try{theme=localStorage.getItem('theme')||'light'}catch(e){}
+function at(t){theme=t;document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'');tbtn.textContent=t==='dark'?'☀️':'🌙';try{localStorage.setItem('theme',t)}catch(e){}}
+at(theme);tbtn.onclick=()=>at(theme==='dark'?'light':'dark');
+</script>
+</body>
+</html>
