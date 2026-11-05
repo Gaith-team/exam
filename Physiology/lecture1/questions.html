@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GHAITH TEAM | Physiology Quiz</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--rose:#e11d48;--rose2:#be123c;--amber:#f59e0b;--ok:#16a34a;--no:#dc2626;--bg:#fff5f7;--card:#fff;--text:#2a0f1b;--t2:#6b3a4c;--bc:rgba(159,18,57,.16);--en:#fff0f3;--fd:'Space Grotesk','IBM Plex Sans Arabic',system-ui,sans-serif}
+[data-theme=dark]{--rose:#fb7185;--rose2:#fda4af;--amber:#fbbf24;--ok:#4ade80;--no:#f87171;--bg:#12050b;--card:#210d17;--text:#fde8ee;--t2:#e0b3c2;--bc:rgba(251,113,133,.22);--en:#2c1220}
+body{font-family:var(--fd);background:var(--bg);color:var(--text);min-height:100vh}
+#pb{position:fixed;top:0;left:0;height:4px;width:0;z-index:99;background:linear-gradient(90deg,var(--rose),var(--amber));transition:width .3s}
+nav{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:10px 20px;background:var(--bg);border-bottom:1px solid var(--bc)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px}
+.logo{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--rose2));color:#fff;display:grid;place-items:center;font-size:12px}
+.tb{width:38px;height:38px;border-radius:50%;border:1px solid var(--bc);background:var(--card);cursor:pointer;font-size:15px}
+.shell{max-width:720px;margin:0 auto;padding:18px 16px 70px}
+.hero{border-radius:26px;padding:26px 18px;text-align:center;color:#fff;background:linear-gradient(135deg,#4a0f2a,#9f1239 60%,#e11d48);margin-bottom:16px}
+.hero h1{font-size:clamp(21px,5vw,30px);margin:6px 0 4px}.hero p{font-size:13px;opacity:.85}
+.card{background:var(--card);border:1px solid var(--bc);border-radius:22px;padding:18px;box-shadow:0 6px 20px rgba(159,18,57,.07);margin-bottom:14px}
+.row{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin:10px 0}
+.btn{font:600 14px var(--fd);padding:10px 18px;border-radius:14px;border:1px solid var(--bc);background:var(--card);color:var(--text);cursor:pointer}
+.btn.on,.btn.pri{background:linear-gradient(135deg,var(--rose),var(--rose2));color:#fff;border-color:transparent}
+.top{display:flex;justify-content:space-between;font-size:13px;color:var(--t2);margin-bottom:10px}
+.q{font-size:17px;font-weight:600;line-height:1.7;padding:14px 16px;background:var(--en);border-left:5px solid var(--rose);border-radius:14px;margin-bottom:12px}
+.o{display:block;width:100%;text-align:left;font:500 15px/1.6 var(--fd);padding:12px 14px;margin-bottom:8px;border-radius:14px;border:1.5px solid var(--bc);background:var(--card);color:var(--text);cursor:pointer}
+.o:hover:not(:disabled){border-color:var(--rose)}
+.o.ok{border-color:var(--ok);background:rgba(22,163,74,.12)}.o.no{border-color:var(--no);background:rgba(220,38,38,.12)}
+.ring{width:130px;height:130px;border-radius:50%;margin:10px auto;display:grid;place-items:center;font-size:28px;font-weight:700}
+.ring span{width:98px;height:98px;border-radius:50%;background:var(--card);display:grid;place-items:center}
+.hide{display:none}
+:focus-visible{outline:3px solid var(--rose);outline-offset:2px}
+</style></head><body>
+<div id="pb"></div>
+<nav><div class="brand"><div class="logo">GT</div>GHAITH TEAM</div><button class="tb" id="tb" aria-label="Toggle theme">🌙</button></nav>
+<div class="shell">
+<div class="hero"><div style="font-size:40px">🫀</div><h1>Introduction to Physiology</h1><p>Physiology</p></div>
+<div class="card" id="home"><div style="text-align:center;font-weight:600">Choose question type</div>
+<div class="row" id="flt"><button class="btn on" data-f="all">All (50)</button><button class="btn" data-f="mcq">MCQ</button><button class="btn" data-f="tf">True/False</button></div>
+<div class="row"><button class="btn pri" id="go">يلا نحل</button></div></div>
+<div class="card hide" id="qz"><div class="top"><span id="cnt"></span><span id="tm">00:00</span><span id="sc"></span></div>
+<div class="q" id="qt"></div><div id="ops"></div><div class="row"><button class="btn pri hide" id="nx">Next ›</button></div></div>
+<div class="card hide" id="rs" style="text-align:center"><div class="ring" id="rg"><span id="pc"></span></div><div id="msg" style="font-weight:600"></div>
+<div class="row"><button class="btn pri hide" id="rw">Retry wrong answers</button><button class="btn" id="rst">Restart</button></div></div>
+</div>
+<script>
+/* ===== Multiple Choice (35) — graded: easy → hard ===== */
+var MCQ=[
+{t:"Physiology is the study of:",o:["The structures of the human body","How the human body works","Only the origin of life","Diseases of organs"],a:1},
+{t:"Anatomy is the study of:",o:["The structures of humans","Chemical reactions only","How body functions work","Homeostasis"],a:0},
+{t:"Which of the following shows anatomy?",o:["Urine test","Blood test","Electrocardiogram","X-ray"],a:3},
+{t:"What is the smallest unit of the body?",o:["Tissue","Organ","Cell","System"],a:2},
+{t:"A group of cells that have common characters forms a:",o:["Organ","Tissue","System","Organelle"],a:1},
+{t:"The heart pumping blood through blood vessels is an example of an:",o:["Cell","Tissue","System","Organ"],a:3},
+{t:"A group of organs organized and complementing each other to perform a certain function forms a:",o:["System","Tissue","Cell","Organelle"],a:0},
+{t:"The cell membrane:",o:["Contains the genes","Surrounds the cell and separates it from the surrounding","Produces energy","Digests waste products"],a:1},
+{t:"The nucleus is separated from the cytoplasm by the:",o:["Cell membrane","Golgi body","Nuclear membrane","Lysosome"],a:2},
+{t:"Total body water (TBW) is about what percentage of body weight?",o:["40%","20%","80%","60%"],a:3},
+{t:"Intracellular fluid (ICF) is about what percentage of body weight?",o:["40%","60%","20%","15%"],a:0},
+{t:"Extracellular fluid (ECF) is about what percentage of body weight?",o:["40%","20%","60%","5%"],a:1},
+{t:"Plasma (intravascular fluid) is about what percentage of body weight?",o:["15%","5%","20%","40%"],a:1},
+{t:"Interstitial fluid (ISF) is about what percentage of body weight?",o:["5%","20%","15%","40%"],a:2},
+{t:"Which regulatory system is rapid?",o:["Chemical regulation","Hormonal regulation","Enzymatic regulation","Nervous regulation"],a:3},
+{t:"The slow (chemical) regulatory system is composed of:",o:["Nerves and muscles","Enzymes and hormones","Nerves and hormones","Muscles and enzymes"],a:1},
+{t:"Enzymes are secreted by:",o:["Endocrine glands","Ductless glands","Exocrine (duct) glands","Nerves"],a:2},
+{t:"Hormones are secreted directly into the blood by:",o:["Exocrine (duct) glands","Salivary glands","Endocrine (ductless) glands","Sweat glands"],a:2},
+{t:"The activity of enzymes is affected by:",o:["pH and temperature","Light only","Gravity","Blood color"],a:0},
+{t:"Each enzyme influences:",o:["Only one reaction","All reactions","Any reaction in the cell","Two reactions"],a:0},
+{t:"Which cell function takes nutrients and oxidizes them to drive energy?",o:["Respiration","Excretion","Division","Metabolism"],a:3},
+{t:"In respiration, the cell:",o:["Takes O2 from and gets rid of CO2 into the extracellular fluid","Takes CO2 from the extracellular fluid","Produces glucose","Divides into two cells"],a:0},
+{t:"Which cell function gets rid of the waste products?",o:["Division","Excretion","Metabolism","Respiration"],a:1},
+{t:"Homeostasis means maintaining constant the:",o:["Structure of the nucleus","Cell membrane only","Internal environment (extracellular fluid)","Number of cells"],a:2},
+{t:"The final goal of all body functions is:",o:["Reproduction","Growth","Digestion","Homeostasis"],a:3},
+{t:"Which of the following are cell organelles present in the cytoplasm?",o:["Mitochondria, ribosomes, endoplasmic reticulum, Golgi bodies and lysosomes","Nucleus only","Cell membrane only","Nuclear membrane only"],a:0},
+{t:"Which group has the highest percentage of total body water?",o:["Older adults","Adult males","Adult females","Children"],a:3},
+{t:"The extracellular fluid is subdivided into:",o:["ICF and plasma","ISF and plasma","ISF and ICF","Plasma and lymph only"],a:1},
+{t:"The protoplasm is formed of:",o:["Cell membrane and organelles","Nucleus and nuclear membrane","Nucleus and cytoplasm","Cytoplasm and ribosomes"],a:2},
+{t:"In a 70 kg adult, TBW is approximately:",o:["28 kg","35 kg","42 kg","49 kg"],a:2},
+{t:"In an 80 kg person, the intracellular fluid is approximately:",o:["16 kg","48 kg","24 kg","32 kg"],a:3},
+{t:"In a 60 kg person, the interstitial fluid is approximately:",o:["3 kg","12 kg","9 kg","24 kg"],a:2},
+{t:"Which statement about nervous regulation is correct?",o:["Information is carried along nerves to the effector organ","Information is carried by blood to far organs","It depends on enzymes","It is slower than chemical regulation"],a:0},
+{t:"Physiology is best described as:",o:["Broader than biology","The study of structures only","The same as anatomy","A branch of biology"],a:3},
+{t:"Urine tests, blood tests and EKGs reveal details about:",o:["Bone structure","Ligament images","The body's physiology","Anatomical structures only"],a:2},
+{t:"Muscle contraction following arrival of a nerve impulse along the somatic nerve is an example of:",o:["Chemical regulation","Nervous regulation","Failure of homeostasis","Enzyme action"],a:1}
+];
+/* ===== True / False (15) ===== */
+var TF=[
+{t:"The cell is the smallest unit of the body.",o:["True","False"],a:0},
+{t:"An X-ray shows the physiology of the body.",o:["True","False"],a:1},
+{t:"Extracellular fluid is about 20% of body weight.",o:["True","False"],a:0},
+{t:"Plasma is about 15% of body weight.",o:["True","False"],a:1},
+{t:"Nervous regulation is slower than chemical regulation.",o:["True","False"],a:1},
+{t:"Enzymes are specific; each enzyme influences only one reaction.",o:["True","False"],a:0},
+{t:"Hormones are secreted by exocrine glands through ducts.",o:["True","False"],a:1},
+{t:"Homeostasis is the final goal of all body functions.",o:["True","False"],a:0},
+{t:"An organ is composed of only one type of tissue.",o:["True","False"],a:1},
+{t:"Division means that the cell is able to reproduce.",o:["True","False"],a:0},
+{t:"Total body water is less in females than in males of the same age and weight.",o:["True","False"],a:0},
+{t:"Total body water is more in children than in adults.",o:["True","False"],a:0},
+{t:"Biology is a branch of physiology.",o:["True","False"],a:1},
+{t:"The nuclear membrane separates the nucleus from the cytoplasm.",o:["True","False"],a:0},
+{t:"If homeostasis is unsuccessful, disaster or death may occur.",o:["True","False"],a:0}
+];
+MCQ.forEach(function(q){q.k='mcq'});TF.forEach(function(q){q.k='tf'});
+var $=function(i){return document.getElementById(i)},F='all',Q=[],i=0,S=0,W=[],ans=false,T0,TI;
+function sh(a){a=a.slice();for(var j=a.length-1;j>0;j--){var k=Math.floor(Math.random()*(j+1)),x=a[j];a[j]=a[k];a[k]=x}return a}
+function show(id){['home','qz','rs'].forEach(function(x){$(x).classList.toggle('hide',x!==id)})}
+function start(list){Q=list;i=0;S=0;W=[];T0=Date.now();clearInterval(TI);TI=setInterval(tick,1000);tick();show('qz');render()}
+function tick(){var s=Math.floor((Date.now()-T0)/1000);$('tm').textContent=('0'+Math.floor(s/60)).slice(-2)+':'+('0'+s%60).slice(-2)}
+function render(){var q=Q[i];ans=false;$('cnt').textContent='Q '+(i+1)+' / '+Q.length;$('sc').textContent='Score: '+S;$('pb').style.width=(i/Q.length*100)+'%';
+$('qt').textContent=q.t;$('nx').classList.add('hide');var h='';q.o.forEach(function(o,k){h+='<button class="o" data-k="'+k+'">'+o+'</button>'});$('ops').innerHTML=h}
+$('ops').onclick=function(e){var b=e.target.closest('.o');if(!b||ans)return;ans=true;var k=+b.dataset.k,q=Q[i],bs=$('ops').children;
+for(var j=0;j<bs.length;j++){bs[j].disabled=true;if(j===q.a)bs[j].classList.add('ok')}
+if(k===q.a)S++;else{b.classList.add('no');W.push(q)}
+$('sc').textContent='Score: '+S;$('nx').textContent=i===Q.length-1?'Finish':'Next ›';$('nx').classList.remove('hide')};
+$('nx').onclick=function(){if(i<Q.length-1){i++;render()}else finish()};
+function finish(){clearInterval(TI);$('pb').style.width='100%';var p=Math.round(S/Q.length*100);
+$('pc').textContent=p+'%';$('rg').style.background='conic-gradient(var(--rose) '+p*3.6+'deg,var(--bc) 0)';
+$('msg').textContent=S+' / '+Q.length+' correct · '+$('tm').textContent;$('rw').classList.toggle('hide',!W.length);show('rs')}
+$('flt').onclick=function(e){var b=e.target.closest('.btn');if(!b)return;F=b.dataset.f;[].forEach.call($('flt').children,function(x){x.classList.toggle('on',x===b)})};
+$('go').onclick=function(){start(sh(F==='mcq'?MCQ:F==='tf'?TF:MCQ.concat(TF)))};
+$('rw').onclick=function(){start(sh(W))};
+$('rst').onclick=function(){$('pb').style.width='0';show('home')};
+var tb=$('tb'),th='light';try{th=localStorage.getItem('theme')||'light'}catch(e){}
+function ap(x){th=x;document.documentElement.setAttribute('data-theme',x==='dark'?'dark':'');tb.textContent=x==='dark'?'☀️':'🌙';try{localStorage.setItem('theme',x)}catch(e){}}
+ap(th);tb.onclick=function(){ap(th==='dark'?'light':'dark')};
+</script></body></html>
