@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --accent:       #7c3aed;
+  --accent-light: #8b5cf6;
+  --accent-dark:  #6d28d9;
+  --accent-glow:  rgba(124,58,237,0.2);
+  --bg:      #f8fafc;
+  --bg2:     #eef2f7;
+  --card:    #ffffff;
+  --text:    #1a2332;
+  --text2:   #4a5568;
+  --text3:   #718096;
+  --bc:      rgba(0,0,0,0.07);
+  --success: #16a34a;
+  --danger:  #dc2626;
+  --warn:    #6d28d9;
+  --r:       16px;
+  --tr:      all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="dark"] {
+  --bg:   #0d1117; --bg2: #161b22; --card: #1c2333;
+  --text: #e6edf3; --text2: #b1bac4; --text3: #7d8590;
+  --bc:   rgba(255,255,255,0.08);
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg); color: var(--text);
+  min-height: 100vh; overflow-x: hidden;
+  transition: background .4s, color .4s;
+}
+
+/* PROGRESS TOP */
+#prog-bar {
+  position: fixed; top: 0; left: 0; height: 3px; z-index: 999;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  transition: width .2s;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px; height: 64px;
+  background: rgba(248,250,252,.93); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--bc); transition: var(--tr);
+}
+[data-theme="dark"] nav { background: rgba(13,17,23,.95); }
+
+.nav-back {
+  display: flex; align-items: center; gap: 7px;
+  color: var(--text2); text-decoration: none; font-size: 13px; font-weight: 700;
+  padding: 7px 13px; border-radius: 8px; border: 1px solid var(--bc);
+  background: var(--card); transition: var(--tr);
+}
+.nav-back:hover { color: var(--accent); border-color: var(--accent-glow); transform: translateX(3px); }
+.nav-brand { display: flex; align-items: center; gap: 9px; font-size: 15px; font-weight: 900; color: var(--text); }
+.nav-logo-icon {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 12px; font-weight: 900;
+}
+.nav-right { display: flex; align-items: center; gap: 8px; }
+.shuffle-btn {
+  border: 1px solid var(--bc);
+  background: var(--bg2);
+  color: var(--text);
+  border-radius: 10px;
+  padding: 8px 12px;
+  font-size: 13px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: .2s ease;
+  font-family: inherit;
+}
+.shuffle-btn:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-1px);
+}
+
+.theme-btn {
+  width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--bc);
+  background: var(--card); cursor: pointer; font-size: 15px;
+  display: flex; align-items: center; justify-content: center; transition: var(--tr);
+}
+.theme-btn:hover { border-color: var(--accent); transform: rotate(20deg); }
+
+/* HERO BAND */
+.hero-band {
+  margin-top: 64px;
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent), var(--accent-light));
+  padding: 40px 24px 36px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.hero-band::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 600px 200px at 50% 100%, rgba(255,255,255,.12) 0%, transparent 70%);
+}
+.hero-band-icon {
+  width: 68px; height: 68px; border-radius: 20px;
+  background: rgba(255,255,255,.2); backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 30px; margin: 0 auto 14px; border: 1.5px solid rgba(255,255,255,.35);
+}
+.hero-band h1 { font-size: clamp(20px,4vw,30px); font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero-band p { font-size: 13px; color: rgba(255,255,255,.8); }
+.hero-band-meta {
+  display: flex; justify-content: center; gap: 24px; margin-top: 20px;
+  flex-wrap: wrap;
+}
+.meta-pill {
+  background: rgba(255,255,255,.18); backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,.3); border-radius: 50px;
+  padding: 6px 16px; font-size: 12px; font-weight: 700; color: #fff;
+  display: flex; align-items: center; gap: 6px;
+}
+
+/* EXAM SHELL */
+.shell { max-width: 560px; margin: 0 auto; padding: 24px 20px 80px; }
+
+/* STATS ROW */
+.stats-row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 16px;
+}
+.stat-box {
+  background: var(--card); border: 1px solid var(--bc); border-radius: var(--r);
+  padding: 12px 10px; text-align: center;
+}
+.stat-box .val { font-size: 20px; font-weight: 900; }
+.stat-box .lbl { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.stat-correct { color: var(--success); }
+.stat-wrong   { color: var(--danger); }
+.stat-remain  { color: var(--accent); }
+
+/* PROGRESS STRIP */
+.prog-strip {
+  background: var(--card); border: 1px solid var(--bc); border-radius: var(--r);
+  padding: 14px 16px; margin-bottom: 16px;
+  display: flex; align-items: center; gap: 14px;
+}
+.prog-label { font-size: 13px; font-weight: 700; color: var(--text2); white-space: nowrap; }
+.prog-track { flex: 1; height: 8px; background: var(--bg2); border-radius: 8px; overflow: hidden; }
+.prog-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  border-radius: 8px; transition: width .4s;
+}
+.timer-badge {
+  min-width: 64px; height: 36px; border-radius: 18px;
+  background: var(--bg2); border: 1px solid var(--bc);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 900; color: var(--text);
+  gap: 5px; padding: 0 12px; flex-shrink: 0;
+}
+.timer-badge.warn { color: var(--warn); border-color: rgba(217,119,6,.3); background: rgba(217,119,6,.08); }
+.timer-badge.danger { color: var(--danger); border-color: rgba(220,38,38,.3); background: rgba(220,38,38,.08); animation: pulse .8s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.6} }
+
+/* QUESTION CARD */
+.q-card {
+  background: var(--card); border: 1px solid var(--bc);
+  border-radius: 20px; overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+  transition: box-shadow .3s;
+}
+.q-header {
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  padding: 4px 18px 4px;
+  display: flex; align-items: center; gap: 8px;
+}
+.q-num {
+  background: rgba(255,255,255,.2); border-radius: 8px;
+  padding: 3px 10px; font-size: 11px; font-weight: 700; color: #fff;
+}
+.q-text {
+  padding: 22px 18px 14px; font-size: 15px; font-weight: 700; color: var(--text);
+  line-height: 1.65; border-bottom: 1px solid var(--bc);
+  text-align: left; direction: ltr;
+}
+.options { padding: 14px 18px 18px; display: flex; flex-direction: column; gap: 10px; }
+
+/* OPTION */
+.opt {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px; border-radius: 12px;
+  border: 1.5px solid var(--bc); background: var(--bg);
+  cursor: pointer; font-size: 14px; font-weight: 600; color: var(--text);
+  transition: var(--tr); user-select: none;
+  direction: ltr; text-align: left;
+}
+.opt:hover:not(.disabled) {
+  border-color: var(--accent); background: var(--accent-glow);
+  transform: translateX(3px);
+}
+.opt-letter {
+  width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+  background: var(--bg2); border: 1px solid var(--bc);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 900; color: var(--text3);
+  transition: var(--tr);
+}
+.opt.correct {
+  border-color: var(--success); background: rgba(22,163,74,.08);
+}
+.opt.correct .opt-letter {
+  background: var(--success); color: #fff; border-color: var(--success);
+}
+.opt.wrong {
+  border-color: var(--danger); background: rgba(220,38,38,.07);
+}
+.opt.wrong .opt-letter {
+  background: var(--danger); color: #fff; border-color: var(--danger);
+}
+.opt.disabled { pointer-events: none; }
+
+/* FEEDBACK */
+.feedback-bar {
+  margin: 14px 18px; padding: 12px 16px; border-radius: 12px;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px; font-weight: 700;
+  animation: popIn .4s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes popIn { from{transform:scale(.8);opacity:0} to{transform:scale(1);opacity:1} }
+.feedback-bar.ok { background: rgba(22,163,74,.1); color: var(--success); border: 1px solid rgba(22,163,74,.25); }
+.feedback-bar.no { background: rgba(220,38,38,.08); color: var(--danger); border: 1px solid rgba(220,38,38,.2); }
+.feedback-icon { font-size: 20px; }
+
+/* EXPLANATION */
+.explanation {
+  margin: 0 18px 14px; padding: 12px 14px;
+  background: rgba(var(--accent-rgb),.06);
+  border-radius: 10px; border-right: 3px solid var(--accent);
+  font-size: 13px; color: var(--text2); line-height: 1.6;
+  display: none;
+}
+
+/* NAV BTNS */
+.nav-btns { padding: 4px 18px 18px; display: flex; gap: 10px; }
+.btn {
+  flex: 1; padding: 13px; border: none; border-radius: 12px;
+  font-size: 14px; font-weight: 900; cursor: pointer;
+  font-family: 'Outfit', sans-serif; transition: var(--tr);
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+}
+.btn-next {
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  color: #fff; box-shadow: 0 4px 14px var(--accent-glow);
+}
+.btn-next:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
+.btn-skip {
+  background: var(--bg2); color: var(--text2); border: 1px solid var(--bc); flex: 0 0 auto; padding: 13px 18px;
+}
+.btn-skip:hover { border-color: var(--warn); color: var(--warn); }
+
+/* ===== RESULTS ===== */
+.result-hero {
+  text-align: center; padding: 36px 20px 28px;
+  background: var(--card); border-radius: 20px;
+  border: 1px solid var(--bc); margin-bottom: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+}
+.score-ring {
+  width: 110px; height: 110px; border-radius: 50%; margin: 0 auto 18px;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; border: 5px solid var(--bg2);
+  position: relative;
+}
+.score-ring svg { position: absolute; inset: -5px; width: calc(100% + 10px); height: calc(100% + 10px); transform: rotate(-90deg); }
+.score-ring circle { fill: none; stroke-width: 5; stroke-linecap: round; }
+.ring-bg { stroke: var(--bg2); }
+.ring-fill { stroke: var(--accent); transition: stroke-dashoffset 1s ease; }
+.score-num { font-size: 28px; font-weight: 900; color: var(--text); }
+.score-pct { font-size: 12px; color: var(--text3); }
+.result-grade { font-size: 22px; font-weight: 900; margin-bottom: 6px; }
+.result-sub { font-size: 14px; color: var(--text2); }
+.result-stats {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 20px;
+}
+.rs { background: var(--bg2); border-radius: 10px; padding: 12px 8px; text-align: center; }
+.rs .n { font-size: 20px; font-weight: 900; }
+.rs .l { font-size: 11px; color: var(--text3); }
+
+/* REPORT ITEMS */
+.report-item {
+  background: var(--card); border: 1px solid var(--bc); border-radius: 14px;
+  padding: 16px; margin-bottom: 10px; border-right: 4px solid var(--bc);
+}
+.report-item.ok { border-right-color: var(--success); }
+.report-item.no { border-right-color: var(--danger); }
+.report-item .ri-q { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+.report-item .ri-row {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; margin-top: 5px; color: var(--text2);
+}
+.ri-badge {
+  padding: 2px 8px; border-radius: 6px; font-weight: 700; font-size: 11px; flex-shrink: 0;
+}
+.ri-yours { background: rgba(220,38,38,.1); color: var(--danger); }
+.ri-right { background: rgba(22,163,74,.1); color: var(--success); }
+
+.result-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+.btn-retry { background: linear-gradient(135deg, var(--accent-dark), var(--accent)); color: #fff; }
+.btn-retry:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
+.btn-home { background: var(--bg2); color: var(--text); border: 1px solid var(--bc); }
+.btn-home:hover { border-color: var(--accent); color: var(--accent); }
+
+/* FOOTER */
+footer {
+  background: var(--bg2); border-top: 1px solid var(--bc);
+  padding: 22px 24px; display: flex; align-items: center;
+  justify-content: space-between; flex-wrap: wrap; gap: 10px;
+}
+.footer-brand { font-size: 14px; font-weight: 700; }
+.footer-brand span { color: var(--accent); }
+.footer-tg { display: flex; align-items: center; gap: 5px; text-decoration: none; color: #229ED9; font-size: 12px; font-weight: 600; }
+
+@media (max-width: 480px) {
+  nav { padding: 0 14px; }
+  .shell { padding: 16px 14px 60px; }
+  .nav-brand span { display: none; }
+  .hero-band { padding: 30px 16px 28px; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog-bar" style="width:0%"></div>
+
+<nav>
+  <a href="https://gaith-team.github.io/exam/psychiatric/index.html" class="nav-back"><i class="fa-solid fa-arrow-right"></i> رجوع</a>
+  <div class="nav-brand">
+    <div class="nav-logo-icon">GT</div>
+    <span>GHAITH TEAM</span>
+  </div>
+  <div class="nav-right">
+    <button class="shuffle-btn" onclick="randomizeQuestions()" title="ترتيب الأسئلة عشوائياً">🔀 عشوائي</button>
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<div class="hero-band">
+  <div class="hero-band-icon">🧠</div>
+  <h1>شامل 3</h1>
+  <p>Psychiatric Nursing </p>
+  <div class="hero-band-meta">
+    <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">-- سؤال</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-clock"></i> 40 Min</div>
+    <div class="meta-pill"><i class="fa-solid fa-shuffle"></i> Shuffled</div>
+  </div>
+</div>
+
+<div class="shell">
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="val stat-correct" id="sCorrect">0</div>
+      <div class="lbl">✔ صحيح</div>
+    </div>
+    <div class="stat-box">
+      <div class="val stat-wrong" id="sWrong">0</div>
+      <div class="lbl">✖ خطأ</div>
+    </div>
+    <div class="stat-box">
+      <div class="val stat-remain" id="sRemain">--%</div>
+      <div class="lbl">⏳ متبقي</div>
+    </div>
+  </div>
+
+  <!-- PROGRESS STRIP -->
+  <div class="prog-strip">
+    <div class="prog-label" id="progLabel">سؤال ١</div>
+    <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+    <div class="timer-badge" id="timerBadge"><i class="fa-regular fa-clock"></i> <span id="timerTxt">40:00</span></div>
+  </div>
+
+  <!-- APP -->
+  <div id="app"></div>
+</div>
+
+<footer>
+  <div class="footer-brand">GHAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg">
+    <i class="fa-brands fa-telegram"></i> @nursing2bu
+  </a>
+</footer>
+
+<script>
+const QUESTIONS = [
+{t:"Which term describes the outward, observable manifestation of a person's internal emotional state?",o:["Mood", "Insight", "Judgment", "Affect"],a:3},
+{t:"Bipolar disorder was previously known as:",o:["Depressive neurosis", "Cyclic psychosis", "Reactive depression", "Manic depression"],a:3},
+{t:"The primary drugs used for bipolar disorder are:",o:["Beta-blockers", "Hypnotics", "Mood stabilizers", "Stimulants"],a:2},
+{t:"Which structure of the personality has the greatest contact with reality?",o:["Id", "Superego", "Ego", "Preconscious"],a:2},
+{t:"The four levels of anxiety are:",o:["Mild, moderate, severe and chronic", "Low, middle, high and extreme", "Normal, mild, acute and panic", "Mild, moderate, severe and panic"],a:3},
+{t:"Ideally, community mental health services are provided through a:",o:["Community mental health center (C.M.H.C)", "Long-stay mental hospital", "School clinic only", "Private pharmacy"],a:0},
+{t:"Which of the following is classified as a depressive disorder?",o:["Bipolar I", "Bipolar II", "Dysthymia", "Cyclothymic disorder"],a:2},
+{t:"Serotonin dysfunction in depression is mainly linked to disturbances in:",o:["Memory and orientation", "Muscle tone and coordination", "Vision and hearing", "Sleep, appetite and libido"],a:3},
+{t:"Depression accompanied by delusions and hallucinations is called:",o:["Depression induced psychotic symptoms", "Pseudodementia", "Dysthymia", "Mixed episode"],a:0},
+{t:"Postpartum depression may emerge any time during the first:",o:["Week after childbirth", "Month after childbirth", "Year after childbirth", "Three years after childbirth"],a:2},
+{t:"The most common thought-process symptom in depressed patients is:",o:["Flight of ideas", "Generalized psychomotor retardation", "Pressured speech", "Grandiose delusions"],a:1},
+{t:"A higher-than-average incidence of bipolar I disorder is found among:",o:["Lower socioeconomic groups", "Upper socioeconomic groups", "Rural unemployed populations", "Children under 5 years"],a:1},
+{t:"In Freud's psychoanalytic view, mania is:",o:["A learned behavior pattern", "A result of low serotonin", "The mirror image of depression, a denial of depression", "An organic brain syndrome"],a:2},
+{t:"The key difference between mania and hypomania is that in hypomania:",o:["Hospitalization is always required", "Delusions of grandeur are present", "Delusions are never present and hospitalization is not indicated", "Functioning is markedly impaired"],a:2},
+{t:"Which nursing intervention is appropriate for a manic client with delusions?",o:["Focus on the feeling and meaning of the delusion, not its content", "Argue logically against the delusion", "Use touch to reassure the client", "Joke and laugh with the client"],a:0},
+{t:"Consistency in psychiatric nursing must operate in all of the following EXCEPT:",o:["The personal opinions of each nurse", "The attitude of the staff", "The ward routine", "Defining the limitations placed on the patient"],a:0},
+{t:"Objectivity in psychiatric nursing means:",o:["Coldness and indifference", "Absence of feelings", "Evaluating the patient's behavior without mixing in one's own feelings, opinions or judgment", "Treating all patients exactly the same"],a:2},
+{t:"Substitution and sublimation belong to the pattern of:",o:["Moving against", "Moving forward", "Moving away", "Moving back"],a:1},
+{t:"Giving a false but logical reason for one's behavior to excuse failure and retain self-respect is:",o:["Projection", "Compensation", "Rationalization", "Conversion"],a:2},
+{t:"In DSM-5, generalized anxiety disorder requires excessive anxiety on most days for at least:",o:["2 weeks", "6 months", "1 month", "2 years"],a:1},
+{t:"Fear of closed places is called:",o:["Claustrophobia", "Acrophobia", "Zoophobia", "Agoraphobia"],a:0},
+{t:"Benzodiazepines such as Xanax and Klonopin:",o:["Work quickly, but tolerance can build up", "Work slowly over several weeks", "Cure anxiety disorders", "Are not habit forming"],a:0},
+{t:"Non-REM sleep consists of how many phases?",o:["Two", "Four", "Three", "Five"],a:2},
+{t:"Excessive sleepiness with prolonged night sleep or daytime sleep episodes nearly every day characterizes:",o:["Insomnia disorder", "Hypersomnolence disorder", "Nightmare disorder", "Restless legs syndrome"],a:1},
+{t:"Community mental health emphasizes care provided in:",o:["Community settings rather than institutional environments", "Long-term psychiatric institutions", "Prisons", "Private hospitals only"],a:0},
+{t:"The emergency crisis intervention center provides care:",o:["During working hours only", "24 hours a day", "On weekends only", "By appointment only"],a:1},
+{t:"In the endocrine hypothesis, hyperactivity of the hypothalamic-pituitary-adrenal axis leads to:",o:["Increased TSH release", "Increased cortisol secretion", "Increased growth hormone release", "Increased nocturnal melatonin"],a:1},
+{t:"Delusions in depression are typically mood congruent, with themes of:",o:["Guilt, poverty, nihilism and deserved persecution", "Grandeur, wealth and power", "Control by external forces", "Erotic attachment"],a:0},
+{t:"Which neurotransmitter may have low plasma levels during both depressive and manic phases?",o:["Dopamine", "GABA", "Serotonin", "Norepinephrine"],a:1},
+{t:"Interpersonal and social rhythm therapy focuses on:",o:["Re-living childhood conflicts", "Exposure to feared stimuli", "Restricting sleep time", "Stabilizing daily routines and sleep/wake cycles"],a:3},
+{t:"A student who is weak in school but excellent in sports is showing:",o:["Compensation", "Sublimation", "Substitution", "Identification"],a:0},
+{t:"In generalized anxiety disorder, the worry is associated with at least ______ of the listed symptoms.",o:["One", "Two", "Five", "Three"],a:3},
+{t:"The HARD mnemonic for PTSD stands for:",o:["Hallucinations, Anxiety, Rituals, Depression", "Hyperarousal, Avoidance, Re-experiencing, Distress", "Hypervigilance, Anger, Regression, Denial", "Helplessness, Apathy, Rumination, Dissociation"],a:1},
+{t:"Therapy in which the individual is 'flooded' with stimuli related to the phobic object until anxiety is no longer experienced is:",o:["Systematic desensitization", "Thought stopping", "Relaxation training", "Implosion therapy"],a:3},
+{t:"Most patients with narcolepsy have a deficit of which neurotransmitter?",o:["Serotonin", "Dopamine", "GABA", "Hypocretin"],a:3},
+{t:"Nightmares arise during:",o:["Stage 3 deep sleep in the first third of the night", "REM sleep, usually in the second half of the sleep episode", "Stage 1 sleep only", "Daytime naps only"],a:1},
+{t:"Night hospital patients are those who:",o:["Cannot leave the hospital", "Are admitted for 24-hour crisis care", "Are gainfully employed in the community and come in the evening to sleep and relax", "Live in foster homes"],a:2},
+{t:"Telling and advising patients are not effective in changing their behavior.",o:["True", "False"],a:0},
+{t:"Community mental health aims to increase the hospitalization of people with mental illness.",o:["True", "False"],a:1},
+{t:"Postpartum depression usually lasts only a few days after delivery.",o:["True", "False"],a:1},
+{t:"Delusions may be present in hypomanic episodes.",o:["True", "False"],a:1},
+{t:"Medications cannot cure an anxiety disorder, but they can improve symptoms.",o:["True", "False"],a:0},
+{t:"Sleepwalking usually resolves on its own, and the environment should be made safe.",o:["True", "False"],a:0},
+{t:"Repressed material may be recalled as trust develops and anxiety is reduced in the nurse-patient relationship.",o:["True", "False"],a:0},
+{t:"Outpatient psychiatric clinics accept patients only by self-referral, without any screening.",o:["True", "False"],a:1},
+{t:"A patient suddenly develops palpitations, chest tightness, sweating and an intense fear of dying that peak within 10 minutes without warning. This is most likely:",o:["A manic episode", "A narcolepsy attack", "Conversion", "A panic attack"],a:3},
+{t:"A manic client tells the nurse, 'I am the president's secret adviser.' The best nursing response is to:",o:["Focus on the feeling behind the statement and redirect to real topics such as the weather or activities", "Argue and prove that he is wrong", "Laugh along with him", "Agree and ask for more details"],a:0},
+{t:"After failing the board exam, a graduate goes to her room, sleeps in a fetal position and sucks her thumb. Which defense mechanism is this?",o:["Regression", "Denial", "Undoing", "Compensation"],a:0},
+{t:"An 8-year-old child walks around the house at night and does not remember it in the morning. What is the priority nursing action?",o:["Wake him forcefully every time", "Make the environment safe", "Give benzodiazepines routinely", "Punish him to stop the behavior"],a:1},
+{t:"A depressed client who said 'Life just isn't worth living' now shows improved energy after one week of treatment. The nurse should:",o:["Continue daily evaluation of suicidal potential because the risk may increase as energy improves", "Reduce observation because he is improving", "Stop the close watch protocol", "Assume the risk has passed"],a:0},
+{t:"A nurse becomes irritated with a demanding patient and insists that he must treat her politely. This shows a lack of:",o:["Consistency", "Reassurance", "Permissiveness", "Objectivity"],a:3},
+{t:"A client refuses to leave home alone and avoids eating in public. If he chooses to eliminate the fear gradually, which technique is used?",o:["Implosion therapy", "Systematic desensitization", "Thought stopping", "Sleep restriction"],a:1},
+{t:"A patient is stable in the hospital but relapses at home, and vocational rehabilitation counselors visit him periodically. Which service suits him best?",o:["Day treatment", "Outpatient clinic only", "Halfway house", "Emergency room"],a:2},
+{t:"Community mental health centers use a ______ team of professionals.",o:["single-discipline", "hospital-only", "volunteer", "multidisciplinary"],a:3},
+{t:"Lithium and anticonvulsants are classified as mood ______.",o:["enhancers", "stabilizers", "blockers", "suppressors"],a:1},
+{t:"______ therapy focuses on dealing with the fears behind the anxiety disorder by engaging with avoided situations.",o:["Interpersonal", "Family-focused", "Exposure", "Stimulus control"],a:2},
+{t:"A laboratory sleep study that evaluates oxygen levels, body movements and brain waves is called ______.",o:["electromyography", "echocardiography", "spirometry", "polysomnography"],a:3},
+{t:"Bipolar disorder affects an average of about ______% of the general population.",o:["1", "5", "10", "20"],a:0}
+];
+
+/* ============ ENGINE ============ */
+let questions, i, correct, wrong, answers, wrongSet, answered;
+let totalTime = 40*60, timeLeft, timerInterval;
+const LETTERS = ['A','B','C','D','E','F'];
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function randomizeQuestions() {
+  if (!confirm('🔀 هل تريد بدء الامتحان من جديد بترتيب أسئلة عشوائي؟')) return;
+  init(QUESTIONS);
+}
+
+function init(pool) {
+  questions = shuffle([...pool]);
+  i = 0; correct = 0; wrong = 0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = []; answered = 0;
+  timeLeft = totalTime;
+  document.getElementById('totalBadge').textContent = questions.length + ' سؤال';
+  startTimer();
+  render();
+}
+
+/* TIMER */
+function startTimer() {
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    const m = Math.floor(timeLeft / 60), s = timeLeft % 60;
+    document.getElementById('timerTxt').textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
+    const badge = document.getElementById('timerBadge');
+    if (timeLeft <= 120) { badge.className = 'timer-badge danger'; }
+    else if (timeLeft <= 300) { badge.className = 'timer-badge warn'; }
+    if (timeLeft <= 0) { clearInterval(timerInterval); finish(); }
+  }, 1000);
+}
+
+/* TOP UI */
+function updateTop() {
+  const total = questions.length;
+  document.getElementById('sCorrect').textContent = correct;
+  document.getElementById('sWrong').textContent = wrong;
+  document.getElementById('sRemain').textContent = Math.round(((total - answered) / total) * 100) + '%';
+  document.getElementById('progLabel').textContent = 'سؤال ' + (i + 1) + ' / ' + total;
+  document.getElementById('progFill').style.width = ((i + 1) / total * 100) + '%';
+  document.getElementById('prog-bar').style.width = ((i + 1) / total * 100) + '%';
+}
+
+/* RENDER QUESTION */
+function render() {
+  updateTop();
+  const q = questions[i];
+  // Randomize answer choices while keeping the original correct-answer index
+  const order = shuffle(q.o.map((_, idx) => idx));
+  q._displayOrder = order;
+  document.getElementById('app').innerHTML = `
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">سؤال ${i + 1} / ${questions.length}</div>
+      </div>
+      <div class="q-text">${q.t}</div>
+      <div class="options">
+        ${order.map((originalIdx, displayIdx) => `
+          <div class="opt" id="opt${originalIdx}" onclick="choose(${originalIdx})">
+            <div class="opt-letter">${LETTERS[displayIdx] || displayIdx + 1}</div>
+            <div class="opt-text">${q.o[originalIdx]}</div>
+          </div>
+        `).join('')}
+      </div>
+      <div class="nav-btns">
+        <button class="btn btn-skip" onclick="skip()"><i class="fa-solid fa-forward"></i> تخطي</button>
+      </div>
+    </div>`;
+}
+
+/* CHOOSE */
+function choose(v) {
+  if (answers[i] !== null) return;
+  answers[i] = v;
+  answered++;
+  const q = questions[i];
+  const ok = v === q.a;
+  ok ? correct++ : wrong++;
+  updateTop();
+
+  q.o.forEach((_, idx) => {
+    const el = document.getElementById('opt' + idx);
+    el.classList.add('disabled');
+    if (idx === q.a) el.classList.add('correct');
+    else if (idx === v) el.classList.add('wrong');
+  });
+
+  const fb = document.createElement('div');
+  fb.className = 'feedback-bar ' + (ok ? 'ok' : 'no');
+  fb.innerHTML = ok
+    ? `<span class="feedback-icon">🥳</span> <span>ما شاء الله عليك 🎉</span>`
+    : `<span class="feedback-icon">😢</span> <span>ركز ونحاول فيها تاني</span>`;
+
+  const card = document.querySelector('.q-card');
+  card.querySelector('.options').after(fb);
+  if (q.exp) {
+    const exp = document.createElement('div');
+    exp.className = 'explanation';
+    exp.style.display = 'block';
+    exp.innerHTML = '<b>💬 شرح:</b> ' + q.exp;
+    fb.after(exp);
+  }
+
+  const navBtns = card.querySelector('.nav-btns');
+  navBtns.innerHTML = `<button class="btn btn-next" onclick="next()">
+    ${i < questions.length - 1 ? '<i class="fa-solid fa-arrow-left"></i> السؤال التالي' : '<i class="fa-solid fa-flag-checkered"></i> إنهاء الامتحان'}
+  </button>`;
+}
+
+/* SKIP */
+function skip() {
+  if (answers[i] === null) { answers[i] = -1; answered++; wrongSet.push(questions[i]); wrong++; updateTop(); }
+  next();
+}
+
+/* NEXT */
+function next() {
+  if (i < questions.length - 1) { i++; render(); window.scrollTo({top: 0, behavior: 'smooth'}); }
+  else finish();
+}
+
+/* FINISH */
+function finish() {
+  clearInterval(timerInterval);
+  const total = questions.length;
+  const score = Math.round((correct / total) * 100);
+
+  questions.forEach((q, idx) => {
+    if (answers[idx] !== q.a) wrongSet.push({...q, myAns: answers[idx]});
+  });
+  wrongSet = [...new Map(wrongSet.map(q => [q.t, q])).values()];
+
+  let grade, gradeColor;
+  if (score >= 90) { grade = '🥇 ممتاز'; gradeColor = 'var(--success)'; }
+  else if (score >= 75) { grade = '🥈 جيد جداً'; gradeColor = 'var(--accent)'; }
+  else if (score >= 60) { grade = '🥉 جيد'; gradeColor = 'var(--warn)'; }
+  else { grade = '📚 راجع تاني'; gradeColor = 'var(--danger)'; }
+
+  const circ = 2 * Math.PI * 45;
+  const offset = circ - (score / 100) * circ;
+
+  const reportHTML = questions.map((q, idx) => {
+    const ok = answers[idx] === q.a;
+    return `<div class="report-item ${ok ? 'ok' : 'no'}">
+      <div class="ri-q">${ok ? '✅' : '❌'} ${q.t}</div>
+      ${!ok ? `
+        <div class="ri-row"><span class="ri-badge ri-yours">إجابتك</span> ${answers[idx] >= 0 ? q.o[answers[idx]] : 'تم التخطي'}</div>
+        <div class="ri-row"><span class="ri-badge ri-right">الصحيح</span> ${q.o[q.a]}</div>
+      ` : ''}
+    </div>`;
+  }).join('');
+
+  document.getElementById('prog-bar').style.width = '100%';
+  document.getElementById('app').innerHTML = `
+    <div class="result-hero">
+      <div class="score-ring">
+        <svg viewBox="0 0 110 110">
+          <circle class="ring-bg" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="0"/>
+          <circle class="ring-fill" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="${circ}"
+            style="stroke:${gradeColor}" id="ringFill"/>
+        </svg>
+        <div class="score-num">${score}</div>
+        <div class="score-pct">%</div>
+      </div>
+      <div class="result-grade" style="color:${gradeColor}">${grade}</div>
+      <div class="result-sub">أجبت على ${answered} من ${total} سؤال</div>
+      <div class="result-stats">
+        <div class="rs"><div class="n" style="color:var(--success)">${correct}</div><div class="l">صحيح</div></div>
+        <div class="rs"><div class="n" style="color:var(--danger)">${wrong}</div><div class="l">خطأ</div></div>
+        <div class="rs"><div class="n" style="color:var(--accent)">${total - answered < 0 ? 0 : total - answered}</div><div class="l">تخطي</div></div>
+      </div>
+    </div>
+
+    <div class="result-actions">
+      ${wrongSet.length ? `<button class="btn btn-retry" onclick="retryWrong()"><i class="fa-solid fa-rotate-right"></i> إعادة الخطأ (${wrongSet.length})
+
+</button>` : ''}
+      <button class="btn btn-home" onclick="init(QUESTIONS)"><i class="fa-solid fa-shuffle"></i> امتحان جديد عشوائي 🔀</button>
+      <a href="https://gaith-team.github.io/exam/psychiatric/index.html" class="btn btn-home" style="text-decoration:none;"><i class="fa-solid fa-house"></i> 
+
+رجوع للمادة</a>
+    </div>
+
+    <div style="margin-top:28px">
+      <div style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text2)">📋 تقرير مفصّل</div>
+      ${reportHTML}
+    </div>`;
+
+  setTimeout(() => { document.getElementById('ringFill').style.strokeDashoffset = offset; }, 100);
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+/* RETRY WRONG */
+function retryWrong() {
+  const pool = [...wrongSet];
+  questions = shuffle(pool); i = 0; correct = 0; wrong = 0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = []; answered = 0; timeLeft = totalTime;
+  startTimer(); render();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+/* THEME */
+const themeBtn = document.getElementById('themeBtn');
+let theme = localStorage.getItem('theme') || 'light';
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', t);
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+
+/* START */
+init(QUESTIONS);
+</script>
+</body>
+</html>
