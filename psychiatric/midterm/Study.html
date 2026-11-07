@@ -145,9 +145,9 @@ S.forEach((s,n)=>{
  (s.tb||[]).forEach(([a,hd,r])=>h+=`<h3>🔍 بيقولك غيث فرق بين ${a}</h3><div class="tw"><table><tr>${hd.map(x=>`<th>${x}</th>`).join("")}</tr>${r.map(x=>`<tr>${x.map(y=>`<td>${y}</td>`).join("")}</tr>`).join("")}</table></div>`);
  if(s.fc)h+=`<h3>🃏 اضغط على الكارت</h3><div class="fcs">${s.fc.map(f=>`<div class="fc"><div class="fi"><div class="fa">${f[0]}</div><div class="fb">${f[1]}</div></div></div>`).join("")}</div>`;
  if(s.tr)h+=`<h3>🎯 ركز مع غيث</h3>`+s.tr.map(x=>`<div class="tr">${x}</div>`).join("");
- h+=`<div class="mq"><h3>🧠 اختبر نفسك</h3>${MQ[n].map((x,i)=>qh(x,i+1)).join("")}</div>`;
+ h+=`<div class="mq"><h3>🧠 تعال نحل يا رفيق</h3>${MQ[n].map((x,i)=>qh(x,i+1)).join("")}</div>`;
  h+=`<button class="dn">✔ خلصت المراجعة</button></section>`;m.insertAdjacentHTML("beforeend",h)});
-m.insertAdjacentHTML("beforeend",`<section id="quiz" style="--c:#7c3aed"><h2><span class="ic">🧠</span>اختبر نفسك</h2>${Q.map((x,i)=>qh(x,i+1)).join("")}<div id="sc">النتيجة: 0 / ${Q.length}</div></section>`);
+m.insertAdjacentHTML("beforeend",`<section id="quiz" style="--c:#7c3aed"><h2><span class="ic">🧠</span>تعال نحل يا رفيق</h2>${Q.map((x,i)=>qh(x,i+1)).join("")}<div id="sc">النتيجة: 0 / ${Q.length}</div></section>`);
 document.querySelectorAll(".fc").forEach(c=>c.onclick=()=>c.classList.toggle("f"));
 document.querySelectorAll(".dn").forEach(b=>b.onclick=()=>{const on=b.classList.toggle("ok");b.textContent=on?"✅ تمت المراجعة":"✔ خلصت المراجعة";done+=on?1:-1;$("#bar").style.width=done/S.length*100+"%";$("#pg").textContent=`تم مراجعة ${done} من ${S.length}`+(done==S.length?" 🎉":"")});
 let sc=0;document.querySelectorAll(".q").forEach(qq=>qq.querySelectorAll(".o").forEach(b=>b.onclick=()=>{const k=+qq.dataset.k,ok=+b.dataset.j==k;qq.querySelectorAll(".o").forEach(o=>{o.disabled=true;if(+o.dataset.j==k)o.classList.add("r")});if(!ok)b.classList.add("w");else if(qq.closest("#quiz")){sc++;$("#sc").textContent=`النتيجة: ${sc} / ${Q.length}`+(sc==Q.length?" 🏆":"")}qq.querySelector(".ex").style.display="block"}));
