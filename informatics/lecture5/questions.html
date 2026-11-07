@@ -10,7 +10,6 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <style>
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-/* Palette: monitor navy (base) · signal cyan (tech) · clinical mint (correct) · violet (e-learning) · amber (alerts) */
 :root {
   --accent:#0891b2; --accent-rgb:8,145,178; --accent-glow:rgba(8,145,178,0.22);
   --c2:#10b981; --c3:#f59e0b; --c4:#6366f1;
@@ -41,8 +40,6 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
 .nav-right { display:flex; align-items:center; gap:8px; }
 .theme-btn { width:38px; height:38px; border-radius:50%; border:1px solid var(--bc); background:var(--card); cursor:pointer; font-size:15px; display:flex; align-items:center; justify-content:center; transition:var(--tr); }
 .theme-btn:hover { border-color:var(--c3); transform:rotate(20deg); }
-
-/* Hero: a patient monitor. The ECG trace runs into a network graph. */
 .hero-band { margin-top:64px; background:var(--grad); padding:38px 24px 64px; text-align:center; position:relative; overflow:hidden; }
 .hero-band::before { content:''; position:absolute; inset:0;
   background:linear-gradient(rgba(34,211,238,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(34,211,238,.09) 1px,transparent 1px),radial-gradient(ellipse 420px 200px at 85% 0%,rgba(99,102,241,.35) 0%,transparent 70%);
@@ -61,7 +58,6 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
 .hero-band-meta { display:flex; justify-content:center; gap:12px; margin-top:20px; flex-wrap:wrap; }
 .meta-pill { background:rgba(7,18,38,.55); border:1px solid rgba(34,211,238,.4); border-radius:6px; padding:6px 14px; font-size:12px; font-weight:600; color:#e6fbff; display:flex; align-items:center; gap:7px; }
 .meta-pill i { color:#22d3ee; }
-
 .shell { max-width:560px; margin:0 auto; padding:24px 20px 80px; }
 .stats-row { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:16px; }
 .stat-box { background:var(--card); border:1px solid var(--bc); border-radius:var(--r); padding:12px 10px; text-align:center; }
@@ -79,8 +75,6 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
 .timer-badge.warn { color:#fbbf24; border-color:rgba(251,191,36,.5); }
 .timer-badge.danger { color:#fb7185; border-color:rgba(251,113,133,.6); animation:pulse .8s infinite; }
 @keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.55} }
-
-/* Question card is an app window */
 .q-card { background:var(--card); border:1px solid var(--bc); border-radius:12px; overflow:hidden; box-shadow:0 8px 28px rgba(7,18,38,.12); }
 .q-header { background:var(--ink); padding:9px 16px; display:flex; align-items:center; gap:12px; border-bottom:2px solid var(--accent); direction:ltr; }
 .q-header .win-dots { display:flex; gap:6px; }
@@ -117,7 +111,6 @@ nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-i
 .btn-next:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(8,145,178,.4); }
 .btn-skip { background:var(--bg2); color:var(--text2); border:1px solid var(--bc); flex:0 0 auto; padding:13px 18px; }
 .btn-skip:hover { border-color:var(--c3); color:var(--warn); }
-
 .result-hero { text-align:center; padding:36px 20px 28px; background:var(--card); border-radius:12px; border:1px solid var(--bc); margin-bottom:20px; box-shadow:0 8px 28px rgba(7,18,38,.12); border-top:4px solid var(--accent); }
 .score-ring { width:110px; height:110px; border-radius:50%; margin:0 auto 18px; display:flex; align-items:center; justify-content:center; flex-direction:column; border:5px solid var(--bg2); position:relative; }
 .score-ring svg { position:absolute; inset:-5px; width:calc(100% + 10px); height:calc(100% + 10px); transform:rotate(-90deg); }
@@ -169,7 +162,7 @@ footer { background:var(--ink); border-top:2px solid var(--accent); padding:22px
     </g>
   </svg>
   <div class="hero-band-icon">💻</div>
-  <h1> Medical Record</h1>
+  <h1>Electronic Health Record</h1>
   <p>Nursing Informatics &amp; Educational Technology</p>
   <div class="hero-band-meta">
     <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">-- سؤال</span></div>
@@ -196,57 +189,56 @@ footer { background:var(--ink); border-top:2px solid var(--accent); padding:22px
 </footer>
 <script>
 const QUESTIONS = [
-
-{t:"A Medical Record is also known as:", o:["Billing Sheet","Health Record","Staff Roster","Pharmacy List"], a:1},
-{t:"Which of the following is NOT a purpose of the medical record?", o:["Recording facts, findings, and observations about health history","Documenting patient care and contributing to high quality of care","Serving as a legal document to confirm the care provided","Advertising the hospital's services to the public"], a:3},
-{t:"Which criterion of effective documentation requires that each individual medical record MUST be correct?", o:["Accuracy","Relevance","Timeliness","Confidentiality"], a:0},
-{t:"Which criterion means that medical records should contain only information related to the patient's healthcare?", o:["Accuracy","Completeness","Relevance","Timeliness"], a:2},
-{t:"Not releasing medical record information without the patient's consent represents which criterion?", o:["Timeliness","Confidentiality","Completeness","Accuracy"], a:1},
-{t:"The History and Physical must be completed and signed within:", o:["24 hours of admission","6 hours of admission","72 hours of admission","1 week of admission"], a:0},
-{t:"A Surgery Post-Operative Note must be written:", o:["Within one week","At the time of discharge","The next morning","Immediately following the surgery"], a:3},
-{t:"Which component includes last name, first name, gender, marital status, address, and emergency contact?", o:["Medical History","Consent Form","Patient Information Form","Discharge Summary"], a:2},
-{t:"A current head-to-toe assessment of the patient's physical condition is recorded in the:", o:["Medical History","Physical Examination","Pathology Report","Consultation Report"], a:1},
-{t:"Which record contains the prescribed care, medications, tests, and treatments for a given patient?", o:["Physician's Orders","Nurse's Notes","Operative Report","Pathology Report"], a:0},
-{t:"Nurse's Notes include vital signs, particularly:", o:["Weight, height, and BMI","Blood glucose and oxygen saturation only","Temperature, pulse, respiration, and blood pressure","ECG and EEG readings"], a:2},
-{t:"Documentation from the pathologist about samples such as bone marrow, blood, or tissue is the:", o:["Operative Report","Anesthesiology Report","Consultation Report","Pathology Report"], a:3},
-{t:"Documentation given by specialists whom the physician has asked to evaluate the patient is called:", o:["Physician's Progress Notes","Consultation Reports","Nurse's Notes","Informed Consent Form"], a:1},
-{t:"Which report gives a detailed account of anesthesia during surgery, including drugs used, dose, and time given?", o:["Anesthesiology Report","Operative Report","Discharge Summary","Pathology Report"], a:0},
-{t:"Which report is written by the surgeon and details the pre-operative and post-operative diagnosis and the surgical procedure?", o:["Anesthesiology Report","Pathology Report","Operative Report","Physician's Orders"], a:2},
-{t:"Which of the following is NOT included in the Discharge Summary?", o:["Date of admission and diagnosis","Course of treatment and patient's response","Follow-up plans and date of discharge","The patient's personal bank details"], a:3},
-{t:"The Informed Consent Form explains:", o:["The patient's home address","The purpose, risks, and benefits of a procedure","The hospital's billing policy","The visiting hours"], a:1},
-{t:"Physician's Progress Notes include:", o:["The patient's condition, examination results, test summaries, treatment plan, and data updates","Only the patient's vital signs","Anesthesia drugs and doses","Admission demographic data only"], a:0},
-{t:"Which type of record is a digital version of a paper chart within a single clinic or practice, with data rarely moving outside the local system?", o:["EHR","PHR","EMR","CDS"], a:2},
-{t:"The Electronic Health Record (EHR) is designed mainly for:", o:["Use within a single clinic only","Patient self-tracking only","Billing purposes only","Interoperability across multiple organizations and facilities"], a:3},
-{t:"The Personal Health Record (PHR) is managed directly by:", o:["The pharmacist","The patient","The hospital administrator","The insurance company"], a:1},
-{t:"SOAP format in clinical documentation stands for:", o:["Subjective, Objective, Assessment, Plan","Symptoms, Observation, Action, Procedure","Subjective, Outcome, Assessment, Planning","Signs, Orders, Assessment, Plan"], a:0},
-{t:"Diagnosis coding in electronic health records uses:", o:["DRG-1 / DRG-2","SOAP-1 / SOAP-2","PHR-10 / PHR-11","ICD-10 / ICD-11"], a:3},
-{t:"Which EHR module gives automated flags for potential drug interactions and reminders for preventive care?", o:["Computerized Provider Order Entry (CPOE)","Patient Portal","Clinical Decision Support (CDS)","Interoperability Protocols"], a:2},
-{t:"CPOE stands for:", o:["Clinical Pharmacy Order Evaluation","Computerized Provider Order Entry","Central Patient Output Evaluation","Computerized Patient Observation Entry"], a:1},
-{t:"Which EHR module allows electronic prescribing to pharmacies and direct routing of lab or imaging orders?", o:["CPOE","Patient Portal","Clinical Decision Support","Medical History module"], a:0},
-{t:"A secure self-service hub where patients view lab results, request refills, and schedule appointments is the:", o:["CDS","CPOE","Patient Portal","SOAP template"], a:2},
-{t:"Interoperability in EHR systems means:", o:["Using one software program inside one clinic only","Deleting duplicate patient files automatically","Encrypting data so that no one can access it","Allowing different software applications and healthcare networks to exchange data securely"], a:3},
-{t:"Why are robust security measures mandated by law for EHR systems?", o:["Because they are expensive to buy","Because they hold Protected Health Information (PHI)","Because they are handwritten documents","Because they are used by one clinic only"], a:1},
-{t:"Instant access to the complete patient history in an EHR mainly helps to reduce:", o:["Diagnostic errors, duplicate testing, and dangerous medication conflicts","The number of nurses needed","Patient confidentiality","The timeliness of documentation"], a:0},
-{t:"A nurse receives an automated EHR alert that conflicts with her assessment of the patient. According to the nurse's role, she should:", o:["Follow the alert blindly","Ignore all alerts permanently","Use clinical judgment rather than relying blindly on the automated alert","Delete the alert from the system"], a:2},
-{t:"A nurse shares her login password with a colleague to save time. Which nursing responsibility in electronic documentation is violated?", o:["Recording care on time","Reporting technical problems","Documenting accurate patient information","Using personal authentication credentials appropriately"], a:3},
-{t:"Although initial use of EHR may be time-consuming, its effect on nursing time efficiency in the long term is:", o:["Permanently slower workflow","Improved workflow efficiency as familiarity increases","Increased documentation errors","Elimination of the need for nursing assessment"], a:1},
-{t:"Which EHR benefit for nursing practice is especially important in shift-based nursing?", o:["Continuity of care","Research and audit","Evidence-based practice","Reduced paperwork storage"], a:0},
-{t:"Which future direction of EHR in nursing uses predictive analytics for patient deterioration?", o:["Voice recognition and automation","Mobile EHR applications","Artificial intelligence integration","Telehealth integration"], a:2},
-{t:"The medical record may serve as a legal document to confirm the care provided.", o:["True","False"], a:0},
-{t:"A medical record should contain all available information, even if it is not relevant to the patient's healthcare.", o:["True","False"], a:1},
-{t:"The History and Physical must be completed and signed within 24 hours of admission.", o:["True","False"], a:0},
-{t:"A Surgery Post-Operative Note can be written at the end of the week after surgery.", o:["True","False"], a:1},
-{t:"An EMR (Electronic Medical Record) contains the patient's history within a single clinic or practice, and its data rarely moves outside the local system.", o:["True","False"], a:0},
-{t:"The Personal Health Record (PHR) is managed directly by the physician.", o:["True","False"], a:1},
-{t:"The EHR is limited to a single clinic and is not designed for sharing data between organizations.", o:["True","False"], a:1},
-{t:"The SOAP format consists of Subjective, Objective, Assessment, and Plan.", o:["True","False"], a:0},
-{t:"Clinical Decision Support (CDS) is the module responsible for e-prescribing to pharmacies.", o:["True","False"], a:1},
-{t:"Nurses should use clinical judgment rather than relying blindly on automated alerts.", o:["True","False"], a:0},
-{t:"Because EHR data is digital, patient confidentiality is no longer a nursing responsibility.", o:["True","False"], a:1},
-{t:"EHR alerts can help prevent adverse drug events.", o:["True","False"], a:0},
-{t:"Mobile EHR applications allow the use of handheld devices for bedside documentation.", o:["True","False"], a:0},
-{t:"A nurse may access any patient's electronic record, even if the patient is not under her care.", o:["True","False"], a:1},
-{t:"The Informed Consent Form serves as evidence that the patient was properly informed before undergoing a procedure.", o:["True","False"], a:0}
+  {t:"What does EHR stand for?", o:["Electronic Hospital Registry", "Emergency Health Report", "Electronic Health Record", "Electronic Heart Record"], a:2},
+  {t:"What does EMR stand for?", o:["Electronic Medical Record", "Emergency Medical Response", "Electronic Management Report", "Essential Medical Registry"], a:0},
+  {t:"A medical record is best described as a documentation that is:", o:["Systematic, legal, and continuous", "Informal, temporary, and optional", "Verbal, private, and short-term", "Financial, administrative, and optional"], a:0},
+  {t:"Modern nursing technology has shifted documentation from:", o:["Traditional paper charts to EHR and EMR systems", "EHR systems back to paper charts", "Written notes to verbal reports only", "Hospital wards to outpatient clinics"], a:0},
+  {t:"Which of the following is NOT a listed reason for the importance of the medical record?", o:["To record facts, findings, and observations about health history", "To document patient care and contribute to high quality of care", "To serve as a legal document confirming the care provided", "To replace communication among the care team"], a:3},
+  {t:"Which criterion of effective documentation means that each individual record MUST be correct?", o:["Relevance", "Accuracy", "Completeness", "Confidentiality"], a:1},
+  {t:"Which criterion requires that records contain only information related to the patient's healthcare?", o:["Timeliness", "Accuracy", "Confidentiality", "Relevance"], a:3},
+  {t:"Releasing medical record information without the patient's consent violates which criterion?", o:["Timeliness", "Confidentiality", "Completeness", "Accuracy"], a:1},
+  {t:"Which component of the medical record contains name, gender, marital status, address, and emergency contact?", o:["Patient Information Form", "Medical History", "Discharge Summary", "Physician's Orders"], a:0},
+  {t:"The record of prescribed care, medications, tests, and treatments for a patient is called:", o:["Nurse's Notes", "Operative Report", "Physician's Orders", "Consultation Report"], a:2},
+  {t:"The Nurse's Notes particularly include which vital signs?", o:["Height, weight, and body mass index", "Hemoglobin, platelets, and white cell count", "Temperature, pulse, respiration, and blood pressure", "Blood group, allergies, and immunizations"], a:2},
+  {t:"Which report is written by a specialist whom the physician asked to evaluate the patient?", o:["Anesthesiology Report", "Consultation Report", "Pathology Report", "Discharge Summary"], a:1},
+  {t:"The surgeon documents the operation details in the:", o:["Anesthesiology Report", "Pathology Report", "Operative Report", "Physician's Orders"], a:2},
+  {t:"Within what time must the History and Physical be completed and signed after admission?", o:["12 hours of admission", "24 hours of admission", "48 hours of admission", "72 hours of admission"], a:1},
+  {t:"When should a surgery Post-Operative Note be written?", o:["Within 72 hours of discharge", "Immediately following the surgery", "At the next morning's rounds", "Only if complications occur"], a:1},
+  {t:"A current head-to-toe assessment of the patient's physical condition is recorded in the:", o:["Medical History", "Consultation Reports", "Discharge Summary", "Physical Examination"], a:3},
+  {t:"Findings from samples such as bone marrow, blood, or tissue are documented by the pathologist in the:", o:["Operative Report", "Anesthesiology Report", "Consent form", "Pathology Report"], a:3},
+  {t:"Documentation of physical therapy, respiratory therapy, or chemotherapy belongs to:", o:["Ancillary/Miscellaneous reports", "Consultation Reports", "Operative Report", "Physician's progress Notes"], a:0},
+  {t:"Which of the following is included in the Anesthesiology Report?", o:["Marital status and employment status", "Final diagnosis and follow-up plans", "Results of bone marrow samples", "Drugs used, dose and time given, and patient response"], a:3},
+  {t:"Which report outlines admission date, diagnosis, course of treatment, final diagnosis, follow-up plans, and date of discharge?", o:["Physician's progress Notes", "Discharge Summary", "Operative Report", "Nurse's Notes"], a:1},
+  {t:"Which item is NOT part of a Discharge Summary?", o:["Drug doses given by the anesthetist during surgery", "Date of admission", "Course of treatment and patient's response", "Follow-up plans"], a:0},
+  {t:"The Informed Consent form serves as evidence that the patient:", o:["Has paid for the procedure", "Has completed physical therapy", "Has been discharged safely", "Was properly informed before undergoing a procedure"], a:3},
+  {t:"Which reason for maintaining thorough records is related to insurance?", o:["To promote accurate claim submission and reimbursement", "To enhance patient satisfaction and trust", "To support precise diagnosis", "To preserve a transparent medical record"], a:0},
+  {t:"HIPAA mandates the confidentiality of:", o:["Protected Health Information (PHI)", "Public Hospital Income", "Personal Health Insurance Payments", "Pharmacy Inventory Prices"], a:0},
+  {t:"According to role-based security, nurses should access records only for:", o:["All patients in the hospital", "Patients assigned directly to their care", "Patients admitted in the last 24 hours", "Patients in neighboring departments"], a:1},
+  {t:"Which pair is listed among the characteristics of effective documentation?", o:["Lengthy and subjective", "Verbal and informal", "Concise and factual", "Estimated and approximate"], a:2},
+  {t:"Audit trails in EHR systems automatically log:", o:["Only deletions made by administrators", "Every view, edit, or deletion with timestamps and user IDs", "Only failed login attempts", "Only edits made after discharge"], a:1},
+  {t:"Which is a recommended best practice for secure documentation?", o:["Share passwords with trusted colleagues", "Stay logged in to save time", "Copy previous notes forward without checking", "Log off computers or portable devices when stepping away"], a:3},
+  {t:"What is the main risk of copying and pasting clinical notes ('copy-forward') without verification?", o:["Faster audit trails", "Loss of timestamps", "Error propagation", "Reduced patient privacy laws"], a:2},
+  {t:"How long should the intensive training of new medical records department staff last before independent work?", o:["One or two days", "Three or four weeks", "Six months", "One year"], a:1},
+  {t:"A supervisor cannot hold a new staff member accountable unless the staff member:", o:["Has worked in the hospital for a year", "Has a clear understanding of his/her responsibilities", "Has completed all hospital units' rotations", "Has signed an insurance claim form"], a:1},
+  {t:"Which statement about orientation of new medical records staff is correct?", o:["They are first sent to all hospital units, then to the department", "They are trained only by written memos", "They are first introduced to department personnel, then to important hospital units", "They begin independent work on the first day"], a:2},
+  {t:"A nurse copies yesterday's note stating 'patient has chest pain', but the pain has resolved. Which problem does this illustrate?", o:["Role-based access violation", "Breach of HIPAA by an outside party", "Error propagation from copy-forward", "Delay in the post-operative note"], a:2},
+  {t:"A relative asks a nurse for a patient's diagnosis, but the patient has not given permission. Which criterion guides the nurse's response?", o:["Timeliness", "Completeness", "Relevance", "Confidentiality"], a:3},
+  {t:"A hospital wants to trace who viewed a record they were not assigned to. Which feature allows this?", o:["Copy-forward", "Informed consent", "Audit trails", "Consultation reports"], a:2},
+  {t:"A medical record is a systematic, legal, and continuous documentation of a patient's care.", o:["True","False"], a:0},
+  {t:"Paper charts are the only form of medical record used in modern healthcare.", o:["True","False"], a:1},
+  {t:"Medical records may serve as a legal document to confirm the care provided.", o:["True","False"], a:0},
+  {t:"The History and Physical must be completed and signed within 48 hours of admission.", o:["True","False"], a:1},
+  {t:"EHR systems automatically log every view, edit, or deletion with timestamps and user IDs.", o:["True","False"], a:0},
+  {t:"Nurses may access the records of any patient in the hospital.", o:["True","False"], a:1},
+  {t:"The Informed Consent form explains the purpose, risks, and benefits of a procedure.", o:["True","False"], a:0},
+  {t:"Physician's progress notes are written by the nurse assigned to the patient.", o:["True","False"], a:1},
+  {t:"The Anesthesiology Report includes the drugs used, the dose and time given, and the patient's response.", o:["True","False"], a:0},
+  {t:"Patient information may be released without consent if the request comes from a colleague.", o:["True","False"], a:1},
+  {t:"Consultation Reports are written by specialists whom the physician has asked to evaluate the patient.", o:["True","False"], a:0},
+  {t:"Copy-forward of clinical notes is recommended to save time and does not require verification.", o:["True","False"], a:1},
+  {t:"Sharing system login credentials with a colleague who forgot a password is acceptable.", o:["True","False"], a:1},
+  {t:"Medical records should contain only information relevant to the patient's healthcare.", o:["True","False"], a:0},
+  {t:"A supervisor can hold a new staff member accountable even if the responsibilities were never clearly explained.", o:["True","False"], a:1},
 ];
 
 
@@ -295,10 +287,10 @@ function updateTop() {
   document.getElementById('prog-bar').style.width = ((i + 1) / total * 100) + '%';
 }
 const SYSTEMS = [
-  { icon:'💻', l:['#0891b2','8,145,178','#071226','#0c2a4d','#0e5a73'], d:['#22d3ee','34,211,238'] }, /* informatics / systems */
-  { icon:'🩺', l:['#059669','5,150,105','#06241f','#0b4a3f','#0e7490'], d:['#34d399','52,211,153'] }, /* clinical / EHR */
-  { icon:'📡', l:['#4f46e5','79,70,229','#0a1030','#1e1b6b','#0e5a73'], d:['#818cf8','129,140,248'] }, /* networks / telehealth */
-  { icon:'🎓', l:['#7c3aed','124,58,237','#120a2e','#2e1a6b','#0e5a73'], d:['#a78bfa','167,139,250'] }  /* e-learning / ed-tech */
+  { icon:'💻', l:['#0891b2','8,145,178','#071226','#0c2a4d','#0e5a73'], d:['#22d3ee','34,211,238'] },
+  { icon:'🩺', l:['#059669','5,150,105','#06241f','#0b4a3f','#0e7490'], d:['#34d399','52,211,153'] },
+  { icon:'📡', l:['#4f46e5','79,70,229','#0a1030','#1e1b6b','#0e5a73'], d:['#818cf8','129,140,248'] },
+  { icon:'🎓', l:['#7c3aed','124,58,237','#120a2e','#2e1a6b','#0e5a73'], d:['#a78bfa','167,139,250'] }
 ];
 function applyPalette() {
   const s = SYSTEMS[(i || 0) % SYSTEMS.length];
