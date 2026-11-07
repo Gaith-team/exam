@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM | Exam</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--forest:#0f3d2e;--leaf:#2f9e5b;--ocean:#0b7a9e;--sun:#f2b134;
+--teal:#2f9e5b;--teal-d:#0f3d2e;--blue:#e8efe3;--bd:#cfdccf;--ok:#198754;--no:#c8372d;--rev:#0b7a9e;--txt:#14231b;
+--grad:linear-gradient(135deg,#0f3d2e 0%,#1f7a4d 55%,#2f9e5b 100%);
+--grad-bar:linear-gradient(90deg,#e5243b 0 5.88%,#dda63a 5.88% 11.76%,#4c9f38 11.76% 17.64%,#c5192d 17.64% 23.52%,#ff3a21 23.52% 29.4%,#26bde2 29.4% 35.28%,#fcc30b 35.28% 41.16%,#a21942 41.16% 47.04%,#fd6925 47.04% 52.92%,#dd1367 52.92% 58.8%,#fd9d24 58.8% 64.68%,#bf8b2e 64.68% 70.56%,#3f7e44 70.56% 76.44%,#0a97d9 76.44% 82.32%,#56c02b 82.32% 88.2%,#00689d 88.2% 94.08%,#19486a 94.08% 100%)}
+body{font-family:'Cairo',Arial,sans-serif;background:#f5f8f1;color:var(--txt);font-size:14px}
+header{background:var(--grad);color:#fff;text-align:center;padding:10px;font-size:18px;font-weight:900;position:relative;border-top:5px solid transparent;border-image:var(--grad-bar) 1;border-bottom:4px solid var(--sun)}
+header .brand{position:absolute;right:16px;top:8px;font-weight:bold;font-size:14px}
+header a{position:absolute;left:16px;top:11px;color:#fff;font-size:13px;text-decoration:none}
+.wrap{max-width:1280px;margin:0 auto;padding:8px 10px 20px}
+.topinfo{background:var(--blue);border:1px solid var(--bd);padding:4px 8px;font-size:13px;margin-bottom:8px}
+.topinfo b{color:var(--leaf)}
+.layout{display:grid;grid-template-columns:1fr 240px;gap:14px;align-items:start}
+.main{background:#fff;border:1px solid var(--bd);min-height:470px;display:flex;flex-direction:column;
+ background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='70'><text x='8' y='45' transform='rotate(-20 75 35)' font-size='14' font-family='Arial' fill='%23000' fill-opacity='.07'>GHAITH TEAM</text></svg>")}
+.qhead{display:flex;justify-content:space-between;align-items:center;padding:12px 6px 6px;margin:0 6px;border-bottom:1px solid var(--bd)}
+.qhead b{font-size:13px}
+.fs button{background:var(--ocean);color:#fff;border:0;padding:6px 12px;margin-left:3px;border-radius:2px;cursor:pointer;font-weight:bold}
+.qbody{padding:8px 12px;flex:1}
+.qtext{font-size:13px;line-height:1.7;margin-bottom:18px;direction:ltr;text-align:left}
+.opt{display:flex;align-items:center;gap:8px;margin:0 0 16px;cursor:pointer;direction:ltr;text-align:left;font-size:13px}
+.opt input{accent-color:var(--teal);cursor:pointer}
+.bar{display:flex;justify-content:space-between;padding:10px;gap:6px;flex-wrap:wrap;border-top:1px solid var(--bd);margin:0 6px 6px}
+.b{background:var(--grad);color:#fff;border:0;padding:9px 12px;font-weight:bold;font-size:13px;border-radius:2px;cursor:pointer}
+.b:hover{filter:brightness(1.12)}
+.b.gray{background:var(--forest)}
+.side>div{background:var(--blue);border:1px solid var(--bd);margin-bottom:10px;padding:8px}
+.timer{text-align:center;background:none!important;border:0!important}
+.timer small{font-size:13px}
+.timer .t{font-size:30px;color:var(--ocean);margin-top:4px}
+.timer .t.warn{color:#c27b0a}.timer .t.danger{color:#c8372d}
+.leg{display:grid;grid-template-columns:1fr 1fr;gap:8px 6px;font-size:10px;margin-top:8px}
+.leg div{display:flex;align-items:center;gap:6px}
+.sq{min-width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:bold;border-radius:2px;border:1px solid transparent}
+.s-ans{background:var(--ok)}.s-no{background:var(--no)}.s-rev{background:var(--rev)}.s-nv{background:#fff;color:#333;border-color:#9bb0a2}
+.nav{display:flex;flex-wrap:wrap;gap:6px;max-height:260px;overflow:auto;background:#e8efe3}
+.nav .sq{width:24px;height:24px;cursor:pointer;font-size:12px}
+.nav .cur{outline:2px solid var(--sun);outline-offset:0}
+.endrow{text-align:center}
+.endrow .b{width:90px}
+footer{text-align:center;padding:16px;font-size:12px;color:#46574d;background:#e8efe3;border-top:4px solid;border-image:var(--grad-bar) 1;margin-top:10px}
+footer a{color:#229ED9;text-decoration:none}
+/* results */
+.res{background:#fff;border:1px solid var(--bd);padding:20px;max-width:900px;margin:10px auto}
+.score{text-align:center;padding:10px 0 18px}
+.score .n{font-size:48px;font-weight:900;color:var(--leaf)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}
+.stats div{background:var(--blue);padding:10px;text-align:center;border-radius:4px}
+.stats b{display:block;font-size:20px}
+.sec{background:var(--grad);border-bottom:3px solid var(--sun);color:#fff;padding:8px 12px;font-weight:bold;margin:22px 0 10px}
+.sec.bad{background:var(--no);border-bottom-color:var(--no)}
+.it{border:1px solid var(--bd);border-left:4px solid var(--ok);padding:12px;margin-bottom:8px;background:#fafcff;direction:ltr;text-align:left}
+.it.bad{border-left-color:var(--no)}
+.it .q{font-weight:bold;font-size:13px;margin-bottom:6px;line-height:1.6}
+.it .r{font-size:12px;margin-top:4px}
+.tag{padding:1px 7px;border-radius:3px;color:#fff;font-size:11px;font-weight:bold;margin-right:6px}
+.tag.y{background:var(--no)}.tag.g{background:var(--ok)}
+.exp{font-size:12px;color:#555;margin-top:6px;background:#eef6f4;padding:6px 8px;border-radius:3px}
+.acts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.hide{display:none}
+@media(max-width:820px){.layout{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}header a{display:none}}
+</style>
+</head>
+<body>
+<header><a href="https://gaith-team.github.io/exam/">← رجوع</a>Sustainable Development Goals (SDGs)<span class="brand">GHAITH TEAM</span></header>
+<div class="wrap">
+ <div id="exam">
+  <div class="topinfo">Total questions in exam: <b id="tot">0</b> | Answered: <b id="ans">0</b></div>
+  <div class="layout">
+   <div class="main">
+    <div class="qhead"><b id="qno"></b><div class="fs"><button onclick="fs(-1)">A-</button><button onclick="fs(0)">A</button><button onclick="fs(1)">A+</button></div></div>
+    <div class="qbody" id="qbody"></div>
+    <div class="bar">
+     <button class="b" onclick="saveNext()">Save &amp; Next</button>
+     <div style="display:flex;gap:4px;flex-wrap:wrap">
+      <button class="b" onclick="mark()">Mark for Review</button>
+      <button class="b" onclick="skip()">Skip</button>
+      <button class="b" onclick="resetQ()">Reset</button>
+     </div>
+    </div>
+   </div>
+   <div class="side">
+    <div class="timer"><small>Time Remaining</small><div class="t" id="tm">35:00</div></div>
+    <div>
+     <div>Number of questions : <b id="tot2">0</b></div>
+     <div class="leg">
+      <div><span class="sq s-ans" id="cAns">0</span>Answered</div>
+      <div><span class="sq s-no" id="cNo">0</span>Not Answered</div>
+      <div><span class="sq s-rev" id="cRev">0</span>For Review</div>
+      <div><span class="sq s-nv" id="cNv">0</span>Not Visited</div>
+     </div>
+    </div>
+    <div class="nav" id="nav"></div>
+    <div class="endrow"><button class="b gray" onclick="endTest()">End Test</button></div>
+   </div>
+  </div>
+ </div>
+ <div id="result" class="hide"></div>
+</div>
+<footer>GHAITH TEAM · <a href="https://t.me/nursing2bu" target="_blank">@nursing2bu</a></footer>
+
+<script>
+const QUESTIONS = [
+{t:"In which year were the Sustainable Development Goals (SDGs) set up by the UN General Assembly?",o:["2000","2012","2015","2030"],a:2},
+{t:"How many Sustainable Development Goals are there?",o:["17","8","12","15"],a:0},
+{t:"By which year are the SDGs intended to be achieved?",o:["2025","2030","2040","2050"],a:1},
+{t:"Which goal is 'Quality Education'?",o:["Goal 4","Goal 3","Goal 5","Goal 8"],a:0},
+{t:"Nurses, as the largest global health care workforce, contribute to how many UN Sustainable Development Goals?",o:["8","10","5","17"],a:3},
+{t:"Which three dimensions does sustainable development encompass?",o:["Education, health and politics","Economy, environment and society","Energy, trade and technology","Agriculture, industry and tourism"],a:1},
+{t:"Which are the three dimensions on which education for sustainable development is centered?",o:["Skills, speed and accuracy","Theory, practice and research","Policy, funding and law","Knowledge, behavior and attitude"],a:3},
+{t:"The Millennium Development Goals (MDGs) started a global effort in which year?",o:["1992","2012","2000","2015"],a:2},
+{t:"Goal 3 (Good Health and Well-being) aims to:",o:["End hunger and improve nutrition","Ensure inclusive and equitable quality education","Reduce inequality within and among countries","Ensure healthy lives and promote well-being for all at all ages"],a:3},
+{t:"Which of the following is Goal 13?",o:["Climate Action","Life on Land","Life Below Water","Affordable and Clean Energy"],a:0},
+{t:"Which strategy helps nursing students gain hard and soft skills that prepare them to lead interprofessional teams?",o:["Study-abroad semesters only","Doctoral research projects","RN completion programs","Interprofessional didactic and clinical experiences"],a:3},
+{t:"Goal 14 (Life Below Water) aims to:",o:["Protect and restore terrestrial ecosystems","Conserve and sustainably use the oceans, seas and marine resources","Ensure access to clean water and sanitation","Take urgent action to combat climate change"],a:1},
+{t:"The SDGs were born at which conference?",o:["UN Millennium Summit in New York (2000)","Earth Summit on Agenda 21 (1992)","UN Conference on Sustainable Development in Rio de Janeiro (2012)","UN General Assembly in Paris (2015)"],a:2},
+{t:"The SDGs are included in a UN-GA Resolution known as:",o:["Agenda 21","The Millennium Declaration","The Rio Declaration","The 2030 Agenda"],a:3},
+{t:"According to the lecture, nursing students who spent 50% of their clinical hours in simulation:",o:["Scored lower on knowledge assessment exams","Scored higher on knowledge assessment exams than those with more traditional clinical hours","Showed no difference in scores","Needed more clinical hours to graduate"],a:1},
+{t:"The Buurtzorg model of care in the Netherlands means:",o:["Neighborhood care","Hospital-centered care","Volunteer-based nursing","Emergency response care"],a:0},
+{t:"The Magnet Recognition Program is best known for promoting:",o:["E-learning through MOOCs","Healthy work environments for nurses","Full practice authority for nurses","International research partnerships"],a:1},
+{t:"Social sustainability initiatives mainly focus on:",o:["Reforestation and water conservation","Supporting small businesses and skills training","Improving quality of life for all community members, especially marginalized and vulnerable groups","Reducing carbon emissions of industries"],a:2},
+{t:"The concept of the National Sustainable Development Strategy (NSDS) was proposed in 1992 in:",o:["Agenda 21","The Millennium Declaration","The 2030 Agenda","The Rio+20 outcome document"],a:0},
+{t:"Target 1.3 (implement comprehensive social protection systems) can be achieved by:",o:["Building cold chains and storage infrastructure","Establishing or expanding health insurance and pension systems","Enforcing road safety laws","Creating marine protected areas"],a:1},
+{t:"Target 2.3 (increase agricultural productivity and support small-scale farmers) can be achieved by:",o:["Banning agricultural exports","Providing school meal programs only","Training farmers on climate-resilient agriculture and giving access to quality seeds and fertilizers","Enforcing industrial waste regulations"],a:2},
+{t:"Target 3.2 aims to end preventable deaths of:",o:["Newborns and children under 5 years old","Adults over 60 years old","Women during menopause","Adolescents aged 10–19"],a:0},
+{t:"Target 5.3 aims to eliminate harmful practices such as:",o:["Unpaid care work and domestic work","Gender pay gaps and glass ceilings","Child labour and forced labour","Female genital mutilation and child marriage"],a:3},
+{t:"Target 7.2 aims to:",o:["Increase the share of renewable energy in the global energy mix","Ensure universal access to modern energy services","Improve energy efficiency globally","Support clean energy in developing countries"],a:0},
+{t:"Target 8.5 aims to:",o:["Promote youth employment only","Develop sustainable tourism","Eradicate forced labour and end child labour","Improve resource efficiency in consumption"],a:2},
+{t:"An example for Target 10.1 (reduce income inequality) is:",o:["Developing fair migration agreements","Implementing progressive tax systems and targeted social transfers","Introducing laws for people with disabilities","Improving access to credit in underdeveloped regions"],a:1},
+{t:"Target 12.2 aims to:",o:["Manage chemicals and waste safely","Implement national sustainable consumption strategies","Reduce food loss and waste","Encourage companies to report on sustainability"],a:2},
+{t:"According to WHO, a sustainable healthcare system is one that:",o:["Improves, maintains or restores health while minimizing negative impacts on the environment","Provides free medicines to all citizens","Relies only on renewable energy in hospitals","Focuses on treating diseases rather than preventing them"],a:0},
+{t:"Which of the following was one of the 8 Millennium Development Goals?",o:["Climate Action","Responsible Consumption and Production","Improve maternal health","Life Below Water"],a:2},
+{t:"Which of the following is an example for Target 4.5 (eliminate gender disparities in education)?",o:["Promoting vocational education through partnerships with industries","Providing incentives for girls, ensuring safe school environments and adopting gender-sensitive curricula","Expanding early childhood development programs","Investing in schools, labs and teaching resources"],a:1},
+{t:"Which example fits Target 9.4 (upgrade and retrofit infrastructure)?",o:["Establishing institutional maintenance plans and clear budgets for periodic upgrades","Expanding rural internet access","Providing incentives for R&D and university–industry partnerships","Encouraging local manufacturing with environmental standards"],a:0},
+{t:"Which example fits Target 11.5 (reduce disaster risks in cities)?",o:["Developing inclusive and efficient public transport systems","Creating early warning systems, urban emergency plans and post-disaster funding mechanisms","Applying participatory urban planning","Upgrading informal settlements"],a:1},
+{t:"Ecological momentary assessment (EMA), as a research innovation, allows researchers to:",o:["Randomly assign nurses to different hospitals","Replace informed consent in studies","Collect data only after the study ends","Collect real-time data on mood, behaviors and risk factors with minimal participant burden"],a:3},
+{t:"Which example fits Targets 14.2–14.5 (protect marine ecosystems and manage fisheries)?",o:["Banning industrial waste discharge into seas","Sharing marine technologies with developing states","Creating marine protected areas and regulating fisheries with quotas and licensing","Running anti-plastic campaigns"],a:2},
+{t:"Which example fits Target 16.10 (protect freedom of expression and access to information)?",o:["Improving justice systems and providing legal aid","Promoting anti-corruption measures","Strengthening child protection programs","Ensuring legal protection for media and open access to government data"],a:3},
+{t:"Nurses are the largest global health care workforce.",o:["True","False"],a:0},
+{t:"Nursing students who spent 50% of their clinical hours in simulation scored lower on knowledge exams than those with traditional clinical hours.",o:["True","False"],a:1},
+{t:"Sustainable development encompasses three dimensions: economy, environment and society.",o:["True","False"],a:0},
+{t:"Sustainable development initiatives aim mainly for short-term, temporary relief.",o:["True","False"],a:1},
+{t:"Regenerative agriculture encourages techniques such as crop rotation, permaculture design and no-till farming.",o:["True","False"],a:0},
+{t:"The SDGs are 17 interlinked goals set up in 2015 by the United Nations General Assembly.",o:["True","False"],a:0},
+{t:"The Millennium Development Goals started a global effort in 2015.",o:["True","False"],a:1},
+{t:"Goal 14 is 'Life on Land'.",o:["True","False"],a:1},
+{t:"Goal 1 aims to end poverty in all its forms everywhere.",o:["True","False"],a:0},
+{t:"Goal 6 aims to ensure availability and sustainable management of energy for all.",o:["True","False"],a:1},
+{t:"Target 3.6 aims to reduce road traffic injuries and health emergencies.",o:["True","False"],a:0},
+{t:"Target 8.7 aims to develop sustainable mining that creates jobs.",o:["True","False"],a:1},
+{t:"Target 17.1–17.3 can be achieved by improving tax systems, combating tax evasion and managing public debt effectively.",o:["True","False"],a:0},
+{t:"Target 10.1 aims to reduce gender inequality.",o:["True","False"],a:1},
+{t:"Goal 16 aims to promote peaceful and inclusive societies, provide access to justice for all and build effective institutions.",o:["True","False"],a:0}
+];
+
+const TOTAL_TIME = 35*60;
+let Q, cur, sel, saved, review, visited, left, iv, size = 13;
+
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+const $ = id => document.getElementById(id);
+
+function init(pool){
+  Q = shuffle([...pool]); const n = Q.length;
+  cur = 0; sel = Array(n).fill(null); saved = Array(n).fill(false);
+  review = Array(n).fill(false); visited = Array(n).fill(false);
+  left = TOTAL_TIME;
+  $('exam').classList.remove('hide'); $('result').classList.add('hide');
+  $('tot').textContent = $('tot2').textContent = n;
+  clearInterval(iv);
+  iv = setInterval(()=>{
+    left--; const m=Math.floor(left/60), s=left%60, t=$('tm');
+    t.textContent = m+':'+(s<10?'0':'')+s;
+    t.className = 't'+(left<=120?' danger':left<=300?' warn':'');
+    if(left<=0){clearInterval(iv);finish()}
+  },1000);
+  if(n) render();
+  window.scrollTo(0,0);
+}
+
+function render(){
+  visited[cur] = true;
+  const q = Q[cur];
+  $('qno').textContent = 'Question No. ' + (cur+1);
+  $('qbody').style.fontSize = size+'px';
+  $('qbody').innerHTML = `<div class="qtext" style="font-size:${size}px">${q.t}</div>` +
+    q.o.map((o,i)=>`<label class="opt" style="font-size:${size}px"><input type="radio" name="o" value="${i}" ${sel[cur]===i?'checked':''} onchange="sel[cur]=${i}"> <span>${o}</span></label>`).join('');
+  refresh();
+}
+
+function status(i){
+  if(review[i]) return 's-rev';
+  if(saved[i]) return 's-ans';
+  if(visited[i]) return 's-no';
+  return 's-nv';
+}
+function refresh(){
+  const n = Q.length; let a=0,no=0,r=0,nv=0;
+  $('nav').innerHTML = Q.map((_,i)=>{
+    const s = status(i);
+    if(saved[i]) a++;
+    if(s==='s-rev') r++; else if(s==='s-no') no++; else if(s==='s-nv') nv++;
+    return `<span class="sq ${s} ${i===cur?'cur':''}" onclick="go(${i})">${i+1}</span>`;
+  }).join('');
+  $('ans').textContent = a; $('cAns').textContent = a; $('cNo').textContent = no;
+  $('cRev').textContent = r; $('cNv').textContent = nv;
+}
+
+function go(i){cur=i;render()}
+function nextQ(){ if(cur<Q.length-1){cur++;render();} else refresh(); }
+function saveNext(){ if(sel[cur]!==null) saved[cur]=true; else saved[cur]=false; nextQ(); }
+function skip(){ nextQ(); }
+function mark(){ review[cur]=!review[cur]; if(sel[cur]!==null) saved[cur]=true; refresh(); }
+function resetQ(){ sel[cur]=null; saved[cur]=false; review[cur]=false; render(); }
+function fs(d){ size = d===0 ? 13 : Math.max(11,Math.min(24,size+d*2)); render(); }
+
+function endTest(){
+  const un = Q.filter((_,i)=>sel[i]===null).length;
+  const msg = un ? `لسه فاضل ${un} سؤال من غير إجابة. تنهي الامتحان؟` : 'تنهي الامتحان؟';
+  if(confirm(msg)) finish();
+}
+
+function finish(){
+  clearInterval(iv);
+  const n = Q.length; let ok=[], bad=[];
+  Q.forEach((q,i)=>{ (sel[i]===q.a ? ok : bad).push(i) });
+  const pct = n ? Math.round(ok.length/n*100) : 0;
+  const card = (i,good)=>{
+    const q=Q[i];
+    return `<div class="it ${good?'':'bad'}"><div class="q">${i+1}. ${q.t}</div>
+    ${good ? `<div class="r"><span class="tag g">Correct</span>${q.o[q.a]}</div>` :
+    `<div class="r"><span class="tag y">Your answer</span>${sel[i]===null?'— لم تتم الإجابة —':q.o[sel[i]]}</div>
+     <div class="r"><span class="tag g">Correct</span>${q.o[q.a]}</div>`}
+    ${q.exp?`<div class="exp">💬 ${q.exp}</div>`:''}</div>`;
+  };
+  const unans = Q.filter((_,i)=>sel[i]===null).length;
+  $('exam').classList.add('hide');
+  const r = $('result'); r.classList.remove('hide');
+  r.innerHTML = `<div class="res">
+   <div class="score"><div class="n">${pct}%</div><div>${ok.length} / ${n}</div></div>
+   <div class="stats">
+    <div><b style="color:var(--ok)">${ok.length}</b>صح</div>
+    <div><b style="color:var(--no)">${bad.length - unans}</b>غلط</div>
+    <div><b style="color:#777">${unans}</b>من غير إجابة</div>
+    <div><b>${n}</b>الإجمالي</div>
+   </div>
+   <div class="acts">
+    ${bad.length?'<button class="b" onclick="retryWrong()">إعادة الأسئلة الغلط ('+bad.length+')</button>':''}
+    <button class="b" onclick="init(QUESTIONS)">امتحان جديد عشوائي</button>
+   </div>
+   <div class="sec">✔ الأسئلة اللي اتحلت صح (${ok.length})</div>
+   ${ok.map(i=>card(i,true)).join('') || '<div style="padding:8px;color:#777">لا يوجد</div>'}
+   <div class="sec bad">✖ الأسئلة الغلط (${bad.length})</div>
+   ${bad.map(i=>card(i,false)).join('') || '<div style="padding:8px;color:#777">ممتاز، مفيش أخطاء 🎉</div>'}
+  </div>`;
+  window.scrollTo(0,0);
+}
+
+function retryWrong(){
+  const pool = Q.filter((q,i)=>sel[i]!==q.a);
+  init(pool);
+}
+
+init(QUESTIONS);
+</script>
+</body>
+</html>
