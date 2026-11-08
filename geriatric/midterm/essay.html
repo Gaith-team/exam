@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Geriatric Nursing – Essay Flashcards</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--red:#d90429;--dred:#8d0120;--ink:#1d1d2b;--bg:#fff5f5;--card:#fff;--muted:#6b6b7b;--c:#d90429}
+*{box-sizing:border-box;margin:0}
+body{font-family:Cairo,Tahoma,system-ui,sans-serif;background:linear-gradient(160deg,#fff5f5,#ffe8ec 55%,#fff0e0);color:var(--ink);min-height:100vh;padding:0 14px 40px}
+header{background:linear-gradient(120deg,var(--dred),var(--red) 60%,#ff6b35);color:#fff;margin:0 -14px;padding:26px 18px 34px;text-align:center;border-radius:0 0 28px 28px;box-shadow:0 10px 30px #d9042955}
+header h1{font-size:clamp(22px,5vw,34px);font-weight:900}
+header p{opacity:.92;margin-top:6px;font-size:15px}
+.wrap{max-width:760px;margin:-18px auto 0}
+.stats{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:16px}
+.stat{background:#fff;border-radius:14px;padding:8px 16px;font-weight:700;box-shadow:0 4px 14px #0001;font-size:14px}
+.stat b{font-size:20px;margin-inline-start:4px}
+.s1 b{color:#0a9d58}.s2 b{color:var(--red)}.s3 b{color:#2563eb}
+.bar{height:12px;background:#fff;border-radius:99px;overflow:hidden;box-shadow:inset 0 1px 4px #0002;margin-bottom:6px}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,#ff6b35,#d90429,#0a9d58);transition:width .5s}
+.msg{text-align:center;font-weight:700;color:var(--dred);font-size:14px;margin-bottom:14px;min-height:22px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;margin-bottom:18px}
+.chip{border:2px solid var(--c);color:var(--c);background:#fff;border-radius:99px;padding:6px 14px;font:700 13px Cairo,sans-serif;cursor:pointer}
+.chip.on{background:var(--c);color:#fff}
+.scene{perspective:1400px;height:440px;max-width:640px;margin:0 auto}
+.card{position:relative;width:100%;height:100%;transform-style:preserve-3d;transition:transform .6s cubic-bezier(.3,.8,.3,1);cursor:pointer}
+.card.flip{transform:rotateY(180deg)}
+.face{position:absolute;inset:0;backface-visibility:hidden;border-radius:24px;padding:26px 24px;direction:ltr;text-align:left;overflow:auto;box-shadow:0 16px 40px #0003}
+.front{background:linear-gradient(145deg,var(--c),#0003 220%),var(--c);color:#fff;display:flex;flex-direction:column;justify-content:center}
+.front .tag{align-self:flex-start;background:#fff;color:var(--c);font-weight:900;font-size:13px;padding:4px 12px;border-radius:99px;margin-bottom:18px}
+.front h2{font-size:clamp(21px,4.4vw,27px);line-height:1.4;font-weight:700}
+.front small{margin-top:22px;opacity:.9;font-size:13px;font-family:Cairo,sans-serif;direction:rtl}
+.back{background:#fff;border-top:10px solid var(--c);transform:rotateY(180deg)}
+.back h3{color:var(--c);font-size:15px;margin-bottom:10px;font-weight:900}
+.back ul{padding-left:20px;font-family:system-ui,Segoe UI,sans-serif;font-size:15.5px;line-height:1.65}
+.back li{margin-bottom:5px}
+.back li::marker{color:var(--c)}
+.back b{color:var(--dred)}
+.ctrl{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:20px}
+button.b{font:900 15px Cairo,sans-serif;border:0;border-radius:14px;padding:12px 20px;cursor:pointer;color:#fff;box-shadow:0 6px 16px #0003;transition:transform .15s}
+button.b:active{transform:scale(.94)}
+.know{background:#0a9d58}.again{background:var(--red)}.nav{background:var(--ink)}.shuf{background:#ff6b35}.rst{background:#fff;color:var(--red);border:2px solid var(--red)}
+.count{text-align:center;margin-top:14px;font-weight:700;color:var(--muted);font-size:14px}
+.done{display:none;text-align:center;background:#fff;border-radius:24px;padding:36px 20px;box-shadow:0 16px 40px #0002;max-width:640px;margin:0 auto}
+.done h2{color:var(--red);font-size:28px}
+:focus-visible{outline:3px solid #2563eb;outline-offset:2px}
+@media(max-width:520px){.scene{height:480px}button.b{padding:11px 14px;font-size:14px}}
+@media(prefers-reduced-motion:reduce){.card,.bar i{transition:none}}
+</style>
+</head>
+<body>
+<header>
+  <h1>🩺 أسئلة المقالي من غيث</h1>
+  <p>Geriatric Nursing 🔥</p>
+</header>
+<div class="wrap">
+  <div style="height:24px"></div>
+  <div class="stats">
+    <div class="stat s1">✅ حافظها<b id="nK">0</b></div>
+    <div class="stat s2">🔁 للمراجعة<b id="nR">0</b></div>
+    <div class="stat s3">📚 الإجمالي<b id="nT">0</b></div>
+  </div>
+  <div class="bar"><i id="bar"></i></div>
+  <div class="msg" id="msg"></div>
+  <div class="chips" id="chips"></div>
+  <div class="scene" id="scene">
+    <div class="card" id="card" tabindex="0" role="button" aria-label="اقلب الكارت">
+      <div class="face front"><span class="tag" id="tag"></span><h2 id="q"></h2><small>👆 اضغط لعرض الإجابة</small></div>
+      <div class="face back"><h3 id="bt"></h3><ul id="a"></ul></div>
+    </div>
+  </div>
+  <div class="done" id="done"><h2>🎉 خلصت المجموعة دي!</h2><p style="margin:10px 0 18px">أنت بطل. لو في كروت للمراجعة اضغط "راجع الصعب".</p><button class="b again" id="reviewBtn">🔁 راجع الصعب</button> <button class="b rst" id="resetBtn">ابدأ من جديد</button></div>
+  <div class="ctrl" id="ctrl">
+    <button class="b nav" id="prev" aria-label="السابق">▶ السابق</button>
+    <button class="b again" id="hard">🔁 صعب</button>
+    <button class="b know" id="easy">✅ حافظها</button>
+    <button class="b nav" id="next" aria-label="التالي">التالي ◀</button>
+  </div>
+  <div class="ctrl"><button class="b shuf" id="shuf">🔀 اخلط الكروت</button><button class="b rst" id="rst">↺ صفّر التقدم</button></div>
+  <div class="count" id="count"></div>
+</div>
+<script>
+const CH={
+ g:["Gerontology & Aging","#d90429"],
+ n:["Needs of the Elderly","#ff6b35"],
+ s:["Stress & Coping","#8e24aa"],
+ p:["Prevention","#00897b"],
+ e:["Ethics","#2563eb"],
+ c:["Community & Rights","#2e9e4f"],
+ h:["Home Health Care","#e91e63"],
+ l:["Palliative Care","#9b0d2a"]
+};
+const D=[
+["g","Define gerontology, geriatrics and gerontological nursing, and explain the difference between them.","<b>Gerontology:</b> scientific study of the aging process and the aged.|<b>Geriatrics:</b> medical care of the aged – physiology, pathology, diagnosis and management of disease in older adults.|<b>Gerontological nursing:</b> combines basic nursing skills with specialized knowledge of aging in health and illness: assess needs, plan, implement and evaluate care."],
+["g","Classify older adults and list the characteristics of the aging process.","<b>Young old:</b> 65–74 | <b>Middle old:</b> 75–84 | <b>Oldest old:</b> 85+|Characteristics: universal, natural, general, gradual, irreversible and inevitable.|Decline in health and energy; progressive deteriorative body changes.|Increased vulnerability to disease and reduced adaptive response.|Increased mortality with age."],
+["g","Discuss the factors that influence the health of the elderly population.","Genetic influence.|Common conditions: hearing loss, cataracts, osteoarthritis, COPD, diabetes, depression, dementia.|Behavioral/psychological factors: physical activity, smoking, social engagement, stress.|Healthy diet, exercise, regular check-ups, mental health care.|Access to affordable, quality health care.|Physical and social environment."],
+["g","Differentiate between ADLs and IADLs. Define ageism and elder abuse.","<b>ADLs:</b> bathing, dressing, grooming, eating, toileting, transferring.|<b>IADLs:</b> cooking, cleaning, shopping, managing finances and medications, using the telephone.|<b>Ageism:</b> stereotypes (thoughts), prejudice (feelings) and discrimination (actions) based on age.|<b>Elder abuse:</b> intentional or negligent act causing harm or serious risk of harm – physical, emotional, sexual, financial or neglect."],
+["g","Explain the role of the geriatric nurse in providing high quality care to older adults and their families.","Recognize one's own and others' attitudes toward aging.|Communicate effectively and respectfully with older adults.|Apply evidence-based nursing standards.|Use technology to enhance older adults' function.|Facilitate active participation of the older adult.|Offer patient-centered care by involving the family in care planning."],
+["n","Explain the physical needs of the elderly.","<b>Nutrition:</b> balanced diet, calcium + vitamin D, high fiber, hydration, limit salt/sugar/fat.|<b>Medication management:</b> right dose, right time; prevent errors and adverse reactions.|<b>Exercise:</b> strength, flexibility, mobility.|<b>Sleep and rest.</b> <b>Pain management</b> (personalized plan).|<b>Personal hygiene</b> with dignity. <b>Regular check-ups</b> and screening."],
+["n","Discuss the social needs of the elderly.","Social interaction – isolation leads to loneliness, depression, cognitive decline.|Family support, friendship and peer relationships.|Community involvement and social recognition/respect.|Supportive services (day-care, senior clubs).|Intergenerational relationships and participation in decisions.|Social security, sense of belonging, purpose and independence."],
+["n","Discuss the psychological needs of the elderly.","Love and belonging; security and safety (emotional + physical).|Self-esteem and respect; autonomy and independence.|Purpose and meaning (volunteering, hobbies, spirituality).|Cognitive stimulation (reading, puzzles, learning).|Emotional support (empathy, listening, counseling).|Spiritual fulfillment; recreation and joy."],
+["n","Describe the environmental needs of older people.","<b>Safety:</b> adequate lighting, handrails, non-slip floors, obstacle-free walkways to prevent falls.|<b>Comfort:</b> stable temperature (poor thermoregulation).|<b>Ergonomic</b> furniture.|Access to services, transport and green spaces.|Clean air/water, reduced pollutants.|Personal preparedness: emergency plans, food, water, medicines."],
+["n","Correct common misconceptions about elderly people.","Not all elderly are weak and sick – many stay healthy.|Dementia is not a normal part of aging.|Older adults can learn new things (e.g. technology).|They are not a burden – they contribute wisdom, volunteering, family care.|Many enjoy social life and live independently.|Aging does not mean unhappiness."],
+["s","Define stress, coping and coping strategies. What are the types of stress?","<b>Stress:</b> mental tension from a real or perceived threat or significant change (eustress / distress).|<b>Coping:</b> multifaceted process that helps older adults optimize resources.|<b>Coping strategies:</b> stabilizing factors that maintain psychosocial balance.|Types: <b>acute, episodic acute, chronic</b>; also <b>positive, tolerable, toxic</b> stress."],
+["s","Describe the three stages of stress (General Adaptation).","<b>1. Alarm reaction:</b> stressor recognized; adrenaline → fight or flight.|<b>2. Resistance:</b> body tries to adapt; resources gradually depleted.|<b>3. Exhaustion:</b> resources depleted; unable to maintain normal function; long-term damage if prolonged."],
+["s","List the signs of stress (physical, cognitive, emotional, behavioral).","<b>Physical:</b> racing heart, ↑pulse, ↑BP, ↑respiration, muscle tension, teeth grinding, loss of appetite, nausea.|<b>Cognitive:</b> mild – alertness; severe – missing details, tunnel vision, poor problem solving.|<b>Emotional:</b> anxiety, irritability, anger, low self-esteem.|<b>Behavioral:</b> disorganized, more errors, incomplete tasks, finger drumming."],
+["s","Compare problem-focused and emotion-focused coping with examples.","<b>Problem-focused:</b> change or eliminate the stressor – taking control, information seeking, weighing pros and cons.|<b>Emotion-focused:</b> change the response to the stressor – social support, positive reappraisal, self-control, distancing, relaxation, meditation.|Healthy lifestyle: exercise, healthy diet, 7–9 hours sleep, social support."],
+["s","Discuss nursing interventions for coping with stress in older adults.","<b>Assessment</b> of stress level.|<b>Therapeutic communication:</b> active listening, empathy, calm demeanor.|<b>Patient education</b> to reduce fear of the unknown.|<b>Relaxation:</b> deep breathing, guided imagery, progressive muscle relaxation.|<b>Calming environment:</b> dim lights, less noise, privacy, music.|Encourage social support and healthy behaviors; collaborate with the team."],
+["p","Define the four levels of prevention with an example for each.","<b>Primordial:</b> prevent emergence of risk factors (smoking bans, reducing air pollution).|<b>Primary:</b> prevent disease before it occurs (health promotion, immunization).|<b>Secondary:</b> early detection and treatment (screening, mammography, BP checks).|<b>Tertiary:</b> limit disability and rehabilitate in established disease."],
+["p","Explain primary prevention: health promotion and specific protection.","<b>Health promotion:</b> socio-economic development, health education (nutrition, hygiene, rest, exercise), genetic counseling, empower people to take responsibility.|<b>Specific protection:</b> immunization, chemoprophylaxis, environmental sanitation (safe water, sewage/refuse disposal, insect and rodent control, food control)."],
+["p","Discuss tertiary prevention and the assessment needed before rehabilitation.","<b>Tertiary:</b> disability limitation + rehabilitation to promote optimal function despite chronic problems.|Assess: type and severity of disability; patient attitudes; goals; realistic plan; suitable team members; monitor progress; social/family circumstances; ability to perform ADLs and work.|Rehabilitation is often long term → team approach."],
+["p","Give examples of preventive measures for diabetes and hypertension.","<b>Diabetes – primary:</b> genetic counseling, weight control, stress control.|<b>Secondary/tertiary:</b> early diagnosis, insulin teaching, nutrition counseling, infection prevention, skin and toenail care, lifestyle self-management.|<b>Hypertension – primary:</b> nutrition education, stress control, regular check-ups, avoid smoking.|<b>Secondary/tertiary:</b> early treatment, antihypertensives, diet adherence, rehabilitation."],
+["e","Explain the principles of ethics in nursing older adults.","<b>Autonomy:</b> right to self-determination and informed consent.|<b>Beneficence:</b> do good, relieve suffering.|<b>Non-maleficence:</b> do no harm; risk/benefit calculation.|<b>Justice:</b> fair access and allocation of resources.|<b>Confidentiality:</b> breached only if risk of harm or with permission.|<b>Veracity:</b> truthfulness builds trust."],
+["e","What is an ethical dilemma? Differentiate it from an ordinary dilemma.","<b>Ethical dilemma:</b> conflicting values, beliefs or responsibilities pull in different directions; a decision could cause harm, break a law or cause intense internal conflict.|<b>Ordinary dilemma:</b> does not involve a conflict between ethical values and principles."],
+["e","Describe the steps to resolve an ethical dilemma.","<b>1. Analyze the consequences:</b> who is helped or hurt; benefits and harms; short- and long-term effects.|<b>2. Analyze the choice:</b> honest, fair, promotes equality, respects others.|<b>3. Make a decision:</b> combine both analyses; if no harmless solution exists, choose the least harmful option."],
+["c","List types of community support services for older people.","Senior citizen center (social, nutritional, educational, counseling).|Home help services; transportation service.|District nursing service (home visits).|Counseling services; support groups.|Rehabilitation services (physio + occupational therapy)."],
+["c","What are the criteria for an effective community service system for the elderly?","<b>Comprehensive:</b> financial support, health care, education, in-home services, recreation, transport.|<b>Coordinated:</b> multi-service agencies in one location.|<b>Accessible:</b> convenient location and affordable.|<b>Quality:</b> addresses assessed needs; periodic needs assessment."],
+["c","Discuss the key rights of elderly people (UN principles).","<b>Independence:</b> food, water, shelter, health care; work opportunities; live at home as long as possible.|<b>Participation:</b> stay integrated, share knowledge, form associations.|<b>Care:</b> family and community care, health and legal services.|<b>Self-fulfillment:</b> education, culture, recreation.|<b>Dignity:</b> free of exploitation and abuse; treated fairly regardless of age."],
+["h","Define home health care and list its benefits.","Care provided by professionals in the patient's own home instead of clinics/nursing homes.|Benefits: greater independence; safety, comfort, convenience; relief for family caregivers; fewer hospital trips; saves money; high quality; personalized care; team of professionals; wide range of services; companionship."],
+["h","What services can be offered in home settings, and who can provide them?","<b>Services:</b> health education, personal care (vital signs, glucose), prevention of bed ulcers and wound dressing, psychosocial support, building family caregiver capacity, simple disease management, transitional care after discharge.|<b>Providers:</b> community health workers, nurses, social workers, GPs, nutritionists, physiotherapists, geriatricians."],
+["h","What should be considered when caring for the elderly at home?","Person-centered care; protect dignity.|Understand them – be patient and calm.|Be a confidant but protect privacy.|Report all forms of abuse.|Be reliable and dependable.|Explore ways to overcome communication disabilities (stroke, hearing).|Remember they desire good quality of life."],
+["h","List the quality requirements for home health care services.","Privacy and dignity; involve people in decisions.|Assessment of individual needs; care planning with regular review.|Safeguarding and safety; infection control.|Medication management; wound and pressure ulcer prevention.|Supervision, continuous training, risk assessment, complaints management.|Continuity of care workers; referral and feedback system."],
+["l","Define palliative care and state its goals. Who benefits from it?","Specialized care for people with serious illness that relieves symptoms and stress; improves quality of life for patient and family.|<b>Goals:</b> maximize quality of life, manage pain and symptoms, emotional/spiritual/psychological support, social care, support families.|<b>Benefit:</b> active, progressive, far-advanced disease (metastatic cancer, CHF, COPD, renal failure, neurological disease, AIDS)."],
+["l","Compare palliative care and hospice care.","<b>Focus:</b> palliative – relief of symptoms; hospice – comfort near end of life.|<b>Eligibility:</b> palliative – any stage; hospice – life expectancy ≤ 6 months.|<b>Treatment:</b> palliative can include curative treatment; hospice – comfort, not cure.|<b>Duration:</b> palliative – no limit; hospice – final months.|<b>Family:</b> hospice has heavy family/caregiver support."],
+["l","Describe the palliative care team and its role.","Doctor (leader), <b>nurse</b> (cornerstone), occupational therapist, physiotherapist, dietician, psychologist, chaplain, volunteers.|Roles: support patients, carers and staff; review complex cases; education; research and audit.|Specialist nurse: clinical support, consultation, education, leadership, research."],
+["l","Outline the nursing assessment of a terminally ill patient.","Diagnosis, medications, allergies.|Vital signs, skin color/temperature, respiratory pattern and breath sounds.|Nutrition, fluids, renal and GI function; ongoing skin assessment.|Pain, nausea, dyspnea; ADLs, sleep and rest.|Neurological assessment near death (consciousness, reflexes, pupils).|Coping of patient and family; at least every 8 hours in institutions."],
+["l","Discuss the nursing management of dyspnea in a dying patient.","<b>Treat pathology:</b> bronchodilators, corticosteroids, diuretics, blood products.|<b>Alter perception:</b> oxygen by nasal cannula, low-dose oral morphine, fan.|<b>Reduce demand:</b> energy conservation, supplies within reach, bedside commode, electric bed.|<b>Decrease anxiety:</b> medications, relaxation, call bell."],
+["l","Discuss psychological and spiritual care in palliative care.","<b>Depression:</b> sleep change, worthlessness, loss of interest, suicidal thoughts → support, counseling, antidepressants, psychiatric referral.|<b>Anxiety</b> (most common): fear of pain, death, family/finances → pharmacologic + non-pharmacologic care.|<b>Spiritual:</b> assess beyond religion.|<b>Hope:</b> listen, encourage sharing, give accurate information, support patient control."]
+];
+const st={}; // idx -> 'k'|'r'
+let view=[], pos=0, filter='all', flipped=false;
+const $=id=>document.getElementById(id);
+function build(){const c=$('chips');c.innerHTML='';
+ const mk=(k,t,col)=>{const b=document.createElement('button');b.className='chip'+(filter===k?' on':'');b.style.setProperty('--c',col);b.textContent=t;b.onclick=()=>{filter=k;pos=0;apply();build()};c.appendChild(b)};
+ mk('all','🔥 الكل ('+D.length+')','#d90429');
+ for(const k in CH)mk(k,CH[k][0],CH[k][1]);
+ mk('hard','🔁 راجع الصعب','#c2410c');}
+function apply(){view=D.map((_,i)=>i).filter(i=>filter==='all'||(filter==='hard'?st[i]==='r':D[i][0]===filter));pos=0;render()}
+function render(){
+ const done=$('done'),scene=$('scene'),ctrl=$('ctrl');
+ $('card').classList.remove('flip');
+ const k=Object.values(st).filter(v=>v==='k').length,r=Object.values(st).filter(v=>v==='r').length;
+ $('nK').textContent=k;$('nR').textContent=r;$('nT').textContent=D.length;
+ $('bar').style.width=(k/D.length*100)+'%';
+ const p=Math.round(k/D.length*100);
+ $('msg').textContent=p===0?'يلا نبدأ! أول كارت أصعب كارت 💪':p<40?'بداية قوية يا بطل 🔥':p<80?'شغال تمام، كمّل! 🚀':p<100?'قربت تخلص المنهج! 🏆':'مبروك! حفظت كل الكروت 🎉🎓';
+ if(!view.length){scene.style.display='none';ctrl.style.display='none';done.style.display='block';$('count').textContent='';return}
+ scene.style.display='';ctrl.style.display='';done.style.display='none';
+ const d=D[view[pos]],col=CH[d[0]][1];
+ document.documentElement.style.setProperty('--c',col);
+ $('tag').textContent=CH[d[0]][0];$('q').textContent=d[1];$('bt').textContent='✔ Answer';
+ $('a').innerHTML=d[2].split('|').map(x=>'<li>'+x+'</li>').join('');
+ $('count').textContent='كارت '+(pos+1)+' من '+view.length+(st[view[pos]]==='k'?' · ✅ محفوظ':st[view[pos]]==='r'?' · 🔁 للمراجعة':'');
+}
+function go(n){pos=(pos+n+view.length)%view.length;render()}
+function mark(v){if(!view.length)return;st[view[pos]]=v;if(pos<view.length-1||v!=='r'){ if(filter==='hard'&&v==='k'){view.splice(pos,1);if(pos>=view.length)pos=0;render();return} if(pos<view.length-1)pos++;else if(filter!=='all'&&filter!=='hard'){}}render()}
+$('card').onclick=()=>$('card').classList.toggle('flip');
+$('next').onclick=()=>go(1);$('prev').onclick=()=>go(-1);
+$('easy').onclick=()=>mark('k');$('hard').onclick=()=>mark('r');
+$('shuf').onclick=()=>{for(let i=view.length-1;i>0;i--){const j=Math.random()*(i+1)|0;[view[i],view[j]]=[view[j],view[i]]}pos=0;render()};
+$('rst').onclick=$('resetBtn').onclick=()=>{for(const k in st)delete st[k];filter='all';build();apply()};
+$('reviewBtn').onclick=()=>{filter='hard';build();apply()};
+document.addEventListener('keydown',e=>{if(e.code==='Space'){e.preventDefault();$('card').classList.toggle('flip')}else if(e.key==='ArrowLeft')go(1);else if(e.key==='ArrowRight')go(-1)});
+build();apply();
+</script>
+</body>
+</html>
