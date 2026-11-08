@@ -1,0 +1,333 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--teal:#7c3aed;--teal-d:#6d28d9;--blue:#eef2f7;--bd:#d9e0ea;--ok:#16a34a;--no:#dc2626;--rev:#2563eb;--txt:#1a2332;--grad:linear-gradient(135deg,#6d28d9,#7c3aed 60%,#8b5cf6)}
+body{font-family:'Outfit',Arial,sans-serif;background:#f8fafc;color:var(--txt);font-size:14px}
+header{background:var(--grad);color:#fff;text-align:center;padding:12px;font-size:18px;font-weight:900;position:relative}
+.shf{position:absolute;left:90px;top:9px;background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:6px;padding:4px 10px;cursor:pointer;font-size:13px;font-family:inherit}
+header .brand{position:absolute;right:16px;top:8px;font-weight:bold;font-size:14px}
+header a{position:absolute;left:16px;top:11px;color:#fff;font-size:13px;text-decoration:none}
+.wrap{max-width:1280px;margin:0 auto;padding:8px 10px 20px}
+.topinfo{background:var(--blue);border:1px solid var(--bd);padding:4px 8px;font-size:13px;margin-bottom:8px}
+.topinfo b{color:var(--teal)}
+.layout{display:grid;grid-template-columns:1fr 240px;gap:14px;align-items:start}
+.main{background:#fff;border:1px solid var(--bd);min-height:470px;display:flex;flex-direction:column;
+ background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='70'><text x='8' y='45' transform='rotate(-20 75 35)' font-size='14' font-family='Arial' fill='%23000' fill-opacity='.07'>GHAITH TEAM</text></svg>")}
+.qhead{display:flex;justify-content:space-between;align-items:center;padding:12px 6px 6px;margin:0 6px;border-bottom:1px solid var(--bd)}
+.qhead b{font-size:13px}
+.fs button{background:#475569;color:#fff;border:0;padding:6px 12px;margin-left:3px;border-radius:2px;cursor:pointer;font-weight:bold}
+.qbody{padding:8px 12px;flex:1}
+.qtext{font-size:13px;line-height:1.7;margin-bottom:18px;direction:ltr;text-align:left}
+.opt{display:flex;align-items:center;gap:8px;margin:0 0 16px;cursor:pointer;direction:ltr;text-align:left;font-size:13px}
+.opt input{accent-color:var(--teal);cursor:pointer}
+.bar{display:flex;justify-content:space-between;padding:10px;gap:6px;flex-wrap:wrap;border-top:1px solid var(--bd);margin:0 6px 6px}
+.b{background:var(--grad);color:#fff;border:0;padding:9px 12px;font-weight:bold;font-size:13px;border-radius:2px;cursor:pointer}
+.b:hover{filter:brightness(1.12)}
+.b.gray{background:#1a2332}
+.side>div{background:var(--blue);border:1px solid var(--bd);margin-bottom:10px;padding:8px}
+.timer{text-align:center;background:none!important;border:0!important}
+.timer small{font-size:13px}
+.timer .t{font-size:30px;color:#1a2332;margin-top:4px}
+.timer .t.warn{color:#c27b0a}.timer .t.danger{color:#c8372d}
+.leg{display:grid;grid-template-columns:1fr 1fr;gap:8px 6px;font-size:10px;margin-top:8px}
+.leg div{display:flex;align-items:center;gap:6px}
+.sq{min-width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:bold;border-radius:2px;border:1px solid transparent}
+.s-ans{background:var(--ok)}.s-no{background:#f97316}.s-rev{background:var(--rev)}.s-nv{background:#fff;color:#333;border-color:#9bb0a2}
+.nav{display:flex;flex-wrap:wrap;gap:6px;max-height:260px;overflow:auto;background:#eef2f7}
+.nav .sq{width:24px;height:24px;cursor:pointer;font-size:12px}
+.nav .cur{outline:2px solid #1a2332;outline-offset:0}
+.endrow{text-align:center}
+.endrow .b{width:90px}
+footer{text-align:center;padding:16px;font-size:12px;color:#4a5568;background:#eef2f7;border-top:1px solid #d9e0ea;margin-top:10px}
+footer a{color:#229ED9;text-decoration:none}
+/* results */
+.res{background:#fff;border:1px solid var(--bd);padding:20px;max-width:900px;margin:10px auto}
+.score{text-align:center;padding:10px 0 18px}
+.score .n{font-size:48px;font-weight:900;color:var(--teal)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}
+.stats div{background:var(--blue);padding:10px;text-align:center;border-radius:4px}
+.stats b{display:block;font-size:20px}
+.sec{background:var(--ok);color:#fff;padding:8px 12px;font-weight:bold;margin:22px 0 10px}
+.sec.bad{background:var(--no)}
+.it{border:1px solid var(--bd);border-left:4px solid var(--ok);padding:12px;margin-bottom:8px;background:#fafcff;direction:ltr;text-align:left}
+.it.bad{border-left-color:var(--no)}
+.it .q{font-weight:bold;font-size:13px;margin-bottom:6px;line-height:1.6}
+.it .r{font-size:12px;margin-top:4px}
+.tag{padding:1px 7px;border-radius:3px;color:#fff;font-size:11px;font-weight:bold;margin-right:6px}
+.tag.y{background:var(--no)}.tag.g{background:var(--ok)}
+.exp{font-size:12px;color:#555;margin-top:6px;background:#eef6f4;padding:6px 8px;border-radius:3px}
+.acts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.hide{display:none}
+@media(max-width:820px){.layout{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}header a{display:none}.shf{left:12px}}
+</style>
+</head>
+<body>
+<header><a href="https://gaith-team.github.io/exam/psychiatric/index.html">← رجوع</a><button class="shf" onclick="randomizeQuestions()">🔀 عشوائي</button>Psychiatric Nursing<span class="brand">GHAITH TEAM</span></header>
+<div class="wrap">
+ <div id="exam">
+  <div class="topinfo">Total questions in exam: <b id="tot">0</b> | Answered: <b id="ans">0</b></div>
+  <div class="layout">
+   <div class="main">
+    <div class="qhead"><b id="qno"></b><div class="fs"><button onclick="fs(-1)">A-</button><button onclick="fs(0)">A</button><button onclick="fs(1)">A+</button></div></div>
+    <div class="qbody" id="qbody"></div>
+    <div class="bar">
+     <button class="b" onclick="saveNext()">Save &amp; Next</button>
+     <div style="display:flex;gap:4px;flex-wrap:wrap">
+      <button class="b" onclick="mark()">Mark for Review</button>
+      <button class="b" onclick="skip()">Skip</button>
+      <button class="b" onclick="resetQ()">Reset</button>
+     </div>
+    </div>
+   </div>
+   <div class="side">
+    <div class="timer"><small>Time Remaining</small><div class="t" id="tm">70:00</div></div>
+    <div>
+     <div>Number of questions : <b id="tot2">0</b></div>
+     <div class="leg">
+      <div><span class="sq s-ans" id="cAns">0</span>Answered</div>
+      <div><span class="sq s-no" id="cNo">0</span>Not Answered</div>
+      <div><span class="sq s-rev" id="cRev">0</span>For Review</div>
+      <div><span class="sq s-nv" id="cNv">0</span>Not Visited</div>
+     </div>
+    </div>
+    <div class="nav" id="nav"></div>
+    <div class="endrow"><button class="b gray" onclick="endTest()">End Test</button></div>
+   </div>
+  </div>
+ </div>
+ <div id="result" class="hide"></div>
+</div>
+<footer>GHAITH TEAM · <a href="https://t.me/nursing2bu" target="_blank">@nursing2bu</a></footer>
+
+<script>
+const QUESTIONS = [
+{t:"The main concept of mental health nursing principles is:", o:["Controlling patient behavior","Treating only physical illness","Respecting patient dignity and potential","Ignoring emotional needs"], a:2},
+{t:"Being non-judgmental means:", o:["Punishing wrong behavior","Evaluating behavior as right or wrong","Accepting the patient without criticism","Ignoring the patient"], a:2},
+{t:"What is more important when a patient talks?", o:["Words only","Nurse’s opinion","Feeling behind the words","Grammar"], a:2},
+{t:"Consistency helps the patient by:", o:["Increasing anxiety","Creating confusion","Providing security","Encouraging dependence"], a:2},
+{t:"Reassurance in psychiatric nursing means:", o:["Ignoring patient problems","Building patient confidence","Giving punishment","Forcing decisions"], a:1},
+{t:"Behavior change occurs mainly through:", o:["Advice","Punishment","Emotional experience","Instructions"], a:2},
+{t:"Anxiety can increase when the nurse:", o:["Listens carefully","Shows calm behavior","Shows her own anxiety","Encourages expression"], a:2},
+{t:"Objectivity means:", o:["Being cold and distant","Judging the patient","Observing without personal bias","Ignoring feelings"], a:2},
+{t:"A professional nurse-patient relationship focuses on:", o:["Nurse’s needs","Patient’s emotional needs","Social status","Rules only"], a:1},
+{t:"Nursing care should focus on:", o:["Symptoms only","Disease only","Patient as a whole person","Medication only"], a:2},
+{t:"Psychiatric nursing principles apply only to mentally ill patients.", o:["True","False"], a:1},
+{t:"Patients should be judged based on their behavior.", o:["True","False"], a:1},
+{t:"Listening is an important nursing skill.", o:["True","False"], a:0},
+{t:"Consistency increases patient anxiety.", o:["True","False"], a:1},
+{t:"Reassurance helps build patient trust.", o:["True","False"], a:0},
+{t:"Giving advice is the best way to change patient behavior.", o:["True","False"], a:1},
+{t:"Nurse’s anxiety can affect the patient.", o:["True","False"], a:0},
+{t:"Objectivity means ignoring patient feelings.", o:["True","False"], a:1},
+{t:"Physical and verbal force should always be used.", o:["True","False"], a:1},
+{t:"Each patient’s symptoms may have different meanings.", o:["True","False"], a:0},
+{t:"Mr. Ahmed hates Ms. Amani, but his superego tells him that such hatred is unacceptable. He ‘solved’ the problem by believing that Ms. Amani hates him. What Defense mechanism did Mr. Ahmed show?", o:["Regression","Projection","Rationalization","Displacement"], a:1},
+{t:"Defense mechanism that shifts sexual or aggressive impulses to a more acceptable or less threatening target is?", o:["Dissociation","Sublimation","Reaction formation","Rationalization"], a:1},
+{t:"A 30-year-old lady started crying seeing injection needle. What Defense mechanism is this?", o:["Regression","Repression","Projection","Sublimation"], a:0},
+{t:"Defense mechanism are automatic and usually unconscious processes or act by the individuals to:", o:["Increase anxiety or fear","Becomes pathologic when overused","Low self esteem","Protect one's sense of security"], a:3},
+{t:"Ms. Fatima, 30 years old, had a dog bite at the age of 2 years. Even though she doesn’t verbalize about dog bite, still she is very much afraid even when a dog barks. What Defense mechanism does Ms. Fatima exhibit?", o:["Regression","Repression","Sublimation","Projection"], a:1},
+{t:"Best-known defense mechanisms, used often to describe situations in which people seem unable to face reality or admit an obvious truth is?", o:["Regression","Displacement","Denial","Projection"], a:2},
+{t:"This is the voluntary, conscious forcing of unpleasant anxiety producing experiences into preconscious mind?", o:["Projection","Suppression","Repression","Regression"], a:1},
+{t:"I'd rather not talk about it right now. This an example for defense mechanism?", o:["Compensation","Regression","Suppression","Repression"], a:2},
+{t:"Return to earlier and more comfortable developmental level?", o:["Compensation","Regression","Suppression","Repression"], a:1},
+{t:"The person gives good logical reason for his behavior (false) instead of real one", o:["Rationalization","Suppression","Denial","Regression"], a:0},
+{t:"Moving against: The person remains emotionally uninvolved by Withdrawing from a situation e.g. Denial, repression, rationalization", o:["True","False"], a:1},
+{t:"Moving forward: The person conforms to the situation, accepts, substitutes, sublimation.", o:["True","False"], a:0},
+{t:"Moving away: The person remains emotionally uninvolved by Withdrawing from a situation e.g. Denial, repression, rationalization", o:["True","False"], a:0},
+{t:"Moving against: The person becomes aggressive, competitive, seeks to rise above others, to control them and may attack in various way.", o:["True","False"], a:0},
+{t:"Consciousness: the perceptions, thoughts and feeling existing in a person's not are in immediate awareness.", o:["True","False"], a:1},
+{t:"Unconsciousness: the perceptions, thoughts and feeling existing in a person's immediate awareness.", o:["True","False"], a:1},
+{t:"Preconscious: This is area between conscious & unconscious, the preconscious includes:- Experiences, thoughts, feelings or desires that might not be in immediate awareness but can be recalled to consciousness when the need arise.", o:["True","False"], a:0},
+{t:"Unconscious: The unconscious refer to all memories, feelings, thoughts or wishes that are not available to the conscious mind.", o:["True","False"], a:0},
+{t:"Ego : the most primitive structure of the human personality, the site of the instincts", o:["True","False"], a:1},
+{t:"Id: the most primitive structure of the human personality, the site of the instincts", o:["True","False"], a:0},
+{t:"A 40-year-old man with recurrent episodes of depression fails to respond to two antidepressants and psychotherapy. What is the next best treatment option?", o:["Stop all medications","Add a mood stabilizer","Electroconvulsive Therapy (ECT)","Increase dose beyond recommended range"], a:2},
+{t:"A 45-year-old woman has recurrent episodes of depression that begin every winter and resolve in spring. What is the best treatment for her condition?", o:["Psychodynamic therapy","Light therapy","Mood stabilizer","ECT"], a:1},
+{t:"A 28-year-old woman develops low mood and tearfulness 3 weeks after giving birth. She finds it hard to bond with her baby and has suicidal thoughts. Diagnosis?", o:["Postpartum blues","Postpartum psychosis","Postpartum depression","Adjustment disorder"], a:2},
+{t:"A 36-year-old man has been depressed for 3 years, with only partial improvement between episodes. Which diagnosis fits best?", o:["Bipolar II disorder","Major Depressive Disorder","Persistent Depressive Disorder (Dysthymia)","Adjustment disorder"], a:2},
+{t:"A 30-year-old man has been feeling sad and tired for the past 2 years. He says he has “always been gloomy,” but he still goes to work daily. He’s never had suicidal thoughts. What is the most likely diagnosis?", o:["Major Depressive Disorder","Persistent Depressive Disorder (Dysthymia)","Cyclothymic Disorder","Adjustment Disorder"], a:1},
+{t:"Major depressive disorder is more common in women than in men.", o:["True","False"], a:0},
+{t:"To diagnose MDD, symptoms must last for at least one week.", o:["True","False"], a:1},
+{t:"Loss of interest or pleasure is one of the core symptoms of depression.", o:["True","False"], a:0},
+{t:"Patients with major depressive disorder always have psychotic symptoms.", o:["True","False"], a:1},
+{t:"Sleep disturbance is a common symptom of major depressive disorder.", o:["True","False"], a:0},
+{t:"A patient with Bipolar II disorder reports feeling “a bit high” and not needing much sleep but denies any problems. The nurse notices mild irritability and increased talkativeness. Which phase is this patient most likely experiencing?", o:["Major depression","Hypomania","Full mania","Mixed episode"], a:1},
+{t:"A manic patient tries to dominate group therapy and interrupts others frequently. What should the nurse do?", o:["Allow the patient to talk freely","Ask the patient to leave the group temporarily","Politely set limits and redirect discussion to others","Ignore the behavior"], a:2},
+{t:"A bipolar patient tells the nurse, “I’m so happy, I can’t stop talking!” and begins dancing around the room. The most therapeutic response is:", o:["“You need to sit down and stop.”","“You seem very energetic; let’s walk to your room to talk quietly.”","“Why are you acting like this?”","“You should calm down immediately.”"], a:1},
+{t:"Which of the following best describes Bipolar I Disorder?", o:["Presence of hypomanic and depressive episodes","Presence of manic episode and depressive episodes","Presence of only depressive episodes","Alternating anxiety and depression"], a:1},
+{t:"Which symptom is most characteristic of a manic episode?", o:["Decreased energy and psychomotor retardation","Inflated self-esteem or grandiosity","Loss of interest in all activities","Feelings of worthlessness"], a:1},
+{t:"In bipolar disorder, hypomania differs from mania in that:", o:["It lasts longer","It causes more severe impairment","It does not cause marked impairment in functioning","It always requires hospitalization"], a:2},
+{t:"A bipolar patient in mania usually has a decreased need for sleep.", o:["True","False"], a:0},
+{t:"Bipolar II disorder involves full manic episodes and major depressive episodes.", o:["True","False"], a:1},
+{t:"Rapid speech and flight of ideas are common symptoms during a depressive episode.", o:["True","False"], a:1},
+{t:"During a manic phase, patients often show poor judgment and concentration", o:["True","False"], a:0},
+{t:"Family education and psych education are key parts of bipolar disorder management.", o:["True","False"], a:0},
+{t:"Anxiety is defined as:", o:["A feeling of happiness","A vague sense of apprehension and uncertainty","A psychotic symptom","A personality disorder"], a:1},
+{t:"Which is NOT a level of anxiety?", o:["Mild","Moderate","Severe","Chronic"], a:3},
+{t:"Generalized Anxiety Disorder is characterized by excessive worry lasting at least:", o:["1 month","3 months","6 months","12 months"], a:2},
+{t:"Which symptom is common during a panic attack?", o:["Bradycardia","Palpitations","Paralysis","Aphasia"], a:1},
+{t:"OCD is characterized by:", o:["Hallucinations","Delusions","Obsessions and compulsions","Memory loss"], a:2},
+{t:"Fear of closed places is called:", o:["Acrophobia","Zoophobia","Claustrophobia","Agoraphobia"], a:2},
+{t:"PTSD may occur after:", o:["Normal daily activities","Traumatic events","Physical exercise","Healthy relationships"], a:1},
+{t:"Which medication group is commonly used for anxiety?", o:["Antibiotics","Benzodiazepines","Antihistamines","Antacids"], a:1},
+{t:"Which psychotherapy is most commonly used for anxiety disorders?", o:["Psychoanalysis only","CBT","Hypnosis","Electrotherapy"], a:1},
+{t:"A psychiatric nurse should first during panic attack:", o:["Leave the client alone","Reassure safety and stay with the client","Argue with the client","Increase environmental stimuli"], a:1},
+{t:"Anxiety disorders are among the most common mental disorders.", o:["True","False"], a:0},
+{t:"Mild anxiety is always harmful.", o:["True","False"], a:1},
+{t:"Women are more likely to develop anxiety disorders than men.", o:["True","False"], a:0},
+{t:"OCD includes obsessions and compulsions.", o:["True","False"], a:0},
+{t:"Agoraphobia is fear of heights.", o:["True","False"], a:1},
+{t:"PTSD can develop after a traumatic event.", o:["True","False"], a:0},
+{t:"Caffeine may worsen anxiety symptoms.", o:["True","False"], a:0},
+{t:"CBT is commonly used to treat anxiety disorders.", o:["True","False"], a:0},
+{t:"Panic attacks always occur only during sleep.", o:["True","False"], a:1},
+{t:"Relaxation techniques may help reduce anxiety.", o:["True","False"], a:0},
+{t:"Pertaining to Non- Rem sleep, which statement is true?", o:["Your heart rate slows, your body temperature drops, deep sleep takes place and It's harder to arouse you during this stage","The brain is active and dreams occur","Heart rate and blood pressure increase","Breathing becomes more rapid, irregular, and shallow, eyes move rapidly in various directions"], a:0},
+{t:"Adults need ……………………… sleep hours", o:["9–12.","8–10.","About 7-9.","About 7-8."], a:2},
+{t:"A complete sleep cycle consists of NON-REM and REM cycle which repeated ………………………… per night", o:["2 to 3 times.","4 to 5 times.","5 to 6 times.","6 to 7 times."], a:2},
+{t:"The brain does not become active during sleep, in fact, there is an increase in neurological activity during sleep.", o:["True","False"], a:1},
+{t:"Almost a third of the general population has some problems with sleep during any given year", o:["True","False"], a:0},
+{t:"More hours of sleep are needed in pregnancy, sickness, mental stress and after strenuous work", o:["True","False"], a:0},
+{t:"Individuals maintain consciousness during sleep paralysis episodes, which frequently involve hallucinations or a sensation of suffocation.", o:["True","False"], a:0},
+{t:"Non-REM sleep arousal disorders occur during the first third of the night.", o:["True","False"], a:0},
+{t:"Which of the following best describes \"adaptive behavior\"?", o:["The ability to perform complex academic tasks","The capability to learn new information quickly","The effectiveness in handling everyday tasks and challenges","The ability to memorize facts and figures"], a:2},
+{t:"Which of the following is NOT typically a cause of intellectual disability?", o:["Genetic conditions","Environmental factors","Learning a second language","Prenatal exposure to toxins"], a:2},
+{t:"Which of the following types of support is often provided to individuals with intellectual disabilities to enhance their adaptive functioning?", o:["Environmental modifications","Medication management","Same-age peer interactions","All of the above"], a:3},
+{t:"What is the primary characteristic of mental retardation (intellectual disability)?", o:["Significantly impaired intellectual functioning and deficits in adaptive behavior","Only low IQ scores","Behavioral problems without intellectual impairment","Normal intellectual functioning"], a:0},
+{t:"what is the prevalence of mental retardation in Egypt?", o:["Approximately 1.5%","About 3.9%","5.5%","8.0%"], a:0},
+{t:"An IQ of approximately 70 or below is often used as a significant indicator of intellectual disability.", o:["True","False"], a:0},
+{t:"Mild mental retardation is generally characterized by an IQ level of 50 to 70.", o:["True","False"], a:0},
+{t:"Problems during pregnancy, such as malnutrition or infections, can contribute to intellectual disabilities.", o:["True","False"], a:0},
+{t:"Children with profound mental retardation typically require significant supervision and are not usually capable of independent functioning.", o:["True","False"], a:0},
+{t:"Genetic counseling is considered a primary prevention strategy for mental retardation, aiming to support affected families.", o:["True","False"], a:0},
+{t:"A system of care that promotes mental health by addressing the needs of a local population through accessible and acceptable services. Is a main concept of …….", o:["Family therapy","Group therapy","Environmental therapy","Community mental health"], a:3},
+{t:"Promote mental health awareness considers one of the ………", o:["Concepts of community mental health nursing","Objectives of community mental health nursing","Characteristics of community mental health nursing","Components of community mental health nursing"], a:1},
+{t:"Which of the following is not Resource of the Community Mental health in Egypt …", o:["General and private mental hospital","Psychiatric unit in general hospitals","Drug addict center","Halfway houses"], a:3},
+{t:"It is the specialty of nursing that focuses on treating individuals of all ages who are experiencing short-term or long-term mental illness or psychological distress. This concept of ……", o:["Community mental health nursing","Mental health services","Mental health nursing","Foster home services"], a:2},
+{t:"The patient is able to continue his social contact with the family, community and their illness period. This is advantage of …..", o:["partial hospitalization.","Out-patient services.","In-patient services.","Halfway houses."], a:0},
+{t:"Community Mental Health Centers one of the important community resources which provide comprehensive services for prevention, treatment, and rehabilitation of mental disorders.", o:["True","False"], a:0},
+{t:"Community Mental Health Center provide Crisis intervention and Social skills training.", o:["True","False"], a:0},
+{t:"From the advantage of day and night hospital, the patient is able to continue his social contacts with the family and community.", o:["True","False"], a:0},
+{t:"In half way houses patients occupy a position midway between sickness and health.", o:["True","False"], a:0},
+{t:"Primary Prevention services aimed at reducing the incidence of mental disorders within the population and didn’t provide explaining or teaching", o:["True","False"], a:1}
+];
+
+const TOTAL_TIME = 70*60;
+let Q, cur, sel, saved, review, visited, left, iv, size = 13;
+
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function shuffleOptions(q){const ix=shuffle(q.o.map((_,k)=>k));return {...q,o:ix.map(k=>q.o[k]),a:ix.indexOf(q.a)}}
+function randomizeQuestions(){if(confirm('🔀 هل تريد بدء الامتحان من جديد بترتيب أسئلة عشوائي؟'))init(QUESTIONS)}
+const $ = id => document.getElementById(id);
+
+function init(pool){
+  Q = shuffle([...pool]).map(shuffleOptions); const n = Q.length;
+  cur = 0; sel = Array(n).fill(null); saved = Array(n).fill(false);
+  review = Array(n).fill(false); visited = Array(n).fill(false);
+  left = TOTAL_TIME;
+  $('exam').classList.remove('hide'); $('result').classList.add('hide');
+  $('tot').textContent = $('tot2').textContent = n;
+  clearInterval(iv);
+  iv = setInterval(()=>{
+    left--; const m=Math.floor(left/60), s=left%60, t=$('tm');
+    t.textContent = m+':'+(s<10?'0':'')+s;
+    t.className = 't'+(left<=120?' danger':left<=300?' warn':'');
+    if(left<=0){clearInterval(iv);finish()}
+  },1000);
+  if(n) render();
+  window.scrollTo(0,0);
+}
+
+function render(){
+  visited[cur] = true;
+  const q = Q[cur];
+  $('qno').textContent = 'Question No. ' + (cur+1);
+  $('qbody').style.fontSize = size+'px';
+  $('qbody').innerHTML = `<div class="qtext" style="font-size:${size}px">${q.t}</div>` +
+    q.o.map((o,i)=>`<label class="opt" style="font-size:${size}px"><input type="radio" name="o" value="${i}" ${sel[cur]===i?'checked':''} onchange="sel[cur]=${i}"> <span>${o}</span></label>`).join('');
+  refresh();
+}
+
+function status(i){
+  if(review[i]) return 's-rev';
+  if(saved[i]) return 's-ans';
+  if(visited[i]) return 's-no';
+  return 's-nv';
+}
+function refresh(){
+  const n = Q.length; let a=0,no=0,r=0,nv=0;
+  $('nav').innerHTML = Q.map((_,i)=>{
+    const s = status(i);
+    if(saved[i]) a++;
+    if(s==='s-rev') r++; else if(s==='s-no') no++; else if(s==='s-nv') nv++;
+    return `<span class="sq ${s} ${i===cur?'cur':''}" onclick="go(${i})">${i+1}</span>`;
+  }).join('');
+  $('ans').textContent = a; $('cAns').textContent = a; $('cNo').textContent = no;
+  $('cRev').textContent = r; $('cNv').textContent = nv;
+}
+
+function go(i){cur=i;render()}
+function nextQ(){ if(cur<Q.length-1){cur++;render();} else refresh(); }
+function saveNext(){ if(sel[cur]!==null) saved[cur]=true; else saved[cur]=false; nextQ(); }
+function skip(){ nextQ(); }
+function mark(){ review[cur]=!review[cur]; if(sel[cur]!==null) saved[cur]=true; refresh(); }
+function resetQ(){ sel[cur]=null; saved[cur]=false; review[cur]=false; render(); }
+function fs(d){ size = d===0 ? 13 : Math.max(11,Math.min(24,size+d*2)); render(); }
+
+function endTest(){
+  const un = Q.filter((_,i)=>sel[i]===null).length;
+  const msg = un ? `لسه فاضل ${un} سؤال من غير إجابة. تنهي الامتحان؟` : 'تنهي الامتحان؟';
+  if(confirm(msg)) finish();
+}
+
+function finish(){
+  clearInterval(iv);
+  const n = Q.length; let ok=[], bad=[];
+  Q.forEach((q,i)=>{ (sel[i]===q.a ? ok : bad).push(i) });
+  const pct = n ? Math.round(ok.length/n*100) : 0;
+  const card = (i,good)=>{
+    const q=Q[i];
+    return `<div class="it ${good?'':'bad'}"><div class="q">${i+1}. ${q.t}</div>
+    ${good ? `<div class="r"><span class="tag g">Correct</span>${q.o[q.a]}</div>` :
+    `<div class="r"><span class="tag y">Your answer</span>${sel[i]===null?'— لم تتم الإجابة —':q.o[sel[i]]}</div>
+     <div class="r"><span class="tag g">Correct</span>${q.o[q.a]}</div>`}
+    ${q.exp?`<div class="exp">💬 ${q.exp}</div>`:''}</div>`;
+  };
+  const unans = Q.filter((_,i)=>sel[i]===null).length;
+  $('exam').classList.add('hide');
+  const r = $('result'); r.classList.remove('hide');
+  r.innerHTML = `<div class="res">
+   <div class="score"><div class="n">${pct}%</div><div>${ok.length} / ${n}</div></div>
+   <div class="stats">
+    <div><b style="color:var(--ok)">${ok.length}</b>صح</div>
+    <div><b style="color:var(--no)">${bad.length - unans}</b>غلط</div>
+    <div><b style="color:#777">${unans}</b>من غير إجابة</div>
+    <div><b>${n}</b>الإجمالي</div>
+   </div>
+   <div class="acts">
+    ${bad.length?'<button class="b" onclick="retryWrong()">إعادة الأسئلة الغلط ('+bad.length+')</button>':''}
+    <button class="b" onclick="init(QUESTIONS)">امتحان جديد عشوائي</button>
+   </div>
+   <div class="sec">✔ الأسئلة اللي اتحلت صح (${ok.length})</div>
+   ${ok.map(i=>card(i,true)).join('') || '<div style="padding:8px;color:#777">لا يوجد</div>'}
+   <div class="sec bad">✖ الأسئلة الغلط (${bad.length})</div>
+   ${bad.map(i=>card(i,false)).join('') || '<div style="padding:8px;color:#777">ممتاز، مفيش أخطاء 🎉</div>'}
+  </div>`;
+  window.scrollTo(0,0);
+}
+
+function retryWrong(){
+  const pool = Q.filter((q,i)=>sel[i]!==q.a);
+  init(pool);
+}
+
+init(QUESTIONS);
+</script>
+</body>
+</html>
