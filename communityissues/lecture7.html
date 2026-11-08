@@ -1,0 +1,412 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+/* Palette: deep harbor teal (people/society) · saffron (awareness) · rose (alert) · sea blue (education) */
+:root {
+  --accent:#0f6b73; --accent-light:#4fb3bb; --accent-dark:#083a40; --accent-glow:rgba(15,107,115,0.2); --accent-rgb:15,107,115;
+  --c2:#0f9d7a; --c3:#e0a100; --c4:#2a74c9;
+  --grad:linear-gradient(160deg,#083a40 0%,#0f6b73 55%,#1b8f8a 100%);
+  --grad-soft:linear-gradient(135deg,#0f6b73,#1b8f8a);
+  --bg:#f1f6f6; --bg2:#e1ecec; --card:#ffffff; --text:#10282b; --text2:#3f5c60; --text3:#789094;
+  --bc:rgba(15,70,75,0.12); --success:#0f9d7a; --danger:#d6336c; --warn:#e0a100; --r:14px;
+  --tr:all 0.25s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="dark"] {
+  --bg:#071a1d; --bg2:#0d2a2e; --card:#10353a; --text:#e8f4f4; --text2:#b2cfd1; --text3:#7ba1a4;
+  --bc:rgba(255,255,255,0.10); --accent:#4fb3bb; --accent-light:#8fd3d8; --accent-dark:#2a8a93;
+  --accent-glow:rgba(79,179,187,0.2); --accent-rgb:79,179,187; --c2:#3fd1a8; --c3:#ffc933; --c4:#6aa8f0;
+  --success:#3fd1a8; --danger:#ff6b9a;
+}
+body { font-family:'Tajawal',sans-serif; background:var(--bg); background-image:radial-gradient(var(--bc) 1.2px,transparent 1.2px); background-size:22px 22px; background-attachment:fixed; color:var(--text); min-height:100vh; overflow-x:hidden; transition:background-color .4s,color .4s; }
+#prog-bar { position:fixed; top:0; right:0; height:4px; z-index:999; background:linear-gradient(270deg,var(--accent),var(--c3)); transition:width .2s; }
+nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:0 24px; height:62px; background:rgba(241,246,246,.94); backdrop-filter:blur(14px); border-bottom:1px solid var(--bc); }
+[data-theme="dark"] nav { background:rgba(7,26,29,.95); }
+.nav-back { display:flex; align-items:center; gap:7px; color:var(--text2); text-decoration:none; font-size:14px; font-weight:700; padding:7px 14px; border-radius:999px; border:1px solid var(--bc); background:var(--card); transition:var(--tr); }
+.nav-back:hover { color:var(--accent); border-color:var(--accent); }
+.nav-brand { display:flex; align-items:center; gap:9px; font-size:15px; font-weight:800; color:var(--text); letter-spacing:.3px; direction:ltr; }
+.nav-logo-icon { width:34px; height:34px; border-radius:50%; background:var(--grad-soft); display:flex; align-items:center; justify-content:center; color:#fff; font-size:12px; font-weight:800; box-shadow:0 0 0 3px var(--card),0 0 0 4px var(--c3); }
+.nav-right { display:flex; align-items:center; gap:8px; }
+.theme-btn { width:38px; height:38px; border-radius:50%; border:1px solid var(--bc); background:var(--card); cursor:pointer; font-size:15px; display:flex; align-items:center; justify-content:center; transition:var(--tr); }
+.theme-btn:hover { border-color:var(--c3); }
+.hero-band { margin-top:62px; background:var(--grad); padding:40px 24px 64px; text-align:center; position:relative; overflow:hidden; transition:background .5s; }
+.hero-band > * { position:relative; }
+.rings { position:absolute !important; inset:0; width:100%; height:100%; opacity:.35; pointer-events:none; }
+.rings circle { fill:none; stroke:#fff; stroke-width:1.5; }
+.rings .gold { stroke:#ffc933; stroke-width:2; }
+.hero-band::after { content:''; position:absolute; left:0; right:0; bottom:-1px; height:26px; background:var(--bg); border-radius:26px 26px 0 0; }
+.hero-band-icon { width:70px; height:70px; border-radius:50%; background:rgba(255,255,255,.14); display:flex; align-items:center; justify-content:center; font-size:32px; margin:0 auto 14px; border:2px solid #ffc933; }
+.hero-band h1 { font-size:clamp(24px,5vw,34px); font-weight:800; color:#fff; margin-bottom:4px; }
+.hero-band p { font-size:14px; color:rgba(255,255,255,.88); font-weight:500; }
+.hero-band-meta { display:flex; justify-content:center; gap:10px; margin-top:18px; flex-wrap:wrap; }
+.meta-pill { background:rgba(255,255,255,.14); border:1px solid rgba(255,255,255,.3); border-radius:999px; padding:6px 15px; font-size:13px; font-weight:700; color:#fff; display:flex; align-items:center; gap:7px; }
+.shell { max-width:560px; margin:0 auto; padding:14px 20px 80px; }
+.stats-row { display:grid; grid-template-columns:1fr 1fr 1fr; gap:10px; margin-bottom:16px; }
+.stat-box { background:var(--card); border:1px solid var(--bc); border-radius:var(--r); padding:12px 10px; text-align:center; border-top:4px solid var(--bc); }
+.stat-box:nth-child(1) { border-top-color:var(--success); }
+.stat-box:nth-child(2) { border-top-color:var(--danger); }
+.stat-box:nth-child(3) { border-top-color:var(--c3); }
+.stat-box .val { font-size:22px; font-weight:800; }
+.stat-box .lbl { font-size:12px; color:var(--text3); margin-top:2px; font-weight:500; }
+.stat-correct { color:var(--success); } .stat-wrong { color:var(--danger); } .stat-remain { color:var(--c3); }
+.prog-strip { background:var(--card); border:1px solid var(--bc); border-radius:var(--r); padding:14px 16px; margin-bottom:16px; display:flex; align-items:center; gap:14px; }
+.prog-label { font-size:14px; font-weight:700; color:var(--text2); white-space:nowrap; }
+.prog-track { flex:1; height:10px; background:var(--bg2); border-radius:10px; overflow:hidden; }
+.prog-fill { height:100%; width:0%; background:linear-gradient(270deg,var(--accent),var(--c3)); border-radius:10px; transition:width .4s; }
+.timer-badge { min-width:68px; height:36px; border-radius:999px; background:var(--bg2); border:1px solid var(--bc); display:flex; align-items:center; justify-content:center; font-size:14px; font-weight:800; color:var(--text); gap:5px; padding:0 12px; flex-shrink:0; font-variant-numeric:tabular-nums; direction:ltr; }
+.timer-badge.warn { color:var(--warn); border-color:rgba(224,161,0,.4); background:rgba(224,161,0,.1); }
+.timer-badge.danger { color:var(--danger); border-color:rgba(214,51,108,.35); background:rgba(214,51,108,.08); animation:pulse .8s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.6} }
+.q-card { background:var(--card); border:1px solid var(--bc); border-radius:22px; overflow:hidden; box-shadow:0 10px 30px rgba(8,58,64,.10); }
+.q-header { background:var(--grad); padding:8px 20px; display:flex; align-items:center; gap:8px; transition:background .5s; }
+.q-num { background:rgba(255,255,255,.2); border-radius:999px; padding:3px 12px; font-size:12px; font-weight:700; color:#fff; }
+.q-text { padding:24px 20px 16px; font-size:17px; font-weight:700; color:var(--text); line-height:1.8; border-bottom:1px dashed var(--bc); text-align:right; direction:rtl; }
+.q-text img { display:block; max-width:100%; max-height:260px; margin:0 auto 12px; border-radius:12px; background:#fff; }
+.options { padding:16px 18px 18px; display:flex; flex-direction:column; gap:10px; }
+.opt { display:flex; align-items:center; gap:12px; padding:14px 16px; border-radius:16px; border:1.5px solid var(--bc); background:var(--bg); cursor:pointer; font-size:15px; font-weight:500; line-height:1.7; color:var(--text); transition:var(--tr); user-select:none; direction:rtl; text-align:right; }
+.opt:hover:not(.disabled) { border-color:var(--accent); background:rgba(var(--accent-rgb),.08); transform:translateX(-3px); }
+.opt-letter { width:30px; height:30px; border-radius:50%; flex-shrink:0; background:var(--bg2); border:1px solid var(--bc); display:flex; align-items:center; justify-content:center; font-size:13px; font-weight:800; color:var(--text3); transition:var(--tr); direction:ltr; }
+.opt:nth-child(1) .opt-letter { background:rgba(15,107,115,.12); color:#0f6b73; border-color:rgba(15,107,115,.35); }
+.opt:nth-child(2) .opt-letter { background:rgba(224,161,0,.15); color:#a87800; border-color:rgba(224,161,0,.45); }
+.opt:nth-child(3) .opt-letter { background:rgba(214,51,108,.11); color:#d6336c; border-color:rgba(214,51,108,.35); }
+.opt:nth-child(4) .opt-letter { background:rgba(42,116,201,.12); color:#2a74c9; border-color:rgba(42,116,201,.35); }
+[data-theme="dark"] .opt:nth-child(1) .opt-letter { color:#8fd3d8; } [data-theme="dark"] .opt:nth-child(2) .opt-letter { color:#ffc933; }
+[data-theme="dark"] .opt:nth-child(3) .opt-letter { color:#ff8fb3; } [data-theme="dark"] .opt:nth-child(4) .opt-letter { color:#8fbdf5; }
+.opt.correct { border-color:var(--success); background:rgba(15,157,122,.12); }
+.opt.correct .opt-letter { background:var(--success); color:#fff; border-color:var(--success); }
+.opt.wrong { border-color:var(--danger); background:rgba(214,51,108,.08); }
+.opt.wrong .opt-letter { background:var(--danger); color:#fff; border-color:var(--danger); }
+.opt.disabled { pointer-events:none; }
+.feedback-bar { margin:14px 18px; padding:12px 16px; border-radius:14px; display:flex; align-items:center; gap:10px; font-size:15px; font-weight:700; animation:popIn .4s cubic-bezier(.34,1.56,.64,1); }
+@keyframes popIn { from{transform:scale(.8);opacity:0} to{transform:scale(1);opacity:1} }
+.feedback-bar.ok { background:rgba(15,157,122,.12); color:var(--success); border:1px solid rgba(15,157,122,.3); }
+.feedback-bar.no { background:rgba(214,51,108,.09); color:var(--danger); border:1px solid rgba(214,51,108,.25); }
+.feedback-icon { font-size:20px; }
+.explanation { margin:0 18px 14px; padding:12px 14px; background:rgba(224,161,0,.10); border-radius:12px; border-right:4px solid var(--c3); font-size:14px; color:var(--text2); line-height:1.8; display:none; }
+.nav-btns { padding:4px 18px 18px; display:flex; gap:10px; }
+.btn { flex:1; padding:13px; border:none; border-radius:999px; font-size:15px; font-weight:800; cursor:pointer; font-family:'Tajawal',sans-serif; transition:var(--tr); display:flex; align-items:center; justify-content:center; gap:8px; }
+.btn:focus-visible, .opt:focus-visible, .theme-btn:focus-visible { outline:3px solid var(--c3); outline-offset:2px; }
+.btn-next { background:var(--grad-soft); color:#fff; box-shadow:0 4px 14px rgba(15,107,115,.3); }
+.btn-next:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(15,107,115,.4); }
+.btn-skip { background:var(--bg2); color:var(--text2); border:1px solid var(--bc); flex:0 0 auto; padding:13px 20px; }
+.btn-skip:hover { border-color:var(--c3); color:var(--warn); }
+.result-hero { text-align:center; padding:36px 20px 28px; background:var(--card); border-radius:22px; border:1px solid var(--bc); margin-bottom:20px; box-shadow:0 10px 30px rgba(8,58,64,.10); border-top:6px solid var(--c3); }
+.score-ring { width:112px; height:112px; border-radius:50%; margin:0 auto 18px; display:flex; align-items:center; justify-content:center; flex-direction:column; border:5px solid var(--bg2); position:relative; }
+.score-ring svg { position:absolute; inset:-5px; width:calc(100% + 10px); height:calc(100% + 10px); transform:rotate(-90deg); }
+.score-ring circle { fill:none; stroke-width:5; stroke-linecap:round; }
+.ring-bg { stroke:var(--bg2); }
+.ring-fill { stroke:var(--accent); transition:stroke-dashoffset 1s ease; }
+.score-num { font-size:28px; font-weight:800; color:var(--text); }
+.score-pct { font-size:12px; color:var(--text3); }
+.result-grade { font-size:24px; font-weight:800; margin-bottom:6px; }
+.result-sub { font-size:15px; color:var(--text2); }
+.result-stats { display:grid; grid-template-columns:repeat(3,1fr); gap:10px; margin-top:20px; }
+.rs { background:var(--bg2); border-radius:14px; padding:12px 8px; text-align:center; }
+.rs .n { font-size:22px; font-weight:800; } .rs .l { font-size:12px; color:var(--text3); }
+.report-item { background:var(--card); border:1px solid var(--bc); border-radius:14px; padding:16px; margin-bottom:10px; border-right:5px solid var(--bc); }
+.report-item.ok { border-right-color:var(--success); } .report-item.no { border-right-color:var(--danger); }
+.report-item .ri-q { font-size:14px; font-weight:700; margin-bottom:8px; direction:rtl; text-align:right; line-height:1.7; }
+.report-item .ri-q img { max-height:90px; display:block; margin:6px 0; border-radius:8px; }
+.report-item .ri-row { display:flex; align-items:center; gap:8px; font-size:13px; margin-top:6px; color:var(--text2); direction:rtl; text-align:right; line-height:1.7; }
+.ri-badge { padding:2px 10px; border-radius:999px; font-weight:700; font-size:12px; flex-shrink:0; }
+.ri-yours { background:rgba(214,51,108,.12); color:var(--danger); } .ri-right { background:rgba(15,157,122,.12); color:var(--success); }
+.result-actions { display:flex; flex-direction:column; gap:10px; margin-top:20px; }
+.btn-retry { background:linear-gradient(135deg,#e0a100,#0f6b73); color:#fff; }
+.btn-retry:hover { transform:translateY(-2px); box-shadow:0 6px 20px rgba(15,107,115,.3); }
+.btn-home { background:var(--bg2); color:var(--text); border:1px solid var(--bc); }
+.btn-home:hover { border-color:var(--accent); color:var(--accent); }
+footer { background:var(--bg2); border-top:1px solid var(--bc); padding:22px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+.footer-brand { font-size:14px; font-weight:700; direction:ltr; } .footer-brand span { color:var(--accent); }
+.footer-tg { display:flex; align-items:center; gap:5px; text-decoration:none; color:#229ED9; font-size:13px; font-weight:600; direction:ltr; }
+@media (max-width:480px) { nav{padding:0 14px;} .shell{padding:10px 14px 60px;} .nav-brand span{display:none;} .hero-band{padding:30px 16px 56px;} .q-text{font-size:16px;} }
+@media (prefers-reduced-motion: reduce) { * { animation:none !important; transition:none !important; } }
+</style>
+</head>
+<body>
+<div id="prog-bar" style="width:0%"></div>
+<nav>
+  <a href="https://gaith-team.github.io/exam/" class="nav-back"><i class="fa-solid fa-arrow-right"></i> رجوع</a>
+  <div class="nav-brand"><div class="nav-logo-icon">GT</div><span>GHAITH TEAM</span></div>
+  <div class="nav-right"><button class="theme-btn" id="themeBtn">🌙</button></div>
+</nav>
+<div class="hero-band">
+  <svg class="rings" viewBox="0 0 600 220" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
+    <circle cx="90" cy="60" r="70"/><circle cx="150" cy="60" r="70" class="gold"/><circle cx="120" cy="115" r="70"/>
+    <circle cx="470" cy="150" r="60"/><circle cx="525" cy="150" r="60"/><circle cx="497" cy="100" r="60" class="gold"/>
+  </svg>
+  <div class="hero-band-icon">🤝</div>
+  <h1>المواطنة</h1>
+  <p>Community Issues</p>
+  <div class="hero-band-meta">
+    <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">-- سؤال</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-clock"></i> 40 دقيقة</div>
+    <div class="meta-pill"><i class="fa-solid fa-shuffle"></i> ترتيب عشوائي</div>
+  </div>
+</div>
+<div class="shell">
+  <div class="stats-row">
+    <div class="stat-box"><div class="val stat-correct" id="sCorrect">0</div><div class="lbl">✔ صحيح</div></div>
+    <div class="stat-box"><div class="val stat-wrong" id="sWrong">0</div><div class="lbl">✖ خطأ</div></div>
+    <div class="stat-box"><div class="val stat-remain" id="sRemain">--%</div><div class="lbl">⏳ متبقي</div></div>
+  </div>
+  <div class="prog-strip">
+    <div class="prog-label" id="progLabel">سؤال ١</div>
+    <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+    <div class="timer-badge" id="timerBadge"><i class="fa-regular fa-clock"></i> <span id="timerTxt">40:00</span></div>
+  </div>
+  <div id="app"></div>
+</div>
+<footer>
+  <div class="footer-brand">GHAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg"><i class="fa-brands fa-telegram"></i> @nursing2bu</a>
+</footer>
+<script>
+const QUESTIONS = [
+{t:"المواطنة هي:",o:["علاقة اقتصادية بين الفرد والشركات","علاقة قانونية واجتماعية تربط الفرد بوطنه قائمة على الحقوق والواجبات المتبادلة","علاقة عشائرية بين أفراد القبيلة","علاقة دينية بين الفرد والمؤسسة الدينية"],a:1},
+{t:"كلمة «مواطنة» مشتقة من:",o:["وطن","نطق","وطء","موطئ"],a:0},
+{t:"كلمة «مواطنة» من حيث ورودها في اللغة:",o:["وردت في المعاجم العربية القديمة","وردت في القرآن الكريم","وردت في كل المعاجم الحديثة فقط","لم ترد في المعاجم العربية وهي كلمة حديثة"],a:3},
+{t:"المواطن هو:",o:["من يقيم في الدولة مؤقتًا","عضو في دولة له ما لأي شخص من حقوق وامتيازات كفلها الدستور وعليه ما عليه من واجبات","من يملك عقارًا فقط","من يعمل بالسياسة فقط"],a:1},
+{t:"الشعور بالانتماء والولاء للوطن والمجتمع يسمى:",o:["الوطنية","الديمقراطية","التنشئة","اللامبالاة"],a:0},
+{t:"الديمقراطية تعني:",o:["حكم الفرد للشعب","حكم الطبقة الغنية","حكم الشعب بالشعب","حكم الأغلبية الدينية"],a:2},
+{t:"الديمقراطية هي أساس:",o:["الاغتراب","الهجرة","العزلة","المواطنة"],a:3},
+{t:"من مظاهر ضعف الوعي بقيم المواطنة:",o:["المشاركة السياسية الفعالة","السلبية واللامبالاة","الشعور بالانتماء","احترام القوانين"],a:1},
+{t:"كل ما يلي من المفاهيم ذات الصلة بمفهوم المواطنة عدا:",o:["الديمقراطية","الوطنية","حقوق الإنسان","الخصخصة"],a:3},
+{t:"من الناحية السياسية تعد المواطنة:",o:["مصدر الولاء القبلي","مجرد شعور عاطفي","مصدر العلاقات السياسية والقانونية","علاقة من طرف واحد"],a:2},
+{t:"من صور مشاركة المواطن في صنع القرار السياسي:",o:["حق التصويت في الانتخابات","الامتناع عن المشاركة","الهجرة","الخروج على القانون"],a:0},
+{t:"تعد المواطنة صفة:",o:["وراثية فقط","مكتسبة من المجتمع الذي نشأ فيه الفرد","تمنح بالقوة","لا تتغير ولا تتطور"],a:1},
+{t:"تمارس المواطنة وتتطور من خلال عملية:",o:["التجارة","الهجرة","العزلة","التنشئة الاجتماعية"],a:3},
+{t:"أكدت الاهتمام بقيم المواطنة كعنصر رئيسي في تكوين شخصية الفرد مؤتمرات:",o:["الصحة العالمية","البنك الدولي","اليونسكو الدولية","الأمم المتحدة للأغذية"],a:2},
+{t:"من القيم التي تتطلبها العمليات الديمقراطية:",o:["العدل والمساواة وسيادة القانون","التعصب والإقصاء","الاحتكار","الانغلاق"],a:0},
+{t:"الولاء كقيمة من قيم المواطنة يعني:",o:["الخضوع للأقوى","ارتباط قوي بالوطن والاعتزاز به والفخر بالانتماء","الالتزام بالقبيلة","الطاعة العمياء"],a:1},
+{t:"الانتماء يتطلب:",o:["السلبية","الاغتراب","مواطنة إيجابية ومشاركة فعالة ودعم قضايا الوطن داخليًا وخارجيًا","الصمت عن القضايا العامة"],a:2},
+{t:"التسامح كقيمة وطنية يعني الاحترام لكل المواطنين بغض النظر عن:",o:["الكفاءة","الأخلاق","الإنتاجية","الدين أو النوع أو الثقافة أو اللغة"],a:3},
+{t:"الالتزام كقيمة من قيم المواطنة يقصد به الالتزام بـ:",o:["القوانين واللوائح والأعراف حتى يسود العدل","رأي الأغلبية دائمًا","رغبات الفرد فقط","تعليمات الأسرة فقط"],a:0},
+{t:"كل ما يلي من قيم المواطنة في بعدها العالمي عدا:",o:["السلام","الانعزال عن الشعوب","التعاون","الدفاع المشترك"],a:1},
+{t:"الدفاع المشترك في بعد المواطنة العالمي يهدف إلى:",o:["غزو الدول","السيطرة على الأقاليم","صد كل اعتداء على الدول والأقاليم حتى ينعم الناس جميعًا بخيرات الحياة","تقليل التعاون الدولي"],a:2},
+{t:"من أسباب الاهتمام بموضوع المواطنة في المجتمع المصري:",o:["الانفتاح السياسي والاقتصادي وتعدد التوجهات والتعديلات الدستورية","غياب التغيرات","انعدام وسائل الإعلام","ثبات الأوضاع"],a:0},
+{t:"الثورة المعرفية والإعلامية وانتشار وسائل الاتصال أدت في بعض الأحيان إلى:",o:["تقوية الولاء لدى الجميع","زيادة الهوية الثقافية","منع تبادل الأفكار","تهديد قيم الهوية الثقافية والانتماء الوطني"],a:3},
+{t:"من المشكلات والسلوكيات السلبية الناتجة عن ضعف قيم المواطنة:",o:["التعاون والتطوع","العنف والتطرف والإرهاب","احترام القانون","المشاركة الإيجابية"],a:1},
+{t:"تعتمد سلامة المجتمع واستقراره، إضافة إلى القوانين والنظام الديمقراطي، على:",o:["وعي المواطنين بحقوقهم وواجباتهم وإدراكهم لهويتهم الوطنية وقدرتهم على التسامح","عدد السكان فقط","الموارد الطبيعية فقط","القوة العسكرية فقط"],a:0},
+{t:"تنمية المواطنة هي:",o:["مسؤولية الأسرة وحدها","مسؤولية المدرسة وحدها","عملية تشاركية تتكامل فيها جهود جميع مؤسسات المجتمع","مسؤولية الإعلام وحده"],a:2},
+{t:"من الظروف التي أدت إلى سلبية المواطنين ونقص قيم المواطنة:",o:["العدالة الاجتماعية","الثقة في القوى الحاكمة","قلة وسائل الاتصال","انشغال الفقراء بالبحث عن لقمة العيش والفجوة بين الحكام والشعب وعدم الثقة في القوى الحاكمة"],a:3},
+{t:"يبرز من بين مؤسسات المجتمع دور:",o:["دور العبادة فقط","المدرسة","الأندية الرياضية","الشركات"],a:1},
+{t:"سبب بروز دور المدرسة في تنمية قيم المواطنة أنها:",o:["مؤسسة لها هياكل وأدوار وأساليب تنفيذ واضحة ومخططة لغرس قيم معينة أهمها قيم المواطنة","الوحيدة في المجتمع","لا تحتاج إلى تخطيط","تعمل بمعزل عن المجتمع"],a:0},
+{t:"من دور المؤسسة الإعلامية في تنمية المواطنة:",o:["نشر الإشاعات","التركيز على الترفيه فقط","برامج للتثقيف السياسي والمدني لتعريف المواطنين بالدستور والقوانين","عدم التطرق للتشريعات"],a:2},
+{t:"تسهم المؤسسة الدينية في تنمية قيم المواطنة من خلال:",o:["فصل القيم الوطنية عن الدين","ربط القيم الوطنية بالتعاليم الدينية السمحة","التركيز على الخلافات","تجاهل المال العام"],a:1},
+{t:"تتيح منظمات المجتمع المدني للطلاب تنمية المواطنة من خلال:",o:["الدراسة النظرية فقط","الامتحانات","الاعتزال عن المجتمع","إشراكهم في الأنشطة التطوعية والخدمية"],a:3},
+{t:"من أمثلة الأنشطة التي تتيحها منظمات المجتمع المدني لتطبيق قيم المواطنة:",o:["حملات النظافة ومحو الأمية ودعم الفئات المحتاجة","الألعاب الإلكترونية","السفر والترفيه","التجارة"],a:0},
+{t:"أي العبارات التالية تصف العلاقة الصحيحة بين الديمقراطية والمواطنة؟",o:["هما تعبيران عن الشيء نفسه تمامًا","لا علاقة بينهما","الديمقراطية مجموعة أفكار ومبادئ وممارسات وإجراءات وهي أساس المواطنة وليستا مترادفتين","المواطنة أساس الديمقراطية فقط"],a:2},
+{t:"الوطن هو موطن الإنسان ومحل إقامته.",o:["صح","غلط"],a:0},
+{t:"لا تقوم المواطنة على حقوق وواجبات متبادلة بين المواطن والدولة.",o:["صح","غلط"],a:1},
+{t:"وردت كلمة «مواطنة» في المعاجم العربية القديمة.",o:["صح","غلط"],a:1},
+{t:"المواطن جزء من كل وليس كينونة معزولة.",o:["صح","غلط"],a:0},
+{t:"الديمقراطية والمواطنة تعبران عن الشيء نفسه تمامًا.",o:["صح","غلط"],a:1},
+{t:"لم تعد المواطنة محصورة في ولاء عشائري أو قبلي أو طائفي أو عرقي أو ديني.",o:["صح","غلط"],a:0},
+{t:"مفهوم المواطنة الاجتماعي محصور في الإطار السياسي فقط.",o:["صح","غلط"],a:1},
+{t:"المواطنة علاقة متبادلة بين الفرد والدولة.",o:["صح","غلط"],a:0},
+{t:"اهتمت مؤتمرات اليونسكو الدولية بقيم المواطنة.",o:["صح","غلط"],a:0},
+{t:"تتعارض قيم المواطنة مع قبول الرأي الآخر واحترام حقوق الأقلية.",o:["صح","غلط"],a:1},
+{t:"من المستحيل إيجاد مواطنين سلبيي الحقوق والحريات يفتخرون بانتمائهم الوطني.",o:["صح","غلط"],a:0},
+{t:"ضعف المشاركة السياسية والإحساس بالاغتراب والرغبة في الهجرة من مظاهر ضعف الوعي بقيم المواطنة.",o:["صح","غلط"],a:0},
+{t:"تنمية المواطنة مسؤولية المدرسة وحدها دون غيرها.",o:["صح","غلط"],a:1},
+{t:"الدين يحث على حب الوطن والتسامح والتعاون واحترام الآخر.",o:["صح","غلط"],a:0},
+{t:"لا علاقة لمنظمات المجتمع المدني بتنمية قيم المواطنة.",o:["صح","غلط"],a:1}
+];
+
+
+/* ============ ENGINE ============ */
+let questions, i, correct, wrong, answers, wrongSet, answered;
+let totalTime = 40*60, timeLeft, timerInterval;
+const LETTERS = ['A','B','C','D','E','F'];
+function shuffle(arr) { for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; }
+function shuffleOptions(q) {
+  const idx = shuffle(q.o.map((_, k) => k));
+  return {...q, o: idx.map(k => q.o[k]), a: idx.indexOf(q.a)};
+}
+function init(pool) {
+  questions = shuffle([...pool]).map(shuffleOptions);
+  i = 0; correct = 0; wrong = 0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = []; answered = 0; timeLeft = totalTime;
+  document.getElementById('totalBadge').textContent = questions.length + ' سؤال';
+  startTimer(); render();
+}
+function startTimer() {
+  clearInterval(timerInterval);
+  document.getElementById('timerBadge').className = 'timer-badge';
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    const m = Math.floor(timeLeft / 60), s = timeLeft % 60;
+    document.getElementById('timerTxt').textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
+    const badge = document.getElementById('timerBadge');
+    if (timeLeft <= 120) { badge.className = 'timer-badge danger'; }
+    else if (timeLeft <= 300) { badge.className = 'timer-badge warn'; }
+    if (timeLeft <= 0) { clearInterval(timerInterval); finish(); }
+  }, 1000);
+}
+function updateTop() {
+  const total = questions.length;
+  document.getElementById('sCorrect').textContent = correct;
+  document.getElementById('sWrong').textContent = wrong;
+  document.getElementById('sRemain').textContent = Math.round(((total - answered) / total) * 100) + '%';
+  document.getElementById('progLabel').textContent = 'سؤال ' + (i + 1) + ' / ' + total;
+  document.getElementById('progFill').style.width = ((i + 1) / total * 100) + '%';
+  document.getElementById('prog-bar').style.width = ((i + 1) / total * 100) + '%';
+}
+const SYSTEMS = [
+  { icon:'🤝', l:['#0f6b73','15,107,115','#083a40','#0f6b73','#1b8f8a'], d:['#4fb3bb','79,179,187'] }, /* society / values */
+  { icon:'📣', l:['#b57f00','181,127,0','#6b4a00','#b57f00','#0f6b73'], d:['#ffc933','255,201,51'] }, /* awareness / media */
+  { icon:'🏘️', l:['#c2255c','194,37,92','#7a1237','#c2255c','#7b3fa0'], d:['#ff8fb3','255,143,179'] }, /* family / community */
+  { icon:'🎓', l:['#2a74c9','42,116,201','#12427a','#2a74c9','#0f6b73'], d:['#8fbdf5','143,189,245'] }  /* education / citizenship */
+];
+function applyPalette() {
+  const s = SYSTEMS[(i || 0) % SYSTEMS.length];
+  const dark = document.documentElement.getAttribute('data-theme') === 'dark';
+  const r = document.documentElement.style;
+  const main = dark ? s.d[0] : s.l[0], rgb = dark ? s.d[1] : s.l[1];
+  r.setProperty('--accent', main);
+  r.setProperty('--accent-rgb', rgb);
+  r.setProperty('--accent-glow', `rgba(${rgb},0.2)`);
+  r.setProperty('--grad', `linear-gradient(160deg,${s.l[2]} 0%,${s.l[3]} 55%,${s.l[4]} 100%)`);
+  r.setProperty('--grad-soft', `linear-gradient(135deg,${s.l[3]},${s.l[4]})`);
+  const ic = document.querySelector('.hero-band-icon'); if (ic) ic.textContent = s.icon;
+}
+function render() {
+  applyPalette();
+  updateTop();
+  const q = questions[i];
+  document.getElementById('app').innerHTML = `
+    <div class="q-card">
+      <div class="q-header"><div class="q-num">سؤال ${i + 1} / ${questions.length}</div></div>
+      <div class="q-text">${q.t}</div>
+      <div class="options">
+        ${q.o.map((o, idx) => `
+          <div class="opt" id="opt${idx}" onclick="choose(${idx})">
+            <div class="opt-letter">${LETTERS[idx] || idx + 1}</div>
+            ${o}
+          </div>`).join('')}
+      </div>
+      <div class="nav-btns"><button class="btn btn-skip" onclick="skip()"><i class="fa-solid fa-forward"></i> تخطي</button></div>
+    </div>`;
+}
+function choose(v) {
+  if (answers[i] !== null) return;
+  answers[i] = v; answered++;
+  const q = questions[i];
+  const ok = v === q.a;
+  ok ? correct++ : wrong++;
+  updateTop();
+  q.o.forEach((_, idx) => {
+    const el = document.getElementById('opt' + idx);
+    el.classList.add('disabled');
+    if (idx === q.a) el.classList.add('correct');
+    else if (idx === v) el.classList.add('wrong');
+  });
+  const fb = document.createElement('div');
+  fb.className = 'feedback-bar ' + (ok ? 'ok' : 'no');
+  fb.innerHTML = ok
+    ? `<span class="feedback-icon">🎉</span> <span>ممتاز ، اللهم بارك </span>`
+    : `<span class="feedback-icon">😔</span> <span>ركز يا سكر</span>`;
+  const card = document.querySelector('.q-card');
+  card.querySelector('.options').after(fb);
+  if (q.exp) {
+    const exp = document.createElement('div');
+    exp.className = 'explanation'; exp.style.display = 'block';
+    exp.innerHTML = '<b>💬 شرح:</b> ' + q.exp;
+    fb.after(exp);
+  }
+  const navBtns = card.querySelector('.nav-btns');
+  navBtns.innerHTML = `<button class="btn btn-next" onclick="next()">
+    ${i < questions.length - 1 ? '<i class="fa-solid fa-arrow-left"></i> السؤال التالي' : '<i class="fa-solid fa-flag-checkered"></i> إنهاء الامتحان'}
+  </button>`;
+}
+function skip() {
+  if (answers[i] === null) { answers[i] = -1; answered++; wrongSet.push(questions[i]); wrong++; updateTop(); }
+  next();
+}
+function next() {
+  if (i < questions.length - 1) { i++; render(); window.scrollTo({top: 0, behavior: 'smooth'}); }
+  else finish();
+}
+function finish() {
+  clearInterval(timerInterval);
+  const total = questions.length;
+  const score = Math.round((correct / total) * 100);
+  questions.forEach((q, idx) => { if (answers[idx] !== q.a) wrongSet.push({...q, myAns: answers[idx]}); });
+  wrongSet = [...new Map(wrongSet.map(q => [q.t, q])).values()];
+  let grade, gradeColor;
+  if (score >= 90) { grade = '🥇 ممتاز'; gradeColor = 'var(--success)'; }
+  else if (score >= 75) { grade = '🥈 جيد جداً'; gradeColor = 'var(--c4)'; }
+  else if (score >= 60) { grade = '🥉 جيد'; gradeColor = 'var(--warn)'; }
+  else { grade = '📚 راجع تاني'; gradeColor = 'var(--danger)'; }
+  const circ = 2 * Math.PI * 45;
+  const offset = circ - (score / 100) * circ;
+  const reportHTML = questions.map((q, idx) => {
+    const ok = answers[idx] === q.a;
+    return `<div class="report-item ${ok ? 'ok' : 'no'}">
+      <div class="ri-q">${ok ? '✅' : '❌'} ${q.t}</div>
+      ${!ok ? `
+        <div class="ri-row"><span class="ri-badge ri-yours">إجابتك</span> ${answers[idx] >= 0 ? q.o[answers[idx]] : 'تم التخطي'}</div>
+        <div class="ri-row"><span class="ri-badge ri-right">الصحيح</span> ${q.o[q.a]}</div>` : ''}
+    </div>`;
+  }).join('');
+  document.getElementById('prog-bar').style.width = '100%';
+  document.getElementById('app').innerHTML = `
+    <div class="result-hero">
+      <div class="score-ring">
+        <svg viewBox="0 0 110 110">
+          <circle class="ring-bg" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="0"/>
+          <circle class="ring-fill" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="${circ}" style="stroke:${gradeColor}" id="ringFill"/>
+        </svg>
+        <div class="score-num">${score}</div><div class="score-pct">%</div>
+      </div>
+      <div class="result-grade" style="color:${gradeColor}">${grade}</div>
+      <div class="result-sub">أجبت على ${answered} من ${total} سؤال</div>
+      <div class="result-stats">
+        <div class="rs"><div class="n" style="color:var(--success)">${correct}</div><div class="l">صحيح</div></div>
+        <div class="rs"><div class="n" style="color:var(--danger)">${wrong}</div><div class="l">خطأ</div></div>
+        <div class="rs"><div class="n" style="color:var(--c3)">${total - answered < 0 ? 0 : total - answered}</div><div class="l">تخطي</div></div>
+      </div>
+    </div>
+    <div class="result-actions">
+      ${wrongSet.length ? `<button class="btn btn-retry" onclick="retryWrong()"><i class="fa-solid fa-rotate-right"></i> إعادة الخطأ (${wrongSet.length})</button>` : ''}
+      <button class="btn btn-home" onclick="init(QUESTIONS)"><i class="fa-solid fa-shuffle"></i> امتحان جديد عشوائي</button>
+      <a href="https://gaith-team.github.io/exam/" class="btn btn-home" style="text-decoration:none;"><i class="fa-solid fa-house"></i> رجوع للمادة</a>
+    </div>
+    <div style="margin-top:28px">
+      <div style="font-size:15px;font-weight:700;margin-bottom:12px;color:var(--text2)">📋 تقرير مفصّل</div>
+      ${reportHTML}
+    </div>`;
+  setTimeout(() => { document.getElementById('ringFill').style.strokeDashoffset = offset; }, 100);
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+function retryWrong() {
+  const pool = [...wrongSet];
+  questions = shuffle(pool).map(shuffleOptions); i = 0; correct = 0; wrong = 0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = []; answered = 0; timeLeft = totalTime;
+  startTimer(); render();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+const themeBtn = document.getElementById('themeBtn');
+let theme = localStorage.getItem('theme') || 'light';
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', t);
+  applyPalette();
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+init(QUESTIONS);
+</script>
+</body>
+</html>
