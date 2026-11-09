@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--teal:#be123c;--teal-d:#6b0f2a;--blue:#f4e6e9;--bd:#e6d2d6;--ok:#15803d;--no:#b91c1c;--rev:#3b3a8c;--txt:#2a1a20;--grad:linear-gradient(135deg,#4a0b1f,#6b0f2a 45%,#2b1b5a)}
+body{font-family:'Cairo',Arial,sans-serif;background:#fbf4f5;color:var(--txt);font-size:14px}
+header{background:var(--grad);color:#fff;text-align:center;padding:12px;font-size:18px;font-weight:900;position:relative;border-bottom:2px solid #be123c}
+.shf{position:absolute;left:90px;top:9px;background:rgba(255,255,255,.2);color:#fff;border:1px solid rgba(255,255,255,.4);border-radius:6px;padding:4px 10px;cursor:pointer;font-size:13px;font-family:inherit}
+header .brand{position:absolute;right:16px;top:8px;font-weight:bold;font-size:14px}
+header a{position:absolute;left:16px;top:11px;color:#fff;font-size:13px;text-decoration:none}
+.wrap{max-width:1280px;margin:0 auto;padding:8px 10px 20px}
+.topinfo{background:var(--blue);border:1px solid var(--bd);padding:4px 8px;font-size:13px;margin-bottom:8px}
+.topinfo b{color:var(--teal)}
+.layout{display:grid;grid-template-columns:1fr 240px;gap:14px;align-items:start}
+.main{background:#fff;border:1px solid var(--bd);min-height:470px;display:flex;flex-direction:column;
+ background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='70'><text x='8' y='45' transform='rotate(-20 75 35)' font-size='14' font-family='Arial' fill='%23000' fill-opacity='.07'>GHAITH TEAM</text></svg>")}
+.qhead{display:flex;justify-content:space-between;align-items:center;padding:12px 6px 6px;margin:0 6px;border-bottom:1px solid var(--bd)}
+.qhead b{font-size:13px}
+.fs button{background:#3b3a8c;color:#fff;border:0;padding:6px 12px;margin-left:3px;border-radius:2px;cursor:pointer;font-weight:bold}
+.qbody{padding:8px 12px;flex:1}
+.qtext{font-size:13px;line-height:1.7;margin-bottom:18px;direction:ltr;text-align:left}
+.opt{display:flex;align-items:center;gap:8px;margin:0 0 16px;cursor:pointer;direction:ltr;text-align:left;font-size:13px}
+.opt input{accent-color:var(--teal);cursor:pointer}
+.bar{display:flex;justify-content:space-between;padding:10px;gap:6px;flex-wrap:wrap;border-top:1px solid var(--bd);margin:0 6px 6px}
+.b{background:var(--grad);color:#fff;border:0;padding:9px 12px;font-weight:bold;font-size:13px;border-radius:2px;cursor:pointer}
+.b:hover{filter:brightness(1.12)}
+.b.gray{background:#2a1a20}
+.side>div{background:var(--blue);border:1px solid var(--bd);margin-bottom:10px;padding:8px}
+.timer{text-align:center;background:none!important;border:0!important}
+.timer small{font-size:13px}
+.timer .t{font-size:30px;color:#3b3a8c;margin-top:4px}
+.timer .t.warn{color:#c27b0a}.timer .t.danger{color:#c8372d}
+.leg{display:grid;grid-template-columns:1fr 1fr;gap:8px 6px;font-size:10px;margin-top:8px}
+.leg div{display:flex;align-items:center;gap:6px}
+.sq{min-width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:bold;border-radius:2px;border:1px solid transparent}
+.s-ans{background:var(--ok)}.s-no{background:#b45309}.s-rev{background:var(--rev)}.s-nv{background:#fff;color:#333;border-color:#9bb0a2}
+.nav{display:flex;flex-wrap:wrap;gap:6px;max-height:260px;overflow:auto;background:#f4e6e9}
+.nav .sq{width:24px;height:24px;cursor:pointer;font-size:12px}
+.nav .cur{outline:2px solid #2a1a20;outline-offset:0}
+.endrow{text-align:center}
+.endrow .b{width:90px}
+footer{text-align:center;padding:16px;font-size:12px;color:#5c4650;background:#f4e6e9;border-top:2px solid #6b0f2a;margin-top:10px}
+footer a{color:#229ED9;text-decoration:none}
+/* results */
+.res{background:#fff;border:1px solid var(--bd);padding:20px;max-width:900px;margin:10px auto}
+.score{text-align:center;padding:10px 0 18px}
+.score .n{font-size:48px;font-weight:900;color:var(--teal)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}
+.stats div{background:var(--blue);padding:10px;text-align:center;border-radius:4px}
+.stats b{display:block;font-size:20px}
+.sec{background:var(--ok);color:#fff;padding:8px 12px;font-weight:bold;margin:22px 0 10px}
+.sec.bad{background:var(--no)}
+.it{border:1px solid var(--bd);border-left:4px solid var(--ok);padding:12px;margin-bottom:8px;background:#fafcff;direction:ltr;text-align:left}
+.it.bad{border-left-color:var(--no)}
+.it .q{font-weight:bold;font-size:13px;margin-bottom:6px;line-height:1.6}
+.it .r{font-size:12px;margin-top:4px}
+.tag{padding:1px 7px;border-radius:3px;color:#fff;font-size:11px;font-weight:bold;margin-right:6px}
+.tag.y{background:var(--no)}.tag.g{background:var(--ok)}
+.exp{font-size:12px;color:#555;margin-top:6px;background:#eef6f4;padding:6px 8px;border-radius:3px}
+.acts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.hide{display:none}
+@media(max-width:820px){.layout{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}header a{display:none}.shf{left:12px}}
+.qtext img{display:block;max-width:100%;max-height:260px;margin:0 auto 12px;border-radius:8px;background:#fff}
+.it .q img{max-height:90px;display:block;margin:6px 0;border-radius:6px}
+</style>
+</head>
+<body>
+<header><a href="https://gaith-team.github.io/exam/psychiatric/index.html">← رجوع</a><button class="shf" onclick="randomizeQuestions()">🔀 عشوائي</button>Pathology<span class="brand">GHAITH TEAM</span></header>
+<div class="wrap">
+ <div id="exam">
+  <div class="topinfo">Total questions in exam: <b id="tot">0</b> | Answered: <b id="ans">0</b></div>
+  <div class="layout">
+   <div class="main">
+    <div class="qhead"><b id="qno"></b><div class="fs"><button onclick="fs(-1)">A-</button><button onclick="fs(0)">A</button><button onclick="fs(1)">A+</button></div></div>
+    <div class="qbody" id="qbody"></div>
+    <div class="bar">
+     <button class="b" onclick="saveNext()">Save &amp; Next</button>
+     <div style="display:flex;gap:4px;flex-wrap:wrap">
+      <button class="b" onclick="mark()">Mark for Review</button>
+      <button class="b" onclick="skip()">Skip</button>
+      <button class="b" onclick="prev()">Previous</button>
+     </div>
+    </div>
+   </div>
+   <div class="side">
+    <div class="timer"><small>Time Remaining</small><div class="t" id="tm">60:00</div></div>
+    <div>
+     <div>Number of questions : <b id="tot2">0</b></div>
+     <div class="leg">
+      <div><span class="sq s-ans" id="cAns">0</span>Answered</div>
+      <div><span class="sq s-no" id="cNo">0</span>Not Answered</div>
+      <div><span class="sq s-rev" id="cRev">0</span>For Review</div>
+      <div><span class="sq s-nv" id="cNv">0</span>Not Visited</div>
+     </div>
+    </div>
+    <div class="nav" id="nav"></div>
+    <div class="endrow"><button class="b gray" onclick="endTest()">End Test</button></div>
+   </div>
+  </div>
+ </div>
+ <div id="result" class="hide"></div>
+</div>
+<footer>GHAITH TEAM · <a href="https://t.me/nursing2bu" target="_blank">@nursing2bu</a></footer>
+
+<script>
+const QUESTIONS = [
+{t:"A biopsy is best defined as:",o:["Examination of cells only","Tissue specimen obtained during life","Post-mortem examination","Blood examination"],a:1},
+{t:"Autopsy refers to:",o:["Examination of cells","Examination of tissue during life","Post-mortem tissue examination","Radiological examination"],a:2},
+{t:"Cell injury occurs when a harmful stimulus:",o:["Is always mild","Exceeds the cell's ability to adapt","Improves cell function","Increases cell division"],a:1},
+{t:"Ischemia means:",o:["Increased oxygen supply","Decreased blood supply","Increased blood pressure","Increased venous drainage"],a:1},
+{t:"Which of the following can cause hypoxia?",o:["Anemia","Hyperplasia","Hypertrophy","Fever"],a:0},
+{t:"Which is an infectious cause of cell injury?",o:["Trauma","Radiation","Bacteria","Obesity"],a:2},
+{t:"Atrophy means:",o:["Increase in cell size","Increase in cell number","Decrease in cell size and/or number","Replacement of one cell type by another"],a:2},
+{t:"Disuse atrophy may occur in:",o:["Muscles of a paralyzed limb","Mammary gland after puberty","Thyroid gland","Bone marrow"],a:0},
+{t:"Hypertrophy means an increase in:",o:["Cell number","Cell size","Cell death","Fibrosis"],a:1},
+{t:"Muscular exercise can cause:",o:["Physiological hypertrophy","Pathological atrophy","Metaplasia","Necrosis"],a:0},
+{t:"Hyperplasia means an increase in:",o:["Cell size","Cell number","Fat content","Fibrous tissue"],a:1},
+{t:"Endometrial hyperplasia may result from prolonged exposure to:",o:["Decreased estrogen","Increased estrogen","Decreased insulin","Increased cortisol"],a:1},
+{t:"Smoking may cause squamous metaplasia in the:",o:["Kidney","Bronchi","Liver","Heart"],a:1},
+{t:"Reversible cell injury means that the cell:",o:["Cannot recover","Can return to normal after removal of the stimulus","Is always dead","Always becomes malignant"],a:1},
+{t:"Which is a form of reversible cell injury?",o:["Necrosis","Apoptosis","Cellular swelling","Infarction"],a:2},
+{t:"Cloudy swelling is associated with:",o:["Mild cell injury","Severe irreversible injury","Tumor formation","Amyloidosis"],a:0},
+{t:"Cellular swelling may make an organ:",o:["Smaller and harder","Enlarged and pale","Black","Calcified"],a:1},
+{t:"Hydropic swelling is characterized by excessive intracellular accumulation of:",o:["Fat","Water","Calcium","Amyloid"],a:1},
+{t:"Fatty change is also called:",o:["Steatosis","Metaplasia","Apoptosis","Calcinosis"],a:0},
+{t:"Fatty change is especially common in the:",o:["Liver","Brain","Skin","Bone"],a:0},
+{t:"A large fat globule may push the nucleus to the cell periphery, producing a:",o:["Star-shaped cell","Signet-ring appearance","Spindle cell","Giant cell"],a:1},
+{t:"Sudan III stains fat:",o:["Orange","Blue","Green","Purple"],a:0},
+{t:"Irreversible cell injury includes:",o:["Hyperplasia and hypertrophy","Necrosis and apoptosis","Metaplasia and atrophy","Cloudy swelling and hydropic swelling"],a:1},
+{t:"Necrosis usually results from:",o:["Severe or prolonged injury","Normal adaptation","Mild exercise","Normal growth"],a:0},
+{t:"Coagulative necrosis commonly occurs after:",o:["Sudden loss of blood supply","Viral hepatitis","Burns only","Allergic reactions"],a:0},
+{t:"Coagulative necrosis occurs in infarction of most organs except the:",o:["Kidney","Heart","Brain","Spleen"],a:2},
+{t:"Liquefactive necrosis is characteristic of:",o:["Brain infarction","Myocardial infarction","Renal infarction","Splenic infarction"],a:0},
+{t:"Liquefactive necrosis may occur in:",o:["Abscess","Bone fracture","Hypertrophy","Hyperplasia"],a:0},
+{t:"Caseous necrosis is characteristic of:",o:["Tuberculosis","Hypertension","Diabetes","Atherosclerosis"],a:0},
+{t:"Enzymatic fat necrosis is mainly associated with:",o:["Acute pancreatitis","Tuberculosis","Hypertension","Anemia"],a:0},
+{t:"Traumatic fat necrosis commonly occurs in the:",o:["Breast","Brain","Kidney","Lung"],a:0},
+{t:"Apoptosis is:",o:["Programmed cell death","Always associated with pus","A form of hyperplasia","A type of infection"],a:0},
+{t:"Apoptosis usually affects:",o:["The whole organ","Single cells or small groups of cells","Entire body","Blood vessels only"],a:1},
+{t:"Apoptosis usually occurs without:",o:["DNA changes","Inflammation","Energy consumption","Cell death"],a:1},
+{t:"Councilman bodies are associated with apoptosis in:",o:["Viral hepatitis","Tuberculosis","Diabetes","Hypertension"],a:0},
+{t:"Accumulation of cholesterol in arterial walls is associated with:",o:["Atherosclerosis","Tuberculosis","Amyloidosis","Apoptosis"],a:0},
+{t:"Anthracosis results from accumulation of:",o:["Carbon particles","Calcium","Amyloid","Bilirubin"],a:0},
+{t:"Anthracosis commonly affects the:",o:["Lung","Kidney","Brain","Thyroid"],a:0},
+{t:"Silicosis is caused by inhalation of:",o:["Carbon","Silica particles","Iron","Bilirubin"],a:1},
+{t:"Amyloidosis is characterized by extracellular deposition of:",o:["Abnormal protein","Fat","Calcium only","Glycogen"],a:0},
+{t:"Amyloid appears on H&E as:",o:["Homogeneous eosinophilic glassy material","Black granular material","Blue crystals","Yellow fat"],a:0},
+{t:"The most important stain for amyloid is:",o:["Congo red","Sudan III","Ziehl-Neelsen","H&E only"],a:0},
+{t:"Inflammation is a protective response to:",o:["Injury, infection or irritation","Normal growth only","Exercise only","Aging only"],a:0},
+{t:"Acute inflammation is usually:",o:["Rapid and short-duration","Slow and long-lasting","Always painless","Always associated with fibrosis"],a:0},
+{t:"The first vascular response in acute inflammation is:",o:["Vasoconstriction","Vasodilation","Thrombosis","Embolism"],a:1},
+{t:"Vasodilation causes:",o:["Redness and heat","Pallor and coldness","Cyanosis only","Fibrosis"],a:0},
+{t:"Exudate is composed of:",o:["Fluid and cells leaving blood vessels","Bone and cartilage","Tumor cells only","Fat only"],a:0},
+{t:"The first major WBC to arrive in acute inflammation is the:",o:["Neutrophil","Lymphocyte","Macrophage","Eosinophil"],a:0},
+{t:"Chemotaxis means:",o:["Movement of WBCs toward the inflammatory site","Destruction of red cells","Formation of antibodies","Cell division"],a:0},
+{t:"The classic cardinal signs of inflammation include redness, heat, swelling, pain and:",o:["Loss of function","Jaundice","Cyanosis","Paralysis"],a:0},
+{t:"Eosinophils increase mainly in:",o:["bacterial infection","viral infection","burns","allergy and parasitic infection"],a:3},
+{t:"Chemotaxis means:",o:["engulfing bacteria","movement of WBCs toward the site of inflammation","formation of pus","blood clotting"],a:1},
+{t:"Neutrophil increase is commonly associated with:",o:["viral infection","allergy","bacterial infection","parasites"],a:2},
+{t:"Which is NOT a cardinal sign of inflammation?",o:["Redness","Heat","Swelling","Cough"],a:3},
+{t:"An abscess is:",o:["diffuse suppurative inflammation","a localized collection of pus in a cavity","a watery exudate","a granuloma"],a:1},
+{t:"Cellulitis is commonly caused by:",o:["Staphylococcus","Mycobacterium","Streptococcus","a virus"],a:2},
+{t:"A burn blister is an example of which inflammation?",o:["Catarrhal","Suppurative","Fibrinous","Serous"],a:3},
+{t:"The main cells in chronic inflammation are:",o:["neutrophils","macrophages and lymphocytes","eosinophils only","RBCs"],a:1},
+{t:"A granuloma is characterized by the presence of:",o:["neutrophils","pus","epithelioid cells","fibrin"],a:2},
+{t:"Tuberculosis is caused by:",o:["Staphylococcus","Mycobacterium tuberculosis","Streptococcus","E. coli"],a:1},
+{t:"The most common route of TB infection is:",o:["ingestion","skin inoculation","inhalation","injection"],a:2},
+{t:"The granuloma of TB is called a:",o:["abscess","tubercle","cyst","polyp"],a:1},
+{t:"The giant cells seen in TB are:",o:["Councilman cells","Russell cells","Langhans cells","signet-ring cells"],a:2},
+{t:"The primary pulmonary TB complex consists of:",o:["Ghon focus + pleural effusion + bronchiectasis","Ghon focus + lymphangitis + hilar lymphadenitis","cavity + fibrosis + calcification","abscess + sinus + fistula"],a:1},
+{t:"Secondary pulmonary TB classically starts in the:",o:["base of the lung","hilum","apex of the lung","pleura"],a:2},
+{t:"Transient presence of bacteria in the blood is called:",o:["Toxemia","Pyaemia","Septicemia","Bacteremia"],a:3},
+{t:"Multiple small abscesses in different organs due to septic emboli is called:",o:["Toxemia","Pyaemia","Bacteremia","Hyperemia"],a:1},
+{t:"Circulation and multiplication of virulent organisms and their toxins in the blood is called:",o:["Bacteremia","Toxemia","Septicemia","Pyaemia"],a:2}
+];
+
+const TOTAL_TIME = 60*60;
+let Q, cur, sel, saved, review, visited, left, iv, size = 13;
+
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function shuffleOptions(q){if(q.o.length<=2)return {...q};const ix=shuffle(q.o.map((_,k)=>k));return {...q,o:ix.map(k=>q.o[k]),a:ix.indexOf(q.a)}}
+function randomizeQuestions(){if(confirm('🔀 هل تريد بدء الامتحان من جديد بترتيب أسئلة عشوائي؟'))init(QUESTIONS)}
+const $ = id => document.getElementById(id);
+
+function init(pool){
+  Q = shuffle([...pool]).map(shuffleOptions); const n = Q.length;
+  cur = 0; sel = Array(n).fill(null); saved = Array(n).fill(false);
+  review = Array(n).fill(false); visited = Array(n).fill(false);
+  left = TOTAL_TIME;
+  $('exam').classList.remove('hide'); $('result').classList.add('hide');
+  $('tot').textContent = $('tot2').textContent = n;
+  clearInterval(iv);
+  iv = setInterval(()=>{
+    left--; const m=Math.floor(left/60), s=left%60, t=$('tm');
+    t.textContent = m+':'+(s<10?'0':'')+s;
+    t.className = 't'+(left<=120?' danger':left<=300?' warn':'');
+    if(left<=0){clearInterval(iv);finish()}
+  },1000);
+  if(n) render();
+  window.scrollTo(0,0);
+}
+
+function render(){
+  visited[cur] = true;
+  const q = Q[cur];
+  $('qno').textContent = 'Question No. ' + (cur+1);
+  $('qbody').style.fontSize = size+'px';
+  $('qbody').innerHTML = `<div class="qtext" style="font-size:${size}px">${q.t}</div>` +
+    q.o.map((o,i)=>`<label class="opt" style="font-size:${size}px"><input type="radio" name="o" value="${i}" ${sel[cur]===i?'checked':''} onchange="sel[cur]=${i}"> <span>${o}</span></label>`).join('');
+  refresh();
+}
+
+function status(i){
+  if(review[i]) return 's-rev';
+  if(saved[i]) return 's-ans';
+  if(visited[i]) return 's-no';
+  return 's-nv';
+}
+function refresh(){
+  const n = Q.length; let a=0,no=0,r=0,nv=0;
+  $('nav').innerHTML = Q.map((_,i)=>{
+    const s = status(i);
+    if(saved[i]) a++;
+    if(s==='s-rev') r++; else if(s==='s-no') no++; else if(s==='s-nv') nv++;
+    return `<span class="sq ${s} ${i===cur?'cur':''}" onclick="go(${i})">${i+1}</span>`;
+  }).join('');
+  $('ans').textContent = a; $('cAns').textContent = a; $('cNo').textContent = no;
+  $('cRev').textContent = r; $('cNv').textContent = nv;
+}
+
+function go(i){cur=i;render()}
+function nextQ(){ if(cur<Q.length-1){cur++;render();return} const k=Q.findIndex((_,x)=>!saved[x]); if(k>=0){cur=k;render()} else {refresh();alert('كل الأسئلة اتحلت، دوس End Test لإنهاء الامتحان')} }
+function saveNext(){ saved[cur]=sel[cur]!==null; nextQ(); }
+function skip(){ nextQ(); }
+function mark(){ review[cur]=!review[cur]; if(sel[cur]!==null) saved[cur]=true; refresh(); }
+function prev(){ if(cur>0){cur--;render()} }
+function fs(d){ size = d===0 ? 13 : Math.max(11,Math.min(24,size+d*2)); render(); }
+
+function endTest(){
+  const un = Q.filter((_,i)=>sel[i]===null).length;
+  const msg = un ? `لسه فاضل ${un} سؤال من غير إجابة. تنهي الامتحان؟` : 'تنهي الامتحان؟';
+  if(confirm(msg)) finish();
+}
+
+function finish(){
+  clearInterval(iv);
+  const n = Q.length; let ok=[], bad=[];
+  Q.forEach((q,i)=>{ (sel[i]===q.a ? ok : bad).push(i) });
+  const pct = n ? Math.round(ok.length/n*100) : 0;
+  const card = (i,good)=>{
+    const q=Q[i];
+    return `<div class="it ${good?'':'bad'}"><div class="q">${i+1}. ${q.t}</div>
+    ${good ? `<div class="r"><span class="tag g">Correct</span>${q.o[q.a]}</div>` :
+    `<div class="r"><span class="tag y">Your answer</span>${sel[i]===null?'— لم تتم الإجابة —':q.o[sel[i]]}</div>
+     <div class="r"><span class="tag g">Correct</span>${q.o[q.a]}</div>`}
+    ${q.exp?`<div class="exp">💬 ${q.exp}</div>`:''}</div>`;
+  };
+  const unans = Q.filter((_,i)=>sel[i]===null).length;
+  $('exam').classList.add('hide');
+  const r = $('result'); r.classList.remove('hide');
+  r.innerHTML = `<div class="res">
+   <div class="score"><div class="n">${pct}%</div><div>${ok.length} / ${n}</div></div>
+   <div class="stats">
+    <div><b style="color:var(--ok)">${ok.length}</b>صح</div>
+    <div><b style="color:var(--no)">${bad.length - unans}</b>غلط</div>
+    <div><b style="color:#777">${unans}</b>من غير إجابة</div>
+    <div><b>${n}</b>الإجمالي</div>
+   </div>
+   <div class="acts">
+    ${bad.length?'<button class="b" onclick="retryWrong()">إعادة الأسئلة الغلط ('+bad.length+')</button>':''}
+    <button class="b" onclick="init(QUESTIONS)">امتحان جديد عشوائي</button>
+   </div>
+   <div class="sec">✔ الأسئلة اللي اتحلت صح (${ok.length})</div>
+   ${ok.map(i=>card(i,true)).join('') || '<div style="padding:8px;color:#777">لا يوجد</div>'}
+   <div class="sec bad">✖ الأسئلة الغلط (${bad.length})</div>
+   ${bad.map(i=>card(i,false)).join('') || '<div style="padding:8px;color:#777">ممتاز، مفيش أخطاء 🎉</div>'}
+  </div>`;
+  window.scrollTo(0,0);
+}
+
+function retryWrong(){
+  const pool = Q.filter((q,i)=>sel[i]!==q.a);
+  init(pool);
+}
+
+init(QUESTIONS);
+</script>
+</body>
+</html>
