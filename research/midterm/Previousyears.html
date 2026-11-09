@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--teal:#4338ca;--teal-d:#312e81;--blue:#e9ecf6;--bd:#d5d9ec;--ok:#059669;--no:#e11d48;--rev:#0284c7;--txt:#14172e;--grad:linear-gradient(135deg,#312e81 0%,#4338ca 45%,#0f766e 100%)}
+body{font-family:'Plus Jakarta Sans',Arial,sans-serif;background:#f5f6fb;color:var(--txt);font-size:14px}
+header{background:var(--grad);color:#fff;text-align:center;padding:12px;font-size:18px;font-weight:800;position:relative}
+header .brand{position:absolute;right:16px;top:8px;font-weight:bold;font-size:14px}
+header a{position:absolute;left:16px;top:11px;color:#fff;font-size:13px;text-decoration:none}
+.wrap{max-width:1280px;margin:0 auto;padding:8px 10px 20px}
+.topinfo{background:var(--blue);border:1px solid var(--bd);padding:4px 8px;font-size:13px;margin-bottom:8px}
+.topinfo b{color:var(--teal)}
+.layout{display:grid;grid-template-columns:1fr 240px;gap:14px;align-items:start}
+.main{background:#fff;border:1px solid var(--bd);min-height:470px;display:flex;flex-direction:column;
+ background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='70'><text x='8' y='45' transform='rotate(-20 75 35)' font-size='14' font-family='Arial' fill='%23000' fill-opacity='.07'>GHAITH TEAM</text></svg>")}
+.qhead{display:flex;justify-content:space-between;align-items:center;padding:12px 6px 6px;margin:0 6px;border-bottom:1px solid var(--bd)}
+.qhead b{font-size:13px}
+.fs button{background:#0284c7;color:#fff;border:0;padding:6px 12px;margin-left:3px;border-radius:2px;cursor:pointer;font-weight:bold}
+.qbody{padding:8px 12px;flex:1}
+.qtext{font-size:13px;line-height:1.7;margin-bottom:18px;direction:ltr;text-align:left}
+.opt{display:flex;align-items:center;gap:8px;margin:0 0 16px;cursor:pointer;direction:ltr;text-align:left;font-size:13px}
+.opt input{accent-color:var(--teal);cursor:pointer}
+.bar{display:flex;justify-content:space-between;padding:10px;gap:6px;flex-wrap:wrap;border-top:1px solid var(--bd);margin:0 6px 6px}
+.b{background:var(--grad);color:#fff;border:0;padding:9px 12px;font-weight:bold;font-size:13px;border-radius:2px;cursor:pointer}
+.b:hover{filter:brightness(1.12)}
+.b.gray{background:#14172e}
+.side>div{background:var(--blue);border:1px solid var(--bd);margin-bottom:10px;padding:8px}
+.timer{text-align:center;background:none!important;border:0!important}
+.timer small{font-size:13px}
+.timer .t{font-size:30px;color:#0284c7;margin-top:4px}
+.timer .t.warn{color:#c27b0a}.timer .t.danger{color:#c8372d}
+.leg{display:grid;grid-template-columns:1fr 1fr;gap:8px 6px;font-size:10px;margin-top:8px}
+.leg div{display:flex;align-items:center;gap:6px}
+.sq{min-width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:bold;border-radius:2px;border:1px solid transparent}
+.s-ans{background:var(--ok)}.s-no{background:#ca8a04}.s-rev{background:var(--rev)}.s-nv{background:#fff;color:#333;border-color:#9bb0a2}
+.nav{display:flex;flex-wrap:wrap;gap:6px;max-height:260px;overflow:auto;background:#e9ecf6}
+.nav .sq{width:24px;height:24px;cursor:pointer;font-size:12px}
+.nav .cur{outline:2px solid #14172e;outline-offset:0}
+.endrow{text-align:center}
+.endrow .b{width:90px}
+footer{text-align:center;padding:16px;font-size:12px;color:#454a6b;background:#e9ecf6;border-top:1px solid #d5d9ec;margin-top:10px}
+footer a{color:#229ED9;text-decoration:none}
+/* results */
+.res{background:#fff;border:1px solid var(--bd);padding:20px;max-width:900px;margin:10px auto}
+.score{text-align:center;padding:10px 0 18px}
+.score .n{font-size:48px;font-weight:900;color:var(--teal)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}
+.stats div{background:var(--blue);padding:10px;text-align:center;border-radius:4px}
+.stats b{display:block;font-size:20px}
+.sec{background:var(--ok);color:#fff;padding:8px 12px;font-weight:bold;margin:22px 0 10px}
+.sec.bad{background:var(--no)}
+.it{border:1px solid var(--bd);border-left:4px solid var(--ok);padding:12px;margin-bottom:8px;background:#fafcff;direction:ltr;text-align:left}
+.it.bad{border-left-color:var(--no)}
+.it .q{font-weight:bold;font-size:13px;margin-bottom:6px;line-height:1.6}
+.it .r{font-size:12px;margin-top:4px}
+.tag{padding:1px 7px;border-radius:3px;color:#fff;font-size:11px;font-weight:bold;margin-right:6px}
+.tag.y{background:var(--no)}.tag.g{background:var(--ok)}
+.exp{font-size:12px;color:#555;margin-top:6px;background:#eef6f4;padding:6px 8px;border-radius:3px}
+.acts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.hide{display:none}
+@media(max-width:820px){.layout{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}header a{display:none}}
+.qtext img{display:block;max-width:100%;max-height:260px;margin:0 auto 12px;border-radius:8px;background:#fff}
+.it .q img{max-height:90px;display:block;margin:6px 0;border-radius:6px}
+</style>
+</head>
+<body>
+<header><a href="https://gaith-team.github.io/exam/">← رجوع</a>Introduction to nursing research<span class="brand">GHAITH TEAM</span></header>
+<div class="wrap">
+ <div id="exam">
+  <div class="topinfo">Total questions in exam: <b id="tot">0</b> | Answered: <b id="ans">0</b></div>
+  <div class="layout">
+   <div class="main">
+    <div class="qhead"><b id="qno"></b><div class="fs"><button onclick="fs(-1)">A-</button><button onclick="fs(0)">A</button><button onclick="fs(1)">A+</button></div></div>
+    <div class="qbody" id="qbody"></div>
+    <div class="bar">
+     <button class="b" onclick="saveNext()">Save &amp; Next</button>
+     <div style="display:flex;gap:4px;flex-wrap:wrap">
+      <button class="b" onclick="mark()">Mark for Review</button>
+      <button class="b" onclick="skip()">Skip</button>
+      <button class="b" onclick="prev()">Previous</button>
+     </div>
+    </div>
+   </div>
+   <div class="side">
+    <div class="timer"><small>Time Remaining</small><div class="t" id="tm">40:00</div></div>
+    <div>
+     <div>Number of questions : <b id="tot2">0</b></div>
+     <div class="leg">
+      <div><span class="sq s-ans" id="cAns">0</span>Answered</div>
+      <div><span class="sq s-no" id="cNo">0</span>Not Answered</div>
+      <div><span class="sq s-rev" id="cRev">0</span>For Review</div>
+      <div><span class="sq s-nv" id="cNv">0</span>Not Visited</div>
+     </div>
+    </div>
+    <div class="nav" id="nav"></div>
+    <div class="endrow"><button class="b gray" onclick="endTest()">End Test</button></div>
+   </div>
+  </div>
+ </div>
+ <div id="result" class="hide"></div>
+</div>
+<footer>GHAITH TEAM · <a href="https://t.me/nursing2bu" target="_blank">@nursing2bu</a></footer>
+
+<script>
+const QUESTIONS = [
+{t:"The following are sources of research problems, Except:",o:["Nursing practice","Personal experience","Literature & theory","Order & control"],a:3},
+{t:"The following are steps of research process, Except:",o:["Conceptualization of research problem","Nursing process","Development of conceptual framework","Research design"],a:1},
+{t:"……… is a written summary of journal articles and books that describe the topic area:",o:["Reference","Discussion","Conclusion","Literature review"],a:3},
+{t:"Characteristics of research questions are the following, Except:",o:["Clear and specific","Completeness of the result","Stated in the present","Contain one or more variables"],a:1},
+{t:"……… is a scientific guess or predictive statement made by the researcher and will be tested after data collection:",o:["Hypothesis","Objectives","Research questions","Critique"],a:0},
+{t:"……… is a small subset of the population that has been chosen to be studied:",o:["Inclusion criteria","Exclusion criteria","A sample","Simple random sampling"],a:2},
+{t:"The following are importance of hypotheses, Except:",o:["Can advance knowledge","Necessary for the improvement of patient care","Provide a statement of relationship between variables","Provide data which are specific and facilitate their acceptance or rejection at the end of the study"],a:1},
+{t:"……… is an image, perception or concept that can be measured, hence capable of taking on different values:",o:["Sampling","Data collection","Variable","Research ethics"],a:2},
+{t:"……… is a strategy to get the information the researcher wants in a study:",o:["Research design","Critiquing","Qualitative data","Hypothesis"],a:0},
+{t:"The following is a common mistake of a research question:",o:["Too broadly defined","Well justified","Original","Feasible"],a:0},
+{t:"Formal statements of expected relationships among variables are:",o:["Research objectives","Research problems","Research hypotheses","Research questions"],a:2},
+{t:"How well a test measures what it is purported to measure refers to:",o:["Reliability","Validity","Probability","Objectivity"],a:1},
+{t:"One of the following is an example of experimental design:",o:["Historical research","Descriptive studies","Quasi-experimental","Longitudinal studies"],a:2},
+{t:"The totality of the universe from which the subjects for a study could be selected is the:",o:["Population","Sample","Variable","Hypothesis"],a:0},
+{t:"All of the following are characteristics of scientific research EXCEPT:",o:["Research is replicable","Research uses a systematic method of problem-solving","Research involves vague observation and not accurate description","Research is always based on empirical and observational evidence"],a:2},
+{t:"The initial and one of the most significant steps in conducting the research process is:",o:["Defining the research variables","Stating the research purpose","Determining the feasibility of the study","Identifying the research problem"],a:3},
+{t:"In a research proposal, the investigator notes that written permission has been obtained from three local hospitals to access patients for the proposed study. This is an example of what aspect of a study?",o:["Feasibility","Reliability","Methodology","Ethics"],a:0},
+{t:"Which criteria are used to determine testability of a hypothesis?",o:["The use of value-laden words in a hypothesis","A hypothesis stated in such a way that it can be clearly supported or not supported","Data-collection efforts that prove the validity of the hypothesis","The nature of the population being tested"],a:1},
+{t:"The nurse develops the hypothesis: \"Elderly women receive less aggressive treatment for breast cancer than do younger women.\" Which variable is the dependent variable?",o:["Age of the patient","Degree of treatment received","Type of cancer being treated","Use of inpatient treatment"],a:1},
+{t:"The nurse develops the hypothesis: \"Elderly women receive less aggressive treatment for breast cancer than do younger women.\" Which variable is the independent variable?",o:["Degree of treatment received","Type of cancer being treated","Age of the patient","Use of inpatient treatment"],a:2},
+{t:"Which of the following types of research involve at least some control by the researcher to implement the study treatment?",o:["Quasi-experimental","Correlation","Descriptive","Experimental"],a:0},
+{t:"In which type of research is there high researcher control, random sampling, and a laboratory setting?",o:["Descriptive","Correlation","Quasi-experimental","Experimental"],a:3},
+{t:"What type of hypothesis is the following? \"Cancer patients who receive music therapy complain less frequently of pain and require less pain medication than cancer patients not receiving music therapy.\"",o:["Simple, associative hypothesis","Complex, directional hypothesis","Simple, non-directional hypothesis","Complex, null hypothesis"],a:1},
+{t:"\"Assessment of Nurses' Knowledge regarding Partogram\" – what is the type of design for this study?",o:["Experimental","Quasi-experimental","Descriptive study design","Case-control"],a:2},
+{t:"Which of the following is not a type of research question?",o:["A hypothesis","Predicting an outcome","Evaluating a phenomenon","Developing good practice"],a:0},
+{t:"\"Individuals who are sleep deprived will differ significantly in their reaction time to those individuals who are not sleep deprived.\" If this is the alternate hypothesis, which is the correct null hypothesis?",o:["Greater sleep deprivation leads to a decrease in reaction time","Individuals who are not sleep deprived will differ in their reaction time from those who are sleep deprived","Individuals who have more sleep will differ in their reaction time from those who are sleep deprived","Individuals who are sleep deprived will not differ in their reaction time from those who are not sleep deprived"],a:3},
+{t:"A cross-sectional study is carried out to examine whether Navy personnel of a higher rank have more positive coping skills than those of a lower rank. Which statement is true of this study?",o:["The independent variable is coping and the dependent variable is low rank","Neither variable is dependent as the researcher cannot manipulate them","The independent variable is rank and the dependent variable is coping skills","The independent variable is coping and the dependent variable is high rank"],a:2},
+{t:"What does quantitative research measure?",o:["Numbers and figures","Feelings and opinions","Numbers and feelings","None of the above"],a:0},
+{t:"An example of types of research variables is:",o:["Analysis variable","Plan variable","Ethical variable","Discrete variable"],a:3},
+{t:"Which of the following describes a characteristic of a good research question?",o:["Contain sample characteristics of subjects","Relevant (related to the topic)","Measured in research variables","It helps to draw the specific conclusion"],a:1},
+{t:"The degree to which an assessment tool produces stable and consistent results is:",o:["Validity","Objectivity","Reliability","Generalization"],a:2},
+{t:"The data collected from a sample can be utilized for a larger group. This characteristic of a good research design is:",o:["Generalization","Objectivity","Reliability","Validity"],a:0},
+// ---- True / False ----
+{t:"In experimental research design, manipulation is not the process by which the researcher manages the independent variable in order to study its effect on the dependent variable.",o:["True","False"],a:1},
+{t:"Scientific methods of research follow a non-systematic approach to problem solving.",o:["True","False"],a:1},
+{t:"Research is planned and is not systematic, and may or may not use the scientific method.",o:["True","False"],a:1},
+{t:"\"Undertook an in-depth study to describe the experience of waiting in a critical care waiting room\" is a qualitative research.",o:["True","False"],a:0},
+{t:"\"Assessment of Knowledge and Practice of Staff Nurses Regarding Ryle's Tube Feeding in a Selected Hospital\" is a qualitative research.",o:["True","False"],a:1},
+{t:"\"Effect of nursing care protocol in prevention and management of hydrocephalic patient developing infection\" is a quantitative research.",o:["True","False"],a:0},
+{t:"\"Oxygen and Ventilator Treatment: Perspectives on Interprofessional Collaboration in a Neonatal Intensive Care Unit\" is a qualitative research.",o:["True","False"],a:0},
+{t:"\"Evaluation of Nurses' Knowledge Concerning Medication Administration through Nasogastric and Enteral Tubes\" is a qualitative research.",o:["True","False"],a:1},
+{t:"The importance of research design is answering the research question.",o:["True","False"],a:0},
+{t:"Nursing research provides a link between education and theory.",o:["True","False"],a:1},
+{t:"The purpose of the study affects the selection of the research design.",o:["True","False"],a:0},
+{t:"Cohort study is considered an experimental design.",o:["True","False"],a:1},
+{t:"Personal experience is one of the sources of research problems.",o:["True","False"],a:0},
+{t:"A cross-sectional study is a non-experimental design.",o:["True","False"],a:0},
+{t:"Null hypothesis implies that there is no relation or statistical difference between variables or groups.",o:["True","False"],a:0},
+{t:"Prospective cohort studies begin in the past and continue to the present.",o:["True","False"],a:1},
+{t:"Hypothesis is considered an intelligent guess or prediction that gives direction to the researcher to answer the research question.",o:["True","False"],a:0},
+{t:"Independent variable is the outcome or response the researcher wants to predict or explain.",o:["True","False"],a:1},
+{t:"Generalization of results is available in problem solving.",o:["True","False"],a:1}
+];
+
+const TOTAL_TIME = 40*60;
+let Q, cur, sel, saved, review, visited, left, iv, size = 13;
+
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function shuffleOptions(q){const ix=shuffle(q.o.map((_,k)=>k));return {...q,o:ix.map(k=>q.o[k]),a:ix.indexOf(q.a)}}
+const $ = id => document.getElementById(id);
+
+function init(pool){
+  Q = shuffle([...pool]).map(shuffleOptions); const n = Q.length;
+  cur = 0; sel = Array(n).fill(null); saved = Array(n).fill(false);
+  review = Array(n).fill(false); visited = Array(n).fill(false);
+  left = TOTAL_TIME;
+  $('exam').classList.remove('hide'); $('result').classList.add('hide');
+  $('tot').textContent = $('tot2').textContent = n;
+  clearInterval(iv);
+  iv = setInterval(()=>{
+    left--; const m=Math.floor(left/60), s=left%60, t=$('tm');
+    t.textContent = m+':'+(s<10?'0':'')+s;
+    t.className = 't'+(left<=120?' danger':left<=300?' warn':'');
+    if(left<=0){clearInterval(iv);finish()}
+  },1000);
+  if(n) render();
+  window.scrollTo(0,0);
+}
+
+function render(){
+  visited[cur] = true;
+  const q = Q[cur];
+  $('qno').textContent = 'Question No. ' + (cur+1);
+  $('qbody').style.fontSize = size+'px';
+  $('qbody').innerHTML = `<div class="qtext" style="font-size:${size}px">${q.t}</div>` +
+    q.o.map((o,i)=>`<label class="opt" style="font-size:${size}px"><input type="radio" name="o" value="${i}" ${sel[cur]===i?'checked':''} onchange="sel[cur]=${i}"> <span>${o}</span></label>`).join('');
+  refresh();
+}
+
+function status(i){
+  if(review[i]) return 's-rev';
+  if(saved[i]) return 's-ans';
+  if(visited[i]) return 's-no';
+  return 's-nv';
+}
+function refresh(){
+  const n = Q.length; let a=0,no=0,r=0,nv=0;
+  $('nav').innerHTML = Q.map((_,i)=>{
+    const s = status(i);
+    if(saved[i]) a++;
+    if(s==='s-rev') r++; else if(s==='s-no') no++; else if(s==='s-nv') nv++;
+    return `<span class="sq ${s} ${i===cur?'cur':''}" onclick="go(${i})">${i+1}</span>`;
+  }).join('');
+  $('ans').textContent = a; $('cAns').textContent = a; $('cNo').textContent = no;
+  $('cRev').textContent = r; $('cNv').textContent = nv;
+}
+
+function go(i){cur=i;render()}
+function nextQ(){ if(cur<Q.length-1){cur++;render();return} const k=Q.findIndex((_,x)=>!saved[x]); if(k>=0){cur=k;render()} else {refresh();alert('كل الأسئلة اتحلت، دوس End Test لإنهاء الامتحان')} }
+function saveNext(){ saved[cur]=sel[cur]!==null; nextQ(); }
+function skip(){ nextQ(); }
+function mark(){ review[cur]=!review[cur]; if(sel[cur]!==null) saved[cur]=true; refresh(); }
+function prev(){ if(cur>0){cur--;render()} }
+function fs(d){ size = d===0 ? 13 : Math.max(11,Math.min(24,size+d*2)); render(); }
+
+function endTest(){
+  const un = Q.filter((_,i)=>sel[i]===null).length;
+  const msg = un ? `لسه فاضل ${un} سؤال من غير إجابة. تنهي الامتحان؟` : 'تنهي الامتحان؟';
+  if(confirm(msg)) finish();
+}
+
+function finish(){
+  clearInterval(iv);
+  const n = Q.length; let ok=[], bad=[];
+  Q.forEach((q,i)=>{ (sel[i]===q.a ? ok : bad).push(i) });
+  const pct = n ? Math.round(ok.length/n*100) : 0;
+  const card = (i,good)=>{
+    const q=Q[i];
+    return `<div class="it ${good?'':'bad'}"><div class="q">${i+1}. ${q.t}</div>
+    ${good ? `<div class="r"><span class="tag g">Correct</span>${q.o[q.a]}</div>` :
+    `<div class="r"><span class="tag y">Your answer</span>${sel[i]===null?'— لم تتم الإجابة —':q.o[sel[i]]}</div>
+     <div class="r"><span class="tag g">Correct</span>${q.o[q.a]}</div>`}
+    ${q.exp?`<div class="exp">💬 ${q.exp}</div>`:''}</div>`;
+  };
+  const unans = Q.filter((_,i)=>sel[i]===null).length;
+  $('exam').classList.add('hide');
+  const r = $('result'); r.classList.remove('hide');
+  r.innerHTML = `<div class="res">
+   <div class="score"><div class="n">${pct}%</div><div>${ok.length} / ${n}</div></div>
+   <div class="stats">
+    <div><b style="color:var(--ok)">${ok.length}</b>صح</div>
+    <div><b style="color:var(--no)">${bad.length - unans}</b>غلط</div>
+    <div><b style="color:#777">${unans}</b>من غير إجابة</div>
+    <div><b>${n}</b>الإجمالي</div>
+   </div>
+   <div class="acts">
+    ${bad.length?'<button class="b" onclick="retryWrong()">إعادة الأسئلة الغلط ('+bad.length+')</button>':''}
+    <button class="b" onclick="init(QUESTIONS)">امتحان جديد عشوائي</button>
+   </div>
+   <div class="sec">✔ الأسئلة اللي اتحلت صح (${ok.length})</div>
+   ${ok.map(i=>card(i,true)).join('') || '<div style="padding:8px;color:#777">لا يوجد</div>'}
+   <div class="sec bad">✖ الأسئلة الغلط (${bad.length})</div>
+   ${bad.map(i=>card(i,false)).join('') || '<div style="padding:8px;color:#777">ممتاز، مفيش أخطاء 🎉</div>'}
+  </div>`;
+  window.scrollTo(0,0);
+}
+
+function retryWrong(){
+  const pool = Q.filter((q,i)=>sel[i]!==q.a);
+  init(pool);
+}
+
+init(QUESTIONS);
+</script>
+</body>
+</html>
