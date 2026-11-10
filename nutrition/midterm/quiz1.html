@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--teal:#15803d;--teal-d:#14532d;--blue:#eaf3e7;--bd:#d3e4d0;--ok:#15803d;--no:#dc2626;--rev:#be185d;--txt:#14231a;--grad:linear-gradient(135deg,#14532d 0%,#15803d 40%,#65a30d 75%,#ea580c 100%)}
+body{font-family:'Outfit',Arial,sans-serif;background:#f6faf5;color:var(--txt);font-size:14px}
+header{background:var(--grad);color:#fff;text-align:center;padding:12px;font-size:18px;font-weight:900;position:relative;border-bottom:3px solid #facc15}
+header .brand{position:absolute;right:16px;top:8px;font-weight:bold;font-size:14px}
+header a{position:absolute;left:16px;top:11px;color:#fff;font-size:13px;text-decoration:none}
+.wrap{max-width:1280px;margin:0 auto;padding:8px 10px 20px}
+.topinfo{background:var(--blue);border:1px solid var(--bd);padding:4px 8px;font-size:13px;margin-bottom:8px}
+.topinfo b{color:var(--teal)}
+.layout{display:grid;grid-template-columns:1fr 240px;gap:14px;align-items:start}
+.main{background:#fff;border:1px solid var(--bd);min-height:470px;display:flex;flex-direction:column;
+ background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='70'><text x='8' y='45' transform='rotate(-20 75 35)' font-size='14' font-family='Arial' fill='%23000' fill-opacity='.07'>GHAITH TEAM</text></svg>")}
+.qhead{display:flex;justify-content:space-between;align-items:center;padding:12px 6px 6px;margin:0 6px;border-bottom:1px solid var(--bd)}
+.qhead b{font-size:13px}
+.fs button{background:#ea580c;color:#fff;border:0;padding:6px 12px;margin-left:3px;border-radius:2px;cursor:pointer;font-weight:bold}
+.qbody{padding:8px 12px;flex:1}
+.qtext{font-size:13px;line-height:1.7;margin-bottom:18px;direction:ltr;text-align:left}
+.opt{display:flex;align-items:center;gap:8px;margin:0 0 16px;cursor:pointer;direction:ltr;text-align:left;font-size:13px}
+.opt input{accent-color:var(--teal);cursor:pointer}
+.bar{display:flex;justify-content:space-between;padding:10px;gap:6px;flex-wrap:wrap;border-top:1px solid var(--bd);margin:0 6px 6px}
+.b{background:var(--grad);color:#fff;border:0;padding:9px 12px;font-weight:bold;font-size:13px;border-radius:2px;cursor:pointer}
+.b:hover{filter:brightness(1.12)}
+.b.gray{background:#14532d}
+.side>div{background:var(--blue);border:1px solid var(--bd);margin-bottom:10px;padding:8px}
+.timer{text-align:center;background:none!important;border:0!important}
+.timer small{font-size:13px}
+.timer .t{font-size:30px;color:#ea580c;margin-top:4px}
+.timer .t.warn{color:#c27b0a}.timer .t.danger{color:#c8372d}
+.leg{display:grid;grid-template-columns:1fr 1fr;gap:8px 6px;font-size:10px;margin-top:8px}
+.leg div{display:flex;align-items:center;gap:6px}
+.sq{min-width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:bold;border-radius:2px;border:1px solid transparent}
+.s-ans{background:var(--ok)}.s-no{background:#ca8a04}.s-rev{background:var(--rev)}.s-nv{background:#fff;color:#333;border-color:#9bb0a2}
+.nav{display:flex;flex-wrap:wrap;gap:6px;max-height:260px;overflow:auto;background:#eaf3e7}
+.nav .sq{width:24px;height:24px;cursor:pointer;font-size:12px}
+.nav .cur{outline:2px solid #14231a;outline-offset:0}
+.endrow{text-align:center}
+.endrow .b{width:90px}
+footer{text-align:center;padding:16px;font-size:12px;color:#3f5546;background:#eaf3e7;border-top:1px solid #d3e4d0;margin-top:10px}
+footer a{color:#229ED9;text-decoration:none}
+/* results */
+.res{background:#fff;border:1px solid var(--bd);padding:20px;max-width:900px;margin:10px auto}
+.score{text-align:center;padding:10px 0 18px}
+.score .n{font-size:48px;font-weight:900;color:var(--teal)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}
+.stats div{background:var(--blue);padding:10px;text-align:center;border-radius:4px}
+.stats b{display:block;font-size:20px}
+.sec{background:var(--ok);color:#fff;padding:8px 12px;font-weight:bold;margin:22px 0 10px}
+.sec.bad{background:var(--no)}
+.it{border:1px solid var(--bd);border-left:4px solid var(--ok);padding:12px;margin-bottom:8px;background:#fafcff;direction:ltr;text-align:left}
+.it.bad{border-left-color:var(--no)}
+.it .q{font-weight:bold;font-size:13px;margin-bottom:6px;line-height:1.6}
+.it .r{font-size:12px;margin-top:4px}
+.tag{padding:1px 7px;border-radius:3px;color:#fff;font-size:11px;font-weight:bold;margin-right:6px}
+.tag.y{background:var(--no)}.tag.g{background:var(--ok)}
+.exp{font-size:12px;color:#555;margin-top:6px;background:#eef6f4;padding:6px 8px;border-radius:3px}
+.acts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.hide{display:none}
+@media(max-width:820px){.layout{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}header a{display:none}}
+.qtext img{display:block;max-width:100%;max-height:260px;margin:0 auto 12px;border-radius:8px;background:#fff}
+.it .q img{max-height:90px;display:block;margin:6px 0;border-radius:6px}
+</style>
+</head>
+<body>
+<header><a href="https://gaith-team.github.io/exam/">← رجوع</a>Applied Nutrition<span class="brand">GHAITH TEAM</span></header>
+<div class="wrap">
+ <div id="exam">
+  <div class="topinfo">Total questions in exam: <b id="tot">0</b> | Answered: <b id="ans">0</b></div>
+  <div class="layout">
+   <div class="main">
+    <div class="qhead"><b id="qno"></b><div class="fs"><button onclick="fs(-1)">A-</button><button onclick="fs(0)">A</button><button onclick="fs(1)">A+</button></div></div>
+    <div class="qbody" id="qbody"></div>
+    <div class="bar">
+     <button class="b" onclick="saveNext()">Save &amp; Next</button>
+     <div style="display:flex;gap:4px;flex-wrap:wrap">
+      <button class="b" onclick="mark()">Mark for Review</button>
+      <button class="b" onclick="skip()">Skip</button>
+      <button class="b" onclick="prev()">Previous</button>
+     </div>
+    </div>
+   </div>
+   <div class="side">
+    <div class="timer"><small>Time Remaining</small><div class="t" id="tm">45:00</div></div>
+    <div>
+     <div>Number of questions : <b id="tot2">0</b></div>
+     <div class="leg">
+      <div><span class="sq s-ans" id="cAns">0</span>Answered</div>
+      <div><span class="sq s-no" id="cNo">0</span>Not Answered</div>
+      <div><span class="sq s-rev" id="cRev">0</span>For Review</div>
+      <div><span class="sq s-nv" id="cNv">0</span>Not Visited</div>
+     </div>
+    </div>
+    <div class="nav" id="nav"></div>
+    <div class="endrow"><button class="b gray" onclick="endTest()">End Test</button></div>
+   </div>
+  </div>
+ </div>
+ <div id="result" class="hide"></div>
+</div>
+<footer>GHAITH TEAM · <a href="https://t.me/nursing2bu" target="_blank">@nursing2bu</a></footer>
+
+<script>
+const QUESTIONS = [
+{t:"Malnutrition refers to:",o:["Only inadequate food intake","Only obesity","A deficiency, excess, or imbalance of energy and/or nutrients","Only vitamin deficiency"],a:2},
+{t:"The six major classes of nutrients are:",o:["Carbohydrates, proteins, fats, vitamins, minerals, and water","Carbohydrates, proteins, fats, fiber, minerals, and alcohol","Proteins, fats, vitamins, minerals, water, and enzymes","Sugars, starches, fats, vitamins, fiber, and water"],a:0},
+{t:"Food safety refers to the practices and conditions needed to:",o:["Improve the taste of food","Increase the nutrient content of food","Reduce the cost of food","Prevent food from becoming contaminated and causing illness"],a:3},
+{t:"The ABCD of nutrition assessment stands for:",o:["Appetite, Blood, Calories, Diet","Anthropometric, Biochemical, Clinical, Dietary","Anthropometric, Behavioral, Clinical, Digestive","Assessment, Biochemical, Calorie, Dietary"],a:1},
+{t:"Fat provides approximately how many kilocalories per gram?",o:["4 kcal","7 kcal","9 kcal","2 kcal"],a:2},
+{t:"Macronutrients include:",o:["Carbohydrates, proteins, and fats","Vitamins and minerals","Vitamins and water","Minerals and fiber"],a:0},
+{t:"Which of the following is NOT a characteristic of good nutritional status?",o:["Appropriate body weight","Normal growth and development","Good immune function","Frequent infections and fatigue"],a:3},
+{t:"The principle of \"moderation\" in healthy eating means:",o:["Eating only one food group","Limiting excessive calories, added sugars, sodium, and saturated fat","Skipping meals regularly","Eating identical meals every day"],a:1},
+{t:"Which of the following is a physical food hazard?",o:["Pesticide residues","Bacteria","Glass or metal pieces","Parasites"],a:2},
+{t:"BMI is calculated as:",o:["Weight (kg) ÷ height² (m²)","Weight (kg) × height (m)","Height (m) ÷ weight (kg)","Weight (kg) ÷ height (m)"],a:0},
+{t:"Night blindness is a deficiency manifestation of:",o:["Vitamin D","Vitamin K","Vitamin C","Vitamin A"],a:3},
+{t:"An adequate diet is characterized by:",o:["High protein, low carbohydrate, and low fiber","Adequacy, balance, variety, and moderation","Rigid meal plans identical for everyone","Only plant foods"],a:1},
+{t:"Which of the following is NOT one of the WHO Five Keys to Safer Food?",o:["Keep clean","Separate raw and cooked","Add preservatives to all foods","Keep food at safe temperatures"],a:2},
+{t:"Scurvy results from deficiency of:",o:["Vitamin C","Vitamin D","Vitamin K","Vitamin B12"],a:0},
+{t:"According to WHO, an adult BMI of 25.0–29.9 is classified as:",o:["Normal range","Underweight","Obesity","Overweight"],a:3},
+{t:"Which term describes excessive energy or nutrient intake that may contribute to overweight and obesity?",o:["Undernutrition","Overnutrition","Micronutrient malnutrition","Dietetics"],a:1},
+{t:"The estimated energy requirement of a 60-kg adult with moderate activity (30 kcal/kg/day) is approximately:",o:["1500 kcal/day","1650 kcal/day","1800 kcal/day","2100 kcal/day"],a:2},
+{t:"Essential amino acids are those that:",o:["Cannot be synthesized by the body at a sufficient rate and must be supplied by the diet","Are synthesized by the body in excess","Are found only in plant foods","Contain no nitrogen"],a:0},
+{t:"Using the same cutting board for raw chicken and salad without cleaning it is an example of:",o:["Pasteurization","Food fortification","Proper food hygiene","Cross-contamination"],a:3},
+{t:"Which statement correctly compares macronutrients and micronutrients?",o:["Micronutrients provide most of the body's energy","Macronutrients are needed in larger amounts, whereas micronutrients are needed in much smaller amounts","Macronutrients do not provide energy","Micronutrients are required in gram quantities"],a:1},
+{t:"In adult men, a waist circumference above which value indicates increased cardiometabolic risk?",o:["80 cm","88 cm","94 cm","102 cm"],a:2},
+{t:"The main function of vitamin K is:",o:["Blood clotting and bone health","Vision","Collagen formation","Thyroid hormone production"],a:0},
+{t:"For a 1800 kcal/day plan, lunch providing 40% of energy equals:",o:["450 kcal","630 kcal","900 kcal","720 kcal"],a:3},
+{t:"Which group is at greater risk of serious complications from foodborne illness?",o:["Healthy adolescents","Infants, older adults, pregnant women, and people with weakened immunity","Athletes","Adults with normal immunity"],a:1},
+{t:"Iodine is essential mainly for:",o:["Hemoglobin formation","Blood clotting","Thyroid hormone production","Bone mineralization"],a:2},
+{t:"The 24-hour recall belongs to which assessment method?",o:["Dietary assessment","Anthropometric assessment","Biochemical assessment","Clinical assessment"],a:0},
+{t:"Food guides (pyramids, plates) are intended to:",o:["Provide a rigid meal plan identical for everyone","Replace clinical nutrition assessment","Specify the exact kcal for each person","Provide general dietary guidance that is adapted to individual age, needs, health status, and culture"],a:3},
+{t:"Rickets in children and osteomalacia in adults are due to deficiency of:",o:["Vitamin A","Vitamin D","Vitamin E","Vitamin K"],a:1},
+{t:"Which of the following is NOT a characteristic of a good meal plan?",o:["Adequate","Culturally appropriate","Rigid and unchangeable","Practical"],a:2},
+{t:"Which statement correctly distinguishes portion from serving?",o:["Portion is the amount actually eaten; serving is a standard amount used for dietary guidance or food labeling","Portion is a standard labeling amount; serving is the amount actually eaten","They are identical terms","Portion applies only to beverages"],a:0},
+{t:"What is the most important rule when interpreting nutrition assessment findings?",o:["Rely on BMI only","Use laboratory results only","Use dietary recall only","Do not depend on one measurement alone"],a:3},
+{t:"Which vitamin deficiency is associated with an increased risk of neural tube defects during pregnancy?",o:["Vitamin B6","Folate (B9)","Thiamine (B1)","Vitamin D"],a:1},
+{t:"Which statement about the requirements of an adequate diet is correct?",o:["They are identical for everyone","They depend only on body weight","They vary according to age, sex, body size, physical activity, and physiological state","They depend only on culture"],a:2},
+{t:"Which practice best illustrates the key \"Separate raw and cooked\"?",o:["Storing raw meat separately from ready-to-eat foods so its juices cannot contaminate them","Washing hands for a few seconds","Refrigerating leftovers promptly","Boiling water before drinking"],a:0},
+{t:"Why is BMI limited as an assessment measure?",o:["It cannot be calculated in adults","It requires blood samples","It measures only height","It does not directly distinguish fat mass from muscle mass"],a:3},
+{t:"Malnutrition includes both undernutrition and overnutrition.",o:["True","False"],a:0},
+{t:"Vitamins and minerals provide energy (calories).",o:["True","False"],a:1},
+{t:"Hand washing is important in food handling because microorganisms are easily transferred from hands to food, utensils, and surfaces.",o:["True","False"],a:0},
+{t:"Nutrition screening is a quick first step used to identify people who may be at nutritional risk.",o:["True","False"],a:0},
+{t:"Food guides are rigid meal plans that must be followed exactly by everyone.",o:["True","False"],a:1},
+{t:"Carbohydrates and proteins each provide approximately 4 kcal/g.",o:["True","False"],a:0},
+{t:"Healthy food can still provide excessive energy when it is eaten in very large portions.",o:["True","False"],a:0},
+{t:"Refrigeration removes the need to cook raw poultry thoroughly.",o:["True","False"],a:1},
+{t:"Nutritional status can be accurately assessed by body weight alone.",o:["True","False"],a:1},
+{t:"Children should be assessed using adult BMI cut-offs.",o:["True","False"],a:1},
+{t:"The fat-soluble vitamins are A, D, E, and K.",o:["True","False"],a:0},
+{t:"For basic educational estimation, low physical activity corresponds to 35 kcal/kg/day.",o:["True","False"],a:1},
+{t:"Variety means including different foods from different food groups in the diet.",o:["True","False"],a:0},
+{t:"Pasteurization reduces harmful microorganisms that may be present in milk.",o:["True","False"],a:0},
+{t:"A laboratory result can be interpreted alone without considering inflammation, hydration, or medications.",o:["True","False"],a:1}
+];
+
+const TOTAL_TIME = 45*60;
+let Q, cur, sel, saved, review, visited, left, iv, size = 13;
+
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function shuffleOptions(q){if(q.o.length===2&&q.o[0]==='True'&&q.o[1]==='False')return {...q};const ix=shuffle(q.o.map((_,k)=>k));return {...q,o:ix.map(k=>q.o[k]),a:ix.indexOf(q.a)}}
+const $ = id => document.getElementById(id);
+
+function init(pool){
+  Q = shuffle([...pool]).map(shuffleOptions); const n = Q.length;
+  cur = 0; sel = Array(n).fill(null); saved = Array(n).fill(false);
+  review = Array(n).fill(false); visited = Array(n).fill(false);
+  left = TOTAL_TIME;
+  $('exam').classList.remove('hide'); $('result').classList.add('hide');
+  $('tot').textContent = $('tot2').textContent = n;
+  clearInterval(iv);
+  iv = setInterval(()=>{
+    left--; const m=Math.floor(left/60), s=left%60, t=$('tm');
+    t.textContent = m+':'+(s<10?'0':'')+s;
+    t.className = 't'+(left<=120?' danger':left<=300?' warn':'');
+    if(left<=0){clearInterval(iv);finish()}
+  },1000);
+  if(n) render();
+  window.scrollTo(0,0);
+}
+
+function render(){
+  visited[cur] = true;
+  const q = Q[cur];
+  $('qno').textContent = 'Question No. ' + (cur+1);
+  $('qbody').style.fontSize = size+'px';
+  $('qbody').innerHTML = `<div class="qtext" style="font-size:${size}px">${q.t}</div>` +
+    q.o.map((o,i)=>`<label class="opt" style="font-size:${size}px"><input type="radio" name="o" value="${i}" ${sel[cur]===i?'checked':''} onchange="sel[cur]=${i}"> <span>${o}</span></label>`).join('');
+  refresh();
+}
+
+function status(i){
+  if(review[i]) return 's-rev';
+  if(saved[i]) return 's-ans';
+  if(visited[i]) return 's-no';
+  return 's-nv';
+}
+function refresh(){
+  const n = Q.length; let a=0,no=0,r=0,nv=0;
+  $('nav').innerHTML = Q.map((_,i)=>{
+    const s = status(i);
+    if(saved[i]) a++;
+    if(s==='s-rev') r++; else if(s==='s-no') no++; else if(s==='s-nv') nv++;
+    return `<span class="sq ${s} ${i===cur?'cur':''}" onclick="go(${i})">${i+1}</span>`;
+  }).join('');
+  $('ans').textContent = a; $('cAns').textContent = a; $('cNo').textContent = no;
+  $('cRev').textContent = r; $('cNv').textContent = nv;
+}
+
+function go(i){cur=i;render()}
+function nextQ(){ if(cur<Q.length-1){cur++;render();return} const k=Q.findIndex((_,x)=>!saved[x]); if(k>=0){cur=k;render()} else {refresh();alert('كل الأسئلة اتحلت، دوس End Test لإنهاء الامتحان')} }
+function saveNext(){ saved[cur]=sel[cur]!==null; nextQ(); }
+function skip(){ nextQ(); }
+function mark(){ review[cur]=!review[cur]; if(sel[cur]!==null) saved[cur]=true; refresh(); }
+function prev(){ if(cur>0){cur--;render()} }
+function fs(d){ size = d===0 ? 13 : Math.max(11,Math.min(24,size+d*2)); render(); }
+
+function endTest(){
+  const un = Q.filter((_,i)=>sel[i]===null).length;
+  const msg = un ? `لسه فاضل ${un} سؤال من غير إجابة. تنهي الامتحان؟` : 'تنهي الامتحان؟';
+  if(confirm(msg)) finish();
+}
+
+function finish(){
+  clearInterval(iv);
+  const n = Q.length; let ok=[], bad=[];
+  Q.forEach((q,i)=>{ (sel[i]===q.a ? ok : bad).push(i) });
+  const pct = n ? Math.round(ok.length/n*100) : 0;
+  const card = (i,good)=>{
+    const q=Q[i];
+    return `<div class="it ${good?'':'bad'}"><div class="q">${i+1}. ${q.t}</div>
+    ${good ? `<div class="r"><span class="tag g">Correct</span>${q.o[q.a]}</div>` :
+    `<div class="r"><span class="tag y">Your answer</span>${sel[i]===null?'— لم تتم الإجابة —':q.o[sel[i]]}</div>
+     <div class="r"><span class="tag g">Correct</span>${q.o[q.a]}</div>`}
+    ${q.exp?`<div class="exp">💬 ${q.exp}</div>`:''}</div>`;
+  };
+  const unans = Q.filter((_,i)=>sel[i]===null).length;
+  $('exam').classList.add('hide');
+  const r = $('result'); r.classList.remove('hide');
+  r.innerHTML = `<div class="res">
+   <div class="score"><div class="n">${pct}%</div><div>${ok.length} / ${n}</div></div>
+   <div class="stats">
+    <div><b style="color:var(--ok)">${ok.length}</b>صح</div>
+    <div><b style="color:var(--no)">${bad.length - unans}</b>غلط</div>
+    <div><b style="color:#777">${unans}</b>من غير إجابة</div>
+    <div><b>${n}</b>الإجمالي</div>
+   </div>
+   <div class="acts">
+    ${bad.length?'<button class="b" onclick="retryWrong()">إعادة الأسئلة الغلط ('+bad.length+')</button>':''}
+    <button class="b" onclick="init(QUESTIONS)">امتحان جديد عشوائي</button>
+   </div>
+   <div class="sec">✔ الأسئلة اللي اتحلت صح (${ok.length})</div>
+   ${ok.map(i=>card(i,true)).join('') || '<div style="padding:8px;color:#777">لا يوجد</div>'}
+   <div class="sec bad">✖ الأسئلة الغلط (${bad.length})</div>
+   ${bad.map(i=>card(i,false)).join('') || '<div style="padding:8px;color:#777">ممتاز، مفيش أخطاء 🎉</div>'}
+  </div>`;
+  window.scrollTo(0,0);
+}
+
+function retryWrong(){
+  const pool = Q.filter((q,i)=>sel[i]!==q.a);
+  init(pool);
+}
+
+init(QUESTIONS);
+</script>
+</body>
+</html>
