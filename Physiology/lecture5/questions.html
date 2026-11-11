@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GHAITH TEAM</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--rose:#e11d48;--rose2:#be123c;--amber:#f59e0b;--violet:#7c3aed;--bg:#fff5f7;--card:#fff;--text:#2a0f1b;--t2:#6b3a4c;--bc:rgba(159,18,57,.16);--en:#fff0f3;--ok:#16a34a;--no:#dc2626;--fd:'Space Grotesk',system-ui,sans-serif}
+[data-theme=dark]{--rose:#fb7185;--rose2:#fda4af;--amber:#fbbf24;--violet:#a78bfa;--bg:#12050b;--card:#210d17;--text:#fde8ee;--t2:#e0b3c2;--bc:rgba(251,113,133,.22);--en:#2c1220;--ok:#4ade80;--no:#f87171}
+body{font-family:var(--fd);background:var(--bg);color:var(--text);min-height:100vh}
+#pb{position:fixed;top:0;left:0;height:4px;width:0;z-index:99;background:linear-gradient(90deg,var(--rose),var(--amber));transition:width .3s}
+nav{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:10px 20px;background:var(--bg);border-bottom:1px solid var(--bc)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px}
+.logo{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--rose2));color:#fff;display:grid;place-items:center;font-size:12px}
+.tb{width:38px;height:38px;border-radius:50%;border:1px solid var(--bc);background:var(--card);cursor:pointer;font-size:15px}
+.hero{margin:16px;border-radius:28px;padding:28px 20px;text-align:center;color:#fff;background:linear-gradient(135deg,#4a0f2a,#9f1239 60%,#e11d48)}
+.hero h1{font-size:clamp(21px,5vw,30px);margin:6px 0 4px}.hero p{font-size:13px;opacity:.85}
+.shell{max-width:720px;margin:0 auto;padding:6px 16px 60px}
+.card{background:var(--card);border:1px solid var(--bc);border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 6px 20px rgba(159,18,57,.07)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:center}
+.chip{padding:9px 16px;border-radius:30px;border:1px solid var(--bc);background:var(--en);color:var(--text);font:600 13px var(--fd);cursor:pointer}
+.chip.on{background:linear-gradient(135deg,var(--rose),var(--rose2));color:#fff;border-color:transparent}
+.btn{padding:12px 26px;border-radius:30px;border:0;background:linear-gradient(135deg,var(--rose),var(--amber));color:#fff;font:700 14px var(--fd);cursor:pointer}
+.btn:disabled{opacity:.4;cursor:default}
+.meta{display:flex;justify-content:space-between;font-size:13px;color:var(--t2);margin-bottom:12px;font-weight:600}
+.q{font-size:17px;line-height:1.6;font-weight:600;margin-bottom:14px;border-left:5px solid var(--rose);padding-left:12px}
+.tag{display:inline-block;font-size:11px;padding:2px 10px;border-radius:20px;background:var(--en);border:1px solid var(--bc);color:var(--rose);margin-bottom:8px}
+.o{display:flex;gap:10px;align-items:center;width:100%;text-align:left;padding:12px 14px;margin-bottom:9px;border-radius:14px;border:1.5px solid var(--bc);background:var(--en);color:var(--text);font:500 15px/1.5 var(--fd);cursor:pointer}
+.o b{width:26px;height:26px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;background:var(--card);border:1px solid var(--bc);font-size:12px}
+.o.ok{border-color:var(--ok);background:rgba(22,163,74,.14)}.o.no{border-color:var(--no);background:rgba(220,38,38,.12)}
+.ring{width:150px;height:150px;border-radius:50%;margin:10px auto;display:grid;place-items:center;font-size:30px;font-weight:700}
+.ring span{width:118px;height:118px;border-radius:50%;background:var(--card);display:grid;place-items:center}
+.rv{padding:10px 12px;border-radius:12px;border:1px solid var(--bc);margin-bottom:8px;font-size:14px;line-height:1.6;text-align:left}
+.rv i{color:var(--ok);font-style:normal;font-weight:600}
+:focus-visible{outline:3px solid var(--violet);outline-offset:2px}
+</style></head><body>
+<div id="pb"></div>
+<nav><div class="brand"><div class="logo">GT</div>GHAITH TEAM</div><button class="tb" id="tb" aria-label="Toggle theme">🌙</button></nav>
+<div class="hero"><div style="font-size:42px">🫀</div><h1>Endocrine System</h1><p> Physiology</p></div>
+<div class="shell" id="app"></div>
+<script>var MCQ=[
+{t: "Where is the heart situated?", o: ["In the right side of the thoracic cavity", "In the left side of the thoracic cavity", "In the abdominal cavity", "In the neck region"], a: 1},
+{t: "How many chambers does the heart have?", o: ["2", "3", "6", "4"], a: 3},
+{t: "The two atria are separated from each other by the:", o: ["Inter-atrial septum", "Inter-ventricular septum", "Mitral valve", "Aortic valve"], a: 0},
+{t: "The mitral valve has how many cusps?", o: ["1", "3", "2", "4"], a: 2},
+{t: "The tricuspid valve separates the:", o: ["Left atrium from the left ventricle", "Left ventricle from the aorta", "Right atrium from the right ventricle", "Right ventricle from the pulmonary artery"], a: 2},
+{t: "The aortic valve separates the:", o: ["Left ventricle from the aorta", "Right ventricle from the pulmonary artery", "Left atrium from the left ventricle", "Right atrium from the right ventricle"], a: 0},
+{t: "The pulmonary valve separates the:", o: ["Left ventricle from the aorta", "Right atrium from the right ventricle", "Left atrium from the left ventricle", "Right ventricle from the pulmonary artery"], a: 3},
+{t: "Which side of the heart is called the high pressure pump?", o: ["Right heart", "Left heart", "Right atrium only", "Pulmonary artery"], a: 1},
+{t: "The right heart pumps blood to the:", o: ["Lungs (pulmonary circulation)", "Peripheral organs (systemic circulation)", "Brain only", "Kidneys only"], a: 0},
+{t: "Which structure is called the pacemaker of the heart?", o: ["Atrioventricular (AV) node", "Purkinje fibers", "Sinoatrial (SA) node", "AV bundle"], a: 2},
+{t: "Normal cardiac output is about:", o: ["2 liters/minute", "5 liters/minute", "10 liters/minute", "15 liters/minute"], a: 1},
+{t: "The normal heart rate ranges from:", o: ["30-50 beats/min", "100-120 beats/min", "120-140 beats/min", "60-90 beats/min"], a: 3},
+{t: "Tachycardia is defined as a heart rate:", o: ["Less than 60/min", "More than 100/min", "Between 60 and 90/min", "Exactly 70/min"], a: 1},
+{t: "The normal stroke volume is about:", o: ["7 ml", "700 ml", "7 liters", "70 ml"], a: 3},
+{t: "The normal systolic blood pressure in a young healthy adult is about:", o: ["120 mmHg", "80 mmHg", "200 mmHg", "60 mmHg"], a: 0},
+{t: "Cardiac output is equal to:", o: ["Heart rate + stroke volume", "Stroke volume ÷ heart rate", "Heart rate × stroke volume", "Systolic − diastolic pressure"], a: 2},
+{t: "The vagus (parasympathetic) nerves supply:", o: ["Both atria and both ventricles", "Both ventricles only", "Both atria only", "The left ventricle only"], a: 2},
+{t: "The sympathetic nerves supply:", o: ["Both atria and both ventricles", "Both atria only", "Both ventricles only", "The SA node only"], a: 0},
+{t: "Which cardiac muscle fibers are responsible for the pumping action of the heart?", o: ["SA node", "Purkinje fibers", "AV node", "Ordinary contractile fibers"], a: 3},
+{t: "Which of the following is NOT a specialized cardiac muscle fiber?", o: ["SA node", "Ordinary contractile fibers of the ventricles", "AV bundle", "Purkinje fibers"], a: 1},
+{t: "According to the all-or-none law, when cardiac muscle is stimulated it:", o: ["Contracts maximally or does not contract at all", "Contracts proportionally to the strength of stimulus", "Contracts only in diastole", "Contracts only with nervous stimulation"], a: 0},
+{t: "The ability of the heart to excite itself and beat regularly without nervous stimulation is:", o: ["Contractility", "Conductivity", "Rhythmicity", "Excitability"], a: 2},
+{t: "The ability of cardiac muscle to transmit the excitation wave is called:", o: ["Rhythmicity", "Conductivity", "Excitability", "Contractility"], a: 1},
+{t: "The ability of cardiac muscle to respond to an adequate stimulus is called:", o: ["Conductivity", "Contractility", "Rhythmicity", "Excitability"], a: 3},
+{t: "An increase in calcium ions causes the heart to stop in:", o: ["Diastole", "Systole", "It speeds up without stopping", "It is unaffected"], a: 1},
+{t: "An increase in potassium ions causes the heart to stop in:", o: ["Systole", "It speeds up without stopping", "It is unaffected", "Diastole"], a: 3},
+{t: "Which of the following stimulates all cardiac properties?", o: ["Sympathetic stimulation", "Vagus nerve stimulation", "Cooling of the heart", "Acetylcholine"], a: 0},
+{t: "Which of the following increases heart rate?", o: ["Hypothermia", "Parasympathetic stimulation", "Fever", "Acetylcholine"], a: 2},
+{t: "A mild to moderate decrease in blood O2 causes:", o: ["Bradycardia", "No change in heart rate", "Tachycardia", "Severe bradycardia"], a: 2},
+{t: "A severe decrease in blood O2 causes:", o: ["Severe bradycardia", "Tachycardia", "No change in heart rate", "Mild tachycardia"], a: 0},
+{t: "Which of the following increases stroke volume?", o: ["Increased aortic pressure", "Increased heart rate", "Decreased venous return", "Increased venous return"], a: 3},
+{t: "Increased pressure in the aorta causes:", o: ["Increased stroke volume", "Decreased stroke volume because it resists emptying of the heart", "No change in stroke volume", "Increased stroke volume by increasing filling"], a: 1},
+{t: "Increasing heart rate decreases stroke volume because it:", o: ["Shortens the period of ventricular filling", "Lengthens the period of ventricular filling", "Increases venous return", "Decreases the force of contraction directly"], a: 0},
+{t: "The normal diastolic blood pressure in a young healthy adult is about:", o: ["120 mmHg", "40 mmHg", "80 mmHg", "150 mmHg"], a: 2},
+{t: "Arterial blood pressure is defined as:", o: ["The pressure of blood inside the veins", "The lateral pressure exerted by blood on the walls of the arteries resulting in their distension", "The pressure inside the capillaries only", "The force of contraction of the atria"], a: 1},
+{t: "Before menopause, the arterial blood pressure of females is ______ that of males of the same age.", o: ["Higher than", "Equal to", "Unrelated to", "Lower than"], a: 3},
+{t: "In which position is ABP measured highest?", o: ["Sitting position", "Lying position", "Standing position", "It is the same in all positions"], a: 1},
+{t: "In the standing position, ABP is higher in the:", o: ["Arm than in the lower limb", "Same in both", "Head than in the lower limb", "Lower limb than in the arm"], a: 3},
+{t: "Which of the following does NOT raise arterial blood pressure?", o: ["Sleep", "Emotions (excitation)", "Exercise", "Obesity"], a: 0},
+{t: "Circulatory shock is characterized by:", o: ["An increase in both cardiac output and ABP", "A decrease in cardiac output with an increase in ABP", "A decrease in both cardiac output and arterial blood pressure", "An increase in cardiac output with a decrease in ABP"], a: 2},
+{t: "Burns cause hypovolemic shock through loss of:", o: ["Whole blood", "Platelets", "Plasma", "Red blood cells only"], a: 2},
+{t: "Excessive vomiting, sweating and diarrhea cause hypovolemic shock through loss of:", o: ["ECF (dehydration)", "Whole blood", "Plasma only", "Platelets"], a: 0},
+{t: "Myocardial infarction leads to which type of shock?", o: ["Hypovolemic shock", "Septic shock", "Neurogenic shock", "Cardiogenic shock"], a: 3},
+{t: "A severe antigen-antibody reaction causes:", o: ["Septic shock", "Anaphylactic shock", "Neurogenic shock", "Cardiogenic shock"], a: 1},
+{t: "Neurogenic shock can occur due to:", o: ["High spinal anesthesia", "Burns", "Bacterial toxins", "Myocardial infarction"], a: 0},
+{t: "Irreversible shock is characterized by:", o: ["Complete response to blood transfusion", "Response to oxygen only", "No response to blood transfusion or other lines of shock therapy", "No tissue damage"], a: 2},
+{t: "Rupture of the spleen leads to:", o: ["External hemorrhage", "Internal hemorrhage in the abdominal cavity", "Cardiogenic shock", "Hemorrhage in the thoracic cavity only"], a: 1},
+{t: "Which is an immediate effect of hemorrhage on the skin blood vessels?", o: ["Vasodilation", "No change", "Increased skin blood flow", "Vasoconstriction"], a: 3},
+{t: "In hemorrhage, the spleen:", o: ["Dilates to store blood", "Contracts to increase the blood volume", "Stops functioning", "Enlarges and decreases blood volume"], a: 1},
+{t: "Stimulation of erythropoiesis after hemorrhage helps to:", o: ["Stop bleeding immediately", "Increase heart rate", "Decrease blood pressure", "Restore the O2 carrying ability of the blood"], a: 3},
+{t: "The delayed effect of hemorrhage on the kidney is:", o: ["Decreased volume of urine", "Increased volume of urine", "No change in urine", "Increased excretion of fluid"], a: 0}
+];
+var TF=[
+{t: "The heart is a hollow muscular organ situated in the left side of the thoracic cavity.", o: ["True", "False"], a: 0},
+{t: "The mitral valve has 3 cusps.", o: ["True", "False"], a: 1},
+{t: "The left heart is called the high pressure pump.", o: ["True", "False"], a: 0},
+{t: "The vagus nerves supply both atria and both ventricles.", o: ["True", "False"], a: 1},
+{t: "Cardiac muscle is voluntary.", o: ["True", "False"], a: 1},
+{t: "The SA node is the pacemaker of the heart.", o: ["True", "False"], a: 0},
+{t: "An increase in potassium ions causes the heart to stop in systole.", o: ["True", "False"], a: 1},
+{t: "Cardiac output is about 5 liters per minute in a healthy adult.", o: ["True", "False"], a: 0},
+{t: "Bradycardia is defined as a heart rate of more than 100/min.", o: ["True", "False"], a: 1},
+{t: "Increased venous return increases stroke volume.", o: ["True", "False"], a: 0},
+{t: "After menopause, the ABP of females is higher than that of males of the same age.", o: ["True", "False"], a: 0},
+{t: "ABP measured in the standing position is higher than that in the lying position.", o: ["True", "False"], a: 1},
+{t: "Cardiogenic shock occurs due to decreased pumping ability of the heart, as in myocardial infarction.", o: ["True", "False"], a: 0},
+{t: "Septic shock occurs due to a severe antigen-antibody reaction.", o: ["True", "False"], a: 1},
+{t: "Hemorrhage causes a decrease in the volume of urine as a delayed effect.", o: ["True", "False"], a: 0}
+
+];
+MCQ.forEach(function(q){q.k='MCQ'});TF.forEach(function(q){q.k='T/F'});
+var app=document.getElementById('app'),mode='all',shuf=false,qs=[],i=0,sc=0,wr=[],lock=false,sec=0,tm;
+function sh(a){a=a.slice();for(var j=a.length-1;j>0;j--){var k=Math.floor(Math.random()*(j+1)),t=a[j];a[j]=a[k];a[k]=t}return a}
+function home(){clearInterval(tm);document.getElementById('pb').style.width='0';
+app.innerHTML='<div class="card"><div class="row" style="margin-bottom:14px"><button class="chip'+(mode=='all'?' on':'')+'" data-m="all">All</button><button class="chip'+(mode=='MCQ'?' on':'')+'" data-m="MCQ">MCQ</button><button class="chip'+(mode=='T/F'?' on':'')+'" data-m="T/F">True / False</button></div><div class="row" style="margin-bottom:18px"><button class="chip'+(shuf?' on':'')+'" id="sf">🔀 Shuffle questions</button></div><div class="row"><button class="btn" id="go">Start Quiz</button></div></div>';
+app.querySelectorAll('[data-m]').forEach(function(b){b.onclick=function(){mode=b.dataset.m;home()}});
+document.getElementById('sf').onclick=function(){shuf=!shuf;home()};
+document.getElementById('go').onclick=function(){start(mode=='all'?MCQ.concat(TF):mode=='MCQ'?MCQ:TF)}}
+function start(list){qs=shuf?sh(list):list.slice();i=0;sc=0;wr=[];sec=0;clearInterval(tm);tm=setInterval(function(){sec++;var e=document.getElementById('tt');if(e)e.textContent=fm(sec)},1000);show()}
+function fm(s){return Math.floor(s/60)+':'+('0'+s%60).slice(-2)}
+function show(){lock=false;var q=qs[i];document.getElementById('pb').style.width=(i/qs.length*100)+'%';
+var h='<div class="card"><div class="meta"><span>Question '+(i+1)+' / '+qs.length+'</span><span>Score '+sc+'</span><span>⏱ <b id="tt">'+fm(sec)+'</b></span></div><span class="tag">'+q.k+'</span><div class="q">'+q.t+'</div>';
+q.o.forEach(function(o,j){h+='<button class="o" data-j="'+j+'"><b>'+(q.k=='MCQ'?'ABCD'[j]:j?'F':'T')+'</b>'+o+'</button>'});
+h+='<div class="row" style="margin-top:12px"><button class="btn" id="nx" disabled>'+(i==qs.length-1?'Finish':'Next')+'</button></div></div>';
+app.innerHTML=h;
+app.querySelectorAll('.o').forEach(function(b){b.onclick=function(){if(lock)return;lock=true;var j=+b.dataset.j,bs=app.querySelectorAll('.o');
+bs[q.a].classList.add('ok');if(j==q.a)sc++;else{b.classList.add('no');wr.push(q)}document.getElementById('nx').disabled=false}});
+document.getElementById('nx').onclick=function(){i++;i<qs.length?show():end()}}
+function end(){clearInterval(tm);document.getElementById('pb').style.width='100%';var p=Math.round(sc/qs.length*100);
+var h='<div class="card" style="text-align:center"><h2>'+(p>=85?'Excellent! 🎉':p>=60?'Good job 👍':'Keep studying 📚')+'</h2><div class="ring" style="background:conic-gradient(var(--rose) '+p+'%,var(--en) 0)"><span>'+p+'%</span></div><p style="color:var(--t2);margin-bottom:14px">'+sc+' / '+qs.length+' correct · ⏱ '+fm(sec)+'</p><div class="row">';
+if(wr.length)h+='<button class="btn" id="rt">Retry wrong ('+wr.length+')</button>';
+h+='<button class="chip" id="hm">Home</button></div></div>';
+if(wr.length){h+='<div class="card"><b>Review</b><div style="margin-top:10px">';wr.forEach(function(q){h+='<div class="rv">'+q.t+'<br><i>✔ '+q.o[q.a]+'</i></div>'});h+='</div></div>'}
+app.innerHTML=h;if(wr.length)document.getElementById('rt').onclick=function(){start(wr.slice())};document.getElementById('hm').onclick=home}
+var b=document.getElementById('tb'),t='light';try{t=localStorage.getItem('theme')||'light'}catch(e){}
+function ap(x){t=x;document.documentElement.setAttribute('data-theme',x==='dark'?'dark':'');b.textContent=x==='dark'?'☀️':'🌙';try{localStorage.setItem('theme',x)}catch(e){}}
+ap(t);b.onclick=function(){ap(t==='dark'?'light':'dark')};home();
+</script></body></html>
