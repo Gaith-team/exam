@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--teal:#c2255c;--teal-d:#2b1646;--blue:#ece5ef;--bd:#ddd0e4;--ok:#138a5b;--no:#d6334a;--rev:#5c7cfa;--txt:#1f1429;--grad:linear-gradient(135deg,#2b1646 0%,#4a1d6b 58%,#7a1f5c 100%)}
+body{font-family:'Readex Pro',Arial,sans-serif;background:#f7f3f8;color:var(--txt);font-size:14px}
+header{background:var(--grad);color:#fff;text-align:center;padding:12px;font-size:18px;font-weight:700;position:relative;border-bottom:5px solid transparent;border-image:linear-gradient(90deg,#0fa3a3 0 25%,#c2255c 25% 50%,#f5a524 50% 75%,#5c7cfa 75% 100%) 1}
+header .brand{position:absolute;right:16px;top:8px;font-weight:bold;font-size:14px}
+header a{position:absolute;left:16px;top:11px;color:#fff;font-size:13px;text-decoration:none}
+.wrap{max-width:1280px;margin:0 auto;padding:8px 10px 20px}
+.topinfo{background:var(--blue);border:1px solid var(--bd);padding:4px 8px;font-size:13px;margin-bottom:8px}
+.topinfo b{color:var(--teal)}
+.layout{display:grid;grid-template-columns:1fr 240px;gap:14px;align-items:start}
+.main{background:#fff;border:1px solid var(--bd);min-height:470px;display:flex;flex-direction:column;
+ background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='70'><text x='8' y='45' transform='rotate(-20 75 35)' font-size='14' font-family='Arial' fill='%23000' fill-opacity='.07'>GHAITH TEAM</text></svg>")}
+.qhead{display:flex;justify-content:space-between;align-items:center;padding:12px 6px 6px;margin:0 6px;border-bottom:1px solid var(--bd)}
+.qhead b{font-size:13px}
+.fs button{background:#5c7cfa;color:#fff;border:0;padding:6px 12px;margin-left:3px;border-radius:2px;cursor:pointer;font-weight:bold}
+.qbody{padding:8px 12px;flex:1}
+.qtext{font-size:13px;line-height:1.7;margin-bottom:18px;direction:ltr;text-align:left}
+.opt{display:flex;align-items:center;gap:8px;margin:0 0 16px;cursor:pointer;direction:ltr;text-align:left;font-size:13px}
+.opt input{accent-color:var(--teal);cursor:pointer}
+.bar{display:flex;justify-content:space-between;padding:10px;gap:6px;flex-wrap:wrap;border-top:1px solid var(--bd);margin:0 6px 6px}
+.b{background:var(--grad);color:#fff;border:0;padding:9px 12px;font-weight:bold;font-size:13px;border-radius:2px;cursor:pointer}
+.b:hover{filter:brightness(1.12)}
+.b.gray{background:#2b1646}
+.side>div{background:var(--blue);border:1px solid var(--bd);margin-bottom:10px;padding:8px}
+.timer{text-align:center;background:none!important;border:0!important}
+.timer small{font-size:13px}
+.timer .t{font-size:30px;color:#0fa3a3;margin-top:4px}
+.timer .t.warn{color:#c27b0a}.timer .t.danger{color:#c8372d}
+.leg{display:grid;grid-template-columns:1fr 1fr;gap:8px 6px;font-size:10px;margin-top:8px}
+.leg div{display:flex;align-items:center;gap:6px}
+.sq{min-width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:bold;border-radius:2px;border:1px solid transparent}
+.s-ans{background:var(--ok)}.s-no{background:#f5a524;color:#3b2a00}.s-rev{background:var(--rev)}.s-nv{background:#fff;color:#333;border-color:#9bb0a2}
+.nav{display:flex;flex-wrap:wrap;gap:6px;max-height:260px;overflow:auto;background:#ece5ef}
+.nav .sq{width:24px;height:24px;cursor:pointer;font-size:12px}
+.nav .cur{outline:2px solid #f5a524;outline-offset:0}
+.endrow{text-align:center}
+.endrow .b{width:90px}
+footer{text-align:center;padding:16px;font-size:12px;color:#55465f;background:#ece5ef;border-top:4px solid transparent;border-image:linear-gradient(90deg,#0fa3a3 0 25%,#c2255c 25% 50%,#f5a524 50% 75%,#5c7cfa 75% 100%) 1;margin-top:10px}
+footer a{color:#229ED9;text-decoration:none}
+/* results */
+.res{background:#fff;border:1px solid var(--bd);padding:20px;max-width:900px;margin:10px auto}
+.score{text-align:center;padding:10px 0 18px}
+.score .n{font-size:48px;font-weight:900;color:var(--teal)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}
+.stats div{background:var(--blue);padding:10px;text-align:center;border-radius:4px}
+.stats b{display:block;font-size:20px}
+.sec{background:var(--ok);color:#fff;padding:8px 12px;font-weight:bold;margin:22px 0 10px}
+.sec.bad{background:var(--no)}
+.it{border:1px solid var(--bd);border-left:4px solid var(--ok);padding:12px;margin-bottom:8px;background:#fafcff;direction:ltr;text-align:left}
+.it.bad{border-left-color:var(--no)}
+.it .q{font-weight:bold;font-size:13px;margin-bottom:6px;line-height:1.6}
+.it .r{font-size:12px;margin-top:4px}
+.tag{padding:1px 7px;border-radius:3px;color:#fff;font-size:11px;font-weight:bold;margin-right:6px}
+.tag.y{background:var(--no)}.tag.g{background:var(--ok)}
+.exp{font-size:12px;color:#555;margin-top:6px;background:#eef6f4;padding:6px 8px;border-radius:3px}
+.acts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.hide{display:none}
+@media(max-width:820px){.layout{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}header a{display:none}}
+.qtext img{display:block;max-width:100%;max-height:260px;margin:0 auto 12px;border-radius:8px;background:#fff}
+.it .q img{max-height:90px;display:block;margin:6px 0;border-radius:6px}
+</style>
+</head>
+<body>
+<header><a href="https://gaith-team.github.io/exam/">← رجوع</a>Biochemistry<span class="brand">GHAITH TEAM</span></header>
+<div class="wrap">
+ <div id="exam">
+  <div class="topinfo">Total questions in exam: <b id="tot">0</b> | Answered: <b id="ans">0</b></div>
+  <div class="layout">
+   <div class="main">
+    <div class="qhead"><b id="qno"></b><div class="fs"><button onclick="fs(-1)">A-</button><button onclick="fs(0)">A</button><button onclick="fs(1)">A+</button></div></div>
+    <div class="qbody" id="qbody"></div>
+    <div class="bar">
+     <button class="b" onclick="saveNext()">Save &amp; Next</button>
+     <div style="display:flex;gap:4px;flex-wrap:wrap">
+      <button class="b" onclick="mark()">Mark for Review</button>
+      <button class="b" onclick="skip()">Skip</button>
+      <button class="b" onclick="prev()">Previous</button>
+     </div>
+    </div>
+   </div>
+   <div class="side">
+    <div class="timer"><small>Time Remaining</small><div class="t" id="tm">45:00</div></div>
+    <div>
+     <div>Number of questions : <b id="tot2">0</b></div>
+     <div class="leg">
+      <div><span class="sq s-ans" id="cAns">0</span>Answered</div>
+      <div><span class="sq s-no" id="cNo">0</span>Not Answered</div>
+      <div><span class="sq s-rev" id="cRev">0</span>For Review</div>
+      <div><span class="sq s-nv" id="cNv">0</span>Not Visited</div>
+     </div>
+    </div>
+    <div class="nav" id="nav"></div>
+    <div class="endrow"><button class="b gray" onclick="endTest()">End Test</button></div>
+   </div>
+  </div>
+ </div>
+ <div id="result" class="hide"></div>
+</div>
+<footer>GHAITH TEAM · <a href="https://t.me/nursing2bu" target="_blank">@nursing2bu</a></footer>
+
+<script>
+const QUESTIONS = [
+{t:"Nutrients are chemical compounds needed for:",o:["Energy only","Energy, growth, repair and vital functions","Digestion only","Excretion only"],a:1},
+{t:"What percentage of the daily macronutrient intake is lipids (fats)?",o:["55%","30%","40%","15%"],a:3},
+{t:"A BMI of 30.0 to 34.9 is classified as:",o:["Obesity (Class 1)","Overweight","Obesity (Class 2)","Severe obesity"],a:0},
+{t:"Energy from nutrients is measured in:",o:["Grams","Liters","Kilocalories (kcal)","Moles"],a:2},
+{t:"Which of the following is a glucosan (gives only glucose on hydrolysis)?",o:["Inulin","Glycogen","Hyaluronic acid","Heparin"],a:1},
+{t:"Maltose (malt sugar) consists of:",o:["Two glucose molecules","Glucose and fructose","Glucose and galactose","Two fructose molecules"],a:0},
+{t:"Inulin is an example of:",o:["Glucosans","Heteropolysaccharides","Oligosaccharides","Fructosans"],a:3},
+{t:"Which of the following is a sulfated heteropolysaccharide?",o:["Hyaluronic acid","Starch","Heparin","Cellulose"],a:2},
+{t:"Oxidative decarboxylation of pyruvic acid occurs in the:",o:["Cytoplasm","Mitochondria","Nucleus","Ribosome"],a:1},
+{t:"The pyruvate dehydrogenase complex needs how many coenzymes?",o:["5","3","2","7"],a:0},
+{t:"How many ATP are formed from glucose oxidation in the absence of O2?",o:["30","8","7","2"],a:3},
+{t:"According to the lecture, complete oxidation of 1 mol of glucose yields:",o:["2 ATP","8 ATP","30 ATP","108 ATP"],a:2},
+{t:"The only source of energy for RBCs is:",o:["Krebs cycle","Glycolysis","β-oxidation","Ketolysis"],a:1},
+{t:"Insulin inhibits production of glucose by the liver through inhibiting:",o:["Glycogenolysis and gluconeogenesis","Glucose uptake","Glycogenesis","Lipogenesis"],a:0},
+{t:"Which group represents the anti-insulin hormones?",o:["Insulin and thyroxine only","Insulin and HDL","Insulin only","Glucagon, adrenaline, glucocorticoids and growth hormone"],a:3},
+{t:"Glycated hemoglobin reflects diabetic control over the last:",o:["24 hours","2 weeks","3 months","2 years"],a:2},
+{t:"An HbA1c level indicating diabetes is:",o:["Below 6.0%","6.5% or over","6.0% to 6.4%","Below 5%"],a:1},
+{t:"The 2-hour postprandial blood glucose in diabetics is:",o:["More than 200 mg/dl","Up to 140 mg/dl","70–110 mg/dl","45 mg/dl or less"],a:0},
+{t:"Type 2 diabetes is usually treated with:",o:["Insulin injection only","Antibiotics","Glucagon","Oral hypoglycemic drugs"],a:3},
+{t:"Deep rapid Kussmaul breathing and fruity breath odor are features of:",o:["Hypoglycemic coma","Renal glucosuria","Diabetic ketoacidosis","Fasting hypoglycemia"],a:2},
+{t:"Sweaty, pale skin with tremor and confusion suggests:",o:["Hypoglycemic coma","Diabetic ketoacidosis","Renal glucosuria","Fatty liver"],a:0},
+{t:"Glucose in urine with normal blood glucose and a normal OGTT curve indicates:",o:["Diabetes mellitus","Renal glucosuria","Alimentary glucosuria","Adrenaline glucosuria"],a:1},
+{t:"A pancreatic β-cell tumor causing fasting hypoglycemia is called:",o:["Hepatic cancer","Glycogen storage disease","Prolonged starvation","Insulinoma"],a:3},
+{t:"Waxes are formed of fatty acids and:",o:["Glycerol","Cholesterol","An alcohol higher than glycerol","Protein"],a:2},
+{t:"A triacylglycerol (TAG) is formed of:",o:["Glycerol + one fatty acid","Glycerol + three fatty acids","Cholesterol + three fatty acids","Sphingosine + fatty acid"],a:1},
+{t:"Lipids combined with phosphoric acid form:",o:["Phospholipids","Glycolipids","Lipoproteins","Waxes"],a:0},
+{t:"Artificial trans fats are produced by:",o:["Fermentation","Oxidation","Hydrolysis","Hydrogenation of liquid vegetable oils"],a:3},
+{t:"Omega-3 PUFA in fish oil is of nutritional importance in:",o:["Raising LDL","Increasing blood glucose","Lowering serum cholesterol in coronary heart disease","Causing fatty liver"],a:2},
+{t:"Arachidonic acid is the precursor of:",o:["Bile acids","Prostaglandins","Vitamin D","Ketone bodies"],a:1},
+{t:"Insulin acts on hormone-sensitive triglyceride lipase by:",o:["Inactivating it, so lipolysis decreases","Activating it, so lipolysis increases","Having no effect on it","Synthesizing it only"],a:0},
+{t:"Lipolysis (breakdown of neutral fats) occurs mainly in:",o:["Liver only","Skeletal muscle only","Kidney","Adipose tissue"],a:3},
+{t:"β-oxidation of fatty acids occurs inside the:",o:["Cytoplasm","Nucleus","Mitochondria","Golgi apparatus"],a:2},
+{t:"α-oxidation is used for the oxidation of:",o:["Palmitic acid","Branched-chain fatty acids such as phytanic acid","Glucose","Cholesterol"],a:1},
+{t:"Which of the following is a cause of ketosis/ketoacidosis?",o:["Prolonged starvation","Carbohydrate-rich diet","High insulin level","Excess HDL"],a:0},
+{t:"Cholesterol is the precursor of:",o:["Amylase and lipase","Insulin and glucagon","Pyruvate and lactate","Bile acids, steroid hormones and vitamin D"],a:3},
+{t:"Dietary fiber lowers cholesterol by decreasing the reabsorption of bile acids.",o:["True","False"],a:0},
+{t:"The Krebs cycle is the final common pathway for the complete oxidation of acetyl-CoA.",o:["True","False"],a:0},
+{t:"Glycolysis is the only source of energy for RBCs.",o:["True","False"],a:0},
+{t:"Muscle glycogenolysis supplies blood glucose during fasting.",o:["True","False"],a:1},
+{t:"Gluconeogenesis is essentially the reversal of glycolysis.",o:["True","False"],a:0},
+{t:"Glucagon and adrenaline lower the blood glucose level.",o:["True","False"],a:1},
+{t:"A normal HbA1c is below 6.0%.",o:["True","False"],a:0},
+{t:"Ketosis is less common in type 1 diabetes than in type 2 diabetes.",o:["True","False"],a:1},
+{t:"In hyperglycemic glucosuria, blood glucose rises above the renal threshold.",o:["True","False"],a:0},
+{t:"Triglycerides make up over 95% of the lipids in our food and body.",o:["True","False"],a:0},
+{t:"Hormone-sensitive triglyceride lipase is activated by insulin.",o:["True","False"],a:1},
+{t:"Diabetes mellitus is associated with increased lipolysis.",o:["True","False"],a:0},
+{t:"Short and medium chain fatty acids need the carnitine shuttle to enter mitochondria.",o:["True","False"],a:1},
+{t:"Trans fats raise HDL and lower LDL cholesterol.",o:["True","False"],a:1},
+{t:"Choline is a lipotropic factor.",o:["True","False"],a:0}
+];
+
+const TOTAL_TIME = 45*60;
+let Q, cur, sel, saved, review, visited, left, iv, size = 13;
+
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function shuffleOptions(q){const ix=shuffle(q.o.map((_,k)=>k));return {...q,o:ix.map(k=>q.o[k]),a:ix.indexOf(q.a)}}
+const $ = id => document.getElementById(id);
+
+function init(pool){
+  Q = shuffle([...pool]).map(shuffleOptions); const n = Q.length;
+  cur = 0; sel = Array(n).fill(null); saved = Array(n).fill(false);
+  review = Array(n).fill(false); visited = Array(n).fill(false);
+  left = TOTAL_TIME;
+  $('exam').classList.remove('hide'); $('result').classList.add('hide');
+  $('tot').textContent = $('tot2').textContent = n;
+  clearInterval(iv);
+  iv = setInterval(()=>{
+    left--; const m=Math.floor(left/60), s=left%60, t=$('tm');
+    t.textContent = m+':'+(s<10?'0':'')+s;
+    t.className = 't'+(left<=120?' danger':left<=300?' warn':'');
+    if(left<=0){clearInterval(iv);finish()}
+  },1000);
+  if(n) render();
+  window.scrollTo(0,0);
+}
+
+function render(){
+  visited[cur] = true;
+  const q = Q[cur];
+  $('qno').textContent = 'Question No. ' + (cur+1);
+  $('qbody').style.fontSize = size+'px';
+  $('qbody').innerHTML = `<div class="qtext" style="font-size:${size}px">${q.t}</div>` +
+    q.o.map((o,i)=>`<label class="opt" style="font-size:${size}px"><input type="radio" name="o" value="${i}" ${sel[cur]===i?'checked':''} onchange="sel[cur]=${i}"> <span>${o}</span></label>`).join('');
+  refresh();
+}
+
+function status(i){
+  if(review[i]) return 's-rev';
+  if(saved[i]) return 's-ans';
+  if(visited[i]) return 's-no';
+  return 's-nv';
+}
+function refresh(){
+  const n = Q.length; let a=0,no=0,r=0,nv=0;
+  $('nav').innerHTML = Q.map((_,i)=>{
+    const s = status(i);
+    if(saved[i]) a++;
+    if(s==='s-rev') r++; else if(s==='s-no') no++; else if(s==='s-nv') nv++;
+    return `<span class="sq ${s} ${i===cur?'cur':''}" onclick="go(${i})">${i+1}</span>`;
+  }).join('');
+  $('ans').textContent = a; $('cAns').textContent = a; $('cNo').textContent = no;
+  $('cRev').textContent = r; $('cNv').textContent = nv;
+}
+
+function go(i){cur=i;render()}
+function nextQ(){ if(cur<Q.length-1){cur++;render();return} const k=Q.findIndex((_,x)=>!saved[x]); if(k>=0){cur=k;render()} else {refresh();alert('كل الأسئلة اتحلت، دوس End Test لإنهاء الامتحان')} }
+function saveNext(){ saved[cur]=sel[cur]!==null; nextQ(); }
+function skip(){ nextQ(); }
+function mark(){ review[cur]=!review[cur]; if(sel[cur]!==null) saved[cur]=true; refresh(); }
+function prev(){ if(cur>0){cur--;render()} }
+function fs(d){ size = d===0 ? 13 : Math.max(11,Math.min(24,size+d*2)); render(); }
+
+function endTest(){
+  const un = Q.filter((_,i)=>sel[i]===null).length;
+  const msg = un ? `لسه فاضل ${un} سؤال من غير إجابة. تنهي الامتحان؟` : 'تنهي الامتحان؟';
+  if(confirm(msg)) finish();
+}
+
+function finish(){
+  clearInterval(iv);
+  const n = Q.length; let ok=[], bad=[];
+  Q.forEach((q,i)=>{ (sel[i]===q.a ? ok : bad).push(i) });
+  const pct = n ? Math.round(ok.length/n*100) : 0;
+  const card = (i,good)=>{
+    const q=Q[i];
+    return `<div class="it ${good?'':'bad'}"><div class="q">${i+1}. ${q.t}</div>
+    ${good ? `<div class="r"><span class="tag g">Correct</span>${q.o[q.a]}</div>` :
+    `<div class="r"><span class="tag y">Your answer</span>${sel[i]===null?'— لم تتم الإجابة —':q.o[sel[i]]}</div>
+     <div class="r"><span class="tag g">Correct</span>${q.o[q.a]}</div>`}
+    ${q.exp?`<div class="exp">💬 ${q.exp}</div>`:''}</div>`;
+  };
+  const unans = Q.filter((_,i)=>sel[i]===null).length;
+  $('exam').classList.add('hide');
+  const r = $('result'); r.classList.remove('hide');
+  r.innerHTML = `<div class="res">
+   <div class="score"><div class="n">${pct}%</div><div>${ok.length} / ${n}</div></div>
+   <div class="stats">
+    <div><b style="color:var(--ok)">${ok.length}</b>صح</div>
+    <div><b style="color:var(--no)">${bad.length - unans}</b>غلط</div>
+    <div><b style="color:#777">${unans}</b>من غير إجابة</div>
+    <div><b>${n}</b>الإجمالي</div>
+   </div>
+   <div class="acts">
+    ${bad.length?'<button class="b" onclick="retryWrong()">إعادة الأسئلة الغلط ('+bad.length+')</button>':''}
+    <button class="b" onclick="init(QUESTIONS)">امتحان جديد عشوائي</button>
+   </div>
+   <div class="sec">✔ الأسئلة اللي اتحلت صح (${ok.length})</div>
+   ${ok.map(i=>card(i,true)).join('') || '<div style="padding:8px;color:#777">لا يوجد</div>'}
+   <div class="sec bad">✖ الأسئلة الغلط (${bad.length})</div>
+   ${bad.map(i=>card(i,false)).join('') || '<div style="padding:8px;color:#777">ممتاز، مفيش أخطاء 🎉</div>'}
+  </div>`;
+  window.scrollTo(0,0);
+}
+
+function retryWrong(){
+  const pool = Q.filter((q,i)=>sel[i]!==q.a);
+  init(pool);
+}
+
+init(QUESTIONS);
+</script>
+</body>
+</html>
