@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hyperemesis Gravidarum - GHAITH TEAM</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Outfit:wght@600;700;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--ac:#db2777;--ac2:#ec4899;--acd:#be185d;--glow:rgba(219,39,119,.15);--bg:#f8fafc;--bg2:#eef2f7;--card:#fff;--tx:#1a2332;--tx2:#4a5568;--tx3:#718096;--bc:rgba(0,0,0,.08);--ok:#16a34a;--no:#dc2626;--r:16px}
+[data-theme=dark]{--bg:#0d1117;--bg2:#161b22;--card:#1c2333;--tx:#e6edf3;--tx2:#b1bac4;--tx3:#7d8590;--bc:rgba(255,255,255,.09)}
+body{font-family:'Cairo','Outfit',sans-serif;background:var(--bg);color:var(--tx);min-height:100vh;transition:background .3s}
+nav{position:sticky;top:0;z-index:10;display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:60px;background:var(--card);border-bottom:1px solid var(--bc)}
+.brand{display:flex;align-items:center;gap:9px;font:900 15px Outfit,sans-serif}
+.logo{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--ac),var(--ac2));color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px}
+.theme{width:38px;height:38px;border-radius:50%;border:1px solid var(--bc);background:var(--bg);cursor:pointer;font-size:15px}
+.hero{background:linear-gradient(135deg,var(--acd),var(--ac),var(--ac2));padding:34px 20px 28px;text-align:center;color:#fff}
+.hero .ic{font-size:34px;margin-bottom:8px}
+.hero h1{font:900 clamp(22px,5vw,32px) Outfit,sans-serif}
+.hero p{font-size:13px;opacity:.85;margin-top:4px}
+.tabs{display:flex;justify-content:center;gap:10px;margin-top:20px}
+.tab{padding:9px 22px;border-radius:50px;border:1.5px solid rgba(255,255,255,.5);background:transparent;color:#fff;font:700 14px Cairo,sans-serif;cursor:pointer}
+.tab.on{background:#fff;color:var(--acd)}
+.shell{max-width:680px;margin:0 auto;padding:22px 16px 60px}
+.sec{margin-bottom:26px}
+.sec>h2{font:900 19px Outfit,sans-serif;direction:ltr;text-align:left;display:flex;align-items:center;gap:10px;padding:10px 14px;background:var(--card);border:1px solid var(--bc);border-radius:12px;border-inline-start:5px solid var(--ac);margin-bottom:12px}
+.tag{font:700 11px Cairo,sans-serif;background:var(--glow);color:var(--ac);padding:2px 9px;border-radius:20px}
+.sec h3{font:700 13px Outfit,sans-serif;direction:ltr;text-align:left;color:var(--ac);margin:16px 4px 8px}
+.it{background:var(--card);border:1px solid var(--bc);border-radius:var(--r);padding:14px 16px;margin-bottom:10px}
+.en{direction:ltr;text-align:left;font:700 15px/1.6 Outfit,sans-serif}
+.ar{margin-top:8px;font-size:14.5px;line-height:1.9;color:var(--tx2)}
+.ex{margin-top:8px;padding:9px 12px;border-radius:10px;background:var(--bg2);font-size:13.5px;line-height:1.9;color:var(--tx2)}
+.ex b{color:var(--ac)}
+.it.dr{border:1.5px dashed var(--ac);background:var(--glow)}
+.lb{display:inline-block;background:var(--ac);color:#fff;font-size:12px;font-weight:700;padding:2px 12px;border-radius:20px;margin-bottom:8px}
+/* quiz */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.st{background:var(--card);border:1px solid var(--bc);border-radius:var(--r);padding:10px;text-align:center}
+.st b{display:block;font:900 20px Outfit,sans-serif}.st span{font-size:11px;color:var(--tx3)}
+.bar{height:8px;background:var(--bg2);border-radius:8px;overflow:hidden;margin-bottom:14px}
+.bar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--ac),var(--ac2));transition:width .4s}
+.q{background:var(--card);border:1px solid var(--bc);border-radius:20px;overflow:hidden}
+.qh{background:linear-gradient(135deg,var(--acd),var(--ac));color:#fff;padding:6px 18px;font-size:12px;font-weight:700;display:flex;justify-content:space-between}
+.qt{padding:20px 18px 12px;direction:ltr;text-align:left;font:700 15px/1.7 Outfit,sans-serif;border-bottom:1px solid var(--bc)}
+.os{padding:14px 18px;display:flex;flex-direction:column;gap:10px}
+.o{direction:ltr;text-align:left;display:flex;align-items:center;gap:12px;padding:13px 14px;border:1.5px solid var(--bc);border-radius:12px;background:var(--bg);cursor:pointer;font:600 14px Outfit,sans-serif;color:var(--tx)}
+.o:hover:not(.d){border-color:var(--ac);background:var(--glow)}
+.o i{font-style:normal;width:28px;height:28px;border-radius:8px;background:var(--bg2);border:1px solid var(--bc);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0}
+.o.d{pointer-events:none}
+.o.c{border-color:var(--ok);background:rgba(22,163,74,.09)}.o.c i{background:var(--ok);color:#fff}
+.o.w{border-color:var(--no);background:rgba(220,38,38,.08)}.o.w i{background:var(--no);color:#fff}
+.fb{margin:0 18px 12px;padding:11px 14px;border-radius:12px;font-weight:700;font-size:14px}
+.fb.ok{background:rgba(22,163,74,.1);color:var(--ok)}.fb.no{background:rgba(220,38,38,.08);color:var(--no)}
+.xp{margin:0 18px 14px;padding:10px 14px;background:var(--bg2);border-radius:10px;border-inline-start:3px solid var(--ac);font-size:13px;line-height:1.8;color:var(--tx2);direction:ltr;text-align:left}
+.btn{width:calc(100% - 36px);margin:0 18px 18px;padding:13px;border:0;border-radius:12px;background:linear-gradient(135deg,var(--acd),var(--ac));color:#fff;font:900 14px Cairo,sans-serif;cursor:pointer}
+.res{text-align:center;background:var(--card);border:1px solid var(--bc);border-radius:20px;padding:30px 18px}
+.res h2{font:900 40px Outfit,sans-serif;color:var(--ac)}
+.rp{background:var(--card);border:1px solid var(--bc);border-inline-start:4px solid var(--no);border-radius:12px;padding:12px 14px;margin-top:10px;direction:ltr;text-align:left;font-size:13px;line-height:1.7}
+footer{text-align:center;padding:18px;font-size:13px;color:var(--tx3);background:var(--bg2);border-top:1px solid var(--bc)}
+footer a{color:#229ED9;text-decoration:none;font-weight:600}
+:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+</style>
+</head>
+<body>
+<nav>
+  <div class="brand"><div class="logo">GT</div>GHAITH TEAM</div>
+  <button class="theme" id="themeBtn" aria-label="Theme">🌙</button>
+</nav>
+<div class="hero">
+  <div class="ic">🤰</div>
+  <h1>Hyperemesis Gravidarum (H.G)</h1>
+  <p>Spotlights on Obstetrics - Abnormal Pregnancy</p>
+  <div class="tabs">
+    <button class="tab on" data-t="notes">📖 الشرح</button>
+    <button class="tab" data-t="quiz">📝 الأسئلة</button>
+  </div>
+</div>
+<div class="shell">
+  <div id="notes"></div>
+  <div id="quiz" hidden></div>
+</div>
+<footer>GHAITH TEAM · <a href="https://t.me/nursing2bu" target="_blank" rel="noopener">@nursing2bu</a></footer>
+
+<script>
+/* ===== NOTES (lecture order) ===== */
+const D=[
+{h:"Definition",i:[
+["It’s an insidious progression of morning sickness (which is a physiological event) → emesis gravidarum → hyperemesis gravidarum.","القيء الصباحي (حاجة طبيعية في الحمل) بيزيد بالتدريج من غير ما حد ياخد باله، لحد ما يوصل لـ emesis gravidarum وبعدين hyperemesis gravidarum.","زي نزلة برد بسيطة بتبدأ بعطسة وبالتدريج تتحول لالتهاب شديد من غير ما تحس."]]},
+{h:"Incidence",i:[
+["1/500 of all pregnancy.","يعني من كل 500 حامل واحدة بس بتصاب بيه، فهو نادر.","لو في قاعة فيها 500 حامل، واحدة بس هي اللي هتعاني منه."]]},
+{h:"Emesis gravidarum vs Hyperemesis gravidarum",i:[
+["Incidence: Emesis is common (50%) - Hyperemesis is rare (1/500 of all pregnancy).","الـ emesis منتشر (نص الحوامل تقريبا)، والـ hyperemesis نادر (1 من 500).","الأولى زي الزكام كتير بيجيله، والتانية زي مرض نادر قليل اللي بيجيله."],
+["Time of vomiting: Emesis at morning - Hyperemesis all the day.","في emesis القيء بيبقى الصبح بس، وفي hyperemesis طول اليوم.","واحدة بتستفرغ أول ما تصحى وبعدها تبقى كويسة، والتانية كل شوية طول النهار."],
+["Course: Emesis regressive at 12 w - Hyperemesis progressive.","الـ emesis بيقل ويختفي عند الأسبوع 12، والـ hyperemesis بيزيد وبيكمل.","الأولى زي موجة بتهدى في الأسبوع 12، والتانية موجة بتعلى."],
+["G. condition: Emesis not affect - Hyperemesis markedly affected.","الحالة العامة في emesis مش بتتأثر، وفي hyperemesis بتتأثر جدا.","الأولى تروح شغلها عادي، والتانية مش قادرة تقوم من السرير."],
+["ttt: Emesis out patient - Hyperemesis in patient (hospitalization).","emesis بيتعالج برا المستشفى، وhyperemesis لازم يتحجز في المستشفى.","الأولى تاخد علاج وتروح بيتها، والتانية محتاجة محاليل ومراقبة جوه المستشفى."]]},
+{h:"Aetiology",i:[
+["Unknown (theories).","السبب الحقيقي مش معروف، فيه نظريات بس.","زي مشكلة محدش متأكد سببها، فكل واحد بيطلع تفسير."],
+["1) Allergic theory: H.G. is allergic manifestation to HCG.","الجسم بيتحسس من هرمون الحمل HCG فيحصل القيء.","زي واحد عنده حساسية من أكلة معينة وجسمه بيرد بأعراض."],
+["2) Psychological theory: H.G. is due to psychological trouble.","السبب مشاكل نفسية.","زي اللي بيتوتر قبل الامتحان وبطنه تقلب."],
+["3) Vitamin ↓↓ theory: HG is due to ↓ vit B.","السبب نقص فيتامين B.","زي العربية من غير بنزين، الجسم من غير الفيتامين مبيشتغلش صح."],
+["B → B6","من فيتامين B الدكتور حدد إن المقصود B6 (حطه في دايرة).","زي ما تقول فاكهة وتقصد التفاح بالتحديد.","dr"],
+["4) Hormonal theory: ↓↓ adrenocortical hormone.","السبب نقص هرمونات الغدة الكظرية (adrenocortical).","لما الغدة المسؤولة عن هرمونات معينة تضعف، الجسم يختل."]]},
+{h:"Pathology",i:[
+["Occurs in severe cases → starvation.","في الحالات الشديدة المريضة مبتقدرش تاكل فيحصل تجويع.","زي حد مش بيقدر ياكل أيام فجسمه يبدأ يستهلك من نفسه."],
+"a) Organs:",
+["Brain: Petechial hemorrhage + encephalopathy.","في المخ: نزيف صغير على شكل نقط + اعتلال في المخ.","زي بقع حمرا صغيرة جوه المخ بتلخبط الوعي."],
+["Heart: Subendocardial and subpericardial hemorrhage.","في القلب: نزيف تحت الغشاء الداخلي (endo) وتحت الغشاء الخارجي (peri).","sub يعني تحت: endo جوه القلب، وperi حوالين القلب."],
+["Liver: Fatty liver.","في الكبد: دهون متراكمة.","الجسم بيحرق دهونه من التجويع فبتتجمع في الكبد."],
+["Kidney: Tubular degeneration.","في الكلى: تلف في الأنابيب الكلوية.","الجفاف بيرهق الكلى فأنابيبها تتضرر."],
+["Peripheral neuritis.","التهاب في الأعصاب الطرفية.","زي التنميل في الإيدين والرجلين."],
+"b) Biochemical changes:",
+["1- Vomiting leads to (triad): Hemoconcentration - ↓↓ Na⁺ & Cl⁻ - ↓ K⁺.","القيء بيعمل 3 حاجات: الدم بيتركز، الصوديوم والكلوريد بينقصوا جامد، والبوتاسيوم بينقص.","زي الشاي لما الميه تتبخر منه يبقى أتقل وأغمق، ودي الـ hemoconcentration."],
+["2- Starvation → ketoacidosis.","التجويع بيخلي الجسم يحرق دهون فتطلع كيتونات والدم يبقى حمضي.","زي عربية خلص بنزينها فبتحرق أي حاجة، والعادم هو الكيتونات."]]},
+{h:"C/P (Clinical Picture)",i:[
+["1- Pt. C/O repeated vomiting to any type of food.","المريضة بتشتكي من قيء متكرر مع أي نوع أكل.","تاكل أي حاجة، لقمة أو شوربة، وترجعها."],
+["2- General exam: (A) dehydration:","في الكشف العام أول حاجة علامات الجفاف.","كل العلامات الجاية سببها نقص الميه في الجسم."],
+["Loss of weight","نقص في الوزن.","الجسم بيفقد ميه فالميزان ينزل."],
+["↓ ABP","نزول ضغط الدم.","ميه أقل في الأوعية فالضغط يقل."],
+["Drowsiness","نعاس وخمول.","زي ما تبقى مش نايم كفاية ومش قادر تركز."],
+["Dry wrinkled skin","جلد ناشف ومتجعد.","زي الفاكهة لما تدبل."],
+["Sunken eyes","عيون غايرة.","العين شكلها داخلة لجوه."],
+["Dry tongue","لسان ناشف.","من قلة الريق والسوائل."],
+["↑ Thirst sensation","إحساس زايد بالعطش.","الجسم بيطلب ميه."],
+["Palpitation","خفقان في القلب.","القلب بيدق أسرع يعوض قلة الدم."],
+["Oliguria","قلة كمية البول.","الكلى بتحافظ على الميه الموجودة."],
+["Constipation","إمساك.","الأمعاء مفيهاش ميه كفاية."],
+["(B) Starvation → Complication cases:","التجويع بيسبب مضاعفات، وهي الـ 5 اللي جاية.","التجويع زي حريقة صغيرة لو اتساب بتوصل لأعضاء كتير."],
+["Jaundice","صفرا (يرقان).","الكبد تعب فاللون يصفر."],
+["Optic neuritis","التهاب العصب البصري.","ممكن المريضة تشتكي من ضعف في النظر."],
+["Heart failure","فشل القلب.","القلب مش قادر يضخ كويس."],
+["Liver damage","تلف الكبد.","الكبد الدهني لو اتساب يتلف."],
+["Kidney damage","تلف الكلى.","الجفاف المستمر بيأذي الكلى."]]},
+{h:"D.D: Other causes of vomiting with pregnancy",i:[
+"(V) related to pregnancy",
+["1- Vesicular mole","الحمل العنقودي.","حمل مش طبيعي والقيء فيه بيكون زايد."],
+["2- Multiple pregnancy","حمل متعدد (توأم).","أكتر من جنين يعني هرمونات أكتر."],
+["3- Acute hydramnios","زيادة حادة في السائل الأمنيوسي.","الرحم بيكبر ويضغط على المعدة."],
+["4- Pyelitis with pregnancy","التهاب حويضة الكلى مع الحمل.","التهاب في الكلى مع حمل يسبب قيء."],
+["5- Ectopic pregnancy","حمل خارج الرحم.","الجنين بيستقر مكان غلط."],
+["6- Complicated ovarian cyst with pregnancy","كيس على المبيض حصلت له مضاعفات مع الحمل.","الكيس لو اتلوى أو اتعقد بيسبب ألم وقيء."],
+["7- Pre eclampsia","تسمم الحمل.","ضغط عالي مع الحمل وأعراضه فيها قيء."],
+"(V) not related to pregnancy",
+["1- Acute appendicitis","التهاب الزايدة الدودية الحاد.","ألم في البطن وقيء حتى من غير حمل."],
+["2- Acute cholecystitis","التهاب المرارة الحاد.","المرارة ملتهبة فبتسبب قيء وألم."],
+["3- Intestinal obstruction","انسداد الأمعاء.","زي مواسير مسدودة، الأكل مبيعديش فيرجع."],
+["4- Uremia","ارتفاع اليوريا في الدم.","الكلى مش بتنضف الدم فالسموم تسبب قيء."],
+["5- Cholemia","وجود الصفرا في الدم.","مشكلة في الكبد أو المرارة."],
+["6- Food poisoning","تسمم غذائي.","أكلة بايظة والجسم بيطردها بالقيء."],
+["7- Gastritis","التهاب المعدة.","المعدة ملتهبة فبترفض الأكل."]]},
+{h:"Investigation of (H.G)",i:[
+["1- Of the disease (vomiting) triad: hemoconcentration, NaCl, K.","تحاليل للـ 3 حاجات اللي القيء بيبوظها: تركيز الدم، الصوديوم والكلوريد، والبوتاسيوم.","بنقيس اللي القيء غيره في الدم."],
+["2- Of complication:","تحاليل وفحوصات للمضاعفات، وهي اللي جاية.","كل فحص بيراجع عضو اتأثر."],
+["Kidney function test","وظائف الكلى.","نشوف الكلى اتأثرت ولا لأ."],
+["Liver function test","وظائف الكبد.","نطمن على الكبد."],
+["ECG","رسم القلب.","نشوف القلب وإيقاعه."],
+["EEG & CT on brain","رسم مخ وأشعة مقطعية على المخ.","لو في اعتلال أو نزيف في المخ."],
+["Fundus exam","فحص قاع العين.","نكشف التهاب العصب البصري."]]},
+{h:"ttt of H.G.",i:[
+["(A) Prophylaxis & early ttt of mild cases emesis gravidarum → by antiemetics & antihistaminics.","الوقاية والعلاج المبكر للحالات البسيطة من emesis بمضادات القيء ومضادات الهيستامين.","زي ما تطفي الحريقة وهي صغيرة قبل ما تكبر."],
+["(B) ttt of H.G.: I- Hospitalization & observation:","علاج الـ HG بيبدأ بحجز المريضة ومراقبتها.","الحالة تعبانة فلازم تبقى تحت عين الفريق."],
+["Restrict visitors.","نقلل الزوار.","الزيارات بتوتر المريضة، وخصوصا مع النظرية النفسية."],
+["Isolated semidark calm room.","أوضة معزولة، شبه مظلمة وهادية.","جو هادي زي أوضة بنام فيها."],
+["Observation.","مراقبة.","هي الـ 2V اللي جاية."],
+["Observation: 2V","المراقبة بتبقى لحاجتين: Vital signs وVomiting.","نراقب حالة المريضة العامة، ونراقب القيء نفسه."],
+"Vital signs",
+["ABP","ضغط الدم.","بيقل مع الجفاف."],
+["Pulse","النبض.","بيزيد مع الجفاف."],
+["Temp","الحرارة.","نتأكد مفيش التهاب."],
+["R.R","معدل التنفس.","بيتغير مع الحموضة."],
+"Vomiting",
+["N./day","عدد مرات القيء في اليوم.","نعد كام مرة استفرغت."],
+["Amount","كمية القيء.","نعرف خسرت قد إيه سوائل."],
+["Colour (e.g. bile stained)","لون القيء، مثلا مصبوغ بالصفرا.","اللون بيدلنا على نوع القيء."],
+["Content (e.g. blood or bile)","محتوى القيء، مثلا دم أو صفرا.","نشوف فيه إيه بالظبط."],
+["II- Correct general condition:","تصحيح الحالة العامة للمريضة.","نصلح اللي القيء بوظه."],
+["I.V. fluid with no oral route for at least 2 or 3 days to stop vomiting using at least 3 liters of fluid/day.","محاليل في الوريد ومنع أي حاجة من الفم لمدة يومين أو تلاتة على الأقل لحد ما القيء يقف، بمعدل 3 لتر سوائل في اليوم على الأقل.","زي ما تريح المعدة خالص وتعوض الميه من الوريد."],
+["Then gradual oral route → diet:","بعد كده نبدأ الأكل من الفم بالتدريج بنظام غذائي معين.","زي طفل بيرجع للأكل بالتدريج."],
+["CHO - diet","أكل كربوهيدرات.","زي الرز والعيش المحمص."],
+["No fat","من غير دهون.","الدهون بتتقل على المعدة."],
+["Not spicy","مش حرّاق.","الحراق بيهيج المعدة."],
+["Small amount","كمية صغيرة.","وجبة صغيرة مبتتعبش المعدة."],
+["6 times/d","6 مرات في اليوم.","بدل 3 وجبات كبيرة، 6 صغيرة."],
+["Fluid","سوائل.","نشجعها على شرب السوائل."],
+["III- Medications:","الأدوية.","الأدوية دي تكمل علاج السوائل."],
+["1- Anti histaminics","مضادات الهيستامين.","بتقلل القيء."],
+["2- Antiemetics","مضادات القيء.","بتوقف الاستفراغ."],
+["3- Vit. B","فيتامين B.","بيعوض النقص."],
+["4- Sedation","مهدئات.","بتهدي المريضة."],
+["IV- TOP: Rarely done nowadays","إنهاء الحمل (TOP) بيتعمل نادرا في الوقت الحالي.","آخر حل لما كل حاجة تفشل."],
+["Indications of TOP: a- Starvation","من دواعيه: التجويع.","الحالة وصلت لتجويع."],
+["b- Persist vomiting with failed medical ttt","القيء المستمر مع فشل العلاج الدوائي.","اتعالجت بالأدوية ومفيش فايدة."],
+["Method: 1- Before 12-14 w: D&C","الطريقة قبل أسبوع 12-14: توسيع وكحت (D&C).","الرحم لسه صغير فنعمل كحت."],
+["2- After 14 w either oxytocin drip or abdominal hysterotomy","بعد أسبوع 14: يا نقطة أوكسيتوسين يا فتح الرحم من البطن (hysterotomy).","الرحم كبر فبنستخدم طريقة تانية."]]}
+];
+const notes=document.getElementById('notes');
+notes.innerHTML=D.map(s=>`<section class="sec"><h2><span class="tag">الكتاب</span>${s.h}</h2>${s.i.map(x=>typeof x==='string'?`<h3>${x}</h3>`:`<div class="it${x[3]?' dr':''}">${x[3]?'<div class="lb">زيادات الدكتور</div>':''}<div class="en">${x[0]}</div><div class="ar">${x[1]}</div><div class="ex"><b>عشان تفهمها :</b> ${x[2]}</div></div>`).join('')}</section>`).join('');
+
+/* ===== QUIZ (from the book only, easy → hard) ===== */
+const TF=["True","False"];
+const Q=[
+["Q1. The incidence of hyperemesis gravidarum is:",["1/5","1/50","1/500","50%"],2,"Hyperemesis is rare: 1/500 of all pregnancy. (50% is emesis.)"],
+["Q2. Vomiting in emesis gravidarum occurs mainly:",["All the day","At morning","At night","After exercise"],1,"Emesis = at morning. Hyperemesis = all the day."],
+["Q3. Emesis gravidarum is usually treated as:",["Out patient","In patient","TOP","Hysterotomy"],0,"Emesis: out patient. Hyperemesis: in patient (hospitalization)."],
+["Q4. Which organ shows fatty changes in H.G.?",["Brain","Heart","Liver","Kidney"],2,"Liver: fatty liver."],
+["Q5. Which is a complication of starvation in H.G.?",["Optic neuritis","Hypertension","Polyuria","Diarrhea"],0,"Complications: jaundice, optic neuritis, heart failure, liver and kidney damage."],
+["Q6. The biochemical triad caused by vomiting is:",["Hemodilution, ↑Na, ↑K","Hemoconcentration, ↓Na & Cl, ↓K","Hemoconcentration, ↑Na, ↑K","Hemodilution, ↓Na, ↓K"],1,"Vomiting → hemoconcentration, ↓↓ Na⁺ & Cl⁻, ↓ K⁺."],
+["Q7. Which is NOT a sign of dehydration?",["Oliguria","Dry tongue","↓ ABP","Increased urine output"],3,"Dehydration causes oliguria, not increased urine output."],
+["Q8. Which is a cause of vomiting NOT related to pregnancy?",["Vesicular mole","Acute hydramnios","Pre eclampsia","Acute cholecystitis"],3,"Acute cholecystitis is not related to pregnancy."],
+["Q9. The minimum I.V. fluid per day in H.G. (with no oral route for 2-3 days) is:",["1 liter","2 liters","3 liters","5 liters"],2,"At least 3 liters of fluid/day."],
+["Q10. TOP after 14 weeks in H.G. with failed medical ttt is done by:",["D&C","Oxytocin drip or abdominal hysterotomy","Antiemetics only","Observation only"],1,"Before 12-14 w: D&C. After 14 w: oxytocin drip or abdominal hysterotomy."],
+["T1. Morning sickness is a physiological event.",TF,0,"True: it is physiological and may progress insidiously to H.G."],
+["T2. Hyperemesis gravidarum affects about 50% of pregnancies.",TF,1,"False: 50% is emesis. Hyperemesis is 1/500."],
+["T3. In hyperemesis, the general condition is markedly affected.",TF,0,"True."],
+["T4. Emesis gravidarum is progressive and does not regress.",TF,1,"False: emesis is regressive at 12 w."],
+["T5. Hyperemesis gravidarum is treated as an out patient.",TF,1,"False: in patient (hospitalization)."],
+["T6. The exact cause of H.G. is known.",TF,1,"False: aetiology is unknown (theories)."],
+["T7. The allergic theory says H.G. is an allergic manifestation to HCG.",TF,0,"True."],
+["T8. Starvation in H.G. leads to ketoacidosis.",TF,0,"True."],
+["T9. The brain in H.G. shows petechial hemorrhage and encephalopathy.",TF,0,"True."],
+["T10. The kidney in H.G. shows fatty degeneration.",TF,1,"False: the kidney shows tubular degeneration; fatty change is in the liver."],
+["T11. Optic neuritis is one of the complications of starvation.",TF,0,"True."],
+["T12. Pyelitis with pregnancy is a cause of vomiting not related to pregnancy.",TF,1,"False: it is in the list of causes related to pregnancy."],
+["T13. Investigation of complications includes EEG & CT on brain and fundus exam.",TF,0,"True."],
+["T14. Hospitalization includes restricting visitors and an isolated semidark calm room.",TF,0,"True."],
+["T15. Before 12-14 weeks, TOP in H.G. is done by D&C.",TF,0,"True: after 14 w oxytocin drip or abdominal hysterotomy."]
+];
+const L=['A','B','C','D'];
+let qi,ok,no,ans,quiz=document.getElementById('quiz');
+function start(pool){Q.cur=pool||Q;qi=0;ok=0;no=0;ans=[];draw()}
+function top(){const n=Q.cur.length;return `<div class="stats"><div class="st"><b style="color:var(--ok)">${ok}</b><span>✔ صحيح</span></div><div class="st"><b style="color:var(--no)">${no}</b><span>✖ خطأ</span></div><div class="st"><b style="color:var(--ac)">${n-ok-no}</b><span>⏳ متبقي</span></div></div><div class="bar"><i style="width:${(qi+1)/n*100}%"></i></div>`}
+function draw(){
+  const q=Q.cur[qi],n=Q.cur.length;
+  quiz.innerHTML=top()+`<div class="q"><div class="qh"><span>سؤال ${qi+1} / ${n}</span><span>${q[1]===TF?'True / False':'MCQ'}</span></div><div class="qt">${q[0]}</div><div class="os">${q[1].map((o,i)=>`<div class="o" data-i="${i}" role="button" tabindex="0"><i>${q[1]===TF?(i?'F':'T'):L[i]}</i>${o}</div>`).join('')}</div><div id="after"></div></div>`;
+  quiz.querySelectorAll('.o').forEach(el=>{el.onclick=()=>pick(+el.dataset.i);el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();pick(+el.dataset.i)}}});
+}
+function pick(v){
+  const q=Q.cur[qi];if(ans[qi]!==undefined)return;ans[qi]=v;
+  const good=v===q[2];good?ok++:no++;
+  quiz.querySelectorAll('.o').forEach((el,i)=>{el.classList.add('d');if(i===q[2])el.classList.add('c');else if(i===v)el.classList.add('w')});
+  const last=qi===Q.cur.length-1;
+  document.getElementById('after').innerHTML=`<div class="fb ${good?'ok':'no'}">${good?'🎉 شطور جدا ، اللهم بارك':'😔 ركز يا سكر'}</div><div class="xp">💬 ${q[3]}</div><button class="btn" id="nx">${last?'إنهاء الامتحان 🏁':'السؤال التالي ←'}</button>`;
+  quiz.querySelector('.stats').outerHTML=top().split('<div class="bar">')[0];
+  document.getElementById('nx').onclick=()=>{last?finish():(qi++,draw(),window.scrollTo({top:0,behavior:'smooth'}))};
+}
+function finish(){
+  const n=Q.cur.length,p=Math.round(ok/n*100),bad=Q.cur.filter((q,i)=>ans[i]!==q[2]);
+  quiz.innerHTML=`<div class="res"><h2>${p}%</h2><p style="margin:8px 0 18px">${p>=90?'🥇 ممتاز':p>=75?'🥈 جيد جداً':p>=60?'🥉 جيد':'📚 راجع تاني'} · صح ${ok} · غلط ${no}</p>${bad.length?`<button class="btn" style="width:100%;margin:0 0 10px" id="rw">إعادة الأسئلة الغلط (${bad.length})</button>`:''}<button class="btn" style="width:100%;margin:0" id="ra">امتحان جديد</button></div>${bad.map(q=>`<div class="rp"><b>${q[0]}</b><br>✔ ${q[1][q[2]]}<br>${q[3]}</div>`).join('')}`;
+  if(bad.length)document.getElementById('rw').onclick=()=>start(bad);
+  document.getElementById('ra').onclick=()=>start(Q);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+start(Q);
+
+/* ===== TABS + THEME ===== */
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===b));
+  notes.hidden=b.dataset.t!=='notes';quiz.hidden=b.dataset.t!=='quiz';
+});
+const tb=document.getElementById('themeBtn');
+let th='light';try{th=localStorage.getItem('theme')||'light'}catch(e){}
+function setTheme(t){th=t;document.documentElement.setAttribute('data-theme',t);tb.textContent=t==='dark'?'☀️':'🌙';try{localStorage.setItem('theme',t)}catch(e){}}
+setTheme(th);tb.onclick=()=>setTheme(th==='dark'?'light':'dark');
+</script>
+</body>
+</html>
