@@ -69,7 +69,7 @@ footer a{color:#229ED9;text-decoration:none;font-weight:600}
 <div class="hero">
   <div class="ic">🤰</div>
   <h1>Hyperemesis Gravidarum (H.G)</h1>
-  <p>Spotlights on Obstetrics - Abnormal Pregnancy</p>
+  <p>طب نسا</p>
   <div class="tabs">
     <button class="tab on" data-t="notes">📖 الشرح</button>
     <button class="tab" data-t="quiz">📝 الأسئلة</button>
@@ -99,7 +99,7 @@ const D=[
 ["1) Allergic theory: H.G. is allergic manifestation to HCG.","الجسم بيتحسس من هرمون الحمل HCG فيحصل القيء.","زي واحد عنده حساسية من أكلة معينة وجسمه بيرد بأعراض."],
 ["2) Psychological theory: H.G. is due to psychological trouble.","السبب مشاكل نفسية.","زي اللي بيتوتر قبل الامتحان وبطنه تقلب."],
 ["3) Vitamin ↓↓ theory: HG is due to ↓ vit B.","السبب نقص فيتامين B.","زي العربية من غير بنزين، الجسم من غير الفيتامين مبيشتغلش صح."],
-["B → B6","من فيتامين B الدكتور حدد إن المقصود B6 (حطه في دايرة).","زي ما تقول فاكهة وتقصد التفاح بالتحديد.","dr"],
+["B → B6","من فيتامين B الدكتور حدد إن المقصود B6 .","زي ما تقول فاكهة وتقصد التفاح بالتحديد.","dr"],
 ["4) Hormonal theory: ↓↓ adrenocortical hormone.","السبب نقص هرمونات الغدة الكظرية (adrenocortical).","لما الغدة المسؤولة عن هرمونات معينة تضعف، الجسم يختل."]]},
 {h:"Pathology",i:[
 ["Occurs in severe cases → starvation.","في الحالات الشديدة المريضة مبتقدرش تاكل فيحصل تجويع.","زي حد مش بيقدر ياكل أيام فجسمه يبدأ يستهلك من نفسه."],
@@ -228,10 +228,11 @@ const Q=[
 const L=['A','B','C','D'];
 let qi,ok,no,ans,quiz=document.getElementById('quiz');
 function start(pool){Q.cur=pool||Q;qi=0;ok=0;no=0;ans=[];draw()}
-function top(){const n=Q.cur.length;return `<div class="stats"><div class="st"><b style="color:var(--ok)">${ok}</b><span>✔ صحيح</span></div><div class="st"><b style="color:var(--no)">${no}</b><span>✖ خطأ</span></div><div class="st"><b style="color:var(--ac)">${n-ok-no}</b><span>⏳ متبقي</span></div></div><div class="bar"><i style="width:${(qi+1)/n*100}%"></i></div>`}
+/* FIX: renamed from top() — "top" is a reserved read-only global (window.top) and broke the whole script */
+function hdr(){const n=Q.cur.length;return `<div class="stats"><div class="st"><b style="color:var(--ok)">${ok}</b><span>✔ صحيح</span></div><div class="st"><b style="color:var(--no)">${no}</b><span>✖ خطأ</span></div><div class="st"><b style="color:var(--ac)">${n-ok-no}</b><span>⏳ متبقي</span></div></div><div class="bar"><i style="width:${(qi+1)/n*100}%"></i></div>`}
 function draw(){
   const q=Q.cur[qi],n=Q.cur.length;
-  quiz.innerHTML=top()+`<div class="q"><div class="qh"><span>سؤال ${qi+1} / ${n}</span><span>${q[1]===TF?'True / False':'MCQ'}</span></div><div class="qt">${q[0]}</div><div class="os">${q[1].map((o,i)=>`<div class="o" data-i="${i}" role="button" tabindex="0"><i>${q[1]===TF?(i?'F':'T'):L[i]}</i>${o}</div>`).join('')}</div><div id="after"></div></div>`;
+  quiz.innerHTML=hdr()+`<div class="q"><div class="qh"><span>سؤال ${qi+1} / ${n}</span><span>${q[1]===TF?'True / False':'MCQ'}</span></div><div class="qt">${q[0]}</div><div class="os">${q[1].map((o,i)=>`<div class="o" data-i="${i}" role="button" tabindex="0"><i>${q[1]===TF?(i?'F':'T'):L[i]}</i>${o}</div>`).join('')}</div><div id="after"></div></div>`;
   quiz.querySelectorAll('.o').forEach(el=>{el.onclick=()=>pick(+el.dataset.i);el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();pick(+el.dataset.i)}}});
 }
 function pick(v){
@@ -240,7 +241,7 @@ function pick(v){
   quiz.querySelectorAll('.o').forEach((el,i)=>{el.classList.add('d');if(i===q[2])el.classList.add('c');else if(i===v)el.classList.add('w')});
   const last=qi===Q.cur.length-1;
   document.getElementById('after').innerHTML=`<div class="fb ${good?'ok':'no'}">${good?'🎉 شطور جدا ، اللهم بارك':'😔 ركز يا سكر'}</div><div class="xp">💬 ${q[3]}</div><button class="btn" id="nx">${last?'إنهاء الامتحان 🏁':'السؤال التالي ←'}</button>`;
-  quiz.querySelector('.stats').outerHTML=top().split('<div class="bar">')[0];
+  quiz.querySelector('.stats').outerHTML=hdr().split('<div class="bar">')[0];
   document.getElementById('nx').onclick=()=>{last?finish():(qi++,draw(),window.scrollTo({top:0,behavior:'smooth'}))};
 }
 function finish(){
