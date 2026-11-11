@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GHAITH TEAM</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--rose:#e11d48;--rose2:#be123c;--amber:#f59e0b;--violet:#7c3aed;--bg:#fff5f7;--card:#fff;--text:#2a0f1b;--t2:#6b3a4c;--bc:rgba(159,18,57,.16);--en:#fff0f3;--ok:#16a34a;--no:#dc2626;--fd:'Space Grotesk',system-ui,sans-serif}
+[data-theme=dark]{--rose:#fb7185;--rose2:#fda4af;--amber:#fbbf24;--violet:#a78bfa;--bg:#12050b;--card:#210d17;--text:#fde8ee;--t2:#e0b3c2;--bc:rgba(251,113,133,.22);--en:#2c1220;--ok:#4ade80;--no:#f87171}
+body{font-family:var(--fd);background:var(--bg);color:var(--text);min-height:100vh}
+#pb{position:fixed;top:0;left:0;height:4px;width:0;z-index:99;background:linear-gradient(90deg,var(--rose),var(--amber));transition:width .3s}
+nav{position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center;padding:10px 20px;background:var(--bg);border-bottom:1px solid var(--bc)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:700;font-size:15px}
+.logo{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--rose),var(--rose2));color:#fff;display:grid;place-items:center;font-size:12px}
+.tb{width:38px;height:38px;border-radius:50%;border:1px solid var(--bc);background:var(--card);cursor:pointer;font-size:15px}
+.hero{margin:16px;border-radius:28px;padding:28px 20px;text-align:center;color:#fff;background:linear-gradient(135deg,#4a0f2a,#9f1239 60%,#e11d48)}
+.hero h1{font-size:clamp(21px,5vw,30px);margin:6px 0 4px}.hero p{font-size:13px;opacity:.85}
+.shell{max-width:720px;margin:0 auto;padding:6px 16px 60px}
+.card{background:var(--card);border:1px solid var(--bc);border-radius:22px;padding:18px;margin-bottom:14px;box-shadow:0 6px 20px rgba(159,18,57,.07)}
+.row{display:flex;gap:8px;flex-wrap:wrap;align-items:center;justify-content:center}
+.chip{padding:9px 16px;border-radius:30px;border:1px solid var(--bc);background:var(--en);color:var(--text);font:600 13px var(--fd);cursor:pointer}
+.chip.on{background:linear-gradient(135deg,var(--rose),var(--rose2));color:#fff;border-color:transparent}
+.btn{padding:12px 26px;border-radius:30px;border:0;background:linear-gradient(135deg,var(--rose),var(--amber));color:#fff;font:700 14px var(--fd);cursor:pointer}
+.btn:disabled{opacity:.4;cursor:default}
+.meta{display:flex;justify-content:space-between;font-size:13px;color:var(--t2);margin-bottom:12px;font-weight:600}
+.q{font-size:17px;line-height:1.6;font-weight:600;margin-bottom:14px;border-left:5px solid var(--rose);padding-left:12px}
+.tag{display:inline-block;font-size:11px;padding:2px 10px;border-radius:20px;background:var(--en);border:1px solid var(--bc);color:var(--rose);margin-bottom:8px}
+.o{display:flex;gap:10px;align-items:center;width:100%;text-align:left;padding:12px 14px;margin-bottom:9px;border-radius:14px;border:1.5px solid var(--bc);background:var(--en);color:var(--text);font:500 15px/1.5 var(--fd);cursor:pointer}
+.o b{width:26px;height:26px;border-radius:50%;flex-shrink:0;display:grid;place-items:center;background:var(--card);border:1px solid var(--bc);font-size:12px}
+.o.ok{border-color:var(--ok);background:rgba(22,163,74,.14)}.o.no{border-color:var(--no);background:rgba(220,38,38,.12)}
+.ring{width:150px;height:150px;border-radius:50%;margin:10px auto;display:grid;place-items:center;font-size:30px;font-weight:700}
+.ring span{width:118px;height:118px;border-radius:50%;background:var(--card);display:grid;place-items:center}
+.rv{padding:10px 12px;border-radius:12px;border:1px solid var(--bc);margin-bottom:8px;font-size:14px;line-height:1.6;text-align:left}
+.rv i{color:var(--ok);font-style:normal;font-weight:600}
+:focus-visible{outline:3px solid var(--violet);outline-offset:2px}
+</style></head><body>
+<div id="pb"></div>
+<nav><div class="brand"><div class="logo">GT</div>GHAITH TEAM</div><button class="tb" id="tb" aria-label="Toggle theme">🌙</button></nav>
+<div class="hero"><div style="font-size:42px">🫀</div><h1>Respiratory System</h1><p> Physiology</p></div>
+<div class="shell" id="app"></div>
+<script>
+var MCQ=[
+
+var MC=[
+{t:"What is the normal respiratory rate in an adult man?",o:["6–8 cycles/min","20–24 cycles/min","12–16 cycles/min","30–40 cycles/min"],a:2},
+{t:"The exchange of O2 and CO2 between blood and atmospheric air across the alveolar wall is called:",o:["Internal respiration","External respiration","Tissue respiration","Ventilation only"],a:1},
+{t:"Which structure is the site of gas exchange?",o:["Trachea","Larynx","Terminal bronchioles","Alveoli"],a:3},
+{t:"Normal resting inspiration occurs due to contraction of the:",o:["Diaphragm and external intercostal muscles","Abdominal wall and internal intercostal muscles","Accessory muscles of inspiration only","Internal intercostal muscles only"],a:0},
+{t:"Normal resting expiration is:",o:["An active process using the abdominal muscles","A passive process due to elasticity of lung and chest","An active process using the internal intercostal muscles","Produced by contraction of the diaphragm"],a:1},
+{t:"Which instrument is used to measure lung volumes?",o:["Sphygmomanometer","Pulse oximeter","Spirometer","Stethoscope"],a:2},
+{t:"The tidal volume in a normal adult male is about:",o:["1100 ml","3000 ml","150 ml","500 ml"],a:3},
+{t:"The inspiratory reserve volume (IRV) equals about:",o:["3000 ml","1100 ml","500 ml","1200 ml"],a:0},
+{t:"The residual volume (RV) is about:",o:["1100 ml","1200 ml","3000 ml","4600 ml"],a:1},
+{t:"The normal volume of dead space is about:",o:["50 ml","350 ml","150 ml","500 ml"],a:2},
+{t:"About what percentage of O2 in blood is transported as oxy-hemoglobin?",o:["1.5%","6%","50%","98.5%"],a:3},
+{t:"The main bulk of CO2 in blood is transported as:",o:["Dissolved CO2","Carbamino compounds","Bicarbonate","Free gas bubbles"],a:2},
+{t:"The respiratory system regulates blood pH by adjusting the amount of:",o:["O2 absorbed","CO2 eliminated","Water ingested","Hemoglobin produced"],a:1},
+{t:"Cyanosis appears when reduced hemoglobin exceeds:",o:["5 g/dl","2 g/dl","10 g/dl","15 g/dl"],a:0},
+{t:"Which of the following is an accessory muscle of expiration?",o:["Diaphragm","External intercostal muscles","Pleura","Abdominal wall muscles"],a:3},
+{t:"Vital capacity (VC) is equal to:",o:["IRV + TV + ERV","TV + IRV","ERV + RV","IRV + TV + ERV + RV"],a:0},
+{t:"The volume of air remaining in the lungs after a normal expiration is the:",o:["Expiratory reserve volume","Functional residual capacity","Inspiratory capacity","Vital capacity"],a:1},
+{t:"The total lung capacity (TLC) in the lecture equals about:",o:["3500 ml","4600 ml","5800 ml","2300 ml"],a:2},
+{t:"The inspiratory capacity (IC) equals TV + IRV, which is about:",o:["2300 ml","4600 ml","5800 ml","3500 ml"],a:3},
+{t:"If TV = 500 ml, DS = 150 ml and RR = 12/min, the alveolar ventilation is:",o:["6000 ml","4200 ml","5100 ml","2400 ml"],a:1},
+{t:"In shallow rapid breathing (TV = 250 ml, RR = 24, DS = 150 ml), the alveolar ventilation is:",o:["2400 ml","4200 ml","5100 ml","6000 ml"],a:0},
+{t:"In deep slow breathing (TV = 1000 ml, RR = 6, DS = 150 ml), the alveolar ventilation is:",o:["6000 ml","4200 ml","5100 ml","2400 ml"],a:2},
+{t:"Vital capacity is lower in the recumbent position than in standing because:",o:["The lungs become smaller","The residual volume increases","The respiratory rate increases","The viscera interfere with the descent of the diaphragm"],a:3},
+{t:"Which of the following increases vital capacity?",o:["Physical training","Pregnancy","Ascites","Rib fracture"],a:0},
+{t:"Physiological dead space equals:",o:["Pathological DS only","Anatomical DS + pathological DS","Anatomical DS − pathological DS","Anatomical DS only"],a:1},
+{t:"Which of the following is NOT a function of the dead space?",o:["Humidifying the inspired air","Warming the inspired air","Gas exchange with the blood","Protecting the alveoli from foreign particles"],a:2},
+{t:"Although physical (dissolved) O2 is only 1.5%, it is important because it:",o:["Carries most of the oxygen","Forms oxy-hemoglobin","Buffers the blood pH","Determines the direction of O2 movement to or from the blood"],a:3},
+{t:"Carbamino compounds are formed by the combination of CO2 with:",o:["Hemoglobin","Plasma proteins","Water","Sodium chloride"],a:0},
+{t:"The CO2 content of arterial blood is about:",o:["3 ml/100 ml","48 ml/100 ml","52 ml/100 ml","19 ml/100 ml"],a:1},
+{t:"Which of the following can cause apnea?",o:["High altitude","Cold weather","Morphine","Anemia"],a:2},
+{t:"Which feature characterizes central cyanosis?",o:["Cold hands","Tongue is not affected","Not improved by O2 therapy","Improved by O2 therapy"],a:3},
+{t:"Which feature suggests peripheral cyanosis?",o:["Cold hands","Warm hands","Cyanosis of the tongue","Improvement with O2 therapy"],a:0},
+{t:"Hypoxic hypoxia may be caused by:",o:["Anemia","Decreased O2 in inspired air at high altitude","Carbon monoxide poisoning","Cyanide poisoning"],a:1},
+{t:"Which of the following causes anemic hypoxia?",o:["Congenital heart disease","Drowning","Carbon monoxide poisoning","Sluggish circulation"],a:2},
+{t:"In stagnant hypoxia:",o:["Arterial O2 is normal and venous O2 is very low","Both arterial and venous O2 are low","Arterial O2 is normal and venous O2 is high","Arterial O2 is low and venous O2 is high"],a:0},
+{t:"Which pattern of blood O2 is seen in histotoxic hypoxia?",o:["Both arterial and venous O2 are low","Arterial O2 is normal and venous O2 is very low","Arterial O2 is low and venous O2 is high","Arterial O2 is normal and venous O2 is high"],a:3},
+{t:"Which type of hypoxia has both arterial and venous O2 lower than normal?",o:["Stagnant hypoxia","Hypoxic hypoxia","Histotoxic hypoxia","Anemic hypoxia"],a:1},
+{t:"Which breathing pattern gives the lowest alveolar ventilation for the same pulmonary ventilation of 6 L/min?",o:["TV 500 ml × 12/min","TV 1000 ml × 6/min","TV 250 ml × 24/min","TV 750 ml × 8/min"],a:2},
+{t:"In shallow rapid breathing, alveolar ventilation falls mainly because:",o:["The fixed dead space forms a larger fraction of each small breath","The pulmonary ventilation decreases","The residual volume increases","The tidal volume increases"],a:0},
+{t:"During forced expiration, contraction of the abdominal wall muscles:",o:["Lowers the diaphragm","Increases the transverse diameter of the chest","Increases the antero-posterior diameter of the chest","Elevates the diaphragm and decreases the vertical diameter of the chest"],a:3},
+{t:"Which of the following is NOT included in the vital capacity?",o:["Inspiratory reserve volume","Residual volume","Tidal volume","Expiratory reserve volume"],a:1},
+{t:"Which capacity consists of exactly ERV + RV?",o:["Vital capacity","Inspiratory capacity","Functional residual capacity","Total lung capacity"],a:2},
+{t:"The bulk of CO2 (42 ml/100 ml arterial blood) is carried as:",o:["NaHCO3 in plasma or KHCO3 in RBCs","Carbamino compounds in RBCs","Dissolved CO2 in plasma","Carbonic acid only"],a:0},
+{t:"If arterial O2 content is 19 ml/100 ml and venous is 14 ml/100 ml, how much O2 did the tissues take from each 100 ml of blood?",o:["14 ml","19 ml","33 ml","5 ml"],a:3},
+{t:"Which condition causes cyanosis through a marked increase in the number of RBCs?",o:["Anemia","Polycythemia","Apnea","Carbon monoxide poisoning"],a:1}
+];
+
+var TF=[
+{t:"Normal resting inspiration is an active process.",o:["True","False"],a:0},
+{t:"Normal resting expiration is an active process that needs contraction of the abdominal muscles.",o:["True","False"],a:1},
+{t:"The tidal volume in a normal adult male is about 500 ml.",o:["True","False"],a:0},
+{t:"The residual volume is included in the vital capacity.",o:["True","False"],a:1},
+{t:"Vital capacity is greater in the recumbent position than in the standing position.",o:["True","False"],a:1},
+{t:"The alveoli are part of the anatomical dead space.",o:["True","False"],a:1},
+{t:"Physiological dead space equals anatomical dead space plus pathological dead space.",o:["True","False"],a:0},
+{t:"Shallow rapid breathing can reduce alveolar ventilation even when pulmonary ventilation stays the same.",o:["True","False"],a:0},
+{t:"About 98.5% of the O2 transported in blood is in the form of oxy-hemoglobin.",o:["True","False"],a:0},
+{t:"Most of the CO2 in blood is transported in physical solution in plasma.",o:["True","False"],a:1},
+{t:"In histotoxic hypoxia, arterial O2 is normal while venous O2 is higher than normal.",o:["True","False"],a:0},
+{t:"Peripheral cyanosis is improved by O2 therapy.",o:["True","False"],a:1},
+{t:"Apnea is the stoppage of breathing due to inhibition of the respiratory center.",o:["True","False"],a:0},
+{t:"Asphyxia causes an increase in the pH of the blood.",o:["True","False"],a:1},
+{t:"In stagnant hypoxia, the arterial O2 is low.",o:["True","False"],a:1}
+];
+MCQ.forEach(function(q){q.k='MCQ'});TF.forEach(function(q){q.k='T/F'});
+var app=document.getElementById('app'),mode='all',shuf=false,qs=[],i=0,sc=0,wr=[],lock=false,sec=0,tm;
+function sh(a){a=a.slice();for(var j=a.length-1;j>0;j--){var k=Math.floor(Math.random()*(j+1)),t=a[j];a[j]=a[k];a[k]=t}return a}
+function home(){clearInterval(tm);document.getElementById('pb').style.width='0';
+app.innerHTML='<div class="card"><div class="row" style="margin-bottom:14px"><button class="chip'+(mode=='all'?' on':'')+'" data-m="all">All</button><button class="chip'+(mode=='MCQ'?' on':'')+'" data-m="MCQ">MCQ</button><button class="chip'+(mode=='T/F'?' on':'')+'" data-m="T/F">True / False</button></div><div class="row" style="margin-bottom:18px"><button class="chip'+(shuf?' on':'')+'" id="sf">🔀 Shuffle questions</button></div><div class="row"><button class="btn" id="go">Start Quiz</button></div></div>';
+app.querySelectorAll('[data-m]').forEach(function(b){b.onclick=function(){mode=b.dataset.m;home()}});
+document.getElementById('sf').onclick=function(){shuf=!shuf;home()};
+document.getElementById('go').onclick=function(){start(mode=='all'?MCQ.concat(TF):mode=='MCQ'?MCQ:TF)}}
+function start(list){qs=shuf?sh(list):list.slice();i=0;sc=0;wr=[];sec=0;clearInterval(tm);tm=setInterval(function(){sec++;var e=document.getElementById('tt');if(e)e.textContent=fm(sec)},1000);show()}
+function fm(s){return Math.floor(s/60)+':'+('0'+s%60).slice(-2)}
+function show(){lock=false;var q=qs[i];document.getElementById('pb').style.width=(i/qs.length*100)+'%';
+var h='<div class="card"><div class="meta"><span>Question '+(i+1)+' / '+qs.length+'</span><span>Score '+sc+'</span><span>⏱ <b id="tt">'+fm(sec)+'</b></span></div><span class="tag">'+q.k+'</span><div class="q">'+q.t+'</div>';
+q.o.forEach(function(o,j){h+='<button class="o" data-j="'+j+'"><b>'+(q.k=='MCQ'?'ABCD'[j]:j?'F':'T')+'</b>'+o+'</button>'});
+h+='<div class="row" style="margin-top:12px"><button class="btn" id="nx" disabled>'+(i==qs.length-1?'Finish':'Next')+'</button></div></div>';
+app.innerHTML=h;
+app.querySelectorAll('.o').forEach(function(b){b.onclick=function(){if(lock)return;lock=true;var j=+b.dataset.j,bs=app.querySelectorAll('.o');
+bs[q.a].classList.add('ok');if(j==q.a)sc++;else{b.classList.add('no');wr.push(q)}document.getElementById('nx').disabled=false}});
+document.getElementById('nx').onclick=function(){i++;i<qs.length?show():end()}}
+function end(){clearInterval(tm);document.getElementById('pb').style.width='100%';var p=Math.round(sc/qs.length*100);
+var h='<div class="card" style="text-align:center"><h2>'+(p>=85?'Excellent! 🎉':p>=60?'Good job 👍':'Keep studying 📚')+'</h2><div class="ring" style="background:conic-gradient(var(--rose) '+p+'%,var(--en) 0)"><span>'+p+'%</span></div><p style="color:var(--t2);margin-bottom:14px">'+sc+' / '+qs.length+' correct · ⏱ '+fm(sec)+'</p><div class="row">';
+if(wr.length)h+='<button class="btn" id="rt">Retry wrong ('+wr.length+')</button>';
+h+='<button class="chip" id="hm">Home</button></div></div>';
+if(wr.length){h+='<div class="card"><b>Review</b><div style="margin-top:10px">';wr.forEach(function(q){h+='<div class="rv">'+q.t+'<br><i>✔ '+q.o[q.a]+'</i></div>'});h+='</div></div>'}
+app.innerHTML=h;if(wr.length)document.getElementById('rt').onclick=function(){start(wr.slice())};document.getElementById('hm').onclick=home}
+var b=document.getElementById('tb'),t='light';try{t=localStorage.getItem('theme')||'light'}catch(e){}
+function ap(x){t=x;document.documentElement.setAttribute('data-theme',x==='dark'?'dark':'');b.textContent=x==='dark'?'☀️':'🌙';try{localStorage.setItem('theme',x)}catch(e){}}
+ap(t);b.onclick=function(){ap(t==='dark'?'light':'dark')};home();
+</script></body></html>
