@@ -102,8 +102,6 @@ footer span{color:var(--accent)}
 <footer>GHAITH <span>TEAM</span></footer>
 
 <script>
-
-/* ===== NOTES (lecture order) ===== */
 const D=[
 {h:"Definition",i:[
 ["It’s an insidious progression of morning sickness (which is a physiological event) → emesis gravidarum → hyperemesis gravidarum.","القيء الصباحي (حاجة طبيعية في الحمل) بيزيد بالتدريج من غير ما حد ياخد باله، لحد ما يوصل لـ emesis gravidarum وبعدين hyperemesis gravidarum.","زي نزلة برد بسيطة بتبدأ بعطسة وبالتدريج تتحول لالتهاب شديد من غير ما تحس."]]},
@@ -220,9 +218,9 @@ notes.innerHTML=D.map(s=>`<section class="sec"><h2><span class="tag">الكتا�
 /* ===== QUIZ (from the book only, easy → hard) ===== */
 const TF=["True","False"];
 const Q=[
-["Q1. The incidence of hyperemesis gravidarum is:",["1/5","1/50","1/500","50%"],2,"Hyperemesis is rare: 1/500 of all pregnancy. (50% is emesis.)"],
-["Q2. Vomiting in emesis gravidarum occurs mainly:",["All the day","At morning","At night","After exercise"],1,"Emesis = at morning. Hyperemesis = all the day."],
-["Q3. Emesis gravidarum is usually treated as:",["Out patient","In patient","TOP","Hysterotomy"],0,"Emesis: out patient. Hyperemesis: in patient (hospitalization)."],
+[" The incidence of hyperemesis gravidarum is:",["1/5","1/50","1/500","50%"],2,"Hyperemesis is rare: 1/500 of all pregnancy. (50% is emesis.)"],
+["Vomiting in emesis gravidarum occurs mainly:",["All the day","At morning","At night","After exercise"],1,"Emesis = at morning. Hyperemesis = all the day."],
+[" Emesis gravidarum is usually treated as:",["Out patient","In patient","TOP","Hysterotomy"],0,"Emesis: out patient. Hyperemesis: in patient (hospitalization)."],
 ["Q4. Which organ shows fatty changes in H.G.?",["Brain","Heart","Liver","Kidney"],2,"Liver: fatty liver."],
 ["Q5. Which is a complication of starvation in H.G.?",["Optic neuritis","Hypertension","Polyuria","Diarrhea"],0,"Complications: jaundice, optic neuritis, heart failure, liver and kidney damage."],
 ["Q6. The biochemical triad caused by vomiting is:",["Hemodilution, ↑Na, ↑K","Hemoconcentration, ↓Na & Cl, ↓K","Hemoconcentration, ↑Na, ↑K","Hemodilution, ↓Na, ↓K"],1,"Vomiting → hemoconcentration, ↓↓ Na⁺ & Cl⁻, ↓ K⁺."],
@@ -246,42 +244,37 @@ const Q=[
 ["T14. Hospitalization includes restricting visitors and an isolated semidark calm room.",TF,0,"True."],
 ["T15. Before 12-14 weeks, TOP in H.G. is done by D&C.",TF,0,"True: after 14 w oxytocin drip or abdominal hysterotomy."]
 ];
-const L=['A','B','C','D'];
-let qi,ok,no,ans,quiz=document.getElementById('quiz');
-function start(pool){Q.cur=pool||Q;qi=0;ok=0;no=0;ans=[];draw()}
-function top(){const n=Q.cur.length;return `<div class="stats"><div class="st"><b style="color:var(--ok)">${ok}</b><span>✔ صحيح</span></div><div class="st"><b style="color:var(--no)">${no}</b><span>✖ خطأ</span></div><div class="st"><b style="color:var(--ac)">${n-ok-no}</b><span>⏳ متبقي</span></div></div><div class="bar"><i style="width:${(qi+1)/n*100}%"></i></div>`}
-function draw(){
-  const q=Q.cur[qi],n=Q.cur.length;
-  quiz.innerHTML=top()+`<div class="q"><div class="qh"><span>سؤال ${qi+1} / ${n}</span><span>${q[1]===TF?'True / False':'MCQ'}</span></div><div class="qt">${q[0]}</div><div class="os">${q[1].map((o,i)=>`<div class="o" data-i="${i}" role="button" tabindex="0"><i>${q[1]===TF?(i?'F':'T'):L[i]}</i>${o}</div>`).join('')}</div><div id="after"></div></div>`;
-  quiz.querySelectorAll('.o').forEach(el=>{el.onclick=()=>pick(+el.dataset.i);el.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();pick(+el.dataset.i)}}});
-}
-function pick(v){
-  const q=Q.cur[qi];if(ans[qi]!==undefined)return;ans[qi]=v;
-  const good=v===q[2];good?ok++:no++;
-  quiz.querySelectorAll('.o').forEach((el,i)=>{el.classList.add('d');if(i===q[2])el.classList.add('c');else if(i===v)el.classList.add('w')});
-  const last=qi===Q.cur.length-1;
-  document.getElementById('after').innerHTML=`<div class="fb ${good?'ok':'no'}">${good?'🎉 شطور جدا ، اللهم بارك':'😔 ركز يا سكر'}</div><div class="xp">💬 ${q[3]}</div><button class="btn" id="nx">${last?'إنهاء الامتحان 🏁':'السؤال التالي ←'}</button>`;
-  quiz.querySelector('.stats').outerHTML=top().split('<div class="bar">')[0];
-  document.getElementById('nx').onclick=()=>{last?finish():(qi++,draw(),window.scrollTo({top:0,behavior:'smooth'}))};
-}
-function finish(){
-  const n=Q.cur.length,p=Math.round(ok/n*100),bad=Q.cur.filter((q,i)=>ans[i]!==q[2]);
-  quiz.innerHTML=`<div class="res"><h2>${p}%</h2><p style="margin:8px 0 18px">${p>=90?'🥇 ممتاز':p>=75?'🥈 جيد جداً':p>=60?'🥉 جيد':'📚 راجع تاني'} · صح ${ok} · غلط ${no}</p>${bad.length?`<button class="btn" style="width:100%;margin:0 0 10px" id="rw">إعادة الأسئلة الغلط (${bad.length})</button>`:''}<button class="btn" style="width:100%;margin:0" id="ra">امتحان جديد</button></div>${bad.map(q=>`<div class="rp"><b>${q[0]}</b><br>✔ ${q[1][q[2]]}<br>${q[3]}</div>`).join('')}`;
-  if(bad.length)document.getElementById('rw').onclick=()=>start(bad);
-  document.getElementById('ra').onclick=()=>start(Q);
-  window.scrollTo({top:0,behavior:'smooth'});
-}
-start(Q);
 
-/* ===== TABS + THEME ===== */
-document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{
-  document.querySelectorAll('.tab').forEach(x=>x.classList.toggle('on',x===b));
-  notes.hidden=b.dataset.t!=='notes';quiz.hidden=b.dataset.t!=='quiz';
-});
-const tb=document.getElementById('themeBtn');
-let th='light';try{th=localStorage.getItem('theme')||'light'}catch(e){}
-function setTheme(t){th=t;document.documentElement.setAttribute('data-theme',t);tb.textContent=t==='dark'?'☀️':'🌙';try{localStorage.setItem('theme',t)}catch(e){}}
-setTheme(th);tb.onclick=()=>setTheme(th==='dark'?'light':'dark');
+/* ===== ENGINE ===== */
+let qs,i,correct,wrong,answers,answered,wrongSet=[],timeLeft,ti,started=false;const TOTAL=35*60,L=['A','B','C','D'];
+const $=id=>document.getElementById(id);
+function shuffle(a){for(let k=a.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[a[k],a[j]]=[a[j],a[k]]}return a}
+function init(pool){qs=shuffle([...pool]);i=0;correct=0;wrong=0;answered=0;answers=new Array(qs.length).fill(null);timeLeft=TOTAL;startTimer();render()}
+function startTimer(){clearInterval(ti);$('tm').className='timer';$('tm').textContent='35:00';ti=setInterval(()=>{timeLeft--;const m=Math.floor(timeLeft/60),s=timeLeft%60;$('tm').textContent=m+':'+(s<10?'0':'')+s;if(timeLeft<=120)$('tm').className='timer danger';else if(timeLeft<=300)$('tm').className='timer warn';if(timeLeft<=0){clearInterval(ti);finish()}},1000)}
+function top_(){const n=qs.length;$('sC').textContent=correct;$('sW').textContent=wrong;$('sR').textContent=Math.round((n-answered)/n*100)+'%';$('pl').textContent='سؤال '+(i+1)+' / '+n;$('pf').style.width=((i+1)/n*100)+'%'}
+function render(){top_();const q=qs[i];$('app').innerHTML=`<div class="q"><div class="qh">سؤال ${i+1} / ${qs.length}</div><div class="qt">${q.t}</div><div class="opts">${q.o.map((o,k)=>`<div class="opt" id="o${k}" tabindex="0" onclick="choose(${k})" onkeydown="if(event.key==='Enter')choose(${k})"><div class="ol">${L[k]}</div>${o}</div>`).join('')}</div><div class="nb"><button class="btn skip" onclick="skip()">تخطي</button></div></div>`}
+function choose(v){if(answers[i]!==null)return;answers[i]=v;answered++;const q=qs[i],ok=v===q.a;ok?correct++:wrong++;if(!ok)wrongSet.push(q);top_();
+ q.o.forEach((_,k)=>{const e=$('o'+k);e.classList.add('dis');if(k===q.a)e.classList.add('correct');else if(k===v)e.classList.add('wrong')});
+ const card=document.querySelector('.q'),fb=document.createElement('div');fb.className='fb '+(ok?'ok':'no');fb.textContent=ok?'🎉 شطور جدا ، اللهم بارك':'😔 ركز يا سكر';card.querySelector('.opts').after(fb);
+ if(q.exp){const e=document.createElement('div');e.className='exp';e.innerHTML='💬 '+q.exp;fb.after(e)}
+ card.querySelector('.nb').innerHTML=`<button class="btn next" onclick="next()">${i<qs.length-1?'السؤال التالي':'إنهاء الامتحان'}</button>`}
+function skip(){if(answers[i]===null){answers[i]=-1;answered++;wrong++;wrongSet.push(qs[i]);top_()}next()}
+function next(){if(i<qs.length-1){i++;render();window.scrollTo({top:0,behavior:'smooth'})}else finish()}
+function finish(){clearInterval(ti);const n=qs.length,sc=Math.round(correct/n*100);
+ let g,c;if(sc>=90){g='🥇 ممتاز';c='var(--ok)'}else if(sc>=75){g='🥈 جيد جداً';c='var(--accent)'}else if(sc>=60){g='🥉 جيد';c='var(--doc)'}else{g='📚 راجع تاني';c='var(--no)'}
+ const rep=qs.map((q,k)=>{const ok=answers[k]===q.a;return `<div class="ri ${ok?'ok':'no'}">${ok?'✅':'❌'} ${q.t}${ok?'':`<p>Your answer: ${answers[k]>=0?q.o[answers[k]]:'Skipped'}</p><p>Correct: ${q.o[q.a]}</p>`}</div>`}).join('');
+ $('app').innerHTML=`<div class="rh"><div class="big" style="color:${c}">${sc}%</div><div style="font-size:20px;font-weight:900;color:${c}">${g}</div><div class="rs"><div><b style="color:var(--ok)">${correct}</b><span>صحيح</span></div><div><b style="color:var(--no)">${wrong}</b><span>خطأ</span></div><div><b>${n-answered}</b><span>لم يُجب</span></div></div></div>
+ <div class="acts">${wrongSet.length?`<button class="btn next" onclick="retryWrong()">إعادة الخطأ (${wrongSet.length})</button>`:''}<button class="btn alt" onclick="wrongSet=[];init(QUESTIONS)">امتحان جديد عشوائي</button></div>${rep}`;
+ window.scrollTo({top:0,behavior:'smooth'})}
+function retryWrong(){const p=[...new Map(wrongSet.map(q=>[q.t,q])).values()];wrongSet=[];init(p);window.scrollTo({top:0,behavior:'smooth'})}
+
+function showTab(t){['study','exam'].forEach(s=>$(s).classList.toggle('on',s===t));$('t1').classList.toggle('on',t==='study');$('t2').classList.toggle('on',t==='exam');
+ if(t==='exam'&&!started){started=true;init(QUESTIONS)}window.scrollTo({top:0})}
+
+/* THEME */
+let theme='light';try{theme=localStorage.getItem('theme')||'light'}catch(e){}
+function applyTheme(t){theme=t;document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'');$('themeBtn').textContent=t==='dark'?'☀️':'🌙';try{localStorage.setItem('theme',t)}catch(e){}}
+applyTheme(theme);$('themeBtn').onclick=()=>applyTheme(theme==='dark'?'light':'dark');
 </script>
 </body>
 </html>
