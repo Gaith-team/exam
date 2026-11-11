@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--accent:#db2777;--accent-light:#ec4899;--accent-dark:#be185d;--glow:rgba(219,39,119,.15);--bg:#f8fafc;--bg2:#eef2f7;--card:#fff;--text:#1a2332;--text2:#4a5568;--text3:#718096;--bc:rgba(0,0,0,.08);--ok:#16a34a;--no:#dc2626;--doc:#b45309;--r:16px}
+[data-theme="dark"]{--bg:#0d1117;--bg2:#161b22;--card:#1c2333;--text:#e6edf3;--text2:#b1bac4;--text3:#7d8590;--bc:rgba(255,255,255,.1);--doc:#fbbf24}
+body{font-family:'Outfit','Segoe UI',Tahoma,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:60px;padding:0 20px;display:flex;align-items:center;justify-content:space-between;background:var(--card);border-bottom:1px solid var(--bc)}
+.brand{display:flex;align-items:center;gap:9px;font-weight:900;font-size:15px}
+.logo{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent-light));color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900}
+.theme-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--bc);background:var(--bg);cursor:pointer;font-size:15px}
+.hero{margin-top:60px;background:linear-gradient(135deg,var(--accent-dark),var(--accent),var(--accent-light));padding:32px 20px 0;text-align:center;color:#fff}
+.hero h1{font-size:clamp(22px,5vw,32px);font-weight:900}
+.hero p{font-size:13px;opacity:.85;margin:6px 0 20px}
+.tabs{display:flex;justify-content:center;gap:6px}
+.tab{padding:11px 22px;border:none;border-radius:12px 12px 0 0;background:rgba(255,255,255,.2);color:#fff;font:700 14px 'Outfit','Segoe UI',sans-serif;cursor:pointer}
+.tab:focus-visible,.btn:focus-visible,.opt:focus-visible{outline:3px solid #fbbf24;outline-offset:2px}
+.tab.on{background:var(--bg);color:var(--accent)}
+.shell{max-width:640px;margin:0 auto;padding:22px 16px 60px}
+.sec{display:none}.sec.on{display:block}
+
+/* STUDY */
+.part{margin:26px 0 12px;font-size:15px;font-weight:900;color:var(--text2);padding-right:10px;border-right:4px solid var(--accent);direction:rtl}
+.part.doc{border-right-color:var(--doc);color:var(--doc);background:rgba(180,83,9,.08);padding:10px 12px;border-radius:10px}
+.note{background:var(--card);border:1px solid var(--bc);border-radius:var(--r);padding:16px 16px 14px;margin-bottom:12px}
+.note.d{border-color:rgba(180,83,9,.35)}
+.en{direction:ltr;text-align:left;font-weight:700;font-size:15px;line-height:1.65;padding-bottom:10px;border-bottom:1px dashed var(--bc)}
+.ar{direction:rtl;text-align:right;font-size:14px;line-height:1.9;color:var(--text2);margin-top:10px}
+.why{direction:rtl;text-align:right;font-size:13.5px;line-height:1.9;margin-top:10px;padding:10px 12px;border-radius:10px;background:var(--glow);border-right:3px solid var(--accent)}
+.why b{color:var(--accent)}
+
+/* EXAM */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.sb{background:var(--card);border:1px solid var(--bc);border-radius:var(--r);padding:11px 6px;text-align:center}
+.sb .v{font-size:20px;font-weight:900}.sb .l{font-size:11px;color:var(--text3)}
+.strip{background:var(--card);border:1px solid var(--bc);border-radius:var(--r);padding:12px 14px;margin-bottom:14px;display:flex;align-items:center;gap:12px}
+.strip .pl{font-size:13px;font-weight:700;color:var(--text2);white-space:nowrap}
+.track{flex:1;height:8px;background:var(--bg2);border-radius:8px;overflow:hidden}
+.fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent-light));transition:width .4s}
+.timer{min-width:62px;padding:7px 12px;border-radius:18px;background:var(--bg2);font-weight:900;font-size:14px;text-align:center}
+.timer.warn{color:var(--accent-dark)}.timer.danger{color:var(--no)}
+.q{background:var(--card);border:1px solid var(--bc);border-radius:20px;overflow:hidden}
+.qh{background:linear-gradient(135deg,var(--accent-dark),var(--accent));padding:6px 16px;font-size:11px;font-weight:700;color:#fff;direction:rtl}
+.qt{padding:20px 18px 14px;font-size:15px;font-weight:700;line-height:1.65;border-bottom:1px solid var(--bc);direction:ltr;text-align:left}
+.opts{padding:14px 16px 10px;display:flex;flex-direction:column;gap:10px}
+.opt{display:flex;align-items:center;gap:12px;padding:13px 14px;border-radius:12px;border:1.5px solid var(--bc);background:var(--bg);cursor:pointer;font-size:14px;font-weight:600;direction:ltr;text-align:left}
+.opt:hover{border-color:var(--accent);background:var(--glow)}
+.ol{width:28px;height:28px;border-radius:8px;flex-shrink:0;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:var(--text3)}
+.opt.correct{border-color:var(--ok);background:rgba(22,163,74,.09)}.opt.correct .ol{background:var(--ok);color:#fff}
+.opt.wrong{border-color:var(--no);background:rgba(220,38,38,.07)}.opt.wrong .ol{background:var(--no);color:#fff}
+.opt.dis{pointer-events:none}
+.fb{margin:6px 16px 10px;padding:11px 14px;border-radius:12px;font-weight:700;font-size:14px;direction:rtl}
+.fb.ok{background:rgba(22,163,74,.1);color:var(--ok)}.fb.no{background:rgba(220,38,38,.08);color:var(--no)}
+.exp{margin:0 16px 12px;padding:11px 13px;background:var(--glow);border-radius:10px;border-left:3px solid var(--accent);font-size:13px;line-height:1.6;color:var(--text2);direction:ltr;text-align:left}
+.nb{padding:4px 16px 16px;display:flex;gap:10px}
+.btn{flex:1;padding:13px;border:none;border-radius:12px;font:900 14px 'Outfit','Segoe UI',sans-serif;cursor:pointer;display:block;text-align:center;text-decoration:none}
+.next{background:linear-gradient(135deg,var(--accent-dark),var(--accent));color:#fff}
+.skip{background:var(--bg2);color:var(--text2);border:1px solid var(--bc);flex:0 0 auto;padding:13px 20px}
+.rh{text-align:center;padding:30px 18px;background:var(--card);border:1px solid var(--bc);border-radius:20px;margin-bottom:16px}
+.big{font-size:44px;font-weight:900}
+.rs{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:16px}
+.rs div{background:var(--bg2);border-radius:10px;padding:10px 6px}.rs b{font-size:20px;display:block}.rs span{font-size:11px;color:var(--text3)}
+.acts{display:flex;flex-direction:column;gap:10px;margin:16px 0}
+.alt{background:var(--bg2);color:var(--text);border:1px solid var(--bc)}
+.ri{background:var(--card);border:1px solid var(--bc);border-right:4px solid var(--bc);border-radius:14px;padding:14px;margin-bottom:10px;font-size:13px;direction:ltr;text-align:left}
+.ri.ok{border-right-color:var(--ok)}.ri.no{border-right-color:var(--no)}
+.ri p{margin-top:6px;color:var(--text2);font-size:12px}
+footer{background:var(--bg2);border-top:1px solid var(--bc);padding:18px 22px;font-size:14px;font-weight:700}
+footer span{color:var(--accent)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<nav><div class="brand"><div class="logo">GT</div>GHAITH TEAM</div><button class="theme-btn" id="themeBtn" aria-label="Theme">🌙</button></nav>
+
+<div class="hero">
+  <h1>Obstetric Shock</h1>
+  <p>طب النساء والتوليد</p>
+  <div class="tabs">
+    <button class="tab on" id="t1" onclick="showTab('study')">📖 الشرح</button>
+    <button class="tab" id="t2" onclick="showTab('exam')">📝 أسئلة عالمحاضرة</button>
+  </div>
+</div>
+
+<div class="shell">
+  <div class="sec on" id="study"></div>
+  <div class="sec" id="exam">
+    <div class="stats">
+      <div class="sb"><div class="v" style="color:var(--ok)" id="sC">0</div><div class="l">✔ صحيح</div></div>
+      <div class="sb"><div class="v" style="color:var(--no)" id="sW">0</div><div class="l">✖ خطأ</div></div>
+      <div class="sb"><div class="v" style="color:var(--accent)" id="sR">--%</div><div class="l">⏳ متبقي</div></div>
+    </div>
+    <div class="strip"><div class="pl" id="pl">سؤال ١</div><div class="track"><div class="fill" id="pf"></div></div><div class="timer" id="tm">35:00</div></div>
+    <div id="app"></div>
+  </div>
+</div>
+<footer>GHAITH <span>TEAM</span></footer>
+
+<script>
+/* ===== STUDY CONTENT (book order) ===== */
+const BOOK=[
+["Definition: Inadequate tissue perfusion.",
+"الصدمة في التوليد معناها إن الدم مش بيوصّل كفاية للأنسجة والأعضاء، يعني الجسم مش واخد الدم والأكسجين اللي محتاجه.",
+"تخيّل ماسورة مياه ضغطها ضعيف: الجنينة اللي في آخرها هتدبل. الجنينة هنا هي أعضاء الجسم."],
+["Types of shock: I- Oligemic shock, II- Cardiogenic shock, III- Septic shock, IV- Neurogenic shock.",
+"الصدمة أربع أنواع، وكل نوع له سبب مختلف: نقص في الدم أو السوائل، أو مشكلة في القلب، أو عدوى، أو سبب عصبي.",
+"السبب هو اللي بيحدد النوع: دم ناقص = Oligemic، قلب تعبان = Cardiogenic، ميكروب = Septic، أعصاب = Neurogenic."],
+["I- Oligemic shock: Loss of blood (A.P.H., P.P.H) — Loss of fluid (hyperemesis gravidarum) — Burns.",
+"النوع ده سببه فقد دم أو سوائل: نزيف قبل الولادة A.P.H أو بعد الولادة P.P.H، أو فقد سوائل من القيء الشديد في الحمل Hyperemesis gravidarum، أو الحروق.",
+"Oligemic معناها حجم الدم قليل. زي عربية بنزينها خلص: المحرك سليم بس مفيش وقود يشغله."],
+["II- Cardiogenic shock: Heart failure — Pulmonary embolism (amniotic fluid embolism).",
+"النوع ده القلب نفسه مش قادر يضخ الدم. من أسبابه فشل القلب، أو الجلطة الرئوية Pulmonary embolism، ومنها الانصمام بالسائل الأمنيوسي.",
+"المشكلة هنا في الطلمبة (القلب) مش في كمية الدم. الدم موجود بس الطلمبة مش بتدفعه."],
+["III- Septic shock: due to infection in obstetrics: a) Septic abortion b) Acute pyelonephritis c) Chorioamnionitis d) Puerperal sepsis.",
+"سببه عدوى في مجال التوليد: إجهاض ملوث، أو التهاب حويضة وكلى حاد، أو التهاب الأغشية والسائل الأمنيوسي، أو عدوى النفاس.",
+"الميكروبات وسمومها بتبوّظ الأوعية الدموية فالدم مش بيوصل كويس. ده نوع الصدمة الوحيد اللي سببه عدوى."],
+["IV- Neurogenic shock: Due to ↑ vagal tone in painful conditions.",
+"سببها زيادة نشاط العصب الحائر (Vagus) بسبب حالات مؤلمة، فبيبطّأ القلب وبيقل الضغط.",
+"الوجع الشديد بيدي العصب الحائر أمر 'فرمل'، فالقلب بيهدّى والضغط بيقع."],
+["Complications of any type of shock: 1- Electrolyte imbalance & metabolic acidosis. 2- DIC. 3- Pulmonary oedema. 4- Renal failure. 5- Coma & loss of consciousness.",
+"المضاعفات دي ممكن تحصل في أي نوع صدمة: اختلال الأملاح وحموضة الدم، التجلط المنتشر في الأوعية DIC، ميّة على الرئة، فشل كلوي، غيبوبة وفقدان الوعي.",
+"كل ما الأعضاء تفضل من غير دم وأكسجين، تبدأ تفشل واحد ورا التاني: الكلى والرئة والمخ والدم نفسه."],
+["General C/P of shock state — In oligemic shock: 2↑ (pulse, R.R.) + 2↓ (ABP, temp) + flat neck veins.",
+"في صدمة نقص الدم: النبض والتنفس يزيدوا (اتنين ↑)، والضغط ودرجة الحرارة يقلوا (اتنين ↓)، وأوردة الرقبة تبقى مفرطحة (فاضية).",
+"الجسم بيحاول يعوّض فيجري بسرعة (نبض وتنفس عالي). أوردة الرقبة فاضية لأن الدم نفسه ناقص."],
+["In cardiogenic shock: 2↑ (pulse, R.R.) + 2↓ (ABP, Temp.) + congested neck veins.",
+"نفس علامات الـ Oligemic (نبض وتنفس ↑، ضغط وحرارة ↓)، بس الفرق إن أوردة الرقبة محتقنة (منتفخة).",
+"القلب مش بيسحب الدم من الأوردة، فالدم بيتكدّس ورا القلب وأوردة الرقبة بتنتفخ. ده الفرق الوحيد عن Oligemic."],
+["In septic shock: 3↑ (pulse, R.R. + Temp.) + 1↓ (ABP).",
+"في الصدمة التعفنية: النبض والتنفس والحرارة كلهم يزيدوا (تلاتة ↑)، والضغط بس هو اللي يقل (واحد ↓).",
+"العدوى بتجيب حمى فالحرارة بتعلى، وده بيميّزها عن باقي الأنواع اللي حرارتها بتقل."],
+["In neurogenic shock: 1↑ (R.R.) + 3↓ (ABP, Temp, pulse).",
+"في الصدمة العصبية: التنفس بس هو اللي يزيد (واحد ↑)، والضغط والحرارة والنبض كلهم يقلوا (تلاتة ↓).",
+"النبض هنا بيقل مش بيزيد، لأن العصب الحائر بيبطّأ القلب. ده اللي يفرّقها عن الباقيين."],
+["Investigation: 1- Increase PCO₂, decrease PO₂. 2- pH: acidosis. 3- Increase serum lactic acid. 4- Investigation for DIC. 5- Investigation of renal affection.",
+"التحاليل: ثاني أكسيد الكربون يزيد والأكسجين يقل، الـ pH بيدل على حموضة، حمض اللاكتيك في الدم يزيد، وكمان تحاليل للتأكد من DIC ومن تأثر الكلى.",
+"الأنسجة من غير أكسجين بتشتغل بطريقة تنتج حمض لاكتيك، فالدم بيبقى حامضي. وبنفحص DIC والكلى لأنهم أكتر مضاعفات بتحصل."],
+["General lines of ttt of shock: Correct loss — Adjuvant therapy — Specific ttt.",
+"علاج الصدمة على تلات خطوات: تعويض اللي اتفقد، وعلاج مساعد، وعلاج نوعي حسب نوع الصدمة.",
+"أول حاجة نعوّض الخسارة، وبعدين ندعم المريض، وبعدين نعالج السبب الخاص بنوع الصدمة."],
+["Correct loss: by either 1- Blood transfusion.",
+"تعويض الفاقد بنقل الدم.",
+"لو الخسارة دم، نعوّضها بدم."],
+["2- Fluid therapy: either crystalloids (saline, Ringer, lactated Ringer) or colloidal (human albumin, hemagel, dextran).",
+"العلاج بالسوائل: يا إما محاليل بلورية (ملحي، رينجر، رينجر لاكتات)، يا إما محاليل غروية (ألبومين بشري، هيماجل، ديكستران).",
+"البلورية سوائل خفيفة ذايبة في المية، والغروية فيها جزيئات كبيرة بتفضل في الأوعية. وبنحفظها بالأمثلة: ملحي ورينجر = بلورية، ألبومين وديكستران = غروية."],
+["Adjuvant therapy: 4P — Patent airway — Positioning: Head down — Patient is warmed — Pethidine in presence of pain.",
+"العلاج المساعد 4 حروف P: تأكد إن مجرى الهواء مفتوح، وضع المريض راسه لتحت، دفّي المريض، وادّي بيثيدين لو فيه ألم.",
+"راس لتحت عشان الدم يروح للمخ، والتدفئة عشان الجسم ميبردش، والبيثيدين عشان الألم ميزودش الصدمة."],
+["Specific ttt: 1- In oligemic shock: Cortisone and blood. 2- In septic shock: Triple antibiotics. 3- In cardiogenic shock: Digitalis and dopamine. 4- In neurogenic shock: Atropine.",
+"العلاج النوعي: Oligemic = كورتيزون ودم، Septic = مضادات حيوية تلاتية، Cardiogenic = ديجيتالس ودوبامين، Neurogenic = أتروبين.",
+"كل علاج بيضرب السبب: الدم للنزيف، المضاد للميكروب، منشّط للقلب الضعيف، والأتروبين بيعاكس العصب الحائر ويسرّع القلب."]
+];
+const DOC=[
+["Subnormal temperature: body temperature is lower than normal range.",
+"الحرارة تحت الطبيعي معناها إن حرارة الجسم أقل من المعدل الطبيعي.",
+"يعني الترمومتر بيقرا رقم أقل من الطبيعي."],
+["Subnormal temp. is one of C/P of: oligemic shock, cardiogenic shock, neurogenic shock (except septic shock: ↑T).",
+"نزول الحرارة من علامات الصدمة النقصية والقلبية والعصبية، ماعدا الصدمة التعفنية حرارتها بتزيد.",
+"هتلاقيها متطابقة مع جدول العلامات: التلات أنواع دول الحرارة فيهم ↓، والتعفنية بس ↑."],
+["Signs of dehydration is present in hyperemesis gravidarum.",
+"علامات الجفاف موجودة في القيء الشديد في الحمل Hyperemesis gravidarum.",
+"القيء الشديد بيفقد السوائل بكميات كبيرة فالجفاف بيظهر."],
+["Signs of dehydration is absent in emesis gravidarum.",
+"علامات الجفاف مش موجودة في القيء العادي في الحمل Emesis gravidarum.",
+"القيء العادي خفيف، فالجسم بيعوّض والجفاف مبيحصلش. ده الفرق بينه وبين Hyperemesis."]
+];
+function card(a,cls){return `<div class="note ${cls||''}"><div class="en">${a[0]}</div><div class="ar">${a[1]}</div><div class="why"><b>عشان تفهمها:</b> ${a[2]}</div></div>`}
+document.getElementById('study').innerHTML=
+ '<div class="part">📘 محتوى الكتاب</div>'+BOOK.map(a=>card(a)).join('')+
+ '<div class="part doc">✍️ زيادات الدكتور</div>'+DOC.map(a=>card(a,'d')).join('');
+
+const TF=['True','False'];
+const QUESTIONS=[
+{t:'Obstetric shock is defined as:',o:['Inadequate tissue perfusion','Excess urine output','Increased tissue oxygen','High blood pressure'],a:0,exp:'Definition: inadequate tissue perfusion.'},
+{t:'Which of the following is a cause of oligemic shock?',o:['Chorioamnionitis','Post-partum hemorrhage','Heart failure','Increased vagal tone'],a:1,exp:'Loss of blood (A.P.H., P.P.H) causes oligemic shock.'},
+{t:'Neurogenic shock is due to:',o:['Loss of blood','Infection','Increased vagal tone in painful conditions','Heart failure'],a:2,exp:'Neurogenic shock is due to ↑ vagal tone in painful conditions.'},
+{t:'Which of the following causes cardiogenic shock?',o:['Burns','Septic abortion','Hyperemesis gravidarum','Pulmonary embolism'],a:3,exp:'Pulmonary embolism (amniotic fluid embolism) and heart failure.'},
+{t:'Which of the following is NOT a cause of septic shock in obstetrics?',o:['Septic abortion','Acute pyelonephritis','Puerperal sepsis','Heart failure'],a:3,exp:'Heart failure causes cardiogenic shock.'},
+{t:'Which of the following is a colloidal fluid?',o:['Saline','Ringer','Dextran','Lactated Ringer'],a:2,exp:'Colloids: human albumin, hemagel, dextran.'},
+{t:'Flat neck veins are a feature of:',o:['Oligemic shock','Cardiogenic shock','Septic shock','Neurogenic shock'],a:0,exp:'Oligemic: 2↑ + 2↓ + flat neck veins.'},
+{t:'Shock with 3↑ (pulse, R.R., temp) and 1↓ (ABP) is:',o:['Neurogenic shock','Cardiogenic shock','Septic shock','Oligemic shock'],a:2,exp:'Septic shock: 3↑ (pulse, R.R., Temp) + 1↓ (ABP).'},
+{t:'Which of the following is NOT part of the 4P of adjuvant therapy?',o:['Patent airway','Positioning: head down','Pethidine in presence of pain','Pulse oximetry'],a:3,exp:'4P: Patent airway, Positioning, Patient warmed, Pethidine.'},
+{t:'A patient shows 1↑ (R.R.) and 3↓ (ABP, temp, pulse). The specific treatment is:',o:['Triple antibiotics','Digitalis and dopamine','Cortisone and blood','Atropine'],a:3,exp:'Neurogenic shock: 1↑ (R.R.) + 3↓; specific ttt is atropine.'},
+{t:'Heart failure is a cause of cardiogenic shock.',o:TF,a:0,exp:'Cardiogenic shock: heart failure and pulmonary embolism.'},
+{t:'Burns are a cause of cardiogenic shock.',o:TF,a:1,exp:'Burns cause oligemic shock.'},
+{t:'Hyperemesis gravidarum can cause oligemic shock through loss of fluid.',o:TF,a:0,exp:'Loss of fluid → oligemic shock.'},
+{t:'Neurogenic shock is due to decreased vagal tone.',o:TF,a:1,exp:'It is due to INCREASED vagal tone.'},
+{t:'Renal failure is a complication of any type of shock.',o:TF,a:0,exp:'Complications: electrolyte imbalance, DIC, pulmonary oedema, renal failure, coma.'},
+{t:'Chorioamnionitis may lead to septic shock.',o:TF,a:0,exp:'Septic shock is due to infection in obstetrics, including chorioamnionitis.'},
+{t:'Neck veins are congested in oligemic shock.',o:TF,a:1,exp:'Flat in oligemic; congested in cardiogenic.'},
+{t:'Neck veins are congested in cardiogenic shock.',o:TF,a:0,exp:'Cardiogenic: 2↑ + 2↓ + congested neck veins.'},
+{t:'In septic shock there are 3 decreased signs and 1 increased sign.',o:TF,a:1,exp:'Septic: 3↑ (pulse, R.R., Temp) + 1↓ (ABP).'},
+{t:'Increased serum lactic acid is an expected investigation finding in shock.',o:TF,a:0,exp:'Investigation: increase serum lactic acid.'},
+{t:'The pH in shock indicates alkalosis.',o:TF,a:1,exp:'pH: acidosis.'},
+{t:'In shock, PCO₂ increases and PO₂ decreases.',o:TF,a:0,exp:'Investigation: increase PCO₂, decrease PO₂.'},
+{t:'Lactated Ringer is a colloidal solution.',o:TF,a:1,exp:'It is a crystalloid.'},
+{t:'Triple antibiotics are the specific treatment of septic shock.',o:TF,a:0,exp:'Septic shock: triple antibiotics.'},
+{t:'Positioning in adjuvant therapy of shock is head up.',o:TF,a:1,exp:'Positioning: head down.'}
+];
+
+/* ===== ENGINE ===== */
+let qs,i,correct,wrong,answers,answered,wrongSet=[],timeLeft,ti,started=false;const TOTAL=35*60,L=['A','B','C','D'];
+const $=id=>document.getElementById(id);
+function shuffle(a){for(let k=a.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[a[k],a[j]]=[a[j],a[k]]}return a}
+function init(pool){qs=shuffle([...pool]);i=0;correct=0;wrong=0;answered=0;answers=new Array(qs.length).fill(null);timeLeft=TOTAL;startTimer();render()}
+function startTimer(){clearInterval(ti);$('tm').className='timer';$('tm').textContent='35:00';ti=setInterval(()=>{timeLeft--;const m=Math.floor(timeLeft/60),s=timeLeft%60;$('tm').textContent=m+':'+(s<10?'0':'')+s;if(timeLeft<=120)$('tm').className='timer danger';else if(timeLeft<=300)$('tm').className='timer warn';if(timeLeft<=0){clearInterval(ti);finish()}},1000)}
+function top_(){const n=qs.length;$('sC').textContent=correct;$('sW').textContent=wrong;$('sR').textContent=Math.round((n-answered)/n*100)+'%';$('pl').textContent='سؤال '+(i+1)+' / '+n;$('pf').style.width=((i+1)/n*100)+'%'}
+function render(){top_();const q=qs[i];$('app').innerHTML=`<div class="q"><div class="qh">سؤال ${i+1} / ${qs.length}</div><div class="qt">${q.t}</div><div class="opts">${q.o.map((o,k)=>`<div class="opt" id="o${k}" tabindex="0" onclick="choose(${k})" onkeydown="if(event.key==='Enter')choose(${k})"><div class="ol">${L[k]}</div>${o}</div>`).join('')}</div><div class="nb"><button class="btn skip" onclick="skip()">تخطي</button></div></div>`}
+function choose(v){if(answers[i]!==null)return;answers[i]=v;answered++;const q=qs[i],ok=v===q.a;ok?correct++:wrong++;if(!ok)wrongSet.push(q);top_();
+ q.o.forEach((_,k)=>{const e=$('o'+k);e.classList.add('dis');if(k===q.a)e.classList.add('correct');else if(k===v)e.classList.add('wrong')});
+ const card=document.querySelector('.q'),fb=document.createElement('div');fb.className='fb '+(ok?'ok':'no');fb.textContent=ok?'🎉 شطور جدا ، اللهم بارك':'😔 ركز يا سكر';card.querySelector('.opts').after(fb);
+ if(q.exp){const e=document.createElement('div');e.className='exp';e.innerHTML='💬 '+q.exp;fb.after(e)}
+ card.querySelector('.nb').innerHTML=`<button class="btn next" onclick="next()">${i<qs.length-1?'السؤال التالي':'إنهاء الامتحان'}</button>`}
+function skip(){if(answers[i]===null){answers[i]=-1;answered++;wrong++;wrongSet.push(qs[i]);top_()}next()}
+function next(){if(i<qs.length-1){i++;render();window.scrollTo({top:0,behavior:'smooth'})}else finish()}
+function finish(){clearInterval(ti);const n=qs.length,sc=Math.round(correct/n*100);
+ let g,c;if(sc>=90){g='🥇 ممتاز';c='var(--ok)'}else if(sc>=75){g='🥈 جيد جداً';c='var(--accent)'}else if(sc>=60){g='🥉 جيد';c='var(--doc)'}else{g='📚 راجع تاني';c='var(--no)'}
+ const rep=qs.map((q,k)=>{const ok=answers[k]===q.a;return `<div class="ri ${ok?'ok':'no'}">${ok?'✅':'❌'} ${q.t}${ok?'':`<p>Your answer: ${answers[k]>=0?q.o[answers[k]]:'Skipped'}</p><p>Correct: ${q.o[q.a]}</p>`}</div>`}).join('');
+ $('app').innerHTML=`<div class="rh"><div class="big" style="color:${c}">${sc}%</div><div style="font-size:20px;font-weight:900;color:${c}">${g}</div><div class="rs"><div><b style="color:var(--ok)">${correct}</b><span>صحيح</span></div><div><b style="color:var(--no)">${wrong}</b><span>خطأ</span></div><div><b>${n-answered}</b><span>لم يُجب</span></div></div></div>
+ <div class="acts">${wrongSet.length?`<button class="btn next" onclick="retryWrong()">إعادة الخطأ (${wrongSet.length})</button>`:''}<button class="btn alt" onclick="wrongSet=[];init(QUESTIONS)">امتحان جديد عشوائي</button></div>${rep}`;
+ window.scrollTo({top:0,behavior:'smooth'})}
+function retryWrong(){const p=[...new Map(wrongSet.map(q=>[q.t,q])).values()];wrongSet=[];init(p);window.scrollTo({top:0,behavior:'smooth'})}
+
+function showTab(t){['study','exam'].forEach(s=>$(s).classList.toggle('on',s===t));$('t1').classList.toggle('on',t==='study');$('t2').classList.toggle('on',t==='exam');
+ if(t==='exam'&&!started){started=true;init(QUESTIONS)}window.scrollTo({top:0})}
+
+/* THEME */
+let theme='light';try{theme=localStorage.getItem('theme')||'light'}catch(e){}
+function applyTheme(t){theme=t;document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'');$('themeBtn').textContent=t==='dark'?'☀️':'🌙';try{localStorage.setItem('theme',t)}catch(e){}}
+applyTheme(theme);$('themeBtn').onclick=()=>applyTheme(theme==='dark'?'light':'dark');
+</script>
+</body>
+</html>
