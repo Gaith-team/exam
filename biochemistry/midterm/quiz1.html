@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link href="https://fonts.googleapis.com/css2?family=Readex+Pro:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--teal:#c2255c;--teal-d:#2b1646;--blue:#ece5ef;--bd:#ddd0e4;--ok:#138a5b;--no:#d6334a;--rev:#5c7cfa;--txt:#1f1429;--grad:linear-gradient(135deg,#2b1646 0%,#4a1d6b 58%,#7a1f5c 100%)}
+body{font-family:'Readex Pro',Arial,sans-serif;background:#f7f3f8;color:var(--txt);font-size:14px}
+header{background:var(--grad);color:#fff;text-align:center;padding:12px;font-size:18px;font-weight:700;position:relative;border-bottom:5px solid transparent;border-image:linear-gradient(90deg,#0fa3a3 0 25%,#c2255c 25% 50%,#f5a524 50% 75%,#5c7cfa 75% 100%) 1}
+header .brand{position:absolute;right:16px;top:8px;font-weight:bold;font-size:14px}
+header a{position:absolute;left:16px;top:11px;color:#fff;font-size:13px;text-decoration:none}
+.wrap{max-width:1280px;margin:0 auto;padding:8px 10px 20px}
+.topinfo{background:var(--blue);border:1px solid var(--bd);padding:4px 8px;font-size:13px;margin-bottom:8px}
+.topinfo b{color:var(--teal)}
+.layout{display:grid;grid-template-columns:1fr 240px;gap:14px;align-items:start}
+.main{background:#fff;border:1px solid var(--bd);min-height:470px;display:flex;flex-direction:column;
+ background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='70'><text x='8' y='45' transform='rotate(-20 75 35)' font-size='14' font-family='Arial' fill='%23000' fill-opacity='.07'>GHAITH TEAM</text></svg>")}
+.qhead{display:flex;justify-content:space-between;align-items:center;padding:12px 6px 6px;margin:0 6px;border-bottom:1px solid var(--bd)}
+.qhead b{font-size:13px}
+.fs button{background:#5c7cfa;color:#fff;border:0;padding:6px 12px;margin-left:3px;border-radius:2px;cursor:pointer;font-weight:bold}
+.qbody{padding:8px 12px;flex:1}
+.qtext{font-size:13px;line-height:1.7;margin-bottom:18px;direction:ltr;text-align:left}
+.opt{display:flex;align-items:center;gap:8px;margin:0 0 16px;cursor:pointer;direction:ltr;text-align:left;font-size:13px}
+.opt input{accent-color:var(--teal);cursor:pointer}
+.bar{display:flex;justify-content:space-between;padding:10px;gap:6px;flex-wrap:wrap;border-top:1px solid var(--bd);margin:0 6px 6px}
+.b{background:var(--grad);color:#fff;border:0;padding:9px 12px;font-weight:bold;font-size:13px;border-radius:2px;cursor:pointer}
+.b:hover{filter:brightness(1.12)}
+.b.gray{background:#2b1646}
+.side>div{background:var(--blue);border:1px solid var(--bd);margin-bottom:10px;padding:8px}
+.timer{text-align:center;background:none!important;border:0!important}
+.timer small{font-size:13px}
+.timer .t{font-size:30px;color:#0fa3a3;margin-top:4px}
+.timer .t.warn{color:#c27b0a}.timer .t.danger{color:#c8372d}
+.leg{display:grid;grid-template-columns:1fr 1fr;gap:8px 6px;font-size:10px;margin-top:8px}
+.leg div{display:flex;align-items:center;gap:6px}
+.sq{min-width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:bold;border-radius:2px;border:1px solid transparent}
+.s-ans{background:var(--ok)}.s-no{background:#f5a524;color:#3b2a00}.s-rev{background:var(--rev)}.s-nv{background:#fff;color:#333;border-color:#9bb0a2}
+.nav{display:flex;flex-wrap:wrap;gap:6px;max-height:260px;overflow:auto;background:#ece5ef}
+.nav .sq{width:24px;height:24px;cursor:pointer;font-size:12px}
+.nav .cur{outline:2px solid #f5a524;outline-offset:0}
+.endrow{text-align:center}
+.endrow .b{width:90px}
+footer{text-align:center;padding:16px;font-size:12px;color:#55465f;background:#ece5ef;border-top:4px solid transparent;border-image:linear-gradient(90deg,#0fa3a3 0 25%,#c2255c 25% 50%,#f5a524 50% 75%,#5c7cfa 75% 100%) 1;margin-top:10px}
+footer a{color:#229ED9;text-decoration:none}
+/* results */
+.res{background:#fff;border:1px solid var(--bd);padding:20px;max-width:900px;margin:10px auto}
+.score{text-align:center;padding:10px 0 18px}
+.score .n{font-size:48px;font-weight:900;color:var(--teal)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}
+.stats div{background:var(--blue);padding:10px;text-align:center;border-radius:4px}
+.stats b{display:block;font-size:20px}
+.sec{background:var(--ok);color:#fff;padding:8px 12px;font-weight:bold;margin:22px 0 10px}
+.sec.bad{background:var(--no)}
+.it{border:1px solid var(--bd);border-left:4px solid var(--ok);padding:12px;margin-bottom:8px;background:#fafcff;direction:ltr;text-align:left}
+.it.bad{border-left-color:var(--no)}
+.it .q{font-weight:bold;font-size:13px;margin-bottom:6px;line-height:1.6}
+.it .r{font-size:12px;margin-top:4px}
+.tag{padding:1px 7px;border-radius:3px;color:#fff;font-size:11px;font-weight:bold;margin-right:6px}
+.tag.y{background:var(--no)}.tag.g{background:var(--ok)}
+.exp{font-size:12px;color:#555;margin-top:6px;background:#eef6f4;padding:6px 8px;border-radius:3px}
+.acts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.hide{display:none}
+@media(max-width:820px){.layout{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}header a{display:none}}
+.qtext img{display:block;max-width:100%;max-height:260px;margin:0 auto 12px;border-radius:8px;background:#fff}
+.it .q img{max-height:90px;display:block;margin:6px 0;border-radius:6px}
+</style>
+</head>
+<body>
+<header><a href="https://gaith-team.github.io/exam/">← رجوع</a>Biochemistry<span class="brand">GHAITH TEAM</span></header>
+<div class="wrap">
+ <div id="exam">
+  <div class="topinfo">Total questions in exam: <b id="tot">0</b> | Answered: <b id="ans">0</b></div>
+  <div class="layout">
+   <div class="main">
+    <div class="qhead"><b id="qno"></b><div class="fs"><button onclick="fs(-1)">A-</button><button onclick="fs(0)">A</button><button onclick="fs(1)">A+</button></div></div>
+    <div class="qbody" id="qbody"></div>
+    <div class="bar">
+     <button class="b" onclick="saveNext()">Save &amp; Next</button>
+     <div style="display:flex;gap:4px;flex-wrap:wrap">
+      <button class="b" onclick="mark()">Mark for Review</button>
+      <button class="b" onclick="skip()">Skip</button>
+      <button class="b" onclick="prev()">Previous</button>
+     </div>
+    </div>
+   </div>
+   <div class="side">
+    <div class="timer"><small>Time Remaining</small><div class="t" id="tm">35:00</div></div>
+    <div>
+     <div>Number of questions : <b id="tot2">0</b></div>
+     <div class="leg">
+      <div><span class="sq s-ans" id="cAns">0</span>Answered</div>
+      <div><span class="sq s-no" id="cNo">0</span>Not Answered</div>
+      <div><span class="sq s-rev" id="cRev">0</span>For Review</div>
+      <div><span class="sq s-nv" id="cNv">0</span>Not Visited</div>
+     </div>
+    </div>
+    <div class="nav" id="nav"></div>
+    <div class="endrow"><button class="b gray" onclick="endTest()">End Test</button></div>
+   </div>
+  </div>
+ </div>
+ <div id="result" class="hide"></div>
+</div>
+<footer>GHAITH TEAM · <a href="https://t.me/nursing2bu" target="_blank">@nursing2bu</a></footer>
+
+<script>
+const QUESTIONS = [
+{t:"What percentage of the daily macronutrient intake is carbohydrates?",o:["15%","30%","55%","70%"],a:2},
+{t:"Which of the following is classified as a micronutrient?",o:["Vitamins","Proteins","Fats","Carbohydrates"],a:0},
+{t:"An adult BMI of 18.5 to 24.9 is classified as:",o:["Underweight","Healthy/normal weight","Overweight","Obesity class 1"],a:1},
+{t:"Dietary fiber is best defined as:",o:["Digestible protein","A fat-soluble vitamin","A mineral","The unavailable (indigestible) carbohydrate in the diet"],a:3},
+{t:"The general formula of carbohydrates is:",o:["(CH2O)n","(CHO)2n","C2H4On","(C2H2O)n"],a:0},
+{t:"Which of the following is a disaccharide?",o:["Glucose","Sucrose","Starch","Fructose"],a:1},
+{t:"Lactose (milk sugar) consists of:",o:["Glucose + fructose","Glucose + glucose","Glucose + galactose","Fructose + galactose"],a:2},
+{t:"The site of glycolysis in the cell is the:",o:["Mitochondria","Nucleus","Lysosome","Cytoplasm"],a:3},
+{t:"Insulin is the only ______ hormone in the body.",o:["Hyperglycemic","Hypoglycemic","Thyroid","Adrenal"],a:1},
+{t:"The normal fasting blood glucose level is:",o:["70–110 mg/dl","110–140 mg/dl","140–170 mg/dl","45–60 mg/dl"],a:0},
+{t:"Every fatty acid contains a terminal:",o:["Amino group","Hydroxyl group","Carboxyl group","Phosphate group"],a:2},
+{t:"One gram of fat produces approximately:",o:["4 kcal","9.3 kcal","2 kcal","7 kcal"],a:1},
+{t:"Essential fatty acids are:",o:["Saturated fatty acids made in the liver","Odd-chain fatty acids","Short-chain fatty acids only","PUFA that the body cannot make and must come from food"],a:3},
+{t:"The three ketone bodies are:",o:["Acetoacetate, acetone and β-OH butyric acid","Pyruvate, lactate and acetone","Glucose, fructose and galactose","Citrate, malate and fumarate"],a:0},
+{t:"Monosaccharides containing 6 carbon atoms are called:",o:["Trioses","Tetroses","Pentoses","Hexoses"],a:3},
+{t:"Oligosaccharides contain:",o:["One sugar unit","Two sugar units","3–10 sugar units","More than 10 sugar units"],a:2},
+{t:"Which enzyme in saliva starts the digestion of starch to maltose?",o:["Maltase","Amylase","Lactase","Sucrase"],a:1},
+{t:"Which enzyme splits sucrose into glucose + fructose?",o:["Sucrase","Maltase","Lactase","Amylase"],a:0},
+{t:"Passage of one NADH+H⁺ through the electron transport chain yields:",o:["1.5 ATP","2.5 ATP","3.5 ATP","10 ATP"],a:1},
+{t:"Rotenone inhibits which complex of the electron transport chain?",o:["Complex II","Complex III","Complex IV","Complex I"],a:3},
+{t:"In the liver, glycogenolysis supplies blood glucose during:",o:["Ketosis","Fatty acid oxidation","Fasting of less than 18 hours","Fasting of more than 18 hours only"],a:2},
+{t:"The key enzyme of glycogenesis is:",o:["Phosphorylase","Glycogen synthase","HMG-CoA reductase","Hormone-sensitive lipase"],a:1},
+{t:"The normal renal threshold for glucose is:",o:["70–110 mg/dl","100–120 mg/dl","160–180 mg/dl","250–300 mg/dl"],a:2},
+{t:"Hypoglycemia means a blood glucose level of:",o:["45 mg/dl or less","90 mg/dl or less","110 mg/dl or less","140 mg/dl or less"],a:0},
+{t:"The main source of blood glucose during prolonged starvation (more than 18 hours) is:",o:["Dietary carbohydrate","Liver glycogenolysis","Muscle glycogen","Gluconeogenesis"],a:3},
+{t:"The HMP shunt produces pentoses and:",o:["NADPH + H⁺","FADH2","ATP only","Acetyl-CoA"],a:0},
+{t:"In a normal OGTT the blood glucose never exceeds:",o:["120 mg/dl","170 mg/dl","250 mg/dl","300 mg/dl"],a:1},
+{t:"The main cause of type 1 diabetes mellitus is:",o:["Insulin resistance","Obesity","Destruction of β-cells","Excess glucagon"],a:2},
+{t:"Which lipoprotein carries cholesterol from tissues to the liver (reverse cholesterol transport)?",o:["LDL","VLDL","HDL","Chylomicron"],a:2},
+{t:"Long-chain acyl-CoA enters the mitochondria by:",o:["Simple diffusion","The citrate shuttle","Albumin transport","The carnitine shuttle"],a:3},
+{t:"According to the lecture, complete oxidation of palmitate (β-oxidation + Krebs cycle) yields:",o:["108 ATP","30 ATP","32 ATP","129 ATP"],a:0},
+{t:"Which of the following is a lipotropic factor?",o:["Cholesterol","Choline","Alcohol","Ketone bodies"],a:1},
+{t:"Fatty liver is the accumulation of lipids exceeding what percentage of liver weight?",o:["1%","2%","4%","40%"],a:2},
+{t:"Endogenous synthesis of cholesterol is about:",o:["0.3 g/day","1.5 g/day","3 g/day","0.7 g/day"],a:3},
+{t:"Cholesterol is synthesized from acetyl-CoA by which key enzyme?",o:["HMG-CoA reductase","Phosphorylase","Glycogen synthase","Hormone-sensitive lipase"],a:0},
+{t:"Minerals are inorganic elements required for normal body functions.",o:["True","False"],a:0},
+{t:"Anabolism is exergonic and releases energy.",o:["True","False"],a:1},
+{t:"Passage of one FADH2 through the electron transport chain yields 2.5 ATP.",o:["True","False"],a:1},
+{t:"Most carbohydrates are sweet in taste and soluble in water.",o:["True","False"],a:0},
+{t:"After a carbohydrate meal, insulin stimulates glycogenesis.",o:["True","False"],a:0},
+{t:"Insulin is the only hypoglycemic hormone.",o:["True","False"],a:0},
+{t:"The net effect of thyroxine is to decrease blood glucose.",o:["True","False"],a:1},
+{t:"In renal glucosuria the patient has hyperglycemia.",o:["True","False"],a:1},
+{t:"Type 2 diabetes accounts for about 80–90% of diabetes cases.",o:["True","False"],a:0},
+{t:"Lipids are soluble in water.",o:["True","False"],a:1},
+{t:"Waxes are formed of glycerol and three fatty acids.",o:["True","False"],a:1},
+{t:"All naturally occurring fatty acids have the cis configuration.",o:["True","False"],a:0},
+{t:"Cholesterol is found in both plant and animal products.",o:["True","False"],a:1},
+{t:"An increased NADH/NAD ratio, as in alcoholism, can cause fatty liver.",o:["True","False"],a:0},
+{t:"Cyanide, carbon monoxide and H2S inhibit Complex IV.",o:["True","False"],a:0}
+];
+
+const TOTAL_TIME = 35*60;
+let Q, cur, sel, saved, review, visited, left, iv, size = 13;
+
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function shuffleOptions(q){const ix=shuffle(q.o.map((_,k)=>k));return {...q,o:ix.map(k=>q.o[k]),a:ix.indexOf(q.a)}}
+const $ = id => document.getElementById(id);
+
+function init(pool){
+  Q = shuffle([...pool]).map(shuffleOptions); const n = Q.length;
+  cur = 0; sel = Array(n).fill(null); saved = Array(n).fill(false);
+  review = Array(n).fill(false); visited = Array(n).fill(false);
+  left = TOTAL_TIME;
+  $('exam').classList.remove('hide'); $('result').classList.add('hide');
+  $('tot').textContent = $('tot2').textContent = n;
+  clearInterval(iv);
+  iv = setInterval(()=>{
+    left--; const m=Math.floor(left/60), s=left%60, t=$('tm');
+    t.textContent = m+':'+(s<10?'0':'')+s;
+    t.className = 't'+(left<=120?' danger':left<=300?' warn':'');
+    if(left<=0){clearInterval(iv);finish()}
+  },1000);
+  if(n) render();
+  window.scrollTo(0,0);
+}
+
+function render(){
+  visited[cur] = true;
+  const q = Q[cur];
+  $('qno').textContent = 'Question No. ' + (cur+1);
+  $('qbody').style.fontSize = size+'px';
+  $('qbody').innerHTML = `<div class="qtext" style="font-size:${size}px">${q.t}</div>` +
+    q.o.map((o,i)=>`<label class="opt" style="font-size:${size}px"><input type="radio" name="o" value="${i}" ${sel[cur]===i?'checked':''} onchange="sel[cur]=${i}"> <span>${o}</span></label>`).join('');
+  refresh();
+}
+
+function status(i){
+  if(review[i]) return 's-rev';
+  if(saved[i]) return 's-ans';
+  if(visited[i]) return 's-no';
+  return 's-nv';
+}
+function refresh(){
+  const n = Q.length; let a=0,no=0,r=0,nv=0;
+  $('nav').innerHTML = Q.map((_,i)=>{
+    const s = status(i);
+    if(saved[i]) a++;
+    if(s==='s-rev') r++; else if(s==='s-no') no++; else if(s==='s-nv') nv++;
+    return `<span class="sq ${s} ${i===cur?'cur':''}" onclick="go(${i})">${i+1}</span>`;
+  }).join('');
+  $('ans').textContent = a; $('cAns').textContent = a; $('cNo').textContent = no;
+  $('cRev').textContent = r; $('cNv').textContent = nv;
+}
+
+function go(i){cur=i;render()}
+function nextQ(){ if(cur<Q.length-1){cur++;render();return} const k=Q.findIndex((_,x)=>!saved[x]); if(k>=0){cur=k;render()} else {refresh();alert('كل الأسئلة اتحلت، دوس End Test لإنهاء الامتحان')} }
+function saveNext(){ saved[cur]=sel[cur]!==null; nextQ(); }
+function skip(){ nextQ(); }
+function mark(){ review[cur]=!review[cur]; if(sel[cur]!==null) saved[cur]=true; refresh(); }
+function prev(){ if(cur>0){cur--;render()} }
+function fs(d){ size = d===0 ? 13 : Math.max(11,Math.min(24,size+d*2)); render(); }
+
+function endTest(){
+  const un = Q.filter((_,i)=>sel[i]===null).length;
+  const msg = un ? `لسه فاضل ${un} سؤال من غير إجابة. تنهي الامتحان؟` : 'تنهي الامتحان؟';
+  if(confirm(msg)) finish();
+}
+
+function finish(){
+  clearInterval(iv);
+  const n = Q.length; let ok=[], bad=[];
+  Q.forEach((q,i)=>{ (sel[i]===q.a ? ok : bad).push(i) });
+  const pct = n ? Math.round(ok.length/n*100) : 0;
+  const card = (i,good)=>{
+    const q=Q[i];
+    return `<div class="it ${good?'':'bad'}"><div class="q">${i+1}. ${q.t}</div>
+    ${good ? `<div class="r"><span class="tag g">Correct</span>${q.o[q.a]}</div>` :
+    `<div class="r"><span class="tag y">Your answer</span>${sel[i]===null?'— لم تتم الإجابة —':q.o[sel[i]]}</div>
+     <div class="r"><span class="tag g">Correct</span>${q.o[q.a]}</div>`}
+    ${q.exp?`<div class="exp">💬 ${q.exp}</div>`:''}</div>`;
+  };
+  const unans = Q.filter((_,i)=>sel[i]===null).length;
+  $('exam').classList.add('hide');
+  const r = $('result'); r.classList.remove('hide');
+  r.innerHTML = `<div class="res">
+   <div class="score"><div class="n">${pct}%</div><div>${ok.length} / ${n}</div></div>
+   <div class="stats">
+    <div><b style="color:var(--ok)">${ok.length}</b>صح</div>
+    <div><b style="color:var(--no)">${bad.length - unans}</b>غلط</div>
+    <div><b style="color:#777">${unans}</b>من غير إجابة</div>
+    <div><b>${n}</b>الإجمالي</div>
+   </div>
+   <div class="acts">
+    ${bad.length?'<button class="b" onclick="retryWrong()">إعادة الأسئلة الغلط ('+bad.length+')</button>':''}
+    <button class="b" onclick="init(QUESTIONS)">امتحان جديد عشوائي</button>
+   </div>
+   <div class="sec">✔ الأسئلة اللي اتحلت صح (${ok.length})</div>
+   ${ok.map(i=>card(i,true)).join('') || '<div style="padding:8px;color:#777">لا يوجد</div>'}
+   <div class="sec bad">✖ الأسئلة الغلط (${bad.length})</div>
+   ${bad.map(i=>card(i,false)).join('') || '<div style="padding:8px;color:#777">ممتاز، مفيش أخطاء 🎉</div>'}
+  </div>`;
+  window.scrollTo(0,0);
+}
+
+function retryWrong(){
+  const pool = Q.filter((q,i)=>sel[i]!==q.a);
+  init(pool);
+}
+
+init(QUESTIONS);
+</script>
+</body>
+</html>
