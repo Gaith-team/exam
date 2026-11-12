@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--teal:#0891b2;--teal-d:#0e5a73;--blue:#dce8f3;--bd:#c2d4e6;--ok:#059669;--no:#e11d48;--rev:#6366f1;--txt:#0a1a33;--grad:linear-gradient(135deg,#071226 0%,#0c2a4d 55%,#0e5a73 100%)}
+body{font-family:'IBM Plex Sans Arabic','Space Grotesk',Arial,sans-serif;background:#eaf1f8;color:var(--txt);font-size:14px}
+header{background:var(--grad);color:#fff;text-align:center;padding:12px;font-size:18px;font-weight:700;position:relative;border-bottom:2px solid #22d3ee}
+header .brand{position:absolute;right:16px;top:8px;font-weight:bold;font-size:14px}
+header a{position:absolute;left:16px;top:11px;color:#fff;font-size:13px;text-decoration:none}
+.wrap{max-width:1280px;margin:0 auto;padding:8px 10px 20px}
+.topinfo{background:var(--blue);border:1px solid var(--bd);padding:4px 8px;font-size:13px;margin-bottom:8px}
+.topinfo b{color:var(--teal)}
+.layout{display:grid;grid-template-columns:1fr 240px;gap:14px;align-items:start}
+.main{background:#fff;border:1px solid var(--bd);min-height:470px;display:flex;flex-direction:column;
+ background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='70'><text x='8' y='45' transform='rotate(-20 75 35)' font-size='14' font-family='Arial' fill='%23000' fill-opacity='.07'>GHAITH TEAM</text></svg>")}
+.qhead{display:flex;justify-content:space-between;align-items:center;padding:12px 6px 6px;margin:0 6px;border-bottom:1px solid var(--bd)}
+.qhead b{font-size:13px}
+.fs button{background:#6366f1;color:#fff;border:0;padding:6px 12px;margin-left:3px;border-radius:2px;cursor:pointer;font-weight:bold}
+.qbody{padding:8px 12px;flex:1}
+.qtext{font-size:13px;line-height:1.7;margin-bottom:18px;direction:ltr;text-align:left}
+.opt{display:flex;align-items:center;gap:8px;margin:0 0 16px;cursor:pointer;direction:ltr;text-align:left;font-size:13px}
+.opt input{accent-color:var(--teal);cursor:pointer}
+.bar{display:flex;justify-content:space-between;padding:10px;gap:6px;flex-wrap:wrap;border-top:1px solid var(--bd);margin:0 6px 6px}
+.b{background:linear-gradient(135deg,#0891b2,#6366f1);color:#fff;border:0;padding:9px 12px;font-weight:bold;font-size:13px;border-radius:2px;cursor:pointer}
+.b:hover{filter:brightness(1.12)}
+.b.gray{background:#071226}
+.side>div{background:var(--blue);border:1px solid var(--bd);margin-bottom:10px;padding:8px}
+.timer{text-align:center;background:none!important;border:0!important}
+.timer small{font-size:13px}
+.timer .t{font-size:30px;color:#0891b2;margin-top:4px}
+.timer .t.warn{color:#c27b0a}.timer .t.danger{color:#c8372d}
+.leg{display:grid;grid-template-columns:1fr 1fr;gap:8px 6px;font-size:10px;margin-top:8px}
+.leg div{display:flex;align-items:center;gap:6px}
+.sq{min-width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:bold;border-radius:2px;border:1px solid transparent}
+.s-ans{background:var(--ok)}.s-no{background:#f59e0b}.s-rev{background:var(--rev)}.s-nv{background:#fff;color:#333;border-color:#9bb0a2}
+.nav{display:flex;flex-wrap:wrap;gap:6px;max-height:260px;overflow:auto;background:#dce8f3}
+.nav .sq{width:24px;height:24px;cursor:pointer;font-size:12px}
+.nav .cur{outline:2px solid #071226;outline-offset:0}
+.endrow{text-align:center}
+.endrow .b{width:90px}
+footer{text-align:center;padding:16px;font-size:12px;color:#a9bdd6;background:#071226;border-top:2px solid #0891b2;margin-top:10px}
+footer a{color:#38bdf8!important}
+footer a{color:#229ED9;text-decoration:none}
+/* results */
+.res{background:#fff;border:1px solid var(--bd);padding:20px;max-width:900px;margin:10px auto}
+.score{text-align:center;padding:10px 0 18px}
+.score .n{font-size:48px;font-weight:900;color:var(--teal)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}
+.stats div{background:var(--blue);padding:10px;text-align:center;border-radius:4px}
+.stats b{display:block;font-size:20px}
+.sec{background:var(--ok);color:#fff;padding:8px 12px;font-weight:bold;margin:22px 0 10px}
+.sec.bad{background:var(--no)}
+.it{border:1px solid var(--bd);border-left:4px solid var(--ok);padding:12px;margin-bottom:8px;background:#fafcff;direction:ltr;text-align:left}
+.it.bad{border-left-color:var(--no)}
+.it .q{font-weight:bold;font-size:13px;margin-bottom:6px;line-height:1.6}
+.it .r{font-size:12px;margin-top:4px}
+.tag{padding:1px 7px;border-radius:3px;color:#fff;font-size:11px;font-weight:bold;margin-right:6px}
+.tag.y{background:var(--no)}.tag.g{background:var(--ok)}
+.exp{font-size:12px;color:#555;margin-top:6px;background:#eef6f4;padding:6px 8px;border-radius:3px}
+.acts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.hide{display:none}
+@media(max-width:820px){.layout{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}header a{display:none}}
+.qtext img{display:block;max-width:100%;max-height:260px;margin:0 auto 12px;border-radius:8px;background:#fff}
+.it .q img{max-height:90px;display:block;margin:6px 0;border-radius:6px}
+</style>
+</head>
+<body>
+<header><a href="https://gaith-team.github.io/exam/">← رجوع</a>بصمجة غيث<span class="brand">GHAITH TEAM</span></header>
+<div class="wrap">
+ <div id="exam">
+  <div class="topinfo">Total questions in exam: <b id="tot">0</b> | Answered: <b id="ans">0</b></div>
+  <div class="layout">
+   <div class="main">
+    <div class="qhead"><b id="qno"></b><div class="fs"><button onclick="fs(-1)">A-</button><button onclick="fs(0)">A</button><button onclick="fs(1)">A+</button></div></div>
+    <div class="qbody" id="qbody"></div>
+    <div class="bar">
+     <button class="b" onclick="saveNext()">Save &amp; Next</button>
+     <div style="display:flex;gap:4px;flex-wrap:wrap">
+      <button class="b" onclick="mark()">Mark for Review</button>
+      <button class="b" onclick="skip()">Skip</button>
+      <button class="b" onclick="prev()">Previous</button>
+     </div>
+    </div>
+   </div>
+   <div class="side">
+    <div class="timer"><small>Time Remaining</small><div class="t" id="tm">40:00</div></div>
+    <div>
+     <div>Number of questions : <b id="tot2">0</b></div>
+     <div class="leg">
+      <div><span class="sq s-ans" id="cAns">0</span>Answered</div>
+      <div><span class="sq s-no" id="cNo">0</span>Not Answered</div>
+      <div><span class="sq s-rev" id="cRev">0</span>For Review</div>
+      <div><span class="sq s-nv" id="cNv">0</span>Not Visited</div>
+     </div>
+    </div>
+    <div class="nav" id="nav"></div>
+    <div class="endrow"><button class="b gray" onclick="endTest()">End Test</button></div>
+   </div>
+  </div>
+ </div>
+ <div id="result" class="hide"></div>
+</div>
+<footer>GHAITH TEAM · <a href="https://t.me/nursing2bu" target="_blank">@nursing2bu</a></footer>
+
+<script>
+const QUESTIONS = [
+{t:"Candidates is one of the most common problems among infancy stage that caused by bacterial infection.", o:["True","False"], a:1},
+{t:"Infant doubles his birth weight at:", o:["4 month","4 years","6 month","6 year"], a:2},
+{t:"Which toy is more suitable for a child aged 10 month?", o:["Tricycle","Push-Pull toy","Music box","Rattle"], a:1},
+{t:". Zinab,a 6-month-old baby, was brought to the health center for growth monitoring. Her birth weight was 3.2 kg, height 52 cm. She is on breast feeding. What will be the expected height of Zinab at one year old:", o:["67 cm","74 cm","78 cm","104 cm"], a:2},
+{t:"Common fears of school age child include relationship with person of opposite sex.", o:["True","False"], a:1},
+{t:"The child fairly achieves both bowel & bladder control by age:", o:["2 years","3 years","5 years","7 years"], a:1},
+{t:"An infant's play is basically:", o:["Solitary play","Parallel play","Co-operative play","Associative play"], a:0},
+{t:"Temper tantrums are typical fears of the preschool age children.", o:["True","False"], a:1},
+{t:"According to normal growth & development, Aziza (4 years old) would ask:", o:["Many what questions","Many why questions","Many when questions","Talk only vowel"], a:1},
+{t:"Which reflex is considered protective for the newborn?", o:["Moro","Sucking","Swallowing","Blinking"], a:3},
+{t:"At birth, the expected measures of anterior fontanel are:", o:["1×1 cm","2.5×2.5 cm","3.5×3.5 cm","5×5 cm"], a:1},
+{t:"An infant doubles his birth height at:", o:["4th month","4 years","12th month","12th year"], a:1},
+{t:"The child normally achieves both bowel& bladder control by age:", o:["2 & 1/2 years","3 years","5 years","7 years"], a:1},
+{t:"\"Latch Key children\"is a characteristic of which stage:", o:["Toddler","Preschool","School age","Adolescent"], a:2},
+{t:"An infant can sit without support at:", o:["5th month","6th month","7th month","8th month"], a:1},
+{t:"Which of the following is an inevitable future trend in pediatric care?", o:["Demand for advanced technical skills","Promotion of health through teaching","Traditional care settings","Provision of anticipatory guidance"], a:1},
+{t:"A child can use a pair of scissors at which stage:", o:["Infant stage","Toddler stage","Preschool stage","School age"], a:2},
+{t:"At birth,the expected measurements of the anterior fontanelle are:", o:["1x1 cm","2.5 x 2.5 cm","3.5 x 3.5 cm","5 x 5 cm"], a:1},
+{t:"Which one of the following age groups has the highest incidence of PEM(Protein-Energy Malnutrition)?", o:["Infant","Under 5 years","5-10 years","Above 10 years"], a:1},
+{t:"Which toy is more suitable for a child aged 10 months?", o:["Tricycle","Push-Pull toy","Music box","Rattle"], a:1},
+{t:"Fatna brought her new baby home from the hospital and introduced him to their toddler son.Which one of the following feelings would the toddler have?", o:["Negativism","Sibling rivalry","Ritualism","Individualism"], a:1},
+{t:"When one child is being the doctor& another is being the patient. This is called:", o:["Solitary play","Parallel play","Co-operative play","Associative play"], a:2},
+{t:"Zinab,a 6-month-old baby, was brought to the health center for growth monitoring. Her birth weight was 3.2 kg, height 52 cm. She is on breast feeding. What will be the expected height of Zinab at one year old?", o:["67 cm","74 cm","78 cm","104 cm"], a:2},
+{t:"A child can use a toothbrush properly at which stage:", o:["Infant stage","Toddler stage","Preschool stage","School stage"], a:3},
+{t:"Which one of the following acons should parents take to discipline a preschooler?", o:["Consistency, firm & an appropriate approach","Providing simple explanation only","Punishing him","By presence of parents during event"], a:0},
+{t:"Aziza is two years old.According to her normal growth & development, which is the correct statement about what Aziza would ask?", o:["Tend to ask many \"what\" questions","Asking many \"why\" questions","Talk incessantly","Talk only vowels"], a:0},
+{t:"The deciduous teeth begin to erupt at the age of:", o:["6th month","12 month","6 years","8 years"], a:0},
+{t:"An infant can walk alone at:", o:["9th Month","12th Month","15 th Month","18th Month"], a:1},
+{t:"An infant's play is basically:", o:["Solitary play.","Parallel play.","Co-operative play.","Associative play."], a:0},
+{t:"Fatma brought her new baby home from hospital and introduces him to their toddler son.Which one of the following feeling would the toddler have?", o:["Negativism.","Sibling rival.","Ritualism.","Individualism"], a:1},
+{t:"Erikson terms the psychosocial crisis faced by infant and children.", o:["Infant.","Toddler.","Preschool.","School.","Adolescent."], a:0},
+{t:"Which toy for 10 month:", o:["Tricycle","Push-Pull","Music box","Rattle"], a:1},
+{t:"Infant doubles weight at:", o:["4th month","4 years","6th month","6th year"], a:2},
+{t:"Newborn reflexes must be examined...", o:["Blinking","Rooting","Moro","Grasping","Sucking"], a:2},
+{t:"The psychosocial theme is\"to make, to make like, to play\" is the character of :", o:["Toddler child","Preschool age child","School age child"], a:1},
+{t:"Child have to develop the sense of moral value during play when he demonstrate control over emotion.", o:["True","False"], a:0},
+{t:"At what age of a child the deciduous teeth begin to be replaced with permanent teeth:", o:["60 months","2 year","6 year","8 year"], a:2},
+{t:"The function of nursery school are to provide:", o:["Experience hearing","opportunities to discover time self","opportunities to communicate with others process","All of the above"], a:3},
+{t:"If the preschool child fails to develop sense of initiative he expected to develop sense of:", o:["Shame and doubt","inferiority","Industry","Guilt"], a:3},
+{t:"A toddler alternates his feet when climbing stairs.", o:["True","False"], a:1},
+{t:"Anterior fontanel is triangular shape which closed at the end of 2nd month.", o:["True","False"], a:1},
+{t:"Obesity is the most common problems among school age children.", o:["True","False"], a:0},
+{t:"Iron deficiency anemia occurs most commonly in children between 6 months and 2 years of age.", o:["True","False"], a:0},
+{t:"Aziza is 4 years old.According to her normal growth & development which is the correct statement Aziza would ask?", o:["Tend to ask many what question","Asking many why question","Ask many when question","Talk only vowel"], a:1},
+{t:"The child fairly achieves both bowel& bladder control by age:", o:["2 years","3 years","4 years","5 years"], a:1},
+{t:"The function of nursery school are to provide:", o:["Experience hearing","opportunities to discover time self","opportunities to communicate with others process","all of the above"], a:3},
+{t:"Listening,touching & mutual exchange of ideas is one of the following Pediatric nurse role:", o:["Therapeutic relation","Support & counseling","Advocacy","Health teaching"], a:0},
+{t:"Social problems that might occur for the child in nursery school:", o:["Thumb sucking","Bad language","School phobia","All of the above"], a:3},
+{t:"Obesity is the most common problems during one of the following stages:", o:["Toddler.","Preschool.","School age.","Adolescence."], a:2},
+{t:"APGAR scoring reflects only the neurological condition of the newborn.", o:["True","False"], a:1},
+{t:"The term growth refers to the increasing capacity of children to use their bodies.", o:["True","False"], a:1},
+{t:"The flow of the milk is controlled by let down Reflex which may be inhibited by:", o:["Anxiety & pain","Sucking reflex.","Eating spicy & fatty food.","Mother confined to bed."], a:0},
+{t:"Which situation best demonstrate the parallel play typical of toddler:", o:["Two toddlers sharing crayons to color separate pictures.","Two toddlers playing a board game with the play therapist.","Two toddlers seated next to each other playing with separate dolls.","Two toddlers seated on the play therapists lap playing with a music box."], a:2},
+{t:"Role diffusion results from inability to develop the sense of trust.", o:["True","False"], a:1},
+{t:"The height of the child at birth is 46cm.what will be the height of this child at the age of one year.", o:["60 cm","72 cm","80 cm","92cm"], a:1},
+{t:"Child can use pair of scissor properly at:", o:["Infant stage","Toddler stage","Preschool stage","School stage"], a:2},
+{t:"Temper tantrums are typical fears of the preschool age children.", o:["True","False"], a:1},
+{t:"Social problems that might occur for the child in nursery school:", o:["Thumb sucking","Bad language","School phobia","All of the above"], a:3},
+{t:"Ali 6 month old baby,his birth weight was 3kg, height 50 cm, on feeding. What will be the expected height of Ali at one year old?", o:["67 cm","74 cm","75cm","104cm"], a:2},
+{t:"Vernix caseosa decreases in preterm newborn and increases in full term.", o:["True","False"], a:1},
+{t:"Home care and day surgery help to minimize the stress of children and their Families.", o:["True","False"], a:0},
+{t:"Common fears of school age child include relation ship with person of opposite sex.", o:["True","False"], a:1},
+{t:"The parents of 20 month-old child ask you advice concerning their son's\"stubborn streak\" He says \"NO\" to their requests and seems to do opposite of everything they ask; your counseling should be based on the knowledge that children of this age are in the developmental stage of :", o:["Oral gratification","Autonomy versus shame and doubt","preconceptual thinking","Industry versus inferiorit"], a:1}
+];
+
+const TOTAL_TIME = 40*60;
+let Q, cur, sel, saved, review, visited, left, iv, size = 13;
+
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function shuffleOptions(q){const ix=shuffle(q.o.map((_,k)=>k));return {...q,o:ix.map(k=>q.o[k]),a:ix.indexOf(q.a)}}
+const $ = id => document.getElementById(id);
+
+function init(pool){
+  Q = shuffle([...pool]).map(shuffleOptions); const n = Q.length;
+  cur = 0; sel = Array(n).fill(null); saved = Array(n).fill(false);
+  review = Array(n).fill(false); visited = Array(n).fill(false);
+  left = TOTAL_TIME;
+  $('exam').classList.remove('hide'); $('result').classList.add('hide');
+  $('tot').textContent = $('tot2').textContent = n;
+  clearInterval(iv);
+  iv = setInterval(()=>{
+    left--; const m=Math.floor(left/60), s=left%60, t=$('tm');
+    t.textContent = m+':'+(s<10?'0':'')+s;
+    t.className = 't'+(left<=120?' danger':left<=300?' warn':'');
+    if(left<=0){clearInterval(iv);finish()}
+  },1000);
+  if(n) render();
+  window.scrollTo(0,0);
+}
+
+function render(){
+  visited[cur] = true;
+  const q = Q[cur];
+  $('qno').textContent = 'Question No. ' + (cur+1);
+  $('qbody').style.fontSize = size+'px';
+  $('qbody').innerHTML = `<div class="qtext" style="font-size:${size}px">${q.t}</div>` +
+    q.o.map((o,i)=>`<label class="opt" style="font-size:${size}px"><input type="radio" name="o" value="${i}" ${sel[cur]===i?'checked':''} onchange="sel[cur]=${i}"> <span>${o}</span></label>`).join('');
+  refresh();
+}
+
+function status(i){
+  if(review[i]) return 's-rev';
+  if(saved[i]) return 's-ans';
+  if(visited[i]) return 's-no';
+  return 's-nv';
+}
+function refresh(){
+  const n = Q.length; let a=0,no=0,r=0,nv=0;
+  $('nav').innerHTML = Q.map((_,i)=>{
+    const s = status(i);
+    if(saved[i]) a++;
+    if(s==='s-rev') r++; else if(s==='s-no') no++; else if(s==='s-nv') nv++;
+    return `<span class="sq ${s} ${i===cur?'cur':''}" onclick="go(${i})">${i+1}</span>`;
+  }).join('');
+  $('ans').textContent = a; $('cAns').textContent = a; $('cNo').textContent = no;
+  $('cRev').textContent = r; $('cNv').textContent = nv;
+}
+
+function go(i){cur=i;render()}
+function nextQ(){ if(cur<Q.length-1){cur++;render();return} const k=Q.findIndex((_,x)=>!saved[x]); if(k>=0){cur=k;render()} else {refresh();alert('كل الأسئلة اتحلت، دوس End Test لإنهاء الامتحان')} }
+function saveNext(){ saved[cur]=sel[cur]!==null; nextQ(); }
+function skip(){ nextQ(); }
+function mark(){ review[cur]=!review[cur]; if(sel[cur]!==null) saved[cur]=true; refresh(); }
+function prev(){ if(cur>0){cur--;render()} }
+function fs(d){ size = d===0 ? 13 : Math.max(11,Math.min(24,size+d*2)); render(); }
+
+function endTest(){
+  const un = Q.filter((_,i)=>sel[i]===null).length;
+  const msg = un ? `لسه فاضل ${un} سؤال من غير إجابة. تنهي الامتحان؟` : 'تنهي الامتحان؟';
+  if(confirm(msg)) finish();
+}
+
+function finish(){
+  clearInterval(iv);
+  const n = Q.length; let ok=[], bad=[];
+  Q.forEach((q,i)=>{ (sel[i]===q.a ? ok : bad).push(i) });
+  const pct = n ? Math.round(ok.length/n*100) : 0;
+  const card = (i,good)=>{
+    const q=Q[i];
+    return `<div class="it ${good?'':'bad'}"><div class="q">${i+1}. ${q.t}</div>
+    ${good ? `<div class="r"><span class="tag g">Correct</span>${q.o[q.a]}</div>` :
+    `<div class="r"><span class="tag y">Your answer</span>${sel[i]===null?'— لم تتم الإجابة —':q.o[sel[i]]}</div>
+     <div class="r"><span class="tag g">Correct</span>${q.o[q.a]}</div>`}
+    ${q.exp?`<div class="exp">💬 ${q.exp}</div>`:''}</div>`;
+  };
+  const unans = Q.filter((_,i)=>sel[i]===null).length;
+  $('exam').classList.add('hide');
+  const r = $('result'); r.classList.remove('hide');
+  r.innerHTML = `<div class="res">
+   <div class="score"><div class="n">${pct}%</div><div>${ok.length} / ${n}</div></div>
+   <div class="stats">
+    <div><b style="color:var(--ok)">${ok.length}</b>صح</div>
+    <div><b style="color:var(--no)">${bad.length - unans}</b>غلط</div>
+    <div><b style="color:#777">${unans}</b>من غير إجابة</div>
+    <div><b>${n}</b>الإجمالي</div>
+   </div>
+   <div class="acts">
+    ${bad.length?'<button class="b" onclick="retryWrong()">إعادة الأسئلة الغلط ('+bad.length+')</button>':''}
+    <button class="b" onclick="init(QUESTIONS)">امتحان جديد عشوائي</button>
+   </div>
+   <div class="sec">✔ الأسئلة اللي اتحلت صح (${ok.length})</div>
+   ${ok.map(i=>card(i,true)).join('') || '<div style="padding:8px;color:#777">لا يوجد</div>'}
+   <div class="sec bad">✖ الأسئلة الغلط (${bad.length})</div>
+   ${bad.map(i=>card(i,false)).join('') || '<div style="padding:8px;color:#777">ممتاز، مفيش أخطاء 🎉</div>'}
+  </div>`;
+  window.scrollTo(0,0);
+}
+
+function retryWrong(){
+  const pool = Q.filter((q,i)=>sel[i]!==q.a);
+  init(pool);
+}
+
+init(QUESTIONS);
+</script>
+</body>
+</html>
