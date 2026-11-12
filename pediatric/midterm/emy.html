@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--teal:#0891b2;--teal-d:#0e5a73;--blue:#dce8f3;--bd:#c2d4e6;--ok:#059669;--no:#e11d48;--rev:#6366f1;--txt:#0a1a33;--grad:linear-gradient(135deg,#071226 0%,#0c2a4d 55%,#0e5a73 100%)}
+body{font-family:'IBM Plex Sans Arabic','Space Grotesk',Arial,sans-serif;background:#eaf1f8;color:var(--txt);font-size:14px}
+header{background:var(--grad);color:#fff;text-align:center;padding:12px;font-size:18px;font-weight:700;position:relative;border-bottom:2px solid #22d3ee}
+header .brand{position:absolute;right:16px;top:8px;font-weight:bold;font-size:14px}
+header a{position:absolute;left:16px;top:11px;color:#fff;font-size:13px;text-decoration:none}
+.wrap{max-width:1280px;margin:0 auto;padding:8px 10px 20px}
+.topinfo{background:var(--blue);border:1px solid var(--bd);padding:4px 8px;font-size:13px;margin-bottom:8px}
+.topinfo b{color:var(--teal)}
+.layout{display:grid;grid-template-columns:1fr 240px;gap:14px;align-items:start}
+.main{background:#fff;border:1px solid var(--bd);min-height:470px;display:flex;flex-direction:column;
+ background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='70'><text x='8' y='45' transform='rotate(-20 75 35)' font-size='14' font-family='Arial' fill='%23000' fill-opacity='.07'>GHAITH TEAM</text></svg>")}
+.qhead{display:flex;justify-content:space-between;align-items:center;padding:12px 6px 6px;margin:0 6px;border-bottom:1px solid var(--bd)}
+.qhead b{font-size:13px}
+.fs button{background:#6366f1;color:#fff;border:0;padding:6px 12px;margin-left:3px;border-radius:2px;cursor:pointer;font-weight:bold}
+.qbody{padding:8px 12px;flex:1}
+.qtext{font-size:13px;line-height:1.7;margin-bottom:18px;direction:ltr;text-align:left}
+.opt{display:flex;align-items:center;gap:8px;margin:0 0 16px;cursor:pointer;direction:ltr;text-align:left;font-size:13px}
+.opt input{accent-color:var(--teal);cursor:pointer}
+.bar{display:flex;justify-content:space-between;padding:10px;gap:6px;flex-wrap:wrap;border-top:1px solid var(--bd);margin:0 6px 6px}
+.b{background:linear-gradient(135deg,#0891b2,#6366f1);color:#fff;border:0;padding:9px 12px;font-weight:bold;font-size:13px;border-radius:2px;cursor:pointer}
+.b:hover{filter:brightness(1.12)}
+.b.gray{background:#071226}
+.side>div{background:var(--blue);border:1px solid var(--bd);margin-bottom:10px;padding:8px}
+.timer{text-align:center;background:none!important;border:0!important}
+.timer small{font-size:13px}
+.timer .t{font-size:30px;color:#0891b2;margin-top:4px}
+.timer .t.warn{color:#c27b0a}.timer .t.danger{color:#c8372d}
+.leg{display:grid;grid-template-columns:1fr 1fr;gap:8px 6px;font-size:10px;margin-top:8px}
+.leg div{display:flex;align-items:center;gap:6px}
+.sq{min-width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:bold;border-radius:2px;border:1px solid transparent}
+.s-ans{background:var(--ok)}.s-no{background:#f59e0b}.s-rev{background:var(--rev)}.s-nv{background:#fff;color:#333;border-color:#9bb0a2}
+.nav{display:flex;flex-wrap:wrap;gap:6px;max-height:260px;overflow:auto;background:#dce8f3}
+.nav .sq{width:24px;height:24px;cursor:pointer;font-size:12px}
+.nav .cur{outline:2px solid #071226;outline-offset:0}
+.endrow{text-align:center}
+.endrow .b{width:90px}
+footer{text-align:center;padding:16px;font-size:12px;color:#a9bdd6;background:#071226;border-top:2px solid #0891b2;margin-top:10px}
+footer a{color:#38bdf8!important}
+footer a{color:#229ED9;text-decoration:none}
+/* results */
+.res{background:#fff;border:1px solid var(--bd);padding:20px;max-width:900px;margin:10px auto}
+.score{text-align:center;padding:10px 0 18px}
+.score .n{font-size:48px;font-weight:900;color:var(--teal)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}
+.stats div{background:var(--blue);padding:10px;text-align:center;border-radius:4px}
+.stats b{display:block;font-size:20px}
+.sec{background:var(--ok);color:#fff;padding:8px 12px;font-weight:bold;margin:22px 0 10px}
+.sec.bad{background:var(--no)}
+.it{border:1px solid var(--bd);border-left:4px solid var(--ok);padding:12px;margin-bottom:8px;background:#fafcff;direction:ltr;text-align:left}
+.it.bad{border-left-color:var(--no)}
+.it .q{font-weight:bold;font-size:13px;margin-bottom:6px;line-height:1.6}
+.it .r{font-size:12px;margin-top:4px}
+.tag{padding:1px 7px;border-radius:3px;color:#fff;font-size:11px;font-weight:bold;margin-right:6px}
+.tag.y{background:var(--no)}.tag.g{background:var(--ok)}
+.exp{font-size:12px;color:#555;margin-top:6px;background:#eef6f4;padding:6px 8px;border-radius:3px}
+.acts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.hide{display:none}
+@media(max-width:820px){.layout{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}header a{display:none}}
+.qtext img{display:block;max-width:100%;max-height:260px;margin:0 auto 12px;border-radius:8px;background:#fff}
+.it .q img{max-height:90px;display:block;margin:6px 0;border-radius:6px}
+</style>
+</head>
+<body>
+<header><a href="https://gaith-team.github.io/exam/">← رجوع</a>آمونة<span class="brand">GHAITH TEAM</span></header>
+<div class="wrap">
+ <div id="exam">
+  <div class="topinfo">Total questions in exam: <b id="tot">0</b> | Answered: <b id="ans">0</b></div>
+  <div class="layout">
+   <div class="main">
+    <div class="qhead"><b id="qno"></b><div class="fs"><button onclick="fs(-1)">A-</button><button onclick="fs(0)">A</button><button onclick="fs(1)">A+</button></div></div>
+    <div class="qbody" id="qbody"></div>
+    <div class="bar">
+     <button class="b" onclick="saveNext()">Save &amp; Next</button>
+     <div style="display:flex;gap:4px;flex-wrap:wrap">
+      <button class="b" onclick="mark()">Mark for Review</button>
+      <button class="b" onclick="skip()">Skip</button>
+      <button class="b" onclick="prev()">Previous</button>
+     </div>
+    </div>
+   </div>
+   <div class="side">
+    <div class="timer"><small>Time Remaining</small><div class="t" id="tm">40:00</div></div>
+    <div>
+     <div>Number of questions : <b id="tot2">0</b></div>
+     <div class="leg">
+      <div><span class="sq s-ans" id="cAns">0</span>Answered</div>
+      <div><span class="sq s-no" id="cNo">0</span>Not Answered</div>
+      <div><span class="sq s-rev" id="cRev">0</span>For Review</div>
+      <div><span class="sq s-nv" id="cNv">0</span>Not Visited</div>
+     </div>
+    </div>
+    <div class="nav" id="nav"></div>
+    <div class="endrow"><button class="b gray" onclick="endTest()">End Test</button></div>
+   </div>
+  </div>
+ </div>
+ <div id="result" class="hide"></div>
+</div>
+<footer>GHAITH TEAM · <a href="https://t.me/nursing2bu" target="_blank">@nursing2bu</a></footer>
+
+<script>
+const QUESTIONS = [
+{t:"1. A nurse is explaining to a new mother how her baby might have contracted an infection. Which of the following is a mode of ANTENATAL infection?",o:["Cord sepsis from improper asepsis","Cross-infection from another baby","Transplacental transmission","Contamination while passing through the vagina"],a:2},
+{t:"2. A newborn is diagnosed with Ophthalmia Neonatorum. The nurse knows that the most common cause is microorganisms acquired during birth from the mother's infected:",o:["Bloodstream","Breast milk","Vagina","Hands"],a:2},
+{t:"3. A nursing student is asked about the primary clinical sign of Oral Thrush (Moniliasis) in an infant. What is the correct response?",o:["High fever and rash","Creamy white patches on the tongue and mouth","Swelling of the hands and feet","Continuous crying and irritability"],a:1},
+{t:"4. A nurse is providing care for an infant with Oral Thrush. Which nursing action is essential after every feeding?",o:["Administering antibiotics","Performing mouth care","Checking the infant's temperature","Applying a shield over the infant's eyes"],a:1},
+{t:"5. A pregnant woman asks how to prevent TORCH infections. The nurse correctly advises her that the risk of serious problems like heart disease and deafness is greatest if the mother gets infected during the:",o:["First trimester","Second trimester","Third trimester","During delivery"],a:0},
+{t:"6. A newborn is showing signs of an umbilical infection. Which of the following is a key clinical picture the nurse should look for?",o:["Jaundice","Redness and moisture of the cord stump","A weak cry","White patches in the mouth"],a:1},
+{t:"7. A nurse is teaching parents about preventing infections. What is the most crucial and basic technique to prevent the spread of infection to a neonate?",o:["Giving the baby a daily bath","Meticulous hand washing","Keeping the room warm","Using baby powder"],a:1},
+{t:"8. A newborn has been diagnosed with Impetigo. The nurse explains to the parents that this is an infection of the:",o:["Lungs","Superficial layer of the skin","Brain and spinal cord","Eyes"],a:1},
+{t:"9. A newborn is diagnosed with Neonatal Meningitis. The nurse understands this is an inflammation of the:",o:["Liver","Lungs","Meninges covering the brain and spinal cord","Heart muscles"],a:2},
+{t:"10. A nurse is caring for an infant with an infection. To prevent spread to other infants in the nursery, what is the first and most important action?",o:["Isolate the infant","Notify the hospital administration","Give all babies antibiotics","Open the windows for ventilation"],a:0},
+{t:"11. A newborn develops a watery discharge from the eyes two days after birth. The nurse recognizes this as a potential sign of:",o:["Oral Thrush","Tetanus Neonatorum","Ophthalmia Neonatorum","Impetigo"],a:2},
+{t:"12. A mother is concerned about her baby having white spots in his mouth. She tries to wipe them off, and the area bleeds slightly. This is a classic sign of:",o:["Neonatal Sepsis","Oral Moniliasis","Umbilical Infection","Jaundice"],a:1},
+{t:"13. A nurse is preparing a care plan for a newborn with Tetanus Neonatorum. Which of the following is a primary symptom of this condition?",o:["Low body temperature","Inability to suck or move the mouth","A distinctive, blotchy rash","Clear fluid from the umbilical cord"],a:1},
+{t:"14. During a health check, a nurse notes that a newborn has a small body size (IUGR), an unusual rash, and hepatosplenomegaly. These signs should raise suspicion for:",o:["A simple skin infection","A TORCH infection","Dehydration","A feeding problem"],a:1},
+{t:"15. A nurse is administering eye drops for Ophthalmia Neonatorum. What is a critical step to ensure the medication is effective?",o:["Restrain the infant's arms to prevent interference","Apply the drops to the outside of the eyelid","Wash the infant's face immediately after","Keep the infant in a dark room"],a:0},
+{t:"16. A newborn delivered via a mother with a known history of untreated gonorrhea presents with profuse purulent eye discharge. The nurse suspects Ophthalmia Neonatorum. What is the preferred drug for treatment?",o:["Mycostatin","Dektarin oral gel","Penicillin","Tetanus antitoxin"],a:2},
+{t:"17. A baby receiving antibiotic therapy for a separate infection develops white plaques in its mouth. The nurse identifies this as a likely case of Oral Thrush. What is the causative microorganism?",o:["Neisseria Gonorrhea","Staphylococcus","Candida Albicans","Clostridium tetani"],a:2},
+{t:"18. A nurse is assessing a newborn with suspected Tetanus Neonatorum. The infant is irritable, has muscle stiffness, and difficulty swallowing. Which finding would further support this diagnosis?",o:["A low white blood cell count","Decreased CSF pressure","A temperature of 40°C and WBC of 10,000","A clean, dry umbilical cord"],a:2},
+{t:"19. A newborn is diagnosed with Neonatal Meningitis. The parents ask what signs to look for. The nurse should mention CNS signs such as:",o:["A strong, consistent cry","A flat, soft fontanel","Lethargy and a bulging fontanel","Rapid weight gain"],a:2},
+{t:"20. A nurse is caring for an infant with a confirmed skin infection. To anticipate a serious complication, the nurse should closely observe for signs of:",o:["Oral Thrush","Generalized sepsis","Hearing impairment","Jaundice"],a:1},
+{t:"21. A newborn is diagnosed with an umbilical infection caused by E. coli. The treatment plan includes a broad-spectrum antibiotic. What is a critical nursing action before starting the antibiotic?",o:["Obtain a culture and sensitivity swab","Bathe the infant thoroughly","Administer a sedative","Feed the infant a full bottle"],a:0},
+{t:"22. A nurse is providing care for an infant with Tetanus Neonatorum experiencing muscle spasms. Which intervention is a priority?",o:["Encouraging frequent oral feeding","Keeping the room brightly lit","Having suction equipment and a tracheostomy set ready","Placing the infant in a room with other newborns for observation"],a:2},
+{t:"23. A newborn is suspected of having a TORCH infection. The diagnosis is typically confirmed through which of the following?",o:["Observing the infant's feeding pattern only","A physical examination and blood tests from the infant and mother","A report from the mother about her diet","Checking the infant's weight daily"],a:1},
+{t:"24. A nurse is caring for an infant with Ophthalmia Neonatorum affecting only the right eye. What is the appropriate preventive measure for the left eye?",o:["Administering penicillin to both eyes","Placing a protective shield over the left eye","Continuously irrigating both eyes with saline","No action is needed as it won't spread"],a:1},
+{t:"25. An infant has developed Impetigo with pustules that have ruptured, forming crusts. The nurse knows that this condition is typically caused by which microorganisms?",o:["Candida albicans or fungus","Staphylococci or streptococci","Neisseria gonorrhea or Chlamydia","Toxoplasma gondii or Rubella virus"],a:1},
+{t:"26. A nurse is developing a care plan for a newborn with Neonatal Sepsis. Under the goal 'Anticipate possible complications,' which sign points specifically to developing meningitis?",o:["Poor feeding","Temperature instability","A bulging and pulsating anterior fontanel","Respiratory distress"],a:2},
+{t:"27. A pregnant nurse is assigned to a neonatal unit. Which patient should she be cautioned to avoid contact with to prevent teratogenic disorders?",o:["An infant with a fractured clavicle","An infant with jaundice under phototherapy","An infant with a confirmed TORCH infection","An infant with feeding difficulties"],a:2},
+{t:"28. A newborn has a foul odor coming from the umbilical stump. This is a characteristic sign of a severe:",o:["Umbilical infection","Oral thrush complication","TORCH syndrome","Neonatal meningitis"],a:0},
+{t:"29. A mother who is a known carrier of Chlamydia gives birth. To prevent Ophthalmia Neonatorum, what prophylactic measure should be performed immediately after birth?",o:["Administering oral penicillin","Cleaning the infant's eyes with Chloramphenicol eye drops","Bathing the infant in antibacterial soap","Isolating the infant from the mother"],a:1},
+{t:"30. A newborn is irritable, has a high-pitched cry, and is experiencing periodic convulsions. The facial expression appears anxious and drawn. These clinical pictures are most indicative of:",o:["Impetigo","Oral Moniliasis","Tetanus Neonatorum","Ophthalmia Neonatorum"],a:2},
+{t:"31. A nurse is reviewing the modes of infection. An infant born after an early rupture of membranes is at higher risk for which type of infection?",o:["Antenatal","Postnatal","Intranatal","Nosocomial"],a:2},
+{t:"32. A newborn is diagnosed with Oral Thrush. The infection is severe and has spread. The nurse should monitor for which potential complication?",o:["Corneal ulceration","Sepsis","Esophagitis or Pneumonia","Hearing impairment"],a:2},
+{t:"33. The prognosis for a newborn with Tetanus Neonatorum is described as 'very poor,' with a mortality rate up to 50%. What is the primary cause of death in these cases?",o:["Respiratory failure","Kidney failure","Heart disease","Severe jaundice"],a:0},
+{t:"34. A nurse is educating a pregnant woman on preventing toxoplasmosis. Which instruction is most important?",o:["Get immunized against chickenpox","Avoid all contact with cat feces","Take penicillin during the first trimester","Eat a low-carbohydrate diet"],a:1},
+{t:"35. A newborn in the NICU is diagnosed with meningitis. Mortality rates are significantly higher in developing countries (40-58%) compared to developed countries (10%). This disparity is primarily due to differences in:",o:["Genetic predispositions","Access to antibiotics and supportive care","Maternal diet during pregnancy","The virulence of the pathogens"],a:1},
+{t:"36. An infant is being treated for Tetanus Neonatorum. The care plan includes gavage feeding, parental fluids, and an intake/output chart. What is the primary rationale for gavage feeding in this infant?",o:["To prevent dehydration due to high fever","To bypass the risk of aspiration due to tetanic jaw spasms and dysphagia","To administer medication that cannot be given intravenously","To correct the infant's low white blood cell count"],a:1},
+{t:"37. A nurse is caring for a newborn with severe Ophthalmia Neonatorum. If left untreated or managed improperly, what is the most severe complication that can arise from this condition?",o:["Spread of infection to the other eye","Systemic sepsis","Corneal ulceration leading to partial or complete loss of vision","Development of meningitis"],a:2},
+{t:"38. A premature infant in the NICU develops signs of sepsis. Blood cultures are pending, but the physician starts broad-spectrum antibiotics. The infant later develops white patches in the mouth. The nurse correctly interprets this as:",o:["A sign of a new, unrelated postnatal infection","A common side effect of the antibiotics, leading to opportunistic Oral Thrush","A clinical manifestation of the primary septic infection","An allergic reaction to the antibiotic formula"],a:1},
+{t:"39. A nurse is managing an infant with an umbilical infection that has progressed to septicemia. The infant suddenly becomes hypotensive and shows signs of poor perfusion. This indicates the onset of shock. What is the immediate priority nursing action under 'Goal 4: Anticipate possible complications'?",o:["Continue frequent cord care with alcohol","Administer prescribed sedatives for comfort","Notify the physician and prepare for hemodynamic support","Isolate the infant to prevent spread"],a:2},
+{t:"40. A nurse is providing discharge teaching to the parents of an infant who recovered from a congenital viral infection. Why is close medical follow-up crucial for this infant?",o:["To ensure the parents are washing their hands correctly","To watch for developmental effects of the disease that may appear as the infant grows","To administer a second course of antibiotics as a precaution","To monitor for reinfection from family members"],a:1},
+{t:"41. An infant with Tetanus Neonatorum is having a painful muscular contraction. The nurse has administered the prescribed tetanus antitoxin and sedative. What is the next most critical nursing intervention to manage the infant's respiratory status?",o:["Performing gavage feeding","Aspirating secretions from the nasopharynx","Checking the infant's temperature","Charting the intake and output"],a:1},
+{t:"42. A mother asks why her baby developed Oral Thrush despite being born in a sterile hospital environment and being exclusively breastfed. The nurse's best explanation is that:",o:["The hospital's sterilization of feeding equipment must have been improper.","The baby may have acquired it during passage through the birth canal, as Candida can be a normal organism that overgrew.","It is a genetic condition passed down from the father's side.","It is a sign that the mother's breast milk is infected."],a:1},
+{t:"43. A newborn is diagnosed with sepsis. The nurse is monitoring for signs of meningitis. Which of the following non-specific signs of illness, when combined, should maintain the highest level of suspicion?",o:["Clear eye discharge and a stable temperature","Vague signs like poor feeding, temperature instability, and irritability","A dry umbilical cord and active sucking reflex","A single episode of spitting up after a feed"],a:1},
+{t:"44. A newborn is being treated for Impetigo. The physician has ordered Bactroban (mupirocin) ointment. The mother asks if this is enough. The nurse explains that in some cases, if the infection is severe or widespread, what additional treatment may be necessary?",o:["Systemic antibiotics","Intravenous fluids","Gavage feeding","Oxygen therapy"],a:0},
+{t:"45. A pregnant woman is immunized for rubella and chickenpox before becoming pregnant. This action is a primary prevention strategy aimed at stopping which mode of infection transmission?",o:["Postnatal cross-infection","Intranatal contamination","Antenatal (transplacental)","Cord sepsis"],a:2}
+];
+
+const TOTAL_TIME = 40*60;
+let Q, cur, sel, saved, review, visited, left, iv, size = 13;
+
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function shuffleOptions(q){const ix=shuffle(q.o.map((_,k)=>k));return {...q,o:ix.map(k=>q.o[k]),a:ix.indexOf(q.a)}}
+const $ = id => document.getElementById(id);
+
+function init(pool){
+  Q = shuffle([...pool]).map(shuffleOptions); const n = Q.length;
+  cur = 0; sel = Array(n).fill(null); saved = Array(n).fill(false);
+  review = Array(n).fill(false); visited = Array(n).fill(false);
+  left = TOTAL_TIME;
+  $('exam').classList.remove('hide'); $('result').classList.add('hide');
+  $('tot').textContent = $('tot2').textContent = n;
+  clearInterval(iv);
+  iv = setInterval(()=>{
+    left--; const m=Math.floor(left/60), s=left%60, t=$('tm');
+    t.textContent = m+':'+(s<10?'0':'')+s;
+    t.className = 't'+(left<=120?' danger':left<=300?' warn':'');
+    if(left<=0){clearInterval(iv);finish()}
+  },1000);
+  if(n) render();
+  window.scrollTo(0,0);
+}
+
+function render(){
+  visited[cur] = true;
+  const q = Q[cur];
+  $('qno').textContent = 'Question No. ' + (cur+1);
+  $('qbody').style.fontSize = size+'px';
+  $('qbody').innerHTML = `<div class="qtext" style="font-size:${size}px">${q.t}</div>` +
+    q.o.map((o,i)=>`<label class="opt" style="font-size:${size}px"><input type="radio" name="o" value="${i}" ${sel[cur]===i?'checked':''} onchange="sel[cur]=${i}"> <span>${o}</span></label>`).join('');
+  refresh();
+}
+
+function status(i){
+  if(review[i]) return 's-rev';
+  if(saved[i]) return 's-ans';
+  if(visited[i]) return 's-no';
+  return 's-nv';
+}
+function refresh(){
+  const n = Q.length; let a=0,no=0,r=0,nv=0;
+  $('nav').innerHTML = Q.map((_,i)=>{
+    const s = status(i);
+    if(saved[i]) a++;
+    if(s==='s-rev') r++; else if(s==='s-no') no++; else if(s==='s-nv') nv++;
+    return `<span class="sq ${s} ${i===cur?'cur':''}" onclick="go(${i})">${i+1}</span>`;
+  }).join('');
+  $('ans').textContent = a; $('cAns').textContent = a; $('cNo').textContent = no;
+  $('cRev').textContent = r; $('cNv').textContent = nv;
+}
+
+function go(i){cur=i;render()}
+function nextQ(){ if(cur<Q.length-1){cur++;render();return} const k=Q.findIndex((_,x)=>!saved[x]); if(k>=0){cur=k;render()} else {refresh();alert('كل الأسئلة اتحلت، دوس End Test لإنهاء الامتحان')} }
+function saveNext(){ saved[cur]=sel[cur]!==null; nextQ(); }
+function skip(){ nextQ(); }
+function mark(){ review[cur]=!review[cur]; if(sel[cur]!==null) saved[cur]=true; refresh(); }
+function prev(){ if(cur>0){cur--;render()} }
+function fs(d){ size = d===0 ? 13 : Math.max(11,Math.min(24,size+d*2)); render(); }
+
+function endTest(){
+  const un = Q.filter((_,i)=>sel[i]===null).length;
+  const msg = un ? `لسه فاضل ${un} سؤال من غير إجابة. تنهي الامتحان؟` : 'تنهي الامتحان؟';
+  if(confirm(msg)) finish();
+}
+
+function finish(){
+  clearInterval(iv);
+  const n = Q.length; let ok=[], bad=[];
+  Q.forEach((q,i)=>{ (sel[i]===q.a ? ok : bad).push(i) });
+  const pct = n ? Math.round(ok.length/n*100) : 0;
+  const card = (i,good)=>{
+    const q=Q[i];
+    return `<div class="it ${good?'':'bad'}"><div class="q">${i+1}. ${q.t}</div>
+    ${good ? `<div class="r"><span class="tag g">Correct</span>${q.o[q.a]}</div>` :
+    `<div class="r"><span class="tag y">Your answer</span>${sel[i]===null?'— لم تتم الإجابة —':q.o[sel[i]]}</div>
+     <div class="r"><span class="tag g">Correct</span>${q.o[q.a]}</div>`}
+    ${q.exp?`<div class="exp">💬 ${q.exp}</div>`:''}</div>`;
+  };
+  const unans = Q.filter((_,i)=>sel[i]===null).length;
+  $('exam').classList.add('hide');
+  const r = $('result'); r.classList.remove('hide');
+  r.innerHTML = `<div class="res">
+   <div class="score"><div class="n">${pct}%</div><div>${ok.length} / ${n}</div></div>
+   <div class="stats">
+    <div><b style="color:var(--ok)">${ok.length}</b>صح</div>
+    <div><b style="color:var(--no)">${bad.length - unans}</b>غلط</div>
+    <div><b style="color:#777">${unans}</b>من غير إجابة</div>
+    <div><b>${n}</b>الإجمالي</div>
+   </div>
+   <div class="acts">
+    ${bad.length?'<button class="b" onclick="retryWrong()">إعادة الأسئلة الغلط ('+bad.length+')</button>':''}
+    <button class="b" onclick="init(QUESTIONS)">امتحان جديد عشوائي</button>
+   </div>
+   <div class="sec">✔ الأسئلة اللي اتحلت صح (${ok.length})</div>
+   ${ok.map(i=>card(i,true)).join('') || '<div style="padding:8px;color:#777">لا يوجد</div>'}
+   <div class="sec bad">✖ الأسئلة الغلط (${bad.length})</div>
+   ${bad.map(i=>card(i,false)).join('') || '<div style="padding:8px;color:#777">ممتاز، مفيش أخطاء 🎉</div>'}
+  </div>`;
+  window.scrollTo(0,0);
+}
+
+function retryWrong(){
+  const pool = Q.filter((q,i)=>sel[i]!==q.a);
+  init(pool);
+}
+
+init(QUESTIONS);
+</script>
+</body>
+</html>
