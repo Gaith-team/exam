@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>GHAITH TEAM</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;700;900&family=Cairo:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ac:#0891b2;--c2:#6d28d9;--bg:#f4fafb;--bg2:#e6f2f5;--card:#fff;--tx:#0f2a30;--tx2:#3f5d65;--bc:rgba(15,60,75,.12);--ex:#fff7ed;--exb:#ea580c;--grad:linear-gradient(135deg,#155e75,#0891b2 45%,#6d28d9)}
+[data-theme=dark]{--bg:#071418;--bg2:#0d1f25;--card:#112a31;--tx:#e6f6f9;--tx2:#b5d3da;--bc:rgba(255,255,255,.1);--ex:#2a1e14;--ac:#22d3ee}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:70px}
+body{font-family:'Cairo','Outfit',sans-serif;background:var(--bg);color:var(--tx);line-height:1.8}
+#bar{position:fixed;top:0;left:0;height:3px;width:0;background:var(--grad);z-index:50}
+nav{position:sticky;top:0;z-index:40;display:flex;gap:8px;align-items:center;padding:10px 14px;background:var(--bg);border-bottom:1px solid var(--bc)}
+#chips{display:flex;gap:6px;overflow-x:auto;flex:1;scrollbar-width:none}
+#chips a{white-space:nowrap;font:700 12px 'Outfit';color:var(--tx2);text-decoration:none;padding:6px 12px;border:1px solid var(--bc);border-radius:50px;background:var(--card)}
+#chips a:hover{color:var(--c2);border-color:var(--c2)}
+#th{width:36px;height:36px;border-radius:50%;border:1px solid var(--bc);background:var(--card);cursor:pointer;font-size:15px}
+header{background:var(--grad);color:#fff;text-align:center;padding:38px 20px 46px;border-radius:0 0 30px 30px}
+header h1{font:900 clamp(24px,5vw,34px) 'Outfit'}
+header p{font:500 14px 'Outfit';opacity:.9;margin-top:4px}
+main{max-width:680px;margin:0 auto;padding:22px 16px 70px}
+h2{font:900 19px 'Outfit';margin:34px 0 14px;padding:8px 16px;border-left:5px solid var(--ac);background:var(--bg2);border-radius:0 14px 14px 0;direction:ltr}
+.card{background:var(--card);border:1px solid var(--bc);border-radius:18px;overflow:hidden;margin-bottom:14px}
+.en{direction:ltr;text-align:left;font:600 15.5px/1.7 'Outfit';padding:14px 18px;background:rgba(8,145,178,.08);border-bottom:1px solid var(--bc)}
+.ar{direction:rtl;text-align:right;padding:12px 18px;font-size:15.5px;font-weight:600}
+.ex{direction:rtl;text-align:right;margin:0 14px 14px;padding:10px 14px;background:var(--ex);border-right:4px solid var(--exb);border-radius:12px;font-size:14.5px;color:var(--tx2)}
+.ex b{color:var(--exb)}
+.sub{direction:ltr;font:700 13px 'Outfit';color:var(--c2);margin:18px 4px 8px}
+footer{text-align:center;padding:20px;font:700 13px 'Outfit';color:var(--tx2);background:var(--bg2)}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div id="bar"></div>
+<nav><div id="chips"></div><button id="th" aria-label="theme">🌙</button></nav>
+<header><h1>Telehealth</h1><p>Communication Skills</p></header>
+<main id="app"></main>
+<footer>GHAITH TEAM · @nursing2bu</footer>
+<script>
+const D=[
+{t:"Introduction",i:[
+["Using technology to provide healthcare remotely is seen as a major strategy to address the continuous increase in the demand for care.","استخدام التكنولوجيا عشان نقدم رعاية صحية عن بُعد بيتعتبر استراتيجية رئيسية لمواجهة الزيادة المستمرة في الطلب على الرعاية.","المستشفيات زحمة والمرضى بيزيدوا، فبدل ما كله ييجي المستشفى، التكنولوجيا بتوصّل الرعاية للمريض في بيته."],
+["Due to the increasingly available communication technology, telehealth is attracting growing interest.","بسبب إن تكنولوجيا الاتصالات بقت متاحة أكتر وأكتر، الاهتمام بالـ telehealth بيزيد.","النت والموبايل بقوا في إيد الكل، فالناس بدأت تهتم تتعالج بيهم."],
+["Nurses can use telehealth technologies in the care of community-dwelling patients, for example by:","الممرضين يقدروا يستخدموا تكنولوجيا الـ telehealth في رعاية المرضى اللي عايشين في المجتمع (في بيوتهم)، زي:","المريض قاعد في بيته مش في المستشفى، والممرضة بتتابعه من بعيد بالطرق اللي جاية دي."],
+["(a) replacing face-to-face visits with e-visits via the use of videoconferencing,","(أ) استبدال الزيارات وش لوش بزيارات إلكترونية عن طريق مكالمة فيديو.","بدل ما الممرضة تروح للمريض، بتكلمه فيديو كول وتشوفه وتسأله."],
+["(b) monitoring vital signs such as blood pressure, blood glucose levels or heart rate via devices for self-measurement,","(ب) متابعة العلامات الحيوية زي الضغط وسكر الدم ومعدل ضربات القلب بأجهزة المريض بيقيس بيها لنفسه.","المريض بيقيس ضغطه وسكره بجهاز في البيت، والنتيجة توصل للممرضة."],
+["(c) monitoring movements in and around the home via activity monitors,","(ج) متابعة حركة المريض جوه البيت وحواليه بأجهزة مراقبة النشاط.","جهاز بيسجل المريض بيتحرك قد إيه، ولو اتحرك أقل من العادي الممرضة تلاحظ."],
+["(d) responding to personal alarms by patients to let nurses or family members know when something goes wrong.","(د) الرد على أجهزة الإنذار الشخصية اللي المريض بيضغط عليها عشان يبلّغ الممرضين أو أهله إن في حاجة غلط حصلت.","مريض وقع في البيت وضغط زرار الإنذار، فالممرضة أو أهله يعرفوا فوراً."],
+["Nurses can also use technologies for teleconsultation, for example to provide wound assessment at a distance.","الممرضين كمان يقدروا يستخدموا التكنولوجيا في الاستشارة عن بُعد (teleconsultation)، زي تقييم الجرح من بعيد.","المريض يصوّر جرحه بالموبايل ويبعته، والممرضة تقيّم حالته من غير ما يجي."],
+["However, these telehealth solutions are only effective if users (patients and nurses) know how to use technology adequately.","بس الحلول دي مبتنفعش غير لو المستخدمين (المرضى والممرضين) عارفين يستخدموا التكنولوجيا صح.","لو المريض معرفش يشغّل جهاز قياس الضغط صح، النتيجة هتبقى غلط والمتابعة تبقى ملهاش لازمة."]]},
+{t:"Definition of telehealth",i:[
+["It is the use of digital information and communication technologies, such as computers and mobile devices, to access health care services remotely and manage your healthcare.","هو استخدام التكنولوجيا الرقمية ووسائل الاتصال، زي الكمبيوتر والموبايل، عشان توصل لخدمات الرعاية الصحية عن بُعد وتدير صحتك.","تحجز كشف وتتابع صحتك من موبايلك وانت في البيت."],
+["These may be technologies you use from home or that your doctor uses to improve or support health care services.","التكنولوجيا دي ممكن تستخدمها انت من البيت، أو الدكتور هو اللي يستخدمها عشان يحسّن أو يدعم الخدمات الصحية.","انت بتبعت قياس السكر من البيت، والدكتور عنده برنامج بيستقبل القياسات."],
+["Telehealth connects rural providers and their patients to services at a distant site.","الـ telehealth بيوصّل مقدمي الرعاية في الأرياف ومرضاهم بخدمات موجودة في مكان بعيد.","دكتور في قرية صغيرة بيستشير أخصائي في القاهرة من خلال النت."],
+["This capability enables patients to receive care in their communities and avoid long travel times.","الإمكانية دي بتخلي المرضى ياخدوا الرعاية في مجتمعهم ويتفادوا السفر الطويل.","مريض في قرية بعيدة يتابع مع الدكتور من بلده بدل ما يسافر ساعات."],
+["Telehealth is different from telemedicine in that it refers to a broader scope of remote health care services than telemedicine.","الـ telehealth مختلف عن الـ telemedicine لأنه أوسع، بيشمل خدمات رعاية صحية عن بُعد أكتر من الـ telemedicine.","telehealth زي الدايرة الكبيرة، والـ telemedicine دايرة أصغر جواها."],
+["(Telemedicine refers specifically to remote clinical services, while telehealth can refer to remote non-clinical services).","(الـ telemedicine معناه تحديداً الخدمات الإكلينيكية عن بُعد، أما الـ telehealth ممكن يشمل كمان خدمات مش إكلينيكية).","telemedicine: دكتور بيكشف ويشخّص عن بُعد. telehealth: ده وكمان حاجات غير إكلينيكية."]]},
+{t:"Tele nursing technology",i:[
+["Tele nursing is the use of telecommunication technology in nursing to enhance patient care.","التمريض عن بُعد (Tele nursing) هو استخدام تكنولوجيا الاتصالات في التمريض عشان نحسّن رعاية المريض.","الممرضة بتستخدم التليفون أو الفيديو عشان تتابع المريض وتطمّن عليه."],
+["It involves the use of electromagnetic channels (e.g., wire, radio, and optical) to transmit voice, data, and video communication signals.","بيشمل استخدام قنوات كهرومغناطيسية (زي الأسلاك والراديو والألياف الضوئية) لنقل إشارات الصوت والبيانات والفيديو.","صوت الممرضة وصورة المريض وبياناته بتتنقل عبر سلك أو موجات راديو أو ألياف ضوئية."]]},
+{t:"Aim of tele-care",i:[
+["To provide multidisciplinary continuing comprehensive care to support aging in place","الهدف: تقديم رعاية مستمرة وشاملة ومتعددة التخصصات عشان ندعم إن كبار السن يفضلوا يعيشوا في مكانهم (بيوتهم).","راجل كبير في السن بيتابعه دكتور وممرضة وأخصائي تغذية وهو قاعد في بيته."],
+["- Community care service.","- خدمة رعاية المجتمع.","الرعاية بتوصل للناس في الحي أو القرية."],
+["- Home care service.","- خدمة الرعاية المنزلية.","الرعاية بتتقدم للمريض في بيته."],
+["- Institution care service.","- خدمة رعاية المؤسسات.","الرعاية داخل مؤسسة زي دار مسنين أو مستشفى."]]},
+{t:"Core Tele-care home services",i:[
+["- Case health management.","- إدارة الحالة الصحية.","متابعة حالة المريض كلها وتنظيم رعايته."],
+["- Tele-physiological monitoring.","- المراقبة الفسيولوجية عن بُعد.","قياس الضغط والسكر والنبض من البيت وإرسالهم."],
+["- Tele-consultation.","- الاستشارة عن بُعد.","مريض يستشير الدكتور أو الممرضة بمكالمة فيديو."],
+["- Tele-health education.","- التثقيف الصحي عن بُعد.","الممرضة تشرح للمريض أكله ودواه بالفيديو."],
+["- Living resources referral.","- التحويل لمصادر المعيشة (توجيه المريض لخدمات ومصادر تساعده في حياته اليومية).","المريض محتاج حد يساعده في احتياجاته، فيتوجّه للجهة المناسبة."],
+["- Emergency management.","- إدارة الطوارئ.","المريض يضغط زرار الاستغاثة والمساعدة تتحرك فوراً."]]},
+{t:"Advantages",i:[
+["1. Increase public access to health care.","1. بتزوّد وصول الناس للرعاية الصحية.","ناس أكتر تقدر تاخد خدمة صحية."],
+["2. Provide access in rural areas.","2. بتوفّر الوصول للرعاية في المناطق الريفية.","قرية مفيهاش مستشفى متخصص تقدر تتواصل مع واحد."],
+["3. Decrease wait-times.","3. بتقلّل وقت الانتظار.","مفيش قعدة ساعات في الاستقبال."],
+["4. Decrease unnecessary hospital visits.","4. بتقلّل زيارات المستشفى اللي ملهاش لازمة.","مريض حالته مستقرة يتابع من البيت."],
+["5. Decrease healthcare costs.","5. بتقلّل تكاليف الرعاية الصحية.","توفير مصاريف المواصلات والإقامة."],
+["6. Increase continuity of care.","6. بتزوّد استمرارية الرعاية.","المتابعة مبتقطعش بين الزيارات."],
+["7. Increase patient compliance with aftercare.","7. بتزوّد التزام المريض بالرعاية بعد الخروج.","الممرضة بتفكّره بالدوا وتتابع إنه ماشي على الخطة."]]},
+{t:"Disadvantages",i:[
+["Decreased face-to-face interaction","قلة التواصل وش لوش.","مفيش حضور مباشر، فصعب تحسّ بحالة المريض زي ما تكون قدامه."],
+["Risk of decreasing quality of care","خطر إن جودة الرعاية تقل.","ممكن تفوتك علامة كنت هتلاحظها لو شفت المريض بنفسك."],
+["May increase liability","ممكن تزوّد المسؤولية القانونية.","لو حصل غلط عن بُعد، المسؤولية تبقى على مقدم الخدمة."],
+["Concerns with security","مخاوف من ناحية الأمان.","البيانات بتتنقل أونلاين فممكن حد يخترقها."],
+["Concerns with maintaining confidentiality.","مخاوف من الحفاظ على السرّية.","معلومات المريض لازم محدش يشوفها غير المسؤولين."]]},
+{t:"Examples of tele monitoring devices",i:[
+["Telemonitoring Device: Patient at home ⇄ E-mail system ⇄ Diabetologists, Dieticians, Nurses, Technical Support","جهاز المراقبة عن بُعد: المريض في البيت ⇄ نظام إيميل ⇄ أخصائيين السكر وأخصائيين التغذية والممرضين والدعم الفني.","المريض بيبعت قياساته بالإيميل، والفريق ده كله بيشوفها وبيرد عليه."],
+["Scale, Actimeter, Tablet, Blood Glucose Monitor","الميزان، جهاز قياس النشاط (Actimeter)، التابلت، جهاز قياس سكر الدم.","الميزان للوزن، والـ Actimeter للحركة، والتابلت لإرسال البيانات، والجهاز للسكر."],
+["Interactive educational software focusing on diet and physical activity","برنامج تعليمي تفاعلي بيركّز على الأكل والنشاط البدني.","برنامج على التابلت بيعلّم المريض يأكل إيه ويتحرك قد إيه."],
+["Summary of data collected (charts highlighting weight, blood glucose, physical activity and diet)","ملخص البيانات المجمّعة (رسومات بيانية بتوضّح الوزن وسكر الدم والنشاط البدني والأكل).","الفريق بيشوف الرسم البياني ويعرف حالة المريض في الأسبوع."]]},
+{t:"Key skills for nurses providing telehealth",i:[
+["Key skills that are emerging as important competencies for nurses that provide telehealth include:","المهارات الأساسية اللي ظهرت ككفاءات مهمة للممرضين اللي بيقدموا الـ telehealth هي:","دي الحاجات اللي لازم تكون عندك لو هتشتغل تمريض عن بُعد."],
+["• Coaching skills.","• مهارات التوجيه والتدريب (Coaching).","توجّه المريض خطوة خطوة يتعلم يتابع صحته."],
+["• The ability to combine clinical experience with telehealth.","• القدرة على الجمع بين الخبرة الإكلينيكية والـ telehealth.","تستخدم خبرتك مع المرضى في التقييم، لكن عبر الشاشة."],
+["• Good communication skills.","• مهارات تواصل كويسة.","توضّح كلامك وتسمع المريض كويس حتى من غير ما تقابله."],
+["• Appropriate clinical knowledge.","• معرفة إكلينيكية مناسبة.","تعرف الأعراض والعلاج عشان تقيّم صح."],
+["• Ethical awareness .","• وعي أخلاقي.","تحافظ على سرية بيانات المريض وحقوقه."],
+["• A supportive attitude.","• اتجاه داعم.","تطمّن المريض وتشجعه وتبقى جنبه."]]}
+];
+const app=document.getElementById('app'),chips=document.getElementById('chips');
+D.forEach((s,n)=>{
+ const h=document.createElement('h2');h.id='s'+n;h.textContent=s.t;app.append(h);
+ const a=document.createElement('a');a.href='#s'+n;a.textContent=s.t.split(' ').slice(0,2).join(' ');chips.append(a);
+ s.i.forEach(([e,r,x])=>{
+  const c=document.createElement('div');c.className='card';
+  const d1=document.createElement('div');d1.className='en';d1.textContent=e;
+  const d2=document.createElement('div');d2.className='ar';d2.textContent=r;
+  const d3=document.createElement('div');d3.className='ex';d3.innerHTML='<b>عشان تفهمها :</b> ';d3.append(x);
+  c.append(d1,d2,d3);app.append(c);
+ });
+});
+addEventListener('scroll',()=>{const m=document.documentElement;document.getElementById('bar').style.width=(scrollY/(m.scrollHeight-innerHeight)*100)+'%'});
+const b=document.getElementById('th');let t='light';try{t=localStorage.getItem('theme')||'light'}catch(e){}
+function ap(v){t=v;document.documentElement.setAttribute('data-theme',v);b.textContent=v==='dark'?'☀️':'🌙';try{localStorage.setItem('theme',v)}catch(e){}}
+ap(t);b.onclick=()=>ap(t==='dark'?'light':'dark');
+</script>
+</body>
+</html>
