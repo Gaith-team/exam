@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--accent:#0891b2;--c2:#7c3aed;--c3:#ea580c;--c4:#059669;--grad:linear-gradient(135deg,#155e75 0%,#0891b2 40%,#6d28d9 100%);--bg:#f4fafb;--bg2:#e6f2f5;--card:#fff;--text:#0f2a30;--text2:#3f5d65;--text3:#6f8b93;--bc:rgba(15,60,75,.12);--exbg:rgba(234,88,12,.07);--arbg:rgba(8,145,178,.07)}
+[data-theme="dark"]{--bg:#071418;--bg2:#0d1f25;--card:#112a31;--text:#e6f6f9;--text2:#b5d3da;--text3:#7fa0a8;--bc:rgba(255,255,255,.1);--exbg:rgba(251,146,60,.1);--arbg:rgba(34,211,238,.08);--accent:#22d3ee}
+html{scroll-behavior:smooth;scroll-padding-top:130px}
+body{font-family:'Outfit','Cairo',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s;padding-bottom:env(safe-area-inset-bottom,0)}
+#pb{position:fixed;top:0;left:0;height:3px;width:0;z-index:999;background:linear-gradient(90deg,#0891b2,#7c3aed,#ea580c,#059669)}
+nav{position:sticky;top:0;z-index:100;background:rgba(244,250,251,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--bc)}
+[data-theme="dark"] nav{background:rgba(7,20,24,.95)}
+.bar{display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:58px;padding-top:env(safe-area-inset-top,0)}
+.brand{display:flex;align-items:center;gap:9px;font-weight:900;font-size:15px}
+.logo{width:32px;height:32px;border-radius:50% 50% 50% 8px;background:linear-gradient(135deg,#0891b2,#6d28d9);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px}
+.tb{width:38px;height:38px;border-radius:50%;border:1px solid var(--bc);background:var(--card);cursor:pointer;font-size:15px}
+.back{font-size:13px;font-weight:700;color:var(--text2);text-decoration:none;padding:7px 14px;border-radius:50px;border:1px solid var(--bc);background:var(--card)}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:0 20px 10px;scrollbar-width:none}
+.chips::-webkit-scrollbar{display:none}
+.chip{flex:0 0 auto;font-size:12px;font-weight:700;color:var(--text2);text-decoration:none;padding:6px 14px;border-radius:50px;border:1px solid var(--bc);background:var(--card);white-space:nowrap}
+.chip.on{background:linear-gradient(135deg,#0891b2,#6d28d9);color:#fff;border-color:transparent}
+.hero{background:var(--grad);padding:36px 24px 48px;text-align:center;border-radius:0 0 50% 50%/0 0 28px 28px;color:#fff}
+.hero .ic{width:64px;height:64px;border-radius:50% 50% 50% 14px;background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 12px}
+.hero h1{font-size:clamp(22px,4.5vw,32px);font-weight:900}
+.hero p{font-size:13px;opacity:.9;margin-top:6px}
+.shell{max-width:760px;margin:0 auto;padding:22px 16px 70px}
+.sec{margin-bottom:30px}
+.sh{display:flex;align-items:center;gap:10px;margin:0 0 12px;padding:12px 18px;border-radius:22px 22px 22px 6px;background:var(--grad);color:#fff;font-size:17px;font-weight:900;text-align:left;direction:ltr}
+.sh .n{width:28px;height:28px;border-radius:50%;background:rgba(255,255,255,.22);display:flex;align-items:center;justify-content:center;font-size:13px;flex-shrink:0}
+.sub{font-size:14px;font-weight:900;color:var(--c2);margin:18px 6px 8px;text-align:left;direction:ltr;border-left:4px solid var(--c3);padding-left:10px}
+.item{background:var(--card);border:1px solid var(--bc);border-radius:22px;overflow:hidden;margin-bottom:12px;box-shadow:0 3px 14px rgba(8,145,178,.08)}
+.en{padding:14px 18px;font-size:15.5px;font-weight:700;line-height:1.7;text-align:left;direction:ltr;border-bottom:1px solid var(--bc)}
+.ar{padding:12px 18px;font-family:'Cairo',sans-serif;font-size:15px;line-height:1.95;text-align:right;direction:rtl;background:var(--arbg)}
+.ar b{color:var(--accent)}
+.ex{padding:12px 18px;font-family:'Cairo',sans-serif;font-size:14.5px;line-height:1.95;text-align:right;direction:rtl;background:var(--exbg);border-top:1px dashed var(--bc)}
+.ex .l{display:inline-block;font-weight:700;color:var(--c3);margin-left:6px}
+.ex .q{direction:ltr;unicode-bidi:embed;font-family:'Outfit',sans-serif;font-weight:600}
+footer{background:var(--bg2);border-top:1px solid var(--bc);padding:20px 24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:14px;font-weight:700}
+footer span{color:var(--accent)}footer a{color:#229ED9;font-size:12px;text-decoration:none}
+@media(max-width:480px){.en{font-size:14.5px}.ar{font-size:14.5px}.shell{padding:16px 12px 60px}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+.chip:focus-visible,.tb:focus-visible{outline:3px solid var(--c2);outline-offset:2px}
+</style>
+</head>
+<body>
+<div id="pb"></div>
+<nav>
+  <div class="bar">
+    <a class="back" href="https://gaith-team.github.io/exam/">← رجوع</a>
+    <div class="brand"><div class="logo">GT</div>GHAITH TEAM</div>
+    <button class="tb" id="tb" aria-label="theme">🌙</button>
+  </div>
+  <div class="chips" id="chips"></div>
+</nav>
+<div class="hero">
+  <div class="ic">💬</div>
+  <h1>Therapeutic Communication</h1>
+  <p>Communication Skills</p>
+</div>
+<div class="shell" id="app"></div>
+<footer><div>GHAITH <span>TEAM</span></div><a href="https://t.me/nursing2bu" target="_blank">@nursing2bu</a></footer>
+<script>
+const D=[
+{t:'Definitions',i:[
+["Communication: It is the ongoing process of conveying information, ideas, facts, opinions, thoughts and feelings through various complex verbal and nonverbal behaviors between two or more individuals.",
+ "التواصل هو عملية <b>مستمرة</b> بتنقل بيها معلومات وأفكار وحقايق وآراء ومشاعر. بتحصل بكلام (verbal) وبغير كلام (nonverbal) وبتكون بين <b>شخصين أو أكتر</b>.",
+ "يعني التواصل مش كلام بس؛ نظرة عين أو تعابير وشك كمان تواصل. وطول ما فيه شخصين بيبعتوا ويستقبلوا يبقى فيه communication."],
+["Therapeutic communication: A purposeful, goal-oriented form of communication used by healthcare professionals, particularly nurses, to build a trusting relationship with a patient and promote their physical, mental, and emotional well-being.",
+ "التواصل العلاجي تواصل <b>ليه هدف</b> بتستخدمه الممرضة والفريق الصحي عشان تبني <b>ثقة</b> مع المريض وتحسّن حالته الجسمانية والنفسية والعاطفية.",
+ "ده غير الرغي العادي؛ أنت داخل الأوضة وفي دماغك هدف واضح، والمريض يحس إنك معاه."],
+["It is a deliberate and conscious process that goes beyond casual conversation to help a patient feel heard, understood, and safe.",
+ "عملية <b>مقصودة وواعية</b>، أكبر من الكلام العادي، هدفها إن المريض يحس إن حد سامعه، وفاهمه، وهو في أمان.",
+ "الممرضة مش بتتكلم بالصدفة؛ كل جملة بتقولها عاملة حسابها عشان المريض يطمن."],
+["It is an interpersonal interaction between the nurse and the client during which the nurse focuses on the client's specific needs to promote an effective exchange of information.",
+ "تفاعل بين الممرضة والعميل (المريض) الممرضة فيه بتركز على <b>احتياجات المريض المحددة</b> عشان تبادل المعلومات يبقى فعّال.",
+ "المحور هنا هو المريض واحتياجه هو، مش اللي الممرضة عاوزة تقوله."],
+["Non therapeutic communication: (Overlapping therapeutic communication with social interaction). Develops when nurses respond in ways that cause clients to feel defensive, misunderstood, controlled, or discouraged from expressing thoughts and feelings. Ex: responding socially, giving false reassurance.",
+ "التواصل <b>غير العلاجي</b> (بيحصل لما التواصل العلاجي يتلخبط مع الكلام الاجتماعي). بيحصل لما الممرضة ترد بطريقة تخلي المريض يحس إنه في موقف دفاعي، أو مش مفهوم، أو متحكَّم فيه، أو يتثبّط ومايعبّرش عن أفكاره ومشاعره. زي إنها ترد بشكل اجتماعي أو تدّي <b>طمأنة كاذبة</b>.",
+ "الطمأنة الكاذبة زي ما تقول لمريض خايف «متقلقش مفيش حاجة» وأنت مش متأكد. المريض هيقفل ومايحكيش تاني."],
+["Therapeutic communication is different from social interaction. Social interaction does not have a goal or purpose and includes casual sharing of information, whereas therapeutic communication has a goal or purpose for the conversation.",
+ "التواصل العلاجي مختلف عن التفاعل الاجتماعي. الاجتماعي <b>مالوش هدف</b> وبس تبادل كلام عادي، أما العلاجي فالمحادثة فيه ليها <b>هدف وغرض</b>.",
+ "قعدة القهوة مع صاحبك اجتماعية، لكن سؤالك للمريض عن خوفه من العملية علاجي."],
+["An example of a nursing goal before using therapeutic communication is, \"The client will share feelings or concerns about their treatment plan by the end of the conversation.\"",
+ "مثال على هدف تمريضي قبل ما تستخدم التواصل العلاجي: «المريض هيشارك مشاعره أو مخاوفه بخصوص خطة العلاج <b>بنهاية المحادثة</b>».",
+ "الهدف هنا مكتوب بشكل محدد وليه وقت؛ يعني أنت عارف عاوز توصل لإيه من الكلام ده."]
+]},
+{t:'Goals of therapeutic communication',i:[
+["Establish a therapeutic nurse-client relationship.","تأسيس علاقة علاجية بين الممرضة والمريض.","أول خطوة هي إن المريض يبقى مرتاح ليكي عشان باقي الشغل يمشي."],
+["Identify client's concerns, needs and problems.","التعرف على <b>مخاوف</b> المريض و<b>احتياجاته</b> و<b>مشاكله</b>.","تسمعي منه إيه اللي شاغله وإيه اللي محتاجه بالظبط."],
+["Assess client's perception of the problem.","تقييم المريض شايف مشكلته إزاي (<b>perception</b>).","نفس المرض كل واحد بيفهمه بطريقة؛ لازم تعرفي هو شايفها إزاي."],
+["Guide clients towards a satisfying and socially acceptable solution.","توجيه المريض لحل <b>مُرضي</b> ومقبول اجتماعياً.","مش بنفرض عليه حل، بنوجهه لحل يرضيه ومايتعارضش مع المجتمع."],
+["Teach the client and family necessary self-care skills.","تعليم المريض و<b>أسرته</b> مهارات الرعاية الذاتية اللازمة.","زي ما تعلميه يهتم بنفسه بعد ما يخرج، وأهله يتعلموا معاه."],
+["Facilitate the client expression of emotions.","تسهيل تعبير المريض عن مشاعره.","تفتحي له الباب يفضفض من غير ما يخاف."],
+["Implement interventions designed to address the client's needs.","تنفيذ التدخلات الموضوعة عشان تلبي احتياجات المريض.","بعد ما عرفتي احتياجه، بتنفذي اللي يناسبه."],
+["Guide the client toward identifying a plan of action.","توجيه المريض إنه <b>يحدد خطة عمل</b>.","هو اللي يوصل لخطته بمساعدتك، مش بس تدّيله خطة جاهزة."]
+]},
+{t:'Characteristics of therapeutic communication',i:[
+["It provides changes and growth for the nurse and the patient. Therapeutic communication has several key characteristics that distinguish it from social conversation and make it a powerful tool in healthcare. These characteristics are essential for building trust, promoting patient well-being, and ensuring effective care.",
+ "التواصل العلاجي بيدّي <b>تغيير ونمو</b> للممرضة وللمريض الاتنين. وليه خصائص مهمة بتفرقه عن الكلام الاجتماعي وبتخليه أداة قوية في الرعاية الصحية، وهي أساسية لبناء الثقة وتحسين حال المريض وضمان رعاية فعّالة.",
+ "يعني الاستفادة مش من ناحية المريض بس؛ الممرضة كمان بتتطور من كل تواصل."],
+['#','Patient-Centered'],
+["The primary focus of therapeutic communication is always on the patient's needs, feelings, and experiences. The nurse's role is to facilitate the conversation, not to dominate it. This approach respects the patient's autonomy and empowers them to take an active role in their care.",
+ "التركيز الأساسي دايماً على <b>احتياجات المريض ومشاعره وتجاربه</b>. دور الممرضة إنها <b>تسهّل</b> الحوار مش تسيطر عليه. ده بيحترم استقلالية المريض (autonomy) وبيخليه يشارك بإيجابية في رعايته.",
+ "لو الممرضة بتتكلم أكتر من المريض يبقى فيه غلط؛ هو اللي لازم ياخد المساحة."],
+['#','Goal-Oriented and Purposeful'],
+["Every interaction in therapeutic communication has a specific objective. It is not just casual conversation; it's a deliberate process used to achieve goals like:",
+ "كل تفاعل ليه <b>هدف محدد</b>. مش مجرد كلام عادي، ده عملية مقصودة لتحقيق أهداف زي اللي جاية تحت.",
+ "قبل ما تدخلي للمريض اسألي نفسك: أنا داخلة ليه؟"],
+["Assessing needs: Gathering information about the patient's physical and emotional state.",
+ "<b>تقييم الاحتياجات:</b> جمع معلومات عن حالة المريض الجسمانية والعاطفية.","تسألي عن الألم وعن نفسيته كمان."],
+["Providing support: Helping the patient cope with fear, anxiety, or pain.",
+ "<b>تقديم الدعم:</b> مساعدة المريض يتأقلم مع الخوف أو القلق أو الألم.","تقعدي جنبه وهو خايف من نتيجة التحاليل."],
+["Educating: Ensuring the patient understands their condition and treatment.",
+ "<b>التثقيف:</b> التأكد إن المريض فاهم حالته وعلاجه.","مش تقولي له الدوا وتمشي؛ اتأكدي إنه فاهم ليه بياخده."],
+["Building trust: Creating a safe and accepting environment for the patient.",
+ "<b>بناء الثقة:</b> خلق جو آمن ومتقبّل للمريض.","المريض يحس إنه مش هيتحاسب على اللي بيقوله."],
+['#','Use of Specific Techniques (skills)'],
+["Therapeutic communication involves conscious use of both verbal and non-verbal techniques.",
+ "التواصل العلاجي فيه استخدام <b>واعي</b> لتقنيات لفظية (verbal) وغير لفظية (non-verbal).",
+ "التقنيات دي هي أدواتك، وكل واحدة جاية تحت بالتفصيل."],
+['#','Acceptance'],
+["Acceptance acknowledges a client's emotions or message and affirms they have been heard. Acceptance isn't necessarily the same thing as agreement; it can be enough to simply make eye contact and say, \"I hear what you are saying.\" Clients who feel their nurses are listening to them and taking them seriously are more likely to be receptive to care.",
+ "<b>القبول:</b> إنك تعترفي بمشاعر المريض أو كلامه وتأكدي له إنه اتسمع. القبول <b>مش معناه الموافقة</b>؛ كفاية تبصي في عينه وتقولي «أنا سامعة اللي بتقوله». المريض اللي يحس إن الممرضة بتسمعه وبتاخده بجد بيبقى أكتر تقبّلاً للرعاية.",
+ "Patient: \"I hate taking all this medicine. It makes me feel numb.\" — Nurse (making eye contact): \"Yes, I understand.\" هي مجادلتوش ولا قالت له لازم تاخده؛ بس عرّفته إنه اتسمع."],
+['#','Offering self'],
+["Making oneself available when the patient is unable to communicate. e.g. \"I will sit beside you for a while\" or \"I am here to listen to you when you need to speak.\"",
+ "<b>عرض النفس:</b> إنك تبقي موجودة ومتاحة لما المريض مايقدرش يتكلم.",
+ "زي ما تقولي له: \"I will sit beside you for a while\" يعني أنا قاعدة معاك شوية، ومش لازم تتكلم دلوقتي."],
+['#','Active Listening'],
+["Active Listening: This goes beyond just hearing what the patient says. It involves paying full attention, using non-verbal cues (like nodding or leaning in), and verbalizing your understanding to show you are engaged. A key component of active listening is the SOLER model:",
+ "<b>الاستماع الفعّال:</b> أكبر من مجرد إنك تسمعي الكلام. بتدّي المريض <b>انتباهك الكامل</b>، وتستخدمي إشارات غير لفظية (زي هزّ الراس والميل ناحيته)، وتقولي اللي فهمتيه بصوت عالي عشان يعرف إنك معاه. وأهم مكوّن فيه نموذج <b>SOLER</b>.",
+ "الفرق بين تسمعي (hearing) وتسمعي بتركيز (listening): التانية دي اللي المريض بيحس بيها."],
+["Sit squarely facing the patient.","اقعدي <b>قدام المريض مباشرة</b> ووشك ناحيته.","S = Sit"],
+["Open posture.","وضعية جسم <b>مفتوحة</b> (من غير ما تكتفي دراعك أو رجلك).","O = Open"],
+["Lean toward the patient.","<b>اميلي</b> ناحية المريض.","L = Lean"],
+["Eye contact.","<b>تواصل بالعين.</b>","E = Eye"],
+["Relaxed posture.","وضعية جسم <b>مريحة</b> ومش متوترة.","R = Relaxed. وبكده كلمة SOLER كلها بتتحفظ من أول حرف."],
+['#','Silence'],
+["Sometimes, the most therapeutic response is silence. It gives the patient time to process their thoughts and feelings without feeling pressured to speak. A nurse should be comfortable with silence and allow the patient to break it.",
+ "أحياناً أحسن رد علاجي هو <b>الصمت</b>. بيدّي المريض وقت يرتّب أفكاره ومشاعره من غير ضغط عليه يتكلم. الممرضة لازم تبقى مرتاحة مع الصمت وتسيب المريض هو اللي يكسره.",
+ "لو سكت المريض متستعجليش وتملي الفراغ بأي كلام؛ استنيه."],
+["It means absence of verbal communication; the nurse should use the period of silence to examine the data preceding the silence and observe the client during this period.",
+ "الصمت معناه غياب التواصل اللفظي، والممرضة لازم تستغله إنها <b>تراجع المعلومات اللي اتقالت قبل السكوت</b> و<b>تلاحظ المريض</b> في الفترة دي.",
+ "السكوت مش وقت ضايع؛ ده وقت بتفكري فيه في اللي قاله وبتراقبي ملامحه."],
+["Silence on the part of the patient may be an attempt to think or recall information, reevaluates his effect on the listener.",
+ "سكوت <b>المريض</b> ممكن يبقى محاولة منه إنه يفكر أو يفتكر معلومة، أو يعيد تقييم تأثير كلامه على السامع.",
+ "ممكن يكون ساكت لأنه بيحاول يفتكر حاجة أو بيفكر هيقول إيه."],
+["On the part of the nurse, it may indicate acceptance and understanding and interest in hearing.",
+ "وسكوت <b>الممرضة</b> ممكن يدل على <b>قبول وفهم واهتمام</b> بالسماع.",
+ "لما الممرضة تسكت وتبص للمريض، هو بيفهم إنها مهتمة وعاوزة تسمع."],
+['#','Empathy'],
+["Empathy is the ability to understand things from the other person's perception and to communicate this understanding to another person. Empathy includes:",
+ "<b>التعاطف:</b> القدرة إنك تفهمي الأمور من وجهة نظر الشخص التاني وتوصّلي له إنك فهمتي. وبيشمل التلات حاجات اللي تحت.",
+ "يعني تحطي نفسك مكانه وتقوليله إنك حاسة بيه."],
+["Accurate perception of the client by the nurse.","إدراك الممرضة للمريض بشكل <b>دقيق</b>.","تفهميه صح مش تخمين."],
+["Communication of this understanding to client and helping him.","إنها <b>توصّل للمريض</b> الفهم ده وتساعده.","مش كفاية تفهمي جواكي، لازم يعرف."],
+["The client's perception of the nurse's understanding.","إن المريض <b>نفسه يحس</b> إن الممرضة فاهماه.","النهاية الصح هي إن المريض يحس إنك فاهمة."],
+['#','General leads'],
+["These are broad questions or statements which will encourage the client to talk. This promotes verbalization, facilitates continued discussion and help rapport by showing the client that their thoughts are valued.",
+ "<b>القيادات العامة:</b> أسئلة أو جمل واسعة بتشجع المريض يتكلم. بتحفّز التعبير بالكلام، وتخلي الحوار يكمل، وتبني <b>الألفة (rapport)</b> لأنها بتبيّن للمريض إن أفكاره ليها قيمة.",
+ "\"go on\" , \"and then\" , \"Tell me more about what you are feeling.\" كلها جمل بسيطة بتفتح له الباب يكمل."],
+['#','Paraphrasing'],
+["This is repeating the idea that the client expressed in different words.",
+ "<b>إعادة الصياغة:</b> إنك تكرري الفكرة اللي قالها المريض لكن <b>بكلام تاني</b>.",
+ "Patient: \"I can't sleep. I stay awake all night.\" — Nurse: \"You have difficulty sleeping.\" هي قالت نفس المعنى بكلامها."],
+['#','Reflecting'],
+["It is directing back to the patient questions, feelings or ideas.",
+ "<b>العكس (Reflecting):</b> إنك ترجّعي للمريض أسئلته أو مشاعره أو أفكاره.",
+ "Patient: \"Do you think I should tell the doctor?\" — Nurse: \"Do you think you should?\" رجّعت له السؤال عشان هو اللي يقرر."],
+["Example: Patient: \"I feel so alone, even though my family visits.\" Nurse: \"It sounds like you feel lonely even when your family is around.\"",
+ "مثال تاني على نفس التقنية: المريض بيقول إنه حاسس بالوحدة رغم زيارة أهله، والممرضة بترجّع له مشاعره.",
+ "هي رجّعت له الإحساس بصيغة تانية، فحس إنها فهمت."],
+['#','Clarifying'],
+["Trying to clear up confusion about events or people, the nurse asks specific questions until the information is completely understood.",
+ "<b>التوضيح:</b> بتحاولي تزيلي أي لخبطة بخصوص أحداث أو أشخاص، وبتسألي أسئلة محددة لحد ما المعلومة تتفهم <b>تماماً</b>.",
+ "Nurse: \"I am not sure I follow you.\" أو لما المريض يقول \"I am just not feeling myself today\" تسأليه: \"What do you mean by not feeling yourself today? What's different from how you usually feel?\""],
+['#','Focusing'],
+["Concern on a single important point, as from generalization to specification.",
+ "<b>التركيز:</b> إنك تركزي على <b>نقطة واحدة مهمة</b>، يعني تنقلي من الكلام العام للكلام المحدد.",
+ "Patient: \"everybody hates me\". Nurse: \"Tell me about one person who has told you that he hates you.\" بدل «الكل»، بنسأل عن شخص واحد."],
+['#','Giving recognition'],
+["Giving recognition acknowledges and validates the client's positive health behaviors. Recognition acknowledges a patient's behavior and highlights it without giving an overt compliment. E.g. Nurse: \"I noticed you took all of your medications.\"",
+ "<b>إعطاء التقدير:</b> إنك تعترفي بالسلوك الصحي الإيجابي للمريض وتأكديه. بتلفتي النظر لسلوكه <b>من غير مدح صريح</b>.",
+ "بدل ما تقولي «برافو عليك»، قولي: \"I noticed you took all of your medications.\" يعني لاحظت إنك أخدت كل أدويتك."],
+['#','Summarizing'],
+["Organizing key issues that have been discussed.",
+ "<b>التلخيص:</b> ترتيب النقط الأساسية اللي اتناقشت.",
+ "\"You have said that ......\" و \"During the past hour you & I have discussed .......\" هي دي الصياغات اللي بتبدأ بيها الملخص."],
+['#','Non-Verbal Cues'],
+["Body language, tone of voice, and facial expressions are just as important as words. A relaxed posture, calm tone, and attentive eye contact all communicate respect and a willingness to listen.",
+ "<b>الإشارات غير اللفظية:</b> لغة الجسم ونبرة الصوت وتعابير الوش <b>مهمة زي الكلام بالظبط</b>. الوقفة المريحة والصوت الهادي وتواصل العين المنتبه كلها بتوصّل احترام واستعداد للسماع.",
+ "ممكن تقولي كلام حلو بس نبرتك عصبية، والمريض هيصدّق النبرة."]
+]},
+{t:'Components of therapeutic communication',i:[
+["The core components of therapeutic communication are the specific verbal and non-verbal techniques used by a healthcare professional to build a trusting relationship with a patient and facilitate their well-being. These components work together to create a safe, supportive, and effective communication environment.",
+ "المكوّنات الأساسية هي التقنيات اللفظية وغير اللفظية المحددة اللي بيستخدمها الفريق الصحي عشان يبني ثقة مع المريض ويساعد في رفاهيته. والمكونات دي <b>بتشتغل مع بعض</b> عشان تعمل بيئة آمنة وداعمة وفعّالة.",
+ "كل مكوّن لوحده مش كفاية؛ قوتهم في إنهم يتجمعوا."],
+['#','1. Active Listening'],
+["This is a fundamental component and goes far beyond simply hearing words. It involves a conscious effort to understand the full message—both the verbal content and the underlying feelings and meanings. Key aspects include:",
+ "مكوّن أساسي وأكبر من مجرد سمع الكلمات. فيه مجهود واعي لفهم الرسالة كلها: <b>المحتوى اللفظي</b> و<b>المشاعر والمعاني اللي ورا الكلام</b>.",
+ "المريض ممكن يقول «أنا كويس» وعينه بتقول عكس كده؛ الاستماع الفعّال يلتقط الاتنين."],
+["Paying full attention: Putting away distractions and focusing entirely on the patient.",
+ "<b>إدّي انتباه كامل:</b> شيلي أي مشتتات وركزي مع المريض بالكامل.","سيبي الموبايل والورق وأنتي معاه."],
+["Using non-verbal cues: Showing you are engaged through eye contact, nodding, and a relaxed, open body posture.",
+ "<b>استخدمي الإشارات غير اللفظية:</b> بيّني إنك معاه بتواصل العين وهزّ الراس ووضعية جسم مفتوحة ومريحة.","هزّة راس بسيطة بتقوله كمّل."],
+["Verbalizing understanding: Paraphrasing or summarizing what the patient said to confirm you've understood them correctly.",
+ "<b>قولي فهمك بصوت عالي:</b> بإعادة الصياغة أو التلخيص عشان تتأكدي إنك فهمتيه صح.","تقولي له «يعني حضرتك...» وتكملي بمعناه."],
+['#','2. Empathy'],
+["Empathy is the ability to understand and share the feelings of another person. In therapeutic communication, it's about seeing the situation from the patient's perspective without judgment. A nurse can convey empathy by saying things like, \"It sounds like you're feeling very overwhelmed right now,\" which validates the patient's emotions and makes them feel heard.",
+ "التعاطف هو القدرة إنك تفهمي مشاعر شخص تاني وتشاركيه فيها. في التواصل العلاجي معناه إنك تشوفي الموقف من <b>وجهة نظر المريض من غير حُكم</b>. تقدري توصّلي التعاطف بجمل زي \"It sounds like you're feeling very overwhelmed right now\" (واضح إنك حاسس بضغط كبير دلوقتي)، وده بيأكد مشاعره وبيخليه يحس إنه اتسمع.",
+ "الجملة دي مش نصيحة ومش حكم؛ هي بس بتقول له أنا شايفة اللي أنت فيه."],
+['#','3. Use of Specific Questions and Statements'],
+["Open-ended questions: These questions encourage the patient to provide more detailed answers and share their feelings. Instead of a \"yes/no\" question like, \"Are you in pain?\" a nurse might ask, \"Can you tell me more about the pain you're experiencing?\"",
+ "<b>الأسئلة المفتوحة:</b> أسئلة بتشجع المريض يدّي إجابات مفصّلة ويشارك مشاعره. بدل سؤال إجابته yes/no زي \"Are you in pain?\" تسألي: \"Can you tell me more about the pain you're experiencing?\"",
+ "السؤال المقفول يجاوب بكلمة واحدة، لكن المفتوح يخليه يحكي."],
+["Clarification: When a patient's statement is unclear, the nurse seeks to clarify to ensure an accurate understanding. This prevents assumptions and helps the patient feel that their concerns are being taken seriously.",
+ "<b>التوضيح:</b> لما كلام المريض مش واضح، الممرضة بتسأل عشان تفهم صح. ده بيمنع <b>الافتراضات</b> وبيخلي المريض يحس إن مخاوفه متاخدة بجد.",
+ "بدل ما تفترضي إنك فهمتي، اسألي وتأكدي."],
+["Offering self: The nurse offers their presence and attention to the patient, conveying that they are available for support. For example, \"I have a few minutes, would you like to talk about what's on your mind?\"",
+ "<b>عرض النفس:</b> الممرضة بتقدّم وجودها واهتمامها للمريض وبتبيّن إنها متاحة للدعم. مثلاً: \"I have a few minutes, would you like to talk about what's on your mind?\"",
+ "يعني معايا شوية وقت، تحب نتكلم في اللي شاغلك؟"],
+['#','4. Therapeutic Use of Silence'],
+["Silence can be a powerful communication tool. It gives the patient time to gather their thoughts, process emotions, and decide what they want to say next without feeling rushed. A skilled nurse is comfortable with silence and knows when to wait for the patient to break it.",
+ "الصمت ممكن يبقى أداة تواصل قوية. بيدّي المريض وقت يجمّع أفكاره ويعالج مشاعره ويقرر هيقول إيه بعد كده من غير استعجال. الممرضة الماهرة <b>مرتاحة مع الصمت</b> وتعرف تستنى المريض هو اللي يكسره.",
+ "الصمت هنا قرار منك، مش حاجة محرجة."]
+]},
+{t:'The main principles of therapeutic communication',i:[
+['#','1. Professionalism and Boundaries'],
+["Therapeutic communication maintains a professional distance. While the relationship is built on warmth and trust, it is not a social friendship. The nurse avoids sharing excessive personal information and keeps the focus on the patient. This boundary is essential for the nurse to maintain objectivity and for the patient to feel safe and respected.",
+ "التواصل العلاجي بيحافظ على <b>مسافة مهنية</b>. العلاقة قايمة على الدفء والثقة لكنها <b>مش صداقة اجتماعية</b>. الممرضة بتتجنب إنها تحكي معلومات شخصية كتير وبتفضل مركزة على المريض. الحدود دي ضرورية عشان الممرضة تفضل <b>موضوعية</b> والمريض يحس بالأمان والاحترام.",
+ "ماتحكيش للمريض عن مشاكلك الشخصية؛ الكلام يفضل عنه هو."],
+['#','2. Confidentiality and Privacy'],
+["This principle is both a legal and ethical obligation. Patients must feel confident that what they share with a nurse will be kept private and not be disclosed without their consent. This creates a secure environment where they can be open and honest about their physical and emotional health.",
+ "المبدأ ده <b>التزام قانوني وأخلاقي</b> في نفس الوقت. المريض لازم يكون واثق إن اللي بيحكيه للممرضة هيفضل سر ومش هيتقال لحد <b>من غير موافقته</b>. ده بيعمل بيئة آمنة يقدر فيها يتكلم بصراحة عن صحته الجسمانية والنفسية.",
+ "لو المريض حاسس إن كلامه هيتنشر مش هيقول الحقيقة."],
+['#','3. Clarity and Honesty'],
+["The nurse must be clear, concise, and truthful in their communication. Using simple, non-medical language ensures the patient understands their condition and treatment. Honesty, even when delivering difficult news, is critical for building a trusting relationship.",
+ "الممرضة لازم تكون <b>واضحة ومختصرة وصادقة</b>. استخدام لغة بسيطة <b>غير طبية</b> بيضمن إن المريض يفهم حالته وعلاجه. والصدق، حتى لو الخبر صعب، مهم جداً لبناء علاقة ثقة.",
+ "قولي له «الضغط مرتفع» بدل مصطلح طبي معقد، ولو الخبر وحش قوليه بصدق وبأسلوب لطيف."],
+['#','4. Respect for Culture and Diversity'],
+["Nurses must be aware of and sensitive to the patient's cultural background, beliefs, and communication styles. Communication should be tailored to respect these differences, including using interpreters when there are language barriers, and acknowledging how cultural norms might affect the patient's views on health and illness.",
+ "الممرضات لازم يكونوا واعيين وحساسين لخلفية المريض الثقافية ومعتقداته وطريقة تواصله. التواصل لازم يتعدّل عشان يحترم الاختلافات دي، ومنها <b>استخدام مترجمين</b> لو فيه حاجز لغة، والاعتراف بإن العادات الثقافية ممكن تأثر على نظرة المريض للصحة والمرض.",
+ "مريض مابيتكلمش لغتك: هتحتاجي مترجم، ولو ثقافته بتأثر على نظرته للعلاج لازم تحترمي ده."]
+]},
+{t:'Phases of therapeutic communication',i:[
+["The phases of therapeutic communication, often described in the context of the nurse-patient relationship, are a structured, goal-oriented process designed to facilitate a patient's healing and growth. This framework, largely based on the work of nurse theorist Hildegard Peplau, consists of four distinct phases: pre-interaction, orientation, working, and termination.",
+ "مراحل التواصل العلاجي بتتوصف في سياق علاقة الممرضة بالمريض، وهي عملية <b>منظمة وليها هدف</b> بتسهّل الشفاء والنمو. الإطار ده مبني أساساً على أعمال منظّرة التمريض <b>Hildegard Peplau</b>، وفيه <b>4 مراحل</b>: pre-interaction, orientation, working, termination.",
+ "احفظي الاسم Peplau والمراحل الأربعة بترتيبهم."],
+['#','1. Pre-Interaction Phase'],
+["This phase occurs before the nurse has any direct contact with the patient. It is a crucial period for preparation.",
+ "المرحلة دي بتحصل <b>قبل أي تواصل مباشر</b> مع المريض، وهي فترة مهمة جداً <b>للتحضير</b>.",
+ "يعني قبل ما تدخلي الأوضة وتقابليه."],
+['#','2. Orientation Phase'],
+["This phase begins with the nurse's first encounter with the patient. The main goal is to establish a trusting relationship.",
+ "المرحلة دي بتبدأ <b>بأول مقابلة</b> بين الممرضة والمريض. هدفها الأساسي <b>بناء علاقة ثقة</b>.",
+ "هي مرحلة التعارف الأولى."],
+['#','3. Working Phase'],
+["This is the longest and most active phase, where the actual work of the therapeutic relationship takes place.",
+ "دي <b>أطول مرحلة وأنشط مرحلة</b>، وفيها بيحصل الشغل الفعلي للعلاقة العلاجية.",
+ "هنا بتنفذي التقنيات والتدخلات."],
+['#','4. Termination Phase'],
+["This phase occurs when the agreed-upon goals have been met, and the therapeutic relationship ends.",
+ "المرحلة دي بتحصل لما <b>الأهداف المتفق عليها تتحقق</b> والعلاقة العلاجية تنتهي.",
+ "الانتهاء هنا معناه إن الهدف اتحقق."]
+]},
+{t:'Role of the nurse in a therapeutic communication',i:[
+["The nurse's role in therapeutic communication is to establish and maintain a professional relationship with the patient to promote their health, well-being, and recovery. This goes beyond simply exchanging information; it's a deliberate, skilled process that helps the patient feel safe, understood, and supported.",
+ "دور الممرضة إنها <b>تبني وتحافظ على علاقة مهنية</b> مع المريض عشان تعزّز صحته ورفاهيته وتعافيه. ده أكبر من تبادل معلومات؛ ده عملية مقصودة ومهارية بتخلي المريض يحس بالأمان والفهم والدعم.",
+ "الدور فيه شقين: تبني العلاقة وتحافظ عليها."],
+['#','1. Building and Maintaining Trust'],
+["The nurse's most fundamental role is to build trust. Patients are in a vulnerable state, and a trusting relationship is essential for them to feel comfortable sharing sensitive information and participating in their care. The nurse achieves this by:",
+ "أهم دور للممرضة هو <b>بناء الثقة</b>. المرضى في حالة ضعف، والعلاقة القايمة على الثقة ضرورية عشان يرتاحوا يشاركوا معلومات حساسة ويشاركوا في رعايتهم. والممرضة بتحقق ده عن طريق اللي جاي.",
+ "المريض لما يكون تعبان بيبقى هشّ، والثقة هي اللي بتخليه يتكلم."],
+["Being present: Dedicating focused, uninterrupted time to the patient.","<b>الحضور:</b> تخصصي وقت مركّز من غير مقاطعة للمريض.","وقتك مع المريض يكون له بس."],
+["Demonstrating empathy: Acknowledging and validating the patient's feelings without judgment.","<b>إظهار التعاطف:</b> الاعتراف بمشاعر المريض وتأكيدها من غير حُكم.","ماتقوليش له «مفيش داعي تخاف»."],
+["Maintaining confidentiality: Assuring the patient that their information will remain private.","<b>الحفاظ على السرية:</b> تطمّني المريض إن معلوماته هتفضل خاصة.","تقولي له بوضوح إن كلامه محفوظ."],
+["Being reliable: Following through on promises and consistently meeting the patient's needs.","<b>الاعتمادية:</b> تنفذي وعودك وتلبّي احتياجات المريض باستمرار.","لو قلتي له هرجعلك بعد ربع ساعة ارجعي."],
+['#','2. Information Exchange and Education'],
+["A nurse acts as an interpreter and educator. They translate complex medical jargon into understandable terms for the patient and their family.",
+ "الممرضة بتشتغل كـ<b>مترجمة ومعلّمة</b>. بتحوّل المصطلحات الطبية المعقدة لكلام مفهوم للمريض وأسرته.",
+ "يعني الدكتور قال مصطلح صعب، وأنتي تشرحيه ببساطة."],
+["Clarifying information: Ensuring the patient fully understands their diagnosis, treatment plan, and medications.","<b>توضيح المعلومات:</b> التأكد إن المريض فاهم تشخيصه وخطة علاجه وأدويته <b>بالكامل</b>.","فاهم المرض وفاهم الدوا."],
+["Assessing understanding: Asking open-ended questions to check for comprehension and address any misconceptions.","<b>تقييم الفهم:</b> بتسألي أسئلة مفتوحة تتأكدي بيها من الفهم وتصححي أي مفاهيم غلط.","اسأليه: «ممكن تقولي هتاخد الدوا إزاي؟»"],
+["Providing support: Offering information about available resources, support groups, and coping strategies.","<b>تقديم الدعم:</b> إنك تدّيله معلومات عن الموارد المتاحة ومجموعات الدعم واستراتيجيات التكيّف.","تعرّفيه فين يلاقي مساعدة."],
+['#','3. Providing Emotional and Psychological Support'],
+["Nurses are vital in helping patients cope with the emotional and psychological stress of illness.",
+ "الممرضات <b>أساسيين</b> في مساعدة المرضى يتحملوا الضغط العاطفي والنفسي بتاع المرض.",
+ "المرض بيتعب الجسم والنفسية، والممرضة بتساعد في الاتنين."],
+["Active listening: Paying close attention to both verbal and non-verbal cues to understand the patient's unspoken concerns.","<b>الاستماع الفعّال:</b> بتنتبهي للإشارات اللفظية وغير اللفظية عشان تفهمي مخاوف المريض <b>اللي مش بيقولها</b>.","اللي مابيتقالش أحياناً أهم."],
+["Encouraging expression: Creating a safe space for the patient to talk about their fears, anxieties, and frustrations.","<b>تشجيع التعبير:</b> تعملي مساحة آمنة للمريض يتكلم عن خوفه وقلقه وإحباطه.","يفضفض من غير ما حد يحاسبه."],
+["Using silence: Knowing when to pause and give the patient time to process their thoughts and emotions without feeling rushed.","<b>استخدام الصمت:</b> تعرفي إمتى تقفي وتدّي المريض وقت يستوعب أفكاره ومشاعره من غير استعجال.","تسكتي وتستني."],
+['#','3. Advocacy and Collaboration'],
+["A nurse serves as the patient's advocate, acting as their voice and ensuring their preferences are respected within the healthcare system.",
+ "الممرضة بتشتغل كـ<b>مدافعة عن المريض (advocate)</b>، بتبقى صوته وبتتأكد إن تفضيلاته متحترمة جوه النظام الصحي.",
+ "لو المريض مش قادر يتكلم أو مش متأكد إنه هيتسمع، أنتي صوته."],
+["Advocating for patient needs: Communicating the patient's wishes and concerns to other members of the healthcare team.","<b>الدفاع عن احتياجات المريض:</b> تنقلي رغباته ومخاوفه لباقي أعضاء الفريق الصحي.","تبلّغي الدكتور باللي المريض قاله."],
+["Collaborating with the team: Facilitating clear communication among physicians, therapists, and other staff to ensure a unified approach to care.","<b>التعاون مع الفريق:</b> تسهّلي التواصل الواضح بين الأطباء والمعالجين وباقي الفريق عشان الرعاية تمشي بنهج موحّد.","الكل يمشي على نفس الخطة."],
+['#','Example of Nurse Using Therapeutic Communication'],
+["Ms. Zeinab is a nursing student who enjoys interacting with patients. When she goes to patients' rooms, she greets them and introduces herself and her role in a calm tone. She kindly asks patients about their problems and notices their reactions. She provides information and answers their questions. Patients perceive that she wants to help them.",
+ "مس زينب طالبة تمريض بتحب تتعامل مع المرضى. لما بتدخل الأوض بتسلّم عليهم وبتعرّف بنفسها ودورها بنبرة هادية. بتسأل عن مشاكلهم بلطف وبتلاحظ ردود أفعالهم، وبتدّيهم معلومات وبتجاوب أسئلتهم، فالمرضى بيحسوا إنها عاوزة تساعدهم.",
+ "فيه هنا تقنيات كتير شغالة: تعريف نفسها (orientation)، نبرة هادية، سؤال بلطف، ملاحظة."],
+["She treats patients professionally by respecting boundaries and listening to them in a nonjudgmental manner. She addresses communication barriers and respects patients' cultural beliefs.",
+ "بتتعامل مع المرضى <b>باحترافية</b> بإنها تحترم الحدود وتسمعهم من غير أحكام. وبتتعامل مع حواجز التواصل وبتحترم معتقدات المرضى الثقافية.",
+ "ده تطبيق لمبدأ الحدود المهنية وبعدين احترام الثقافة."],
+["She notices patients' health literacy and ensures they understand her messages and patient education. As a result, patients trust her and feel as if she cares about them, so they feel comfortable sharing their health care needs with her.",
+ "بتلاحظ مستوى <b>الثقافة الصحية</b> عند المرضى وبتتأكد إنهم فاهمين رسايلها وتثقيفها. والنتيجة إن المرضى <b>بيثقوا فيها</b> وبيحسوا إنها مهتمة بيهم، فبيرتاحوا يشاركوها احتياجاتهم الصحية.",
+ "هي ماطبّقتش حاجة واحدة؛ طبّقت الثقة والوضوح والاحترام مع بعض، والنتيجة إن المريض بقى يفضفض."]
+]}
+];
+const app=document.getElementById('app'),chips=document.getElementById('chips');
+let h='',c='';
+D.forEach((s,k)=>{
+  c+=`<a class="chip" href="#s${k}" data-k="${k}">${k+1}. ${s.t.length>26?s.t.slice(0,24)+'…':s.t}</a>`;
+  h+=`<section class="sec" id="s${k}"><div class="sh"><span class="n">${k+1}</span>${s.t}</div>`;
+  s.i.forEach(x=>{
+    if(x[0]==='#'){h+=`<div class="sub">${x[1]}</div>`;return}
+    h+=`<div class="item"><div class="en">${x[0]}</div><div class="ar">${x[1]}</div><div class="ex"><span class="l">💡 عشان تفهمها:</span>${x[2]}</div></div>`;
+  });
+  h+='</section>';
+});
+app.innerHTML=h;chips.innerHTML=c;
+const secs=[...document.querySelectorAll('.sec')],cs=[...document.querySelectorAll('.chip')];
+function onScroll(){
+  const p=scrollY/(document.body.scrollHeight-innerHeight)*100;
+  document.getElementById('pb').style.width=p+'%';
+  let a=0;secs.forEach((s,k)=>{if(s.getBoundingClientRect().top<160)a=k});
+  cs.forEach((x,k)=>x.classList.toggle('on',k===a));
+  if(cs[a])cs[a].scrollIntoView({block:'nearest',inline:'center'});
+}
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+const tb=document.getElementById('tb');let th='light';
+try{th=localStorage.getItem('theme')||'light'}catch(e){}
+function at(t){th=t;document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'');tb.textContent=t==='dark'?'☀️':'🌙';try{localStorage.setItem('theme',t)}catch(e){}}
+at(th);tb.onclick=()=>at(th==='dark'?'light':'dark');
+</script>
+</body>
+</html>
