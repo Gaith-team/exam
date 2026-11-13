@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--teal:#0891b2;--teal-d:#155e75;--blue:#e6f2f5;--bd:#cfe3e8;--ok:#15803d;--no:#dc2626;--rev:#7c3aed;--txt:#0f2a30;--grad:linear-gradient(135deg,#155e75 0%,#0891b2 40%,#6d28d9 100%)}
+body{font-family:'Outfit',Arial,sans-serif;background:#f4fafb;color:var(--txt);font-size:14px}
+header{background:var(--grad);color:#fff;text-align:center;padding:12px;font-size:18px;font-weight:900;position:relative}
+header .brand{position:absolute;right:16px;top:8px;font-weight:bold;font-size:14px}
+header a{position:absolute;left:16px;top:11px;color:#fff;font-size:13px;text-decoration:none}
+.wrap{max-width:1280px;margin:0 auto;padding:8px 10px 20px}
+.topinfo{background:var(--blue);border:1px solid var(--bd);padding:4px 8px;font-size:13px;margin-bottom:8px}
+.topinfo b{color:var(--teal)}
+.layout{display:grid;grid-template-columns:1fr 240px;gap:14px;align-items:start}
+.main{background:#fff;border:1px solid var(--bd);min-height:470px;display:flex;flex-direction:column;
+ background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='70'><text x='8' y='45' transform='rotate(-20 75 35)' font-size='14' font-family='Arial' fill='%23000' fill-opacity='.07'>GHAITH TEAM</text></svg>")}
+.qhead{display:flex;justify-content:space-between;align-items:center;padding:12px 6px 6px;margin:0 6px;border-bottom:1px solid var(--bd)}
+.qhead b{font-size:13px}
+.fs button{background:#6d28d9;color:#fff;border:0;padding:6px 12px;margin-left:3px;border-radius:2px;cursor:pointer;font-weight:bold}
+.qbody{padding:8px 12px;flex:1}
+.qtext{font-size:13px;line-height:1.7;margin-bottom:18px;direction:ltr;text-align:left}
+.opt{display:flex;align-items:center;gap:8px;margin:0 0 16px;cursor:pointer;direction:ltr;text-align:left;font-size:13px}
+.opt input{accent-color:var(--teal);cursor:pointer}
+.bar{display:flex;justify-content:space-between;padding:10px;gap:6px;flex-wrap:wrap;border-top:1px solid var(--bd);margin:0 6px 6px}
+.b{background:var(--grad);color:#fff;border:0;padding:9px 12px;font-weight:bold;font-size:13px;border-radius:2px;cursor:pointer}
+.b:hover{filter:brightness(1.12)}
+.b.gray{background:#0f2a30}
+.side>div{background:var(--blue);border:1px solid var(--bd);margin-bottom:10px;padding:8px}
+.timer{text-align:center;background:none!important;border:0!important}
+.timer small{font-size:13px}
+.timer .t{font-size:30px;color:#0891b2;margin-top:4px}
+.timer .t.warn{color:#c27b0a}.timer .t.danger{color:#c8372d}
+.leg{display:grid;grid-template-columns:1fr 1fr;gap:8px 6px;font-size:10px;margin-top:8px}
+.leg div{display:flex;align-items:center;gap:6px}
+.sq{min-width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:bold;border-radius:2px;border:1px solid transparent}
+.s-ans{background:var(--ok)}.s-no{background:#ea580c}.s-rev{background:var(--rev)}.s-nv{background:#fff;color:#333;border-color:#9bb0a2}
+.nav{display:flex;flex-wrap:wrap;gap:6px;max-height:260px;overflow:auto;background:#e6f2f5}
+.nav .sq{width:24px;height:24px;cursor:pointer;font-size:12px}
+.nav .cur{outline:2px solid #0f2a30;outline-offset:0}
+.endrow{text-align:center}
+.endrow .b{width:90px}
+footer{text-align:center;padding:16px;font-size:12px;color:#3f5d65;background:#e6f2f5;border-top:1px solid #cfe3e8;margin-top:10px}
+footer a{color:#229ED9;text-decoration:none}
+/* results */
+.res{background:#fff;border:1px solid var(--bd);padding:20px;max-width:900px;margin:10px auto}
+.score{text-align:center;padding:10px 0 18px}
+.score .n{font-size:48px;font-weight:900;color:var(--teal)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}
+.stats div{background:var(--blue);padding:10px;text-align:center;border-radius:4px}
+.stats b{display:block;font-size:20px}
+.sec{background:var(--ok);color:#fff;padding:8px 12px;font-weight:bold;margin:22px 0 10px}
+.sec.bad{background:var(--no)}
+.it{border:1px solid var(--bd);border-left:4px solid var(--ok);padding:12px;margin-bottom:8px;background:#fafcff;direction:ltr;text-align:left}
+.it.bad{border-left-color:var(--no)}
+.it .q{font-weight:bold;font-size:13px;margin-bottom:6px;line-height:1.6}
+.it .r{font-size:12px;margin-top:4px}
+.tag{padding:1px 7px;border-radius:3px;color:#fff;font-size:11px;font-weight:bold;margin-right:6px}
+.tag.y{background:var(--no)}.tag.g{background:var(--ok)}
+.exp{font-size:12px;color:#555;margin-top:6px;background:#eef6f4;padding:6px 8px;border-radius:3px}
+.acts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.hide{display:none}
+@media(max-width:820px){.layout{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}header a{display:none}}
+.qtext img{display:block;max-width:100%;max-height:260px;margin:0 auto 12px;border-radius:8px;background:#fff}
+.it .q img{max-height:90px;display:block;margin:6px 0;border-radius:6px}
+</style>
+</head>
+<body>
+<header><a href="https://gaith-team.github.io/exam/">← رجوع</a>Communication Skills<span class="brand">GHAITH TEAM</span></header>
+<div class="wrap">
+ <div id="exam">
+  <div class="topinfo">Total questions in exam: <b id="tot">0</b> | Answered: <b id="ans">0</b></div>
+  <div class="layout">
+   <div class="main">
+    <div class="qhead"><b id="qno"></b><div class="fs"><button onclick="fs(-1)">A-</button><button onclick="fs(0)">A</button><button onclick="fs(1)">A+</button></div></div>
+    <div class="qbody" id="qbody"></div>
+    <div class="bar">
+     <button class="b" onclick="saveNext()">Save &amp; Next</button>
+     <div style="display:flex;gap:4px;flex-wrap:wrap">
+      <button class="b" onclick="mark()">Mark for Review</button>
+      <button class="b" onclick="skip()">Skip</button>
+      <button class="b" onclick="prev()">Previous</button>
+     </div>
+    </div>
+   </div>
+   <div class="side">
+    <div class="timer"><small>Time Remaining</small><div class="t" id="tm">35:00</div></div>
+    <div>
+     <div>Number of questions : <b id="tot2">0</b></div>
+     <div class="leg">
+      <div><span class="sq s-ans" id="cAns">0</span>Answered</div>
+      <div><span class="sq s-no" id="cNo">0</span>Not Answered</div>
+      <div><span class="sq s-rev" id="cRev">0</span>For Review</div>
+      <div><span class="sq s-nv" id="cNv">0</span>Not Visited</div>
+     </div>
+    </div>
+    <div class="nav" id="nav"></div>
+    <div class="endrow"><button class="b gray" onclick="endTest()">End Test</button></div>
+   </div>
+  </div>
+ </div>
+ <div id="result" class="hide"></div>
+</div>
+<footer>GHAITH TEAM · <a href="https://t.me/nursing2bu" target="_blank">@nursing2bu</a></footer>
+
+<script>
+const QUESTIONS = [
+{t:"Communication is usually described as a:", o:["One-way process","Two-way process","Written-only process","Silent process"], a:1},
+{t:"Which is called 'the spine of the organization'?", o:["Delegation","Planning","Decision making","Communication"], a:3},
+{t:"Formal communication is also known as:", o:["The official","The grapevine","Paralanguage","Body language"], a:0},
+{t:"Informal communication is also known as:", o:["The official","Downward communication","The grapevine","Upward communication"], a:2},
+{t:"Communication from a subordinate to a superior is called:", o:["Downward","Horizontal","Diagonal","Upward"], a:3},
+{t:"Active listening is more than just:", o:["Empathizing","Paraphrasing","Hearing words","Asking questions"], a:2},
+{t:"Telehealth is the use of ______ to access health care services remotely.", o:["Digital information and communication technologies","Only telephone calls","Only hospital visits","Written letters only"], a:0},
+{t:"The nurse–patient relationship is an interaction aimed at enhancing the ______ of the patient.", o:["Income","Well-being","Education only","Privacy only"], a:1},
+{t:"The first element of the communication process is:", o:["Encoding","Medium","The sender","Feedback"], a:2},
+{t:"Which of the following is an example of written communication?", o:["Lectures","Face to face conversation","Telephone conversation","Emails"], a:3},
+{t:"Which type of listening centers on understanding and validating the speaker's emotions and feelings?", o:["Critical listening","Empathetic listening","Informational listening","Selective listening"], a:1},
+{t:"Which of the following is an advantage of telehealth?", o:["Provides access in rural areas","Decreased face-to-face interaction","May increase liability","Concerns with security"], a:0},
+{t:"Which is the fastest form of communication that rapidly transmits information to various members of the organization?", o:["Formal communication","Written communication","Informal communication","Downward communication"], a:2},
+{t:"Eye contact, focusing on the speaker's message and attentive listening techniques are called:", o:["Paralanguage","Time language","Space language","Attending behavior"], a:3},
+{t:"Nodding your head, smiling and making small noises like 'yes' show that you are:", o:["Staying focused","Listening","Asking questions","Not interrupting"], a:1},
+{t:"Which type of listening involves distinguishing different sounds, tones, accents and vocal cues?", o:["Discriminative listening","Appreciative listening","Relational listening","Passive listening"], a:0},
+{t:"Which statement about hearing is correct?", o:["It is an internal behavior involving both mind and body","It requires empathy and curiosity","It is a physical act that only involves the ears","It is a skill necessary for effective communication"], a:2},
+{t:"Which of the following is a core tele-care home service?", o:["Surgery","Tele-physiological monitoring","Pharmacy dispensing","Face-to-face visits only"], a:1},
+{t:"Tele nursing involves the use of electromagnetic channels (wire, radio, optical) to transmit:", o:["Printed documents only","Blood samples","Emails only","Voice, data and video communication signals"], a:3},
+{t:"Which of the following is a key component of the nurse–patient relationship?", o:["Self-awareness","Competition","Secrecy","Speed"], a:0},
+{t:"Self-awareness is the ability to:", o:["Control other people's emotions","Memorize patient data","Recognize and understand your moods, emotions and drives, and their effects on others","Avoid patient contact"], a:2},
+{t:"A verbal message that is sent too rapidly can:", o:["Improve relevance","Improve the tone","Reduce silence","Increase anxieties in the receiver"], a:3},
+{t:"Translating the message into verbal and non-verbal symbols is called:", o:["Decoding","Encoding","Action","Feedback"], a:1},
+{t:"Which is a benefit of a successful nurse–patient relationship?", o:["Decrease the length of hospital stays","Increase the length of hospital stays","Increase the overall cost of a hospital visit","Decrease the quality of care"], a:0},
+{t:"Deafness, noisy environments, faulty equipment and poor eyesight are examples of ______ barriers.", o:["Psychological","Linguistic","Cultural","Physical"], a:3},
+{t:"Anger, frustration and humour that can blur decision-making capacities are examples of:", o:["Attitudinal barriers","Emotional barriers","Perception barriers","Physiological barriers"], a:1},
+{t:"Poor management, lack of consultation with employees and personality conflicts are examples of:", o:["Cultural barriers","Linguistic barriers","Attitudinal barriers","Physical barriers"], a:2},
+{t:"Telehealth differs from telemedicine in that:", o:["Telehealth has a broader scope and can include non-clinical services","Telemedicine has a broader scope than telehealth","They are exactly the same","Telehealth excludes mobile devices"], a:0},
+{t:"Which type of listening emphasizes building and maintaining interpersonal relationships through empathetic understanding?", o:["Selective listening","Critical listening","Passive listening","Relational listening"], a:3},
+{t:"Passive listening occurs when individuals:", o:["Evaluate arguments critically","Enjoy the aesthetic value of speech","Receive information without actively engaging in the conversation","Focus only on specific parts of the message"], a:2},
+{t:"Which benefit of active listening is achieved by fostering trust, respect and a sense of belonging?", o:["Improved customer satisfaction","Strengthened relationships","Increased productivity","Enhanced leadership skills"], a:1},
+{t:"Fatigue, hunger and pain are examples of:", o:["Physical discomfort that hinders concentration","Cultural differences","Personal bias","Information overload"], a:0},
+{t:"The necessary knowledge aspects needed to maintain nurse–patient relationships include all of the following EXCEPT:", o:["Background knowledge","Knowledge of the person","Knowledge of the nurse's income","Knowledge of health/illness"], a:2},
+{t:"Increased compassion fatigue in the nurse leads to:", o:["Higher job satisfaction","Improved therapeutic behaviors","Shorter hospital stays","Reduced ability to communicate effectively and compassionately"], a:3},
+{t:"Which of the following describes the therapeutic relationship (compared with the social relationship)?", o:["Unlimited in time","Always goal directed and purposeful","Set up for mutual need satisfaction","Goals develop spontaneously"], a:1},
+{t:"Communication is not just giving information; it also involves comprehension of the information by the receiver.", o:["True","False"], a:0},
+{t:"Informal communication passes through predefined channels that all members of the organization are bound to follow.", o:["True","False"], a:1},
+{t:"Non-verbal communication is an exchange of information without using words.", o:["True","False"], a:0},
+{t:"The communication process is completed once the message is sent, even if feedback does not occur.", o:["True","False"], a:1},
+{t:"Active listening involves giving undivided attention to the speaker, empathizing, and providing meaningful feedback.", o:["True","False"], a:0},
+{t:"Hearing is an active process that requires empathy, curiosity and motivation.", o:["True","False"], a:1},
+{t:"Selective listening involves focusing on all aspects of the speaker's message equally.", o:["True","False"], a:1},
+{t:"Telehealth enables patients to receive care in their communities and avoid long travel times.", o:["True","False"], a:0},
+{t:"Increasing public access to health care is a disadvantage of telehealth.", o:["True","False"], a:1},
+{t:"Nurses can use telehealth to monitor vital signs such as blood pressure and blood glucose via devices for self-measurement.", o:["True","False"], a:0},
+{t:"Respecting the patient's culture and ensuring open-mindedness is incorporated throughout the relationship until the termination phase.", o:["True","False"], a:0},
+{t:"A social relationship is always goal directed and time limited.", o:["True","False"], a:1},
+{t:"Trust is considered the foundation of nursing care and is essential to the nurse–patient relationship.", o:["True","False"], a:0},
+{t:"A poor nurse–patient relationship improves the quality of care and the patient's satisfaction.", o:["True","False"], a:1},
+{t:"Listening to non-verbal cues such as body language and tone of voice is unnecessary in active listening.", o:["True","False"], a:1}
+];
+
+const TOTAL_TIME = 35*60;
+let Q, cur, sel, saved, review, visited, left, iv, size = 13;
+
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function shuffleOptions(q){if(q.o.length===2&&q.o[0]==='True'&&q.o[1]==='False')return {...q};const ix=shuffle(q.o.map((_,k)=>k));return {...q,o:ix.map(k=>q.o[k]),a:ix.indexOf(q.a)}}
+const $ = id => document.getElementById(id);
+
+function init(pool){
+  Q = shuffle([...pool]).map(shuffleOptions); const n = Q.length;
+  cur = 0; sel = Array(n).fill(null); saved = Array(n).fill(false);
+  review = Array(n).fill(false); visited = Array(n).fill(false);
+  left = TOTAL_TIME;
+  $('exam').classList.remove('hide'); $('result').classList.add('hide');
+  $('tot').textContent = $('tot2').textContent = n;
+  clearInterval(iv);
+  iv = setInterval(()=>{
+    left--; const m=Math.floor(left/60), s=left%60, t=$('tm');
+    t.textContent = m+':'+(s<10?'0':'')+s;
+    t.className = 't'+(left<=120?' danger':left<=300?' warn':'');
+    if(left<=0){clearInterval(iv);finish()}
+  },1000);
+  if(n) render();
+  window.scrollTo(0,0);
+}
+
+function render(){
+  visited[cur] = true;
+  const q = Q[cur];
+  $('qno').textContent = 'Question No. ' + (cur+1);
+  $('qbody').style.fontSize = size+'px';
+  $('qbody').innerHTML = `<div class="qtext" style="font-size:${size}px">${q.t}</div>` +
+    q.o.map((o,i)=>`<label class="opt" style="font-size:${size}px"><input type="radio" name="o" value="${i}" ${sel[cur]===i?'checked':''} onchange="sel[cur]=${i}"> <span>${o}</span></label>`).join('');
+  refresh();
+}
+
+function status(i){
+  if(review[i]) return 's-rev';
+  if(saved[i]) return 's-ans';
+  if(visited[i]) return 's-no';
+  return 's-nv';
+}
+function refresh(){
+  const n = Q.length; let a=0,no=0,r=0,nv=0;
+  $('nav').innerHTML = Q.map((_,i)=>{
+    const s = status(i);
+    if(saved[i]) a++;
+    if(s==='s-rev') r++; else if(s==='s-no') no++; else if(s==='s-nv') nv++;
+    return `<span class="sq ${s} ${i===cur?'cur':''}" onclick="go(${i})">${i+1}</span>`;
+  }).join('');
+  $('ans').textContent = a; $('cAns').textContent = a; $('cNo').textContent = no;
+  $('cRev').textContent = r; $('cNv').textContent = nv;
+}
+
+function go(i){cur=i;render()}
+function nextQ(){ if(cur<Q.length-1){cur++;render();return} const k=Q.findIndex((_,x)=>!saved[x]); if(k>=0){cur=k;render()} else {refresh();alert('كل الأسئلة اتحلت، دوس End Test لإنهاء الامتحان')} }
+function saveNext(){ saved[cur]=sel[cur]!==null; nextQ(); }
+function skip(){ nextQ(); }
+function mark(){ review[cur]=!review[cur]; if(sel[cur]!==null) saved[cur]=true; refresh(); }
+function prev(){ if(cur>0){cur--;render()} }
+function fs(d){ size = d===0 ? 13 : Math.max(11,Math.min(24,size+d*2)); render(); }
+
+function endTest(){
+  const un = Q.filter((_,i)=>sel[i]===null).length;
+  const msg = un ? `لسه فاضل ${un} سؤال من غير إجابة. تنهي الامتحان؟` : 'تنهي الامتحان؟';
+  if(confirm(msg)) finish();
+}
+
+function finish(){
+  clearInterval(iv);
+  const n = Q.length; let ok=[], bad=[];
+  Q.forEach((q,i)=>{ (sel[i]===q.a ? ok : bad).push(i) });
+  const pct = n ? Math.round(ok.length/n*100) : 0;
+  const card = (i,good)=>{
+    const q=Q[i];
+    return `<div class="it ${good?'':'bad'}"><div class="q">${i+1}. ${q.t}</div>
+    ${good ? `<div class="r"><span class="tag g">Correct</span>${q.o[q.a]}</div>` :
+    `<div class="r"><span class="tag y">Your answer</span>${sel[i]===null?'— لم تتم الإجابة —':q.o[sel[i]]}</div>
+     <div class="r"><span class="tag g">Correct</span>${q.o[q.a]}</div>`}
+    ${q.exp?`<div class="exp">💬 ${q.exp}</div>`:''}</div>`;
+  };
+  const unans = Q.filter((_,i)=>sel[i]===null).length;
+  $('exam').classList.add('hide');
+  const r = $('result'); r.classList.remove('hide');
+  r.innerHTML = `<div class="res">
+   <div class="score"><div class="n">${pct}%</div><div>${ok.length} / ${n}</div></div>
+   <div class="stats">
+    <div><b style="color:var(--ok)">${ok.length}</b>صح</div>
+    <div><b style="color:var(--no)">${bad.length - unans}</b>غلط</div>
+    <div><b style="color:#777">${unans}</b>من غير إجابة</div>
+    <div><b>${n}</b>الإجمالي</div>
+   </div>
+   <div class="acts">
+    ${bad.length?'<button class="b" onclick="retryWrong()">إعادة الأسئلة الغلط ('+bad.length+')</button>':''}
+    <button class="b" onclick="init(QUESTIONS)">امتحان جديد عشوائي</button>
+   </div>
+   <div class="sec">✔ الأسئلة اللي اتحلت صح (${ok.length})</div>
+   ${ok.map(i=>card(i,true)).join('') || '<div style="padding:8px;color:#777">لا يوجد</div>'}
+   <div class="sec bad">✖ الأسئلة الغلط (${bad.length})</div>
+   ${bad.map(i=>card(i,false)).join('') || '<div style="padding:8px;color:#777">ممتاز، مفيش أخطاء 🎉</div>'}
+  </div>`;
+  window.scrollTo(0,0);
+}
+
+function retryWrong(){
+  const pool = Q.filter((q,i)=>sel[i]!==q.a);
+  init(pool);
+}
+
+init(QUESTIONS);
+</script>
+</body>
+</html>
