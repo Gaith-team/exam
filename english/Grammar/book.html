@@ -1,0 +1,483 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--accent:#0d9488;--accent-rgb:13,148,136;--c2:#f97316;--c4:#0891b2;
+--grad:linear-gradient(135deg,#0f172a 0%,#0e7490 60%,#0d9488 100%);--grad-soft:linear-gradient(135deg,#0d9488,#0891b2);
+--bg:#f4f7f8;--bg2:#e5ecee;--card:#fff;--text:#0f1b21;--text2:#44575f;--text3:#7b8d95;--bc:rgba(15,40,50,.12);
+--success:#16a34a;--danger:#dc2626;--warn:#d97706;--r:6px;--tr:all .25s ease;
+padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+[data-theme="dark"]{--bg:#0a1114;--bg2:#121c20;--card:#16232a;--text:#e8f1f3;--text2:#b2c4ca;--text3:#7f949c;--bc:rgba(255,255,255,.10);--accent:#2dd4bf;--accent-rgb:45,212,191;--c2:#fb923c;--success:#4ade80;--danger:#f87171;--c4:#22d3ee;color-scheme:dark}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;direction:ltr;text-align:left}
+#prog-bar{position:fixed;top:0;left:0;height:4px;z-index:999;background:linear-gradient(90deg,var(--accent),var(--c2));transition:width .2s}
+nav{position:fixed;top:env(safe-area-inset-top,0px);left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:64px;background:rgba(244,247,248,.95);backdrop-filter:blur(14px);border-bottom:2px solid var(--accent)}
+[data-theme="dark"] nav{background:rgba(10,17,20,.95)}
+.nav-back{color:var(--text2);text-decoration:none;font-size:13px;font-weight:700;padding:7px 13px;border-radius:var(--r);border:1px solid var(--bc);background:var(--card)}
+.nav-brand{display:flex;align-items:center;gap:9px;font-size:15px;font-weight:800;letter-spacing:.6px}
+.nav-logo-icon{width:34px;height:34px;border-radius:var(--r);background:var(--c2);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:800}
+.theme-btn{width:38px;height:38px;border-radius:var(--r);border:1px solid var(--bc);background:var(--card);cursor:pointer;font-size:15px}
+.hero-band{margin-top:calc(64px + env(safe-area-inset-top,0px));background:var(--grad);padding:40px 24px 48px;position:relative;overflow:hidden}
+.hero-band::after{content:'';position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:rgba(249,115,22,.35)}
+.hero-inner{max-width:560px;margin:0 auto;position:relative;z-index:1}
+.hero-band-icon{width:60px;height:60px;border-radius:var(--r);background:rgba(255,255,255,.14);display:flex;align-items:center;justify-content:center;font-size:30px;margin-bottom:14px;border:1px solid rgba(255,255,255,.3)}
+.hero-band h1{font-size:clamp(22px,4vw,30px);font-weight:800;color:#fff;margin-bottom:4px}
+.hero-band p{font-size:13px;color:rgba(255,255,255,.85)}
+.hero-band-meta{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.meta-pill{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);border-radius:var(--r);padding:6px 14px;font-size:12px;font-weight:700;color:#fff}
+.shell{max-width:560px;margin:0 auto;padding:24px 20px 80px}
+.stats-row{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:16px}
+.stat-box{background:var(--card);border:1px solid var(--bc);border-left:4px solid var(--c4);border-radius:var(--r);padding:12px}
+.stat-box:nth-child(1){border-left-color:var(--success)}.stat-box:nth-child(2){border-left-color:var(--danger)}
+.stat-box .val{font-size:20px;font-weight:800}.stat-box .lbl{font-size:11px;color:var(--text3);margin-top:2px}
+.stat-correct{color:var(--success)}.stat-wrong{color:var(--danger)}.stat-remain{color:var(--c4)}
+.prog-strip{background:var(--card);border:1px solid var(--bc);border-radius:var(--r);padding:14px 16px;margin-bottom:16px;display:flex;align-items:center;gap:14px}
+.prog-label{font-size:13px;font-weight:700;color:var(--text2);white-space:nowrap}
+.prog-track{flex:1;height:6px;background:var(--bg2);border-radius:6px;overflow:hidden}
+.prog-fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--c2));transition:width .4s}
+.timer-badge{min-width:70px;height:36px;border-radius:var(--r);background:var(--bg2);border:1px solid var(--bc);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;padding:0 12px;font-variant-numeric:tabular-nums}
+.timer-badge.warn{color:var(--warn);border-color:var(--warn)}
+.timer-badge.danger{color:var(--danger);border-color:var(--danger);animation:pulse .8s infinite}
+@keyframes pulse{50%{opacity:.55}}
+.menu h3{font-size:15px;font-weight:800;margin-bottom:12px;color:var(--text2)}
+.topic{display:flex;width:100%;align-items:center;justify-content:space-between;gap:10px;margin-bottom:10px;padding:15px 16px;border-radius:var(--r);border:1.5px solid var(--bc);border-left:4px solid var(--accent);background:var(--card);color:var(--text);font:inherit;font-size:14px;font-weight:700;cursor:pointer;text-align:left;transition:var(--tr)}
+.topic:hover{border-color:var(--accent);transform:translateX(3px)}
+.topic .tc{font-size:12px;color:var(--text3);white-space:nowrap}
+.topic.all{border-left-color:var(--c2);background:linear-gradient(135deg,rgba(249,115,22,.12),transparent)}
+.q-card{background:var(--card);border:1px solid var(--bc);border-top:4px solid var(--accent);border-radius:var(--r);box-shadow:0 8px 24px rgba(10,40,50,.08)}
+.q-header{padding:12px 18px 0}
+.q-num{display:inline-block;background:rgba(var(--accent-rgb),.12);color:var(--accent);border-radius:4px;padding:3px 10px;font-size:11px;font-weight:700;text-transform:uppercase}
+.q-text{padding:14px 18px;font-size:16px;font-weight:700;line-height:1.6;border-bottom:1px solid var(--bc)}
+.options{padding:14px 18px 18px;display:flex;flex-direction:column;gap:10px}
+.opt{display:flex;align-items:center;gap:12px;padding:13px 16px;border-radius:var(--r);border:1.5px solid var(--bc);background:var(--bg);cursor:pointer;font-size:14px;font-weight:600;transition:var(--tr);user-select:none}
+.opt:hover:not(.disabled){border-color:var(--accent);background:rgba(var(--accent-rgb),.08);transform:translateX(3px)}
+.opt-letter{width:28px;height:28px;border-radius:var(--r);flex-shrink:0;background:var(--bg2);border:1px solid var(--bc);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:800;color:var(--text2)}
+.opt.correct{border-color:var(--success);background:rgba(22,163,74,.1)}
+.opt.correct .opt-letter{background:var(--success);color:#fff;border-color:var(--success)}
+.opt.wrong{border-color:var(--danger);background:rgba(220,38,38,.08)}
+.opt.wrong .opt-letter{background:var(--danger);color:#fff;border-color:var(--danger)}
+.opt.disabled{pointer-events:none}
+.feedback-bar{margin:0 18px 14px;padding:12px 16px;border-radius:var(--r);display:flex;align-items:center;gap:10px;font-size:14px;font-weight:700}
+.feedback-bar.ok{background:rgba(22,163,74,.1);color:var(--success);border:1px solid rgba(22,163,74,.3)}
+.feedback-bar.no{background:rgba(220,38,38,.08);color:var(--danger);border:1px solid rgba(220,38,38,.25)}
+.nav-btns{padding:4px 18px 18px;display:flex;gap:10px}
+.btn{flex:1;padding:13px;border:none;border-radius:var(--r);font-size:14px;font-weight:800;cursor:pointer;font-family:inherit;transition:var(--tr);display:flex;align-items:center;justify-content:center;gap:8px;text-decoration:none}
+.btn:focus-visible,.opt:focus-visible,.topic:focus-visible{outline:3px solid var(--c2);outline-offset:2px}
+.btn-next{background:var(--grad-soft);color:#fff}
+.btn-skip{background:var(--bg2);color:var(--text2);border:1px solid var(--bc);flex:0 0 auto;padding:13px 18px}
+.result-hero{text-align:center;padding:36px 20px 28px;background:var(--card);border-radius:var(--r);border:1px solid var(--bc);border-top:4px solid var(--c2);margin-bottom:20px}
+.score-ring{width:110px;height:110px;margin:0 auto 18px;display:flex;align-items:center;justify-content:center;flex-direction:column;position:relative}
+.score-ring svg{position:absolute;inset:0;width:100%;height:100%;transform:rotate(-90deg)}
+.score-ring circle{fill:none;stroke-width:6;stroke-linecap:round}
+.ring-bg{stroke:var(--bg2)}.ring-fill{transition:stroke-dashoffset 1s ease}
+.score-num{font-size:28px;font-weight:800;line-height:1}.score-pct{font-size:12px;color:var(--text3)}
+.result-grade{font-size:22px;font-weight:800;margin-bottom:6px}.result-sub{font-size:14px;color:var(--text2)}
+.result-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px}
+.rs{background:var(--bg2);border-radius:var(--r);padding:12px 8px;text-align:center}
+.rs .n{font-size:20px;font-weight:800}.rs .l{font-size:11px;color:var(--text3)}
+.report-item{background:var(--card);border:1px solid var(--bc);border-left:4px solid var(--bc);border-radius:var(--r);padding:16px;margin-bottom:10px}
+.report-item.ok{border-left-color:var(--success)}.report-item.no{border-left-color:var(--danger)}
+.ri-q{font-size:13px;font-weight:700;margin-bottom:8px}
+.ri-row{display:flex;align-items:center;gap:8px;font-size:12px;margin-top:5px;color:var(--text2)}
+.ri-badge{padding:2px 8px;border-radius:4px;font-weight:700;font-size:11px;flex-shrink:0}
+.ri-yours{background:rgba(220,38,38,.12);color:var(--danger)}.ri-right{background:rgba(22,163,74,.12);color:var(--success)}
+.result-actions{display:flex;flex-direction:column;gap:10px;margin-top:20px}
+.btn-retry{background:linear-gradient(135deg,#f97316,#ea580c);color:#fff}
+.btn-home{background:var(--bg2);color:var(--text);border:1px solid var(--bc)}
+footer{background:var(--bg2);border-top:1px solid var(--bc);padding:22px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.footer-brand{font-size:14px;font-weight:700}.footer-brand span{color:var(--c2)}
+.footer-tg{text-decoration:none;color:#229ED9;font-size:12px;font-weight:600}
+@media(max-width:480px){nav{padding:0 14px}.shell{padding:16px 14px 60px}.nav-brand span{display:none}.hero-band{padding:30px 16px 36px}}
+</style>
+</head>
+<body>
+<div id="prog-bar" style="width:0%"></div>
+<nav>
+  <a href="https://gaith-team.github.io/exam/" class="nav-back">← Back</a>
+  <div class="nav-brand"><div class="nav-logo-icon">GT</div><span>GHAITH TEAM</span></div>
+  <div><button class="theme-btn" id="themeBtn" aria-label="Toggle theme">🌙</button></div>
+</nav>
+<div class="hero-band">
+  <div class="hero-inner">
+    <div class="hero-band-icon">🔬</div>
+    <h1>Grammar</h1>
+    <p id="topicName">إختار الشابتر اللي أنت عاوزة أو حل شامل علي كلة </p>
+    <div class="hero-band-meta">
+      <div class="meta-pill" id="totalBadge">-- Questions</div>
+      <div class="meta-pill" id="timeBadge">-- Min</div>
+      <div class="meta-pill">Shuffled</div>
+    </div>
+  </div>
+</div>
+<div class="shell">
+  <div id="hud" style="display:none">
+    <div class="stats-row">
+      <div class="stat-box"><div class="val stat-correct" id="sCorrect">0</div><div class="lbl">✔ Correct</div></div>
+      <div class="stat-box"><div class="val stat-wrong" id="sWrong">0</div><div class="lbl">✖ Wrong</div></div>
+      <div class="stat-box"><div class="val stat-remain" id="sRemain">--%</div><div class="lbl">⏳ Remaining</div></div>
+    </div>
+    <div class="prog-strip">
+      <div class="prog-label" id="progLabel">Question 1</div>
+      <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+      <div class="timer-badge" id="timerBadge">⏱ <span id="timerTxt">--:--</span></div>
+    </div>
+  </div>
+  <div id="app"></div>
+</div>
+<footer>
+  <div class="footer-brand">GHAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg">@nursing2bu</a>
+</footer>
+<script>
+/* Each chapter = one topic: {n: name, q: [ {t, o, a} ]} */
+const S=[
+{n:"Chapter I – Present Simple",q:[
+{t:"The human heart ____ blood throughout the body to supply oxygen and nutrients.",o:["is pumping","pumps","pump","pumped"],a:1},
+{t:"Standard nursing shifts at this hospital ____ at exactly 07:00 AM every day.",o:["starts","starting","start","are starting"],a:2},
+{t:"Dr. Adam ____ outpatient consultations on Thursday afternoons.",o:["does not conduct","do not conduct","is not conducting","not conducts"],a:0},
+{t:"How often ____ the charge nurse check the emergency medication inventory?",o:["do","is","doing","does"],a:3},
+{t:"Chronic smoker patients often ____ a higher risk of developing respiratory infections.",o:["has","have","are having","having"],a:1},
+{t:"This antibiotic ____ the growth of bacteria by destroying their cell walls.",o:["inhibit","inhibiting","inhibits","is inhibiting"],a:2},
+{t:"Red blood cells ____ hemoglobin, which binds to oxygen molecules.",o:["contain","contains","containing","is containing"],a:0},
+{t:"The triage nurse ____ patients based on the severity of their medical condition.",o:["prioritize","is prioritizing","prioritizes","do prioritize"],a:2},
+{t:"Diabetic patients ____ always require immediate insulin injections if their blood sugar is stable.",o:["do not","does not","are not","not"],a:0},
+{t:"Obesity ____ the workload on the cardiovascular system and joints.",o:["increase","increases","increasing","is increasing"],a:1}]},
+{n:"Chapter II – Adjectives + Prepositions",q:[
+{t:"Jessica is highly capable ____ managing large corporate projects on her own.",o:["at","of","with","for"],a:1},
+{t:"Regular aerobic exercise combined with a balanced diet is exceptionally good ____ you.",o:["for","at","about","with"],a:0},
+{t:"The young boy was absolutely brilliant ____ solving complex mathematical equations.",o:["of","in","at","for"],a:2},
+{t:"Why are you so worried ____ the final examinations? You have studied hard.",o:["with","about","for","of"],a:1},
+{t:"The entire historical city center was completely crowded ____ international tourists.",o:["of","with","at","about"],a:1},
+{t:"Local citizens must be fully aware ____ the new traffic regulations in the city.",o:["of","about","with","to"],a:0},
+{t:"Are you seriously excited ____ relocating to a new country next month?",o:["for","about","with","at"],a:1},
+{t:"The school principal was deeply disappointed ____ the final academic results.",o:["with","of","for","at"],a:0},
+{t:"Please don’t be angry ____ me; I really did not mean to break your laptop.",o:["about","for","with","at"],a:2},
+{t:"This modern facility is fully responsible ____ maintaining clean public spaces.",o:["to","for","with","of"],a:1},
+{t:"I am completely bored ____ listening to the exact same stories every single day.",o:["of","with","about","at"],a:1},
+{t:"The country is famous ____ its delicious traditional cuisine and hospitality.",o:["for","of","about","with"],a:0},
+{t:"The teacher noticed that the student was completely hopeless ____ chemistry concepts.",o:["for","at","with","of"],a:1},
+{t:"We were highly surprised ____ her sudden decision to resign from her position.",o:["at","with","for","about"],a:0},
+{t:"Is anyone here truly familiar ____ the latest rules of this card game?",o:["of","for","with","about"],a:2},
+{t:"The patient is anxious ____ the surgery.",o:["for","about","in"],a:1},
+{t:"Nurses must be good ____ communication skills.",o:["at","of","from"],a:0},
+{t:"This medical center is famous ____ excellent patient care.",o:["for","about","at"],a:0},
+{t:"The young nurse is very interested ____ learning about neuroplasticity.",o:["at","in","of"],a:1},
+{t:"Wash your hands to stay safe ____ bacteria.",o:["for","from","about"],a:1}]},
+{n:"Chapter III – Prepositions of Time & Place",q:[
+{t:"The exercise starts ____ 9:00 AM.",o:["at","on","in"],a:0},
+{t:"The nurse is ____ the third floor.",o:["in","on","at"],a:1},
+{t:"Doctors visit patients ____ the morning.",o:["at","on","in"],a:2},
+{t:"Keep the extra bandages ____ the glass cabinet.",o:["in","on","at"],a:0},
+{t:"The neurology clinic is closed ____ Sunday.",o:["at","on","in"],a:1},
+{t:"Put the blanket ____ the patient’s feet.",o:["on","under","in"],a:0},
+{t:"The surgeon will arrive ____ 11:30 AM.",o:["at","in","on"],a:0},
+{t:"My shift ends ____ night.",o:["at","on","in"],a:0},
+{t:"Keep the medicine ____ the small bag.",o:["in","on","at"],a:0},
+{t:"The clinic is open ____ Sunday.",o:["at","on","in"],a:1},
+{t:"Put the basket ____ the bed.",o:["on","under","in"],a:1},
+{t:"The oxygen valve is ____ the wall behind the bed.",o:["on","at","under"],a:0},
+{t:"The patient was born ____ 1998.",o:["in","at","on"],a:0},
+{t:"The medicine box is placed ____ the bedside table.",o:["on","in","at"],a:0},
+{t:"The therapist helps patients ____ the afternoon.",o:["in","at","on"],a:0},
+{t:"Dr. Ahmed works ____ the emergency department.",o:["in","on","at"],a:0},
+{t:"Please wait ____ the hospital waiting room.",o:["in","on","at"],a:0},
+{t:"The appointment is ____ March 22nd.",o:["on","in","at"],a:0}]},
+{n:"Chapter IV – Countable & Uncountable Nouns",q:[
+{t:"The nurse needs ____ fresh gauze for the wound.",o:["a","some"],a:1},
+{t:"How ____ equipment is in the emergency room?",o:["many","much"],a:1},
+{t:"Please give the patient ____ glass of water.",o:["a","some"],a:0},
+{t:"There is ____ blood on the floor near the bed.",o:["some","many"],a:0},
+{t:"Nurse Mona has ____ patients to check today.",o:["much","many"],a:1},
+{t:"We need ____ information about the patient’s allergy.",o:["an","some"],a:1},
+{t:"Take ____ pill every morning after breakfast.",o:["a","some"],a:0},
+{t:"Is there ____ pain in your left arm?",o:["any","many"],a:0},
+{t:"The doctor gave good ____ to the nursing staff.",o:["advice","advices"],a:0},
+{t:"Can you bring me ____ clean towels from the shelf?",o:["some","much"],a:0},
+{t:"There are ____ beds available in the ward.",o:["few","little"],a:0},
+{t:"Drink ____ water to stay healthy during your shift.",o:["a lot of","many"],a:0},
+{t:"She gave the patient ____ useful medical advice.",o:["a","some"],a:1},
+{t:"How ____ nurses are on duty tonight?",o:["much","many"],a:1},
+{t:"We don’t have ____ time before the surgery starts.",o:["many","much"],a:1}]},
+{n:"Chapter V – Present Continuous",q:[
+{t:"Look! The nurse ____ the patient’s blood pressure.",o:["check","is checking","checked"],a:1},
+{t:"Listen! The baby ____ in the pediatric ward.",o:["cries","is crying","cried"],a:1},
+{t:"The doctor ____ surgery at the moment.",o:["performs","is performing","performed"],a:1},
+{t:"We ____ vital signs right now.",o:["monitor","are monitoring","monitored"],a:1},
+{t:"The patient ____ sleeping; he is awake.",o:["is not","are not","does not"],a:0},
+{t:"____ the physician examining the thyroid gland?",o:["Is","Are","Do"],a:0},
+{t:"My colleagues ____ documentation in the office.",o:["is writing","are writing","write"],a:1},
+{t:"What ____ you doing at this moment?",o:["are","is","do"],a:0},
+{t:"The medical team ____ hard in the emergency room.",o:["works","are working","work"],a:1},
+{t:"She ____ a patient chart right now.",o:["reads","is reading","read"],a:1},
+{t:"Are the nurses giving medication? Yes, they ____.",o:["is","are","do"],a:1},
+{t:"The patient ____ resting comfortably on the bed.",o:["is","are","am"],a:0},
+{t:"Why ____ the monitor beeping loudly?",o:["is","are","do"],a:0},
+{t:"I ____ helping the surgeon with instruments.",o:["am","is","are"],a:0},
+{t:"They ____ talking to the patient’s family members.",o:["is","are","do"],a:1},
+{t:"Right now, Nurse Sarah ____ temperature.",o:["take","is taking","took"],a:1},
+{t:"The children ____ playing in the waiting area.",o:["is","are","am"],a:1},
+{t:"Look at that monitor! It ____ properly.",o:["not working","is not working","works"],a:1},
+{t:"____ the doctor talking to Mr. Robert?",o:["Is","Are","Do"],a:0},
+{t:"We ____ waiting for the laboratory results.",o:["am","is","are"],a:2},
+{t:"The surgeon ____ an operation today.",o:["is performing","perform","performed"],a:0},
+{t:"Listen! The ambulance ____ outside.",o:["comes","is coming","came"],a:1},
+{t:"The patient ____ drinking water right now.",o:["is","are","drinks"],a:0},
+{t:"Why ____ you standing in the hallway?",o:["are","is","do"],a:0},
+{t:"She ____ wearing her white uniform today.",o:["is","are","am"],a:0},
+{t:"The medical students ____ listening to the lecture.",o:["is","are","do"],a:1},
+{t:"Is the nurse changing the bandage? No, she ____.",o:["isn’t","aren’t","don’t"],a:0},
+{t:"They ____ preparing the medication tray.",o:["is","are","am"],a:1},
+{t:"The baby ____ crying anymore.",o:["is not","are not","do not"],a:0},
+{t:"I ____ writing my shift notes now.",o:["am","is","are"],a:0},
+{t:"Choose the correct sentence:",o:["The nurse is check the patient.","The nurse is checking the patient.","The nurse checking the patient."],a:1},
+{t:"Choose the correct sentence:",o:["Are you feeling better today?","Is you feeling better today?","You are feeling better today?"],a:0},
+{t:"Choose the correct sentence:",o:["They is working in the ward.","They are working in the ward.","They working in the ward."],a:1},
+{t:"Choose the correct sentence:",o:["The doctor not sleeping now.","The doctor is not sleeping now.","The doctor are not sleeping now."],a:1},
+{t:"Choose the correct sentence:",o:["What is you doing?","What are you doing?","What you are doing?"],a:1},
+{t:"Choose the correct sentence:",o:["Look! The patient is smiling.","Look! The patient smiling.","Look! The patient is smile."],a:0},
+{t:"Choose the correct sentence:",o:["We am monitoring the pulse.","We is monitoring the pulse.","We are monitoring the pulse."],a:2},
+{t:"Choose the correct sentence:",o:["Is she taking her medicine?","Are she taking her medicine?","Do she taking her medicine?"],a:0}]},
+{n:"Chapter VI – Future with “going to”",q:[
+{t:"I ____ going to wash my hands before I touch the patient.",o:["is","am","are","be"],a:1},
+{t:"The nurse ____ going to give the green pill to the old man.",o:["am","are","is","not"],a:2},
+{t:"We ____ going to clean the medical tools today.",o:["is","am","are","be"],a:2},
+{t:"Look! The patient is out of bed. He ____ going to fall.",o:["am","is","are","not"],a:1},
+{t:"____ you going to help the doctor in the room?",o:["Is","Am","Are","Be"],a:2},
+{t:"She is ____ going to work tonight because she is sick.",o:["no","not","am","are"],a:1},
+{t:"What time ____ the doctor going to come to the hospital?",o:["is","am","are","be"],a:0},
+{t:"They are not ____ to change the bed sheets now.",o:["go","going","gone","goes"],a:1},
+{t:"The baby is crying. The mother ____ going to feed him.",o:["am","are","is","be"],a:2},
+{t:"I am tired. I am ____ going to work extra hours today.",o:["not","no","am","is"],a:0},
+{t:"Look at those heavy boxes. They ____ going to fall down.",o:["is","am","are","be"],a:2},
+{t:"____ the head nurse going to meet the new students today?",o:["Are","Is","Am","Be"],a:1},
+{t:"We are going ____ clean the clinic room now.",o:["for","to","at","in"],a:1},
+{t:"The computer is off. I am going to ____ it on.",o:["turn","turning","turned","turns"],a:0},
+{t:"The sick girl ____ going to drink her warm milk.",o:["am","is","are","be"],a:1},
+{t:"Are they ____ to move the patient to a new bed?",o:["go","going","gone","goes"],a:1},
+{t:"I am ____ going to take my break right now.",o:["am","to","not","are"],a:2},
+{t:"The doctor ____ going to write a medical note.",o:["is","are","am","be"],a:0},
+{t:"What ____ you going to do for the patient?",o:["is","am","are","be"],a:2},
+{t:"The patient feels good. He ____ going to go home tomorrow.",o:["am","are","is","be"],a:2},
+{t:"The nurse ____ give the pill to the patient.",o:["is going to","am going to","are going to"],a:0},
+{t:"I ____ check the blood pressure in a minute.",o:["am going to","is going to","are going to"],a:0},
+{t:"We ____ start the evening shift at 3 PM.",o:["is going to","am going to","are going to"],a:2},
+{t:"Dr. Ahmed ____ perform surgery tomorrow morning.",o:["is going to","am going to","are going to"],a:0},
+{t:"The patient ____ leave the hospital on Monday.",o:["is going to","am going to","are going to"],a:0},
+{t:"You ____ take this medicine twice a day.",o:["is going to","am going to","are going to"],a:2},
+{t:"The nurses ____ write the shift report soon.",o:["is going to","am going to","are going to"],a:2},
+{t:"____ she going to measure the temperature?",o:["Is","Are","Am"],a:0},
+{t:"____ you going to help me with this patient?",o:["Is","Are","Am"],a:1},
+{t:"The pharmacist ____ bring new medicine to the ward.",o:["is going to","am going to","are going to"],a:0},
+{t:"He ____ not going to take pills without water.",o:["is","am","are"],a:0},
+{t:"They ____ going to monitor the heart rate.",o:["is","am","are"],a:2},
+{t:"What ____ you going to do next?",o:["is","are","am"],a:1},
+{t:"I ____ not going to give wrong medicine.",o:["am","is","are"],a:0},
+{t:"The baby ____ going to sleep soon.",o:["is","am","are"],a:0},
+{t:"Nurse Mona is going to ____ the injection now.",o:["give","gives","giving"],a:0},
+{t:"We are going to ____ vital signs at noon.",o:["check","checks","checking"],a:0},
+{t:"Is the doctor going to ____ the patient?",o:["examine","examines","examining"],a:0},
+{t:"They are not going to ____ mistakes with drugs.",o:["make","makes","making"],a:0},
+{t:"Are you going to ____ water with your tablet?",o:["drink","drinks","drinking"],a:0},
+{t:"The patient is going to ____ better soon.",o:["feel","feels","feeling"],a:0},
+{t:"She is going to ____ the medicine label carefully.",o:["read","reads","reading"],a:0},
+{t:"I am going to ____ my shift notes now.",o:["write","writes","writing"],a:0},
+{t:"Are the doctors going to ____ the test results?",o:["review","reviews","reviewing"],a:0},
+{t:"He is going to ____ in Room 10.",o:["rest","rests","resting"],a:0},
+{t:"We are going to ____ the room quiet.",o:["keep","keeps","keeping"],a:0},
+{t:"Is she going to ____ the bandage?",o:["change","changes","changing"],a:0},
+{t:"They are going to ____ the doctor’s order.",o:["follow","follows","following"],a:0},
+{t:"I am going to ____ my hands before touching the patient.",o:["wash","washes","washing"],a:0},
+{t:"Are you going to ____ the patient’s chart?",o:["update","updates","updating"],a:0},
+{t:"Choose the correct sentence:",o:["The nurse is going to give the pill.","The nurse is go to give the pill.","The nurse going to give the pill."],a:0},
+{t:"Choose the correct sentence:",o:["Are you going to take your medicine?","Is you going to take your medicine?","You going to take your medicine?"],a:0},
+{t:"Choose the correct sentence:",o:["We am going to check the pulse.","We is going to check the pulse.","We are going to check the pulse."],a:2},
+{t:"Choose the correct sentence:",o:["She not going to work tomorrow.","She is not going to work tomorrow.","She are not going to work tomorrow."],a:1},
+{t:"Choose the correct sentence:",o:["What are you going to do?","What is you going to do?","What you going to do?"],a:0},
+{t:"Choose the correct sentence:",o:["Look! The doctor is going to arrive.","Look! The doctor going to arrive.","Look! The doctor is go to arrive."],a:0},
+{t:"Choose the correct sentence:",o:["I am going to help the patient.","I are going to help the patient.","I is going to help the patient."],a:0},
+{t:"Choose the correct sentence:",o:["Are they going to stay in the ward?","Is they going to stay in the ward?","Do they going to stay in the ward?"],a:0}]}
+];
+
+let questions=[],i=0,correct,wrong,answers,wrongSet,answered,cur=-1;
+let totalTime=40*60,timeLeft,timerInterval;
+const LETTERS=['A','B','C','D','E','F'];
+const $=id=>document.getElementById(id);
+function shuffle(a){for(let k=a.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[a[k],a[j]]=[a[j],a[k]];}return a;}
+function shuffleOptions(q){const idx=shuffle(q.o.map((_,k)=>k));return {...q,o:idx.map(k=>q.o[k]),a:idx.indexOf(q.a)};}
+const allQ=()=>S.flatMap(s=>s.q);
+
+function menu(){
+  clearInterval(timerInterval);cur=-1;
+  $('hud').style.display='none';
+  $('prog-bar').style.width='0%';
+  $('topicName').textContent='Choose a chapter or take the comprehensive exam';
+  $('totalBadge').textContent=allQ().length+' Questions in total';
+  $('timeBadge').textContent='Timed';
+  $('app').innerHTML='<div class="menu"><h3>📚 Choose a topic</h3>'+
+    S.map((s,k)=>`<button class="topic" onclick="start(${k})"><span>${s.n}</span><span class="tc">${s.q.length} Qs</span></button>`).join('')+
+    `<button class="topic all" onclick="start(-1)"><span>🏆 Comprehensive – All Chapters</span><span class="tc">${allQ().length} Qs</span></button></div>`;
+  window.scrollTo({top:0});
+}
+function start(k){
+  cur=k;
+  const pool=k<0?allQ():S[k].q;
+  totalTime=Math.max(5,Math.ceil(pool.length*0.5))*60;
+  $('topicName').textContent=k<0?'Comprehensive – All Chapters':S[k].n;
+  $('hud').style.display='block';
+  questions=shuffle([...pool]).map(shuffleOptions);
+  i=0;correct=0;wrong=0;answered=0;wrongSet=[];
+  answers=new Array(questions.length).fill(null);
+  timeLeft=totalTime;
+  $('totalBadge').textContent=questions.length+' Questions';
+  $('timeBadge').textContent=(totalTime/60)+' Min';
+  startTimer();render();
+  window.scrollTo({top:0});
+}
+function startTimer(){
+  clearInterval(timerInterval);
+  $('timerBadge').className='timer-badge';
+  const show=()=>{const m=Math.floor(timeLeft/60),s=timeLeft%60;$('timerTxt').textContent=`${m}:${s<10?'0':''}${s}`;};
+  show();
+  timerInterval=setInterval(()=>{
+    timeLeft--;show();
+    const b=$('timerBadge');
+    if(timeLeft<=120)b.className='timer-badge danger';else if(timeLeft<=300)b.className='timer-badge warn';
+    if(timeLeft<=0){clearInterval(timerInterval);finish();}
+  },1000);
+}
+function updateTop(){
+  const total=questions.length||1;
+  $('sCorrect').textContent=correct;$('sWrong').textContent=wrong;
+  $('sRemain').textContent=Math.round(((total-answered)/total)*100)+'%';
+  $('progLabel').textContent='Question '+(i+1)+' / '+total;
+  $('progFill').style.width=((i+1)/total*100)+'%';
+  $('prog-bar').style.width=((i+1)/total*100)+'%';
+}
+const SYSTEMS=[
+  {icon:'🔬',l:['#0d9488','13,148,136'],d:['#2dd4bf','45,212,191']},
+  {icon:'📊',l:['#0891b2','8,145,178'],d:['#22d3ee','34,211,238']},
+  {icon:'📝',l:['#ea580c','234,88,12'],d:['#fb923c','251,146,60']},
+  {icon:'📚',l:['#4f46e5','79,70,229'],d:['#818cf8','129,140,248']}
+];
+function applyPalette(){
+  const s=SYSTEMS[(i||0)%SYSTEMS.length];
+  const dark=document.documentElement.getAttribute('data-theme')==='dark';
+  const r=document.documentElement.style,c=dark?s.d:s.l;
+  r.setProperty('--accent',c[0]);r.setProperty('--accent-rgb',c[1]);
+  r.setProperty('--grad-soft',`linear-gradient(135deg,${s.l[0]},#0f172a)`);
+  const ic=document.querySelector('.hero-band-icon');if(ic)ic.textContent=s.icon;
+}
+function render(){
+  applyPalette();updateTop();
+  const q=questions[i];if(!q)return;
+  $('app').innerHTML=`
+    <div class="q-card">
+      <div class="q-header"><div class="q-num">Question ${i+1} / ${questions.length}</div></div>
+      <div class="q-text">${q.t}</div>
+      <div class="options">
+        ${q.o.map((o,idx)=>`<div class="opt" id="opt${idx}" onclick="choose(${idx})"><div class="opt-letter">${LETTERS[idx]||idx+1}</div>${o}</div>`).join('')}
+      </div>
+      <div class="nav-btns"><button class="btn btn-skip" onclick="skip()">Skip ⏭</button></div>
+    </div>`;
+}
+function choose(v){
+  if(answers[i]!==null)return;
+  answers[i]=v;answered++;
+  const q=questions[i],ok=v===q.a;
+  ok?correct++:wrong++;
+  updateTop();
+  q.o.forEach((_,idx)=>{
+    const el=$('opt'+idx);el.classList.add('disabled');
+    if(idx===q.a)el.classList.add('correct');else if(idx===v)el.classList.add('wrong');
+  });
+  const fb=document.createElement('div');
+  fb.className='feedback-bar '+(ok?'ok':'no');
+  fb.innerHTML=ok?'<span>🎉</span><span>Excellent! Well done.</span>':'<span>😔</span><span>Not quite — stay focused!</span>';
+  const card=document.querySelector('.q-card');
+  card.querySelector('.options').after(fb);
+  card.querySelector('.nav-btns').innerHTML=`<button class="btn btn-next" onclick="next()">${i<questions.length-1?'Next Question →':'🏁 Finish Exam'}</button>`;
+}
+function skip(){
+  if(answers[i]===null){answers[i]=-1;answered++;wrong++;updateTop();}
+  next();
+}
+function next(){
+  if(i<questions.length-1){i++;render();}
+  else finish();
+}
+function finish(){
+  clearInterval(timerInterval);
+  const total=questions.length,score=total?Math.round((correct/total)*100):0;
+  wrongSet=[];
+  questions.forEach((q,idx)=>{if(answers[idx]!==q.a)wrongSet.push(q);});
+  let grade,gc;
+  if(score>=90){grade='🥇 Excellent';gc='var(--success)';}
+  else if(score>=75){grade='🥈 Very Good';gc='var(--c4)';}
+  else if(score>=60){grade='🥉 Good';gc='var(--warn)';}
+  else{grade='📚 Keep Studying';gc='var(--danger)';}
+  const circ=2*Math.PI*45,offset=circ-(score/100)*circ;
+  const report=questions.map((q,idx)=>{
+    const ok=answers[idx]===q.a;
+    return `<div class="report-item ${ok?'ok':'no'}">
+      <div class="ri-q">${ok?'✅':'❌'} ${q.t}</div>
+      ${!ok?`<div class="ri-row"><span class="ri-badge ri-yours">Your answer</span> ${answers[idx]>=0&&answers[idx]!==null?q.o[answers[idx]]:'Skipped'}</div>
+      <div class="ri-row"><span class="ri-badge ri-right">Correct</span> ${q.o[q.a]}</div>`:''}
+    </div>`;
+  }).join('');
+  const skipped=answers.filter(a=>a===-1||a===null).length;
+  $('prog-bar').style.width='100%';
+  $('app').innerHTML=`
+    <div class="result-hero">
+      <div class="score-ring">
+        <svg viewBox="0 0 110 110"><circle class="ring-bg" cx="55" cy="55" r="45"/>
+        <circle class="ring-fill" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="${circ}" style="stroke:${gc}" id="ringFill"/></svg>
+        <div class="score-num">${score}</div><div class="score-pct">%</div>
+      </div>
+      <div class="result-grade" style="color:${gc}">${grade}</div>
+      <div class="result-sub">You answered ${answered} of ${total} questions</div>
+      <div class="result-stats">
+        <div class="rs"><div class="n" style="color:var(--success)">${correct}</div><div class="l">Correct</div></div>
+        <div class="rs"><div class="n" style="color:var(--danger)">${wrong}</div><div class="l">Wrong</div></div>
+        <div class="rs"><div class="n" style="color:var(--c4)">${skipped}</div><div class="l">Skipped / Unanswered</div></div>
+      </div>
+    </div>
+    <div class="result-actions">
+      ${wrongSet.length?`<button class="btn btn-retry" onclick="retryWrong()">🔁 Retry Mistakes (${wrongSet.length})</button>`:''}
+      <button class="btn btn-home" onclick="start(cur)">🔀 New Random Exam</button>
+      <button class="btn btn-home" onclick="menu()">📚 Change Topic</button>
+      <a href="https://gaith-team.github.io/exam/" class="btn btn-home">🏠 Back to Subject</a>
+    </div>
+    <div style="margin-top:28px">
+      <div style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text2)">📋 Detailed Report</div>${report}
+    </div>`;
+  setTimeout(()=>{const r=$('ringFill');if(r)r.style.strokeDashoffset=offset;},100);
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+function retryWrong(){
+  questions=shuffle([...wrongSet]).map(shuffleOptions);
+  i=0;correct=0;wrong=0;answered=0;wrongSet=[];
+  answers=new Array(questions.length).fill(null);
+  timeLeft=totalTime;startTimer();render();
+  window.scrollTo({top:0,behavior:'smooth'});
+}
+const themeBtn=$('themeBtn');
+let theme=window.matchMedia&&matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+try{theme=localStorage.getItem('theme')||theme;}catch(e){}
+function applyTheme(t){
+  theme=t;
+  document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'light');
+  themeBtn.textContent=t==='dark'?'☀️':'🌙';
+  try{localStorage.setItem('theme',t);}catch(e){}
+  applyPalette();
+}
+applyTheme(theme);
+themeBtn.addEventListener('click',()=>applyTheme(theme==='dark'?'light':'dark'));
+menu();
+</script>
+</body>
+</html>
