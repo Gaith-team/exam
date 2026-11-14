@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM - Amniotic Fluid Disorders</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--accent:#db2777;--accent2:#ec4899;--dark:#be185d;--glow:rgba(219,39,119,.15);--bg:#f8fafc;--bg2:#eef2f7;--card:#fff;--text:#1a2332;--text2:#4a5568;--text3:#718096;--bc:rgba(0,0,0,.08);--ok:#16a34a;--no:#dc2626;--hl:#fff7ed;--hlb:#f59e0b}
+[data-theme="dark"]{--bg:#0d1117;--bg2:#161b22;--card:#1c2333;--text:#e6edf3;--text2:#b1bac4;--text3:#7d8590;--bc:rgba(255,255,255,.1);--hl:#2a2113}
+body{font-family:'Outfit','Segoe UI',Tahoma,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;transition:background .3s}
+nav{position:sticky;top:0;z-index:50;display:flex;align-items:center;justify-content:space-between;padding:0 20px;height:58px;background:var(--card);border-bottom:1px solid var(--bc)}
+.brand{display:flex;align-items:center;gap:9px;font-weight:900}
+.logo{width:32px;height:32px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px}
+.theme-btn{width:36px;height:36px;border-radius:50%;border:1px solid var(--bc);background:var(--bg2);cursor:pointer;font-size:15px}
+.hero{background:linear-gradient(135deg,var(--dark),var(--accent),var(--accent2));padding:32px 20px;text-align:center;color:#fff}
+.hero h1{font-size:clamp(20px,4vw,28px);font-weight:900;direction:ltr}
+.hero p{font-size:13px;opacity:.85;margin-top:6px}
+.tabs{display:flex;max-width:760px;margin:18px auto 0;padding:0 16px;gap:10px}
+.tab{flex:1;padding:12px;border-radius:12px;border:1px solid var(--bc);background:var(--card);color:var(--text2);font:700 14px 'Outfit','Segoe UI',sans-serif;cursor:pointer}
+.tab.on{background:linear-gradient(135deg,var(--dark),var(--accent));color:#fff;border-color:transparent}
+.wrap{max-width:760px;margin:0 auto;padding:18px 16px 70px}
+.hide{display:none}
+/* NOTES */
+.sec{margin:26px 0 12px;padding:10px 16px;border-radius:12px;background:var(--bg2);border-right:5px solid var(--accent);font-weight:900;font-size:15px}
+.sec small{display:block;font-weight:600;color:var(--text3);font-size:12px;margin-top:2px;direction:ltr;text-align:left}
+.sub{margin:18px 4px 8px;font-weight:900;color:var(--accent);font-size:14px;direction:ltr;text-align:left}
+.item{background:var(--card);border:1px solid var(--bc);border-radius:14px;padding:14px 16px;margin-bottom:10px}
+.en{direction:ltr;text-align:left;font-weight:700;font-size:14.5px;line-height:1.6}
+.ar{margin-top:8px;font-size:14px;line-height:1.8;color:var(--text2)}
+.und{margin-top:9px;padding:9px 12px;border-radius:10px;background:var(--hl);border-right:3px solid var(--hlb);font-size:13.5px;line-height:1.8}
+.und b{color:var(--hlb)}
+.note{margin:6px 0 14px;font-size:12.5px;color:var(--text3);text-align:center}
+/* QUIZ */
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+.sb{background:var(--card);border:1px solid var(--bc);border-radius:14px;padding:10px;text-align:center}
+.sb .v{font-size:20px;font-weight:900}.sb .l{font-size:11px;color:var(--text3)}
+.strip{background:var(--card);border:1px solid var(--bc);border-radius:14px;padding:12px 14px;margin-bottom:14px;display:flex;align-items:center;gap:12px}
+.track{flex:1;height:8px;background:var(--bg2);border-radius:8px;overflow:hidden}
+.fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width .3s}
+.timer{min-width:64px;padding:6px 12px;border-radius:18px;background:var(--bg2);font-weight:900;font-size:14px;text-align:center;direction:ltr}
+.timer.danger{color:var(--no)}
+.qc{background:var(--card);border:1px solid var(--bc);border-radius:18px;overflow:hidden}
+.qh{background:linear-gradient(135deg,var(--dark),var(--accent));color:#fff;padding:6px 16px;font-size:12px;font-weight:700;display:flex;justify-content:space-between}
+.qt{padding:20px 18px 14px;font-weight:700;font-size:15px;line-height:1.65;direction:ltr;text-align:left;border-bottom:1px solid var(--bc)}
+.opts{padding:14px 18px;display:flex;flex-direction:column;gap:9px}
+.opt{display:flex;align-items:center;gap:12px;padding:13px 14px;border-radius:12px;border:1.5px solid var(--bc);background:var(--bg);cursor:pointer;font-size:14px;font-weight:600;direction:ltr;text-align:left}
+.opt:hover:not(.dis){border-color:var(--accent);background:var(--glow)}
+.let{width:28px;height:28px;border-radius:8px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0}
+.opt.correct{border-color:var(--ok);background:rgba(22,163,74,.09)}.opt.correct .let{background:var(--ok);color:#fff}
+.opt.wrong{border-color:var(--no);background:rgba(220,38,38,.07)}.opt.wrong .let{background:var(--no);color:#fff}
+.dis{pointer-events:none}
+.fb{margin:0 18px 12px;padding:11px 14px;border-radius:12px;font-weight:700;font-size:14px}
+.fb.ok{background:rgba(22,163,74,.1);color:var(--ok)}.fb.no{background:rgba(220,38,38,.08);color:var(--no)}
+.exp{margin:0 18px 14px;padding:11px 14px;background:var(--hl);border-right:3px solid var(--hlb);border-radius:10px;font-size:13.5px;line-height:1.8}
+.nb{padding:4px 18px 18px;display:flex;gap:10px}
+.btn{flex:1;padding:13px;border:none;border-radius:12px;font:900 14px 'Outfit','Segoe UI',sans-serif;cursor:pointer;display:block;text-align:center;text-decoration:none}
+.btn-p{background:linear-gradient(135deg,var(--dark),var(--accent));color:#fff}
+.btn-s{background:var(--bg2);color:var(--text2);border:1px solid var(--bc);flex:0 0 auto;padding:13px 18px}
+.res{text-align:center;padding:30px 18px;background:var(--card);border:1px solid var(--bc);border-radius:18px;margin-bottom:16px}
+.res .big{font-size:44px;font-weight:900;color:var(--accent)}
+.res .g{font-size:20px;font-weight:900;margin:6px 0}
+.acts{display:flex;flex-direction:column;gap:10px;margin-top:16px}
+.ri{background:var(--card);border:1px solid var(--bc);border-right:4px solid var(--bc);border-radius:12px;padding:14px;margin-bottom:9px;font-size:13px}
+.ri.ok{border-right-color:var(--ok)}.ri.no{border-right-color:var(--no)}
+.ri .q{font-weight:700;direction:ltr;text-align:left;margin-bottom:6px}
+.ri .r{direction:ltr;text-align:left;margin-top:4px;color:var(--text2)}
+</style>
+</head>
+<body>
+<nav><div class="brand"><div class="logo">GT</div>GHAITH TEAM</div><button class="theme-btn" id="themeBtn">🌙</button></nav>
+<div class="hero"><h1>Amniotic Fluid Disorders</h1><p>طب نسا</p></div>
+<div class="tabs"><button class="tab on" id="t1" onclick="showTab(1)">📖 الشرح</button><button class="tab" id="t2" onclick="showTab(2)">📝 الأسئلة</button></div>
+
+<div class="wrap">
+<div id="notes"></div>
+<div id="quiz" class="hide">
+  <div class="stats">
+    <div class="sb"><div class="v" style="color:var(--ok)" id="sC">0</div><div class="l">✔ صحيح</div></div>
+    <div class="sb"><div class="v" style="color:var(--no)" id="sW">0</div><div class="l">✖ خطأ</div></div>
+    <div class="sb"><div class="v" style="color:var(--accent)" id="sR">100%</div><div class="l">⏳ متبقي</div></div>
+  </div>
+  <div class="strip"><b id="pl" style="font-size:13px;white-space:nowrap"></b><div class="track"><div class="fill" id="pf"></div></div><div class="timer" id="tm">20:00</div></div>
+  <div id="app"></div>
+</div>
+</div>
+
+<script>
+/* ================= NOTES (ترتيب المحاضرة) ================= */
+const NOTES = [
+{h:"AMNIOTIC FLUID DISORDERS", s:"Premature Rupture of Membrane (PROM)", g:[
+{t:"Definition: We have 2 items:", i:[
+["PROM: Rupture of membrane before initiation of labour pains.","PROM يعني الغشاء (الكيس) اللي حوالين الجنين ينفجر قبل ما ألم الطلق يبدأ.","الست لسه ما حسّتش بأي طلق، وفجأة مية نزلت منها. يعني الغشاء اتفتح قبل الطلق."],
+["PPROM: Rupture of membrane before 37 w of pregnancy.","PPROM يعني الغشاء ينفجر قبل الأسبوع 37 من الحمل.","نفس PROM بس الحمل لسه ما كملش، يعني الجنين لسه Preterm."]]},
+{t:"Aetiology:", i:[
+["The exact cause is unknown, but theoretically 2 mechanisms may occur:","السبب الأكيد مش معروف، بس نظرياً فيه ميكانيزمين ممكن يحصلوا.","مفيش سبب واحد متفق عليه، فبيتفسر بطريقتين."],
+["1- Reduction of membrane tensile strength, e.g. with infection.","قوة شد الغشاء بتقل، زي مع العدوى.","زي كيس بلاستيك رقّ وضعف، أقل ضغط يخرقه."],
+["2- ↑ of intrauterine pressure e.g. polyhydramnios.","الضغط جوه الرحم بيزيد، زي مع زيادة السائل الأمنيوسي (polyhydramnios).","زي بالونة اتنفخت زيادة عن اللزوم، بتفرقع بسهولة."],
+["The main cause is reduction of membrane strength by infection (microorganisms):","السبب الرئيسي هو إن الميكروبات تضعّف قوة الغشاء.","الميكروب هو الأساس، والباقي نظريات. والميكروب بيعمل ده بـ 3 طرق في الشرح اللي تحت."],
+["Mucinase & protease → Dissolve mucus plug","الميكروبات بتفرز إنزيمات (mucinase و protease) بتذوّب سدادة المخاط.","السدادة دي زي الفلينة اللي بتقفل عنق الرحم. لما تدوب، الباب يتفتح للميكروبات وتوصل للغشاء."],
+["Collagenase & elastase → Membrane disruption ROM","إنزيمات collagenase و elastase بتهري الغشاء فيتقطع وينفجر (ROM).","الكولاجين والإيلاستين هما الخيوط اللي شادّة الغشاء، لما يتقطعوا القماشة تتفتق."],
+["↑PG","العدوى بتزوّد البروستاجلاندين (PG).","الـ PG بيحرّك انقباضات الرحم، فبيساعد إن الغشاء ينفجر والطلق يتبدي بدري."]]},
+{t:"Diagnosis of PROM:", i:[
+["1- History of gush of fluid from vagina which is: a- Large amount. b- Suddenly occur.","الست بتحكي إن مية نزلت من المهبل مرة واحدة، وكمية كبيرة، وفجأة.","ده الفرق بينها وبين التسريب البسيط أو البول: هنا اندفاع كبير ومفاجئ."],
+["2- Visualization of amniotic fluid (A.F.) inside vagina, by using cusco's speculum.","نشوف السائل الأمنيوسي بعينينا جوه المهبل باستخدام منظار cusco.","الدكتور يفتح المهبل بالمنظار ويلاقي المية متجمعة جوه، يبقى تشخيص مباشر."],
+["3- Nitrazine test: by use of Nitrazine paper to estimate pH, vaginal pH normally = 5 (acidic). In case of PROM → pH is alkaline as pH of A.F. is alkaline 7.5.","اختبار النيترازين: بنستخدم ورقة نيترازين نقيس بيها الـ pH. المهبل طبيعي حمضي pH = 5، ولو PROM الـ pH يبقى قلوي (7.5) لأن السائل الأمنيوسي قلوي.","الورقة بتغيّر لونها لما تلمس سائل قلوي. المهبل حمضي، فلو الورقة اتقلّبت يبقى فيه سائل غريب قلوي نازل (هو السائل الأمنيوسي)."],
+["4- Fern test: a drop of A.F. on glass slide under microscope → crystallization pattern of A.F. salts (fern appearance).","اختبار الـ Fern: نحط نقطة سائل على شريحة زجاج ونبصّ بالميكروسكوب، نشوف أملاح السائل متبلورة على شكل ورقة سرخس.","لما السائل ينشّف الأملاح بتترسم شكل ورق السرخس، يبقى ده سائل أمنيوسي."],
+["5- Abdominal U/S to detect the amount of liquor around fetus, in case of PROM → ↓ amount of liquor.","السونار على البطن بيقيس كمية السائل حوالين الجنين، ولو PROM الكمية بتقل.","المية نزلت، فاللي حوالين الجنين بقى أقل."],
+["6- Vaginal cytology: +ve of fetal cells in smear of vaginal cytology indicate PROM.","فحص الخلايا من المهبل: لو لقينا خلايا جنينية في المسحة يبقى PROM.","السائل الأمنيوسي فيه خلايا من الجنين، فلو ظهرت في المهبل يبقى السائل نزل."],
+["7- Fetal fibronectin: +ve in endocx. & vagina → highly accurate diagnosis of PROM.","الـ Fetal fibronectin لو طلع إيجابي في عنق الرحم والمهبل يبقى تشخيص PROM دقيق جداً.","ده تحليل بيدوّر على بروتين جنيني، وظهوره في المكان ده دليل قوي."],
+["8- Alfa-fetoprotein (α-FP): +ve in vagina → high accurate diagnosis.","الـ Alfa-fetoprotein لو إيجابي في المهبل يبقى تشخيص دقيق عالي.","بروتين موجود في السائل الأمنيوسي، لو لقيناه في المهبل يبقى السائل نزل."],
+["9- Amnioscopy: for direct visualization of amniotic fluid & membranes.","الـ Amnioscopy بنشوف بيه السائل الأمنيوسي والأغشية مباشرة.","منظار بيدخل ويخلينا نبصّ على الغشاء بنفسنا."]]},
+{t:"Complications of PROM:", i:[
+["Maternal: 1- Chorio amnionitis. 2- Premature separation of placenta.","مضاعفات للأم: التهاب الأغشية والسائل (chorioamnionitis)، وانفصال المشيمة المبكر.","الأم بتتعرض للعدوى، والمشيمة ممكن تنفصل قبل وقتها."],
+["Fetal: 1- Infection of fetus. 2- R.D.S. 3- Pulmonary hypoplasia. 4- Fetal distress. 5- ↑ perinatal morbidity & mortality.","مضاعفات للجنين: عدوى للجنين، RDS، نقص نمو الرئة، ضيق جنين (fetal distress)، وزيادة المرض والوفيات حول الولادة.","قلة السائل بتأثر على نمو الرئة، والعدوى بتوصله، ففرصة المضاعفات بتزيد."]]},
+{t:"ttt. of PROM:", i:[
+["1- Antibiotics is mandatory: penicillin or erythromycin.","المضاد الحيوي إجباري: بنسلين أو إريثروميسين.","السبب إن العدوى هي أخطر حاجة في PROM، فمفيش مجال نستغنى عن المضاد."],
+["2- PROM with complication: infection → TOP, fetal distress → TOP.","لو PROM معاه مضاعفات: عدوى أو ضيق جنين، نعمل TOP (إنهاء الحمل).","TOP معناها Termination of pregnancy. المضاعفة معناها إن البقاء جوه الرحم بقى خطر، فنولّدها."],
+["PROM without complication: < 28 w → TOP.","من غير مضاعفات، لو أقل من 28 أسبوع: TOP.","زي ما هو مكتوب في المحاضرة."],
+["PROM without complication: 28-36 w → according to L/S ratio: < 2 → expectant ttt, > 2 → TOP.","من 28 لـ 36 أسبوع بنشوف الـ L/S ratio: لو أقل من 2 نستنى (expectant)، ولو أكبر من 2 نعمل TOP.","الـ L/S ratio بيقيس نضج رئة الجنين. أقل من 2 معناها الرئة لسه مش ناضجة فنستنى، وأكبر من 2 الرئة جاهزة فنولّد."],
+["PROM without complication: > 36 W → TOP.","من غير مضاعفات، لو أكبر من 36 أسبوع: TOP.","الحمل شبه كامل، فمفيش داعي نستنى."]]},
+{t:"Role of antibiotics in PROM:", i:[
+["a. Can prevent PROM.","المضاد ممكن يمنع حدوث PROM.","علشان العدوى سبب رئيسي، فلو اتعالجت قبل كده ممكن الغشاء ما ينفجرش."],
+["b. Prevent PTL associated with PROM.","يمنع الطلق المبكر (PTL) المصاحب لـ PROM.","PTL = preterm labour."],
+["c. Prevent chorioamnionitis.","يمنع التهاب الأغشية والسائل (chorioamnionitis).","الغشاء المفتوح باب للميكروبات، والمضاد بيحمي."],
+["d. Prophylaxis against fetal intra uterine infection.","وقاية من عدوى الجنين جوه الرحم.","يعني بنحمي الجنين نفسه قبل ما يتصاب."],
+["e. Prevent neonate infection","يمنع عدوى المولود بعد الولادة.","الحماية بتمتد لحد ما الطفل يتولد."]]},
+{t:"Role of corticosteroids:", i:[
+["24mg dexamethazone for 24hr which begin to act after 24hr from last dose for 1 week.","24 ملجم ديكساميثازون على مدار 24 ساعة، وبيبدأ يشتغل بعد 24 ساعة من آخر جرعة وبيفضل شغال لمدة أسبوع.","الكورتيزون بينضّج رئة الجنين عشان لو اتولد بدري ما يعملش RDS. وعشان كده بنحتاج وقت قبل ما يبدأ مفعوله."]]},
+{t:"Role of short term tocolysis in PROM:", i:[
+["Long term tocolysis is contra indicated as some authors described that uterine irritability (which suppressed by tocolytics) may be the earliest sign of choriomnionitis.","الـ tocolysis (مثبطات الانقباض) لفترة طويلة ممنوعة، لأن بعض العلماء قالوا إن تهيّج الرحم ممكن يكون أول علامة على chorioamnionitis، والـ tocolytics بتخبّيه.","لو سكّتنا الانقباضات بقالنا فترة، ممكن نفوّت العلامة اللي تنبهنا إن فيه التهاب."],
+["Short term tocolysis can be used for only 2 days till the cortisone dose is taken (24mg/24hr for 1day) and begin to act after 24 hr of the last dose.","الـ tocolysis قصير المدى ينفع بس لمدة يومين، لحد ما جرعة الكورتيزون تتاخد (24 ملجم/24 ساعة لمدة يوم) وتبدأ تشتغل بعد 24 ساعة من آخر جرعة.","الهدف إننا نكسب وقت بسيط بس عشان الكورتيزون ينضّج الرئة، مش نأجّل الولادة أكتر من كده."]]}
+]},
+{h:"Intrauterine Infection With Pregnancy", s:"(Chorioamnionitis)", g:[
+{t:"Introduction:", i:[
+["Usually choroamnionitis occurs after PROM but there is some organisms can cross intact membrane & cause chorioamnionitis e.g.","غالباً الالتهاب بيحصل بعد PROM، بس فيه ميكروبات تقدر تعدّي الغشاء السليم وتعمل chorioamnionitis، زي:","يعني مش شرط الغشاء ينفجر، فيه ميكروبات قوية تخترقه."],
+["1- Listeria monocytogenous.","الليستريا مونوسيتوجينز.","ميكروب من اللي بيعدي الغشاء السليم."],
+["2- Bacteroid fragilis.","الباكتيرويد فراجيليس.","ميكروب تاني من نفس المجموعة."],
+["3- Group B-hemolytic strept.","استربتوكوكس المجموعة B المحللة للدم.","التالت في القايمة."],
+["Amniotic fluid infection syndrome = congenital neonatal pneumonia + chorioamnionitis.","متلازمة عدوى السائل الأمنيوسي = التهاب رئوي خلقي للمولود + chorioamnionitis.","يعني الميكروب بيصيب الغشاء، والجنين بيبلع السائل الملوّث فيتصاب في رئته."]]},
+{t:"Aetiology:", i:[
+["(a) Organisms Type: 1- mycoplasma. 2- bacteroid fragilis. 3- gp B. strept. 4- strept. faecalis. 5- non-haemolytic strept 6- E. coli.","أنواع الميكروبات: ميكوبلازما، باكتيرويد فراجيليس، استربتوكوكس مجموعة B، استربتوكوكس فيكالس، استربتوكوكس غير محللة للدم، وإي كولاي.","6 أنواع لازم تحفظهم، ولاحظ إن اتنين منهم اتكرروا مع اللي فوق."],
+["b) Route: Ascending route, descending route, transplacental.","طرق وصول العدوى: صاعدة (من المهبل)، نازلة، وعبر المشيمة.","ascending يعني من تحت لفوق من المهبل، descending يعني من فوق، transplacental يعني من دم الأم للجنين عن طريق المشيمة."],
+["c) P.F. : (a) General as before","العوامل المهيّئة: عامة زي اللي قبل كده.","يعني نفس العوامل العامة اللي اتكلمنا عنها قبل كده."],
+["(b) Local: PROM, prolonged labour, excessive vaginal manipulation e.g. PV, meconium.","العوامل المحلية: PROM، طلق طويل، تدخلات مهبلية كتير زي الفحص PV، والميكونيوم.","كل ما الغشاء يفضل مفتوح أو نفحص كتير، الميكروبات تدخل أكتر."]]},
+{t:"C/P: (A) Clinical diagnosis:", i:[
+["Fever > 37.2°C + 2 of the followings:","حرارة أعلى من 37.2 درجة + اتنين من اللي جاي:","الحرارة شرط أساسي، ونكمّل عليها اتنين من الأربعة."],
+["1- Maternal tachycardia.","سرعة نبض الأم.","الجسم بيقاوم العدوى فالقلب بيسرع."],
+["2- Fetal tachycardia (1st sign of chorioamnionitis).","سرعة نبض الجنين (أول علامة لـ chorioamnionitis).","نبض الجنين بيسرع أول حاجة، فنراقبه عشان نلحق."],
+["3- Tender uterus.","الرحم بيوجع عند اللمس.","الالتهاب في الرحم بيخليه مؤلم."],
+["4- Foul odour vaginal discharge.","إفرازات مهبلية ريحتها وحشة.","نتاج الميكروبات ريحتها كريهة."]]},
+{t:"(B) Investigation:", i:[
+["1- Leucocytosis: 1500 above normal or above 15000.","زيادة كرات الدم البيضا: 1500 فوق الطبيعي أو فوق 15000.","الجسم بيصنّع بيض أكتر لمّا فيه عدوى."],
+["2- ↑ CRP (+ve).","زيادة CRP (إيجابي).","علامة التهاب بتظهر في الدم."],
+["3- ↑ ESR.","زيادة الـ ESR.","علامة التهاب كمان."],
+["4- Isolation of organisms from A.F.","عزل الميكروبات من السائل الأمنيوسي.","نزرع السائل ونلاقي الميكروب نفسه."]]},
+{t:"ttt:", i:[
+["(A) prophylaxis:","العلاج الوقائي.","نمنع العدوى قبل ما تحصل (بالمضاد الحيوي مع PROM)."],
+["(B) Curative: Antibiotics + TOP.","العلاج الشافي: مضاد حيوي + TOP (إنهاء الحمل).","لو الالتهاب حصل، بنعالج بالمضاد وبننهي الحمل."]]}
+]},
+{h:"POLYHYDRAMNIOS", s:"", g:[
+{t:"Definition: We have 3 definitions:", i:[
+["a- Presence of excessive amount of liquor over 2 liters.","وجود كمية سائل زيادة عن 2 لتر.","السائل الطبيعي أقل من كده بكتير."],
+["b- Vertical pocket diameter > 8 cm.","أكبر جيب رأسي للسائل أكبر من 8 سم.","بنقيس بالسونار أعمق جيب سائل."],
+["c- Amniotic fluid index (AFI) = sum of mean vertical pocket diameter in 4 quadrants of maternal abdomen by U/S => > 20cm.","الـ AFI هو مجموع متوسط أقطار الجيوب الرأسية في 4 أرباع من بطن الأم بالسونار، ولو أكبر من 20 سم يبقى polyhydramnios.","نقسم البطن 4 أجزاء، نقيس جيب في كل جزء، ونجمعهم."]]},
+{t:"Causes: Disease of theories", i:[
+["a- Uniovular twins: one fetus obtains a greater part of circulation (hyperperfused) → hypertrophy of kidneys → production of more fetal urine in amniotic sac.","توأم من بويضة واحدة: واحد فيهم ياخد النصيب الأكبر من الدورة الدموية (hyperperfused)، فكليته تكبر وتنتج بول أكتر جوه كيس السائل.","الجنين بيتبوّل جوه السائل الأمنيوسي. كل ما يبول أكتر، السائل يزيد."],
+["b- Congenital fetal anomalies: Anencephaly: loss of bony vault of the fetal head, it cause polyhydramnios, why?","تشوهات خلقية: انعدام المخ (Anencephaly) يعني فقدان عظمة قبة الجمجمة، وبيسبب polyhydramnios. ليه؟","الجنين بيتعامل مع جمجمة ناقصة، وده بيتسبب في 3 حاجات تحت."],
+["1- Loss CSF into amnion.","السائل المخي الشوكي (CSF) بيضيع جوه السائل الأمنيوسي.","السائل بتاع المخ بيتسرب جوه الكيس ويزوّده."],
+["2- Irritation of exposed centers → ↓ ADH → ↑ urination.","تهيّج المراكز المكشوفة بيقلل الـ ADH فالتبول يزيد.","الـ ADH هرمون بيحافظ على المية في الجسم. لما يقل، بول أكتر ينزل في السائل."],
+["3- Defective swallowing.","البلع بيبقى معيوب.","الجنين لو مش بيبلع السائل، السائل يتراكم."],
+["Congenital atresia of oesophagus → ↓ swallowing → ↑ Amnion.","انسداد خلقي في المريء بيقلل البلع فالسائل يزيد.","المريء مقفول فالجنين مش قادر يبلع السائل."],
+["Congenital lung hypoplasia → ↓ inspiration of A.F → polyhydramnios.","نقص نمو الرئة الخلقي بيقلل شهيق السائل الأمنيوسي فيحصل polyhydramnios.","الجنين بيمتص جزء من السائل مع التنفس، ولو الرئة صغيرة ما بتمتصش."],
+["c- Cord causes: obstruction to venous circulation of fetus → oedema of placenta → ↑ transudation into amniotic sac.","أسباب الحبل السري: انسداد في الدورة الوريدية للجنين يسبب ورم (oedema) في المشيمة، فيزيد النضح (transudation) جوه كيس السائل.","زي ما لو الأنبوبة اتسدّت، الضغط يزيد وتسرّب المية للجنب."],
+["Causes of fetal cord venous obstruction: (I) true knots of cord.","أسباب انسداد الوريد في الحبل السري: (1) عقد حقيقية في الحبل السري.","العقدة بتخنق الوريد."],
+["(II) fetal liver cirrhosis → fetal heart diseases / fetal liver $ / fetal Rh.","(2) تليف كبد الجنين، وبيجي مع أمراض قلب الجنين، ومتلازمات كبد الجنين، وحالات الـ Rh للجنين.","لما الكبد يتليّف أو القلب يضعف، الدم ما بيمشيش كويس فيحصل ورم في المشيمة."]]}
+]}
+];
+
+function renderNotes(){
+  let h="";
+  NOTES.forEach(sec=>{
+    h+=`<div class="sec">${sec.h}${sec.s?`<small>${sec.s}</small>`:""}</div>`;
+    sec.g.forEach(g=>{
+      h+=`<div class="sub">${g.t}</div>`;
+      g.i.forEach(x=>{
+        h+=`<div class="item"><div class="en">${x[0]}</div><div class="ar">${x[1]}</div><div class="und"><b>عشان تفهمها:</b> ${x[2]}</div></div>`;
+      });
+    });
+  });
+  document.getElementById("notes").innerHTML=h;
+}
+
+/* ================= QUESTIONS (من الكتاب فقط) ================= */
+const TF=["True","False"];
+const QUESTIONS=[
+/* MCQ - easy to hard */
+{t:"PROM is defined as rupture of membrane:",o:["Before initiation of labour pains","After the start of labour pains","Only after 37 weeks","During the second stage of labour"],a:0,exp:"PROM = الغشاء ينفجر قبل ما ألم الطلق يبدأ."},
+{t:"PPROM means rupture of membrane before how many weeks of pregnancy?",o:["28 weeks","32 weeks","37 weeks","40 weeks"],a:2,exp:"PPROM = قبل 37 أسبوع."},
+{t:"Which is the main cause of PROM?",o:["Reduction of membrane strength by infection","Anemia","Hypertension","Post-term pregnancy"],a:0,exp:"السبب الرئيسي هو العدوى (الميكروبات) اللي بتضعّف الغشاء."},
+{t:"In PROM, the vaginal pH by Nitrazine test becomes:",o:["Acidic (5)","Alkaline (7.5)","Neutral (7.0)","Unchanged"],a:1,exp:"المهبل طبيعي pH=5 حمضي، والسائل الأمنيوسي قلوي 7.5."},
+{t:"Which antibiotic is mandatory in the treatment of PROM?",o:["Gentamicin only","Penicillin or erythromycin","Metronidazole only","Tetracycline"],a:1,exp:"الكتاب بيقول المضاد إجباري: penicillin أو erythromycin."},
+{t:"Which of the following is a fetal complication of PROM?",o:["Pulmonary hypoplasia","Premature separation of placenta","Chorioamnionitis","Tender uterus"],a:0,exp:"الأم: chorioamnionitis وانفصال المشيمة. الجنين: infection, RDS, pulmonary hypoplasia, fetal distress."},
+{t:"What is the first sign of chorioamnionitis?",o:["Foul vaginal discharge","Tender uterus","Fetal tachycardia","Maternal tachycardia"],a:2,exp:"الكتاب كاتب: Fetal tachycardia (1st sign of chorioamnionitis)."},
+{t:"PROM without complication at 28–36 weeks: the decision depends on the L/S ratio. If L/S ratio is < 2, you:",o:["Terminate the pregnancy (TOP)","Follow expectant treatment","Do cesarean immediately","Give tocolysis for 2 weeks"],a:1,exp:"أقل من 2 = رئة غير ناضجة فنستنى (expectant)، وأكبر من 2 نعمل TOP."},
+{t:"Which cause of polyhydramnios acts by decreased swallowing of amniotic fluid?",o:["Congenital atresia of oesophagus","Uniovular twins","True knots of the cord","Fetal Rh"],a:0,exp:"انسداد المريء → ↓ swallowing → ↑ amnion."},
+{t:"In anencephaly, which of the following explains polyhydramnios?",o:["↑ ADH with oliguria","Loss of CSF into amnion and ↓ ADH with ↑ urination","↑ swallowing of liquor","Hypoperfusion of the kidney"],a:1,exp:"الأسباب 3: ضياع CSF، تهيّج المراكز فـ ↓ADH فـ ↑urination، والبلع المعيوب."},
+/* TF - easy to hard */
+{t:"PROM means rupture of membrane before initiation of labour pains.",o:TF,a:0,exp:"صح، ده تعريف PROM."},
+{t:"Vaginal pH is normally alkaline.",o:TF,a:1,exp:"غلط، المهبل طبيعي حمضي pH = 5. القلوي هو السائل الأمنيوسي."},
+{t:"Fern test shows a crystallization pattern of amniotic fluid salts.",o:TF,a:0,exp:"صح، شكل ورقة السرخس."},
+{t:"Ultrasound in PROM shows an increased amount of liquor.",o:TF,a:1,exp:"غلط، كمية السائل بتقل (↓)."},
+{t:"Mucinase and protease dissolve the mucus plug.",o:TF,a:0,exp:"صح، بتذوّب سدادة المخاط."},
+{t:"Collagenase and elastase cause membrane disruption.",o:TF,a:0,exp:"صح، بتقطّع الغشاء فيحصل ROM."},
+{t:"Antibiotics can prevent chorioamnionitis in PROM.",o:TF,a:0,exp:"صح، من أدوارها منع chorioamnionitis."},
+{t:"Long term tocolysis is recommended in PROM.",o:TF,a:1,exp:"غلط، ممنوعة لأنها ممكن تخبّي أول علامة لـ chorioamnionitis (تهيج الرحم)."},
+{t:"Short term tocolysis can be used for only 2 days in PROM.",o:TF,a:0,exp:"صح، لحد ما جرعة الكورتيزون تتاخد وتبدأ تشتغل."},
+{t:"PROM with infection or fetal distress is managed by TOP.",o:TF,a:0,exp:"صح، مع المضاعفات (infection / fetal distress) العلاج TOP."},
+{t:"Chorioamnionitis never occurs with intact membranes.",o:TF,a:1,exp:"غلط، فيه ميكروبات (Listeria, Bacteroides fragilis, GBS) تعدّي الغشاء السليم."},
+{t:"Maternal tachycardia is the first sign of chorioamnionitis.",o:TF,a:1,exp:"غلط، أول علامة هي fetal tachycardia."},
+{t:"Polyhydramnios is diagnosed when the AFI is more than 20 cm.",o:TF,a:0,exp:"صح، AFI > 20 سم."},
+{t:"Anencephaly causes polyhydramnios by increasing ADH.",o:TF,a:1,exp:"غلط، بتقلل الـ ADH (↓ADH) فالتبول يزيد."},
+{t:"Congenital lung hypoplasia causes polyhydramnios by decreasing inspiration of amniotic fluid.",o:TF,a:0,exp:"صح، ↓ inspiration of A.F → polyhydramnios."},
+{t:"PPROM refers to rupture of membrane before 37 weeks of pregnancy.",o:TF,a:0,exp:"صح، الـ P الزيادة = Preterm."},
+{t:"Polyhydramnios can predispose to PROM by increasing intrauterine pressure.",o:TF,a:0,exp:"صح، ↑ intrauterine pressure e.g. polyhydramnios."},
+{t:"In PROM, the history is a small amount of fluid that leaks gradually.",o:TF,a:1,exp:"غلط، التاريخ المرضي: كمية كبيرة وبتحصل فجأة (gush)."},
+{t:"In PROM, Nitrazine paper shows an acidic pH.",o:TF,a:1,exp:"غلط، بيطلع قلوي 7.5 لأن السائل الأمنيوسي قلوي."},
+{t:"Infection increases prostaglandins (PG), which contributes to membrane rupture.",o:TF,a:0,exp:"صح، الميكروبات بتعمل ↑PG مع الإنزيمات."},
+{t:"Amnioscopy is used for direct visualization of amniotic fluid and membranes.",o:TF,a:0,exp:"صح، ده دورها في التشخيص."},
+{t:"A positive fetal fibronectin in endocervix and vagina is a highly accurate diagnosis of PROM.",o:TF,a:0,exp:"صح، كما هو مكتوب في الكتاب."},
+{t:"Premature separation of placenta is a fetal complication of PROM.",o:TF,a:1,exp:"غلط، ده مضاعفة للأم (مع chorioamnionitis)."},
+{t:"Pulmonary hypoplasia and RDS are fetal complications of PROM.",o:TF,a:0,exp:"صح، من مضاعفات الجنين."},
+{t:"Antibiotics in PROM are optional and not mandatory.",o:TF,a:1,exp:"غلط، المضاد إجباري (penicillin أو erythromycin)."},
+{t:"PROM without complication at more than 36 weeks is managed by expectant treatment.",o:TF,a:1,exp:"غلط، بعد 36 أسبوع العلاج TOP."},
+{t:"PROM at 28-36 weeks with an L/S ratio > 2 is managed by TOP.",o:TF,a:0,exp:"صح، أكبر من 2 = TOP، وأقل من 2 = expectant."},
+{t:"Antibiotics in PROM help to prevent neonatal infection.",o:TF,a:0,exp:"صح، من أدوار المضاد في PROM."},
+{t:"Dexamethasone 24 mg begins to act 24 hours after the last dose.",o:TF,a:0,exp:"صح، وبيفضل لمدة أسبوع."},
+{t:"Listeria monocytogenes can cross intact membranes and cause chorioamnionitis.",o:TF,a:0,exp:"صح، مع Bacteroides fragilis و Group B strept."},
+{t:"Amniotic fluid infection syndrome equals congenital neonatal pneumonia plus chorioamnionitis.",o:TF,a:0,exp:"صح، تعريف الـ syndrome."},
+{t:"Routes of infection in chorioamnionitis include ascending, descending and transplacental routes.",o:TF,a:0,exp:"صح، الـ 3 طرق مذكورة في الكتاب."},
+{t:"The clinical diagnosis of chorioamnionitis is fever > 37.2°C plus 2 of 4 signs.",o:TF,a:0,exp:"صح، (maternal tachycardia, fetal tachycardia, tender uterus, foul discharge)."},
+{t:"Foul odour vaginal discharge is a sign of chorioamnionitis.",o:TF,a:0,exp:"صح، من علامات التشخيص الإكلينيكي."},
+{t:"Leucocytosis above 15000 is an investigation finding in chorioamnionitis.",o:TF,a:0,exp:"صح، مع ↑CRP و ↑ESR وعزل الميكروب من A.F."},
+{t:"Curative treatment of chorioamnionitis is antibiotics plus TOP.",o:TF,a:0,exp:"صح، كما هو في الكتاب."},
+{t:"Polyhydramnios is defined as liquor of more than 2 liters.",o:TF,a:0,exp:"صح، أحد التعريفات الثلاثة."},
+{t:"Polyhydramnios is defined as a vertical pocket diameter of more than 8 cm.",o:TF,a:0,exp:"صح، ده التعريف التاني."},
+{t:"In uniovular twins, the hyperperfused fetus develops atrophy of the kidneys.",o:TF,a:1,exp:"غلط، بيحصل hypertrophy للكلى فبول أكتر فسائل أكتر."},
+{t:"Congenital atresia of oesophagus causes polyhydramnios by increasing fetal swallowing.",o:TF,a:1,exp:"غلط، بتقلل البلع (↓ swallowing) فالسائل يزيد."}
+];
+
+/* ================= ENGINE ================= */
+let questions,i,correct,wrong,answers,answered,timeLeft,timerI,started=false;
+const LET=["A","B","C","D"];
+function shuffle(a){for(let k=a.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[a[k],a[j]]=[a[j],a[k]]}return a}
+function init(pool,rand){questions=rand?shuffle([...pool]):[...pool];i=0;correct=0;wrong=0;answered=0;answers=new Array(questions.length).fill(null);timeLeft=20*60;startTimer();render()}
+function startTimer(){clearInterval(timerI);const tm=document.getElementById("tm");tm.className="timer";tm.textContent="20:00";
+ timerI=setInterval(()=>{timeLeft--;const m=Math.floor(timeLeft/60),s=timeLeft%60;tm.textContent=m+":"+(s<10?"0":"")+s;if(timeLeft<=120)tm.className="timer danger";if(timeLeft<=0){clearInterval(timerI);finish()}},1000)}
+function top_(){const n=questions.length;sC.textContent=correct;sW.textContent=wrong;sR.textContent=Math.round((n-answered)/n*100)+"%";pl.textContent="سؤال "+(i+1)+" / "+n;pf.style.width=((i+1)/n*100)+"%"}
+function render(){top_();const q=questions[i];
+ const type=q.o===TF?"True / False":"Multiple Choice";
+ app.innerHTML=`<div class="qc"><div class="qh"><span>سؤال ${i+1} / ${questions.length}</span><span>${type}</span></div><div class="qt">${q.t}</div><div class="opts">${q.o.map((o,k)=>`<div class="opt" id="o${k}" onclick="choose(${k})"><div class="let">${LET[k]}</div>${o}</div>`).join("")}</div><div class="nb"><button class="btn btn-s" onclick="skip()">تخطي</button></div></div>`}
+function choose(v){if(answers[i]!==null)return;answers[i]=v;answered++;const q=questions[i],ok=v===q.a;ok?correct++:wrong++;top_();
+ q.o.forEach((_,k)=>{const e=document.getElementById("o"+k);e.classList.add("dis");if(k===q.a)e.classList.add("correct");else if(k===v)e.classList.add("wrong")});
+ const card=document.querySelector(".qc");const fb=document.createElement("div");fb.className="fb "+(ok?"ok":"no");fb.textContent=ok?"🎉 شطور جدا، اللهم بارك":"😔 ركز يا سكر";
+ card.querySelector(".opts").after(fb);
+ if(q.exp){const e=document.createElement("div");e.className="exp";e.innerHTML="<b>💬 شرح:</b> "+q.exp;fb.after(e)}
+ card.querySelector(".nb").innerHTML=`<button class="btn btn-p" onclick="next()">${i<questions.length-1?"السؤال التالي":"إنهاء الامتحان"}</button>`}
+function skip(){if(answers[i]===null){answers[i]=-1;answered++;wrong++;top_()}next()}
+function next(){if(i<questions.length-1){i++;render();window.scrollTo({top:0,behavior:"smooth"})}else finish()}
+function finish(){clearInterval(timerI);const n=questions.length,sc=Math.round(correct/n*100);
+ let g=sc>=90?"🥇 ممتاز":sc>=75?"🥈 جيد جداً":sc>=60?"🥉 جيد":"📚 راجع تاني";
+ const wr=questions.filter((q,k)=>answers[k]!==q.a);
+ const rep=questions.map((q,k)=>{const ok=answers[k]===q.a;return `<div class="ri ${ok?"ok":"no"}"><div class="q">${ok?"✅":"❌"} ${q.t}</div>${ok?"":`<div class="r">إجابتك: ${answers[k]>=0?q.o[answers[k]]:"تم التخطي"}</div><div class="r">الصحيح: ${q.o[q.a]}</div>`}</div>`}).join("");
+ window._wr=wr;
+ app.innerHTML=`<div class="res"><div class="big">${sc}%</div><div class="g">${g}</div><div>صحيح ${correct} • خطأ ${wrong} من ${n}</div><div class="acts">${wr.length?`<button class="btn btn-p" onclick="init(window._wr,true)">إعادة الأسئلة الخطأ (${wr.length})</button>`:""}<button class="btn btn-s" onclick="init(QUESTIONS,false)">امتحان جديد بالترتيب</button><button class="btn btn-s" onclick="init(QUESTIONS,true)">امتحان جديد عشوائي</button></div></div><div style="font-weight:700;margin:18px 4px 10px;color:var(--text2)">📋 تقرير مفصّل</div>${rep}`;
+ window.scrollTo({top:0,behavior:"smooth"})}
+
+function showTab(n){
+ document.getElementById("notes").classList.toggle("hide",n!==1);
+ document.getElementById("quiz").classList.toggle("hide",n!==2);
+ t1.classList.toggle("on",n===1);t2.classList.toggle("on",n===2);
+ if(n===2&&!started){started=true;init(QUESTIONS,false)}
+ window.scrollTo({top:0})}
+
+/* THEME */
+const tb=document.getElementById("themeBtn");let theme="light";
+function applyTheme(t){theme=t;document.documentElement.setAttribute("data-theme",t==="dark"?"dark":"");tb.textContent=t==="dark"?"☀️":"🌙"}
+tb.onclick=()=>applyTheme(theme==="dark"?"light":"dark");
+
+renderNotes();
+</script>
+</body>
+</html>
