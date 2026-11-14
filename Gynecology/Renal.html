@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Renal Diseases with Pregnancy - GHAITH TEAM</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--ac:#db2777;--ac2:#be185d;--bg:#f8fafc;--bg2:#eef2f7;--card:#fff;--tx:#1a2332;--tx2:#4a5568;--bc:rgba(0,0,0,.08);--ok:#16a34a;--no:#dc2626}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#0d1117;--bg2:#161b22;--card:#1c2333;--tx:#e6edf3;--tx2:#b1bac4;--bc:rgba(255,255,255,.1)}}
+:root[data-theme=dark]{--bg:#0d1117;--bg2:#161b22;--card:#1c2333;--tx:#e6edf3;--tx2:#b1bac4;--bc:rgba(255,255,255,.1)}
+body{font-family:'Outfit','Segoe UI',Tahoma,sans-serif;background:var(--bg);color:var(--tx);line-height:1.6}
+header{background:linear-gradient(135deg,var(--ac2),var(--ac));color:#fff;text-align:center;padding:28px 16px 20px}
+header h1{font-size:clamp(20px,4vw,28px);font-weight:900}header p{opacity:.85;font-size:13px}
+.tabs{display:flex;gap:8px;justify-content:center;margin-top:16px}
+.tab{border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.15);color:#fff;padding:8px 20px;border-radius:30px;font:700 14px Outfit,sans-serif;cursor:pointer}
+.tab.on{background:#fff;color:var(--ac2)}
+.wrap{max-width:640px;margin:0 auto;padding:18px 14px 60px}
+h2{margin:26px 0 12px;padding:10px 14px;border-radius:12px;background:var(--card);border:1px solid var(--bc);border-right:5px solid var(--ac);font-size:16px;direction:ltr;border-right-width:1px;border-left:5px solid var(--ac)}
+.it{background:var(--card);border:1px solid var(--bc);border-radius:14px;padding:14px 16px;margin-bottom:12px}
+.tag{display:inline-block;font-size:11px;font-weight:700;padding:2px 10px;border-radius:20px;margin-bottom:6px;background:var(--bg2);color:var(--tx2)}
+.tag.d{background:rgba(219,39,119,.12);color:var(--ac)}
+.en{font-weight:700;font-size:15px;direction:ltr;text-align:left}
+.ar{direction:rtl;text-align:right;margin-top:8px;font-size:14px;color:var(--tx2)}
+.ex{direction:rtl;text-align:right;margin-top:8px;padding:8px 12px;border-radius:10px;background:var(--bg2);border-right:3px solid var(--ac);font-size:13.5px}
+.ex b{color:var(--ac)}
+.hide{display:none}
+.stats{display:flex;gap:10px;margin-bottom:12px}.st{flex:1;background:var(--card);border:1px solid var(--bc);border-radius:12px;padding:8px;text-align:center;font-weight:900}.st small{display:block;font-weight:400;font-size:11px;color:var(--tx2)}
+.q{background:var(--card);border:1px solid var(--bc);border-radius:16px;overflow:hidden}
+.qt{padding:18px;font-weight:700;direction:ltr;text-align:left;border-bottom:1px solid var(--bc)}
+.qh{padding:6px 18px;background:linear-gradient(135deg,var(--ac2),var(--ac));color:#fff;font-size:12px;font-weight:700;display:flex;justify-content:space-between}
+.opts{padding:14px 18px;display:flex;flex-direction:column;gap:8px}
+.op{padding:12px 14px;border:1.5px solid var(--bc);border-radius:10px;cursor:pointer;font-weight:600;direction:ltr;text-align:left;background:var(--bg)}
+.op:hover{border-color:var(--ac)}.op.c{border-color:var(--ok);background:rgba(22,163,74,.1)}.op.w{border-color:var(--no);background:rgba(220,38,38,.08)}.op.x{pointer-events:none}
+.btn{display:block;width:calc(100% - 36px);margin:0 18px 18px;padding:12px;border:0;border-radius:10px;background:var(--ac);color:#fff;font:900 14px Outfit,sans-serif;cursor:pointer}
+.res{text-align:center;padding:30px 16px;background:var(--card);border:1px solid var(--bc);border-radius:16px}.res .n{font-size:42px;font-weight:900;color:var(--ac)}
+.ri{background:var(--card);border:1px solid var(--bc);border-radius:10px;padding:10px 14px;margin-top:8px;font-size:13px;direction:ltr;text-align:left}
+button:focus-visible,.op:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+</style></head><body>
+<header><h1>Renal Diseases with Pregnancy</h1><p>طب النساء والتوليد</p>
+<div class="tabs"><button class="tab on" id="t1">المحاضرة</button><button class="tab" id="t2">الامتحان (50 سؤال)</button></div></header>
+<div class="wrap"><div id="notes"></div><div id="quiz" class="hide"></div></div>
+<script>
+/* ===== NOTES: [en, ar, example, source] source: k=الكتاب, d=زيادات الدكتور ===== */
+const N=[
+["Asymptomatic (Silent) Bacteriuria",[
+["Definition: Presence of bacteria more than 10⁵ organisms in urethral sample or presence of any bacteria in suprapubic sample.","يعني في بكتيريا كتير في البول (أكتر من 100 ألف) لو العينة من مجرى البول، أو أي بكتيريا لو العينة بالسرنجة من فوق العانة.","كأن عندك مية كتير ومفيهاش غير شوية جراثيم، ده طبيعي؟ لأ، ده تلوث. وفي العينة النضيفة (فوق العانة) حتى جرثومة واحدة تعتبر مشكلة."],
+["Incidence: 5 – 10% of all pregnancies.","بيحصل عند من 5 لـ 10% من الحوامل.","يعني من كل 100 حامل، حوالي 5 لـ 10 منهم عندهم بكتيريا في البول وهما مش حاسين."],
+["Complications: 1- 50% → symptomatic bacteriuria either cystitis or pyelonephritis.","50% منهم بتبقى عندهم أعراض، يا التهاب مثانة يا التهاب حوض الكلى.","زي نار تحت الرماد، نص الحالات بتولع وتبان."],
+["2- ↑ incidence of PIH.","بيزود احتمال ارتفاع ضغط الحمل (PIH).","الالتهاب الصامت بيتعب الجسم من جوه فالضغط يعلى."],
+["3- ↑ incidence of perinatal mortality and morbidity.","بيزود وفيات ومضاعفات الجنين حوالين الولادة.","الالتهاب مش بيأذي الأم بس، الجنين كمان بيتأثر."],
+["Diagnosis: No C/P, but by investigation.","مفيش أعراض خالص، فبنشخصه بالتحاليل بس.","زي حد جواه مشكلة وهو مبسوط ومش حاسس، مفيش غير الفحص اللي يكشفها."],
+["1- The most specific method is culture of urine sample but this method is expensive and not practical for screening of all pregnant females.","أدق طريقة هي زراعة البول، بس غالية وصعب نعملها لكل الحوامل.","زي أحسن كاميرا، دقيقة جدا بس مينفعش تركبها في كل شارع من غلاها."],
+["2- Mic. exam of urine for pus cells in urine, easy, but less accurate.","فحص البول بالميكروسكوب على خلايا الصديد، سهل بس أقل دقة.","زي النظر بالعين، سريع وببلاش بس ممكن يفوتك حاجة."],
+["N.B.: The commonest organisms are: E-coli → Initial episode. Pseudomonas → Recurrent.","أكتر بكتيريا: E-coli في أول مرة، وPseudomonas في المرات المتكررة (الرجوع).","اربطها: E-coli = الأولى (E للـ Early)، Pseudomonas = Persistent/متكررة (P)."],
+["N.B: How to differentiate between lower and upper UT colonization? 1- Bladder wash-out technique. 2- +ve of organisms coated by antibodies in upper UT colonization. 3- Ureteric catheter aspiration. 4- Percutaneous aspiration of urine from kidney.","نفرق بين الجرثومة في الجهاز البولي السفلي والعلوي إزاي؟ 1) غسيل المثانة 2) وجود بكتيريا مغطاة بأجسام مضادة معناه إنها في العلوي 3) سحب بول بقسطرة الحالب 4) سحب بول من الكلى بالإبرة عن طريق الجلد.","عشان تعرف الدخان جاي من أنهي دور في العمارة، بتفحص كل دور لوحده."],
+["ttt: 1) Urinary antiseptics → these are chemicals of antibacterial properties and concentrated mainly in urine.","العلاج: أولا مطهرات بولية، مواد بتقتل البكتيريا وبتتركز في البول أكتر من أي مكان.","زي مطهر بتحطه على الجرح مباشرة، بيشتغل في مكان المشكلة (البول)."],
+["Examples: 1- Sulfonamides (Chemotrim) 2 tab x 2. 2- Nitrofurantion (Macrodantin).","أمثلة: السلفا (كيموترم) قرصين مرتين، والنيتروفيورانتوين (ماكرودانتين).","كيموترم = 2 × 2، أربعة أقراص في اليوم."],
+["2) Antibiotics: Amoxycillin 500mg t.d.s. / Cephalosporine.","ثانيا المضادات الحيوية: أموكسيسيللين 500 مجم 3 مرات يوميا، أو سيفالوسبورين.","t.d.s. يعني 3 مرات في اليوم."]]],
+["Cystitis",[
+["Definition: Inflammation of bladder wall.","التهاب في جدار المثانة.","المثانة زي البالونة، والالتهاب في جلدها من جوه."],
+["Incidence: (1 – 2%) of all pregnancy.","بيحصل عند 1 لـ 2% من الحوامل.",""],
+["Causative organisms: E. coli in 80% of cases and mixed organisms in 20%.","السبب E. coli في 80% من الحالات، وبكتيريا مختلطة في 20%.","يعني تقريبا كل 5 حالات، 4 منهم E. coli."],
+["C/P: 1- Frequency, dysuria, hematuria. 2- Pyrexia may be present. 3- Lower abdominal discomfort.","الأعراض: تكرار التبول، حرقان، دم في البول، ممكن حرارة، وانزعاج أسفل البطن.","هتلاقيها رايحة الحمام كل شوية وتتعب وفي بول فيه دم."],
+["Diagnosis: 1- Urine exam: for pus cells, RBC. 2- Culture from the centrifuged urine specimen shows pure growth of the causative organism. 3- Sensitivity tests: of the organisms present to various types of antibiotics.","التشخيص: فحص بول لخلايا الصديد والكرات الحمرا، زراعة من عينة البول بعد الطرد المركزي بتظهر نمو نقي للميكروب، وتحليل حساسية يبين أنهي مضاد يقتله.","الحساسية زي الامتحان: نجرب كذا مضاد ونشوف مين اللي ينجح."],
+["ttt: 1- fluid intake: ↑ to at least 3 L/d.","العلاج: زوّد السوائل لـ 3 لتر في اليوم على الأقل.","السوائل بتغسل المثانة وتطرد الجراثيم مع البول."],
+["2- Antibiotic therapy: a- Nitrofurantion (Macrodantin): It's effective against all the uropathogens except proteus.","مضاد حيوي: ماكرودانتين فعال على كل ميكروبات الجهاز البولي ما عدا البروتيوس.","زي مفتاح بيفتح كل الأبواب إلا باب واحد، البروتيوس."],
+["b- A broad spectrum antibiotics as amoxycillin can be used. Dose 500mg /6 hr.","ممكن مضاد واسع المدى زي أموكسيسيللين، 500 مجم كل 6 ساعات.","كل 6 ساعات = 4 مرات في اليوم."]]],
+["Pyelonephritis With Pregnancy",[
+["Definition: Inflammation of both renal pelvis and renal parenchyma.","التهاب في حوض الكلى وأنسجة الكلى مع بعض.",""],
+["Incidence: 1% of all pregnancies.","بيحصل عند 1% من الحوامل.",""],
+["Cause - P.F.: 1- General: as the rule. 2- Local: Short urethra.","العوامل المساعدة: عامة زي أي التهاب، وموضعية: قصر مجرى البول.","قصير يعني الجرثومة توصل بسرعة."],
+["Urine stasis due to: a- Dilatation of ureter under effect of ↑ progesterone.","ركود البول بسبب توسع الحالب من زيادة هرمون البروجسترون.","البروجسترون بيرخي العضلات فالحالب يتسع والبول يمشي ببطء."],
+["b- Pressure of enlarged uterus on ureter especially right ureter so right sided pyelonephritis is more common than left sided.","ضغط الرحم الكبير على الحالب خصوصا اليمين، فالتهاب الكلى اليمين أكتر من الشمال.","الرحم بيميل ناحية اليمين شوية فبيضغط على الحالب اليمين."],
+["Organisms: Initial attack: most common is E. coli. Recurrent attack: most common is pseudomonas. So the most common organism → gram – ve bacteria.","الميكروب: أول مرة E. coli، والمتكررة Pseudomonas، يعني الأكتر البكتيريا سالبة الجرام.",""],
+["Routes: 1- Direct ascending infection urethra → bladder → ureter → kidney.","الطرق: عدوى صاعدة مباشرة من مجرى البول للمثانة للحالب للكلى.","زي مية بتطلع من الحنفية لفوق، الجرثومة بتطلع لحد الكلى."],
+["2- Lymphatic Route: from GIT especially colon.","عن طريق الليمف من الجهاز الهضمي خصوصا القولون.",""],
+["3- Blood, from septic focus in the body. e.g. chronic tonsillitis, chronic appendicitis.","عن طريق الدم من بؤرة صديدية في الجسم زي التهاب اللوزتين المزمن أو الزايدة المزمن.",""],
+["Complications of acute pyelonephritis: (A) Maternal: 1- Chronic pyelonephritis. 2- Septic shock. 3- Septic focus. 4- Renal hypertension. 5- Renal failure.","مضاعفات الأم: التهاب كلى مزمن، صدمة تسممية، بؤرة صديدية، ضغط كلوي، فشل كلوي.",""],
+["(B) Fetal: 1- IUFD. 2- IUGR. 3- Mild trimester abortion and premature labour and premature baby. 4- ↑ perinatal mortality and morbidity.","مضاعفات الجنين: موت الجنين داخل الرحم، تأخر النمو، إجهاض وولادة مبكرة وطفل مبتسر، وزيادة الوفيات والمضاعفات.","IUFD موت، IUGR تأخر نمو."],
+["C/P: Usually acute pyelonephritis occurs at 16 w or later in pregnancy.","بيحصل عادة من الأسبوع 16 أو بعده.",""],
+["Symptom: 1- Severe dull aching pain in loin (kidney) which may be radiated to groin (ureter). Loin: area of renal angle. Groin: junction between thigh and abdomen.","ألم شديد ممل في الخاصرة (الكلى) ممكن يمتد للأربية (الحالب). الخاصرة: منطقة الزاوية الكلوية. الأربية: ملتقى الفخذ بالبطن.","الوجع من ضهرها بينزل لتحت لحد الفخذ."],
+["2- As a rule, any parenchymatous organ (Kidney) → easy pass of bacteria and toxins inside circulation with early bacteremia and toxemia. pt C/O ↑ temperature, headache, malaise and may be rigors.","الكلى عضو فيه نسيج كتير فالبكتيريا والسموم تدخل الدم بسهولة وتحصل بكتيريميا وتسمم، والمريضة تشتكي من حرارة وصداع وإعياء وممكن رعشة.","الكلى زي الإسفنجة، لما تتلوث الميكروب يدخل الدم بسرعة."],
+["Signs: 1- Fever and may reach to hyperpyrexia (> 40.5°C).","العلامات: حرارة ممكن توصل لفوق 40.5 درجة.",""],
+["2- Tender renal angle: Renal angle: angle between sacrospinalis and last rib which examined by closed fist of hand and not by finger.","ألم عند الزاوية الكلوية، وهي الزاوية بين العضلة الشوكية وآخر ضلع، وبتتفحص بقبضة اليد المقفولة مش بالصباع.","اضربي بخفة بقبضة اليد، الصباع مش هيوصل للعمق."],
+["Investigation: 1- of infection: Leucocytosis, ↑ ESR, +Ve C-reactive protein.","فحوصات العدوى: زيادة كرات الدم البيضا، زيادة سرعة الترسيب، وCRP إيجابي.",""],
+["2- of kidney function: Urine culture, U/S on kidney, Kidney function test.","وظائف الكلى: مزرعة بول، سونار على الكلى، تحليل وظائف الكلى.",""],
+["3- for fetal maturity and fetal well being: e.g. U/S on fetus.","لنضج الجنين وسلامته: سونار على الجنين.",""],
+["D.D.: of a case of acute abdomen with pregnancy ? (Mention).","التشخيص التفريقي: أي حالة بطن حادة مع الحمل (اذكرها).",""],
+["ttt: I) Prophylaxis: Good A.N.C. & early diagnosis and treatment of asymptomatic bacteruria.","الوقاية: رعاية حمل كويسة وتشخيص وعلاج مبكر للبكتيريا الصامتة.","علاج الصامتة بدري بيمنع الالتهاب الكبير."],
+["II) Active ttt: 1- ttt of septic shock. 2- ttt of acute pyelonephritis: (A) Hospitalization: a- Restrict visitors. b- Isolated semidark calm room. c- Observation to fetus and mother.","العلاج الفعال: علاج الصدمة التسممية، وعلاج الالتهاب الحاد: دخول المستشفى، تقليل الزوار، غرفة معزولة شبه مظلمة وهادية، ومراقبة الأم والجنين.",""],
+["(B) Care of any feverish patient: a- Complete bed rest. b- I.V. fluid. c- Diet: light, easily digestible, small amount CHO. d- Antipyretics and cold fomits.","رعاية أي مريضة بحرارة: راحة تامة في السرير، محاليل وريدية، أكل خفيف سهل الهضم قليل كربوهيدرات، خافضات حرارة وكمادات باردة.",""],
+["e- Specific ttt of acute pyelonephritis: parenteral antibiotics either cephalosporine, or amoxicillin 1 gm/8 hr.","العلاج النوعي: مضاد حيوي بالحقن، سيفالوسبورين أو أموكسيسيللين 1 جم كل 8 ساعات.",""],
+["f- Analgesics for acute pain.","مسكنات للألم الحاد.",""]]],
+["الشرح المكتوب بخط اليد",[
+["Patient with Asymptomatic Bacteriuria → symptomatic bacteriuria: Pyelonephritis (upper) / Cystitis (lower).","مريضة عندها بكتيريا صامتة ممكن تتحول لبكتيريا بأعراض: التهاب حوض الكلى (علوي) أو التهاب المثانة (سفلي).","",1],
+["Cystitis → inflammation of bladder wall → infection in lower → in Bladder.","التهاب المثانة هو التهاب في جدار المثانة، عدوى في الجزء السفلي.","",1],
+["Pyelonephritis → inflammation of renal pelvis and renal parenchyma → infection in upper → in kidney.","التهاب حوض الكلى هو التهاب حوض الكلى وأنسجتها، عدوى في الجزء العلوي، في الكلى.","",1],
+["Causes of pyelonephritis: an infection in other parts of the body such as the tonsils (tonsillitis) or sinuses, can be a source of bacteria that can travel to the kidneys and cause pyelonephritis, especially happen with low immunity.","أسباب التهاب الكلى: عدوى في مكان تاني في الجسم زي اللوز أو الجيوب الأنفية ممكن تبقى مصدر بكتيريا تنتقل للكلى، وخصوصا لو المناعة ضعيفة.","لو عندك التهاب لوز أو جيوب ومعاه مناعة ضعيفة، الميكروب ينتقل للكلى ويعمل التهاب.",1],
+["C/P of pyelonephritis, symptoms (the doctor said they are gathered in a word): Fever with rigors ↑T, Anorexia, Headache, Malaise.","أعراض التهاب الكلى، الدكتور قال إنها مجمعة في كلمة (فاهم): حرارة مع رعشة، فقدان الشهية، صداع، وإعياء.","ف = Fever، ا = Anorexia، ه = Headache، م = Malaise.",1]]]
+];
+function renderNotes(){let h="";N.forEach(([s,it])=>{h+=`<h2>${s}</h2>`;it.forEach(([e,a,x,d])=>{h+=`<div class="it"><span class="tag ${d?'d':''}">${d?'زيادات الدكتور':'الكتاب'}</span><div class="en">${e}</div><div class="ar">${a}</div>${x?`<div class="ex"><b>عشان تفهمها :</b> ${x}</div>`:''}</div>`})});document.getElementById('notes').innerHTML=h}
+renderNotes();
+
+/* ===== QUIZ (book only, easy → hard) ===== */
+const T=(t,v)=>({t:"True / False: "+t,o:["True","False"],a:v?0:1});
+const M=(t,o,a)=>({t,o,a});
+const Q=[
+M("Incidence of asymptomatic bacteriuria in pregnancy is:",["1–2%","5–10%","20–30%","50%"],1),
+M("The commonest organism in the initial episode is:",["Pseudomonas","Proteus","E. coli","Klebsiella"],2),
+M("Cystitis is inflammation of:",["Renal pelvis","Bladder wall","Ureter","Urethra"],1),
+M("Incidence of pyelonephritis in pregnancy is:",["1%","5%","10%","20%"],0),
+M("The most common organism in recurrent attacks is:",["E. coli","Pseudomonas","Proteus","Staph"],1),
+M("Minimum fluid intake in cystitis:",["1 L/d","2 L/d","3 L/d","5 L/d"],2),
+M("Most specific method to diagnose asymptomatic bacteriuria:",["Mic. exam of urine","Urine culture","U/S","ESR"],1),
+M("Which side is pyelonephritis more common in pregnancy?",["Left","Right","Equal","Bilateral only"],1),
+M("Acute pyelonephritis usually occurs at:",["6 weeks","10 weeks","16 weeks or later","Only after delivery"],2),
+M("Percentage of asymptomatic bacteriuria that becomes symptomatic:",["10%","25%","50%","90%"],2),
+M("Nitrofurantoin (Macrodantin) is NOT effective against:",["E. coli","Proteus","Klebsiella","Enterococci"],1),
+M("The renal angle is examined by:",["Finger","Closed fist","Stethoscope","Open palm only"],1),
+M("Fever in acute pyelonephritis may reach hyperpyrexia of:",["> 38°C","> 39°C","> 40.5°C","> 36°C"],2),
+M("Parenteral amoxicillin dose in acute pyelonephritis:",["500 mg/6 hr","1 gm/8 hr","250 mg/12 hr","2 gm/24 hr"],1),
+M("Which is a FETAL complication of acute pyelonephritis?",["Septic shock","Renal failure","IUGR","Renal hypertension"],2),
+T("Asymptomatic bacteriuria has no clinical picture.",1),
+T("Asymptomatic bacteriuria increases the incidence of PIH.",1),
+T("Cystitis is inflammation of the renal pelvis.",0),
+T("E. coli causes about 80% of cystitis cases.",1),
+T("Frequency, dysuria and hematuria are features of cystitis.",1),
+T("Pyelonephritis involves both renal pelvis and renal parenchyma.",1),
+T("A short urethra is a local predisposing factor for pyelonephritis.",1),
+T("Progesterone causes ureteric dilatation and urine stasis.",1),
+T("Left-sided pyelonephritis is more common than right-sided.",0),
+T("Pseudomonas is the commonest organism in the initial attack.",0),
+T("The most common organisms are gram-negative bacteria.",1),
+T("Lymphatic spread to the kidney can be from the GIT, especially the colon.",1),
+T("Chronic tonsillitis can be a blood-borne source of pyelonephritis.",1),
+T("Urine culture is cheap and practical for screening all pregnant women.",0),
+T("Microscopic urine exam for pus cells is easy but less accurate.",1),
+T("Sulfonamides (Chemotrim) are examples of urinary antiseptics.",1),
+T("Urinary antiseptics are concentrated mainly in urine.",1),
+T("Ureteric catheter aspiration can differentiate upper from lower tract colonization.",1),
+T("Septic shock is a fetal complication of pyelonephritis.",0),
+T("IUFD and IUGR are fetal complications of acute pyelonephritis.",1),
+T("Pain of pyelonephritis is in the loin and may radiate to the groin.",1),
+T("The loin is the junction between thigh and abdomen.",0),
+T("Renal angle tenderness is elicited by the finger, not the fist.",0),
+T("Leucocytosis, raised ESR and +ve CRP show infection in pyelonephritis.",1),
+T("Prophylaxis includes good ANC and early treatment of asymptomatic bacteriuria.",1),
+T("Care of pyelonephritis includes a bright, busy room with many visitors.",0),
+T("Diet for a feverish patient should be light, easily digestible with small amount of CHO.",1),
+T("Cephalosporine or amoxicillin parenterally is specific treatment of acute pyelonephritis.",1),
+T("Renal hypertension and renal failure are maternal complications.",1),
+T("Amoxicillin dose in cystitis is 500 mg every 6 hours.",1),
+T("Pyelonephritis usually occurs before 16 weeks of pregnancy.",0),
+T("Bladder wash-out is one method to differentiate lower from upper UT colonization.",1),
+T("Sensitivity tests show which antibiotics the organism responds to.",1),
+T("Pyelonephritis incidence in pregnancy is about 1%.",1),
+T("Asymptomatic bacteriuria cannot cause perinatal morbidity.",0),
+T("Nitrofurantoin is effective against all uropathogens including proteus.",0)
+];
+let qi=0,cor=0,ans=[];
+function qStart(){qi=0;cor=0;ans=[];qShow()}
+function qShow(){const q=Q[qi];document.getElementById('quiz').innerHTML=`<div class="stats"><div class="st" style="color:var(--ok)">${cor}<small>صحيح</small></div><div class="st" style="color:var(--no)">${ans.length-cor}<small>خطأ</small></div><div class="st">${Q.length-ans.length}<small>متبقي</small></div></div><div class="q"><div class="qh"><span>Question ${qi+1} / ${Q.length}</span><span>${qi<15?'MCQ':'True/False'}</span></div><div class="qt">${q.t}</div><div class="opts">${q.o.map((o,i)=>`<div class="op" tabindex="0" id="o${i}" onclick="qPick(${i})">${o}</div>`).join('')}</div><div id="nx"></div></div>`}
+function qPick(v){if(ans[qi]!==undefined)return;const q=Q[qi];ans[qi]=v;if(v===q.a)cor++;q.o.forEach((_,i)=>{const e=document.getElementById('o'+i);e.classList.add('x');if(i===q.a)e.classList.add('c');else if(i===v)e.classList.add('w')});document.getElementById('nx').innerHTML=`<button class="btn" onclick="qNext()">${qi<Q.length-1?'Next':'Finish'}</button>`}
+function qNext(){if(qi<Q.length-1){qi++;qShow();scrollTo(0,0)}else qEnd()}
+function qEnd(){const p=Math.round(cor/Q.length*100);document.getElementById('quiz').innerHTML=`<div class="res"><div class="n">${p}%</div><p>${cor} / ${Q.length}</p><button class="btn" style="margin-top:16px;width:100%" onclick="qStart()">Restart</button></div>`+Q.map((q,i)=>ans[i]===q.a?'':`<div class="ri">❌ ${q.t}<br>Correct: <b>${q.o[q.a]}</b></div>`).join('')}
+qStart();
+
+/* tabs + theme */
+const a=document.getElementById('t1'),b=document.getElementById('t2');
+function tab(n){a.classList.toggle('on',n==1);b.classList.toggle('on',n==2);document.getElementById('notes').classList.toggle('hide',n==2);document.getElementById('quiz').classList.toggle('hide',n==1);scrollTo(0,0)}
+a.onclick=()=>tab(1);b.onclick=()=>tab(2);
+</script></body></html>
