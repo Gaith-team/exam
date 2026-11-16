@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--teal:#0e7490;--teal-d:#1e3a8a;--blue:#eef2f7;--bd:#d3dbe6;--ok:#16a34a;--no:#dc2626;--rev:#1e3a8a;--txt:#1a2332;--grad:linear-gradient(135deg,#1e3a8a 0%,#0e7490 50%,#10b981 100%)}
+body{font-family:'Outfit',Arial,sans-serif;background:#f8fafc;color:var(--txt);font-size:14px}
+header{background:var(--grad);color:#fff;text-align:center;padding:12px;font-size:18px;font-weight:900;position:relative;border-bottom:4px solid #f59e0b}
+header .brand{position:absolute;right:16px;top:8px;font-weight:bold;font-size:14px}
+header a{position:absolute;left:16px;top:11px;color:#fff;font-size:13px;text-decoration:none}
+.wrap{max-width:1280px;margin:0 auto;padding:8px 10px 20px}
+.topinfo{background:var(--blue);border:1px solid var(--bd);padding:4px 8px;font-size:13px;margin-bottom:8px}
+.topinfo b{color:var(--teal)}
+.layout{display:grid;grid-template-columns:1fr 240px;gap:14px;align-items:start}
+.main{background:#fff;border:1px solid var(--bd);min-height:470px;display:flex;flex-direction:column;
+ background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='70'><text x='8' y='45' transform='rotate(-20 75 35)' font-size='14' font-family='Arial' fill='%23000' fill-opacity='.07'>GHAITH TEAM</text></svg>")}
+.qhead{display:flex;justify-content:space-between;align-items:center;padding:12px 6px 6px;margin:0 6px;border-bottom:1px solid var(--bd)}
+.qhead b{font-size:13px}
+.qhead .tn{font-size:11px;color:#0e7490;font-weight:600;margin-left:8px}
+.fs button{background:#1e3a8a;color:#fff;border:0;padding:6px 12px;margin-left:3px;border-radius:2px;cursor:pointer;font-weight:bold}
+.qbody{padding:8px 12px;flex:1}
+.qtext{font-size:13px;line-height:1.7;margin-bottom:18px;direction:ltr;text-align:left}
+.opt{display:flex;align-items:center;gap:8px;margin:0 0 16px;cursor:pointer;direction:ltr;text-align:left;font-size:13px}
+.opt input{accent-color:var(--teal);cursor:pointer}
+.bar{display:flex;justify-content:space-between;padding:10px;gap:6px;flex-wrap:wrap;border-top:1px solid var(--bd);margin:0 6px 6px}
+.b{background:var(--grad);color:#fff;border:0;padding:9px 12px;font-weight:bold;font-size:13px;border-radius:2px;cursor:pointer;font-family:inherit}
+.b:hover{filter:brightness(1.12)}
+.b.gray{background:#1a2332}
+.b.light{background:#fff;color:#1e3a8a;border:1px solid #1e3a8a}
+.side>div{background:var(--blue);border:1px solid var(--bd);margin-bottom:10px;padding:8px}
+.timer{text-align:center;background:none!important;border:0!important}
+.timer small{font-size:13px}
+.timer .t{font-size:30px;color:#1e3a8a;margin-top:4px}
+.timer .t.warn{color:#c27b0a}.timer .t.danger{color:#c8372d}
+.leg{display:grid;grid-template-columns:1fr 1fr;gap:8px 6px;font-size:10px;margin-top:8px}
+.leg div{display:flex;align-items:center;gap:6px}
+.sq{min-width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:bold;border-radius:2px;border:1px solid transparent}
+.s-ans{background:var(--ok)}.s-no{background:#f59e0b;color:#3b2a00}.s-rev{background:var(--rev)}.s-nv{background:#fff;color:#333;border-color:#9bb0a2}
+.nav{display:flex;flex-wrap:wrap;gap:6px;max-height:260px;overflow:auto;background:#eef2f7}
+.nav .sq{width:24px;height:24px;cursor:pointer;font-size:12px}
+.nav .cur{outline:2px solid #f59e0b;outline-offset:0}
+.endrow{text-align:center;display:flex;gap:6px;justify-content:center;flex-wrap:wrap}
+footer{text-align:center;padding:16px;font-size:12px;color:#4a5568;background:#eef2f7;border-top:3px solid transparent;border-image:linear-gradient(90deg,#1e3a8a,#0e7490,#10b981,#f59e0b) 1;margin-top:10px}
+footer a{color:#229ED9;text-decoration:none}
+/* home / topics */
+.home h2{text-align:center;font-size:22px;margin-bottom:4px}
+.home .sub{text-align:center;color:#556;font-size:13px;margin-bottom:16px}
+.tgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.tp{display:flex;align-items:center;gap:10px;border:2px solid var(--bd);border-radius:8px;padding:12px;background:#fafcff;cursor:pointer;user-select:none;transition:.15s}
+.tp:hover{border-color:#0e7490}
+.tp.on{border-color:#0e7490;background:#e6f4f8}
+.tp input{accent-color:var(--teal);width:18px;height:18px;cursor:pointer}
+.tp .nm{flex:1;font-weight:600;font-size:14px}
+.tp .ct{background:var(--grad);color:#fff;font-size:12px;font-weight:bold;border-radius:12px;padding:2px 10px}
+.hinfo{text-align:center;margin:16px 0 4px;font-size:13px;color:#334}
+.hinfo b{color:var(--teal)}
+/* results */
+.res{background:#fff;border:1px solid var(--bd);padding:20px;max-width:900px;margin:10px auto}
+.score{text-align:center;padding:10px 0 18px}
+.score .n{font-size:48px;font-weight:900;color:var(--teal)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}
+.stats div{background:var(--blue);padding:10px;text-align:center;border-radius:4px}
+.stats b{display:block;font-size:20px}
+.sec{background:var(--ok);color:#fff;padding:8px 12px;font-weight:bold;margin:22px 0 10px}
+.sec.bad{background:var(--no)}
+.it{border:1px solid var(--bd);border-left:4px solid var(--ok);padding:12px;margin-bottom:8px;background:#fafcff;direction:ltr;text-align:left}
+.it.bad{border-left-color:var(--no)}
+.it .q{font-weight:bold;font-size:13px;margin-bottom:6px;line-height:1.6}
+.it .r{font-size:12px;margin-top:4px}
+.it .tpn{font-size:11px;color:#0e7490;margin-bottom:4px}
+.tag{padding:1px 7px;border-radius:3px;color:#fff;font-size:11px;font-weight:bold;margin-right:6px}
+.tag.y{background:var(--no)}.tag.g{background:var(--ok)}
+.exp{font-size:12px;color:#555;margin-top:6px;background:#eef6f4;padding:6px 8px;border-radius:3px}
+.acts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.hide{display:none}
+@media(max-width:820px){.layout{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}header a{display:none}}
+.qtext img{display:block;max-width:100%;max-height:260px;margin:0 auto 12px;border-radius:8px;background:#fff}
+.it .q img{max-height:90px;display:block;margin:6px 0;border-radius:6px}
+</style>
+</head>
+<body>
+<header><a href="https://gaith-team.github.io/exam/">← رجوع</a>Nursing Management<span class="brand">GHAITH TEAM</span></header>
+<div class="wrap">
+
+ <!-- شاشة اختيار الموضوع -->
+ <div id="home" class="hide">
+  <div class="res home">
+   <h2>اختار الموضوع</h2>
+   <div class="sub">اختار موضوع أو أكتر وابدأ الامتحان</div>
+   <div class="acts" style="margin:0 0 14px">
+    <button class="b light" onclick="selAll(true)">تحديد الكل</button>
+    <button class="b light" onclick="selAll(false)">إلغاء التحديد</button>
+   </div>
+   <div class="tgrid" id="tgrid"></div>
+   <div class="hinfo">المحدد: <b id="hSel">0</b> موضوع · <b id="hQ">0</b> سؤال · الوقت: <b id="hT">0</b> دقيقة</div>
+   <div class="acts">
+    <button class="b" id="startSel" onclick="startSelected()">ابدأ الامتحان</button>
+    <button class="b gray" onclick="startAll()">كل المواضيع مع بعض</button>
+   </div>
+  </div>
+ </div>
+
+ <div id="exam" class="hide">
+  <div class="topinfo">Total questions in exam: <b id="tot">0</b> | Answered: <b id="ans">0</b></div>
+  <div class="layout">
+   <div class="main">
+    <div class="qhead"><div><b id="qno"></b><span class="tn" id="qtopic"></span></div><div class="fs"><button onclick="fs(-1)">A-</button><button onclick="fs(0)">A</button><button onclick="fs(1)">A+</button></div></div>
+    <div class="qbody" id="qbody"></div>
+    <div class="bar">
+     <button class="b" onclick="saveNext()">Save &amp; Next</button>
+     <div style="display:flex;gap:4px;flex-wrap:wrap">
+      <button class="b" onclick="mark()">Mark for Review</button>
+      <button class="b" onclick="skip()">Skip</button>
+      <button class="b" onclick="prev()">Previous</button>
+     </div>
+    </div>
+   </div>
+   <div class="side">
+    <div class="timer"><small>Time Remaining</small><div class="t" id="tm">70:00</div></div>
+    <div>
+     <div>Number of questions : <b id="tot2">0</b></div>
+     <div class="leg">
+      <div><span class="sq s-ans" id="cAns">0</span>Answered</div>
+      <div><span class="sq s-no" id="cNo">0</span>Not Answered</div>
+      <div><span class="sq s-rev" id="cRev">0</span>For Review</div>
+      <div><span class="sq s-nv" id="cNv">0</span>Not Visited</div>
+     </div>
+    </div>
+    <div class="nav" id="nav"></div>
+    <div class="endrow">
+     <button class="b gray" onclick="endTest()">End Test</button>
+     <button class="b light" onclick="leaveToTopics()">المواضيع</button>
+    </div>
+   </div>
+  </div>
+ </div>
+ <div id="result" class="hide"></div>
+</div>
+<footer>GHAITH TEAM · <a href="https://t.me/nursing2bu" target="_blank">@nursing2bu</a></footer>
+
+<script>
+const TOPICS = [
+{n:"Climate Change",q:[
+{t:"Using transportation is a major contributor of greenhouse gases, especially ……… emissions.",o:["Carbon dioxide","Carbon oxide","Nitrous dioxide","Methane"],a:0},
+{t:"Climate change is most likely to result in which of the following?",o:["More stable weather patterns","Increased drought","More food storage","Lower medical errors"],a:1},
+{t:"Conference of the Parties focus on ………",o:["Climate adaptation","Increase emission","Political exchange","Human rights advocacy"],a:0},
+{t:"Climate change refers to ……",o:["Daily change in weather","Long-term weather patterns","Short term weather patterns","Seasonal change only"],a:1},
+{t:"Which human activity releases the most carbon dioxide?",o:["Planting trees","Burning fossil fuels","Recycling waste","Using solar energy"],a:1},
+{t:"Global warming is gradual decrease in the earth's temperature due to the greenhouse effect.",o:["True","False"],a:1},
+{t:"Recycling paper is an effective way to adapt with climate change in daily living.",o:["True","False"],a:0},
+{t:"Coal mining releases methane, a potent greenhouse gas which has a global warming effect.",o:["True","False"],a:0},
+{t:"Climate change leads to decreased patient vulnerability, delay in cancer detection and management, and worsening prognosis of cancer.",o:["True","False"],a:1},
+{t:"Planting trees helps fight climate change by absorbing carbon dioxide.",o:["True","False"],a:0},
+{t:"Global warming and climate change mean exactly the same thing.",o:["True","False"],a:1},
+{t:"Alternative energy sources increase greenhouse gas emissions.",o:["True","False"],a:1},
+{t:"Human activities are a major cause of recent climate change.",o:["True","False"],a:0},
+{t:"Climate change can cause more extreme weather events like floods and droughts.",o:["True","False"],a:0},
+{t:"Climate change can delay infections spread.",o:["True","False"],a:1}]},
+{n:"Power & Authority",q:[
+{t:"Dr. Sara Hamdi, teaching staff at Benha faculty of nursing, teaches students how to document in kardex through using:",o:["Reward power","Expert power","Rational persuasion power","Legitimate power"],a:1},
+{t:"Positional power is derived from a person's position in the hierarchy. Which is NOT a type of positional power?",o:["Reward power","Coercive power","Rational persuasion power","Legitimate power"],a:2},
+{t:"Power based on formal status and authority is:",o:["Positional","Referent","Expert","Personal"],a:0},
+{t:"Power based on special skill and charisma is:",o:["Positional","Reward","Expert","Personal"],a:3},
+{t:"Mr Ahmed, an emergency department nurse, always forgets to document vital signs; the head nurse decides to punish him using:",o:["Reward power","Coercive power","Expert power","Representative power"],a:1},
+{t:"Staff manager has formal authority over people and resources.",o:["True","False"],a:1},
+{t:"Line manager has formal authority over people and resources.",o:["True","False"],a:0},
+{t:"Operational authority is giving someone permission to assume certain responsibilities through delegation of authority.",o:["True","False"],a:0},
+{t:"Technical authority is giving someone permission to assume certain responsibilities through delegation of authority.",o:["True","False"],a:1},
+{t:"Legal authority means an individual is legally permitted by virtue of the position to take an action.",o:["True","False"],a:0}]},
+{n:"Marketing",q:[
+{t:"The main principle of marketing focuses on profit versus sales.",o:["True","False"],a:0},
+{t:"Marketing mix includes place, price, person and product.",o:["True","False"],a:1},
+{t:"Market begins and ends with customer needs.",o:["True","False"],a:0},
+{t:"Broadening the organization's mission is a principle of marketing.",o:["True","False"],a:0},
+{t:"Marketing assessment phase includes:",o:["Outlines the services","Outlines program","Outlines budget","Outlines target market"],a:3},
+{t:"Marketing failures because it:",o:["Focus on patient needs","Focus on patient satisfaction","Focus on profit versus sales","Focus on ambiguous objectives"],a:2},
+{t:"In which marketing phase should the organization assess their mission, philosophy, goals and objectives?",o:["Assessment","Planning","Implementation","Evaluation"],a:0},
+{t:"In which marketing phase should the organization develop their mission, goals and objectives?",o:["Assessment","Planning","Implementation","Evaluation"],a:1},
+{t:"In which marketing phase should the organization develop their marketing mix?",o:["Assessment","Planning","Implementation","Evaluation"],a:1}]},
+{n:"Nursing Director",q:[
+{t:"The professional nurse responsible for leading an entire healthcare system is:",o:["Head nurse","Nursing supervisor","Nursing matron","Hospital administrator"],a:2},
+{t:"Miss Huda, nursing director, analyzes data to determine staffing pattern. This task is related to:",o:["Planning phase","Assessment phase","Implementation phase","Evaluation phase"],a:1},
+{t:"Miss Mona, nursing director, develops a system of evaluation of work performance. This task is related to:",o:["Assessment phase","Planning phase","Implementation phase","Evaluation phase"],a:1},
+{t:"Mr. Tarek, nursing director, submits a monthly report on the functions and progress of nursing services. This task is related to:",o:["Assessment phase","Planning phase","Implementation phase","Evaluation phase"],a:3},
+{t:"Miss Hala, nursing director, serves as a role model for nursing personnel. This task is related to:",o:["Assessment phase","Planning phase","Implementation phase","Evaluation phase"],a:2},
+{t:"Which is a professional qualification needed for selecting a nursing director?",o:["Hold a bachelor in nursing","Four years recent clinical experience","Self-improvement","Competency ability in nursing practice"],a:0},
+{t:"Miss Reda, nursing director, serves as consultant for nursing personnel. This task is related to:",o:["Assessment phase","Planning phase","Implementation phase","Evaluation phase"],a:2},
+{t:"Miss Huda, nursing director, investigates complaints concerning nursing service and takes appropriate action. This task is related to:",o:["Planning phase","Assessment phase","Implementation phase","Evaluation phase"],a:3},
+{t:"Miss Mona, nursing director, coordinates nursing roles and their relationship to other hospital departments. This task is related to:",o:["Assessment phase","Planning phase","Implementation phase","Evaluation phase"],a:2},
+{t:"Mr. Tarek, nursing director, continually evaluates care through management reports, direct observation and patient rounds. This task is related to:",o:["Assessment phase","Planning phase","Implementation phase","Evaluation phase"],a:3}]},
+{n:"Role of Head Nurse",q:[
+{t:"The head nurse is responsible for managing nursing service activities in:",o:["The entire hospital","A single nursing unit","The outpatient department","Multiple hospitals"],a:1},
+{t:"The head nurse belongs to which level of management?",o:["Top management","Middle management","First-line (lower) management","Executive management"],a:2},
+{t:"Which management level determines organizational objectives and policies?",o:["Lower management","Middle management","Top management","Unit management"],a:2},
+{t:"Top management usually prepares plans for:",o:["Daily activities","Weekly activities","1–5 years","5–20 years"],a:3},
+{t:"Middle-level managers mainly spend their time:",o:["Directing workers","Coordinating and communicating","Patient care","Housekeeping"],a:1},
+{t:"Lower-level managers usually prepare:",o:["Strategic plans","Long-term plans","Daily, weekly, and monthly plans","National health policies"],a:2},
+{t:"The head nurse is directly responsible to:",o:["The Minister of Health","Nursing supervisor","Hospital director only","Medical director"],a:1},
+{t:"Which qualification is a personal qualification for a head nurse?",o:["Bachelor's degree","Communication skills","Emotional and physical health","Five years of experience"],a:2},
+{t:"The minimum educational qualification for a head nurse is:",o:["Diploma in Nursing","Associate Degree","Bachelor of Science in Nursing","Master's degree"],a:2},
+{t:"A head nurse should have at least:",o:["Six months of clinical experience","One year of experience only","Two to five years of clinical experience","Ten years of experience"],a:2},
+{t:"Human skills refer to the ability to:",o:["Repair equipment","Work effectively with people","Prepare reports","Develop policies"],a:1},
+{t:"Conceptual skills enable the head nurse to:",o:["Administer medications","Understand complex situations and solve problems","Prepare duty schedules","Maintain supplies"],a:1},
+{t:"Technical skills are mainly acquired through:",o:["Experience, education, and training","Personality only","Observation only","Social media"],a:0},
+{t:"Political skills involve:",o:["Participating in elections","Influencing others to achieve organizational objectives","Budget preparation","Patient assessment"],a:1},
+{t:"Analytical skills help the head nurse:",o:["Perform laboratory tests","Analyze situations and make sound decisions","Prepare food","Maintain buildings"],a:1},
+{t:"Which is NOT one of the four main areas of the head nurse's role?",o:["Patient-care management","Staff management","Financial auditing","Unit management"],a:2},
+{t:"Patient-care management focuses primarily on:",o:["Preparing payroll","Meeting patients' total needs","Purchasing equipment","Conducting research"],a:1},
+{t:"Staff utilization includes:",o:["Performing surgery","Assigning tasks with appropriate authority","Building maintenance","Financial management"],a:1},
+{t:"Staff supervision aims to:",o:["Increase hospital income","Ensure nursing activities meet objectives","Recruit physicians","Maintain equipment"],a:1},
+{t:"Staff evaluation (performance appraisal) is:",o:["Informal daily feedback","A periodic formal evaluation of performance","Salary calculation","Patient satisfaction survey"],a:1},
+{t:"Staff development includes:",o:["Reducing staff numbers","Encouraging continuous learning and training","Ignoring performance standards","Eliminating education programs"],a:1},
+{t:"Relations management includes:",o:["Developing coordination among departments","Purchasing medications","Conducting laboratory tests","Repairing equipment"],a:0},
+{t:"An effective way to manage conflict is:",o:["Avoid communication","Hold frequent team meetings","Ignore disagreements","Punish staff immediately"],a:1},
+{t:"Maintaining effective communication requires:",o:["One-way communication only","Honest communication and feedback","Written communication only","No negotiation"],a:1},
+{t:"In the traditional organization pattern:",o:["The unit manager performs all activities","The head nurse performs most unit activities","Staff nurses manage the unit","There is no supervision"],a:1},
+{t:"The progressive organization pattern appoints a unit manager mainly to:",o:["Replace physicians","Reduce the head nurse's management workload","Supervise laboratory staff","Manage hospital finances"],a:1},
+{t:"In a subordinate relationship:",o:["The unit manager supervises the head nurse","The head nurse is responsible to the unit manager","The unit manager is responsible to the head nurse","Both have equal authority"],a:2},
+{t:"Which activity is a clerical responsibility?",o:["Preparing telephone messages","Administering medications","Performing surgery","Conducting patient assessments"],a:0},
+{t:"Maintenance of supplies and equipment mainly includes:",o:["Diagnosing diseases","Ordering, storing, and maintaining supplies","Preparing meals","Conducting research"],a:1},
+{t:"Plant maintenance includes:",o:["Developing policies","Preparing repair requests and ensuring completion","Hiring nurses","Conducting staff appraisal"],a:1}]}
+];
+
+// كل الأسئلة في قائمة واحدة، وكل سؤال عليه اسم موضوعه
+const QUESTIONS = TOPICS.flatMap(tp => tp.q.map(q => ({...q, topic: tp.n})));
+
+let Q, cur, sel, saved, review, visited, left, iv, size = 13, curPool = [], picked = new Set();
+
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+const $ = id => document.getElementById(id);
+const minsFor = n => Math.min(70, Math.max(5, n));   // دقيقة لكل سؤال، بحد أقصى 70 دقيقة
+
+/* ---------- شاشة المواضيع ---------- */
+function showHome(){
+  clearInterval(iv);
+  $('exam').classList.add('hide'); $('result').classList.add('hide'); $('home').classList.remove('hide');
+  $('tgrid').innerHTML = TOPICS.map((tp,i)=>`
+    <label class="tp ${picked.has(i)?'on':''}" onclick="event.preventDefault();toggleTopic(${i})">
+      <input type="checkbox" ${picked.has(i)?'checked':''} tabindex="-1">
+      <span class="nm">${tp.n}</span><span class="ct">${tp.q.length}</span>
+    </label>`).join('');
+  const cnt = [...picked].reduce((s,i)=>s+TOPICS[i].q.length,0);
+  $('hSel').textContent = picked.size; $('hQ').textContent = cnt; $('hT').textContent = cnt?minsFor(cnt):0;
+  $('startSel').disabled = !picked.size; $('startSel').style.opacity = picked.size?1:.5;
+  window.scrollTo(0,0);
+}
+function toggleTopic(i){ picked.has(i)?picked.delete(i):picked.add(i); showHome(); }
+function selAll(v){ picked = v ? new Set(TOPICS.map((_,i)=>i)) : new Set(); showHome(); }
+function startSelected(){
+  if(!picked.size) return;
+  const names = new Set([...picked].map(i=>TOPICS[i].n));
+  init(QUESTIONS.filter(q=>names.has(q.topic)));
+}
+function startAll(){ init(QUESTIONS); }
+function leaveToTopics(){ if(confirm('الرجوع للمواضيع؟ الامتحان الحالي هيتلغي.')) showHome(); }
+
+/* ---------- الامتحان ---------- */
+function init(pool){
+  curPool = pool;
+  Q = shuffle([...pool]); const n = Q.length;
+  cur = 0; sel = Array(n).fill(null); saved = Array(n).fill(false);
+  review = Array(n).fill(false); visited = Array(n).fill(false);
+  left = minsFor(n)*60;
+  $('home').classList.add('hide'); $('exam').classList.remove('hide'); $('result').classList.add('hide');
+  $('tot').textContent = $('tot2').textContent = n;
+  const tick = ()=>{ const m=Math.floor(left/60), s=left%60, t=$('tm'); t.textContent = m+':'+(s<10?'0':'')+s; t.className = 't'+(left<=120?' danger':left<=300?' warn':''); };
+  tick();
+  clearInterval(iv);
+  iv = setInterval(()=>{ left--; tick(); if(left<=0){clearInterval(iv);finish()} },1000);
+  if(n) render();
+  window.scrollTo(0,0);
+}
+
+function render(){
+  visited[cur] = true;
+  const q = Q[cur];
+  $('qno').textContent = 'Question No. ' + (cur+1);
+  $('qtopic').textContent = q.topic ? '· ' + q.topic : '';
+  $('qbody').style.fontSize = size+'px';
+  $('qbody').innerHTML = `<div class="qtext" style="font-size:${size}px">${q.t}</div>` +
+    q.o.map((o,i)=>`<label class="opt" style="font-size:${size}px"><input type="radio" name="o" value="${i}" ${sel[cur]===i?'checked':''} onchange="sel[cur]=${i}"> <span>${o}</span></label>`).join('');
+  refresh();
+}
+
+function status(i){
+  if(review[i]) return 's-rev';
+  if(saved[i]) return 's-ans';
+  if(visited[i]) return 's-no';
+  return 's-nv';
+}
+function refresh(){
+  let a=0,no=0,r=0,nv=0;
+  $('nav').innerHTML = Q.map((_,i)=>{
+    const s = status(i);
+    if(saved[i]) a++;
+    if(s==='s-rev') r++; else if(s==='s-no') no++; else if(s==='s-nv') nv++;
+    return `<span class="sq ${s} ${i===cur?'cur':''}" onclick="go(${i})">${i+1}</span>`;
+  }).join('');
+  $('ans').textContent = a; $('cAns').textContent = a; $('cNo').textContent = no;
+  $('cRev').textContent = r; $('cNv').textContent = nv;
+}
+
+function go(i){cur=i;render()}
+function nextQ(){ if(cur<Q.length-1){cur++;render();return} const k=Q.findIndex((_,x)=>!saved[x]); if(k>=0){cur=k;render()} else {refresh();alert('كل الأسئلة اتحلت، دوس End Test لإنهاء الامتحان')} }
+function saveNext(){ saved[cur]=sel[cur]!==null; nextQ(); }
+function skip(){ nextQ(); }
+function mark(){ review[cur]=!review[cur]; if(sel[cur]!==null) saved[cur]=true; refresh(); }
+function prev(){ if(cur>0){cur--;render()} }
+function fs(d){ size = d===0 ? 13 : Math.max(11,Math.min(24,size+d*2)); render(); }
+
+function endTest(){
+  const un = Q.filter((_,i)=>sel[i]===null).length;
+  const msg = un ? `لسه فاضل ${un} سؤال من غير إجابة. تنهي الامتحان؟` : 'تنهي الامتحان؟';
+  if(confirm(msg)) finish();
+}
+
+function finish(){
+  clearInterval(iv);
+  const n = Q.length; let ok=[], bad=[];
+  Q.forEach((q,i)=>{ (sel[i]===q.a ? ok : bad).push(i) });
+  const pct = n ? Math.round(ok.length/n*100) : 0;
+  const card = (i,good)=>{
+    const q=Q[i];
+    return `<div class="it ${good?'':'bad'}">${q.topic?`<div class="tpn">${q.topic}</div>`:''}<div class="q">${i+1}. ${q.t}</div>
+    ${good ? `<div class="r"><span class="tag g">Correct</span>${q.o[q.a]}</div>` :
+    `<div class="r"><span class="tag y">Your answer</span>${sel[i]===null?'— لم تتم الإجابة —':q.o[sel[i]]}</div>
+     <div class="r"><span class="tag g">Correct</span>${q.o[q.a]}</div>`}
+    ${q.exp?`<div class="exp">💬 ${q.exp}</div>`:''}</div>`;
+  };
+  const unans = Q.filter((_,i)=>sel[i]===null).length;
+  $('exam').classList.add('hide');
+  const r = $('result'); r.classList.remove('hide');
+  r.innerHTML = `<div class="res">
+   <div class="score"><div class="n">${pct}%</div><div>${ok.length} / ${n}</div></div>
+   <div class="stats">
+    <div><b style="color:var(--ok)">${ok.length}</b>صح</div>
+    <div><b style="color:var(--no)">${bad.length - unans}</b>غلط</div>
+    <div><b style="color:#777">${unans}</b>من غير إجابة</div>
+    <div><b>${n}</b>الإجمالي</div>
+   </div>
+   <div class="acts">
+    ${bad.length?'<button class="b" onclick="retryWrong()">إعادة الأسئلة الغلط ('+bad.length+')</button>':''}
+    <button class="b" onclick="init(curPool)">إعادة نفس الامتحان (ترتيب جديد)</button>
+    <button class="b gray" onclick="showHome()">اختيار موضوع آخر</button>
+   </div>
+   <div class="sec">✔ الأسئلة اللي اتحلت صح (${ok.length})</div>
+   ${ok.map(i=>card(i,true)).join('') || '<div style="padding:8px;color:#777">لا يوجد</div>'}
+   <div class="sec bad">✖ الأسئلة الغلط (${bad.length})</div>
+   ${bad.map(i=>card(i,false)).join('') || '<div style="padding:8px;color:#777">ممتاز، مفيش أخطاء 🎉</div>'}
+  </div>`;
+  window.scrollTo(0,0);
+}
+
+function retryWrong(){
+  const pool = Q.filter((q,i)=>sel[i]!==q.a);
+  init(pool);
+}
+
+picked = new Set(TOPICS.map((_,i)=>i));
+showHome();
+</script>
+</body>
+</html>
