@@ -89,17 +89,17 @@ footer a{color:#229ED9;text-decoration:none}
  <!-- شاشة اختيار الموضوع -->
  <div id="home" class="hide">
   <div class="res home">
-   <h2>اختار الموضوع</h2>
-   <div class="sub">اختار موضوع أو أكتر وابدأ الامتحان</div>
+   <h2>اختار المحاضرة</h2>
+   <div class="sub">اختار محاضرة أو أكتر وابدأ الامتحان</div>
    <div class="acts" style="margin:0 0 14px">
     <button class="b light" onclick="selAll(true)">تحديد الكل</button>
     <button class="b light" onclick="selAll(false)">إلغاء التحديد</button>
    </div>
    <div class="tgrid" id="tgrid"></div>
-   <div class="hinfo">المحدد: <b id="hSel">0</b> موضوع · <b id="hQ">0</b> سؤال · الوقت: <b id="hT">0</b> دقيقة</div>
+   <div class="hinfo">المحدد: <b id="hSel">0</b> محاضرة · <b id="hQ">0</b> سؤال · الوقت: <b id="hT">0</b> دقيقة</div>
    <div class="acts">
-    <button class="b" id="startSel" onclick="startSelected()">ابدأ الامتحان</button>
-    <button class="b gray" onclick="startAll()">كل المواضيع مع بعض</button>
+    <button class="b" id="startSel" onclick="startSelected()">يلا نحل </button>
+    <button class="b gray" onclick="startAll()">كل المحاضرات مع بعض</button>
    </div>
   </div>
  </div>
@@ -133,7 +133,7 @@ footer a{color:#229ED9;text-decoration:none}
     <div class="nav" id="nav"></div>
     <div class="endrow">
      <button class="b gray" onclick="endTest()">End Test</button>
-     <button class="b light" onclick="leaveToTopics()">المواضيع</button>
+     <button class="b light" onclick="leaveToTopics()">المحاضرات</button>
     </div>
    </div>
   </div>
@@ -225,7 +225,6 @@ const TOPICS = [
 {t:"Plant maintenance includes:",o:["Developing policies","Preparing repair requests and ensuring completion","Hiring nurses","Conducting staff appraisal"],a:1}]}
 ];
 
-// كل الأسئلة في قائمة واحدة، وكل سؤال عليه اسم موضوعه
 const QUESTIONS = TOPICS.flatMap(tp => tp.q.map(q => ({...q, topic: tp.n})));
 
 let Q, cur, sel, saved, review, visited, left, iv, size = 13, curPool = [], picked = new Set();
