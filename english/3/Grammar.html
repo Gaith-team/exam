@@ -1,1 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--teal:#0d9488;--teal-d:#0e7490;--blue:#e5ecee;--bd:#cbd9dd;--ok:#16a34a;--no:#dc2626;--rev:#4f46e5;--txt:#0f1b21;--grad:linear-gradient(135deg,#0f172a 0%,#0e7490 60%,#0d9488 100%)}
+body{font-family:'Inter',system-ui,sans-serif;background:#f4f7f8;color:var(--txt);font-size:14px}
+header{background:var(--grad);color:#fff;text-align:center;padding:12px;font-size:18px;font-weight:800;position:relative;border-bottom:3px solid #f97316}
+header .brand{position:absolute;right:16px;top:8px;font-weight:bold;font-size:14px}
+header a{position:absolute;left:16px;top:11px;color:#fff;font-size:13px;text-decoration:none}
+.wrap{max-width:1280px;margin:0 auto;padding:8px 10px 20px}
+.topinfo{background:var(--blue);border:1px solid var(--bd);padding:4px 8px;font-size:13px;margin-bottom:8px}
+.topinfo b{color:var(--teal)}
+.layout{display:grid;grid-template-columns:1fr 240px;gap:14px;align-items:start}
+.main{background:#fff;border:1px solid var(--bd);min-height:470px;display:flex;flex-direction:column;
+ background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='70'><text x='8' y='45' transform='rotate(-20 75 35)' font-size='14' font-family='Arial' fill='%23000' fill-opacity='.07'>GHAITH TEAM</text></svg>")}
+.qhead{display:flex;justify-content:space-between;align-items:center;padding:12px 6px 6px;margin:0 6px;border-bottom:1px solid var(--bd)}
+.qhead b{font-size:13px}
+.fs button{background:#0891b2;color:#fff;border:0;padding:6px 12px;margin-left:3px;border-radius:2px;cursor:pointer;font-weight:bold}
+.qbody{padding:8px 12px;flex:1}
+.qtext{font-size:13px;line-height:1.7;margin-bottom:18px;direction:ltr;text-align:left}
+.opt{display:flex;align-items:center;gap:8px;margin:0 0 16px;cursor:pointer;direction:ltr;text-align:left;font-size:13px}
+.opt input{accent-color:var(--teal);cursor:pointer}
+.bar{display:flex;justify-content:space-between;padding:10px;gap:6px;flex-wrap:wrap;border-top:1px solid var(--bd);margin:0 6px 6px}
+.b{background:var(--grad);color:#fff;border:0;padding:9px 12px;font-weight:bold;font-size:13px;border-radius:2px;cursor:pointer}
+.b:hover{filter:brightness(1.12)}
+.b.gray{background:#0f172a}
+.side>div{background:var(--blue);border:1px solid var(--bd);margin-bottom:10px;padding:8px}
+.timer{text-align:center;background:none!important;border:0!important}
+.timer small{font-size:13px}
+.timer .t{font-size:30px;color:#0e7490;margin-top:4px}
+.timer .t.warn{color:#c27b0a}.timer .t.danger{color:#c8372d}
+.leg{display:grid;grid-template-columns:1fr 1fr;gap:8px 6px;font-size:10px;margin-top:8px}
+.leg div{display:flex;align-items:center;gap:6px}
+.sq{min-width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:bold;border-radius:2px;border:1px solid transparent}
+.s-ans{background:var(--ok)}.s-no{background:#f97316}.s-rev{background:var(--rev)}.s-nv{background:#fff;color:#333;border-color:#9bb0a2}
+.nav{display:flex;flex-wrap:wrap;gap:6px;max-height:260px;overflow:auto;background:#e5ecee}
+.nav .sq{width:24px;height:24px;cursor:pointer;font-size:12px}
+.nav .cur{outline:2px solid #f97316;outline-offset:0}
+.endrow{text-align:center}
+.endrow .b{width:90px}
+footer{text-align:center;padding:16px;font-size:12px;color:#44575f;background:#e5ecee;border-top:1px solid #cbd9dd;margin-top:10px}
+footer a{color:#229ED9;text-decoration:none}
+.res{background:#fff;border:1px solid var(--bd);padding:20px;max-width:900px;margin:10px auto}
+.score{text-align:center;padding:10px 0 18px}
+.score .n{font-size:48px;font-weight:900;color:var(--teal)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}
+.stats div{background:var(--blue);padding:10px;text-align:center;border-radius:4px}
+.stats b{display:block;font-size:20px}
+.sec{background:var(--ok);color:#fff;padding:8px 12px;font-weight:bold;margin:22px 0 10px}
+.sec.bad{background:var(--no)}
+.it{border:1px solid var(--bd);border-left:4px solid var(--ok);padding:12px;margin-bottom:8px;background:#fafcff;direction:ltr;text-align:left}
+.it.bad{border-left-color:var(--no)}
+.it .q{font-weight:bold;font-size:13px;margin-bottom:6px;line-height:1.6}
+.it .r{font-size:12px;margin-top:4px}
+.tag{padding:1px 7px;border-radius:3px;color:#fff;font-size:11px;font-weight:bold;margin-right:6px}
+.tag.y{background:var(--no)}.tag.g{background:var(--ok)}
+.exp{font-size:12px;color:#555;margin-top:6px;background:#eef6f4;padding:6px 8px;border-radius:3px}
+.acts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.hide{display:none}
+.home{max-width:900px;margin:14px auto}
+.home h2{text-align:center;margin-bottom:12px;color:var(--teal-d)}
+.tp{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:10px}
+.tp button{background:#fff;border:1px solid var(--bd);border-left:5px solid var(--teal);padding:14px;text-align:left;font:inherit;font-weight:700;cursor:pointer;border-radius:4px;color:var(--txt)}
+.tp button small{display:block;font-weight:400;color:#557;margin-top:4px}
+.tp button:hover{border-left-color:#f97316;background:var(--blue)}
+.tp button.all{background:var(--grad);color:#fff;border-left-color:#f97316}.tp button.all small{color:#dff}
+@media(max-width:820px){.layout{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}header a{display:none}}
+</style>
+</head>
+<body>
+<header><a href="https://gaith-team.github.io/exam/">← Back</a Grammar<span class="brand">GHAITH TEAM</span></header>
+<div class="wrap">
+ <div id="home" class="home"><h2>Choose a Lecture</h2><div class="tp" id="tp"></div></div>
+ <div id="exam" class="hide">
+  <div class="topinfo"><span id="tname"></span> | Total questions: <b id="tot">0</b> | Answered: <b id="ans">0</b></div>
+  <div class="layout">
+   <div class="main">
+    <div class="qhead"><b id="qno"></b><div class="fs"><button onclick="fs(-1)">A-</button><button onclick="fs(0)">A</button><button onclick="fs(1)">A+</button></div></div>
+    <div class="qbody" id="qbody"></div>
+    <div class="bar">
+     <button class="b" onclick="saveNext()">Save &amp; Next</button>
+     <div style="display:flex;gap:4px;flex-wrap:wrap">
+      <button class="b" onclick="mark()">Mark for Review</button>
+      <button class="b" onclick="skip()">Skip</button>
+      <button class="b" onclick="prev()">Previous</button>
+     </div>
+    </div>
+   </div>
+   <div class="side">
+    <div class="timer"><small>Time Remaining</small><div class="t" id="tm">20:00</div></div>
+    <div>
+     <div>Number of questions : <b id="tot2">0</b></div>
+     <div class="leg">
+      <div><span class="sq s-ans" id="cAns">0</span>Answered</div>
+      <div><span class="sq s-no" id="cNo">0</span>Not Answered</div>
+      <div><span class="sq s-rev" id="cRev">0</span>For Review</div>
+      <div><span class="sq s-nv" id="cNv">0</span>Not Visited</div>
+     </div>
+    </div>
+    <div class="nav" id="nav"></div>
+    <div class="endrow"><button class="b gray" onclick="endTest()">End Test</button></div>
+   </div>
+  </div>
+ </div>
+ <div id="result" class="hide"></div>
+</div>
+<footer>GHAITH TEAM · <a href="https://t.me/nursing2bu" target="_blank">@nursing2bu</a></footer>
 
+<script>
+const T=[
+{n:"Chapter I – Present Simple Tense",q:[
+{t:"The heart ______ oxygenated blood throughout the body.",o:["pump","pumps","is pumping","pumped"],a:1},
+{t:"Chronic patients ______ their medications daily at 08:00 AM.",o:["takes","is taking","take","has take"],a:2},
+{t:"The evening shift ______ exactly at 07:00 PM.",o:["begin","beginning","is begin","begins"],a:3},
+{t:"'The patient suffers from type-2 diabetes mellitus.' Present Simple is used here for a:",o:["Permanent condition / diagnosis","Action at the moment of speaking","Future plan","Finished past event"],a:0},
+{t:"Nurses ______ patient vitals every four hours.",o:["documents","documenting","document","is document"],a:2},
+{t:"Dr. Evans ______ the X-ray films carefully.",o:["examine","examining","examines","examineing"],a:2},
+{t:"Choose the correct negative sentence:",o:["The patient does not require immediate intubation.","The patient do not require immediate intubation.","The patient does not requires immediate intubation.","The patient not require immediate intubation."],a:0},
+{t:"Which sentence is INCORRECT?",o:["Nurses document patient vitals every four hours.","The doctor examine the patient daily.","The heart pumps blood throughout the body.","The evening shift begins at 07:00 PM."],a:1},
+{t:"Choose the grammatically correct sentence: 'The morning shift at this hospital ______ at exactly 07:00 AM every day.'",o:["is starting","starts","start","starting"],a:1},
+{t:"Choose the grammatically correct sentence: 'Standard nursing shifts at this hospital ______ at exactly 07:00 AM every day.'",o:["is starting","starts","start","starting"],a:2},
+{t:"We add -s / -es to the verb with I, you, we and they.",o:["True","False"],a:1},
+{t:"'The heart pumps blood' is a Present Simple sentence expressing an anatomical fact.",o:["True","False"],a:0},
+{t:"Present Simple can be used for fixed timetables such as shift handovers.",o:["True","False"],a:0}]},
+{n:"Chapter II – Adjectives + Prepositions",q:[
+{t:"She is afraid ______ heights.",o:["at","about","of","with"],a:2},
+{t:"Sarah is excellent ______ public speaking.",o:["at","for","of","about"],a:0},
+{t:"The manager was disappointed ______ the results.",o:["with","of","about","for"],a:0},
+{t:"Children are excited ______ the upcoming holiday.",o:["of","about","with","for"],a:1},
+{t:"Paris is famous ______ its beautiful architecture.",o:["at","about","with","for"],a:3},
+{t:"Vaccination keeps children safe ______ diseases.",o:["of","from","for","about"],a:1},
+{t:"Complete: 'He is angry ______ his brother. He is angry ______ the delayed flight.'",o:["with / about","about / with","at / for","for / of"],a:0},
+{t:"Choose the sentence with the correct preposition:",o:["Mona is interested on pediatric care.","Smoking is bad at the lungs.","Sleep is important at the brain.","The patient is tired of taking many pills."],a:3},
+{t:"Ahmed is very good ______ giving injections, but smoking is bad ______ the lungs.",o:["at / for","for / at","of / for","at / at"],a:0},
+{t:"Complete the sentence with the correct preposition: 'The patient is anxious ______ his upcoming surgery.'",o:["at","with","for","about"],a:3},
+{t:"'Good at' is used with activities, while 'good for' is used with health / well-being.",o:["True","False"],a:0},
+{t:"'Sorry for' refers to a situation, and 'sorry about' refers to an action.",o:["True","False"],a:1},
+{t:"'Angry with' is followed by a person.",o:["True","False"],a:0}]},
+{n:"Chapter III – Prepositions of Time & Place",q:[
+{t:"The doctor comes ______ 8:00 AM.",o:["on","at","in","for"],a:1},
+{t:"The test is ______ Monday.",o:["at","in","on","by"],a:2},
+{t:"The hospital opened ______ 2020.",o:["in","on","at","to"],a:0},
+{t:"The patient sleeps ______ night.",o:["in","on","of","at"],a:3},
+{t:"The clinic is ______ the second floor.",o:["in","at","on","between"],a:2},
+{t:"The patient is ______ Room 302.",o:["on","in","at","behind"],a:1},
+{t:"We have a staff meeting ______ Friday morning.",o:["on","in","at","by"],a:0},
+{t:"Room 2 is ______ Room 1 and Room 3.",o:["under","behind","between","next to"],a:2},
+{t:"The nurse checks the patient ______ the morning, and the clinic opens ______ October 12th.",o:["on / in","at / on","in / at","in / on"],a:3},
+{t:"Meet the doctor ______ the hospital entrance.",o:["at","on","between","in"],a:0},
+{t:"We use IN for months, years and parts of the day.",o:["True","False"],a:0},
+{t:"We use AT with the days of the week.",o:["True","False"],a:1},
+{t:"'The clinic opens in October 12th' is grammatically correct.",o:["True","False"],a:1}]},
+{n:"Chapter IV – Countable & Uncountable Nouns",q:[
+{t:"Which noun is countable?",o:["blood","advice","pill","equipment"],a:2},
+{t:"Which noun is uncountable?",o:["bed","information","nurse","bandage"],a:1},
+{t:"The nurse gives ______ pill to the patient.",o:["an","some","much","a"],a:3},
+{t:"There is ______ emergency in Room 4.",o:["a","an","many","few"],a:1},
+{t:"The patient needs some ______.",o:["a rest","rests","rest","an rest"],a:2},
+{t:"Do not give too much ______ at once.",o:["medicine","pills","beds","nurses"],a:0},
+{t:"We need many ______ in the cabinet.",o:["bandage","water","bandages","information"],a:2},
+{t:"Which sentence is correct?",o:["Is there any blood on the gauze?","There are three bloods in the bag.","The nurse gave an advice.","We have many equipment."],a:0},
+{t:"Identify the correct quantifiers: 'The nurse needs ______ fresh gauze for the wound, but there are only ______ beds available in the ward.'",o:["a / much","many / little","some / few","an / a lot"],a:2},
+{t:"Which pair of words is used with uncountable nouns?",o:["a few / many","some / a little","three / several","a / an"],a:1},
+{t:"Uncountable nouns take 'a / an' and have a plural form.",o:["True","False"],a:1},
+{t:"'Many' and 'few' are used with plural countable nouns.",o:["True","False"],a:0},
+{t:"'A lot of' can be used with both countable and uncountable nouns.",o:["True","False"],a:0}]},
+{n:"Chapter V – Present Continuous Tense",q:[
+{t:"The doctor ______ the patient right now.",o:["examines","is examining","are examining","examining"],a:1},
+{t:"The structure of the Present Continuous is:",o:["Subject + V1 + s","Subject + will + V1","Subject + am / is / are + V-ing","Subject + do / does + V1"],a:2},
+{t:"We ______ the patient's heart rate.",o:["is monitoring","monitoring","monitor","are monitoring"],a:3},
+{t:"Choose the correct negative: 'The patient ______ at the moment.'",o:["is not sleeping","not sleeping","does not sleeping","are not sleeping"],a:0},
+{t:"______ the doctor coming to the room?",o:["Does","Is","Are","Do"],a:1},
+{t:"'Are you feeling better today?' Choose the correct short answer:",o:["Yes, I do.","Yes, I feel.","Yes, I does.","Yes, I am."],a:3},
+{t:"The medical staff ______ in the ward.",o:["are working","is working","works","working"],a:0},
+{t:"Which sentence correctly uses the Present Continuous to describe an action happening right now?",o:["Nurse Mona checking the vital signs.","Look! Nurse Mona is checking the vital signs.","Nurse Mona is check the vital signs.","Nurse Mona checks the vital signs right now."],a:1},
+{t:"Which sentence is correct?",o:["The nurses is not taking a break right now.","The nurses not taking a break right now.","The nurses are not taking a break right now.","The nurses does not taking a break right now."],a:2},
+{t:"The Present Continuous describes actions happening at the moment of speaking.",o:["True","False"],a:0},
+{t:"In Present Continuous questions, the verb 'be' comes after the subject.",o:["True","False"],a:1},
+{t:"'Is the doctor coming?' → 'Yes, he is.' is a correct short answer.",o:["True","False"],a:0}]},
+{n:"Chapter VI – 'Going to'",q:[
+{t:"The structure of 'going to' is:",o:["Subject + going to + V-ing","Subject + will + going to","Subject + be (am / is / are) + going to + simple verb","Subject + do + going to + V1"],a:2},
+{t:"I ______ going to check the patient's temperature.",o:["is","am","are","be"],a:1},
+{t:"He ______ going to help the sick child.",o:["are","am","is","be"],a:2},
+{t:"They ______ going to give the medicine.",o:["is","am","be","are"],a:3},
+{t:"Choose the correct negative: 'I ______ going to change the bandage now.'",o:["am not","not am","don't","isn't"],a:0},
+{t:"______ the doctor going to see the patient soon?",o:["Are","Does","Is","Do"],a:2},
+{t:"'I am going to clean the patient's room at 10:00 AM.' expresses:",o:["A plan decided before speaking","A permanent fact","An action at this moment","A past habit"],a:0},
+{t:"'The sky is very dark. It is going to rain.' uses 'going to' for:",o:["A past habit","An action at this moment","A permanent fact","A prediction based on what you see now"],a:3},
+{t:"'The child is holding his stomach. He ______ cry.'",o:["will to","is going to","going to","are going to"],a:1},
+{t:"'Going to' is used for plans decided before speaking.",o:["True","False"],a:0},
+{t:"To make a negative with 'going to', add 'not' before the 'be' verb.",o:["True","False"],a:1},
+{t:"'Going to' is used for predictions based on what you see now.",o:["True","False"],a:0}]}
+];
+const X=[[
+{t:"Which sentence uses the Present Simple for a habitual routine?",o:["The nurse is taking vitals now.","The nurse will take vitals tomorrow.","The nurse took vitals yesterday.","The nurse takes vitals every morning."],a:3},
+{t:"He / She / It / singular nouns take the verb form:",o:["Base verb (V1) only","Verb + -s / -es / -ies","Verb + -ing","Verb + -ed"],a:1},
+{t:"I / You / We / They / plural nouns take the verb form:",o:["Base verb (V1)","Verb + -s","Verb + -ing","Verb + -ed"],a:0},
+{t:"The patient ______ immediate intubation. (negative)",o:["do not require","not requires","does not require","does not requires"],a:2},
+{t:"'Chronic patients take their medications daily at 08:00 AM.' shows:",o:["A permanent condition","A habitual routine","A future plan","A universal truth"],a:1},
+{t:"Which sentence is a universal truth about anatomy?",o:["The heart pumps oxygenated blood throughout the body.","The nurse is checking the blood pressure.","The doctor will visit tomorrow.","I am taking notes."],a:0},
+{t:"______ the patient require oxygen?",o:["Is","Do","Does","Are"],a:2},
+{t:"Which verb form is correct? 'The Doctor ______ the patient every morning.'",o:["examine","examines","is examine","are examining"],a:1},
+{t:"Nurses ______ not leave the ward during handover.",o:["does","is","are","do"],a:3},
+{t:"The nurse ______ the wound daily. (wash)",o:["wash","washs","washes","washies"],a:2},
+{t:"The Present Simple is used for established medical routines.",o:["True","False"],a:0},
+{t:"'Does' is used with plural subjects in questions.",o:["True","False"],a:1},
+{t:"In a negative sentence, the main verb takes -s after 'does not'.",o:["True","False"],a:1},
+{t:"'The evening shift begins at 07:00 PM' expresses a fixed institutional schedule.",o:["True","False"],a:0}],
+[
+{t:"Students easily get bored ______ long lectures.",o:["of","with","at","for"],a:1},
+{t:"I am quite bad ______ remembering names.",o:["at","for","about","with"],a:0},
+{t:"The book is full ______ useful information.",o:["with","at","of","about"],a:2},
+{t:"You are responsible ______ keeping your room clean.",o:["of","to","about","for"],a:3},
+{t:"He is anxious ______ the job interview.",o:["about","of","for","at"],a:0},
+{t:"We are deeply sorry ______ the inconvenient delay.",o:["for","about","at","with"],a:1},
+{t:"I am so sorry ______ breaking your favorite coffee mug.",o:["for","about","of","at"],a:0},
+{t:"You must always be kind ______ animals.",o:["for","at","to","of"],a:2},
+{t:"Be careful ______ the patient's allergy.",o:["at","of","with","to"],a:1},
+{t:"Mona is a nurse; she is interested ______ pediatric care.",o:["at","in","on","of"],a:1},
+{t:"'Interested in' is a correct adjective + preposition pair.",o:["True","False"],a:0},
+{t:"'Afraid of' and 'aware of' both take the preposition OF.",o:["True","False"],a:0},
+{t:"'Good for' is used with an activity, e.g. 'good for playing the piano'.",o:["True","False"],a:1},
+{t:"'Worried about' and 'anxious about' both take ABOUT.",o:["True","False"],a:0}],
+[
+{t:"The nurse is ______ the door.",o:["in","on","at","between"],a:2},
+{t:"The clinic gets busy ______ the summer.",o:["on","at","by","in"],a:3},
+{t:"The paper is ______ the desk.",o:["in","at","on","into"],a:2},
+{t:"The shoes are ______ the bed.",o:["under","between","at","on"],a:0},
+{t:"The chair is ______ the bed.",o:["between","next to","in","on"],a:1},
+{t:"The wheelchair is ______ the curtain.",o:["behind","at","on","in"],a:0},
+{t:"The medicine is ______ the box.",o:["on","at","under","in"],a:3},
+{t:"Keep the syringe ______ the sterile tray.",o:["on","in","at","to"],a:1},
+{t:"The doctor arrives ______ noon.",o:["in","on","at","by"],a:2},
+{t:"Choose the correct prepositions: ______ 8:00 AM / ______ Monday / ______ 2020.",o:["on / at / in","at / on / in","in / on / at","at / in / on"],a:1},
+{t:"ON is used for exact clock times.",o:["True","False"],a:1},
+{t:"AT is used for noon and night.",o:["True","False"],a:0},
+{t:"'The clinic opens on October 12th' is correct.",o:["True","False"],a:0},
+{t:"We use IN for the days of the week.",o:["True","False"],a:1}],
+[
+{t:"Which noun is uncountable?",o:["pill","bed","water","patient"],a:2},
+{t:"Which noun is countable?",o:["pain","bed","medicine","blood"],a:1},
+{t:"Is there ______ blood on the gauze?",o:["a","any","an","many"],a:1},
+{t:"There are ______ nurses on this shift.",o:["three","a","much","an"],a:0},
+{t:"Do we have ______ water?",o:["a","an","any","many"],a:2},
+{t:"There is a lot of ______ in the ward today.",o:["work","works","a work","many work"],a:0},
+{t:"There are a lot of ______ waiting.",o:["patient","patients","much patient","a patient"],a:1},
+{t:"Which sentence is correct?",o:["The nurse needs some informations.","We have an equipment.","The patient needs some rest.","There are many waters."],a:2},
+{t:"Which word CANNOT be used with an uncountable noun?",o:["some","a little","much","many"],a:3},
+{t:"Which word is used with a singular countable noun?",o:["a / an","many","few","several"],a:0},
+{t:"'Equipment' and 'advice' are uncountable nouns.",o:["True","False"],a:0},
+{t:"'Several' is used with uncountable nouns.",o:["True","False"],a:1},
+{t:"'Some' and 'any' can be used with both countable (plural) and uncountable nouns.",o:["True","False"],a:0},
+{t:"We can say 'an information' in clinical reports.",o:["True","False"],a:1}],
+[
+{t:"The nurses ______ a break right now. (negative)",o:["is not taking","are not taking","do not taking","not taking"],a:1},
+{t:"Choose the correct question:",o:["Is the doctor come to the room?","Does the doctor coming to the room?","Is the doctor coming to the room?","Are the doctor coming to the room?"],a:2},
+{t:"'Is the doctor coming?' Choose the correct negative short answer:",o:["No, he doesn't.","No, he isn't.","No, he not.","No, he don't."],a:1},
+{t:"Which time expression fits the Present Continuous?",o:["every day","at the moment","yesterday","next year"],a:1},
+{t:"They ______ examining the patient.",o:["is","am","are","be"],a:2},
+{t:"I ______ giving the injection now.",o:["is","are","be","am"],a:3},
+{t:"He ______ taking his medication now. (negative)",o:["do not","is not","are not","not"],a:1},
+{t:"Which sentence is INCORRECT?",o:["The doctor is examining the patient.","We are monitoring the heart rate.","The nurse is give the injection.","The staff are working in the ward."],a:2},
+{t:"The verb form used after am / is / are in the Present Continuous is:",o:["V1","V-ing","V-ed","V3"],a:1},
+{t:"Look! The patient ______.",o:["is waking up","wakes up","woke up","wake up"],a:0},
+{t:"'Are you feeling better today?' → 'Yes, I am.' is a correct answer.",o:["True","False"],a:0},
+{t:"'The patient is not sleeping' is a correct negative sentence.",o:["True","False"],a:0},
+{t:"'The doctor examining the patient now' is a complete correct sentence.",o:["True","False"],a:1},
+{t:"The Present Continuous is used for permanent facts such as anatomy.",o:["True","False"],a:1}],
+[
+{t:"She ______ going to visit the clinic today. (negative)",o:["are not","am not","is not","not"],a:2},
+{t:"'They are not ______ leave the hospital early.'",o:["going to","go to","goes to","gone to"],a:0},
+{t:"______ I going to work in the morning?",o:["Is","Am","Are","Do"],a:1},
+{t:"______ you going to wash your hands now?",o:["Are","Is","Am","Does"],a:0},
+{t:"'The head nurse is going to call the doctor.' This is:",o:["A sudden past action","A plan decided a moment before","A habit","A general fact"],a:1},
+{t:"Which sentence is a prediction based on what you see now?",o:["I am going to clean the room at 10:00 AM.","The patient looks very tired and sleepy. He is going to sleep soon.","They are going to give the medicine.","I am going to check the temperature."],a:1},
+{t:"After 'going to' we use:",o:["V-ing","V-ed","a simple verb","V3"],a:2},
+{t:"Which sentence is correct?",o:["He going to help the child.","He is going to helps the child.","He is going help the child.","He is going to help the child."],a:3},
+{t:"I ______ not going to change the bandage now.",o:["is","are","am","do"],a:2},
+{t:"'Look at the child. He is holding his stomach. He is ______.'",o:["going to cry","goes cry","going cry","go to cry"],a:0},
+{t:"'Going to' needs 'will' after the be verb.",o:["True","False"],a:1},
+{t:"Questions with 'going to' begin with the 'be' verb.",o:["True","False"],a:0},
+{t:"'You are going to give the medicine' is a positive 'going to' sentence.",o:["True","False"],a:0},
+{t:"'It is going to rain' is a plan decided before speaking.",o:["True","False"],a:1}]];
+X.forEach((a,k)=>T[k].q.push(...a));
+T.push({n:"★ Comprehensive – All Chapters (I–VI)",q:T.flatMap(x=>x.q)});
+
+let QUESTIONS=[], tIdx=0, Q, cur, sel, saved, review, visited, left, iv, size=13;
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function shuffleOptions(q){if(q.o.length<3)return {...q};const ix=shuffle(q.o.map((_,k)=>k));return {...q,o:ix.map(k=>q.o[k]),a:ix.indexOf(q.a)}}
+const $=id=>document.getElementById(id);
+
+$('tp').innerHTML=T.map((x,k)=>`<button class="${k==T.length-1?'all':''}" onclick="pick(${k})">${x.n}<small>${x.q.length} questions</small></button>`).join('');
+function pick(k){tIdx=k;QUESTIONS=T[k].q;$('home').classList.add('hide');$('tname').textContent=T[k].n;init(QUESTIONS)}
+function home(){clearInterval(iv);$('exam').classList.add('hide');$('result').classList.add('hide');$('home').classList.remove('hide');window.scrollTo(0,0)}
+
+function init(pool){
+  Q=shuffle([...pool]).map(shuffleOptions);const n=Q.length;
+  cur=0;sel=Array(n).fill(null);saved=Array(n).fill(false);
+  review=Array(n).fill(false);visited=Array(n).fill(false);
+  left=Math.max(600,n*40);
+  $('exam').classList.remove('hide');$('result').classList.add('hide');
+  $('tot').textContent=$('tot2').textContent=n;
+  clearInterval(iv);
+  const tick=()=>{const m=Math.floor(left/60),s=left%60,t=$('tm');t.textContent=m+':'+(s<10?'0':'')+s;t.className='t'+(left<=120?' danger':left<=300?' warn':'')};
+  tick();
+  iv=setInterval(()=>{left--;tick();if(left<=0){clearInterval(iv);finish()}},1000);
+  if(n)render();
+  window.scrollTo(0,0);
+}
+function render(){
+  visited[cur]=true;const q=Q[cur];
+  $('qno').textContent='Question No. '+(cur+1);
+  $('qbody').innerHTML=`<div class="qtext" style="font-size:${size}px">${q.t}</div>`+
+    q.o.map((o,i)=>`<label class="opt" style="font-size:${size}px"><input type="radio" name="o" value="${i}" ${sel[cur]===i?'checked':''} onchange="sel[cur]=${i}"> <span>${o}</span></label>`).join('');
+  refresh();
+}
+function status(i){if(review[i])return 's-rev';if(saved[i])return 's-ans';if(visited[i])return 's-no';return 's-nv'}
+function refresh(){
+  let a=0,no=0,r=0,nv=0;
+  $('nav').innerHTML=Q.map((_,i)=>{const s=status(i);if(saved[i])a++;
+    if(s==='s-rev')r++;else if(s==='s-no')no++;else if(s==='s-nv')nv++;
+    return `<span class="sq ${s} ${i===cur?'cur':''}" onclick="go(${i})">${i+1}</span>`}).join('');
+  $('ans').textContent=a;$('cAns').textContent=a;$('cNo').textContent=no;$('cRev').textContent=r;$('cNv').textContent=nv;
+}
+function go(i){cur=i;render()}
+function nextQ(){if(cur<Q.length-1){cur++;render();return}const k=Q.findIndex((_,x)=>!saved[x]);if(k>=0){cur=k;render()}else{refresh();alert('All questions answered. Press End Test to finish.')}}
+function saveNext(){saved[cur]=sel[cur]!==null;nextQ()}
+function skip(){nextQ()}
+function mark(){review[cur]=!review[cur];if(sel[cur]!==null)saved[cur]=true;refresh()}
+function prev(){if(cur>0){cur--;render()}}
+function fs(d){size=d===0?13:Math.max(11,Math.min(24,size+d*2));render()}
+function endTest(){const un=Q.filter((_,i)=>sel[i]===null).length;
+  if(confirm(un?`You have ${un} unanswered question(s). End the test?`:'End the test?'))finish()}
+function finish(){
+  clearInterval(iv);
+  const n=Q.length;let ok=[],bad=[];
+  Q.forEach((q,i)=>{(sel[i]===q.a?ok:bad).push(i)});
+  const pct=n?Math.round(ok.length/n*100):0;
+  const card=(i,good)=>{const q=Q[i];
+    return `<div class="it ${good?'':'bad'}"><div class="q">${i+1}. ${q.t}</div>
+    ${good?`<div class="r"><span class="tag g">Correct</span>${q.o[q.a]}</div>`:
+    `<div class="r"><span class="tag y">Your answer</span>${sel[i]===null?'— Not answered —':q.o[sel[i]]}</div>
+     <div class="r"><span class="tag g">Correct</span>${q.o[q.a]}</div>`}
+    ${q.exp?`<div class="exp">💬 ${q.exp}</div>`:''}</div>`};
+  const unans=Q.filter((_,i)=>sel[i]===null).length;
+  $('exam').classList.add('hide');
+  const r=$('result');r.classList.remove('hide');
+  r.innerHTML=`<div class="res">
+   <div class="score"><div class="n">${pct}%</div><div>${ok.length} / ${n}</div></div>
+   <div class="stats">
+    <div><b style="color:var(--ok)">${ok.length}</b>Correct</div>
+    <div><b style="color:var(--no)">${bad.length-unans}</b>Wrong</div>
+    <div><b style="color:#777">${unans}</b>Unanswered</div>
+    <div><b>${n}</b>Total</div>
+   </div>
+   <div class="acts">
+    ${bad.length?'<button class="b" onclick="retryWrong()">Retry wrong questions ('+bad.length+')</button>':''}
+    <button class="b" onclick="init(QUESTIONS)">New random exam</button>
+    <button class="b gray" onclick="home()">⌂ Topics</button>
+   </div>
+   <div class="sec">✔ Correct questions (${ok.length})</div>
+   ${ok.map(i=>card(i,true)).join('')||'<div style="padding:8px;color:#777">None</div>'}
+   <div class="sec bad">✖ Wrong questions (${bad.length})</div>
+   ${bad.map(i=>card(i,false)).join('')||'<div style="padding:8px;color:#777">Excellent, no mistakes 🎉</div>'}
+  </div>`;
+  window.scrollTo(0,0);
+}
+function retryWrong(){init(Q.filter((q,i)=>sel[i]!==q.a))}
+</script>
+</body>
+</html>
