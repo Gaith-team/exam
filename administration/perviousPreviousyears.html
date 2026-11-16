@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--teal:#0e7490;--teal-d:#1e3a8a;--blue:#eef2f7;--bd:#d3dbe6;--ok:#16a34a;--no:#dc2626;--rev:#1e3a8a;--txt:#1a2332;--grad:linear-gradient(135deg,#1e3a8a 0%,#0e7490 50%,#10b981 100%)}
+body{font-family:'Outfit',Arial,sans-serif;background:#f8fafc;color:var(--txt);font-size:14px}
+header{background:var(--grad);color:#fff;text-align:center;padding:12px;font-size:18px;font-weight:900;position:relative;border-bottom:4px solid #f59e0b}
+header .brand{position:absolute;right:16px;top:8px;font-weight:bold;font-size:14px}
+header a{position:absolute;left:16px;top:11px;color:#fff;font-size:13px;text-decoration:none}
+.wrap{max-width:1280px;margin:0 auto;padding:8px 10px 20px}
+.topinfo{background:var(--blue);border:1px solid var(--bd);padding:4px 8px;font-size:13px;margin-bottom:8px}
+.topinfo b{color:var(--teal)}
+.layout{display:grid;grid-template-columns:1fr 240px;gap:14px;align-items:start}
+.main{background:#fff;border:1px solid var(--bd);min-height:470px;display:flex;flex-direction:column;
+ background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='70'><text x='8' y='45' transform='rotate(-20 75 35)' font-size='14' font-family='Arial' fill='%23000' fill-opacity='.07'>GHAITH TEAM</text></svg>")}
+.qhead{display:flex;justify-content:space-between;align-items:center;padding:12px 6px 6px;margin:0 6px;border-bottom:1px solid var(--bd)}
+.qhead b{font-size:13px}
+.fs button{background:#1e3a8a;color:#fff;border:0;padding:6px 12px;margin-left:3px;border-radius:2px;cursor:pointer;font-weight:bold}
+.qbody{padding:8px 12px;flex:1}
+.qtext{font-size:13px;line-height:1.7;margin-bottom:18px;direction:ltr;text-align:left}
+.opt{display:flex;align-items:center;gap:8px;margin:0 0 16px;cursor:pointer;direction:ltr;text-align:left;font-size:13px}
+.opt input{accent-color:var(--teal);cursor:pointer}
+.bar{display:flex;justify-content:space-between;padding:10px;gap:6px;flex-wrap:wrap;border-top:1px solid var(--bd);margin:0 6px 6px}
+.b{background:var(--grad);color:#fff;border:0;padding:9px 12px;font-weight:bold;font-size:13px;border-radius:2px;cursor:pointer}
+.b:hover{filter:brightness(1.12)}
+.b.gray{background:#1a2332}
+.side>div{background:var(--blue);border:1px solid var(--bd);margin-bottom:10px;padding:8px}
+.timer{text-align:center;background:none!important;border:0!important}
+.timer small{font-size:13px}
+.timer .t{font-size:30px;color:#1e3a8a;margin-top:4px}
+.timer .t.warn{color:#c27b0a}.timer .t.danger{color:#c8372d}
+.leg{display:grid;grid-template-columns:1fr 1fr;gap:8px 6px;font-size:10px;margin-top:8px}
+.leg div{display:flex;align-items:center;gap:6px}
+.sq{min-width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:bold;border-radius:2px;border:1px solid transparent}
+.s-ans{background:var(--ok)}.s-no{background:#f59e0b;color:#3b2a00}.s-rev{background:var(--rev)}.s-nv{background:#fff;color:#333;border-color:#9bb0a2}
+.nav{display:flex;flex-wrap:wrap;gap:6px;max-height:260px;overflow:auto;background:#eef2f7}
+.nav .sq{width:24px;height:24px;cursor:pointer;font-size:12px}
+.nav .cur{outline:2px solid #f59e0b;outline-offset:0}
+.endrow{text-align:center}
+.endrow .b{width:90px}
+footer{text-align:center;padding:16px;font-size:12px;color:#4a5568;background:#eef2f7;border-top:3px solid transparent;border-image:linear-gradient(90deg,#1e3a8a,#0e7490,#10b981,#f59e0b) 1;margin-top:10px}
+footer a{color:#229ED9;text-decoration:none}
+/* results */
+.res{background:#fff;border:1px solid var(--bd);padding:20px;max-width:900px;margin:10px auto}
+.score{text-align:center;padding:10px 0 18px}
+.score .n{font-size:48px;font-weight:900;color:var(--teal)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}
+.stats div{background:var(--blue);padding:10px;text-align:center;border-radius:4px}
+.stats b{display:block;font-size:20px}
+.sec{background:var(--ok);color:#fff;padding:8px 12px;font-weight:bold;margin:22px 0 10px}
+.sec.bad{background:var(--no)}
+.it{border:1px solid var(--bd);border-left:4px solid var(--ok);padding:12px;margin-bottom:8px;background:#fafcff;direction:ltr;text-align:left}
+.it.bad{border-left-color:var(--no)}
+.it .q{font-weight:bold;font-size:13px;margin-bottom:6px;line-height:1.6}
+.it .r{font-size:12px;margin-top:4px}
+.tag{padding:1px 7px;border-radius:3px;color:#fff;font-size:11px;font-weight:bold;margin-right:6px}
+.tag.y{background:var(--no)}.tag.g{background:var(--ok)}
+.exp{font-size:12px;color:#555;margin-top:6px;background:#eef6f4;padding:6px 8px;border-radius:3px}
+.acts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.hide{display:none}
+@media(max-width:820px){.layout{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}header a{display:none}}
+.qtext img{display:block;max-width:100%;max-height:260px;margin:0 auto 12px;border-radius:8px;background:#fff}
+.it .q img{max-height:90px;display:block;margin:6px 0;border-radius:6px}
+</style>
+</head>
+<body>
+<header><a href="https://gaith-team.github.io/exam/">← رجوع</a>Nursing Management<span class="brand">GHAITH TEAM</span></header>
+<div class="wrap">
+ <div id="exam">
+  <div class="topinfo">Total questions in exam: <b id="tot">0</b> | Answered: <b id="ans">0</b></div>
+  <div class="layout">
+   <div class="main">
+    <div class="qhead"><b id="qno"></b><div class="fs"><button onclick="fs(-1)">A-</button><button onclick="fs(0)">A</button><button onclick="fs(1)">A+</button></div></div>
+    <div class="qbody" id="qbody"></div>
+    <div class="bar">
+     <button class="b" onclick="saveNext()">Save &amp; Next</button>
+     <div style="display:flex;gap:4px;flex-wrap:wrap">
+      <button class="b" onclick="mark()">Mark for Review</button>
+      <button class="b" onclick="skip()">Skip</button>
+      <button class="b" onclick="prev()">Previous</button>
+     </div>
+    </div>
+   </div>
+   <div class="side">
+    <div class="timer"><small>Time Remaining</small><div class="t" id="tm">70:00</div></div>
+    <div>
+     <div>Number of questions : <b id="tot2">0</b></div>
+     <div class="leg">
+      <div><span class="sq s-ans" id="cAns">0</span>Answered</div>
+      <div><span class="sq s-no" id="cNo">0</span>Not Answered</div>
+      <div><span class="sq s-rev" id="cRev">0</span>For Review</div>
+      <div><span class="sq s-nv" id="cNv">0</span>Not Visited</div>
+     </div>
+    </div>
+    <div class="nav" id="nav"></div>
+    <div class="endrow"><button class="b gray" onclick="endTest()">End Test</button></div>
+   </div>
+  </div>
+ </div>
+ <div id="result" class="hide"></div>
+</div>
+<footer>GHAITH TEAM · <a href="https://t.me/nursing2bu" target="_blank">@nursing2bu</a></footer>
+
+<script>
+const QUESTIONS = [
+/* ===== 1) Role of the Director of Nursing Service ===== */
+{t:"Nursing director (Matron) combines years of clinical experience, education, and ______ to develop organizational structure and standards of care.", o:["Financial skills","Managerial skills","Technical skills only","Legal skills"], a:1},
+{t:"The educational qualification required for a nursing director is:", o:["Diploma in nursing","Master's degree required, Bachelor preferred","Bachelor of Science required, Master's preferred","Doctorate required"], a:2},
+{t:"The professional qualification for a nursing director requires how many years of recent clinical experience, including 1 year supervisory?", o:["Two years","Three years","Five years","Four years"], a:3},
+{t:"Collecting and analyzing data to determine the staffing pattern is part of which function of the director?", o:["Assessment","Planning","Implementation","Evaluation"], a:0},
+{t:"Making nursing rounds to assess the quality of patient care belongs to:", o:["Planning","Assessment","Evaluation","Implementation"], a:1},
+{t:"Developing job/position descriptions (with management personnel) belongs to:", o:["Assessment","Evaluation","Planning","Implementation"], a:2},
+{t:"Establishing and maintaining an effective patient classification system belongs to:", o:["Assessment","Planning","Evaluation","Implementation"], a:1},
+{t:"Conducting monthly management meetings belongs to:", o:["Implementation","Assessment","Planning","Evaluation"], a:0},
+{t:"Interviewing applicants, approving hiring and terminating personnel when necessary belongs to:", o:["Assessment","Planning","Implementation","Evaluation"], a:2},
+{t:"Preparing and submitting budget information to administration belongs to:", o:["Planning","Implementation","Assessment","Evaluation"], a:1},
+{t:"Submitting a monthly report on the functions and progress of nursing services to the administrator belongs to:", o:["Evaluation","Planning","Assessment","Implementation"], a:0},
+{t:"Evaluating and analyzing incident reports and taking follow-up action belongs to:", o:["Assessment","Evaluation","Planning","Implementation"], a:1},
+{t:"The director assesses nursing care, the environment and equipment regularly together with the:", o:["Head nurse","Hospital administrator","Infection control nurse","Safety committee"], a:2},
+{t:"The Director of Nursing is responsible for leading a nursing department or an entire healthcare system.", o:["True","False"], a:0},
+{t:"A Master's degree is strictly required to become a nursing director.", o:["True","False"], a:1},
+{t:"The director outlines and interprets to personnel the nursing service's role in disaster planning.", o:["True","False"], a:0},
+{t:"The director has no role in evaluating the performance of supervisors and head nurses.", o:["True","False"], a:1},
+
+/* ===== 2) Climate Change ===== */
+{t:"Climate is defined as an area's:", o:["Daily weather","Long-term weather patterns","Seasonal storms only","Ocean temperature"], a:1},
+{t:"Since the 1800s, the main driver of climate change has been:", o:["The solar cycle","Volcanic eruptions","Human activities such as burning fossil fuels","Ocean currents"], a:2},
+{t:"Global warming is generally due to:", o:["The greenhouse effect","Ozone increase","Solar storms","Earth's rotation"], a:0},
+{t:"Which activity releases methane, a potent greenhouse gas?", o:["Solar power","Coal mining","Recycling","Planting trees"], a:1},
+{t:"Cutting down forests causes emissions because trees:", o:["Absorb oxygen","Release the carbon they have been storing when cut","Produce methane","Reflect sunlight"], a:1},
+{t:"Which of the following is a cause of climate change mentioned in the material?", o:["Generating power by burning coal, oil, or gas","Planting trees","Using washable dishes","Recycling paper"], a:0},
+{t:"Weather-related events displaced an estimated ______ million people on average each year.", o:["12.3","23.1","32.1","51.2"], a:1},
+{t:"COP27 was hosted in November 2022 by Egypt in:", o:["Cairo","Alexandria","Luxor","Sharm el-Sheikh"], a:3},
+{t:"Which is NOT one of the three main areas of COP27?", o:["Reducing emissions","Climate adaptation","Climate finance","Nuclear energy"], a:3},
+{t:"Heat waves are associated with which health problem?", o:["Cardiovascular diseases such as stroke","Lung cancer","Food insecurity","Burns"], a:0},
+{t:"Air pollution can cause:", o:["Heat stroke","Asthma, COPD and lung cancer","Displacement","Malnutrition"], a:1},
+{t:"Higher temperatures increase:", o:["Heat-related illnesses","Water availability","Crop productivity","Fish stocks"], a:0},
+{t:"As temperatures rise, more moisture evaporates, which exacerbates:", o:["Droughts only","Extreme rainfall and flooding","Cold waves","Soil fertility"], a:1},
+{t:"As a nurse, a role in climate change is to:", o:["Educate patients and communities about its health impacts","Ignore environmental issues","Increase use of disposable products","Use air conditioners continuously"], a:0},
+{t:"Climate change shifts may be natural, such as variations in the solar cycle.", o:["True","False"], a:0},
+{t:"Higher temperatures make water more available in most regions.", o:["True","False"], a:1},
+{t:"Deserts are expanding, reducing land for growing food.", o:["True","False"], a:0},
+{t:"Planting a tree helps purify the air.", o:["True","False"], a:0},
+
+/* ===== 3) The Head Nurse ===== */
+{t:"The head nurse fills which management level?", o:["Top-level management","Middle-level management","First-line (lower) management","Executive management"], a:2},
+{t:"Top management level in nursing is represented by the:", o:["Head nurse","Nursing supervisor","Staff nurse","Director of nursing service department"], a:3},
+{t:"Middle management level in nursing is represented by the:", o:["Nursing supervisor","Head nurse","Nursing director","Nurse aid"], a:0},
+{t:"Long-term plans of the top management are generally made for:", o:["1 to 5 years","5 to 20 years","Less than 1 year","Daily"], a:1},
+{t:"Middle management prepares short-term plans generally for:", o:["Daily only","5 to 20 years","1 to 5 years","More than 20 years"], a:2},
+{t:"Which level requires more conceptual skills and less technical skills?", o:["Top level","Middle level","Lower level","All equally"], a:0},
+{t:"The head nurse is responsible to:", o:["Staff nurses and aides","Nurse supervisor and the nursing service director","Patients only","The pharmacy"], a:1},
+{t:"The educational qualification of the head nurse is:", o:["Diploma only","Any health degree","Master's degree required","B.Sc.N. with advanced preparation in nursing administration"], a:3},
+{t:"The head nurse should have experience of two to five years, with at least ______ as a nurse in charge of a unit.", o:["One year","Two years","Three years","Six months"], a:0},
+{t:"The ability to work with and through people, including motivation and effective leadership, is:", o:["Technical skill","Human skill","Analytical skill","Political skill"], a:1},
+{t:"The ability to understand complex scenarios and develop creative solutions is:", o:["Conceptual skill","Technical skill","Human skill","Political skill"], a:0},
+{t:"Using knowledge, techniques and requirements necessary for specific tasks is:", o:["Conceptual skill","Political skill","Technical skill","Human skill"], a:2},
+{t:"Understanding others at work and using that knowledge to influence them to enhance objectives is:", o:["Analytical skill","Political skill","Technical skill","Conceptual skill"], a:1},
+{t:"Knowing which nurse to place in care of which patient reflects strong:", o:["Political skills","Technical skills","Human skills","Analytical skills"], a:3},
+{t:"Which is NOT one of the four main areas of the head nurse's role?", o:["Patient-care management","Staff management","Financial auditing","Unit management"], a:2},
+{t:"Which is NOT part of staff management?", o:["Staff utilization","Staff supervision","Staff development","Relations management"], a:3},
+{t:"Periodic formal evaluation of whether the staff nurse's performance meets pre-determined standards is:", o:["Staff supervision","Staff utilization","Staff evaluation (performance appraisal)","Staff development"], a:2},
+{t:"A problem of the traditional unit organization pattern is that it:", o:["Decreases the head nurse's time in patient care management","Removes all management functions","Hires a unit manager","Decreases her workload"], a:0},
+{t:"In the progressive organization pattern, the hospital appoints a:", o:["Second head nurse","Unit manager to relieve the head nurse from management activities","Nursing director","Safety officer"], a:1},
+{t:"In the 'superior relation', the unit manager is:", o:["Subordinate to the head nurse","A peer of the head nurse","One of the hospital's assistant administrators","A staff nurse"], a:2},
+{t:"Transcribing medical prescriptions is part of the unit manager's:", o:["Clerical responsibilities","Plant maintenance","Dietary services","Staff evaluation"], a:0},
+{t:"The head nurse fills first-line management in the hospital.", o:["True","False"], a:0},
+{t:"The head nurse belongs to the middle level of management.", o:["True","False"], a:1},
+{t:"Lower-level managers have limited authority but important responsibility.", o:["True","False"], a:0},
+
+/* ===== 4) Marketing ===== */
+{t:"Marketing is defined as a social and managerial process by which individuals and groups obtain what they want through:", o:["Advertising only","Exchanging products and services with others","Lowering prices","Producing goods"], a:1},
+{t:"Which is NOT a condition of exchange?", o:["At least two parties","Each party offers something valuable to the other","Each party is free to accept or reject the offer","One party must be forced to accept"], a:3},
+{t:"The two basic types of marketing are:", o:["Internal and external","Local and global","Direct and indirect","Public and private"], a:0},
+{t:"Treating employees as internal customers is called:", o:["External marketing","Internal marketing","Mass marketing","Direct marketing"], a:1},
+{t:"Promoting healthcare services to patients and the community is:", o:["Internal marketing","Exchange","External marketing","Assessment"], a:2},
+{t:"The four Ps of the marketing mix are:", o:["Product, price, place, promotion","People, process, profit, planning","Product, people, policy, price","Price, profit, place, publicity"], a:0},
+{t:"Which element of the marketing mix involves physical location, accessibility and availability?", o:["Product","Price","Promotion","Place"], a:3},
+{t:"Which element informs potential consumers of the existence of services and persuades them of the benefits?", o:["Promotion","Price","Place","Product"], a:0},
+{t:"The steps of the marketing process are:", o:["Planning, buying, selling, profit","Assessment, planning, implementation, evaluation/control","Research, design, production, sale","Advertising, pricing, delivery, follow-up"], a:1},
+{t:"SWOT analysis is used in which step of the marketing process?", o:["Implementation","Evaluation","Assessment","Control"], a:2},
+{t:"Which is a tool used in marketing assessment?", o:["Brochures","Questionnaire","Newsletters","Web site"], a:1},
+{t:"Developing the marketing plan, budget/cost analysis and the marketing mix occurs in:", o:["Planning","Assessment","Evaluation","Implementation"], a:0},
+{t:"Media releases, brochures, pamphlets and word of mouth are forms of promotion in:", o:["Assessment","Planning","Implementation","Evaluation"], a:2},
+{t:"Identifying the gap between planned and actual goals is part of:", o:["Planning","Evaluation and control","Assessment","Product design"], a:1},
+{t:"A common cause of marketing failure is:", o:["Failure to collect data prior to making decisions","Too much research","Clear objectives","Neutral evaluation of information"], a:0},
+{t:"According to the marketing principles, the marketing concept requires a focus on:", o:["Sales versus profit","Profit versus sales","Advertising only","Price only"], a:1},
+{t:"The marketing process is similar to the nursing process.", o:["True","False"], a:0},
+{t:"Marketing begins and ends with customer needs.", o:["True","False"], a:0},
+{t:"Advertising is considered the least public face of marketing.", o:["True","False"], a:1},
+
+/* ===== 5) Change ===== */
+{t:"A change agent is a person or group who helps an organization move from:", o:["The future to the past","The current state to a desired future state","One manager to another","Profit to loss"], a:1},
+{t:"Which is a quality of a change agent?", o:["Rigidity","Working alone","Ability to communicate well","Avoiding involvement of others"], a:2},
+{t:"Change that occurs as a reaction to problems and is crisis driven is:", o:["Planned change","Accidental (reactive) change","Proactive change","Gradual change"], a:1},
+{t:"Planned change results from:", o:["Deliberate effort to make something happen","Sudden crisis","Chance events","External force only"], a:0},
+{t:"Phase 1 of successful change is:", o:["Diagnosis and recognition","Invention and commitment","Pressure and arousal","Reinforcement and acceptance"], a:2},
+{t:"Involving the whole organization in determining the true causes of problems is Phase:", o:["1","3","5","6"], a:1},
+{t:"One department trying out an idea before the whole organization is Phase:", o:["Experimentation and search","Invention and commitment","Intervention and reorientation","Pressure and arousal"], a:0},
+{t:"Praise, recognition, promotion and salary increases are used in:", o:["Phase 1","Phase 2","Phase 4","Phase 6 (reinforcement and acceptance)"], a:3},
+{t:"Lewin's change theory has how many stages?", o:["Two","Three","Five","Seven"], a:1},
+{t:"The stages of Lewin's theory are:", o:["Plan, do, check","Unfreezing, moving, refreezing","Knowledge, persuasion, decision","Diagnose, assess, select"], a:1},
+{t:"Establishing the change as a new habit is:", o:["Unfreezing","Moving","Refreezing","Persuasion"], a:2},
+{t:"Lippitt's theory of change consists of how many phases?", o:["Three","Five","Six","Seven"], a:3},
+{t:"The last phase of Lippitt's theory is:", o:["Maintain the change","Terminate the helping relationship","Diagnose the problem","Select change objectives"], a:1},
+{t:"The first step of Havelock's six-step model is:", o:["Diagnosing the problem","Choosing the solution","Building a relationship","Acquiring resources"], a:2},
+{t:"The first stage of Rogers' diffusion of innovation theory is:", o:["Knowledge","Persuasion","Decision","Confirmation"], a:0},
+{t:"Forces that tend to initiate a change and keep it going are:", o:["Restraining forces","Driving forces","Equilibrium","Resistance"], a:1},
+{t:"Apathy, hostility and poor performance are examples of:", o:["Driving forces","Equilibrium","Restraining forces","Change strategies"], a:2},
+{t:"Using official authority, rewards and punishments to create change is the:", o:["Power-coercion strategy","Logical persuasion strategy","Participation strategy","Reinforcement strategy"], a:0},
+{t:"Which strategy is used when little resistance is anticipated?", o:["Power-coercion","Participation","Logical persuasion","Denial"], a:2},
+{t:"Which is a reason for resisting change?", o:["Understanding the change fully","Fear of losing power","Receiving bonuses","Realistic programs"], a:1},
+{t:"Which is a strategy to overcome resistance to change?", o:["Excluding staff from the process","Withholding resources","Staff participation in the process of change","Avoiding communication"], a:2},
+{t:"The nurse manager who explains the purpose and benefits of change to staff plays the role of:", o:["Planner","Communicator","Problem-solver","Educator"], a:1},
+{t:"The nurse manager who identifies barriers and adjusts the plan plays the role of:", o:["Motivator","Supporter","Problem-solver","Planner"], a:2},
+{t:"Resistance to change is expected as an integral part of the change process.", o:["True","False"], a:0},
+{t:"Accidental change is deliberate, proactive and long lasting.", o:["True","False"], a:1},
+{t:"In Lewin's model, unfreezing involves recognizing the need to change.", o:["True","False"], a:0},
+
+/* ===== 6) Power and Authority ===== */
+{t:"Power is defined as:", o:["The right to command only","The capacity of a person, team or organization to influence others","A formal position only","The span of control"], a:1},
+{t:"Power based on formal status derived from position in the hierarchy is:", o:["Personal power","Positional power","Expert power","Referent power"], a:1},
+{t:"Power based on expertise, skills, charisma or credibility is:", o:["Positional power","Legitimate power","Personal power","Coercive power"], a:2},
+{t:"Which is NOT a type of position power?", o:["Reward power","Coercive power","Legitimate power","Referent power"], a:3},
+{t:"Using bonuses and praise to influence others is:", o:["Reward power","Coercive power","Expert power","Representative power"], a:0},
+{t:"Denying desired rewards or administering punishments to influence others is:", o:["Reward power","Legitimate power","Coercive power","Referent power"], a:2},
+{t:"Formal hierarchical authority is also known as:", o:["Expert power","Legitimate power","Referent power","Rational persuasion"], a:1},
+{t:"The formal right to speak as a representative for an important group is:", o:["Representative power","Reward power","Expert power","Referent power"], a:0},
+{t:"Control of another's behavior through knowledge or experience the other person needs is:", o:["Referent power","Coercive power","Expert power","Reward power"], a:2},
+{t:"Influence based on charisma, identification and trust is:", o:["Expert power","Referent power","Legitimate power","Coercive power"], a:1},
+{t:"A guideline for coercive power is to:", o:["Punish in public","Warn before punishing and punish in private","Punish without warning","Avoid informing subordinates of rules"], a:1},
+{t:"Authority is the right to take final decisions, and it moves in:", o:["An upward direction","A downward direction","All directions","A horizontal direction"], a:1},
+{t:"Which is NOT a type of authority mentioned?", o:["Ultimate","Legal","Technical","Referent"], a:3},
+{t:"The ministry of health that sets national health policies and standards is an example of:", o:["Operational authority","Technical authority","Ultimate authority","Staff authority"], a:2},
+{t:"A hospital director delegating to the director of nursing service to act on behalf of the department is:", o:["Legal authority","Technical authority","Ultimate authority","Referent power"], a:0},
+{t:"Authority held by a recognized expert, not necessarily derived from position, is:", o:["Legal authority","Operational authority","Technical authority","Ultimate authority"], a:2},
+{t:"The management principle that no person should report to more than one boss is:", o:["Span of control","Chain of command","Line authority","Staff authority"], a:1},
+{t:"The number of subordinates who report directly to a manager is the:", o:["Chain of command","Hierarchy of authority","Staff authority","Span of control"], a:3},
+{t:"Positions created to support, assist and advise holders of line authority have:", o:["Line authority","Staff authority","Ultimate authority","Coercive power"], a:1},
+{t:"Which statement about power versus authority is correct?", o:["Power is formal only","Authority flows in all directions","Power flows in all directions, while authority is a down-flowing concept","Authority is a personal quality"], a:2},
+{t:"Power is a broader concept than authority.", o:["True","False"], a:0},
+{t:"Authority is a personal quality, while power is mostly vested in the position.", o:["True","False"], a:1},
+{t:"A manager may have considerable authority but still be powerless.", o:["True","False"], a:0},
+
+/* ===== 7) The Staff Nurse ===== */
+{t:"A staff nurse is a qualified, registered nurse who provides:", o:["Only administrative work","Direct patient care under supervision of senior nurses or physicians","Only teaching","Only pharmacy services"], a:1},
+{t:"Which is a professional qualification of the staff nurse?", o:["Master's degree is a must","Licensure is a must","Ten years of experience is required","No membership in any syndicate"], a:1},
+{t:"The staff nurse reports to:", o:["The nursing director directly","The hospital administrator","The team leader or head nurse","The nurse aid"], a:2},
+{t:"In the nursing service organization chart, the staff nurse is:", o:["At the top","Almost on the bottom","In the middle","Outside the chart"], a:1},
+{t:"Nurses who provide vaccinations and health education in the community are:", o:["Clinic staff nurses","Community health nurses","ICU nurses","Surgical nurses"], a:1},
+{t:"A nurse who cares for children's health is a:", o:["Pediatric nurse","Surgical nurse","Medical nurse","Emergency nurse"], a:0},
+{t:"A nurse who cares for patients before and after operations is a:", o:["Medical nurse","Maternity nurse","Surgical nurse","Pediatric nurse"], a:2},
+{t:"A staff nurse holding a bachelor's degree in nursing is classified as:", o:["Practical nurse","Registered nurse","Specialized nurse","Junior nurse"], a:1},
+{t:"Giving full attention to what others say without interrupting inappropriately is:", o:["Speaking","Instructing","Active listening","Monitoring"], a:2},
+{t:"Teaching others how to do something is:", o:["Instructing","Coordination","Writing","Service orientation"], a:0},
+{t:"Assessing the performance of yourself or others to take corrective action is:", o:["Time management","Monitoring","Coordination","Critical thinking"], a:1},
+{t:"Preparing and administering oral, IV and IM medications belongs to which responsibility?", o:["Discharge planning","Advocacy","Direct patient care","Resource management"], a:2},
+{t:"Providing home care, medication and follow-up instructions belongs to:", o:["Discharge planning","Infection control","Professional development","Communication"], a:0},
+{t:"Hand hygiene and use of PPE belong to:", o:["Discharge planning","Infection control and safety","Advocacy","Education"], a:1},
+{t:"Giving accurate handover during shift changes belongs to:", o:["Direct patient care","Infection control","Communication and collaboration","Discharge planning"], a:2},
+{t:"Speaking up on behalf of patients who cannot express themselves is:", o:["Advocacy for patients","Discharge planning","Equipment management","Professional development"], a:0},
+{t:"Reporting malfunctioning or missing equipment belongs to:", o:["Direct patient care","Resource and equipment management","Advocacy","Education"], a:1},
+{t:"The staff nurse should identify early signs of deterioration and report them immediately.", o:["True","False"], a:0},
+{t:"Past experience is always strictly required for staff nurses, even in general units.", o:["True","False"], a:1},
+{t:"The staff nurse may supervise assistant nurses, nurse aids or student nurses if present in the unit.", o:["True","False"], a:0}
+
+];
+
+const TOTAL_TIME = 70*60;
+let Q, cur, sel, saved, review, visited, left, iv, size = 13;
+
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+const $ = id => document.getElementById(id);
+
+function init(pool){
+  Q = shuffle([...pool]); const n = Q.length;
+  cur = 0; sel = Array(n).fill(null); saved = Array(n).fill(false);
+  review = Array(n).fill(false); visited = Array(n).fill(false);
+  left = TOTAL_TIME;
+  $('exam').classList.remove('hide'); $('result').classList.add('hide');
+  $('tot').textContent = $('tot2').textContent = n;
+  clearInterval(iv);
+  iv = setInterval(()=>{
+    left--; const m=Math.floor(left/60), s=left%60, t=$('tm');
+    t.textContent = m+':'+(s<10?'0':'')+s;
+    t.className = 't'+(left<=120?' danger':left<=300?' warn':'');
+    if(left<=0){clearInterval(iv);finish()}
+  },1000);
+  if(n) render();
+  window.scrollTo(0,0);
+}
+
+function render(){
+  visited[cur] = true;
+  const q = Q[cur];
+  $('qno').textContent = 'Question No. ' + (cur+1);
+  $('qbody').style.fontSize = size+'px';
+  $('qbody').innerHTML = `<div class="qtext" style="font-size:${size}px">${q.t}</div>` +
+    q.o.map((o,i)=>`<label class="opt" style="font-size:${size}px"><input type="radio" name="o" value="${i}" ${sel[cur]===i?'checked':''} onchange="sel[cur]=${i}"> <span>${o}</span></label>`).join('');
+  refresh();
+}
+
+function status(i){
+  if(review[i]) return 's-rev';
+  if(saved[i]) return 's-ans';
+  if(visited[i]) return 's-no';
+  return 's-nv';
+}
+function refresh(){
+  const n = Q.length; let a=0,no=0,r=0,nv=0;
+  $('nav').innerHTML = Q.map((_,i)=>{
+    const s = status(i);
+    if(saved[i]) a++;
+    if(s==='s-rev') r++; else if(s==='s-no') no++; else if(s==='s-nv') nv++;
+    return `<span class="sq ${s} ${i===cur?'cur':''}" onclick="go(${i})">${i+1}</span>`;
+  }).join('');
+  $('ans').textContent = a; $('cAns').textContent = a; $('cNo').textContent = no;
+  $('cRev').textContent = r; $('cNv').textContent = nv;
+}
+
+function go(i){cur=i;render()}
+function nextQ(){ if(cur<Q.length-1){cur++;render();return} const k=Q.findIndex((_,x)=>!saved[x]); if(k>=0){cur=k;render()} else {refresh();alert('كل الأسئلة اتحلت، دوس End Test لإنهاء الامتحان')} }
+function saveNext(){ saved[cur]=sel[cur]!==null; nextQ(); }
+function skip(){ nextQ(); }
+function mark(){ review[cur]=!review[cur]; if(sel[cur]!==null) saved[cur]=true; refresh(); }
+function prev(){ if(cur>0){cur--;render()} }
+function fs(d){ size = d===0 ? 13 : Math.max(11,Math.min(24,size+d*2)); render(); }
+
+function endTest(){
+  const un = Q.filter((_,i)=>sel[i]===null).length;
+  const msg = un ? `لسه فاضل ${un} سؤال من غير إجابة. تنهي الامتحان؟` : 'تنهي الامتحان؟';
+  if(confirm(msg)) finish();
+}
+
+function finish(){
+  clearInterval(iv);
+  const n = Q.length; let ok=[], bad=[];
+  Q.forEach((q,i)=>{ (sel[i]===q.a ? ok : bad).push(i) });
+  const pct = n ? Math.round(ok.length/n*100) : 0;
+  const card = (i,good)=>{
+    const q=Q[i];
+    return `<div class="it ${good?'':'bad'}"><div class="q">${i+1}. ${q.t}</div>
+    ${good ? `<div class="r"><span class="tag g">Correct</span>${q.o[q.a]}</div>` :
+    `<div class="r"><span class="tag y">Your answer</span>${sel[i]===null?'— لم تتم الإجابة —':q.o[sel[i]]}</div>
+     <div class="r"><span class="tag g">Correct</span>${q.o[q.a]}</div>`}
+    ${q.exp?`<div class="exp">💬 ${q.exp}</div>`:''}</div>`;
+  };
+  const unans = Q.filter((_,i)=>sel[i]===null).length;
+  $('exam').classList.add('hide');
+  const r = $('result'); r.classList.remove('hide');
+  r.innerHTML = `<div class="res">
+   <div class="score"><div class="n">${pct}%</div><div>${ok.length} / ${n}</div></div>
+   <div class="stats">
+    <div><b style="color:var(--ok)">${ok.length}</b>صح</div>
+    <div><b style="color:var(--no)">${bad.length - unans}</b>غلط</div>
+    <div><b style="color:#777">${unans}</b>من غير إجابة</div>
+    <div><b>${n}</b>الإجمالي</div>
+   </div>
+   <div class="acts">
+    ${bad.length?'<button class="b" onclick="retryWrong()">إعادة الأسئلة الغلط ('+bad.length+')</button>':''}
+    <button class="b" onclick="init(QUESTIONS)">امتحان جديد عشوائي</button>
+   </div>
+   <div class="sec">✔ الأسئلة اللي اتحلت صح (${ok.length})</div>
+   ${ok.map(i=>card(i,true)).join('') || '<div style="padding:8px;color:#777">لا يوجد</div>'}
+   <div class="sec bad">✖ الأسئلة الغلط (${bad.length})</div>
+   ${bad.map(i=>card(i,false)).join('') || '<div style="padding:8px;color:#777">ممتاز، مفيش أخطاء 🎉</div>'}
+  </div>`;
+  window.scrollTo(0,0);
+}
+
+function retryWrong(){
+  const pool = Q.filter((q,i)=>sel[i]!==q.a);
+  init(pool);
+}
+
+init(QUESTIONS);
+</script>
+</body>
+</html>
