@@ -1,0 +1,463 @@
+
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM — Glossary & Reading Comprehension</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&family=Inter:wght@400;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--accent:#0d9488;--accent-rgb:13,148,136;--c2:#f97316;--c4:#0891b2;
+--grad:linear-gradient(135deg,#0f172a 0%,#0e7490 60%,#0d9488 100%);
+--bg:#f4f7f8;--bg2:#e5ecee;--card:#fff;--text:#0f1b21;--text2:#44575f;--text3:#7b8d95;--bc:rgba(15,40,50,.12);--r:8px;--tr:all .25s ease}
+[data-theme="dark"]{--bg:#0a1114;--bg2:#121c20;--card:#16232a;--text:#e8f1f3;--text2:#b2c4ca;--text3:#7f949c;--bc:rgba(255,255,255,.10);--accent:#2dd4bf;--accent-rgb:45,212,191;--c2:#fb923c;--c4:#22d3ee}
+html{scroll-behavior:smooth;scroll-padding-top:130px}
+body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;transition:background-color .4s,color .4s}
+#prog{position:fixed;top:0;left:0;height:4px;z-index:999;width:0;background:linear-gradient(90deg,var(--accent),var(--c2))}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;display:flex;align-items:center;justify-content:space-between;padding:0 24px;background:rgba(244,247,248,.95);backdrop-filter:blur(14px);border-bottom:2px solid var(--accent)}
+[data-theme="dark"] nav{background:rgba(10,17,20,.95)}
+.brand{display:flex;align-items:center;gap:9px;font-size:15px;font-weight:800;letter-spacing:.6px}
+.logo{width:34px;height:34px;border-radius:var(--r);background:var(--c2);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:800}
+.theme-btn{width:38px;height:38px;border-radius:var(--r);border:1px solid var(--bc);background:var(--card);cursor:pointer;font-size:15px;transition:var(--tr)}
+.theme-btn:hover{border-color:var(--c2)}
+.hero{margin-top:64px;background:var(--grad);padding:44px 24px 52px;position:relative;overflow:hidden}
+.hero::after{content:'';position:absolute;right:-60px;top:-60px;width:220px;height:220px;border-radius:50%;background:rgba(249,115,22,.35)}
+.hero-in{max-width:820px;margin:0 auto;position:relative;z-index:1}
+.hero-ic{width:60px;height:60px;border-radius:var(--r);background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.3);display:flex;align-items:center;justify-content:center;font-size:30px;margin-bottom:14px}
+.hero h1{font-size:clamp(22px,4vw,32px);font-weight:800;color:#fff;margin-bottom:6px}
+.hero p{font-size:14px;color:rgba(255,255,255,.85)}
+.pills{display:flex;gap:10px;margin-top:18px;flex-wrap:wrap}
+.pill{background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.3);border-radius:var(--r);padding:6px 14px;font-size:12px;font-weight:700;color:#fff;display:flex;align-items:center;gap:6px}
+.chips{position:sticky;top:64px;z-index:90;background:var(--bg);border-bottom:1px solid var(--bc);padding:10px 16px;overflow-x:auto;white-space:nowrap;display:flex;gap:8px;justify-content:center}
+.chip{display:inline-flex;align-items:center;gap:8px;text-decoration:none;color:var(--text2);font-size:12px;font-weight:700;padding:6px 12px;border-radius:var(--r);border:1px solid var(--bc);background:var(--card);transition:var(--tr)}
+.chip b{background:var(--accent);color:#fff;border-radius:4px;min-width:20px;height:20px;display:inline-flex;align-items:center;justify-content:center;font-size:11px}
+.chip:hover,.chip.on{border-color:var(--c2);color:var(--c2)}
+.shell{max-width:820px;margin:0 auto;padding:28px 18px 80px}
+.chapter{margin-bottom:56px}
+.ch-head{display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--bc);border-top:4px solid var(--accent);border-radius:var(--r);padding:20px;box-shadow:0 8px 24px rgba(10,40,50,.07);margin-bottom:22px}
+.ch-icon{width:54px;height:54px;border-radius:var(--r);background:rgba(var(--accent-rgb),.12);display:flex;align-items:center;justify-content:center;font-size:28px;flex-shrink:0}
+.ch-kicker{font-size:11px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;color:var(--accent);margin-bottom:2px}
+.ch-head h2{font-size:clamp(17px,3vw,22px);font-weight:800;line-height:1.3}
+.sec{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:800;margin:26px 0 12px}
+.sec-ic{width:30px;height:30px;border-radius:6px;background:var(--c2);color:#fff;display:flex;align-items:center;justify-content:center;font-size:13px}
+.passage-title{display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:var(--text2);background:var(--bg2);border-left:4px solid var(--c4);border-radius:var(--r);padding:10px 14px;margin-bottom:14px}
+.items{display:flex;flex-direction:column;gap:16px}
+.item{position:relative;background:var(--card);border:1px solid var(--bc);border-radius:var(--r);padding:18px 18px 16px 18px;box-shadow:0 4px 14px rgba(10,40,50,.05);transition:var(--tr)}
+.item:hover{border-color:rgba(var(--accent-rgb),.5)}
+.num{position:absolute;top:-11px;left:14px;background:var(--accent);color:#fff;font-size:11px;font-weight:800;border-radius:4px;padding:2px 9px}
+.en-box{direction:ltr;text-align:left;border-left:4px solid var(--accent);padding:4px 0 4px 14px;margin:6px 0 14px}
+.term{display:inline-block;background:rgba(var(--accent-rgb),.12);color:var(--accent);font-weight:800;font-size:15px;border-radius:4px;padding:3px 11px;margin-bottom:8px}
+.en-txt{font-size:15px;font-weight:600;line-height:1.65}
+.en-txt.big{font-size:16.5px;font-weight:700}
+.ar{direction:rtl;text-align:right;background:rgba(var(--accent-rgb),.06);border-radius:var(--r);padding:12px 14px;margin-bottom:10px;border-right:4px solid var(--c4)}
+.ar-lbl,.ex-lbl{font-family:'Cairo','Inter',sans-serif;font-size:12px;font-weight:800;margin-bottom:4px;display:flex;align-items:center;gap:6px}
+.ar-lbl{color:var(--c4)}
+.ar-txt,.ex-txt{font-family:'Cairo','Inter',sans-serif;font-size:16px;line-height:1.95;color:var(--text)}
+.ex{direction:rtl;text-align:right;background:rgba(249,115,22,.08);border-radius:var(--r);padding:12px 14px;border-right:4px solid var(--c2)}
+.ex-lbl{color:var(--c2)}
+.ex-txt{color:var(--text2)}
+.lt{font-family:'Inter',sans-serif;font-weight:700;font-size:.9em;color:var(--accent);unicode-bidi:isolate}
+.ex .lt{color:var(--c2)}
+footer{background:var(--bg2);border-top:1px solid var(--bc);padding:22px 24px;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:10px}
+.fb{font-size:14px;font-weight:700}.fb span{color:var(--c2)}
+.tg{display:flex;align-items:center;gap:5px;text-decoration:none;color:#229ED9;font-size:12px;font-weight:600}
+@media(max-width:560px){nav{padding:0 14px}.brand span{display:none}.chips{justify-content:flex-start}.item{padding:16px 14px 14px}.ar-txt,.ex-txt{font-size:15.5px}}
+@media print{nav,.chips,.theme-btn,#prog{display:none}.hero{margin-top:0}.item{break-inside:avoid;box-shadow:none}}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<nav><div class="brand"><div class="logo">GT</div><span>GHAITH TEAM</span></div><button class="theme-btn" id="themeBtn" aria-label="Toggle theme">🌙</button></nav>
+<div class="hero"><div class="hero-in">
+<div class="hero-ic">📘</div>
+<h1>Glossary &amp; Reading Comprehension</h1>
+<p>الشرح ببساطة مع غيث</p>
+<div class="pills">
+<div class="pill"><i class="fa-solid fa-layer-group"></i> 6 Chapters</div>
+<div class="pill"><i class="fa-solid fa-list-ol"></i>إدعيلي</div>
+</div></div></div>
+<div class="chips"><a href="#ch1" class="chip"><b>1</b><span>Welcome to Professional Nursing</span></a><a href="#ch2" class="chip"><b>2</b><span>Why We Need Sleep</span></a><a href="#ch3" class="chip"><b>3</b><span>How the Brain Heals</span></a><a href="#ch4" class="chip"><b>4</b><span>When the Doctor is Away: The Nurse Steps In</span></a><a href="#ch5" class="chip"><b>5</b><span>The Thyroid Gland: Body Energy</span></a><a href="#ch6" class="chip"><b>6</b><span>Taking Medicine Safely</span></a></div>
+<div class="shell">
+<section class="chapter" id="ch1">
+<header class="ch-head"><div class="ch-icon">🩺</div><div><div class="ch-kicker">Chapter I</div><h2>Chapter 1: Welcome to Professional Nursing</h2></div></header>
+<h3 class="sec"><span class="sec-ic"><i class="fa-solid fa-book"></i></span>Glossary 1:</h3>
+<div class="items"><article class="item gl" data-n="g1-1">
+<div class="num">1</div>
+<div class="en-box"><span class="term">Shift</span><p class="en-txt">A period of working time in a hospital or medical facility.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">كلمة <span class="lt" dir="ltr">Shift</span> معناها «وردية عمل (فترة العمل بالمستشفى)»، يعني الفترة اللي بتشتغلها في المستشفى أو المكان الطبي، زي وردية الصبح أو وردية الليل.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">لما تقول «أنا شغال شيفت الليل في العناية»، يعني بتشتغل فترة الليل بس، وبعدها حد تاني بيستلم منك.</div></div></article><article class="item gl" data-n="g1-2">
+<div class="num">2</div>
+<div class="en-box"><span class="term">Vital signs</span><p class="en-txt">Clinical measurements (blood pressure, pulse, temperature) indicating basic body functions.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Vital signs</span> هي «العلامات الحيوية (الضغط، النبض، الحرارة)»، يعني قياسات طبية بتبيّن الجسم شغال إزاي في وظائفه الأساسية.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">قبل ما تدّي أي علاج بتقيس ضغط المريض ونبضه وحرارته؛ كل ده اسمه <span class="lt" dir="ltr">vital signs</span>.</div></div></article><article class="item gl" data-n="g1-3">
+<div class="num">3</div>
+<div class="en-box"><span class="term">Administer</span><p class="en-txt">To give or manage the application of a drug or medication to a patient.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Administer</span> معناها «يُعطي / يُشرف على إعطاء (الدواء)»، يعني تدّي المريض الدوا بنفسك أو تتابع إنه اتدّى صح.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">الدكتور كتب حقنة والممرضة راحت إدتهاله، يبقى هي <span class="lt" dir="ltr">administered the injection</span>.</div></div></article><article class="item gl" data-n="g1-4">
+<div class="num">4</div>
+<div class="en-box"><span class="term">Medication</span><p class="en-txt">A substance used for medical treatment, especially a medicine or drug.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Medication</span> معناها «الدواء / العلاج»، أي مادة بتتاخد عشان تعالج المريض.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">الأقراص والشراب والحقن اللي مكتوبة في كارت علاج المريض كلها <span class="lt" dir="ltr">medications</span>.</div></div></article><article class="item gl" data-n="g1-5">
+<div class="num">5</div>
+<div class="en-box"><span class="term">Patient</span><p class="en-txt">A person receiving or registered to receive medical treatment.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Patient</span> معناها «مريض»، الشخص اللي بياخد علاج أو متسجّل عشان ياخد علاج.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">أي حد راقد في العنبر أو جاي العيادة عشان يتعالج يبقى <span class="lt" dir="ltr">patient</span>.</div></div></article><article class="item gl" data-n="g1-6">
+<div class="num">6</div>
+<div class="en-box"><span class="term">Check up</span><p class="en-txt">A medical examination to test one's general state of health.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Check up</span> معناها «فحص طبي»، كشف عام عشان تطمّن على حالة صحتك بشكل عام.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">واحد بيروح للدكتور كل سنة يطمّن إن كل حاجة تمام حتى لو مش تعبان، ده بيعمل <span class="lt" dir="ltr">check up</span>.</div></div></article><article class="item gl" data-n="g1-7">
+<div class="num">7</div>
+<div class="en-box"><span class="term">Accurately</span><p class="en-txt">In a way that is correct in all details; exactly.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Accurately</span> معناها «بدقة»، يعني الحاجة صح في كل تفاصيلها من غير ولا غلطة.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">لو الجهاز قرا الضغط 120/80 وإنت كتبته 120/80 بالظبط، تبقى سجّلته <span class="lt" dir="ltr">accurately</span>.</div></div></article><article class="item gl" data-n="g1-8">
+<div class="num">8</div>
+<div class="en-box"><span class="term">Compassion</span><p class="en-txt">Sympathetic pity and concern for the sufferings or misfortunes of others.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Compassion</span> معناها «الرحمة / التعاطف في الرعاية»، إنك تحس بوجع الناس وتهتم بيهم.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">ممرضة قعدت جنب مريض خايف وطمّنته بكلمتين حلوين؛ دي <span class="lt" dir="ltr">compassion</span>.</div></div></article><article class="item gl" data-n="g1-9">
+<div class="num">9</div>
+<div class="en-box"><span class="term">Recover</span><p class="en-txt">To return to a normal state of health, mind, or strength.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Recover</span> معناها «يتعافى / يتماثل للشفاء»، يعني يرجع لصحته وعقله وقوته الطبيعية.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">واحد كان تعبان بعد عملية ورجع يمشي ويأكل عادي، ده <span class="lt" dir="ltr">recovered</span>.</div></div></article><article class="item gl" data-n="g1-10">
+<div class="num">10</div>
+<div class="en-box"><span class="term">Routine</span><p class="en-txt">A sequence of actions regularly followed, or daily tasks.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Routine</span> معناها «الروتين أو المهام اليومية المتكررة»، يعني الخطوات اللي بتعملها كل يوم بنفس الترتيب.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">تقيس العلامات الحيوية وبعدين تدّي الأدوية كل صبح بنفس الترتيب؛ ده الـ <span class="lt" dir="ltr">routine</span> بتاعك.</div></div></article></div>
+<h3 class="sec"><span class="sec-ic"><i class="fa-solid fa-book-open"></i></span>I. Comprehension:</h3>
+<div class="passage-title"><i class="fa-solid fa-file-lines"></i> Reading Passage 1: Hospital Routine</div>
+<div class="items"><article class="item rd">
+<div class="num">1</div>
+<div class="en-box"><p class="en-txt big">Sarah is a professional nurse.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">سارة ممرضة محترفة (<span class="lt" dir="ltr">professional nurse</span>)، يعني متخصصة وشغلتها التمريض.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">زي ما تقول «أحمد دكتور شاطر»، هنا بنقول سارة ممرضة محترفة في شغلها.</div></div></article><article class="item rd">
+<div class="num">2</div>
+<div class="en-box"><p class="en-txt big">She works at a big hospital.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">هي بتشتغل في مستشفى كبيرة.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">زي واحدة بتشتغل في مستشفى جامعي كبير فيه أقسام كتير.</div></div></article><article class="item rd">
+<div class="num">3</div>
+<div class="en-box"><p class="en-txt big">Every day, her morning shift starts at 7:00 AM.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">كل يوم، وردية الصبح بتاعتها بتبدأ الساعة 7:00 الصبح.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">يعني الساعة 7 بتكون واقفة في القسم جاهزة تستلم الشغل.</div></div></article><article class="item rd">
+<div class="num">4</div>
+<div class="en-box"><p class="en-txt big">First, Sarah checks the patients' medical charts.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">أول حاجة، سارة بتراجع الملفات (الكروت) الطبية بتاعة المرضى (<span class="lt" dir="ltr">medical charts</span>).</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">زي ما تفتح ملف المريض تشوف تشخيصه وعلاجه قبل ما تقرب منه.</div></div></article><article class="item rd">
+<div class="num">5</div>
+<div class="en-box"><p class="en-txt big">She measures their vital signs, such as blood pressure, and records them accurately in the system.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">بتقيس العلامات الحيوية بتاعتهم (<span class="lt" dir="ltr">vital signs</span>) زي ضغط الدم، وبتسجّلها بدقة على السيستم.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">تقيس الضغط 120/80 وتكتبه في السيستم زي ما هو من غير تقريب.</div></div></article><article class="item rd">
+<div class="num">6</div>
+<div class="en-box"><p class="en-txt big">After that, she administers the prescribed medications.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">بعد كده بتدّي الأدوية اللي الدكتور كتبها للمرضى (<span class="lt" dir="ltr">prescribed medications</span>).</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">الدكتور كتب مضاد حيوي، فهي بتدّيه للمريض في معاده.</div></div></article><article class="item rd">
+<div class="num">7</div>
+<div class="en-box"><p class="en-txt big">Sarah loves her job because she helps people recover.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">سارة بتحب شغلها عشان بتساعد الناس يتعافوا ويخفّوا.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">لما تشوف مريض كان تعبان وبقى يمشي على رجله، بتحس إن تعبها ما راحش على الفاضي.</div></div></article><article class="item rd">
+<div class="num">8</div>
+<div class="en-box"><p class="en-txt big">She and her colleagues work hard as a professional team.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">هي وزمايلها (<span class="lt" dir="ltr">colleagues</span>) بيشتغلوا بجد كفريق محترف.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">واحدة تقيس الضغط وواحدة تجهّز الدوا، وكل واحدة عارفة دورها.</div></div></article><article class="item rd">
+<div class="num">9</div>
+<div class="en-box"><p class="en-txt big">They do not waste any time during the shift.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">مبيضيّعوش أي وقت أثناء الوردية.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">مفيش قعدة فاضية؛ أول ما تخلّص مع مريض تروح للّي بعده على طول.</div></div></article><article class="item rd">
+<div class="num">10</div>
+<div class="en-box"><p class="en-txt big">At 3:00 PM, her work ends, and she goes home.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">الساعة 3:00 العصر شغلها بيخلص وبترجع البيت.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">وردية من 7 الصبح لـ 3 العصر يعني 8 ساعات شغل وبعدها تمشي.</div></div></article></div></section><section class="chapter" id="ch2">
+<header class="ch-head"><div class="ch-icon">😴</div><div><div class="ch-kicker">Chapter II</div><h2>Chapter 2: Why We Need Sleep</h2></div></header>
+<h3 class="sec"><span class="sec-ic"><i class="fa-solid fa-book"></i></span>Glossary 1:</h3>
+<div class="items"><article class="item gl" data-n="g2-1">
+<div class="num">1</div>
+<div class="en-box"><span class="term">Immune System</span><p class="en-txt">The body's defense network against infections and diseases.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Immune System</span> هو «الجهاز المناعي»، شبكة دفاع الجسم ضد العدوى والأمراض.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">لما تعدّي جنب واحد عيّان ومتاخدش منه العدوى، ده جهازك المناعي بيدافع عنك.</div></div></article><article class="item gl" data-n="g2-2">
+<div class="num">2</div>
+<div class="en-box"><span class="term">Tissue Repair</span><p class="en-txt">The biological process of regenerating damaged cells and tissues.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Tissue Repair</span> هو «إصلاح الأنسجة»، العملية البيولوجية اللي الجسم بيجدّد بيها الخلايا والأنسجة التالفة.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">الجرح بيقفل وبيتكوّن مكانه جلد جديد؛ ده <span class="lt" dir="ltr">tissue repair</span>.</div></div></article><article class="item gl" data-n="g2-3">
+<div class="num">3</div>
+<div class="en-box"><span class="term">Memory Consolidation</span><p class="en-txt">The process by which the brain stabilizes and stores memories.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Memory Consolidation</span> معناها «تثبيت وترسيخ الذاكرة»، العملية اللي المخ بيثبّت بيها الذكريات والمعلومات ويخزّنها.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">بتذاكر بالليل وتنام، وتصحى تلاقي المعلومة ثابتة في دماغك؛ ده <span class="lt" dir="ltr">memory consolidation</span>.</div></div></article><article class="item gl" data-n="g2-4">
+<div class="num">4</div>
+<div class="en-box"><span class="term">Anxiety</span><p class="en-txt">A feeling of worry, nervousness, or unease about an imminent event.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Anxiety</span> معناها «القلق والتوتر»، إحساس بالقلق أو العصبية أو عدم الراحة من حاجة قريبة هتحصل.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">مريض هيدخل عملية بكرة ومش عارف ينام من التفكير؛ ده <span class="lt" dir="ltr">anxiety</span>.</div></div></article><article class="item gl" data-n="g2-5">
+<div class="num">5</div>
+<div class="en-box"><span class="term">Hospital Ward</span><p class="en-txt">A large room in a hospital where multiple beds are placed for patients.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Hospital Ward</span> معناها «عنابر المستشفى / القسم الداخلي»، أوضة كبيرة في المستشفى فيها سراير كتير للمرضى.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">عنبر الباطنة اللي فيه 20 سرير للمرضى ده <span class="lt" dir="ltr">hospital ward</span>.</div></div></article><article class="item gl" data-n="g2-6">
+<div class="num">6</div>
+<div class="en-box"><span class="term">Restorative Sleep</span><p class="en-txt">Deep, high-quality sleep that refreshes the body and mind.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Restorative Sleep</span> معناها «نوم مجدد للنشاط / نوم عميق ومفيد»، نوم عميق وجودته عالية بيرجّع نشاط الجسم والعقل.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">تنام 8 ساعات متواصلة من غير ما حد يصحّيك وتصحى مرتاح؛ ده <span class="lt" dir="ltr">restorative sleep</span>.</div></div></article></div>
+<h3 class="sec"><span class="sec-ic"><i class="fa-solid fa-book-open"></i></span>I. Reading Comprehension:</h3>
+<div class="passage-title"><i class="fa-solid fa-file-lines"></i> Reading Passage 1: The Vital Role of Sleep in Patient Recovery</div>
+<div class="items"><article class="item rd">
+<div class="num">1</div>
+<div class="en-box"><p class="en-txt big">Sleep is fundamental for every patient and acts as a powerful healing nurse.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">النوم أساسي (<span class="lt" dir="ltr">fundamental</span>) لأي مريض، وبيشتغل زي «ممرضة» قوية بتساعد على الشفا.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">زي ما الممرضة بتدّي علاج، النوم كمان بيدّي الجسم فرصة يتعالج.</div></div></article><article class="item rd">
+<div class="num">2</div>
+<div class="en-box"><p class="en-txt big">Rest is not merely a passive state; it is an active biological process crucial for recovery.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">الراحة مش مجرد حالة سلبية (<span class="lt" dir="ltr">passive</span>)، دي عملية بيولوجية نشطة (<span class="lt" dir="ltr">active</span>) ومهمة جدًا للتعافي.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">وإنت نايم شكلك ساكن، لكن جسمك من جوّه شغّال بيصلّح ويبني.</div></div></article><article class="item rd">
+<div class="num">3</div>
+<div class="en-box"><p class="en-txt big">Sleep helps the brain work efficiently.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">النوم بيساعد المخ يشتغل بكفاءة.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">بعد ما تنام كويس بتركّز وتفتكر أسرع من لما تسهر.</div></div></article><article class="item rd">
+<div class="num">4</div>
+<div class="en-box"><p class="en-txt big">While patients sleep, their brains process and fix memories, reducing cognitive fatigue and confusion.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">وهما نايمين، مخ المرضى بيعالج الذكريات ويثبّتها، وده بيقلّل الإرهاق الذهني (<span class="lt" dir="ltr">cognitive fatigue</span>) والتشويش.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">مريض كبير في السن نام كويس، فصحي مش تايه ولا بيسأل «أنا فين؟».</div></div></article><article class="item rd">
+<div class="num">5</div>
+<div class="en-box"><p class="en-txt big">The body actively repairs muscles, builds tissues, and restores physical energy during deep sleep cycles.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">الجسم بيصلّح العضلات ويبني الأنسجة ويرجّع الطاقة الجسدية أثناء دورات النوم العميق.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">بعد عملية، المريض لما ينام نوم عميق جسمه بيلمّ العضلات والجرح أسرع.</div></div></article><article class="item rd">
+<div class="num">6</div>
+<div class="en-box"><p class="en-txt big">Quality sleep strengthens the immune system.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">النوم الجيد (<span class="lt" dir="ltr">quality sleep</span>) بيقوّي الجهاز المناعي.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">اللي بينام كويس نادرًا ما بياخد برد، واللي بيسهر دايمًا بيتعب بسرعة.</div></div></article><article class="item rd">
+<div class="num">7</div>
+<div class="en-box"><p class="en-txt big">A robust immune system is vital for fighting infections and preventing complications within the hospital ward.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">الجهاز المناعي القوي (<span class="lt" dir="ltr">robust</span>) مهم جدًا لمحاربة العدوى ومنع المضاعفات جوّه العنبر.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">في عنبر مليان مرضى، المريض اللي مناعته قوية احتمال ياخد عدوى بيكون أقل.</div></div></article><article class="item rd">
+<div class="num">8</div>
+<div class="en-box"><p class="en-txt big">As a healthcare professional, you must prioritize and care for your patient's sleep hygiene.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">كمقدّم رعاية صحية، لازم تدّي أولوية وتهتم بـ«عادات نوم» المريض (<span class="lt" dir="ltr">sleep hygiene</span>).</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">تطفّي النور الزيادة وتهدّي الدوشة وقت نوم المريض.</div></div></article><article class="item rd">
+<div class="num">9</div>
+<div class="en-box"><p class="en-txt big">A dedicated nurse looks after tired patients, minimizes nocturnal disturbances, and keeps them safe and comfortable.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">الممرضة المخلصة (<span class="lt" dir="ltr">dedicated</span>) بتراعي المرضى التعبانين، وبتقلّل الإزعاج بالليل (<span class="lt" dir="ltr">nocturnal disturbances</span>)، وبتحافظ على أمانهم وراحتهم.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">تأجّل أي إجراء مش مستعجل لحد الصبح بدل ما تصحّي المريض الساعة 3 بالليل.</div></div></article><article class="item rd">
+<div class="num">10</div>
+<div class="en-box"><p class="en-txt big">Many patients feel anxious or worried about their diagnosis, prognosis, or treatment plans.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">مرضى كتير بيحسوا بقلق من تشخيصهم (<span class="lt" dir="ltr">diagnosis</span>) أو توقّع مسار المرض (<span class="lt" dir="ltr">prognosis</span>) أو خطة العلاج.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">مريض بيسأل «هخف إمتى؟» و«العملية فيها خطر؟» وماسك قلقه طول الليل.</div></div></article><article class="item rd">
+<div class="num">11</div>
+<div class="en-box"><p class="en-txt big">This hospital-induced anxiety makes it very difficult for patients to fall and stay asleep.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">القلق اللي بيحصل بسبب المستشفى ده بيصعّب جدًا على المريض إنه ينام ويكمّل نومه.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">يتقلّب في السرير ويصحى كل شوية لأن دماغه مشغولة.</div></div></article><article class="item rd">
+<div class="num">12</div>
+<div class="en-box"><p class="en-txt big">Without sufficient restorative sleep, a patient cannot reach full recovery quickly, which may unnecessarily prolong their hospital stay.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">من غير نوم مجدد كفاية (<span class="lt" dir="ltr">restorative sleep</span>)، المريض مش هيتعافى بسرعة، وده ممكن يطوّل قعدته في المستشفى من غير داعي.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">مريض مبينامش كويس ممكن يقعد أيام زيادة قبل ما يخرج.</div></div></article></div></section><section class="chapter" id="ch3">
+<header class="ch-head"><div class="ch-icon">🧠</div><div><div class="ch-kicker">Chapter III</div><h2>Chapter 3: How the Brain Heals</h2></div></header>
+<h3 class="sec"><span class="sec-ic"><i class="fa-solid fa-book"></i></span>Glossary 1:</h3>
+<div class="items"><article class="item gl" data-n="g3-1">
+<div class="num">1</div>
+<div class="en-box"><span class="term">Neuroplasticity</span><p class="en-txt">The brain's ability to change and learn new things.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Neuroplasticity</span> هي «المرونة العصبيّة (قدرة الدماغ على التكيّف والتطور)»، يعني المخ بيعرف يتغيّر ويتعلّم حاجات جديدة.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">واحد إيده اليمين اتشلّت بعد جلطة، فبدأ يتعلم يكتب بالشمال؛ المخ بيبني مسارات جديدة، ودي <span class="lt" dir="ltr">neuroplasticity</span>.</div></div></article><article class="item gl" data-n="g3-2">
+<div class="num">2</div>
+<div class="en-box"><span class="term">Brain Injury</span><p class="en-txt">Harm or damage to the brain caused by illness or trauma.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Brain Injury</span> معناها «إصابة الدماغ»، ضرر بيحصل للمخ بسبب مرض أو حادثة.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">حد وقع من على سلم وخبط دماغه جامد؛ ده <span class="lt" dir="ltr">brain injury</span>.</div></div></article><article class="item gl" data-n="g3-3">
+<div class="num">3</div>
+<div class="en-box"><span class="term">Rehabilitation</span><p class="en-txt">Helping a sick patient get strong and better again.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Rehabilitation</span> معناها «التأهيل / إعادة التأهيل»، مساعدة المريض يرجع قوي وأحسن تاني.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">مريض بعد جلطة بيروح جلسات كل يوم يتمرّن فيها على المشي والكلام؛ ده <span class="lt" dir="ltr">rehabilitation</span>.</div></div></article><article class="item gl" data-n="g3-4">
+<div class="num">4</div>
+<div class="en-box"><span class="term">Cognitive Function</span><p class="en-txt">Brain actions like thinking, learning, and remembering.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Cognitive Function</span> هي «الوظيفة الإدراكية / المعرفية»، شغل المخ زي التفكير والتعلّم والتذكّر.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">لما تحل مسألة أو تفتكر اسم حد، دي <span class="lt" dir="ltr">cognitive function</span> شغّالة.</div></div></article><article class="item gl" data-n="g3-5">
+<div class="num">5</div>
+<div class="en-box"><span class="term">Neurological Ward</span><p class="en-txt">Hospital room or section for patients with brain problems.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Neurological Ward</span> معناها «قسم الأمراض العصبية»، قسم أو أوضة في المستشفى لمرضى مشاكل المخ.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">مريض الجلطة الدماغية بيتنقل لقسم الأعصاب؛ ده الـ <span class="lt" dir="ltr">neurological ward</span>.</div></div></article><article class="item gl" data-n="g3-6">
+<div class="num">6</div>
+<div class="en-box"><span class="term">Physical Therapy</span><p class="en-txt">Easy exercises to help patients move their body.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Physical Therapy</span> معناها «العلاج الطبيعي»، تمارين سهلة تساعد المريض يحرّك جسمه.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">الأخصائي بيحرّك رجل المريض معاه ببطء كل يوم؛ ده <span class="lt" dir="ltr">physical therapy</span>.</div></div></article><article class="item gl" data-n="g3-7">
+<div class="num">7</div>
+<div class="en-box"><span class="term">Stroke</span><p class="en-txt">A sudden medical condition that stops blood flow to part of the brain.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Stroke</span> معناها «سكتة دماغية»، حالة طبية مفاجئة بتوقّف وصول الدم لجزء من المخ.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">واحد فجأة وشّه اتشدّ لجنب وكلامه تقل؛ دي علامات <span class="lt" dir="ltr">stroke</span>.</div></div></article><article class="item gl" data-n="g3-8">
+<div class="num">8</div>
+<div class="en-box"><span class="term">Recovery</span><p class="en-txt">The process of getting healthy again after illness or injury.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Recovery</span> معناها «الشفاء / التعافي»، العملية اللي بترجع بيها صحتك بعد المرض أو الإصابة.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">من أول يوم الجبس لحد ما رجلك ترجع تمشي عادي، ده كله <span class="lt" dir="ltr">recovery</span>.</div></div></article></div>
+<h3 class="sec"><span class="sec-ic"><i class="fa-solid fa-book-open"></i></span>I. Reading Comprehension</h3>
+<div class="passage-title"><i class="fa-solid fa-file-lines"></i> Reading Passage 1: The Human Brain</div>
+<div class="items"><article class="item rd">
+<div class="num">1</div>
+<div class="en-box"><p class="en-txt big">The human brain is an amazing and powerful organ.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">مخ الإنسان عضو مذهل وقوي.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">كل حركة وكلمة وفكرة بتطلع منه.</div></div></article><article class="item rd">
+<div class="num">2</div>
+<div class="en-box"><p class="en-txt big">It can change, adapt, and fix itself even after severe damage.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">بيقدر يتغيّر ويتأقلم (<span class="lt" dir="ltr">adapt</span>) ويصلّح نفسه حتى بعد ضرر شديد.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">زي واحد بيعيد ترتيب أوضته بعد ما حاجة اتكسرت، ويوزّع الحاجات على أماكن تانية.</div></div></article><article class="item rd">
+<div class="num">3</div>
+<div class="en-box"><p class="en-txt big">When a patient suffers from a brain injury or a stroke, the brain works hard to heal its cells.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">لما المريض يتعرّض لإصابة في المخ (<span class="lt" dir="ltr">brain injury</span>) أو سكتة دماغية (<span class="lt" dir="ltr">stroke</span>)، المخ بيشتغل جامد عشان يعالج خلاياه.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">مريض بعد جلطة، بعد كام أسبوع بتلاقيه بدأ يحرّك صوابعه تاني.</div></div></article><article class="item rd">
+<div class="num">4</div>
+<div class="en-box"><p class="en-txt big">This special healing process is called neuroplasticity.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">عملية الشفاء الخاصة دي اسمها <span class="lt" dir="ltr">neuroplasticity</span> (المرونة العصبية).</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">لو حد سألك «اسم قدرة المخ إنه يصلّح نفسه إيه؟» تقوله <span class="lt" dir="ltr">neuroplasticity</span>.</div></div></article><article class="item rd">
+<div class="num">5</div>
+<div class="en-box"><p class="en-txt big">Healthy parts of the brain take over the work of damaged areas and help the body function again.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">الأجزاء السليمة من المخ بتستلم شغل الأجزاء التالفة وتساعد الجسم يشتغل تاني.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">زي موظف غاب فزميله اللي جنبه أخد شغله مؤقتًا.</div></div></article><article class="item rd">
+<div class="num">6</div>
+<div class="en-box"><p class="en-txt big">This natural process helps patients learn simple everyday actions like walking, talking, writing, and eating independently.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">العملية الطبيعية دي بتساعد المرضى يتعلموا تاني حاجات يومية بسيطة زي المشي والكلام والكتابة والأكل لوحدهم (<span class="lt" dir="ltr">independently</span>).</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">مريض بقى يمسك الملعقة ويأكل لوحده من غير ما حد يأكّله.</div></div></article><article class="item rd">
+<div class="num">7</div>
+<div class="en-box"><p class="en-txt big">Nurses play a vital role in supporting brain healing every single day.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">الممرضات ليهم دور حيوي (<span class="lt" dir="ltr">vital role</span>) في دعم شفاء المخ كل يوم.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">متابعة الممرضة اليومية للمريض بتفرق في سرعة تحسّنه.</div></div></article><article class="item rd">
+<div class="num">8</div>
+<div class="en-box"><p class="en-txt big">In the hospital, nurses guide patients through easy daily exercises to keep their muscles active.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">في المستشفى، الممرضات بيوجّهوا المرضى في تمارين يومية سهلة عشان عضلاتهم تفضل نشيطة.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">الممرضة بتقول للمريض «اقفل إيدك وافتحها 10 مرات» كل شوية.</div></div></article><article class="item rd">
+<div class="num">9</div>
+<div class="en-box"><p class="en-txt big">They help patients move their hands, arms, and legs slowly and safely.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">بيساعدوهم يحرّكوا إيديهم ودراعاتهم ورجليهم ببطء وأمان.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">تمسك دراع المريض وتحرّكه بهدوء من غير شدّ عشان ميتعورش.</div></div></article><article class="item rd">
+<div class="num">10</div>
+<div class="en-box"><p class="en-txt big">Nurses also make sure the hospital room is quiet and peaceful so the patient can get enough rest.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">الممرضات كمان بيتأكدوا إن أوضة المستشفى هادية ومريحة عشان المريض ياخد راحة كفاية.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">تقلّل الصوت والزيارات وتقفل الباب.</div></div></article><article class="item rd">
+<div class="num">11</div>
+<div class="en-box"><p class="en-txt big">Rest is essential for neuroplasticity and brain recovery.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">الراحة ضرورية (<span class="lt" dir="ltr">essential</span>) للمرونة العصبية وتعافي المخ.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">من غير نوم وراحة، المخ مش بيبني الوصلات الجديدة كويس.</div></div></article><article class="item rd">
+<div class="num">12</div>
+<div class="en-box"><p class="en-txt big">With kind nursing care, patience, and time, the brain can achieve wonderful recovery and become much stronger.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">مع رعاية تمريضية لطيفة وصبر ووقت، المخ ممكن يتعافى تعافي رائع ويبقى أقوى بكتير.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">مريض كان مش بيتكلم، وبعد شهور من الرعاية والصبر بقى يتكلم جمل كاملة.</div></div></article></div></section><section class="chapter" id="ch4">
+<header class="ch-head"><div class="ch-icon">🚑</div><div><div class="ch-kicker">Chapter IV</div><h2>Chapter 4: When the Doctor is Away: The Nurse Steps In</h2></div></header>
+<h3 class="sec"><span class="sec-ic"><i class="fa-solid fa-book"></i></span>Glossary 1:</h3>
+<div class="items"><article class="item gl" data-n="g4-1">
+<div class="num">1</div>
+<div class="en-box"><span class="term">Emergency</span><p class="en-txt">A serious, unexpected situation that needs immediate action.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Emergency</span> معناها «حالة طارئة»، موقف خطير ومفاجئ لازم تتصرف فيه فورًا.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">مريض فجأة نفسه وقف؛ دي <span class="lt" dir="ltr">emergency</span> ومينفعش تستنى.</div></div></article><article class="item gl" data-n="g4-2">
+<div class="num">2</div>
+<div class="en-box"><span class="term">Assessment</span><p class="en-txt">The evaluation or check of a patient's health condition.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Assessment</span> معناها «تقييم (الحالة الصحية)»، فحص وتقدير حالة المريض.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">الممرضة تسأل المريض وتقيس علاماته وتشوف لونه وتنفّسه قبل أي قرار؛ ده <span class="lt" dir="ltr">assessment</span>.</div></div></article><article class="item gl" data-n="g4-3">
+<div class="num">3</div>
+<div class="en-box"><span class="term">Delegate</span><p class="en-txt">To give tasks or duties to other healthcare staff members.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Delegate</span> معناها «يفوّض / يوزّع المهام»، يعني تدّي شغل أو مهام لباقي الفريق الطبي.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">تقول لزميلتك «قيسي ضغط سرير 3» وإنتِ تتابعي الحالة الحرجة؛ كده إنتِ <span class="lt" dir="ltr">delegated</span> المهمة.</div></div></article><article class="item gl" data-n="g4-4">
+<div class="num">4</div>
+<div class="en-box"><span class="term">Intervention</span><p class="en-txt">An action taken to improve a patient's medical condition.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Intervention</span> معناها «تدخل طبّي / علاجي»، إجراء بتعمله عشان تحسّن حالة المريض.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">تدّي أكسجين لمريض نفسه تقيل؛ ده <span class="lt" dir="ltr">intervention</span>.</div></div></article><article class="item gl" data-n="g4-5">
+<div class="num">5</div>
+<div class="en-box"><span class="term">Observation</span><p class="en-txt">Careful watching of a patient's signs and symptoms.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Observation</span> معناها «ملاحظة دقيقة للمريض»، إنك تتابع علاماته وأعراضه بتركيز.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">تفضل واخدة بالك من لون المريض وتنفّسه كل شوية؛ دي <span class="lt" dir="ltr">observation</span>.</div></div></article><article class="item gl" data-n="g4-6">
+<div class="num">6</div>
+<div class="en-box"><span class="term">Protocol</span><p class="en-txt">Official rules and steps to follow in medical care.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Protocol</span> معناها «بروتوكول / إجراءات معتمدة»، قواعد وخطوات رسمية بتمشي عليها في الرعاية الطبية.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">المستشفى عندها خطوات مكتوبة للتعامل مع توقف القلب، وكل الممرضات بيمشوا عليها؛ ده <span class="lt" dir="ltr">protocol</span>.</div></div></article><article class="item gl" data-n="g4-7">
+<div class="num">7</div>
+<div class="en-box"><span class="term">Condition</span><p class="en-txt">The state of health of a patient at a specific time.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Condition</span> معناها «الحالة الصحية»، حالة المريض الصحية في وقت معيّن.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">لما تقول «حالة المريض مستقرة دلوقتي»، إنت بتوصف الـ <span class="lt" dir="ltr">condition</span> بتاعته.</div></div></article><article class="item gl" data-n="g4-8">
+<div class="num">8</div>
+<div class="en-box"><span class="term">Response</span><p class="en-txt">How a patient's body reacts to a treatment or medicine.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Response</span> معناها «استجابة / رد فعل»، جسم المريض بيتفاعل إزاي مع العلاج أو الدوا.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">بعد ما تدّي المريض خافض حرارة، لو حرارته نزلت يبقى عنده <span class="lt" dir="ltr">response</span> كويس.</div></div></article></div>
+<h3 class="sec"><span class="sec-ic"><i class="fa-solid fa-book-open"></i></span>I. Reading Comprehension</h3>
+<div class="passage-title"><i class="fa-solid fa-file-lines"></i> Reading Passage 1: The Nurse Instead of the Doctor</div>
+<div class="items"><article class="item rd">
+<div class="num">1</div>
+<div class="en-box"><p class="en-txt big">Hospitals are busy places where unexpected emergency events can happen at any moment.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">المستشفيات أماكن زحمة وممكن تحصل فيها حالات طارئة (<span class="lt" dir="ltr">emergency</span>) مش متوقعة في أي لحظة.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">ممكن في نص الليل يوصل حادث والقسم كله يتحرك.</div></div></article><article class="item rd">
+<div class="num">2</div>
+<div class="en-box"><p class="en-txt big">Sometimes, a doctor is busy in surgery or attending another critical case in a different ward when an urgent situation arises.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">أوقات الدكتور بيبقى مشغول في عملية أو مع حالة حرجة تانية في عنبر مختلف، وفجأة تحصل حالة مستعجلة.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">الدكتور جوّه العمليات، والمريض اللي في العنبر حالته ساءت فجأة.</div></div></article><article class="item rd">
+<div class="num">3</div>
+<div class="en-box"><p class="en-txt big">During these important moments, the professional nurse must step in immediately.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">في اللحظات المهمة دي، الممرضة المحترفة لازم تتدخل فورًا (<span class="lt" dir="ltr">step in</span>).</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">متستناش الدكتور؛ ابدأ بالإجراءات الأساسية على طول.</div></div></article><article class="item rd">
+<div class="num">4</div>
+<div class="en-box"><p class="en-txt big">Nurses are well-trained healthcare professionals who can make a quick clinical assessment, check vital signs, and provide safe care before the doctor arrives.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">الممرضات مدرّبات كويس، وبيعرفوا يعملوا تقييم إكلينيكي سريع (<span class="lt" dir="ltr">clinical assessment</span>) ويقيسوا العلامات الحيوية ويقدّموا رعاية آمنة قبل ما الدكتور يوصل.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">تبص على المريض وتقيس ضغطه ونبضه وتطمّن عليه لحد ما الدكتور ييجي.</div></div></article><article class="item rd">
+<div class="num">5</div>
+<div class="en-box"><p class="en-txt big">When a patient's condition suddenly changes, the nurse relies on a medical protocol and sharp observation skills.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">لما حالة المريض (<span class="lt" dir="ltr">condition</span>) تتغيّر فجأة، الممرضة بتعتمد على بروتوكول طبي (<span class="lt" dir="ltr">medical protocol</span>) ومهارات ملاحظة حادّة (<span class="lt" dir="ltr">observation skills</span>).</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">مريض لونه بقى أزرق فجأة، فتمشي على خطوات البروتوكول بترتيبها.</div></div></article><article class="item rd">
+<div class="num">6</div>
+<div class="en-box"><p class="en-txt big">They check the patient's breathing, measure blood pressure, and monitor heart rates accurately.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">بيفحصوا تنفّس المريض، ويقيسوا الضغط، ويراقبوا معدّل ضربات القلب بدقة.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">تركّب الجهاز وتتابع أرقام النبض والضغط على الشاشة.</div></div></article><article class="item rd">
+<div class="num">7</div>
+<div class="en-box"><p class="en-txt big">If necessary, the nurse can take rapid intervention or delegate tasks to other staff.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">لو لزم الأمر، الممرضة ممكن تتدخل بسرعة (<span class="lt" dir="ltr">rapid intervention</span>) أو توزّع المهام (<span class="lt" dir="ltr">delegate</span>) على باقي الطاقم.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">واحدة تنده على الدكتور، والتانية تجيب عربية الطوارئ، وإنتِ مع المريض.</div></div></article><article class="item rd">
+<div class="num">8</div>
+<div class="en-box"><p class="en-txt big">When nurses take charge during critical moments, they ensure patient safety and maintain stability across the hospital ward until the physician returns, looking closely at the patient's physical response.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">لما الممرضات يمسكوا زمام الأمور في اللحظات الحرجة، بيضمنوا سلامة المريض ويحافظوا على استقرار العنبر لحد ما الدكتور (<span class="lt" dir="ltr">physician</span>) يرجع، وبيراقبوا استجابة المريض الجسدية (<span class="lt" dir="ltr">physical response</span>) عن قرب.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">تفضل جنب المريض تتابع هل نفسه اتحسّن بعد الأكسجين ولا لأ، لحد ما الدكتور يرجع.</div></div></article></div></section><section class="chapter" id="ch5">
+<header class="ch-head"><div class="ch-icon">🦋</div><div><div class="ch-kicker">Chapter V</div><h2>Chapter 5: The Thyroid Gland: Body Energy</h2></div></header>
+<h3 class="sec"><span class="sec-ic"><i class="fa-solid fa-book"></i></span>Glossary 1:</h3>
+<div class="items"><article class="item gl" data-n="g5-1">
+<div class="num">1</div>
+<div class="en-box"><span class="term">Metabolism</span><p class="en-txt">The chemical processes that give the body energy.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Metabolism</span> معناها «الأيض / التمثيل الغذائي»، العمليات الكيميائية اللي بتدّي الجسم طاقة.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">الأكل اللي بتاكله بيتحوّل جوّه جسمك لطاقة تمشّيك؛ ده <span class="lt" dir="ltr">metabolism</span>.</div></div></article><article class="item gl" data-n="g5-2">
+<div class="num">2</div>
+<div class="en-box"><span class="term">Hormone</span><p class="en-txt">A chemical substance made by glands to control body functions.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Hormone</span> معناها «هرمون»، مادة كيميائية بتصنعها الغدد عشان تتحكم في وظايف الجسم.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">الأنسولين هرمون بيتحكم في السكر في الدم.</div></div></article><article class="item gl" data-n="g5-3">
+<div class="num">3</div>
+<div class="en-box"><span class="term">Gland</span><p class="en-txt">An organ that makes and releases substances like hormones.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Gland</span> معناها «غدة»، عضو بيصنع ويفرز مواد زي الهرمونات.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">الغدة الدرقية اللي في رقبتك غدة بتفرز هرمون.</div></div></article><article class="item gl" data-n="g5-4">
+<div class="num">4</div>
+<div class="en-box"><span class="term">Fatigue</span><p class="en-txt">Extreme tiredness and lack of physical energy.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Fatigue</span> معناها «الإرهاق الشديد / التعب»، تعب شديد وقلة طاقة جسدية.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">واحد بيصحى تعبان ومفيش عنده طاقة يعمل أي حاجة رغم إنه نام؛ ده <span class="lt" dir="ltr">fatigue</span>.</div></div></article><article class="item gl" data-n="g5-5">
+<div class="num">5</div>
+<div class="en-box"><span class="term">Weight</span><p class="en-txt">How heavy a person's body is.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Weight</span> معناها «الوزن»، جسم الشخص تقيل قد إيه.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">تطلع على الميزان تلاقيه 70 كيلو؛ ده الـ <span class="lt" dir="ltr">weight</span> بتاعك.</div></div></article><article class="item gl" data-n="g5-6">
+<div class="num">6</div>
+<div class="en-box"><span class="term">Symptom</span><p class="en-txt">A physical sign that shows a person is sick.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Symptom</span> معناها «عَرَض مرضي»، علامة جسدية بتدل إن الشخص عيّان.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">الصداع والسخونية <span class="lt" dir="ltr">symptoms</span> بتدل إنك تعبان.</div></div></article><article class="item gl" data-n="g5-7">
+<div class="num">7</div>
+<div class="en-box"><span class="term">Diagnosis</span><p class="en-txt">Finding out what illness a patient has.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Diagnosis</span> معناها «تشخيص المرض»، إنك تعرف المريض عنده إيه بالظبط.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">الدكتور يطلب تحاليل وبعدها يقولك عندك مشكلة في الغدة الدرقية؛ ده <span class="lt" dir="ltr">diagnosis</span>.</div></div></article><article class="item gl" data-n="g5-8">
+<div class="num">8</div>
+<div class="en-box"><span class="term">Function</span><p class="en-txt">The special job or purpose of an organ.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Function</span> معناها «وظيفة»، الشغلانة أو الغرض الخاص بالعضو.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">وظيفة (<span class="lt" dir="ltr">function</span>) القلب إنه يضخ الدم لكل الجسم.</div></div></article></div>
+<h3 class="sec"><span class="sec-ic"><i class="fa-solid fa-book-open"></i></span>I. Reading Comprehension</h3>
+<div class="passage-title"><i class="fa-solid fa-file-lines"></i> Reading Passage 1: The Balance of the Body</div>
+<div class="items"><article class="item rd">
+<div class="num">1</div>
+<div class="en-box"><p class="en-txt big">The human body is complex, and every organ has a special function.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">جسم الإنسان معقّد، وكل عضو له وظيفة (<span class="lt" dir="ltr">function</span>) خاصة.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">القلب بيضخ، والكلى بتصفّي، والرئة بتتنفس؛ كل واحد له شغلانته.</div></div></article><article class="item rd">
+<div class="num">2</div>
+<div class="en-box"><p class="en-txt big">One of the most important small organs in our neck is the thyroid gland.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">من أهم الأعضاء الصغيرة اللي في رقبتنا الغدة الدرقية (<span class="lt" dir="ltr">thyroid gland</span>).</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">لو حطيت إيدك على قدّام رقبتك من تحت، هناك مكان الغدة الدرقية.</div></div></article><article class="item rd">
+<div class="num">3</div>
+<div class="en-box"><p class="en-txt big">This tiny gland makes an important hormone that controls our body metabolism.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">الغدة الصغيرة دي بتصنع هرمون مهم (<span class="lt" dir="ltr">hormone</span>) بيتحكم في الأيض (<span class="lt" dir="ltr">metabolism</span>) في جسمنا.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">لو الهرمون زاد أو قلّ، سرعة حرق الجسم للأكل بتتغيّر.</div></div></article><article class="item rd">
+<div class="num">4</div>
+<div class="en-box"><p class="en-txt big">Metabolism is the way our body uses food to create energy for daily activities and keeps our internal systems working smoothly.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">الأيض هو الطريقة اللي جسمنا بيستخدم بيها الأكل عشان يعمل طاقة للأنشطة اليومية، ويخلّي الأجهزة الداخلية شغّالة بسلاسة.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">زي بنزين العربية؛ الأكل هو البنزين، والأيض هو الموتور اللي بيحوّله لحركة.</div></div></article><article class="item rd">
+<div class="num">5</div>
+<div class="en-box"><p class="en-txt big">Sometimes, patients visit the clinic because they feel constant fatigue and unexplained changes in their body weight.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">أحيانًا المرضى بييجوا العيادة عشان بيحسوا بإرهاق مستمر (<span class="lt" dir="ltr">constant fatigue</span>) وتغيّرات في وزنهم (<span class="lt" dir="ltr">weight</span>) من غير سبب واضح.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">واحدة تعبانة على طول، ووزنها زاد أو نقص من غير ما تغيّر أكلها.</div></div></article><article class="item rd">
+<div class="num">6</div>
+<div class="en-box"><p class="en-txt big">These are often a clear symptom of thyroid problems.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">الحاجات دي في الغالب بتبقى عَرَض (<span class="lt" dir="ltr">symptom</span>) واضح على مشاكل الغدة الدرقية.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">تعب مع تغيّر في الوزن يخلّي الدكتور يفكّر في الغدة الدرقية.</div></div></article><article class="item rd">
+<div class="num">7</div>
+<div class="en-box"><p class="en-txt big">When doctors examine the patient, they look for the right diagnosis to start proper care.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">لما الدكاترة بيكشفوا على المريض، بيدوروا على التشخيص الصح (<span class="lt" dir="ltr">diagnosis</span>) عشان يبدأوا الرعاية المناسبة.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">يكشف ويسأل ويطلب تحليل، وبعدين يبدأ العلاج.</div></div></article><article class="item rd">
+<div class="num">8</div>
+<div class="en-box"><p class="en-txt big">Nurses help by checking vital signs, recording patient history, and supporting doctors during tests.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">الممرضات بيساعدوا بقياس العلامات الحيوية وتسجيل تاريخ المريض المرضي ودعم الدكاترة أثناء الفحوصات.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">تسأل المريض «التعب بدأ من إمتى؟» وتكتب الإجابة في الملف.</div></div></article><article class="item rd">
+<div class="num">9</div>
+<div class="en-box"><p class="en-txt big">Understanding how the thyroid works helps nurses give better care to endocrine patients.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">فهم الغدة الدرقية بتشتغل إزاي بيساعد الممرضات يقدّموا رعاية أحسن لمرضى الغدد الصماء (<span class="lt" dir="ltr">endocrine patients</span>).</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">لو فاهمة إن الغدة بتتحكم في الطاقة، هتفهمي ليه المريض بيتعب بسرعة.</div></div></article></div></section><section class="chapter" id="ch6">
+<header class="ch-head"><div class="ch-icon">💊</div><div><div class="ch-kicker">Chapter VI</div><h2>Chapter 6: Taking Medicine Safely</h2></div></header>
+<h3 class="sec"><span class="sec-ic"><i class="fa-solid fa-book"></i></span>Glossary 1:</h3>
+<div class="items"><article class="item gl" data-n="g6-1">
+<div class="num">1</div>
+<div class="en-box"><span class="term">Pill</span><p class="en-txt">A small solid piece of medicine you swallow.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Pill</span> معناها «حبة دواء»، قطعة صغيرة صلبة من الدوا بتبلعها.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">قرص الباراسيتامول اللي بتبلعه بالمية ده <span class="lt" dir="ltr">pill</span>.</div></div></article><article class="item gl" data-n="g6-2">
+<div class="num">2</div>
+<div class="en-box"><span class="term">Dose</span><p class="en-txt">The exact amount of medicine to take.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Dose</span> معناها «جرعة الدواء»، الكمية المظبوطة من الدوا اللي المفروض تاخدها.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">الدكتور كتب قرص واحد كل 8 ساعات؛ ده الـ <span class="lt" dir="ltr">dose</span>.</div></div></article><article class="item gl" data-n="g6-3">
+<div class="num">3</div>
+<div class="en-box"><span class="term">Safety</span><p class="en-txt">Being safe and free from danger or harm.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Safety</span> معناها «الأمان»، إنك تكون في أمان وبعيد عن الخطر أو الضرر.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">تغسل إيدك قبل ما تحضّر الدوا عشان <span class="lt" dir="ltr">safety</span> المريض.</div></div></article><article class="item gl" data-n="g6-4">
+<div class="num">4</div>
+<div class="en-box"><span class="term">Reaction</span><p class="en-txt">A bad or unexpected body change from a drug.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Reaction</span> معناها «تفاعل تحسّسي / أثر جانبي»، تغيّر وحش أو مش متوقع بيحصل في الجسم بسبب الدوا.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">بعد الحقنة ظهرله طفح جلدي وحكّة؛ ده <span class="lt" dir="ltr">reaction</span>.</div></div></article><article class="item gl" data-n="g6-5">
+<div class="num">5</div>
+<div class="en-box"><span class="term">Label</span><p class="en-txt">The paper on a bottle that gives information.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Label</span> معناها «ملصق / بطاقة الدواء»، الورقة اللي على العلبة وبتديك معلومات عن الدوا.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">اسم الدوا والجرعة المكتوبين على العلبة هم الـ <span class="lt" dir="ltr">label</span>.</div></div></article><article class="item gl" data-n="g6-6">
+<div class="num">6</div>
+<div class="en-box"><span class="term">Pharmacy</span><p class="en-txt">A place where medicine is prepared and sold.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Pharmacy</span> معناها «صيدلية»، مكان بيتجهّز فيه الدوا وبيتباع.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">الممرضة بتروح صيدلية المستشفى (<span class="lt" dir="ltr">pharmacy</span>) تستلم العلاج.</div></div></article><article class="item gl" data-n="g6-7">
+<div class="num">7</div>
+<div class="en-box"><span class="term">Harm</span><p class="en-txt">Physical injury or damage.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Harm</span> معناها «أذى / ضرر»، إصابة أو ضرر جسدي.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">لو اتدّت جرعة غلط ممكن تعمل <span class="lt" dir="ltr">harm</span> للمريض.</div></div></article><article class="item gl" data-n="g6-8">
+<div class="num">8</div>
+<div class="en-box"><span class="term">Timing</span><p class="en-txt">Doing something at the right time.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt"><span class="lt" dir="ltr">Timing</span> معناها «التوقيت المناسب»، إنك تعمل الحاجة في الوقت الصح.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">مضاد حيوي كل 12 ساعة، يعني 8 الصبح و8 بالليل؛ ده الـ <span class="lt" dir="ltr">timing</span> الصح.</div></div></article></div>
+<h3 class="sec"><span class="sec-ic"><i class="fa-solid fa-book-open"></i></span>Reading Comprehension:</h3>
+<div class="passage-title"><i class="fa-solid fa-file-lines"></i> Reading Passage 1: The Patient's Medicine</div>
+<div class="items"><article class="item rd">
+<div class="num">1</div>
+<div class="en-box"><p class="en-txt big">Giving medicine to patients is a very important job for nurses.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">إعطاء الدواء للمرضى شغلانة مهمة جدًا للممرضات.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">الدوا لو اتدّى صح بيعالج، ولو اتدّى غلط ممكن يضرّ.</div></div></article><article class="item rd">
+<div class="num">2</div>
+<div class="en-box"><p class="en-txt big">Every pill or liquid drug must be given with high care and strict safety.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">كل حبة (<span class="lt" dir="ltr">pill</span>) أو دوا سائل لازم يتدّي بعناية عالية وأمان صارم (<span class="lt" dir="ltr">strict safety</span>).</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">سواء قرص أو شراب، بتتأكد من كل خطوة قبل ما تديه.</div></div></article><article class="item rd">
+<div class="num">3</div>
+<div class="en-box"><p class="en-txt big">Before giving any dose, the nurse must read the medicine label very carefully.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">قبل أي جرعة (<span class="lt" dir="ltr">dose</span>)، لازم الممرضة تقرا بطاقة الدواء (<span class="lt" dir="ltr">label</span>) بتركيز شديد.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">تقرا الاسم والتركيز والتاريخ على العلبة قبل ما تفتحها.</div></div></article><article class="item rd">
+<div class="num">4</div>
+<div class="en-box"><p class="en-txt big">Checking the right timing helps the patient get better fast and stops any bad body reaction or harm.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">التأكد من التوقيت الصح (<span class="lt" dir="ltr">timing</span>) بيساعد المريض يتحسّن بسرعة، وبيمنع أي تفاعل سيء (<span class="lt" dir="ltr">reaction</span>) أو ضرر (<span class="lt" dir="ltr">harm</span>).</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">لو اديت الجرعة التانية بدري قوي، ممكن تحصل أعراض جانبية.</div></div></article><article class="item rd">
+<div class="num">5</div>
+<div class="en-box"><p class="en-txt big">Hospitals have strict rules for medicines.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">المستشفيات عندها قواعد صارمة للأدوية.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">زي إن الدوا ميتدّاش من غير أمر مكتوب من الدكتور.</div></div></article><article class="item rd">
+<div class="num">6</div>
+<div class="en-box"><p class="en-txt big">Nurses get drugs from the hospital pharmacy and check the patient's name twice.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">الممرضات بياخدوا الأدوية من صيدلية المستشفى (<span class="lt" dir="ltr">pharmacy</span>) ويتأكدوا من اسم المريض مرتين.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">تسأل المريض «اسمك إيه؟» وتقارنه باللي مكتوب على الكارت.</div></div></article><article class="item rd">
+<div class="num">7</div>
+<div class="en-box"><p class="en-txt big">Never give old medicine or medicine with no name tag.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">ممنوع تدّي دوا قديم أو دوا من غير بطاقة بالاسم (<span class="lt" dir="ltr">name tag</span>).</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">لقيت حقنة في الدرج من غير اسم عليها؟ متدّهاش للمريض.</div></div></article><article class="item rd">
+<div class="num">8</div>
+<div class="en-box"><p class="en-txt big">Safe habits keep patients happy and healthy.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">العادات الآمنة بتخلّي المرضى مبسوطين وبصحة كويسة.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">كل مرة تغسل إيدك وتراجع البطاقة، ده بيحمي المريض.</div></div></article><article class="item rd">
+<div class="num">9</div>
+<div class="en-box"><p class="en-txt big">Good nurses always protect their patients from any drug mistakes.</p></div>
+<div class="ar"><div class="ar-lbl"><i class="fa-solid fa-language"></i> الشرح</div><div class="ar-txt">الممرضات الشاطرين دايمًا بيحموا مرضاهم من أي أخطاء في الأدوية.</div></div><div class="ex"><div class="ex-lbl"><i class="fa-solid fa-lightbulb"></i> عشان تفهمها :</div><div class="ex-txt">لو حسّيتي إن الجرعة غريبة، تسألي قبل ما تديها.</div></div></article></div></section>
+</div>
+<footer><div class="fb">GHAITH <span>TEAM</span></div><a href="https://t.me/nursing2bu" target="_blank" class="tg"><i class="fa-brands fa-telegram"></i> @nursing2bu</a></footer>
+<script>
+const btn=document.getElementById('themeBtn');let theme='light';
+try{theme=localStorage.getItem('theme')||'light'}catch(e){}
+function setT(t){theme=t;document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'');btn.textContent=t==='dark'?'☀️':'🌙';try{localStorage.setItem('theme',t)}catch(e){}}
+setT(theme);btn.addEventListener('click',()=>setT(theme==='dark'?'light':'dark'));
+const prog=document.getElementById('prog');
+const secs=[...document.querySelectorAll('.chapter')],chips=[...document.querySelectorAll('.chip')];
+function onScroll(){
+  const h=document.documentElement.scrollHeight-innerHeight;prog.style.width=(h>0?scrollY/h*100:0)+'%';
+  let cur=0;secs.forEach((s,i)=>{if(s.getBoundingClientRect().top<180)cur=i});
+  chips.forEach((c,i)=>c.classList.toggle('on',i===cur));
+}
+addEventListener('scroll',onScroll,{passive:true});onScroll();
+</script>
+</body>
+</html>
