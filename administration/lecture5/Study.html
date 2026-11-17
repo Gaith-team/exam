@@ -1,0 +1,871 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM </title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:#1e3a8a; --teal:#0e7490; --emerald:#10b981; --gold:#f59e0b;
+  --accent:#0e7490; --accent-glow:rgba(14,116,144,0.18); --accent-rgb:14,116,144;
+  --grad:linear-gradient(135deg,#1e3a8a 0%,#0e7490 50%,#10b981 100%);
+  --grad-bar:linear-gradient(90deg,#1e3a8a,#0e7490,#10b981,#f59e0b);
+  --bg:#f8fafc; --bg2:#eef2f7; --card:#ffffff;
+  --text:#1a2332; --text2:#4a5568; --text3:#718096;
+  --bc:rgba(0,0,0,0.07);
+  --r:16px; --tr:all .3s cubic-bezier(.4,0,.2,1);
+}
+[data-theme="dark"] {
+  --bg:#0d1117; --bg2:#161b22; --card:#1c2333;
+  --text:#e6edf3; --text2:#b1bac4; --text3:#7d8590;
+  --bc:rgba(255,255,255,0.08);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family:'Outfit',sans-serif; background:var(--bg); color:var(--text);
+  min-height:100vh; overflow-x:hidden; transition:background .4s,color .4s;
+}
+
+#prog-bar { position:fixed; top:0; left:0; height:3px; z-index:999; background:var(--grad-bar); width:0%; transition:width .15s; }
+
+nav {
+  position:fixed; top:0; left:0; right:0; z-index:100;
+  display:flex; align-items:center; justify-content:space-between;
+  padding:0 28px; height:64px;
+  background:rgba(248,250,252,.93); backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--bc);
+}
+[data-theme="dark"] nav { background:rgba(13,17,23,.95); }
+.nav-brand { display:flex; align-items:center; gap:9px; font-size:15px; font-weight:900; color:var(--text); }
+.nav-logo-icon {
+  width:34px; height:34px; border-radius:8px; background:var(--grad);
+  display:flex; align-items:center; justify-content:center;
+  color:#fff; font-size:12px; font-weight:900; box-shadow:0 0 0 2px rgba(245,158,11,.5);
+}
+.nav-right { display:flex; align-items:center; gap:8px; }
+.theme-btn, .tool-btn {
+  height:38px; min-width:38px; border-radius:50px; border:1px solid var(--bc);
+  background:var(--card); cursor:pointer; font-size:14px; color:var(--text);
+  display:flex; align-items:center; justify-content:center; gap:6px; padding:0 12px;
+  font-family:'Outfit',sans-serif; font-weight:700; transition:var(--tr);
+}
+.theme-btn { width:38px; padding:0; border-radius:50%; font-size:15px; }
+.theme-btn:hover { border-color:var(--accent); transform:rotate(20deg); }
+.tool-btn:hover { border-color:var(--accent); color:var(--accent); }
+.tool-btn.off { opacity:.55; }
+
+.hero-band {
+  margin-top:64px; background:var(--grad); padding:40px 24px 36px; text-align:center;
+  position:relative; overflow:hidden; border-bottom:4px solid var(--gold);
+}
+.hero-band::before {
+  content:''; position:absolute; inset:0;
+  background:
+    radial-gradient(circle 220px at 12% 20%, rgba(245,158,11,.22) 0%, transparent 70%),
+    radial-gradient(circle 260px at 90% 85%, rgba(16,185,129,.28) 0%, transparent 70%),
+    radial-gradient(ellipse 600px 200px at 50% 100%, rgba(255,255,255,.12) 0%, transparent 70%);
+}
+.hero-band > * { position:relative; }
+.hero-band-icon {
+  width:68px; height:68px; border-radius:20px; background:rgba(255,255,255,.2);
+  backdrop-filter:blur(8px); display:flex; align-items:center; justify-content:center;
+  font-size:30px; margin:0 auto 14px; border:1.5px solid rgba(255,255,255,.35);
+}
+.hero-band h1 { font-size:clamp(20px,4vw,30px); font-weight:900; color:#fff; margin-bottom:6px; }
+.hero-band p { font-size:13px; color:rgba(255,255,255,.85); }
+.hero-band-meta { display:flex; justify-content:center; gap:14px; margin-top:20px; flex-wrap:wrap; }
+.meta-pill {
+  background:rgba(255,255,255,.18); backdrop-filter:blur(6px);
+  border:1px solid rgba(255,255,255,.3); border-radius:50px; padding:6px 16px;
+  font-size:12px; font-weight:700; color:#fff; display:flex; align-items:center; gap:6px;
+}
+.meta-pill i { color:var(--gold); }
+
+/* CHIPS */
+.chips-wrap {
+  position:sticky; top:64px; z-index:90; background:var(--bg);
+  border-bottom:1px solid var(--bc); padding:10px 0;
+}
+.chips { display:flex; gap:8px; overflow-x:auto; padding:0 20px; max-width:860px; margin:0 auto; scrollbar-width:none; }
+.chips::-webkit-scrollbar { display:none; }
+.chip {
+  flex-shrink:0; padding:7px 14px; border-radius:50px; font-size:12px; font-weight:700;
+  background:var(--card); border:1px solid var(--bc); color:var(--text2);
+  text-decoration:none; transition:var(--tr); white-space:nowrap;
+}
+.chip:hover, .chip.active { background:var(--grad); color:#fff; border-color:transparent; }
+
+.shell { max-width:860px; margin:0 auto; padding:24px 20px 80px; }
+
+/* SECTION */
+.sec { margin-bottom:34px; scroll-margin-top:130px; }
+.sec-head {
+  display:flex; align-items:center; gap:12px; background:var(--grad); color:#fff;
+  padding:14px 18px; border-radius:16px 16px 0 0; border-bottom:3px solid var(--gold);
+}
+.sec-icon {
+  width:38px; height:38px; border-radius:10px; background:rgba(255,255,255,.2);
+  display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0;
+}
+.sec-title { font-size:17px; font-weight:900; line-height:1.3; }
+.sec-count { margin-left:auto; font-size:11px; font-weight:700; background:rgba(255,255,255,.2); padding:3px 10px; border-radius:50px; white-space:nowrap; }
+.sec-body {
+  background:var(--card); border:1px solid var(--bc); border-top:none;
+  border-radius:0 0 16px 16px; padding:14px; display:flex; flex-direction:column; gap:12px;
+  box-shadow:0 4px 20px rgba(0,0,0,.05);
+}
+
+.subhead {
+  font-size:13px; font-weight:900; color:var(--navy); padding:8px 12px;
+  background:rgba(var(--accent-rgb),.08); border-left:4px solid var(--gold);
+  border-radius:8px; direction:ltr; text-align:left; margin-top:6px;
+}
+[data-theme="dark"] .subhead { color:#7dd3fc; }
+
+/* POINT */
+.pt {
+  border:1px solid var(--bc); border-radius:14px; overflow:hidden; background:var(--bg);
+  transition:var(--tr);
+}
+.pt:hover { border-color:rgba(var(--accent-rgb),.4); box-shadow:0 4px 14px var(--accent-glow); }
+.pt.sub { margin-left:22px; border-left:3px solid var(--teal); }
+.pt.done { opacity:.55; }
+
+.pt-en {
+  display:flex; gap:10px; align-items:flex-start; padding:13px 14px;
+  font-size:15px; font-weight:700; line-height:1.6; direction:ltr; text-align:left;
+  background:var(--card); cursor:pointer;
+}
+.pt-n {
+  min-width:26px; height:26px; border-radius:8px; background:var(--grad); color:#fff;
+  font-size:11px; font-weight:900; display:flex; align-items:center; justify-content:center; flex-shrink:0; margin-top:2px;
+}
+.pt-ar {
+  padding:12px 16px; font-size:14.5px; line-height:1.9; color:var(--text);
+  direction:rtl; text-align:right; border-top:1px dashed var(--bc);
+  font-family:'Segoe UI',Tahoma,'Outfit',sans-serif;
+}
+.pt-ar .tag, .pt-ex .tag {
+  display:inline-block; font-size:11px; font-weight:900; padding:2px 9px; border-radius:6px; margin-left:8px; vertical-align:middle;
+}
+.pt-ar .tag { background:rgba(14,116,144,.12); color:var(--teal); }
+[data-theme="dark"] .pt-ar .tag { color:#5eead4; }
+.pt-ex {
+  padding:12px 16px; font-size:14px; line-height:1.9; color:var(--text2);
+  direction:rtl; text-align:right; border-top:1px dashed var(--bc);
+  background:rgba(245,158,11,.07); border-right:4px solid var(--gold);
+  font-family:'Segoe UI',Tahoma,'Outfit',sans-serif;
+}
+.pt-ex .tag { background:rgba(245,158,11,.2); color:#b45309; }
+[data-theme="dark"] .pt-ex .tag { color:#fbbf24; }
+body.hide-ex .pt-ex { display:none; }
+body.hide-ar .pt-ar { display:none; }
+
+footer {
+  background:var(--bg2); border-top:3px solid; border-image:var(--grad-bar) 1;
+  padding:22px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;
+}
+.footer-brand { font-size:14px; font-weight:700; }
+.footer-brand span { color:var(--accent); }
+.footer-tg { display:flex; align-items:center; gap:5px; text-decoration:none; color:#229ED9; font-size:12px; font-weight:600; }
+
+@media (max-width:560px) {
+  nav { padding:0 12px; }
+  .nav-brand span { display:none; }
+  .shell { padding:16px 12px 60px; }
+  .pt.sub { margin-left:12px; }
+  .tool-btn span { display:none; }
+  .sec-count { display:none; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog-bar"></div>
+
+<nav>
+  <div class="nav-brand">
+    <div class="nav-logo-icon">GT</div>
+    <span>GHAITH TEAM</span>
+  </div>
+  <div class="nav-right">
+    <button class="tool-btn" id="btnAr" title="Arabic"><i class="fa-solid fa-language"></i><span>الشرح</span></button>
+    <button class="tool-btn" id="btnEx" title="Examples"><i class="fa-solid fa-lightbulb"></i><span>عشان تفهمها</span></button>
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<div class="hero-band">
+  <div class="hero-band-icon">🔄</div>
+  <h1>Planning Continuity of Patient Care</h1>
+  <p>Nursing Management</p>
+  <div class="hero-band-meta">
+    <div class="meta-pill"><i class="fa-solid fa-language"></i> ببساطة مع غيث</div>
+  </div>
+</div>
+
+<div class="chips-wrap"><div class="chips" id="chips"></div></div>
+
+<div class="shell" id="app"></div>
+
+<footer>
+  <div class="footer-brand">GHAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg"><i class="fa-brands fa-telegram"></i> @nursing2bu</a>
+</footer>
+
+<script>
+/* Item format: [English, Arabic explanation, Example, level]  |  {h:"sub heading"}  (level 1 = indented sub-point) */
+const SECTIONS = [
+
+{ id:"intro", icon:"📖", title:"Introduction — Continuity of Care", items:[
+
+[`All people have equal access to quality health services that are coproduced in a way that meets their life course needs, are coordinated across the continuum of care and are comprehensive, safe, effective, timely, efficient and acceptable; and all careers are motivated, skilled and operate in a supportive environment.`,
+`دي الصورة المثالية للنظام الصحي: كل الناس ليهم نفس الحق في خدمة صحية كويسة بتتعمل بمشاركة المريض وبتناسب احتياجاته في كل مراحل حياته، ومتنسقة بين كل مراحل الرعاية، وشاملة وآمنة وفعّالة وفي وقتها وبأقل مجهود وتكلفة ومقبولة عند الناس. وكمان مقدمي الرعاية عندهم دافع ومهارة وشغالين في بيئة بتدعمهم.`,
+`مريض عنده سكر وضغط: بيتابع في العيادة، وبعدين يدخل المستشفى، وبعدين يخرج. المفروض يحس إن ده كله سلسلة واحدة مترابطة، وكل الفريق عارف حالته، والممرضة اللي بتخدمه شغالة في مكان فيه إمكانيات ودعم.`],
+
+[`Continuity enables care coordination by creating the conditions and ongoing relationships to support seamless interactions among multiple providers, within interdisciplinary teams or in care settings or sectors.`,
+`الاستمرارية هي اللي بتخلي التنسيق ممكن، لأنها بتعمل ظروف وعلاقات مستمرة تخلي التعامل بين مقدمي الرعاية (دكتور، تمريض، علاج طبيعي...) في الفريق الواحد أو بين الأقسام والجهات المختلفة يمشي من غير تقطيع.`,
+`مريض هيتنقل من العناية المركزة للقسم: لو الممرضة اللي سلّمت والممرضة اللي استلمت متعودين يتواصلوا ويتبادلوا المعلومات، النقل بيحصل من غير ما أي حاجة تضيع.`],
+
+[`Without relationships built on security, reliability and continuity, case management wasn't as effective.`,
+`من غير علاقات مبنية على الأمان والثقة والاستمرارية، إدارة الحالة مش بتبقى بنفس الكفاءة.`,
+`مريض بيتعامل مع نفس الممرضة كل يوم وواثق فيها، بيقولها كل حاجة وبيسمع كلامها، فخطة علاجه بتمشي أحسن من مريض كل يوم يقابل وش جديد.`],
+
+{h:"Definition"},
+
+[`Continuity of care is concerned with quality of care over time. It is the process by which the patient and his/her physician-led care team are cooperatively involved in ongoing health care management toward the shared goal of high quality, cost-effective medical care.`,
+`استمرارية الرعاية معناها جودة الرعاية على مدار الوقت. هي العملية اللي المريض وفريق الرعاية اللي بيقوده الدكتور بيشتركوا فيها مع بعض في إدارة الرعاية الصحية بشكل مستمر، عشان يوصلوا لهدف واحد: رعاية عالية الجودة وقليلة التكلفة.`,
+`مريض قلب بيتابع كل شهر: الدكتور والتمريض والمريض نفسه كلهم متفقين على الخطة (أدوية، أكل، متابعة) وبيكملوا عليها شهر ورا شهر، مش مرة وخلاص.`],
+
+[`Planning Continuity Patient Care: is the process of managing patient care from the primary care contact through preadmission, admission, in-patient care, discharge and follow up/maintenance.`,
+`التخطيط لاستمرارية رعاية المريض هو إنك تدير رعاية المريض من أول مرة يتعامل فيها مع الرعاية الأولية، وبعدين قبل الدخول، والدخول، والإقامة في المستشفى، والخروج، وبعد كده المتابعة والمحافظة على حالته.`,
+`مريض راح الوحدة الصحية بألم في الصدر ← اتحوّل المستشفى وعملوله تجهيزات قبل الدخول ← دخل واتعالج ← خرج بخطة ← بييجي يتابع. التخطيط هو إن الخطوات دي كلها مترتبة ومحدش يتوه فيها.`],
+
+[`Continuity of care: reflects the extent to which a series of discrete health care events is experienced by people as coherent and interconnected over time and consistent with their health needs and preferences.`,
+`استمرارية الرعاية بتقيس قد إيه سلسلة الأحداث الصحية المنفصلة (زيارات، تحاليل، دخول مستشفى) المريض بيحس إنها مترابطة ومتسلسلة مع الوقت ومناسبة لاحتياجاته وتفضيلاته الصحية.`,
+`لو المريض حس إن كل زيارة بتكمّل اللي قبلها ومحدش بيسأله نفس الأسئلة من الأول، يبقى فيه استمرارية. لو كل مرة بيبدأ من الصفر، يبقى مفيش.`],
+
+[`This involves coordination between a range of community-based and hospital/health service providers, and careers, with particular reference to efficient information transfer between all providers across the hospital/community interface.`,
+`ده معناه تنسيق بين مقدمي الخدمة في المجتمع (وحدات صحية، رعاية منزلية) ومقدمي الخدمة في المستشفى ومقدمي الرعاية، مع التركيز على نقل المعلومات بكفاءة بين الكل عند الحدود بين المستشفى والمجتمع.`,
+`ممرضة الرعاية المنزلية تعرف من تقرير الخروج إن المريض عنده جرح عمليات وبيتغيّر عليه كل يوم، من غير ما تسأل المريض من الأول.`, 1],
+
+[`Part of the planning for discharge process includes the development of a coordinated plan for the community services which need to be in place prior to discharge from Hospital.`,
+`جزء من التخطيط للخروج إنك تعمل خطة منسقة لخدمات المجتمع اللي لازم تكون جاهزة قبل ما المريض يخرج من المستشفى.`,
+`مريض هيخرج على جهاز أكسجين منزلي: قبل الخروج بيومين نتأكد إن الجهاز وصل البيت وفيه حد هيتابعه.`, 1],
+
+[`Care Coordination: a proactive approach to bringing together care professionals and providers to meet the needs of service users to ensure that they receive integrated, person-focused care across various settings.`,
+`تنسيق الرعاية هو أسلوب استباقي بيجمع المتخصصين ومقدمي الخدمة مع بعض عشان يلبّوا احتياجات متلقي الخدمة، ويضمنوا إنه ياخد رعاية متكاملة محورها الشخص نفسه في كل الأماكن المختلفة.`,
+`مريض جلطة في المخ: التمريض بينسق مع الدكتور والعلاج الطبيعي والأخصائي الاجتماعي من قبل ما يخرج، بدل ما أهله يلفوا على كل واحد لوحده.`]
+
+]},
+
+{ id:"why", icon:"❓", title:"Why Plan Continuity of Patient Care?", items:[
+
+{h:"Why do planning of continuity patient care?"},
+
+[`Good continuity of care planning contributes to improved quality`,
+`التخطيط الكويس للاستمرارية بيساهم في تحسين جودة الرعاية.`,
+`مريض خارج بخطة مكتوبة وواضحة بيتعالج صح أكتر من مريض خارج بكلام شفهي.`],
+
+[`Improved safety of care.`,
+`بتزود أمان الرعاية.`,
+`لو الأدوية اتنقلت صح في ورقة التسليم، مفيش مريض هياخد دوا غلط أو جرعة مكررة.`],
+
+[`Increased patient, career and service provider satisfaction.`,
+`بتزود رضا المريض ومقدم الرعاية ومقدمي الخدمة.`,
+`المريض مرتاح، وأهله مرتاحين، والممرضة مش بتتخانق عشان معلومات ناقصة.`],
+
+[`Reduced readmission rates.`,
+`بتقلل معدلات إعادة الدخول للمستشفى.`,
+`مريض فشل قلب خرج وعارف يتابع وزنه وأدويته، فمش هيرجع بعد أسبوع بتورم.`],
+
+[`Appropriate length of stay in health facilities.`,
+`بتخلي مدة الإقامة في المنشأة الصحية مناسبة (مش أطول ولا أقصر من اللازم).`,
+`مريض جاهز للخروج مش بيفضل أيام زيادة عشان الخدمات اللي برا مش جاهزة، ومش بيخرج بدري وهو لسه محتاج.`],
+
+[`It can also be expected to reduce duplication of effort .`,
+`ومتوقع كمان إنها تقلل تكرار المجهود.`,
+`متتعملش نفس التحليل مرتين عشان نتيجة الأولانية ماوصلتش.`],
+
+[`Maximize use of resources, including access to appropriate service providers and levels of care.`,
+`بتخلينا نستفيد بأقصى شكل من الموارد، وكمان توصل للمقدم المناسب ومستوى الرعاية المناسب.`,
+`مريض محتاج رعاية بسيطة يروح وحدة صحية أو رعاية منزلية، مش يشغل سرير عناية.`]
+
+]},
+
+{ id:"principles", icon:"🧭", title:"Key Principles of Planning", items:[
+
+{h:"Key principles planning of continuity patient care:"},
+
+[`The needs of the patient are the focus of all continuity of care planning processes.`,
+`احتياجات المريض هي محور كل خطوات التخطيط لاستمرارية الرعاية.`,
+`قبل ما نخطط لخروج مريض، نسأل: هو محتاج إيه هو؟ مش محتاج إيه المستشفى.`],
+
+[`Patient and career involvement in the planning process is essential (including an advocate, if required).`,
+`مشاركة المريض ومقدم الرعاية في التخطيط أساسية (ومعاهم شخص يدافع عن حقوق المريض لو لزم).`,
+`بنقعد مع المريض وابنه اللي هيرعاه ونشرح الخطة ونسمع رأيهم، ولو المريض مش قادر يتكلم عن نفسه، حد يمثله.`],
+
+[`Continuity of care planning is for all patients. The extent of planning relates to complexity of need.`,
+`التخطيط للاستمرارية لكل المرضى. وحجم التخطيط بيتحدد بتعقيد احتياجات المريض.`,
+`مريض مغص بسيط خروجه بتعليمات بسيطة، ومريض بعد عملية قلب مفتوح محتاج خطة أكبر بكتير.`],
+
+[`More comprehensive care planning and coordination is required for patients with chronic/complex care needs.`,
+`المرضى اللي عندهم احتياجات مزمنة أو معقدة محتاجين تخطيط وتنسيق أشمل.`,
+`مريض فشل كلوي بيعمل غسيل وكمان سكر وضغط: محتاج تنسيق بين أكتر من تخصص ومتابعة مستمرة.`],
+
+[`Planning for discharge starts at first contact with the hospital on, or before, admission.`,
+`التخطيط للخروج بيبدأ من أول تعامل مع المستشفى، يوم الدخول أو قبله.`,
+`أول ما المريض يدخل، الممرضة تسأل عن سكنه ومين هيرعاه، مش تستنى يوم الخروج.`],
+
+[`Continuity of care planning is multi-disciplinary.`,
+`التخطيط للاستمرارية بيشارك فيه فريق من تخصصات مختلفة.`,
+`دكتور وتمريض وتغذية وعلاج طبيعي وأخصائي اجتماعي، كل واحد بيحط جزء في الخطة.`],
+
+[`Continuity of care planning is respectful and sensitive to the needs of people from diverse linguistic and cultural, backgrounds.`,
+`التخطيط لازم يحترم ويراعي احتياجات الناس من خلفيات لغوية وثقافية مختلفة.`,
+`مريض أجنبي مبيتكلمش عربي: نجيب مترجم أو نكتب التعليمات بلغته، ونراعي عاداته في الأكل.`],
+
+[`Subject to privacy provisions, continuity of care planning includes timely ongoing communication, information transfer and service coordination between hospitals and community based services.`,
+`مع احترام قواعد الخصوصية، التخطيط بيشمل تواصل مستمر في وقته، ونقل معلومات، وتنسيق خدمات بين المستشفيات والخدمات المجتمعية.`,
+`نبعت تقرير الخروج للوحدة الصحية اللي هتتابع المريض، بس بالمعلومات اللازمة ليهم بس وبموافقة المريض.`]
+
+]},
+
+{ id:"domains", icon:"🧩", title:"Domains & Monitoring of Continuity", items:[
+
+{h:"The four domains of continuity in the new framework are:"},
+
+[`interpersonal continuity: the subjective experience of the caring relationship between a patient and his or her health care professional;`,
+`الاستمرارية الشخصية: إحساس المريض بالعلاقة الرعائية بينه وبين مقدم الرعاية الصحية بتاعه.`,
+`المريض بيحس إن الممرضة بتفهمه وبتهتم بيه، وبيرتاح في التعامل معاها.`],
+
+[`longitudinal continuity: a history of interaction with the same health care professional in a series of discrete episodes;`,
+`الاستمرارية الطولية: تاريخ من التعامل مع نفس مقدم الرعاية في سلسلة زيارات أو مرات منفصلة.`,
+`مريض بيروح كل مرة لنفس الدكتور ونفس الممرضة في العيادة، فهم عارفين تاريخه.`],
+
+[`management continuity: effective collaboration of teams across care boundaries to provide seamless care;`,
+`استمرارية الإدارة: تعاون فعّال بين الفرق عبر حدود الرعاية عشان الرعاية تبقى سلسة من غير فجوات.`,
+`فريق العناية وفريق القسم وفريق الرعاية المنزلية شغالين على نفس الخطة.`],
+
+[`Informational continuity: the availability of clinical and psychosocial information at all encounters with professionals.`,
+`الاستمرارية المعلوماتية: إن المعلومات الإكلينيكية والنفسية الاجتماعية تكون متاحة في كل مرة المريض بيقابل فيها أي مقدم رعاية.`,
+`أي ممرضة تفتح ملف المريض تلاقي تشخيصه وحساسيته وظروفه الاجتماعية قدامها.`],
+
+{h:"Monitoring continuity of care — this is enabled by:"},
+
+[`Patient input into developing practice policy on continuity and producing patient information`,
+`مشاركة المريض في وضع سياسة العمل الخاصة بالاستمرارية وفي إعداد المعلومات الموجهة للمرضى.`,
+`ناخد رأي المرضى في نشرة التعليمات اللي بتتوزع عليهم: واضحة ولا لأ؟`],
+
+[`involving the whole team – particularly front desk staff – in improving continuity`,
+`إشراك الفريق كله، وخصوصاً موظفي الاستقبال، في تحسين الاستمرارية.`,
+`موظف الاستقبال اللي بيحجز المواعيد يحاول يخلّي المريض يقابل نفس الدكتور كل مرة.`],
+
+[`identifying a practice lead for continuity, to champion this aspect of quality among competing priorities`,
+`تحديد مسؤول عن الاستمرارية يتبنّى الموضوع ده وسط الأولويات المتنافسة.`,
+`ممرضة مسؤولة عن متابعة الاستمرارية في القسم، دورها تفكّر الكل بيها وسط شغل كتير.`],
+
+[`Support and guidance on improving continuity from primary care organizations, professional bodies and regulators.`,
+`دعم وإرشاد لتحسين الاستمرارية من منظمات الرعاية الأولية والهيئات المهنية والجهات المنظمة.`,
+`نقابة التمريض أو وزارة الصحة تصدر إرشادات ومعايير للقسم يمشي عليها.`]
+
+]},
+
+{ id:"relationship", icon:"🤝", title:"Relationship Continuity & Types", items:[
+
+{h:"The advantages and benefits of relationship continuity include:"},
+
+[`Increased satisfaction, both for patients and staff, and enhanced loyalty`,
+`رضا أكبر عند المرضى والموظفين، وولاء أكتر.`,
+`المريض بيحب يتعالج عند نفس الفريق، والفريق بيحس بقيمة شغله.`],
+
+[`Reduced conflicts of responsibility for clinicians .`,
+`تقليل تضارب المسؤوليات عند الأطباء ومقدمي الرعاية.`,
+`لما نفس الشخص متابع الحالة، مفيش خناق على مين المسؤول عن إيه.`],
+
+[`Increased security and trust within the doctor–patient relationship . This increases willingness to accept medical advice and adherence to longterm preventive regimens such as statin medication.`,
+`أمان وثقة أكتر في علاقة الدكتور بالمريض. وده بيخلي المريض يقبل النصيحة الطبية أكتر ويلتزم بالأنظمة الوقائية طويلة المدى زي دواء الستاتين (دوا الكوليسترول).`,
+`المريض اللي واثق في دكتوره بيواظب على دوا الكوليسترول سنين من غير ما يوقفه من نفسه.`],
+
+[`Improved problem recognition and quality of management – especially for diabetes`,
+`تحسّن في اكتشاف المشاكل وجودة إدارة الحالة، خصوصاً في السكر.`,
+`الدكتور اللي متابع مريض السكر من سنين يلاحظ أي تغيير بسيط في حالته بسرعة.`],
+
+{h:"Some risks and harms of relationship continuity:"},
+
+[`Delayed diagnosis a fresh start with a new clinician may open up new diagnostic perspectives.`,
+`تأخر التشخيص: لأن بداية جديدة مع دكتور جديد ممكن تفتح زوايا تشخيص جديدة.`,
+`دكتور متعود على مريض فمش بيشك في حاجة جديدة، ودكتور جديد بنظرة جديدة يلاحظها.`],
+
+[`Increased costs this is because flexibility of staff deployment is reduced. One of the main drivers for reducing longitudinal continuity in general practice has been the desire of a group of clinicians to share workload equally. However, discontinuity may also have costs.`,
+`زيادة التكاليف: لأن مرونة توزيع الموظفين بتقل. وأحد أسباب تقليل الاستمرارية الطولية في الممارسة العامة كان رغبة مجموعة من الأطباء إنهم يتقاسموا العبء بالتساوي. لكن برضه عدم الاستمرارية ممكن يكون ليها تكلفة.`,
+`لو كل مريض لازم ياخد نفس الممرضة، مش هعرف أوزع الشغل بمرونة. وفي المقابل، لو بدّلت الممرضات كل يوم ممكن ألاقي تكلفة تانية.`],
+
+[`Encouraging collusion an example might include sickness certification.`,
+`تشجيع التواطؤ: ومثال على كده شهادات الإجازة المرضية.`,
+`دكتور بقاله سنين مع مريض ممكن يديله شهادة مرضية عشان المجاملة من غير ما يكون محتاجها فعلاً.`],
+
+[`Reduced conformity to professional standards and guidelines`,
+`قلة الالتزام بالمعايير والإرشادات المهنية.`,
+`ممكن مع كتر التعود نتساهل ونسيب خطوة من الإجراء الصح.`],
+
+{h:"Types of continuity of care — There are distinguishes between two types of continuity of care:"},
+
+[`Relationship continuity: a continuous therapeutic relationship with a clinician`,
+`استمرارية العلاقة: علاقة علاجية مستمرة مع مقدم رعاية معين.`,
+`مريض بيتعامل مع نفس الدكتور والممرضة طول فترة علاجه.`],
+
+[`Management continuity: continuity and consistency of clinical management, including providing and sharing information and care planning, and any necessary co-ordination of care required by the patient.`,
+`استمرارية الإدارة: استمرارية وثبات إدارة الحالة إكلينيكياً، وتشمل إعطاء المعلومات ومشاركتها، وتخطيط الرعاية، وأي تنسيق للرعاية يحتاجه المريض.`,
+`حتى لو الممرضة اتغيرت، الخطة والمعلومات ماشية زي ما هي ومتنسقة مع باقي الفريق.`]
+
+]},
+
+{ id:"methods", icon:"🛠️", title:"Methods of Planning Continuity", items:[
+
+{h:"Methods of Planning Continuity Patient Care"},
+
+[`1-Nursing Conference`,
+`الطريقة الأولى: المؤتمر التمريضي (اجتماع فريق التمريض).`,
+`اجتماع الصبح في بداية الوردية بتتوزع فيه المهام ونتكلم عن المرضى.`],
+
+[`II-Nursing care plan`,
+`الطريقة التانية: خطة الرعاية التمريضية.`,
+`ورقة مكتوبة لكل مريض فيها مشاكله وأهدافه والتدخلات المطلوبة.`]
+
+]},
+
+{ id:"conference", icon:"🗣️", title:"I. Nursing Conference", items:[
+
+[`Nursing conference is a meeting of the nursing staff for planning the nursing care , organization the day's work and acquainting all members with new information . It is the only practical means whereby everyone's ideas , observation and suggestions can be combined and the best ones are selected .`,
+`المؤتمر التمريضي هو اجتماع لفريق التمريض عشان نخطط للرعاية التمريضية وننظم شغل اليوم ونعرّف كل الأعضاء بالمعلومات الجديدة. وهو الوسيلة العملية الوحيدة اللي بتجمع أفكار وملاحظات واقتراحات الكل ونختار منها الأحسن.`,
+`قبل الوردية، الممرضة المسؤولة تجمع الفريق: تقول المهام، وكل واحدة تقول ملاحظتها عن المرضى، ونتفق على أحسن حل.`],
+
+{h:"Type of Conference :"},
+
+[`Direction – giving conference ( on duty ) .`,
+`مؤتمر إعطاء التوجيهات (في بداية الشغل).`,
+`اجتماع أول الشيفت: مين هياخد أي مريض.`],
+
+[`Patient centered conference .`,
+`مؤتمر محوره المريض.`,
+`نناقش مريض معين حالته صعبة ونخطط لرعايته.`],
+
+[`Content conference .`,
+`مؤتمر المحتوى (معلومات ومعرفة).`,
+`محاضرة قصيرة عن طريقة جديدة لاستخدام جهاز أو إجراء.`],
+
+[`Reporting conference ( off duty ) .`,
+`مؤتمر التقارير (في آخر الشغل).`,
+`آخر الشيفت بنسلّم للشيفت اللي بعده اللي حصل طول اليوم.`],
+
+[`General problem conference .`,
+`مؤتمر المشاكل العامة.`,
+`الفريق كله بيتكلم عن مشكلة في الشغل زي نقص المستلزمات ونحلها.`],
+
+{h:"1- Direction – Giving Conference “On Duty”:"},
+
+[`Is the meeting of the nursing staff at the beginning of the work shift for the specific purpose of :`,
+`هو اجتماع فريق التمريض في بداية وردية الشغل لأغراض محددة:`,
+`الساعة 7 الصبح، قبل ما نبدأ، الكل بيتجمع.`],
+
+[`Communicating job assignment .`,
+`توصيل توزيع المهام.`,
+`"فلانة هتاخد الأسرّة من 1 لـ 4".`, 1],
+
+[`Delineating areas of responsibilities .`,
+`تحديد مجالات المسؤوليات.`,
+`كل ممرضة عارفة هي مسؤولة عن إيه بالظبط.`, 1],
+
+[`Imparting the information necessary for the members to effectively care for patients .`,
+`إعطاء المعلومات اللازمة للأعضاء عشان يرعوا المرضى بفعالية.`,
+`نبّه الفريق إن مريض سرير 3 عنده حساسية من البنسلين.`, 1],
+
+[`Before starting the conference , the leader should have the assignment work sheet ready . The information to be given to the staff should be pertinent, inclusive, clear and accurate. She should give the time necessary to the members to read the contents and provide them with direction .`,
+`قبل ما يبدأ المؤتمر، القائدة لازم تكون جهزت ورقة توزيع الشغل. والمعلومات اللي هتتقال للفريق لازم تكون مناسبة وشاملة وواضحة ودقيقة. وتدّي الأعضاء الوقت اللازم يقروا المحتوى وتوجّههم.`,
+`المسؤولة تيجي بجدول التوزيع مطبوع، تدّي الفريق دقيقتين يقروه، وبعدين تشرح وتجاوب على الأسئلة.`],
+
+{h:"2- Patient – Centered Conference:"},
+
+[`Is a meeting in which problems of patient care are discussed and evaluated . The emphasis must be on the evaluation of patient needs and planning the needed nursing care .`,
+`هو اجتماع بنناقش فيه مشاكل رعاية المريض ونقيّمها. والتركيز لازم يكون على تقييم احتياجات المريض وتخطيط الرعاية التمريضية المطلوبة.`,
+`مريض مش بياكل وعنده قرحة ضغط: الفريق بيقعد يتناقش في احتياجاته ويحط خطة رعاية.`],
+
+{h:"3- Content Conference :"},
+
+[`Contains the input of knowledge needed that enables the staff to perform their work effectively .`,
+`بيدّي الفريق المعرفة اللي محتاجينها عشان يؤدوا شغلهم بكفاءة.`,
+`مؤتمر عن طريقة جديدة في العناية بالجروح عشان الكل يطبقها صح.`],
+
+{h:"4- Reporting Conference “Off Duty”:"},
+
+[`Is a conference in which members give a progressive report about the activities of the day : It has four goals :`,
+`هو مؤتمر الأعضاء بيقدموا فيه تقرير متتابع عن أنشطة اليوم. وله أربعة أهداف:`,
+`آخر اليوم كل ممرضة بتقول اللي عملته مع مرضاها.`],
+
+[`a) To report accurately and objectively relevant information about the patient .`,
+`أ) إننا نبلّغ بدقة وموضوعية بالمعلومات المهمة عن المريض.`,
+`"الضغط كان 150/90 الصبح، والساعة 12 نزل 130/80 بعد الدوا" من غير رأي شخصي.`, 1],
+
+[`b) To give reaction to the situation when it is pertinent .`,
+`ب) إننا نقدم رد فعل على الموقف لما يكون مناسب.`,
+`لو المريض اتضايق من إجراء، نقول رد فعله وإزاي اتصرفنا.`, 1],
+
+[`c) To evaluate the care in the light of the objectives .`,
+`ج) إننا نقيّم الرعاية في ضوء الأهداف.`,
+`الهدف كان إن المريض يمشي خطوتين، هل حصل؟`, 1],
+
+[`d) To update the nursing acre plan to ensure the continuity of care .`,
+`د) إننا نحدّث خطة الرعاية التمريضية عشان نضمن استمرارية الرعاية.`,
+`نعدّل الخطة عشان الشيفت اللي بعدينا يكمل صح.`, 1],
+
+{h:"5- General problem Conference:"},
+
+[`A conference in which the workers express their ideas about the work situation and try to resolve the problem .`,
+`مؤتمر العاملين بيعبروا فيه عن أفكارهم عن وضع الشغل ويحاولوا يحلوا المشكلة.`,
+`الكل بيتكلم عن زحمة الشغل وقلة الأيادي، ونقترح حل زي إعادة توزيع الورديات.`],
+
+{h:"Purposes of the Conferences :"},
+
+[`To Plan The Individualized Nursing Care: Each patient should have a nursing care plan ; the leader can gather information , give direction of how to meet the patient's needs and solve the problems and keep the plan up – to – date for continuity of care . It can be useful for evaluation`,
+`التخطيط لرعاية تمريضية فردية: كل مريض لازم يكون ليه خطة رعاية تمريضية. والقائدة تقدر تجمع المعلومات وتوجه إزاي نلبّي احتياجات المريض ونحل مشاكله، وتخلي الخطة محدّثة عشان الاستمرارية. وبرضه مفيدة في التقييم.`,
+`كل مريض ليه خطة باسمه، وفي المؤتمر القائدة بتحدّثها بآخر المعلومات.`],
+
+[`To Coordinate All The Available Services: During the conference it is the responsibility of the team leader to make members award of the different services offered to the patient by the hospital , other members of the health team and other health agencies within the community .`,
+`تنسيق كل الخدمات المتاحة: في المؤتمر مسؤولية قائدة الفريق إنها تعرّف الأعضاء بالخدمات المختلفة المقدمة للمريض من المستشفى، وباقي أعضاء الفريق الصحي، والجهات الصحية الأخرى في المجتمع.`,
+`تقول للفريق: "المريض ده عنده جلسات علاج طبيعي، وهيتابع في الوحدة الصحية بعد الخروج".`],
+
+[`To Promote Spirit Of Cooperation Between Staff Members: As members work together they learn more about their patients and participate in the planning of care , as a result , the spirit of the members is stimulated by a feeling of satisfaction due to better performance .`,
+`تشجيع روح التعاون بين أعضاء الفريق: لما الأعضاء بيشتغلوا مع بعض بيعرفوا أكتر عن مرضاهم ويشاركوا في تخطيط الرعاية، فبتتحمّس روحهم بإحساس الرضا بسبب الأداء الأحسن.`,
+`ممرضة جديدة بتشارك في الاجتماع وبتقول رأيها، فتحس إنها جزء من الفريق وتشتغل بحماس.`],
+
+[`To Increase the Understanding: To acquire more understanding through supervision and instructions that can be given during the conference.`,
+`زيادة الفهم: إننا نكتسب فهم أكتر من خلال الإشراف والتعليمات اللي بتتقال في المؤتمر.`,
+`القائدة تشرح لممرضة جديدة ليه بنقيس العلامات الحيوية كل ساعة لمريض معين.`]
+
+]},
+
+{ id:"ncp", icon:"📋", title:"II. Nursing Care Plan", items:[
+
+[`Nursing care plan is written for individual patients. It is a practical way of implementing the nursing process to work.`,
+`خطة الرعاية التمريضية بتتكتب لكل مريض لوحده. وهي طريقة عملية لتطبيق عملية التمريض.`,
+`ورقة باسم المريض فيها مشاكله وإيه اللي هنعمله.`],
+
+[`Producing a nursing care plan involves:`,
+`عمل خطة الرعاية التمريضية بيشمل:`,
+`خطوتين أساسيتين، اتنين تحت.`],
+
+[`Assessing the patient's needs.`,
+`تقييم احتياجات المريض.`,
+`نسأل ونفحص المريض عشان نعرف محتاج إيه.`, 1],
+
+[`Planning appropriate care.`,
+`تخطيط الرعاية المناسبة.`,
+`نكتب إيه اللي هنعمله على حسب احتياجه.`, 1],
+
+[`The nursing care plan can then be given or modified and adopted as necessary using the written record.`,
+`وبعد كده الخطة ممكن تتقدم أو تتعدّل وتتبنّى حسب الحاجة باستخدام السجل المكتوب.`,
+`لو حالة المريض اتغيرت، بنرجع للورقة ونعدّل.`],
+
+[`Nursing care plan is a written record of goals and objectives of care as well as summary of definite nursing measures that are used by all those who care for the patient .`,
+`خطة الرعاية التمريضية هي سجل مكتوب لأهداف الرعاية وكمان ملخص لإجراءات التمريض المحددة اللي بيستخدمها كل اللي بيرعوا المريض.`,
+`أي ممرضة تيجي الشيفت التاني تقرا الخطة وتعرف الهدف وإيه اللي المفروض يتعمل.`],
+
+{h:"Purposes of Nursing Care Plan:"},
+
+[`To indicate the objectives of nursing intervention.`,
+`توضيح أهداف التدخل التمريضي.`,
+`الهدف: "المريض يمشي بمساعدة خلال 3 أيام".`],
+
+[`To provide a guide to patient – centered care.`,
+`تقديم دليل لرعاية محورها المريض.`,
+`الخطة بتفكّرنا نبصّ على احتياج المريض هو.`],
+
+[`To provide a mean of communication.`,
+`توفير وسيلة اتصال.`,
+`الممرضة بتسلّم للتانية بالخطة المكتوبة بدل الكلام الشفهي.`],
+
+[`To provide a guide for supervision.`,
+`توفير دليل للإشراف.`,
+`المشرفة تفتح الخطة وتتأكد إن الشغل ماشي عليها.`],
+
+[`To provide a basis for evaluating nursing care.`,
+`توفير أساس لتقييم الرعاية التمريضية.`,
+`نقارن اللي حصل بالأهداف المكتوبة ونعرف نجحنا ولا لأ.`],
+
+{h:"The plan should include:"},
+
+[`Problems concerning the giving of delegated medical orders .`,
+`مشاكل متعلقة بتنفيذ الأوامر الطبية المفوّضة.`,
+`مريض بيرفض ياخد الدوا في معاده، فنكتب المشكلة ونحلها.`],
+
+[`Problems concerning information to be given to the patient and his relatives.`,
+`مشاكل متعلقة بالمعلومات اللي لازم تتقال للمريض وأقاربه.`,
+`أهل المريض محتاجين يعرفوا طريقة الخروج وهما مش فاهمين.`],
+
+[`Problems which affect the interpersonal relationships between the patient and the workers .`,
+`مشاكل بتأثر على العلاقات الشخصية بين المريض والعاملين.`,
+`مريض بيتضايق من ممرضة معينة، فنكتب ده ونحاول نحله.`],
+
+[`Problems which affect the given nursing procedures for a particular patient`,
+`مشاكل بتأثر على الإجراءات التمريضية المقدمة لمريض معين.`,
+`مريض بيخاف من الحقن، فبنكتب إننا لازم نطمنه قبل الإجراء.`],
+
+[`Problems concerning the patient's response to his illness and his ability to care for him self.`,
+`مشاكل متعلقة باستجابة المريض لمرضه وقدرته على رعاية نفسه.`,
+`مريض مش متقبل إنه سكر وبيرفض ياخد الإنسولين بنفسه.`],
+
+[`Suggestions for possible solutions to the problems.`,
+`اقتراحات لحلول ممكنة للمشاكل.`,
+`للمريض اللي بيخاف: نشرح له خطوة خطوة وندّيه فرصة يجرب.`],
+
+{h:"The Plan Should Not Include :"},
+
+[`Confidential information about the patient .`,
+`معلومات سرية عن المريض.`,
+`مينفعش نكتب في الخطة تفاصيل شخصية جداً مش لازم الكل يعرفها.`],
+
+[`Suggestions which are repetitions of hospital routine or doctors' orders`,
+`اقتراحات هي تكرار لروتين المستشفى أو أوامر الأطباء.`,
+`مش هنكتب "قيس الضغط الصبح" لو ده روتين القسم أصلاً أو في أوامر الدكتور.`],
+
+{h:"Components of Nursing Care Plan: Nursing history which includes:"},
+
+{h:"I. Health information :"},
+
+[`Current diagnosis and operation , past and present health problems and allergies .`,
+`التشخيص الحالي والعملية، والمشاكل الصحية السابقة والحالية، والحساسية.`,
+`مريض اتشخّص التهاب زايدة وعمل عملية، عنده سكر من 5 سنين، وعنده حساسية من البنسلين.`],
+
+[`Social information : such as occupation , etc .`,
+`معلومات اجتماعية: زي الوظيفة وغيرها.`,
+`المريض سواق، ومتجوز، وعنده 3 عيال.`],
+
+[`Patient's perception of the reason for his / her admission .`,
+`فهم المريض لسبب دخوله المستشفى.`,
+`المريض بيقول: "أنا دخلت عشان الضغط عالي"، فنعرف هو فاهم ولا لأ.`],
+
+[`Patient's description of his usual pattern of daily living activities such as sleep , diet , bowel , habits , etc …`,
+`وصف المريض لنمط أنشطة حياته اليومية المعتادة زي النوم والأكل والإخراج وعاداته.`,
+`بينام 6 ساعات، وبياكل 3 وجبات، وبيشرب شاي كتير.`],
+
+[`Patients' and / or the nurse's description of patient's condition including hearing, vision, mobility, … etc.`,
+`وصف المريض و/أو الممرضة لحالة المريض بما فيها السمع والبصر والحركة وغيرها.`,
+`المريض سمعه تقيل ومحتاج نظارة ومبيقدرش يمشي لوحده.`],
+
+{h:"II. Care plan ( 4 steps ) :"},
+
+[`Assessment, Planning, Implementation, and Evaluation`,
+`خطوات خطة الرعاية 4: التقييم، التخطيط، التنفيذ، التقويم.`,
+`ببساطة: نشوف المشكلة ← نخطط ← ننفذ ← نشوف نجحنا ولا لأ.`],
+
+{h:"A. Assessment :"},
+
+[`includes :`,
+`التقييم بيشمل:`,
+`خطوتين: نجمع ونفسّر.`],
+
+[`Collection of information .`,
+`جمع المعلومات.`,
+`نسأل المريض ونقيس العلامات الحيوية ونقرا الملف.`, 1],
+
+[`Interpreting the information .`,
+`تفسير المعلومات.`,
+`ضغط 180/110 يبقى ده مش طبيعي ومحتاج تدخل.`, 1],
+
+[`Defining patient's needs and problems : Needs and problems are not identical , although one grows out of or is related to the other . Needs are concerned with the process necessary for life and with a person's response to his environment . A problem arises when a conflict occurs between one or more of these needs as a result of the patient's disease , e.g. body needs for fluids if the patient is :`,
+`تحديد احتياجات المريض ومشاكله: الاحتياجات والمشاكل مش نفس الحاجة، رغم إن واحدة بتطلع من التانية أو مرتبطة بيها. الاحتياجات بتتعلق بالعمليات الضرورية للحياة وباستجابة الإنسان لبيئته. والمشكلة بتظهر لما يحصل تعارض بين واحدة أو أكتر من الاحتياجات دي بسبب مرض المريض. مثال: احتياج الجسم للسوائل لو المريض:`,
+`الاحتياج: الجسم محتاج مية. المشكلة: المريض مش قادر يشربها لسبب ما.`],
+
+[`Nauseated , refuses to take fluids .`,
+`عنده غثيان ويرفض يشرب سوائل.`,
+`مريض مستفرغ وبيقول "مش قادر أشرب".`, 1],
+
+[`Willing to drink but unable to do so because of oral surgery .`,
+`عايز يشرب لكن مش قادر بسبب عملية في الفم.`,
+`مريض عمل جراحة في الفك وعايز يشرب بس مبيعرفش.`, 1],
+
+[`Limited in his / her fluid intake but insists on drinking too much`,
+`السوائل بتاعته محدودة لكن مصمم يشرب كتير.`,
+`مريض فشل كلوي ممنوع من السوائل وبيشرب مية كتير.`, 1],
+
+[`In each case , the need and the problem involved is the fluid intake , however , in each situation the cause of the problems different .`,
+`في كل حالة الاحتياج والمشكلة هما تناول السوائل، لكن في كل موقف سبب المشكلة مختلف.`,
+`التلات مرضى مشكلتهم السوائل، بس واحد بسبب غثيان، وواحد بسبب جراحة، وواحد بسبب إصراره.`],
+
+[`The situation must be specific to the cause and individualized for the patient .`,
+`لازم الموقف يتحدد حسب السبب ويتفصّل على المريض نفسه.`,
+`الحل مع المريض اللي مستفرغ غير الحل مع المريض اللي بيشرب كتير.`],
+
+{h:"B. Planning :"},
+
+[`The second step is planning the information obtained ; this will enable the nurse to identify the patient's nursing problems , these are then included in the care plan .`,
+`الخطوة التانية هي التخطيط للمعلومات اللي اتجمعت، وده بيمكّن الممرضة تحدد مشاكل المريض التمريضية، وبعدين بتتحط في خطة الرعاية.`,
+`الممرضة بتحدد من المعلومات إن المريض عنده ألم وصعوبة نوم، وتكتبهم كمشاكل.`],
+
+[`Once the patient's needs and problems have been listed , the nurse can then plan the necessary nursing care . It includes :`,
+`أول ما احتياجات ومشاكل المريض تتسجل، الممرضة تقدر تخطط الرعاية التمريضية اللازمة. وده بيشمل:`,
+`ثلاث خطوات تحت.`],
+
+[`1. Setting, the goals (or expected outcome for each problem) considering priority .`,
+`1. وضع الأهداف (أو النتيجة المتوقعة لكل مشكلة) مع مراعاة الأولوية.`,
+`مشكلة الألم أولوية قبل مشكلة النوم، فنحط هدف: "الألم يقل خلال ساعة".`, 1],
+
+[`2. Deciding what nursing care will meet the stated goals and writing the appropriate instructions .`,
+`2. تحديد إيه الرعاية التمريضية اللي هتحقق الأهداف المحددة، وكتابة التعليمات المناسبة.`,
+`نكتب: "إدي المسكن في معاده، وغيّر وضعية المريض".`, 1],
+
+[`3. Deciding when to review or evaluate each problem to see if the goal is being achieved .`,
+`3. تحديد إمتى هنراجع أو نقيّم كل مشكلة عشان نشوف الهدف اتحقق ولا لأ.`,
+`نقيّم الألم بعد ساعة من المسكن.`, 1],
+
+{h:"Guidelines for planning care:"},
+
+[`Various techniques can be used during planning to determine patient's needs and problems :`,
+`في تقنيات مختلفة نقدر نستخدمها أثناء التخطيط عشان نحدد احتياجات ومشاكل المريض:`,
+`تلات طرق تحت.`],
+
+[`(1) Maslow's hierarchy of needs: Needs are grouped into five categories arranged in the order of their importance to individuals and carrying out life processes .`,
+`(1) هرم ماسلو للاحتياجات: الاحتياجات بتتقسم لخمس فئات مرتبة حسب أهميتها للأفراد وللقيام بعمليات الحياة.`,
+`الأول احتياج الأكل والنفس، قبل الأمان، قبل الانتماء. فنبدأ بالأهم.`, 1],
+
+[`(2) Nursing problems: Another valuable guide to the planning of nursing care . It can be used as an aim of nursing care to be achieved or an nursing problems to be solved, e.g. .`,
+`(2) المشاكل التمريضية: دليل مفيد تاني للتخطيط للرعاية التمريضية. ممكن تتستخدم كهدف للرعاية نحققه أو كمشاكل تمريضية نحلها، مثلاً:`,
+`ناخد قائمة الأهداف التمريضية ونشوف المريض محتاج إيه فيها.`, 1],
+
+[`To maintain good hygiene and physical comfort .`,
+`المحافظة على نظافة كويسة وراحة جسدية.`,
+`استحمام وتغيير ملابس المريض.`, 1],
+
+[`To promote safety through prevention of accidents .`,
+`تعزيز الأمان عن طريق منع الحوادث.`,
+`رفع جوانب السرير لمريض معرّض للسقوط.`, 1],
+
+[`To promote optimal activity , exercise , rest and sleep .`,
+`تعزيز النشاط والتمارين والراحة والنوم بشكل أمثل.`,
+`مريض راقد نخليه يتحرك شوية، ونخلّيه ينام كفاية.`, 1],
+
+[`(3) Health strength and limitations: In this method , the nurse lists the strengths of the patient who is able and willing to care for himself and what he understands , them she lists the weaknesses or limitations of the patient who is unable or unwilling to care for himself , and what he / she does not accept or understand . When planning his / her care , the nurse will try to use some of patient's strength to help him overcome his weakness .`,
+`(3) نقاط القوة والقيود الصحية: في الطريقة دي الممرضة بتسجّل نقاط القوة عند المريض القادر والراغب في رعاية نفسه وإيه اللي بيفهمه، وبعدين بتسجّل نقاط الضعف أو القيود عند المريض غير القادر أو غير الراغب يرعى نفسه، وإيه اللي مش بيقبله أو مش بيفهمه. وعند التخطيط، الممرضة هتحاول تستخدم بعض نقاط قوة المريض عشان تساعده يتغلب على ضعفه.`,
+`مريض سكر: قوته إنه فاهم الأكل وعايز يتحسن، وضعفه إنه بيخاف من الحقن. نستخدم رغبته في التحسن عشان نشجعه يتعلم الإنسولين.`, 1],
+
+{h:"C. Implementation :"},
+
+[`Is the third step in the care plan in which nursing instructions are carried out . Consideration must be given to how the implementation of instructions is recorded.`,
+`الخطوة التالتة في خطة الرعاية، وفيها بتتنفذ التعليمات التمريضية. ولازم ناخد في الاعتبار إزاي تنفيذ التعليمات هيتسجّل.`,
+`ننفذ الإجراء، وبعدين نكتب في الملف عملنا إيه وإمتى.`],
+
+{h:"D. Evaluation :"},
+
+[`It is the last step in planning nursing care . It is essential to determine if the care has been effective and this involves deciding and measuring how the specific nursing goals have been met . It is a continuing process that assesses and measures the quality .`,
+`هو آخر خطوة في تخطيط الرعاية التمريضية. لازم نحدد إذا كانت الرعاية فعّالة، وده معناه إننا نقرر ونقيس الأهداف التمريضية المحددة اتحققت قد إيه. وهي عملية مستمرة بتقيّم وتقيس الجودة.`,
+`الهدف كان إن الألم يقل؛ بعد ساعة نسأل المريض: قل ولا لأ؟`],
+
+{h:"Progress Record:"},
+
+[`The final part of the nursing care plan is the progress record .`,
+`الجزء الأخير من خطة الرعاية التمريضية هو سجل التقدم.`,
+`ورقة في آخر الخطة بنسجل فيها تطور حالة المريض.`],
+
+[`It can be used to record day to day progress or not can be written about progress with each nursing problem .`,
+`ممكن نستخدمه لتسجيل التقدم يوم بيوم، أو ممكن نكتب فيه عن التقدم في كل مشكلة تمريضية.`,
+`"اليوم الأول: الألم 8/10. اليوم التاني: 5/10".`],
+
+{h:"Keeping The Plan Up – To – Date :"},
+
+[`During rounds .`,
+`أثناء الجولات على المرضى.`,
+`وإحنا بنلف على المرضى لو لقينا تغيير نحدّث الخطة.`],
+
+[`When reviewing the kardex .`,
+`عند مراجعة الكاردكس.`,
+`نفتح الكاردكس ونلاقي أمر جديد فنضيفه للخطة.`],
+
+[`When shift report is given .`,
+`عند تسليم تقرير الوردية.`,
+`وإحنا بنسلّم الشيفت نضيف أي جديد في الخطة.`],
+
+[`At the nursing conference.`,
+`في المؤتمر التمريضي.`,
+`في الاجتماع الفريق كله يقول ملاحظاته ونحدّث الخطة.`]
+
+]}
+
+];
+
+/* ===== RENDER ===== */
+const app = document.getElementById('app');
+const chips = document.getElementById('chips');
+let totalPts = 0;
+
+SECTIONS.forEach((s, si) => {
+  let n = 0;
+  let body = '';
+  s.items.forEach(it => {
+    if (it.h) { body += `<div class="subhead">${it.h}</div>`; return; }
+    n++; totalPts++;
+    const sub = it[3] ? ' sub' : '';
+    body += `<div class="pt${sub}">
+      <div class="pt-en" onclick="this.parentElement.classList.toggle('done')"><div class="pt-n">${n}</div><div>${it[0]}</div></div>
+      <div class="pt-ar"><span class="tag">شرح</span>${it[1]}</div>
+      <div class="pt-ex"><span class="tag">عشان تفهمها</span>${it[2]}</div>
+    </div>`;
+  });
+  app.insertAdjacentHTML('beforeend', `
+    <section class="sec" id="${s.id}">
+      <div class="sec-head">
+        <div class="sec-icon">${s.icon}</div>
+        <div class="sec-title">${s.title}</div>
+        <div class="sec-count">${n} points</div>
+      </div>
+      <div class="sec-body">${body}</div>
+    </section>`);
+  chips.insertAdjacentHTML('beforeend', `<a class="chip" href="#${s.id}" data-id="${s.id}">${s.icon} ${s.title.split('—')[0].split('&')[0].trim()}</a>`);
+});
+document.getElementById('totalBadge').textContent = totalPts + ' points';
+document.getElementById('secBadge').textContent = SECTIONS.length + ' sections';
+
+/* progress bar + active chip */
+const secEls = [...document.querySelectorAll('.sec')];
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  document.getElementById('prog-bar').style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+  let cur = secEls[0].id;
+  secEls.forEach(el => { if (el.getBoundingClientRect().top < 160) cur = el.id; });
+  document.querySelectorAll('.chip').forEach(c => {
+    const on = c.dataset.id === cur;
+    c.classList.toggle('active', on);
+    if (on) { const p = c.parentElement; p.scrollTo({ left: c.offsetLeft - 40, behavior: 'smooth' }); }
+  });
+}, { passive: true });
+
+/* toggles */
+function toggler(btnId, cls) {
+  const b = document.getElementById(btnId);
+  b.addEventListener('click', () => { document.body.classList.toggle(cls); b.classList.toggle('off'); });
+}
+toggler('btnAr', 'hide-ar');
+toggler('btnEx', 'hide-ex');
+
+/* theme */
+const themeBtn = document.getElementById('themeBtn');
+let theme = 'light';
+try { theme = localStorage.getItem('theme') || 'light'; } catch (e) {}
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  try { localStorage.setItem('theme', t); } catch (e) {}
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+</script>
+</body>
+</html>
