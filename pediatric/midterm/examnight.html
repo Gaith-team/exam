@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=IBM+Plex+Sans+Arabic:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--teal:#0891b2;--teal-d:#0e5a73;--blue:#dce8f3;--bd:#c2d4e6;--ok:#059669;--no:#e11d48;--rev:#6366f1;--txt:#0a1a33;--grad:linear-gradient(135deg,#071226 0%,#0c2a4d 55%,#0e5a73 100%)}
+body{font-family:'IBM Plex Sans Arabic','Space Grotesk',Arial,sans-serif;background:#eaf1f8;color:var(--txt);font-size:14px}
+header{background:var(--grad);color:#fff;text-align:center;padding:12px;font-size:18px;font-weight:700;position:relative;border-bottom:2px solid #22d3ee}
+header .brand{position:absolute;right:16px;top:8px;font-weight:bold;font-size:14px}
+header a{position:absolute;left:16px;top:11px;color:#fff;font-size:13px;text-decoration:none}
+.wrap{max-width:1280px;margin:0 auto;padding:8px 10px 20px}
+.topinfo{background:var(--blue);border:1px solid var(--bd);padding:4px 8px;font-size:13px;margin-bottom:8px}
+.topinfo b{color:var(--teal)}
+.layout{display:grid;grid-template-columns:1fr 240px;gap:14px;align-items:start}
+.main{background:#fff;border:1px solid var(--bd);min-height:470px;display:flex;flex-direction:column;
+ background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='70'><text x='8' y='45' transform='rotate(-20 75 35)' font-size='14' font-family='Arial' fill='%23000' fill-opacity='.07'>GHAITH TEAM</text></svg>")}
+.qhead{display:flex;justify-content:space-between;align-items:center;padding:12px 6px 6px;margin:0 6px;border-bottom:1px solid var(--bd)}
+.qhead b{font-size:13px}
+.fs button{background:#6366f1;color:#fff;border:0;padding:6px 12px;margin-left:3px;border-radius:2px;cursor:pointer;font-weight:bold}
+.qbody{padding:8px 12px;flex:1}
+.qtext{font-size:13px;line-height:1.7;margin-bottom:18px;direction:ltr;text-align:left}
+.opt{display:flex;align-items:center;gap:8px;margin:0 0 16px;cursor:pointer;direction:ltr;text-align:left;font-size:13px}
+.opt input{accent-color:var(--teal);cursor:pointer}
+.bar{display:flex;justify-content:space-between;padding:10px;gap:6px;flex-wrap:wrap;border-top:1px solid var(--bd);margin:0 6px 6px}
+.b{background:linear-gradient(135deg,#0891b2,#6366f1);color:#fff;border:0;padding:9px 12px;font-weight:bold;font-size:13px;border-radius:2px;cursor:pointer}
+.b:hover{filter:brightness(1.12)}
+.b.gray{background:#071226}
+.side>div{background:var(--blue);border:1px solid var(--bd);margin-bottom:10px;padding:8px}
+.timer{text-align:center;background:none!important;border:0!important}
+.timer small{font-size:13px}
+.timer .t{font-size:30px;color:#0891b2;margin-top:4px}
+.timer .t.warn{color:#c27b0a}.timer .t.danger{color:#c8372d}
+.leg{display:grid;grid-template-columns:1fr 1fr;gap:8px 6px;font-size:10px;margin-top:8px}
+.leg div{display:flex;align-items:center;gap:6px}
+.sq{min-width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:bold;border-radius:2px;border:1px solid transparent}
+.s-ans{background:var(--ok)}.s-no{background:#f59e0b}.s-rev{background:var(--rev)}.s-nv{background:#fff;color:#333;border-color:#9bb0a2}
+.nav{display:flex;flex-wrap:wrap;gap:6px;max-height:260px;overflow:auto;background:#dce8f3}
+.nav .sq{width:24px;height:24px;cursor:pointer;font-size:12px}
+.nav .cur{outline:2px solid #071226;outline-offset:0}
+.endrow{text-align:center}
+.endrow .b{width:90px}
+footer{text-align:center;padding:16px;font-size:12px;color:#a9bdd6;background:#071226;border-top:2px solid #0891b2;margin-top:10px}
+footer a{color:#38bdf8!important}
+footer a{color:#229ED9;text-decoration:none}
+/* results */
+.res{background:#fff;border:1px solid var(--bd);padding:20px;max-width:900px;margin:10px auto}
+.score{text-align:center;padding:10px 0 18px}
+.score .n{font-size:48px;font-weight:900;color:var(--teal)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}
+.stats div{background:var(--blue);padding:10px;text-align:center;border-radius:4px}
+.stats b{display:block;font-size:20px}
+.sec{background:var(--ok);color:#fff;padding:8px 12px;font-weight:bold;margin:22px 0 10px}
+.sec.bad{background:var(--no)}
+.it{border:1px solid var(--bd);border-left:4px solid var(--ok);padding:12px;margin-bottom:8px;background:#fafcff;direction:ltr;text-align:left}
+.it.bad{border-left-color:var(--no)}
+.it .q{font-weight:bold;font-size:13px;margin-bottom:6px;line-height:1.6}
+.it .r{font-size:12px;margin-top:4px}
+.tag{padding:1px 7px;border-radius:3px;color:#fff;font-size:11px;font-weight:bold;margin-right:6px}
+.tag.y{background:var(--no)}.tag.g{background:var(--ok)}
+.exp{font-size:12px;color:#555;margin-top:6px;background:#eef6f4;padding:6px 8px;border-radius:3px}
+.acts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.hide{display:none}
+@media(max-width:820px){.layout{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}header a{display:none}}
+.qtext img{display:block;max-width:100%;max-height:260px;margin:0 auto 12px;border-radius:8px;background:#fff}
+.it .q img{max-height:90px;display:block;margin:6px 0;border-radius:6px}
+</style>
+</head>
+<body>
+<header><a href="https://gaith-team.github.io/exam/">← رجوع</a>بصمجة غيث<span class="brand">GHAITH TEAM</span></header>
+<div class="wrap">
+ <div id="exam">
+  <div class="topinfo">Total questions in exam: <b id="tot">0</b> | Answered: <b id="ans">0</b></div>
+  <div class="layout">
+   <div class="main">
+    <div class="qhead"><b id="qno"></b><div class="fs"><button onclick="fs(-1)">A-</button><button onclick="fs(0)">A</button><button onclick="fs(1)">A+</button></div></div>
+    <div class="qbody" id="qbody"></div>
+    <div class="bar">
+     <button class="b" onclick="saveNext()">Save &amp; Next</button>
+     <div style="display:flex;gap:4px;flex-wrap:wrap">
+      <button class="b" onclick="mark()">Mark for Review</button>
+      <button class="b" onclick="skip()">Skip</button>
+      <button class="b" onclick="prev()">Previous</button>
+     </div>
+    </div>
+   </div>
+   <div class="side">
+    <div class="timer"><small>Time Remaining</small><div class="t" id="tm">70:00</div></div>
+    <div>
+     <div>Number of questions : <b id="tot2">0</b></div>
+     <div class="leg">
+      <div><span class="sq s-ans" id="cAns">0</span>Answered</div>
+      <div><span class="sq s-no" id="cNo">0</span>Not Answered</div>
+      <div><span class="sq s-rev" id="cRev">0</span>For Review</div>
+      <div><span class="sq s-nv" id="cNv">0</span>Not Visited</div>
+     </div>
+    </div>
+    <div class="nav" id="nav"></div>
+    <div class="endrow"><button class="b gray" onclick="endTest()">End Test</button></div>
+   </div>
+  </div>
+ </div>
+ <div id="result" class="hide"></div>
+</div>
+<footer>GHAITH TEAM · <a href="https://t.me/nursing2bu" target="_blank">@nursing2bu</a></footer>
+
+<script>
+const QUESTIONS = [
+  {t:"Is a progressive increase in skills and capacity of function in adulthood?", o:["Family planning","Maturation","Growth","Development"], a:3},
+  {t:"Nurse can assess growth through observation of ......", o:["Five senses","Vital signs","Reflexes","Anthropometric measurements"], a:3},
+  {t:"Which of the following is NOT a characteristic of the principles of growth & development?", o:["Growth proceeds from the head to the toes.","Growth proceeds from the center of the body to the periphery.","Growth proceeds from the general to the specific.","Growth proceeds in a spiral fashion."], a:3},
+  {t:"Which of the following is NOT an environmental factor that influences growth and development?", o:["Geographical location","Season","O2 concentration","Race and nationality"], a:3},
+  {t:"Which of the following is considered pattern of growth and development?", o:["Continuous process","Depends on maturation","It is predictable","General to specific"], a:3},
+  {t:"Most common complications of neonatal sepsis are", o:["Septicemia","Carditis","Gastroenteritis","Chorioamnionitis"], a:0},
+  {t:"A 3-years-old child is hospitalized, parent tell the nurse that at home the child was potty trained but now he refuse to use the toilet and voiding on himself. What the nurse should tell the parent?", o:["Try potty training again while the child is hospitalized.","Reassure the parent that this is temporary and is most likely occurring because the child is hospitalized.","Advise the parent to set limits and implement discipline strategies for toilet accidents.","Recommend the parent avoids ritualistic routines until the child is not hospitalized."], a:1},
+  {t:"A 2 years old child having temper tantrum. What actions below are NOT appropriate for dealing with this situation?", o:["Attempt to stop the tantrum, Reason with the child and Leave the child alone until the tantrum stops","Protect the child from hurting himself","Ignore the behavior","Be consistent with the approach"], a:0},
+  {t:"How to calculate weight for a 3 year old child?", o:["Use formula age in year × 2 + 8","Use formula age in month × 2 + 8","Use formula age in year × 5 + 80","Use formula age in month × 5 + 80"], a:0},
+  {t:"According to Erikson's stage of development, what is the sense a 20-month old can develop?", o:["Autonomy versus shame and doubt","Trust versus mistrust","Initiative versus guilt","Industry versus inferiority"], a:0},
+  {t:"Toddler can say 50 words and 2-word sentences, at age of", o:["15 months","36 months","24 months","30 months"], a:2},
+  {t:"What is the major consequence of substance abuse among adolescents?", o:["Enhanced cognitive abilities","Improved mental health","Negative impact on brain development and academic performance","Equal opportunities for growth"], a:2},
+  {t:"What is a key characteristic of adolescence?", o:["Rapid physical growth","Stable emotional regulation","Decreased need for peer relationships","Fixed identity formation"], a:0},
+  {t:"Adolescent is presented to psychiatric nurses with manifestation of addiction to narcotics, robbery and felt rejection. Which is the expected diagnosis?", o:["An addict","Delinquency","Psychoneurosis","Ritualistic behavior"], a:1},
+  {t:"Which reflex is identified when the neonate's head, arm, and leg on one side, slowly relax?", o:["Eye blinking","Tonic neck","Grasping","Startle"], a:1},
+  {t:"A nurse is assessing a newborn at 1 minute after birth. The newborn has a heart rate of 150 b/m, a strong cry, and well-flexed muscle tone, pink body with blue hands and feet, and grimaces when suctioned. What is the newborn's APGAR score?", o:["7 score","8 score","9 score","10 score"], a:1},
+  {t:"In caring of infant with oral thrush, the mother should avoid:", o:["Give the infant Mycostatin drops","Remove the patches from the mucous membrane","Apply gentian violet locally","Mouth care after feeding"], a:1},
+  {t:"A neonate has skin lesions that fail to heal. The lesions are erythematous papules, reported to be itchy and exhibit exudate pus, this condition refer to:", o:["Tetanus Neonatorum","TORCH infection","Septicemia","Impetigo"], a:3},
+  {t:"A 3 days old neonate born by normal vaginal delivery presenting with eyelid redness, swelling and a profuse purulent eye discharge. What is the likely causative organism in this case?", o:["Streptococci","Neisseria Gonorrhea","Cytomegaly","Staphylococci"], a:1},
+  {t:"Hani is a newborn presenting with low birth weight, microcephaly with unusual rash, jaundice and thrombocytopenia. These clinical signs may be index of suspicion for:", o:["Tetanus Neonatorum","TORCH infection","Impetigo","Umbilical infection"], a:1},
+  {t:"A 7 days old neonate presents to the pediatric emergency with fever, neck stiffness and muscular contractions and WBC is 8000 to 12,000. What is the most likely diagnosis?", o:["Umbilical infection","Sepsis","Tetanus","Rubella"], a:2},
+  {t:"Which one of the following statements best describes a physiological goiter?", o:["It occurs in area where is lacking in Iodine as in mountains","Enlargement of thyroid, which occur in girls at time of puberty.","Tumor localized in the thyroid tissue.","Errors in synthesis of thyroid hormones."], a:1},
+  {t:"During the period of 8 to 11 years, children are interested in:", o:["Religion","Body posture","Other","Socialization"], a:3},
+  {t:"A child is able to recognize months, days, numbers at which of the following age:", o:["5 years","6 years","7 years","8 years"], a:3},
+  {t:"Which of the following best describes the development of a 10 years old child?", o:["Afraid from separation","Same-sex peers are more important for his life.","School-age children are not concerned about how they appear to others","Children are interested in sexualization."], a:1},
+  {t:"The child is 7-years-old. What stage of psychosocial development should this child be in?", o:["Autonomy vs. Shame and Doubt","Initiative vs. Guilt","Industry vs. Inferiority","Identity vs. Role Confusion"], a:2},
+  {t:"The role of the peer group in the life of school-age children is that it:", o:["Gives them an opportunity to learn dominance and hostility.","Allows them to remain dependent on their parents for a longer time.","Decreases their need to learn appropriate sex roles.","Provides them with security as they gain independence from their parents."], a:3},
+  {t:"According to Piaget, what is the first stage of cognitive development, occurring from birth to two years of age?", o:["Sensorimotor stage","Infant cognition stage","Object permanance stage","Sensory information stage"], a:0},
+  {t:"What milestone should an infant aged 8-9 months be able to successfully perform?", o:["Begin walking","Say several words","Sit without support","Follow basic commands"], a:2},
+  {t:"Most children tripple their birth weight by:", o:["6 months","9 months","12 months","18 months"], a:2},
+  {t:"The nurse is assessing the growth and development of a 5-month-old. Which of the following would be considered a normal weight for this infant?", o:["Quadruple the birth weight","Triple the birth weight","Two and a half times the birth weight","Double the birth weight"], a:3},
+  {t:"Calculate the weight of infant at the age of 7 months, whose birth weight was 3 kg.", o:["6.5 kg","8.5 kg","8 kg","7.5 kg"], a:3},
+  {t:"The nurse is discussing development of motor skills in the preschool-age group with a group of nursing students. Which of the following statements is most accurate regarding the gross motor skills of a 4-year-old?", o:["The child can hop on one foot.","The child can walk backwards with heel to toe.","The child can jump rope.","The child can throw and catch a ball."], a:0},
+  {t:"A pre-school child stands erect with a more ________ posture", o:["Slender","Obesity","Disturbed","Ugly"], a:0},
+  {t:"Thinking in preschool aged children is ________", o:["Egocentric and concrete","Undefined","Mental","Disturbed"], a:0},
+  {t:"A mother tells a nurse that her child has recently established some friendships for the first time. In which age group do you expect this child to be?", o:["Adolescence","Preschool","School age","Toddler"], a:1},
+  {t:"Nursing students are reviewing information about the cognitive development of preschoolers. The students demonstrate understanding of the information when they identify that a 3 years old is in which of the following stages as identified by Piaget?", o:["Tertiary circular reaction","Primary circular reaction","Preoperational thought","Coordination of secondary schema"], a:2},
+  {t:"When assessing the umbilical stump, the nurse observed presence of oozing, and the cord is moist. What is the appropriate intervention should be done:", o:["Give the infant broad spectrum antibiotic","Nothing as this normal","Clean with warm water","Clean the discharge with sterile saline"], a:0},
+  {t:"Ahmed aged 4-months old after complete antibiotic course for treatment of respiratory infection he presents with creamy white patches on his tongue, roof of mouth and gums. What is the appropriate treatment:", o:["Remove this patches from the mucous membrane then mouth care.","Give the infant systemic antibiotic","Apply gentian violet locally","Apply antibiotic locally"], a:2},
+  {t:"One month old infant is admitted to unit with a severe case of impetigo. While providing care to this infant, the nurse should follow:", o:["Droplet precautions","Standard precautions only","Contact precautions","Airborne precaution"], a:2},
+  {t:"Which is effective treatment for impetigo:", o:["Systemic antibiotic","Locally gentian violet.","Systemic antiviral","Locally antifungal"], a:0},
+  {t:"One week age neonate admitted to hospital with temperature 40°C, irritability, and restless, cannot move his mouth or suck with spasm of the muscles of the jaw. Which of the following organism is responsible about this case:", o:["Streptococci","Tetanus palladium","Virus","Staphylococci"], a:1},
+  {t:"The toddler period characterized by ......", o:["Growth slow considerably and most dramatic advances occur in language and interpersonal skills","Growth faster than infancy period","Growth more than development","Growth and development equal to infancy period"], a:0},
+  {t:"The toddler can say 20 words at:", o:["15 months","36 months","18 months","30 months"], a:2},
+  {t:"The child's self-concept as a girl or a boy is probably completed at the stage of:", o:["Infancy","Preschool","School","Toddler"], a:3},
+  {t:"Toddler can jump down from chairs as a gross motor development at age", o:["18 months","24 months","30 months","15 months"], a:2},
+  {t:"Calculate weight for child has 1.5 year:", o:["11 kg","10 kg","9 kg","8 kg"], a:0},
+  {t:"Toddler can open doors by turning doorknobs as a fine motor development, at the age of:", o:["18 months","24 months","30 months","15 months"], a:1},
+  {t:"A mother of a term neonate asks the pediatric nurse about the blue-back pigmented, at the base of the back and on the buttocks. Which of the following correctly describes this finding?", o:["Lanugo","Milia","Mongolian spots","Vernix caseosa"], a:2},
+  {t:"A newborn's mother is alarmed to find small amounts of blood on her newborn girl's diaper. When the nurse checks the newborn's urine it is straw colored and has no offensive odor. This condition explained as:", o:["\"It appears your baby has a kidney infection\"","Breast-fed babies often experience this type of bleeding problem due to lack of vitamin C in the breast milk\"","The baby probably passed a small kidney stone\"","Pseudo menstruation is related to the withdrawal of maternal hormones."], a:3},
+  {t:"The newborn's stomach capacity is ------", o:["40 to 50 ml","50 to 60 ml","60 to 70 ml","70 to 80 ml"], a:1},
+  {t:"Anterior fontanel is completely closed at:", o:["9-11 months","11-12 months","12-16 months","12-18 months"], a:3},
+  {t:"Which of the following are considering normal problem of newborn?", o:["Occasional regurgitation or vomiting","Significant repeated vomiting","Appearance of whitish patches on the tongue","Appearance of yellow coloration of eyes and skin."], a:0},
+  {t:"A pediatric nurse assessing a newborn baby one minute APGAR score, he noted the following: heart rate < 100 beats/min, some flexion, blue at extremities, pink body, grimace/feeble cry when stimulated. What is the neonate's Apgar score?", o:["Apgar score 1","Apgar score 2","Apgar score 3","Apgar score 4"], a:3},
+  {t:"Which of the following is considered the main cause of posture defects in adolescent female?", o:["Breast developments","Over eating with inactivity","Wearing comfortable shoes","Watching TV during toddler stage."], a:0},
+  {t:"Adolescent female suffering from severe neurosis and need psychiatric help, what is the adolescent female problem?", o:["Severe psychoneurosis","Delinquency","Masturbation","Schizophrenia"], a:0},
+  {t:"Which of the following is considered the main need for adolescent?", o:["Making dependent relationship with the family","Integration of his personality for future responsibility","Separation from opposite sex","Proper nutrition and exercise"], a:1},
+  {t:"Regarding significant consequence for premenstrual syndrome upon the female adolescent, what is the FALSE?", o:["Mood swings","Lower achievements in high school","Higher level of concentration","Change in libido"], a:2},
+  {t:"The infant can sit down from a standing position alone at:", o:["10 months","9 months","12 months","8 months"], a:2},
+  {t:"Infant can drink from cup with assistance at:", o:["9 months","8 months","10 months","12 months"], a:1},
+  {t:"By which one of the following, the pediatric nurse can assess infant's development:", o:["Observation of motor progress","Measurement of head circumference","Teeth eruption","Observation for closure of the fontanel"], a:0},
+  {t:"In which of the following ages the infant's chest circumference is equal to head circumference?", o:["6 months","9 months","12 months","15 months"], a:2},
+  {t:"The oral stage of development according to \"Freud\" extends from?", o:["Birth to 10 months.","Birth to 12 months.","Birth to 15 months.","Birth to 18 months."], a:3},
+  {t:"Process by which the biological changes occur in sequential order and give children new abilities, this is called:", o:["Family planning","Socialization","Maturation","Development"], a:2},
+  {t:"The principles of growth and development are:", o:["Each stage occurs separately and not depends upon the preceding one.","Child development is unpredictable during the life span.","Early development is less critical than later development.","All children go through a normal sequence of development, but not in the same rate."], a:3},
+  {t:"Sana learnt to hold a glass and a bottle before she could hold a pen or button her shirt. This example indicates that --------", o:["Development is unidimensional.","Direction of development is cephalo-caudal.","Direction of development is proximo-distal.","The direction follows a random pattern."], a:2},
+  {t:"The pace of development varies from one child to another, but it follows ...... pattern", o:["a toe-to-head","a haphazard","an unpredictable","a sequential and orderly"], a:3},
+  {t:"Growth in height and weight of children is an example of", o:["Quantitative change","Qualitative change","Change in affective domain","Change in cognitive domain"], a:0},
+  {t:"While performing physical assessment of a 6 month-old, the nurse notes that the infant's anterior fontanel is still slightly open. Which of the following is the nurse's most appropriate action?", o:["Notify the physician immediately because there is a problem.","Perform an intensive neurological examination.","Do nothing because this is a normal finding for the age.","Perform an intensive developmental examination"], a:2},
+  {t:"The nurse is assessing the psychosocial development of a preschooler. What is the normal activity characteristic of him?", o:["Engages in solitary play with peers","Initiates activities with others","Engages in parallel play with peers","Refuse to play with other"], a:1},
+  {t:"A 4 years old is going to finger paint for the first time. Which of the following is the best action for the caregiver supervisor of this activity?", o:["Make a model for the child to follow so it will be easy to copy.","Tell the child that it will be fun but that he or she should not make a mess","Draw a picture first for the child to see how to do it.","Support whatever the child paints"], a:3},
+  {t:"A 5-years-old girl post-tonsillectomy. The girl looks out the window and tells the nurse that it is raining and says, \"The sky is crying because it is sad that my throat hurts.\" The nurse understands that the girl is demonstrating which mental process?", o:["Magical thinking","Centration","Transduction","Animism"], a:0},
+  {t:"The nurse is discussing development of fine motor skills in the preschool-age group with a group of nursing students. Which of the following statements is most accurate regarding the fine motor skills of a 3-year-old?", o:["The child can feed himself well.","The child can use scissors.","The child can tie their shoelaces.","The child can print a few letters."], a:0},
+];
+
+const TOTAL_TIME = 70*60;
+let Q, cur, sel, saved, review, visited, left, iv, size = 13;
+
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function shuffleOptions(q){const ix=shuffle(q.o.map((_,k)=>k));return {...q,o:ix.map(k=>q.o[k]),a:ix.indexOf(q.a)}}
+const $ = id => document.getElementById(id);
+
+function init(pool){
+  Q = shuffle([...pool]).map(shuffleOptions); const n = Q.length;
+  cur = 0; sel = Array(n).fill(null); saved = Array(n).fill(false);
+  review = Array(n).fill(false); visited = Array(n).fill(false);
+  left = TOTAL_TIME;
+  $('exam').classList.remove('hide'); $('result').classList.add('hide');
+  $('tot').textContent = $('tot2').textContent = n;
+  clearInterval(iv);
+  iv = setInterval(()=>{
+    left--; const m=Math.floor(left/60), s=left%60, t=$('tm');
+    t.textContent = m+':'+(s<10?'0':'')+s;
+    t.className = 't'+(left<=120?' danger':left<=300?' warn':'');
+    if(left<=0){clearInterval(iv);finish()}
+  },1000);
+  if(n) render();
+  window.scrollTo(0,0);
+}
+
+function render(){
+  visited[cur] = true;
+  const q = Q[cur];
+  $('qno').textContent = 'Question No. ' + (cur+1);
+  $('qbody').style.fontSize = size+'px';
+  $('qbody').innerHTML = `<div class="qtext" style="font-size:${size}px">${q.t}</div>` +
+    q.o.map((o,i)=>`<label class="opt" style="font-size:${size}px"><input type="radio" name="o" value="${i}" ${sel[cur]===i?'checked':''} onchange="sel[cur]=${i}"> <span>${o}</span></label>`).join('');
+  refresh();
+}
+
+function status(i){
+  if(review[i]) return 's-rev';
+  if(saved[i]) return 's-ans';
+  if(visited[i]) return 's-no';
+  return 's-nv';
+}
+function refresh(){
+  const n = Q.length; let a=0,no=0,r=0,nv=0;
+  $('nav').innerHTML = Q.map((_,i)=>{
+    const s = status(i);
+    if(saved[i]) a++;
+    if(s==='s-rev') r++; else if(s==='s-no') no++; else if(s==='s-nv') nv++;
+    return `<span class="sq ${s} ${i===cur?'cur':''}" onclick="go(${i})">${i+1}</span>`;
+  }).join('');
+  $('ans').textContent = a; $('cAns').textContent = a; $('cNo').textContent = no;
+  $('cRev').textContent = r; $('cNv').textContent = nv;
+}
+
+function go(i){cur=i;render()}
+function nextQ(){ if(cur<Q.length-1){cur++;render();return} const k=Q.findIndex((_,x)=>!saved[x]); if(k>=0){cur=k;render()} else {refresh();alert('كل الأسئلة اتحلت، دوس End Test لإنهاء الامتحان')} }
+function saveNext(){ saved[cur]=sel[cur]!==null; nextQ(); }
+function skip(){ nextQ(); }
+function mark(){ review[cur]=!review[cur]; if(sel[cur]!==null) saved[cur]=true; refresh(); }
+function prev(){ if(cur>0){cur--;render()} }
+function fs(d){ size = d===0 ? 13 : Math.max(11,Math.min(24,size+d*2)); render(); }
+
+function endTest(){
+  const un = Q.filter((_,i)=>sel[i]===null).length;
+  const msg = un ? `لسه فاضل ${un} سؤال من غير إجابة. تنهي الامتحان؟` : 'تنهي الامتحان؟';
+  if(confirm(msg)) finish();
+}
+
+function finish(){
+  clearInterval(iv);
+  const n = Q.length; let ok=[], bad=[];
+  Q.forEach((q,i)=>{ (sel[i]===q.a ? ok : bad).push(i) });
+  const pct = n ? Math.round(ok.length/n*100) : 0;
+  const card = (i,good)=>{
+    const q=Q[i];
+    return `<div class="it ${good?'':'bad'}"><div class="q">${i+1}. ${q.t}</div>
+    ${good ? `<div class="r"><span class="tag g">Correct</span>${q.o[q.a]}</div>` :
+    `<div class="r"><span class="tag y">Your answer</span>${sel[i]===null?'— لم تتم الإجابة —':q.o[sel[i]]}</div>
+     <div class="r"><span class="tag g">Correct</span>${q.o[q.a]}</div>`}
+    ${q.exp?`<div class="exp">💬 ${q.exp}</div>`:''}</div>`;
+  };
+  const unans = Q.filter((_,i)=>sel[i]===null).length;
+  $('exam').classList.add('hide');
+  const r = $('result'); r.classList.remove('hide');
+  r.innerHTML = `<div class="res">
+   <div class="score"><div class="n">${pct}%</div><div>${ok.length} / ${n}</div></div>
+   <div class="stats">
+    <div><b style="color:var(--ok)">${ok.length}</b>صح</div>
+    <div><b style="color:var(--no)">${bad.length - unans}</b>غلط</div>
+    <div><b style="color:#777">${unans}</b>من غير إجابة</div>
+    <div><b>${n}</b>الإجمالي</div>
+   </div>
+   <div class="acts">
+    ${bad.length?'<button class="b" onclick="retryWrong()">إعادة الأسئلة الغلط ('+bad.length+')</button>':''}
+    <button class="b" onclick="init(QUESTIONS)">امتحان جديد عشوائي</button>
+   </div>
+   <div class="sec">✔ الأسئلة اللي اتحلت صح (${ok.length})</div>
+   ${ok.map(i=>card(i,true)).join('') || '<div style="padding:8px;color:#777">لا يوجد</div>'}
+   <div class="sec bad">✖ الأسئلة الغلط (${bad.length})</div>
+   ${bad.map(i=>card(i,false)).join('') || '<div style="padding:8px;color:#777">ممتاز، مفيش أخطاء 🎉</div>'}
+  </div>`;
+  window.scrollTo(0,0);
+}
+
+function retryWrong(){
+  const pool = Q.filter((q,i)=>sel[i]!==q.a);
+  init(pool);
+}
+
+init(QUESTIONS);
+</script>
+</body>
+</html>
