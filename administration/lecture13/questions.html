@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#1e3a8a;--teal:#0e7490;--em:#10b981;--gold:#f59e0b;--red:#ef4444;--pur:#8b5cf6;--grad:linear-gradient(135deg,#1e3a8a,#0e7490 55%,#10b981);--bg:#f1f5f9;--card:#fff;--text:#1a2332;--text2:#4a5568;--bc:rgba(0,0,0,.1)}
+[data-theme=dark]{--bg:#0d1117;--card:#1c2333;--text:#e6edf3;--text2:#b1bac4;--bc:rgba(255,255,255,.12)}
+body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:var(--bg);color:var(--text);min-height:100vh}
+header{position:sticky;top:0;z-index:50;background:var(--grad);color:#fff;border-bottom:3px solid var(--gold);display:flex;align-items:center;justify-content:space-between;gap:10px;padding:10px 18px;flex-wrap:wrap}
+.brand{font-weight:800;font-size:16px}.brand small{display:block;font-weight:500;font-size:12px;opacity:.85}
+.hr{display:flex;align-items:center;gap:10px}
+.timer{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.35);border-radius:50px;padding:6px 16px;font-weight:800;font-variant-numeric:tabular-nums}
+.ib{width:36px;height:36px;border-radius:50%;border:1px solid rgba(255,255,255,.4);background:rgba(255,255,255,.15);color:#fff;cursor:pointer;font-size:15px}
+.endb{background:var(--red);color:#fff;border:0;border-radius:50px;padding:8px 18px;font-weight:800;cursor:pointer}
+main{max-width:1050px;margin:18px auto;padding:0 14px;display:grid;grid-template-columns:1fr 270px;gap:16px}
+.card{background:var(--card);border:1px solid var(--bc);border-radius:14px;padding:18px;box-shadow:0 3px 14px rgba(0,0,0,.05)}
+.qmeta{display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;font-size:13px;font-weight:700;color:var(--text2)}
+.tag{background:rgba(14,116,144,.14);color:var(--teal);padding:3px 12px;border-radius:50px;font-weight:800}
+[data-theme=dark] .tag{color:#5eead4}
+.qt{font-size:17px;font-weight:700;line-height:1.7;margin-bottom:16px}
+.opt{display:flex;gap:12px;align-items:flex-start;width:100%;text-align:left;background:var(--bg);border:2px solid var(--bc);border-radius:12px;padding:12px 14px;margin-bottom:10px;cursor:pointer;font-size:15px;color:var(--text);font-family:inherit;line-height:1.55}
+.opt:hover{border-color:var(--teal)}
+.opt.sel{border-color:var(--teal);background:rgba(14,116,144,.12)}
+.opt b{min-width:26px;height:26px;border-radius:8px;background:var(--grad);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;flex-shrink:0}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:14px}
+.btn{border:0;border-radius:10px;padding:10px 18px;font-weight:800;cursor:pointer;font-size:14px;font-family:inherit}
+.b1{background:var(--em);color:#fff}.b2{background:var(--pur);color:#fff}.b3{background:var(--gold);color:#fff}.b4{background:var(--bc);color:var(--text)}
+.btn:disabled{opacity:.4;cursor:not-allowed}
+.nav h3{font-size:14px;margin-bottom:10px}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:7px}
+.nb{aspect-ratio:1;border-radius:8px;border:2px solid transparent;background:#cbd5e1;color:#1a2332;font-weight:800;font-size:13px;cursor:pointer}
+.nb.ans{background:var(--em);color:#fff}.nb.mk{background:var(--pur);color:#fff}.nb.skp{background:var(--red);color:#fff}.nb.cur{border-color:var(--navy);box-shadow:0 0 0 2px var(--gold)}
+.leg{margin-top:12px;font-size:12px;color:var(--text2);display:grid;gap:4px}
+.leg i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:6px;vertical-align:middle}
+.ring{width:150px;height:150px;border-radius:50%;margin:8px auto 14px;display:flex;align-items:center;justify-content:center;font-size:30px;font-weight:900}
+.ring span{background:var(--card);width:116px;height:116px;border-radius:50%;display:flex;align-items:center;justify-content:center}
+.stats{display:flex;justify-content:center;gap:18px;flex-wrap:wrap;font-weight:800;margin-bottom:16px}
+.rv{border:1px solid var(--bc);border-left:5px solid var(--em);border-radius:10px;padding:12px 14px;margin-bottom:10px;background:var(--card);font-size:14px;line-height:1.6}
+.rv.bad{border-left-color:var(--red)}
+.rv .y{color:var(--em);font-weight:800}.rv .n{color:var(--red);font-weight:800}
+h2.sh{margin:16px 0 10px;font-size:16px}
+@media(max-width:800px){main{grid-template-columns:1fr}.nav{order:-1}.grid{grid-template-columns:repeat(10,1fr)}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand">GHAITH TEAM<small>Nursing Management | Motivation</small></div>
+  <div class="hr"><div class="timer" id="timer">60:00</div><button class="ib" id="th" title="Theme">🌙</button><button class="endb" id="end">End Test</button></div>
+</header>
+<main id="main">
+  <div class="card" id="qcard"></div>
+  <div class="card nav">
+    <h3 id="prog"></h3><div class="grid" id="grid"></div>
+    <div class="leg"><span><i style="background:#10b981"></i>Saved</span><span><i style="background:#8b5cf6"></i>Marked for review</span><span><i style="background:#ef4444"></i>Skipped / not answered</span><span><i style="background:#cbd5e1"></i>Not visited</span></div>
+  </div>
+</main>
+
+<script>
+/* ===== MCQ (35) ===== */
+const MCQ=[
+{t:"Motivation is defined simply as:",o:["Controlling staff through strict rules","Selecting the best candidates for a job","Inspiring people to work and exert a high level of effort toward organizational goals","Evaluating employee performance each year"],a:2},
+{t:"Motivation is described as forces ______ to a person that arouse enthusiasm and persistence to pursue a certain course of action.",o:["Either internal or external","Only internal","Only external","Neither internal nor external"],a:0},
+{t:"Motivation is a process of arousing behavior, sustaining behavior and ______ behavior in a specific course.",o:["Ignoring","Punishing","Recording","Changing"],a:3},
+{t:"In The Motivation Process, an unsatisfied need first creates:",o:["Rewards","Tension","Goal achievement","Reduction of tension"],a:1},
+{t:"The idea that only unsatisfied needs can influence behavior comes from:",o:["Gholipour's process of motivation","Maslow's hierarchy of needs","Reward motivation","Work factors"],a:1},
+{t:"Which need is at the base of Maslow's hierarchy?",o:["Safety","Social","Esteem","Physiological"],a:3},
+{t:"The security of a home and family and protection from physical and emotional harm belongs to which need?",o:["Safety","Social","Esteem","Self-actualization"],a:0},
+{t:"Love, affection, belongingness, acceptance and friendship belong to which need?",o:["Physiological","Safety","Social","Esteem"],a:2},
+{t:"The drive to become what one is capable of becoming, including growth and self fulfillment, is:",o:["Esteem","Social need","Safety","Self-actualization"],a:3},
+{t:"How many main kinds of motivation are described in the lecture?",o:["Two","Three","Four","Five"],a:1},
+{t:"Intrinsic motivation is:",o:["Internal and under the control of the person himself","External and under the control of others","Based on the hope of getting a reward","Based mainly on fear"],a:0},
+{t:"Which of the following is an internal motivator?",o:["Salary","Supervision","Responsibility","Working conditions"],a:2},
+{t:"Extrinsic motivation is also described as:",o:["Power motivation","Fear motivation","Incentives motivation","Affiliation motivation"],a:1},
+{t:"'I will give you a candy bar if you clean your room' is an example of:",o:["Reward motivation","Intrinsic motivation","Fear motivation","Competence motivation"],a:0},
+{t:"Which of the following is classified under intrinsic motivation?",o:["Incentives motivation","Fear motivation","Achievement motivation","Affiliation motivation"],a:3},
+{t:"Reward motivation is also known as:",o:["Power motivation and competence motivation","Fear motivation","Incentives motivation and achievement motivation","Affiliation motivation"],a:2},
+{t:"Which of the following is a PERSONAL factor affecting motivation?",o:["Leadership style","Peer relationships","Self-concepts","Organization"],a:2},
+{t:"Health status affects motivation because motivation requires:",o:["Physical and psychomotor energy","Financial resources","Peer approval","Organizational support"],a:0},
+{t:"A person's perception of his/her own capabilities influences motivational capacity. This is called:",o:["Health status","Self-concepts","Financial status","Opportunities available"],a:1},
+{t:"When the opportunity to learn and grow in the work situation is lacking:",o:["Motivation is increased","Motivation is unaffected","Staff become more independent","Motivation is stifled"],a:3},
+{t:"Which of the following is a WORK factor affecting motivation?",o:["Health status","Self-concepts","Financial status","Leadership style"],a:3},
+{t:"Dissatisfying peer relationships can result in:",o:["Increased creativity","Job dissatisfaction and resignations","Higher productivity","Better collaboration"],a:1},
+{t:"Adequate staff members, sufficient equipment and available supplies belong to which work factor?",o:["Leadership style","Peer relationships","Organization","Relationships"],a:2},
+{t:"In nursing management, staff need to be motivated in order to:",o:["Have quality patient care, develop staff efficiency and reduce absenteeism","Increase hospital fees, reduce training and limit promotions","Avoid supervision and reduce teamwork","Replace staff and shorten shifts"],a:0},
+{t:"Which of the following is importance of motivation to the ORGANIZATION rather than to the individual?",o:["It helps avoid strikes and activities that hamper production","It gives job satisfaction","It helps in self development","It keeps employees cheerful"],a:0},
+{t:"According to the lecture, changes can be easily brought in a firm if employees:",o:["Are paid more than other firms","Are closely supervised","Have limited responsibility","Have complete faith in the firm and are motivated regularly"],a:3},
+{t:"According to Maslow, a person advances to the next level of needs when the lower level need is:",o:["Completely and permanently satisfied","Ignored","At least minimally satisfied","Replaced by a reward"],a:2},
+{t:"An annual reward for better performance in the form of money, recognition, praise or promotion is:",o:["Avoidance learning","Punishment","Positive reinforcement","Participation in activities"],a:2},
+{t:"Some staff nurses improve their behavior in order to avoid criticism. This technique is:",o:["Positive reinforcement","Avoidance learning","Punishment","Reward motivation"],a:1},
+{t:"A Nursing Superintendent withholding reward or promotion to change staff behavior is using:",o:["Punishment","Positive reinforcement","Avoidance learning","Reward motivation"],a:0},
+{t:"Conferences, Nurses' Day and Hospital Annual Day are used to give staff a feeling of:",o:["Discipline, fear and control","Money, tension and drives","Rewards, punishment and criticism","Affiliation, acceptance and recognition"],a:3},
+{t:"Regarding newly appointed staff, the lecture states they should be:",o:["Closely supervised and never independent","Left alone without observation","Left independent but observed closely","Given punishment first"],a:2},
+{t:"Which of the following is NOT a suggestion for a manager to improve subordinates' motivation?",o:["Ignore individual differences","Recognize individual differences","Learn to listen","Set meaningful goals"],a:0},
+{t:"A manager who wants to improve motivation should link rewards to:",o:["Seniority","Attendance only","Hiring date","Performance"],a:3},
+{t:"Which sequence correctly represents The Motivation Process?",o:["Drives, tension, unsatisfied need, rewards","Tension, unsatisfied need, search, drives","Unsatisfied need, tension, drives, search, goal achievement","Unsatisfied need, drives, tension, goal achievement"],a:2}
+];
+
+/* ===== TRUE / FALSE (15) ===== */
+const TF=[
+{t:"Satisfied needs influence behavior as strongly as unsatisfied needs.",o:["True","False"],a:1},
+{t:"In Maslow's hierarchy, needs are arranged in order of importance from the basic to the complex.",o:["True","False"],a:0},
+{t:"Esteem needs include both self esteem and external esteem.",o:["True","False"],a:0},
+{t:"Intrinsic motivation is under the control of others.",o:["True","False"],a:1},
+{t:"Salary, benefits, working conditions and supervision are examples of externally motivated needs.",o:["True","False"],a:0},
+{t:"Reward motivation occurs when the prospect or hope of getting a reward compels people to do something.",o:["True","False"],a:0},
+{t:"Money is a powerful motivator, and sufficient income to meet perceived needs is necessary.",o:["True","False"],a:0},
+{t:"Dissatisfying peer relationships have no effect on job dissatisfaction or resignations.",o:["True","False"],a:1},
+{t:"One purpose of motivating nursing staff is to reduce absenteeism.",o:["True","False"],a:0},
+{t:"Productivity is the outcome of performance.",o:["True","False"],a:0},
+{t:"In avoidance learning, nurses improve their behavior in order to receive a monetary reward.",o:["True","False"],a:1},
+{t:"Newly appointed staff should be left independent but be observed closely.",o:["True","False"],a:0},
+{t:"Leadership style is a personal factor affecting motivation.",o:["True","False"],a:1},
+{t:"Withholding reward or promotion to change staff behavior is an example of punishment.",o:["True","False"],a:0},
+{t:"Motivation is important only to the individual and not to the organization.",o:["True","False"],a:1}
+];
+
+/* ===== CASE QUESTIONS (10) ===== */
+const CASE=[
+{t:"Case: A newly appointed staff nurse completes all her records on time and arrives early only to avoid being criticized by the head nurse. Which motivational technique explains her behavior?",o:["Positive reinforcement","Punishment","Avoidance learning","Intrinsic motivation"],a:2},
+{t:"Case: An ICU nurse continues to work hard because she loves the nature of her job and feels responsible for her patients, even without extra pay. Which type of motivation is this?",o:["Intrinsic motivation","Extrinsic motivation","Reward motivation","Fear motivation"],a:0},
+{t:"Case: A nurse accepts extra shifts because the hospital promised a bonus for everyone who works them. Which type of motivation is this?",o:["Power motivation","Competence motivation","Affiliation motivation","Reward motivation"],a:3},
+{t:"Case: A unit is understaffed, essential equipment is missing and supplies are often unavailable. Nurses report low morale. Which work factor is affecting their motivation?",o:["Organization","Leadership style","Peer relationships","Financial status"],a:0},
+{t:"Case: A newly graduated nurse keeps saying, 'I am not capable of handling critical patients,' and shows little enthusiasm to learn. Which personal factor is most involved?",o:["Health status","Self-concepts","Relationships","Opportunities available"],a:1},
+{t:"Case: A nurse has constant conflicts with her colleagues and is thinking of resigning, although she is satisfied with her salary. Which factor is mainly affecting her motivation?",o:["Financial status","Organization","Self-concepts","Peer relationships"],a:3},
+{t:"Case: A nurse is worried about meals and housing and shows no interest in training courses. Which principle explains this?",o:["Higher needs always appear first","A person advances to the next level only after the lower level need is at least minimally satisfied","Satisfied needs are the strongest motivators","All needs have equal importance"],a:1},
+{t:"Case: A nurse manager invites staff to conferences, Nurses' Day and the Hospital Annual Day. What is the main aim of this action?",o:["To give staff affiliation, acceptance and recognition","To punish low performers","To teach staff avoidance learning","To create tension in the team"],a:0},
+{t:"Case: A head nurse rewards one nurse with a course, another with a day off and a third with public praise, according to what each values. Which suggestion is she applying?",o:["Check the system for equity","Don't ignore money","Provide challenging work","Recognize achievements and individualize rewards"],a:3},
+{t:"Case: A supervisor delays the promotion of a frequently absent nurse and gives an annual bonus and praise to the best performing nurse. Which two techniques is she using?",o:["Avoidance learning and punishment","Punishment and positive reinforcement","Positive reinforcement and avoidance learning","Punishment and participation in activities"],a:1}
+];
+
+/* ===== ENGINE ===== */
+const ALL=[...MCQ.map(q=>({...q,k:'MCQ'})),...TF.map(q=>({...q,k:'True / False'})),...CASE.map(q=>({...q,k:'Case'}))];
+let Q,cur,ans,pick,mark,seen,left,timer,ended;
+const $=id=>document.getElementById(id), L=['A','B','C','D'];
+
+function start(list,mins){
+  Q=list;cur=0;ended=false;left=mins*60;
+  ans=Q.map(()=>null);pick=Q.map(()=>null);mark=Q.map(()=>false);seen=Q.map(()=>false);
+  $('main').style.display='grid';$('res')&&$('res').remove();
+  clearInterval(timer);tick();timer=setInterval(tick,1000);render();
+}
+function tick(){
+  const m=Math.floor(left/60),s=left%60;$('timer').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+  if(left--<=0){finish();}
+}
+function render(){
+  seen[cur]=true;const q=Q[cur];
+  let h=`<div class="qmeta"><span>Question ${cur+1} of ${Q.length}</span><span class="tag">${q.k}</span></div><div class="qt">${q.t}</div>`;
+  q.o.forEach((o,i)=>{h+=`<button class="opt ${pick[cur]===i?'sel':''}" onclick="sel(${i})"><b>${q.o.length===2?(i?'F':'T'):L[i]}</b><span>${o}</span></button>`});
+  h+=`<div class="btns"><button class="btn b4" onclick="go(cur-1)" ${cur?'':'disabled'}>Previous</button><button class="btn b1" onclick="save()">Save &amp; Next</button><button class="btn b2" onclick="rev()">${mark[cur]?'Unmark':'Mark for Review'}</button><button class="btn b3" onclick="skip()">Skip</button></div>`;
+  $('qcard').innerHTML=h;
+  $('prog').textContent=`Saved: ${ans.filter(x=>x!==null).length} / ${Q.length}`;
+  $('grid').innerHTML=Q.map((_,i)=>{let c='';if(mark[i])c='mk';else if(ans[i]!==null)c='ans';else if(seen[i]&&i!==cur)c='skp';return `<button class="nb ${c} ${i===cur?'cur':''}" onclick="go(${i})">${i+1}</button>`}).join('');
+}
+function sel(i){pick[cur]=i;render()}
+function go(i){if(i>=0&&i<Q.length){cur=i;render()}}
+function nextFrom(i){
+  if(i<Q.length-1){cur=i+1;render();return}
+  const u=ans.findIndex(x=>x===null);
+  if(u>=0){cur=u;render()}else{render();if(confirm('All questions are answered. End the test now?'))finish()}
+}
+function save(){if(pick[cur]!==null)ans[cur]=pick[cur];nextFrom(cur)}
+function skip(){nextFrom(cur)}
+function rev(){mark[cur]=!mark[cur];if(pick[cur]!==null)ans[cur]=pick[cur];nextFrom(cur)}
+function finish(){
+  if(ended)return;ended=true;clearInterval(timer);
+  const ok=[],bad=[];Q.forEach((q,i)=>(ans[i]===q.a?ok:bad).push(i));
+  const pct=Math.round(ok.length/Q.length*100),col=pct>=75?'#10b981':pct>=50?'#f59e0b':'#ef4444';
+  const item=(i,g)=>{const q=Q[i];return `<div class="rv ${g?'':'bad'}"><b>Q${i+1}.</b> ${q.t}<br>${g?'':`<span class="n">Your answer: ${ans[i]===null?'Not answered':q.o[ans[i]]}</span><br>`}<span class="y">Correct answer: ${q.o[q.a]}</span></div>`};
+  $('main').style.display='none';
+  const d=document.createElement('div');d.id='res';d.style.cssText='max-width:820px;margin:18px auto;padding:0 14px';
+  d.innerHTML=`<div class="card"><div class="ring" style="background:conic-gradient(${col} ${pct*3.6}deg,#cbd5e1 0)"><span>${pct}%</span></div>
+  <div class="stats"><span style="color:#10b981">Correct: ${ok.length}</span><span style="color:#ef4444">Wrong / Unanswered: ${bad.length}</span><span>Total: ${Q.length}</span></div>
+  <div class="btns" style="justify-content:center"><button class="btn b1" onclick="start(ALL,60)">Restart</button>${bad.length?`<button class="btn b3" id="rt">Retry wrong answers</button>`:''}</div>
+  <h2 class="sh">Correct answers (${ok.length})</h2>${ok.map(i=>item(i,1)).join('')||'<p>None</p>'}
+  <h2 class="sh">Wrong / unanswered (${bad.length})</h2>${bad.map(i=>item(i,0)).join('')||'<p>None</p>'}</div>`;
+  document.body.appendChild(d);scrollTo(0,0);
+  const rt=$('rt');if(rt)rt.onclick=()=>start(bad.map(i=>Q[i]),Math.max(5,Math.ceil(bad.length*1)));
+}
+$('end').onclick=()=>{if(confirm('End the test and see your results?'))finish()};
+/* theme */
+let th='light';try{th=localStorage.getItem('theme')||'light'}catch(e){}
+function setTheme(t){th=t;document.documentElement.setAttribute('data-theme',t);$('th').textContent=t==='dark'?'☀️':'🌙';try{localStorage.setItem('theme',t)}catch(e){}}
+setTheme(th);$('th').onclick=()=>setTheme(th==='dark'?'light':'dark');
+start(ALL,60);
+</script>
+</body>
+</html>
