@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--teal:#0f766e;--teal-d:#134e4a;--blue:#ccfbf1;--bd:#b7ebe2;--ok:#15803d;--no:#b91c1c;--rev:#4f46e5;--txt:#134e4a;--grad:linear-gradient(135deg,#0f766e 0%,#14b8a6 60%,#2dd4bf 100%)}
+body{font-family:'Outfit',Arial,sans-serif;background:#f0fdfa;color:var(--txt);font-size:14px}
+header{background:var(--grad);color:#fff;text-align:center;padding:12px;font-size:18px;font-weight:900;position:relative}
+header .brand{position:absolute;right:16px;top:8px;font-weight:bold;font-size:14px}
+header a{position:absolute;left:16px;top:11px;color:#fff;font-size:13px;text-decoration:none}
+.wrap{max-width:1280px;margin:0 auto;padding:8px 10px 20px}
+.topinfo{background:var(--blue);border:1px solid var(--bd);padding:4px 8px;font-size:13px;margin-bottom:8px}
+.topinfo b{color:var(--teal)}
+.layout{display:grid;grid-template-columns:1fr 240px;gap:14px;align-items:start}
+.main{background:#fff;border:1px solid var(--bd);min-height:470px;display:flex;flex-direction:column;
+ background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='70'><text x='8' y='45' transform='rotate(-20 75 35)' font-size='14' font-family='Arial' fill='%23000' fill-opacity='.07'>GHAITH TEAM</text></svg>")}
+.qhead{display:flex;justify-content:space-between;align-items:center;padding:12px 6px 6px;margin:0 6px;border-bottom:1px solid var(--bd)}
+.qhead b{font-size:13px}
+.fs button{background:#0f766e;color:#fff;border:0;padding:6px 12px;margin-left:3px;border-radius:2px;cursor:pointer;font-weight:bold}
+.qbody{padding:8px 12px;flex:1}
+.qtext{font-size:13px;line-height:1.7;margin-bottom:18px;direction:ltr;text-align:left}
+.opt{display:flex;align-items:center;gap:8px;margin:0 0 16px;cursor:pointer;direction:ltr;text-align:left;font-size:13px}
+.opt input{accent-color:var(--teal);cursor:pointer}
+.bar{display:flex;justify-content:space-between;padding:10px;gap:6px;flex-wrap:wrap;border-top:1px solid var(--bd);margin:0 6px 6px}
+.b{background:var(--grad);color:#fff;border:0;padding:9px 12px;font-weight:bold;font-size:13px;border-radius:2px;cursor:pointer}
+.b:hover{filter:brightness(1.12)}
+.b.gray{background:#134e4a}
+.side>div{background:var(--blue);border:1px solid var(--bd);margin-bottom:10px;padding:8px}
+.timer{text-align:center;background:none!important;border:0!important}
+.timer small{font-size:13px}
+.timer .t{font-size:30px;color:#0f766e;margin-top:4px}
+.timer .t.warn{color:#c27b0a}.timer .t.danger{color:#c8372d}
+.leg{display:grid;grid-template-columns:1fr 1fr;gap:8px 6px;font-size:10px;margin-top:8px}
+.leg div{display:flex;align-items:center;gap:6px}
+.sq{min-width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:bold;border-radius:2px;border:1px solid transparent}
+.s-ans{background:var(--ok)}.s-no{background:#b45309}.s-rev{background:var(--rev)}.s-nv{background:#fff;color:#333;border-color:#9bb0a2}
+.nav{display:flex;flex-wrap:wrap;gap:6px;max-height:260px;overflow:auto;background:#ccfbf1}
+.nav .sq{width:24px;height:24px;cursor:pointer;font-size:12px}
+.nav .cur{outline:2px solid #134e4a;outline-offset:0}
+.endrow{text-align:center}
+.endrow .b{width:90px}
+footer{text-align:center;padding:16px;font-size:12px;color:#0f766e;background:#ccfbf1;border-top:1px solid #b7ebe2;margin-top:10px}
+footer a{color:#229ED9;text-decoration:none}
+/* results */
+.res{background:#fff;border:1px solid var(--bd);padding:20px;max-width:900px;margin:10px auto}
+.score{text-align:center;padding:10px 0 18px}
+.score .n{font-size:48px;font-weight:900;color:var(--teal)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}
+.stats div{background:var(--blue);padding:10px;text-align:center;border-radius:4px}
+.stats b{display:block;font-size:20px}
+.sec{background:var(--ok);color:#fff;padding:8px 12px;font-weight:bold;margin:22px 0 10px}
+.sec.bad{background:var(--no)}
+.it{border:1px solid var(--bd);border-left:4px solid var(--ok);padding:12px;margin-bottom:8px;background:#fafcff;direction:ltr;text-align:left}
+.it.bad{border-left-color:var(--no)}
+.it .q{font-weight:bold;font-size:13px;margin-bottom:6px;line-height:1.6}
+.it .r{font-size:12px;margin-top:4px}
+.tag{padding:1px 7px;border-radius:3px;color:#fff;font-size:11px;font-weight:bold;margin-right:6px}
+.tag.y{background:var(--no)}.tag.g{background:var(--ok)}
+.exp{font-size:12px;color:#555;margin-top:6px;background:#eef6f4;padding:6px 8px;border-radius:3px}
+.acts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.hide{display:none}
+@media(max-width:820px){.layout{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}header a{display:none}}
+.qtext img{display:block;max-width:100%;max-height:260px;margin:0 auto 12px;border-radius:8px;background:#fff}
+.it .q img{max-height:90px;display:block;margin:6px 0;border-radius:6px}
+.filters{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:8px}
+.fbtn{padding:5px 13px;border-radius:50px;border:1.5px solid #b7ebe2;background:#fff;font:700 12px 'Outfit',sans-serif;color:#0f766e;cursor:pointer}
+.fbtn.on,.fbtn:hover{background:#14b8a6;color:#fff;border-color:#14b8a6}
+.tp{margin-left:8px;background:#ccfbf1;color:#0f766e;border-radius:50px;padding:2px 10px;font-size:11px}
+</style>
+</head>
+<body>
+<header><a href="https://gaith-team.github.io/exam/">← Back</a>Community Health Nursing<span class="brand">GHAITH TEAM</span></header>
+<div class="wrap">
+ <div id="exam">
+  <div id="filterWrap" class="filters" style="display:none"></div>
+  <div class="topinfo">Total questions in exam: <b id="tot">0</b> | Answered: <b id="ans">0</b></div>
+  <div class="layout">
+   <div class="main">
+    <div class="qhead"><b id="qno"></b><div class="fs"><button onclick="fs(-1)">A-</button><button onclick="fs(0)">A</button><button onclick="fs(1)">A+</button></div></div>
+    <div class="qbody" id="qbody"></div>
+    <div class="bar">
+     <button class="b" onclick="saveNext()">Save &amp; Next</button>
+     <div style="display:flex;gap:4px;flex-wrap:wrap">
+      <button class="b" onclick="mark()">Mark for Review</button>
+      <button class="b" onclick="skip()">Skip</button>
+      <button class="b" onclick="prev()">Previous</button>
+     </div>
+    </div>
+   </div>
+   <div class="side">
+    <div class="timer"><small>Time Remaining</small><div class="t" id="tm">40:00</div></div>
+    <div>
+     <div>Number of questions : <b id="tot2">0</b></div>
+     <div class="leg">
+      <div><span class="sq s-ans" id="cAns">0</span>Answered</div>
+      <div><span class="sq s-no" id="cNo">0</span>Not Answered</div>
+      <div><span class="sq s-rev" id="cRev">0</span>For Review</div>
+      <div><span class="sq s-nv" id="cNv">0</span>Not Visited</div>
+     </div>
+    </div>
+    <div class="nav" id="nav"></div>
+    <div class="endrow"><button class="b gray" onclick="endTest()">End Test</button></div>
+   </div>
+  </div>
+ </div>
+ <div id="result" class="hide"></div>
+</div>
+<footer>GHAITH TEAM · <a href="https://t.me/nursing2bu" target="_blank">@nursing2bu</a></footer>
+
+<script>
+const QUESTIONS = [
+
+  {t:"Community health nursing is best defined as a synthesis of:", o:["Nursing practice and public health applied to promote and preserve the health of populations", "Medical practice and hospital administration", "Nursing practice and social work only", "Public health and clinical pharmacy"], a:0, d:1},
+  {t:"The stage in which nurses visited the sick poor at home, recorded temperature and pulse, and taught hygiene under a physician's direction was:", o:["Early home care nursing", "District nursing (mid-1800s to 1900)", "Public health nursing", "Community health nursing"], a:1, d:1},
+  {t:"Public health is defined as the science and art of:", o:["Treating individual patients in hospitals", "Providing care only through private agencies", "Preventing disease, prolonging life and promoting health and efficiency through organized community efforts", "Curing communicable diseases only"], a:2, d:1},
+  {t:"The three primary functions of public health in which community health nurses work are:", o:["Assessment, diagnosis and treatment", "Planning, organizing and controlling", "Assessment, policy development and assurance", "Prevention, cure and rehabilitation"], a:2, d:1},
+  {t:"A disease that exists permanently in a particular region or population, such as malaria in parts of Africa, is called:", o:["Endemic", "Epidemic", "Pandemic", "Outbreak"], a:0, d:1},
+  {t:"The epidemiologic triad consists of:", o:["Agent, host and environment", "Agent, vector and vehicle", "Host, reservoir and carrier", "Source, route and susceptible host"], a:0, d:1},
+  {t:"Typhoid fever is caused by:", o:["Salmonella typhi", "Vibrio cholerae", "Hepatitis A virus", "Brucella"], a:0, d:1},
+  {t:"According to the lecture, which typhoid vaccine is used in Egypt?", o:["Ty21 oral live vaccine", "BCG vaccine", "TAB vaccine (heat-killed, phenol-preserved)", "Sabin vaccine"], a:2, d:1},
+  {t:"How many calories per day does a school-age student need, according to the lecture?", o:["1200 calories", "2400 calories", "1800 calories", "3200 calories"], a:1, d:1},
+  {t:"Which public health function involves the continuous collection of data on health, diseases, injuries, air and water quality, food safety and available resources?", o:["Policy development", "Assurance", "Assessment", "Evaluation"], a:2, d:2},
+  {t:"Secondary prevention in community health aims at:", o:["Keeping illness or injury from occurring", "Detecting and treating existing health problems at a point when intervention may lead to control or eradication", "Reducing disability and restoring function", "Improving the housing of the community"], a:1, d:2},
+  {t:"The word 'outbreak' is used when an epidemic occurs:", o:["In a small confined area such as a school, camp, hotel or prison", "Throughout the whole world", "Permanently in one region", "Only among animals"], a:0, d:2},
+  {t:"A person or animal that harbors a specific infectious agent without discernible clinical disease and is a potential source of infection is a:", o:["Case", "Host", "Carrier", "Vector"], a:2, d:2},
+  {t:"Overcrowding, poverty and dietary habits belong to which category of environmental factors?", o:["Physical environment", "Socio-cultural environment", "Biological environment", "Chemical environment"], a:1, d:2},
+  {t:"Transmission of an infectious agent by mosquitoes, fleas, mites and ticks is called:", o:["Direct contact", "Droplet spread", "Vehicle spread", "Vector spread"], a:3, d:2},
+  {t:"Which of the following is a SPECIFIC factor of host resistance?", o:["Intact skin", "Leukocytes and the immune system", "The cough reflex", "Gastric juices"], a:1, d:2},
+  {t:"Primary prevention of disease is accomplished through:", o:["Health promotion and specific protection", "Early case finding and notification", "Treatment of complications and rehabilitation", "Isolation and disinfection of cases"], a:0, d:2},
+  {t:"The four forms of school health services are:", o:["Screening, curative, social and legal services", "Appraisal, preventive, curative and dental services", "Preventive, educational, dental and legal services", "Appraisal, nutritional, dental and recreational services"], a:1, d:2},
+  {t:"Classroom windows should be arranged in:", o:["Both side walls to allow cross ventilation", "The front wall only", "The back wall only", "The ceiling only"], a:0, d:2},
+  {t:"In Egypt, school health insurance provides a health unit for each:", o:["300 students", "1000 students", "3000 students", "10,000 students"], a:2, d:2},
+  {t:"The most frequently occurring illness in childhood is:", o:["Skin infections", "Eye infections", "Urinary tract infection", "Respiratory infections"], a:3, d:2},
+  {t:"The three domains of learning are:", o:["Verbal, visual and auditory", "Sending, receiving and interpersonal", "Cognitive, affective and psychomotor", "Value, expectancy and affective"], a:2, d:2},
+  {t:"Which health education method is described as 'acting out the role of another to get a different perspective, usually followed by discussion'?", o:["Lecture", "Demonstration", "Case study", "Role playing"], a:3, d:2},
+  {t:"A school nurse finds that a child has abdominal pain, vomiting and headache whenever school is mentioned. Before labeling it school phobia, what must be done FIRST?", o:["Refer the child to a psychiatrist immediately", "Rule out all organic causes", "Exclude the child from school for 14 days", "Give analgesics and observe"], a:1, d:3},
+  {t:"The adult TAB vaccine schedule in Egypt is:", o:["Two doses of 0.5 ml and 1.0 ml subcutaneously, 4 weeks apart, with a 1.0 ml booster every 3 years", "A single 1.0 ml dose every year", "Four oral doses on alternate days", "Three doses of 0.5 ml IM at 0, 1 and 6 months"], a:0, d:3},
+  {t:"Contacts of a typhoid case should be put under surveillance for:", o:["1 week", "2 months", "6 months", "3 weeks from the date of last exposure"], a:3, d:3},
+  {t:"Which tests are included in the examination of food handlers according to the lecture?", o:["Chest X-ray for TB, stool analysis, skin examination for staph infection and throat swab for diphtheria", "ECG, lipid profile and blood glucose", "Lumbar puncture and urine culture only", "Pregnancy test and bone scan"], a:0, d:3},
+  {t:"Which three activities should a school dental health program include?", o:["Tooth extraction, orthodontics and surgery", "Dental X-ray, filling and scaling only", "Screening, isolation and exclusion", "Dental health education, preventive measures, and referral with follow-through"], a:3, d:3},
+  {t:"Which are the three sets of communication skills community health nurses need to cultivate?", o:["Verbal, written and visual skills", "Sending skills, receiving skills and interpersonal skills", "Listening, speaking and reading skills", "Assessment, planning and evaluation skills"], a:1, d:3},
+  {t:"The four types of child abuse described in the lecture are:", o:["Physical, verbal, financial and sexual abuse", "Neglect, bullying, hate crimes and gang violence", "Physical, psychological, financial and workplace abuse", "Physical abuse, physical and emotional neglect, emotional abuse and sexual abuse"], a:3, d:3},
+  {t:"A counseling session should generally last:", o:["Less than one hour, with a second session scheduled if more time is needed", "More than three hours", "Exactly two hours", "As long as the client wishes, without limit"], a:0, d:3},
+  {t:"The central question in Stage Two of the counseling process (identifying possible options) is:", o:["What is the problem?", "What can be done to solve the problem?", "When, with whom and where should it be done?", "How will the session be closed?"], a:1, d:3},
+  {t:"Which of the following is an ethical principle in counseling that gives the patient the right to self-determination?", o:["Beneficence", "Autonomy", "Fidelity", "Honesty"], a:1, d:3},
+  {t:"The combined oral contraceptive (estrogen and progestin) has an effectiveness of about:", o:["96.8%", "50%", "75%", "99.5%"], a:0, d:3},
+  {t:"IMCI (Integrated Management of Childhood Illness) has three main components. Which is one of them?", o:["Reduce the cost of hospital beds", "Provide free drugs to all adults", "Introduce compulsory school immunization", "Improve health workers' skills"], a:3, d:3},
+  {t:"A pandemic is an epidemic confined to a small area such as a school or camp.", o:["True", "False"], a:1, d:1},
+  {t:"District nursing was the stage that came after public health nursing.", o:["True", "False"], a:1, d:1},
+  {t:"Stool and urine cultures are the most practical tests for diagnosing typhoid and are used mainly in the first week.", o:["True", "False"], a:1, d:2},
+  {t:"A child with measles should be excluded from school for 7 days.", o:["True", "False"], a:1, d:2},
+  {t:"A counseling session should generally last more than one hour.", o:["True", "False"], a:1, d:2},
+  {t:"Emotional neglect is defined as an intentional injury inflicted on a child by another person.", o:["True", "False"], a:1, d:3},
+  {t:"Progestin-only oral contraceptives impair lactation.", o:["True", "False"], a:1, d:3},
+  {t:"A school nurse measures the height, weight, vision and hearing of all students every year to find problems early. This activity is part of which school health service?", o:["Curative services", "Appraisal (screening) services", "Dental services", "Emergency services"], a:1, d:1},
+  {t:"A student is diagnosed with chickenpox. What is the most appropriate action by the school nurse?", o:["Exclude the student for 14 days, examine him before readmission and put classmates under supervision", "Allow him to attend if he has no fever", "Exclude him for 7 days only", "Exclude him for 21 days and ignore the contacts"], a:0, d:2},
+  {t:"A patient with sustained step-ladder fever for four days, abdominal distension and headache is suspected of having typhoid. Which test is most useful to confirm the diagnosis at this stage?", o:["Widal test", "Stool analysis only", "Blood culture", "Urine analysis only"], a:2, d:2},
+  {t:"A pregnant woman is in her 7th month of pregnancy. How often should she attend antenatal visits at this stage?", o:["Every 4 weeks", "Every week", "Every 2 weeks", "Once only before delivery"], a:2, d:2},
+  {t:"A woman who has had a stroke is being helped to identify her type and severity of disability, set realistic goals and follow a rehabilitation plan. Which level of prevention is this?", o:["Primary prevention", "Secondary prevention", "Health promotion", "Tertiary prevention"], a:3, d:3},
+  {t:"A counselor who recently lost a close relative finds it very hard to counsel a bereaved client and projects his own sadness onto the client. This is an example of:", o:["Transference", "Counter-transference", "Reflection of feeling", "Paraphrasing"], a:1, d:3},
+  {t:"A breast-feeding mother with no history of pelvic inflammatory disease wants a long-term contraceptive method that needs minimal effort. Which method is most suitable?", o:["Combined oral contraceptive pill", "Spermicidal foam", "Intrauterine device (IUD)", "Condoms"], a:2, d:3},
+  {t:"An emergency department nurse suspects that a patient is a victim of intimate partner violence. Which action belongs to SECONDARY prevention?", o:["Teach parenting classes in schools", "Reduce violence in media", "Conduct community education campaigns on violence", "Assess for violence, develop a safety plan for the victim and refer to community agencies"], a:3, d:3}
+
+];
+
+const TOTAL_TIME = 40*60;
+let Q, cur, sel, saved, review, visited, left, iv, size = 13;
+
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function shuffleOptions(q){const ix=shuffle(q.o.map((_,k)=>k));return {...q,o:ix.map(k=>q.o[k]),a:ix.indexOf(q.a)}}
+const $ = id => document.getElementById(id);
+
+function init(pool){
+  Q = shuffle([...pool]).map(shuffleOptions); const n = Q.length;
+  cur = 0; sel = Array(n).fill(null); saved = Array(n).fill(false);
+  review = Array(n).fill(false); visited = Array(n).fill(false);
+  left = TOTAL_TIME;
+  $('exam').classList.remove('hide'); $('result').classList.add('hide');
+  $('tot').textContent = $('tot2').textContent = n;
+  clearInterval(iv);
+  iv = setInterval(()=>{
+    left--; const m=Math.floor(left/60), s=left%60, t=$('tm');
+    t.textContent = m+':'+(s<10?'0':'')+s;
+    t.className = 't'+(left<=120?' danger':left<=300?' warn':'');
+    if(left<=0){clearInterval(iv);finish()}
+  },1000);
+  if(n) render();
+  window.scrollTo(0,0);
+}
+
+function render(){
+  visited[cur] = true;
+  const q = Q[cur];
+  $('qno').innerHTML = 'Question No. ' + (cur+1) + (q.topic ? ' <span class="tp">'+q.topic+'</span>' : '');
+  $('qbody').style.fontSize = size+'px';
+  $('qbody').innerHTML = `<div class="qtext" style="font-size:${size}px">${q.t}</div>` +
+    q.o.map((o,i)=>`<label class="opt" style="font-size:${size}px"><input type="radio" name="o" value="${i}" ${sel[cur]===i?'checked':''} onchange="sel[cur]=${i}"> <span>${o}</span></label>`).join('');
+  refresh();
+}
+
+function status(i){
+  if(review[i]) return 's-rev';
+  if(saved[i]) return 's-ans';
+  if(visited[i]) return 's-no';
+  return 's-nv';
+}
+function refresh(){
+  const n = Q.length; let a=0,no=0,r=0,nv=0;
+  $('nav').innerHTML = Q.map((_,i)=>{
+    const s = status(i);
+    if(saved[i]) a++;
+    if(s==='s-rev') r++; else if(s==='s-no') no++; else if(s==='s-nv') nv++;
+    return `<span class="sq ${s} ${i===cur?'cur':''}" onclick="go(${i})">${i+1}</span>`;
+  }).join('');
+  $('ans').textContent = a; $('cAns').textContent = a; $('cNo').textContent = no;
+  $('cRev').textContent = r; $('cNv').textContent = nv;
+}
+
+function go(i){cur=i;render()}
+function nextQ(){ if(cur<Q.length-1){cur++;render();return} const k=Q.findIndex((_,x)=>!saved[x]); if(k>=0){cur=k;render()} else {refresh();alert('All questions answered. Press End Test to finish.')} }
+function saveNext(){ saved[cur]=sel[cur]!==null; nextQ(); }
+function skip(){ nextQ(); }
+function mark(){ review[cur]=!review[cur]; if(sel[cur]!==null) saved[cur]=true; refresh(); }
+function prev(){ if(cur>0){cur--;render()} }
+function fs(d){ size = d===0 ? 13 : Math.max(11,Math.min(24,size+d*2)); render(); }
+
+function endTest(){
+  const un = Q.filter((_,i)=>sel[i]===null).length;
+  const msg = un ? `You have ${un} unanswered question(s). End the test?` : 'End the test?';
+  if(confirm(msg)) finish();
+}
+
+function finish(){
+  clearInterval(iv);
+  const n = Q.length; let ok=[], bad=[];
+  Q.forEach((q,i)=>{ (sel[i]===q.a ? ok : bad).push(i) });
+  const pct = n ? Math.round(ok.length/n*100) : 0;
+  const card = (i,good)=>{
+    const q=Q[i];
+    return `<div class="it ${good?'':'bad'}"><div class="q">${i+1}. ${q.t}</div>
+    ${good ? `<div class="r"><span class="tag g">Correct</span>${q.o[q.a]}</div>` :
+    `<div class="r"><span class="tag y">Your answer</span>${sel[i]===null?'— Not answered —':q.o[sel[i]]}</div>
+     <div class="r"><span class="tag g">Correct</span>${q.o[q.a]}</div>`}
+    ${q.exp?`<div class="exp">💬 ${q.exp}</div>`:''}</div>`;
+  };
+  const unans = Q.filter((_,i)=>sel[i]===null).length;
+  $('exam').classList.add('hide');
+  const r = $('result'); r.classList.remove('hide');
+  r.innerHTML = `<div class="res">
+   <div class="score"><div class="n">${pct}%</div><div>${ok.length} / ${n}</div></div>
+   <div class="stats">
+    <div><b style="color:var(--ok)">${ok.length}</b>Correct</div>
+    <div><b style="color:var(--no)">${bad.length - unans}</b>Wrong</div>
+    <div><b style="color:#777">${unans}</b>Unanswered</div>
+    <div><b>${n}</b>Total</div>
+   </div>
+   <div class="acts">
+    ${bad.length?'<button class="b" onclick="retryWrong()">Retry wrong questions ('+bad.length+')</button>':''}
+    <button class="b" onclick="init(getPool())">New random exam</button>
+   </div>
+   <div class="sec">✔ Correct questions (${ok.length})</div>
+   ${ok.map(i=>card(i,true)).join('') || '<div style="padding:8px;color:#777">None</div>'}
+   <div class="sec bad">✖ Wrong questions (${bad.length})</div>
+   ${bad.map(i=>card(i,false)).join('') || '<div style="padding:8px;color:#777">Excellent, no mistakes 🎉</div>'}
+  </div>`;
+  window.scrollTo(0,0);
+}
+
+function retryWrong(){
+  const pool = Q.filter((q,i)=>sel[i]!==q.a);
+  init(pool);
+}
+
+var activeTopic='All';
+function getPool(){return activeTopic==='All'?QUESTIONS:QUESTIONS.filter(function(q){return q.topic===activeTopic})}
+function buildFilters(){var t=[...new Set(QUESTIONS.map(function(q){return q.topic}).filter(Boolean))],w=$('filterWrap');if(!t.length){w.style.display='none';return}w.style.display='flex';w.innerHTML=['All'].concat(t).map(function(x){return '<button class="fbtn'+(x===activeTopic?' on':'')+'" data-t="'+x.replace(/"/g,'&quot;')+'">'+x+'</button>'}).join('')}
+$('filterWrap').onclick=function(e){var b=e.target.closest('.fbtn');if(!b)return;activeTopic=b.dataset.t;buildFilters();init(getPool())};
+buildFilters();init(getPool());
+</script>
+</body>
+</html>
