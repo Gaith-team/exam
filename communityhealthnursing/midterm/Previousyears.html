@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--teal:#0f766e;--teal-d:#134e4a;--blue:#ccfbf1;--bd:#b7ebe2;--ok:#15803d;--no:#b91c1c;--rev:#4f46e5;--txt:#134e4a;--grad:linear-gradient(135deg,#0f766e 0%,#14b8a6 60%,#2dd4bf 100%)}
+body{font-family:'Outfit',Arial,sans-serif;background:#f0fdfa;color:var(--txt);font-size:14px}
+header{background:var(--grad);color:#fff;text-align:center;padding:12px;font-size:18px;font-weight:900;position:relative}
+header .brand{position:absolute;right:16px;top:8px;font-weight:bold;font-size:14px}
+header a{position:absolute;left:16px;top:11px;color:#fff;font-size:13px;text-decoration:none}
+.wrap{max-width:1280px;margin:0 auto;padding:8px 10px 20px}
+.topinfo{background:var(--blue);border:1px solid var(--bd);padding:4px 8px;font-size:13px;margin-bottom:8px}
+.topinfo b{color:var(--teal)}
+.layout{display:grid;grid-template-columns:1fr 240px;gap:14px;align-items:start}
+.main{background:#fff;border:1px solid var(--bd);min-height:470px;display:flex;flex-direction:column;
+ background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='70'><text x='8' y='45' transform='rotate(-20 75 35)' font-size='14' font-family='Arial' fill='%23000' fill-opacity='.07'>GHAITH TEAM</text></svg>")}
+.qhead{display:flex;justify-content:space-between;align-items:center;padding:12px 6px 6px;margin:0 6px;border-bottom:1px solid var(--bd)}
+.qhead b{font-size:13px}
+.fs button{background:#0f766e;color:#fff;border:0;padding:6px 12px;margin-left:3px;border-radius:2px;cursor:pointer;font-weight:bold}
+.qbody{padding:8px 12px;flex:1}
+.qtext{font-size:13px;line-height:1.7;margin-bottom:18px;direction:ltr;text-align:left}
+.opt{display:flex;align-items:center;gap:8px;margin:0 0 16px;cursor:pointer;direction:ltr;text-align:left;font-size:13px}
+.opt input{accent-color:var(--teal);cursor:pointer}
+.bar{display:flex;justify-content:space-between;padding:10px;gap:6px;flex-wrap:wrap;border-top:1px solid var(--bd);margin:0 6px 6px}
+.b{background:var(--grad);color:#fff;border:0;padding:9px 12px;font-weight:bold;font-size:13px;border-radius:2px;cursor:pointer}
+.b:hover{filter:brightness(1.12)}
+.b.gray{background:#134e4a}
+.side>div{background:var(--blue);border:1px solid var(--bd);margin-bottom:10px;padding:8px}
+.timer{text-align:center;background:none!important;border:0!important}
+.timer small{font-size:13px}
+.timer .t{font-size:30px;color:#0f766e;margin-top:4px}
+.timer .t.warn{color:#c27b0a}.timer .t.danger{color:#c8372d}
+.leg{display:grid;grid-template-columns:1fr 1fr;gap:8px 6px;font-size:10px;margin-top:8px}
+.leg div{display:flex;align-items:center;gap:6px}
+.sq{min-width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:bold;border-radius:2px;border:1px solid transparent}
+.s-ans{background:var(--ok)}.s-no{background:#b45309}.s-rev{background:var(--rev)}.s-nv{background:#fff;color:#333;border-color:#9bb0a2}
+.nav{display:flex;flex-wrap:wrap;gap:6px;max-height:260px;overflow:auto;background:#ccfbf1}
+.nav .sq{width:24px;height:24px;cursor:pointer;font-size:12px}
+.nav .cur{outline:2px solid #134e4a;outline-offset:0}
+.endrow{text-align:center}
+.endrow .b{width:90px}
+footer{text-align:center;padding:16px;font-size:12px;color:#0f766e;background:#ccfbf1;border-top:1px solid #b7ebe2;margin-top:10px}
+footer a{color:#229ED9;text-decoration:none}
+.res{background:#fff;border:1px solid var(--bd);padding:20px;max-width:900px;margin:10px auto}
+.score{text-align:center;padding:10px 0 18px}
+.score .n{font-size:48px;font-weight:900;color:var(--teal)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}
+.stats div{background:var(--blue);padding:10px;text-align:center;border-radius:4px}
+.stats b{display:block;font-size:20px}
+.sec{background:var(--ok);color:#fff;padding:8px 12px;font-weight:bold;margin:22px 0 10px}
+.sec.bad{background:var(--no)}
+.it{border:1px solid var(--bd);border-left:4px solid var(--ok);padding:12px;margin-bottom:8px;background:#fafcff;direction:ltr;text-align:left}
+.it.bad{border-left-color:var(--no)}
+.it .q{font-weight:bold;font-size:13px;margin-bottom:6px;line-height:1.6}
+.it .r{font-size:12px;margin-top:4px}
+.tag{padding:1px 7px;border-radius:3px;color:#fff;font-size:11px;font-weight:bold;margin-right:6px}
+.tag.y{background:var(--no)}.tag.g{background:var(--ok)}
+.exp{font-size:12px;color:#555;margin-top:6px;background:#eef6f4;padding:6px 8px;border-radius:3px}
+.acts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.hide{display:none}
+@media(max-width:820px){.layout{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}header a{display:none}}
+.qtext img{display:block;max-width:100%;max-height:260px;margin:0 auto 12px;border-radius:8px;background:#fff}
+.it .q img{max-height:90px;display:block;margin:6px 0;border-radius:6px}
+.filters{display:flex;gap:7px;flex-wrap:wrap;margin-bottom:8px}
+.fbtn{padding:5px 13px;border-radius:50px;border:1.5px solid #b7ebe2;background:#fff;font:700 12px 'Outfit',sans-serif;color:#0f766e;cursor:pointer}
+.fbtn.on,.fbtn:hover{background:#14b8a6;color:#fff;border-color:#14b8a6}
+.tp{margin-left:8px;background:#ccfbf1;color:#0f766e;border-radius:50px;padding:2px 10px;font-size:11px}
+</style>
+</head>
+<body>
+<header><a href="https://gaith-team.github.io/exam/">← Back</a>Community Health Nursing<span class="brand">GHAITH TEAM</span></header>
+<div class="wrap">
+ <div id="exam">
+  <div id="filterWrap" class="filters" style="display:none"></div>
+  <div class="topinfo">Total questions in exam: <b id="tot">0</b> | Answered: <b id="ans">0</b></div>
+  <div class="layout">
+   <div class="main">
+    <div class="qhead"><b id="qno"></b><div class="fs"><button onclick="fs(-1)">A-</button><button onclick="fs(0)">A</button><button onclick="fs(1)">A+</button></div></div>
+    <div class="qbody" id="qbody"></div>
+    <div class="bar">
+     <button class="b" onclick="saveNext()">Save &amp; Next</button>
+     <div style="display:flex;gap:4px;flex-wrap:wrap">
+      <button class="b" onclick="mark()">Mark for Review</button>
+      <button class="b" onclick="skip()">Skip</button>
+      <button class="b" onclick="prev()">Previous</button>
+     </div>
+    </div>
+   </div>
+   <div class="side">
+    <div class="timer"><small>Time Remaining</small><div class="t" id="tm">40:00</div></div>
+    <div>
+     <div>Number of questions : <b id="tot2">0</b></div>
+     <div class="leg">
+      <div><span class="sq s-ans" id="cAns">0</span>Answered</div>
+      <div><span class="sq s-no" id="cNo">0</span>Not Answered</div>
+      <div><span class="sq s-rev" id="cRev">0</span>For Review</div>
+      <div><span class="sq s-nv" id="cNv">0</span>Not Visited</div>
+     </div>
+    </div>
+    <div class="nav" id="nav"></div>
+    <div class="endrow"><button class="b gray" onclick="endTest()">End Test</button></div>
+   </div>
+  </div>
+ </div>
+ <div id="result" class="hide"></div>
+</div>
+<footer>GHAITH TEAM · <a href="https://t.me/nursing2bu" target="_blank">@nursing2bu</a></footer>
+
+<script>
+const QUESTIONS = [
+{t:"District nursing is a stage in the development of community health nursing that starts from:",o:["Mid-1800s to 1900","1900 to 1970","Before mid-1800s","1970 to the present"],a:0,topic:"Overview of CHN"},
+{t:"Treatment of the sick poor at home is a characteristic of:",o:["Early home care nursing","District nursing","Public health nursing","Community health nursing"],a:1,topic:"Overview of CHN"},
+{t:"Early home care nursing took place:",o:["Before the mid-1800s","Mid-1800s to 1900","1900 to 1970","1970 to the present"],a:0,topic:"Overview of CHN"},
+{t:"Community health is the science and art of preventing disease, prolonging life and promoting health through organized community efforts.",o:["True","False"],a:1,topic:"Overview of CHN"},
+{t:"Policy development is:",o:["Formation of a guide for action","Translation of established policies into services","A continuous process of collecting information","Systematic investigation to discover facts"],a:0,topic:"Overview of CHN"},
+{t:"The translation of established policies into services is:",o:["Research","Evaluation","Assessment","Assurance"],a:3,topic:"Overview of CHN"},
+{t:"Policy development is the process of translating established policies into services.",o:["True","False"],a:1,topic:"Overview of CHN"},
+{t:"Policy development means measuring and monitoring the health status of the population.",o:["True","False"],a:1,topic:"Overview of CHN"},
+{t:"Assessment is a systematic investigation to discover facts affecting community health.",o:["True","False"],a:1,topic:"Overview of CHN"},
+{t:"Research is a systematic investigation to discover facts affecting community health and community health practice.",o:["True","False"],a:0,topic:"Overview of CHN"},
+{t:"Which of the following is a function of community health nursing?",o:["Uses aggregate measurements and analysis","Promotes client responsibility and self-care","Policy development","Emphasizes prevention and health promotion"],a:2,topic:"Overview of CHN"},
+{t:"The function of community health nursing is effective when: 1) Measuring and monitoring the health status of the community 2) Determining present and future decisions affecting public health 3) Translating established policies into services 4) Neglecting the rules of public health in services",o:["1, 2, 3","1, 2, 4","1, 3, 4","2, 3, 4"],a:0,topic:"Overview of CHN"},
+{t:"Which of the following is a characteristic of community health nursing?",o:["Progress in causal thinking","Advanced technology","Population focused","Changing role of women"],a:2,topic:"Overview of CHN"},
+{t:"Factors that influence community health nursing development include: 1) Changes in education 2) Changing demographics 3) Physical impairment 4) Spiritual factors",o:["1, 2","1, 3","2, 3","3, 4"],a:0,topic:"Overview of CHN"},
+{t:"Changes in nursing education have had an important influence on community health nursing practice.",o:["True","False"],a:0,topic:"Overview of CHN"},
+{t:"Community health nursing encourages individual participation rather than permitting dependency.",o:["True","False"],a:0,topic:"Overview of CHN"},
+{t:"The educator role in community health nursing is insignificant because a wider audience can be reached.",o:["True","False"],a:1,topic:"Overview of CHN"},
+{t:"Expanded skills means the broad range of interacting needs that affect the collective health of the client as a larger system.",o:["True","False"],a:1,topic:"Overview of CHN"},
+{t:"Holistic practice means considering the broad range of interacting needs that affect the collective health of the client as a larger system.",o:["True","False"],a:0,topic:"Overview of CHN"},
+{t:"The clinical role of the community health nurse emphasizes:",o:["Family focus","Individual focus","Marketing skills","Expanded skills"],a:3,topic:"Overview of CHN"},
+{t:"The community health nurse should be focused on:",o:["Wellness for every individual","Economic forces of the community","Advanced technology","Evaluation of the practice"],a:0,topic:"Overview of CHN"},
+{t:"The scopes (settings) of community health nursing include: 1) Ambulatory service setting 2) Occupational health settings 3) Residential institutions 4) Service to people with health problems",o:["1, 2, 4","1, 2, 3","1, 3","1, 2, 3, 4"],a:1,topic:"Overview of CHN"},
+{t:"Components of community health practice include: 1) Prevention of health problems 2) Treatment of disorders 3) Rehabilitation 4) Satisfying a mandate",o:["1, 2, 3","2, 3, 4","1, 2, 4","1, 3, 4"],a:0,topic:"Overview of CHN"},
+{t:"Treatment, as a component of community health practice, can occur through:",o:["Promotion services","Indirect services","Preventive services","Healthy programs"],a:1,topic:"Overview of CHN"},
+{t:"Tertiary prevention attempts to reduce the extent and severity of a health problem to preserve function.",o:["True","False"],a:0,topic:"Overview of CHN"},
+{t:"Tertiary prevention includes:",o:["Investigating social and family circumstances","Increasing the level of resistance against health problems","Increasing people's awareness","Providing health education to promote health"],a:0,topic:"Overview of CHN"},
+{t:"The role of the community health nurse in secondary prevention includes: 1) Provide health education to promote health 2) Provide health education based on diagnosis 3) Help patients participate in their care 4) Participate with the health team in providing care",o:["1, 2, 3","1, 3, 4","2, 3, 4","1, 2, 4"],a:2,topic:"Overview of CHN"},
+{t:"Health education reduces the cost of health care.",o:["True","False"],a:0,topic:"Overview of CHN"},
+{t:"The incubation period of typhoid fever (Enterica) is:",o:["1 to 5 weeks","1 to 3 weeks","1 to 6 weeks","1 to 4 weeks"],a:1,topic:"Communicable Diseases"},
+{t:"In typhoid fever, antibodies in the Widal (agglutination) test begin to rise in the:",o:["First week","Second week","Third week","Fourth week"],a:1,topic:"Communicable Diseases"},
+{t:"A booster dose of the heat-killed phenol-preserved typhoid vaccine is given every:",o:["Three weeks","Three days","Three months","Three years"],a:3,topic:"Communicable Diseases"},
+{t:"The heat-killed phenol-preserved (TAB) typhoid vaccine is given:",o:["Orally","Subcutaneously","Intravenously","Intramuscularly"],a:1,topic:"Communicable Diseases"},
+{t:"The live virulent typhoid vaccine (Ty21) is given:",o:["Intramuscularly","Orally","Intradermally","Subcutaneously"],a:1,topic:"Communicable Diseases"},
+{t:"A major criterion of typhoid fever is sustained fever for:",o:["More than 2 days","Less than 2 days","More than 2 weeks","Less than 2 weeks"],a:0,topic:"Communicable Diseases"},
+{t:"Which of the following is a minor criterion of typhoid fever?",o:["Abdominal distension","Sustained fever","Relative bradycardia","Headache"],a:2,topic:"Communicable Diseases"},
+{t:"Modes of transmission of typhoid fever include: 1) Ingestion of contaminated food or water 2) Direct hand-to-mouth infection from cases or carriers 3) Indirect use of soiled articles of cases or carriers 4) Flies carrying organisms to exposed food",o:["1, 2, 3, 4","1, 3, 4","2, 3, 4","1, 2, 4"],a:0,topic:"Communicable Diseases"},
+{t:"COVID-19 infection is considered a(n) ........ disease:",o:["Epidemic","Pandemic","Endemic","Outbreak"],a:1,topic:"Communicable Diseases"},
+{t:"........ describes diseases occurring in a small confined area (e.g., school, camp, hotel or prison):",o:["Epidemic","Pandemic","Endemic","Outbreak"],a:3,topic:"Communicable Diseases"},
+{t:"A disease or condition regularly found among particular people or in a certain area is:",o:["Pandemic","Endemic","Epidemic","Outbreak"],a:1,topic:"Communicable Diseases"},
+{t:"Malaria is considered a(n) ........ disease:",o:["Sporadic","Pandemic","Endemic","Outbreak"],a:2,topic:"Communicable Diseases"},
+{t:"A person that harbors a specific infectious agent in the absence of clinical manifestations of disease is a:",o:["Reservoir","Case","Vector","Carrier"],a:3,topic:"Communicable Diseases"},
+{t:"A carrier is a person having the particular disease, health disorder, or condition under investigation.",o:["True","False"],a:1,topic:"Communicable Diseases"},
+{t:"The time interval between invasion of the body by an infectious agent and appearance of the first signs and symptoms is the:",o:["Convalescent period","Incubation period","Transitional period","Sporadic period"],a:1,topic:"Communicable Diseases"},
+{t:"Epidemic describes a disease that spreads throughout the world.",o:["True","False"],a:1,topic:"Communicable Diseases"},
+{t:"Zoonosis is the word used when an epidemic occurs in a small confined area.",o:["True","False"],a:1,topic:"Communicable Diseases"},
+{t:"H1N1 influenza is considered an epidemic disease.",o:["True","False"],a:1,topic:"Communicable Diseases"},
+{t:"Host factors in the epidemiologic triad are considered intrinsic factors.",o:["True","False"],a:0,topic:"Communicable Diseases"},
+{t:"Host is one of the extrinsic factors that cause infectious disease.",o:["True","False"],a:1,topic:"Communicable Diseases"},
+{t:"An extrinsic factor for an infectious disease to occur is:",o:["Exercise","Education","Environment","Occupation"],a:2,topic:"Communicable Diseases"},
+{t:"Exercise is one of the social traits of the intrinsic (host) factors in the epidemiologic triad.",o:["True","False"],a:0,topic:"Communicable Diseases"},
+{t:"The epidemiologic triad explains the interaction between two elements for disease occurrence.",o:["True","False"],a:1,topic:"Communicable Diseases"},
+{t:"The chain of infection includes three elements for disease occurrence.",o:["True","False"],a:1,topic:"Communicable Diseases"},
+{t:"Vehicle spread involves the transmission of an infectious agent on an animate object.",o:["True","False"],a:1,topic:"Communicable Diseases"},
+{t:"........ involves the transmission of an infectious agent in or on an animate thing:",o:["Reservoir","Vehicle","Vector","Zoonosis"],a:2,topic:"Communicable Diseases"},
+{t:"Zoonotic diseases include:",o:["Meningitis","Chickenpox","Enterica","Brucellosis"],a:3,topic:"Communicable Diseases"},
+{t:"Which of the following is a droplet infection?",o:["Enterica","Varicella","Ebola","Anthrax"],a:1,topic:"Communicable Diseases"},
+{t:"Common droplet infections include: 1) Meningitis 2) Enterica 3) Parotitis 4) Varicella",o:["1, 2, 4","1, 3, 4","1, 2, 3, 4","2, 3, 4"],a:1,topic:"Communicable Diseases"},
+{t:"Parotitis is one of the:",o:["Gastrointestinal tract infections","Respiratory tract infections","Genitourinary tract infections","Integumentary tract infections"],a:1,topic:"Communicable Diseases"},
+{t:"Enterica is one of the droplet infections.",o:["True","False"],a:1,topic:"Communicable Diseases"},
+{t:"Parotitis is one of the foodborne diseases.",o:["True","False"],a:1,topic:"Communicable Diseases"},
+{t:"Rubella is a genitourinary tract infection.",o:["True","False"],a:1,topic:"Communicable Diseases"},
+{t:"A disease that can be transmitted through saliva is:",o:["Parotitis","Hepatitis A","Streptococcal infection","Meningitis"],a:1,topic:"Communicable Diseases"},
+{t:"General factors of body resistance include: 1) Diarrhea 2) Fibroblasts 3) Gastric juices 4) Cough reflex",o:["1, 2, 3, 4","1, 2, 4","1, 2, 3","1, 3, 4"],a:3,topic:"Communicable Diseases"},
+{t:"Vomiting is one of the specific factors of body resistance to gastrointestinal diseases.",o:["True","False"],a:1,topic:"Communicable Diseases"},
+{t:"Cough reflex is one of the specific factors of body resistance to infection.",o:["True","False"],a:1,topic:"Communicable Diseases"},
+{t:"Characteristics of the school-age period include:",o:["Period of play and calm","Period of play and creation","Period of relaxation","Period of recreation"],a:1,topic:"School Health"},
+{t:"A reason for giving school-age children special consideration is that:",o:["They constitute a tiny sector of the population","School students are considered a vulnerable group","School students are less liable to accidents","School students need promoting adjustment"],a:1,topic:"School Health"},
+{t:"........ is the procedure to protect and promote the health of the school community:",o:["School health program","Health appraisal","Health education","Health screening"],a:0,topic:"School Health"},
+{t:"The components of the school health program are school living environment, school health services and health screening.",o:["True","False"],a:1,topic:"School Health"},
+{t:"School health services include appraisal services, preventive services and screening services.",o:["True","False"],a:1,topic:"School Health"},
+{t:"The components of the school health program are separate and do not affect one another.",o:["True","False"],a:1,topic:"School Health"},
+{t:"The comprehensive school health program deals with the emotional health of students.",o:["True","False"],a:0,topic:"School Health"},
+{t:"The school health program provides curative services to school students.",o:["True","False"],a:0,topic:"School Health"},
+{t:"First aid service is one of the curative measures in the school setting.",o:["True","False"],a:1,topic:"School Health"},
+{t:"The health status of students is a strong determinant of their school environment.",o:["True","False"],a:0,topic:"School Health"},
+{t:"The most common complaints of a student with school phobia are abdominal pain, vomiting and headache.",o:["True","False"],a:0,topic:"School Health"},
+{t:"........ means the organized activity carried out to assess the health status of students from the physical, mental, social and emotional aspects:",o:["School health program","Health appraisal","Health education","Health services"],a:1,topic:"School Health"},
+{t:"Health appraisal services include:",o:["First aid","Referral","Screening","Comprehensive medical treatment"],a:2,topic:"School Health"},
+{t:"Health appraisal includes all of the following EXCEPT:",o:["History","Insect control","Screening","Special survey"],a:1,topic:"School Health"},
+{t:"School nurses identify children with chickenpox and exclude them from school for:",o:["21 days","18 days","14 days","7 days"],a:2,topic:"School Health"},
+{t:"School nurses identify children with hepatitis A and exclude them from school for:",o:["21 days","18 days","14 days","7 days"],a:0,topic:"School Health"},
+{t:"School nurses identify children with German measles and exclude them from school for:",o:["21 days","18 days","14 days","7 days"],a:3,topic:"School Health"},
+{t:"A student with hepatitis A should be excluded from school for 10 days.",o:["True","False"],a:1,topic:"School Health"},
+{t:"A student with whooping cough should be excluded from school for 18 days.",o:["True","False"],a:0,topic:"School Health"},
+{t:"Booster doses of DT are given to school children in:",o:["1st and 4th year of primary school","1st and 3rd year of preparatory school","1st and 5th year of secondary school","1st and 4th year of secondary school"],a:0,topic:"School Health"},
+{t:"Health education is an essential component of the school health program and is done through:",o:["Conducting health conferences","Assisting in special surveys","Comprehensive medical examination","Curative services"],a:0,topic:"School Health"},
+{t:"Which of the following is a preventive service of school health services?",o:["Taking history","Screening tests","Education of children with special disabilities","Medication administration and monitoring"],a:2,topic:"School Health"},
+{t:"Preventive measures of school health services include: 1) Prevention and control of communicable diseases 2) Early detection and correction of non-communicable diseases 3) Early identification and education of children with special disabilities 4) Medication administration and monitoring",o:["1, 3, 4","1, 2, 3","2, 3, 4","1, 2, 3, 4"],a:1,topic:"School Health"},
+{t:"The school health program provides curative services through:",o:["Taking history","Affiliated hospitals or services","Healthful environment","Emergency care"],a:1,topic:"School Health"},
+{t:"The school health nurse provides curative services for students through:",o:["Helping in planning and conducting school health projects","Conducting health conferences with teachers about students' health","Giving health education to sick children about how to prevent reinfection","Referral and treatment for any discovered diseases"],a:3,topic:"School Health"},
+{t:"Aims of school health services include: 1) To enhance overall health 2) Early detection of disorders 3) Inappropriate treatment 4) Prevention and control of communicable diseases",o:["1, 3, 4","1, 2, 4","2, 3, 4","1, 2, 3, 4"],a:1,topic:"School Health"},
+{t:"The school nurse can protect students from infection through:",o:["Conducting school health projects","Conducting health conferences with teachers","Ensuring a healthful school environment","Developing talents and skills for students"],a:2,topic:"School Health"},
+{t:"A secondary-school student is isolated, drowsy and less concentrated one month after his father's death. The role of the school health nurse for this student is:",o:["Taking personal and family history","Listening to the student and his problems","Assisting in the medical examination","Providing prescribed medication"],a:1,topic:"School Health"},
+{t:"Which of the following is an objective of health education?",o:["Promotion of health and prevention of disease","Motivating the public to follow sound logic behavior","Changing positive traditional beliefs","Promoting the development and improper use of health services"],a:0,topic:"Health Education"},
+{t:"The objectives of health education include all of the following EXCEPT:",o:["Reducing diseases","Motivating the public to follow unhealthy behavior","Changing faulty traditional behaviors","Proper use of health services"],a:1,topic:"Health Education"},
+{t:"Motivating the public to follow sound health behavior is a main objective of health education.",o:["True","False"],a:0,topic:"Health Education"},
+{t:"Health education is limited to situations in which actual instruction is given.",o:["True","False"],a:1,topic:"Health Education"},
+{t:"Which of the following is considered a principle of a health education program?",o:["Learner","Presentation of content","Learning situation","The events of instruction"],a:3,topic:"Health Education"},
+{t:"The most useful categories of educational principles include: 1) The nature of learning 2) The events of instruction 3) Guidelines for the effective educator 4) Presentation of content",o:["1, 2, 4","2, 3, 4","1, 2, 3","1, 3, 4"],a:2,topic:"Health Education"},
+{t:"........ is a category of educational principles:",o:["Capacity of learning","The events of instruction","Learning situation","Reinforcement"],a:1,topic:"Health Education"},
+{t:"Motivation to learn is influenced by: 1) The value component 2) The expectancy component 3) The affective component",o:["1, 2, 3","2, 3","1, 3","1, 2"],a:0,topic:"Health Education"},
+{t:"Strategies to increase motivation and self-efficacy include: 1) Enhance relevance 2) Build confidence 3) Generate satisfaction 4) Reinforcement and retention",o:["1, 2, 3","2, 3, 4","1, 2, 4","1, 3, 4"],a:0,topic:"Health Education"},
+{t:"A strategy to increase motivation for learning is:",o:["Application of information","Positive reinforcement","Enhance relevance","Promote feedback"],a:2,topic:"Health Education"},
+{t:"The learning process is affected by:",o:["Experience","Environment","Motivation","Participation"],a:2,topic:"Health Education"},
+{t:"The process by which people acquire knowledge, change their feelings and modify their health behavior is the:",o:["Learning process","Participation","Counseling process","Evaluation"],a:0,topic:"Health Education"},
+{t:"Engaging the learner in the learning process is called:",o:["Evaluation","Participation","Experience","Environment"],a:1,topic:"Health Education"},
+{t:"Providing learning guidance is considered part of the sequence of instruction.",o:["True","False"],a:0,topic:"Health Education"},
+{t:"Active participation of the learner is an indirect method of health education.",o:["True","False"],a:1,topic:"Health Education"},
+{t:"Role playing is not followed by discussion.",o:["True","False"],a:1,topic:"Health Education"},
+{t:"The capacity for learning is equal for all people.",o:["True","False"],a:1,topic:"Health Education"},
+{t:"........ is considered a barrier to health education:",o:["Sanitary environment","Adequate health services","Illiteracy","Young members of the family"],a:2,topic:"Health Education"},
+{t:"A human barrier to health education is:",o:["Lack of application of knowledge","Faulty behavior","Inadequate health services","Insanitary environment"],a:1,topic:"Health Education"},
+{t:"Community health nurses need to cultivate sets of communication skills, which include:",o:["Intrapersonal skills","Persons skills","Interpersonal skills","Personal skills"],a:2,topic:"Health Education"},
+{t:"The core of communication skills includes: 1) Sending skills 2) Receiving skills 3) Interpersonal skills 4) Writing skills",o:["1, 2, 3","2, 3, 4","1, 3, 4","1, 2, 4"],a:0,topic:"Health Education"},
+{t:"Interpersonal skills include the following:",o:["Receiving skills and showing respect","Showing respect and developing trust","Developing trust and motivation","Showing respect and motivating"],a:1,topic:"Health Education"},
+{t:"Which of the following is a type of interpersonal skill?",o:["Paraphrasing","Intrapersonal skills","Empathizing","Sympathy"],a:2,topic:"Health Education"},
+{t:"Which of the following is a nonverbal channel used to send messages?",o:["Communicated ideas","Speaking","Facial expression","Attitudes"],a:2,topic:"Health Education"},
+{t:"Effective receiving skills require attention to the verbal message only.",o:["True","False"],a:1,topic:"Health Education"},
+{t:"Counseling is based on public health needs.",o:["True","False"],a:1,topic:"Health Education"},
+{t:"Counseling is information provided to increase the client's knowledge.",o:["True","False"],a:1,topic:"Health Education"},
+{t:"Counseling is defined as a helping process aimed at problem solving.",o:["True","False"],a:0,topic:"Health Education"},
+{t:"Advice serves to empower clients to help themselves.",o:["True","False"],a:1,topic:"Health Education"},
+{t:"Types of interpersonal violence are: 1) Homicide and suicide 2) Youth-related violence 3) Intimate partner violence 4) Elder abuse",o:["1, 2, 4","1, 3, 4","2, 3, 4","1, 2, 3"],a:1,topic:"Violence"},
+{t:"Which of the following is a type of interpersonal violence?",o:["Prison violence","Youth-related violence","Hate crimes","Elder abuse"],a:3,topic:"Violence"},
+{t:"........ is an interpersonal violence:",o:["Child abuse","Workplace violence","Youth-related violence","Gangs"],a:0,topic:"Violence"},
+{t:"Hate crimes are a type of interpersonal violence.",o:["True","False"],a:1,topic:"Violence"},
+{t:"Gangs are a type of:",o:["Workplace violence","Intimate partner violence","Community violence","Prison violence"],a:2,topic:"Violence"},
+{t:"Community violence includes: 1) Terrorism 2) Gangs 3) Neglect 4) Hate crimes",o:["1, 3, 4","1, 2, 4","2, 3, 4","1, 2, 3, 4"],a:1,topic:"Violence"},
+{t:"Factors that contribute to violence include: 1) Intolerance and ignorance 2) Media influence 3) Maldevelopment or deprivation 4) Political and religious ideology",o:["1, 2, 4","1, 3, 4","2, 3, 4","1, 2, 3"],a:0,topic:"Violence"},
+{t:"Which of the following is a factor that contributes to violence?",o:["High income and employment","Absence of firearms","Functional family and emotional support","Media influence"],a:3,topic:"Violence"},
+{t:"Factors that contribute to violence include all of the following EXCEPT:",o:["Movies often depict people being tortured","Participation in violent video games","Tolerance and ignorance","Political and religious ideology"],a:2,topic:"Violence"},
+{t:"........ is perpetrated by a friend, acquaintance or family member during an argument:",o:["Prison violence","Suicide","Homicide","Youth violence"],a:2,topic:"Violence"},
+{t:"The risk of death by suicide is greater than the risk of death by homicide.",o:["True","False"],a:0,topic:"Violence"},
+{t:"Homicide is an act of a human killing one's own self.",o:["True","False"],a:1,topic:"Violence"},
+{t:"The presence of a gun in the home is an important risk factor for suicide as well as homicide.",o:["True","False"],a:0,topic:"Violence"},
+{t:"Education plays a major part in the primary prevention of violence.",o:["True","False"],a:0,topic:"Violence"},
+{t:"........ is the systematic use of violent terror as a means of coercion:",o:["Hate crime","Gangs","Prison violence","Terrorism"],a:3,topic:"Violence"},
+{t:"The intentional use of physical force or power against oneself, another person, or a group or community is called:",o:["Violence","Hate crime","Terrorism","Homicide"],a:0,topic:"Violence"},
+{t:"Intimate partner violence is also known as domestic violence.",o:["True","False"],a:0,topic:"Violence"},
+{t:"Child physical neglect includes:",o:["Failure to give positive feedback","Failure to provide basic needs","Failure to show affection","Withholding love and rejection"],a:1,topic:"Violence"},
+{t:"........ is maltreatment of a child by a person responsible for the child's welfare:",o:["Physical neglect","Emotional neglect","Sexual abuse","Financial exploitation"],a:0,topic:"Violence"},
+{t:"Emotional neglect includes beating, burning, biting, bruising, and head and internal injury.",o:["True","False"],a:1,topic:"Violence"},
+{t:"Physical neglect includes beating, burning, biting, bruising, and head and internal injury.",o:["True","False"],a:1,topic:"Violence"},
+{t:"Emotional neglect is the failure to nurture a child in developmentally appropriate ways.",o:["True","False"],a:0,topic:"Violence"},
+{t:"Types of child abuse include: 1) Physical and emotional neglect 2) Sexual abuse 3) Emotional abuse 4) Homicide",o:["1, 2, 4","1, 3, 4","2, 3, 4","1, 2, 3"],a:3,topic:"Violence"},
+{t:"Physical abuse of older adults includes:",o:["Purposeful infliction of physical pain or injury","Provoking fear or isolation","Theft or misuse of money or property","Charging for services not delivered"],a:0,topic:"Violence"},
+{t:"Health care fraud and abuse of older adults is:",o:["Withholding of personal care or medication","Charging for services not delivered","Charging for services delivered","Misuse of money or property"],a:1,topic:"Violence"},
+{t:"Neglect of older adults includes withholding of personal care, food or medication.",o:["True","False"],a:0,topic:"Violence"},
+{t:"The first step of counseling is:",o:["Goal setting","Counseling intervention","Rapport building","Termination and follow-up"],a:2,topic:"Counseling"},
+{t:"The person who provides help in sessions to solve problems is the:",o:["Counselor","Counselee","Therapist","Consultant"],a:0,topic:"Counseling"},
+{t:"Which of the following is a goal of counseling?",o:["Don't block free expression of feeling","Recognize your limitations","Promoting decision making","Believing in the client"],a:2,topic:"Counseling"},
+{t:"Which of the following is a quality of a good counselor?",o:["Prejudice toward clients","Self-reflection","Non-judgmental attitude","Introspection"],a:2,topic:"Counseling"},
+{t:"Congruence refers to being consistently real in the helping relationship.",o:["True","False"],a:0,topic:"Counseling"},
+{t:"Empathy is a non-judgmental attitude toward the client that provides a relationship which feels safe, warm and accepting.",o:["True","False"],a:1,topic:"Counseling"},
+{t:"Primary health care is essential health care based on practical, scientifically sound methods of advanced technology.",o:["True","False"],a:1,topic:"Primary Health Care"},
+{t:"Developing rapport with the community is a strategy of primary health care.",o:["True","False"],a:0,topic:"Primary Health Care"},
+{t:"Expansion of services and ensuring efficiency is one of the primary health care approaches.",o:["True","False"],a:0,topic:"Primary Health Care"},
+{t:"The development efforts of each health sector are complementary to others.",o:["True","False"],a:0,topic:"Primary Health Care"},
+{t:"Accessibility is often expressed in terms of a numerical ratio between services and the population.",o:["True","False"],a:0,topic:"Primary Health Care"},
+{t:"Accessibility means an organized and continuous supply of care.",o:["True","False"],a:0,topic:"Primary Health Care"},
+{t:"Equity is a continuing and organized supply of care.",o:["True","False"],a:1,topic:"Primary Health Care"},
+{t:"The legislative approach is used in the case of compulsory immunization of children.",o:["True","False"],a:0,topic:"Primary Health Care"},
+{t:"Application of appropriate technology is a requirement of primary health care.",o:["True","False"],a:0,topic:"Primary Health Care"},
+{t:"Collaboration with academic institutions is essential for primary health care development.",o:["True","False"],a:0,topic:"Primary Health Care"},
+{t:"Provision of drugs is not an essential element of primary health care.",o:["True","False"],a:1,topic:"Primary Health Care"},
+{t:"Primary health care emphasizes curative services more than promotive services.",o:["True","False"],a:1,topic:"Primary Health Care"},
+{t:"One of the infant and child priorities (UNICEF) is the elevation of neonatal tetanus.",o:["True","False"],a:1,topic:"Primary Health Care"},
+{t:"Health cannot be attained by the health sector alone; primary health care requires the support of other sectors.",o:["True","False"],a:0,topic:"Primary Health Care"},
+{t:"Intrauterine devices are inserted in the vagina and work by killing sperm.",o:["True","False"],a:1,topic:"Primary Health Care"},
+{t:"Social configurations is a form of family record data.",o:["True","False"],a:0,topic:"Primary Health Care"},
+{t:"Appropriateness (of technology in PHC) means:",o:["Scientifically sound and acceptable to those who apply and use it","A continuing and organized supply of care","Services to all and more services to the needy","Distribution of resources according to income"],a:0,topic:"Primary Health Care"},
+{t:"Instruments in PHC delivery include:",o:["Appropriate technology","Community participation","Conduction of minor surgery","Equity in distribution and accessibility"],a:2,topic:"Primary Health Care"},
+{t:"Primary health care elements include:",o:["Basic lab work","First aid services","Multisectoral approach","Provision of essential basic household drugs"],a:3,topic:"Primary Health Care"},
+{t:"The essential elements of PHC are: 1) Appropriate treatment of common diseases and injuries 2) Appropriate technology that people can use and afford 3) Adequate safe water supply and basic sanitation 4) Provision of essential basic household drugs",o:["1, 2, 3","1, 2, 4","1, 3, 4","2, 3, 4"],a:2,topic:"Primary Health Care"},
+{t:"The scope of primary health care services includes:",o:["Maternal care","Child care","Health education","All of the above"],a:3,topic:"Primary Health Care"},
+{t:"Reasons for slow progress of primary health care include:",o:["Vitamin A deficiency worldwide","The continuous low status of women","Food-borne diseases","Correction of family feeding practices"],a:1,topic:"Primary Health Care"},
+{t:"Which of the following is NOT a center providing primary health care in urban areas?",o:["Rural health units","School health centers","Industrial health centers","Health office"],a:0,topic:"Primary Health Care"},
+{t:"Which of the following is NOT done at subsequent prenatal visits?",o:["Vital signs","Fundal height","Fundus tone and position","Urine analysis"],a:2,topic:"Primary Health Care"},
+{t:"Which of the following is NOT a sector that supports primary health care?",o:["Waste sector","Mass media","Provision of essential drugs","Housing"],a:2,topic:"Primary Health Care"},
+{t:"Which of the following is NOT paramedical personnel?",o:["Technicians","Midwives","Social workers","Health visitors"],a:2,topic:"Primary Health Care"},
+{t:"Which of the following is NOT included in the data of the family record?",o:["Family composition and size","Social configurations and relations","Referral services","Immunization against major infectious diseases"],a:3,topic:"Primary Health Care"},
+{t:"Primary health care is applied to prevent the occurrence of disease through the following EXCEPT:",o:["Immunization","Chemoprophylaxis","Life-saving services","Environmental sanitation"],a:2,topic:"Primary Health Care"},
+{t:"The Integrated Management of Childhood Illness (IMCI) includes the following EXCEPT:",o:["A broad strategy to improve child health","A particular focus on the poorest and most disadvantaged children","Aims to reduce childhood deaths, illnesses and disability","Limited to interventions at home"],a:3,topic:"Primary Health Care"},
+{t:"Social awareness and self-reliance are key factors for:",o:["Intersectoral coordination","Community participation","Team approach","Appropriate technology"],a:1,topic:"Primary Health Care"},
+{t:"Premarital care includes: 1) Family planning services 2) Breast feeding and proper nutrition 3) Genetic counseling 4) Systemic medical examination",o:["1, 2","2, 3","3, 4","1, 4"],a:2,topic:"Primary Health Care"},
+{t:"In developing countries, the percentage of women who make at least one antenatal visit is:",o:["75%","65%","55%","51%"],a:1,topic:"Primary Health Care"},
+{t:"In developed countries, the percentage of women who make at least one antenatal visit is:",o:["93%","95%","97%","99%"],a:2,topic:"Primary Health Care"},
+];
+
+const TOTAL_TIME = 40*60;
+let Q, cur, sel, saved, review, visited, left, iv, size = 13;
+
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function shuffleOptions(q){const ix=shuffle(q.o.map((_,k)=>k));return {...q,o:ix.map(k=>q.o[k]),a:ix.indexOf(q.a)}}
+const $ = id => document.getElementById(id);
+
+function init(pool){
+  Q = shuffle([...pool]).map(shuffleOptions); const n = Q.length;
+  cur = 0; sel = Array(n).fill(null); saved = Array(n).fill(false);
+  review = Array(n).fill(false); visited = Array(n).fill(false);
+  left = TOTAL_TIME;
+  $('exam').classList.remove('hide'); $('result').classList.add('hide');
+  $('tot').textContent = $('tot2').textContent = n;
+  clearInterval(iv);
+  iv = setInterval(()=>{
+    left--; const m=Math.floor(left/60), s=left%60, t=$('tm');
+    t.textContent = m+':'+(s<10?'0':'')+s;
+    t.className = 't'+(left<=120?' danger':left<=300?' warn':'');
+    if(left<=0){clearInterval(iv);finish()}
+  },1000);
+  if(n) render();
+  window.scrollTo(0,0);
+}
+
+function render(){
+  visited[cur] = true;
+  const q = Q[cur];
+  $('qno').innerHTML = 'Question No. ' + (cur+1) + (q.topic ? ' <span class="tp">'+q.topic+'</span>' : '');
+  $('qbody').style.fontSize = size+'px';
+  $('qbody').innerHTML = `<div class="qtext" style="font-size:${size}px">${q.t}</div>` +
+    q.o.map((o,i)=>`<label class="opt" style="font-size:${size}px"><input type="radio" name="o" value="${i}" ${sel[cur]===i?'checked':''} onchange="sel[cur]=${i}"> <span>${o}</span></label>`).join('');
+  refresh();
+}
+
+function status(i){
+  if(review[i]) return 's-rev';
+  if(saved[i]) return 's-ans';
+  if(visited[i]) return 's-no';
+  return 's-nv';
+}
+function refresh(){
+  const n = Q.length; let a=0,no=0,r=0,nv=0;
+  $('nav').innerHTML = Q.map((_,i)=>{
+    const s = status(i);
+    if(saved[i]) a++;
+    if(s==='s-rev') r++; else if(s==='s-no') no++; else if(s==='s-nv') nv++;
+    return `<span class="sq ${s} ${i===cur?'cur':''}" onclick="go(${i})">${i+1}</span>`;
+  }).join('');
+  $('ans').textContent = a; $('cAns').textContent = a; $('cNo').textContent = no;
+  $('cRev').textContent = r; $('cNv').textContent = nv;
+}
+
+function go(i){cur=i;render()}
+function nextQ(){ if(cur<Q.length-1){cur++;render();return} const k=Q.findIndex((_,x)=>!saved[x]); if(k>=0){cur=k;render()} else {refresh();alert('All questions answered. Press End Test to finish.')} }
+function saveNext(){ saved[cur]=sel[cur]!==null; nextQ(); }
+function skip(){ nextQ(); }
+function mark(){ review[cur]=!review[cur]; if(sel[cur]!==null) saved[cur]=true; refresh(); }
+function prev(){ if(cur>0){cur--;render()} }
+function fs(d){ size = d===0 ? 13 : Math.max(11,Math.min(24,size+d*2)); render(); }
+
+function endTest(){
+  const un = Q.filter((_,i)=>sel[i]===null).length;
+  const msg = un ? `You have ${un} unanswered question(s). End the test?` : 'End the test?';
+  if(confirm(msg)) finish();
+}
+
+function finish(){
+  clearInterval(iv);
+  const n = Q.length; let ok=[], bad=[];
+  Q.forEach((q,i)=>{ (sel[i]===q.a ? ok : bad).push(i) });
+  const pct = n ? Math.round(ok.length/n*100) : 0;
+  const card = (i,good)=>{
+    const q=Q[i];
+    return `<div class="it ${good?'':'bad'}"><div class="q">${i+1}. ${q.t}</div>
+    ${good ? `<div class="r"><span class="tag g">Correct</span>${q.o[q.a]}</div>` :
+    `<div class="r"><span class="tag y">Your answer</span>${sel[i]===null?'— Not answered —':q.o[sel[i]]}</div>
+     <div class="r"><span class="tag g">Correct</span>${q.o[q.a]}</div>`}
+    ${q.exp?`<div class="exp">💬 ${q.exp}</div>`:''}</div>`;
+  };
+  const unans = Q.filter((_,i)=>sel[i]===null).length;
+  $('exam').classList.add('hide');
+  const r = $('result'); r.classList.remove('hide');
+  r.innerHTML = `<div class="res">
+   <div class="score"><div class="n">${pct}%</div><div>${ok.length} / ${n}</div></div>
+   <div class="stats">
+    <div><b style="color:var(--ok)">${ok.length}</b>Correct</div>
+    <div><b style="color:var(--no)">${bad.length - unans}</b>Wrong</div>
+    <div><b style="color:#777">${unans}</b>Unanswered</div>
+    <div><b>${n}</b>Total</div>
+   </div>
+   <div class="acts">
+    ${bad.length?'<button class="b" onclick="retryWrong()">Retry wrong questions ('+bad.length+')</button>':''}
+    <button class="b" onclick="init(getPool())">New random exam</button>
+   </div>
+   <div class="sec">✔ Correct questions (${ok.length})</div>
+   ${ok.map(i=>card(i,true)).join('') || '<div style="padding:8px;color:#777">None</div>'}
+   <div class="sec bad">✖ Wrong questions (${bad.length})</div>
+   ${bad.map(i=>card(i,false)).join('') || '<div style="padding:8px;color:#777">Excellent, no mistakes 🎉</div>'}
+  </div>`;
+  window.scrollTo(0,0);
+}
+
+function retryWrong(){
+  const pool = Q.filter((q,i)=>sel[i]!==q.a);
+  init(pool);
+}
+
+var activeTopic='All';
+function getPool(){return activeTopic==='All'?QUESTIONS:QUESTIONS.filter(function(q){return q.topic===activeTopic})}
+function buildFilters(){var t=[...new Set(QUESTIONS.map(function(q){return q.topic}).filter(Boolean))],w=$('filterWrap');if(!t.length){w.style.display='none';return}w.style.display='flex';w.innerHTML=['All'].concat(t).map(function(x){return '<button class="fbtn'+(x===activeTopic?' on':'')+'" data-t="'+x.replace(/"/g,'&quot;')+'">'+x+'</button>'}).join('')}
+$('filterWrap').onclick=function(e){var b=e.target.closest('.fbtn');if(!b)return;activeTopic=b.dataset.t;buildFilters();init(getPool())};
+buildFilters();init(getPool());
+</script>
+</body>
+</html>
