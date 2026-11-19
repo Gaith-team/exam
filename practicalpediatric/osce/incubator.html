@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM - OSCE Quiz | Incubator Care</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--blue:#3a5a9b;--blue-d:#2c4679;--box:#cfe6ec;--ok:#16a34a;--no:#dc2626;--topbar:#555a5f}
+body{font-family:'Segoe UI',Roboto,Arial,sans-serif;background:#f5f7f9;color:#1d2125;font-size:14px}
+.topbar{background:var(--topbar);height:46px;display:flex;align-items:center;justify-content:space-between;padding:0 14px;color:#fff;position:sticky;top:0;z-index:50;border-top:4px solid #2b2d30}
+.brand{display:flex;align-items:center;gap:8px;font-weight:900;letter-spacing:.5px;font-size:17px}
+.logo{width:28px;height:28px;border-radius:7px;background:linear-gradient(135deg,#0f766e,#14b8a6);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900}
+.topbar nav{display:flex;gap:18px;margin-left:18px;font-size:13px;opacity:.95}
+.tg{color:#fff;text-decoration:none;font-size:12px;opacity:.9}
+.wrap{display:flex;gap:18px;padding:12px 18px 0;max-width:1300px;margin:0 auto;align-items:flex-start}
+.main{flex:1;min-width:0}
+.side{width:220px;flex-shrink:0;position:sticky;top:60px}
+.btn{background:var(--blue);color:#fff;border:0;border-radius:4px;padding:8px 14px;font-size:12px;font-weight:700;cursor:pointer;text-transform:uppercase;font-family:inherit}
+.btn:hover{background:var(--blue-d)}
+.btn[disabled]{opacity:.45;cursor:not-allowed}
+.btn.sm{padding:5px 8px;font-size:10px}
+.btn.gray{background:#8a8f94}.btn.green{background:var(--ok)}.btn.red{background:var(--no)}
+.timerrow{display:flex;justify-content:flex-end;align-items:center;gap:6px;margin:10px 0 12px}
+.timer{border:1px solid #c0392b;background:#fff;padding:4px 8px;font-size:13px}
+.timer.low{color:var(--no);font-weight:700;animation:bl 1s infinite}
+@keyframes bl{50%{opacity:.5}}
+.q{display:flex;gap:10px;margin-bottom:22px}
+.info{width:98px;flex-shrink:0;background:#f1f3f5;border:1px solid #dde1e5;border-radius:3px;padding:8px;font-size:11px;color:#555;line-height:1.5;align-self:flex-start}
+.info .n{font-size:13px}.info .n b{font-size:17px;color:#222}
+.info .st{margin-top:5px}.info .flag{margin-top:8px;cursor:pointer;color:#333;display:flex;gap:4px;align-items:center;user-select:none}
+.info .flag.on{color:#c0392b;font-weight:700}
+.body{flex:1;background:var(--box);border-radius:5px;padding:14px 14px 12px;min-width:0}
+.qt{font-size:13.5px;margin-bottom:14px;line-height:1.5}
+.opt{display:flex;align-items:center;gap:8px;padding:5px 2px;cursor:pointer;font-size:13.5px}
+.opt input{accent-color:var(--blue);cursor:pointer}
+.opt.right{background:rgba(22,163,74,.2);border-radius:4px}
+.opt.wrong{background:rgba(220,38,38,.18);border-radius:4px}
+.clear{display:inline-block;margin:10px 0 0 24px;color:var(--blue);font-size:12px;cursor:pointer;text-transform:uppercase;font-weight:600}
+.fb{margin-top:10px;font-size:12.5px;font-weight:700}
+.fb.ok{color:var(--ok)}.fb.no{color:var(--no)}
+.qimg{display:block;max-width:100%;max-height:260px;border-radius:4px;background:#fff;padding:4px;margin:0 0 12px}
+.subs{margin:0 0 10px 22px;line-height:1.7;font-weight:600}
+textarea{width:100%;min-height:80px;border:1px solid #9bb;border-radius:4px;padding:8px;font-family:inherit;font-size:13.5px;resize:vertical;background:#fff}
+.model{margin-top:10px;background:#fff;border-left:4px solid var(--ok);border-radius:4px;padding:8px 12px;font-size:13px;line-height:1.7}
+.model b{color:var(--ok)}
+.mark{margin-top:10px;display:flex;gap:8px;align-items:center;font-size:12.5px;font-weight:700;flex-wrap:wrap}
+.bottom{display:flex;justify-content:space-between;align-items:center;margin:8px 0 30px;gap:10px;flex-wrap:wrap}
+.finishrow{display:flex;justify-content:flex-end;margin-bottom:18px}
+select{padding:7px 10px;border:1px solid #bbb;border-radius:4px;min-width:220px;background:#fff;font-family:inherit}
+.nav{background:#fff;border:1px solid #dde1e5;padding:12px}
+.nav h3{font-size:15px;font-weight:400;color:#444;margin-bottom:12px}
+.grid{display:flex;flex-wrap:wrap;gap:6px}
+.nb{width:26px;height:30px;border:1px solid #222;background:#fff;font-size:10px;cursor:pointer;position:relative;padding-top:1px;text-align:center;border-radius:2px}
+.nb.ans{background:#cfd4da}
+.nb.fl::after{content:'';position:absolute;top:0;right:0;border-top:9px solid #c0392b;border-left:9px solid transparent}
+.nb.cur{outline:2px solid var(--blue);outline-offset:1px}
+.nb.ok{background:#bfe8c9}.nb.no{background:#f3b9b9}
+.nav a{display:block;margin-top:12px;color:var(--blue);font-size:12px;cursor:pointer;text-decoration:none}
+.foot{background:#0a76c9;height:90px;margin-top:20px;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:700;gap:10px}
+.res{background:#fff;border:1px solid #dde1e5;border-radius:6px;padding:20px;margin:14px 0;text-align:center}
+.res .big{font-size:38px;font-weight:900;color:var(--blue)}
+.res .row{display:flex;justify-content:center;gap:24px;margin-top:10px;font-weight:700;flex-wrap:wrap}
+.res .note{margin-top:10px;font-size:12px;color:#777}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.45);display:none;align-items:center;justify-content:center;z-index:99}
+.modal.show{display:flex}
+.mbox{background:#fff;border-radius:6px;padding:20px;max-width:360px;width:90%}
+.mbox p{margin-bottom:14px;line-height:1.6}
+.mbox .acts{display:flex;gap:8px;justify-content:flex-end}
+@media(max-width:820px){.wrap{flex-direction:column-reverse}.side{width:100%;position:static}.q{flex-direction:column}.info{width:auto;display:flex;gap:12px;flex-wrap:wrap}.topbar nav{display:none}}
+
+.setbar{display:flex;align-items:center;gap:12px;min-width:240px;justify-content:center}
+.pill{background:#fff;border:1px solid #c5ccd3;border-radius:20px;padding:6px 14px;font-weight:700;font-size:12.5px;color:#2c4679;white-space:nowrap}
+.prog{width:140px;height:8px;background:#dde3ea;border-radius:8px;overflow:hidden}
+.prog>i{display:block;height:100%;background:linear-gradient(90deg,#0f766e,#14b8a6);width:0;transition:width .3s}
+.setscore{margin:0 0 14px;padding:10px 14px;border-radius:5px;background:#fff;border-left:5px solid var(--blue);font-weight:700;display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+.sets{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin-top:12px}
+.sets span{font-size:11.5px;padding:4px 9px;border-radius:12px;background:#eef1f5;font-weight:700;cursor:pointer}
+.sets span.g{background:#bfe8c9}.sets span.m{background:#fde7b0}.sets span.r{background:#f3b9b9}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="brand"><div class="logo">GT</div><span>GHAITH TEAM</span>
+    <nav><span>Home</span><span>My courses</span></nav></div>
+  <a class="tg" href="https://t.me/nursing2bu" target="_blank">@nursing2bu</a>
+</div>
+
+<div class="wrap">
+  <div class="main">
+    <div class="timerrow">
+      <span class="timer" id="timer">Time left 0:00:00</span>
+      <button class="btn sm" id="hideBtn">Hide</button>
+    </div>
+    <div id="page"></div>
+    <div id="result"></div>
+    <div class="bottom">
+      <button class="btn" id="prevBtn">&#9668; Previous set</button>
+      <div class="setbar"><span class="pill" id="setPill">Set 1 of 1</span><div class="prog"><i id="progFill"></i></div></div>
+      <button class="btn" id="mainBtn">Submit set</button>
+    </div>
+  </div>
+  <div class="side">
+    <div class="nav">
+      <h3>Quiz navigation</h3>
+      <div class="grid" id="grid"></div>
+      <a id="finishLink">Finish quiz now ...</a>
+    </div>
+  </div>
+</div>
+
+<div class="foot"><div class="logo" style="width:34px;height:34px">GT</div> GHAITH TEAM</div>
+
+<div class="modal" id="modal"><div class="mbox"><p id="mmsg"></p>
+  <div class="acts"><button class="btn gray" id="mNo">Cancel</button><button class="btn" id="mYes">Yes, continue</button></div></div></div>
+
+<script>
+const IMG = {};
+
+/* ================== الأسئلة ==================
+   MCQ:  Q("السؤال", "الإجابة الصح", ["غلط1","غلط2","غلط3"], أي_رقم)   // الرقم بيتخلط عشوائي أصلاً
+   مقالي: S("السؤال", صورة_أو_null, ["سؤال فرعي"...], ["الإجابة النموذجية"...])  */
+function Q(t,c,w,p){const o=[...w];o.splice(p,0,c);return {type:'mcq',t:t,o:o,a:p};}
+function S(t,img,sub,model){return {type:'saq',t:t,img:img,sub:sub,model:model};}
+
+const QUESTIONS = [
+  Q("Temperature control of the incubator should be between _______?","28-32 degree",["26-30 degree","26-32 degree","28-30 degree"],1),
+  Q("Humidity control of the incubator should be between _______?","55-65 %",["60-80 %","60-70 %","50-70 %"],2),
+];
+
+const SHUFFLE = true;          // ترتيب الأسئلة والاختيارات عشوائي
+const PER_PAGE = 2;            // كل set = سؤالين
+const SECONDS_MCQ = 120;       // set كله اختيارات = دقيقتين
+const SECONDS_WRITTEN = 300;   // set فيه سؤال كتابة = 5 دقايق
+const MARK = 1.00;
+
+function shuf(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];}return a;}
+const QS = (SHUFFLE?shuf(QUESTIONS):[...QUESTIONS]).map(q=>{
+  if(q.type!=='mcq') return q;
+  const right=q.o[q.a]; const o=SHUFFLE?shuf(q.o):[...q.o];
+  return {type:'mcq',t:q.t,o:o,a:o.indexOf(right)};
+});
+
+const total = QS.length;
+const pages = Math.ceil(total / PER_PAGE);
+const done = new Array(pages).fill(false);
+const left = Array.from({length:pages},(_,p)=>QS.slice(p*PER_PAGE,(p+1)*PER_PAGE).some(q=>q.type==='saq')?SECONDS_WRITTEN:SECONDS_MCQ);
+const ans = QS.map(q=>q.type==='saq'?'':null);
+const flags = new Array(total).fill(false);
+const selfmark = new Array(total).fill(null);
+let page = 0, tick;
+const L = ['a','b','c','d','e','f'];
+const $ = id => document.getElementById(id);
+const esc = s => String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;');
+const pageOf = i => Math.floor(i/PER_PAGE);
+const qRange = p => [p*PER_PAGE, Math.min((p+1)*PER_PAGE,total)];
+const active = () => done.findIndex(d=>!d);
+const allDone = () => active()===-1;
+const isAns = i => QS[i].type==='saq' ? ans[i].trim()!=='' : ans[i]!==null;
+const isRight = i => QS[i].type==='saq' ? selfmark[i]===true : ans[i]===QS[i].a;
+const pageScore = p => {const [a,b]=qRange(p);let s=0;for(let i=a;i<b;i++)if(isRight(i))s++;return s;};
+const pageCount = p => {const [a,b]=qRange(p);return b-a;};
+function fmt(s){const m=Math.floor(s/60),x=s%60;return '0:'+String(m).padStart(2,'0')+':'+String(x).padStart(2,'0');}
+
+function updateTimer(){
+  const t=$('timer');
+  if(done[page]){t.textContent='Set submitted: '+pageScore(page)+'/'+pageCount(page);t.classList.remove('low');}
+  else{t.textContent='Time left '+fmt(Math.max(left[page],0));t.classList.toggle('low',left[page]<=30);}
+}
+function startTimer(){
+  clearInterval(tick);
+  tick=setInterval(()=>{
+    const a=active(); if(a===-1||page!==a) return;
+    left[a]--; updateTimer();
+    if(left[a]<=0) submitPage(a);
+  },1000);
+}
+
+function statusText(i){
+  const q=QS[i], p=pageOf(i);
+  if(done[p]){
+    if(q.type==='saq') return selfmark[i]===null?'Self-mark pending':(selfmark[i]?'Correct':'Incorrect');
+    return ans[i]===null?'Not answered':(ans[i]===q.a?'Correct':'Incorrect');
+  }
+  return isAns(i)?'Answer saved':'Not yet answered';
+}
+
+function render(){
+  const [from,to]=qRange(page), locked=done[page];
+  let h='';
+  if(locked){
+    h+=`<div class="setscore"><span>Set ${page+1} result</span><span style="color:${pageScore(page)===pageCount(page)?'var(--ok)':'var(--blue)'}">${pageScore(page)} / ${pageCount(page)}</span></div>`;
+  }
+  for(let i=from;i<to;i++){
+    const q=QS[i];
+    const markTxt = locked ? ('Mark '+(isRight(i)?MARK:0).toFixed(2)+' out of '+MARK.toFixed(2)) : 'Marked out of '+MARK.toFixed(2);
+    let inner='';
+    if(q.type==='mcq'){
+      inner=`<div class="qt">${esc(q.t)}</div>`+
+        q.o.map((o,k)=>{
+          let c='';
+          if(locked){ if(k===q.a)c='right'; else if(k===ans[i])c='wrong'; }
+          return `<label class="opt ${c}"><input type="radio" name="r${i}" ${ans[i]===k?'checked':''} ${locked?'disabled':''} onchange="pick(${i},${k})"> <span>${L[k]}.&nbsp; ${esc(o)}</span></label>`}).join('')+
+        (locked
+          ? `<div class="fb ${ans[i]===q.a?'ok':'no'}">${ans[i]===q.a?'&#10004; Your answer is correct.':(ans[i]===null?'&#10006; No answer. ':'&#10006; Your answer is incorrect. ')+(ans[i]===q.a?'':'The correct answer is: '+L[q.a]+'. '+esc(q.o[q.a]))}</div>`
+          : (ans[i]!==null?`<span class="clear" onclick="clr(${i})">Clear my choice</span>`:''));
+    } else {
+      inner=`<div class="qt"><b>${esc(q.t)}</b></div>`+
+        (q.img?`<img class="qimg" src="${q.img}" alt="question image">`:'')+
+        `<ol class="subs">${q.sub.map(s=>`<li>${esc(s)}</li>`).join('')}</ol>`+
+        `<textarea placeholder="Type your answer here..." ${locked?'disabled':''} oninput="typed(${i},this.value)">${esc(ans[i])}</textarea>`+
+        (locked
+          ? `<div class="model"><b>Model answer:</b><br>${q.model.map(m=>'- '+esc(m)).join('<br>')}</div>
+             <div class="mark">Mark yourself:
+               <button class="btn sm green" onclick="mark(${i},true)">I got it right</button>
+               <button class="btn sm red" onclick="mark(${i},false)">I got it wrong</button></div>`
+          : '');
+    }
+    h+=`<div class="q" id="q${i}">
+      <div class="info">
+        <div class="n">Question <b>${i+1}</b></div>
+        <div class="st" id="st${i}">${statusText(i)}</div>
+        <div class="st">${markTxt}</div>
+        ${locked?'':`<div class="flag ${flags[i]?'on':''}" onclick="toggleFlag(${i})">&#9873; ${flags[i]?'Remove flag':'Flag question'}</div>`}
+      </div>
+      <div class="body">${inner}</div></div>`;
+  }
+  $('page').innerHTML=h;
+  const a=active();
+  $('prevBtn').disabled = page===0;
+  const mb=$('mainBtn');
+  if(!done[page]){ mb.textContent='Submit set'; mb.disabled=false; }
+  else if(page<pages-1){ mb.textContent='Next set \u25BA'; mb.disabled=false; }
+  else { mb.textContent=allDone()?'Finished':'Last set'; mb.disabled=true; }
+  $('setPill').textContent='Set '+(page+1)+' of '+pages;
+  $('progFill').style.width=(done.filter(Boolean).length/pages*100)+'%';
+  updateTimer(); renderGrid();
+  if(allDone()) showResult();
+}
+
+function renderGrid(){
+  const [from,to]=qRange(page);
+  $('grid').innerHTML=QS.map((q,i)=>{
+    const p=pageOf(i); let c='nb';
+    if(done[p]){ if(q.type==='saq'){ if(selfmark[i]===true)c+=' ok'; else if(selfmark[i]===false)c+=' no'; } else if(ans[i]===q.a)c+=' ok'; else c+=' no'; }
+    else { if(isAns(i))c+=' ans'; if(flags[i])c+=' fl'; }
+    if(i>=from&&i<to)c+=' cur';
+    return `<div class="${c}" onclick="goQ(${i})">${i+1}</div>`}).join('');
+}
+
+function pick(i,k){ans[i]=k;render();}
+function clr(i){ans[i]=null;render();}
+function typed(i,v){ans[i]=v;const e=$('st'+i);if(e)e.textContent=statusText(i);renderGrid();}
+function mark(i,v){selfmark[i]=v;render();}
+function toggleFlag(i){flags[i]=!flags[i];render();}
+function goPage(p){
+  const a=active(); const lim=(a===-1)?pages-1:a;
+  page=Math.max(0,Math.min(lim,p)); render(); window.scrollTo({top:0,behavior:'smooth'});
+}
+function goQ(i){const p=pageOf(i);const a=active();if(a!==-1&&p>a)return;page=p;render();const e=$('q'+i);if(e)e.scrollIntoView({behavior:'smooth',block:'center'});}
+
+function submitPage(p){
+  if(done[p]) return;
+  done[p]=true; $('modal').classList.remove('show');
+  if(page===p) { render(); window.scrollTo({top:0,behavior:'smooth'}); }
+}
+function mainAction(){
+  if(!done[page]){
+    const [a,b]=qRange(page); let un=0; for(let i=a;i<b;i++) if(!isAns(i)) un++;
+    if(un){ pending='submit'; $('mmsg').textContent=`You have ${un} unanswered question(s) in this set. Submit anyway?`; $('modal').classList.add('show'); }
+    else submitPage(page);
+  } else if(page<pages-1){ goPage(page+1); }
+}
+let pending='submit';
+function askFinishAll(){
+  if(allDone())return;
+  pending='all'; $('mmsg').textContent='Finish the quiz now? All remaining sets will be submitted as they are.';
+  $('modal').classList.add('show');
+}
+function confirmYes(){
+  if(pending==='all'){ for(let p=0;p<pages;p++) done[p]=true; $('modal').classList.remove('show'); page=pages-1; render(); window.scrollTo({top:0,behavior:'smooth'}); }
+  else submitPage(page);
+}
+
+function showResult(){
+  const mcqIdx=QS.map((q,i)=>i).filter(i=>QS[i].type==='mcq');
+  const saqIdx=QS.map((q,i)=>i).filter(i=>QS[i].type==='saq');
+  const mcqOk=mcqIdx.filter(i=>ans[i]===QS[i].a).length;
+  const saqOk=saqIdx.filter(i=>selfmark[i]===true).length;
+  const saqPending=saqIdx.filter(i=>selfmark[i]===null).length;
+  const score=mcqOk+saqOk, pct=Math.round(score/total*100);
+  let sets='';
+  for(let p=0;p<pages;p++){const s=pageScore(p),n=pageCount(p);sets+=`<span class="${s===n?'g':(s===0?'r':'m')}" onclick="page=${p};render();window.scrollTo({top:0,behavior:'smooth'})">Set ${p+1}: ${s}/${n}</span>`;}
+  $('result').innerHTML=`<div class="res"><div class="big">${score} / ${total}</div>
+    <div style="color:#666;margin-top:4px">${pct}%</div>
+    <div class="row"><span style="color:var(--ok)">MCQ correct: ${mcqOk}/${mcqIdx.length}</span><span style="color:var(--blue)">Essay/Images (self-marked): ${saqOk}/${saqIdx.length}</span></div>
+    ${saqPending?`<div class="note">${saqPending} essay question(s) still need self-marking inside their sets.</div>`:''}
+    <div class="sets">${sets}</div>
+    <div style="margin-top:14px"><button class="btn" onclick="location.reload()">Re-attempt quiz (new random order)</button></div></div>`;
+  $('finishLink').style.display='none';
+}
+
+$('prevBtn').onclick=()=>goPage(page-1);
+$('mainBtn').onclick=mainAction;
+$('finishLink').onclick=askFinishAll;
+$('mNo').onclick=()=>$('modal').classList.remove('show');
+$('mYes').onclick=confirmYes;
+$('hideBtn').onclick=()=>{const t=$('timer'),h=t.style.display==='none';t.style.display=h?'':'none';$('hideBtn').textContent=h?'Hide':'Show'};
+render(); startTimer();
+</script>
+</body>
+</html>
