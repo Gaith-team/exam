@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM - Shock</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root {
+  --accent:#be123c; --accent-light:#fb7185; --accent-rgb:190,18,60;
+  --c2:#1d4ed8; --c3:#d97706; --c4:#0d9488;
+  --grad:linear-gradient(135deg,#9f1239 0%,#be123c 30%,#5b21b6 70%,#1e3a8a 100%);
+  --grad-soft:linear-gradient(135deg,#be123c,#1d4ed8);
+  --bg:#faf6f6; --bg2:#f3eaec; --card:#ffffff; --text:#2a1519; --text2:#5b4348; --text3:#8a7479;
+  --bc:rgba(80,20,35,0.09); --r:16px; --tr:all .3s cubic-bezier(.4,0,.2,1);
+  --ex-bg:rgba(217,119,6,.09); --ex-bd:#d97706;
+}
+[data-theme="dark"] {
+  --bg:#130a0d; --bg2:#1c1015; --card:#25161c; --text:#f5e9ec; --text2:#d4bcc2; --text3:#9c8289;
+  --bc:rgba(255,255,255,0.09); --accent:#fb7185; --accent-rgb:251,113,133; --c2:#60a5fa; --c3:#fbbf24; --c4:#2dd4bf;
+  --ex-bg:rgba(251,191,36,.1); --ex-bd:#fbbf24;
+}
+html { scroll-behavior:smooth; scroll-padding-top:80px; }
+body { font-family:'Outfit','Cairo',sans-serif; background:var(--bg); color:var(--text); min-height:100vh; overflow-x:hidden; transition:background .4s,color .4s; }
+#prog-bar { position:fixed; top:0; left:0; height:3px; z-index:999; width:0; background:linear-gradient(90deg,var(--accent),var(--c3),var(--c4),var(--c2)); }
+nav { position:fixed; top:0; left:0; right:0; z-index:100; display:flex; align-items:center; justify-content:space-between; padding:0 28px; height:64px; background:rgba(250,246,246,.93); backdrop-filter:blur(16px); border-bottom:1px solid var(--bc); }
+[data-theme="dark"] nav { background:rgba(19,10,13,.95); }
+.nav-back { display:flex; align-items:center; gap:7px; color:var(--text2); text-decoration:none; font-size:13px; font-weight:700; padding:7px 13px; border-radius:8px; border:1px solid var(--bc); background:var(--card); transition:var(--tr); font-family:'Cairo',sans-serif; }
+.nav-back:hover { color:var(--c2); border-color:var(--c2); }
+.nav-brand { display:flex; align-items:center; gap:9px; font-size:15px; font-weight:900; }
+.nav-logo-icon { width:34px; height:34px; border-radius:8px; background:var(--grad-soft); display:flex; align-items:center; justify-content:center; color:#fff; font-size:12px; font-weight:900; }
+.theme-btn { width:38px; height:38px; border-radius:50%; border:1px solid var(--bc); background:var(--card); cursor:pointer; font-size:15px; display:flex; align-items:center; justify-content:center; transition:var(--tr); }
+.theme-btn:hover { border-color:var(--c3); }
+.hero-band { margin-top:64px; background:var(--grad); padding:40px 24px 50px; text-align:center; position:relative; overflow:hidden; }
+.hero-band::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 380px 180px at 12% 0%,rgba(245,158,11,.28),transparent 70%),radial-gradient(ellipse 600px 200px at 50% 100%,rgba(13,148,136,.25),transparent 70%); }
+.hero-band > * { position:relative; }
+.ecg { position:absolute !important; left:0; right:0; bottom:8px; width:100%; height:42px; opacity:.4; pointer-events:none; }
+.ecg path { fill:none; stroke:#fff; stroke-width:2; stroke-linecap:round; stroke-linejoin:round; stroke-dasharray:1200; stroke-dashoffset:1200; animation:ecgDraw 2.6s ease-out forwards; }
+@keyframes ecgDraw { to { stroke-dashoffset:0; } }
+@media (prefers-reduced-motion: reduce) { .ecg path { animation:none; stroke-dashoffset:0; } html{scroll-behavior:auto;} }
+.hero-icon { width:68px; height:68px; border-radius:20px; background:rgba(255,255,255,.18); display:flex; align-items:center; justify-content:center; font-size:32px; margin:0 auto 14px; border:1.5px solid rgba(255,255,255,.35); }
+.hero-band h1 { font-size:clamp(22px,4vw,32px); font-weight:900; color:#fff; margin-bottom:6px; }
+.hero-band p { font-size:13px; color:rgba(255,255,255,.88); }
+.meta-row { display:flex; justify-content:center; gap:12px; margin-top:18px; flex-wrap:wrap; }
+.meta-pill { background:rgba(255,255,255,.16); border:1px solid rgba(255,255,255,.3); border-radius:50px; padding:6px 16px; font-size:12px; font-weight:700; color:#fff; display:flex; align-items:center; gap:6px; }
+.shell { max-width:760px; margin:0 auto; padding:24px 18px 80px; }
+.toc { display:flex; flex-wrap:wrap; gap:8px; margin-bottom:26px; justify-content:center; }
+.toc a { text-decoration:none; font-size:12px; font-weight:700; color:var(--text2); background:var(--card); border:1px solid var(--bc); padding:7px 13px; border-radius:50px; transition:var(--tr); }
+.toc a:hover { color:var(--accent); border-color:var(--accent); }
+.sec { margin:34px 0 14px; display:flex; align-items:center; gap:10px; }
+.sec h2 { font-size:19px; font-weight:900; background:var(--grad); color:#fff; padding:9px 18px; border-radius:12px; }
+.sub { margin:22px 0 10px; font-size:15px; font-weight:900; color:var(--accent); padding-left:12px; border-left:4px solid var(--c3); }
+.item { background:var(--card); border:1px solid var(--bc); border-radius:var(--r); margin-bottom:12px; overflow:hidden; box-shadow:0 2px 12px rgba(120,20,45,.05); }
+.en { padding:15px 18px; font-size:15px; font-weight:700; line-height:1.65; direction:ltr; text-align:left; border-left:5px solid var(--accent); background:rgba(var(--accent-rgb),.05); }
+.item:nth-of-type(4n+2) .en { border-left-color:var(--c2); }
+.item:nth-of-type(4n+3) .en { border-left-color:var(--c3); }
+.item:nth-of-type(4n+4) .en { border-left-color:var(--c4); }
+.ar { padding:13px 18px; font-family:'Cairo',sans-serif; font-size:15px; line-height:1.9; direction:rtl; text-align:right; color:var(--text); }
+.ex { margin:0 14px 14px; padding:11px 14px; background:var(--ex-bg); border-right:4px solid var(--ex-bd); border-radius:10px; font-family:'Cairo',sans-serif; font-size:14px; line-height:1.85; direction:rtl; text-align:right; color:var(--text2); }
+.ex b { color:var(--ex-bd); }
+.flow { display:flex; flex-direction:column; align-items:center; gap:4px; padding:14px 18px 6px; direction:ltr; }
+.flow span { background:var(--grad-soft); color:#fff; font-size:13px; font-weight:700; padding:7px 16px; border-radius:10px; text-align:center; }
+.flow i { color:var(--text3); font-style:normal; font-size:16px; }
+.cap { text-align:center; font-size:12px; color:var(--text3); padding:0 18px 12px; direction:ltr; }
+footer { background:var(--bg2); border-top:1px solid var(--bc); padding:22px 24px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px; }
+.footer-brand { font-size:14px; font-weight:700; } .footer-brand span { color:var(--accent); }
+.footer-tg { display:flex; align-items:center; gap:5px; text-decoration:none; color:#229ED9; font-size:12px; font-weight:600; }
+@media (max-width:480px){ nav{padding:0 14px;} .nav-brand span{display:none;} .shell{padding:18px 12px 60px;} .en,.ar{font-size:14px;} }
+</style>
+</head>
+<body>
+<div id="prog-bar"></div>
+<nav>
+  <a href="https://gaith-team.github.io/exam/" class="nav-back"><i class="fa-solid fa-arrow-right"></i> رجوع</a>
+  <div class="nav-brand"><div class="nav-logo-icon">GT</div><span>GHAITH TEAM</span></div>
+  <button class="theme-btn" id="themeBtn" aria-label="theme">🌙</button>
+</nav>
+<div class="hero-band">
+  <svg class="ecg" viewBox="0 0 600 46" preserveAspectRatio="none" aria-hidden="true"><path d="M0 26 H90 L104 26 L112 8 L124 40 L134 14 L142 26 H250 L264 26 L272 6 L284 42 L294 14 L302 26 H410 L424 26 L432 8 L444 40 L454 14 L462 26 H600"/></svg>
+  <div class="hero-icon">🩸</div>
+  <h1>Shock</h1>
+  <p>Internal Medicine (Level 2) · Part 97-108</p>
+  <div class="meta-row">
+  
+    <div class="meta-pill"><i class="fa-solid fa-language"></i> English + مصري</div>
+  </div>
+</div>
+<div class="shell">
+  <div class="toc" id="toc"></div>
+  <div id="content"></div>
+</div>
+<footer>
+  <div class="footer-brand">GHAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg"><i class="fa-brands fa-telegram"></i> @nursing2bu</a>
+</footer>
+<script>
+const E = 'عشان تفهمها :';
+const DATA = [
+'# Shock',
+['Shock is a life-threatening condition and affects all body systems.',
+ 'الشوك (الصدمة) حالة خطيرة على حياة المريض، وبتأثر على كل أجهزة الجسم مش جهاز واحد بس.',
+ 'زي ما الكهربا تقطع عن العمارة كلها، مش شقة واحدة؛ كل الشقق (الأجهزة) هتتأثر.'],
+['It may develop rapidly or slowly, depending on the underlying cause.',
+ 'ممكن تحصل بسرعة أو بالتدريج، وده بيعتمد على السبب اللي ورا الحالة.',
+ 'نزيف من حادثة عربية ممكن يوصّل المريض للصدمة في دقايق، لكن إسهال وجفاف كذا يوم بيوصله ليها ببطء.'],
+['During shock, the body struggles to survive, calling on all its homeostatic mechanisms to restore blood flow and tissue perfusion.',
+ 'وقت الصدمة الجسم بيحارب عشان يعيش، فبيشغّل كل آليات التوازن بتاعته (homeostatic mechanisms) عشان يرجّع الدم يوصل للأنسجة تاني.',
+ 'زي شركة فلوسها قلت؛ بتقفل الأقسام الأقل أهمية وتوجّه الفلوس للأقسام الحيوية عشان تفضل شغالة.'],
+'## Definition of shock',
+['Definition: Shock = a state of inadequate tissue perfusion → ↓ oxygen delivery → cell & organ dysfunction.',
+ 'الصدمة يعني الأنسجة مش واخدة دم كفاية (inadequate tissue perfusion)، فالأكسجين اللي بيوصلها بيقل، فالخلايا والأعضاء متشتغلش صح.',
+ 'زي زرعة ماتسقتش كفاية؛ الميّه قلت، الجذور مش لاقية أكل، والورق يدبل.'],
+['N.B. Shock usually begins when a patient\'s circulatory system fails to function properly.',
+ 'ملحوظة مهمة: الصدمة غالباً بتبدأ لما الجهاز الدوري (القلب والأوعية والدم) عند المريض يبطّل يشتغل صح.',
+ 'زي نظام مواسير مياه في بيت لما يبوّظ؛ المية مش هتوصل للحنفيات (الأنسجة).'],
+['For proper functioning of the circulatory system, it needs: 1- An adequate blood volume.',
+ 'عشان الجهاز الدوري يشتغل تمام، محتاج أول حاجة كمية دم كفاية في الجسم.',
+ 'لو خزان المية فاضي مفيش مية هتتوزع، مهما كانت الطلمبة قوية.'],
+['2- An efficient heart pump.',
+ 'تاني حاجة: قلب شغّال كويس بيضخ الدم بكفاءة.',
+ 'الطلمبة لازم تكون سليمة عشان تزق المية في المواسير.'],
+['3- A healthy vascular condition.',
+ 'تالت حاجة: أوعية دموية سليمة (مش متسعة زيادة ولا مقطوعة).',
+ 'المواسير لازم تكون سليمة وبحجمها الطبيعي؛ لو اتوسعت أوي الضغط هيقع.'],
+'# Types of shock',
+['Shock can be classified by etiology: (1) Hypovolemic shock, (2) Cardiogenic shock, (3) Circulatory or distributive shock.',
+ 'الصدمة بتتقسم حسب السبب (etiology) لـ 3 أنواع: صدمة نقص الحجم (Hypovolemic)، صدمة قلبية (Cardiogenic)، وصدمة دورانية أو توزيعية (Circulatory / Distributive).',
+ 'ثلاث مشاكل ممكن تعطّل الدورة: الخزان فاضي (الدم قل)، الطلمبة عطلانة (القلب)، أو المواسير اتوسّعت (الأوعية).'],
+'## 1- Hypovolemic shock (Oligemic shock)',
+['The most common type of shock, resulting from decreased intravascular volume due to fluid loss.',
+ 'ده أكتر نوع صدمة شيوعاً، وبيحصل لما حجم السوائل جوه الأوعية يقل بسبب فقدان سوائل.',
+ 'زي ما تجيب كوباية مليانة وتشرب منها بالتدريج لحد ما تفضى.'],
+['Hypovolemic shock occurs when there is a reduction in intravascular volume of 15% to 25%. This would represent a loss of 750 to 1,300 mL of blood in a 70-kg / person.',
+ 'الصدمة دي بتحصل لما حجم الدم جوه الأوعية يقل من 15% لـ 25%، وده يعادل فقدان حوالي 750 لـ 1300 مل دم في شخص وزنه 70 كيلو.',
+ 'يعني لو واحد وزنه 70 كيلو خسر أكتر من تلات أربع لتر دم تقريباً، يبقى دخل مرحلة الخطر.'],
+['Pathophysiology: ↓ circulating volume → ↓ venous return → ↓ cardiac output → decrease tissue perfusion',
+ 'اللي بيحصل جوه الجسم: الدم اللي بيلف يقل، فالدم الراجع للقلب (venous return) يقل، فالقلب يضخ أقل (cardiac output)، فالأنسجة تاخد دم أقل.',
+ 'زي خزان بيفضى: مية أقل في المواسير، فالطلمبة تسحب أقل، فالحنفيات (الأنسجة) تنشف.',
+ ['↓ circulating volume','↓ venous return','↓ cardiac output','↓ tissue perfusion']],
+'## Possible causes (Hypovolemic): Occurs as a result of loss of intravascular fluid volume',
+['a- Internal or external hemorrhage.','نزيف داخلي (جوه الجسم) أو خارجي (بره الجسم) بيخلي الدم يقل.','زي كسر في الفخذ بينزف جوه العضلة من غير ما تشوف دم بره، أو جرح قطعي بينزف قدامك.'],
+['b- Traumatic injury.','إصابة رضّية زي حادثة أو وقعة، بتسبب نزيف وفقدان سوائل.','واحد اتخبط بعربية وجسمه اتكسر؛ فقد دم كتير.'],
+['c- Severe dehydration from vomiting and diarrhea.','جفاف شديد من القيء والإسهال بيفقّد الجسم مية وأملاح.','طفل عنده نزلة معوية وبيرجّع ويسهّل كتير من غير تعويض سوائل.'],
+['d- Burns.','الحروق بتخلي السوائل تطلع من الأوعية وتتسرب للجلد المحروق.','واحد اتحرق بمية سخنة على مساحة كبيرة؛ بلازما كتير بتتسرب من جلده.'],
+['e- Liver failure, causing ascites.','فشل الكبد بيسبب استسقاء (ascites)، يعني سوائل بتتجمع في البطن وتطلع من الدورة الدموية.','مريض كبد بطنه منفوخة ميّه؛ الميّه دي كانت المفروض تكون في أوعيته.'],
+'## Examples (Hypovolemic)',
+['a- Hemorrhagic shock','صدمة نزفية: بتحصل بسبب فقدان الدم.','واحد جرحه نازف بغزارة ومحدش وقّفه.'],
+['b- Burns shock','صدمة الحروق: بتحصل بسبب فقدان سوائل من الحروق.','طفل اتحرق وجسمه بيفقد سوائل من الجلد المحروق.'],
+'## Signs and symptoms (Hypovolemic)',
+['1- Hypotension.','هبوط في ضغط الدم.','القلب مش لاقي دم يضخه فالضغط في الشرايين بينزل.'],
+['2- Rapid pulse.','النبض سريع.','القلب بيجري عشان يعوّض قلة الدم، زي حد بيحمل جراكن بسرعة عشان يعوّض إن الجرادل نصها فاضي.'],
+['3- Cold pale skin.','الجلد بارد وشاحب (باهت).','الجسم بيسحب الدم من الجلد ويوجهه للقلب والمخ.'],
+['4- Rapid respiration.','التنفس سريع.','الجسم بيحاول يجيب أكسجين أكتر عشان الدم قل.'],
+['5- Intense thirst.','عطش شديد.','الجسم فاقد سوائل فبيطلب مية بقوة.'],
+['6- Restlessness or mental dullness.','قلق وعدم استقرار أو بلادة وتشوش ذهني.','المخ مش واخد دم كفاية فتلاقي المريض متوتر أو مش مركّز.'],
+['Note: Low blood pressure and rapid heart rate (tachycardia) are the key signs of shock.',
+ 'ملحوظة: انخفاض الضغط وسرعة ضربات القلب (tachycardia) هما أهم علامتين على الصدمة.',
+ 'لو لقيت مريض ضغطه واطي ونبضه عالي، فكّر فوراً في الصدمة.'],
+'## Risk Factors for Hypovolemic Shock — External: Fluid Losses',
+['Trauma','إصابة.','حادثة طريق.'],
+['Surgery','العمليات الجراحية.','عملية فيها نزيف كتير.'],
+['Vomiting','القيء (الترجيع).','مريض بيرجّع من غير ما يشرب.'],
+['Diarrhea','الإسهال.','طفل بيسهّل كتير.'],
+['Diuresis','إدرار البول (كتر التبول).','مريض واخد مدرّات بول بجرعة عالية وبيفقد سوائل كتير.'],
+['Diabetes insipidus','السكر الكاذب (بوال)، بيخلي المريض يفقد كميات كبيرة جداً من البول.','مريض بيشرب ويتبول لترات كتير باستمرار.'],
+'## Risk Factors for Hypovolemic Shock — Internal: Fluid Shifts',
+['Hemorrhage','نزيف داخلي.','نزيف في المعدة جوه الجسم.'],
+['Burns','الحروق، السوائل بتتحرك من الأوعية للأنسجة المحروقة.','المية بتتجمع في الفقاقيع.'],
+['Ascites','استسقاء البطن.','سوائل متجمعة في البطن.'],
+['Peritonitis','التهاب الغشاء البريتوني، والسوائل بتتسرب جوه البطن.','واحد زايدته انفجرت والسوائل اتجمعت في بطنه.'],
+['Dehydration','الجفاف.','واحد في الصيف مشربش مية ولا عوّض اللي عرقه.'],
+'## 2- Cardiogenic shock',
+['Occurs when the heart\'s ability to contract and to pump blood is impaired and the supply of oxygen is inadequate for the heart and tissues.',
+ 'بتحصل لما قدرة القلب على الانقباض وضخ الدم تضعف، فالأكسجين مش بيكفي القلب نفسه ولا باقي الأنسجة.',
+ 'زي طلمبة مية موتورها ضعيف؛ المية موجودة في الخزان بس مش بتتزق للمواسير.'],
+['The inability of the heart to pump enough blood to supply all parts of the body.',
+ 'يعني القلب مش قادر يضخ دم كفاية لكل أجزاء الجسم.',
+ 'الطلمبة شغالة بس مش كفاية لكل أدوار العمارة.'],
+['The causes of cardiogenic shock are known as either coronary or no coronary.',
+ 'أسباب الصدمة القلبية بتتقسم لنوعين: أسباب تاجية (coronary) أو غير تاجية (non-coronary).',
+ 'يا إما المشكلة في شرايين القلب نفسها (التاجية)، يا إما في حاجة تانية بتأثر على القلب.'],
+['Coronary cardiogenic shock is more common than non-coronary cardiogenic shock and is seen most often in patients with myocardial infarction.',
+ 'النوع التاجي أشهر من غير التاجي، وبيظهر غالباً عند مرضى احتشاء عضلة القلب (جلطة القلب).',
+ 'واحد جاله جلطة في القلب وبعدها القلب ضعف ومبقاش يضخ.'],
+['Coronary cardiogenic shock occurs when a significant amount of the left ventricular myocardium has been destroyed.',
+ 'الصدمة القلبية التاجية بتحصل لما جزء كبير من عضلة البطين الأيسر (left ventricle) يتدمّر.',
+ 'البطين الأيسر هو الطلمبة الرئيسية؛ لو نص عضلته ماتت، الطلمبة تقع.'],
+['Patients experiencing an anterior wall myocardial infarction are at the greatest risk for developing cardiogenic shock because of the potentially extensive damage to the left ventricle caused by occlusion of the left anterior descending coronary artery.',
+ 'المرضى اللي عندهم جلطة في الجدار الأمامي للقلب هما الأكتر عرضة للصدمة القلبية، لأن انسداد الشريان التاجي الأيسر النازل الأمامي (LAD) بيسبب تلف كبير في البطين الأيسر.',
+ 'الشريان ده زي الطريق الرئيسي لأكبر جزء في القلب؛ لو اتقفل، جزء كبير يتعطل.'],
+['Non-coronary causes can be related to severe metabolic problems (severe hypoxemia, acidosis, hypoglycemia, and hypocalcemia) and tension pneumothorax.',
+ 'الأسباب غير التاجية ممكن تكون مشاكل أيضية شديدة (نقص أكسجين شديد، حموضة، نقص سكر، نقص كالسيوم) أو استرواح صدر ضاغط (tension pneumothorax).',
+ 'القلب محتاج بيئة مظبوطة عشان يشتغل؛ لو الأكسجين أو الكالسيوم أو السكر اختل، القلب يضعف حتى لو شرايينه سليمة.'],
+'## Possible causes (Cardiogenic)',
+['a- Acute myocardial infarction (AMI).','احتشاء عضلة القلب الحاد (جلطة القلب).','واحد بيحس بألم شديد في صدره وجاله جلطة مفاجئة.'],
+['b- Cardiac surgery.','جراحات القلب.','واحد عمل عملية قلب مفتوح والقلب ضعف بعدها.'],
+['c- Chronic progressive heart disease (cardiomyopathy).','أمراض القلب المزمنة المتطورة (اعتلال عضلة القلب).','عضلة القلب بتضعف مع السنين.'],
+['d- Chest trauma.','إصابة الصدر.','واحد خبط في الدركسيون فقلبه اتأذى.'],
+['e- Cardiac failure.','فشل القلب.','قلب مريض مبقاش قادر يلبّي احتياج الجسم.'],
+'## Signs and symptoms (Cardiogenic)',
+['Patients in cardiogenic shock may experience 1- Angina pain','المرضى في الصدمة القلبية ممكن يحسوا بـ: ألم الذبحة الصدرية (angina) أولاً.','واحد بيحس بضغط وألم ورا عضمة الصدر.'],
+['2- Dysrhythmias.','اضطرابات ضربات القلب.','القلب بيدق مرة سريع ومرة بطيء وعشوائي.'],
+['3- Hemodynamic instability.','عدم استقرار الدورة الدموية (الضغط والنبض مش ثابتين).','الضغط بيطلع وينزل ومش مستقر.'],
+'## Risk Factors for Cardiogenic Shock — Coronary Factors',
+['Myocardial infarction.','احتشاء عضلة القلب.','جلطة في القلب.'],
+'## Risk Factors for Cardiogenic Shock — Non-coronary Factors',
+['Cardiomyopathies.','اعتلالات عضلة القلب.','عضلة القلب ضعيفة أو متضخمة.'],
+['Valvular damage.','تلف الصمامات.','صمام مبيتفتحش أو بيرجّع الدم.'],
+['Cardiac tamponade.','انضغاط القلب بسبب تجمع سوائل حواليه.','سوائل حوالين القلب بتضغط عليه ومش بتخليه يتمدد.'],
+['Dysrhythmias.','اضطرابات النظم.','دقات غير منتظمة تضعف الضخ.'],
+'## 3- Circulatory or distributive shock (Vasogenic shock)',
+['Occurs as a result of inadequate peripheral resistance from widespread vasodilatation.',
+ 'بتحصل بسبب إن المقاومة الطرفية (peripheral resistance) تقل بسبب اتساع الأوعية الدموية في الجسم كله.',
+ 'زي المواسير اللي اتوسعت كلها فجأة، فضغط المية نزل ومبقتش توصل.'],
+['Circulatory shock can be caused either by a loss of sympathetic tone or by release of biochemical mediators from cells.',
+ 'الصدمة دي سببها يا إما فقدان الشد السمباتاوي (sympathetic tone) اللي بيحافظ على انقباض الأوعية، يا إما إن الخلايا تفرز مواد كيميائية بتوسّع الأوعية.',
+ 'الأوعية في العادة مشدودة بإشارات عصبية؛ لو الإشارة راحت أو اتفرزت مواد توسعها، تتفرد.'],
+['The varied mechanisms leading to the initial vasodilation in circulatory shock further subdivide this classification of shock into three types: or Possible causes:',
+ 'الأسباب المختلفة لاتساع الأوعية بتقسّم الصدمة دي لـ 3 أنواع (أو أسباب محتملة).',
+ 'كل نوع فيهم له سبب مختلف بس النتيجة واحدة: الأوعية اتسعت.'],
+['(a) Septic shock, (b) Anaphylactic shock, and (c) Neurogenic shock.',
+ 'الأنواع الثلاثة: صدمة إنتانية (septic)، صدمة تحسسية (anaphylactic)، وصدمة عصبية (neurogenic).',
+ 'الأولى بسبب ميكروب، التانية بسبب حساسية، والتالتة بسبب إصابة أعصاب.'],
+'## a- Septicemia (Septic shock)',
+['Severe infection → sepsis → persistent hypotension (due to vasodilation & capillary leak).',
+ 'عدوى شديدة تتحول لتسمم دموي (sepsis)، ويحصل هبوط مستمر في الضغط بسبب اتساع الأوعية وتسرب الشعيرات الدموية.',
+ 'ميكروبات في الدم بتخلي الأوعية تتوسع وتسرّب، فالضغط ينزل.'],
+['Septic shock is the most common type of circulatory shock and it caused by bacterial toxins due to wide spread infection leading to vasodilatation and drop of arterial blood pressure.',
+ 'الصدمة الإنتانية هي أشهر نوع من الصدمة الدورانية، وبتحصل بسبب سموم البكتيريا نتيجة عدوى منتشرة، فتوسّع الأوعية والضغط ينزل.',
+ 'بكتيريا في الدم بتفرز سموم تفرد الأوعية فالضغط يقع.'],
+['It is seen in diphtheria, gas gangrene, E. Coli peritonitis, and staphylococcal pneumonia an meningococcal meningitis.',
+ 'بتظهر في أمراض زي الدفتيريا، الغرغرينا الغازية، التهاب البريتون بالإيكولاي، الالتهاب الرئوي بالمكورات العنقودية، والتهاب السحايا بالمكورات السحائية.',
+ 'مثلاً عدوى بالإيكولاي في البطن ممكن تدخل المريض في صدمة إنتانية.'],
+['Shock is produced through toxins which act directly on the smooth muscle fibers of the blood vessels and heart.',
+ 'الصدمة بتحصل عن طريق سموم بتأثر مباشرة على العضلات الملساء بتاعة الأوعية الدموية والقلب.',
+ 'السموم دي بتشل العضلات اللي شدّاها الأوعية، فتتفرد.'],
+'## b- Anaphylactic reaction (Anaphylactic shock)',
+['Occur in severe allergic conditions as a result of antigen-antibody reaction after the entry of an antigen to which the patient is sensitive into the circulatory system. This leads to release of large amount of histamine leading to marked vasodilatation and marked drop of arterial blood pressure.',
+ 'بتحصل في حالات الحساسية الشديدة، لما مادة (antigen) المريض عنده حساسية منها تدخل دمه، فيحصل تفاعل antigen-antibody، فيتفرز هيستامين كتير يوسّع الأوعية جداً والضغط ينزل بشدة.',
+ 'واحد عنده حساسية من البنسلين واخد حقنة؛ بعد دقايق جسمه كله احمرّ وضغطه وقع.'],
+['N.B. Histamine: A compound that is released by cells in response to injury and in allergic and inflammatory reactions, causing contraction of smooth muscle and dilation of capillaries.',
+ 'ملحوظة: الهيستامين مادة بتفرزها الخلايا استجابةً للإصابة وفي حالات الحساسية والالتهاب، وبتسبب انقباض العضلات الملساء واتساع الشعيرات الدموية.',
+ 'هو زي جرس الإنذار الكيميائي: لما يرن، الشعيرات تتوسع والجسم يتورّم.'],
+'## c- Neurogenic shock (Brain and spinal cord trauma)',
+['In neurogenic shock, vasodilation occurs as a result of a loss of sympathetic tone.',
+ 'في الصدمة العصبية بيحصل اتساع في الأوعية بسبب فقدان الشد السمباتاوي.',
+ 'الأعصاب اللي كانت بتشد الأوعية اتقطعت، فالأوعية ارتخت.'],
+['This can be caused by spinal cord injury, spinal anesthesia, or nervous system damage. It can also result from Suppression of the vasomotor center by drugs. Or lack of glucose (e.g., Insulin overdose, insulin reaction or shock).',
+ 'ممكن تحصل من إصابة الحبل الشوكي، أو التخدير النخاعي، أو تلف الجهاز العصبي. وممكن كمان من تثبيط مركز الأوعية (vasomotor center) بالأدوية، أو من نقص الجلوكوز (زي جرعة زيادة إنسولين).',
+ 'واحد خد جرعة إنسولين كبيرة وسكره وقع فجأة فدخل في صدمة.'],
+['Neurogenic shock may have a prolonged course (spinal cord injury) or a short one (syncope or fainting).',
+ 'الصدمة العصبية ممكن تطول (زي إصابة الحبل الشوكي) أو تكون قصيرة (زي الإغماء).',
+ 'مصاب في الحبل الشوكي حالته بتطول، لكن واحد أغمى عليه من منظر دم بيفوق بسرعة.'],
+['It can also result from sever emotions there is sudden stimulation of the autonomic nervous system leading to vaso-vagal syncope (fainting) and drop of arterial blood pressure.',
+ 'وممكن تحصل كمان من انفعال شديد، فيحصل تنبيه مفاجئ للجهاز العصبي الذاتي، فيحصل إغماء وعائي مبهمي (vaso-vagal syncope) والضغط ينزل.',
+ 'حد سمع خبر صادم فجأة وقع على الأرض مغمى عليه.'],
+['It is characterized by: Dry, warm skin rather than the cool, moist skin seen in hypovolemic shock.',
+ 'بتتميز بجلد ناشف ودافي، عكس الجلد البارد الرطب اللي بنشوفه في صدمة نقص الحجم.',
+ 'في النزيف الجلد بارد وعرقان، لكن هنا الأوعية متوسعة فالجلد دافي وناشف.'],
+['Bradycardia, rather than the tachycardia that characterizes other forms of shock.',
+ 'بطء في النبض (bradycardia)، عكس باقي أنواع الصدمة اللي فيها النبض سريع (tachycardia).',
+ 'لأن الأعصاب السمباتاوية (اللي بتسرّع القلب) متعطلة، فالقلب بيدق بطيء.'],
+'## Physiology / Pathophysiology',
+['Vasodilation → Maldistribution of blood volume → Decreased venous return → Decreased stroke volume → Decreased cardiac output → Decreased tissue perfusion',
+ 'اتساع الأوعية يخلي توزيع الدم غير متوازن، فالدم الراجع للقلب يقل، فحجم الضربة (stroke volume) يقل، فكمية الدم اللي القلب بيضخها في الدقيقة (cardiac output) تقل، فالأنسجة تاخد دم أقل.',
+ 'زي ما تفتح كل حنفيات العمارة مرة واحدة؛ الضغط ينزل وأعلى دور ميلاقيش مية.',
+ ['Vasodilation','Maldistribution of blood volume','Decreased venous return','Decreased stroke volume','Decreased cardiac output','Decreased tissue perfusion'],
+ 'Fig.4. Pathophysiologic sequence of events in circulatory shock.'],
+'## Risk Factors for Circulatory Shock — Septic Shock',
+['Immunosuppression.','ضعف المناعة.','مريض بياخد أدوية مثبطة للمناعة بعد زراعة عضو.'],
+['Extremes of age (<1 yr and >65 yr).','الأعمار المتطرفة: أقل من سنة وأكبر من 65 سنة.','الرضيع مناعته لسه ضعيفة وكبير السن مناعته نازلة.'],
+['Malnourishment.','سوء التغذية.','طفل ناقص تغذية جسمه مش قادر يقاوم العدوى.'],
+['Chronic illness.','الأمراض المزمنة.','مريض سكر مزمن بيتعب بسرعة من أي عدوى.'],
+['Invasive procedures.','الإجراءات التداخلية.','مريض فيه قسطرة بولية أو كانيولا لمدة طويلة وجالُه عدوى.'],
+'## Risk Factors for Circulatory Shock — Anaphylactic Shock',
+['Penicillin sensitivity.','حساسية البنسلين.','واحد خد حقنة بنسلين وعنده حساسية منها.'],
+['Transfusion reaction.','تفاعل نقل الدم.','نقل دم لمريض بفصيلة غير متوافقة.'],
+['Bee sting allergy.','حساسية لسعة النحل.','واحد اتلسع من نحلة وانتفخ وجهه ووقع ضغطه.'],
+['Latex sensitivity.','حساسية اللاتكس.','ممرض بيلبس جوانتي لاتكس وبيحصله حساسية شديدة.'],
+'## Risk Factors for Circulatory Shock — Neurogenic Shock',
+['Spinal cord injury.','إصابة الحبل الشوكي.','واحد وقع من على سلم وعموده الفقري اتأذى.'],
+['Spinal anesthesia.','التخدير النخاعي.','مريض أخد بنج نصفي وضغطه نزل.'],
+['Depressant action of medications.','التأثير المثبّط لبعض الأدوية.','أدوية بتثبط الجهاز العصبي فتوسع الأوعية.'],
+['Glucose deficiency.','نقص الجلوكوز.','مريض سكر خد إنسولين ومكلش.'],
+'# Warning signs of shock',
+['1- Anxiety – restlessness, confusion and disorientation due to: a- Central nervous system (CNS) response to hypoxia (lack of oxygen).',
+ 'أول علامة تحذير: قلق وعدم استقرار وتشوش وفقدان توجه، وسببه إن الجهاز العصبي المركزي بيستجيب لنقص الأكسجين (hypoxia).',
+ 'المخ لما الأكسجين ينقص عنده، المريض بيبقى متوتر ومش فاهم هو فين.'],
+['b- Inadequate cerebral perfusion.',
+ 'والسبب التاني: الدم اللي واصل للمخ مش كفاية.',
+ 'مخ مش واخد دم = مريض مش مركّز.'],
+['2- Deep, rapid respirations due to: a- Low circulatory oxygen.',
+ 'تنفس عميق وسريع، وسببه قلة الأكسجين في الدم.',
+ 'الجسم بيحاول يعوّض الأكسجين الناقص بنفس أسرع وأعمق.'],
+['b- Acidosis.',
+ 'والسبب التاني: الحموضة (acidosis) اللي الجسم بيحاول يتخلص منها بالتنفس.',
+ 'التنفس السريع بيطرد ثاني أكسيد الكربون فيخفف الحموضة.'],
+['3- Narrowing of pulse pressure – the difference between systolic and diastolic pressure due to: a- Systolic pressure – from reduced cardiac output.',
+ 'ضيق في الضغط النبضي (pulse pressure) وهو الفرق بين الانقباضي والانبساطي، وسببه إن الضغط الانقباضي بينزل بسبب قلة ضخ القلب.',
+ 'لو الضغط 120/80 الفرق 40، لكن في الصدمة ممكن يبقى 90/80 والفرق يضيق لـ 10.'],
+['b- Diastolic pressure – from CNS response.',
+ 'والسبب التاني: الضغط الانبساطي بيفضل أو بيعلى بسبب استجابة الجهاز العصبي المركزي.',
+ 'الجسم بيشد الأوعية فالانبساطي مبيقعش زي الانقباضي.'],
+['4- Rapid heart rate, weak thread pulse due to: a- Stimulation of the heart by CNS.',
+ 'نبض سريع وضعيف زي الخيط (thread pulse)، وسببه إن الجهاز العصبي المركزي بينبه القلب يدق أسرع.',
+ 'القلب بيجري بس كل ضربة ضعيفة، فالنبض يتحسس بالعافية.'],
+['5- Thirst, dry mouth due to: a- Shift of fluid from interstitial to intravascular causing tissue dehydration which stimulates the hypothalamus thirst center.',
+ 'عطش وجفاف في الفم، وسببه إن السوائل بتتحرك من الأنسجة للأوعية الدموية، فالأنسجة تجف وده بينبه مركز العطش في الهايبوثالامس.',
+ 'الجسم بياخد مية من الأنسجة يعوّض بيها الأوعية، فالأنسجة تعطش وتبعت إشارة للمخ.'],
+['b- Peripheral circulation which causes saliva production.',
+ 'والسبب التاني مرتبط بالدورة الطرفية وإنتاج اللعاب (قلة الدم الطرفي بتقلل اللعاب).',
+ 'غدد اللعاب لما الدم يقل عندها، الريق يقل والفم ينشف.'],
+['c- Mouth breathing during hyperventilation.',
+ 'والسبب التالت: التنفس من الفم أثناء فرط التنفس (hyperventilation) بيجفف الفم.',
+ 'زي لما تنام وتتنفس من بقك وتصحى بقك ناشف.'],
+['Decreased urine output (less than 30 ml/hr) due to: b- Decreased blood flow to the kidneys.',
+ 'قلة البول (أقل من 30 مل في الساعة)، وسببه إن الدم الواصل للكلى قل.',
+ 'الكلى مش واخدة دم كفاية تفلتره فالبول يقل جداً.'],
+['6- Cool, clammy skin; pale or cyanotic skin and mucous membrane due to: a- Increased CNS causing peripheral vasoconstriction.',
+ 'جلد بارد ولزج (clammy)، شاحب أو أزرق (cyanotic) وكمان الأغشية المخاطية، وسببه إن الجهاز العصبي المركزي بيزيد نشاطه فيضيّق الأوعية الطرفية.',
+ 'الجسم بيسحب الدم من الجلد عشان يحمي الأعضاء المهمة، فتلاقي إيد المريض ساقعة.'],
+['7- Low body temperature due to: a- Poor blood flow except in early septic shock, temperature rises.',
+ 'انخفاض درجة حرارة الجسم، وسببه ضعف تدفق الدم، ما عدا أول الصدمة الإنتانية حيث الحرارة بتعلى.',
+ 'جسم مدفعش دم للجلد = برودة، بس العدوى في بداية الإنتان بتسبب حرارة.'],
+['8- Muscle weakness, fatigue due to: a- Anaerobic metabolism causing lactic acid build up.',
+ 'ضعف في العضلات وإرهاق، وسببه إن الخلايا بتشتغل من غير أكسجين (anaerobic metabolism) فيتراكم حمض اللاكتيك.',
+ 'زي ما تجري سباق وإيدك تتوجعك بعده من اللاكتيك، بس هنا في الجسم كله.'],
+['b- Hyperkalemia.',
+ 'والسبب التاني: ارتفاع البوتاسيوم في الدم (hyperkalemia).',
+ 'الخلايا لما تتضرر بتسرّب بوتاسيوم، وده بيضعف العضلات.'],
+'# Initial measures in shock management',
+['1- Check the initial (ABBCS) rapidly and initiate the necessary measures.',
+ 'أول خطوة: افحص الـ ABBCS بسرعة وابدأ الإجراءات اللازمة.',
+ 'زي الإسعاف لما يوصل: أول حاجة يشوف الممر الهوائي والتنفس والنزيف والدورة الدموية.'],
+['A Airway - Clear the airway','A = Airway: نضّف مجرى الهواء.','لو المريض في حاجة في زوره، شيلها.'],
+['B Breathing - Initiate artificial breathing, if required.','B = Breathing: ابدأ تنفس صناعي لو لزم.','مريض مش بيتنفس؛ نبدأ إنعاش.'],
+['B Bleeding - Control gross bleeding and splint fractures.','B = Bleeding: سيطر على النزيف الكبير وثبّت الكسور بجبيرة.','جرح بينزف؛ اضغط عليه، وكسر؛ ثبّته.'],
+['C Circulation – Check pulse rate and Bp.','C = Circulation: افحص النبض والضغط.','قيس الضغط واحسب النبض.'],
+['- Insert IV cannula for fluid replacement or blood transfusion.','ركّب كانيولا وريدية عشان تعوّض السوائل أو تنقل دم.','دخّل كانيولا كبيرة عشان تدّي سوائل بسرعة.'],
+['- Draw blood samples for investigations.','اسحب عينات دم للتحاليل.','اسحب عينة وهو بيتركب الكانيولا.'],
+['S Sensorium - Assess the patient\'s level of consciousness','S = Sensorium: قيّم مستوى وعي المريض.','اسأله اسمه وهو فين، وشوف بيرد ولا لأ.'],
+['- Explain to the patient what is happening in positive, clear terms and convey reassurance.','اشرح للمريض اللي بيحصل بكلام إيجابي وواضح وطمّنه.','قوله "إحنا معاك وهنعمل اللازم" بصوت هادي.'],
+['- If the person is breathing on his or her own, continue to check breathing every 2 minutes until help arrives.','لو المريض بيتنفس لوحده، استمر تشوف التنفس كل دقيقتين لحد ما المساعدة توصل.','بص على صدره كل دقيقتين وتأكد إنه لسه بيتنفس.'],
+['- Transport promptly.','انقله بسرعة للمستشفى.','متضيّعش وقت؛ الإسعاف أسرع.'],
+['2- Depending on the type or the cause of the shock, treatments differ. In general, fluid resuscitation (giving a large amount of fluid to raise blood pressure quickly) with an IV in the ambulance or emergency room is the first-line treatment for all types of shock. Administer medications such as epinephrine, norepinephrine, or dopamine try to raise a patient\'s blood pressure to ensure blood flow to the vital organs.',
+ 'العلاج بيختلف حسب نوع الصدمة وسببها. لكن بشكل عام أول علاج لكل الأنواع هو إنعاش بالسوائل (fluid resuscitation): إدّي كمية سوائل كبيرة بالوريد في الإسعاف أو الطوارئ عشان ترفع الضغط بسرعة. وبعدها بتدّي أدوية زي الإبينفرين والنورإبينفرين والدوبامين عشان ترفع الضغط وتضمن إن الدم يوصل للأعضاء الحيوية.',
+ 'زي ما تملا خزان فاضي بسرعة (السوائل)، وبعدين تقوّي الطلمبة (الأدوية) عشان الضغط يفضل ثابت.'],
+['2- Do NOT move a person who has a known or suspected spinal injury (to prevent further injury).',
+ 'متحرّكش المريض لو عنده إصابة معروفة أو مشتبه فيها في العمود الفقري، عشان متزودش الإصابة.',
+ 'واحد وقع من فوق وبيشتكي من ضهره؛ متشيلوش، استنى الإسعاف.'],
+['3- Have the person lie down on his or her back with the feet elevated above the head to increase blood flow to vital organs.',
+ 'نيّم المريض على ضهره ووطّي راسه وارفع رجليه فوق مستوى الراس عشان يزيد الدم للأعضاء الحيوية.',
+ 'الرجلين المرفوعة بتخلي الدم ينزل من رجليه ناحية القلب والمخ.'],
+['4- Keep the person warm and comfortable. Loosen tight clothing and cover them with a blanket.',
+ 'خلّي المريض دافي ومرتاح، وفك الهدوم الضيقة وغطيه ببطانية.',
+ 'فُك ياقة القميص والحزام وغطيه.'],
+['5- Do NOT give fluids by mouth, even if the person complains of thirst',
+ 'متدّيش المريض أي سوائل بالفم حتى لو بيقول إنه عطشان.',
+ 'ممكن يحتاج عملية أو يغمى عليه فيشرق؛ اديله سوائل وريدي بس.'],
+['6- Give appropriate first aid for any injuries.',
+ 'اعمل الإسعافات الأولية المناسبة لأي إصابات.',
+ 'لو في جرح أو كسر، تعامل معاه.'],
+['7- Direct pressure should be applied to any wounds that are bleeding.',
+ 'اضغط ضغط مباشر على أي جرح بينزف.',
+ 'حط شاش على الجرح واضغط بإيدك لحد ما النزيف يقف.'],
+'# Medical management of shock',
+['Vasoactive Agents Used in Treating Shock',
+ 'دي الأدوية اللي بتأثر على الأوعية والقلب وبنستخدمها في علاج الصدمة.',
+ 'زي صندوق عُدّة فيه أدوات مختلفة، كل واحدة بتعمل حاجة غير التانية.'],
+'## Inotropic Agents',
+['Medication: Dobutamine (Dobutrex), Dopamine (Intropin), Epinephrine (Adrenalin), Milrinone (Primacor)',
+ 'دي أدوية المجموعة: دوبيوتامين، دوبامين، إبينفرين، ميلرينون.',
+ 'كلها بتقوي ضربة القلب.'],
+['Desired Action in Shock: Improve contractility, increase stroke volume, increase cardiac output',
+ 'المطلوب منها: تحسّن قوة انقباض القلب، وتزوّد حجم الضربة، وتزوّد كمية الدم اللي القلب بيضخها.',
+ 'زي ما تدّي الطلمبة موتور أقوى.'],
+['Disadvantages: Increase oxygen demand of the heart',
+ 'عيبها: بتزوّد احتياج القلب للأكسجين.',
+ 'القلب بيشتغل أقوى فبيحتاج أكسجين أكتر، وده خطر على مريض جلطة.'],
+'## Vasodilators',
+['Medication: Nitroglycerin (Tridil), Nitroprusside (Nipride)',
+ 'دي أدوية المجموعة: نيتروجلسرين ونيتروبروسايد.',
+ 'بتوسّع الأوعية.'],
+['Desired Action in Shock: To improve perfusion to organs. Reduce preload and afterload, reduce oxygen demand of heart',
+ 'المطلوب منها: تحسّن وصول الدم للأعضاء، وتقلل الحمل قبل وبعد (preload و afterload) على القلب، وتقلل احتياج القلب للأكسجين.',
+ 'زي ما تفتح مواسير أوسع فالطلمبة تشتغل أريح.'],
+['Disadvantages: Cause hypotension',
+ 'عيبها: بتسبب هبوط في الضغط.',
+ 'لأنها بتوسع الأوعية، الضغط ممكن ينزل أكتر.'],
+'## Vasopressor Agents',
+['Medication: Norepinephrine (Levophed), Dopamine (Intropin), Phenylephrine (NeoSynephrine), Vasopressin (Pitressin)',
+ 'دي أدوية المجموعة: نورإبينفرين، دوبامين، فينيلإفرين، فازوبريسين.',
+ 'كلها بتضيّق الأوعية وترفع الضغط.'],
+['Desired Action in Shock: Increase blood pressure by vasoconstriction',
+ 'المطلوب منها: ترفع الضغط عن طريق تضييق الأوعية.',
+ 'زي ما تضغط خرطوم المية بإيدك فالمية تطلع بقوة.'],
+['Disadvantages: Increase afterload, thereby increasing cardiac workload; compromise perfusion to skin, kidneys, lungs, gastrointestinal tract',
+ 'عيبها: بتزوّد الحمل بعد القلب (afterload) فتزوّد شغل القلب، وبتقلل وصول الدم للجلد والكلى والرئتين والجهاز الهضمي.',
+ 'الأوعية الضيقة بتصعّب على القلب، وكمان الدم مبيوصلش للأعضاء دي كويس.'],
+'## Diuretics',
+['Diuretics: To reduce pulmonary edema and to improve diuresis',
+ 'مدرّات البول: بتقلل الاستسقاء الرئوي (مية في الرئة) وبتحسّن إدرار البول.',
+ 'مريض رئته مليانة سوائل بياخد مدر يخرج السوائل بالبول.'],
+'## Bronchodilators',
+['Bronchodilators: Act as peripheral vasodilators in addition to relief of spasm',
+ 'موسّعات الشعب الهوائية: بتشتغل كموسّعات للأوعية الطرفية كمان، بالإضافة لإنها بتريح التشنج.',
+ 'زي ما تفتح ممر ضيق فالهوا (والدم) يعدي أسهل.']
+];
+
+(function build(){
+  const content = document.getElementById('content');
+  const toc = document.getElementById('toc');
+  let html = '', n = 0, secId = 0;
+  DATA.forEach(d => {
+    if (typeof d === 'string') {
+      if (d.startsWith('## ')) html += `<div class="sub" dir="ltr">${d.slice(3)}</div>`;
+      else {
+        secId++; const t = d.slice(2);
+        html += `<div class="sec" id="s${secId}"><h2 dir="ltr">${t}</h2></div>`;
+        toc.insertAdjacentHTML('beforeend', `<a href="#s${secId}">${t}</a>`);
+      }
+      return;
+    }
+    n++;
+    const [en, ar, ex, flow, cap] = d;
+    html += `<div class="item"><div class="en">${en}</div>` +
+      (flow ? `<div class="flow">${flow.map((f,k)=>(k?'<i>↓</i>':'')+`<span>${f}</span>`).join('')}</div>` + (cap?`<div class="cap">${cap}</div>`:'') : '') +
+      `<div class="ar">${ar}</div><div class="ex"><b>${E}</b> ${ex}</div></div>`;
+  });
+  content.innerHTML = html;
+  document.getElementById('cnt').textContent = n + ' نقطة';
+})();
+
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  document.getElementById('prog-bar').style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%';
+});
+const themeBtn = document.getElementById('themeBtn');
+let theme = 'light';
+try { theme = localStorage.getItem('theme') || 'light'; } catch(e) {}
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  try { localStorage.setItem('theme', t); } catch(e) {}
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+</script>
+</body>
+</html>
