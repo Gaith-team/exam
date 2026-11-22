@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--teal:#db2777;--teal-d:#be185d;--blue:#eef2f7;--bd:#e3d3dc;--ok:#16a34a;--no:#dc2626;--rev:#6366f1;--txt:#1a2332;--grad:linear-gradient(135deg,#be185d,#db2777,#ec4899)}
+body{font-family:'Outfit',Arial,sans-serif;background:#f8fafc;color:var(--txt);font-size:14px}
+header{background:var(--grad);color:#fff;text-align:center;padding:12px;font-size:18px;font-weight:900;position:relative}
+header .brand{position:absolute;right:16px;top:8px;font-weight:bold;font-size:14px}
+header a{position:absolute;left:16px;top:11px;color:#fff;font-size:13px;text-decoration:none}
+.wrap{max-width:1280px;margin:0 auto;padding:8px 10px 20px}
+.topinfo{background:var(--blue);border:1px solid var(--bd);padding:4px 8px;font-size:13px;margin-bottom:8px}
+.topinfo b{color:var(--teal)}
+.layout{display:grid;grid-template-columns:1fr 240px;gap:14px;align-items:start}
+.main{background:#fff;border:1px solid var(--bd);min-height:470px;display:flex;flex-direction:column;
+ background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='70'><text x='8' y='45' transform='rotate(-20 75 35)' font-size='14' font-family='Arial' fill='%23000' fill-opacity='.07'>GHAITH TEAM</text></svg>")}
+.qhead{display:flex;justify-content:space-between;align-items:center;padding:12px 6px 6px;margin:0 6px;border-bottom:1px solid var(--bd)}
+.qhead b{font-size:13px}
+.fs button{background:#be185d;color:#fff;border:0;padding:6px 12px;margin-left:3px;border-radius:2px;cursor:pointer;font-weight:bold}
+.qbody{padding:8px 12px;flex:1}
+.qtext{font-size:13px;line-height:1.7;margin-bottom:18px;direction:ltr;text-align:left}
+.opt{display:flex;align-items:center;gap:8px;margin:0 0 16px;cursor:pointer;direction:ltr;text-align:left;font-size:13px}
+.opt input{accent-color:var(--teal);cursor:pointer}
+.bar{display:flex;justify-content:space-between;padding:10px;gap:6px;flex-wrap:wrap;border-top:1px solid var(--bd);margin:0 6px 6px}
+.b{background:var(--grad);color:#fff;border:0;padding:9px 12px;font-weight:bold;font-size:13px;border-radius:2px;cursor:pointer}
+.b:hover{filter:brightness(1.12)}
+.b.gray{background:#1a2332}
+.side>div{background:var(--blue);border:1px solid var(--bd);margin-bottom:10px;padding:8px}
+.timer{text-align:center;background:none!important;border:0!important}
+.timer small{font-size:13px}
+.timer .t{font-size:30px;color:#db2777;margin-top:4px}
+.timer .t.warn{color:#c27b0a}.timer .t.danger{color:#c8372d}
+.leg{display:grid;grid-template-columns:1fr 1fr;gap:8px 6px;font-size:10px;margin-top:8px}
+.leg div{display:flex;align-items:center;gap:6px}
+.sq{min-width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:bold;border-radius:2px;border:1px solid transparent}
+.s-ans{background:var(--ok)}.s-no{background:#d97706}.s-rev{background:var(--rev)}.s-nv{background:#fff;color:#333;border-color:#9bb0a2}
+.nav{display:flex;flex-wrap:wrap;gap:6px;max-height:260px;overflow:auto;background:#eef2f7}
+.nav .sq{width:24px;height:24px;cursor:pointer;font-size:12px}
+.nav .cur{outline:2px solid #1a2332;outline-offset:0}
+.endrow{text-align:center}
+.endrow .b{width:90px}
+footer{text-align:center;padding:16px;font-size:12px;color:#4a5568;background:#eef2f7;border-top:1px solid #e3d3dc;margin-top:10px}
+footer a{color:#229ED9;text-decoration:none}
+/* results */
+.res{background:#fff;border:1px solid var(--bd);padding:20px;max-width:900px;margin:10px auto}
+.score{text-align:center;padding:10px 0 18px}
+.score .n{font-size:48px;font-weight:900;color:var(--teal)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}
+.stats div{background:var(--blue);padding:10px;text-align:center;border-radius:4px}
+.stats b{display:block;font-size:20px}
+.sec{background:var(--ok);color:#fff;padding:8px 12px;font-weight:bold;margin:22px 0 10px}
+.sec.bad{background:var(--no)}
+.it{border:1px solid var(--bd);border-left:4px solid var(--ok);padding:12px;margin-bottom:8px;background:#fafcff;direction:ltr;text-align:left}
+.it.bad{border-left-color:var(--no)}
+.it .q{font-weight:bold;font-size:13px;margin-bottom:6px;line-height:1.6}
+.it .r{font-size:12px;margin-top:4px}
+.tag{padding:1px 7px;border-radius:3px;color:#fff;font-size:11px;font-weight:bold;margin-right:6px}
+.tag.y{background:var(--no)}.tag.g{background:var(--ok)}
+.exp{font-size:12px;color:#555;margin-top:6px;background:#eef6f4;padding:6px 8px;border-radius:3px}
+.acts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.hide{display:none}
+@media(max-width:820px){.layout{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}header a{display:none}}
+.qtext img{display:block;max-width:100%;max-height:260px;margin:0 auto 12px;border-radius:8px;background:#fff}
+.it .q img{max-height:90px;display:block;margin:6px 0;border-radius:6px}
+</style>
+</head>
+<body>
+<header><a href="https://gaith-team.github.io/exam/obstetric/index.html">← رجوع</a>تمريض النساء والتوليد عملي<span class="brand">GHAITH TEAM</span></header>
+<div class="wrap">
+ <div id="exam">
+  <div class="topinfo">Total questions in exam: <b id="tot">0</b> | Answered: <b id="ans">0</b></div>
+  <div class="layout">
+   <div class="main">
+    <div class="qhead"><b id="qno"></b><div class="fs"><button onclick="fs(-1)">A-</button><button onclick="fs(0)">A</button><button onclick="fs(1)">A+</button></div></div>
+    <div class="qbody" id="qbody"></div>
+    <div class="bar">
+     <button class="b" onclick="saveNext()">Save &amp; Next</button>
+     <div style="display:flex;gap:4px;flex-wrap:wrap">
+      <button class="b" onclick="mark()">Mark for Review</button>
+      <button class="b" onclick="skip()">Skip</button>
+      <button class="b" onclick="prev()">Previous</button>
+     </div>
+    </div>
+   </div>
+   <div class="side">
+    <div class="timer"><small>Time Remaining</small><div class="t" id="tm">35:00</div></div>
+    <div>
+     <div>Number of questions : <b id="tot2">0</b></div>
+     <div class="leg">
+      <div><span class="sq s-ans" id="cAns">0</span>Answered</div>
+      <div><span class="sq s-no" id="cNo">0</span>Not Answered</div>
+      <div><span class="sq s-rev" id="cRev">0</span>For Review</div>
+      <div><span class="sq s-nv" id="cNv">0</span>Not Visited</div>
+     </div>
+    </div>
+    <div class="nav" id="nav"></div>
+    <div class="endrow"><button class="b gray" onclick="endTest()">End Test</button></div>
+   </div>
+  </div>
+ </div>
+ <div id="result" class="hide"></div>
+</div>
+<footer>GHAITH TEAM · <a href="https://t.me/nursing2bu" target="_blank">@nursing2bu</a></footer>
+
+<script>
+const QUESTIONS = [
+
+{t:"Lightening usually occurs about how long before the onset of labor in a nullipara?", o:["Two weeks","Two days","Six weeks","It occurs only during the second stage"], a:0},
+{t:"Which maternal position should be avoided during labor to prevent supine hypotension?", o:["Supine position","Left lateral position","Sitting position","Walking"], a:0},
+{t:"The usual lidocaine concentration used for local anesthesia of the episiotomy is:", o:["0.1% in 20 ml","0.5% in 10 ml (or 1% in 5 ml)","5% in 10 ml","2% in 50 ml"], a:1},
+{t:"The denominator (reference point) palpated in a vertex presentation is the:", o:["Mentum","Sacrum","Occiput","Scapula"], a:2},
+{t:"Vitamin K is given intramuscularly to the newborn to prevent:", o:["Neonatal jaundice","Neonatal hemorrhagic disease","Ophthalmia neonatorum","Hypothermia"], a:1},
+{t:"If the placenta has not been delivered after how long should a retained placenta be suspected?", o:["10 minutes","20 minutes","2 hours","30 minutes"], a:3},
+{t:"Which phase of the first stage is the hardest but the shortest?", o:["Latent phase","Active phase","Transition phase","Early latent phase"], a:2},
+{t:"A multiparous woman in labor is transferred to the delivery room when the cervix is:", o:["4–5 cm dilated","8–9 cm dilated","Latent phase only","Not dilated yet"], a:1},
+{t:"The total weight gain during a normal pregnancy is approximately:", o:["12–13 kg","5–6 kg","8–9 kg","20–25 kg"], a:0},
+{t:"On per-vaginal examination, a cervical dilatation of 4 cm corresponds to:", o:["1 loose finger","2 loose fingers","2 tight fingers","3 tight fingers"], a:1},
+{t:"The fetal heart can first be heard with a fetoscope (Pinard stethoscope) at about:", o:["5–6 weeks","10–12 weeks","14–16 weeks","24–26 weeks"], a:3},
+{t:"The first stage of labor ends with:", o:["Rupture of the membranes","Delivery of the baby","Delivery of the placenta","Complete cervical dilatation (10 cm)"], a:3},
+{t:"The booking (first antenatal) visit should usually take place between:", o:["4–6 weeks","10–14 weeks","20–24 weeks","32–36 weeks"], a:1},
+{t:"Restitution is best described as:", o:["Descent of the head into the pelvis","Turning of the head 1/8 circle opposite to internal rotation to restore its relation with the shoulders","Contact of the chin with the fetal thorax","Passage of the head out of the birth canal"], a:1},
+{t:"Termination of pregnancy before viability of the fetus is called:", o:["Abortion","Preterm labor","Post-term labor","Fetal mortality"], a:0},
+{t:"Preterm labor is labor that occurs:", o:["Before 20 weeks","After 20 weeks and before 37 weeks","Between 38 and 42 weeks","After 42 weeks"], a:1},
+{t:"The normal maternal surface of the placenta is dark red and is made of:", o:["15–20 cotyledons","5–10 cotyledons","25–30 cotyledons","40–50 cotyledons"], a:0},
+{t:"Which organization recommends using the partogram to follow labor?", o:["UNICEF","WHO","ILO","WTO"], a:1},
+{t:"An advantage of the midline episiotomy is that it is:", o:["Associated with more blood loss","Harder to repair","Associated with painful intercourse","Easy to repair with less pain and blood loss"], a:3},
+{t:"A postpartum woman who has not passed urine should be catheterized if she fails to void within:", o:["1–2 hours","12 hours","24 hours","4–6 hours"], a:3},
+{t:"A normal umbilical cord contains:", o:["1 artery and 2 veins","2 arteries and 1 vein","2 arteries and 2 veins","3 arteries"], a:1},
+{t:"When clamping the cord after delivery, the first Kocher is placed on the cord at least:", o:["5 cm from the baby","10 cm from the baby","15 cm from the baby","30 cm from the baby"], a:2},
+{t:"In the active phase of the first stage the cervix dilates from:", o:["0–3 cm","4–7 cm","8–10 cm","10 cm only"], a:1},
+{t:"On the partogram, descent of the fetal head is plotted using the symbol:", o:["A","X","O","B"], a:2},
+{t:"The part of the fetus that first enters the pelvis and lies over the inlet is the:", o:["Station","Lie","Engagement","Presentation"], a:3},
+{t:"The active method of delivering the placenta by controlled cord traction is known as:", o:["Ritgen maneuver","Leopold maneuver","Brandt-Andrews method","Pawlik grip"], a:2},
+{t:"During the first stage of labor, the fetal heart rate should be heard:", o:["Every 5 minutes","Every 30 minutes at all times","Every 2 hours until rupture of membranes, then every 30 minutes","Every 4 hours"], a:2},
+{t:"Which moulding degree is the NORMAL one according to the per-vaginal examination notes?", o:["0 (separated bones)","+ (bones just touching)","++ (overlapping bones, reducible)","+++ (severely overlapping, irreducible)"], a:2},
+{t:"The expected normal fasting blood glucose concentration in a pregnant woman is:", o:["50–60 mg/dL","70–100 mg/dL","110–140 mg/dL","150–200 mg/dL"], a:1},
+{t:"According to the rule of fifths, the fetal head is said to be engaged when:", o:["Five-fifths are palpable above the pelvic brim","Four-fifths are palpable above the brim","Three-fifths are palpable above the brim","Two finger-breadths (2/5) or less are palpable above the pelvic brim"], a:3},
+{t:"Placenta previa is a contraindication to per-vaginal examination.", o:["True","False"], a:0},
+{t:"An ice pack applied promptly to the perineum after vaginal birth helps reduce edema and limit hematoma formation.", o:["True","False"], a:0},
+{t:"The fourth Leopold maneuver is omitted if the fetal presentation is breech.", o:["True","False"], a:0},
+{t:"Midline episiotomy causes more blood loss and is more painful than medio-lateral episiotomy.", o:["True","False"], a:1},
+{t:"A fetal heart rate above 160 beats/min is called bradycardia.", o:["True","False"], a:1},
+{t:"The presence of lanugo hair at delivery is a sign of post-maturity.", o:["True","False"], a:1},
+{t:"A term pregnancy is a gestation that continues until at least 38 weeks.", o:["True","False"], a:0},
+{t:"A primiparous woman is transferred to the delivery room when her cervix is 8–9 cm dilated.", o:["True","False"], a:1},
+{t:"Primary postpartum hemorrhage is bleeding that occurs within the third stage or within 24 hours after birth.", o:["True","False"], a:0},
+{t:"Group B Streptococcus positive status with ruptured membranes is a contraindication to per-vaginal examination.", o:["True","False"], a:0},
+{t:"A newborn at 1 minute has a heart rate of 90/min, no respiratory effort, flaccid tone, no response to stimulation and a blue/pale color. What is the Apgar score and risk category?", o:["Score 8 – small risk","Score 6 – moderate risk","Score 10 – normal","Score 1 – high risk (1–4)"], a:3},
+{t:"Two hours after delivery, a woman has heavy bleeding and the uterine fundus is soft and boggy. What is the first nursing action?", o:["Give an oral analgesic","Apply ice to the fundus","Massage the fundus through the abdomen (supporting the lower segment) until firm","Encourage ambulation"], a:2},
+{t:"During the second pelvic grip the nurse finds the cephalic prominence on the same side as the fetal back. What does this indicate?", o:["The head is flexed (vertex)","The head is extended (face)","The fetus is breech","The head is engaged at 0 station"], a:1},
+{t:"A 36-year-old woman has a twin pregnancy at 30 weeks. According to the recommended schedule for a high-risk pregnancy, how often should she be seen?", o:["Monthly","Every 2 weeks","Every week","She should be hospitalized now"], a:2},
+{t:" The baby's head has just been delivered. What is the correct immediate action?", o:["Cut the cord immediately","Wipe mucus and fluid from the mouth first, then the nose, with dry gauze to avoid aspiration","Give vitamin K","Measure the head circumference"], a:1},
+{t:" In the third stage the nurse observes a sudden gush of blood, lengthening of the cord and a harder, globular uterus. What is the most appropriate next step?", o:["Signs of placental separation: massage the fundus, ask the woman to strain, deliver and inspect the placenta","Pull strongly on the cord immediately","Wait one hour before doing anything","Transfer the mother to the ward at once"], a:0},
+{t:"On the partogram, a woman's cervical dilatation line has crossed to the right of the alert line. What does this mean?", o:["Slow progress – referral/action is needed","Normal progress – continue routine observation","Labor is finished","The baby is engaged"], a:0},
+{t:"A primigravida's fetal head is crowning and an episiotomy is planned. When should the local anesthesia be given?", o:["After delivery of the placenta","After the repair","It is never needed","Immediately before crowning (so it has time to act)"], a:3},
+{t:"After suturing the episiotomy and removing the vaginal pack, the nurse assists the doctor to insert a finger into the rectum. What is the purpose?", o:["To check cervical dilatation","To apply antiseptic","To measure anal sphincter tone only","To exclude rectal involvement/injury"], a:3},
+{t:" A woman has 24 weeks of amenorrhea, but the nurse finds the fundus at the xiphoid process. Which causes should be considered?", o:["Oligohydramnios","IUGR","Polyhydramnios, twins, macrosomia or miscalculation of dates","This is normal for 24 weeks"], a:2}
+};
+];
+
+const TOTAL_TIME = 35*60;
+let Q, cur, sel, saved, review, visited, left, iv, size = 13;
+
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+const $ = id => document.getElementById(id);
+
+function init(pool){
+  Q = shuffle([...pool]); const n = Q.length;
+  cur = 0; sel = Array(n).fill(null); saved = Array(n).fill(false);
+  review = Array(n).fill(false); visited = Array(n).fill(false);
+  left = TOTAL_TIME;
+  $('exam').classList.remove('hide'); $('result').classList.add('hide');
+  $('tot').textContent = $('tot2').textContent = n;
+  clearInterval(iv);
+  iv = setInterval(()=>{
+    left--; const m=Math.floor(left/60), s=left%60, t=$('tm');
+    t.textContent = m+':'+(s<10?'0':'')+s;
+    t.className = 't'+(left<=120?' danger':left<=300?' warn':'');
+    if(left<=0){clearInterval(iv);finish()}
+  },1000);
+  if(n) render();
+  window.scrollTo(0,0);
+}
+
+function render(){
+  visited[cur] = true;
+  const q = Q[cur];
+  $('qno').textContent = 'Question No. ' + (cur+1);
+  $('qbody').style.fontSize = size+'px';
+  $('qbody').innerHTML = `<div class="qtext" style="font-size:${size}px">${q.t}</div>` +
+    q.o.map((o,i)=>`<label class="opt" style="font-size:${size}px"><input type="radio" name="o" value="${i}" ${sel[cur]===i?'checked':''} onchange="sel[cur]=${i}"> <span>${o}</span></label>`).join('');
+  refresh();
+}
+
+function status(i){
+  if(review[i]) return 's-rev';
+  if(saved[i]) return 's-ans';
+  if(visited[i]) return 's-no';
+  return 's-nv';
+}
+function refresh(){
+  const n = Q.length; let a=0,no=0,r=0,nv=0;
+  $('nav').innerHTML = Q.map((_,i)=>{
+    const s = status(i);
+    if(saved[i]) a++;
+    if(s==='s-rev') r++; else if(s==='s-no') no++; else if(s==='s-nv') nv++;
+    return `<span class="sq ${s} ${i===cur?'cur':''}" onclick="go(${i})">${i+1}</span>`;
+  }).join('');
+  $('ans').textContent = a; $('cAns').textContent = a; $('cNo').textContent = no;
+  $('cRev').textContent = r; $('cNv').textContent = nv;
+}
+
+function go(i){cur=i;render()}
+function nextQ(){ if(cur<Q.length-1){cur++;render();return} const k=Q.findIndex((_,x)=>!saved[x]); if(k>=0){cur=k;render()} else {refresh();alert('كل الأسئلة اتحلت، دوس End Test لإنهاء الامتحان')} }
+function saveNext(){ saved[cur]=sel[cur]!==null; nextQ(); }
+function skip(){ nextQ(); }
+function mark(){ review[cur]=!review[cur]; if(sel[cur]!==null) saved[cur]=true; refresh(); }
+function prev(){ if(cur>0){cur--;render()} }
+function fs(d){ size = d===0 ? 13 : Math.max(11,Math.min(24,size+d*2)); render(); }
+
+function endTest(){
+  const un = Q.filter((_,i)=>sel[i]===null).length;
+  const msg = un ? `لسه فاضل ${un} سؤال من غير إجابة. تنهي الامتحان؟` : 'تنهي الامتحان؟';
+  if(confirm(msg)) finish();
+}
+
+function finish(){
+  clearInterval(iv);
+  const n = Q.length; let ok=[], bad=[];
+  Q.forEach((q,i)=>{ (sel[i]===q.a ? ok : bad).push(i) });
+  const pct = n ? Math.round(ok.length/n*100) : 0;
+  const card = (i,good)=>{
+    const q=Q[i];
+    return `<div class="it ${good?'':'bad'}"><div class="q">${i+1}. ${q.t}</div>
+    ${good ? `<div class="r"><span class="tag g">Correct</span>${q.o[q.a]}</div>` :
+    `<div class="r"><span class="tag y">Your answer</span>${sel[i]===null?'— لم تتم الإجابة —':q.o[sel[i]]}</div>
+     <div class="r"><span class="tag g">Correct</span>${q.o[q.a]}</div>`}
+    ${q.exp?`<div class="exp">💬 ${q.exp}</div>`:''}</div>`;
+  };
+  const unans = Q.filter((_,i)=>sel[i]===null).length;
+  $('exam').classList.add('hide');
+  const r = $('result'); r.classList.remove('hide');
+  r.innerHTML = `<div class="res">
+   <div class="score"><div class="n">${pct}%</div><div>${ok.length} / ${n}</div></div>
+   <div class="stats">
+    <div><b style="color:var(--ok)">${ok.length}</b>صح</div>
+    <div><b style="color:var(--no)">${bad.length - unans}</b>غلط</div>
+    <div><b style="color:#777">${unans}</b>من غير إجابة</div>
+    <div><b>${n}</b>الإجمالي</div>
+   </div>
+   <div class="acts">
+    ${bad.length?'<button class="b" onclick="retryWrong()">إعادة الأسئلة الغلط ('+bad.length+')</button>':''}
+    <button class="b" onclick="init(QUESTIONS)">امتحان جديد عشوائي</button>
+   </div>
+   <div class="sec">✔ الأسئلة اللي اتحلت صح (${ok.length})</div>
+   ${ok.map(i=>card(i,true)).join('') || '<div style="padding:8px;color:#777">لا يوجد</div>'}
+   <div class="sec bad">✖ الأسئلة الغلط (${bad.length})</div>
+   ${bad.map(i=>card(i,false)).join('') || '<div style="padding:8px;color:#777">ممتاز، مفيش أخطاء 🎉</div>'}
+  </div>`;
+  window.scrollTo(0,0);
+}
+
+function retryWrong(){
+  const pool = Q.filter((q,i)=>sel[i]!==q.a);
+  init(pool);
+}
+
+init(QUESTIONS);
+</script>
+</body>
+</html>
