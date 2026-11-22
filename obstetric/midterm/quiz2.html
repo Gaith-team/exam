@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--teal:#db2777;--teal-d:#be185d;--blue:#eef2f7;--bd:#e3d3dc;--ok:#16a34a;--no:#dc2626;--rev:#6366f1;--txt:#1a2332;--grad:linear-gradient(135deg,#be185d,#db2777,#ec4899)}
+body{font-family:'Outfit',Arial,sans-serif;background:#f8fafc;color:var(--txt);font-size:14px}
+header{background:var(--grad);color:#fff;text-align:center;padding:12px;font-size:18px;font-weight:900;position:relative}
+header .brand{position:absolute;right:16px;top:8px;font-weight:bold;font-size:14px}
+header a{position:absolute;left:16px;top:11px;color:#fff;font-size:13px;text-decoration:none}
+.wrap{max-width:1280px;margin:0 auto;padding:8px 10px 20px}
+.topinfo{background:var(--blue);border:1px solid var(--bd);padding:4px 8px;font-size:13px;margin-bottom:8px}
+.topinfo b{color:var(--teal)}
+.layout{display:grid;grid-template-columns:1fr 240px;gap:14px;align-items:start}
+.main{background:#fff;border:1px solid var(--bd);min-height:470px;display:flex;flex-direction:column;
+ background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='150' height='70'><text x='8' y='45' transform='rotate(-20 75 35)' font-size='14' font-family='Arial' fill='%23000' fill-opacity='.07'>GHAITH TEAM</text></svg>")}
+.qhead{display:flex;justify-content:space-between;align-items:center;padding:12px 6px 6px;margin:0 6px;border-bottom:1px solid var(--bd)}
+.qhead b{font-size:13px}
+.fs button{background:#be185d;color:#fff;border:0;padding:6px 12px;margin-left:3px;border-radius:2px;cursor:pointer;font-weight:bold}
+.qbody{padding:8px 12px;flex:1}
+.qtext{font-size:13px;line-height:1.7;margin-bottom:18px;direction:ltr;text-align:left}
+.opt{display:flex;align-items:center;gap:8px;margin:0 0 16px;cursor:pointer;direction:ltr;text-align:left;font-size:13px}
+.opt input{accent-color:var(--teal);cursor:pointer}
+.bar{display:flex;justify-content:space-between;padding:10px;gap:6px;flex-wrap:wrap;border-top:1px solid var(--bd);margin:0 6px 6px}
+.b{background:var(--grad);color:#fff;border:0;padding:9px 12px;font-weight:bold;font-size:13px;border-radius:2px;cursor:pointer}
+.b:hover{filter:brightness(1.12)}
+.b.gray{background:#1a2332}
+.side>div{background:var(--blue);border:1px solid var(--bd);margin-bottom:10px;padding:8px}
+.timer{text-align:center;background:none!important;border:0!important}
+.timer small{font-size:13px}
+.timer .t{font-size:30px;color:#db2777;margin-top:4px}
+.timer .t.warn{color:#c27b0a}.timer .t.danger{color:#c8372d}
+.leg{display:grid;grid-template-columns:1fr 1fr;gap:8px 6px;font-size:10px;margin-top:8px}
+.leg div{display:flex;align-items:center;gap:6px}
+.sq{min-width:22px;height:22px;display:inline-flex;align-items:center;justify-content:center;color:#fff;font-size:11px;font-weight:bold;border-radius:2px;border:1px solid transparent}
+.s-ans{background:var(--ok)}.s-no{background:#d97706}.s-rev{background:var(--rev)}.s-nv{background:#fff;color:#333;border-color:#9bb0a2}
+.nav{display:flex;flex-wrap:wrap;gap:6px;max-height:260px;overflow:auto;background:#eef2f7}
+.nav .sq{width:24px;height:24px;cursor:pointer;font-size:12px}
+.nav .cur{outline:2px solid #1a2332;outline-offset:0}
+.endrow{text-align:center}
+.endrow .b{width:90px}
+footer{text-align:center;padding:16px;font-size:12px;color:#4a5568;background:#eef2f7;border-top:1px solid #e3d3dc;margin-top:10px}
+footer a{color:#229ED9;text-decoration:none}
+/* results */
+.res{background:#fff;border:1px solid var(--bd);padding:20px;max-width:900px;margin:10px auto}
+.score{text-align:center;padding:10px 0 18px}
+.score .n{font-size:48px;font-weight:900;color:var(--teal)}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:14px 0}
+.stats div{background:var(--blue);padding:10px;text-align:center;border-radius:4px}
+.stats b{display:block;font-size:20px}
+.sec{background:var(--ok);color:#fff;padding:8px 12px;font-weight:bold;margin:22px 0 10px}
+.sec.bad{background:var(--no)}
+.it{border:1px solid var(--bd);border-left:4px solid var(--ok);padding:12px;margin-bottom:8px;background:#fafcff;direction:ltr;text-align:left}
+.it.bad{border-left-color:var(--no)}
+.it .q{font-weight:bold;font-size:13px;margin-bottom:6px;line-height:1.6}
+.it .r{font-size:12px;margin-top:4px}
+.tag{padding:1px 7px;border-radius:3px;color:#fff;font-size:11px;font-weight:bold;margin-right:6px}
+.tag.y{background:var(--no)}.tag.g{background:var(--ok)}
+.exp{font-size:12px;color:#555;margin-top:6px;background:#eef6f4;padding:6px 8px;border-radius:3px}
+.acts{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-top:16px}
+.hide{display:none}
+@media(max-width:820px){.layout{grid-template-columns:1fr}.stats{grid-template-columns:1fr 1fr}header a{display:none}}
+.qtext img{display:block;max-width:100%;max-height:260px;margin:0 auto 12px;border-radius:8px;background:#fff}
+.it .q img{max-height:90px;display:block;margin:6px 0;border-radius:6px}
+</style>
+</head>
+<body>
+<header><a href="https://gaith-team.github.io/exam/obstetric/index.html">← رجوع</a>تمريض النساء والتوليد<span class="brand">GHAITH TEAM</span></header>
+<div class="wrap">
+ <div id="exam">
+  <div class="topinfo">Total questions in exam: <b id="tot">0</b> | Answered: <b id="ans">0</b></div>
+  <div class="layout">
+   <div class="main">
+    <div class="qhead"><b id="qno"></b><div class="fs"><button onclick="fs(-1)">A-</button><button onclick="fs(0)">A</button><button onclick="fs(1)">A+</button></div></div>
+    <div class="qbody" id="qbody"></div>
+    <div class="bar">
+     <button class="b" onclick="saveNext()">Save &amp; Next</button>
+     <div style="display:flex;gap:4px;flex-wrap:wrap">
+      <button class="b" onclick="mark()">Mark for Review</button>
+      <button class="b" onclick="skip()">Skip</button>
+      <button class="b" onclick="prev()">Previous</button>
+     </div>
+    </div>
+   </div>
+   <div class="side">
+    <div class="timer"><small>Time Remaining</small><div class="t" id="tm">50:00</div></div>
+    <div>
+     <div>Number of questions : <b id="tot2">0</b></div>
+     <div class="leg">
+      <div><span class="sq s-ans" id="cAns">0</span>Answered</div>
+      <div><span class="sq s-no" id="cNo">0</span>Not Answered</div>
+      <div><span class="sq s-rev" id="cRev">0</span>For Review</div>
+      <div><span class="sq s-nv" id="cNv">0</span>Not Visited</div>
+     </div>
+    </div>
+    <div class="nav" id="nav"></div>
+    <div class="endrow"><button class="b gray" onclick="endTest()">End Test</button></div>
+   </div>
+  </div>
+ </div>
+ <div id="result" class="hide"></div>
+</div>
+<footer>GHAITH TEAM · <a href="https://t.me/nursing2bu" target="_blank">@nursing2bu</a></footer>
+
+<script>
+const QUESTIONS = [
+{"t":"A heart-shaped pelvic brim with a narrow pubic arch characterizes the:","o":["Gynecoid pelvis","Anthropoid pelvis","Platypelloid pelvis","Android pelvis"],"a":3},{"t":"The suture between the two parietal bones of the fetal skull is the:","o":["Sagittal suture","Lambdoid suture","Coronal suture","Frontal suture"],"a":0},{"t":"The function of the mons pubis is to:","o":["Protect the symphysis pubis","Lubricate the vagina during intercourse","Enclose the clitoris","Secrete mucus at the urethral opening"],"a":0},{"t":"Bartholin's glands:","o":["Produce estrogen","Secrete urine","Secrete mucus that lubricates the vagina during intercourse","Form the hymen"],"a":2},{"t":"Ovulation normally occurs at about the:","o":["1st day","7th day","28th day","14th day of the cycle"],"a":3},{"t":"The hormone that plays the greatest role in maintaining pregnancy is:","o":["Progesterone","Prostaglandin","Human placental lactogen","Relaxin"],"a":0},{"t":"When an ovum (23X) is fertilized by a sperm carrying 23Y, the fetus will be:","o":["Twins","Female","Male","Sex cannot be determined"],"a":2},{"t":"The umbilical cord contains:","o":["One vein and one artery","Two veins and two arteries","One vein carrying oxygenated blood and two arteries carrying deoxygenated blood","Two veins and one artery"],"a":2},{"t":"Normal labor lasts:","o":["48 hours","3–24 hours from the onset of true labor pain","Less than 3 hours","More than 24 hours"],"a":1},{"t":"Lochia alba is:","o":["Dark red discharge of blood and decidual debris","White or yellowish discharge of leukocytes, decidua and mucus","Pinkish-brown discharge of old blood and serum","Bright red discharge after the first 2 hours"],"a":1},{"t":"The true (anatomical) conjugate measures:","o":["10 cm, to the most bulging point of the symphysis","20 cm, from the 5th lumbar spine","12.5 cm, to the lower border of the symphysis","11 cm, from the sacral promontory to the upper border of the symphysis pubis"],"a":3},{"t":"Palmer's sign is:","o":["Bluish discoloration of the vagina","Approximation of two fingers to the abdominal hand","Intermittent uterine contractions felt on bimanual examination early in pregnancy","Softening of the cervix"],"a":2},{"t":"Menorrhagia is:","o":["A cycle longer than 35 days","Excessive amount or prolonged duration of bleeding with a fixed intermenstrual period","A cycle shorter than 21 days","Irregular bleeding unrelated to menstruation"],"a":1},{"t":"Polymenorrhea is a menstrual cycle that is:","o":["Less than 21 days","Bleeding of less than 30 cc","More than 35 days","Bleeding for less than 3 days"],"a":0},{"t":"If the ovum is not fertilized, the corpus luteum:","o":["Degenerates into the corpus albicans","Produces more hCG","Forms the placenta","Becomes a graafian follicle"],"a":0},{"t":"Implantation takes place by the end of the:","o":["3rd day","14th day","1st day","7th day after fertilization"],"a":3},{"t":"At term the placenta is discoid and weighs about:","o":["1500 g","500–600 g","1000 g","100–200 g"],"a":1},{"t":"Green-tinged amniotic fluid indicates:","o":["Hemolytic disease","Infection","A normal finding at term","Meconium staining (fetal distress in non-breech presentation)"],"a":3},{"t":"During pregnancy, cardiac output increases by about:","o":["40%, reaching its maximum at 20–24 weeks","It decreases to 60%","100% at 10 weeks","10% at term"],"a":0},{"t":"During pregnancy, the glomerular filtration rate increases by about:","o":["50%","It does not change","25% then falls","10%"],"a":0},{"t":"Serum pregnancy tests can be positive by:","o":["14 days after fertilization","6 weeks after fertilization","7–10 days after fertilization","4 weeks after fertilization"],"a":2},{"t":"The gestational sac can be seen by trans-abdominal ultrasound at:","o":["3 weeks","12 weeks","6 weeks","10 weeks"],"a":2},{"t":"In a high-risk pregnancy, antenatal visits between 28 and 36 weeks are scheduled:","o":["Every 2 weeks","Every 3 months","Every month","Every week"],"a":3},{"t":"Which of the following is a warning (danger) sign during pregnancy?","o":["Mild morning nausea at 8 weeks","Cessation of fetal movement","Urinary frequency in the first trimester","Slight backache at 30 weeks"],"a":1},{"t":"A suitable measure for heartburn in pregnancy is:","o":["Small frequent meals and sitting upright for 30 minutes after eating","Large fatty meals","Eating spicy food","Lying flat after meals"],"a":0},{"t":"The expected duration of the second stage of labor in a primigravida is:","o":["10–15 hours","6–8 hours","10–20 minutes","1–2 hours"],"a":3},{"t":"Internal rotation of the fetal head is a rotation of about:","o":["No rotation occurs","180° in either direction","45° anteriorly to the midline under the symphysis","90° posteriorly"],"a":2},{"t":"The dose of water-soluble vitamin K1 given to the newborn is:","o":["0.1 mg I.V.","1 mg I.M.","5 mg orally","10 mg I.M."],"a":1},{"t":"After delivery, the uterine fundus normally descends by about:","o":["5 cm every 24 hours","1–2 cm every 24 hours","0.2 cm per week","It does not change in the first week"],"a":1},{"t":"The broad ligament is a true supporting ligament of the uterus.","o":["True","False"],"a":1},{"t":"In the nulliparous adult the vagina is H-shaped in section.","o":["True","False"],"a":0},{"t":"The luteal phase of the ovarian cycle usually lasts about 14 days.","o":["True","False"],"a":0},{"t":"Urine pregnancy tests become positive earlier than serum pregnancy tests.","o":["True","False"],"a":1},{"t":"Hyperventilation during pregnancy lowers the maternal blood CO2 tension.","o":["True","False"],"a":0},{"t":"The maternal side of the placenta is white and shiny.","o":["True","False"],"a":1},{"t":"X-ray is the preferred routine method for diagnosing pregnancy in the second trimester.","o":["True","False"],"a":1},{"t":"Tea and coffee should be restricted in pregnancy because they reduce iron absorption.","o":["True","False"],"a":0},{"t":"In the active method of third-stage management, ergometrine 0.5 mg I.M. is given with delivery of the anterior shoulder.","o":["True","False"],"a":0},{"t":"Postpartum depression is defined as depression occurring within the first 24 hours after delivery.","o":["True","False"],"a":1},{"t":"A woman at her booking visit asks about diet in pregnancy. Which advice is correct?","o":["Take iron tablets together with tea","Drink 8–10 glasses of fluid daily and restrict tea and coffee","Restrict fluids to reduce urinary frequency","Increase fat intake to gain more weight"],"a":1},{"t":"A woman at 28 weeks reports severe persistent headache and blurred vision. The nurse should:","o":["Tell her to drink more tea","Reassure her that this is a minor discomfort","Advise her to contact the obstetrician immediately because these are danger signs","Advise rest at home until the next visit"],"a":2},{"t":"A pregnant woman at 30 weeks complains of leg cramps at night. Which measure is appropriate?","o":["Apply cold packs and avoid calcium","Dorsiflex the foot of the affected leg, elevate the legs, and encourage regular walking","Plantar-flex the foot of the affected leg","Stop all exercise"],"a":1},{"t":"A speculum examination at 20 weeks shows bluish discoloration of the vagina due to increased vascularity. This is:","o":["Goodell's sign","Hegar's sign","Palmer's sign","Chadwick's sign"],"a":3},{"t":"A multipara in labor has a cervix dilated 9 cm, hyperventilates, feels a desire to defecate, and has involuntary bearing down. She is in the:","o":["Active acceleration phase","Active deceleration phase of the first stage","Latent phase of the first stage","Third stage of labor"],"a":1},{"t":"A woman at 38 weeks passes a blood-stained mucus plug and has regular contractions that are increasing in frequency and intensity. The passage of the plug is called:","o":["Show, a sign of true labor","Placental separation","Show, a sign of false labor","Lochia rubra"],"a":0},{"t":"During delivery of the head, the nurse notices a loop of cord coiled around the baby's neck. The correct action is to:","o":["Try to slip the loop over the head","Pull firmly on the cord","Delay delivery of the head","Ignore it completely"],"a":0},{"t":"With delivery of the anterior shoulder, ergometrine 0.5 mg I.M. is given, then controlled traction is applied on the cord while the uterus is pushed upwards. This is the:","o":["Active (Brandt-Andrews) method of third-stage management","Conservative method","Duncan's mechanism of separation","Schultze's mechanism of separation"],"a":0},{"t":"A newborn at 1 minute has a heart rate below 100/min, slow irregular respiration, some flexion of limbs, a grimace, and is pale. The total Apgar score and risk category are:","o":["6 – moderate risk","10 – normal","8 – small risk","4 – high risk"],"a":3},{"t":"A woman at 1 week postpartum has persistent heavy bright-red lochia and an enlarged, soft uterus higher than expected. The most likely cause is:","o":["After-pains from breastfeeding","A perineal hematoma","Sub-involution due to retained placental fragments or infection","Normal lochia rubra"],"a":2}
+];
+
+const TOTAL_TIME = 50*60;
+let Q, cur, sel, saved, review, visited, left, iv, size = 13;
+
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+const $ = id => document.getElementById(id);
+
+function init(pool){
+  Q = shuffle([...pool]); const n = Q.length;
+  cur = 0; sel = Array(n).fill(null); saved = Array(n).fill(false);
+  review = Array(n).fill(false); visited = Array(n).fill(false);
+  left = TOTAL_TIME;
+  $('exam').classList.remove('hide'); $('result').classList.add('hide');
+  $('tot').textContent = $('tot2').textContent = n;
+  clearInterval(iv);
+  iv = setInterval(()=>{
+    left--; const m=Math.floor(left/60), s=left%60, t=$('tm');
+    t.textContent = m+':'+(s<10?'0':'')+s;
+    t.className = 't'+(left<=120?' danger':left<=300?' warn':'');
+    if(left<=0){clearInterval(iv);finish()}
+  },1000);
+  if(n) render();
+  window.scrollTo(0,0);
+}
+
+function render(){
+  visited[cur] = true;
+  const q = Q[cur];
+  $('qno').textContent = 'Question No. ' + (cur+1);
+  $('qbody').style.fontSize = size+'px';
+  $('qbody').innerHTML = `<div class="qtext" style="font-size:${size}px">${q.t}</div>` +
+    q.o.map((o,i)=>`<label class="opt" style="font-size:${size}px"><input type="radio" name="o" value="${i}" ${sel[cur]===i?'checked':''} onchange="sel[cur]=${i}"> <span>${o}</span></label>`).join('');
+  refresh();
+}
+
+function status(i){
+  if(review[i]) return 's-rev';
+  if(saved[i]) return 's-ans';
+  if(visited[i]) return 's-no';
+  return 's-nv';
+}
+function refresh(){
+  const n = Q.length; let a=0,no=0,r=0,nv=0;
+  $('nav').innerHTML = Q.map((_,i)=>{
+    const s = status(i);
+    if(saved[i]) a++;
+    if(s==='s-rev') r++; else if(s==='s-no') no++; else if(s==='s-nv') nv++;
+    return `<span class="sq ${s} ${i===cur?'cur':''}" onclick="go(${i})">${i+1}</span>`;
+  }).join('');
+  $('ans').textContent = a; $('cAns').textContent = a; $('cNo').textContent = no;
+  $('cRev').textContent = r; $('cNv').textContent = nv;
+}
+
+function go(i){cur=i;render()}
+function nextQ(){ if(cur<Q.length-1){cur++;render();return} const k=Q.findIndex((_,x)=>!saved[x]); if(k>=0){cur=k;render()} else {refresh();alert('كل الأسئلة اتحلت، دوس End Test لإنهاء الامتحان')} }
+function saveNext(){ saved[cur]=sel[cur]!==null; nextQ(); }
+function skip(){ nextQ(); }
+function mark(){ review[cur]=!review[cur]; if(sel[cur]!==null) saved[cur]=true; refresh(); }
+function prev(){ if(cur>0){cur--;render()} }
+function fs(d){ size = d===0 ? 13 : Math.max(11,Math.min(24,size+d*2)); render(); }
+
+function endTest(){
+  const un = Q.filter((_,i)=>sel[i]===null).length;
+  const msg = un ? `لسه فاضل ${un} سؤال من غير إجابة. تنهي الامتحان؟` : 'تنهي الامتحان؟';
+  if(confirm(msg)) finish();
+}
+
+function finish(){
+  clearInterval(iv);
+  const n = Q.length; let ok=[], bad=[];
+  Q.forEach((q,i)=>{ (sel[i]===q.a ? ok : bad).push(i) });
+  const pct = n ? Math.round(ok.length/n*100) : 0;
+  const card = (i,good)=>{
+    const q=Q[i];
+    return `<div class="it ${good?'':'bad'}"><div class="q">${i+1}. ${q.t}</div>
+    ${good ? `<div class="r"><span class="tag g">Correct</span>${q.o[q.a]}</div>` :
+    `<div class="r"><span class="tag y">Your answer</span>${sel[i]===null?'— لم تتم الإجابة —':q.o[sel[i]]}</div>
+     <div class="r"><span class="tag g">Correct</span>${q.o[q.a]}</div>`}
+    ${q.exp?`<div class="exp">💬 ${q.exp}</div>`:''}</div>`;
+  };
+  const unans = Q.filter((_,i)=>sel[i]===null).length;
+  $('exam').classList.add('hide');
+  const r = $('result'); r.classList.remove('hide');
+  r.innerHTML = `<div class="res">
+   <div class="score"><div class="n">${pct}%</div><div>${ok.length} / ${n}</div></div>
+   <div class="stats">
+    <div><b style="color:var(--ok)">${ok.length}</b>صح</div>
+    <div><b style="color:var(--no)">${bad.length - unans}</b>غلط</div>
+    <div><b style="color:#777">${unans}</b>من غير إجابة</div>
+    <div><b>${n}</b>الإجمالي</div>
+   </div>
+   <div class="acts">
+    ${bad.length?'<button class="b" onclick="retryWrong()">إعادة الأسئلة الغلط ('+bad.length+')</button>':''}
+    <button class="b" onclick="init(QUESTIONS)">امتحان جديد عشوائي</button>
+   </div>
+   <div class="sec">✔ الأسئلة اللي اتحلت صح (${ok.length})</div>
+   ${ok.map(i=>card(i,true)).join('') || '<div style="padding:8px;color:#777">لا يوجد</div>'}
+   <div class="sec bad">✖ الأسئلة الغلط (${bad.length})</div>
+   ${bad.map(i=>card(i,false)).join('') || '<div style="padding:8px;color:#777">ممتاز، مفيش أخطاء 🎉</div>'}
+  </div>`;
+  window.scrollTo(0,0);
+}
+
+function retryWrong(){
+  const pool = Q.filter((q,i)=>sel[i]!==q.a);
+  init(pool);
+}
+
+init(QUESTIONS);
+</script>
+</body>
+</html>
