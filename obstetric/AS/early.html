@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GHAITH</title>
+<style>
+:root{--bg:#f3f5fb;--card:#fff;--ink:#121b36;--mut:#5a6683;--line:#e0e5f1;--brand:#4f46e5;--b2:#e11d6a;--ok:#0e9f6e;--warn:#d97706;--soft:#eef0ff;--sh:0 4px 18px rgba(30,40,90,.08);box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0c1120;--card:#151c33;--ink:#e8ecf8;--mut:#9aa7c7;--line:#26304f;--brand:#8b83ff;--b2:#ff5c93;--ok:#34d399;--warn:#fbbf24;--soft:#1d2547;--sh:0 4px 18px rgba(0,0,0,.4)}}
+:root[data-theme="dark"]{--bg:#0c1120;--card:#151c33;--ink:#e8ecf8;--mut:#9aa7c7;--line:#26304f;--brand:#8b83ff;--b2:#ff5c93;--ok:#34d399;--warn:#fbbf24;--soft:#1d2547;--sh:0 4px 18px rgba(0,0,0,.4)}
+*{box-sizing:border-box}html{scroll-padding-top:70px}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,Helvetica,Arial,sans-serif}
+.hero{background:linear-gradient(135deg,#312e81,#4f46e5 55%,#e11d6a);color:#fff;padding:34px 20px 70px}
+.wrap{max-width:1000px;margin:0 auto}
+.hero h1{margin:6px 0 6px;font-size:clamp(26px,5vw,40px);letter-spacing:-.02em;line-height:1.15}
+.hero p{margin:0;opacity:.9;max-width:640px}
+.badge{display:inline-block;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);border-radius:99px;padding:3px 12px;font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.tg{background:rgba(255,255,255,.18);color:#fff;border:1px solid rgba(255,255,255,.35);border-radius:10px;padding:6px 12px;cursor:pointer;font-size:13px}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;margin:-34px auto 0;max-width:1000px;padding:0 12px}
+.navin{background:var(--card);border:1px solid var(--line);box-shadow:var(--sh);border-radius:16px;padding:6px;display:flex;gap:4px;overflow-x:auto}
+.navin button{flex:1 0 auto;border:0;background:none;color:var(--mut);font:600 14px inherit;padding:10px 14px;border-radius:11px;cursor:pointer;white-space:nowrap}
+.navin button.on{background:var(--brand);color:#fff}
+main{max-width:1000px;margin:18px auto 60px;padding:0 12px}
+.panel{display:none}.panel.on{display:block;animation:f .3s}
+@keyframes f{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+h2{font-size:22px;margin:22px 0 10px;letter-spacing:-.01em}
+.sub{color:var(--mut);margin:-4px 0 14px;font-size:14px}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(210px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--sh)}
+.card h3{margin:0 0 6px;font-size:16px}
+.stat{text-align:center}.stat b{display:block;font-size:30px;color:var(--brand);line-height:1.1}.stat span{font-size:13px;color:var(--mut)}
+.tag{display:inline-block;font-size:11px;font-weight:700;border-radius:6px;padding:2px 8px;margin-right:4px;background:var(--soft);color:var(--brand)}
+.tag.r{background:#ffe3ee;color:#be123c}.tag.g{background:#d9f8ea;color:#047857}.tag.o{background:#fff0d2;color:#b45309}
+details{background:var(--card);border:1px solid var(--line);border-radius:14px;margin:8px 0;box-shadow:var(--sh)}
+summary{cursor:pointer;padding:13px 16px;font-weight:700;list-style:none;display:flex;justify-content:space-between}
+summary::after{content:"+";color:var(--brand);font-size:20px;line-height:1}
+details[open] summary::after{content:"–"}
+details .b{padding:0 16px 14px}
+ul{margin:6px 0;padding-left:20px}li{margin:3px 0}
+.note{border-left:4px solid var(--warn);background:var(--soft);padding:10px 14px;border-radius:0 12px 12px 0;margin:12px 0;font-size:14px}
+.key{border-left-color:var(--b2)}
+.chips{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0}
+.chip{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:99px;padding:6px 14px;cursor:pointer;font:600 13px inherit}
+.chip.on{background:var(--brand);color:#fff;border-color:var(--brand)}
+.tw{overflow-x:auto;border-radius:16px;border:1px solid var(--line);box-shadow:var(--sh);background:var(--card)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:14px}
+th{background:var(--soft);text-align:left;padding:10px 12px;font-size:12px;text-transform:uppercase;letter-spacing:.06em;color:var(--mut)}
+td{padding:10px 12px;border-top:1px solid var(--line);vertical-align:top}
+tbody tr{cursor:pointer}tbody tr:hover,tbody tr.sel{background:var(--soft)}
+#det{margin-top:12px}
+.pair .cols{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));margin-top:8px}
+.pair .col{background:var(--soft);border-radius:12px;padding:10px 12px;font-size:14px}
+.pair .col b{display:block;color:var(--brand);margin-bottom:2px}
+.tip{margin-top:10px;font-size:14px;color:var(--b2);font-weight:600}
+.mn{cursor:pointer;text-align:center;transition:transform .15s}.mn:hover{transform:translateY(-3px)}
+.mn .ac{font-size:30px;font-weight:800;letter-spacing:.06em;background:linear-gradient(90deg,var(--brand),var(--b2));-webkit-background-clip:text;background-clip:text;color:transparent}
+.mn .t{font-size:12px;color:var(--mut);text-transform:uppercase;letter-spacing:.06em}
+.mn .x{display:none;margin-top:8px;text-align:left;font-size:14px}.mn.open .x{display:block}
+.qb{height:8px;background:var(--line);border-radius:9px;overflow:hidden;margin:8px 0 16px}.qb i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--b2));transition:width .3s}
+.opt{display:block;width:100%;text-align:left;background:var(--card);color:var(--ink);border:1.5px solid var(--line);border-radius:12px;padding:12px 14px;margin:8px 0;cursor:pointer;font:15px inherit}
+.opt:hover:not(:disabled){border-color:var(--brand)}.opt.ok{border-color:var(--ok);background:rgba(14,159,110,.12)}.opt.no{border-color:var(--b2);background:rgba(225,29,106,.1)}
+.btn{background:var(--brand);color:#fff;border:0;border-radius:12px;padding:11px 20px;font:700 15px inherit;cursor:pointer;margin-top:8px}
+.ex{margin-top:10px;font-size:14px;color:var(--mut)}
+.big{font-size:54px;font-weight:800;color:var(--brand);line-height:1}
+footer{text-align:center;color:var(--mut);font-size:12px;padding:0 12px 30px}
+</style></head><body>
+<header class="hero"><div class="wrap">
+<div class="top"><span class="badge">Maternity Nursing · Pages 143–152</span><button class="tg" id="tg">Light / Dark</button></div>
+<h1>Bleeding in Early Pregnancy</h1>
+<p>إستعني بالله ولا تعجزي</p>
+</div></header>
+<nav><div class="navin" id="nav"></div></nav>
+<main>
+
+<section class="panel on" id="p0">
+<h2>The Big Picture</h2><p class="sub">Common causes of bleeding in early pregnancy: <b>Abortion (miscarriage)</b>, <b>Ectopic pregnancy</b>, <b>Hydatidiform (vesicular) mole</b>, or cervical malignancy.</p>
+<div class="grid">
+<div class="card stat"><b>28 wks</b><span>Abortion = termination before fetal viability</span></div>
+<div class="card stat"><b>24–28</b><span>weeks: fetal viability window (with incubator)</span></div>
+<div class="card stat"><b>10–20%</b><span>of clinical pregnancies miscarry</span></div>
+<div class="card stat"><b>&gt;95%</b><span>of ectopics implant in the fallopian tube</span></div>
+</div>
+<div class="grid" style="margin-top:12px">
+<div class="card"><span class="tag r">1</span><h3>Abortion</h3>Bleeding + cervix status + pain decide the type. Most occur in the 2nd–3rd month.</div>
+<div class="card"><span class="tag o">2</span><h3>Ectopic</h3>Pregnancy outside the uterine cavity. Danger: rupture → hypovolemic shock.</div>
+<div class="card"><span class="tag g">3</span><h3>Vesicular mole</h3>Abnormal tissue instead of a baby. Danger: choriocarcinoma, pre-eclampsia.</div>
+</div>
+<div class="note key"><b>Exam angle:</b> Always connect <i>bleeding → shock → nursing priorities</i>: vital signs, IV fluids, oxygen, supine position with a pillow under head and shoulder, psychological support.</div>
+<h2>Causes of Abortion</h2>
+<div id="causes"></div>
+</section>
+
+<section class="panel" id="p1">
+<h2>Types of Abortion</h2><p class="sub">Filter by cervix, then tap a row for full management.</p>
+<div class="chips" id="chips"></div>
+<div class="tw"><table><thead><tr><th>Type</th><th>Cervix</th><th>Bleeding</th><th>Pain</th><th>Uterus</th></tr></thead><tbody id="tb"></tbody></table></div>
+<div id="det" class="card"><b>Tap a row</b> to see definition and nursing management.</div>
+<div class="note">* <b>Book note:</b> Complete abortion is “cervix dilated, mild bleeding” on p.144 but “closed cervix” in the p.145 table. Use the wording your doctor/lecturer uses; most exams follow the table.</div>
+<h2>Diagnosis · Complications · Treatment</h2>
+<div class="grid">
+<div class="card"><h3>Diagnostic tests</h3><ul><li>Pregnancy test</li><li><b>Ultrasound</b> — safest and confirmatory; shows if products of conception are intact</li></ul></div>
+<div class="card"><h3>Complications</h3><ul><li>Shock</li><li>Infection → death or infertility</li><li>DIC</li><li>Depression, hysteria, grief</li></ul></div>
+<div class="card"><h3>Treatment</h3><ul><li>Antibiotics with surgical abortion</li><li>Manual/electric <b>vacuum aspiration</b> up to 12–14 wks</li><li>D&amp;C = obsolete method</li></ul></div>
+</div>
+<h2>Other Types</h2>
+<div class="grid">
+<div class="card"><h3>Habitual</h3>≥ 3 successive spontaneous abortions. Commonest treatable cause: <b>incompetent internal cervical os</b>.</div>
+<div class="card"><h3>Therapeutic</h3>Legal termination by a physician for a medical indication.</div>
+<div class="card"><h3>Criminal</h3>Illegal termination with no medical or obstetric indication.</div>
+</div>
+</section>
+
+<section class="panel" id="p2">
+<h2>Ectopic Pregnancy</h2><p class="sub">Any pregnancy occurring outside the uterine cavity — commonly “tubal pregnancy”.</p>
+<div id="ect"></div>
+</section>
+
+<section class="panel" id="p3">
+<h2>Vesicular Mole</h2><p class="sub">Also called gestational trophoblastic disease. Rare; abnormal tissue grows instead of a baby; may be cancerous.</p>
+<div class="grid">
+<div class="card"><span class="tag g">Complete mole</span><h3>46 chromosomes</h3>No baby ever develops; placenta grows many fluid-filled cysts.</div>
+<div class="card"><span class="tag o">Partial mole</span><h3>69 chromosomes</h3>Two sperms fertilize one ovum; baby starts but cannot survive.</div>
+</div>
+<div id="mole"></div>
+</section>
+
+<section class="panel" id="p4">
+<h2>Look-Alikes: Spot the Difference</h2><p class="sub">The pairs examiners love to mix up.</p>
+<div id="pairs"></div>
+</section>
+
+<section class="panel" id="p5">
+<h2>Memory Tricks</h2><p class="sub">Tap a card to reveal the mnemonic.</p>
+<div class="grid" id="mns"></div>
+</section>
+
+<section class="panel" id="p6">
+<h2>Test Yourself</h2><p class="sub">12 questions with instant feedback and explanations. Your review key appears at the end.</p>
+<div id="quiz"></div>
+</section>
+</main>
+<footer>Built from the textbook pages 143–152 · Study aid, follow your course material for final wording.</footer>
+
+<script>
+var $=function(s){return document.querySelector(s)};
+var tabs=["Overview","Abortion","Ectopic","Mole","Look-alikes","Mnemonics","Quiz"];
+tabs.forEach(function(t,i){var b=document.createElement("button");b.textContent=t;if(!i)b.className="on";b.onclick=function(){go(i)};$("#nav").appendChild(b)});
+function go(i){document.querySelectorAll(".panel").forEach(function(p,j){p.classList.toggle("on",i===j)});document.querySelectorAll("#nav button").forEach(function(b,j){b.classList.toggle("on",i===j)});window.scrollTo({top:0,behavior:"smooth"})}
+$("#tg").onclick=function(){var r=document.documentElement,d=r.getAttribute("data-theme");var dark=d?d==="dark":matchMedia("(prefers-color-scheme:dark)").matches;r.setAttribute("data-theme",dark?"light":"dark")};
+function acc(id,items){$(id).innerHTML=items.map(function(x,i){return "<details"+(i===0?" open":"")+"><summary>"+x[0]+"</summary><div class='b'>"+x[1]+"</div></details>"}).join("")}
+acc("#causes",[
+["Fetal causes","<ul><li>Maldevelopment or disease of the fertilized ovum</li><li>Fetal anemia, fetal asphyxia, abnormality of cord</li></ul>"],
+["General maternal causes","<ul><li>Anemia · Cardiac &amp; pulmonary disease · Diabetes mellitus</li><li>Environmental: alcohol, pollution, cigarettes, drugs</li><li>Infection &amp; fever · Hypertension &amp; kidney disease</li><li>Trauma (e.g. abdominal kick)</li></ul>"],
+["Local maternal causes","<ul><li>Cervical incompetence</li><li>Congenital uterine abnormalities</li><li>Uterine fibroids</li><li>Retroverted flexed uterus (RVF)</li></ul>"]]);
+var T=[
+["Threatened","Closed","Mild red spotting","Mild or absent","Size = dates","Embryo is viable; products intact. May go to term or become inevitable.","Monitor vitals · supine with pillow under head and shoulder · bed rest · <b>no coitus</b> · healthy diet · medication as ordered · psychological support."],
+["Inevitable","Open","Severe","Severe colicky suprapubic, radiates to back","Enlarged","Embryo dead; products intact or expelled. Umbrella for incomplete + complete.","Analgesia · correct shock (bed rest, IV fluid, O₂, frequent vitals) · triple antibiotic + drug to stop bleeding / prevent DIC · supine + pillow · antibiotic and methergine prophylaxis · support."],
+["Incomplete","Open","Severe, continuous","Severe, colicky","—","Embryo dead; some products retained (felt through the os).","Same management as inevitable."],
+["Complete*","Closed*","Mild (history of severe bleed)","None","Involuted","All products expelled. Patient: crying, fear of future pregnancy, grief.","Same management as inevitable + emotional support."],
+["Missed","Closed","Brown discharge","Absent unless expulsion starts","Small for dates","Dead embryo retained; pregnancy symptoms subside; test negative; ultrasound confirms.","Terminate pregnancy if needed (prevent septic shock) · <b>oxytocin</b> to evacuate · IV fluid + O₂ · bed rest, healthy diet · vitals · triple antibiotic · support."],
+["Septic","—","Offensive discharge, pus on gloves","Tender uterus, distension","Tender","Incomplete abortion + uterine infection. Fever, anorexia, hypotension, ↑ temp and respiration.","Analgesia · treat septic shock (IV fluid, O₂) · vitals · triple antibiotic · evacuate: <b>&lt;12–14 wks D&amp;C</b>, <b>&gt;14 wks oxytocin induction</b> · confidentiality + support."],
+["Habitual","Open","Severe","Strong suprapubic","Enlarged","≥ 3 successive spontaneous abortions.","Record vitals, bleeding, cramps, IV fluids, labs · prepare D&amp;C · iron + iron-rich diet · encourage tests to find the cause · emotional support."]];
+var f="All";
+function drawT(){$("#tb").innerHTML=T.map(function(r,i){return (f==="All"||r[1].indexOf(f)===0)?"<tr data-i='"+i+"'><td><b>"+r[0]+"</b></td><td><span class='tag "+(r[1][0]==="C"?"g":r[1][0]==="O"?"r":"")+"'>"+r[1]+"</span></td><td>"+r[2]+"</td><td>"+r[3]+"</td><td>"+r[4]+"</td></tr>":""}).join("");
+document.querySelectorAll("#tb tr").forEach(function(tr){tr.onclick=function(){document.querySelectorAll("#tb tr").forEach(function(x){x.classList.remove("sel")});tr.classList.add("sel");var r=T[tr.dataset.i];$("#det").innerHTML="<h3>"+r[0]+" abortion</h3><p>"+r[5]+"</p><b>Nursing management</b><p>"+r[6]+"</p>"}})}
+["All","Closed","Open"].forEach(function(c){var b=document.createElement("button");b.className="chip"+(c==="All"?" on":"");b.textContent=c==="All"?"All types":c+" cervix";b.onclick=function(){f=c;document.querySelectorAll(".chip").forEach(function(x){x.classList.remove("on")});b.classList.add("on");drawT()};$("#chips").appendChild(b)});
+drawT();
+acc("#ect",[
+["Definition &amp; sites","Egg settles in the fallopian tube &gt;95% of the time. Also ovary, abdomen, cervix. Tubal sites: fimbrial, ampullary, isthmic, interstitial."],
+["Pathophysiology","<ul><li>Fertilization at the distal third of the tube</li><li>Zygote divides and grows</li><li>Obstruction stops it travelling to the uterus</li><li>It lodges at the constricted part and implants there; trophoblast penetrates the tubal wall</li></ul>"],
+["Risk factors &amp; causes","<ul><li><b>Risk:</b> previous ectopic · tubal surgery · infertility or ovulation-stimulating drugs</li><li><b>Ovum:</b> abnormal rapid trophoblast development · over-development with migration to the other side</li><li><b>Tube narrowing:</b> congenital (tubal hypoplasia) · inflammatory (chronic salpingitis) · traumatic (after tubal surgery) · tumor or outside pressure</li></ul>"],
+["Signs &amp; symptoms","<ul><li>Amenorrhea, breast tenderness, nausea, vomiting, frequent urination</li><li>Vaginal spotting or bleeding</li><li>Dizziness or fainting, low BP (blood loss)</li><li><b>Sharp stabbing pain</b>, comes and goes; pelvis, abdomen, even <b>shoulder and neck</b></li></ul>"],
+["Diagnosis","<ul><li><b>Pelvic ultrasound</b> (early) — most common</li><li>MRI — safer than CT in pregnancy</li></ul>"],
+["Complications","<ul><li>Rupture with internal bleeding</li><li>Hypovolemic shock</li><li>Tubal damage → future infertility</li></ul>"],
+["Medical management","<ul><li><b>Methotrexate:</b> folic acid antagonist, destroys rapidly growing trophoblast and zygote</li><li><b>Mifepristone:</b> abortifacient, sloughs off the tubal implantation site</li><li>Both leave the tube intact, no surgical scarring</li><li>IV therapy to restore volume · blood typing and cross-matching, hemoglobin level</li></ul>"],
+["Surgical management","<ul><li><b>Laparoscopy:</b> ligate bleeding vessels, repair or remove damaged tube</li><li><b>Salpingectomy:</b> if tube completely damaged; remove it and suture the rest</li></ul>"]]);
+acc("#mole",[
+["Pathophysiology","<ul><li>Fertilization occurs; in a partial mole two sperms fertilize one ovum</li><li>Meiosis fails in a partial mole; in a complete mole the chromosomes duplicate</li><li>Embryo fails to develop: 69 chromosomes (partial), 46 (complete)</li><li>Trophoblastic villi proliferate into fluid-filled <b>grape-like vesicles</b></li></ul>"],
+["Risk factors","<ul><li>Age under 17 or over 35</li><li>Previous molar pregnancy</li><li>Previous spontaneous abortions</li></ul>"],
+["Signs &amp; symptoms","<ul><li>Irregular vaginal bleeding, vaginal discharge</li><li>Sudden abdominal pain, nausea and vomiting</li><li>Pre-eclampsia: headache, blurred vision, hypertension, edema</li><li>Shock: low BP, rapid weak pulse</li></ul>"],
+["Complications","<ol><li>Perforation (perforating mole)</li><li>Bleeding (vesicle separation or perforation)</li><li>Sepsis</li><li>Malignancy: <b>choriocarcinoma</b></li><li>Abdominal hysterectomy</li></ol>"],
+["Treatment","<ul><li><b>Suction curettage</b> = preferred evacuation, regardless of uterine size, if fertility is desired</li><li>Oxytocics and prostaglandin analogues <b>only after</b> evacuation, for significant hemorrhage</li><li><b>Abdominal hysterectomy:</b> invasive mole (tumorous growth); age over 40 or family complete and desires sterilization</li></ul>"],
+["Follow-up","<ul><li><b>No pregnancy for 2 years</b></li><li>Monthly visits for 1 year, then every 3 months for another year</li><li>Watch bleeding and uterine involution; pregnancy test negative after 4 weeks</li></ul>"]]);
+var P=[
+["Threatened vs Missed — both have a CLOSED cervix",[["Threatened","Red spotting · embryo viable · uterus = dates · mild pain · irritability"],["Missed","Brown discharge · embryo dead · uterus small · test negative · painless"]],"Red = alive, Brown = dead."],
+["Inevitable vs Incomplete vs Complete — dead embryo, open os",[["Inevitable","Umbrella term: products intact or expelled; severe bleed + colicky pain; enlarged uterus"],["Incomplete","Some products retained; severe continuous bleeding; severe colicky pain"],["Complete","All expelled; mild bleeding, no pain; uterus involuted; grief"]],"More tissue left = more pain and bleeding."],
+["Inevitable vs Habitual — identical signs in the book",[["Inevitable","A single event; manage bleeding, shock, infection"],["Habitual","≥ 3 successive; find the cause (incompetent internal os); iron; tests"]],"Same symptoms, different history."],
+["Ectopic vs Vesicular mole",[["Ectopic","Outside uterus, tube &gt;95%; stabbing pain, shoulder pain, shock; methotrexate / salpingectomy"],["Mole","Inside uterus; grape vesicles; pre-eclampsia signs; suction curettage; choriocarcinoma risk"]],"Pain + shoulder = ectopic. Hypertension in early pregnancy = mole."],
+["Complete vs Partial mole",[["Complete","46 chromosomes; no baby; placenta cysts"],["Partial","69 chromosomes; two sperms; baby starts but is absorbed"]],"Partial = Plus (69, two sperms)."],
+["Methotrexate vs Mifepristone",[["Methotrexate","Folic acid antagonist; kills trophoblast and zygote"],["Mifepristone","Abortifacient; sloughs implantation site"]],"Both save the tube."],
+["Evacuation methods",[["Vacuum aspiration","Up to 12–14 wks for abortion"],["D&amp;C","Called obsolete, yet used in septic abortion &lt;12–14 wks and habitual"],["Suction curettage","Preferred for mole"],["Oxytocin","Missed abortion · septic &gt;14 wks induction · mole only after evacuation"]],"Under 14 scrape, over 14 induce."]];
+$("#pairs").innerHTML=P.map(function(p){return "<div class='card pair' style='margin:10px 0'><h3>"+p[0]+"</h3><div class='cols'>"+p[1].map(function(c){return "<div class='col'><b>"+c[0]+"</b>"+c[1]+"</div>"}).join("")+"</div><div class='tip'>Trick: "+p[2]+"</div></div>"}).join("");
+var M=[
+["T M · I I","Cervix","<b>T</b>hreatened and <b>M</b>issed = <b>T</b>ight (closed). <b>I</b>nevitable and <b>I</b>ncomplete = <b>I</b>nlet open."],
+["S·B·M·S","Bleeding ladder","<b>S</b>potting (threatened) → <b>B</b>rown (missed) → <b>M</b>ild (complete) → <b>S</b>evere (inevitable, incomplete)."],
+["Small = dead","Uterus size","Threatened = normal for dates. Missed = <b>small</b> for dates. Inevitable = enlarged. Complete = involuted."],
+["P A B","Ectopic triad","<b>P</b>ain (stabbing, shoulder) · <b>A</b>menorrhea · <b>B</b>leeding (spotting)."],
+["P S I","Ectopic risks","<b>P</b>revious ectopic · <b>S</b>urgery on tube · <b>I</b>nfertility treatment."],
+["C I T T","Tubal narrowing","<b>C</b>ongenital · <b>I</b>nflammatory · <b>T</b>raumatic · <b>T</b>umor."],
+["R H D","Ectopic complications","<b>R</b>upture · <b>H</b>ypovolemic shock · <b>D</b>amaged tubes (infertility)."],
+["GRAPES","Mole","<b>G</b>rape vesicles · <b>R</b>isk age &lt;17 / &gt;35 · <b>A</b>bnormal bleeding · <b>P</b>re-eclampsia · <b>E</b>vacuate by suction · <b>S</b>erial follow-up."],
+["P B S M H","Mole complications","<b>P</b>erforation · <b>B</b>leeding · <b>S</b>epsis · <b>M</b>alignancy (choriocarcinoma) · <b>H</b>ysterectomy."],
+["2 · 1 · 1","Mole follow-up","No pregnancy <b>2</b> yrs · monthly for <b>1</b> yr · every 3 months for another <b>1</b> yr."],
+["2 sperms = 69","Partial mole","Two sperms make three sets: 23 × 3 = 69. Complete = 46 with no baby."],
+["F · L · U · R","Local causes","<b>F</b>ibroids · cervical <b>L</b>axity (incompetence) · <b>U</b>terine anomaly · <b>R</b>etroverted flexed uterus."],
+["ACDE-IHT","General causes","<b>A</b>nemia · <b>C</b>ardiac/pulmonary · <b>D</b>iabetes · <b>E</b>nvironment · <b>I</b>nfection · <b>H</b>ypertension/kidney · <b>T</b>rauma."],
+["F · O · V · P","Shock first aid","<b>F</b>luids IV · <b>O</b>xygen · <b>V</b>itals · <b>P</b>osition supine with pillow under head and shoulder."]];
+$("#mns").innerHTML=M.map(function(m){return "<div class='card mn'><div class='ac'>"+m[0]+"</div><div class='t'>"+m[1]+"</div><div class='x'>"+m[2]+"</div></div>"}).join("");
+document.querySelectorAll(".mn").forEach(function(c){c.onclick=function(){c.classList.toggle("open")}});
+var Q=[
+["Closed cervix, brown discharge, uterus small for dates, negative pregnancy test:",["Threatened","Missed","Incomplete","Inevitable"],1,"Missed abortion: dead embryo retained, closed os, brown discharge, small uterus."],
+["Red spotting, closed cervix, uterus size equals dates:",["Threatened","Missed","Complete","Habitual"],0,"Threatened abortion: embryo still viable."],
+["Severe continuous bleeding, colicky pain, open os with retained products felt:",["Complete","Missed","Incomplete","Threatened"],2,"Incomplete abortion: some products of conception retained."],
+["Septic abortion at 16 weeks gestation needs:",["D&C","Oxytocin medical induction","Bed rest only","Cerclage"],1,"Over 14 weeks: induction with oxytocin. Under 12–14 weeks: D&C."],
+["Commonest site of ectopic pregnancy:",["Ovary","Cervix","Abdomen","Fallopian tube"],3,"More than 95% are tubal."],
+["Methotrexate in ectopic pregnancy works as:",["Abortifacient sloughing the site","Folic acid antagonist destroying trophoblast","Analgesic","Anticoagulant"],1,"Methotrexate is the folic acid antagonist; mifepristone is the abortifacient."],
+["Chromosomes in a partial mole:",["23","46","69","92"],2,"Two sperms fertilize one ovum: 69. Complete mole = 46."],
+["Preferred method of evacuating a mole when fertility is desired:",["Hysterectomy","Suction curettage","Oxytocin infusion","Laparoscopy"],1,"Suction curettage regardless of uterine size."],
+["Habitual abortion is:",["Two abortions","Three or more successive spontaneous abortions","One abortion with infection","Legal termination"],1,"Commonest treatable cause: incompetent internal cervical os."],
+["After a molar pregnancy the woman should avoid pregnancy for:",["6 months","1 year","2 years","5 years"],2,"Monthly follow-up for 1 year, then 3-monthly for another year."],
+["Dizziness, amenorrhea, stabbing pelvic pain radiating to the shoulder suggests:",["Missed abortion","Ruptured ectopic","Vesicular mole","Threatened abortion"],1,"Shoulder pain plus low BP signals internal bleeding from ectopic rupture."],
+["Best position in inevitable abortion with heavy bleeding:",["Prone","Sitting upright","Supine, pillow under head and shoulder","Trendelenburg only"],2,"Supine with a pillow under head and shoulder to decrease bleeding."]];
+var qi=0,sc=0,log=[];
+function showQ(){var q=Q[qi];
+$("#quiz").innerHTML="<div class='qb'><i style='width:"+(qi/Q.length*100)+"%'></i></div><div class='card'><span class='tag'>Question "+(qi+1)+" / "+Q.length+"</span><h3 style='margin:10px 0'>"+q[0]+"</h3><div id='ops'></div><div class='ex' id='ex'></div><button class='btn' id='nx' style='display:none'>"+(qi===Q.length-1?"See results":"Next")+"</button></div>";
+q[1].forEach(function(o,i){var b=document.createElement("button");b.className="opt";b.innerHTML=o;b.onclick=function(){
+document.querySelectorAll(".opt").forEach(function(x,j){x.disabled=true;if(j===q[2])x.classList.add("ok")});
+if(i===q[2])sc++;else b.classList.add("no");log.push(i===q[2]);
+$("#ex").innerHTML=(i===q[2]?"<b style='color:var(--ok)'>Correct.</b> ":"<b style='color:var(--b2)'>Not quite.</b> ")+q[3];
+$("#nx").style.display="inline-block";$("#nx").onclick=function(){qi++;qi<Q.length?showQ():fin()}};$("#ops").appendChild(b)})}
+function fin(){$("#quiz").innerHTML="<div class='card' style='text-align:center'><div class='qb'><i style='width:100%'></i></div><div class='big'>"+sc+" / "+Q.length+"</div><p>"+(sc>=10?"Excellent. You are exam-ready.":sc>=7?"Good. Review the look-alikes tab.":"Revisit the mnemonics and try again.")+"</p><button class='btn' id='rs'>Retry</button></div><h2>Answer key</h2>"+Q.map(function(q,i){return "<div class='card' style='margin:8px 0'><span class='tag "+(log[i]?"g":"r")+"'>Q"+(i+1)+"</span> <b>"+q[1][q[2]]+"</b><div class='ex'>"+q[3]+"</div></div>"}).join("");
+$("#rs").onclick=function(){qi=0;sc=0;log=[];showQ()}}
+showQ();
+</script></body></html>
