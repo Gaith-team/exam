@@ -1,0 +1,790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title> GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --accent:       #db2777;
+  --accent-light: #ec4899;
+  --accent-dark:  #be185d;
+  --accent-glow:  rgba(219,39,119,0.2);
+  --bg:      #f8fafc;
+  --bg2:     #eef2f7;
+  --card:    #ffffff;
+  --text:    #1a2332;
+  --text2:   #4a5568;
+  --text3:   #718096;
+  --bc:      rgba(0,0,0,0.07);
+  --success: #16a34a;
+  --danger:  #dc2626;
+  --warn:    #be185d;
+  --r:       16px;
+  --tr:      all 0.3s cubic-bezier(0.4,0,0.2,1);
+}
+[data-theme="dark"] {
+  --bg:   #0d1117; --bg2: #161b22; --card: #1c2333;
+  --text: #e6edf3; --text2: #b1bac4; --text3: #7d8590;
+  --bc:   rgba(255,255,255,0.08);
+}
+
+body {
+  font-family: 'Outfit', sans-serif;
+  background: var(--bg); color: var(--text);
+  min-height: 100vh; overflow-x: hidden;
+  transition: background .4s, color .4s;
+}
+
+/* PROGRESS TOP */
+#prog-bar {
+  position: fixed; top: 0; left: 0; height: 3px; z-index: 999;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  transition: width .2s;
+}
+
+/* NAV */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 28px; height: 64px;
+  background: rgba(248,250,252,.93); backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--bc); transition: var(--tr);
+}
+[data-theme="dark"] nav { background: rgba(13,17,23,.95); }
+
+.nav-back {
+  display: flex; align-items: center; gap: 7px;
+  color: var(--text2); text-decoration: none; font-size: 13px; font-weight: 700;
+  padding: 7px 13px; border-radius: 8px; border: 1px solid var(--bc);
+  background: var(--card); transition: var(--tr);
+}
+.nav-back:hover { color: var(--accent); border-color: var(--accent-glow); transform: translateX(3px); }
+.nav-brand { display: flex; align-items: center; gap: 9px; font-size: 15px; font-weight: 900; color: var(--text); }
+.nav-logo-icon {
+  width: 34px; height: 34px; border-radius: 8px;
+  background: linear-gradient(135deg, var(--accent), var(--accent-light));
+  display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 12px; font-weight: 900;
+}
+.nav-right { display: flex; align-items: center; gap: 8px; }
+.theme-btn {
+  width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--bc);
+  background: var(--card); cursor: pointer; font-size: 15px;
+  display: flex; align-items: center; justify-content: center; transition: var(--tr);
+}
+.theme-btn:hover { border-color: var(--accent); transform: rotate(20deg); }
+
+/* HERO BAND */
+.hero-band {
+  margin-top: 64px;
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent), var(--accent-light));
+  padding: 40px 24px 36px; text-align: center;
+  position: relative; overflow: hidden;
+}
+.hero-band::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse 600px 200px at 50% 100%, rgba(255,255,255,.12) 0%, transparent 70%);
+}
+.hero-band-icon {
+  width: 68px; height: 68px; border-radius: 20px;
+  background: rgba(255,255,255,.2); backdrop-filter: blur(8px);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 30px; margin: 0 auto 14px; border: 1.5px solid rgba(255,255,255,.35);
+}
+.hero-band h1 { font-size: clamp(20px,4vw,30px); font-weight: 900; color: #fff; margin-bottom: 6px; }
+.hero-band p { font-size: 13px; color: rgba(255,255,255,.8); }
+.hero-band-meta {
+  display: flex; justify-content: center; gap: 24px; margin-top: 20px;
+  flex-wrap: wrap;
+}
+.meta-pill {
+  background: rgba(255,255,255,.18); backdrop-filter: blur(6px);
+  border: 1px solid rgba(255,255,255,.3); border-radius: 50px;
+  padding: 6px 16px; font-size: 12px; font-weight: 700; color: #fff;
+  display: flex; align-items: center; gap: 6px;
+}
+
+/* EXAM SHELL */
+.shell { max-width: 560px; margin: 0 auto; padding: 24px 20px 80px; }
+
+/* STATS ROW */
+.stats-row {
+  display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 10px; margin-bottom: 16px;
+}
+.stat-box {
+  background: var(--card); border: 1px solid var(--bc); border-radius: var(--r);
+  padding: 12px 10px; text-align: center;
+}
+.stat-box .val { font-size: 20px; font-weight: 900; }
+.stat-box .lbl { font-size: 11px; color: var(--text3); margin-top: 2px; }
+.stat-correct { color: var(--success); }
+.stat-wrong   { color: var(--danger); }
+.stat-remain  { color: var(--accent); }
+
+/* PROGRESS STRIP */
+.prog-strip {
+  background: var(--card); border: 1px solid var(--bc); border-radius: var(--r);
+  padding: 14px 16px; margin-bottom: 16px;
+  display: flex; align-items: center; gap: 14px;
+}
+.prog-label { font-size: 13px; font-weight: 700; color: var(--text2); white-space: nowrap; }
+.prog-track { flex: 1; height: 8px; background: var(--bg2); border-radius: 8px; overflow: hidden; }
+.prog-fill {
+  height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--accent), var(--accent-light));
+  border-radius: 8px; transition: width .4s;
+}
+.timer-badge {
+  min-width: 64px; height: 36px; border-radius: 18px;
+  background: var(--bg2); border: 1px solid var(--bc);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 14px; font-weight: 900; color: var(--text);
+  gap: 5px; padding: 0 12px; flex-shrink: 0;
+}
+.timer-badge.warn { color: var(--warn); border-color: rgba(217,119,6,.3); background: rgba(217,119,6,.08); }
+.timer-badge.danger { color: var(--danger); border-color: rgba(220,38,38,.3); background: rgba(220,38,38,.08); animation: pulse .8s infinite; }
+@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.6} }
+
+/* QUESTION CARD */
+.q-card {
+  background: var(--card); border: 1px solid var(--bc);
+  border-radius: 20px; overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+  transition: box-shadow .3s;
+}
+.q-header {
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  padding: 4px 18px 4px;
+  display: flex; align-items: center; gap: 8px;
+}
+.q-num {
+  background: rgba(255,255,255,.2); border-radius: 8px;
+  padding: 3px 10px; font-size: 11px; font-weight: 700; color: #fff;
+}
+.q-text {
+  padding: 22px 18px 14px; font-size: 15px; font-weight: 700; color: var(--text);
+  line-height: 1.65; border-bottom: 1px solid var(--bc);
+  text-align: left; direction: ltr;
+}
+.options { padding: 14px 18px 18px; display: flex; flex-direction: column; gap: 10px; }
+
+/* OPTION */
+.opt {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 16px; border-radius: 12px;
+  border: 1.5px solid var(--bc); background: var(--bg);
+  cursor: pointer; font-size: 14px; font-weight: 600; color: var(--text);
+  transition: var(--tr); user-select: none;
+  direction: ltr; text-align: left;
+}
+.opt:hover:not(.disabled) {
+  border-color: var(--accent); background: var(--accent-glow);
+  transform: translateX(3px);
+}
+.opt-letter {
+  width: 28px; height: 28px; border-radius: 8px; flex-shrink: 0;
+  background: var(--bg2); border: 1px solid var(--bc);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 12px; font-weight: 900; color: var(--text3);
+  transition: var(--tr);
+}
+.opt.correct {
+  border-color: var(--success); background: rgba(22,163,74,.08);
+}
+.opt.correct .opt-letter {
+  background: var(--success); color: #fff; border-color: var(--success);
+}
+.opt.wrong {
+  border-color: var(--danger); background: rgba(220,38,38,.07);
+}
+.opt.wrong .opt-letter {
+  background: var(--danger); color: #fff; border-color: var(--danger);
+}
+.opt.disabled { pointer-events: none; }
+
+/* FEEDBACK */
+.feedback-bar {
+  margin: 14px 18px; padding: 12px 16px; border-radius: 12px;
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px; font-weight: 700;
+  animation: popIn .4s cubic-bezier(.34,1.56,.64,1);
+}
+@keyframes popIn { from{transform:scale(.8);opacity:0} to{transform:scale(1);opacity:1} }
+.feedback-bar.ok { background: rgba(22,163,74,.1); color: var(--success); border: 1px solid rgba(22,163,74,.25); }
+.feedback-bar.no { background: rgba(220,38,38,.08); color: var(--danger); border: 1px solid rgba(220,38,38,.2); }
+.feedback-icon { font-size: 20px; }
+
+/* EXPLANATION */
+.explanation {
+  margin: 0 18px 14px; padding: 12px 14px;
+  background: rgba(var(--accent-rgb),.06);
+  border-radius: 10px; border-right: 3px solid var(--accent);
+  font-size: 13px; color: var(--text2); line-height: 1.6;
+  display: none;
+}
+
+/* NAV BTNS */
+.nav-btns { padding: 4px 18px 18px; display: flex; gap: 10px; }
+.btn {
+  flex: 1; padding: 13px; border: none; border-radius: 12px;
+  font-size: 14px; font-weight: 900; cursor: pointer;
+  font-family: 'Outfit', sans-serif; transition: var(--tr);
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+}
+.btn-next {
+  background: linear-gradient(135deg, var(--accent-dark), var(--accent));
+  color: #fff; box-shadow: 0 4px 14px var(--accent-glow);
+}
+.btn-next:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
+.btn-skip {
+  background: var(--bg2); color: var(--text2); border: 1px solid var(--bc); flex: 0 0 auto; padding: 13px 18px;
+}
+.btn-skip:hover { border-color: var(--warn); color: var(--warn); }
+
+/* ===== RESULTS ===== */
+.result-hero {
+  text-align: center; padding: 36px 20px 28px;
+  background: var(--card); border-radius: 20px;
+  border: 1px solid var(--bc); margin-bottom: 20px;
+  box-shadow: 0 4px 20px rgba(0,0,0,.06);
+}
+.score-ring {
+  width: 110px; height: 110px; border-radius: 50%; margin: 0 auto 18px;
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; border: 5px solid var(--bg2);
+  position: relative;
+}
+.score-ring svg { position: absolute; inset: -5px; width: calc(100% + 10px); height: calc(100% + 10px); transform: rotate(-90deg); }
+.score-ring circle { fill: none; stroke-width: 5; stroke-linecap: round; }
+.ring-bg { stroke: var(--bg2); }
+.ring-fill { stroke: var(--accent); transition: stroke-dashoffset 1s ease; }
+.score-num { font-size: 28px; font-weight: 900; color: var(--text); }
+.score-pct { font-size: 12px; color: var(--text3); }
+.result-grade { font-size: 22px; font-weight: 900; margin-bottom: 6px; }
+.result-sub { font-size: 14px; color: var(--text2); }
+.result-stats {
+  display: grid; grid-template-columns: repeat(3,1fr); gap: 10px; margin-top: 20px;
+}
+.rs { background: var(--bg2); border-radius: 10px; padding: 12px 8px; text-align: center; }
+.rs .n { font-size: 20px; font-weight: 900; }
+.rs .l { font-size: 11px; color: var(--text3); }
+
+/* REPORT ITEMS */
+.report-item {
+  background: var(--card); border: 1px solid var(--bc); border-radius: 14px;
+  padding: 16px; margin-bottom: 10px; border-right: 4px solid var(--bc);
+}
+.report-item.ok { border-right-color: var(--success); }
+.report-item.no { border-right-color: var(--danger); }
+.report-item .ri-q { font-size: 13px; font-weight: 700; margin-bottom: 8px; }
+.report-item .ri-row {
+  display: flex; align-items: center; gap: 8px;
+  font-size: 12px; margin-top: 5px; color: var(--text2);
+}
+.ri-badge {
+  padding: 2px 8px; border-radius: 6px; font-weight: 700; font-size: 11px; flex-shrink: 0;
+}
+.ri-yours { background: rgba(220,38,38,.1); color: var(--danger); }
+.ri-right { background: rgba(22,163,74,.1); color: var(--success); }
+
+.result-actions { display: flex; flex-direction: column; gap: 10px; margin-top: 20px; }
+.btn-retry { background: linear-gradient(135deg, var(--accent-dark), var(--accent)); color: #fff; }
+.btn-retry:hover { transform: translateY(-2px); box-shadow: 0 6px 20px var(--accent-glow); }
+.btn-home { background: var(--bg2); color: var(--text); border: 1px solid var(--bc); }
+.btn-home:hover { border-color: var(--accent); color: var(--accent); }
+
+/* FOOTER */
+footer {
+  background: var(--bg2); border-top: 1px solid var(--bc);
+  padding: 22px 24px; display: flex; align-items: center;
+  justify-content: space-between; flex-wrap: wrap; gap: 10px;
+}
+.footer-brand { font-size: 14px; font-weight: 700; }
+.footer-brand span { color: var(--accent); }
+.footer-tg { display: flex; align-items: center; gap: 5px; text-decoration: none; color: #229ED9; font-size: 12px; font-weight: 600; }
+
+@media (max-width: 480px) {
+  nav { padding: 0 14px; }
+  .shell { padding: 16px 14px 60px; }
+  .nav-brand span { display: none; }
+  .hero-band { padding: 30px 16px 28px; }
+}
+</style>
+</head>
+<body>
+
+<div id="prog-bar" style="width:0%"></div>
+
+<nav>
+  <a href="https://gaith-team.github.io/exam/obstetric/index.html" class="nav-back"><i class="fa-solid fa-arrow-right"></i> رجوع</a>
+  <div class="nav-brand">
+    <div class="nav-logo-icon">GT</div>
+    <span>GHAITH TEAM</span>
+  </div>
+  <div class="nav-right">
+    <button class="theme-btn" id="themeBtn">🌙</button>
+  </div>
+</nav>
+
+<div class="hero-band">
+  <div class="hero-band-icon">🤰</div>
+  <h1>أسئلة دكتور أسماء أبو العنين </h1>
+  <p>تمريض النساء والتوليد</p>
+  <div class="hero-band-meta">
+    <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">-- سؤال</span></div>
+    <div class="meta-pill"><i class="fa-solid fa-clock"></i> 200 Min</div>
+    <div class="meta-pill"><i class="fa-solid fa-shuffle"></i> Shuffled</div>
+  </div>
+</div>
+
+<div class="shell">
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="val stat-correct" id="sCorrect">0</div>
+      <div class="lbl">✔ صحيح</div>
+    </div>
+    <div class="stat-box">
+      <div class="val stat-wrong" id="sWrong">0</div>
+      <div class="lbl">✖ خطأ</div>
+    </div>
+    <div class="stat-box">
+      <div class="val stat-remain" id="sRemain">--%</div>
+      <div class="lbl">⏳ متبقي</div>
+    </div>
+  </div>
+
+  <!-- PROGRESS STRIP -->
+  <div class="prog-strip">
+    <div class="prog-label" id="progLabel">سؤال ١</div>
+    <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+    <div class="timer-badge" id="timerBadge"><i class="fa-regular fa-clock"></i> <span id="timerTxt">200:00</span></div>
+  </div>
+
+  <!-- APP -->
+  <div id="app"></div>
+</div>
+
+<footer>
+  <div class="footer-brand">GHAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" class="footer-tg">
+    <i class="fa-brands fa-telegram"></i> @nursing2bu
+  </a>
+</footer>
+
+<script>
+const QUESTIONS = [
+{t:"A nurse teaches a pregnant woman about the signs of pregnancy during second trimester. Which finding should the woman expect?",o:["Amenorrhea","Braxton Hicks contractions","Abdominal enlargement","Quickening"],a:3},
+{t:"Which of the following is considered a maternal complication of puerperal sepsis?",o:["Hypovolemic shock","Secondary Infertility","Hypertension","Postpartum fever"],a:1},
+{t:"Android pelvis (male pelvis) the brim heart shaped with straight sacrum which prevents fetal rotation",o:["True","False"],a:0},
+{t:"Which of the following best describes the function of the fallopian tubes?",o:["Acidic environment, that protects against ascending infections.","Site for fertilization and transport of the ovum/zygote","Passageway for the fetus during childbirth","Organ that retains and nourishes the fetus until labor"],a:1},
+{t:"Insulin requirements decrease as pregnancy progresses due to improved insulin sensitivity",o:["True","False"],a:1},
+{t:"In cases of postpartum uterine atony, vaginal bleeding is usually sudden, profuse, and bright red immediately after delivery",o:["True","False"],a:1},
+{t:"Oliguria means that the urine output 100 C.C/day or no urine output",o:["True","False"],a:1},
+{t:"Incomplete abortion, the end is already dilated and there is severe vaginal bleeding",o:["True","False"],a:0},
+{t:"By which week of pregnancy is the placenta fully formed?",o:["8 weeks","20 weeks","16 weeks","12 weeks"],a:3},
+{t:"Uterine involution is the process where the uterus enlarges after delivery",o:["True","False"],a:1},
+{t:"The umbilical cord contains two veins and one artery",o:["True","False"],a:1},
+{t:"Routine prophylactic antibiotics are given to all postpartum women to prevent puerperal sepsis",o:["True","False"],a:1},
+{t:"Women with malnutrition are at increased risk for developing preeclampsia",o:["True","False"],a:0},
+{t:"During follow-up visits for a pregnant woman with a history of pregnancy induced hypertension (PIH), which finding should the nurse assess most carefully at each visit?",o:["Resolution of dependent edema","Reduction in urinary protein levels","Sudden or excessive maternal weight gain","Reduction in maternal pulse rate"],a:2},
+{t:"Which ligament extends from the cervix to the sacrum and helps support the uterus?",o:["Uterosacral ligament","Round ligament","Cardinal ligament","Broad ligament"],a:0},
+{t:"Which hormone is secreted by the placenta and is primarily responsible for maintenance of the pregnancy?",o:["Prolactin","Estrogen","Progesterone","Human chorionic gonadotropin"],a:2},
+{t:"What is the priority nursing action when labor is progressing more rapidly than expected (precipitous labor)",o:["Suspect placental abruption and prepare for emergency management","Stop oxytocin infusion if it is being administered","Assess fetal heart rate immediately","Administer a tocolytic medication to slow uterine contractions"],a:2},
+{t:"A menopausal woman complains of vaginal dryness. Which nursing intervention is most appropriate?",o:["Increase salt intake","Advise complete sexual abstinence","Encourage high caffeine intake","Recommend water-based lubricants"],a:3},
+{t:"A pregnant woman complains of tingling and numbness in her hands and feet. Which treatment is most appropriate?",o:["Ferrous fumarate injection (IM)","Vitamin B6 oral tablets","Oral folic acid","Vitamin B12 injection (IM)"],a:3},
+{t:"Which mechanism best explains the development of gestational diabetes in a high-risk pregnant woman (BMI >30) at 26 weeks gestation?",o:["Increased insulin resistance caused by placental hormones","Absolute insulin deficiency caused by autoimmune destruction of pancreatic beta cells","Excess Insulin production due to fetal pancreatic overstimulation","Decreased renal threshold for glucose resulting in persistent glycosuria"],a:0},
+{t:"If the color of the amniotic fluid is green is an indicated sign of fetal distress",o:["True","False"],a:0},
+{t:"To ensure that the baby breathes immediately after the head is delivered, the nurse's priority action is to suction the nose then the mouth to remove mucus secretions",o:["True","False"],a:1},
+{t:"In pregnant woman diagnosed with severe concealed abruption placentae, which complication should the nurse monitor most closely?",o:["Disseminated Intravascular Coagulation (DIC)","Polyhydramnios","Hyperemesis gravidarum","Gestational diabetes mellitus"],a:0},
+{t:"Which of the following diameters is considered the shortest anteroposterior diameter of the pelvic inlet?",o:["Obstetric conjugate","Diagonal conjugate","Anatomical conjugate","External conjugate"],a:0},
+{t:"In infants of diabetic mothers, hyperbilirubinemia is primarily caused by which of the following?",o:["Increased Insulin secretion causing accelerated red blood cell destruction","Immaturity of liver function associated with increased breakdown of red blood cells","Elevated calcium levels leading to impaired bilirubin metabolism","Reduced liver enzyme activity secondary to vitamin K deficiency"],a:1},
+{t:"Palmer's sign described as uterine contractions felt during bimanual examination",o:["True","False"],a:0},
+{t:"Which barrier method covers the entire vaginal canal?",o:["Cervical cap","Spermicides","Diaphragm","Female condom"],a:3},
+{t:"Placenta previa as a type of antepartum hemorrhage characterized by which of the following?",o:["Painful bleeding from a normally implanted placenta during the third trimester","Painful vaginal bleeding caused by a low-lying placenta in late pregnancy","Recurrent painless vaginal bleeding during the third trimester","Continuous vaginal bleeding during late pregnancy"],a:2},
+{t:"When does a nurse determine that a woman has entered the second stage of labor?",o:["The cervix is fully dilated (10 cm)","The woman reports increasing back pain","The woman experiences rupture of membranes with fluid leakage","Uterine contractions become regular and strong"],a:0},
+{t:"Combined oral contraceptive is a preferred contraceptive method for cardiac women after delivery",o:["True","False"],a:1},
+{t:"The ovaries are covered by cuboidal epithelium and contain medulla and cortex",o:["True","False"],a:0},
+{t:"Which of the following findings is most characteristic of false labor pain?",o:["Irregular uterine contractions that are relieved by rest or analgesics","Progressive cervical effacement and dilatation","Uterine contractions that progressively increase in intensity and frequency.","Presence of a bloody show associated with cervical dilatation"],a:0},
+{t:"Placenta previa is more commonly associated with which of the following risk factors?",o:["Oligohydramnios, young maternal age, and primigravidity","Short umbilical cord, polyhydramnios, and substance abuse","Previous cesarean delivery, multiparity, and advanced maternal age","Gestational hypertension and obesity in primigravida women"],a:2},
+{t:"What happens if fertilization does not occur after ovulation?",o:["The corpus luteum degenerates, leading to menstruation","A new ovulation occurs immediately","Estrogen and progesterone levels continue to rise","The endometrial lining remains intact and is maintained"],a:0},
+{t:"Which of the following cervical changes is commonly observed during the early postpartum period?",o:["The cervix remains dilated at 6 cm","The cervix becomes rounded","The cervix returns to its pre-pregnancy shape.","The cervix appears edematous and bruised"],a:3},
+{t:"Cardinal symptoms of placenta previa is painful, causeless and recurrent 2nd or 3rd trimester vaginal bleeding",o:["True","False"],a:1},
+{t:"A 35-year-old woman suspects she may be pregnant. The physician notes in chart that the lower uterine segment is soft. This finding is known as",o:["Chadwick's Sign","Ballottement","Hegar's Sign","Goodell's Sign"],a:2},
+{t:"The woman education regarding modifiable risk factors for prolapse should include information on",o:["Avoiding pelvic examinations","Maintaining a healthy weight","Maintaining vigorous exercise","Increasing fluid intake"],a:1},
+{t:"Which part of the sperm contains genetic characteristics?",o:["Head","Tail","Middle piece","Neck"],a:0},
+{t:"In which degree of uterine prolapse the whole uterus completely protruded outside the vulva?",o:["First degree","Second degree","Fourth degree","Third degree"],a:3},
+{t:"In a high-risk pregnancy exclude fetal congenital anomaly by USG and fetal ECHO. During which gestational age are those tests most accurately performed?",o:["Around 20 weeks of gestation","Around 16 weeks of gestation","Around 36 weeks of gestation","Around 32 weeks of gestation"],a:0},
+{t:"Which part of the Fallopian tube is responsible for picking up the ovum after ovulation?",o:["Interstitial part","Ampulla","Isthmus","Infundibulum with fimbria"],a:3},
+{t:"A woman develops heavy vaginal bleeding 30 minutes after delivery. On examination, the uterus is soft, boggy, and enlarged. The bleeding improves after uterine massage. What is the most likely cause?",o:["Cervical laceration","Uterine atony","Retained placenta fragments","Coagulation disorder"],a:1},
+{t:"Abdominal laxity has no role in causing urinary retention after delivery",o:["True","False"],a:1},
+{t:"Per vaginal examination under double set-up technique is indicated in active treatment of placenta previa",o:["True","False"],a:0},
+{t:"The gestational sac can be visualized at 6 weeks by trans abdominal ultrasound",o:["True","False"],a:0},
+{t:"What are the clinical features of the clonic stage of eclampsia?",o:["Involuntary passage of urine and stool","Opisthotonus (arching of the back muscles)","Generalized rhythmic jerking of voluntary muscles","Cyanosis due to respiratory muscle involvement"],a:2},
+{t:"By the third postpartum day, plasma volume primarily restored through which of the following physiological adaptations?",o:["Increased cardiac output","Due to the shift of extracellular fluid into the vascular space","Decreased renal excretion of water","Hemoconcentration due to fluid loss"],a:1},
+{t:"Prolapsed umbilical cord is NOT commonly associated with which of the following condition?",o:["Polyhydramnios (hydramnios)","Intact membranes","Premature rupture of membranes","Twins pregnancy"],a:1},
+{t:"A nurse is caring for a woman in labor at 39 weeks' gestation, preparing to deliver her second child. She has a history of anemia during most of her pregnancy. What is the nurse's greatest concern?",o:["Neonatal hyperbilirubinemia","Hydatidiform mole","Chorioamnionitis","Postpartum hemorrhage"],a:3},
+{t:"Secondary infertility means the woman had at least one previous pregnancy",o:["True","False"],a:0},
+{t:"Abruption placentae is a serious complication of pregnancy characterized by which of the following?",o:["Sudden onset of painful vaginal bleeding with a rigid, tender uterus.","Implantation of the placenta in the lower uterine segment.","Intermittent, painless vaginal spotting throughout the third trimester","Painless, bright red vaginal bleeding in the third trimester."],a:0},
+{t:"Hormone replacement therapy is suitable for all menopausal women",o:["True","False"],a:1},
+{t:"After evacuation of a molar pregnancy, how often should follow-up be done during the first year?",o:["Every 4 months","Every 3 months","Every 6 months","Every 1 month"],a:3},
+{t:"As pregnancy progresses, the abdominal muscles may separate because of stretching of the abdominal wall. What is this condition called?",o:["Diastasis recti abdominis","Rectus muscle strain","Separation of the linea alba","Abdominal wall separation"],a:0},
+{t:"Which of the following is a risk factor for developing a vesicular mole (hydatidiform mole)?",o:["Use of prescribed medications","Polycystic ovary syndrome (PCOS)","History of previous spontaneous abortion","Well-controlled diabetes mellitus"],a:2},
+{t:"A woman who is 36 weeks' pregnant tells the nurse that she is having difficulty sleeping because she feels uncomfortable at night. Which sleeping position should the nurse recommend?",o:["Lying in the prone position with the head turned to one side","Lying on her back with one pillow under her head","Lying on her back with a pillow under her knees","Lying on her left side with a pillow between her knees"],a:3},
+{t:"A pregnant woman taking iron supplements reports that her stool has become dark black. What should the nurse do?",o:["Switch to another medication","Reassure her that this is a normal side effect","Stop the iron immediately","Report as a gastrointestinal bleeding sign"],a:1},
+{t:"A fasting glucose level of 95 mg/dl on awakening is considered a target for women with gestational diabetes",o:["True","False"],a:0},
+{t:"At 24 weeks of gestation, where is the uterine fundus expected to be located when measuring fundal height?",o:["At the xiphoid process","At the level of the umbilicus","At the symphysis pubis","Midway between the umbilicus and symphysis pubis"],a:1},
+{t:"Pregnant woman is considered anemic when the hemoglobin below 11gm/dl in 1st trimester",o:["True","False"],a:0},
+{t:"Which of the following best defines cephalopelvic disproportion (CPD) during labor?",o:["Excessive uterine stretching in multiple pregnancy","Decreased placental perfusion causing fetal distress","Fetal head is too large to fit through the maternal pelvis","Prolonged labor due to weak uterine contractions"],a:2},
+{t:"Ectopic pregnancy most commonly occurs in which part of the fallopian tube?",o:["Fimbriae","Isthmus","Ampulla","Infundibulum"],a:2},
+{t:"Which term describes the stage when the fetal head remains visible at the vaginal ring without receding between contractions?",o:["Engagement of the fetal head","Expulsion of the fetal head","Crowning","External rotation of the fetal head"],a:2},
+{t:"Which of the following is NOT considered a definitive sign of true labor?",o:["Progressive cervical dilatation and effacement","Bulging of the membranes during uterine contractions","Bloody show","Lightening"],a:3},
+{t:"The pregnant women with hypertension at 30 weeks, when plan the antenatal visit, which time of the following is scheduled?",o:["Every 4 weeks","Every 2 weeks","Every 1 week","Hospitalization"],a:2},
+{t:"Which of the following is the most accurate definition of menopause?",o:["Permanent cessation of menstruation for 12 consecutive months","Irregular menstrual cycle after age 40","Decrease in estrogen levels only","Absence of menstruation for 6 months"],a:0},
+{t:"After implantation of fertilized ovum on the endometrium is changed to morula",o:["True","False"],a:1},
+{t:"Prostaglandins help sperm movement",o:["True","False"],a:0},
+{t:"A nurse is reviewing the laboratory results of a pregnant woman suspected of having HELLP syndrome. What does the \"LP\" in HELLP stand for?",o:["Low perfusion","Low protein","Low platelets count","Low prothrombin"],a:2},
+{t:"Which phase of the ovarian cycle occurs after ovulation and before menstruation?",o:["Ovulatory phase","Menstrual phase","Follicular phase","Luteal phase"],a:3},
+{t:"Which of the following best describes a pathological uterine contraction ring?",o:["It is characterized by uterine contractions lasting longer than 90 seconds","It indicates a reduction of the essential pelvic diameters by 1 cm or more","It occurs at the junction between the upper and lower uterine segments","It usually occurs around a groove in the fetal body"],a:2},
+{t:"Fertilization occurs at the middle part of the fallopian tube",o:["True","False"],a:0},
+{t:"Pregnant woman informs the nurse that her last normal menstrual period was on September 19th, 2025. Using Naegele's rule, which of the following would the nurse determine to be the woman's estimated date of delivery (EDD)?",o:["August 12, 2026","June 26, 2026","July 26, 2025","June 20, 2026"],a:1},
+{t:"When providing contraceptive counseling to a lactating mother, the nurse decide the best option is",o:["Progestin-only pills","Copper IUD","Estrogen injections","Combined oral contraceptive pills"],a:0},
+{t:"Menorrhagia refers to abnormally light menstrual bleeding",o:["True","False"],a:1},
+{t:"Persistent vomiting during pregnancy is consider minor discomfort of pregnancy",o:["True","False"],a:1},
+{t:"During assessment of a woman on the third postpartum day, the nurse notes that the breasts are firm and warm (engorgement). What is the most appropriate nursing intervention?",o:["Encourage exclusive breastfeeding","Assess the woman's temperature and pulse rate","Massage the breasts","Manually express breast milk"],a:0},
+{t:"What is the estimated maternal mortality rate associated with cardiac disease during pregnancy among Egyptian women?",o:["12.8%","0.145","0.105","0.140"],a:0},
+{t:"A pregnant woman complains of heart burn (pyrosis). What is the most likely physiological cause?",o:["A decrease gastrin production","Increased acidity of gastric secretion","Increased gastric motility","Relaxation of the cardiac sphincter due to progesterone"],a:3},
+{t:"Which hormone decline is primary responsible for menopausal symptoms?",o:["Luteinizing","Prolactin","Estrogen","Testosterone"],a:2},
+{t:"Uterine size is smaller than expected for gestational age in which condition",o:["Threatened abortion","Inevitable abortion","Incomplete abortion","Missed abortion"],a:3},
+{t:"Which term refers to decreased sperm motility (weakness)?",o:["Asthenospermia","Necrospermia","Oligospermia","Azoospermia"],a:0},
+{t:"Which of following is the common symptom during second trimester of pregnancy?",o:["Morning sickness","Quickening","Chadwick's sign","Frequency of micturition"],a:1},
+{t:"Which of the following hormone is responsible for stimulating the release of an egg from the follicle (ovulation)?",o:["FSH (Follicle-Stimulating Hormone)","Estrogen","LH (Luteinizing Hormone)","Progesterone"],a:2},
+{t:"During the immediate postpartum period, the nurse plans to take the woman's vital signs:",o:["Every 30 minutes during the first hour and then every hour for the next two hours.","Every 15 minutes during the first hour and then every 30 minutes for the next two hours.","Every hour for the first 2 hours and then every 4 hours","Every 5 minutes for the first 30 minutes and then every hour for the next 4 hours."],a:1},
+{t:"When the fetal head is at the level of the ischial spine, it is said that the station of the head is",o:["Station \"-1\"","Station \"0\"","Station \"+1\"","Station \"+2\""],a:1},
+{t:"When planning a diet with a pregnant woman, what's the nurse FIRST action?",o:["Teach the woman about the food pyramid.","Caution the woman to avoid large doses of vitamins, especially those that are fat soluble.","Instruct the woman to limit the intake of fatty foods.","Review the woman's current dietary intake."],a:3},
+{t:"A nurse is performing an assessment on a mother who just delivered a healthy newborn. The nurse checks the uterine fundus immediately at:",o:["The level of the umbilicus.","Above the level of the umbilicus.","One fingerbreadth above the symphysis pubis.","To the right of the abdomen."],a:0},
+{t:"When determining the duration of a uterine contraction the right technique is to time it from:",o:["The beginning of one contraction to the end of the same contraction.","The end of one contraction to the beginning of another contraction.","The acme point of one contraction to the acme point of another contraction.","The beginning of one contraction to the end of another contraction."],a:0},
+{t:"The process of returning the uterus to its prepregnant status is termed:",o:["Atrophy.","Retrographic change.","Involution.","Subinvolution."],a:2},
+{t:"What is hormone responsible of milk secretion?",o:["Estrogen hormone.","Prolactin hormone.","Progesterone hormone.","Luteinizing hormone."],a:1},
+{t:"A nurse is preparing to perform a fundal assessment on a postpartum woman. The initial nursing action in performing this assessment is which of the following?",o:["Ask the woman to turn on her side.","Ask the woman to lie flat on her back with the knees and legs flat and straight.","Ask the woman to urinate and empty her bladder.","Massage the fundus gently before determining the level of the fundus."],a:2},
+{t:"Which of the following is an advantage of episiotomy over lacerations?",o:["It is more difficult to repair than laceration.","It is more painful than laceration.","It involves more blood loss than laceration.","Heals faster than laceration."],a:3},
+{t:"A woman is admitted to hospital in early active labor. The priority nursing intervention on the admission of this woman would be:",o:["Auscultating the fetal heart.","Taking an obstetric history.","Asking the woman when she last ate.","Ascertaining whether the membranes were ruptured."],a:0},
+{t:"Which of the following fundal heights indicates less than 12 weeks' gestation when the date of the LMP is unknown?",o:["Uterus in the pelvis.","Uterus at the xiphoid.","Uterus in the abdomen.","Uterus at the umbilicus."],a:0},
+{t:"Which of the following refers to engagement?",o:["When the presenting part goes through the pelvic inlet.","When the presenting part is level with the ischial spines.","When the greatest biparietal diameter of the fetal head passes the pelvic inlet.","When the presenting part goes through the pelvic outlet."],a:2},
+{t:"During the fourth stage of labor a full bladder increases the risk of",o:["Hemorrhage","Disseminated intravascular coagulation.","Infection","Shock"],a:0},
+{t:"The lochia on the first few days after delivery is characterized as",o:["Pinkish with some blood clots.","Whitish with some mucus.","Reddish with some mucus.","Serous with some brown tinged mucus."],a:2},
+{t:"Which of the following is a characteristic of first stage of labor?",o:["Pushing with contractions.","Gradual cervical dilation.","Crowning of the head.","Delivery of the head."],a:1},
+{t:"The best time for Folic acid supplementation during pregnancy is:",o:["First trimester.","Second trimester.","Third trimester.","All trimesters of pregnancy."],a:0},
+{t:"After doing Leopold's maneuvers, the nurse determines that the fetus is in the ROP position. To auscultate the fetal heart tones, the Doppler is placed:",o:["Above the umbilicus at the midline.","Above the umbilicus on the left side.","Below the umbilicus on the right side.","Below the umbilicus near the left groin."],a:2},
+{t:"Pregnant woman arrives at a prenatal clinic for the first prenatal assessment. She tells the nurse that the first day of last menstrual period was September 19th, 2020. The nurse determines the estimated date of confinement using Naegele's rule:",o:["July 26, 2020.","June 12, 2021.","June 26, 2021.","July 12, 2021."],a:2},
+{t:"Spinnbarkeit is an indicator of ovulation which is characterized as:",o:["Thin watery mucus which can be stretched into a long strand about 10 cm.","Thick mucus that is detached from the cervix during ovulation.","Thin mucus that is yellowish in color with fishy odor.","Thick mucus vaginal discharge influenced by high level of estrogen."],a:0},
+{t:"Which of the following describes the vaginal discharge on the first day after delivery?",o:["Lochia alba.","Lochia serosa.","Lochia rubra.","Show."],a:2},
+{t:"After the vaginal delivery, the nurse observes that the umbilical cord elongates and a spurt of blood from the vagina. The nurse documents these observations as signs of:",o:["Hematoma.","Placenta previa.","Uterine atony.","Placental separation."],a:3},
+{t:"A 31-year-old multipara is admitted to the birthing room after initial examination reveals her cervix to be at 8 cm, completely effaced (100 %), and at 0 station. What is this phase?",o:["Active phase.","Transitional phase.","Latent phase.","Expulsive phase."],a:1},
+{t:"During a prenatal visit at 38 weeks, a nurse assesses the fetal heart rate. The nurse determines that the fetal heart rate is normal if which of the following is noted?",o:["80 BPM.","100 BPM.","150 BPM.","180 BPM."],a:2},
+{t:"Which of the following refers to gravida?",o:["Number of term pregnancies a female has had.","Number of children a female has delivered.","Number of times a female has been pregnant.","A serious pregnancy."],a:2},
+{t:"All the following refers to the mechanism of action of estrogen as a contraception EXCEPT:",o:["Change cervical mucus and decrease sperm penetration.","Increase tubal motility.","It has effect on endometrium which becomes unsuitable for implantation.","Inhibition of hypothalamus ovarian axis leading to suppress ovulation."],a:1},
+{t:"A nurse is assigned to care for a woman with hypotonic uterine contraction and signs of slowing labor. The nurse would expect to note which of the following prescribed treatments for this condition?",o:["Medication that will provide sedation.","Increased hydration.","Oxytocin infusion.","Administration of a tocolytic medication."],a:2},
+{t:"The nurse observes the woman's amniotic fluid and decides that it appears normal, because it is:",o:["Clear and dark amber in color.","Milky, greenish yellow, containing shreds of mucus.","Clear, almost colorless, and containing little white specks.","Cloudy, greenish-yellow, and containing little white specks."],a:2},
+{t:"What is the organ that brings a zygote?",o:["Vagina","Cervix","Uterus","Breast"],a:2},
+{t:"Mechanism of central separation of placenta is known as:",o:["Dunken method","Schultz method","Negele rule"],a:1},
+{t:"White discharge from the genital tract during puerperium",o:["Lochia rubra","Lochia serosa","Lochia alba"],a:2},
+{t:"During which of the following phases of the menstrual cycle is ideal for implantation of a fertilized egg to occur?",o:["Ischemic phase","Proliferative phase","Menstrual phase","Secretory phase"],a:3},
+{t:"The female clitoris is homologous to which of the following male body parts:",o:["Scrotum","Prostate","Penis","Frenulum"],a:2},
+{t:"Which option describes the proper order of the cardinal movements of labor (mechanism of labor)",o:["Engagement, internal rotation, descent, flexion","Engagement, external rotation, descent, extension","Engagement, extension, internal rotation, flexion","Engagement, flexion, internal rotation, extension, external rotation"],a:3},
+{t:"Which of the following refers to occipito posterior position?",o:["It is vertex presentation with fetal head hyperextended.","It is vertex presentation with fetal back directed posteriorly.","It is vertex presentation with fetal limbs directed anteriorly.","It is vertex presentation with fetal face directed posteriorly."],a:1},
+{t:"The ovaries correspond to the ......... in male.",o:["Prostate","Testes","Penis"],a:1},
+{t:"When assessing the adequacy of sperm for conception to occur, which of the following is the most helpful criterion?",o:["Sperm count","Sperm maturity only","Sperm motility & maturity.","Semen volume"],a:2},
+{t:"Heba has been experiencing regular, coordinated contractions with cervical dilatation moving from 4 cm to 6 cm in the last half hour, and membranes are still intact. Heba is in which stage of labor?",o:["Latent phase of the first stage of labor","Active phase of the first stage of labor","The 3rd stage of labor","The 2nd stage of labor"],a:1},
+{t:"Following delivery of healthy baby, which one is first to be done:",o:["To place baby on comfortable position","To clear airway and maintain patent airway","Eye care for newborn","Clamping the umbilical cord"],a:1},
+{t:"Perception of fetal movement by multigravida pregnant woman:",o:["6-8 weeks","16-18 weeks","20-24 weeks","None of the above"],a:1},
+{t:"The uterus is a hollow, muscular and ............ organ.",o:["Pear-shaped","Almond-shaped","Orange-shaped"],a:0},
+{t:"During a prenatal visit, the nurse is able to feel fetal movements & auscultate the F.H.R with a fetoscope, these changes of pregnancy are known as:",o:["Expected changes.","Probable changes","Positive changes","Presumptive changes"],a:2},
+{t:"Fetal malpresentation includes:",o:["Breech presentation","Face","Brow."],a:0},
+{t:"The mucus membrane on a base of connective tissue and changing in the thickness",o:["The myometrium","Endometrium","The perimetrium"],a:1},
+{t:"Softening related to increased vascularity and slight hypertrophy of cervix",o:["Goodell's sign","Palmer sign","Chadwick's sign."],a:0},
+{t:"Which lies directly over the blastocyst and separates it from the cavity",o:["Decidua vera","Decidua basalis","Decidua capsularis"],a:2},
+{t:"A normal pregnant woman is in her 33rd week of gestation. The nurse would assist the woman in scheduling her next appointment in ......... weeks.",o:["4","2","3","1"],a:1},
+{t:"The process of rupture of graafian follicles is known as:",o:["Menstruation","Fertilization","Ovulation","Conception"],a:2},
+{t:"Stage of fertilized ovum which can do implantation is:",o:["Zygote","Blastocyst","Morula","4 cell stage"],a:1},
+{t:"Which of the following is not routine investigation of A.N.C:",o:["Urine analysis","Hb concentration","VDRL","Blood sugar"],a:2},
+{t:"At term placenta weighs approximately:",o:["500 gm","1200 gm","100 gm","800 gm"],a:0},
+{t:"Which of the following is a characteristic posture of pregnancy?",o:["Kyphosis","Lordosis","Hyperextension","Scoliosis"],a:1},
+{t:"The hormone responsible for the maturation of the graafian follicle is:",o:["FSH","Progesterone","Estrogen","LH"],a:0},
+{t:"During pregnancy maternal estrogen increases markedly. Most of this estrogen is produced by which of the following?",o:["Ovaries","Endometrium","Adrenal","Fetus"],a:0},
+{t:"In vertex presentation, the position is determined by the relationship of what fetal part to mother's pelvis?",o:["Mentum","Sacrum","Sinciput","Occiput"],a:3},
+{t:"Which of the following is not a part of product of conception?",o:["Decidua","Fetus","Amniotic fluid","Membranes, placenta"],a:0},
+{t:"The average length of the umbilical cord at term",o:["35-40 cm","80-100 cm","50 cm","15-25 cm"],a:2},
+{t:"The last menstrual period was June 30; the expected date of confinement (EDC) is approximately:",o:["March 23","March 28","April 7","March 7"],a:2},
+{t:"Normal FHR is:",o:["80-100 bpm","120-160 bpm","80-120 bpm","60-100 bpm"],a:1},
+{t:"The area in which the openings of urethra and vagina are situated & enclosed by the labia minora.",o:["The perineal body","Vaginal opening","Vestibule","None of the above"],a:2},
+{t:"The brown line from the umbilicus until the symphysis pubis is",o:["Chloasma","Striae gravidarum","Linea nigra"],a:2},
+{t:"Which of the following is derived from mesoderm?",o:["Lining of GIT","Brain","Liver","Skeletal system"],a:3},
+{t:"The time between the beginning of one uterine contraction to the end of the same contraction is:",o:["Intensity","Duration","Intervals","Frequency"],a:1},
+{t:"The main causes of constipation during pregnancy are",o:["Decrease physical exertion.","Changes in the diet","Relaxation of the smooth muscle system","Obstruction of the lower bowel by the presenting part"],a:2},
+{t:"Premature rupture of membranes is most strictly defined as spontaneous rupture at the end of?",o:["The second stage of labor","The 32nd week of gestation","The 3rd stage of labor","First stage of labor"],a:3},
+{t:"The pregnant uterus reaches the umbilical level at",o:["9 weeks","10 weeks","24 weeks","36 weeks"],a:2},
+{t:"A woman just delivered a healthy girl, but the placenta has not yet been delivered. What stage of labor does this scenario represent?",o:["1st stage","2nd stage","3rd stage","4th stage"],a:2},
+{t:"On palpation of the fundus you get a hard mass. The fetal part is:",o:["Sacrum","Head","Hand","Leg"],a:1},
+{t:"On palpation of the left side of the abdomen revealed smooth curved part, this is:",o:["Extremities","Head of the fetus","Back of the fetus","Breech"],a:2},
+{t:"The fascia overlying the levator ani muscles provide support to the middle part of the vagina",o:["True","False"],a:0},
+{t:"Weakness of pelvic floor muscle provide adequate support of the uterus.",o:["True","False"],a:1},
+{t:"The most fertile days of a woman's cycle can vary from month to month.",o:["True","False"],a:0},
+{t:"A woman should be visiting the antenatal clinic once every month in the first 7 months in normal pregnancy.",o:["True","False"],a:0},
+{t:"Immediately after delivery the uterus weight is 500gm.",o:["True","False"],a:1},
+{t:"During first stage of labor the nurse should help women to bear down during contraction and relax in between.",o:["True","False"],a:1},
+{t:"After head delivery the anterior shoulder should be delivered firstly",o:["True","False"],a:0},
+{t:"During active method of placental delivery, ergometrine should be given after delivery of anterior shoulder.",o:["True","False"],a:0},
+{t:"Uterine contraction is the primary power involved in labor and delivery.",o:["True","False"],a:0},
+{t:"Frequency is times of contraction per 10 min",o:["True","False"],a:0},
+{t:"The posterior vaginal wall is shorter than anterior wall.",o:["True","False"],a:1},
+{t:"At the secretory phase of the menstrual cycle, the uterus is under the effect of estrogen.",o:["True","False"],a:1},
+{t:"The ampulla is a narrow area between the cavity and the cervix, which is 7mm long.",o:["True","False"],a:1},
+{t:"Supravaginal portion situated below the attachment site that protrudes into the vagina.",o:["True","False"],a:1},
+{t:"Pregnancy is diabetogenic because of rising levels of human placental lactogen hormones, estrogen, progesterone, and adrenal cortisol.",o:["True","False"],a:0},
+{t:"Bluish violet discoloration of the vagina is called Chadwick's sign",o:["True","False"],a:0},
+{t:"The inner cell mass of blastocyst is called the embryonic mass and will form embryo",o:["True","False"],a:0},
+{t:"Lochia serosa is white discharge that lasts one day only",o:["True","False"],a:1},
+{t:"Involution is the return of uterus to pregravid state",o:["True","False"],a:0},
+{t:"Vaginal discharge on the first day after labor is lochia alba",o:["True","False"],a:1},
+{t:"Uterus after delivery at term normally weighs 200 gm",o:["True","False"],a:1},
+{t:"Umbilical cord contains 2 arteries and 2 veins",o:["True","False"],a:1}
+];
+
+/* ============ ENGINE ============ */
+let questions, i, correct, wrong, answers, wrongSet, answered;
+let totalTime = 200*60, timeLeft, timerInterval;
+const LETTERS = ['A','B','C','D','E','F'];
+
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+  return arr;
+}
+
+function init(pool) {
+  questions = shuffle([...pool]);
+  i = 0; correct = 0; wrong = 0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = []; answered = 0;
+  timeLeft = totalTime;
+  document.getElementById('totalBadge').textContent = questions.length + ' سؤال';
+  startTimer();
+  render();
+}
+
+/* TIMER */
+function startTimer() {
+  clearInterval(timerInterval);
+  timerInterval = setInterval(() => {
+    timeLeft--;
+    const m = Math.floor(timeLeft / 60), s = timeLeft % 60;
+    document.getElementById('timerTxt').textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
+    const badge = document.getElementById('timerBadge');
+    if (timeLeft <= 120) { badge.className = 'timer-badge danger'; }
+    else if (timeLeft <= 300) { badge.className = 'timer-badge warn'; }
+    if (timeLeft <= 0) { clearInterval(timerInterval); finish(); }
+  }, 1000);
+}
+
+/* TOP UI */
+function updateTop() {
+  const total = questions.length;
+  document.getElementById('sCorrect').textContent = correct;
+  document.getElementById('sWrong').textContent = wrong;
+  document.getElementById('sRemain').textContent = Math.round(((total - answered) / total) * 100) + '%';
+  document.getElementById('progLabel').textContent = 'سؤال ' + (i + 1) + ' / ' + total;
+  document.getElementById('progFill').style.width = ((i + 1) / total * 100) + '%';
+  document.getElementById('prog-bar').style.width = ((i + 1) / total * 100) + '%';
+}
+
+/* RENDER QUESTION */
+function render() {
+  updateTop();
+  const q = questions[i];
+  document.getElementById('app').innerHTML = `
+    <div class="q-card">
+      <div class="q-header">
+        <div class="q-num">سؤال ${i + 1} / ${questions.length}</div>
+      </div>
+   <div class="q-text">
+  ${q.s ? `<div style="margin-bottom:14px;
+    padding:12px;
+    background:var(--bg2);
+    border-radius:12px;
+    font-size:13px;
+    line-height:1.8;
+    color:var(--text2);">
+    ${q.s}
+  </div>` : ''}
+
+  ${q.t}
+</div>
+      <div class="options">
+        ${q.o.map((o, idx) => `
+          <div class="opt" id="opt${idx}" onclick="choose(${idx})">
+            <div class="opt-letter">${LETTERS[idx] || idx + 1}</div>
+            ${o}
+          </div>
+        `).join('')}
+      </div>
+      <div class="nav-btns">
+        <button class="btn btn-skip" onclick="skip()"><i class="fa-solid fa-forward"></i> تخطي</button>
+      </div>
+    </div>`;
+}
+
+/* CHOOSE */
+function choose(v) {
+  if (answers[i] !== null) return;
+  answers[i] = v;
+  answered++;
+  const q = questions[i];
+  const ok = v === q.a;
+  ok ? correct++ : wrong++;
+  updateTop();
+
+  q.o.forEach((_, idx) => {
+    const el = document.getElementById('opt' + idx);
+    el.classList.add('disabled');
+    if (idx === q.a) el.classList.add('correct');
+    else if (idx === v) el.classList.add('wrong');
+  });
+
+  const fb = document.createElement('div');
+  fb.className = 'feedback-bar ' + (ok ? 'ok' : 'no');
+  fb.innerHTML = ok
+    ? `<span class="feedback-icon">🎉</span> <span>شطور جدا ، اللهم بارك</span>`
+    : `<span class="feedback-icon">😔</span> <span>ركز يا سكر</span>`;
+
+  const card = document.querySelector('.q-card');
+  card.querySelector('.options').after(fb);
+  if (q.exp) {
+    const exp = document.createElement('div');
+    exp.className = 'explanation';
+    exp.style.display = 'block';
+    exp.innerHTML = '<b>💬 شرح:</b> ' + q.exp;
+    fb.after(exp);
+  }
+
+  const navBtns = card.querySelector('.nav-btns');
+  navBtns.innerHTML = `<button class="btn btn-next" onclick="next()">
+    ${i < questions.length - 1 ? '<i class="fa-solid fa-arrow-left"></i> السؤال التالي' : '<i class="fa-solid fa-flag-checkered"></i> إنهاء الامتحان'}
+  </button>`;
+}
+
+/* SKIP */
+function skip() {
+  if (answers[i] === null) { answers[i] = -1; answered++; wrongSet.push(questions[i]); wrong++; updateTop(); }
+  next();
+}
+
+/* NEXT */
+function next() {
+  if (i < questions.length - 1) { i++; render(); window.scrollTo({top: 0, behavior: 'smooth'}); }
+  else finish();
+}
+
+/* FINISH */
+function finish() {
+  clearInterval(timerInterval);
+  const total = questions.length;
+  const score = Math.round((correct / total) * 100);
+
+  questions.forEach((q, idx) => {
+    if (answers[idx] !== q.a) wrongSet.push({...q, myAns: answers[idx]});
+  });
+  wrongSet = [...new Map(wrongSet.map(q => [q.t, q])).values()];
+
+  let grade, gradeColor;
+  if (score >= 90) { grade = '🥇 ممتاز'; gradeColor = 'var(--success)'; }
+  else if (score >= 75) { grade = '🥈 جيد جداً'; gradeColor = 'var(--accent)'; }
+  else if (score >= 60) { grade = '🥉 جيد'; gradeColor = 'var(--warn)'; }
+  else { grade = '📚 راجع تاني'; gradeColor = 'var(--danger)'; }
+
+  const circ = 2 * Math.PI * 45;
+  const offset = circ - (score / 100) * circ;
+
+  const reportHTML = questions.map((q, idx) => {
+    const ok = answers[idx] === q.a;
+    return `<div class="report-item ${ok ? 'ok' : 'no'}">
+      <div class="ri-q">${ok ? '✅' : '❌'} ${q.t}</div>
+      ${!ok ? `
+        <div class="ri-row"><span class="ri-badge ri-yours">إجابتك</span> ${answers[idx] >= 0 ? q.o[answers[idx]] : 'تم التخطي'}</div>
+        <div class="ri-row"><span class="ri-badge ri-right">الصحيح</span> ${q.o[q.a]}</div>
+      ` : ''}
+    </div>`;
+  }).join('');
+
+  document.getElementById('prog-bar').style.width = '100%';
+  document.getElementById('app').innerHTML = `
+    <div class="result-hero">
+      <div class="score-ring">
+        <svg viewBox="0 0 110 110">
+          <circle class="ring-bg" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="0"/>
+          <circle class="ring-fill" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="${circ}"
+            style="stroke:${gradeColor}" id="ringFill"/>
+        </svg>
+        <div class="score-num">${score}</div>
+        <div class="score-pct">%</div>
+      </div>
+      <div class="result-grade" style="color:${gradeColor}">${grade}</div>
+      <div class="result-sub">أجبت على ${answered} من ${total} سؤال</div>
+      <div class="result-stats">
+        <div class="rs"><div class="n" style="color:var(--success)">${correct}</div><div class="l">صحيح</div></div>
+        <div class="rs"><div class="n" style="color:var(--danger)">${wrong}</div><div class="l">خطأ</div></div>
+        <div class="rs"><div class="n" style="color:var(--accent)">${total - answered < 0 ? 0 : total - answered}</div><div class="l">تخطي</div></div>
+      </div>
+    </div>
+
+    <div class="result-actions">
+      ${wrongSet.length ? `<button class="btn btn-retry" onclick="retryWrong()"><i class="fa-solid fa-rotate-right"></i> إعادة الخطأ (${wrongSet.length})</button>` : ''}
+      <button class="btn btn-home" onclick="init(QUESTIONS)"><i class="fa-solid fa-shuffle"></i> امتحان جديد عشوائي</button>
+      <a href="https://gaith-team.github.io/exam/obstetric/index.html" class="btn btn-home" style="text-decoration:none;"><i class="fa-solid fa-house"></i> رجوع للمادة</a>
+    </div>
+
+    <div style="margin-top:28px">
+      <div style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text2)">📋 تقرير مفصّل</div>
+      ${reportHTML}
+    </div>`;
+
+  setTimeout(() => { document.getElementById('ringFill').style.strokeDashoffset = offset; }, 100);
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+/* RETRY WRONG */
+function retryWrong() {
+  const pool = [...wrongSet];
+  questions = shuffle(pool); i = 0; correct = 0; wrong = 0;
+  answers = new Array(questions.length).fill(null);
+  wrongSet = []; answered = 0; timeLeft = totalTime;
+  startTimer(); render();
+  window.scrollTo({top: 0, behavior: 'smooth'});
+}
+
+/* THEME */
+const themeBtn = document.getElementById('themeBtn');
+let theme = localStorage.getItem('theme') || 'light';
+function applyTheme(t) {
+  theme = t;
+  document.documentElement.setAttribute('data-theme', t === 'dark' ? 'dark' : '');
+  themeBtn.textContent = t === 'dark' ? '☀️' : '🌙';
+  localStorage.setItem('theme', t);
+}
+applyTheme(theme);
+themeBtn.addEventListener('click', () => applyTheme(theme === 'dark' ? 'light' : 'dark'));
+
+/* START */
+init(QUESTIONS);
+</script>
+</body>
+</html>
