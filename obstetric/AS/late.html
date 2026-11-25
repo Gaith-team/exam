@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ghaith</title>
+<style>
+:root{--ink:#12263A;--bg:#F3F6F8;--card:#fff;--line:#D5DEE5;--mut:#5B6B7A;--pv:#0F7F8C;--pvt:#E0F2F4;--ab:#B42342;--abt:#FBE6EA;--tr:#B27D00;--trt:#FFF3CF;--ok:#2E8B57;--okt:#DDF3E6}
+@media(prefers-color-scheme:dark){:root{--ink:#E8EEF3;--bg:#0E1A26;--card:#162636;--line:#2A3E52;--mut:#9AABBB;--pv:#4FC3CF;--pvt:#12373D;--ab:#FF7A93;--abt:#3E1B26;--tr:#F2C14E;--trt:#3B3115;--ok:#6FD39A;--okt:#16372A}}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 "Segoe UI",Tahoma,"Noto Sans Arabic",system-ui,sans-serif}
+header{padding:34px 20px 22px;max-width:980px;margin:auto}
+header h1{font-size:clamp(26px,5vw,40px);line-height:1.15;margin:0 0 8px;letter-spacing:-.5px}
+header p{margin:0;color:var(--mut);max-width:62ch}
+.split{height:8px;margin-top:20px;border-radius:4px;background:linear-gradient(90deg,var(--pv) 50%,var(--ab) 50%)}
+nav{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+nav div{max-width:980px;margin:auto;display:flex;gap:6px;padding:10px 14px;overflow-x:auto}
+nav button{flex:none;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 14px;border-radius:999px;font:inherit;font-size:14px;font-weight:600;cursor:pointer}
+nav button[aria-selected=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+button:focus-visible{outline:3px solid var(--tr);outline-offset:2px}
+main{max-width:980px;margin:auto;padding:20px 16px 60px}
+section{display:none}section.on{display:block}
+h2{font-size:24px;margin:6px 0 4px}
+.sub{color:var(--mut);margin:0 0 18px}
+.ar{direction:rtl;text-align:right;font-size:15px;color:var(--mut);margin:4px 0 0}
+.grid{display:grid;gap:12px;grid-template-columns:repeat(auto-fill,minmax(290px,1fr))}
+.card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.card b.t{display:block;font-size:16px}
+.gold{border-left:5px solid var(--pv)}.gold:nth-child(even){border-left-color:var(--ab)}
+.nums{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 20px}
+.nums span{background:var(--ink);color:var(--bg);border-radius:8px;padding:6px 12px;font-size:14px}
+.nums em{font-style:normal;font-weight:800;color:var(--tr);margin-right:6px;filter:brightness(1.6)}
+.tools{display:flex;gap:10px;align-items:center;margin:0 0 12px;flex-wrap:wrap}
+.btn{border:0;background:var(--ink);color:var(--bg);padding:9px 16px;border-radius:8px;font:inherit;font-weight:600;cursor:pointer}
+.wrap{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--card)}
+table{border-collapse:collapse;width:100%;min-width:640px;font-size:14.5px}
+th,td{padding:10px 12px;border-bottom:1px solid var(--line);vertical-align:top;text-align:left}
+th{position:sticky;top:0}
+th.pv,td.pv{background:var(--pvt)}th.ab,td.ab{background:var(--abt)}
+th.pv{color:var(--pv)}th.ab{color:var(--ab)}
+td.f{font-weight:700;width:18%}
+.mask td.pv,.mask td.ab{filter:blur(6px);cursor:pointer;user-select:none}
+.mask td.rev{filter:none}
+.pair{border-top:6px solid var(--pv)}
+.pair h3{margin:0 0 8px;font-size:17px}
+.row{display:flex;gap:10px;align-items:baseline;padding:5px 0;border-top:1px dashed var(--line)}
+.row .k{flex:none;min-width:112px;font-weight:700}
+.chip{display:inline-block;border-radius:6px;padding:1px 9px;font-weight:700;font-size:13px;background:var(--pvt);color:var(--pv)}
+.chip.r{background:var(--abt);color:var(--ab)}
+.mn{border-top:6px solid var(--tr)}
+.mn h3{margin:0}
+.mn .lt{font-size:28px;font-weight:800;letter-spacing:3px;margin:2px 0 6px;color:var(--tr)}
+.mn ul{margin:0;padding:0;list-style:none}
+.mn li{padding:2px 0}.mn li b{display:inline-block;width:1.5em;color:var(--ab)}
+.trap{border-left:5px solid var(--tr);background:var(--trt)}
+.trap.done{border-left-color:var(--ok);background:var(--okt)}
+.trap .bad{color:var(--ab);font-weight:700}.trap .good{color:var(--ok);font-weight:700}
+.trap label{display:flex;gap:8px;align-items:center;margin-top:8px;font-size:14px;font-weight:600;cursor:pointer}
+.bar{height:8px;background:var(--line);border-radius:4px;overflow:hidden;margin:6px 0 16px}
+.bar i{display:block;height:100%;width:0;background:var(--ok);transition:width .3s}
+.q{margin-bottom:14px}
+.q p{margin:0 0 8px;font-weight:700}
+.opt{display:block;width:100%;text-align:left;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:8px;padding:9px 12px;margin:5px 0;font:inherit;font-size:15px;cursor:pointer}
+.opt.good{background:var(--okt);border-color:var(--ok)}
+.opt.bad{background:var(--abt);border-color:var(--ab)}
+.exp{display:none;margin-top:8px;padding:10px 12px;border-radius:8px;background:var(--trt);font-size:14.5px}
+.q.ans .exp{display:block}.q.ans .opt{pointer-events:none}
+#score{font-size:20px;font-weight:800}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+<h1>Antepartum Hemorrhage</h1>
+<p>إستعن بالله ولا تعجز</p>
+<div class="split" aria-hidden="true"></div>
+</header>
+<nav><div role="tablist" id="tabs"></div></nav>
+<main id="main"></main>
+
+<script>
+var $=function(s,r){return(r||document).querySelector(s)};
+var tabs=[["gold","Cheat sheet"],["cmp","Previa vs Abruption"],["alike","Look-alikes"],["mn","Mnemonics"],["trap","Exam traps"],["quiz","Quiz"]];
+
+var GOLD=[
+["Previa = PAINLESS, causeless, recurrent bright-red bleeding (2nd/3rd trimester). Abruption = PAINFUL, dark blood.","مفيش وجع = previa. في وجع وبطن زي الخشب = abruption."],
+["Vaginal exam in previa is CONTRAINDICATED. If needed: blood ready, operating theatre, aseptic, general anesthesia, active treatment indicated.","الـ 5 شروط تتحفظ: BOAGA (في الـ Mnemonics)."],
+["Degrees: Lateralis 10% · Marginalis 30% · Centralis 60%.","الأكتر شيوعاً Centralis، وفيه كمان Incomplete و Complete وقت الولادة."],
+["Conservative Rx: before 37 w + baby alive + small bleed + not in labor. Bed rest, then CS at 37th week.","الهدف تأجيل الولادة لحد 37 – 38 أسبوع."],
+["Active Rx: at/after 37 w + in labor + severe/persistent bleeding. Double set-up in OR decides vaginal vs CS.","مفيش قرار من غير double set-up في العمليات."],
+["Concealed abruption: acute abdominal pain, shock (hemorrhagic + neurogenic), fundus larger than dates, rigid tender uterus, inaudible FHS.","ده أخطر نوع، لأن الدم محبوس ورا المشيمة (retroplacental hematoma)."],
+["#1 cause of abruption = hypertension (more in multigravida). #2 = trauma & tumor.","H.T.N الأول، بعدها الصدمة."],
+["Definitive treatment of abruption = immediate delivery. Living fetus → CS.","Dead fetus: ممكن vaginal (ARM + oxytocin) إلا لو في مانع."],
+["Abruption complications: shock, DIC, oliguria/anuria (kidney failure), fetal distress/death, premature delivery, PPH (clotting defect).","السلسلة: Shock ← DIC ← Kidney ← Fetus ← Preterm ← PPH."],
+["Nursing red flag: INCREASING FUNDAL HEIGHT = concealed bleeding.","الممرضة تقيس الـ fundal height كل شوية."]
+];
+var NUMS=[["1/200","previa incidence"],["1–2%","abruption incidence"],["10/30/60","L / M / C"],["37–38 w","conservative target"],["5","PV exam precautions"],["7","previa risk factors"],["7","previa CS indications"],["3","abruption types"],["2","packed RBCs crossmatch"],["3","abruption nursing diagnoses"]];
+
+var CMP=[
+["Other name","Unavoidable APH","Accidental hemorrhage"],
+["Incidence","1/200 pregnancies reaching 3rd trimester","1–2% of all pregnancies"],
+["Placenta site","Abnormal: lower uterine segment","Normal: upper segment, separates prematurely"],
+["Mechanism","Inelastic placenta can’t follow the enlarging lower segment → inevitable separation","Premature separation after fetal viability"],
+["Main cause / risk","Previous CS, high parity, advanced age, smoking, multiple gestation, prior previa, fibroid","Hypertension (#1), trauma & tumor, vit C/K deficiency, short cord, sudden decompression (polyhydramnios), smoking/cocaine"],
+["Pain","Painless","Painful (concealed: acute; revealed: slight)"],
+["Blood","Often bright red; recurrent","May be dark; usually one attack (revealed)"],
+["Uterus","Soft, not tender, not hard","Rigid, tender, hard / “woody” (concealed)"],
+["Fundal level","= period of amenorrhea","> period of amenorrhea (concealed)"],
+["Fetal parts","Easy to palpate","Not easy to palpate (concealed)"],
+["FHS","Audible, normal","Inaudible / fetal distress (concealed)"],
+["Presentation","Malpresentation, no engagement, high presenting part","No malpresentation, no delayed engagement; may be engaged"],
+["Hypertension","Rare","May be present (↑BP, edema, proteinuria)"],
+["PV exam","Contraindicated (only under 5 precautions)","Concealed: to determine engagement & dilatation. Revealed: forbidden unless previa excluded"],
+["Investigation","Trans-vaginal US (after trans-abdominal), CBC, blood group & Rh, coagulation","US, MRI, CBC, blood group & Rh, coagulation “clot test”"],
+["Shock","Hemorrhagic (acute bleeding); chronic bleeding → anemia","Concealed: hemorrhagic (internal) + neurogenic"],
+["Treatment","Conservative (<37 w) or Active (≥37 w)","Immediate delivery; concealed: correct shock first"],
+["Key complications","APH, prolapsed cord, accreta/increta/percreta, PPH","DIC, oliguria/anuria, PPH due to clotting defect"]
+];
+
+var ALIKE=[
+["Degrees of previa",[["Lateralis (10%)","Lower edge in lower segment, does NOT reach internal os"],["Marginalis (30%)","Edge REACHES but does NOT cover os"],["Centralis (60%)","REACHES & COVERS internal os"]],"Lateral = بعيدة، Marginal = بتلمس الحافة، Central = غطّت الفتحة."],
+["Centralis during labor",[["Incomplete","Covers a PARTIALLY dilated cervix"],["Complete","Covers partially OR fully dilated cervix"]],"Complete = بتغطي في الحالتين."],
+["Previa management",[["Conservative","<37 w, alive, small bleed, no labor: admit, bed rest, replace blood, US only (no pelvic exam), CS at 37 w"],["Active","≥37 w, in labor, severe/persistent bleed: OR, double set-up, ARM + oxytocin if vaginal"]],"السن + الألم + كمية الدم = بيحددوا النوع."],
+["Types of abruption",[["Revealed","Almost all blood expelled via cervix. Dark bleeding, slight pain, normal-size uterus, FHS audible"],["Concealed","Blood behind placenta (retroplacental hematoma). Acute pain, shock, rigid uterus"],["Mixed","Some retained, some expelled: less severe combo of both"]],"Revealed بيتعالج زي previa."],
+["Adherent placenta (complication of previa)",[["Accreta","Placenta adherent"],["Increta","Deeper invasion"],["Percreta","Deepest, goes through"]],"الترتيب: accreta ثم increta ثم percreta (الأعمق)."],
+["Abruption: dead vs living fetus",[["Dead fetus","Decide vaginal vs CS. Vaginal: ARM + oxytocin. CS if normal delivery contraindicated"],["Living fetus","CS"]],"الجنين عايش = CS."],
+["Levels of prevention (abruption)",[["Primary","Antenatal care, avoid trauma & sudden decompression, left lateral position, folic acid, avoid cocaine/alcohol/smoking, treat HTN/DM"],["Secondary","Early diagnosis & effective treatment"],["Tertiary","Hospital: assess, emergency labs, Ringer’s lactate via wide-bore IV, immediate delivery"]],"Primary = قبل المشكلة، Tertiary = علاج المضاعفات."],
+["Nursing: previa vs abruption",[["Previa","Bed rest, report spotting, serial Hb/Hct, NST/BPP/US, no pelvic exam, crossmatch 2 packed RBCs"],["Abruption","3 diagnoses: Ineffective tissue perfusion · Risk for shock · Acute pain. Watch fundal height, external monitor"]],"في abruption الـ external monitor بيمنع trauma للـ cervix."]
+];
+
+var MN=[
+["PREVIA","Cardinal picture of previa",[["P","Painless bleeding"],["R","Relaxed (soft) uterus"],["E","Easy to palpate fetal parts"],["V","Vaginal exam forbidden"],["I","Is high: no engagement"],["A","Audible FHS"]],"عكس كل حرف = abruption."],
+["ABRUPT","Cardinal picture of concealed abruption",[["A","Acute abdominal pain"],["B","Blood dark (or hidden)"],["R","Rigid, woody uterus"],["U","Uterus larger than dates"],["P","Pressure ↑ (HTN, edema, proteinuria)"],["T","Tender, inaudible FHS, shock"]],"اتخيل بطن زي الخشب وبنت بتصرخ."],
+["BOAGA","5 precautions before vaginal exam in previa",[["B","Blood transfusion available"],["O","Operating theatre"],["A","Aseptic condition"],["G","General anesthesia"],["A","Active treatment indicated"]],"بوجا: لو ناقص حرف، مفيش PV."],
+["CHAMPS-F","7 risk factors of previa",[["C","Cesarean (previous)"],["H","High parity"],["A","Advanced maternal age"],["M","Multiple gestation"],["P","Prior previa"],["S","Smoking"],["F","Fibroid (uterine)"]],"الأبطال CHAMPS بيجيبوا F (فيبرويد)."],
+["10 · 30 · 60","Previa degrees by incidence",[["L","Lateral = Low = 10%"],["M","Marginal = Meets the os = 30%"],["C","Central = Covers the os = 60%"]],"الأصغر في الأول، والأكبر هو الأخطر."],
+["CPS-OHDM","CS indications in previa",[["C","Centralis (complete or incomplete)"],["P","Posterior marginalis"],["S","Severe or persistent bleeding"],["O","Oxytocin contraindicated"],["H","Head not engaged"],["D","Distress (fetal)"],["M","Malpresentation & failure to progress"]],"سبعة بنود = سبعة حروف."],
+["HTV-SSS","Causes of abruption in order",[["H","Hypertension (#1)"],["T","Trauma & Tumor (#2)"],["V","Vitamins C and K deficiency"],["S","Short umbilical cord (traction)"],["S","Sudden uterine decompression (polyhydramnios)"],["S","Smoking / substance abuse (cocaine)"]],"الجملة: Hit The Vessels, Sudden Separation Starts."]
+];
+
+var TRAP=[
+["“Painless bleeding means abruption.”","Painless = PREVIA. Abruption is painful (concealed: acute; revealed: only slight pain).","الأسئلة بتلعب على كلمة painless."],
+["“Do a vaginal exam to confirm previa.”","Contraindicated. Confirm with ultrasound; if PV is a must, use the 5 precautions in the OR.","ثبتها: US أولاً، PV آخر حاجة."],
+["“Revealed abruption allows PV exam.”","Forbidden unless placenta previa is excluded first.","استبعد previa قبل أي PV."],
+["“Fundal height equals dates in abruption.”","Concealed abruption: fundal level LARGER than amenorrhea. Previa: EQUAL to amenorrhea.","الرحم بيكبر مع النزيف المحبوس."],
+["“Lateralis is the commonest degree.”","Centralis is 60%, marginalis 30%, lateralis 10%.","الترتيب بالعكس: L10 M30 C60."],
+["“Incidence 1–2% is previa.”","Previa 1/200 pregnancies. 1–2% is ABRUPTION.","رقمين مش بيتبدلوا."],
+["“FHS is audible in concealed abruption.”","Concealed: inaudible FHS. Previa: audible FHS.","وفي previa بيبقى في malpresentation مش abruption."],
+["“Conservative management = deliver now.”","Conservative = DELAY delivery to 37–38 w (only if <37 w, alive, small bleed, no labor).","Conservative يعني استنى."],
+["“Previa bleeding is ‘accidental’.”","Previa = UNAVOIDABLE hemorrhage. Abruption = ACCIDENTAL hemorrhage.","Accidental = Abruption."],
+["“Hypertension is common in previa.”","HTN is RARE in previa; it is the #1 cause of abruption.","HTN رايحة على abruption."],
+["“Concealed abruption has one type of shock.”","Two: hemorrhagic (internal) + neurogenic.","الاتنين مع بعض في الإجابة."],
+["“Treat revealed abruption as an emergency CS always.”","Revealed hemorrhage is treated like placenta previa: conservative OR active.","Revealed = بروتوكول previa."],
+["“Dead fetus in abruption always needs CS.”","Dead fetus: decide. Vaginal (ARM + oxytocin) unless contraindicated. Living fetus: CS.","الجنين الميت عنده اختيارين."]
+];
+
+var QZ=[
+["Cardinal symptom of placenta previa?",["Painless, causeless, recurrent vaginal bleeding","Severe constant pain with dark blood","Bleeding with proteinuria and edema","Sudden gush of clear fluid"],0,"Painless and recurrent in 2nd/3rd trimester. Pain + dark blood points to abruption."],
+["Most common degree of placenta previa?",["Lateralis","Marginalis","Centralis","Accreta"],2,"Centralis 60%, marginalis 30%, lateralis 10%."],
+["Fundus larger than dates, rigid tender uterus, inaudible FHS. Diagnosis?",["Placenta previa centralis","Concealed abruption","Revealed abruption","Marginalis previa"],1,"Large fundus + woody uterus + inaudible FHS = concealed abruption."],
+["Before any vaginal examination in third-trimester bleeding, you must first:",["Give oxytocin","Exclude placenta previa","Rupture the membranes","Start magnesium sulfate"],1,"PV is forbidden unless previa is excluded (ultrasound)."],
+["33 weeks, baby alive, small bleed, not in labor. Plan?",["Immediate CS","ARM + oxytocin","Conservative: admit, bed rest, CS at 37 w","Discharge home"],2,"Conservative aims to delay delivery to 37–38 w."],
+["Most important cause of placental abruption?",["Trauma","Vitamin C deficiency","Short cord","Hypertension"],3,"Hypertension is #1 (multigravida); trauma & tumor are #2."],
+["Which is NOT in the book’s CS indications for previa?",["Posterior marginalis","Head not engaged","Fetal distress","Placenta previa lateralis"],3,"Lateralis isn’t listed. Centralis and posterior marginalis are."],
+["Two types of shock in concealed abruption:",["Septic + anaphylactic","Hemorrhagic + neurogenic","Cardiogenic + septic","Hypovolemic + anaphylactic"],1,"Internal hemorrhage + neurogenic shock."],
+["Definitive treatment of abruption?",["Bed rest","Tocolytics","Immediate delivery","Observation until 37 w"],2,"Immediate delivery. Living fetus: CS."],
+["In abruption, an increasing fundal height suggests:",["Labor onset","Concealed bleeding","Polyhydramnios","Full bladder"],1,"Nursing assessment: rising fundus = concealed bleeding."],
+["Why does previa bleed?",["Uterine rupture","Inelastic placenta can’t follow the enlarging lower segment","Raised BP","Short cord traction"],1,"Hence ‘unavoidable’ antepartum hemorrhage."],
+["Fluid of choice listed for abruption emergency care:",["Ringer’s lactate via wide-bore IV","Dextrose 5% by mouth","Albumin only","Mannitol"],0,"Ringer’s lactate drip + blood arranged for transfusion."]
+];
+
+function esc(s){return s}
+function tabsInit(){var t=$("#tabs"),m=$("#main");
+tabs.forEach(function(x,i){var b=document.createElement("button");b.textContent=x[1];b.setAttribute("role","tab");b.onclick=function(){show(x[0])};b.id="t_"+x[0];t.appendChild(b);var s=document.createElement("section");s.id=x[0];m.appendChild(s)});
+}
+function show(id){tabs.forEach(function(x){$("#"+x[0]).classList.toggle("on",x[0]==id);$("#t_"+x[0]).setAttribute("aria-selected",x[0]==id)});window.scrollTo(0,0)}
+function head(t,s){return "<h2>"+t+"</h2><p class=sub>"+s+"</p>"}
+
+function build(){
+var h=head("Cheat sheet","اقرا ده الأول. لو معاك نص ساعة بس، دي هي.")+"<div class=nums>"+NUMS.map(function(n){return "<span><em>"+n[0]+"</em>"+n[1]+"</span>"}).join("")+"</div><div class=grid>"+GOLD.map(function(g){return "<div class='card gold'><b class=t>"+g[0]+"</b><p class=ar lang=ar>"+g[1]+"</p></div>"}).join("")+"</div>";
+$("#gold").innerHTML=h;
+
+var r=head("Previa vs Abruption","الجدول ده بيحل نص الامتحان. دوس “Test me” وغطّي الإجابات وجاوب من دماغك، وبعدين دوس على الخلية تكشفها.")+"<div class=tools><button class=btn id=tm aria-pressed=false>Test me</button><span class=sub style='margin:0' id=tmh></span></div><div class=wrap id=tw><table><thead><tr><th>Feature</th><th class=pv>Placenta Previa</th><th class=ab>Abruption</th></tr></thead><tbody>"+CMP.map(function(c){return "<tr><td class=f>"+c[0]+"</td><td class=pv>"+c[1]+"</td><td class=ab>"+c[2]+"</td></tr>"}).join("")+"</tbody></table></div>";
+$("#cmp").innerHTML=r;
+$("#tm").onclick=function(){var on=$("#tw").classList.toggle("mask");this.setAttribute("aria-pressed",on);this.textContent=on?"Show all":"Test me";$("#tmh").textContent=on?"دوس على أي خلية مطموسة عشان تكشفها":"";if(!on)document.querySelectorAll(".rev").forEach(function(e){e.classList.remove("rev")})};
+$("#tw").onclick=function(e){if(e.target.tagName=="TD"&&this.classList.contains("mask"))e.target.classList.toggle("rev")};
+
+$("#alike").innerHTML=head("Look-alikes","الحاجات اللي بتتلخبط على بعض. كل كارت فيه الفرق في سطر.")+"<div class=grid>"+ALIKE.map(function(a,i){return "<div class='card pair'"+(i%2?" style='border-top-color:var(--ab)'":"")+"><h3>"+a[0]+"</h3>"+a[1].map(function(p){return "<div class=row><span class=k><span class='chip"+(i%2?" r":"")+"'>"+p[0]+"</span></span><span>"+p[1]+"</span></div>"}).join("")+"<p class=ar lang=ar>"+a[2]+"</p></div>"}).join("")+"</div>";
+
+$("#mn").innerHTML=head("Mnemonics","اختصارات للأجزاء الصعبة. احفظ الكلمة وهي تفتحلك القايمة.")+"<div class=grid>"+MN.map(function(m){return "<div class='card mn'><h3>"+m[1]+"</h3><div class=lt>"+m[0]+"</div><ul>"+m[2].map(function(x){return "<li><b>"+x[0]+"</b>"+x[1]+"</li>"}).join("")+"</ul><p class=ar lang=ar>"+m[3]+"</p></div>"}).join("")+"</div>";
+
+$("#trap").innerHTML=head("Exam traps","الغلطات اللي الدكتور بيصطادك بيها. علّم على اللي مسكته.")+"<div id=tc>0 / "+TRAP.length+" locked in</div><div class=bar><i id=tb></i></div><div class=grid>"+TRAP.map(function(t,i){return "<div class='card trap' id=tr"+i+"><div class=bad>Trap: "+t[0]+"</div><div class=good>Truth: "+t[1]+"</div><p class=ar lang=ar>"+t[2]+"</p><label><input type=checkbox data-i="+i+"> Got it</label></div>"}).join("")+"</div>";
+$("#trap").onchange=function(e){var i=e.target.dataset.i;$("#tr"+i).classList.toggle("done",e.target.checked);var n=document.querySelectorAll("#trap input:checked").length;$("#tc").textContent=n+" / "+TRAP.length+" locked in";$("#tb").style.width=n/TRAP.length*100+"%"};
+
+var done=0,ok=0;
+$("#quiz").innerHTML=head("Quiz","جاوب الأول وبعدين شوف الشرح. السكور بيظهر تحت.")+"<div id=score>Score: 0 / 0</div><div class=bar><i id=qb></i></div>"+QZ.map(function(q,i){return "<div class='card q' id=q"+i+"><p>"+(i+1)+". "+q[0]+"</p>"+q[1].map(function(o,j){return "<button class=opt data-q="+i+" data-o="+j+">"+o+"</button>"}).join("")+"<div class=exp><b>Why:</b> "+q[3]+"</div></div>"}).join("");
+$("#quiz").onclick=function(e){var b=e.target.closest(".opt");if(!b)return;var i=+b.dataset.q,j=+b.dataset.o,q=QZ[i],c=$("#q"+i);c.classList.add("ans");c.querySelectorAll(".opt")[q[2]].classList.add("good");if(j==q[2])ok++;else b.classList.add("bad");done++;$("#score").textContent="Score: "+ok+" / "+done+(done==QZ.length?(ok>=10?"  ممتاز، انت جاهز":ok>=7?"  كويس، راجع الـ traps":"  راجع الـ cheat sheet تاني"):"");$("#qb").style.width=done/QZ.length*100+"%"};
+}
+tabsInit();build();show("gold");
+</script>
+</body>
+</html>
