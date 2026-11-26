@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ghaith</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@600;800&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f2f6f7;--card:#fff;--ink:#10202b;--mut:#5a6b76;--line:#d5e0e4;--amber:#f2a900;--mint:#13806f;--coral:#d8431f;--blue:#2257c9;--soft:#e6f1f0;--trap:#fdeae4;--lcd:#c9e4a3;--lcdink:#16301a}
+@media(prefers-color-scheme:dark){:root:not([data-t=l]){--bg:#0d1820;--card:#15252f;--ink:#e8f1f4;--mut:#93a8b3;--line:#27404d;--soft:#16343a;--trap:#3a1f19;--amber:#ffc23d;--mint:#4cc9b0;--coral:#ff7a57;--blue:#7ea6ff}}
+:root[data-t=d]{--bg:#0d1820;--card:#15252f;--ink:#e8f1f4;--mut:#93a8b3;--line:#27404d;--soft:#16343a;--trap:#3a1f19;--amber:#ffc23d;--mint:#4cc9b0;--coral:#ff7a57;--blue:#7ea6ff}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 Cairo,"Segoe UI",system-ui,sans-serif}
+h1,h2,h3{font-family:"Bricolage Grotesque",Cairo,system-ui,sans-serif;line-height:1.2;margin:0}
+.wrap{max-width:980px;margin:0 auto;padding:0 18px}
+header{padding:34px 0 26px;border-bottom:4px solid var(--amber)}
+header .wrap{display:grid;grid-template-columns:1.2fr 1fr;gap:26px;align-items:center}
+h1{font-size:clamp(28px,5vw,46px);font-weight:800}
+.sub{color:var(--mut);margin:10px 0 0}
+.meter{background:#1c2b33;border-radius:22px 22px 40px 40px;padding:16px;box-shadow:0 10px 30px rgba(0,0,0,.25)}
+.lcd{background:var(--lcd);color:var(--lcdink);border-radius:10px;padding:12px 16px;font-family:"Courier New",monospace}
+.lcd div{display:flex;justify-content:space-between;font-size:20px;font-weight:700;border-bottom:1px dashed #16301a55;padding:3px 0}
+.lcd div:last-child{border:0}.lcd small{font-size:12px;display:block;margin-top:6px;opacity:.8}
+.top{position:sticky;top:0;z-index:5;background:var(--bg);border-bottom:1px solid var(--line)}
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:10px 0}
+.tabs button,.btn{font:600 14px Cairo,sans-serif;border:1px solid var(--line);background:var(--card);color:var(--ink);padding:8px 14px;border-radius:999px;cursor:pointer;white-space:nowrap}
+.tabs button[aria-selected=true]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+button:focus-visible,summary:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.tabs .sp{flex:1}
+section.panel{display:none;padding:22px 0 60px}section.panel.on{display:block}
+.strip{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:20px}
+.num{background:var(--card);border:1px solid var(--line);border-left:5px solid var(--amber);border-radius:8px;padding:10px 12px}
+.num b{font:800 22px "Bricolage Grotesque",sans-serif;display:block}.num span{color:var(--mut);font-size:13px}
+details{background:var(--card);border:1px solid var(--line);border-radius:10px;margin:10px 0}
+summary{cursor:pointer;padding:14px 16px;font:700 18px "Bricolage Grotesque",Cairo,sans-serif;list-style:none;display:flex;justify-content:space-between;gap:10px}
+summary::after{content:"+";color:var(--amber);font-size:24px;line-height:1}details[open] summary::after{content:"–"}
+.body{padding:0 18px 16px}
+ul{padding-left:20px;margin:8px 0}li{margin:4px 0}
+.ar{direction:rtl;text-align:right;background:var(--soft);border-right:4px solid var(--mint);padding:9px 13px;border-radius:6px;margin:10px 0;font-size:15px}
+.trap{direction:rtl;text-align:right;background:var(--trap);border-right:4px solid var(--coral);padding:9px 13px;border-radius:6px;margin:10px 0;font-size:15px}
+.trap::before{content:"فخ! ";font-weight:700;color:var(--coral)}
+mark{background:none;color:var(--coral);font-weight:700}
+table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--line);font-size:15px;margin:10px 0}
+th,td{padding:9px 11px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}th{background:var(--soft)}
+.sc{overflow-x:auto}
+h2{font-size:24px;margin:26px 0 6px}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(270px,1fr));gap:12px}
+.mn{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px}
+.mn h3{font-size:17px}.mn .k{font:800 26px "Bricolage Grotesque",sans-serif;color:var(--blue);margin:4px 0}
+.mn p{margin:6px 0;color:var(--mut);font-size:14.5px}
+.q{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:16px;margin:12px 0}
+.q p{margin:0 0 10px;font-weight:600}
+.o{display:block;width:100%;text-align:left;margin:6px 0;padding:10px 12px;border:1px solid var(--line);background:var(--bg);color:var(--ink);border-radius:8px;font:inherit;cursor:pointer}
+.o.ok{background:#bfe8d6;color:#073b2c;border-color:var(--mint)}.o.no{background:#f7c7ba;color:#5a1706;border-color:var(--coral)}
+.fb{display:none;margin-top:8px}
+#score{position:sticky;bottom:10px;background:var(--ink);color:var(--bg);border-radius:999px;padding:10px 18px;width:max-content;margin:14px auto 0;font-weight:700}
+@media(max-width:720px){header .wrap{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<header><div class="wrap">
+<div><h1>Gestational Diabetes<br>Night-Before Review</h1>
+<p class="sub">ما شاء اللع عالشطارة </p>
+<p class="ar" dir="rtl">يا دكتورةالأرقام اللي تحت هي اللي بتجيب الدرجات.</p></div>
+<div class="meter" aria-label="Glucometer showing key targets"><div class="lcd">
+<div><span>Wake-up</span><span>&lt;95</span></div><div><span>1h after meal</span><span>&lt;140</span></div><div><span>2h after meal</span><span>&lt;120</span></div><small>mg/dl – target readings</small></div></div>
+</div></header>
+
+<div class="top"><div class="wrap"><div class="tabs" role="tablist">
+<button role="tab" aria-selected="true" data-p="core">Core notes</button>
+<button role="tab" aria-selected="false" data-p="alike">Look-alikes</button>
+<button role="tab" aria-selected="false" data-p="mn">Mnemonics</button>
+<button role="tab" aria-selected="false" data-p="traps">Exam traps</button>
+<button role="tab" aria-selected="false" data-p="quiz">Quiz</button>
+<span class="sp"></span><button class="btn" id="th">Theme</button></div></div></div>
+
+<main class="wrap">
+
+<section class="panel on" id="core">
+<div class="strip">
+<div class="num"><b>139 / 140–184 / 185</b><span>50 g GCT cut-offs</span></div>
+<div class="num"><b>90·165·145·125</b><span>100 g GTT (2 abnormal)</span></div>
+<div class="num"><b>0.7 → 0.8 → 0.9–1</b><span>IU/kg insulin by trimester</span></div>
+<div class="num"><b>45 / 30 / 25 %</b><span>Carb / Fat / Protein</span></div>
+<div class="num"><b>HbA1c &gt; 7</b><span>last 4–12 weeks</span></div>
+<div class="num"><b>37–40 wk</b><span>delivery if no complications</span></div>
+</div>
+
+<details open><summary>Definitions &amp; pathophysiology</summary><div class="body"><ul>
+<li><b>DM:</b> metabolic syndrome – hyperglycemia + glycosuria, secondary effect on protein, lipids, electrolytes; due to <mark>↓ insulin secretion</mark> or <mark>↓ insulin responsiveness</mark>.</li>
+<li><b>GDM:</b> diagnosed in the <mark>2nd or 3rd trimester</mark>, not clearly overt diabetes before gestation. Cause: can’t keep adequate insulin response because insulin sensitivity drops as gestation advances.</li>
+<li>No insulin → glucose can’t enter muscle/fat cells → protein catabolism, ketosis, negative nitrogen balance → glucose rises → cellular water lost, glucosuria → extracellular dehydration (osmotic pressure).</li>
+<li><b>Pregnancy is diabetogenic:</b> hPL, estrogen, progesterone, cortisol, prolactin = insulin antagonists → ↑ resistance, ↓ tissue sensitivity.</li></ul>
+<div class="ar">السؤال الكلاسيكي: "ليه الحمل بيسبب سكر؟" الإجابة: 5 هرمونات (hPL, E, P, Cortisol, Prolactin) بيشتغلوا ضد الإنسولين.</div></div></details>
+
+<details><summary>Risk factors</summary><div class="body"><ul>
+<li>Family history of diabetes and hypertension</li><li>Obesity</li><li>Polyhydramnios</li>
+<li>Mother <mark>&gt; 45</mark> years or <mark>&lt; 20</mark> years (as written in the book)</li>
+<li>Multiparity</li><li>Repeated unexplained abortion or stillbirth</li><li>Previous macrosomic infant</li></ul>
+<div class="trap">الكتاب كاتب العمر "فوق 45 وتحت 20" – اكتبها زي الكتاب في الامتحان حتى لو شفتها في مصدر تاني 35.</div></div></details>
+
+<details><summary>Symptoms</summary><div class="body">
+<p>Most of the time <b>no noticeable symptoms</b>. Possible: increased thirst, polyuria, dry mouth, tiredness, blurred eyesight, genital itching or thrush.</p>
+<div class="ar">لو جالك سؤال "أغلب الحالات…" الإجابة: ما بتظهرش أعراض (asymptomatic).</div></div></details>
+
+<details><summary>Complications</summary><div class="body">
+<p><b>Maternal:</b> polyhydramnios, ↑ abortion, ↑ preeclampsia, ↑ perinatal mortality &amp; morbidity, preterm labor, infection, APH &amp; PPH, prolonged obstructed labor, puerperal sepsis.</p>
+<p><b>Fetal / neonatal:</b> fetal hyperglycemia or neonatal hypoglycemia, IUFD, congenital malformation, macrosomia, prematurity &amp; RDS, neonatal hyperbilirubinemia.</p>
+<div class="trap">Polyhydramnios بيظهر مرتين: risk factor وكمان maternal complication. ماتتلخبطش.</div></div></details>
+
+<details><summary>Newborn of GDM mother: problems &amp; characters</summary><div class="body">
+<table><tr><th>Problem</th><th>Because of</th></tr>
+<tr><td>Respiratory distress syndrome</td><td>prematurity</td></tr>
+<tr><td>Hypothermia</td><td>prematurity</td></tr>
+<tr><td>Hyperbilirubinemia</td><td>premature liver function</td></tr>
+<tr><td>Hypoglycemia</td><td>fetal hyperinsulinism</td></tr>
+<tr><td>Hypocalcemia</td><td>–</td></tr>
+<tr><td>Neonatal infection</td><td>susceptibility</td></tr>
+<tr><td>Bleeding tendencies</td><td>–</td></tr>
+<tr><td>Polycythemia</td><td>hypoxia of bone marrow → compensatory</td></tr>
+<tr><td>Birth trauma</td><td>oversized baby + prematurity</td></tr></table>
+<p><b>Characters:</b> oversized (<mark>4.5 kg</mark> = macrosomia), moon face, longer than usual, coated with vernix caseosa, large umbilical cord, large placenta, congenital anomalies may be present, hypertrophy of islets of Langerhans.</p></div></details>
+
+<details><summary>Diagnosis: GCT vs GTT</summary><div class="body">
+<p><b>1) Glucose challenge test (1-hour, 50 g oral):</b></p><ul>
+<li>≤ 139 mg/dl → negative, stop.</li><li>140–184 → positive → needs <b>3-hour 100 g OGTT</b>.</li><li>≥ 185 → <b>diagnostic</b>, no further test.</li></ul>
+<p><b>2) GTT:</b> done in the first part of the 3rd trimester. Fasting woman gets 100 g glucose orally; 4 samples (fasting, 1, 2, 3 h); <mark>two abnormal readings</mark> = positive.</p>
+<div class="sc"><table><tr><th>Fasting</th><th>1 h</th><th>2 h</th><th>3 h</th></tr><tr><td>90</td><td>165</td><td>145</td><td>125</td></tr></table></div>
+<div class="ar">كده عندك 3 مستويات للـ GCT و 4 أرقام للـ GTT – اكتبهم على ورقة وراجعهم قبل ما تدخل.</div></div></details>
+
+<details><summary>Nursing assessment</summary><div class="body"><ul>
+<li>Visits <b>every 2 weeks until 28 wk</b>, then <b>weekly until 36 wk</b>, then <b>hospitalized till delivery</b>.</li>
+<li>Screening at the <b>first prenatal visit</b> for women with risk factors; observe signs and symptoms in all pregnant women.</li>
+<li>Baseline vital signs, BP, fetal heart sounds – compare with later readings.</li>
+<li>Serum <b>AFP</b> for early detection of congenital malformation.</li>
+<li><b>HbA1c</b>: glycemic control over previous 4–12 weeks; &gt; 7 = elevated glucose.</li>
+<li>Ultrasound at <b>18 weeks</b>: confirm gestational age + detect congenital abnormalities.</li>
+<li>Assess fetal wellbeing and psycho-socioeconomic support (social, emotional, economic).</li></ul></div></details>
+
+<details><summary>Nursing intervention: nutrition</summary><div class="body"><ul>
+<li>Cut down sweets; 3 small meals + 1–3 snacks; fixed meal times; fiber from fruits, vegetables, whole grains.</li>
+<li>Normal-weight client: <b>2200–2500 kcal</b>. Carbs ≥ 45% (200–300 g), fat 30% (70–80 g), protein 25% (100–125 g).</li>
+<li><b>+30 g protein/day</b> in 2nd and 3rd trimesters. Nephropathy + proteinuria → extra protein.</li>
+<li>Distributed as 3 meals + 3 snacks, never less than <b>2000 kcal</b>/day.</li>
+<li>Complex carbs each meal (delay glucose absorption); adequate fat (delays gastric emptying, prevents hyperglycemia); <b>evening snack</b> of complex carb + protein prevents night hypoglycemia; avoid sweets.</li></ul>
+<div class="trap">الكتاب بيقول "3 meals + 1–3 snacks" في مكان و "3 meals + 3 snacks" في مكان تاني. لو الاختيارات فيها الاتنين، دور على الصياغة اللي في السؤال.</div></div></details>
+
+<details><summary>Insulin &amp; blood glucose monitoring</summary><div class="body"><ul>
+<li>Targets: <b>&lt; 95</b> on awakening, <b>&lt; 140</b> 1 h after meal, <b>&lt; 120</b> 2 h after meal.</li>
+<li>Check <b>4 times/day</b>: on rising, before lunch, before dinner, at bedtime. Keep a record and show the team.</li>
+<li>Insulin is <b>not harmful for the baby</b>; dose individualized by clinical picture + glucose results.</li>
+<li><b>1st trimester 0.7, 2nd 0.8, 3rd 0.9–1.0 IU/kg</b>. <b>2/3 in the morning, 1/3 in the evening</b>. Usually mixture: long-acting + short-acting.</li></ul></div></details>
+
+<details><summary>Exercise, delivery, breastfeeding</summary><div class="body"><ul>
+<li>Pregnancy is <b>not the time to start</b> vigorous exercise. Exercise lowers blood glucose.</li>
+<li>Well-controlled women who already exercise may continue; remind them to eat a carb or protein snack <b>before</b> activity.</li>
+<li>Stop exercise if <b>hypertensive complication</b> signs appear.</li>
+<li>Delivery: timing depends on complications; if none → term <b>37–40 wk</b>. Vaginal if practicable; C/S if urgent delivery needed or malpresentation.</li>
+<li>Diabetic mothers are <b>encouraged to breastfeed</b>.</li></ul></div></details>
+
+<details><summary>Care of the newborn</summary><div class="body">
+<table><tr><th>Give</th><th>To treat / prevent</th></tr>
+<tr><td>Oxygen (immediately)</td><td>RDS</td></tr><tr><td>Warmth</td><td>Hypothermia</td></tr>
+<tr><td>Phototherapy, phenobarbitone, exchange transfusion</td><td>Hyperbilirubinemia</td></tr>
+<tr><td>Glucose (immediately)</td><td>Hypoglycemia (fetal hyperinsulinism)</td></tr>
+<tr><td>Calcium</td><td>Hypocalcemia</td></tr>
+<tr><td>Prophylactic antibiotics</td><td>Infection</td></tr><tr><td>Vitamin K</td><td>Bleeding</td></tr></table></div></details>
+</section>
+
+<section class="panel" id="alike">
+<h2>Look-alikes: don’t mix these up</h2>
+<div class="ar">دي الأجزاء اللي الدكاترة بيحبوا يلعبوا فيها. كل صف = سؤال محتمل.</div>
+<div class="sc"><table><tr><th>Item A</th><th>Item B</th><th>The difference</th></tr>
+<tr><td>GCT (50 g)</td><td>GTT (100 g)</td><td>GCT = screening, 1 h, non-fasting cut-offs 139/140–184/185. GTT = confirmation, fasting + 3 h, 4 samples, 2 abnormal.</td></tr>
+<tr><td>140 in GCT</td><td>140 in monitoring</td><td>GCT: <b>140–184</b> = positive → do GTT. Monitoring: <b>&lt; 140</b> = target 1 h after a meal.</td></tr>
+<tr><td>90 (GTT fasting)</td><td>&lt; 95 (target fasting)</td><td>90 = abnormal cut-off in the test. 95 = goal during treatment.</td></tr>
+<tr><td>1 h: 165 (GTT)</td><td>1 h: 140 (target)</td><td>Different tests, different numbers.</td></tr>
+<tr><td>Fetal hyperglycemia</td><td>Neonatal hypoglycemia</td><td>Same sentence in the book: baby is high in utero (hyperinsulinism) then drops low after birth.</td></tr>
+<tr><td>Hyperbilirubinemia</td><td>Hypoglycemia</td><td>Bili = premature liver → phototherapy. Hypoglycemia = fetal hyperinsulinism → glucose.</td></tr>
+<tr><td>Polycythemia</td><td>Bleeding tendency</td><td>Polycythemia = hypoxia of bone marrow (compensatory). Bleeding → vitamin K.</td></tr>
+<tr><td>Hypothermia</td><td>RDS</td><td>Both “due to prematurity” – warmth vs oxygen.</td></tr>
+<tr><td>Macrosomia</td><td>Prematurity</td><td>Baby is oversized (4.5 kg) <b>and</b> can be premature – birth trauma is due to both.</td></tr>
+<tr><td>Calories 2200–2500</td><td>Min 2000</td><td>2200–2500 = normal-weight client. 2000 = never go below.</td></tr>
+<tr><td>Carbs 200–300 g</td><td>Protein 100–125 g</td><td>Carbs 45%, fat 30% (70–80 g), protein 25%.</td></tr>
+<tr><td>AFP</td><td>HbA1c</td><td>AFP = fetal malformation. HbA1c = glucose control 4–12 wk.</td></tr>
+<tr><td>Ultrasound 18 wk</td><td>Weekly visits till 36 wk</td><td>Don’t mix timings: 18 wk = scan, 28/36 = visit schedule.</td></tr></table></div>
+</section>
+
+<section class="panel" id="mn">
+<h2>Mnemonics for the hard parts</h2>
+<div class="grid">
+<div class="mn"><h3>Anti-insulin hormones</h3><div class="k">hPL + E + P + C + P</div><p>“Help! Every Pregnant Chick’s Pancreas” – hPL, Estrogen, Progesterone, Cortisol, Prolactin.</p></div>
+<div class="mn"><h3>Newborn problems</h3><div class="k">4H + RIBPT</div><p>4 H’s: Hypothermia, Hypoglycemia, Hypocalcemia, Hyperbilirubinemia. Then “RIBPT – Ribbit 🐸”: RDS, Infection, Bleeding, Polycythemia, Trauma.</p></div>
+<div class="mn"><h3>Newborn care order</h3><div class="k">O-W-P-G-C-A-K</div><p>“Oh Wow, Please Give Calcium And K” – Oxygen, Warmth, Phototherapy, Glucose, Calcium, Antibiotics, vitamin K.</p></div>
+<div class="mn"><h3>Glucose targets</h3><div class="k">95 – 140 – 120</div><p>Wake 95, then 1 h = 140, 2 h = 120. The 1 h number is always the biggest.</p></div>
+<div class="mn"><h3>Insulin per trimester</h3><div class="k">7 · 8 · 9</div><p>0.7, 0.8, 0.9–1.0 climbing with the weeks. Then 2/3 morning, 1/3 evening (“big breakfast, small dinner”).</p></div>
+<div class="mn"><h3>GCT cut-offs</h3><div class="k">139 · 140 · 185</div><p>139 = go home, 140 = go on to GTT, 185 = stop, it’s GDM.</p></div>
+<div class="mn"><h3>Macronutrients</h3><div class="k">45 · 30 · 25</div><p>Carbs &gt; Fat &gt; Protein, in the order C-F-P: 200–300 / 70–80 / 100–125 g.</p></div>
+<div class="mn"><h3>Visit schedule</h3><div class="k">2 – 28 | 1 – 36 | Hosp</div><p>Every 2 weeks until 28, every 1 week until 36, then hospital.</p></div>
+<div class="mn"><h3>GTT readings</h3><div class="k">90 · 165 · 145 · 125</div><p>Starts at 90, jumps to 165, then steps down by 20: 145, 125.</p></div>
+</div>
+<div class="ar">نصيحة: اكتب كل mnemonic بإيدك مرة واحدة. الإيد بتحفظ أحسن من العين.</div>
+</section>
+
+<section class="panel" id="traps">
+<h2>Exam traps (spot them before they spot you)</h2>
+<div class="trap">"Positive GCT" معناها 140–184 مش 185. لو الرقم 185 أو أكتر يبقى diagnostic ومفيش test تاني.</div>
+<div class="trap">GTT محتاج <b>two</b> abnormal readings مش واحدة.</div>
+<div class="trap">Insulin "harmful for the baby"؟ غلط. الكتاب: Insulin is <b>not</b> harmful for the baby.</div>
+<div class="trap">Hypoglycemia في الطفل سببها <b>fetal hyperinsulinism</b>. الـ prematurity سبب الـ RDS والـ hypothermia بس.</div>
+<div class="trap">Hyperbilirubinemia سببها premature <b>liver function</b> مش hyperinsulinism.</div>
+<div class="trap">Polycythemia سببها hypoxia of <b>bone marrow</b> (compensatory).</div>
+<div class="trap">Exercise: ممنوع تبدأ vigorous exercise في الحمل، لكن اللي كانت بتمارس وهي controlled تكمل.</div>
+<div class="trap">Snack قبل الرياضة = carbohydrate <b>or</b> protein. وsnack بالليل = complex carb <b>+</b> protein.</div>
+<div class="trap">Mode of delivery: vaginal لو مفيش complications. C/S لو urgent أو malpresentation.</div>
+<div class="trap">Breastfeeding: الأم السكرية <b>تتشجع</b> ترضّع، مش بتتمنع.</div>
+<div class="trap">Vitamin K للـ bleeding، calcium للـ hypocalcemia، glucose للـ hypoglycemia – ماتبدلش.</div>
+<div class="trap">Glucose target بعد الأكل بساعة &lt; 140، بعد ساعتين &lt; 120. ماتعكسهمش.</div>
+</section>
+
+<section class="panel" id="quiz">
+<h2>Quick quiz</h2>
+<div class="ar">جاوب من غير ما تبص فوق. لو غلطت، اقرا التفسير وكمل.</div>
+<div id="qs"></div><div id="score">Score: 0 / 0</div>
+</section>
+</main>
+
+<script>
+const Q=[
+["A 50 g glucose challenge test gives 150 mg/dl. What is next?",["Diagnostic of GDM, no more tests","Negative result","3-hour 100 g oral glucose tolerance test","Repeat the same test"],2,"140–184 = positive, so GTT is required."],
+["Which hormones make pregnancy diabetogenic?",["hPL, estrogen, progesterone, cortisol, prolactin","Insulin, glucagon, thyroxine","Oxytocin, FSH, LH","Aldosterone, ADH, calcitonin"],0,"They act as insulin antagonists."],
+["Insulin dose in the 3rd trimester?",["0.7 IU/kg","0.8 IU/kg","0.5 IU/kg","0.9–1.0 IU/kg"],3,"0.7 → 0.8 → 0.9–1.0, with 2/3 in the morning."],
+["Target blood glucose 2 hours after a meal?",["< 140 mg/dl","< 120 mg/dl","< 95 mg/dl","< 185 mg/dl"],1,"140 is for 1 hour, 120 for 2 hours."],
+["Neonatal hypoglycemia is due to:",["Premature liver function","Hypoxia of bone marrow","Fetal hyperinsulinism","Oversized baby"],2,"Treat it with glucose immediately after delivery."],
+["Hyperbilirubinemia in the newborn is due to:",["Premature liver function","Fetal hyperinsulinism","Hypoxia of bone marrow","Large placenta"],0,"Treat with phototherapy, phenobarbitone, exchange transfusion."],
+["Polycythemia in the newborn results from:",["Fetal hyperinsulinism","Prematurity","Oversized baby","Hypoxia of bone marrow (compensatory)"],3,"The bone marrow compensates for hypoxia."],
+["HbA1c above 7 reflects high glucose over:",["Last 1–2 weeks","Previous 4–12 weeks","Last 24 hours","Previous 6 months"],1,"HbA1c = glycemic control over 4–12 weeks."],
+["Antenatal visit schedule in GDM:",["Weekly until 28 wk then every 2 weeks","Every 4 weeks until 36 wk","Every 2 weeks until 28 wk, weekly until 36 wk, then hospitalized","Hospitalized from 28 wk"],2,"2 – 28 | 1 – 36 | hospital."],
+["Uncomplicated GDM: delivery timing?",["Term, 37–40 weeks","34 weeks","41–42 weeks","Always C/S at 36 weeks"],0,"Vaginal if practicable; C/S for urgency or malpresentation."]];
+let ok=0,done=0;const qs=document.getElementById("qs"),sc=document.getElementById("score");
+Q.forEach((q,i)=>{const d=document.createElement("div");d.className="q";
+d.innerHTML="<p>"+(i+1)+". "+q[0]+"</p>"+q[1].map((o,j)=>'<button class="o" data-j="'+j+'">'+"ABCD"[j]+") "+o+"</button>").join("")+'<div class="fb ar" dir="rtl"></div>';
+d.querySelectorAll(".o").forEach(b=>b.onclick=()=>{if(d.dataset.d)return;d.dataset.d=1;done++;const j=+b.dataset.j;
+d.querySelectorAll(".o")[q[2]].classList.add("ok");if(j===q[2])ok++;else b.classList.add("no");
+const f=d.querySelector(".fb");f.style.display="block";f.textContent=(j===q[2]?"تمام! ":"غلط. الصح: "+"ABCD"[q[2]]+". ")+q[3];sc.textContent="Score: "+ok+" / "+done});
+qs.appendChild(d)});
+const tabs=[...document.querySelectorAll(".tabs [data-p]")];
+tabs.forEach(t=>t.onclick=()=>{tabs.forEach(x=>x.setAttribute("aria-selected",x===t));
+document.querySelectorAll(".panel").forEach(p=>p.classList.toggle("on",p.id===t.dataset.p));scrollTo(0,0)});
+let mode=0;document.getElementById("th").onclick=()=>{mode=(mode+1)%3;
+const r=document.documentElement;r.removeAttribute("data-t");if(mode===1)r.dataset.t="d";if(mode===2)r.dataset.t="l"};
+</script>
+</body>
+</html>
