@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Toxemia of Pregnancy – Exam Night Revision</title>
+<style>
+:root{--bg:#0d1a27;--panel:#142638;--panel2:#1a3249;--ink:#e8f1f5;--mute:#93a9b8;--line:#25435c;--teal:#2bc4ab;--red:#ff6b5e;--amber:#f6b93b;--ok:#3ddc97;--r:14px}
+:root[data-theme=light]{--bg:#eef4f6;--panel:#fff;--panel2:#e3eef2;--ink:#12283a;--mute:#53697a;--line:#c7d8e0;--teal:#0f8f7b;--red:#d6402f;--amber:#b87a00;--ok:#14935b}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.65 "Segoe UI",Tahoma,"Noto Naskh Arabic",system-ui,sans-serif}
+header{padding:34px 20px 22px;max-width:1080px;margin:auto}
+h1{font:800 clamp(26px,5vw,44px)/1.1 Georgia,"Times New Roman",serif;margin:0 0 8px;letter-spacing:-.5px}
+header p{margin:0;color:var(--mute);max-width:680px}
+.bar{display:flex;gap:10px;flex-wrap:wrap;margin-top:16px}
+button{font:inherit;cursor:pointer}
+.chip{background:var(--panel);color:var(--ink);border:1px solid var(--line);border-radius:99px;padding:6px 14px;font-size:14px}
+.chip[aria-pressed=true]{background:var(--teal);color:#04201b;border-color:var(--teal);font-weight:700}
+nav{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 92%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line)}
+nav div{max-width:1080px;margin:auto;display:flex;gap:4px;overflow-x:auto;padding:8px 14px}
+nav button{background:none;border:0;color:var(--mute);padding:8px 14px;border-radius:10px;white-space:nowrap;font-weight:600}
+nav button.on{background:var(--panel2);color:var(--teal)}
+main{max-width:1080px;margin:auto;padding:22px 16px 80px}
+section{display:none}section.on{display:block}
+h2{font:700 24px Georgia,serif;margin:6px 0 4px}
+.sub{color:var(--mute);margin:0 0 18px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(235px,1fr));gap:12px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:14px 16px}
+.card small{color:var(--mute);display:block}
+.val{font:800 21px/1.25 Georgia,serif;color:var(--teal);margin:2px 0 6px}
+.tip{font-size:14px;color:var(--mute);border-top:1px dashed var(--line);padding-top:6px;margin-top:6px}
+.grp{margin:26px 0 10px;font-weight:700;color:var(--amber);font-size:15px}
+body.cram .val:not(.show){filter:blur(8px);cursor:pointer;user-select:none}
+.tw{overflow-x:auto;margin-bottom:26px;border:1px solid var(--line);border-radius:var(--r)}
+table{border-collapse:collapse;width:100%;min-width:620px;background:var(--panel)}
+th,td{padding:10px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--line);font-size:15px}
+th{background:var(--panel2);color:var(--teal);position:sticky;top:0}
+td:first-child{font-weight:700;white-space:nowrap}
+tr:last-child td{border-bottom:0}
+td em{color:var(--amber);font-style:normal;font-size:14px;display:block;margin-top:3px}
+.t{font-weight:700;margin:16px 0 8px}
+.mn{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:12px}
+.mn .card b.k{display:block;font:800 30px Georgia,serif;color:var(--amber);letter-spacing:1px}
+.mn li{margin:2px 0}.mn ul{padding-left:18px;margin:8px 0 0;font-size:15px}
+.trap{background:var(--panel);border:1px solid var(--line);border-left:5px solid var(--red);border-radius:var(--r);margin-bottom:10px}
+.trap button{all:unset;display:block;cursor:pointer;padding:13px 16px;width:100%;box-sizing:border-box;font-weight:700}
+.trap button:focus-visible,.chip:focus-visible,nav button:focus-visible,.opt:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.trap .a{display:none;padding:0 16px 14px;color:var(--ink)}
+.trap.open .a{display:block}.trap .a div{margin-top:6px}
+.bad{color:var(--red)}.good{color:var(--ok)}
+.q{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:20px;max-width:760px}
+.prog{height:6px;background:var(--panel2);border-radius:9px;overflow:hidden;margin-bottom:16px}
+.prog i{display:block;height:100%;background:var(--teal);width:0;transition:width .3s}
+.opt{display:block;width:100%;text-align:left;background:var(--panel2);color:var(--ink);border:2px solid transparent;border-radius:12px;padding:11px 14px;margin:8px 0}
+.opt:hover:not(:disabled){border-color:var(--teal)}
+.opt.right{border-color:var(--ok);background:color-mix(in srgb,var(--ok) 20%,var(--panel2))}
+.opt.wrong{border-color:var(--red);background:color-mix(in srgb,var(--red) 20%,var(--panel2))}
+.why{margin-top:10px;padding:10px 12px;border-radius:10px;background:var(--panel2);font-size:15px}
+.next{margin-top:14px;background:var(--teal);color:#04201b;border:0;border-radius:10px;padding:10px 20px;font-weight:800}
+.score{font:800 56px Georgia,serif;color:var(--teal)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header>
+<h1>Toxemia of Pregnancy (PIH)</h1>
+<p dir="auto">شطورة أوي </p>
+<div class="bar">
+<button class="chip" id="cram" aria-pressed="false"> hide answers</button>
+<button class="chip" id="theme">Light / Dark</button>
+</div>
+</header>
+<nav><div id="tabs"></div></nav>
+<main>
+<section id="s0"></section><section id="s1"></section><section id="s2"></section><section id="s3"></section><section id="s4"></section>
+</main>
+<script>
+const $=s=>document.querySelector(s);
+/* ---------- DATA ---------- */
+const MUST=[
+["Diagnosis",[
+["Hypertension","≥ 140/90 mmHg","لازم قراءتين، بينهم 6 ساعات أو أكتر، وهي في الوضع الجانبي أو semi-sitting."],
+["Proteinuria","> 0.3 g/L in 24-h urine","علامة متأخرة (Late sign)."],
+["Occult oedema","Weight gain ≥ 2 lb/week","الاستسقاء الخفي بيسبق الضغط. الـ clinical oedema بييجي بعده."],
+["Onset of PIH","After the 20th week","الـ chronic HTN: قبل الحمل أو في أول 20 أسبوع أو مستمر بعد 6 أسابيع postpartum."],
+["Incidence","Pre-eclampsia 5–10% • Eclampsia 1/1000–1/2000","النسبة eclampsia : pre-eclampsia = 1 : 100."],
+["HELLP: platelets","< 100,000 /mm³","Hemolytic anaemia + Elevated Liver enzymes + Low Platelets."]]],
+["Urine & Severity",[
+["Oliguria","< 500 cc/day","Anuria أقل من 100 cc/day. الطبيعي 1500 ml/day."],
+["Mild BP","140–160 / 90–110","Severe: ≥ 160 / ≥ 110."],
+["Mild urine","> 500 ml/24h • protein < 5 g • dipstick 1+/2+","Severe: ≤ 500 ml • ≥ 5 g • 3+/4+."],
+["Sulpho-salicylic test","10 drops + 5 ml clear urine","من غير تسخين. كثافة السحابة = كمية البروتين."]]],
+["Prevention & Care",[
+["Salt intake","3–4 g/day","Low carbohydrate، more protein، calcium & magnesium."],
+["Low-dose aspirin","40–100 mg orally/day","بيقلل thromboxane (vasoconstrictor)."],
+["Rest","2 h at day & 8 h at night, left side","علشان الرحم ما يضغطش على IVC."],
+["Observation","BP 2×/day • urine albumin daily • oedema daily • weight 2×/week • FHS 1×/day","وعند الدخول: blood picture, kidney functions, US, fetal wellbeing tests."],
+["Phenobarbitone","120–240 mg daily","Sedative في الـ pre-eclampsia."],
+["Timing of delivery","Severe: at once • Mild: end of 37th week","Mild بشرط المرض متسيطر عليه ومفيش complications."],
+["Steroids (IM)","Not more than 7 days before expected delivery","لتكوين surfactant ومنع RDS."]]],
+["Eclampsia",[
+["Fit stages","Premonitory 30 s • Tonic 30 s • Clonic 1–2 min • Coma 10–30 min","الـ opisthotonus والـ cyanosis في الـ Tonic."],
+["Types","Antepartum 65% • Intrapartum 20% • Postpartum 15%","Postpartum eclampsia خلال 10 أيام بس."],
+["Eden's criteria","SBP > 200 • Pulse > 120 • Temp > 39 • RR > 40 • Coma ≥ 6h • > 6 fits","كمان: dry eclampsia, anuria, jaundice, heart failure."],
+["Terminate pregnancy","If labour doesn't start within 12 h after fits are controlled and the fetus is alive","لو الجنين ميت: مفيش حاجة، نستنى spontaneous expulsion."]]],
+["MgSO4",[
+["Initial dose","4–6 g IV over 4–6 min (1 g/min)","Maintenance: 4 g IV drip every 4 h. Max: 24 g/24 h."],
+["Check BEFORE each dose","Knee jerk present • RR > 16/min • Urine > 30 ml/h","لو واحدة منهم ناقصة: متديش الجرعة."],
+["Antidote","Ca gluconate 10 ml of 10%","Absent reflexes = CNS depression."]]],
+["Health education",[
+["Fetal movement count","3 times/day for 20–30 min","نقص الحركة أو وقفها ممكن يكون fetal distress."],
+["Call the doctor if","Gain > 2 lb (0.9 kg)/week or 0.5 lb (0.23 kg)/day","نفس الميزان، نفس الوقت، نفس الهدوم."]]]
+];
+const LOOK=[
+{t:"1) Classification: who is who?",h:["Type","Defining feature","Memory trick"],r:[
+["Gestational HTN","HTN after 20 wk, previously normal BP, NO proteinuria / end-organ signs","HTN لوحدها = Gestational"],
+["Pre-eclampsia","HTN + proteinuria, oedema or both, after 20th wk","لازم HTN + حاجة"],
+["Eclampsia","Tonic-clonic seizure in pre-eclampsia, no other neurologic cause","Pre-eclampsia + Fit"],
+["Chronic HTN","Before pregnancy, or first 20 wk, or persists > 6 wk postpartum","كان موجود قبل الـ 20 أسبوع"],
+["Superimposed","Pre-eclampsia/eclampsia ON chronic HTN","Chronic + Pre-eclampsia"]]},
+{t:"2) The 3 cardinal signs",h:["","Hypertension","Oedema","Proteinuria"],r:[
+["Onset","Early sign","Occult before HTN, clinical after HTN","Late sign"],
+["Cause","Vasospasm of arterioles","↑ capillary permeability + salt & water retention","Vasoconstriction → glomerular ischemia"],
+["Diagnosed by","Sphygmomanometer, ≥ 2 readings 6 h apart","Periodic weight; oedema at ankle, leg, vulva, lower abdominal wall, face, hands","Boiling test, Sulpho-salicylic acid test"]]},
+{t:"3) Boiling test vs Sulpho-salicylic test",h:["","Boiling test","Sulpho-salicylic acid"],r:[
+["Specimen","Catheter specimen, 10 ml in test tube","5 ml clear urine"],
+["Technique","Heat upper 1/3 of the tube → cloud","Add 10 drops → white cloud, NO boiling"],
+["Interpretation","Add acetic acid: dissolves = phosphate • persists = albuminuria","Cloud density = traces, +, ++, +++, ++++"]]},
+{t:"4) Mild vs Severe pre-eclampsia",h:["","Mild","Severe"],r:[
+["BP","140–160 / 90–110","≥ 160 / ≥ 110"],
+["Symptoms","Absent","Present: headache, visual disturbance, epigastric pain, vaginal bleeding, ↓ fetal movement"],
+["Urine","> 500 ml/24h • < 5 g/24h • 1+/2+","≤ 500 ml/24h • ≥ 5 g/24h • 3+/4+"],
+["Delivery","End of 37th wk if controlled","At once"]]},
+{t:"5) Pre-eclampsia vs Eclampsia management",h:["","Pre-eclampsia","Eclampsia"],r:[
+["Position / room","Left side, rest 2 h day & 8 h night","Semi-Fowler (drain bronchial secretions), single quiet semi-dark room"],
+["Diet","Salt free / minimal (3–4 g), low CHO, more protein","Nothing per mouth"],
+["Sedative","Phenobarbitone 120–240 mg","Morphine 10–20 IM"],
+["Antihypertensive","Aldomet, Atenolol","Aldomet, Atenolol, Hydralazine"],
+["Extra drugs","Diuretic: Frusemide (Lasix)","Glucose, Atropine, Digitalis"],
+["MgSO4","Imminent eclampsia only (p.179)","Basic drug, aim: prevent convulsions"],
+["Terminate","Severe at once • Mild at 37 wk","If no labour 12 h after fits controlled and fetus alive"],
+["Observe","BP, urine albumin, oedema, weight, FHS","No. of convulsions, duration of coma, T/BP/P/R, urine, fetus living or dead"]]},
+{t:"6) Headache & symptoms: the cause",h:["Symptom","Cause"],r:[
+["Occipital headache","Hypertension"],["Frontal headache","Cerebral oedema"],
+["Eye symptoms (blur, flashes, blindness)","Vascular spasm, haemorrhage, exudates, retinal detachment"],
+["Nausea & vomiting","Cerebral oedema, gastric oedema"],
+["Epigastric pain","Rapid liver enlargement, stretched capsule (subcapsular haemorrhage), capsule rupture"],
+["Oliguria / anuria","Renal affection"]]}
+];
+const MNE=[
+["GIP-C","Why is it a 'disease of theories'?",["Genetic","Immunological","Prostaglandin","Calcium (hypocalcaemia)"],"G.I. Pre-eclampsia Care."],
+["H-E-P","Order of the cardinal signs",["Hypertension = early","Edema = middle (occult before HTN)","Proteinuria = late"],"اتسلسلوا زي كلمة HEP: الضغط الأول، البروتين آخر واحد."],
+["H.EL.LP","HELLP syndrome",["Hemolytic anaemia","Elevated Liver enzymes","Low Platelets < 100,000"],"الاسم نفسه هو الحل."],
+["K-R-U","Before EVERY MgSO4 dose",["Knee jerk present","Respiration > 16","Urine > 30 ml/h"],"كرو: لو ناقص واحدة، وقف. والترياق: Calcium Cancels Magnesium."],
+["30·30·2·30","Eclamptic fit durations",["Premonitory 30 s","Tonic 30 s","Clonic 1–2 min","Coma 10–30 min"],"تلاتين، تلاتين، دقيقتين، تلاتين: الـ Clonic هو الأطول في الـ fit والـ Coma أطول من الكل."],
+["65·20·15","Eclampsia types",["Antepartum 65%","Intrapartum 20%","Postpartum 15%"],"A-I-P ترتيب نزولي. وPostpartum لحد 10 أيام بس."],
+["200·120·39·40·6·6","Eden's criteria",["SBP > 200","Pulse > 120","Temp > 39","RR > 40","Coma ≥ 6 h","> 6 convulsions"],"حفظ الأرقام بالترتيب. الباقي: dry eclampsia, anuria, jaundice, heart failure."],
+["HFE","Maternal complications",["Haemorrhage (accidental, cerebral)","Failure (renal, heart, liver, suprarenal)","Eclampsia"],"في الـ eclampsia بيتضاف: aspiration pneumonia + maternal hypoxia."],
+["A-PCC-UFO-LF","Risk factors",["Age (very young / very old)","Parity (primigravida)","Chronic HTN","Chronic nephritis","Uterine overdistension (DM, polyhydramnios, twins, mole)","Fetal hydrops","Obesity","Low socioeconomic / malnutrition","Family history"],"Uterine overdistension بتاخد 4 أمثلة: DM, polyhydramnios, multiple pregnancy, vesicular mole."],
+["ERGO ↑","No ergometrine!",["Causes vasoconstriction","Worsens PIH","May lead to eclampsia and cerebral haemorrhage","Only allowed in PPH"],"الـ ergometrine بيرفع الضغط. في الـ 3rd و 4th stage ممنوع إلا لو PPH."],
+["Left = Liver-safe","Why left side-lying?",["Gravid uterus doesn't compress IVC","↑ uterine & placental blood flow","Promotes diuresis, ↓ BP"],"في الـ convulsion: لف المريضة على جنبها لما الـ tonic phase يبدأ يهدى."]
+];
+const TRAPS=[
+["Is oedema a diagnostic sign?","Recently oedema has <b>no diagnostic or prognostic value</b> (present in 50% of normal pregnant women). لكن لسه جزء من الـ definition كـ cardinal sign. لو السؤال 'recently' = مش diagnostic."],
+["MgSO4: 'imminent eclampsia only' or 'severe, imminent, eclampsia'?","الكتاب قال في p.179 (medical measures في pre-eclampsia): <b>imminent eclampsia only</b>. وفي p.187 (indications in PIH): <b>severe pre-eclampsia, imminent eclampsia, eclampsia</b>. شوف السؤال بيتكلم عن إيه، ولو سؤال الـ indications العام اختار الـ 3."],
+["Postpartum convulsion after 10 days","<b>Not eclampsia</b>. Postpartum eclampsia خلال 10 أيام بس. بعد كده يبقى other neurological lesion."],
+["Which position?","Pre-eclampsia: <b>left side-lying</b>. Eclampsia: <b>semi-Fowler</b> in bed. During the convulsion: turn her <b>on her side</b>. لا تلخبط بين التلاتة."],
+["Diet: pre-eclampsia vs eclampsia","Pre-eclampsia: salt free or minimal (3–4 g/day). Eclampsia: <b>Nothing per mouth</b>. مش 'low salt' في الـ eclampsia."],
+["Sedative: which one?","Pre-eclampsia → <b>phenobarbitone 120–240 mg</b>. Eclampsia → <b>morphine 10–20 IM</b>."],
+["Ergometrine","<span class='bad'>Contraindicated</span> in 3rd and 4th stage <b>except if PPH</b>. Don't write 'always avoid'."],
+["Proteinuria vs BP: which is late?","Proteinuria = <b>late</b>. HTN = <b>early</b>. Occult oedema قبل الـ HTN."],
+["Boiling test: cloud dissolves after acetic acid","= <b>phosphate</b>. If it persists = <b>albuminuria</b>. السؤال بيقلبها عليك."],
+["Dead fetus in eclampsia","Nothing is done, <b>wait for spontaneous expulsion</b>. التدخل للـ termination لما الجنين عايش."],
+["Absent knee jerk during MgSO4","<b>Do NOT give the next dose</b>. Absent reflexes = CNS depression. Antidote: Ca gluconate 10 ml of 10%."],
+["Dry eclampsia","= <b>absence of oedema</b>, and it is one of Eden's criteria for SEVERE eclampsia."],
+["Corticosteroids timing","IM, as prescribed, <b>not more than 7 days</b> before the expected delivery. Purpose: surfactant → avoid RDS."],
+["Ratios","Pre-eclampsia 1/10–1/20 • Eclampsia 1/1000–1/2000 • <b>Eclampsia : Pre-eclampsia = 1 : 100</b>."],
+["Typos inside the book (don't panic)","جدول mild/severe مكتوب فيه 'Systolic' مرتين: التاني هو <b>Diastolic</b> (90–110 / ≥ 110). و'Mg SO2' المقصود بيها <b>MgSO4</b>. و Lasix مكتوبة '40 gm/day' في الكتاب. اكتبها زي الكتاب في امتحان الكتاب، بس افهم إن ده غلط طباعة."]
+];
+const QZ=[
+["BP 150/95 at 28 weeks, previously normal, no proteinuria, no symptoms. Diagnosis?",["Chronic hypertension","Pre-eclampsia","Gestational hypertension","Superimposed pre-eclampsia"],2,"HTN after 20 wk without proteinuria or end-organ signs = gestational hypertension."],
+["Which cardinal sign is the LATE one?",["Proteinuria","Hypertension","Occult oedema","Clinical oedema"],0,"HTN early، oedema in between، proteinuria late."],
+["Proteinuria is diagnosed by more than:",["0.1 g/L in 24 h","0.5 g/L in spot urine","3 g/L in 24 h","0.3 g/L in 24-h urine collection"],3,"> 0.3 gm/L in a 24 hrs urine collection."],
+["In the boiling test, the cloud persists after acetic acid. It is:",["Phosphate","Albuminuria","Bile salts","Glucose"],1,"Dissolves = phosphate. Persists = albuminuria."],
+["Dipstick of SEVERE pre-eclampsia:",["1+ / 2+","Trace","3+ / 4+","Negative"],2,"Mild 1+/2+. Severe 3+/4+."],
+["Opisthotonus and cyanosis appear in which stage of the fit?",["Tonic","Premonitory","Clonic","Coma"],0,"Tonic stage: back muscles (opisthotonus) and respiratory muscles (cyanosis)."],
+["MgSO4 initial dose:",["2 g IM once","10 g over 30 min","24 g over 24 h","4–6 g IV over 4–6 min"],3,"Initial 4–6 g IV (1 g/min). Maintenance 4 g every 4 h. Max 24 g/24 h."],
+["Antidote of MgSO4 toxicity:",["Atropine","Calcium gluconate 10 ml 10%","Naloxone","Vitamin K"],1,"Calcium gluconate."],
+["Convulsion on day 12 postpartum in a woman who had pre-eclampsia:",["Probably another neurological lesion","Postpartum eclampsia","Intrapartum eclampsia","Antepartum eclampsia"],0,"Postpartum eclampsia occurs within 10 days only."],
+["Which drug is avoided in the 3rd and 4th stage unless there is PPH?",["Magnesium sulphate","Aldomet","Ergometrine","Calcium gluconate"],2,"Ergometrine → vasoconstriction → worsens PIH → eclampsia / cerebral haemorrhage."],
+["Diet of a woman with eclampsia:",["Salt-free diet","Nothing per mouth","High carbohydrate diet","Low protein diet"],1,"Eclampsia: nothing per mouth."],
+["Fetus alive, fits controlled, labour has not started. Terminate pregnancy after:",["6 hours","24 hours","48 hours","12 hours"],3,"If labour does not start within 12 hours after control of convulsions and the fetus is alive."]
+];
+/* ---------- UI ---------- */
+const TABS=["Must-Know","Look-Alikes","Mnemonics","Exam Traps","Quiz"];
+$("#tabs").innerHTML=TABS.map((t,i)=>`<button data-i="${i}">${t}</button>`).join("");
+function show(i){document.querySelectorAll("section").forEach((s,j)=>s.classList.toggle("on",i==j));document.querySelectorAll("nav button").forEach((b,j)=>b.classList.toggle("on",i==j));scrollTo(0,0)}
+$("#tabs").onclick=e=>{if(e.target.dataset.i)show(+e.target.dataset.i)};
+$("#s0").innerHTML=`<h2>Must-Know Numbers</h2><p class="sub" dir="auto">الأرقام اللي بتيجي في الامتحان. فعّل Cram mode فوق، وكل رقم هيتغبش لحد ما تدوس عليه.</p>`+
+MUST.map(([g,a])=>`<div class="grp">${g}</div><div class="grid">`+a.map(([l,v,t])=>`<div class="card"><small>${l}</small><div class="val">${v}</div><div class="tip" dir="auto">${t}</div></div>`).join("")+`</div>`).join("");
+$("#s1").innerHTML=`<h2>Look-Alikes</h2><p class="sub" dir="auto">الحاجات المتشابهة جنب بعض. اللي بيتلخبط فيها الطلبة بيتحط فيها السؤال.</p>`+
+LOOK.map(x=>`<div class="t">${x.t}</div><div class="tw"><table><tr>${x.h.map(h=>`<th>${h}</th>`).join("")}</tr>${x.r.map(r=>`<tr>${r.map((c,i)=>`<td${/[\u0600-\u06FF]/.test(c)?' dir="auto"':''}>${c}</td>`).join("")}</tr>`).join("")}</table></div>`).join("");
+$("#s2").innerHTML=`<h2>Mnemonics</h2><p class="sub" dir="auto">كل مونيمك معاه الشرح بالمصري. الأرقام والمصطلحات مطابقة للكتاب.</p><div class="mn">`+
+MNE.map(([k,t,l,a])=>`<div class="card"><b class="k">${k}</b><b>${t}</b><ul>${l.map(i=>`<li>${i}</li>`).join("")}</ul><div class="tip" dir="auto">${a}</div></div>`).join("")+`</div>`;
+$("#s3").innerHTML=`<h2>Exam Traps</h2><p class="sub" dir="auto">دوس على السؤال عشان تشوف الفخ. قبل ما تدوس، جاوب في دماغك.</p>`+
+TRAPS.map(([q,a])=>`<div class="trap"><button aria-expanded="false">${q}</button><div class="a" dir="auto">${a}</div></div>`).join("");
+$("#s3").onclick=e=>{const b=e.target.closest(".trap button");if(b){const p=b.parentNode;b.setAttribute("aria-expanded",p.classList.toggle("open"))}};
+/* Quiz */
+let qi=0,sc=0;
+function quiz(){const s=$("#s4");
+if(qi>=QZ.length){const p=Math.round(sc/QZ.length*100);s.innerHTML=`<h2>Quiz</h2><div class="q"><div class="score">${sc}/${QZ.length}</div><p dir="auto">${p>=85?"ممتاز! أنت جاهز.":p>=60?"كويس، راجع الفخاخ والمتشابهات تاني.":"ارجع للـ Must-Know والمونيمك وجرب تاني."}</p><button class="next" id="rs">Restart quiz</button></div>`;$("#rs").onclick=()=>{qi=0;sc=0;quiz()};return}
+const [q,o,a,w]=QZ[qi];
+s.innerHTML=`<h2>Quiz</h2><p class="sub">Question ${qi+1} of ${QZ.length} • Score ${sc}</p><div class="q"><div class="prog"><i style="width:${qi/QZ.length*100}%"></i></div><b>${q}</b>${o.map((x,i)=>`<button class="opt" data-i="${i}">${x}</button>`).join("")}<div id="fb"></div></div>`;
+s.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{const c=+b.dataset.i;if(c==a)sc++;
+s.querySelectorAll(".opt").forEach((x,i)=>{x.disabled=true;if(i==a)x.classList.add("right");else if(i==c)x.classList.add("wrong")});
+$("#fb").innerHTML=`<div class="why"><b class="${c==a?"good":"bad"}">${c==a?"Correct":"Not quite"}.</b> ${w}</div><button class="next" id="nx">${qi==QZ.length-1?"See score":"Next question"}</button>`;
+$("#nx").onclick=()=>{qi++;quiz()}})}
+quiz();
+/* Controls */
+$("#cram").onclick=e=>{const on=document.body.classList.toggle("cram");e.target.setAttribute("aria-pressed",on);document.querySelectorAll(".val").forEach(v=>v.classList.remove("show"))};
+document.addEventListener("click",e=>{if(e.target.classList.contains("val"))e.target.classList.toggle("show")});
+$("#theme").onclick=()=>{const r=document.documentElement;r.dataset.theme=r.dataset.theme=="light"?"dark":"light"};
+if(matchMedia("(prefers-color-scheme: light)").matches)document.documentElement.dataset.theme="light";
+show(0);
+</script>
+</body>
+</html>
