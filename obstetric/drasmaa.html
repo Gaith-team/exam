@@ -5,10 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title> GHAITH TEAM</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&family=Amiri:wght@400;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
 <style>
+html { scroll-behavior: auto; overflow-anchor: none; }
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
 :root {
@@ -141,16 +142,6 @@ nav {
   background: linear-gradient(90deg, var(--accent), var(--accent-light));
   border-radius: 8px; transition: width .4s;
 }
-.timer-badge {
-  min-width: 64px; height: 36px; border-radius: 18px;
-  background: var(--bg2); border: 1px solid var(--bc);
-  display: flex; align-items: center; justify-content: center;
-  font-size: 14px; font-weight: 900; color: var(--text);
-  gap: 5px; padding: 0 12px; flex-shrink: 0;
-}
-.timer-badge.warn { color: var(--warn); border-color: rgba(217,119,6,.3); background: rgba(217,119,6,.08); }
-.timer-badge.danger { color: var(--danger); border-color: rgba(220,38,38,.3); background: rgba(220,38,38,.08); animation: pulse .8s infinite; }
-@keyframes pulse { 0%,100%{opacity:1} 50%{opacity:.6} }
 
 /* QUESTION CARD */
 .q-card {
@@ -195,18 +186,10 @@ nav {
   font-size: 12px; font-weight: 900; color: var(--text3);
   transition: var(--tr);
 }
-.opt.correct {
-  border-color: var(--success); background: rgba(22,163,74,.08);
-}
-.opt.correct .opt-letter {
-  background: var(--success); color: #fff; border-color: var(--success);
-}
-.opt.wrong {
-  border-color: var(--danger); background: rgba(220,38,38,.07);
-}
-.opt.wrong .opt-letter {
-  background: var(--danger); color: #fff; border-color: var(--danger);
-}
+.opt.correct { border-color: var(--success); background: rgba(22,163,74,.08); }
+.opt.correct .opt-letter { background: var(--success); color: #fff; border-color: var(--success); }
+.opt.wrong { border-color: var(--danger); background: rgba(220,38,38,.07); }
+.opt.wrong .opt-letter { background: var(--danger); color: #fff; border-color: var(--danger); }
 .opt.disabled { pointer-events: none; }
 
 /* FEEDBACK */
@@ -224,7 +207,7 @@ nav {
 /* EXPLANATION */
 .explanation {
   margin: 0 18px 14px; padding: 12px 14px;
-  background: rgba(var(--accent-rgb),.06);
+  background: var(--bg2);
   border-radius: 10px; border-right: 3px solid var(--accent);
   font-size: 13px; color: var(--text2); line-height: 1.6;
   display: none;
@@ -300,6 +283,28 @@ nav {
 .btn-home { background: var(--bg2); color: var(--text); border: 1px solid var(--bc); }
 .btn-home:hover { border-color: var(--accent); color: var(--accent); }
 
+/* BOOST (قرآن / تحفيز كل 10 دقايق) */
+#boost {
+  position: fixed; left: 50%; bottom: 24px;
+  transform: translate(-50%, 30px); opacity: 0;
+  width: min(92vw, 460px); z-index: 1000;
+  padding: 16px 18px; border-radius: 16px;
+  background: var(--card); border: 1.5px solid var(--accent); color: var(--text);
+  box-shadow: 0 10px 40px var(--accent-glow);
+  text-align: center; direction: rtl;
+  transition: all .5s cubic-bezier(.34,1.56,.64,1);
+  pointer-events: none;
+}
+#boost.show { opacity: 1; transform: translate(-50%, 0); pointer-events: auto; }
+#boost .b-tag { font-size: 11px; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
+#boost .b-txt { font-size: 17px; font-weight: 700; line-height: 1.9; }
+#boost .b-src { font-size: 12px; color: var(--text3); margin-top: 6px; }
+#boost .b-x {
+  position: absolute; top: 6px; left: 10px; background: none; border: none;
+  color: var(--text3); font-size: 16px; cursor: pointer;
+}
+#boost.quran .b-txt { font-family: 'Amiri','Traditional Arabic',serif; font-size: 21px; }
+
 /* FOOTER */
 footer {
   background: var(--bg2); border-top: 1px solid var(--bc);
@@ -339,7 +344,6 @@ footer {
   <p>تمريض النساء والتوليد</p>
   <div class="hero-band-meta">
     <div class="meta-pill"><i class="fa-solid fa-list-ol"></i> <span id="totalBadge">-- سؤال</span></div>
-    <div class="meta-pill"><i class="fa-solid fa-clock"></i> 500 Min</div>
     <div class="meta-pill"><i class="fa-solid fa-shuffle"></i> Shuffled</div>
   </div>
 </div>
@@ -365,12 +369,13 @@ footer {
   <div class="prog-strip">
     <div class="prog-label" id="progLabel">سؤال ١</div>
     <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
-    <div class="timer-badge" id="timerBadge"><i class="fa-regular fa-clock"></i> <span id="timerTxt">500:00</span></div>
   </div>
 
   <!-- APP -->
   <div id="app"></div>
 </div>
+
+<div id="boost"></div>
 
 <footer>
   <div class="footer-brand">GHAITH <span>TEAM</span></div>
@@ -688,7 +693,6 @@ const QUESTIONS = [
 
 /* ============ ENGINE ============ */
 let questions, i, correct, wrong, answers, wrongSet, answered;
-let totalTime = 500*60, timeLeft, timerInterval;
 const LETTERS = ['A','B','C','D','E','F'];
 
 function shuffle(arr) {
@@ -704,24 +708,70 @@ function init(pool) {
   i = 0; correct = 0; wrong = 0;
   answers = new Array(questions.length).fill(null);
   wrongSet = []; answered = 0;
-  timeLeft = totalTime;
   document.getElementById('totalBadge').textContent = questions.length + ' سؤال';
-  startTimer();
+  startBoost();
+  resetApp();
   render();
 }
 
-/* TIMER */
-function startTimer() {
-  clearInterval(timerInterval);
-  timerInterval = setInterval(() => {
-    timeLeft--;
-    const m = Math.floor(timeLeft / 60), s = timeLeft % 60;
-    document.getElementById('timerTxt').textContent = `${m}:${s < 10 ? '0' : ''}${s}`;
-    const badge = document.getElementById('timerBadge');
-    if (timeLeft <= 120) { badge.className = 'timer-badge danger'; }
-    else if (timeLeft <= 300) { badge.className = 'timer-badge warn'; }
-    if (timeLeft <= 0) { clearInterval(timerInterval); finish(); }
-  }, 1000);
+/* ============ BOOST: قرآن / جملة تحفيزية كل 10 دقايق ============ */
+const BOOST_EVERY_MS = 10 * 60 * 1000;
+const QURAN = [
+  {t:"فَإِنَّ مَعَ الْعُسْرِ يُسْرًا ۝ إِنَّ مَعَ الْعُسْرِ يُسْرًا", s:"سورة الشرح"},
+  {t:"وَقُل رَّبِّ زِدْنِي عِلْمًا", s:"سورة طه"},
+  {t:"إِنَّ اللَّهَ مَعَ الصَّابِرِينَ", s:"سورة البقرة"},
+  {t:"وَمَن يَتَوَكَّلْ عَلَى اللَّهِ فَهُوَ حَسْبُهُ", s:"سورة الطلاق"},
+  {t:"لَا يُكَلِّفُ اللَّهُ نَفْسًا إِلَّا وُسْعَهَا", s:"سورة البقرة"},
+  {t:"وَأَن لَّيْسَ لِلْإِنسَانِ إِلَّا مَا سَعَىٰ", s:"سورة النجم"},
+  {t:"وَاصْبِرْ فَإِنَّ اللَّهَ لَا يُضِيعُ أَجْرَ الْمُحْسِنِينَ", s:"سورة هود"},
+  {t:"وَلَا تَهِنُوا وَلَا تَحْزَنُوا وَأَنتُمُ الْأَعْلَوْنَ إِن كُنتُم مُّؤْمِنِينَ", s:"سورة آل عمران"},
+  {t:"إِنَّ اللَّهَ لَا يُغَيِّرُ مَا بِقَوْمٍ حَتَّىٰ يُغَيِّرُوا مَا بِأَنفُسِهِمْ", s:"سورة الرعد"},
+  {t:"وَاللَّهُ يُحِبُّ الصَّابِرِينَ", s:"سورة آل عمران"}
+];
+const MOTIVATE = [
+  "كمّل يا بطل، كل سؤال بتحله بيقربك من النجاح 💪",
+  "التعب النهارده هو فرحتك بكرة، متوقفش دلوقتي 🔥",
+  "إنت أقرب للهدف مما تتخيل، خد نفس وكمّل 🌟",
+  "اللي بيذاكر بجد عمره ما بيندم، كمّل 📚",
+  "ركّز شوية كمان، المجهود ده مش هيضيع أبدًا ✨",
+  "ممرض شاطر في المستقبل بيبدأ من مذاكرة النهارده 🩺",
+  "مفيش حاجة اسمها مستحيل، في بس لسه ما حاولتش كفاية 🚀",
+  "خطوة خطوة وهتوصل، المهم متوقفش ❤️",
+  "كل غلطة بتتعلم منها النهارده هتبقى إجابة صح في الامتحان 🎯",
+  "فخور بيك إنك لسه مكمّل، كمّل للآخر 🏆"
+];
+
+let boostInterval, boostHideT, boostCount = 0, qi = 0, mi = 0;
+const qOrder = shuffle([...QURAN.keys()]);
+const mOrder = shuffle([...MOTIVATE.keys()]);
+
+function showBoost() {
+  boostCount++;
+  const box = document.getElementById('boost');
+  const closeBtn = `<button class="b-x" onclick="document.getElementById('boost').classList.remove('show')">✕</button>`;
+  if (boostCount % 2 === 1) {            // الأولى قرآن، التانية تحفيز، وهكذا
+    const q = QURAN[qOrder[qi++ % qOrder.length]];
+    box.className = 'quran';
+    box.innerHTML = `${closeBtn}<div class="b-tag">📖 آية</div><div class="b-txt">﴿ ${q.t} ﴾</div><div class="b-src">${q.s}</div>`;
+  } else {
+    const m = MOTIVATE[mOrder[mi++ % mOrder.length]];
+    box.className = '';
+    box.innerHTML = `${closeBtn}<div class="b-tag">💡 تحفيز</div><div class="b-txt">${m}</div>`;
+  }
+  requestAnimationFrame(() => box.classList.add('show'));
+  clearTimeout(boostHideT);
+  boostHideT = setTimeout(() => box.classList.remove('show'), 12000);
+}
+
+function startBoost() {
+  clearInterval(boostInterval);
+  boostCount = 0;
+  document.getElementById('boost').classList.remove('show');
+  boostInterval = setInterval(showBoost, BOOST_EVERY_MS);
+}
+function stopBoost() {
+  clearInterval(boostInterval);
+  document.getElementById('boost').classList.remove('show');
 }
 
 /* TOP UI */
@@ -736,27 +786,26 @@ function updateTop() {
 }
 
 /* RENDER QUESTION */
+function resetApp() {
+  const app = document.getElementById('app');
+  app.innerHTML = '';
+  app.style.minHeight = '';
+}
 function render() {
   updateTop();
   const q = questions[i];
-  document.getElementById('app').innerHTML = `
+  const app = document.getElementById('app');
+  const y = window.scrollY;
+  if (app.offsetHeight) app.style.minHeight = app.offsetHeight + 'px'; /* الارتفاع ما بينزلش */
+  app.innerHTML = `
     <div class="q-card">
       <div class="q-header">
         <div class="q-num">سؤال ${i + 1} / ${questions.length}</div>
       </div>
-   <div class="q-text">
-  ${q.s ? `<div style="margin-bottom:14px;
-    padding:12px;
-    background:var(--bg2);
-    border-radius:12px;
-    font-size:13px;
-    line-height:1.8;
-    color:var(--text2);">
-    ${q.s}
-  </div>` : ''}
-
-  ${q.t}
-</div>
+      <div class="q-text">
+        ${q.s ? `<div style="margin-bottom:14px;padding:12px;background:var(--bg2);border-radius:12px;font-size:13px;line-height:1.8;color:var(--text2);">${q.s}</div>` : ''}
+        ${q.t}
+      </div>
       <div class="options">
         ${q.o.map((o, idx) => `
           <div class="opt" id="opt${idx}" onclick="choose(${idx})">
@@ -769,6 +818,7 @@ function render() {
         <button class="btn btn-skip" onclick="skip()"><i class="fa-solid fa-forward"></i> تخطي</button>
       </div>
     </div>`;
+  window.scrollTo(0, y); /* نفس مكان السكرول بالظبط */
 }
 
 /* CHOOSE */
@@ -816,15 +866,15 @@ function skip() {
   next();
 }
 
-/* NEXT */
+/* NEXT — من غير أي سكرول: الشاشة تفضل ثابتة */
 function next() {
-  if (i < questions.length - 1) { i++; render(); window.scrollTo({top: 0, behavior: 'smooth'}); }
+  if (i < questions.length - 1) { i++; render(); }
   else finish();
 }
 
 /* FINISH */
 function finish() {
-  clearInterval(timerInterval);
+  stopBoost();
   const total = questions.length;
   const score = Math.round((correct / total) * 100);
 
@@ -854,6 +904,7 @@ function finish() {
   }).join('');
 
   document.getElementById('prog-bar').style.width = '100%';
+  document.getElementById('app').style.minHeight = '';
   document.getElementById('app').innerHTML = `
     <div class="result-hero">
       <div class="score-ring">
@@ -894,9 +945,8 @@ function retryWrong() {
   const pool = [...wrongSet];
   questions = shuffle(pool); i = 0; correct = 0; wrong = 0;
   answers = new Array(questions.length).fill(null);
-  wrongSet = []; answered = 0; timeLeft = totalTime;
-  startTimer(); render();
-  window.scrollTo({top: 0, behavior: 'smooth'});
+  wrongSet = []; answered = 0;
+  startBoost(); resetApp(); render();
 }
 
 /* THEME */
