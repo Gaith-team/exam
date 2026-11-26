@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ar" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>GHAITH TEAM</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--accent:#0f766e;--c2:#4338ca;--c3:#d97706;--c4:#e11d48;--grad:linear-gradient(135deg,#134e4a 0%,#0f766e 40%,#4338ca 100%);--bg:#f4f9f8;--bg2:#e6f1ef;--card:#fff;--text:#10262a;--text2:#41585b;--text3:#738b8e;--bc:rgba(15,70,70,.12)}
+:root[data-theme="dark"]{--bg:#08161a;--bg2:#0f2227;--card:#142a30;--text:#e8f5f3;--text2:#b5d0cd;--text3:#7f9c99;--bc:rgba(255,255,255,.1);--accent:#2dd4bf;--c2:#818cf8;--c3:#fbbf24;--c4:#fb7185}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#08161a;--bg2:#0f2227;--card:#142a30;--text:#e8f5f3;--text2:#b5d0cd;--text3:#7f9c99;--bc:rgba(255,255,255,.1);--accent:#2dd4bf;--c2:#818cf8;--c3:#fbbf24;--c4:#fb7185}}
+:root{box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+html{scroll-padding-top:80px;scroll-behavior:smooth}
+body{font-family:'Outfit','Segoe UI',Tahoma,sans-serif;background:var(--bg);color:var(--text);line-height:1.7;overflow-x:hidden}
+#pb{position:fixed;top:env(safe-area-inset-top,0px);left:0;height:3px;width:0;z-index:99;background:linear-gradient(90deg,var(--accent),var(--c3),var(--c4),var(--c2))}
+nav{position:sticky;top:env(safe-area-inset-top,0px);z-index:50;display:flex;justify-content:space-between;align-items:center;padding:10px 18px;background:var(--card);border-bottom:1px solid var(--bc)}
+.brand{display:flex;align-items:center;gap:9px;font-weight:900}
+.logo{width:32px;height:32px;border-radius:8px;background:var(--grad);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px}
+.tb{width:36px;height:36px;border-radius:50%;border:1px solid var(--bc);background:var(--bg);cursor:pointer;font-size:15px}
+.hero{background:var(--grad);color:#fff;text-align:center;padding:36px 18px 40px}
+.hero .ic{font-size:44px}.hero h1{font-size:clamp(22px,5vw,32px);font-weight:900;margin:6px 0 4px}.hero p{opacity:.9;font-size:13px}
+.shell{max-width:760px;margin:0 auto;padding:20px 16px 60px}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px}
+.toc a{font-size:12px;font-weight:700;text-decoration:none;color:var(--text2);background:var(--card);border:1px solid var(--bc);padding:6px 12px;border-radius:20px}
+.toc a:hover{color:var(--c2);border-color:var(--c2)}
+.sec{margin-bottom:28px}
+.sec h2{font-size:18px;font-weight:900;padding:12px 16px;border-radius:14px;color:#fff;background:var(--grad);margin-bottom:12px}
+.sec h3{font-size:14px;font-weight:900;color:var(--c2);margin:16px 4px 8px}
+.it{background:var(--card);border:1px solid var(--bc);border-radius:14px;margin-bottom:10px;overflow:hidden;border-left:4px solid var(--accent)}
+.sec:nth-of-type(3n+2) .it{border-left-color:var(--c2)}.sec:nth-of-type(3n) .it{border-left-color:var(--c3)}
+.en{padding:12px 14px;font-weight:700;font-size:14.5px;direction:ltr;text-align:left}
+.ar{padding:10px 14px;font-size:14px;color:var(--text2);direction:rtl;text-align:right;background:var(--bg2)}
+.ex{padding:10px 14px;font-size:13.5px;color:var(--text);direction:rtl;text-align:right;border-top:1px dashed var(--bc)}
+.ex b{color:var(--c3)}
+footer{background:var(--bg2);border-top:1px solid var(--bc);padding:18px;text-align:center;font-size:13px;font-weight:700}
+footer a{color:#229ED9;text-decoration:none}
+</style>
+</head>
+<body>
+<div id="pb"></div>
+<nav><div class="brand"><div class="logo">GT</div>GHAITH TEAM</div><button class="tb" id="tb" aria-label="theme">🌙</button></nav>
+<div class="hero"><div class="ic">🫁</div><h1>Tuberculosis (TB)</h1><p>Epidemiology · Part 78-86</p></div>
+<div class="shell"><div class="toc" id="toc"></div><div id="app"></div></div>
+<footer>GHAITH TEAM · <a href="https://t.me/nursing2bu" target="_blank" rel="noopener">@nursing2bu</a></footer>
+<script>
+const X='عشان تفهمها :';
+const D=[
+{t:'Definition',i:[
+['TB is an infectious disease caused by a bacterium called Mycobacterium tuberculosis.','السل مرض معدي بتسببه بكتيريا اسمها Mycobacterium tuberculosis.',X+' السبب بكتيريا مش فيروس.'],
+['It primarily affects the lungs but can also affect other parts of body, such as the brain, lymph nodes, kidneys, bones, and joints.','بيصيب الرئتين أساسًا، بس ممكن يصيب أجزاء تانية زي المخ والغدد الليمفاوية والكلى والعظام والمفاصل.',X+' ممكن يبدأ في الصدر وبعدين يوصل لأعضاء تانية.']]},
+{t:'Incubation period',i:[
+['Symptoms may occur as early as several weeks after infection, or it may occur after many years.','الأعراض ممكن تظهر بعد أسابيع قليلة من العدوى، أو بعد سنين كتير.',X+' واحد اتعدى النهارده ممكن يتعب بعد شهر وممكن بعد سنين.'],
+['An infected person has the greatest risk of developing TB within the first two years after infection.','أعلى خطر إن الشخص المصاب يتحوّل لمرض نشط بيكون في أول سنتين بعد العدوى.',X+' أول سنتين هما الأخطر.']]},
+{t:'Types of TB Based on Location of Infection',i:[
+['TB types can be grouped based on the location of the infection, as the affected organ determines the symptoms and treatment.','أنواع السل ممكن تتقسم حسب مكان العدوى، لأن العضو المصاب هو اللي بيحدد الأعراض والعلاج.',X+' لو الإصابة في الرئة الأعراض غير لو في العظام.'],
+['1. Pulmonary TB','السل الرئوي.',X+' السل اللي في الرئتين.'],
+['Pulmonary TB is the most common type.','السل الرئوي هو النوع الأشهر.',X+' أغلب المرضى بيكون عندهم الرئة.'],
+['The infection attacks lung tissue and spreads through the air when an infected person coughs, sneezes, or talks.','العدوى بتهاجم نسيج الرئة وبتنتشر بالهوا لما المصاب يكح أو يعطس أو يتكلم.',X+' الرذاذ اللي بيطلع من المريض هو وسيلة العدوى.'],
+['Common symptoms include:','الأعراض الشائعة هي الجاية.',X+' دي علامات تخليك تشك في السل الرئوي.'],
+['Coughing for more than 2 weeks','كحة أكتر من أسبوعين.',X+' كحة مش بتروح بالمرة.'],
+['Coughing up phlegm or blood','كحة بتطلّع بلغم أو دم.',X+' لما تشوف في البلغم خيوط دم.'],
+['Fever','حمى.',X+' ارتفاع في درجة الحرارة.'],
+['Night sweats','عرق بالليل.',X+' يصحى من النوم وهدومه مبلولة.'],
+['Chest pain','ألم في الصدر.',X+' وجع في الصدر مع التنفس أو الكحة.'],
+['Hard to breathe','صعوبة في التنفس.',X+' يحس إن نَفَسه تقيل.'],
+['Decreased appetite','قلة الشهية.',X+' مبقاش عايز ياكل.'],
+['Weight loss for no apparent reason','نقص في الوزن من غير سبب واضح.',X+' بيخس من غير ريجيم.'],
+['2. Extrapulmonary TB','السل خارج الرئة.',X+' السل اللي في عضو غير الرئة.'],
+['Extrapulmonary TB is a TB infection that occurs in organs other than the lungs.','هو عدوى سل بتحصل في أعضاء غير الرئتين.',X+' زي مثلًا الكلى أو العظام.'],
+['Symptoms vary depending on the infected organ.','الأعراض بتختلف حسب العضو المصاب.',X+' لو العظام تحس بوجع فيها، ولو الكلى أعراض تانية.'],
+['Some locations that can be affected include:','فيه أماكن ممكن تتأثر، هي الجاية.',X+' دي أمثلة على الأعضاء المصابة.'],
+['Lymph gland','الغدد الليمفاوية.',X+' تورم في الغدد.'],
+['Bones and joints','العظام والمفاصل.',X+' الإصابة بتكون في الهيكل العظمي.'],
+['Meningitis (TB meningitis)','التهاب السحايا السلّي.',X+' التهاب الأغشية اللي حوالين المخ بسبب ميكروب السل.'],
+['Kidney','الكلى.',X+' الميكروب بيوصل لجهاز الكلى.'],
+['Reproductive organs','الأعضاء التناسلية.',X+' الإصابة بتكون في الجهاز التناسلي.']]},
+{t:'Types of TB Based on Bacterial Activity',i:[
+['In addition to the location of infection, TB is also differentiated based on the activity of the bacteria in the body.','بالإضافة لمكان العدوى، السل بيتفرّق كمان حسب نشاط البكتيريا في الجسم.',X+' ننظر هل البكتيريا نايمة ولا صاحية.'],
+['Read on for more information:','كمّل القراءة لمعلومات أكتر.',X+' الجاي هو التفاصيل.'],
+['1. Latent TB','السل الكامن.',X+' نوع البكتيريا فيه ساكتة.'],
+['In latent TB, the bacteria are present in the body but are inactive.','في السل الكامن البكتيريا موجودة في الجسم بس مش نشطة.',X+' الميكروب موجود بس نايم.'],
+['The sufferer experiences no symptoms and is not contagious to others.','المصاب مفيش عنده أعراض ومش بيعدّي حد.',X+' واحد شكله سليم تمامًا وماينقلش العدوى.'],
+['However, latent TB still requires vigilance because it can progress to active TB, especially in people with weakened immune systems.','لكن السل الكامن لازم ننتبه له لأنه ممكن يتحول لسل نشط، خصوصًا عند اللي مناعتهم ضعيفة.',X+' لو المناعة وقعت الميكروب النايم ممكن يصحى.'],
+['2. Active TB','السل النشط.',X+' الميكروب هنا صاحي.'],
+['Active TB occurs when the bacteria multiply and cause symptoms.','السل النشط بيحصل لما البكتيريا تتكاثر وتسبب أعراض.',X+' هنا المريض بيبدأ يتعب فعلًا.'],
+['With active TB, people can transmit the disease to others.','في السل النشط الناس ممكن تنقل المرض لغيرهم.',X+' المريض النشط هو اللي بيعدّي.'],
+['Active TB treatment must be carried out regularly and completely according to doctor\'s recommendations to prevent complications and drug resistance.','لازم علاج السل النشط يتاخد بانتظام وبالكامل حسب توصية الدكتور عشان نمنع المضاعفات ومقاومة الأدوية.',X+' لو وقفت الدوا في نصه الميكروب ممكن يبقى مقاوم.']]},
+{t:'Types of TB Based on Response to Drugs',i:[
+['The bacteria\'s response to drugs determines the type of TB and its treatment.','استجابة البكتيريا للأدوية هي اللي بتحدد نوع السل وعلاجه.',X+' الدوا بيأثر في بعضها وبعضها لأ.'],
+['1. Drug-Sensitive TB','السل الحساس للأدوية.',X+' الميكروب بيتأثر بالدوا العادي.'],
+['Drug-sensitive TB is a type that can still be treated with first-line anti-tuberculosis.','هو نوع لسه ممكن يتعالج بأدوية السل من الخط الأول.',X+' الأدوية الأساسية بتنفع معاه.'],
+['With adherence to medication for at least six months, the chance of recovery is very high.','لو المريض التزم بالدوا ستة شهور على الأقل فاحتمال الشفاء عالي جدًا.',X+' ستة شهور التزام = فرصة شفا كبيرة.'],
+['2. Multidrug-Resistant TB (MDR/XDR)','السل المقاوم لعدة أدوية.',X+' الميكروب هنا مبقاش بيتأثر بالأدوية العادية.'],
+['Drug-resistant TB occurs when bacteria are no longer susceptible to standard medications.','يحصل لما البكتيريا متبقاش حساسة للأدوية القياسية.',X+' الدوا مبقاش يقتلها.'],
+['The following are types of drug-resistant TB:','دي أنواع السل المقاوم للأدوية.',X+' فيه نوعين، MDR وXDR.'],
+['MDR-TB (Multidrug-Resistant TB) : resistant to at least two main drugs, namely isoniazid and rifampicin.','MDR-TB مقاوم على الأقل لدوائين رئيسيين هما isoniazid وrifampicin.',X+' يعني الدوائين الأهم مبقوش ينفعوا.'],
+['XDR-TB (Extensively Drug-Resistant TB) : resistant to more types of drugs, including second-line drugs.','XDR-TB مقاوم لأنواع أكتر من الأدوية، بما فيها أدوية الخط التاني.',X+' أخطر من MDR لأنه مقاوم لأدوية أكتر.'],
+['This condition usually occurs due to incomplete or irregular treatment.','الحالة دي غالبًا بتحصل بسبب علاج ناقص أو غير منتظم.',X+' المريض اللي بيوقف الدوا أو بينساه بيعمل ميكروب مقاوم.'],
+['Treatment is more complex, takes longer, and requires close supervision.','العلاج بيكون أعقد وأطول ومحتاج متابعة لصيقة.',X+' مش هيخلص في شهور قليلة والمتابعة ضرورية.']]},
+{t:'Risk factors for developing TB disease',i:[
+['Have weakened immune systems, due to drugs, sickness, or malnutrition.','ضعف المناعة بسبب أدوية أو مرض أو سوء تغذية.',X+' جسم ضعيف مش قادر يحارب الميكروب.'],
+['Are in prolonged (days to weeks) and close contact or living with someone with TB disease, especially in crowded or poorly ventilated conditions.','التعرّض الطويل (أيام لأسابيع) والقريب أو المعيشة مع مريض سل، خصوصًا في أماكن زحمة أو تهويتها وحشة.',X+' ساكن مع مريض في أوضة صغيرة مقفولة.'],
+['Abuse substances (including smoking).','تعاطي المواد (بما فيها التدخين).',X+' المدخن رئته ضعيفة أمام العدوى.'],
+['Suffering from certain medical conditions such as HIV and diabetes.','وجود حالات مرضية معينة زي HIV والسكر.',X+' مريض السكر مناعته أضعف.'],
+['Are children under the age of 5 and elderly.','الأطفال أقل من 5 سنين وكبار السن.',X+' الطفل الصغير والمسن مناعتهم أقل.'],
+['Other conditions that put someone at risk are severe kidney disease, malnutrition, organ transplant, head and neck cancer, and long-term use of corticosteroids.','حالات تانية بتزود الخطر: مرض كلوي شديد، سوء تغذية، زراعة عضو، سرطان الرأس والرقبة، والاستخدام الطويل للكورتيزون.',X+' كلها حاجات بتضعف المناعة.']]},
+{t:'Signs/symptoms of active TB infections',i:[
+['A persistent and productive cough lasting more than three weeks','كحة مستمرة ومعاها بلغم بتستمر أكتر من ثلاث أسابيع.',X+' كحة مش بتخف ومعاها بلغم.'],
+['Unexplained weight loss and lack of appetite','نقص وزن غير مفسر وقلة شهية.',X+' بيخس وهو مش في ريجيم.'],
+['Night sweats','عرق بالليل.',X+' يصحى مبلول من العرق.'],
+['Fever – some sources state it usually occurs in the afternoon','حمى، وبعض المصادر بتقول إنها غالبًا بتحصل بعد الضهر.',X+' درجة الحرارة بتعلى بعد العصر.'],
+['Abnormal fatigue','إرهاق غير طبيعي.',X+' تعب مش مرتبط بمجهود.'],
+['Swollen lymph nodes','تورم في الغدد الليمفاوية.',X+' كتل في الرقبة أو تحت الإبط.'],
+['Shortness of breath, haemoptysis and chest pain can develop as the disease progresses.','ضيق التنفس والكحة بدم وألم الصدر ممكن يظهروا مع تقدم المرض.',X+' دي أعراض أول ما المرض يتقدم.']]},
+{t:'Diagnosis of TB',i:[
+['The definitive test for tuberculosis is detecting the pathogen via a culture.','الاختبار القاطع للسل هو اكتشاف الميكروب بالمزرعة.',X+' بنزرع عينة ونشوف الميكروب بيطلع ولا لأ.'],
+['Cultures can be obtained from sputum, pleural fluid, a tissue biopsy, or bronchoalveolar lavage.','المزارع ممكن تتاخد من البلغم أو سائل البلورا أو خزعة نسيج أو غسيل القصبات والحويصلات.',X+' عينة من أماكن مختلفة حسب حالة المريض.'],
+['An acid-fast bacilli smear may be conducted though false negatives are common enough that a negative smear does not indicate NO disease is present.','ممكن يتعمل مسحة العصيات الحمضية، لكن النتايج السلبية الكاذبة شائعة، فالمسحة السلبية مش معناها إن مفيش مرض.',X+' نتيجة سالبة مش دليل قاطع إنه سليم.'],
+['Additionally, false positives can also occur.','وكمان ممكن تحصل نتايج إيجابية كاذبة.',X+' ممكن النتيجة تطلع موجبة وهو مش عنده المرض.'],
+['For this reason, it is considered a standard practice in the U.S. to run three specimens.','عشان كده الممارسة القياسية في أمريكا إنهم يعملوا ثلاث عينات.',X+' بناخد أكتر من عينة عشان نتأكد.'],
+['Another commonly used test is the IGRA – interferon gamma release assay.','اختبار تاني شائع هو IGRA، اختبار إطلاق الإنترفيرون جاما.',X+' تحليل دم بنوع معين.'],
+['You’ll often see this referred to by its more common name which is the QuantiFERON-TB test.','هتلاقيه غالبًا بالاسم الأشهر QuantiFERON-TB.',X+' ده نفس IGRA بس باسمه التجاري.'],
+['This is a blood test that detects the presence of a specific interferon in both active and latent infection.','ده تحليل دم بيكشف وجود إنترفيرون معين في العدوى النشطة والكامنة.',X+' بيكشف الاتنين، النشط والكامن.'],
+['A nucleic acid amplification test can also be conducted.','ممكن كمان يتعمل اختبار تضخيم الحمض النووي.',X+' بيدوّر على المادة الوراثية للميكروب.'],
+['A positive result in an individual at risk for TB is typically considered sufficient for diagnosis.','النتيجة الإيجابية لشخص معرض لخطر السل غالبًا تكفي للتشخيص.',X+' لو واحد عنده عوامل خطورة ونتيجته موجبة يتشخّص.'],
+['A tuberculin skin test can also detect infection and is used to support a diagnosis of TB.','اختبار التيوبركولين الجلدي ممكن كمان يكشف العدوى ويُستخدم لدعم تشخيص السل.',X+' حقنة صغيرة تحت الجلد ونشوف رد الفعل.'],
+['In other words, if the test is positive, this is supportive of a diagnosis of active TB.','يعني لو الاختبار إيجابي ده بيدعم تشخيص السل النشط.',X+' إيجابي يعني احتمال التشخيص كبير.'],
+['However, if the test is negative, it doesn’t rule out active infection.','لكن لو سلبي ده مش بينفي العدوى النشطة.',X+' سلبي مش معناه إنه مفيش TB.'],
+['Imaging may be utilized as part of the patient’s initial evaluation.','ممكن يتستخدم التصوير كجزء من التقييم الأولي للمريض.',X+' الأشعة بتيجي في الفحص الأول.'],
+['This could be a chest x-ray or chest CT.','ممكن يكون أشعة على الصدر أو مقطعية على الصدر.',X+' صورة للرئتين تبيّن أي تغيير.']]},
+{t:'Treatment of tuberculosis',i:[
+['TB disease is curable.','مرض السل ممكن يتشفي.',X+' الشفا ممكن لو العلاج كامل.'],
+['It is treated by a standardized course of treatment usually including antibacterial medicines.','بيتعالج بكورس علاج موحّد غالبًا فيه أدوية مضادة للبكتيريا.',X+' بروتوكول ثابت بيمشي عليه الأطباء.'],
+['Treatment depends on whether TB is drug-susceptible or drug-resistant.','العلاج بيعتمد على إذا كان السل حساس للأدوية ولا مقاوم لها.',X+' نوع الميكروب بيحدد الدوا.'],
+['Treatment for drug-resistant TB is longer and more complex.','علاج السل المقاوم أطول وأعقد.',X+' مدته أطول وأدويته أكتر.'],
+['Drug-susceptible pulmonary TB: usually treated with a combination of isoniazid (H), rifampicin/rifampin (R), pyrazinamide (Z), and ethambutol (E) for an initial phase, followed by isoniazid and rifampicin.','السل الرئوي الحساس للأدوية: غالبًا بيتعالج بمزيج من isoniazid (H) وrifampicin/rifampin (R) وpyrazinamide (Z) وethambutol (E) في المرحلة الأولى، وبعدين isoniazid وrifampicin.',X+' بنبدأ بأربع أدوية وبعدها نكمّل باتنين.'],
+['A common regimen is 6 months: 2 months HRZE + 4 months HR.','نظام شائع مدته 6 شهور: شهرين HRZE + 4 شهور HR.',X+' يعني أول شهرين أربع أدوية، وبعدها أربع شهور بدوائين.'],
+['Latent TB infection: treated with preventive regimens using drugs such as isoniazid and/or rifampicin, with the exact regimen depending on the patient.','عدوى السل الكامن: بتتعالج بأنظمة وقائية بأدوية زي isoniazid و/أو rifampicin، والنظام بيعتمد على المريض.',X+' بنديله دوا يمنع إن الميكروب النايم يصحى.'],
+['Drug-resistant TB: requires a specialized multidrug regimen, selected according to drug-susceptibility testing and current guidelines.','السل المقاوم: محتاج نظام متخصص متعدد الأدوية يتحدد حسب اختبار الحساسية للأدوية والإرشادات الحالية.',X+' بنعمل تحليل يوريّنا الدوا اللي بينفع.']]},
+{t:'Health education for prevention TB',i:[
+['1. Maintain good personal and environmental hygiene.','حافظ على النظافة الشخصية ونظافة البيئة.',X+' بيتك ونفسك نضاف.'],
+['2. Adopt a healthy lifestyle, i.e., have balanced diet, adequate exercise and rest.','اتبع نمط حياة صحي، يعني غذاء متوازن ورياضة وراحة كفاية.',X+' أكل كويس ونوم كفاية بيقوّوا المناعة.'],
+['3. Keep hands clean and wash hands properly.','حافظ على نضافة إيديك واغسلها صح.',X+' اغسل إيدك بالمية والصابون.'],
+['4. Wash hands when they are dirtied by respiratory secretions e.g. after sneezing.','اغسل إيدك لما تتوسخ بإفرازات الجهاز التنفسي زي بعد العطس.',X+' عطست في إيدك، اغسلها على طول.'],
+['5. Cover nose and mouth while sneezing or coughing and dispose of nasal and mouth discharge properly.','غطّي أنفك وبقك وقت العطس أو الكحة وتخلص من إفرازات الأنف والفم صح.',X+' استخدم منديل وارميه في الزبالة.'],
+['6. Seek treatment promptly if symptoms like tuberculosis appear, particularly persistently coughing for more than one month.','اطلب العلاج بسرعة لو ظهرت أعراض شبه السل، خصوصًا الكحة المستمرة أكتر من شهر.',X+' كحة بقالها شهر، روح للدكتور.'],
+['7. Receive BCG immunization according to immunization schedule.','خد تطعيم BCG حسب جدول التطعيمات.',X+' التطعيم بيتاخد في الميعاد المحدد.']]},
+{t:'Health education for the TB patients and family',i:[
+['The key teaching points for tuberculosis are going to be around the medication regimen and avoiding the spread of infection.','نقاط التعليم الأساسية للسل بتدور حوالين نظام الدوا ومنع انتشار العدوى.',X+' الحاجتين الأهم: الدوا والعدوى.'],
+['Patients must complete the entire course of treatment, even if they begin to feel better.','المريض لازم يكمّل كورس العلاج كله حتى لو بدأ يحس إنه أحسن.',X+' متوقفش الدوا عشان حسيت إنك بقيت كويس.'],
+['Patients taking medication should avoid alcohol and acetaminophen for the duration of the regimen.','المرضى اللي بياخدوا الدوا لازم يتجنبوا الكحول والأسيتامينوفين طول فترة العلاج.',X+' مفيش كحول ولا باراسيتامول أثناء الكورس.'],
+['Female patients who are taking oral contraceptives should utilize an additional form of birth control as rifampin can reduce their effectiveness.','المريضات اللي بياخدوا حبوب منع الحمل لازم يستخدموا وسيلة تانية إضافية لأن rifampin ممكن يقلل فعاليتها.',X+' الحبوب لوحدها مش كفاية مع الدوا ده.'],
+['The signs of liver damage can include fatigue, nausea, vomiting, loss of appetite, dark-coloured urine, abdominal pain.','علامات تلف الكبد ممكن تشمل إرهاق وغثيان وقيء وفقدان الشهية وبول غامق اللون وألم في البطن.',X+' لو البول بقى غامق وبيستفرغ، لازم يبلّغ الدكتور.'],
+['To prevent the spread of infection outside the hospital, the patient should avoid crowds or confined spaces such as public transport.','لمنع انتشار العدوى برة المستشفى لازم المريض يتجنب الزحمة والأماكن المقفولة زي المواصلات العامة.',X+' يتجنب الميكروباص المزحوم.'],
+['They should also wear a surgical mask when around others and limit or avoid exposure to children or immunocompromised individuals.','ولازم يلبس ماسك جراحي لما يبقى حوالين الناس، ويقلل أو يتجنب الاحتكاك بالأطفال أو اللي مناعتهم ضعيفة.',X+' يلبس ماسك وميقعدش جنب طفل صغير.'],
+['There is a vaccine for TB – the BCG vaccine.','فيه تطعيم للسل اسمه BCG.',X+' التطعيم ده بيتاخد ضد السل.'],
+['It is typically administered to children and infants in countries where TB is prevalent, but it does not always prevent infection.','بيتدّي عادة للأطفال والرضع في الدول اللي السل منتشر فيها، لكنه مش دايمًا بيمنع العدوى.',X+' ممكن يحمي، بس مش ضمان 100%.'],
+['Teach your patient with latent TB that it turns into active infection in about 5 to 10% of cases.','علّم مريض السل الكامن إنه بيتحول لعدوى نشطة في حوالي 5 لـ 10% من الحالات.',X+' من كل 100 حالة كامنة، 5 لـ 10 ممكن يبقوا نشطين.'],
+['They should know the signs/symptoms of active infection so they can report them to their physician immediately.','لازم يعرفوا علامات وأعراض العدوى النشطة عشان يبلّغوا الدكتور فورًا.',X+' أول ما تظهر كحة طويلة وعرق بالليل، يروح للدكتور.']]}
+];
+const app=document.getElementById('app'),toc=document.getElementById('toc');
+D.forEach((s,n)=>{const id='s'+n;
+toc.insertAdjacentHTML('beforeend',`<a href="#${id}">${s.t}</a>`);
+app.insertAdjacentHTML('beforeend',`<section class="sec" id="${id}"><h2>${s.t}</h2>${s.i.map(([e,a,x])=>`<div class="it"><div class="en">${e}</div><div class="ar">${a}</div><div class="ex"><b>${X}</b> ${x.replace(X,'').trim()}</div></div>`).join('')}</section>`);});
+const pb=document.getElementById('pb');
+addEventListener('scroll',()=>{const h=document.documentElement;pb.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'});
+const tb=document.getElementById('tb');
+function setT(t){document.documentElement.setAttribute('data-theme',t);tb.textContent=t==='dark'?'☀️':'🌙';try{localStorage.setItem('theme',t)}catch(e){}}
+let t0='light';try{t0=localStorage.getItem('theme')||(matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light')}catch(e){}
+setT(t0);tb.onclick=()=>setT(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');
+</script>
+</body>
+</html>
