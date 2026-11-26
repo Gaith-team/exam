@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --accent:#7c3aed;--accent-light:#8b5cf6;--accent-dark:#6d28d9;--accent-glow:rgba(124,58,237,.14);
+  --bg:#f8fafc;--bg2:#eef2f7;--card:#fff;--text:#1a2332;--text2:#4a5568;--text3:#718096;
+  --bc:rgba(0,0,0,.08);--ok:#16a34a;--ok-bg:rgba(22,163,74,.08);--ex:#b45309;--ex-bg:rgba(245,158,11,.10);
+  --ar-bg:rgba(124,58,237,.06);--r:16px;
+}
+:root[data-theme="dark"]{
+  --bg:#0d1117;--bg2:#161b22;--card:#1c2333;--text:#e6edf3;--text2:#b1bac4;--text3:#7d8590;
+  --bc:rgba(255,255,255,.09);--ex:#fbbf24;--ex-bg:rgba(245,158,11,.10);--ar-bg:rgba(139,92,246,.12);--accent-glow:rgba(139,92,246,.2);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#0d1117;--bg2:#161b22;--card:#1c2333;--text:#e6edf3;--text2:#b1bac4;--text3:#7d8590;
+    --bc:rgba(255,255,255,.09);--ex:#fbbf24;--ex-bg:rgba(245,158,11,.10);--ar-bg:rgba(139,92,246,.12);--accent-glow:rgba(139,92,246,.2);
+  }
+}
+html{scroll-behavior:smooth;scroll-padding-top:84px}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;transition:background .3s,color .3s}
+#prog{position:fixed;top:0;left:0;height:3px;width:0;z-index:999;background:linear-gradient(90deg,var(--accent),var(--accent-light))}
+
+nav{position:fixed;top:0;left:0;right:0;z-index:100;height:64px;padding:0 24px;display:flex;align-items:center;justify-content:space-between;
+  background:rgba(248,250,252,.93);backdrop-filter:blur(16px);border-bottom:1px solid var(--bc)}
+:root[data-theme="dark"] nav{background:rgba(13,17,23,.95)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) nav{background:rgba(13,17,23,.95)}}
+.brand{display:flex;align-items:center;gap:9px;font-weight:900;font-size:15px}
+.logo{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,var(--accent),var(--accent-light));color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900}
+.nav-r{display:flex;gap:8px;align-items:center}
+.btn-s{border:1px solid var(--bc);background:var(--card);color:var(--text);border-radius:10px;padding:8px 12px;font:700 13px 'Cairo','Outfit',sans-serif;cursor:pointer}
+.btn-s:hover,.btn-s:focus-visible{border-color:var(--accent);color:var(--accent);outline:none}
+.theme{width:38px;height:38px;border-radius:50%;border:1px solid var(--bc);background:var(--card);cursor:pointer;font-size:15px}
+.theme:hover,.theme:focus-visible{border-color:var(--accent);outline:none}
+
+.hero{margin-top:64px;padding:44px 20px 38px;text-align:center;background:linear-gradient(135deg,var(--accent-dark),var(--accent),var(--accent-light))}
+.hero .ic{width:68px;height:68px;margin:0 auto 14px;border-radius:20px;background:rgba(255,255,255,.2);border:1.5px solid rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center;font-size:30px}
+.hero h1{font-size:clamp(22px,4.5vw,32px);font-weight:900;color:#fff;margin-bottom:6px}
+.hero p{font-size:14px;color:rgba(255,255,255,.85)}
+.pills{display:flex;justify-content:center;gap:10px;margin-top:18px;flex-wrap:wrap}
+.pill{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);border-radius:50px;padding:6px 16px;font-size:12px;font-weight:700;color:#fff}
+
+.toc{position:sticky;top:64px;z-index:50;background:var(--bg);border-bottom:1px solid var(--bc);padding:10px 16px;display:flex;gap:8px;overflow-x:auto;scrollbar-width:thin}
+.toc a{flex:0 0 auto;text-decoration:none;font-size:12px;font-weight:700;color:var(--text2);padding:6px 12px;border-radius:50px;border:1px solid var(--bc);background:var(--card);white-space:nowrap}
+.toc a:hover,.toc a:focus-visible{color:var(--accent);border-color:var(--accent);outline:none}
+
+main{max-width:760px;margin:0 auto;padding:28px 18px 80px}
+section{margin-bottom:46px}
+.sec-head{display:flex;align-items:center;gap:12px;margin-bottom:6px}
+.sec-tag{font-size:12px;font-weight:700;color:var(--accent);letter-spacing:.3px}
+.sec-title{font-size:clamp(20px,3.6vw,26px);font-weight:900;margin-bottom:16px;line-height:1.3}
+
+.group{margin:22px 0 10px;font-weight:900;font-size:15px;color:var(--accent-dark);padding-left:12px;border-left:4px solid var(--accent)}
+:root[data-theme="dark"] .group{color:var(--accent-light)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]) .group{color:var(--accent-light)}}
+
+.item{background:var(--card);border:1px solid var(--bc);border-radius:var(--r);margin-bottom:14px;overflow:hidden;box-shadow:0 2px 10px rgba(0,0,0,.04)}
+.en{padding:16px 18px;font-size:16px;line-height:1.6;font-weight:600;direction:ltr;text-align:left}
+.en b{color:var(--accent);font-weight:900}
+.ar{padding:14px 18px;direction:rtl;text-align:right;font-family:'Cairo',sans-serif;font-size:15.5px;line-height:1.95;color:var(--text);background:var(--ar-bg);border-top:1px solid var(--bc)}
+.ar .k{display:inline-block;font-weight:700;color:var(--accent);margin-left:6px}
+.ex{padding:14px 18px;direction:rtl;text-align:right;font-family:'Cairo',sans-serif;font-size:15px;line-height:1.95;color:var(--text2);background:var(--ex-bg);border-top:1px dashed var(--bc)}
+.ex .k{font-weight:700;color:var(--ex);margin-left:6px}
+.note{direction:rtl;text-align:right;font-family:'Cairo',sans-serif;font-size:13px;color:var(--text3);margin:-6px 0 14px}
+
+footer{background:var(--bg2);border-top:1px solid var(--bc);padding:22px 24px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;font-size:14px;font-weight:700}
+footer span{color:var(--accent)}
+footer a{color:#229ED9;text-decoration:none;font-size:12px;font-weight:600}
+@media (max-width:480px){nav{padding:0 12px}.brand span{display:none}.en{font-size:15px}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div id="prog"></div>
+<nav>
+  <div class="brand"><div class="logo">GT</div><span>GHAITH TEAM</span></div>
+  <div class="nav-r">
+    <button class="btn-s" id="toggleEx" type="button">إخفاء الأمثلة</button>
+    <button class="theme" id="themeBtn" type="button" aria-label="Toggle theme">🌙</button>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="ic">🧠</div>
+  <h1>Schizophrenia</h1>
+<p>physchatric medicine </p>
+<div class="pills"><span class="pill">Psychiatric Nursing</span><span class="pill" id="count">--</span></div>
+</header>
+
+<div class="toc" id="toc"></div>
+<main id="app"></main>
+
+<footer>
+  <div>GHAITH <span>TEAM</span></div>
+  <a href="https://t.me/nursing2bu" target="_blank" rel="noopener">@nursing2bu</a>
+</footer>
+
+<script>
+const D = [
+{id:"s1",tag:"01. Clinical Definition",title:"Understanding Schizophrenia",groups:[{items:[
+ {h:"Neurodevelopmental Character",en:"A complex biological disorder disrupting thought, perception, affect, and goal-directed behavior.",
+  ar:"اضطراب بيولوجي معقد بيبوّظ التفكير، والإدراك (اللي بتحسه بحواسك)، والمشاعر (affect)، والسلوك اللي بيوصّلك لهدفك. وكلمة neurodevelopmental معناها إن أصله من تكوين المخ وهو بيتبني.",
+  ex:"راديو الإشارة بتاعته مشوّشة: الراديو شغال بس اللي بيطلع منه مش مظبوط. المخ شغال بس بيفسّر الدنيا غلط."},
+ {h:"Chronic Course",en:"Characterized by episodic acute exacerbations alternating with periods of partial or full remission.",
+  ar:"المرض بييجي على شكل نوبات: الأعراض بتشتد فجأة (acute exacerbation)، وبعدين بتهدى جزئياً أو كلياً (remission)، وبعدين ممكن ترجع تاني.",
+  ex:"زي الربو: فترة تبقى كويس فيها، وفجأة تيجي نوبة، وبعدها تهدى."},
+ {h:"Functional Impact",en:"Profoundly alters social functioning, occupation, self-care independence, and quality of life.",
+  ar:"بيأثر جامد على علاقة المريض بالناس، وشغله، وقدرته يعتني بنفسه لوحده، وعلى جودة حياته عموماً.",
+  ex:"شاب كان بيشتغل ويخرج مع صحابه، بعد المرض بقى مش قادر يروح الشغل وبيحتاج حد يفكره يستحمى ويأكل."}
+]}]},
+
+{id:"s2",tag:"02. Diagnostic Standards",title:"DSM-5-TR & ICD-11 Diagnostic Framework",groups:[
+ {label:"Core Symptom Criteria (Min 2 required)",items:[
+ {h:"Core Symptom Criteria",en:"Core Symptom Criteria (Min 2 required).",
+  ar:"لازم يبقى فيه على الأقل عرضين من الأعراض الأساسية عشان يتحط التشخيص.",
+  ex:"زي شروط القبول: مينفعش تكتفي بعرض واحد."},
+ {en:"At least 1 symptom must be from items 1, 2, or 3.",
+  ar:"واحد على الأقل منهم لازم يكون من البنود ١ أو ٢ أو ٣ (الضلالات، الهلاوس، الكلام المتفكك).",
+  ex:"يعني لو العرضين من الأعراض الباقية بس، التشخيص مش بيكمل."},
+ {h:"Delusions",en:"Fixed, false beliefs impervious to logic.",
+  ar:"ضلالات: اعتقادات ثابتة وغلط، ومهما قلت للمريض أدلة ومنطق مبيغيّرهاش.",
+  ex:"مريض مقتنع إن الجيران بيراقبوه بكاميرات، وكل ما تثبتله إن مفيش كاميرات يقولك \"إنت كمان معاهم\"."},
+ {h:"Hallucinations",en:"Perceptions without an external stimulus (e.g., hearing voices).",
+  ar:"هلاوس: إنه يحس أو يسمع أو يشوف حاجة مش موجودة فعلاً بره دماغه.",
+  ex:"مريض قاعد لوحده في أوضة ساكتة وبيرد على صوت بيشتمه، مع إن مفيش حد معاه."},
+ {h:"Disorganized Speech",en:"Derailment, incoherence, loose associations.",
+  ar:"كلام متفكك: يبدأ يتكلم في موضوع ويخرج منه لحاجة تانية خالص (derailment)، أو كلامه مش مفهوم (incoherence)، أو الأفكار مش مربوطة ببعض (loose associations).",
+  ex:"تسأله \"عامل إيه؟\" يقولك \"النهارده الجو حلو والعربية زرقا والقط جعان\"."},
+ {h:"Disorganized/Catatonic Behavior",en:"Abnormal motor activity or posture.",
+  ar:"سلوك غير منظم أو كاتاتوني: حركة أو وقفة غير طبيعية في الجسم.",
+  ex:"مريض واقف ساعات في نفس الوضع زي التمثال، أو بيتحرك حركات من غير هدف."}
+ ]},
+ {items:[
+ {h:"Timeframe Requirement",en:"Active symptoms for 1 month; continuous signs for ≥ 6 months.",
+  ar:"لازم الأعراض النشطة تكون موجودة شهر، وعلامات المرض مستمرة ٦ شهور أو أكتر.",
+  ex:"واحد بقاله يومين متلخبط مش فصام. الفصام لازم يكمل المدة دي."},
+ {h:"Social/Occupational Dysfunction",en:"Marked decline in work, interpersonal relations, or self-care.",
+  ar:"تدهور واضح في الشغل، أو العلاقات مع الناس، أو الاعتناء بنفسه.",
+  ex:"موظف مجتهد بقى يتأخر ويتخانق مع زمايله ومبقاش بيهتم بنضافته."}
+ ]}
+]},
+
+{id:"s2b",tag:"02B. Clinical Presentation",title:"Classic Subtypes & Diagnostic Evolution",groups:[{items:[
+ {h:"Paranoid",en:"Prominent persecutory/grandiose delusions and auditory hallucinations; cognitive function and affect relatively preserved.",
+  ar:"أبرز حاجة فيه ضلالات اضطهاد (حاسس إن حد بيأذيه) أو عظمة (حاسس إنه شخص مهم جداً)، مع هلاوس سمعية. والتفكير والمشاعر بتبقى لسه كويسة نسبياً.",
+  ex:"مريض شايف إن المخابرات بتتبعه، وبيسمع أصوات، بس لسه بيتكلم بشكل مفهوم ومنظم."},
+ {h:"Disorganized (Hebephrenic)",en:"Disorganized speech, erratic behavior, and flat/inappropriate affect; severe impairment in daily self-care routines.",
+  ar:"كلام متفكك، وتصرفات غير متوقعة، ومشاعر باردة (flat) أو مش مناسبة للموقف، وتأثير شديد على اعتناءه بنفسه كل يوم.",
+  ex:"مريض بيضحك في موقف حزين، ومش بيستحمى ولا بيغيّر هدومه."},
+ {h:"Catatonic",en:"Marked psychomotor disturbance: stupor, waxy flexibility, mutism, posturing, or unprovoked, purposeless motor excitement.",
+  ar:"اضطراب واضح في الحركة: خمول تام (stupor)، أو جسمه بيفضل على الوضع اللي تحطه فيه زي الشمع (waxy flexibility)، أو مبيتكلمش (mutism)، أو بياخد وقفات غريبة (posturing)، أو بيتحرك بعنف من غير سبب ومن غير هدف.",
+  ex:"ترفع دراعه يفضل مرفوع زي الشمعة، وبعدها فجأة يجري ويصرخ من غير سبب."},
+ {h:"Undifferentiated",en:"Undifferentiated: Mixed active symptoms without a single dominant pattern.",
+  ar:"أعراض نشطة مخلوطة، ومفيش نمط واحد هو الغالب.",
+  ex:"مريض عنده شوية هلاوس وشوية كلام متفكك وشوية حركات غريبة، ومفيش نوع واضح."},
+ {h:"Residual",en:"Residual: Chronic negative symptoms with attenuated positive symptoms.",
+  ar:"أعراض سلبية مزمنة (زي الانسحاب وقلة الحماس)، مع أعراض إيجابية خفيفة ومخففة.",
+  ex:"مريض كان عنده هلاوس جامدة، دلوقتي هادي بس لسه منعزل ومفيش عنده طاقة."},
+ {h:"DSM-5-TR Diagnostic Note",en:"Formal subtypes were removed in modern diagnostic manuals (DSM-5 / ICD-11) due to low diagnostic stability and overlapping treatments. They remain essential clinical descriptors for…",
+  ar:"الأنواع الرسمية دي اتشالت من الأدلة الحديثة (DSM-5 / ICD-11) لأن التشخيص كان بيتغير مع الوقت، ولأن علاجها كان متشابه. ومع ذلك لسه مهمين كوصف إكلينيكي. (الجملة مقطوعة في الملف الأصلي عند الكلمة دي).",
+  ex:"زي أسماء الأحجام \"صغير/وسط/كبير\": مش مقاسات رسمية بس بتفيد في الوصف."}
+]}]},
+
+{id:"s3",tag:"03. Aetiology & Risk Factors",title:"Genetic Susceptibility & Stress-Vulnerability Model",groups:[
+ {items:[
+ {en:"Strong polygenic architecture involving hundreds of small-effect variants.",
+  ar:"الوراثة هنا مش جين واحد، دي مئات الجينات كل واحد ليه تأثير بسيط، ومجموعها هو اللي بيزوّد الخطر.",
+  ex:"زي لما تحط مئات الحبات الصغيرة في كفة ميزان، كل حبة مش بتفرق، بس كلها مع بعض بتقلّب الميزان."},
+ {en:"Biological vulnerability interacts with environmental stress to trigger episodes.",
+  ar:"الاستعداد البيولوجي بيتفاعل مع الضغط البيئي وبيفجّر النوبات.",
+  ex:"الاستعداد زي البنزين، والضغط زي الشرارة. مفيش بنزين مفيش حريقة، ومفيش شرارة ممكن مفيش حريقة."}
+ ]},
+ {label:"Genetics & Heritability",items:[
+ {h:"Lifetime Prevalence Risk",en:"Lifetime Prevalence Risk: General Population: ~1%.",
+  ar:"احتمال إن الواحد يصاب بالفصام طول عمره في عامة الناس حوالي ١٪.",
+  ex:"من كل ١٠٠ شخص عادي، واحد بس هيصاب."},
+ {en:"1st-Degree Relative: ~10%.",
+  ar:"لو أب أو أم أو أخ أو أخت (قرابة درجة أولى) عنده الفصام، احتمالك بيبقى حوالي ١٠٪.",
+  ex:"لو أخوك مصاب، فاحتمالك واحد من كل ١٠ تقريباً."},
+ {en:"Both Parents Affected: 40%–50%.",
+  ar:"لو الأب والأم الاتنين مصابين، الاحتمال بيطلع لـ ٤٠٪ لـ ٥٠٪.",
+  ex:"يعني تقريباً نص الحالات في الظروف دي."}
+ ]},
+ {label:"Stress-Vulnerability Model",items:[
+ {h:"Key Nursing Takeaway",en:"Reducing environmental stress and enhancing coping mechanisms prevents relapse and protects cognitive stability.",
+  ar:"لو قلّلت الضغط اللي حوالين المريض وقويت طرق تعامله مع المشاكل (coping)، بتمنع الانتكاسة وبتحافظ على استقرار تفكيره.",
+  ex:"ممرضة بتهدّي جو الأوضة، وبتعلّم المريض يتنفس بعمق لما يتوتر، فبتقل احتمالية رجوع النوبة."}
+ ]}
+]},
+
+{id:"s4",tag:"04. Neurobiology",title:"Neurochemical & Structural Brain Changes",groups:[
+ {label:"Dopamine Hypothesis",items:[
+ {h:"Mesolimbic Hyperactivity",en:"Mesolimbic Hyperactivity: Drives positive symptoms (hallucinations/delusions).",
+  ar:"زيادة نشاط الدوبامين في المسار الميزوليمبي بتسبب الأعراض الإيجابية، يعني الهلاوس والضلالات.",
+  ex:"زي صوت الراديو لما يعلى زيادة وتسمع حاجات مش موجودة."},
+ {h:"Mesocortical Hypoactivity",en:"Mesocortical Hypoactivity: Drives negative and cognitive symptoms.",
+  ar:"قلة نشاط الدوبامين في المسار الميزوكورتيكال بتسبب الأعراض السلبية والإدراكية (التفكير والذاكرة).",
+  ex:"زي موبايل بطاريته على ٥٪: بطيء ومش بيستجيب."}
+ ]},
+ {label:"Glutamate Pathway",items:[
+ {en:"NMDA receptor hypofunction contributes to persistent cognitive deficits and persistent negative symptoms poorly managed by classic dopamine blockers.",
+  ar:"ضعف شغل مستقبلات NMDA بيساهم في مشاكل التفكير والأعراض السلبية المستمرة، والأدوية القديمة اللي بتقفل الدوبامين مش بتعالجها كويس.",
+  ex:"زي واحد بيصلّح عطل في الكهربا بس العطل الحقيقي في السباكة، فالدوا (الدوبامين) مش بيحل المشكلة دي."}
+ ]},
+ {label:"Structural Alterations",items:[
+ {en:"Ventricular enlargement, reduced cortical gray matter, and impaired prefrontal cortex connectivity resulting from abnormal fetal development or early pruning.",
+  ar:"البطينات في المخ بتكبر، والمادة الرمادية في القشرة بتقل، والاتصال بين الفص الجبهي (prefrontal) والباقي بيضعف. وده نتيجة تطور غير طبيعي للجنين أو تقليم (pruning) بدري زيادة للوصلات العصبية.",
+  ex:"زي شجرة اتقصّت فروعها بدري أوي، فباقي الشجرة مبقاش فيه اتصال كويس."}
+ ]}
+]},
+
+{id:"s5",tag:"05. Environmental Factors",title:"Environmental & Psychosocial Triggers",groups:[{items:[
+ {h:"Prenatal Insults",en:"Maternal viral infections, severe malnutrition, and obstetrical hypoxia increase neurodevelopmental risk.",
+  ar:"عدوى فيروسية للأم، أو سوء تغذية شديد، أو نقص أكسجين وقت الولادة (hypoxia)، بيزوّدوا خطر مشاكل في تطور المخ.",
+  ex:"أم اتعرضت لفيروس شديد وهي حامل، أو الطفل اتأخر في العياط وقت الولادة ونقص عليه الأكسجين."},
+ {h:"Cannabis Use",en:"Adolescent heavy exposure to high-THC cannabis acts as a major catalyst for early psychotic onset.",
+  ar:"التعرض الكتير للحشيش اللي فيه نسبة THC عالية في سن المراهقة بيسرّع ظهور الذهان بدري.",
+  ex:"مراهق بيدخن حشيش كتير، الفصام ظهر عنده في سن ١٨ بدل ما كان ممكن يتأخر أو مايظهرش."},
+ {h:"Social Stressors",en:"Urban upbringing, migration, early life trauma, and high Expressed Emotion (EE) in living environments.",
+  ar:"التربية في المدينة، أو الهجرة، أو صدمات في الطفولة، أو بيئة ساكن فيها ناس كتير بينتقدوا ويتخانقوا ويتدخلوا جامد (Expressed Emotion).",
+  ex:"مريض عايش في بيت أهله كل يوم بيصرخوا عليه ويقولوله \"إنت السبب\"، فبينتكس بسرعة."}
+]}]},
+
+{id:"s6",tag:"06. Clinical Assessment",title:"Symptom Domains & Nursing Priorities",groups:[
+ {label:"Positive Symptoms",items:[
+ {h:"Typical Manifestations",en:"Hallucinations, delusions, paranoia, disorganized speech/behavior.",
+  ar:"هلاوس، وضلالات، وبارانويا (شك واضطهاد)، وكلام وسلوك متفكك.",
+  ex:"مريض بيسمع أصوات وبيشك إن الدكتور عايز يسممه."},
+ {h:"Nursing Assessment & Focus",en:"Assess command hallucinations; maintain safety; validate distress without supporting delusions.",
+  ar:"اسأل عن الهلاوس الآمرة (command hallucinations) يعني أصوات بتأمره يعمل حاجة، وحافظ على الأمان، وطمّن المريض على ضيقه من غير ما توافقه على الضلالة.",
+  ex:"تقوله \"أنا فاهم إنك خايف جداً وأنا معاك\"، ومتقولوش \"أيوه فعلاً حد عايز يأذيك\"."}
+ ]},
+ {label:"Negative Symptoms",items:[
+ {h:"Typical Manifestations",en:"Avolition, blunted affect, anhedonia, alogia, social isolation.",
+  ar:"فقدان الدافع (avolition)، ومشاعر باهتة (blunted affect)، وعدم الاستمتاع بحاجة (anhedonia)، وقلة الكلام (alogia)، وانعزال اجتماعي.",
+  ex:"مريض قاعد في السرير طول اليوم، وشكله من غير تعبيرات، ومش عايز يكلم حد."},
+ {h:"Nursing Assessment & Focus",en:"Assist with ADLs; set structured routine; offer brief, low-demand social contact.",
+  ar:"ساعده في أنشطة الحياة اليومية (ADLs)، وحط له روتين منظم، وقدّم له تواصل اجتماعي قصير ومن غير ضغط.",
+  ex:"تقعد معاه ٥ دقايق تقوله صباح الخير من غير ما تسأله أسئلة كتير، وتفكره بميعاد الأكل والحمام."}
+ ]},
+ {label:"Cognitive Symptoms",items:[
+ {h:"Typical Manifestations",en:"Executive dysfunction, memory deficits, slow processing speed.",
+  ar:"ضعف في التخطيط واتخاذ القرار (executive dysfunction)، وضعف في الذاكرة، وبطء في معالجة المعلومات.",
+  ex:"مريض بتقوله ٣ حاجات مرة واحدة، فبينسى اتنين وبياخد وقت يرد."},
+ {h:"Nursing Assessment & Focus",en:"Give brief, step-by-step instructions; use clear visual cues; simplify decision-making.",
+  ar:"اديله تعليمات قصيرة وخطوة خطوة، واستخدم إشارات بصرية واضحة، وبسّط القرارات.",
+  ex:"بدل \"خد الدوا واستحمى والبس\"، تقول \"خد الدوا\"، وبعد ما يخلص تقوله \"دلوقتي استحمى\"، وتعلّق جدول بالصور."}
+ ]}
+]},
+
+{id:"s7",tag:"07. Lines of Management",title:"Phased Nursing & Multidisciplinary Management",groups:[{items:[
+ {h:"FIRST LINE – Acute Stabilization",en:"Safety restoration, de-escalation, standard SGAs/FGAs, and adherence monitoring.",
+  ar:"رجّع الأمان، وهدّي الموقف (de-escalation)، وادّي الأدوية المضادة للذهان العادية (SGAs/FGAs)، وراقب إن المريض ملتزم بالدوا.",
+  ex:"مريض هايج في الطوارئ: الأول تهدّيه وتأمّنه، وبعدين تبدأ الدوا وتتأكد إنه بيبلعه."},
+ {h:"SECOND LINE – Refractory Care",en:"Clozapine initiation for treatment-resistant cases; strict blood (ANC) and cardiac oversight.",
+  ar:"لو العلاج العادي مانفعش، نبدأ كلوزابين (Clozapine) مع متابعة دقيقة للدم (ANC) وللقلب.",
+  ex:"زي لما المضاد الحيوي العادي مايجيبش نتيجة، تروح لدوا أقوى لكن بمتابعة أشد."},
+ {h:"THIRD LINE – Rehabilitation",en:"CBTp, social skills training, family psychoeducation, and metabolic health management.",
+  ar:"علاج معرفي سلوكي للذهان (CBTp)، وتدريب على المهارات الاجتماعية، وتثقيف الأسرة، وإدارة الصحة الأيضية (metabolic).",
+  ex:"بعد ما المريض يهدى، نعلّمه يرجع يعيش وسط الناس، ونعلّم أهله يتعاملوا معاه، ونتابع وزنه وسكره."}
+]}]},
+
+{id:"s8",tag:"08. First-Line Management",title:"Acute Phase Stabilization & Standard Pharmacotherapy",groups:[
+ {label:"Pharmacological Agents",items:[
+ {h:"SGAs (First Choice)",en:"SGAs (First Choice): Risperidone, Olanzapine, Quetiapine, Aripiprazole (lower EPS risk).",
+  ar:"الجيل التاني من مضادات الذهان هو الاختيار الأول: ريسبيريدون، أولانزابين، كويتيابين، أريبيبرازول. وخطر الأعراض الحركية الجانبية (EPS) بتاعتهم أقل.",
+  ex:"زي لما تختار دوا ليه أعراض جانبية أخف من التاني، فبتبدأ بيه الأول."},
+ {h:"FGAs",en:"FGAs: Haloperidol, Fluphenazine (effective for positive symptoms; higher EPS risk).",
+  ar:"الجيل الأول: هالوبيريدول وفلوفينازين. بيعالجوا الأعراض الإيجابية كويس، بس خطر الـ EPS معاهم أعلى.",
+  ex:"دوا قوي وفعّال، بس ممكن يخلي إيد المريض ترتعش أو جسمه يتشنج."},
+ {h:"LAI Formulations",en:"LAI Formulations: Long-Acting Injectables for poor medication adherence.",
+  ar:"حقن طويلة المفعول (LAI) للمريض اللي مش بيلتزم بالأقراص.",
+  ex:"مريض بينسى الحبوب أو بيرفضها، فبناخد له حقنة مرة كل كام أسبوع بدل ما ياخد قرص كل يوم."}
+ ]},
+ {label:"Core Nursing Actions",items:[
+ {h:"Safety Maintenance",en:"Safety Maintenance: Reduce stimulation; monitor command hallucinations.",
+  ar:"حافظ على الأمان: قلّل المؤثرات حوالين المريض، وراقب الهلاوس الآمرة.",
+  ex:"تنقله لأوضة هادية ونورها خافت، ومتسيبوش لوحده لو بيسمع أصوات بتأمره يأذي نفسه."},
+ {h:"EPS Screening",en:"EPS Screening: Assess dystonia, akathisia, and parkinsonism using AIMS.",
+  ar:"افحص الأعراض الحركية الجانبية: الديستونيا (شد عضلي)، والأكاثيزيا (عدم قدرة على الجلوس مرتاح)، والباركنسونية (رعشة وبطء)، وبتستخدم مقياس AIMS.",
+  ex:"مريض مش عارف يقعد وبيمشي رايح جاي طول الوقت بعد الدوا، ده أكاثيزيا."},
+ {h:"Metabolic Monitoring",en:"Metabolic Monitoring: Establish baseline weight, lipids, and blood glucose.",
+  ar:"اعمل قياس أساسي قبل ما تبدأ: الوزن، والدهون، وسكر الدم، عشان تقارن بيه بعدين.",
+  ex:"تسجل وزنه وسكره النهارده، وبعد شهرين تشوف لو زادوا بسبب الدوا."}
+ ]}
+]},
+
+{id:"s9",tag:"09. Second-Line Management",title:"Treatment-Resistant Schizophrenia & Clozapine Protocol",groups:[
+ {label:"Clozapine Indication",items:[
+ {en:"Gold standard for Treatment-Resistant Schizophrenia (TRS) — defined as nonresponse to ≥ 2 distinct antipsychotic trials.",
+  ar:"الكلوزابين هو الاختيار الأفضل للفصام المقاوم للعلاج (TRS)، وده معناه إن المريض معملش تحسن بعد تجربة ٢ مضاد ذهان مختلفين أو أكتر.",
+  ex:"جرّبنا ريسبيريدون وأولانزابين والأعراض لسه، يبقى ده وقت الكلوزابين."},
+ {en:"Uniquely reduces persistent suicidal behavior.",
+  ar:"ومن مميزاته إنه لوحده بيقلل السلوك الانتحاري المستمر.",
+  ex:"مريض حاول ينتحر أكتر من مرة، الكلوزابين بيحميه أكتر من باقي الأدوية."}
+ ]},
+ {label:"Mandatory Nursing Oversight",items:[
+ {h:"ANC Monitoring",en:"ANC Monitoring: Mandatory regular blood draws for Absolute Neutrophil Count to prevent agranulocytosis.",
+  ar:"لازم تسحب دم بانتظام عشان تقيس عدد الخلايا العدلة (ANC) وتمنع نقص كرات الدم البيضاء الخطير (agranulocytosis).",
+  ex:"قبل ما تدّي المريض جرعة الكلوزابين، تتأكد إن تحليل الدم بتاعه (ANC) سليم."},
+ {h:"GI Hypomotility",en:"GI Hypomotility: Monitor strictly for severe constipation/bowel obstruction.",
+  ar:"الأمعاء بتتحرك ببطء، فراقب بدقة الإمساك الشديد وانسداد الأمعاء.",
+  ex:"مريض مبيدخلش الحمام بقاله ٣ أيام وبطنه منتفخة وبيتألم، ده خطر لازم يتبلغ عنه فوراً."},
+ {h:"Cardiac Vigilance",en:"Cardiac Vigilance: Watch for myocarditis signs (fever, chest pain, tachycardia) in weeks 1–4.",
+  ar:"خلّي بالك من علامات التهاب عضلة القلب (myocarditis): حرارة، وألم في الصدر، وسرعة ضربات القلب، وده في الأسابيع ١ لـ ٤ من بداية الدوا.",
+  ex:"مريض بدأ الكلوزابين من أسبوعين، وفجأة حرارته عالية وبيقول صدري بيوجعني، لازم تبلغ الدكتور بسرعة."}
+ ]}
+]},
+
+{id:"s10",tag:"10. Third-Line Management",title:"Psychosocial Rehabilitation & Physical Health Care",groups:[{items:[
+ {h:"CBTp & Skills Training",en:"Helps evaluate distressing beliefs and develop behavioral skills for community living.",
+  ar:"بيساعد المريض يفحص الأفكار المخيفة اللي عنده، ويتعلم مهارات سلوكية تخليه يعيش وسط المجتمع.",
+  ex:"المعالج بيقوله \"إيه الدليل إن الناس بتراقبك؟\"، وبيدرّبه إزاي يركب المواصلات ويشتري حاجته."},
+ {h:"Family Psychoeducation",en:"Reduces Expressed Emotion (EE), lowers family stress, and identifies early prodromal relapse signs.",
+  ar:"بيقلل الانتقاد والانفعال الزايد في البيت (EE)، وبيقلل ضغط الأسرة، وبيعرّفهم علامات الانتكاسة المبكرة (prodromal).",
+  ex:"الأم تعرف إن لو ابنها بدأ ينام قليل ويتشكك تاني، تروح بيه للمتابعة بدري."},
+ {h:"Cardiometabolic Health",en:"Promotes structured physical activity, nutritional support, and smoking cessation to lower CVD risks.",
+  ar:"بيشجّع على نشاط بدني منتظم، ودعم غذائي، والإقلاع عن التدخين، عشان نقلل خطر أمراض القلب والأوعية.",
+  ex:"تمشّي المريض ٣٠ دقيقة كل يوم، وتساعده يقلل السجاير والأكل الدسم."}
+]}]},
+
+{id:"s11",tag:"Summary Practice Directives",title:"Core Takeaways for Nursing Excellence",groups:[{items:[
+ {h:"1. Prioritize Safety & Reality",en:"Validate distress without reinforcing hallucinations or delusions; de-escalate early.",
+  ar:"طمّن المريض على خوفه من غير ما تؤكد الهلاوس والضلالات، وهدّي الموقف بدري.",
+  ex:"تقول \"أنا مصدّق إنك خايف\"، ومتقولش \"أيوه أنا كمان سمعت الصوت\"."},
+ {h:"2. Monitor Pharmacotherapy",en:"Vigilance for EPS, metabolic side effects, and strict blood protocols during Clozapine therapy.",
+  ar:"خلّي عينك على الأعراض الحركية (EPS)، والآثار الجانبية الأيضية، والتزم بتحاليل الدم بدقة أثناء العلاج بالكلوزابين.",
+  ex:"كل أسبوع تقيس وزنه وتتابع تحليل دمه ومعاد الحقنة."},
+ {h:"3. Holistic Recovery Focus",en:"Integrate family education, social skills training, and physical cardiovascular health.",
+  ar:"اربط بين تثقيف الأسرة، والتدريب على المهارات الاجتماعية، وصحة القلب والجسم.",
+  ex:"مش بس نعالجه بالدوا: نعلّم أهله، ونعلّمه يتعامل مع الناس، ونخليه يتحرك."}
+]}]}
+];
+
+const app=document.getElementById('app'),toc=document.getElementById('toc');
+let total=0;
+D.forEach(s=>{
+  const sec=document.createElement('section');sec.id=s.id;
+  let h=`<div class="sec-head"><span class="sec-tag">${s.tag}</span></div><h2 class="sec-title">${s.title}</h2>`;
+  s.groups.forEach(g=>{
+    if(g.label)h+=`<div class="group">${g.label}</div>`;
+    g.items.forEach(it=>{
+      total++;
+      h+=`<article class="item"><div class="en">${it.h?`<b>${it.h}</b><br>`:''}${it.en}</div><div class="ar">${it.ar}</div><div class="ex exb"><span class="k">عشان تفهمها :</span>${it.ex}</div></article>`;
+    });
+  });
+  sec.innerHTML=h;app.appendChild(sec);
+  const a=document.createElement('a');a.href='#'+s.id;a.textContent=s.tag;toc.appendChild(a);
+});
+document.getElementById('count').textContent=total+' نقطة';
+
+/* progress */
+const prog=document.getElementById('prog');
+addEventListener('scroll',()=>{const h=document.documentElement;prog.style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'},{passive:true});
+
+/* toggle examples */
+const tg=document.getElementById('toggleEx');let shown=true;
+tg.onclick=()=>{shown=!shown;document.querySelectorAll('.exb').forEach(e=>e.style.display=shown?'':'none');tg.textContent=shown?'إخفاء الأمثلة':'إظهار الأمثلة'};
+
+/* theme */
+const tb=document.getElementById('themeBtn');
+let th;try{th=localStorage.getItem('theme')}catch(e){}
+if(!th)th=matchMedia('(prefers-color-scheme: dark)').matches?'dark':'light';
+function ap(t){th=t;document.documentElement.setAttribute('data-theme',t);tb.textContent=t==='dark'?'☀️':'🌙';try{localStorage.setItem('theme',t)}catch(e){}}
+ap(th);tb.onclick=()=>ap(th==='dark'?'light':'dark');
+</script>
+</body>
+</html>
