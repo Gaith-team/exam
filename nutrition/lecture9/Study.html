@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM - Nutrition across the Life Course</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--accent:#15803d;--c2:#ea580c;--c3:#ca8a04;--c4:#be185d;--grad:linear-gradient(135deg,#14532d 0%,#15803d 40%,#65a30d 75%,#ea580c 100%);--bg:#f6faf5;--bg2:#eaf3e7;--card:#fff;--text:#14231a;--text2:#3f5546;--text3:#738a7a;--bc:rgba(20,60,30,.12)}
+[data-theme=dark]{--bg:#0b140e;--bg2:#111e15;--card:#16261b;--text:#e8f5ec;--text2:#b8d2c0;--text3:#7f9a88;--bc:rgba(255,255,255,.1);--accent:#4ade80;--c2:#fb923c;--c3:#facc15;--c4:#f472b6}
+body{font-family:'Outfit','Segoe UI',Tahoma,sans-serif;background:var(--bg);color:var(--text);transition:background .4s,color .4s}
+#pb{position:fixed;top:0;right:0;height:3px;z-index:999;width:0;background:linear-gradient(90deg,var(--accent),var(--c3),var(--c2),var(--c4))}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:60px;background:var(--card);border-bottom:1px solid var(--bc)}
+.brand{display:flex;align-items:center;gap:9px;font-weight:900}
+.logo{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,#15803d,#65a30d);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px}
+.tb{width:38px;height:38px;border-radius:50%;border:1px solid var(--bc);background:var(--bg);cursor:pointer;font-size:15px}
+.hero{margin-top:60px;background:var(--grad);padding:38px 20px 42px;text-align:center;color:#fff}
+.hero .ic{font-size:44px;margin-bottom:8px}
+.hero h1{font-size:clamp(20px,4vw,30px);font-weight:900;direction:ltr}
+.hero p{font-size:13px;opacity:.9;margin-top:6px;direction:ltr}
+.shell{max-width:760px;margin:0 auto;padding:22px 16px 70px}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:22px;direction:ltr}
+.toc a{font-size:12px;font-weight:700;text-decoration:none;color:var(--text2);background:var(--card);border:1px solid var(--bc);padding:6px 12px;border-radius:30px}
+.toc a:hover{border-color:var(--c2);color:var(--c2)}
+.sec{margin-bottom:26px;scroll-margin-top:76px}
+.sh{background:var(--grad);color:#fff;padding:12px 18px;border-radius:14px 14px 0 0;font-weight:900;font-size:16px;direction:ltr;text-align:left}
+.sb{background:var(--card);border:1px solid var(--bc);border-top:0;border-radius:0 0 14px 14px;padding:6px 14px 14px}
+.sub{margin:16px 0 4px;padding:6px 12px;border-radius:8px;background:rgba(202,138,4,.14);color:#a16207;font-weight:800;font-size:13px;direction:ltr;text-align:left}
+[data-theme=dark] .sub{color:var(--c3)}
+.it{margin-top:10px;border:1px solid var(--bc);border-radius:12px;overflow:hidden;background:var(--bg)}
+.en{padding:11px 14px;font-weight:700;font-size:14.5px;line-height:1.6;direction:ltr;text-align:left;border-left:4px solid var(--accent);background:rgba(21,128,61,.07)}
+.ar{padding:10px 14px;font-size:14px;line-height:1.9;color:var(--text);border-right:4px solid var(--c2)}
+.ex{padding:10px 14px;font-size:13.5px;line-height:1.9;color:var(--text2);background:rgba(190,24,93,.06);border-right:4px solid var(--c4)}
+.ex b,.ar b{font-size:12px;margin-left:4px}
+.ar b{color:var(--c2)}.ex b{color:var(--c4)}
+footer{background:var(--bg2);border-top:1px solid var(--bc);padding:20px;text-align:center;font-weight:700;font-size:14px}
+footer span{color:var(--accent)} footer a{color:#229ED9;text-decoration:none;margin-right:10px;font-size:12px}
+</style>
+</head>
+<body>
+<div id="pb"></div>
+<nav><div class="brand"><div class="logo">GT</div>GHAITH TEAM</div><button class="tb" id="tb">🌙</button></nav>
+<div class="hero"><div class="ic">🥗</div><h1>Nutrition across the Life Course</h1><p>Applied Nutrition – Level 2 – 2026/2027</p></div>
+<div class="shell"><div class="toc" id="toc"></div><div id="app"></div></div>
+<footer>GHAITH <span>TEAM</span> <a href="https://t.me/nursing2bu" target="_blank">@nursing2bu</a></footer>
+<script>
+const D=`
+# Introduction
+Nutrition across the life course refers to the nutritional requirements and healthy eating practices needed at different stages of human development, from pregnancy and infancy through childhood, adolescence, adulthood, and older age.||التغذية عبر مراحل العمر معناها الاحتياجات الغذائية وعادات الأكل الصحي اللي محتاجها الإنسان في كل مرحلة، من الحمل والرضاعة لحد الطفولة والمراهقة والبلوغ وكبر السن.||عشان تفهمها: الأكل المناسب لطفل عمره سنة غير الأكل المناسب لراجل عنده سبعين سنة.
+Nutritional needs change with growth, development, physical activity, physiological changes, and health conditions.||احتياجات الأكل بتتغير مع النمو والتطور والنشاط البدني والتغيرات في وظائف الجسم والحالة الصحية.||عشان تفهمها: اللي بيلعب رياضة محتاج أكل أكتر من اللي قاعد، والمريض ممكن يحتاج أكل مختلف.
+# Importance of Adequate Nutrition at Different Life Stages
+Adequate nutrition is essential throughout life because nutritional needs change according to growth, development, activity, and physiological changes.||الأكل الكفاية ضروري طول العمر لأن الاحتياجات بتتغير حسب النمو والتطور والنشاط وتغيرات الجسم.||عشان تفهمها: زي العربية، كل مرحلة محتاجة بنزين بكمية ونوع مختلف.
+## Life Stage / Importance of Adequate Nutrition
+Pregnancy: Supports maternal health, fetal growth and brain development, and helps prevent nutritional deficiencies and complications.||في الحمل الأكل بيدعم صحة الأم ونمو الجنين ومخه، وبيمنع نقص العناصر والمضاعفات.||عشان تفهمها: الأم لو أكلت كويس، الجنين بياخد اللي يحتاجه من غير ما الأم تتعب.
+Lactation: Supports maternal recovery and adequate breast milk production and helps maintain maternal nutrient stores.||في الرضاعة الأكل بيساعد الأم تتعافى وبيساعد على كمية لبن كفاية وبيحافظ على مخزون الأم من العناصر.||عشان تفهمها: الأم بتدّي من جسمها في اللبن، فلازم تعوّض بالأكل.
+Infancy: Provides nutrients needed for rapid growth, brain development, immunity, and healthy development.||في الرضاعة (الرضّع) الأكل بيدّي العناصر للنمو السريع وتطور المخ والمناعة.||عشان تفهمها: الرضيع بيكبر بسرعة جدًا في أول سنة.
+Early Childhood: Supports physical growth, cognitive development, immunity, and development of healthy eating habits.||في الطفولة المبكرة الأكل بيدعم نمو الجسم والتفكير والمناعة وتكوين عادات أكل سليمة.||عشان تفهمها: الطفل اللي يتعود على الفاكهة صغير هيحبها لما يكبر.
+School Age: Provides energy for growth, learning, concentration, physical activity, and immune function.||في سن المدرسة الأكل بيدّي طاقة للنمو والتعلم والتركيز والحركة والمناعة.||عشان تفهمها: التلميذ اللي مبيفطرش بيبقى مشتت في الحصة.
+Adolescence: Supports rapid growth, puberty, bone development, muscle development, and reproductive maturation.||في المراهقة الأكل بيدعم النمو السريع والبلوغ وبناء العظام والعضلات ونضج الجهاز التناسلي.||عشان تفهمها: المراهق بيطول بسرعة فجسمه محتاج مواد بناء كتير.
+Adulthood: Maintains healthy body weight, energy, muscle and bone health, and helps prevent chronic diseases such as diabetes and cardiovascular disease.||في البلوغ الأكل بيحافظ على وزن صحي وطاقة وعضلات وعظام وبيمنع الأمراض المزمنة زي السكر وأمراض القلب.||عشان تفهمها: أكل صح النهارده يحميك من السكر والقلب بعدين.
+Older Adulthood: Helps maintain muscle strength, bone health, immunity, cognitive function, hydration, and independence while reducing the risk of malnutrition.||في كبر السن الأكل بيحافظ على قوة العضلات والعظام والمناعة والتفكير والترطيب والاستقلالية وبيقلل خطر سوء التغذية.||عشان تفهمها: التغذية الكويسة تخلي الجد يمشي ويخدم نفسه لوحده.
+# Nutrition at Different Life Stages
+## 1. Nutrition during pregnancy
+Pregnancy increases the body's nutritional requirements to support maternal health, fetal growth, and development.||الحمل بيزوّد احتياجات الجسم الغذائية عشان تدعم صحة الأم ونمو الجنين وتطوره.||عشان تفهمها: الأم بتاكل لنفسها وللجنين، فاحتياجها أكتر.
+## Important Nutrients
+Protein: growth of fetal tissues and maternal tissues.||البروتين لنمو أنسجة الجنين وأنسجة الأم.||عشان تفهمها: البروتين هو "الطوب" اللي بيتبني بيه الجسم.
+Iron: prevention of maternal anemia and support of fetal blood formation.||الحديد بيمنع أنيميا الأم وبيساعد في تكوين دم الجنين.||عشان تفهمها: من غير حديد الدم يقل والأم تتعب وتبقى شاحبة.
+Folic acid: important for neural tube development.||حمض الفوليك مهم لتكوين الأنبوب العصبي للجنين.||عشان تفهمها: الأنبوب العصبي هو اللي بيتكوّن منه المخ والحبل الشوكي.
+Calcium: fetal bone and teeth development.||الكالسيوم لتكوين عظام وأسنان الجنين.||عشان تفهمها: اللبن والجبن مصدر كويس للكالسيوم.
+Vitamin D: calcium absorption and bone health.||فيتامين د بيساعد على امتصاص الكالسيوم وصحة العظام.||عشان تفهمها: من غيره الكالسيوم ميتمتصش كويس حتى لو أكلته.
+Iodine: fetal brain and nervous-system development.||اليود لنمو مخ الجنين وجهازه العصبي.||عشان تفهمها: اليود عنصر صغير بس تأثيره كبير على ذكاء الطفل.
+Omega-3 fatty acids: fetal brain and eye development.||أوميجا 3 لنمو مخ وعين الجنين.||عشان تفهمها: دهون مفيدة موجودة في السمك.
+## Healthy Practices
+Eat a varied and balanced diet.||كلي أكل متنوع ومتوازن.||عشان تفهمها: متعتمديش على نوع واحد، خدي من كل الأنواع.
+Consume adequate fruits and vegetables.||كلي كمية كفاية من الفاكهة والخضار.||عشان تفهمها: طبق سلطة مع كل غدا.
+Choose whole grains and protein-rich foods.||اختاري الحبوب الكاملة والأكل الغني بالبروتين.||عشان تفهمها: عيش بلدي أحسن من العيش الأبيض، وبيض أو فول أو لحمة للبروتين.
+Drink adequate fluids.||اشربي سوائل كفاية.||عشان تفهمها: ميه بانتظام طول اليوم.
+Take prescribed prenatal supplements.||خدي المكملات اللي الدكتور كاتبها لفترة الحمل.||عشان تفهمها: زي حديد وفوليك بالجرعة اللي الدكتور حددها.
+Avoid alcohol and foods with significant food-safety risks.||ابعدي عن الكحول وعن الأكل اللي فيه خطر على السلامة الغذائية.||عشان تفهمها: الأكل غير المضمون أو الملوث ممكن يأذي الأم والجنين.
+## Common Nutritional Problems
+Iron-deficiency anemia||أنيميا نقص الحديد.||عشان تفهمها: تعب وشحوب بسبب قلة الحديد في الدم.
+Inadequate weight gain||زيادة وزن أقل من المطلوب.||عشان تفهمها: الأم مش بتزيد كفاية في الحمل فالجنين ممكن ميكبرش كويس.
+Excessive weight gain||زيادة وزن أكتر من اللازم.||عشان تفهمها: الأم بتزيد وزن بسرعة زيادة عن المعدل.
+Nausea and vomiting||غثيان وقيء.||عشان تفهمها: بيحصل كتير في الحمل وبيأثر على قدرتها تاكل.
+Constipation||إمساك.||عشان تفهمها: صعوبة في الإخراج، والألياف والميه بيساعدوا.
+## 2. Nutrition during lactation
+Breastfeeding increases nutritional and fluid requirements to support milk production and maternal health.||الرضاعة الطبيعية بتزوّد احتياجات الأكل والسوائل عشان تدعم إنتاج اللبن وصحة الأم.||عشان تفهمها: الأم بتفقد سوائل وعناصر في اللبن فلازم تعوضها.
+## Recommendations
+Eat a balanced and varied diet.||كلي أكل متوازن ومتنوع.||عشان تفهمها: خدي من كل مجموعات الأكل.
+Consume adequate protein.||كلي بروتين كفاية.||عشان تفهمها: بيض ولحمة وبقوليات.
+Maintain adequate hydration.||حافظي على ترطيب كفاية للجسم.||عشان تفهمها: اشربي ميه كتير خصوصًا وقت الرضاعة.
+Include fruits, vegetables, whole grains, dairy or appropriate alternatives, and protein foods.||ضيفي فاكهة وخضار وحبوب كاملة ولبن أو بدائله وأكل بروتين.||عشان تفهمها: طبق فيه من كل مجموعة.
+Continue prescribed supplements when indicated.||كمّلي المكملات المكتوبة لما يكون مطلوب.||عشان تفهمها: متوقفيش المكمل من نفسك إلا بكلام الدكتور.
+## Breastfeeding
+Exclusive breastfeeding is recommended for approximately the first 6 months of life, when possible and appropriate.||الرضاعة الطبيعية الخالصة موصى بيها لأول 6 شهور تقريبًا لو ممكنة ومناسبة.||عشان تفهمها: الرضيع ياخد لبن أمه بس من غير ميه ولا أكل لحد 6 شهور.
+## 3. Nutrition during infancy
+Infancy is a period of rapid growth and development.||الرضاعة (مرحلة الرضيع) فترة نمو وتطور سريع.||عشان تفهمها: وزن الرضيع بيزيد كتير في شهور قليلة.
+## 0–6 Months
+Breast milk is the recommended primary food.||لبن الأم هو الأكل الأساسي الموصى بيه.||عشان تفهمها: ده الأكل الرئيسي للرضيع.
+Appropriate infant formula can be used when breastfeeding is not possible or is insufficient.||ممكن نستخدم لبن صناعي مناسب لو الرضاعة مش ممكنة أو مش كفاية.||عشان تفهمها: لو الأم مش قادرة ترضع أو اللبن قليل.
+Avoid giving complementary foods before the infant is developmentally ready.||متدّيش أكل تكميلي قبل ما الرضيع يبقى جاهز نمائيًا.||عشان تفهمها: متبدأش بأكل جامد وهو لسه مش جاهز.
+## Around 6 Months
+Complementary foods are introduced while breastfeeding continues.||بنبدأ نضيف الأكل التكميلي والرضاعة مستمرة.||عشان تفهمها: الأكل بيتضاف مش بيحل مكان الرضاعة.
+Suitable foods include:||الأكل المناسب بيشمل الآتي:||عشان تفهمها: دي أمثلة للأكل اللي ينفع نبدأ بيه.
+Mashed vegetables and fruits||خضار وفاكهة مهروسة.||عشان تفهمها: زي موزة أو جزر مهروس.
+Cereals and grains||سيريلاك وحبوب.||عشان تفهمها: زي الأرز أو الشوفان المطبوخ.
+Eggs and other protein-rich foods||بيض وأكل غني بالبروتين.||عشان تفهمها: البيض مصدر بروتين للرضيع.
+Legumes||البقوليات.||عشان تفهمها: زي العدس والفول.
+Meat, poultry, or fish prepared appropriately||لحمة أو فراخ أو سمك متحضرين بشكل مناسب.||عشان تفهمها: مطبوخين كويس ومقطعين أو مهروسين مناسب لسنه.
+## Recommendations
+Introduce foods gradually.||أدخل الأكل بالتدريج.||عشان تفهمها: صنف جديد كل مرة مش كلهم مرة واحدة.
+Provide iron-rich foods.||قدّم أكل غني بالحديد.||عشان تفهمها: عشان يتجنب الأنيميا.
+Use appropriate food texture according to developmental stage.||استخدم قوام أكل مناسب لمرحلة نمو الطفل.||عشان تفهمها: مهروس للصغير وبعدين أخشن لما يكبر.
+Maintain safe food preparation and hygiene.||حافظ على تحضير أكل آمن ونظافة.||عشان تفهمها: غسيل إيدين وأدوات نضيفة.
+Avoid choking hazards.||ابعد عن الأكل اللي ممكن يسبب اختناق.||عشان تفهمها: متدّيش حاجة صغيرة وجامدة ممكن تتحشر في حلقه.
+## 4. Nutrition during early childhood
+Early childhood is important for establishing lifelong eating habits.||الطفولة المبكرة مهمة لتكوين عادات الأكل اللي هتفضل طول العمر.||عشان تفهمها: اللي يتعوده الطفل دلوقتي هيكمل بيه.
+## Nutritional Needs
+Children need adequate:||الأطفال محتاجين كفاية من:||عشان تفهمها: دي العناصر اللي جاية تحت.
+Energy||الطاقة.||عشان تفهمها: عشان يلعب ويتحرك.
+Protein||البروتين.||عشان تفهمها: عشان يبني جسمه.
+Iron||الحديد.||عشان تفهمها: عشان الدم.
+Calcium||الكالسيوم.||عشان تفهمها: عشان العظام والسنان.
+Vitamin D||فيتامين د.||عشان تفهمها: عشان العظام وامتصاص الكالسيوم.
+Zinc||الزنك.||عشان تفهمها: عشان النمو.
+Vitamins and minerals||الفيتامينات والمعادن.||عشان تفهمها: عشان الجسم يشتغل صح.
+## Healthy Practices
+Provide regular balanced meals and healthy snacks.||قدّم وجبات متوازنة منتظمة وسناكس صحية.||عشان تفهمها: مواعيد ثابتة وسناك زي فاكهة.
+Encourage fruits and vegetables.||شجّع على الفاكهة والخضار.||عشان تفهمها: خليهم جزء من كل وجبة.
+Offer milk or appropriate dairy alternatives.||قدّم لبن أو بدائل ألبان مناسبة.||عشان تفهمها: للكالسيوم.
+Limit sugary drinks and highly processed foods.||قلل المشروبات السكرية والأكل المصنع جدًا.||عشان تفهمها: مش كل يوم عصاير وشيبسي.
+Encourage water as the main beverage.||شجّع الميه كمشروب أساسي.||عشان تفهمها: الميه هي الاختيار الأول.
+Avoid forcing children to eat.||متجبرش الأطفال على الأكل.||عشان تفهمها: الإجبار بيخليهم يكرهوا الأكل.
+## Common Problems
+Iron-deficiency anemia||أنيميا نقص الحديد.||عشان تفهمها: شحوب وتعب بسبب قلة الحديد.
+Undernutrition||نقص التغذية.||عشان تفهمها: الطفل مش بياخد كفايته من الأكل.
+Stunting||قصر القامة (التقزم).||عشان تفهمها: طول الطفل أقل من سنه.
+Overweight and obesity||زيادة الوزن والسمنة.||عشان تفهمها: وزن الطفل أكتر من المعدل.
+Dental caries||تسوس الأسنان.||عشان تفهمها: بيحصل من كتر السكريات.
+## 5. Nutrition during school age
+Children require adequate nutrition for growth, learning, physical activity, and immunity.||الأطفال محتاجين تغذية كفاية للنمو والتعلم والنشاط والمناعة.||عشان تفهمها: التلميذ بيذاكر ويلعب فمحتاج طاقة.
+## Healthy Diet
+Fruits and vegetables||فاكهة وخضار.||عشان تفهمها: فيتامينات وألياف.
+Whole grains||حبوب كاملة.||عشان تفهمها: زي العيش البلدي.
+Lean protein||بروتين قليل الدهون.||عشان تفهمها: زي صدور الفراخ والسمك.
+Dairy or suitable alternatives||ألبان أو بدائل مناسبة.||عشان تفهمها: لبن وزبادي.
+Adequate water||ميه كفاية.||عشان تفهمها: زجاجة ميه معاه في المدرسة.
+## Healthy School Practices
+Encourage eating breakfast.||شجّع على الفطار.||عشان تفهمها: الفطار بيديه طاقة للتركيز.
+Provide nutritious lunch options.||وفّر اختيارات غدا/سندوتشات مغذية.||عشان تفهمها: سندوتش جبنة وخيار بدل حلويات.
+Limit sugary beverages and highly processed foods.||قلل المشروبات السكرية والأكل المصنع جدًا.||عشان تفهمها: قلل الكانتين من العصاير والشيبسي.
+Encourage physical activity.||شجّع على النشاط البدني.||عشان تفهمها: رياضة وحركة في المدرسة.
+## 6. Nutrition during adolescence
+Adolescence involves rapid physical growth and hormonal changes, resulting in increased nutritional requirements.||المراهقة فيها نمو جسدي سريع وتغيرات هرمونية فبتزيد الاحتياجات الغذائية.||عشان تفهمها: جسمه بيتغير بسرعة فمحتاج أكل أكتر.
+## Important Nutrients
+Protein: growth and tissue development||البروتين للنمو وتكوين الأنسجة.||عشان تفهمها: بناء عضلات وجسم.
+Iron: particularly important because of increased requirements during menstruation||الحديد مهم جدًا بسبب زيادة الاحتياج وقت الدورة الشهرية.||عشان تفهمها: البنت بتفقد دم في الدورة فتحتاج حديد أكتر.
+Calcium and vitamin D: bone development||الكالسيوم وفيتامين د لتكوين العظام.||عشان تفهمها: العظام بتتبني بقوة في المراهقة.
+Zinc: growth and development||الزنك للنمو والتطور.||عشان تفهمها: بيساعد الجسم يكبر ويتطور.
+Folate and other B vitamins: metabolism and cell development||الفولات وفيتامينات ب التانية للتمثيل الغذائي ونمو الخلايا.||عشان تفهمها: بتساعد الجسم يحول الأكل لطاقة ويبني خلايا.
+## Common Nutritional Problems
+Iron-deficiency anemia||أنيميا نقص الحديد.||عشان تفهمها: دوخة وتعب.
+Obesity||السمنة.||عشان تفهمها: وزن زائد بشكل كبير.
+Undernutrition||نقص التغذية.||عشان تفهمها: أكل أقل من احتياجه.
+Skipping meals||تخطي الوجبات.||عشان تفهمها: زي ما يسيب الفطار.
+Excessive consumption of fast food||الإفراط في الوجبات السريعة.||عشان تفهمها: برجر وبطاطس كل يوم.
+Eating disorders||اضطرابات الأكل.||عشان تفهمها: مشاكل نفسية في علاقة الشخص بالأكل.
+## Nursing Role
+Promote healthy body image.||شجّع صورة جسد صحية.||عشان تفهمها: ساعد المراهق يتقبل شكل جسمه.
+Provide nutrition education.||قدّم تثقيف غذائي.||عشان تفهمها: اشرح له الأكل الصح.
+Encourage regular physical activity.||شجّع على النشاط البدني المنتظم.||عشان تفهمها: رياضة بشكل ثابت.
+Identify unhealthy dieting behaviors.||اكتشف سلوكيات الدايت غير الصحية.||عشان تفهمها: زي إنه يمتنع عن الأكل بشكل مبالغ فيه.
+Refer adolescents with suspected eating disorders.||حوّل المراهقين اللي يُشتبه إن عندهم اضطرابات أكل.||عشان تفهمها: ابعتهم للمتخصص.
+## 7. Nutrition during adulthood
+Adults require nutrition that maintains health, energy, body composition, and prevention of chronic disease.||البالغين محتاجين تغذية تحافظ على الصحة والطاقة وتكوين الجسم وتمنع الأمراض المزمنة.||عشان تفهمها: أكل يخليك نشيط ويحميك من الأمراض.
+## Healthy Diet
+Vegetables and fruits||خضار وفاكهة.||عشان تفهمها: أساس الطبق.
+Whole grains||حبوب كاملة.||عشان تفهمها: عيش أسمر وأرز بني.
+Lean protein||بروتين قليل الدهون.||عشان تفهمها: سمك وفراخ.
+Healthy sources of fats||مصادر دهون صحية.||عشان تفهمها: زيت زيتون ومكسرات.
+Adequate water||ميه كفاية.||عشان تفهمها: اشرب بانتظام.
+Appropriate portion sizes||أحجام حصص مناسبة.||عشان تفهمها: كمية معقولة من غير زيادة.
+## Limit
+Excess salt||الملح الزيادة.||عشان تفهمها: بيزود الضغط.
+Added sugars||السكريات المضافة.||عشان تفهمها: السكر اللي بيتحط في الأكل والمشروبات.
+Saturated and trans fats||الدهون المشبعة والمتحولة.||عشان تفهمها: زي السمنة والمقليات.
+Highly processed foods||الأكل المصنع جدًا.||عشان تفهمها: الأكل المعلب والجاهز.
+Excessive alcohol||الكحول الزيادة.||عشان تفهمها: ضار بالجسم لو زاد.
+## Nutrition-Related Health Problems
+Obesity||السمنة.||عشان تفهمها: بتزوّد خطر أمراض تانية.
+Type 2 diabetes||السكر النوع التاني.||عشان تفهمها: مرتبط بالأكل والوزن.
+Hypertension||ارتفاع ضغط الدم.||عشان تفهمها: الملح الزيادة من أسبابه.
+Cardiovascular disease||أمراض القلب والأوعية الدموية.||عشان تفهمها: القلب والشرايين.
+Dyslipidemia||اضطراب دهون الدم.||عشان تفهمها: الكوليسترول والدهون في الدم تبقى مش طبيعية.
+## 8. Nutrition during older adulthood
+Older adults may have reduced energy requirements but still require nutrient-dense foods.||كبار السن ممكن تقل احتياجاتهم من الطاقة بس لسه محتاجين أكل غني بالعناصر.||عشان تفهمها: كمية أقل بس كل لقمة فيها قيمة غذائية.
+## Important Nutrients
+Protein||البروتين.||عشان تفهمها: للحفاظ على العضلات.
+Calcium||الكالسيوم.||عشان تفهمها: للعظام.
+Vitamin D||فيتامين د.||عشان تفهمها: للعظام.
+Vitamin B12||فيتامين ب12.||عشان تفهمها: للدم والأعصاب.
+Iron when indicated||الحديد لما يكون مطلوب.||عشان تفهمها: لو فيه احتياج حسب الحالة.
+Fiber||الألياف.||عشان تفهمها: للهضم.
+Fluids||السوائل.||عشان تفهمها: عشان ميحصلش جفاف.
+## Common Factors Affecting Nutrition
+Reduced appetite||قلة الشهية.||عشان تفهمها: مش بيحس بالجوع.
+Difficulty chewing or swallowing||صعوبة في المضغ أو البلع.||عشان تفهمها: مش قادر ياكل الأكل الجامد.
+Dental problems||مشاكل الأسنان.||عشان تفهمها: أسنان ناقصة أو وجع.
+Reduced taste and smell||ضعف حاسة التذوق والشم.||عشان تفهمها: الأكل بيبقى مالوش طعم.
+Chronic diseases||الأمراض المزمنة.||عشان تفهمها: زي السكر والضغط.
+Medication effects||تأثيرات الأدوية.||عشان تفهمها: بعض الأدوية بتأثر على الشهية.
+Social isolation||العزلة الاجتماعية.||عشان تفهمها: ساكن لوحده فمبيهتمش بالأكل.
+Financial difficulties||صعوبات مادية.||عشان تفهمها: مش قادر يشتري أكل كويس.
+## Common Nutritional Problems
+Undernutrition||نقص التغذية.||عشان تفهمها: مش بياخد كفايته.
+Dehydration||الجفاف.||عشان تفهمها: قلة السوائل في الجسم.
+Constipation||الإمساك.||عشان تفهمها: صعوبة الإخراج.
+Vitamin and mineral deficiencies||نقص الفيتامينات والمعادن.||عشان تفهمها: عناصر ناقصة في الجسم.
+Sarcopenia||ضمور العضلات (السركوبينيا).||عشان تفهمها: العضلات بتضعف مع السن.
+## Nursing Interventions
+Monitor weight and nutritional intake.||راقب الوزن وكمية الأكل.||عشان تفهمها: سجّل وزنه وكام أكل.
+Assess chewing and swallowing.||قيّم المضغ والبلع.||عشان تفهمها: تأكد إنه يقدر ياكل بأمان.
+Provide appropriate food texture.||وفّر قوام أكل مناسب.||عشان تفهمها: أكل لين أو مهروس لو محتاج.
+Encourage adequate fluids.||شجّع على سوائل كفاية.||عشان تفهمها: ميه طول اليوم.
+Offer small, nutrient-dense meals when appetite is poor.||قدّم وجبات صغيرة غنية بالعناصر لما الشهية تبقى ضعيفة.||عشان تفهمها: وجبات صغيرة كتير بدل وجبة كبيرة.
+Monitor for signs of malnutrition.||راقب علامات سوء التغذية.||عشان تفهمها: فقدان وزن وضعف.
+Refer to a dietitian when necessary.||حوّل لأخصائي تغذية لما يلزم.||عشان تفهمها: لو الحالة محتاجة خطة خاصة.
+# General Nursing Role across Life Courses
+The nurse should:||الممرضة لازم تعمل الآتي:||عشان تفهمها: دي مهام الممرضة في كل المراحل.
+1. Assess nutritional status, dietary habits, weight, and growth.||تقيّم الحالة الغذائية وعادات الأكل والوزن والنمو.||عشان تفهمها: تسأل وتقيس وتشوف الطفل أو المريض.
+2. Identify nutritional risk factors and problems.||تحدد عوامل الخطر والمشاكل الغذائية.||عشان تفهمها: تلاحظ إيه اللي ممكن يسبب مشكلة.
+3. Monitor weight, growth, intake, and relevant laboratory findings.||تتابع الوزن والنمو والأكل ونتايج التحاليل المهمة.||عشان تفهمها: تتابع بانتظام وتقارن.
+4. Educate individuals and families about healthy nutrition.||تثقف الأفراد والأسر عن التغذية الصحية.||عشان تفهمها: تشرح لهم الأكل الصح.
+5. Promote breastfeeding and appropriate complementary feeding.||تشجع الرضاعة الطبيعية والتغذية التكميلية المناسبة.||عشان تفهمها: تقنع الأم بالرضاعة وتعلمها تضيف الأكل صح.
+6. Prevent malnutrition, micronutrient deficiencies, and obesity.||تمنع سوء التغذية ونقص الفيتامينات والمعادن والسمنة.||عشان تفهمها: الوقاية أحسن من العلاج.
+7. Provide age-appropriate nutrition counseling.||تقدم إرشاد غذائي مناسب للسن.||عشان تفهمها: كلام للطفل غير كلام لكبير السن.
+8. Encourage healthy lifestyle behaviors.||تشجع سلوكيات نمط حياة صحي.||عشان تفهمها: أكل صح ورياضة ونوم.
+9. Refer patients with nutritional problems to appropriate healthcare professionals.||تحوّل المرضى اللي عندهم مشاكل غذائية للمختصين المناسبين.||عشان تفهمها: تبعتهم للدكتور أو أخصائي التغذية.
+10. Follow up to evaluate nutritional improvement and adherence.||تتابع عشان تقيّم التحسن الغذائي والالتزام.||عشان تفهمها: تشوف لو الحالة اتحسنت والمريض ماشي على النصايح.
+***Good nutrition at every stage of life supports growth, development, immunity, healthy aging, and prevention of disease.||التغذية الجيدة في كل مرحلة بتدعم النمو والتطور والمناعة والشيخوخة الصحية والوقاية من الأمراض.||عشان تفهمها: دي الخلاصة، الأكل الصح في كل عمر بيحميك.
+# Appropriate Nutrition Education for Individuals and Families
+The nurse provides age-appropriate, culturally acceptable, and individualized nutrition education to promote healthy eating and prevent nutritional problems.||الممرضة بتقدم تثقيف غذائي مناسب للسن ومقبول ثقافيًا ومخصص لكل شخص عشان تشجع الأكل الصحي وتمنع المشاكل الغذائية.||عشان تفهمها: النصيحة لازم تناسب سن الشخص وعاداته وظروفه.
+## Key Nutrition Education Points
+## 1. Balanced Diet
+Encourage a variety of foods from all major food groups.||شجّع على تنوع الأكل من كل المجموعات الرئيسية.||عشان تفهمها: متقتصرش على صنف واحد.
+Include vegetables, fruits, whole grains, protein-rich foods, and appropriate dairy or alternatives.||ضيف خضار وفاكهة وحبوب كاملة وأكل غني بالبروتين وألبان أو بدائل مناسبة.||عشان تفهمها: طبق متنوع.
+## 2. Healthy Portion Sizes
+Teach appropriate portion sizes according to age, activity level, and health status.||علّم أحجام الحصص المناسبة حسب السن ومستوى النشاط والحالة الصحية.||عشان تفهمها: اللاعب ياكل أكتر من القاعد.
+Encourage regular, balanced meals.||شجّع على وجبات منتظمة ومتوازنة.||عشان تفهمها: مواعيد ثابتة ومن غير تفويت وجبات.
+## 3. Healthy Food Choices
+Choose fresh and minimally processed foods.||اختار أكل طازج وقليل التصنيع.||عشان تفهمها: فاكهة طازجة أحسن من الجاهزة.
+Limit foods high in added sugars, salt, and unhealthy fats.||قلل الأكل العالي في السكر المضاف والملح والدهون غير الصحية.||عشان تفهمها: قلل الحلويات والمقليات والمخللات.
+Encourage water instead of sugary drinks.||شجّع على الميه بدل المشروبات السكرية.||عشان تفهمها: ميه بدل المياه الغازية.
+## 4. Special Life-Stage Needs
+Pregnancy: adequate protein, iron, folate, calcium, and other essential nutrients.||الحمل: بروتين وحديد وفولات وكالسيوم وعناصر أساسية تانية بكمية كفاية.||عشان تفهمها: دي العناصر المهمة للأم والجنين.
+Infants: breastfeeding and appropriate complementary feeding.||الرضّع: رضاعة طبيعية وتغذية تكميلية مناسبة.||عشان تفهمها: لبن الأم وبعدين أكل بالتدريج.
+Children: nutrient-rich foods to support growth and development.||الأطفال: أكل غني بالعناصر يدعم النمو والتطور.||عشان تفهمها: أكل فيه قيمة غذائية عالية.
+Adolescents: adequate iron, calcium, protein, and healthy eating habits.||المراهقين: حديد وكالسيوم وبروتين كفاية وعادات أكل صحية.||عشان تفهمها: عشان النمو السريع.
+Adults: balanced diet and healthy weight management.||البالغين: أكل متوازن وإدارة وزن صحية.||عشان تفهمها: تحافظ على وزنك.
+Older adults: adequate protein, fluids, fiber, calcium, and vitamin D.||كبار السن: بروتين وسوائل وألياف وكالسيوم وفيتامين د كفاية.||عشان تفهمها: للعضلات والعظام والهضم.
+## 5. Food Safety
+Wash hands before food preparation and eating.||اغسل إيديك قبل تحضير الأكل وقبل ما تاكل.||عشان تفهمها: عشان ميحصلش تلوث.
+Store and cook foods safely.||خزّن واطبخ الأكل بشكل آمن.||عشان تفهمها: تحفظه صح وتطبخه كويس.
+Avoid contaminated or unsafe foods.||ابعد عن الأكل الملوث أو غير الآمن.||عشان تفهمها: متاكلش حاجة شكلها أو ريحتها مش طبيعية.
+## 6. Healthy Lifestyle
+Encourage regular physical activity.||شجّع على نشاط بدني منتظم.||عشان تفهمها: حركة كل يوم.
+Promote adequate sleep.||شجّع على نوم كفاية.||عشان تفهمها: النوم جزء من الصحة.
+Encourage healthy stress-management strategies.||شجّع على طرق صحية للتعامل مع الضغط النفسي.||عشان تفهمها: عشان الضغط ميأثرش على الأكل.
+## 7. Prevention of Nutritional Problems
+Recognize early signs of undernutrition, obesity, and micronutrient deficiencies.||اتعرف بدري على علامات نقص التغذية والسمنة ونقص الفيتامينات والمعادن.||عشان تفهمها: كل ما اكتشفت بدري كان أحسن.
+Encourage regular monitoring of weight and growth in children.||شجّع على متابعة منتظمة لوزن ونمو الأطفال.||عشان تفهمها: قياس الوزن والطول بشكل دوري.
+## 8. Individualized Education
+Consider the person's age, culture, food preferences, economic situation, health condition, and nutritional needs.||راعي سن الشخص وثقافته وتفضيلاته في الأكل ووضعه الاقتصادي وحالته الصحية واحتياجاته الغذائية.||عشان تفهمها: نصيحتك لازم تناسب ظروفه هو.
+Use simple language and practical examples.||استخدم لغة بسيطة وأمثلة عملية.||عشان تفهمها: اتكلم بكلام يفهمه.
+## 9. Family Involvement
+Encourage parents and family members to participate in healthy meal planning.||شجّع الأهل وأفراد الأسرة يشاركوا في تخطيط وجبات صحية.||عشان تفهمها: الأسرة كلها تشارك.
+Promote healthy eating habits for the whole family.||شجّع عادات أكل صحية للأسرة كلها.||عشان تفهمها: الكل ياكل صح مش واحد بس.
+## 10. Follow-Up
+Assess understanding using teach-back.||قيّم الفهم باستخدام طريقة teach-back.||عشان تفهمها: تخلي الشخص يعيد الشرح بكلامه عشان تتأكد إنه فهم.
+Monitor adherence and nutritional progress.||تابع الالتزام والتقدم الغذائي.||عشان تفهمها: شوف لو ماشي على النصيحة.
+Refer to a dietitian when specialized nutritional care is needed.||حوّل لأخصائي تغذية لما تحتاج رعاية غذائية متخصصة.||عشان تفهمها: لو الحالة معقدة.
+`;
+const app=document.getElementById('app'),toc=document.getElementById('toc');
+let cur=null,n=0;
+D.trim().split('\n').forEach(l=>{
+ if(l.startsWith('# ')){n++;const id='s'+n;toc.innerHTML+=`<a href="#${id}">${l.slice(2)}</a>`;
+  const s=document.createElement('div');s.className='sec';s.id=id;s.innerHTML=`<div class="sh">${l.slice(2)}</div><div class="sb"></div>`;app.appendChild(s);cur=s.querySelector('.sb');}
+ else if(l.startsWith('## ')){cur.insertAdjacentHTML('beforeend',`<div class="sub">${l.slice(3)}</div>`);}
+ else{const p=l.split('||');const ex=p[2].replace('عشان تفهمها:','');
+  cur.insertAdjacentHTML('beforeend',`<div class="it"><div class="en">${p[0]}</div><div class="ar">${p[1]}</div><div class="ex"><b>💡 عشان تفهمها:</b>${ex}</div></div>`);}
+});
+const tb=document.getElementById('tb');
+function th(t){document.documentElement.setAttribute('data-theme',t);tb.textContent=t==='dark'?'☀️':'🌙';}
+let t='light';tb.onclick=()=>{t=t==='dark'?'light':'dark';th(t)};
+addEventListener('scroll',()=>{const h=document.documentElement;document.getElementById('pb').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%'});
+</script>
+</body>
+</html>
