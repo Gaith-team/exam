@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mobility | GHAITH TEAM</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--accent:#be123c;--c2:#1d4ed8;--c3:#d97706;--c4:#0d9488;--grad:linear-gradient(135deg,#9f1239 0%,#be123c 30%,#5b21b6 70%,#1e3a8a 100%);--bg:#faf6f6;--bg2:#f3eaec;--card:#fff;--text:#2a1519;--text2:#5b4348;--text3:#8a7479;--bc:rgba(80,20,35,.09);--r:16px}
+[data-theme="dark"]{--bg:#130a0d;--bg2:#1c1015;--card:#25161c;--text:#f5e9ec;--text2:#d4bcc2;--text3:#9c8289;--bc:rgba(255,255,255,.09);--accent:#fb7185;--c2:#60a5fa;--c3:#fbbf24;--c4:#2dd4bf}
+body{font-family:'Outfit','Segoe UI',Tahoma,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden;transition:background .4s,color .4s}
+#pb{position:fixed;top:0;left:0;height:3px;width:0;z-index:999;background:linear-gradient(90deg,var(--accent),var(--c3),var(--c4),var(--c2))}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 24px;height:64px;background:rgba(250,246,246,.93);backdrop-filter:blur(16px);border-bottom:1px solid var(--bc)}
+[data-theme="dark"] nav{background:rgba(19,10,13,.95)}
+.brand{display:flex;align-items:center;gap:9px;font-size:15px;font-weight:900}
+.logo{width:34px;height:34px;border-radius:8px;background:linear-gradient(135deg,#be123c,#1d4ed8);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:900}
+.tb{width:38px;height:38px;border-radius:50%;border:1px solid var(--bc);background:var(--card);cursor:pointer;font-size:15px}
+.hero{margin-top:64px;background:var(--grad);padding:38px 20px 42px;text-align:center;color:#fff}
+.hero .ic{width:64px;height:64px;border-radius:20px;background:rgba(255,255,255,.18);border:1.5px solid rgba(255,255,255,.35);display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 12px}
+.hero h1{font-size:clamp(22px,4vw,32px);font-weight:900}
+.hero p{font-size:13px;opacity:.88;margin-top:4px}
+.shell{max-width:760px;margin:0 auto;padding:20px 16px 80px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:4px 0 14px;position:sticky;top:64px;z-index:50;background:var(--bg)}
+.chips a{flex:0 0 auto;font-size:12px;font-weight:700;color:var(--text2);text-decoration:none;padding:7px 13px;border-radius:50px;border:1px solid var(--bc);background:var(--card);white-space:nowrap}
+.chips a:hover{color:var(--c2);border-color:var(--c2)}
+.sec{margin-top:26px;scroll-margin-top:130px}
+.sec>h2{font-size:17px;font-weight:900;color:#fff;background:var(--grad);padding:12px 18px;border-radius:14px;margin-bottom:12px}
+.sub{font-size:14px;font-weight:900;color:var(--accent);margin:18px 4px 8px;border-inline-start:4px solid var(--c3);padding-inline-start:10px}
+.it{background:var(--card);border:1px solid var(--bc);border-radius:var(--r);padding:14px 16px;margin-bottom:10px;box-shadow:0 2px 12px rgba(120,20,45,.05)}
+.en{direction:ltr;text-align:left;font-size:15px;font-weight:700;line-height:1.6;padding-inline-start:12px;border-left:4px solid var(--accent)}
+.ar{direction:rtl;text-align:right;font-size:14px;color:var(--text2);line-height:1.8;margin-top:9px}
+.ex{direction:rtl;text-align:right;margin-top:9px;padding:10px 13px;border-radius:10px;background:rgba(13,148,136,.09);border-right:3px solid var(--c4);font-size:13px;line-height:1.75;color:var(--text2)}
+.ex b{color:var(--c4);font-weight:900}
+footer{background:var(--bg2);border-top:1px solid var(--bc);padding:20px 24px;text-align:center;font-size:14px;font-weight:700}
+footer span{color:var(--accent)}
+@media(max-width:480px){nav{padding:0 12px}.brand span{display:none}.en{font-size:14px}}
+</style>
+</head>
+<body>
+<div id="pb"></div>
+<nav><div class="brand"><div class="logo">GT</div><span>GHAITH TEAM</span></div><button class="tb" id="tb">🌙</button></nav>
+<div class="hero"><div class="ic">🛏️</div><h1>Mobility</h1><p>Fundamentals of Nursing</p></div>
+<div class="shell"><div class="chips" id="chips"></div><div id="app"></div></div>
+<footer>GHAITH <span>TEAM</span></footer>
+<script>
+const D=[
+["Mobility · Introduction",[
+["Motor function and the ability to move involve all parts of the motor nervous system.","الحركة بتعتمد على الجهاز العصبي الحركي كله، مش جزء واحد بس.","زي العربية: الموتور والبطارية والعجل كلهم لازم يشتغلوا عشان تمشي."],
+["Injury, malformation or disease to any part of this system will therefore affect the individual’s ability to move.","لو أي جزء في الجهاز ده اتصاب أو فيه عيب خلقي أو مرض، قدرة الشخص على الحركة بتتأثر.","لو عجلة واحدة بنشر، العربية كلها مش هتمشي زي الأول."],
+["The motor nervous system includes:","الجهاز الحركي بيتكون من الحاجات اللي جاية.","زي فريق كورة: كل لاعب ليه دور."],
+["1- The central nervous system (CNS).","المخ والحبل الشوكي، هما اللي بيدّوا الأوامر.","زي غرفة التحكم اللي بتبعت الأوامر."],
+["2- The peripheral nervous system.","الأعصاب اللي برّه المخ والحبل الشوكي، بتوصّل الأوامر للعضلات.","زي أسلاك الكهربا اللي بتوصّل الأمر من اللوحة للمروحة."],
+["3- Muscles, ligaments and tendons.","العضلات هي اللي بتتحرك، والأربطة والأوتار بتثبّت وتوصّل العضلة بالعضمة.","العضلة زي الموتور، والوتر زي الحبل اللي بيشدّ."],
+["4- The skeleton.","الهيكل العظمي، هو الإطار اللي الجسم متبني عليه.","زي هيكل العمارة الخرسانية."],
+["5- The spine and discs.","العمود الفقري والغضاريف اللي بين الفقرات، بيدّوا ثبات ومرونة.","الغضاريف زي المساعدين في العربية، بيمتصّوا الصدمات."],
+["Mobility: the ability of a person to move freely and independently from one position or place to another.","الـ Mobility يعني الشخص يتحرك بحرية ومن غير مساعدة، من وضع لوضع أو من مكان لمكان.","إنك تقوم من سريرك وتروح المطبخ لوحدك من غير ما حد يسندك."],
+["Examples include: Turning in bed, Sitting at the bedside.","من أمثلتها: إنك تتقلب في السرير، وتقعد على طرف السرير.","المريض اللي يقلب على جنبه لوحده معاه mobility."],
+["Functional musculoskeletal and nervous systems are essential for mobility, (A person's ability to move about freely).","لازم العضلات والعظام والأعصاب تكون شغالة كويس عشان الحركة الحرة تحصل.","لو العضلة سليمة والعصب مقطوع، العضلة مش هتتحرك."],
+["Immobility: a reduction or complete loss of the ability to move independently.","الـ Immobility يعني قدرة الشخص على الحركة بتقل أو بتروح خالص.","واحد رجله في الجبس مش قادر يمشي لوحده."],
+["It may be temporary or permanent.","ممكن تكون مؤقتة أو دايمة.","الكسر بيتلحم فالمشكلة بتروح (مؤقتة)، لكن إصابة النخاع ممكن تفضل (دايمة)."],
+["For example, a patient with a fractured leg may have temporary immobility, while a patient with a severe neurological disorder may experience long-term limitations.","مريض رجله مكسورة عنده immobility مؤقتة لحد ما العضمة تلحم، ومريض عنده اضطراب عصبي شديد ممكن حركته تفضل محدودة فترة طويلة.","زي الفرق بين عطل بسيط في العربية بيتصلح، وعطل كبير في الموتور نفسه."],
+["Bed rest: Is an intervention in which the client is restricted to bed for therapeutic reasons.","الراحة في السرير تدخّل علاجي، المريض بيتمنع يقوم من السرير لسبب علاجي.","دكتور القلب قال للمريض يلزم السرير كام يوم عشان قلبه يرتاح."],
+["h","Importance of Mobility"],
+["Mobility is essential for maintaining normal body function.","الحركة ضرورية عشان أجهزة الجسم تشتغل بشكل طبيعي.","زي الماكينة اللي لو وقفت فترة بتصدّي."],
+["Regular movement helps maintain:","الحركة المنتظمة بتحافظ على الحاجات دي:","زي ما الجيم بيحافظ على لياقتك، الحركة بتحافظ على أجهزتك."],
+["Muscle strength","قوة العضلات.","اللي بيمشي كل يوم رجليه بتفضل قوية."],
+["Joint flexibility","مرونة المفاصل.","المفصل اللي بيتحرك زي الباب اللي بيتزيّت، مش بيهنّج."],
+["Cardiovascular function","وظيفة القلب والأوعية الدموية.","الحركة بتخلي القلب يضخ الدم بكفاءة."],
+["Respiratory function","وظيفة التنفس.","لما تتحرك بتتنفس أعمق فالرئة بتتهوّى كويس."],
+["Bone health","صحة العظام.","العضمة اللي بتشيل وزن وبتتحرك بتفضل أقوى."],
+["Gastrointestinal function","وظيفة الجهاز الهضمي.","الحركة بتحرّك الأمعاء فالهضم يمشي."],
+["Urinary function","وظيفة الجهاز البولي.","الحركة بتساعد البول ينزل ويفضّي المثانة."],
+["Psychological well-being","الراحة النفسية.","اللي بيتحرك ويخرج بيبقى مزاجه أحسن من اللي حابس نفسه."],
+["Independence in activities of daily living","الاستقلالية في أنشطة الحياة اليومية.","يأكل ويلبس ويدخل الحمام لوحده من غير ما يطلب مساعدة."]
+]],
+["Degrees of mobility",[
+["1. Complete immobility e.g. unconscious patient.","عدم حركة كامل، زي المريض فاقد الوعي.","مريض في غيبوبة مش بيحرّك أي حاجة."],
+["2. Partial mobility e.g. patient with fracture.","حركة جزئية، زي مريض عنده كسر.","مريض كسر في رجله بيحرك إيديه وجسمه بس رجله لأ."],
+["3. Disuse atrophy: Has been used to describe the pathological reduction in normal size of muscle fibers after prolonged inactivity from bed rest, trauma, casting, or local nerve damage.","ضمور عدم الاستخدام: يعني ألياف العضلة بتصغر عن حجمها الطبيعي بشكل مرضي بعد مدة طويلة من عدم الحركة بسبب الراحة في السرير أو إصابة أو جبس أو تلف عصب موضعي.","زي اللي شال الجبس بعد شهر ولقى رجله أنحف من التانية."]
+]],
+["Factors that may affect mobility",[
+["The factors that may affect mobility may be:","العوامل اللي ممكن تأثر على الحركة هي:","زي أسباب كتير ممكن توقف عربية، مش سبب واحد."],
+["1- Physical arising from altered structures, function or processes of movement, for instance weakness arising from conditions such as anemia, neurological or muscular impairment, or fractures.","عوامل جسدية: تغيّر في تركيب أو وظيفة أو عملية الحركة، زي الضعف بسبب أنيميا أو مشكلة عصبية أو عضلية أو كسور.","واحد عنده أنيميا تعبان وضعيف فمش قادر يقوم."],
+["2- Psychological including depression, fear and anxiety (particularly in older people) and altered body image, for example stroke or amputation.","عوامل نفسية: زي الاكتئاب والخوف والقلق (خصوصاً عند كبار السن) وتغيّر صورة الجسم، زي بعد جلطة أو بتر.","راجل كبير خايف يقع فبيقعد ومبيتحركش."],
+["3- Pain including that affecting general joint/muscle movement.","الألم، وخصوصاً اللي بيأثر على حركة المفاصل والعضلات عموماً.","اللي ركبته بتوجعه بيتجنب المشي."],
+["4- Environmental/social : such as poor housing, wet floors, inappropriate footwear, bed height, lack of assistive devices","عوامل البيئة والمجتمع: زي سكن وحش، أرضية مبلولة، جزمة مش مناسبة، ارتفاع السرير، ومفيش أدوات مساعدة.","أرضية الحمام مبلولة فالمريض خايف يمشي عليها."],
+["5-Treatment-related factors: as surgery, intravenous lines, urinary catheters, drains, casts, traction, sedative medications","عوامل مرتبطة بالعلاج: زي العمليات، الكانيولا الوريدية، القسطرة البولية، التصريف، الجبس، الشد، والأدوية المهدئة.","مريض متوصّل بكانيولا وقسطرة وdrain، حركته متقيدة بالأجهزة دي."]
+]],
+["Effect of immobility on physiological condition",[
+["Effect of immobility on physiological condition of patients: Including changes in the following systems:","تأثير عدم الحركة على حالة المريض الفسيولوجية، وبيشمل تغيرات في الأجهزة دي:","زي ما عطل واحد في مصنع بيأثر على كل الخطوط."],
+["1. Respiratory system","الجهاز التنفسي.","الرئة بتتأثر لو المريض نايم على ضهره طول الوقت."],
+["2. Cardiovascular system.","الجهاز القلبي الوعائي.","الدم بيتجمع في الرجلين لو مفيش حركة."],
+["3. Musculoskeletal system.","الجهاز العضلي الهيكلي.","العضلات بتضعف والمفاصل بتتيبّس."],
+["4. Integumentary system.","الجلد.","الجلد اللي بيستحمل ضغط مستمر بيتقرّح."],
+["5. Urinary system.","الجهاز البولي.","البول بيركد في المثانة."],
+["6. Fecal elimination.","إخراج البراز.","الأمعاء بتكسل فيحصل إمساك."],
+["7. Neurosensory system.","الجهاز العصبي الحسي.","المريض بيتأثر نفسياً وإدراكياً من الملل والعزلة."]
+]],
+["1. Respiratory changes",[
+["Immobility can decrease effective lung expansion and may contribute to retained respiratory secretions.","عدم الحركة ممكن يقلل تمدد الرئة بشكل فعّال وممكن يخلي الإفرازات التنفسية تفضل محبوسة.","زي البالون اللي مش بتنفخه كويس، مش بيتمدد كله."],
+["Potential complications include:","المضاعفات المحتملة:","دي المشاكل اللي ممكن تحصل في الآخر."],
+["Reduced ventilation","قلة التهوية.","هوا أقل بيدخل الرئة."],
+["Atelectatic changes","تغيّرات انخماص الرئة (atelectasis).","الحويصلات بتنكمش وتقفل زي بالونة اتفشّت."],
+["Retained secretions","إفرازات محبوسة.","البلغم قاعد في الصدر مش عارف يطلع."],
+["Increased risk of respiratory infection","زيادة خطر عدوى الجهاز التنفسي.","البلغم الراكد مكان كويس للميكروبات تتكاثر."],
+["Nursing Interventions for respiratory changes:","التدخلات التمريضية للتغيرات التنفسية:","دي اللي الممرضة بتعمله عشان تمنع المشاكل اللي فاتت."],
+["Aim: Maintain airway patency, achieve optimal lung expansion and gas exchange, and mobilize airway secretions.","الهدف: الحفاظ على المجرى الهوائي مفتوح، وتحقيق أفضل تمدد للرئة وتبادل غازات، وتحريك الإفرازات.","زي ما بتفتح الأنبوبة المسدودة عشان الميّه تجري."],
+["Put patient in upright positioning","خلّي المريض في وضع قاعد/معتدل.","وهو قاعد الرئة بتتمدد أحسن من وهو نايم."],
+["Teach patient deep breathing and coughing exercise","علّم المريض تمارين التنفس العميق والكحة.","شهيق عميق وكحة قوية بتطلّع البلغم."],
+["Appropriate activity and mobilization","نشاط وتحريك مناسب للمريض.","مشي بسيط حسب حالته."],
+["Incentive spirometry when prescribed or indicated","استخدام جهاز الـ incentive spirometer لما يكون مكتوب أو مطلوب.","جهاز بينفخ فيه المريض عشان يوسّع رئته."],
+["Changing position and exercise every 1 to 2 hrs.","غيّر الوضع واعمل تمارين كل ساعة لساعتين.","زي المنبه: كل ساعتين اتحرك."]
+]],
+["2. Cardiovascular changes",[
+["The three major changes are:","التغيرات الرئيسية التلاتة هي:","هنشرحهم واحد واحد."],
+["Orthostatic hypotension","هبوط الضغط الانتصابي.","تقوم بسرعة فتحس بدوخة."],
+["Venous stasis","ركود الدم في الأوردة.","الدم بيتجمع في الرجلين زي المياه الراكدة."],
+["Peripheral edema","تورّم الأطراف.","الرجلين بتورم من السوايل المتجمعة."],
+["Reduced cardiovascular tolerance","قلة تحمّل القلب والأوعية للمجهود.","واحد بقاله شهر في السرير، يمشي خطوتين يتهجّ."],
+["Orthostatic hypotension: This occurs when blood pressure falls significantly after changing position, particularly when moving from lying to sitting or standing.","ده بيحصل لما الضغط ينزل كتير بعد تغيير الوضع، خصوصاً من نايم لقاعد أو واقف.","قمت من السرير فجأة، الدم نزل من راسك، الدنيا لفّت."],
+["The patient may experience: Dizziness, Weakness, Fainting","المريض ممكن يحس بـ: دوخة، ضعف، إغماء.","الدماغ بتاخد دم أقل لحظة فبتتلخبط."],
+["Therefore, when mobilizing a patient who has been on bed rest, do not move them rapidly from lying to standing.","عشان كده، لما تحرّك مريض كان على راحة سرير، متنقلوش بسرعة من نايم لواقف.","زي ما بتفتح الباب بالراحة عشان ميخبطش فيك."],
+["Instead:","بدل كده:","اتبع الخطوات دي بالترتيب."],
+["1. Raise the head of the bed.","ارفع راس السرير.","ابدأ بالتدريج، مش مرة واحدة."],
+["2. Help the patient sit.","ساعد المريض يقعد.","مسنده من ضهره وكتفه."],
+["3. Allow time for adjustment.","اديله وقت يتأقلم.","استنى دقيقة يتعوّد على الوضع."],
+["4. Assess for dizziness.","اسأله وقيّم لو عنده دوخة.","اسأل: دايخ؟ شايف عادي؟"],
+["5. Assist the patient to stand.","ساعده يقف.","وقّفه وانت ماسكه."],
+["6. Continue monitoring.","كمّل مراقبة.","فضل متابعه وهو واقف ومشي."],
+["Nursing Interventions for Cardiovascular changes:","التدخلات التمريضية للتغيرات القلبية الوعائية:","الخطوات اللي تمنع المشاكل القلبية."],
+["Aim: Maintain cardiovascular function, increase activity tolerance, and prevent thrombus formation.","الهدف: الحفاظ على وظيفة القلب والأوعية، وزيادة تحمّل النشاط، ومنع تكوّن الجلطات.","الدم لازم يفضل جاري عشان ميتجلطش."],
+["Movement and exercise.","حركة وتمارين.","تحريك الرجلين وهو في السرير بيحرّك الدم."],
+["Use vertical positions.","استخدم الأوضاع الرأسية (قاعد/واقف).","الجاذبية بتساعد الدورة الدموية."],
+["Encourage normal breathing pattern.","شجّع نمط تنفس طبيعي.","من غير حبس نفس أو شد."],
+["Elastic stocking.","الشراب الضاغط (elastic stocking).","بيضغط على الرجلين فمبيسيبش الدم يركد."]
+]],
+["3. Musculoskeletal changes",[
+["Immobility leads to permanent impairment of mobility which causing:","عدم الحركة بيؤدي لضعف دايم في الحركة، وده بيسبب:","لو سبت الحاجة من غير استخدام بتتلف."],
+["Muscle weakness","ضعف العضلات.","العضلة اللي مش بتتستخدم بتفقد قوتها."],
+["Muscle atrophy","ضمور العضلات.","العضلة بتصغر وتنحف."],
+["Decreased muscle tone","قلة شدّ العضلات.","العضلة بتبقى رخوة."],
+["Joint stiffness","تيبّس المفاصل.","المفصل مش بيتني بسهولة."],
+["Contractures","تقلّصات دايمة.","العضلة بتتقصر وتشدّ المفصل."],
+["Loss of bone density","فقدان كثافة العظام.","العضمة بتبقى هشّة."],
+["Increased risk of osteoporosis","زيادة خطر هشاشة العظام.","العضمة بتتكسر بسهولة."],
+["Contracture","تقلّص دايم.","نفس النقطة اللي فوق، اتكتبت تاني في المحاضرة."],
+["A contracture is a permanent shortening of a muscle, tendon, or other tissue that can restrict joint movement.","الـ contracture هو تقصير دايم في العضلة أو الوتر أو نسيج تاني، وبيحدّ من حركة المفصل.","زي الحبل اللي اتشدّ وقصر فمبقاش المفصل يتحرك لآخره."],
+["For example, prolonged positioning of a patient without adequate range-of-motion exercises may result in limited joint movement.","مثلاً لو المريض فضل في وضع واحد مدة طويلة من غير تمارين المدى الحركي، المفصل حركته هتتحدد.","مريض إيده مثنية على صدره أسبوعين، مبقاش قادر يفردها."],
+["Nursing prevention: The nurse should:","الوقاية التمريضية: الممرضة المفروض:","دي خطوات المنع."],
+["Encourage appropriate activity.","تشجّع نشاط مناسب.","اطلب منه يتحرك قد ما يقدر."],
+["Perform or assist with range-of-motion exercises.","تعمل أو تساعد في تمارين المدى الحركي (ROM).","تحرّك المفصل لآخره بالراحة."],
+["Maintain proper body alignment.","تحافظ على استقامة الجسم الصحيحة.","جسمه يبقى معدول مش ملخبط."],
+["Reposition the patient regularly.","تغيّر وضع المريض بانتظام.","كل ساعتين اقلبه."],
+["Use appropriate positioning devices when indicated.","تستخدم أدوات التوضيع المناسبة لما تتطلب.","زي المخدات والـ rolls اللي بتسند الجسم."],
+["Active and passive range of motion.","تمارين المدى الحركي الفعالة والسلبية.","فعالة: المريض بيعملها، سلبية: الممرضة بتعملها."]
+]],
+["4. Integumentary changes",[
+["A pressure ulcer, or decubitus ulcer, Is the consequence of ischemia and anoxia to tissue.","قرحة الضغط أو decubitus ulcer هي نتيجة نقص تروية ونقص أكسجين للنسيج.","زي لما تفضل قاعد على رجلك فتنمّل، بس لو استمر الجلد بيموت."],
+["Tissues are compressed, blood diverted, and blood vessels powerfully constricted by continual pressure on the skin and underlying structures; thus cellular respiration is impaired, and cells die.","الأنسجة بتتضغط، والدم بيتحوّل بعيد، والأوعية بتضيق جامد بسبب الضغط المستمر على الجلد والأنسجة اللي تحته، فتنفس الخلايا بيتأثر والخلايا بتموت.","لو ضغطت على خرطوم الميّه مدة طويلة، الميّه متوصلش للآخر."],
+["Loss of skin turgor and elasticity.","فقدان شدّ ومرونة الجلد.","الجلد لما تقرصه مبيرجعش بسرعة."],
+["Pressure Areas","مناطق الضغط (مكتوبة تحت صورة في المحاضرة).","العضم البارز زي الكعب والعصعص هي أكتر مناطق بتتعرض للضغط."],
+["Nursing Interventions for integumentary changes","التدخلات التمريضية لتغيرات الجلد.","الخطوات اللي تحمي الجلد."],
+["Assess pressure-injury risk.","قيّم خطر إصابات الضغط.","اعرف مين أكتر عرضة قبل ما تحصل مشكلة."],
+["Reposition according to the individualized care plan.","غيّر الوضع حسب خطة الرعاية الخاصة بالمريض.","كل مريض ليه جدول قلب مناسب له."],
+["Inspect the skin regularly.","افحص الجلد بانتظام.","بص على مناطق الضغط كل يوم."],
+["Keep the skin clean and dry.","خلي الجلد نضيف وناشف.","الرطوبة بتسهّل التقرّح."],
+["Reduce pressure and shear.","قلل الضغط والاحتكاك/الشدّ (shear).","متسحبوش المريض على السرير، ارفعه."],
+["Encourage mobility whenever safe.","شجّع الحركة طالما آمنة.","أي حركة بتخفف الضغط."],
+["Ensure adequate nutrition and hydration when appropriate.","اتأكد إن التغذية والسوايل كفاية لما يكون مناسب.","الجلد محتاج أكل وميّه عشان يتجدد."]
+]],
+["5. Urinary elimination changes",[
+["Urinary stasis.","ركود البول.","البول قاعد في المثانة مش بيتصرف."],
+["Renal calculi formation.","تكوّن حصوات الكلى.","الأملاح بتتجمع وتتحول لحصوة."],
+["Urinary incontinence.","سلس البول.","البول بينزل من غير تحكم."],
+["Urinary retention.","احتباس البول.","المثانة ممتلية والمريض مش قادر يفضّيها."],
+["Urinary tract infection.","التهاب المسالك البولية.","الميكروبات بتتكاثر في البول الراكد."],
+["Urinary stasis increases the risk of:","ركود البول بيزوّد خطر:","ده اللي بيحصل بسبب الركود."],
+["Urinary tract infection.","التهاب المسالك البولية.","الميكروب بيعيش في البول الراكد."],
+["Renal calculi.","حصوات الكلى.","الأملاح بتترسب في البول الراكد."],
+["Renal calculi: Are calcium stones that lodge in the renal pelvis and pass through the ureters.","حصوات الكلى هي حصوات كالسيوم بتستقر في حوض الكلى وبتعدي في الحالب.","حتة صغيرة بتتحرك في الأنبوبة وتوجع."],
+["Causes of renal calculi in immobilized client:","أسباب حصوات الكلى عند المريض اللي مش بيتحرك:","دي الأسباب."],
+["Altered calcium metabolism.","اضطراب في أيض الكالسيوم.","الجسم مش بيتعامل مع الكالسيوم بشكل طبيعي."],
+["The resulting hypercalcemia.","وبالتالي ارتفاع الكالسيوم في الدم.","الكالسيوم الزايد بيطلع في البول ويتحجّر."],
+["Nursing Interventions for urinary elimination changes","التدخلات التمريضية لتغيرات إخراج البول.","خطوات المنع."],
+["Turning, positioning and exercise.","التقليب والتوضيع والتمارين.","الحركة بتساعد المثانة تفضى."],
+["Encouraging appropriate mobility and adequate hydration","تشجيع الحركة المناسبة وشرب سوايل كفاية.","الميّه بتغسل المسالك."],
+["Perianal hygiene.","نظافة المنطقة حوالين الشرج.","بتقلل نقل الميكروبات للمسالك."],
+["Position and relaxation of urination.","وضع مناسب واسترخاء وقت التبول.","لو المريض مرتاح وفي وضع مناسب هيتبول أسهل."]
+]],
+["6. Gastrointestinal changes",[
+["Decreased appetite","قلة الشهية.","مفيش حركة فمفيش جوع."],
+["Constipation","إمساك.","الأمعاء كسلانة."],
+["Abdominal discomfort","انزعاج في البطن.","تحس بنفخة وتقل."],
+["Nursing interventions: The nurse should encourage, when appropriate:","التدخلات التمريضية: الممرضة تشجّع لما يكون مناسب:","الحاجات دي بتسهّل الهضم."],
+["Adequate fluid intake","شرب سوايل كفاية.","الميّه بتليّن البراز."],
+["Appropriate dietary fiber","ألياف غذائية مناسبة.","الخضار والفواكه بتحرّك الأمعاء."],
+["Physical activity","نشاط بدني.","الحركة بتحرّك الأمعاء."],
+["Regular toileting","الدخول للحمام بانتظام.","ميعاد ثابت يعوّد الجسم."],
+["Prescribed medications when necessary","الأدوية المكتوبة لما يكون لازم.","زي الملينات بأمر الدكتور."],
+["Always consider the patient's diagnosis and fluid/diet restrictions","دايماً راعي تشخيص المريض وقيود السوايل والأكل.","مريض قلب أو كلى ممكن يتمنع من السوايل."]
+]],
+["7. Psychosocial effects of immobility",[
+["Depression.","اكتئاب.","المريض بيحس إنه حبيس السرير."],
+["Behavioral changes.","تغيرات سلوكية.","ممكن يبقى عصبي أو منعزل."],
+["Changes in the sleep-wake cycle.","تغيّر دورة النوم واليقظة.","ينام نهار ويسهر ليل."],
+["Impaired coping.","ضعف القدرة على التكيّف.","مبيقدرش يتعامل مع حالته."],
+["Impaired decision making and problem solving abilities.","ضعف اتخاذ القرار وحل المشاكل.","يتلخبط في القرارات البسيطة."],
+["Loss of self-esteem.","فقدان الثقة بالنفس.","يحس إنه عبء على غيره."],
+["Nursing Interventions: Maintain an acceptable sleep/wake pattern","التدخلات التمريضية: حافظ على نمط نوم/يقظة مقبول.","نوّره بالنهار ونوّمه بالليل."],
+["Achieve socialization, and complete self-care independently.","حقّق التواصل الاجتماعي، وخلّيه يعتني بنفسه باستقلالية.","خلّيه يتكلم مع الناس ويعمل اللي يقدر عليه بنفسه."]
+]],
+["Activity and Exercise",[
+["Muscles that are not used become weak and shortened during prolonged bed rest, strength and endurance decrease rapidly.","العضلات اللي مش بتتستخدم بتضعف وتقصر في الراحة الطويلة، والقوة والتحمل بيقلوا بسرعة.","الإسبوع في السرير ممكن يعمل فرق كبير."],
+["Patient can regain muscle strength and mobility by practicing specific groups of exercises daily.","المريض يقدر يرجّع قوة العضلات والحركة بممارسة مجموعات تمارين معينة كل يوم.","زي اللي بيرجّع لياقته بالجيم بالتدريج."],
+["Regular exercise contributes to a healthy body; therefore, immobility has a negative effect.","التمارين المنتظمة بتساهم في جسم صحي، عشان كده عدم الحركة ليه تأثير سلبي.","اللي بيتمرن بيبقى أصحّ."],
+["The purpose of exercises","هدف التمارين.","ليه بنعملها؟"],
+["1- To promote proper alignment,","تعزيز استقامة الجسم الصحيحة.","جسم معدول."],
+["2- To prevent contractures and atrophy of muscles,","منع التقلصات وضمور العضلات.","العضلة متتشدّش وتضمر."],
+["3- To stimulate circulation,","تنشيط الدورة الدموية.","الدم يجري."],
+["4- To prevent thrombophlebitis and pressure ulcer,","منع التهاب الوريد الخثاري وقرحة الضغط.","الدم ميتجلطش والجلد ميتقرّحش."],
+["5- To reduces joint pain and stiffness,","تقليل ألم وتيبّس المفاصل.","المفصل يفضل مرن."],
+["6- To increases flexibility and endurance,","زيادة المرونة والتحمل.","يتعب أقل."],
+["7- To prevents edema of the extremities, and","منع تورم الأطراف.","السوايل متتجمعش في الرجلين."],
+["8- To promotes lung expansion.","تعزيز تمدد الرئة.","رئة أحسن تهوية."]
+]],
+["Types of exercises",[
+["1-Passive exercises: are carried out by the therapist or nurse without assistance from the patient. These exercises enable the patient to retain as much joint range of motion as possible, as well as stimulating circulation.","التمارين السلبية: بيعملها المعالج أو الممرضة من غير مشاركة المريض، وبتخلي المريض يحتفظ بأكبر مدى حركي للمفصل وبتنشّط الدورة الدموية.","مريض في غيبوبة، الممرضة بتحرّك إيده ورجله."],
+["2- Active assistive exercises: these exercises are performed by the patient with assistance from the nurse. Active assistive exercises encourage normal muscle function.","التمارين الفعالة المساعَدة: المريض بيعملها وهو واخد مساعدة من الممرضة، وبتشجّع وظيفة العضلة الطبيعية.","المريض بيرفع إيده والممرضة بتسنده."],
+["3- Active exercises: although supervised by the nurse, are performed by the patient. These exercises increase muscle strength when the patient is partially immobile.","التمارين الفعالة: المريض هو اللي بيعملها بإشراف الممرضة، وبتزوّد قوة العضلة لما المريض يكون حركته جزئية.","المريض بيرفع رجله لوحده والممرضة واقفة تتابع."],
+["4-Resistive exercises: these are active exercises performed by the patient by pulling or pushing an opposing force in order to increase muscle power.","التمارين المقاومة: تمارين فعالة بيعملها المريض بالشد أو الدفع ضد قوة مقاومة عشان يزوّد قوة العضلة.","زي رفع الأثقال أو الضغط على كورة مطاط."],
+["5-Range of motion (ROM) exercises are the most common form of exercises for maintaining joint mobility and increasing maximal motion of a joint when the client is totally or partially immobilized. These exercises are completed by the nurse or physical therapist.","تمارين المدى الحركي (ROM) هي أشهر نوع تمارين للحفاظ على حركة المفصل وزيادة أقصى حركة له لما المريض يكون مش بيتحرك كلياً أو جزئياً. وبتتعمل بواسطة الممرضة أو أخصائي العلاج الطبيعي.","تحرّك مفصل الكوع من فرد لثني لآخره."]
+]],
+["Common terminology related to exercise",[
+["Abduction: Moving away from the median line","الإبعاد: الحركة بعيد عن الخط الأوسط للجسم.","ترفع دراعك جنب بعيد عن جسمك."],
+["Adduction: Moving towards the median line","التقريب: الحركة ناحية الخط الأوسط.","تنزّل دراعك لجنبك."],
+["Circumduction: Moving through a circle, in combination","الحركة الدائرية: حركة في دايرة بتجمع أكتر من حركة.","تلف دراعك في دايرة زي الطاحونة."],
+["Contraction: Shortening or drawing together","الانقباض: التقصير أو الشدّ لبعض.","تعمل بايسبس بتشد العضلة."],
+["Dependent: Unable to help, needs full assistance to achieve task","اعتمادي: مش قادر يساعد ومحتاج مساعدة كاملة لإنجاز المهمة.","مريض مش قادر ياكل ولا يلبس من غير مساعدة."],
+["Independent: Needs no assistance with task","مستقل: مش محتاج مساعدة في المهمة.","يقدر يعمل كل حاجة لوحده."],
+["Dorsal: Relating to the back","ظهري: يخص الضهر.","الجهة الخلفية."],
+["Dorsiflexion: Bending of the foot and toes upwards","ثني ظهري: ثني القدم والأصابع لفوق.","ترفع مقدمة رجلك لفوق ناحية السما."],
+["Extension: Straightening","البسط: فرد المفصل.","تفرد كوعك."],
+["External rotation: Rolling outwards","دوران خارجي: اللفّ لبرّه.","تلف رجلك لبرّه."],
+["Internal rotation: Rolling inwards","دوران داخلي: اللفّ لجوّه.","تلف رجلك لجوّه."],
+["Hemiparesis: Weakness /paralysis on one side of the body","ضعف نصفي: ضعف أو شلل جزئي في جانب واحد من الجسم.","بعد جلطة، الإيد والرجل اليمين ضعفانين."],
+["Hemiplegia: Paralysis on one side of the body","شلل نصفي: شلل كامل في جانب واحد من الجسم.","الجانب الشمال مش بيتحرك خالص."],
+["Contractures: Deformity caused by shortening of muscles, tendons and ligaments","التقلصات: تشوه ناتج عن تقصير العضلات والأوتار والأربطة.","الإيد متثنية ومتفردش."]
+]],
+["Nursing care for immobilized patient",[
+["h","1- Nursing assessment"],
+["Before mobilizing a patient, the nurse should perform an appropriate assessment.","قبل ما تحرّك المريض، الممرضة لازم تعمل تقييم مناسب.","زي ما بتكشف على الطريق قبل ما تسوق."],
+["Assess:","قيّم:","ده اللي هتقيّمه."],
+["Muscle strength","قوة العضلات.","هل يقدر يرفع إيده؟"],
+["Balance","التوازن.","هل يقف من غير ما يتمايل؟"],
+["Coordination","التناسق الحركي.","هل حركاته منتظمة؟"],
+["Range of motion","المدى الحركي.","كام درجة يقدر يحرّك المفصل؟"],
+["Gait","طريقة المشي.","بيمشي معدول ولا بيعرج؟"],
+["Pain","الألم.","هل في ألم يمنعه؟"],
+["Level of consciousness","مستوى الوعي.","هل فايق ويفهم؟"],
+["Neurological status","الحالة العصبية.","هل في ضعف أو تنميل؟"],
+["Cardiovascular status","الحالة القلبية الوعائية.","النبض والضغط."],
+["Respiratory status","الحالة التنفسية.","معدل التنفس وهل في ضيق نفس."],
+["Activity tolerance","تحمّل النشاط.","يقدر يتحرك قد إيه من غير ما يتعب؟"],
+["Assessing Activity Tolerance: Activity tolerance is the ability to perform activity without experiencing excessive physiological stress.","تقييم تحمّل النشاط: هو القدرة على أداء النشاط من غير ضغط فسيولوجي زايد.","تقدر تطلع سلالم من غير ما تلهث بزيادة."],
+["Observe for:","لاحظ:","علامات إنه مش متحمل."],
+["Shortness of breath","ضيق نفس.","يتنفس بصعوبة."],
+["Chest discomfort","انزعاج في الصدر.","وجع أو ضغط في الصدر."],
+["Dizziness","دوخة.","الدنيا بتلف."],
+["Excessive fatigue","تعب زايد.","مرهق جداً بعد حركة بسيطة."],
+["Weakness","ضعف.","جسمه مش شايله."],
+["Pallor","شحوب.","وشه بقى أصفر."],
+["Cyanosis","زرقة.","شفايفه أو أطرافه زرقا."],
+["Abnormal heart-rate response","استجابة غير طبيعية في معدل النبض.","نبضه يعلى جداً مع حركة بسيطة."],
+["Significant blood-pressure changes","تغيّرات كبيرة في الضغط.","ضغطه ينزل أو يطلع فجأة."],
+["h","2- Examples of NANDA nursing diagnosis related to impaired mobility"],
+["1- Impaired physical mobility R/T reduced range of motion, bed rest, decreased strength.","اضطراب الحركة الجسدية مرتبط بقلة المدى الحركي، الراحة في السرير، وقلة القوة.","المريض مش قادر يتحرك بسبب الجبس والضعف."],
+["2- Ineffective breathing pattern r/t decreased lung expansion, accumulation of pulmonary secretions, improper body positioning.","نمط تنفس غير فعال مرتبط بقلة تمدد الرئة، تراكم الإفرازات الرئوية، ووضع جسم غير مناسب.","المريض نايم مسطح والبلغم متراكم فنفسه تقيل."],
+["3- Impaired skin integrity r/t restricted mobility, pressure on skin’s surface, shearing force.","اضطراب سلامة الجلد مرتبط بتقييد الحركة، الضغط على سطح الجلد، وقوة الشدّ (shear).","الجلد بيتجرح من الضغط والاحتكاك."],
+["4- Risk for fluid volume deficit r/t decreased fluid intake.","خطر نقص حجم السوايل مرتبط بقلة شرب السوايل.","المريض مش بيشرب كفاية فممكن يجفّ."],
+["5- Ineffective individual coping r/t reduced activity level, social isolation.","تكيّف فردي غير فعال مرتبط بقلة النشاط والعزلة الاجتماعية.","مريض لوحده في أوضة مبيتحركش فبيتعب نفسياً."],
+["h","3- Nursing planning to Promote Mobility"],
+["The patient will demonstrate improved mobility and perform movement safely with the appropriate level of assistance.","المريض هيظهر تحسن في الحركة وهيتحرك بأمان بمستوى المساعدة المناسب.","يقوم من السرير بمساعدة بسيطة من غير ما يقع."],
+["The patient will gradually increase activity without excessive fatigue, dyspnea, dizziness, or other adverse symptoms.","المريض هيزوّد نشاطه تدريجياً من غير تعب زايد أو ضيق نفس أو دوخة أو أعراض سلبية.","النهاردة خطوتين، بكرة خمسة، من غير ما يتعب."],
+["h","4- Nursing implementation to Promote Mobility"],
+["Our goal is to promote the highest safe level of independence.","هدفنا نعزّز أعلى مستوى آمن من الاستقلالية.","نخليه يعتمد على نفسه قد ما يقدر بأمان."],
+["Important interventions include:","التدخلات المهمة بتشمل:","دي أهم الخطوات."],
+["1. Encourage independence","شجّع الاستقلالية.","سيبه يعمل اللي يقدر عليه."],
+["Allow patients to perform activities they can safely perform themselves.","اسمح للمرضى يعملوا الأنشطة اللي يقدروا يعملوها بأمان لوحدهم.","لو يقدر يمسك الكوباية، سيبه يمسكها."],
+["Do not do everything for the patient unnecessarily.","متعملش كل حاجة للمريض من غير لزوم.","لو عملت كل حاجة هو هيتعوّد على الاعتماد."],
+["2. Increase activity gradually","زوّد النشاط بالتدريج.","زي ما الطفل بيتعلم يمشي خطوة خطوة."],
+["For a patient who has been on bed rest:","لمريض كان على راحة سرير:","الترتيب ده."],
+["Bed → Sitting → Standing → Transferring → Walking","سرير ← قعاد ← وقوف ← نقل ← مشي.","بنبدأ بالأبسط ونطلع للأصعب."],
+["Progress according to tolerance and clinical condition.","اتقدّم حسب تحمّل المريض وحالته الإكلينيكية.","لو تعب في مرحلة، ارجع خطوة."],
+["3. Control pain","تحكّم في الألم.","الألم ممكن يمنع المريض من الحركة."],
+["Pain can be a major barrier to mobility.","الألم ممكن يكون عائق كبير للحركة.","مين هيتحرك وهو بيتوجع؟"],
+["Assess pain and provide prescribed interventions before planned activity when appropriate.","قيّم الألم وادّي التدخلات المكتوبة قبل النشاط المخطط لما يكون مناسب.","ادّي المسكن قبل المشي بوقت كفاية."],
+["4. Use assistive devices correctly","استخدم الأدوات المساعدة صح.","الأداة الغلط ممكن تضر."],
+["Depending on the patient's needs, devices may include:","حسب احتياج المريض، الأدوات ممكن تشمل:","الأداة بتتختار حسب حالته."],
+["Cane","عكاز.","للي محتاج دعم بسيط."],
+["Walker","ووكر (مشاية).","للي محتاج دعم أكتر."],
+["Wheelchair","كرسي متحرك.","للي مش بيقدر يمشي."],
+["The nurse must ensure that the patient knows how to use the device safely.","الممرضة لازم تتأكد إن المريض عارف يستخدم الجهاز بأمان.","وريه بالعملي وخليه يجرّب قدامك."],
+["5. Maintain a safe environment","حافظ على بيئة آمنة.","الأمان قبل الحركة."],
+["Before mobilization:","قبل التحريك:","اعمل ده الأول."],
+["Lock the bed.","اقفل عجل السرير.","عشان السرير ميتحركش."],
+["Ensure appropriate footwear.","تأكد من حذاء مناسب.","جزمة مش بتزلق."],
+["Remove obstacles.","شيل العوائق.","أي حاجة في الطريق ممكن تعثّره."],
+["Provide adequate lighting.","وفّر إضاءة كافية.","عشان يشوف طريقه."],
+["Secure lines and tubes.","ثبّت الخطوط والأنابيب.","كانيولا وقسطرة متتشدّش."],
+["Place necessary equipment within reach.","حط المعدات الضرورية في متناول إيده.","جرس الاستدعاء جنبه."],
+["h","5- Nursing evaluation"],
+["The patient demonstrates improved movement, participates in exercises, and performs transfers or ambulation safely.","المريض بيظهر تحسن في الحركة، وبيشارك في التمارين، وبينقل نفسه أو يمشي بأمان.","بقى يقوم من السرير للكرسي لوحده."],
+["The patient performs increased levels of activity with minimal fatigue and returns to baseline after activity.","المريض بيعمل مستويات نشاط أعلى بأقل تعب وبيرجع لحالته الطبيعية بعد النشاط.","مشي في الطرقة ورجع نفسه عادي."]
+]]
+];
+const app=document.getElementById('app'),chips=document.getElementById('chips');
+D.forEach((s,i)=>{
+ const a=document.createElement('a');a.href='#s'+i;a.textContent=s[0];chips.appendChild(a);
+ let h='<section class="sec" id="s'+i+'"><h2>'+s[0]+'</h2>';
+ s[1].forEach(x=>{
+  if(x[0]==='h')h+='<div class="sub">'+x[1]+'</div>';
+  else h+='<div class="it"><div class="en">'+x[0]+'</div><div class="ar">'+x[1]+'</div><div class="ex"><b>عشان تفهمها:</b> '+x[2]+'</div></div>';
+ });
+ app.insertAdjacentHTML('beforeend',h+'</section>');
+});
+addEventListener('scroll',()=>{const d=document.documentElement;document.getElementById('pb').style.width=(d.scrollTop/(d.scrollHeight-d.clientHeight)*100)+'%'});
+const tb=document.getElementById('tb');let t='light';
+try{t=localStorage.getItem('theme')||'light'}catch(e){}
+function at(v){t=v;document.documentElement.setAttribute('data-theme',v==='dark'?'dark':'');tb.textContent=v==='dark'?'☀️':'🌙';try{localStorage.setItem('theme',v)}catch(e){}}
+at(t);tb.onclick=()=>at(t==='dark'?'light':'dark');
+</script>
+</body>
+</html>
