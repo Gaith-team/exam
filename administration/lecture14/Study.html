@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--navy:#1e3a8a;--teal:#0e7490;--emerald:#10b981;--gold:#f59e0b;--accent:#0e7490;--glow:rgba(14,116,144,.15);
+--grad:linear-gradient(135deg,#1e3a8a 0%,#0e7490 50%,#10b981 100%);--bar:linear-gradient(90deg,#1e3a8a,#0e7490,#10b981,#f59e0b);
+--bg:#f8fafc;--bg2:#eef2f7;--card:#fff;--text:#1a2332;--text2:#4a5568;--text3:#718096;--bc:rgba(0,0,0,.08);--ex:#fffbeb;--exb:#f59e0b}
+[data-theme="dark"]{--bg:#0d1117;--bg2:#161b22;--card:#1c2333;--text:#e6edf3;--text2:#b1bac4;--text3:#7d8590;--bc:rgba(255,255,255,.1);--ex:#2a2410;--accent:#22b8cf}
+body{font-family:'Outfit','Cairo',sans-serif;background:var(--bg);color:var(--text);transition:background .3s,color .3s;line-height:1.7}
+#pb{position:fixed;top:0;left:0;height:3px;width:0;background:var(--bar);z-index:999}
+nav{position:sticky;top:0;z-index:100;height:60px;display:flex;align-items:center;justify-content:space-between;padding:0 20px;background:rgba(248,250,252,.93);backdrop-filter:blur(14px);border-bottom:1px solid var(--bc)}
+[data-theme="dark"] nav{background:rgba(13,17,23,.95)}
+.brand{display:flex;align-items:center;gap:9px;font-weight:900;font-size:15px}
+.logo{width:34px;height:34px;border-radius:8px;background:var(--grad);color:#fff;display:flex;align-items:center;justify-content:center;font-size:12px;box-shadow:0 0 0 2px rgba(245,158,11,.5)}
+.tools{display:flex;gap:8px}
+.tb{height:38px;padding:0 14px;border-radius:19px;border:1px solid var(--bc);background:var(--card);color:var(--text);cursor:pointer;font:700 12px 'Cairo',sans-serif}
+.tb:hover{border-color:var(--accent)}
+.hero{background:var(--grad);text-align:center;padding:38px 20px 32px;border-bottom:4px solid var(--gold);color:#fff}
+.hero .ic{font-size:44px}
+.hero h1{font-size:clamp(22px,4vw,32px);font-weight:900}
+.hero p{opacity:.88;font-size:13px}
+.wrap{max-width:820px;margin:0 auto;padding:22px 16px 70px}
+.toc{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:24px}
+.toc a{font-size:12px;font-weight:700;text-decoration:none;color:var(--text2);background:var(--card);border:1px solid var(--bc);padding:6px 12px;border-radius:20px}
+.toc a:hover{color:var(--accent);border-color:var(--accent)}
+.sec{margin-bottom:34px;scroll-margin-top:72px}
+.sh{background:var(--grad);color:#fff;padding:12px 18px;border-radius:14px 14px 0 0;font-weight:900;font-size:16px;border-bottom:3px solid var(--gold)}
+.sub{margin:18px 0 8px;font-weight:900;font-size:14px;color:var(--teal);padding-left:10px;border-left:4px solid var(--gold)}
+[data-theme="dark"] .sub{color:#22d3ee}
+.cards{background:var(--card);border:1px solid var(--bc);border-top:none;border-radius:0 0 14px 14px;padding:14px}
+.item{border:1px solid var(--bc);border-radius:12px;margin-bottom:12px;overflow:hidden;background:var(--bg)}
+.en{padding:12px 16px;font-weight:700;font-size:15px;direction:ltr;text-align:left;border-left:5px solid var(--teal);background:var(--card)}
+.ar{padding:11px 16px;font-family:'Cairo',sans-serif;font-size:14.5px;direction:rtl;text-align:right;color:var(--text2);border-top:1px dashed var(--bc)}
+.ex{padding:11px 16px;font-family:'Cairo',sans-serif;font-size:14px;direction:rtl;text-align:right;background:var(--ex);border-top:1px dashed var(--bc);border-right:4px solid var(--exb)}
+.ex b{color:var(--exb)}
+.hide-ex .ex{display:none}
+.links a{display:block;color:var(--accent);word-break:break-all;margin:6px 0;font-size:13px}
+footer{text-align:center;padding:20px;border-top:3px solid;border-image:var(--bar) 1;background:var(--bg2);font-weight:700;font-size:14px}
+footer span{color:var(--accent)}
+</style>
+</head>
+<body>
+<div id="pb"></div>
+<nav>
+  <div class="brand"><div class="logo">GT</div>GHAITH TEAM</div>
+  <div class="tools"><button class="tb" id="exBtn">إخفاء "عشان تفهمها"</button><button class="tb" id="thBtn">🌙</button></div>
+</nav>
+<div class="hero"><div class="ic">⏰</div><h1>Time Management</h1><p>Nursing Management</p></div>
+<div class="wrap">
+  <div class="toc" id="toc"></div>
+  <div id="app"></div>
+</div>
+<footer>GHAITH <span>TEAM</span> · @nursing2bu</footer>
+
+<script>
+const D=[
+{t:"Introduction",i:[
+["Time is one of the most valuable resources that can't be renewed or stored.","الوقت من أغلى الموارد، ومينفعش تجدده ولا تخزنه.","تخيل فلوس مش هتقدر تحوشها ولا تعوضها لو صرفتها؛ كل دقيقة بتعدي بتروح للأبد."],
+["It's number of seconds, minutes, hours, or days available to manager to accomplish a given task.","الوقت هو عدد الثواني والدقايق والساعات والأيام المتاحة للمدير عشان يخلّص مهمة معينة.","المشرفة عندها وردية 8 ساعات تخلص فيها شغل القسم؛ الـ 8 ساعات دول هما الوقت المتاح ليها."],
+["Nurse managers frequently state that their time is scarcest and most valuable time considered everything and fundamental to their care.","مديرات التمريض بيقولوا دايماً إن وقتهم أندر وأغلى حاجة عندهم، وأساسي في الرعاية.","مديرة القسم مفيش وقت فاضي عندها؛ كله مقسوم بين مرور وإدارة ومتابعة مرضى."],
+["Ultimate patient satisfaction taken time limited time made it to nurses to complete required task almost impossible with resident.","رضا المريض النهائي بياخد وقت، والوقت المحدود بيخلي التمريض يخلص كل المطلوب شبه مستحيل.","ممرضة معاها 10 مرضى والمفروض تدّي أدوية وتقيس علامات حيوية وتكلم كل مريض؛ الوقت مش بيكفي."],
+["A person who was time efficiently generally experiences less stress related to social family and job activities.","الشخص اللي بيستغل وقته صح غالباً بيتعرض لضغط أقل في حياته الاجتماعية والأسرية والشغل.","واحد ماشي بجدول بيلحق شغله وأهله وأصحابه من غير توتر، عكس اللي بيجري ورا كل حاجة."]]},
+{t:"Definitions",i:[
+["Time management: is the process of organizing and planning how to divide your time between specific activities.","إدارة الوقت هي عملية تنظيم وتخطيط لتقسيم وقتك بين أنشطة محددة.","تقسم يومك: ساعتين مذاكرة، ساعة رياضة، ساعة أسرة، وهكذا."],
+["Time Management: refers to managing time effectively so that the right time is allocated to the right activity.","إدارة الوقت يعني تستغل الوقت بفعالية بحيث تدّي كل نشاط الوقت المناسب له.","المهمة الصعبة تاخد ساعة كاملة، ومكالمة بسيطة تاخد 5 دقايق بس."],
+["Time Management: refers to making the best use of time as time is always limited.","إدارة الوقت يعني تحقق أقصى استفادة من الوقت لأنه دايماً محدود.","عندك 24 ساعة بس زي أي حد؛ اللي بينجح هو اللي بيستفيد منهم أكتر."]]},
+{t:"Why Is Time Management Important?",i:[
+["Time management is important because it helps you control your workday so you can build your business without compromising your work-life balance.","إدارة الوقت مهمة لأنها بتخليك تتحكم في يوم شغلك وتبني شغلك من غير ما تضيّع التوازن بين الشغل وحياتك.","تخلص شغلك في ميعاده وتروح بيتك تقعد مع أهلك مش تفضل في الشغل لآخر الليل."],
+["Here are seven benefits of proper time management:","دي سبع فوايد لإدارة الوقت الصح:","السبع نقاط الجاية هي الفوايد."],
+["sub","1) Improve Your Performance"],
+["When you learn to block time out of your day for all your important tasks, you'll have a better idea of everything you need to accomplish and how long each task should take.","لما تتعلم تخصص وقت من يومك لكل مهمة مهمة، هتبقى فاهم المطلوب منك وكل مهمة محتاجة قد إيه.","تكتب: 9–10 تقارير، 10–11 مرور؛ فتعرف إنت مطلوب منك إيه وبكام وقت."],
+["When you have a schedule to follow, you'll likely find that you spend less time deciding what to work on or procrastinating and more time getting down to important work.","لما يبقى عندك جدول تمشي عليه، هتضيّع وقت أقل في التفكير تشتغل في إيه أو في التسويف، وهتقضي وقت أكتر في الشغل المهم.","من غير جدول بتقعد تسأل نفسك أبدأ بإيه؛ مع الجدول بتبدأ على طول."],
+["Time management can help you focus on just the essential tasks ahead of you and avoid time-consuming distractions.","إدارة الوقت بتساعدك تركز على المهام الأساسية بس وتتجنب المشتتات اللي بتاكل وقتك.","تقفل الموبايل وإنت بتعمل المهمة المهمة."],
+["sub","2) Produce Better Work"],
+["When you're not constantly racing to meet a deadline, you can put more effort and thought into your work.","لما مش بتجري طول الوقت وراء ميعاد التسليم، تقدر تحط مجهود وتفكير أكتر في شغلك.","اللي ماسك بحث من أسبوعين بيراجعه براحة، مش اللي هيسلمه بعد ساعة."],
+["Time management helps you prioritize your tasks so that you ensure you have enough time available to complete every project.","إدارة الوقت بتساعدك ترتب أولوياتك وتتأكد إن عندك وقت كفاية لإنجاز كل مشروع.","ترتب مهامك: الأهم الأول، وتسيب لكل واحدة وقتها."],
+["The quality of your work increases when you're not rushing to complete it ahead of a fast approaching deadline.","جودة شغلك بتزيد لما مش بتستعجل عشان تخلصه قبل ميعاد قرّب.","الشغل اللي بيتعمل في آخر لحظة بيطلع فيه أخطاء؛ اللي بيتعمل بهدوء بيطلع أحسن."],
+["sub","3) Deliver Work on Time"],
+["Properly managing your time involves assigning every task on your list to a specific blocks of time.","إدارة الوقت الصح معناها إنك تخصص لكل مهمة في قائمتك فترة زمنية محددة.","المهمة دي من 2 لـ 3، والتانية من 3 لـ 4."],
+["Many people use time management to allow themselves several days to complete a project, or finish it ahead of the due date to provide a buffer for any challenges that might arise.","ناس كتير بتستخدم إدارة الوقت عشان تدّي نفسها كذا يوم لإنجاز المشروع، أو تخلصه قبل ميعاده عشان يبقى فيه هامش لأي مشكلة تحصل.","لو التسليم يوم الخميس، تخلصه الثلاثاء؛ ولو حصل عطل يوم الأربع يبقى عندك وقت."],
+["If you properly schedule the time needed to complete your work, you'll be able to hit your deadlines every time.","لو جدولت الوقت اللازم لشغلك صح، هتقدر تلتزم بمواعيدك كل مرة.","اللي بيحسب وقت كل مهمة صح، مبيتأخرش."],
+["sub","4) Reduce Your Stress"],
+["It's easy to become anxious when you have a full list of tasks to accomplish both for work and in your personal life.","من السهل إنك تتوتر لما يكون عندك قايمة طويلة من المهام في الشغل وفي حياتك الشخصية.","شغل متراكم وطلبات بيت في نفس الوقت = توتر."],
+["Good time management can help you prioritize your to-do list and set aside the time needed for your most important tasks, so you know exactly what you need to do and how much time you have available to complete everything.","إدارة الوقت الكويسة بتساعدك ترتب قايمتك وتحجز الوقت للمهام الأهم، فتعرف بالظبط المطلوب منك وكام وقت عندك.","لما تعرف إنك هتخلص كل حاجة في ميعادها، قلقك بيقل."],
+["Prioritizing your tasks and giving yourself enough time to accomplish them can help reduce your stress levels.","ترتيب الأولويات وإدّاء نفسك وقت كفاية بيقلل مستوى التوتر.","مهمة واحدة واضحة أهون من عشرة مهام متلخبطة."],
+["sub","5) Improved Career Opportunities"],
+["Time management can help you become a more reliable employee who always submits high-quality work by your due dates.","إدارة الوقت بتخليك موظف يعتمد عليه، بيسلم شغل عالي الجودة في المواعيد.","المشرفة اللي دايماً بتسلم تقاريرها صح وفي معادها، الكل بيثق فيها."],
+["This in turn will make you more valuable as a worker and improve your professional reputation, which can help you find new opportunities to expand your career.","ده بيزود قيمتك كموظف وبيحسّن سمعتك المهنية، وده بيفتحلك فرص جديدة تطور بيها مسيرتك.","سمعة كويسة ممكن توصلك لترقية أو منصب أعلى."],
+["sub","6) Boost Your Confidence"],
+["When you manage your time properly and successfully meet your deadlines, you'll feel a sense of accomplishment and confidence in your abilities.","لما تدير وقتك صح وتلتزم بمواعيدك، هتحس بإنجاز وثقة في قدراتك.","كل مرة بتخلص فيها في ميعادك بتقول: أنا قدها."],
+["Consistently finishing your daily to-do list is a huge motivator that can drive people to further improve their time management skills and take on new work opportunities.","إنك تخلص قايمة مهامك اليومية باستمرار ده دافع كبير بيخلي الناس تطور مهارات إدارة الوقت أكتر وتاخد فرص شغل جديدة.","تشطب كل المهام آخر اليوم، فتتحمس تعمل كده تاني وتاخد مسؤوليات أكبر."],
+["sub","7) Become More Efficient"],
+["When you understand how to manage your time effectively, you'll become more focused at work which allows you to accomplish more with less time available.","لما تفهم تدير وقتك صح، هتبقى أكتر تركيز في الشغل، فتنجز أكتر في وقت أقل.","بتخلص شغل ساعتين في ساعة لأنك مركز."],
+["For example, instead of trying to work on a big project when you have fifteen minutes free before a meeting, you can accomplish a few small tasks in that time and save the bigger tasks that require more brain power for when you have a large block of time free.","مثلاً بدل ما تبدأ مشروع كبير في 15 دقيقة فاضية قبل اجتماع، تقدر تخلص كام مهمة صغيرة في الوقت ده، وتسيب المهام الكبيرة اللي محتاجة تركيز أعلى لوقت طويل فاضي.","الـ 15 دقيقة تردّ فيها على رسالتين، والتقرير الكبير تعمله لما يبقى عندك ساعتين."],
+["You'll be able to work more efficiently to achieve more with less time available.","هتقدر تشتغل بكفاءة أعلى وتحقق أكتر في وقت أقل.","نفس الساعات، بس إنتاج أكبر."]]},
+{t:"Types of Time Management",i:[
+["Two types of time management: 1- Response time (managerial time). 2- Discretionary time (specialty time).","في نوعين لإدارة الوقت: 1- وقت الاستجابة (الوقت الإداري). 2- الوقت الاختياري (الوقت التخصصي).","الأول وقت بتردّ فيه على الناس، والتاني وقت إنت اللي بتتحكم فيه."],
+["sub","1) Response time or managerial time"],
+["Response time or managerial time is often spent responding to requests, demands and problems that are initiated by others.","وقت الاستجابة (الإداري) غالباً بيتصرف في الردّ على طلبات ومشاكل بيبدأها ناس تانية.","زميلة بتطلب منك حاجة، ومريض عنده مشكلة؛ إنت بتردّ."],
+["(this type of time that is shared with or given to others system). It's considered incontrollable.","ده الوقت اللي بيتشارك مع غيرك أو بتدّيه لنظام تاني، وبيتعبر غير قابل للتحكم.","مش إنت اللي بتحدد ميعاده، فصعب تتحكم فيه."],
+["Eg: speaking on the telephone, office visits, attending meeting, making rounds.","أمثلة: الكلام في التليفون، زيارات المكتب، حضور الاجتماعات، عمل الجولات (المرور).","تليفون بيرن، حد داخل مكتبك، اجتماع، مرور على الأسرّة."],
+["sub","2) Discretionary time or specialty time"],
+["Discretionary time or specialty time: involve those activities which are accomplished alone, for example, a nurse supervisor might see staffing, mapping out long term plan, preparing the agenda for meeting.","الوقت الاختياري (التخصصي): أنشطة بتعملها لوحدك، زي مشرفة تمريض بتراجع التوزيع (staffing)، أو ترسم خطة طويلة المدى، أو تجهز جدول أعمال اجتماع.","قاعدة في مكتبك لوحدك بتخطط الشيفتات؛ إنت اللي بتحدد توقيته."]]},
+{t:"Effects of Estimating Time Incorrectly",i:[
+["a) Under-estimation of time","أ) التقليل من تقدير الوقت (تفتكر الشغل هياخد وقت أقل من الحقيقي).","تفتكر المهمة ساعة وهي ثلاث ساعات."],
+["Stress due to committing to too many tasks","ضغط بسبب الالتزام بمهام كتير أوي.","وافقت على 10 مهام وإنت وقتك يكفي 4."],
+["Poor quality output","جودة الشغل بتطلع ضعيفة.","من الاستعجال بتعمل أخطاء."],
+["Deadlines may be missed","ممكن تفوّت المواعيد النهائية.","تسلّم متأخر."],
+["b) Over-estimation of time","ب) المبالغة في تقدير الوقت (تفتكر الشغل هياخد وقت أكتر من الحقيقي).","تفتكر المهمة 3 ساعات وهي ساعة."],
+["Stress due to people pressing to have activities completed","ضغط بسبب إن الناس بتضغط عليك عشان تخلص الأنشطة.","الإدارة تسأل: لسه ماخلصتش؟"],
+["Deadlines set may not match requirements","المواعيد اللي اتحددت ممكن متناسبش المتطلبات.","تحدد ميعاد بعيد أوي وتتعطل الأقسام التانية."]]},
+{t:"Time Wasters",i:[
+["Time Wasters: Is something that prevents a person from accomplishing the job or achieving the goal. It is classified into internal and external time wasters.","مضيّعات الوقت: أي حاجة بتمنع الشخص من إنجاز الشغل أو تحقيق الهدف. وبتتقسم داخلية وخارجية.","الموبايل بيمنعك تذاكر؛ ده مضيّع وقت."],
+["sub","A- Internal time wasters"],
+["1. Procrastination: procrastination occurs when there's \"a temporal gap between intended behavior and enacted behavior.\"","1. التسويف: بيحصل لما يبقى فيه فجوة زمنية بين السلوك اللي ناويه والسلوك اللي بتعمله فعلاً.","ناوي تذاكر الساعة 5 وتبدأ الساعة 9."],
+["That is, procrastination is occurring when there's a significant time period between when people intend to do a job, and when they actually do it.","يعني التسويف بيحصل لما يبقى فيه فترة كبيرة بين اللحظة اللي الناس بتنوي فيها تعمل الشغل واللحظة اللي بتعمله فيها فعلاً.","قلت هعمل التقرير النهارده، وعملته بعد أسبوع."],
+["2. Failure to delegate","2. الفشل في التفويض.","تعمل كل حاجة بنفسك رغم إن فيه حد يقدر يساعدك."],
+["3. Unclear objectives","3. أهداف مش واضحة.","مش عارف أنت عايز توصل لإيه فبتتوه."],
+["4. Failure to set priorities","4. الفشل في تحديد الأولويات.","بتبدأ بالمهمة السهلة وتسيب المهمة المهمة."],
+["5. Crisis management","5. إدارة الأزمات (الشغل كله ردّ فعل لمشاكل طارئة).","كل يوم بتطفي حريق بدل ما تخطط."],
+["6. Failure to plan","6. الفشل في التخطيط.","تدخل اليوم من غير خطة."],
+["7. Poor scheduling","7. جدولة ضعيفة.","تحط مهمتين في نفس الميعاد."],
+["8. Lack of relevant skills","8. نقص المهارات المطلوبة.","اللي مبيعرفش الشغل بياخد وقت أطول."],
+["9. Haste","9. الاستعجال.","تستعجل فتغلط وتعيد الشغل."],
+["10. Attempting too much at one time","10. محاولة عمل حاجات كتير في وقت واحد.","تعمل خمس مهام مع بعض فمفيش واحدة تخلص."],
+["11. Inability to say no","11. عدم القدرة على قول لأ.","توافق على كل طلب، فيضيع وقتك."],
+["12. Social media as Facebook, Twitter, YouTube and other social media can be a huge black hole for time.","12. السوشيال ميديا زي فيسبوك وتويتر ويوتيوب ممكن تبقى ثقب أسود ضخم للوقت.","تفتح تشوف رسالة وتلاقي نفسك قعدت ساعة."],
+["sub","B- External time wasters"],
+["Be aware of ways others or the environment waste your time:","خلّي بالك من الطرق اللي بيضيّع بيها الآخرين أو البيئة وقتك:","المضيّعات دي جاية من برّا، مش منك."],
+["1. Interruptions, especially email","1. المقاطعات، خصوصاً الإيميل.","إشعار إيميل يقطع تركيزك."],
+["2. Office socializing","2. الكلام والاختلاط الاجتماعي في المكتب.","زميل يقعد يحكيلك قصة وإنت مشغول."],
+["3. Too many meetings","3. اجتماعات كتير أوي.","اجتماع كل يوم بياخد نص اليوم."],
+["4. Unscheduled visitors","4. زوار من غير موعد.","حد يدخل عليك فجأة."],
+["5. Poor work environment","5. بيئة شغل سيئة.","دوشة وزحمة بتعطلك."],
+["6. Unclear goals","6. أهداف مش واضحة.","الإدارة مبتحددش المطلوب بالظبط."],
+["7. Trying to get other's cooperation","7. محاولة الحصول على تعاون الآخرين.","تقعد تجري ورا حد عشان يوقع أو يساعدك."],
+["8. Bureaucratic \"red tape\"","8. الروتين والبيروقراطية.","ورقة محتاجة 5 توقيعات."],
+["9. Lack of information","9. نقص المعلومات.","محتاج بيانات ومش لاقيها."],
+["10. A poor filing system: when the system is very slow a lot of your time go to overcome technical problems.","10. نظام حفظ ملفات سيء: لما يبقى بطيء جداً، وقت كتير بيروح في التغلب على المشاكل التقنية.","تدوّر على ملف مريض نص ساعة."]]},
+{t:"Procrastination",i:[
+["Definition: Procrastination is the act of delaying or putting off tasks until the last minute, or past their deadline.","التسويف هو تأجيل المهام لآخر لحظة أو لما بعد ميعادها.","تذاكر ليلة الامتحان."],
+["Some researchers define procrastination as a \"form of self-regulation failure characterized by the irrational delay of tasks despite potentially negative consequences.\"","بعض الباحثين بيعرّفوه إنه شكل من فشل التنظيم الذاتي، بيتميز بتأجيل غير منطقي للمهام رغم النتائج السلبية المحتملة.","عارف إن التأجيل هيضرك ومع ذلك بتأجل."],
+["sub","Forms of procrastination"],
+["Ignoring the task, hoping it will go away","تتجاهل المهمة وتتمنى إنها تختفي.","تسيب الجواب من غير ما تفتحه."],
+["Underestimating how long it will take","تقلل من تقدير الوقت اللي هتاخده.","تفتكر ساعة وهي خمس."],
+["Overestimating your abilities and resources","تبالغ في تقدير قدراتك وإمكانياتك.","تقول أنا هخلصها في دقيقة."],
+["Telling yourself that poor performance is okay","تقول لنفسك إن الأداء الضعيف عادي.","أي حاجة تعدّي."],
+["Doing something else that isn't very important","تعمل حاجة تانية مش مهمة أوي.","ترتب مكتبك بدل ما تذاكر."],
+["Believing that repeated \"minor\" delays won't hurt you","تفتكر إن التأخيرات الصغيرة المتكررة مش هتضرك.","تأخير ساعة كل يوم بيتراكم."],
+["Talking about a hard job rather than doing it","تتكلم عن الشغل الصعب بدل ما تعمله.","تحكي عن المشروع طول اليوم ومتبدأش."],
+["Putting all your work on only one part of the task","تركز كل شغلك على جزء واحد بس من المهمة.","تقعد تنسق الغلاف وتسيب المحتوى."],
+["Becoming paralyzed when having to make choices","تتشل لما تضطر تاخد قرار.","محتار تبدأ بأنهي مهمة وتفضل واقف."],
+["sub","Types of Procrastination"],
+["Some researchers classify two types of procrastinators: passive and active procrastinators.","بعض الباحثين بيقسموا المسوّفين لنوعين: سلبي ونشط.","ده نوع بيأجل غصب عنه، وده بيأجل بإرادته."],
+["Passive procrastinators: Delay the task because they have trouble making decisions and acting on them","المسوّف السلبي: بيأجل المهمة لأن عنده صعوبة في اتخاذ القرارات وتنفيذها.","مش قادر يقرر يبدأ إزاي فبيأجل."],
+["Active procrastinators: Delay the task purposefully because working under pressure allows them to \"feel challenged and motivated\"","المسوّف النشط: بيأجل المهمة عمداً لأن الشغل تحت الضغط بيخليه يحس بالتحدي والحماس.","بيذاكر ليلة الامتحان لأنه بيشتغل أحسن تحت الضغط."]]},
+{t:"How to Overcome Procrastination",i:[
+["You might find yourself wondering, How can I stop procrastinating?","ممكن تلاقي نفسك بتسأل: أقف تسويف إزاي؟","ده سؤال كل طالب."],
+["Fortunately, there are a number of different things you can do to fight procrastination and start getting things done on time. Consider these your procrastination exercises:","الحمد لله فيه حاجات كتير تقدر تعملها تحارب بيها التسويف وتخلص شغلك في وقته. اعتبرها تمارين ضد التسويف:","الخمس نقاط الجاية هي التمارين."],
+["Make a to-do list: To help keep you on track, consider placing a due date next to each item.","اعمل قايمة مهام: عشان تفضل ماشي صح، حط تاريخ تسليم جنب كل بند.","اكتب: تقرير – الخميس."],
+["Take baby steps: Break down the items on your list into small, manageable steps so that your tasks don't seem so overwhelming.","خد خطوات صغيرة: قسّم بنود القايمة لخطوات صغيرة سهلة عشان المهام متبانش ضخمة.","بدل ما تكتب البحث، ابدأ بالعنوان بس."],
+["Recognize the warning signs: Pay attention to any thoughts of procrastination and do your best to resist the urge. If you begin to think about procrastinating, force yourself to spend a few minutes working on your task.","اعرف علامات التحذير: انتبه لأي أفكار تسويف وقاوم الرغبة. لو بدأت تفكر تأجل، أجبر نفسك تشتغل في المهمة كام دقيقة.","لما تقول بعدين، اشتغل 5 دقايق بس."],
+["Eliminate distraction: Ask yourself what pulls your attention away the most—whether it's Instagram, Facebook updates, or the local news—and turn off those sources of distraction.","احذف المشتتات: اسأل نفسك إيه أكتر حاجة بتشد انتباهك (إنستجرام، فيسبوك، الأخبار)، وقفل مصادر التشتيت دي.","اقفل إشعارات الموبايل وقت المذاكرة."],
+["Pat yourself on the back: When you finish an item on your to-do list on time, congratulate yourself and reward yourself by indulging in something you find fun.","كافئ نفسك: لما تخلص بند في قايمتك في وقته، هنّي نفسك وكافئها بحاجة بتستمتع بيها.","خلصت تقرير؟ خد قهوتك المفضلة."]]},
+{t:"Eliminating Time Wasters (How to Break the Distraction Habit)",i:[
+["We all need to look at the tasks that strip us of the time necessary to get real work done. Here are a few of the most common culprits, along with some simple solutions:","كلنا محتاجين نبص على المهام اللي بتسرق منا الوقت اللازم للشغل الحقيقي. دي أكتر الأسباب شيوعاً مع حلول بسيطة:","الجداول الجاية: كل سبب وحلوله."],
+["sub","Telephone"],
+["Use voice mail and set aside time to return calls.","استخدم البريد الصوتي وخصص وقت للرد على المكالمات.","سيب المكالمات للـ voice mail وردّ عليها الساعة 12."],
+["Avoid small talk. Stay focused on the reason for the call.","تجنب الكلام الجانبي وركز على سبب المكالمة.","ادخل في الموضوع على طول."],
+["Stand up while you talk on the phone. You are more likely to keep the conversation brief.","قف وإنت بتتكلم في التليفون، فاحتمال أكبر تخلي المكالمة قصيرة.","الوقوف بيخليك متعجل شوية فتختصر."],
+["Take any necessary action immediately following the call.","اتخذ أي إجراء لازم فور انتهاء المكالمة.","تعمل اللي اتطلب منك فوراً."],
+["Set aside times of the day for receiving calls and let others know when you are available.","خصص أوقات من اليوم لاستقبال المكالمات وعرّف الناس إمتى إنت متاح.","قول للناس: أنا متاح من 1 لـ 2."],
+["sub","Unexpected Visitors"],
+["Establish blocks of time when you are available for visits.","حدد فترات زمنية تكون متاح فيها للزيارات.","ساعة محددة لاستقبال الزوار."],
+["Tell the visitor politely that you cannot meet with them at this time and schedule the visit for a more convenient time.","قول للزائر بأدب إنك مش قادر تقابله دلوقتي، وحدد الزيارة في وقت أنسب.","تعالى بكرة الساعة 10."],
+["Set a mutually agreeable time limit for the visit.","حدد حد زمني للزيارة يكون متفق عليه من الطرفين.","نتكلم 10 دقايق."],
+["When someone comes to the door, stand up and have your meeting standing.","لما حد ييجي عند الباب، قف واعمل الاجتماع واقف.","ماتقعدوش فتطول."],
+["sub","Meetings"],
+["Know the purpose of the meeting in advance.","اعرف هدف الاجتماع مقدماً.","اسأل: الاجتماع ده ليه؟"],
+["Arrive on time.","احضر في الميعاد.","وصول متأخر بيضيع وقت الكل."],
+["Prepare an agenda and stick to it. Use a timed agenda, if necessary.","جهّز جدول أعمال والتزم بيه، واستخدم جدول بتوقيت لو لزم.","كل بند له 10 دقايق."],
+["Distribute the agenda a week before the meeting. This gives everyone time to prepare and discuss the issue.","وزّع جدول الأعمال قبل الاجتماع بأسبوع، عشان الكل يلحق يجهز ويناقش الموضوع.","الكل يجي وهو جاهز."],
+["Invite only participants who can speak about the topics of the meeting and give any necessary approvals.","اعزم بس المشاركين اللي يقدروا يتكلموا في مواضيع الاجتماع ويدّوا أي موافقات لازمة.","مفيش داعي تعزم اللي مالوش علاقة."],
+["Keep the meeting to an hour in length. Participants tend to lose interest after first hour.","خلّي الاجتماع ساعة بالكتير، لأن المشاركين غالباً بيفقدوا الاهتمام بعد أول ساعة.","اجتماع ساعتين الساعة التانية فيها شرود."],
+["Stay focused on the agenda items.","ركز على بنود جدول الأعمال.","متخرجش عن الموضوع."],
+["Go to a meeting with an objective and leave the meeting having accomplished the objective.","ادخل الاجتماع بهدف واخرج بعد ما حققته.","هدفك: قرار بخصوص التوزيع؛ تخرج وقد اتخذتوه."],
+["Start and end the meeting on time.","ابدأ وانهي الاجتماع في موعده.","8:00 ويخلص 9:00 بالظبط."],
+["Leave a 30-minute period between meetings. Avoid back-to-back meetings.","سيب 30 دقيقة بين الاجتماعات، وتجنب الاجتماعات المتتالية.","اجتماع 10 وبعده اجتماع 10:30."],
+["sub","Paper overload"],
+["Adequate filling system by keeping correspondence organized in easily retrievable files","نظام حفظ مناسب بإنك تحافظ على المراسلات منظمة في ملفات سهل ترجع لها.","ملفات مترتبة بالتاريخ والنوع."],
+["Increase ways of computerization and electronic mail to reduce paper trail and increase response time.","زوّد وسائل الحوسبة والبريد الإلكتروني عشان تقلل الورق وتزود سرعة الاستجابة.","تبعت إيميل بدل ورقة."],
+["Create system of file folders or envelopes for sorting incoming papers by urgency and importance.","اعمل نظام ملفات أو مظاريف لفرز الورق الوارد حسب الاستعجال والأهمية.","ملف عاجل وملف مهم."],
+["Throw away things that are no longer valuable.","ارمي الحاجات اللي مبقاش ليها قيمة.","ورق قديم مالوش لازمة."],
+["Delegate paper tasks","فوّض المهام الورقية.","اطلب من السكرتارية تنظيم الورق."],
+["Handle papers only once and clear the desk for action.","اتعامل مع الورقة مرة واحدة بس وفضّي المكتب للشغل.","تقرأ الورقة وتقرر على طول: أرد أو أحفظ أو أرمي."]]},
+{t:"How to Use Time Effectively?",i:[
+["Time Management includes: a) Effective Planning b) Setting goals and objectives c) Setting deadlines d) Delegation of responsibilities e) Prioritizing activities as per their importance f) Spending the right time on the right activity","إدارة الوقت بتشمل: أ) التخطيط الفعال ب) تحديد الأهداف ج) تحديد المواعيد النهائية د) تفويض المسؤوليات هـ) ترتيب الأنشطة حسب أهميتها و) قضاء الوقت المناسب على النشاط المناسب.","ست نقاط ظبّط بيهم يومك، وكل واحدة شرحها تحت."],
+["sub","Effective Planning"],
+["Plan your day well in advance. Prepare a To Do List or a \"TASK PLAN\".","خطط يومك كويس من بدري، وجهّز قايمة To Do أو خطة مهام.","تكتب خطة يومك من الليلة اللي قبلها."],
+["Jot down the important activities that need to be done in a single day against the time that should be allocated to each activity.","اكتب الأنشطة المهمة اللي لازم تتعمل في اليوم الواحد مقابل الوقت المخصص لكل نشاط.","مرور – 9 لـ 10، تقارير – 10 لـ 11."],
+["High Priority work should come on top followed by those which do not need much of your importance at the moment.","الشغل عالي الأولوية يجي فوق، وبعده الأشياء اللي مش محتاجة اهتمامك أوي في اللحظة دي.","الأهم أول القايمة."],
+["Complete pending tasks one by one. Do not begin fresh work unless you have finished your previous task.","خلّص المهام المعلقة واحدة واحدة، ومتبدأش شغل جديد إلا لما تخلص المهمة السابقة.","متفتحش مهمة جديدة والقديمة نصها."],
+["Tick the ones you have already completed. Ensure you finish the tasks within the stipulated time frame.","علّم (✓) على اللي خلصته، وتأكد إنك بتخلص المهام في الإطار الزمني المحدد.","شطب المهمة بيدّيك دافع."],
+["sub","Setting Goals and Objectives"],
+["Working without goals and targets in an organization would be similar to a situation where the captain of the ship loses his way in the sea. Yes, you would be lost.","الشغل من غير أهداف في المؤسسة زي قبطان السفينة اللي تاه في البحر؛ آه، هتضيع.","سفينة من غير وجهة هتدور في مكانها."],
+["Set targets for yourself and make sure they are realistic ones and achievable.","حدد أهداف لنفسك وتأكد إنها واقعية وممكن تتحقق.","هدف: أخلص 10 صفحات النهارده، مش 100."],
+["sub","Setting Deadlines"],
+["Set deadlines for yourself and strive hard to complete tasks ahead of the deadlines.","حدد مواعيد نهائية لنفسك واجتهد تخلص المهام قبلها.","لو الميعاد الخميس، خلّي ميعادك الأربع."],
+["Do not wait for your superiors to ask you every time. Learn to take ownership of work.","متستناش رؤساءك يسألوك كل مرة، وتعلم تتحمل مسؤولية شغلك.","تبادر وتسلم من غير ما حد يطلب."],
+["One person who can best set the deadlines is you yourself. Ask yourself how much time needs to be devoted to a particular task and for how many days.","أنسب شخص يحدد المواعيد هو إنت نفسك. اسأل نفسك المهمة دي محتاجة كام وقت وكام يوم.","إنت أدرى بقدراتك."],
+["Use a planner to mark the important dates against the set deadlines.","استخدم مخطط (planner) لتعليم التواريخ المهمة مقابل المواعيد المحددة.","علّم كل ميعاد في الأجندة أو الموبايل."],
+["sub","Delegation of Responsibilities"],
+["Learn to say \"NO\" at workplace. Don't do everything on your own. There are other people as well.","اتعلم تقول لأ في الشغل. متعملش كل حاجة لوحدك، فيه ناس تانية.","زميلة تقدر تساعدك؟ فوضها."],
+["One should not accept something which he knows is difficult for him.","الواحد ميقبلش حاجة هو عارف إنها صعبة عليه.","متوافقش على مهمة وإنت عارف إنك مش هتعرف."],
+["The roles and responsibilities must be delegated as per interest and specialization of employees for them to finish tasks within deadlines.","الأدوار والمسؤوليات لازم تتفوض حسب اهتمام وتخصص الموظفين عشان يخلصوا في المواعيد.","اللي ماهر في الأدوية يمسك الأدوية."],
+["A person who does not have knowledge about something needs more time than someone who knows the work well.","اللي معندوش معرفة بحاجة بياخد وقت أطول من اللي عارف الشغل كويس.","تعطي المهمة لمن يعرفها."],
+["sub","Prioritizing Tasks"],
+["Prioritize the tasks as per their importance and urgency. Know the difference between important and urgent work.","رتّب المهام حسب أهميتها واستعجالها، وافهم الفرق بين المهم والعاجل.","عاجل = وقته ضيق؛ مهم = قيمته كبيرة."],
+["Identify which tasks should be done within a day, which all should be done within a month and so on.","حدد أنهي مهام تتعمل في يوم، وأنهي في شهر، وهكذا.","مهمة اليوم غير مهمة الشهر."],
+["Tasks which are most important should be done earlier.","المهام الأهم لازم تتعمل الأول.","ابدأ بالأهم."],
+["You must divide all requests into three categories:","لازم تقسم كل الطلبات لتلات فئات:","الفئات التلاتة دي تحت."],
+["1) \"Don't do\" - items reflect problem that will take care of themselves, are already outdated or are accomplished by someone else.","1) \"متعملش\": بنود مشاكلها هتتحل لوحدها، أو بقت قديمة، أو حد تاني خلّصها.","طلب اتحل لوحده؛ متعملهوش."],
+["2) \"Do later\" - the manager must be sure that large projects have been broken down into smaller projects and that a specific time line and plan for implementation are in place","2) \"اعمله بعدين\": المدير لازم يتأكد إن المشاريع الكبيرة اتقسمت لمشاريع أصغر، وإن فيه جدول زمني وخطة تنفيذ محددين.","مشروع كبير تقسمه لمراحل وتحط لكل مرحلة ميعاد."],
+["3) \"Do now\" - most commonly reflect a unit's day-to-day operational needs.","3) \"اعمله دلوقتي\": غالباً بيعبر عن احتياجات التشغيل اليومية للوحدة.","إعطاء الأدوية في ميعادها."],
+["sub","Prioritise matrix (from the figure)"],
+["Urgent + Important: Do it now","عاجل ومهم: اعمله دلوقتي.","مريض حالته تدهورت."],
+["Important + Not urgent: Decide when to do it","مهم وغير عاجل: حدد إمتى تعمله.","خطة تدريب الفريق."],
+["Urgent + Not important: Delegate it","عاجل وغير مهم: فوّضه.","مكالمة مش مهمة؛ حد تاني يردّ."],
+["Not important + Not urgent: Dump it","غير مهم وغير عاجل: ارميه.","تصفح السوشيال بدون سبب."],
+["sub","Spending the right time on right activity"],
+["Develop the habit of doing the right thing at the right time. Work done at the wrong time is not of much use.","كوّن عادة إنك تعمل الحاجة الصح في الوقت الصح، لأن الشغل في الوقت الغلط مبيفيدش كتير.","تقرير بعد ما الاجتماع خلص مالوش لازمة."],
+["Don't waste a complete day on something which can be done in an hour or so.","متضيّعش يوم كامل على حاجة تتعمل في ساعة.","ورقة بسيطة متاخدش منك يوم."],
+["Also keep some time separate for your personal calls or checking updates on Facebook or Twitter.","وكمان خصص وقت منفصل لمكالماتك الشخصية أو متابعة فيسبوك وتويتر.","نص ساعة للموبايل بعد الشغل."],
+["After all human being is not a machine.","في الآخر الإنسان مش آلة.","محتاج راحة وفاصل."]]},
+];
+const app=document.getElementById('app'),toc=document.getElementById('toc');
+D.forEach((s,n)=>{
+ toc.insertAdjacentHTML('beforeend',`<a href="#s${n}">${s.t}</a>`);
+ let h=`<section class="sec" id="s${n}"><div class="sh">${n+1}. ${s.t}</div><div class="cards">`;
+ s.i.forEach(x=>{
+  if(x[0]==='sub'){h+=`<div class="sub">${x[1]}</div>`;return}
+  h+=`<div class="item"><div class="en">${x[0]}</div><div class="ar">${x[1]}</div><div class="ex"><b>عشان تفهمها:</b> ${x[2]}</div></div>`;
+ });
+ if(s.links)h+=`<div class="links">${s.links.map(l=>`<a href="${l}" target="_blank" rel="noopener">${l}</a>`).join('')}</div>`;
+ app.insertAdjacentHTML('beforeend',h+`</div></section>`);
+});
+window.addEventListener('scroll',()=>{const d=document.documentElement;document.getElementById('pb').style.width=(d.scrollTop/(d.scrollHeight-d.clientHeight)*100)+'%'});
+const th=document.getElementById('thBtn');
+function at(t){document.documentElement.setAttribute('data-theme',t);th.textContent=t==='dark'?'☀️':'🌙';try{localStorage.setItem('theme',t)}catch(e){}}
+let t='light';try{t=localStorage.getItem('theme')||'light'}catch(e){}at(t);
+th.onclick=()=>at(document.documentElement.getAttribute('data-theme')==='dark'?'light':'dark');
+const eb=document.getElementById('exBtn');
+eb.onclick=()=>{const h=document.body.classList.toggle('hide-ex');eb.textContent=h?'إظهار "عشان تفهمها"':'إخفاء "عشان تفهمها"'};
+</script>
+</body>
+</html>
