@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GHAITH TEAM – Self-Concept Quiz</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+:root{--ac:#0891b2;--c2:#7c3aed;--bg:#f4fafb;--bg2:#e6f2f5;--card:#fff;--tx:#0f2a30;--tx2:#3f5d65;--bc:rgba(15,60,75,.12);--ok:#15803d;--no:#dc2626;--g:linear-gradient(135deg,#155e75,#0891b2 40%,#6d28d9)}
+@media(prefers-color-scheme:dark){:root{--ac:#22d3ee;--c2:#a78bfa;--bg:#071418;--bg2:#0d1f25;--card:#112a31;--tx:#e6f6f9;--tx2:#b5d3da;--bc:rgba(255,255,255,.12);--ok:#4ade80;--no:#f87171}}
+body{font-family:'Segoe UI',Tahoma,Arial,sans-serif;background:var(--bg);color:var(--tx);min-height:100vh}
+nav{display:flex;align-items:center;justify-content:space-between;padding:0 18px;height:60px;background:var(--card);border-bottom:1px solid var(--bc)}
+.brand{display:flex;align-items:center;gap:10px;font-weight:900}
+.logo{width:36px;height:36px;border-radius:50% 50% 50% 8px;background:var(--g);display:flex;align-items:center;justify-content:center;color:#fff;font-size:13px;font-weight:900}
+.back{color:var(--tx2);text-decoration:none;font-size:13px;font-weight:700;padding:6px 14px;border:1px solid var(--bc);border-radius:50px}
+.hero{background:var(--g);color:#fff;text-align:center;padding:28px 16px 38px;border-radius:0 0 50% 50%/0 0 26px 26px}
+.hero h1{font-size:24px}.hero p{font-size:13px;opacity:.9;margin-top:4px}
+.pills{display:flex;justify-content:center;gap:10px;margin-top:14px;flex-wrap:wrap}
+.pills span{background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);border-radius:50px;padding:5px 14px;font-size:12px;font-weight:700}
+.shell{max-width:560px;margin:0 auto;padding:20px 16px 60px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:14px}
+.st{background:var(--card);border:1px solid var(--bc);border-radius:16px;padding:10px;text-align:center}
+.st b{font-size:20px;display:block}.st small{font-size:11px;color:var(--tx2)}
+.strip{background:var(--card);border:1px solid var(--bc);border-radius:16px;padding:12px 14px;margin-bottom:14px;display:flex;align-items:center;gap:12px;font-size:13px;font-weight:700}
+.track{flex:1;height:8px;background:var(--bg2);border-radius:8px;overflow:hidden}
+.fill{height:100%;width:0;background:var(--g);transition:width .4s}
+.timer{min-width:62px;text-align:center;background:var(--bg2);border-radius:18px;padding:6px 10px}
+.timer.warn{color:#ea580c}.timer.danger{color:var(--no)}
+.card{background:var(--card);border:1px solid var(--bc);border-radius:24px;overflow:hidden}
+.qh{background:var(--g);color:#fff;padding:6px 18px;font-size:12px;font-weight:700}
+.qt{margin:16px 18px 6px;padding:14px 16px;font-weight:700;line-height:1.6;background:rgba(8,145,178,.08);border:1px solid var(--bc);border-radius:20px 20px 20px 6px;direction:ltr;text-align:left}
+.opts{padding:12px 18px 16px;display:flex;flex-direction:column;gap:10px}
+.opt{display:flex;align-items:center;gap:12px;padding:12px 14px;border:1.5px solid var(--bc);border-radius:18px;background:var(--bg);cursor:pointer;font-weight:600;direction:ltr;text-align:left}
+.opt:hover{border-color:var(--c2)}
+.ltr{width:28px;height:28px;border-radius:50%;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;flex-shrink:0}
+.opt.correct{border-color:var(--ok);background:rgba(21,128,61,.1)}.opt.correct .ltr{background:var(--ok);color:#fff}
+.opt.wrong{border-color:var(--no);background:rgba(220,38,38,.08)}.opt.wrong .ltr{background:var(--no);color:#fff}
+.opt.dis{pointer-events:none}
+.fb{margin:0 18px 12px;padding:10px 16px;border-radius:50px;font-weight:700;font-size:14px}
+.fb.ok{background:rgba(21,128,61,.1);color:var(--ok)}.fb.no{background:rgba(220,38,38,.08);color:var(--no)}
+.nb{padding:4px 18px 18px;display:flex;gap:10px}
+.btn{flex:1;padding:12px;border:0;border-radius:50px;font-weight:900;font-size:14px;cursor:pointer;font-family:inherit;text-decoration:none;text-align:center;display:block}
+.btn:focus-visible,.opt:focus-visible{outline:3px solid var(--c2);outline-offset:2px}
+.next{background:var(--g);color:#fff}.skip{background:var(--bg2);color:var(--tx2);flex:0 0 auto;padding:12px 18px}
+.res{text-align:center;padding:30px 18px;background:var(--card);border:1px solid var(--bc);border-radius:24px;margin-bottom:16px}
+.res h2{font-size:44px}.res p{color:var(--tx2);margin-top:6px}
+.acts{display:flex;flex-direction:column;gap:10px;margin-bottom:20px}
+.retry{background:linear-gradient(135deg,#ea580c,#7c3aed);color:#fff}.home{background:var(--bg2);color:var(--tx)}
+.ri{background:var(--card);border:1px solid var(--bc);border-right:4px solid var(--bc);border-radius:16px;padding:14px;margin-bottom:10px;font-size:13px}
+.ri.ok{border-right-color:var(--ok)}.ri.no{border-right-color:var(--no)}
+.ri div{margin-top:5px;color:var(--tx2)}
+footer{text-align:center;padding:20px;color:var(--tx2);font-size:13px}footer a{color:#229ED9;text-decoration:none;font-weight:700}
+</style></head><body>
+<nav><a class="back" href="https://gaith-team.github.io/exam/">رجوع</a><div class="brand"><div class="logo">GT</div>GHAITH TEAM</div><span></span></nav>
+<div class="hero"><h1>Self-Concept</h1><p>Communication Skills</p><div class="pills"><span id="tb">-- سؤال</span><span>35 Min</span><span>Shuffled</span></div></div>
+<div class="shell">
+<div class="stats"><div class="st"><b id="sc" style="color:var(--ok)">0</b><small>✔ صحيح</small></div><div class="st"><b id="sw" style="color:var(--no)">0</b><small>✖ خطأ</small></div><div class="st"><b id="sr" style="color:var(--c2)">--%</b><small>⏳ متبقي</small></div></div>
+<div class="strip"><span id="pl">سؤال ١</span><div class="track"><div class="fill" id="pf"></div></div><div class="timer" id="tm">35:00</div></div>
+<div id="app"></div></div>
+<footer>GHAITH TEAM – <a href="https://t.me/nursing2bu" target="_blank">@nursing2bu</a></footer>
+<script>
+const QUESTIONS=[
+{t:"Self-concept is best defined as:",o:["The total number of friends a person has","A collection of beliefs about oneself","Physical strength only","Academic grades only"],a:1},
+{t:"Self-concept embodies the answer to which question?",o:["Who am I?","Where am I going?","What do I own?","Who loves me?"],a:0},
+{t:"Self-concept is shaped and influenced by our interactions with:",o:["Distant countries","Past generations only","Our immediate environment","Weather and climate"],a:2},
+{t:"Which of the following is NOT a key component of self-concept?",o:["Personal characteristics","Social roles","Physical appearance","Financial income"],a:3},
+{t:"Being a parent, a friend, or a member of a specific community is an example of:",o:["Personal characteristics","Social roles","Skills and abilities","Physical appearance"],a:1},
+{t:"How you see your body and physical self refers to:",o:["Physical appearance","Social roles","Skills and abilities","Personal characteristics"],a:0},
+{t:"A strong self-concept is necessary for:",o:["Avoiding all relationships","Winning every competition","Healthy and satisfying interactions","Eliminating all stress"],a:2},
+{t:"A weak self-concept often distorts how a person perceives others see him, generating:",o:["Greater self-actualization","Accurate perception of others","Unconditional positive regard","Feeling of insecurity in relating to others"],a:3},
+{t:"Which of the following is a factor that affects self-concept?",o:["Blood type","Relations in the family","Shoe size","Time zone"],a:1},
+{t:"Carl Rogers was one of the founders of:",o:["Humanistic psychology","Behaviorism","Psychoanalysis","Cognitive neuroscience"],a:0},
+{t:"According to Carl Rogers, self-concept includes how many components?",o:["Two","Five","Three","Four"],a:2},
+{t:"The mental picture of yourself, including your physical appearance, traits, and abilities is called:",o:["Ideal self","Self-esteem","Social role","Self-image"],a:3},
+{t:"Self-worth (self-esteem) is:",o:["The value we place upon ourselves","The self we would like to be","A mental picture of our appearance","Our knowledge of other people"],a:0},
+{t:"The self we would like to be is called:",o:["Self-image","Ideal self","Self-esteem","Social self"],a:1},
+{t:"The incongruity between self-image and ideal self can negatively impact:",o:["Physical growth","Memory","Self-esteem","Vision"],a:2},
+{t:"Congruence between the self-image and ideal self means that:",o:["There is a fair amount of overlap between the two","There is no relation between the two","The ideal self is rejected completely","The person depends on others' opinions"],a:0},
+{t:"Greater congruence between self-image and ideal self will enable:",o:["Cognitive dissonance","Internal confusion","Insecurity","Self-actualization"],a:3},
+{t:"Incongruence leads to internal confusion, also called:",o:["Self-actualization","Cognitive dissonance","Growth mindset","Self-compassion"],a:1},
+{t:"In which stage do you begin to differentiate yourself from others and develop a basic sense of self?",o:["Adulthood","Childhood","Infancy","Old age"],a:2},
+{t:"Understanding your role in social groups and making social comparisons start in:",o:["Childhood","Infancy","Adulthood only","Before birth"],a:0},
+{t:"In adulthood, self-concept becomes:",o:["Fixed and unchangeable","Less organized","Purely physical","More detailed, organized, and stable, though it can still be adjusted"],a:3},
+{t:"Practicing self-awareness means understanding your thoughts, emotions, strengths, and weaknesses:",o:["With harsh criticism","Without judgment","Only when others praise you","Only during therapy"],a:1},
+{t:"Cultivating a growth mindset means:",o:["Avoiding challenges","Relying on luck","Embracing challenges as opportunities for growth","Ignoring your weaknesses"],a:2},
+{t:"Challenging negative thoughts means:",o:["Identifying and reframing negative beliefs into more positive and helpful perspectives","Ignoring all feelings","Suppressing every thought","Blaming others"],a:0},
+{t:"Setting realistic goals means aligning your goals with your:",o:["Others' expectations only","An unrealistic ideal","Random choices","Perceived desires and strengths"],a:3},
+{t:"Supportive relationships are those that offer:",o:["Conditional approval","Unconditional positive regard and acceptance","Constant criticism","Constant competition"],a:1},
+{t:"Embracing your uniqueness means:",o:["Hiding your weaknesses","Striving for an unrealistic ideal","Acknowledging both your strengths and weaknesses","Copying successful people"],a:2},
+{t:"A nursing student believes she is excellent at clinical skills, but she repeatedly fails practical exams and feels confused. This best illustrates:",o:["Incongruence between self-image and experiences","Congruence","Self-actualization","Unconditional positive regard"],a:0},
+{t:"A child describes himself as a fast runner who is taller than his classmates. This reflects:",o:["Infancy differentiation","Adulthood stability","Self-compassion","A more descriptive childhood self-concept with social comparison"],a:3},
+{t:"Which statement about Carl Rogers' theory is correct?",o:["Self-esteem is the self we would like to be","Self-image and ideal self can be congruent or incongruent","Ideal self always equals self-image","Congruence prevents self-actualization"],a:1},
+{t:"Self-concept embodies the answer to the question \"Who am I?\"",o:["True","False"],a:0},
+{t:"A weak self-concept is necessary for healthy and satisfying interactions.",o:["True","False"],a:1},
+{t:"Names and nick-names can affect self-concept.",o:["True","False"],a:0},
+{t:"Carl Rogers suggested that self-concept includes four components.",o:["True","False"],a:1},
+{t:"The ideal self is the self we would like to be.",o:["True","False"],a:0},
+{t:"Incongruence between self-image and ideal self enables self-actualization.",o:["True","False"],a:1},
+{t:"In adulthood, self-concept becomes more detailed, organized, and stable, though it can still be adjusted over time.",o:["True","False"],a:0},
+{t:"Social comparisons begin only in adulthood.",o:["True","False"],a:1},
+{t:"Practicing self-compassion means being kind and understanding toward yourself, just as you would be to a good friend.",o:["True","False"],a:0},
+{t:"Seeking professional help is discouraged as a way to improve self-concept.",o:["True","False"],a:1}
+];
+let Q,i,c,w,A,wr,ans,tl,ti;const TT=35*60,L=['A','B','C','D'];
+const $=id=>document.getElementById(id);
+function sh(a){for(let k=a.length-1;k>0;k--){const j=Math.floor(Math.random()*(k+1));[a[k],a[j]]=[a[j],a[k]]}return a}
+function so(q){if(q.o.length===2&&q.o[0]==='True')return{...q};const x=sh(q.o.map((_,k)=>k));return{...q,o:x.map(k=>q.o[k]),a:x.indexOf(q.a)}}
+function start(pool){Q=sh([...pool]).map(so);i=0;c=0;w=0;A=new Array(Q.length).fill(null);wr=[];ans=0;tl=TT;$('tb').textContent=Q.length+' سؤال';tick();render()}
+function tick(){clearInterval(ti);ti=setInterval(()=>{tl--;const m=Math.floor(tl/60),s=tl%60;$('tm').textContent=m+':'+(s<10?'0':'')+s;$('tm').className='timer'+(tl<=120?' danger':tl<=300?' warn':'');if(tl<=0){clearInterval(ti);fin()}},1000)}
+function top_(){const n=Q.length;$('sc').textContent=c;$('sw').textContent=w;$('sr').textContent=Math.round((n-ans)/n*100)+'%';$('pl').textContent='سؤال '+(i+1)+' / '+n;$('pf').style.width=(i+1)/n*100+'%'}
+function render(){top_();const q=Q[i];$('app').innerHTML=`<div class="card"><div class="qh">سؤال ${i+1} / ${Q.length}</div><div class="qt">${q.t}</div><div class="opts">${q.o.map((o,k)=>`<div class="opt" id="o${k}" tabindex="0" onclick="pick(${k})"><div class="ltr">${L[k]}</div>${o}</div>`).join('')}</div><div class="nb" id="nb"><button class="btn skip" onclick="skip()">⏭ تخطي</button></div></div>`}
+function pick(v){if(A[i]!==null)return;A[i]=v;ans++;const q=Q[i],ok=v===q.a;ok?c++:w++;top_();q.o.forEach((_,k)=>{const e=$('o'+k);e.classList.add('dis');if(k===q.a)e.classList.add('correct');else if(k===v)e.classList.add('wrong')});
+const f=document.createElement('div');f.className='fb '+(ok?'ok':'no');f.textContent=ok?'🎉 ممتاز ، اللهم بارك':'😔 ركز يا سكر';document.querySelector('.opts').after(f);
+$('nb').innerHTML=`<button class="btn next" onclick="next()">${i<Q.length-1?'السؤال التالي':'🏁 إنهاء الامتحان'}</button>`}
+function skip(){if(A[i]===null){A[i]=-1;ans++;w++;top_()}next()}
+function next(){if(i<Q.length-1){i++;render();scrollTo({top:0,behavior:'smooth'})}else fin()}
+function fin(){clearInterval(ti);const n=Q.length,sc=Math.round(c/n*100);wr=Q.filter((q,k)=>A[k]!==q.a);
+const g=sc>=90?'🥇 ممتاز':sc>=75?'🥈 جيد جداً':sc>=60?'🥉 جيد':'📚 راجع تاني';
+const rp=Q.map((q,k)=>{const ok=A[k]===q.a;return`<div class="ri ${ok?'ok':'no'}">${ok?'✅':'❌'} ${q.t}${ok?'':`<div>إجابتك: ${A[k]>=0?q.o[A[k]]:'تم التخطي'}</div><div>الصحيح: ${q.o[q.a]}</div>`}</div>`}).join('');
+$('pf').style.width='100%';
+$('app').innerHTML=`<div class="res"><h2>${sc}%</h2><p>${g}</p><p>صحيح ${c} · خطأ ${w} · من ${n} سؤال</p></div><div class="acts">${wr.length?`<button class="btn retry" onclick="retry()">🔁 إعادة الخطأ (${wr.length})</button>`:''}<button class="btn home" onclick="start(QUESTIONS)">🔀 امتحان جديد عشوائي</button><a class="btn home" href="https://gaith-team.github.io/exam/">🏠 رجوع للمادة</a></div><div>📋 تقرير مفصّل</div>${rp}`;scrollTo({top:0,behavior:'smooth'})}
+function retry(){const p=[...wr];Q=sh(p).map(so);i=0;c=0;w=0;A=new Array(Q.length).fill(null);wr=[];ans=0;tl=TT;tick();render();scrollTo({top:0,behavior:'smooth'})}
+start(QUESTIONS);
+</script></body></html>
