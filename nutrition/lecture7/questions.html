@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHAITH TEAM</title>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{--accent:#15803d;--c2:#ea580c;--c3:#ca8a04;--c4:#be185d;--grad:linear-gradient(135deg,#14532d 0%,#15803d 40%,#65a30d 75%,#ea580c 100%);--grad-soft:linear-gradient(135deg,#15803d,#65a30d);--bg:#f6faf5;--bg2:#eaf3e7;--card:#fff;--text:#14231a;--text2:#3f5546;--text3:#738a7a;--bc:rgba(20,60,30,.10);--success:#15803d;--danger:#dc2626;--warn:#d97706;--r:16px;--tr:all .3s cubic-bezier(.4,0,.2,1)}
+[data-theme="dark"]{--bg:#0b140e;--bg2:#111e15;--card:#16261b;--text:#e8f5ec;--text2:#b8d2c0;--text3:#7f9a88;--bc:rgba(255,255,255,.09);--accent:#4ade80;--c2:#fb923c;--success:#4ade80;--danger:#f87171}
+body{font-family:'Outfit',sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+#prog-bar{position:fixed;top:0;left:0;height:3px;z-index:999;background:linear-gradient(90deg,var(--accent),var(--c3),var(--c2),var(--c4));transition:width .2s}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:0 28px;height:64px;background:rgba(246,250,245,.93);backdrop-filter:blur(16px);border-bottom:1px solid var(--bc)}
+[data-theme="dark"] nav{background:rgba(11,20,14,.95)}
+.nav-brand{display:flex;align-items:center;gap:9px;font-size:15px;font-weight:900}
+.nav-logo-icon{width:34px;height:34px;border-radius:8px;background:var(--grad-soft);display:flex;align-items:center;justify-content:center;color:#fff;font-size:12px;font-weight:900}
+.theme-btn{width:38px;height:38px;border-radius:50%;border:1px solid var(--bc);background:var(--card);cursor:pointer;font-size:15px}
+.hero-band{margin-top:64px;background:var(--grad);padding:36px 24px 40px;text-align:center}
+.hero-band-icon{width:64px;height:64px;border-radius:20px;background:rgba(255,255,255,.18);display:flex;align-items:center;justify-content:center;font-size:30px;margin:0 auto 12px;border:1.5px solid rgba(255,255,255,.35)}
+.hero-band h1{font-size:clamp(20px,4vw,30px);font-weight:900;color:#fff;margin-bottom:6px}
+.hero-band p{font-size:13px;color:rgba(255,255,255,.88)}
+.hero-band-meta{display:flex;justify-content:center;gap:12px;margin-top:18px;flex-wrap:wrap}
+.meta-pill{background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.3);border-radius:50px;padding:6px 16px;font-size:12px;font-weight:700;color:#fff}
+.shell{max-width:560px;margin:0 auto;padding:24px 20px 80px}
+.stats-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px}
+.stat-box{background:var(--card);border:1px solid var(--bc);border-radius:var(--r);padding:12px 10px;text-align:center}
+.stat-box:nth-child(1){border-top:3px solid var(--success)}.stat-box:nth-child(2){border-top:3px solid var(--danger)}.stat-box:nth-child(3){border-top:3px solid var(--c2)}
+.stat-box .val{font-size:20px;font-weight:900}.stat-box .lbl{font-size:11px;color:var(--text3)}
+.stat-correct{color:var(--success)}.stat-wrong{color:var(--danger)}.stat-remain{color:var(--c2)}
+.prog-strip{background:var(--card);border:1px solid var(--bc);border-radius:var(--r);padding:14px 16px;margin-bottom:16px;display:flex;align-items:center;gap:14px}
+.prog-label{font-size:13px;font-weight:700;color:var(--text2);white-space:nowrap}
+.prog-track{flex:1;height:8px;background:var(--bg2);border-radius:8px;overflow:hidden}
+.prog-fill{height:100%;width:0;background:linear-gradient(90deg,var(--accent),var(--c3),var(--c2),var(--c4));border-radius:8px;transition:width .4s}
+.timer-badge{min-width:64px;height:36px;border-radius:18px;background:var(--bg2);border:1px solid var(--bc);display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:900;padding:0 12px}
+.timer-badge.warn{color:var(--warn)}.timer-badge.danger{color:var(--danger);animation:pulse .8s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.6}}
+.q-card{background:var(--card);border:1px solid var(--bc);border-radius:20px;overflow:hidden;box-shadow:0 4px 20px rgba(20,90,40,.08)}
+.q-header{background:var(--grad);padding:4px 18px}
+.q-num{display:inline-block;background:rgba(255,255,255,.2);border-radius:8px;padding:3px 10px;font-size:11px;font-weight:700;color:#fff}
+.q-text{padding:22px 18px 14px;font-size:15px;font-weight:700;line-height:1.65;border-bottom:1px solid var(--bc);text-align:left;direction:ltr}
+.options{padding:14px 18px 18px;display:flex;flex-direction:column;gap:10px}
+.opt{display:flex;align-items:center;gap:12px;padding:14px 16px;border-radius:12px;border:1.5px solid var(--bc);background:var(--bg);cursor:pointer;font-size:14px;font-weight:600;transition:var(--tr);user-select:none;direction:ltr;text-align:left}
+.opt:hover:not(.disabled){border-color:var(--c2);background:rgba(234,88,12,.07);transform:translateX(3px)}
+.opt-letter{width:28px;height:28px;border-radius:8px;flex-shrink:0;background:var(--bg2);border:1px solid var(--bc);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:900;color:var(--text3)}
+.opt:nth-child(1) .opt-letter{background:rgba(21,128,61,.12);color:#15803d}.opt:nth-child(2) .opt-letter{background:rgba(234,88,12,.12);color:#ea580c}
+.opt:nth-child(3) .opt-letter{background:rgba(202,138,4,.16);color:#a16207}.opt:nth-child(4) .opt-letter{background:rgba(190,24,93,.12);color:#be185d}
+.opt.correct{border-color:var(--success);background:rgba(21,128,61,.09)}.opt.correct .opt-letter{background:var(--success);color:#fff}
+.opt.wrong{border-color:var(--danger);background:rgba(220,38,38,.07)}.opt.wrong .opt-letter{background:var(--danger);color:#fff}
+.opt.disabled{pointer-events:none}
+.feedback-bar{margin:14px 18px;padding:12px 16px;border-radius:12px;display:flex;align-items:center;gap:10px;font-size:14px;font-weight:700}
+.feedback-bar.ok{background:rgba(21,128,61,.1);color:var(--success)}.feedback-bar.no{background:rgba(220,38,38,.08);color:var(--danger)}
+.explanation{margin:0 18px 14px;padding:12px 14px;background:rgba(21,128,61,.06);border-radius:10px;border-right:3px solid var(--c3);font-size:13px;color:var(--text2);line-height:1.6}
+.nav-btns{padding:4px 18px 18px;display:flex;gap:10px}
+.btn{flex:1;padding:13px;border:none;border-radius:12px;font-size:14px;font-weight:900;cursor:pointer;font-family:'Outfit',sans-serif;transition:var(--tr);display:flex;align-items:center;justify-content:center;gap:7px;text-decoration:none}
+.btn-next{background:var(--grad-soft);color:#fff}
+.btn-skip{background:var(--bg2);color:var(--text2);border:1px solid var(--bc);flex:0 0 auto;padding:13px 18px}
+.result-hero{text-align:center;padding:36px 20px 28px;background:var(--card);border-radius:20px;border:1px solid var(--bc);margin-bottom:20px}
+.score-ring{width:110px;height:110px;border-radius:50%;margin:0 auto 18px;display:flex;align-items:center;justify-content:center;flex-direction:column;border:5px solid var(--bg2);position:relative}
+.score-ring svg{position:absolute;inset:-5px;width:calc(100% + 10px);height:calc(100% + 10px);transform:rotate(-90deg)}
+.score-ring circle{fill:none;stroke-width:5;stroke-linecap:round}
+.ring-bg{stroke:var(--bg2)}.ring-fill{transition:stroke-dashoffset 1s ease}
+.score-num{font-size:28px;font-weight:900}.score-pct{font-size:12px;color:var(--text3)}
+.result-grade{font-size:22px;font-weight:900;margin-bottom:6px}.result-sub{font-size:14px;color:var(--text2)}
+.result-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:20px}
+.rs{background:var(--bg2);border-radius:10px;padding:12px 8px;text-align:center}.rs .n{font-size:20px;font-weight:900}.rs .l{font-size:11px;color:var(--text3)}
+.report-item{background:var(--card);border:1px solid var(--bc);border-radius:14px;padding:16px;margin-bottom:10px;border-right:4px solid var(--bc)}
+.report-item.ok{border-right-color:var(--success)}.report-item.no{border-right-color:var(--danger)}
+.report-item .ri-q{font-size:13px;font-weight:700;margin-bottom:8px}
+.report-item .ri-row{display:flex;align-items:center;gap:8px;font-size:12px;margin-top:5px;color:var(--text2)}
+.ri-badge{padding:2px 8px;border-radius:6px;font-weight:700;font-size:11px;flex-shrink:0}
+.ri-yours{background:rgba(220,38,38,.1);color:var(--danger)}.ri-right{background:rgba(21,128,61,.1);color:var(--success)}
+.result-actions{display:flex;flex-direction:column;gap:10px;margin-top:20px}
+.btn-retry{background:linear-gradient(135deg,#ea580c,#15803d);color:#fff}
+.btn-home{background:var(--bg2);color:var(--text);border:1px solid var(--bc)}
+footer{background:var(--bg2);border-top:1px solid var(--bc);padding:22px 24px;font-size:14px;font-weight:700}
+footer span{color:var(--accent)}
+@media(max-width:480px){nav{padding:0 14px}.shell{padding:16px 14px 60px}.nav-brand span{display:none}}
+</style>
+</head>
+<body>
+<div id="prog-bar" style="width:0%"></div>
+<nav><div class="nav-brand"><div class="nav-logo-icon">GT</div><span>GHAITH TEAM</span></div><button class="theme-btn" id="themeBtn">🌙</button></nav>
+<div class="hero-band">
+  <div class="hero-band-icon">🥗</div>
+  <h1>Nutrition Assessment</h1>
+  <p>Applied Nutrition</p>
+  <div class="hero-band-meta">
+    <div class="meta-pill" id="totalBadge">-- سؤال</div><div class="meta-pill">35 Min</div><div class="meta-pill">Shuffled</div>
+  </div>
+</div>
+<div class="shell">
+  <div class="stats-row">
+    <div class="stat-box"><div class="val stat-correct" id="sCorrect">0</div><div class="lbl">✔ صحيح</div></div>
+    <div class="stat-box"><div class="val stat-wrong" id="sWrong">0</div><div class="lbl">✖ خطأ</div></div>
+    <div class="stat-box"><div class="val stat-remain" id="sRemain">--%</div><div class="lbl">⏳ متبقي</div></div>
+  </div>
+  <div class="prog-strip">
+    <div class="prog-label" id="progLabel">سؤال ١</div>
+    <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+    <div class="timer-badge" id="timerBadge"><span id="timerTxt">35:00</span></div>
+  </div>
+  <div id="app"></div>
+</div>
+<footer>GHAITH <span>TEAM</span></footer>
+<script>
+const QUESTIONS = [
+/* ===== Multiple Choice (easy → hard) ===== */
+{t:"Malnutrition is best defined as:", o:["Excess intake of fat only","An imbalance between the body's nutritional requirements and the intake or absorption of nutrients","Loss of appetite only","Infection of the digestive tract"], a:1},
+{t:"Which term describes low weight for height?", o:["Stunting","Underweight","Wasting","Obesity"], a:2},
+{t:"Stunting means:", o:["Low weight for height","Low weight for age","Excess weight for height","Low height for age"], a:3},
+{t:"Underweight means:", o:["Low weight for age","Low height for age","Low weight for height","Excess weight for age"], a:0},
+{t:"Which of the following is NOT a type of malnutrition?", o:["Undernutrition","Micronutrient deficiencies","Overnutrition","Hyperhydration"], a:3},
+{t:"Night blindness is a manifestation of deficiency of:", o:["Vitamin C","Vitamin A","Vitamin D","Iron"], a:1},
+{t:"Goiter is associated with deficiency of:", o:["Iodine","Zinc","Folate","Vitamin K"], a:0},
+{t:"Rickets in children results from severe deficiency of:", o:["Vitamin C","Vitamin A","Iron","Vitamin D"], a:3},
+{t:"Scurvy is caused by deficiency of:", o:["Vitamin D","Vitamin C","Zinc","Folate"], a:1},
+{t:"Which sign is characteristic of kwashiorkor?", o:["Edema","Severe loss of subcutaneous fat without edema","Hypertension","Obesity"], a:0},
+{t:"Which description matches marasmus?", o:["Predominantly protein deficiency with edema","Vitamin A deficiency with dry eyes","Severe deficiency of calories and protein with marked wasting","Iron overload"], a:2},
+{t:"Chronic undernutrition is mainly characterized by:", o:["Wasting","Edema","Stunting","Goiter"], a:2},
+{t:"The main characteristic of acute undernutrition is:", o:["Wasting or loss of body weight and muscle mass","Stunting","Edema only","Obesity"], a:0},
+{t:"Which of the following increases nutritional requirements?", o:["Poverty","Fasting","Poor appetite","Burns"], a:3},
+{t:"Which is an example of impaired digestion or absorption?", o:["Fever","Pregnancy","Short bowel syndrome","Poverty"], a:2},
+{t:"Which is an example of increased nutrient losses?", o:["Fasting","Poor appetite","Eating disorders","Persistent drainage from wounds or fistulas"], a:3},
+{t:"Which cardiovascular changes may occur in severe undernutrition?", o:["Hypertension and tachycardia","Hypotension and bradycardia","Hypertension and bradycardia","Hypotension and tachycardia"], a:1},
+{t:"“Hidden hunger” refers to:", o:["Adequate calorie intake but lack of essential vitamins and minerals","Complete starvation","Overeating","Fasting for religious reasons"], a:0},
+{t:"The fat-soluble vitamins are:", o:["B group and C","A, C, D, E","A, D, E, K","B, C, D, K"], a:2},
+{t:"Which vitamin is required for collagen synthesis, wound healing and iron absorption?", o:["Vitamin D","Vitamin A","Vitamin B12","Vitamin C"], a:3},
+{t:"Adequate folic acid before conception and in early pregnancy reduces the risk of:", o:["Goiter","Scurvy","Neural tube defects","Rickets"], a:2},
+{t:"Which vitamin is essential for red blood cell formation and normal neurological function?", o:["Vitamin B12","Iron","Vitamin C","Zinc"], a:0},
+{t:"The most important population-level strategy to prevent iodine deficiency is:", o:["Sunlight exposure","Iron tablets","Adequately iodized salt","Eating eggs"], a:2},
+{t:"Which foods are good sources of vitamin A?", o:["Strawberries and oranges","Liver, eggs, carrots and sweet potatoes","Meat only","Iodized salt"], a:1},
+{t:"Which group is NOT considered at risk of iron deficiency?", o:["Pregnant women","Adolescents","Women with heavy menstrual bleeding","Healthy adult men with adequate dietary iron"], a:3},
+{t:"Delayed wound healing and poor growth are manifestations of deficiency of:", o:["Zinc","Vitamin A","Iodine","Vitamin C"], a:0},
+{t:"Osteomalacia in adults is associated with deficiency of:", o:["Vitamin A","Iodine","Folate","Vitamin D"], a:3},
+{t:"Stunting develops mainly during:", o:["Pregnancy and the first years of life","Adolescence","Adulthood","Old age"], a:0},
+{t:"Xerophthalmia is associated with deficiency of:", o:["Vitamin D","Vitamin A","Iron","Vitamin C"], a:1},
+{t:"A nurse notices a child with edema, a distended abdomen and sparse hair. The most likely condition is:", o:["Marasmus","Rickets","Kwashiorkor","Scurvy"], a:2},
+{t:"A patient has bleeding gums, easy bruising and poor wound healing. Which foods should the nurse encourage?", o:["Oranges, guava and peppers","Liver and eggs","Fatty fish","Red meat only"], a:0},
+{t:"Which finding in a child suggests vitamin D deficiency?", o:["Bleeding gums","Night blindness","Goiter","Bowed legs and bone deformities"], a:3},
+{t:"In which condition may muscle wasting be masked by edema?", o:["Marasmus","Kwashiorkor","Scurvy","Rickets"], a:1},
+{t:"The nursing role “Prevent complications” in malnutrition includes monitoring for:", o:["Only body weight","Only laboratory results","Only fluid intake","Infection, weakness, pressure injuries and delayed wound healing"], a:3},
+{t:"Which is NOT a recommended strategy to prevent micronutrient deficiencies?", o:["Dietary diversification","Food fortification","Using iodized salt","Avoiding breastfeeding and complementary feeding"], a:3},
+/* ===== True / False ===== */
+{t:"Malnutrition includes overweight and obesity.", o:["True","False"], a:0},
+{t:"Stunting is a sign of acute undernutrition.", o:["True","False"], a:1},
+{t:"Undernutrition simply means being thin.", o:["True","False"], a:1},
+{t:"Edema is a characteristic feature of kwashiorkor.", o:["True","False"], a:0},
+{t:"Marasmus is predominantly protein deficiency with edema.", o:["True","False"], a:1},
+{t:"A person with adequate calorie intake can still have micronutrient deficiency.", o:["True","False"], a:0},
+{t:"Vitamin C deficiency causes rickets.", o:["True","False"], a:1},
+{t:"Using iodized salt is an important population-level strategy to prevent iodine deficiency.", o:["True","False"], a:0},
+{t:"Vitamin B12 is found mainly in animal products.", o:["True","False"], a:0},
+{t:"Fever, burns and surgery increase the body's nutritional requirements.", o:["True","False"], a:0},
+{t:"Severe undernutrition can cause hypertension and tachycardia.", o:["True","False"], a:1},
+{t:"Folic acid before conception increases the risk of neural tube defects.", o:["True","False"], a:1},
+{t:"Vitamin C is a fat-soluble vitamin.", o:["True","False"], a:1},
+{t:"Assisting feeding and addressing chewing or swallowing difficulties is part of the nursing role in malnutrition.", o:["True","False"], a:0},
+{t:"Pregnant women are among the risk groups for iron deficiency.", o:["True","False"], a:0}
+];
+
+let questions,i,correct,wrong,answers,wrongSet,answered,timeLeft,timerInterval;const totalTime=35*60;const LETTERS=['A','B','C','D'];
+function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function shuffleOptions(q){if(q.o.length===2&&q.o[0]==='True'&&q.o[1]==='False')return{...q};const idx=shuffle(q.o.map((_,k)=>k));return{...q,o:idx.map(k=>q.o[k]),a:idx.indexOf(q.a)}}
+function init(pool){questions=shuffle([...pool]).map(shuffleOptions);i=0;correct=0;wrong=0;answers=new Array(questions.length).fill(null);wrongSet=[];answered=0;timeLeft=totalTime;document.getElementById('totalBadge').textContent=questions.length+' سؤال';startTimer();render()}
+function startTimer(){clearInterval(timerInterval);timerInterval=setInterval(()=>{timeLeft--;const m=Math.floor(timeLeft/60),s=timeLeft%60;document.getElementById('timerTxt').textContent=`${m}:${s<10?'0':''}${s}`;const b=document.getElementById('timerBadge');if(timeLeft<=120)b.className='timer-badge danger';else if(timeLeft<=300)b.className='timer-badge warn';if(timeLeft<=0){clearInterval(timerInterval);finish()}},1000)}
+function updateTop(){const t=questions.length;document.getElementById('sCorrect').textContent=correct;document.getElementById('sWrong').textContent=wrong;document.getElementById('sRemain').textContent=Math.round((t-answered)/t*100)+'%';document.getElementById('progLabel').textContent='سؤال '+(i+1)+' / '+t;document.getElementById('progFill').style.width=((i+1)/t*100)+'%';document.getElementById('prog-bar').style.width=((i+1)/t*100)+'%'}
+function render(){updateTop();const q=questions[i];document.getElementById('app').innerHTML=`<div class="q-card"><div class="q-header"><div class="q-num">سؤال ${i+1} / ${questions.length}</div></div><div class="q-text">${q.t}</div><div class="options">${q.o.map((o,k)=>`<div class="opt" id="opt${k}" onclick="choose(${k})"><div class="opt-letter">${LETTERS[k]||k+1}</div>${o}</div>`).join('')}</div><div class="nav-btns"><button class="btn btn-skip" onclick="skip()">تخطي</button></div></div>`}
+function choose(v){if(answers[i]!==null)return;answers[i]=v;answered++;const q=questions[i];const ok=v===q.a;ok?correct++:wrong++;updateTop();q.o.forEach((_,k)=>{const el=document.getElementById('opt'+k);el.classList.add('disabled');if(k===q.a)el.classList.add('correct');else if(k===v)el.classList.add('wrong')});const fb=document.createElement('div');fb.className='feedback-bar '+(ok?'ok':'no');fb.innerHTML=ok?'<span>🎉</span><span>ممتاز ، اللهم بارك </span>':'<span>😔</span><span>ركز يا سكر</span>';const card=document.querySelector('.q-card');card.querySelector('.options').after(fb);if(q.exp){const e=document.createElement('div');e.className='explanation';e.innerHTML='<b>💬 شرح:</b> '+q.exp;fb.after(e)}card.querySelector('.nav-btns').innerHTML=`<button class="btn btn-next" onclick="next()">${i<questions.length-1?'السؤال التالي':'إنهاء الامتحان'}</button>`}
+function skip(){if(answers[i]===null){answers[i]=-1;answered++;wrong++;updateTop()}next()}
+function next(){if(i<questions.length-1){i++;render();scrollTo({top:0,behavior:'smooth'})}else finish()}
+function finish(){clearInterval(timerInterval);const total=questions.length;const score=Math.round(correct/total*100);questions.forEach((q,k)=>{if(answers[k]!==q.a)wrongSet.push({...q})});wrongSet=[...new Map(wrongSet.map(q=>[q.t,q])).values()];let grade,gc;if(score>=90){grade='🥇 ممتاز';gc='var(--success)'}else if(score>=75){grade='🥈 جيد جداً';gc='var(--c2)'}else if(score>=60){grade='🥉 جيد';gc='var(--warn)'}else{grade='📚 راجع تاني';gc='var(--danger)'}const circ=2*Math.PI*45,off=circ-score/100*circ;const rep=questions.map((q,k)=>{const ok=answers[k]===q.a;return`<div class="report-item ${ok?'ok':'no'}"><div class="ri-q">${ok?'✅':'❌'} ${q.t}</div>${!ok?`<div class="ri-row"><span class="ri-badge ri-yours">إجابتك</span> ${answers[k]>=0?q.o[answers[k]]:'تم التخطي'}</div><div class="ri-row"><span class="ri-badge ri-right">الصحيح</span> ${q.o[q.a]}</div>`:''}</div>`}).join('');document.getElementById('prog-bar').style.width='100%';document.getElementById('app').innerHTML=`<div class="result-hero"><div class="score-ring"><svg viewBox="0 0 110 110"><circle class="ring-bg" cx="55" cy="55" r="45" stroke-dasharray="${circ}"/><circle class="ring-fill" cx="55" cy="55" r="45" stroke-dasharray="${circ}" stroke-dashoffset="${circ}" style="stroke:${gc}" id="ringFill"/></svg><div class="score-num">${score}</div><div class="score-pct">%</div></div><div class="result-grade" style="color:${gc}">${grade}</div><div class="result-sub">أجبت على ${answers.filter(a=>a!==null&&a!==-1).length} من ${total} سؤال</div><div class="result-stats"><div class="rs"><div class="n" style="color:var(--success)">${correct}</div><div class="l">صحيح</div></div><div class="rs"><div class="n" style="color:var(--danger)">${wrong}</div><div class="l">خطأ</div></div><div class="rs"><div class="n" style="color:var(--c2)">${answers.filter(a=>a===null||a===-1).length}</div><div class="l">تخطي</div></div></div></div><div class="result-actions">${wrongSet.length?`<button class="btn btn-retry" onclick="retryWrong()">إعادة الخطأ (${wrongSet.length})</button>`:''}<button class="btn btn-home" onclick="init(QUESTIONS)">امتحان جديد عشوائي</button></div><div style="margin-top:28px"><div style="font-size:14px;font-weight:700;margin-bottom:12px;color:var(--text2)">📋 تقرير مفصّل</div>${rep}</div>`;setTimeout(()=>{document.getElementById('ringFill').style.strokeDashoffset=off},100);scrollTo({top:0,behavior:'smooth'})}
+function retryWrong(){const pool=[...wrongSet];questions=shuffle(pool).map(shuffleOptions);i=0;correct=0;wrong=0;answers=new Array(questions.length).fill(null);wrongSet=[];answered=0;timeLeft=totalTime;startTimer();render();scrollTo({top:0,behavior:'smooth'})}
+const themeBtn=document.getElementById('themeBtn');let theme='light';try{theme=localStorage.getItem('theme')||'light'}catch(e){}
+function applyTheme(t){theme=t;document.documentElement.setAttribute('data-theme',t==='dark'?'dark':'');themeBtn.textContent=t==='dark'?'☀️':'🌙';try{localStorage.setItem('theme',t)}catch(e){}}
+applyTheme(theme);themeBtn.addEventListener('click',()=>applyTheme(theme==='dark'?'light':'dark'));
+init(QUESTIONS);
+</script>
+</body>
+</html>
